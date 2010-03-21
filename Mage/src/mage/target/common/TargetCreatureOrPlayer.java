@@ -37,7 +37,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetImpl;
-import mage.target.TargetObject;
 
 /**
  *

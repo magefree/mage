@@ -37,30 +37,32 @@ import mage.filter.common.FilterPlaneswalkerOrPlayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetObject;
+import mage.target.TargetImpl;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetDefender extends TargetObject {
+public class TargetDefender extends TargetImpl {
 
 	protected FilterPlaneswalkerOrPlayer filter;
+	protected UUID attackerId;
 
-	public TargetDefender(List<UUID> defenders) {
-		this(1, 1, defenders);
+	public TargetDefender(List<UUID> defenders, UUID attackerId) {
+		this(1, 1, defenders, attackerId);
 	}
 
-	public TargetDefender(int numTargets, List<UUID> defenders) {
-		this(numTargets, numTargets, defenders);
+	public TargetDefender(int numTargets, List<UUID> defenders, UUID attackerId) {
+		this(numTargets, numTargets, defenders, attackerId);
 	}
 
-	public TargetDefender(int minNumTargets, int maxNumTargets, List<UUID> defenders) {
+	public TargetDefender(int minNumTargets, int maxNumTargets, List<UUID> defenders, UUID attackerId) {
 		this.minNumberOfTargets = minNumTargets;
 		this.maxNumberOfTargets = maxNumTargets;
 		this.zone = Zone.ALL;
 		this.filter = new FilterPlaneswalkerOrPlayer(defenders);
 		this.targetName = filter.getMessage();
+		this.attackerId = attackerId;
 	}
 
 	@Override
@@ -68,6 +70,7 @@ public class TargetDefender extends TargetObject {
 		return this.filter;
 	}
 
+	@Override
 	public boolean canChoose(UUID sourceId, Game game) {
 		int count = 0;
 		for (Player player: game.getPlayers().values()) {
@@ -81,6 +84,37 @@ public class TargetDefender extends TargetObject {
 				count++;
 		}
 		return count >= this.minNumberOfTargets;
+	}
+
+	@Override
+	public String getTargetedName(Game game) {
+		StringBuilder sb = new StringBuilder();
+		for (UUID targetId: getTargets()) {
+			Permanent permanent = game.getPermanent(targetId);
+			if (permanent != null) {
+				sb.append(permanent.getName());
+				sb.append(" ");
+			}
+			else {
+				Player player = game.getPlayer(targetId);
+				sb.append(player.getName());
+				sb.append(" ");
+			}
+		}
+		return sb.toString();
+	}
+
+	@Override
+	public boolean canTarget(UUID id, Game game) {
+		Player player = game.getPlayer(id);
+		if (player != null) {
+			return player.canTarget(game.getObject(attackerId)) && filter.match(player);
+		}
+		Permanent permanent = game.getPermanent(id);
+		if (permanent != null) {
+			return permanent.canTarget(game.getObject(attackerId)) && filter.match(permanent);
+		}
+		return false;
 	}
 
 
