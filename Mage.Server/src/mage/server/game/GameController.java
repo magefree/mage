@@ -347,6 +347,7 @@ public class GameController implements GameCallback {
 		return new CardsView(cards.values());
 	}
 
+	@Override
 	public void gameResult(String result) {
 		endGame(result);
 	}

@@ -48,6 +48,8 @@ public class Main {
 
 	private static Logger logger = Logging.getLogger(Main.class.getName());
 
+	private final static String testModeArg = "-testMode=";
+
     /**
      * @param args the command line arguments
      */
@@ -61,7 +63,13 @@ public class Main {
 		for (Plugin plugin: config.getPlayerTypes()) {
 			PlayerFactory.getInstance().addPlayerType(plugin.getName(), loadPlugin(plugin));
 		}
-        Server server = new ServerImpl(config.getPort(), config.getServerName());
+		boolean testMode = false;
+		for (String arg: args) {
+			if (arg.startsWith(testModeArg)) {
+				testMode = Boolean.valueOf(arg.replace(testModeArg, ""));
+			}
+		}
+        Server server = new ServerImpl(config.getPort(), config.getServerName(), testMode);
 		
     }
 

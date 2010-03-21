@@ -57,6 +57,7 @@ public class GameWorker implements Callable {
 			result.gameResult(game.getWinner());
 		} catch (Exception ex) {
 			logger.log(Level.SEVERE, null, ex);
+			result.gameResult("Server Error");
 		}
 		return null;
 	}

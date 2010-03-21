@@ -62,13 +62,17 @@ public class ServerImpl implements Server {
 
 	private final static Logger logger = Logging.getLogger("Mage Server");
 
-	public ServerImpl(int port, String name) {
+	private boolean testMode;
+
+	public ServerImpl(int port, String name, boolean testMode) {
 		try {
 			System.setSecurityManager(null);
 			Registry reg = LocateRegistry.createRegistry(port);
 			Server server = (Server) UnicastRemoteObject.exportObject(this, 0);
 			reg.rebind(name, server);
+			this.testMode = testMode;
 			logger.info("Started MAGE server - listening on port " + port);
+			logger.info("MAGE server running in test mode");
 		} catch (RemoteException ex) {
 			logger.log(Level.SEVERE, "Failed to start RMI server at port " + port, ex);
 		}
@@ -425,7 +429,8 @@ public class ServerImpl implements Server {
 	@Override
 	public void cheat(UUID gameId, UUID sessionId, DeckCardLists deckList) throws MageException {
 		try {
-//			GameManager.getInstance().cheat(gameId, sessionId, deckList);
+			if (testMode)
+				GameManager.getInstance().cheat(gameId, sessionId, deckList);
 		}
 		catch (Exception ex) {
 			handleException(ex);
