@@ -217,6 +217,7 @@ public class HumanPlayer extends PlayerImpl {
 		return true;
 	}
 
+	@Override
 	public boolean playXMana(VariableManaCost cost, Game game) {
 		game.firePlayXManaEvent(playerId, "Pay {X}: {X}=" + cost.getValue());
 		waitForResponse();
@@ -272,7 +273,7 @@ public class HumanPlayer extends PlayerImpl {
 	}
 
 	protected boolean selectDefender(List<UUID> defenders, UUID attackerId, Game game) {
-		TargetDefender target = new TargetDefender(defenders);
+		TargetDefender target = new TargetDefender(defenders, attackerId);
 		if (chooseTarget(Outcome.Damage, target, game)) {
 			declareAttacker(attackerId, response.getUUID(), game);
 			return true;
