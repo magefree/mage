@@ -100,10 +100,6 @@
 
         <delete file="${release.dir}/temp_final.jar"/>
 
-		<copy todir="${release.dir}/config">
-			<fileset dir="./config"/>
-		</copy>
-
 		<copy todir="${release.dir}">
 			<fileset dir="./release"/>
 		</copy>
