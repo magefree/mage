@@ -10,7 +10,8 @@ You can download this from:  http://java.com/
 -----------------------------------------------------------------------------------
 
 You will need to download both the client and the server applications.  These can be
-obtained from http://code.google.com/p/magic--another-game-engine/downloads/list
+obtained from http://code.google.com/p/magic--another-game-engine/downloads/list.
+Extact the client and the server to separate folders.
 
 To play a game you can either connect to a server or start your own server.  To
 connect to a server you will need to know the server name or IP address and the port.
@@ -25,3 +26,15 @@ join an existing game that hasn't started yet or you can create a new table by
 clicking the new button.
 
 -----------------------------------------------------------------------------------
+
+The client useage should be fairly self evident.  Click on cards in your hand to
+play them.  Click on cards in the battlefield to activate abilities.  A popup menu
+will be presented if you have more than one choice.  To pass priority for the turn
+hold down the ctrl key while clicking done.  You will still receive priority if
+your opponent casts a spell or activates an ability.
+
+-----------------------------------------------------------------------------------
+
+MAGE is still very much in the testing phase so there can be lots of bugs and/or
+missing functionality.  Please be patient.  If you notice anything or want to
+make suggestions please contact me at BetaSteward@googlemail.com
