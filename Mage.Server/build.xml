@@ -75,7 +75,7 @@
     <target name="package-for-release" depends="jar">
 
         <property name="release.jar.name" value="${application.title}"/>
-        <property name="release.dir" value="release-${app.version}"/>
+        <property name="release.dir" value="releases/release-${app.version}"/>
         <property name="release.jar" value="${release.dir}/${release.jar.name}.jar"/>
 
         <echo message="Packaging ${application.title} into a single JAR at ${release.jar}"/>
