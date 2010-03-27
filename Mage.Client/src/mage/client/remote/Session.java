@@ -33,7 +33,9 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,13 +43,12 @@ import javax.swing.JOptionPane;
 import mage.Constants;
 import mage.cards.decks.DeckCardLists;
 import mage.client.MageFrame;
+import mage.client.chat.ChatPanel;
+import mage.client.game.GamePanel;
 import mage.client.util.Config;
-import mage.interfaces.ChatClient;
-import mage.interfaces.Client;
-import mage.interfaces.GameClient;
-import mage.interfaces.GameReplayClient;
 import mage.interfaces.MageException;
 import mage.interfaces.Server;
+import mage.interfaces.callback.CallbackClientDaemon;
 import mage.util.Logging;
 import mage.view.TableView;
 
@@ -66,6 +67,9 @@ public class Session {
 	private MageFrame frame;
 	private String[] playerTypes;
 	private String[] gameTypes;
+	private Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
+	private GamePanel game;
+	private CallbackClientDaemon callbackDaemon;
 
 	public Session(MageFrame frame) {
 		this.frame = frame;
@@ -75,13 +79,14 @@ public class Session {
 		if (isConnected()) {
 			disconnect();
 		}
-		this.userName = userName;
-		this.client = new ClientImpl(frame, userName);
 		System.setSecurityManager(null);
 		Registry reg = LocateRegistry.getRegistry(serverName, port);
 		this.server = (Server) reg.lookup(Config.remoteServer);
+		this.userName = userName;
 		try {
-			sessionId = server.registerClient(client);
+			this.client = new Client(this, frame, userName);
+			sessionId = server.registerClient(userName, client.getId());
+			callbackDaemon = new CallbackClientDaemon(sessionId, client, server);
 			playerTypes = server.getPlayerTypes();
 			gameTypes = server.getGameTypes();
 			logger.info("Connected to RMI server at " + serverName + ":" + port);
@@ -95,6 +100,10 @@ public class Session {
 
 		if (isConnected()) {
 			try {
+				for (UUID chatId: chats.keySet()) {
+					server.leaveChat(chatId, sessionId);
+				}
+				//TODO: stop daemon
 				server.deregisterClient(sessionId);
 				server = null;
 				logger.info("Disconnected ... ");
@@ -116,6 +125,18 @@ public class Session {
 
 	public String[] getGameTypes() {
 		return gameTypes;
+	}
+
+	public Map<UUID, ChatPanel> getChats() {
+		return chats;
+	}
+
+	public GamePanel getGame() {
+		return game;
+	}
+
+	public void setGame(GamePanel gamePanel) {
+		game = gamePanel;
 	}
 
 	public UUID getMainRoomId() {
@@ -268,9 +289,10 @@ public class Session {
 		return false;
 	}
 
-	public boolean joinChat(UUID chatId, ChatClient client) {
+	public boolean joinChat(UUID chatId, ChatPanel chat) {
 		try {
-			server.joinChat(chatId, client);
+			server.joinChat(chatId, sessionId, userName);
+			chats.put(chatId, chat);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
@@ -280,9 +302,10 @@ public class Session {
 		return false;
 	}
 
-	public boolean leaveChat(UUID chatId, UUID clientId) {
+	public boolean leaveChat(UUID chatId) {
 		try {
-			server.leaveChat(chatId, clientId);
+			server.leaveChat(chatId, sessionId);
+			chats.remove(chatId);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
@@ -304,9 +327,9 @@ public class Session {
 		return false;
 	}
 
-	public boolean joinGame(UUID gameId, GameClient gameClient) {
+	public boolean joinGame(UUID gameId) {
 		try {
-			server.joinGame(gameId, sessionId, gameClient);
+			server.joinGame(gameId, sessionId);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
@@ -316,9 +339,9 @@ public class Session {
 		return false;
 	}
 
-	public boolean watchGame(UUID gameId, GameClient gameClient) {
+	public boolean watchGame(UUID gameId) {
 		try {
-			server.watchGame(gameId, sessionId, gameClient);
+			server.watchGame(gameId, sessionId);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
@@ -328,9 +351,9 @@ public class Session {
 		return false;
 	}
 
-	public boolean replayGame(UUID gameId, GameReplayClient replayClient) {
+	public boolean replayGame() {
 		try {
-			server.replayGame(gameId, sessionId, replayClient);
+			server.replayGame(sessionId);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
@@ -410,9 +433,9 @@ public class Session {
 		return false;
 	}
 
-	public boolean stopWatching(UUID gameId, UUID gameClientId) {
+	public boolean stopWatching(UUID gameId) {
 		try {
-			server.stopWatching(gameId, gameClientId);
+			server.stopWatching(gameId, sessionId);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);

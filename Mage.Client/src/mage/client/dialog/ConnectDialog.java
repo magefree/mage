@@ -34,10 +34,12 @@
 
 package mage.client.dialog;
 
+import java.awt.Cursor;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.prefs.Preferences;
 import javax.swing.JOptionPane;
 import mage.client.remote.Session;
 import mage.client.util.Config;
@@ -51,16 +53,19 @@ public class ConnectDialog extends MageDialog {
 
 	private final static Logger logger = Logging.getLogger(ConnectDialog.class.getName());
 	private Session session;
+	private Preferences prefs;
 
     /** Creates new form ConnectDialog */
     public ConnectDialog(Session session) {
 		this.session = session;
+		prefs = Preferences.userNodeForPackage(this.getClass());
         initComponents();
     }
 
 	public void showDialog() {
-		this.txtServer.setText(Config.serverName);
-		this.txtPort.setText(Integer.toString(Config.port));
+		this.txtServer.setText(prefs.get("serverAddress", Config.serverName));
+		this.txtPort.setText(prefs.get("serverPort", Integer.toString(Config.port)));
+		this.txtUserName.setText(prefs.get("userName", ""));
 		this.setModal(true);
 		this.setVisible(true);
 	}
@@ -94,8 +99,6 @@ public class ConnectDialog extends MageDialog {
                 ConnectDialog.this.keyTyped(evt);
             }
         });
-
-        txtUserName.setText("me");
 
         lblUserName.setLabelFor(txtUserName);
         lblUserName.setText("User Name:");
@@ -154,7 +157,7 @@ public class ConnectDialog extends MageDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUserName))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
                     .addComponent(btnConnect))
@@ -171,14 +174,40 @@ public class ConnectDialog extends MageDialog {
 	private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
 		
 		try {
+			if (txtUserName.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(rootPane, "Please provide a user name");
+				return;
+			}
+			if (txtServer.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(rootPane, "Please provide a server address");
+				return;
+			}
+			if (txtPort.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(rootPane, "Please provide a port number");
+				return;
+			}
+			if (Integer.valueOf(txtPort.getText()) < 1 || Integer.valueOf(txtPort.getText()) > 65535 ) {
+				JOptionPane.showMessageDialog(rootPane, "Invalid port number");
+				txtPort.setText(prefs.get("serverPort", Integer.toString(Config.port)));
+				return;
+			}
+			setCursor(new Cursor(Cursor.WAIT_CURSOR));
 			session.connect(txtUserName.getText(), txtServer.getText(), Integer.valueOf(txtPort.getText()));
+			prefs.put("serverAddress", txtServer.getText());
+			prefs.put("serverPort", txtPort.getText());
+			prefs.put("userName", txtUserName.getText());
 			this.setVisible(false);
 		} catch (RemoteException ex) {
+			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 			logger.log(Level.SEVERE, "Unable to connect to server", ex);
 			JOptionPane.showMessageDialog(rootPane, "Unable to connect to server");
 		} catch (NotBoundException ex) {
+			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 			logger.log(Level.SEVERE, "Unable to connect to server", ex);
 			JOptionPane.showMessageDialog(rootPane, "Unable to connect to server");
+		}
+		finally {
+			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
 	}//GEN-LAST:event_btnConnectActionPerformed
 

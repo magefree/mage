@@ -48,6 +48,7 @@ import mage.cards.decks.Deck;
 import mage.client.dialog.AboutDialog;
 import mage.client.dialog.ConnectDialog;
 import mage.client.remote.Session;
+import mage.client.util.EDTExceptionHandler;
 import mage.util.Logging;
 
 /**
@@ -75,6 +76,7 @@ public class MageFrame extends javax.swing.JFrame {
     /** Creates new form MageFrame */
     public MageFrame() {
 
+		EDTExceptionHandler.registerExceptionHandler();
 		addWindowListener(new WindowAdapter()
 		{
 			@Override
@@ -100,7 +102,6 @@ public class MageFrame extends javax.swing.JFrame {
     }
 
 	public void showGame(UUID gameId, UUID playerId) {
-		logger.info("showing game");
 		this.tablesPane.hideTables();
 		this.tablesPane.setVisible(false);
 		this.gamePane.setVisible(true);

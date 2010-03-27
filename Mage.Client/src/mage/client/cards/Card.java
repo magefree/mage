@@ -166,24 +166,17 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 
 	private String getText(String cardType) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(card.getName());
-		sb.append("\n");
+		sb.append(card.getName()).append("\n");
 		if (card.getManaCost().size() > 0) {
-			sb.append(card.getManaCost());
-			sb.append("\n");
+			sb.append(card.getManaCost()).append("\n");
 		}
-		sb.append(cardType);
-		sb.append("\n");
-		sb.append(card.getColor().toString());
-		sb.append("\n");
+		sb.append(cardType).append("\n");
+		sb.append(card.getColor().toString()).append("\n");
 		for (String rule: card.getRules()) {
-			sb.append(rule);
-			sb.append("\n");
+			sb.append(rule).append("\n");
 		}
 		if (card.getCardTypes().contains(CardType.CREATURE)) {
-			sb.append(card.getPower());
-			sb.append("/");
-			sb.append(card.getToughness());
+			sb.append(card.getPower()).append("/").append(card.getToughness());
 		}
 		else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
 			sb.append(card.getLoyalty());
@@ -209,20 +202,17 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 		StringBuilder sbType = new StringBuilder();
 
 		for (String superType: card.getSuperTypes()) {
-			sbType.append(superType);
-			sbType.append(" ");
+			sbType.append(superType).append(" ");
 		}
 
 		for (mage.Constants.CardType cardType: card.getCardTypes()) {
-			sbType.append(cardType.toString());
-			sbType.append(" ");
+			sbType.append(cardType.toString()).append(" ");
 		}
 
 		if (card.getSubTypes().size() > 0) {
 			sbType.append("- ");
 			for (String subType: card.getSubTypes()) {
-				sbType.append(subType);
-				sbType.append(" ");
+				sbType.append(subType).append(" ");
 			}
 		}
 

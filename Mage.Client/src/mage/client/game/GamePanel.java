@@ -51,11 +51,7 @@ import mage.client.dialog.PickChoiceDialog;
 import mage.client.dialog.PickNumberDialog;
 import mage.client.dialog.ShowCardsDialog;
 import mage.client.game.FeedbackPanel.FeedbackMode;
-import mage.client.remote.GameClientImpl;
-import mage.client.remote.GameReplayClientImpl;
 import mage.client.remote.Session;
-import mage.interfaces.GameClient;
-import mage.interfaces.GameReplayClient;
 import mage.util.Logging;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
@@ -74,8 +70,6 @@ public class GamePanel extends javax.swing.JPanel {
 	private Map<UUID, PlayAreaPanel> players = new HashMap<UUID, PlayAreaPanel>();
 	private Map<UUID, ExileZoneDialog> exiles = new HashMap<UUID, ExileZoneDialog>();
 	private UUID gameId;
-	private GameClient gameClient;
-	private GameReplayClient replayClient;
 	private Session session;
 	private CombatDialog combat = new CombatDialog();
 
@@ -87,7 +81,7 @@ public class GamePanel extends javax.swing.JPanel {
 	public void showGame(UUID gameId, UUID playerId) {
 		this.gameId = gameId;
 		session = MageFrame.getSession();
-		gameClient = new GameClientImpl(this);
+		session.setGame(this);
 		this.feedbackPanel.init(gameId);
 		this.feedbackPanel.clear();
 		this.abilityPicker.init(session, gameId);
@@ -96,13 +90,14 @@ public class GamePanel extends javax.swing.JPanel {
 		this.btnStopWatching.setVisible(false);
 		this.setVisible(true);
 		this.chatPanel.connect(session.getGameChatId(gameId));
-		if (!session.joinGame(gameId, gameClient))
+		if (!session.joinGame(gameId))
 			hideGame();
 	}
 
 	public void watchGame(UUID gameId) {
 		this.gameId = gameId;
-		gameClient = new GameClientImpl(this);
+		session = MageFrame.getSession();
+		session.setGame(this);
 		this.feedbackPanel.init(gameId);
 		this.feedbackPanel.clear();
 		this.btnConcede.setVisible(false);
@@ -110,19 +105,20 @@ public class GamePanel extends javax.swing.JPanel {
 		this.pnlReplay.setVisible(false);
 		this.setVisible(true);
 		this.chatPanel.connect(session.getGameChatId(gameId));
-		if (!session.watchGame(gameId, gameClient))
+		if (!session.watchGame(gameId))
 			hideGame();
 	}
 
 	public void replayGame(UUID gameId) {
 		this.gameId = gameId;
-		replayClient = new GameReplayClientImpl(this);
+		session = MageFrame.getSession();
+		session.setGame(this);
 		this.feedbackPanel.clear();
 		this.btnConcede.setVisible(false);
 		this.btnStopWatching.setVisible(false);
 		this.pnlReplay.setVisible(true);
 		this.setVisible(true);
-		if (!session.replayGame(gameId, replayClient))
+		if (!session.replayGame())
 			hideGame();
 	}
 
@@ -537,7 +533,7 @@ public class GamePanel extends javax.swing.JPanel {
 
 	private void btnStopWatchingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopWatchingActionPerformed
 		if (modalQuestion("Are you sure you want to stop watching?", "Stop watching") == JOptionPane.YES_OPTION) {
-			session.stopWatching(gameId, ((GameClientImpl)gameClient).getIdLocal());
+			session.stopWatching(gameId);
 		}
 	}//GEN-LAST:event_btnStopWatchingActionPerformed
 

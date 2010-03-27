@@ -34,6 +34,7 @@
 
 package mage.client.deckeditor;
 
+import java.awt.Cursor;
 import mage.Constants.Zone;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -91,7 +92,13 @@ public class CardSelector extends javax.swing.JPanel {
 	}
 
 	private void filterCards() {
-		this.cardsList1.loadCards(new CardsView(cards.getCards(filter)), bigCard, null);
+		try {
+			setCursor(new Cursor(Cursor.WAIT_CURSOR));
+			this.cardsList1.loadCards(new CardsView(cards.getCards(filter)), bigCard, null);
+		}
+		finally {
+			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		}
 	}
 
 	public CardsList getCardsList() {

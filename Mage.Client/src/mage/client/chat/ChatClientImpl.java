@@ -26,60 +26,60 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.client.chat;
-
-import java.io.Serializable;
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
-import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JTextArea;
-import mage.interfaces.ChatClient;
-import mage.util.Logging;
-
-
-/**
- *
- * @author BetaSteward_at_googlemail.com
- */
-public class ChatClientImpl implements ChatClient, Serializable {
-
-	private final static Logger logger = Logging.getLogger(ChatClientImpl.class.getName());
-
-	private JTextArea textArea;
-	private String userName;
-	private UUID clientId;
-
-	public ChatClientImpl(String userName, JTextArea textArea) {
-		this.clientId = UUID.randomUUID();
-		this.textArea = textArea;
-		try {
-			this.userName = userName;
-			UnicastRemoteObject.exportObject(this, 0);
-		} catch (RemoteException ex) {
-			logger.log(Level.SEVERE, null, ex);
-		}
-	}
-
-	@Override
-	public void receiveMessage(String message) throws RemoteException {
-		this.textArea.append(message + "\n");
-		textArea.setCaretPosition(textArea.getText().length() - 1);
-	}
-
-	@Override
-	public String getName() throws RemoteException {
-		return userName;
-	}
-
-	@Override
-	public UUID getId() throws RemoteException {
-		return clientId;
-	}
-
-	public UUID getIdLocal() {
-		return clientId;
-	}
-
-}
+//package mage.client.chat;
+//
+//import java.io.Serializable;
+//import java.rmi.RemoteException;
+//import java.rmi.server.UnicastRemoteObject;
+//import java.util.UUID;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+//import javax.swing.JTextArea;
+//import mage.interfaces.ChatClient;
+//import mage.util.Logging;
+//
+//
+///**
+// *
+// * @author BetaSteward_at_googlemail.com
+// */
+//public class ChatClientImpl implements ChatClient, Serializable {
+//
+//	private final static Logger logger = Logging.getLogger(ChatClientImpl.class.getName());
+//
+//	private JTextArea textArea;
+//	private String userName;
+//	private UUID clientId;
+//
+//	public ChatClientImpl(String userName, JTextArea textArea) {
+//		this.clientId = UUID.randomUUID();
+//		this.textArea = textArea;
+//		try {
+//			this.userName = userName;
+//			UnicastRemoteObject.exportObject(this, 0);
+//		} catch (RemoteException ex) {
+//			logger.log(Level.SEVERE, null, ex);
+//		}
+//	}
+//
+//	@Override
+//	public void receiveMessage(String message) throws RemoteException {
+//		this.textArea.append(message + "\n");
+//		textArea.setCaretPosition(textArea.getText().length() - 1);
+//	}
+//
+//	@Override
+//	public String getName() throws RemoteException {
+//		return userName;
+//	}
+//
+//	@Override
+//	public UUID getId() throws RemoteException {
+//		return clientId;
+//	}
+//
+//	public UUID getIdLocal() {
+//		return clientId;
+//	}
+//
+//}

@@ -66,7 +66,7 @@
                   <Component id="txtUserName" min="-2" max="-2" attributes="0"/>
                   <Component id="lblUserName" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="39" max="32767" attributes="0"/>
+              <EmptySpace pref="43" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnConnect" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -101,9 +101,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtUserName">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="me"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblUserName">
       <Properties>

@@ -34,9 +34,8 @@
 
 package mage.client.deckeditor;
 
+import java.awt.Cursor;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -95,15 +94,20 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				}
 			}
 		);
-
 		this.setVisible(true);
 		this.repaint();
 	}
 
 	private void refreshDeck() {
-		this.txtDeckName.setText(deck.getName());
-		deckArea.getDeckList().loadCards(new CardsView(deck.getCards()), bigCard, null);
-		deckArea.getSideboardList().loadCards(new CardsView(deck.getSideboard()), bigCard, null);
+		try {
+			setCursor(new Cursor(Cursor.WAIT_CURSOR));
+			this.txtDeckName.setText(deck.getName());
+			deckArea.getDeckList().loadCards(new CardsView(deck.getCards()), bigCard, null);
+			deckArea.getSideboardList().loadCards(new CardsView(deck.getSideboard()), bigCard, null);
+		}
+		finally {
+			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		}
 	}
 
 	private Card createCard(Class clazz) {
@@ -236,9 +240,13 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		if (ret == JFileChooser.APPROVE_OPTION) {
 			File file = fcSelectDeck.getSelectedFile();
 			try {
+				setCursor(new Cursor(Cursor.WAIT_CURSOR));
 				deck = Deck.load(DeckCardLists.load(file.getPath()));
 			} catch (Exception ex) {
 				Logger.getLogger(DeckEditorPanel.class.getName()).log(Level.SEVERE, null, ex);
+			}
+			finally {
+				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 			}
 			refreshDeck();
 		}
@@ -251,9 +259,13 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		if (ret == JFileChooser.APPROVE_OPTION) {
 			File file = fcSelectDeck.getSelectedFile();
 			try {
+				setCursor(new Cursor(Cursor.WAIT_CURSOR));
 				deck.getDeckCardLists().save(file.getPath());
 			} catch (Exception ex) {
 				Logger.getLogger(DeckEditorPanel.class.getName()).log(Level.SEVERE, null, ex);
+			}
+			finally {
+				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 			}
 		}
 	}//GEN-LAST:event_btnSaveActionPerformed

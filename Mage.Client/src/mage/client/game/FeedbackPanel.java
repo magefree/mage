@@ -145,7 +145,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
                         } else if (source instanceof MenuComponent) {
                             ((MenuComponent) source).dispatchEvent(event);
                         } else {
-							logger.info("Unable to dispatch: " + event);
+							logger.warning("Unable to dispatch: " + event);
                         }
                     }
                 }

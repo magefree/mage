@@ -8,6 +8,7 @@ You will need to have the Java Runtime Environment Version 6 Update 10 or greate
 You can download this from:  http://java.com/
 
 -----------------------------------------------------------------------------------
+Installing and running MAGE
 
 You will need to download both the client and the server applications.  These can be
 obtained from http://code.google.com/p/magic--another-game-engine/downloads/list.
@@ -23,17 +24,34 @@ To launch the client run the startClient.bat command.  Click on the connect butt
 the toolbar and enter the server name/IP address and port.  Then click on the tables
 button.  This will bring up a list of active and completed games.  Click on join to
 join an existing game that hasn't started yet or you can create a new table by
-clicking the new button.
+clicking the New button.
 
 -----------------------------------------------------------------------------------
+Playing a game
 
-The client useage should be fairly self evident.  Click on cards in your hand to
+Playing a game should be fairly self evident.  Your hand is displayed at the bottom
+of the screen.  The battlefield is the central area.  Click on cards in your hand to
 play them.  Click on cards in the battlefield to activate abilities.  A popup menu
 will be presented if you have more than one choice.  To pass priority for the turn
 hold down the ctrl key while clicking done.  You will still receive priority if
-your opponent casts a spell or activates an ability.
+your opponent casts a spell or activates an ability.  Target cards by clicking on
+them.  To target a player click on the player name.  You can see the cards in any
+graveyard by clicking on the graveyard count.
 
 -----------------------------------------------------------------------------------
+Deck editor
+
+A simple deck editor is available by clicking on the Deck Editor button on the 
+toolbar.  All the available cards are displayed in the top section.  Your deck
+and sideboard are displayed at the bottom.  To add a card to your deck double
+click on the card in the top section.  To remove it from your deck double click
+on the card in the deck area.  The sideboard section is not ready yet (don't 
+worry it's coming soon).
+
+You can save or load a deck  using the Save or Load buttons.
+
+-----------------------------------------------------------------------------------
+Notes
 
 MAGE is still very much in the testing phase so there can be lots of bugs and/or
 missing functionality.  Please be patient.  If you notice anything or want to

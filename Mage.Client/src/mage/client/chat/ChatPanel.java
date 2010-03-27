@@ -39,7 +39,6 @@ import java.util.UUID;
 import java.util.logging.Logger;
 import mage.client.MageFrame;
 import mage.client.remote.Session;
-import mage.interfaces.ChatClient;
 import mage.util.Logging;
 /**
  *
@@ -51,7 +50,6 @@ public class ChatPanel extends javax.swing.JPanel {
 
 	private UUID chatId;
 	private UUID clientId;
-	private ChatClient client;
 	private Session session;
 
 
@@ -63,16 +61,18 @@ public class ChatPanel extends javax.swing.JPanel {
 	public void connect(UUID chatId) {
 		session = MageFrame.getSession();
 		this.chatId = chatId;
-		client = new ChatClientImpl(session.getUserName(), this.txtConversation);
-		clientId = ((ChatClientImpl)client).getIdLocal();
-		session.joinChat(chatId, client);
+		session.joinChat(chatId, this);
 	}
 
 	public void disconnect() {
 		if (session.isConnected())
-			session.leaveChat(chatId, clientId);
+			session.leaveChat(chatId);
 	}
 
+	public void receiveMessage(String message) {
+		this.txtConversation.append(message + "\n");
+		txtConversation.setCaretPosition(txtConversation.getText().length() - 1);
+	}
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -105,15 +105,15 @@ public class ChatPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
             .addComponent(txtMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

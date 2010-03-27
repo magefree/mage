@@ -35,6 +35,9 @@ import java.util.UUID;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JPopupMenu;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+import mage.client.MageFrame;
 import mage.client.remote.Session;
 import mage.view.AbilityPickerView;
 
@@ -42,12 +45,13 @@ import mage.view.AbilityPickerView;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AbilityPicker extends JPopupMenu {
+public class AbilityPicker extends JPopupMenu implements PopupMenuListener {
 
 	private Session session;
 	private UUID gameId;
 
 	public AbilityPicker() {
+		this.addPopupMenuListener(this);
 	}
 
 	public void init(Session session, UUID gameId) {
@@ -60,8 +64,19 @@ public class AbilityPicker extends JPopupMenu {
 		for (Entry<UUID, String> choice: choices.getChoices().entrySet()) {
 			this.add(new AbilityPickerAction(choice.getKey(), choice.getValue()));
 		}
-		this.setLocation(p);
-		this.setVisible(true);
+//		this.setLocation(p);
+		this.show(MageFrame.getDesktop(), p.x, p.y);
+	}
+
+	@Override
+	public void popupMenuWillBecomeVisible(PopupMenuEvent e) {	}
+
+	@Override
+	public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {  }
+
+	@Override
+	public void popupMenuCanceled(PopupMenuEvent e) {
+		session.sendPlayerBoolean(gameId, false);
 	}
 
 	private class AbilityPickerAction extends AbstractAction {
