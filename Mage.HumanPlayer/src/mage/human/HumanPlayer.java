@@ -343,9 +343,11 @@ public class HumanPlayer extends PlayerImpl {
 		}
 		else {
 			game.fireGetChoiceEvent(playerId, name, abilities.values());
-			waitForUUIDResponse();
-			if (abilities.containsKey(response.getUUID()))
-				activateAbility(abilities.get(response.getUUID()), game);
+			waitForResponse();
+			if (response.getUUID() != null) {
+				if (abilities.containsKey(response.getUUID()))
+					activateAbility(abilities.get(response.getUUID()), game);
+			}
 		}
 	}
 
