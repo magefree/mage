@@ -30,21 +30,22 @@ package mage.interfaces;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.rmi.AccessException;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.DeckType;
 import mage.cards.decks.DeckCardLists;
+import mage.interfaces.callback.CallbackServer;
 import mage.view.TableView;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface Server extends Remote {
+public interface Server extends Remote, CallbackServer {
 
-	public UUID registerClient(Client c) throws RemoteException, MageException;
+//	public String getClientIp() throws RemoteException, MageException;
+	public UUID registerClient(String userName, UUID clientId) throws RemoteException, MageException;
 	public void deregisterClient(UUID sessionId) throws RemoteException, MageException;
 
 	public String[] getGameTypes() throws RemoteException, MageException;
@@ -63,8 +64,8 @@ public interface Server extends Remote {
 
 	//chat methods
 	public void sendChatMessage(UUID chatId, String userName, String message) throws RemoteException, MageException;
-	public void joinChat(UUID chatId, ChatClient chatClient) throws RemoteException, MageException;
-	public void leaveChat(UUID chatId, UUID clientId) throws RemoteException, MageException;
+	public void joinChat(UUID chatId, UUID sessionId, String userName) throws RemoteException, MageException;
+	public void leaveChat(UUID chatId, UUID sessionId) throws RemoteException, MageException;
 	public UUID getTableChatId(UUID tableId) throws RemoteException, MageException;
 	public UUID getGameChatId(UUID gameId) throws RemoteException, MageException;
 	public UUID getRoomChatId(UUID roomId) throws RemoteException, MageException;
@@ -74,9 +75,9 @@ public interface Server extends Remote {
 
 	//game methods
 	public void startGame(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
-	public void joinGame(UUID gameId, UUID sessionId, GameClient gameClient) throws RemoteException, MageException;
-	public void watchGame(UUID gameId, UUID sessionId, GameClient gameClient) throws RemoteException, MageException;
-	public void stopWatching(UUID gameId, UUID clientId) throws RemoteException, MageException;
+	public void joinGame(UUID gameId, UUID sessionId) throws RemoteException, MageException;
+	public void watchGame(UUID gameId, UUID sessionId) throws RemoteException, MageException;
+	public void stopWatching(UUID gameId, UUID sessionId) throws RemoteException, MageException;
 	public void sendPlayerUUID(UUID gameId, UUID sessionId, UUID data) throws RemoteException, MageException;
 	public void sendPlayerString(UUID gameId, UUID sessionId, String data) throws RemoteException, MageException;
 	public void sendPlayerBoolean(UUID gameId, UUID sessionId, Boolean data) throws RemoteException, MageException;
@@ -84,7 +85,7 @@ public interface Server extends Remote {
 	public void concedeGame(UUID gameId, UUID sessionId) throws RemoteException, MageException;
 
 	//replay methods
-	public void replayGame(UUID gameId, UUID sessionId, GameReplayClient replayClient) throws RemoteException, MageException;
+	public void replayGame(UUID sessionId) throws RemoteException, MageException;
 	public void stopReplay(UUID sessionId) throws RemoteException, MageException;
 	public void nextPlay(UUID sessionId) throws RemoteException, MageException;
 	public void previousPlay(UUID sessionId) throws RemoteException, MageException;
