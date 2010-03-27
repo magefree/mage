@@ -50,6 +50,8 @@ public class Main {
 
 	private final static String testModeArg = "-testMode=";
 
+	private static Server server;
+
     /**
      * @param args the command line arguments
      */
@@ -69,8 +71,9 @@ public class Main {
 				testMode = Boolean.valueOf(arg.replace(testModeArg, ""));
 			}
 		}
-        Server server = new ServerImpl(config.getPort(), config.getServerName(), testMode);
-		
+		System.setProperty("java.rmi.server.hostname", config.getServerAddress());
+		server = new ServerImpl(config.getPort(), config.getServerName(), testMode);
+
     }
 
 	private static Class<?> loadPlugin(Plugin plugin) {

@@ -28,13 +28,14 @@
 
 package mage.server;
 
+import java.util.logging.Level;
 import mage.server.util.ThreadExecutor;
-import java.rmi.RemoteException;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import mage.interfaces.Client;
+import mage.interfaces.callback.CallbackServer;
+import mage.interfaces.callback.CallbackServerSession;
+import mage.interfaces.callback.ClientCallback;
 import mage.server.game.GameManager;
 import mage.server.game.TableManager;
 import mage.util.Logging;
@@ -49,17 +50,14 @@ public class Session {
 	private final static Logger logger = Logging.getLogger(Session.class.getName());
 
 	private UUID sessionId;
+	private UUID clientId;
 	private String username;
-	private Client client;
+	private final CallbackServerSession callback = new CallbackServerSession();
 
-	public Session(Client client) {
+	public Session(String userName, UUID clientId) {
 		sessionId = UUID.randomUUID();
-		try {
-			username = client.getUserName();
-		} catch (RemoteException ex) {
-			logger.log(Level.SEVERE, null, ex);
-		}
-		this.client = client;
+		this.username = userName;
+		this.clientId = clientId;
 	}
 
 	public UUID getId() {
@@ -70,59 +68,79 @@ public class Session {
 		SessionManager.getInstance().removeSession(sessionId);
 		TableManager.getInstance().removeSession(sessionId);
 		GameManager.getInstance().removeSession(sessionId);
+		ChatManager.getInstance().removeSession(sessionId);
+	}
 
+	public ClientCallback callback() {
+		try {
+			return callback.callback();
+		} catch (InterruptedException ex) {
+			logger.log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
+
+	public void fireCallback(ClientCallback call) {
+		try {
+			callback.setCallback(call);
+		} catch (InterruptedException ex) {
+			logger.log(Level.SEVERE, null, ex);
+		}
 	}
 
 	public void gameStarted(final UUID gameId, final UUID playerId) {
-		executor.submit(
-			new Runnable() {
-				@Override
-				public void run() {
-					try {
-						client.gameStarted(gameId, playerId);
-						logger.info("game started for player " + playerId);
-					}
-					catch (RemoteException ex) {
-						logger.log(Level.WARNING, ex.getMessage());
-						kill();
-					}
-				}
-			}
-		);
+		fireCallback(new ClientCallback("startGame", new UUID[] {gameId, playerId}));
+//		executor.submit(
+//			new Runnable() {
+//				@Override
+//				public void run() {
+//					try {
+//						client.gameStarted(gameId, playerId);
+//						logger.info("game started for player " + playerId);
+//					}
+//					catch (RemoteException ex) {
+//						logger.log(Level.WARNING, ex.getMessage());
+//						kill();
+//					}
+//				}
+//			}
+//		);
 	}
 
 	public void watchGame(final UUID gameId) {
-		executor.submit(
-			new Runnable() {
-				@Override
-				public void run() {
-					try {
-						client.watchGame(gameId);
-					}
-					catch (RemoteException ex) {
-						logger.log(Level.WARNING, ex.getMessage());
-						kill();
-					}
-				}
-			}
-		);
+		fireCallback(new ClientCallback("watchGame", gameId));
+//		executor.submit(
+//			new Runnable() {
+//				@Override
+//				public void run() {
+//					try {
+//						client.watchGame(gameId);
+//					}
+//					catch (RemoteException ex) {
+//						logger.log(Level.WARNING, ex.getMessage());
+//						kill();
+//					}
+//				}
+//			}
+//		);
 	}
 
 	public void replayGame(final UUID gameId) {
-		executor.submit(
-			new Runnable() {
-				@Override
-				public void run() {
-					try {
-						client.replayGame(gameId);
-					}
-					catch (RemoteException ex) {
-						logger.log(Level.WARNING, ex.getMessage());
-						kill();
-					}
-				}
-			}
-		);
+		fireCallback(new ClientCallback("replayGame", gameId));
+//		executor.submit(
+//			new Runnable() {
+//				@Override
+//				public void run() {
+//					try {
+//						client.replayGame(gameId);
+//					}
+//					catch (RemoteException ex) {
+//						logger.log(Level.WARNING, ex.getMessage());
+//						kill();
+//					}
+//				}
+//			}
+//		);
 	}
 
 	public String getUsername() {

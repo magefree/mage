@@ -44,7 +44,6 @@ import mage.cards.decks.DeckCardLists;
 import mage.game.Game;
 import mage.game.GameReplay;
 import mage.game.events.TableEvent;
-import mage.interfaces.GameClient;
 import mage.server.ChatManager;
 import mage.server.util.ThreadExecutor;
 import mage.game.events.Listener;
@@ -95,7 +94,7 @@ public class GameController implements GameCallback {
 							break;
 						case INFO:
 							ChatManager.getInstance().broadcast(chatId, "", event.getMessage());
-							logger.info(game.getId() + " " + event.getMessage());
+							logger.fine(game.getId() + " " + event.getMessage());
 							break;
 					}
 				}
@@ -140,11 +139,11 @@ public class GameController implements GameCallback {
 		return sessionPlayerMap.get(sessionId);
 	}
 
-	public void join(UUID sessionId, GameClient client) {
+	public void join(UUID sessionId) {
 		UUID playerId = sessionPlayerMap.get(sessionId);
-		GameSession gameSession = new GameSession(client, game, sessionId, playerId);
+		GameSession gameSession = new GameSession(game, sessionId, playerId);
 		gameSessions.put(playerId, gameSession);
-		logger.log(Level.INFO, "player " + playerId + " has joined game " + game.getId());
+		logger.info("player " + playerId + " has joined game " + game.getId());
 		gameSession.init(getGameView(playerId));
 		ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(playerId).getName() + " has joined the game");
 		if (allJoined()) {
@@ -168,8 +167,8 @@ public class GameController implements GameCallback {
 		return true;
 	}
 
-	public void watch(UUID sessionId, GameClient client) {
-		GameWatcher gameWatcher = new GameWatcher(client, sessionId, game.getId());
+	public void watch(UUID sessionId) {
+		GameWatcher gameWatcher = new GameWatcher(sessionId, game.getId());
 		watchers.put(sessionId, gameWatcher);
 		gameWatcher.init(getGameView());
 		ChatManager.getInstance().broadcast(chatId, "", " has started watching");

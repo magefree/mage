@@ -30,7 +30,6 @@ package mage.server;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import mage.interfaces.Client;
 
 /**
  *
@@ -50,8 +49,8 @@ public class SessionManager {
 		return sessions.get(sessionId);
 	}
 
-	public UUID createSession(Client c) {
-		Session session = new Session(c);
+	public UUID createSession(String userName, UUID clientId) {
+		Session session = new Session(userName, clientId);
 		sessions.put(session.getId(), session);
 		return session.getId();
 	}

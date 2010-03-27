@@ -31,6 +31,7 @@ package mage.server;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.RemoteServer;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Collection;
 import java.util.List;
@@ -38,13 +39,10 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mage.Constants.DeckType;
-import mage.interfaces.ChatClient;
-import mage.interfaces.Client;
 import mage.cards.decks.DeckCardLists;
-import mage.interfaces.GameClient;
-import mage.interfaces.GameReplayClient;
 import mage.interfaces.MageException;
 import mage.interfaces.Server;
+import mage.interfaces.callback.ClientCallback;
 import mage.server.game.GameFactory;
 import mage.server.game.GameManager;
 import mage.server.game.GamesRoomManager;
@@ -58,7 +56,7 @@ import mage.view.TableView;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ServerImpl implements Server {
+public class ServerImpl extends RemoteServer implements Server {
 
 	private final static Logger logger = Logging.getLogger("Mage Server");
 
@@ -68,8 +66,8 @@ public class ServerImpl implements Server {
 		try {
 			System.setSecurityManager(null);
 			Registry reg = LocateRegistry.createRegistry(port);
-			Server server = (Server) UnicastRemoteObject.exportObject(this, 0);
-			reg.rebind(name, server);
+			Server stub = (Server) UnicastRemoteObject.exportObject(this, port);
+			reg.rebind(name, stub);
 			this.testMode = testMode;
 			logger.info("Started MAGE server - listening on port " + port);
 			logger.info("MAGE server running in test mode");
@@ -80,10 +78,29 @@ public class ServerImpl implements Server {
 	}
 
 	@Override
-	public UUID registerClient(Client c) throws RemoteException {
+	public ClientCallback callback(UUID sessionId) {
+		return SessionManager.getInstance().getSession(sessionId).callback();
+	}
 
-		UUID sessionId = SessionManager.getInstance().createSession(c);
-		logger.info("Session " + sessionId + " created for client " + c.getId());
+//	@Override
+//	public String getClientIp() throws RemoteException, MageException {
+//		try {
+//			return getClientHost();
+//		} catch (Exception ex) {
+//			handleException(ex);
+//		}
+//		return null;
+//	}
+
+	@Override
+	public UUID registerClient(String userName, UUID clientId) throws MageException, RemoteException {
+
+		UUID sessionId = SessionManager.getInstance().createSession(userName, clientId);
+		try {
+			logger.info("Session " + sessionId + " created for user " + userName + " at " + getClientHost());
+		} catch (Exception ex) {
+			handleException(ex);
+		}
 		return sessionId;
 		
 	}
@@ -178,9 +195,9 @@ public class ServerImpl implements Server {
 	}
 
 	@Override
-	public void joinChat(UUID chatId, ChatClient chatClient) throws MageException {
+	public void joinChat(UUID chatId, UUID sessionId, String userName) throws MageException {
 		try {
-			ChatManager.getInstance().joinChat(chatId, chatClient);
+			ChatManager.getInstance().joinChat(chatId, sessionId, userName);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -188,9 +205,9 @@ public class ServerImpl implements Server {
 	}
 
 	@Override
-	public void leaveChat(UUID chatId, UUID clientId) throws MageException {
+	public void leaveChat(UUID chatId, UUID sessionId) throws MageException {
 		try {
-			ChatManager.getInstance().leaveChat(chatId, clientId);
+			ChatManager.getInstance().leaveChat(chatId, sessionId);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -252,9 +269,9 @@ public class ServerImpl implements Server {
 	}
 
 	@Override
-	public void joinGame(UUID gameId, UUID sessionId, GameClient gameClient) throws MageException {
+	public void joinGame(UUID gameId, UUID sessionId) throws MageException {
 		try {
-			GameManager.getInstance().joinGame(gameId, sessionId, gameClient);
+			GameManager.getInstance().joinGame(gameId, sessionId);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -334,9 +351,9 @@ public class ServerImpl implements Server {
 	}
 
 	@Override
-	public void watchGame(UUID gameId, UUID sessionId, GameClient gameClient) throws MageException {
+	public void watchGame(UUID gameId, UUID sessionId) throws MageException {
 		try {
-			GameManager.getInstance().watchGame(gameId, sessionId, gameClient);
+			GameManager.getInstance().watchGame(gameId, sessionId);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -344,9 +361,9 @@ public class ServerImpl implements Server {
 	}
 
 	@Override
-	public void stopWatching(UUID gameId, UUID clientId) throws MageException {
+	public void stopWatching(UUID gameId, UUID sessionId) throws MageException {
 		try {
-			GameManager.getInstance().stopWatching(gameId, clientId);
+			GameManager.getInstance().stopWatching(gameId, sessionId);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -354,9 +371,9 @@ public class ServerImpl implements Server {
 	}
 
 	@Override
-	public void replayGame(UUID gameId, UUID sessionId, GameReplayClient replayClient) throws MageException {
+	public void replayGame(UUID sessionId) throws MageException {
 		try {
-			ReplayManager.getInstance().startReplay(sessionId, replayClient);
+			ReplayManager.getInstance().startReplay(sessionId);
 		}
 		catch (Exception ex) {
 			handleException(ex);

@@ -30,12 +30,13 @@ package mage.server.game;
 
 import java.rmi.RemoteException;
 import java.util.UUID;
-import java.util.concurrent.ExecutorService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mage.interfaces.GameClient;
-import mage.server.util.ThreadExecutor;
+import mage.interfaces.callback.ClientCallback;
+import mage.server.Session;
+import mage.server.SessionManager;
 import mage.util.Logging;
+import mage.view.GameClientMessage;
 import mage.view.GameView;
 
 /**
@@ -44,83 +45,96 @@ import mage.view.GameView;
  */
 public class GameWatcher {
 
-	protected static ExecutorService rmiExecutor = ThreadExecutor.getInstance().getRMIExecutor();
+//	protected static ExecutorService rmiExecutor = ThreadExecutor.getInstance().getRMIExecutor();
 	protected final static Logger logger = Logging.getLogger(GameWatcher.class.getName());
-
-	protected GameClient client;
 
 	protected UUID sessionId;
 	protected UUID gameId;
 	protected boolean killed = false;
 
-	public GameWatcher(GameClient client, UUID sessionId, UUID gameId) {
-		this.client = client;
+	public GameWatcher(UUID sessionId, UUID gameId) {
 		this.sessionId = sessionId;
 		this.gameId = gameId;
 	}
 
 	public void init(final GameView gameView) {
-		if (!killed)
-			rmiExecutor.submit(
-				new Runnable() {
-					@Override
-					public void run() {
-						try {
-							client.init(gameView);
-						} catch (RemoteException ex) {
-							handleRemoteException(ex);
-						}
-					}
-				}
-			);
+		if (!killed) {
+			Session session = SessionManager.getInstance().getSession(sessionId);
+			if (session != null)
+				session.fireCallback(new ClientCallback("gameInit", gameView));
+		}
+//			rmiExecutor.submit(
+//				new Runnable() {
+//					@Override
+//					public void run() {
+//						try {
+//							client.init(gameView);
+//						} catch (RemoteException ex) {
+//							handleRemoteException(ex);
+//						}
+//					}
+//				}
+//			);
 	}
 
 	public void update(final GameView gameView) {
-		if (!killed)
-			rmiExecutor.submit(
-				new Runnable() {
-					@Override
-					public void run() {
-						try {
-							client.update(gameView);
-						} catch (RemoteException ex) {
-							handleRemoteException(ex);
-						}
-					}
-				}
-			);
+		if (!killed) {
+			Session session = SessionManager.getInstance().getSession(sessionId);
+			if (session != null)
+				session.fireCallback(new ClientCallback("gameUpdate", gameView));
+		}
+//			rmiExecutor.submit(
+//				new Runnable() {
+//					@Override
+//					public void run() {
+//						try {
+//							client.update(gameView);
+//						} catch (RemoteException ex) {
+//							handleRemoteException(ex);
+//						}
+//					}
+//				}
+//			);
 	}
 
 	public void inform(final String message, final GameView gameView) {
-		if (!killed)
-			rmiExecutor.submit(
-				new Runnable() {
-					@Override
-					public void run() {
-						try {
-							client.inform(message, gameView);
-						} catch (RemoteException ex) {
-							handleRemoteException(ex);
-						}
-					}
-				}
-			);
+		if (!killed) {
+			Session session = SessionManager.getInstance().getSession(sessionId);
+			if (session != null)
+				session.fireCallback(new ClientCallback("gameInform", new GameClientMessage(gameView, message)));
+		}
+//			rmiExecutor.submit(
+//				new Runnable() {
+//					@Override
+//					public void run() {
+//						try {
+//							client.inform(message, gameView);
+//						} catch (RemoteException ex) {
+//							handleRemoteException(ex);
+//						}
+//					}
+//				}
+//			);
 	}
 
 	public void gameOver(final String message) {
-		if (!killed)
-			rmiExecutor.submit(
-				new Runnable() {
-					@Override
-					public void run() {
-						try {
-							client.gameOver(message);
-						} catch (RemoteException ex) {
-							handleRemoteException(ex);
-						}
-					}
-				}
-			);
+		if (!killed) {
+			Session session = SessionManager.getInstance().getSession(sessionId);
+			if (session != null)
+				session.fireCallback(new ClientCallback("gameOver", message));
+		}
+//			rmiExecutor.submit(
+//				new Runnable() {
+//					@Override
+//					public void run() {
+//						try {
+//							client.gameOver(message);
+//						} catch (RemoteException ex) {
+//							handleRemoteException(ex);
+//						}
+//					}
+//				}
+//			);
 	}
 
 	protected void handleRemoteException(RemoteException ex) {

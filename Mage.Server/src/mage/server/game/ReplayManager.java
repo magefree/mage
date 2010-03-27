@@ -30,7 +30,6 @@ package mage.server.game;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import mage.interfaces.GameReplayClient;
 import mage.server.SessionManager;
 
 /**
@@ -49,13 +48,13 @@ public class ReplayManager {
 	private ConcurrentHashMap<UUID, ReplaySession> replaySessions = new ConcurrentHashMap<UUID, ReplaySession>();
 
 	public void replayGame(UUID sessionId, UUID gameId) {
-		ReplaySession replaySession = new ReplaySession(gameId);
+		ReplaySession replaySession = new ReplaySession(gameId, sessionId);
 		replaySessions.put(sessionId, replaySession);
 		SessionManager.getInstance().getSession(sessionId).replayGame(gameId);
 	}
 
-	public void startReplay(UUID sessionId, GameReplayClient replayClient) {
-		replaySessions.get(sessionId).replay(replayClient);
+	public void startReplay(UUID sessionId) {
+		replaySessions.get(sessionId).replay();
 	}
 
 	public void stopReplay(UUID sessionId) {

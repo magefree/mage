@@ -14,6 +14,7 @@
     
 	<xs:element name="server">
 		<xs:complexType>
+			<xs:attribute name="serverAddress" type="xs:string" use="required"/>
 			<xs:attribute name="serverName" type="xs:string" use="required"/>
 			<xs:attribute name="port" type="xs:positiveInteger" use="required"/>
 			<xs:attribute name="maxGameThreads" type="xs:positiveInteger" use="required"/>

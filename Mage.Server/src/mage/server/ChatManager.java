@@ -30,7 +30,6 @@ package mage.server;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import mage.interfaces.ChatClient;
 
 /**
  *
@@ -54,12 +53,12 @@ public class ChatManager {
 		return chatSession.getChatId();
 	}
 
-	public void joinChat(UUID chatId, ChatClient client) {
-		chatSessions.get(chatId).join(client);
+	public void joinChat(UUID chatId, UUID sessionId, String userName) {
+		chatSessions.get(chatId).join(userName, sessionId);
 	}
 
-	public void leaveChat(UUID chatId, UUID clientId) {
-		chatSessions.get(chatId).leave(clientId);
+	public void leaveChat(UUID chatId, UUID sessionId) {
+		chatSessions.get(chatId).kill(sessionId);
 	}
 
 	public void destroyChatSession(UUID chatId) {
@@ -68,5 +67,11 @@ public class ChatManager {
 
 	public void broadcast(UUID chatId, String userName, String message) {
 		chatSessions.get(chatId).broadcast(userName, message);
+	}
+
+	void removeSession(UUID sessionId) {
+		for (ChatSession chat: chatSessions.values()) {
+			chat.kill(sessionId);
+		}
 	}
 }

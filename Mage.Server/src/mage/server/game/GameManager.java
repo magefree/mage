@@ -33,7 +33,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import mage.cards.decks.DeckCardLists;
 import mage.game.Game;
 import mage.game.GameReplay;
-import mage.interfaces.GameClient;
 
 /**
  *
@@ -56,8 +55,8 @@ public class GameManager {
 		return gameController.getSessionId();
 	}
 
-	public void joinGame(UUID gameId, UUID sessionId, GameClient client) {
-		gameControllers.get(gameId).join(sessionId, client);
+	public void joinGame(UUID gameId, UUID sessionId) {
+		gameControllers.get(gameId).join(sessionId);
 	}
 
 //	public void leaveGame(UUID gameId, UUID clientId) {
@@ -92,12 +91,12 @@ public class GameManager {
 		gameControllers.get(gameId).concede(sessionId);
 	}
 
-	public void watchGame(UUID gameId, UUID sessionId, GameClient client) {
-		gameControllers.get(gameId).watch(sessionId, client);
+	public void watchGame(UUID gameId, UUID sessionId) {
+		gameControllers.get(gameId).watch(sessionId);
 	}
 
-	public void stopWatching(UUID gameId, UUID clientId) {
-		gameControllers.get(gameId).stopWatching(clientId);
+	public void stopWatching(UUID gameId, UUID sessionId) {
+		gameControllers.get(gameId).stopWatching(sessionId);
 	}
 
 	public void removeSession(UUID sessionId) {

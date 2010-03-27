@@ -64,7 +64,7 @@ public class PlayerFactory {
 			logger.log(Level.SEVERE, null, ex);
 			return null;
 		}
-		logger.info("Player created: " + player.getId().toString());
+		logger.info("Player created: " + name + "-" + player.getId().toString());
 		return player;
 	}
 

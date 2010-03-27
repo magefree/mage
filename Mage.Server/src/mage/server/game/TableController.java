@@ -90,7 +90,7 @@ public class TableController {
 			}
 
 		} catch (GameException ex) {
-			logger.log(Level.WARNING, ex.getMessage());
+			logger.warning(ex.getMessage());
 			return false;
 		}
 		return true;

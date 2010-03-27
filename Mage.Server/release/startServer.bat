@@ -1,1 +1,1 @@
-start java -jar .\MageServer.jar
+start java -server -Djava.security.policy=./config/security.policy -Djava.util.logging.config.file=./config/logging.config -jar ./MageServer.jar
