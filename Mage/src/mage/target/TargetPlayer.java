@@ -101,8 +101,7 @@ public class TargetPlayer extends TargetImpl {
 	public String getTargetedName(Game game) {
 		StringBuilder sb = new StringBuilder();
 		for (UUID targetId: getTargets()) {
-			sb.append(game.getPlayer(targetId).getName());
-			sb.append(" ");
+			sb.append(game.getPlayer(targetId).getName()).append(" ");
 		}
 		return sb.toString();
 	}

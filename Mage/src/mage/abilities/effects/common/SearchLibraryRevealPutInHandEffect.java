@@ -76,16 +76,11 @@ public class SearchLibraryRevealPutInHandEffect extends OneShotEffect {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Search your library for ");
 		if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
-			sb.append("up to ");
-			sb.append(target.getMaxNumberOfTargets());
-			sb.append(" ");
-			sb.append(target.getTargetName());
-			sb.append(", reveal them, and put them into your hand");
+			sb.append("up to ").append(target.getMaxNumberOfTargets()).append(" ");
+			sb.append(target.getTargetName()).append(", reveal them, and put them into your hand");
 		}
 		else {
-			sb.append("a ");
-			sb.append(target.getTargetName());
-			sb.append(", reveal that card, and put it into your hand");
+			sb.append("a ").append(target.getTargetName()).append(", reveal that card, and put it into your hand");
 		}
 		sb.append(". Then shuffle your library");
 

@@ -151,8 +151,7 @@ public abstract class AbilityImpl implements Ability, Serializable {
 
 		if (!(this instanceof SpellAbility)) {
 			if (!costs.getText().equals("")) {
-				sbRule.append(costs.getText());
-				sbRule.append(": ");
+				sbRule.append(costs.getText()).append(": ");
 			}
 		}
 		sbRule.append(effects.getText());

@@ -160,9 +160,7 @@ public class Mana implements Comparable<Mana>, Serializable {
 		for (int i = 0; i < white; i++)
 			sbMana.append("{W}");
 		if (colorless > 0) {
-			sbMana.append("{");
-			sbMana.append(Integer.toString(colorless));
-			sbMana.append("}");
+			sbMana.append("{").append(Integer.toString(colorless)).append("}");
 		}
 		return sbMana.toString();
 	}

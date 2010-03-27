@@ -58,8 +58,7 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
 
 		StringBuilder sbText = new StringBuilder();
 		for (T cost: this) {
-			sbText.append(cost.getText());
-			sbText.append(", ");
+			sbText.append(cost.getText()).append(", ");
 		}
 		sbText.setLength(sbText.length() - 2);
 		return sbText.toString();

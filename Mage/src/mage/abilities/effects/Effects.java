@@ -47,7 +47,7 @@ public class Effects extends ArrayList<Effect> {
 	public String getText() {
 		StringBuilder sbText = new StringBuilder();
 		for (Effect effect: this) {
-			sbText.append(effect.getText() + ". ");
+			sbText.append(effect.getText()).append(". ");
 		}
 		return sbText.toString();
 	}

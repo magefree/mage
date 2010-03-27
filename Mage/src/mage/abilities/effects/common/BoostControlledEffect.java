@@ -85,8 +85,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
 			sb.append("Creatures");
 		else
 			sb.append(filter.getMessage());
-		sb.append(" you control get ");
-		sb.append(String.format("%1$+d/%2$+d", power, toughness));
+		sb.append(" you control get ").append(String.format("%1$+d/%2$+d", power, toughness));
 		sb.append((duration==Duration.EndOfTurn?" until end of turn":""));
 		return sb.toString();
 	}

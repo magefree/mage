@@ -272,7 +272,7 @@ public class ContinuousEffects implements Serializable {
 	public String getText() {
 		StringBuilder sbText = new StringBuilder();
 		for (ContinuousEffect effect: effects) {
-			sbText.append(effect.getText() + " ");
+			sbText.append(effect.getText()).append(" ");
 		}
 		return sbText.toString();
 	}

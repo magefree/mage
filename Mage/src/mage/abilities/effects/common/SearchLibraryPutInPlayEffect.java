@@ -88,16 +88,11 @@ public class SearchLibraryPutInPlayEffect extends OneShotEffect {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Search your library for ");
 		if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
-			sb.append("up to ");
-			sb.append(target.getMaxNumberOfTargets());
-			sb.append(" ");
-			sb.append(target.getTargetName());
-			sb.append(", and put them onto the battlefield");
+			sb.append("up to ").append(target.getMaxNumberOfTargets()).append(" ");
+			sb.append(target.getTargetName()).append(", and put them onto the battlefield");
 		}
 		else {
-			sb.append("a ");
-			sb.append(target.getTargetName());
-			sb.append(", and put it onto the battlefield");
+			sb.append("a ").append(target.getTargetName()).append(", and put it onto the battlefield");
 		}
 		sb.append(". Then shuffle your library");
 		return sb.toString();
