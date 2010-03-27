@@ -117,7 +117,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
 	@Override
 	public boolean chooseTarget(Outcome outcome, Target target, Game game) {
-		logger.info("chooseTarget: " + outcome.toString() + ":" + target.toString());
+		logger.fine("chooseTarget: " + outcome.toString() + ":" + target.toString());
 		UUID opponentId = game.getOpponents(playerId).get(0);
 		if (target instanceof TargetPlayer) {
 			if (outcome.isGood()) {
@@ -170,7 +170,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
 	@Override
 	public void priority(Game game) {
-		logger.info("priority");
+		logger.fine("priority");
 		if (game.getActivePlayerId().equals(playerId)) {
 			if (game.isMainPhase() && game.getStack().isEmpty()) {
 				playLand(game);
@@ -226,7 +226,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 	}
 
 	private void playLand(Game game) {
-		logger.info("playLand");
+		logger.fine("playLand");
 		List<Card> lands = hand.getCards(new FilterLandCard());
 		while (lands.size() > 0 && this.landsPlayed < this.landsPerTurn) {
 			if (lands.size() == 1)
@@ -238,7 +238,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 	}
 
 	private void playALand(List<Card> lands, Game game) {
-		logger.info("playALand");
+		logger.fine("playALand");
 		//play a land that will allow us to play an unplayable
 		for (Mana mana: unplayable.keySet()) {
 			for (Card card: lands) {
@@ -325,11 +325,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 				}
 			}
 		}
-		logger.info("findPlayables: " + playableInstant.toString() + "---" + playableNonInstant.toString() + "---" + playableAbilities.toString() );
+		logger.fine("findPlayables: " + playableInstant.toString() + "---" + playableNonInstant.toString() + "---" + playableAbilities.toString() );
 	}
 
 	protected ManaOptions getManaAvailable(Game game) {
-		logger.info("getManaAvailable");
+		logger.fine("getManaAvailable");
 		List<Permanent> manaPerms = this.getAvailableManaProducers(game);
 		
 		ManaOptions available = new ManaOptions();
@@ -341,7 +341,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
 	@Override
 	public boolean playMana(ManaCost unpaid, Game game) {
-		logger.info("playMana");
+		logger.fine("playMana");
 		ManaCost cost;
 		List<Permanent> producers;
 		if (unpaid instanceof ManaCosts) {
@@ -429,7 +429,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
 	@Override
 	public boolean playXMana(VariableManaCost cost, Game game) {
-		logger.info("playXMana");
+		logger.fine("playXMana");
 		//put everything into X
 		for (Permanent perm: this.getAvailableManaProducers(game)) {
 			for (ManaAbility ability: perm.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
@@ -448,21 +448,21 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
 	@Override
 	public boolean chooseUse(Outcome outcome, String message, Game game) {
-		logger.info("chooseUse");
+		logger.fine("chooseUse");
 		//TODO: improve ths
 		return outcome.isGood();
 	}
 
 	@Override
 	public boolean choose(Outcome outcome, Choice choice, Game game) {
-		logger.info("choose");
+		logger.fine("choose");
 		//TODO: implement this
 		return false;
 	}
 
 	@Override
 	public boolean searchCards(Cards cards, TargetCard target, Game game)  {
-		logger.info("searchCards");
+		logger.fine("searchCards");
 		//TODO: improve ths
 		//return first match
 		for (Card card: cards.getCards(target.getFilter())) {
@@ -474,7 +474,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
 	@Override
 	public void selectAttackers(Game game) {
-		logger.info("selectAttackers");
+		logger.fine("selectAttackers");
 		UUID opponentId = game.getOpponents(playerId).get(0);
 		Attackers attackers = getAvailableAttackers(game);
 		List<Permanent> blockers = getOpponentBlockers(opponentId, game);
@@ -501,7 +501,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
 	@Override
 	public void selectBlockers(Game game) {
-		logger.info("selectBlockers");
+		logger.fine("selectBlockers");
 
 		List<Permanent> blockers = getAvailableBlockers(game);
 
@@ -517,27 +517,27 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 	
 	@Override
 	public int chooseEffect(List<ReplacementEffect> rEffects, Game game) {
-		logger.info("chooseEffect");
+		logger.fine("chooseEffect");
 		//TODO: implement this
 		return 0;
 	}
 
 	@Override
 	public void assignDamage(int damage, List<UUID> targets, UUID sourceId, Game game) {
-		logger.info("assignDamage");
+		logger.fine("assignDamage");
 		//TODO: improve this
 		game.getPermanent(targets.get(0)).damage(damage, sourceId, game);
 	}
 
 	@Override
 	public int getAmount(int min, int max, String message, Game game) {
-		logger.info("getAmount");
+		logger.fine("getAmount");
 		//TODO: improve this
 		return min;
 	}
 
 	protected List<Permanent> getAvailableManaProducers(Game game) {
-		logger.info("getAvailableManaProducers");
+		logger.fine("getAvailableManaProducers");
 		List<Permanent> result = new ArrayList<Permanent>();
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(playerId)) {
 			for (ManaAbility ability: permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
@@ -551,7 +551,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 	}
 
 	protected Attackers getAvailableAttackers(Game game) {
-		logger.info("getAvailableAttackers");
+		logger.fine("getAvailableAttackers");
 		FilterCreatureForAttack attackFilter = new FilterCreatureForAttack();
 		attackFilter.getControllerId().add(playerId);
 		Attackers attackers = new Attackers();
@@ -569,7 +569,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 	}
 
 	protected int combatPotential(Permanent creature, Game game) {
-		logger.info("combatPotential");
+		logger.fine("combatPotential");
 		if (!creature.canAttack(game))
 			return 0;
 		int potential = creature.getPower().getValue();
@@ -582,7 +582,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 	}
 
 	protected List<Permanent> getAvailableBlockers(Game game) {
-		logger.info("getAvailableBlockers");
+		logger.fine("getAvailableBlockers");
 		FilterCreatureForCombat blockFilter = new FilterCreatureForCombat();
 		blockFilter.getControllerId().add(playerId);
 		List<Permanent> blockers = game.getBattlefield().getActivePermanents(blockFilter);
@@ -590,7 +590,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 	}
 
 	protected List<Permanent> getOpponentBlockers(UUID opponentId, Game game) {
-		logger.info("getOpponentBlockers");
+		logger.fine("getOpponentBlockers");
 		FilterCreatureForCombat blockFilter = new FilterCreatureForCombat();
 		blockFilter.getControllerId().add(opponentId);
 		List<Permanent> blockers = game.getBattlefield().getActivePermanents(blockFilter);
@@ -598,7 +598,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 	}
 
 	protected CombatSimulator simulateAttack(Attackers attackers, List<Permanent> blockers, UUID opponentId, Game game) {
-		logger.info("simulateAttack");
+		logger.fine("simulateAttack");
 		List<Permanent> attackersList = attackers.getAttackers();
 		CombatSimulator best = new CombatSimulator();
 		int bestResult = 0;
@@ -629,7 +629,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 	}
 
 	protected CombatSimulator simulateBlock(CombatSimulator combat, List<Permanent> blockers, Game game) {
-		logger.info("simulateBlock");
+		logger.fine("simulateBlock");
 
 		TreeNode<CombatSimulator> simulations;
 
@@ -713,10 +713,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 		StringBuilder sb = new StringBuilder();
 		sb.append("computer player hand: ");
 		for (Card card: hand.values()) {
-			sb.append(card.getName());
-			sb.append(",");
+			sb.append(card.getName()).append(",");
 		}
-		logger.info(sb.toString());
+		logger.fine(sb.toString());
 	}
 
 	private void playRemoval(List<UUID> attackers, Game game) {
