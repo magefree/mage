@@ -65,6 +65,16 @@ public class ObjectColor implements Serializable {
 		}
 	}
 
+	public int getColorCount() {
+		int count = 0;
+		if (white) count++;
+		if (blue) count++;
+		if (black) count++;
+		if (green) count++;
+		if (red) count++;
+		return count;
+	}
+
 	public void setColor(ObjectColor color) {
 		this.setBlack(color.isBlack());
 		this.setBlue(color.isBlue());
