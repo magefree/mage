@@ -8,6 +8,7 @@
 				<xs:element ref="server"/>
 				<xs:element ref="playerTypes"/>
 				<xs:element ref="gameTypes"/>
+				<xs:element ref="deckTypes"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -45,5 +46,13 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-    
+
+	<xs:element name="deckTypes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="plugin" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
 </xs:schema>
