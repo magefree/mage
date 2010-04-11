@@ -82,6 +82,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
 				} else {
 					try {
 						SwingUtilities.invokeAndWait(new Runnable() {
+							@Override
 							public void run() {
 								stopModal();
 							}

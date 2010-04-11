@@ -40,12 +40,12 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import mage.Constants;
 import mage.cards.decks.DeckCardLists;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
 import mage.client.game.GamePanel;
 import mage.client.util.Config;
+import mage.game.GameException;
 import mage.interfaces.MageException;
 import mage.interfaces.Server;
 import mage.interfaces.callback.CallbackClientDaemon;
@@ -67,6 +67,7 @@ public class Session {
 	private MageFrame frame;
 	private String[] playerTypes;
 	private String[] gameTypes;
+	private String[] deckTypes;
 	private Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
 	private GamePanel game;
 	private CallbackClientDaemon callbackDaemon;
@@ -89,7 +90,9 @@ public class Session {
 			callbackDaemon = new CallbackClientDaemon(sessionId, client, server);
 			playerTypes = server.getPlayerTypes();
 			gameTypes = server.getGameTypes();
+			deckTypes = server.getDeckTypes();
 			logger.info("Connected to RMI server at " + serverName + ":" + port);
+			frame.setStatusText("Connected to " + serverName + ":" + port);
 			frame.enableButtons();
 		} catch (MageException ex) {
 			Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
@@ -112,6 +115,7 @@ public class Session {
 			} catch (MageException ex) {
 				logger.log(Level.SEVERE, "Error disconnecting ...", ex);
 			}
+			frame.setStatusText("Not connected");
 		}
 	}
 
@@ -125,6 +129,10 @@ public class Session {
 
 	public String[] getGameTypes() {
 		return gameTypes;
+	}
+
+	public String[] getDeckTypes() {
+		return deckTypes;
 	}
 
 	public Map<UUID, ChatPanel> getChats() {
@@ -225,6 +233,8 @@ public class Session {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
 			handleMageException(ex);
+		} catch (GameException ex) {
+			handleGameException(ex);
 		}
 		return false;
 	}
@@ -363,7 +373,7 @@ public class Session {
 		return false;
 	}
 
-	public TableView createTable(UUID roomId, String gameType, Constants.DeckType deckType, List<String> playerTypes) {
+	public TableView createTable(UUID roomId, String gameType, String deckType, List<String> playerTypes) {
 		try {
 			return server.createTable(sessionId, roomId, gameType, deckType, playerTypes);
 		} catch (RemoteException ex) {
@@ -496,6 +506,7 @@ public class Session {
 	private void handleRemoteException(RemoteException ex) {
 		server = null;
 		logger.log(Level.SEVERE, "Connection to server lost", ex);
+		frame.setStatusText("Not connected");
 		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Connection to server lost.", "Error", JOptionPane.ERROR_MESSAGE);
 		frame.disableButtons();
 	}
@@ -506,6 +517,12 @@ public class Session {
 		disconnect();
 		frame.disableButtons();
 	}
+
+	private void handleGameException(GameException ex) {
+		logger.log(Level.WARNING, "Game error", ex.getMessage());
+		JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	}
+
 
 	public String getUserName() {
 		return userName;

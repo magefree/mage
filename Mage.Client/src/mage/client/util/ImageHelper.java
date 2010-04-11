@@ -41,6 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import javax.imageio.ImageIO;
 import mage.Constants.CardType;
+import mage.view.AbilityView;
 import mage.view.CardView;
 import mage.view.StackAbilityView;
 import static mage.client.util.Constants.*;
@@ -87,12 +88,12 @@ public class ImageHelper {
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
 		g.drawImage(getFrame(card), 0, 0, Color.WHITE, null);
-		if (!card.getArt().equals("")) {
+		if (card.getArt() != null && !card.getArt().equals("")) {
 			Image art = loadImage(Config.cardArtResourcePath + card.getArt(), ART_MAX_WIDTH, ART_MAX_HEIGHT);
 			g.drawImage(art, CONTENT_MAX_XOFFSET, ART_MAX_YOFFSET, null);
 		}
 
-		if (card.getCardTypes().contains(CardType.CREATURE) || card.getCardTypes().contains(CardType.PLANESWALKER)) {
+		if (card.getCardTypes() != null && (card.getCardTypes().contains(CardType.CREATURE) || card.getCardTypes().contains(CardType.PLANESWALKER))) {
 			g.drawImage(Frames.PowBoxLeft, POWBOX_MAX_LEFT, POWBOX_MAX_TOP, null);
 			g.drawImage(Frames.PowBoxMid, POWBOX_MAX_LEFT + 7, POWBOX_MAX_TOP, null);
 			g.drawImage(Frames.PowBoxRight, POWBOX_MAX_LEFT + 38, POWBOX_MAX_TOP, null);
@@ -105,7 +106,7 @@ public class ImageHelper {
 	}
 
 	protected static Image getFrame(CardView card) {
-		if (card instanceof StackAbilityView) {
+		if (card instanceof StackAbilityView || card instanceof AbilityView) {
 			return Frames.Effect;
 		}
 
@@ -116,6 +117,48 @@ public class ImageHelper {
 			if (card.getColor().isColorless()) {
 				return Frames.Grey;
 			} else if (card.getColor().isMulticolored()) {
+				if (card.getColor().getColorCount() > 2)
+					return Frames.Gold;
+				if (card.getColor().isBlack() && card.getColor().isRed()) {
+					if (Frames.BlackRed != null)
+						return Frames.BlackRed;
+				}
+				else if (card.getColor().isBlack() && card.getColor().isGreen()) {
+					if (Frames.BlackGreen != null)
+						return Frames.BlackGreen;
+				}
+				else if (card.getColor().isBlack() && card.getColor().isBlue()) {
+					if (Frames.BlueBlack != null)
+						return Frames.BlueBlack;
+				}
+				else if (card.getColor().isRed() && card.getColor().isBlue()) {
+					if (Frames.BlueRed != null)
+						return Frames.BlueRed;
+				}
+				else if (card.getColor().isGreen() && card.getColor().isBlue()) {
+					if (Frames.GreenBlue != null)
+						return Frames.GreenBlue;
+				}
+				else if (card.getColor().isGreen() && card.getColor().isWhite()) {
+					if (Frames.GreenWhite != null)
+						return Frames.GreenWhite;
+				}
+				else if (card.getColor().isRed() && card.getColor().isGreen()) {
+					if (Frames.RedGreen != null)
+						return Frames.RedGreen;
+				}
+				else if (card.getColor().isRed() && card.getColor().isWhite()) {
+					if (Frames.RedWhite != null)
+						return Frames.RedWhite;
+				}
+				else if (card.getColor().isWhite() && card.getColor().isBlack()) {
+					if (Frames.WhiteBlack != null)
+						return Frames.WhiteBlack;
+				}
+				else if (card.getColor().isWhite() && card.getColor().isBlue()) {
+					if (Frames.WhiteBlue != null)
+						return Frames.WhiteBlue;
+				}
 				return Frames.Gold;
 			} else {
 				if (card.getColor().isBlack()) {
@@ -152,7 +195,7 @@ public class ImageHelper {
 				return Frames.Swamp;
 			}
 		}
-		return Frames.Grey;
+		return Frames.Land;
 	}
 
 	public static Image ScaleImage(Image image, int width, int height) {

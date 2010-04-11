@@ -41,6 +41,8 @@ import java.io.IOException;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JDesktopPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -145,6 +147,7 @@ public class MageFrame extends javax.swing.JFrame {
         btnAbout = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnExit = new javax.swing.JButton();
+        lblStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 768));
@@ -239,12 +242,16 @@ public class MageFrame extends javax.swing.JFrame {
         });
         mageToolbar.add(btnExit);
 
+        lblStatus.setText("Not connected");
+        mageToolbar.add(Box.createHorizontalGlue());
+        mageToolbar.add(lblStatus);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, 1106, Short.MAX_VALUE)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1106, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
+            .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,32 +342,13 @@ public class MageFrame extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
+    private javax.swing.JLabel lblStatus;
     private javax.swing.JToolBar mageToolbar;
     private mage.client.TablesPane tablesPane;
     // End of variables declaration//GEN-END:variables
 
-	private void createDeck() {
-		Deck deck = new Deck();
-		deck.getCards().add(new mage.sets.shardsofalara.BroodmateDragon(null));
-		deck.getCards().add(new mage.sets.shardsofalara.BroodmateDragon(null));
-		deck.getCards().add(new mage.sets.alarareborn.BloodbraidElf(null));
-		deck.getCards().add(new mage.sets.alarareborn.BloodbraidElf(null));
-		deck.getCards().add(new mage.sets.shardsofalara.JundPanorama(null));
-		deck.getCards().add(new mage.sets.shardsofalara.JundPanorama(null));
-		deck.getCards().add(new mage.sets.alarareborn.VengefulRebirth(null));
-		deck.getCards().add(new mage.sets.alarareborn.VengefulRebirth(null));
-		deck.getCards().add(new mage.sets.shardsofalara.SproutingThrinax(null));
-		deck.getCards().add(new mage.sets.shardsofalara.SproutingThrinax(null));
-		deck.getCards().add(new mage.sets.shardsofalara.SarkhanVol(null));
-		deck.getCards().add(new mage.sets.shardsofalara.SarkhanVol(null));
-		deck.getCards().add(new mage.sets.alarareborn.MaelstromPulse(null));
-		deck.getCards().add(new mage.sets.alarareborn.MaelstromPulse(null));
-		try {
-			deck.getDeckCardLists().save("test.dck");
-		} catch (FileNotFoundException ex) {
-			logger.log(Level.SEVERE, null, ex);
-		} catch (IOException ex) {
-			logger.log(Level.SEVERE, null, ex);
-		}
+	public void setStatusText(String status) {
+		this.lblStatus.setText(status);
 	}
+
 }

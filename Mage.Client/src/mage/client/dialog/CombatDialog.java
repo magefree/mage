@@ -34,10 +34,8 @@
 
 package mage.client.dialog;
 
-import java.awt.Dimension;
 import java.util.List;
 import java.util.UUID;
-import javax.swing.JLayeredPane;
 import mage.client.cards.BigCard;
 import mage.client.game.CombatGroup;
 import mage.view.CombatGroupView;
@@ -69,11 +67,9 @@ public class CombatDialog extends MageDialog {
 			combatGroup.init(gameId, bigCard);
 			combatGroup.update(group);
 			combatGroup.setVisible(true);
-//			combatGroup.setPreferredSize(new Dimension(140, 440));
 			combatArea.add(combatGroup);
 			combatGroup.revalidate();
 		}
-//		combatArea.setPreferredSize(new Dimension(140, 440));
 		pack();
 		this.revalidate();
 		this.repaint();

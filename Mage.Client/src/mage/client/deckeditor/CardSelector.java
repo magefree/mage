@@ -35,28 +35,26 @@
 package mage.client.deckeditor;
 
 import java.awt.Cursor;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import javax.swing.DefaultComboBoxModel;
+import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.ExpansionSet;
 import mage.client.cards.BigCard;
-import mage.client.cards.CardsList;
+import mage.client.cards.CardGrid;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
-import mage.sets.AlaraReborn;
-import mage.sets.Conflux;
-import mage.sets.Magic2010;
-import mage.sets.Planechase;
-import mage.sets.ShardsOfAlara;
-import mage.sets.Tenth;
-import mage.sets.Worldwake;
-import mage.sets.Zendikar;
+import mage.sets.Sets;
 import mage.view.CardsView;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CardSelector extends javax.swing.JPanel {
+public class CardSelector extends javax.swing.JPanel implements ComponentListener {
 
 	private Cards cards = new CardsImpl(Zone.OUTSIDE);
 	private FilterCard filter = new FilterCard();
@@ -65,19 +63,18 @@ public class CardSelector extends javax.swing.JPanel {
     /** Creates new form CardSelector */
     public CardSelector() {
         initComponents();
+		this.addComponentListener(this);
     }
 
 	public void loadCards(BigCard bigCard) {
 		this.bigCard = bigCard;
 		this.cards.clear();
-		cards.addAll(AlaraReborn.getInstance().createCards());
-		cards.addAll(Conflux.getInstance().createCards());
-		cards.addAll(Magic2010.getInstance().createCards());
-		cards.addAll(Planechase.getInstance().createCards());
-		cards.addAll(ShardsOfAlara.getInstance().createCards());
-		cards.addAll(Tenth.getInstance().createCards());
-		cards.addAll(Worldwake.getInstance().createCards());
-		cards.addAll(Zendikar.getInstance().createCards());
+		cbExpansionSet.setModel(new DefaultComboBoxModel(Sets.getInstance().toArray()));
+		cbExpansionSet.insertItemAt("All sets", 0);
+		cbExpansionSet.setSelectedIndex(0);
+		for (ExpansionSet set: Sets.getInstance()) {
+			cards.addAll(set.createCards());
+		}
 		filter.setUseColor(true);
 		filter.getColor().setBlack(true);
 		filter.getColor().setBlue(true);
@@ -88,21 +85,29 @@ public class CardSelector extends javax.swing.JPanel {
 		filter.setUseColorless(true);
 		filter.setNotColor(false);
 		filter.setScopeColor(ComparisonScope.Any);
+		filter.getCardType().add(CardType.LAND);
+		filter.getCardType().add(CardType.ARTIFACT);
+		filter.getCardType().add(CardType.CREATURE);
+		filter.getCardType().add(CardType.ENCHANTMENT);
+		filter.getCardType().add(CardType.INSTANT);
+		filter.getCardType().add(CardType.PLANESWALKER);
+		filter.getCardType().add(CardType.SORCERY);
+		filter.setScopeCardType(ComparisonScope.Any);
 		filterCards();
 	}
 
 	private void filterCards() {
 		try {
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			this.cardsList1.loadCards(new CardsView(cards.getCards(filter)), bigCard, null);
+			this.cardGrid.loadCards(new CardsView(cards.getCards(filter)), bigCard, null);
 		}
 		finally {
 			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
 	}
 
-	public CardsList getCardsList() {
-		return this.cardsList1;
+	public CardGrid getCardsList() {
+		return this.cardGrid;
 	}
 
 	public Cards getCards() {
@@ -118,16 +123,27 @@ public class CardSelector extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jToolBar1 = new javax.swing.JToolBar();
+        tbColor = new javax.swing.JToolBar();
         rdoRed = new javax.swing.JRadioButton();
         rdoGreen = new javax.swing.JRadioButton();
         rdoBlue = new javax.swing.JRadioButton();
         rdoBlack = new javax.swing.JRadioButton();
         rdoWhite = new javax.swing.JRadioButton();
         rdoColorless = new javax.swing.JRadioButton();
-        cardsList1 = new mage.client.cards.CardsList();
+        cbExpansionSet = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        cardGrid = new mage.client.cards.CardGrid();
+        tbTypes = new javax.swing.JToolBar();
+        rdoLand = new javax.swing.JRadioButton();
+        rdoCreatures = new javax.swing.JRadioButton();
+        rdoArtifacts = new javax.swing.JRadioButton();
+        rdoEnchantments = new javax.swing.JRadioButton();
+        rdoInstants = new javax.swing.JRadioButton();
+        rdoSorceries = new javax.swing.JRadioButton();
+        rdoPlaneswalkers = new javax.swing.JRadioButton();
 
-        jToolBar1.setRollover(true);
+        tbColor.setFloatable(false);
+        tbColor.setRollover(true);
 
         rdoRed.setSelected(true);
         rdoRed.setText("Red ");
@@ -139,7 +155,7 @@ public class CardSelector extends javax.swing.JPanel {
                 rdoRedActionPerformed(evt);
             }
         });
-        jToolBar1.add(rdoRed);
+        tbColor.add(rdoRed);
 
         rdoGreen.setSelected(true);
         rdoGreen.setText("Green ");
@@ -151,7 +167,7 @@ public class CardSelector extends javax.swing.JPanel {
                 rdoGreenActionPerformed(evt);
             }
         });
-        jToolBar1.add(rdoGreen);
+        tbColor.add(rdoGreen);
 
         rdoBlue.setSelected(true);
         rdoBlue.setText("Blue ");
@@ -163,7 +179,7 @@ public class CardSelector extends javax.swing.JPanel {
                 rdoBlueActionPerformed(evt);
             }
         });
-        jToolBar1.add(rdoBlue);
+        tbColor.add(rdoBlue);
 
         rdoBlack.setSelected(true);
         rdoBlack.setText("Black ");
@@ -175,7 +191,7 @@ public class CardSelector extends javax.swing.JPanel {
                 rdoBlackActionPerformed(evt);
             }
         });
-        jToolBar1.add(rdoBlack);
+        tbColor.add(rdoBlack);
 
         rdoWhite.setSelected(true);
         rdoWhite.setText("White ");
@@ -187,10 +203,10 @@ public class CardSelector extends javax.swing.JPanel {
                 rdoWhiteActionPerformed(evt);
             }
         });
-        jToolBar1.add(rdoWhite);
+        tbColor.add(rdoWhite);
 
         rdoColorless.setSelected(true);
-        rdoColorless.setText("Colorless");
+        rdoColorless.setText("Colorless ");
         rdoColorless.setFocusable(false);
         rdoColorless.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         rdoColorless.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -199,21 +215,121 @@ public class CardSelector extends javax.swing.JPanel {
                 rdoColorlessActionPerformed(evt);
             }
         });
-        jToolBar1.add(rdoColorless);
+        tbColor.add(rdoColorless);
+
+        cbExpansionSet.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbExpansionSet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbExpansionSetActionPerformed(evt);
+            }
+        });
+        tbColor.add(cbExpansionSet);
+
+        jScrollPane1.setViewportView(cardGrid);
+
+        tbTypes.setFloatable(false);
+        tbTypes.setRollover(true);
+
+        rdoLand.setSelected(true);
+        rdoLand.setFocusable(false);
+        rdoLand.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        rdoLand.setLabel("Land ");
+        rdoLand.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        rdoLand.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoLandActionPerformed(evt);
+            }
+        });
+        tbTypes.add(rdoLand);
+
+        rdoCreatures.setSelected(true);
+        rdoCreatures.setFocusable(false);
+        rdoCreatures.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        rdoCreatures.setLabel("Creatures ");
+        rdoCreatures.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        rdoCreatures.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoCreaturesActionPerformed(evt);
+            }
+        });
+        tbTypes.add(rdoCreatures);
+
+        rdoArtifacts.setSelected(true);
+        rdoArtifacts.setText("Artifacts ");
+        rdoArtifacts.setFocusable(false);
+        rdoArtifacts.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        rdoArtifacts.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        rdoArtifacts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoArtifactsActionPerformed(evt);
+            }
+        });
+        tbTypes.add(rdoArtifacts);
+
+        rdoEnchantments.setSelected(true);
+        rdoEnchantments.setText("Enchantments ");
+        rdoEnchantments.setFocusable(false);
+        rdoEnchantments.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        rdoEnchantments.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        rdoEnchantments.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoEnchantmentsActionPerformed(evt);
+            }
+        });
+        tbTypes.add(rdoEnchantments);
+
+        rdoInstants.setSelected(true);
+        rdoInstants.setText("Instants ");
+        rdoInstants.setFocusable(false);
+        rdoInstants.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        rdoInstants.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        rdoInstants.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoInstantsActionPerformed(evt);
+            }
+        });
+        tbTypes.add(rdoInstants);
+
+        rdoSorceries.setSelected(true);
+        rdoSorceries.setText("Sorceries ");
+        rdoSorceries.setFocusable(false);
+        rdoSorceries.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        rdoSorceries.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        rdoSorceries.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoSorceriesActionPerformed(evt);
+            }
+        });
+        tbTypes.add(rdoSorceries);
+
+        rdoPlaneswalkers.setSelected(true);
+        rdoPlaneswalkers.setText("Planeswalkers ");
+        rdoPlaneswalkers.setFocusable(false);
+        rdoPlaneswalkers.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        rdoPlaneswalkers.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        rdoPlaneswalkers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoPlaneswalkersActionPerformed(evt);
+            }
+        });
+        tbTypes.add(rdoPlaneswalkers);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
-            .addComponent(cardsList1, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
+            .addComponent(tbColor, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
+            .addComponent(tbTypes, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tbColor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(cardsList1, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))
+                .addComponent(tbTypes, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -247,16 +363,110 @@ public class CardSelector extends javax.swing.JPanel {
 		filterCards();
 	}//GEN-LAST:event_rdoColorlessActionPerformed
 
+	private void rdoLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoLandActionPerformed
+		if (this.rdoLand.isSelected())
+			filter.getCardType().add(CardType.LAND);
+		else
+			filter.getCardType().remove(CardType.LAND);
+		filterCards();
+	}//GEN-LAST:event_rdoLandActionPerformed
+
+	private void rdoCreaturesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoCreaturesActionPerformed
+		if (this.rdoCreatures.isSelected())
+			filter.getCardType().add(CardType.CREATURE);
+		else
+			filter.getCardType().remove(CardType.CREATURE);
+		filterCards();
+	}//GEN-LAST:event_rdoCreaturesActionPerformed
+
+	private void rdoArtifactsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoArtifactsActionPerformed
+		if (this.rdoArtifacts.isSelected())
+			filter.getCardType().add(CardType.ARTIFACT);
+		else
+			filter.getCardType().remove(CardType.ARTIFACT);
+		filterCards();
+	}//GEN-LAST:event_rdoArtifactsActionPerformed
+
+	private void rdoEnchantmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoEnchantmentsActionPerformed
+		if (this.rdoEnchantments.isSelected())
+			filter.getCardType().add(CardType.ENCHANTMENT);
+		else
+			filter.getCardType().remove(CardType.ENCHANTMENT);
+		filterCards();
+	}//GEN-LAST:event_rdoEnchantmentsActionPerformed
+
+	private void rdoInstantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoInstantsActionPerformed
+		if (this.rdoInstants.isSelected())
+			filter.getCardType().add(CardType.INSTANT);
+		else
+			filter.getCardType().remove(CardType.INSTANT);
+		filterCards();
+	}//GEN-LAST:event_rdoInstantsActionPerformed
+
+	private void rdoSorceriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoSorceriesActionPerformed
+		if (this.rdoSorceries.isSelected())
+			filter.getCardType().add(CardType.SORCERY);
+		else
+			filter.getCardType().remove(CardType.SORCERY);
+		filterCards();
+	}//GEN-LAST:event_rdoSorceriesActionPerformed
+
+	private void rdoPlaneswalkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoPlaneswalkersActionPerformed
+		if (this.rdoPlaneswalkers.isSelected())
+			filter.getCardType().add(CardType.PLANESWALKER);
+		else
+			filter.getCardType().remove(CardType.PLANESWALKER);
+		filterCards();
+	}//GEN-LAST:event_rdoPlaneswalkersActionPerformed
+
+	private void cbExpansionSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbExpansionSetActionPerformed
+		filter.getExpansionSetId().clear();
+		if (cbExpansionSet.getSelectedItem() instanceof ExpansionSet) {
+			filter.getExpansionSetId().add(((ExpansionSet)this.cbExpansionSet.getSelectedItem()).getId());
+		}
+		filterCards();
+	}//GEN-LAST:event_cbExpansionSetActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private mage.client.cards.CardsList cardsList1;
-    private javax.swing.JToolBar jToolBar1;
+    private mage.client.cards.CardGrid cardGrid;
+    private javax.swing.JComboBox cbExpansionSet;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton rdoArtifacts;
     private javax.swing.JRadioButton rdoBlack;
     private javax.swing.JRadioButton rdoBlue;
     private javax.swing.JRadioButton rdoColorless;
+    private javax.swing.JRadioButton rdoCreatures;
+    private javax.swing.JRadioButton rdoEnchantments;
     private javax.swing.JRadioButton rdoGreen;
+    private javax.swing.JRadioButton rdoInstants;
+    private javax.swing.JRadioButton rdoLand;
+    private javax.swing.JRadioButton rdoPlaneswalkers;
     private javax.swing.JRadioButton rdoRed;
+    private javax.swing.JRadioButton rdoSorceries;
     private javax.swing.JRadioButton rdoWhite;
+    private javax.swing.JToolBar tbColor;
+    private javax.swing.JToolBar tbTypes;
     // End of variables declaration//GEN-END:variables
+
+	@Override
+	public void componentResized(ComponentEvent e) {
+		this.cardGrid.drawCards();
+	}
+
+	@Override
+	public void componentMoved(ComponentEvent e) {
+		this.cardGrid.drawCards();
+	}
+
+	@Override
+	public void componentShown(ComponentEvent e) {
+		this.cardGrid.drawCards();
+	}
+
+	@Override
+	public void componentHidden(ComponentEvent e) {
+		this.cardGrid.drawCards();
+	}
 
 }

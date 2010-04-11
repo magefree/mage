@@ -78,7 +78,7 @@ public class GamePanel extends javax.swing.JPanel {
         initComponents();
     }
 
-	public void showGame(UUID gameId, UUID playerId) {
+	public synchronized void showGame(UUID gameId, UUID playerId) {
 		this.gameId = gameId;
 		session = MageFrame.getSession();
 		session.setGame(this);
@@ -94,7 +94,7 @@ public class GamePanel extends javax.swing.JPanel {
 			hideGame();
 	}
 
-	public void watchGame(UUID gameId) {
+	public synchronized void watchGame(UUID gameId) {
 		this.gameId = gameId;
 		session = MageFrame.getSession();
 		session.setGame(this);
@@ -109,7 +109,7 @@ public class GamePanel extends javax.swing.JPanel {
 			hideGame();
 	}
 
-	public void replayGame(UUID gameId) {
+	public synchronized void replayGame(UUID gameId) {
 		this.gameId = gameId;
 		session = MageFrame.getSession();
 		session.setGame(this);
@@ -126,11 +126,11 @@ public class GamePanel extends javax.swing.JPanel {
 		this.chatPanel.disconnect();
 		this.players.clear();
 		this.pnlBattlefield.removeAll();
-
+		this.combat.hideDialog();
 		this.setVisible(false);
 	}
 
-	public void init(GameView game) {
+	public synchronized void init(GameView game) {
 		combat.init(gameId, bigCard);
 		MageFrame.getDesktop().add(combat, JLayeredPane.PALETTE_LAYER);
 		this.players.clear();
@@ -144,7 +144,7 @@ public class GamePanel extends javax.swing.JPanel {
 		updateGame(game);
 	}
 
-	public void updateGame(GameView game) {
+	public synchronized void updateGame(GameView game) {
 		if (game.getHand() != null)
 			this.hand.loadCards(game.getHand(), bigCard, gameId);
 		else
@@ -169,6 +169,7 @@ public class GamePanel extends javax.swing.JPanel {
 		}
 		if (game.getCombat().size() > 0) {
 			combat.showDialog(game.getCombat());
+			combat.setLocation(300, 200);
 		}
 		else {
 			combat.hideDialog();

@@ -53,7 +53,7 @@ import static mage.client.util.Constants.*;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BattlefieldPanel extends javax.swing.JPanel implements ComponentListener {
+public class BattlefieldPanel extends javax.swing.JLayeredPane implements ComponentListener {
 
 	private Map<UUID, Permanent> permanents = new HashMap<UUID, Permanent>();
 	private UUID gameId;
@@ -98,11 +98,13 @@ public class BattlefieldPanel extends javax.swing.JPanel implements ComponentLis
 		perm.setBounds(findEmptySpace(new Dimension(FRAME_WIDTH, FRAME_HEIGHT)));
 		permanents.put(permanent.getId(), perm);
 		this.add(perm);
+		moveToFront(perm);
 		perm.update(permanent);
 	}
 
 	private void groupAttachments(PermanentView permanent) {
 		Permanent perm = permanents.get(permanent.getId());
+		int position = getPosition(perm);
 		perm.getLinks().clear();
 		Rectangle r = perm.getBounds();
 		for (UUID attachmentId: permanent.getAttachments()) {
@@ -110,6 +112,7 @@ public class BattlefieldPanel extends javax.swing.JPanel implements ComponentLis
 			perm.getLinks().add(link);
 			r.translate(20, 20);
 			link.setBounds(r);
+			setPosition(link, ++position);
 		}
 	}
 
@@ -163,18 +166,22 @@ public class BattlefieldPanel extends javax.swing.JPanel implements ComponentLis
         setLayout(null);
     }// </editor-fold>//GEN-END:initComponents
 
+	@Override
 	public void componentResized(ComponentEvent e) {
 		resizeBattlefield();
 	}
 
+	@Override
 	public void componentMoved(ComponentEvent e) {
 		resizeBattlefield();
 	}
 
+	@Override
 	public void componentShown(ComponentEvent e) {
 		resizeBattlefield();
 	}
 
+	@Override
 	public void componentHidden(ComponentEvent e) {
 		resizeBattlefield();
 	}

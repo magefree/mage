@@ -38,8 +38,6 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 import mage.client.util.Event;
 import mage.client.util.Listener;

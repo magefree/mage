@@ -34,7 +34,6 @@
 
 package mage.client.cards;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -43,17 +42,17 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
+import java.util.List;
 import java.util.UUID;
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
 import javax.swing.text.BadLocationException;
@@ -72,7 +71,7 @@ import static mage.client.util.Constants.*;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Card extends javax.swing.JPanel implements MouseMotionListener, MouseListener, FocusListener {
+public class Card extends javax.swing.JPanel implements MouseMotionListener, MouseListener, FocusListener, ComponentListener {
 
 	protected static Session session = MageFrame.getSession();
 
@@ -109,6 +108,7 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 	    addFocusListener(this);
 	    addMouseMotionListener(this);
 		text.addMouseMotionListener(this);
+		addComponentListener(this);
     }
 
 	public UUID getCardId() {
@@ -164,7 +164,7 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 	    gSmall.dispose();
 	}
 
-	private String getText(String cardType) {
+	protected String getText(String cardType) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(card.getName()).append("\n");
 		if (card.getManaCost().size() > 0) {
@@ -172,7 +172,7 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 		}
 		sb.append(cardType).append("\n");
 		sb.append(card.getColor().toString()).append("\n");
-		for (String rule: card.getRules()) {
+		for (String rule: getRules()) {
 			sb.append(rule).append("\n");
 		}
 		if (card.getCardTypes().contains(CardType.CREATURE)) {
@@ -184,18 +184,20 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 		return sb.toString();
 	}
 
-	private void drawText() {
+	protected void drawText() {
 		text.setText("");
 		StyledDocument doc = text.getStyledDocument();
 
 		try {
-			for (String rule: card.getRules())
+			for (String rule: getRules())
 				doc.insertString(doc.getLength(), rule + "\n", doc.getStyle("small"));
-		} catch (BadLocationException e) {
-			System.err.println("Couldn't insert initial text into text pane.");
-		}
+		} catch (BadLocationException e) {}
 
 		text.setCaretPosition(0);
+	}
+
+	protected List<String> getRules() {
+		return card.getRules();
 	}
 
 	protected String getType(CardView card) {
@@ -243,7 +245,7 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 
         text.setBorder(null);
         text.setEditable(false);
-        text.setFont(new java.awt.Font("Arial", 0, 9));
+        text.setFont(new java.awt.Font("Arial", 0, 9)); // NOI18N
         text.setFocusable(false);
         text.setOpaque(false);
         jScrollPane1.setViewportView(text);
@@ -273,7 +275,7 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-		this.bigCard.setCard(card.getId(), image, card.getRules());
+		this.bigCard.setCard(card.getId(), image, getRules());
 	}
 
 	@Override
@@ -328,28 +330,22 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextPane text;
+    protected javax.swing.JTextPane text;
     // End of variables declaration//GEN-END:variables
 
-}
+	@Override
+	public void componentResized(ComponentEvent e) { }
 
-class TextPopup extends JPanel {
+	@Override
+	public void componentMoved(ComponentEvent e) { }
 
-	JTextArea txt;
+	@Override
+	public void componentShown(ComponentEvent e) { }
 
-    public TextPopup() {
-		super(new BorderLayout());
-		this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-        txt = new JTextArea(1, 20);
-		txt.setLineWrap(true);
-		txt.setWrapStyleWord(true);
-		txt.setEditable(false);
-		txt.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
-		txt.setBackground(Color.lightGray);
-        this.add(txt);
-    }
-
-	public void setText(String text) {
-		txt.setText(text);
+	@Override
+	public void componentHidden(ComponentEvent e) {
+		if (popup != null)
+			popup.hide();
 	}
+
 }

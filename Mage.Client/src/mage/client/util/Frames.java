@@ -44,12 +44,23 @@ public class Frames {
 	public static Image Grey = ImageHelper.loadImage(Config.frameResourcePath + "8 grey.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
 	public static Image Red = ImageHelper.loadImage(Config.frameResourcePath + "8 red.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
 	public static Image White = ImageHelper.loadImage(Config.frameResourcePath + "8 white.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
+	public static Image BlackRed = ImageHelper.loadImage(Config.frameResourcePath + "black to red hybrid.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
+	public static Image BlackGreen = ImageHelper.loadImage(Config.frameResourcePath + "eve hybrid black to green.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
+	public static Image BlueBlack = ImageHelper.loadImage(Config.frameResourcePath + "blue_to_black_hybrid.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
+	public static Image BlueRed = ImageHelper.loadImage(Config.frameResourcePath + "eve hybrid blue to red.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
+	public static Image GreenBlue = ImageHelper.loadImage(Config.frameResourcePath + "eve hybrid green to blue.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
+	public static Image GreenWhite = ImageHelper.loadImage(Config.frameResourcePath + "green_to_white_hybrid.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
+	public static Image RedGreen = ImageHelper.loadImage(Config.frameResourcePath + "red_to_green_hybrid.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
+	public static Image RedWhite = ImageHelper.loadImage(Config.frameResourcePath + "eve hybrid red to white.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
+	public static Image WhiteBlack = ImageHelper.loadImage(Config.frameResourcePath + "eve hybrid white to black.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
+	public static Image WhiteBlue = ImageHelper.loadImage(Config.frameResourcePath + "white_to_blue_hybrid.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
 
 	public static Image Forest = ImageHelper.loadImage(Config.frameResourcePath + "8 land mana green.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
 	public static Image Island = ImageHelper.loadImage(Config.frameResourcePath + "8 land mana blue.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
 	public static Image Mountain = ImageHelper.loadImage(Config.frameResourcePath + "8 land mana red.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
 	public static Image Plains = ImageHelper.loadImage(Config.frameResourcePath + "8 land mana white.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
 	public static Image Swamp = ImageHelper.loadImage(Config.frameResourcePath + "8 land mana black.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
+	public static Image Land = ImageHelper.loadImage(Config.frameResourcePath + "8 multiland nomana colorless.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
 
 	public static Image Effect = ImageHelper.loadImage(Config.frameResourcePath + "Effects\\effect0.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
 

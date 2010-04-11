@@ -74,9 +74,7 @@ public class BigCard extends javax.swing.JPanel {
 			for (String line: strings) {
 				doc.insertString(doc.getLength(), line + "\n", doc.getStyle("regular"));
 			}
-		} catch (BadLocationException ble) {
-			System.err.println("Couldn't insert initial text into text pane.");
-		}
+		} catch (BadLocationException ble) { }
 		text.setCaretPosition(0);
 	}
 

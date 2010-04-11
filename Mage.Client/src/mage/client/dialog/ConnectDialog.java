@@ -193,6 +193,7 @@ public class ConnectDialog extends MageDialog {
 			}
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
 			session.connect(txtUserName.getText(), txtServer.getText(), Integer.valueOf(txtPort.getText()));
+
 			prefs.put("serverAddress", txtServer.getText());
 			prefs.put("serverPort", txtPort.getText());
 			prefs.put("userName", txtUserName.getText());

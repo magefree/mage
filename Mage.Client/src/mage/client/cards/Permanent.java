@@ -45,7 +45,11 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import javax.swing.PopupFactory;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.StyledDocument;
 import mage.client.util.ImageHelper;
+import mage.view.CounterView;
 import mage.view.PermanentView;
 import static mage.client.util.Constants.*;
 
@@ -86,6 +90,19 @@ public class Permanent extends Card {
 	}
 
 	@Override
+	protected List<String> getRules() {
+		if (permanent.getCounters() != null) {
+			List<String> rules = new ArrayList<String>(permanent.getRules());
+			for (CounterView counter: permanent.getCounters())
+				rules.add(counter.getCount() + " x " + counter.getName());
+			return rules;
+		}
+		else {
+			return permanent.getRules();
+		}
+	}
+
+	@Override
 	public void mousePressed(MouseEvent e) {
 		p = e.getPoint();
 		e.consume();
@@ -109,6 +126,12 @@ public class Permanent extends Card {
 				perm.setBounds(r);
 			}
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+
+		super.mouseClicked(arg0);
 	}
 
 	@Override
@@ -177,6 +200,21 @@ public class Permanent extends Card {
 
 	public boolean overlaps(Rectangle r1) {
 		return this.getBounds().intersects(r1);
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		if (popup != null)
+			popup.hide();
+		PopupFactory factory = PopupFactory.getSharedInstance();
+		int x = (int) this.getLocationOnScreen().getX() + (permanent.isTapped()?FRAME_HEIGHT:FRAME_WIDTH);
+		int y = (int) this.getLocationOnScreen().getY() + 40;
+		popup = factory.getPopup(this, popupText, x, y);
+		popup.show();
+		//hack to get popup to resize to fit text
+		popup.hide();
+		popup = factory.getPopup(this, popupText, x, y);
+		popup.show();
 	}
 
     /** This method is called from within the constructor to

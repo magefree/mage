@@ -42,7 +42,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import mage.Constants;
 import mage.cards.decks.DeckCardLists;
 import mage.client.remote.Session;
 import mage.util.Logging;
@@ -99,8 +98,6 @@ public class NewTableDialog extends MageDialog {
 
         lbDeckType.setText("Deck Type:");
 
-        cbDeckType.setModel(new DefaultComboBoxModel(Constants.DeckType.values()));
-
         lbPlayer2Type.setText("Player 2 Type:");
 
         cbPlayer2Type.addActionListener(new java.awt.event.ActionListener() {
@@ -138,11 +135,6 @@ public class NewTableDialog extends MageDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cbDeckType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbGameType, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnOK)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancel))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lbPlayer2Type)
@@ -153,7 +145,12 @@ public class NewTableDialog extends MageDialog {
                         .addComponent(player1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(player2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)))
+                        .addComponent(player2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(360, Short.MAX_VALUE)
+                        .addComponent(btnOK)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancel)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -175,11 +172,11 @@ public class NewTableDialog extends MageDialog {
                     .addComponent(cbPlayer2Type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(player2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOK)
-                    .addComponent(btnCancel))
-                .addContainerGap(39, Short.MAX_VALUE))
+                    .addComponent(btnCancel)
+                    .addComponent(btnOK))
+                .addContainerGap())
         );
 
         pack();
@@ -198,6 +195,10 @@ public class NewTableDialog extends MageDialog {
 		else {
 			this.player2Panel.setVisible(false);
 		}
+		this.pack();
+		this.revalidate();
+		this.repaint();
+		
 	}//GEN-LAST:event_cbPlayer2TypeActionPerformed
 
 	private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
@@ -208,30 +209,34 @@ public class NewTableDialog extends MageDialog {
 			table = session.createTable(
 					roomId,
 					(String)this.cbGameType.getSelectedItem(),
-					(Constants.DeckType)this.cbDeckType.getSelectedItem(),
+					(String)this.cbDeckType.getSelectedItem(),
 					playerTypes
 			);
-			session.joinTable(
+			if (session.joinTable(
 					roomId,
 					table.getTableId(),
 					0,
 					this.player1Panel.getPlayerName(),
 					DeckCardLists.load(this.player1Panel.getDeckFile())
-			);
-			if (!this.cbPlayer2Type.getSelectedItem().equals("Human")) {
-				session.joinTable(
-						roomId,
-						table.getTableId(),
-						1,
-						this.player2Panel.getPlayerName(),
-						DeckCardLists.load(this.player2Panel.getDeckFile())
-				);
+			)) {
+				if (!this.cbPlayer2Type.getSelectedItem().equals("Human")) {
+					if (session.joinTable(
+							roomId,
+							table.getTableId(),
+							1,
+							this.player2Panel.getPlayerName(),
+							DeckCardLists.load(this.player2Panel.getDeckFile())
+					)) {
+						this.setVisible(false);
+						return;
+					}
+				}
 			}
 		} catch (Exception ex) {
 			handleError(ex);
 		}
-
-		this.setVisible(false);
+		session.removeTable(roomId, table.getTableId());
+		table = null;
 	}//GEN-LAST:event_btnOKActionPerformed
 
 	private void handleError(Exception ex) {
@@ -241,10 +246,15 @@ public class NewTableDialog extends MageDialog {
 
 	public void showDialog(UUID roomId) {
 		session = MageFrame.getSession();
+		this.player1Panel.setPlayerName(session.getUserName());
 		cbGameType.setModel(new DefaultComboBoxModel(session.getGameTypes()));
+		cbDeckType.setModel(new DefaultComboBoxModel(session.getDeckTypes()));
 		cbPlayer2Type.setModel(new DefaultComboBoxModel(session.getPlayerTypes()));
 		this.roomId = roomId;
 		this.setModal(true);
+		this.pack();
+		this.revalidate();
+		this.repaint();
 		this.setVisible(true);
 	}
 

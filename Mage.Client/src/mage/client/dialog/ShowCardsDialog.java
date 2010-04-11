@@ -36,11 +36,8 @@ package mage.client.dialog;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Collection;
 import java.util.UUID;
 import javax.swing.JLayeredPane;
 import mage.client.MageFrame;
@@ -65,6 +62,34 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 	public void loadCards(String name, CardsView showCards, BigCard bigCard, UUID gameId) {
 		this.title = name;
 		cardArea.removeAll();
+		if (showCards != null && showCards.size() < 10)
+			loadCardsFew(showCards, bigCard, gameId);
+		else
+			loadCardsMany(showCards, bigCard, gameId);
+		cardArea.revalidate();
+		if (getParent() != MageFrame.getDesktop() || this.isClosed)
+			MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
+		pack();
+		this.revalidate();
+		this.repaint();
+		this.setVisible(true);
+	}
+
+	private void loadCardsFew(CardsView showCards, BigCard bigCard, UUID gameId) {
+		Rectangle rectangle = new Rectangle(FRAME_WIDTH, FRAME_HEIGHT);
+		for (CardView card: showCards) {
+			Card cardImg = new Card(card, bigCard, gameId);
+			cardImg.setBounds(rectangle);
+			cardArea.add(cardImg);
+			cardArea.moveToFront(cardImg);
+			cardImg.update(card);
+			cardImg.addMouseListener(this);
+			rectangle.translate(FRAME_WIDTH, 0);
+		}
+		cardArea.setPreferredSize(new Dimension(FRAME_WIDTH * showCards.size(), FRAME_HEIGHT));
+	}
+
+	private void loadCardsMany(CardsView showCards, BigCard bigCard, UUID gameId) {
 		int columns = 1;
 		if (showCards != null && showCards.size() > 0) {
 			Rectangle rectangle = new Rectangle(FRAME_WIDTH, FRAME_HEIGHT);
@@ -87,13 +112,6 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 			}
 		}
 		cardArea.setPreferredSize(new Dimension(FRAME_WIDTH * columns, FRAME_HEIGHT + 400));
-		cardArea.revalidate();
-		if (getParent() != MageFrame.getDesktop() || this.isClosed)
-			MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
-		pack();
-		this.revalidate();
-		this.repaint();
-		this.setVisible(true);
 	}
 
     /** This method is called from within the constructor to
@@ -124,6 +142,7 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
+	@Override
 	public void mouseClicked(MouseEvent e) {
 		this.setVisible(false);
 	}

@@ -116,6 +116,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 
     }
 
+	@Override
 	public void update(Observable arg0, Object arg1) {
 		try {
 			tableModel.loadData(roomId);
@@ -129,7 +130,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 
 		this.roomId = roomId;
 		session = MageFrame.getSession();
-		this.btnQuickStart.setVisible(false);
+		this.btnQuickStart.setVisible(true);
 		if (newTableDialog == null) {
 			newTableDialog = new NewTableDialog();
 			MageFrame.getDesktop().add(newTableDialog);
@@ -258,7 +259,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 			table = session.createTable(
 					roomId,
 					"Two Player Duel",
-					Constants.DeckType.CONSTRUCTED_EXTENDED,
+					"Constructed",
 					playerTypes
 			);
 			session.joinTable(
@@ -378,6 +379,7 @@ class TablesWatchdog extends Observable implements ActionListener {
 		t.start();
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		setChanged();
 		notifyObservers();

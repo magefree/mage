@@ -35,6 +35,10 @@
 package mage.client;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.prefs.Preferences;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 
@@ -45,20 +49,34 @@ import javax.swing.filechooser.FileFilter;
 public class NewPlayerPanel extends javax.swing.JPanel {
 
 	private JFileChooser fcSelectDeck;
+	private Preferences prefs;
 
     /** Creates new form NewPlayerPanel */
     public NewPlayerPanel() {
         initComponents();
+		prefs = Preferences.userNodeForPackage(this.getClass());
 		fcSelectDeck = new JFileChooser();
 		fcSelectDeck.setAcceptAllFileFilterUsed(false);
 		fcSelectDeck.addChoosableFileFilter(new DeckFilter());
     }
 
-	public void playerLoadDeck() {
+    public void setPlayerName(String playerName) {
+		this.txtPlayerName.setText(playerName);
+		this.txtPlayerName.setEditable(false);
+		this.txtPlayerName.setEnabled(false);
+    }
+
+	protected void playerLoadDeck() {
+		String lastFolder = prefs.get("lastDeckFolder", "");
+		if (!lastFolder.isEmpty())
+			fcSelectDeck.setCurrentDirectory(new File(lastFolder));
 		int ret = fcSelectDeck.showDialog(this, "Select Deck");
 		if (ret == JFileChooser.APPROVE_OPTION) {
 			File file = fcSelectDeck.getSelectedFile();
 			this.txtPlayerDeck.setText(file.getPath());
+			try {
+				prefs.put("lastDeckFolder", file.getCanonicalPath());
+			} catch (IOException ex) {	}
 		}
 		fcSelectDeck.setSelectedFile(null);
 	}
@@ -71,13 +89,13 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 		return this.txtPlayerDeck.getText();
 	}
 
-	public void setPlayerName(String playerName) {
-		this.txtPlayerName.setText(playerName);
-	}
-
-	public void setDeckFile(String deckFile) {
-		this.txtPlayerDeck.setText(deckFile);
-	}
+//	public void setPlayerName(String playerName) {
+//		this.txtPlayerName.setText(playerName);
+//	}
+//
+//	public void setDeckFile(String deckFile) {
+//		this.txtPlayerDeck.setText(deckFile);
+//	}
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -110,10 +128,13 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblPlayerDeck)
-                    .addComponent(lblPlayer2Name))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(lblPlayerDeck))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblPlayer2Name)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
@@ -126,9 +147,9 @@ public class NewPlayerPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblPlayer2Name)
-                    .addComponent(txtPlayerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPlayerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPlayer2Name))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPlayerDeck)
