@@ -31,8 +31,8 @@ package mage.server.game;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.DeckType;
 import mage.cards.decks.DeckCardLists;
+import mage.game.GameException;
 import mage.view.TableView;
 
 /**
@@ -42,8 +42,8 @@ import mage.view.TableView;
 public interface GamesRoom extends Room {
 
 	public Collection<TableView> getTables();
-	public boolean joinTable(UUID sessionId, UUID tableId, int seatNum, String name, DeckCardLists deckList);
-	public TableView createTable(UUID sessionId, String gameType, DeckType deckType, List<String> playerTypes);
+	public boolean joinTable(UUID sessionId, UUID tableId, int seatNum, String name, DeckCardLists deckList) throws GameException;
+	public TableView createTable(UUID sessionId, String gameType, String deckType, List<String> playerTypes);
 	public void removeTable(UUID sessionId, UUID tableId);
 	public TableView getTable(UUID tableId);
 	public void leaveTable(UUID sessionId, UUID tableId);

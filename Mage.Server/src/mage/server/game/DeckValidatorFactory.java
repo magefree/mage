@@ -28,73 +28,56 @@
 
 package mage.server.game;
 
-import java.rmi.RemoteException;
-import java.util.UUID;
+import java.lang.reflect.Constructor;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
+import mage.cards.decks.*;
 import java.util.logging.Logger;
-import mage.interfaces.callback.ClientCallback;
-import mage.server.Session;
-import mage.server.SessionManager;
+import mage.Constants;
 import mage.util.Logging;
-import mage.view.GameClientMessage;
-import mage.view.GameView;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GameWatcher {
+public class DeckValidatorFactory {
 
-	protected final static Logger logger = Logging.getLogger(GameWatcher.class.getName());
+	private final static DeckValidatorFactory INSTANCE = new DeckValidatorFactory();
+	private final static Logger logger = Logging.getLogger(DeckValidatorFactory.class.getName());
 
-	protected UUID sessionId;
-	protected UUID gameId;
-	protected boolean killed = false;
+	private Map<String, Class> deckTypes = new HashMap<String, Class>();
 
-	public GameWatcher(UUID sessionId, UUID gameId) {
-		this.sessionId = sessionId;
-		this.gameId = gameId;
+	public static DeckValidatorFactory getInstance() {
+		return INSTANCE;
 	}
 
-	public void init(final GameView gameView) {
-		if (!killed) {
-			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null)
-				session.fireCallback(new ClientCallback("gameInit", gameView));
+	private DeckValidatorFactory() {}
+
+	public DeckValidator createDeckValidator(String deckType) {
+
+		DeckValidator validator;
+		Constructor<?> con;
+		try {
+			con = deckTypes.get(deckType).getConstructor(new Class[]{});
+			validator = (DeckValidator)con.newInstance(new Object[] {});
+		} catch (Exception ex) {
+			logger.log(Level.SEVERE, null, ex);
+			return null;
 		}
+		logger.info("Deck validator created: " + validator.getName());
+
+		return validator;
 	}
 
-	public void update(final GameView gameView) {
-		if (!killed) {
-			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null)
-				session.fireCallback(new ClientCallback("gameUpdate", gameView));
-		}
+	public Set<String> getDeckTypes() {
+		return deckTypes.keySet();
 	}
 
-	public void inform(final String message, final GameView gameView) {
-		if (!killed) {
-			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null)
-				session.fireCallback(new ClientCallback("gameInform", new GameClientMessage(gameView, message)));
-		}
-	}
-
-	public void gameOver(final String message) {
-		if (!killed) {
-			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null)
-				session.fireCallback(new ClientCallback("gameOver", message));
-		}
-	}
-
-	protected void handleRemoteException(RemoteException ex) {
-		logger.log(Level.SEVERE, null, ex);
-		GameManager.getInstance().kill(gameId, sessionId);
-	}
-	
-	public void setKilled() {
-		killed = true;
+	public void addDeckType(String name, Class deckType) {
+		if (deckType != null)
+			this.deckTypes.put(name, deckType);
 	}
 
 }

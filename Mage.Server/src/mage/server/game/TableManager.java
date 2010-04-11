@@ -33,8 +33,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
-import mage.Constants.DeckType;
 import mage.cards.decks.DeckCardLists;
+import mage.game.GameException;
 import mage.game.Table;
 import mage.util.Logging;
 
@@ -54,7 +54,7 @@ public class TableManager {
 		return INSTANCE;
 	}
 
-	public Table createTable(UUID sessionId, String gameType, DeckType deckType, List<String> playerTypes) {
+	public Table createTable(UUID sessionId, String gameType, String deckType, List<String> playerTypes) {
 		TableController tableController = new TableController(sessionId, gameType, deckType, playerTypes);
 		controllers.put(tableController.getTable().getId(), tableController);
 		tables.put(tableController.getTable().getId(), tableController.getTable());
@@ -69,7 +69,7 @@ public class TableManager {
 		return tables.values();
 	}
 
-	public boolean joinTable(UUID sessionId, UUID tableId, int seatNum, String name, DeckCardLists deckList) {
+	public boolean joinTable(UUID sessionId, UUID tableId, int seatNum, String name, DeckCardLists deckList) throws GameException {
 		return controllers.get(tableId).joinTable(sessionId, seatNum, name, deckList);
 	}
 

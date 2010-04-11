@@ -8,12 +8,14 @@
 				<xs:element ref="server"/>
 				<xs:element ref="playerTypes"/>
 				<xs:element ref="gameTypes"/>
+				<xs:element ref="deckTypes"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
     
 	<xs:element name="server">
 		<xs:complexType>
+			<xs:attribute name="serverAddress" type="xs:string" use="required"/>
 			<xs:attribute name="serverName" type="xs:string" use="required"/>
 			<xs:attribute name="port" type="xs:positiveInteger" use="required"/>
 			<xs:attribute name="maxGameThreads" type="xs:positiveInteger" use="required"/>
@@ -44,5 +46,13 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-    
+
+	<xs:element name="deckTypes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="plugin" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
 </xs:schema>

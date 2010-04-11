@@ -28,16 +28,16 @@
 
 package mage.server;
 
+import mage.server.util.PluginClassLoader;
 import java.io.File;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mage.interfaces.Server;
+import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.PlayerFactory;
 import mage.server.util.ConfigSettings;
 import mage.server.util.config.Plugin;
+import mage.util.Copier;
 import mage.util.Logging;
 
 /**
@@ -49,8 +49,10 @@ public class Main {
 	private static Logger logger = Logging.getLogger(Main.class.getName());
 
 	private final static String testModeArg = "-testMode=";
+	private final static String pluginFolder = "plugins";
 
-	private static Server server;
+	public static PluginClassLoader classLoader = new PluginClassLoader();
+	public static ServerImpl server;
 
     /**
      * @param args the command line arguments
@@ -58,6 +60,7 @@ public class Main {
     public static void main(String[] args) {
 
 		logger.info("Starting MAGE server version " + Main.class.getPackage().getImplementationVersion());
+		logger.info("Logging level: " + logger.getLevel());
 		ConfigSettings config = ConfigSettings.getInstance();
 		for (Plugin plugin: config.getGameTypes()) {
 			GameFactory.getInstance().addGameType(plugin.getName(), loadPlugin(plugin));
@@ -65,12 +68,16 @@ public class Main {
 		for (Plugin plugin: config.getPlayerTypes()) {
 			PlayerFactory.getInstance().addPlayerType(plugin.getName(), loadPlugin(plugin));
 		}
+		for (Plugin plugin: config.getDeckTypes()) {
+			DeckValidatorFactory.getInstance().addDeckType(plugin.getName(), loadPlugin(plugin));
+		}
 		boolean testMode = false;
 		for (String arg: args) {
 			if (arg.startsWith(testModeArg)) {
 				testMode = Boolean.valueOf(arg.replace(testModeArg, ""));
 			}
 		}
+		Copier.setLoader(classLoader);
 		System.setProperty("java.rmi.server.hostname", config.getServerAddress());
 		server = new ServerImpl(config.getPort(), config.getServerName(), testMode);
 
@@ -78,10 +85,11 @@ public class Main {
 
 	private static Class<?> loadPlugin(Plugin plugin) {
 		try {
-			File jarFile = new File("plugins/" + plugin.getJar());
-			URLClassLoader urlClassLoader = URLClassLoader.newInstance(new URL[] { jarFile.toURI().toURL() }, Main.class.getClassLoader());
-			logger.info("Loaded plugin: " + plugin.getClassName());
-			return Class.forName(plugin.getClassName(), true, urlClassLoader);
+			classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
+			logger.info("Loading plugin: " + plugin.getClassName());
+			return Class.forName(plugin.getClassName(), true, classLoader);
+		} catch (ClassNotFoundException ex) {
+			logger.log(Level.SEVERE, "Plugin not Found:" + plugin.getJar() + " - check plugin folder");
 		} catch (Exception ex) {
 			logger.log(Level.SEVERE, "Error loading plugin " + plugin.getJar(), ex);
 		}

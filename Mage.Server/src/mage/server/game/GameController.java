@@ -36,6 +36,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -48,7 +49,6 @@ import mage.server.ChatManager;
 import mage.server.util.ThreadExecutor;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
-import mage.human.HumanPlayer;
 import mage.players.Player;
 import mage.util.Logging;
 import mage.view.AbilityPickerView;
@@ -94,7 +94,7 @@ public class GameController implements GameCallback {
 							break;
 						case INFO:
 							ChatManager.getInstance().broadcast(chatId, "", event.getMessage());
-							logger.fine(game.getId() + " " + event.getMessage());
+							logger.finest(game.getId() + " " + event.getMessage());
 							break;
 					}
 				}
@@ -110,6 +110,9 @@ public class GameController implements GameCallback {
 							break;
 						case PICK_TARGET:
 							target(event.getPlayerId(), event.getMessage(), event.getCards(), event.isRequired());
+							break;
+						case PICK_ABILITY:
+							target(event.getPlayerId(), event.getMessage(), event.getAbilities(), event.isRequired());
 							break;
 						case SELECT:
 							select(event.getPlayerId(), event.getMessage());
@@ -160,7 +163,7 @@ public class GameController implements GameCallback {
 
 	private boolean allJoined() {
 		for (Player player: game.getPlayers().values()) {
-			if (player instanceof HumanPlayer && gameSessions.get(player.getId()) == null) {
+			if (player.isHuman() && gameSessions.get(player.getId()) == null) {
 				return false;
 			}
 		}
@@ -203,10 +206,6 @@ public class GameController implements GameCallback {
 		}
 		updateGame();
 	}
-
-//	public void timeout(UUID sessionId) {
-//		kill(sessionId);
-//	}
 
 	public void kill(UUID sessionId) {
 		if (sessionPlayerMap.containsKey(sessionId)) {
@@ -277,7 +276,7 @@ public class GameController implements GameCallback {
 		gameSessions.get(playerId).ask(question, getGameView(playerId));
 	}
 
-	private void chooseAbility(UUID playerId, Collection<? extends ActivatedAbility> choices) {
+	private void chooseAbility(UUID playerId, Collection<? extends Ability> choices) {
 		informOthers(playerId);
 		gameSessions.get(playerId).chooseAbility(new AbilityPickerView(choices));
 	}
@@ -289,7 +288,12 @@ public class GameController implements GameCallback {
 
 	private void target(UUID playerId, String question, Cards cards, boolean required) {
 		informOthers(playerId);
-		gameSessions.get(playerId).target(question, getCardView(cards), required, getGameView(playerId));
+		gameSessions.get(playerId).target(question, new CardsView(cards), required, getGameView(playerId));
+	}
+
+	private void target(UUID playerId, String question, Collection<? extends Ability> abilities, boolean required) {
+		informOthers(playerId);
+		gameSessions.get(playerId).target(question, new CardsView(abilities, game), required, getGameView(playerId));
 	}
 
 	private void select(UUID playerId, String message) {
@@ -314,7 +318,7 @@ public class GameController implements GameCallback {
 
 	private void revealCards(String name, Cards cards) {
 		for (GameSession session: gameSessions.values()) {
-			session.revealCards(name, getCardView(cards));
+			session.revealCards(name, new CardsView(cards));
 		}
 	}
 
@@ -336,14 +340,8 @@ public class GameController implements GameCallback {
 
 	private GameView getGameView(UUID playerId) {
 		GameView gameView = new GameView(game.getState());
-		gameView.setHand(getCardView(game.getPlayer(playerId).getHand()));
+		gameView.setHand(new CardsView(game.getPlayer(playerId).getHand()));
 		return gameView;
-	}
-
-	private CardsView getCardView(Cards cards) {
-		if (cards == null)
-			return null;
-		return new CardsView(cards.values());
 	}
 
 	@Override

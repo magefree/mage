@@ -72,8 +72,9 @@ public class PlayerFactory {
 		return playerTypes.keySet();
 	}
 
-	public void addPlayerType(String name, Class gameType) {
-		this.playerTypes.put(name, gameType);
+	public void addPlayerType(String name, Class playerType) {
+		if (playerType != null)
+			this.playerTypes.put(name, playerType);
 	}
 
 }

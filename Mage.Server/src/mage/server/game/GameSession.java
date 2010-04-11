@@ -67,20 +67,6 @@ public class GameSession extends GameWatcher {
 			if (session != null)
 				session.fireCallback(new ClientCallback("gameAsk", new GameClientMessage(gameView, question)));
 		}
-//			setupTimeout();
-//			rmiExecutor.submit(
-//				new Runnable() {
-//					@Override
-//					public void run() {
-//						try {
-//							client.ask(question, gameView);
-//						} catch (RemoteException ex) {
-//							handleRemoteException(ex);
-//						}
-//					}
-//				}
-//			);
-//		}
 	}
 
 	public void target(final String question, final CardsView cardView, final boolean required, final GameView gameView) {
@@ -89,21 +75,6 @@ public class GameSession extends GameWatcher {
 			if (session != null)
 				session.fireCallback(new ClientCallback("gameTarget", new GameClientMessage(gameView, question, cardView, required)));
 		}
-//		if (!killed) {
-//			setupTimeout();
-//			rmiExecutor.submit(
-//				new Runnable() {
-//					@Override
-//					public void run() {
-//						try {
-//							client.target(question, cardView, required, gameView);
-//						} catch (RemoteException ex) {
-//							handleRemoteException(ex);
-//						}
-//					}
-//				}
-//			);
-//		}
 	}
 
 	public void select(final String message, final GameView gameView) {
@@ -112,21 +83,6 @@ public class GameSession extends GameWatcher {
 			if (session != null)
 				session.fireCallback(new ClientCallback("gameSelect", new GameClientMessage(gameView, message)));
 		}
-//		if (!killed) {
-//			setupTimeout();
-//			rmiExecutor.submit(
-//				new Runnable() {
-//					@Override
-//					public void run() {
-//						try {
-//							client.select(message, gameView);
-//						} catch (RemoteException ex) {
-//							handleRemoteException(ex);
-//						}
-//					}
-//				}
-//			);
-//		}
 	}
 
 	public void chooseAbility(final AbilityPickerView abilities) {
@@ -135,21 +91,6 @@ public class GameSession extends GameWatcher {
 			if (session != null)
 				session.fireCallback(new ClientCallback("gameChooseAbility", abilities));
 		}
-//		if (!killed) {
-//			setupTimeout();
-//			rmiExecutor.submit(
-//				new Runnable() {
-//					@Override
-//					public void run() {
-//						try {
-//							client.chooseAbility(abilities);
-//						} catch (RemoteException ex) {
-//							handleRemoteException(ex);
-//						}
-//					}
-//				}
-//			);
-//		}
 	}
 
 	public void choose(final String message, final String[] choices) {
@@ -158,21 +99,6 @@ public class GameSession extends GameWatcher {
 			if (session != null)
 				session.fireCallback(new ClientCallback("gameChoose", new GameClientMessage(choices, message)));
 		}
-//		if (!killed) {
-//			setupTimeout();
-//			rmiExecutor.submit(
-//				new Runnable() {
-//					@Override
-//					public void run() {
-//						try {
-//							client.choose(message, choices);
-//						} catch (RemoteException ex) {
-//							handleRemoteException(ex);
-//						}
-//					}
-//				}
-//			);
-//		}
 	}
 
 	public void playMana(final String message, final GameView gameView) {
@@ -181,21 +107,6 @@ public class GameSession extends GameWatcher {
 			if (session != null)
 				session.fireCallback(new ClientCallback("gamePlayMana", new GameClientMessage(gameView, message)));
 		}
-//		if (!killed) {
-//			setupTimeout();
-//			rmiExecutor.submit(
-//				new Runnable() {
-//					@Override
-//					public void run() {
-//						try {
-//							client.playMana(message, gameView);
-//						} catch (RemoteException ex) {
-//							handleRemoteException(ex);
-//						}
-//					}
-//				}
-//			);
-//		}
 	}
 
 	public void playXMana(final String message, final GameView gameView) {
@@ -204,21 +115,6 @@ public class GameSession extends GameWatcher {
 			if (session != null)
 				session.fireCallback(new ClientCallback("gamePlayXMana", new GameClientMessage(gameView, message)));
 		}
-//		if (!killed) {
-//			setupTimeout();
-//			rmiExecutor.submit(
-//				new Runnable() {
-//					@Override
-//					public void run() {
-//						try {
-//							client.playXMana(message, gameView);
-//						} catch (RemoteException ex) {
-//							handleRemoteException(ex);
-//						}
-//					}
-//				}
-//			);
-//		}
 	}
 
 	public void getAmount(final String message, final int min, final int max) {
@@ -227,21 +123,6 @@ public class GameSession extends GameWatcher {
 			if (session != null)
 				session.fireCallback(new ClientCallback("gameSelectAmount", new GameClientMessage(message, min, max)));
 		}
-//		if (!killed) {
-//			setupTimeout();
-//			rmiExecutor.submit(
-//				new Runnable() {
-//					@Override
-//					public void run() {
-//						try {
-//							client.getAmount(min, max);
-//						} catch (RemoteException ex) {
-//							handleRemoteException(ex);
-//						}
-//					}
-//				}
-//			);
-//		}
 	}
 
 	public void revealCards(final String name, final CardsView cardView) {
@@ -250,20 +131,6 @@ public class GameSession extends GameWatcher {
 			if (session != null)
 				session.fireCallback(new ClientCallback("gameReveal", new GameClientMessage(cardView, name)));
 		}
-//		if (!killed) {
-//			rmiExecutor.submit(
-//				new Runnable() {
-//					@Override
-//					public void run() {
-//						try {
-//							client.revealCards(name, cardView);
-//						} catch (RemoteException ex) {
-//							handleRemoteException(ex);
-//						}
-//					}
-//				}
-//			);
-//		}
 	}
 
 

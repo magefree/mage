@@ -35,6 +35,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mage.game.Game;
+import mage.server.Main;
 import mage.util.Logging;
 
 /**
@@ -68,7 +69,6 @@ public class GameFactory {
 		logger.info("Game created: " + game.getId().toString());
 
 		return game;
-
 	}
 
 	public Set<String> getGameTypes() {
@@ -76,7 +76,8 @@ public class GameFactory {
 	}
 
 	public void addGameType(String name, Class gameType) {
-		this.gameTypes.put(name, gameType);
+		if (gameType != null)
+			this.gameTypes.put(name, gameType);
 	}
 
 }

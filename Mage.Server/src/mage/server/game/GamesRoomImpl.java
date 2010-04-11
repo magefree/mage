@@ -35,8 +35,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
-import mage.Constants.DeckType;
 import mage.cards.decks.DeckCardLists;
+import mage.game.GameException;
 import mage.game.Table;
 import mage.util.Logging;
 import mage.view.TableView;
@@ -61,7 +61,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 	}
 
 	@Override
-	public boolean joinTable(UUID sessionId, UUID tableId, int seatNum, String name, DeckCardLists deckList) {
+	public boolean joinTable(UUID sessionId, UUID tableId, int seatNum, String name, DeckCardLists deckList) throws GameException {
 		if (tables.containsKey(tableId)) {
 			return TableManager.getInstance().joinTable(sessionId, tableId, seatNum, name, deckList);
 		} else {
@@ -70,7 +70,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 	}
 
 	@Override
-	public TableView createTable(UUID sessionId, String gameType, DeckType deckType, List<String> playerTypes) {
+	public TableView createTable(UUID sessionId, String gameType, String deckType, List<String> playerTypes) {
 		Table table = TableManager.getInstance().createTable(sessionId, gameType, deckType, playerTypes);
 		tables.put(table.getId(), table);
 		return new TableView(table);

@@ -34,7 +34,6 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mage.Constants.DeckType;
 import mage.Constants.TableState;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
@@ -44,6 +43,7 @@ import mage.game.Seat;
 import mage.game.Table;
 import mage.players.Player;
 import mage.server.ChatManager;
+import mage.server.Main;
 import mage.server.SessionManager;
 import mage.util.Logging;
 
@@ -61,38 +61,31 @@ public class TableController {
 	private Game game;
 	private ConcurrentHashMap<UUID, UUID> sessionPlayerMap = new ConcurrentHashMap<UUID, UUID>();
 
-	public TableController(UUID sessionId, String gameType, DeckType deckType, List<String> playerTypes) {
+	public TableController(UUID sessionId, String gameType, String deckType, List<String> playerTypes) {
 		this.sessionId = sessionId;
 		chatId = ChatManager.getInstance().createChatSession();
 		game = GameFactory.getInstance().createGame(gameType);
-		table = new Table(game, deckType, playerTypes);
+		table = new Table(game, DeckValidatorFactory.getInstance().createDeckValidator(deckType), playerTypes);
 	}
 
-	public synchronized boolean joinTable(UUID sessionId, int seatNum, String name, DeckCardLists deckList) {
+	public synchronized boolean joinTable(UUID sessionId, int seatNum, String name, DeckCardLists deckList) throws GameException {
 		if (table.getState() != TableState.WAITING) {
 			return false;
 		}
-		try {
-			Seat seat = table.getSeats()[seatNum];
-			Deck deck = Deck.load(deckList);
-			if (validDeck(deck)) {
-				Player player = createPlayer(name, deck, seat.getPlayerType());
-				table.joinTable(player, seatNum);
-				logger.info("player joined " + player.getId());
-				//only add human players to sessionPlayerMap
-				if (table.getSeats()[seatNum].getPlayerType().equals("Human")) {
-					//TODO: add isHuman property to Player and check that instead
-					sessionPlayerMap.put(sessionId, player.getId());
-				}
-			}
-			else {
-				throw new GameException("Invalid deck type");
-			}
-
-		} catch (GameException ex) {
-			logger.warning(ex.getMessage());
-			return false;
+		Seat seat = table.getSeats()[seatNum];
+		Deck deck = Deck.load(deckList);
+		if (!Main.server.isTestMode() && !validDeck(deck)) {
+			throw new GameException(name + " has an invalid deck for this format");
 		}
+		
+		Player player = createPlayer(name, deck, seat.getPlayerType());
+		table.joinTable(player, seatNum);
+		logger.info("player joined " + player.getId());
+		//only add human players to sessionPlayerMap
+		if (table.getSeats()[seatNum].getPlayer().isHuman()) {
+			sessionPlayerMap.put(sessionId, player.getId());
+		}
+
 		return true;
 	}
 

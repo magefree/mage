@@ -38,11 +38,12 @@ import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mage.Constants.DeckType;
 import mage.cards.decks.DeckCardLists;
+import mage.game.GameException;
 import mage.interfaces.MageException;
 import mage.interfaces.Server;
 import mage.interfaces.callback.ClientCallback;
+import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.GameManager;
 import mage.server.game.GamesRoomManager;
@@ -70,27 +71,21 @@ public class ServerImpl extends RemoteServer implements Server {
 			reg.rebind(name, stub);
 			this.testMode = testMode;
 			logger.info("Started MAGE server - listening on port " + port);
-			logger.info("MAGE server running in test mode");
+			if (testMode)
+				logger.info("MAGE server running in test mode");
 		} catch (RemoteException ex) {
 			logger.log(Level.SEVERE, "Failed to start RMI server at port " + port, ex);
 		}
+	}
 
+	public boolean isTestMode() {
+		return testMode;
 	}
 
 	@Override
 	public ClientCallback callback(UUID sessionId) {
 		return SessionManager.getInstance().getSession(sessionId).callback();
 	}
-
-//	@Override
-//	public String getClientIp() throws RemoteException, MageException {
-//		try {
-//			return getClientHost();
-//		} catch (Exception ex) {
-//			handleException(ex);
-//		}
-//		return null;
-//	}
 
 	@Override
 	public UUID registerClient(String userName, UUID clientId) throws MageException, RemoteException {
@@ -106,7 +101,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public TableView createTable(UUID sessionId, UUID roomId, String gameType, DeckType deckType, List<String> playerTypes) throws MageException {
+	public TableView createTable(UUID sessionId, UUID roomId, String gameType, String deckType, List<String> playerTypes) throws MageException {
 		try {
 			TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(sessionId, gameType, deckType, playerTypes);
 			logger.info("Table " + table.getTableId() + " created");
@@ -129,13 +124,15 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public boolean joinTable(UUID sessionId, UUID roomId, UUID tableId, int seatNum, String name, DeckCardLists deckList) throws MageException {
+	public boolean joinTable(UUID sessionId, UUID roomId, UUID tableId, int seatNum, String name, DeckCardLists deckList) throws MageException, GameException {
 		try {
 			boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTable(sessionId, tableId, seatNum, name, deckList);
 			logger.info("Session " + sessionId + " joined table " + tableId);
 			return ret;
 		}
 		catch (Exception ex) {
+			if (ex instanceof GameException)
+				throw (GameException)ex;
 			handleException(ex);
 		}
 		return false;
@@ -436,6 +433,17 @@ public class ServerImpl extends RemoteServer implements Server {
 	public String[] getPlayerTypes() throws MageException {
 		try {
 			return PlayerFactory.getInstance().getPlayerTypes().toArray(new String[0]);
+		}
+		catch (Exception ex) {
+			handleException(ex);
+		}
+		return null;
+	}
+
+	@Override
+	public String[] getDeckTypes() throws MageException {
+		try {
+			return DeckValidatorFactory.getInstance().getDeckTypes().toArray(new String[0]);
 		}
 		catch (Exception ex) {
 			handleException(ex);
