@@ -1,10 +1,10 @@
 /*
 * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
 *
-* Redistribution and use in source and binary forms, with or without modification, are
+* Redistribution and use in ability and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
 *
-*    1. Redistributions of source code must retain the above copyright notice, this list of
+*    1. Redistributions of ability code must retain the above copyright notice, this list of
 *       conditions and the following disclaimer.
 *
 *    2. Redistributions in binary form must reproduce the above copyright notice, this list
@@ -71,6 +71,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
 	protected UUID playerId;
 	protected String name;
+	protected boolean human;
 	protected int life;
 	protected boolean wins;
 	protected boolean loses;
@@ -95,7 +96,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 	}
 
 	@Override
-	public void init() {
+	public void init(Game game) {
 		this.hand.clear();
 		this.graveyard.clear();
 		this.abilities.clear();
@@ -106,6 +107,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 		this.passed = false;
 		this.passedTurn = false;
 		library.addAll(deck.getCards());
+		for (Card card: deck.getCards().values()) {
+			game.getState().getWatchers().addAll(card.getWatchers());
+		}
 	}
 
 	@Override
@@ -131,9 +135,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 	}
 
 	@Override
-	public void handleEvent(GameEvent event, Game game) {
-		hand.handleEvent(event, game);
-		graveyard.handleEvent(event, game);
+	public void checkTriggers(GameEvent event, Game game) {
+		hand.checkTriggers(event, game);
+		graveyard.checkTriggers(event, game);
 	}
 
 	@Override
@@ -220,13 +224,16 @@ public abstract class PlayerImpl implements Player, Serializable {
 		game.fireInformEvent(name + " discards " + Integer.toString(amount) + " card" + (amount > 1?"s":""));
 	}
 
-	protected void discard(Card card, Game game) {
+	@Override
+	public boolean discard(Card card, Game game) {
 		//20091005 - 701.1
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DISCARD_CARD, playerId, playerId))) {
 			removeFromHand(card, game);
 			putInGraveyard(card, game, false);
 			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, playerId, playerId));
+			return true;
 		}
+		return false;
 	}
 
 	@Override
@@ -278,10 +285,12 @@ public abstract class PlayerImpl implements Player, Serializable {
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, card.getId(), playerId))) {
 			game.bookmarkState();
 			removeFromHand(card, game);
+
 			game.getStack().push(new Spell(card, playerId));
+			card.getSpellAbility().clear();
 			if (card.getSpellAbility().activate(game, noMana)) {
 				for (KickerAbility ability: card.getAbilities().getKickerAbilities()) {
-					ability.activate(game, false);
+					ability.copy().activate(game, false);
 				}
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, card.getId(), playerId));
 				game.removeLastBookmark();
@@ -301,6 +310,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 			if (putOntoBattlefield(card, game)) {
 				landsPlayed++;
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED, card.getId(), playerId));
+				game.fireInformEvent(name + " plays " + card.getName());
 				game.removeLastBookmark();
 				return true;
 			}
@@ -327,6 +337,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 			game.getStack().push(new StackAbility(ability, playerId));
 			if (ability.activate(game, false)) {
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, ability.getId(), playerId));
+				game.fireInformEvent(name + ability.getActivatedMessage(game));
 				game.removeLastBookmark();
 				return true;
 			}
@@ -345,26 +356,30 @@ public abstract class PlayerImpl implements Player, Serializable {
 			result = playLand(hand.get(ability.getSourceId()), game);
 		}
 		else if (ability instanceof ManaAbility) {
-			result = playManaAbility((ManaAbility)ability, game);
+			result = playManaAbility((ManaAbility)ability.copy(), game);
 		}
 		else if (ability instanceof SpellAbility) {
 			result = cast(hand.get(ability.getSourceId()), game, false);
 		}
 		else {
-			result = playAbility(ability, game);
+			result = playAbility((ActivatedAbility)ability.copy(), game);
 		}
-		if (result && !(ability instanceof ManaAbility))
-			game.fireInformEvent(name + ability.getActivatedMessage(game));
 
 		return result;
 	}
 
 	@Override
-	public boolean triggerAbility(TriggeredAbility ability, Game game) {
+	public boolean triggerAbility(TriggeredAbility source, Game game) {
+		//20091005 - 603.3c, 603.3d
+		game.saveState();
+		game.bookmarkState();
+		TriggeredAbility ability = (TriggeredAbility) source.copy();
+		game.getStack().push(new StackAbility(ability, playerId));
 		if (ability.activate(game, false)) {
-			game.getStack().push(new StackAbility(ability, playerId));
+			game.removeLastBookmark();
 			return true;
 		}
+		game.restoreState();
 		return false;
 	}
 
@@ -450,6 +465,11 @@ public abstract class PlayerImpl implements Player, Serializable {
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public boolean isHuman() {
+		return human;
 	}
 
 	@Override
@@ -627,14 +647,18 @@ public abstract class PlayerImpl implements Player, Serializable {
 	@Override
 	public boolean searchLibrary(TargetCardInLibrary target, Game game) {
 		//20091005 - 701.14c
-		if (library.count(target.getFilter()) < target.getNumberOfTargets()) {
-			TargetCardInLibrary newTarget = new TargetCardInLibrary(library.count(target.getFilter()), target.getMaxNumberOfTargets(), target.getFilter());
-			searchCards(new CardsImpl(Zone.LIBRARY, getLibrary().getCards()), newTarget, game);
+		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY, playerId, playerId))) {
+			if (library.count(target.getFilter()) < target.getNumberOfTargets()) {
+				TargetCardInLibrary newTarget = new TargetCardInLibrary(library.count(target.getFilter()), target.getMaxNumberOfTargets(), target.getFilter());
+				searchCards(new CardsImpl(Zone.LIBRARY, getLibrary().getCards()), newTarget, game);
+			}
+			else {
+				searchCards(new CardsImpl(Zone.LIBRARY, getLibrary().getCards()), target, game);
+			}
+			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, playerId, playerId));
+			return true;
 		}
-		else {
-			searchCards(new CardsImpl(Zone.LIBRARY, getLibrary().getCards()), target, game);
-		}
-		return true;
+		return false;
 	}
 
 }

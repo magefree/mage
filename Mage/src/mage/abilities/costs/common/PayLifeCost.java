@@ -41,17 +41,18 @@ public class PayLifeCost extends CostImpl {
 	private int amount;
 
 	public PayLifeCost(int amount) {
-//		super(ability);
 		this.amount = amount;
 		this.text = "Pay " + Integer.toString(amount) + " life";
 	}
 
+	@Override
 	public boolean canPay(UUID playerId, Game game) {
 		if (ability.getControllerId().equals(playerId))
 			return game.getPlayer(playerId).getLife() >= amount;
 		return false;
 	}
 
+	@Override
 	public boolean pay(Game game, boolean noMana) {
 		this.paid = game.getPlayer(ability.getControllerId()).loseLife(amount, game) == amount;
 		return paid;

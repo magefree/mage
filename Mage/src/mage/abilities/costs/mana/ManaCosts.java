@@ -60,6 +60,19 @@ public class ManaCosts extends CostsImpl<ManaCost> implements Costs<ManaCost>, M
 	}
 
 	@Override
+	public boolean add(ManaCost cost) {
+		if (cost instanceof ManaCosts) {
+			for (ManaCost manaCost: (ManaCosts)cost) {
+				super.add(manaCost);
+			}
+			return true;
+		}
+		else {
+			return super.add(cost);
+		}
+	}
+
+	@Override
 	public int convertedManaCost() {
 		int total = 0;
 		for (ManaCost cost: this) {
@@ -79,7 +92,7 @@ public class ManaCosts extends CostsImpl<ManaCost> implements Costs<ManaCost>, M
 
 	@Override
 	public boolean pay(Game game, boolean noMana) {
-		if (noMana) {
+		if (this.size() == 0 || noMana) {
 			setPaid();
 			return true;
 		}
@@ -122,7 +135,6 @@ public class ManaCosts extends CostsImpl<ManaCost> implements Costs<ManaCost>, M
 		return unpaid;
 	}
 
-	@Override
 	public List<VariableManaCost> getVariableCosts() {
 		List<VariableManaCost> variableCosts = new ArrayList<VariableManaCost>();
 		for (ManaCost cost: this) {
@@ -135,6 +147,7 @@ public class ManaCosts extends CostsImpl<ManaCost> implements Costs<ManaCost>, M
 	@Override
 	public void assignPayment(ManaPool pool) {
 		//attempt to pay colored costs first
+
 		for (ManaCost cost: this) {
 			if (!cost.isPaid() && cost instanceof ColoredManaCost) {
 				cost.assignPayment(pool);
@@ -217,6 +230,7 @@ public class ManaCosts extends CostsImpl<ManaCost> implements Costs<ManaCost>, M
 		return sbText.toString();
 	}
 
+	@Override
 	public ManaOptions getOptions() {
 		ManaOptions options = new ManaOptions();
 		for (ManaCost cost: this) {
@@ -225,6 +239,7 @@ public class ManaCosts extends CostsImpl<ManaCost> implements Costs<ManaCost>, M
 		return options;
 	}
 
+	@Override
 	public boolean testPay(Mana testMana) {
 		for (ManaCost cost: this) {
 			if (cost.testPay(testMana))

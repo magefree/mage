@@ -36,6 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.watchers.Watchers;
 
 public interface Card extends MageObject {
 
@@ -46,8 +47,10 @@ public interface Card extends MageObject {
 	public void addAbility(Ability ability);
 	public SpellAbility getSpellAbility();
 	public List<String> getRules();
+	public Watchers getWatchers();
 	public Card copy();
+	public UUID getExpansionSetId();
 
-	public void handleEvent(Zone zone, GameEvent event, Game game);
+	public void checkTriggers(Zone zone, GameEvent event, Game game);
 	
 }

@@ -31,7 +31,7 @@ package mage.abilities;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
-import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ManaCost;
 import mage.game.Game;
 
 /**
@@ -40,26 +40,31 @@ import mage.game.Game;
  */
 public class SpellAbility extends ActivatedAbilityImpl {
 
-	public SpellAbility(Cost cost) {
-		super(Zone.HAND, cost);
+	public SpellAbility(ManaCost cost) {
+		super(Zone.HAND);
+		this.addManaCost(cost);
 		this.name = "Cast";
 	}
 
 	@Override
 	public boolean canActivate(UUID playerId, Game game) {
-		if (game.getObject(sourceId).getCardType().contains(CardType.INSTANT) ||
-				(game.isMainPhase() &&
-				game.getStack().isEmpty() &&
-				game.getActivePlayerId().equals(playerId)) &&
-				costs.canPay(playerId, game) &&
-				targets.canChoose(sourceId, game))
+		if ((game.getObject(sourceId).getCardType().contains(CardType.INSTANT) || game.canPlaySorcery(playerId)) &&
+				costs.canPay(playerId, game) && targets.canChoose(sourceId, game)) {
 			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public String getActivatedMessage(Game game) {
 		return " casts " + getMessageText(game);
+	}
+
+	public void clear() {
+		this.choices.clearChosen();
+		this.targets.clearChosen();
+		this.manaCosts.clearPaid();
+		this.costs.clearPaid();
 	}
 
 }

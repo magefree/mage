@@ -33,6 +33,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.TriggeredAbilities;
 import mage.cards.Cards;
 
 /**
@@ -43,6 +44,7 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
 
 	protected final EventDispatcher<PlayerQueryEvent> dispatcher = new EventDispatcher<PlayerQueryEvent>() {};
 
+	@Override
 	public void addListener(Listener<PlayerQueryEvent> listener) {
 		dispatcher.addListener(listener);
 	}
@@ -65,6 +67,10 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
 
 	public void target(UUID playerId, String message, Cards cards, boolean required) {
 		dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, cards, required));
+	}
+
+	public void target(UUID playerId, String message, TriggeredAbilities abilities, boolean required) {
+		dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, abilities, required));
 	}
 
 	public void playMana(UUID playerId, String message) {

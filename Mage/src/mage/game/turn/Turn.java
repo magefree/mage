@@ -29,6 +29,8 @@
 package mage.game.turn;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
@@ -40,159 +42,97 @@ import mage.game.Game;
  */
 public class Turn implements Serializable {
 
-	private TurnPhase phase;
-	private PhaseStep step;
+	private Phase currentPhase;
 	private UUID activePlayerId;
-	private UUID priorityPlayerId;
+	private List<Phase> phases = new ArrayList<Phase>();
+
+	public Turn() {
+		phases.add(new BeginningPhase());
+		phases.add(new PreCombatMainPhase());
+		phases.add(new CombatPhase());
+		phases.add(new PostCombatMainPhase());
+		phases.add(new EndPhase());
+	}
 
 	public TurnPhase getPhase() {
-		return phase;
+		if (currentPhase != null)
+			return currentPhase.getType();
+		return null;
+	}
+
+	public Phase getPhase(TurnPhase turnPhase) {
+		for (Phase phase: phases) {
+			if (phase.getType() == turnPhase) {
+				return phase;
+			}
+		}
+		return null;
 	}
 
 	public PhaseStep getStep() {
-		return step;
-	}
-
-	public UUID getActivePlayerId() {
-		return activePlayerId;
-	}
-
-	public void setActivePlayerId(UUID activePlayerId) {
-		this.activePlayerId = activePlayerId;
-	}
-
-	public UUID getPriorityPlayerId() {
-		return priorityPlayerId;
-	}
-
-	public void setPriorityPlayerId(UUID priorityPlayerId) {
-		this.priorityPlayerId = priorityPlayerId;
-	}
-
-	private boolean nextStep(Game game) {
-		if (step == null) {
-			phase = TurnPhase.BEGINNING;
-			step = PhaseStep.UNTAP;
-			return true;
-		}
-		switch(step) {
-			case UNTAP:
-				step = PhaseStep.UPKEEP;
-				return true;
-			case UPKEEP:
-				step = PhaseStep.DRAW;
-				return true;
-			case DRAW:
-				phase = TurnPhase.PRECOMBAT_MAIN;
-				step = PhaseStep.PRECOMBAT_MAIN;
-				return true;
-			case PRECOMBAT_MAIN:
-				phase = TurnPhase.COMBAT;
-				step = PhaseStep.BEGIN_COMBAT;
-				return true;
-			case BEGIN_COMBAT:
-				step = PhaseStep.DECLARE_ATTACKERS;
-				return true;
-			case DECLARE_ATTACKERS:
-				//20091005 - 508.6
-				if (game.getCombat().getGroups().size() > 0)
-					step = PhaseStep.DECLARE_BLOCKERS;
-				else
-					step = PhaseStep.END_COMBAT;
-				return true;
-			case DECLARE_BLOCKERS:
-				//20091005 - 510.5
-				if (game.getCombat().hasFirstOrDoubleStrike(game))
-					step = PhaseStep.FIRST_COMBAT_DAMAGE;
-				else
-					step = PhaseStep.COMBAT_DAMAGE;
-				return true;
-			case FIRST_COMBAT_DAMAGE:
-				step = PhaseStep.COMBAT_DAMAGE;
-				return true;
-			case COMBAT_DAMAGE:
-				step = PhaseStep.END_COMBAT;
-				return true;
-			case END_COMBAT:
-				phase = TurnPhase.POSTCOMBAT_MAIN;
-				step = PhaseStep.POSTCOMBAT_MAIN;
-				return true;
-			case POSTCOMBAT_MAIN:
-				phase = TurnPhase.END;
-				step = PhaseStep.END_TURN;
-				return true;
-			case END_TURN:
-				step = PhaseStep.CLEANUP;
-				return true;
-			case CLEANUP:
-				return false;
-		}
-
-		return false;
+		if (currentPhase != null)
+			return currentPhase.getStep();
+		return null;
 	}
 
 	public void play(Game game, UUID activePlayerId) {
 		if (game.isGameOver())
 			return;
 
-		phase = null;
-		step = null;
 		this.activePlayerId = activePlayerId;
+		resetCounts();
 		game.getPlayer(activePlayerId).beginTurn();
-		while (nextStep(game)) {
-			playStep(game);
-			game.saveState();
+		for (Phase phase: phases) {
+			if (game.isGameOver())
+				return;
+			currentPhase = phase;
+			if (phase.play(game, activePlayerId)) {
+				//20091005 - 500.4/703.4n
+				game.emptyManaPools();
+				game.saveState();
+				//20091005 - 500.8
+				playExtraPhases(game, phase.getType());
+			}
+		}
+		//20091005 - 500.7
+		playExtraTurns(game);
+	}
+
+	private void resetCounts() {
+		for (Phase phase: phases) {
+			phase.resetCount();
 		}
 	}
 
-	private void playStep(Game game) {
-		if (game.isGameOver())
+	private void playExtraPhases(Game game, TurnPhase afterPhase) {
+		TurnPhase extraPhase = game.getState().getTurnMods().extraPhase(activePlayerId, afterPhase);
+		if (extraPhase == null)
 			return;
-
-		switch(step) {
-			case UNTAP:
-				game.playUntapStep();
-				break;
-			case UPKEEP:
-				game.playUpkeepStep();
-				break;
-			case DRAW:
-				game.playDrawStep();
+		Phase phase;
+		switch(extraPhase) {
+			case BEGINNING:
+				phase = new BeginningPhase();
 				break;
 			case PRECOMBAT_MAIN:
-				game.playPreCombatMainStep();
+				phase = new PreCombatMainPhase();
 				break;
-			case BEGIN_COMBAT:
-				game.playBeginCombatStep();
-				break;
-			case DECLARE_ATTACKERS:
-				game.playDeclareAttackersStep();
-				break;
-			case DECLARE_BLOCKERS:
-				game.playDeclareBlockersStep();
-				break;
-			case FIRST_COMBAT_DAMAGE:
-				game.playCombatDamageStep(true);
-				break;
-			case COMBAT_DAMAGE:
-				game.playCombatDamageStep(false);
-				break;
-			case END_COMBAT:
-				game.playEndCombatStep();
+			case COMBAT:
+				phase = new CombatPhase();
 				break;
 			case POSTCOMBAT_MAIN:
-				game.playPostMainStep();
+				phase = new PostCombatMainPhase();
 				break;
-			case END_TURN:
-				game.playEndStep();
-				break;
-			case CLEANUP:
-				game.playCleanupStep();
-				break;
+			default:
+				phase = new EndPhase();
 		}
-		//20091005 - 500.4/703.4n
-		game.emptyManaPools();
+		currentPhase = phase;
+		phase.play(game, activePlayerId);
 	}
 
+	private void playExtraTurns(Game game) {
+		while (game.getState().getTurnMods().extraTurn(activePlayerId)) {
+			this.play(game, activePlayerId);
+		}
+	}
 
 }

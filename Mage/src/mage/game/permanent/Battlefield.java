@@ -86,10 +86,10 @@ public class Battlefield implements Serializable {
 		return field.containsKey(key);
 	}
 
-	public void handleEvent(GameEvent event, Game game) {
+	public void checkTriggers(GameEvent event, Game game) {
 		for (Permanent perm: field.values()) {
 			if (perm.isPhasedIn())
-				perm.handleEvent(event, game);
+				perm.checkTriggers(event, game);
 		}
 	}
 

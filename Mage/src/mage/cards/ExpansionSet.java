@@ -44,9 +44,14 @@ public class ExpansionSet implements Serializable {
 
 	protected String name;
 	protected List<Class> cards = new ArrayList<Class>();
+	protected UUID id = UUID.randomUUID();
 
 	public List<Class> getCards() {
 		return cards;
+	}
+
+	public UUID getId() {
+		return id;
 	}
 
 	public String getName() {
@@ -71,4 +76,8 @@ public class ExpansionSet implements Serializable {
 		return created;
 	}
 
+	@Override
+	public String toString() {
+		return name;
+	}
 }

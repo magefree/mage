@@ -32,7 +32,6 @@ import java.util.UUID;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.game.Game;
-import mage.players.Player;
 
 /**
  *

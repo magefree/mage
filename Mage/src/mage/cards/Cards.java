@@ -41,9 +41,10 @@ public interface Cards extends Map<UUID, Card>, Serializable {
 	public void add(Card card);
 	public void remove(Card card);
 	public void setOwner(UUID ownerId);
-	public void handleEvent(GameEvent event, Game game);
 	public void addAll(List<Card> createCards);
 	public List<Card> getCards(FilterCard filter);
 	public Card getRandom();
+	public int count(FilterCard filter);
 
+	public void checkTriggers(GameEvent event, Game game);
 }

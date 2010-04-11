@@ -37,11 +37,13 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.StaticAbility;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.IndestructableAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.ShroudAbility;
@@ -111,11 +113,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent
 	}
 
 	@Override
-	public void handleEvent(GameEvent event, Game game) {
+	public void checkTriggers(GameEvent event, Game game) {
 		if (event.getType() == EventType.BEGINNING_PHASE_PRE && game.getActivePlayerId().equals(controllerId))
 			this.controlledFromStartOfTurn = true;
-		for (Ability ability: abilities.getTriggeredAbilities(Zone.BATTLEFIELD)) {
-			ability.handleEvent(event, game);
+		for (TriggeredAbility ability: abilities.getTriggeredAbilities(Zone.BATTLEFIELD)) {
+			ability.checkTrigger(event, game);
 		}
 	}
 
@@ -423,9 +425,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent
 		//20091005 - 701.6
 		//TODO: handle noRegen
 		if (!game.replaceEvent(GameEvent.getEvent(EventType.DESTROY_PERMANENT, objectId, sourceId, controllerId))) {
-			if (moveToZone(Zone.GRAVEYARD, game, false)) {
-				game.fireEvent(GameEvent.getEvent(EventType.DESTROYED_PERMANENT, objectId, sourceId, controllerId));
-				return true;
+			if (!this.getAbilities().containsKey(IndestructableAbility.getInstance().getId())) {
+				if (moveToZone(Zone.GRAVEYARD, game, false)) {
+					game.fireEvent(GameEvent.getEvent(EventType.DESTROYED_PERMANENT, objectId, sourceId, controllerId));
+					return true;
+				}
 			}
 		}
 		return false;

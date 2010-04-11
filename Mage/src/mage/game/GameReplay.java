@@ -46,15 +46,15 @@ public class GameReplay {
 	}
 
 	public GameState next() {
-		if (this.stateIndex < savedGame.getStates().size()) {
-			return savedGame.getStates().get(stateIndex++);
+		if (this.stateIndex < savedGame.getSize()) {
+			return savedGame.get(stateIndex++);
 		}
 		return null;
 	}
 
 	public GameState previous() {
 		if (this.stateIndex > 0) {
-			return savedGame.getStates().get(--stateIndex);
+			return savedGame.get(--stateIndex);
 		}
 		return null;
 	}

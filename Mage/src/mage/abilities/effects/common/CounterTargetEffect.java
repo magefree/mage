@@ -42,6 +42,7 @@ public class CounterTargetEffect extends OneShotEffect {
 		super(Outcome.Detriment);
 	}
 
+	@Override
 	public boolean apply(Game game) {
 		return game.getStack().counter(this.source.getFirstTarget(), source.getSourceId(), game);
 	}

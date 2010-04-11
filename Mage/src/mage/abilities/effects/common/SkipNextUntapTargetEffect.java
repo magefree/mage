@@ -46,21 +46,25 @@ public class SkipNextUntapTargetEffect extends ReplacementEffectImpl {
 		super(Duration.OneUse, Outcome.Detriment);
 	}
 
+	@Override
 	public boolean apply(Game game) {
 		return false;
 	}
 
+	@Override
 	public boolean replaceEvent(GameEvent event, Game game) {
+		used = true;
 		return true;
 	}
 
+	@Override
 	public boolean applies(GameEvent event, Game game) {
-		if (game.getStep() == PhaseStep.UNTAP &&
+		if (game.getTurn().getStep() == PhaseStep.UNTAP &&
 				event.getType() == EventType.UNTAP &&
-				event.getSourceId().equals(source.getFirstTarget())) {
-			used = true;
+				event.getTargetId().equals(source.getFirstTarget())) {
+			return true;
 		}
-		return used;
+		return false;
 	}
 
 	@Override

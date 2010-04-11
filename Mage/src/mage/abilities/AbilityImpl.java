@@ -29,11 +29,18 @@
 package mage.abilities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import mage.Constants.Outcome;
 import mage.Constants.Zone;
+import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
@@ -41,7 +48,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.choices.Choice;
 import mage.choices.Choices;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.Target;
 import mage.target.Targets;
 import mage.util.Copier;
@@ -57,7 +63,9 @@ public abstract class AbilityImpl implements Ability, Serializable {
 	protected UUID id;
 	protected UUID controllerId;
 	protected UUID sourceId;
+	protected ManaCosts manaCosts = new ManaCosts(this);
 	protected Costs<Cost> costs = new CostsImpl<Cost>(this);
+	protected List<AlternativeCost> alternativeCosts = new ArrayList<AlternativeCost>();
 	protected Targets targets = new Targets(this);
 	protected Choices choices = new Choices(this);
 	protected Effects effects = new Effects(this);
@@ -88,7 +96,7 @@ public abstract class AbilityImpl implements Ability, Serializable {
 					result &= effect.apply(game);
 				}
 				else {
-					game.addEffect((ContinuousEffectImpl) effect);
+					game.addEffect((ContinuousEffect) effect);
 				}
 			}
 		}
@@ -101,7 +109,21 @@ public abstract class AbilityImpl implements Ability, Serializable {
 			return false;
 		if (targets.size() > 0 && targets.choose(effects.get(0).getOutcome(), game) == false)
 			return false;
-		return getCosts().pay(game, noMana);
+		if (!useAlternativeCost(game)) {
+			if (!manaCosts.pay(game, noMana))
+				return false;
+		}
+		return costs.pay(game, noMana);
+	}
+
+	protected boolean useAlternativeCost(Game game) {
+		for (AlternativeCost cost: alternativeCosts) {
+			if (cost.isAvailable(game)) {
+				if (game.getPlayer(this.controllerId).chooseUse(Outcome.Neutral, "Use alternative cost " + cost.getName(), game))
+					return cost.pay(game, false);
+			}
+		}
+		return false;
 	}
 
 	@Override
@@ -131,6 +153,16 @@ public abstract class AbilityImpl implements Ability, Serializable {
 	}
 
 	@Override
+	public ManaCosts getManaCosts() {
+		return manaCosts;
+	}
+
+	@Override
+	public List<AlternativeCost> getAlternativeCosts() {
+		return alternativeCosts;
+	}
+
+	@Override
 	public Effects getEffects() {
 		return effects;
 	}
@@ -150,10 +182,25 @@ public abstract class AbilityImpl implements Ability, Serializable {
 		StringBuilder sbRule = new StringBuilder();
 
 		if (!(this instanceof SpellAbility)) {
-			if (!costs.getText().equals("")) {
-				sbRule.append(costs.getText()).append(": ");
+			if (manaCosts.size() > 0) {
+				sbRule.append(manaCosts.getText());
+			}
+			if (costs.size() > 0) {
+				if (sbRule.length() > 0) {
+					sbRule.append(",");
+				}
+				sbRule.append(costs.getText());
+			}
+			if (sbRule.length() > 0) {
+				sbRule.append(": ");
 			}
 		}
+		else if (this.alternativeCosts.size() > 0) {
+			for (AlternativeCost cost: alternativeCosts) {
+				sbRule.append(cost.getText()).append("\n");
+			}
+		}
+
 		sbRule.append(effects.getText());
 
 		return sbRule.toString();
@@ -175,15 +222,26 @@ public abstract class AbilityImpl implements Ability, Serializable {
 	}
 
 	@Override
-	public void handleEvent(GameEvent event, Game game) {
-		
-	}
-
-	@Override
 	public void addCost(Cost cost) {
 		if (cost != null) {
 			cost.setAbility(this);
 			this.costs.add(cost);
+		}
+	}
+
+	@Override
+	public void addManaCost(ManaCost cost) {
+		if (cost != null) {
+			cost.setAbility(this);
+			this.manaCosts.add(cost);
+		}
+	}
+
+	@Override
+	public void addAlternativeCost(AlternativeCost cost) {
+		if (cost != null) {
+			cost.setAbility(this);
+			this.alternativeCosts.add(cost);
 		}
 	}
 

@@ -29,18 +29,46 @@
 package mage.target.common;
 
 import java.util.UUID;
+import mage.Constants.Zone;
+import mage.cards.Card;
+import mage.filter.FilterCard;
+import mage.game.Game;
+import mage.target.TargetCard;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetDiscard extends TargetCardInHand {
+public class TargetDiscard extends TargetCard {
+
+	private UUID playerId;
 
 	public TargetDiscard(UUID playerId) {
-		super(playerId);
-		filter.getOwnerId().add(playerId);
+		this(1, 1, new FilterCard(), playerId);
+	}
+
+	public TargetDiscard(FilterCard filter, UUID playerId) {
+		this(1, 1, filter, playerId);
+	}
+
+	public TargetDiscard(int numTargets, FilterCard filter, UUID playerId) {
+		this(numTargets, numTargets, filter, playerId);
+	}
+
+	public TargetDiscard(int minNumTargets, int maxNumTargets, FilterCard filter, UUID playerId) {
+		super(minNumTargets, maxNumTargets, Zone.HAND, filter);
+		this.filter.getOwnerId().add(playerId);
+		this.playerId = playerId;
 		this.required = true;
 		this.targetName = "card to discard";
+	}
+
+	@Override
+	public boolean canTarget(UUID id, Game game) {
+		Card card = game.getPlayer(playerId).getHand().get(id);
+		if (card != null)
+			return filter.match(card);
+		return false;
 	}
 
 }

@@ -33,7 +33,6 @@ import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PlayTargetWithoutPayingManaEffect;
 import mage.cards.Card;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -53,7 +52,7 @@ public class CascadeAbility extends TriggeredAbilityImpl {
 	}
 
 	@Override
-	public void handleEvent(GameEvent event, Game game) {
+	public void checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.SPELL_CAST && event.getTargetId().equals(this.getSourceId()) ) {
 			trigger(game, event.getPlayerId());
 		}
@@ -71,6 +70,7 @@ class CascadeEffect extends OneShotEffect {
 		super(Outcome.PutCardInPlay);
 	}
 
+	@Override
 	public boolean apply(Game game) {
 		Card card;
 		Player player = game.getPlayer(this.getSource().getControllerId());
@@ -85,10 +85,7 @@ class CascadeEffect extends OneShotEffect {
 
 		if (card != null) {
 			if (player.chooseUse(outcome, "Use cascade effect on " + card.getName() + "?", game)) {
-				PlayTargetWithoutPayingManaEffect playEffect = new PlayTargetWithoutPayingManaEffect();
-				playEffect.setSource(source);
-				playEffect.setTarget(card);
-				playEffect.apply(game);
+				player.cast(card, game, true);
 				exile.remove(card.getId());
 			}
 		}

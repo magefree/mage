@@ -47,7 +47,7 @@ public class BoostSourceWhileControlsEffect extends WhileControlsContinuousEffec
 	private int toughness;
 
 	public BoostSourceWhileControlsEffect(FilterPermanent filter, int power, int toughness) {
-		super(Duration.WhileInPlay, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, filter, Outcome.BoostCreature);
+		super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, filter, Outcome.BoostCreature);
 		this.power = power;
 		this.toughness = toughness;
 	}

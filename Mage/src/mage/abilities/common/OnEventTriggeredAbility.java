@@ -59,7 +59,7 @@ public class OnEventTriggeredAbility extends TriggeredAbilityImpl {
 	}
 
 	@Override
-	public void handleEvent(GameEvent event, Game game) {
+	public void checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == eventType) {
 			if (allPlayers || event.getPlayerId().equals(this.controllerId) ) {
 				trigger(game, this.controllerId);

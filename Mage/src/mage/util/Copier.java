@@ -28,15 +28,25 @@
 
 package mage.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.URLClassLoader;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class Copier<T> {
+
+	private static ClassLoader loader;
+
+	public static void setLoader(ClassLoader loader) {
+		Copier.loader = loader;
+	}
 
 	public T copy(T obj) {
         T copy = null;
@@ -51,7 +61,7 @@ public class Copier<T> {
 
             // Retrieve an input stream from the byte array and read
             // a copy of the object back in.
-            ObjectInputStream in = new ObjectInputStream(fbos.getInputStream());
+            ObjectInputStream in = new CopierObjectInputStream(loader, fbos.getInputStream());
             copy = (T) in.readObject();
         }
         catch(IOException e) {
@@ -62,5 +72,40 @@ public class Copier<T> {
         }
         return copy;
 
+	}
+
+	public byte[] copyCompressed(T obj) {
+        try {
+            FastByteArrayOutputStream fbos = new FastByteArrayOutputStream();
+            ObjectOutputStream out= new ObjectOutputStream(new GZIPOutputStream(fbos));
+
+            // Write the object out to a byte array
+            out.writeObject(obj);
+            out.flush();
+            out.close();
+
+			byte[] copy = new byte[fbos.getSize()];
+            System.arraycopy(fbos.getByteArray(), 0, copy, 0, fbos.getSize());
+			return copy;
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+	}
+
+	public T uncompressCopy(byte[] buffer) {
+        T copy = null;
+        try {
+			ObjectInputStream in = new ObjectInputStream(new GZIPInputStream(new ByteArrayInputStream(buffer)));
+			copy = (T) in.readObject();
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+        catch(ClassNotFoundException cnfe) {
+            cnfe.printStackTrace();
+        }
+		return copy;
 	}
 }

@@ -42,17 +42,20 @@ import mage.game.events.GameEvent.EventType;
 public class CantCounterSourceEffect extends ReplacementEffectImpl {
 
 	public CantCounterSourceEffect() {
-		super(Duration.OneShot, Outcome.Benefit);
+		super(Duration.WhileOnStack, Outcome.Benefit);
 	}
 	
+	@Override
 	public boolean apply(Game game) {
 		return true;
 	}
 
+	@Override
 	public boolean replaceEvent(GameEvent event, Game game) {
 		return true;
 	}
 
+	@Override
 	public boolean applies(GameEvent event, Game game) {
 		if (event.getType() == EventType.COUNTER && event.getTargetId().equals(source.getSourceId()))
 			return true;

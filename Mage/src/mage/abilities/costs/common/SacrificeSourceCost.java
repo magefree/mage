@@ -52,6 +52,7 @@ public class SacrificeSourceCost extends CostImpl {
 		return paid;
 	}
 
+	@Override
 	public boolean canPay(UUID playerId, Game game) {
 		Permanent source = game.getPermanent(ability.getSourceId());
 		if (source != null) {

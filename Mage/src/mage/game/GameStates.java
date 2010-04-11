@@ -43,8 +43,8 @@ public class GameStates {
 		states.add(gameState.copy());
 	}
 
-	public List<GameState> getStates() {
-		return states;
+	public int getSize() {
+		return states.size();
 	}
 
 	public GameState rollback(int index) {
@@ -52,5 +52,11 @@ public class GameStates {
 			states.remove(index);
 		}
 		return states.get(index - 1);
+	}
+
+	public GameState get(int index) {
+		if (index <= states.size())
+			return states.get(index);
+		return null;
 	}
 }

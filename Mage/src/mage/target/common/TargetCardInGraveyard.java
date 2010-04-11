@@ -55,12 +55,12 @@ public class TargetCardInGraveyard extends TargetCard {
 
 	public TargetCardInGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
 		super(minNumTargets, maxNumTargets, Zone.HAND, filter);
-		this.targetName = "card in graveyard";
+		this.targetName = filter.getMessage();
 	}
 
 	@Override
 	public boolean canTarget(UUID id, Game game) {
-		Card card = game.getPlayer(this.source.getControllerId()).getHand().get(id);
+		Card card = game.getPlayer(this.source.getControllerId()).getGraveyard().get(id);
 		if (card != null)
 			return filter.match(card);
 		return false;

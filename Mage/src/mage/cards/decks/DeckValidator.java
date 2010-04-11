@@ -36,6 +36,7 @@ import java.io.Serializable;
  */
 public interface DeckValidator extends Serializable {
 
+	public String getName();
 	public boolean validate(Deck deck);
 	
 }

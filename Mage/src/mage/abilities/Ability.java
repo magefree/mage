@@ -29,16 +29,19 @@
 package mage.abilities;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 import mage.Constants.Zone;
+import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.choices.Choice;
 import mage.choices.Choices;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.Target;
 import mage.target.Targets;
 
@@ -49,6 +52,10 @@ public interface Ability extends Serializable {
 	public UUID getSourceId();
 	public Costs<Cost> getCosts();
 	public void addCost(Cost cost);
+	public ManaCosts getManaCosts();
+	public void addManaCost(ManaCost cost);
+	public List<AlternativeCost> getAlternativeCosts();
+	public void addAlternativeCost(AlternativeCost cost);
 	public Effects getEffects();
 	public void addEffect(Effect effect);
 	public Targets getTargets();
@@ -63,7 +70,6 @@ public interface Ability extends Serializable {
 	public void setEnabled(boolean enabled);
 	public boolean activate(Game game, boolean noMana);
 	public boolean resolve(Game game);
-	public void handleEvent(GameEvent event, Game game);
 
 	public void setControllerId(UUID controllerId);
 	public void setSourceId(UUID sourceID);

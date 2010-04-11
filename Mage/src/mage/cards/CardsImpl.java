@@ -85,9 +85,19 @@ public class CardsImpl extends LinkedHashMap<UUID, Card> implements Cards, Seria
 	}
 
 	@Override
-	public void handleEvent(GameEvent event, Game game) {
+	public int count(FilterCard filter) {
+		int result = 0;
 		for (Card card: this.values()) {
-			card.handleEvent(zone, event, game);
+			if (filter.match(card))
+				result++;
+		}
+		return result;
+	}
+
+	@Override
+	public void checkTriggers(GameEvent event, Game game) {
+		for (Card card: this.values()) {
+			card.checkTriggers(zone, event, game);
 		}
 	}
 

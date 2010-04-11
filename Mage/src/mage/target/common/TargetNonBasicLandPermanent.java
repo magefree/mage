@@ -41,6 +41,7 @@ public class TargetNonBasicLandPermanent extends TargetLandPermanent {
 		filter.getName().add("Mountain");
 		filter.getName().add("Swamp");
 		filter.getName().add("Plains");
+		this.targetName = "nonbasic land";
 	}
 
 }

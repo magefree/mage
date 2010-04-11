@@ -29,8 +29,10 @@
 package mage.game.stack;
 
 import java.util.ArrayList;
+import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.choices.Choice;
@@ -81,6 +83,7 @@ public class StackAbility implements StackObject, Ability {
 		return false;
 	}
 
+	@Override
 	public void counter(Game game) {
 		
 	}
@@ -193,11 +196,6 @@ public class StackAbility implements StackObject, Ability {
 	public void addCost(Cost cost) {}
 
 	@Override
-	public void handleEvent(GameEvent event, Game game) {
-		ability.handleEvent(event, game);
-	}
-
-	@Override
 	public void addEffect(Effect effect) {}
 
 	@Override
@@ -231,5 +229,24 @@ public class StackAbility implements StackObject, Ability {
 		//TODO: not sure if this will be needed
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
+
+	@Override
+	public List<AlternativeCost> getAlternativeCosts() {
+		return ability.getAlternativeCosts();
+	}
+
+	@Override
+	public void addAlternativeCost(AlternativeCost cost) { }
+
+	@Override
+	public ManaCosts getManaCosts() {
+		return ability.getManaCosts();
+	}
+
+	@Override
+	public void addManaCost(ManaCost cost) { }
+
+	@Override
+	public void checkTriggers(GameEvent event, Game game) {	}
 
 }

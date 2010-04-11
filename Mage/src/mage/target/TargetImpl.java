@@ -31,11 +31,13 @@ package mage.target;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.players.Player;
 
 /**
  *
@@ -51,6 +53,7 @@ public abstract class TargetImpl implements Target {
 	protected int minNumberOfTargets;
 	protected boolean required = false;
 	protected Ability source;
+	protected boolean chosen = false;
 
 	@Override
 	public int getNumberOfTargets() {
@@ -89,7 +92,7 @@ public abstract class TargetImpl implements Target {
 
 	@Override
 	public boolean isChosen() {
-		return targets.size() >= minNumberOfTargets;
+		return chosen;
 	}
 
 	@Override
@@ -100,6 +103,7 @@ public abstract class TargetImpl implements Target {
 	@Override
 	public void clearChosen() {
 		targets.clear();
+		chosen = false;
 	}
 
 	/**
@@ -120,6 +124,25 @@ public abstract class TargetImpl implements Target {
 			targets.add(id);
 		}
 	}
+
+	@Override
+	public boolean choose(Outcome outcome, Game game) {
+		Player player = game.getPlayer(this.source.getControllerId());
+		while (!isChosen()) {
+			chosen = targets.size() >= minNumberOfTargets;
+			if (!player.chooseTarget(outcome, this, game)) {
+				return chosen;
+			}
+			chosen = targets.size() >= minNumberOfTargets;
+		}
+		while (!doneChosing()) {
+			if (!player.chooseTarget(outcome, this, game)) {
+				break;
+			}
+		}
+		return true;
+	}
+
 
 	@Override
 	public boolean isLegal(Game game) {

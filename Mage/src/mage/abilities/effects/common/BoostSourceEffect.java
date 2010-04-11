@@ -26,18 +26,45 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.cards.decks;
+package mage.abilities.effects.common;
 
-import java.io.Serializable;
+import mage.Constants.Duration;
+import mage.Constants.Layer;
+import mage.Constants.Outcome;
+import mage.Constants.SubLayer;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DeckValidatorConstructed implements DeckValidator, Serializable {
+public class BoostSourceEffect extends ContinuousEffectImpl {
 
-	public boolean validate(Deck deck) {
-		return true;
+	private int power;
+	private int toughness;
+
+	public BoostSourceEffect(int power, int toughness, Duration duration) {
+		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+		this.power = power;
+		this.toughness = toughness;
+	}
+
+	@Override
+	public boolean apply(Game game) {
+		Permanent target = (Permanent) game.getPermanent(this.source.getSourceId());
+		if (target != null) {
+			target.addPower(power);
+			target.addToughness(toughness);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public String getText() {
+		return "{this} gets " + String.format("%1$+d/%2$+d", power, toughness) + " " + duration.toString();
 	}
 
 }

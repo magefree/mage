@@ -35,6 +35,7 @@ import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.TriggeredAbilities;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
@@ -58,6 +59,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public interface Player extends MageItem {
 
+	public boolean isHuman();
 	public Deck getDeck();
 	public void setDeck(Deck deck);
 	public String getName();
@@ -79,7 +81,7 @@ public interface Player extends MageItem {
 	public boolean hasLeft();
 	public ManaPool getManaPool();
 	
-	public void init();
+	public void init(Game game);
 	public void reset();
 	public void shuffleLibrary(Game game);
 	public int drawCards(int num, Game game);
@@ -97,9 +99,10 @@ public interface Player extends MageItem {
 	public boolean activateAbility(ActivatedAbility ability, Game game);
 	public boolean triggerAbility(TriggeredAbility ability, Game game);
 	public boolean canTarget(MageObject source);
-	public void handleEvent(GameEvent event, Game game);
+	public void checkTriggers(GameEvent event, Game game);
 	public void discard(int amount, Game game);
 	public void discardToMax(Game game);
+	public boolean discard(Card card, Game game);
 	public void lost(Game game);
 	public void won(Game game);
 	public void leaveGame();
@@ -125,6 +128,7 @@ public interface Player extends MageItem {
 	public abstract boolean playXMana(VariableManaCost cost, Game game);
 	public abstract boolean searchCards(Cards cards, TargetCard target, Game game);
 	public abstract int chooseEffect(List<ReplacementEffect> rEffects, Game game);
+	public abstract TriggeredAbility chooseTriggeredAbility(TriggeredAbilities abilities, Game game);
 	public abstract void selectAttackers(Game game);
 	public abstract void selectBlockers(Game game);
 	public abstract void assignDamage(int damage, List<UUID> targets, UUID sourceId, Game game);

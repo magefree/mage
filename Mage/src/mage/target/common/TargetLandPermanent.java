@@ -28,7 +28,6 @@
 
 package mage.target.common;
 
-import mage.Constants.CardType;
 import mage.Constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.TargetPermanent;

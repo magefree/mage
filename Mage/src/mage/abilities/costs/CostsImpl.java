@@ -29,11 +29,8 @@
 package mage.abilities.costs;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.game.Game;
 
@@ -145,23 +142,23 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
 		return null;
  	}
 
-	@Override
-	public ManaCosts getManaCosts() {
-		ManaCosts manaCosts = new ManaCosts(ability);
-		for (T cost: this) {
-			if (cost instanceof ManaCost)
-				manaCosts.add((ManaCost)cost);
-		}
-		return manaCosts;
-	}
-
-	@Override
-	public List<VariableManaCost> getVariableCosts() {
-		List<VariableManaCost> variableCosts = new ArrayList<VariableManaCost>();
-		for (T cost: this) {
-			if (cost instanceof ManaCosts)
-				variableCosts.addAll(((ManaCosts)cost).getVariableCosts());
-		}
-		return variableCosts;
-	}
+//	@Override
+//	public ManaCosts getManaCosts() {
+//		ManaCosts manaCosts = new ManaCosts(ability);
+//		for (T cost: this) {
+//			if (cost instanceof ManaCost)
+//				manaCosts.add((ManaCost)cost);
+//		}
+//		return manaCosts;
+//	}
+//
+//	@Override
+//	public List<VariableManaCost> getVariableCosts() {
+//		List<VariableManaCost> variableCosts = new ArrayList<VariableManaCost>();
+//		for (T cost: this) {
+//			if (cost instanceof ManaCosts)
+//				variableCosts.addAll(((ManaCosts)cost).getVariableCosts());
+//		}
+//		return variableCosts;
+//	}
 }

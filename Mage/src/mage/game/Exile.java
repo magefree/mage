@@ -73,9 +73,9 @@ public class Exile implements Serializable {
 		return exileZones.get(id);
 	}
 
-	void handleEvent(GameEvent event, Game game) {
+	void checkTriggers(GameEvent event, Game game) {
 		for (ExileZone exile: exileZones.values()) {
-			exile.handleEvent(event, game);
+			exile.checkTriggers(event, game);
 		}
 	}
 }

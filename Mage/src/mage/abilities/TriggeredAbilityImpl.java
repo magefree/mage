@@ -29,7 +29,6 @@
 package mage.abilities;
 
 import java.util.UUID;
-import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
@@ -57,8 +56,16 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
 	@Override
 	public void trigger(Game game, UUID controllerId) {
-		this.controllerId = controllerId;
-		game.addTriggeredAbility(this);
+		//20091005 - 603.4
+		if (checkIfClause(game)) {
+			this.controllerId = controllerId;
+			game.addTriggeredAbility(this);
+		}
+	}
+
+	@Override
+	public boolean checkIfClause(Game game) {
+		return true;
 	}
 
 	@Override
@@ -70,6 +77,9 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 				return false;
 			}
 		}
-		return super.resolve(game);
+		//20091005 - 603.4
+		if (checkIfClause(game))
+			return super.resolve(game);
+		return false;
 	}
 }

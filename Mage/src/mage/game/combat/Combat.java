@@ -159,4 +159,15 @@ public class Combat implements Serializable {
 		return total;
 	}
 
+	public boolean attacksAlone() {
+		return (groups.size() == 1 && groups.get(0).getAttackers().size() == 1);
+	}
+
+	public boolean noAttackers() {
+		if (groups.size() == 0 || getAttackers().size() == 0)
+			return true;
+		return false;
+	}
+
+
 }

@@ -59,6 +59,7 @@ public class FastByteArrayInputStream extends InputStream {
         return count - pos;
     }
 
+	@Override
     public final int read() {
         return (pos < count) ? (buf[pos++] & 0xff) : -1;
     }

@@ -36,8 +36,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.PhaseStep;
-import mage.Constants.TurnPhase;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilities;
@@ -47,10 +45,12 @@ import mage.game.combat.Combat;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.turn.Turn;
+import mage.game.turn.TurnMods;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
 import mage.util.Copier;
+import mage.watchers.Watchers;
 
 /**
  *
@@ -66,6 +66,8 @@ public class GameState implements Serializable {
 
 	private static final transient Copier<GameState> copier = new Copier<GameState>();
 	private Players players = new Players();
+	private UUID activePlayerId;
+	private UUID priorityPlayerId;
 	private Turn turn = new Turn();
 	private SpellStack stack = new SpellStack();
 	private Exile exile = new Exile();
@@ -76,6 +78,8 @@ public class GameState implements Serializable {
 	private ContinuousEffects effects = new ContinuousEffects();
 	private TriggeredAbilities triggers = new TriggeredAbilities();
 	private Combat combat = new Combat();
+	private TurnMods turnMods = new TurnMods();
+	private Watchers watchers = new Watchers();
 
 	public void addPlayer(Player player) {
 		players.put(player.getId(), player);
@@ -89,12 +93,20 @@ public class GameState implements Serializable {
 		return players.get(playerId);
 	}
 
-	public TurnPhase getPhase() {
-		return turn.getPhase();
+	public UUID getActivePlayerId() {
+		return activePlayerId;
 	}
 
-	public PhaseStep getStep() {
-		return turn.getStep();
+	public void setActivePlayerId(UUID activePlayerId) {
+		this.activePlayerId = activePlayerId;
+	}
+
+	public UUID getPriorityPlayerId() {
+		return priorityPlayerId;
+	}
+
+	public void setPriorityPlayerId(UUID priorityPlayerId) {
+		this.priorityPlayerId = priorityPlayerId;
 	}
 
 	public Battlefield getBattlefield() {
@@ -129,6 +141,14 @@ public class GameState implements Serializable {
 		return this.gameOver;
 	}
 
+	public TurnMods getTurnMods() {
+		return this.turnMods;
+	}
+
+	public Watchers getWatchers() {
+		return this.watchers;
+	}
+
 	public void endGame() {
 		this.gameOver = true;
 	}
@@ -149,10 +169,6 @@ public class GameState implements Serializable {
 	public void addEffect(ContinuousEffect effect) {
 		effects.addEffect(effect);
 	}
-
-//	public boolean effectExists(UUID effectId) {
-//		return effects.effectExists(effectId);
-//	}
 
 	public void addMessage(String message) {
 		this.messages.add(message);
@@ -239,12 +255,13 @@ public class GameState implements Serializable {
 	public void handleEvent(GameEvent event, Game game) {
 		if (!replaceEvent(event, game)) {
 			for (Player player: players.values()) {
-				player.handleEvent(event, game);
+				player.checkTriggers(event, game);
 			}
 		}
-		battlefield.handleEvent(event, game);
-		stack.handleEvent(event, game);
-		exile.handleEvent(event, game);
+		battlefield.checkTriggers(event, game);
+		stack.checkTriggers(event, game);
+		exile.checkTriggers(event, game);
+		watchers.watch(event, game);
 	}
 
 	public boolean replaceEvent(GameEvent event, Game game) {
@@ -260,7 +277,7 @@ public class GameState implements Serializable {
 		return this.triggers;
 	}
 
-	ContinuousEffects getContinuousEffects() {
+	public ContinuousEffects getContinuousEffects() {
 		return effects;
 	}
 

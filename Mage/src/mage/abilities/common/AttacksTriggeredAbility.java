@@ -46,7 +46,7 @@ public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
 	}
 
 	@Override
-	public void handleEvent(GameEvent event, Game game) {
+	public void checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId()) ) {
 			trigger(game, this.controllerId);
 		}

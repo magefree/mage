@@ -31,7 +31,6 @@ package mage.target.common;
 import java.util.UUID;
 import mage.Constants.Zone;
 import mage.cards.Card;
-import mage.cards.Cards;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.target.TargetCard;

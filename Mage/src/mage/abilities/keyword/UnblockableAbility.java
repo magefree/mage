@@ -58,7 +58,7 @@ public class UnblockableAbility extends EvasionAbilityImpl {
 
 	@Override
 	public String getRule() {
-		return "{this} is unblockable";
+		return "Unblockable";
 	}
 
 }

@@ -83,10 +83,9 @@ public class Targets extends ArrayList<Target> {
 
 	public boolean choose(Outcome outcome, Game game) {
 		if (this.size() > 0) {
-			Player player = game.getPlayer(this.source.getControllerId());
 			while (!isChosen()) {
 				Target target = this.getUnchosen().get(0);
-				if (!player.chooseTarget(outcome, target, game))
+				if (!target.choose(outcome, game))
 					return false;
 			}
 		}

@@ -47,7 +47,7 @@ public class PutIntoGraveFromBattlefieldTriggeredAbility extends TriggeredAbilit
 	}
 
 	@Override
-	public void handleEvent(GameEvent event, Game game) {
+	public void checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId()) ) {
 			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
 			if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD)

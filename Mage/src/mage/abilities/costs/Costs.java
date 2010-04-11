@@ -29,15 +29,11 @@
 package mage.abilities.costs;
 
 import java.util.List;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.VariableManaCost;
 
 public interface Costs<T extends Cost> extends List<T>, Cost {
 	@Override
 	public boolean add(T cost);
 
 	public List<T> getUnpaid();
-	public List<VariableManaCost> getVariableCosts();
-	public ManaCosts getManaCosts();
 
 }

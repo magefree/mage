@@ -39,7 +39,7 @@ public interface StackObject extends MageObject {
 	public boolean resolve(Game game);
 	public UUID getSourceId();
 	public UUID getControllerId();
-	public void handleEvent(GameEvent event, Game game);
+	public void checkTriggers(GameEvent event, Game game);
 	public void counter(Game game);
 
 }

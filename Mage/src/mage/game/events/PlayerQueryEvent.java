@@ -32,7 +32,9 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.EventObject;
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.TriggeredAbilities;
 import mage.cards.Cards;
 
 /**
@@ -42,11 +44,11 @@ import mage.cards.Cards;
 public class PlayerQueryEvent extends EventObject implements ExternalEvent, Serializable {
 
 	public enum QueryType {
-		ASK, CHOOSE, CHOOSE_ABILITY, PICK_TARGET, SELECT, PLAY_MANA, PLAY_X_MANA, AMOUNT
+		ASK, CHOOSE, CHOOSE_ABILITY, PICK_TARGET, PICK_ABILITY, SELECT, PLAY_MANA, PLAY_X_MANA, AMOUNT
 	}
 
 	private String message;
-	private Collection<? extends ActivatedAbility> abilities;
+	private Collection<? extends Ability> abilities;
 	private String[] choices;
 	private Cards cards;
 	private QueryType queryType;
@@ -55,7 +57,7 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 	private int min;
 	private int max;
 
-	private PlayerQueryEvent(UUID playerId, String message, Collection<? extends ActivatedAbility> abilities, String[] choices, Cards cards, QueryType queryType, int min, int max, boolean required) {
+	private PlayerQueryEvent(UUID playerId, String message, Collection<? extends Ability> abilities, String[] choices, Cards cards, QueryType queryType, int min, int max, boolean required) {
 		super(playerId);
 		this.queryType = queryType;
 		this.message = message;
@@ -87,6 +89,10 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 		return new PlayerQueryEvent(playerId, message, null, null, cards, QueryType.PICK_TARGET, 0, 0, required);
 	}
 
+	public static PlayerQueryEvent targetEvent(UUID playerId, String message, TriggeredAbilities abilities, boolean required) {
+		return new PlayerQueryEvent(playerId, message, abilities, null, null, QueryType.PICK_ABILITY, 0, 0, required);
+	}
+
 	public static PlayerQueryEvent selectEvent(UUID playerId, String message) {
 		return new PlayerQueryEvent(playerId, message, null, null, null, QueryType.SELECT, 0, 0, false);
 	}
@@ -111,7 +117,7 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 		return queryType;
 	}
 
-	public Collection<? extends ActivatedAbility> getAbilities() {
+	public Collection<? extends Ability> getAbilities() {
 		return abilities;
 	}
 

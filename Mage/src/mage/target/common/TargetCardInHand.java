@@ -41,29 +41,26 @@ import mage.target.TargetCard;
  */
 public class TargetCardInHand extends TargetCard {
 
-	protected UUID playerId;
-
-	public TargetCardInHand(UUID playerId) {
-		this(1, 1, new FilterCard(), playerId);
+	public TargetCardInHand() {
+		this(1, 1, new FilterCard());
 	}
 
-	public TargetCardInHand(FilterCard filter, UUID playerId) {
-		this(1, 1, filter, playerId);
+	public TargetCardInHand(FilterCard filter) {
+		this(1, 1, filter);
 	}
 
-	public TargetCardInHand(int numTargets, FilterCard filter, UUID playerId) {
-		this(numTargets, numTargets, filter, playerId);
+	public TargetCardInHand(int numTargets, FilterCard filter) {
+		this(numTargets, numTargets, filter);
 	}
 
-	public TargetCardInHand(int minNumTargets, int maxNumTargets, FilterCard filter, UUID playerId) {
+	public TargetCardInHand(int minNumTargets, int maxNumTargets, FilterCard filter) {
 		super(minNumTargets, maxNumTargets, Zone.HAND, filter);
-		this.targetName = "card in hand";
-		this.playerId = playerId;
+		this.targetName = filter.getMessage();
 	}
 
 	@Override
 	public boolean canTarget(UUID id, Game game) {
-		Card card = game.getPlayer(playerId).getHand().get(id);
+		Card card = game.getPlayer(this.source.getControllerId()).getHand().get(id);
 		if (card != null)
 			return filter.match(card);
 		return false;

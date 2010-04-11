@@ -67,7 +67,7 @@ public class ContinuousEffects implements Serializable {
 	public void removeInactiveEffects(Game game) {
 		for (Iterator<ContinuousEffect> i = effects.iterator(); i.hasNext();) {
 			ContinuousEffect entry = i.next();
-			if (entry.getDuration() == Duration.WhileInPlay) {
+			if (entry.getDuration() == Duration.WhileOnBattlefield) {
 				Permanent permanent = (Permanent)game.getPermanent(entry.getSource().getSourceId());
 				if (permanent == null || !permanent.isPhasedIn())
 					i.remove();

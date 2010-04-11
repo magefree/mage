@@ -96,6 +96,7 @@ public class FastByteArrayOutputStream extends OutputStream {
         size += len;
     }
 
+	@Override
     public final void write(int b) {
         verifyBufferSize(size + 1);
         buf[size++] = (byte) b;

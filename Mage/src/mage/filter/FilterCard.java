@@ -41,6 +41,8 @@ public class FilterCard extends FilterObject<Card> {
 
 	protected List<UUID> ownerId = new ArrayList<UUID>();
 	protected boolean notOwner = false;
+	protected List<UUID> expansionSetId = new ArrayList<UUID>();
+	protected boolean notExpansionSetId = false;
 
 	public FilterCard() {
 		super("card");
@@ -58,6 +60,9 @@ public class FilterCard extends FilterObject<Card> {
 		if (ownerId.size() > 0 && ownerId.contains(card.getOwnerId()) == notOwner)
 			return false;
 
+		if (expansionSetId.size() > 0 && expansionSetId.contains(card.getExpansionSetId()) == notExpansionSetId)
+			return false;
+		
 		return true;
 	}
 
@@ -69,6 +74,14 @@ public class FilterCard extends FilterObject<Card> {
 		this.notOwner = notOwner;
 	}
 	
+	public List<UUID> getExpansionSetId() {
+		return expansionSetId;
+	}
+
+	public void setNotExpansionSetId(boolean notExpansionSetId) {
+		this.notExpansionSetId = notExpansionSetId;
+	}
+
 	public boolean matchOwner(UUID testOwnerId) {
 		if (ownerId.size() > 0 && ownerId.contains(testOwnerId) == notOwner)
 			return false;

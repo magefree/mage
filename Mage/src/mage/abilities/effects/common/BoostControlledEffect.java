@@ -49,7 +49,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
 	protected FilterCreaturePermanent filter;
 
 	public BoostControlledEffect(int power, int toughness, Duration duration) {
-		this(power, toughness, duration, null);
+		this(power, toughness, duration, new FilterCreaturePermanent());
 	}
 
 	public BoostControlledEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter) {
@@ -61,19 +61,11 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
 
 	@Override
 	public boolean apply(Game game) {
-		if (filter != null) {
-			filter.getControllerId().clear();
-			filter.getControllerId().add(this.source.getControllerId());
-			for (Permanent perm: game.getBattlefield().getActivePermanents(filter)) {
-				perm.addPower(power);
-				perm.addToughness(toughness);
-			}
-		}
-		else {
-			for (Permanent perm: game.getBattlefield().getActivePermanents(this.source.getControllerId(), CardType.CREATURE)) {
-				perm.addPower(power);
-				perm.addToughness(toughness);
-			}
+		filter.getControllerId().clear();
+		filter.getControllerId().add(this.source.getControllerId());
+		for (Permanent perm: game.getBattlefield().getActivePermanents(filter)) {
+			perm.addPower(power);
+			perm.addToughness(toughness);
 		}
 		return true;
 	}
@@ -81,10 +73,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
 	@Override
 	public String getText() {
 		StringBuilder sb = new StringBuilder();
-		if (filter == null)
-			sb.append("Creatures");
-		else
-			sb.append(filter.getMessage());
+		sb.append(filter.getMessage());
 		sb.append(" you control get ").append(String.format("%1$+d/%2$+d", power, toughness));
 		sb.append((duration==Duration.EndOfTurn?" until end of turn":""));
 		return sb.toString();

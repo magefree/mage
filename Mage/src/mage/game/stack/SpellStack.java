@@ -53,9 +53,9 @@ public class SpellStack extends Stack<StackObject> {
 		this.remove(top);
 	}
 
-	public void handleEvent(GameEvent event, Game game) {
+	public void checkTriggers(GameEvent event, Game game) {
 		for (StackObject stackObject: this) {
-			stackObject.handleEvent(event, game);
+			stackObject.checkTriggers(event, game);
 		}
 	}
 

@@ -47,7 +47,7 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
 	protected Effects baseEffects = new Effects(null);
 
 	public EntersBattlefieldEffect(Effect baseEffect) {
-		super(Duration.OneShot, baseEffect.getOutcome());
+		super(Duration.WhileOnBattlefield, baseEffect.getOutcome());
 		this.baseEffects.add(baseEffect);
 	}
 

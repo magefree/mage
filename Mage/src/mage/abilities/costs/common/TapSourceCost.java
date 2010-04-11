@@ -29,7 +29,6 @@
 package mage.abilities.costs.common;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.game.Game;
@@ -54,17 +53,13 @@ public class TapSourceCost extends CostImpl {
 		return paid;
 	}
 
+	@Override
 	public boolean canPay(UUID playerId, Game game) {
 		Permanent source = game.getPermanent(ability.getSourceId());
 		if (source != null) {
 			return !source.isTapped() && source.canTap();
 		}
 		return false;
-	}
-
-	@Override
-	public void setAbility(Ability ability) {
-		this.ability = ability;
 	}
 
 }

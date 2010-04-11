@@ -94,6 +94,8 @@ public class SearchLibraryPutInPlayEffect extends OneShotEffect {
 		else {
 			sb.append("a ").append(target.getTargetName()).append(", and put it onto the battlefield");
 		}
+		if (tapped)
+			sb.append(" tapped");
 		sb.append(". Then shuffle your library");
 		return sb.toString();
 	}

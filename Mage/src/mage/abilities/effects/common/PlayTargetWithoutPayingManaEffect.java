@@ -40,8 +40,6 @@ import mage.players.Player;
  */
 public class PlayTargetWithoutPayingManaEffect extends OneShotEffect {
 
-	private Card target;
-
 	public PlayTargetWithoutPayingManaEffect() {
 		super(Outcome.GainControl);
 	}
@@ -49,10 +47,12 @@ public class PlayTargetWithoutPayingManaEffect extends OneShotEffect {
 	@Override
 	public boolean apply(Game game) {
 		Player controller = game.getPlayer(this.source.getControllerId());
+		Card target = (Card) game.getObject(this.source.getFirstTarget());
 		return controller.cast(target, game, true);
 	}
 
-	public void setTarget(Card card) {
-		this.target = card;
+	@Override
+	public String getText() {
+		return "you may put " + this.getSource().getTargets().get(0).getTargetName() + " from you hand onto the battlefield";
 	}
 }

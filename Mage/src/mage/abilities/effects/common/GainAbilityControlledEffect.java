@@ -28,13 +28,13 @@
 
 package mage.abilities.effects.common;
 
-import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -42,28 +42,37 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GainAbilityTargetEOTEffect extends ContinuousEffectImpl {
+public class GainAbilityControlledEffect extends ContinuousEffectImpl {
 
-	private Ability ability;
+	protected Ability ability;
+	protected FilterPermanent permanentFilter;
 
-	public GainAbilityTargetEOTEffect(Ability ability) {
-		super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+	public GainAbilityControlledEffect(Ability ability, Duration duration) {
+		this(ability, duration, new FilterPermanent());
+	}
+
+	public GainAbilityControlledEffect(Ability ability, Duration duration, FilterPermanent filter) {
+		super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
 		this.ability = ability;
+		this.permanentFilter = filter;
 	}
 
 	@Override
 	public boolean apply(Game game) {
-		Permanent permanent = game.getPermanent(this.source.getFirstTarget());
-		if (permanent != null) {
-			permanent.addAbility(ability);
-			return true;
+		permanentFilter.getControllerId().clear();
+		permanentFilter.getControllerId().add(this.source.getControllerId());
+		for (Permanent perm: game.getBattlefield().getActivePermanents(permanentFilter)) {
+			perm.addAbility(ability);
 		}
-		return false;
+		return true;
 	}
 
 	@Override
 	public String getText() {
-		return "Target creature gains " + ability.getRule() + " until end of turn";
+		StringBuilder sb = new StringBuilder();
+		sb.append(permanentFilter.getMessage()).append(" you control gain ").append(ability.getRule());
+		sb.append(" ").append(duration.toString());
+		return sb.toString();
 	}
 
 }

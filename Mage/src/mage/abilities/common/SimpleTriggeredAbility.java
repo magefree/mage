@@ -49,7 +49,7 @@ public class SimpleTriggeredAbility extends TriggeredAbilityImpl {
 	}
 
 	@Override
-	public void handleEvent(GameEvent event, Game game) {
+	public void checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == eventType) {
 			trigger(game, event.getPlayerId());
 		}

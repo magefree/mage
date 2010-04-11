@@ -30,7 +30,6 @@ package mage.filter.common;
 
 import mage.Constants.CardType;
 import mage.filter.FilterPermanent;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -46,14 +45,6 @@ public class FilterPlaneswalkerPermanent extends FilterPermanent {
 	public FilterPlaneswalkerPermanent(String name) {
 		super(name);
 		cardType.add(CardType.PLANESWALKER);
-	}
-
-	@Override
-	public boolean match(Permanent permanent) {
-		if (!super.match(permanent))
-			return false;
-
-		return true;
 	}
 
 }

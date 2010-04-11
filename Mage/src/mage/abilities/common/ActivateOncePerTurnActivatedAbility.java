@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 
@@ -41,13 +42,17 @@ import mage.game.Game;
  */
 public class ActivateOncePerTurnActivatedAbility extends ActivatedAbilityImpl {
 
+	protected UUID effectId;
+
 	public ActivateOncePerTurnActivatedAbility(Zone zone, Effect effect, Cost cost) {
 		super(zone, effect, cost);
+		effectId = effect.getId();
 	}
 
 	@Override
 	public boolean canActivate(UUID playerId, Game game) {
-		if (isActivated(game))
+		//assumes that ability creates a continuous effect
+		if (game.getContinuousEffects().effectExists(this.id))
 			return false;
 		return super.canActivate(playerId, game);
 	}

@@ -29,18 +29,12 @@
 package mage.abilities.keyword;
 
 import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.BoostTargetEffect;
 import mage.game.Game;
-import mage.game.combat.Combat;
-import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,22 +44,16 @@ import mage.target.common.TargetCreaturePermanent;
 public class ExaltedAbility extends TriggeredAbilityImpl {
 
 	public ExaltedAbility() {
-		super(Zone.BATTLEFIELD, new ExaltedEffect());
+		super(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn));
 	}
 
 	@Override
-	public void handleEvent(GameEvent event, Game game) {
-		if (event.getType() == EventType.DECLARED_ATTACKERS ) {
-			Combat combat = game.getCombat();
-			if (combat.getGroups().size() == 1) {
-				CombatGroup group = combat.getGroups().get(0);
-				if (group.getAttackers().size() == 1) {
-					if (game.getPermanent(group.getAttackers().get(0)).getControllerId().equals(this.controllerId)) {
-						this.targets.add(new TargetCreaturePermanent());
-						this.targets.get(0).getTargets().add(group.getAttackers().get(0));
-						trigger(game, event.getPlayerId());
-					}
-				}
+	public void checkTrigger(GameEvent event, Game game) {
+		if (event.getType() == EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(this.controllerId) ) {
+			if (game.getCombat().attacksAlone()) {
+				this.targets.add(new TargetCreaturePermanent());
+				this.targets.get(0).getTargets().add(game.getCombat().getAttackers().get(0));
+				trigger(game, event.getPlayerId());
 			}
 		}
 	}
@@ -73,25 +61,6 @@ public class ExaltedAbility extends TriggeredAbilityImpl {
 	@Override
 	public String getRule() {
 		return "Exalted";
-	}
-
-}
-
-class ExaltedEffect extends ContinuousEffectImpl {
-
-	public ExaltedEffect() {
-		super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-	}
-
-	@Override
-	public boolean apply(Game game) {
-		Permanent permanent = game.getPermanent(this.source.getFirstTarget());
-		if (permanent != null) {
-			permanent.addPower(1);
-			permanent.addToughness(1);
-			return true;
-		}
-		return false;
 	}
 
 }

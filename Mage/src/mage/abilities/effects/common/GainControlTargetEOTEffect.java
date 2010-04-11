@@ -46,6 +46,7 @@ public class GainControlTargetEOTEffect extends ContinuousEffectImpl {
 		super(Duration.EndOfTurn, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
 	}
 
+	@Override
 	public boolean apply(Game game) {
 		Permanent permanent = game.getPermanent(this.source.getFirstTarget());
 		if (permanent != null) {

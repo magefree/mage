@@ -40,6 +40,7 @@ import mage.abilities.TriggeredAbility;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.util.Copier;
+import mage.watchers.Watchers;
 
 public abstract class CardImpl extends MageObjectImpl implements Card {
 
@@ -47,6 +48,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
 	protected UUID ownerId;
 	protected String art = "";
+	protected Watchers watchers = new Watchers();
+	protected UUID expansionSetId;
 	
 	public CardImpl(UUID ownerId, String name, CardType[] cardTypes, String costs) {
 		this.ownerId = ownerId;
@@ -116,9 +119,19 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 	}
 
 	@Override
-	public void handleEvent(Zone zone, GameEvent event, Game game) {
+	public Watchers getWatchers() {
+		return watchers;
+	}
+
+	@Override
+	public void checkTriggers(Zone zone, GameEvent event, Game game) {
 		for (TriggeredAbility ability: abilities.getTriggeredAbilities(zone)) {
-			ability.handleEvent(event, game);
+			ability.checkTrigger(event, game);
 		}
+	}
+
+	@Override
+	public UUID getExpansionSetId() {
+		return expansionSetId;
 	}
 }

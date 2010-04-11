@@ -28,6 +28,7 @@
 
 package mage.filter.common;
 
+import java.util.UUID;
 import mage.filter.Filter;
 import mage.filter.FilterImpl;
 import mage.filter.FilterPlayer;
@@ -45,6 +46,12 @@ public class FilterCreatureOrPlayer extends FilterImpl<Object> implements Filter
 
 	public FilterCreatureOrPlayer() {
 		this("player or creature");
+	}
+
+	public FilterCreatureOrPlayer(String name, UUID controllerId) {
+		this(name);
+		creatureFilter.getControllerId().add(controllerId);
+		playerFilter.getPlayerId().add(controllerId);
 	}
 
 	public FilterCreatureOrPlayer(String name) {

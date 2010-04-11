@@ -31,11 +31,9 @@ package mage.game;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.DeckType;
 import mage.Constants.TableState;
 import mage.MageItem;
 import mage.cards.decks.DeckValidator;
-import mage.cards.decks.DeckValidatorFactory;
 import mage.players.Player;
 
 /**
@@ -47,19 +45,19 @@ public class Table implements MageItem, Serializable {
 	private UUID tableId;
 	private String name;
 	private Game game;
-	private DeckType deckType;
+//	private String deckType;
 	private Seat[] seats;
 	private int numSeats;
 	private DeckValidator validator;
 	private TableState state = TableState.WAITING;
 
-	public Table(Game game, DeckType deckType, List<String> playerTypes) {
+	public Table(Game game, DeckValidator validator, List<String> playerTypes) {
 		tableId = UUID.randomUUID();
 		this.numSeats = game.getNumPlayers();
 		this.game = game;
-		this.deckType = deckType;
 		createSeats(playerTypes);
-		this.validator = DeckValidatorFactory.getInstance().createDeckValidator(deckType);
+		this.validator = validator;
+//		this.validator = DeckValidatorFactory.getInstance().createDeckValidator(deckType);
 	}
 
 	private void createSeats(List<String> playerTypes) {
@@ -87,9 +85,9 @@ public class Table implements MageItem, Serializable {
 		state = TableState.DUELING;
 	}
 
-	public void replayGame() {
-
-	}
+//	public void replayGame() {
+//
+//	}
 
 	public void endGame() {
 		state = TableState.FINISHED;
@@ -99,8 +97,8 @@ public class Table implements MageItem, Serializable {
 		return game.getGameType();
 	}
 
-	public DeckType getDeckType() {
-		return deckType;
+	public String getDeckType() {
+		return validator.getName();
 	}
 
 	public UUID joinTable(Player player, int seatNum) throws GameException {

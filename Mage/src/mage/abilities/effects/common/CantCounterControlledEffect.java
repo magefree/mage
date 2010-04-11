@@ -47,7 +47,7 @@ public class CantCounterControlledEffect extends ReplacementEffectImpl {
 	private FilterSpell filter;
 
 	public CantCounterControlledEffect(FilterSpell filter) {
-		super(Duration.OneShot, Outcome.Benefit);
+		super(Duration.WhileOnStack, Outcome.Benefit);
 		this.filter = filter;
 	}
 

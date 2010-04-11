@@ -28,7 +28,6 @@
 
 package mage.abilities.effects.common;
 
-import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
@@ -47,7 +46,7 @@ public class GainAbilityEquippedEffect  extends ContinuousEffectImpl {
 	protected Ability ability;
 
 	public GainAbilityEquippedEffect(Ability ability) {
-		super(Duration.WhileInPlay, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+		super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
 		this.ability = ability;
 	}
 

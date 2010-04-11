@@ -30,6 +30,7 @@ package mage.abilities;
 
 import java.util.UUID;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
@@ -38,5 +39,7 @@ import mage.game.Game;
 public interface TriggeredAbility extends Ability {
 
 	public void trigger(Game game, UUID controllerId);
-	
+	public void checkTrigger(GameEvent event, Game game);
+	public boolean checkIfClause(Game game);
+
 }

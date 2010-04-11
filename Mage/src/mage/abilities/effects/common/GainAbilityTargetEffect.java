@@ -28,7 +28,6 @@
 
 package mage.abilities.effects.common;
 
-import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
@@ -42,26 +41,31 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GainAbilityControlledEOTEffect extends ContinuousEffectImpl {
+public class GainAbilityTargetEffect extends ContinuousEffectImpl {
 
 	protected Ability ability;
 
-	public GainAbilityControlledEOTEffect(Ability ability) {
-		super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+	public GainAbilityTargetEffect(Ability ability, Duration duration) {
+		super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
 		this.ability = ability;
 	}
 
 	@Override
 	public boolean apply(Game game) {
-		for (Permanent perm: game.getBattlefield().getActivePermanents(this.source.getControllerId(), CardType.CREATURE)) {
-			perm.addAbility(ability);
+		Permanent permanent = game.getPermanent(this.source.getFirstTarget());
+		if (permanent != null) {
+			permanent.addAbility(ability);
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	@Override
 	public String getText() {
-		return "Creatures you control gain " + ability.getRule() + " until end of turn";
+		StringBuilder sb = new StringBuilder();
+		sb.append("Target ").append(this.source.getTargets().get(0).getTargetName()).append(" gains ");
+		sb.append(ability.getRule()).append(" ").append(duration.toString());
+		return sb.toString();
 	}
 
 }

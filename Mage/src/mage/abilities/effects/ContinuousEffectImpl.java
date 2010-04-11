@@ -71,16 +71,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
 		return false;
 	}
 
-//	@Override
-//	public Layer getLayer() {
-//		return layer;
-//	}
-//
-//	@Override
-//	public SubLayer getSubLayer() {
-//		return sublayer;
-//	}
-
 	@Override
 	public Date getTimestamp() {
 		return timestamp;

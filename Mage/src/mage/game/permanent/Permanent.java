@@ -84,7 +84,7 @@ public interface Permanent extends Card {
 	public boolean isLoyaltyUsed();
 
 	public void endOfTurn(Game game);
-	public void handleEvent(GameEvent event, Game game);
+	public void checkTriggers(GameEvent event, Game game);
 	public int getTurnsOnBattlefield();
 
 	public void addPower(int power);

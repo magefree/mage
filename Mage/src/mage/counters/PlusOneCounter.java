@@ -35,7 +35,7 @@ package mage.counters;
 public class PlusOneCounter extends BoostCounter {
 
 	public PlusOneCounter() {
-		super(1, 1);
+		this(1);
 	}
 
 	public PlusOneCounter(int amount) {

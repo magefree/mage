@@ -45,6 +45,7 @@ import mage.cards.Card;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.util.Copier;
+import mage.watchers.Watchers;
 
 /**
  *
@@ -60,6 +61,7 @@ public class Spell implements StackObject, Card {
 		this.controllerId = controllerId;
 	}
 
+	@Override
 	public boolean resolve(Game game) {
 		boolean result = false;
 		if (card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY)) {
@@ -93,108 +95,144 @@ public class Spell implements StackObject, Card {
 		}
 	}
 
+	@Override
 	public void counter(Game game) {
 		game.getPlayers().get(controllerId).putInGraveyard(card, game, false);
 	}
 
+	@Override
 	public UUID getSourceId() {
 		return card.getId();
 	}
 
+	@Override
 	public UUID getControllerId() {
 		return this.controllerId;
 	}
 
+	@Override
 	public String getName() {
 		return card.getName();
 	}
 
+	@Override
 	public List<CardType> getCardType() {
 		return card.getCardType();
 	}
 
+	@Override
 	public List<String> getSubtype() {
 		return card.getSubtype();
 	}
 
+	@Override
 	public List<String> getSupertype() {
 		return card.getSupertype();
 	}
 
+	@Override
 	public Abilities getAbilities() {
 		return card.getAbilities();
 	}
 
+	@Override
 	public ObjectColor getColor() {
 		return card.getColor();
 	}
 
+	@Override
 	public ManaCosts getManaCost() {
 		return card.getManaCost();
 	}
 
+	@Override
 	public MageInt getPower() {
 		return card.getPower();
 	}
 
+	@Override
 	public MageInt getToughness() {
 		return card.getToughness();
 	}
 
+	@Override
 	public MageInt getLoyalty() {
 		return card.getLoyalty();
 	}
 
+	@Override
 	public Zone getZone() {
 		return Zone.STACK;
 	}
 
+	@Override
 	public void setZone(Zone zone) {
 		
 	}
 
+	@Override
 	public UUID getId() {
 		return card.getId();
 	}
 
+	@Override
 	public UUID getOwnerId() {
 		return card.getOwnerId();
 	}
 
+	@Override
 	public String getArt() {
 		return card.getArt();
 	}
 
+	@Override
 	public void addAbility(Ability ability) {
 		
 	}
 
+	@Override
 	public SpellAbility getSpellAbility() {
 		return card.getSpellAbility();
 	}
 
+	@Override
 	public void setControllerId(UUID controllerId) {
 		this.controllerId = controllerId;
 	}
 
+	@Override
 	public void setOwnerId(UUID controllerId) {
 		
 	}
 
+	@Override
 	public Card copy() {
 		return new Copier<Spell>().copy(this);
 	}
 
-	public void handleEvent(GameEvent event, Game game) {
-		handleEvent(Zone.STACK, event, game);
+	@Override
+	public void checkTriggers(GameEvent event, Game game) {
+		checkTriggers(Zone.STACK, event, game);
 	}
 
-	public void handleEvent(Zone zone, GameEvent event, Game game) {
-		card.handleEvent(zone, event, game);
+	@Override
+	public void checkTriggers(Zone zone, GameEvent event, Game game) {
+		card.checkTriggers(zone, event, game);
 	}
 
+	@Override
 	public List<String> getRules() {
 		return card.getRules();
+	}
+
+	@Override
+	public Watchers getWatchers() {
+		return card.getWatchers();
+	}
+
+	@Override
+	public UUID getExpansionSetId() {
+		return card.getExpansionSetId();
 	}
 
 }

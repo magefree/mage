@@ -32,6 +32,8 @@ import java.util.UUID;
 import mage.Constants.TimingRule;
 import mage.Constants.Zone;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.cards.Card;
@@ -45,33 +47,82 @@ import mage.target.Target;
 public abstract class ActivatedAbilityImpl extends AbilityImpl implements ActivatedAbility {
 
 	protected TimingRule timing = TimingRule.INSTANT;
-	protected UUID effectId;
 
-	public ActivatedAbilityImpl(Zone zone, Cost cost) {
+	public ActivatedAbilityImpl(Zone zone) {
 		super(zone);
+	}
+
+	public ActivatedAbilityImpl(Zone zone, Effect effect) {
+		super(zone);
+		if (effect != null) {
+			this.addEffect(effect);
+		}
+	}
+
+	public ActivatedAbilityImpl(Zone zone, Effect effect, ManaCosts cost) {
+		super(zone);
+		if (effect != null) {
+			this.addEffect(effect);
+		}
 		if (cost != null)
-			this.addCost(cost);
+			this.addManaCost(cost);
+	}
+
+	public ActivatedAbilityImpl(Zone zone, Effects effects, ManaCosts cost) {
+		super(zone);
+		if (effects != null) {
+			for (Effect effect: effects) {
+				this.addEffect(effect);
+			}
+		}
+		if (cost != null)
+			this.addManaCost(cost);
 	}
 
 	public ActivatedAbilityImpl(Zone zone, Effect effect, Cost cost) {
 		super(zone);
 		if (effect != null) {
 			this.addEffect(effect);
-			effectId = effect.getId();
 		}
 		if (cost != null)
 			this.addCost(cost);
 	}
 
+	public ActivatedAbilityImpl(Zone zone, Effect effect, Costs<Cost> costs) {
+		super(zone);
+		if (effect != null) {
+			this.addEffect(effect);
+		}
+		if (costs != null) {
+			for (Cost cost: costs) {
+				this.addCost(cost);
+			}
+		}
+	}
+
 	public ActivatedAbilityImpl(Zone zone, Effects effects, Cost cost) {
+		super(zone);
+		if (effects != null) {
+			for (Effect effect: effects) {
+				this.addEffect(effect);
+			}
+		}
+		if (cost != null)
+			this.addCost(cost);
+	}
+
+	public ActivatedAbilityImpl(Zone zone, Effects effects, Costs<Cost> costs) {
 		super(zone);
 		for (Effect effect: effects) {
 			if (effect != null) {
 				this.addEffect(effect);
 			}
 		}
-		if (cost != null)
-			this.addCost(cost);
+		if (costs != null) {
+			for (Cost cost: costs) {
+				this.addCost(cost);
+			}
+		}
 	}
 
 	@Override
@@ -80,22 +131,9 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 		if (!controlsAbility(playerId, game))
 			return false;
 		//20091005 - 602.5d/602.5e
-		if (timing == TimingRule.INSTANT || (game.isMainPhase() &&
-				game.getStack().isEmpty() &&
-				game.getActivePlayerId().equals(playerId)) &&
-				costs.canPay(playerId, game) &&
-				targets.canChoose(sourceId, game)
-			) {
+		if ((timing == TimingRule.INSTANT || game.canPlaySorcery(playerId)) && costs.canPay(playerId, game) && targets.canChoose(sourceId, game)) {
 			return true;
 		}
-		return false;
-	}
-
-	@Override
-	public boolean isActivated(Game game) {
-
-		if (effectId != null)
-			return game.getContinuousEffects().effectExists(this.id);
 		return false;
 	}
 

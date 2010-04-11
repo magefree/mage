@@ -48,7 +48,7 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
 		if (!controlsAbility(playerId, game))
 			return false;
 		//20091005 - 114.2a
-		if (game.getActivePlayerId().equals(playerId) && game.getStack().isEmpty() && game.isMainPhase()) {
+		if (game.canPlaySorcery(playerId)) {
 			return game.getPlayer(playerId).canPlayLand();
 		}
 		return false;
