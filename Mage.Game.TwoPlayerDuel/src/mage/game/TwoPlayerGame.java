@@ -55,11 +55,12 @@ public class TwoPlayerGame extends GameImpl {
 	}
 
 	@Override
-	public void playDrawStep() {
+	public boolean playDrawStep(UUID activePlayerId) {
 		//20091005 - 103.7a
-		if (getTurnNum() != 1 || !state.getTurn().getActivePlayerId().equals(startingPlayerId)) {
-			super.playDrawStep();
+		if (getTurnNum() != 1 || !activePlayerId.equals(startingPlayerId)) {
+			return super.playDrawStep(activePlayerId);
 		}
+		return false;
 	}
 
 	@Override
