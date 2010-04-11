@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.sets.ShardsOfAlara;
 
 /**
  *
@@ -41,6 +42,7 @@ public class WoollyThoctar extends CardImpl {
 
 	public WoollyThoctar(UUID ownerId) {
 		super(ownerId, "Woolly Thoctar", new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
+		this.expansionSetId = ShardsOfAlara.getInstance().getId();
 		this.color.setRed(true);
 		this.color.setGreen(true);
 		this.color.setWhite(true);

@@ -30,6 +30,7 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 import mage.cards.basiclands.Plains;
+import mage.sets.Tenth;
 
 /**
  *
@@ -39,6 +40,7 @@ public class Plains1 extends Plains {
 
 	public Plains1(UUID ownerId) {
 		super(ownerId);
+		this.expansionSetId = Tenth.getInstance().getId();
 		this.art = "80949_typ_reg_sty_010.jpg";
 	}
 

@@ -36,13 +36,15 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.BoostControlledEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.GainAbilityControlledEOTEffect;
-import mage.abilities.effects.common.GainAbilityTargetEOTEffect;
+import mage.abilities.effects.common.GainAbilityControlledEffect;
+import mage.abilities.effects.common.GainAbilityTargetEffect;
 import mage.abilities.effects.common.GainControlTargetEOTEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.DragonToken;
+import mage.sets.ShardsOfAlara;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -55,6 +57,7 @@ public class SarkhanVol extends CardImpl {
 
 	public SarkhanVol(UUID ownerId) {
 		super(ownerId, "Sarkhan Vol", new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
+		this.expansionSetId = ShardsOfAlara.getInstance().getId();
 		this.subtype.add("Sarkhan");
 		this.color.setRed(true);
 		this.color.setGreen(true);
@@ -63,13 +66,13 @@ public class SarkhanVol extends CardImpl {
 
 		Effects effects1 = new Effects(null);
 		effects1.add(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
-		effects1.add(new GainAbilityControlledEOTEffect(HasteAbility.getInstance()));
+		effects1.add(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
 		this.addAbility(new LoyaltyAbility(effects1, 1));
 
 		Effects effects2 = new Effects(null);
 		effects2.add(new GainControlTargetEOTEffect());
 		effects2.add(new UntapTargetEffect());
-		effects2.add(new GainAbilityTargetEOTEffect(HasteAbility.getInstance()));
+		effects2.add(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
 
 		LoyaltyAbility ability = new LoyaltyAbility(effects2, -2);
 		ability.addTarget(new TargetCreaturePermanent());

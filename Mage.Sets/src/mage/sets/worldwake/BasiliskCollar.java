@@ -39,6 +39,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.sets.Worldwake;
 
 /**
  *
@@ -48,6 +49,7 @@ public class BasiliskCollar extends CardImpl {
 
 	public BasiliskCollar(UUID ownerId) {
 		super(ownerId, "Basilisk Collar", new CardType[]{CardType.ARTIFACT}, "{1}");
+		this.expansionSetId = Worldwake.getInstance().getId();
 		this.art = "126549_typ_reg_sty_010.jpg";
 		this.subtype.add("Equipment");
 		this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));

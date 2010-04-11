@@ -33,11 +33,9 @@ import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
-import mage.Constants.PhaseStep;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -50,6 +48,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WolfToken;
 import mage.players.Player;
+import mage.sets.Magic2010;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -62,6 +61,7 @@ public class MasterOfTheWildHunt extends CardImpl {
 
 	public MasterOfTheWildHunt(UUID ownerId) {
 		super(ownerId, "Master of the Wild Hunt", new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+		this.expansionSetId = Magic2010.getInstance().getId();
 		this.subtype.add("Human");
 		this.subtype.add("Shaman");
 		this.color.setGreen(true);

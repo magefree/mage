@@ -39,6 +39,7 @@ import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.sets.Conflux;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -50,6 +51,7 @@ public class PathToExile extends CardImpl {
 
 	public PathToExile(UUID ownerId) {
 		super(ownerId, "Path To Exile", new CardType[]{CardType.INSTANT}, "{W}");
+		this.expansionSetId = Conflux.getInstance().getId();
 		this.color.setWhite(true);
 		this.art = "118686_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());

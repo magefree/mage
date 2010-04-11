@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.abilities.effects.common.DestroyAllNamedPermanentsEffect;
 import mage.cards.CardImpl;
+import mage.sets.AlaraReborn;
 import mage.target.common.TargetNonlandPermanent;
 
 /**
@@ -42,6 +43,7 @@ public class MaelstromPulse extends CardImpl {
 
 	public MaelstromPulse(UUID ownerId) {
 		super(ownerId, "Maelstrom Pulse", new CardType[]{CardType.SORCERY}, "{1}{B}{G}");
+		this.expansionSetId = AlaraReborn.getInstance().getId();
 		this.color.setBlack(true);
 		this.color.setGreen(true);
 		this.art = "121021_typ_reg_sty_010.jpg";

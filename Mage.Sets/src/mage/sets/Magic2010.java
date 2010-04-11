@@ -46,17 +46,25 @@ public class Magic2010 extends ExpansionSet {
 	private Magic2010() {
 		this.name = "Magic 2010";
 		this.cards.add(BaneslayerAngel.class);
+		this.cards.add(BirdsOfParadise.class);
 		this.cards.add(Cancel.class);
 		this.cards.add(CelestialPurge.class);
 		this.cards.add(DragonskullSummit.class);
+		this.cards.add(Flashfreeze.class);
 		this.cards.add(GargoyleCastle.class);
 		this.cards.add(GarrukWildspeaker.class);
+		this.cards.add(GlacialFortress.class);
 		this.cards.add(GreatSableStag.class);
 		this.cards.add(HonorOfThePure.class);
+		this.cards.add(HowlingMine.class);
+		this.cards.add(JaceBeleren.class);
 		this.cards.add(LightningBolt.class);
 		this.cards.add(MasterOfTheWildHunt.class);
 		this.cards.add(RootboundCrag.class);
+		this.cards.add(SafePassage.class);
 		this.cards.add(SunpetalGrove.class);
+		this.cards.add(TerramorphicExpanse.class);
+		this.cards.add(TimeWarp.class);
 		this.cards.add(WhiteKnight.class);
 	}
 }

@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.CascadeAbility;
 import mage.cards.CardImpl;
+import mage.sets.AlaraReborn;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,6 +44,7 @@ public class BituminousBlast extends CardImpl {
 
 	public BituminousBlast(UUID ownerId) {
 		super(ownerId, "Bituminous Blast", new CardType[]{CardType.INSTANT}, "{3}{B}{R}");
+		this.expansionSetId = AlaraReborn.getInstance().getId();
 		this.color.setBlack(true);
 		this.color.setRed(true);
 		this.art = "121045_typ_reg_sty_010.jpg";

@@ -30,6 +30,7 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 import mage.cards.basiclands.Mountain;
+import mage.sets.Tenth;
 
 /**
  *
@@ -39,6 +40,7 @@ public class Mountain1 extends Mountain {
 
 	public Mountain1(UUID ownerId) {
 		super(ownerId);
+		this.expansionSetId = Tenth.getInstance().getId();
 		this.art = "89159_typ_reg_sty_010.jpg";
 	}
 

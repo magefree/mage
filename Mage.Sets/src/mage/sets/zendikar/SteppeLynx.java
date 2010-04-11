@@ -30,10 +30,12 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.MageInt;
 import mage.abilities.common.LandfallAbility;
-import mage.abilities.effects.common.BoostSourceEOTEffect;
+import mage.abilities.effects.common.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.sets.Zendikar;
 
 /**
  *
@@ -43,13 +45,14 @@ public class SteppeLynx extends CardImpl {
 
 	public SteppeLynx(UUID ownerId) {
 		super(ownerId, "Steppe Lynx", new CardType[]{CardType.CREATURE}, "{W}");
+		this.expansionSetId = Zendikar.getInstance().getId();
 		this.subtype.add("Cat");
 		this.color.setWhite(true);
 		this.art = "123546_typ_reg_sty_010.jpg";
 		this.power = new MageInt(0);
 		this.toughness = new MageInt(1);
 
-		this.addAbility(new LandfallAbility(new BoostSourceEOTEffect(2, 2), false));
+		this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
 	}
 
 }

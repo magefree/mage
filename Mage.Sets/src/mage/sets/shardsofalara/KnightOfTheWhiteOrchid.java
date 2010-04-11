@@ -43,6 +43,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
+import mage.sets.ShardsOfAlara;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -53,6 +54,7 @@ public class KnightOfTheWhiteOrchid extends CardImpl {
 
 	public KnightOfTheWhiteOrchid(UUID ownerId) {
 		super(ownerId, "Knight of the White Orchid", new CardType[]{CardType.CREATURE}, "{W}{W}");
+		this.expansionSetId = ShardsOfAlara.getInstance().getId();
 		this.subtype.add("Human");
 		this.subtype.add("Knight");
 		this.color.setWhite(true);
@@ -77,29 +79,35 @@ class KnightOfTheWhiteOrchidAbility extends EntersBattlefieldTriggeredAbility {
 	}
 
 	@Override
-	public void handleEvent(GameEvent event, Game game) {
+	public void checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId()) ) {
 			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
 			if (zEvent.getToZone() == Zone.BATTLEFIELD) {
-				FilterLandPermanent filter = new FilterLandPermanent();
-				filter.getControllerId().clear();
-				filter.getControllerId().add(this.controllerId);
-				int numLands = game.getBattlefield().count(filter);
-				for (UUID opponentId: game.getOpponents(this.controllerId)) {
-					filter.getControllerId().clear();
-					filter.getControllerId().add(opponentId);
-					if (numLands < game.getBattlefield().count(filter)) {
-						trigger(game, this.controllerId);
-						break;
-					}
-				}
+				trigger(game, this.controllerId);
 			}
 		}
 	}
 
 	@Override
+	public boolean checkIfClause(Game game) {
+		FilterLandPermanent filter = new FilterLandPermanent();
+		filter.getControllerId().clear();
+		filter.getControllerId().add(this.controllerId);
+		int numLands = game.getBattlefield().count(filter);
+		for (UUID opponentId: game.getOpponents(this.controllerId)) {
+			filter.getControllerId().clear();
+			filter.getControllerId().add(opponentId);
+			if (numLands < game.getBattlefield().count(filter)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	@Override
 	public String getRule() {
-		return "When Knight of the White Orchid enters the battlefield, if an opponent controls more lands than you, you may " + super.getRule();
+		return "When {this} enters the battlefield, if an opponent controls more lands than you, you may " + super.getRule();
 	}
 
 }

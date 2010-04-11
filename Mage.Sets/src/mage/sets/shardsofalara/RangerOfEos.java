@@ -30,21 +30,13 @@ package mage.sets.shardsofalara;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SearchLibraryRevealPutInHandEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
+import mage.sets.ShardsOfAlara;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -63,6 +55,7 @@ public class RangerOfEos extends CardImpl {
 
 	public RangerOfEos(UUID ownerId) {
 		super(ownerId, "Ranger Of Eos", new CardType[]{CardType.CREATURE}, "{3}{W}");
+		this.expansionSetId = ShardsOfAlara.getInstance().getId();
 		this.color.setWhite(true);
 		this.subtype.add("Human");
 		this.subtype.add("Soldier");
@@ -75,37 +68,3 @@ public class RangerOfEos extends CardImpl {
 	}
 
 }
-
-//class RangerOfEosEffect extends OneShotEffect {
-//
-//	private static FilterCard filter = new FilterCard();
-//
-//	static {
-//		filter.getCardType().add(CardType.CREATURE);
-//		filter.setConvertedManaCost(2);
-//		filter.setConvertedManaCostComparison(ComparisonType.LessThan);
-//	}
-//
-//	@Override
-//	public boolean apply(Game game) {
-//		Player player = game.getPlayer(this.getSource().getControllerId());
-//		TargetCard target = new TargetCard(0, 2, Zone.LIBRARY, filter);
-//		player.searchCards(new CardsImpl(Zone.LIBRARY, player.getLibrary().getCards()), target, game);
-//		Cards cards = new CardsImpl(Zone.REVEALED);
-//		for (UUID cardId: target.getTargets()) {
-//			Card card = player.getLibrary().remove(cardId);
-//			if (card != null) {
-//				player.putInHand(card, game);
-//				cards.add(card);
-//			}
-//		}
-//		if (cards.size() > 0)
-//			player.revealCards(cards, game);
-//		return true;
-//	}
-//
-//	@Override
-//	public String getText() {
-//		return "you may search your library for up to two creature cards with converted mana cost 1 or less, reveal them, and put them into your hand. If you do, shuffle your library.";
-//	}
-//}

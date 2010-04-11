@@ -36,6 +36,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
+import mage.sets.Zendikar;
 
 /**
  *
@@ -45,6 +46,7 @@ public class EmeriaAngel extends CardImpl {
 
 	public EmeriaAngel(UUID ownerId) {
 		super(ownerId, "Emeria Angel", new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+		this.expansionSetId = Zendikar.getInstance().getId();
 		this.subtype.add("Angel");
 		this.color.setWhite(true);
 		this.art = "123678_typ_reg_sty_010.jpg";

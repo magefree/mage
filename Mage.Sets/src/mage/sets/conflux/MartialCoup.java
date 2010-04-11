@@ -38,6 +38,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SoldierToken;
 import mage.players.Player;
+import mage.sets.Conflux;
 
 /**
  *
@@ -47,6 +48,7 @@ public class MartialCoup extends CardImpl {
 
 	public MartialCoup(UUID ownerId) {
 		super(ownerId, "Martial Coup", new CardType[]{CardType.SORCERY}, "{X}{W}{W}");
+		this.expansionSetId = Conflux.getInstance().getId();
 		this.color.setWhite(true);
 		this.art = "118685_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addEffect(new MartialCoupEffect());
@@ -59,9 +61,10 @@ class MartialCoupEffect extends OneShotEffect {
 		super(Outcome.PutCreatureInPlay);
 	}
 
+	@Override
 	public boolean apply(Game game) {
 		Player controller = game.getPlayer(this.source.getControllerId());
-		int amount = this.source.getCosts().getVariableCosts().get(0).getValue();
+		int amount = this.source.getManaCosts().getVariableCosts().get(0).getValue();
 
 		FilterCreaturePermanent filter = new FilterCreaturePermanent();
 		if (amount > 4) {

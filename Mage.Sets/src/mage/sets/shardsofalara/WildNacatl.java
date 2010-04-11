@@ -36,6 +36,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.BoostSourceWhileControlsEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.sets.ShardsOfAlara;
 
 /**
  *
@@ -48,6 +49,7 @@ public class WildNacatl extends CardImpl {
 
 	public WildNacatl(UUID ownerId) {
 		super(ownerId, "Wild Nacatl", new CardType[]{CardType.CREATURE}, "{G}");
+		this.expansionSetId = ShardsOfAlara.getInstance().getId();
 		this.color.setGreen(true);
 		this.subtype.add("Cat");
 		this.subtype.add("Warrior");

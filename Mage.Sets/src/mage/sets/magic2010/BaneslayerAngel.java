@@ -38,6 +38,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.sets.Magic2010;
 
 /**
  *
@@ -47,6 +48,7 @@ public class BaneslayerAngel extends CardImpl {
 
 	public BaneslayerAngel(UUID ownerId) {
 		super(ownerId, "Baneslayer Angel", new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+		this.expansionSetId = Magic2010.getInstance().getId();
 		this.subtype.add("Angel");
 		this.color.setWhite(true);
 		this.art = "";

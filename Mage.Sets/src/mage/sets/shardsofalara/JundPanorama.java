@@ -40,6 +40,7 @@ import mage.abilities.effects.common.SearchLibraryPutInPlayEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.sets.ShardsOfAlara;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -50,6 +51,7 @@ public class JundPanorama extends CardImpl {
 
 	public JundPanorama(UUID ownerId) {
 		super(ownerId, "Jund Panorama", new CardType[]{CardType.LAND}, null);
+		this.expansionSetId = ShardsOfAlara.getInstance().getId();
 		this.art = "116191_typ_reg_sty_010.jpg";
 		this.addAbility(new ColorlessManaAbility());
 		this.addAbility(new JundPanoramaAbility());

@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.sets.Magic2010;
 
 /**
  *
@@ -47,6 +48,7 @@ public class RootboundCrag extends CardImpl {
 
 	public RootboundCrag(UUID ownerId) {
 		super(ownerId, "Rootbound Crag", new CardType[]{CardType.LAND}, null);
+		this.expansionSetId = Magic2010.getInstance().getId();
 		this.art = "121648_typ_reg_sty_010.jpg";
 		this.addAbility(new EntersBattlefieldStaticAbility(new RootboundCragEffect()));
 		this.addAbility(new RedManaAbility());

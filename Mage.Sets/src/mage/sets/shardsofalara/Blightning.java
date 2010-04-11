@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.sets.ShardsOfAlara;
 import mage.target.TargetPlayer;
 
 /**
@@ -43,6 +44,7 @@ public class Blightning extends CardImpl {
 
 	public Blightning(UUID ownerId) {
 		super(ownerId, "Blightning", new CardType[]{CardType.SORCERY}, "{1}{B}{R}");
+		this.expansionSetId = ShardsOfAlara.getInstance().getId();
 		this.color.setBlack(true);
 		this.color.setRed(true);
 		this.art = "115010_typ_reg_sty_010.jpg";

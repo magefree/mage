@@ -34,6 +34,7 @@ import mage.MageInt;
 import mage.abilities.keyword.CascadeAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.sets.AlaraReborn;
 
 /**
  *
@@ -43,6 +44,7 @@ public class BloodbraidElf extends CardImpl {
 
 	public BloodbraidElf(UUID ownerId) {
 		super(ownerId, "Bloodbraid Elf", new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
+		this.expansionSetId = AlaraReborn.getInstance().getId();
 		this.color.setRed(true);
 		this.color.setGreen(true);
 		this.subtype.add("Elf");

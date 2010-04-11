@@ -30,12 +30,9 @@ package mage.sets.planechase;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -43,6 +40,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.sets.Planechase;
 
 /**
  *
@@ -52,6 +50,7 @@ public class SoulWarden extends CardImpl {
 
 	public SoulWarden(UUID ownerId) {
 		super(ownerId, "Soul Warden", new CardType[]{CardType.CREATURE}, "{W}");
+		this.expansionSetId = Planechase.getInstance().getId();
 		this.subtype.add("Human");
 		this.subtype.add("Cleric");
 		this.color.setWhite(true);
@@ -70,7 +69,7 @@ class SoulWardenAbility extends TriggeredAbilityImpl {
 	}
 
 	@Override
-	public void handleEvent(GameEvent event, Game game) {
+	public void checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
 			Permanent permanent = game.getPermanent(event.getTargetId());
 			if (permanent.getCardType().contains(CardType.CREATURE) && !permanent.getId().equals(this.getSourceId()))
@@ -84,38 +83,3 @@ class SoulWardenAbility extends TriggeredAbilityImpl {
 	}
 
 }
-
-//class SoulWardenEffect extends ReplacementEffectImpl {
-//
-//	public SoulWardenEffect() {
-//		super(Duration.WhileInPlay);
-//	}
-//
-//	@Override
-//	public boolean apply(Game game) {
-//		game.getPlayer(source.getControllerId()).gainLife(1, game);
-//		return true;
-//	}
-//
-//	@Override
-//	public boolean replaceEvent(GameEvent event, Game game) {
-//		apply(game);
-//		return false;
-//	}
-//
-//	@Override
-//	public boolean applies(GameEvent event, Game game) {
-//		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
-//			Permanent permanent = game.getPermanent(event.getTargetId());
-//			if (permanent.getCardType().contains(CardType.CREATURE))
-//				return true;
-//		}
-//		return false;
-//	}
-//
-//	@Override
-//	public String getText() {
-//		return "Whenever another creature enters the battlefield, you gain 1 life";
-//	}
-//
-//}

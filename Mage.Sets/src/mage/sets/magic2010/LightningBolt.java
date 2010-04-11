@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.sets.Magic2010;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -42,6 +43,7 @@ public class LightningBolt extends CardImpl {
 
 	public LightningBolt(UUID ownerId) {
 		super(ownerId, "Lightning Bolt", new CardType[]{CardType.INSTANT}, "{R}");
+		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setRed(true);
 		this.art = "121669_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

@@ -37,6 +37,7 @@ import mage.abilities.effects.common.CantCounterSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.sets.Magic2010;
 
 /**
  *
@@ -46,6 +47,7 @@ public class GreatSableStag extends CardImpl {
 
 	public GreatSableStag(UUID ownerId) {
 		super(ownerId, "Great Sable Stag", new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
+		this.expansionSetId = Magic2010.getInstance().getId();
 		this.subtype.add("Elk");
 		this.color.setGreen(true);
 		this.art = "122172_typ_reg_sty_010.jpg";

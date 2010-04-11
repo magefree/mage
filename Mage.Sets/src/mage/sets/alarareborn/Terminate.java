@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.abilities.effects.common.DestroyNoRegenTargetEffect;
 import mage.cards.CardImpl;
+import mage.sets.AlaraReborn;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -42,6 +43,7 @@ public class Terminate extends CardImpl {
 
 	public Terminate(UUID ownerId) {
 		super(ownerId, "Terminate", new CardType[]{CardType.INSTANT}, "{B}{R}");
+		this.expansionSetId = AlaraReborn.getInstance().getId();
 		this.color.setBlack(true);
 		this.color.setRed(true);
 		this.art = "115230_typ_reg_sty_010.jpg";

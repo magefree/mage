@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.sets.Magic2010;
 
 /**
  *
@@ -47,6 +48,7 @@ public class DragonskullSummit extends CardImpl {
 
 	public DragonskullSummit(UUID ownerId) {
 		super(ownerId, "Dragonskull Summit", new CardType[]{CardType.LAND}, null);
+		this.expansionSetId = Magic2010.getInstance().getId();
 		this.art = "121671_typ_reg_sty_010.jpg";
 		this.addAbility(new EntersBattlefieldStaticAbility(new DragonskullSummitEffect()));
 		this.addAbility(new BlackManaAbility());

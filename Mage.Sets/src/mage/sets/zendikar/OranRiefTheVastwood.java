@@ -43,6 +43,7 @@ import mage.counters.PlusOneCounter;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.sets.Zendikar;
 
 /**
  *
@@ -52,6 +53,7 @@ public class OranRiefTheVastwood extends CardImpl {
 
 	public OranRiefTheVastwood(UUID ownerId) {
 		super(ownerId, "Oran-Rief, the Vastwood", new CardType[]{CardType.LAND}, null);
+		this.expansionSetId = Zendikar.getInstance().getId();
 		this.art = "123692_typ_reg_sty_010.jpg";
 		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
 		this.addAbility(new GreenManaAbility());
@@ -66,6 +68,7 @@ class OranRiefTheVastwoodEffect extends OneShotEffect {
 		super(Outcome.BoostCreature);
 	}
 
+	@Override
 	public boolean apply(Game game) {
 		FilterPermanent filter = new FilterPermanent();
 		filter.getCardType().add(CardType.CREATURE);

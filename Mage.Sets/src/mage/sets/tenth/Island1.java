@@ -30,6 +30,7 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 import mage.cards.basiclands.Island;
+import mage.sets.Tenth;
 
 /**
  *
@@ -39,6 +40,7 @@ public class Island1 extends Island {
 
 	public Island1(UUID ownerId) {
 		super(ownerId);
+		this.expansionSetId = Tenth.getInstance().getId();
 		this.art = "80957_typ_reg_sty_010.jpg";
 	}
 

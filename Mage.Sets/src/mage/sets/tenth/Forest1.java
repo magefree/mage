@@ -30,6 +30,7 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 import mage.cards.basiclands.Forest;
+import mage.sets.Tenth;
 
 /**
  *
@@ -39,6 +40,7 @@ public class Forest1 extends Forest {
 
 	public Forest1(UUID ownerId) {
 		super(ownerId);
+		this.expansionSetId = Tenth.getInstance().getId();
 		this.art = "89160_typ_reg_sty_010.jpg";
 	}
 

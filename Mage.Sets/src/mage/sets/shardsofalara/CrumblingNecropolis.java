@@ -36,6 +36,7 @@ import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.sets.ShardsOfAlara;
 
 /**
  *
@@ -45,6 +46,7 @@ public class CrumblingNecropolis extends CardImpl {
 
 	public CrumblingNecropolis(UUID ownerId) {
 		super(ownerId, "Crumbling Necropolis", new CardType[]{CardType.LAND}, null);
+		this.expansionSetId = ShardsOfAlara.getInstance().getId();
 		this.art = "115145_typ_reg_sty_010.jpg";
 		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
 		this.addAbility(new RedManaAbility());

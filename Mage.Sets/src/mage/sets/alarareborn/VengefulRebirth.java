@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.sets.AlaraReborn;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -49,6 +50,7 @@ public class VengefulRebirth extends CardImpl {
 
 	public VengefulRebirth(UUID ownerId) {
 		super(ownerId, "Vengeful Rebirth", new CardType[]{CardType.SORCERY}, "{4}{R}{G}");
+		this.expansionSetId = AlaraReborn.getInstance().getId();
 		this.color.setRed(true);
 		this.color.setGreen(true);
 		this.art = "115104_typ_reg_sty_010.jpg";

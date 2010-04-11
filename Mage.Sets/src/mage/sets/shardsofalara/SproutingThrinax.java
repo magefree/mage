@@ -35,6 +35,7 @@ import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.SaprolingToken;
+import mage.sets.ShardsOfAlara;
 
 /**
  *
@@ -46,6 +47,7 @@ public class SproutingThrinax extends CardImpl {
 
 	public SproutingThrinax(UUID ownerId) {
 		super(ownerId, "Sprouting Thrinax", new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
+		this.expansionSetId = ShardsOfAlara.getInstance().getId();
 		this.color.setBlack(true);
 		this.color.setRed(true);
 		this.color.setGreen(true);

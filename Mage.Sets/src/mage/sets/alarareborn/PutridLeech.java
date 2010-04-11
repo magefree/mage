@@ -30,12 +30,14 @@ package mage.sets.alarareborn;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.effects.common.BoostSourceEOTEffect;
+import mage.abilities.effects.common.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.sets.AlaraReborn;
 
 /**
  *
@@ -45,6 +47,7 @@ public class PutridLeech extends CardImpl {
 
 	public PutridLeech(UUID ownerId) {
 		super(ownerId, "Putrid Leech", new CardType[]{CardType.CREATURE}, "{B}{G}");
+		this.expansionSetId = AlaraReborn.getInstance().getId();
 		this.color.setBlack(true);
 		this.color.setGreen(true);
 		this.subtype.add("Zombie");
@@ -52,6 +55,6 @@ public class PutridLeech extends CardImpl {
 		this.art = "120997_typ_reg_sty_010.jpg";
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
-		this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEOTEffect(2, 2), new PayLifeCost(2)));
+		this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new PayLifeCost(2)));
 	}
 }

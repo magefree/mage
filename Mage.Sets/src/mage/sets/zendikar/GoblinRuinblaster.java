@@ -39,6 +39,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.sets.Zendikar;
 import mage.target.common.TargetNonBasicLandPermanent;
 
 /**
@@ -49,6 +50,7 @@ public class GoblinRuinblaster extends CardImpl {
 
 	public GoblinRuinblaster(UUID ownerId) {
 		super(ownerId, "Goblin Ruinblaster", new CardType[]{CardType.CREATURE}, "{2}{R}");
+		this.expansionSetId = Zendikar.getInstance().getId();
 		this.color.setRed(true);
 		this.subtype.add("Goblin");
 		this.subtype.add("Shaman");
@@ -58,7 +60,7 @@ public class GoblinRuinblaster extends CardImpl {
 		this.addAbility(HasteAbility.getInstance());
 		KickerAbility ability = new KickerAbility(new EntersBattlefieldEffect(new DestroyTargetEffect()), false);
 		ability.getTargets().add(new TargetNonBasicLandPermanent());
-		ability.getCosts().add(new ColoredManaCost(ColoredManaSymbol.R));
+		ability.addManaCost(new ColoredManaCost(ColoredManaSymbol.R));
 		this.addAbility(ability);
 
 	}

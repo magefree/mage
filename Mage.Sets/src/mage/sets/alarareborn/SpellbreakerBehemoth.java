@@ -37,6 +37,7 @@ import mage.abilities.effects.common.CantCounterControlledEffect;
 import mage.abilities.effects.common.CantCounterSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
+import mage.sets.AlaraReborn;
 
 /**
  *
@@ -46,6 +47,7 @@ public class SpellbreakerBehemoth extends CardImpl {
 
 	public SpellbreakerBehemoth(UUID ownerId) {
 		super(ownerId, "Spellbreaker Behemoth", new CardType[]{CardType.CREATURE}, "{1}{R}{G}{G}");
+		this.expansionSetId = AlaraReborn.getInstance().getId();
 		this.color.setRed(true);
 		this.color.setGreen(true);
 		this.subtype.add("Beast");

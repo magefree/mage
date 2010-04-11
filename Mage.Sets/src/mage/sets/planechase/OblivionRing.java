@@ -39,6 +39,7 @@ import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterNonlandPermanent;
+import mage.sets.Planechase;
 import mage.target.TargetPermanent;
 
 /**
@@ -49,6 +50,7 @@ public class OblivionRing extends CardImpl {
 
 	public OblivionRing(UUID ownerId) {
 		super(ownerId, "Oblivion Ring", new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
+		this.expansionSetId = Planechase.getInstance().getId();
 		this.color.setWhite(true);
 		this.art = "115005_typ_reg_sty_010.jpg";
 		FilterNonlandPermanent filter = new FilterNonlandPermanent();

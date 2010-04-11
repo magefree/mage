@@ -36,6 +36,7 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.sets.Conflux;
 
 /**
  *
@@ -45,6 +46,7 @@ public class NobleHierarch extends CardImpl {
 
 	public NobleHierarch(UUID ownerId) {
 		super(ownerId, "Noble Hierarch", new CardType[]{CardType.CREATURE}, "{G}");
+		this.expansionSetId = Conflux.getInstance().getId();
 		this.color.setGreen(true);
 		this.subtype.add("Human");
 		this.subtype.add("Druid");

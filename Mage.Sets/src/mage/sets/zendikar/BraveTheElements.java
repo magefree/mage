@@ -30,7 +30,8 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.abilities.effects.common.GainAbilityControlledEOTEffect;
+import mage.Constants.Duration;
+import mage.abilities.effects.common.GainAbilityControlledEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
@@ -38,6 +39,7 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.sets.Zendikar;
 
 /**
  *
@@ -47,6 +49,7 @@ public class BraveTheElements extends CardImpl {
 
 	public BraveTheElements(UUID ownerId) {
 		super(ownerId, "Brave the Elements", new CardType[]{CardType.INSTANT}, "{W}");
+		this.expansionSetId = Zendikar.getInstance().getId();
 		this.color.setWhite(true);
 		this.art = "123638_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addChoice(new ChoiceColor());
@@ -55,13 +58,13 @@ public class BraveTheElements extends CardImpl {
 
 }
 
-class BraveTheElementsEffect extends GainAbilityControlledEOTEffect {
+class BraveTheElementsEffect extends GainAbilityControlledEffect {
 
 	FilterCreaturePermanent filter1 = new FilterCreaturePermanent();
-	FilterCard filter2 = new FilterCard();
+	FilterCard filter2;
 
 	public BraveTheElementsEffect() {
-		super(new ProtectionAbility(new FilterCard()));
+		super(new ProtectionAbility(new FilterCard()), Duration.EndOfTurn);
 		filter1.setUseColor(true);
 		filter1.getColor().setWhite(true);
 		filter2 = (FilterCard)((ProtectionAbility)ability).getFilter();
@@ -76,7 +79,7 @@ class BraveTheElementsEffect extends GainAbilityControlledEOTEffect {
 		filter1.getControllerId().clear();
 		filter1.getControllerId().add(source.getControllerId());
 		for (Permanent perm: game.getBattlefield().getActivePermanents(filter1)) {
-			perm.getAbilities().add(ability);
+			perm.addAbility(ability);
 		}
 		return true;
 	}

@@ -36,6 +36,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.sets.Magic2010;
 
 /**
  *
@@ -47,11 +48,12 @@ public class HonorOfThePure extends CardImpl {
 
 	public HonorOfThePure(UUID ownerId) {
 		super(ownerId, "Honor of the Pure", new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setWhite(true);
 		this.art = "";
 		filter.setUseColor(true);
 		filter.getColor().setWhite(true);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileInPlay, filter)));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter)));
 	}
 
 }

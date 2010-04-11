@@ -45,9 +45,12 @@ public class Conflux extends ExpansionSet {
 
 	private Conflux() {
 		this.name = "Conflux";
+		this.cards.add(FontOfMythos.class);
+		this.cards.add(KnightOfTheReliquary.class);
 		this.cards.add(MartialCoup.class);
 		this.cards.add(NobleHierarch.class);
 		this.cards.add(PathToExile.class);
+		this.cards.add(Thornling.class);
 	}
 
 }

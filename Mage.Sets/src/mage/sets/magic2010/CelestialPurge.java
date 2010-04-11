@@ -31,11 +31,11 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.TargetController;
-import mage.ObjectColor;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
+import mage.sets.Magic2010;
 import mage.target.TargetPermanent;
 
 /**
@@ -55,6 +55,7 @@ public class CelestialPurge extends CardImpl {
 
 	public CelestialPurge(UUID ownerId) {
 		super(ownerId, "Celestial Purge", new CardType[]{CardType.INSTANT}, "{1}{W}");
+		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setWhite(true);
 		this.art = "118751_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetPermanent(filter, TargetController.ANY));

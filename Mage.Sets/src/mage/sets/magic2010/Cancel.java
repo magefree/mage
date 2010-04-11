@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterSpell;
+import mage.sets.Magic2010;
 import mage.target.TargetSpell;
 
 /**
@@ -41,13 +41,12 @@ import mage.target.TargetSpell;
  */
 public class Cancel extends CardImpl {
 
-	private static FilterSpell filter = new FilterSpell();
-
 	public Cancel(UUID ownerId) {
 		super(ownerId, "Cancel", new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
+		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setBlue(true);
 		this.art = "116179_typ_reg_sty_010.jpg";
-		this.getSpellAbility().addTarget(new TargetSpell(filter));
+		this.getSpellAbility().addTarget(new TargetSpell());
 		this.getSpellAbility().addEffect(new CounterTargetEffect());
 	}
 

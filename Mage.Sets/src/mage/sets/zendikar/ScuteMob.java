@@ -39,7 +39,7 @@ import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
+import mage.sets.Zendikar;
 
 /**
  *
@@ -49,6 +49,7 @@ public class ScuteMob extends CardImpl {
 
 	public ScuteMob(UUID ownerId) {
 		super(ownerId, "Scute Mob", new CardType[]{CardType.CREATURE}, "{G}");
+		this.expansionSetId = Zendikar.getInstance().getId();
 		this.color.setGreen(true);
 		this.subtype.add("Insect");
 		this.art = "123606_typ_reg_sty_010.jpg";
@@ -68,16 +69,17 @@ class ScuteMobAbility extends TriggeredAbilityImpl {
 	}
 
 	@Override
-	public void handleEvent(GameEvent event, Game game) {
-		if (event.getType() == EventType.UPKEEP_STEP_PRE) {
-			Permanent permanent = game.getPermanent(this.sourceId);
-			if (game.getActivePlayerId().equals(permanent.getControllerId())) {
-				filter.getControllerId().clear();
-				filter.getControllerId().add(permanent.getControllerId());
-				if (game.getBattlefield().count(filter) >= 5)
-					trigger(game, permanent.getControllerId());
-			}
+	public void checkTrigger(GameEvent event, Game game) {
+		if (event.getType() == EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
+			trigger(game, this.controllerId);
 		}
+	}
+
+	@Override
+	public boolean checkIfClause(Game game) {
+		filter.getControllerId().clear();
+		filter.getControllerId().add(this.controllerId);
+		return game.getBattlefield().count(filter) >= 5;
 	}
 
 	@Override

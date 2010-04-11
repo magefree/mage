@@ -32,16 +32,18 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldStaticAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.common.AddPlusOneCountersSourceEffect;
 import mage.abilities.effects.common.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.EntersBattlefieldTappedEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
+import mage.sets.Worldwake;
 
 /**
  *
@@ -51,7 +53,9 @@ public class RagingRavine extends CardImpl {
 
 	public RagingRavine(UUID ownerId) {
 		super(ownerId, "Raging Ravine", new CardType[]{CardType.LAND}, null);
+		this.expansionSetId = Worldwake.getInstance().getId();
 		this.art = "126537_typ_reg_sty_010.jpg";
+		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new RedManaAbility());
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new RagingRavineToken()), new ManaCosts("{2}{R}{G}")));
@@ -65,6 +69,8 @@ class RagingRavineToken extends Token {
 		super("", "3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\"");
 		cardType.add(CardType.CREATURE);
 		subtype.add("Elemental");
+		color.setRed(true);
+		color.setGreen(true);
 		power = new MageInt(3);
 		toughness = new MageInt(3);
 		addAbility(new AttacksTriggeredAbility(new AddPlusOneCountersSourceEffect(1), false));

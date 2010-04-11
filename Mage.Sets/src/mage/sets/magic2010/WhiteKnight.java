@@ -35,6 +35,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.sets.Magic2010;
 
 /**
  *
@@ -44,6 +45,7 @@ public class WhiteKnight extends CardImpl {
 
 	public WhiteKnight(UUID ownerId) {
 		super(ownerId, "White Knight", new CardType[]{CardType.CREATURE}, "{W}{W}");
+		this.expansionSetId = Magic2010.getInstance().getId();
 		this.subtype.add("Human");
 		this.subtype.add("Knight");
 		this.color.setWhite(true);

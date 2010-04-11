@@ -34,6 +34,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.sets.Zendikar;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -44,13 +45,14 @@ public class BurstLightning extends CardImpl {
 
 	public BurstLightning(UUID ownerId) {
 		super(ownerId, "Burst Lightning", new CardType[]{CardType.INSTANT}, "{R}");
+		this.expansionSetId = Zendikar.getInstance().getId();
 		this.color.setRed(true);
 		this.art = "123560_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 		this.getSpellAbility().addEffect(new DamageTargetEffect(2));
 		KickerAbility ability = new KickerAbility(new DamageTargetEffect(4), true);
-		ability.getTargets().add(this.getSpellAbility().getTargets().get(0));
-		ability.getCosts().add(new GenericManaCost(4));
+		ability.addTarget(this.getSpellAbility().getTargets().get(0));
+		ability.addManaCost(new GenericManaCost(4));
 		this.addAbility(ability);
 	}
 

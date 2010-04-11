@@ -39,6 +39,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.sets.Zendikar;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -49,6 +50,7 @@ public class MarshFlats extends CardImpl {
 
 	public MarshFlats(UUID ownerId) {
 		super(ownerId, "Marsh Flats", new CardType[]{CardType.LAND}, null);
+		this.expansionSetId = Zendikar.getInstance().getId();
 		this.art = "123707_typ_reg_sty_010.jpg";
 		this.addAbility(new MarshFlatsAbility());
 	}

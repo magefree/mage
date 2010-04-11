@@ -32,7 +32,6 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -42,6 +41,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
+import mage.sets.Magic2010;
 
 /**
  *
@@ -51,6 +51,7 @@ public class GargoyleCastle extends CardImpl {
 
 	public GargoyleCastle(UUID ownerId) {
 		super(ownerId, "Gargoyle Castle", new CardType[]{CardType.LAND}, null);
+		this.expansionSetId = Magic2010.getInstance().getId();
 		this.art = "122169_typ_reg_sty_010.jpg";
 		this.addAbility(new ColorlessManaAbility());
 		this.addAbility(new GargoyleCastleAbility());
