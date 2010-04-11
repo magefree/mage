@@ -32,7 +32,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.DeckType;
 import mage.Constants.TableState;
 import mage.game.Seat;
 import mage.game.Table;
@@ -45,7 +44,7 @@ public class TableView implements Serializable {
 	
 	private UUID tableId;
 	private String gameType;
-	private DeckType deckType;
+	private String deckType;
 	private TableState tableState;
 	private List<SeatView> seats = new ArrayList<SeatView>();
 
@@ -67,7 +66,7 @@ public class TableView implements Serializable {
 		return gameType;
 	}
 
-	public DeckType getDeckType() {
+	public String getDeckType() {
 		return deckType;
 	}
 

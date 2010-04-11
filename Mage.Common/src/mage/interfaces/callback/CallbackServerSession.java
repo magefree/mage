@@ -111,11 +111,11 @@ public class CallbackServerSession {
 			waitingForCallback = true;
 			waiting.signal();
 			while (callback.getMethod() == null) {
-				logger.fine("waiting for callback");
+				logger.finer("waiting for callback");
 				callbackCalled.await();
 			}
 			waitingForCallback = false;
-			logger.fine("callback called:" + callback.getMethod());
+			logger.finer("callback called:" + callback.getMethod());
 			return callback;
 		}
 		finally {
@@ -133,7 +133,7 @@ public class CallbackServerSession {
 		lock.lock();
 		try {
 			while (!waitingForCallback) {
-				logger.fine("waiting for callback state to call:" + call.getMethod());
+				logger.finer("waiting for callback state to call:" + call.getMethod());
 				waiting.await();
 			}
 			callback.setMethod(call.getMethod());

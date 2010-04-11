@@ -30,8 +30,11 @@ package mage.view;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import mage.MageObject;
+import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.game.Game;
 
 /**
  *
@@ -49,8 +52,16 @@ public class CardsView extends ArrayList<CardView> {
 	}
 
 	public CardsView(Cards cards) {
-		for (Card card: cards.values()) {
-			this.add(new CardView(card));
+		if (cards != null)
+			for (Card card: cards.values()) {
+				this.add(new CardView(card));
+			}
+	}
+
+	public CardsView(Collection<? extends Ability> abilities, Game game) {
+		for (Ability ability: abilities) {
+			String sourceName = game.getPermanent(ability.getSourceId()).getName();
+			this.add(new AbilityView(ability, sourceName));
 		}
 	}
 

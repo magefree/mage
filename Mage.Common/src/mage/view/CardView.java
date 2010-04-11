@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.ObjectColor;
-import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.Card;
 import mage.game.permanent.Permanent;
 

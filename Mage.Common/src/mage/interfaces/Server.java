@@ -33,8 +33,8 @@ import java.rmi.RemoteException;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.DeckType;
 import mage.cards.decks.DeckCardLists;
+import mage.game.GameException;
 import mage.interfaces.callback.CallbackServer;
 import mage.view.TableView;
 
@@ -50,10 +50,11 @@ public interface Server extends Remote, CallbackServer {
 
 	public String[] getGameTypes() throws RemoteException, MageException;
 	public String[] getPlayerTypes() throws RemoteException, MageException;
+	public String[] getDeckTypes() throws RemoteException, MageException;
 
 	//table methods
-	public TableView createTable(UUID sessionId, UUID roomId, String gameType, DeckType deckType, List<String> playerTypes) throws RemoteException, MageException;
-	public boolean joinTable(UUID sessionId, UUID roomId, UUID tableId, int seatNum, String name, DeckCardLists deckList) throws RemoteException, MageException;
+	public TableView createTable(UUID sessionId, UUID roomId, String gameType, String deckType, List<String> playerTypes) throws RemoteException, MageException;
+	public boolean joinTable(UUID sessionId, UUID roomId, UUID tableId, int seatNum, String name, DeckCardLists deckList) throws RemoteException, MageException, GameException;
 	public boolean watchTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
 	public boolean replayTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
 	public void leaveTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;

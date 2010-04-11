@@ -58,7 +58,7 @@ public class StackAbilityView extends CardView {
 
 	@Override
 	protected String formatRule(String rule) {
-		String newRule = rule.replace("{this}", this.name);
+		String newRule = rule.replace("{this}", this.sourceName);
 		newRule.replace("{source}", this.sourceName);
 		return newRule;
 	}

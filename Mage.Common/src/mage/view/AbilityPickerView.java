@@ -33,7 +33,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import mage.abilities.ActivatedAbility;
+import mage.abilities.Ability;
 
 /**
  *
@@ -43,8 +43,8 @@ public class AbilityPickerView implements Serializable {
 
 	private Map<UUID, String> choices = new HashMap<UUID, String>();
 
-	public AbilityPickerView(Collection<? extends ActivatedAbility> abilities) {
-		for (ActivatedAbility ability: abilities) {
+	public AbilityPickerView(Collection<? extends Ability> abilities) {
+		for (Ability ability: abilities) {
 			choices.put(ability.getId(), ability.getRule());
 		}
 	}

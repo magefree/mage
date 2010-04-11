@@ -31,7 +31,7 @@ package mage.view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.game.GameState;
+import mage.counters.Counter;
 import mage.game.permanent.Permanent;
 
 /**
@@ -46,6 +46,7 @@ public class PermanentView extends CardView {
 	private boolean faceUp;
 	private int damage;
 	private List<UUID> attachments;
+	private List<CounterView> counters;
 
 	public PermanentView(Permanent permanent) {
 		super(permanent);
@@ -57,6 +58,12 @@ public class PermanentView extends CardView {
 		if (permanent.getAttachments().size() > 0) {
 			attachments = new ArrayList<UUID>();
 			attachments.addAll(permanent.getAttachments());
+		}
+		if (permanent.getCounters().size() > 0) {
+			counters = new ArrayList<CounterView>();
+			for (Counter counter: permanent.getCounters().values()) {
+				counters.add(new CounterView(counter));
+			}
 		}
 	}
 
@@ -82,5 +89,9 @@ public class PermanentView extends CardView {
 
 	public List<UUID> getAttachments() {
 		return attachments;
+	}
+
+	public List<CounterView> getCounters() {
+		return counters;
 	}
 }

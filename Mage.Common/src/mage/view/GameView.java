@@ -73,13 +73,13 @@ public class GameView implements Serializable {
 		for (ExileZone exileZone: game.getExile().getExileZones()) {
 			exiles.add(new ExileView(exileZone));
 		}
-		this.phase = game.getPhase();
-		this.step = game.getStep();
+		this.phase = game.getTurn().getPhase();
+		this.step = game.getTurn().getStep();
 		this.turn = game.getTurnNum();
-		if (game.getTurn().getActivePlayerId() != null)
-			this.activePlayerName = game.getPlayer(game.getTurn().getActivePlayerId()).getName();
-		if (game.getTurn().getPriorityPlayerId() != null)
-			this.priorityPlayerName = game.getPlayer(game.getTurn().getPriorityPlayerId()).getName();
+		if (game.getActivePlayerId() != null)
+			this.activePlayerName = game.getPlayer(game.getActivePlayerId()).getName();
+		if (game.getPriorityPlayerId() != null)
+			this.priorityPlayerName = game.getPlayer(game.getPriorityPlayerId()).getName();
 		for (CombatGroup combatGroup: game.getCombat().getGroups()) {
 			combat.add(new CombatGroupView(combatGroup, game));
 		}
