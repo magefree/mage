@@ -339,9 +339,9 @@ is divided into following sections:
             -->
     <target depends="init" name="deps-jar" unless="no.deps">
         <ant antfile="${project.Mage}/build.xml" inheritall="false" target="jar"/>
-        <ant antfile="${project.Mage_AI}/build.xml" inheritall="false" target="jar"/>
         <ant antfile="${project.Mage_Common}/build.xml" inheritall="false" target="jar"/>
-        <ant antfile="${project.Mage_HumanPlayer}/build.xml" inheritall="false" target="jar"/>
+        <ant antfile="${project.Mage_Player_AI}/build.xml" inheritall="false" target="jar"/>
+        <ant antfile="${project.Mage_Player_Human}/build.xml" inheritall="false" target="jar"/>
         <ant antfile="${project.Mage_Sets}/build.xml" inheritall="false" target="jar"/>
     </target>
     <target depends="init,-check-automatic-build,-clean-after-automatic-build" name="-verify-automatic-build"/>
@@ -696,9 +696,9 @@ is divided into following sections:
             -->
     <target depends="init" name="deps-clean" unless="no.deps">
         <ant antfile="${project.Mage}/build.xml" inheritall="false" target="clean"/>
-        <ant antfile="${project.Mage_AI}/build.xml" inheritall="false" target="clean"/>
         <ant antfile="${project.Mage_Common}/build.xml" inheritall="false" target="clean"/>
-        <ant antfile="${project.Mage_HumanPlayer}/build.xml" inheritall="false" target="clean"/>
+        <ant antfile="${project.Mage_Player_AI}/build.xml" inheritall="false" target="clean"/>
+        <ant antfile="${project.Mage_Player_Human}/build.xml" inheritall="false" target="clean"/>
         <ant antfile="${project.Mage_Sets}/build.xml" inheritall="false" target="clean"/>
     </target>
     <target depends="init" name="-do-clean">
