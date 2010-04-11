@@ -65,24 +65,6 @@ public final class Constants {
 
 	}
 
-	public enum DeckType {
-		CONSTRUCTED_STANDARD ("Constructed - Standard"),
-		CONSTRUCTED_EXTENDED ("Constructed - Extended"),
-		LIMITED ("Limited");
-
-		private String text;
-
-		DeckType(String text) {
-			this.text = text;
-		}
-
-		@Override
-		public String toString() {
-			return text;
-		}
-
-	}
-
 	public enum CardType {
 		ARTIFACT ("Artifact"),
 		CREATURE ("Creature"),
@@ -107,13 +89,24 @@ public final class Constants {
 	}
 
 	public enum Duration {
-		OneShot,
-		OneUse,
-		EndOfGame,
-		WhileInPlay,
-		EndOfTurn,
-		EndOfCombat,
-		Conditional
+		OneUse(""),
+		EndOfGame("for the rest of the game"),
+		WhileOnBattlefield(""),
+		WhileOnStack(""),
+		EndOfTurn("until end of turn"),
+		EndOfCombat("until end of combat");
+
+		private String text;
+
+		Duration(String text) {
+			this.text = text;
+		}
+
+		@Override
+		public String toString() {
+			return text;
+		}
+
 	}
 
 	public enum Layer {
@@ -212,6 +205,7 @@ public final class Constants {
 		UnboostCreature(false),
 		AddAbility(true),
 		GainLife(true),
+		ExtraTurn(true),
 		BecomeCreature(true),
 		PutCreatureInPlay(true),
 		PutCardInPlay(true),
@@ -219,6 +213,7 @@ public final class Constants {
 		GainControl(true),
 		DrawCard(true),
 		Discard(false),
+		Sacrifice(false),
 		Exile(false),
 		Protect(true),
 		PutManaInPool(true),
