@@ -68,7 +68,19 @@ public class KickerAbility extends StaticAbility {
 
 	@Override
 	public String getRule() {
-		return "Kicker " + costs.getText() + ":" + effects.getText() + (replaces?" instead":"");
+		StringBuilder sb = new StringBuilder();
+		sb.append("Kicker");
+		if (manaCosts.size() > 0) {
+			sb.append(manaCosts.getText());
+			if (costs.size() > 0)
+				sb.append(",");
+		}
+		if (costs.size() > 0)
+			sb.append(costs.getText());
+		sb.append(":").append(effects.getText());
+		if (replaces)
+			sb.append(" instead");
+		return sb.toString();
 	}
 
 }
