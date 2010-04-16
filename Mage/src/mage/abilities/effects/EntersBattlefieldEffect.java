@@ -90,9 +90,4 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
 		return "When {this} enters the battlefield, " + baseEffects.getText();
 	}
 
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Game game) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
 }
