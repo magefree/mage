@@ -53,6 +53,6 @@ public class PlayTargetWithoutPayingManaEffect extends OneShotEffect {
 
 	@Override
 	public String getText() {
-		return "you may put " + this.getSource().getTargets().get(0).getTargetName() + " from you hand onto the battlefield";
+		return "you may put " + this.getSource().getTargets().get(0).getTargetName() + " from your hand onto the battlefield";
 	}
 }
