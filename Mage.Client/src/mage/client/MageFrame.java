@@ -117,11 +117,11 @@ public class MageFrame extends javax.swing.JFrame {
 		this.gamePane.watchGame(gameId);
 	}
 
-	public void replayGame(UUID gameId) {
+	public void replayGame() {
 		this.tablesPane.hideTables();
 		this.tablesPane.setVisible(false);
 		this.gamePane.setVisible(true);
-		this.gamePane.replayGame(gameId);
+		this.gamePane.replayGame();
 	}
 
     /** This method is called from within the constructor to
@@ -242,7 +242,7 @@ public class MageFrame extends javax.swing.JFrame {
         });
         mageToolbar.add(btnExit);
 
-        lblStatus.setText("Not connected");
+        lblStatus.setText("Not connected ");
         mageToolbar.add(Box.createHorizontalGlue());
         mageToolbar.add(lblStatus);
 
@@ -250,15 +250,15 @@ public class MageFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
-            .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, 1066, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1144, Short.MAX_VALUE)
+            .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, 1144, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(mageToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 840, Short.MAX_VALUE))
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE))
         );
 
         pack();

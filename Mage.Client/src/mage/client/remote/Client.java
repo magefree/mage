@@ -69,7 +69,7 @@ public class Client implements CallbackClient {
 			gameStarted(data[0], data[1]);
 		}
 		else if (callback.getMethod().equals("replayGame")) {
-			replayGame((UUID) callback.getData());
+			replayGame();
 		}
 		else if (callback.getMethod().equals("watchGame")) {
 			watchGame((UUID) callback.getData());
@@ -158,9 +158,9 @@ public class Client implements CallbackClient {
 		logger.info("Watching game " + gameId);
 	}
 
-	protected void replayGame(UUID gameId) {
-		frame.replayGame(gameId);
-		logger.info("Replaying game " + gameId);
+	protected void replayGame() {
+		frame.replayGame();
+		logger.info("Replaying game");
 	}
 
 }

@@ -64,13 +64,6 @@ public class NewTableDialog extends MageDialog {
     public NewTableDialog() {
         initComponents();
 		this.player2Panel.setVisible(false);
-		//for testing only
-//		this.player1Panel.setPlayerName("human");
-//		this.player2Panel.setPlayerName("computer");
-//		//this.cbPlayer2Type.setSelectedItem(PlayerType.COMPUTER);
-//		this.player2Panel.setVisible(true);
-//		this.player1Panel.setDeckFile("test.dck");
-//		this.player2Panel.setDeckFile("test.dck");
 
     }
 
@@ -206,31 +199,20 @@ public class NewTableDialog extends MageDialog {
 			List<String> playerTypes = new ArrayList<String>();
 			playerTypes.add("Human");
 			playerTypes.add((String) this.cbPlayer2Type.getSelectedItem());
-			table = session.createTable(
-					roomId,
-					(String)this.cbGameType.getSelectedItem(),
-					(String)this.cbDeckType.getSelectedItem(),
-					playerTypes
-			);
-			if (session.joinTable(
-					roomId,
-					table.getTableId(),
-					0,
-					this.player1Panel.getPlayerName(),
-					DeckCardLists.load(this.player1Panel.getDeckFile())
-			)) {
+			table = session.createTable(roomId,	(String)this.cbGameType.getSelectedItem(), (String)this.cbDeckType.getSelectedItem(), playerTypes);
+			if (session.joinTable(roomId, table.getTableId(), 0, this.player1Panel.getPlayerName(), DeckCardLists.load(this.player1Panel.getDeckFile()))) {
 				if (!this.cbPlayer2Type.getSelectedItem().equals("Human")) {
-					if (session.joinTable(
-							roomId,
-							table.getTableId(),
-							1,
-							this.player2Panel.getPlayerName(),
-							DeckCardLists.load(this.player2Panel.getDeckFile())
-					)) {
+					if (session.joinTable(roomId, table.getTableId(), 1, this.player2Panel.getPlayerName(), DeckCardLists.load(this.player2Panel.getDeckFile()))) {
 						this.setVisible(false);
 						return;
 					}
+					JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
 				}
+				else {
+					this.setVisible(false);
+					return;
+				}
+				JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		} catch (Exception ex) {
 			handleError(ex);

@@ -166,14 +166,14 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 
 	protected String getText(String cardType) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(card.getName()).append("\n");
+		sb.append(card.getName());
 		if (card.getManaCost().size() > 0) {
-			sb.append(card.getManaCost()).append("\n");
+			sb.append("\n").append(card.getManaCost());
 		}
-		sb.append(cardType).append("\n");
-		sb.append(card.getColor().toString()).append("\n");
+		sb.append("\n").append(cardType);
+		sb.append("\n").append(card.getColor().toString());
 		for (String rule: getRules()) {
-			sb.append(rule).append("\n");
+			sb.append("\n").append(rule);
 		}
 		if (card.getCardTypes().contains(CardType.CREATURE)) {
 			sb.append(card.getPower()).append("/").append(card.getToughness());

@@ -56,8 +56,8 @@ public class GamePane extends MagePane {
 		gamePanel.watchGame(gameId);
 	}
 
-	public void replayGame(UUID gameId) {
-		gamePanel.replayGame(gameId);
+	public void replayGame() {
+		gamePanel.replayGame();
 	}
 
     /** This method is called from within the constructor to

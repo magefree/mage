@@ -92,7 +92,7 @@ public class Session {
 			gameTypes = server.getGameTypes();
 			deckTypes = server.getDeckTypes();
 			logger.info("Connected to RMI server at " + serverName + ":" + port);
-			frame.setStatusText("Connected to " + serverName + ":" + port);
+			frame.setStatusText("Connected to " + serverName + ":" + port + " ");
 			frame.enableButtons();
 		} catch (MageException ex) {
 			Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
@@ -115,7 +115,7 @@ public class Session {
 			} catch (MageException ex) {
 				logger.log(Level.SEVERE, "Error disconnecting ...", ex);
 			}
-			frame.setStatusText("Not connected");
+			frame.setStatusText("Not connected ");
 		}
 	}
 

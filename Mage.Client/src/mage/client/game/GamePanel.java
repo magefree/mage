@@ -89,6 +89,7 @@ public class GamePanel extends javax.swing.JPanel {
 		this.pnlReplay.setVisible(false);
 		this.btnStopWatching.setVisible(false);
 		this.setVisible(true);
+		this.chatPanel.clear();
 		this.chatPanel.connect(session.getGameChatId(gameId));
 		if (!session.joinGame(gameId))
 			hideGame();
@@ -102,22 +103,25 @@ public class GamePanel extends javax.swing.JPanel {
 		this.feedbackPanel.clear();
 		this.btnConcede.setVisible(false);
 		this.btnStopWatching.setVisible(true);
+		this.btnCheat.setVisible(false);
 		this.pnlReplay.setVisible(false);
 		this.setVisible(true);
+		this.chatPanel.clear();
 		this.chatPanel.connect(session.getGameChatId(gameId));
 		if (!session.watchGame(gameId))
 			hideGame();
 	}
 
-	public synchronized void replayGame(UUID gameId) {
-		this.gameId = gameId;
+	public synchronized void replayGame() {
 		session = MageFrame.getSession();
 		session.setGame(this);
 		this.feedbackPanel.clear();
 		this.btnConcede.setVisible(false);
 		this.btnStopWatching.setVisible(false);
+		this.btnCheat.setVisible(false);
 		this.pnlReplay.setVisible(true);
 		this.setVisible(true);
+		this.chatPanel.clear();
 		if (!session.replayGame())
 			hideGame();
 	}
@@ -132,6 +136,7 @@ public class GamePanel extends javax.swing.JPanel {
 
 	public synchronized void init(GameView game) {
 		combat.init(gameId, bigCard);
+		combat.setLocation(300, 200);
 		MageFrame.getDesktop().add(combat, JLayeredPane.PALETTE_LAYER);
 		this.players.clear();
 		this.pnlBattlefield.removeAll();
@@ -169,7 +174,6 @@ public class GamePanel extends javax.swing.JPanel {
 		}
 		if (game.getCombat().size() > 0) {
 			combat.showDialog(game.getCombat());
-			combat.setLocation(300, 200);
 		}
 		else {
 			combat.hideDialog();
@@ -230,7 +234,7 @@ public class GamePanel extends javax.swing.JPanel {
 	}
 
 	public void pickAbility(AbilityPickerView choices) {
-		this.abilityPicker.show(choices, MouseInfo.getPointerInfo().getLocation());
+		this.abilityPicker.show(choices, MageFrame.getDesktop().getMousePosition());
 	}
 
 	public void revealCards(String name, CardsView cards) {
@@ -297,9 +301,10 @@ public class GamePanel extends javax.swing.JPanel {
         pnlBattlefield = new javax.swing.JPanel();
         chatPanel = new mage.client.chat.ChatPanel();
 
-        jSplitPane1.setDividerLocation(1000);
+        jSplitPane1.setBorder(null);
         jSplitPane1.setDividerSize(3);
         jSplitPane1.setResizeWeight(1.0);
+        jSplitPane1.setMinimumSize(new java.awt.Dimension(26, 48));
 
         pnlGameInfo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -467,7 +472,7 @@ public class GamePanel extends javax.swing.JPanel {
                 .addComponent(stack, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(pnlReplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlGameInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -482,7 +487,7 @@ public class GamePanel extends javax.swing.JPanel {
         pnlHand.setLayout(pnlHandLayout);
         pnlHandLayout.setHorizontalGroup(
             pnlHandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(hand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
+            .addComponent(hand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
         );
         pnlHandLayout.setVerticalGroup(
             pnlHandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -500,18 +505,20 @@ public class GamePanel extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlHand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlBattlefield, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)))
+                    .addComponent(pnlBattlefield, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(pnlBattlefield, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
+                .addComponent(pnlBattlefield, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(pnlHand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(pnlGameInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jSplitPane1.setLeftComponent(jPanel3);
+
+        chatPanel.setMinimumSize(new java.awt.Dimension(100, 48));
         jSplitPane1.setRightComponent(chatPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

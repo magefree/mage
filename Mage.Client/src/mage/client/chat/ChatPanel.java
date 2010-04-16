@@ -74,6 +74,11 @@ public class ChatPanel extends javax.swing.JPanel {
 		txtConversation.setCaretPosition(txtConversation.getText().length() - 1);
 	}
 
+	public void clear() {
+		this.txtConversation.selectAll();
+		this.txtConversation.replaceSelection("");
+	}
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
