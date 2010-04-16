@@ -62,7 +62,9 @@ public class Step implements Serializable {
 			case BEGIN_COMBAT:
 				return game.playBeginCombatStep(activePlayerId);
 			case DECLARE_ATTACKERS:
-				return game.playDeclareAttackersStep(activePlayerId);
+				if (game.getPlayer(activePlayerId).hasAvailableAttackers(game))
+					return game.playDeclareAttackersStep(activePlayerId);
+				return false;
 			case DECLARE_BLOCKERS:
 				if (!game.getCombat().noAttackers())
 					return game.playDeclareBlockersStep(activePlayerId);
