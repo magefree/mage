@@ -39,7 +39,7 @@ import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.effects.common.ExileSourceEffect;
+import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.game.events.GameEvent;
@@ -52,6 +52,8 @@ import mage.watchers.Watchers;
  * @author BetaSteward_at_googlemail.com
  */
 public class Spell implements StackObject, Card {
+
+//	private static final transient Copier<Spell> copier = new Copier<Spell>();
 
 	private Card card;
 	private UUID controllerId;
@@ -79,7 +81,7 @@ public class Spell implements StackObject, Card {
 				if (!replaced)
 					result = ability.resolve(game);
 
-				if (ability.getEffects().contains(ExileSourceEffect.getInstance()))
+				if (ability.getEffects().contains(ExileSpellEffect.getInstance()))
 					game.getExile().getPermanentExile().add(card);
 				else
 					game.getPlayers().get(controllerId).putInGraveyard(card, game, false);
