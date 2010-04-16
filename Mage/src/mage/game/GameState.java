@@ -64,7 +64,7 @@ import mage.watchers.Watchers;
  */
 public class GameState implements Serializable {
 
-	private static final transient Copier<GameState> copier = new Copier<GameState>();
+//	private static final transient Copier<GameState> copier = new Copier<GameState>();
 	private Players players = new Players();
 	private UUID activePlayerId;
 	private UUID priorityPlayerId;
@@ -232,12 +232,6 @@ public class GameState implements Serializable {
 		}
 		return null;
 	}
-
-    public GameState copy() {
-
-    	return copier.copy(this);
-
-    }
 
 	public void restore(GameState state) {
 		this.stack = state.stack;
