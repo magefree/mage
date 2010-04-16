@@ -128,7 +128,7 @@ public abstract class TargetImpl implements Target {
 	@Override
 	public boolean choose(Outcome outcome, Game game) {
 		Player player = game.getPlayer(this.source.getControllerId());
-		while (!isChosen()) {
+		while (!isChosen() && !doneChosing()) {
 			chosen = targets.size() >= minNumberOfTargets;
 			if (!player.chooseTarget(outcome, this, game)) {
 				return chosen;
@@ -140,7 +140,7 @@ public abstract class TargetImpl implements Target {
 				break;
 			}
 		}
-		return true;
+		return chosen = true;
 	}
 
 

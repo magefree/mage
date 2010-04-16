@@ -36,6 +36,7 @@ import java.util.Date;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Formatter;
 import java.util.logging.Handler;
+import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
@@ -54,6 +55,14 @@ public class Logging {
 		return logger;
 	}
 
+	public static Level getLevel(Logger logger) {
+		Level level = logger.getLevel();
+		while (level == null && logger.getParent() != null) {
+			logger = logger.getParent();
+			level = logger.getLevel();
+		}
+		return level;
+	}
 }
 
 class LogFormatter extends Formatter {

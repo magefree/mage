@@ -85,6 +85,10 @@ public class TargetPermanent extends TargetObject {
 		return false;
 	}
 
+	public void setTargetController(TargetController controller) {
+		this.controller = controller;
+	}
+
 	protected void setController(UUID controllerId, Game game) {
 		filter.getControllerId().clear();
 		switch (controller) {

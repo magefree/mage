@@ -30,7 +30,6 @@ package mage.players;
 
 import java.io.Serializable;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.Iterator;
@@ -48,6 +47,8 @@ import mage.util.Copier;
  * @author BetaSteward_at_googlemail.com
  */
 public class Library implements Serializable {
+
+//	private static final transient Copier<Library> copier = new Copier<Library>();
 
 	private static Random rnd = new Random();
 
@@ -79,6 +80,10 @@ public class Library implements Serializable {
 			emptyDraw = true;
 		}
 		return card;
+	}
+
+	public Card getFromTop(Game game) {
+		return library.peekFirst();
 	}
 
 	public void putOnTop(Card card, Game game) {

@@ -29,6 +29,7 @@
 package mage.watchers;
 
 import java.util.ArrayList;
+import java.util.UUID;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -50,9 +51,9 @@ public class Watchers extends ArrayList<Watcher> {
 		}
 	}
 
-	public Watcher get(String key) {
+	public Watcher get(UUID controllerId, String key) {
 		for (Watcher watcher: this) {
-			if (watcher.getKey().equals(key))
+			if (watcher.getControllerId().equals(controllerId) && watcher.getKey().equals(key))
 				return watcher;
 		}
 		return null;

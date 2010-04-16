@@ -136,6 +136,7 @@ public interface Player extends MageItem {
 	
 	public void declareAttacker(UUID attackerId, UUID defenderId, Game game);
 	public void declareBlocker(UUID blockerId, UUID attackerId, Game game);
+	public boolean hasAvailableAttackers(Game game);
 	
 	public void beginTurn();
 	public void endOfTurn(Game game);

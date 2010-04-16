@@ -82,7 +82,7 @@ public abstract class GameImpl implements Game, Serializable {
 	protected GameState state;
 	protected UUID startingPlayerId;
 	protected UUID choosingPlayerId;
-	protected String winner;
+	protected Player winner;
 	protected GameStates gameStates;
 
 	public GameImpl() {
@@ -147,7 +147,9 @@ public abstract class GameImpl implements Game, Serializable {
 
 	@Override
 	public String getWinner() {
-		return winner;
+		if (winner == null)
+			return "Game is a draw";
+		return "Player " + winner.getName() + " is the winner";
 	}
 
 	@Override
@@ -225,16 +227,18 @@ public abstract class GameImpl implements Game, Serializable {
 			}
 		}
 
+		winner = findWinner();
+
+		saveState();
+	}
+
+	protected Player findWinner() {
 		for (Player player: state.getPlayers().values()) {
 			if (player.hasWon() || (!player.hasLost() && !player.hasLeft())) {
-				winner = "Player " + player.getName() + " is the winner";
-				break;
+				return player;
 			}
 		}
-
-		if (winner == null)
-			winner = "Game is a draw";
-		saveState();
+		return null;
 	}
 
 	protected void endOfTurn() {

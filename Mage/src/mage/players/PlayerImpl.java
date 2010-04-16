@@ -51,6 +51,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.decks.Deck;
 import mage.counters.Counters;
+import mage.filter.common.FilterCreatureForAttack;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
@@ -67,6 +68,7 @@ import mage.util.Copier;
 
 public abstract class PlayerImpl implements Player, Serializable {
 
+//	private static final transient Copier<Player> copier = new Copier<Player>();
 	private static final long serialVersionUID = 1L;
 
 	protected UUID playerId;
@@ -659,6 +661,18 @@ public abstract class PlayerImpl implements Player, Serializable {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public boolean hasAvailableAttackers(Game game) {
+		return getAvailableAttackers(game).size() > 0;
+	}
+
+	protected List<Permanent> getAvailableAttackers(Game game) {
+		FilterCreatureForAttack attackFilter = new FilterCreatureForAttack();
+		attackFilter.getControllerId().add(playerId);
+		List<Permanent> attackers = game.getBattlefield().getActivePermanents(attackFilter);
+		return attackers;
 	}
 
 }

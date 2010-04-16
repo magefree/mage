@@ -32,7 +32,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.URLClassLoader;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -97,7 +96,7 @@ public class Copier<T> {
 	public T uncompressCopy(byte[] buffer) {
         T copy = null;
         try {
-			ObjectInputStream in = new ObjectInputStream(new GZIPInputStream(new ByteArrayInputStream(buffer)));
+			ObjectInputStream in = new CopierObjectInputStream(loader, new GZIPInputStream(new ByteArrayInputStream(buffer)));
 			copy = (T) in.readObject();
         }
         catch(IOException e) {
