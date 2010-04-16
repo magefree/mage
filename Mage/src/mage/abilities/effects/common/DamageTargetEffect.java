@@ -47,6 +47,10 @@ public class DamageTargetEffect extends OneShotEffect {
 		this.amount = amount;
 	}
 
+	public int getAmount() {
+		return amount;
+	}
+
 	@Override
 	public boolean apply(Game game) {
 		Permanent permanent = game.getPermanent(this.source.getFirstTarget());
