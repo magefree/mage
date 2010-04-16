@@ -48,6 +48,7 @@ public class Worldwake extends ExpansionSet {
 		this.cards.add(BasiliskCollar.class);
 		this.cards.add(CelestialColonnade.class);
 		this.cards.add(RagingRavine.class);
+		this.cards.add(SearingBlaze.class);
 		this.cards.add(SejiriSteppe.class);
 		this.cards.add(StirringWildwood.class);
 		this.cards.add(StoneforgeMystic.class);

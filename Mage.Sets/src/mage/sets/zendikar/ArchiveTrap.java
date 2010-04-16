@@ -84,7 +84,7 @@ class ArchiveTrapAlternativeCost extends AlternativeCost {
 
 	@Override
 	public boolean isAvailable(Game game) {
-		Watcher watcher = game.getState().getWatchers().get("LibrarySearched");
+		Watcher watcher = game.getState().getWatchers().get(this.ability.getControllerId(), "LibrarySearched");
 		if (watcher != null && watcher.conditionMet())
 			return true;
 		return false;

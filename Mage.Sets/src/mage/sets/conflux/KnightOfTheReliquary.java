@@ -54,6 +54,7 @@ import mage.game.permanent.Permanent;
 import mage.sets.Conflux;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetLandPermanent;
+import mage.target.common.TargetSacrificePermanent;
 
 /**
  *
@@ -80,10 +81,9 @@ public class KnightOfTheReliquary extends CardImpl {
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
 		TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
-		TargetLandPermanent sac = new TargetLandPermanent(1, 1, filter, TargetController.YOU);
 		Costs costs = new CostsImpl();
 		costs.add(new TapSourceCost());
-		costs.add(new SacrificeTargetCost(sac));
+		costs.add(new SacrificeTargetCost(new TargetSacrificePermanent(1, 1, filter)));
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KnightOfTheReliquaryEffect()));
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay), costs));
 	}

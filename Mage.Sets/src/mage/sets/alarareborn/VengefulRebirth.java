@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileSourceEffect;
+import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -57,7 +57,7 @@ public class VengefulRebirth extends CardImpl {
 		this.getSpellAbility().addTarget(new TargetCardInGraveyard());
 		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 		this.getSpellAbility().addEffect(new VengefulRebirthEffect());
-		this.getSpellAbility().addEffect(ExileSourceEffect.getInstance());
+		this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
 	}
 
 }

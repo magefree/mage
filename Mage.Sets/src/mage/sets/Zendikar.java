@@ -52,6 +52,7 @@ public class Zendikar extends ExpansionSet {
 		this.cards.add(ConquerorsPledge.class);
 		this.cards.add(DayOfJudgment.class);
 		this.cards.add(EmeriaAngel.class);
+		this.cards.add(GoblinGuide.class);
 		this.cards.add(GoblinRuinblaster.class);
 		this.cards.add(KabiraCrossroads.class);
 		this.cards.add(LotusCobra.class);

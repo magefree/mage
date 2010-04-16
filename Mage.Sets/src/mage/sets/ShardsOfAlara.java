@@ -51,6 +51,7 @@ public class ShardsOfAlara extends ExpansionSet {
 		this.cards.add(BroodmateDragon.class);
 		this.cards.add(CrumblingNecropolis.class);
 		this.cards.add(ElspethKnightErrant.class);
+		this.cards.add(HellsThunder.class);
 		this.cards.add(JundPanorama.class);
 		this.cards.add(KnightOfTheWhiteOrchid.class);
 		this.cards.add(RafiqOfTheMany.class);

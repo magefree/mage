@@ -45,11 +45,14 @@ public class Magic2010 extends ExpansionSet {
 
 	private Magic2010() {
 		this.name = "Magic 2010";
+		this.cards.add(BallLightning.class);
 		this.cards.add(BaneslayerAngel.class);
 		this.cards.add(BirdsOfParadise.class);
 		this.cards.add(Cancel.class);
 		this.cards.add(CelestialPurge.class);
 		this.cards.add(DragonskullSummit.class);
+		this.cards.add(Earthquake.class);
+		this.cards.add(EliteVanguard.class);
 		this.cards.add(Flashfreeze.class);
 		this.cards.add(GargoyleCastle.class);
 		this.cards.add(GarrukWildspeaker.class);
