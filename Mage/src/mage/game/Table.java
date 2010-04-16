@@ -32,7 +32,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.TableState;
-import mage.MageItem;
 import mage.cards.decks.DeckValidator;
 import mage.players.Player;
 
@@ -40,24 +39,22 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Table implements MageItem, Serializable {
+public class Table implements Serializable {
 
 	private UUID tableId;
 	private String name;
-	private Game game;
-//	private String deckType;
+	private String gameType;
 	private Seat[] seats;
 	private int numSeats;
 	private DeckValidator validator;
 	private TableState state = TableState.WAITING;
 
-	public Table(Game game, DeckValidator validator, List<String> playerTypes) {
+	public Table(String gameType, DeckValidator validator, List<String> playerTypes) {
 		tableId = UUID.randomUUID();
-		this.numSeats = game.getNumPlayers();
-		this.game = game;
+		this.numSeats = playerTypes.size();
+		this.gameType = gameType;
 		createSeats(playerTypes);
 		this.validator = validator;
-//		this.validator = DeckValidatorFactory.getInstance().createDeckValidator(deckType);
 	}
 
 	private void createSeats(List<String> playerTypes) {
@@ -69,32 +66,27 @@ public class Table implements MageItem, Serializable {
 		}
 	}
 
-	@Override
 	public UUID getId() {
 		return tableId;
 	}
 
-	public void setGame(Game game) {
-		this.game = game;
-	}
+//	public void setGame(Game game) {
+//		this.game = game;
+//	}
 
-	public void initGame() throws GameException {
+	public void initGame(Game game) throws GameException {
 		for (int i = 0; i < numSeats; i++ ) {
 			game.addPlayer(seats[i].getPlayer());
 		}
 		state = TableState.DUELING;
 	}
 
-//	public void replayGame() {
-//
-//	}
-
 	public void endGame() {
 		state = TableState.FINISHED;
 	}
 
 	public String getGameType() {
-		return game.getGameType();
+		return gameType;
 	}
 
 	public String getDeckType() {
@@ -131,7 +123,6 @@ public class Table implements MageItem, Serializable {
 			if (seats[i].getPlayer().getId().equals(playerId))
 				seats[i].setPlayer(null);
 		}
-	
 	}
 
 	public TableState getState() {
@@ -141,10 +132,5 @@ public class Table implements MageItem, Serializable {
 	public DeckValidator getValidator() {
 		return this.validator;
 	}
-
-//	public void checkTable() {
-//		if (game != null && state == TableState.DUELING && game.isGameOver())
-//			state = TableState.FINISHED;
-//	}
 
 }
