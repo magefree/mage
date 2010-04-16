@@ -41,7 +41,6 @@ import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
@@ -57,8 +56,6 @@ import mage.util.Copier;
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class AbilityImpl implements Ability, Serializable {
-
-	protected static Copier<Ability> copier = new Copier<Ability>();
 
 	protected UUID id;
 	protected UUID controllerId;
@@ -283,6 +280,6 @@ public abstract class AbilityImpl implements Ability, Serializable {
 
 	@Override
 	public Ability copy() {
-		return copier.copy(this);
+		return new Copier<Ability>().copy(this);
 	}
 }
