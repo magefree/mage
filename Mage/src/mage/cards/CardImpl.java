@@ -44,8 +44,6 @@ import mage.watchers.Watchers;
 
 public abstract class CardImpl extends MageObjectImpl implements Card {
 
-	private static final transient Copier<Card> copier = new Copier<Card>();
-
 	protected UUID ownerId;
 	protected String art = "";
 	protected Watchers watchers = new Watchers();
@@ -115,7 +113,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
 	@Override
 	public Card copy() {
-		return copier.copy(this);
+		return new Copier<Card>().copy(this);
 	}
 
 	@Override
