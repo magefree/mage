@@ -58,6 +58,8 @@ import mage.abilities.costs.mana.MonoHybridManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffect;
+import mage.abilities.effects.common.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -84,6 +86,7 @@ import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetDiscard;
+import mage.target.common.TargetSacrificePermanent;
 import mage.util.Copier;
 import mage.util.Logging;
 import mage.util.TreeNode;
@@ -154,6 +157,17 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 				}
 			}
 		}
+		if (target instanceof TargetSacrificePermanent) {
+			List<Permanent> targets;
+			targets = threats(playerId, (TargetPermanent) target, game);
+			Collections.reverse(targets);
+			for (Permanent permanent: targets) {
+				if (target.canTarget(permanent.getId(), game)) {
+					target.addTarget(permanent.getId(), game);
+					return true;
+				}
+			}
+		}
 		if (target instanceof TargetPermanent) {
 			List<Permanent> targets;
 			if (outcome.isGood()) {
@@ -175,6 +189,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 	@Override
 	public void priority(Game game) {
 		logger.fine("priority");
+		UUID opponentId = game.getOpponents(playerId).get(0);
 		if (game.getActivePlayerId().equals(playerId)) {
 			if (game.isMainPhase() && game.getStack().isEmpty()) {
 				playLand(game);
@@ -185,8 +200,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 					break;
 				case DRAW:
 					logState(game);
-				case DECLARE_BLOCKERS:
-					playRemoval(game.getCombat().getAttackers(), game);
 				case PRECOMBAT_MAIN:
 					findPlayables(game);
 					if (playableAbilities.size() > 0) {
@@ -196,10 +209,20 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 									if (this.activateAbility(ability, game))
 										return;
 								}
+								if (ability.getEffects().hasOutcome(Outcome.PutCreatureInPlay)) {
+									if (getOpponentBlockers(opponentId, game).size() <= 1)
+										if (this.activateAbility(ability, game))
+											return;
+								}
 							}
 						}
 					}
 					break;
+				case DECLARE_BLOCKERS:
+					playRemoval(game.getCombat().getBlockers(), game);
+					playDamage(game.getCombat().getBlockers(), game);
+				case END_COMBAT:
+					playDamage(game.getCombat().getBlockers(), game);
 				case POSTCOMBAT_MAIN:
 					findPlayables(game);
 					if (game.getStack().isEmpty()) {
@@ -214,8 +237,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 						if (playableAbilities.size() > 0) {
 							for (ActivatedAbility ability: playableAbilities) {
 								if (ability.canActivate(playerId, game)) {
-									if (this.activateAbility(ability, game))
-										return;
+									if (!(ability.getEffects().get(0) instanceof BecomesCreatureSourceEOTEffect)) {
+										if (this.activateAbility(ability, game))
+											return;
+									}
 								}
 							}
 						}
@@ -225,6 +250,13 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 		}
 		else {
 			//respond to opponent events
+			switch (game.getTurn().getStep()) {
+				case DECLARE_ATTACKERS:
+					playRemoval(game.getCombat().getAttackers(), game);
+					playDamage(game.getCombat().getAttackers(), game);
+				case END_COMBAT:
+					playDamage(game.getCombat().getAttackers(), game);
+			}
 		}
 		this.passed = true;
 	}
@@ -481,7 +513,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 	public void selectAttackers(Game game) {
 		logger.fine("selectAttackers");
 		UUID opponentId = game.getOpponents(playerId).get(0);
-		Attackers attackers = getAvailableAttackers(game);
+		Attackers attackers = getPotentialAttackers(game);
 		List<Permanent> blockers = getOpponentBlockers(opponentId, game);
 		List<Permanent> actualAttackers = new ArrayList<Permanent>();
 		if (blockers.isEmpty()) {
@@ -564,12 +596,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 		return result;
 	}
 
-	protected Attackers getAvailableAttackers(Game game) {
+	protected Attackers getPotentialAttackers(Game game) {
 		logger.fine("getAvailableAttackers");
-		FilterCreatureForAttack attackFilter = new FilterCreatureForAttack();
-		attackFilter.getControllerId().add(playerId);
 		Attackers attackers = new Attackers();
-		List<Permanent> creatures = game.getBattlefield().getActivePermanents(attackFilter);
+		List<Permanent> creatures = super.getAvailableAttackers(game);
 		for (Permanent creature: creatures) {
 			int potential = combatPotential(creature, game);
 			if (potential > 0) {
@@ -732,14 +762,15 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 		logger.fine(sb.toString());
 	}
 
-	private void playRemoval(List<UUID> attackers, Game game) {
-		for (UUID attackerId: attackers) {
+	private void playRemoval(List<UUID> creatures, Game game) {
+		for (UUID creatureId: creatures) {
 			for (Card card: this.playableInstant) {
 				if (card.getSpellAbility().canActivate(playerId, game)) {
 					for (Effect effect: card.getSpellAbility().getEffects()) {
-						if (effect.getOutcome().equals(Outcome.DestroyPermanent) || effect.getOutcome().equals(Outcome.Damage)) {
-							if (card.getSpellAbility().getTargets().get(0).canTarget(attackerId, game)) {
-
+						if (effect.getOutcome().equals(Outcome.DestroyPermanent)) {
+							if (card.getSpellAbility().getTargets().get(0).canTarget(creatureId, game)) {
+								if (this.activateAbility(card.getSpellAbility(), game))
+									return;
 							}
 						}
 					}
@@ -748,17 +779,24 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 		}
 	}
 
-	protected int evaluateState(GameState state, Game game) {
-		int value = life;
-		Player opponent = game.getPlayer(game.getOpponents(playerId).get(0));
-		if (opponent.getLife() <= 0)
-			return Integer.MAX_VALUE;
-		value -= opponent.getLife();
-		for (Permanent permanent: state.getBattlefield().getAllPermanents()) {
-			
+	private void playDamage(List<UUID> creatures, Game game) {
+		for (UUID creatureId: creatures) {
+			Permanent creature = game.getPermanent(creatureId);
+			for (Card card: this.playableInstant) {
+				if (card.getSpellAbility().canActivate(playerId, game)) {
+					for (Effect effect: card.getSpellAbility().getEffects()) {
+						if (effect instanceof DamageTargetEffect) {
+							if (card.getSpellAbility().getTargets().get(0).canTarget(creatureId, game)) {
+								if (((DamageTargetEffect)effect).getAmount() > (creature.getPower().getValue() - creature.getDamage())) {
+									if (this.activateAbility(card.getSpellAbility(), game))
+										return;
+								}
+							}
+						}
+					}
+				}
+			}
 		}
-		return value;
 	}
-
 }
 
