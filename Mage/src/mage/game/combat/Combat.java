@@ -64,6 +64,14 @@ public class Combat implements Serializable {
 		return attackers;
 	}
 
+	public List<UUID> getBlockers() {
+		List<UUID> blockers = new ArrayList<UUID>();
+		for (CombatGroup group: groups) {
+			blockers.addAll(group.blockers);
+		}
+		return blockers;
+	}
+
 	public void clear() {
 		groups.clear();
 		defenders.clear();
