@@ -28,19 +28,21 @@
 
 package mage.game;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import mage.util.Copier;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GameStates {
+public class GameStates implements Serializable {
 
-	private List<GameState> states = new LinkedList<GameState>();
+	private List<byte[]> states = new LinkedList<byte[]>();
 
 	public void save(GameState gameState) {
-		states.add(gameState.copy());
+		states.add(new Copier<GameState>().copyCompressed(gameState));
 	}
 
 	public int getSize() {
@@ -51,12 +53,12 @@ public class GameStates {
 		while (states.size() > index) {
 			states.remove(index);
 		}
-		return states.get(index - 1);
+		return new Copier<GameState>().uncompressCopy(states.get(index - 1));
 	}
 
 	public GameState get(int index) {
-		if (index <= states.size())
-			return states.get(index);
+		if (index < states.size())
+			return new Copier<GameState>().uncompressCopy(states.get(index));
 		return null;
 	}
 }
