@@ -30,10 +30,12 @@ package mage.abilities.costs.common;
 
 import java.util.UUID;
 import mage.Constants.Outcome;
+import mage.Constants.TargetController;
 import mage.abilities.costs.CostImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrificePermanent;
 
 /**
  *
@@ -41,9 +43,9 @@ import mage.target.Target;
  */
 public class SacrificeTargetCost extends CostImpl {
 
-	public Target target;
+	public TargetSacrificePermanent target;
 
-	public SacrificeTargetCost(Target target) {
+	public SacrificeTargetCost(TargetSacrificePermanent target) {
 		this.target = target;
 		this.text = "Sacrifice " + target.getTargetName();
 	}
