@@ -53,4 +53,9 @@ public class TapSourceEffect extends OneShotEffect {
 		return false;
 	}
 
+	@Override
+	public String getText() {
+		return "tap {this}";
+	}
+
 }
