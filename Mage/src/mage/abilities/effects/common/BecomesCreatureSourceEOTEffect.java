@@ -38,7 +38,6 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-import mage.util.Copier;
 
 /**
  *
