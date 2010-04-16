@@ -28,6 +28,7 @@
 
 package mage.server.game;
 
+import mage.game.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,7 +38,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
-import mage.game.Table;
 import mage.util.Logging;
 import mage.view.TableView;
 

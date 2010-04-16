@@ -34,16 +34,13 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.game.Game;
-import mage.game.GameReplay;
 import mage.game.events.TableEvent;
 import mage.server.ChatManager;
 import mage.server.util.ThreadExecutor;
@@ -147,7 +144,7 @@ public class GameController implements GameCallback {
 		GameSession gameSession = new GameSession(game, sessionId, playerId);
 		gameSessions.put(playerId, gameSession);
 		logger.info("player " + playerId + " has joined game " + game.getId());
-		gameSession.init(getGameView(playerId));
+//		gameSession.init(getGameView(playerId));
 		ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(playerId).getName() + " has joined the game");
 		if (allJoined()) {
 			startGame();
@@ -156,6 +153,9 @@ public class GameController implements GameCallback {
 
 	private synchronized void startGame() {
 		if (gameFuture == null) {
+			for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
+				entry.getValue().init(getGameView(entry.getKey()));
+			}
 			GameWorker worker = new GameWorker(game, this);
 			gameFuture = gameExecutor.submit(worker);
 		}
@@ -175,13 +175,6 @@ public class GameController implements GameCallback {
 		watchers.put(sessionId, gameWatcher);
 		gameWatcher.init(getGameView());
 		ChatManager.getInstance().broadcast(chatId, "", " has started watching");
-	}
-
-	public GameReplay createReplay() {
-		if (game.isGameOver()) {
-			return new GameReplay(game.getGameStates());
-		}
-		return null;
 	}
 	
 	public void stopWatching(UUID sessionId) {

@@ -28,6 +28,18 @@
 
 package mage.server.game;
 
+import mage.game.Table;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.UUID;
@@ -39,8 +51,8 @@ import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.game.Game;
 import mage.game.GameException;
+import mage.game.GameStates;
 import mage.game.Seat;
-import mage.game.Table;
 import mage.players.Player;
 import mage.server.ChatManager;
 import mage.server.Main;
@@ -57,6 +69,7 @@ public class TableController {
 
 	private UUID sessionId;
 	private UUID chatId;
+	private UUID gameId;
 	private Table table;
 	private Game game;
 	private ConcurrentHashMap<UUID, UUID> sessionPlayerMap = new ConcurrentHashMap<UUID, UUID>();
@@ -65,7 +78,8 @@ public class TableController {
 		this.sessionId = sessionId;
 		chatId = ChatManager.getInstance().createChatSession();
 		game = GameFactory.getInstance().createGame(gameType);
-		table = new Table(game, DeckValidatorFactory.getInstance().createDeckValidator(deckType), playerTypes);
+		gameId = game.getId();
+		table = new Table(gameType, DeckValidatorFactory.getInstance().createDeckValidator(deckType), playerTypes);
 	}
 
 	public synchronized boolean joinTable(UUID sessionId, int seatNum, String name, DeckCardLists deckList) throws GameException {
@@ -90,12 +104,26 @@ public class TableController {
 	}
 
 	public boolean watchTable(UUID sessionId) {
+		if (table.getState() != TableState.DUELING) {
+			return false;
+		}
 		SessionManager.getInstance().getSession(sessionId).watchGame(game.getId());
 		return true;
 	}
 
+	public GameReplay createReplay() {
+		if (table.getState() == TableState.FINISHED) {
+			return new GameReplay(loadGame());
+		}
+		return null;
+	}
+
+
 	public boolean replayTable(UUID sessionId) {
-		ReplayManager.getInstance().replayGame(sessionId, game.getId());
+		if (table.getState() != TableState.FINISHED) {
+			return false;
+		}
+		ReplayManager.getInstance().replayGame(sessionId, table.getId());
 		return true;
 	}
 
@@ -118,7 +146,7 @@ public class TableController {
 	public synchronized void startGame(UUID sessionId) {
 		if (sessionId.equals(this.sessionId) && table.getState() == TableState.STARTING) {
 			try {
-				table.initGame();
+				table.initGame(game);
 			} catch (GameException ex) {
 				logger.log(Level.SEVERE, null, ex);
 			}
@@ -132,6 +160,52 @@ public class TableController {
 
 	public void endGame() {
 		table.endGame();
+		saveGame();
+		GameManager.getInstance().removeGame(game.getId());
+		game = null;
+	}
+
+	private void saveGame() {
+		try {
+			//use buffering
+			OutputStream file = new FileOutputStream("saved/" + game.getId().toString() + ".game");
+			OutputStream buffer = new BufferedOutputStream(file);
+			ObjectOutput output = new ObjectOutputStream(buffer);
+			try {
+				output.writeObject(game.getGameStates());
+			}
+			finally {
+				output.close();
+				logger.log(Level.SEVERE, "Saved game:" + game.getId());
+			}
+		}
+		catch(IOException ex) {
+			logger.log(Level.SEVERE, "Cannot save game.", ex);
+		}
+	}
+
+	private GameStates loadGame() {
+		try{
+			//use buffering
+			InputStream file = new FileInputStream("saved/" + gameId.toString() + ".game");
+			InputStream buffer = new BufferedInputStream(file);
+			ObjectInput input = new ObjectInputStream(buffer);
+			try {
+				//deserialize the List
+				GameStates gameStates = (GameStates)input.readObject();
+				return gameStates;
+			}
+			finally {
+				input.close();
+			}
+		}
+		catch(ClassNotFoundException ex) {
+			logger.log(Level.SEVERE, "Cannot load game. Class not found.", ex);
+		}
+		catch(IOException ex) {
+			logger.log(Level.SEVERE, "Cannot load game:" + game.getId(), ex);
+		}
+		return null;
 	}
 
 	public boolean isOwner(UUID sessionId) {

@@ -47,10 +47,10 @@ public class ReplayManager {
 
 	private ConcurrentHashMap<UUID, ReplaySession> replaySessions = new ConcurrentHashMap<UUID, ReplaySession>();
 
-	public void replayGame(UUID sessionId, UUID gameId) {
-		ReplaySession replaySession = new ReplaySession(gameId, sessionId);
+	public void replayGame(UUID sessionId, UUID tableId) {
+		ReplaySession replaySession = new ReplaySession(tableId, sessionId);
 		replaySessions.put(sessionId, replaySession);
-		SessionManager.getInstance().getSession(sessionId).replayGame(gameId);
+		SessionManager.getInstance().getSession(sessionId).replayGame();
 	}
 
 	public void startReplay(UUID sessionId) {

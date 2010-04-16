@@ -60,7 +60,7 @@ public class Main {
     public static void main(String[] args) {
 
 		logger.info("Starting MAGE server version " + Main.class.getPackage().getImplementationVersion());
-		logger.info("Logging level: " + logger.getLevel());
+		logger.info("Logging level: " + Logging.getLevel(logger));
 		ConfigSettings config = ConfigSettings.getInstance();
 		for (Plugin plugin: config.getGameTypes()) {
 			GameFactory.getInstance().addGameType(plugin.getName(), loadPlugin(plugin));

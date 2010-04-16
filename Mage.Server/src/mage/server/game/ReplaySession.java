@@ -30,7 +30,6 @@ package mage.server.game;
 
 import java.util.UUID;
 import java.util.logging.Logger;
-import mage.game.GameReplay;
 import mage.game.GameState;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.Session;
@@ -44,14 +43,13 @@ import mage.view.GameView;
  */
 public class ReplaySession implements GameCallback {
 
-//	protected static ExecutorService rmiExecutor = ThreadExecutor.getInstance().getRMIExecutor();
 	private final static Logger logger = Logging.getLogger(ReplaySession.class.getName());
 
 	private GameReplay game;
 	protected UUID sessionId;
 
-	ReplaySession(UUID gameId, UUID sessionId) {
-		this.game = GameManager.getInstance().createReplay(gameId);
+	ReplaySession(UUID tableId, UUID sessionId) {
+		this.game = TableManager.getInstance().createReplay(tableId);
 		this.sessionId = sessionId;
 	}
 
@@ -60,17 +58,6 @@ public class ReplaySession implements GameCallback {
 		Session session = SessionManager.getInstance().getSession(sessionId);
 		if (session != null)
 			session.fireCallback(new ClientCallback("replayInit", new GameView(game.next())));
-//		rmiExecutor.submit(
-//			new Runnable() {
-//				public void run() {
-//					try {
-//						client.init(new GameView(game.next()));
-//					} catch (RemoteException ex) {
-//						logger.log(Level.SEVERE, null, ex);
-//					}
-//				}
-//			}
-//		);
 	}
 
 	public void stop() {
@@ -90,34 +77,17 @@ public class ReplaySession implements GameCallback {
 		Session session = SessionManager.getInstance().getSession(sessionId);
 		if (session != null)
 			session.fireCallback(new ClientCallback("replayDone", result));
-//		rmiExecutor.submit(
-//			new Runnable() {
-//				public void run() {
-//					try {
-//						client.gameOver(result);
-//					} catch (RemoteException ex) {
-//						logger.log(Level.SEVERE, null, ex);
-//					}
-//				}
-//			}
-//		);
 	}
 
 	private void updateGame(final GameState state) {
-		Session session = SessionManager.getInstance().getSession(sessionId);
-		if (session != null)
-			session.fireCallback(new ClientCallback("replayUpdate", new GameView(state)));
-//		rmiExecutor.submit(
-//			new Runnable() {
-//				public void run() {
-//					try {
-//						client.update(new GameView(state));
-//					} catch (RemoteException ex) {
-//						logger.log(Level.SEVERE, null, ex);
-//					}
-//				}
-//			}
-//		);
+		if (state == null) {
+			gameResult("game ended");
+		}
+		else {
+			Session session = SessionManager.getInstance().getSession(sessionId);
+			if (session != null)
+				session.fireCallback(new ClientCallback("replayUpdate", new GameView(state)));
+		}
 	}
 
 }

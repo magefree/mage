@@ -28,6 +28,7 @@
 
 package mage.server.game;
 
+import mage.game.Table;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -35,7 +36,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
-import mage.game.Table;
 import mage.util.Logging;
 
 /**
@@ -112,5 +112,9 @@ public class TableManager {
 	
 	public void endGame(UUID tableId) {
 		controllers.get(tableId).endGame();
+	}
+
+	public GameReplay createReplay(UUID tableId) {
+		return controllers.get(tableId).createReplay();
 	}
 }

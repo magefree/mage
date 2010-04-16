@@ -29,11 +29,8 @@
 package mage.server;
 
 import java.util.logging.Level;
-import mage.server.util.ThreadExecutor;
 import java.util.UUID;
-import java.util.concurrent.ExecutorService;
 import java.util.logging.Logger;
-import mage.interfaces.callback.CallbackServer;
 import mage.interfaces.callback.CallbackServerSession;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.game.GameManager;
@@ -46,7 +43,6 @@ import mage.util.Logging;
  */
 public class Session {
 
-	private static ExecutorService executor = ThreadExecutor.getInstance().getRMIExecutor();
 	private final static Logger logger = Logging.getLogger(Session.class.getName());
 
 	private UUID sessionId;
@@ -90,57 +86,14 @@ public class Session {
 
 	public void gameStarted(final UUID gameId, final UUID playerId) {
 		fireCallback(new ClientCallback("startGame", new UUID[] {gameId, playerId}));
-//		executor.submit(
-//			new Runnable() {
-//				@Override
-//				public void run() {
-//					try {
-//						client.gameStarted(gameId, playerId);
-//						logger.info("game started for player " + playerId);
-//					}
-//					catch (RemoteException ex) {
-//						logger.log(Level.WARNING, ex.getMessage());
-//						kill();
-//					}
-//				}
-//			}
-//		);
 	}
 
 	public void watchGame(final UUID gameId) {
 		fireCallback(new ClientCallback("watchGame", gameId));
-//		executor.submit(
-//			new Runnable() {
-//				@Override
-//				public void run() {
-//					try {
-//						client.watchGame(gameId);
-//					}
-//					catch (RemoteException ex) {
-//						logger.log(Level.WARNING, ex.getMessage());
-//						kill();
-//					}
-//				}
-//			}
-//		);
 	}
 
-	public void replayGame(final UUID gameId) {
-		fireCallback(new ClientCallback("replayGame", gameId));
-//		executor.submit(
-//			new Runnable() {
-//				@Override
-//				public void run() {
-//					try {
-//						client.replayGame(gameId);
-//					}
-//					catch (RemoteException ex) {
-//						logger.log(Level.WARNING, ex.getMessage());
-//						kill();
-//					}
-//				}
-//			}
-//		);
+	public void replayGame() {
+		fireCallback(new ClientCallback("replayGame", null));
 	}
 
 	public String getUsername() {
