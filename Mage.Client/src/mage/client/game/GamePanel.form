@@ -63,7 +63,7 @@
                       <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="pnlHand" max="32767" attributes="0"/>
-                          <Component id="pnlBattlefield" alignment="0" pref="665" max="32767" attributes="0"/>
+                          <Component id="pnlBattlefield" alignment="0" pref="715" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -399,7 +399,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="hand" alignment="1" pref="661" max="32767" attributes="0"/>
+                      <Component id="hand" alignment="1" pref="711" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">

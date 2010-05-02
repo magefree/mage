@@ -75,7 +75,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 		session = MageFrame.getSession();
 	}
 
-	public void getFeedback(FeedbackMode mode, String message, boolean modal) {
+	public void getFeedback(FeedbackMode mode, String message, boolean modal, boolean special) {
 		this.lblMessage.setText(message);
 		this.selected = false;
 		this.mode = mode;
@@ -107,6 +107,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 				this.btnRight.setText("Done");
 				break;
 		}
+		this.btnSpecial.setVisible(special);
 		if (modal)
 			startModal();
 		this.revalidate();
@@ -176,6 +177,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
         btnLeft = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         lblMessage = new javax.swing.JTextArea();
+        btnSpecial = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
 
@@ -205,12 +207,21 @@ public class FeedbackPanel extends javax.swing.JPanel {
         lblMessage.setBorder(null);
         jScrollPane1.setViewportView(lblMessage);
 
+        btnSpecial.setText("Special");
+        btnSpecial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSpecialActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(106, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(btnSpecial)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(btnLeft)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRight))
@@ -223,7 +234,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRight)
-                    .addComponent(btnLeft)))
+                    .addComponent(btnLeft)
+                    .addComponent(btnSpecial)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -242,10 +254,15 @@ public class FeedbackPanel extends javax.swing.JPanel {
 		session.sendPlayerBoolean(gameId, true);
 	}//GEN-LAST:event_btnLeftActionPerformed
 
+	private void btnSpecialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpecialActionPerformed
+		session.sendPlayerString(gameId, "special");
+	}//GEN-LAST:event_btnSpecialActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLeft;
     private javax.swing.JButton btnRight;
+    private javax.swing.JButton btnSpecial;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea lblMessage;
     // End of variables declaration//GEN-END:variables

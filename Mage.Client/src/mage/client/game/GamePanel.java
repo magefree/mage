@@ -183,7 +183,7 @@ public class GamePanel extends javax.swing.JPanel {
 	}
 
 	public void ask(String question) {
-		this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, true);
+		this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, true, false);
 	}
 
 	public void inform(String information, CardsView cardView, GameView gameView) {
@@ -191,7 +191,7 @@ public class GamePanel extends javax.swing.JPanel {
 		if (cardView != null && cardView.size() > 0) {
 			showCards(information, cardView);
 		}
-		this.feedbackPanel.getFeedback(FeedbackMode.INFORM, information, false);
+		this.feedbackPanel.getFeedback(FeedbackMode.INFORM, information, false, gameView.getSpecial());
 	}
 
 	public void cancel(String message, CardsView cardView, GameView gameView) {
@@ -199,7 +199,7 @@ public class GamePanel extends javax.swing.JPanel {
 		if (cardView != null && cardView.size() > 0) {
 			showCards(message, cardView);
 		}
-		this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, false);
+		this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, false, gameView.getSpecial());
 	}
 
 	public void modalMessage(String message) {
@@ -216,17 +216,17 @@ public class GamePanel extends javax.swing.JPanel {
 
 	public void select(String message, GameView gameView) {
 		updateGame(gameView);
-		this.feedbackPanel.getFeedback(FeedbackMode.SELECT, message, false);
+		this.feedbackPanel.getFeedback(FeedbackMode.SELECT, message, false, gameView.getSpecial());
 	}
 
 	public void playMana(String message, GameView gameView) {
 		updateGame(gameView);
-		this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, false);
+		this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, false, gameView.getSpecial());
 	}
 
 	public void playXMana(String message, GameView gameView) {
 		updateGame(gameView);
-		this.feedbackPanel.getFeedback(FeedbackMode.CONFIRM, message, false);
+		this.feedbackPanel.getFeedback(FeedbackMode.CONFIRM, message, false, gameView.getSpecial());
 	}
 
 	public void replayMessage(String message) {
