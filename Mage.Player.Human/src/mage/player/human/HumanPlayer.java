@@ -42,6 +42,7 @@ import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.SpecialAction;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.filter.common.FilterCreatureForCombat;
@@ -171,6 +172,8 @@ public class HumanPlayer extends PlayerImpl {
 			} else if (response.getInteger() != null) {
 				passed = true;
 				passedTurn = true;
+			} else if (response.getString() != null && response.getString().equals("special")) {
+				specialAction(game);
 			} else if (response.getUUID() != null) {
 				MageObject object = game.getObject(response.getUUID());
 				if (object != null) {
@@ -353,6 +356,16 @@ public class HumanPlayer extends PlayerImpl {
 		game.fireGetAmountEvent(playerId, message, min, max);
 		waitForIntegerResponse();
 		return response.getInteger();
+	}
+
+	protected void specialAction(Game game) {
+		Map<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId);
+		game.fireGetChoiceEvent(playerId, name, specialActions.values());
+		waitForResponse();
+		if (response.getUUID() != null) {
+			if (specialActions.containsKey(response.getUUID()))
+				activateAbility(specialActions.get(response.getUUID()), game);
+		}
 	}
 
 	protected void activateAbility(Map<UUID, ? extends ActivatedAbility> abilities, Game game) {
