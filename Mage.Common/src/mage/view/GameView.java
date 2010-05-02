@@ -57,6 +57,7 @@ public class GameView implements Serializable {
 	private String activePlayerName = "";
 	private String priorityPlayerName = "";
 	private int turn;
+	private boolean special = false;
 
 	public GameView(GameState game) {
 		for (Player player: game.getPlayers().values()) {
@@ -83,6 +84,7 @@ public class GameView implements Serializable {
 		for (CombatGroup combatGroup: game.getCombat().getGroups()) {
 			combat.add(new CombatGroupView(combatGroup, game));
 		}
+		this.special = game.getSpecialActions().getControlledBy(game.getPriorityPlayerId()).size() > 0;
 	}
 
 	public List<PlayerView> getPlayers() {
@@ -127,5 +129,9 @@ public class GameView implements Serializable {
 
 	public String getPriorityPlayerName() {
 		return priorityPlayerName;
+	}
+
+	public boolean getSpecial() {
+		return special;
 	}
 }
