@@ -26,40 +26,59 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.player.ai;
+package mage.player.ai.simulators;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Zone;
-import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.TrampleAbility;
+import java.util.ArrayList;
+import java.util.List;
+import mage.abilities.ActivatedAbility;
+import mage.cards.Card;
 import mage.game.Game;
+import mage.game.GameState;
 import mage.game.permanent.Permanent;
+import mage.player.ai.ComputerPlayer;
+import mage.player.ai.PermanentEvaluator;
+import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PermanentEvaluator {
+public class ActionSimulator {
 
-	//preserve calculations for efficiency
-	private Map<UUID, Integer> values = new HashMap<UUID, Integer>();
-	private CombatEvaluator combat = new CombatEvaluator();
+	private ComputerPlayer player;
+	private List<Card> playableInstants = new ArrayList<Card>();
+	private List<ActivatedAbility> playableAbilities = new ArrayList<ActivatedAbility>();
 
-	public int evaluate(Permanent permanent, Game game) {
-		if (!values.containsKey(permanent.getId())) {
-			int value = 0;
-			if (permanent.getCardType().contains(CardType.CREATURE)) {
-				value += combat.evaluate(permanent, game);
-			}
-			value += permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD).size();
-			value += permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD).size();
-			values.put(permanent.getId(), value);
+	private Game game;
+
+	public ActionSimulator(ComputerPlayer player) {
+		this.player = player;
+	}
+
+	public void simulate(Game game) {
+
+	}
+
+	public int evaluateState() {
+		Player opponent = game.getPlayer(game.getOpponents(player.getId()).get(0));
+		if (game.isGameOver()) {
+			if (player.hasLost() || opponent.hasWon())
+				return Integer.MIN_VALUE;
+			if (opponent.hasLost() || player.hasWon())
+				return Integer.MAX_VALUE;
 		}
-		return values.get(permanent.getId());
+		int value = player.getLife();
+		value -= opponent.getLife();
+		PermanentEvaluator evaluator = new PermanentEvaluator();
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(player.getId())) {
+			value += evaluator.evaluate(permanent, game);
+		}
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(player.getId())) {
+			value -= evaluator.evaluate(permanent, game);
+		}
+		value += player.getHand().size();
+		value -= opponent.getHand().size();
+		return value;
 	}
 
 }

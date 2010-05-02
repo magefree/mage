@@ -31,8 +31,6 @@ package mage.player.ai;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Zone;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -43,23 +41,26 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PermanentEvaluator {
+public class CombatEvaluator {
 
 	//preserve calculations for efficiency
 	private Map<UUID, Integer> values = new HashMap<UUID, Integer>();
-	private CombatEvaluator combat = new CombatEvaluator();
 
-	public int evaluate(Permanent permanent, Game game) {
-		if (!values.containsKey(permanent.getId())) {
+	public int evaluate(Permanent creature, Game game) {
+		if (!values.containsKey(creature.getId())) {
 			int value = 0;
-			if (permanent.getCardType().contains(CardType.CREATURE)) {
-				value += combat.evaluate(permanent, game);
-			}
-			value += permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD).size();
-			value += permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD).size();
-			values.put(permanent.getId(), value);
+			if (creature.canAttack(game))
+				value += 2;
+			value += creature.getPower().getValue();
+			value += creature.getToughness().getValue();
+			value += creature.getAbilities().getEvasionAbilities().size();
+			value += creature.getAbilities().getProtectionAbilities().size();
+			value += creature.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId())?1:0;
+			value += creature.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId())?2:0;
+			value += creature.getAbilities().containsKey(TrampleAbility.getInstance().getId())?1:0;
+			values.put(creature.getId(), value);
 		}
-		return values.get(permanent.getId());
+		return values.get(creature.getId());
 	}
 
 }

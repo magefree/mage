@@ -251,6 +251,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 		else {
 			//respond to opponent events
 			switch (game.getTurn().getStep()) {
+				case UPKEEP:
+					findPlayables(game);
 				case DECLARE_ATTACKERS:
 					playRemoval(game.getCombat().getAttackers(), game);
 					playDamage(game.getCombat().getAttackers(), game);
