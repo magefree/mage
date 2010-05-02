@@ -56,15 +56,15 @@ public class ArchiveTrap extends CardImpl {
 		this.getSpellAbility().addTarget(new TargetOpponent());
 		this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(13));
 		this.getSpellAbility().addAlternativeCost(new ArchiveTrapAlternativeCost());
-		this.watchers.add(new ArchiveTrapWatcher(ownerId));
+		this.watchers.add(new ArchiveTrapWatcher());
 	}
 
 }
 
 class ArchiveTrapWatcher extends WatcherImpl {
 
-	public ArchiveTrapWatcher(UUID controllerId) {
-		super(controllerId, "LibrarySearched");
+	public ArchiveTrapWatcher() {
+		super("LibrarySearched");
 	}
 
 	@Override

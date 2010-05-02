@@ -51,6 +51,7 @@ public class Conflux extends ExpansionSet {
 		this.cards.add(MartialCoup.class);
 		this.cards.add(NobleHierarch.class);
 		this.cards.add(PathToExile.class);
+		this.cards.add(QuenchableFire.class);
 		this.cards.add(Thornling.class);
 	}
 

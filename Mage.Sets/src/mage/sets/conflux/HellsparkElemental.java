@@ -51,7 +51,7 @@ public class HellsparkElemental extends CardImpl {
 		this.expansionSetId = Conflux.getInstance().getId();
 		this.subtype.add("Elemental");
 		this.color.setRed(true);
-		this.art = "";
+		this.art = "118669_typ_reg_sty_010.jpg";
 		this.power = new MageInt(3);
 		this.toughness = new MageInt(1);
 

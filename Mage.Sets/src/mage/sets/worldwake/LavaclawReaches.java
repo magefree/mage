@@ -26,41 +26,54 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.shardsofalara;
+package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.OnEventTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldStaticAbility;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.UnearthAbility;
+import mage.abilities.effects.common.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.BoostPowerSourceVariableEffect;
+import mage.abilities.effects.common.EntersBattlefieldTappedEffect;
+import mage.abilities.mana.BlackManaAbility;
+import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
-import mage.game.events.GameEvent.EventType;
-import mage.sets.ShardsOfAlara;
+import mage.game.permanent.token.Token;
+import mage.sets.Worldwake;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HellsThunder extends CardImpl {
+public class LavaclawReaches extends CardImpl {
 
-	public HellsThunder(UUID ownerId) {
-		super(ownerId, "Hell's Thunder", new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-		this.expansionSetId = ShardsOfAlara.getInstance().getId();
-		this.subtype.add("Elemental");
-		this.color.setRed(true);
-		this.art = "115234_typ_reg_sty_010.jpg";
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
+	public LavaclawReaches(UUID ownerId) {
+		super(ownerId, "Lavaclaw Reaches", new CardType[]{CardType.LAND}, null);
+		this.expansionSetId = Worldwake.getInstance().getId();
+		this.art = "126532_typ_reg_sty_010.jpg";
+		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
+		this.addAbility(new BlackManaAbility());
+		this.addAbility(new RedManaAbility());
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new LavaclawReachesToken()), new ManaCosts("{1}{B}{R}")));
+	}
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(HasteAbility.getInstance());
-		this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", new SacrificeSourceEffect()));
-		this.addAbility(new UnearthAbility(new ManaCosts("{4}{R}")));
+}
 
+class LavaclawReachesToken extends Token {
+
+	public LavaclawReachesToken() {
+		super("", "2/2 black and red Elemental creature with \"{X}: This creature gets +X/+0 until end of turn.\"");
+		cardType.add(CardType.CREATURE);
+		subtype.add("Elemental");
+		color.setRed(true);
+		color.setBlack(true);
+		power = new MageInt(2);
+		toughness = new MageInt(2);
+		addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostPowerSourceVariableEffect(Duration.EndOfTurn), new ManaCosts("{X}")));
 	}
 
 }

@@ -54,10 +54,11 @@ public class SearingBlaze extends CardImpl {
 		super(ownerId, "Searing Blaze", new CardType[]{CardType.INSTANT}, "{R}{R}");
 		this.expansionSetId = Worldwake.getInstance().getId();
 		this.color.setRed(true);
-		this.art = "";
+		this.art = "126476_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetPlayer());
 		//TODO: change this to only allow creatures controlled by first target
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+		this.getSpellAbility().addEffect(new SearingBlazeEffect());
 		this.watchers.add(new SearingBlazeWatcher(ownerId));
 	}
 
@@ -66,7 +67,7 @@ public class SearingBlaze extends CardImpl {
 class SearingBlazeWatcher extends WatcherImpl {
 
 	public SearingBlazeWatcher(UUID controllerId) {
-		super(controllerId, "LandPlayed");
+		super("LandPlayed");
 	}
 
 	@Override
@@ -107,4 +108,8 @@ class SearingBlazeEffect extends OneShotEffect {
 		return true;
 	}
 
+	@Override
+	public String getText() {
+		return "{this} deals 1 damage to target player and 1 damage to target creature that player controls.  \nLandfall — If you had a land enter the battlefield under your control this turn, {this} deals 3 damage to that player and 3 damage to that creature instead.";
+	}
 }

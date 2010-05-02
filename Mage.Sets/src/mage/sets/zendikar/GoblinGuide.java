@@ -96,4 +96,8 @@ class GoblinGuideEffect extends OneShotEffect {
 		return false;
 	}
 
+	@Override
+	public String getText() {
+		return "defending player reveals the top card of his or her library. If it's a land card, that player puts it into his or her hand";
+	}
 }
