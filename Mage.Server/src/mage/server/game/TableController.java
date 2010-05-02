@@ -36,7 +36,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInput;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
@@ -46,6 +45,8 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 import mage.Constants.TableState;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
@@ -57,6 +58,7 @@ import mage.players.Player;
 import mage.server.ChatManager;
 import mage.server.Main;
 import mage.server.SessionManager;
+import mage.util.CopierObjectInputStream;
 import mage.util.Logging;
 
 /**
@@ -170,7 +172,7 @@ public class TableController {
 			//use buffering
 			OutputStream file = new FileOutputStream("saved/" + game.getId().toString() + ".game");
 			OutputStream buffer = new BufferedOutputStream(file);
-			ObjectOutput output = new ObjectOutputStream(buffer);
+			ObjectOutput output = new ObjectOutputStream(new GZIPOutputStream(buffer));
 			try {
 				output.writeObject(game.getGameStates());
 			}
@@ -189,7 +191,8 @@ public class TableController {
 			//use buffering
 			InputStream file = new FileInputStream("saved/" + gameId.toString() + ".game");
 			InputStream buffer = new BufferedInputStream(file);
-			ObjectInput input = new ObjectInputStream(buffer);
+			ObjectInput input = new CopierObjectInputStream(Main.classLoader, new GZIPInputStream(buffer));
+			//ObjectInput input = new ObjectInputStream(buffer);
 			try {
 				//deserialize the List
 				GameStates gameStates = (GameStates)input.readObject();

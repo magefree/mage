@@ -93,6 +93,9 @@ public class GameController implements GameCallback {
 							ChatManager.getInstance().broadcast(chatId, "", event.getMessage());
 							logger.finest(game.getId() + " " + event.getMessage());
 							break;
+						case REVEAL:
+							revealCards(event.getMessage(), event.getCards());
+							break;
 					}
 				}
 			}
