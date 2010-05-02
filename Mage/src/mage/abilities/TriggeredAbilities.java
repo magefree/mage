@@ -29,33 +29,13 @@
 package mage.abilities;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.UUID;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class TriggeredAbilities extends ArrayList<TriggeredAbility> {
-
-	public void handleEvent(GameEvent event, Game game) {
-		for(TriggeredAbility ability: this) {
-			ability.checkTrigger(event, game);
-		} 
-	}
-
-//	public boolean check(Game game) {
-//		boolean played = false;
-//		Iterator<TriggeredAbility> it = this.iterator();
-//		while(it.hasNext()) {
-//			TriggeredAbility ability = it.next();
-//			it.remove();
-//			played |= game.getPlayer(ability.getControllerId()).triggerAbility(ability, game);
-//		}
-//		return played;
-//	}
 
 	public TriggeredAbilities getControlledBy(UUID controllerId) {
 		TriggeredAbilities controlledBy = new TriggeredAbilities();

@@ -39,7 +39,7 @@ import mage.game.Game;
 public class PlayLandAbility extends ActivatedAbilityImpl {
 
 	public PlayLandAbility() {
-		super(Zone.HAND, null);
+		super(Zone.HAND);
 		this.name = "Play";
 	}
 

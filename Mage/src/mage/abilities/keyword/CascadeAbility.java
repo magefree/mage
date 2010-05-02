@@ -52,10 +52,12 @@ public class CascadeAbility extends TriggeredAbilityImpl {
 	}
 
 	@Override
-	public void checkTrigger(GameEvent event, Game game) {
+	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.SPELL_CAST && event.getTargetId().equals(this.getSourceId()) ) {
 			trigger(game, event.getPlayerId());
+			return true;
 		}
+		return false;
 	}
 
 	@Override

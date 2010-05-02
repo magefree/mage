@@ -66,7 +66,6 @@ public class PermanentCard extends PermanentImpl {
 		this.cardType = copy.getCardType();
 		this.color = copy.getColor();
 		this.manaCost = copy.getManaCost();
-//		this.loyalty = copy.getLoyalty();
 		this.power = copy.getPower();
 		this.toughness = copy.getToughness();
 		this.subtype = copy.getSubtype();

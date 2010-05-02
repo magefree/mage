@@ -39,7 +39,7 @@ import mage.game.events.GameEvent;
 public interface TriggeredAbility extends Ability {
 
 	public void trigger(Game game, UUID controllerId);
-	public void checkTrigger(GameEvent event, Game game);
+	public boolean checkTrigger(GameEvent event, Game game);
 	public boolean checkIfClause(Game game);
 
 }

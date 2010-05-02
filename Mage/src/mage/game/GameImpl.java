@@ -709,6 +709,11 @@ public abstract class GameImpl implements Game, Serializable {
 	}
 
 	@Override
+	public void fireRevealCardsEvent(String message, Cards cards) {
+		tableEventSource.fireTableEvent(EventType.REVEAL, message, cards, this);
+	}
+
+	@Override
 	public void fireGetAmountEvent(UUID playerId, String message, int min, int max) {
 		playerQueryEventSource.amount(playerId, message, min, max);
 	}

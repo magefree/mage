@@ -29,6 +29,7 @@
 package mage.game.events;
 
 import java.io.Serializable;
+import mage.cards.Cards;
 import mage.game.Game;
 
 /**
@@ -39,11 +40,16 @@ public class TableEventSource implements EventSource<TableEvent>, Serializable {
 
 	protected final EventDispatcher<TableEvent> dispatcher = new EventDispatcher<TableEvent>() {};
 
+	@Override
 	public void addListener(Listener<TableEvent> listener) {
 		dispatcher.addListener(listener);
 	}
 
 	public void fireTableEvent(TableEvent.EventType eventType, String message, Game game) {
-		dispatcher.fireEvent(new TableEvent(eventType, message, game));
+		dispatcher.fireEvent(new TableEvent(eventType, message, null, game));
+	}
+
+	public void fireTableEvent(TableEvent.EventType eventType, String message, Cards cards, Game game) {
+		dispatcher.fireEvent(new TableEvent(eventType, message, cards, game));
 	}
 }

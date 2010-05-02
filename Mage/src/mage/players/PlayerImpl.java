@@ -40,6 +40,7 @@ import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.PlayLandAbility;
+import mage.abilities.SpecialAction;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.keyword.KickerAbility;
@@ -65,11 +66,9 @@ import mage.game.stack.StackAbility;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
 import mage.util.Copier;
+import mage.watchers.Watcher;
 
 public abstract class PlayerImpl implements Player, Serializable {
-
-//	private static final transient Copier<Player> copier = new Copier<Player>();
-	private static final long serialVersionUID = 1L;
 
 	protected UUID playerId;
 	protected String name;
@@ -110,7 +109,10 @@ public abstract class PlayerImpl implements Player, Serializable {
 		this.passedTurn = false;
 		library.addAll(deck.getCards());
 		for (Card card: deck.getCards().values()) {
-			game.getState().getWatchers().addAll(card.getWatchers());
+			for (Watcher watcher: card.getWatchers()) {
+				watcher.setControllerId(playerId);
+				game.getState().getWatchers().add(watcher);
+			}
 		}
 	}
 
@@ -298,8 +300,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 				game.removeLastBookmark();
 				return true;
 			}
+			game.restoreState();
 		}
-		game.restoreState();
 		return false;
 	}
 
@@ -316,8 +318,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 				game.removeLastBookmark();
 				return true;
 			}
+			game.restoreState();
 		}
-		game.restoreState();
 		return false;
 	}
 
@@ -343,8 +345,25 @@ public abstract class PlayerImpl implements Player, Serializable {
 				game.removeLastBookmark();
 				return true;
 			}
+			game.restoreState();
 		}
-		game.restoreState();
+		return false;
+	}
+
+	protected boolean specialAction(SpecialAction action, Game game) {
+		//20091005 - 114
+		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, action.getId(), playerId))) {
+			game.bookmarkState();
+			if (action.activate(game, false)) {
+				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, action.getId(), playerId));
+				game.fireInformEvent(name + action.getActivatedMessage(game));
+				if (action.resolve(game)) {
+					game.removeLastBookmark();
+					return true;
+				}
+			}
+			game.restoreState();
+		}
 		return false;
 	}
 
@@ -356,6 +375,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
 		if (ability instanceof PlayLandAbility) {
 			result = playLand(hand.get(ability.getSourceId()), game);
+		}
+		else if (ability instanceof SpecialAction) {
+			result = specialAction((SpecialAction)ability.copy(), game);
 		}
 		else if (ability instanceof ManaAbility) {
 			result = playManaAbility((ManaAbility)ability.copy(), game);
@@ -411,7 +433,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
 	@Override
 	public void revealCards(Cards cards, Game game) {
-		//TODO: implement this
+		game.fireRevealCardsEvent(this.name + " revealed", cards);
 	}
 
 	@Override

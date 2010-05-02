@@ -48,14 +48,16 @@ public class ExaltedAbility extends TriggeredAbilityImpl {
 	}
 
 	@Override
-	public void checkTrigger(GameEvent event, Game game) {
+	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(this.controllerId) ) {
 			if (game.getCombat().attacksAlone()) {
 				this.targets.add(new TargetCreaturePermanent());
 				this.targets.get(0).getTargets().add(game.getCombat().getAttackers().get(0));
 				trigger(game, event.getPlayerId());
+				return true;
 			}
 		}
+		return false;
 	}
 
 	@Override

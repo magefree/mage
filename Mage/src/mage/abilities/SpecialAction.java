@@ -26,41 +26,18 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.abilities.common;
+package mage.abilities;
 
 import mage.Constants.Zone;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PutIntoGraveFromBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
+public abstract class SpecialAction extends ActivatedAbilityImpl {
 
-	public PutIntoGraveFromBattlefieldTriggeredAbility(Effect effect, boolean optional) {
-		super(Zone.GRAVEYARD, effect, optional);
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId()) ) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-			if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
-				trigger(game, event.getPlayerId());
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public String getRule() {
-		return "When {this} is put into a graveyard from the battlefield, " + super.getRule();
+	public SpecialAction() {
+		super(Zone.ALL);
 	}
 
 }

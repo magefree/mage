@@ -40,6 +40,7 @@ import mage.game.events.GameEvent;
 public interface Watcher extends Serializable {
 
 	public UUID getControllerId();
+	public void setControllerId(UUID controllerId);
 	public String getKey();
 	public void watch(GameEvent event, Game game);
 	public boolean conditionMet();

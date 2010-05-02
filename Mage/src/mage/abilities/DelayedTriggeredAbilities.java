@@ -26,39 +26,47 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.util;
+package mage.abilities;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectStreamClass;
-import java.io.StreamCorruptedException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CopierObjectInputStream extends ObjectInputStream {
-    ClassLoader myLoader = null;
+public class DelayedTriggeredAbilities extends ArrayList<DelayedTriggeredAbility> {
 
-    public CopierObjectInputStream(ClassLoader newLoader, InputStream theStream) throws IOException, StreamCorruptedException {
-        super(theStream);
-        myLoader = newLoader;
-    }
+	public void checkTriggers(GameEvent event, Game game) {
+		Iterator<DelayedTriggeredAbility> it = this.iterator();
+		while (it.hasNext()) {
+			DelayedTriggeredAbility ability = it.next();
+			if (ability.checkTrigger(event, game))
+				it.remove();
+		}
+	}
 
-	@Override
-    protected Class resolveClass(ObjectStreamClass osc) throws IOException, ClassNotFoundException
-    {
-        Class theClass = null;
+//	public boolean check(Game game) {
+//		boolean played = false;
+//		Iterator<TriggeredAbility> it = this.iterator();
+//		while(it.hasNext()) {
+//			TriggeredAbility ability = it.next();
+//			it.remove();
+//			played |= game.getPlayer(ability.getControllerId()).triggerAbility(ability, game);
+//		}
+//		return played;
+//	}
 
-		try {
-            theClass = Class.forName(osc.getName(), true, myLoader);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return theClass;
-    }
+//	public TriggeredAbilities getControlledBy(UUID controllerId) {
+//		TriggeredAbilities controlledBy = new TriggeredAbilities();
+//		for (TriggeredAbility ability: this) {
+//			if (ability.getControllerId().equals(controllerId))
+//				controlledBy.add(ability);
+//		}
+//		return controlledBy;
+//	}
 
 }
+

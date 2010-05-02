@@ -38,6 +38,9 @@ import java.util.List;
 import java.util.UUID;
 import mage.Constants.Zone;
 import mage.MageObject;
+import mage.abilities.DelayedTriggeredAbilities;
+import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.SpecialActions;
 import mage.abilities.TriggeredAbilities;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
@@ -49,7 +52,6 @@ import mage.game.turn.TurnMods;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
-import mage.util.Copier;
 import mage.watchers.Watchers;
 
 /**
@@ -64,7 +66,6 @@ import mage.watchers.Watchers;
  */
 public class GameState implements Serializable {
 
-//	private static final transient Copier<GameState> copier = new Copier<GameState>();
 	private Players players = new Players();
 	private UUID activePlayerId;
 	private UUID priorityPlayerId;
@@ -77,6 +78,8 @@ public class GameState implements Serializable {
 	private List<String> messages = new ArrayList<String>();
 	private ContinuousEffects effects = new ContinuousEffects();
 	private TriggeredAbilities triggers = new TriggeredAbilities();
+	private DelayedTriggeredAbilities delayed = new DelayedTriggeredAbilities();
+	private SpecialActions specialActions = new SpecialActions();
 	private Combat combat = new Combat();
 	private TurnMods turnMods = new TurnMods();
 	private Watchers watchers = new Watchers();
@@ -149,6 +152,10 @@ public class GameState implements Serializable {
 		return this.watchers;
 	}
 
+	public SpecialActions getSpecialActions() {
+		return this.specialActions;
+	}
+	
 	public void endGame() {
 		this.gameOver = true;
 	}
@@ -254,6 +261,7 @@ public class GameState implements Serializable {
 		}
 		battlefield.checkTriggers(event, game);
 		stack.checkTriggers(event, game);
+		delayed.checkTriggers(event, game);
 		exile.checkTriggers(event, game);
 		watchers.watch(event, game);
 	}
@@ -265,6 +273,19 @@ public class GameState implements Serializable {
 
 	public void addTriggeredAbility(TriggeredAbility ability) {
 		this.triggers.add(ability);
+	}
+
+	public void addDelayedTriggeredAbility(DelayedTriggeredAbility ability) {
+		this.delayed.add(ability);
+	}
+
+	public void removeDelayedTriggeredAbility(UUID abilityId) {
+		for (DelayedTriggeredAbility ability: delayed) {
+			if (ability.getId().equals(abilityId))  {
+				delayed.remove(ability);
+				break;
+			}
+		}
 	}
 
 	public TriggeredAbilities getTriggered() {

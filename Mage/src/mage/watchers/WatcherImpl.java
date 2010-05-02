@@ -42,14 +42,18 @@ public abstract class WatcherImpl implements Watcher {
 	protected String key;
 	protected boolean condition = false;
 
-	public WatcherImpl(UUID controllerId, String key) {
-		this.controllerId = controllerId;
+	public WatcherImpl(String key) {
 		this.key = key;
 	}
 
 	@Override
 	public UUID getControllerId() {
 		return controllerId;
+	}
+
+	@Override
+	public void setControllerId(UUID controllerId) {
+		this.controllerId = controllerId;
 	}
 
 	@Override

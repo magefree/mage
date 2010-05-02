@@ -47,12 +47,15 @@ public class LeavesBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
 	}
 
 	@Override
-	public void checkTrigger(GameEvent event, Game game) {
+	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId()) ) {
 			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-			if (zEvent.getFromZone() == Zone.BATTLEFIELD)
+			if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
 				trigger(game, this.controllerId);
+				return true;
+			}
 		}
+		return false;
 	}
 
 	@Override
