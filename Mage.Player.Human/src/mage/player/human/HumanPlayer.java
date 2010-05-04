@@ -45,6 +45,7 @@ import mage.abilities.ActivatedAbility;
 import mage.abilities.SpecialAction;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
+import mage.cards.decks.Deck;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -61,14 +62,14 @@ import mage.target.common.TargetDefender;
  */
 public class HumanPlayer extends PlayerImpl {
 
-	final PlayerResponse response = new PlayerResponse();
+	final transient PlayerResponse response = new PlayerResponse();
 
 	private boolean abort = false;
 
-	protected TargetPermanent targetCombat = new TargetPermanent(new FilterCreatureForCombat(), TargetController.YOU);
+	protected transient TargetPermanent targetCombat = new TargetPermanent(new FilterCreatureForCombat(), TargetController.YOU);
 
-	public HumanPlayer(String name) {
-		super(name);
+	public HumanPlayer(String name, Deck deck) {
+		super(name, deck);
 		human = true;
 	}
 
