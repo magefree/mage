@@ -53,7 +53,6 @@ import mage.players.Player;
  */
 public class ContinuousEffects implements Serializable {
 
-	private static final long serialVersionUID = 1L;
 	private List<ContinuousEffect> effects = new ArrayList<ContinuousEffect>();
 
 	public void removeEndOfTurnEffects() {

@@ -60,8 +60,6 @@ import mage.target.common.TargetCardInLibrary;
 public interface Player extends MageItem {
 
 	public boolean isHuman();
-	public Deck getDeck();
-	public void setDeck(Deck deck);
 	public String getName();
 	public Library getLibrary();
 	public Cards getGraveyard();

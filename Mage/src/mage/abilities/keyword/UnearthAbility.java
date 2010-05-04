@@ -33,10 +33,12 @@ import mage.Constants.Outcome;
 import mage.Constants.TimingRule;
 import mage.Constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.GainAbilitySourceEffect;
 import mage.cards.Card;
@@ -58,7 +60,7 @@ public class UnearthAbility extends ActivatedAbilityImpl {
 		super(Zone.GRAVEYARD, new UnearthEffect(), costs);
 		this.timing = TimingRule.SORCERY;
 		this.effects.add(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield));
-		this.effects.add(new GainAbilitySourceEffect(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", new ExileSourceEffect()), Duration.WhileOnBattlefield));
+		this.effects.add(new CreateDelayedTriggeredAbilityEffect(new UnearthDelayedTriggeredAbility()));
 		this.effects.add(new UnearthLeavesBattlefieldEffect());
 	}
 
@@ -85,6 +87,7 @@ class UnearthEffect extends OneShotEffect {
 		Card card = player.getGraveyard().get(this.source.getSourceId());
 		if (card != null) {
 			player.putOntoBattlefield(card, game);
+			player.removeFromGraveyard(card, game);
 			return true;
 		}
 		return false;
@@ -93,6 +96,28 @@ class UnearthEffect extends OneShotEffect {
 	@Override
 	public String getText() {
 		return "Return this card from your graveyard to the battlefield";
+	}
+
+}
+
+class UnearthDelayedTriggeredAbility extends DelayedTriggeredAbility {
+
+	public UnearthDelayedTriggeredAbility() {
+		super(new ExileSourceEffect());
+	}
+
+	@Override
+	public boolean checkTrigger(GameEvent event, Game game) {
+		if (event.getType() == EventType.END_TURN_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
+			trigger(game, event.getPlayerId());
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public String getRule() {
+		return "Exile {this} at the beginning of the next end step";
 	}
 
 }
@@ -108,7 +133,7 @@ class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl {
 	public boolean applies(GameEvent event, Game game) {
 		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.source.getSourceId())) {
 			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-			if (zEvent.getFromZone() == Zone.BATTLEFIELD)
+			if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() != Zone.EXILED)
 				return true;
 		}
 		return false;
@@ -128,6 +153,6 @@ class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl {
 
 	@Override
 	public String getText() {
-		return "When {this} leaves the battlefield, exile {this}";
+		return "When {this} leaves the battlefield, exile it";
 	}
 }

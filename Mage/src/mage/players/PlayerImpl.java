@@ -76,7 +76,6 @@ public abstract class PlayerImpl implements Player, Serializable {
 	protected int life;
 	protected boolean wins;
 	protected boolean loses;
-	protected Deck deck;
 	protected Library library;
 	protected Cards hand = new CardsImpl(Zone.HAND);
 	protected Cards graveyard = new CardsImpl(Zone.GRAVEYARD);
@@ -90,10 +89,12 @@ public abstract class PlayerImpl implements Player, Serializable {
 	protected boolean passedTurn;
 	protected boolean left;
 
-	public PlayerImpl(String name) {
+	public PlayerImpl(String name, Deck deck) {
 		this.playerId = UUID.randomUUID();
 		this.name = name;
+		deck.setOwnerId(playerId);
 		library = new Library(playerId);
+		library.addAll(deck.getCards());
 	}
 
 	@Override
@@ -101,14 +102,12 @@ public abstract class PlayerImpl implements Player, Serializable {
 		this.hand.clear();
 		this.graveyard.clear();
 		this.abilities.clear();
-		this.library.clear();
 		this.wins = false;
 		this.loses = false;
 		this.left = false;
 		this.passed = false;
 		this.passedTurn = false;
-		library.addAll(deck.getCards());
-		for (Card card: deck.getCards().values()) {
+		for (Card card: library.getCards()) {
 			for (Watcher watcher: card.getWatchers()) {
 				watcher.setControllerId(playerId);
 				game.getState().getWatchers().add(watcher);
@@ -471,17 +470,6 @@ public abstract class PlayerImpl implements Player, Serializable {
 	}
 
 	@Override
-	public Deck getDeck() {
-		return deck;
-	}
-
-	@Override
-	public void setDeck(Deck deck) {
-		this.deck = deck;
-		deck.setOwnerId(playerId);
-	}
-
-	@Override
 	public ManaPool getManaPool() {
 		return this.manaPool;
 	}
@@ -578,7 +566,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 	@Override
 	public void restore(Player player) {
 		this.library = player.getLibrary();
-		this.deck = player.getDeck();
+//		this.deck = player.getDeck();
 		this.hand = player.getHand();
 		this.graveyard = player.getGraveyard();
 		this.abilities = player.getAbilities();

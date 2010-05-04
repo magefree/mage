@@ -524,6 +524,7 @@ public abstract class GameImpl implements Game, Serializable {
 		if (!replaceEvent(new GameEvent(GameEvent.EventType.DRAW_STEP, null, null, activePlayerId))) {
 			//20091005 - 504.1/703.4c
 			getPlayer(activePlayerId).drawCards(1, this);
+			saveState();
 			fireEvent(new GameEvent(GameEvent.EventType.DRAW_STEP_PRE, null, null, activePlayerId));
 			playPriority(activePlayerId);
 			fireEvent(new GameEvent(GameEvent.EventType.DRAW_STEP_POST, null, null, activePlayerId));
@@ -606,6 +607,7 @@ public abstract class GameImpl implements Game, Serializable {
 			playPriority(activePlayerId);
 			fireEvent(new GameEvent(GameEvent.EventType.END_COMBAT_STEP_POST, null, null, activePlayerId));
 			removeCreaturesFromCombat();
+			saveState();
 			return true;
 		}
 		return false;

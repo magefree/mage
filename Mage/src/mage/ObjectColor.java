@@ -32,8 +32,6 @@ import java.io.Serializable;
 
 public class ObjectColor implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
 	public static final ObjectColor WHITE = new ObjectColor("W");
 	public static final ObjectColor BLUE = new ObjectColor("U");
 	public static final ObjectColor BLACK = new ObjectColor("B");

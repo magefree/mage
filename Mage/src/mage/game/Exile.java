@@ -58,7 +58,7 @@ public class Exile implements Serializable {
 	}
 	
 	public ExileZone createZone(UUID id, String name) {
-		return createZone(id, name, false);
+		return createZone(id, name + " - Exile", false);
 	}
 
 	public ExileZone createZone(UUID id, String name, boolean hidden) {

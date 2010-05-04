@@ -142,23 +142,4 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
 		return null;
  	}
 
-//	@Override
-//	public ManaCosts getManaCosts() {
-//		ManaCosts manaCosts = new ManaCosts(ability);
-//		for (T cost: this) {
-//			if (cost instanceof ManaCost)
-//				manaCosts.add((ManaCost)cost);
-//		}
-//		return manaCosts;
-//	}
-//
-//	@Override
-//	public List<VariableManaCost> getVariableCosts() {
-//		List<VariableManaCost> variableCosts = new ArrayList<VariableManaCost>();
-//		for (T cost: this) {
-//			if (cost instanceof ManaCosts)
-//				variableCosts.addAll(((ManaCosts)cost).getVariableCosts());
-//		}
-//		return variableCosts;
-//	}
 }
