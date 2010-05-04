@@ -30,6 +30,7 @@ package mage.server;
 
 import mage.server.util.PluginClassLoader;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mage.server.game.DeckValidatorFactory;
@@ -61,6 +62,7 @@ public class Main {
 
 		logger.info("Starting MAGE server version " + Main.class.getPackage().getImplementationVersion());
 		logger.info("Logging level: " + Logging.getLevel(logger));
+		deleteSavedGames();
 		ConfigSettings config = ConfigSettings.getInstance();
 		for (Plugin plugin: config.getGameTypes()) {
 			GameFactory.getInstance().addGameType(plugin.getName(), loadPlugin(plugin));
@@ -94,6 +96,22 @@ public class Main {
 			logger.log(Level.SEVERE, "Error loading plugin " + plugin.getJar(), ex);
 		}
 		return null;
+	}
+
+	private static void deleteSavedGames() {
+		File directory = new File("saved/");
+		File[] files = directory.listFiles(
+			new FilenameFilter() {
+				@Override
+				public boolean accept(File dir, String name) {
+					return name.endsWith(".game");
+				}
+			}
+		);
+		for (File file : files)
+		{
+			file.delete();
+		}
 	}
 
 }

@@ -134,9 +134,9 @@ public class TableController {
 	}
 
 	private Player createPlayer(String name, Deck deck, String playerType) {
-		Player player = PlayerFactory.getInstance().createPlayer(playerType, name);
+		Player player = PlayerFactory.getInstance().createPlayer(playerType, name, deck);
 		logger.info("Player created " + player.getId());
-		player.setDeck(deck);
+//		player.setDeck(deck);
 		return player;
 	}
 
@@ -178,8 +178,8 @@ public class TableController {
 			}
 			finally {
 				output.close();
-				logger.log(Level.SEVERE, "Saved game:" + game.getId());
 			}
+			logger.log(Level.SEVERE, "Saved game:" + game.getId());
 		}
 		catch(IOException ex) {
 			logger.log(Level.SEVERE, "Cannot save game.", ex);

@@ -34,6 +34,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mage.cards.decks.Deck;
 import mage.players.Player;
 import mage.util.Logging;
 
@@ -54,12 +55,12 @@ public class PlayerFactory {
 
 	private PlayerFactory() {}
 
-	public Player createPlayer(String playerType, String name) {
+	public Player createPlayer(String playerType, String name, Deck deck) {
 		Player player;
 		Constructor<?> con;
 		try {
-			con = playerTypes.get(playerType).getConstructor(new Class[]{String.class});
-			player = (Player)con.newInstance(new Object[] {name});
+			con = playerTypes.get(playerType).getConstructor(new Class[]{String.class, Deck.class});
+			player = (Player)con.newInstance(new Object[] {name, deck});
 		} catch (Exception ex) {
 			logger.log(Level.SEVERE, null, ex);
 			return null;
