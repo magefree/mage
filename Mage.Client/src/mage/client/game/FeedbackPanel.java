@@ -117,6 +117,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 		stopModal();
 		this.btnLeft.setVisible(false);
 		this.btnRight.setVisible(false);
+		this.btnSpecial.setVisible(false);
 		this.lblMessage.setText("");
 	}
 

@@ -131,13 +131,14 @@ public class GamePanel extends javax.swing.JPanel {
 		this.players.clear();
 		this.pnlBattlefield.removeAll();
 		this.combat.hideDialog();
+		MageFrame.getDesktop().remove(combat);
 		this.setVisible(false);
 	}
 
 	public synchronized void init(GameView game) {
 		combat.init(gameId, bigCard);
-		combat.setLocation(300, 200);
-		MageFrame.getDesktop().add(combat, JLayeredPane.PALETTE_LAYER);
+		MageFrame.getDesktop().add(combat, JLayeredPane.POPUP_LAYER);
+		combat.setLocation(500, 300);
 		this.players.clear();
 		this.pnlBattlefield.removeAll();
 		for (PlayerView player: game.getPlayers()) {

@@ -64,7 +64,6 @@ public class AbilityPicker extends JPopupMenu implements PopupMenuListener {
 		for (Entry<UUID, String> choice: choices.getChoices().entrySet()) {
 			this.add(new AbilityPickerAction(choice.getKey(), choice.getValue()));
 		}
-//		this.setLocation(p);
 		this.show(MageFrame.getDesktop(), p.x, p.y);
 	}
 
@@ -81,7 +80,6 @@ public class AbilityPicker extends JPopupMenu implements PopupMenuListener {
 
 	private class AbilityPickerAction extends AbstractAction {
 
-		private static final long serialVersionUID = 1L;
 		private UUID id;
 
 		public AbilityPickerAction(UUID id, String choice) {

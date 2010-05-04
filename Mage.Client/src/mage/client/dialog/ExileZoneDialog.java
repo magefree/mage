@@ -60,7 +60,7 @@ public class ExileZoneDialog extends MageDialog {
 		if (exile.size() > 0) {
 			cards.loadCards(exile, bigCard, gameId);
 			if (getParent() != MageFrame.getDesktop() || this.isClosed)
-				MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
+				MageFrame.getDesktop().add(this, JLayeredPane.POPUP_LAYER);
 			try {
 				this.setIcon(false);
 			} catch (PropertyVetoException ex) {

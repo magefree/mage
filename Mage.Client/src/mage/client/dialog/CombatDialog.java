@@ -34,8 +34,11 @@
 
 package mage.client.dialog;
 
+import java.beans.PropertyVetoException;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mage.client.cards.BigCard;
 import mage.client.game.CombatGroup;
 import mage.view.CombatGroupView;
@@ -48,6 +51,8 @@ public class CombatDialog extends MageDialog {
 
 	private UUID gameId;
 	private BigCard bigCard;
+	private int lastX = 500;
+	private int lastY = 300;
 
     /** Creates new form CombatDialog */
     public CombatDialog() {
@@ -70,13 +75,23 @@ public class CombatDialog extends MageDialog {
 			combatArea.add(combatGroup);
 			combatGroup.revalidate();
 		}
+		try {
+			this.setSelected(true);
+		} catch (PropertyVetoException ex) {
+			Logger.getLogger(CombatDialog.class.getName()).log(Level.SEVERE, null, ex);
+		}
 		pack();
 		this.revalidate();
 		this.repaint();
-		this.setVisible(true);
+		if (!this.isVisible())  {
+			this.setVisible(true);
+			this.setLocation(lastX, lastY);
+		}
 	}
 
 	public void hideDialog() {
+		this.lastX = this.getX();
+		this.lastY = this.getY();
 		this.setVisible(false);
 	}
 
@@ -93,6 +108,7 @@ public class CombatDialog extends MageDialog {
         combatArea = new javax.swing.JPanel();
 
         setResizable(true);
+        setNormalBounds(new java.awt.Rectangle(400, 200, 410, 307));
         setVisible(true);
         getContentPane().setLayout(new java.awt.BorderLayout());
 
