@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
+import mage.MageObject;
 import mage.game.ExileZone;
 import mage.game.GameState;
 import mage.game.combat.CombatGroup;
@@ -65,7 +66,11 @@ public class GameView implements Serializable {
 		}
 		for (StackObject stackObject: game.getStack()) {
 			if (stackObject instanceof StackAbility) {
-				stack.add(new StackAbilityView((StackAbility)stackObject, game.getObject(stackObject.getSourceId()).getName()));
+				MageObject object = game.getObject(stackObject.getSourceId());
+				if (object != null)
+					stack.add(new StackAbilityView((StackAbility)stackObject, object.getName()));
+				else
+					stack.add(new StackAbilityView((StackAbility)stackObject, ""));
 			}
 			else {
 				stack.add(new CardView((Spell)stackObject));
