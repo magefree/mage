@@ -70,6 +70,7 @@ import mage.player.ai.simulators.CombatSimulator;
 import mage.player.ai.simulators.CreatureSimulator;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.filter.common.FilterCreatureForAttack;
 import mage.filter.common.FilterCreatureForCombat;
@@ -99,15 +100,15 @@ import mage.util.TreeNode;
  */
 public class ComputerPlayer extends PlayerImpl implements Player {
 
-	private final static Logger logger = Logging.getLogger(ComputerPlayer.class.getName());
+	private final static transient Logger logger = Logging.getLogger(ComputerPlayer.class.getName());
 	private boolean abort = false;
-	private Map<Mana, Card> unplayable = new TreeMap<Mana, Card>();
-	private List<Card> playableNonInstant = new ArrayList<Card>();
-	private List<Card> playableInstant = new ArrayList<Card>();
-	private List<ActivatedAbility> playableAbilities = new ArrayList<ActivatedAbility>();
+	private transient Map<Mana, Card> unplayable = new TreeMap<Mana, Card>();
+	private transient List<Card> playableNonInstant = new ArrayList<Card>();
+	private transient List<Card> playableInstant = new ArrayList<Card>();
+	private transient List<ActivatedAbility> playableAbilities = new ArrayList<ActivatedAbility>();
 
-	public ComputerPlayer(String name) {
-		super(name);
+	public ComputerPlayer(String name, Deck deck) {
+		super(name, deck);
 		human = false;
 	}
 
