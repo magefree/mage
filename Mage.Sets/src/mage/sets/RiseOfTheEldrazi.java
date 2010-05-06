@@ -28,31 +28,24 @@
 
 package mage.sets;
 
-import java.util.ArrayList;
 import mage.cards.ExpansionSet;
+import mage.sets.riseoftheeldrazi.*;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Sets extends ArrayList<ExpansionSet> {
+public class RiseOfTheEldrazi extends ExpansionSet {
 
-	private static final Sets fINSTANCE =  new Sets();
+	private static final RiseOfTheEldrazi fINSTANCE =  new RiseOfTheEldrazi();
 
-	public static Sets getInstance() {
+	public static RiseOfTheEldrazi getInstance() {
 		return fINSTANCE;
 	}
 
-	private Sets() {
-		this.add(AlaraReborn.getInstance());
-		this.add(Conflux.getInstance());
-		this.add(Magic2010.getInstance());
-		this.add(Planechase.getInstance());
-		this.add(RiseOfTheEldrazi.getInstance());
-		this.add(ShardsOfAlara.getInstance());
-		this.add(Tenth.getInstance());
-		this.add(Worldwake.getInstance());
-		this.add(Zendikar.getInstance());
+	private RiseOfTheEldrazi() {
+		this.name = "Rise Of The Eldrazi";
+		this.cards.add(KarganDragonlord.class);
 	}
-
+	
 }

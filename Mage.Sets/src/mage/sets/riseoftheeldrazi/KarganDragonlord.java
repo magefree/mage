@@ -26,33 +26,51 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets;
+package mage.sets.riseoftheeldrazi;
 
-import java.util.ArrayList;
-import mage.cards.ExpansionSet;
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Zone;
+import mage.MageInt;
+import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.effects.common.BoostSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.LevelAbility;
+import mage.abilities.keyword.LevelUpAbility;
+import mage.abilities.keyword.TrampleAbility;
+import mage.cards.LevelerCard;
+import mage.sets.RiseOfTheEldrazi;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Sets extends ArrayList<ExpansionSet> {
+public class KarganDragonlord extends LevelerCard {
 
-	private static final Sets fINSTANCE =  new Sets();
+	public KarganDragonlord(UUID ownerId) {
+		super(ownerId, "Kargan Dragonlord", new CardType[]{CardType.CREATURE}, "{R}{R}");
+		this.expansionSetId = RiseOfTheEldrazi.getInstance().getId();
+		this.subtype.add("Human");
+		this.subtype.add("Warrior");
+		this.color.setRed(true);
+		this.art = "";
+		this.power = new MageInt(2);
+		this.toughness = new MageInt(2);
 
-	public static Sets getInstance() {
-		return fINSTANCE;
+		this.addAbility(new LevelUpAbility(new ManaCosts("{R}")));
+		Abilities abilities1 = new AbilitiesImpl();
+		abilities1.add(FlyingAbility.getInstance());
+		this.getLevels().add(new LevelAbility(4, 7, abilities1, 4, 4));
+		Abilities abilities2 = new AbilitiesImpl();
+		abilities2.add(FlyingAbility.getInstance());
+		abilities2.add(TrampleAbility.getInstance());
+		abilities2.add(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCosts("{R}")));
+		this.getLevels().add(new LevelAbility(8, -1, abilities2, 8, 8));
 	}
 
-	private Sets() {
-		this.add(AlaraReborn.getInstance());
-		this.add(Conflux.getInstance());
-		this.add(Magic2010.getInstance());
-		this.add(Planechase.getInstance());
-		this.add(RiseOfTheEldrazi.getInstance());
-		this.add(ShardsOfAlara.getInstance());
-		this.add(Tenth.getInstance());
-		this.add(Worldwake.getInstance());
-		this.add(Zendikar.getInstance());
-	}
 
 }

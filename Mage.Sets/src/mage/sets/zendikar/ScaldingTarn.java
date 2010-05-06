@@ -30,17 +30,9 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Zone;
-import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.SearchLibraryPutInPlayEffect;
+import mage.abilities.common.FetchLandActivatedAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
 import mage.sets.Zendikar;
-import mage.target.common.TargetCardInLibrary;
 
 /**
  *
@@ -52,23 +44,8 @@ public class ScaldingTarn extends CardImpl {
 		super(ownerId, "Scalding Tarn", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Zendikar.getInstance().getId();
 		this.art = "123672_typ_reg_sty_010.jpg";
-		this.addAbility(new ScaldingTarnAbility());
+		this.addAbility(new FetchLandActivatedAbility(new String[] {"Island", "Mountain"}));
 	}
 
 }
 
-class ScaldingTarnAbility extends ActivatedAbilityImpl {
-
-	public ScaldingTarnAbility() {
-		super(Zone.BATTLEFIELD, null);
-		addCost(new TapSourceCost());
-		addCost(new PayLifeCost(1));
-		addCost(new SacrificeSourceCost());
-		FilterCard filter = new FilterCard("Island or Mountain");
-		filter.getName().add("Island");
-		filter.getName().add("Mountain");
-		TargetCardInLibrary target = new TargetCardInLibrary(filter);
-		addEffect(new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay));
-	}
-
-}
