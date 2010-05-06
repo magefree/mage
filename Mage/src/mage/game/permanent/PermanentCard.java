@@ -32,7 +32,9 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.abilities.keyword.LevelAbility;
 import mage.cards.Card;
+import mage.cards.LevelerCard;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 
@@ -58,7 +60,6 @@ public class PermanentCard extends PermanentImpl {
 	public void reset() {
 		// when the permanent is reset copy all original values from the card
 		// must copy card each reset so that the original values don't get modified
-		// TODO: might need to find way to handle abilities that need to preserve state
 		Card copy = card.copy();
 		this.name = copy.getName();
 		this.abilities = copy.getAbilities();
@@ -68,6 +69,14 @@ public class PermanentCard extends PermanentImpl {
 		this.manaCost = copy.getManaCost();
 		this.power = copy.getPower();
 		this.toughness = copy.getToughness();
+		if (card instanceof LevelerCard) {
+			LevelAbility level = ((LevelerCard)card).getLevel(this.getCounters().getCount("Level"));
+			if (level != null) {
+				this.power.setValue(level.getPower());
+				this.toughness.setValue(level.getToughness());
+				this.abilities.addAll(level.getAbilities());
+			}
+		}
 		this.subtype = copy.getSubtype();
 		this.supertype = copy.getSupertype();
 		this.art = copy.getArt();
