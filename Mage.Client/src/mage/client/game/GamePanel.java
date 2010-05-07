@@ -34,7 +34,6 @@
 
 package mage.client.game;
 
-import java.awt.MouseInfo;
 import java.util.logging.Level;
 import mage.client.*;
 import java.util.HashMap;
@@ -70,6 +69,7 @@ public class GamePanel extends javax.swing.JPanel {
 	private Map<UUID, PlayAreaPanel> players = new HashMap<UUID, PlayAreaPanel>();
 	private Map<UUID, ExileZoneDialog> exiles = new HashMap<UUID, ExileZoneDialog>();
 	private UUID gameId;
+	private UUID playerId;
 	private Session session;
 	private CombatDialog combat = new CombatDialog();
 
@@ -80,6 +80,7 @@ public class GamePanel extends javax.swing.JPanel {
 
 	public synchronized void showGame(UUID gameId, UUID playerId) {
 		this.gameId = gameId;
+		this.playerId = playerId;
 		session = MageFrame.getSession();
 		session.setGame(this);
 		this.feedbackPanel.init(gameId);
@@ -97,6 +98,7 @@ public class GamePanel extends javax.swing.JPanel {
 
 	public synchronized void watchGame(UUID gameId) {
 		this.gameId = gameId;
+		this.playerId = null;
 		session = MageFrame.getSession();
 		session.setGame(this);
 		this.feedbackPanel.init(gameId);
@@ -113,6 +115,7 @@ public class GamePanel extends javax.swing.JPanel {
 	}
 
 	public synchronized void replayGame() {
+		this.playerId = null;
 		session = MageFrame.getSession();
 		session.setGame(this);
 		this.feedbackPanel.clear();
@@ -141,20 +144,27 @@ public class GamePanel extends javax.swing.JPanel {
 		combat.setLocation(500, 300);
 		this.players.clear();
 		this.pnlBattlefield.removeAll();
+		PlayAreaPanel sessionPlayer = null;
 		for (PlayerView player: game.getPlayers()) {
 			PlayAreaPanel playerPanel = new PlayAreaPanel(player, bigCard, gameId);
 			players.put(player.getPlayerId(), playerPanel);
-			this.pnlBattlefield.add(playerPanel);
+			if (playerId.equals(player.getPlayerId()))
+				sessionPlayer = playerPanel;
+			else
+				this.pnlBattlefield.add(playerPanel);
 			playerPanel.setVisible(true);
 		}
+		// add PlayAreaPanel that belongs to the client last so that is will appear at the bottom
+		if (sessionPlayer != null)
+			this.pnlBattlefield.add(sessionPlayer);
 		updateGame(game);
 	}
 
 	public synchronized void updateGame(GameView game) {
-		if (game.getHand() != null)
-			this.hand.loadCards(game.getHand(), bigCard, gameId);
-		else
+		if (playerId == null || game.getHand() == null)
 			this.hand.setVisible(false);
+		else
+			this.hand.loadCards(game.getHand(), bigCard, gameId);
 		if (game.getPhase() != null)
 			this.txtPhase.setText(game.getPhase().toString());
 		if (game.getStep() != null)
