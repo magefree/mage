@@ -42,7 +42,6 @@ import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.ReplacementEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
-import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.counters.Counters;
 import mage.game.events.GameEvent;
@@ -73,7 +72,7 @@ public interface Player extends MageItem {
 	public Cards getHand();
 	public boolean isPassed();
 	public boolean isEmptyDraw();
-	public void resetPriority();
+	public void resetPassed();
 	public boolean hasLost();
 	public boolean hasWon();
 	public boolean hasLeft();

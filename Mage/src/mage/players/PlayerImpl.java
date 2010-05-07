@@ -388,6 +388,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 			result = playAbility((ActivatedAbility)ability.copy(), game);
 		}
 
+		//if player has taken an action then reset all player passed flags
+		if (result)
+			game.getPlayers().resetPassed();
 		return result;
 	}
 
@@ -586,7 +589,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 	}
 
 	@Override
-	public void resetPriority() {
+	public void resetPassed() {
 		passed = false;
 	}
 

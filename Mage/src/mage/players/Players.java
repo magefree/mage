@@ -41,9 +41,9 @@ public class Players extends LinkedHashMap<UUID, Player> {
 		this.put(player.getId(), player);
 	}
 
-	public void resetPriority() {
+	public void resetPassed() {
 		for (Player player: this.values()) {
-			player.resetPriority();
+			player.resetPassed();
 		}
 	}
 }
