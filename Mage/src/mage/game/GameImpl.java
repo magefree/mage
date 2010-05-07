@@ -30,7 +30,6 @@ package mage.game;
 
 import mage.game.stack.SpellStack;
 import java.io.Serializable;
-import java.net.URLClassLoader;
 import java.util.Collection;
 import java.util.Random;
 import java.util.Stack;
@@ -301,34 +300,41 @@ public abstract class GameImpl implements Game, Serializable {
 
 	@Override
 	public void playPriority(UUID activePlayerId) {
+		state.getPlayers().resetPassed();
 		while (!isGameOver()) {
-			while (!isGameOver()) {
-				int stackSize = state.getStack().size();
-				state.getPlayers().resetPriority();
-				for (Player player: getPlayerList(activePlayerId)) {
-					state.setPriorityPlayerId(player.getId());
-					while (!player.isPassed() && !isGameOver()) {
-						checkStateAndTriggered();
-						if (isGameOver()) 
-							return;
-						player.priority(this);
-						if (isGameOver())
-							return;
-						applyEffects();
-						saveState();
-					}
+			for (Player player: getPlayerList(activePlayerId)) {
+				state.setPriorityPlayerId(player.getId());
+				while (!player.isPassed() && !isGameOver()) {
+					checkStateAndTriggered();
+					if (isGameOver()) return;
+					// resetPassed should be called if player performs any action
+					player.priority(this);
+					if (isGameOver()) return;
+					applyEffects();
+					saveState();
 				}
-				//no items have been added to the stack
-				if (isGameOver() || stackSize == state.getStack().size())
-					break;
+				if (isGameOver()) return;
+				if (allPassed()) {
+					if (!state.getStack().isEmpty()) {
+						//20091005 - 115.4
+						state.getStack().resolve(this);
+						applyEffects();
+						state.getPlayers().resetPassed();
+						saveState();
+						break;
+					}
+					return;
+				}
 			}
-			if (isGameOver() || state.getStack().isEmpty())
-				break;
-			//20091005 - 115.4
-			state.getStack().resolve(this);
-			applyEffects();
-			saveState();
 		}
+	}
+
+	protected boolean allPassed() {
+		for (Player player: state.getPlayers().values()) {
+			if (!player.isPassed())
+				return false;
+		}
+		return true;
 	}
 
 	@Override
