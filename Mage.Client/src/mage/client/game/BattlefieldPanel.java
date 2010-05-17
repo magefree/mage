@@ -46,6 +46,7 @@ import java.util.Map.Entry;
 import java.util.UUID;
 import mage.client.cards.BigCard;
 import mage.client.cards.Permanent;
+import mage.client.util.Config;
 import mage.view.PermanentView;
 import static mage.client.util.Constants.*;
 
@@ -93,9 +94,9 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 	}
 
 	private void addPermanent(PermanentView permanent) {
-		Permanent perm = new Permanent(permanent, bigCard, gameId);
+		Permanent perm = new Permanent(permanent, bigCard, Config.dimensions, gameId);
 		perm.addComponentListener(this);
-		perm.setBounds(findEmptySpace(new Dimension(FRAME_WIDTH, FRAME_HEIGHT)));
+		perm.setBounds(findEmptySpace(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight)));
 		permanents.put(permanent.getId(), perm);
 		this.add(perm);
 		moveToFront(perm);
@@ -162,8 +163,6 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
-        setLayout(null);
     }// </editor-fold>//GEN-END:initComponents
 
 	@Override

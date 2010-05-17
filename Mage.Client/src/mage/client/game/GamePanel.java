@@ -34,6 +34,7 @@
 
 package mage.client.game;
 
+import java.awt.GridBagConstraints;
 import java.util.logging.Level;
 import mage.client.*;
 import java.util.HashMap;
@@ -51,6 +52,7 @@ import mage.client.dialog.PickNumberDialog;
 import mage.client.dialog.ShowCardsDialog;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.remote.Session;
+import mage.client.util.Config;
 import mage.util.Logging;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
@@ -144,19 +146,60 @@ public class GamePanel extends javax.swing.JPanel {
 		combat.setLocation(500, 300);
 		this.players.clear();
 		this.pnlBattlefield.removeAll();
-		PlayAreaPanel sessionPlayer = null;
+		//arrange players in a circle with the session player at the bottom left
+		int numSeats = game.getPlayers().size();
+		int numColumns = (numSeats + 1) / 2;
+		boolean oddNumber = (numColumns > 1 && numSeats % 2 == 1);
+		int col = 0;
+		int row = 1;
+		int playerSeat = 0;
 		for (PlayerView player: game.getPlayers()) {
+			if (playerId.equals(player.getPlayerId()))
+				break;
+			playerSeat++;
+		}
+		PlayerView player = game.getPlayers().get(playerSeat);
+		PlayAreaPanel sessionPlayer = new PlayAreaPanel(player, bigCard, gameId);
+		players.put(player.getPlayerId(), sessionPlayer);
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.BOTH;
+		c.weightx = 0.5;
+		c.weighty = 0.5;
+		if (oddNumber)
+			c.gridwidth = 2;
+		c.gridx = col;
+		c.gridy = row;
+		this.pnlBattlefield.add(sessionPlayer, c);
+		sessionPlayer.setVisible(true);
+		if (oddNumber)
+			col++;
+		int playerNum = playerSeat + 1;
+		while (true) {
+			if (row == 1)
+				col++;
+			else
+				col--;
+			if (col >= numColumns) {
+				row = 0;
+				col = numColumns - 1;
+			}
+			player = game.getPlayers().get(playerNum);
 			PlayAreaPanel playerPanel = new PlayAreaPanel(player, bigCard, gameId);
 			players.put(player.getPlayerId(), playerPanel);
-			if (playerId.equals(player.getPlayerId()))
-				sessionPlayer = playerPanel;
-			else
-				this.pnlBattlefield.add(playerPanel);
+			c = new GridBagConstraints();
+			c.fill = GridBagConstraints.BOTH;
+			c.weightx = 0.5;
+			c.weighty = 0.5;
+			c.gridx = col;
+			c.gridy = row;
+			this.pnlBattlefield.add(playerPanel, c);
 			playerPanel.setVisible(true);
+			playerNum++;
+			if (playerNum >= numSeats)
+				playerNum = 0;
+			if (playerNum == playerSeat)
+				break;
 		}
-		// add PlayAreaPanel that belongs to the client last so that is will appear at the bottom
-		if (sessionPlayer != null)
-			this.pnlBattlefield.add(sessionPlayer);
 		updateGame(game);
 	}
 
@@ -167,8 +210,12 @@ public class GamePanel extends javax.swing.JPanel {
 			this.hand.loadCards(game.getHand(), bigCard, gameId);
 		if (game.getPhase() != null)
 			this.txtPhase.setText(game.getPhase().toString());
+		else
+			this.txtPhase.setText("");
 		if (game.getStep() != null)
 			this.txtStep.setText(game.getStep().toString());
+		else
+			this.txtStep.setText("");
 		this.txtActivePlayer.setText(game.getActivePlayerName());
 		this.txtPriority.setText(game.getPriorityPlayerName());
 		this.txtTurn.setText(Integer.toString(game.getTurn()));
@@ -251,12 +298,12 @@ public class GamePanel extends javax.swing.JPanel {
 	public void revealCards(String name, CardsView cards) {
 		ShowCardsDialog showCards = new ShowCardsDialog();
 		MageFrame.getDesktop().add(showCards);
-		showCards.loadCards(name, cards, bigCard, gameId);
+		showCards.loadCards(name, cards, bigCard, Config.dimensions, gameId);
 	}
 
 	private void showCards(String title, CardsView cards) {
 		ShowCardsDialog showCards = new ShowCardsDialog();
-		showCards.loadCards(title, cards, bigCard, gameId);
+		showCards.loadCards(title, cards, bigCard, Config.dimensions, gameId);
 	}
 
 	public void getAmount(int min, int max) {
@@ -493,19 +540,22 @@ public class GamePanel extends javax.swing.JPanel {
         );
 
         pnlHand.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlHand.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 25));
+
+        hand.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight));
 
         javax.swing.GroupLayout pnlHandLayout = new javax.swing.GroupLayout(pnlHand);
         pnlHand.setLayout(pnlHandLayout);
         pnlHandLayout.setHorizontalGroup(
             pnlHandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(hand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
+            .addComponent(hand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
         );
         pnlHandLayout.setVerticalGroup(
             pnlHandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(hand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
         );
 
-        pnlBattlefield.setLayout(new java.awt.GridLayout(0, 1));
+        pnlBattlefield.setLayout(new java.awt.GridBagLayout());
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -516,7 +566,7 @@ public class GamePanel extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlHand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlBattlefield, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)))
+                    .addComponent(pnlBattlefield, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

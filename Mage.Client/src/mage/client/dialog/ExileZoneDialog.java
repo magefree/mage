@@ -61,11 +61,11 @@ public class ExileZoneDialog extends MageDialog {
 			cards.loadCards(exile, bigCard, gameId);
 			if (getParent() != MageFrame.getDesktop() || this.isClosed)
 				MageFrame.getDesktop().add(this, JLayeredPane.POPUP_LAYER);
-			try {
-				this.setIcon(false);
-			} catch (PropertyVetoException ex) {
-				Logger.getLogger(ShowCardsDialog.class.getName()).log(Level.SEVERE, null, ex);
-			}
+//			try {
+//				this.setIcon(false);
+//			} catch (PropertyVetoException ex) {
+//				Logger.getLogger(ShowCardsDialog.class.getName()).log(Level.SEVERE, null, ex);
+//			}
 		}
 		this.setVisible(exile.size() > 0);
 	}

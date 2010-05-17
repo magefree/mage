@@ -32,9 +32,11 @@
  * Created on Dec 17, 2009, 9:21:42 AM
  */
 
-package mage.client;
+package mage.client.table;
 
 import java.util.UUID;
+import mage.client.MageFrame;
+import mage.client.MagePane;
 
 /**
  *
@@ -69,7 +71,7 @@ public class TablesPane extends MagePane {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tablesPanel = new mage.client.TablesPanel();
+        tablesPanel = new mage.client.table.TablesPanel();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,7 +89,7 @@ public class TablesPane extends MagePane {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private mage.client.TablesPanel tablesPanel;
+    private mage.client.table.TablesPanel tablesPanel;
     // End of variables declaration//GEN-END:variables
 
 }

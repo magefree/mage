@@ -32,7 +32,7 @@
  * Created on 15-Dec-2009, 10:54:01 PM
  */
 
-package mage.client;
+package mage.client.table;
 
 import mage.client.dialog.NewTableDialog;
 import mage.client.dialog.JoinTableDialog;
@@ -51,8 +51,8 @@ import javax.swing.Action;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.AbstractTableModel;
-import mage.Constants;
 import mage.cards.decks.DeckCardLists;
+import mage.client.MageFrame;
 import mage.client.remote.MageRemoteException;
 import mage.client.remote.Session;
 import mage.client.util.ButtonColumn;
@@ -260,7 +260,8 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 					roomId,
 					"Two Player Duel",
 					"Constructed",
-					playerTypes
+					playerTypes,
+					null, null
 			);
 			session.joinTable(
 					roomId,

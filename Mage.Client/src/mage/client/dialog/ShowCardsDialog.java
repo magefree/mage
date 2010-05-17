@@ -43,6 +43,8 @@ import javax.swing.JLayeredPane;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.Card;
+import mage.client.cards.CardDimensions;
+import mage.client.util.Config;
 import mage.view.CardView;
 import mage.view.CardsView;
 import static mage.client.util.Constants.*;
@@ -59,13 +61,13 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 		this.setModal(false);
     }
 
-	public void loadCards(String name, CardsView showCards, BigCard bigCard, UUID gameId) {
+	public void loadCards(String name, CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId) {
 		this.title = name;
 		cardArea.removeAll();
 		if (showCards != null && showCards.size() < 10)
-			loadCardsFew(showCards, bigCard, gameId);
+			loadCardsFew(showCards, bigCard, dimension, gameId);
 		else
-			loadCardsMany(showCards, bigCard, gameId);
+			loadCardsMany(showCards, bigCard, dimension, gameId);
 		cardArea.revalidate();
 		if (getParent() != MageFrame.getDesktop() || this.isClosed)
 			MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
@@ -75,34 +77,34 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 		this.setVisible(true);
 	}
 
-	private void loadCardsFew(CardsView showCards, BigCard bigCard, UUID gameId) {
-		Rectangle rectangle = new Rectangle(FRAME_WIDTH, FRAME_HEIGHT);
+	private void loadCardsFew(CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId) {
+		Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 		for (CardView card: showCards) {
-			Card cardImg = new Card(card, bigCard, gameId);
+			Card cardImg = new Card(card, bigCard, dimension, gameId);
 			cardImg.setBounds(rectangle);
 			cardArea.add(cardImg);
 			cardArea.moveToFront(cardImg);
 			cardImg.update(card);
 			cardImg.addMouseListener(this);
-			rectangle.translate(FRAME_WIDTH, 0);
+			rectangle.translate(Config.dimensions.frameWidth, 0);
 		}
-		cardArea.setPreferredSize(new Dimension(FRAME_WIDTH * showCards.size(), FRAME_HEIGHT));
+		cardArea.setPreferredSize(new Dimension(Config.dimensions.frameWidth * showCards.size(), Config.dimensions.frameHeight));
 	}
 
-	private void loadCardsMany(CardsView showCards, BigCard bigCard, UUID gameId) {
+	private void loadCardsMany(CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId) {
 		int columns = 1;
 		if (showCards != null && showCards.size() > 0) {
-			Rectangle rectangle = new Rectangle(FRAME_WIDTH, FRAME_HEIGHT);
+			Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 			int count = 0;
 			for (CardView card: showCards) {
-				Card cardImg = new Card(card, bigCard, gameId);
+				Card cardImg = new Card(card, bigCard, dimension, gameId);
 				cardImg.setBounds(rectangle);
 				cardArea.add(cardImg);
 				cardArea.moveToFront(cardImg);
 				cardImg.update(card);
 				cardImg.addMouseListener(this);
 				if (count >= 20) {
-					rectangle.translate(FRAME_WIDTH, -400);
+					rectangle.translate(Config.dimensions.frameWidth, -400);
 					columns++;
 					count = 0;
 				} else {
@@ -111,7 +113,7 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 				}
 			}
 		}
-		cardArea.setPreferredSize(new Dimension(FRAME_WIDTH * columns, FRAME_HEIGHT + 400));
+		cardArea.setPreferredSize(new Dimension(Config.dimensions.frameWidth * columns, Config.dimensions.frameHeight + 400));
 	}
 
     /** This method is called from within the constructor to

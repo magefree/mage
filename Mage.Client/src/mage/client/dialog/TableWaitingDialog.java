@@ -74,16 +74,23 @@ public class TableWaitingDialog extends MageDialog implements Observer {
 		tableSeats.createDefaultColumnsFromModel();
     }
 
+	@Override
 	public void update(Observable arg0, Object arg1) {
 		TableView table = session.getTable(roomId, tableId);
 		if (table != null) {
 			if (table.getTableState() == TableState.STARTING) {
 				this.btnStart.setEnabled(true);
+				this.btnMoveDown.setEnabled(true);
+				this.btnMoveUp.setEnabled(true);
 			} else {
 				this.btnStart.setEnabled(false);
+				this.btnMoveDown.setEnabled(false);
+				this.btnMoveUp.setEnabled(false);
 			}
+			int row = this.tableSeats.getSelectedRow();
 			tableWaitModel.loadData(table);
 			this.tableSeats.repaint();
+			this.tableSeats.getSelectionModel().setSelectionInterval(row, row);
 		}
 		else {
 			closeDialog();
@@ -108,6 +115,7 @@ public class TableWaitingDialog extends MageDialog implements Observer {
 			this.chatPanel.connect(chatId);
 			seatsWatchdog.addObserver(this);
 			this.setModal(true);
+			this.setLocation(100, 100);
 			this.setVisible(true);
 		}
 		else {
@@ -141,9 +149,23 @@ public class TableWaitingDialog extends MageDialog implements Observer {
         tableSeats = new javax.swing.JTable();
         chatPanel = new mage.client.chat.ChatPanel();
 
+        setTitle("Waiting for players");
+
         btnMoveUp.setText("Move Up");
+        btnMoveUp.setEnabled(false);
+        btnMoveUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveUpActionPerformed(evt);
+            }
+        });
 
         btnMoveDown.setText("Move Down");
+        btnMoveDown.setEnabled(false);
+        btnMoveDown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveDownActionPerformed(evt);
+            }
+        });
 
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -153,6 +175,7 @@ public class TableWaitingDialog extends MageDialog implements Observer {
         });
 
         btnStart.setText("Start");
+        btnStart.setEnabled(false);
         btnStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnStartActionPerformed(evt);
@@ -164,6 +187,7 @@ public class TableWaitingDialog extends MageDialog implements Observer {
         jSplitPane1.setResizeWeight(1.0);
 
         tableSeats.setModel(tableWaitModel);
+        tableSeats.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tableSeats);
 
         jSplitPane1.setLeftComponent(jScrollPane1);
@@ -188,7 +212,7 @@ public class TableWaitingDialog extends MageDialog implements Observer {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMoveDown)
@@ -215,6 +239,23 @@ public class TableWaitingDialog extends MageDialog implements Observer {
 		closeDialog();
 	}//GEN-LAST:event_btnCancelActionPerformed
 
+	private void btnMoveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDownActionPerformed
+		int row = this.tableSeats.getSelectedRow();
+		if (row < this.tableSeats.getRowCount() - 1) {
+			session.swapSeats(roomId, tableId, row, row + 1);
+			this.tableSeats.getSelectionModel().setSelectionInterval(row + 1, row + 1);
+		}
+
+	}//GEN-LAST:event_btnMoveDownActionPerformed
+
+	private void btnMoveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveUpActionPerformed
+		int row = this.tableSeats.getSelectedRow();
+		if (row > 0) {
+			session.swapSeats(roomId, tableId, row, row - 1);
+			this.tableSeats.getSelectionModel().setSelectionInterval(row - 1, row - 1);
+		}
+	}//GEN-LAST:event_btnMoveUpActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
@@ -232,7 +273,6 @@ public class TableWaitingDialog extends MageDialog implements Observer {
 class TableWaitModel extends AbstractTableModel {
     private String[] columnNames = new String[]{"Seat Num", "Player Id", "Name", "Player Type"};
 	private SeatView[] seats = new SeatView[0];
-
 
 	public void loadData(TableView table) {
 		seats = table.getSeats().toArray(new SeatView[0]);
@@ -303,6 +343,7 @@ class SeatsWatchdog extends Observable implements ActionListener {
 		t.start();
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		setChanged();
 		notifyObservers();

@@ -32,12 +32,10 @@
  * Created on 15-Dec-2009, 10:09:46 PM
  */
 
-package mage.client;
+package mage.client.table;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
@@ -89,14 +87,6 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 		return this.txtPlayerDeck.getText();
 	}
 
-//	public void setPlayerName(String playerName) {
-//		this.txtPlayerName.setText(playerName);
-//	}
-//
-//	public void setDeckFile(String deckFile) {
-//		this.txtPlayerDeck.setText(deckFile);
-//	}
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -106,15 +96,17 @@ public class NewPlayerPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblPlayer2Name = new javax.swing.JLabel();
+        lblPlayerName = new javax.swing.JLabel();
         txtPlayerName = new javax.swing.JTextField();
         lblPlayerDeck = new javax.swing.JLabel();
         txtPlayerDeck = new javax.swing.JTextField();
         btnPlayerDeck = new javax.swing.JButton();
 
-        lblPlayer2Name.setText("Player Name:");
+        lblPlayerName.setLabelFor(txtPlayerName);
+        lblPlayerName.setText("Name:");
 
-        lblPlayerDeck.setText("Player Deck:");
+        lblPlayerDeck.setLabelFor(txtPlayerDeck);
+        lblPlayerDeck.setText("Deck:");
 
         btnPlayerDeck.setText("...");
         btnPlayerDeck.addActionListener(new java.awt.event.ActionListener() {
@@ -130,32 +122,27 @@ public class NewPlayerPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
+                        .addGap(4, 4, 4)
                         .addComponent(lblPlayerDeck))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblPlayer2Name)))
+                    .addComponent(lblPlayerName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
-                    .addComponent(txtPlayerDeck, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE))
+                    .addComponent(txtPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+                    .addComponent(txtPlayerDeck, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(btnPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPlayerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPlayer2Name))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(lblPlayerName))
+                .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPlayerDeck)
                     .addComponent(txtPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -166,8 +153,8 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPlayerDeck;
-    private javax.swing.JLabel lblPlayer2Name;
     private javax.swing.JLabel lblPlayerDeck;
+    private javax.swing.JLabel lblPlayerName;
     private javax.swing.JTextField txtPlayerDeck;
     private javax.swing.JTextField txtPlayerName;
     // End of variables declaration//GEN-END:variables

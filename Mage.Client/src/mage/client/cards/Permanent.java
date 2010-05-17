@@ -46,8 +46,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.PopupFactory;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.StyledDocument;
 import mage.client.util.ImageHelper;
 import mage.view.CounterView;
 import mage.view.PermanentView;
@@ -63,14 +61,15 @@ public class Permanent extends Card {
 
 	protected List<Permanent> links = new ArrayList<Permanent>();
 	protected boolean linked;
-	protected BufferedImage tappedImage = new BufferedImage(FRAME_HEIGHT, FRAME_WIDTH, BufferedImage.TYPE_INT_RGB);
+	protected BufferedImage tappedImage;
 	protected BufferedImage flippedImage;
 
     /** Creates new form Permanent */
-	public Permanent(PermanentView permanent, BigCard bigCard, UUID gameId) {
-		super(permanent, bigCard, gameId);
+	public Permanent(PermanentView permanent, BigCard bigCard, CardDimensions dimensions, UUID gameId) {
+		super(permanent, bigCard, dimensions, gameId);
 		this.setSize(this.getPreferredSize());
 		this.permanent = permanent;
+		tappedImage = new BufferedImage(dimension.frameHeight, dimension.frameWidth, BufferedImage.TYPE_INT_RGB);
 	}
 
 	public UUID getPermanentId() {
@@ -154,10 +153,10 @@ public class Permanent extends Card {
 	      g2.setColor(Color.BLACK);
 	    }
 	    if (permanent.isTapped()) {
-	    	g2.drawRect(0, 0, FRAME_HEIGHT - 1, FRAME_WIDTH - 1);
+	    	g2.drawRect(0, 0, dimension.frameHeight - 1, dimension.frameWidth - 1);
 	    }
 	    else {
-	    	g2.drawRect(0, 0, FRAME_WIDTH - 1, FRAME_HEIGHT - 1);
+	    	g2.drawRect(0, 0, dimension.frameWidth - 1, dimension.frameHeight - 1);
 	    }
 
 	}
@@ -166,7 +165,7 @@ public class Permanent extends Card {
 		Graphics2D g = (Graphics2D) tappedImage.getGraphics();
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		g.drawImage(this.createImage(ImageHelper.rotate(small)), 0, 0, this);
+		g.drawImage(this.createImage(ImageHelper.rotate(small, dimension)), 0, 0, this);
 
 		g.dispose();
 	}
@@ -177,7 +176,7 @@ public class Permanent extends Card {
 		if (permanent.getDamage() > 0) {
 			Graphics2D g = image.createGraphics();
 			g.setColor(Color.RED);
-			g.drawString(Integer.toString(permanent.getDamage()), DAMAGE_MAX_LEFT, POWBOX_MAX_TOP + 15);
+			g.drawString(Integer.toString(permanent.getDamage()), DAMAGE_MAX_LEFT, POWBOX_TEXT_MAX_TOP);
 			g.dispose();
 		}
 		generateTappedImage();
@@ -186,10 +185,10 @@ public class Permanent extends Card {
 	@Override
 	public Dimension getPreferredSize() {
 	    if (permanent != null && permanent.isTapped()) {
-	    	return new Dimension(FRAME_HEIGHT, FRAME_WIDTH);
+	    	return new Dimension(dimension.frameHeight, dimension.frameWidth);
 	    }
 	    else {
-	    	return new Dimension(FRAME_WIDTH, FRAME_HEIGHT);
+	    	return new Dimension(dimension.frameWidth, dimension.frameHeight);
 	    }
 	}
 
@@ -207,7 +206,7 @@ public class Permanent extends Card {
 		if (popup != null)
 			popup.hide();
 		PopupFactory factory = PopupFactory.getSharedInstance();
-		int x = (int) this.getLocationOnScreen().getX() + (permanent.isTapped()?FRAME_HEIGHT:FRAME_WIDTH);
+		int x = (int) this.getLocationOnScreen().getX() + (permanent.isTapped()?dimension.frameHeight:dimension.frameWidth);
 		int y = (int) this.getLocationOnScreen().getY() + 40;
 		popup = factory.getPopup(this, popupText, x, y);
 		popup.show();

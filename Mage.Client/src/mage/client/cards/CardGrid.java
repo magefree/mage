@@ -44,11 +44,11 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.client.util.Config;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.view.CardView;
 import mage.view.CardsView;
-import static mage.client.util.Constants.*;
 
 /**
  *
@@ -64,7 +64,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     public CardGrid() {
         initComponents();
 		addComponentListener(this);
-		setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
+		setPreferredSize(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight));
     }
 
 	public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
@@ -72,7 +72,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
 		this.gameId = gameId;
 		cards.clear();
 		for (CardView card: showCards) {
-			Card cardImg = new Card(card, bigCard, gameId);
+			Card cardImg = new Card(card, bigCard, Config.dimensions, gameId);
 			cardImg.update(card);
 			cardImg.addMouseListener(this);
 			cards.add(cardImg);
@@ -84,13 +84,13 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
 	public void drawCards() {
 		removeAll();
 		int maxWidth = this.getParent().getWidth();
-		int numColumns = maxWidth / FRAME_WIDTH;
+		int numColumns = maxWidth / Config.dimensions.frameWidth;
 		int curColumn = 0;
 		int curRow = 0;
 		if (cards.size() > 0) {
-			Rectangle rectangle = new Rectangle(FRAME_WIDTH, FRAME_HEIGHT);
+			Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 			for (Card cardImg: cards) {
-				rectangle.setLocation(curColumn * FRAME_WIDTH, curRow * 20);
+				rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
 				cardImg.setBounds(rectangle);
 				add(cardImg);
 				moveToFront(cardImg);

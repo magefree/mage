@@ -40,6 +40,8 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import mage.Constants.MultiplayerAttackOption;
+import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.DeckCardLists;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
@@ -50,6 +52,7 @@ import mage.interfaces.MageException;
 import mage.interfaces.Server;
 import mage.interfaces.callback.CallbackClientDaemon;
 import mage.util.Logging;
+import mage.view.GameTypeView;
 import mage.view.TableView;
 
 /**
@@ -66,7 +69,7 @@ public class Session {
 	private String userName;
 	private MageFrame frame;
 	private String[] playerTypes;
-	private String[] gameTypes;
+	private List<GameTypeView> gameTypes;
 	private String[] deckTypes;
 	private Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
 	private GamePanel game;
@@ -127,7 +130,7 @@ public class Session {
 		return playerTypes;
 	}
 
-	public String[] getGameTypes() {
+	public List<GameTypeView> getGameTypes() {
 		return gameTypes;
 	}
 
@@ -373,9 +376,9 @@ public class Session {
 		return false;
 	}
 
-	public TableView createTable(UUID roomId, String gameType, String deckType, List<String> playerTypes) {
+	public TableView createTable(UUID roomId, String gameType, String deckType, List<String> playerTypes, MultiplayerAttackOption attackOption, RangeOfInfluence range) {
 		try {
-			return server.createTable(sessionId, roomId, gameType, deckType, playerTypes);
+			return server.createTable(sessionId, roomId, gameType, deckType, playerTypes, attackOption, range);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -398,6 +401,18 @@ public class Session {
 	public boolean removeTable(UUID roomId, UUID tableId) {
 		try {
 			server.removeTable(sessionId, roomId, tableId);
+			return true;
+		} catch (RemoteException ex) {
+			handleRemoteException(ex);
+		} catch (MageException ex) {
+			handleMageException(ex);
+		}
+		return false;
+	}
+
+	public boolean swapSeats(UUID roomId, UUID tableId, int seatNum1, int seatNum2) {
+		try {
+			server.swapSeats(sessionId, roomId, tableId, seatNum1, seatNum2);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);

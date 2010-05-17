@@ -63,7 +63,6 @@ public class MageDialog extends javax.swing.JInternalFrame {
 
     @Override
     public void show() {
-		this.setLocation(200, 200);
         super.show();
         if (this.modal) {
             startModal();

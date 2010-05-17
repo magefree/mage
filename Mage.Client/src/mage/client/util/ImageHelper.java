@@ -41,6 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import javax.imageio.ImageIO;
 import mage.Constants.CardType;
+import mage.client.cards.CardDimensions;
 import mage.view.AbilityView;
 import mage.view.CardView;
 import mage.view.StackAbilityView;
@@ -202,23 +203,23 @@ public class ImageHelper {
 		return image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 	}
 
-	public static MemoryImageSource rotate(Image image) {
-		int buffer[] = new int[FRAME_WIDTH * FRAME_HEIGHT];
-		int rotate[] = new int[FRAME_HEIGHT * FRAME_WIDTH];
-		PixelGrabber grabber = new PixelGrabber(image, 0, 0, FRAME_WIDTH, FRAME_HEIGHT, buffer, 0, FRAME_WIDTH);
+	public static MemoryImageSource rotate(Image image, CardDimensions dimensions) {
+		int buffer[] = new int[dimensions.frameWidth * dimensions.frameHeight];
+		int rotate[] = new int[dimensions.frameHeight * dimensions.frameWidth];
+		PixelGrabber grabber = new PixelGrabber(image, 0, 0, dimensions.frameWidth, dimensions.frameHeight, buffer, 0, dimensions.frameWidth);
 		try {
 			grabber.grabPixels();
 		}
 		catch(InterruptedException e) {
 			e.printStackTrace();
 		}
-		for(int y = 0; y < FRAME_HEIGHT; y++) {
-			for(int x = 0; x < FRAME_WIDTH; x++) {
-				rotate[((FRAME_WIDTH - x - 1) *FRAME_HEIGHT)+y] = buffer[(y*FRAME_WIDTH)+x];
+		for(int y = 0; y < dimensions.frameHeight; y++) {
+			for(int x = 0; x < dimensions.frameWidth; x++) {
+				rotate[((dimensions.frameWidth - x - 1) *dimensions.frameHeight)+y] = buffer[(y*dimensions.frameWidth)+x];
 			}
 		}
 
-		return new MemoryImageSource(FRAME_HEIGHT, FRAME_WIDTH, rotate, 0, FRAME_HEIGHT);
+		return new MemoryImageSource(dimensions.frameHeight, dimensions.frameWidth, rotate, 0, dimensions.frameHeight);
 
 	}
 
@@ -230,11 +231,11 @@ public class ImageHelper {
 				Image image = Symbols.getSymbol(symbol);
 				if (image != null) {
 					g.drawImage(image, costLeft, yOffset, o);
-					costLeft -= SYMBOL_SPACE;
+					costLeft -= SYMBOL_MAX_SPACE;
 				}
 				else {
-					g.drawString(symbol, costLeft, yOffset + SYMBOL_SPACE);
-					costLeft -= SYMBOL_SPACE + 4;
+					g.drawString(symbol, costLeft, yOffset + SYMBOL_MAX_SPACE);
+					costLeft -= SYMBOL_MAX_SPACE + 4;
 				}
 			}
 		}

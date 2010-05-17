@@ -39,6 +39,7 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.UUID;
+import mage.client.util.Config;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.view.CardView;
@@ -56,23 +57,23 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
     /** Creates new form Cards */
     public CardsList() {
         initComponents();
-		cardArea.setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
+		cardArea.setPreferredSize(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight));
     }
 
 	public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
 		cardArea.removeAll();
 		if (showCards != null && showCards.size() > 0) {
-			Rectangle rectangle = new Rectangle(FRAME_WIDTH, FRAME_HEIGHT);
+			Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 			int count = 0;
 			for (CardView card: showCards) {
-				Card cardImg = new Card(card, bigCard, gameId);
+				Card cardImg = new Card(card, bigCard, Config.dimensions, gameId);
 				cardImg.setBounds(rectangle);
 				cardArea.add(cardImg);
 				cardArea.moveToFront(cardImg);
 				cardImg.update(card);
 				cardImg.addMouseListener(this);
 				if (count >= 10) {
-					rectangle.translate(FRAME_WIDTH, -200);
+					rectangle.translate(Config.dimensions.frameWidth, -200);
 					count = 0;
 				} else {
 					rectangle.translate(0, 20);
@@ -80,7 +81,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
 				}
 			}
 		}
-		cardArea.setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT + 200));
+		cardArea.setPreferredSize(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 200));
 		cardArea.revalidate();
 		this.revalidate();
 		this.repaint();
@@ -122,6 +123,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
+	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getClickCount() == 2 && !e.isConsumed()) {
 			e.consume();

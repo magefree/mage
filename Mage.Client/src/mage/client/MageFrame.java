@@ -36,17 +36,14 @@ package mage.client;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JDesktopPane;
+import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import mage.cards.decks.Deck;
 import mage.client.dialog.AboutDialog;
 import mage.client.dialog.ConnectDialog;
 import mage.client.remote.Session;
@@ -99,7 +96,8 @@ public class MageFrame extends javax.swing.JFrame {
 
 		session = new Session(this);
 		connectDialog = new ConnectDialog(session);
-		desktopPane.add(connectDialog);
+		desktopPane.add(connectDialog, JLayeredPane.POPUP_LAYER);
+//		connectDialog.setLocation(50, 50);
 		disableButtons();
     }
 
@@ -134,7 +132,7 @@ public class MageFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         desktopPane = new javax.swing.JDesktopPane();
-        tablesPane = new mage.client.TablesPane();
+        tablesPane = new mage.client.table.TablesPane();
         gamePane = new mage.client.game.GamePane();
         deckEditorPane = new mage.client.deckeditor.DeckEditorPane();
         mageToolbar = new javax.swing.JToolBar();
@@ -344,7 +342,7 @@ public class MageFrame extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JToolBar mageToolbar;
-    private mage.client.TablesPane tablesPane;
+    private mage.client.table.TablesPane tablesPane;
     // End of variables declaration//GEN-END:variables
 
 	public void setStatusText(String status) {

@@ -52,7 +52,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout"/>
       <SubComponents>
-        <Component class="mage.client.TablesPane" name="tablesPane">
+        <Component class="mage.client.table.TablesPane" name="tablesPane">
           <Properties>
             <Property name="maximum" type="boolean" value="true"/>
           </Properties>

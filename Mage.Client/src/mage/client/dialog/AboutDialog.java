@@ -48,6 +48,7 @@ public class AboutDialog extends MageDialog {
 
 	public void showDialog() {
 		this.lblVersion.setText(MageDialog.class.getPackage().getImplementationVersion());
+		this.setLocation(100, 100);
 		this.setVisible(true);
 	}
 
@@ -65,6 +66,8 @@ public class AboutDialog extends MageDialog {
         lblVersion = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+
+        setTitle("About MAGE");
 
         btnOk.setText("OK");
         btnOk.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +118,7 @@ public class AboutDialog extends MageDialog {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(btnOk)
                 .addContainerGap())
         );

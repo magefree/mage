@@ -18,56 +18,56 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                       <Component id="lblPlayerDeck" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblPlayer2Name" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="lblPlayerName" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txtPlayerName" alignment="0" pref="314" max="32767" attributes="1"/>
-                  <Component id="txtPlayerDeck" alignment="0" pref="314" max="32767" attributes="1"/>
+                  <Component id="txtPlayerName" alignment="0" pref="405" max="32767" attributes="1"/>
+                  <Component id="txtPlayerDeck" alignment="0" pref="405" max="32767" attributes="1"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="btnPlayerDeck" min="-2" pref="24" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtPlayerName" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblPlayer2Name" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPlayerName" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblPlayerDeck" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtPlayerDeck" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnPlayerDeck" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lblPlayer2Name">
+    <Component class="javax.swing.JLabel" name="lblPlayerName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Player Name:"/>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="txtPlayerName"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Name:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPlayerName">
     </Component>
     <Component class="javax.swing.JLabel" name="lblPlayerDeck">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Player Deck:"/>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="txtPlayerDeck"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Deck:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPlayerDeck">

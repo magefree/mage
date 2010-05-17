@@ -36,6 +36,7 @@ package mage.client.cards;
 
 import java.awt.Dimension;
 import java.util.UUID;
+import mage.client.util.Config;
 import mage.view.CardView;
 import mage.view.CardsView;
 import static mage.client.util.Constants.*;
@@ -49,17 +50,17 @@ public class Cards extends javax.swing.JPanel {
     /** Creates new form Cards */
     public Cards() {
         initComponents();
-		cardArea.setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
+		cardArea.setPreferredSize(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight));
     }
 
 	public void loadCards(CardsView cards, BigCard bigCard, UUID gameId) {
 		cardArea.removeAll();
 		for (CardView card: cards) {
-			Card cardImg = new Card(card, bigCard, gameId);
+			Card cardImg = new Card(card, bigCard, Config.dimensions, gameId);
 			cardArea.add(cardImg);
 			cardImg.update(card);
 		}
-		cardArea.setPreferredSize(new Dimension(cards.size() * FRAME_WIDTH, FRAME_HEIGHT));
+		cardArea.setPreferredSize(new Dimension(cards.size() * Config.dimensions.frameWidth, Config.dimensions.frameHeight));
 		cardArea.revalidate();
 		cardArea.repaint();
 		this.revalidate();

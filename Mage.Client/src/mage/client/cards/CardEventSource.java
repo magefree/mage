@@ -52,6 +52,7 @@ public class CardEventSource implements EventSource<Event>, Serializable {
 		dispatcher.fireEvent(new Event(cardId, message));
 	}
 
+	@Override
 	public void clearListeners() {
 		dispatcher.clearListeners();
 	}

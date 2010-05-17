@@ -63,6 +63,7 @@ import javax.swing.text.StyledDocument;
 import mage.Constants.CardType;
 import mage.client.MageFrame;
 import mage.client.remote.Session;
+
 import mage.client.util.ImageHelper;
 import mage.view.CardView;
 import static mage.client.util.Constants.*;
@@ -76,6 +77,7 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 	protected static Session session = MageFrame.getSession();
 
 	protected Point p;
+	protected CardDimensions dimension;
 
 	protected UUID gameId;
 	protected BigCard bigCard;
@@ -85,15 +87,17 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 	protected TextPopup popupText = new TextPopup();
 	protected BufferedImage background;
 	protected BufferedImage image = new BufferedImage(FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT, BufferedImage.TYPE_INT_RGB);
-	protected BufferedImage small = new BufferedImage(FRAME_WIDTH, FRAME_HEIGHT, BufferedImage.TYPE_INT_RGB);
+	protected BufferedImage small;
 
     /** Creates new form Card */
-    public Card(CardView card, BigCard bigCard, UUID gameId) {
+    public Card(CardView card, BigCard bigCard, CardDimensions dimension, UUID gameId) {
+		this.dimension = dimension;
         initComponents();
 
 		this.gameId = gameId;
 		this.card = card;
 		this.bigCard = bigCard;
+		small = new BufferedImage(dimension.frameWidth, dimension.frameHeight, BufferedImage.TYPE_INT_RGB);
 		background = ImageHelper.getBackground(card);
 		
 		StyledDocument doc = text.getStyledDocument();
@@ -132,15 +136,15 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 
 	    gSmall.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		gSmall.setColor(Color.BLACK);
-	    gSmall.drawImage(ImageHelper.ScaleImage(image, FRAME_WIDTH, FRAME_HEIGHT), 0, 0, this);
+	    gSmall.drawImage(ImageHelper.ScaleImage(image, dimension.frameWidth, dimension.frameHeight), 0, 0, this);
 
 		gImage.setFont(new Font("Arial", Font.PLAIN, NAME_FONT_MAX_SIZE));
 		gImage.drawString(card.getName(), CONTENT_MAX_XOFFSET, NAME_MAX_YOFFSET);
 		if (card.getCardTypes().contains(CardType.CREATURE)) {
-			gImage.drawString(card.getPower() + "/" + card.getToughness(), POWBOX_MAX_LEFT + 10, POWBOX_MAX_TOP + 15);
+			gImage.drawString(card.getPower() + "/" + card.getToughness(), POWBOX_TEXT_MAX_LEFT, POWBOX_TEXT_MAX_TOP);
 		}
 		else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
-			gImage.drawString(card.getLoyalty(), POWBOX_MAX_LEFT + 10, POWBOX_MAX_TOP + 15);
+			gImage.drawString(card.getLoyalty(), POWBOX_TEXT_MAX_LEFT, POWBOX_TEXT_MAX_TOP);
 		}
 
 		if (card.getCardTypes().size() > 0)
@@ -148,17 +152,17 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 
 		gImage.dispose();
 
-		gSmall.setFont(new Font("Arial", Font.PLAIN, NAME_FONT_SIZE));
-		gSmall.drawString(card.getName(), CONTENT_XOFFSET, NAME_YOFFSET+1);
+		gSmall.setFont(new Font("Arial", Font.PLAIN, dimension.nameFontSize));
+		gSmall.drawString(card.getName(), dimension.contentXOffset, dimension.nameYOffset);
 		if (card.getCardTypes().contains(CardType.CREATURE)) {
-			gSmall.drawString(card.getPower() + "/" + card.getToughness(), POWBOX_LEFT + 5, POWBOX_TOP + 8);
+			gSmall.drawString(card.getPower() + "/" + card.getToughness(), dimension.powBoxTextLeft, dimension.powBoxTextTop);
 		}
 		else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
-			gSmall.drawString(card.getLoyalty(), POWBOX_LEFT + 5, POWBOX_TOP + 8);
+			gSmall.drawString(card.getLoyalty(), dimension.powBoxTextLeft, dimension.powBoxTextTop);
 		}
 
 		if (card.getCardTypes().size() > 0)
-			gSmall.drawString(cardType, CONTENT_XOFFSET, TYPE_YOFFSET);
+			gSmall.drawString(cardType, dimension.contentXOffset, dimension.typeYOffset);
 		drawText();
 
 	    gSmall.dispose();
@@ -171,15 +175,17 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 			sb.append("\n").append(card.getManaCost());
 		}
 		sb.append("\n").append(cardType);
-		sb.append("\n").append(card.getColor().toString());
-		for (String rule: getRules()) {
-			sb.append("\n").append(rule);
+		if (card.getColor().hasColor()) {
+			sb.append("\n").append(card.getColor().toString());
 		}
 		if (card.getCardTypes().contains(CardType.CREATURE)) {
-			sb.append(card.getPower()).append("/").append(card.getToughness());
+			sb.append("\n").append(card.getPower()).append("/").append(card.getToughness());
 		}
 		else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
-			sb.append(card.getLoyalty());
+			sb.append("\n").append(card.getLoyalty());
+		}
+		for (String rule: getRules()) {
+			sb.append("\n").append(rule);
 		}
 		return sb.toString();
 	}
@@ -235,7 +241,7 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 
         setMinimumSize(getPreferredSize());
         setOpaque(false);
-        setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
+        setPreferredSize(new Dimension(dimension.frameWidth, dimension.frameHeight));
         setLayout(null);
 
         jScrollPane1.setBorder(null);
@@ -245,14 +251,14 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 
         text.setBorder(null);
         text.setEditable(false);
-        text.setFont(new java.awt.Font("Arial", 0, 9)); // NOI18N
+        text.setFont(new java.awt.Font("Arial", 0, 9));
         text.setFocusable(false);
         text.setOpaque(false);
         jScrollPane1.setViewportView(text);
 
         add(jScrollPane1);
         jScrollPane1.setBounds(20, 110, 130, 100);
-        jScrollPane1.setBounds(new Rectangle(CONTENT_XOFFSET, TEXT_YOFFSET, TEXT_WIDTH, TEXT_HEIGHT));
+        jScrollPane1.setBounds(new Rectangle(dimension.contentXOffset, dimension.textYOffset, dimension.textWidth, dimension.textHeight));
     }// </editor-fold>//GEN-END:initComponents
 
 	@Override
@@ -266,7 +272,7 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 		} else {
 			g2.setColor(Color.BLACK);
 		}
-		g2.drawRect(0, 0, FRAME_WIDTH - 1, FRAME_HEIGHT - 1);
+		g2.drawRect(0, 0, dimension.frameWidth - 1, dimension.frameHeight - 1);
 	}
 
 	@Override
@@ -298,11 +304,11 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 		if (popup != null)
 			popup.hide();
 		PopupFactory factory = PopupFactory.getSharedInstance();
-		popup = factory.getPopup(this, popupText, (int) this.getLocationOnScreen().getX() + FRAME_WIDTH, (int) this.getLocationOnScreen().getY() + 40);
+		popup = factory.getPopup(this, popupText, (int) this.getLocationOnScreen().getX() + dimension.frameWidth, (int) this.getLocationOnScreen().getY() + 40);
 		popup.show();
 		//hack to get popup to resize to fit text
 		popup.hide();
-		popup = factory.getPopup(this, popupText, (int) this.getLocationOnScreen().getX() + FRAME_WIDTH, (int) this.getLocationOnScreen().getY() + 40);
+		popup = factory.getPopup(this, popupText, (int) this.getLocationOnScreen().getX() + dimension.frameWidth, (int) this.getLocationOnScreen().getY() + 40);
 		popup.show();
 	}
 

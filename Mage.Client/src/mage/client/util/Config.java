@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mage.client.cards.CardDimensions;
 import mage.util.Logging;
 
 /**
@@ -53,7 +54,9 @@ public class Config {
 	public static final String cardArtResourcePath;
 	public static final String symbolsResourcePath;
 	public static final String resourcePath;
+	public static final double cardScalingFactor;
 	public static final boolean useResource;
+	public static final CardDimensions dimensions;
 
 	static {
 		Properties p = new Properties();
@@ -67,6 +70,8 @@ public class Config {
 		remoteServer = p.getProperty("remote-server");
 		cardsResourcePath = p.getProperty("cards-resource-path");
 		resourcePath = p.getProperty("resource-path");
+		cardScalingFactor = Double.valueOf(p.getProperty("card-scaling-factor"));
+		dimensions = new CardDimensions(cardScalingFactor);
 		File test = new File(cardsResourcePath);
 		if (test.isDirectory()) {
 			useResource = false;

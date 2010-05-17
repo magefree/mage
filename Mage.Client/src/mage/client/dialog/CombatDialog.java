@@ -108,6 +108,7 @@ public class CombatDialog extends MageDialog {
         combatArea = new javax.swing.JPanel();
 
         setResizable(true);
+        setTitle("Combat");
         setNormalBounds(new java.awt.Rectangle(400, 200, 410, 307));
         setVisible(true);
         getContentPane().setLayout(new java.awt.BorderLayout());

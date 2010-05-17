@@ -37,6 +37,7 @@ package mage.client.game;
 import java.awt.Dimension;
 import java.util.UUID;
 import mage.client.cards.BigCard;
+import mage.client.util.Config;
 import mage.view.CombatGroupView;
 import static mage.client.util.Constants.*;
 
@@ -63,9 +64,9 @@ public class CombatGroup extends javax.swing.JPanel {
 	public void update(CombatGroupView combatGroup) {
 		this.lblDefender.setText(combatGroup.getDefenderName());
 		this.attackers.loadCards(combatGroup.getAttackers(), bigCard, gameId);
-		attackers.setPreferredSize(new Dimension(FRAME_WIDTH + 6, FRAME_HEIGHT + 6));
+		attackers.setPreferredSize(new Dimension(Config.dimensions.frameWidth + 6, Config.dimensions.frameHeight + 6));
 		this.blockers.loadCards(combatGroup.getBlockers(), bigCard, gameId);
-		blockers.setPreferredSize(new Dimension(FRAME_WIDTH + 6, FRAME_HEIGHT + 6));
+		blockers.setPreferredSize(new Dimension(Config.dimensions.frameWidth + 6, Config.dimensions.frameHeight + 6));
 		this.attackers.setVisible(true);
 		this.blockers.setVisible(true);
 	}

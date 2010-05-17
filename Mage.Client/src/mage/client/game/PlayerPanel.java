@@ -34,11 +34,13 @@
 
 package mage.client.game;
 
+import java.awt.Color;
 import java.util.UUID;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.dialog.ShowCardsDialog;
 import mage.client.remote.Session;
+import mage.client.util.Config;
 import mage.view.PlayerView;
 
 /**
@@ -74,6 +76,15 @@ public class PlayerPanel extends javax.swing.JPanel {
 		this.txtLibrary.setText(Integer.toString(player.getLibraryCount()));
 		this.btnGrave.setText(Integer.toString(player.getGraveyard().size()));
 		this.btnPlayerName.setText(player.getName());
+		if (player.isActive()) {
+			this.btnPlayerName.setBackground(Color.DARK_GRAY);
+		}
+		else if (player.hasLeft()) {
+			this.btnPlayerName.setBackground(Color.RED);
+		}
+		else {
+			this.btnPlayerName.setBackground(Color.LIGHT_GRAY);
+		}
 	}
 
     /** This method is called from within the constructor to
@@ -189,7 +200,7 @@ public class PlayerPanel extends javax.swing.JPanel {
 		if (graveyard == null) {
 			graveyard = new ShowCardsDialog();
 		}
-		graveyard.loadCards(player.getName() + " graveyard", player.getGraveyard(), bigCard, gameId);
+		graveyard.loadCards(player.getName() + " graveyard", player.getGraveyard(), bigCard, Config.dimensions, gameId);
 	}//GEN-LAST:event_btnGraveActionPerformed
 
 

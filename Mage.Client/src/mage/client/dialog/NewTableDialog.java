@@ -34,6 +34,8 @@
 
 package mage.client.dialog;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import mage.client.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,9 +44,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.SpinnerNumberModel;
+import mage.Constants.MultiplayerAttackOption;
+import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.DeckCardLists;
 import mage.client.remote.Session;
+import mage.client.table.TablePlayerPanel;
+import mage.client.util.Event;
+import mage.client.util.Listener;
 import mage.util.Logging;
+import mage.view.GameTypeView;
 import mage.view.TableView;
 
 /**
@@ -59,12 +68,11 @@ public class NewTableDialog extends MageDialog {
 	private UUID playerId;
 	private UUID roomId;
 	private Session session;
+	private List<TablePlayerPanel> players = new ArrayList<TablePlayerPanel>();
 	
     /** Creates new form NewTableDialog */
     public NewTableDialog() {
         initComponents();
-		this.player2Panel.setVisible(false);
-
     }
 
     /** This method is called from within the constructor to
@@ -80,24 +88,33 @@ public class NewTableDialog extends MageDialog {
         cbGameType = new javax.swing.JComboBox();
         lbDeckType = new javax.swing.JLabel();
         cbDeckType = new javax.swing.JComboBox();
-        lbPlayer2Type = new javax.swing.JLabel();
-        cbPlayer2Type = new javax.swing.JComboBox();
         btnOK = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
-        player2Panel = new mage.client.NewPlayerPanel();
-        player1Panel = new mage.client.NewPlayerPanel();
+        player1Panel = new mage.client.table.NewPlayerPanel();
+        spnNumPlayers = new javax.swing.JSpinner();
+        lblNumPlayers = new javax.swing.JLabel();
+        cbRange = new javax.swing.JComboBox();
+        lblRange = new javax.swing.JLabel();
+        lblAttack = new javax.swing.JLabel();
+        cbAttackOption = new javax.swing.JComboBox();
+        pnlOtherPlayers = new javax.swing.JPanel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
 
-        lblGameType.setText("Game Type:");
+        setTitle("New Table");
 
-        lbDeckType.setText("Deck Type:");
+        lblGameType.setText("Game Type");
 
-        lbPlayer2Type.setText("Player 2 Type:");
-
-        cbPlayer2Type.addActionListener(new java.awt.event.ActionListener() {
+        cbGameType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbPlayer2TypeActionPerformed(evt);
+                cbGameTypeActionPerformed(evt);
             }
         });
+
+        lbDeckType.setText("Deck Type");
 
         btnOK.setText("OK");
         btnOK.addActionListener(new java.awt.event.ActionListener() {
@@ -113,63 +130,136 @@ public class NewTableDialog extends MageDialog {
             }
         });
 
+        spnNumPlayers.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                numPlayersChanged(evt);
+            }
+        });
+
+        lblNumPlayers.setLabelFor(spnNumPlayers);
+        lblNumPlayers.setText("Players");
+
+        lblRange.setLabelFor(cbRange);
+        lblRange.setText("Range of Influence");
+
+        lblAttack.setLabelFor(cbAttackOption);
+        lblAttack.setText("Attack Option");
+
+        pnlOtherPlayers.setLayout(new java.awt.GridLayout(0, 1));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLabel1.setText("Player 1 (You)");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLabel2.setText("Other Players");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblGameType)
-                            .addComponent(lbDeckType))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbDeckType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbGameType, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lbPlayer2Type)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbPlayer2Type, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(player1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(player2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(360, Short.MAX_VALUE)
-                        .addComponent(btnOK)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancel)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(358, Short.MAX_VALUE)
+                .addComponent(btnOK)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCancel)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbDeckType)
+                .addContainerGap(426, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbGameType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNumPlayers)
+                            .addComponent(spnNumPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblRange)
+                            .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblAttack)
+                            .addComponent(cbAttackOption, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblGameType)
+                    .addComponent(cbDeckType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(396, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(player1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(399, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbGameType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblGameType))
+                .addComponent(lbDeckType)
+                .addGap(0, 0, 0)
+                .addComponent(cbDeckType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbDeckType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbDeckType))
+                .addComponent(lblGameType)
+                .addGap(0, 0, 0)
+                .addComponent(cbGameType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblAttack)
+                        .addGap(0, 0, 0)
+                        .addComponent(cbAttackOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblNumPlayers)
+                        .addGap(0, 0, 0)
+                        .addComponent(spnNumPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblRange)
+                        .addGap(0, 0, 0)
+                        .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addGap(0, 0, 0)
                 .addComponent(player1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbPlayer2Type)
-                    .addComponent(cbPlayer2Type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(player2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 4, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
                     .addComponent(btnOK))
-                .addContainerGap())
+                .addGap(0, 0, 0))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(223, 223, 223)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(149, Short.MAX_VALUE)))
         );
 
         pack();
@@ -181,45 +271,100 @@ public class NewTableDialog extends MageDialog {
 		this.setVisible(false);
 	}//GEN-LAST:event_btnCancelActionPerformed
 
-	private void cbPlayer2TypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPlayer2TypeActionPerformed
-		if (!this.cbPlayer2Type.getSelectedItem().equals("Human")) {
-			this.player2Panel.setVisible(true);
+	private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
+		GameTypeView gameType = (GameTypeView) cbGameType.getSelectedItem();
+		List<String> playerTypes = new ArrayList<String>();
+		playerTypes.add("Human");
+		for (TablePlayerPanel player: players) {
+			playerTypes.add(player.getPlayerType());
 		}
-		else {
-			this.player2Panel.setVisible(false);
+		table = session.createTable(
+				roomId,
+				gameType.getName(),
+				(String)this.cbDeckType.getSelectedItem(),
+				playerTypes,
+				(MultiplayerAttackOption)this.cbAttackOption.getSelectedItem(), 
+				(RangeOfInfluence)this.cbRange.getSelectedItem());
+		try {
+			if (session.joinTable(roomId, table.getTableId(), 0, this.player1Panel.getPlayerName(), DeckCardLists.load(this.player1Panel.getDeckFile()))) {
+				int seatNum = 1;
+				for (TablePlayerPanel player: players) {
+					if (!player.getPlayerType().equals("Human")) {
+						if (!player.joinTable(roomId, table.getTableId(), seatNum)) {
+							JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
+							session.removeTable(roomId, table.getTableId());
+							table = null;
+							return;
+						}
+					}
+					seatNum++;
+				}
+				this.setVisible(false);
+				return;
+			}
+		} catch (FileNotFoundException ex) {
+			handleError(ex);
+		} catch (IOException ex) {
+			handleError(ex);
+		} catch (ClassNotFoundException ex) {
+			handleError(ex);
+		}
+		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
+		session.removeTable(roomId, table.getTableId());
+		table = null;
+	}//GEN-LAST:event_btnOKActionPerformed
+
+	private void cbGameTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGameTypeActionPerformed
+		setGameOptions();
+	}//GEN-LAST:event_cbGameTypeActionPerformed
+
+	private void numPlayersChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_numPlayersChanged
+		int numPlayers = (Integer)this.spnNumPlayers.getValue() - 1;
+		createPlayers(numPlayers);
+	}//GEN-LAST:event_numPlayersChanged
+
+	private void setGameOptions() {
+		GameTypeView gameType = (GameTypeView) cbGameType.getSelectedItem();
+		this.spnNumPlayers.setModel(new SpinnerNumberModel(gameType.getMinPlayers(), gameType.getMinPlayers(), gameType.getMaxPlayers(), 1));
+		this.spnNumPlayers.setEnabled(gameType.getMinPlayers() != gameType.getMaxPlayers());
+		this.cbAttackOption.setEnabled(gameType.isUseAttackOption());
+		this.cbRange.setEnabled(gameType.isUseRange());
+		createPlayers(gameType.getMinPlayers() - 1);
+	}
+
+	private void createPlayers(int numPlayers) {
+		if (numPlayers > players.size()) {
+			while (players.size() != numPlayers) {
+				TablePlayerPanel playerPanel = new TablePlayerPanel();
+				playerPanel.init(players.size() + 2);
+				players.add(playerPanel);
+				playerPanel.addPlayerTypeEventListener(
+					new Listener<Event> () {
+						@Override
+						public void event(Event event) {
+							drawPlayers();
+						}
+					}
+				);
+			}
+		}
+		else if (numPlayers < players.size()) {
+			while (players.size() != numPlayers) {
+				players.remove(players.size() - 1);
+			}
+		}
+		drawPlayers();
+	}
+
+	private void drawPlayers() {
+		this.pnlOtherPlayers.removeAll();
+		for (TablePlayerPanel panel: players) {
+			this.pnlOtherPlayers.add(panel);
 		}
 		this.pack();
 		this.revalidate();
 		this.repaint();
-		
-	}//GEN-LAST:event_cbPlayer2TypeActionPerformed
-
-	private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-		try {
-			List<String> playerTypes = new ArrayList<String>();
-			playerTypes.add("Human");
-			playerTypes.add((String) this.cbPlayer2Type.getSelectedItem());
-			table = session.createTable(roomId,	(String)this.cbGameType.getSelectedItem(), (String)this.cbDeckType.getSelectedItem(), playerTypes);
-			if (session.joinTable(roomId, table.getTableId(), 0, this.player1Panel.getPlayerName(), DeckCardLists.load(this.player1Panel.getDeckFile()))) {
-				if (!this.cbPlayer2Type.getSelectedItem().equals("Human")) {
-					if (session.joinTable(roomId, table.getTableId(), 1, this.player2Panel.getPlayerName(), DeckCardLists.load(this.player2Panel.getDeckFile()))) {
-						this.setVisible(false);
-						return;
-					}
-					JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
-				}
-				else {
-					this.setVisible(false);
-					return;
-				}
-				JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
-			}
-		} catch (Exception ex) {
-			handleError(ex);
-		}
-		session.removeTable(roomId, table.getTableId());
-		table = null;
-	}//GEN-LAST:event_btnOKActionPerformed
+	}
 
 	private void handleError(Exception ex) {
 		logger.log(Level.SEVERE, "Error loading deck", ex);
@@ -229,14 +374,14 @@ public class NewTableDialog extends MageDialog {
 	public void showDialog(UUID roomId) {
 		session = MageFrame.getSession();
 		this.player1Panel.setPlayerName(session.getUserName());
-		cbGameType.setModel(new DefaultComboBoxModel(session.getGameTypes()));
+		cbGameType.setModel(new DefaultComboBoxModel(session.getGameTypes().toArray()));
 		cbDeckType.setModel(new DefaultComboBoxModel(session.getDeckTypes()));
-		cbPlayer2Type.setModel(new DefaultComboBoxModel(session.getPlayerTypes()));
+		cbRange.setModel(new DefaultComboBoxModel(RangeOfInfluence.values()));
+		cbAttackOption.setModel(new DefaultComboBoxModel(MultiplayerAttackOption.values()));
 		this.roomId = roomId;
 		this.setModal(true);
-		this.pack();
-		this.revalidate();
-		this.repaint();
+		setGameOptions();
+		this.setLocation(150, 100);
 		this.setVisible(true);
 	}
 
@@ -251,14 +396,23 @@ public class NewTableDialog extends MageDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnOK;
+    private javax.swing.JComboBox cbAttackOption;
     private javax.swing.JComboBox cbDeckType;
     private javax.swing.JComboBox cbGameType;
-    private javax.swing.JComboBox cbPlayer2Type;
+    private javax.swing.JComboBox cbRange;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel lbDeckType;
-    private javax.swing.JLabel lbPlayer2Type;
+    private javax.swing.JLabel lblAttack;
     private javax.swing.JLabel lblGameType;
-    private mage.client.NewPlayerPanel player1Panel;
-    private mage.client.NewPlayerPanel player2Panel;
+    private javax.swing.JLabel lblNumPlayers;
+    private javax.swing.JLabel lblRange;
+    private mage.client.table.NewPlayerPanel player1Panel;
+    private javax.swing.JPanel pnlOtherPlayers;
+    private javax.swing.JSpinner spnNumPlayers;
     // End of variables declaration//GEN-END:variables
 
 }

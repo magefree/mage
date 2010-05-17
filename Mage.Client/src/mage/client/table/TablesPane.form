@@ -29,7 +29,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="mage.client.TablesPanel" name="tablesPanel">
+    <Component class="mage.client.table.TablesPanel" name="tablesPanel">
     </Component>
   </SubComponents>
 </Form>
