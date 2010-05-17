@@ -29,19 +29,22 @@
 package mage.game;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
-import mage.players.Player;
+import mage.Constants.MultiplayerAttackOption;
+import mage.Constants.RangeOfInfluence;
 
-public class TwoPlayerGame extends GameImpl {
+public class TwoPlayerDuel extends GameImpl {
 
-	public TwoPlayerGame() {
-		super();
+	public TwoPlayerDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range) {
+		super(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL);
 	}
 
 	@Override
-	public String getGameType() {
-		return "Two Player Duel";
+	public GameType getGameType() {
+		return new TwoPlayerDuelType();
 	}
 
 	@Override
@@ -70,12 +73,13 @@ public class TwoPlayerGame extends GameImpl {
 	}
 
 	@Override
-	public List<UUID> getOpponents(UUID playerId) {
-		List<UUID> opponents = new ArrayList<UUID>();
-		for (Player player: this.getPlayers().values()) {
-			if (!player.getId().equals(playerId))
-				opponents.add(player.getId());
+	public Set<UUID> getOpponents(UUID playerId) {
+		Set<UUID> opponents = new HashSet<UUID>();
+		for (UUID opponentId: this.getPlayer(playerId).getInRange()) {
+			if (!opponentId.equals(playerId))
+				opponents.add(opponentId);
 		}
 		return opponents;
 	}
+
 }
