@@ -60,7 +60,7 @@ public class ActionSimulator {
 	}
 
 	public int evaluateState() {
-		Player opponent = game.getPlayer(game.getOpponents(player.getId()).get(0));
+		Player opponent = game.getPlayer(game.getOpponents(player.getId()).iterator().next());
 		if (game.isGameOver()) {
 			if (player.hasLost() || opponent.hasWon())
 				return Integer.MIN_VALUE;
@@ -70,10 +70,10 @@ public class ActionSimulator {
 		int value = player.getLife();
 		value -= opponent.getLife();
 		PermanentEvaluator evaluator = new PermanentEvaluator();
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(player.getId())) {
+		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(player.getId())) {
 			value += evaluator.evaluate(permanent, game);
 		}
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(player.getId())) {
+		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(player.getId())) {
 			value -= evaluator.evaluate(permanent, game);
 		}
 		value += player.getHand().size();
