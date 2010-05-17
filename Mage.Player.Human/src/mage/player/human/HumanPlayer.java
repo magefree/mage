@@ -36,8 +36,10 @@ import mage.cards.Cards;
 import mage.choices.Choice;
 import mage.players.*;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import mage.Constants.Outcome;
+import mage.Constants.RangeOfInfluence;
 import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.MageObject;
@@ -68,8 +70,8 @@ public class HumanPlayer extends PlayerImpl {
 
 	protected transient TargetPermanent targetCombat = new TargetPermanent(new FilterCreatureForCombat(), TargetController.YOU);
 
-	public HumanPlayer(String name, Deck deck) {
-		super(name, deck);
+	public HumanPlayer(String name, Deck deck, RangeOfInfluence range) {
+		super(name, deck, range);
 		human = true;
 	}
 
@@ -294,7 +296,7 @@ public class HumanPlayer extends PlayerImpl {
 		}
 	}
 
-	protected boolean selectDefender(List<UUID> defenders, UUID attackerId, Game game) {
+	protected boolean selectDefender(Set<UUID> defenders, UUID attackerId, Game game) {
 		TargetDefender target = new TargetDefender(defenders, attackerId);
 		if (chooseTarget(Outcome.Damage, target, game)) {
 			declareAttacker(attackerId, response.getUUID(), game);
