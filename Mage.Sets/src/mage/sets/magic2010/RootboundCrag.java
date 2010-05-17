@@ -31,13 +31,12 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.abilities.common.EntersBattlefieldStaticAbility;
-import mage.abilities.effects.common.EntersBattlefieldTappedEffect;
+import mage.abilities.effects.common.EntersBattlefieldTappedUnlessControlsEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.common.FilterLandPermanent;
 import mage.sets.Magic2010;
 
 /**
@@ -46,32 +45,21 @@ import mage.sets.Magic2010;
  */
 public class RootboundCrag extends CardImpl {
 
+	private static FilterLandPermanent filter = new FilterLandPermanent();
+
+	static {
+		filter.getSubtype().add("Mountain");
+		filter.getSubtype().add("Forest");
+		filter.setScopeSubtype(ComparisonScope.Any);
+		filter.setMessage("Mountain or a Forest");
+	}
+
 	public RootboundCrag(UUID ownerId) {
 		super(ownerId, "Rootbound Crag", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.art = "121648_typ_reg_sty_010.jpg";
-		this.addAbility(new EntersBattlefieldStaticAbility(new RootboundCragEffect()));
+		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedUnlessControlsEffect(filter)));
 		this.addAbility(new RedManaAbility());
 		this.addAbility(new GreenManaAbility());
 	}
-}
-
-class RootboundCragEffect extends EntersBattlefieldTappedEffect {
-
-	@Override
-	public boolean replaceEvent(GameEvent event, Game game) {
-		FilterPermanent filter = new FilterPermanent();
-		filter.getName().add("Mountain");
-		filter.getName().add("Forest");
-		filter.getControllerId().add(this.source.getControllerId());
-		if (game.getBattlefield().count(filter) == 0)
-			return apply(game);
-		return false;
-	}
-
-	@Override
-	public String getText() {
-		return super.getText() + " unless you control a Mountain or a Forest";
-	}
-
 }

@@ -31,13 +31,12 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.abilities.common.EntersBattlefieldStaticAbility;
-import mage.abilities.effects.common.EntersBattlefieldTappedEffect;
+import mage.abilities.effects.common.EntersBattlefieldTappedUnlessControlsEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.common.FilterLandPermanent;
 import mage.sets.Magic2010;
 
 /**
@@ -46,32 +45,21 @@ import mage.sets.Magic2010;
  */
 public class DragonskullSummit extends CardImpl {
 
+	private static FilterLandPermanent filter = new FilterLandPermanent();
+
+	static {
+		filter.getSubtype().add("Swamp");
+		filter.getSubtype().add("Mountain");
+		filter.setScopeSubtype(ComparisonScope.Any);
+		filter.setMessage("Swamp or a Mountain");
+	}
+
 	public DragonskullSummit(UUID ownerId) {
 		super(ownerId, "Dragonskull Summit", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.art = "121671_typ_reg_sty_010.jpg";
-		this.addAbility(new EntersBattlefieldStaticAbility(new DragonskullSummitEffect()));
+		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedUnlessControlsEffect(filter)));
 		this.addAbility(new BlackManaAbility());
 		this.addAbility(new RedManaAbility());
 	}
-}
-
-class DragonskullSummitEffect extends EntersBattlefieldTappedEffect {
-
-	@Override
-	public boolean replaceEvent(GameEvent event, Game game) {
-		FilterPermanent filter = new FilterPermanent();
-		filter.getName().add("Swamp");
-		filter.getName().add("Mountain");
-		filter.getControllerId().add(this.source.getControllerId());
-		if (game.getBattlefield().count(filter) == 0)
-			return apply(game);
-		return false;
-	}
-
-	@Override
-	public String getText() {
-		return super.getText() + " unless you control a Mountain or a Swamp";
-	}
-
 }

@@ -68,11 +68,13 @@ class EarthquakeEffect extends OneShotEffect {
 		FilterCreaturePermanent filter = new FilterCreaturePermanent();
 		filter.getAbilities().add(FlyingAbility.getInstance());
 		filter.setNotAbilities(true);
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter)) {
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, this.source.getControllerId(), game)) {
 			permanent.damage(amount, source.getId(), game);
 		}
-		for (Player player: game.getPlayers().values()) {
-			player.damage(amount, source.getId(), game);
+		for (UUID playerId: game.getPlayer(this.source.getControllerId()).getInRange()) {
+			Player player = game.getPlayer(playerId);
+			if (player != null)
+				player.damage(amount, source.getId(), game);
 		}
 		return true;
 	}

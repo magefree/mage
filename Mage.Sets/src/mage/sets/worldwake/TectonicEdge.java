@@ -83,7 +83,7 @@ class TectonicEdgeCost extends CostImpl {
 		for (UUID opponentId: game.getOpponents(playerId)) {
 			filter.getControllerId().clear();
 			filter.getControllerId().add(opponentId);
-			if (game.getBattlefield().count(filter) > 3) {
+			if (game.getBattlefield().countAll(filter, opponentId) > 3) {
 				return true;
 			}
 		}

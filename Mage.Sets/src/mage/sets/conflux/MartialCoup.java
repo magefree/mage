@@ -68,7 +68,7 @@ class MartialCoupEffect extends OneShotEffect {
 
 		FilterCreaturePermanent filter = new FilterCreaturePermanent();
 		if (amount > 4) {
-			for (Permanent permanent: game.getBattlefield().getActivePermanents(filter)) {
+			for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, this.source.getControllerId(), game)) {
 				permanent.destroy(this.source.getSourceId(), game, false);
 			}
 		}

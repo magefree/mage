@@ -76,9 +76,7 @@ class BraveTheElementsEffect extends GainAbilityControlledEffect {
 		ChoiceColor choice = (ChoiceColor) this.source.getChoices().get(0);
 		filter2.setColor(choice.getColor());
 		filter2.setMessage(choice.getChoice());
-		filter1.getControllerId().clear();
-		filter1.getControllerId().add(source.getControllerId());
-		for (Permanent perm: game.getBattlefield().getActivePermanents(filter1)) {
+		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter1, source.getControllerId())) {
 			perm.addAbility(ability);
 		}
 		return true;

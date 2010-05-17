@@ -87,13 +87,12 @@ class MasterOfTheWildHuntEffect extends OneShotEffect {
 		filter.setUseTapped(true);
 	}
 
+	@Override
 	public boolean apply(Game game) {
-		filter.getControllerId().clear();
-		filter.getControllerId().add(this.source.getControllerId());
 		List<UUID> wolves = new ArrayList<UUID>();
 		Permanent target = game.getPermanent(this.source.getFirstTarget());
 		if (target != null) {
-			for (Permanent permanent: game.getBattlefield().getActivePermanents(filter)) {
+			for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, this.source.getControllerId())) {
 				permanent.tap(game);
 				target.damage(permanent.getToughness().getValue(), permanent.getId(), game);
 			}
