@@ -30,12 +30,14 @@ package mage.interfaces;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import mage.Constants.MultiplayerAttackOption;
+import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
 import mage.interfaces.callback.CallbackServer;
+import mage.view.GameTypeView;
 import mage.view.TableView;
 
 /**
@@ -48,20 +50,21 @@ public interface Server extends Remote, CallbackServer {
 	public UUID registerClient(String userName, UUID clientId) throws RemoteException, MageException;
 	public void deregisterClient(UUID sessionId) throws RemoteException, MageException;
 
-	public String[] getGameTypes() throws RemoteException, MageException;
+	public List<GameTypeView> getGameTypes() throws RemoteException, MageException;
 	public String[] getPlayerTypes() throws RemoteException, MageException;
 	public String[] getDeckTypes() throws RemoteException, MageException;
 
 	//table methods
-	public TableView createTable(UUID sessionId, UUID roomId, String gameType, String deckType, List<String> playerTypes) throws RemoteException, MageException;
+	public TableView createTable(UUID sessionId, UUID roomId, String gameType, String deckType, List<String> playerTypes, MultiplayerAttackOption attackOption, RangeOfInfluence range) throws RemoteException, MageException;
 	public boolean joinTable(UUID sessionId, UUID roomId, UUID tableId, int seatNum, String name, DeckCardLists deckList) throws RemoteException, MageException, GameException;
 	public boolean watchTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
 	public boolean replayTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
 	public void leaveTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
+	public void swapSeats(UUID sessionId, UUID roomId, UUID tableId, int seatNum1, int seatNum2) throws RemoteException, MageException;
 	public void removeTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
 	public boolean isTableOwner(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
 	public TableView getTable(UUID roomId, UUID tableId) throws RemoteException, MageException;
-	public Collection<TableView> getTables(UUID roomId) throws RemoteException, MageException;
+	public List<TableView> getTables(UUID roomId) throws RemoteException, MageException;
 
 	//chat methods
 	public void sendChatMessage(UUID chatId, String userName, String message) throws RemoteException, MageException;

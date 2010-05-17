@@ -84,8 +84,12 @@ public class GameView implements Serializable {
 		this.turn = game.getTurnNum();
 		if (game.getActivePlayerId() != null)
 			this.activePlayerName = game.getPlayer(game.getActivePlayerId()).getName();
+		else
+			this.activePlayerName = "";
 		if (game.getPriorityPlayerId() != null)
 			this.priorityPlayerName = game.getPlayer(game.getPriorityPlayerId()).getName();
+		else
+			this.priorityPlayerName = "";
 		for (CombatGroup combatGroup: game.getCombat().getGroups()) {
 			combat.add(new CombatGroupView(combatGroup, game));
 		}

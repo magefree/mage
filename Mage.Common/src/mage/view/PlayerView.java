@@ -48,6 +48,8 @@ public class PlayerView implements Serializable {
 	private int life;
 	private int libraryCount;
 	private int handCount;
+	private boolean isActive;
+	private boolean hasLeft;
 	private ManaPoolView manaPool;
 	private CardsView graveyard = new CardsView();
 	private Map<UUID, PermanentView> battlefield = new HashMap<UUID, PermanentView>();
@@ -59,6 +61,8 @@ public class PlayerView implements Serializable {
 		this.libraryCount = player.getLibrary().size();
 		this.handCount = player.getHand().size();
 		this.manaPool = new ManaPoolView(player.getManaPool());
+		this.isActive = (player.getId().equals(game.getActivePlayerId()));
+		this.hasLeft = player.hasLeft();
 		for (Card card: player.getGraveyard().values()) {
 			graveyard.add(new CardView(card));
 		}
@@ -69,35 +73,42 @@ public class PlayerView implements Serializable {
 	}
 
 	public int getLife() {
-		return life;
+		return this.life;
 	}
 
 	public int getLibraryCount() {
-		return libraryCount;
+		return this.libraryCount;
 	}
 
 	public int getHandCount() {
-		return handCount;
+		return this.handCount;
 	}
 
 	public ManaPoolView getManaPool() {
-		return manaPool;
+		return this.manaPool;
 	}
 
 	public CardsView getGraveyard() {
-		return graveyard;
+		return this.graveyard;
 	}
 
 	public Map<UUID, PermanentView> getBattlefield() {
-		return battlefield;
+		return this.battlefield;
 	}
 
 	public UUID getPlayerId() {
-		return playerId;
+		return this.playerId;
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
+	public boolean isActive() {
+		return this.isActive;
+	}
+
+	public boolean hasLeft() {
+		return this.hasLeft;
+	}
 }

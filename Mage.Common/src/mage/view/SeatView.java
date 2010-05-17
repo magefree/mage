@@ -46,8 +46,8 @@ public class SeatView implements Serializable {
 		if (seat.getPlayer() != null) {
 			this.playerId = seat.getPlayer().getId();
 			this.playerName = seat.getPlayer().getName();
-			this.playerType = seat.getPlayerType();
 		}
+		this.playerType = seat.getPlayerType();
 	}
 
 	public UUID getPlayerId() {
