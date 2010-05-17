@@ -38,6 +38,7 @@ import java.util.ListIterator;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
+ * a thread-safe circular list
  *
  * @author BetaSteward_at_googlemail.com
  */
@@ -96,14 +97,29 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
 		return list.get(index);
 	}
 
+	/**
+	 * Returns the next element in the list
+	 * 
+	 * @return the next element in the list
+	 */
 	public E getNext() {
 		return list.get(incrementPointer());
 	}
 
+	/**
+	 * Returns the previous element in the list
+	 *
+	 * @return the previous element in the list
+	 */
 	public E getPrevious() {
 		return list.get(decrementPointer());
 	}
 
+	/**
+	 * Removes the current element from the list
+	 *
+	 * @return <tt>true</tt> is the item was successfully removed
+	 */
 	public boolean remove() {
 		return this.remove(get());
 	}

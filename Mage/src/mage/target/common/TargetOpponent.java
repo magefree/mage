@@ -44,10 +44,10 @@ public class TargetOpponent extends TargetPlayer {
 	}
 	
 	@Override
-	public boolean canChoose(UUID sourceId, Game game) {
+	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
 		filter.getPlayerId().clear();
 		filter.getPlayerId().addAll(game.getOpponents(this.getAbility().getControllerId()));
-		return super.canChoose(sourceId, game);
+		return super.canChoose(sourceId, sourceControllerId, game);
 	}
 	
 	@Override

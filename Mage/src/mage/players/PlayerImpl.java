@@ -29,11 +29,16 @@
 package mage.players;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import mage.Constants.Outcome;
+import mage.Constants.RangeOfInfluence;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Abilities;
@@ -63,6 +68,7 @@ import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
+import mage.game.stack.StackObject;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
 import mage.util.Copier;
@@ -88,10 +94,13 @@ public abstract class PlayerImpl implements Player, Serializable {
 	protected boolean passed;
 	protected boolean passedTurn;
 	protected boolean left;
+	protected RangeOfInfluence range;
+	protected Set<UUID> inRange = new HashSet<UUID>();
 
-	public PlayerImpl(String name, Deck deck) {
+	public PlayerImpl(String name, Deck deck, RangeOfInfluence range) {
 		this.playerId = UUID.randomUUID();
 		this.name = name;
+		this.range = range;
 		deck.setOwnerId(playerId);
 		library = new Library(playerId);
 		library.addAll(deck.getCards());
@@ -113,6 +122,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 				game.getState().getWatchers().add(watcher);
 			}
 		}
+		findRange(game);
 	}
 
 	@Override
@@ -128,8 +138,50 @@ public abstract class PlayerImpl implements Player, Serializable {
 	}
 
 	@Override
-	public void beginTurn() {
+	public void beginTurn(Game game) {
 		this.landsPlayed = 0;
+		findRange(game);
+	}
+
+	protected void findRange(Game game) {
+		//20100423 - 801.2c
+		inRange.clear();
+		if (range == RangeOfInfluence.ALL) {
+			for (Player player: game.getPlayers().values()) {
+				if (!player.hasLeft())
+					inRange.add(player.getId());
+			}
+		}
+		else {
+			if ((range.getRange() * 2) + 1 >= game.getPlayers().size()) {
+				for (Player player: game.getPlayers().values()) {
+					if (!player.hasLeft())
+						inRange.add(player.getId());
+				}
+			}
+			else {
+				inRange.add(playerId);
+				PlayerList players = game.getPlayerList(playerId);
+				for (int i = 0; i < range.getRange(); i++) {
+					Player player = players.getNext();
+					while (player.hasLeft())
+						player = players.getNext();
+					inRange.add(player.getId());
+				}
+				players = game.getPlayerList(playerId);
+				for (int i = 0; i < range.getRange(); i++) {
+					Player player = players.getPrevious();
+					while (player.hasLeft())
+						player = players.getPrevious();
+					inRange.add(player.getId());
+				}
+			}
+		}
+	}
+
+	@Override
+	public Set<UUID> getInRange() {
+		return inRange;
 	}
 
 	@Override
@@ -145,6 +197,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
 	@Override
 	public boolean canTarget(MageObject source) {
+		if (this.hasLost() || this.hasLeft())
+			return false;
 		if (source != null) {
 			if (abilities.containsKey(ShroudAbility.getInstance().getId()))
 				return false;
@@ -296,6 +350,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 					ability.copy().activate(game, false);
 				}
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, card.getId(), playerId));
+				game.fireInformEvent(name + " casts " + card.getName());
 				game.removeLastBookmark();
 				return true;
 			}
@@ -452,7 +507,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 	@Override
 	public void untap(Game game) {
 		//20091005 - 502.2
-		for (Permanent permanent: game.getBattlefield().getAllPermanents(playerId)) {
+		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
 			permanent.untap(game);
 		}
 	}
@@ -569,7 +624,6 @@ public abstract class PlayerImpl implements Player, Serializable {
 	@Override
 	public void restore(Player player) {
 		this.library = player.getLibrary();
-//		this.deck = player.getDeck();
 		this.hand = player.getHand();
 		this.graveyard = player.getGraveyard();
 		this.abilities = player.getAbilities();
@@ -590,18 +644,45 @@ public abstract class PlayerImpl implements Player, Serializable {
 
 	@Override
 	public void resetPassed() {
-		passed = false;
+		if (!this.loses && !this.left)
+			passed = false;
+		else
+			passed = true;
 	}
 
 	@Override
-	public void concede() {
-		this.loses = true;
+	public void concede(Game game) {
+		leaveGame(game);
 	}
 
 	@Override
-	public void leaveGame() {
+	public void leaveGame(Game game) {
+		this.passed = true;
+		this.abort();
 		this.loses = true;
 		this.left = true;
+		//20100423 - 800.4a
+		this.hand.clear();
+		this.graveyard.clear();
+		this.library.clear();
+		for (Iterator<Permanent> it = game.getBattlefield().getAllPermanents().iterator(); it.hasNext();) {
+			Permanent perm = it.next();
+			if (perm.getOwnerId().equals(playerId)) {
+				it.remove();
+			}
+		}
+		for (Iterator<StackObject> it = game.getStack().iterator(); it.hasNext();) {
+			StackObject object = it.next();
+			if (object.getControllerId().equals(playerId)) {
+				it.remove();
+			}
+		}
+		for (Iterator<Permanent> it = game.getBattlefield().getAllPermanents().iterator(); it.hasNext();) {
+			Permanent perm = it.next();
+			if (perm.getControllerId().equals(playerId)) {
+				perm.moveToExile(null, "", game);
+			}
+		}
 	}
 
 	@Override
@@ -613,6 +694,10 @@ public abstract class PlayerImpl implements Player, Serializable {
 	public void lost(Game game) {
 		if (!game.replaceEvent(new GameEvent(GameEvent.EventType.LOSES, null, null, playerId))) {
 			this.loses = true;
+			//20100423 - 603.9
+			if (!this.wins)
+				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST, null, null, playerId));
+			leaveGame(game);
 		}
 	}
 
@@ -620,8 +705,16 @@ public abstract class PlayerImpl implements Player, Serializable {
 	public void won(Game game) {
 		if (!game.replaceEvent(new GameEvent(GameEvent.EventType.WINS, null, null, playerId))) {
 			if (!this.loses) {
-				this.wins = true;
-				game.end();
+				//20100423 - 800.6, 801.16
+				if (game.getPlayers().size() > 2) {
+					for (UUID opponentId: game.getOpponents(playerId)) {
+						game.getPlayer(opponentId).lost(game);
+					}
+				}
+				else {
+					this.wins = true;
+					game.end();
+				}
 			}
 		}
 	}
@@ -684,7 +777,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 	protected List<Permanent> getAvailableAttackers(Game game) {
 		FilterCreatureForAttack attackFilter = new FilterCreatureForAttack();
 		attackFilter.getControllerId().add(playerId);
-		List<Permanent> attackers = game.getBattlefield().getActivePermanents(attackFilter);
+		List<Permanent> attackers = game.getBattlefield().getAllActivePermanents(attackFilter);
 		return attackers;
 	}
 

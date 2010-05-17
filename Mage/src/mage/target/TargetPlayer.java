@@ -63,10 +63,11 @@ public class TargetPlayer extends TargetImpl {
 	}
 
 	@Override
-	public boolean canChoose(UUID sourceId, Game game) {
+	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
 		int count = 0;
-		for (Player player: game.getPlayers().values()) {
-			if (filter.match(player)) {
+		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+			Player player = game.getPlayer(playerId);
+			if (player != null && !player.hasLeft() && filter.match(player)) {
 				if (player.canTarget(game.getObject(sourceId)))
 					count++;
 			}

@@ -101,9 +101,9 @@ public class Targets extends ArrayList<Target> {
 		return true;
 	}
 
-	public boolean canChoose(UUID sourceId, Game game) {
+	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
 		for (Target target: this) {
-			if (!target.canChoose(sourceId, game))
+			if (!target.canChoose(sourceId, sourceControllerId, game))
 				return false;
 		}
 		return true;

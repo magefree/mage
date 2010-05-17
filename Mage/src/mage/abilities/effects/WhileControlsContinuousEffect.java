@@ -32,7 +32,6 @@ import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 
@@ -53,9 +52,7 @@ public abstract class WhileControlsContinuousEffect extends ContinuousEffectImpl
 	
 	@Override
 	public boolean apply(Game game) {
-		filter.getControllerId().clear();
-		filter.getControllerId().add(this.source.getControllerId());
-		if (game.getBattlefield().count(filter) > 0) {
+		if (game.getBattlefield().countAll(filter, this.source.getControllerId()) > 0) {
 			return applyEffect(game);
 		}
 		return false;

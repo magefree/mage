@@ -70,10 +70,6 @@ public class Table implements Serializable {
 		return tableId;
 	}
 
-//	public void setGame(Game game) {
-//		this.game = game;
-//	}
-
 	public void initGame(Game game) throws GameException {
 		for (int i = 0; i < numSeats; i++ ) {
 			game.addPlayer(seats[i].getPlayer());

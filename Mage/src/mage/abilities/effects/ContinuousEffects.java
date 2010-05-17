@@ -92,47 +92,6 @@ public class ContinuousEffects implements Serializable {
 	}
 
 
-//	private List<ContinuousEffect> getLayer(Layer layer, SubLayer sublayer) {
-//		List<ContinuousEffect> layerEffects = new ArrayList<ContinuousEffect>();
-//		for (ContinuousEffect effect: effects) {
-//			if (effect.getLayer() == layer && effect.getSubLayer() == sublayer) {
-//				layerEffects.add(effect);
-//			}
-//		}
-//		Collections.sort(layerEffects, new TimestampSorter());
-//		return layerEffects;
-//	}
-
-//	private List<PreventionEffect> GetApplicablePreventionEffects(GameEvent event, Game game) {
-//		List<PreventionEffect> effects = new ArrayList<PreventionEffect>();
-//		for (IEffect effect: this) {
-//			if (effect instanceof PreventionEffect && ((PreventionEffect)effect).Applies(event, game)) {
-//				effects.add((PreventionEffect)effect);
-//			}
-//		}
-//		return effects;
-//	}
-
-//	public List<PreventionEffect> GetApplicablePreventionEffects(IMageObject source, IPermanent target, Game game) {
-//		List<PreventionEffect> effects = new ArrayList<PreventionEffect>();
-//		for (IEffect effect: this) {
-//			if (effect instanceof PreventionEffect && ((PreventionEffect)effect).Applies(source, target, game)) {
-//				effects.add((PreventionEffect)effect);
-//			}
-//		}
-//		return effects;
-//	}
-//
-//	public List<PreventionEffect> GetApplicablePreventionEffects(IMageObject source, IPlayer target, Game game) {
-//		List<PreventionEffect> effects = new ArrayList<PreventionEffect>();
-//		for (IEffect effect: this) {
-//			if (effect instanceof PreventionEffect && ((PreventionEffect)effect).Applies(source, target, game)) {
-//				effects.add((PreventionEffect)effect);
-//			}
-//		}
-//		return effects;
-//	}
-
 	private List<ReplacementEffect> getApplicableReplacementEffects(GameEvent event, Game game) {
 		List<ReplacementEffect> replacementEffects = new ArrayList<ReplacementEffect>();
 		for (Effect effect: effects) {
@@ -179,18 +138,6 @@ public class ContinuousEffects implements Serializable {
 				}
 			}
 		}
-
-//		if (!caught) {
-//			List<PreventionEffect> pEffects = GetApplicablePreventionEffects(event, game);
-//			if (pEffects.size() > 0) {
-//				if (pEffects.size() == 1) {
-//					caught = pEffects.get(0).ReplaceEvent(event, game);
-//				}
-//				else {
-//					//TODO: handle multiple
-//				}
-//			}
-//		}
 
 		return caught;
 	}
@@ -260,7 +207,7 @@ public class ContinuousEffects implements Serializable {
 	}
 
 	protected void applyCounters(Game game) {
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(CardType.CREATURE)) {
+		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
 			for (BoostCounter counter: permanent.getCounters().getBoostCounters()) {
 				permanent.addPower(counter.getPower() * counter.getCount());
 				permanent.addToughness(counter.getToughness() * counter.getCount());

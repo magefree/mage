@@ -32,8 +32,10 @@ import mage.game.stack.SpellStack;
 import mage.MageObject;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import mage.Constants.MultiplayerAttackOption;
+import mage.Constants.RangeOfInfluence;
 import mage.MageItem;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbilities;
@@ -56,9 +58,11 @@ import mage.players.Players;
 
 public interface Game extends MageItem, Serializable {
 
-	public String getGameType();
+	public GameType getGameType();
 	public int getNumPlayers();
 	public int getLife();
+	public RangeOfInfluence getRangeOfInfluence();
+	public MultiplayerAttackOption getAttackOption();
 	
 	//game data methods
 	public MageObject getObject(UUID objectId);
@@ -67,7 +71,7 @@ public interface Game extends MageItem, Serializable {
 	public Player getPlayer(UUID playerId);
 	public Players getPlayers();
 	public PlayerList getPlayerList(UUID playerId);
-	public List<UUID> getOpponents(UUID controllerId);
+	public Set<UUID> getOpponents(UUID controllerId);
 	public Turn getTurn();
 	public int getTurnNum();
 	public boolean isMainPhase();

@@ -34,9 +34,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Zone;
+import mage.Constants.RangeOfInfluence;
 import mage.abilities.keyword.PhasingAbility;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -60,11 +61,42 @@ public class Battlefield implements Serializable {
 		field.clear();
 	}
 
-	public int count(FilterPermanent filter) {
+	public int countAll(FilterPermanent filter) {
 		int count = 0;
 		for (Permanent permanent: field.values()) {
 			if (filter.match(permanent)) {
 				count++;
+			}
+		}
+		return count;
+	}
+
+	public int countAll(FilterPermanent filter, UUID controllerId) {
+		int count = 0;
+		for (Permanent permanent: field.values()) {
+			if (permanent.getControllerId().equals(controllerId) && filter.match(permanent)) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+
+	public int count(FilterPermanent filter, UUID sourcePlayerId, Game game) {
+		int count = 0;
+		if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
+			for (Permanent permanent: field.values()) {
+				if (filter.match(permanent)) {
+					count++;
+				}
+			}
+		}
+		else {
+			Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
+			for (Permanent permanent: field.values()) {
+				if (range.contains(permanent.getControllerId()) && filter.match(permanent)) {
+					count++;
+				}
 			}
 		}
 		return count;
@@ -87,9 +119,19 @@ public class Battlefield implements Serializable {
 	}
 
 	public void checkTriggers(GameEvent event, Game game) {
-		for (Permanent perm: field.values()) {
-			if (perm.isPhasedIn())
-				perm.checkTriggers(event, game);
+		if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
+			for (Permanent perm: field.values()) {
+				if (perm.isPhasedIn())
+					perm.checkTriggers(event, game);
+			}
+		}
+		else {
+			//20100423 - 801.7
+			Set<UUID> range = game.getPlayer(event.getPlayerId()).getInRange();
+			for (Permanent perm: field.values()) {
+				if (range.contains(perm.getControllerId()) && perm.isPhasedIn())
+					perm.checkTriggers(event, game);
+			}
 		}
 	}
 
@@ -113,7 +155,7 @@ public class Battlefield implements Serializable {
 		return perms;
 	}
 
-	public List<Permanent> getActivePermanents() {
+	public List<Permanent> getAllActivePermanents() {
 		List<Permanent> active = new ArrayList<Permanent>();
 		for (Permanent perm: field.values()) {
 			if (perm.isPhasedIn())
@@ -122,7 +164,7 @@ public class Battlefield implements Serializable {
 		return active;
 	}
 
-	public List<Permanent> getActivePermanents(UUID controllerId) {
+	public List<Permanent> getAllActivePermanents(UUID controllerId) {
 		List<Permanent> active = new ArrayList<Permanent>();
 		for (Permanent perm: field.values()) {
 			if (perm.isPhasedIn() && perm.getControllerId().equals(controllerId))
@@ -131,7 +173,7 @@ public class Battlefield implements Serializable {
 		return active;
 	}
 
-	public List<Permanent> getActivePermanents(CardType type) {
+	public List<Permanent> getAllActivePermanents(CardType type) {
 		List<Permanent> active = new ArrayList<Permanent>();
 		for (Permanent perm: field.values()) {
 			if (perm.isPhasedIn() && perm.getCardType().contains(type))
@@ -140,7 +182,7 @@ public class Battlefield implements Serializable {
 		return active;
 	}
 
-	public List<Permanent> getActivePermanents(FilterPermanent filter) {
+	public List<Permanent> getAllActivePermanents(FilterPermanent filter) {
 		List<Permanent> active = new ArrayList<Permanent>();
 		for (Permanent perm: field.values()) {
 			if (perm.isPhasedIn() && filter.match(perm))
@@ -149,13 +191,43 @@ public class Battlefield implements Serializable {
 		return active;
 	}
 
-	public List<Permanent> getActivePermanents(UUID controllerId, CardType type) {
+	public List<Permanent> getAllActivePermanents(FilterPermanent filter, UUID controllerId) {
 		List<Permanent> active = new ArrayList<Permanent>();
 		for (Permanent perm: field.values()) {
-			if (perm.isPhasedIn() && perm.getCardType().contains(type) && perm.getControllerId().equals(controllerId))
+			if (perm.isPhasedIn() && perm.getControllerId().equals(controllerId) && filter.match(perm))
 				active.add(perm);
 		}
 		return active;
+	}
+
+	public List<Permanent> getActivePermanents(FilterPermanent filter, UUID sourcePlayerId, Game game) {
+		if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
+			return getAllActivePermanents(filter);
+		}
+		else {
+			List<Permanent> active = new ArrayList<Permanent>();
+			Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
+			for (Permanent perm: field.values()) {
+				if (perm.isPhasedIn() && range.contains(perm.getControllerId()) && filter.match(perm))
+					active.add(perm);
+			}
+			return active;
+		}
+	}
+
+	public List<Permanent> getActivePermanents(UUID sourcePlayerId, Game game) {
+		if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
+			return getAllActivePermanents();
+		}
+		else {
+			List<Permanent> active = new ArrayList<Permanent>();
+			Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
+			for (Permanent perm: field.values()) {
+				if (perm.isPhasedIn() && range.contains(perm.getControllerId()))
+					active.add(perm);
+			}
+			return active;
+		}
 	}
 
 	public List<Permanent> getPhasedIn(UUID controllerId) {

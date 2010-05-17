@@ -47,11 +47,9 @@ public class DestroyAllControlledTargetEffect extends OneShotEffect {
 		this.filter = filter;
 	}
 
+	@Override
 	public boolean apply(Game game) {
-		filter.getControllerId().clear();
-		filter.getControllerId().add(this.source.getFirstTarget());
-		filter.setNotController(false);
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter)) {
+		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, this.source.getFirstTarget())) {
 			permanent.destroy(this.source.getSourceId(), game, false);
 		}
 		return true;

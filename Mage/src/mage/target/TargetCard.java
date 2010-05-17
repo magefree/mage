@@ -70,18 +70,21 @@ public class TargetCard extends TargetObject {
 	}
 
 	@Override
-	public boolean canChoose(UUID sourceId, Game game) {
-		for (Player player: game.getPlayers().values()) {
-			if (filter.matchOwner(player.getId())) {
-				switch (zone) {
-					case HAND:
-						if (player.getHand().getCards(filter).size() > this.minNumberOfTargets)
-							return true;
-						break;
-					case GRAVEYARD:
-						if (player.getGraveyard().getCards(filter).size() > this.minNumberOfTargets)
-							return true;
-						break;
+	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+			if (filter.matchOwner(playerId)) {
+				Player player = game.getPlayer(playerId);
+				if (player != null) {
+					switch (zone) {
+						case HAND:
+							if (player.getHand().getCards(filter).size() > this.minNumberOfTargets)
+								return true;
+							break;
+						case GRAVEYARD:
+							if (player.getGraveyard().getCards(filter).size() > this.minNumberOfTargets)
+								return true;
+							break;
+					}
 				}
 			}
 		}

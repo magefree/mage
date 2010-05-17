@@ -31,13 +31,15 @@ package mage.game;
 import mage.game.stack.SpellStack;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.Outcome;
 import mage.Constants.PhaseStep;
+import mage.Constants.RangeOfInfluence;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.ActivatedAbility;
@@ -83,9 +85,13 @@ public abstract class GameImpl implements Game, Serializable {
 	protected UUID choosingPlayerId;
 	protected Player winner;
 	protected GameStates gameStates;
+	protected RangeOfInfluence range;
+	protected MultiplayerAttackOption attackOption;
 
-	public GameImpl() {
+	public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range) {
 		id = UUID.randomUUID();
+		this.range = range;
+		this.attackOption = attackOption;
 		state = new GameState();
 		gameStates = new GameStates();
 	}
@@ -98,6 +104,16 @@ public abstract class GameImpl implements Game, Serializable {
 	@Override
 	public void addPlayer(Player player) throws GameException {
 		state.addPlayer(player);
+	}
+
+	@Override
+	public RangeOfInfluence getRangeOfInfluence() {
+		return range;
+	}
+
+	@Override
+	public MultiplayerAttackOption getAttackOption() {
+		return attackOption;
 	}
 
 	@Override
@@ -279,22 +295,20 @@ public abstract class GameImpl implements Game, Serializable {
 	}
 
 	@Override
-	public void quit(UUID playerId) {
+	public synchronized void quit(UUID playerId) {
 		Player player = state.getPlayer(playerId);
 		if (player != null) {
-			player.leaveGame();
+			player.leaveGame(this);
 			fireInformEvent(player.getName() + " has left the game.");
-			player.abort();
 		}
 	}
 
 	@Override
-	public void concede(UUID playerId) {
+	public synchronized void concede(UUID playerId) {
 		Player player = state.getPlayer(playerId);
 		if (player != null) {
-			player.concede();
+			player.concede(this);
 			fireInformEvent(player.getName() + " has conceded.");
-			player.abort();
 		}
 	}
 
@@ -304,7 +318,7 @@ public abstract class GameImpl implements Game, Serializable {
 		while (!isGameOver()) {
 			for (Player player: getPlayerList(activePlayerId)) {
 				state.setPriorityPlayerId(player.getId());
-				while (!player.isPassed() && !isGameOver()) {
+				while (!player.isPassed() && !player.hasLost() && !player.hasLeft()&& !isGameOver()) {
 					checkStateAndTriggered();
 					if (isGameOver()) return;
 					// resetPassed should be called if player performs any action
@@ -320,6 +334,7 @@ public abstract class GameImpl implements Game, Serializable {
 						state.getStack().resolve(this);
 						applyEffects();
 						state.getPlayers().resetPassed();
+						fireUpdatePlayersEvent();
 						saveState();
 						break;
 					}
@@ -331,7 +346,7 @@ public abstract class GameImpl implements Game, Serializable {
 
 	protected boolean allPassed() {
 		for (Player player: state.getPlayers().values()) {
-			if (!player.isPassed())
+			if (!player.isPassed() && !player.hasLost() && !player.hasLeft())
 				return false;
 		}
 		return true;
@@ -347,7 +362,7 @@ public abstract class GameImpl implements Game, Serializable {
 	}
 
 	@Override
-	public void applyEffects() {
+	public synchronized void applyEffects() {
 		state.applyEffects(this);
 	}
 
@@ -406,7 +421,7 @@ public abstract class GameImpl implements Game, Serializable {
 				somethingHappened = true;
 			}
 		}
-		for (Permanent perm: getBattlefield().getActivePermanents(CardType.CREATURE)) {
+		for (Permanent perm: getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
 			//20091005 - 704.5f
 			if (perm.getToughness().getValue() == 0) {
 				perm.moveToZone(Zone.GRAVEYARD, this, false);
@@ -419,35 +434,37 @@ public abstract class GameImpl implements Game, Serializable {
 			}
 		}
 		//20091005 - 704.5i
-		for (Permanent perm: getBattlefield().getActivePermanents(CardType.PLANESWALKER)) {
+		for (Permanent perm: getBattlefield().getAllActivePermanents(CardType.PLANESWALKER)) {
 			if (perm.getLoyalty().getValue() == 0) {
 				perm.moveToZone(Zone.GRAVEYARD, this, false);
 				return true;
 			}
 		}
-		//20091005 - 704.5j
+		//20091005 - 704.5j, 801.14
 		FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
-		if (getBattlefield().count(filterPlaneswalker) > 1) {  //don't bother checking if less than 2 planeswalkers in play
-			for (String planeswalkerType: Constants.PlaneswalkerTypes) {
-				filterPlaneswalker.getSubtype().clear();
-				filterPlaneswalker.getSubtype().add(planeswalkerType);
-				filterPlaneswalker.setScopeSubtype(ComparisonScope.Any);
-				if (getBattlefield().count(filterPlaneswalker) > 1) {
-					for (Permanent perm: getBattlefield().getActivePermanents(filterPlaneswalker)) {
-						perm.moveToZone(Zone.GRAVEYARD, this, false);
+		if (getBattlefield().countAll(filterPlaneswalker) > 1) {  //don't bother checking if less than 2 planeswalkers in play
+			for (Permanent planeswalker: getBattlefield().getAllActivePermanents(CardType.PLANESWALKER)) {
+				for (String planeswalkertype: planeswalker.getSubtype()) {
+					filterPlaneswalker.getSubtype().clear();
+					filterPlaneswalker.getSubtype().add(planeswalkertype);
+					filterPlaneswalker.setScopeSubtype(ComparisonScope.Any);
+					if (getBattlefield().count(filterPlaneswalker, planeswalker.getControllerId(), this) > 1) {
+						for (Permanent perm: getBattlefield().getActivePermanents(filterPlaneswalker, planeswalker.getControllerId(), this)) {
+							perm.moveToZone(Zone.GRAVEYARD, this, false);
+						}
+						return true;
 					}
-					somethingHappened = true;
 				}
 			}
 		}
-		//20091005 - 704.5k
+		//20091005 - 704.5k, 801.12
 		FilterLegendaryPermanent filterLegendary = new FilterLegendaryPermanent();
-		if (getBattlefield().count(filterPlaneswalker) > 1) {  //don't bother checking if less than 2 legends in play
-			for (Permanent legend: getBattlefield().getActivePermanents(filterLegendary)) {
+		if (getBattlefield().countAll(filterLegendary) > 1) {  //don't bother checking if less than 2 legends in play
+			for (Permanent legend: getBattlefield().getAllActivePermanents(filterLegendary)) {
 				FilterLegendaryPermanent filterLegendName = new FilterLegendaryPermanent();
 				filterLegendName.getName().add(legend.getName());
-				if (getBattlefield().count(filterLegendName) > 1) {
-					for (Permanent dupLegend: getBattlefield().getActivePermanents(filterLegendName)) {
+				if (getBattlefield().count(filterLegendName, legend.getControllerId(), this) > 1) {
+					for (Permanent dupLegend: getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
 						dupLegend.moveToZone(Zone.GRAVEYARD, this, false);
 					}
 					return true;
@@ -455,7 +472,7 @@ public abstract class GameImpl implements Game, Serializable {
 			}
 		}
 		//20091005 - 704.5p
-		for (Permanent perm: getBattlefield().getActivePermanents(new FilterEquipment())) {
+		for (Permanent perm: getBattlefield().getAllActivePermanents(new FilterEquipment())) {
 			if (perm.getAttachedTo() != null) {
 				Permanent creature = getPermanent(perm.getAttachedTo());
 				if (creature == null) {
@@ -467,7 +484,7 @@ public abstract class GameImpl implements Game, Serializable {
 				}
 			}
 		}
-		for (Permanent perm: getBattlefield().getActivePermanents(new FilterFortification())) {
+		for (Permanent perm: getBattlefield().getAllActivePermanents(new FilterFortification())) {
 			if (perm.getAttachedTo() != null) {
 				Permanent land = getPermanent(perm.getAttachedTo());
 				if (land == null) {
@@ -480,7 +497,7 @@ public abstract class GameImpl implements Game, Serializable {
 			}
 		}
 		//20091005 - 704.5q
-		for (Permanent perm: getBattlefield().getActivePermanents()) {
+		for (Permanent perm: getBattlefield().getAllActivePermanents()) {
 			if (perm.getAttachments().size() > 0) {
 				for (UUID attachmentId: perm.getAttachments()) {
 					Permanent attachment = getPermanent(attachmentId);
@@ -556,10 +573,7 @@ public abstract class GameImpl implements Game, Serializable {
 			//20091005 - 507.1
 			state.getCombat().clear();
 			state.getCombat().setAttacker(activePlayerId);
-			for (Player player: state.getPlayers().values()) {
-				if (!player.getId().equals(state.getActivePlayerId()))
-					state.getCombat().getDefenders().add(player.getId());
-			}
+			state.getCombat().setDefenders(this);
 			fireEvent(new GameEvent(GameEvent.EventType.BEGIN_COMBAT_STEP_PRE, null, null, activePlayerId));
 			playPriority(activePlayerId);
 			fireEvent(new GameEvent(GameEvent.EventType.PRECOMBAT_MAIN_STEP_POST, null, null, activePlayerId));
@@ -647,7 +661,8 @@ public abstract class GameImpl implements Game, Serializable {
 			fireEvent(new GameEvent(GameEvent.EventType.CLEANUP_STEP_PRE, null, null, activePlayerId));
 			//20091005 - 514.1
 			Player player = getPlayer(activePlayerId);
-			player.discardToMax(this);
+			if (!player.hasLeft() && !player.hasLost())
+				player.discardToMax(this);
 			state.getBattlefield().endOfTurn(activePlayerId, this);
 			state.removeEotEffects(this);
 			if (checkStateAndTriggered()) {

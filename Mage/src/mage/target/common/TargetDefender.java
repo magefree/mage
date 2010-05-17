@@ -29,11 +29,13 @@
 package mage.target.common;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterPlaneswalkerOrPlayer;
+import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -48,15 +50,15 @@ public class TargetDefender extends TargetImpl {
 	protected FilterPlaneswalkerOrPlayer filter;
 	protected UUID attackerId;
 
-	public TargetDefender(List<UUID> defenders, UUID attackerId) {
+	public TargetDefender(Set<UUID> defenders, UUID attackerId) {
 		this(1, 1, defenders, attackerId);
 	}
 
-	public TargetDefender(int numTargets, List<UUID> defenders, UUID attackerId) {
+	public TargetDefender(int numTargets, Set<UUID> defenders, UUID attackerId) {
 		this(numTargets, numTargets, defenders, attackerId);
 	}
 
-	public TargetDefender(int minNumTargets, int maxNumTargets, List<UUID> defenders, UUID attackerId) {
+	public TargetDefender(int minNumTargets, int maxNumTargets, Set<UUID> defenders, UUID attackerId) {
 		this.minNumberOfTargets = minNumTargets;
 		this.maxNumberOfTargets = maxNumTargets;
 		this.zone = Zone.ALL;
@@ -71,16 +73,17 @@ public class TargetDefender extends TargetImpl {
 	}
 
 	@Override
-	public boolean canChoose(UUID sourceId, Game game) {
+	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
 		int count = 0;
-		for (Player player: game.getPlayers().values()) {
-			if (player.canTarget(game.getObject(this.source.getSourceId())) && filter.match(player))
+		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+			Player player = game.getPlayer(playerId);
+			if (player != null && player.canTarget(game.getObject(this.source.getSourceId())) && filter.match(player))
 				count++;
 		}
 		if (count >= this.minNumberOfTargets)
 			return true;
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(CardType.PLANESWALKER)) {
-			if (permanent.canTarget(game.getObject(this.source.getSourceId())) && filter.match(permanent))
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterPlaneswalkerPermanent(), sourceControllerId, game)) {
+			if (permanent.canBeTargetedBy(game.getObject(this.source.getSourceId())) && filter.match(permanent))
 				count++;
 		}
 		return count >= this.minNumberOfTargets;
@@ -110,7 +113,7 @@ public class TargetDefender extends TargetImpl {
 		}
 		Permanent permanent = game.getPermanent(id);
 		if (permanent != null) {
-			return permanent.canTarget(game.getObject(attackerId)) && filter.match(permanent);
+			return permanent.canBeTargetedBy(game.getObject(attackerId)) && filter.match(permanent);
 		}
 		return false;
 	}

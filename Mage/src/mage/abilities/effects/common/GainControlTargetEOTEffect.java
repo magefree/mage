@@ -50,8 +50,7 @@ public class GainControlTargetEOTEffect extends ContinuousEffectImpl {
 	public boolean apply(Game game) {
 		Permanent permanent = game.getPermanent(this.source.getFirstTarget());
 		if (permanent != null) {
-			permanent.setControllerId(this.source.getControllerId());
-			return true;
+			return permanent.changeControllerId(this.source.getControllerId(), game);
 		}
 		return false;
 	}

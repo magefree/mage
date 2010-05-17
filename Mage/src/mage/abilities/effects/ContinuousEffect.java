@@ -41,8 +41,8 @@ import mage.game.Game;
 public interface ContinuousEffect extends Effect {
 
 	public Duration getDuration();
-//	public Layer getLayer();
-//	public SubLayer getSubLayer();
 	public Date getTimestamp();
 	public boolean apply(Layer layer, SubLayer sublayer, Game game);
+	public boolean hasLayer(Layer layer);
+	
 }

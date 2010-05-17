@@ -46,7 +46,7 @@ public interface Target extends Serializable {
 	public boolean isChosen();
 	public boolean doneChosing();
 	public void clearChosen();
-	public boolean canChoose(UUID sourceId, Game game);
+	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game);
 	public boolean choose(Outcome outcome, Game game);
 	public String getMessage();
 	public String getTargetName();

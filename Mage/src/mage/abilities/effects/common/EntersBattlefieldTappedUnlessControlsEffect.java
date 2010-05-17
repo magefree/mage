@@ -26,43 +26,34 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.costs.common;
+package mage.abilities.effects.common;
 
-import java.util.UUID;
-import mage.Constants.Outcome;
-import mage.abilities.costs.CostImpl;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetSacrificePermanent;
+import mage.game.events.GameEvent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SacrificeTargetCost extends CostImpl {
+public class EntersBattlefieldTappedUnlessControlsEffect extends EntersBattlefieldTappedEffect {
 
-	public TargetSacrificePermanent target;
+	FilterPermanent filter;
 
-	public SacrificeTargetCost(TargetSacrificePermanent target) {
-		this.target = target;
-		this.text = "Sacrifice " + target.getTargetName();
+	public EntersBattlefieldTappedUnlessControlsEffect(FilterPermanent filter) {
+		this.filter = filter;
 	}
 
 	@Override
-	public boolean pay(Game game, boolean noMana) {
-		target.setAbility(ability);
-		if (target.choose(Outcome.Sacrifice, game)) {
-			Permanent source = game.getPermanent(target.getFirstTarget());
-			if (source != null) {
-				paid = source.sacrifice(this.ability.getSourceId(), game);
-			}
-		}
-		return paid;
+	public boolean replaceEvent(GameEvent event, Game game) {
+		if (game.getBattlefield().countAll(filter, this.source.getControllerId()) == 0)
+			return apply(game);
+		return false;
 	}
 
 	@Override
-	public boolean canPay(UUID playerId, Game game) {
-		return target.canChoose(playerId, playerId, game);
+	public String getText() {
+		return super.getText() + " unless you control a " + filter.getMessage();
 	}
 
 }

@@ -76,5 +76,9 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
 		return timestamp;
 	}
 
+	@Override
+	public boolean hasLayer(Layer layer) {
+		return this.layer == layer;
+	}
 
 }

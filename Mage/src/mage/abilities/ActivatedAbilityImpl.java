@@ -131,7 +131,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 		if (!controlsAbility(playerId, game))
 			return false;
 		//20091005 - 602.5d/602.5e
-		if ((timing == TimingRule.INSTANT || game.canPlaySorcery(playerId)) && costs.canPay(playerId, game) && targets.canChoose(sourceId, game)) {
+		if ((timing == TimingRule.INSTANT || game.canPlaySorcery(playerId)) && costs.canPay(playerId, game) && targets.canChoose(sourceId, playerId, game)) {
 			return true;
 		}
 		return false;

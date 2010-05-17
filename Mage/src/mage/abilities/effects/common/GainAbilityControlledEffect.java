@@ -59,9 +59,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
 
 	@Override
 	public boolean apply(Game game) {
-		permanentFilter.getControllerId().clear();
-		permanentFilter.getControllerId().add(this.source.getControllerId());
-		for (Permanent perm: game.getBattlefield().getActivePermanents(permanentFilter)) {
+		for (Permanent perm: game.getBattlefield().getAllActivePermanents(permanentFilter, this.source.getControllerId())) {
 			perm.addAbility(ability);
 		}
 		return true;

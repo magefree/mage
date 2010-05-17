@@ -81,7 +81,7 @@ public class Turn implements Serializable {
 
 		this.activePlayerId = activePlayerId;
 		resetCounts();
-		game.getPlayer(activePlayerId).beginTurn();
+		game.getPlayer(activePlayerId).beginTurn(game);
 		for (Phase phase: phases) {
 			if (game.isGameOver())
 				return;

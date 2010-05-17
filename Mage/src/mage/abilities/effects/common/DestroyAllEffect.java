@@ -47,8 +47,9 @@ public class DestroyAllEffect extends OneShotEffect {
 		this.filter = filter;
 	}
 
+	@Override
 	public boolean apply(Game game) {
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter)) {
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, this.source.getControllerId(), game)) {
 			permanent.destroy(this.source.getSourceId(), game, false);
 		}
 		return true;

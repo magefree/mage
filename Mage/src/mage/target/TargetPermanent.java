@@ -78,7 +78,7 @@ public class TargetPermanent extends TargetObject {
 			setController(controllerId, game);
 		if (permanent != null) {
 			if (this.source != null)
-				return permanent.canTarget(game.getObject(this.source.getSourceId())) && filter.match(permanent);
+				return permanent.canBeTargetedBy(game.getObject(this.source.getSourceId())) && filter.match(permanent);
 			else
 				return filter.match(permanent);
 		}
@@ -115,12 +115,12 @@ public class TargetPermanent extends TargetObject {
 	}
 
 	@Override
-	public boolean canChoose(UUID sourceId, Game game) {
-		List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter);
+	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+		List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, sourceControllerId, game);
 		Iterator<Permanent> it = permanents.iterator();
 		while(it.hasNext()) {
 			Permanent permanent = it.next();
-			if (!permanent.canTarget(game.getObject(sourceId))) {
+			if (!permanent.canBeTargetedBy(game.getObject(sourceId))) {
 				it.remove();
 			}
 		}

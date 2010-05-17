@@ -29,6 +29,7 @@
 package mage.players;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.MageItem;
@@ -77,6 +78,7 @@ public interface Player extends MageItem {
 	public boolean hasWon();
 	public boolean hasLeft();
 	public ManaPool getManaPool();
+	public Set<UUID> getInRange();
 	
 	public void init(Game game);
 	public void reset();
@@ -102,8 +104,8 @@ public interface Player extends MageItem {
 	public boolean discard(Card card, Game game);
 	public void lost(Game game);
 	public void won(Game game);
-	public void leaveGame();
-	public void concede();
+	public void leaveGame(Game game);
+	public void concede(Game game);
 	public void abort();
 	
 	public void revealCards(Cards cards, Game game);
@@ -135,7 +137,7 @@ public interface Player extends MageItem {
 	public void declareBlocker(UUID blockerId, UUID attackerId, Game game);
 	public boolean hasAvailableAttackers(Game game);
 	
-	public void beginTurn();
+	public void beginTurn(Game game);
 	public void endOfTurn(Game game);
 	public void phasing(Game game);
 	public void untap(Game game);

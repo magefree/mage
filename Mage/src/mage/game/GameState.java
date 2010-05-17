@@ -184,7 +184,7 @@ public class GameState implements Serializable {
 	public PlayerList getPlayerList(UUID playerId) {
 		PlayerList playerList = new PlayerList();
 		for (Player player: players.values()) {
-			if (!player.hasLeft())
+			if (!player.hasLeft() && !player.hasLost())
 				playerList.add(player);
 		}
 		playerList.setCurrent(playerId);

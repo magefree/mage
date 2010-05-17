@@ -65,8 +65,8 @@ public interface Permanent extends Card {
 	public boolean removeAttachment(UUID permanentId, Game game);
 	
 	public UUID getControllerId();
-	public void changeControllerId(UUID controllerId, Game game);
-	public boolean canTarget(MageObject source);
+	public boolean changeControllerId(UUID controllerId, Game game);
+	public boolean canBeTargetedBy(MageObject source);
 	public int getDamage();
 	public int damage(int damage, UUID sourceId, Game game);
 	public Counters getCounters();

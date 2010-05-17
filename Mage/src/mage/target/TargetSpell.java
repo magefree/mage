@@ -77,10 +77,11 @@ public class TargetSpell extends TargetObject {
 		return false;
 	}
 
-	public boolean canChoose(UUID sourceId, Game game) {
+	@Override
+	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
 		int count = 0;
 		for (StackObject stackObject: game.getStack()) {
-			if (stackObject instanceof Spell && filter.match((Spell)stackObject)) {
+			if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell)stackObject)) {
 				count++;
 			}
 		}

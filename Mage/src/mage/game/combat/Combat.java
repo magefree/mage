@@ -30,12 +30,16 @@ package mage.game.combat;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.players.PlayerList;
 
 
 /**
@@ -45,14 +49,14 @@ import mage.game.permanent.Permanent;
 public class Combat implements Serializable {
 
 	protected List<CombatGroup> groups = new ArrayList<CombatGroup>();
-	protected List<UUID> defenders = new ArrayList<UUID>();
+	protected Set<UUID> defenders = new HashSet<UUID>();
 	protected UUID attackerId;
 
 	public List<CombatGroup> getGroups() {
 		return groups;
 	}
 
-	public List<UUID> getDefenders() {
+	public Set<UUID> getDefenders() {
 		return defenders;
 	}
 
@@ -86,19 +90,55 @@ public class Combat implements Serializable {
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackerId, attackerId))) {
 			game.getPlayer(attackerId).selectAttackers(game);
 			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackerId, attackerId));
+			game.fireInformEvent(game.getPlayer(attackerId).getName() + " attacks with " + groups.size() + " creatures");
 		}
 	}
 
 	public void selectBlockers(Game game) {
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, attackerId, attackerId))) {
 			for (UUID defenderId: defenders) {
-				game.getPlayer(defenderId).selectBlockers(game);
-				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
+				//check if defender is being attacked
+				if (isAttacked(defenderId, game)) {
+					game.getPlayer(defenderId).selectBlockers(game);
+					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
+				}
 			}
 		}
 	}
 
+	public void setDefenders(Game game) {
+		Set<UUID> opponents = game.getOpponents(attackerId);
+		PlayerList players;
+		switch (game.getAttackOption()) {
+			case LEFT:
+				players = game.getPlayerList(attackerId);
+				while (true) {
+					Player opponent = players.getNext();
+					if (opponents.contains(opponent.getId())) {
+						defenders.add(opponent.getId());
+						break;
+					}
+				}
+				break;
+			case RIGHT:
+				players = game.getPlayerList(attackerId);
+				while (true) {
+					Player opponent = players.getPrevious();
+					if (opponents.contains(opponent.getId())) {
+						defenders.add(opponent.getId());
+						break;
+					}
+				}
+				break;
+			case MULITPLE:
+				defenders.addAll(game.getOpponents(attackerId));
+				break;
+		}
+	}
+
 	public void declareAttacker(UUID attackerId, UUID defenderId, Game game) {
+		if (!defenders.contains(defenderId))
+			return;
 		Permanent defender = game.getPermanent(defenderId);
 		CombatGroup newGroup = new CombatGroup(defenderId, defender != null);
 		newGroup.attackers.add(attackerId);
@@ -177,5 +217,17 @@ public class Combat implements Serializable {
 		return false;
 	}
 
+	protected boolean isAttacked(UUID defenderId, Game game) {
+		for (CombatGroup group: groups) {
+			if (group.getDefenderId().equals(defenderId))
+				return true;
+			if (group.defenderIsPlaneswalker) {
+				Permanent permanent = game.getPermanent(group.getDefenderId());
+				if (permanent.getControllerId().equals(defenderId))
+					return true;
+			}
+		}
+		return false;
+	}
 
 }

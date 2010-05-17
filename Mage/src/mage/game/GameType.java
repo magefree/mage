@@ -26,43 +26,55 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.costs.common;
+package mage.game;
 
-import java.util.UUID;
-import mage.Constants.Outcome;
-import mage.abilities.costs.CostImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetSacrificePermanent;
+import java.io.Serializable;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SacrificeTargetCost extends CostImpl {
+public abstract class GameType implements Serializable {
 
-	public TargetSacrificePermanent target;
-
-	public SacrificeTargetCost(TargetSacrificePermanent target) {
-		this.target = target;
-		this.text = "Sacrifice " + target.getTargetName();
-	}
-
-	@Override
-	public boolean pay(Game game, boolean noMana) {
-		target.setAbility(ability);
-		if (target.choose(Outcome.Sacrifice, game)) {
-			Permanent source = game.getPermanent(target.getFirstTarget());
-			if (source != null) {
-				paid = source.sacrifice(this.ability.getSourceId(), game);
-			}
-		}
-		return paid;
-	}
+	protected String name;
+	protected int minPlayers;
+	protected int maxPlayers;
+	protected int numTeams;
+	protected int playersPerTeam;
+	protected boolean useRange;
+	protected boolean useAttackOption;
 
 	@Override
-	public boolean canPay(UUID playerId, Game game) {
-		return target.canChoose(playerId, playerId, game);
+	public String toString() {
+		return name;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public int getMinPlayers() {
+		return minPlayers;
+	}
+
+	public int getMaxPlayers() {
+		return maxPlayers;
+	}
+
+	public int getNumTeams() {
+		return numTeams;
+	}
+
+	public int getPlayersPerTeam() {
+		return playersPerTeam;
+	}
+
+	public boolean isUseRange() {
+		return useRange;
+	}
+
+	public boolean isUseAttackOption() {
+		return useAttackOption;
 	}
 
 }

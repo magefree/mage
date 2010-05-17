@@ -100,4 +100,9 @@ public class BecomesCreatureSourceEOTEffect extends ContinuousEffectImpl {
 		return "Until end of turn {this} becomes a " + token.getDescription() + ". It's still a land";
 	}
 
+	@Override
+	public boolean hasLayer(Layer layer) {
+		return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == layer.TypeChangingEffects_4;
+	}
+
 }

@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreatureOrPlayer;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -72,7 +73,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
 		Permanent permanent = game.getPermanent(id);
 		if (permanent != null) {
 			if (this.source != null)
-				return permanent.canTarget(game.getObject(this.source.getSourceId())) && filter.match(permanent);
+				return permanent.canBeTargetedBy(game.getObject(this.source.getSourceId())) && filter.match(permanent);
 			else
 				return filter.match(permanent);
 		}
@@ -86,16 +87,17 @@ public class TargetCreatureOrPlayer extends TargetImpl {
 	}
 
 	@Override
-	public boolean canChoose(UUID sourceId, Game game) {
+	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
 		int count = 0;
-		for (Player player: game.getPlayers().values()) {
-			if (player.canTarget(game.getObject(this.source.getSourceId())) && filter.match(player))
+		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+			Player player = game.getPlayer(playerId);
+			if (player != null && player.canTarget(game.getObject(this.source.getSourceId())) && filter.match(player))
 				count++;
 		}
 		if (count >= this.minNumberOfTargets)
 			return true;
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(CardType.CREATURE)) {
-			if (permanent.canTarget(game.getObject(this.source.getSourceId())) && filter.match(permanent))
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
+			if (permanent.canBeTargetedBy(game.getObject(this.source.getSourceId())) && filter.match(permanent))
 				count++;
 		}
 		return count >= this.minNumberOfTargets;

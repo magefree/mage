@@ -49,7 +49,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
 	@Override
 	public boolean canActivate(UUID playerId, Game game) {
 		if ((game.getObject(sourceId).getCardType().contains(CardType.INSTANT) || game.canPlaySorcery(playerId)) &&
-				costs.canPay(playerId, game) && targets.canChoose(sourceId, game)) {
+				costs.canPay(playerId, game) && targets.canChoose(sourceId, playerId, game)) {
 			return true;
 		}
 		return false;

@@ -267,12 +267,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent
 	}
 
 	@Override
-	public void changeControllerId(UUID controllerId, Game game) {
+	public boolean changeControllerId(UUID controllerId, Game game) {
 		if (!controllerId.equals(this.controllerId)) {
-			this.removeFromCombat(game);
-			this.controlledFromStartOfTurn = false;
-			this.controllerId = controllerId;
+			Player newController = game.getPlayer(controllerId);
+			if (newController != null && (!newController.hasLeft() || !newController.hasLost())) {
+				this.removeFromCombat(game);
+				this.controlledFromStartOfTurn = false;
+				this.controllerId = controllerId;
+				return true;
+			}
 		}
+		return false;
 	}
 
 	@Override
@@ -389,7 +394,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent
 	}
 
 	@Override
-	public boolean canTarget(MageObject source) {
+	public boolean canBeTargetedBy(MageObject source) {
 		if (source != null) {
 			if (abilities.containsKey(ShroudAbility.getInstance().getId()))
 				return false;

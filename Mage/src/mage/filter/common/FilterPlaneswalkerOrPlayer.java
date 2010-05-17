@@ -29,6 +29,7 @@
 package mage.filter.common;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.filter.Filter;
 import mage.filter.FilterImpl;
@@ -45,7 +46,7 @@ public class FilterPlaneswalkerOrPlayer extends FilterImpl<Object> implements Fi
 	protected FilterPlaneswalkerPermanent planeswalkerFilter = new FilterPlaneswalkerPermanent();
 	protected FilterPlayer playerFilter = new FilterPlayer();
 
-	public FilterPlaneswalkerOrPlayer(List<UUID> defenders) {
+	public FilterPlaneswalkerOrPlayer(Set<UUID> defenders) {
 		super("planeswalker or player");
 		planeswalkerFilter.getControllerId().addAll(defenders);
 		playerFilter.getPlayerId().addAll(defenders);

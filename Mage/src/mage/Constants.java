@@ -256,6 +256,39 @@ public final class Constants {
 		ANY, YOU, NOT_YOU, OPPONENT
 	}
 
+	public enum RangeOfInfluence {
+		ONE(1),
+		TWO(2),
+		ALL(0);
+
+		private int range;
+
+		RangeOfInfluence(int range) {
+			this.range = range;
+		}
+
+		public int getRange() {
+			return range;
+		}
+	}
+
+	public enum MultiplayerAttackOption {
+		MULITPLE("Attack Multiple Players"),
+		LEFT("Attack Left"),
+		RIGHT("Attack Right");
+
+		private String text;
+
+		MultiplayerAttackOption(String text) {
+			this.text = text;
+		}
+
+		@Override
+		public String toString() {
+			return text;
+		}
+	}
+
 	public static List<String> PlaneswalkerTypes = new ArrayList<String>()
 		{{add("Ajani"); add("Bolas"); add("Chandra"); add("Elspeth");add("Garruk"); add("Jace"); add("Liliana"); add("Nissa"); add("Sarkhan"); add("Sorin"); add("Tezzeret");}};
 	

@@ -61,9 +61,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
 
 	@Override
 	public boolean apply(Game game) {
-		filter.getControllerId().clear();
-		filter.getControllerId().add(this.source.getControllerId());
-		for (Permanent perm: game.getBattlefield().getActivePermanents(filter)) {
+		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, this.source.getControllerId())) {
 			perm.addPower(power);
 			perm.addToughness(toughness);
 		}

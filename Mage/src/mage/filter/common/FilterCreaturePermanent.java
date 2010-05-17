@@ -28,7 +28,6 @@
 
 package mage.filter.common;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.game.permanent.Permanent;
