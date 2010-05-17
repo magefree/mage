@@ -47,6 +47,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+import mage.Constants.MultiplayerAttackOption;
+import mage.Constants.RangeOfInfluence;
 import mage.Constants.TableState;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
@@ -76,10 +78,10 @@ public class TableController {
 	private Game game;
 	private ConcurrentHashMap<UUID, UUID> sessionPlayerMap = new ConcurrentHashMap<UUID, UUID>();
 
-	public TableController(UUID sessionId, String gameType, String deckType, List<String> playerTypes) {
+	public TableController(UUID sessionId, String gameType, String deckType, List<String> playerTypes, MultiplayerAttackOption attackOption, RangeOfInfluence range) {
 		this.sessionId = sessionId;
 		chatId = ChatManager.getInstance().createChatSession();
-		game = GameFactory.getInstance().createGame(gameType);
+		game = GameFactory.getInstance().createGame(gameType, attackOption, range);
 		gameId = game.getId();
 		table = new Table(gameType, DeckValidatorFactory.getInstance().createDeckValidator(deckType), playerTypes);
 	}
@@ -134,9 +136,8 @@ public class TableController {
 	}
 
 	private Player createPlayer(String name, Deck deck, String playerType) {
-		Player player = PlayerFactory.getInstance().createPlayer(playerType, name, deck);
+		Player player = PlayerFactory.getInstance().createPlayer(playerType, name, deck, game.getRangeOfInfluence());
 		logger.info("Player created " + player.getId());
-//		player.setDeck(deck);
 		return player;
 	}
 
@@ -165,6 +166,19 @@ public class TableController {
 		saveGame();
 		GameManager.getInstance().removeGame(game.getId());
 		game = null;
+	}
+
+	public void swapSeats(int seatNum1, int seatNum2) {
+		if (table.getState() == TableState.STARTING) {
+			if (seatNum1 >= 0 && seatNum2 >= 0 && seatNum1 < table.getSeats().length && seatNum2 < table.getSeats().length) {
+				Player swapPlayer = table.getSeats()[seatNum1].getPlayer();
+				String swapType = table.getSeats()[seatNum1].getPlayerType();
+				table.getSeats()[seatNum1].setPlayer(table.getSeats()[seatNum2].getPlayer());
+				table.getSeats()[seatNum1].setPlayerType(table.getSeats()[seatNum2].getPlayerType());
+				table.getSeats()[seatNum2].setPlayer(swapPlayer);
+				table.getSeats()[seatNum2].setPlayerType(swapType);
+			}
+		}
 	}
 
 	private void saveGame() {

@@ -34,6 +34,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.Deck;
 import mage.players.Player;
 import mage.util.Logging;
@@ -55,12 +56,12 @@ public class PlayerFactory {
 
 	private PlayerFactory() {}
 
-	public Player createPlayer(String playerType, String name, Deck deck) {
+	public Player createPlayer(String playerType, String name, Deck deck, RangeOfInfluence range) {
 		Player player;
 		Constructor<?> con;
 		try {
-			con = playerTypes.get(playerType).getConstructor(new Class[]{String.class, Deck.class});
-			player = (Player)con.newInstance(new Object[] {name, deck});
+			con = playerTypes.get(playerType).getConstructor(new Class[]{String.class, Deck.class, RangeOfInfluence.class});
+			player = (Player)con.newInstance(new Object[] {name, deck, range});
 		} catch (Exception ex) {
 			logger.log(Level.SEVERE, null, ex);
 			return null;

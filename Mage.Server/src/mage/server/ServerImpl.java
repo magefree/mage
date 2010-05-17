@@ -33,11 +33,12 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.RemoteServer;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mage.Constants.MultiplayerAttackOption;
+import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
 import mage.interfaces.MageException;
@@ -51,6 +52,7 @@ import mage.server.game.PlayerFactory;
 import mage.server.game.ReplayManager;
 import mage.server.game.TableManager;
 import mage.util.Logging;
+import mage.view.GameTypeView;
 import mage.view.TableView;
 
 /**
@@ -101,9 +103,9 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public TableView createTable(UUID sessionId, UUID roomId, String gameType, String deckType, List<String> playerTypes) throws MageException {
+	public TableView createTable(UUID sessionId, UUID roomId, String gameType, String deckType, List<String> playerTypes, MultiplayerAttackOption attackOption, RangeOfInfluence range) throws MageException {
 		try {
-			TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(sessionId, gameType, deckType, playerTypes);
+			TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(sessionId, gameType, deckType, playerTypes, attackOption, range);
 			logger.info("Table " + table.getTableId() + " created");
 			return table;
 		}
@@ -139,7 +141,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public Collection<TableView> getTables(UUID roomId) throws MageException {
+	public List<TableView> getTables(UUID roomId) throws MageException {
 		try {
 			return GamesRoomManager.getInstance().getRoom(roomId).getTables();
 		}
@@ -242,6 +244,16 @@ public class ServerImpl extends RemoteServer implements Server {
 			handleException(ex);
 		}
 		return false;
+	}
+
+	@Override
+	public void swapSeats(UUID sessionId, UUID roomId, UUID tableId, int seatNum1, int seatNum2) throws RemoteException, MageException {
+		try {
+			TableManager.getInstance().swapSeats(tableId, sessionId, seatNum1, seatNum2);
+		}
+		catch (Exception ex) {
+			handleException(ex);
+		}
 	}
 
 	@Override
@@ -419,9 +431,9 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public String[] getGameTypes() throws MageException {
+	public List<GameTypeView> getGameTypes() throws MageException {
 		try {
-			return GameFactory.getInstance().getGameTypes().toArray(new String[0]);
+			return GameFactory.getInstance().getGameTypes();
 		}
 		catch (Exception ex) {
 			handleException(ex);

@@ -31,11 +31,12 @@ package mage.server.game;
 import mage.game.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
+import mage.Constants.MultiplayerAttackOption;
+import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
 import mage.util.Logging;
@@ -52,7 +53,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 	private ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<UUID, Table>();
 
 	@Override
-	public Collection<TableView> getTables() {
+	public List<TableView> getTables() {
 		ArrayList<TableView> tableList = new ArrayList<TableView>();
 		for (Table table: tables.values()) {
 			tableList.add(new TableView(table));
@@ -70,8 +71,8 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 	}
 
 	@Override
-	public TableView createTable(UUID sessionId, String gameType, String deckType, List<String> playerTypes) {
-		Table table = TableManager.getInstance().createTable(sessionId, gameType, deckType, playerTypes);
+	public TableView createTable(UUID sessionId, String gameType, String deckType, List<String> playerTypes, MultiplayerAttackOption attackOption, RangeOfInfluence range) {
+		Table table = TableManager.getInstance().createTable(sessionId, gameType, deckType, playerTypes, attackOption, range);
 		tables.put(table.getId(), table);
 		return new TableView(table);
 	}

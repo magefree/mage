@@ -37,6 +37,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import mage.server.util.config.Config;
 import mage.server.util.config.Plugin;
+import mage.server.util.config.GamePlugin;
 import mage.util.Logging;
 /**
  *
@@ -84,15 +85,15 @@ public class ConfigSettings {
 	}
 
 	public List<Plugin> getPlayerTypes() {
-		return config.getPlayerTypes().getPlugin();
+		return config.getPlayerTypes().getPlayerType();
 	}
 
-	public List<Plugin> getGameTypes() {
-		return config.getGameTypes().getPlugin();
+	public List<GamePlugin> getGameTypes() {
+		return config.getGameTypes().getGameType();
 	}
 
 	public List<Plugin> getDeckTypes() {
-		return config.getDeckTypes().getPlugin();
+		return config.getDeckTypes().getDeckType();
 	}
 
 }

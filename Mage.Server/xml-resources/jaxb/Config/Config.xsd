@@ -23,18 +23,24 @@
 		</xs:complexType>
 	</xs:element>
 
-	<xs:element name="plugin">
-		<xs:complexType>
-			<xs:attribute name="name" type="xs:string"/>
-			<xs:attribute name="jar" type="xs:string"/>
-			<xs:attribute name="className" type="xs:string"/>
-		</xs:complexType>
-    </xs:element>
+	<xs:complexType name="plugin">
+		<xs:attribute name="name" type="xs:string"/>
+		<xs:attribute name="jar" type="xs:string"/>
+		<xs:attribute name="className" type="xs:string"/>
+	</xs:complexType>
+
+	<xs:complexType name="gamePlugin">
+		<xs:complexContent>
+			<xs:extension base="plugin">
+				<xs:attribute name="typeName" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 
 	<xs:element name="playerTypes">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="plugin" maxOccurs="unbounded"/>
+				<xs:element name="playerType" type="plugin" maxOccurs="unbounded"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -42,7 +48,7 @@
 	<xs:element name="gameTypes">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="plugin" maxOccurs="unbounded"/>
+				<xs:element name="gameType" type="gamePlugin" maxOccurs="unbounded"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -50,7 +56,7 @@
 	<xs:element name="deckTypes">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="plugin" maxOccurs="unbounded"/>
+				<xs:element name="deckType" type="plugin" maxOccurs="unbounded"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

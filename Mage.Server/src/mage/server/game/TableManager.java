@@ -34,6 +34,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
+import mage.Constants.MultiplayerAttackOption;
+import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
 import mage.util.Logging;
@@ -54,8 +56,8 @@ public class TableManager {
 		return INSTANCE;
 	}
 
-	public Table createTable(UUID sessionId, String gameType, String deckType, List<String> playerTypes) {
-		TableController tableController = new TableController(sessionId, gameType, deckType, playerTypes);
+	public Table createTable(UUID sessionId, String gameType, String deckType, List<String> playerTypes, MultiplayerAttackOption attackOption, RangeOfInfluence range) {
+		TableController tableController = new TableController(sessionId, gameType, deckType, playerTypes, attackOption, range);
 		controllers.put(tableController.getTable().getId(), tableController);
 		tables.put(tableController.getTable().getId(), tableController.getTable());
 		return tableController.getTable();
@@ -116,5 +118,11 @@ public class TableManager {
 
 	public GameReplay createReplay(UUID tableId) {
 		return controllers.get(tableId).createReplay();
+	}
+
+	public void swapSeats(UUID tableId, UUID sessionId, int seatNum1, int seatNum2) {
+		if (isTableOwner(tableId, sessionId)) {
+			controllers.get(tableId).swapSeats(seatNum1, seatNum2);
+		}
 	}
 }
