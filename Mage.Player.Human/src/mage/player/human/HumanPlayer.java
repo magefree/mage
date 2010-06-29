@@ -52,6 +52,7 @@ import mage.filter.common.FilterCreatureForCombat;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAttackingCreature;
@@ -161,19 +162,56 @@ public class HumanPlayer extends PlayerImpl {
 	}
 
 	@Override
+	public boolean chooseTarget(Cards cards, TargetCard target, Game game) {
+		game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired());
+		while (!abort) {
+			waitForResponse();
+			if (response.getUUID() != null) {
+				if (target.canTarget(response.getUUID(), cards, game)) {
+					target.addTarget(response.getUUID(), game);
+					return true;
+				}
+			} else if (!target.isRequired()) {
+				return false;
+			}
+		}
+		return false;
+	}
+
+
+	@Override
+	public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Game game) {
+		game.fireSelectTargetEvent(playerId, target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), target.isRequired());
+		while (!abort) {
+			waitForResponse();
+			if (response.getUUID() != null) {
+				if (target.canTarget(response.getUUID(), game)) {
+					UUID targetId = response.getUUID();
+					int amountSelected = getAmount(1, target.getAmountRemaining(), "Select amount", game);
+					target.addTarget(targetId, amountSelected, game);
+					return true;
+				}
+			} else if (!target.isRequired()) {
+				return false;
+			}
+		}
+		return false;
+	}
+
+	@Override
 	public void priority(Game game) {
 		passed = false;
 		if (!abort) {
 			if (passedTurn && game.getStack().isEmpty()) {
-				passed = true;
+				pass();
 				return;
 			}
 			game.firePriorityEvent(playerId);
 			waitForResponse();
 			if (response.getBoolean() != null) {
-				passed = true;
+				pass();
 			} else if (response.getInteger() != null) {
-				passed = true;
+				pass();
 				passedTurn = true;
 			} else if (response.getString() != null && response.getString().equals("special")) {
 				specialAction(game);
@@ -198,20 +236,6 @@ public class HumanPlayer extends PlayerImpl {
 				}
 			}
 		}
-	}
-
-	@Override
-	public boolean searchCards(Cards cards, TargetCard target, Game game) {
-		while (!abort && !target.doneChosing()) {
-			game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired());
-			waitForResponse();
-			if (response.getUUID() != null && cards.containsKey(response.getUUID())) {
-				target.addTarget(response.getUUID(), game);
-			} else if (!target.isRequired()) {
-				break;
-			}
-		}
-		return target.isChosen();
 	}
 
 	@Override
