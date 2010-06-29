@@ -33,7 +33,6 @@ import java.util.List;
 import mage.abilities.ActivatedAbility;
 import mage.cards.Card;
 import mage.game.Game;
-import mage.game.GameState;
 import mage.game.permanent.Permanent;
 import mage.player.ai.ComputerPlayer;
 import mage.player.ai.PermanentEvaluator;
