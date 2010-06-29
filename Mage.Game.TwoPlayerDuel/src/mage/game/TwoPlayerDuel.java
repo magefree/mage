@@ -28,13 +28,13 @@
 
 package mage.game;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.Constants.MultiplayerAttackOption;
+import mage.Constants.PhaseStep;
 import mage.Constants.RangeOfInfluence;
+import mage.game.turn.TurnMod;
 
 public class TwoPlayerDuel extends GameImpl {
 
@@ -57,13 +57,19 @@ public class TwoPlayerDuel extends GameImpl {
 		return 20;
 	}
 
+//	@Override
+//	public boolean playDrawStep(UUID activePlayerId) {
+//		//20091005 - 103.7a
+//		if (getTurnNum() != 1 || !activePlayerId.equals(startingPlayerId)) {
+//			return super.playDrawStep(activePlayerId);
+//		}
+//		return false;
+//	}
+
 	@Override
-	public boolean playDrawStep(UUID activePlayerId) {
-		//20091005 - 103.7a
-		if (getTurnNum() != 1 || !activePlayerId.equals(startingPlayerId)) {
-			return super.playDrawStep(activePlayerId);
-		}
-		return false;
+	public void init() {
+		super.init();
+		state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
 	}
 
 	@Override
