@@ -38,7 +38,7 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EliteVanguard  extends CardImpl {
+public class EliteVanguard extends CardImpl {
 
 	public EliteVanguard(UUID ownerId) {
 		super(ownerId, "Elite Vanguard", new CardType[]{CardType.CREATURE}, "{W}");
@@ -46,7 +46,7 @@ public class EliteVanguard  extends CardImpl {
 		this.color.setWhite(true);
 		this.subtype.add("Human");
 		this.subtype.add("Soldier");
-		this.art = "";
+		this.art = "103534_typ_reg_sty_010.jpg";
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(1);
 	}

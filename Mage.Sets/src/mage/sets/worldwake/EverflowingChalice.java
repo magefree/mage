@@ -26,55 +26,69 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.Mana;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.AddCountersSourceEffect;
+import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.keyword.MultikickerAbility;
+import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.sets.Conflux;
-import mage.target.TargetPlayer;
+import mage.sets.Worldwake;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FontOfMythos extends CardImpl {
+public class EverflowingChalice extends CardImpl {
 
-	public FontOfMythos(UUID ownerId) {
-		super(ownerId, "Font of Mythos", new CardType[]{CardType.ARTIFACT}, "{4}");
-		this.expansionSetId = Conflux.getInstance().getId();
-		this.art = "119800_typ_reg_sty_010.jpg";
-		this.addAbility(new FontOfMythosAbility());
+	public EverflowingChalice(UUID ownerId) {
+		super(ownerId, "Everflowing Chalice", new CardType[]{CardType.ARTIFACT}, "{0}");
+		this.expansionSetId = Worldwake.getInstance().getId();
+		this.art = "126542_typ_reg_sty_010.jpg";
+		MultikickerAbility ability = new MultikickerAbility(new AddCountersSourceEffect("charge", 1), false);
+		ability.addManaCost(new GenericManaCost(2));
+		this.addAbility(ability);
+		this.addAbility(new EverflowingChaliceAbility());
 	}
 
 }
 
-class FontOfMythosAbility extends TriggeredAbilityImpl {
+class EverflowingChaliceAbility extends ManaAbility {
 
-	public FontOfMythosAbility() {
-		super(Zone.BATTLEFIELD, new DrawCardTargetEffect(2));
+	public EverflowingChaliceAbility() {
+		super(Zone.BATTLEFIELD, new EverflowingChaliceEffect(), new TapSourceCost());
 	}
 
 	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DRAW_STEP_PRE) {
-			this.addTarget(new TargetPlayer());
-			this.targets.get(0).getTargets().add(event.getPlayerId());
-			trigger(game, event.getPlayerId());
-			return true;
-		}
-		return false;
+	public Mana getNetMana(Game game) {
+		return Mana.ColorlessMana(game.getPermanent(this.getSourceId()).getCounters().getCount("charge"));
+	}
+
+}
+
+class EverflowingChaliceEffect extends ManaEffect {
+
+	public EverflowingChaliceEffect() {
+		super(new Mana());
 	}
 
 	@Override
-	public String getRule() {
-		return "At the beginning of each player's draw step, that player draws two additional cards.";
+	public boolean apply(Game game) {
+		this.mana.clear();
+		this.mana.setColorless(game.getPermanent(this.source.getSourceId()).getCounters().getCount("charge"));
+		return super.apply(game);
+	}
+
+	@Override
+	public String getText() {
+		return "Add {1} to your mana pool for each charge counter on {this}";
 	}
 
 }

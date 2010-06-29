@@ -75,7 +75,7 @@ class FinestHourAbility extends TriggeredAbilityImpl {
 		if (checkIfClause(game) && game.getActivePlayerId().equals(this.controllerId)) {
 			if (event.getType() == EventType.DECLARED_ATTACKERS) {
 				if (game.getCombat().attacksAlone()) {
-					this.targets.add(new TargetCreaturePermanent());
+					this.addTarget(new TargetCreaturePermanent());
 					this.targets.get(0).getTargets().add(game.getCombat().getAttackers().get(0));
 					trigger(game, event.getPlayerId());
 					return true;
@@ -108,7 +108,7 @@ class FinestHourEffect extends OneShotEffect {
 		Permanent permanent = game.getPermanent(this.source.getFirstTarget());
 		if (permanent != null) {
 			permanent.setTapped(false);
-			game.getState().getTurnMods().add(new TurnMod(this.source.getControllerId(), TurnPhase.COMBAT, null));
+			game.getState().getTurnMods().add(new TurnMod(this.source.getControllerId(), TurnPhase.COMBAT, null, false));
 		}
 		else {
 			return false;

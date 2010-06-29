@@ -58,7 +58,7 @@ public class LavaclawReaches extends CardImpl {
 		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
 		this.addAbility(new BlackManaAbility());
 		this.addAbility(new RedManaAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new LavaclawReachesToken()), new ManaCosts("{1}{B}{R}")));
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new LavaclawReachesToken(), "land"), new ManaCosts("{1}{B}{R}")));
 	}
 
 }

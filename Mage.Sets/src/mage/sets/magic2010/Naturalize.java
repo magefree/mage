@@ -26,55 +26,38 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Zone;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.Constants.TargetController;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.sets.Conflux;
-import mage.target.TargetPlayer;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.FilterPermanent;
+import mage.sets.Magic2010;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LokiX
  */
-public class FontOfMythos extends CardImpl {
+public class Naturalize extends CardImpl {
 
-	public FontOfMythos(UUID ownerId) {
-		super(ownerId, "Font of Mythos", new CardType[]{CardType.ARTIFACT}, "{4}");
-		this.expansionSetId = Conflux.getInstance().getId();
-		this.art = "119800_typ_reg_sty_010.jpg";
-		this.addAbility(new FontOfMythosAbility());
+	private static FilterPermanent filter = new FilterPermanent("artifact or enchantment");
+
+	static {
+		filter.getCardType().add(CardType.ARTIFACT);
+		filter.getCardType().add(CardType.ENCHANTMENT);
+		filter.setScopeColor(ComparisonScope.Any);
 	}
 
-}
-
-class FontOfMythosAbility extends TriggeredAbilityImpl {
-
-	public FontOfMythosAbility() {
-		super(Zone.BATTLEFIELD, new DrawCardTargetEffect(2));
+	public Naturalize(UUID onwerId){
+		super(onwerId, "Naturalize", new CardType[]{CardType.INSTANT},"{1}{G}");
+		this.expansionSetId = Magic2010.getInstance().getId();
+		this.color.setGreen(true);
+		this.art = "49669_typ_reg_sty_010.jpg";
+		this.getSpellAbility().addTarget(new TargetPermanent(filter, TargetController.ANY));
+		this.getSpellAbility().addEffect(new DestroyTargetEffect());
 	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DRAW_STEP_PRE) {
-			this.addTarget(new TargetPlayer());
-			this.targets.get(0).getTargets().add(event.getPlayerId());
-			trigger(game, event.getPlayerId());
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public String getRule() {
-		return "At the beginning of each player's draw step, that player draws two additional cards.";
-	}
-
 }

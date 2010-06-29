@@ -26,55 +26,77 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.TargetController;
 import mage.Constants.Zone;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.RequirementAttackEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.sets.Conflux;
-import mage.target.TargetPlayer;
+import mage.game.permanent.Permanent;
+import mage.sets.Magic2010;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FontOfMythos extends CardImpl {
+public class AlluringSiren extends CardImpl {
 
-	public FontOfMythos(UUID ownerId) {
-		super(ownerId, "Font of Mythos", new CardType[]{CardType.ARTIFACT}, "{4}");
-		this.expansionSetId = Conflux.getInstance().getId();
-		this.art = "119800_typ_reg_sty_010.jpg";
-		this.addAbility(new FontOfMythosAbility());
+	public AlluringSiren(UUID ownerId) {
+		super(ownerId, "Alluring Siren", new CardType[]{CardType.CREATURE}, "{1}{U}");
+		this.expansionSetId = Magic2010.getInstance().getId();
+		this.color.setBlue(true);
+		this.subtype.add("Siren");
+		this.art = "121568_typ_reg_sty_010.jpg";
+		this.power = new MageInt(1);
+		this.toughness = new MageInt(1);
+		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AlluringSirenEffect(), new TapSourceCost());
+		TargetCreaturePermanent target = new TargetCreaturePermanent();
+		target.setTargetController(TargetController.OPPONENT);
+		ability.addTarget(target);
+		this.addAbility(ability);
 	}
 
 }
 
-class FontOfMythosAbility extends TriggeredAbilityImpl {
+class AlluringSirenEffect extends RequirementAttackEffect {
 
-	public FontOfMythosAbility() {
-		super(Zone.BATTLEFIELD, new DrawCardTargetEffect(2));
+	public AlluringSirenEffect() {
+		super(Duration.OneUse);
 	}
 
 	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DRAW_STEP_PRE) {
-			this.addTarget(new TargetPlayer());
-			this.targets.get(0).getTargets().add(event.getPlayerId());
-			trigger(game, event.getPlayerId());
+	public boolean applies(GameEvent event, Game game) {
+		if (event.getType().equals(EventType.DECLARE_ATTACKERS_STEP_PRE) && event.getPlayerId().equals(this.source.getFirstTarget()))
 			return true;
+		if (event.getType().equals(EventType.END_PHASE_POST) && event.getPlayerId().equals(this.source.getFirstTarget()))
+			used = true;
+		return false;
+	}
+
+	@Override
+	public boolean apply(Game game) {
+		Permanent creature = game.getPermanent(this.source.getFirstTarget());
+		if (creature != null) {
+			if (creature.canAttack(game)) {
+				game.getCombat().declareAttacker(creature.getId(), this.source.getControllerId(), game);
+			}
 		}
 		return false;
 	}
 
 	@Override
-	public String getRule() {
-		return "At the beginning of each player's draw step, that player draws two additional cards.";
+	public String getText() {
+		return "Target creature an opponent controls attacks you this turn if able.";
 	}
-
 }

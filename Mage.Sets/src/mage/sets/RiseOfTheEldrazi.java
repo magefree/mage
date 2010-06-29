@@ -45,7 +45,10 @@ public class RiseOfTheEldrazi extends ExpansionSet {
 
 	private RiseOfTheEldrazi() {
 		this.name = "Rise Of The Eldrazi";
+		this.cards.add(Deprive.class);
+		this.cards.add(GideonJura.class);
 		this.cards.add(KarganDragonlord.class);
+		this.cards.add(WallOfOmens.class);
 	}
 	
 }

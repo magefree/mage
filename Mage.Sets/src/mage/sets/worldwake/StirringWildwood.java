@@ -57,7 +57,7 @@ public class StirringWildwood extends CardImpl {
 		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new WhiteManaAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new StirringWildwoodToken()), new ManaCosts("{1}{G}{W}")));
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new StirringWildwoodToken(), "land"), new ManaCosts("{1}{G}{W}")));
 	}
 
 }

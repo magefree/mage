@@ -58,7 +58,7 @@ public class RagingRavine extends CardImpl {
 		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new RedManaAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new RagingRavineToken()), new ManaCosts("{2}{R}{G}")));
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new RagingRavineToken(), "land"), new ManaCosts("{2}{R}{G}")));
 	}
 
 }

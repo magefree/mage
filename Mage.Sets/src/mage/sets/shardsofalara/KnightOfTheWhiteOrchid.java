@@ -95,8 +95,6 @@ class KnightOfTheWhiteOrchidAbility extends EntersBattlefieldTriggeredAbility {
 		FilterLandPermanent filter = new FilterLandPermanent();
 		int numLands = game.getBattlefield().countAll(filter, this.controllerId);
 		for (UUID opponentId: game.getOpponents(this.controllerId)) {
-			filter.getControllerId().clear();
-			filter.getControllerId().add(opponentId);
 			if (numLands < game.getBattlefield().countAll(filter, opponentId)) {
 				return true;
 			}

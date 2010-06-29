@@ -26,55 +26,56 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.TargetController;
 import mage.Constants.Zone;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.MageInt;
+import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.sets.Conflux;
-import mage.target.TargetPlayer;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.sets.Magic2010;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LokiX
  */
-public class FontOfMythos extends CardImpl {
+public class RoyalAssassin extends CardImpl {
 
-	public FontOfMythos(UUID ownerId) {
-		super(ownerId, "Font of Mythos", new CardType[]{CardType.ARTIFACT}, "{4}");
-		this.expansionSetId = Conflux.getInstance().getId();
-		this.art = "119800_typ_reg_sty_010.jpg";
-		this.addAbility(new FontOfMythosAbility());
-	}
+    public RoyalAssassin(UUID onwerId){
+        super(onwerId,"Royal Assassin", new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+        this.expansionSetId = Magic2010.getInstance().getId();
+        this.color.setBlack(true);
+        this.subtype.add("Human");
+        this.subtype.add("Assassin");
+		this.art = "48786_typ_reg_sty_010.jpg";
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
+        this.addAbility(new RoyalAssassinAbility());
+    }
 }
 
-class FontOfMythosAbility extends TriggeredAbilityImpl {
+class RoyalAssassinAbility extends ActivatedAbilityImpl {
 
-	public FontOfMythosAbility() {
-		super(Zone.BATTLEFIELD, new DrawCardTargetEffect(2));
+    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
+
+	static {
+		filter.setUseTapped(true);
+		filter.setScopeColor(ComparisonScope.Any);
+		filter.setTapped(true);
 	}
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DRAW_STEP_PRE) {
-			this.addTarget(new TargetPlayer());
-			this.targets.get(0).getTargets().add(event.getPlayerId());
-			trigger(game, event.getPlayerId());
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public String getRule() {
-		return "At the beginning of each player's draw step, that player draws two additional cards.";
-	}
-
+    public RoyalAssassinAbility(){
+        super(Zone.BATTLEFIELD, null);
+        addTarget(new TargetCreaturePermanent(1,1,filter, TargetController.ANY));
+        addCost(new TapSourceCost());
+        addEffect(new DestroyTargetEffect());
+    }
 }

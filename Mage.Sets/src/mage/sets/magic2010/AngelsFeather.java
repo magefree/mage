@@ -26,55 +26,56 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.sets.Conflux;
-import mage.target.TargetPlayer;
+import mage.sets.Magic2010;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FontOfMythos extends CardImpl {
+public class AngelsFeather extends CardImpl {
 
-	public FontOfMythos(UUID ownerId) {
-		super(ownerId, "Font of Mythos", new CardType[]{CardType.ARTIFACT}, "{4}");
-		this.expansionSetId = Conflux.getInstance().getId();
-		this.art = "119800_typ_reg_sty_010.jpg";
-		this.addAbility(new FontOfMythosAbility());
+	public AngelsFeather(UUID ownerId) {
+		super(ownerId, "Angel's Feather", new CardType[]{CardType.ARTIFACT}, "{2}");
+		this.expansionSetId = Magic2010.getInstance().getId();
+		this.art = "75223_typ_reg_sty_010.jpg";
+		this.addAbility(new AngelsFeatherAbility());
 	}
 
 }
 
-class FontOfMythosAbility extends TriggeredAbilityImpl {
+class AngelsFeatherAbility extends TriggeredAbilityImpl {
 
-	public FontOfMythosAbility() {
-		super(Zone.BATTLEFIELD, new DrawCardTargetEffect(2));
+	public AngelsFeatherAbility() {
+		super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
 	}
 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DRAW_STEP_PRE) {
-			this.addTarget(new TargetPlayer());
-			this.targets.get(0).getTargets().add(event.getPlayerId());
-			trigger(game, event.getPlayerId());
-			return true;
+		if (event.getType() == EventType.SPELL_CAST) {
+			MageObject spell = game.getObject(event.getTargetId());
+			if (spell != null && spell.getColor().isWhite()) {
+				trigger(game, event.getPlayerId());
+				return true;
+			}
 		}
 		return false;
 	}
 
 	@Override
 	public String getRule() {
-		return "At the beginning of each player's draw step, that player draws two additional cards.";
+		return "Whenever a player casts a white spell, you may gain 1 life.";
 	}
 
 }

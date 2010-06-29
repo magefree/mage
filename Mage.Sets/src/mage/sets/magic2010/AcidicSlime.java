@@ -26,55 +26,53 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Zone;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.Constants.TargetController;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.sets.Conflux;
-import mage.target.TargetPlayer;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.FilterPermanent;
+import mage.sets.Magic2010;
+import mage.target.Target;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FontOfMythos extends CardImpl {
+public class AcidicSlime extends CardImpl {
 
-	public FontOfMythos(UUID ownerId) {
-		super(ownerId, "Font of Mythos", new CardType[]{CardType.ARTIFACT}, "{4}");
-		this.expansionSetId = Conflux.getInstance().getId();
-		this.art = "119800_typ_reg_sty_010.jpg";
-		this.addAbility(new FontOfMythosAbility());
+	private static FilterPermanent filter = new FilterPermanent("artifact, enchantment, or land");
+
+	static {
+		filter.getCardType().add(CardType.ARTIFACT);
+		filter.getCardType().add(CardType.ENCHANTMENT);
+		filter.getCardType().add(CardType.LAND);
+		filter.setScopeCardType(ComparisonScope.Any);
 	}
 
-}
+	public AcidicSlime(UUID ownerId) {
+		super(ownerId, "Acidic Slime", new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+		this.expansionSetId = Magic2010.getInstance().getId();
+		this.subtype.add("Ooze");
+		this.color.setGreen(true);
+		this.art = "121561_typ_reg_sty_010.jpg";
+		this.power = new MageInt(2);
+		this.toughness = new MageInt(2);
 
-class FontOfMythosAbility extends TriggeredAbilityImpl {
-
-	public FontOfMythosAbility() {
-		super(Zone.BATTLEFIELD, new DrawCardTargetEffect(2));
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DRAW_STEP_PRE) {
-			this.addTarget(new TargetPlayer());
-			this.targets.get(0).getTargets().add(event.getPlayerId());
-			trigger(game, event.getPlayerId());
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public String getRule() {
-		return "At the beginning of each player's draw step, that player draws two additional cards.";
+		this.addAbility(DeathtouchAbility.getInstance());
+		Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
+		Target target = new TargetPermanent(filter, TargetController.ANY);
+		target.setRequired(true);
+		ability.addTarget(target);
+		this.addAbility(ability);
 	}
 
 }

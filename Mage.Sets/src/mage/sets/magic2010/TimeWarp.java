@@ -63,7 +63,7 @@ class TimeWarpEffect extends OneShotEffect {
 
 	@Override
 	public boolean apply(Game game) {
-		game.getState().getTurnMods().add(new TurnMod(source.getFirstTarget()));
+		game.getState().getTurnMods().add(new TurnMod(source.getFirstTarget(), false));
 		return true;
 	}
 

@@ -62,6 +62,7 @@ public class Zendikar extends ExpansionSet {
 		this.cards.add(RampagingBaloths.class);
 		this.cards.add(ScaldingTarn.class);
 		this.cards.add(ScuteMob.class);
+		this.cards.add(SpreadingSeas.class);
 		this.cards.add(SteppeLynx.class);
 		this.cards.add(SunspringExpedition.class);
 		this.cards.add(TeeteringPeaks.class);

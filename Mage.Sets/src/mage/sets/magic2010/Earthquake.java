@@ -83,6 +83,4 @@ class EarthquakeEffect extends OneShotEffect {
 	public String getText() {
 		return "Earthquake deals X damage to each creature without flying and each player";
 	}
-
-
 }

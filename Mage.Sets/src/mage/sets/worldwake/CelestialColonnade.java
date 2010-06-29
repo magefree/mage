@@ -58,7 +58,7 @@ public class CelestialColonnade extends CardImpl {
 		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
 		this.addAbility(new BlueManaAbility());
 		this.addAbility(new WhiteManaAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new CelestialColonnadeToken()), new ManaCosts("{3}{W}{U}")));
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new CelestialColonnadeToken(), "land"), new ManaCosts("{3}{W}{U}")));
 	}
 
 }

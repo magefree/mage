@@ -64,7 +64,7 @@ class HowlingMineAbility extends TriggeredAbilityImpl {
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.DRAW_STEP_PRE) {
-			this.targets.add(new TargetPlayer());
+			this.addTarget(new TargetPlayer());
 			this.targets.get(0).getTargets().add(event.getPlayerId());
 			trigger(game, event.getPlayerId());
 			return true;

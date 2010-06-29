@@ -57,7 +57,7 @@ public class KarganDragonlord extends LevelerCard {
 		this.subtype.add("Human");
 		this.subtype.add("Warrior");
 		this.color.setRed(true);
-		this.art = "";
+		this.art = "127295_typ_reg_sty_010.jpg";
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
 

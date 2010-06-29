@@ -26,55 +26,29 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Zone;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.abilities.effects.common.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.sets.Conflux;
-import mage.target.TargetPlayer;
+import mage.filter.common.FilterBasicLandCard;
+import mage.sets.Magic2010;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LokiX
  */
-public class FontOfMythos extends CardImpl {
+public class RampantGrowth extends CardImpl {
 
-	public FontOfMythos(UUID ownerId) {
-		super(ownerId, "Font of Mythos", new CardType[]{CardType.ARTIFACT}, "{4}");
-		this.expansionSetId = Conflux.getInstance().getId();
-		this.art = "119800_typ_reg_sty_010.jpg";
-		this.addAbility(new FontOfMythosAbility());
+	public RampantGrowth(UUID ownerId){
+		super(ownerId, "Rampant Growth", new CardType[]{CardType.SORCERY}, "{1}{G}");
+		this.expansionSetId = Magic2010.getInstance().getId();
+		this.color.setGreen(true);
+		this.art = "101061_typ_reg_sty_010.jpg";
+		TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
+		this.getSpellAbility().addTarget(target);
+		this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, true));
 	}
-
-}
-
-class FontOfMythosAbility extends TriggeredAbilityImpl {
-
-	public FontOfMythosAbility() {
-		super(Zone.BATTLEFIELD, new DrawCardTargetEffect(2));
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DRAW_STEP_PRE) {
-			this.addTarget(new TargetPlayer());
-			this.targets.get(0).getTargets().add(event.getPlayerId());
-			trigger(game, event.getPlayerId());
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public String getRule() {
-		return "At the beginning of each player's draw step, that player draws two additional cards.";
-	}
-
 }

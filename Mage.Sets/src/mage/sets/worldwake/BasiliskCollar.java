@@ -34,7 +34,7 @@ import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.GainAbilityEquippedEffect;
+import mage.abilities.effects.common.GainAbilityAttachedEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -53,7 +53,7 @@ public class BasiliskCollar extends CardImpl {
 		this.art = "126549_typ_reg_sty_010.jpg";
 		this.subtype.add("Equipment");
 		this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityEquippedEffect(LifelinkAbility.getInstance())));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityEquippedEffect(DeathtouchAbility.getInstance())));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance())));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DeathtouchAbility.getInstance())));
 	}
 }

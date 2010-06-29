@@ -34,7 +34,6 @@ import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
-import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -53,8 +52,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.sets.Conflux;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetLandPermanent;
-import mage.target.common.TargetSacrificePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -83,7 +81,7 @@ public class KnightOfTheReliquary extends CardImpl {
 		TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
 		Costs costs = new CostsImpl();
 		costs.add(new TapSourceCost());
-		costs.add(new SacrificeTargetCost(new TargetSacrificePermanent(1, 1, filter)));
+		costs.add(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter)));
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KnightOfTheReliquaryEffect()));
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay), costs));
 	}

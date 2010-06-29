@@ -50,7 +50,7 @@ public class HonorOfThePure extends CardImpl {
 		super(ownerId, "Honor of the Pure", new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setWhite(true);
-		this.art = "";
+		this.art = "102628_typ_reg_sty_010.jpg";
 		filter.setUseColor(true);
 		filter.getColor().setWhite(true);
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter)));
