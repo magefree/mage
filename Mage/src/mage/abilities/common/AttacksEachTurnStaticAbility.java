@@ -26,33 +26,55 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.abilities.common;
 
+import mage.Constants.Duration;
 import mage.Constants.Outcome;
-import mage.abilities.effects.OneShotEffect;
+import mage.Constants.Zone;
+import mage.abilities.StaticAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.RequirementAttackEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.common.TargetDefender;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EquipEffect extends OneShotEffect {
+public class AttacksEachTurnStaticAbility extends StaticAbility {
 
-	public EquipEffect(Outcome outcome) {
-		super(outcome);
+	public AttacksEachTurnStaticAbility() {
+		super(Zone.BATTLEFIELD, new AttacksEachTurnEffect());
+	}
+	
+}
+
+class AttacksEachTurnEffect extends RequirementAttackEffect {
+
+	public AttacksEachTurnEffect() {
+		super(Duration.WhileOnBattlefield);
 	}
 
+	@Override
 	public boolean apply(Game game) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			return permanent.addAttachment(source.getSourceId(), game);
+		Permanent creature = game.getPermanent(this.source.getSourceId());
+		if (creature != null) {
+			if (creature.canAttack(game)) {
+				TargetDefender target = new TargetDefender(game.getCombat().getDefenders(), creature.getControllerId());
+				Player controller = game.getPlayer(creature.getControllerId());
+				while (!target.isChosen())
+					controller.chooseTarget(Outcome.Damage, target, game);
+				game.getCombat().declareAttacker(creature.getId(), target.getFirstTarget(), game);
+				return true;
+			}
 		}
 		return false;
 	}
 
 	@Override
 	public String getText() {
-		return "Equip";
+		return "{this} attacks each turn if able.";
 	}
 }

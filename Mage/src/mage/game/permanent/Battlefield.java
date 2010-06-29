@@ -137,22 +137,12 @@ public class Battlefield implements Serializable {
 
 	public void endOfTurn(UUID controllerId, Game game) {
 		for (Permanent perm: field.values()) {
-			if (perm.getControllerId().equals(controllerId))
-				perm.endOfTurn(game);
+			perm.endOfTurn(game);
 		}
 	}
 
 	public Collection<Permanent> getAllPermanents() {
 		return field.values();
-	}
-
-	public Collection<Permanent> getAllPermanents(UUID controllerId) {
-		List<Permanent> perms = new ArrayList<Permanent>();
-		for (Permanent perm: field.values()) {
-			if (perm.getControllerId().equals(controllerId))
-				perms.add(perm);
-		}
-		return perms;
 	}
 
 	public List<Permanent> getAllActivePermanents() {
@@ -164,6 +154,14 @@ public class Battlefield implements Serializable {
 		return active;
 	}
 
+	/**
+	 * Returns all Permanents on the battlefield that are controlled by the specified
+	 * player id.  The method ignores the range of influence.
+	 * 
+	 * @param controllerId
+	 * @return a list of Permanent
+	 * @see Permanent
+	 */
 	public List<Permanent> getAllActivePermanents(UUID controllerId) {
 		List<Permanent> active = new ArrayList<Permanent>();
 		for (Permanent perm: field.values()) {
@@ -173,6 +171,14 @@ public class Battlefield implements Serializable {
 		return active;
 	}
 
+	/**
+	 * Returns all Permanents on the battlefield that match the specified CardType.
+	 * This method ignores the range of influence.
+	 * 
+	 * @param type
+	 * @return a list of Permanent
+	 * @see Permanent
+	 */
 	public List<Permanent> getAllActivePermanents(CardType type) {
 		List<Permanent> active = new ArrayList<Permanent>();
 		for (Permanent perm: field.values()) {
@@ -182,6 +188,14 @@ public class Battlefield implements Serializable {
 		return active;
 	}
 
+	/**
+	 * Returns all Permanents on the battlefield that match the supplied filter.  
+	 * This method ignores the range of influence.
+	 * 
+	 * @param filter
+	 * @return a list of Permanent
+	 * @see Permanent
+	 */
 	public List<Permanent> getAllActivePermanents(FilterPermanent filter) {
 		List<Permanent> active = new ArrayList<Permanent>();
 		for (Permanent perm: field.values()) {
@@ -191,6 +205,15 @@ public class Battlefield implements Serializable {
 		return active;
 	}
 
+	/**
+	 * Returns all Permanents that match the filter and are controlled by controllerId.
+	 * This method ignores the range of influence.
+	 *
+	 * @param filter
+	 * @param controllerId
+	 * @return a list of Permanent
+	 * @see Permanent
+	 */
 	public List<Permanent> getAllActivePermanents(FilterPermanent filter, UUID controllerId) {
 		List<Permanent> active = new ArrayList<Permanent>();
 		for (Permanent perm: field.values()) {
@@ -200,6 +223,16 @@ public class Battlefield implements Serializable {
 		return active;
 	}
 
+	/**
+	 * Returns all Permanents that are within the range of influence  of the specified player id
+	 * and that match the supplied filter.
+	 * 
+	 * @param filter
+	 * @param sourcePlayerId
+	 * @param game
+	 * @return a list of Permanent
+	 * @see Permanent
+	 */
 	public List<Permanent> getActivePermanents(FilterPermanent filter, UUID sourcePlayerId, Game game) {
 		if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
 			return getAllActivePermanents(filter);
@@ -215,6 +248,14 @@ public class Battlefield implements Serializable {
 		}
 	}
 
+	/**
+	 * Returns all Permanents that are within the range of influence  of the specified player id.
+	 * 
+	 * @param sourcePlayerId
+	 * @param game
+	 * @return a list of Permanent
+	 * @see Permanent
+	 */
 	public List<Permanent> getActivePermanents(UUID sourcePlayerId, Game game) {
 		if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
 			return getAllActivePermanents();
@@ -247,14 +288,5 @@ public class Battlefield implements Serializable {
 		}
 		return phasedOut;
 	}
-
-//	public List<Permanent> getMatches(FilterPermanent filter) {
-//		List<Permanent> matches = new ArrayList<Permanent>();
-//		for (Permanent perm: field.values()) {
-//			if (filter.match(perm))
-//				matches.add(perm);
-//		}
-//		return matches;
-//	}
 
 }

@@ -48,10 +48,10 @@ public class Logging {
 
 	public static Logger getLogger(String name) {
 		Logger logger = Logger.getLogger(name);
-		logger.setUseParentHandlers(false);
 		ConsoleHandler handler = new ConsoleHandler();
 		handler.setFormatter(new LogFormatter());
 		logger.addHandler(handler);
+		logger.setUseParentHandlers(false);
 		return logger;
 	}
 

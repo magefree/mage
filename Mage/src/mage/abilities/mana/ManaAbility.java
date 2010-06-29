@@ -33,7 +33,6 @@ import mage.Constants.Zone;
 import mage.Mana;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
 import mage.abilities.effects.common.ManaEffect;
 import mage.game.Game;
 
@@ -57,7 +56,7 @@ public abstract class ManaAbility extends ActivatedAbilityImpl {
 		return costs.canPay(playerId, game);
 	}
 
-	public Mana getNetMana() {
+	public Mana getNetMana(Game game) {
 		return netMana;
 	}
 }

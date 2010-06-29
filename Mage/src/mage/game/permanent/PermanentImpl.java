@@ -110,6 +110,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent
 		this.damage = 0;
 		this.loyaltyUsed = false;
 		this.turnsOnBattlefield++;
+		for (Ability ability: this.abilities) {
+			ability.reset(game);
+		}
 	}
 
 	@Override

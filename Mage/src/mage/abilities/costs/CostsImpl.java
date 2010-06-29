@@ -33,6 +33,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.game.Game;
+import mage.target.Targets;
 
 /**
  *
@@ -141,5 +142,14 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
 		}
 		return null;
  	}
+
+	@Override
+	public Targets getTargets() {
+		Targets targets = new Targets(ability);
+		for (Cost cost: this) {
+			targets.addAll(cost.getTargets());
+		}
+		return targets;
+	}
 
 }

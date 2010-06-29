@@ -40,7 +40,7 @@ import mage.game.Game;
 public class TableEvent extends EventObject implements ExternalEvent, Serializable {
 
 	public enum EventType {
-		UPDATE, INFO, REVEAL
+		UPDATE, INFO, REVEAL, LOOK
 	}
 
 	private Game game;

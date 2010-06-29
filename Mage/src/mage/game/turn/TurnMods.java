@@ -52,7 +52,19 @@ public class TurnMods extends ArrayList<TurnMod> {
 		return false;
 	}
 
-	public PhaseStep extraStep(UUID playerId, PhaseStep afterStep) {
+	public boolean skipTurn(UUID playerId) {
+		ListIterator<TurnMod> it = this.listIterator(this.size());
+		while (it.hasPrevious()) {
+			TurnMod turnMod = it.previous();
+			if (turnMod.isSkipTurn() == true && turnMod.getPlayerId().equals(playerId)) {
+				it.remove();
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public Step extraStep(UUID playerId, PhaseStep afterStep) {
 		ListIterator<TurnMod> it = this.listIterator(this.size());
 		while (it.hasPrevious()) {
 			TurnMod turnMod = it.previous();
@@ -62,6 +74,18 @@ public class TurnMods extends ArrayList<TurnMod> {
 			}
 		}
 		return null;
+	}
+
+	public boolean skipStep(UUID playerId, PhaseStep step) {
+		ListIterator<TurnMod> it = this.listIterator(this.size());
+		while (it.hasPrevious()) {
+			TurnMod turnMod = it.previous();
+			if (turnMod.getSkipStep() != null && turnMod.getPlayerId().equals(playerId) && turnMod.getSkipStep() == step) {
+				it.remove();
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public TurnPhase extraPhase(UUID playerId, TurnPhase afterPhase) {
@@ -74,6 +98,18 @@ public class TurnMods extends ArrayList<TurnMod> {
 			}
 		}
 		return null;
+	}
+
+	public boolean skipPhase(UUID playerId, TurnPhase phase) {
+		ListIterator<TurnMod> it = this.listIterator(this.size());
+		while (it.hasPrevious()) {
+			TurnMod turnMod = it.previous();
+			if (turnMod.getSkipPhase() != null && turnMod.getPlayerId().equals(playerId) && turnMod.getSkipPhase() == phase) {
+				it.remove();
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

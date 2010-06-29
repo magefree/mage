@@ -31,6 +31,7 @@ package mage.abilities.mana;
 import java.util.ArrayList;
 import java.util.List;
 import mage.Mana;
+import mage.game.Game;
 import mage.util.Copier;
 
 /**
@@ -44,13 +45,13 @@ import mage.util.Copier;
  */
 public class ManaOptions extends ArrayList<Mana> {
 
-	public void addMana(List<ManaAbility> abilities) {
+	public void addMana(List<ManaAbility> abilities, Game game) {
 		if (isEmpty())
 			this.add(new Mana());
 		if (!abilities.isEmpty()) {
 			if (abilities.size() == 1) {
 				//if there is only one mana option available add it to all the existing options
-				addMana(abilities.get(0).getNetMana());
+				addMana(abilities.get(0).getNetMana(game));
 			}
 			else if (abilities.size() > 1) {
 				//perform a union of all existing options and the new options
@@ -61,7 +62,7 @@ public class ManaOptions extends ArrayList<Mana> {
 					for (Mana mana: copy) {
 						Mana newMana = new Mana();
 						newMana.add(mana);
-						newMana.add(ability.getNetMana());
+						newMana.add(ability.getNetMana(game));
 						this.add(newMana);
 					}
 				}

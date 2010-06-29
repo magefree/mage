@@ -57,7 +57,7 @@ public class PreventAllCombatDamageEffect extends PreventionEffectImpl {
 
 	@Override
 	public boolean applies(GameEvent event, Game game) {
-		if (game.getTurn().getStep() == PhaseStep.COMBAT_DAMAGE)
+		if (game.getTurn().getStepType() == PhaseStep.COMBAT_DAMAGE)
 			return super.applies(event, game);
 		return false;
 	}

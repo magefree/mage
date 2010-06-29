@@ -98,7 +98,8 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
 	}
 
 	/**
-	 * Returns the next element in the list
+	 * Returns the next element in the list.  Will loop around to the beginning
+	 * of the list if the current element is the last.
 	 * 
 	 * @return the next element in the list
 	 */
@@ -107,7 +108,8 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
 	}
 
 	/**
-	 * Returns the previous element in the list
+	 * Returns the previous element in the list.  Will loop around to the end
+	 * of the list if the current element is the first.
 	 *
 	 * @return the previous element in the list
 	 */

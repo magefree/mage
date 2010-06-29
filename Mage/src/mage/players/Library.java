@@ -74,6 +74,13 @@ public class Library implements Serializable {
 		}
 	}
 
+	/**
+	 * Removes the top card of the Library and returns it
+	 * 
+	 * @param game
+	 * @return Card
+	 * @see Card
+	 */
 	public Card removeFromTop(Game game) {
 		Card card = library.pollFirst();
 		if (card == null) {
@@ -82,6 +89,13 @@ public class Library implements Serializable {
 		return card;
 	}
 
+	/**
+	 * Returns the top card of the Library without removing it
+	 *
+	 * @param game
+	 * @return Card
+	 * @see Card
+	 */
 	public Card getFromTop(Game game) {
 		return library.peekFirst();
 	}

@@ -41,8 +41,10 @@ import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
 import mage.Constants.Zone;
 import mage.MageObject;
+import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
+import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.SpecialAction;
@@ -52,6 +54,7 @@ import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -104,6 +107,10 @@ public abstract class PlayerImpl implements Player, Serializable {
 		deck.setOwnerId(playerId);
 		library = new Library(playerId);
 		library.addAll(deck.getCards());
+	}
+
+	protected PlayerImpl(UUID id) {
+		this.playerId = id;
 	}
 
 	@Override
@@ -161,18 +168,18 @@ public abstract class PlayerImpl implements Player, Serializable {
 			}
 			else {
 				inRange.add(playerId);
-				PlayerList players = game.getPlayerList(playerId);
+				PlayerList players = game.getState().getPlayerList(playerId);
 				for (int i = 0; i < range.getRange(); i++) {
-					Player player = players.getNext();
+					Player player = players.getNext(game);
 					while (player.hasLeft())
-						player = players.getNext();
+						player = players.getNext(game);
 					inRange.add(player.getId());
 				}
-				players = game.getPlayerList(playerId);
+				players = game.getState().getPlayerList(playerId);
 				for (int i = 0; i < range.getRange(); i++) {
-					Player player = players.getPrevious();
+					Player player = players.getPrevious(game);
 					while (player.hasLeft())
-						player = players.getPrevious();
+						player = players.getPrevious(game);
 					inRange.add(player.getId());
 				}
 			}
@@ -196,7 +203,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 	}
 
 	@Override
-	public boolean canTarget(MageObject source) {
+	public boolean canBeTargetedBy(MageObject source) {
 		if (this.hasLost() || this.hasLeft())
 			return false;
 		if (source != null) {
@@ -251,6 +258,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 	public boolean putInHand(Card card, Game game) {
 		if (card.getOwnerId().equals(playerId)) {
 			this.hand.add(card);
+			if (card.getSpellAbility() != null)
+				card.getSpellAbility().clear();
 		} else {
 			return game.getPlayer(card.getOwnerId()).putInHand(card, game);
 		}
@@ -337,24 +346,25 @@ public abstract class PlayerImpl implements Player, Serializable {
 	}
 
 	@Override
-	public boolean cast(Card card, Game game, boolean noMana) {
+	public boolean cast(SpellAbility ability, Game game, boolean noMana) {
 		//20091005 - 601.2a
-		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, card.getId(), playerId))) {
-			game.bookmarkState();
-			removeFromHand(card, game);
-
-			game.getStack().push(new Spell(card, playerId));
-			card.getSpellAbility().clear();
-			if (card.getSpellAbility().activate(game, noMana)) {
-				for (KickerAbility ability: card.getAbilities().getKickerAbilities()) {
-					ability.copy().activate(game, false);
+		Card card = game.getCard(ability.getSourceId());
+		if (card != null) {
+			if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, card.getId(), playerId))) {
+				game.bookmarkState();
+				removeFromHand(card, game);
+				game.getStack().push(new Spell(card, ability, playerId));
+				if (ability.activate(game, noMana)) {
+					for (KickerAbility kicker: card.getAbilities().getKickerAbilities()) {
+						kicker.activate(game, false);
+					}
+					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, card.getId(), playerId));
+					game.fireInformEvent(name + " casts " + card.getName());
+					game.removeLastBookmark();
+					return true;
 				}
-				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, card.getId(), playerId));
-				game.fireInformEvent(name + " casts " + card.getName());
-				game.removeLastBookmark();
-				return true;
+				game.restoreState();
 			}
-			game.restoreState();
 		}
 		return false;
 	}
@@ -437,7 +447,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 			result = playManaAbility((ManaAbility)ability.copy(), game);
 		}
 		else if (ability instanceof SpellAbility) {
-			result = cast(hand.get(ability.getSourceId()), game, false);
+			result = cast((SpellAbility)ability, game, false);
 		}
 		else {
 			result = playAbility((ActivatedAbility)ability.copy(), game);
@@ -455,10 +465,12 @@ public abstract class PlayerImpl implements Player, Serializable {
 		game.saveState();
 		game.bookmarkState();
 		TriggeredAbility ability = (TriggeredAbility) source.copy();
-		game.getStack().push(new StackAbility(ability, playerId));
-		if (ability.activate(game, false)) {
-			game.removeLastBookmark();
-			return true;
+		if (ability.getTargets().canChoose(ability.getSourceId(), playerId, game)) {
+			game.getStack().push(new StackAbility(ability, playerId));
+			if (ability.activate(game, false)) {
+				game.removeLastBookmark();
+				return true;
+			}
 		}
 		game.restoreState();
 		return false;
@@ -471,6 +483,11 @@ public abstract class PlayerImpl implements Player, Serializable {
 				useable.put(ability.getId(), ability);
 		}
 		return useable;
+	}
+
+	@Override
+	public int getLandsPlayed() {
+		return landsPlayed;
 	}
 
 	@Override
@@ -491,6 +508,11 @@ public abstract class PlayerImpl implements Player, Serializable {
 	@Override
 	public void revealCards(Cards cards, Game game) {
 		game.fireRevealCardsEvent(this.name + " revealed", cards);
+	}
+
+	@Override
+	public void lookAtCards(Cards cards, Game game) {
+		game.fireLookAtCardsEvent(playerId, this.name + " looking at", cards);
 	}
 
 	@Override
@@ -630,11 +652,18 @@ public abstract class PlayerImpl implements Player, Serializable {
 		this.manaPool = player.getManaPool();
 		this.life = player.getLife();
 		this.counters = player.getCounters();
+		this.inRange = player.getInRange();
+		this.landsPlayed = player.getLandsPlayed();
 	}
 
 	@Override
 	public boolean isPassed() {
 		return passed;
+	}
+
+	@Override
+	public void pass() {
+		this.passed = true;
 	}
 
 	@Override
@@ -645,9 +674,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 	@Override
 	public void resetPassed() {
 		if (!this.loses && !this.left)
-			passed = false;
+			this.passed = false;
 		else
-			passed = true;
+			this.passed = true;
 	}
 
 	@Override
@@ -668,6 +697,11 @@ public abstract class PlayerImpl implements Player, Serializable {
 		for (Iterator<Permanent> it = game.getBattlefield().getAllPermanents().iterator(); it.hasNext();) {
 			Permanent perm = it.next();
 			if (perm.getOwnerId().equals(playerId)) {
+				if (perm.getAttachedTo() != null) {
+					Permanent attachedTo = game.getPermanent(perm.getAttachedTo());
+					if (attachedTo != null)
+						attachedTo.removeAttachment(perm.getId(), game);
+				}
 				it.remove();
 			}
 		}
@@ -756,15 +790,15 @@ public abstract class PlayerImpl implements Player, Serializable {
 	public boolean searchLibrary(TargetCardInLibrary target, Game game) {
 		//20091005 - 701.14c
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY, playerId, playerId))) {
-			if (library.count(target.getFilter()) < target.getNumberOfTargets()) {
-				TargetCardInLibrary newTarget = new TargetCardInLibrary(library.count(target.getFilter()), target.getMaxNumberOfTargets(), target.getFilter());
-				searchCards(new CardsImpl(Zone.LIBRARY, getLibrary().getCards()), newTarget, game);
+			TargetCardInLibrary newTarget;
+			if (library.count(target.getFilter()) < target.getNumberOfTargets())
+				newTarget = new TargetCardInLibrary(library.count(target.getFilter()), target.getMaxNumberOfTargets(), target.getFilter());
+			else
+				newTarget = target;
+			if (chooseTarget(new CardsImpl(Zone.LIBRARY, getLibrary().getCards()), newTarget, game)) {
+				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, playerId, playerId));
+				return true;
 			}
-			else {
-				searchCards(new CardsImpl(Zone.LIBRARY, getLibrary().getCards()), target, game);
-			}
-			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, playerId, playerId));
-			return true;
 		}
 		return false;
 	}
@@ -779,6 +813,140 @@ public abstract class PlayerImpl implements Player, Serializable {
 		attackFilter.getControllerId().add(playerId);
 		List<Permanent> attackers = game.getBattlefield().getAllActivePermanents(attackFilter);
 		return attackers;
+	}
+
+	protected ManaOptions getManaAvailable(Game game) {
+		List<Permanent> manaPerms = this.getAvailableManaProducers(game);
+
+		ManaOptions available = new ManaOptions();
+		for (Permanent perm: manaPerms) {
+			available.addMana(perm.getAbilities().getManaAbilities(Zone.BATTLEFIELD), game);
+		}
+		return available;
+	}
+
+	protected List<Permanent> getAvailableManaProducers(Game game) {
+		List<Permanent> result = new ArrayList<Permanent>();
+		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
+			for (ManaAbility ability: permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
+				if (ability.canActivate(playerId, game)) {
+					result.add(permanent);
+					break;
+				}
+			}
+		}
+		return result;
+	}
+
+	protected boolean canPlay(ActivatedAbility ability, ManaOptions available, Game game) {
+		if (!(ability instanceof ManaAbility) && ability.canActivate(playerId, game)) {
+			ManaOptions abilityOptions = ability.getManaCosts().getOptions();
+			if (abilityOptions.size() == 0) {
+				return true;
+			}
+			else {
+				for (Mana mana: abilityOptions) {
+					for (Mana avail: available) {
+						if (mana.enough(avail)) {
+							return true;
+						}
+					}
+				}
+			}
+
+		}
+		return false;
+	}
+
+	@Override
+	public List<Ability> getPlayable(Game game, boolean hidden) {
+		List<Ability> playable = new ArrayList<Ability>();
+
+		ManaOptions available = getManaAvailable(game);
+		available.addMana(manaPool.getMana());
+
+		if (hidden) {
+			for (Card card: hand.getUniqueCards()) {
+				for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.HAND)) {
+					if (canPlay(ability, available, game))
+						playable.add(ability);
+				}
+			}
+		}
+		for (Card card: graveyard.getUniqueCards()) {
+			for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.GRAVEYARD)) {
+				if (canPlay(ability, available, game))
+					playable.add(ability);
+			}
+		}
+		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
+			for (ActivatedAbility ability: permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
+				if (canPlay(ability, available, game))
+					playable.add(ability);
+			}
+		}
+		return playable;
+	}
+
+	@Override
+	public List<Ability> getPlayableOptions(Ability ability, Game game) {
+		List<Ability> options = new ArrayList<Ability>();
+
+		if (ability.getTargets().size() > 0)
+			addTargetOptions(options, ability, 0, game);
+		else if (ability.getChoices().size() > 0)
+			addChoiceOptions(options, ability, 0, game);
+		else if (ability.getCosts().getTargets().size() > 0)
+			addCostTargetOptions(options, ability, 0, game);
+
+		return options;
+	}
+
+	private void addTargetOptions(List<Ability> options, Ability option, int targetNum, Game game) {
+		for (UUID targetId: option.getTargets().get(targetNum).possibleTargets(option.getSourceId(), playerId, game)) {
+			Ability newOption = option.copy();
+			newOption.getTargets().get(targetNum).addTarget(targetId, game);
+			if (targetNum < option.getTargets().size() - 1) {
+				addTargetOptions(options, newOption, targetNum + 1, game);
+			}
+			else {
+				if (option.getChoices().size() > 0)
+					addChoiceOptions(options, newOption, 0, game);
+				else if (option.getCosts().getTargets().size() > 0)
+					addCostTargetOptions(options, newOption, 0, game);
+				else
+					options.add(newOption);
+			}
+		}
+	}
+
+	private void addChoiceOptions(List<Ability> options, Ability option, int choiceNum, Game game) {
+		for (String choice: option.getChoices().get(choiceNum).getChoices()) {
+			Ability newOption = option.copy();
+			newOption.getChoices().get(choiceNum).setChoice(choice);
+			if (choiceNum < option.getChoices().size() - 1) {
+				addChoiceOptions(options, newOption, choiceNum + 1, game);
+			}
+			else {
+				if (option.getCosts().getTargets().size() > 0)
+					addCostTargetOptions(options, newOption, 0, game);
+				else
+					options.add(newOption);
+			}
+		}
+	}
+
+	private void addCostTargetOptions(List<Ability> options, Ability option, int targetNum, Game game) {
+		for (UUID targetId: option.getCosts().getTargets().get(targetNum).possibleTargets(option.getSourceId(), playerId, game)) {
+			Ability newOption = option.copy();
+			newOption.getCosts().getTargets().get(targetNum).addTarget(targetId, game);
+			if (targetNum < option.getCosts().getTargets().size() - 1) {
+				addCostTargetOptions(options, newOption, targetNum + 1, game);
+			}
+			else {
+				options.add(newOption);
+			}
+		}
 	}
 
 }

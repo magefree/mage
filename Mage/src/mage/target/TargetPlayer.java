@@ -28,8 +28,11 @@
 
 package mage.target;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.filter.FilterPlayer;
 import mage.game.Game;
 import mage.players.Player;
@@ -65,21 +68,37 @@ public class TargetPlayer extends TargetImpl {
 	@Override
 	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
 		int count = 0;
+		MageObject targetSource = game.getObject(sourceId);
 		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
 			Player player = game.getPlayer(playerId);
 			if (player != null && !player.hasLeft() && filter.match(player)) {
-				if (player.canTarget(game.getObject(sourceId)))
+				if (player.canBeTargetedBy(targetSource)) {
 					count++;
+					if (count >= this.minNumberOfTargets)
+						return true;
+				}
 			}
 		}
-		if (count >= this.minNumberOfTargets)
-			return true;
 		return false;
 	}
 
 	@Override
+	public List<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+		List<UUID> possibleTargets = new ArrayList<UUID>();
+		MageObject targetSource = game.getObject(sourceId);
+		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+			Player player = game.getPlayer(playerId);
+			if (player != null && !player.hasLeft() && filter.match(player)) {
+				if (player.canBeTargetedBy(targetSource))
+					possibleTargets.add(playerId);
+			}
+		}
+		return possibleTargets;
+	}
+
+	@Override
 	public boolean isLegal(Game game) {
-		for (UUID playerId: targets) {
+		for (UUID playerId: targets.keySet()) {
 			if (!canTarget(playerId, game))
 				return false;
 		}
@@ -91,7 +110,7 @@ public class TargetPlayer extends TargetImpl {
 		Player player = game.getPlayer(id);
 		if (player != null) {
 			if (source != null)
-				return player.canTarget(game.getObject(this.source.getSourceId())) && filter.match(player);
+				return player.canBeTargetedBy(game.getObject(this.source.getSourceId())) && filter.match(player);
 			else 
 				return filter.match(player);
 		}

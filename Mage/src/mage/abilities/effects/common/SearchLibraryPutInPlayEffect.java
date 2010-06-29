@@ -64,23 +64,25 @@ public class SearchLibraryPutInPlayEffect extends OneShotEffect {
 	@Override
 	public boolean apply(Game game) {
 		Player player = game.getPlayer(this.source.getControllerId());
-		player.searchLibrary(target, game);
-		if (target.getTargets().size() > 0) {
-			for (UUID cardId: target.getTargets()) {
-				Card card = player.getLibrary().remove(cardId);
-				if (card != null) {
-					if (player.putOntoBattlefield(card, game)) {
-						if (tapped) {
-							Permanent permanent = game.getPermanent(card.getId());
-							if (permanent != null)
-								permanent.setTapped(true);
+		if (player.searchLibrary(target, game)) {
+			if (target.getTargets().size() > 0) {
+				for (UUID cardId: target.getTargets()) {
+					Card card = player.getLibrary().remove(cardId);
+					if (card != null) {
+						if (player.putOntoBattlefield(card, game)) {
+							if (tapped) {
+								Permanent permanent = game.getPermanent(card.getId());
+								if (permanent != null)
+									permanent.setTapped(true);
+							}
 						}
 					}
 				}
+				player.shuffleLibrary(game);
+				return true;
 			}
-			player.shuffleLibrary(game);
 		}
-		return true;
+		return false;
 	}
 
 	@Override

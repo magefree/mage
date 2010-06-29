@@ -32,6 +32,7 @@ import java.io.Serializable;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.game.Game;
+import mage.target.Targets;
 
 public interface Cost extends Serializable {
 
@@ -41,7 +42,8 @@ public interface Cost extends Serializable {
 	public boolean isPaid();
 	public void clearPaid();
 	public void setPaid();
-
+	public Targets getTargets();
+	
 	public Ability getAbility();
 	public void setAbility(Ability ability);
 

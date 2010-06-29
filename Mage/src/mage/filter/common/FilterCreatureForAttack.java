@@ -28,6 +28,9 @@
 
 package mage.filter.common;
 
+import mage.abilities.keyword.DefenderAbility;
+import mage.game.permanent.Permanent;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -46,6 +49,15 @@ public class FilterCreatureForAttack extends FilterCreaturePermanent {
 		this.useBlocking = true;
 		this.tapped = false;
 		this.useTapped = true;
+		this.abilities.add(DefenderAbility.getInstance());
+		this.notAbilities = true;
 	}
 
+	@Override
+	public boolean match(Permanent permanent) {
+		if (!super.match(permanent))
+			return false;
+
+		return permanent.canTap();
+	}
 }

@@ -46,10 +46,12 @@ import mage.game.permanent.token.Token;
 public class BecomesCreatureSourceEOTEffect extends ContinuousEffectImpl {
 
 	protected Token token;
+	protected String type;
 
-	public BecomesCreatureSourceEOTEffect(Token token) {
+	public BecomesCreatureSourceEOTEffect(Token token, String type) {
 		super(Duration.EndOfTurn, Outcome.BecomeCreature);
 		this.token = token;
+		this.type = type;
 	}
 
 	@Override
@@ -97,7 +99,7 @@ public class BecomesCreatureSourceEOTEffect extends ContinuousEffectImpl {
 
 	@Override
 	public String getText() {
-		return "Until end of turn {this} becomes a " + token.getDescription() + ". It's still a land";
+		return "Until end of turn {this} becomes a " + token.getDescription() + " that's still a " + this.type;
 	}
 
 	@Override

@@ -61,7 +61,7 @@ public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Seri
 	public List<ActivatedAbility> getActivatedAbilities(Zone zone) {
 		List<ActivatedAbility> zonedAbilities = new ArrayList<ActivatedAbility>();
 		for (Ability ability: this) {
-			if (ability.isEnabled() && ability instanceof ActivatedAbility && ability.getZone().match(zone)) {
+			if (ability instanceof ActivatedAbility && ability.getZone().match(zone)) {
 				zonedAbilities.add((ActivatedAbility)ability);
 			}
 		}
@@ -77,7 +77,7 @@ public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Seri
 	public List<ManaAbility> getManaAbilities(Zone zone) {
 		List<ManaAbility> abilities = new ArrayList<ManaAbility>();
 		for (Ability ability: this) {
-			if (ability.isEnabled() && ability instanceof ManaAbility && ability.getZone().match(zone)) {
+			if (ability instanceof ManaAbility && ability.getZone().match(zone)) {
 				abilities.add((ManaAbility)ability);
 			}
 		}
@@ -88,7 +88,7 @@ public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Seri
 	public List<EvasionAbility> getEvasionAbilities() {
 		List<EvasionAbility> abilities = new ArrayList<EvasionAbility>();
 		for (Ability ability: this) {
-			if (ability.isEnabled() && ability instanceof EvasionAbility) {
+			if (ability instanceof EvasionAbility) {
 				abilities.add((EvasionAbility)ability);
 			}
 		}
@@ -99,7 +99,7 @@ public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Seri
 	public List<StaticAbility> getStaticAbilities(Zone zone) {
 		List<StaticAbility> zonedAbilities = new ArrayList<StaticAbility>();
 		for (Ability ability: this) {
-			if (ability.isEnabled() && ability instanceof StaticAbility && ability.getZone().match(zone)) {
+			if (ability instanceof StaticAbility && ability.getZone().match(zone)) {
 				zonedAbilities.add((StaticAbility)ability);
 			}
 		}
@@ -110,7 +110,7 @@ public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Seri
 	public List<TriggeredAbility> getTriggeredAbilities(Zone zone) {
 		List<TriggeredAbility> zonedAbilities = new ArrayList<TriggeredAbility>();
 		for (Ability ability: this) {
-			if (ability.isEnabled() && ability instanceof TriggeredAbility && ability.getZone().match(zone)) {
+			if (ability instanceof TriggeredAbility && ability.getZone().match(zone)) {
 				zonedAbilities.add((TriggeredAbility)ability);
 			}
 		}
@@ -121,7 +121,7 @@ public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Seri
 	public List<ProtectionAbility> getProtectionAbilities() {
 		List<ProtectionAbility> abilities = new ArrayList<ProtectionAbility>();
 		for (Ability ability: this) {
-			if (ability.isEnabled() && ability instanceof ProtectionAbility) {
+			if (ability instanceof ProtectionAbility) {
 				abilities.add((ProtectionAbility)ability);
 			}
 		}
@@ -132,7 +132,7 @@ public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Seri
 	public List<KickerAbility> getKickerAbilities() {
 		List<KickerAbility> abilities = new ArrayList<KickerAbility>();
 		for (Ability ability: this) {
-			if (ability.isEnabled() && ability instanceof KickerAbility) {
+			if (ability instanceof KickerAbility) {
 				abilities.add((KickerAbility)ability);
 			}
 		}
@@ -153,6 +153,7 @@ public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Seri
 		}
 	}
 
+	@Override
 	public boolean containsAll(Abilities abilities) {
 		if (this.size() < abilities.size())
 			return false;
@@ -170,6 +171,7 @@ public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Seri
 		return true;
 	}
 
+	@Override
 	public boolean containsKey(UUID abilityId) {
 		for (Ability ability: this) {
 			if (ability.getId().equals(abilityId))
@@ -178,6 +180,7 @@ public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Seri
 		return false;
 	}
 
+	@Override
 	public Ability get(UUID abilityId) {
 		for (Ability ability: this) {
 			if (ability.getId().equals(abilityId))

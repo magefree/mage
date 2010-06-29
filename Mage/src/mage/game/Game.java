@@ -28,6 +28,7 @@
 
 package mage.game;
 
+import mage.cards.Card;
 import mage.game.stack.SpellStack;
 import mage.MageObject;
 import java.io.Serializable;
@@ -65,13 +66,16 @@ public interface Game extends MageItem, Serializable {
 	public MultiplayerAttackOption getAttackOption();
 	
 	//game data methods
+	public Object getCustomData();
+	public void setCustomData(Object data);
 	public MageObject getObject(UUID objectId);
 	public Permanent getPermanent(UUID permanentId);
+	public Card getCard(UUID cardId);
 	public void addPlayer(Player player) throws GameException;
 	public Player getPlayer(UUID playerId);
 	public Players getPlayers();
-	public PlayerList getPlayerList(UUID playerId);
-	public Set<UUID> getOpponents(UUID controllerId);
+	public PlayerList getPlayerList();
+	public Set<UUID> getOpponents(UUID playerId);
 	public Turn getTurn();
 	public int getTurnNum();
 	public boolean isMainPhase();
@@ -98,6 +102,7 @@ public interface Game extends MageItem, Serializable {
 	public void fireSelectTargetEvent(UUID playerId, String message, TriggeredAbilities abilities, boolean required);
 	public void fireRevealCardsEvent(String message, Cards cards);
 	public void fireSelectEvent(UUID playerId, String message);
+	public void fireLookAtCardsEvent(UUID playerId, String message, Cards cards);
 	public void firePriorityEvent(UUID playerId);
 	public void firePlayManaEvent(UUID playerId, String message);
 	public void firePlayXManaEvent(UUID playerId, String message);
@@ -112,6 +117,7 @@ public interface Game extends MageItem, Serializable {
 	public boolean replaceEvent(GameEvent event);
 
 	//game play methods
+	public void init();
 	public void start();
 	public void end();
 	public void mulligan(UUID playerId);
@@ -121,21 +127,8 @@ public interface Game extends MageItem, Serializable {
 	public void addEffect(ContinuousEffect continuousEffect);
 	public void addTriggeredAbility(TriggeredAbility ability);
 	public void applyEffects();
-//	public boolean checkStateAndTriggered();
-//	public boolean checkStateBasedActions();
+	public boolean checkStateAndTriggered();
 	public void playPriority(UUID activePlayerId);
-	public boolean playUntapStep(UUID activePlayerId);
-	public boolean playUpkeepStep(UUID activePlayerId);
-	public boolean playDrawStep(UUID activePlayerId);
-	public boolean playPreCombatMainStep(UUID activePlayerId);
-	public boolean playBeginCombatStep(UUID activePlayerId);
-	public boolean playDeclareAttackersStep(UUID activePlayerId);
-	public boolean playDeclareBlockersStep(UUID activePlayerId);
-	public boolean playCombatDamageStep(UUID activePlayerId, boolean first);
-	public boolean playEndCombatStep(UUID activePlayerId);
-	public boolean playPostMainStep(UUID activePlayerId);
-	public boolean playEndStep(UUID activePlayerId);
-	public boolean playCleanupStep(UUID activePlayerId);
 
 	//game transaction methods
 	public void saveState();

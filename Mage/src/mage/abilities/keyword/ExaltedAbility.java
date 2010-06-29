@@ -51,8 +51,9 @@ public class ExaltedAbility extends TriggeredAbilityImpl {
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(this.controllerId) ) {
 			if (game.getCombat().attacksAlone()) {
-				this.targets.add(new TargetCreaturePermanent());
-				this.targets.get(0).getTargets().add(game.getCombat().getAttackers().get(0));
+				TargetCreaturePermanent target = new TargetCreaturePermanent();
+				this.addTarget(target);
+				this.getTargets().get(0).addTarget(game.getCombat().getAttackers().get(0), game);
 				trigger(game, event.getPlayerId());
 				return true;
 			}

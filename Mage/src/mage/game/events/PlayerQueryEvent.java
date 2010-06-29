@@ -44,7 +44,7 @@ import mage.cards.Cards;
 public class PlayerQueryEvent extends EventObject implements ExternalEvent, Serializable {
 
 	public enum QueryType {
-		ASK, CHOOSE, CHOOSE_ABILITY, PICK_TARGET, PICK_ABILITY, SELECT, PLAY_MANA, PLAY_X_MANA, AMOUNT
+		ASK, CHOOSE, CHOOSE_ABILITY, PICK_TARGET, PICK_ABILITY, SELECT, PLAY_MANA, PLAY_X_MANA, AMOUNT, LOOK
 	}
 
 	private String message;
@@ -109,6 +109,10 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 		return new PlayerQueryEvent(playerId, message, null, null, null, QueryType.AMOUNT, min, max, false);
 	}
 
+	public static PlayerQueryEvent lookEvent(UUID playerId, String message, Cards cards) {
+		return new PlayerQueryEvent(playerId, message, null, null, cards, QueryType.LOOK, 0, 0, false);
+	}
+	
 	public String getMessage() {
 		return message;
 	}

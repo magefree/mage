@@ -29,22 +29,39 @@
 package mage.players;
 
 import java.util.UUID;
+import mage.game.Game;
 import mage.util.CircularList;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PlayerList extends CircularList<Player> {
+public class PlayerList extends CircularList<UUID> {
 
-	public boolean setCurrent(UUID playerId) {
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getId().equals(playerId)) {
-				index = i;
-				return true;
-			}
+	public Player getNext(Game game) {
+		Player player;
+		UUID start = this.get();
+		while (true) {
+			player = game.getPlayer(super.getNext());
+			if (!player.hasLeft() && !player.hasLost())
+				break;
+			if (player.getId().equals(start))
+				return null;
 		}
-		return false;
+		return player;
+	}
+
+	public Player getPrevious(Game game) {
+		Player player;
+		UUID start = this.get();
+		while (true) {
+			player = game.getPlayer(super.getPrevious());
+			if (!player.hasLeft() && !player.hasLost())
+				break;
+			if (player.getId().equals(start))
+				return null;
+		}
+		return player;
 	}
 
 }

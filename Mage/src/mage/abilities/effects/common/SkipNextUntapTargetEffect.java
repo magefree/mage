@@ -59,7 +59,7 @@ public class SkipNextUntapTargetEffect extends ReplacementEffectImpl {
 
 	@Override
 	public boolean applies(GameEvent event, Game game) {
-		if (game.getTurn().getStep() == PhaseStep.UNTAP &&
+		if (game.getTurn().getStepType() == PhaseStep.UNTAP &&
 				event.getType() == EventType.UNTAP &&
 				event.getTargetId().equals(source.getFirstTarget())) {
 			return true;

@@ -84,6 +84,9 @@ public class StackAbility implements StackObject, Ability {
 	}
 
 	@Override
+	public void reset(Game game) { }
+	
+	@Override
 	public void counter(Game game) {
 		
 	}
@@ -175,14 +178,6 @@ public class StackAbility implements StackObject, Ability {
 	public String getRule() {
 		return ability.getRule();
 	}
-
-	@Override
-	public boolean isEnabled() {
-		return ability.isEnabled();
-	}
-
-	@Override
-	public void setEnabled(boolean enabled) {}
 
 	@Override
 	public void setControllerId(UUID controllerId) {

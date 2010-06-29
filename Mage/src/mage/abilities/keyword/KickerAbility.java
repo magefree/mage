@@ -52,7 +52,16 @@ public class KickerAbility extends StaticAbility {
 	public boolean activate(Game game, boolean noMana) {
 		Player player = game.getPlayer(this.getControllerId());
 		if (player.chooseUse(this.effects.get(0).getOutcome(), "Use kicker " + this.effects.get(0).getText() + "?", game)) {
-			kicked = super.activate(game, noMana);
+			game.saveState();
+			game.bookmarkState();
+			if (super.activate(game, noMana)) {
+				game.removeLastBookmark();
+				kicked = true;
+			}
+			else {
+				game.restoreState();
+				kicked = false;
+			}
 			return kicked;
 		}
 		return false;

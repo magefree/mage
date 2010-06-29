@@ -29,6 +29,7 @@
 package mage.cards;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -43,6 +44,7 @@ public interface Cards extends Map<UUID, Card>, Serializable {
 	public void setOwner(UUID ownerId);
 	public void addAll(List<Card> createCards);
 	public List<Card> getCards(FilterCard filter);
+	public Collection<Card> getUniqueCards();
 	public Card getRandom();
 	public int count(FilterCard filter);
 

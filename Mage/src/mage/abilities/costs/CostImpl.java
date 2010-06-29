@@ -29,16 +29,15 @@
 package mage.abilities.costs;
 
 import mage.abilities.Ability;
+import mage.target.Target;
+import mage.target.Targets;
 
 public abstract class CostImpl implements Cost {
 
 	protected String text;
 	protected Ability ability;
 	protected boolean paid = false;
-
-//	public CostImpl(Ability ability) {
-//		this.ability = ability;
-//	}
+	protected Targets targets = new Targets(null);
 
 	public CostImpl() {
 	}
@@ -56,6 +55,19 @@ public abstract class CostImpl implements Cost {
 	@Override
 	public void setAbility(Ability ability) {
 		this.ability = ability;
+		targets.setSource(ability);
+	}
+
+	public void addTarget(Target target) {
+		if (target != null) {
+			target.setAbility(ability);
+			this.targets.add(target);
+		}
+	}
+
+	@Override
+	public Targets getTargets() {
+		return this.targets;
 	}
 
 	@Override

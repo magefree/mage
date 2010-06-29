@@ -63,6 +63,7 @@ public class SearchLibraryRevealPutInHandEffect extends OneShotEffect {
 				Card card = player.getLibrary().remove(cardId);
 				if (card != null) {
 					player.putInHand(card, game);
+					revealed.add(card);
 				}
 			}
 			player.shuffleLibrary(game);

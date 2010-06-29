@@ -58,10 +58,12 @@ public abstract class Phase implements Serializable {
 		return type;
 	}
 
-	public PhaseStep getStep() {
-		if (currentStep != null)
-			return currentStep.getType();
-		return null;
+	public Step getStep() {
+		return currentStep;
+	}
+
+	public void setStep(Step step) {
+		this.currentStep = step;
 	}
 
 	public void resetCount() {
@@ -85,13 +87,8 @@ public abstract class Phase implements Serializable {
 				if (game.isGameOver())
 					return false;
 				currentStep = step;
-				if (step.play(game, activePlayerId)) {
-					//20091005 - 500.4/703.4n
-					game.emptyManaPools();
-					game.saveState();
-					//20091005 - 500.9
-					playExtraSteps(game, step.getType());
-				}
+				if (!game.getState().getTurnMods().skipStep(activePlayerId, currentStep.getType()))
+					playStep(game, activePlayerId);
 			}
 			count++;
 			game.fireEvent(new GameEvent(postEvent, null, null, activePlayerId));
@@ -100,14 +97,34 @@ public abstract class Phase implements Serializable {
 		return false;
 	}
 
+	public void prePriority(Game game, UUID activePlayerId) {
+		currentStep.beginStep(game, activePlayerId);
+	}
+
+	public void postPriority(Game game, UUID activePlayerId) {
+		currentStep.endStep(game, activePlayerId);
+		//20091005 - 500.4/703.4n
+		game.emptyManaPools();
+		game.saveState();
+		//20091005 - 500.9
+		playExtraSteps(game, currentStep.getType());
+	}
+
+	protected void playStep(Game game, UUID activePlayerId) {
+		if (!currentStep.skipStep(game, activePlayerId)) {
+			prePriority(game, activePlayerId);
+			currentStep.priority(game, activePlayerId);
+			postPriority(game, activePlayerId);
+		}
+	}
+
 	private void playExtraSteps(Game game, PhaseStep afterStep) {
 		while (true) {
-			PhaseStep extraStep = game.getState().getTurnMods().extraStep(activePlayerId, afterStep);
+			Step extraStep = game.getState().getTurnMods().extraStep(activePlayerId, afterStep);
 			if (extraStep == null)
 				return;
-			Step step = new Step(extraStep);
-			currentStep = step;
-			step.play(game, activePlayerId);
+			currentStep = extraStep;
+			playStep(game, activePlayerId);
 		}
 	}
 

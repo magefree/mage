@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.keyword.FlashAbility;
 import mage.game.Game;
 
 /**
@@ -48,8 +49,10 @@ public class SpellAbility extends ActivatedAbilityImpl {
 
 	@Override
 	public boolean canActivate(UUID playerId, Game game) {
-		if ((game.getObject(sourceId).getCardType().contains(CardType.INSTANT) || game.canPlaySorcery(playerId)) &&
-				costs.canPay(playerId, game) && targets.canChoose(sourceId, playerId, game)) {
+		if ((game.getObject(sourceId).getCardType().contains(CardType.INSTANT) ||
+			game.getObject(sourceId).getAbilities().containsKey(FlashAbility.getInstance().getId()) ||
+			game.canPlaySorcery(playerId)) &&
+			costs.canPay(playerId, game) && targets.canChoose(sourceId, playerId, game)) {
 			return true;
 		}
 		return false;

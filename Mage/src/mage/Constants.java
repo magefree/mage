@@ -214,6 +214,7 @@ public final class Constants {
 		DrawCard(true),
 		Discard(false),
 		Sacrifice(false),
+		ReturnToHand(false),
 		Exile(false),
 		Protect(true),
 		PutManaInPool(true),

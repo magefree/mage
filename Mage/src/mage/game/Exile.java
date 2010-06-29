@@ -33,6 +33,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import mage.cards.Card;
 import mage.game.events.GameEvent;
 
 /**
@@ -73,9 +74,19 @@ public class Exile implements Serializable {
 		return exileZones.get(id);
 	}
 
-	void checkTriggers(GameEvent event, Game game) {
+	public void checkTriggers(GameEvent event, Game game) {
 		for (ExileZone exile: exileZones.values()) {
 			exile.checkTriggers(event, game);
 		}
+	}
+
+	public Card getCard(UUID cardId) {
+		Card card;
+		for (ExileZone exile: exileZones.values()) {
+			card = exile.get(cardId);
+			if (card != null)
+				return card;
+		}
+		return null;
 	}
 }

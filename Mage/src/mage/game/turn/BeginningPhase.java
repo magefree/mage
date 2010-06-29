@@ -28,7 +28,6 @@
 
 package mage.game.turn;
 
-import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
 import mage.game.events.GameEvent.EventType;
 
@@ -43,9 +42,9 @@ public class BeginningPhase extends Phase {
 		this.event = EventType.BEGINNING_PHASE;
 		this.preEvent = EventType.BEGINNING_PHASE_PRE;
 		this.postEvent = EventType.BEGINNING_PHASE_POST;
-		this.steps.add(new Step(PhaseStep.UNTAP));
-		this.steps.add(new Step(PhaseStep.UPKEEP));
-		this.steps.add(new Step(PhaseStep.DRAW));
+		this.steps.add(new UntapStep());
+		this.steps.add(new UpkeepStep());
+		this.steps.add(new DrawStep());
 	}
 
 }

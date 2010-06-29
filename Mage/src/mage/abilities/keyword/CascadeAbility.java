@@ -87,7 +87,7 @@ class CascadeEffect extends OneShotEffect {
 
 		if (card != null) {
 			if (player.chooseUse(outcome, "Use cascade effect on " + card.getName() + "?", game)) {
-				player.cast(card, game, true);
+				player.cast(card.getSpellAbility(), game, true);
 				exile.remove(card.getId());
 			}
 		}

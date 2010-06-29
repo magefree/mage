@@ -28,10 +28,10 @@
 
 package mage.game;
 
+import java.io.IOException;
 import mage.game.stack.SpellStack;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 import java.util.UUID;
@@ -47,6 +47,7 @@ import mage.abilities.TriggeredAbilities;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
+import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
 import mage.filter.Filter.ComparisonScope;
@@ -55,7 +56,6 @@ import mage.filter.common.FilterFortification;
 import mage.filter.common.FilterLegendaryPermanent;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.game.combat.Combat;
-import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.game.events.Listener;
@@ -73,18 +73,19 @@ import mage.target.TargetPlayer;
 
 public abstract class GameImpl implements Game, Serializable {
 
-	private Stack<Integer> savedStates = new Stack<Integer>();
+	private transient Stack<Integer> savedStates = new Stack<Integer>();
+	private Object customData;
 
 	protected UUID id;
 	protected boolean ready = false;
-	protected TableEventSource tableEventSource = new TableEventSource();
-	protected PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
+	protected transient TableEventSource tableEventSource = new TableEventSource();
+	protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
 
 	protected GameState state;
 	protected UUID startingPlayerId;
 	protected UUID choosingPlayerId;
 	protected Player winner;
-	protected GameStates gameStates;
+	protected transient GameStates gameStates = new GameStates();
 	protected RangeOfInfluence range;
 	protected MultiplayerAttackOption attackOption;
 
@@ -93,12 +94,21 @@ public abstract class GameImpl implements Game, Serializable {
 		this.range = range;
 		this.attackOption = attackOption;
 		state = new GameState();
-		gameStates = new GameStates();
 	}
 
 	@Override
 	public UUID getId() {
 		return id;
+	}
+
+	@Override
+	public Object getCustomData() {
+		return customData;
+	}
+
+	@Override
+	public void setCustomData(Object data) {
+		this.customData = data;
 	}
 
 	@Override
@@ -132,13 +142,19 @@ public abstract class GameImpl implements Game, Serializable {
 	}
 
 	@Override
+	public Card getCard(UUID cardId) {
+		return state.getCard(cardId);
+	}
+
+	@Override
 	public GameStates getGameStates() {
 		return gameStates;
 	}
 
 	@Override
 	public void saveState() {
-		gameStates.save(state);
+		if (gameStates != null)
+			gameStates.save(state);
 	}
 
 	@Override
@@ -179,7 +195,9 @@ public abstract class GameImpl implements Game, Serializable {
 
 	@Override
 	public void restoreState() {
-		state.restore(gameStates.rollback(savedStates.pop()));
+		GameState restore = gameStates.rollback(savedStates.pop());
+		if (restore != null)
+			state.restore(restore);
 	}
 
 	@Override
@@ -189,6 +207,29 @@ public abstract class GameImpl implements Game, Serializable {
 
 	@Override
 	public void start() {
+		init();
+		PlayerList players = state.getPlayerList(startingPlayerId);
+		Player player = getPlayer(players.get());
+		while (!isGameOver()) {
+			if (player.getId().equals(startingPlayerId)) {
+				state.setTurnNum(state.getTurnNum() + 1);
+				fireInformEvent("Turn " + Integer.toString(state.getTurnNum()));
+			}
+			state.setActivePlayerId(player.getId());
+			state.getTurn().play(this, player.getId());
+			if (isGameOver())
+				break;
+			endOfTurn();
+			player = players.getNext(this);
+		}
+
+		winner = findWinner();
+
+		saveState();
+	}
+
+	@Override
+	public void init() {
 		for (Player player: state.getPlayers().values()) {
 			player.init(this);
 		}
@@ -204,6 +245,7 @@ public abstract class GameImpl implements Game, Serializable {
 		if (startingPlayerId == null) {
 			TargetPlayer targetPlayer = new TargetPlayer();
 			targetPlayer.setRequired(true);
+			targetPlayer.setTargetName("starting player");
 			Player choosingPlayer = getPlayer(pickChoosingPlayer());
 			if (choosingPlayer.chooseTarget(Outcome.Benefit, targetPlayer, this)) {
 				startingPlayerId = targetPlayer.getTargets().get(0);
@@ -216,13 +258,15 @@ public abstract class GameImpl implements Game, Serializable {
 		saveState();
 
 		//20091005 - 103.3
-		for (Player player: state.getPlayerList(startingPlayerId)) {
+		for (UUID playerId: state.getPlayerList(startingPlayerId)) {
+			Player player = getPlayer(playerId);
 			player.setLife(this.getLife(), this);
 			player.drawCards(7, this);
 		}
 
 		//20091005 - 103.4
-		for (Player player: state.getPlayerList(startingPlayerId)) {
+		for (UUID playerId: state.getPlayerList(startingPlayerId)) {
+			Player player = getPlayer(playerId);
 			while (player.getHand().size() > 0 && player.chooseMulligan(this)) {
 				mulligan(player.getId());
 			}
@@ -230,21 +274,6 @@ public abstract class GameImpl implements Game, Serializable {
 			saveState();
 		}
 
-		while (!isGameOver()) {
-			state.setTurnNum(state.getTurnNum() + 1);
-			fireInformEvent("Turn " + Integer.toString(state.getTurnNum()));
-			for (Player player: state.getPlayerList(startingPlayerId)) {
-				state.setActivePlayerId(player.getId());
-				state.getTurn().play(this, player.getId());
-				if (isGameOver())
-					break;
-				endOfTurn();
-			}
-		}
-
-		winner = findWinner();
-
-		saveState();
 	}
 
 	protected Player findWinner() {
@@ -314,9 +343,12 @@ public abstract class GameImpl implements Game, Serializable {
 
 	@Override
 	public void playPriority(UUID activePlayerId) {
-		state.getPlayers().resetPassed();
 		while (!isGameOver()) {
-			for (Player player: getPlayerList(activePlayerId)) {
+			state.getPlayers().resetPassed();
+			state.getPlayerList().setCurrent(activePlayerId);
+			Player player;
+			while (!isGameOver()) {
+				player = getPlayer(state.getPlayerList().get());
 				state.setPriorityPlayerId(player.getId());
 				while (!player.isPassed() && !player.hasLost() && !player.hasLeft()&& !isGameOver()) {
 					checkStateAndTriggered();
@@ -338,8 +370,10 @@ public abstract class GameImpl implements Game, Serializable {
 						saveState();
 						break;
 					}
-					return;
+					else
+						return;
 				}
+				state.getPlayerList().getNext();
 			}
 		}
 	}
@@ -376,7 +410,8 @@ public abstract class GameImpl implements Game, Serializable {
 		state.addTriggeredAbility((TriggeredAbility) ability.copy());
 	}
 	
-	protected boolean checkStateAndTriggered() {
+	@Override
+	public boolean checkStateAndTriggered() {
 		boolean somethingHappened = false;
 		//20091005 - 115.5
 		while (true) {
@@ -392,7 +427,8 @@ public abstract class GameImpl implements Game, Serializable {
 
 	public boolean checkTriggered() {
 		boolean played = false;
-		for (Player player: getPlayerList(state.getActivePlayerId())) {
+		for (UUID playerId: state.getPlayerList(state.getActivePlayerId())) {
+			Player player = getPlayer(playerId);
 			while (true) {
 				TriggeredAbilities abilities = state.getTriggered().getControlledBy(player.getId());
 				if (abilities.size() == 0)
@@ -517,172 +553,13 @@ public abstract class GameImpl implements Game, Serializable {
 	}
 
 	@Override
-	public boolean playUntapStep(UUID activePlayerId) {
-		fireEvent(new GameEvent(GameEvent.EventType.BEGINNING_PHASE_PRE, null, null, activePlayerId));
-		if (!replaceEvent(new GameEvent(GameEvent.EventType.UNTAP_STEP, null, null, activePlayerId))) {
-			//20091005 - 502.1/703.4a
-			getPlayer(activePlayerId).phasing(this);
-			//20091005 - 502.2/703.4b
-			getPlayer(activePlayerId).untap(this);
-			fireEvent(new GameEvent(GameEvent.EventType.UNTAP_STEP_PRE, null, null, activePlayerId));
-			fireEvent(new GameEvent(GameEvent.EventType.UNTAP_STEP_POST, null, null, activePlayerId));
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean playUpkeepStep(UUID activePlayerId) {
-		if (!replaceEvent(new GameEvent(GameEvent.EventType.UPKEEP_STEP, null, null, activePlayerId))) {
-			fireEvent(new GameEvent(GameEvent.EventType.UPKEEP_STEP_PRE, null, null, activePlayerId));
-			playPriority(activePlayerId);
-			fireEvent(new GameEvent(GameEvent.EventType.UPKEEP_STEP_POST, null, null, activePlayerId));
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean playDrawStep(UUID activePlayerId) {
-		if (!replaceEvent(new GameEvent(GameEvent.EventType.DRAW_STEP, null, null, activePlayerId))) {
-			//20091005 - 504.1/703.4c
-			getPlayer(activePlayerId).drawCards(1, this);
-			saveState();
-			fireEvent(new GameEvent(GameEvent.EventType.DRAW_STEP_PRE, null, null, activePlayerId));
-			playPriority(activePlayerId);
-			fireEvent(new GameEvent(GameEvent.EventType.DRAW_STEP_POST, null, null, activePlayerId));
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean playPreCombatMainStep(UUID activePlayerId) {
-		if (!replaceEvent(new GameEvent(GameEvent.EventType.PRECOMBAT_MAIN_STEP, null, null, activePlayerId))) {
-			fireEvent(new GameEvent(GameEvent.EventType.PRECOMBAT_MAIN_STEP_PRE, null, null, activePlayerId));
-			playPriority(activePlayerId);
-			fireEvent(new GameEvent(GameEvent.EventType.PRECOMBAT_MAIN_STEP_POST, null, null, activePlayerId));
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean playBeginCombatStep(UUID activePlayerId) {
-		if (!replaceEvent(new GameEvent(GameEvent.EventType.BEGIN_COMBAT_STEP, null, null, activePlayerId))) {
-			//20091005 - 507.1
-			state.getCombat().clear();
-			state.getCombat().setAttacker(activePlayerId);
-			state.getCombat().setDefenders(this);
-			fireEvent(new GameEvent(GameEvent.EventType.BEGIN_COMBAT_STEP_PRE, null, null, activePlayerId));
-			playPriority(activePlayerId);
-			fireEvent(new GameEvent(GameEvent.EventType.PRECOMBAT_MAIN_STEP_POST, null, null, activePlayerId));
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean playDeclareAttackersStep(UUID activePlayerId) {
-		if (!replaceEvent(new GameEvent(GameEvent.EventType.DECLARE_ATTACKERS_STEP, null, null, activePlayerId))) {
-			state.getCombat().selectAttackers(this);
-			fireEvent(new GameEvent(GameEvent.EventType.DECLARE_ATTACKERS_STEP_PRE, null, null, activePlayerId));
-			playPriority(activePlayerId);
-			fireEvent(new GameEvent(GameEvent.EventType.DECLARE_ATTACKERS_STEP_POST, null, null, activePlayerId));
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean playDeclareBlockersStep(UUID activePlayerId) {
-		if (!replaceEvent(new GameEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP, null, null, activePlayerId))) {
-			state.getCombat().selectBlockers(this);
-			fireEvent(new GameEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_PRE, null, null, activePlayerId));
-			playPriority(activePlayerId);
-			fireEvent(new GameEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_POST, null, null, activePlayerId));
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean playCombatDamageStep(UUID activePlayerId, boolean first) {
-		if (!replaceEvent(new GameEvent(GameEvent.EventType.COMBAT_DAMAGE_STEP, null, null, activePlayerId))) {
-			fireEvent(new GameEvent(GameEvent.EventType.COMBAT_DAMAGE_STEP_PRE, null, null, activePlayerId));
-			for (CombatGroup group: getCombat().getGroups()) {
-				group.assignDamage(first, this);
-			}
-			playPriority(activePlayerId);
-			fireEvent(new GameEvent(GameEvent.EventType.COMBAT_DAMAGE_STEP_POST, null, null, activePlayerId));
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean playEndCombatStep(UUID activePlayerId) {
-		if (!replaceEvent(new GameEvent(GameEvent.EventType.END_COMBAT_STEP, null, null, activePlayerId))) {
-			fireEvent(new GameEvent(GameEvent.EventType.END_COMBAT_STEP_PRE, null, null, activePlayerId));
-			playPriority(activePlayerId);
-			fireEvent(new GameEvent(GameEvent.EventType.END_COMBAT_STEP_POST, null, null, activePlayerId));
-			removeCreaturesFromCombat();
-			saveState();
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean playPostMainStep(UUID activePlayerId) {
-		if (!replaceEvent(new GameEvent(GameEvent.EventType.POSTCOMBAT_MAIN_STEP, null, null, activePlayerId))) {
-			fireEvent(new GameEvent(GameEvent.EventType.POSTCOMBAT_MAIN_STEP_PRE, null, null, activePlayerId));
-			playPriority(activePlayerId);
-			fireEvent(new GameEvent(GameEvent.EventType.POSTCOMBAT_MAIN_STEP_POST, null, null, activePlayerId));
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean playEndStep(UUID activePlayerId) {
-		if (!replaceEvent(new GameEvent(GameEvent.EventType.END_TURN_STEP, null, null, activePlayerId))) {
-			fireEvent(new GameEvent(GameEvent.EventType.END_TURN_STEP_PRE, null, null, activePlayerId));
-			playPriority(activePlayerId);
-			fireEvent(new GameEvent(GameEvent.EventType.END_TURN_STEP_POST, null, null, activePlayerId));
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean playCleanupStep(UUID activePlayerId) {
-		if (!replaceEvent(new GameEvent(GameEvent.EventType.CLEANUP_STEP, null, null, activePlayerId))) {
-			fireEvent(new GameEvent(GameEvent.EventType.CLEANUP_STEP_PRE, null, null, activePlayerId));
-			//20091005 - 514.1
-			Player player = getPlayer(activePlayerId);
-			if (!player.hasLeft() && !player.hasLost())
-				player.discardToMax(this);
-			state.getBattlefield().endOfTurn(activePlayerId, this);
-			state.removeEotEffects(this);
-			if (checkStateAndTriggered()) {
-				playPriority(activePlayerId);
-				playCleanupStep(activePlayerId);
-			}
-			fireEvent(new GameEvent(GameEvent.EventType.CLEANUP_STEP_POST, null, null, activePlayerId));
-			return true;
-		}
-		return false;
-	}
-
-	@Override
 	public void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener) {
 		playerQueryEventSource.addListener(listener);
 	}
 
 	@Override
-	public void firePriorityEvent(UUID playerId) {
-		String message = this.state.getTurn().getStep().toString();
+	public synchronized void firePriorityEvent(UUID playerId) {
+		String message = this.state.getTurn().getStepType().toString();
 		if (this.canPlaySorcery(playerId))
 			message += " - play spells and sorceries.";
 		else
@@ -692,7 +569,7 @@ public abstract class GameImpl implements Game, Serializable {
 	}
 
 	@Override
-	public void fireSelectEvent(UUID playerId, String message) {
+	public synchronized void fireSelectEvent(UUID playerId, String message) {
 		playerQueryEventSource.select(playerId, message);
 	}
 
@@ -737,6 +614,11 @@ public abstract class GameImpl implements Game, Serializable {
 	}
 
 	@Override
+	public void fireLookAtCardsEvent(UUID playerId, String message, Cards cards) {
+		playerQueryEventSource.target(playerId, message, cards);
+	}
+
+	@Override
 	public void fireGetAmountEvent(UUID playerId, String message, int min, int max) {
 		playerQueryEventSource.amount(playerId, message, min, max);
 	}
@@ -768,8 +650,8 @@ public abstract class GameImpl implements Game, Serializable {
 	}
 
 	@Override
-	public PlayerList getPlayerList(UUID playerId) {
-		return state.getPlayerList(playerId);
+	public PlayerList getPlayerList() {
+		return state.getPlayerList();
 	}
 
 	@Override
@@ -814,7 +696,7 @@ public abstract class GameImpl implements Game, Serializable {
 
 	@Override
 	public boolean isMainPhase() {
-		return state.getTurn().getStep() == PhaseStep.PRECOMBAT_MAIN || state.getTurn().getStep() == PhaseStep.POSTCOMBAT_MAIN;
+		return state.getTurn().getStepType() == PhaseStep.PRECOMBAT_MAIN || state.getTurn().getStepType() == PhaseStep.POSTCOMBAT_MAIN;
 	}
 
 	@Override
@@ -852,6 +734,14 @@ public abstract class GameImpl implements Game, Serializable {
 	@Override
 	public ContinuousEffects getContinuousEffects() {
 		return state.getContinuousEffects();
+	}
+
+	private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+		in.defaultReadObject();
+		savedStates = new Stack<Integer>();
+		tableEventSource = new TableEventSource();
+		playerQueryEventSource = new PlayerQueryEventSource();
+		gameStates = new GameStates();
 	}
 
 }

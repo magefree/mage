@@ -30,8 +30,11 @@ package mage.cards;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 import mage.Constants.Zone;
@@ -117,6 +120,17 @@ public class CardsImpl extends LinkedHashMap<UUID, Card> implements Cards, Seria
 		for(Card card: cards) {
 			this.put(card.getId(), card);
 		}
+	}
+
+	@Override
+	public Collection<Card> getUniqueCards() {
+		Map<String, Card> cards = new HashMap<String, Card>();
+		for(Card card: this.values()) {
+			if (!cards.containsKey(card.getName())) {
+				cards.put(card.getName(), card);
+			}
+		}
+		return cards.values();
 	}
 
 }

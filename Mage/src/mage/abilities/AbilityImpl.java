@@ -113,6 +113,9 @@ public abstract class AbilityImpl implements Ability, Serializable {
 		return costs.pay(game, noMana);
 	}
 
+	@Override
+	public void reset(Game game) {}
+
 	protected boolean useAlternativeCost(Game game) {
 		for (AlternativeCost cost: alternativeCosts) {
 			if (cost.isAvailable(game)) {
@@ -197,6 +200,13 @@ public abstract class AbilityImpl implements Ability, Serializable {
 				sbRule.append(cost.getText()).append("\n");
 			}
 		}
+		else {
+			for (Cost cost: this.costs) {
+				if (!(cost instanceof ManaCost)) {
+					sbRule.append("As an additional cost to cast {this}, ").append(cost.getText()).append("\n");
+				}
+			}
+		}
 
 		sbRule.append(effects.getText());
 
@@ -206,16 +216,6 @@ public abstract class AbilityImpl implements Ability, Serializable {
 	@Override
 	public String getName() {
 		return name;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	@Override
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
 	}
 
 	@Override
@@ -273,9 +273,7 @@ public abstract class AbilityImpl implements Ability, Serializable {
 
 	@Override
 	public UUID getFirstTarget() {
-		if (this.targets.size() > 0)
-			return this.targets.get(0).getFirstTarget();
-		return null;
+		return targets.getFirstTarget();
 	}
 
 	@Override

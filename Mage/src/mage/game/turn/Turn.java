@@ -54,10 +54,14 @@ public class Turn implements Serializable {
 		phases.add(new EndPhase());
 	}
 
-	public TurnPhase getPhase() {
+	public TurnPhase getPhaseType() {
 		if (currentPhase != null)
 			return currentPhase.getType();
 		return null;
+	}
+
+	public Phase getPhase() {
+		return currentPhase;
 	}
 
 	public Phase getPhase(TurnPhase turnPhase) {
@@ -69,14 +73,27 @@ public class Turn implements Serializable {
 		return null;
 	}
 
-	public PhaseStep getStep() {
+	public void setPhase(Phase phase) {
+		this.currentPhase = phase;
+	}
+
+	public Step getStep() {
 		if (currentPhase != null)
 			return currentPhase.getStep();
 		return null;
 	}
 
+	public PhaseStep getStepType() {
+		if (currentPhase != null && currentPhase.getStep() != null)
+			return currentPhase.getStep().getType();
+		return null;
+	}
+
 	public void play(Game game, UUID activePlayerId) {
 		if (game.isGameOver())
+			return;
+
+		if (game.getState().getTurnMods().skipTurn(activePlayerId))
 			return;
 
 		this.activePlayerId = activePlayerId;
@@ -86,12 +103,14 @@ public class Turn implements Serializable {
 			if (game.isGameOver())
 				return;
 			currentPhase = phase;
-			if (phase.play(game, activePlayerId)) {
-				//20091005 - 500.4/703.4n
-				game.emptyManaPools();
-				game.saveState();
-				//20091005 - 500.8
-				playExtraPhases(game, phase.getType());
+			if (!game.getState().getTurnMods().skipPhase(activePlayerId, currentPhase.getType())) {
+				if (phase.play(game, activePlayerId)) {
+					//20091005 - 500.4/703.4n
+					game.emptyManaPools();
+					game.saveState();
+					//20091005 - 500.8
+					playExtraPhases(game, phase.getType());
+				}
 			}
 		}
 		//20091005 - 500.7

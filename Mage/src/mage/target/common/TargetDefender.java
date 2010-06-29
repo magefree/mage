@@ -28,11 +28,13 @@
 
 package mage.target.common;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.filter.Filter;
 import mage.filter.common.FilterPlaneswalkerOrPlayer;
 import mage.filter.common.FilterPlaneswalkerPermanent;
@@ -75,18 +77,41 @@ public class TargetDefender extends TargetImpl {
 	@Override
 	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
 		int count = 0;
+		MageObject targetSource = game.getObject(sourceId);
 		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
 			Player player = game.getPlayer(playerId);
-			if (player != null && player.canTarget(game.getObject(this.source.getSourceId())) && filter.match(player))
+			if (player != null && player.canBeTargetedBy(targetSource) && filter.match(player)) {
 				count++;
+				if (count >= this.minNumberOfTargets)
+					return true;
+			}
 		}
-		if (count >= this.minNumberOfTargets)
-			return true;
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterPlaneswalkerPermanent(), sourceControllerId, game)) {
-			if (permanent.canBeTargetedBy(game.getObject(this.source.getSourceId())) && filter.match(permanent))
+			if (permanent.canBeTargetedBy(targetSource) && filter.match(permanent)) {
 				count++;
+				if (count >= this.minNumberOfTargets)
+					return true;
+			}
 		}
-		return count >= this.minNumberOfTargets;
+		return false;
+	}
+
+	@Override
+	public List<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+		List<UUID> possibleTargets = new ArrayList<UUID>();
+		MageObject targetSource = game.getObject(sourceId);
+		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+			Player player = game.getPlayer(playerId);
+			if (player != null && player.canBeTargetedBy(targetSource) && filter.match(player)) {
+				possibleTargets.add(playerId);
+			}
+		}
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterPlaneswalkerPermanent(), sourceControllerId, game)) {
+			if (permanent.canBeTargetedBy(targetSource) && filter.match(permanent)) {
+				possibleTargets.add(permanent.getId());
+			}
+		}
+		return possibleTargets;
 	}
 
 	@Override
@@ -108,12 +133,13 @@ public class TargetDefender extends TargetImpl {
 	@Override
 	public boolean canTarget(UUID id, Game game) {
 		Player player = game.getPlayer(id);
+		MageObject targetSource = game.getObject(attackerId);
 		if (player != null) {
-			return player.canTarget(game.getObject(attackerId)) && filter.match(player);
+			return player.canBeTargetedBy(targetSource) && filter.match(player);
 		}
 		Permanent permanent = game.getPermanent(id);
 		if (permanent != null) {
-			return permanent.canBeTargetedBy(game.getObject(attackerId)) && filter.match(permanent);
+			return permanent.canBeTargetedBy(targetSource) && filter.match(permanent);
 		}
 		return false;
 	}

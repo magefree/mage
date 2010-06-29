@@ -50,10 +50,13 @@ public class GameStates implements Serializable {
 	}
 
 	public GameState rollback(int index) {
-		while (states.size() > index) {
-			states.remove(index);
+		if (index < states.size()) {
+			while (states.size() > index) {
+				states.remove(index);
+			}
+			return new Copier<GameState>().uncompressCopy(states.get(index - 1));
 		}
-		return new Copier<GameState>().uncompressCopy(states.get(index - 1));
+		return null;
 	}
 
 	public GameState get(int index) {

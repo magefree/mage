@@ -55,8 +55,11 @@ public class GainProtectionFromColorTargetEOTEffect extends GainAbilityTargetEff
 		protectionFilter.setColor(choice.getColor());
 		protectionFilter.setMessage(choice.getChoice());
 		Permanent creature = game.getPermanent(source.getFirstTarget());
-		creature.addAbility(ability);
-		return true;
+		if (creature != null) {
+			creature.addAbility(ability);
+			return true;
+		}
+		return false;
 	}
 
 	@Override

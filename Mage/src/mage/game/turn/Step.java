@@ -32,61 +32,49 @@ import java.io.Serializable;
 import java.util.UUID;
 import mage.Constants.PhaseStep;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Step implements Serializable {
+public abstract class Step implements Serializable {
 
 	private PhaseStep type;
+	private boolean hasPriority;
+	protected EventType stepEvent;
+	protected EventType preStepEvent;
+	protected EventType postStepEvent;
 
-	public Step(PhaseStep type) {
+	public Step(PhaseStep type, boolean hasPriority) {
 		this.type = type;
+		this.hasPriority = hasPriority;
 	}
 
 	public PhaseStep getType() {
 		return type;
 	}
 
-	public boolean play(Game game, UUID activePlayerId) {
-		switch(type) {
-			case UNTAP:
-				return game.playUntapStep(activePlayerId);
-			case UPKEEP:
-				return game.playUpkeepStep(activePlayerId);
-			case DRAW:
-				return game.playDrawStep(activePlayerId);
-			case PRECOMBAT_MAIN:
-				return game.playPreCombatMainStep(activePlayerId);
-			case BEGIN_COMBAT:
-				return game.playBeginCombatStep(activePlayerId);
-			case DECLARE_ATTACKERS:
-				if (game.getPlayer(activePlayerId).hasAvailableAttackers(game))
-					return game.playDeclareAttackersStep(activePlayerId);
-				return false;
-			case DECLARE_BLOCKERS:
-				if (!game.getCombat().noAttackers())
-					return game.playDeclareBlockersStep(activePlayerId);
-				return false;
-			case FIRST_COMBAT_DAMAGE:
-				if (!game.getCombat().noAttackers() && game.getCombat().hasFirstOrDoubleStrike(game))
-					return game.playCombatDamageStep(activePlayerId, true);
-				return false;
-			case COMBAT_DAMAGE:
-				if (!game.getCombat().noAttackers())
-					return game.playCombatDamageStep(activePlayerId, false);
-				return false;
-			case END_COMBAT:
-				return game.playEndCombatStep(activePlayerId);
-			case POSTCOMBAT_MAIN:
-				return game.playPostMainStep(activePlayerId);
-			case END_TURN:
-				return game.playEndStep(activePlayerId);
-			case CLEANUP:
-				return game.playCleanupStep(activePlayerId);
-		}
-		return false;
+	public void beginStep(Game game, UUID activePlayerId) {
+		game.fireEvent(new GameEvent(preStepEvent, null, null, activePlayerId));
+	}
+
+	public void priority(Game game, UUID activePlayerId) {
+		if (hasPriority)
+			game.playPriority(activePlayerId);
+	}
+
+	public void endStep(Game game, UUID activePlayerId) {
+		game.fireEvent(new GameEvent(postStepEvent, null, null, activePlayerId));
+	}
+
+	public boolean skipStep(Game game, UUID activePlayerId) {
+		return game.replaceEvent(new GameEvent(stepEvent, null, null, activePlayerId));
+	}
+
+	public boolean getHasPriority() {
+		return this.hasPriority;
 	}
 
 }

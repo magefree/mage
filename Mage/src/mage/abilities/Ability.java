@@ -66,10 +66,9 @@ public interface Ability extends Serializable {
 	public Zone getZone();
 	public String getRule();
 	public String getName();
-	public boolean isEnabled();
-	public void setEnabled(boolean enabled);
 	public boolean activate(Game game, boolean noMana);
 	public boolean resolve(Game game);
+	public void reset(Game game);
 
 	public void setControllerId(UUID controllerId);
 	public void setSourceId(UUID sourceID);

@@ -76,6 +76,7 @@ public class MonoHybridManaCost extends ManaCostImpl implements ManaCost {
 		return this;
 	}
 
+	@Override
 	public boolean testPay(Mana testMana) {
 		switch (mana) {
 			case B:

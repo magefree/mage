@@ -58,7 +58,9 @@ public class DrawCardTargetEffect extends OneShotEffect {
 
 	@Override
 	public String getText() {
-		return "Target player draws " + Integer.toString(amount) + " card" + (amount == 1?"":"s");
+		StringBuilder sb = new StringBuilder();
+		sb.append("Target player draws ").append(Integer.toString(amount)).append(" card").append((amount == 1?"":"s"));
+		return sb.toString();
 	}
 
 

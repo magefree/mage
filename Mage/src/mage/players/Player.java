@@ -35,7 +35,9 @@ import mage.Constants.Outcome;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Abilities;
+import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilities;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.mana.ManaCost;
@@ -50,6 +52,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.Target;
+import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -71,8 +74,10 @@ public interface Player extends MageItem {
 	public void gainLife(int amount, Game game);
 	public int damage(int damage, UUID sourceId, Game game);
 	public Cards getHand();
+	public int getLandsPlayed();
 	public boolean isPassed();
 	public boolean isEmptyDraw();
+	public void pass();
 	public void resetPassed();
 	public boolean hasLost();
 	public boolean hasWon();
@@ -84,7 +89,7 @@ public interface Player extends MageItem {
 	public void reset();
 	public void shuffleLibrary(Game game);
 	public int drawCards(int num, Game game);
-	public boolean cast(Card card, Game game, boolean noMana);
+	public boolean cast(SpellAbility ability, Game game, boolean noMana);
 	public boolean putInHand(Card card, Game game);
 	public boolean removeFromHand(Card card, Game game);
 	public boolean putOntoBattlefield(Card card, Game game);
@@ -97,7 +102,7 @@ public interface Player extends MageItem {
 	public boolean playLand(Card card, Game game);
 	public boolean activateAbility(ActivatedAbility ability, Game game);
 	public boolean triggerAbility(TriggeredAbility ability, Game game);
-	public boolean canTarget(MageObject source);
+	public boolean canBeTargetedBy(MageObject source);
 	public void checkTriggers(GameEvent event, Game game);
 	public void discard(int amount, Game game);
 	public void discardToMax(Game game);
@@ -109,7 +114,8 @@ public interface Player extends MageItem {
 	public void abort();
 	
 	public void revealCards(Cards cards, Game game);
-
+	public void lookAtCards(Cards cards, Game game);
+	
 	public Player copy();
 	public void restore(Player player);
 
@@ -120,12 +126,13 @@ public interface Player extends MageItem {
 
 	public abstract void priority(Game game);
 	public abstract boolean chooseTarget(Outcome outcome, Target target, Game game);
+	public abstract boolean chooseTarget(Cards cards, TargetCard target, Game game);
+	public abstract boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Game game);
 	public abstract boolean chooseMulligan(Game game);
 	public abstract boolean chooseUse(Outcome outcome, String message, Game game);
 	public abstract boolean choose(Outcome outcome, Choice choice, Game game);
 	public abstract boolean playMana(ManaCost unpaid, Game game);
 	public abstract boolean playXMana(VariableManaCost cost, Game game);
-	public abstract boolean searchCards(Cards cards, TargetCard target, Game game);
 	public abstract int chooseEffect(List<ReplacementEffect> rEffects, Game game);
 	public abstract TriggeredAbility chooseTriggeredAbility(TriggeredAbilities abilities, Game game);
 	public abstract void selectAttackers(Game game);
@@ -142,4 +149,7 @@ public interface Player extends MageItem {
 	public void phasing(Game game);
 	public void untap(Game game);
 
+	public List<Ability> getPlayable(Game game, boolean hidden);
+	public List<Ability> getPlayableOptions(Ability ability, Game game);
+	
 }

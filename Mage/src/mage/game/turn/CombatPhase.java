@@ -28,7 +28,6 @@
 
 package mage.game.turn;
 
-import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
 import mage.game.events.GameEvent.EventType;
 
@@ -43,12 +42,12 @@ public class CombatPhase extends Phase {
 		this.event = EventType.COMBAT_PHASE;
 		this.preEvent = EventType.COMBAT_PHASE_PRE;
 		this.postEvent = EventType.COMBAT_PHASE_POST;
-		this.steps.add(new Step(PhaseStep.BEGIN_COMBAT));
-		this.steps.add(new Step(PhaseStep.DECLARE_ATTACKERS));
-		this.steps.add(new Step(PhaseStep.DECLARE_BLOCKERS));
-		this.steps.add(new Step(PhaseStep.FIRST_COMBAT_DAMAGE));
-		this.steps.add(new Step(PhaseStep.COMBAT_DAMAGE));
-		this.steps.add(new Step(PhaseStep.END_COMBAT));
+		this.steps.add(new BeginCombatStep());
+		this.steps.add(new DeclareAttackersStep());
+		this.steps.add(new DeclareBlockersStep());
+		this.steps.add(new CombatDamageStep(true));
+		this.steps.add(new CombatDamageStep(false));
+		this.steps.add(new EndOfCombatStep());
 	}
 
 }

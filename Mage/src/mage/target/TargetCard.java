@@ -28,6 +28,8 @@
 
 package mage.target;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.Constants.Zone;
 import mage.cards.Card;
@@ -69,6 +71,23 @@ public class TargetCard extends TargetObject {
 		return this.filter;
 	}
 
+	public boolean choose(Cards cards, Game game) {
+		Player player = game.getPlayer(this.source.getControllerId());
+		while (!isChosen() && !doneChosing()) {
+			chosen = targets.size() >= minNumberOfTargets;
+			if (!player.chooseTarget(cards, this, game)) {
+				return chosen;
+			}
+			chosen = targets.size() >= minNumberOfTargets;
+		}
+		while (!doneChosing()) {
+			if (!player.chooseTarget(cards, this, game)) {
+				break;
+			}
+		}
+		return chosen = true;
+	}
+
 	@Override
 	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
 		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
@@ -77,11 +96,15 @@ public class TargetCard extends TargetObject {
 				if (player != null) {
 					switch (zone) {
 						case HAND:
-							if (player.getHand().getCards(filter).size() > this.minNumberOfTargets)
+							if (player.getHand().count(filter) >= this.minNumberOfTargets)
 								return true;
 							break;
 						case GRAVEYARD:
-							if (player.getGraveyard().getCards(filter).size() > this.minNumberOfTargets)
+							if (player.getGraveyard().count(filter) >= this.minNumberOfTargets)
+								return true;
+							break;
+						case LIBRARY:
+							if (player.getLibrary().count(filter) >= this.minNumberOfTargets)
 								return true;
 							break;
 					}
@@ -89,6 +112,32 @@ public class TargetCard extends TargetObject {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public List<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+		List<UUID> possibleTargets = new ArrayList<UUID>();
+		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+			if (filter.matchOwner(playerId)) {
+				Player player = game.getPlayer(playerId);
+				if (player != null) {
+					switch (zone) {
+						case HAND:
+							for (Card card: player.getHand().getCards(filter)) {
+								possibleTargets.add(card.getId());
+							}
+							break;
+						case GRAVEYARD:
+							for (Card card: player.getGraveyard().getCards(filter)) {
+								possibleTargets.add(card.getId());
+							}
+							break;
+					}
+				}
+			}
+		}
+		return possibleTargets;
+
 	}
 
 	public boolean canTarget(UUID id, Cards cards, Game game) {

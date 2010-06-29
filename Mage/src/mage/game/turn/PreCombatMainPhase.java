@@ -28,7 +28,6 @@
 
 package mage.game.turn;
 
-import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
 import mage.game.events.GameEvent.EventType;
 
@@ -43,7 +42,7 @@ public class PreCombatMainPhase extends Phase {
 		this.event = EventType.PRECOMBAT_MAIN_PHASE;
 		this.preEvent = EventType.PRECOMBAT_MAIN_PHASE_PRE;
 		this.postEvent = EventType.PRECOMBAT_MAIN_PHASE_POST;
-		this.steps.add(new Step(PhaseStep.PRECOMBAT_MAIN));
+		this.steps.add(new PreCombatMainStep());
 	}
 
 }

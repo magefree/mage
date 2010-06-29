@@ -34,7 +34,7 @@ import mage.Constants.TimingRule;
 import mage.Constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
-import mage.abilities.effects.common.EquipEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,9 +44,14 @@ import mage.target.common.TargetCreaturePermanent;
 public class EquipAbility extends ActivatedAbilityImpl {
 
 	public EquipAbility(Outcome outcome, Cost cost) {
-		super(Zone.BATTLEFIELD, new EquipEffect(outcome), cost);
-		this.targets.add(new TargetCreaturePermanent(1, TargetController.YOU));
+		super(Zone.BATTLEFIELD, new AttachEffect(outcome), cost);
+		this.addTarget(new TargetCreaturePermanent(1, TargetController.YOU));
 		this.timing = TimingRule.SORCERY;
+	}
+
+	@Override
+	public String getRule() {
+		return "Equip" + super.getRule();
 	}
 
 }

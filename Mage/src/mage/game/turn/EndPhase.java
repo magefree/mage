@@ -28,8 +28,10 @@
 
 package mage.game.turn;
 
+import java.util.UUID;
 import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
+import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 
 /**
@@ -43,8 +45,21 @@ public class EndPhase extends Phase {
 		this.event = EventType.END_PHASE;
 		this.preEvent = EventType.END_PHASE_PRE;
 		this.postEvent = EventType.END_PHASE_POST;
-		this.steps.add(new Step(PhaseStep.END_TURN));
-		this.steps.add(new Step(PhaseStep.CLEANUP));
+		this.steps.add(new EndStep());
+		this.steps.add(new CleanupStep());
+	}
+
+	@Override
+	protected void playStep(Game game, UUID activePlayerId) {
+		if (currentStep.getType() == PhaseStep.CLEANUP) {
+			currentStep.beginStep(game, activePlayerId);
+			if (game.checkStateAndTriggered()) {
+				playStep(game, activePlayerId);
+			}
+			currentStep.endStep(game, activePlayerId);
+		}
+		else
+			super.playStep(game, activePlayerId);
 	}
 
 }

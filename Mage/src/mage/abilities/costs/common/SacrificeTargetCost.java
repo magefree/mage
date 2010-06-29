@@ -30,10 +30,11 @@ package mage.abilities.costs.common;
 
 import java.util.UUID;
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetSacrificePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -41,18 +42,15 @@ import mage.target.common.TargetSacrificePermanent;
  */
 public class SacrificeTargetCost extends CostImpl {
 
-	public TargetSacrificePermanent target;
-
-	public SacrificeTargetCost(TargetSacrificePermanent target) {
-		this.target = target;
+	public SacrificeTargetCost(TargetControlledPermanent target) {
+		this.addTarget(target);
 		this.text = "Sacrifice " + target.getTargetName();
 	}
 
 	@Override
 	public boolean pay(Game game, boolean noMana) {
-		target.setAbility(ability);
-		if (target.choose(Outcome.Sacrifice, game)) {
-			Permanent source = game.getPermanent(target.getFirstTarget());
+		if (targets.choose(Outcome.Sacrifice, game)) {
+			Permanent source = game.getPermanent(targets.getFirstTarget());
 			if (source != null) {
 				paid = source.sacrifice(this.ability.getSourceId(), game);
 			}
@@ -62,7 +60,11 @@ public class SacrificeTargetCost extends CostImpl {
 
 	@Override
 	public boolean canPay(UUID playerId, Game game) {
-		return target.canChoose(playerId, playerId, game);
+		return targets.canChoose(playerId, playerId, game);
 	}
 
+	@Override
+	public void setAbility(Ability ability) {
+		super.setAbility(ability);
+	}
 }

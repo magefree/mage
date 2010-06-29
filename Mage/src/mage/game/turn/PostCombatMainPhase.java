@@ -43,7 +43,7 @@ public class PostCombatMainPhase extends Phase {
 		this.event = EventType.POSTCOMBAT_MAIN_PHASE;
 		this.preEvent = EventType.POSTCOMBAT_MAIN_PHASE_PRE;
 		this.postEvent = EventType.POSTCOMBAT_MAIN_STEP_POST;
-		this.steps.add(new Step(PhaseStep.POSTCOMBAT_MAIN));
+		this.steps.add(new PostCombatMainStep());
 	}
 
 }

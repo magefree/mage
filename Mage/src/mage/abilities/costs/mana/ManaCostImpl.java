@@ -55,6 +55,12 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
 		return options;
 	}
 
+	@Override
+	public void clearPaid() {
+		payment.clear();
+		super.clearPaid();
+	}
+
 	protected boolean assignColored(ManaPool pool, ColoredManaSymbol mana) {
 		switch (mana) {
 			case B:

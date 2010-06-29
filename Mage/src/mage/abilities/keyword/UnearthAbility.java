@@ -59,9 +59,9 @@ public class UnearthAbility extends ActivatedAbilityImpl {
 	public UnearthAbility(ManaCosts costs) {
 		super(Zone.GRAVEYARD, new UnearthEffect(), costs);
 		this.timing = TimingRule.SORCERY;
-		this.effects.add(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield));
-		this.effects.add(new CreateDelayedTriggeredAbilityEffect(new UnearthDelayedTriggeredAbility()));
-		this.effects.add(new UnearthLeavesBattlefieldEffect());
+		this.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield));
+		this.addEffect(new CreateDelayedTriggeredAbilityEffect(new UnearthDelayedTriggeredAbility()));
+		this.addEffect(new UnearthLeavesBattlefieldEffect());
 	}
 
 	public boolean isUnearthed() {

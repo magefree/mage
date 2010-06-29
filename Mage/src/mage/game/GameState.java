@@ -29,12 +29,15 @@
 package mage.game;
 
 import mage.abilities.TriggeredAbility;
+import mage.cards.Card;
 import mage.game.events.GameEvent;
 import mage.game.stack.SpellStack;
 import mage.game.stack.StackObject;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import mage.Constants.Zone;
 import mage.MageObject;
@@ -67,6 +70,7 @@ import mage.watchers.Watchers;
 public class GameState implements Serializable {
 
 	private Players players = new Players();
+	private PlayerList playerList = new PlayerList();
 	private UUID activePlayerId;
 	private UUID priorityPlayerId;
 	private Turn turn = new Turn();
@@ -83,9 +87,11 @@ public class GameState implements Serializable {
 	private Combat combat = new Combat();
 	private TurnMods turnMods = new TurnMods();
 	private Watchers watchers = new Watchers();
+	private Map<String, Object> values = new HashMap<String, Object>();
 
 	public void addPlayer(Player player) {
 		players.put(player.getId(), player);
+		playerList.add(player.getId());
 	}
 	
 	public Players getPlayers() {
@@ -181,14 +187,18 @@ public class GameState implements Serializable {
 		this.messages.add(message);
 	}
 
+	public PlayerList getPlayerList() {
+		return playerList;
+	}
+
 	public PlayerList getPlayerList(UUID playerId) {
-		PlayerList playerList = new PlayerList();
+		PlayerList newPlayerList = new PlayerList();
 		for (Player player: players.values()) {
 			if (!player.hasLeft() && !player.hasLost())
-				playerList.add(player);
+				newPlayerList.add(player.getId());
 		}
-		playerList.setCurrent(playerId);
-		return playerList;
+		newPlayerList.setCurrent(playerId);
+		return newPlayerList;
 	}
 
 	public MageObject getObject(UUID objectId) {
@@ -198,28 +208,9 @@ public class GameState implements Serializable {
 			object.setZone(Zone.BATTLEFIELD);
 			return object;
 		}
-		for(Player player: players.values()) {
-			if (player.getHand().containsKey(objectId)) {
-				object = player.getHand().get(objectId);
-				object.setZone(Zone.HAND);
-				return object;
-			}
-			if (player.getGraveyard().containsKey(objectId)) {
-				object = player.getGraveyard().get(objectId);
-				object.setZone(Zone.GRAVEYARD);
-				return object;
-			}
-//			if (player.getLibrary().containsKey(objectId)) {
-//				return player.getLibrary().get(objectId);
-//			}
-//			for (Cards cards: player..values()) {
-//				if (cards.containsKey(id))
-//					return cards.get(id);
-//			}
-//			if (player.getSideboard().containsKey(id)) {
-//				return player.getSideboard().get(id);
-//			}
-		}
+		object = getCard(objectId);
+		if (object != null)
+			return object;
 		for (StackObject item: stack) {
 			if (item.getId().equals(objectId)) {
 				item.setZone(Zone.STACK);
@@ -228,6 +219,23 @@ public class GameState implements Serializable {
 		}
 
 		return null;
+	}
+
+	public Card getCard(UUID cardId) {
+		Card card;
+		for(Player player: players.values()) {
+			if (player.getHand().containsKey(cardId)) {
+				card = player.getHand().get(cardId);
+				card.setZone(Zone.HAND);
+				return card;
+			}
+			if (player.getGraveyard().containsKey(cardId)) {
+				card = player.getGraveyard().get(cardId);
+				card.setZone(Zone.GRAVEYARD);
+				return card;
+			}
+		}
+		return this.exile.getCard(cardId);
 	}
 
 	public Permanent getPermanent(UUID permanentId) {
@@ -296,4 +304,11 @@ public class GameState implements Serializable {
 		return effects;
 	}
 
+	public Object getValue(String valueId) {
+		return values.get(valueId);
+	}
+
+	public void setValue(String valueId, Object value) {
+		values.put(valueId, value);
+	}
 }

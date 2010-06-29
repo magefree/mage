@@ -28,6 +28,8 @@
 
 package mage.target;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.Constants.Zone;
 import mage.filter.FilterSpell;
@@ -83,9 +85,22 @@ public class TargetSpell extends TargetObject {
 		for (StackObject stackObject: game.getStack()) {
 			if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell)stackObject)) {
 				count++;
+				if (count >= this.minNumberOfTargets)
+					return true;
 			}
 		}
-		return count >= this.minNumberOfTargets;
+		return false;
+	}
+
+	@Override
+	public List<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+		List<UUID> possibleTargets = new ArrayList<UUID>();
+		for (StackObject stackObject: game.getStack()) {
+			if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell)stackObject)) {
+				possibleTargets.add(stackObject.getId());
+			}
+		}
+		return possibleTargets;
 	}
 
 }

@@ -26,44 +26,33 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.game.turn;
 
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
+import java.util.UUID;
+import mage.Constants.PhaseStep;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GainAbilityEquippedEffect  extends ContinuousEffectImpl {
+public class BeginCombatStep extends Step {
 
-	protected Ability ability;
-
-	public GainAbilityEquippedEffect(Ability ability) {
-		super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-		this.ability = ability;
+	public BeginCombatStep() {
+		super(PhaseStep.BEGIN_COMBAT, true);
+		this.stepEvent = EventType.BEGIN_COMBAT_STEP;
+		this.preStepEvent = EventType.BEGIN_COMBAT_STEP_PRE;
+		this.postStepEvent = EventType.BEGIN_COMBAT_STEP_POST;
 	}
 
 	@Override
-	public boolean apply(Game game) {
-		Permanent equipment = game.getPermanent(this.source.getSourceId());
-		if (equipment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(equipment.getAttachedTo());
-			if (creature != null)
-				creature.addAbility(ability);
-		}
-		return true;
-	}
-
-	@Override
-	public String getText() {
-		return "Equipped creature gains " + ability.getRule();
+	public void beginStep(Game game, UUID activePlayerId) {
+		//20091005 - 507.1
+		game.getCombat().clear();
+		game.getCombat().setAttacker(activePlayerId);
+		game.getCombat().setDefenders(game);
+		super.beginStep(game, activePlayerId);
 	}
 
 }

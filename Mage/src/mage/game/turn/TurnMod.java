@@ -42,14 +42,20 @@ public class TurnMod implements Serializable {
 
 	private UUID playerId;
 	private boolean extraTurn;
+	private boolean skipTurn;
 	private TurnPhase extraPhase;
-	private PhaseStep extraStep;
+	private TurnPhase skipPhase;
+	private Step extraStep;
+	private PhaseStep skipStep;
 	private TurnPhase afterPhase;
 	private PhaseStep afterStep;
 
-	public TurnMod(UUID playerId) {
+	public TurnMod(UUID playerId, boolean skip) {
 		this.playerId = playerId;
-		this.extraTurn = true;
+		if (skip)
+			this.skipTurn = true;
+		else
+			this.extraTurn = true;
 	}
 
 	/**
@@ -58,9 +64,12 @@ public class TurnMod implements Serializable {
 	 * @param extraPhase
 	 * @param afterPhase - set to null if extraPhase is after the next phase
 	 */
-	public TurnMod(UUID playerId, TurnPhase extraPhase, TurnPhase afterPhase) {
+	public TurnMod(UUID playerId, TurnPhase phase, TurnPhase afterPhase, boolean skip) {
 		this.playerId = playerId;
-		this.extraPhase = extraPhase;
+		if (skip)
+			this.skipPhase = phase;
+		else
+			this.extraPhase = phase;
 		this.afterPhase = afterPhase;
 	}
 
@@ -70,11 +79,16 @@ public class TurnMod implements Serializable {
 	 * @param extraStep
 	 * @param afterStep - set to null if extraStep is after the next step
 	 */
-	public TurnMod(UUID playerId, PhaseStep extraStep, PhaseStep afterStep) {
+	public TurnMod(UUID playerId, Step step, PhaseStep afterStep) {
 		this.playerId = playerId;
-		this.extraStep = extraStep;
+		this.extraStep = step;
 		this.afterStep = afterStep;
 	}
+
+	public TurnMod(UUID playerId, PhaseStep step) {
+		this.playerId = playerId;
+		this.skipStep = step;
+	}	
 
 	public UUID getPlayerId() {
 		return playerId;
@@ -84,12 +98,24 @@ public class TurnMod implements Serializable {
 		return extraTurn;
 	}
 
+	public boolean isSkipTurn() {
+		return skipTurn;
+	}
+
 	public TurnPhase getExtraPhase() {
 		return extraPhase;
 	}
 
-	public PhaseStep getExtraStep() {
+	public Step getExtraStep() {
 		return extraStep;
+	}
+
+	public TurnPhase getSkipPhase() {
+		return skipPhase;
+	}
+
+	public PhaseStep getSkipStep() {
+		return skipStep;
 	}
 
 	public TurnPhase getAfterPhase() {

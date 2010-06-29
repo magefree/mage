@@ -42,6 +42,10 @@ public class TargetLandPermanent extends TargetPermanent {
 		this(1, 1, new FilterLandPermanent(), TargetController.ANY);
 	}
 
+	public TargetLandPermanent(FilterLandPermanent filter) {
+		this(1, 1, filter, TargetController.ANY);
+	}
+
 	public TargetLandPermanent(int numTargets, TargetController controller) {
 		this(numTargets, numTargets, new FilterLandPermanent(), controller);
 	}

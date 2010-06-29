@@ -111,9 +111,9 @@ public class Combat implements Serializable {
 		PlayerList players;
 		switch (game.getAttackOption()) {
 			case LEFT:
-				players = game.getPlayerList(attackerId);
+				players = game.getState().getPlayerList(attackerId);
 				while (true) {
-					Player opponent = players.getNext();
+					Player opponent = players.getNext(game);
 					if (opponents.contains(opponent.getId())) {
 						defenders.add(opponent.getId());
 						break;
@@ -121,9 +121,9 @@ public class Combat implements Serializable {
 				}
 				break;
 			case RIGHT:
-				players = game.getPlayerList(attackerId);
+				players = game.getState().getPlayerList(attackerId);
 				while (true) {
-					Player opponent = players.getPrevious();
+					Player opponent = players.getPrevious(game);
 					if (opponents.contains(opponent.getId())) {
 						defenders.add(opponent.getId());
 						break;
@@ -217,7 +217,7 @@ public class Combat implements Serializable {
 		return false;
 	}
 
-	protected boolean isAttacked(UUID defenderId, Game game) {
+	public boolean isAttacked(UUID defenderId, Game game) {
 		for (CombatGroup group: groups) {
 			if (group.getDefenderId().equals(defenderId))
 				return true;

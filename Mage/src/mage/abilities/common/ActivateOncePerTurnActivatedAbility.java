@@ -42,19 +42,34 @@ import mage.game.Game;
  */
 public class ActivateOncePerTurnActivatedAbility extends ActivatedAbilityImpl {
 
-	protected UUID effectId;
 
 	public ActivateOncePerTurnActivatedAbility(Zone zone, Effect effect, Cost cost) {
 		super(zone, effect, cost);
-		effectId = effect.getId();
 	}
 
 	@Override
 	public boolean canActivate(UUID playerId, Game game) {
-		//assumes that ability creates a continuous effect
-		if (game.getContinuousEffects().effectExists(this.id))
-			return false;
-		return super.canActivate(playerId, game);
+		Boolean activated = (Boolean)game.getState().getValue(this.id.toString() + "activated");
+		if (activated == null)
+			return true;
+		else
+			return !activated;
+	}
+
+	@Override
+	public boolean activate(Game game, boolean noMana) {
+		if (canActivate(this.controllerId, game)) {
+			if (super.activate(game, noMana)) {
+				game.getState().setValue(this.id.toString() + "activated", Boolean.TRUE);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public void reset(Game game) {
+		game.getState().setValue(this.id.toString() + "activated", Boolean.FALSE);
 	}
 
 	@Override

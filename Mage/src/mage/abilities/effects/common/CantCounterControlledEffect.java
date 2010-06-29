@@ -51,14 +51,17 @@ public class CantCounterControlledEffect extends ReplacementEffectImpl {
 		this.filter = filter;
 	}
 
+	@Override
 	public boolean apply(Game game) {
 		return true;
 	}
 
+	@Override
 	public boolean replaceEvent(GameEvent event, Game game) {
 		return true;
 	}
 
+	@Override
 	public boolean applies(GameEvent event, Game game) {
 		if (event.getType() == EventType.COUNTER) {
 			filter.getControllerId().clear();

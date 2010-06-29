@@ -29,7 +29,9 @@
 package mage.target;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
@@ -45,7 +47,7 @@ import mage.players.Player;
  */
 public abstract class TargetImpl implements Target {
 
-	protected List<UUID> targets = new ArrayList<UUID>();
+	protected Map<UUID, Integer> targets = new HashMap<UUID, Integer>();
 
 	protected String targetName;
 	protected Zone zone;
@@ -73,6 +75,11 @@ public abstract class TargetImpl implements Target {
 	@Override
 	public String getTargetName() {
 		return targetName;
+	}
+
+	@Override
+	public void setTargetName(String name) {
+		this.targetName = name;
 	}
 
 	@Override
@@ -114,14 +121,33 @@ public abstract class TargetImpl implements Target {
 	 */
 	@Override
 	public void addTarget(UUID id, Game game) {
+		//20100423 - 113.3
+		if (!targets.containsKey(id)) {
+			if (source != null) {
+				if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getSourceId(), source.getControllerId()))) {
+					targets.put(id, 0);
+					game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getSourceId(), source.getControllerId()));
+				}
+			}
+			else {
+				targets.put(id, 0);
+			}
+		}
+	}
+
+	@Override
+	public void addTarget(UUID id, int amount, Game game) {
+		if (targets.containsKey(id)) {
+			amount += targets.get(id);
+		}
 		if (source != null) {
 			if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getSourceId(), source.getControllerId()))) {
-				targets.add(id);
+				targets.put(id, amount);
 				game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getSourceId(), source.getControllerId()));
 			}
 		}
 		else {
-			targets.add(id);
+			targets.put(id, amount);
 		}
 	}
 
@@ -146,7 +172,7 @@ public abstract class TargetImpl implements Target {
 
 	@Override
 	public boolean isLegal(Game game) {
-		for (UUID targetId: targets) {
+		for (UUID targetId: targets.keySet()) {
 			if (!canTarget(targetId, game))
 				return false;
 		}
@@ -155,20 +181,27 @@ public abstract class TargetImpl implements Target {
 
 	@Override
 	public List<UUID> getTargets() {
-		return targets;
+		return new ArrayList(targets.keySet());
 	}
 
 	@Override
-	public UUID getLastTarget() {
-		if (targets.size() > 0)
-			return targets.get(targets.size() - 1);
-		return null;
+	public int getTargetAmount(UUID targetId) {
+		if (targets.containsKey(targetId))
+			return targets.get(targetId);
+		return 0;
 	}
+
+//	@Override
+//	public UUID getLastTarget() {
+//		if (targets.size() > 0)
+//			return targets.keySet().iterator().next();
+//		return null;
+//	}
 
 	@Override
 	public UUID getFirstTarget() {
 		if (targets.size() > 0)
-			return targets.get(0);
+			return targets.keySet().iterator().next();
 		return null;
 	}
 

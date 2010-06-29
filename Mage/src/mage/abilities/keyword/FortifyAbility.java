@@ -33,7 +33,7 @@ import mage.Constants.TimingRule;
 import mage.Constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
-import mage.abilities.effects.common.EquipEffect;
+import mage.abilities.effects.common.AttachEffect;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -43,9 +43,9 @@ import mage.target.common.TargetLandPermanent;
 public class FortifyAbility extends ActivatedAbilityImpl {
 	//20091005 - 702.64
 
-	public FortifyAbility(Zone zone, EquipEffect effect, Cost cost) {
+	public FortifyAbility(Zone zone, AttachEffect effect, Cost cost) {
 		super(zone, effect, cost);
-		targets.add(new TargetLandPermanent(1, TargetController.YOU));
+		this.addTarget(new TargetLandPermanent(1, TargetController.YOU));
 		timing = TimingRule.SORCERY;
 	}
 

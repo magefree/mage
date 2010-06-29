@@ -34,7 +34,6 @@ import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -50,6 +49,9 @@ public class Targets extends ArrayList<Target> {
 	
 	public void setSource(Ability ability) {
 		this.source = ability;
+		for (Target target: this) {
+			target.setAbility(ability);
+		}
 	}
 
 	@Override
@@ -108,4 +110,11 @@ public class Targets extends ArrayList<Target> {
 		}
 		return true;
 	}
+
+	public UUID getFirstTarget() {
+		if (this.size() > 0)
+			return this.get(0).getFirstTarget();
+		return null;
+	}
+
 }

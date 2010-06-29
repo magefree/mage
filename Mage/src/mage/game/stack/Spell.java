@@ -56,10 +56,12 @@ public class Spell implements StackObject, Card {
 //	private static final transient Copier<Spell> copier = new Copier<Spell>();
 
 	private Card card;
+	private SpellAbility ability;
 	private UUID controllerId;
 
-	public Spell(Card card, UUID controllerId) {
+	public Spell(Card card, SpellAbility ability, UUID controllerId) {
 		this.card = card;
+		this.ability = ability;
 		this.controllerId = controllerId;
 	}
 
@@ -67,19 +69,12 @@ public class Spell implements StackObject, Card {
 	public boolean resolve(Game game) {
 		boolean result = false;
 		if (card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY)) {
-			SpellAbility ability = card.getSpellAbility();
 			if (ability.getTargets().stillLegal(game)) {
-				boolean replaced = false;
-				for (KickerAbility kicker: card.getAbilities().getKickerAbilities()) {
-					if (kicker.isKicked()) {
-						if (kicker.isReplaces()) {
-							replaced = true;
-						}
-						kicker.resolve(game);
-					}
-				}
+				boolean replaced = resolveKicker(game);
 				if (!replaced)
 					result = ability.resolve(game);
+				else
+					result = true;
 
 				if (ability.getEffects().contains(ExileSpellEffect.getInstance()))
 					game.getExile().getPermanentExile().add(card);
@@ -91,10 +86,37 @@ public class Spell implements StackObject, Card {
 			counter(game);
 			return false;
 		}
+		else if (card.getCardType().contains(CardType.ENCHANTMENT) && card.getSubtype().contains("Aura")) {
+			if (ability.getTargets().stillLegal(game)) {
+				Player controller = game.getPlayers().get(controllerId);
+				if (controller.putOntoBattlefield(card, game)) {
+					return ability.resolve(game);
+				}
+				return false;
+			}
+			//20091005 - 608.2b
+			counter(game);
+			return false;
+		}
 		else {
 			Player controller = game.getPlayers().get(controllerId);
-			return controller.putOntoBattlefield(card, game);
+			result = controller.putOntoBattlefield(card, game);
+			resolveKicker(game);
+			return result;
 		}
+	}
+
+	protected boolean resolveKicker(Game game) {
+		boolean replaced = false;
+		for (KickerAbility kicker: card.getAbilities().getKickerAbilities()) {
+			if (kicker.isKicked()) {
+				if (kicker.isReplaces()) {
+					replaced = true;
+				}
+				kicker.resolve(game);
+			}
+		}
+		return replaced;
 	}
 
 	@Override
