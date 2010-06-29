@@ -34,6 +34,9 @@ import java.net.URLClassLoader;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ *
+ * some code courtesy of http://tech.puredanger.com/2006/11/09/classloader/
+ *
  */
 public class PluginClassLoader extends URLClassLoader {
 

@@ -48,6 +48,7 @@ public class Session {
 	private UUID sessionId;
 	private UUID clientId;
 	private String username;
+	private int messageId = 0;
 	private final CallbackServerSession callback = new CallbackServerSession();
 
 	public Session(String userName, UUID clientId) {
@@ -78,6 +79,8 @@ public class Session {
 
 	public void fireCallback(ClientCallback call) {
 		try {
+			call.setMessageId(messageId++);
+			logger.info(sessionId + " - " + call.getMessageId() + " - " + call.getMethod());
 			callback.setCallback(call);
 		} catch (InterruptedException ex) {
 			logger.log(Level.SEVERE, null, ex);
