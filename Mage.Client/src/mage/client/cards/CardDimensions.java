@@ -61,8 +61,8 @@ public class CardDimensions {
 		textYOffset = (int)(TEXT_MAX_YOFFSET * scaleFactor);
 		textWidth = (int)(TEXT_MAX_WIDTH * scaleFactor);
 		textHeight = (int)(TEXT_MAX_HEIGHT * scaleFactor);
-		powBoxTextTop = (int)(POWBOX_MAX_TOP * scaleFactor);
-		powBoxTextLeft = (int)(POWBOX_MAX_LEFT * scaleFactor);
+		powBoxTextTop = (int)(POWBOX_TEXT_MAX_TOP * scaleFactor);
+		powBoxTextLeft = (int)(POWBOX_TEXT_MAX_LEFT * scaleFactor);
 		nameFontSize = Math.max(9, (int)(NAME_FONT_MAX_SIZE * scaleFactor));
 	}
 

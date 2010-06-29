@@ -74,6 +74,7 @@ public class GamePanel extends javax.swing.JPanel {
 	private UUID playerId;
 	private Session session;
 	private CombatDialog combat = new CombatDialog();
+	private PickNumberDialog pickNumber = new PickNumberDialog();
 
     /** Creates new form GamePanel */
     public GamePanel() {
@@ -144,6 +145,7 @@ public class GamePanel extends javax.swing.JPanel {
 		combat.init(gameId, bigCard);
 		MageFrame.getDesktop().add(combat, JLayeredPane.POPUP_LAYER);
 		combat.setLocation(500, 300);
+		MageFrame.getDesktop().add(pickNumber, JLayeredPane.POPUP_LAYER);
 		this.players.clear();
 		this.pnlBattlefield.removeAll();
 		//arrange players in a circle with the session player at the bottom left
@@ -306,9 +308,8 @@ public class GamePanel extends javax.swing.JPanel {
 		showCards.loadCards(title, cards, bigCard, Config.dimensions, gameId);
 	}
 
-	public void getAmount(int min, int max) {
-		PickNumberDialog pickNumber = new PickNumberDialog();
-		pickNumber.showDialog(min, max);
+	public void getAmount(int min, int max, String message) {
+		pickNumber.showDialog(min, max, message);
 		if (pickNumber.isCancel())
 			session.sendPlayerBoolean(gameId, false);
 		else

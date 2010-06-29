@@ -47,7 +47,6 @@ import mage.client.cards.CardDimensions;
 import mage.client.util.Config;
 import mage.view.CardView;
 import mage.view.CardsView;
-import static mage.client.util.Constants.*;
 
 /**
  *

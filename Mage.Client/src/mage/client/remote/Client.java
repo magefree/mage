@@ -52,6 +52,7 @@ public class Client implements CallbackClient {
 	private String userName;
 	private MageFrame frame;
 	private Session session;
+	private int messageId = 0;
 
 	public Client(Session session, MageFrame frame, String userName) {
 
@@ -63,84 +64,91 @@ public class Client implements CallbackClient {
 	}
 
 	@Override
-	public void processCallback(ClientCallback callback) {
-		if (callback.getMethod().equals("startGame")) {
-			UUID[] data = (UUID[]) callback.getData();
-			gameStarted(data[0], data[1]);
-		}
-		else if (callback.getMethod().equals("replayGame")) {
-			replayGame();
-		}
-		else if (callback.getMethod().equals("watchGame")) {
-			watchGame((UUID) callback.getData());
-		}
-		else if (callback.getMethod().equals("chatMessage")) {
-			ChatMessage message = (ChatMessage) callback.getData();
-			session.getChats().get(message.getChatId()).receiveMessage(message.getMessage());
-		}
-		else if (callback.getMethod().equals("replayInit")) {
-			session.getGame().init((GameView) callback.getData());
-		}
-		else if (callback.getMethod().equals("replayDone")) {
-			session.getGame().modalMessage((String) callback.getData());
-			session.getGame().hideGame();
-		}
-		else if (callback.getMethod().equals("replayUpdate")) {
-			session.getGame().updateGame((GameView) callback.getData());
-		}
-		else if (callback.getMethod().equals("gameInit")) {
-			session.getGame().init((GameView) callback.getData());
-		}
-		else if (callback.getMethod().equals("gameUpdate")) {
-			session.getGame().updateGame((GameView) callback.getData());
-		}
-		else if (callback.getMethod().equals("gameInform")) {
-			GameClientMessage message = (GameClientMessage) callback.getData();
-			session.getGame().inform(message.getMessage(), null, message.getGameView());
-		}
-		else if (callback.getMethod().equals("gameOver")) {
-			session.getGame().modalMessage((String) callback.getData());
-			session.getGame().hideGame();
-		}
-		else if (callback.getMethod().equals("gameAsk")) {
-			GameClientMessage message = (GameClientMessage) callback.getData();
-			session.getGame().updateGame(message.getGameView());
-			session.getGame().ask(message.getMessage());
-		}
-		else if (callback.getMethod().equals("gameTarget")) {
-			GameClientMessage message = (GameClientMessage) callback.getData();
-			if (message.isFlag()) {
-				session.getGame().inform(message.getMessage(), message.getCardsView(), message.getGameView());
-			} else {
-				session.getGame().cancel(message.getMessage(), message.getCardsView(), message.getGameView());
+	public synchronized void processCallback(ClientCallback callback) {
+		if (callback.getMessageId() > messageId) {
+			messageId = callback.getMessageId();
+			logger.info(callback.getMessageId() + " - " + callback.getMethod());
+			if (callback.getMethod().equals("startGame")) {
+				UUID[] data = (UUID[]) callback.getData();
+				gameStarted(data[0], data[1]);
+			}
+			else if (callback.getMethod().equals("replayGame")) {
+				replayGame();
+			}
+			else if (callback.getMethod().equals("watchGame")) {
+				watchGame((UUID) callback.getData());
+			}
+			else if (callback.getMethod().equals("chatMessage")) {
+				ChatMessage message = (ChatMessage) callback.getData();
+				session.getChats().get(message.getChatId()).receiveMessage(message.getMessage());
+			}
+			else if (callback.getMethod().equals("replayInit")) {
+				session.getGame().init((GameView) callback.getData());
+			}
+			else if (callback.getMethod().equals("replayDone")) {
+				session.getGame().modalMessage((String) callback.getData());
+				session.getGame().hideGame();
+			}
+			else if (callback.getMethod().equals("replayUpdate")) {
+				session.getGame().updateGame((GameView) callback.getData());
+			}
+			else if (callback.getMethod().equals("gameInit")) {
+				session.getGame().init((GameView) callback.getData());
+			}
+			else if (callback.getMethod().equals("gameUpdate")) {
+				session.getGame().updateGame((GameView) callback.getData());
+			}
+			else if (callback.getMethod().equals("gameInform")) {
+				GameClientMessage message = (GameClientMessage) callback.getData();
+				session.getGame().inform(message.getMessage(), null, message.getGameView());
+			}
+			else if (callback.getMethod().equals("gameOver")) {
+				session.getGame().modalMessage((String) callback.getData());
+				session.getGame().hideGame();
+			}
+			else if (callback.getMethod().equals("gameAsk")) {
+				GameClientMessage message = (GameClientMessage) callback.getData();
+				session.getGame().updateGame(message.getGameView());
+				session.getGame().ask(message.getMessage());
+			}
+			else if (callback.getMethod().equals("gameTarget")) {
+				GameClientMessage message = (GameClientMessage) callback.getData();
+				if (message.isFlag()) {
+					session.getGame().inform(message.getMessage(), message.getCardsView(), message.getGameView());
+				} else {
+					session.getGame().cancel(message.getMessage(), message.getCardsView(), message.getGameView());
+				}
+			}
+			else if (callback.getMethod().equals("gameSelect")) {
+				GameClientMessage message = (GameClientMessage) callback.getData();
+				session.getGame().select(message.getMessage(), message.getGameView());
+			}
+			else if (callback.getMethod().equals("gameChooseAbility")) {
+				session.getGame().pickAbility((AbilityPickerView) callback.getData());
+			}
+			else if (callback.getMethod().equals("gameChoose")) {
+				GameClientMessage message = (GameClientMessage) callback.getData();
+				session.getGame().getChoice(message.getMessage(), message.getStrings());
+			}
+			else if (callback.getMethod().equals("gamePlayMana")) {
+				GameClientMessage message = (GameClientMessage) callback.getData();
+				session.getGame().playMana(message.getMessage(), message.getGameView());
+			}
+			else if (callback.getMethod().equals("gamePlayXMana")) {
+				GameClientMessage message = (GameClientMessage) callback.getData();
+				session.getGame().playXMana(message.getMessage(), message.getGameView());
+			}
+			else if (callback.getMethod().equals("gameSelectAmount")) {
+				GameClientMessage message = (GameClientMessage) callback.getData();
+				session.getGame().getAmount(message.getMin(), message.getMax(), message.getMessage());
+			}
+			else if (callback.getMethod().equals("gameReveal")) {
+				GameClientMessage message = (GameClientMessage) callback.getData();
+				session.getGame().revealCards(message.getMessage(), message.getCardsView());
 			}
 		}
-		else if (callback.getMethod().equals("gameSelect")) {
-			GameClientMessage message = (GameClientMessage) callback.getData();
-			session.getGame().select(message.getMessage(), message.getGameView());
-		}
-		else if (callback.getMethod().equals("gameChooseAbility")) {
-			session.getGame().pickAbility((AbilityPickerView) callback.getData());
-		}
-		else if (callback.getMethod().equals("gameChoose")) {
-			GameClientMessage message = (GameClientMessage) callback.getData();
-			session.getGame().getChoice(message.getMessage(), message.getStrings());
-		}
-		else if (callback.getMethod().equals("gamePlayMana")) {
-			GameClientMessage message = (GameClientMessage) callback.getData();
-			session.getGame().playMana(message.getMessage(), message.getGameView());
-		}
-		else if (callback.getMethod().equals("gamePlayXMana")) {
-			GameClientMessage message = (GameClientMessage) callback.getData();
-			session.getGame().playXMana(message.getMessage(), message.getGameView());
-		}
-		else if (callback.getMethod().equals("gameSelectAmount")) {
-			GameClientMessage message = (GameClientMessage) callback.getData();
-			session.getGame().getAmount(message.getMin(), message.getMax());
-		}
-		else if (callback.getMethod().equals("gameReveal")) {
-			GameClientMessage message = (GameClientMessage) callback.getData();
-			session.getGame().revealCards(message.getMessage(), message.getCardsView());
+		else {
+			logger.warning("message out of sequence - ignoring");
 		}
 	}
 
