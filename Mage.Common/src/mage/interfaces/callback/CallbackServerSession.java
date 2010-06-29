@@ -29,7 +29,6 @@
 package mage.interfaces.callback;
 
 import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Logger;
 import mage.util.Logging;
@@ -39,56 +38,6 @@ import mage.util.Logging;
  * @author BetaSteward_at_googlemail.com
  */
 public class CallbackServerSession {
-
-//	private final ClientCallback callback = new ClientCallback();
-//	private Boolean waiting = false;
-//
-//	/**
-//	 *
-//	 * blocks the thread until a callback is requested
-//	 *
-//	 * @return ClientCallback - the callback requested
-//	 */
-//	public ClientCallback callback() {
-//		//TODO: use ReentrantLock instead
-//		do {
-//			callback.clear();
-//			synchronized(callback) {
-//				try {
-//					waiting = true;
-//					callback.wait();
-//					waiting.notify();
-//					waiting = false;
-//				} catch (InterruptedException ex) {}
-//			}
-//		} while (callback.getMethod() == null);
-//		return callback;
-//	}
-//
-//	/**
-//	 *
-//	 * requests a callback
-//	 *
-//	 * @param call - the callback to request
-//	 */
-//	public void setCallback(ClientCallback call) {
-//		//TODO: use ReentrantLock instead - wait until a lock is aquired by another thread before setting method and data
-//		synchronized(waiting) {
-//			if (!waiting) {
-//				try {
-//					waiting.wait();
-//				} catch (InterruptedException ex) {}
-//			}
-//		}
-//
-//		synchronized(callback) {
-//			callback.setMethod(call.getMethod());
-//			callback.setData(call.getData());
-//			callback.notify();
-//		}
-//	}
-
-
 
 	private final static Logger logger = Logging.getLogger(CallbackServerSession.class.getName());
 
@@ -138,6 +87,7 @@ public class CallbackServerSession {
 			}
 			callback.setMethod(call.getMethod());
 			callback.setData(call.getData());
+			callback.setMessageId(call.getMessageId());
 			callbackCalled.signal();
 		}
 		finally {

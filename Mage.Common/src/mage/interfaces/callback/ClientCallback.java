@@ -38,6 +38,7 @@ public class ClientCallback implements Serializable {
 	
 	private Object data;
 	private String method;
+	private int messageId;
 
 	public ClientCallback() {}
 
@@ -65,6 +66,14 @@ public class ClientCallback implements Serializable {
 
 	public void setMethod(String method) {
 		this.method = method;
+	}
+
+	public void setMessageId(int messageId) {
+		this.messageId = messageId;
+	}
+
+	public int getMessageId() {
+		return messageId;
 	}
 
 }

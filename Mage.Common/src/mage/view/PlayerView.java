@@ -66,10 +66,21 @@ public class PlayerView implements Serializable {
 		for (Card card: player.getGraveyard().values()) {
 			graveyard.add(new CardView(card));
 		}
-		for (Permanent permanent: game.getBattlefield().getAllPermanents(player.getId())) {
-			PermanentView view = new PermanentView(permanent);
-			battlefield.put(view.getId(), view);
+		for (Permanent permanent: game.getBattlefield().getAllPermanents()) {
+			if (showInBattlefield(permanent, game)) {
+				PermanentView view = new PermanentView(permanent);
+				battlefield.put(view.getId(), view);
+			}
 		}
+	}
+
+	private boolean showInBattlefield(Permanent permanent, GameState game) {
+
+		//show permanents controlled by player or attachments to permanents controlled by player
+		if (permanent.getAttachedTo() == null)
+			return permanent.getControllerId().equals(playerId);
+		else
+			return game.getPermanent(permanent.getAttachedTo()).getControllerId().equals(playerId);
 	}
 
 	public int getLife() {
