@@ -35,7 +35,6 @@
 package mage.client.game;
 
 import java.awt.GridBagConstraints;
-import java.util.logging.Level;
 import mage.client.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,11 +43,8 @@ import java.util.logging.Logger;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import mage.cards.decks.DeckCardLists;
-import mage.client.dialog.CombatDialog;
 import mage.client.dialog.ExileZoneDialog;
 import mage.client.dialog.PickChoiceDialog;
-import mage.client.dialog.PickNumberDialog;
 import mage.client.dialog.ShowCardsDialog;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.remote.Session;
@@ -73,13 +69,19 @@ public class GamePanel extends javax.swing.JPanel {
 	private UUID gameId;
 	private UUID playerId;
 	private Session session;
-	private CombatDialog combat = new CombatDialog();
-	private PickNumberDialog pickNumber = new PickNumberDialog();
 
     /** Creates new form GamePanel */
     public GamePanel() {
         initComponents();
     }
+
+	public void cleanUp() {
+		MageFrame.getCombatDialog().hideDialog();
+		MageFrame.getPickNumberDialog().hide();
+		for (ExileZoneDialog exile: exiles.values()) {
+			exile.hide();
+		}
+	}
 
 	public synchronized void showGame(UUID gameId, UUID playerId) {
 		this.gameId = gameId;
@@ -108,7 +110,6 @@ public class GamePanel extends javax.swing.JPanel {
 		this.feedbackPanel.clear();
 		this.btnConcede.setVisible(false);
 		this.btnStopWatching.setVisible(true);
-		this.btnCheat.setVisible(false);
 		this.pnlReplay.setVisible(false);
 		this.setVisible(true);
 		this.chatPanel.clear();
@@ -124,7 +125,6 @@ public class GamePanel extends javax.swing.JPanel {
 		this.feedbackPanel.clear();
 		this.btnConcede.setVisible(false);
 		this.btnStopWatching.setVisible(false);
-		this.btnCheat.setVisible(false);
 		this.pnlReplay.setVisible(true);
 		this.setVisible(true);
 		this.chatPanel.clear();
@@ -136,16 +136,21 @@ public class GamePanel extends javax.swing.JPanel {
 		this.chatPanel.disconnect();
 		this.players.clear();
 		this.pnlBattlefield.removeAll();
-		this.combat.hideDialog();
-		MageFrame.getDesktop().remove(combat);
+		MageFrame.getCombatDialog().hideDialog();
+//		MageFrame.getDesktop().remove(combat);
 		this.setVisible(false);
 	}
 
 	public synchronized void init(GameView game) {
-		combat.init(gameId, bigCard);
-		MageFrame.getDesktop().add(combat, JLayeredPane.POPUP_LAYER);
-		combat.setLocation(500, 300);
-		MageFrame.getDesktop().add(pickNumber, JLayeredPane.POPUP_LAYER);
+		MageFrame.getCombatDialog().init(gameId, bigCard);
+//		MageFrame.getDesktop().add(combat, JLayeredPane.POPUP_LAYER);
+		MageFrame.getCombatDialog().setLocation(500, 300);
+//		MageFrame.getDesktop().add(pickNumber, JLayeredPane.POPUP_LAYER);
+		addPlayers(game);
+		updateGame(game);
+	}
+
+	private void addPlayers(GameView game) {
 		this.players.clear();
 		this.pnlBattlefield.removeAll();
 		//arrange players in a circle with the session player at the bottom left
@@ -155,10 +160,12 @@ public class GamePanel extends javax.swing.JPanel {
 		int col = 0;
 		int row = 1;
 		int playerSeat = 0;
-		for (PlayerView player: game.getPlayers()) {
-			if (playerId.equals(player.getPlayerId()))
-				break;
-			playerSeat++;
+		if (playerId != null) {
+			for (PlayerView player: game.getPlayers()) {
+				if (playerId.equals(player.getPlayerId()))
+					break;
+				playerSeat++;
+			}
 		}
 		PlayerView player = game.getPlayers().get(playerSeat);
 		PlayAreaPanel sessionPlayer = new PlayAreaPanel(player, bigCard, gameId);
@@ -176,6 +183,8 @@ public class GamePanel extends javax.swing.JPanel {
 		if (oddNumber)
 			col++;
 		int playerNum = playerSeat + 1;
+		if (playerNum >= numSeats)
+			playerNum = 0;
 		while (true) {
 			if (row == 1)
 				col++;
@@ -202,7 +211,6 @@ public class GamePanel extends javax.swing.JPanel {
 			if (playerNum == playerSeat)
 				break;
 		}
-		updateGame(game);
 	}
 
 	public synchronized void updateGame(GameView game) {
@@ -229,20 +237,23 @@ public class GamePanel extends javax.swing.JPanel {
 			if (!exiles.containsKey(exile.getId())) {
 				ExileZoneDialog newExile = new ExileZoneDialog();
 				exiles.put(exile.getId(), newExile);
+				MageFrame.getDesktop().add(newExile, JLayeredPane.POPUP_LAYER);
+				newExile.show();
 			}
 			exiles.get(exile.getId()).loadCards(exile, bigCard, gameId);
 		}
 		if (game.getCombat().size() > 0) {
-			combat.showDialog(game.getCombat());
+			MageFrame.getCombatDialog().showDialog(game.getCombat());
 		}
 		else {
-			combat.hideDialog();
+			MageFrame.getCombatDialog().hideDialog();
 		}
 		this.revalidate();
 		this.repaint();
 	}
 
-	public void ask(String question) {
+	public void ask(String question, GameView gameView) {
+		updateGame(gameView);
 		this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, true, false);
 	}
 
@@ -309,11 +320,11 @@ public class GamePanel extends javax.swing.JPanel {
 	}
 
 	public void getAmount(int min, int max, String message) {
-		pickNumber.showDialog(min, max, message);
-		if (pickNumber.isCancel())
+		MageFrame.getPickNumberDialog().showDialog(min, max, message);
+		if (MageFrame.getPickNumberDialog().isCancel())
 			session.sendPlayerBoolean(gameId, false);
 		else
-			session.sendPlayerInteger(gameId, pickNumber.getAmount());
+			session.sendPlayerInteger(gameId, MageFrame.getPickNumberDialog().getAmount());
 	}
 
 	public void getChoice(String message, String[] choices) {
@@ -350,14 +361,12 @@ public class GamePanel extends javax.swing.JPanel {
         btnStopWatching = new javax.swing.JButton();
         bigCard = new mage.client.cards.BigCard();
         stack = new mage.client.cards.Cards();
-        btnCheat = new javax.swing.JButton();
         pnlReplay = new javax.swing.JPanel();
         btnStopReplay = new javax.swing.JButton();
         btnPreviousPlay = new javax.swing.JButton();
         btnNextPlay = new javax.swing.JButton();
-        pnlHand = new javax.swing.JPanel();
-        hand = new mage.client.cards.Cards();
         pnlBattlefield = new javax.swing.JPanel();
+        hand = new mage.client.cards.Cards();
         chatPanel = new mage.client.chat.ChatPanel();
 
         jSplitPane1.setBorder(null);
@@ -420,12 +429,7 @@ public class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        btnCheat.setText("?");
-        btnCheat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCheatActionPerformed(evt);
-            }
-        });
+        stack.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 25));
 
         btnStopReplay.setText("Stop");
         btnStopReplay.addActionListener(new java.awt.event.ActionListener() {
@@ -492,9 +496,7 @@ public class GamePanel extends javax.swing.JPanel {
                 .addComponent(btnConcede)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnStopWatching)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCheat)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
             .addComponent(bigCard, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
             .addComponent(feedbackPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
             .addComponent(stack, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
@@ -528,35 +530,20 @@ public class GamePanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(feedbackPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(stack, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(stack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
                 .addComponent(pnlReplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlGameInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConcede)
-                    .addComponent(btnStopWatching)
-                    .addComponent(btnCheat)))
-        );
-
-        pnlHand.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlHand.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 25));
-
-        hand.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight));
-
-        javax.swing.GroupLayout pnlHandLayout = new javax.swing.GroupLayout(pnlHand);
-        pnlHand.setLayout(pnlHandLayout);
-        pnlHandLayout.setHorizontalGroup(
-            pnlHandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(hand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
-        );
-        pnlHandLayout.setVerticalGroup(
-            pnlHandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(hand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                    .addComponent(btnStopWatching)))
         );
 
         pnlBattlefield.setLayout(new java.awt.GridBagLayout());
+
+        hand.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 25));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -566,15 +553,15 @@ public class GamePanel extends javax.swing.JPanel {
                 .addComponent(pnlGameInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlHand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(hand, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
                     .addComponent(pnlBattlefield, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(pnlBattlefield, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
+                .addComponent(pnlBattlefield, javax.swing.GroupLayout.DEFAULT_SIZE, 794, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(pnlHand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(hand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(pnlGameInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -591,7 +578,7 @@ public class GamePanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 847, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -621,18 +608,9 @@ public class GamePanel extends javax.swing.JPanel {
 		session.previousPlay();
 	}//GEN-LAST:event_btnPreviousPlayActionPerformed
 
-	private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheatActionPerformed
-		try {
-			session.cheat(gameId, DeckCardLists.load("cheat.dck"));
-		} catch (Exception ex) {
-			logger.log(Level.SEVERE, null, ex);
-		}
-	}//GEN-LAST:event_btnCheatActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private mage.client.game.AbilityPicker abilityPicker;
     private mage.client.cards.BigCard bigCard;
-    private javax.swing.JButton btnCheat;
     private javax.swing.JButton btnConcede;
     private javax.swing.JButton btnNextPlay;
     private javax.swing.JButton btnPreviousPlay;
@@ -650,7 +628,6 @@ public class GamePanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblTurn;
     private javax.swing.JPanel pnlBattlefield;
     private javax.swing.JPanel pnlGameInfo;
-    private javax.swing.JPanel pnlHand;
     private javax.swing.JPanel pnlReplay;
     private mage.client.cards.Cards stack;
     private javax.swing.JLabel txtActivePlayer;

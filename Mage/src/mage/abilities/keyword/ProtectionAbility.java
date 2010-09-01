@@ -31,13 +31,20 @@ package mage.abilities.keyword;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.StaticAbility;
+import mage.cards.Card;
 import mage.filter.Filter;
+import mage.filter.FilterCard;
+import mage.filter.FilterObject;
+import mage.filter.FilterPermanent;
+import mage.filter.FilterSpell;
+import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ProtectionAbility extends StaticAbility {
+public class ProtectionAbility extends StaticAbility<ProtectionAbility> {
 
 	protected Filter filter;
 
@@ -46,13 +53,41 @@ public class ProtectionAbility extends StaticAbility {
 		this.filter = filter;
 	}
 
+	public ProtectionAbility(final ProtectionAbility ability) {
+		super(ability);
+		this.filter = ability.filter.copy();
+	}
+
+	@Override
+	public ProtectionAbility copy() {
+		return new ProtectionAbility(this);
+	}
+
 	@Override
 	public String getRule() {
 		return "Protection from " + filter.getMessage();
 	}
 
 	public boolean canTarget(MageObject source) {
-		return !filter.match(source);
+		if (filter instanceof FilterPermanent) {
+			if (source instanceof Permanent)
+				return !filter.match(source);
+			return true;
+		}
+		if (filter instanceof FilterSpell) {
+			if (source instanceof Spell)
+				return !filter.match(source);
+			return true;
+		}
+		if (filter instanceof FilterCard) {
+			if (source instanceof Card)
+				return !filter.match(source);
+			return true;
+		}
+		if (filter instanceof FilterObject) {
+			return !filter.match(source);
+		}
+		return true;
 	}
 
 	public Filter getFilter() {

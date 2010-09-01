@@ -46,7 +46,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GoblinRuinblaster extends CardImpl {
+public class GoblinRuinblaster extends CardImpl<GoblinRuinblaster> {
 
 	public GoblinRuinblaster(UUID ownerId) {
 		super(ownerId, "Goblin Ruinblaster", new CardType[]{CardType.CREATURE}, "{2}{R}");
@@ -54,15 +54,28 @@ public class GoblinRuinblaster extends CardImpl {
 		this.color.setRed(true);
 		this.subtype.add("Goblin");
 		this.subtype.add("Shaman");
-		this.art = "123599_typ_reg_sty_010.jpg";
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(1);
 		this.addAbility(HasteAbility.getInstance());
 		KickerAbility ability = new KickerAbility(new EntersBattlefieldEffect(new DestroyTargetEffect()), false);
-		ability.getTargets().add(new TargetNonBasicLandPermanent());
+		ability.addTarget(new TargetNonBasicLandPermanent());
 		ability.addManaCost(new ColoredManaCost(ColoredManaSymbol.R));
 		this.addAbility(ability);
 
+	}
+
+	public GoblinRuinblaster(final GoblinRuinblaster card) {
+		super(card);
+	}
+
+	@Override
+	public GoblinRuinblaster copy() {
+		return new GoblinRuinblaster(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123599_typ_reg_sty_010.jpg";
 	}
 }
 

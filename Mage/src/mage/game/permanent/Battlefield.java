@@ -31,7 +31,7 @@ package mage.game.permanent;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -49,11 +49,23 @@ import mage.game.events.GameEvent;
  */
 public class Battlefield implements Serializable {
 
-	private Map<UUID, Permanent> field = new HashMap<UUID, Permanent>();
+	private Map<UUID, Permanent> field = new LinkedHashMap<UUID, Permanent>();
 
-	public void reset() {
+	public Battlefield () {}
+
+	public Battlefield(final Battlefield battlefield) {
+		for (UUID permId: battlefield.field.keySet()) {
+			field.put(permId, battlefield.field.get(permId).copy());
+		}
+	}
+
+	public Battlefield copy() {
+		return new Battlefield(this);
+	}
+
+	public void reset(Game game) {
 		for (Permanent perm: field.values()) {
-			perm.reset();
+			perm.reset(game);
 		}
 	}
 
@@ -143,6 +155,10 @@ public class Battlefield implements Serializable {
 
 	public Collection<Permanent> getAllPermanents() {
 		return field.values();
+	}
+
+	public Set<UUID> getAllPermanentIds() {
+		return field.keySet();
 	}
 
 	public List<Permanent> getAllActivePermanents() {

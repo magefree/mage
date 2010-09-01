@@ -89,17 +89,14 @@ public class Table implements Serializable {
 		return validator.getName();
 	}
 
-	public UUID joinTable(Player player, int seatNum) throws GameException {
-		if (seatNum >= numSeats || seatNum < 0) {
-			throw new GameException("Invalid seat number");
-		}
-		if (seats[seatNum].getPlayer() != null) {
+	public UUID joinTable(Player player, Seat seat) throws GameException {
+		if (seat.getPlayer() != null) {
 			throw new GameException("Seat is occupied.");
 		}
-		this.seats[seatNum].setPlayer(player);
+		seat.setPlayer(player);
 		if (isReady())
 			state = TableState.STARTING;
-		return this.seats[seatNum].getPlayer().getId();
+		return seat.getPlayer().getId();
 	}
 
 	private boolean isReady() {
@@ -112,6 +109,14 @@ public class Table implements Serializable {
 
 	public Seat[] getSeats() {
 		return seats;
+	}
+
+	public Seat getNextAvailableSeat() {
+		for (int i = 0; i < numSeats; i++ ) {
+			if (seats[i].getPlayer() == null)
+				return seats[i];
+		}
+		return null;
 	}
 
 	public void leaveTable(UUID playerId) {

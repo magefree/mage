@@ -29,7 +29,6 @@
 package mage.abilities.costs;
 
 import java.io.Serializable;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.target.Targets;
@@ -37,14 +36,13 @@ import mage.target.Targets;
 public interface Cost extends Serializable {
 
 	public String getText();
-	public boolean canPay(UUID playerId, Game game);
-	public boolean pay(Game game, boolean noMana);
+	public boolean canPay(Ability source, Game game);
+	public boolean pay(Game game, Ability source, boolean noMana);
 	public boolean isPaid();
 	public void clearPaid();
 	public void setPaid();
 	public Targets getTargets();
-	
-	public Ability getAbility();
-	public void setAbility(Ability ability);
+
+	public Cost copy();
 
 }

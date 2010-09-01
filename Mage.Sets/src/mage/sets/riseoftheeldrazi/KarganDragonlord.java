@@ -35,8 +35,9 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LevelAbility;
@@ -49,7 +50,7 @@ import mage.sets.RiseOfTheEldrazi;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class KarganDragonlord extends LevelerCard {
+public class KarganDragonlord extends LevelerCard<KarganDragonlord> {
 
 	public KarganDragonlord(UUID ownerId) {
 		super(ownerId, "Kargan Dragonlord", new CardType[]{CardType.CREATURE}, "{R}{R}");
@@ -57,20 +58,32 @@ public class KarganDragonlord extends LevelerCard {
 		this.subtype.add("Human");
 		this.subtype.add("Warrior");
 		this.color.setRed(true);
-		this.art = "127295_typ_reg_sty_010.jpg";
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
 
-		this.addAbility(new LevelUpAbility(new ManaCosts("{R}")));
-		Abilities abilities1 = new AbilitiesImpl();
+		this.addAbility(new LevelUpAbility(new ManaCostsImpl("{R}")));
+		Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
 		abilities1.add(FlyingAbility.getInstance());
 		this.getLevels().add(new LevelAbility(4, 7, abilities1, 4, 4));
-		Abilities abilities2 = new AbilitiesImpl();
+		Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
 		abilities2.add(FlyingAbility.getInstance());
 		abilities2.add(TrampleAbility.getInstance());
-		abilities2.add(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCosts("{R}")));
+		abilities2.add(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
 		this.getLevels().add(new LevelAbility(8, -1, abilities2, 8, 8));
 	}
 
+	public KarganDragonlord(final KarganDragonlord card) {
+		super(card);
+	}
+
+	@Override
+	public KarganDragonlord copy() {
+		return new KarganDragonlord(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "127295_typ_reg_sty_010.jpg";
+	}
 
 }

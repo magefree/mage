@@ -31,12 +31,7 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.sets.Magic2010;
 
@@ -44,7 +39,7 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LlanowarElves extends CardImpl {
+public class LlanowarElves extends CardImpl<LlanowarElves> {
 
 	public LlanowarElves(UUID ownerId) {
 		super(ownerId, "Llanowar Elves", new CardType[]{CardType.CREATURE}, "{G}");
@@ -52,10 +47,23 @@ public class LlanowarElves extends CardImpl {
 		this.subtype.add("Elf");
 		this.subtype.add("Druid");
 		this.color.setGreen(true);
-		this.art = "86938_typ_reg_sty_010.jpg";
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
 		this.addAbility(new GreenManaAbility());
+	}
+
+	public LlanowarElves(final LlanowarElves card) {
+		super(card);
+	}
+
+	@Override
+	public LlanowarElves copy() {
+		return new LlanowarElves(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "86938_typ_reg_sty_010.jpg";
 	}
 
 }

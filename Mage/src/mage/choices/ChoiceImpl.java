@@ -31,22 +31,35 @@ package mage.choices;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import mage.abilities.Ability;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ChoiceImpl implements Choice, Serializable {
+public class ChoiceImpl<T extends ChoiceImpl<T>> implements Choice, Serializable {
 
-	protected Ability source;
 	protected boolean chosen;
+	protected boolean required;
 	protected String choice;
 	protected List<String> choices = new ArrayList<String>();
 	protected String message;
 
 	public ChoiceImpl() {
+		this(false);
+	}
 
+	public ChoiceImpl(boolean required) {
+		this.required = required;
+	}
+
+	public ChoiceImpl(ChoiceImpl<T> choice) {
+		this.choice = choice.choice;
+		this.chosen = choice.chosen;
+		this.required = choice.required;
+		this.message = choice.message;
+		for (String c: choice.choices) {
+			this.choices.add(c);
+		}
 	}
 
 	@Override
@@ -84,13 +97,13 @@ public class ChoiceImpl implements Choice, Serializable {
 	}
 
 	@Override
-	public Ability getAbility() {
-		return source;
+	public boolean isRequired() {
+		return this.required;
 	}
 
 	@Override
-	public void setAbility(Ability source) {
-		this.source = source;
+	public T copy() {
+		return (T)new ChoiceImpl(this);
 	}
 
 }

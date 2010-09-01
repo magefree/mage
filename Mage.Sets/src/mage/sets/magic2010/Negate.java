@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Negate extends CardImpl {
+public class Negate extends CardImpl<Negate> {
 
 	private static FilterSpell filter = new FilterSpell("noncreature spell");
 
@@ -53,10 +53,22 @@ public class Negate extends CardImpl {
 		super(ownerId, "Negate", new CardType[]{CardType.INSTANT}, "{1}{U}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setBlue(true);
-		this.art = "109907_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetSpell(filter));
 		this.getSpellAbility().addEffect(new CounterTargetEffect());
 	}
 
+	public Negate(final Negate card) {
+		super(card);
+	}
+
+	@Override
+	public Negate copy() {
+		return new Negate(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "109907_typ_reg_sty_010.jpg";
+	}
 
 }

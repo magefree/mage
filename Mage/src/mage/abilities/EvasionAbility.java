@@ -36,7 +36,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface EvasionAbility {
+public interface EvasionAbility extends Ability {
 
 	public boolean canBlock(Permanent permanent, Game game);
 

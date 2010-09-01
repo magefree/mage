@@ -34,7 +34,7 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldStaticAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.BecomesCreatureSourceEOTEffect;
 import mage.abilities.effects.common.EntersBattlefieldTappedEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -49,16 +49,29 @@ import mage.sets.Worldwake;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CelestialColonnade extends CardImpl {
+public class CelestialColonnade extends CardImpl<CelestialColonnade> {
 
 	public CelestialColonnade(UUID ownerId) {
 		super(ownerId, "Celestial Colonnade", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Worldwake.getInstance().getId();
-		this.art = "126518_typ_reg_sty_010.jpg";
 		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
 		this.addAbility(new BlueManaAbility());
 		this.addAbility(new WhiteManaAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new CelestialColonnadeToken(), "land"), new ManaCosts("{3}{W}{U}")));
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new CelestialColonnadeToken(), "land"), new ManaCostsImpl("{3}{W}{U}")));
+	}
+
+	public CelestialColonnade(final CelestialColonnade card) {
+		super(card);
+	}
+
+	@Override
+	public CelestialColonnade copy() {
+		return new CelestialColonnade(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "126518_typ_reg_sty_010.jpg";
 	}
 
 }

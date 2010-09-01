@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common;
 
+import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
@@ -36,7 +37,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
+public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect<CreateDelayedTriggeredAbilityEffect> {
 
 	protected DelayedTriggeredAbility ability;
 
@@ -45,18 +46,28 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
 		this.ability = ability;
 	}
 
+	public CreateDelayedTriggeredAbilityEffect(final CreateDelayedTriggeredAbilityEffect effect) {
+		super(effect);
+		this.ability = effect.ability.copy();
+	}
+
 	@Override
-	public boolean apply(Game game) {
+	public CreateDelayedTriggeredAbilityEffect copy() {
+		return new CreateDelayedTriggeredAbilityEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
 		DelayedTriggeredAbility delayedAbility = (DelayedTriggeredAbility) ability.copy();
-		delayedAbility.setSourceId(this.source.getSourceId());
-		delayedAbility.setControllerId(this.source.getControllerId());
-		delayedAbility.getTargets().addAll(this.source.getTargets());
+		delayedAbility.setSourceId(source.getSourceId());
+		delayedAbility.setControllerId(source.getControllerId());
+		delayedAbility.getTargets().addAll(source.getTargets());
 		game.getState().addDelayedTriggeredAbility(delayedAbility);
 		return true;
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return ability.getRule();
 	}
 

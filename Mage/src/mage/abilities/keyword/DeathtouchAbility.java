@@ -36,7 +36,7 @@ import mage.abilities.StaticAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DeathtouchAbility extends StaticAbility {
+public class DeathtouchAbility extends StaticAbility<DeathtouchAbility> {
 
 	private static final DeathtouchAbility fINSTANCE =  new DeathtouchAbility();
 
@@ -56,5 +56,12 @@ public class DeathtouchAbility extends StaticAbility {
 	public String getRule() {
 		return "Deathtouch";
 	}
+
+	@Override
+	public DeathtouchAbility copy() {
+		return fINSTANCE;
+	}
+
+
 
 }

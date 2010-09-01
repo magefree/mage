@@ -266,14 +266,12 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 			session.joinTable(
 					roomId,
 					table.getTableId(),
-					0,
 					"Human",
 					DeckCardLists.load("test.dck")
 			);
 			session.joinTable(
 					roomId,
 					table.getTableId(),
-					1,
 					"Computer",
 					DeckCardLists.load("test.dck")
 			);

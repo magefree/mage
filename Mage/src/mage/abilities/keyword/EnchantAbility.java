@@ -38,11 +38,20 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EnchantAbility extends StaticAbility {
+public class EnchantAbility extends StaticAbility<EnchantAbility> {
 
 	public EnchantAbility(Outcome outcome, TargetPermanent target) {
 		super(Zone.BATTLEFIELD, new AttachEffect(outcome));
 		this.addTarget(target);
+	}
+
+	public EnchantAbility(final EnchantAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public EnchantAbility copy() {
+		return new EnchantAbility(this);
 	}
 
 	@Override

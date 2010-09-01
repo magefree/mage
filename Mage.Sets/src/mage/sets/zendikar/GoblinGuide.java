@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -49,7 +50,7 @@ import mage.sets.Zendikar;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GoblinGuide extends CardImpl {
+public class GoblinGuide extends CardImpl<GoblinGuide> {
 
 	public GoblinGuide(UUID ownerId) {
 		super(ownerId, "Goblin Guide", new CardType[]{CardType.CREATURE}, "{R}");
@@ -57,32 +58,54 @@ public class GoblinGuide extends CardImpl {
 		this.color.setRed(true);
 		this.subtype.add("Goblin");
 		this.subtype.add("Scout");
-		this.art = "123540_typ_reg_sty_010.jpg";
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
 		this.addAbility(HasteAbility.getInstance());
 		this.addAbility(new AttacksTriggeredAbility(new GoblinGuideEffect(), false));
 	}
 
+	public GoblinGuide(final GoblinGuide card) {
+		super(card);
+	}
+
+	@Override
+	public GoblinGuide copy() {
+		return new GoblinGuide(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123540_typ_reg_sty_010.jpg";
+	}
+
 }
 
-class GoblinGuideEffect extends OneShotEffect {
+class GoblinGuideEffect extends OneShotEffect<GoblinGuideEffect> {
 
 	public GoblinGuideEffect() {
 		super(Outcome.DrawCard);
 	}
 
+	public GoblinGuideEffect(final GoblinGuideEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
+	public GoblinGuideEffect copy() {
+		return new GoblinGuideEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
 		Player defender = null;
 		for (CombatGroup group: game.getCombat().getGroups()) {
-			if (group.getAttackers().contains(this.source.getSourceId())) {
+			if (group.getAttackers().contains(source.getSourceId())) {
 				defender = game.getPlayer(group.getDefenderId());
 				break;
 			}
 		}
 		if (defender != null) {
-			Cards cards = new CardsImpl(Zone.REVEALED);
+			Cards cards = new CardsImpl();
 			Card card = defender.getLibrary().getFromTop(game);
 			if (card != null) {
 				cards.add(card);
@@ -97,7 +120,7 @@ class GoblinGuideEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "defending player reveals the top card of his or her library. If it's a land card, that player puts it into his or her hand";
 	}
 }

@@ -31,11 +31,14 @@ package mage.sets.worldwake;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.Constants.Zone;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.sets.Worldwake;
@@ -48,13 +51,12 @@ import mage.watchers.WatcherImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SearingBlaze extends CardImpl {
+public class SearingBlaze extends CardImpl<SearingBlaze> {
 
 	public SearingBlaze(UUID ownerId) {
 		super(ownerId, "Searing Blaze", new CardType[]{CardType.INSTANT}, "{R}{R}");
 		this.expansionSetId = Worldwake.getInstance().getId();
 		this.color.setRed(true);
-		this.art = "126476_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetPlayer());
 		//TODO: change this to only allow creatures controlled by first target
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -62,31 +64,67 @@ public class SearingBlaze extends CardImpl {
 		this.watchers.add(new SearingBlazeWatcher(ownerId));
 	}
 
+	public SearingBlaze(final SearingBlaze card) {
+		super(card);
+	}
+
+	@Override
+	public SearingBlaze copy() {
+		return new SearingBlaze(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "126476_typ_reg_sty_010.jpg";
+	}
+
 }
 
-class SearingBlazeWatcher extends WatcherImpl {
+class SearingBlazeWatcher extends WatcherImpl<SearingBlazeWatcher> {
 
 	public SearingBlazeWatcher(UUID controllerId) {
-		super("LandPlayed");
+		super("LandPlayed", controllerId);
+	}
+
+	public SearingBlazeWatcher(final SearingBlazeWatcher watcher) {
+		super(watcher);
+	}
+
+	@Override
+	public SearingBlazeWatcher copy() {
+		return new SearingBlazeWatcher(this);
 	}
 
 	@Override
 	public void watch(GameEvent event, Game game) {
-		if (event.getType() == EventType.LAND_PLAYED && game.getOpponents(controllerId).contains(event.getPlayerId()))
-			condition = true;
+		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
+			Permanent permanent = game.getPermanent(event.getTargetId());
+			if (permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(event.getPlayerId())) {
+				condition = true;
+			}
+		}
 	}
 
 }
 
-class SearingBlazeEffect extends OneShotEffect {
+class SearingBlazeEffect extends OneShotEffect<SearingBlazeEffect> {
 
 	public SearingBlazeEffect() {
 		super(Outcome.Damage);
 	}
 
+	public SearingBlazeEffect(final SearingBlazeEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Watcher watcher = game.getState().getWatchers().get(this.source.getControllerId(), "LandPlayed");
+	public SearingBlazeEffect copy() {
+		return new SearingBlazeEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "LandPlayed");
 		Player player = game.getPlayer(source.getTargets().get(0).getFirstTarget());
 		Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
 		if (watcher != null && watcher.conditionMet()) {
@@ -109,7 +147,7 @@ class SearingBlazeEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "{this} deals 1 damage to target player and 1 damage to target creature that player controls.  \nLandfall — If you had a land enter the battlefield under your control this turn, {this} deals 3 damage to that player and 3 damage to that creature instead.";
 	}
 }

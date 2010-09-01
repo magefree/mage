@@ -37,7 +37,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DeclareAttackersStep extends Step {
+public class DeclareAttackersStep extends Step<DeclareAttackersStep> {
 
 	public DeclareAttackersStep() {
 		super(PhaseStep.DECLARE_ATTACKERS, true);
@@ -46,9 +46,13 @@ public class DeclareAttackersStep extends Step {
 		this.postStepEvent = EventType.DECLARE_ATTACKERS_STEP_POST;
 	}
 
+	public DeclareAttackersStep(final DeclareAttackersStep step) {
+		super(step);
+	}
+
 	@Override
 	public boolean skipStep(Game game, UUID activePlayerId) {
-		if (!game.getPlayer(activePlayerId).hasAvailableAttackers(game))
+		if (game.getPlayer(activePlayerId).getAvailableAttackers(game).size() == 0)
 			return true;
 		return super.skipStep(game, activePlayerId);
 	}
@@ -57,6 +61,11 @@ public class DeclareAttackersStep extends Step {
 	public void beginStep(Game game, UUID activePlayerId) {
 		super.beginStep(game, activePlayerId);
 		game.getCombat().selectAttackers(game);
+	}
+
+	@Override
+	public DeclareAttackersStep copy() {
+		return new DeclareAttackersStep(this);
 	}
 
 }

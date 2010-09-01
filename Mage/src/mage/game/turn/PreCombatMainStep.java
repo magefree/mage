@@ -35,13 +35,22 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PreCombatMainStep extends Step {
+public class PreCombatMainStep extends Step<PreCombatMainStep> {
 
 	public PreCombatMainStep() {
 		super(PhaseStep.PRECOMBAT_MAIN, true);
 		this.stepEvent = EventType.PRECOMBAT_MAIN_STEP;
 		this.preStepEvent = EventType.PRECOMBAT_MAIN_STEP_PRE;
 		this.postStepEvent = EventType.PRECOMBAT_MAIN_STEP_POST;
+	}
+
+	public PreCombatMainStep(final PreCombatMainStep step) {
+		super(step);
+	}
+
+	@Override
+	public PreCombatMainStep copy() {
+		return new PreCombatMainStep(this);
 	}
 
 }

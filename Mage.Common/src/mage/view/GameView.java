@@ -35,6 +35,7 @@ import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
 import mage.MageObject;
 import mage.game.ExileZone;
+import mage.game.Game;
 import mage.game.GameState;
 import mage.game.combat.CombatGroup;
 import mage.game.stack.Spell;
@@ -60,40 +61,40 @@ public class GameView implements Serializable {
 	private int turn;
 	private boolean special = false;
 
-	public GameView(GameState game) {
-		for (Player player: game.getPlayers().values()) {
-			players.add(new PlayerView(player, game));
+	public GameView(GameState state, Game game) {
+		for (Player player: state.getPlayers().values()) {
+			players.add(new PlayerView(player, state, game));
 		}
-		for (StackObject stackObject: game.getStack()) {
+		for (StackObject stackObject: state.getStack()) {
 			if (stackObject instanceof StackAbility) {
 				MageObject object = game.getObject(stackObject.getSourceId());
 				if (object != null)
-					stack.add(new StackAbilityView((StackAbility)stackObject, object.getName()));
+					stack.put(stackObject.getId(), new StackAbilityView((StackAbility)stackObject, object.getName()));
 				else
-					stack.add(new StackAbilityView((StackAbility)stackObject, ""));
+					stack.put(null, new StackAbilityView((StackAbility)stackObject, ""));
 			}
 			else {
-				stack.add(new CardView((Spell)stackObject));
+				stack.put(stackObject.getId(), new CardView((Spell)stackObject));
 			}
 		}
-		for (ExileZone exileZone: game.getExile().getExileZones()) {
-			exiles.add(new ExileView(exileZone));
+		for (ExileZone exileZone: state.getExile().getExileZones()) {
+			exiles.add(new ExileView(exileZone, game));
 		}
-		this.phase = game.getTurn().getPhaseType();
-		this.step = game.getTurn().getStepType();
-		this.turn = game.getTurnNum();
-		if (game.getActivePlayerId() != null)
-			this.activePlayerName = game.getPlayer(game.getActivePlayerId()).getName();
+		this.phase = state.getTurn().getPhaseType();
+		this.step = state.getTurn().getStepType();
+		this.turn = state.getTurnNum();
+		if (state.getActivePlayerId() != null)
+			this.activePlayerName = state.getPlayer(state.getActivePlayerId()).getName();
 		else
 			this.activePlayerName = "";
-		if (game.getPriorityPlayerId() != null)
-			this.priorityPlayerName = game.getPlayer(game.getPriorityPlayerId()).getName();
+		if (state.getPriorityPlayerId() != null)
+			this.priorityPlayerName = state.getPlayer(state.getPriorityPlayerId()).getName();
 		else
 			this.priorityPlayerName = "";
-		for (CombatGroup combatGroup: game.getCombat().getGroups()) {
-			combat.add(new CombatGroupView(combatGroup, game));
+		for (CombatGroup combatGroup: state.getCombat().getGroups()) {
+			combat.add(new CombatGroupView(combatGroup, state));
 		}
-		this.special = game.getSpecialActions().getControlledBy(game.getPriorityPlayerId()).size() > 0;
+		this.special = state.getSpecialActions().getControlledBy(state.getPriorityPlayerId()).size() > 0;
 	}
 
 	public List<PlayerView> getPlayers() {

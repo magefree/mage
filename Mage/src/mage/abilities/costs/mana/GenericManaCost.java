@@ -31,13 +31,18 @@ package mage.abilities.costs.mana;
 import mage.Mana;
 import mage.players.ManaPool;
 
-public class GenericManaCost extends ManaCostImpl implements ManaCost {
+public class GenericManaCost extends ManaCostImpl<GenericManaCost> {
 
 	protected int mana;
 
 	public GenericManaCost(int mana) {
 		this.mana = mana;
 		this.options.addMana(Mana.ColorlessMana(mana));
+	}
+
+	public GenericManaCost(GenericManaCost cost) {
+		super(cost);
+		this.mana = cost.mana;
 	}
 
 	public int getMana() {
@@ -74,6 +79,11 @@ public class GenericManaCost extends ManaCostImpl implements ManaCost {
 	@Override
 	public boolean testPay(Mana testMana) {
 		return testMana.count() > 0;
+	}
+
+	@Override
+	public GenericManaCost copy() {
+		return new GenericManaCost(this);
 	}
 
 }

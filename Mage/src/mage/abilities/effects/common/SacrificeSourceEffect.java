@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,23 +38,32 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SacrificeSourceEffect extends OneShotEffect {
+public class SacrificeSourceEffect extends OneShotEffect<SacrificeSourceEffect> {
 
 	public SacrificeSourceEffect() {
 		super(Outcome.Sacrifice);
 	}
 
+	public SacrificeSourceEffect(final SacrificeSourceEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Permanent permanent = game.getPermanent(this.source.getSourceId());
+	public SacrificeSourceEffect copy() {
+		return new SacrificeSourceEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
-			return permanent.sacrifice(this.source.getSourceId(), game);
+			return permanent.sacrifice(source.getSourceId(), game);
 		}
 		return false;
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "sacrifice {this}";
 	}
 

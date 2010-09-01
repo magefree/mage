@@ -35,7 +35,7 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldStaticAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.BecomesCreatureSourceEOTEffect;
 import mage.abilities.effects.common.BoostPowerSourceVariableEffect;
 import mage.abilities.effects.common.EntersBattlefieldTappedEffect;
@@ -49,16 +49,30 @@ import mage.sets.Worldwake;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LavaclawReaches extends CardImpl {
+public class LavaclawReaches extends CardImpl<LavaclawReaches> {
 
 	public LavaclawReaches(UUID ownerId) {
 		super(ownerId, "Lavaclaw Reaches", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Worldwake.getInstance().getId();
-		this.art = "126532_typ_reg_sty_010.jpg";
+//		this.art = "126532_typ_reg_sty_010.jpg";
 		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
 		this.addAbility(new BlackManaAbility());
 		this.addAbility(new RedManaAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new LavaclawReachesToken(), "land"), new ManaCosts("{1}{B}{R}")));
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new LavaclawReachesToken(), "land"), new ManaCostsImpl("{1}{B}{R}")));
+	}
+
+	public LavaclawReaches(final LavaclawReaches card) {
+		super(card);
+	}
+
+	@Override
+	public LavaclawReaches copy() {
+		return new LavaclawReaches(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "126532_typ_reg_sty_010.jpg";
 	}
 
 }
@@ -73,7 +87,7 @@ class LavaclawReachesToken extends Token {
 		color.setBlack(true);
 		power = new MageInt(2);
 		toughness = new MageInt(2);
-		addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostPowerSourceVariableEffect(Duration.EndOfTurn), new ManaCosts("{X}")));
+		addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostPowerSourceVariableEffect(Duration.EndOfTurn), new ManaCostsImpl("{X}")));
 	}
 
 }

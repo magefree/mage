@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.players.Player;
@@ -37,7 +38,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LoseLifeTargetEffect extends OneShotEffect {
+public class LoseLifeTargetEffect extends OneShotEffect<LoseLifeTargetEffect> {
 
 	protected int amount;
 
@@ -50,9 +51,19 @@ public class LoseLifeTargetEffect extends OneShotEffect {
 		return amount;
 	}
 
+	public LoseLifeTargetEffect(final LoseLifeTargetEffect effect) {
+		super(effect);
+		this.amount = effect.amount;
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Player player = game.getPlayer(this.source.getFirstTarget());
+	public LoseLifeTargetEffect copy() {
+		return new LoseLifeTargetEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Player player = game.getPlayer(source.getFirstTarget());
 		if (player != null) {
 			player.loseLife(amount, game);
 			return true;
@@ -61,8 +72,8 @@ public class LoseLifeTargetEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
-		return "Target " + this.source.getTargets().get(0).getTargetName() + " loses " + Integer.toString(amount) + " life";
+	public String getText(Ability source) {
+		return "Target " + source.getTargets().get(0).getTargetName() + " loses " + Integer.toString(amount) + " life";
 	}
 
 

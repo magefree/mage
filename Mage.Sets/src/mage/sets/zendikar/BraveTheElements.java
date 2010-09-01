@@ -31,6 +31,7 @@ package mage.sets.zendikar;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.abilities.Ability;
 import mage.abilities.effects.common.GainAbilityControlledEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
@@ -45,15 +46,28 @@ import mage.sets.Zendikar;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BraveTheElements extends CardImpl {
+public class BraveTheElements extends CardImpl<BraveTheElements> {
 
 	public BraveTheElements(UUID ownerId) {
 		super(ownerId, "Brave the Elements", new CardType[]{CardType.INSTANT}, "{W}");
 		this.expansionSetId = Zendikar.getInstance().getId();
 		this.color.setWhite(true);
-		this.art = "123638_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addChoice(new ChoiceColor());
 		this.getSpellAbility().addEffect(new BraveTheElementsEffect());
+	}
+
+	public BraveTheElements(final BraveTheElements card) {
+		super(card);
+	}
+
+	@Override
+	public BraveTheElements copy() {
+		return new BraveTheElements(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123638_typ_reg_sty_010.jpg";
 	}
 
 }
@@ -71,9 +85,20 @@ class BraveTheElementsEffect extends GainAbilityControlledEffect {
 		filter2.setUseColor(true);
 	}
 
+	public BraveTheElementsEffect(final BraveTheElementsEffect effect) {
+		super(effect);
+		this.filter1 = effect.filter1.copy();
+		this.filter2 = effect.filter2.copy();
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		ChoiceColor choice = (ChoiceColor) this.source.getChoices().get(0);
+	public BraveTheElementsEffect copy() {
+		return new BraveTheElementsEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
 		filter2.setColor(choice.getColor());
 		filter2.setMessage(choice.getChoice());
 		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter1, source.getControllerId())) {
@@ -83,7 +108,7 @@ class BraveTheElementsEffect extends GainAbilityControlledEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Choose a color. White creatures you control gain protection from the chosen color until end of turn";
 	}
 

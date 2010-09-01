@@ -30,7 +30,7 @@ package mage.abilities.effects.common;
 
 import java.util.UUID;
 import mage.Constants.Outcome;
-import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 
@@ -38,7 +38,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RemoveDelayedTriggeredAbilityEffect extends OneShotEffect {
+public class RemoveDelayedTriggeredAbilityEffect extends OneShotEffect<RemoveDelayedTriggeredAbilityEffect> {
 
 	protected UUID abilityId;
 
@@ -47,14 +47,24 @@ public class RemoveDelayedTriggeredAbilityEffect extends OneShotEffect {
 		this.abilityId = abilityId;
 	}
 
+	public RemoveDelayedTriggeredAbilityEffect(final RemoveDelayedTriggeredAbilityEffect effect) {
+		super(effect);
+		this.abilityId = effect.abilityId;
+	}
+
 	@Override
-	public boolean apply(Game game) {
+	public RemoveDelayedTriggeredAbilityEffect copy() {
+		return new RemoveDelayedTriggeredAbilityEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
 		game.getState().removeDelayedTriggeredAbility(abilityId);
 		return true;
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		//TODO: improve this
 		return "remove triggered ability";
 	}

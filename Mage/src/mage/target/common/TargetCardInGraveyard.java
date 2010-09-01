@@ -30,6 +30,7 @@ package mage.target.common;
 
 import java.util.UUID;
 import mage.Constants.Zone;
+import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -39,7 +40,7 @@ import mage.target.TargetCard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetCardInGraveyard extends TargetCard {
+public class TargetCardInGraveyard extends TargetCard<TargetCardInGraveyard> {
 
 	public TargetCardInGraveyard() {
 		this(1, 1, new FilterCard());
@@ -58,12 +59,21 @@ public class TargetCardInGraveyard extends TargetCard {
 		this.targetName = filter.getMessage();
 	}
 
+	public TargetCardInGraveyard(final TargetCardInGraveyard target) {
+		super(target);
+	}
+
 	@Override
-	public boolean canTarget(UUID id, Game game) {
-		Card card = game.getPlayer(this.source.getControllerId()).getGraveyard().get(id);
+	public boolean canTarget(UUID id, Ability source, Game game) {
+		Card card = game.getPlayer(source.getControllerId()).getGraveyard().get(id, game);
 		if (card != null)
 			return filter.match(card);
 		return false;
+	}
+
+	@Override
+	public TargetCardInGraveyard copy() {
+		return new TargetCardInGraveyard(this);
 	}
 
 }

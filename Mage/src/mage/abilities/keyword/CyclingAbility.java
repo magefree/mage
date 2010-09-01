@@ -30,6 +30,7 @@ package mage.abilities.keyword;
 
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
+import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.DiscardSourceCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -42,11 +43,20 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CyclingAbility extends ActivatedAbilityImpl {
+public class CyclingAbility extends ActivatedAbilityImpl<CyclingAbility> {
 
 	public CyclingAbility(ManaCosts costs) {
 		super(Zone.HAND, new CycleEffect(), costs);
 		this.addCost(new DiscardSourceCost());
+	}
+
+	public CyclingAbility(final CyclingAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public CyclingAbility copy() {
+		return new CyclingAbility(this);
 	}
 
 	@Override
@@ -56,21 +66,30 @@ public class CyclingAbility extends ActivatedAbilityImpl {
 
 }
 
-class CycleEffect extends OneShotEffect {
+class CycleEffect extends OneShotEffect<CycleEffect> {
 
 	public CycleEffect() {
 		super(Outcome.DrawCard);
 	}
 
+	public CycleEffect(final CycleEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Player player = game.getPlayer(this.source.getControllerId());
+	public CycleEffect copy() {
+		return new CycleEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Player player = game.getPlayer(source.getControllerId());
 		player.drawCards(1, game);
 		return true;
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Draw a card";
 	}
 

@@ -28,14 +28,19 @@
 
 package mage.abilities;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TriggeredAbilities extends ArrayList<TriggeredAbility> {
+public class TriggeredAbilities extends AbilitiesImpl<TriggeredAbility> {
+
+	public TriggeredAbilities() {}
+
+	public TriggeredAbilities(final TriggeredAbilities abilities) {
+		super(abilities);
+	}
 
 	public TriggeredAbilities getControlledBy(UUID controllerId) {
 		TriggeredAbilities controlledBy = new TriggeredAbilities();
@@ -44,6 +49,11 @@ public class TriggeredAbilities extends ArrayList<TriggeredAbility> {
 				controlledBy.add(ability);
 		}
 		return controlledBy;
+	}
+	
+	@Override
+	public TriggeredAbilities copy() {
+		return new TriggeredAbilities(this);
 	}
 
 }

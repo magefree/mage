@@ -41,7 +41,7 @@ public class ExileZone extends CardsImpl implements Serializable {
 
 	private UUID id;
 	private String name;
-	private boolean hidden = false;
+	private boolean hidden;
 
 	public ExileZone(UUID id, String name) {
 		this(id, name, false);
@@ -54,6 +54,13 @@ public class ExileZone extends CardsImpl implements Serializable {
 		this.hidden = hidden;
 	}
 
+	public ExileZone(final ExileZone zone) {
+		super(zone);
+		this.id = zone.id;
+		this.name = zone.name;
+		this.hidden = zone.hidden;
+	}
+
 	public UUID getId() {
 		return id;
 	}
@@ -64,5 +71,10 @@ public class ExileZone extends CardsImpl implements Serializable {
 
 	public boolean isHidden() {
 		return hidden;
+	}
+
+	@Override
+	public ExileZone copy() {
+		return new ExileZone(this);
 	}
 }

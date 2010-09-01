@@ -32,9 +32,14 @@ import java.io.IOException;
 import mage.game.stack.SpellStack;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.Stack;
 import java.util.UUID;
+import java.util.logging.Logger;
 import mage.Constants.CardType;
 import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.Outcome;
@@ -42,6 +47,7 @@ import mage.Constants.PhaseStep;
 import mage.Constants.RangeOfInfluence;
 import mage.Constants.Zone;
 import mage.MageObject;
+import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbilities;
 import mage.abilities.TriggeredAbility;
@@ -50,6 +56,7 @@ import mage.abilities.effects.ContinuousEffects;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterEquipment;
 import mage.filter.common.FilterFortification;
@@ -66,34 +73,64 @@ import mage.game.events.PlayerQueryEvent;
 import mage.game.events.PlayerQueryEventSource;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
+import mage.game.turn.Phase;
+import mage.game.turn.Step;
 import mage.game.turn.Turn;
 import mage.players.PlayerList;
 import mage.players.Players;
 import mage.target.TargetPlayer;
+import mage.util.Logging;
 
-public abstract class GameImpl implements Game, Serializable {
+public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
+
+	private final static transient Logger logger = Logging.getLogger(GameImpl.class.getName());
+
+	private static FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
+	private static FilterLegendaryPermanent filterLegendary = new FilterLegendaryPermanent();
+	private static FilterLegendaryPermanent filterLegendName = new FilterLegendaryPermanent();
+	private static FilterEquipment filterEquipment = new FilterEquipment();
+	private static FilterFortification filterFortification = new FilterFortification();
 
 	private transient Stack<Integer> savedStates = new Stack<Integer>();
-	private Object customData;
+	private transient Object customData;
 
-	protected UUID id;
-	protected boolean ready = false;
+	protected final UUID id;
+	protected boolean ready;
 	protected transient TableEventSource tableEventSource = new TableEventSource();
 	protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
 
+	protected Map<UUID, Card> gameCards = new HashMap<UUID, Card>();
 	protected GameState state;
 	protected UUID startingPlayerId;
 	protected UUID choosingPlayerId;
-	protected Player winner;
+	protected UUID winnerId;
 	protected transient GameStates gameStates = new GameStates();
 	protected RangeOfInfluence range;
 	protected MultiplayerAttackOption attackOption;
 
+	@Override
+	public abstract T copy();
+
 	public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range) {
-		id = UUID.randomUUID();
+		this.id = UUID.randomUUID();
 		this.range = range;
 		this.attackOption = attackOption;
-		state = new GameState();
+		this.state = new GameState();
+	}
+
+	public GameImpl(final GameImpl<T> game) {
+		this.id = game.id;
+		this.ready = game.ready;
+		this.startingPlayerId = game.startingPlayerId;
+		this.choosingPlayerId = game.choosingPlayerId;
+		this.winnerId = game.winnerId;
+		this.range = game.range;
+		this.attackOption = game.attackOption;
+		this.state = game.state.copy();
+		for (UUID cardId: game.gameCards.keySet()) {
+			this.gameCards.put(cardId, game.gameCards.get(cardId).copy());
+		}
 	}
 
 	@Override
@@ -109,6 +146,14 @@ public abstract class GameImpl implements Game, Serializable {
 	@Override
 	public void setCustomData(Object data) {
 		this.customData = data;
+	}
+
+	@Override
+	public void loadCards(Set<Card> cards, UUID ownerId) {
+		for (Card card: cards) {
+			card.setOwnerId(ownerId);
+			gameCards.put(card.getId(), card);
+		}
 	}
 
 	@Override
@@ -133,7 +178,23 @@ public abstract class GameImpl implements Game, Serializable {
 
 	@Override
 	public MageObject getObject(UUID objectId) {
-		return state.getObject(objectId);
+		MageObject object;
+		if (state.getBattlefield().containsPermanent(objectId)) {
+			object = state.getBattlefield().getPermanent(objectId);
+			object.setZone(Zone.BATTLEFIELD);
+			return object;
+		}
+		object = getCard(objectId);
+		if (object != null)
+			return object;
+		for (StackObject item: state.getStack()) {
+			if (item.getId().equals(objectId)) {
+				item.setZone(Zone.STACK);
+				return item;
+			}
+		}
+
+		return null;
 	}
 
 	@Override
@@ -143,12 +204,17 @@ public abstract class GameImpl implements Game, Serializable {
 
 	@Override
 	public Card getCard(UUID cardId) {
-		return state.getCard(cardId);
+		return gameCards.get(cardId);
 	}
 
 	@Override
 	public GameStates getGameStates() {
 		return gameStates;
+	}
+	
+	@Override
+	public void loadGameStates(GameStates states) {
+		this.gameStates = states;
 	}
 
 	@Override
@@ -178,9 +244,9 @@ public abstract class GameImpl implements Game, Serializable {
 
 	@Override
 	public String getWinner() {
-		if (winner == null)
+		if (winnerId == null)
 			return "Game is a draw";
-		return "Player " + winner.getName() + " is the winner";
+		return "Player " + state.getPlayer(winnerId).getName() + " is the winner";
 	}
 
 	@Override
@@ -190,7 +256,9 @@ public abstract class GameImpl implements Game, Serializable {
 
 	@Override
 	public void bookmarkState() {
-		savedStates.push(gameStates.getSize());
+		saveState();
+		logger.fine("Bookmarking state: " + gameStates.getSize());
+		savedStates.push(gameStates.getSize() - 1);
 	}
 
 	@Override
@@ -223,7 +291,7 @@ public abstract class GameImpl implements Game, Serializable {
 			player = players.getNext(this);
 		}
 
-		winner = findWinner();
+		winnerId = findWinner();
 
 		saveState();
 	}
@@ -247,8 +315,8 @@ public abstract class GameImpl implements Game, Serializable {
 			targetPlayer.setRequired(true);
 			targetPlayer.setTargetName("starting player");
 			Player choosingPlayer = getPlayer(pickChoosingPlayer());
-			if (choosingPlayer.chooseTarget(Outcome.Benefit, targetPlayer, this)) {
-				startingPlayerId = targetPlayer.getTargets().get(0);
+			if (choosingPlayer.chooseTarget(Outcome.Benefit, targetPlayer, null, this)) {
+				startingPlayerId = ((List<UUID>)targetPlayer.getTargets()).get(0);
 				fireInformEvent(state.getPlayer(startingPlayerId).getName() + " will start");
 			}
 			else {
@@ -276,10 +344,10 @@ public abstract class GameImpl implements Game, Serializable {
 
 	}
 
-	protected Player findWinner() {
+	protected UUID findWinner() {
 		for (Player player: state.getPlayers().values()) {
 			if (player.hasWon() || (!player.hasLost() && !player.hasLeft())) {
-				return player;
+				return player.getId();
 			}
 		}
 		return null;
@@ -316,7 +384,7 @@ public abstract class GameImpl implements Game, Serializable {
 	public void mulligan(UUID playerId) {
 		Player player = getPlayer(playerId);
 		int numCards = player.getHand().size();
-		player.getLibrary().addAll(player.getHand());
+		player.getLibrary().addAll(player.getHand().getCards(this));
 		player.getHand().clear();
 		player.shuffleLibrary(this);
 		player.drawCards(numCards - 1, this);
@@ -357,7 +425,6 @@ public abstract class GameImpl implements Game, Serializable {
 					player.priority(this);
 					if (isGameOver()) return;
 					applyEffects();
-					saveState();
 				}
 				if (isGameOver()) return;
 				if (allPassed()) {
@@ -367,7 +434,6 @@ public abstract class GameImpl implements Game, Serializable {
 						applyEffects();
 						state.getPlayers().resetPassed();
 						fireUpdatePlayersEvent();
-						saveState();
 						break;
 					}
 					else
@@ -401,8 +467,8 @@ public abstract class GameImpl implements Game, Serializable {
 	}
 
 	@Override
-	public void addEffect(ContinuousEffect continuousEffect) {
-		state.addEffect(continuousEffect);
+	public void addEffect(ContinuousEffect continuousEffect, Ability source) {
+		state.addEffect(continuousEffect, source);
 	}
 
 	@Override
@@ -414,9 +480,9 @@ public abstract class GameImpl implements Game, Serializable {
 	public boolean checkStateAndTriggered() {
 		boolean somethingHappened = false;
 		//20091005 - 115.5
-		while (true) {
+		while (!this.isGameOver()) {
 			if (!checkStateBasedActions() ) {
-				if (!checkTriggered()) {
+				if (this.isGameOver() || !checkTriggered()) {
 					break;
 				}
 			}
@@ -454,7 +520,7 @@ public abstract class GameImpl implements Game, Serializable {
 		for (Player player: state.getPlayers().values()) {
 			if (!player.hasLost() && (player.getLife() <= 0 || player.isEmptyDraw() || player.getCounters().getCount("Poison") >= 10)) {
 				player.lost(this);
-				somethingHappened = true;
+				return false;
 			}
 		}
 		for (Permanent perm: getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
@@ -477,7 +543,6 @@ public abstract class GameImpl implements Game, Serializable {
 			}
 		}
 		//20091005 - 704.5j, 801.14
-		FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
 		if (getBattlefield().countAll(filterPlaneswalker) > 1) {  //don't bother checking if less than 2 planeswalkers in play
 			for (Permanent planeswalker: getBattlefield().getAllActivePermanents(CardType.PLANESWALKER)) {
 				for (String planeswalkertype: planeswalker.getSubtype()) {
@@ -494,10 +559,9 @@ public abstract class GameImpl implements Game, Serializable {
 			}
 		}
 		//20091005 - 704.5k, 801.12
-		FilterLegendaryPermanent filterLegendary = new FilterLegendaryPermanent();
 		if (getBattlefield().countAll(filterLegendary) > 1) {  //don't bother checking if less than 2 legends in play
 			for (Permanent legend: getBattlefield().getAllActivePermanents(filterLegendary)) {
-				FilterLegendaryPermanent filterLegendName = new FilterLegendaryPermanent();
+				filterLegendName.getName().clear();
 				filterLegendName.getName().add(legend.getName());
 				if (getBattlefield().count(filterLegendName, legend.getControllerId(), this) > 1) {
 					for (Permanent dupLegend: getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
@@ -508,7 +572,7 @@ public abstract class GameImpl implements Game, Serializable {
 			}
 		}
 		//20091005 - 704.5p
-		for (Permanent perm: getBattlefield().getAllActivePermanents(new FilterEquipment())) {
+		for (Permanent perm: getBattlefield().getAllActivePermanents(filterEquipment)) {
 			if (perm.getAttachedTo() != null) {
 				Permanent creature = getPermanent(perm.getAttachedTo());
 				if (creature == null) {
@@ -520,7 +584,7 @@ public abstract class GameImpl implements Game, Serializable {
 				}
 			}
 		}
-		for (Permanent perm: getBattlefield().getAllActivePermanents(new FilterFortification())) {
+		for (Permanent perm: getBattlefield().getAllActivePermanents(filterFortification)) {
 			if (perm.getAttachedTo() != null) {
 				Permanent land = getPermanent(perm.getAttachedTo());
 				if (land == null) {
@@ -625,12 +689,12 @@ public abstract class GameImpl implements Game, Serializable {
 
 	@Override
 	public void fireChooseEvent(UUID playerId, Choice choice) {
-		playerQueryEventSource.choose(playerId, choice.getMessage(), choice.getChoices().toArray(new String[0]));
+		playerQueryEventSource.choose(playerId, choice.getMessage(), ((List<String>)choice.getChoices()).toArray(new String[0]));
 	}
 
 	@Override
 	public void informPlayers(String message) {
-		state.addMessage(message);
+//		state.addMessage(message);
 		fireInformEvent(message);
 	}
 
@@ -659,15 +723,15 @@ public abstract class GameImpl implements Game, Serializable {
 		return state.getTurn();
 	}
 
-//	@Override
-//	public TurnPhase getPhase() {
-//		return state.getPhase();
-//	}
-//
-//	@Override
-//	public PhaseStep getStep() {
-//		return state.getStep();
-//	}
+	@Override
+	public Phase getPhase() {
+		return state.getTurn().getPhase();
+	}
+
+	@Override
+	public Step getStep() {
+		return state.getTurn().getStep();
+	}
 
 	@Override
 	public Battlefield getBattlefield() {
@@ -737,6 +801,7 @@ public abstract class GameImpl implements Game, Serializable {
 	}
 
 	private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+		//initialize transient objects during deserialization
 		in.defaultReadObject();
 		savedStates = new Stack<Integer>();
 		tableEventSource = new TableEventSource();

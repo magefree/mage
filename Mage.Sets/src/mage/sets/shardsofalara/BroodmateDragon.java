@@ -42,7 +42,7 @@ import mage.sets.ShardsOfAlara;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BroodmateDragon extends CardImpl {
+public class BroodmateDragon extends CardImpl<BroodmateDragon> {
 
 	private static DragonToken dragonToken = new DragonToken();
 
@@ -53,12 +53,25 @@ public class BroodmateDragon extends CardImpl {
 		this.color.setRed(true);
 		this.color.setGreen(true);
 		this.color.setBlack(true);
-		this.art = "116186_typ_reg_sty_010.jpg";
 		this.power = new MageInt(4);
 		this.toughness = new MageInt(4);
 
 		this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(dragonToken), false));
 		this.addAbility(FlyingAbility.getInstance());
+	}
+
+	public BroodmateDragon(final BroodmateDragon card) {
+		super(card);
+	}
+
+	@Override
+	public BroodmateDragon copy() {
+		return new BroodmateDragon(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "116186_typ_reg_sty_010.jpg";
 	}
 
 }

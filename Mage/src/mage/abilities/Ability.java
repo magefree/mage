@@ -31,6 +31,7 @@ package mage.abilities;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
+import mage.Constants.AbilityType;
 import mage.Constants.Zone;
 import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.Cost;
@@ -48,11 +49,12 @@ import mage.target.Targets;
 public interface Ability extends Serializable {
 
 	public UUID getId();
+	public AbilityType getAbilityType();
 	public UUID getControllerId();
 	public UUID getSourceId();
 	public Costs<Cost> getCosts();
 	public void addCost(Cost cost);
-	public ManaCosts getManaCosts();
+	public ManaCosts<ManaCost> getManaCosts();
 	public void addManaCost(ManaCost cost);
 	public List<AlternativeCost> getAlternativeCosts();
 	public void addAlternativeCost(AlternativeCost cost);
@@ -64,14 +66,14 @@ public interface Ability extends Serializable {
 	public Choices getChoices();
 	public void addChoice(Choice choice);
 	public Zone getZone();
+	public boolean isUsesStack();
 	public String getRule();
-	public String getName();
 	public boolean activate(Game game, boolean noMana);
 	public boolean resolve(Game game);
 	public void reset(Game game);
 
 	public void setControllerId(UUID controllerId);
 	public void setSourceId(UUID sourceID);
+
 	public Ability copy();
-	
 }

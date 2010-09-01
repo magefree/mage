@@ -38,9 +38,8 @@ import java.beans.PropertyVetoException;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLayeredPane;
-import mage.client.MageFrame;
 import mage.client.cards.BigCard;
+import mage.client.util.Config;
 import mage.view.ExileView;
 
 /**
@@ -57,17 +56,21 @@ public class ExileZoneDialog extends MageDialog {
 
 	public void loadCards(ExileView exile, BigCard bigCard, UUID gameId) {
 		this.title = exile.getName();
+		boolean changed = false;
+		changed = cards.loadCards(exile, bigCard, gameId);
 		if (exile.size() > 0) {
-			cards.loadCards(exile, bigCard, gameId);
-			if (getParent() != MageFrame.getDesktop() || this.isClosed)
-				MageFrame.getDesktop().add(this, JLayeredPane.POPUP_LAYER);
-//			try {
-//				this.setIcon(false);
-//			} catch (PropertyVetoException ex) {
-//				Logger.getLogger(ShowCardsDialog.class.getName()).log(Level.SEVERE, null, ex);
-//			}
+			show();
+			if (changed) {
+				try {
+					this.setIcon(false);
+				} catch (PropertyVetoException ex) {
+					Logger.getLogger(ExileZoneDialog.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			}
 		}
-		this.setVisible(exile.size() > 0);
+		else {
+			hide();
+		}
 	}
 	
     /** This method is called from within the constructor to
@@ -82,6 +85,8 @@ public class ExileZoneDialog extends MageDialog {
         cards = new mage.client.cards.Cards();
 
         setIconifiable(true);
+
+        cards.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 25));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

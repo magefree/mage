@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,15 +38,24 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ExileSourceEffect extends OneShotEffect {
+public class ExileSourceEffect extends OneShotEffect<ExileSourceEffect> {
 
 	public ExileSourceEffect() {
 		super(Outcome.Exile);
 	}
 
+	public ExileSourceEffect(final ExileSourceEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Permanent permanent = game.getPermanent(this.source.getSourceId());
+	public ExileSourceEffect copy() {
+		return new ExileSourceEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
 			return permanent.moveToExile(null, "", game);
 		}
@@ -53,7 +63,7 @@ public class ExileSourceEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Exile {this}";
 	}
 

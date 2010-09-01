@@ -43,5 +43,7 @@ public interface ManaCost extends Cost {
 	public ManaCost getUnpaid();
 	public ManaOptions getOptions();
 	public boolean testPay(Mana testMana);
-	
+
+	@Override
+	public ManaCost copy();
 }

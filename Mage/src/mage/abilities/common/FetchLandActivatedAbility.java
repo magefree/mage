@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FetchLandActivatedAbility extends ActivatedAbilityImpl {
+public class FetchLandActivatedAbility extends ActivatedAbilityImpl<FetchLandActivatedAbility> {
 
 	public FetchLandActivatedAbility(String[] subTypes) {
 		super(Zone.BATTLEFIELD, null);
@@ -61,11 +61,20 @@ public class FetchLandActivatedAbility extends ActivatedAbilityImpl {
 		addEffect(new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay));
 	}
 
+	public FetchLandActivatedAbility(FetchLandActivatedAbility ability) {
+		super(ability);
+	}
+
 	private String subTypeNames(String[] subTypes) {
 		StringBuilder sb = new StringBuilder();
 		for (String subType: subTypes) {
 			sb.append(subType).append(" or ");
 		}
 		return sb.substring(0, sb.length() - 4);
+	}
+
+	@Override
+	public FetchLandActivatedAbility copy() {
+		return new FetchLandActivatedAbility(this);
 	}
 }

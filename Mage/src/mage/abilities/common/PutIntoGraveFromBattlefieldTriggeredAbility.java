@@ -40,10 +40,14 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PutIntoGraveFromBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
+public class PutIntoGraveFromBattlefieldTriggeredAbility extends TriggeredAbilityImpl<PutIntoGraveFromBattlefieldTriggeredAbility> {
 
 	public PutIntoGraveFromBattlefieldTriggeredAbility(Effect effect, boolean optional) {
 		super(Zone.GRAVEYARD, effect, optional);
+	}
+
+	public PutIntoGraveFromBattlefieldTriggeredAbility(PutIntoGraveFromBattlefieldTriggeredAbility ability) {
+		super(ability);
 	}
 
 	@Override
@@ -61,6 +65,11 @@ public class PutIntoGraveFromBattlefieldTriggeredAbility extends TriggeredAbilit
 	@Override
 	public String getRule() {
 		return "When {this} is put into a graveyard from the battlefield, " + super.getRule();
+	}
+
+	@Override
+	public PutIntoGraveFromBattlefieldTriggeredAbility copy() {
+		return new PutIntoGraveFromBattlefieldTriggeredAbility(this);
 	}
 
 }

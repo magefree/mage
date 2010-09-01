@@ -44,28 +44,50 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FontOfMythos extends CardImpl {
+public class FontOfMythos extends CardImpl<FontOfMythos> {
 
 	public FontOfMythos(UUID ownerId) {
 		super(ownerId, "Font of Mythos", new CardType[]{CardType.ARTIFACT}, "{4}");
 		this.expansionSetId = Conflux.getInstance().getId();
-		this.art = "119800_typ_reg_sty_010.jpg";
 		this.addAbility(new FontOfMythosAbility());
+	}
+
+	public FontOfMythos(final FontOfMythos card) {
+		super(card);
+	}
+
+	@Override
+	public FontOfMythos copy() {
+		return new FontOfMythos(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "119800_typ_reg_sty_010.jpg";
 	}
 
 }
 
-class FontOfMythosAbility extends TriggeredAbilityImpl {
+class FontOfMythosAbility extends TriggeredAbilityImpl<FontOfMythosAbility> {
 
 	public FontOfMythosAbility() {
 		super(Zone.BATTLEFIELD, new DrawCardTargetEffect(2));
+	}
+
+	public FontOfMythosAbility(final FontOfMythosAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public FontOfMythosAbility copy() {
+		return new FontOfMythosAbility(this);
 	}
 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.DRAW_STEP_PRE) {
 			this.addTarget(new TargetPlayer());
-			this.targets.get(0).getTargets().add(event.getPlayerId());
+			this.targets.get(0).addTarget(event.getPlayerId(), this, game);
 			trigger(game, event.getPlayerId());
 			return true;
 		}

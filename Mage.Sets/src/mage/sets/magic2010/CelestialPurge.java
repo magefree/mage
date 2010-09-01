@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CelestialPurge extends CardImpl {
+public class CelestialPurge extends CardImpl<CelestialPurge> {
 
 	private static FilterPermanent filter = new FilterPermanent("black or red permanent");
 
@@ -57,9 +57,22 @@ public class CelestialPurge extends CardImpl {
 		super(ownerId, "Celestial Purge", new CardType[]{CardType.INSTANT}, "{1}{W}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setWhite(true);
-		this.art = "118751_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetPermanent(filter, TargetController.ANY));
 		this.getSpellAbility().addEffect(new ExileTargetEffect());
+	}
+
+	public CelestialPurge(final CelestialPurge card) {
+		super(card);
+	}
+
+	@Override
+	public CelestialPurge copy() {
+		return new CelestialPurge(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "118751_typ_reg_sty_010.jpg";
 	}
 
 }

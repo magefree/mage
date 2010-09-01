@@ -37,22 +37,42 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterPermanent extends FilterObject<Permanent> {
+public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<Permanent, FilterPermanent<T>> {
 	protected List<UUID> ownerId = new ArrayList<UUID>();
-	protected boolean notOwner = false;
+	protected boolean notOwner;
 	protected List<UUID> controllerId = new ArrayList<UUID>();
-	protected boolean notController = false;
-	protected boolean useTapped = false;
+	protected boolean notController;
+	protected boolean useTapped;
 	protected boolean tapped;
-	protected boolean useFlipped = false;
+	protected boolean useFlipped;
 	protected boolean flipped;
-	protected boolean useFaceup = false;
+	protected boolean useFaceup;
 	protected boolean faceup;
-	protected boolean usePhased = false;
+	protected boolean usePhased;
 	protected boolean phasedIn;
 
 	public FilterPermanent() {
 		super("permanent");
+	}
+
+	public FilterPermanent(FilterPermanent<T> filter) {
+		super(filter);
+		for (UUID oId: filter.ownerId) {
+			this.ownerId.add(oId);
+		}
+		this.notOwner = filter.notOwner;
+		for (UUID oId: filter.controllerId) {
+			this.controllerId.add(oId);
+		}
+		this.notController = filter.notController;
+		this.useTapped = filter.useTapped;
+		this.tapped = filter.tapped;
+		this.useFlipped = filter.useFlipped;
+		this.flipped = filter.flipped;
+		this.useFaceup = filter.useFaceup;
+		this.faceup = filter.faceup;
+		this.usePhased = filter.usePhased;
+		this.phasedIn = filter.phasedIn;
 	}
 
 	public FilterPermanent(String name) {
@@ -62,27 +82,27 @@ public class FilterPermanent extends FilterObject<Permanent> {
 	@Override
 	public boolean match(Permanent permanent) {
 		if (!super.match(permanent))
-			return false;
+			return notFilter;
 
 		if (ownerId.size() > 0 && ownerId.contains(permanent.getOwnerId()) == notOwner)
-			return false;
+			return notFilter;
 
 		if (controllerId.size() > 0 && controllerId.contains(permanent.getControllerId()) == notController)
-			return false;
+			return notFilter;
 
 		if (useTapped && permanent.isTapped() != tapped)
-			return false;
+			return notFilter;
 
 		if (useFlipped && permanent.isFlipped() != flipped)
-			return false;
+			return notFilter;
 
 		if (useFaceup && permanent.isFaceUp() != faceup)
-			return false;
+			return notFilter;
 
 		if (usePhased && permanent.isPhasedIn() != phasedIn)
-			return false;
+			return notFilter;
 
-		return true;
+		return !notFilter;
 	}
 
 	public List<UUID> getOwnerId() {
@@ -135,6 +155,11 @@ public class FilterPermanent extends FilterObject<Permanent> {
 		if (controllerId.size() > 0 && controllerId.contains(testControllerId) == notController)
 			return false;
 		return true;
+	}
+
+	@Override
+	public FilterPermanent<T> copy() {
+		return new FilterPermanent<T>(this);
 	}
 
 }

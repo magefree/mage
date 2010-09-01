@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Duration;
+import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.filter.Filter;
 import mage.game.Game;
@@ -40,7 +41,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PreventAllDamageToEffect extends PreventionEffectImpl {
+public class PreventAllDamageToEffect extends PreventionEffectImpl<PreventAllDamageToEffect> {
 
 	protected Filter filter;
 
@@ -49,20 +50,30 @@ public class PreventAllDamageToEffect extends PreventionEffectImpl {
 		this.filter = filter;
 	}
 
+	public PreventAllDamageToEffect(final PreventAllDamageToEffect effect) {
+		super(effect);
+		this.filter = effect.filter.copy();
+	}
+
 	@Override
-	public boolean apply(Game game) {
+	public PreventAllDamageToEffect copy() {
+		return new PreventAllDamageToEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
 		return true;
 	}
 
 	@Override
-	public boolean replaceEvent(GameEvent event, Game game) {
+	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
 		event.setAmount(0);
 		return false;
 	}
 
 	@Override
-	public boolean applies(GameEvent event, Game game) {
-		if (super.applies(event, game)) {
+	public boolean applies(GameEvent event, Ability source, Game game) {
+		if (super.applies(event, source, game)) {
 			Permanent permanent = game.getPermanent(event.getTargetId());
 			if (permanent != null) {
 				if (filter.match(permanent))
@@ -78,7 +89,7 @@ public class PreventAllDamageToEffect extends PreventionEffectImpl {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Prevent all damage that would be dealt to " + filter.getMessage() + " " + duration.toString();
 	}
 

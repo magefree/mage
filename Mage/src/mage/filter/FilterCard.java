@@ -29,7 +29,9 @@
 package mage.filter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.cards.Card;
 
@@ -37,12 +39,12 @@ import mage.cards.Card;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterCard extends FilterObject<Card> {
+public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, FilterCard<T>> {
 
 	protected List<UUID> ownerId = new ArrayList<UUID>();
-	protected boolean notOwner = false;
+	protected boolean notOwner;
 	protected List<UUID> expansionSetId = new ArrayList<UUID>();
-	protected boolean notExpansionSetId = false;
+	protected boolean notExpansionSetId;
 
 	public FilterCard() {
 		super("card");
@@ -52,18 +54,30 @@ public class FilterCard extends FilterObject<Card> {
 		super(name);
 	}
 
+	public FilterCard(FilterCard<T> filter) {
+		super(filter);
+		for (UUID oId: filter.ownerId) {
+			this.ownerId.add(oId);
+		}
+		this.notOwner = filter.notOwner;
+		for (UUID eId: filter.expansionSetId) {
+			this.expansionSetId.add(eId);
+		}
+		this.notExpansionSetId = filter.notExpansionSetId;
+	}
+
 	@Override
 	public boolean match(Card card) {
 		if (!super.match(card))
-			return false;
+			return notFilter;
 
 		if (ownerId.size() > 0 && ownerId.contains(card.getOwnerId()) == notOwner)
-			return false;
+			return notFilter;
 
 		if (expansionSetId.size() > 0 && expansionSetId.contains(card.getExpansionSetId()) == notExpansionSetId)
-			return false;
+			return notFilter;
 		
-		return true;
+		return !notFilter;
 	}
 
 	public List<UUID> getOwnerId() {
@@ -88,4 +102,18 @@ public class FilterCard extends FilterObject<Card> {
 		return true;
 	}
 
+	public Set<Card> filter(Set<Card> cards) {
+		Set<Card> filtered = new HashSet<Card>();
+		for (Card card: cards) {
+			if (match(card)) {
+				filtered.add(card);
+			}
+		}
+		return filtered;
+	}
+
+	@Override
+	public FilterCard<T> copy() {
+		return new FilterCard<T>(this);
+	}
 }

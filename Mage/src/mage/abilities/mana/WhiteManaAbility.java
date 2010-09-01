@@ -35,11 +35,20 @@ import mage.abilities.effects.common.ManaEffect;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WhiteManaAbility extends BasicManaAbility {
+public class WhiteManaAbility extends BasicManaAbility<WhiteManaAbility> {
 
 	public WhiteManaAbility() {
 		super(new ManaEffect(Mana.WhiteMana));
 		this.netMana.setWhite(1);
+	}
+
+	public WhiteManaAbility(WhiteManaAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public WhiteManaAbility copy() {
+		return new WhiteManaAbility(this);
 	}
 
 }

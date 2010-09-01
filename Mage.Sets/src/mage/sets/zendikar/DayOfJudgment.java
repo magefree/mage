@@ -39,14 +39,27 @@ import mage.sets.Zendikar;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DayOfJudgment extends CardImpl {
+public class DayOfJudgment extends CardImpl<DayOfJudgment> {
 
 	public DayOfJudgment(UUID ownerId) {
 		super(ownerId, "Day of Judgment", new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
 		this.expansionSetId = Zendikar.getInstance().getId();
 		this.color.setWhite(true);
-		this.art = "123645_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent("creatures")));
+	}
+
+	public DayOfJudgment(final DayOfJudgment card) {
+		super(card);
+	}
+
+	@Override
+	public DayOfJudgment copy() {
+		return new DayOfJudgment(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123645_typ_reg_sty_010.jpg";
 	}
 
 }

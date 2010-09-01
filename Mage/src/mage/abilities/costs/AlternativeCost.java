@@ -28,13 +28,14 @@
 
 package mage.abilities.costs;
 
+import mage.abilities.Ability;
 import mage.game.Game;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AlternativeCost extends CostsImpl<Cost> {
+public abstract class AlternativeCost<T extends AlternativeCost<T>> extends CostsImpl<Cost> {
 
 	protected String name;
 
@@ -42,11 +43,16 @@ public class AlternativeCost extends CostsImpl<Cost> {
 		this.name = name;
 	}
 
+	public AlternativeCost(final AlternativeCost<T> cost) {
+		super(cost);
+		this.name = cost.name;
+	}
+
 	public String getName() {
 		return name;
 	}
 
-	public boolean isAvailable(Game game) {
+	public boolean isAvailable(Game game, Ability source) {
 		return true;
 	}
 }

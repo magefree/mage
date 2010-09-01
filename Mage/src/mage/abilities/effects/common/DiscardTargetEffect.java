@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.players.Player;
@@ -37,7 +38,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DiscardTargetEffect extends OneShotEffect {
+public class DiscardTargetEffect extends OneShotEffect<DiscardTargetEffect> {
 
 	protected int amount;
 
@@ -46,9 +47,19 @@ public class DiscardTargetEffect extends OneShotEffect {
 		this.amount = amount;
 	}
 
+	public DiscardTargetEffect(final DiscardTargetEffect effect) {
+		super(effect);
+		this.amount = effect.amount;
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Player player = game.getPlayer(this.source.getFirstTarget());
+	public DiscardTargetEffect copy() {
+		return new DiscardTargetEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Player player = game.getPlayer(source.getFirstTarget());
 		if (player != null) {
 			player.discard(amount, game);
 			return true;
@@ -57,7 +68,7 @@ public class DiscardTargetEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Target player discards " + Integer.toString(amount) + " card" + (amount == 1?"":"s");
 	}
 

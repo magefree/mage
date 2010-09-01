@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.players.Player;
@@ -37,7 +38,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DrawCardControllerEffect extends OneShotEffect {
+public class DrawCardControllerEffect extends OneShotEffect<DrawCardControllerEffect> {
 
 	protected int amount;
 
@@ -46,9 +47,19 @@ public class DrawCardControllerEffect extends OneShotEffect {
 		this.amount = amount;
 	}
 
+	public DrawCardControllerEffect(final DrawCardControllerEffect effect) {
+		super(effect);
+		this.amount = effect.amount;
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Player player = game.getPlayer(this.source.getControllerId());
+	public DrawCardControllerEffect copy() {
+		return new DrawCardControllerEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Player player = game.getPlayer(source.getControllerId());
 		if (player != null) {
 			player.drawCards(amount, game);
 			return true;
@@ -57,7 +68,7 @@ public class DrawCardControllerEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("draw ").append(Integer.toString(amount)).append(" card").append((amount == 1?"":"s"));
 		return sb.toString();

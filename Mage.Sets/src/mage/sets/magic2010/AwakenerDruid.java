@@ -50,7 +50,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AwakenerDruid extends CardImpl {
+public class AwakenerDruid extends CardImpl<AwakenerDruid> {
 
 	private static FilterLandPermanent filter = new FilterLandPermanent("Forest");
 
@@ -64,7 +64,6 @@ public class AwakenerDruid extends CardImpl {
 		this.color.setGreen(true);
 		this.subtype.add("Human");
 		this.subtype.add("Druid");
-		this.art = "121576_typ_reg_sty_010.jpg";
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
 		Ability ability = new EntersBattlefieldTriggeredAbility(new AwakenerDruidEffect(), false);
@@ -72,9 +71,23 @@ public class AwakenerDruid extends CardImpl {
 		this.addAbility(ability);
 	}
 
+
+	public AwakenerDruid(final AwakenerDruid card) {
+		super(card);
+	}
+
+	@Override
+	public AwakenerDruid copy() {
+		return new AwakenerDruid(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121576_typ_reg_sty_010.jpg";
+	}
 }
 
-class AwakenerDruidEffect extends ContinuousEffectImpl {
+class AwakenerDruidEffect extends ContinuousEffectImpl<AwakenerDruidEffect> {
 
 	protected static AwakenerDruidToken token = new AwakenerDruidToken();
 
@@ -82,9 +95,18 @@ class AwakenerDruidEffect extends ContinuousEffectImpl {
 		super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
 	}
 
+	public AwakenerDruidEffect(final AwakenerDruidEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Game game) {
-		Permanent permanent = game.getPermanent(this.source.getFirstTarget());
+	public AwakenerDruidEffect copy() {
+		return new AwakenerDruidEffect(this);
+	}
+
+	@Override
+	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
 			switch (layer) {
 				case TypeChangingEffects_4:
@@ -114,12 +136,12 @@ class AwakenerDruidEffect extends ContinuousEffectImpl {
 	}
 
 	@Override
-	public boolean apply(Game game) {
+	public boolean apply(Game game, Ability source) {
 		return false;
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "target Forest becomes a 4/5 green Treefolk creature for as long as {this} is on the battlefield. It's still a land.";
 	}
 

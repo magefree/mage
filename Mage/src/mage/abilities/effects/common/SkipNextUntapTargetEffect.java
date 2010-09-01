@@ -31,6 +31,7 @@ package mage.abilities.effects.common;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.PhaseStep;
+import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -40,25 +41,34 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SkipNextUntapTargetEffect extends ReplacementEffectImpl {
+public class SkipNextUntapTargetEffect extends ReplacementEffectImpl<SkipNextUntapTargetEffect> {
 
 	public SkipNextUntapTargetEffect() {
 		super(Duration.OneUse, Outcome.Detriment);
 	}
 
+	public SkipNextUntapTargetEffect(final SkipNextUntapTargetEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
+	public SkipNextUntapTargetEffect copy() {
+		return new SkipNextUntapTargetEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
 		return false;
 	}
 
 	@Override
-	public boolean replaceEvent(GameEvent event, Game game) {
+	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
 		used = true;
 		return true;
 	}
 
 	@Override
-	public boolean applies(GameEvent event, Game game) {
+	public boolean applies(GameEvent event, Ability source, Game game) {
 		if (game.getTurn().getStepType() == PhaseStep.UNTAP &&
 				event.getType() == EventType.UNTAP &&
 				event.getTargetId().equals(source.getFirstTarget())) {
@@ -68,7 +78,7 @@ public class SkipNextUntapTargetEffect extends ReplacementEffectImpl {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Target " + source.getTargets().get(0).getTargetName() + " doesn't untap during its controller's next untap step";
 	}
 

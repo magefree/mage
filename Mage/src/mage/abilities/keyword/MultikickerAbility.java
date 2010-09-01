@@ -37,10 +37,20 @@ import mage.game.Game;
  */
 public class MultikickerAbility extends KickerAbility {
 
-	int activateCount = 0;
+	int activateCount;
 
 	public MultikickerAbility(Effect effect, boolean replaces) {
 		super(effect, replaces);
+	}
+
+	public MultikickerAbility(final MultikickerAbility ability) {
+		super(ability);
+		this.activateCount = ability.activateCount;
+	}
+
+	@Override
+	public MultikickerAbility copy() {
+		return new MultikickerAbility(this);
 	}
 
 	@Override
@@ -77,7 +87,7 @@ public class MultikickerAbility extends KickerAbility {
 		}
 		if (costs.size() > 0)
 			sb.append(costs.getText());
-		sb.append(":").append(effects.getText());
+		sb.append(":").append(effects.getText(this));
 		if (replaces)
 			sb.append(" instead");
 		return sb.toString();

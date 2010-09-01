@@ -36,7 +36,7 @@ import mage.abilities.StaticAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LifelinkAbility extends StaticAbility {
+public class LifelinkAbility extends StaticAbility<LifelinkAbility> {
 
 	private static final LifelinkAbility fINSTANCE =  new LifelinkAbility();
 
@@ -55,6 +55,11 @@ public class LifelinkAbility extends StaticAbility {
 	@Override
 	public String getRule() {
 		return "Lifelink";
+	}
+
+	@Override
+	public LifelinkAbility copy() {
+		return fINSTANCE;
 	}
 
 }

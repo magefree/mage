@@ -39,23 +39,21 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Choices extends ArrayList<Choice>{
+public class Choices extends ArrayList<Choice> {
 
-	protected Ability source;
 	protected Outcome outcome;
 
-	public Choices(Ability ability) {
-		this.source = ability;
+	public Choices() {}
+
+	public Choices(final Choices choices) {
+		this.outcome = choices.outcome;
+		for (Choice choice: choices) {
+			this.add(choice.copy());
+		}
 	}
 
-	public void setSource(Ability ability) {
-		this.source = ability;
-	}
-
-	@Override
-	public boolean add(Choice choice) {
-		choice.setAbility(source);
-		return super.add(choice);
+	public Choices copy() {
+		return new Choices(this);
 	}
 
 	public List<Choice> getUnchosen() {
@@ -81,9 +79,9 @@ public class Choices extends ArrayList<Choice>{
 		return true;
 	}
 
-	public boolean choose(Game game) {
+	public boolean choose(Game game, Ability source) {
 		if (this.size() > 0) {
-			Player player = game.getPlayer(this.source.getControllerId());
+			Player player = game.getPlayer(source.getControllerId());
 			while (!isChosen()) {
 				Choice choice = this.getUnchosen().get(0);
 				if (!player.choose(outcome, choice, game))

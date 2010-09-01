@@ -41,18 +41,31 @@ import mage.sets.Zendikar;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SteppeLynx extends CardImpl {
+public class SteppeLynx extends CardImpl<SteppeLynx> {
 
 	public SteppeLynx(UUID ownerId) {
 		super(ownerId, "Steppe Lynx", new CardType[]{CardType.CREATURE}, "{W}");
 		this.expansionSetId = Zendikar.getInstance().getId();
 		this.subtype.add("Cat");
 		this.color.setWhite(true);
-		this.art = "123546_typ_reg_sty_010.jpg";
 		this.power = new MageInt(0);
 		this.toughness = new MageInt(1);
 
 		this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
+	}
+
+	public SteppeLynx(final SteppeLynx card) {
+		super(card);
+	}
+
+	@Override
+	public SteppeLynx copy() {
+		return new SteppeLynx(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123546_typ_reg_sty_010.jpg";
 	}
 
 }

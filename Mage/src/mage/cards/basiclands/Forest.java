@@ -35,10 +35,14 @@ import mage.abilities.mana.GreenManaAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Forest extends BasicLand {
+public abstract class Forest<T extends Forest<T>> extends BasicLand<T> {
 
 	public Forest(UUID ownerId) {
 		super(ownerId, "Forest", new GreenManaAbility());
+	}
+
+	public Forest(Forest land) {
+		super(land);
 	}
 
 }

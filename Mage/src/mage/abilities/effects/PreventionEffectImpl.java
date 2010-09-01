@@ -30,6 +30,7 @@ package mage.abilities.effects;
 
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -38,15 +39,18 @@ import mage.game.events.GameEvent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class PreventionEffectImpl extends ReplacementEffectImpl {
-
+public abstract class PreventionEffectImpl<T extends PreventionEffectImpl<T>> extends ReplacementEffectImpl<T> {
 
 	public PreventionEffectImpl(Duration duration) {
 		super(duration, Outcome.PreventDamage);
 	}
 
+	public PreventionEffectImpl(final PreventionEffectImpl effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean applies(GameEvent event, Game game) {
+	public boolean applies(GameEvent event, Ability source, Game game) {
 		switch (event.getType()) {
 			case DAMAGE_CREATURE:
 			case DAMAGE_PLAYER:

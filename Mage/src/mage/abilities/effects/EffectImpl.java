@@ -36,37 +36,30 @@ import mage.abilities.Ability;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class EffectImpl implements Effect {
+public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 
-	protected UUID id;
-	protected String text = "";
-	protected Ability source;
-	protected Outcome outcome;
+//	protected final UUID id;
+	protected final Outcome outcome;
 
 	public EffectImpl(Outcome outcome) {
-		this.id = UUID.randomUUID();
+//		this.id = UUID.randomUUID();
 		this.outcome = outcome;
 	}
-	
-	@Override
-	public String getText() {
-		return text;
+
+	public EffectImpl(final EffectImpl effect) {
+//		this.id = effect.id;
+		this.outcome = effect.outcome;
 	}
 
 	@Override
-	public Ability getSource() {
-		return source;
+	public String getText(Ability source) {
+		return "";
 	}
 
-	@Override
-	public void setSource(Ability ability) {
-		this.source = ability;
-	}
-
-	@Override
-	public UUID getId() {
-		return id;
-	}
+//	@Override
+//	public UUID getId() {
+//		return id;
+//	}
 
 	@Override
 	public Outcome getOutcome() {

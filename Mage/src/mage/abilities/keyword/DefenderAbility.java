@@ -36,7 +36,7 @@ import mage.abilities.StaticAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DefenderAbility extends StaticAbility {
+public class DefenderAbility extends StaticAbility<DefenderAbility> {
 
 	private static final DefenderAbility fINSTANCE =  new DefenderAbility();
 
@@ -55,6 +55,11 @@ public class DefenderAbility extends StaticAbility {
 	@Override
 	public String getRule() {
 		return "Defender";
+	}
+
+	@Override
+	public DefenderAbility copy() {
+		return fINSTANCE;
 	}
 
 }

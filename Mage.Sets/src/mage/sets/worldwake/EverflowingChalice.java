@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.Mana;
+import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.AddCountersSourceEffect;
@@ -46,24 +47,46 @@ import mage.sets.Worldwake;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EverflowingChalice extends CardImpl {
+public class EverflowingChalice extends CardImpl<EverflowingChalice> {
 
 	public EverflowingChalice(UUID ownerId) {
 		super(ownerId, "Everflowing Chalice", new CardType[]{CardType.ARTIFACT}, "{0}");
 		this.expansionSetId = Worldwake.getInstance().getId();
-		this.art = "126542_typ_reg_sty_010.jpg";
 		MultikickerAbility ability = new MultikickerAbility(new AddCountersSourceEffect("charge", 1), false);
 		ability.addManaCost(new GenericManaCost(2));
 		this.addAbility(ability);
 		this.addAbility(new EverflowingChaliceAbility());
 	}
 
+	public EverflowingChalice(final EverflowingChalice card) {
+		super(card);
+	}
+
+	@Override
+	public EverflowingChalice copy() {
+		return new EverflowingChalice(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "126542_typ_reg_sty_010.jpg";
+	}
+
 }
 
-class EverflowingChaliceAbility extends ManaAbility {
+class EverflowingChaliceAbility extends ManaAbility<EverflowingChaliceAbility> {
 
 	public EverflowingChaliceAbility() {
 		super(Zone.BATTLEFIELD, new EverflowingChaliceEffect(), new TapSourceCost());
+	}
+
+	public EverflowingChaliceAbility(final EverflowingChaliceAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public EverflowingChaliceAbility copy() {
+		return new EverflowingChaliceAbility(this);
 	}
 
 	@Override
@@ -79,15 +102,24 @@ class EverflowingChaliceEffect extends ManaEffect {
 		super(new Mana());
 	}
 
-	@Override
-	public boolean apply(Game game) {
-		this.mana.clear();
-		this.mana.setColorless(game.getPermanent(this.source.getSourceId()).getCounters().getCount("charge"));
-		return super.apply(game);
+	public EverflowingChaliceEffect(final EverflowingChaliceEffect effect) {
+		super(effect);
 	}
 
 	@Override
-	public String getText() {
+	public EverflowingChaliceEffect copy() {
+		return new EverflowingChaliceEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		this.mana.clear();
+		this.mana.setColorless(game.getPermanent(source.getSourceId()).getCounters().getCount("charge"));
+		return super.apply(game, source);
+	}
+
+	@Override
+	public String getText(Ability source) {
 		return "Add {1} to your mana pool for each charge counter on {this}";
 	}
 

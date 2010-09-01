@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LokiX
  */
-public class DoomBlade extends CardImpl {
+public class DoomBlade extends CardImpl<DoomBlade> {
 
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 
@@ -55,8 +55,21 @@ public class DoomBlade extends CardImpl {
         super(onwerId, "Doom Blade", new CardType[]{CardType.INSTANT},"{1}{B}");
         this.expansionSetId = Magic2010.getInstance().getId();
         this.color.setBlack(true);
-		this.art = "121618_typ_reg_sty_010.jpg";
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(1,1,filter, TargetController.ANY));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
+
+	public DoomBlade(final DoomBlade card) {
+		super(card);
+	}
+
+	@Override
+	public DoomBlade copy() {
+		return new DoomBlade(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121618_typ_reg_sty_010.jpg";
+	}
 }

@@ -42,7 +42,7 @@ import mage.sets.Conflux;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class NobleHierarch extends CardImpl {
+public class NobleHierarch extends CardImpl<NobleHierarch> {
 
 	public NobleHierarch(UUID ownerId) {
 		super(ownerId, "Noble Hierarch", new CardType[]{CardType.CREATURE}, "{G}");
@@ -50,12 +50,25 @@ public class NobleHierarch extends CardImpl {
 		this.color.setGreen(true);
 		this.subtype.add("Human");
 		this.subtype.add("Druid");
-		this.art = "118694_typ_reg_sty_010.jpg";
 		this.power = new MageInt(0);
 		this.toughness = new MageInt(1);
 		this.addAbility(new ExaltedAbility());
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new WhiteManaAbility());
 		this.addAbility(new BlueManaAbility());
+	}
+
+	public NobleHierarch(final NobleHierarch card) {
+		super(card);
+	}
+
+	@Override
+	public NobleHierarch copy() {
+		return new NobleHierarch(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "118694_typ_reg_sty_010.jpg";
 	}
 }

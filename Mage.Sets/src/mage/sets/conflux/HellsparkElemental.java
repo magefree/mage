@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.UnearthAbility;
@@ -44,21 +44,34 @@ import mage.sets.Conflux;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HellsparkElemental extends CardImpl {
+public class HellsparkElemental extends CardImpl<HellsparkElemental> {
 
 	public HellsparkElemental(UUID ownerId) {
 		super(ownerId, "Hellspark Elemental", new CardType[]{CardType.CREATURE}, "{1}{R}");
 		this.expansionSetId = Conflux.getInstance().getId();
 		this.subtype.add("Elemental");
 		this.color.setRed(true);
-		this.art = "118669_typ_reg_sty_010.jpg";
 		this.power = new MageInt(3);
 		this.toughness = new MageInt(1);
 
 		this.addAbility(HasteAbility.getInstance());
 		this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", new SacrificeSourceEffect()));
-		this.addAbility(new UnearthAbility(new ManaCosts("{1}{R}")));
+		this.addAbility(new UnearthAbility(new ManaCostsImpl("{1}{R}")));
 
+	}
+
+	public HellsparkElemental(final HellsparkElemental card) {
+		super(card);
+	}
+
+	@Override
+	public HellsparkElemental copy() {
+		return new HellsparkElemental(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "118669_typ_reg_sty_010.jpg";
 	}
 
 }

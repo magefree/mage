@@ -42,7 +42,7 @@ import mage.sets.ShardsOfAlara;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WildNacatl extends CardImpl {
+public class WildNacatl extends CardImpl<WildNacatl> {
 
 	private FilterPermanent filter1 = new FilterPermanent("Mountain");
 	private FilterPermanent filter2 = new FilterPermanent("Plains");
@@ -53,12 +53,25 @@ public class WildNacatl extends CardImpl {
 		this.color.setGreen(true);
 		this.subtype.add("Cat");
 		this.subtype.add("Warrior");
-		this.art = "115062_typ_reg_sty_010.jpg";
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
 		filter1.getName().add("Mountain");
 		filter2.getName().add("Plains");
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter1, 1, 1)));
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter2, 1, 1)));
+	}
+
+	public WildNacatl(final WildNacatl card) {
+		super(card);
+	}
+
+	@Override
+	public WildNacatl copy() {
+		return new WildNacatl(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "115062_typ_reg_sty_010.jpg";
 	}
 }

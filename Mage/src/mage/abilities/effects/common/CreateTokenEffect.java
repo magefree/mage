@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
@@ -38,7 +39,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CreateTokenEffect extends OneShotEffect {
+public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
 
 	private Token token;
 	private int amount;
@@ -51,22 +52,37 @@ public class CreateTokenEffect extends OneShotEffect {
 		super(Outcome.PutCreatureInPlay);
 		this.token = token;
 		this.amount = amount;
-		if (amount == 1) {
-			text = "put a " + token.getDescription();
-		}
-		else {
-			text =  "put " + Integer.toString(amount) + " " + token.getDescription();
-		}
-		text +=  " onto the battlefield";
+	}
+
+	public CreateTokenEffect(final CreateTokenEffect effect) {
+		super(effect);
+		this.amount = effect.amount;
+		this.token = effect.token.copy();
 	}
 
 	@Override
-	public boolean apply(Game game) {
-		Player controller = game.getPlayer(this.source.getControllerId());
+	public CreateTokenEffect copy() {
+		return new CreateTokenEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Player controller = game.getPlayer(source.getControllerId());
 		for (int i = 0; i < amount; i++) {
 			controller.putOntoBattlefield(token, game);
 		}
 		return true;
+	}
+
+	@Override
+	public String getText(Ability source) {
+		StringBuilder sb = new StringBuilder();
+		if (amount == 1)
+			sb.append("put a");
+		else
+			sb.append("put ").append(Integer.toString(amount));
+		sb.append(" ").append(token.getDescription()).append(" onto the battlefield");
+		return sb.toString();
 	}
 
 }

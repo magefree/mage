@@ -32,117 +32,172 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Zone;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
+import mage.abilities.Ability;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterObject<T extends MageObject> extends FilterImpl<T> implements Filter<T> {
-	protected Abilities abilities = new AbilitiesImpl();
-	protected boolean notAbilities = false;
+public abstract class FilterObject<E extends MageObject, T extends FilterObject<E, T>> extends FilterImpl<E, T> implements Filter<E> {
+	protected Abilities<Ability> abilities;
+	protected boolean notAbilities;
 	protected List<CardType> cardType = new ArrayList<CardType>();
 	protected ComparisonScope scopeCardType = ComparisonScope.All;
-	protected boolean notCardType = false;
-	protected boolean colorless = false;
-	protected boolean useColorless = false;
-	protected boolean useColor = false;
-	protected ObjectColor color = new ObjectColor();
+	protected boolean notCardType;
+	protected boolean colorless;
+	protected boolean useColorless;
+	protected boolean useColor;
+	protected ObjectColor color;
 	protected ComparisonScope scopeColor = ComparisonScope.All;
-	protected boolean notColor = false;
+	protected boolean notColor;
 	protected List<String> name = new ArrayList<String>();
-	protected boolean notName = false;
+	protected boolean notName;
 	protected List<String> subtype = new ArrayList<String>();
 	protected ComparisonScope scopeSubtype = ComparisonScope.All;
-	protected boolean notSubtype = false;
+	protected boolean notSubtype;
 	protected List<String> supertype = new ArrayList<String>();
 	protected ComparisonScope scopeSupertype = ComparisonScope.All;
-	protected boolean notSupertype = false;
-	protected int convertedManaCost = 0;
+	protected boolean notSupertype;
+	protected Zone zone;
+	protected boolean notZone;
+	protected int convertedManaCost;
 	protected ComparisonType convertedManaCostComparison;
-	protected int power = 0;
+	protected int power;
 	protected ComparisonType powerComparison;
-	protected int toughness = 0;
+	protected int toughness;
 	protected ComparisonType toughnessComparison;
-	protected UUID id = null;
+	protected UUID id;
 	protected boolean notId;
+
+	@Override
+	public abstract FilterObject<E, T> copy();
 
 	public FilterObject(String name) {
 		super(name);
+		abilities = new AbilitiesImpl<Ability>();
+		color = new ObjectColor();
+	}
+
+	public FilterObject(FilterObject filter) {
+		super(filter);
+		this.abilities = filter.abilities.copy();
+		this.notAbilities = filter.notAbilities;
+		for (CardType cType: (List<CardType>)filter.cardType) {
+			this.cardType.add(cType);
+		}
+		this.scopeCardType = filter.scopeCardType;
+		this.notCardType = filter.notCardType;
+		this.colorless = filter.colorless;
+		this.useColorless = filter.useColorless;
+		this.useColor = filter.useColor;
+		this.color = filter.color.copy();
+		this.scopeColor = filter.scopeColor;
+		this.notColor = filter.notColor;
+		for (String fName: (List<String>)filter.name) {
+			this.name.add(fName);
+		}
+		this.notName = filter.notName;
+		for (String fSubtype: (List<String>)filter.subtype) {
+			this.subtype.add(fSubtype);
+		}
+		this.scopeSubtype = filter.scopeSubtype;
+		this.notSubtype = filter.notSubtype;
+		for (String fSupertype: (List<String>)filter.supertype) {
+			this.supertype.add(fSupertype);
+		}
+		this.scopeSupertype = filter.scopeSupertype;
+		this.notSupertype = filter.notSupertype;
+		this.zone = filter.zone;
+		this.notZone = filter.notZone;
+		this.convertedManaCost = filter.convertedManaCost;
+		this.convertedManaCostComparison = filter.convertedManaCostComparison;
+		this.power = filter.power;
+		this.powerComparison = filter.powerComparison;
+		this.toughness = filter.toughness;
+		this.toughnessComparison = filter.toughnessComparison;
+		this.id = filter.id;
+		this.notId = filter.notId;
 	}
 
 	@Override
-	public boolean match(T object) {
+	public boolean match(E object) {
 
 		if (id != null) {
 			if (object.getId().equals(id) == notId)
-				return false;
+				return notFilter;
 		}
 
 		if (name.size() > 0) {
 			if (name.contains(object.getName()) == notName)
-				return false;
+				return notFilter;
+		}
+
+		if (zone != null) {
+			if (object.getZone().match(zone) == notZone)
+				return notFilter;
 		}
 
 		if (useColor) {
 			if (scopeColor == ComparisonScope.All) {
 				if (object.getColor().equals(color) == notColor) {
-					return false;
+					return notFilter;
 				}
 			}
 			else if (object.getColor().contains(color) == notColor) {
 				if (useColorless && colorless) { //need to treat colorless like a color in this case
 					if (object.getColor().isColorless() != colorless) {
-						return false;
+						return notFilter;
 					}
 				}
 				else {
-					return false;
+					return notFilter;
 				}
 			}
 		}
 		else if (useColorless && object.getColor().isColorless() != colorless) {
-			return false;
+			return notFilter;
 		}
 
 		if (cardType.size() > 0) {
 			if (!compCardType.compare(cardType, object.getCardType(), scopeCardType, notCardType))
-				return false;
+				return notFilter;
 		}
 
 		if (subtype.size() > 0) {
 			if (!compString.compare(subtype, object.getSubtype(), scopeSubtype, notSubtype))
-				return false;
+				return notFilter;
 		}
 
 		if (supertype.size() > 0) {
-			if (!compString.compare(supertype, object.getSubtype(), scopeSupertype, notSupertype))
-				return false;
+			if (!compString.compare(supertype, object.getSupertype(), scopeSupertype, notSupertype))
+				return notFilter;
 		}
 
 		if (abilities.size() > 0 && object.getAbilities().containsAll(abilities) == notAbilities) {
-			return false;
+			return notFilter;
 		}
 
 		if (convertedManaCostComparison != null) {
 			if (!compareInts(object.getManaCost().convertedManaCost(), convertedManaCost, convertedManaCostComparison))
-				return false;
+				return notFilter;
 		}
 
 		if (powerComparison != null) {
 			if (!compareInts(object.getPower().getValue(), power, powerComparison))
-				return false;
+				return notFilter;
 		}
 
 		if (toughnessComparison != null) {
 			if (!compareInts(object.getToughness().getValue(), toughness, toughnessComparison))
-				return false;
+				return notFilter;
 		}
 
-		return true;
+		return !notFilter;
 	}
 
 	public Abilities getAbilities() {
@@ -255,6 +310,14 @@ public class FilterObject<T extends MageObject> extends FilterImpl<T> implements
 
 	public void setNotId(boolean notId) {
 		this.notId = notId;
+	}
+
+	public void setZone(Zone zone) {
+		this.zone = zone;
+	}
+
+	public void setNotZone(boolean notZone) {
+		this.notZone = notZone;
 	}
 	
 }

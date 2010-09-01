@@ -77,10 +77,11 @@ public class Session {
 		return null;
 	}
 
-	public void fireCallback(ClientCallback call) {
+	public synchronized void fireCallback(ClientCallback call) {
 		try {
 			call.setMessageId(messageId++);
-			logger.info(sessionId + " - " + call.getMessageId() + " - " + call.getMethod());
+			if (logger.isLoggable(Level.FINE))
+				logger.fine(sessionId + " - " + call.getMessageId() + " - " + call.getMethod());
 			callback.setCallback(call);
 		} catch (InterruptedException ex) {
 			logger.log(Level.SEVERE, null, ex);

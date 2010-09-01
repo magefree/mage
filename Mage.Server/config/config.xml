@@ -5,6 +5,8 @@
 	<playerTypes>
 		<playerType name="Human" jar="Mage.Player.Human.jar" className="mage.player.human.HumanPlayer"/>
 		<playerType name="Computer - default" jar="Mage.Player.AI.jar" className="mage.player.ai.ComputerPlayer"/>
+		<playerType name="Computer - minimax" jar="Mage.Player.AIMinimax.jar" className="mage.player.ai.ComputerPlayer2"/>
+		<playerType name="Computer - minimax hybrid" jar="Mage.Player.AIMinimax.jar" className="mage.player.ai.ComputerPlayer3"/>
 	</playerTypes>
 	<gameTypes>
 		<gameType name="Two Player Duel" jar="Mage.Game.TwoPlayerDuel.jar" className="mage.game.TwoPlayerDuel" typeName="mage.game.TwoPlayerDuelType"/>

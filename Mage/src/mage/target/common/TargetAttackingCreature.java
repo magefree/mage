@@ -35,7 +35,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetAttackingCreature extends TargetCreaturePermanent {
+public class TargetAttackingCreature extends TargetCreaturePermanent<TargetAttackingCreature> {
 
 	public TargetAttackingCreature() {
 		this(1, 1, new FilterAttackingCreature(), TargetController.ANY);
@@ -49,4 +49,14 @@ public class TargetAttackingCreature extends TargetCreaturePermanent {
 		super(1, 1, filter, controller);
 		this.targetName = filter.getMessage();
 	}
+
+	public TargetAttackingCreature(final TargetAttackingCreature target) {
+		super(target);
+	}
+
+	@Override
+	public TargetAttackingCreature copy() {
+		return new TargetAttackingCreature(this);
+	}
+
 }

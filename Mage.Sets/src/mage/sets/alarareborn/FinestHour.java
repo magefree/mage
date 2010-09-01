@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.TurnPhase;
 import mage.Constants.Zone;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ExaltedAbility;
@@ -49,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FinestHour extends CardImpl {
+public class FinestHour extends CardImpl<FinestHour> {
 
 	public FinestHour(UUID ownerId) {
 		super(ownerId, "Finest Hour", new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{W}{U}");
@@ -57,17 +58,39 @@ public class FinestHour extends CardImpl {
 		this.color.setWhite(true);
 		this.color.setGreen(true);
 		this.color.setBlue(true);
-		this.art = "121018_typ_reg_sty_010.jpg";
 		this.addAbility(new ExaltedAbility());
 		this.addAbility(new FinestHourAbility());
 	}
 
+	public FinestHour(final FinestHour card) {
+		super(card);
+	}
+
+	@Override
+	public FinestHour copy() {
+		return new FinestHour(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121018_typ_reg_sty_010.jpg";
+	}
+
 }
 
-class FinestHourAbility extends TriggeredAbilityImpl {
+class FinestHourAbility extends TriggeredAbilityImpl<FinestHourAbility> {
 
 	public FinestHourAbility() {
 		super(Zone.BATTLEFIELD, new FinestHourEffect());
+	}
+
+	public FinestHourAbility(final FinestHourAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public FinestHourAbility copy() {
+		return new FinestHourAbility(this);
 	}
 
 	@Override
@@ -76,7 +99,7 @@ class FinestHourAbility extends TriggeredAbilityImpl {
 			if (event.getType() == EventType.DECLARED_ATTACKERS) {
 				if (game.getCombat().attacksAlone()) {
 					this.addTarget(new TargetCreaturePermanent());
-					this.targets.get(0).getTargets().add(game.getCombat().getAttackers().get(0));
+					this.targets.get(0).addTarget(game.getCombat().getAttackers().get(0), this, game);
 					trigger(game, event.getPlayerId());
 					return true;
 				}
@@ -97,18 +120,27 @@ class FinestHourAbility extends TriggeredAbilityImpl {
 
 }
 
-class FinestHourEffect extends OneShotEffect {
+class FinestHourEffect extends OneShotEffect<FinestHourEffect> {
 
 	public FinestHourEffect() {
 		super(Outcome.Benefit);
 	}
 
+	public FinestHourEffect(final FinestHourEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Permanent permanent = game.getPermanent(this.source.getFirstTarget());
+	public FinestHourEffect copy() {
+		return new FinestHourEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
 			permanent.setTapped(false);
-			game.getState().getTurnMods().add(new TurnMod(this.source.getControllerId(), TurnPhase.COMBAT, null, false));
+			game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.COMBAT, null, false));
 		}
 		else {
 			return false;

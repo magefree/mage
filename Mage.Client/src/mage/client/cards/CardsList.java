@@ -44,7 +44,6 @@ import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.view.CardView;
 import mage.view.CardsView;
-import static mage.client.util.Constants.*;
 
 /**
  *
@@ -57,7 +56,6 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
     /** Creates new form Cards */
     public CardsList() {
         initComponents();
-		cardArea.setPreferredSize(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight));
     }
 
 	public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
@@ -65,7 +63,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
 		if (showCards != null && showCards.size() > 0) {
 			Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 			int count = 0;
-			for (CardView card: showCards) {
+			for (CardView card: showCards.values()) {
 				Card cardImg = new Card(card, bigCard, Config.dimensions, gameId);
 				cardImg.setBounds(rectangle);
 				cardArea.add(cardImg);
@@ -110,6 +108,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
         cardArea = new javax.swing.JLayeredPane();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setPreferredSize(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight));
         setLayout(new java.awt.BorderLayout());
 
         jScrollPane1.setViewportView(cardArea);
@@ -131,15 +130,19 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
 		}
 	}
 
+	@Override
 	public void mousePressed(MouseEvent e) {
 	}
 
+	@Override
 	public void mouseReleased(MouseEvent e) {
 	}
 
+	@Override
 	public void mouseEntered(MouseEvent e) {
 	}
 
+	@Override
 	public void mouseExited(MouseEvent e) {
 	}
 

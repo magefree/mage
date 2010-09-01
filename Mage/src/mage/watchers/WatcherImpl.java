@@ -36,14 +36,21 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class WatcherImpl implements Watcher {
+public abstract class WatcherImpl<T extends WatcherImpl<T>> implements Watcher<T> {
 
 	protected UUID controllerId;
 	protected String key;
-	protected boolean condition = false;
+	protected boolean condition;
 
-	public WatcherImpl(String key) {
+	public WatcherImpl(String key, UUID controllerId) {
 		this.key = key;
+		this.controllerId = controllerId;
+	}
+
+	public WatcherImpl(final WatcherImpl watcher) {
+		this.condition = watcher.condition;
+		this.key = watcher.key;
+		this.controllerId = watcher.controllerId;
 	}
 
 	@Override

@@ -37,12 +37,17 @@ package mage.client.cards;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Rectangle;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 import mage.client.util.Config;
 import mage.client.util.Event;
@@ -54,45 +59,52 @@ import mage.view.CardsView;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CardGrid extends javax.swing.JLayeredPane implements MouseListener, ComponentListener {
+public class CardGrid extends javax.swing.JLayeredPane implements MouseListener {
 
 	protected CardEventSource cardEventSource = new CardEventSource();
 	protected BigCard bigCard;
 	protected UUID gameId;
-	protected List<Card> cards = new ArrayList<Card>();
+	private Map<UUID, Card> cards = new HashMap<UUID, Card>();
 
     public CardGrid() {
         initComponents();
-		addComponentListener(this);
-		setPreferredSize(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight));
     }
 
 	public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
 		this.bigCard = bigCard;
 		this.gameId = gameId;
-		cards.clear();
-		for (CardView card: showCards) {
-			Card cardImg = new Card(card, bigCard, Config.dimensions, gameId);
-			cardImg.update(card);
-			cardImg.addMouseListener(this);
-			cards.add(cardImg);
+		for (CardView card: showCards.values()) {
+			if (!cards.containsKey(card.getId())) {
+				Card cardImg = new Card(card, bigCard, Config.dimensions, gameId);
+				cardImg.addMouseListener(this);
+				add(cardImg);
+				cardImg.update(card);
+				cards.put(card.getId(), cardImg);
+			}
+		}
+		for (Iterator<Entry<UUID, Card>> i = cards.entrySet().iterator(); i.hasNext();) {
+			Entry<UUID, Card> entry = i.next();
+			if (!showCards.containsKey(entry.getKey())) {
+				removeCard(entry.getKey());
+				i.remove();
+			}
 		}
 		drawCards();
 		this.setVisible(true);
 	}
 
 	public void drawCards() {
-		removeAll();
 		int maxWidth = this.getParent().getWidth();
 		int numColumns = maxWidth / Config.dimensions.frameWidth;
 		int curColumn = 0;
 		int curRow = 0;
 		if (cards.size() > 0) {
 			Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-			for (Card cardImg: cards) {
+			List<Card> sortedCards = new ArrayList<Card>(cards.values());
+			Collections.sort(sortedCards, new CardComparator());
+			for (Card cardImg: sortedCards) {
 				rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
 				cardImg.setBounds(rectangle);
-				add(cardImg);
 				moveToFront(cardImg);
 				curColumn++;
 				if (curColumn == numColumns) {
@@ -103,6 +115,17 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
 		}
 		resizeArea();
 	}
+
+	private void removeCard(UUID cardId) {
+        for (Component comp: getComponents()) {
+        	if (comp instanceof Card) {
+        		if (((Card)comp).getCardId().equals(cardId)) {
+					remove(comp);
+        		}
+        	}
+        }
+	}
+
 
 	public void addCardEventListener(Listener<Event> listener) {
 		cardEventSource.addListener(listener);
@@ -125,11 +148,11 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 294, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 197, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -157,26 +180,6 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
 	@Override
 	public void mouseExited(MouseEvent e) {}
 
-	@Override
-	public void componentResized(ComponentEvent e) {
-		resizeArea();
-	}
-
-	@Override
-	public void componentMoved(ComponentEvent e) {
-		resizeArea();
-	}
-
-	@Override
-	public void componentShown(ComponentEvent e) {
-		resizeArea();
-	}
-
-	@Override
-	public void componentHidden(ComponentEvent e) {
-		resizeArea();
-	}
-
 	private void resizeArea() {
         Dimension area = new Dimension(0, 0);
         Dimension size = getPreferredSize();
@@ -197,4 +200,13 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
        }
 
 	}
+}
+
+class CardComparator implements Comparator<Card> {
+
+	@Override
+	public int compare(Card o1, Card o2) {
+		return o1.card.getName().compareTo(o2.card.getName());
+	}
+
 }

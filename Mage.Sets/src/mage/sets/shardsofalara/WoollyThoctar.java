@@ -38,7 +38,7 @@ import mage.sets.ShardsOfAlara;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WoollyThoctar extends CardImpl {
+public class WoollyThoctar extends CardImpl<WoollyThoctar> {
 
 	public WoollyThoctar(UUID ownerId) {
 		super(ownerId, "Woolly Thoctar", new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
@@ -47,9 +47,22 @@ public class WoollyThoctar extends CardImpl {
 		this.color.setGreen(true);
 		this.color.setWhite(true);
 		this.subtype.add("Beast");
-		this.art = "117002_typ_reg_sty_010.jpg";
 		this.power = new MageInt(5);
 		this.toughness = new MageInt(4);
+	}
+
+	public WoollyThoctar(final WoollyThoctar card) {
+		super(card);
+	}
+
+	@Override
+	public WoollyThoctar copy() {
+		return new WoollyThoctar(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "117002_typ_reg_sty_010.jpg";
 	}
 
 }

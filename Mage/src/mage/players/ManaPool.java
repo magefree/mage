@@ -44,6 +44,17 @@ public class ManaPool implements Serializable {
 	private int black = 0;
 	private int colorless = 0;
 
+	public ManaPool() {}
+
+	public ManaPool(final ManaPool pool) {
+		this.red = pool.red;
+		this.green = pool.green;
+		this.blue = pool.blue;
+		this.white = pool.white;
+		this.black = pool.black;
+		this.colorless = pool.colorless;
+	}
+
 	public void setRed(int red) {
 		this.red = red;
 	}
@@ -193,4 +204,7 @@ public class ManaPool implements Serializable {
 		return red + green + blue + white + black + colorless;
 	}
 
+	public ManaPool copy() {
+		return new ManaPool(this);
+	}
 }

@@ -31,23 +31,19 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.abilities.common.EntersBattlefieldStaticAbility;
-import mage.abilities.effects.common.EntersBattlefieldTappedEffect;
 import mage.abilities.effects.common.EntersBattlefieldTappedUnlessControlsEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.sets.Magic2010;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SunpetalGrove extends CardImpl {
+public class SunpetalGrove extends CardImpl<SunpetalGrove> {
 
 	private static FilterLandPermanent filter = new FilterLandPermanent();
 
@@ -61,9 +57,22 @@ public class SunpetalGrove extends CardImpl {
 	public SunpetalGrove(UUID ownerId) {
 		super(ownerId, "Sunpetal Grove", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Magic2010.getInstance().getId();
-		this.art = "121679_typ_reg_sty_010.jpg";
 		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedUnlessControlsEffect(filter)));
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new WhiteManaAbility());
+	}
+
+	public SunpetalGrove(final SunpetalGrove card) {
+		super(card);
+	}
+
+	@Override
+	public SunpetalGrove copy() {
+		return new SunpetalGrove(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121679_typ_reg_sty_010.jpg";
 	}
 }

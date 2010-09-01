@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.counters.PlusOneCounter;
 import mage.game.Game;
@@ -38,7 +39,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AddPlusOneCountersSourceEffect extends OneShotEffect {
+public class AddPlusOneCountersSourceEffect extends OneShotEffect<AddPlusOneCountersSourceEffect> {
 
 	private int amount;
 
@@ -47,9 +48,19 @@ public class AddPlusOneCountersSourceEffect extends OneShotEffect {
 		this.amount = amount;
 	}
 
+	public AddPlusOneCountersSourceEffect(final AddPlusOneCountersSourceEffect effect) {
+		super(effect);
+		this.amount = effect.amount;
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Permanent permanent = game.getPermanent(this.source.getSourceId());
+	public AddPlusOneCountersSourceEffect copy() {
+		return new AddPlusOneCountersSourceEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
 			permanent.getCounters().addCounter(new PlusOneCounter(amount));
 		}
@@ -57,7 +68,7 @@ public class AddPlusOneCountersSourceEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		if (amount > 1)
 			return "put " + Integer.toString(amount) + " +1/+1 counters on {this}";
 		else

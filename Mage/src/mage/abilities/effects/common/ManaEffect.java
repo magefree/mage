@@ -30,6 +30,7 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.Mana;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 
@@ -37,7 +38,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ManaEffect extends OneShotEffect {
+public class ManaEffect extends OneShotEffect<ManaEffect> {
 
 	protected Mana mana;
 
@@ -46,14 +47,24 @@ public class ManaEffect extends OneShotEffect {
 		this.mana = mana;
 	}
 
+	public ManaEffect(final ManaEffect effect) {
+		super(effect);
+		this.mana = effect.mana.copy();
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		game.getPlayer(this.source.getControllerId()).getManaPool().changeMana(mana);
+	public ManaEffect copy() {
+		return new ManaEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		game.getPlayer(source.getControllerId()).getManaPool().changeMana(mana);
 		return true;
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Add " + mana.toString() + " to your mana pool";
 	}
 

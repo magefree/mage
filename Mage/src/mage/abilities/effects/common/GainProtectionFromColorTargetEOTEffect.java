@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Duration;
+import mage.abilities.Ability;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.choices.ChoiceColor;
 import mage.filter.FilterCard;
@@ -49,9 +50,19 @@ public class GainProtectionFromColorTargetEOTEffect extends GainAbilityTargetEff
 		protectionFilter.setUseColor(true);
 	}
 
+	public GainProtectionFromColorTargetEOTEffect(final GainProtectionFromColorTargetEOTEffect effect) {
+		super(effect);
+		this.protectionFilter = effect.protectionFilter.copy();
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		ChoiceColor choice = (ChoiceColor) this.source.getChoices().get(0);
+	public GainProtectionFromColorTargetEOTEffect copy() {
+		return new GainProtectionFromColorTargetEOTEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
 		protectionFilter.setColor(choice.getColor());
 		protectionFilter.setMessage(choice.getChoice());
 		Permanent creature = game.getPermanent(source.getFirstTarget());
@@ -63,7 +74,7 @@ public class GainProtectionFromColorTargetEOTEffect extends GainAbilityTargetEff
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "target creature you control gains protection from the color of your choice until end of turn";
 	}
 

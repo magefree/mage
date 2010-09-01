@@ -39,13 +39,18 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SimpleTriggeredAbility extends TriggeredAbilityImpl {
+public class SimpleTriggeredAbility extends TriggeredAbilityImpl<SimpleTriggeredAbility> {
 
 	EventType eventType;
 
 	public SimpleTriggeredAbility(Zone zone, EventType eventType, Effect effect) {
 		super(zone, effect);
 		this.eventType = eventType;
+	}
+
+	public SimpleTriggeredAbility(SimpleTriggeredAbility ability) {
+		super(ability);
+		this.eventType = ability.eventType;
 	}
 
 	@Override
@@ -55,5 +60,10 @@ public class SimpleTriggeredAbility extends TriggeredAbilityImpl {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public SimpleTriggeredAbility copy() {
+		return new SimpleTriggeredAbility(this);
 	}
 }

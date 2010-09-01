@@ -35,10 +35,16 @@ import mage.abilities.effects.Effect;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
+public abstract class DelayedTriggeredAbility<T extends DelayedTriggeredAbility<T>> extends TriggeredAbilityImpl<T> {
 
 	public DelayedTriggeredAbility(Effect effect) {
 		super(Zone.ALL, effect);
 	}
 
+	public DelayedTriggeredAbility(final DelayedTriggeredAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public abstract T copy();
 }

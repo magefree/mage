@@ -36,7 +36,7 @@ import mage.abilities.StaticAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ShroudAbility extends StaticAbility {
+public class ShroudAbility extends StaticAbility<ShroudAbility> {
 
 	private static final ShroudAbility fINSTANCE =  new ShroudAbility();
 
@@ -55,6 +55,11 @@ public class ShroudAbility extends StaticAbility {
 	@Override
 	public String getRule() {
 		return "Shroud";
+	}
+
+	@Override
+	public ShroudAbility copy() {
+		return fINSTANCE;
 	}
 
 }

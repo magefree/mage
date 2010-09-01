@@ -31,22 +31,26 @@ package mage.cards;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
-public interface Cards extends Map<UUID, Card>, Serializable {
+public interface Cards extends Set<UUID>, Serializable {
 
 	public void add(Card card);
+	public Card get(UUID cardId, Game game);
 	public void remove(Card card);
-	public void setOwner(UUID ownerId);
+	public void setOwner(UUID ownerId, Game game);
 	public void addAll(List<Card> createCards);
-	public List<Card> getCards(FilterCard filter);
-	public Collection<Card> getUniqueCards();
-	public Card getRandom();
-	public int count(FilterCard filter);
+	public Set<Card> getCards(Game game);
+	public Set<Card> getCards(FilterCard filter, Game game);
+	public Collection<Card> getUniqueCards(Game game);
+	public Card getRandom(Game game);
+	public int count(FilterCard filter, Game game);
 
 	public void checkTriggers(GameEvent event, Game game);
+
+	public Cards copy();
 }

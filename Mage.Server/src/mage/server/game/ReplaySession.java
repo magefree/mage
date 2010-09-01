@@ -30,6 +30,7 @@ package mage.server.game;
 
 import java.util.UUID;
 import java.util.logging.Logger;
+import mage.game.Game;
 import mage.game.GameState;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.Session;
@@ -45,19 +46,19 @@ public class ReplaySession implements GameCallback {
 
 	private final static Logger logger = Logging.getLogger(ReplaySession.class.getName());
 
-	private GameReplay game;
+	private GameReplay replay;
 	protected UUID sessionId;
 
 	ReplaySession(UUID tableId, UUID sessionId) {
-		this.game = TableManager.getInstance().createReplay(tableId);
+		this.replay = TableManager.getInstance().createReplay(tableId);
 		this.sessionId = sessionId;
 	}
 
 	public void replay() {
-		game.start();
+		replay.start();
 		Session session = SessionManager.getInstance().getSession(sessionId);
 		if (session != null)
-			session.fireCallback(new ClientCallback("replayInit", new GameView(game.next())));
+			session.fireCallback(new ClientCallback("replayInit", new GameView(replay.next(), replay.getGame())));
 	}
 
 	public void stop() {
@@ -65,11 +66,11 @@ public class ReplaySession implements GameCallback {
 	}
 
 	public synchronized void next() {
-		updateGame(game.next());
+		updateGame(replay.next(), replay.getGame());
 	}
 
 	public synchronized void previous() {
-		updateGame(game.previous());
+		updateGame(replay.previous(), replay.getGame());
 	}
 
 	@Override
@@ -79,14 +80,14 @@ public class ReplaySession implements GameCallback {
 			session.fireCallback(new ClientCallback("replayDone", result));
 	}
 
-	private void updateGame(final GameState state) {
+	private void updateGame(final GameState state, Game game) {
 		if (state == null) {
 			gameResult("game ended");
 		}
 		else {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("replayUpdate", new GameView(state)));
+				session.fireCallback(new ClientCallback("replayUpdate", new GameView(state, game)));
 		}
 	}
 

@@ -54,6 +54,16 @@ public class Turn implements Serializable {
 		phases.add(new EndPhase());
 	}
 
+	public Turn(final Turn turn) {
+		if (turn.currentPhase != null)
+			this.currentPhase = turn.currentPhase.copy();
+		this.activePlayerId = turn.activePlayerId;
+		for (Phase phase: turn.phases) {
+			this.phases.add(phase.copy());
+		}
+		
+	}
+
 	public TurnPhase getPhaseType() {
 		if (currentPhase != null)
 			return currentPhase.getType();
@@ -154,4 +164,7 @@ public class Turn implements Serializable {
 		}
 	}
 
+	public Turn copy() {
+		return new Turn(this);
+	}
 }

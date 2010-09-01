@@ -71,8 +71,8 @@ public class TableManager {
 		return tables.values();
 	}
 
-	public boolean joinTable(UUID sessionId, UUID tableId, int seatNum, String name, DeckCardLists deckList) throws GameException {
-		return controllers.get(tableId).joinTable(sessionId, seatNum, name, deckList);
+	public boolean joinTable(UUID sessionId, UUID tableId, String name, DeckCardLists deckList) throws GameException {
+		return controllers.get(tableId).joinTable(sessionId, name, deckList);
 	}
 
 	public void removeSession(UUID sessionId) {

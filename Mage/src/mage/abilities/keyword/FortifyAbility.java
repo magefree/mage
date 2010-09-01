@@ -40,7 +40,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FortifyAbility extends ActivatedAbilityImpl {
+public class FortifyAbility extends ActivatedAbilityImpl<FortifyAbility> {
 	//20091005 - 702.64
 
 	public FortifyAbility(Zone zone, AttachEffect effect, Cost cost) {
@@ -48,5 +48,15 @@ public class FortifyAbility extends ActivatedAbilityImpl {
 		this.addTarget(new TargetLandPermanent(1, TargetController.YOU));
 		timing = TimingRule.SORCERY;
 	}
+
+	public FortifyAbility(final FortifyAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public FortifyAbility copy() {
+		return new FortifyAbility(this);
+	}
+
 
 }

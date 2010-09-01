@@ -41,7 +41,7 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BogWraith extends CardImpl {
+public class BogWraith extends CardImpl<BogWraith> {
 
 	private static FilterLandPermanent filter = new FilterLandPermanent("Swamp");
 
@@ -55,10 +55,23 @@ public class BogWraith extends CardImpl {
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setBlack(true);
 		this.subtype.add("Wraith");
-		this.art = "";
 		this.power = new MageInt(3);
 		this.toughness = new MageInt(3);
 		this.addAbility(new LandwalkAbility(filter));
+	}
+
+	public BogWraith(final BogWraith card) {
+		super(card);
+	}
+
+	@Override
+	public BogWraith copy() {
+		return new BogWraith(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "106215_typ_reg_sty_010.jpg";
 	}
 
 }

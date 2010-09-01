@@ -28,7 +28,6 @@
 
 package mage.game.turn;
 
-import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
 import mage.game.events.GameEvent.EventType;
 
@@ -36,7 +35,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PostCombatMainPhase extends Phase {
+public class PostCombatMainPhase extends Phase<PostCombatMainPhase> {
 
 	public PostCombatMainPhase() {
 		this.type = TurnPhase.POSTCOMBAT_MAIN;
@@ -44,6 +43,15 @@ public class PostCombatMainPhase extends Phase {
 		this.preEvent = EventType.POSTCOMBAT_MAIN_PHASE_PRE;
 		this.postEvent = EventType.POSTCOMBAT_MAIN_STEP_POST;
 		this.steps.add(new PostCombatMainStep());
+	}
+
+	public PostCombatMainPhase(final PostCombatMainPhase phase) {
+		super(phase);
+	}
+
+	@Override
+	public PostCombatMainPhase copy() {
+		return new PostCombatMainPhase(this);
 	}
 
 }

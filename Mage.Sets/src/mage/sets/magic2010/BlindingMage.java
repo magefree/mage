@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.sets.Magic2010;
@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BlindingMage extends CardImpl {
+public class BlindingMage extends CardImpl<BlindingMage> {
 
 	public BlindingMage(UUID ownerId) {
 		super(ownerId, "Blinding Mage", new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -53,13 +53,26 @@ public class BlindingMage extends CardImpl {
 		this.subtype.add("Human");
 		this.subtype.add("Wizard");
 		this.color.setWhite(true);
-		this.art = "121614_typ_reg_sty_010.jpg";
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(2);
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCosts("{W}"));
+		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{W}"));
 		ability.addCost(new TapSourceCost());
 		ability.addTarget(new TargetCreaturePermanent());
 		this.addAbility(ability);
+	}
+
+	public BlindingMage(final BlindingMage card) {
+		super(card);
+	}
+
+	@Override
+	public BlindingMage copy() {
+		return new BlindingMage(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121614_typ_reg_sty_010.jpg";
 	}
 
 }

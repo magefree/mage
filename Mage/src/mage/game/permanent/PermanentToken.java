@@ -31,6 +31,7 @@ package mage.game.permanent;
 import mage.game.permanent.token.Token;
 import java.util.UUID;
 import mage.Constants.Zone;
+import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 
@@ -38,28 +39,39 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PermanentToken extends PermanentImpl {
+public class PermanentToken extends PermanentImpl<PermanentToken> {
 
 	protected Token token;
 	
 	public PermanentToken(Token token, UUID ownerId, UUID controllerId) {
 		super(ownerId, controllerId, token.getName());
 		this.token = token;
-		reset();
+		copyFromToken(token);
+	}
+
+	public PermanentToken(final PermanentToken permanent) {
+		super(permanent);
+		this.token = permanent.token.copy();
 	}
 
 	@Override
-	public void reset() {
+	public void reset(Game game) {
 		Token copy = token.copy();
-		this.name = copy.getName();
-		this.abilities = copy.getAbilities();
-		this.abilities.setControllerId(this.controllerId);
-		this.cardType = copy.getCardType();
-		this.color = copy.getColor();
-		this.power = copy.getPower();
-		this.toughness = copy.getToughness();
-		this.subtype = copy.getSubtype();
-		super.reset();
+		copyFromToken(copy);
+		super.reset(game);
+	}
+
+	protected void copyFromToken(Token token) {
+		this.name = token.getName();
+		this.abilities.clear();
+		for (Ability ability: token.getAbilities()) {
+			this.addAbility(ability);
+		}
+		this.cardType = token.getCardType();
+		this.color = token.getColor();
+		this.power = token.getPower();
+		this.toughness = token.getToughness();
+		this.subtype = token.getSubtype();
 	}
 
 	@Override
@@ -82,6 +94,16 @@ public class PermanentToken extends PermanentImpl {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public String getArt() {
+		return "";
+	}
+
+	@Override
+	public PermanentToken copy() {
+		return new PermanentToken(this);
 	}
 
 }

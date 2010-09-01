@@ -37,6 +37,14 @@ import java.util.UUID;
  */
 public class Players extends LinkedHashMap<UUID, Player> {
 
+	public Players() {}
+
+	public Players(final Players players) {
+		for (UUID id: players.keySet()) {
+			this.put(id, players.get(id).copy());
+		}
+	}
+
 	public void addPlayer(Player player) {
 		this.put(player.getId(), player);
 	}
@@ -46,4 +54,9 @@ public class Players extends LinkedHashMap<UUID, Player> {
 			player.resetPassed();
 		}
 	}
+
+	public Players copy() {
+		return new Players(this);
+	}
+
 }

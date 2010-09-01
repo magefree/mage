@@ -37,7 +37,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterPlayer extends FilterImpl<Player> implements Filter<Player> {
+public class FilterPlayer extends FilterImpl<Player, FilterPlayer> implements Filter<Player> {
 
 	protected List<UUID> playerId = new ArrayList<UUID>();
 	protected boolean notPlayer;
@@ -46,13 +46,21 @@ public class FilterPlayer extends FilterImpl<Player> implements Filter<Player> {
 		super("player");
 	}
 
+	public FilterPlayer(FilterPlayer filter) {
+		super(filter);
+		for (UUID pId: filter.playerId) {
+			this.playerId.add(pId);
+		}
+		this.notPlayer = filter.notPlayer;
+	}
+
 	@Override
 	public boolean match(Player player) {
 
 		if (playerId.size() > 0 && playerId.contains(player.getId()) == notPlayer)
-			return false;
+			return notFilter;
 
-		return true;
+		return !notFilter;
 	}
 
 	public List<UUID> getPlayerId() {
@@ -61,6 +69,11 @@ public class FilterPlayer extends FilterImpl<Player> implements Filter<Player> {
 
 	public void setNotPlayer(boolean notPlayer) {
 		this.notPlayer = notPlayer;
+	}
+
+	@Override
+	public FilterPlayer copy() {
+		return new FilterPlayer(this);
 	}
 
 }

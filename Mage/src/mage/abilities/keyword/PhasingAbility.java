@@ -36,7 +36,7 @@ import mage.abilities.StaticAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PhasingAbility extends StaticAbility {
+public class PhasingAbility extends StaticAbility<PhasingAbility> {
 
 	private static final PhasingAbility fINSTANCE =  new PhasingAbility();
 
@@ -55,6 +55,11 @@ public class PhasingAbility extends StaticAbility {
 	@Override
 	public String getRule() {
 		return "Phasing";
+	}
+
+	@Override
+	public PhasingAbility copy() {
+		return fINSTANCE;
 	}
 
 }

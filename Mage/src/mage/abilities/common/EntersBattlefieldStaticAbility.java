@@ -36,10 +36,19 @@ import mage.abilities.effects.EntersBattlefieldEffect;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EntersBattlefieldStaticAbility extends StaticAbility {
+public class EntersBattlefieldStaticAbility extends StaticAbility<EntersBattlefieldStaticAbility> {
 
 	public EntersBattlefieldStaticAbility(EntersBattlefieldEffect effect) {
 		super(Zone.BATTLEFIELD, effect);
+	}
+
+	public EntersBattlefieldStaticAbility(EntersBattlefieldStaticAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public EntersBattlefieldStaticAbility copy() {
+		return new EntersBattlefieldStaticAbility(this);
 	}
 
 }

@@ -38,10 +38,19 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CreateTokenActivatedAbility extends ActivatedAbilityImpl {
+public class CreateTokenActivatedAbility extends ActivatedAbilityImpl<CreateTokenActivatedAbility> {
 
 	public CreateTokenActivatedAbility(Zone zone, Token token, Cost cost) {
 		super(zone, new CreateTokenEffect(token), cost);
+	}
+
+	public CreateTokenActivatedAbility(CreateTokenActivatedAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public CreateTokenActivatedAbility copy() {
+		return new CreateTokenActivatedAbility(this);
 	}
 
 }

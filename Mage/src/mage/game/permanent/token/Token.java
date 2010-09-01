@@ -34,11 +34,8 @@ import mage.MageObjectImpl;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.util.Copier;
 
-public class Token extends MageObjectImpl {
-
-	private static final transient Copier<Token> copier = new Copier<Token>();
+public class Token extends MageObjectImpl<Token> {
 
 	protected String description;
 
@@ -50,7 +47,7 @@ public class Token extends MageObjectImpl {
 	public Token(String name, String description, ObjectColor color, List<String> subtype, int power, int toughness, Abilities abilities) {
 		this(name, description);
 		this.cardType.add(CardType.CREATURE);
-		this.color = color;
+		this.color = color.copy();
 		this.subtype = subtype;
 		this.power.setValue(power);
 		this.toughness.setValue(toughness);
@@ -59,16 +56,22 @@ public class Token extends MageObjectImpl {
 		}
 	}
 
-	public String getDescription() {
-		return description;
+	public Token(final Token token) {
+		super(token);
+		this.description = token.description;
 	}
 
-	public Token copy() {
-		return copier.copy(this);
+	public String getDescription() {
+		return description;
 	}
 
 	public void addAbility(Ability ability) {
 		ability.setSourceId(this.getId());
 		abilities.add(ability);
+	}
+
+	@Override
+	public Token copy() {
+		return new Token(this);
 	}
 }

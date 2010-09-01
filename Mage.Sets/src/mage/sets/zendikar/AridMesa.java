@@ -38,13 +38,26 @@ import mage.sets.Zendikar;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AridMesa extends CardImpl {
+public class AridMesa extends CardImpl<AridMesa> {
 
 	public AridMesa(UUID ownerId) {
 		super(ownerId, "Arid Mesa", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Zendikar.getInstance().getId();
-		this.art = "123565_typ_reg_sty_010.jpg";
 		this.addAbility(new FetchLandActivatedAbility(new String[] {"Mountain", "Plains"}));
+	}
+
+	public AridMesa(final AridMesa card) {
+		super(card);
+	}
+
+	@Override
+	public AridMesa copy() {
+		return new AridMesa(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123565_typ_reg_sty_010.jpg";
 	}
 
 }

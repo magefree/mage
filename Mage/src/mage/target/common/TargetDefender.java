@@ -35,6 +35,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.MageObject;
+import mage.abilities.Ability;
 import mage.filter.Filter;
 import mage.filter.common.FilterPlaneswalkerOrPlayer;
 import mage.filter.common.FilterPlaneswalkerPermanent;
@@ -47,7 +48,7 @@ import mage.target.TargetImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetDefender extends TargetImpl {
+public class TargetDefender extends TargetImpl<TargetDefender> {
 
 	protected FilterPlaneswalkerOrPlayer filter;
 	protected UUID attackerId;
@@ -67,6 +68,12 @@ public class TargetDefender extends TargetImpl {
 		this.filter = new FilterPlaneswalkerOrPlayer(defenders);
 		this.targetName = filter.getMessage();
 		this.attackerId = attackerId;
+	}
+
+	public TargetDefender(final TargetDefender target) {
+		super(target);
+		this.filter = target.filter.copy();
+		this.attackerId = target.attackerId;
 	}
 
 	@Override
@@ -131,7 +138,7 @@ public class TargetDefender extends TargetImpl {
 	}
 
 	@Override
-	public boolean canTarget(UUID id, Game game) {
+	public boolean canTarget(UUID id, Ability source, Game game) {
 		Player player = game.getPlayer(id);
 		MageObject targetSource = game.getObject(attackerId);
 		if (player != null) {
@@ -142,6 +149,11 @@ public class TargetDefender extends TargetImpl {
 			return permanent.canBeTargetedBy(targetSource) && filter.match(permanent);
 		}
 		return false;
+	}
+
+	@Override
+	public TargetDefender copy() {
+		return new TargetDefender(this);
 	}
 
 

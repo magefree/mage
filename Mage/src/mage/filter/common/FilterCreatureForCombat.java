@@ -32,7 +32,7 @@ package mage.filter.common;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterCreatureForCombat extends FilterCreaturePermanent {
+public class FilterCreatureForCombat extends FilterCreaturePermanent<FilterCreatureForCombat> {
 
 	public FilterCreatureForCombat() {
 		this("");
@@ -48,6 +48,15 @@ public class FilterCreatureForCombat extends FilterCreaturePermanent {
 		this.useTapped = true;
 		this.phasedIn = true;
 		this.usePhased = true;
+	}
+
+	public FilterCreatureForCombat(final FilterCreatureForCombat filter) {
+		super(filter);
+	}
+
+	@Override
+	public FilterCreatureForCombat copy() {
+		return new FilterCreatureForCombat(this);
 	}
 
 }

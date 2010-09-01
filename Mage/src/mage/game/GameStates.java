@@ -31,7 +31,9 @@ package mage.game;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Logger;
 import mage.util.Copier;
+import mage.util.Logging;
 
 /**
  *
@@ -39,10 +41,15 @@ import mage.util.Copier;
  */
 public class GameStates implements Serializable {
 
-	private List<byte[]> states = new LinkedList<byte[]>();
+	private final static transient Logger logger = Logging.getLogger(GameStates.class.getName());
+
+//	private List<byte[]> states = new LinkedList<byte[]>();
+	private List<GameState> states = new LinkedList<GameState>();
 
 	public void save(GameState gameState) {
-		states.add(new Copier<GameState>().copyCompressed(gameState));
+//		states.add(new Copier<GameState>().copyCompressed(gameState));
+		states.add(gameState.copy());
+		logger.fine("Saved game state: " + states.size());
 	}
 
 	public int getSize() {
@@ -50,18 +57,22 @@ public class GameStates implements Serializable {
 	}
 
 	public GameState rollback(int index) {
-		if (index < states.size()) {
-			while (states.size() > index) {
-				states.remove(index);
+		if (states.size() > 0 && index < states.size()) {
+			while (states.size() > index + 1) {
+				states.remove(states.size() - 1);
 			}
-			return new Copier<GameState>().uncompressCopy(states.get(index - 1));
+//			return new Copier<GameState>().uncompressCopy(states.get(index));
+			logger.fine("Rolling back state: " + index);
+			return states.get(index);
 		}
 		return null;
 	}
 
 	public GameState get(int index) {
 		if (index < states.size())
-			return new Copier<GameState>().uncompressCopy(states.get(index));
+//			return new Copier<GameState>().uncompressCopy(states.get(index));
+			return states.get(index);
 		return null;
 	}
+
 }

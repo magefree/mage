@@ -36,14 +36,23 @@ import mage.abilities.effects.common.CantCounterSourceEffect;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantCounterAbility extends StaticAbility {
+public class CantCounterAbility extends StaticAbility<CantCounterAbility> {
 
 	public CantCounterAbility() {
 		super(Zone.STACK, new CantCounterSourceEffect());
 	}
 
+	public CantCounterAbility(CantCounterAbility ability) {
+		super(ability);
+	}
+
 	@Override
 	public String getRule() {
 		return "{this} can't be countered";
+	}
+
+	@Override
+	public CantCounterAbility copy() {
+		return new CantCounterAbility(this);
 	}
 }

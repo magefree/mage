@@ -38,12 +38,19 @@ import mage.abilities.keyword.LevelAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class LevelerCard extends CardImpl {
+public abstract class LevelerCard<T extends LevelerCard<T>> extends CardImpl<T> {
 
-	private List<LevelAbility> levels = new ArrayList<LevelAbility>();
+	protected List<LevelAbility> levels = new ArrayList<LevelAbility>();
 
 	public LevelerCard(UUID ownerId, String name, CardType[] cardTypes, String costs) {
 		super(ownerId, name, cardTypes, costs);
+	}
+
+	public LevelerCard(LevelerCard card) {
+		super(card);
+		for (LevelAbility ability: (List<LevelAbility>)card.levels) {
+			this.levels.add(ability.copy());
+		}
 	}
 
 	public List<LevelAbility> getLevels() {

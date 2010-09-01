@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,14 +38,23 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AttachEffect extends OneShotEffect {
+public class AttachEffect extends OneShotEffect<AttachEffect> {
 
 	public AttachEffect(Outcome outcome) {
 		super(outcome);
 	}
 
+	public AttachEffect(final AttachEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
+	public AttachEffect copy() {
+		return new AttachEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
 		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
 			return permanent.addAttachment(source.getSourceId(), game);

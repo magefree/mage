@@ -42,19 +42,32 @@ import mage.sets.Zendikar;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EmeriaAngel extends CardImpl {
+public class EmeriaAngel extends CardImpl<EmeriaAngel> {
 
 	public EmeriaAngel(UUID ownerId) {
 		super(ownerId, "Emeria Angel", new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
 		this.expansionSetId = Zendikar.getInstance().getId();
 		this.subtype.add("Angel");
 		this.color.setWhite(true);
-		this.art = "123678_typ_reg_sty_010.jpg";
 		this.power = new MageInt(3);
 		this.toughness = new MageInt(3);
 
 		this.addAbility(FlyingAbility.getInstance());
 		this.addAbility(new LandfallAbility(new CreateTokenEffect(new BirdToken()), true));
+	}
+
+	public EmeriaAngel(final EmeriaAngel card) {
+		super(card);
+	}
+
+	@Override
+	public EmeriaAngel copy() {
+		return new EmeriaAngel(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123678_typ_reg_sty_010.jpg";
 	}
 
 }

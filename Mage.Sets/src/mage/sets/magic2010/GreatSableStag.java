@@ -43,14 +43,13 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GreatSableStag extends CardImpl {
+public class GreatSableStag extends CardImpl<GreatSableStag> {
 
 	public GreatSableStag(UUID ownerId) {
 		super(ownerId, "Great Sable Stag", new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.subtype.add("Elk");
 		this.color.setGreen(true);
-		this.art = "122172_typ_reg_sty_010.jpg";
 		this.power = new MageInt(3);
 		this.toughness = new MageInt(3);
 
@@ -63,6 +62,20 @@ public class GreatSableStag extends CardImpl {
 		filter2.getColor().setBlack(true);
 		this.addAbility(new ProtectionAbility(filter2));
 		this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterSourceEffect()));
+	}
+
+	public GreatSableStag(final GreatSableStag card) {
+		super(card);
+	}
+
+	@Override
+	public GreatSableStag copy() {
+		return new GreatSableStag(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "122172_typ_reg_sty_010.jpg";
 	}
 
 }

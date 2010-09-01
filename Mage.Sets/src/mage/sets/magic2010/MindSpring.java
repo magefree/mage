@@ -31,6 +31,7 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -41,28 +42,50 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MindSpring extends CardImpl {
+public class MindSpring extends CardImpl<MindSpring> {
 
 	public MindSpring(UUID ownerId) {
 		super(ownerId, "Mind Spring", new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setBlue(true);
-		this.art = "109919_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addEffect(new MindSpringEffect());
+	}
+
+	public MindSpring(final MindSpring card) {
+		super(card);
+	}
+
+	@Override
+	public MindSpring copy() {
+		return new MindSpring(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "109919_typ_reg_sty_010.jpg";
 	}
 
 }
 
-class MindSpringEffect extends OneShotEffect {
+class MindSpringEffect extends OneShotEffect<MindSpringEffect> {
 
 	public MindSpringEffect() {
 		super(Outcome.DrawCard);
 	}
 
+	public MindSpringEffect(final MindSpringEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		int amount = this.source.getManaCosts().getVariableCosts().get(0).getValue();
-		Player player = game.getPlayer(this.source.getControllerId());
+	public MindSpringEffect copy() {
+		return new MindSpringEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		int amount = source.getManaCosts().getVariableCosts().get(0).getValue();
+		Player player = game.getPlayer(source.getControllerId());
 		if (player != null) {
 			player.drawCards(amount, game);
 			return true;
@@ -71,7 +94,7 @@ class MindSpringEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Draw X cards";
 	}
 }

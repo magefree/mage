@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common;
 
+import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpecialAction;
 import mage.abilities.effects.OneShotEffect;
@@ -37,7 +38,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CreateSpecialActionEffect extends OneShotEffect {
+public class CreateSpecialActionEffect extends OneShotEffect<CreateSpecialActionEffect> {
 
 	protected SpecialAction action;
 
@@ -46,18 +47,28 @@ public class CreateSpecialActionEffect extends OneShotEffect {
 		this.action = action;
 	}
 
+	public CreateSpecialActionEffect(final CreateSpecialActionEffect effect) {
+		super(effect);
+		this.action = (SpecialAction) effect.action.copy();
+	}
+
 	@Override
-	public boolean apply(Game game) {
+	public CreateSpecialActionEffect copy() {
+		return new CreateSpecialActionEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
 		SpecialAction newAction = (SpecialAction) action.copy();
-		newAction.setSourceId(this.source.getSourceId());
-		newAction.setControllerId(this.source.getControllerId());
-		newAction.getTargets().addAll(this.source.getTargets());
+		newAction.setSourceId(source.getSourceId());
+		newAction.setControllerId(source.getControllerId());
+		newAction.getTargets().addAll(source.getTargets());
 		game.getState().getSpecialActions().add(newAction);
 		return true;
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return action.getRule();
 	}
 

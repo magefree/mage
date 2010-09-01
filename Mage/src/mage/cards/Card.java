@@ -43,14 +43,14 @@ public interface Card extends MageObject {
 	public UUID getOwnerId();
 	public String getArt();
 	public void setControllerId(UUID controllerId);
-	public void setOwnerId(UUID controllerId);
+	public void setOwnerId(UUID ownerId);
 	public void addAbility(Ability ability);
 	public SpellAbility getSpellAbility();
 	public List<String> getRules();
 	public Watchers getWatchers();
-	public Card copy();
 	public UUID getExpansionSetId();
 
 	public void checkTriggers(Zone zone, GameEvent event, Game game);
-	
+
+	public Card copy();
 }

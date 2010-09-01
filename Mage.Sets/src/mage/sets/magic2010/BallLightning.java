@@ -43,20 +43,33 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BallLightning extends CardImpl {
+public class BallLightning extends CardImpl<BallLightning> {
 
 	public BallLightning(UUID ownerId) {
 		super(ownerId, "Ball Lightning", new CardType[]{CardType.CREATURE}, "{R}{R}{R}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.subtype.add("Elemental");
 		this.color.setRed(true);
-		this.art = "122161_typ_reg_sty_010.jpg";
 		this.power = new MageInt(6);
 		this.toughness = new MageInt(1);
 
 		this.addAbility(TrampleAbility.getInstance());
 		this.addAbility(HasteAbility.getInstance());
 		this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", new SacrificeSourceEffect()));
+	}
+
+	public BallLightning(final BallLightning card) {
+		super(card);
+	}
+
+	@Override
+	public BallLightning copy() {
+		return new BallLightning(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "122161_typ_reg_sty_010.jpg";
 	}
 
 }

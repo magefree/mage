@@ -39,7 +39,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainAbilityControlledEffect;
 import mage.abilities.effects.common.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.IndestructableAbility;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.game.permanent.token.SoldierToken;
@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ElspethKnightErrant extends CardImpl {
+public class ElspethKnightErrant extends CardImpl<ElspethKnightErrant> {
 
 	private static SoldierToken soldierToken = new SoldierToken();
 
@@ -59,12 +59,11 @@ public class ElspethKnightErrant extends CardImpl {
 		this.expansionSetId = ShardsOfAlara.getInstance().getId();
 		this.subtype.add("Elspeth");
 		this.color.setWhite(true);
-		this.art = "114973_typ_reg_sty_010.jpg";
 		this.loyalty = new MageInt(4);
 
 		this.addAbility(new LoyaltyAbility(new CreateTokenEffect(soldierToken), 1));
 
-		Effects effects1 = new Effects(null);
+		Effects effects1 = new Effects();
 		effects1.add(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
 		effects1.add(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
 		LoyaltyAbility ability1 = new LoyaltyAbility(effects1, 1);
@@ -76,8 +75,22 @@ public class ElspethKnightErrant extends CardImpl {
 		filter.getCardType().add(CardType.CREATURE);
 		filter.getCardType().add(CardType.ENCHANTMENT);
 		filter.getCardType().add(CardType.LAND);
-		this.addAbility(new LoyaltyAbility(new GainAbilityControlledEffect(IndestructableAbility.getInstance(), Duration.EndOfGame, filter), -8));
+		this.addAbility(new LoyaltyAbility(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.EndOfGame, filter), -8));
 
+	}
+
+	public ElspethKnightErrant(final ElspethKnightErrant card) {
+		super(card);
+	}
+
+	@Override
+	public ElspethKnightErrant copy() {
+		return new ElspethKnightErrant(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "114973_typ_reg_sty_010.jpg";
 	}
 
 }

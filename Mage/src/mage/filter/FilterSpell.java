@@ -37,7 +37,7 @@ import mage.game.stack.Spell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterSpell extends FilterObject<Spell> {
+public class FilterSpell extends FilterObject<Spell, FilterSpell> {
 
 	protected List<UUID> controllerId = new ArrayList<UUID>();
 	protected boolean notController = false;
@@ -50,16 +50,24 @@ public class FilterSpell extends FilterObject<Spell> {
 		super(name);
 	}
 
+	public FilterSpell(FilterSpell filter) {
+		super(filter);
+		for (UUID cId: filter.controllerId) {
+			this.controllerId.add(cId);
+		}
+		this.notController = filter.notController;
+	}
+
 	@Override
 	public boolean match(Spell spell) {
 
 		if (!super.match(spell))
-			return false;
+			return notFilter;
 
 		if (controllerId.size() > 0 && controllerId.contains(spell.getControllerId()) == notController)
-			return false;
+			return notFilter;
 
-		return true;
+		return !notFilter;
 	}
 
 	public List<UUID> getControllerId() {
@@ -68,6 +76,11 @@ public class FilterSpell extends FilterObject<Spell> {
 
 	public void setNotController(boolean notController) {
 		this.notController = notController;
+	}
+
+	@Override
+	public FilterSpell copy() {
+		return new FilterSpell(this);
 	}
 
 }

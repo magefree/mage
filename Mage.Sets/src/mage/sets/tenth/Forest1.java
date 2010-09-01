@@ -36,12 +36,25 @@ import mage.sets.Tenth;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Forest1 extends Forest {
+public class Forest1 extends Forest<Forest1> {
 
 	public Forest1(UUID ownerId) {
 		super(ownerId);
 		this.expansionSetId = Tenth.getInstance().getId();
-		this.art = "89160_typ_reg_sty_010.jpg";
+	}
+
+	public Forest1(final Forest1 card) {
+		super(card);
+	}
+
+	@Override
+	public Forest1 copy() {
+		return new Forest1(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "89160_typ_reg_sty_010.jpg";
 	}
 
 }

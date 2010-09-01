@@ -32,7 +32,7 @@ package mage.filter.common;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterAttackingCreature extends FilterCreaturePermanent {
+public class FilterAttackingCreature extends FilterCreaturePermanent<FilterAttackingCreature> {
 
 	public FilterAttackingCreature() {
 		this("");
@@ -44,4 +44,12 @@ public class FilterAttackingCreature extends FilterCreaturePermanent {
 		this.useAttacking = true;
 	}
 
+	public FilterAttackingCreature(final FilterAttackingCreature filter) {
+		super(filter);
+	}
+
+	@Override
+	public FilterAttackingCreature copy() {
+		return new FilterAttackingCreature(this);
+	}
 }

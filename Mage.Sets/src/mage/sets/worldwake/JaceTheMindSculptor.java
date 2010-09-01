@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -52,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class JaceTheMindSculptor extends CardImpl {
+public class JaceTheMindSculptor extends CardImpl<JaceTheMindSculptor> {
 
 
 	public JaceTheMindSculptor(UUID ownerId) {
@@ -60,7 +61,6 @@ public class JaceTheMindSculptor extends CardImpl {
 		this.expansionSetId = Worldwake.getInstance().getId();
 		this.subtype.add("Jace");
 		this.color.setBlue(true);
-		this.art = "126493_typ_reg_sty_010.jpg";
 		this.loyalty = new MageInt(3);
 
 		LoyaltyAbility ability1 = new LoyaltyAbility(new JaceTheMindSculptorEffect1(), 2);
@@ -80,20 +80,43 @@ public class JaceTheMindSculptor extends CardImpl {
 
 	}
 
+	public JaceTheMindSculptor(final JaceTheMindSculptor card) {
+		super(card);
+	}
+
+	@Override
+	public JaceTheMindSculptor copy() {
+		return new JaceTheMindSculptor(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "126493_typ_reg_sty_010.jpg";
+	}
+
 }
 
-class JaceTheMindSculptorEffect1 extends OneShotEffect {
+class JaceTheMindSculptorEffect1 extends OneShotEffect<JaceTheMindSculptorEffect1> {
 
 	public JaceTheMindSculptorEffect1() {
 		super(Outcome.Detriment);
 	}
 
+	public JaceTheMindSculptorEffect1(final JaceTheMindSculptorEffect1 effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Player controller = game.getPlayer(this.source.getControllerId());
-		Player player = game.getPlayer(this.source.getFirstTarget());
+	public JaceTheMindSculptorEffect1 copy() {
+		return new JaceTheMindSculptorEffect1(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Player controller = game.getPlayer(source.getControllerId());
+		Player player = game.getPlayer(source.getFirstTarget());
 		if (controller != null && player != null) {
-			Cards cards = new CardsImpl(Zone.REVEALED);
+			Cards cards = new CardsImpl();
 			cards.add(player.getLibrary().getFromTop(game));
 			controller.lookAtCards(cards, game);
 			if (controller.chooseUse(outcome, "Do you wish to put card on the bottom of player's library?", game)) {
@@ -107,36 +130,45 @@ class JaceTheMindSculptorEffect1 extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Look at the top card of target player's library. You may put that card on the bottom of that player's library";
 	}
 
 }
 
-class JaceTheMindSculptorEffect2 extends OneShotEffect {
+class JaceTheMindSculptorEffect2 extends OneShotEffect<JaceTheMindSculptorEffect2> {
 
 	public JaceTheMindSculptorEffect2() {
 		super(Outcome.DrawCard);
 	}
 
+	public JaceTheMindSculptorEffect2(final JaceTheMindSculptorEffect2 effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Player player = game.getPlayer(this.source.getControllerId());
+	public JaceTheMindSculptorEffect2 copy() {
+		return new JaceTheMindSculptorEffect2(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Player player = game.getPlayer(source.getControllerId());
 		if (player != null) {
 			player.drawCards(3, game);
-			putOnLibrary(player, game);
-			putOnLibrary(player, game);
+			putOnLibrary(player, source, game);
+			putOnLibrary(player, source, game);
 			return true;
 		}
 		return false;
 	}
 
-	private boolean putOnLibrary(Player player, Game game) {
+	private boolean putOnLibrary(Player player, Ability source, Game game) {
 		TargetCardInHand target = new TargetCardInHand();
 		target.setRequired(true);
-		target.setAbility(source);
-		player.chooseTarget(Outcome.ReturnToHand, target, game);
-		Card card = player.getHand().get(target.getFirstTarget());
+//		target.setAbility(source);
+		player.chooseTarget(Outcome.ReturnToHand, target, source, game);
+		Card card = player.getHand().get(target.getFirstTarget(), game);
 		if (card != null) {
 			player.getHand().remove(card);
 			player.getLibrary().putOnTop(card, game);
@@ -145,21 +177,30 @@ class JaceTheMindSculptorEffect2 extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Draw three cards, then put two cards from your hand on top of your library in any order";
 	}
 
 }
 
-class JaceTheMindSculptorEffect3 extends OneShotEffect {
+class JaceTheMindSculptorEffect3 extends OneShotEffect<JaceTheMindSculptorEffect3> {
 
 	public JaceTheMindSculptorEffect3() {
 		super(Outcome.DrawCard);
 	}
 
+	public JaceTheMindSculptorEffect3(final JaceTheMindSculptorEffect3 effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Player player = game.getPlayer(this.source.getFirstTarget());
+	public JaceTheMindSculptorEffect3 copy() {
+		return new JaceTheMindSculptorEffect3(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Player player = game.getPlayer(source.getFirstTarget());
 		ExileZone exile = game.getExile().getPermanentExile();
 		if (player != null) {
 			while (true) {
@@ -168,7 +209,7 @@ class JaceTheMindSculptorEffect3 extends OneShotEffect {
 				Card card = player.getLibrary().removeFromTop(game);
 				exile.add(card);
 			}
-			player.getLibrary().addAll(player.getHand());
+			player.getLibrary().addAll(player.getHand().getCards(game));
 			player.getLibrary().shuffle();
 			player.getHand().clear();
 			return true;
@@ -177,7 +218,7 @@ class JaceTheMindSculptorEffect3 extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Exile all cards from target player's library, then that player shuffles his or her hand into his or her library";
 	}
 

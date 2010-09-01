@@ -30,6 +30,7 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -39,31 +40,40 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantCounterSourceEffect extends ReplacementEffectImpl {
+public class CantCounterSourceEffect extends ReplacementEffectImpl<CantCounterSourceEffect> {
 
 	public CantCounterSourceEffect() {
 		super(Duration.WhileOnStack, Outcome.Benefit);
 	}
 	
+	public CantCounterSourceEffect(final CantCounterSourceEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
+	public CantCounterSourceEffect copy() {
+		return new CantCounterSourceEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
 		return true;
 	}
 
 	@Override
-	public boolean replaceEvent(GameEvent event, Game game) {
+	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
 		return true;
 	}
 
 	@Override
-	public boolean applies(GameEvent event, Game game) {
+	public boolean applies(GameEvent event, Ability source, Game game) {
 		if (event.getType() == EventType.COUNTER && event.getTargetId().equals(source.getSourceId()))
 			return true;
 		return false;
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "{this} can't be countered";
 	}
 

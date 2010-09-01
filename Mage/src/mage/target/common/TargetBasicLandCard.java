@@ -35,7 +35,7 @@ import mage.target.TargetCard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetBasicLandCard extends TargetCard {
+public class TargetBasicLandCard extends TargetCard<TargetBasicLandCard> {
 
 	public TargetBasicLandCard(Zone zone) {
 		super(zone);
@@ -46,4 +46,12 @@ public class TargetBasicLandCard extends TargetCard {
 		filter.getName().add("Plains");
 	}
 
+	public TargetBasicLandCard(final TargetBasicLandCard target) {
+		super(target);
+	}
+
+	@Override
+	public TargetBasicLandCard copy() {
+		return new TargetBasicLandCard(this);
+	}
 }

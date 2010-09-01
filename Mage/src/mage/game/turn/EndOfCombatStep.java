@@ -37,7 +37,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EndOfCombatStep extends Step {
+public class EndOfCombatStep extends Step<EndOfCombatStep> {
 
 	public EndOfCombatStep() {
 		super(PhaseStep.END_COMBAT, true);
@@ -46,12 +46,21 @@ public class EndOfCombatStep extends Step {
 		this.postStepEvent = EventType.END_COMBAT_STEP_POST;
 	}
 
+	public EndOfCombatStep(final EndOfCombatStep step) {
+		super(step);
+	}
+
 	@Override
 	public void endStep(Game game, UUID activePlayerId) {
 		super.endStep(game, activePlayerId);
 		//20091005 - 511.3
 		game.getCombat().endCombat(game);
-		game.saveState();
+//		game.saveState();
+	}
+
+	@Override
+	public EndOfCombatStep copy() {
+		return new EndOfCombatStep(this);
 	}
 
 }

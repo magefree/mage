@@ -46,17 +46,14 @@ import mage.view.TableView;
  */
 public interface Server extends Remote, CallbackServer {
 
-//	public String getClientIp() throws RemoteException, MageException;
 	public UUID registerClient(String userName, UUID clientId) throws RemoteException, MageException;
 	public void deregisterClient(UUID sessionId) throws RemoteException, MageException;
 
-	public List<GameTypeView> getGameTypes() throws RemoteException, MageException;
-	public String[] getPlayerTypes() throws RemoteException, MageException;
-	public String[] getDeckTypes() throws RemoteException, MageException;
+	public ServerState getServerState() throws RemoteException, MageException;
 
 	//table methods
 	public TableView createTable(UUID sessionId, UUID roomId, String gameType, String deckType, List<String> playerTypes, MultiplayerAttackOption attackOption, RangeOfInfluence range) throws RemoteException, MageException;
-	public boolean joinTable(UUID sessionId, UUID roomId, UUID tableId, int seatNum, String name, DeckCardLists deckList) throws RemoteException, MageException, GameException;
+	public boolean joinTable(UUID sessionId, UUID roomId, UUID tableId, String name, DeckCardLists deckList) throws RemoteException, MageException, GameException;
 	public boolean watchTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
 	public boolean replayTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
 	public void leaveTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
@@ -95,6 +92,6 @@ public interface Server extends Remote, CallbackServer {
 	public void previousPlay(UUID sessionId) throws RemoteException, MageException;
 
 	//test methods
-	public void cheat(UUID gameId, UUID sessionId, DeckCardLists deckList) throws RemoteException, MageException;
+	public void cheat(UUID gameId, UUID sessionId, UUID playerId, DeckCardLists deckList) throws RemoteException, MageException;
 	
 }

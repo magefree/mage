@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import mage.cards.Card;
+import mage.game.Game;
 import mage.game.GameState;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -54,33 +55,33 @@ public class PlayerView implements Serializable {
 	private CardsView graveyard = new CardsView();
 	private Map<UUID, PermanentView> battlefield = new HashMap<UUID, PermanentView>();
 
-	public PlayerView(Player player, GameState game) {
+	public PlayerView(Player player, GameState state, Game game) {
 		this.playerId = player.getId();
 		this.name = player.getName();
 		this.life = player.getLife();
 		this.libraryCount = player.getLibrary().size();
 		this.handCount = player.getHand().size();
 		this.manaPool = new ManaPoolView(player.getManaPool());
-		this.isActive = (player.getId().equals(game.getActivePlayerId()));
+		this.isActive = (player.getId().equals(state.getActivePlayerId()));
 		this.hasLeft = player.hasLeft();
-		for (Card card: player.getGraveyard().values()) {
-			graveyard.add(new CardView(card));
+		for (Card card: player.getGraveyard().getCards(game)) {
+			graveyard.put(card.getId(), new CardView(card));
 		}
-		for (Permanent permanent: game.getBattlefield().getAllPermanents()) {
-			if (showInBattlefield(permanent, game)) {
+		for (Permanent permanent: state.getBattlefield().getAllPermanents()) {
+			if (showInBattlefield(permanent, state)) {
 				PermanentView view = new PermanentView(permanent);
 				battlefield.put(view.getId(), view);
 			}
 		}
 	}
 
-	private boolean showInBattlefield(Permanent permanent, GameState game) {
+	private boolean showInBattlefield(Permanent permanent, GameState state) {
 
 		//show permanents controlled by player or attachments to permanents controlled by player
 		if (permanent.getAttachedTo() == null)
 			return permanent.getControllerId().equals(playerId);
 		else
-			return game.getPermanent(permanent.getAttachedTo()).getControllerId().equals(playerId);
+			return state.getPermanent(permanent.getAttachedTo()).getControllerId().equals(playerId);
 	}
 
 	public int getLife() {

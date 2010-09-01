@@ -39,16 +39,29 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MaelstromPulse extends CardImpl {
+public class MaelstromPulse extends CardImpl<MaelstromPulse> {
 
 	public MaelstromPulse(UUID ownerId) {
 		super(ownerId, "Maelstrom Pulse", new CardType[]{CardType.SORCERY}, "{1}{B}{G}");
 		this.expansionSetId = AlaraReborn.getInstance().getId();
 		this.color.setBlack(true);
 		this.color.setGreen(true);
-		this.art = "121021_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetNonlandPermanent());
 		this.getSpellAbility().addEffect(new DestroyAllNamedPermanentsEffect());
+	}
+
+	public MaelstromPulse(final MaelstromPulse card) {
+		super(card);
+	}
+
+	@Override
+	public MaelstromPulse copy() {
+		return new MaelstromPulse(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121021_typ_reg_sty_010.jpg";
 	}
 
 }

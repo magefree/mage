@@ -39,7 +39,6 @@ import java.util.UUID;
 import mage.client.cards.BigCard;
 import mage.client.util.Config;
 import mage.view.CombatGroupView;
-import static mage.client.util.Constants.*;
 
 /**
  *
@@ -53,7 +52,6 @@ public class CombatGroup extends javax.swing.JPanel {
     /** Creates new form CombatGroup */
     public CombatGroup() {
         initComponents();
-//		setPreferredSize(new Dimension(160, 440));
     }
 
 	public void init(UUID gameId, BigCard bigCard) {
@@ -64,9 +62,9 @@ public class CombatGroup extends javax.swing.JPanel {
 	public void update(CombatGroupView combatGroup) {
 		this.lblDefender.setText(combatGroup.getDefenderName());
 		this.attackers.loadCards(combatGroup.getAttackers(), bigCard, gameId);
-		attackers.setPreferredSize(new Dimension(Config.dimensions.frameWidth + 6, Config.dimensions.frameHeight + 6));
+//		attackers.setPreferredSize(new Dimension(Config.dimensions.frameWidth + 6, Config.dimensions.frameHeight + 6));
 		this.blockers.loadCards(combatGroup.getBlockers(), bigCard, gameId);
-		blockers.setPreferredSize(new Dimension(Config.dimensions.frameWidth + 6, Config.dimensions.frameHeight + 6));
+//		blockers.setPreferredSize(new Dimension(Config.dimensions.frameWidth + 6, Config.dimensions.frameHeight + 6));
 		this.attackers.setVisible(true);
 		this.blockers.setVisible(true);
 	}
@@ -84,25 +82,29 @@ public class CombatGroup extends javax.swing.JPanel {
         attackers = new mage.client.cards.Cards();
         lblDefender = new javax.swing.JLabel();
 
+        blockers.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth + 8, Config.dimensions.frameHeight + 25));
+
+        attackers.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth + 8, Config.dimensions.frameHeight + 25));
+
         lblDefender.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblDefender.setText("jLabel1");
+        lblDefender.setText("Defender");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblDefender, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-            .addComponent(blockers, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-            .addComponent(attackers, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+            .addComponent(lblDefender, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+            .addComponent(blockers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(attackers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblDefender)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(blockers, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(blockers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(attackers, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(attackers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

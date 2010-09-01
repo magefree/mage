@@ -32,7 +32,7 @@ package mage.counters;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PlusOneCounter extends BoostCounter {
+public class PlusOneCounter extends BoostCounter<PlusOneCounter> {
 
 	public PlusOneCounter() {
 		this(1);

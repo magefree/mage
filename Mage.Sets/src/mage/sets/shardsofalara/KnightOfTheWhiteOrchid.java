@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class KnightOfTheWhiteOrchid extends CardImpl {
+public class KnightOfTheWhiteOrchid extends CardImpl<KnightOfTheWhiteOrchid> {
 
 	public KnightOfTheWhiteOrchid(UUID ownerId) {
 		super(ownerId, "Knight of the White Orchid", new CardType[]{CardType.CREATURE}, "{W}{W}");
@@ -58,7 +58,6 @@ public class KnightOfTheWhiteOrchid extends CardImpl {
 		this.subtype.add("Human");
 		this.subtype.add("Knight");
 		this.color.setWhite(true);
-		this.art = "116188_typ_reg_sty_010.jpg";
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
 
@@ -66,9 +65,23 @@ public class KnightOfTheWhiteOrchid extends CardImpl {
 		this.addAbility(FirstStrikeAbility.getInstance());
 	}
 
+	public KnightOfTheWhiteOrchid(final KnightOfTheWhiteOrchid card) {
+		super(card);
+	}
+
+	@Override
+	public KnightOfTheWhiteOrchid copy() {
+		return new KnightOfTheWhiteOrchid(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "116188_typ_reg_sty_010.jpg";
+	}
+
 }
 
-class KnightOfTheWhiteOrchidAbility extends EntersBattlefieldTriggeredAbility {
+class KnightOfTheWhiteOrchidAbility extends EntersBattlefieldTriggeredAbility<KnightOfTheWhiteOrchidAbility> {
 
 	public KnightOfTheWhiteOrchidAbility() {
 		super(null, true);
@@ -76,6 +89,15 @@ class KnightOfTheWhiteOrchidAbility extends EntersBattlefieldTriggeredAbility {
 		filter.getName().add("Plains");
 		TargetCardInLibrary target = new TargetCardInLibrary(filter);
 		addEffect(new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay));
+	}
+
+	public KnightOfTheWhiteOrchidAbility(final KnightOfTheWhiteOrchidAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public KnightOfTheWhiteOrchidAbility copy() {
+		return new KnightOfTheWhiteOrchidAbility(this);
 	}
 
 	@Override

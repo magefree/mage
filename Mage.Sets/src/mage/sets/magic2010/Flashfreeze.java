@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Flashfreeze extends CardImpl {
+public class Flashfreeze extends CardImpl<Flashfreeze> {
 
 	private static FilterSpell filter = new FilterSpell("red or green spell");
 
@@ -56,9 +56,22 @@ public class Flashfreeze extends CardImpl {
 		super(ownerId, "Flashfreeze", new CardType[]{CardType.INSTANT}, "{1}{U}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setBlue(true);
-		this.art = "96954_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetSpell(filter));
 		this.getSpellAbility().addEffect(new CounterTargetEffect());
+	}
+
+	public Flashfreeze(final Flashfreeze card) {
+		super(card);
+	}
+
+	@Override
+	public Flashfreeze copy() {
+		return new Flashfreeze(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "96954_typ_reg_sty_010.jpg";
 	}
 
 }

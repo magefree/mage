@@ -34,12 +34,16 @@
 
 package mage.client.cards;
 
+import java.awt.Component;
 import java.awt.Dimension;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 import mage.client.util.Config;
 import mage.view.CardView;
 import mage.view.CardsView;
-import static mage.client.util.Constants.*;
 
 /**
  *
@@ -47,25 +51,51 @@ import static mage.client.util.Constants.*;
  */
 public class Cards extends javax.swing.JPanel {
 
+	private Map<UUID, Card> cards = new HashMap<UUID, Card>();
+
     /** Creates new form Cards */
     public Cards() {
         initComponents();
-		cardArea.setPreferredSize(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight));
     }
 
-	public void loadCards(CardsView cards, BigCard bigCard, UUID gameId) {
-		cardArea.removeAll();
-		for (CardView card: cards) {
-			Card cardImg = new Card(card, bigCard, Config.dimensions, gameId);
-			cardArea.add(cardImg);
-			cardImg.update(card);
+	public boolean loadCards(CardsView cardsView, BigCard bigCard, UUID gameId) {
+		boolean changed = false;
+		for (CardView card: cardsView.values()) {
+			if (!cards.containsKey(card.getId())) {
+				Card cardImg = new Card(card, bigCard, Config.dimensions, gameId);
+				cards.put(card.getId(), cardImg);
+				cardArea.add(cardImg);
+				changed = true;
+			}
+			cards.get(card.getId()).update(card);
 		}
+		for (Iterator<Entry<UUID, Card>> i = cards.entrySet().iterator(); i.hasNext();) {
+			Entry<UUID, Card> entry = i.next();
+			if (!cardsView.containsKey(entry.getKey())) {
+				removeCard(entry.getKey());
+				i.remove();
+				changed = true;
+			}
+		}
+
 		cardArea.setPreferredSize(new Dimension(cards.size() * Config.dimensions.frameWidth, Config.dimensions.frameHeight));
 		cardArea.revalidate();
 		cardArea.repaint();
 		this.revalidate();
 		this.repaint();
+		return changed;
 	}
+
+	private void removeCard(UUID cardId) {
+        for (Component comp: cardArea.getComponents()) {
+        	if (comp instanceof Card) {
+        		if (((Card)comp).getCardId().equals(cardId)) {
+					cardArea.remove(comp);
+        		}
+        	}
+        }
+	}
+
 
     /** This method is called from within the constructor to
      * initialize the form.

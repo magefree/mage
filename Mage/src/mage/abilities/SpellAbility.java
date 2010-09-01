@@ -29,6 +29,7 @@
 package mage.abilities;
 
 import java.util.UUID;
+import mage.Constants.AbilityType;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.abilities.costs.mana.ManaCost;
@@ -39,12 +40,16 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SpellAbility extends ActivatedAbilityImpl {
+public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
 
-	public SpellAbility(ManaCost cost) {
-		super(Zone.HAND);
+	public SpellAbility(ManaCost cost, String cardName) {
+		super(AbilityType.SPELL, Zone.HAND);
 		this.addManaCost(cost);
-		this.name = "Cast";
+		this.name = "Cast " + cardName;
+	}
+
+	public SpellAbility(SpellAbility ability) {
+		super(ability);
 	}
 
 	@Override
@@ -52,7 +57,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
 		if ((game.getObject(sourceId).getCardType().contains(CardType.INSTANT) ||
 			game.getObject(sourceId).getAbilities().containsKey(FlashAbility.getInstance().getId()) ||
 			game.canPlaySorcery(playerId)) &&
-			costs.canPay(playerId, game) && targets.canChoose(sourceId, playerId, game)) {
+			costs.canPay(this, game) && targets.canChoose(sourceId, playerId, game)) {
 			return true;
 		}
 		return false;
@@ -68,6 +73,16 @@ public class SpellAbility extends ActivatedAbilityImpl {
 		this.targets.clearChosen();
 		this.manaCosts.clearPaid();
 		this.costs.clearPaid();
+	}
+
+	@Override
+	public String toString() {
+		return this.name;
+	}
+
+	@Override
+	public SpellAbility copy() {
+		return new SpellAbility(this);
 	}
 
 }

@@ -42,16 +42,29 @@ import mage.sets.ShardsOfAlara;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CrumblingNecropolis extends CardImpl {
+public class CrumblingNecropolis extends CardImpl<CrumblingNecropolis> {
 
 	public CrumblingNecropolis(UUID ownerId) {
 		super(ownerId, "Crumbling Necropolis", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = ShardsOfAlara.getInstance().getId();
-		this.art = "115145_typ_reg_sty_010.jpg";
 		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
 		this.addAbility(new RedManaAbility());
 		this.addAbility(new BlueManaAbility());
 		this.addAbility(new BlackManaAbility());
+	}
+
+	public CrumblingNecropolis(final CrumblingNecropolis card) {
+		super(card);
+	}
+
+	@Override
+	public CrumblingNecropolis copy() {
+		return new CrumblingNecropolis(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "115145_typ_reg_sty_010.jpg";
 	}
 
 }

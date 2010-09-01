@@ -34,16 +34,24 @@ import mage.filter.FilterPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterLegendaryPermanent extends FilterPermanent {
+public class FilterLegendaryPermanent extends FilterPermanent<FilterLegendaryPermanent> {
 
 	public FilterLegendaryPermanent() {
 		this("legend");
 	}
 
-
 	public FilterLegendaryPermanent(String name) {
 		super(name);
 		this.supertype.add("Legendary");
+	}
+
+	public FilterLegendaryPermanent(final FilterLegendaryPermanent filter) {
+		super(filter);
+	}
+
+	@Override
+	public FilterLegendaryPermanent copy() {
+		return new FilterLegendaryPermanent(this);
 	}
 
 }

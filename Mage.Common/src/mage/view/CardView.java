@@ -78,7 +78,7 @@ public class CardView implements Serializable {
 	}
 
 	protected CardView() {
-		
+
 	}
 
 	protected List<String> formatRules(List<String> rules) {

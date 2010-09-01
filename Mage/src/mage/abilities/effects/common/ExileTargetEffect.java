@@ -31,6 +31,7 @@ package mage.abilities.effects.common;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -39,7 +40,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ExileTargetEffect extends OneShotEffect {
+public class ExileTargetEffect extends OneShotEffect<ExileTargetEffect> {
 
 	private String exileZone = null;
 	private UUID exileId = null;
@@ -54,9 +55,20 @@ public class ExileTargetEffect extends OneShotEffect {
 		super(Outcome.Exile);
 	}
 
+	public ExileTargetEffect(final ExileTargetEffect effect) {
+		super(effect);
+		this.exileZone = effect.exileZone;
+		this.exileId = effect.exileId;
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Permanent permanent = game.getPermanent(this.source.getFirstTarget());
+	public ExileTargetEffect copy() {
+		return new ExileTargetEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
 			return permanent.moveToExile(exileId, exileZone, game);
 		}
@@ -64,8 +76,8 @@ public class ExileTargetEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
-		return "Exile target " + this.source.getTargets().get(0).getTargetName();
+	public String getText(Ability source) {
+		return "Exile target " + source.getTargets().get(0).getTargetName();
 	}
 
 }

@@ -42,18 +42,34 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HonorOfThePure extends CardImpl {
+public class HonorOfThePure extends CardImpl<HonorOfThePure> {
 
-	private FilterCreaturePermanent filter = new FilterCreaturePermanent("White creatures");
+	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("White creatures");
+
+	static {
+		filter.setUseColor(true);
+		filter.getColor().setWhite(true);
+	}
 
 	public HonorOfThePure(UUID ownerId) {
 		super(ownerId, "Honor of the Pure", new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setWhite(true);
-		this.art = "102628_typ_reg_sty_010.jpg";
-		filter.setUseColor(true);
-		filter.getColor().setWhite(true);
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter)));
+	}
+
+	public HonorOfThePure(final HonorOfThePure card) {
+		super(card);
+	}
+
+	@Override
+	public HonorOfThePure copy() {
+		return new HonorOfThePure(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "102628_typ_reg_sty_010.jpg";
 	}
 
 }

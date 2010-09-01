@@ -35,10 +35,13 @@ import mage.abilities.mana.BlackManaAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Swamp extends BasicLand {
+public abstract class Swamp<T extends Swamp<T>> extends BasicLand<T> {
 
 	public Swamp(UUID ownerId) {
 		super(ownerId, "Swamp", new BlackManaAbility());
 	}
 
+	public Swamp(Swamp land) {
+		super(land);
+	}
 }

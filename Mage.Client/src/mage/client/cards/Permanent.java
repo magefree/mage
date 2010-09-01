@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.PopupFactory;
+import mage.client.util.Config;
 import mage.client.util.ImageHelper;
 import mage.view.CounterView;
 import mage.view.PermanentView;
@@ -69,7 +70,7 @@ public class Permanent extends Card {
 		super(permanent, bigCard, dimensions, gameId);
 		this.setSize(this.getPreferredSize());
 		this.permanent = permanent;
-		tappedImage = new BufferedImage(dimension.frameHeight, dimension.frameWidth, BufferedImage.TYPE_INT_RGB);
+		tappedImage = new BufferedImage(Config.dimensions.frameHeight, Config.dimensions.frameWidth, BufferedImage.TYPE_INT_RGB);
 	}
 
 	public UUID getPermanentId() {
@@ -153,10 +154,10 @@ public class Permanent extends Card {
 	      g2.setColor(Color.BLACK);
 	    }
 	    if (permanent.isTapped()) {
-	    	g2.drawRect(0, 0, dimension.frameHeight - 1, dimension.frameWidth - 1);
+	    	g2.drawRect(0, 0, Config.dimensions.frameHeight - 1, Config.dimensions.frameWidth - 1);
 	    }
 	    else {
-	    	g2.drawRect(0, 0, dimension.frameWidth - 1, dimension.frameHeight - 1);
+	    	g2.drawRect(0, 0, Config.dimensions.frameWidth - 1, Config.dimensions.frameHeight - 1);
 	    }
 
 	}
@@ -185,10 +186,10 @@ public class Permanent extends Card {
 	@Override
 	public Dimension getPreferredSize() {
 	    if (permanent != null && permanent.isTapped()) {
-	    	return new Dimension(dimension.frameHeight, dimension.frameWidth);
+	    	return new Dimension(Config.dimensions.frameHeight, Config.dimensions.frameWidth);
 	    }
 	    else {
-	    	return new Dimension(dimension.frameWidth, dimension.frameHeight);
+	    	return new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 	    }
 	}
 
@@ -203,17 +204,20 @@ public class Permanent extends Card {
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		if (popup != null)
+		if (!popupShowing) {
+			if (popup != null)
+				popup.hide();
+			PopupFactory factory = PopupFactory.getSharedInstance();
+			int x = (int) this.getLocationOnScreen().getX() + (permanent.isTapped()?Config.dimensions.frameHeight:Config.dimensions.frameWidth);
+			int y = (int) this.getLocationOnScreen().getY() + 40;
+			popup = factory.getPopup(this, popupText, x, y);
+			popup.show();
+			//hack to get popup to resize to fit text
 			popup.hide();
-		PopupFactory factory = PopupFactory.getSharedInstance();
-		int x = (int) this.getLocationOnScreen().getX() + (permanent.isTapped()?dimension.frameHeight:dimension.frameWidth);
-		int y = (int) this.getLocationOnScreen().getY() + 40;
-		popup = factory.getPopup(this, popupText, x, y);
-		popup.show();
-		//hack to get popup to resize to fit text
-		popup.hide();
-		popup = factory.getPopup(this, popupText, x, y);
-		popup.show();
+			popup = factory.getPopup(this, popupText, x, y);
+			popup.show();
+			popupShowing = true;
+		}
 	}
 
     /** This method is called from within the constructor to

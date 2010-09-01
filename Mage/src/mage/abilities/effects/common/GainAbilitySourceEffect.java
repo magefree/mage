@@ -41,7 +41,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GainAbilitySourceEffect extends ContinuousEffectImpl {
+public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySourceEffect> {
 
 	protected Ability ability;
 
@@ -50,18 +50,29 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
 		this.ability = ability;
 	}
 
+	public GainAbilitySourceEffect(final GainAbilitySourceEffect effect) {
+		super(effect);
+		this.ability = effect.ability.copy();
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Permanent permanent = game.getPermanent(this.source.getSourceId());
+	public GainAbilitySourceEffect copy() {
+		return new GainAbilitySourceEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
 			permanent.addAbility(ability);
+			//TODO: should copy ability before adding
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("{this} gains ").append(ability.getRule()).append(" ").append(duration.toString());
 		return sb.toString();

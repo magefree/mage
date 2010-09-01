@@ -45,15 +45,28 @@ import mage.sets.Worldwake;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BasiliskCollar extends CardImpl {
+public class BasiliskCollar extends CardImpl<BasiliskCollar> {
 
 	public BasiliskCollar(UUID ownerId) {
 		super(ownerId, "Basilisk Collar", new CardType[]{CardType.ARTIFACT}, "{1}");
 		this.expansionSetId = Worldwake.getInstance().getId();
-		this.art = "126549_typ_reg_sty_010.jpg";
 		this.subtype.add("Equipment");
 		this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance())));
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DeathtouchAbility.getInstance())));
+	}
+
+	public BasiliskCollar(final BasiliskCollar card) {
+		super(card);
+	}
+
+	@Override
+	public BasiliskCollar copy() {
+		return new BasiliskCollar(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "126549_typ_reg_sty_010.jpg";
 	}
 }

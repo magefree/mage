@@ -28,10 +28,11 @@
 
 package mage.abilities.effects.common;
 
+import java.util.List;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.players.Player;
@@ -39,24 +40,30 @@ import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author LokiX
+ * @author LokiX, BetaSteward_at_googlemail.com
  */
-public class SearchLibraryPutInHandEffect extends OneShotEffect {
-
-    private TargetCardInLibrary target;
+public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutInHandEffect> {
 
     public SearchLibraryPutInHandEffect(TargetCardInLibrary target) {
-		super(Outcome.DrawCard);
-		this.target = target;
+		super(target, Outcome.DrawCard);
     }
 
+	public SearchLibraryPutInHandEffect(final SearchLibraryPutInHandEffect effect) {
+		super(effect);
+	}
+
+	@Override
+	public SearchLibraryPutInHandEffect copy() {
+		return new SearchLibraryPutInHandEffect(this);
+	}
+
     @Override
-    public boolean apply(Game game) {
-        Player player = game.getPlayer(this.source.getControllerId());
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
 		player.searchLibrary(target, game);
         if (target.getTargets().size() > 0) {
-            for (UUID cardId: target.getTargets()) {
-                Card card = player.getLibrary().remove(cardId);
+            for (UUID cardId: (List<UUID>)target.getTargets()) {
+                Card card = player.getLibrary().remove(cardId, game);
                 if (card != null){
                     player.putInHand(card, game);
                 }
@@ -67,7 +74,7 @@ public class SearchLibraryPutInHandEffect extends OneShotEffect {
     }
 
     @Override
-    public String getText() {
+    public String getText(Ability source) {
         StringBuilder sb = new StringBuilder();
         sb.append("Search your library for ");
         if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
@@ -82,9 +89,9 @@ public class SearchLibraryPutInHandEffect extends OneShotEffect {
 		return sb.toString();
     }
 
-    @Override
-    public void setSource(Ability ability) {
-		super.setSource(ability);
-		target.setAbility(ability);
-    }
+//    @Override
+//    public void setSource(Ability ability) {
+//		super.setSource(ability);
+//		target.setAbility(ability);
+//    }
 }

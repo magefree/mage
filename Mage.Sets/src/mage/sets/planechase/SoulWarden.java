@@ -46,7 +46,7 @@ import mage.sets.Planechase;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SoulWarden extends CardImpl {
+public class SoulWarden extends CardImpl<SoulWarden> {
 
 	public SoulWarden(UUID ownerId) {
 		super(ownerId, "Soul Warden", new CardType[]{CardType.CREATURE}, "{W}");
@@ -54,18 +54,40 @@ public class SoulWarden extends CardImpl {
 		this.subtype.add("Human");
 		this.subtype.add("Cleric");
 		this.color.setWhite(true);
-		this.art = "05621_typ_reg_sty_010.jpg";
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
 		this.addAbility(new SoulWardenAbility());
 	}
 
+	public SoulWarden(final SoulWarden card) {
+		super(card);
+	}
+
+	@Override
+	public SoulWarden copy() {
+		return new SoulWarden(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "05621_typ_reg_sty_010.jpg";
+	}
+
 }
 
-class SoulWardenAbility extends TriggeredAbilityImpl {
+class SoulWardenAbility extends TriggeredAbilityImpl<SoulWardenAbility> {
 
 	public SoulWardenAbility() {
 		super(Zone.BATTLEFIELD, new GainLifeEffect(1));
+	}
+
+	public SoulWardenAbility(final SoulWardenAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public SoulWardenAbility copy() {
+		return new SoulWardenAbility(this);
 	}
 
 	@Override

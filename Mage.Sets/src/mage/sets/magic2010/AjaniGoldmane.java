@@ -36,6 +36,7 @@ import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -57,25 +58,38 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AjaniGoldmane extends CardImpl {
+public class AjaniGoldmane extends CardImpl<AjaniGoldmane> {
 
 	public AjaniGoldmane(UUID ownerId) {
 		super(ownerId, "Ajani Goldmane", new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.subtype.add("Ajani");
 		this.color.setWhite(true);
-		this.art = "105545_typ_reg_sty_010.jpg";
 		this.loyalty = new MageInt(4);
 
 		this.addAbility(new LoyaltyAbility(new GainLifeEffect(2), 1));
 
-		Effects effects1 = new Effects(null);
+		Effects effects1 = new Effects();
 		effects1.add(new AddPlusOneCountersControlledEffect(1));
 		effects1.add(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
 		this.addAbility(new LoyaltyAbility(effects1, -1));
 
 		this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new AvatarToken()), -6));
 
+	}
+
+	public AjaniGoldmane(final AjaniGoldmane card) {
+		super(card);
+	}
+
+	@Override
+	public AjaniGoldmane copy() {
+		return new AjaniGoldmane(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "105545_typ_reg_sty_010.jpg";
 	}
 
 }
@@ -92,17 +106,26 @@ class AvatarToken extends Token {
 
 }
 
-class AvatarTokenEffect extends ContinuousEffectImpl {
+class AvatarTokenEffect extends ContinuousEffectImpl<AvatarTokenEffect> {
 
 	public AvatarTokenEffect() {
 		super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
 	}
 
+	public AvatarTokenEffect(final AvatarTokenEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Permanent token = game.getPermanent(this.source.getSourceId());
+	public AvatarTokenEffect copy() {
+		return new AvatarTokenEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent token = game.getPermanent(source.getSourceId());
 		if (token != null) {
-			Player controller = game.getPlayer(this.source.getControllerId());
+			Player controller = game.getPlayer(source.getControllerId());
 			if (controller != null) {
 				token.getPower().setValue(controller.getLife());
 				token.getToughness().setValue(controller.getLife());

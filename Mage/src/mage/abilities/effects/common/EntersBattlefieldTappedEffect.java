@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common;
 
+import mage.abilities.Ability;
 import mage.abilities.effects.EntersBattlefieldEffect;
 
 /**
@@ -40,8 +41,17 @@ public class EntersBattlefieldTappedEffect extends EntersBattlefieldEffect {
 		super(new TapSourceEffect());
 	}
 
+	public EntersBattlefieldTappedEffect(final EntersBattlefieldTappedEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public String getText() {
+	public EntersBattlefieldTappedEffect copy() {
+		return new EntersBattlefieldTappedEffect(this);
+	}
+
+	@Override
+	public String getText(Ability source) {
 		return "{this} enters the battlefield tapped";
 	}
 }

@@ -30,6 +30,7 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.filter.FilterSpell;
 import mage.game.Game;
@@ -42,7 +43,7 @@ import mage.game.stack.StackObject;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantCounterControlledEffect extends ReplacementEffectImpl {
+public class CantCounterControlledEffect extends ReplacementEffectImpl<CantCounterControlledEffect> {
 
 	private FilterSpell filter;
 
@@ -51,21 +52,31 @@ public class CantCounterControlledEffect extends ReplacementEffectImpl {
 		this.filter = filter;
 	}
 
+	public CantCounterControlledEffect(final CantCounterControlledEffect effect) {
+		super(effect);
+		this.filter = effect.filter.copy();
+	}
+
 	@Override
-	public boolean apply(Game game) {
+	public CantCounterControlledEffect copy() {
+		return new CantCounterControlledEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
 		return true;
 	}
 
 	@Override
-	public boolean replaceEvent(GameEvent event, Game game) {
+	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
 		return true;
 	}
 
 	@Override
-	public boolean applies(GameEvent event, Game game) {
+	public boolean applies(GameEvent event, Ability source, Game game) {
 		if (event.getType() == EventType.COUNTER) {
 			filter.getControllerId().clear();
-			filter.getControllerId().add(this.source.getControllerId());
+			filter.getControllerId().add(source.getControllerId());
 			StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
 			if (stackObject instanceof Spell) {
 				if (filter.match((Spell) stackObject))
@@ -76,7 +87,7 @@ public class CantCounterControlledEffect extends ReplacementEffectImpl {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return filter.getMessage() + " can't be countered";
 	}
 

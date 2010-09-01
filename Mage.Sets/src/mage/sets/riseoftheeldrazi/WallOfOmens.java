@@ -41,19 +41,32 @@ import mage.sets.RiseOfTheEldrazi;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WallOfOmens extends CardImpl {
+public class WallOfOmens extends CardImpl<WallOfOmens> {
 
 	public WallOfOmens(UUID ownerId) {
 		super(ownerId, "Wall Of Omens", new CardType[]{CardType.CREATURE}, "{1}{W}");
 		this.expansionSetId = RiseOfTheEldrazi.getInstance().getId();
 		this.subtype.add("Wall");
 		this.color.setWhite(true);
-		this.art = "127342_typ_reg_sty_010.jpg";
 		this.power = new MageInt(0);
 		this.toughness = new MageInt(4);
 
 		this.addAbility(DefenderAbility.getInstance());
 		this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1), false));
+	}
+
+	public WallOfOmens(final WallOfOmens card) {
+		super(card);
+	}
+
+	@Override
+	public WallOfOmens copy() {
+		return new WallOfOmens(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "127342_typ_reg_sty_010.jpg";
 	}
 
 }

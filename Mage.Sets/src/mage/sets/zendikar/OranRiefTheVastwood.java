@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldStaticAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -49,31 +50,54 @@ import mage.sets.Zendikar;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class OranRiefTheVastwood extends CardImpl {
+public class OranRiefTheVastwood extends CardImpl<OranRiefTheVastwood> {
 
 	public OranRiefTheVastwood(UUID ownerId) {
 		super(ownerId, "Oran-Rief, the Vastwood", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Zendikar.getInstance().getId();
-		this.art = "123692_typ_reg_sty_010.jpg";
+//		this.art = "123692_typ_reg_sty_010.jpg";
 		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new OranRiefTheVastwoodEffect(), new TapSourceCost()));
 	}
 
+	public OranRiefTheVastwood(final OranRiefTheVastwood card) {
+		super(card);
+	}
+
+	@Override
+	public OranRiefTheVastwood copy() {
+		return new OranRiefTheVastwood(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123692_typ_reg_sty_010.jpg";
+	}
+
 }
 
-class OranRiefTheVastwoodEffect extends OneShotEffect {
+class OranRiefTheVastwoodEffect extends OneShotEffect<OranRiefTheVastwoodEffect> {
 
 	public OranRiefTheVastwoodEffect() {
 		super(Outcome.BoostCreature);
 	}
 
+	public OranRiefTheVastwoodEffect(final OranRiefTheVastwoodEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
+	public OranRiefTheVastwoodEffect copy() {
+		return new OranRiefTheVastwoodEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
 		FilterPermanent filter = new FilterPermanent();
 		filter.getCardType().add(CardType.CREATURE);
 		filter.getColor().setGreen(true);
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, this.source.getControllerId(), game)) {
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
 			if (permanent.getTurnsOnBattlefield() == 0) {
 				permanent.getCounters().addCounter(new PlusOneCounter());
 			}
@@ -82,7 +106,7 @@ class OranRiefTheVastwoodEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Put a +1/+1 counter on each green creature that entered the battlefield this turn";
 	}
 

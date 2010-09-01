@@ -28,21 +28,32 @@
 
 package mage.abilities.costs.mana;
 
-import java.util.UUID;
 import mage.Constants.ColoredManaSymbol;
 import mage.Mana;
+import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.game.Game;
 import mage.players.ManaPool;
 import mage.players.Player;
 
-public abstract class ManaCostImpl extends CostImpl implements ManaCost {
+public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T> implements ManaCost {
 
-	protected Mana payment = new Mana();
-	protected ManaOptions options = new ManaOptions();
+	protected Mana payment;
+	protected ManaOptions options;
+
+	@Override
+	public abstract T copy();
 
 	public ManaCostImpl() {
+		payment = new Mana();
+		options = new ManaOptions();
+	}
+
+	public ManaCostImpl(final ManaCostImpl cost) {
+		super(cost);
+		this.payment = cost.payment.copy();
+		this.options = cost.options.copy();
 	}
 
 	@Override
@@ -166,17 +177,17 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
 	}
 
 	@Override
-	public boolean canPay(UUID playerId, Game game) {
+	public boolean canPay(Ability source, Game game) {
 		return true;
 	}
 
 	@Override
-	public boolean pay(Game game, boolean noMana) {
+	public boolean pay(Game game, Ability source, boolean noMana) {
 		if (noMana) {
 			setPaid();
 			return true;
 		}
-		Player player = game.getPlayer(this.getAbility().getControllerId());
+		Player player = game.getPlayer(source.getControllerId());
 		assignPayment(player.getManaPool());
 		while (!isPaid()) {
 			if (player.playMana(this, game))

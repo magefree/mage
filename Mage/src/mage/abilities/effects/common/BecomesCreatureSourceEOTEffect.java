@@ -43,7 +43,7 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BecomesCreatureSourceEOTEffect extends ContinuousEffectImpl {
+public class BecomesCreatureSourceEOTEffect extends ContinuousEffectImpl<BecomesCreatureSourceEOTEffect> {
 
 	protected Token token;
 	protected String type;
@@ -54,51 +54,65 @@ public class BecomesCreatureSourceEOTEffect extends ContinuousEffectImpl {
 		this.type = type;
 	}
 
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Game game) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		switch (layer) {
-			case TypeChangingEffects_4:
-				if (sublayer == SubLayer.NA) {
-					if (token.getCardType().size() > 0)
-						permanent.getCardType().addAll(token.getCardType());
-					if (token.getSubtype().size() > 0)
-						permanent.getSubtype().addAll(token.getSubtype());
-				}
-				break;
-			case ColorChangingEffects_5:
-				if (sublayer == SubLayer.NA) {
-					if (token.getColor().hasColor())
-						permanent.getColor().setColor(token.getColor());
-				}
-				break;
-			case AbilityAddingRemovingEffects_6:
-				if (sublayer == SubLayer.NA) {
-					if (token.getAbilities().size() > 0) {
-						for (Ability ability: token.getAbilities()) {
-							permanent.addAbility(ability);
-						}
-					}
-				}
-				break;
-			case PTChangingEffects_7:
-				if (sublayer == SubLayer.SetPT_7b) {
-					if (token.getPower() != MageInt.EmptyMageInt)
-						permanent.getPower().setValue(token.getPower().getValue());
-					if (token.getToughness() != MageInt.EmptyMageInt)
-						permanent.getToughness().setValue(token.getToughness().getValue());
-				}
-		}
-		return true;
+	public BecomesCreatureSourceEOTEffect(final BecomesCreatureSourceEOTEffect effect) {
+		super(effect);
+		this.token = effect.token.copy();
+		this.type = effect.type;
 	}
 
 	@Override
-	public boolean apply(Game game) {
+	public BecomesCreatureSourceEOTEffect copy() {
+		return new BecomesCreatureSourceEOTEffect(this);
+	}
+
+	@Override
+	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+		Permanent permanent = game.getPermanent(source.getSourceId());
+		if (permanent != null) {
+			switch (layer) {
+				case TypeChangingEffects_4:
+					if (sublayer == SubLayer.NA) {
+						if (token.getCardType().size() > 0)
+							permanent.getCardType().addAll(token.getCardType());
+						if (token.getSubtype().size() > 0)
+							permanent.getSubtype().addAll(token.getSubtype());
+					}
+					break;
+				case ColorChangingEffects_5:
+					if (sublayer == SubLayer.NA) {
+						if (token.getColor().hasColor())
+							permanent.getColor().setColor(token.getColor());
+					}
+					break;
+				case AbilityAddingRemovingEffects_6:
+					if (sublayer == SubLayer.NA) {
+						if (token.getAbilities().size() > 0) {
+							for (Ability ability: token.getAbilities()) {
+								permanent.addAbility(ability);
+							}
+						}
+					}
+					break;
+				case PTChangingEffects_7:
+					if (sublayer == SubLayer.SetPT_7b) {
+						if (token.getPower() != MageInt.EmptyMageInt)
+							permanent.getPower().setValue(token.getPower().getValue());
+						if (token.getToughness() != MageInt.EmptyMageInt)
+							permanent.getToughness().setValue(token.getToughness().getValue());
+					}
+			}
+			return true;
+		}
 		return false;
 	}
 
 	@Override
-	public String getText() {
+	public boolean apply(Game game, Ability source) {
+		return false;
+	}
+
+	@Override
+	public String getText(Ability source) {
 		return "Until end of turn {this} becomes a " + token.getDescription() + " that's still a " + this.type;
 	}
 

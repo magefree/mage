@@ -36,7 +36,7 @@ import mage.abilities.StaticAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HasteAbility extends StaticAbility {
+public class HasteAbility extends StaticAbility<HasteAbility> {
 
 	private static final HasteAbility fINSTANCE =  new HasteAbility();
 
@@ -55,6 +55,11 @@ public class HasteAbility extends StaticAbility {
 	@Override
 	public String getRule() {
 		return "Haste";
+	}
+
+	@Override
+	public HasteAbility copy() {
+		return fINSTANCE;
 	}
 
 }

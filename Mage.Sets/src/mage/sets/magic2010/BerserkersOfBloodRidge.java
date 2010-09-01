@@ -39,7 +39,7 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BerserkersOfBloodRidge  extends CardImpl {
+public class BerserkersOfBloodRidge  extends CardImpl<BerserkersOfBloodRidge> {
 
 	public BerserkersOfBloodRidge(UUID ownerId) {
 		super(ownerId, "Berserkers of Blood Ridge", new CardType[]{CardType.CREATURE}, "{4}{R}");
@@ -47,10 +47,23 @@ public class BerserkersOfBloodRidge  extends CardImpl {
 		this.color.setRed(true);
 		this.subtype.add("Human");
 		this.subtype.add("Berserker");
-		this.art = "121659_typ_reg_sty_010.jpg";
 		this.power = new MageInt(4);
 		this.toughness = new MageInt(4);
 		this.addAbility(new AttacksEachTurnStaticAbility());
+	}
+
+	public BerserkersOfBloodRidge(final BerserkersOfBloodRidge card) {
+		super(card);
+	}
+
+	@Override
+	public BerserkersOfBloodRidge copy() {
+		return new BerserkersOfBloodRidge(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121659_typ_reg_sty_010.jpg";
 	}
 
 }

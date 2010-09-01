@@ -36,7 +36,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetControlledPermanent extends TargetPermanent {
+public class TargetControlledPermanent extends TargetPermanent<TargetControlledPermanent> {
 
 	public TargetControlledPermanent() {
 		this(1, 1, new FilterPermanent());
@@ -51,4 +51,12 @@ public class TargetControlledPermanent extends TargetPermanent {
 		this.targetName = filter.getMessage();
 	}
 
+	public TargetControlledPermanent(final TargetControlledPermanent target) {
+		super(target);
+	}
+
+	@Override
+	public TargetControlledPermanent copy() {
+		return new TargetControlledPermanent(this);
+	}
 }

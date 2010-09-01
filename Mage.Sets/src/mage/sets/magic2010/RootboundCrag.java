@@ -43,7 +43,7 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RootboundCrag extends CardImpl {
+public class RootboundCrag extends CardImpl<RootboundCrag> {
 
 	private static FilterLandPermanent filter = new FilterLandPermanent();
 
@@ -57,9 +57,22 @@ public class RootboundCrag extends CardImpl {
 	public RootboundCrag(UUID ownerId) {
 		super(ownerId, "Rootbound Crag", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Magic2010.getInstance().getId();
-		this.art = "121648_typ_reg_sty_010.jpg";
 		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedUnlessControlsEffect(filter)));
 		this.addAbility(new RedManaAbility());
 		this.addAbility(new GreenManaAbility());
+	}
+
+	public RootboundCrag(final RootboundCrag card) {
+		super(card);
+	}
+
+	@Override
+	public RootboundCrag copy() {
+		return new RootboundCrag(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121648_typ_reg_sty_010.jpg";
 	}
 }

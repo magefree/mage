@@ -43,6 +43,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author BetaSteward_at_googlemail.com
  */
 public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
+	//TODO: might have to make E extend Copyable
 
 	protected List<E> list = new ArrayList<E>();
 
@@ -51,6 +52,20 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
 	protected int modCount;
 	protected int index;
 
+	public CircularList() {}
+
+	public CircularList(final CircularList<E> cList) {
+		this.modCount = cList.modCount;
+		for (E entry: cList.list) {
+			this.list.add((E)entry);
+		}
+		this.index = cList.index;
+	}
+
+	public CircularList<E> copy() {
+		return new CircularList<E>(this);
+	}
+	
 	/**
 	 *  Inserts an element into the current position
 	 */

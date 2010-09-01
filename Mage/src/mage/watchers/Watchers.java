@@ -39,6 +39,14 @@ import mage.game.events.GameEvent;
  */
 public class Watchers extends ArrayList<Watcher> {
 
+	public Watchers copy() {
+		Watchers newCopy = new Watchers();
+		for (Watcher watcher: this) {
+			newCopy.add(watcher.copy());
+		}
+		return newCopy;
+	}
+
 	public void watch(GameEvent event, Game game) {
 		for (Watcher watcher: this) {
 			watcher.watch(event, game);

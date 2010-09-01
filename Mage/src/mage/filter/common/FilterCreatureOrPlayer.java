@@ -39,7 +39,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterCreatureOrPlayer extends FilterImpl<Object> implements Filter<Object> {
+public class FilterCreatureOrPlayer extends FilterImpl<Object, FilterCreatureOrPlayer> implements Filter<Object> {
 
 	protected FilterCreaturePermanent creatureFilter;
 	protected FilterPlayer playerFilter;
@@ -59,7 +59,13 @@ public class FilterCreatureOrPlayer extends FilterImpl<Object> implements Filter
 		creatureFilter = new FilterCreaturePermanent();
 		playerFilter = new FilterPlayer();
 	}
-	
+
+	public FilterCreatureOrPlayer(final FilterCreatureOrPlayer filter) {
+		super(filter);
+		this.creatureFilter = filter.creatureFilter.copy();
+		this.playerFilter = filter.playerFilter.copy();
+	}
+
 	@Override
 	public boolean match(Object o) {
 		if (o instanceof Player) {
@@ -68,7 +74,12 @@ public class FilterCreatureOrPlayer extends FilterImpl<Object> implements Filter
 		else if (o instanceof Permanent) {
 			return creatureFilter.match((Permanent)o);
 		}
-		return false;
+		return notFilter;
+	}
+
+	@Override
+	public FilterCreatureOrPlayer copy() {
+		return new FilterCreatureOrPlayer(this);
 	}
 
 }

@@ -36,7 +36,7 @@ import mage.abilities.StaticAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TrampleAbility extends StaticAbility {
+public class TrampleAbility extends StaticAbility<TrampleAbility> {
 
 	private static final TrampleAbility fINSTANCE =  new TrampleAbility();
 
@@ -55,6 +55,11 @@ public class TrampleAbility extends StaticAbility {
 	@Override
 	public String getRule() {
 		return "Trample";
+	}
+
+	@Override
+	public TrampleAbility copy() {
+		return fINSTANCE;
 	}
 
 }

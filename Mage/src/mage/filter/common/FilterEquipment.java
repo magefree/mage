@@ -35,7 +35,7 @@ import mage.filter.FilterPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterEquipment extends FilterPermanent {
+public class FilterEquipment extends FilterPermanent<FilterEquipment> {
 
 	public FilterEquipment() {
 		this("equipment");
@@ -47,4 +47,12 @@ public class FilterEquipment extends FilterPermanent {
 		this.getSubtype().add("Equipment");
 	}
 
+	public FilterEquipment(final FilterEquipment filter) {
+		super(filter);
+	}
+
+	@Override
+	public FilterEquipment copy() {
+		return new FilterEquipment(this);
+	}
 }

@@ -37,7 +37,13 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SpecialActions extends ArrayList<SpecialAction> {
+public class SpecialActions extends AbilitiesImpl<SpecialAction> {
+
+	public SpecialActions() {}
+	
+	public SpecialActions(final SpecialActions actions) {
+		super(actions);
+	}
 
 	public Map<UUID, SpecialAction> getControlledBy(UUID controllerId) {
 		HashMap<UUID, SpecialAction> controlledBy = new HashMap<UUID, SpecialAction>();
@@ -46,6 +52,11 @@ public class SpecialActions extends ArrayList<SpecialAction> {
 				controlledBy.put(action.id, action);
 		}
 		return controlledBy;
+	}
+
+	@Override
+	public SpecialActions copy() {
+		return new SpecialActions(this);
 	}
 
 }

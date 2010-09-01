@@ -50,7 +50,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GarrukWildspeaker extends CardImpl {
+public class GarrukWildspeaker extends CardImpl<GarrukWildspeaker> {
 
 	private static BeastToken beastToken = new BeastToken();
 
@@ -59,7 +59,6 @@ public class GarrukWildspeaker extends CardImpl {
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.subtype.add("Garruk");
 		this.color.setGreen(true);
-		this.art = "105523_typ_reg_sty_010.jpg";
 		this.loyalty = new MageInt(3);
 
 		LoyaltyAbility ability1 = new LoyaltyAbility(new UntapTargetEffect(), 1);
@@ -68,9 +67,23 @@ public class GarrukWildspeaker extends CardImpl {
 
 		this.addAbility(new LoyaltyAbility(new CreateTokenEffect(beastToken), -1));
 
-		Effects effects1 = new Effects(null);
+		Effects effects1 = new Effects();
 		effects1.add(new BoostControlledEffect(3, 3, Duration.EndOfTurn));
 		effects1.add(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
 		this.addAbility(new LoyaltyAbility(effects1, -4));
+	}
+
+	public GarrukWildspeaker(final GarrukWildspeaker card) {
+		super(card);
+	}
+
+	@Override
+	public GarrukWildspeaker copy() {
+		return new GarrukWildspeaker(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "105523_typ_reg_sty_010.jpg";
 	}
 }

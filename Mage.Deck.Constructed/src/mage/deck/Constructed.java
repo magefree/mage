@@ -58,8 +58,8 @@ public class Constructed extends DeckValidatorImpl {
 
 		List<String> basicLandNames = new ArrayList<String>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains"));
 		Map<String, Integer> counts = new HashMap<String, Integer>();
-		countCards(counts, deck.getCards().values());
-		countCards(counts, deck.getSideboard().values());
+		countCards(counts, deck.getCards());
+		countCards(counts, deck.getSideboard());
 		for (Entry<String, Integer> entry: counts.entrySet()) {
 			if (entry.getValue() > 4) {
 				if (!basicLandNames.contains(entry.getKey())) {

@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author LokiX
  */
-public class Naturalize extends CardImpl {
+public class Naturalize extends CardImpl<Naturalize> {
 
 	private static FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
@@ -56,8 +56,21 @@ public class Naturalize extends CardImpl {
 		super(onwerId, "Naturalize", new CardType[]{CardType.INSTANT},"{1}{G}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setGreen(true);
-		this.art = "49669_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetPermanent(filter, TargetController.ANY));
 		this.getSpellAbility().addEffect(new DestroyTargetEffect());
+	}
+
+	public Naturalize(final Naturalize card) {
+		super(card);
+	}
+
+	@Override
+	public Naturalize copy() {
+		return new Naturalize(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "49669_typ_reg_sty_010.jpg";
 	}
 }

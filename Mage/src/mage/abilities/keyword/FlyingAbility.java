@@ -37,7 +37,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FlyingAbility extends EvasionAbilityImpl {
+public class FlyingAbility extends EvasionAbilityImpl<FlyingAbility> {
 
 	private static final FlyingAbility fINSTANCE =  new FlyingAbility();
 
@@ -61,6 +61,11 @@ public class FlyingAbility extends EvasionAbilityImpl {
 	@Override
 	public String getRule() {
 		return "Flying";
+	}
+
+	@Override
+	public FlyingAbility copy() {
+		return fINSTANCE;
 	}
 
 }

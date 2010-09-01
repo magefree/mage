@@ -28,6 +28,7 @@
 
 package mage.players;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -43,10 +44,12 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.ReplacementEffect;
+import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
 import mage.counters.Counters;
+import mage.filter.FilterAbility;
 import mage.game.events.GameEvent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -54,19 +57,19 @@ import mage.game.permanent.token.Token;
 import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.util.Copyable;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface Player extends MageItem {
+public interface Player extends MageItem, Copyable<Player> {
 
 	public boolean isHuman();
 	public String getName();
 	public Library getLibrary();
 	public Cards getGraveyard();
-	public Abilities getAbilities();
+	public Abilities<Ability> getAbilities();
 	public Counters getCounters();
 	public int getLife();
 	public void setLife(int life, Game game);
@@ -97,7 +100,7 @@ public interface Player extends MageItem {
 	public boolean removeFromBattlefield(Permanent permanent, Game game);
 	public boolean putInGraveyard(Card card, Game game, boolean fromBattlefield);
 	public boolean removeFromGraveyard(Card card, Game game);
-	public boolean searchLibrary(TargetCardInLibrary target, Game game);
+	public boolean searchLibrary(TargetCard target, Game game);
 	public boolean canPlayLand();
 	public boolean playLand(Card card, Game game);
 	public boolean activateAbility(ActivatedAbility ability, Game game);
@@ -116,6 +119,7 @@ public interface Player extends MageItem {
 	public void revealCards(Cards cards, Game game);
 	public void lookAtCards(Cards cards, Game game);
 	
+	@Override
 	public Player copy();
 	public void restore(Player player);
 
@@ -125,9 +129,9 @@ public interface Player extends MageItem {
 	public void setResponseInteger(Integer data);
 
 	public abstract void priority(Game game);
-	public abstract boolean chooseTarget(Outcome outcome, Target target, Game game);
-	public abstract boolean chooseTarget(Cards cards, TargetCard target, Game game);
-	public abstract boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Game game);
+	public abstract boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game);
+	public abstract boolean chooseTarget(Cards cards, TargetCard target, Ability source, Game game);
+	public abstract boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game);
 	public abstract boolean chooseMulligan(Game game);
 	public abstract boolean chooseUse(Outcome outcome, String message, Game game);
 	public abstract boolean choose(Outcome outcome, Choice choice, Game game);
@@ -142,14 +146,15 @@ public interface Player extends MageItem {
 	
 	public void declareAttacker(UUID attackerId, UUID defenderId, Game game);
 	public void declareBlocker(UUID blockerId, UUID attackerId, Game game);
-	public boolean hasAvailableAttackers(Game game);
+	public List<Permanent> getAvailableAttackers(Game game);
+	public List<Permanent> getAvailableBlockers(Game game);
 	
 	public void beginTurn(Game game);
 	public void endOfTurn(Game game);
 	public void phasing(Game game);
 	public void untap(Game game);
 
-	public List<Ability> getPlayable(Game game, boolean hidden);
+	public List<Ability> getPlayable(Game game, FilterAbility filter, ManaOptions available, boolean hidden);
 	public List<Ability> getPlayableOptions(Ability ability, Game game);
 	
 }

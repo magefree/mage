@@ -32,6 +32,7 @@ import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
+import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -40,7 +41,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BoostTargetEffect extends ContinuousEffectImpl {
+public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
 
 	private int power;
 	private int toughness;
@@ -51,9 +52,20 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
 		this.toughness = toughness;
 	}
 
+	public BoostTargetEffect(final BoostTargetEffect effect) {
+		super(effect);
+		this.power = effect.power;
+		this.toughness = effect.toughness;
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Permanent target = (Permanent) game.getPermanent(this.source.getFirstTarget());
+	public BoostTargetEffect copy() {
+		return new BoostTargetEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent target = (Permanent) game.getPermanent(source.getFirstTarget());
 		if (target != null) {
 			target.addPower(power);
 			target.addToughness(toughness);
@@ -63,9 +75,9 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("target ").append(this.source.getTargets().get(0).getTargetName()).append(" gets ");
+		sb.append("target ").append(source.getTargets().get(0).getTargetName()).append(" gets ");
 		sb.append(String.format("%1$+d/%2$+d", power, toughness)).append(" ").append(duration.toString());
 		return sb.toString();
 	}

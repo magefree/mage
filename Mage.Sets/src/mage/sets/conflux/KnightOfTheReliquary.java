@@ -36,6 +36,7 @@ import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Costs;
@@ -58,7 +59,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class KnightOfTheReliquary extends CardImpl {
+public class KnightOfTheReliquary extends CardImpl<KnightOfTheReliquary> {
 
 	private static FilterLandPermanent filter = new FilterLandPermanent("Forest or Plains");
 
@@ -75,7 +76,6 @@ public class KnightOfTheReliquary extends CardImpl {
 		this.color.setGreen(true);
 		this.subtype.add("Human");
 		this.subtype.add("Knight");
-		this.art = "119798_typ_reg_sty_010.jpg";
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
 		TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
@@ -86,9 +86,23 @@ public class KnightOfTheReliquary extends CardImpl {
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay), costs));
 	}
 
+	public KnightOfTheReliquary(final KnightOfTheReliquary card) {
+		super(card);
+	}
+
+	@Override
+	public KnightOfTheReliquary copy() {
+		return new KnightOfTheReliquary(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "119798_typ_reg_sty_010.jpg";
+	}
+
 }
 
-class KnightOfTheReliquaryEffect extends ContinuousEffectImpl {
+class KnightOfTheReliquaryEffect extends ContinuousEffectImpl<KnightOfTheReliquaryEffect> {
 
 	private static FilterLandCard filter = new FilterLandCard();
 
@@ -96,11 +110,20 @@ class KnightOfTheReliquaryEffect extends ContinuousEffectImpl {
 		super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
 	}
 
+	public KnightOfTheReliquaryEffect(final KnightOfTheReliquaryEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		int count = game.getPlayer(this.source.getControllerId()).getGraveyard().count(filter);
+	public KnightOfTheReliquaryEffect copy() {
+		return new KnightOfTheReliquaryEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		int count = game.getPlayer(source.getControllerId()).getGraveyard().count(filter, game);
 		if (count > 0) {
-			Permanent target = (Permanent) game.getPermanent(this.source.getSourceId());
+			Permanent target = (Permanent) game.getPermanent(source.getSourceId());
 			if (target != null) {
 				target.addPower(count);
 				target.addToughness(count);
@@ -111,7 +134,7 @@ class KnightOfTheReliquaryEffect extends ContinuousEffectImpl {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "{this} gets +1/+1 for each land card in your graveyard";
 	}
 

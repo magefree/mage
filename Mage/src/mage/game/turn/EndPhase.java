@@ -38,7 +38,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EndPhase extends Phase {
+public class EndPhase extends Phase<EndPhase> {
 
 	public EndPhase() {
 		this.type = TurnPhase.END;
@@ -47,6 +47,10 @@ public class EndPhase extends Phase {
 		this.postEvent = EventType.END_PHASE_POST;
 		this.steps.add(new EndStep());
 		this.steps.add(new CleanupStep());
+	}
+
+	public EndPhase(final EndPhase phase) {
+		super(phase);
 	}
 
 	@Override
@@ -60,6 +64,11 @@ public class EndPhase extends Phase {
 		}
 		else
 			super.playStep(game, activePlayerId);
+	}
+
+	@Override
+	public EndPhase copy() {
+		return new EndPhase(this);
 	}
 
 }

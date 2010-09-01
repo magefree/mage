@@ -35,12 +35,13 @@ import java.util.Map;
 import java.util.UUID;
 import mage.cards.Card;
 import mage.game.events.GameEvent;
+import mage.util.Copyable;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Exile implements Serializable {
+public class Exile implements Serializable, Copyable<Exile> {
 
 	private static final UUID PERMANENT = UUID.randomUUID();
 
@@ -48,6 +49,12 @@ public class Exile implements Serializable {
 
 	public Exile() {
 		createZone(PERMANENT, "Permanent");
+	}
+
+	public Exile(final Exile exile) {
+		for (UUID exileId: exile.exileZones.keySet()) {
+			exileZones.put(exileId, exile.exileZones.get(exileId).copy());
+		}
 	}
 
 	public Collection<ExileZone> getExileZones() {
@@ -80,13 +87,16 @@ public class Exile implements Serializable {
 		}
 	}
 
-	public Card getCard(UUID cardId) {
-		Card card;
+	public Card getCard(UUID cardId, Game game) {
 		for (ExileZone exile: exileZones.values()) {
-			card = exile.get(cardId);
-			if (card != null)
-				return card;
+			if (exile.contains(cardId))
+				return game.getCard(cardId);
 		}
 		return null;
+	}
+
+	@Override
+	public Exile copy() {
+		return new Exile(this);
 	}
 }

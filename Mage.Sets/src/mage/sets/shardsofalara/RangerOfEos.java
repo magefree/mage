@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RangerOfEos extends CardImpl {
+public class RangerOfEos extends CardImpl<RangerOfEos> {
 
 	private static FilterCard filter = new FilterCard("creature cards with converted mana cost 1 or less");
 
@@ -59,12 +59,25 @@ public class RangerOfEos extends CardImpl {
 		this.color.setWhite(true);
 		this.subtype.add("Human");
 		this.subtype.add("Soldier");
-		this.art = "114946_typ_reg_sty_010.jpg";
 		this.power = new MageInt(3);
 		this.toughness = new MageInt(2);
 
 		TargetCardInLibrary target = new TargetCardInLibrary(0, 2, filter);
 		this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(target), true));
+	}
+
+	public RangerOfEos(final RangerOfEos card) {
+		super(card);
+	}
+
+	@Override
+	public RangerOfEos copy() {
+		return new RangerOfEos(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "114946_typ_reg_sty_010.jpg";
 	}
 
 }

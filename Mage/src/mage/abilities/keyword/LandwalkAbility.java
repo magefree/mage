@@ -29,22 +29,30 @@
 package mage.abilities.keyword;
 
 import mage.abilities.EvasionAbilityImpl;
-import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LandwalkAbility extends EvasionAbilityImpl {
+public class LandwalkAbility extends EvasionAbilityImpl<LandwalkAbility> {
 
 	FilterLandPermanent filter;
 
 	public LandwalkAbility(FilterLandPermanent filter) {
 		this.filter = filter;
+	}
+
+	public LandwalkAbility(final LandwalkAbility ability) {
+		super(ability);
+		this.filter = ability.filter.copy();
+	}
+
+	@Override
+	public LandwalkAbility copy() {
+		return new LandwalkAbility(this);
 	}
 
 	@Override

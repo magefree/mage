@@ -48,7 +48,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AjaniVengeant extends CardImpl {
+public class AjaniVengeant extends CardImpl<AjaniVengeant> {
 
 	public AjaniVengeant(UUID ownerId) {
 		super(ownerId, "Ajani Vengeant", new CardType[]{CardType.PLANESWALKER}, "{2}{R}{W}");
@@ -56,14 +56,13 @@ public class AjaniVengeant extends CardImpl {
 		this.subtype.add("Ajani");
 		this.color.setRed(true);
 		this.color.setWhite(true);
-		this.art = "114969_typ_reg_sty_010.jpg";
 		this.loyalty = new MageInt(3);
 
 		LoyaltyAbility ability1 = new LoyaltyAbility(new SkipNextUntapTargetEffect(), 1);
 		ability1.addTarget(new TargetPermanent());
 		this.addAbility(ability1);
 
-		Effects effects1 = new Effects(null);
+		Effects effects1 = new Effects();
 		effects1.add(new DamageTargetEffect(3));
 		effects1.add(new GainLifeEffect(3));
 		LoyaltyAbility ability2 = new LoyaltyAbility(effects1, -2);
@@ -77,5 +76,19 @@ public class AjaniVengeant extends CardImpl {
 		this.addAbility(ability3);
 
 
+	}
+
+	public AjaniVengeant(final AjaniVengeant card) {
+		super(card);
+	}
+
+	@Override
+	public AjaniVengeant copy() {
+		return new AjaniVengeant(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "114969_typ_reg_sty_010.jpg";
 	}
 }

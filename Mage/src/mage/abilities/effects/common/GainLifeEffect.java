@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.players.Player;
@@ -37,7 +38,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GainLifeEffect extends OneShotEffect {
+public class GainLifeEffect extends OneShotEffect<GainLifeEffect> {
 
 	private int life;
 
@@ -46,9 +47,19 @@ public class GainLifeEffect extends OneShotEffect {
 		this.life = life;
 	}
 
+	public GainLifeEffect(final GainLifeEffect effect) {
+		super(effect);
+		this.life = effect.life;
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Player player = game.getPlayer(this.source.getControllerId());
+	public GainLifeEffect copy() {
+		return new GainLifeEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Player player = game.getPlayer(source.getControllerId());
 		if (player != null) {
 			player.gainLife(life, game);
 		}
@@ -56,7 +67,7 @@ public class GainLifeEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "you gain " + Integer.toString(life) + " life";
 	}
 

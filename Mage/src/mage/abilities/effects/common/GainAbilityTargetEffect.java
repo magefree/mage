@@ -50,20 +50,31 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
 		this.ability = ability;
 	}
 
+	public GainAbilityTargetEffect(final GainAbilityTargetEffect effect) {
+		super(effect);
+		this.ability = effect.ability.copy();
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Permanent permanent = game.getPermanent(this.source.getFirstTarget());
+	public GainAbilityTargetEffect copy() {
+		return new GainAbilityTargetEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
 			permanent.addAbility(ability);
+			//TODO: should copy ability before adding
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Target ").append(this.source.getTargets().get(0).getTargetName()).append(" gains ");
+		sb.append("Target ").append(source.getTargets().get(0).getTargetName()).append(" gains ");
 		sb.append(ability.getRule()).append(" ").append(duration.toString());
 		return sb.toString();
 	}

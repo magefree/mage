@@ -54,13 +54,12 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SpreadingSeas extends CardImpl {
+public class SpreadingSeas extends CardImpl<SpreadingSeas> {
 
 	public SpreadingSeas(UUID ownerId) {
 		super(ownerId, "Spreading Seas", new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 		this.expansionSetId = Zendikar.getInstance().getId();
 		this.color.setBlue(true);
-		this.art = "123683_typ_reg_sty_010.jpg";
 		this.subtype.add("Aura");
 
 		TargetPermanent auraTarget = new TargetLandPermanent();
@@ -72,20 +71,43 @@ public class SpreadingSeas extends CardImpl {
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpreadingSeasEffect()));
 
 	}
+
+	public SpreadingSeas(final SpreadingSeas card) {
+		super(card);
+	}
+
+	@Override
+	public SpreadingSeas copy() {
+		return new SpreadingSeas(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123683_typ_reg_sty_010.jpg";
+	}
 }
 
-class SpreadingSeasEffect extends ContinuousEffectImpl {
+class SpreadingSeasEffect extends ContinuousEffectImpl<SpreadingSeasEffect> {
 
 	public SpreadingSeasEffect() {
 		super(Duration.WhileOnBattlefield, Outcome.Detriment);
 	}
 
+	public SpreadingSeasEffect(final SpreadingSeasEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Game game) {
-		Permanent enchantment = game.getPermanent(this.source.getSourceId());
+	public SpreadingSeasEffect copy() {
+		return new SpreadingSeasEffect(this);
+	}
+
+	@Override
+	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+		Permanent enchantment = game.getPermanent(source.getSourceId());
 		if (enchantment.getAttachedTo() != null) {
 			Permanent land = game.getPermanent(enchantment.getAttachedTo());
-			if (land  != null) {
+			if (land != null) {
 				switch (layer) {
 					case TypeChangingEffects_4:
 						if (sublayer == SubLayer.NA) {
@@ -107,7 +129,7 @@ class SpreadingSeasEffect extends ContinuousEffectImpl {
 	}
 
 	@Override
-	public boolean apply(Game game) {
+	public boolean apply(Game game, Ability source) {
 		return false;
 	}
 
@@ -117,7 +139,7 @@ class SpreadingSeasEffect extends ContinuousEffectImpl {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Enchanted land is an Island.";
 	}
 }

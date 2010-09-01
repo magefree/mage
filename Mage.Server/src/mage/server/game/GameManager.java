@@ -108,8 +108,8 @@ public class GameManager {
 //		return gameControllers.get(gameId).createReplay();
 //	}
 
-	public void cheat(UUID gameId, UUID sessionId, DeckCardLists deckList) {
-		gameControllers.get(gameId).cheat(sessionId, deckList);
+	public void cheat(UUID gameId, UUID sessionId, UUID playerId, DeckCardLists deckList) {
+		gameControllers.get(gameId).cheat(sessionId, playerId, deckList);
 	}
 
 	void timeout(UUID gameId, UUID sessionId) {

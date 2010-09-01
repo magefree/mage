@@ -42,17 +42,30 @@ import mage.sets.Zendikar;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ConquerorsPledge extends CardImpl {
+public class ConquerorsPledge extends CardImpl<ConquerorsPledge> {
 
 	public ConquerorsPledge(UUID ownerId) {
 		super(ownerId, "Conquerors Pledge", new CardType[]{CardType.SORCERY}, "{2}{W}{W}{W}");
 		this.expansionSetId = Zendikar.getInstance().getId();
 		this.color.setWhite(true);
-		this.art = "123781_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addEffect(new CreateTokenEffect(new KorSoldierToken(), 6));
 		KickerAbility ability = new KickerAbility(new CreateTokenEffect(new KorSoldierToken(), 12), true);
 		ability.addManaCost(new GenericManaCost(6));
 		this.addAbility(ability);
+	}
+
+	public ConquerorsPledge(final ConquerorsPledge card) {
+		super(card);
+	}
+
+	@Override
+	public ConquerorsPledge copy() {
+		return new ConquerorsPledge(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123781_typ_reg_sty_010.jpg";
 	}
 
 }

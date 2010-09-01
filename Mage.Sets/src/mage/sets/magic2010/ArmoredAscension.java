@@ -53,13 +53,12 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ArmoredAscension extends CardImpl {
+public class ArmoredAscension extends CardImpl<ArmoredAscension> {
 
 	public ArmoredAscension(UUID ownerId) {
 		super(ownerId, "Armored Ascension", new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setWhite(true);
-		this.art = "122162_typ_reg_sty_010.jpg";
 		this.subtype.add("Aura");
 
 		TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -70,9 +69,23 @@ public class ArmoredAscension extends CardImpl {
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArmoredAscensionEffect()));
 
 	}
+
+	public ArmoredAscension(final ArmoredAscension card) {
+		super(card);
+	}
+
+	@Override
+	public ArmoredAscension copy() {
+		return new ArmoredAscension(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "122162_typ_reg_sty_010.jpg";
+	}
 }
 
-class ArmoredAscensionEffect extends ContinuousEffectImpl {
+class ArmoredAscensionEffect extends ContinuousEffectImpl<ArmoredAscensionEffect> {
 
 	private static FilterLandPermanent filter = new FilterLandPermanent("Plains");
 
@@ -84,16 +97,25 @@ class ArmoredAscensionEffect extends ContinuousEffectImpl {
 		super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
 	}
 
+	public ArmoredAscensionEffect(final ArmoredAscensionEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Game game) {
-		Permanent enchantment = game.getPermanent(this.source.getSourceId());
+	public ArmoredAscensionEffect copy() {
+		return new ArmoredAscensionEffect(this);
+	}
+
+	@Override
+	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+		Permanent enchantment = game.getPermanent(source.getSourceId());
 		if (enchantment.getAttachedTo() != null) {
 			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
 			if (creature  != null) {
 				switch (layer) {
 					case PTChangingEffects_7:
 						if (sublayer == SubLayer.ModifyPT_7c) {
-							int amount = game.getBattlefield().countAll(filter, this.source.getControllerId());
+							int amount = game.getBattlefield().countAll(filter, source.getControllerId());
 							creature.addPower(amount);
 							creature.addToughness(amount);
 						}
@@ -111,7 +133,7 @@ class ArmoredAscensionEffect extends ContinuousEffectImpl {
 	}
 
 	@Override
-	public boolean apply(Game game) {
+	public boolean apply(Game game, Ability source) {
 		return false;
 	}
 
@@ -121,7 +143,7 @@ class ArmoredAscensionEffect extends ContinuousEffectImpl {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Enchanted creature gets +1/+1 for each Plains you control and has flying.";
 	}
 

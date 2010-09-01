@@ -37,11 +37,13 @@ package mage.client.deckeditor;
 import java.awt.Cursor;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
 import mage.Constants.CardType;
-import mage.Constants.Zone;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardGrid;
@@ -56,8 +58,9 @@ import mage.view.CardsView;
  */
 public class CardSelector extends javax.swing.JPanel implements ComponentListener {
 
-	private Cards cards = new CardsImpl(Zone.OUTSIDE);
-	private FilterCard filter = new FilterCard();
+	private final Set<Card> allCards = new LinkedHashSet<Card>();
+	private final List<Card> cards = new ArrayList<Card>();
+	private final FilterCard filter = new FilterCard();
 	private BigCard bigCard;
 	
     /** Creates new form CardSelector */
@@ -68,12 +71,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
 	public void loadCards(BigCard bigCard) {
 		this.bigCard = bigCard;
-		this.cards.clear();
 		cbExpansionSet.setModel(new DefaultComboBoxModel(Sets.getInstance().toArray()));
 		cbExpansionSet.insertItemAt("All sets", 0);
 		cbExpansionSet.setSelectedIndex(0);
 		for (ExpansionSet set: Sets.getInstance()) {
-			cards.addAll(set.createCards());
+			allCards.addAll(set.createCards());
 		}
 		filter.setUseColor(true);
 		filter.getColor().setBlack(true);
@@ -98,8 +100,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
 	private void filterCards() {
 		try {
+			cards.clear();
+			for (Card card: allCards) {
+				if (filter.match(card))
+					cards.add(card);
+			}
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			this.cardGrid.loadCards(new CardsView(cards.getCards(filter)), bigCard, null);
+			this.cardGrid.loadCards(new CardsView(cards), bigCard, null);
 		}
 		finally {
 			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -110,7 +117,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		return this.cardGrid;
 	}
 
-	public Cards getCards() {
+	public List<Card> getCards() {
 		return cards;
 	}
 

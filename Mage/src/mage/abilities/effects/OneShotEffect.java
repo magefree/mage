@@ -34,10 +34,14 @@ import mage.Constants.Outcome;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class OneShotEffect extends EffectImpl {
+public abstract class OneShotEffect<T extends OneShotEffect<T>> extends EffectImpl<T> {
 
 	public OneShotEffect(Outcome outcome) {
 		super(outcome);
+	}
+
+	public OneShotEffect(final OneShotEffect<T> effect) {
+		super(effect);
 	}
 
 }

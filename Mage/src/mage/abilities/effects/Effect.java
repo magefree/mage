@@ -38,13 +38,12 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface Effect extends Serializable {
+public interface Effect<T extends Effect<T>> extends Serializable {
 
-	public UUID getId();
-	public String getText();
-	public boolean apply(Game game);
-	public Ability getSource();
+//	public UUID getId();
+	public String getText(Ability source);
+	public boolean apply(Game game, Ability source);
 	public Outcome getOutcome();
-	public void setSource(Ability ability);
-	
+
+	public T copy();
 }

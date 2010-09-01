@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Duration;
+import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -38,27 +39,36 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PreventAllDamageSourceEffect extends PreventionEffectImpl {
+public class PreventAllDamageSourceEffect extends PreventionEffectImpl<PreventAllDamageSourceEffect> {
 
 	public PreventAllDamageSourceEffect(Duration duration) {
 		super(duration);
 	}
 
+	public PreventAllDamageSourceEffect(final PreventAllDamageSourceEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
+	public PreventAllDamageSourceEffect copy() {
+		return new PreventAllDamageSourceEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
 		return true;
 	}
 
 	@Override
-	public boolean replaceEvent(GameEvent event, Game game) {
+	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
 		event.setAmount(0);
 		return false;
 	}
 
 	@Override
-	public boolean applies(GameEvent event, Game game) {
-		if (super.applies(event, game)) {
-			if (event.getTargetId().equals(this.source.getId())) {
+	public boolean applies(GameEvent event, Ability source, Game game) {
+		if (super.applies(event, source, game)) {
+			if (event.getTargetId().equals(source.getId())) {
 				return true;
 			}
 		}
@@ -66,7 +76,7 @@ public class PreventAllDamageSourceEffect extends PreventionEffectImpl {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Prevent all damage that would be dealt to {this} " + duration.toString();
 	}
 

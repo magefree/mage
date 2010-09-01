@@ -58,6 +58,19 @@ public class TurnMod implements Serializable {
 			this.extraTurn = true;
 	}
 
+	public TurnMod(final TurnMod mod) {
+		this.playerId = mod.playerId;
+		this.extraTurn = mod.extraTurn;
+		this.skipTurn = mod.skipTurn;
+		this.extraPhase = mod.extraPhase;
+		this.skipPhase = mod.skipPhase;
+		if (mod.extraStep != null)
+			this.extraStep = mod.extraStep.copy();
+		this.skipStep = mod.skipStep;
+		this.afterPhase = mod.afterPhase;
+		this.afterStep = mod.afterStep;
+	}
+
 	/**
 	 *
 	 * @param playerId
@@ -126,4 +139,7 @@ public class TurnMod implements Serializable {
 		return afterStep;
 	}
 
+	public TurnMod copy() {
+		return new TurnMod(this);
+	}
 }

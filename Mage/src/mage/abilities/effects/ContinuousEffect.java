@@ -32,17 +32,18 @@ import java.util.Date;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.SubLayer;
+import mage.abilities.Ability;
 import mage.game.Game;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface ContinuousEffect extends Effect {
+public interface ContinuousEffect<T extends ContinuousEffect<T>> extends Effect<T> {
 
 	public Duration getDuration();
 	public Date getTimestamp();
-	public boolean apply(Layer layer, SubLayer sublayer, Game game);
+	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game);
 	public boolean hasLayer(Layer layer);
 	
 }

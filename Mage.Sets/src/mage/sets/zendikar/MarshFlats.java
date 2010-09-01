@@ -38,13 +38,26 @@ import mage.sets.Zendikar;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MarshFlats extends CardImpl {
+public class MarshFlats extends CardImpl<MarshFlats> {
 
 	public MarshFlats(UUID ownerId) {
 		super(ownerId, "Marsh Flats", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Zendikar.getInstance().getId();
-		this.art = "123707_typ_reg_sty_010.jpg";
 		this.addAbility(new FetchLandActivatedAbility(new String[] {"Swamp", "Plains"}));
+	}
+
+	public MarshFlats(final MarshFlats card) {
+		super(card);
+	}
+
+	@Override
+	public MarshFlats copy() {
+		return new MarshFlats(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123707_typ_reg_sty_010.jpg";
 	}
 
 }

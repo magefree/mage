@@ -39,7 +39,7 @@ import mage.sets.ShardsOfAlara;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RhoxWarMonk extends CardImpl {
+public class RhoxWarMonk extends CardImpl<RhoxWarMonk> {
 
 	public RhoxWarMonk(UUID ownerId) {
 		super(ownerId, "Rhox War Monk", new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
@@ -49,11 +49,24 @@ public class RhoxWarMonk extends CardImpl {
 		this.color.setWhite(true);
 		this.color.setBlue(true);
 		this.color.setGreen(true);
-		this.art = "115055_typ_reg_sty_010.jpg";
 		this.power = new MageInt(3);
 		this.toughness = new MageInt(4);
 
 		this.addAbility(LifelinkAbility.getInstance());
+	}
+
+	public RhoxWarMonk(final RhoxWarMonk card) {
+		super(card);
+	}
+
+	@Override
+	public RhoxWarMonk copy() {
+		return new RhoxWarMonk(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "115055_typ_reg_sty_010.jpg";
 	}
 
 }

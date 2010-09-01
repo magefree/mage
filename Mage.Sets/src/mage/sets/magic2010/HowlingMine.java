@@ -44,28 +44,50 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HowlingMine extends CardImpl {
+public class HowlingMine extends CardImpl<HowlingMine> {
 
 	public HowlingMine(UUID ownerId) {
 		super(ownerId, "Howling Mine", new CardType[]{CardType.ARTIFACT}, "{2}");
 		this.expansionSetId = Magic2010.getInstance().getId();
-		this.art = "102959_typ_reg_sty_010.jpg";
 		this.addAbility(new HowlingMineAbility());
+	}
+
+	public HowlingMine(final HowlingMine card) {
+		super(card);
+	}
+
+	@Override
+	public HowlingMine copy() {
+		return new HowlingMine(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "102959_typ_reg_sty_010.jpg";
 	}
 
 }
 
-class HowlingMineAbility extends TriggeredAbilityImpl {
+class HowlingMineAbility extends TriggeredAbilityImpl<HowlingMineAbility> {
 
 	public HowlingMineAbility() {
 		super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1));
+	}
+
+	public HowlingMineAbility(final HowlingMineAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public HowlingMineAbility copy() {
+		return new HowlingMineAbility(this);
 	}
 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.DRAW_STEP_PRE) {
 			this.addTarget(new TargetPlayer());
-			this.targets.get(0).getTargets().add(event.getPlayerId());
+			this.targets.get(0).addTarget(event.getPlayerId(), null, game);
 			trigger(game, event.getPlayerId());
 			return true;
 		}

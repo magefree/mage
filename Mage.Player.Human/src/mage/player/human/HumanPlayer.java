@@ -43,6 +43,7 @@ import mage.Constants.RangeOfInfluence;
 import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.MageObject;
+import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.SpecialAction;
 import mage.abilities.costs.mana.ManaCost;
@@ -63,17 +64,22 @@ import mage.target.common.TargetDefender;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HumanPlayer extends PlayerImpl {
+public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	final transient PlayerResponse response = new PlayerResponse();
 
-	private boolean abort = false;
+	private boolean abort;
 
 	protected transient TargetPermanent targetCombat = new TargetPermanent(new FilterCreatureForCombat(), TargetController.YOU);
 
 	public HumanPlayer(String name, Deck deck, RangeOfInfluence range) {
 		super(name, deck, range);
 		human = true;
+	}
+
+	public HumanPlayer(final HumanPlayer player) {
+		super(player);
+		this.abort = player.abort;
 	}
 
 	protected void waitForResponse() {
@@ -135,23 +141,27 @@ public class HumanPlayer extends PlayerImpl {
 
 	@Override
 	public boolean choose(Outcome outcome, Choice choice, Game game) {
-		game.fireChooseEvent(playerId, choice);
 		while (!abort) {
-			waitForStringResponse();
-			choice.setChoice(response.getString());
-			return true;
+			game.fireChooseEvent(playerId, choice);
+			waitForResponse();
+			if (response.getString() != null) {
+				choice.setChoice(response.getString());
+				return true;
+			} else if (!choice.isRequired()) {
+				return false;
+			}
 		}
 		return false;
 	}
 
 	@Override
-	public boolean chooseTarget(Outcome outcome, Target target, Game game) {
-		game.fireSelectTargetEvent(playerId, target.getMessage(), target.isRequired());
+	public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
 		while (!abort) {
+			game.fireSelectTargetEvent(playerId, target.getMessage(), target.isRequired());
 			waitForResponse();
 			if (response.getUUID() != null) {
-				if (target.canTarget(response.getUUID(), game)) {
-					target.addTarget(response.getUUID(), game);
+				if (target.canTarget(response.getUUID(), source, game)) {
+					target.addTarget(response.getUUID(), source, game);
 					return true;
 				}
 			} else if (!target.isRequired()) {
@@ -162,13 +172,13 @@ public class HumanPlayer extends PlayerImpl {
 	}
 
 	@Override
-	public boolean chooseTarget(Cards cards, TargetCard target, Game game) {
+	public boolean chooseTarget(Cards cards, TargetCard target, Ability source, Game game) {
 		game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired());
 		while (!abort) {
 			waitForResponse();
 			if (response.getUUID() != null) {
 				if (target.canTarget(response.getUUID(), cards, game)) {
-					target.addTarget(response.getUUID(), game);
+					target.addTarget(response.getUUID(), source, game);
 					return true;
 				}
 			} else if (!target.isRequired()) {
@@ -180,15 +190,15 @@ public class HumanPlayer extends PlayerImpl {
 
 
 	@Override
-	public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Game game) {
+	public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
 		game.fireSelectTargetEvent(playerId, target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), target.isRequired());
 		while (!abort) {
 			waitForResponse();
 			if (response.getUUID() != null) {
-				if (target.canTarget(response.getUUID(), game)) {
+				if (target.canTarget(response.getUUID(), source, game)) {
 					UUID targetId = response.getUUID();
 					int amountSelected = getAmount(1, target.getAmountRemaining(), "Select amount", game);
-					target.addTarget(targetId, amountSelected, game);
+					target.addTarget(targetId, amountSelected, source, game);
 					return true;
 				}
 			} else if (!target.isRequired()) {
@@ -313,7 +323,7 @@ public class HumanPlayer extends PlayerImpl {
 			if (response.getBoolean() != null) {
 				return;
 			} else if (response.getUUID() != null) {
-				if (targetCombat.canTarget(playerId, response.getUUID(), game)) {
+				if (targetCombat.canTarget(playerId, response.getUUID(), null, game)) {
 					selectDefender(game.getCombat().getDefenders(), response.getUUID(), game);
 				}
 			}
@@ -321,10 +331,16 @@ public class HumanPlayer extends PlayerImpl {
 	}
 
 	protected boolean selectDefender(Set<UUID> defenders, UUID attackerId, Game game) {
-		TargetDefender target = new TargetDefender(defenders, attackerId);
-		if (chooseTarget(Outcome.Damage, target, game)) {
-			declareAttacker(attackerId, response.getUUID(), game);
+		if (defenders.size() == 1) {
+			declareAttacker(attackerId, defenders.iterator().next(), game);
 			return true;
+		}
+		else {
+			TargetDefender target = new TargetDefender(defenders, attackerId);
+			if (chooseTarget(Outcome.Damage, target, null, game)) {
+				declareAttacker(attackerId, response.getUUID(), game);
+				return true;
+			}
 		}
 		return false;
 	}
@@ -338,7 +354,7 @@ public class HumanPlayer extends PlayerImpl {
 			if (response.getBoolean() != null) {
 				return;
 			} else if (response.getUUID() != null) {
-				if (targetCombat.canTarget(playerId, response.getUUID(), game)) {
+				if (targetCombat.canTarget(playerId, response.getUUID(), null, game)) {
 					selectCombatGroup(response.getUUID(), game);
 				}
 			}
@@ -361,7 +377,7 @@ public class HumanPlayer extends PlayerImpl {
 		int remainingDamage = damage;
 		while (remainingDamage > 0) {
 			Target target = new TargetCreatureOrPlayer();
-			chooseTarget(Outcome.Damage, target, game);
+			chooseTarget(Outcome.Damage, target, null, game);
 			if (targets.size() == 0 || targets.contains(target.getFirstTarget())) {
 				int damageAmount = getAmount(0, remainingDamage, "Select amount", game);
 				Permanent permanent = game.getPermanent(target.getFirstTarget());
@@ -447,6 +463,11 @@ public class HumanPlayer extends PlayerImpl {
 		synchronized(response) {
 			response.notify();
 		}
+	}
+
+	@Override
+	public HumanPlayer copy() {
+		return new HumanPlayer(this);
 	}
 
 }

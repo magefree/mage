@@ -29,17 +29,21 @@
 package mage.target.common;
 
 import java.util.UUID;
+import mage.Constants.Outcome;
 import mage.Constants.Zone;
+import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.cards.CardsImpl;
 import mage.filter.FilterCard;
 import mage.game.Game;
+import mage.players.Player;
 import mage.target.TargetCard;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetCardInLibrary extends TargetCard {
+public class TargetCardInLibrary extends TargetCard<TargetCardInLibrary> {
 
 	public TargetCardInLibrary() {
 		this(1, 1, new FilterCard());
@@ -57,12 +61,39 @@ public class TargetCardInLibrary extends TargetCard {
 		super(minNumTargets, maxNumTargets, Zone.LIBRARY, filter);
 	}
 
+	public TargetCardInLibrary(final TargetCardInLibrary target) {
+		super(target);
+	}
+
 	@Override
-	public boolean canTarget(UUID id, Game game) {
-		Card card = game.getPlayer(this.source.getControllerId()).getLibrary().getCard(id);
+	public boolean choose(Outcome outcome, UUID playerId, Ability source, Game game) {
+		Player player = game.getPlayer(playerId);
+		while (!isChosen() && !doneChosing()) {
+			chosen = targets.size() >= minNumberOfTargets;
+			if (!player.chooseTarget(new CardsImpl(Zone.LIBRARY, player.getLibrary().getCards(game)), this, null, game)) {
+				return chosen;
+			}
+			chosen = targets.size() >= minNumberOfTargets;
+		}
+		while (!doneChosing()) {
+			if (!player.chooseTarget(new CardsImpl(Zone.LIBRARY, player.getLibrary().getCards(game)), this, null, game)) {
+				break;
+			}
+		}
+		return chosen = true;
+	}
+
+	@Override
+	public boolean canTarget(UUID id, Ability source, Game game) {
+		Card card = game.getPlayer(source.getControllerId()).getLibrary().getCard(id, game);
 		if (card != null)
 			return filter.match(card);
 		return false;
+	}
+
+	@Override
+	public TargetCardInLibrary copy() {
+		return new TargetCardInLibrary(this);
 	}
 
 }

@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AcidicSlime extends CardImpl {
+public class AcidicSlime extends CardImpl<AcidicSlime> {
 
 	private static FilterPermanent filter = new FilterPermanent("artifact, enchantment, or land");
 
@@ -63,7 +63,6 @@ public class AcidicSlime extends CardImpl {
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.subtype.add("Ooze");
 		this.color.setGreen(true);
-		this.art = "121561_typ_reg_sty_010.jpg";
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
 
@@ -73,6 +72,20 @@ public class AcidicSlime extends CardImpl {
 		target.setRequired(true);
 		ability.addTarget(target);
 		this.addAbility(ability);
+	}
+
+	public AcidicSlime(final AcidicSlime card) {
+		super(card);
+	}
+
+	@Override
+	public AcidicSlime copy() {
+		return new AcidicSlime(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121561_typ_reg_sty_010.jpg";
 	}
 
 }

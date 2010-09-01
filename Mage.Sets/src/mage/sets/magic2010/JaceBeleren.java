@@ -43,14 +43,13 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class JaceBeleren extends CardImpl {
+public class JaceBeleren extends CardImpl<JaceBeleren> {
 
 	public JaceBeleren(UUID ownerId) {
 		super(ownerId, "Jace Beleren", new CardType[]{CardType.PLANESWALKER}, "{1}{U}{U}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.subtype.add("Jace");
 		this.color.setBlue(true);
-		this.art = "105537_typ_reg_sty_010.jpg";
 		this.loyalty = new MageInt(3);
 
 		this.addAbility(new LoyaltyAbility(new DrawCardAllEffect(1), 2));
@@ -63,6 +62,20 @@ public class JaceBeleren extends CardImpl {
 		ability2.addTarget(new TargetPlayer());
 		this.addAbility(ability2);
 
+	}
+
+	public JaceBeleren(final JaceBeleren card) {
+		super(card);
+	}
+
+	@Override
+	public JaceBeleren copy() {
+		return new JaceBeleren(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "105537_typ_reg_sty_010.jpg";
 	}
 
 }

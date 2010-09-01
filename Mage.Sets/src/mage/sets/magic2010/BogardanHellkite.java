@@ -38,21 +38,19 @@ import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.sets.Magic2010;
-import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BogardanHellkite extends CardImpl {
+public class BogardanHellkite extends CardImpl<BogardanHellkite> {
 
 	public BogardanHellkite(UUID ownerId) {
 		super(ownerId, "Bogardan Hellkite", new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.subtype.add("Dragon");
 		this.color.setRed(true);
-		this.art = "97381_typ_reg_sty_010.jpg";
 		this.power = new MageInt(5);
 		this.toughness = new MageInt(5);
 
@@ -61,6 +59,20 @@ public class BogardanHellkite extends CardImpl {
 		Ability ability = new EntersBattlefieldTriggeredAbility(new DamageMultiEffect(5), false);
 		ability.addTarget(new TargetCreatureOrPlayerAmount(5));
 		this.addAbility(ability);
+	}
+
+	public BogardanHellkite(final BogardanHellkite card) {
+		super(card);
+	}
+
+	@Override
+	public BogardanHellkite copy() {
+		return new BogardanHellkite(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "97381_typ_reg_sty_010.jpg";
 	}
 
 }

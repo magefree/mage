@@ -29,6 +29,7 @@
 package mage.game.stack;
 
 import java.util.ArrayList;
+import mage.Constants.AbilityType;
 import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -47,7 +48,9 @@ import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
+import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.game.events.GameEvent;
 import mage.target.Target;
 import mage.target.Targets;
@@ -60,9 +63,9 @@ public class StackAbility implements StackObject, Ability {
 
 	private static List emptyList = new ArrayList();
 	private static ObjectColor emptyColor = new ObjectColor();
-	private static ManaCosts emptyCost = new ManaCosts("");
-	private static Abilities emptyAbilites = new AbilitiesImpl();
-	private static Effects emptyEffects = new Effects(null);
+	private static ManaCosts emptyCost = new ManaCostsImpl();
+	private static Costs emptyCosts = new CostsImpl();
+	private static Abilities<Ability> emptyAbilites = new AbilitiesImpl<Ability>();
 
 	private Ability ability;
 	private UUID controllerId;
@@ -74,9 +77,15 @@ public class StackAbility implements StackObject, Ability {
 		this.controllerId = controllerId;
 	}
 
+	public StackAbility(final StackAbility spell) {
+		this.ability = spell.ability.copy();
+		this.controllerId = spell.controllerId;
+		this.id = spell.id;
+	}
+
 	@Override
 	public boolean resolve(Game game) {
-		if (ability.getTargets().stillLegal(game)) {
+		if (ability.getTargets().stillLegal(ability, game)) {
 			return ability.resolve(game);
 		}
 		counter(game);
@@ -166,12 +175,12 @@ public class StackAbility implements StackObject, Ability {
 
 	@Override
 	public Costs getCosts() {
-		return emptyCost;
+		return emptyCosts;
 	}
 
 	@Override
 	public Effects getEffects() {
-		return emptyEffects;
+		return ability.getEffects();
 	}
 
 	@Override
@@ -220,12 +229,6 @@ public class StackAbility implements StackObject, Ability {
 	public void addChoice(Choice choice) {}
 
 	@Override
-	public Ability copy() {
-		//TODO: not sure if this will be needed
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
 	public List<AlternativeCost> getAlternativeCosts() {
 		return ability.getAlternativeCosts();
 	}
@@ -243,5 +246,20 @@ public class StackAbility implements StackObject, Ability {
 
 	@Override
 	public void checkTriggers(GameEvent event, Game game) {	}
+
+	@Override
+	public AbilityType getAbilityType() {
+		return ability.getAbilityType();
+	}
+
+	@Override
+	public boolean isUsesStack() {
+		return true;
+	}
+
+	@Override
+	public StackAbility copy() {
+		return new StackAbility(this);
+	}
 
 }

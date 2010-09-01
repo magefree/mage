@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MasterOfTheWildHunt extends CardImpl {
+public class MasterOfTheWildHunt extends CardImpl<MasterOfTheWildHunt> {
 
 	private static WolfToken wolfToken = new WolfToken();
 
@@ -65,34 +65,59 @@ public class MasterOfTheWildHunt extends CardImpl {
 		this.subtype.add("Human");
 		this.subtype.add("Shaman");
 		this.color.setGreen(true);
-		this.art = "121652_typ_reg_sty_010.jpg";
 		this.power = new MageInt(3);
 		this.toughness = new MageInt(3);
 
 		this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new CreateTokenEffect(wolfToken)));
 		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MasterOfTheWildHuntEffect(), new TapSourceCost());
-		ability.getTargets().add(new TargetCreaturePermanent());
+		ability.addTarget(new TargetCreaturePermanent());
 		this.addAbility(ability);
+	}
+
+	public MasterOfTheWildHunt(final MasterOfTheWildHunt card) {
+		super(card);
+	}
+
+	@Override
+	public MasterOfTheWildHunt copy() {
+		return new MasterOfTheWildHunt(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121652_typ_reg_sty_010.jpg";
 	}
 }
 
-class MasterOfTheWildHuntEffect extends OneShotEffect {
+class MasterOfTheWildHuntEffect extends OneShotEffect<MasterOfTheWildHuntEffect> {
 
-	private FilterCreaturePermanent filter = new FilterCreaturePermanent();
+	private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-	public MasterOfTheWildHuntEffect() {
-		super(Outcome.Damage);
+	static {
 		filter.getName().add("Wolf");
 		filter.setTapped(false);
 		filter.setUseTapped(true);
 	}
 
+	public MasterOfTheWildHuntEffect() {
+		super(Outcome.Damage);
+	}
+
+	public MasterOfTheWildHuntEffect(final MasterOfTheWildHuntEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
+	public MasterOfTheWildHuntEffect copy() {
+		return new MasterOfTheWildHuntEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
 		List<UUID> wolves = new ArrayList<UUID>();
-		Permanent target = game.getPermanent(this.source.getFirstTarget());
+		Permanent target = game.getPermanent(source.getFirstTarget());
 		if (target != null) {
-			for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, this.source.getControllerId())) {
+			for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
 				permanent.tap(game);
 				target.damage(permanent.getToughness().getValue(), permanent.getId(), game);
 			}
@@ -103,7 +128,7 @@ class MasterOfTheWildHuntEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Tap all untapped Wolf creatures you control. Each Wolf tapped this way deals damage equal to its power to target creature. That creature deals damage equal to its power divided as its controller chooses among any number of those Wolves";
 	}
 }

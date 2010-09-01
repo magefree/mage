@@ -29,18 +29,14 @@
 package mage.game;
 
 import mage.abilities.TriggeredAbility;
-import mage.cards.Card;
 import mage.game.events.GameEvent;
 import mage.game.stack.SpellStack;
-import mage.game.stack.StackObject;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import mage.Constants.Zone;
-import mage.MageObject;
+import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbilities;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpecialActions;
@@ -50,11 +46,13 @@ import mage.abilities.effects.ContinuousEffects;
 import mage.game.combat.Combat;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
 import mage.game.turn.Turn;
 import mage.game.turn.TurnMods;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
+import mage.util.Copyable;
 import mage.watchers.Watchers;
 
 /**
@@ -67,33 +65,103 @@ import mage.watchers.Watchers;
  * these will always remain constant throughout its lifetime
  * 
  */
-public class GameState implements Serializable {
+public class GameState implements Serializable, Copyable<GameState> {
 
-	private Players players = new Players();
-	private PlayerList playerList = new PlayerList();
+	private Players players;
+	private PlayerList playerList;
 	private UUID activePlayerId;
 	private UUID priorityPlayerId;
-	private Turn turn = new Turn();
-	private SpellStack stack = new SpellStack();
-	private Exile exile = new Exile();
-	private Battlefield battlefield = new Battlefield();
-	private int turnNum = 0;
-	private boolean gameOver = false;
-	private List<String> messages = new ArrayList<String>();
-	private ContinuousEffects effects = new ContinuousEffects();
-	private TriggeredAbilities triggers = new TriggeredAbilities();
-	private DelayedTriggeredAbilities delayed = new DelayedTriggeredAbilities();
-	private SpecialActions specialActions = new SpecialActions();
-	private Combat combat = new Combat();
-	private TurnMods turnMods = new TurnMods();
-	private Watchers watchers = new Watchers();
+	private Turn turn;
+	private SpellStack stack;
+	private Exile exile;
+	private Battlefield battlefield;
+	private int turnNum;
+	private boolean gameOver;
+//	private List<String> messages = new ArrayList<String>();
+	private ContinuousEffects effects;
+	private TriggeredAbilities triggers;
+	private DelayedTriggeredAbilities delayed;
+	private SpecialActions specialActions;
+	private Combat combat;
+	private TurnMods turnMods;
+	private Watchers watchers;
 	private Map<String, Object> values = new HashMap<String, Object>();
+
+	public GameState() {
+		players = new Players();
+		playerList = new PlayerList();
+		turn = new Turn();
+		stack = new SpellStack();
+		exile = new Exile();
+		battlefield = new Battlefield();
+		effects = new ContinuousEffects();
+		triggers = new TriggeredAbilities();
+		delayed = new DelayedTriggeredAbilities();
+		specialActions = new SpecialActions();
+		combat = new Combat();
+		turnMods = new TurnMods();
+		watchers = new Watchers();
+	}
+
+	public GameState(final GameState state) {
+		this.players = state.players.copy();
+		this.playerList = state.playerList.copy();
+		this.activePlayerId = state.activePlayerId;
+		this.priorityPlayerId = state.priorityPlayerId;
+		this.turn = state.turn.copy();
+		this.stack = state.stack.copy();
+		this.exile = state.exile.copy();
+		this.battlefield = state.battlefield.copy();
+		this.turnNum = state.turnNum;
+		this.gameOver = state.gameOver;
+		this.effects = state.effects.copy();
+		this.triggers = state.triggers.copy();
+		this.delayed = state.delayed.copy();
+		this.specialActions = state.specialActions.copy();
+		this.combat = state.combat.copy();
+		this.turnMods = state.turnMods.copy();
+		this.watchers = state.watchers.copy();
+		for (String key: state.values.keySet()) {
+			values.put(key, state.values.get(key));
+			//TODO: might have to change value to Copyable
+		}
+	}
+
+	@Override
+	public GameState copy() {
+		return new GameState(this);
+	}
 
 	public void addPlayer(Player player) {
 		players.put(player.getId(), player);
 		playerList.add(player.getId());
 	}
-	
+
+	public int getValue() {
+//		final int prime = 31;
+//		int result = 1;
+//		result *= prime + turnNum;
+//		result *= prime + turn.getPhaseType().toString().hashCode();
+
+		StringBuilder sb = new StringBuilder(1024);
+
+		sb.append(turnNum).append(turn.getPhaseType()).append(turn.getStepType()).append(activePlayerId).append(priorityPlayerId);
+
+		for (Player player: players.values()) {
+			sb.append("player").append(player.getLife()).append(player.getHand()).append(player.getLibrary().getCardList());
+		}
+
+		for (UUID permanentId: battlefield.getAllPermanentIds()) {
+			sb.append("permanent").append(permanentId);
+		}
+
+		for (StackObject spell: stack) {
+			sb.append("spell").append(spell.getId());
+		}
+
+		return sb.toString().hashCode();
+	}
+
 	public Players getPlayers() {
 		return players;
 	}
@@ -170,7 +238,7 @@ public class GameState implements Serializable {
 		for (Player player: players.values()) {
 			player.reset();
 		}
-		battlefield.reset();
+		battlefield.reset(game);
 		effects.apply(game);
 	}
 
@@ -179,13 +247,13 @@ public class GameState implements Serializable {
 		applyEffects(game);
 	}
 
-	public void addEffect(ContinuousEffect effect) {
-		effects.addEffect(effect);
+	public void addEffect(ContinuousEffect effect, Ability source) {
+		effects.addEffect(effect, source);
 	}
 
-	public void addMessage(String message) {
-		this.messages.add(message);
-	}
+//	public void addMessage(String message) {
+//		this.messages.add(message);
+//	}
 
 	public PlayerList getPlayerList() {
 		return playerList;
@@ -199,43 +267,6 @@ public class GameState implements Serializable {
 		}
 		newPlayerList.setCurrent(playerId);
 		return newPlayerList;
-	}
-
-	public MageObject getObject(UUID objectId) {
-		MageObject object;
-		if (battlefield.containsPermanent(objectId)) {
-			object = battlefield.getPermanent(objectId);
-			object.setZone(Zone.BATTLEFIELD);
-			return object;
-		}
-		object = getCard(objectId);
-		if (object != null)
-			return object;
-		for (StackObject item: stack) {
-			if (item.getId().equals(objectId)) {
-				item.setZone(Zone.STACK);
-				return item;
-			}
-		}
-
-		return null;
-	}
-
-	public Card getCard(UUID cardId) {
-		Card card;
-		for(Player player: players.values()) {
-			if (player.getHand().containsKey(cardId)) {
-				card = player.getHand().get(cardId);
-				card.setZone(Zone.HAND);
-				return card;
-			}
-			if (player.getGraveyard().containsKey(cardId)) {
-				card = player.getGraveyard().get(cardId);
-				card.setZone(Zone.GRAVEYARD);
-				return card;
-			}
-		}
-		return this.exile.getCard(cardId);
 	}
 
 	public Permanent getPermanent(UUID permanentId) {
@@ -262,6 +293,7 @@ public class GameState implements Serializable {
 	}
 
 	public void handleEvent(GameEvent event, Game game) {
+		watchers.watch(event, game);
 		if (!replaceEvent(event, game)) {
 			for (Player player: players.values()) {
 				player.checkTriggers(event, game);
@@ -271,7 +303,6 @@ public class GameState implements Serializable {
 		stack.checkTriggers(event, game);
 		delayed.checkTriggers(event, game);
 		exile.checkTriggers(event, game);
-		watchers.watch(event, game);
 	}
 
 	public boolean replaceEvent(GameEvent event, Game game) {
@@ -311,4 +342,5 @@ public class GameState implements Serializable {
 	public void setValue(String valueId, Object value) {
 		values.put(valueId, value);
 	}
+
 }

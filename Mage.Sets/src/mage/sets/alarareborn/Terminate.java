@@ -39,16 +39,29 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Terminate extends CardImpl {
+public class Terminate extends CardImpl<Terminate> {
 
 	public Terminate(UUID ownerId) {
 		super(ownerId, "Terminate", new CardType[]{CardType.INSTANT}, "{B}{R}");
 		this.expansionSetId = AlaraReborn.getInstance().getId();
 		this.color.setBlack(true);
 		this.color.setRed(true);
-		this.art = "115230_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 		this.getSpellAbility().addEffect(new DestroyNoRegenTargetEffect());
+	}
+
+	public Terminate(final Terminate card) {
+		super(card);
+	}
+
+	@Override
+	public Terminate copy() {
+		return new Terminate(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "115230_typ_reg_sty_010.jpg";
 	}
 
 }

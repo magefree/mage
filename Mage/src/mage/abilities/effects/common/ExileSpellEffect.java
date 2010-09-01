@@ -30,6 +30,7 @@ package mage.abilities.effects.common;
 
 import java.io.ObjectStreamException;
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 
@@ -37,7 +38,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ExileSpellEffect extends OneShotEffect {
+public class ExileSpellEffect extends OneShotEffect<ExileSpellEffect> {
 
 	private static final ExileSpellEffect fINSTANCE =  new ExileSpellEffect();
 
@@ -54,13 +55,18 @@ public class ExileSpellEffect extends OneShotEffect {
 	}
 
 	@Override
-	public boolean apply(Game game) {
+	public boolean apply(Game game, Ability source) {
 		//this effect is applied when a spell resolves - see Spell.java
 		return true;
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Exile {this}";
+	}
+
+	@Override
+	public ExileSpellEffect copy() {
+		return fINSTANCE;
 	}
 }

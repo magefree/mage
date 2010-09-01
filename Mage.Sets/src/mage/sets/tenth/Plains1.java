@@ -36,12 +36,25 @@ import mage.sets.Tenth;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Plains1 extends Plains {
+public class Plains1 extends Plains<Plains1> {
 
 	public Plains1(UUID ownerId) {
 		super(ownerId);
 		this.expansionSetId = Tenth.getInstance().getId();
-		this.art = "80949_typ_reg_sty_010.jpg";
+	}
+
+	public Plains1(final Plains1 card) {
+		super(card);
+	}
+
+	@Override
+	public Plains1 copy() {
+		return new Plains1(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "80949_typ_reg_sty_010.jpg";
 	}
 
 }

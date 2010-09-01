@@ -28,7 +28,6 @@
 
 package mage.filter.common;
 
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.filter.Filter;
@@ -41,15 +40,23 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterPlaneswalkerOrPlayer extends FilterImpl<Object> implements Filter<Object> {
+public class FilterPlaneswalkerOrPlayer extends FilterImpl<Object, FilterPlaneswalkerOrPlayer> implements Filter<Object> {
 
-	protected FilterPlaneswalkerPermanent planeswalkerFilter = new FilterPlaneswalkerPermanent();
-	protected FilterPlayer playerFilter = new FilterPlayer();
+	protected FilterPlaneswalkerPermanent planeswalkerFilter;
+	protected FilterPlayer playerFilter;
 
 	public FilterPlaneswalkerOrPlayer(Set<UUID> defenders) {
 		super("planeswalker or player");
+		planeswalkerFilter = new FilterPlaneswalkerPermanent();
 		planeswalkerFilter.getControllerId().addAll(defenders);
+		playerFilter = new FilterPlayer();
 		playerFilter.getPlayerId().addAll(defenders);
+	}
+
+	public FilterPlaneswalkerOrPlayer(final FilterPlaneswalkerOrPlayer filter) {
+		super(filter);
+		this.planeswalkerFilter = filter.planeswalkerFilter.copy();
+		this.playerFilter = filter.playerFilter.copy();
 	}
 
 	@Override
@@ -60,6 +67,11 @@ public class FilterPlaneswalkerOrPlayer extends FilterImpl<Object> implements Fi
 		else if (o instanceof Permanent) {
 			return planeswalkerFilter.match((Permanent)o);
 		}
-		return false;
+		return notFilter;
+	}
+
+	@Override
+	public FilterPlaneswalkerOrPlayer copy() {
+		return new FilterPlaneswalkerOrPlayer(this);
 	}
 }

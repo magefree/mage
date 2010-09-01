@@ -63,6 +63,7 @@ import javax.swing.text.StyledDocument;
 import mage.Constants.CardType;
 import mage.client.MageFrame;
 import mage.client.remote.Session;
+import mage.client.util.Config;
 
 import mage.client.util.ImageHelper;
 import mage.view.CardView;
@@ -79,10 +80,11 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 	protected Point p;
 	protected CardDimensions dimension;
 
-	protected UUID gameId;
-	protected BigCard bigCard;
+	protected final UUID gameId;
+	protected final BigCard bigCard;
 	protected CardView card;
 	protected Popup popup;
+	protected boolean popupShowing;
 
 	protected TextPopup popupText = new TextPopup();
 	protected BufferedImage background;
@@ -97,7 +99,7 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 		this.gameId = gameId;
 		this.card = card;
 		this.bigCard = bigCard;
-		small = new BufferedImage(dimension.frameWidth, dimension.frameHeight, BufferedImage.TYPE_INT_RGB);
+		small = new BufferedImage(Config.dimensions.frameWidth, Config.dimensions.frameHeight, BufferedImage.TYPE_INT_RGB);
 		background = ImageHelper.getBackground(card);
 		
 		StyledDocument doc = text.getStyledDocument();
@@ -136,7 +138,7 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 
 	    gSmall.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		gSmall.setColor(Color.BLACK);
-	    gSmall.drawImage(ImageHelper.ScaleImage(image, dimension.frameWidth, dimension.frameHeight), 0, 0, this);
+	    gSmall.drawImage(ImageHelper.ScaleImage(image, Config.dimensions.frameWidth, Config.dimensions.frameHeight), 0, 0, this);
 
 		gImage.setFont(new Font("Arial", Font.PLAIN, NAME_FONT_MAX_SIZE));
 		gImage.drawString(card.getName(), CONTENT_MAX_XOFFSET, NAME_MAX_YOFFSET);
@@ -152,17 +154,17 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 
 		gImage.dispose();
 
-		gSmall.setFont(new Font("Arial", Font.PLAIN, dimension.nameFontSize));
-		gSmall.drawString(card.getName(), dimension.contentXOffset, dimension.nameYOffset);
+		gSmall.setFont(new Font("Arial", Font.PLAIN, Config.dimensions.nameFontSize));
+		gSmall.drawString(card.getName(), Config.dimensions.contentXOffset, Config.dimensions.nameYOffset);
 		if (card.getCardTypes().contains(CardType.CREATURE)) {
-			gSmall.drawString(card.getPower() + "/" + card.getToughness(), dimension.powBoxTextLeft, dimension.powBoxTextTop);
+			gSmall.drawString(card.getPower() + "/" + card.getToughness(), Config.dimensions.powBoxTextLeft, Config.dimensions.powBoxTextTop);
 		}
 		else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
-			gSmall.drawString(card.getLoyalty(), dimension.powBoxTextLeft, dimension.powBoxTextTop);
+			gSmall.drawString(card.getLoyalty(), Config.dimensions.powBoxTextLeft, Config.dimensions.powBoxTextTop);
 		}
 
 		if (card.getCardTypes().size() > 0)
-			gSmall.drawString(cardType, dimension.contentXOffset, dimension.typeYOffset);
+			gSmall.drawString(cardType, Config.dimensions.contentXOffset, Config.dimensions.typeYOffset);
 		drawText();
 
 	    gSmall.dispose();
@@ -187,6 +189,7 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 		for (String rule: getRules()) {
 			sb.append("\n").append(rule);
 		}
+		sb.append("\n").append(card.getId());
 		return sb.toString();
 	}
 
@@ -272,7 +275,7 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 		} else {
 			g2.setColor(Color.BLACK);
 		}
-		g2.drawRect(0, 0, dimension.frameWidth - 1, dimension.frameHeight - 1);
+		g2.drawRect(0, 0, Config.dimensions.frameWidth - 1, Config.dimensions.frameHeight - 1);
 	}
 
 	@Override
@@ -301,21 +304,27 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		if (popup != null)
+		if (!popupShowing) {
+			if (popup != null)
+				popup.hide();
+			PopupFactory factory = PopupFactory.getSharedInstance();
+			popup = factory.getPopup(this, popupText, (int) this.getLocationOnScreen().getX() + Config.dimensions.frameWidth, (int) this.getLocationOnScreen().getY() + 40);
+			popup.show();
+			//hack to get popup to resize to fit text
 			popup.hide();
-		PopupFactory factory = PopupFactory.getSharedInstance();
-		popup = factory.getPopup(this, popupText, (int) this.getLocationOnScreen().getX() + dimension.frameWidth, (int) this.getLocationOnScreen().getY() + 40);
-		popup.show();
-		//hack to get popup to resize to fit text
-		popup.hide();
-		popup = factory.getPopup(this, popupText, (int) this.getLocationOnScreen().getX() + dimension.frameWidth, (int) this.getLocationOnScreen().getY() + 40);
-		popup.show();
+			popup = factory.getPopup(this, popupText, (int) this.getLocationOnScreen().getX() + Config.dimensions.frameWidth, (int) this.getLocationOnScreen().getY() + 40);
+			popup.show();
+			popupShowing = true;
+		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		if (popup != null)
+		if(getMousePosition(true) != null) return;
+		if (popup != null) {
 			popup.hide();
+			popupShowing = false;
+		}
 	}
 
 	@Override

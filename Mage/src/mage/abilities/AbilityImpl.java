@@ -28,10 +28,11 @@
 
 package mage.abilities;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Logger;
+import mage.Constants.AbilityType;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.costs.AlternativeCost;
@@ -40,6 +41,7 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
@@ -49,34 +51,60 @@ import mage.choices.Choices;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.Targets;
-import mage.util.Copier;
+import mage.util.Logging;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class AbilityImpl implements Ability, Serializable {
+public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
-	protected UUID id;
+	private final static transient Logger logger = Logging.getLogger(AbilityImpl.class.getName());
+
+	protected final UUID id;
+	protected AbilityType abilityType;
 	protected UUID controllerId;
 	protected UUID sourceId;
-	protected ManaCosts manaCosts = new ManaCosts(this);
-	protected Costs<Cost> costs = new CostsImpl<Cost>(this);
-	protected List<AlternativeCost> alternativeCosts = new ArrayList<AlternativeCost>();
-	protected Targets targets = new Targets(this);
-	protected Choices choices = new Choices(this);
-	protected Effects effects = new Effects(this);
+	protected ManaCosts<ManaCost> manaCosts;
+	protected Costs<Cost> costs;
+	protected ArrayList<AlternativeCost> alternativeCosts = new ArrayList<AlternativeCost>();
+	protected Targets targets;
+	protected Choices choices;
+	protected Effects effects;
 	protected Zone zone;
 	protected String name;
-	protected boolean enabled = true;
+	protected boolean usesStack = true;
 
-	public AbilityImpl(Zone zone) {
+	@Override
+	public abstract T copy();
+
+	public AbilityImpl(AbilityType abilityType, Zone zone) {
 		this.id = UUID.randomUUID();
+		this.abilityType = abilityType;
 		this.zone = zone;
-		targets.setSource(this);
-		costs.setAbility(this);
-		choices.setSource(this);
-		effects.setSource(this);
+		this.manaCosts = new ManaCostsImpl<ManaCost>();
+		this.costs = new CostsImpl<Cost>();
+		this.effects = new Effects();
+		this.targets = new Targets();
+		this.choices = new Choices();
+	}
+
+	public AbilityImpl(AbilityImpl<T> ability) {
+		this.id = ability.id;
+		this.abilityType = ability.abilityType;
+		this.controllerId = ability.controllerId;
+		this.sourceId = ability.sourceId;
+		this.zone = ability.zone;
+		this.name = ability.name;
+		this.usesStack = ability.usesStack;
+		this.manaCosts = ability.manaCosts.copy();
+		this.costs = ability.costs.copy();
+		for (AlternativeCost cost: ability.alternativeCosts) {
+			this.alternativeCosts.add((AlternativeCost)cost.copy());
+		}
+		this.targets = ability.targets.copy();
+		this.choices = ability.choices.copy();
+		this.effects = ability.effects.copy();
 	}
 
 	@Override
@@ -85,16 +113,19 @@ public abstract class AbilityImpl implements Ability, Serializable {
 	}
 
 	@Override
+	public AbilityType getAbilityType() {
+		return this.abilityType;
+	}
+
+	@Override
 	public boolean resolve(Game game) {
 		boolean result = true;
-		if (enabled) {
-			for (Effect effect: getEffects()) {
-				if (effect instanceof OneShotEffect) {
-					result &= effect.apply(game);
-				}
-				else {
-					game.addEffect((ContinuousEffect) effect);
-				}
+		for (Effect effect: getEffects()) {
+			if (effect instanceof OneShotEffect) {
+				result &= effect.apply(game, this);
+			}
+			else {
+				game.addEffect((ContinuousEffect) effect, this);
 			}
 		}
 		return result;
@@ -102,15 +133,25 @@ public abstract class AbilityImpl implements Ability, Serializable {
 
 	@Override
 	public boolean activate(Game game, boolean noMana) {
-		if (choices.size() > 0 && choices.choose(game) == false)
+		if (choices.size() > 0 && choices.choose(game, this) == false) {
+			logger.fine("activate failed - choice");
 			return false;
-		if (targets.size() > 0 && targets.choose(effects.get(0).getOutcome(), game) == false)
-			return false;
-		if (!useAlternativeCost(game)) {
-			if (!manaCosts.pay(game, noMana))
-				return false;
 		}
-		return costs.pay(game, noMana);
+		if (targets.size() > 0 && targets.choose(effects.get(0).getOutcome(), this.controllerId, this, game) == false) {
+			logger.fine("activate failed - target");
+			return false;
+		}
+		if (!useAlternativeCost(game)) {
+			if (!manaCosts.pay(game, this, noMana)) {
+				logger.fine("activate failed - mana");
+				return false;
+			}
+		}
+		if (!costs.pay(game, this, noMana)) {
+			logger.fine("activate failed - non mana costs");
+			return false;
+		}
+		return true;
 	}
 
 	@Override
@@ -118,9 +159,9 @@ public abstract class AbilityImpl implements Ability, Serializable {
 
 	protected boolean useAlternativeCost(Game game) {
 		for (AlternativeCost cost: alternativeCosts) {
-			if (cost.isAvailable(game)) {
+			if (cost.isAvailable(game, this)) {
 				if (game.getPlayer(this.controllerId).chooseUse(Outcome.Neutral, "Use alternative cost " + cost.getName(), game))
-					return cost.pay(game, false);
+					return cost.pay(game, this, false);
 			}
 		}
 		return false;
@@ -153,7 +194,7 @@ public abstract class AbilityImpl implements Ability, Serializable {
 	}
 
 	@Override
-	public ManaCosts getManaCosts() {
+	public ManaCosts<ManaCost> getManaCosts() {
 		return manaCosts;
 	}
 
@@ -178,10 +219,15 @@ public abstract class AbilityImpl implements Ability, Serializable {
 	}
 
 	@Override
+	public boolean isUsesStack() {
+		return usesStack;
+	}
+
+	@Override
 	public String getRule() {
 		StringBuilder sbRule = new StringBuilder();
 
-		if (!(this instanceof SpellAbility)) {
+		if (!(this.abilityType == AbilityType.SPELL)) {
 			if (manaCosts.size() > 0) {
 				sbRule.append(manaCosts.getText());
 			}
@@ -208,20 +254,19 @@ public abstract class AbilityImpl implements Ability, Serializable {
 			}
 		}
 
-		sbRule.append(effects.getText());
+		sbRule.append(effects.getText(this));
 
 		return sbRule.toString();
 	}
 
-	@Override
-	public String getName() {
-		return name;
-	}
+//	@Override
+//	public String getName() {
+//		return "";
+//	}
 
 	@Override
 	public void addCost(Cost cost) {
 		if (cost != null) {
-			cost.setAbility(this);
 			this.costs.add(cost);
 		}
 	}
@@ -229,7 +274,6 @@ public abstract class AbilityImpl implements Ability, Serializable {
 	@Override
 	public void addManaCost(ManaCost cost) {
 		if (cost != null) {
-			cost.setAbility(this);
 			this.manaCosts.add(cost);
 		}
 	}
@@ -237,7 +281,6 @@ public abstract class AbilityImpl implements Ability, Serializable {
 	@Override
 	public void addAlternativeCost(AlternativeCost cost) {
 		if (cost != null) {
-			cost.setAbility(this);
 			this.alternativeCosts.add(cost);
 		}
 	}
@@ -245,7 +288,6 @@ public abstract class AbilityImpl implements Ability, Serializable {
 	@Override
 	public void addEffect(Effect effect) {
 		if (effect != null) {
-			effect.setSource(this);
 			this.effects.add(effect);
 		}
 	}
@@ -253,7 +295,6 @@ public abstract class AbilityImpl implements Ability, Serializable {
 	@Override
 	public void addTarget(Target target) {
 		if (target != null) {
-			target.setAbility(this);
 			this.targets.add(target);
 		}
 	}
@@ -261,7 +302,6 @@ public abstract class AbilityImpl implements Ability, Serializable {
 	@Override
 	public void addChoice(Choice choice) {
 		if (choice != null) {
-			choice.setAbility(this);
 			this.choices.add(choice);
 		}
 	}
@@ -277,7 +317,7 @@ public abstract class AbilityImpl implements Ability, Serializable {
 	}
 
 	@Override
-	public Ability copy() {
-		return new Copier<Ability>().copy(this);
+	public String toString() {
+		return getRule();
 	}
 }

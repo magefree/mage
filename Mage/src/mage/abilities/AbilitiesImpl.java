@@ -28,7 +28,6 @@
 
 package mage.abilities;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -36,20 +35,32 @@ import mage.Constants.Zone;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ManaAbility;
-import mage.util.Copier;
+import mage.filter.FilterAbility;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Serializable {
+public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Abilities<T> {
 
+	public AbilitiesImpl() {}
+	
+	public AbilitiesImpl(final AbilitiesImpl<T> abilities) {
+		for (T ability: abilities) {
+			this.add((T)ability.copy());
+		}
+	}
+
+	@Override
+	public AbilitiesImpl<T> copy() {
+		return new AbilitiesImpl<T>(this);
+	}
 
 	@Override
 	public List<String> getRules() {
 		List<String> rules = new ArrayList<String>();
 
-		for (Ability ability:this) {
+		for (T ability:this) {
 			if (!(ability instanceof SpellAbility || ability instanceof PlayLandAbility))
 				rules.add(ability.getRule());
 		}
@@ -58,9 +69,9 @@ public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Seri
 	}
 
 	@Override
-	public List<ActivatedAbility> getActivatedAbilities(Zone zone) {
-		List<ActivatedAbility> zonedAbilities = new ArrayList<ActivatedAbility>();
-		for (Ability ability: this) {
+	public Abilities<ActivatedAbility> getActivatedAbilities(Zone zone) {
+		Abilities<ActivatedAbility> zonedAbilities = new AbilitiesImpl<ActivatedAbility>();
+		for (T ability: this) {
 			if (ability instanceof ActivatedAbility && ability.getZone().match(zone)) {
 				zonedAbilities.add((ActivatedAbility)ability);
 			}
@@ -69,14 +80,20 @@ public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Seri
 	}
 
 	@Override
-	public Abilities copy() {
-		return new Copier<Abilities>().copy(this);
+	public Abilities<ActivatedAbility> getActivatedAbilities(Zone zone, FilterAbility filter) {
+		Abilities<ActivatedAbility> zonedAbilities = new AbilitiesImpl<ActivatedAbility>();
+		for (T ability: this) {
+			if (ability instanceof ActivatedAbility && ability.getZone().match(zone) && filter.match(ability)) {
+				zonedAbilities.add((ActivatedAbility)ability);
+			}
+		}
+		return zonedAbilities;
 	}
 
 	@Override
-	public List<ManaAbility> getManaAbilities(Zone zone) {
-		List<ManaAbility> abilities = new ArrayList<ManaAbility>();
-		for (Ability ability: this) {
+	public Abilities<ManaAbility> getManaAbilities(Zone zone) {
+		Abilities<ManaAbility> abilities = new AbilitiesImpl<ManaAbility>();
+		for (T ability: this) {
 			if (ability instanceof ManaAbility && ability.getZone().match(zone)) {
 				abilities.add((ManaAbility)ability);
 			}
@@ -85,9 +102,9 @@ public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Seri
 	}
 
 	@Override
-	public List<EvasionAbility> getEvasionAbilities() {
-		List<EvasionAbility> abilities = new ArrayList<EvasionAbility>();
-		for (Ability ability: this) {
+	public Abilities<EvasionAbility> getEvasionAbilities() {
+		Abilities<EvasionAbility> abilities = new AbilitiesImpl<EvasionAbility>();
+		for (T ability: this) {
 			if (ability instanceof EvasionAbility) {
 				abilities.add((EvasionAbility)ability);
 			}
@@ -96,9 +113,9 @@ public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Seri
 	}
 
 	@Override
-	public List<StaticAbility> getStaticAbilities(Zone zone) {
-		List<StaticAbility> zonedAbilities = new ArrayList<StaticAbility>();
-		for (Ability ability: this) {
+	public Abilities<StaticAbility> getStaticAbilities(Zone zone) {
+		Abilities<StaticAbility> zonedAbilities = new AbilitiesImpl<StaticAbility>();
+		for (T ability: this) {
 			if (ability instanceof StaticAbility && ability.getZone().match(zone)) {
 				zonedAbilities.add((StaticAbility)ability);
 			}
@@ -107,9 +124,9 @@ public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Seri
 	}
 
 	@Override
-	public List<TriggeredAbility> getTriggeredAbilities(Zone zone) {
-		List<TriggeredAbility> zonedAbilities = new ArrayList<TriggeredAbility>();
-		for (Ability ability: this) {
+	public Abilities<TriggeredAbility> getTriggeredAbilities(Zone zone) {
+		Abilities<TriggeredAbility> zonedAbilities = new AbilitiesImpl<TriggeredAbility>();
+		for (T ability: this) {
 			if (ability instanceof TriggeredAbility && ability.getZone().match(zone)) {
 				zonedAbilities.add((TriggeredAbility)ability);
 			}
@@ -118,9 +135,9 @@ public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Seri
 	}
 
 	@Override
-	public List<ProtectionAbility> getProtectionAbilities() {
-		List<ProtectionAbility> abilities = new ArrayList<ProtectionAbility>();
-		for (Ability ability: this) {
+	public Abilities<ProtectionAbility> getProtectionAbilities() {
+		Abilities<ProtectionAbility> abilities = new AbilitiesImpl<ProtectionAbility>();
+		for (T ability: this) {
 			if (ability instanceof ProtectionAbility) {
 				abilities.add((ProtectionAbility)ability);
 			}
@@ -129,9 +146,9 @@ public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Seri
 	}
 
 	@Override
-	public List<KickerAbility> getKickerAbilities() {
-		List<KickerAbility> abilities = new ArrayList<KickerAbility>();
-		for (Ability ability: this) {
+	public Abilities<KickerAbility> getKickerAbilities() {
+		Abilities<KickerAbility> abilities = new AbilitiesImpl<KickerAbility>();
+		for (T ability: this) {
 			if (ability instanceof KickerAbility) {
 				abilities.add((KickerAbility)ability);
 			}
@@ -154,12 +171,12 @@ public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Seri
 	}
 
 	@Override
-	public boolean containsAll(Abilities abilities) {
+	public boolean containsAll(Abilities<T> abilities) {
 		if (this.size() < abilities.size())
 			return false;
-		for (Ability ability: abilities) {
+		for (T ability: abilities) {
 			boolean found = false;
-			for (Ability test: this) {
+			for (T test: this) {
 				if (ability.getRule().equals(test.getRule())) {
 					found = true;
 					break;
@@ -173,7 +190,7 @@ public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Seri
 
 	@Override
 	public boolean containsKey(UUID abilityId) {
-		for (Ability ability: this) {
+		for (T ability: this) {
 			if (ability.getId().equals(abilityId))
 				return true;
 		}
@@ -181,12 +198,21 @@ public class AbilitiesImpl extends ArrayList<Ability> implements Abilities, Seri
 	}
 
 	@Override
-	public Ability get(UUID abilityId) {
-		for (Ability ability: this) {
+	public T get(UUID abilityId) {
+		for (T ability: this) {
 			if (ability.getId().equals(abilityId))
 				return ability;
 		}
 		return null;
+	}
+
+	@Override
+	public int getOutcomeTotal() {
+		int total = 0;
+		for (T ability: this) {
+			total += ability.getEffects().getOutcomeTotal();
+		}
+		return total;
 	}
 
 }

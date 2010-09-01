@@ -33,8 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.InsectToken;
@@ -44,7 +43,7 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AntQueen extends CardImpl {
+public class AntQueen extends CardImpl<AntQueen> {
 
 	private static InsectToken insectToken = new InsectToken();
 
@@ -53,11 +52,25 @@ public class AntQueen extends CardImpl {
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.subtype.add("Insect");
 		this.color.setGreen(true);
-		this.art = "122179_typ_reg_sty_010.jpg";
+//		this.art = "122179_typ_reg_sty_010.jpg";
 		this.power = new MageInt(5);
 		this.toughness = new MageInt(5);
 
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(insectToken), new ManaCosts("{1}{G}")));
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(insectToken), new ManaCostsImpl("{1}{G}")));
+	}
+
+	public AntQueen(final AntQueen card) {
+		super(card);
+	}
+
+	@Override
+	public AntQueen copy() {
+		return new AntQueen(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "122179_typ_reg_sty_010.jpg";
 	}
 
 }

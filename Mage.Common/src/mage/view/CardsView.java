@@ -28,40 +28,39 @@
 
 package mage.view;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import mage.MageObject;
+import java.util.HashMap;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
-import mage.cards.Cards;
-import mage.game.Game;
+import mage.game.GameState;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CardsView extends ArrayList<CardView> {
+public class CardsView extends HashMap<UUID, CardView> {
 
 
 	public CardsView() {}
 
 	public CardsView(Collection<Card> cards) {
 		for (Card card: cards) {
-			this.add(new CardView(card));
+			this.put(card.getId(), new CardView(card));
 		}
 	}
 
-	public CardsView(Cards cards) {
-		if (cards != null)
-			for (Card card: cards.values()) {
-				this.add(new CardView(card));
-			}
-	}
+//	public CardsView(Cards cards) {
+//		if (cards != null)
+//			for (Card card: cards.values()) {
+//				this.add(new CardView(card));
+//			}
+//	}
 
-	public CardsView(Collection<? extends Ability> abilities, Game game) {
+	public CardsView(Collection<? extends Ability> abilities, GameState state) {
 		for (Ability ability: abilities) {
-			String sourceName = game.getPermanent(ability.getSourceId()).getName();
-			this.add(new AbilityView(ability, sourceName));
+			String sourceName = state.getPermanent(ability.getSourceId()).getName();
+			this.put(ability.getId(), new AbilityView(ability, sourceName));
 		}
 	}
 

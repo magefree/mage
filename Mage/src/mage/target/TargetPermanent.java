@@ -29,12 +29,14 @@
 package mage.target;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.MageObject;
+import mage.abilities.Ability;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -43,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetPermanent extends TargetObject {
+public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<TargetPermanent<T>> {
 
 	protected FilterPermanent filter;
 	protected TargetController controller;
@@ -69,18 +71,24 @@ public class TargetPermanent extends TargetObject {
 		this.controller = controller;
 	}
 
-	@Override
-	public boolean canTarget(UUID id, Game game) {
-		return canTarget(null, id, game);
+	public TargetPermanent(final TargetPermanent<T> target) {
+		super(target);
+		this.filter = target.filter.copy();
+		this.controller = target.controller;
 	}
 
-	public boolean canTarget(UUID controllerId, UUID id, Game game) {
+	@Override
+	public boolean canTarget(UUID id, Ability source, Game game) {
+		return canTarget(null, id, source, game);
+	}
+
+	public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
 		Permanent permanent = game.getPermanent(id);
 		if (controllerId != null)
 			setController(controllerId, game);
 		if (permanent != null) {
-			if (this.source != null)
-				return permanent.canBeTargetedBy(game.getObject(this.source.getSourceId())) && filter.match(permanent);
+			if (source != null)
+				return permanent.canBeTargetedBy(game.getObject(source.getSourceId())) && filter.match(permanent);
 			else
 				return filter.match(permanent);
 		}
@@ -120,6 +128,8 @@ public class TargetPermanent extends TargetObject {
 	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
 		int count = 0;
 		MageObject targetSource = game.getObject(sourceId);
+		if (sourceControllerId != null)
+			setController(sourceControllerId, game);
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, game)) {
 			if (permanent.canBeTargetedBy(targetSource)) {
 				count++;
@@ -132,14 +142,21 @@ public class TargetPermanent extends TargetObject {
 
 	@Override
 	public List<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-		List<UUID> possibleTargets = new ArrayList<UUID>();
+		Map<Integer, UUID> possibleTargets = new HashMap<Integer, UUID>();
 		MageObject targetSource = game.getObject(sourceId);
+		if (sourceControllerId != null)
+			setController(sourceControllerId, game);
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, game)) {
 			if (permanent.canBeTargetedBy(targetSource)) {
-				possibleTargets.add(permanent.getId());
+				possibleTargets.put(permanent.getValue().hashCode(), permanent.getId());
 			}
 		}
-		return possibleTargets;
+		return new ArrayList<UUID>(possibleTargets.values());
+	}
+
+	@Override
+	public TargetPermanent copy() {
+		return new TargetPermanent(this);
 	}
 
 }

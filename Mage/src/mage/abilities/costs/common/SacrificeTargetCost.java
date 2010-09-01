@@ -28,7 +28,6 @@
 
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
@@ -40,31 +39,36 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SacrificeTargetCost extends CostImpl {
+public class SacrificeTargetCost extends CostImpl<SacrificeTargetCost> {
 
 	public SacrificeTargetCost(TargetControlledPermanent target) {
 		this.addTarget(target);
 		this.text = "Sacrifice " + target.getTargetName();
 	}
 
+	public SacrificeTargetCost(SacrificeTargetCost cost) {
+		super(cost);
+	}
+
 	@Override
-	public boolean pay(Game game, boolean noMana) {
-		if (targets.choose(Outcome.Sacrifice, game)) {
-			Permanent source = game.getPermanent(targets.getFirstTarget());
-			if (source != null) {
-				paid = source.sacrifice(this.ability.getSourceId(), game);
+	public boolean pay(Game game, Ability source, boolean noMana) {
+		if (targets.choose(Outcome.Sacrifice, source.getControllerId(), source, game)) {
+			Permanent permanent = game.getPermanent(targets.getFirstTarget());
+			if (permanent != null) {
+				paid = permanent.sacrifice(source.getSourceId(), game);
 			}
 		}
 		return paid;
 	}
 
 	@Override
-	public boolean canPay(UUID playerId, Game game) {
-		return targets.canChoose(playerId, playerId, game);
+	public boolean canPay(Ability source, Game game) {
+		return targets.canChoose(source.getControllerId(), source.getControllerId(), game);
 	}
 
 	@Override
-	public void setAbility(Ability ability) {
-		super.setAbility(ability);
+	public SacrificeTargetCost copy() {
+		return new SacrificeTargetCost(this);
 	}
+
 }

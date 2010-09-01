@@ -39,15 +39,28 @@ import mage.target.TargetSpell;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Cancel extends CardImpl {
+public class Cancel extends CardImpl<Cancel> {
 
 	public Cancel(UUID ownerId) {
 		super(ownerId, "Cancel", new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setBlue(true);
-		this.art = "116179_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetSpell());
 		this.getSpellAbility().addEffect(new CounterTargetEffect());
+	}
+
+	public Cancel(final Cancel card) {
+		super(card);
+	}
+
+	@Override
+	public Cancel copy() {
+		return new Cancel(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "116179_typ_reg_sty_010.jpg";
 	}
 
 }

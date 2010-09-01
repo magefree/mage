@@ -41,7 +41,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
+public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityAttachedEffect> {
 
 	protected Ability ability;
 
@@ -50,19 +50,30 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
 		this.ability = ability;
 	}
 
+	public GainAbilityAttachedEffect(final GainAbilityAttachedEffect effect) {
+		super(effect);
+		this.ability = effect.ability.copy();
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Permanent equipment = game.getPermanent(this.source.getSourceId());
+	public GainAbilityAttachedEffect copy() {
+		return new GainAbilityAttachedEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent equipment = game.getPermanent(source.getSourceId());
 		if (equipment.getAttachedTo() != null) {
 			Permanent creature = game.getPermanent(equipment.getAttachedTo());
 			if (creature != null)
 				creature.addAbility(ability);
+			//TODO: should copy ability before adding
 		}
 		return true;
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Equipped creature gains " + ability.getRule();
 	}
 

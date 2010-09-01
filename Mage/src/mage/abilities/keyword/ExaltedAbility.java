@@ -41,10 +41,19 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ExaltedAbility extends TriggeredAbilityImpl {
+public class ExaltedAbility extends TriggeredAbilityImpl<ExaltedAbility> {
 
 	public ExaltedAbility() {
 		super(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn));
+	}
+
+	public ExaltedAbility(final ExaltedAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public ExaltedAbility copy() {
+		return new ExaltedAbility(this);
 	}
 
 	@Override
@@ -53,7 +62,7 @@ public class ExaltedAbility extends TriggeredAbilityImpl {
 			if (game.getCombat().attacksAlone()) {
 				TargetCreaturePermanent target = new TargetCreaturePermanent();
 				this.addTarget(target);
-				this.getTargets().get(0).addTarget(game.getCombat().getAttackers().get(0), game);
+				this.getTargets().get(0).addTarget(game.getCombat().getAttackers().get(0), null, game);
 				trigger(game, event.getPlayerId());
 				return true;
 			}

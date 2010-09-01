@@ -36,7 +36,7 @@ import mage.abilities.StaticAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FirstStrikeAbility extends StaticAbility {
+public class FirstStrikeAbility extends StaticAbility<FirstStrikeAbility> {
 
 	private static final FirstStrikeAbility fINSTANCE =  new FirstStrikeAbility();
 
@@ -55,6 +55,11 @@ public class FirstStrikeAbility extends StaticAbility {
 	@Override
 	public String getRule() {
 		return "First Strike";
+	}
+
+	@Override
+	public FirstStrikeAbility copy() {
+		return fINSTANCE;
 	}
 
 }

@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class TargetImpl implements Target {
+public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 
 	protected Map<UUID, Integer> targets = new HashMap<UUID, Integer>();
 
@@ -54,8 +54,24 @@ public abstract class TargetImpl implements Target {
 	protected int maxNumberOfTargets;
 	protected int minNumberOfTargets;
 	protected boolean required = false;
-	protected Ability source;
 	protected boolean chosen = false;
+
+	@Override
+	public abstract T copy();
+
+	public TargetImpl() {}
+
+	public TargetImpl(final TargetImpl<T> target) {
+		this.targetName = target.targetName;
+		this.zone = target.zone;
+		this.maxNumberOfTargets = target.maxNumberOfTargets;
+		this.minNumberOfTargets = target.minNumberOfTargets;
+		this.required = target.required;
+		this.chosen = target.chosen;
+		for (UUID id: target.targets.keySet()) {
+			this.targets.put(id, target.targets.get(id));
+		}
+	}
 
 	@Override
 	public int getNumberOfTargets() {
@@ -99,6 +115,8 @@ public abstract class TargetImpl implements Target {
 
 	@Override
 	public boolean isChosen() {
+		if (targets.size() == maxNumberOfTargets)
+			return true;
 		return chosen;
 	}
 
@@ -120,29 +138,33 @@ public abstract class TargetImpl implements Target {
 	 * @return true if able to add target
 	 */
 	@Override
-	public void addTarget(UUID id, Game game) {
+	public void addTarget(UUID id, Ability source, Game game) {
 		//20100423 - 113.3
-		if (!targets.containsKey(id)) {
-			if (source != null) {
-				if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getSourceId(), source.getControllerId()))) {
-					targets.put(id, 0);
-					game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getSourceId(), source.getControllerId()));
+		if (targets.size() < maxNumberOfTargets) {
+			if (!targets.containsKey(id)) {
+				if (source != null) {
+					if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getSourceId(), source.getControllerId()))) {
+						targets.put(id, 0);
+						chosen = targets.size() >= minNumberOfTargets;
+						game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getSourceId(), source.getControllerId()));
+					}
 				}
-			}
-			else {
-				targets.put(id, 0);
+				else {
+					targets.put(id, 0);
+				}
 			}
 		}
 	}
 
 	@Override
-	public void addTarget(UUID id, int amount, Game game) {
+	public void addTarget(UUID id, int amount, Ability source, Game game) {
 		if (targets.containsKey(id)) {
 			amount += targets.get(id);
 		}
 		if (source != null) {
 			if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getSourceId(), source.getControllerId()))) {
 				targets.put(id, amount);
+				chosen = targets.size() >= minNumberOfTargets;
 				game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getSourceId(), source.getControllerId()));
 			}
 		}
@@ -152,28 +174,27 @@ public abstract class TargetImpl implements Target {
 	}
 
 	@Override
-	public boolean choose(Outcome outcome, Game game) {
-		Player player = game.getPlayer(this.source.getControllerId());
+	public boolean choose(Outcome outcome, UUID playerId, Ability source, Game game) {
+		Player player = game.getPlayer(playerId);
 		while (!isChosen() && !doneChosing()) {
 			chosen = targets.size() >= minNumberOfTargets;
-			if (!player.chooseTarget(outcome, this, game)) {
+			if (!player.chooseTarget(outcome, this, source, game)) {
 				return chosen;
 			}
 			chosen = targets.size() >= minNumberOfTargets;
 		}
 		while (!doneChosing()) {
-			if (!player.chooseTarget(outcome, this, game)) {
+			if (!player.chooseTarget(outcome, this, source, game)) {
 				break;
 			}
 		}
 		return chosen = true;
 	}
 
-
 	@Override
-	public boolean isLegal(Game game) {
+	public boolean isLegal(Ability source, Game game) {
 		for (UUID targetId: targets.keySet()) {
-			if (!canTarget(targetId, game))
+			if (!canTarget(targetId, source, game))
 				return false;
 		}
 		return true;
@@ -203,16 +224,6 @@ public abstract class TargetImpl implements Target {
 		if (targets.size() > 0)
 			return targets.keySet().iterator().next();
 		return null;
-	}
-
-	@Override
-	public Ability getAbility() {
-		return source;
-	}
-
-	@Override
-	public void setAbility(Ability ability) {
-		this.source = ability;
 	}
 
 }

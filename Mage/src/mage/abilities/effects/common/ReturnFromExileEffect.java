@@ -31,6 +31,7 @@ package mage.abilities.effects.common;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
@@ -40,7 +41,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnFromExileEffect extends OneShotEffect {
+public class ReturnFromExileEffect extends OneShotEffect<ReturnFromExileEffect> {
 
 	private UUID exileId;
 	private Zone zone;
@@ -51,9 +52,22 @@ public class ReturnFromExileEffect extends OneShotEffect {
 		this.zone = zone;
 	}
 
-	public boolean apply(Game game) {
+	public ReturnFromExileEffect(final ReturnFromExileEffect effect) {
+		super(effect);
+		this.exileId = effect.exileId;
+		this.zone = effect.zone;
+	}
+
+	@Override
+	public ReturnFromExileEffect copy() {
+		return new ReturnFromExileEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
 		Player player;
-		for (Card card: game.getExile().getExileZone(exileId).values()) {
+		for (UUID cardId: game.getExile().getExileZone(exileId)) {
+			Card card = game.getCard(cardId);
 			player = game.getPlayer(card.getOwnerId());
 			switch(zone) {
 				case BATTLEFIELD:
@@ -72,7 +86,7 @@ public class ReturnFromExileEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("return the exiled cards ");
 		switch(zone) {

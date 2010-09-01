@@ -32,6 +32,7 @@ import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
+import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -46,17 +47,26 @@ public class GainControlTargetEOTEffect extends ContinuousEffectImpl {
 		super(Duration.EndOfTurn, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
 	}
 
+	public GainControlTargetEOTEffect(final GainControlTargetEOTEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Permanent permanent = game.getPermanent(this.source.getFirstTarget());
+	public GainControlTargetEOTEffect copy() {
+		return new GainControlTargetEOTEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
-			return permanent.changeControllerId(this.source.getControllerId(), game);
+			return permanent.changeControllerId(source.getControllerId(), game);
 		}
 		return false;
 	}
 
 	@Override
-	public String getText() {
-		return "Gain control of target " + this.source.getTargets().get(0).getTargetName() + " until end of turn";
+	public String getText(Ability source) {
+		return "Gain control of target " + source.getTargets().get(0).getTargetName() + " until end of turn";
 	}
 }

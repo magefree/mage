@@ -42,7 +42,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class Phase implements Serializable {
+public abstract class Phase<T extends Phase<T>> implements Serializable {
 
 	protected TurnPhase type;
 	protected List<Step> steps = new ArrayList<Step>();
@@ -53,6 +53,24 @@ public abstract class Phase implements Serializable {
 	protected UUID activePlayerId;
 	protected Step currentStep;
 	protected int count;
+
+	public abstract T copy();
+
+	public Phase() {}
+
+	public Phase(final Phase<T> phase) {
+		this.type = phase.type;
+		this.event = phase.event;
+		this.preEvent = phase.preEvent;
+		this.postEvent = phase.postEvent;
+		this.activePlayerId = phase.activePlayerId;
+		if (phase.currentStep != null)
+			this.currentStep = phase.currentStep.copy();
+		this.count = phase.count;
+		for (Step step: phase.steps) {
+			this.steps.add(step.copy());
+		}
+	}
 
 	public TurnPhase getType() {
 		return type;
@@ -80,8 +98,7 @@ public abstract class Phase implements Serializable {
 
 		this.activePlayerId = activePlayerId;
 
-		if (!game.replaceEvent(new GameEvent(event, null, null, activePlayerId))) {
-			game.fireEvent(new GameEvent(preEvent, null, null, activePlayerId));
+		if (beginPhase(game, activePlayerId)) {
 
 			for (Step step: steps) {
 				if (game.isGameOver())
@@ -91,10 +108,22 @@ public abstract class Phase implements Serializable {
 					playStep(game, activePlayerId);
 			}
 			count++;
-			game.fireEvent(new GameEvent(postEvent, null, null, activePlayerId));
+			endPhase(game, activePlayerId);
 			return true;
 		}
 		return false;
+	}
+
+	public boolean beginPhase(Game game, UUID activePlayerId) {
+		if (!game.replaceEvent(new GameEvent(event, null, null, activePlayerId))) {
+			game.fireEvent(new GameEvent(preEvent, null, null, activePlayerId));
+			return true;
+		}
+		return false;
+	}
+
+	public void endPhase(Game game, UUID activePlayerId) {
+		game.fireEvent(new GameEvent(postEvent, null, null, activePlayerId));
 	}
 
 	public void prePriority(Game game, UUID activePlayerId) {
@@ -105,7 +134,6 @@ public abstract class Phase implements Serializable {
 		currentStep.endStep(game, activePlayerId);
 		//20091005 - 500.4/703.4n
 		game.emptyManaPools();
-		game.saveState();
 		//20091005 - 500.9
 		playExtraSteps(game, currentStep.getType());
 	}

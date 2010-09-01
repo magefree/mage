@@ -29,6 +29,7 @@
 package mage.abilities;
 
 import java.util.UUID;
+import mage.Constants.AbilityType;
 import mage.Constants.Zone;
 import mage.game.Game;
 
@@ -36,11 +37,16 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PlayLandAbility extends ActivatedAbilityImpl {
+public class PlayLandAbility extends ActivatedAbilityImpl<PlayLandAbility> {
 
-	public PlayLandAbility() {
-		super(Zone.HAND);
-		this.name = "Play";
+	public PlayLandAbility(String cardName) {
+		super(AbilityType.PLAY_LAND, Zone.HAND);
+		this.usesStack = false;
+		this.name = "Play " + cardName;
+	}
+
+	public PlayLandAbility(PlayLandAbility ability) {
+		super(ability);
 	}
 
 	@Override
@@ -58,4 +64,15 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
 	public String getActivatedMessage(Game game) {
 		return " plays " + getMessageText(game);
 	}
+
+	@Override
+	public String toString() {
+		return this.name;
+	}
+
+	@Override
+	public PlayLandAbility copy() {
+		return new PlayLandAbility(this);
+	}
+
 }

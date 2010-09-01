@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -38,7 +39,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DamageTargetEffect extends OneShotEffect {
+public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
 
 	protected int amount;
 
@@ -51,24 +52,34 @@ public class DamageTargetEffect extends OneShotEffect {
 		return amount;
 	}
 
+	public DamageTargetEffect(final DamageTargetEffect effect) {
+		super(effect);
+		this.amount = effect.amount;
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Permanent permanent = game.getPermanent(this.source.getFirstTarget());
+	public DamageTargetEffect copy() {
+		return new DamageTargetEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
-			permanent.damage(amount, this.source.getSourceId(), game);
+			permanent.damage(amount, source.getSourceId(), game);
 			return true;
 		}
-		Player player = game.getPlayer(this.source.getFirstTarget());
+		Player player = game.getPlayer(source.getFirstTarget());
 		if (player != null) {
-			player.damage(amount, this.source.getSourceId(), game);
+			player.damage(amount, source.getSourceId(), game);
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public String getText() {
-		return "{source} deals " + Integer.toString(amount) + " damage to target " + this.source.getTargets().get(0).getTargetName();
+	public String getText(Ability source) {
+		return "{source} deals " + Integer.toString(amount) + " damage to target " + source.getTargets().get(0).getTargetName();
 	}
 
 }

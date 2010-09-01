@@ -29,6 +29,7 @@
 package mage.abilities;
 
 import java.util.UUID;
+import mage.Constants.AbilityType;
 import mage.Constants.TimingRule;
 import mage.Constants.Zone;
 import mage.abilities.costs.Cost;
@@ -44,23 +45,32 @@ import mage.target.Target;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class ActivatedAbilityImpl extends AbilityImpl implements ActivatedAbility {
+public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> extends AbilityImpl<T> implements ActivatedAbility {
 
 	protected TimingRule timing = TimingRule.INSTANT;
 
+	protected ActivatedAbilityImpl(AbilityType abilityType, Zone zone) {
+		super(abilityType, zone);
+	}
+
+	public ActivatedAbilityImpl(ActivatedAbilityImpl ability) {
+		super(ability);
+		timing = ability.timing;
+	}
+
 	public ActivatedAbilityImpl(Zone zone) {
-		super(zone);
+		this(zone, null);
 	}
 
 	public ActivatedAbilityImpl(Zone zone, Effect effect) {
-		super(zone);
+		super(AbilityType.ACTIVATED, zone);
 		if (effect != null) {
 			this.addEffect(effect);
 		}
 	}
 
 	public ActivatedAbilityImpl(Zone zone, Effect effect, ManaCosts cost) {
-		super(zone);
+		super(AbilityType.ACTIVATED, zone);
 		if (effect != null) {
 			this.addEffect(effect);
 		}
@@ -69,7 +79,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 	}
 
 	public ActivatedAbilityImpl(Zone zone, Effects effects, ManaCosts cost) {
-		super(zone);
+		super(AbilityType.ACTIVATED, zone);
 		if (effects != null) {
 			for (Effect effect: effects) {
 				this.addEffect(effect);
@@ -80,7 +90,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 	}
 
 	public ActivatedAbilityImpl(Zone zone, Effect effect, Cost cost) {
-		super(zone);
+		super(AbilityType.ACTIVATED, zone);
 		if (effect != null) {
 			this.addEffect(effect);
 		}
@@ -89,7 +99,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 	}
 
 	public ActivatedAbilityImpl(Zone zone, Effect effect, Costs<Cost> costs) {
-		super(zone);
+		super(AbilityType.ACTIVATED, zone);
 		if (effect != null) {
 			this.addEffect(effect);
 		}
@@ -101,7 +111,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 	}
 
 	public ActivatedAbilityImpl(Zone zone, Effects effects, Cost cost) {
-		super(zone);
+		super(AbilityType.ACTIVATED, zone);
 		if (effects != null) {
 			for (Effect effect: effects) {
 				this.addEffect(effect);
@@ -112,7 +122,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 	}
 
 	public ActivatedAbilityImpl(Zone zone, Effects effects, Costs<Cost> costs) {
-		super(zone);
+		super(AbilityType.ACTIVATED, zone);
 		for (Effect effect: effects) {
 			if (effect != null) {
 				this.addEffect(effect);
@@ -131,7 +141,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 		if (!controlsAbility(playerId, game))
 			return false;
 		//20091005 - 602.5d/602.5e
-		if ((timing == TimingRule.INSTANT || game.canPlaySorcery(playerId)) && costs.canPay(playerId, game) && targets.canChoose(sourceId, playerId, game)) {
+		if ((timing == TimingRule.INSTANT || game.canPlaySorcery(playerId)) && costs.canPay(this, game) && targets.canChoose(sourceId, playerId, game)) {
 			return true;
 		}
 		return false;

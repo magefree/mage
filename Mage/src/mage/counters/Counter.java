@@ -34,13 +34,18 @@ import java.io.Serializable;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Counter implements Serializable {
+public class Counter<T extends Counter<T>> implements Serializable {
 
 	protected String name;
 	protected int count;
 
 	public Counter(String name) {
 		this.name = name;
+	}
+
+	public Counter(Counter counter) {
+		this.name = counter.name;
+		this.count = counter.count;
 	}
 
 	public void add() {
@@ -69,5 +74,9 @@ public class Counter implements Serializable {
 
 	public int getCount() {
 		return count;
+	}
+
+	public T copy() {
+		return (T)new Counter(this);
 	}
 }

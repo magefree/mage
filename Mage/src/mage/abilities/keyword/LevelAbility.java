@@ -31,27 +31,37 @@ package mage.abilities.keyword;
 import mage.Constants.Zone;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
+import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LevelAbility extends StaticAbility {
+public class LevelAbility extends StaticAbility<LevelAbility> {
 
 	private int level1;
 	private int level2;
-	private Abilities abilities = new AbilitiesImpl();
+	private Abilities<Ability> abilities = new AbilitiesImpl<Ability>();
 	private int power;
 	private int toughness;
 
-	public LevelAbility(int level1, int level2, Abilities abilities, int power, int toughness) {
+	public LevelAbility(int level1, int level2, Abilities<Ability> abilities, int power, int toughness) {
 		super(Zone.BATTLEFIELD, null);
 		this.level1 = level1;
 		this.level2 = level2;
 		this.abilities.addAll(abilities);
 		this.power = power;
 		this.toughness = toughness;
+	}
+
+	public LevelAbility(LevelAbility ability) {
+		super(ability);
+		this.level1 = ability.level1;
+		this.level2 = ability.level2;
+		this.abilities = ability.abilities.copy();
+		this.power = ability.power;
+		this.toughness = ability.toughness;
 	}
 
 	public int getLevel1() {
@@ -62,7 +72,7 @@ public class LevelAbility extends StaticAbility {
 		return level2;
 	}
 
-	public Abilities getAbilities() {
+	public Abilities<Ability> getAbilities() {
 		return abilities;
 	}
 
@@ -87,6 +97,11 @@ public class LevelAbility extends StaticAbility {
 			sb.append(rule).append(" ");
 		}
 		return sb.toString();
+	}
+
+	@Override
+	public LevelAbility copy() {
+		return new LevelAbility(this);
 	}
 
 }

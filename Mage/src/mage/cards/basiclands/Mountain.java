@@ -35,10 +35,13 @@ import mage.abilities.mana.RedManaAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Mountain extends BasicLand {
+public abstract class Mountain<T extends Mountain<T>> extends BasicLand<T> {
 
 	public Mountain(UUID ownerId) {
 		super(ownerId, "Mountain", new RedManaAbility());
 	}
 
+	public Mountain(Mountain land) {
+		super(land);
+	}
 }

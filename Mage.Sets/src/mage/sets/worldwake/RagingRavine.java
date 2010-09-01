@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldStaticAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AddPlusOneCountersSourceEffect;
 import mage.abilities.effects.common.BecomesCreatureSourceEOTEffect;
 import mage.abilities.effects.common.EntersBattlefieldTappedEffect;
@@ -49,16 +49,29 @@ import mage.sets.Worldwake;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RagingRavine extends CardImpl {
+public class RagingRavine extends CardImpl<RagingRavine> {
 
 	public RagingRavine(UUID ownerId) {
 		super(ownerId, "Raging Ravine", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Worldwake.getInstance().getId();
-		this.art = "126537_typ_reg_sty_010.jpg";
 		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new RedManaAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new RagingRavineToken(), "land"), new ManaCosts("{2}{R}{G}")));
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new RagingRavineToken(), "land"), new ManaCostsImpl("{2}{R}{G}")));
+	}
+
+	public RagingRavine(final RagingRavine card) {
+		super(card);
+	}
+
+	@Override
+	public RagingRavine copy() {
+		return new RagingRavine(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "126537_typ_reg_sty_010.jpg";
 	}
 
 }

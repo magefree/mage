@@ -34,7 +34,13 @@
 
 package mage.client.game;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import mage.cards.decks.DeckCardLists;
+import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.view.PlayerView;
 
@@ -44,7 +50,9 @@ import mage.view.PlayerView;
  */
 public class PlayAreaPanel extends javax.swing.JPanel {
 
-	
+	UUID playerId;
+	UUID gameId;
+
     /** Creates new form PlayAreaPanel */
     public PlayAreaPanel() {
         initComponents();
@@ -59,6 +67,14 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 	public void init(PlayerView player, BigCard bigCard, UUID gameId) {
 		this.playerPanel.init(gameId, player.getPlayerId(), bigCard);
 		this.battlefieldPanel.init(gameId, bigCard);
+		if (MageFrame.getSession().isTestMode()) {
+			this.playerId = player.getPlayerId();
+			this.gameId = gameId;
+			this.btnCheat.setVisible(true);
+		}
+		else {
+			this.btnCheat.setVisible(false);
+		}
 	}
 
 	public void update(PlayerView player) {
@@ -80,10 +96,18 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         playerPanel = new mage.client.game.PlayerPanel();
         manaPool = new mage.client.game.ManaPool();
+        btnCheat = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         battlefieldPanel = new mage.client.game.BattlefieldPanel();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        btnCheat.setText("Cheat");
+        btnCheat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheatActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -91,6 +115,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(manaPool, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
             .addComponent(playerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnCheat, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,7 +123,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 .addComponent(playerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(manaPool, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(btnCheat))
         );
 
         jScrollPane1.setViewportView(battlefieldPanel);
@@ -114,14 +140,27 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+	private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheatActionPerformed
+		try {
+			MageFrame.getSession().cheat(gameId, playerId, DeckCardLists.load("cheat.dck"));
+		} catch (FileNotFoundException ex) {
+			Logger.getLogger(PlayAreaPanel.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (IOException ex) {
+			Logger.getLogger(PlayAreaPanel.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(PlayAreaPanel.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}//GEN-LAST:event_btnCheatActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private mage.client.game.BattlefieldPanel battlefieldPanel;
+    private javax.swing.JButton btnCheat;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private mage.client.game.ManaPool manaPool;

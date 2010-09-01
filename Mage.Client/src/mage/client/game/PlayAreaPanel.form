@@ -25,8 +25,8 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jScrollPane1" alignment="1" pref="278" max="32767" attributes="0"/>
           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-          <Component id="jScrollPane1" alignment="1" pref="252" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -45,6 +45,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="manaPool" alignment="0" pref="116" max="32767" attributes="1"/>
               <Component id="playerPanel" alignment="0" max="32767" attributes="1"/>
+              <Component id="btnCheat" alignment="0" pref="116" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -53,7 +54,8 @@
                   <Component id="playerPanel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                   <Component id="manaPool" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="14" max="32767" attributes="0"/>
+                  <EmptySpace pref="17" max="32767" attributes="0"/>
+                  <Component id="btnCheat" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -62,6 +64,14 @@
         <Component class="mage.client.game.PlayerPanel" name="playerPanel">
         </Component>
         <Component class="mage.client.game.ManaPool" name="manaPool">
+        </Component>
+        <Component class="javax.swing.JButton" name="btnCheat">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cheat"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCheatActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

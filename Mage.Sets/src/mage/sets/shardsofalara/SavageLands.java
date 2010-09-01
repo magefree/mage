@@ -42,16 +42,29 @@ import mage.sets.ShardsOfAlara;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SavageLands extends CardImpl {
+public class SavageLands extends CardImpl<SavageLands> {
 
 	public SavageLands(UUID ownerId) {
 		super(ownerId, "Savage Lands", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = ShardsOfAlara.getInstance().getId();
-		this.art = "114986_typ_reg_sty_010.jpg";
 		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
 		this.addAbility(new RedManaAbility());
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new BlackManaAbility());
+	}
+
+	public SavageLands(final SavageLands card) {
+		super(card);
+	}
+
+	@Override
+	public SavageLands copy() {
+		return new SavageLands(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "114986_typ_reg_sty_010.jpg";
 	}
 
 }

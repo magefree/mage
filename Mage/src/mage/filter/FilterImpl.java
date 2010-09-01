@@ -35,16 +35,25 @@ import mage.ObjectColor;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class FilterImpl<T> implements Filter<T> {
+public abstract class FilterImpl<E, T extends FilterImpl<E, T>> implements Filter<E> {
 
 	protected static ListComparer<CardType> compCardType = new ListComparer<CardType>();
 	protected static ListComparer<String> compString = new ListComparer<String>();
+
+	protected String message;
+	protected boolean notFilter = false;
+
+	@Override
+	public abstract FilterImpl<E, T> copy();
 
 	public FilterImpl(String name) {
 		this.message = name;
 	}
 
-	protected String message;
+	public FilterImpl(FilterImpl filter) {
+		this.message = filter.message;
+		this.notFilter = filter.notFilter;
+	}
 
 	protected boolean compareInts(int int1, int int2, ComparisonType type) {
 		switch (type) {
@@ -80,4 +89,10 @@ public abstract class FilterImpl<T> implements Filter<T> {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	@Override
+	public void setNotFilter(boolean notFilter) {
+		this.notFilter = notFilter;
+	}
+
 }

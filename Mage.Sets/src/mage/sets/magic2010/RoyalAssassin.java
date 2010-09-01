@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LokiX
  */
-public class RoyalAssassin extends CardImpl {
+public class RoyalAssassin extends CardImpl<RoyalAssassin> {
 
     public RoyalAssassin(UUID onwerId){
         super(onwerId,"Royal Assassin", new CardType[]{CardType.CREATURE},"{1}{B}{B}");
@@ -54,15 +54,28 @@ public class RoyalAssassin extends CardImpl {
         this.color.setBlack(true);
         this.subtype.add("Human");
         this.subtype.add("Assassin");
-		this.art = "48786_typ_reg_sty_010.jpg";
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         this.addAbility(new RoyalAssassinAbility());
     }
+
+	public RoyalAssassin(final RoyalAssassin card) {
+		super(card);
+	}
+
+	@Override
+	public RoyalAssassin copy() {
+		return new RoyalAssassin(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "48786_typ_reg_sty_010.jpg";
+	}
 }
 
-class RoyalAssassinAbility extends ActivatedAbilityImpl {
+class RoyalAssassinAbility extends ActivatedAbilityImpl<RoyalAssassinAbility> {
 
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
@@ -78,4 +91,14 @@ class RoyalAssassinAbility extends ActivatedAbilityImpl {
         addCost(new TapSourceCost());
         addEffect(new DestroyTargetEffect());
     }
+
+	public RoyalAssassinAbility(final RoyalAssassinAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public RoyalAssassinAbility copy() {
+		return new RoyalAssassinAbility(this);
+	}
+
 }

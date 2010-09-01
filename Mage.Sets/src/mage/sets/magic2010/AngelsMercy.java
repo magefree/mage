@@ -38,15 +38,26 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AngelsMercy extends CardImpl {
+public class AngelsMercy extends CardImpl<AngelsMercy> {
 
 	public AngelsMercy(UUID ownerId) {
 		super(ownerId, "Angel's Mercy", new CardType[]{CardType.INSTANT}, "{2}{W}{W}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setWhite(true);
-		this.art = "121628_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addEffect(new GainLifeEffect(7));
 	}
 
+	public AngelsMercy(final AngelsMercy card) {
+		super(card);
+	}
 
+	@Override
+	public AngelsMercy copy() {
+		return new AngelsMercy(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121628_typ_reg_sty_010.jpg";
+	}
 }

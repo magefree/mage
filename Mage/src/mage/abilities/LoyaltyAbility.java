@@ -38,7 +38,7 @@ import mage.abilities.effects.Effects;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LoyaltyAbility extends ActivatedAbilityImpl {
+public class LoyaltyAbility extends ActivatedAbilityImpl<LoyaltyAbility> {
 
 	public LoyaltyAbility(Effect effect, int loyalty) {
 		super(Zone.BATTLEFIELD, effect, new PayLoyaltyCost(loyalty));
@@ -48,6 +48,15 @@ public class LoyaltyAbility extends ActivatedAbilityImpl {
 	public LoyaltyAbility(Effects effects, int loyalty) {
 		super(Zone.BATTLEFIELD, effects, new PayLoyaltyCost(loyalty));
 		this.timing = TimingRule.SORCERY;
+	}
+
+	public LoyaltyAbility(LoyaltyAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public LoyaltyAbility copy() {
+		return new LoyaltyAbility(this);
 	}
 
 }

@@ -39,7 +39,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class OnEventTriggeredAbility extends TriggeredAbilityImpl {
+public class OnEventTriggeredAbility extends TriggeredAbilityImpl<OnEventTriggeredAbility> {
 
 	private EventType eventType;
 	private String eventName;
@@ -58,6 +58,13 @@ public class OnEventTriggeredAbility extends TriggeredAbilityImpl {
 		this.allPlayers = allPlayers;
 	}
 
+	public OnEventTriggeredAbility(OnEventTriggeredAbility ability) {
+		super(ability);
+		this.eventType = ability.eventType;
+		this.eventName = ability.eventName;
+		this.allPlayers = ability.allPlayers;
+	}
+
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == eventType) {
@@ -72,6 +79,11 @@ public class OnEventTriggeredAbility extends TriggeredAbilityImpl {
 	@Override
 	public String getRule() {
 		return "At the " + eventName + ", " + super.getRule();
+	}
+
+	@Override
+	public OnEventTriggeredAbility copy() {
+		return new OnEventTriggeredAbility(this);
 	}
 
 }

@@ -41,19 +41,32 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BurstLightning extends CardImpl {
+public class BurstLightning extends CardImpl<BurstLightning> {
 
 	public BurstLightning(UUID ownerId) {
 		super(ownerId, "Burst Lightning", new CardType[]{CardType.INSTANT}, "{R}");
 		this.expansionSetId = Zendikar.getInstance().getId();
 		this.color.setRed(true);
-		this.art = "123560_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 		this.getSpellAbility().addEffect(new DamageTargetEffect(2));
 		KickerAbility ability = new KickerAbility(new DamageTargetEffect(4), true);
 		ability.addTarget(this.getSpellAbility().getTargets().get(0));
 		ability.addManaCost(new GenericManaCost(4));
 		this.addAbility(ability);
+	}
+
+	public BurstLightning(final BurstLightning card) {
+		super(card);
+	}
+
+	@Override
+	public BurstLightning copy() {
+		return new BurstLightning(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123560_typ_reg_sty_010.jpg";
 	}
 
 }

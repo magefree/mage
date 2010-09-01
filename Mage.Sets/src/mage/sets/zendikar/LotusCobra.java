@@ -41,20 +41,33 @@ import mage.sets.Zendikar;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LotusCobra extends CardImpl {
+public class LotusCobra extends CardImpl<LotusCobra> {
 
 	public LotusCobra(UUID ownerId) {
 		super(ownerId, "Lotus Cobra", new CardType[]{CardType.CREATURE}, "{1}{G}");
 		this.expansionSetId = Zendikar.getInstance().getId();
 		this.subtype.add("Snake");
 		this.color.setGreen(true);
-		this.art = "123641_typ_reg_sty_010.jpg";
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(1);
 
 		LandfallAbility ability = new LandfallAbility(new AddManaOfAnyColorEffect(1), false);
 		ability.addChoice(new ChoiceColor());
 		this.addAbility(ability);
+	}
+
+	public LotusCobra(final LotusCobra card) {
+		super(card);
+	}
+
+	@Override
+	public LotusCobra copy() {
+		return new LotusCobra(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123641_typ_reg_sty_010.jpg";
 	}
 
 }

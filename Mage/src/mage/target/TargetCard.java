@@ -29,7 +29,9 @@
 package mage.target;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import mage.Constants.Zone;
 import mage.cards.Card;
@@ -42,7 +44,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetCard extends TargetObject {
+public class TargetCard<T extends TargetCard<T>> extends TargetObject<TargetCard<T>> {
 
 	protected FilterCard filter;
 
@@ -66,27 +68,32 @@ public class TargetCard extends TargetObject {
 		this.targetName = filter.getMessage();
 	}
 
+	public TargetCard(final TargetCard target) {
+		super(target);
+		this.filter = target.filter.copy();
+	}
+
 	@Override
 	public FilterCard getFilter() {
 		return this.filter;
 	}
 
-	public boolean choose(Cards cards, Game game) {
-		Player player = game.getPlayer(this.source.getControllerId());
-		while (!isChosen() && !doneChosing()) {
-			chosen = targets.size() >= minNumberOfTargets;
-			if (!player.chooseTarget(cards, this, game)) {
-				return chosen;
-			}
-			chosen = targets.size() >= minNumberOfTargets;
-		}
-		while (!doneChosing()) {
-			if (!player.chooseTarget(cards, this, game)) {
-				break;
-			}
-		}
-		return chosen = true;
-	}
+//	public boolean choose(Cards cards, Game game) {
+//		Player player = game.getPlayer(this.source.getControllerId());
+//		while (!isChosen() && !doneChosing()) {
+//			chosen = targets.size() >= minNumberOfTargets;
+//			if (!player.chooseTarget(cards, this, game)) {
+//				return chosen;
+//			}
+//			chosen = targets.size() >= minNumberOfTargets;
+//		}
+//		while (!doneChosing()) {
+//			if (!player.chooseTarget(cards, this, game)) {
+//				break;
+//			}
+//		}
+//		return chosen = true;
+//	}
 
 	@Override
 	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
@@ -96,15 +103,15 @@ public class TargetCard extends TargetObject {
 				if (player != null) {
 					switch (zone) {
 						case HAND:
-							if (player.getHand().count(filter) >= this.minNumberOfTargets)
+							if (player.getHand().count(filter, game) >= this.minNumberOfTargets)
 								return true;
 							break;
 						case GRAVEYARD:
-							if (player.getGraveyard().count(filter) >= this.minNumberOfTargets)
+							if (player.getGraveyard().count(filter, game) >= this.minNumberOfTargets)
 								return true;
 							break;
 						case LIBRARY:
-							if (player.getLibrary().count(filter) >= this.minNumberOfTargets)
+							if (player.getLibrary().count(filter, game) >= this.minNumberOfTargets)
 								return true;
 							break;
 					}
@@ -116,35 +123,41 @@ public class TargetCard extends TargetObject {
 
 	@Override
 	public List<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-		List<UUID> possibleTargets = new ArrayList<UUID>();
-		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
-			if (filter.matchOwner(playerId)) {
-				Player player = game.getPlayer(playerId);
-				if (player != null) {
-					switch (zone) {
-						case HAND:
-							for (Card card: player.getHand().getCards(filter)) {
-								possibleTargets.add(card.getId());
-							}
-							break;
-						case GRAVEYARD:
-							for (Card card: player.getGraveyard().getCards(filter)) {
-								possibleTargets.add(card.getId());
-							}
-							break;
+		Map<String, UUID> possibleTargets = new HashMap<String, UUID>();
+		Player player = game.getPlayer(sourceControllerId);
+		if (player != null) {
+			switch (zone) {
+				case HAND:
+					for (Card card: player.getHand().getCards(filter, game)) {
+						possibleTargets.put(card.getName(), card.getId());
 					}
-				}
+					break;
+				case GRAVEYARD:
+					for (Card card: player.getGraveyard().getCards(filter, game)) {
+						possibleTargets.put(card.getName(), card.getId());
+					}
+					break;
+				case LIBRARY:
+					for (Card card: player.getLibrary().getUniqueCards(game)) {
+						if (filter.match(card))
+							possibleTargets.put(card.getName(), card.getId());
+					}
+					break;
 			}
 		}
-		return possibleTargets;
-
+		return new ArrayList<UUID>(possibleTargets.values());
 	}
 
 	public boolean canTarget(UUID id, Cards cards, Game game) {
-		Card card = cards.get(id);
+		Card card = cards.get(id, game);
 		if (card != null)
 			return filter.match(card);
 		return false;
+	}
+
+	@Override
+	public TargetCard copy() {
+		return new TargetCard(this);
 	}
 
 }

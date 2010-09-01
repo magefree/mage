@@ -30,12 +30,18 @@ package mage.players;
 
 import java.io.Serializable;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.UUID;
+import mage.Constants.Zone;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.filter.FilterCard;
@@ -48,28 +54,34 @@ import mage.util.Copier;
  */
 public class Library implements Serializable {
 
-//	private static final transient Copier<Library> copier = new Copier<Library>();
-
 	private static Random rnd = new Random();
 
-	private boolean emptyDraw = false;
-	private Deque<Card> library = new ArrayDeque<Card>();
+	private boolean emptyDraw;
+	private Deque<UUID> library = new ArrayDeque<UUID>();
 	private UUID playerId;
 
 	public Library(UUID playerId) {
 		this.playerId = playerId;
 	}
 
+	public Library(final Library lib) {
+		this.emptyDraw = lib.emptyDraw;
+		this.playerId = lib.playerId;
+		for (UUID id: lib.library) {
+			this.library.addLast(id);
+		}
+	}
+
 	public void shuffle() {
-		Card[] shuffled = library.toArray(new Card[0]);
+		UUID[] shuffled = library.toArray(new UUID[0]);
 		for (int n = shuffled.length - 1; n > 0; n--) {
 			int r = rnd.nextInt(n);
-			Card temp = shuffled[n];
+			UUID temp = shuffled[n];
 			shuffled[n] = shuffled[r];
 			shuffled[r] = temp;
 		}
 		library.clear();
-		for (Card card: shuffled) {
+		for (UUID card: shuffled) {
 			library.add(card);
 		}
 	}
@@ -82,7 +94,7 @@ public class Library implements Serializable {
 	 * @see Card
 	 */
 	public Card removeFromTop(Game game) {
-		Card card = library.pollFirst();
+		Card card = game.getCard(library.pollFirst());
 		if (card == null) {
 			emptyDraw = true;
 		}
@@ -97,25 +109,32 @@ public class Library implements Serializable {
 	 * @see Card
 	 */
 	public Card getFromTop(Game game) {
-		return library.peekFirst();
+		return game.getCard(library.peekFirst());
 	}
 
 	public void putOnTop(Card card, Game game) {
-		if (card.getOwnerId().equals(playerId))
-			library.addFirst(card);
-		else
+		if (card.getOwnerId().equals(playerId)) {
+			card.setZone(Zone.LIBRARY);
+			library.addFirst(card.getId());
+		}
+		else {
 			game.getPlayer(card.getOwnerId()).getLibrary().putOnTop(card, game);
+		}
 	}
 
 	public void putOnBottom(Card card, Game game) {
-		if (card.getOwnerId().equals(playerId))
-			library.add(card);
-		else
+		if (card.getOwnerId().equals(playerId)) {
+			card.setZone(Zone.LIBRARY);
+			library.add(card.getId());
+		}
+		else {
 			game.getPlayer(card.getOwnerId()).getLibrary().putOnBottom(card, game);
+		}
 	}
 
 	public Library copy() {
-		return new Copier<Library>().copy(this);
+//		return new Copier<Library>().copy(this);
+		return new Library(this);
 	}
 
 	public void clear() {
@@ -128,19 +147,38 @@ public class Library implements Serializable {
 	
 	public void set(Library newLibrary) {
 		library.clear();
-		for (Card card: newLibrary.getCards()) {
+		for (UUID card: newLibrary.getCardList()) {
 			library.add(card);
 		}
 	}
 
-	public List<Card> getCards() {
-		return Arrays.asList(library.toArray(new Card[0]));
+	public List<UUID> getCardList() {
+		return new ArrayList(library);
 	}
 
-	public int count(FilterCard filter) {
+	public List<Card> getCards(Game game) {
+		List<Card> cards = new ArrayList<Card>();
+		for (UUID cardId: library) {
+			cards.add(game.getCard(cardId));
+		}
+		return cards;
+	}
+
+	public Collection<Card> getUniqueCards(Game game) {
+		Map<String, Card> cards = new HashMap<String, Card>();
+		for (UUID cardId: library) {
+			Card card = game.getCard(cardId);
+			if (!cards.containsKey(card.getName())) {
+				cards.put(card.getName(), card);
+			}
+		}
+		return cards.values();
+	}
+
+	public int count(FilterCard filter, Game game) {
 		int result = 0;
-		for (Card card: library) {
-			if (filter.match(card))
+		for (UUID card: library) {
+			if (filter.match(game.getCard(card)))
 				result++;
 		}
 		return result;
@@ -151,31 +189,34 @@ public class Library implements Serializable {
 		return emptyDraw;
 	}
 
-	void setControllerId(UUID playerId) {
-		for (Card card: library) {
-			card.setControllerId(playerId);
+	void setControllerId(UUID playerId, Game game) {
+		for (UUID cardId: library) {
+			game.getCard(cardId).setControllerId(playerId);
 		}
 	}
 
-	public void addAll(Cards cards) {
-		library.addAll(cards.values());
+	public void addAll(Set<Card> cards) {
+		for (Card card: cards) {
+			card.setZone(Zone.LIBRARY);
+			library.add(card.getId());
+		}
 	}
 
-	public Card getCard(UUID cardId) {
-		for (Card card: library) {
-			if (card.getId().equals(cardId))
-				return card;
+	public Card getCard(UUID cardId, Game game) {
+		for (UUID card: library) {
+			if (card.equals(cardId))
+				return game.getCard(card);
 		}
 		return null;
 	}
 
-	public Card remove(UUID cardId) {
-		Iterator<Card> it = library.iterator();
+	public Card remove(UUID cardId, Game game) {
+		Iterator<UUID> it = library.iterator();
 		while(it.hasNext()) {
-			Card card = it.next();
-			if (card.getId().equals(cardId)) {
+			UUID card = it.next();
+			if (card.equals(cardId)) {
 				it.remove();
-				return card;
+				return game.getCard(card);
 			}
 		}
 		return null;

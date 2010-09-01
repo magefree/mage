@@ -28,7 +28,7 @@
 
 package mage.abilities.costs.common;
 
-import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,7 +37,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PayLoyaltyCost extends CostImpl {
+public class PayLoyaltyCost extends CostImpl<PayLoyaltyCost> {
 
 	private int amount;
 
@@ -46,23 +46,33 @@ public class PayLoyaltyCost extends CostImpl {
 		this.text = Integer.toString(amount) + " loyalty";
 	}
 
+	public PayLoyaltyCost(PayLoyaltyCost cost) {
+		super(cost);
+		this.amount = cost.amount;
+	}
+
 	@Override
-	public boolean canPay(UUID playerId, Game game) {
-		Permanent planeswalker = game.getPermanent(this.ability.getSourceId());
+	public boolean canPay(Ability source, Game game) {
+		Permanent planeswalker = game.getPermanent(source.getSourceId());
 		if (planeswalker.getLoyalty().getValue() + amount >= 0 && !planeswalker.isLoyaltyUsed())
 			return true;
 		return false;
 	}
 
 	@Override
-	public boolean pay(Game game, boolean noMana) {
-		Permanent planeswalker = game.getPermanent(this.ability.getSourceId());
+	public boolean pay(Game game, Ability source, boolean noMana) {
+		Permanent planeswalker = game.getPermanent(source.getSourceId());
 		if (planeswalker.getLoyalty().getValue() + amount > 0 && !planeswalker.isLoyaltyUsed()) {
 			planeswalker.getLoyalty().boostValue(amount);
 			planeswalker.setLoyaltyUsed(true);
 			this.paid = true;
 		}
 		return paid;
+	}
+
+	@Override
+	public PayLoyaltyCost copy() {
+		return new PayLoyaltyCost(this);
 	}
 
 }

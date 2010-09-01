@@ -36,10 +36,14 @@ import mage.Constants.PhaseStep;
 import mage.Constants.RangeOfInfluence;
 import mage.game.turn.TurnMod;
 
-public class TwoPlayerDuel extends GameImpl {
+public class TwoPlayerDuel extends GameImpl<TwoPlayerDuel> {
 
 	public TwoPlayerDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range) {
 		super(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL);
+	}
+
+	public TwoPlayerDuel(final TwoPlayerDuel game) {
+		super(game);
 	}
 
 	@Override
@@ -86,6 +90,11 @@ public class TwoPlayerDuel extends GameImpl {
 				opponents.add(opponentId);
 		}
 		return opponents;
+	}
+
+	@Override
+	public TwoPlayerDuel copy() {
+		return new TwoPlayerDuel(this);
 	}
 
 }

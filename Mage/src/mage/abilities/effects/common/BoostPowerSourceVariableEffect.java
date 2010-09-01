@@ -32,6 +32,7 @@ import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
+import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -40,16 +41,25 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BoostPowerSourceVariableEffect extends ContinuousEffectImpl {
+public class BoostPowerSourceVariableEffect extends ContinuousEffectImpl<BoostPowerSourceVariableEffect> {
 
 	public BoostPowerSourceVariableEffect(Duration duration) {
 		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
 	}
 
+	public BoostPowerSourceVariableEffect(final BoostPowerSourceVariableEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		int amount = this.source.getManaCosts().getVariableCosts().get(0).getValue();
-		Permanent target = (Permanent) game.getPermanent(this.source.getSourceId());
+	public BoostPowerSourceVariableEffect copy() {
+		return new BoostPowerSourceVariableEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		int amount = source.getManaCosts().getVariableCosts().get(0).getValue();
+		Permanent target = (Permanent) game.getPermanent(source.getSourceId());
 		if (target != null) {
 			target.addPower(amount);
 			return true;
@@ -58,7 +68,7 @@ public class BoostPowerSourceVariableEffect extends ContinuousEffectImpl {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "{this} gets " + String.format("+X/+0") + " " + duration.toString();
 	}
 

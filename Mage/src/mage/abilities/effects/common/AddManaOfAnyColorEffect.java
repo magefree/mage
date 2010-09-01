@@ -30,6 +30,7 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.Mana;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.choices.ChoiceColor;
 import mage.game.Game;
@@ -39,7 +40,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AddManaOfAnyColorEffect extends OneShotEffect {
+public class AddManaOfAnyColorEffect extends OneShotEffect<AddManaOfAnyColorEffect> {
 
 	int amount;
 
@@ -48,10 +49,20 @@ public class AddManaOfAnyColorEffect extends OneShotEffect {
 		this.amount = amount;
 	}
 
+	public AddManaOfAnyColorEffect(final AddManaOfAnyColorEffect effect) {
+		super(effect);
+		this.amount = effect.amount;
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		ChoiceColor choice = (ChoiceColor) this.source.getChoices().get(0);
-		Player player = game.getPlayer(this.source.getControllerId());
+	public AddManaOfAnyColorEffect copy() {
+		return new AddManaOfAnyColorEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
+		Player player = game.getPlayer(source.getControllerId());
 		if (choice.getColor().isBlack()) {
 			player.getManaPool().changeMana(Mana.BlackMana);
 			return true;
@@ -76,7 +87,7 @@ public class AddManaOfAnyColorEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		if (amount > 1)
 			return "add " + Integer.toString(amount) + " mana of any color to your mana pool";
 		else

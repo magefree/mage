@@ -72,9 +72,9 @@ public class TablePlayerPanel extends javax.swing.JPanel {
 		this.lblPlayerNum.setText("Player " + playerNum);
 	}
 
-	public boolean joinTable(UUID roomId, UUID tableId, int seatNum) throws FileNotFoundException, IOException, ClassNotFoundException {
+	public boolean joinTable(UUID roomId, UUID tableId) throws FileNotFoundException, IOException, ClassNotFoundException {
 		if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
-			return session.joinTable(roomId, tableId, seatNum, this.newPlayerPanel.getPlayerName(), DeckCardLists.load(this.newPlayerPanel.getDeckFile()));
+			return session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), DeckCardLists.load(this.newPlayerPanel.getDeckFile()));
  		}
 		return true;
 	}

@@ -39,10 +39,16 @@ public class ChatMessage implements Serializable {
 
 	private UUID chatId;
 	private String message;
+	private MessageColor color;
 
-	public ChatMessage(UUID chatId, String message) {
+	public enum MessageColor {
+		BLACK, RED, GREEN, BLUE, ORANGE;
+	}
+
+	public ChatMessage(UUID chatId, String message, MessageColor color) {
 		this.chatId = chatId;
 		this.message = message;
+		this.color = color;
 	}
 
 	public String getMessage() {
@@ -51,5 +57,9 @@ public class ChatMessage implements Serializable {
 
 	public UUID getChatId() {
 		return chatId;
+	}
+
+	public MessageColor getColor() {
+		return color;
 	}
 }

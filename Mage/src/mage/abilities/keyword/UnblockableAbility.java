@@ -37,7 +37,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class UnblockableAbility extends EvasionAbilityImpl {
+public class UnblockableAbility extends EvasionAbilityImpl<UnblockableAbility> {
 
 	private static final UnblockableAbility fINSTANCE =  new UnblockableAbility();
 
@@ -59,6 +59,11 @@ public class UnblockableAbility extends EvasionAbilityImpl {
 	@Override
 	public String getRule() {
 		return "Unblockable";
+	}
+
+	@Override
+	public UnblockableAbility copy() {
+		return fINSTANCE;
 	}
 
 }

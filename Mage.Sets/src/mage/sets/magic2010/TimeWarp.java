@@ -31,6 +31,7 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -42,33 +43,55 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TimeWarp extends CardImpl {
+public class TimeWarp extends CardImpl<TimeWarp> {
 
 	public TimeWarp(UUID ownerId) {
 		super(ownerId, "Time Warp", new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setBlue(true);
-		this.art = "122160_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetPlayer());
 		this.getSpellAbility().addEffect(new TimeWarpEffect());
 	}
 
+	public TimeWarp(final TimeWarp card) {
+		super(card);
+	}
+
+	@Override
+	public TimeWarp copy() {
+		return new TimeWarp(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "122160_typ_reg_sty_010.jpg";
+	}
+
 }
 
-class TimeWarpEffect extends OneShotEffect {
+class TimeWarpEffect extends OneShotEffect<TimeWarpEffect> {
 
 	public TimeWarpEffect() {
 		super(Outcome.ExtraTurn);
 	}
 
+	public TimeWarpEffect(final TimeWarpEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
+	public TimeWarpEffect copy() {
+		return new TimeWarpEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
 		game.getState().getTurnMods().add(new TurnMod(source.getFirstTarget(), false));
 		return true;
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Target player takes an extra turn after this one.";
 	}
 }

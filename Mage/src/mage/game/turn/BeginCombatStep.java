@@ -37,13 +37,17 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BeginCombatStep extends Step {
+public class BeginCombatStep extends Step<BeginCombatStep> {
 
 	public BeginCombatStep() {
 		super(PhaseStep.BEGIN_COMBAT, true);
 		this.stepEvent = EventType.BEGIN_COMBAT_STEP;
 		this.preStepEvent = EventType.BEGIN_COMBAT_STEP_PRE;
 		this.postStepEvent = EventType.BEGIN_COMBAT_STEP_POST;
+	}
+
+	public BeginCombatStep(final BeginCombatStep step) {
+		super(step);
 	}
 
 	@Override
@@ -53,6 +57,11 @@ public class BeginCombatStep extends Step {
 		game.getCombat().setAttacker(activePlayerId);
 		game.getCombat().setDefenders(game);
 		super.beginStep(game, activePlayerId);
+	}
+
+	@Override
+	public BeginCombatStep copy() {
+		return new BeginCombatStep(this);
 	}
 
 }

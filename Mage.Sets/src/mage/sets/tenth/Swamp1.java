@@ -36,12 +36,25 @@ import mage.sets.Tenth;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Swamp1 extends Swamp {
+public class Swamp1 extends Swamp<Swamp1> {
 
 	public Swamp1(UUID ownerId) {
 		super(ownerId);
 		this.expansionSetId = Tenth.getInstance().getId();
-		this.art = "89177_typ_reg_sty_010.jpg";
+	}
+
+	public Swamp1(final Swamp1 card) {
+		super(card);
+	}
+
+	@Override
+	public Swamp1 copy() {
+		return new Swamp1(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "89177_typ_reg_sty_010.jpg";
 	}
 
 }

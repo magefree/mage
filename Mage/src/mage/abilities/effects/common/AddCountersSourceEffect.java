@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.counters.Counter;
 import mage.game.Game;
@@ -38,7 +39,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AddCountersSourceEffect extends OneShotEffect {
+public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffect> {
 
 	private int amount;
 	private String name;
@@ -49,9 +50,15 @@ public class AddCountersSourceEffect extends OneShotEffect {
 		this.amount = amount;
 	}
 
+	public AddCountersSourceEffect(final AddCountersSourceEffect effect) {
+		super(effect);
+		this.amount = effect.amount;
+		this.name = effect.name;
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Permanent permanent = game.getPermanent(this.source.getSourceId());
+	public boolean apply(Game game, Ability source) {
+		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
 			Counter counter = new Counter(name);
 			counter.add(amount);
@@ -61,7 +68,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		if (amount > 1) {
 			StringBuilder sb = new StringBuilder();
 			sb.append("put ").append(Integer.toString(amount)).append(" ").append(name).append("counters on {this}");
@@ -69,6 +76,11 @@ public class AddCountersSourceEffect extends OneShotEffect {
 		}
 		else
 			return "put a " + name + " counter on {this}";
+	}
+
+	@Override
+	public AddCountersSourceEffect copy() {
+		return new AddCountersSourceEffect(this);
 	}
 
 

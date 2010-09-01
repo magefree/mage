@@ -38,13 +38,26 @@ import mage.sets.Zendikar;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ScaldingTarn extends CardImpl {
+public class ScaldingTarn extends CardImpl<ScaldingTarn> {
 
 	public ScaldingTarn(UUID ownerId) {
 		super(ownerId, "Scalding Tarn", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Zendikar.getInstance().getId();
-		this.art = "123672_typ_reg_sty_010.jpg";
 		this.addAbility(new FetchLandActivatedAbility(new String[] {"Island", "Mountain"}));
+	}
+
+	public ScaldingTarn(final ScaldingTarn card) {
+		super(card);
+	}
+
+	@Override
+	public ScaldingTarn copy() {
+		return new ScaldingTarn(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123672_typ_reg_sty_010.jpg";
 	}
 
 }

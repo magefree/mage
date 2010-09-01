@@ -31,9 +31,10 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpecialAction;
-import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.RemoveDelayedTriggeredAbilityEffect;
@@ -49,47 +50,68 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class QuenchableFire extends CardImpl {
+public class QuenchableFire extends CardImpl<QuenchableFire> {
 
 	public QuenchableFire(UUID ownerId) {
 		super(ownerId, "Quenchable Fire", new CardType[]{CardType.SORCERY}, "{3}{R}");
 		this.expansionSetId = Conflux.getInstance().getId();
 		this.color.setRed(true);
-		this.art = "118698_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetPlayer());
 		this.getSpellAbility().addEffect(new DamageTargetEffect(3));
 		this.getSpellAbility().addEffect(new QuenchableFireEffect());
 	}
 
+	public QuenchableFire(final QuenchableFire card) {
+		super(card);
+	}
+
+	@Override
+	public QuenchableFire copy() {
+		return new QuenchableFire(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "118698_typ_reg_sty_010.jpg";
+	}
 }
 
-class QuenchableFireEffect extends OneShotEffect {
+class QuenchableFireEffect extends OneShotEffect<QuenchableFireEffect> {
 
 	public QuenchableFireEffect() {
 		super(Outcome.Damage);
 	}
 	
+	public QuenchableFireEffect(final QuenchableFireEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
+	public QuenchableFireEffect copy() {
+		return new QuenchableFireEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
 		//create delayed triggereda ability
 		QuenchableFireDelayedTriggeredAbility delayedAbility = new QuenchableFireDelayedTriggeredAbility();
-		delayedAbility.setSourceId(this.source.getSourceId());
-		delayedAbility.setControllerId(this.source.getControllerId());
-		delayedAbility.getTargets().addAll(this.source.getTargets());
+		delayedAbility.setSourceId(source.getSourceId());
+		delayedAbility.setControllerId(source.getControllerId());
+		delayedAbility.getTargets().addAll(source.getTargets());
 		game.getState().addDelayedTriggeredAbility(delayedAbility);
 		//create special action
 		QuenchableFireSpecialAction newAction = new QuenchableFireSpecialAction(delayedAbility.getId());
 		delayedAbility.setSpecialActionId(newAction.getId());
-		newAction.setSourceId(this.source.getSourceId());
-		newAction.setControllerId(this.source.getFirstTarget());
-		newAction.getTargets().addAll(this.source.getTargets());
+		newAction.setSourceId(source.getSourceId());
+		newAction.setControllerId(source.getFirstTarget());
+		newAction.getTargets().addAll(source.getTargets());
 		game.getState().getSpecialActions().add(newAction);
 		return true;
 	}
 	
 }
 
-class QuenchableFireDelayedTriggeredAbility extends DelayedTriggeredAbility {
+class QuenchableFireDelayedTriggeredAbility extends DelayedTriggeredAbility<QuenchableFireDelayedTriggeredAbility> {
 
 	private UUID specialActionId;
 
@@ -99,6 +121,15 @@ class QuenchableFireDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 	public void setSpecialActionId(UUID specialActionId) {
 		this.specialActionId = specialActionId;
+	}
+
+	public QuenchableFireDelayedTriggeredAbility(final QuenchableFireDelayedTriggeredAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public QuenchableFireDelayedTriggeredAbility copy() {
+		return new QuenchableFireDelayedTriggeredAbility(this);
 	}
 
 	@Override
@@ -123,11 +154,21 @@ class QuenchableFireDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 }
 
-class QuenchableFireSpecialAction extends SpecialAction {
+class QuenchableFireSpecialAction extends SpecialAction<QuenchableFireSpecialAction> {
 
 	public QuenchableFireSpecialAction(UUID effectId) {
-		this.addCost(new ManaCosts("{U}"));
+		this.addCost(new ManaCostsImpl("{U}"));
 		this.addEffect(new RemoveDelayedTriggeredAbilityEffect(effectId));
 		this.addEffect(new RemoveSpecialActionEffect(this.getId()));
 	}
+
+	public QuenchableFireSpecialAction(final QuenchableFireSpecialAction ability) {
+		super(ability);
+	}
+
+	@Override
+	public QuenchableFireSpecialAction copy() {
+		return new QuenchableFireSpecialAction(this);
+	}
+
 }

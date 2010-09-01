@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 
@@ -36,20 +37,29 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CounterTargetEffect extends OneShotEffect {
+public class CounterTargetEffect extends OneShotEffect<CounterTargetEffect> {
 
 	public CounterTargetEffect() {
 		super(Outcome.Detriment);
 	}
 
-	@Override
-	public boolean apply(Game game) {
-		return game.getStack().counter(this.source.getFirstTarget(), source.getSourceId(), game);
+	public CounterTargetEffect(final CounterTargetEffect effect) {
+		super(effect);
 	}
 
 	@Override
-	public String getText() {
-		return "Counter target " + this.source.getTargets().get(0).getTargetName();
+	public CounterTargetEffect copy() {
+		return new CounterTargetEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
+	}
+
+	@Override
+	public String getText(Ability source) {
+		return "Counter target " + source.getTargets().get(0).getTargetName();
 	}
 
 }

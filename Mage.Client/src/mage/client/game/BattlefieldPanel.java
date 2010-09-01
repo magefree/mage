@@ -48,7 +48,6 @@ import mage.client.cards.BigCard;
 import mage.client.cards.Permanent;
 import mage.client.util.Config;
 import mage.view.PermanentView;
-import static mage.client.util.Constants.*;
 
 /**
  *

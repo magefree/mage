@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -47,16 +48,26 @@ public class DestroyAllEffect extends OneShotEffect {
 		this.filter = filter;
 	}
 
+	public DestroyAllEffect(final DestroyAllEffect effect) {
+		super(effect);
+		this.filter = effect.filter.copy();
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, this.source.getControllerId(), game)) {
-			permanent.destroy(this.source.getSourceId(), game, false);
+	public DestroyAllEffect copy() {
+		return new DestroyAllEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+			permanent.destroy(source.getSourceId(), game, false);
 		}
 		return true;
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Destroy all " + filter.getMessage();
 	}
 

@@ -47,19 +47,32 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GargoyleCastle extends CardImpl {
+public class GargoyleCastle extends CardImpl<GargoyleCastle> {
 
 	public GargoyleCastle(UUID ownerId) {
 		super(ownerId, "Gargoyle Castle", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Magic2010.getInstance().getId();
-		this.art = "122169_typ_reg_sty_010.jpg";
 		this.addAbility(new ColorlessManaAbility());
 		this.addAbility(new GargoyleCastleAbility());
 	}
 
+	public GargoyleCastle(final GargoyleCastle card) {
+		super(card);
+	}
+
+	@Override
+	public GargoyleCastle copy() {
+		return new GargoyleCastle(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "122169_typ_reg_sty_010.jpg";
+	}
+
 }
 
-class GargoyleCastleAbility extends ActivatedAbilityImpl {
+class GargoyleCastleAbility extends ActivatedAbilityImpl<GargoyleCastleAbility> {
 
 	public GargoyleCastleAbility() {
 		super(Zone.BATTLEFIELD, null);
@@ -67,6 +80,15 @@ class GargoyleCastleAbility extends ActivatedAbilityImpl {
 		addCost(new GenericManaCost(5));
 		addCost(new SacrificeSourceCost());
 		addEffect(new CreateTokenEffect(new GargoyleToken()));
+	}
+
+	public GargoyleCastleAbility(final GargoyleCastleAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public GargoyleCastleAbility copy() {
+		return new GargoyleCastleAbility(this);
 	}
 
 }

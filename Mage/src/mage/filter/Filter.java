@@ -47,5 +47,8 @@ public interface Filter<T> extends Serializable {
 	public boolean match(T o);
 	public String getMessage();
 	public void setMessage(String message);
+	public void setNotFilter(boolean notFilter);
+	
+	public Filter<T> copy();
 	
 }

@@ -38,6 +38,7 @@ import java.util.UUID;
 import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
 import mage.MageItem;
+import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbilities;
 import mage.abilities.TriggeredAbility;
@@ -45,6 +46,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.cards.Cards;
 import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
 import mage.game.combat.Combat;
 import mage.game.events.GameEvent;
 import mage.game.events.TableEvent;
@@ -52,6 +54,8 @@ import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
+import mage.game.turn.Phase;
+import mage.game.turn.Step;
 import mage.game.turn.Turn;
 import mage.players.Player;
 import mage.players.PlayerList;
@@ -66,6 +70,7 @@ public interface Game extends MageItem, Serializable {
 	public MultiplayerAttackOption getAttackOption();
 	
 	//game data methods
+	public void loadCards(Set<Card> cards, UUID ownerId);
 	public Object getCustomData();
 	public void setCustomData(Object data);
 	public MageObject getObject(UUID objectId);
@@ -77,6 +82,8 @@ public interface Game extends MageItem, Serializable {
 	public PlayerList getPlayerList();
 	public Set<UUID> getOpponents(UUID playerId);
 	public Turn getTurn();
+	public Phase getPhase();
+	public Step getStep();
 	public int getTurnNum();
 	public boolean isMainPhase();
 	public boolean canPlaySorcery(UUID playerId);
@@ -87,10 +94,12 @@ public interface Game extends MageItem, Serializable {
 	public SpellStack getStack();
 	public Exile getExile();
 	public Combat getCombat();
-	public GameStates getGameStates();
 	public GameState getState();
 	public String getWinner();
 	public ContinuousEffects getContinuousEffects();
+	public GameStates getGameStates();
+	public void loadGameStates(GameStates states);
+	public Game copy();
 
 	//client event methods
 	public void addTableEventListener(Listener<TableEvent> listener);
@@ -124,7 +133,7 @@ public interface Game extends MageItem, Serializable {
 	public void quit(UUID playerId);
 	public void concede(UUID playerId);
 	public void emptyManaPools();
-	public void addEffect(ContinuousEffect continuousEffect);
+	public void addEffect(ContinuousEffect continuousEffect, Ability source);
 	public void addTriggeredAbility(TriggeredAbility ability);
 	public void applyEffects();
 	public boolean checkStateAndTriggered();

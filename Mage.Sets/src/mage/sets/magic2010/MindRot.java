@@ -39,14 +39,27 @@ import mage.target.TargetPlayer;
  *
  * @author LokiX
  */
-public class MindRot extends CardImpl {
+public class MindRot extends CardImpl<MindRot> {
 
     public MindRot(UUID onwerId){
         super(onwerId, "Mind Rot", new CardType[]{CardType.SORCERY},"{2}{B}");
         this.expansionSetId = Magic2010.getInstance().getId();
         this.color.setBlack(true);
-		this.art = "";
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
     }
+
+	public MindRot(final MindRot card) {
+		super(card);
+	}
+
+	@Override
+	public MindRot copy() {
+		return new MindRot(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "04716_typ_reg_sty_001.jpg";
+	}
 }

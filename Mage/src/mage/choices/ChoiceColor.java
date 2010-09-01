@@ -34,7 +34,7 @@ import mage.ObjectColor;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ChoiceColor extends ChoiceImpl {
+public class ChoiceColor extends ChoiceImpl<ChoiceColor> {
 
 	public ChoiceColor() {
 		this.choices.add("Black");
@@ -43,6 +43,15 @@ public class ChoiceColor extends ChoiceImpl {
 		this.choices.add("Red");
 		this.choices.add("White");
 		this.message = "Choose color";
+	}
+
+	public ChoiceColor(final ChoiceColor choice) {
+		super(choice);
+	}
+
+	@Override
+	public ChoiceColor copy() {
+		return new ChoiceColor(this);
 	}
 
 	public ObjectColor getColor() {

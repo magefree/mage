@@ -38,13 +38,26 @@ import mage.sets.Zendikar;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class VerdantCatacombs extends CardImpl {
+public class VerdantCatacombs extends CardImpl<VerdantCatacombs> {
 
 	public VerdantCatacombs(UUID ownerId) {
 		super(ownerId, "Verdant Catacombs", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Zendikar.getInstance().getId();
-		this.art = "123743_typ_reg_sty_010.jpg";
 		this.addAbility(new FetchLandActivatedAbility(new String[] {"Forest", "Swamp"}));
+	}
+
+	public VerdantCatacombs(final VerdantCatacombs card) {
+		super(card);
+	}
+
+	@Override
+	public VerdantCatacombs copy() {
+		return new VerdantCatacombs(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123743_typ_reg_sty_010.jpg";
 	}
 
 }

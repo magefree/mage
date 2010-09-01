@@ -42,18 +42,23 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EntersBattlefieldEffect extends ReplacementEffectImpl {
+public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlefieldEffect> {
 
-	protected Effects baseEffects = new Effects(null);
+	protected Effects baseEffects = new Effects();
 
 	public EntersBattlefieldEffect(Effect baseEffect) {
 		super(Duration.WhileOnBattlefield, baseEffect.getOutcome());
 		this.baseEffects.add(baseEffect);
 	}
 
+	public EntersBattlefieldEffect(EntersBattlefieldEffect effect) {
+		super(effect);
+		this.baseEffects = effect.baseEffects.copy();
+	}
+
 	@Override
-	public boolean applies(GameEvent event, Game game) {
-		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.source.getSourceId())) {
+	public boolean applies(GameEvent event, Ability source, Game game) {
+		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
 			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
 			if (zEvent.getToZone() == Zone.BATTLEFIELD)
 				return true;
@@ -62,32 +67,30 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
 	}
 
 	@Override
-	public boolean apply(Game game) {
+	public boolean apply(Game game, Ability source) {
 		for (Effect effect: baseEffects) {
 			if (effect instanceof ContinuousEffect) {
-				game.addEffect((ContinuousEffect) effect);
+				game.addEffect((ContinuousEffect) effect, source);
 			}
 			else
-				effect.apply(game);
+				effect.apply(game, source);
 		}
 		return true;
 	}
 
 	@Override
-	public boolean replaceEvent(GameEvent event, Game game) {
-		return apply(game);
-	}
-
-
-	@Override
-	public void setSource(Ability source) {
-		this.source = source;
-		baseEffects.setSource(source);
+	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+		return apply(game, source);
 	}
 
 	@Override
-	public String getText() {
-		return "When {this} enters the battlefield, " + baseEffects.getText();
+	public String getText(Ability source) {
+		return "When {this} enters the battlefield, " + baseEffects.getText(source);
+	}
+
+	@Override
+	public EntersBattlefieldEffect copy() {
+		return new EntersBattlefieldEffect(this);
 	}
 
 }

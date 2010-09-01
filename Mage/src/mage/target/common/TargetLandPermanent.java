@@ -36,7 +36,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetLandPermanent extends TargetPermanent {
+public class TargetLandPermanent<T extends TargetLandPermanent<T>> extends TargetPermanent<TargetLandPermanent<T>> {
 
 	public TargetLandPermanent() {
 		this(1, 1, new FilterLandPermanent(), TargetController.ANY);
@@ -55,4 +55,12 @@ public class TargetLandPermanent extends TargetPermanent {
 		this.targetName = filter.getMessage();
 	}
 
+	public TargetLandPermanent(final TargetLandPermanent target) {
+		super(target);
+	}
+
+	@Override
+	public TargetLandPermanent copy() {
+		return new TargetLandPermanent(this);
+	}
 }

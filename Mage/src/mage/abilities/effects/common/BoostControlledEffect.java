@@ -28,11 +28,11 @@
 
 package mage.abilities.effects.common;
 
-import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
+import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BoostControlledEffect extends ContinuousEffectImpl {
+public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledEffect> {
 
 	private int power;
 	private int toughness;
@@ -59,9 +59,21 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
 		this.filter = filter;
 	}
 
+	public BoostControlledEffect(final BoostControlledEffect effect) {
+		super(effect);
+		this.power = effect.power;
+		this.toughness = effect.toughness;
+		this.filter = effect.filter.copy();
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, this.source.getControllerId())) {
+	public BoostControlledEffect copy() {
+		return new BoostControlledEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
 			perm.addPower(power);
 			perm.addToughness(toughness);
 		}
@@ -69,7 +81,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(filter.getMessage());
 		sb.append(" you control get ").append(String.format("%1$+d/%2$+d", power, toughness));

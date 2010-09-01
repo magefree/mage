@@ -39,17 +39,30 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AirElemental extends CardImpl {
+public class AirElemental extends CardImpl<AirElemental> {
 
 	public AirElemental(UUID ownerId) {
 		super(ownerId, "Air Elemental", new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setBlue(true);
 		this.subtype.add("Elemental");
-		this.art = "101044_typ_reg_sty_010.jpg";
 		this.power = new MageInt(4);
 		this.toughness = new MageInt(4);
 		this.addAbility(FlyingAbility.getInstance());
+	}
+
+	public AirElemental(final AirElemental card) {
+		super(card);
+	}
+
+	@Override
+	public AirElemental copy() {
+		return new AirElemental(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "101044_typ_reg_sty_010.jpg";
 	}
 
 }

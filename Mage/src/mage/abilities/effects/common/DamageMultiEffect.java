@@ -28,22 +28,20 @@
 
 package mage.abilities.effects.common;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.TargetAmount;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DamageMultiEffect extends OneShotEffect {
+public class DamageMultiEffect extends OneShotEffect<DamageMultiEffect> {
 
 	protected int amount;
 
@@ -56,18 +54,28 @@ public class DamageMultiEffect extends OneShotEffect {
 		return amount;
 	}
 
+	public DamageMultiEffect(final DamageMultiEffect effect) {
+		super(effect);
+		this.amount = effect.amount;
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Target multiTarget = this.source.getTargets().get(0);
+	public DamageMultiEffect copy() {
+		return new DamageMultiEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Target multiTarget = source.getTargets().get(0);
 		for (UUID target: multiTarget.getTargets()) {
 			Permanent permanent = game.getPermanent(target);
 			if (permanent != null) {
-				permanent.damage(multiTarget.getTargetAmount(target), this.source.getSourceId(), game);
+				permanent.damage(multiTarget.getTargetAmount(target), source.getSourceId(), game);
 			}
 			else {
 				Player player = game.getPlayer(target);
 				if (player != null) {
-					player.damage(multiTarget.getTargetAmount(target), this.source.getSourceId(), game);
+					player.damage(multiTarget.getTargetAmount(target), source.getSourceId(), game);
 				}
 			}
 		}
@@ -75,10 +83,10 @@ public class DamageMultiEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("{source} deals ").append(Integer.toString(amount));
-		sb.append(" damage divided as you choose among any number of target ").append(this.source.getTargets().get(0).getTargetName());
+		sb.append(" damage divided as you choose among any number of target ").append(source.getTargets().get(0).getTargetName());
 		return sb.toString();
 	}
 

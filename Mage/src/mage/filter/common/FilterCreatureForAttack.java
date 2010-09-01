@@ -35,7 +35,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterCreatureForAttack extends FilterCreaturePermanent {
+public class FilterCreatureForAttack extends FilterCreaturePermanent<FilterCreatureForAttack> {
 
 	public FilterCreatureForAttack() {
 		this("");
@@ -53,11 +53,20 @@ public class FilterCreatureForAttack extends FilterCreaturePermanent {
 		this.notAbilities = true;
 	}
 
+	public FilterCreatureForAttack(final FilterCreatureForAttack filter) {
+		super(filter);
+	}
+
 	@Override
 	public boolean match(Permanent permanent) {
 		if (!super.match(permanent))
-			return false;
+			return notFilter;
 
 		return permanent.canTap();
+	}
+
+	@Override
+	public FilterCreatureForAttack copy() {
+		return new FilterCreatureForAttack(this);
 	}
 }

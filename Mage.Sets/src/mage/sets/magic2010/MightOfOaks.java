@@ -40,14 +40,27 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LokiX
  */
-public class MightOfOaks extends CardImpl {
+public class MightOfOaks extends CardImpl<MightOfOaks> {
 
     public MightOfOaks(UUID onwerId){
         super(onwerId, "Might of Oaks", new CardType[]{CardType.INSTANT},"{3}{G}");
         this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setGreen(true);
-		this.art = "102958_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 		this.getSpellAbility().addEffect(new BoostTargetEffect(7, 7, Duration.EndOfTurn));
     }
+
+	public MightOfOaks(final MightOfOaks card) {
+		super(card);
+	}
+
+	@Override
+	public MightOfOaks copy() {
+		return new MightOfOaks(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "102958_typ_reg_sty_010.jpg";
+	}
 }

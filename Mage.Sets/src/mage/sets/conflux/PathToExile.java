@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -47,17 +48,29 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PathToExile extends CardImpl {
+public class PathToExile extends CardImpl<PathToExile> {
 
 	public PathToExile(UUID ownerId) {
 		super(ownerId, "Path To Exile", new CardType[]{CardType.INSTANT}, "{W}");
 		this.expansionSetId = Conflux.getInstance().getId();
 		this.color.setWhite(true);
-		this.art = "118686_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 		this.getSpellAbility().addEffect(new PathToExileEffect());
 	}
 
+	public PathToExile(final PathToExile card) {
+		super(card);
+	}
+
+	@Override
+	public PathToExile copy() {
+		return new PathToExile(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "118686_typ_reg_sty_010.jpg";
+	}
 }
 
 class PathToExileEffect extends OneShotEffect {
@@ -66,16 +79,25 @@ class PathToExileEffect extends OneShotEffect {
 		super(Outcome.Exile);
 	}
 
+	public PathToExileEffect(final PathToExileEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Permanent permanent = game.getPermanent(this.source.getFirstTarget());
+	public PathToExileEffect copy() {
+		return new PathToExileEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
 			Player player = game.getPlayer(permanent.getControllerId());
 			if (permanent.moveToZone(Zone.EXILED, game, false)) {
 				if (player.chooseUse(Outcome.PutCardInPlay, "Use Path to Exile effect?", game)) {
 					TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
 					player.searchLibrary(target, game);
-					Card card = player.getLibrary().remove(target.getFirstTarget());
+					Card card = player.getLibrary().remove(target.getFirstTarget(), game);
 					if (card != null) {
 						if (player.putOntoBattlefield(card, game)) {
 							Permanent land = game.getPermanent(card.getId());
@@ -92,7 +114,7 @@ class PathToExileEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Exile target creature. Its controller may search his or her library for a basic land card, put that card onto the battlefield tapped, then shuffle his or her library";
 	}
 

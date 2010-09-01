@@ -38,13 +38,17 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CleanupStep extends Step {
+public class CleanupStep extends Step<CleanupStep> {
 
 	public CleanupStep() {
 		super(PhaseStep.CLEANUP, true);
 		this.stepEvent = EventType.CLEANUP_STEP;
 		this.preStepEvent = EventType.CLEANUP_STEP_PRE;
 		this.postStepEvent = EventType.CLEANUP_STEP_POST;
+	}
+
+	public CleanupStep(final CleanupStep step) {
+		super(step);
 	}
 
 	@Override
@@ -57,7 +61,11 @@ public class CleanupStep extends Step {
 		//20100423 - 514.2
 		game.getBattlefield().endOfTurn(activePlayerId, game);
 		game.getState().removeEotEffects(game);
+	}
 
+	@Override
+	public CleanupStep copy() {
+		return new CleanupStep(this);
 	}
 
 }

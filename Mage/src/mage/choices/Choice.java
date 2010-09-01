@@ -29,7 +29,6 @@
 package mage.choices;
 
 import java.util.List;
-import mage.abilities.Ability;
 
 /**
  *
@@ -38,12 +37,12 @@ import mage.abilities.Ability;
 public interface Choice {
 	
 	public boolean isChosen();
+	public boolean isRequired();
 	public void clearChoice();
 	public String getMessage();
 	public void setChoice(String choice);
 	public List<String> getChoices();
 	public String getChoice();
-	public Ability getAbility();
-	public void setAbility(Ability ability);
 
+	public Choice copy();
 }

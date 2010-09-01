@@ -33,29 +33,38 @@ import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
+import mage.abilities.Ability;
 import mage.game.Game;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class ContinuousEffectImpl extends EffectImpl implements ContinuousEffect {
+public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> extends EffectImpl<T> implements ContinuousEffect<T> {
 
 	protected Duration duration;
 	protected Layer layer;
 	protected SubLayer sublayer;
-	protected Date timestamp = new Date();
+	protected Date timestamp;
 
 	public ContinuousEffectImpl(Duration duration, Outcome outcome) {
 		super(outcome);
 		this.duration = duration;
+		this.timestamp = new Date();
 	}
 
 	public ContinuousEffectImpl(Duration duration, Layer layer, SubLayer sublayer, Outcome outcome) {
-		super(outcome);
-		this.duration = duration;
+		this(duration, outcome);
 		this.layer = layer;
 		this.sublayer = sublayer;
+	}
+
+	public ContinuousEffectImpl(final ContinuousEffectImpl effect) {
+		super(effect);
+		this.duration = effect.duration;
+		this.layer = effect.layer;
+		this.sublayer = effect.sublayer;
+		this.timestamp = new Date(effect.timestamp.getTime());
 	}
 
 	@Override
@@ -64,9 +73,9 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
 	}
 
 	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Game game) {
+	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
 		if (this.layer == layer && this.sublayer == sublayer) {
-			return apply(game);
+			return apply(game, source);
 		}
 		return false;
 	}

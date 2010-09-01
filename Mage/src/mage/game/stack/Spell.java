@@ -44,16 +44,13 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.util.Copier;
 import mage.watchers.Watchers;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Spell implements StackObject, Card {
-
-//	private static final transient Copier<Spell> copier = new Copier<Spell>();
+public class Spell<T extends Spell<T>> implements StackObject, Card {
 
 	private Card card;
 	private SpellAbility ability;
@@ -65,11 +62,17 @@ public class Spell implements StackObject, Card {
 		this.controllerId = controllerId;
 	}
 
+	public Spell(final Spell<T> spell) {
+		this.card = spell.card.copy();
+		this.ability = spell.ability.copy();
+		this.controllerId = spell.controllerId;
+	}
+
 	@Override
 	public boolean resolve(Game game) {
 		boolean result = false;
 		if (card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY)) {
-			if (ability.getTargets().stillLegal(game)) {
+			if (ability.getTargets().stillLegal(ability, game)) {
 				boolean replaced = resolveKicker(game);
 				if (!replaced)
 					result = ability.resolve(game);
@@ -87,7 +90,7 @@ public class Spell implements StackObject, Card {
 			return false;
 		}
 		else if (card.getCardType().contains(CardType.ENCHANTMENT) && card.getSubtype().contains("Aura")) {
-			if (ability.getTargets().stillLegal(game)) {
+			if (ability.getTargets().stillLegal(ability, game)) {
 				Player controller = game.getPlayers().get(controllerId);
 				if (controller.putOntoBattlefield(card, game)) {
 					return ability.resolve(game);
@@ -216,7 +219,7 @@ public class Spell implements StackObject, Card {
 
 	@Override
 	public SpellAbility getSpellAbility() {
-		return card.getSpellAbility();
+		return ability;
 	}
 
 	@Override
@@ -227,11 +230,6 @@ public class Spell implements StackObject, Card {
 	@Override
 	public void setOwnerId(UUID controllerId) {
 		
-	}
-
-	@Override
-	public Card copy() {
-		return new Copier<Spell>().copy(this);
 	}
 
 	@Override
@@ -259,4 +257,8 @@ public class Spell implements StackObject, Card {
 		return card.getExpansionSetId();
 	}
 
+	@Override
+	public Spell<T> copy() {
+		return new Spell<T>(this);
+	}
 }

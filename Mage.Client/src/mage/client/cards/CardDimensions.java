@@ -36,19 +36,19 @@ import static mage.client.util.Constants.*;
  */
 public class CardDimensions {
 
-	public static int frameHeight;
-	public static int frameWidth;
-	public static int symbolHeight;
-	public static int symbolWidth;
-	public static int contentXOffset;
-	public static int nameYOffset;
-	public static int typeYOffset;
-	public static int textYOffset;
-	public static int textWidth;
-	public static int textHeight;
-	public static int powBoxTextTop;
-	public static int powBoxTextLeft;
-	public static int nameFontSize;
+	public int frameHeight;
+	public int frameWidth;
+	public int symbolHeight;
+	public int symbolWidth;
+	public int contentXOffset;
+	public int nameYOffset;
+	public int typeYOffset;
+	public int textYOffset;
+	public int textWidth;
+	public int textHeight;
+	public int powBoxTextTop;
+	public int powBoxTextLeft;
+	public int nameFontSize;
 
 	public CardDimensions(double scaleFactor) {
 		frameHeight = (int)(FRAME_MAX_HEIGHT * scaleFactor);

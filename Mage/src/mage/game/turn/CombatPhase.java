@@ -35,7 +35,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CombatPhase extends Phase {
+public class CombatPhase extends Phase<CombatPhase> {
 
 	public CombatPhase() {
 		this.type = TurnPhase.COMBAT;
@@ -48,6 +48,15 @@ public class CombatPhase extends Phase {
 		this.steps.add(new CombatDamageStep(true));
 		this.steps.add(new CombatDamageStep(false));
 		this.steps.add(new EndOfCombatStep());
+	}
+
+	public CombatPhase(final CombatPhase phase) {
+		super(phase);
+	}
+
+	@Override
+	public CombatPhase copy() {
+		return new CombatPhase(this);
 	}
 
 }

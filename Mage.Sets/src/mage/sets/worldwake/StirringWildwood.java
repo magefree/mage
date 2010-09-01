@@ -34,7 +34,7 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldStaticAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.BecomesCreatureSourceEOTEffect;
 import mage.abilities.effects.common.EntersBattlefieldTappedEffect;
 import mage.abilities.keyword.ReachAbility;
@@ -48,16 +48,29 @@ import mage.sets.Worldwake;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class StirringWildwood extends CardImpl {
+public class StirringWildwood extends CardImpl<StirringWildwood> {
 
 	public StirringWildwood(UUID ownerId) {
 		super(ownerId, "Stirring Wildwood", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Worldwake.getInstance().getId();
-		this.art = "126541_typ_reg_sty_010.jpg";
 		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new WhiteManaAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new StirringWildwoodToken(), "land"), new ManaCosts("{1}{G}{W}")));
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new StirringWildwoodToken(), "land"), new ManaCostsImpl("{1}{G}{W}")));
+	}
+
+	public StirringWildwood(final StirringWildwood card) {
+		super(card);
+	}
+
+	@Override
+	public StirringWildwood copy() {
+		return new StirringWildwood(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "126541_typ_reg_sty_010.jpg";
 	}
 
 }

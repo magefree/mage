@@ -29,7 +29,9 @@
 package mage.game.stack;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 import java.util.UUID;
 import mage.Constants.Zone;
@@ -46,6 +48,14 @@ import mage.players.Player;
  */
 public class SpellStack extends Stack<StackObject> {
 
+	public SpellStack () {}
+
+	public SpellStack(final SpellStack stack) {
+		for (StackObject spell: stack) {
+			this.push(spell.copy());
+		}
+	}
+
 	//resolve top StackObject
 	public void resolve(Game game) {
 		StackObject top = this.peek();
@@ -58,7 +68,6 @@ public class SpellStack extends Stack<StackObject> {
 			stackObject.checkTriggers(event, game);
 		}
 	}
-
 
 	public boolean counter(UUID objectId, UUID sourceId, Game game) {
 		StackObject stackObject = getStackObject(objectId);
@@ -76,31 +85,33 @@ public class SpellStack extends Stack<StackObject> {
 
 	public boolean replaceEvent(GameEvent event, Game game) {
 		boolean caught = false;
-		List<ReplacementEffect> rEffects = new ArrayList<ReplacementEffect>();
+		Map<ReplacementEffect, Ability> rEffects = new LinkedHashMap<ReplacementEffect, Ability>();
 		for (StackObject stackObject: this) {
 			for (Ability ability: stackObject.getAbilities()) {
 				if (ability.getZone() == Zone.STACK) {
 					for (Effect effect: ability.getEffects()) {
 						if (effect instanceof ReplacementEffect) {
-							if (((ReplacementEffect)effect).applies(event, game))
-								rEffects.add((ReplacementEffect) effect);
+							if (((ReplacementEffect)effect).applies(event, ability, game))
+								rEffects.put((ReplacementEffect) effect, ability);
 						}
 					}
 				}
 			}
 		}
 		if (rEffects.size() > 0) {
+			List<ReplacementEffect> effects = new ArrayList(rEffects.keySet());
+			int index;
 			if (rEffects.size() == 1) {
-				caught = rEffects.get(0).replaceEvent(event, game);
+				index = 0;
 			}
 			else {
 				Player player = game.getPlayer(event.getPlayerId());
-				caught = rEffects.get(player.chooseEffect(rEffects, game)).replaceEvent(event, game);
+				index = player.chooseEffect(effects, game);
 			}
+			caught = effects.get(index).replaceEvent(event, rEffects.get(effects.get(index)), game);
 		}
 		return caught;
 	}
-
 
 	public StackObject getStackObject(UUID id) {
 		for (StackObject stackObject: this) {
@@ -108,5 +119,9 @@ public class SpellStack extends Stack<StackObject> {
 				return stackObject;
 		}
 		return null;
+	}
+
+	public SpellStack copy() {
+		return new SpellStack(this);
 	}
 }

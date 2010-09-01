@@ -31,6 +31,7 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
@@ -44,32 +45,54 @@ import mage.sets.Conflux;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MartialCoup extends CardImpl {
+public class MartialCoup extends CardImpl<MartialCoup> {
 
 	public MartialCoup(UUID ownerId) {
 		super(ownerId, "Martial Coup", new CardType[]{CardType.SORCERY}, "{X}{W}{W}");
 		this.expansionSetId = Conflux.getInstance().getId();
 		this.color.setWhite(true);
-		this.art = "118685_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addEffect(new MartialCoupEffect());
+	}
+
+	public MartialCoup(final MartialCoup card) {
+		super(card);
+	}
+
+	@Override
+	public MartialCoup copy() {
+		return new MartialCoup(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "118685_typ_reg_sty_010.jpg";
 	}
 }
 
-class MartialCoupEffect extends OneShotEffect {
+class MartialCoupEffect extends OneShotEffect<MartialCoupEffect> {
 
 	public MartialCoupEffect() {
 		super(Outcome.PutCreatureInPlay);
 	}
 
+	public MartialCoupEffect(final MartialCoupEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Player controller = game.getPlayer(this.source.getControllerId());
-		int amount = this.source.getManaCosts().getVariableCosts().get(0).getValue();
+	public MartialCoupEffect copy() {
+		return new MartialCoupEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Player controller = game.getPlayer(source.getControllerId());
+		int amount = source.getManaCosts().getVariableCosts().get(0).getValue();
 
 		FilterCreaturePermanent filter = new FilterCreaturePermanent();
 		if (amount > 4) {
-			for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, this.source.getControllerId(), game)) {
-				permanent.destroy(this.source.getSourceId(), game, false);
+			for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+				permanent.destroy(source.getSourceId(), game, false);
 			}
 		}
 		for (int i = 0; i < amount; i++) {
@@ -79,7 +102,7 @@ class MartialCoupEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Put X 1/1 white Soldier creature tokens onto the battlefield. If X is 5 or more, destroy all other creatures";
 	}
 

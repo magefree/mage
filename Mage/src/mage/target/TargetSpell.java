@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.Zone;
+import mage.abilities.Ability;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -41,7 +42,7 @@ import mage.game.stack.StackObject;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetSpell extends TargetObject {
+public class TargetSpell extends TargetObject<TargetSpell> {
 
 	protected FilterSpell filter;
 
@@ -65,13 +66,18 @@ public class TargetSpell extends TargetObject {
 		this.targetName = filter.getMessage();
 	}
 
+	public TargetSpell(final TargetSpell target) {
+		super(target);
+		this.filter = target.filter.copy();
+	}
+
 	@Override
 	public FilterSpell getFilter() {
 		return filter;
 	}
 
 	@Override
-	public boolean canTarget(UUID id, Game game) {
+	public boolean canTarget(UUID id, Ability source, Game game) {
 		StackObject stackObject = game.getStack().getStackObject(id);
 		if (stackObject != null && stackObject instanceof Spell) {
 			return filter.match((Spell)stackObject);
@@ -101,6 +107,11 @@ public class TargetSpell extends TargetObject {
 			}
 		}
 		return possibleTargets;
+	}
+
+	@Override
+	public TargetSpell copy() {
+		return new TargetSpell(this);
 	}
 
 }

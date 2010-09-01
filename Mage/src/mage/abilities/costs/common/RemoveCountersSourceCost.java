@@ -29,6 +29,7 @@
 package mage.abilities.costs.common;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,7 +38,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RemoveCountersSourceCost extends CostImpl {
+public class RemoveCountersSourceCost extends CostImpl<RemoveCountersSourceCost> {
 
 	private int amount;
 	private String name;
@@ -48,21 +49,32 @@ public class RemoveCountersSourceCost extends CostImpl {
 		this.text = "Remove " + amount + " " + name + " counters from {this}";
 	}
 
+	public RemoveCountersSourceCost(RemoveCountersSourceCost cost) {
+		super(cost);
+		this.amount = cost.amount;
+		this.name = cost.name;
+	}
+
 	@Override
-	public boolean canPay(UUID playerId, Game game) {
-		Permanent source = game.getPermanent(this.ability.getSourceId());
-		if (source.getCounters().getCount(name) >= amount)
+	public boolean canPay(Ability source, Game game) {
+		Permanent permanent = game.getPermanent(source.getSourceId());
+		if (permanent.getCounters().getCount(name) >= amount)
 			return true;
 		return false;
 	}
 
 	@Override
-	public boolean pay(Game game, boolean noMana) {
-		Permanent source = game.getPermanent(this.ability.getSourceId());
-		if (source.getCounters().getCount(name) >= amount) {
-			source.getCounters().removeCounter(name, amount);
+	public boolean pay(Game game, Ability source, boolean noMana) {
+		Permanent permanent = game.getPermanent(source.getSourceId());
+		if (permanent.getCounters().getCount(name) >= amount) {
+			permanent.getCounters().removeCounter(name, amount);
 			this.paid = true;
 		}
 		return paid;
+	}
+
+	@Override
+	public RemoveCountersSourceCost copy() {
+		return new RemoveCountersSourceCost(this);
 	}
 }

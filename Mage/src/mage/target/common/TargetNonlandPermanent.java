@@ -36,7 +36,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetNonlandPermanent extends TargetPermanent {
+public class TargetNonlandPermanent extends TargetPermanent<TargetNonlandPermanent> {
 
 	public TargetNonlandPermanent() {
 		this(1, 1, TargetController.ANY);
@@ -51,4 +51,12 @@ public class TargetNonlandPermanent extends TargetPermanent {
 		this.targetName = filter.getMessage();
 	}
 
+	public TargetNonlandPermanent(final TargetNonlandPermanent target) {
+		super(target);
+	}
+
+	@Override
+	public TargetNonlandPermanent copy() {
+		return new TargetNonlandPermanent(this);
+	}
 }

@@ -40,11 +40,14 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ActivateOncePerTurnActivatedAbility extends ActivatedAbilityImpl {
-
+public class ActivateOncePerTurnActivatedAbility extends ActivatedAbilityImpl<ActivateOncePerTurnActivatedAbility> {
 
 	public ActivateOncePerTurnActivatedAbility(Zone zone, Effect effect, Cost cost) {
 		super(zone, effect, cost);
+	}
+
+	public ActivateOncePerTurnActivatedAbility(ActivateOncePerTurnActivatedAbility ability) {
+		super(ability);
 	}
 
 	@Override
@@ -83,6 +86,11 @@ public class ActivateOncePerTurnActivatedAbility extends ActivatedAbilityImpl {
 	@Override
 	public String getRule() {
 		return super.getRule() + " Activate this ability only once each turn.";
+	}
+
+	@Override
+	public ActivateOncePerTurnActivatedAbility copy() {
+		return new ActivateOncePerTurnActivatedAbility(this);
 	}
 
 }

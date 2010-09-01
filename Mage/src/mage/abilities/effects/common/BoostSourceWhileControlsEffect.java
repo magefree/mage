@@ -33,6 +33,7 @@ import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
+import mage.abilities.Ability;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -41,7 +42,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BoostSourceWhileControlsEffect extends WhileControlsContinuousEffect {
+public class BoostSourceWhileControlsEffect extends WhileControlsContinuousEffect<BoostSourceWhileControlsEffect> {
 
 	private int power;
 	private int toughness;
@@ -52,9 +53,20 @@ public class BoostSourceWhileControlsEffect extends WhileControlsContinuousEffec
 		this.toughness = toughness;
 	}
 
+	public BoostSourceWhileControlsEffect(final BoostSourceWhileControlsEffect effect) {
+		super(effect);
+		this.power = effect.power;
+		this.toughness = effect.toughness;
+	}
+
 	@Override
-	protected boolean applyEffect(Game game) {
-		Permanent permanent = game.getPermanent(this.source.getSourceId());
+	public BoostSourceWhileControlsEffect copy() {
+		return new BoostSourceWhileControlsEffect(this);
+	}
+
+	@Override
+	public boolean applyEffect(Game game, Ability source) {
+		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
 			permanent.addPower(power);
 			permanent.addToughness(toughness);
@@ -63,7 +75,7 @@ public class BoostSourceWhileControlsEffect extends WhileControlsContinuousEffec
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "{this} gets " + String.format("%1$+d/%2$+d", power, toughness) + " as long as you control a " + filter.getName();
 	}
 }

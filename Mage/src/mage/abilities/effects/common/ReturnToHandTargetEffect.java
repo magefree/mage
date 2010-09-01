@@ -30,6 +30,7 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -38,15 +39,24 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnToHandTargetEffect extends OneShotEffect {
+public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEffect> {
 
 	public ReturnToHandTargetEffect() {
 		super(Outcome.ReturnToHand);
 	}
 
+	public ReturnToHandTargetEffect(final ReturnToHandTargetEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Permanent permanent = game.getPermanent(this.source.getFirstTarget());
+	public ReturnToHandTargetEffect copy() {
+		return new ReturnToHandTargetEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
 			return permanent.moveToZone(Zone.HAND, game, false);
 		}
@@ -54,8 +64,8 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
-		return "Return target " + this.source.getTargets().get(0).getTargetName() + " to it's owner's hand";
+	public String getText(Ability source) {
+		return "Return target " + source.getTargets().get(0).getTargetName() + " to it's owner's hand";
 
 	}
 }

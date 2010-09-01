@@ -32,6 +32,6 @@ package mage.abilities.effects;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface PreventionEffect extends ContinuousEffect {
+public interface PreventionEffect<T extends PreventionEffect<T>> extends ContinuousEffect<T> {
 
 }

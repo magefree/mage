@@ -40,10 +40,18 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
+public class EntersBattlefieldTriggeredAbility<T extends EntersBattlefieldTriggeredAbility<T>> extends TriggeredAbilityImpl<T> {
+
+	public EntersBattlefieldTriggeredAbility(Effect effect) {
+		this(effect, false);
+	}
 
 	public EntersBattlefieldTriggeredAbility(Effect effect, boolean optional) {
 		super(Zone.BATTLEFIELD, effect, optional);
+	}
+
+	public EntersBattlefieldTriggeredAbility(EntersBattlefieldTriggeredAbility ability) {
+		super(ability);
 	}
 
 	@Override
@@ -61,6 +69,11 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
 	@Override
 	public String getRule() {
 		return "When {this} enters the battlefield, " + super.getRule();
+	}
+
+	@Override
+	public T copy() {
+		return (T) new EntersBattlefieldTriggeredAbility(this);
 	}
 
 }

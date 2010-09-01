@@ -45,17 +45,30 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TeeteringPeaks extends CardImpl {
+public class TeeteringPeaks extends CardImpl<TeeteringPeaks> {
 
 	public TeeteringPeaks(UUID ownerId) {
 		super(ownerId, "Teetering Peaks", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Zendikar.getInstance().getId();
-		this.art = "123557_typ_reg_sty_010.jpg";
 		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
 		Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), false);
 		ability.addTarget(new TargetCreaturePermanent());
 		this.addAbility(ability);
 		this.addAbility(new RedManaAbility());
+	}
+
+	public TeeteringPeaks(final TeeteringPeaks card) {
+		super(card);
+	}
+
+	@Override
+	public TeeteringPeaks copy() {
+		return new TeeteringPeaks(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123557_typ_reg_sty_010.jpg";
 	}
 
 }

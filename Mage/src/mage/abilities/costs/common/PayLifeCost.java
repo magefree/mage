@@ -29,6 +29,7 @@
 package mage.abilities.costs.common;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.game.Game;
 
@@ -36,7 +37,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PayLifeCost extends CostImpl {
+public class PayLifeCost extends CostImpl<PayLifeCost> {
 
 	private int amount;
 
@@ -45,17 +46,25 @@ public class PayLifeCost extends CostImpl {
 		this.text = "Pay " + Integer.toString(amount) + " life";
 	}
 
-	@Override
-	public boolean canPay(UUID playerId, Game game) {
-		if (ability.getControllerId().equals(playerId))
-			return game.getPlayer(playerId).getLife() >= amount;
-		return false;
+	public PayLifeCost(PayLifeCost cost) {
+		super(cost);
+		this.amount = cost.amount;
 	}
 
 	@Override
-	public boolean pay(Game game, boolean noMana) {
-		this.paid = game.getPlayer(ability.getControllerId()).loseLife(amount, game) == amount;
+	public boolean canPay(Ability source, Game game) {
+		return game.getPlayer(source.getControllerId()).getLife() >= amount;
+	}
+
+	@Override
+	public boolean pay(Game game, Ability source, boolean noMana) {
+		this.paid = game.getPlayer(source.getControllerId()).loseLife(amount, game) == amount;
 		return paid;
+	}
+
+	@Override
+	public PayLifeCost copy() {
+		return new PayLifeCost(this);
 	}
 
 }

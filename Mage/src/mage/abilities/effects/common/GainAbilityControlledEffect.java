@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GainAbilityControlledEffect extends ContinuousEffectImpl {
+public class GainAbilityControlledEffect extends ContinuousEffectImpl<GainAbilityControlledEffect> {
 
 	protected Ability ability;
 	protected FilterPermanent permanentFilter;
@@ -57,16 +57,27 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
 		this.permanentFilter = filter;
 	}
 
+	public GainAbilityControlledEffect(final GainAbilityControlledEffect effect) {
+		super(effect);
+		this.ability = effect.ability.copy();
+		this.permanentFilter = effect.permanentFilter.copy();
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		for (Permanent perm: game.getBattlefield().getAllActivePermanents(permanentFilter, this.source.getControllerId())) {
-			perm.addAbility(ability);
+	public GainAbilityControlledEffect copy() {
+		return new GainAbilityControlledEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		for (Permanent perm: game.getBattlefield().getAllActivePermanents(permanentFilter, source.getControllerId())) {
+			perm.addAbility(ability.copy());
 		}
 		return true;
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(permanentFilter.getMessage()).append(" you control gain ").append(ability.getRule());
 		sb.append(" ").append(duration.toString());

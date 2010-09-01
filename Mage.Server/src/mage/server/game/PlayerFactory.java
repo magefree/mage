@@ -30,6 +30,7 @@ package mage.server.game;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
@@ -48,7 +49,7 @@ public class PlayerFactory {
 	private final static PlayerFactory INSTANCE = new PlayerFactory();
 	private final static Logger logger = Logging.getLogger(PlayerFactory.class.getName());
 
-	private Map<String, Class> playerTypes = new HashMap<String, Class>();
+	private Map<String, Class> playerTypes = new LinkedHashMap<String, Class>();
 
 	public static PlayerFactory getInstance() {
 		return INSTANCE;

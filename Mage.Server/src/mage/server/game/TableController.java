@@ -86,21 +86,26 @@ public class TableController {
 		table = new Table(gameType, DeckValidatorFactory.getInstance().createDeckValidator(deckType), playerTypes);
 	}
 
-	public synchronized boolean joinTable(UUID sessionId, int seatNum, String name, DeckCardLists deckList) throws GameException {
+	public synchronized boolean joinTable(UUID sessionId, String name, DeckCardLists deckList) throws GameException {
 		if (table.getState() != TableState.WAITING) {
 			return false;
 		}
-		Seat seat = table.getSeats()[seatNum];
+		Seat seat = table.getNextAvailableSeat();
+		if (seat == null) {
+			throw new GameException("No available seats.");
+		}
 		Deck deck = Deck.load(deckList);
 		if (!Main.server.isTestMode() && !validDeck(deck)) {
 			throw new GameException(name + " has an invalid deck for this format");
 		}
 		
 		Player player = createPlayer(name, deck, seat.getPlayerType());
-		table.joinTable(player, seatNum);
+		game.loadCards(deck.getCards(), player.getId());
+		game.loadCards(deck.getSideboard(), player.getId());
+		table.joinTable(player, seat);
 		logger.info("player joined " + player.getId());
 		//only add human players to sessionPlayerMap
-		if (table.getSeats()[seatNum].getPlayer().isHuman()) {
+		if (seat.getPlayer().isHuman()) {
 			sessionPlayerMap.put(sessionId, player.getId());
 		}
 
@@ -183,11 +188,11 @@ public class TableController {
 
 	private void saveGame() {
 		try {
-			//use buffering
 			OutputStream file = new FileOutputStream("saved/" + game.getId().toString() + ".game");
 			OutputStream buffer = new BufferedOutputStream(file);
 			ObjectOutput output = new ObjectOutputStream(new GZIPOutputStream(buffer));
 			try {
+				output.writeObject(game);
 				output.writeObject(game.getGameStates());
 			}
 			finally {
@@ -200,17 +205,16 @@ public class TableController {
 		}
 	}
 
-	private GameStates loadGame() {
+	private Game loadGame() {
 		try{
-			//use buffering
 			InputStream file = new FileInputStream("saved/" + gameId.toString() + ".game");
 			InputStream buffer = new BufferedInputStream(file);
 			ObjectInput input = new CopierObjectInputStream(Main.classLoader, new GZIPInputStream(buffer));
-			//ObjectInput input = new ObjectInputStream(buffer);
 			try {
-				//deserialize the List
-				GameStates gameStates = (GameStates)input.readObject();
-				return gameStates;
+				Game game = (Game)input.readObject();
+				GameStates states = (GameStates)input.readObject();
+				game.loadGameStates(states);
+				return game;
 			}
 			finally {
 				input.close();

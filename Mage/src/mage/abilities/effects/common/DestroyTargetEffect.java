@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,7 +38,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DestroyTargetEffect extends OneShotEffect {
+public class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
 
 	protected boolean noRegen;
 
@@ -50,18 +51,28 @@ public class DestroyTargetEffect extends OneShotEffect {
 		this.noRegen = noRegen;
 	}
 
+	public DestroyTargetEffect(final DestroyTargetEffect effect) {
+		super(effect);
+		this.noRegen = effect.noRegen;
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Permanent permanent = game.getPermanent(this.source.getFirstTarget());
+	public DestroyTargetEffect copy() {
+		return new DestroyTargetEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
-			permanent.destroy(this.source.getSourceId(), game, noRegen);
+			permanent.destroy(source.getSourceId(), game, noRegen);
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Destroy target " + source.getTargets().get(0).getTargetName();
 	}
 

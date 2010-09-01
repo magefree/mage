@@ -36,10 +36,14 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetCreaturePermanent extends TargetPermanent {
+public class TargetCreaturePermanent<T extends TargetCreaturePermanent<T>> extends TargetPermanent<TargetCreaturePermanent<T>> {
 
 	public TargetCreaturePermanent() {
 		this(1, 1, new FilterCreaturePermanent(), TargetController.ANY);
+	}
+
+	public TargetCreaturePermanent(FilterCreaturePermanent filter) {
+		this(1, 1, filter, TargetController.ANY);
 	}
 
 	public TargetCreaturePermanent(int numTargets, TargetController controller) {
@@ -49,6 +53,15 @@ public class TargetCreaturePermanent extends TargetPermanent {
 	public TargetCreaturePermanent(int minNumTargets, int maxNumTargets, FilterCreaturePermanent filter, TargetController controller) {
 		super(1, 1, filter, controller);
 		this.targetName = filter.getMessage();
+	}
+
+	public TargetCreaturePermanent(final TargetCreaturePermanent target) {
+		super(target);
+	}
+
+	@Override
+	public TargetCreaturePermanent copy() {
+		return new TargetCreaturePermanent(this);
 	}
 
 }

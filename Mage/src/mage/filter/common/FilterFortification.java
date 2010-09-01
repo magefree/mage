@@ -35,7 +35,7 @@ import mage.filter.FilterPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterFortification extends FilterPermanent {
+public class FilterFortification extends FilterPermanent<FilterFortification> {
 
 	public FilterFortification() {
 		this("fortification");
@@ -47,4 +47,12 @@ public class FilterFortification extends FilterPermanent {
 		this.getSubtype().add("Fortification");
 	}
 
+	public FilterFortification(final FilterFortification filter) {
+		super(filter);
+	}
+
+	@Override
+	public FilterFortification copy() {
+		return new FilterFortification(this);
+	}
 }

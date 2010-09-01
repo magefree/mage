@@ -43,7 +43,7 @@ import mage.sets.AlaraReborn;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PutridLeech extends CardImpl {
+public class PutridLeech extends CardImpl<PutridLeech> {
 
 	public PutridLeech(UUID ownerId) {
 		super(ownerId, "Putrid Leech", new CardType[]{CardType.CREATURE}, "{B}{G}");
@@ -52,9 +52,22 @@ public class PutridLeech extends CardImpl {
 		this.color.setGreen(true);
 		this.subtype.add("Zombie");
 		this.subtype.add("Leech");
-		this.art = "120997_typ_reg_sty_010.jpg";
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
 		this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new PayLifeCost(2)));
+	}
+
+	public PutridLeech(final PutridLeech card) {
+		super(card);
+	}
+
+	@Override
+	public PutridLeech copy() {
+		return new PutridLeech(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "120997_typ_reg_sty_010.jpg";
 	}
 }

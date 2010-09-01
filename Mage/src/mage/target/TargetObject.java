@@ -31,13 +31,14 @@ package mage.target;
 import java.util.UUID;
 import mage.Constants.Zone;
 import mage.MageObject;
+import mage.abilities.Ability;
 import mage.game.Game;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class TargetObject extends TargetImpl {
+public abstract class TargetObject<T extends TargetObject<T>> extends TargetImpl<T> {
 
 	protected TargetObject() {}
 	
@@ -47,6 +48,10 @@ public abstract class TargetObject extends TargetImpl {
 
 	public TargetObject(int numTargets, Zone zone) {
 		this(numTargets, numTargets, zone);
+	}
+
+	public TargetObject(final TargetObject target) {
+		super(target);
 	}
 
 	public TargetObject(int minNumTargets, int maxNumTargets, Zone zone) {
@@ -66,7 +71,7 @@ public abstract class TargetObject extends TargetImpl {
 	}
 
 	@Override
-	public boolean canTarget(UUID id, Game game) {
+	public boolean canTarget(UUID id, Ability source, Game game) {
 		MageObject object = game.getObject(id);
 		if (object != null && object.getZone().match(zone))
 			return getFilter().match(object);

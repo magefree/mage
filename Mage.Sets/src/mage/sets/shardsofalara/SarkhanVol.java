@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SarkhanVol extends CardImpl {
+public class SarkhanVol extends CardImpl<SarkhanVol> {
 
 	private static DragonToken dragonToken = new DragonToken();
 
@@ -61,15 +61,14 @@ public class SarkhanVol extends CardImpl {
 		this.subtype.add("Sarkhan");
 		this.color.setRed(true);
 		this.color.setGreen(true);
-		this.art = "115056_typ_reg_sty_010.jpg";
 		this.loyalty = new MageInt(4);
 
-		Effects effects1 = new Effects(null);
+		Effects effects1 = new Effects();
 		effects1.add(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
 		effects1.add(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
 		this.addAbility(new LoyaltyAbility(effects1, 1));
 
-		Effects effects2 = new Effects(null);
+		Effects effects2 = new Effects();
 		effects2.add(new GainControlTargetEOTEffect());
 		effects2.add(new UntapTargetEffect());
 		effects2.add(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
@@ -79,5 +78,19 @@ public class SarkhanVol extends CardImpl {
 		this.addAbility(ability);
 
 		this.addAbility(new LoyaltyAbility(new CreateTokenEffect(dragonToken), -6));
+	}
+
+	public SarkhanVol(final SarkhanVol card) {
+		super(card);
+	}
+
+	@Override
+	public SarkhanVol copy() {
+		return new SarkhanVol(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "115056_typ_reg_sty_010.jpg";
 	}
 }

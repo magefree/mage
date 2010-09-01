@@ -48,28 +48,28 @@ public interface Target extends Serializable {
 	public void clearChosen();
 	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game);
 	public List<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game);
-	public boolean choose(Outcome outcome, Game game);
+	public boolean choose(Outcome outcome, UUID playerId, Ability source, Game game);
 	public String getMessage();
 	public String getTargetName();
 	public void setTargetName(String name);
 	public String getTargetedName(Game game);
 	public Zone getZone();
-	public boolean isLegal(Game game);
-	public boolean canTarget(UUID id, Game game);
-	public void addTarget(UUID id, Game game);
-	public void addTarget(UUID id, int amount, Game game);
+	public boolean isLegal(Ability source, Game game);
+	public boolean canTarget(UUID id, Ability source, Game game);
+	public void addTarget(UUID id, Ability source, Game game);
+	public void addTarget(UUID id, int amount, Ability source, Game game);
 
 	public int getTargetAmount(UUID targetId);
 	public int getNumberOfTargets();
 	public int getMaxNumberOfTargets();
 	public List<UUID> getTargets();
 	public Filter getFilter();
-	public Ability getAbility();
-	public void setAbility(Ability ability);
 	
 	public boolean isRequired();
 	public void setRequired(boolean required);
 
 //	public UUID getLastTarget();
 	public UUID getFirstTarget();
+
+	public Target copy();
 }

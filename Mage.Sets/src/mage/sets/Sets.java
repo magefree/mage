@@ -47,6 +47,7 @@ public class Sets extends ArrayList<ExpansionSet> {
 		this.add(AlaraReborn.getInstance());
 		this.add(Conflux.getInstance());
 		this.add(Magic2010.getInstance());
+		this.add(Magic2011.getInstance());
 		this.add(Planechase.getInstance());
 		this.add(RiseOfTheEldrazi.getInstance());
 		this.add(ShardsOfAlara.getInstance());

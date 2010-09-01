@@ -36,11 +36,11 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterCreaturePermanent extends FilterPermanent {
+public class FilterCreaturePermanent<T extends FilterCreaturePermanent<T>> extends FilterPermanent<FilterCreaturePermanent<T>> {
 
-	protected boolean useAttacking = false;
+	protected boolean useAttacking;
 	protected boolean attacking;
-	protected boolean useBlocking = false;
+	protected boolean useBlocking;
 	protected boolean blocking;
 
 	public FilterCreaturePermanent() {
@@ -52,17 +52,30 @@ public class FilterCreaturePermanent extends FilterPermanent {
 		cardType.add(CardType.CREATURE);
 	}
 
+	public FilterCreaturePermanent(final FilterCreaturePermanent<T> filter) {
+		super(filter);
+		this.useAttacking = filter.useAttacking;
+		this.attacking = filter.attacking;
+		this.useBlocking = filter.useBlocking;
+		this.blocking = filter.blocking;
+	}
+
 	@Override
 	public boolean match(Permanent permanent) {
 		if (!super.match(permanent))
-			return false;
+			return notFilter;
 
 		if (useAttacking && permanent.isAttacking() != attacking)
-			return false;
+			return notFilter;
 
 		if (useBlocking && permanent.isBlocking() != blocking)
-			return false;
+			return notFilter;
 
-		return true;
+		return !notFilter;
+	}
+
+	@Override
+	public FilterCreaturePermanent<T> copy() {
+		return new FilterCreaturePermanent<T>(this);
 	}
 }

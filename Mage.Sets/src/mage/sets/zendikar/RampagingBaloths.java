@@ -42,18 +42,31 @@ import mage.sets.Zendikar;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RampagingBaloths extends CardImpl {
+public class RampagingBaloths extends CardImpl<RampagingBaloths> {
 
 	public RampagingBaloths(UUID ownerId) {
 		super(ownerId, "Rampaging Baloths", new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
 		this.expansionSetId = Zendikar.getInstance().getId();
 		this.subtype.add("Beast");
 		this.color.setGreen(true);
-		this.art = "123726_typ_reg_sty_010.jpg";
 		this.power = new MageInt(6);
 		this.toughness = new MageInt(6);
 		this.addAbility(TrampleAbility.getInstance());
 		this.addAbility(new LandfallAbility(new CreateTokenEffect(new RampagingBalothsToken()), true));
+	}
+
+	public RampagingBaloths(final RampagingBaloths card) {
+		super(card);
+	}
+
+	@Override
+	public RampagingBaloths copy() {
+		return new RampagingBaloths(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123726_typ_reg_sty_010.jpg";
 	}
 
 }

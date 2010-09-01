@@ -38,13 +38,26 @@ import mage.sets.Zendikar;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MistyRainforest extends CardImpl {
+public class MistyRainforest extends CardImpl<MistyRainforest> {
 
 	public MistyRainforest(UUID ownerId) {
 		super(ownerId, "Misty Rainforest", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Zendikar.getInstance().getId();
-		this.art = "123689_typ_reg_sty_010.jpg";
 		this.addAbility(new FetchLandActivatedAbility(new String[] {"Forest", "Island"}));
+	}
+
+	public MistyRainforest(final MistyRainforest card) {
+		super(card);
+	}
+
+	@Override
+	public MistyRainforest copy() {
+		return new MistyRainforest(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123689_typ_reg_sty_010.jpg";
 	}
 
 }

@@ -41,12 +41,21 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EquipAbility extends ActivatedAbilityImpl {
+public class EquipAbility extends ActivatedAbilityImpl<EquipAbility> {
 
 	public EquipAbility(Outcome outcome, Cost cost) {
 		super(Zone.BATTLEFIELD, new AttachEffect(outcome), cost);
 		this.addTarget(new TargetCreaturePermanent(1, TargetController.YOU));
 		this.timing = TimingRule.SORCERY;
+	}
+
+	public EquipAbility(final EquipAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public EquipAbility copy() {
+		return new EquipAbility(this);
 	}
 
 	@Override

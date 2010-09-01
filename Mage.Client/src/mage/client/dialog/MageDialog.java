@@ -64,6 +64,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
     @Override
     public void show() {
         super.show();
+		this.toFront();
         if (this.modal) {
             startModal();
         }
@@ -72,6 +73,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
     @Override
     public void setVisible(boolean value) {
         super.setVisible(value);
+		this.toFront();
         if (modal) {
             if (value) {
                 startModal();

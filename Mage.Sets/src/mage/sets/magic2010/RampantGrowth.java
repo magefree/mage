@@ -40,15 +40,28 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LokiX
  */
-public class RampantGrowth extends CardImpl {
+public class RampantGrowth extends CardImpl<RampantGrowth> {
 
 	public RampantGrowth(UUID ownerId){
 		super(ownerId, "Rampant Growth", new CardType[]{CardType.SORCERY}, "{1}{G}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setGreen(true);
-		this.art = "101061_typ_reg_sty_010.jpg";
 		TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
 		this.getSpellAbility().addTarget(target);
 		this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, true));
+	}
+
+	public RampantGrowth(final RampantGrowth card) {
+		super(card);
+	}
+
+	@Override
+	public RampantGrowth copy() {
+		return new RampantGrowth(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "101061_typ_reg_sty_010.jpg";
 	}
 }

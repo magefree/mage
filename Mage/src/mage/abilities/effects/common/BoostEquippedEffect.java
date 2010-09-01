@@ -28,11 +28,11 @@
 
 package mage.abilities.effects.common;
 
-import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
+import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -41,20 +41,35 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BoostEquippedEffect  extends ContinuousEffectImpl {
+public class BoostEquippedEffect extends ContinuousEffectImpl<BoostEquippedEffect> {
 
 	private int power;
 	private int toughness;
 
 	public BoostEquippedEffect(int power, int toughness) {
-		super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+		this(power, toughness, Duration.WhileOnBattlefield);
+	}
+
+	public BoostEquippedEffect(int power, int toughness, Duration duration) {
+		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
 		this.power = power;
 		this.toughness = toughness;
 	}
 
+	public BoostEquippedEffect(final BoostEquippedEffect effect) {
+		super(effect);
+		this.power = effect.power;
+		this.toughness = effect.toughness;
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Permanent equipment = game.getPermanent(this.source.getSourceId());
+	public BoostEquippedEffect copy() {
+		return new BoostEquippedEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent equipment = game.getPermanent(source.getSourceId());
 		if (equipment.getAttachedTo() != null) {
 			Permanent creature = game.getPermanent(equipment.getAttachedTo());
 			if (creature != null) {
@@ -66,9 +81,12 @@ public class BoostEquippedEffect  extends ContinuousEffectImpl {
 	}
 
 	@Override
-	public String getText() {
-		return "Equipped creatures gets " + String.format("%1$+d/%2$+d", power, toughness);
+	public String getText(Ability source) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Equipped creatures gets ").append(String.format("%1$+d/%2$+d", power, toughness));
+		if (duration != Duration.WhileOnBattlefield)
+			sb.append(" ").append(duration.toString());
+		return sb.toString();
 	}
-
 
 }

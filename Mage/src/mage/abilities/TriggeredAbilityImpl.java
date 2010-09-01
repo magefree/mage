@@ -29,6 +29,7 @@
 package mage.abilities;
 
 import java.util.UUID;
+import mage.Constants.AbilityType;
 import mage.Constants.Zone;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
@@ -39,7 +40,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class TriggeredAbilityImpl extends AbilityImpl implements TriggeredAbility {
+public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> extends AbilityImpl<T> implements TriggeredAbility {
 
 	protected boolean optional;
 
@@ -48,10 +49,15 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 	}
 	
 	public TriggeredAbilityImpl(Zone zone, Effect effect, boolean optional) {
-		super(zone);
+		super(AbilityType.TRIGGERED, zone);
 		if (effect != null)
 			addEffect(effect);
 		this.optional = optional;
+	}
+
+	public TriggeredAbilityImpl(final TriggeredAbilityImpl ability) {
+		super(ability);
+		this.optional = ability.optional;
 	}
 
 	@Override

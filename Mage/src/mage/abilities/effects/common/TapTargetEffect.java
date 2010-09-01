@@ -30,6 +30,7 @@ package mage.abilities.effects.common;
 
 import java.util.UUID;
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -39,15 +40,24 @@ import mage.target.Target;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TapTargetEffect extends OneShotEffect {
+public class TapTargetEffect extends OneShotEffect<TapTargetEffect> {
 
 	public TapTargetEffect() {
 		super(Outcome.Tap);
 	}
 
+	public TapTargetEffect(final TapTargetEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		for (UUID target: this.source.getTargets().get(0).getTargets()) {
+	public TapTargetEffect copy() {
+		return new TapTargetEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		for (UUID target: source.getTargets().get(0).getTargets()) {
 			Permanent permanent = game.getPermanent(target);
 			if (permanent != null) {
 				permanent.setTapped(true);
@@ -60,12 +70,12 @@ public class TapTargetEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
-		Target target = this.source.getTargets().get(0);
+	public String getText(Ability source) {
+		Target target = source.getTargets().get(0);
 		if (target.getNumberOfTargets() > 1)
-			return "tap " + target.getNumberOfTargets() + " target " + this.source.getTargets().get(0).getTargetName() + "s";
+			return "tap " + target.getNumberOfTargets() + " target " + source.getTargets().get(0).getTargetName() + "s";
 		else
-			return "tap target " + this.source.getTargets().get(0).getTargetName();
+			return "tap target " + source.getTargets().get(0).getTargetName();
 	}
 
 }

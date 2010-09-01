@@ -36,7 +36,7 @@ import mage.abilities.StaticAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class VigilanceAbility extends StaticAbility {
+public class VigilanceAbility extends StaticAbility<VigilanceAbility> {
 
 	private static final VigilanceAbility fINSTANCE =  new VigilanceAbility();
 
@@ -55,6 +55,11 @@ public class VigilanceAbility extends StaticAbility {
 	@Override
 	public String getRule() {
 		return "Vigilance";
+	}
+
+	@Override
+	public VigilanceAbility copy() {
+		return fINSTANCE;
 	}
 
 }

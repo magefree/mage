@@ -36,7 +36,7 @@ import mage.abilities.StaticAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReachAbility extends StaticAbility {
+public class ReachAbility extends StaticAbility<ReachAbility> {
 
 	private static final ReachAbility fINSTANCE =  new ReachAbility();
 
@@ -55,6 +55,11 @@ public class ReachAbility extends StaticAbility {
 	@Override
 	public String getRule() {
 		return "Reach";
+	}
+
+	@Override
+	public ReachAbility copy() {
+		return fINSTANCE;
 	}
 
 }

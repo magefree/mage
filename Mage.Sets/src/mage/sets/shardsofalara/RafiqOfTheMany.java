@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RafiqOfTheMany extends CardImpl {
+public class RafiqOfTheMany extends CardImpl<RafiqOfTheMany> {
 
 	public RafiqOfTheMany(UUID ownerId) {
 		super(ownerId, "Rafiq of the Many", new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
@@ -59,19 +59,41 @@ public class RafiqOfTheMany extends CardImpl {
 		this.supertype.add("Legendary");
 		this.subtype.add("Human");
 		this.subtype.add("Knight");
-		this.art = "115029_typ_reg_sty_010.jpg";
 		this.power = new MageInt(3);
 		this.toughness = new MageInt(3);
 		this.addAbility(new ExaltedAbility());
 		this.addAbility(new RafiqOfTheManyAbility());
 	}
 
+	public RafiqOfTheMany(final RafiqOfTheMany card) {
+		super(card);
+	}
+
+	@Override
+	public RafiqOfTheMany copy() {
+		return new RafiqOfTheMany(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "115029_typ_reg_sty_010.jpg";
+	}
+
 }
 
-class RafiqOfTheManyAbility extends TriggeredAbilityImpl {
+class RafiqOfTheManyAbility extends TriggeredAbilityImpl<RafiqOfTheManyAbility> {
 
 	public RafiqOfTheManyAbility() {
 		super(Zone.BATTLEFIELD, new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
+	}
+
+	public RafiqOfTheManyAbility(final RafiqOfTheManyAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public RafiqOfTheManyAbility copy() {
+		return new RafiqOfTheManyAbility(this);
 	}
 
 	@Override
@@ -79,7 +101,7 @@ class RafiqOfTheManyAbility extends TriggeredAbilityImpl {
 		if (event.getType() == EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(this.controllerId) ) {
 			if (game.getCombat().attacksAlone()) {
 				this.addTarget(new TargetCreaturePermanent());
-				this.targets.get(0).getTargets().add(game.getCombat().getAttackers().get(0));
+				this.targets.get(0).addTarget(game.getCombat().getAttackers().get(0), null, game);
 				trigger(game, event.getPlayerId());
 				return true;
 			}

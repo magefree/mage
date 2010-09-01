@@ -69,13 +69,15 @@ public interface Permanent extends Card {
 	public boolean canBeTargetedBy(MageObject source);
 	public int getDamage();
 	public int damage(int damage, UUID sourceId, Game game);
+	public void removeAllDamage(Game game);
 	public Counters getCounters();
-	public void reset();
+	public void reset(Game game);
 	public boolean destroy(UUID sourceId, Game game, boolean noRegen);
 	public boolean sacrifice(UUID sourceId, Game game);
 	public void entersBattlefield(Game game);
 	public boolean moveToZone(Zone zone, Game game, boolean sacrificed);
 	public boolean moveToExile(UUID exileId, String name, Game game);
+	public String getValue();
 
 	@Override
 	public void addAbility(Ability ability);
@@ -98,5 +100,8 @@ public interface Permanent extends Card {
 	public boolean canBlock(UUID attackerId, Game game);
 	public boolean removeFromCombat(Game game);
 	public boolean isDeathtouched();
+
+	@Override
+	public Permanent copy();
 
 }

@@ -43,7 +43,7 @@ import mage.sets.AlaraReborn;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SpellbreakerBehemoth extends CardImpl {
+public class SpellbreakerBehemoth extends CardImpl<SpellbreakerBehemoth> {
 
 	public SpellbreakerBehemoth(UUID ownerId) {
 		super(ownerId, "Spellbreaker Behemoth", new CardType[]{CardType.CREATURE}, "{1}{R}{G}{G}");
@@ -51,7 +51,6 @@ public class SpellbreakerBehemoth extends CardImpl {
 		this.color.setRed(true);
 		this.color.setGreen(true);
 		this.subtype.add("Beast");
-		this.art = "120966_typ_reg_sty_010.jpg";
 		this.power = new MageInt(5);
 		this.toughness = new MageInt(5);
 		this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterSourceEffect()));
@@ -60,6 +59,20 @@ public class SpellbreakerBehemoth extends CardImpl {
 		filter.setPower(5);
 		this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterControlledEffect(filter)));
 
+	}
+
+	public SpellbreakerBehemoth(final SpellbreakerBehemoth card) {
+		super(card);
+	}
+
+	@Override
+	public SpellbreakerBehemoth copy() {
+		return new SpellbreakerBehemoth(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "120966_typ_reg_sty_010.jpg";
 	}
 	
 }

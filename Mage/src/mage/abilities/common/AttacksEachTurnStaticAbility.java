@@ -31,6 +31,7 @@ package mage.abilities.common;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
+import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RequirementAttackEffect;
@@ -43,29 +44,42 @@ import mage.target.common.TargetDefender;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AttacksEachTurnStaticAbility extends StaticAbility {
+public class AttacksEachTurnStaticAbility extends StaticAbility<AttacksEachTurnStaticAbility> {
 
 	public AttacksEachTurnStaticAbility() {
 		super(Zone.BATTLEFIELD, new AttacksEachTurnEffect());
 	}
+
+	public AttacksEachTurnStaticAbility(AttacksEachTurnStaticAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public AttacksEachTurnStaticAbility copy() {
+		return new AttacksEachTurnStaticAbility(this);
+	}
 	
 }
 
-class AttacksEachTurnEffect extends RequirementAttackEffect {
+class AttacksEachTurnEffect extends RequirementAttackEffect<AttacksEachTurnEffect> {
 
 	public AttacksEachTurnEffect() {
 		super(Duration.WhileOnBattlefield);
 	}
 
+	public AttacksEachTurnEffect(final AttacksEachTurnEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Permanent creature = game.getPermanent(this.source.getSourceId());
+	public boolean apply(Game game, Ability source) {
+		Permanent creature = game.getPermanent(source.getSourceId());
 		if (creature != null) {
 			if (creature.canAttack(game)) {
 				TargetDefender target = new TargetDefender(game.getCombat().getDefenders(), creature.getControllerId());
 				Player controller = game.getPlayer(creature.getControllerId());
 				while (!target.isChosen())
-					controller.chooseTarget(Outcome.Damage, target, game);
+					controller.chooseTarget(Outcome.Damage, target, source, game);
 				game.getCombat().declareAttacker(creature.getId(), target.getFirstTarget(), game);
 				return true;
 			}
@@ -74,7 +88,12 @@ class AttacksEachTurnEffect extends RequirementAttackEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "{this} attacks each turn if able.";
+	}
+
+	@Override
+	public AttacksEachTurnEffect copy() {
+		return new AttacksEachTurnEffect(this);
 	}
 }

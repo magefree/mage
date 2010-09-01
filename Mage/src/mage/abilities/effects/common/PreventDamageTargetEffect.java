@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Duration;
+import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -37,7 +38,7 @@ import mage.game.events.GameEvent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PreventDamageTargetEffect extends PreventionEffectImpl {
+public class PreventDamageTargetEffect extends PreventionEffectImpl<PreventDamageTargetEffect> {
 
 	private int amount;
 
@@ -46,13 +47,23 @@ public class PreventDamageTargetEffect extends PreventionEffectImpl {
 		this.amount = amount;
 	}
 
+	public PreventDamageTargetEffect(final PreventDamageTargetEffect effect) {
+		super(effect);
+		this.amount = effect.amount;
+	}
+
 	@Override
-	public boolean apply(Game game) {
+	public PreventDamageTargetEffect copy() {
+		return new PreventDamageTargetEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
 		return true;
 	}
 
 	@Override
-	public boolean replaceEvent(GameEvent event, Game game) {
+	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
 		if (event.getAmount() >= this.amount) {
 			event.setAmount(event.getAmount() - amount);
 			this.used = true;
@@ -65,8 +76,8 @@ public class PreventDamageTargetEffect extends PreventionEffectImpl {
 	}
 
 	@Override
-	public boolean applies(GameEvent event, Game game) {
-		if (!this.used && super.applies(event, game) && event.getTargetId().equals(this.getSource().getFirstTarget())) {
+	public boolean applies(GameEvent event, Ability source, Game game) {
+		if (!this.used && super.applies(event, source, game) && event.getTargetId().equals(source.getFirstTarget())) {
 			return true;
 		}
 		return false;

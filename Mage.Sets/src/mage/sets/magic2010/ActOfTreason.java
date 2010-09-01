@@ -43,18 +43,31 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ActOfTreason extends CardImpl {
+public class ActOfTreason extends CardImpl<ActOfTreason> {
 
 	public ActOfTreason(UUID ownerId) {
 		super(ownerId, "Act Of Treason", new CardType[]{CardType.SORCERY}, "{2}{R}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setRed(true);
-		this.art = "121664_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 		this.getSpellAbility().addEffect(new GainControlTargetEOTEffect());
 		this.getSpellAbility().addEffect(new UntapTargetEffect());
 		this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
 
+	}
+
+	public ActOfTreason(final ActOfTreason card) {
+		super(card);
+	}
+
+	@Override
+	public ActOfTreason copy() {
+		return new ActOfTreason(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121664_typ_reg_sty_010.jpg";
 	}
 
 }

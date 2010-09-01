@@ -38,28 +38,36 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TapSourceCost extends CostImpl {
+public class TapSourceCost extends CostImpl<TapSourceCost> {
 
 	public TapSourceCost() {
 		this.text = "{T}";
 	}
 
+	public TapSourceCost(TapSourceCost cost) {
+		super(cost);
+	}
+
 	@Override
-	public boolean pay(Game game, boolean noMana) {
-		Permanent source = game.getPermanent(ability.getSourceId());
-		if (source != null) {
-			paid = source.tap(game);
+	public boolean pay(Game game, Ability source, boolean noMana) {
+		Permanent permanent = game.getPermanent(source.getSourceId());
+		if (permanent != null) {
+			paid = permanent.tap(game);
 		}
 		return paid;
 	}
 
 	@Override
-	public boolean canPay(UUID playerId, Game game) {
-		Permanent source = game.getPermanent(ability.getSourceId());
-		if (source != null) {
-			return !source.isTapped() && source.canTap();
+	public boolean canPay(Ability source, Game game) {
+		Permanent permanent = game.getPermanent(source.getSourceId());
+		if (permanent != null) {
+			return !permanent.isTapped() && permanent.canTap();
 		}
 		return false;
 	}
 
+	@Override
+	public TapSourceCost copy() {
+		return new TapSourceCost(this);
+	}
 }

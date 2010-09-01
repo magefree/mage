@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -45,22 +45,36 @@ import mage.sets.ShardsOfAlara;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HellsThunder extends CardImpl {
+public class HellsThunder extends CardImpl<HellsThunder> {
 
 	public HellsThunder(UUID ownerId) {
 		super(ownerId, "Hell's Thunder", new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
 		this.expansionSetId = ShardsOfAlara.getInstance().getId();
 		this.subtype.add("Elemental");
 		this.color.setRed(true);
-		this.art = "115234_typ_reg_sty_010.jpg";
+//		this.art = "115234_typ_reg_sty_010.jpg";
 		this.power = new MageInt(4);
 		this.toughness = new MageInt(4);
 
 		this.addAbility(FlyingAbility.getInstance());
 		this.addAbility(HasteAbility.getInstance());
 		this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", new SacrificeSourceEffect()));
-		this.addAbility(new UnearthAbility(new ManaCosts("{4}{R}")));
+		this.addAbility(new UnearthAbility(new ManaCostsImpl("{4}{R}")));
 
+	}
+
+	public HellsThunder(final HellsThunder card) {
+		super(card);
+	}
+
+	@Override
+	public HellsThunder copy() {
+		return new HellsThunder(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "115234_typ_reg_sty_010.jpg";
 	}
 
 }

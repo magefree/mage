@@ -41,7 +41,7 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WhiteKnight extends CardImpl {
+public class WhiteKnight extends CardImpl<WhiteKnight> {
 
 	public WhiteKnight(UUID ownerId) {
 		super(ownerId, "White Knight", new CardType[]{CardType.CREATURE}, "{W}{W}");
@@ -49,7 +49,6 @@ public class WhiteKnight extends CardImpl {
 		this.subtype.add("Human");
 		this.subtype.add("Knight");
 		this.color.setWhite(true);
-		this.art = "121715_typ_reg_sty_010.jpg";
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
 
@@ -60,5 +59,18 @@ public class WhiteKnight extends CardImpl {
 		this.addAbility(new ProtectionAbility(filter));
 	}
 
+	public WhiteKnight(final WhiteKnight card) {
+		super(card);
+	}
+
+	@Override
+	public WhiteKnight copy() {
+		return new WhiteKnight(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121715_typ_reg_sty_010.jpg";
+	}
 
 }

@@ -42,10 +42,14 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LandfallAbility extends TriggeredAbilityImpl {
+public class LandfallAbility extends TriggeredAbilityImpl<LandfallAbility> {
 
 	public LandfallAbility(Effect effect, boolean optional) {
 		super(Zone.BATTLEFIELD, effect, optional);
+	}
+
+	public LandfallAbility(LandfallAbility ability) {
+		super(ability);
 	}
 
 	@Override
@@ -65,6 +69,9 @@ public class LandfallAbility extends TriggeredAbilityImpl {
 		return "Landfall - Whenever a land enters the battlefield under your control, " + (optional?" you may ":"") + super.getRule();
 	}
 
-
+	@Override
+	public LandfallAbility copy() {
+		return new LandfallAbility(this);
+	}
 
 }

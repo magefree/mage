@@ -45,18 +45,32 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TerramorphicExpanse extends CardImpl {
+public class TerramorphicExpanse extends CardImpl<TerramorphicExpanse> {
 
 	public TerramorphicExpanse(UUID ownerId) {
 		super(ownerId, "Terramorphic Expanse", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Magic2010.getInstance().getId();
-		this.art = "97502_typ_reg_sty_010.jpg";
+//		this.art = "97502_typ_reg_sty_010.jpg";
 		this.addAbility(new TerramorphicExpanseAbility());
+	}
+
+	public TerramorphicExpanse(final TerramorphicExpanse card) {
+		super(card);
+	}
+
+	@Override
+	public TerramorphicExpanse copy() {
+		return new TerramorphicExpanse(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "97502_typ_reg_sty_010.jpg";
 	}
 
 }
 
-class TerramorphicExpanseAbility extends ActivatedAbilityImpl {
+class TerramorphicExpanseAbility extends ActivatedAbilityImpl<TerramorphicExpanseAbility> {
 
 	public TerramorphicExpanseAbility() {
 		super(Zone.BATTLEFIELD, null);
@@ -64,6 +78,15 @@ class TerramorphicExpanseAbility extends ActivatedAbilityImpl {
 		addCost(new SacrificeSourceCost());
 		TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
 		addEffect(new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay));
+	}
+
+	public TerramorphicExpanseAbility(final TerramorphicExpanseAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public TerramorphicExpanseAbility copy() {
+		return new TerramorphicExpanseAbility(this);
 	}
 
 }

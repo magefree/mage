@@ -32,7 +32,7 @@ package mage.counters;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BoostCounter extends Counter {
+public class BoostCounter<T extends BoostCounter<T>> extends Counter<T> {
 
 	protected int power;
 	protected int toughness;

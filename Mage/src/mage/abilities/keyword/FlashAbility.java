@@ -36,7 +36,7 @@ import mage.abilities.StaticAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FlashAbility extends StaticAbility {
+public class FlashAbility extends StaticAbility<FlashAbility> {
 
 	private static final FlashAbility fINSTANCE =  new FlashAbility();
 
@@ -55,6 +55,11 @@ public class FlashAbility extends StaticAbility {
 	@Override
 	public String getRule() {
 		return "Flash";
+	}
+
+	@Override
+	public FlashAbility copy() {
+		return fINSTANCE;
 	}
 
 }

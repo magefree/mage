@@ -36,12 +36,25 @@ import mage.sets.Tenth;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Island1 extends Island {
+public class Island1 extends Island<Island1> {
 
 	public Island1(UUID ownerId) {
 		super(ownerId);
 		this.expansionSetId = Tenth.getInstance().getId();
-		this.art = "80957_typ_reg_sty_010.jpg";
+	}
+
+	public Island1(final Island1 card) {
+		super(card);
+	}
+
+	@Override
+	public Island1 copy() {
+		return new Island1(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "80957_typ_reg_sty_010.jpg";
 	}
 
 }

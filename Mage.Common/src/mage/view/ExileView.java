@@ -31,6 +31,7 @@ package mage.view;
 import java.util.UUID;
 import mage.cards.Card;
 import mage.game.ExileZone;
+import mage.game.Game;
 
 /**
  *
@@ -41,11 +42,11 @@ public class ExileView extends CardsView {
 	private String name;
 	private UUID id;
 
-	public ExileView(ExileZone exileZone) {
+	public ExileView(ExileZone exileZone, Game game) {
 		this.name = exileZone.getName();
 		this.id = exileZone.getId();
-		for (Card card: exileZone.values()) {
-			this.add(new CardView(card));
+		for (Card card: exileZone.getCards(game)) {
+			this.put(card.getId(), new CardView(card));
 		}
 	}
 

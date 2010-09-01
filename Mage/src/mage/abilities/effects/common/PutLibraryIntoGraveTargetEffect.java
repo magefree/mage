@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
@@ -38,7 +39,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PutLibraryIntoGraveTargetEffect extends OneShotEffect {
+public class PutLibraryIntoGraveTargetEffect extends OneShotEffect<PutLibraryIntoGraveTargetEffect> {
 
 	private int amount;
 
@@ -47,9 +48,19 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect {
 		this.amount = amount;
 	}
 
+	public PutLibraryIntoGraveTargetEffect(final PutLibraryIntoGraveTargetEffect effect) {
+		super(effect);
+		this.amount = effect.amount;
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Player player = game.getPlayer(this.source.getFirstTarget());
+	public PutLibraryIntoGraveTargetEffect copy() {
+		return new PutLibraryIntoGraveTargetEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Player player = game.getPlayer(source.getFirstTarget());
 		Card card;
 		for (int i = 0; i < amount; i++) {
 			card = player.getLibrary().removeFromTop(game);
@@ -62,9 +73,9 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Target ").append(this.getSource().getTargets().get(0).getTargetName());
+		sb.append("Target ").append(source.getTargets().get(0).getTargetName());
 		sb.append(" puts the top ").append(amount).append("cards of his or her library into his or her graveyard.");
 		return sb.toString();
 	}

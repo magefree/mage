@@ -42,15 +42,28 @@ import mage.sets.Magic2010;
  *
  * @author LokiX
  */
-public class Overrun extends CardImpl {
+public class Overrun extends CardImpl<Overrun> {
 
     public Overrun(UUID onwerId) {
         super(onwerId, "Overrun", new CardType[]{CardType.SORCERY},"{2}{G}{G}{G}");
         this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setGreen(true);
-		this.art = "33280_typ_reg_sty_001.jpg";
 
         this.getSpellAbility().addEffect(new BoostControlledEffect(3, 3, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
     }
+
+	public Overrun(final Overrun card) {
+		super(card);
+	}
+
+	@Override
+	public Overrun copy() {
+		return new Overrun(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "33280_typ_reg_sty_001.jpg";
+	}
 }

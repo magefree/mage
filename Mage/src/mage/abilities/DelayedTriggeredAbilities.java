@@ -28,7 +28,6 @@
 
 package mage.abilities;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -37,7 +36,13 @@ import mage.game.events.GameEvent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DelayedTriggeredAbilities extends ArrayList<DelayedTriggeredAbility> {
+ public class DelayedTriggeredAbilities extends AbilitiesImpl<DelayedTriggeredAbility> {
+
+	 public DelayedTriggeredAbilities() {}
+
+	 public DelayedTriggeredAbilities(final DelayedTriggeredAbilities abilities) {
+		super(abilities);
+	}
 
 	public void checkTriggers(GameEvent event, Game game) {
 		Iterator<DelayedTriggeredAbility> it = this.iterator();
@@ -48,25 +53,10 @@ public class DelayedTriggeredAbilities extends ArrayList<DelayedTriggeredAbility
 		}
 	}
 
-//	public boolean check(Game game) {
-//		boolean played = false;
-//		Iterator<TriggeredAbility> it = this.iterator();
-//		while(it.hasNext()) {
-//			TriggeredAbility ability = it.next();
-//			it.remove();
-//			played |= game.getPlayer(ability.getControllerId()).triggerAbility(ability, game);
-//		}
-//		return played;
-//	}
-
-//	public TriggeredAbilities getControlledBy(UUID controllerId) {
-//		TriggeredAbilities controlledBy = new TriggeredAbilities();
-//		for (TriggeredAbility ability: this) {
-//			if (ability.getControllerId().equals(controllerId))
-//				controlledBy.add(ability);
-//		}
-//		return controlledBy;
-//	}
+	@Override
+	public DelayedTriggeredAbilities copy() {
+		return new DelayedTriggeredAbilities(this);
+	}
 
 }
 

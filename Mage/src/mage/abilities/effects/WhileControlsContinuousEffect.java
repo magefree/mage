@@ -32,6 +32,7 @@ import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
+import mage.abilities.Ability;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 
@@ -39,7 +40,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class WhileControlsContinuousEffect extends ContinuousEffectImpl {
+public abstract class WhileControlsContinuousEffect<T extends WhileControlsContinuousEffect<T>> extends ContinuousEffectImpl<T> {
 
 	protected FilterPermanent filter;
 	
@@ -49,15 +50,20 @@ public abstract class WhileControlsContinuousEffect extends ContinuousEffectImpl
 		this.layer = layer;
 		this.sublayer = sublayer;
 	}
+
+	public WhileControlsContinuousEffect(WhileControlsContinuousEffect effect) {
+		super(effect);
+		this.filter = effect.filter.copy();
+	}
 	
 	@Override
-	public boolean apply(Game game) {
-		if (game.getBattlefield().countAll(filter, this.source.getControllerId()) > 0) {
-			return applyEffect(game);
+	public boolean apply(Game game, Ability source) {
+		if (game.getBattlefield().countAll(filter, source.getControllerId()) > 0) {
+			return applyEffect(game, source);
 		}
 		return false;
 	}
 
-	protected abstract boolean applyEffect(Game game);
+	protected abstract boolean applyEffect(Game game, Ability source);
 
 }

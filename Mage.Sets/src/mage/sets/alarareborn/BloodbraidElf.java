@@ -40,7 +40,7 @@ import mage.sets.AlaraReborn;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BloodbraidElf extends CardImpl {
+public class BloodbraidElf extends CardImpl<BloodbraidElf> {
 
 	public BloodbraidElf(UUID ownerId) {
 		super(ownerId, "Bloodbraid Elf", new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
@@ -49,10 +49,23 @@ public class BloodbraidElf extends CardImpl {
 		this.color.setGreen(true);
 		this.subtype.add("Elf");
 		this.subtype.add("Berserker");
-		this.art = "121042_typ_reg_sty_010.jpg";
 		this.power = new MageInt(3);
 		this.toughness = new MageInt(2);
 		this.addAbility(HasteAbility.getInstance());
 		this.addAbility(new CascadeAbility());
-	} 
+	}
+
+	public BloodbraidElf(final BloodbraidElf card) {
+		super(card);
+	}
+
+	@Override
+	public BloodbraidElf copy() {
+		return new BloodbraidElf(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121042_typ_reg_sty_010.jpg";
+	}
 }

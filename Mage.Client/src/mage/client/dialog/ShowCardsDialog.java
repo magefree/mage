@@ -78,7 +78,7 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 
 	private void loadCardsFew(CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId) {
 		Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-		for (CardView card: showCards) {
+		for (CardView card: showCards.values()) {
 			Card cardImg = new Card(card, bigCard, dimension, gameId);
 			cardImg.setBounds(rectangle);
 			cardArea.add(cardImg);
@@ -95,7 +95,7 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 		if (showCards != null && showCards.size() > 0) {
 			Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 			int count = 0;
-			for (CardView card: showCards) {
+			for (CardView card: showCards.values()) {
 				Card cardImg = new Card(card, bigCard, dimension, gameId);
 				cardImg.setBounds(rectangle);
 				cardArea.add(cardImg);

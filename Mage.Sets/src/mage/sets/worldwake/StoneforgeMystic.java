@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PlayTargetWithoutPayingManaEffect;
 import mage.abilities.effects.common.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class StoneforgeMystic extends CardImpl {
+public class StoneforgeMystic extends CardImpl<StoneforgeMystic> {
 
 	private static FilterCard filter = new FilterCard("an Equipment card");
 
@@ -63,17 +63,30 @@ public class StoneforgeMystic extends CardImpl {
 		this.color.setWhite(true);
 		this.subtype.add("Kor");
 		this.subtype.add("Artificer");
-		this.art = "126571_typ_reg_sty_010.jpg";
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(2);
 
 		TargetCardInLibrary target = new TargetCardInLibrary(1, 1, filter);
 		this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(target), true));
 
-		SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PlayTargetWithoutPayingManaEffect(), new ManaCosts("{1}{W}"));
+		SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PlayTargetWithoutPayingManaEffect(), new ManaCostsImpl("{1}{W}"));
 		ability.addCost(new TapSourceCost());
 		ability.addTarget(new TargetCardInHand(0, 1, filter));
 		this.addAbility(ability);
+	}
+
+	public StoneforgeMystic(final StoneforgeMystic card) {
+		super(card);
+	}
+
+	@Override
+	public StoneforgeMystic copy() {
+		return new StoneforgeMystic(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "126571_typ_reg_sty_010.jpg";
 	}
 
 }

@@ -31,6 +31,7 @@ package mage.abilities.costs.common;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
+import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -40,27 +41,36 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnToHandTargetCost extends CostImpl {
+public class ReturnToHandTargetCost extends CostImpl<ReturnToHandTargetCost> {
 
 	public ReturnToHandTargetCost(TargetControlledPermanent target) {
 		this.addTarget(target);
 		this.text = "return " + target.getTargetName() + " you control to it's owner's hand";
 	}
 
+	public ReturnToHandTargetCost(ReturnToHandTargetCost cost) {
+		super(cost);
+	}
+
 	@Override
-	public boolean pay(Game game, boolean noMana) {
-		if (targets.choose(Outcome.ReturnToHand, game)) {
-			Permanent source = game.getPermanent(targets.getFirstTarget());
-			if (source != null) {
-				paid = source.moveToZone(Zone.HAND, game, false);
+	public boolean pay(Game game, Ability source, boolean noMana) {
+		if (targets.choose(Outcome.ReturnToHand, source.getControllerId(), source, game)) {
+			Permanent permanent = game.getPermanent(targets.getFirstTarget());
+			if (permanent != null) {
+				paid = permanent.moveToZone(Zone.HAND, game, false);
 			}
 		}
 		return paid;
 	}
 
 	@Override
-	public boolean canPay(UUID playerId, Game game) {
-		return targets.canChoose(playerId, playerId, game);
+	public boolean canPay(Ability source, Game game) {
+		return targets.canChoose(source.getControllerId(), source.getControllerId(), game);
+	}
+
+	@Override
+	public ReturnToHandTargetCost copy() {
+		return new ReturnToHandTargetCost(this);
 	}
 
 

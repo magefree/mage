@@ -38,6 +38,12 @@ import mage.util.CircularList;
  */
 public class PlayerList extends CircularList<UUID> {
 
+	public PlayerList() {}
+
+	public PlayerList(final PlayerList list) {
+		super(list);
+	}
+
 	public Player getNext(Game game) {
 		Player player;
 		UUID start = this.get();
@@ -62,6 +68,11 @@ public class PlayerList extends CircularList<UUID> {
 				return null;
 		}
 		return player;
+	}
+
+	@Override
+	public PlayerList copy() {
+		return new PlayerList(this);
 	}
 
 }

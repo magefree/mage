@@ -40,6 +40,14 @@ import mage.Constants.TurnPhase;
  */
 public class TurnMods extends ArrayList<TurnMod> {
 
+	public TurnMods() {}
+
+	public TurnMods(final TurnMods mods) {
+		for (TurnMod mod: mods) {
+			this.add(mod.copy());
+		}
+	}
+
 	public boolean extraTurn(UUID playerId) {
 		ListIterator<TurnMod> it = this.listIterator(this.size());
 		while (it.hasPrevious()) {
@@ -110,6 +118,10 @@ public class TurnMods extends ArrayList<TurnMod> {
 			}
 		}
 		return false;
+	}
+
+	public TurnMods copy() {
+		return new TurnMods(this);
 	}
 
 }

@@ -29,10 +29,13 @@
 package mage.target.common;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import mage.Constants.Zone;
 import mage.MageObject;
+import mage.abilities.Ability;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.common.FilterCreaturePermanent;
@@ -45,7 +48,7 @@ import mage.target.TargetImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetCreatureOrPlayer extends TargetImpl {
+public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
 
 	protected FilterCreatureOrPlayer filter;
 
@@ -65,24 +68,29 @@ public class TargetCreatureOrPlayer extends TargetImpl {
 		this.targetName = filter.getMessage();
 	}
 
+	public TargetCreatureOrPlayer(final TargetCreatureOrPlayer target) {
+		super(target);
+		this.filter = target.filter.copy();
+	}
+
 	@Override
 	public Filter getFilter() {
 		return this.filter;
 	}
 
 	@Override
-	public boolean canTarget(UUID id, Game game) {
+	public boolean canTarget(UUID id, Ability source, Game game) {
 		Permanent permanent = game.getPermanent(id);
-		MageObject targetSource = game.getObject(this.source.getSourceId());
+		MageObject targetSource = game.getObject(source.getSourceId());
 		if (permanent != null) {
-			if (this.source != null)
+			if (source != null)
 				return permanent.canBeTargetedBy(targetSource) && filter.match(permanent);
 			else
 				return filter.match(permanent);
 		}
 		Player player = game.getPlayer(id);
 		if (player != null)
-			if (this.source != null)
+			if (source != null)
 				return player.canBeTargetedBy(targetSource) && filter.match(player);
 			else
 				return filter.match(player);
@@ -113,20 +121,20 @@ public class TargetCreatureOrPlayer extends TargetImpl {
 
 	@Override
 	public List<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-		List<UUID> possibleTargets = new ArrayList<UUID>();
+		Map<Integer, UUID> possibleTargets = new HashMap<Integer, UUID>();
 		MageObject targetSource = game.getObject(sourceId);
 		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
 			Player player = game.getPlayer(playerId);
 			if (player != null && player.canBeTargetedBy(targetSource) && filter.match(player)) {
-				possibleTargets.add(playerId);
+				possibleTargets.put(player.hashCode(), playerId);
 			}
 		}
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
 			if (permanent.canBeTargetedBy(targetSource) && filter.match(permanent)) {
-				possibleTargets.add(permanent.getId());
+				possibleTargets.put(permanent.getValue().hashCode(), permanent.getId());
 			}
 		}
-		return possibleTargets;
+		return new ArrayList<UUID>(possibleTargets.values());
 	}
 
 	@Override
@@ -143,6 +151,11 @@ public class TargetCreatureOrPlayer extends TargetImpl {
 			}
 		}
 		return sb.toString();
+	}
+
+	@Override
+	public TargetCreatureOrPlayer copy() {
+		return new TargetCreatureOrPlayer(this);
 	}
 
 }

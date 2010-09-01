@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.TargetController;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.RequirementAttackEffect;
 import mage.abilities.effects.common.BecomesCreatureSourceEOTEffect;
@@ -55,7 +56,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GideonJura extends CardImpl {
+public class GideonJura extends CardImpl<GideonJura> {
 
 	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
@@ -68,7 +69,6 @@ public class GideonJura extends CardImpl {
 		this.expansionSetId = RiseOfTheEldrazi.getInstance().getId();
 		this.subtype.add("Gideon");
 		this.color.setWhite(true);
-		this.art = "127248_typ_reg_sty_010.jpg";
 		this.loyalty = new MageInt(6);
 
 		LoyaltyAbility ability1 = new LoyaltyAbility(new GideonJuraEffect(), 2);
@@ -82,6 +82,20 @@ public class GideonJura extends CardImpl {
 		LoyaltyAbility ability3 = new LoyaltyAbility(new BecomesCreatureSourceEOTEffect(new GideonJuraToken(), "planeswalker"), 0);
 		ability3.addEffect(new PreventAllDamageSourceEffect(Duration.EndOfTurn));
 		this.addAbility(ability3);
+	}
+
+	public GideonJura(final GideonJura card) {
+		super(card);
+	}
+
+	@Override
+	public GideonJura copy() {
+		return new GideonJura(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "127248_typ_reg_sty_010.jpg";
 	}
 
 }
@@ -99,28 +113,37 @@ class GideonJuraToken extends Token {
 
 }
 
-class GideonJuraEffect extends RequirementAttackEffect {
+class GideonJuraEffect extends RequirementAttackEffect<GideonJuraEffect> {
 
 	public GideonJuraEffect() {
 		super(Duration.OneUse);
 	}
 
+	public GideonJuraEffect(final GideonJuraEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean applies(GameEvent event, Game game) {
-		if (event.getType().equals(EventType.DECLARE_ATTACKERS_STEP_PRE) && event.getPlayerId().equals(this.source.getFirstTarget()))
+	public GideonJuraEffect copy() {
+		return new GideonJuraEffect(this);
+	}
+
+	@Override
+	public boolean applies(GameEvent event, Ability source, Game game) {
+		if (event.getType().equals(EventType.DECLARE_ATTACKERS_STEP_PRE) && event.getPlayerId().equals(source.getFirstTarget()))
 			return true;
-		if (event.getType().equals(EventType.END_PHASE_POST) && event.getPlayerId().equals(this.source.getFirstTarget()))
+		if (event.getType().equals(EventType.END_PHASE_POST) && event.getPlayerId().equals(source.getFirstTarget()))
 			used = true;
 		return false;
 	}
 
 	@Override
-	public boolean apply(Game game) {
-		Player player = game.getPlayer(this.source.getFirstTarget());
+	public boolean apply(Game game, Ability source) {
+		Player player = game.getPlayer(source.getFirstTarget());
 		if (player != null) {
 			for (Permanent creature: game.getBattlefield().getAllActivePermanents(new FilterCreatureForCombat(), player.getId())) {
 				if (creature.canAttack(game)) {
-					game.getCombat().declareAttacker(creature.getId(), this.source.getControllerId(), game);
+					game.getCombat().declareAttacker(creature.getId(), source.getControllerId(), game);
 				}
 			}
 			return true;
@@ -129,7 +152,7 @@ class GideonJuraEffect extends RequirementAttackEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "During target opponent's next turn, creatures that player controls attack {this} if able";
 	}
 }

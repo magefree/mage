@@ -50,6 +50,7 @@ import mage.players.Player;
 import mage.util.Logging;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
+import mage.view.ChatMessage.MessageColor;
 import mage.view.GameView;
 
 /**
@@ -90,7 +91,7 @@ public class GameController implements GameCallback {
 							updateGame();
 							break;
 						case INFO:
-							ChatManager.getInstance().broadcast(chatId, "", event.getMessage());
+							ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK);
 							logger.finest(game.getId() + " " + event.getMessage());
 							break;
 						case REVEAL:
@@ -152,7 +153,7 @@ public class GameController implements GameCallback {
 		gameSessions.put(playerId, gameSession);
 		logger.info("player " + playerId + " has joined game " + game.getId());
 //		gameSession.init(getGameView(playerId));
-		ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(playerId).getName() + " has joined the game");
+		ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(playerId).getName() + " has joined the game", MessageColor.BLACK);
 		if (allJoined()) {
 			startGame();
 		}
@@ -181,12 +182,12 @@ public class GameController implements GameCallback {
 		GameWatcher gameWatcher = new GameWatcher(sessionId, game.getId());
 		watchers.put(sessionId, gameWatcher);
 		gameWatcher.init(getGameView());
-		ChatManager.getInstance().broadcast(chatId, "", " has started watching");
+		ChatManager.getInstance().broadcast(chatId, "", " has started watching", MessageColor.BLACK);
 	}
 	
 	public void stopWatching(UUID sessionId) {
 		watchers.remove(sessionId);
-		ChatManager.getInstance().broadcast(chatId, "", " has stopped watching");
+		ChatManager.getInstance().broadcast(chatId, "", " has stopped watching", MessageColor.BLACK);
 	}
 	
 	public void concede(UUID sessionId) {
@@ -197,11 +198,11 @@ public class GameController implements GameCallback {
 		game.quit(getPlayerId(sessionId));
 	}
 
-	public void cheat(UUID sessionId, DeckCardLists deckList) {
-		Player player = game.getPlayer(getPlayerId(sessionId));
+	public void cheat(UUID sessionId, UUID playerId, DeckCardLists deckList) {
+		Player player = game.getPlayer(playerId);
 		Deck deck = Deck.load(deckList);
-		deck.setOwnerId(player.getId());
-		for (Card card: deck.getCards().values()) {
+		game.loadCards(deck.getCards(), playerId);
+		for (Card card: deck.getCards()) {
 			player.putOntoBattlefield(card, game);
 		}
 		updateGame();
@@ -222,7 +223,7 @@ public class GameController implements GameCallback {
 
 	public void timeout(UUID sessionId) {
 		if (sessionPlayerMap.containsKey(sessionId)) {
-			ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(sessionPlayerMap.get(sessionId)).getName() + " has timed out.  Auto concede.");
+			ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(sessionPlayerMap.get(sessionId)).getName() + " has timed out.  Auto concede.", MessageColor.BLACK);
 			concede(sessionId);
 		}
 	}
@@ -272,68 +273,72 @@ public class GameController implements GameCallback {
 	}
 
 	private synchronized void ask(UUID playerId, String question) {
-		informOthers(playerId);
 		if (gameSessions.containsKey(playerId))
 			gameSessions.get(playerId).ask(question, getGameView(playerId));
+		informOthers(playerId);
 	}
 
 	private synchronized void chooseAbility(UUID playerId, Collection<? extends Ability> choices) {
-		informOthers(playerId);
 		if (gameSessions.containsKey(playerId))
 			gameSessions.get(playerId).chooseAbility(new AbilityPickerView(choices));
+		informOthers(playerId);
 	}
 
 	private synchronized void choose(UUID playerId, String message, String[] choices) {
-		informOthers(playerId);
 		if (gameSessions.containsKey(playerId))
 			gameSessions.get(playerId).choose(message, choices);
+		informOthers(playerId);
 	}
 
 	private synchronized void target(UUID playerId, String question, Cards cards, boolean required) {
+		if (gameSessions.containsKey(playerId)) {
+			if (cards != null)
+				gameSessions.get(playerId).target(question, new CardsView(cards.getCards(game)), required, getGameView(playerId));
+			else
+				gameSessions.get(playerId).target(question, new CardsView(), required, getGameView(playerId));
+		}
 		informOthers(playerId);
-		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).target(question, new CardsView(cards), required, getGameView(playerId));
 	}
 
 	private synchronized void target(UUID playerId, String question, Collection<? extends Ability> abilities, boolean required) {
-		informOthers(playerId);
 		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).target(question, new CardsView(abilities, game), required, getGameView(playerId));
+			gameSessions.get(playerId).target(question, new CardsView(abilities, game.getState()), required, getGameView(playerId));
+		informOthers(playerId);
 	}
 
 	private synchronized void select(UUID playerId, String message) {
-		informOthers(playerId);
 		if (gameSessions.containsKey(playerId))
 			gameSessions.get(playerId).select(message, getGameView(playerId));
+		informOthers(playerId);
 	}
 
 	private synchronized void playMana(UUID playerId, String message) {
-		informOthers(playerId);
 		if (gameSessions.containsKey(playerId))
 			gameSessions.get(playerId).playMana(message, getGameView(playerId));
+		informOthers(playerId);
 	}
 
 	private synchronized void playXMana(UUID playerId, String message) {
-		informOthers(playerId);
 		if (gameSessions.containsKey(playerId))
 			gameSessions.get(playerId).playXMana(message, getGameView(playerId));
+		informOthers(playerId);
 	}
 
 	private synchronized void amount(UUID playerId, String message, int min, int max) {
-		informOthers(playerId);
 		if (gameSessions.containsKey(playerId))
 			gameSessions.get(playerId).getAmount(message, min, max);
+		informOthers(playerId);
 	}
 
 	private synchronized void revealCards(String name, Cards cards) {
 		for (GameSession session: gameSessions.values()) {
-			session.revealCards(name, new CardsView(cards));
+			session.revealCards(name, new CardsView(cards.getCards(game)));
 		}
 	}
 
 	private synchronized void lookAtCards(UUID playerId, String name, Cards cards) {
 		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).revealCards(name, new CardsView(cards));
+			gameSessions.get(playerId).revealCards(name, new CardsView(cards.getCards(game)));
 	}
 
 	private void informOthers(UUID playerId) {
@@ -349,12 +354,12 @@ public class GameController implements GameCallback {
 	}
 
 	private GameView getGameView() {
-		return new GameView(game.getState());
+		return new GameView(game.getState(), game);
 	}
 
 	private GameView getGameView(UUID playerId) {
-		GameView gameView = new GameView(game.getState());
-		gameView.setHand(new CardsView(game.getPlayer(playerId).getHand()));
+		GameView gameView = new GameView(game.getState(), game);
+		gameView.setHand(new CardsView(game.getPlayer(playerId).getHand().getCards(game)));
 		return gameView;
 	}
 

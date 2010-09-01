@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,21 +38,31 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DestroyNoRegenTargetEffect extends OneShotEffect {
+public class DestroyNoRegenTargetEffect extends OneShotEffect<DestroyNoRegenTargetEffect> {
 
 	public DestroyNoRegenTargetEffect() {
 		super(Outcome.DestroyPermanent);
 	}
 
-	public boolean apply(Game game) {
-		Permanent permanent = game.getPermanent(this.source.getFirstTarget());
-		permanent.destroy(this.source.getSourceId(), game, true);
+	public DestroyNoRegenTargetEffect(final DestroyNoRegenTargetEffect effect) {
+		super(effect);
+	}
+
+	@Override
+	public DestroyNoRegenTargetEffect copy() {
+		return new DestroyNoRegenTargetEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent permanent = game.getPermanent(source.getFirstTarget());
+		permanent.destroy(source.getSourceId(), game, true);
 		return true;
 	}
 
 	@Override
-	public String getText() {
-		return "Destroy target " + this.source.getTargets().get(0).getTargetName() + ".  It can't be regenerated";
+	public String getText(Ability source) {
+		return "Destroy target " + source.getTargets().get(0).getTargetName() + ".  It can't be regenerated";
 	}
 
 }

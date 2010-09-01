@@ -38,7 +38,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CombatDamageStep extends Step {
+public class CombatDamageStep extends Step<CombatDamageStep> {
 
 	private boolean first;
 
@@ -48,6 +48,11 @@ public class CombatDamageStep extends Step {
 		this.stepEvent = EventType.COMBAT_DAMAGE_STEP;
 		this.preStepEvent = EventType.COMBAT_DAMAGE_STEP_PRE;
 		this.postStepEvent = EventType.COMBAT_DAMAGE_STEP_POST;
+	}
+
+	public CombatDamageStep(final CombatDamageStep step) {
+		super(step);
+		this.first = step.first;
 	}
 
 	@Override
@@ -69,6 +74,11 @@ public class CombatDamageStep extends Step {
 
 	public boolean getFirst() {
 		return first;
+	}
+
+	@Override
+	public CombatDamageStep copy() {
+		return new CombatDamageStep(this);
 	}
 
 }

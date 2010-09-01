@@ -31,6 +31,7 @@ package mage.sets.alarareborn;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.Card;
@@ -46,43 +47,65 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class VengefulRebirth extends CardImpl {
+public class VengefulRebirth extends CardImpl<VengefulRebirth> {
 
 	public VengefulRebirth(UUID ownerId) {
 		super(ownerId, "Vengeful Rebirth", new CardType[]{CardType.SORCERY}, "{4}{R}{G}");
 		this.expansionSetId = AlaraReborn.getInstance().getId();
 		this.color.setRed(true);
 		this.color.setGreen(true);
-		this.art = "115104_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetCardInGraveyard());
 		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 		this.getSpellAbility().addEffect(new VengefulRebirthEffect());
 		this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
 	}
 
+	public VengefulRebirth(final VengefulRebirth card) {
+		super(card);
+	}
+
+	@Override
+	public VengefulRebirth copy() {
+		return new VengefulRebirth(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "115104_typ_reg_sty_010.jpg";
+	}
+
 }
 
-class VengefulRebirthEffect extends OneShotEffect {
+class VengefulRebirthEffect extends OneShotEffect<VengefulRebirthEffect> {
 
 	public VengefulRebirthEffect() {
 		super(Outcome.DrawCard);
 	}
 
+	public VengefulRebirthEffect(final VengefulRebirthEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Player player = game.getPlayer(this.source.getControllerId());
-		Card card = (Card)game.getObject(this.source.getFirstTarget());
+	public VengefulRebirthEffect copy() {
+		return new VengefulRebirthEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Player player = game.getPlayer(source.getControllerId());
+		Card card = (Card)game.getObject(source.getFirstTarget());
 		if (player.removeFromGraveyard(card, game) && player.putInHand(card, game)) {
 			int damage = card.getManaCost().convertedManaCost();
 			if (!card.getCardType().contains(CardType.LAND)) {
-				Permanent permanent = game.getPermanent(this.source.getTargets().get(1).getTargets().get(0));
+				Permanent permanent = game.getPermanent(source.getTargets().get(1).getTargets().get(0));
 				if (permanent != null) {
-					permanent.damage(damage, this.source.getSourceId(), game);
+					permanent.damage(damage, source.getSourceId(), game);
 					return true;
 				}
-				Player targetPlayer = game.getPlayer(this.source.getTargets().get(1).getTargets().get(0));
+				Player targetPlayer = game.getPlayer(source.getTargets().get(1).getTargets().get(0));
 				if (targetPlayer != null) {
-					targetPlayer.damage(damage, this.source.getSourceId(), game);
+					targetPlayer.damage(damage, source.getSourceId(), game);
 					return true;
 				}
 				return false;
@@ -92,7 +115,7 @@ class VengefulRebirthEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, Vengeful Rebirth deals damage equal to that card's converted mana cost to target creature or player";
 	}
 

@@ -31,6 +31,7 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -44,34 +45,56 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Earthquake extends CardImpl {
+public class Earthquake extends CardImpl<Earthquake> {
 
 	public Earthquake(UUID ownerId) {
 		super(ownerId, "Earthquake", new CardType[]{CardType.SORCERY}, "{X}{R}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setRed(true);
-		this.art = "118685_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addEffect(new EarthquakeEffect());
+	}
+
+	public Earthquake(final Earthquake card) {
+		super(card);
+	}
+
+	@Override
+	public Earthquake copy() {
+		return new Earthquake(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "118685_typ_reg_sty_010.jpg";
 	}
 }
 
-class EarthquakeEffect extends OneShotEffect {
+class EarthquakeEffect extends OneShotEffect<EarthquakeEffect> {
 
 	public EarthquakeEffect() {
 		super(Outcome.Damage);
 	}
 
+	public EarthquakeEffect(final EarthquakeEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		int amount = this.source.getManaCosts().getVariableCosts().get(0).getValue();
+	public EarthquakeEffect copy() {
+		return new EarthquakeEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		int amount = source.getManaCosts().getVariableCosts().get(0).getValue();
 
 		FilterCreaturePermanent filter = new FilterCreaturePermanent();
 		filter.getAbilities().add(FlyingAbility.getInstance());
 		filter.setNotAbilities(true);
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, this.source.getControllerId(), game)) {
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
 			permanent.damage(amount, source.getId(), game);
 		}
-		for (UUID playerId: game.getPlayer(this.source.getControllerId()).getInRange()) {
+		for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
 			Player player = game.getPlayer(playerId);
 			if (player != null)
 				player.damage(amount, source.getId(), game);
@@ -80,7 +103,7 @@ class EarthquakeEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Earthquake deals X damage to each creature without flying and each player";
 	}
 }

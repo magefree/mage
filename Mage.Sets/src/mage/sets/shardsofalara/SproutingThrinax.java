@@ -41,7 +41,7 @@ import mage.sets.ShardsOfAlara;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SproutingThrinax extends CardImpl {
+public class SproutingThrinax extends CardImpl<SproutingThrinax> {
 
 	private static SaprolingToken saprolingToken = new SaprolingToken();
 
@@ -52,11 +52,24 @@ public class SproutingThrinax extends CardImpl {
 		this.color.setRed(true);
 		this.color.setGreen(true);
 		this.subtype.add("Lizard");
-		this.art = "114974_typ_reg_sty_010.jpg";
 		this.power = new MageInt(3);
 		this.toughness = new MageInt(3);
 
 		this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new CreateTokenEffect(saprolingToken, 3), false));
+	}
+
+	public SproutingThrinax(final SproutingThrinax card) {
+		super(card);
+	}
+
+	@Override
+	public SproutingThrinax copy() {
+		return new SproutingThrinax(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "114974_typ_reg_sty_010.jpg";
 	}
 
 }

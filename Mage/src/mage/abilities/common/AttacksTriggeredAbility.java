@@ -39,10 +39,14 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
+public class AttacksTriggeredAbility extends TriggeredAbilityImpl<AttacksTriggeredAbility> {
 
 	public AttacksTriggeredAbility(Effect effect, boolean optional) {
 		super(Zone.BATTLEFIELD, effect, optional);
+	}
+
+	public AttacksTriggeredAbility(AttacksTriggeredAbility ability) {
+		super(ability);
 	}
 
 	@Override
@@ -57,6 +61,11 @@ public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
 	@Override
 	public String getRule() {
 		return "When {this} attacks, " + super.getRule();
+	}
+
+	@Override
+	public AttacksTriggeredAbility copy() {
+		return new AttacksTriggeredAbility(this);
 	}
 
 

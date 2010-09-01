@@ -39,15 +39,28 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LightningBolt extends CardImpl {
+public class LightningBolt extends CardImpl<LightningBolt> {
 
 	public LightningBolt(UUID ownerId) {
 		super(ownerId, "Lightning Bolt", new CardType[]{CardType.INSTANT}, "{R}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setRed(true);
-		this.art = "121669_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 		this.getSpellAbility().addEffect(new DamageTargetEffect(3));
+	}
+
+	public LightningBolt(final LightningBolt card) {
+		super(card);
+	}
+
+	@Override
+	public LightningBolt copy() {
+		return new LightningBolt(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121669_typ_reg_sty_010.jpg";
 	}
 
 }

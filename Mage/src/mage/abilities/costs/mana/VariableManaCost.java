@@ -35,7 +35,7 @@ import mage.players.ManaPool;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class VariableManaCost extends ManaCostImpl implements ManaCost {
+public class VariableManaCost extends ManaCostImpl<VariableManaCost> {
 
 	protected Mana manaPaid = new Mana();
 	protected int multiplier;
@@ -47,6 +47,12 @@ public class VariableManaCost extends ManaCostImpl implements ManaCost {
 	
 	public VariableManaCost(int multiplier) {
 		this.multiplier = multiplier;
+	}
+
+	public VariableManaCost(VariableManaCost cost) {
+		super(cost);
+		this.manaPaid = cost.manaPaid.copy();
+		this.multiplier = cost.multiplier;
 	}
 
 	@Override
@@ -96,6 +102,11 @@ public class VariableManaCost extends ManaCostImpl implements ManaCost {
 	@Override
 	public boolean testPay(Mana testMana) {
 		return true;
+	}
+
+	@Override
+	public VariableManaCost copy() {
+		return new VariableManaCost(this);
 	}
 	
 }

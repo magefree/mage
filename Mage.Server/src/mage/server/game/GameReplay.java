@@ -37,10 +37,12 @@ import mage.game.*;
 public class GameReplay {
 
 	private GameStates savedGame;
+	private Game game;
 	private int stateIndex;
 
-	public GameReplay(GameStates savedGame) {
-		this.savedGame = savedGame;
+	public GameReplay(Game game) {
+		this.savedGame = game.getGameStates();
+		this.game = game;
 	}
 
 	public void start() {
@@ -61,4 +63,7 @@ public class GameReplay {
 		return null;
 	}
 
+	public Game getGame() {
+		return this.game;
+	}
 }

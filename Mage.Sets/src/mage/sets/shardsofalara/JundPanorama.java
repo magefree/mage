@@ -47,19 +47,32 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class JundPanorama extends CardImpl {
+public class JundPanorama extends CardImpl<JundPanorama> {
 
 	public JundPanorama(UUID ownerId) {
 		super(ownerId, "Jund Panorama", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = ShardsOfAlara.getInstance().getId();
-		this.art = "116191_typ_reg_sty_010.jpg";
 		this.addAbility(new ColorlessManaAbility());
 		this.addAbility(new JundPanoramaAbility());
 	}
 
+	public JundPanorama(final JundPanorama card) {
+		super(card);
+	}
+
+	@Override
+	public JundPanorama copy() {
+		return new JundPanorama(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "116191_typ_reg_sty_010.jpg";
+	}
+
 }
 
-class JundPanoramaAbility extends ActivatedAbilityImpl {
+class JundPanoramaAbility extends ActivatedAbilityImpl<JundPanoramaAbility> {
 
 	public JundPanoramaAbility() {
 		super(Zone.BATTLEFIELD, null);
@@ -73,5 +86,15 @@ class JundPanoramaAbility extends ActivatedAbilityImpl {
 		TargetCardInLibrary target = new TargetCardInLibrary(filter);
 		addEffect(new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay));
 	}
+
+	public JundPanoramaAbility(final JundPanoramaAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public JundPanoramaAbility copy() {
+		return new JundPanoramaAbility(this);
+	}
+
 	
 }

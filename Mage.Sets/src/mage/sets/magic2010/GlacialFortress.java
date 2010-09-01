@@ -43,7 +43,7 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GlacialFortress extends CardImpl {
+public class GlacialFortress extends CardImpl<GlacialFortress> {
 
 	private static FilterLandPermanent filter = new FilterLandPermanent();
 
@@ -57,9 +57,22 @@ public class GlacialFortress extends CardImpl {
 	public GlacialFortress(UUID ownerId) {
 		super(ownerId, "Glacial Fortress", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Magic2010.getInstance().getId();
-		this.art = "121634_typ_reg_sty_010.jpg";
 		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedUnlessControlsEffect(filter)));
 		this.addAbility(new BlueManaAbility());
 		this.addAbility(new WhiteManaAbility());
+	}
+
+	public GlacialFortress(final GlacialFortress card) {
+		super(card);
+	}
+
+	@Override
+	public GlacialFortress copy() {
+		return new GlacialFortress(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121634_typ_reg_sty_010.jpg";
 	}
 }

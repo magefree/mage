@@ -80,7 +80,12 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				@Override
 				public void event(Event event) {
 					if (event.getEventName().equals("double-click")) {
-						deck.getCards().add(createCard(cardSelector.getCards().get((UUID)event.getSource()).getClass()));
+						for (Card card: cardSelector.getCards()) {
+							if (card.getId().equals((UUID)event.getSource())) {
+								deck.getCards().add(createCard(card.getClass()));
+								break;
+							}
+						}
 						refreshDeck();
 					}
 				}
@@ -92,7 +97,12 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				@Override
 				public void event(Event event) {
 					if (event.getEventName().equals("double-click")) {
-						deck.getCards().remove((UUID)event.getSource());
+						for (Card card: deck.getCards()) {
+							if (card.getId().equals((UUID)event.getSource())) {
+								deck.getCards().remove(card);
+								break;
+							}
+						}
 						refreshDeck();
 					}
 				}
@@ -272,8 +282,11 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		if (ret == JFileChooser.APPROVE_OPTION) {
 			File file = fcSelectDeck.getSelectedFile();
 			try {
+				String fileName = file.getPath();
+				if (!fileName.endsWith(".dck"))
+					fileName += ".dck";
 				setCursor(new Cursor(Cursor.WAIT_CURSOR));
-				deck.getDeckCardLists().save(file.getPath());
+				deck.getDeckCardLists().save(fileName);
 			} catch (Exception ex) {
 				Logger.getLogger(DeckEditorPanel.class.getName()).log(Level.SEVERE, null, ex);
 			}

@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.sets.Magic2010;
@@ -53,13 +53,26 @@ public class AcolyteOfXathrid extends CardImpl {
 		this.subtype.add("Human");
 		this.subtype.add("Cleric");
 		this.color.setBlack(true);
-		this.art = "121644_typ_reg_sty_010.jpg";
 		this.power = new MageInt(0);
 		this.toughness = new MageInt(1);
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCosts("{1}{B}"));
+		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCostsImpl("{1}{B}"));
 		ability.addCost(new TapSourceCost());
 		ability.addTarget(new TargetPlayer());
 		this.addAbility(ability);
+	}
+
+	public AcolyteOfXathrid(final AcolyteOfXathrid card) {
+		super(card);
+	}
+
+	@Override
+	public AcolyteOfXathrid copy() {
+		return new AcolyteOfXathrid(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121644_typ_reg_sty_010.jpg";
 	}
 
 }

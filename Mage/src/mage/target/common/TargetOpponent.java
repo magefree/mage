@@ -29,6 +29,7 @@
 package mage.target.common;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.game.Game;
 import mage.target.TargetPlayer;
 
@@ -36,25 +37,34 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetOpponent extends TargetPlayer {
+public class TargetOpponent extends TargetPlayer<TargetOpponent> {
 
 	public TargetOpponent() {
 		super();
 		this.targetName = "opponent";
 	}
+
+	public TargetOpponent(final TargetOpponent target) {
+		super(target);
+	}
 	
 	@Override
 	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
 		filter.getPlayerId().clear();
-		filter.getPlayerId().addAll(game.getOpponents(this.getAbility().getControllerId()));
+		filter.getPlayerId().addAll(game.getOpponents(sourceControllerId));
 		return super.canChoose(sourceId, sourceControllerId, game);
 	}
 	
 	@Override
-	public boolean canTarget(UUID id, Game game) {
+	public boolean canTarget(UUID id, Ability source, Game game) {
 		filter.getPlayerId().clear();
-		filter.getPlayerId().addAll(game.getOpponents(this.getAbility().getControllerId()));
-		return super.canTarget(id, game);
+		filter.getPlayerId().addAll(game.getOpponents(source.getControllerId()));
+		return super.canTarget(id, source, game);
+	}
+
+	@Override
+	public TargetOpponent copy() {
+		return new TargetOpponent(this);
 	}
 
 }

@@ -30,6 +30,7 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
@@ -46,25 +47,47 @@ import mage.watchers.WatcherImpl;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ArchiveTrap extends CardImpl {
+public class ArchiveTrap extends CardImpl<ArchiveTrap> {
 
 	public ArchiveTrap(UUID ownerId) {
 		super(ownerId, "Archive Trap", new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
 		this.expansionSetId = Zendikar.getInstance().getId();
 		this.color.setBlue(true);
-		this.art = "125080_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetOpponent());
 		this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(13));
 		this.getSpellAbility().addAlternativeCost(new ArchiveTrapAlternativeCost());
-		this.watchers.add(new ArchiveTrapWatcher());
+		this.watchers.add(new ArchiveTrapWatcher(ownerId));
+	}
+
+	public ArchiveTrap(final ArchiveTrap card) {
+		super(card);
+	}
+
+	@Override
+	public ArchiveTrap copy() {
+		return new ArchiveTrap(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "125080_typ_reg_sty_010.jpg";
 	}
 
 }
 
-class ArchiveTrapWatcher extends WatcherImpl {
+class ArchiveTrapWatcher extends WatcherImpl<ArchiveTrapWatcher> {
 
-	public ArchiveTrapWatcher() {
-		super("LibrarySearched");
+	public ArchiveTrapWatcher(UUID controllerId) {
+		super("LibrarySearched", controllerId);
+	}
+
+	public ArchiveTrapWatcher(final ArchiveTrapWatcher watcher) {
+		super(watcher);
+	}
+
+	@Override
+	public ArchiveTrapWatcher copy() {
+		return new ArchiveTrapWatcher(this);
 	}
 
 	@Override
@@ -75,16 +98,25 @@ class ArchiveTrapWatcher extends WatcherImpl {
 
 }
 
-class ArchiveTrapAlternativeCost extends AlternativeCost {
+class ArchiveTrapAlternativeCost extends AlternativeCost<ArchiveTrapAlternativeCost> {
 
 	public ArchiveTrapAlternativeCost() {
 		super("you may pay {0} rather than pay Archive Trap's mana cost");
 		this.add(new GenericManaCost(0));
 	}
 
+	public ArchiveTrapAlternativeCost(final ArchiveTrapAlternativeCost cost) {
+		super(cost);
+	}
+
 	@Override
-	public boolean isAvailable(Game game) {
-		Watcher watcher = game.getState().getWatchers().get(this.ability.getControllerId(), "LibrarySearched");
+	public ArchiveTrapAlternativeCost copy() {
+		return new ArchiveTrapAlternativeCost(this);
+	}
+
+	@Override
+	public boolean isAvailable(Game game, Ability source) {
+		Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "LibrarySearched");
 		if (watcher != null && watcher.conditionMet())
 			return true;
 		return false;

@@ -28,16 +28,21 @@
 
 package mage.abilities;
 
+import mage.Constants.AbilityType;
 import mage.Constants.Zone;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class EvasionAbilityImpl extends StaticAbility implements EvasionAbility {
+public abstract class EvasionAbilityImpl<T extends EvasionAbilityImpl<T>> extends StaticAbility<T> implements EvasionAbility {
 
 	public EvasionAbilityImpl() {
-		super(Zone.BATTLEFIELD, null);
+		super(AbilityType.EVASION, Zone.BATTLEFIELD);
+	}
+
+	public EvasionAbilityImpl(final EvasionAbilityImpl ability) {
+		super(ability);
 	}
 
 }

@@ -40,15 +40,28 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GiantGrowth extends CardImpl {
+public class GiantGrowth extends CardImpl<GiantGrowth> {
 
 	public GiantGrowth(UUID ownerId) {
 		super(ownerId, "Giant Growth", new CardType[]{CardType.INSTANT}, "{G}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setGreen(true);
-		this.art = "101059_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 		this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
+	}
+
+	public GiantGrowth(final GiantGrowth card) {
+		super(card);
+	}
+
+	@Override
+	public GiantGrowth copy() {
+		return new GiantGrowth(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "101059_typ_reg_sty_010.jpg";
 	}
 
 }

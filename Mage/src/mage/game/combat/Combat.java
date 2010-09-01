@@ -40,17 +40,30 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.players.PlayerList;
+import mage.util.Copyable;
 
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Combat implements Serializable {
+public class Combat implements Serializable, Copyable<Combat> {
 
 	protected List<CombatGroup> groups = new ArrayList<CombatGroup>();
 	protected Set<UUID> defenders = new HashSet<UUID>();
 	protected UUID attackerId;
+
+	public Combat() {}
+
+	public Combat(final Combat combat) {
+		this.attackerId = combat.attackerId;
+		for (CombatGroup group: combat.groups) {
+			groups.add(group.copy());
+		}
+		for (UUID defenderId: combat.defenders) {
+			defenders.add(defenderId);
+		}
+	}
 
 	public List<CombatGroup> getGroups() {
 		return groups;
@@ -80,6 +93,15 @@ public class Combat implements Serializable {
 		groups.clear();
 		defenders.clear();
 		attackerId = null;
+	}
+
+	public int getValue(Game game) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(attackerId).append(defenders);
+		for (CombatGroup group: groups) {
+			sb.append(group.getValue(game));
+		}
+		return sb.toString().hashCode();
 	}
 
 	public void setAttacker(UUID playerId) {
@@ -228,6 +250,15 @@ public class Combat implements Serializable {
 			}
 		}
 		return false;
+	}
+
+	public void damageAssignmentOrder(Game game) {
+		//TODO:  set damage assignment order
+	}
+
+	@Override
+	public Combat copy() {
+		return new Combat(this);
 	}
 
 }

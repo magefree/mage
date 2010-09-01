@@ -43,7 +43,7 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DragonskullSummit extends CardImpl {
+public class DragonskullSummit extends CardImpl<DragonskullSummit> {
 
 	private static FilterLandPermanent filter = new FilterLandPermanent();
 
@@ -57,9 +57,22 @@ public class DragonskullSummit extends CardImpl {
 	public DragonskullSummit(UUID ownerId) {
 		super(ownerId, "Dragonskull Summit", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Magic2010.getInstance().getId();
-		this.art = "121671_typ_reg_sty_010.jpg";
 		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedUnlessControlsEffect(filter)));
 		this.addAbility(new BlackManaAbility());
 		this.addAbility(new RedManaAbility());
+	}
+
+	public DragonskullSummit(final DragonskullSummit card) {
+		super(card);
+	}
+
+	@Override
+	public DragonskullSummit copy() {
+		return new DragonskullSummit(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121671_typ_reg_sty_010.jpg";
 	}
 }

@@ -63,6 +63,7 @@ public class GameSession extends GameWatcher {
 
 	public void ask(final String question, final GameView gameView) {
 		if (!killed) {
+			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
 				session.fireCallback(new ClientCallback("gameAsk", new GameClientMessage(gameView, question)));
@@ -71,6 +72,7 @@ public class GameSession extends GameWatcher {
 
 	public void target(final String question, final CardsView cardView, final boolean required, final GameView gameView) {
 		if (!killed) {
+			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
 				session.fireCallback(new ClientCallback("gameTarget", new GameClientMessage(gameView, question, cardView, required)));
@@ -79,6 +81,7 @@ public class GameSession extends GameWatcher {
 
 	public void select(final String message, final GameView gameView) {
 		if (!killed) {
+			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
 				session.fireCallback(new ClientCallback("gameSelect", new GameClientMessage(gameView, message)));
@@ -87,6 +90,7 @@ public class GameSession extends GameWatcher {
 
 	public void chooseAbility(final AbilityPickerView abilities) {
 		if (!killed) {
+			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
 				session.fireCallback(new ClientCallback("gameChooseAbility", abilities));
@@ -95,6 +99,7 @@ public class GameSession extends GameWatcher {
 
 	public void choose(final String message, final String[] choices) {
 		if (!killed) {
+			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
 				session.fireCallback(new ClientCallback("gameChoose", new GameClientMessage(choices, message)));
@@ -103,6 +108,7 @@ public class GameSession extends GameWatcher {
 
 	public void playMana(final String message, final GameView gameView) {
 		if (!killed) {
+			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
 				session.fireCallback(new ClientCallback("gamePlayMana", new GameClientMessage(gameView, message)));
@@ -111,6 +117,7 @@ public class GameSession extends GameWatcher {
 
 	public void playXMana(final String message, final GameView gameView) {
 		if (!killed) {
+			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
 				session.fireCallback(new ClientCallback("gamePlayXMana", new GameClientMessage(gameView, message)));
@@ -119,6 +126,7 @@ public class GameSession extends GameWatcher {
 
 	public void getAmount(final String message, final int min, final int max) {
 		if (!killed) {
+			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
 				session.fireCallback(new ClientCallback("gameSelectAmount", new GameClientMessage(message, min, max)));

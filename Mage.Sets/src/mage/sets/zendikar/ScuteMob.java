@@ -45,27 +45,49 @@ import mage.sets.Zendikar;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ScuteMob extends CardImpl {
+public class ScuteMob extends CardImpl<ScuteMob> {
 
 	public ScuteMob(UUID ownerId) {
 		super(ownerId, "Scute Mob", new CardType[]{CardType.CREATURE}, "{G}");
 		this.expansionSetId = Zendikar.getInstance().getId();
 		this.color.setGreen(true);
 		this.subtype.add("Insect");
-		this.art = "123606_typ_reg_sty_010.jpg";
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
 		this.addAbility(new ScuteMobAbility());
 	}
 
+	public ScuteMob(final ScuteMob card) {
+		super(card);
+	}
+
+	@Override
+	public ScuteMob copy() {
+		return new ScuteMob(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123606_typ_reg_sty_010.jpg";
+	}
+
 }
 
-class ScuteMobAbility extends TriggeredAbilityImpl {
+class ScuteMobAbility extends TriggeredAbilityImpl<ScuteMobAbility> {
 
 	private FilterLandPermanent filter = new FilterLandPermanent();
 
 	public ScuteMobAbility() {
 		super(Zone.BATTLEFIELD, new AddPlusOneCountersSourceEffect(4));
+	}
+
+	public ScuteMobAbility(final ScuteMobAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public ScuteMobAbility copy() {
+		return new ScuteMobAbility(this);
 	}
 
 	@Override

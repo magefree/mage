@@ -39,12 +39,13 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.Copyable;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CombatGroup implements Serializable {
+public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
 	protected List<UUID> attackers = new ArrayList<UUID>();
 	protected List<UUID> blockers = new ArrayList<UUID>();
@@ -56,6 +57,37 @@ public class CombatGroup implements Serializable {
 	public CombatGroup(UUID defenderId, boolean defenderIsPlaneswalker) {
 		this.defenderId = defenderId;
 		this.defenderIsPlaneswalker = defenderIsPlaneswalker;
+	}
+
+	public CombatGroup(final CombatGroup group) {
+		this.blocked = group.blocked;
+		this.defenderId = group.defenderId;
+		this.defenderIsPlaneswalker = group.defenderIsPlaneswalker;
+		for (UUID attackerId: group.attackers) {
+			this.attackers.add(attackerId);
+		}
+		for (UUID blockerId: group.blockers) {
+			this.blockers.add(blockerId);
+		}
+		for (UUID orderId: group.blockerOrder) {
+			this.blockerOrder.add(orderId);
+		}
+	}
+
+	protected String getValue(Game game) {
+		StringBuilder sb = new StringBuilder(1024);
+		for (UUID attackerId: attackers) {
+			getPermanentValue(attackerId, sb, game);
+		}
+		for (UUID blockerId: blockers) {
+			getPermanentValue(blockerId, sb, game);
+		}
+		return sb.toString();
+	}
+
+	private void getPermanentValue(UUID permId, StringBuilder sb, Game game) {
+		Permanent perm = game.getPermanent(permId);
+		sb.append(perm.getValue());
 	}
 
 	public boolean hasFirstOrDoubleStrike(Game game) {
@@ -219,6 +251,7 @@ public class CombatGroup implements Serializable {
 		}
 		game.getPermanent(blockerId).setBlocking(true);
 		blockers.add(blockerId);
+		blockerOrder.add(blockerId);
 		this.blocked = true;
 		for (UUID attackerId: attackers) {
 			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, blockerId, attackerId, playerId));
@@ -243,9 +276,15 @@ public class CombatGroup implements Serializable {
 		}
 		if (blockers.contains(creatureId)) {
 			blockers.remove(creatureId);
+			//20100423 - 509.2a
 			if (blockerOrder.contains(creatureId))
 				blockerOrder.remove(creatureId);
 		}
+	}
+
+	@Override
+	public CombatGroup copy() {
+		return new CombatGroup(this);
 	}
 
 }

@@ -40,14 +40,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.UUID;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.Mana;
+import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbilities;
 import mage.abilities.TriggeredAbility;
@@ -103,10 +107,10 @@ import mage.util.TreeNode;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ComputerPlayer extends PlayerImpl implements Player {
+public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> implements Player {
 
 	private final static transient Logger logger = Logging.getLogger(ComputerPlayer.class.getName());
-	private boolean abort = false;
+	private boolean abort;
 	private transient Map<Mana, Card> unplayable = new TreeMap<Mana, Card>();
 	private transient List<Card> playableNonInstant = new ArrayList<Card>();
 	private transient List<Card> playableInstant = new ArrayList<Card>();
@@ -121,31 +125,37 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 		super(id);
 	}
 
+	public ComputerPlayer(final ComputerPlayer player) {
+		super(player);
+		this.abort = player.abort;
+	}
+	
 	@Override
 	public boolean chooseMulligan(Game game) {
 		logger.fine("chooseMulligan");
 		if (hand.size() < 6)
 			return false;
-		List<Card> lands = hand.getCards(new FilterLandCard());
+		Set<Card> lands = hand.getCards(new FilterLandCard(), game);
 		if (lands.size() < 2 || lands.size() > hand.size() - 2)
 			return true;
 		return false;
 	}
 
 	@Override
-	public boolean chooseTarget(Outcome outcome, Target target, Game game) {
-		logger.fine("chooseTarget: " + outcome.toString() + ":" + target.toString());
+	public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
+		if (logger.isLoggable(Level.FINE))
+			logger.fine("chooseTarget: " + outcome.toString() + ":" + target.toString());
 		UUID opponentId = game.getOpponents(playerId).iterator().next();
 		if (target instanceof TargetPlayer) {
 			if (outcome.isGood()) {
-				if (target.canTarget(playerId, game)) {
-					target.addTarget(playerId, game);
+				if (target.canTarget(playerId, source, game)) {
+					target.addTarget(playerId, source, game);
 					return true;
 				}
 			}
 			else {
-				if (target.canTarget(playerId, game)) {
-					target.addTarget(opponentId, game);
+				if (target.canTarget(playerId, source, game)) {
+					target.addTarget(opponentId, source, game);
 					return true;
 				}
 			}
@@ -154,15 +164,15 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 			findPlayables(game);
 			if (unplayable.size() > 0) {
 				for (int i = unplayable.size() - 1; i >= 0; i--) {
-					if (target.canTarget(unplayable.values().toArray(new Card[0])[i].getId(), game)) {
-						target.addTarget(unplayable.values().toArray(new Card[0])[i].getId(), game);
+					if (target.canTarget(unplayable.values().toArray(new Card[0])[i].getId(), source, game)) {
+						target.addTarget(unplayable.values().toArray(new Card[0])[i].getId(), source, game);
 						return true;
 					}
 				}
 			}
 			if (hand.size() > 0) {
-				if (target.canTarget(hand.keySet().toArray(new UUID[0])[0], game)) {
-					target.addTarget(hand.keySet().toArray(new UUID[0])[0], game);
+				if (target.canTarget(hand.toArray(new UUID[0])[0], source, game)) {
+					target.addTarget(hand.toArray(new UUID[0])[0], source, game);
 					return true;
 				}
 			}
@@ -173,8 +183,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 			if (!outcome.isGood())
 				Collections.reverse(targets);
 			for (Permanent permanent: targets) {
-				if (target.canTarget(permanent.getId(), game)) {
-					target.addTarget(permanent.getId(), game);
+				if (target.canTarget(permanent.getId(), source, game)) {
+					target.addTarget(permanent.getId(), source, game);
 					return true;
 				}
 			}
@@ -188,8 +198,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 				targets = threats(opponentId, ((TargetPermanent)target).getFilter(), game);
 			}
 			for (Permanent permanent: targets) {
-				if (target.canTarget(permanent.getId(), game)) {
-					target.addTarget(permanent.getId(), game);
+				if (target.canTarget(permanent.getId(), source, game)) {
+					target.addTarget(permanent.getId(), source, game);
 					return true;
 				}
 			}
@@ -198,12 +208,13 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 	}
 
 	@Override
-	public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Game game) {
-		logger.fine("chooseTarget: " + outcome.toString() + ":" + target.toString());
+	public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
+		if (logger.isLoggable(Level.FINE))
+			logger.fine("chooseTarget: " + outcome.toString() + ":" + target.toString());
 		UUID opponentId = game.getOpponents(playerId).iterator().next();
 		if (target instanceof TargetCreatureOrPlayerAmount) {
 			if (game.getPlayer(opponentId).getLife() <= target.getAmountRemaining()) {
-				target.addTarget(opponentId, target.getAmountRemaining(), game);
+				target.addTarget(opponentId, target.getAmountRemaining(), source, game);
 				return true;
 			}
 			List<Permanent> targets;
@@ -214,9 +225,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 				targets = threats(opponentId, new FilterCreaturePermanent(), game);
 			}
 			for (Permanent permanent: targets) {
-				if (target.canTarget(permanent.getId(), game)) {
+				if (target.canTarget(permanent.getId(), source, game)) {
 					if (permanent.getToughness().getValue() <= target.getAmountRemaining()) {
-						target.addTarget(permanent.getId(), permanent.getToughness().getValue(), game);
+						target.addTarget(permanent.getId(), permanent.getToughness().getValue(), source, game);
 						return true;
 					}
 				}
@@ -304,17 +315,17 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
 	protected void playLand(Game game) {
 		logger.fine("playLand");
-		List<Card> lands = hand.getCards(new FilterLandCard());
+		Set<Card> lands = hand.getCards(new FilterLandCard(), game);
 		while (lands.size() > 0 && this.landsPlayed < this.landsPerTurn) {
 			if (lands.size() == 1)
-				this.playLand(lands.get(0), game);
+				this.playLand(lands.iterator().next(), game);
 			else {
 				playALand(lands, game);
 			}
 		}
 	}
 
-	protected void playALand(List<Card> lands, Game game) {
+	protected void playALand(Set<Card> lands, Game game) {
 		logger.fine("playALand");
 		//play a land that will allow us to play an unplayable
 		for (Mana mana: unplayable.keySet()) {
@@ -341,8 +352,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 			}
 		}
 		//play first available land
-		this.playLand(lands.get(0), game);
-		lands.remove(0);
+		this.playLand(lands.iterator().next(), game);
+		lands.remove(lands.iterator().next());
 	}
 
 	protected void findPlayables(Game game) {
@@ -350,7 +361,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 		playableNonInstant.clear();
 		unplayable.clear();
 		playableAbilities.clear();
-		List<Card> nonLands = hand.getCards(new FilterNonlandCard());
+		Set<Card> nonLands = hand.getCards(new FilterNonlandCard(), game);
 		ManaOptions available = getManaAvailable(game);
 		available.addMana(manaPool.getMana());
 
@@ -402,7 +413,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 				}
 			}
 		}
-		logger.fine("findPlayables: " + playableInstant.toString() + "---" + playableNonInstant.toString() + "---" + playableAbilities.toString() );
+		if (logger.isLoggable(Level.FINE))
+			logger.fine("findPlayables: " + playableInstant.toString() + "---" + playableNonInstant.toString() + "---" + playableAbilities.toString() );
 	}
 
 	@Override
@@ -417,7 +429,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 		ManaCost cost;
 		List<Permanent> producers;
 		if (unpaid instanceof ManaCosts) {
-			cost = ((ManaCosts)unpaid).get(0);
+			cost = ((ManaCosts<ManaCost>)unpaid).get(0);
 			producers = getSortedProducers((ManaCosts)unpaid, game);
 		}
 		else {
@@ -477,7 +489,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 	 * @param game
 	 * @return List<Permanent>
 	 */
-	private List<Permanent> getSortedProducers(ManaCosts unpaid, Game game) {
+	private List<Permanent> getSortedProducers(ManaCosts<ManaCost> unpaid, Game game) {
 		List<Permanent> unsorted = this.getAvailableManaProducers(game);
 		Map<Permanent, Integer> scored = new HashMap<Permanent, Integer>();
 		for (Permanent permanent: unsorted) {
@@ -490,6 +502,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 					}
 				}
 			}
+			if (score > 0) // score mana producers that produce other types higher
+				score += permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD).size();
 			scored.put(permanent, score);
 		}
 		return sortByValue(scored);
@@ -546,15 +560,19 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 	}
 
 	@Override
-	public boolean chooseTarget(Cards cards, TargetCard target, Game game)  {
+	public boolean chooseTarget(Cards cards, TargetCard target, Ability source, Game game)  {
 		logger.fine("chooseTarget");
 		//TODO: improve this
 		//return first match
-		for (Card card: cards.getCards(target.getFilter())) {
-			target.addTarget(card.getId(), game);
-			return true;
+		if (!target.doneChosing()) {
+			for (Card card: cards.getCards(target.getFilter(), game)) {
+				target.addTarget(card.getId(), source, game);
+				if (target.doneChosing())
+					return true;
+			}
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	@Override
@@ -665,12 +683,12 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 		return potential;
 	}
 
-	protected List<Permanent> getAvailableBlockers(Game game) {
-		logger.fine("getAvailableBlockers");
-		FilterCreatureForCombat blockFilter = new FilterCreatureForCombat();
-		List<Permanent> blockers = game.getBattlefield().getAllActivePermanents(blockFilter, playerId);
-		return blockers;
-	}
+//	protected List<Permanent> getAvailableBlockers(Game game) {
+//		logger.fine("getAvailableBlockers");
+//		FilterCreatureForCombat blockFilter = new FilterCreatureForCombat();
+//		List<Permanent> blockers = game.getBattlefield().getAllActivePermanents(blockFilter, playerId);
+//		return blockers;
+//	}
 
 	protected List<Permanent> getOpponentBlockers(UUID opponentId, Game game) {
 		logger.fine("getOpponentBlockers");
@@ -784,10 +802,24 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 	}
 
 	protected void logState(Game game) {
+		if (logger.isLoggable(Level.FINE))
+			logList("computer player hand: ", new ArrayList(hand.getCards(game)));
+	}
+
+	protected void logList(String message, List<MageObject> list) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("computer player hand: ");
-		for (Card card: hand.values()) {
-			sb.append(card.getName()).append(",");
+		sb.append(message).append(": ");
+		for (MageObject object: list) {
+			sb.append(object.getName()).append(",");
+		}
+		logger.fine(sb.toString());
+	}
+
+	protected void logAbilityList(String message, List<Ability> list) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(message).append(": ");
+		for (Ability ability: list) {
+			sb.append(ability.getRule()).append(",");
 		}
 		logger.fine(sb.toString());
 	}
@@ -798,7 +830,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 				if (card.getSpellAbility().canActivate(playerId, game)) {
 					for (Effect effect: card.getSpellAbility().getEffects()) {
 						if (effect.getOutcome().equals(Outcome.DestroyPermanent)) {
-							if (card.getSpellAbility().getTargets().get(0).canTarget(creatureId, game)) {
+							if (card.getSpellAbility().getTargets().get(0).canTarget(creatureId, card.getSpellAbility(), game)) {
 								if (this.activateAbility(card.getSpellAbility(), game))
 									return;
 							}
@@ -816,7 +848,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 				if (card.getSpellAbility().canActivate(playerId, game)) {
 					for (Effect effect: card.getSpellAbility().getEffects()) {
 						if (effect instanceof DamageTargetEffect) {
-							if (card.getSpellAbility().getTargets().get(0).canTarget(creatureId, game)) {
+							if (card.getSpellAbility().getTargets().get(0).canTarget(creatureId, card.getSpellAbility(), game)) {
 								if (((DamageTargetEffect)effect).getAmount() > (creature.getPower().getValue() - creature.getDamage())) {
 									if (this.activateAbility(card.getSpellAbility(), game))
 										return;
@@ -835,6 +867,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 		playableNonInstant = new ArrayList<Card>();
 		playableInstant = new ArrayList<Card>();
 		playableAbilities = new ArrayList<ActivatedAbility>();
+	}
+
+	@Override
+	public T copy() {
+		return (T)new ComputerPlayer(this);
 	}
 
 }

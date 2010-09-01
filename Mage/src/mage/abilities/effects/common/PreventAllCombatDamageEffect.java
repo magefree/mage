@@ -30,6 +30,7 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Duration;
 import mage.Constants.PhaseStep;
+import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -38,32 +39,41 @@ import mage.game.events.GameEvent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PreventAllCombatDamageEffect extends PreventionEffectImpl {
+public class PreventAllCombatDamageEffect extends PreventionEffectImpl<PreventAllCombatDamageEffect> {
 
 	public PreventAllCombatDamageEffect(Duration duration) {
 		super(duration);
 	}
 
+	public PreventAllCombatDamageEffect(final PreventAllCombatDamageEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
+	public PreventAllCombatDamageEffect copy() {
+		return new PreventAllCombatDamageEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
 		return true;
 	}
 
 	@Override
-	public boolean replaceEvent(GameEvent event, Game game) {
+	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
 		event.setAmount(0);
 		return false;
 	}
 
 	@Override
-	public boolean applies(GameEvent event, Game game) {
+	public boolean applies(GameEvent event, Ability source, Game game) {
 		if (game.getTurn().getStepType() == PhaseStep.COMBAT_DAMAGE)
-			return super.applies(event, game);
+			return super.applies(event, source, game);
 		return false;
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Prevent all combat damage " + duration.toString();
 	}
 }

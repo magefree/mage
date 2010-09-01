@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common;
 
+import mage.abilities.Ability;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -44,16 +45,26 @@ public class EntersBattlefieldTappedUnlessControlsEffect extends EntersBattlefie
 		this.filter = filter;
 	}
 
+	public EntersBattlefieldTappedUnlessControlsEffect(final EntersBattlefieldTappedUnlessControlsEffect effect) {
+		super(effect);
+		this.filter = effect.filter.copy();
+	}
+
 	@Override
-	public boolean replaceEvent(GameEvent event, Game game) {
-		if (game.getBattlefield().countAll(filter, this.source.getControllerId()) == 0)
-			return apply(game);
+	public EntersBattlefieldTappedUnlessControlsEffect copy() {
+		return new EntersBattlefieldTappedUnlessControlsEffect(this);
+	}
+
+	@Override
+	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+		if (game.getBattlefield().countAll(filter, source.getControllerId()) == 0)
+			return apply(game, source);
 		return false;
 	}
 
 	@Override
-	public String getText() {
-		return super.getText() + " unless you control a " + filter.getMessage();
+	public String getText(Ability source) {
+		return super.getText(source) + " unless you control a " + filter.getMessage();
 	}
 
 }

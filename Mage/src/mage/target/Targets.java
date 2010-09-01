@@ -41,23 +41,12 @@ import mage.game.Game;
  */
 public class Targets extends ArrayList<Target> {
 
-	protected Ability source;
+	public Targets() {}
 
-	public Targets(Ability ability) {
-		this.source = ability;
-	}
-	
-	public void setSource(Ability ability) {
-		this.source = ability;
-		for (Target target: this) {
-			target.setAbility(ability);
+	public Targets(final Targets targets) {
+		for (Target target: targets) {
+			this.add(target.copy());
 		}
-	}
-
-	@Override
-	public boolean add(Target target) {
-		target.setAbility(source);
-		return super.add(target);
 	}
 
 	public List<Target> getUnchosen() {
@@ -83,20 +72,20 @@ public class Targets extends ArrayList<Target> {
 		return true;
 	}
 
-	public boolean choose(Outcome outcome, Game game) {
+	public boolean choose(Outcome outcome, UUID playerId, Ability source, Game game) {
 		if (this.size() > 0) {
 			while (!isChosen()) {
 				Target target = this.getUnchosen().get(0);
-				if (!target.choose(outcome, game))
+				if (!target.choose(outcome, playerId, source, game))
 					return false;
 			}
 		}
 		return true;
 	}
 
-	public boolean stillLegal(Game game) {
+	public boolean stillLegal(Ability source, Game game) {
 		for (Target target: this) {
-			if (!target.isLegal(game)) {
+			if (!target.isLegal(source, game)) {
 				return false;
 			}
 		}
@@ -117,4 +106,7 @@ public class Targets extends ArrayList<Target> {
 		return null;
 	}
 
+	public Targets copy() {
+		return new Targets(this);
+	}
 }

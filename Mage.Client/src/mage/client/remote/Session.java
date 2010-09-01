@@ -50,6 +50,7 @@ import mage.client.util.Config;
 import mage.game.GameException;
 import mage.interfaces.MageException;
 import mage.interfaces.Server;
+import mage.interfaces.ServerState;
 import mage.interfaces.callback.CallbackClientDaemon;
 import mage.util.Logging;
 import mage.view.GameTypeView;
@@ -68,9 +69,10 @@ public class Session {
 	private Client client;
 	private String userName;
 	private MageFrame frame;
-	private String[] playerTypes;
-	private List<GameTypeView> gameTypes;
-	private String[] deckTypes;
+	private ServerState serverState;
+//	private String[] playerTypes;
+//	private List<GameTypeView> gameTypes;
+//	private String[] deckTypes;
 	private Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
 	private GamePanel game;
 	private CallbackClientDaemon callbackDaemon;
@@ -91,9 +93,7 @@ public class Session {
 			this.client = new Client(this, frame, userName);
 			sessionId = server.registerClient(userName, client.getId());
 			callbackDaemon = new CallbackClientDaemon(sessionId, client, server);
-			playerTypes = server.getPlayerTypes();
-			gameTypes = server.getGameTypes();
-			deckTypes = server.getDeckTypes();
+			serverState = server.getServerState();
 			logger.info("Connected to RMI server at " + serverName + ":" + port);
 			frame.setStatusText("Connected to " + serverName + ":" + port + " ");
 			frame.enableButtons();
@@ -127,15 +127,19 @@ public class Session {
 	}
 
 	public String[] getPlayerTypes() {
-		return playerTypes;
+		return serverState.getPlayerTypes();
 	}
 
 	public List<GameTypeView> getGameTypes() {
-		return gameTypes;
+		return serverState.getGameTypes();
 	}
 
 	public String[] getDeckTypes() {
-		return deckTypes;
+		return serverState.getDeckTypes();
+	}
+
+	public boolean isTestMode() {
+		return serverState.isTestMode();
 	}
 
 	public Map<UUID, ChatPanel> getChats() {
@@ -229,9 +233,9 @@ public class Session {
 		return false;
 	}
 
-	public boolean joinTable(UUID roomId, UUID tableId, int seat, String playerName, DeckCardLists deckList) {
+	public boolean joinTable(UUID roomId, UUID tableId, String playerName, DeckCardLists deckList) {
 		try {
-			return server.joinTable(sessionId, roomId, tableId, seat, playerName, deckList);
+			return server.joinTable(sessionId, roomId, tableId, playerName, deckList);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -506,9 +510,9 @@ public class Session {
 		return false;
 	}
 
-	public boolean cheat(UUID gameId, DeckCardLists deckList) {
+	public boolean cheat(UUID gameId, UUID playerId, DeckCardLists deckList) {
 		try {
-			server.cheat(gameId, sessionId, deckList);
+			server.cheat(gameId, sessionId, playerId, deckList);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);

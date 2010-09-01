@@ -31,9 +31,8 @@ package mage.abilities.costs;
 import java.util.List;
 
 public interface Costs<T extends Cost> extends List<T>, Cost {
-	@Override
-	public boolean add(T cost);
 
 	public List<T> getUnpaid();
-
+	@Override
+	public Costs<T> copy();
 }

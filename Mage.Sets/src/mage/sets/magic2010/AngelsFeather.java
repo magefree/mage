@@ -44,21 +44,43 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AngelsFeather extends CardImpl {
+public class AngelsFeather extends CardImpl<AngelsFeather> {
 
 	public AngelsFeather(UUID ownerId) {
 		super(ownerId, "Angel's Feather", new CardType[]{CardType.ARTIFACT}, "{2}");
 		this.expansionSetId = Magic2010.getInstance().getId();
-		this.art = "75223_typ_reg_sty_010.jpg";
 		this.addAbility(new AngelsFeatherAbility());
+	}
+
+	public AngelsFeather(final AngelsFeather card) {
+		super(card);
+	}
+
+	@Override
+	public AngelsFeather copy() {
+		return new AngelsFeather(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "75223_typ_reg_sty_010.jpg";
 	}
 
 }
 
-class AngelsFeatherAbility extends TriggeredAbilityImpl {
+class AngelsFeatherAbility extends TriggeredAbilityImpl<AngelsFeatherAbility> {
 
 	public AngelsFeatherAbility() {
 		super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
+	}
+
+	public AngelsFeatherAbility(final AngelsFeatherAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public AngelsFeatherAbility copy() {
+		return new AngelsFeatherAbility(this);
 	}
 
 	@Override

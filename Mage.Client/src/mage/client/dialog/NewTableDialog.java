@@ -286,18 +286,16 @@ public class NewTableDialog extends MageDialog {
 				(MultiplayerAttackOption)this.cbAttackOption.getSelectedItem(), 
 				(RangeOfInfluence)this.cbRange.getSelectedItem());
 		try {
-			if (session.joinTable(roomId, table.getTableId(), 0, this.player1Panel.getPlayerName(), DeckCardLists.load(this.player1Panel.getDeckFile()))) {
-				int seatNum = 1;
+			if (session.joinTable(roomId, table.getTableId(), this.player1Panel.getPlayerName(), DeckCardLists.load(this.player1Panel.getDeckFile()))) {
 				for (TablePlayerPanel player: players) {
 					if (!player.getPlayerType().equals("Human")) {
-						if (!player.joinTable(roomId, table.getTableId(), seatNum)) {
+						if (!player.joinTable(roomId, table.getTableId())) {
 							JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
 							session.removeTable(roomId, table.getTableId());
 							table = null;
 							return;
 						}
 					}
-					seatNum++;
 				}
 				this.setVisible(false);
 				return;

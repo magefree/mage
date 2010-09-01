@@ -41,13 +41,21 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FreeForAll extends GameImpl {
+public class FreeForAll extends GameImpl<FreeForAll> {
 
 	private int numPlayers;
 	private List<UUID> mulliganed = new ArrayList<UUID>();
 
 	public FreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range) {
 		super(attackOption, range);
+	}
+
+	public FreeForAll(final FreeForAll game) {
+		super(game);
+		this.numPlayers = game.numPlayers;
+		for (UUID playerId: game.mulliganed) {
+			mulliganed.add(playerId);
+		}
 	}
 
 	@Override
@@ -88,11 +96,16 @@ public class FreeForAll extends GameImpl {
 			numCards += 1;
 			mulliganed.add(playerId);
 		}
-		player.getLibrary().addAll(player.getHand());
+		player.getLibrary().addAll(player.getHand().getCards(this));
 		player.getHand().clear();
 		player.shuffleLibrary(this);
 		player.drawCards(numCards - 1, this);
 		fireInformEvent(player.getName() + " mulligans down to " + Integer.toString(numCards - 1) + " cards");
+	}
+
+	@Override
+	public FreeForAll copy() {
+		return new FreeForAll(this);
 	}
 
 }

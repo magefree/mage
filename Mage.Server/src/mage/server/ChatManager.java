@@ -30,6 +30,7 @@ package mage.server;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import mage.view.ChatMessage.MessageColor;
 
 /**
  *
@@ -65,8 +66,8 @@ public class ChatManager {
 		chatSessions.remove(chatId);
 	}
 
-	public void broadcast(UUID chatId, String userName, String message) {
-		chatSessions.get(chatId).broadcast(userName, message);
+	public void broadcast(UUID chatId, String userName, String message, MessageColor color) {
+		chatSessions.get(chatId).broadcast(userName, message, color);
 	}
 
 	void removeSession(UUID sessionId) {

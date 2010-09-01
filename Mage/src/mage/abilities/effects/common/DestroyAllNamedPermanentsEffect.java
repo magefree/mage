@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,29 +38,38 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DestroyAllNamedPermanentsEffect extends OneShotEffect {
+public class DestroyAllNamedPermanentsEffect extends OneShotEffect<DestroyAllNamedPermanentsEffect> {
 
 	public DestroyAllNamedPermanentsEffect() {
 		super(Outcome.DestroyPermanent);
 	}
 
+	public DestroyAllNamedPermanentsEffect(final DestroyAllNamedPermanentsEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Permanent permanent = game.getPermanent(this.source.getFirstTarget());
+	public DestroyAllNamedPermanentsEffect copy() {
+		return new DestroyAllNamedPermanentsEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		String name = permanent.getName();
 
-		permanent.destroy(this.source.getSourceId(), game, false);
-		for (Permanent perm: game.getBattlefield().getActivePermanents(this.source.getControllerId(), game)) {
+		permanent.destroy(source.getSourceId(), game, false);
+		for (Permanent perm: game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
 			if (perm.getName().equals(name))
-				perm.destroy(this.source.getSourceId(), game, false);
+				perm.destroy(source.getSourceId(), game, false);
 		}
 
 		return true;
 	}
 
 	@Override
-	public String getText() {
-		return "Destroy target " + this.source.getTargets().get(0).getTargetName() + " and all other permanents with the same name as that permanent";
+	public String getText(Ability source) {
+		return "Destroy target " + source.getTargets().get(0).getTargetName() + " and all other permanents with the same name as that permanent";
 	}
 
 }

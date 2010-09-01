@@ -39,6 +39,7 @@ import java.util.logging.Logger;
 import mage.interfaces.callback.ClientCallback;
 import mage.util.Logging;
 import mage.view.ChatMessage;
+import mage.view.ChatMessage.MessageColor;
 
 /**
  *
@@ -59,7 +60,7 @@ public class ChatSession {
 
 	public void join(String userName, UUID sessionId) {
 		clients.put(sessionId, userName);
-		broadcast(userName, " has joined");
+		broadcast(userName, " has joined", MessageColor.BLACK);
 		logger.info(userName + " joined chat " + chatId);
 	}
 
@@ -67,18 +68,18 @@ public class ChatSession {
 		if (clients.containsKey(sessionId)) {
 			String userName = clients.get(sessionId);
 			clients.remove(sessionId);
-			broadcast(userName, " has left");
+			broadcast(userName, " has left", MessageColor.BLACK);
 			logger.info(userName + " has left chat " + chatId);
 		}
 	}
 
-	public void broadcast(String userName, String message) {
+	public void broadcast(String userName, String message, MessageColor color) {
 		Calendar cal = new GregorianCalendar();
 		final String msg = timeFormatter.format(cal.getTime()) + " " + userName + ":" + message;
 		for (UUID sessionId: clients.keySet()) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("chatMessage", new ChatMessage(chatId, msg)));
+				session.fireCallback(new ClientCallback("chatMessage", new ChatMessage(chatId, msg, color)));
 			else
 				kill(sessionId);
 		}

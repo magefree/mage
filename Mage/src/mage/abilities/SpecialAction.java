@@ -28,16 +28,22 @@
 
 package mage.abilities;
 
+import mage.Constants.AbilityType;
 import mage.Constants.Zone;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class SpecialAction extends ActivatedAbilityImpl {
+public abstract class SpecialAction<T extends SpecialAction<T>> extends ActivatedAbilityImpl<T> {
 
 	public SpecialAction() {
-		super(Zone.ALL);
+		super(AbilityType.SPECIAL_ACTION, Zone.ALL);
+		this.usesStack = false;
+	}
+
+	public SpecialAction(final SpecialAction action) {
+		super(action);
 	}
 
 }

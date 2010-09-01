@@ -38,7 +38,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class KickerAbility extends StaticAbility {
+public class KickerAbility extends StaticAbility<KickerAbility> {
 
 	protected boolean kicked = false;
 	protected boolean replaces = false;
@@ -48,11 +48,21 @@ public class KickerAbility extends StaticAbility {
 		this.replaces = replaces;
 	}
 
+	public KickerAbility(final KickerAbility ability) {
+		super(ability);
+		this.kicked = ability.kicked;
+		this.replaces = ability.replaces;
+	}
+
+	@Override
+	public KickerAbility copy() {
+		return new KickerAbility(this);
+	}
+
 	@Override
 	public boolean activate(Game game, boolean noMana) {
 		Player player = game.getPlayer(this.getControllerId());
-		if (player.chooseUse(this.effects.get(0).getOutcome(), "Use kicker " + this.effects.get(0).getText() + "?", game)) {
-			game.saveState();
+		if (player.chooseUse(this.effects.get(0).getOutcome(), "Use kicker " + this.effects.get(0).getText(this) + "?", game)) {
 			game.bookmarkState();
 			if (super.activate(game, noMana)) {
 				game.removeLastBookmark();
@@ -86,7 +96,7 @@ public class KickerAbility extends StaticAbility {
 		}
 		if (costs.size() > 0)
 			sb.append(costs.getText());
-		sb.append(":").append(effects.getText());
+		sb.append(":").append(effects.getText(this));
 		if (replaces)
 			sb.append(" instead");
 		return sb.toString();

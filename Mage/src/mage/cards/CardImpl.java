@@ -28,6 +28,7 @@
 
 package mage.cards;
 
+import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
@@ -39,16 +40,14 @@ import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.util.Copier;
 import mage.watchers.Watchers;
 
-public abstract class CardImpl extends MageObjectImpl implements Card {
+public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> implements Card {
 
 	protected UUID ownerId;
-	protected String art = "";
 	protected Watchers watchers = new Watchers();
 	protected UUID expansionSetId;
-	
+
 	public CardImpl(UUID ownerId, String name, CardType[] cardTypes, String costs) {
 		this.ownerId = ownerId;
 		this.name = name;
@@ -56,9 +55,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 			this.cardType.add(newCardType);
 		this.manaCost.load(costs);
 		if (cardType.contains(CardType.LAND))
-			addAbility(new PlayLandAbility());
+			addAbility(new PlayLandAbility(name));
 		else
-			addAbility(new SpellAbility(manaCost));
+			addAbility(new SpellAbility(manaCost, name));
 	}
 
 	protected CardImpl(UUID ownerId, String name) {
@@ -66,15 +65,42 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 		this.name = name;
 	}
 
+	protected CardImpl(UUID id, UUID ownerId, String name) {
+		super(id);
+		this.ownerId = ownerId;
+		this.name = name;
+	}
+
+	public CardImpl(final CardImpl card) {
+		super(card);
+		ownerId = card.ownerId;
+		expansionSetId = card.expansionSetId;
+		watchers = card.watchers.copy();
+	}
+
+	public static Card createCard(String name) {
+		try {
+			Class<?> theClass  = Class.forName(name);
+			Constructor<?> con = theClass.getConstructor(new Class[]{UUID.class});
+			Card card = (Card) con.newInstance(new Object[] {null});
+			card.setZone(Zone.OUTSIDE);
+			return card;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	@Override
 	public UUID getOwnerId() {
 		return ownerId;
 	}
 
-	@Override
-	public String getArt() {
-		return art;
-	}
+//	@Override
+//	public String getArt() {
+//		return art;
+//	}
 
 	@Override
 	public List<String> getRules() {
@@ -111,10 +137,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 		abilities.setControllerId(ownerId);
 	}
 
-	@Override
-	public Card copy() {
-		return new Copier<Card>().copy(this);
-	}
+//	@Override
+//	public Card copy() {
+//		return new Copier<Card>().copy(this);
+//	}
 
 	@Override
 	public Watchers getWatchers() {

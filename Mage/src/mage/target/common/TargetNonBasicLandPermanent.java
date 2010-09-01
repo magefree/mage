@@ -32,7 +32,7 @@ package mage.target.common;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetNonBasicLandPermanent extends TargetLandPermanent {
+public class TargetNonBasicLandPermanent extends TargetLandPermanent<TargetNonBasicLandPermanent> {
 
 	public TargetNonBasicLandPermanent() {
 		filter.setNotName(true);
@@ -44,4 +44,12 @@ public class TargetNonBasicLandPermanent extends TargetLandPermanent {
 		this.targetName = "nonbasic land";
 	}
 
+	public TargetNonBasicLandPermanent(final TargetNonBasicLandPermanent target) {
+		super(target);
+	}
+
+	@Override
+	public TargetNonBasicLandPermanent copy() {
+		return new TargetNonBasicLandPermanent(this);
+	}
 }

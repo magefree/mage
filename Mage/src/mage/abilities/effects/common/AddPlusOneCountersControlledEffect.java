@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AddPlusOneCountersControlledEffect extends OneShotEffect {
+public class AddPlusOneCountersControlledEffect extends OneShotEffect<AddPlusOneCountersControlledEffect> {
 
 	private int amount;
 	private FilterPermanent filter;
@@ -61,15 +61,26 @@ public class AddPlusOneCountersControlledEffect extends OneShotEffect {
 		this.filter = filter;
 	}
 
+	public AddPlusOneCountersControlledEffect(final AddPlusOneCountersControlledEffect effect) {
+		super(effect);
+		this.amount = effect.amount;
+		this.filter = effect.filter.copy();
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, this.source.getControllerId())) {
+	public AddPlusOneCountersControlledEffect copy() {
+		return new AddPlusOneCountersControlledEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
 			perm.getCounters().addCounter(new PlusOneCounter(amount));		}
 		return true;
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Put ").append(amount).append(" +1/+1 counter");
 		if (amount > 1)

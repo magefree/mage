@@ -31,6 +31,7 @@ package mage.abilities.keyword;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -44,11 +45,15 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CascadeAbility extends TriggeredAbilityImpl {
+public class CascadeAbility extends TriggeredAbilityImpl<CascadeAbility> {
 	//20091005 - 702.82
 
 	public CascadeAbility() {
 		super(Zone.STACK, new CascadeEffect());
+	}
+
+	public CascadeAbility(CascadeAbility ability) {
+		super(ability);
 	}
 
 	@Override
@@ -64,20 +69,29 @@ public class CascadeAbility extends TriggeredAbilityImpl {
 	public String getRule() {
 		return "Cascade";
 	}
+
+	@Override
+	public CascadeAbility copy() {
+		return new CascadeAbility(this);
+	}
 }
 
-class CascadeEffect extends OneShotEffect {
+class CascadeEffect extends OneShotEffect<CascadeEffect> {
 
 	public CascadeEffect() {
 		super(Outcome.PutCardInPlay);
 	}
 
+	public CascadeEffect(CascadeEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
+	public boolean apply(Game game, Ability source) {
 		Card card;
-		Player player = game.getPlayer(this.getSource().getControllerId());
-		ExileZone exile = game.getExile().createZone(this.source.getSourceId(), player.getName() + " " + this.getSource().getName() + " Cascade");
-		int sourceCost = game.getObject(this.source.getSourceId()).getManaCost().convertedManaCost();
+		Player player = game.getPlayer(source.getControllerId());
+		ExileZone exile = game.getExile().createZone(source.getSourceId(), player.getName() + " Cascade");
+		int sourceCost = game.getObject(source.getSourceId()).getManaCost().convertedManaCost();
 		do {
 			card = player.getLibrary().removeFromTop(game);
 			if (card == null)
@@ -93,12 +107,17 @@ class CascadeEffect extends OneShotEffect {
 		}
 
 		while (exile.size() > 0) {
-			card = exile.getRandom();
+			card = exile.getRandom(game);
 			exile.remove(card.getId());
 			player.getLibrary().putOnBottom(card, game);
 		}
 
 		return true;
+	}
+
+	@Override
+	public CascadeEffect copy() {
+		return new CascadeEffect(this);
 	}
 
 }

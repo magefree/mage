@@ -50,14 +50,13 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AlluringSiren extends CardImpl {
+public class AlluringSiren extends CardImpl<AlluringSiren> {
 
 	public AlluringSiren(UUID ownerId) {
 		super(ownerId, "Alluring Siren", new CardType[]{CardType.CREATURE}, "{1}{U}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setBlue(true);
 		this.subtype.add("Siren");
-		this.art = "121568_typ_reg_sty_010.jpg";
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
 		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AlluringSirenEffect(), new TapSourceCost());
@@ -67,36 +66,59 @@ public class AlluringSiren extends CardImpl {
 		this.addAbility(ability);
 	}
 
+	public AlluringSiren(final AlluringSiren card) {
+		super(card);
+	}
+
+	@Override
+	public AlluringSiren copy() {
+		return new AlluringSiren(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121568_typ_reg_sty_010.jpg";
+	}
+
 }
 
-class AlluringSirenEffect extends RequirementAttackEffect {
+class AlluringSirenEffect extends RequirementAttackEffect<AlluringSirenEffect> {
 
 	public AlluringSirenEffect() {
 		super(Duration.OneUse);
 	}
 
+	public AlluringSirenEffect(final AlluringSirenEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean applies(GameEvent event, Game game) {
-		if (event.getType().equals(EventType.DECLARE_ATTACKERS_STEP_PRE) && event.getPlayerId().equals(this.source.getFirstTarget()))
+	public AlluringSirenEffect copy() {
+		return new AlluringSirenEffect(this);
+	}
+
+	@Override
+	public boolean applies(GameEvent event, Ability source, Game game) {
+		if (event.getType().equals(EventType.DECLARE_ATTACKERS_STEP_PRE) && event.getPlayerId().equals(source.getFirstTarget()))
 			return true;
-		if (event.getType().equals(EventType.END_PHASE_POST) && event.getPlayerId().equals(this.source.getFirstTarget()))
+		if (event.getType().equals(EventType.END_PHASE_POST) && event.getPlayerId().equals(source.getFirstTarget()))
 			used = true;
 		return false;
 	}
 
 	@Override
-	public boolean apply(Game game) {
-		Permanent creature = game.getPermanent(this.source.getFirstTarget());
+	public boolean apply(Game game, Ability source) {
+		Permanent creature = game.getPermanent(source.getFirstTarget());
 		if (creature != null) {
 			if (creature.canAttack(game)) {
-				game.getCombat().declareAttacker(creature.getId(), this.source.getControllerId(), game);
+				game.getCombat().declareAttacker(creature.getId(), source.getControllerId(), game);
 			}
 		}
 		return false;
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "Target creature an opponent controls attacks you this turn if able.";
 	}
 }

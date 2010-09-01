@@ -38,11 +38,21 @@ import mage.abilities.effects.common.AddCountersSourceEffect;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LevelUpAbility extends ActivatedAbilityImpl {
+public class LevelUpAbility extends ActivatedAbilityImpl<LevelUpAbility> {
 
 	public LevelUpAbility(ManaCosts costs) {
 		super(Zone.BATTLEFIELD, new AddCountersSourceEffect("Level", 1), costs);
 		this.timing = TimingRule.SORCERY;
 	}
+
+	public LevelUpAbility(final LevelUpAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public LevelUpAbility copy() {
+		return new LevelUpAbility(this);
+	}
+
 
 }

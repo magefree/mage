@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
+import mage.MageObjectImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.BoostEquippedEffect;
@@ -46,17 +47,30 @@ import mage.sets.AlaraReborn;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BehemothSledge extends CardImpl {
+public class BehemothSledge extends CardImpl<BehemothSledge> {
 
 	public BehemothSledge(UUID ownerId) {
 		super(ownerId, "Behemoth Sledge", new CardType[]{CardType.ARTIFACT}, "{1}{G}{W}");
 		this.expansionSetId = AlaraReborn.getInstance().getId();
-		this.art = "120963_typ_reg_sty_010.jpg";
 		this.subtype.add("Equipment");
 		this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance())));
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance())));
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
+	}
+
+	protected BehemothSledge(BehemothSledge me) {
+		super(me);
+	}
+
+	@Override
+	public BehemothSledge copy() {
+		return new BehemothSledge(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "120963_typ_reg_sty_010.jpg";
 	}
 
 }

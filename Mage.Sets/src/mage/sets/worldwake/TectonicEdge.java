@@ -51,12 +51,11 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TectonicEdge extends CardImpl {
+public class TectonicEdge extends CardImpl<TectonicEdge> {
 
 	public TectonicEdge(UUID ownerId) {
 		super(ownerId, "Tectonic Edge", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Worldwake.getInstance().getId();
-		this.art = "126492_typ_reg_sty_010.jpg";
 		this.addAbility(new ColorlessManaAbility());
 		Costs costs = new CostsImpl();
 		costs.add(new TapSourceCost());
@@ -68,9 +67,23 @@ public class TectonicEdge extends CardImpl {
 		this.addAbility(ability);
 	}
 
+	public TectonicEdge(final TectonicEdge card) {
+		super(card);
+	}
+
+	@Override
+	public TectonicEdge copy() {
+		return new TectonicEdge(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "126492_typ_reg_sty_010.jpg";
+	}
+
 }
 
-class TectonicEdgeCost extends CostImpl {
+class TectonicEdgeCost extends CostImpl<TectonicEdgeCost> {
 
 	FilterLandPermanent filter = new FilterLandPermanent();
 
@@ -78,9 +91,18 @@ class TectonicEdgeCost extends CostImpl {
 		this.text = "Activate this ability only if an opponent controls four or more lands";
 	}
 
+	public TectonicEdgeCost(final TectonicEdgeCost cost) {
+		super(cost);
+	}
+
 	@Override
-	public boolean canPay(UUID playerId, Game game) {
-		for (UUID opponentId: game.getOpponents(playerId)) {
+	public TectonicEdgeCost copy() {
+		return new TectonicEdgeCost(this);
+	}
+
+	@Override
+	public boolean canPay(Ability source, Game game) {
+		for (UUID opponentId: game.getOpponents(source.getControllerId())) {
 			if (game.getBattlefield().countAll(filter, opponentId) > 3) {
 				return true;
 			}
@@ -89,7 +111,7 @@ class TectonicEdgeCost extends CostImpl {
 	}
 
 	@Override
-	public boolean pay(Game game, boolean noMana) {
+	public boolean pay(Game game, Ability source, boolean noMana) {
 		this.paid = true;
 		return paid;
 	}

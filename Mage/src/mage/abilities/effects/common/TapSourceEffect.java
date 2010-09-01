@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,15 +38,24 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TapSourceEffect extends OneShotEffect {
+public class TapSourceEffect extends OneShotEffect<TapSourceEffect> {
 
 	public TapSourceEffect() {
 		super(Outcome.Tap);
 	}
 
+	public TapSourceEffect(final TapSourceEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Permanent permanent = game.getPermanent(this.source.getSourceId());
+	public TapSourceEffect copy() {
+		return new TapSourceEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
 			permanent.setTapped(true);
 			return true;
@@ -54,7 +64,7 @@ public class TapSourceEffect extends OneShotEffect {
 	}
 
 	@Override
-	public String getText() {
+	public String getText(Ability source) {
 		return "tap {this}";
 	}
 

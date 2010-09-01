@@ -39,6 +39,18 @@ import java.util.List;
  */
 public class Counters extends HashMap<String, Counter> implements Serializable {
 
+	public Counters() {}
+	
+	public Counters(final Counters counters) {
+		for (String key: counters.keySet()) {
+			this.put(key, counters.get(key).copy());
+		}
+	}
+
+	public Counters copy() {
+		return new Counters(this);
+	}
+
 	public void addCounter(String name) {
 		if (!this.containsKey(name))
 			this.put(name, new Counter(name));

@@ -28,10 +28,13 @@
 
 package mage.game.permanent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.keyword.LevelAbility;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
@@ -42,49 +45,58 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PermanentCard extends PermanentImpl {
+public class PermanentCard extends PermanentImpl<PermanentCard> {
 
-	protected Card card;
+	protected String art;
+	protected List<String> levelerRules;
 
 	public PermanentCard(Card card, UUID controllerId) {
-		super(card.getOwnerId(), controllerId, card.getName());
-		this.card = card;
-		this.objectId = card.getId();
-		reset();
+		super(card.getId(), card.getOwnerId(), controllerId, card.getName());
+		copyFromCard(card);
 		if (card.getCardType().contains(CardType.PLANESWALKER)) {
 			this.loyalty = new MageInt(card.getLoyalty().getValue());
-		}		
+		}
+		if (card instanceof LevelerCard) {
+			levelerRules = ((LevelerCard)card).getRules();
+		}
+	}
+
+	public PermanentCard(final PermanentCard permanent) {
+		super(permanent);
+		this.art = permanent.art;
 	}
 
 	@Override
-	public void reset() {
+	public void reset(Game game) {
 		// when the permanent is reset copy all original values from the card
 		// must copy card each reset so that the original values don't get modified
-		Card copy = card.copy();
-		this.name = copy.getName();
-		this.abilities = copy.getAbilities();
+		Card copy = game.getCard(objectId).copy();
+		copyFromCard(copy);
+		super.reset(game);
+	}
+
+	protected void copyFromCard(Card card) {
+		this.name = card.getName();
+		this.abilities = card.getAbilities();
 		this.abilities.setControllerId(this.controllerId);
-		this.cardType = copy.getCardType();
-		this.color = copy.getColor();
-		this.manaCost = copy.getManaCost();
-		this.power = copy.getPower();
-		this.toughness = copy.getToughness();
+		this.cardType = card.getCardType();
+		this.color = card.getColor();
+		this.manaCost = card.getManaCost();
+		this.power = card.getPower();
+		this.toughness = card.getToughness();
 		if (card instanceof LevelerCard) {
 			LevelAbility level = ((LevelerCard)card).getLevel(this.getCounters().getCount("Level"));
 			if (level != null) {
 				this.power.setValue(level.getPower());
 				this.toughness.setValue(level.getToughness());
-				this.abilities.addAll(level.getAbilities());
+				for (Ability ability: level.getAbilities()) {
+					this.addAbility(ability);
+				}
 			}
 		}
-		this.subtype = copy.getSubtype();
-		this.supertype = copy.getSupertype();
-		this.art = copy.getArt();
-		super.reset();
-	}
-
-	public Card getCard() {
-		return card;
+		this.subtype = card.getSubtype();
+		this.supertype = card.getSupertype();
+		this.art = card.getArt();
 	}
 
 	@Override
@@ -93,13 +105,13 @@ public class PermanentCard extends PermanentImpl {
 			if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
 				switch (zone) {
 					case GRAVEYARD:
-						game.getPlayer(ownerId).putInGraveyard(card, game, !sacrificed);
+						game.getPlayer(ownerId).putInGraveyard(game.getCard(objectId), game, !sacrificed);
 						break;
 					case HAND:
-						game.getPlayer(ownerId).getHand().add(card);
+						game.getPlayer(ownerId).getHand().add(game.getCard(objectId));
 						break;
 					case EXILED:
-						game.getExile().getPermanentExile().add(card);
+						game.getExile().getPermanentExile().add(game.getCard(objectId));
 						break;
 				}
 				game.fireEvent(new ZoneChangeEvent(this.getId(), this.getControllerId(), Zone.BATTLEFIELD, zone));
@@ -114,10 +126,10 @@ public class PermanentCard extends PermanentImpl {
 		if (!game.replaceEvent(new ZoneChangeEvent(this.getId(), this.getControllerId(), Zone.BATTLEFIELD, Zone.EXILED))) {
 			if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
 				if (exileId == null) {
-					game.getExile().getPermanentExile().add(card);
+					game.getExile().getPermanentExile().add(game.getCard(objectId));
 				}
 				else {
-					game.getExile().createZone(exileId, name).add(card);
+					game.getExile().createZone(exileId, name).add(game.getCard(objectId));
 				}
 				game.fireEvent(new ZoneChangeEvent(this.getId(), this.getControllerId(), Zone.BATTLEFIELD, Zone.EXILED));
 				return true;
@@ -125,4 +137,25 @@ public class PermanentCard extends PermanentImpl {
 		}
 		return false;
 	}
+
+	@Override
+	public String getArt() {
+		return art;
+	}
+
+	@Override
+	public PermanentCard copy() {
+		return new PermanentCard(this);
+	}
+
+	@Override
+	public List<String> getRules() {
+		if (levelerRules == null)
+			return super.getRules();
+		List<String> rules = new ArrayList<String>();
+		rules.addAll(super.getRules());
+		rules.addAll(levelerRules);
+		return rules;
+	}
+
 }

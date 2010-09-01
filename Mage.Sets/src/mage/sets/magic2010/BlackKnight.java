@@ -41,7 +41,7 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BlackKnight extends CardImpl {
+public class BlackKnight extends CardImpl<BlackKnight> {
 
 	private static FilterCard filter = new FilterCard("White");
 
@@ -56,12 +56,25 @@ public class BlackKnight extends CardImpl {
 		this.subtype.add("Human");
 		this.subtype.add("Knight");
 		this.color.setBlack(true);
-		this.art = "121622_typ_reg_sty_010.jpg";
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
 
 		this.addAbility(FirstStrikeAbility.getInstance());
 		this.addAbility(new ProtectionAbility(filter));
+	}
+
+	public BlackKnight(final BlackKnight card) {
+		super(card);
+	}
+
+	@Override
+	public BlackKnight copy() {
+		return new BlackKnight(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121622_typ_reg_sty_010.jpg";
 	}
 
 }

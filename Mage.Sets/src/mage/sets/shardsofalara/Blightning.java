@@ -40,16 +40,29 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Blightning extends CardImpl {
+public class Blightning extends CardImpl<Blightning> {
 
 	public Blightning(UUID ownerId) {
 		super(ownerId, "Blightning", new CardType[]{CardType.SORCERY}, "{1}{B}{R}");
 		this.expansionSetId = ShardsOfAlara.getInstance().getId();
 		this.color.setBlack(true);
 		this.color.setRed(true);
-		this.art = "115010_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetPlayer());
 		this.getSpellAbility().addEffect(new DamageTargetEffect(3));
 		this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
+	}
+
+	public Blightning(final Blightning card) {
+		super(card);
+	}
+
+	@Override
+	public Blightning copy() {
+		return new Blightning(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "115010_typ_reg_sty_010.jpg";
 	}
 }

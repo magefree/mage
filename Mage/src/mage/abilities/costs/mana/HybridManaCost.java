@@ -32,7 +32,7 @@ import mage.Constants.ColoredManaSymbol;
 import mage.Mana;
 import mage.players.ManaPool;
 
-public class HybridManaCost extends ManaCostImpl implements ManaCost {
+public class HybridManaCost extends ManaCostImpl<HybridManaCost> {
 	private ColoredManaSymbol mana1;
 	private ColoredManaSymbol mana2;
 
@@ -41,6 +41,12 @@ public class HybridManaCost extends ManaCostImpl implements ManaCost {
 		this.mana2 = mana2;
 		addColoredOption(mana1);
 		addColoredOption(mana2);
+	}
+
+	public HybridManaCost(HybridManaCost cost) {
+		super(cost);
+		this.mana1 = cost.mana1;
+		this.mana2 = cost.mana2;
 	}
 
 	@Override
@@ -112,5 +118,10 @@ public class HybridManaCost extends ManaCostImpl implements ManaCost {
 				return testMana.getGreen() > 0;
 		}
 		return false;
+	}
+
+	@Override
+	public HybridManaCost copy() {
+		return new HybridManaCost(this);
 	}
 }

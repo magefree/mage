@@ -29,6 +29,7 @@
 package mage.abilities.mana;
 
 import java.util.UUID;
+import mage.Constants.AbilityType;
 import mage.Constants.Zone;
 import mage.Mana;
 import mage.abilities.ActivatedAbilityImpl;
@@ -40,12 +41,23 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class ManaAbility extends ActivatedAbilityImpl {
+public abstract class ManaAbility<T extends ManaAbility<T>> extends ActivatedAbilityImpl<T> {
 
 	protected Mana netMana = new Mana();
 
 	public ManaAbility(Zone zone, ManaEffect effect, Cost cost) {
-		super(zone, effect, cost);
+		super(AbilityType.MANA, zone);
+		this.usesStack = false;
+		if (effect != null) {
+			this.addEffect(effect);
+		}
+		if (cost != null)
+			this.addCost(cost);
+	}
+
+	public ManaAbility(ManaAbility ability) {
+		super(ability);
+		this.netMana = ability.netMana.copy();
 	}
 
 	@Override
@@ -53,7 +65,7 @@ public abstract class ManaAbility extends ActivatedAbilityImpl {
 		if (!controlsAbility(playerId, game))
 			return false;
 		//20091005 - 605.3a
-		return costs.canPay(playerId, game);
+		return costs.canPay(this, game);
 	}
 
 	public Mana getNetMana(Game game) {

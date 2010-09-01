@@ -42,17 +42,29 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Deprive extends CardImpl {
+public class Deprive extends CardImpl<Deprive> {
 
 	public Deprive(UUID ownerId) {
 		super(ownerId, "Deprive", new CardType[]{CardType.INSTANT}, "{U}{U}");
 		this.expansionSetId = RiseOfTheEldrazi.getInstance().getId();
 		this.color.setBlue(true);
-		this.art = "127324_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(1, 1, new FilterLandPermanent())));
 		this.getSpellAbility().addTarget(new TargetSpell());
 		this.getSpellAbility().addEffect(new CounterTargetEffect());
 	}
 
+	public Deprive(final Deprive card) {
+		super(card);
+	}
+
+	@Override
+	public Deprive copy() {
+		return new Deprive(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "127324_typ_reg_sty_010.jpg";
+	}
 
 }

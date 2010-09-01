@@ -35,7 +35,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BeginningPhase extends Phase {
+public class BeginningPhase extends Phase<BeginningPhase> {
 
 	public BeginningPhase() {
 		this.type = TurnPhase.BEGINNING;
@@ -45,6 +45,15 @@ public class BeginningPhase extends Phase {
 		this.steps.add(new UntapStep());
 		this.steps.add(new UpkeepStep());
 		this.steps.add(new DrawStep());
+	}
+
+	public BeginningPhase(final BeginningPhase phase) {
+		super(phase);
+	}
+
+	@Override
+	public BeginningPhase copy() {
+		return new BeginningPhase(this);
 	}
 
 }

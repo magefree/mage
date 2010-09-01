@@ -28,6 +28,7 @@
 
 package mage.abilities.effects;
 
+import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -35,10 +36,10 @@ import mage.game.events.GameEvent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface ReplacementEffect extends ContinuousEffect {
+public interface ReplacementEffect<T extends ReplacementEffect<T>> extends ContinuousEffect<T> {
 
-	public boolean replaceEvent(GameEvent event, Game game);
-	public boolean applies(GameEvent event, Game game);
+	public boolean replaceEvent(GameEvent event, Ability source, Game game);
+	public boolean applies(GameEvent event, Ability source, Game game);
 	boolean isUsed();
 
 }

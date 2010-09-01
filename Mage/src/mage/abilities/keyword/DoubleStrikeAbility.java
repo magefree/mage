@@ -36,7 +36,7 @@ import mage.abilities.StaticAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DoubleStrikeAbility extends StaticAbility {
+public class DoubleStrikeAbility extends StaticAbility<DoubleStrikeAbility> {
 
 	private static final DoubleStrikeAbility fINSTANCE =  new DoubleStrikeAbility();
 
@@ -55,6 +55,11 @@ public class DoubleStrikeAbility extends StaticAbility {
 	@Override
 	public String getRule() {
 		return "Double Strike";
+	}
+
+	@Override
+	public DoubleStrikeAbility copy() {
+		return fINSTANCE;
 	}
 
 }

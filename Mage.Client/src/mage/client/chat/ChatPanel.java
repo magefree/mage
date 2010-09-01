@@ -34,12 +34,14 @@
 
 package mage.client.chat;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.UUID;
 import java.util.logging.Logger;
 import mage.client.MageFrame;
 import mage.client.remote.Session;
 import mage.util.Logging;
+import mage.view.ChatMessage.MessageColor;
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -69,7 +71,24 @@ public class ChatPanel extends javax.swing.JPanel {
 			session.leaveChat(chatId);
 	}
 
-	public void receiveMessage(String message) {
+	public void receiveMessage(String message, MessageColor color) {
+		switch (color) {
+			case BLACK:
+				this.txtConversation.setForeground(Color.BLACK);
+				break;
+			case RED:
+				this.txtConversation.setForeground(Color.RED);
+				break;
+			case GREEN:
+				this.txtConversation.setForeground(Color.GREEN);
+				break;
+			case BLUE:
+				this.txtConversation.setForeground(Color.BLUE);
+				break;
+			case ORANGE:
+				this.txtConversation.setForeground(Color.ORANGE);
+				break;
+		}
 		this.txtConversation.append(message + "\n");
 		txtConversation.setCaretPosition(txtConversation.getText().length() - 1);
 	}

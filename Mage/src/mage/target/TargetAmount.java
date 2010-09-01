@@ -30,6 +30,7 @@ package mage.target;
 
 import java.util.UUID;
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -37,7 +38,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class TargetAmount extends TargetImpl {
+public abstract class TargetAmount<T extends TargetAmount<T>> extends TargetImpl<T> {
 
 	int amount;
 	int remainingAmount;
@@ -48,8 +49,19 @@ public abstract class TargetAmount extends TargetImpl {
 		this.required = true;
 	}
 
+	public TargetAmount(final TargetAmount target) {
+		super(target);
+		this.amount = target.amount;
+		this.remainingAmount = target.remainingAmount;
+	}
+
 	public int getAmountRemaining() {
 		return remainingAmount;
+	}
+
+	@Override
+	public boolean isChosen() {
+		return doneChosing();
 	}
 
 	@Override
@@ -64,19 +76,19 @@ public abstract class TargetAmount extends TargetImpl {
 	}
 
 	@Override
-	public void addTarget(UUID id, int amount, Game game) {
+	public void addTarget(UUID id, int amount, Ability source, Game game) {
 		if (amount <= remainingAmount) {
-			super.addTarget(id, amount, game);
+			super.addTarget(id, amount, source, game);
 			remainingAmount -= amount;
 		}
 	}
 
 	@Override
-	public boolean choose(Outcome outcome, Game game) {
-		Player player = game.getPlayer(this.source.getControllerId());
+	public boolean choose(Outcome outcome, UUID playerId, Ability source, Game game) {
+		Player player = game.getPlayer(playerId);
 		chosen = remainingAmount == 0;
 		while (remainingAmount > 0) {
-			if (!player.chooseTargetAmount(outcome, this, game)) {
+			if (!player.chooseTargetAmount(outcome, this, source, game)) {
 				return chosen;
 			}
 			chosen = remainingAmount == 0;

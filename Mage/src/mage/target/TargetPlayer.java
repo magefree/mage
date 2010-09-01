@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.Constants.Zone;
 import mage.MageObject;
+import mage.abilities.Ability;
 import mage.filter.FilterPlayer;
 import mage.game.Game;
 import mage.players.Player;
@@ -41,7 +42,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetPlayer extends TargetImpl {
+public class TargetPlayer<T extends TargetPlayer<T>> extends TargetImpl<TargetPlayer<T>> {
 
 	protected FilterPlayer filter = new FilterPlayer();
 
@@ -56,8 +57,12 @@ public class TargetPlayer extends TargetImpl {
 	public TargetPlayer(int minNumTargets, int maxNumTargets) {
 		this.minNumberOfTargets = minNumTargets;
 		this.maxNumberOfTargets = maxNumTargets;
-		this.zone = Zone.PLAYER;
 		this.targetName = "player";
+	}
+
+	public TargetPlayer(final TargetPlayer target) {
+		super(target);
+		this.filter = target.filter.copy();
 	}
 
 	@Override
@@ -97,20 +102,20 @@ public class TargetPlayer extends TargetImpl {
 	}
 
 	@Override
-	public boolean isLegal(Game game) {
+	public boolean isLegal(Ability source, Game game) {
 		for (UUID playerId: targets.keySet()) {
-			if (!canTarget(playerId, game))
+			if (!canTarget(playerId, source, game))
 				return false;
 		}
 		return true;
 	}
 
 	@Override
-	public boolean canTarget(UUID id, Game game) {
+	public boolean canTarget(UUID id, Ability source, Game game) {
 		Player player = game.getPlayer(id);
 		if (player != null) {
 			if (source != null)
-				return player.canBeTargetedBy(game.getObject(this.source.getSourceId())) && filter.match(player);
+				return player.canBeTargetedBy(game.getObject(source.getSourceId())) && filter.match(player);
 			else 
 				return filter.match(player);
 		}
@@ -124,6 +129,11 @@ public class TargetPlayer extends TargetImpl {
 			sb.append(game.getPlayer(targetId).getName()).append(" ");
 		}
 		return sb.toString();
+	}
+
+	@Override
+	public TargetPlayer copy() {
+		return new TargetPlayer(this);
 	}
 
 }

@@ -44,14 +44,13 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BaneslayerAngel extends CardImpl {
+public class BaneslayerAngel extends CardImpl<BaneslayerAngel> {
 
 	public BaneslayerAngel(UUID ownerId) {
 		super(ownerId, "Baneslayer Angel", new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.subtype.add("Angel");
 		this.color.setWhite(true);
-		this.art = "";
 		this.power = new MageInt(5);
 		this.toughness = new MageInt(5);
 
@@ -64,6 +63,20 @@ public class BaneslayerAngel extends CardImpl {
 		FilterPermanent filter2 = new FilterCreaturePermanent("Dragon");
 		filter2.getSubtype().add("Dragon");
 		this.addAbility(new ProtectionAbility(filter2));
+	}
+
+	public BaneslayerAngel(final BaneslayerAngel card) {
+		super(card);
+	}
+
+	@Override
+	public BaneslayerAngel copy() {
+		return new BaneslayerAngel(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "87090_typ_reg_sty_010.jpg";
 	}
 
 }

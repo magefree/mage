@@ -45,18 +45,31 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SejiriSteppe extends CardImpl {
+public class SejiriSteppe extends CardImpl<SejiriSteppe> {
 
 	public SejiriSteppe(UUID ownerId) {
 		super(ownerId, "Sejiri Steppe", new CardType[]{CardType.LAND}, null);
 		this.expansionSetId = Worldwake.getInstance().getId();
-		this.art = "123657_typ_reg_sty_010.jpg";
 		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
 		EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainProtectionFromColorTargetEOTEffect(), false);
 		ability.addTarget(new TargetCreaturePermanent(1, TargetController.YOU));
 		ability.addChoice(new ChoiceColor());
 		this.addAbility(ability);
 		this.addAbility(new WhiteManaAbility());
+	}
+
+	public SejiriSteppe(final SejiriSteppe card) {
+		super(card);
+	}
+
+	@Override
+	public SejiriSteppe copy() {
+		return new SejiriSteppe(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123657_typ_reg_sty_010.jpg";
 	}
 
 }

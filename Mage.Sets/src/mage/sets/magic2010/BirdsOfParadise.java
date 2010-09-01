@@ -44,14 +44,13 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BirdsOfParadise extends CardImpl {
+public class BirdsOfParadise extends CardImpl<BirdsOfParadise> {
 
 	public BirdsOfParadise(UUID ownerId) {
 		super(ownerId, "Birds of Paradise", new CardType[]{CardType.CREATURE}, "{G}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.subtype.add("Bird");
 		this.color.setGreen(true);
-		this.art = "88690_typ_reg_sty_010.jpg";
 		this.power = new MageInt(0);
 		this.toughness = new MageInt(1);
 		this.addAbility(FlyingAbility.getInstance());
@@ -60,6 +59,20 @@ public class BirdsOfParadise extends CardImpl {
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new RedManaAbility());
 		this.addAbility(new WhiteManaAbility());
+	}
+
+	public BirdsOfParadise(final BirdsOfParadise card) {
+		super(card);
+	}
+
+	@Override
+	public BirdsOfParadise copy() {
+		return new BirdsOfParadise(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "88690_typ_reg_sty_010.jpg";
 	}
 
 }

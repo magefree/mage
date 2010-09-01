@@ -43,6 +43,7 @@ import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
 import mage.interfaces.MageException;
 import mage.interfaces.Server;
+import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
@@ -52,6 +53,7 @@ import mage.server.game.PlayerFactory;
 import mage.server.game.ReplayManager;
 import mage.server.game.TableManager;
 import mage.util.Logging;
+import mage.view.ChatMessage.MessageColor;
 import mage.view.GameTypeView;
 import mage.view.TableView;
 
@@ -126,9 +128,9 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public boolean joinTable(UUID sessionId, UUID roomId, UUID tableId, int seatNum, String name, DeckCardLists deckList) throws MageException, GameException {
+	public boolean joinTable(UUID sessionId, UUID roomId, UUID tableId, String name, DeckCardLists deckList) throws MageException, GameException {
 		try {
-			boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTable(sessionId, tableId, seatNum, name, deckList);
+			boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTable(sessionId, tableId, name, deckList);
 			logger.info("Session " + sessionId + " joined table " + tableId);
 			return ret;
 		}
@@ -186,7 +188,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	@Override
 	public void sendChatMessage(UUID chatId, String userName, String message) throws MageException {
 		try {
-			ChatManager.getInstance().broadcast(chatId, userName, message);
+			ChatManager.getInstance().broadcast(chatId, userName, message, MessageColor.BLUE);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -431,9 +433,13 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public List<GameTypeView> getGameTypes() throws MageException {
+	public ServerState getServerState() throws RemoteException, MageException {
 		try {
-			return GameFactory.getInstance().getGameTypes();
+			return new ServerState(
+					GameFactory.getInstance().getGameTypes(),
+					PlayerFactory.getInstance().getPlayerTypes().toArray(new String[0]),
+					DeckValidatorFactory.getInstance().getDeckTypes().toArray(new String[0]),
+					testMode);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -441,33 +447,44 @@ public class ServerImpl extends RemoteServer implements Server {
 		return null;
 	}
 
-	@Override
-	public String[] getPlayerTypes() throws MageException {
-		try {
-			return PlayerFactory.getInstance().getPlayerTypes().toArray(new String[0]);
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
-		return null;
-	}
+//	@Override
+//	public List<GameTypeView> getGameTypes() throws MageException {
+//		try {
+//			return GameFactory.getInstance().getGameTypes();
+//		}
+//		catch (Exception ex) {
+//			handleException(ex);
+//		}
+//		return null;
+//	}
+//
+//	@Override
+//	public String[] getPlayerTypes() throws MageException {
+//		try {
+//			return PlayerFactory.getInstance().getPlayerTypes().toArray(new String[0]);
+//		}
+//		catch (Exception ex) {
+//			handleException(ex);
+//		}
+//		return null;
+//	}
+//
+//	@Override
+//	public String[] getDeckTypes() throws MageException {
+//		try {
+//			return DeckValidatorFactory.getInstance().getDeckTypes().toArray(new String[0]);
+//		}
+//		catch (Exception ex) {
+//			handleException(ex);
+//		}
+//		return null;
+//	}
 
 	@Override
-	public String[] getDeckTypes() throws MageException {
-		try {
-			return DeckValidatorFactory.getInstance().getDeckTypes().toArray(new String[0]);
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
-		return null;
-	}
-
-	@Override
-	public void cheat(UUID gameId, UUID sessionId, DeckCardLists deckList) throws MageException {
+	public void cheat(UUID gameId, UUID sessionId, UUID playerId, DeckCardLists deckList) throws MageException {
 		try {
 			if (testMode)
-				GameManager.getInstance().cheat(gameId, sessionId, deckList);
+				GameManager.getInstance().cheat(gameId, sessionId, playerId, deckList);
 		}
 		catch (Exception ex) {
 			handleException(ex);

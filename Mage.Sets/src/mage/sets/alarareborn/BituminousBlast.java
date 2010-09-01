@@ -40,17 +40,30 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BituminousBlast extends CardImpl {
+public class BituminousBlast extends CardImpl<BituminousBlast> {
 
 	public BituminousBlast(UUID ownerId) {
 		super(ownerId, "Bituminous Blast", new CardType[]{CardType.INSTANT}, "{3}{B}{R}");
 		this.expansionSetId = AlaraReborn.getInstance().getId();
 		this.color.setBlack(true);
 		this.color.setRed(true);
-		this.art = "121045_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 		this.getSpellAbility().addEffect(new DamageTargetEffect(4));
 		this.addAbility(new CascadeAbility());
+	}
+
+	public BituminousBlast(final BituminousBlast card) {
+		super(card);
+	}
+
+	@Override
+	public BituminousBlast copy() {
+		return new BituminousBlast(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121045_typ_reg_sty_010.jpg";
 	}
 
 }

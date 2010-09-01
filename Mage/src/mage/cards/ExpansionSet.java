@@ -31,7 +31,9 @@ package mage.cards;
 import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,11 +42,11 @@ import java.util.logging.Logger;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ExpansionSet implements Serializable {
+public abstract class ExpansionSet implements Serializable {
 
 	protected String name;
-	protected List<Class> cards = new ArrayList<Class>();
-	protected UUID id = UUID.randomUUID();
+	protected final List<Class> cards = new ArrayList<Class>();
+	protected final UUID id = UUID.randomUUID();
 
 	public List<Class> getCards() {
 		return cards;
@@ -68,8 +70,8 @@ public class ExpansionSet implements Serializable {
 		}
 	}
 
-	public List<Card> createCards() {
-		List<Card> created = new ArrayList<Card>();
+	public Set<Card> createCards() {
+		Set<Card> created = new HashSet<Card>();
 		for (Class clazz: cards) {
 			created.add(createCard(clazz));
 		}

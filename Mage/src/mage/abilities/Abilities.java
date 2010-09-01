@@ -28,33 +28,34 @@
 
 package mage.abilities;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.Zone;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ManaAbility;
+import mage.filter.FilterAbility;
 
-public interface Abilities extends List<Ability> {
+public interface Abilities<T extends Ability> extends List<T>, Serializable {
 
 	public List<String> getRules();
-	public List<ActivatedAbility> getActivatedAbilities(Zone zone);
-	public List<ManaAbility> getManaAbilities(Zone zone);
-	public List<StaticAbility> getStaticAbilities(Zone zone);
-	public List<EvasionAbility> getEvasionAbilities();
-	public List<TriggeredAbility> getTriggeredAbilities(Zone zone);
-	public List<ProtectionAbility> getProtectionAbilities();
-	public List<KickerAbility> getKickerAbilities();
+	public Abilities<ActivatedAbility> getActivatedAbilities(Zone zone);
+	public Abilities<ActivatedAbility> getActivatedAbilities(Zone zone, FilterAbility filter);
+	public Abilities<ManaAbility> getManaAbilities(Zone zone);
+	public Abilities<StaticAbility> getStaticAbilities(Zone zone);
+	public Abilities<EvasionAbility> getEvasionAbilities();
+	public Abilities<TriggeredAbility> getTriggeredAbilities(Zone zone);
+	public Abilities<ProtectionAbility> getProtectionAbilities();
+	public Abilities<KickerAbility> getKickerAbilities();
+	public int getOutcomeTotal();
 	
-	public Abilities copy();
-
 	public void setControllerId(UUID controllerId);
 	public void setSourceId(UUID sourceId);
 	public boolean containsKey(UUID abilityId);
-	public Ability get(UUID abilityId);
+	public T get(UUID abilityId);
 
-	public boolean containsAll(Abilities abilities);
+	public boolean containsAll(Abilities<T> abilities);
 
-
-
+	public Abilities<T> copy();
 }

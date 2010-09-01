@@ -29,7 +29,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jSplitPane1" alignment="0" pref="847" max="32767" attributes="0"/>
+          <Component id="jSplitPane1" alignment="0" pref="798" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -62,8 +62,8 @@
                       <Component id="pnlGameInfo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="pnlHand" max="32767" attributes="0"/>
-                          <Component id="pnlBattlefield" alignment="0" pref="715" max="32767" attributes="0"/>
+                          <Component id="hand" pref="715" max="32767" attributes="0"/>
+                          <Component id="pnlBattlefield" pref="715" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -71,9 +71,9 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="pnlBattlefield" pref="634" max="32767" attributes="0"/>
+                      <Component id="pnlBattlefield" pref="794" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                      <Component id="pnlHand" min="-2" max="-2" attributes="0"/>
+                      <Component id="hand" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="pnlGameInfo" alignment="0" max="32767" attributes="0"/>
               </Group>
@@ -116,9 +116,7 @@
                           <Component id="btnConcede" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnStopWatching" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnCheat" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="19" max="32767" attributes="0"/>
+                          <EmptySpace pref="62" max="32767" attributes="0"/>
                       </Group>
                       <Component id="bigCard" alignment="0" pref="256" max="32767" attributes="0"/>
                       <Component id="feedbackPanel" alignment="0" pref="256" max="32767" attributes="0"/>
@@ -160,16 +158,15 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="feedbackPanel" min="-2" pref="109" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                          <Component id="stack" min="-2" pref="209" max="-2" attributes="0"/>
+                          <Component id="stack" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                           <Component id="bigCard" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="8" max="32767" attributes="0"/>
+                          <EmptySpace pref="164" max="32767" attributes="0"/>
                           <Component id="pnlReplay" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnConcede" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnStopWatching" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnCheat" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -325,14 +322,11 @@
                 <Component class="mage.client.cards.BigCard" name="bigCard">
                 </Component>
                 <Component class="mage.client.cards.Cards" name="stack">
-                </Component>
-                <Component class="javax.swing.JButton" name="btnCheat">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="?"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 25)" type="code"/>
+                    </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCheatActionPerformed"/>
-                  </Events>
                 </Component>
                 <Container class="javax.swing.JPanel" name="pnlReplay">
 
@@ -387,44 +381,17 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="pnlHand">
-              <Properties>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
-                    <EtchetBorder/>
-                  </Border>
-                </Property>
-                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 25)" type="code"/>
-                </Property>
-              </Properties>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="hand" alignment="1" pref="711" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="hand" alignment="1" pref="209" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Component class="mage.client.cards.Cards" name="hand">
-                  <Properties>
-                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight)" type="code"/>
-                    </Property>
-                  </Properties>
-                </Component>
-              </SubComponents>
-            </Container>
             <Container class="javax.swing.JPanel" name="pnlBattlefield">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
             </Container>
+            <Component class="mage.client.cards.Cards" name="hand">
+              <Properties>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 25)" type="code"/>
+                </Property>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Component class="mage.client.chat.ChatPanel" name="chatPanel">

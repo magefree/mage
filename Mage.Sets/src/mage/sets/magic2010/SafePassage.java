@@ -40,14 +40,27 @@ import mage.sets.Magic2010;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SafePassage  extends CardImpl {
+public class SafePassage  extends CardImpl<SafePassage> {
 
 	public SafePassage(UUID ownerId) {
 		super(ownerId, "Safe Passage", new CardType[]{CardType.INSTANT}, "{2}{W}");
 		this.expansionSetId = Magic2010.getInstance().getId();
 		this.color.setWhite(true);
-		this.art = "121601_typ_reg_sty_010.jpg";
 		this.getSpellAbility().addEffect(new PreventAllDamageToEffect(Duration.EndOfTurn, new FilterCreatureOrPlayer("you and creatures you control", ownerId)));
+	}
+
+	public SafePassage(final SafePassage card) {
+		super(card);
+	}
+
+	@Override
+	public SafePassage copy() {
+		return new SafePassage(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121601_typ_reg_sty_010.jpg";
 	}
 
 }

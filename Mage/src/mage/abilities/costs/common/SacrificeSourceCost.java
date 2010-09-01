@@ -29,6 +29,7 @@
 package mage.abilities.costs.common;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,28 +38,37 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SacrificeSourceCost extends CostImpl {
+public class SacrificeSourceCost extends CostImpl<SacrificeSourceCost> {
 
 	public SacrificeSourceCost() {
 		this.text = "Sacrifice {this}";
 	}
 
+	public SacrificeSourceCost(SacrificeSourceCost cost) {
+		super(cost);
+	}
+
 	@Override
-	public boolean pay(Game game, boolean noMana) {
-		Permanent source = game.getPermanent(ability.getSourceId());
-		if (source != null) {
-			paid = source.sacrifice(this.ability.getSourceId(), game);
+	public boolean pay(Game game, Ability source, boolean noMana) {
+		Permanent permanent = game.getPermanent(source.getSourceId());
+		if (permanent != null) {
+			paid = permanent.sacrifice(source.getSourceId(), game);
 		}
 		return paid;
 	}
 
 	@Override
-	public boolean canPay(UUID playerId, Game game) {
-		Permanent source = game.getPermanent(ability.getSourceId());
-		if (source != null) {
+	public boolean canPay(Ability source, Game game) {
+		Permanent permanent = game.getPermanent(source.getSourceId());
+		if (permanent != null) {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public SacrificeSourceCost copy() {
+		return new SacrificeSourceCost(this);
 	}
 
 }

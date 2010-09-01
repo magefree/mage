@@ -38,7 +38,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class UntapStep extends Step {
+public class UntapStep extends Step<UntapStep> {
 
 	public UntapStep() {
 		super(PhaseStep.UNTAP, false);
@@ -46,7 +46,11 @@ public class UntapStep extends Step {
 		this.preStepEvent = EventType.UNTAP_STEP_PRE;
 		this.postStepEvent = EventType.UNTAP_STEP_POST;
 	}
-	
+
+	public UntapStep(final UntapStep step) {
+		super(step);
+	}
+
 	@Override
 	public void beginStep(Game game, UUID activePlayerId) {
 		super.beginStep(game, activePlayerId);
@@ -57,5 +61,9 @@ public class UntapStep extends Step {
 		activePlayer.untap(game);
 	}
 
+	@Override
+	public UntapStep copy() {
+		return new UntapStep(this);
+	}
 
 }

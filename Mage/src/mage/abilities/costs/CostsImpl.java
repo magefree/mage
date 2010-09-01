@@ -29,7 +29,6 @@
 package mage.abilities.costs;
 
 import java.util.ArrayList;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.game.Game;
@@ -41,12 +40,12 @@ import mage.target.Targets;
  */
 public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> {
 
-	protected Ability ability;
-
 	public CostsImpl() {}
-
-	public CostsImpl(Ability ability) {
-		this.ability = ability;
+	
+	public CostsImpl(final CostsImpl<T> costs) {
+		for (Cost cost: costs) {
+			this.add((T)cost.copy());
+		}
 	}
 
 	@Override
@@ -63,20 +62,20 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
 	}
 
 	@Override
-	public boolean canPay(UUID playerId, Game game) {
-		for (Cost cost: this) {
-			if (!cost.canPay(playerId, game))
+	public boolean canPay(Ability source, Game game) {
+		for (T cost: this) {
+			if (!cost.canPay(source, game))
 				return false;
 		}
 		return true;
 	}
 
 	@Override
-	public boolean pay(Game game, boolean noMana) {
+	public boolean pay(Game game, Ability source, boolean noMana) {
 		if (this.size() > 0) {
 			while (!isPaid()) {
-				Cost cost = getFirstUnpaid();
-				if (!cost.pay(game, noMana))
+				T cost = getFirstUnpaid();
+				if (!cost.pay(game, source, noMana))
 					return false;
 			}
 		}
@@ -86,7 +85,7 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
 	@Override
 	public boolean isPaid() {
 		for (T cost: this) {
-			if (!(cost instanceof VariableManaCost) && !cost.isPaid())
+			if (!((T)cost instanceof VariableManaCost) && !cost.isPaid())
 				return false;
 		}
 		return true;
@@ -107,27 +106,8 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
 	}
 
 	@Override
-	public Ability getAbility() {
-		return ability;
-	}
-
-	@Override
-	public void setAbility(Ability ability) {
-		this.ability = ability;
-		for (T cost: this) {
-			cost.setAbility(ability);
-		}
-	}
-
-	@Override
-	public boolean add(T cost) {
-		cost.setAbility(ability);
-		return super.add(cost);
-	}
-
-	@Override
 	public Costs<T> getUnpaid() {
-		Costs<T> unpaid = new CostsImpl<T>(ability);
+		Costs<T> unpaid = new CostsImpl<T>();
 		for (T cost: this) {
 			if (!cost.isPaid())
 				unpaid.add(cost);
@@ -145,11 +125,16 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
 
 	@Override
 	public Targets getTargets() {
-		Targets targets = new Targets(ability);
-		for (Cost cost: this) {
+		Targets targets = new Targets();
+		for (T cost: this) {
 			targets.addAll(cost.getTargets());
 		}
 		return targets;
+	}
+
+	@Override
+	public Costs<T> copy() {
+		return new CostsImpl(this);
 	}
 
 }

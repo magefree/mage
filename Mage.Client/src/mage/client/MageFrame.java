@@ -45,7 +45,9 @@ import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import mage.client.dialog.AboutDialog;
+import mage.client.dialog.CombatDialog;
 import mage.client.dialog.ConnectDialog;
+import mage.client.dialog.PickNumberDialog;
 import mage.client.remote.Session;
 import mage.client.util.EDTExceptionHandler;
 import mage.util.Logging;
@@ -60,6 +62,8 @@ public class MageFrame extends javax.swing.JFrame {
 
 	private static Session session;
 	private ConnectDialog connectDialog;
+	private static CombatDialog combat;
+	private static PickNumberDialog pickNumber;
 
 	/**
 	 * @return the session
@@ -96,8 +100,12 @@ public class MageFrame extends javax.swing.JFrame {
 
 		session = new Session(this);
 		connectDialog = new ConnectDialog(session);
+		combat = new CombatDialog();
+		pickNumber = new PickNumberDialog();
 		desktopPane.add(connectDialog, JLayeredPane.POPUP_LAYER);
-//		connectDialog.setLocation(50, 50);
+		desktopPane.add(combat, JLayeredPane.POPUP_LAYER);
+		combat.hideDialog();
+		desktopPane.add(pickNumber, JLayeredPane.POPUP_LAYER);
 		disableButtons();
     }
 
@@ -309,6 +317,14 @@ public class MageFrame extends javax.swing.JFrame {
 		this.tablesPane.setVisible(false);
 		this.gamePane.setVisible(false);
 		this.deckEditorPane.setVisible(false);
+	}
+
+	public static CombatDialog getCombatDialog() {
+		return combat;
+	}
+
+	public static PickNumberDialog getPickNumberDialog() {
+		return pickNumber;
 	}
 
     /**

@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
@@ -38,21 +39,30 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PlayTargetWithoutPayingManaEffect extends OneShotEffect {
+public class PlayTargetWithoutPayingManaEffect extends OneShotEffect<PlayTargetWithoutPayingManaEffect> {
 
 	public PlayTargetWithoutPayingManaEffect() {
 		super(Outcome.GainControl);
 	}
 
+	public PlayTargetWithoutPayingManaEffect(final PlayTargetWithoutPayingManaEffect effect) {
+		super(effect);
+	}
+
 	@Override
-	public boolean apply(Game game) {
-		Player controller = game.getPlayer(this.source.getControllerId());
-		Card target = (Card) game.getObject(this.source.getFirstTarget());
+	public PlayTargetWithoutPayingManaEffect copy() {
+		return new PlayTargetWithoutPayingManaEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Player controller = game.getPlayer(source.getControllerId());
+		Card target = (Card) game.getObject(source.getFirstTarget());
 		return controller.cast(target.getSpellAbility(), game, true);
 	}
 
 	@Override
-	public String getText() {
-		return "you may put " + this.getSource().getTargets().get(0).getTargetName() + " from your hand onto the battlefield";
+	public String getText(Ability source) {
+		return "you may put " + source.getTargets().get(0).getTargetName() + " from your hand onto the battlefield";
 	}
 }

@@ -45,10 +45,13 @@ public class Worldwake extends ExpansionSet {
 
 	private Worldwake() {
 		this.name = "Worldwake";
+		this.cards.add(ArborElf.class);
 		this.cards.add(BasiliskCollar.class);
 		this.cards.add(CelestialColonnade.class);
+		this.cards.add(DreadStatuary.class);
 		this.cards.add(EverflowingChalice.class);
 		this.cards.add(JaceTheMindSculptor.class);
+		this.cards.add(KhalniGarden.class);
 		this.cards.add(LavaclawReaches.class);
 		this.cards.add(RagingRavine.class);
 		this.cards.add(SearingBlaze.class);
@@ -56,6 +59,7 @@ public class Worldwake extends ExpansionSet {
 		this.cards.add(StirringWildwood.class);
 		this.cards.add(StoneforgeMystic.class);
 		this.cards.add(TectonicEdge.class);
+		this.cards.add(WolfbriarElemental.class);
 	}
 
 }

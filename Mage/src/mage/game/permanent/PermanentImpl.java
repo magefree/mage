@@ -43,10 +43,11 @@ import mage.abilities.effects.Effect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.IndestructableAbility;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.ShroudAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.counters.Counters;
 import mage.game.Game;
@@ -58,32 +59,69 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class PermanentImpl extends CardImpl implements Permanent
-{
-	protected boolean tapped = false;
-	protected boolean flipped = false;
+public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl<T> implements Permanent {
+
+	protected boolean tapped;
+	protected boolean flipped;
 	protected UUID controllerId;
 	protected int damage;
-	protected boolean controlledFromStartOfTurn = false;
-	protected int turnsOnBattlefield = 0;
+	protected boolean controlledFromStartOfTurn;
+	protected int turnsOnBattlefield;
 	protected boolean phasedIn = true;
 	protected boolean faceUp = true;
-	protected boolean attacking = false;
-	protected boolean blocking = false;
-	protected boolean loyaltyUsed = false;
-	protected boolean deathtouched = false;
-	protected Counters counters = new Counters();
+	protected boolean attacking;
+	protected boolean blocking;
+	protected boolean loyaltyUsed;
+	protected boolean deathtouched;
+	protected Counters counters;
 	protected List<UUID> attachments = new ArrayList<UUID>();
 	protected UUID attachedTo;
 
 	public PermanentImpl(UUID ownerId, UUID controllerId, String name) {
 		super(ownerId, name);
 		this.controllerId = controllerId;
+		this.counters = new Counters();
+	}
+
+	public PermanentImpl(UUID id, UUID ownerId, UUID controllerId, String name) {
+		super(id, ownerId, name);
+		this.controllerId = controllerId;
+		this.counters = new Counters();
+	}
+
+	public PermanentImpl(final PermanentImpl<T> permanent) {
+		super(permanent);
+		this.tapped = permanent.tapped;
+		this.flipped = permanent.flipped;
+		this.controllerId = permanent.controllerId;
+		this.damage = permanent.damage;
+		this.controlledFromStartOfTurn = permanent.controlledFromStartOfTurn;
+		this.turnsOnBattlefield = permanent.turnsOnBattlefield;
+		this.phasedIn = permanent.phasedIn;
+		this.faceUp = permanent.faceUp;
+		this.attacking = permanent.attacking;
+		this.blocking = permanent.blocking;
+		this.loyaltyUsed = permanent.loyaltyUsed;
+		this.deathtouched = permanent.deathtouched;
+		this.counters = permanent.counters.copy();
+		for (UUID attachmentId: permanent.attachments) {
+			this.attachments.add(attachmentId);
+		}
+		this.attachedTo = permanent.attachedTo;
 	}
 
 	@Override
-	public void reset() {
+	public void reset(Game game) {
 		this.controllerId = ownerId;
+	}
+
+	@Override
+	public String getValue() {
+		StringBuilder sb = new StringBuilder(1024);
+		sb.append(controllerId).append(name).append(tapped).append(damage);
+		sb.append(subtype).append(supertype).append(power.getValue()).append(toughness.getValue());
+		sb.append(abilities);
+		return sb.toString();
 	}
 
 	@Override
@@ -335,14 +373,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent
 	}
 
 	@Override
-	public int damage(int damage, UUID sourceId, Game game) {
+	public int damage(int damageAmount, UUID sourceId, Game game) {
 		int damageDone = 0;
-		if (damage > 0 && canDamage(game.getObject(sourceId))) {
+		if (damageAmount > 0 && canDamage(game.getObject(sourceId))) {
 			if (cardType.contains(CardType.PLANESWALKER)) {
-				damageDone = damagePlaneswalker(damage, sourceId, game);
+				damageDone = damagePlaneswalker(damageAmount, sourceId, game);
 			}
 			else {
-				damageDone = damageCreature(damage, sourceId, game);
+				damageDone = damageCreature(damageAmount, sourceId, game);
 			}
 			if (damageDone > 0) {
 				Permanent source = game.getPermanent(sourceId);
@@ -356,6 +394,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent
 			}
 		}
 		return damageDone;
+	}
+
+	@Override
+	public void removeAllDamage(Game game) {
+		damage = 0;
 	}
 
 	protected int damagePlaneswalker(int damage, UUID sourceId, Game game) {
@@ -423,7 +466,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent
 		for (StaticAbility ability: abilities.getStaticAbilities(Zone.BATTLEFIELD)) {
 			for (Effect effect: ability.getEffects()) {
 				if (effect instanceof ContinuousEffect)
-					game.addEffect((ContinuousEffect)effect);
+					game.addEffect((ContinuousEffect)effect, ability);
 			}
 		}
 	}
@@ -432,8 +475,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent
 	public boolean destroy(UUID sourceId, Game game, boolean noRegen) {
 		//20091005 - 701.6
 		//TODO: handle noRegen
-		if (!game.replaceEvent(GameEvent.getEvent(EventType.DESTROY_PERMANENT, objectId, sourceId, controllerId))) {
-			if (!this.getAbilities().containsKey(IndestructableAbility.getInstance().getId())) {
+		if (!game.replaceEvent(GameEvent.getEvent(EventType.DESTROY_PERMANENT, objectId, sourceId, controllerId, noRegen?1:0))) {
+			if (!this.getAbilities().containsKey(IndestructibleAbility.getInstance().getId())) {
 				if (moveToZone(Zone.GRAVEYARD, game, false)) {
 					game.fireEvent(GameEvent.getEvent(EventType.DESTROYED_PERMANENT, objectId, sourceId, controllerId));
 					return true;

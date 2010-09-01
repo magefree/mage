@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 import mage.Mana;
 import mage.game.Game;
-import mage.util.Copier;
 
 /**
  *
@@ -45,6 +44,14 @@ import mage.util.Copier;
  */
 public class ManaOptions extends ArrayList<Mana> {
 
+	public ManaOptions () {};
+
+	public ManaOptions(final ManaOptions options) {
+		for (Mana mana: options) {
+			this.add(mana.copy());
+		}
+	}
+
 	public void addMana(List<ManaAbility> abilities, Game game) {
 		if (isEmpty())
 			this.add(new Mana());
@@ -55,8 +62,7 @@ public class ManaOptions extends ArrayList<Mana> {
 			}
 			else if (abilities.size() > 1) {
 				//perform a union of all existing options and the new options
-				Copier<List<Mana>> copier = new Copier<List<Mana>>();
-				List<Mana> copy = copier.copy(this);
+				List<Mana> copy = copy();
 				this.clear();
 				for (ManaAbility ability: abilities) {
 					for (Mana mana: copy) {
@@ -88,8 +94,7 @@ public class ManaOptions extends ArrayList<Mana> {
 			}
 			else if (options.size() > 1) {
 				//perform a union of all existing options and the new options
-				Copier<List<Mana>> copier = new Copier<List<Mana>>();
-				List<Mana> copy = copier.copy(this);
+				List<Mana> copy = copy();
 				this.clear();
 				for (Mana addMana: options) {
 					for (Mana mana: copy) {
@@ -101,6 +106,10 @@ public class ManaOptions extends ArrayList<Mana> {
 				}
 			}
 		}
+	}
+
+	public ManaOptions copy() {
+		return new ManaOptions(this);
 	}
 
 }

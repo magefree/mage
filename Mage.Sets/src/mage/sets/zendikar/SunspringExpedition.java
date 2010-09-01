@@ -34,6 +34,9 @@ import mage.Constants.Zone;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.LandfallAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.Costs;
+import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.AddCountersSourceEffect;
@@ -45,20 +48,33 @@ import mage.sets.Zendikar;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SunspringExpedition extends CardImpl {
+public class SunspringExpedition extends CardImpl<SunspringExpedition> {
 
 	public SunspringExpedition(UUID ownerId) {
 		super(ownerId, "Sunspring Expedition", new CardType[]{CardType.ENCHANTMENT}, "{W}");
 		this.expansionSetId = Zendikar.getInstance().getId();
 		this.color.setWhite(true);
-		this.art = "123558_typ_reg_sty_010.jpg";
 
 		this.addAbility(new LandfallAbility(new AddCountersSourceEffect("quest", 1), true));
-		ActivatedAbility ability = new ActivatedAbilityImpl(Zone.BATTLEFIELD, new GainLifeEffect(8)) {};
-		ability.addCost(new RemoveCountersSourceCost("quest", 3));
-		ability.addCost(new SacrificeSourceCost());
+		Costs costs = new CostsImpl();
+		costs.add(new RemoveCountersSourceCost("quest", 3));
+		costs.add(new SacrificeSourceCost());
+		ActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(8), costs);
 		this.addAbility(ability);
 	}
 
+	public SunspringExpedition(final SunspringExpedition card) {
+		super(card);
+	}
+
+	@Override
+	public SunspringExpedition copy() {
+		return new SunspringExpedition(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123558_typ_reg_sty_010.jpg";
+	}
 
 }
