@@ -31,6 +31,7 @@ package mage.sets.shardsofalara;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -43,7 +44,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
-import mage.sets.ShardsOfAlara;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -53,8 +53,8 @@ import mage.target.common.TargetCardInLibrary;
 public class KnightOfTheWhiteOrchid extends CardImpl<KnightOfTheWhiteOrchid> {
 
 	public KnightOfTheWhiteOrchid(UUID ownerId) {
-		super(ownerId, "Knight of the White Orchid", new CardType[]{CardType.CREATURE}, "{W}{W}");
-		this.expansionSetId = ShardsOfAlara.getInstance().getId();
+		super(ownerId, "Knight of the White Orchid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}");
+		this.expansionSetCode = "ALA";
 		this.subtype.add("Human");
 		this.subtype.add("Knight");
 		this.color.setWhite(true);

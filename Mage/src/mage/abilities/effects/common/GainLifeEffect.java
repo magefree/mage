@@ -63,7 +63,7 @@ public class GainLifeEffect extends OneShotEffect<GainLifeEffect> {
 		if (player != null) {
 			player.gainLife(life, game);
 		}
-		return false;
+		return true;
 	}
 
 	@Override

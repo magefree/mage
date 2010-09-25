@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -45,7 +46,6 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.sets.Magic2010;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -56,8 +56,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class ArmoredAscension extends CardImpl<ArmoredAscension> {
 
 	public ArmoredAscension(UUID ownerId) {
-		super(ownerId, "Armored Ascension", new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Armored Ascension", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
+		this.expansionSetCode = "M10";
 		this.color.setWhite(true);
 		this.subtype.add("Aura");
 
@@ -109,9 +109,9 @@ class ArmoredAscensionEffect extends ContinuousEffectImpl<ArmoredAscensionEffect
 	@Override
 	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
 		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment.getAttachedTo() != null) {
+		if (enchantment != null && enchantment.getAttachedTo() != null) {
 			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-			if (creature  != null) {
+			if (creature != null) {
 				switch (layer) {
 					case PTChangingEffects_7:
 						if (sublayer == SubLayer.ModifyPT_7c) {

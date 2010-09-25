@@ -30,7 +30,6 @@ package mage.abilities.effects.common;
 
 import java.util.UUID;
 import mage.Constants.Outcome;
-import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;

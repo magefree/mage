@@ -49,8 +49,8 @@ public class TapSourceCost extends CostImpl<TapSourceCost> {
 	}
 
 	@Override
-	public boolean pay(Game game, Ability source, boolean noMana) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
+	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+		Permanent permanent = game.getPermanent(sourceId);
 		if (permanent != null) {
 			paid = permanent.tap(game);
 		}
@@ -58,8 +58,8 @@ public class TapSourceCost extends CostImpl<TapSourceCost> {
 	}
 
 	@Override
-	public boolean canPay(Ability source, Game game) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
+	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+		Permanent permanent = game.getPermanent(sourceId);
 		if (permanent != null) {
 			return !permanent.isTapped() && permanent.canTap();
 		}

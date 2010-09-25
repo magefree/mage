@@ -30,12 +30,12 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.EldraziSpawnToken;
-import mage.sets.RiseOfTheEldrazi;
 
 /**
  *
@@ -44,8 +44,8 @@ import mage.sets.RiseOfTheEldrazi;
 public class KozileksPredator extends CardImpl<KozileksPredator> {
 
 	public KozileksPredator(UUID ownerId) {
-		super(ownerId, "Kozilek's Predator", new CardType[]{CardType.CREATURE}, "{3}{G}");
-		this.expansionSetId = RiseOfTheEldrazi.getInstance().getId();
+		super(ownerId, "Kozilek's Predator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+		this.expansionSetCode = "ROE";
 		this.subtype.add("Eldrazi");
 		this.subtype.add("Drone");
 		this.color.setGreen(true);

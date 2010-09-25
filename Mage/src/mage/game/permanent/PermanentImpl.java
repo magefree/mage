@@ -38,8 +38,10 @@ import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.TriggeredAbility;
+import mage.abilities.common.EntersBattlefieldStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -47,7 +49,6 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.ShroudAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.counters.Counters;
 import mage.game.Game;
@@ -184,6 +185,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
 	@Override
 	public boolean canTap() {
+		//20100423 - 302.6
 		if (!cardType.contains(CardType.CREATURE) || this.controlledFromStartOfTurn || this.abilities.containsKey(HasteAbility.getInstance().getId())) {
 			return true;
 		}
@@ -373,14 +375,14 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	}
 
 	@Override
-	public int damage(int damageAmount, UUID sourceId, Game game) {
+	public int damage(int damageAmount, UUID sourceId, Game game, boolean preventable) {
 		int damageDone = 0;
 		if (damageAmount > 0 && canDamage(game.getObject(sourceId))) {
 			if (cardType.contains(CardType.PLANESWALKER)) {
-				damageDone = damagePlaneswalker(damageAmount, sourceId, game);
+				damageDone = damagePlaneswalker(damageAmount, sourceId, game, preventable);
 			}
 			else {
-				damageDone = damageCreature(damageAmount, sourceId, game);
+				damageDone = damageCreature(damageAmount, sourceId, game, preventable);
 			}
 			if (damageDone > 0) {
 				Permanent source = game.getPermanent(sourceId);
@@ -401,9 +403,9 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		damage = 0;
 	}
 
-	protected int damagePlaneswalker(int damage, UUID sourceId, Game game) {
+	protected int damagePlaneswalker(int damage, UUID sourceId, Game game, boolean preventable) {
 		GameEvent event = new GameEvent(GameEvent.EventType.DAMAGE_PLANESWALKER, objectId, sourceId, controllerId, damage);
-		if (!game.replaceEvent(event)) {
+		if (!preventable || !game.replaceEvent(event)) {
 			int actualDamage = event.getAmount();
 			if (actualDamage > 0) {
 				if (event.getAmount() > this.loyalty.getValue()) {
@@ -417,9 +419,9 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		return 0;
 	}
 
-	protected int damageCreature(int damage, UUID sourceId, Game game) {
+	protected int damageCreature(int damage, UUID sourceId, Game game, boolean preventable) {
 		GameEvent event = new GameEvent(GameEvent.EventType.DAMAGE_CREATURE, objectId, sourceId, controllerId, damage);
-		if (!game.replaceEvent(event)) {
+		if (!preventable || !game.replaceEvent(event)) {
 			int actualDamage = event.getAmount();
 			if (actualDamage > 0) {
 				if (this.damage + event.getAmount() > this.toughness.getValue()) {
@@ -464,9 +466,15 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
 	protected void addEffects(Game game) {
 		for (StaticAbility ability: abilities.getStaticAbilities(Zone.BATTLEFIELD)) {
-			for (Effect effect: ability.getEffects()) {
-				if (effect instanceof ContinuousEffect)
-					game.addEffect((ContinuousEffect)effect, ability);
+			if (ability.activate(game, false)) {
+				for (Effect effect: ability.getEffects()) {
+					if (effect instanceof ContinuousEffect)
+						game.addEffect((ContinuousEffect)effect, ability);
+					else if (ability instanceof EntersBattlefieldStaticAbility && effect instanceof OneShotEffect) {
+						//20100423 - 603.6e
+						effect.apply(game, ability);
+					}
+				}
 			}
 		}
 	}

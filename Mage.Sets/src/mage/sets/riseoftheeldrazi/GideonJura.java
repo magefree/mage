@@ -31,6 +31,7 @@ package mage.sets.riseoftheeldrazi;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.Constants.TargetController;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -48,7 +49,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-import mage.sets.RiseOfTheEldrazi;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
@@ -65,8 +65,8 @@ public class GideonJura extends CardImpl<GideonJura> {
 	}
 
 	public GideonJura(UUID ownerId) {
-		super(ownerId, "Gideon Jura", new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
-		this.expansionSetId = RiseOfTheEldrazi.getInstance().getId();
+		super(ownerId, "Gideon Jura", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
+		this.expansionSetCode = "ROE";
 		this.subtype.add("Gideon");
 		this.color.setWhite(true);
 		this.loyalty = new MageInt(6);
@@ -76,7 +76,7 @@ public class GideonJura extends CardImpl<GideonJura> {
 		this.addAbility(ability1);
 
 		LoyaltyAbility ability2 = new LoyaltyAbility(new DestroyTargetEffect(), -2);
-		ability2.addTarget(new TargetCreaturePermanent(1, 1, filter, TargetController.ANY));
+		ability2.addTarget(new TargetCreaturePermanent(1, 1, filter, TargetController.ANY, false));
 		this.addAbility(ability2);
 
 		LoyaltyAbility ability3 = new LoyaltyAbility(new BecomesCreatureSourceEOTEffect(new GideonJuraToken(), "planeswalker"), 0);

@@ -31,9 +31,9 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.abilities.effects.common.BoostTargetEffect;
 import mage.cards.CardImpl;
-import mage.sets.Magic2010;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,8 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class MightOfOaks extends CardImpl<MightOfOaks> {
 
     public MightOfOaks(UUID onwerId){
-        super(onwerId, "Might of Oaks", new CardType[]{CardType.INSTANT},"{3}{G}");
-        this.expansionSetId = Magic2010.getInstance().getId();
+        super(onwerId, "Might of Oaks", Rarity.RARE, new CardType[]{CardType.INSTANT},"{3}{G}");
+        this.expansionSetCode = "M10";
 		this.color.setGreen(true);
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 		this.getSpellAbility().addEffect(new BoostTargetEffect(7, 7, Duration.EndOfTurn));

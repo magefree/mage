@@ -31,7 +31,6 @@ package mage.abilities.effects.common;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;

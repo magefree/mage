@@ -30,19 +30,19 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldStaticAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.BecomesCreatureSourceEOTEffect;
-import mage.abilities.effects.common.EntersBattlefieldTappedEffect;
+import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
-import mage.sets.Worldwake;
 
 /**
  *
@@ -51,9 +51,9 @@ import mage.sets.Worldwake;
 public class StirringWildwood extends CardImpl<StirringWildwood> {
 
 	public StirringWildwood(UUID ownerId) {
-		super(ownerId, "Stirring Wildwood", new CardType[]{CardType.LAND}, null);
-		this.expansionSetId = Worldwake.getInstance().getId();
-		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
+		super(ownerId, "Stirring Wildwood", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		this.expansionSetCode = "WWK";
+		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new WhiteManaAbility());
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new StirringWildwoodToken(), "land"), new ManaCostsImpl("{1}{G}{W}")));

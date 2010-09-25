@@ -35,7 +35,7 @@ import mage.abilities.mana.WhiteManaAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class Plains<T extends Plains<T>> extends BasicLand<T> {
+public class Plains extends BasicLand<Plains> {
 
 	public Plains(UUID ownerId) {
 		super(ownerId, "Plains", new WhiteManaAbility());
@@ -43,5 +43,15 @@ public abstract class Plains<T extends Plains<T>> extends BasicLand<T> {
 
 	public Plains(Plains land) {
 		super(land);
+	}
+
+	@Override
+	public Plains copy() {
+		return new Plains(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "";
 	}
 }

@@ -31,6 +31,7 @@ package mage.sets.shardsofalara;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -40,7 +41,6 @@ import mage.abilities.effects.common.SearchLibraryPutInPlayEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
-import mage.sets.ShardsOfAlara;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -50,8 +50,8 @@ import mage.target.common.TargetCardInLibrary;
 public class JundPanorama extends CardImpl<JundPanorama> {
 
 	public JundPanorama(UUID ownerId) {
-		super(ownerId, "Jund Panorama", new CardType[]{CardType.LAND}, null);
-		this.expansionSetId = ShardsOfAlara.getInstance().getId();
+		super(ownerId, "Jund Panorama", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+		this.expansionSetCode = "ALA";
 		this.addAbility(new ColorlessManaAbility());
 		this.addAbility(new JundPanoramaAbility());
 	}

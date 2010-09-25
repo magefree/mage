@@ -31,6 +31,7 @@ package mage.sets.riseoftheeldrazi;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.Mana;
@@ -41,13 +42,11 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.GainAbilityControlledEffect;
 import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LevelAbility;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.LevelerCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.sets.RiseOfTheEldrazi;
 
 /**
  *
@@ -62,8 +61,8 @@ public class JoragaTreespeaker extends LevelerCard<JoragaTreespeaker> {
 	}
 
 	public JoragaTreespeaker(UUID ownerId) {
-		super(ownerId, "Joraga Treespeaker", new CardType[]{CardType.CREATURE}, "{G}");
-		this.expansionSetId = RiseOfTheEldrazi.getInstance().getId();
+		super(ownerId, "Joraga Treespeaker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
+		this.expansionSetCode = "ROE";
 		this.subtype.add("Elf");
 		this.subtype.add("Druid");
 		this.color.setGreen(true);

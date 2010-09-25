@@ -30,10 +30,10 @@ package mage.sets.shardsofalara;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
-import mage.sets.ShardsOfAlara;
 
 /**
  *
@@ -42,8 +42,8 @@ import mage.sets.ShardsOfAlara;
 public class RhoxWarMonk extends CardImpl<RhoxWarMonk> {
 
 	public RhoxWarMonk(UUID ownerId) {
-		super(ownerId, "Rhox War Monk", new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
-		this.expansionSetId = ShardsOfAlara.getInstance().getId();
+		super(ownerId, "Rhox War Monk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
+		this.expansionSetCode = "ALA";
 		this.subtype.add("Rhino");
 		this.subtype.add("Monk");
 		this.color.setWhite(true);

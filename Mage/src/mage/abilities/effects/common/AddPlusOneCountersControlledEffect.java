@@ -52,7 +52,7 @@ public class AddPlusOneCountersControlledEffect extends OneShotEffect<AddPlusOne
 	private FilterPermanent filter;
 
 	public AddPlusOneCountersControlledEffect(int amount) {
-		this(amount, new FilterCreaturePermanent());
+		this(amount, FilterCreaturePermanent.getDefault());
 	}
 
 	public AddPlusOneCountersControlledEffect(int amount, FilterPermanent filter) {

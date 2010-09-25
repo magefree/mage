@@ -31,6 +31,7 @@ package mage.sets.shardsofalara;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.Effects;
@@ -43,7 +44,6 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.game.permanent.token.SoldierToken;
-import mage.sets.ShardsOfAlara;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -55,8 +55,8 @@ public class ElspethKnightErrant extends CardImpl<ElspethKnightErrant> {
 	private static SoldierToken soldierToken = new SoldierToken();
 
 	public ElspethKnightErrant(UUID ownerId) {
-		super(ownerId, "Elspeth, Knight-Errant", new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
-		this.expansionSetId = ShardsOfAlara.getInstance().getId();
+		super(ownerId, "Elspeth, Knight-Errant", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
+		this.expansionSetCode = "ALA";
 		this.subtype.add("Elspeth");
 		this.color.setWhite(true);
 		this.loyalty = new MageInt(4);

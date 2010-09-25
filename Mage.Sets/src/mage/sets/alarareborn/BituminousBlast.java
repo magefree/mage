@@ -30,10 +30,11 @@ package mage.sets.alarareborn;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.CascadeAbility;
 import mage.cards.CardImpl;
-import mage.sets.AlaraReborn;
+
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,8 +44,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class BituminousBlast extends CardImpl<BituminousBlast> {
 
 	public BituminousBlast(UUID ownerId) {
-		super(ownerId, "Bituminous Blast", new CardType[]{CardType.INSTANT}, "{3}{B}{R}");
-		this.expansionSetId = AlaraReborn.getInstance().getId();
+		super(ownerId, "Bituminous Blast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{B}{R}");
+		this.expansionSetCode = "ARB";
 		this.color.setBlack(true);
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());

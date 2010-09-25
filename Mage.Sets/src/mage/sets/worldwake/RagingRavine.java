@@ -30,6 +30,7 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -38,12 +39,11 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AddPlusOneCountersSourceEffect;
 import mage.abilities.effects.common.BecomesCreatureSourceEOTEffect;
-import mage.abilities.effects.common.EntersBattlefieldTappedEffect;
+import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
-import mage.sets.Worldwake;
 
 /**
  *
@@ -52,9 +52,9 @@ import mage.sets.Worldwake;
 public class RagingRavine extends CardImpl<RagingRavine> {
 
 	public RagingRavine(UUID ownerId) {
-		super(ownerId, "Raging Ravine", new CardType[]{CardType.LAND}, null);
-		this.expansionSetId = Worldwake.getInstance().getId();
-		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
+		super(ownerId, "Raging Ravine", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		this.expansionSetCode = "WWK";
+		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new RedManaAbility());
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new RagingRavineToken(), "land"), new ManaCostsImpl("{2}{R}{G}")));

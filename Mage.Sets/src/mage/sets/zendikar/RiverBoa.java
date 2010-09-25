@@ -30,6 +30,7 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,7 +40,6 @@ import mage.abilities.keyword.LandwalkAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterLandPermanent;
-import mage.sets.Zendikar;
 
 /**
  *
@@ -55,8 +55,8 @@ public class RiverBoa extends CardImpl<RiverBoa> {
 	}
 
 	public RiverBoa(UUID ownerId) {
-		super(ownerId, "River Boa", new CardType[]{CardType.CREATURE}, "{1}{G}");
-		this.expansionSetId = Zendikar.getInstance().getId();
+		super(ownerId, "River Boa", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+		this.expansionSetCode = "ZEN";
 		this.color.setGreen(true);
 		this.subtype.add("Snake");
 		this.power = new MageInt(2);

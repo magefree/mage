@@ -30,9 +30,10 @@ package mage.sets.alarareborn;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyNoRegenTargetEffect;
 import mage.cards.CardImpl;
-import mage.sets.AlaraReborn;
+
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -42,8 +43,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class Terminate extends CardImpl<Terminate> {
 
 	public Terminate(UUID ownerId) {
-		super(ownerId, "Terminate", new CardType[]{CardType.INSTANT}, "{B}{R}");
-		this.expansionSetId = AlaraReborn.getInstance().getId();
+		super(ownerId, "Terminate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{R}");
+		this.expansionSetCode = "ARB";
 		this.color.setBlack(true);
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());

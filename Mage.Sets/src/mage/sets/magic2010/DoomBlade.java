@@ -30,11 +30,11 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.TargetController;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.sets.Magic2010;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -52,10 +52,10 @@ public class DoomBlade extends CardImpl<DoomBlade> {
 	}
 
     public DoomBlade(UUID onwerId){
-        super(onwerId, "Doom Blade", new CardType[]{CardType.INSTANT},"{1}{B}");
-        this.expansionSetId = Magic2010.getInstance().getId();
+        super(onwerId, "Doom Blade", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
+        this.expansionSetCode = "M10";
         this.color.setBlack(true);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(1,1,filter, TargetController.ANY));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(1, 1, filter, TargetController.ANY, false));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

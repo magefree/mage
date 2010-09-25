@@ -30,12 +30,12 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
-import mage.sets.RiseOfTheEldrazi;
 
 /**
  *
@@ -44,8 +44,8 @@ import mage.sets.RiseOfTheEldrazi;
 public class WallOfOmens extends CardImpl<WallOfOmens> {
 
 	public WallOfOmens(UUID ownerId) {
-		super(ownerId, "Wall Of Omens", new CardType[]{CardType.CREATURE}, "{1}{W}");
-		this.expansionSetId = RiseOfTheEldrazi.getInstance().getId();
+		super(ownerId, "Wall Of Omens", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+		this.expansionSetCode = "ROE";
 		this.subtype.add("Wall");
 		this.color.setWhite(true);
 		this.power = new MageInt(0);

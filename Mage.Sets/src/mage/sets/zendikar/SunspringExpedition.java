@@ -30,9 +30,9 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.ActivatedAbility;
-import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Costs;
@@ -42,7 +42,6 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.AddCountersSourceEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
-import mage.sets.Zendikar;
 
 /**
  *
@@ -51,8 +50,8 @@ import mage.sets.Zendikar;
 public class SunspringExpedition extends CardImpl<SunspringExpedition> {
 
 	public SunspringExpedition(UUID ownerId) {
-		super(ownerId, "Sunspring Expedition", new CardType[]{CardType.ENCHANTMENT}, "{W}");
-		this.expansionSetId = Zendikar.getInstance().getId();
+		super(ownerId, "Sunspring Expedition", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
+		this.expansionSetCode = "ZEN";
 		this.color.setWhite(true);
 
 		this.addAbility(new LandfallAbility(new AddCountersSourceEffect("quest", 1), true));

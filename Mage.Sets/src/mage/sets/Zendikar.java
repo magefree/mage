@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.sets.zendikar.*;
 import mage.cards.ExpansionSet;
 
 /**
@@ -44,34 +43,7 @@ public class Zendikar extends ExpansionSet {
 	}
 
 	private Zendikar() {
-		this.name = "Zendikar";
-		this.cards.add(AdventuringGear.class);
-		this.cards.add(AetherFigment.class);
-		this.cards.add(ArchiveTrap.class);
-		this.cards.add(AridMesa.class);
-		this.cards.add(BeastmasterAscension.class);
-		this.cards.add(BraveTheElements.class);
-		this.cards.add(BurstLightning.class);
-		this.cards.add(ConquerorsPledge.class);
-		this.cards.add(DayOfJudgment.class);
-		this.cards.add(EldraziMonument.class);
-		this.cards.add(EmeriaAngel.class);
-		this.cards.add(GoblinGuide.class);
-		this.cards.add(GoblinRuinblaster.class);
-		this.cards.add(KabiraCrossroads.class);
-		this.cards.add(LotusCobra.class);
-		this.cards.add(MarshFlats.class);
-		this.cards.add(MistyRainforest.class);
-		this.cards.add(OranRiefTheVastwood.class);
-		this.cards.add(RampagingBaloths.class);
-		this.cards.add(RiverBoa.class);
-		this.cards.add(ScaldingTarn.class);
-		this.cards.add(ScuteMob.class);
-		this.cards.add(SpreadingSeas.class);
-		this.cards.add(SteppeLynx.class);
-		this.cards.add(SunspringExpedition.class);
-		this.cards.add(TeeteringPeaks.class);
-		this.cards.add(VerdantCatacombs.class);
+		super("Zendikar", "ZEN", "seticon_ZEN", "mage.sets.zendikar");
 	}
 
 }

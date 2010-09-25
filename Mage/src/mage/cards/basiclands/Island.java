@@ -35,7 +35,7 @@ import mage.abilities.mana.BlueManaAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class Island<T extends Island<T>> extends BasicLand<T> {
+public class Island extends BasicLand<Island> {
 
 	public Island(UUID ownerId) {
 		super(ownerId, "Island", new BlueManaAbility());
@@ -43,6 +43,16 @@ public abstract class Island<T extends Island<T>> extends BasicLand<T> {
 
 	public Island(Island land) {
 		super(land);
+	}
+
+	@Override
+	public Island copy() {
+		return new Island(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "";
 	}
 
 }

@@ -60,7 +60,7 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 		this.setModal(false);
     }
 
-	public void loadCards(String name, CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId) {
+	public void loadCards(String name, CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean modal) {
 		this.title = name;
 		cardArea.removeAll();
 		if (showCards != null && showCards.size() < 10)
@@ -73,6 +73,7 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 		pack();
 		this.revalidate();
 		this.repaint();
+		this.setModal(modal);
 		this.setVisible(true);
 	}
 

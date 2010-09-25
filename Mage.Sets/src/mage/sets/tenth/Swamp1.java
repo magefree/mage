@@ -29,27 +29,16 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-import mage.cards.basiclands.Swamp;
-import mage.sets.Tenth;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Swamp1 extends Swamp<Swamp1> {
+public class Swamp1 extends mage.cards.basiclands.Swamp {
 
 	public Swamp1(UUID ownerId) {
 		super(ownerId);
-		this.expansionSetId = Tenth.getInstance().getId();
-	}
-
-	public Swamp1(final Swamp1 card) {
-		super(card);
-	}
-
-	@Override
-	public Swamp1 copy() {
-		return new Swamp1(this);
+		this.expansionSetCode = "10E";
 	}
 
 	@Override

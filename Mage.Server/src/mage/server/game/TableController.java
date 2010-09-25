@@ -198,7 +198,7 @@ public class TableController {
 			finally {
 				output.close();
 			}
-			logger.log(Level.SEVERE, "Saved game:" + game.getId());
+			logger.log(Level.INFO, "Saved game:" + game.getId());
 		}
 		catch(IOException ex) {
 			logger.log(Level.SEVERE, "Cannot save game.", ex);

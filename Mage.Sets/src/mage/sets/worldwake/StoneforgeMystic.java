@@ -30,6 +30,7 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -40,7 +41,6 @@ import mage.abilities.effects.common.PlayTargetWithoutPayingManaEffect;
 import mage.abilities.effects.common.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
-import mage.sets.Worldwake;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 
@@ -58,8 +58,8 @@ public class StoneforgeMystic extends CardImpl<StoneforgeMystic> {
 	}
 
 	public StoneforgeMystic(UUID ownerId) {
-		super(ownerId, "Stoneforge Mystic", new CardType[]{CardType.CREATURE}, "{1}{W}");
-		this.expansionSetId = Worldwake.getInstance().getId();
+		super(ownerId, "Stoneforge Mystic", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
+		this.expansionSetCode = "WWK";
 		this.color.setWhite(true);
 		this.subtype.add("Kor");
 		this.subtype.add("Artificer");

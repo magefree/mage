@@ -31,6 +31,7 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -39,7 +40,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SoldierToken;
 import mage.players.Player;
-import mage.sets.Conflux;
+
 
 /**
  *
@@ -48,8 +49,8 @@ import mage.sets.Conflux;
 public class MartialCoup extends CardImpl<MartialCoup> {
 
 	public MartialCoup(UUID ownerId) {
-		super(ownerId, "Martial Coup", new CardType[]{CardType.SORCERY}, "{X}{W}{W}");
-		this.expansionSetId = Conflux.getInstance().getId();
+		super(ownerId, "Martial Coup", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{W}{W}");
+		this.expansionSetCode = "CON";
 		this.color.setWhite(true);
 		this.getSpellAbility().addEffect(new MartialCoupEffect());
 	}
@@ -87,11 +88,10 @@ class MartialCoupEffect extends OneShotEffect<MartialCoupEffect> {
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Player controller = game.getPlayer(source.getControllerId());
-		int amount = source.getManaCosts().getVariableCosts().get(0).getValue();
+		int amount = source.getCosts().getVariableCosts().get(0).getAmount();
 
-		FilterCreaturePermanent filter = new FilterCreaturePermanent();
 		if (amount > 4) {
-			for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+			for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), source.getControllerId(), game)) {
 				permanent.destroy(source.getSourceId(), game, false);
 			}
 		}

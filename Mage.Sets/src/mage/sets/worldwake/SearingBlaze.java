@@ -31,6 +31,7 @@ package mage.sets.worldwake;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -41,7 +42,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.sets.Worldwake;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
@@ -54,8 +54,8 @@ import mage.watchers.WatcherImpl;
 public class SearingBlaze extends CardImpl<SearingBlaze> {
 
 	public SearingBlaze(UUID ownerId) {
-		super(ownerId, "Searing Blaze", new CardType[]{CardType.INSTANT}, "{R}{R}");
-		this.expansionSetId = Worldwake.getInstance().getId();
+		super(ownerId, "Searing Blaze", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}{R}");
+		this.expansionSetCode = "WWK";
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetPlayer());
 		//TODO: change this to only allow creatures controlled by first target
@@ -129,18 +129,18 @@ class SearingBlazeEffect extends OneShotEffect<SearingBlazeEffect> {
 		Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
 		if (watcher != null && watcher.conditionMet()) {
 			if (player != null) {
-				player.damage(3, source.getId(), game);
+				player.damage(3, source.getId(), game, false, true);
 			}
 			if (creature != null) {
-				creature.damage(3, source.getId(), game);
+				creature.damage(3, source.getId(), game, true);
 			}
 		}
 		else {
 			if (player != null) {
-				player.damage(1, source.getId(), game);
+				player.damage(1, source.getId(), game, false, true);
 			}
 			if (creature != null) {
-				creature.damage(1, source.getId(), game);
+				creature.damage(1, source.getId(), game, true);
 			}
 		}
 		return true;

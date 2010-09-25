@@ -52,8 +52,8 @@ public class FlyingAbility extends EvasionAbilityImpl<FlyingAbility> {
 	private FlyingAbility() {}
 
 	@Override
-	public boolean canBlock(Permanent permanent, Game game) {
-		if (permanent.getAbilities().containsKey(id) || permanent.getAbilities().containsKey(ReachAbility.getInstance().getId()))
+	public boolean canBlock(Permanent blocker, Game game) {
+		if (blocker.getAbilities().containsKey(id) || blocker.getAbilities().containsKey(ReachAbility.getInstance().getId()))
 			return true;
 		return false;
 	}

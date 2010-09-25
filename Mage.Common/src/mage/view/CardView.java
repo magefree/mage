@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.ObjectColor;
 import mage.cards.Card;
 import mage.game.permanent.Permanent;
@@ -55,6 +56,8 @@ public class CardView implements Serializable {
 	protected ObjectColor color;
 	protected List<String> manaCost;
 	protected String art;
+	protected Rarity rarity;
+	protected String expansionSetCode;
 
 	public CardView(Card card) {
 		this.id = card.getId();
@@ -75,6 +78,8 @@ public class CardView implements Serializable {
 		this.color = card.getColor();
 		this.manaCost = card.getManaCost().getSymbols();
 		this.art = card.getArt();
+		this.rarity = card.getRarity();
+		this.expansionSetCode = card.getExpansionSetCode();
 	}
 
 	protected CardView() {
@@ -137,6 +142,14 @@ public class CardView implements Serializable {
 
 	public String getArt() {
 		return art;
+	}
+
+	public Rarity getRarity() {
+		return rarity;
+	}
+
+	public String getExpansionSetCode() {
+		return expansionSetCode;
 	}
 
 	public UUID getId() {

@@ -68,16 +68,17 @@ public interface Permanent extends Card {
 	public boolean changeControllerId(UUID controllerId, Game game);
 	public boolean canBeTargetedBy(MageObject source);
 	public int getDamage();
-	public int damage(int damage, UUID sourceId, Game game);
+	public int damage(int damage, UUID sourceId, Game game, boolean preventable);
 	public void removeAllDamage(Game game);
 	public Counters getCounters();
 	public void reset(Game game);
 	public boolean destroy(UUID sourceId, Game game, boolean noRegen);
 	public boolean sacrifice(UUID sourceId, Game game);
 	public void entersBattlefield(Game game);
-	public boolean moveToZone(Zone zone, Game game, boolean sacrificed);
+	public boolean moveToZone(Zone zone, Game game, boolean flag);
 	public boolean moveToExile(UUID exileId, String name, Game game);
 	public String getValue();
+	public void setArt(String art);
 
 	@Override
 	public void addAbility(Ability ability);

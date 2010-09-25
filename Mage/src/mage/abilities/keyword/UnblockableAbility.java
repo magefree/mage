@@ -52,7 +52,7 @@ public class UnblockableAbility extends EvasionAbilityImpl<UnblockableAbility> {
 	private UnblockableAbility() {}
 
 	@Override
-	public boolean canBlock(Permanent permanent, Game game) {
+	public boolean canBlock(Permanent blocker, Game game) {
 		return false;
 	}
 

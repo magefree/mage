@@ -75,7 +75,7 @@ public class PermanentToken extends PermanentImpl<PermanentToken> {
 	}
 
 	@Override
-	public boolean moveToZone(Zone zone, Game game, boolean sacrificed) {
+	public boolean moveToZone(Zone zone, Game game, boolean flag) {
 		if (!game.replaceEvent(new ZoneChangeEvent(this.getId(), this.getControllerId(), Zone.BATTLEFIELD, zone))) {
 			if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
 				game.fireEvent(new ZoneChangeEvent(this.getId(), this.getControllerId(), Zone.BATTLEFIELD, zone));
@@ -100,6 +100,9 @@ public class PermanentToken extends PermanentImpl<PermanentToken> {
 	public String getArt() {
 		return "";
 	}
+
+	@Override
+	public void setArt(String art) { }
 
 	@Override
 	public PermanentToken copy() {

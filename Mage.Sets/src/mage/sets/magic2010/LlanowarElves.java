@@ -30,10 +30,10 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
-import mage.sets.Magic2010;
 
 /**
  *
@@ -42,8 +42,8 @@ import mage.sets.Magic2010;
 public class LlanowarElves extends CardImpl<LlanowarElves> {
 
 	public LlanowarElves(UUID ownerId) {
-		super(ownerId, "Llanowar Elves", new CardType[]{CardType.CREATURE}, "{G}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Llanowar Elves", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+		this.expansionSetCode = "M10";
 		this.subtype.add("Elf");
 		this.subtype.add("Druid");
 		this.color.setGreen(true);

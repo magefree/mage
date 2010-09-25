@@ -30,12 +30,12 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.LandwalkAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterLandPermanent;
-import mage.sets.Magic2010;
 
 /**
  *
@@ -51,8 +51,8 @@ public class BogWraith extends CardImpl<BogWraith> {
 	}
 
 	public BogWraith(UUID ownerId) {
-		super(ownerId, "Bog Wraith", new CardType[]{CardType.CREATURE}, "{3}{B}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Bog Wraith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+		this.expansionSetCode = "M10";
 		this.color.setBlack(true);
 		this.subtype.add("Wraith");
 		this.power = new MageInt(3);

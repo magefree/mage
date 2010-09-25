@@ -30,6 +30,7 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.MageInt;
@@ -39,7 +40,6 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.sets.Magic2010;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,8 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class RoyalAssassin extends CardImpl<RoyalAssassin> {
 
     public RoyalAssassin(UUID onwerId){
-        super(onwerId,"Royal Assassin", new CardType[]{CardType.CREATURE},"{1}{B}{B}");
-        this.expansionSetId = Magic2010.getInstance().getId();
+        super(onwerId,"Royal Assassin", Rarity.RARE, new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+        this.expansionSetCode = "M10";
         this.color.setBlack(true);
         this.subtype.add("Human");
         this.subtype.add("Assassin");
@@ -87,7 +87,7 @@ class RoyalAssassinAbility extends ActivatedAbilityImpl<RoyalAssassinAbility> {
 
     public RoyalAssassinAbility(){
         super(Zone.BATTLEFIELD, null);
-        addTarget(new TargetCreaturePermanent(1,1,filter, TargetController.ANY));
+        addTarget(new TargetCreaturePermanent(1, 1, filter, TargetController.ANY, false));
         addCost(new TapSourceCost());
         addEffect(new DestroyTargetEffect());
     }

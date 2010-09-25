@@ -84,7 +84,7 @@ public abstract class TargetAmount<T extends TargetAmount<T>> extends TargetImpl
 	}
 
 	@Override
-	public boolean choose(Outcome outcome, UUID playerId, Ability source, Game game) {
+	public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game) {
 		Player player = game.getPlayer(playerId);
 		chosen = remainingAmount == 0;
 		while (remainingAmount > 0) {

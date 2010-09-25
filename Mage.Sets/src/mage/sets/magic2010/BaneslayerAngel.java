@@ -30,6 +30,7 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -38,7 +39,6 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.sets.Magic2010;
 
 /**
  *
@@ -47,8 +47,8 @@ import mage.sets.Magic2010;
 public class BaneslayerAngel extends CardImpl<BaneslayerAngel> {
 
 	public BaneslayerAngel(UUID ownerId) {
-		super(ownerId, "Baneslayer Angel", new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Baneslayer Angel", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+		this.expansionSetCode = "M10";
 		this.subtype.add("Angel");
 		this.color.setWhite(true);
 		this.power = new MageInt(5);

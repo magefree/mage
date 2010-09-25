@@ -30,6 +30,7 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,7 +41,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
-import mage.sets.RiseOfTheEldrazi;
 import mage.watchers.Watcher;
 import mage.watchers.WatcherImpl;
 
@@ -51,8 +51,8 @@ import mage.watchers.WatcherImpl;
 public class Vengevine extends CardImpl<Vengevine> {
 
 	public Vengevine(UUID ownerId) {
-		super(ownerId, "Vengevine", new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-		this.expansionSetId = RiseOfTheEldrazi.getInstance().getId();
+		super(ownerId, "Vengevine", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+		this.expansionSetCode = "ROE";
 		this.subtype.add("Elemental");
 		this.color.setGreen(true);
 		this.power = new MageInt(4);

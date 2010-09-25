@@ -30,6 +30,7 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -38,7 +39,6 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.sets.Zendikar;
 import mage.target.common.TargetOpponent;
 import mage.watchers.Watcher;
 import mage.watchers.WatcherImpl;
@@ -50,8 +50,8 @@ import mage.watchers.WatcherImpl;
 public class ArchiveTrap extends CardImpl<ArchiveTrap> {
 
 	public ArchiveTrap(UUID ownerId) {
-		super(ownerId, "Archive Trap", new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
-		this.expansionSetId = Zendikar.getInstance().getId();
+		super(ownerId, "Archive Trap", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
+		this.expansionSetCode = "ZEN";
 		this.color.setBlue(true);
 		this.getSpellAbility().addTarget(new TargetOpponent());
 		this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(13));

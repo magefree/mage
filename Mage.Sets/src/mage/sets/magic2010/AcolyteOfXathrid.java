@@ -30,6 +30,7 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -38,7 +39,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
-import mage.sets.Magic2010;
 import mage.target.TargetPlayer;
 
 /**
@@ -48,8 +48,8 @@ import mage.target.TargetPlayer;
 public class AcolyteOfXathrid extends CardImpl {
 
 	public AcolyteOfXathrid(UUID ownerId) {
-		super(ownerId, "Acolyte Of Xathrid", new CardType[]{CardType.CREATURE}, "{B}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Acolyte Of Xathrid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
+		this.expansionSetCode = "M10";
 		this.subtype.add("Human");
 		this.subtype.add("Cleric");
 		this.color.setBlack(true);

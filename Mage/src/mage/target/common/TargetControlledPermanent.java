@@ -39,15 +39,15 @@ import mage.target.TargetPermanent;
 public class TargetControlledPermanent extends TargetPermanent<TargetControlledPermanent> {
 
 	public TargetControlledPermanent() {
-		this(1, 1, new FilterPermanent());
+		this(1, 1, new FilterPermanent(), false);
 	}
 
 	public TargetControlledPermanent(int numTargets) {
-		this(numTargets, numTargets, new FilterPermanent());
+		this(numTargets, numTargets, new FilterPermanent(), false);
 	}
 
-	public TargetControlledPermanent(int minNumTargets, int maxNumTargets, FilterPermanent filter) {
-		super(1, 1, filter, TargetController.YOU);
+	public TargetControlledPermanent(int minNumTargets, int maxNumTargets, FilterPermanent filter, boolean notTarget) {
+		super(1, 1, filter, TargetController.YOU, notTarget);
 		this.targetName = filter.getMessage();
 	}
 

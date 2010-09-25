@@ -88,6 +88,56 @@ public final class Constants {
 		
 	}
 
+	public enum Rarity {
+
+		LAND ("Land", "common"),
+		COMMON ("Common", "common"),
+		UNCOMMON ("Uncommon", "uncommon"),
+		RARE ("Rare", "rare"),
+		MYTHIC ("Mythic", "mythic");
+
+		private String text;
+		private String symbolCode;
+
+		Rarity(String text, String symbolCode) {
+			this.text = text;
+			this.symbolCode = symbolCode;
+		}
+
+		@Override
+		public String toString() {
+			return text;
+		}
+
+		public String getSymbolCode() {
+			return symbolCode;
+		}
+
+	}
+
+	public enum AbilityType {
+		PLAY_LAND("Play land"),
+		MANA("Mana"),
+		SPELL("Spell"),
+		ACTIVATED("Activated"),
+		STATIC("Static"),
+		TRIGGERED("Triggered"),
+		EVASION("Evasion"),
+		LOYALTY("Loyalty"),
+		SPECIAL_ACTION("Special Action");
+
+		private String text;
+
+		AbilityType(String text) {
+			this.text = text;
+		}
+
+		@Override
+		public String toString() {
+			return text;
+		}
+	}
+
 	public enum Duration {
 		OneUse(""),
 		EndOfGame("for the rest of the game"),
@@ -240,7 +290,7 @@ public final class Constants {
 	}
 
 	public enum Zone {
-		HAND, GRAVEYARD, LIBRARY, BATTLEFIELD, STACK, EXILED, ALL, OUTSIDE, CARD_PICKER, REVEALED, PLAYER, ATTACKERS, BLOCKERS;
+		HAND, GRAVEYARD, LIBRARY, BATTLEFIELD, STACK, EXILED, ALL, OUTSIDE, PICK;
 		
 		public boolean match(Zone zone) {
 			if (this == zone || this == ALL || zone == ALL)
@@ -290,7 +340,7 @@ public final class Constants {
 		}
 	}
 
-	public static List<String> PlaneswalkerTypes = new ArrayList<String>()
+	public static final List<String> PlaneswalkerTypes = new ArrayList<String>()
 		{{add("Ajani"); add("Bolas"); add("Chandra"); add("Elspeth");add("Garruk"); add("Jace"); add("Liliana"); add("Nissa"); add("Sarkhan"); add("Sorin"); add("Tezzeret");}};
 	
 	private Constants() {

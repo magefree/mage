@@ -31,20 +31,20 @@ package mage.sets.zendikar;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldStaticAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.EntersBattlefieldTappedEffect;
+import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.counters.PlusOneCounter;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.sets.Zendikar;
 
 /**
  *
@@ -53,10 +53,9 @@ import mage.sets.Zendikar;
 public class OranRiefTheVastwood extends CardImpl<OranRiefTheVastwood> {
 
 	public OranRiefTheVastwood(UUID ownerId) {
-		super(ownerId, "Oran-Rief, the Vastwood", new CardType[]{CardType.LAND}, null);
-		this.expansionSetId = Zendikar.getInstance().getId();
-//		this.art = "123692_typ_reg_sty_010.jpg";
-		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
+		super(ownerId, "Oran-Rief, the Vastwood", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		this.expansionSetCode = "ZEN";
+		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new OranRiefTheVastwoodEffect(), new TapSourceCost()));
 	}

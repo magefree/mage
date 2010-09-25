@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -47,7 +48,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.sets.Zendikar;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -56,14 +56,12 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class EldraziMonument extends CardImpl<EldraziMonument> {
 
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures");
-
 	public EldraziMonument(UUID ownerId) {
-		super(ownerId, "Eldrazi Monument", new CardType[]{CardType.ARTIFACT}, "{5}");
-		this.expansionSetId = Zendikar.getInstance().getId();
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+		super(ownerId, "Eldrazi Monument", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{5}");
+		this.expansionSetCode = "ZEN";
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, FilterCreaturePermanent.getDefault(), false)));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, FilterCreaturePermanent.getDefault())));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, FilterCreaturePermanent.getDefault())));
 		this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new EldraziMonumentEffect()));
 	}
 
@@ -85,8 +83,6 @@ public class EldraziMonument extends CardImpl<EldraziMonument> {
 
 class EldraziMonumentEffect extends OneShotEffect<EldraziMonumentEffect> {
 
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
 	public EldraziMonumentEffect() {
 		super(Outcome.Sacrifice);
 	}
@@ -102,21 +98,19 @@ class EldraziMonumentEffect extends OneShotEffect<EldraziMonumentEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter);
+		TargetControlledPermanent target = new TargetControlledPermanent(1, 1, FilterCreaturePermanent.getDefault(), true);
 		target.setRequired(true);
 		Player player = game.getPlayer(source.getControllerId());
 		if (target.canChoose(source.getId(), source.getControllerId(), game)) {
-			player.chooseTarget(this.outcome, target, source, game);
+			player.choose(this.outcome, target, game);
 			Permanent permanent = game.getPermanent(target.getFirstTarget());
 			if (permanent != null) {
 				return permanent.sacrifice(source.getSourceId(), game);
 			}
 		}
-		else {
-			Permanent permanent = game.getPermanent(source.getSourceId());
-			if (permanent != null) {
-				return permanent.sacrifice(source.getSourceId(), game);
-			}
+		Permanent permanent = game.getPermanent(source.getSourceId());
+		if (permanent != null) {
+			return permanent.sacrifice(source.getSourceId(), game);
 		}
 		return false;
 

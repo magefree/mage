@@ -31,11 +31,11 @@ package mage.sets.shardsofalara;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PreventAllCombatDamageEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
-import mage.sets.ShardsOfAlara;
 
 /**
  *
@@ -44,8 +44,8 @@ import mage.sets.ShardsOfAlara;
 public class Angelsong extends CardImpl<Angelsong> {
 
 	public Angelsong(UUID ownerId) {
-		super(ownerId, "Angelsong", new CardType[]{CardType.INSTANT}, "{1}{W}");
-		this.expansionSetId = ShardsOfAlara.getInstance().getId();
+		super(ownerId, "Angelsong", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
+		this.expansionSetCode = "ALA";
 		this.color.setWhite(true);
 		this.getSpellAbility().addEffect(new PreventAllCombatDamageEffect(Duration.EndOfTurn));
 		this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));

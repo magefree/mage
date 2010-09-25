@@ -30,11 +30,12 @@ package mage;
 
 import java.util.Map;
 import java.util.UUID;
+import mage.util.Copyable;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface MageObjects extends Map<UUID, MageObject> {
+public interface MageObjects<T extends MageObject> extends Map<UUID, T>, Copyable<MageObjects> {
 
 }

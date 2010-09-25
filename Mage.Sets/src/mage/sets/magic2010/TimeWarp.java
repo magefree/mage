@@ -31,12 +31,12 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
-import mage.sets.Magic2010;
 import mage.target.TargetPlayer;
 
 /**
@@ -46,8 +46,8 @@ import mage.target.TargetPlayer;
 public class TimeWarp extends CardImpl<TimeWarp> {
 
 	public TimeWarp(UUID ownerId) {
-		super(ownerId, "Time Warp", new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Time Warp", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
+		this.expansionSetCode = "M10";
 		this.color.setBlue(true);
 		this.getSpellAbility().addTarget(new TargetPlayer());
 		this.getSpellAbility().addEffect(new TimeWarpEffect());

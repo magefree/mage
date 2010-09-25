@@ -32,12 +32,12 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
-import mage.sets.Zendikar;
 
 /**
  *
@@ -46,8 +46,8 @@ import mage.sets.Zendikar;
 public class AdventuringGear extends CardImpl<AdventuringGear> {
 
 	public AdventuringGear(UUID ownerId) {
-		super(ownerId, "Adventuring Gear", new CardType[]{CardType.ARTIFACT}, "{1}");
-		this.expansionSetId = Zendikar.getInstance().getId();
+		super(ownerId, "Adventuring Gear", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
+		this.expansionSetCode = "ZEN";
 		this.subtype.add("Equipment");
 		this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
 		this.addAbility(new LandfallAbility(new BoostEquippedEffect(2, 2, Duration.EndOfTurn), false));

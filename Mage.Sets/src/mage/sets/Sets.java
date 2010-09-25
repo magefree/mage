@@ -28,32 +28,48 @@
 
 package mage.sets;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Sets extends ArrayList<ExpansionSet> {
+public class Sets extends HashMap<String, ExpansionSet> {
 
 	private static final Sets fINSTANCE =  new Sets();
+	private static Set<String> names;
 
 	public static Sets getInstance() {
 		return fINSTANCE;
 	}
 
 	private Sets() {
-		this.add(AlaraReborn.getInstance());
-		this.add(Conflux.getInstance());
-		this.add(Magic2010.getInstance());
-		this.add(Magic2011.getInstance());
-		this.add(Planechase.getInstance());
-		this.add(RiseOfTheEldrazi.getInstance());
-		this.add(ShardsOfAlara.getInstance());
-		this.add(Tenth.getInstance());
-		this.add(Worldwake.getInstance());
-		this.add(Zendikar.getInstance());
+		names = new HashSet<String>();
+		this.addSet(AlaraReborn.getInstance());
+		this.addSet(Conflux.getInstance());
+		this.addSet(Magic2010.getInstance());
+		this.addSet(Magic2011.getInstance());
+		this.addSet(Planechase.getInstance());
+		this.addSet(RiseOfTheEldrazi.getInstance());
+		this.addSet(ShardsOfAlara.getInstance());
+		this.addSet(Tenth.getInstance());
+		this.addSet(Worldwake.getInstance());
+		this.addSet(Zendikar.getInstance());
+	}
+
+	private void addSet(ExpansionSet set) {
+		this.put(set.getCode(), set);
+		for (Card card: set.createCards()) {
+			names.add(card.getName());
+		}
+	}
+
+	public static Set<String> getCardNames() {
+		return names;
 	}
 
 }

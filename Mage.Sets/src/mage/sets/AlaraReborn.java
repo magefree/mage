@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.sets.alarareborn.*;
 import mage.cards.ExpansionSet;
 
 /**
@@ -44,16 +43,7 @@ public class AlaraReborn extends ExpansionSet {
 	}
 
 	private AlaraReborn() {
-		this.name = "Alara Reborn";
-		this.cards.add(BehemothSledge.class);
-		this.cards.add(BituminousBlast.class);
-		this.cards.add(BloodbraidElf.class);
-		this.cards.add(FinestHour.class);
-		this.cards.add(MaelstromPulse.class);
-		this.cards.add(PutridLeech.class);
-		this.cards.add(SpellbreakerBehemoth.class);
-		this.cards.add(Terminate.class);
-		this.cards.add(VengefulRebirth.class);
+		super("Alara Reborn", "ARB", "seticon_mtgarb", "mage.sets.alarareborn");
 	}
 
 }

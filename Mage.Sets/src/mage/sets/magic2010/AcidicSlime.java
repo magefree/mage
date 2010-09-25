@@ -30,6 +30,7 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.TargetController;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -39,7 +40,6 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
-import mage.sets.Magic2010;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
@@ -59,8 +59,8 @@ public class AcidicSlime extends CardImpl<AcidicSlime> {
 	}
 
 	public AcidicSlime(UUID ownerId) {
-		super(ownerId, "Acidic Slime", new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Acidic Slime", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+		this.expansionSetCode = "M10";
 		this.subtype.add("Ooze");
 		this.color.setGreen(true);
 		this.power = new MageInt(2);

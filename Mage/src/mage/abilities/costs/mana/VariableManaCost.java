@@ -29,13 +29,14 @@
 package mage.abilities.costs.mana;
 
 import mage.Mana;
+import mage.abilities.costs.VariableCost;
 import mage.players.ManaPool;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class VariableManaCost extends ManaCostImpl<VariableManaCost> {
+public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements VariableCost {
 
 	protected Mana manaPaid = new Mana();
 	protected int multiplier;
@@ -95,7 +96,8 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> {
 		return manaPaid;
 	}
 
-	public int getValue() {
+	@Override
+	public int getAmount() {
 		return manaPaid.count() / multiplier;
 	}
 

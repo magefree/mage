@@ -32,8 +32,10 @@ import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -56,9 +58,21 @@ public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEf
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			return permanent.moveToZone(Zone.HAND, game, false);
+		switch (source.getTargets().get(0).getZone()) {
+			case BATTLEFIELD:
+				Permanent permanent = game.getPermanent(source.getFirstTarget());
+				if (permanent != null) {
+					return permanent.moveToZone(Zone.HAND, game, false);
+				}
+			case GRAVEYARD:
+				Card card = game.getCard(source.getFirstTarget());
+				for (Player player: game.getPlayers().values()) {
+					if (player.getGraveyard().contains(card.getId())) {
+						player.getHand().add(card);
+						player.getGraveyard().remove(card);
+						return true;
+					}
+				}
 		}
 		return false;
 	}

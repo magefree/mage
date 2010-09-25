@@ -52,13 +52,13 @@ public class PayLifeCost extends CostImpl<PayLifeCost> {
 	}
 
 	@Override
-	public boolean canPay(Ability source, Game game) {
-		return game.getPlayer(source.getControllerId()).getLife() >= amount;
+	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+		return game.getPlayer(controllerId).getLife() >= amount;
 	}
 
 	@Override
-	public boolean pay(Game game, Ability source, boolean noMana) {
-		this.paid = game.getPlayer(source.getControllerId()).loseLife(amount, game) == amount;
+	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+		this.paid = game.getPlayer(controllerId).loseLife(amount, game) == amount;
 		return paid;
 	}
 

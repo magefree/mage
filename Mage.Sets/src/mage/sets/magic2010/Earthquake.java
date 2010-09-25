@@ -31,6 +31,7 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -39,7 +40,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.sets.Magic2010;
 
 /**
  *
@@ -48,8 +48,8 @@ import mage.sets.Magic2010;
 public class Earthquake extends CardImpl<Earthquake> {
 
 	public Earthquake(UUID ownerId) {
-		super(ownerId, "Earthquake", new CardType[]{CardType.SORCERY}, "{X}{R}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Earthquake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
+		this.expansionSetCode = "M10";
 		this.color.setRed(true);
 		this.getSpellAbility().addEffect(new EarthquakeEffect());
 	}
@@ -71,6 +71,13 @@ public class Earthquake extends CardImpl<Earthquake> {
 
 class EarthquakeEffect extends OneShotEffect<EarthquakeEffect> {
 
+	private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+
+	static {
+		filter.getAbilities().add(FlyingAbility.getInstance());
+		filter.setNotAbilities(true);
+	}
+
 	public EarthquakeEffect() {
 		super(Outcome.Damage);
 	}
@@ -86,18 +93,15 @@ class EarthquakeEffect extends OneShotEffect<EarthquakeEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		int amount = source.getManaCosts().getVariableCosts().get(0).getValue();
+		int amount = source.getCosts().getVariableCosts().get(0).getAmount();
 
-		FilterCreaturePermanent filter = new FilterCreaturePermanent();
-		filter.getAbilities().add(FlyingAbility.getInstance());
-		filter.setNotAbilities(true);
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-			permanent.damage(amount, source.getId(), game);
+			permanent.damage(amount, source.getId(), game, true);
 		}
 		for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
 			Player player = game.getPlayer(playerId);
 			if (player != null)
-				player.damage(amount, source.getId(), game);
+				player.damage(amount, source.getId(), game, false, true);
 		}
 		return true;
 	}

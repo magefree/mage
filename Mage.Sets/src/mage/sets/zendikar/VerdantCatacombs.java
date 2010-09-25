@@ -30,9 +30,9 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.abilities.common.FetchLandActivatedAbility;
 import mage.cards.CardImpl;
-import mage.sets.Zendikar;
 
 /**
  *
@@ -41,8 +41,8 @@ import mage.sets.Zendikar;
 public class VerdantCatacombs extends CardImpl<VerdantCatacombs> {
 
 	public VerdantCatacombs(UUID ownerId) {
-		super(ownerId, "Verdant Catacombs", new CardType[]{CardType.LAND}, null);
-		this.expansionSetId = Zendikar.getInstance().getId();
+		super(ownerId, "Verdant Catacombs", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		this.expansionSetCode = "ZEN";
 		this.addAbility(new FetchLandActivatedAbility(new String[] {"Forest", "Swamp"}));
 	}
 

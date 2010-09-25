@@ -72,11 +72,22 @@ public class Targets extends ArrayList<Target> {
 		return true;
 	}
 
-	public boolean choose(Outcome outcome, UUID playerId, Ability source, Game game) {
+	public boolean choose(Outcome outcome, UUID playerId, Game game) {
 		if (this.size() > 0) {
 			while (!isChosen()) {
 				Target target = this.getUnchosen().get(0);
-				if (!target.choose(outcome, playerId, source, game))
+				if (!target.choose(outcome, playerId, game))
+					return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean chooseTargets(Outcome outcome, UUID playerId, Ability source, Game game) {
+		if (this.size() > 0) {
+			while (!isChosen()) {
+				Target target = this.getUnchosen().get(0);
+				if (!target.chooseTarget(outcome, playerId, source, game))
 					return false;
 			}
 		}

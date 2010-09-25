@@ -30,9 +30,9 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
-import mage.sets.Magic2010;
 
 /**
  *
@@ -41,8 +41,8 @@ import mage.sets.Magic2010;
 public class AngelsMercy extends CardImpl<AngelsMercy> {
 
 	public AngelsMercy(UUID ownerId) {
-		super(ownerId, "Angel's Mercy", new CardType[]{CardType.INSTANT}, "{2}{W}{W}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Angel's Mercy", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{W}");
+		this.expansionSetCode = "M10";
 		this.color.setWhite(true);
 		this.getSpellAbility().addEffect(new GainLifeEffect(7));
 	}

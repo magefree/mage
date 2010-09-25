@@ -33,6 +33,7 @@ import java.util.List;
 public interface Costs<T extends Cost> extends List<T>, Cost {
 
 	public List<T> getUnpaid();
+	public List<VariableCost> getVariableCosts();
 	@Override
 	public Costs<T> copy();
 }

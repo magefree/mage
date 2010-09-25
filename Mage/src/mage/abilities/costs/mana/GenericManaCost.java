@@ -49,6 +49,10 @@ public class GenericManaCost extends ManaCostImpl<GenericManaCost> {
 		return mana;
 	}
 
+	public void setMana(int mana) {
+		this.mana = mana;
+	}
+
 	@Override
 	public int convertedManaCost() {
 		return mana;

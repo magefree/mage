@@ -39,8 +39,8 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.prefs.Preferences;
 import javax.swing.JOptionPane;
+import mage.client.MageFrame;
 import mage.client.remote.Session;
 import mage.client.util.Config;
 import mage.util.Logging;
@@ -52,20 +52,17 @@ import mage.util.Logging;
 public class ConnectDialog extends MageDialog {
 
 	private final static Logger logger = Logging.getLogger(ConnectDialog.class.getName());
-	private Session session;
-	private Preferences prefs;
 
     /** Creates new form ConnectDialog */
-    public ConnectDialog(Session session) {
-		this.session = session;
-		prefs = Preferences.userNodeForPackage(this.getClass());
-        initComponents();
+    public ConnectDialog() {
+       initComponents();
     }
 
 	public void showDialog() {
-		this.txtServer.setText(prefs.get("serverAddress", Config.serverName));
-		this.txtPort.setText(prefs.get("serverPort", Integer.toString(Config.port)));
-		this.txtUserName.setText(prefs.get("userName", ""));
+		this.txtServer.setText(MageFrame.getPreferences().get("serverAddress", Config.serverName));
+		this.txtPort.setText(MageFrame.getPreferences().get("serverPort", Integer.toString(Config.port)));
+		this.txtUserName.setText(MageFrame.getPreferences().get("userName", ""));
+		this.chkAutoConnect.setSelected(Boolean.parseBoolean(MageFrame.getPreferences().get("autoConnect", "false")));
 		this.setModal(true);
 		this.setLocation(50, 50);
 		this.setVisible(true);
@@ -88,6 +85,7 @@ public class ConnectDialog extends MageDialog {
         lblUserName = new javax.swing.JLabel();
         btnConnect = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        chkAutoConnect = new javax.swing.JCheckBox();
 
         setTitle("Connect");
         setNormalBounds(new java.awt.Rectangle(100, 100, 410, 307));
@@ -121,14 +119,25 @@ public class ConnectDialog extends MageDialog {
             }
         });
 
+        chkAutoConnect.setText("Automatically connect to this server next time");
+        chkAutoConnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkAutoConnectActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnConnect)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancel))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblPort)
                             .addComponent(lblServer)
@@ -138,12 +147,9 @@ public class ConnectDialog extends MageDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(131, 131, 131))
-                            .addComponent(txtServer, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
-                            .addComponent(txtUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnConnect)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancel)))
+                            .addComponent(txtServer, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                            .addComponent(txtUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                            .addComponent(chkAutoConnect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -161,7 +167,9 @@ public class ConnectDialog extends MageDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUserName))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkAutoConnect)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
                     .addComponent(btnConnect))
@@ -172,48 +180,46 @@ public class ConnectDialog extends MageDialog {
     }// </editor-fold>//GEN-END:initComponents
 
 	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+		MageFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
 		this.setVisible(false);
 	}//GEN-LAST:event_btnCancelActionPerformed
 
 	private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
 		
+		if (txtUserName.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(rootPane, "Please provide a user name");
+			return;
+		}
+		if (txtServer.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(rootPane, "Please provide a server address");
+			return;
+		}
+		if (txtPort.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(rootPane, "Please provide a port number");
+			return;
+		}
+		if (Integer.valueOf(txtPort.getText()) < 1 || Integer.valueOf(txtPort.getText()) > 65535 ) {
+			JOptionPane.showMessageDialog(rootPane, "Invalid port number");
+			txtPort.setText(MageFrame.getPreferences().get("serverPort", Integer.toString(Config.port)));
+			return;
+		}
 		try {
-			if (txtUserName.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(rootPane, "Please provide a user name");
-				return;
-			}
-			if (txtServer.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(rootPane, "Please provide a server address");
-				return;
-			}
-			if (txtPort.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(rootPane, "Please provide a port number");
-				return;
-			}
-			if (Integer.valueOf(txtPort.getText()) < 1 || Integer.valueOf(txtPort.getText()) > 65535 ) {
-				JOptionPane.showMessageDialog(rootPane, "Invalid port number");
-				txtPort.setText(prefs.get("serverPort", Integer.toString(Config.port)));
-				return;
-			}
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			session.connect(txtUserName.getText(), txtServer.getText(), Integer.valueOf(txtPort.getText()));
-
-			prefs.put("serverAddress", txtServer.getText());
-			prefs.put("serverPort", txtPort.getText());
-			prefs.put("userName", txtUserName.getText());
-			this.setVisible(false);
-		} catch (RemoteException ex) {
-			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-			logger.log(Level.SEVERE, "Unable to connect to server", ex);
-			JOptionPane.showMessageDialog(rootPane, "Unable to connect to server");
-		} catch (NotBoundException ex) {
-			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-			logger.log(Level.SEVERE, "Unable to connect to server", ex);
-			JOptionPane.showMessageDialog(rootPane, "Unable to connect to server");
+			if (MageFrame.connect(txtUserName.getText(), txtServer.getText(), Integer.valueOf(txtPort.getText()))) {
+				MageFrame.getPreferences().put("serverAddress", txtServer.getText());
+				MageFrame.getPreferences().put("serverPort", txtPort.getText());
+				MageFrame.getPreferences().put("userName", txtUserName.getText());
+				MageFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
+				this.setVisible(false);
+			}
+			else {
+				JOptionPane.showMessageDialog(rootPane, "Unable to connect to server");
+			}
 		}
 		finally {
 			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		}
+
 	}//GEN-LAST:event_btnConnectActionPerformed
 
 	private void keyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_keyTyped
@@ -222,10 +228,16 @@ public class ConnectDialog extends MageDialog {
 			evt.consume();
 	}//GEN-LAST:event_keyTyped
 
+	private void chkAutoConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAutoConnectActionPerformed
+		
+		// TODO add your handling code here:
+	}//GEN-LAST:event_chkAutoConnectActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnConnect;
+    private javax.swing.JCheckBox chkAutoConnect;
     private javax.swing.JLabel lblPort;
     private javax.swing.JLabel lblServer;
     private javax.swing.JLabel lblUserName;

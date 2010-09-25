@@ -31,7 +31,6 @@ package mage.target;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.filter.FilterPlayer;
@@ -47,17 +46,18 @@ public class TargetPlayer<T extends TargetPlayer<T>> extends TargetImpl<TargetPl
 	protected FilterPlayer filter = new FilterPlayer();
 
 	public TargetPlayer() {
-		this(1, 1);
+		this(1, 1, false);
 	}
 
 	public TargetPlayer(int numTargets) {
-		this(numTargets, numTargets);
+		this(numTargets, numTargets, false);
 	}
 
-	public TargetPlayer(int minNumTargets, int maxNumTargets) {
+	public TargetPlayer(int minNumTargets, int maxNumTargets, boolean notTarget) {
 		this.minNumberOfTargets = minNumTargets;
 		this.maxNumberOfTargets = maxNumTargets;
 		this.targetName = "player";
+		this.notTarget = notTarget;
 	}
 
 	public TargetPlayer(final TargetPlayer target) {
@@ -108,6 +108,15 @@ public class TargetPlayer<T extends TargetPlayer<T>> extends TargetImpl<TargetPl
 				return false;
 		}
 		return true;
+	}
+
+	@Override
+	public boolean canTarget(UUID id, Game game) {
+		Player player = game.getPlayer(id);
+		if (player != null) {
+			return filter.match(player);
+		}
+		return false;
 	}
 
 	@Override

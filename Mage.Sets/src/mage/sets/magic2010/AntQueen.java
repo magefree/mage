@@ -30,6 +30,7 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -37,7 +38,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.InsectToken;
-import mage.sets.Magic2010;
 
 /**
  *
@@ -48,8 +48,8 @@ public class AntQueen extends CardImpl<AntQueen> {
 	private static InsectToken insectToken = new InsectToken();
 
 	public AntQueen(UUID ownerId) {
-		super(ownerId, "Ant Queen", new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Ant Queen", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+		this.expansionSetCode = "M10";
 		this.subtype.add("Insect");
 		this.color.setGreen(true);
 //		this.art = "122179_typ_reg_sty_010.jpg";

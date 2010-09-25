@@ -30,9 +30,11 @@ package mage.abilities.costs.mana;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import mage.Constants.ColoredManaSymbol;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.costs.VariableCost;
 import mage.abilities.mana.ManaOptions;
 import mage.game.Game;
 import mage.players.ManaPool;
@@ -89,12 +91,12 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 	}
 
 	@Override
-	public boolean pay(Game game, Ability source, boolean noMana) {
+	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
 		if (this.size() == 0 || noMana) {
 			setPaid();
 			return true;
 		}
-		Player player = game.getPlayer(source.getControllerId());
+		Player player = game.getPlayer(controllerId);
 		assignPayment(player.getManaPool());
 		while (!isPaid()) {
 			if (player.playMana(this.getUnpaid(), game))
@@ -135,11 +137,11 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 	}
 
 	@Override
-	public List<VariableManaCost> getVariableCosts() {
-		List<VariableManaCost> variableCosts = new ArrayList<VariableManaCost>();
+	public List<VariableCost> getVariableCosts() {
+		List<VariableCost> variableCosts = new ArrayList<VariableCost>();
 		for (ManaCost cost: this) {
-			if (cost instanceof VariableManaCost)
-				variableCosts.add((VariableManaCost) cost);
+			if (cost instanceof VariableCost)
+				variableCosts.add((VariableCost) cost);
 		}
 		return variableCosts;
 	}
@@ -251,9 +253,9 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 	}
 
 	@Override
-	public boolean canPay(Ability source, Game game) {
+	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
 		for (T cost: this) {
-			if (!cost.canPay(source, game))
+			if (!cost.canPay(sourceId, controllerId, game))
 				return false;
 		}
 		return true;

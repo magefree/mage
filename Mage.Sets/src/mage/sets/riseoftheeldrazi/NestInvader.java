@@ -30,12 +30,12 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.EldraziSpawnToken;
-import mage.sets.RiseOfTheEldrazi;
 
 /**
  *
@@ -44,8 +44,8 @@ import mage.sets.RiseOfTheEldrazi;
 public class NestInvader extends CardImpl<NestInvader> {
 
 	public NestInvader(UUID ownerId) {
-		super(ownerId, "Nest Invader", new CardType[]{CardType.CREATURE}, "{1}{G}");
-		this.expansionSetId = RiseOfTheEldrazi.getInstance().getId();
+		super(ownerId, "Nest Invader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+		this.expansionSetCode = "ROE";
 		this.subtype.add("Eldrazi");
 		this.subtype.add("Drone");
 		this.color.setGreen(true);

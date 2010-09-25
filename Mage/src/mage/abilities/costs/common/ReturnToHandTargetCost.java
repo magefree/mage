@@ -53,19 +53,21 @@ public class ReturnToHandTargetCost extends CostImpl<ReturnToHandTargetCost> {
 	}
 
 	@Override
-	public boolean pay(Game game, Ability source, boolean noMana) {
-		if (targets.choose(Outcome.ReturnToHand, source.getControllerId(), source, game)) {
-			Permanent permanent = game.getPermanent(targets.getFirstTarget());
-			if (permanent != null) {
-				paid = permanent.moveToZone(Zone.HAND, game, false);
+	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+		if (targets.choose(Outcome.ReturnToHand, controllerId, game)) {
+			for (UUID targetId: targets.get(0).getTargets()) {
+				Permanent permanent = game.getPermanent(targetId);
+				if (permanent == null)
+					return false;
+				paid |= permanent.moveToZone(Zone.HAND, game, false);
 			}
 		}
 		return paid;
 	}
 
 	@Override
-	public boolean canPay(Ability source, Game game) {
-		return targets.canChoose(source.getControllerId(), source.getControllerId(), game);
+	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+		return targets.canChoose(controllerId, controllerId, game);
 	}
 
 	@Override

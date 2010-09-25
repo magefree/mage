@@ -54,11 +54,12 @@ public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
 
 	@Override
 	public boolean canActivate(UUID playerId, Game game) {
-		if ((game.getObject(sourceId).getCardType().contains(CardType.INSTANT) ||
-			game.getObject(sourceId).getAbilities().containsKey(FlashAbility.getInstance().getId()) ||
-			game.canPlaySorcery(playerId)) &&
-			costs.canPay(this, game) && targets.canChoose(sourceId, playerId, game)) {
-			return true;
+		if ((game.getObject(sourceId).getCardType().contains(CardType.INSTANT) || 
+				game.getObject(sourceId).getAbilities().containsKey(FlashAbility.getInstance().getId()) ||
+				game.canPlaySorcery(playerId))) {
+			if (costs.canPay(sourceId, controllerId, game) && targets.canChoose(sourceId, playerId, game)) {
+				return true;
+			}
 		}
 		return false;
 	}

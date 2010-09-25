@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.sets.magic2010.*;
 import mage.cards.ExpansionSet;
 
 /**
@@ -44,59 +43,6 @@ public class Magic2010 extends ExpansionSet {
 	}
 
 	private Magic2010() {
-		this.name = "Magic 2010";
-		this.cards.add(AcidicSlime.class);
-		this.cards.add(AcolyteOfXathrid.class);
-		this.cards.add(ActOfTreason.class);
-		this.cards.add(AirElemental.class);
-		this.cards.add(AjaniGoldmane.class);
-		this.cards.add(AlluringSiren.class);
-		this.cards.add(AngelsFeather.class);
-		this.cards.add(AngelsMercy.class);
-		this.cards.add(AntQueen.class);
-		this.cards.add(ArmoredAscension.class);
-		this.cards.add(Assassinate.class);
-		this.cards.add(AwakenerDruid.class);
-		this.cards.add(BallLightning.class);
-		this.cards.add(BaneslayerAngel.class);
-		this.cards.add(BirdsOfParadise.class);
-		this.cards.add(BerserkersOfBloodRidge.class);
-		this.cards.add(BlackKnight.class);
-		this.cards.add(BlindingMage.class);
-		this.cards.add(BogWraith.class);
-		this.cards.add(BogardanHellkite.class);
-		this.cards.add(Cancel.class);
-		this.cards.add(CelestialPurge.class);
-		this.cards.add(DiabolicTutor.class);
-		this.cards.add(DoomBlade.class);
-		this.cards.add(DragonskullSummit.class);
-		this.cards.add(Earthquake.class);
-		this.cards.add(EliteVanguard.class);
-		this.cards.add(Flashfreeze.class);
-		this.cards.add(GargoyleCastle.class);
-		this.cards.add(GarrukWildspeaker.class);
-		this.cards.add(GiantGrowth.class);
-		this.cards.add(GlacialFortress.class);
-		this.cards.add(GreatSableStag.class);
-		this.cards.add(HonorOfThePure.class);
-		this.cards.add(HowlingMine.class);
-		this.cards.add(JaceBeleren.class);
-		this.cards.add(LlanowarElves.class);
-		this.cards.add(LightningBolt.class);
-		this.cards.add(MasterOfTheWildHunt.class);
-		this.cards.add(MightOfOaks.class);
-		this.cards.add(MindRot.class);
-		this.cards.add(Naturalize.class);
-		this.cards.add(Overrun.class);
-		this.cards.add(RampantGrowth.class);
-		this.cards.add(MindSpring.class);
-		this.cards.add(Negate.class);
-		this.cards.add(RootboundCrag.class);
-		this.cards.add(RoyalAssassin.class);
-		this.cards.add(SafePassage.class);
-		this.cards.add(SunpetalGrove.class);
-		this.cards.add(TerramorphicExpanse.class);
-		this.cards.add(TimeWarp.class);
-		this.cards.add(WhiteKnight.class);
+		super("Magic 2010", "M10", "seticon_M10", "mage.sets.magic2010");
 	}
 }

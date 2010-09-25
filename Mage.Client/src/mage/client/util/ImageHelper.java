@@ -42,6 +42,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import mage.Constants.CardType;
 import mage.client.cards.CardDimensions;
+import mage.sets.Sets;
 import mage.view.AbilityView;
 import mage.view.CardView;
 import mage.view.StackAbilityView;
@@ -52,17 +53,30 @@ import static mage.client.util.Constants.*;
  * @author BetaSteward_at_googlemail.com
  */
 public class ImageHelper {
-	protected static HashMap<String, Image> images = new HashMap<String, Image>();
+	protected static HashMap<String, BufferedImage> images = new HashMap<String, BufferedImage>();
 	protected static HashMap<String, BufferedImage> backgrounds = new HashMap<String, BufferedImage>();
 
-	public static Image loadImage(String ref, int width, int height) {
-		Image image = loadImage(ref);
+	public static BufferedImage loadImage(String ref, int width, int height) {
+		BufferedImage image = loadImage(ref);
 		if (image != null)
-			return ScaleImage(image, width, height);
+			return scaleImage(image, width, height);
 		return null;
 	}
 
-	public static Image loadImage(String ref) {
+	/**
+	 *
+	 * @param ref - image name
+	 * @param height - height after scaling
+	 * @return a scaled image that preserves the original aspect ratio, with a specified height
+	 */
+	public static BufferedImage loadImage(String ref, int height) {
+		BufferedImage image = loadImage(ref);
+		if (image != null)
+			return scaleImage(image, height);
+		return null;
+	}
+
+	public static BufferedImage loadImage(String ref) {
 		if (!images.containsKey(ref)) {
 			try {
 				if (Config.useResource)
@@ -76,11 +90,9 @@ public class ImageHelper {
 		return images.get(ref);
 	}
 
-	public static BufferedImage getBackground(CardView card) {
-		// card background should be the same for all cards with the same name/art
-		String cardName = card.getName()+card.getArt();
-		if (backgrounds.containsKey(cardName)) {
-			return backgrounds.get(cardName);
+	public static BufferedImage getBackground(CardView card, String backgroundName) {
+		if (backgrounds.containsKey(backgroundName)) {
+			return backgrounds.get(backgroundName);
 		}
 		
 		BufferedImage background = new BufferedImage(FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -88,28 +100,40 @@ public class ImageHelper {
 	    g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
-		g.drawImage(getFrame(card), 0, 0, Color.WHITE, null);
-		if (card.getArt() != null && !card.getArt().equals("")) {
-			Image art = loadImage(Config.cardArtResourcePath + card.getArt(), ART_MAX_WIDTH, ART_MAX_HEIGHT);
-			g.drawImage(art, CONTENT_MAX_XOFFSET, ART_MAX_YOFFSET, null);
+		if (card instanceof StackAbilityView || card instanceof AbilityView) {
+			g.drawImage(Frames.Effect, 0, 0, Color.WHITE, null);
 		}
+		else {
+			g.drawImage(getFrame(card), 0, 0, Color.WHITE, null);
+			if (card.getArt() != null && !card.getArt().equals("")) {
+				BufferedImage art = loadImage(Config.cardArtResourcePath + card.getArt(), ART_MAX_WIDTH, ART_MAX_HEIGHT);
+				g.drawImage(art, CONTENT_MAX_XOFFSET, ART_MAX_YOFFSET, null);
+			}
 
-		if (card.getCardTypes() != null && (card.getCardTypes().contains(CardType.CREATURE) || card.getCardTypes().contains(CardType.PLANESWALKER))) {
-			g.drawImage(Frames.PowBoxLeft, POWBOX_MAX_LEFT, POWBOX_MAX_TOP, null);
-			g.drawImage(Frames.PowBoxMid, POWBOX_MAX_LEFT + 7, POWBOX_MAX_TOP, null);
-			g.drawImage(Frames.PowBoxRight, POWBOX_MAX_LEFT + 38, POWBOX_MAX_TOP, null);
+			if (card.getExpansionSetCode() != null && card.getRarity() != null) {
+				String symbolCode = Sets.getInstance().get(card.getExpansionSetCode()).getSymbolCode();
+				if (symbolCode != null && symbolCode.length() > 0) {
+					StringBuilder sb = new StringBuilder();
+					sb.append(Config.setIconsResourcePath).append("graphic_").append(symbolCode).append("_").append(card.getRarity().getSymbolCode()).append(".png");
+					BufferedImage icon = loadImage(sb.toString(), ICON_MAX_HEIGHT);
+					g.drawImage(icon, ICON_MAX_XOFFSET - icon.getWidth(), ICON_MAX_YOFFSET, null);
+				}
+			}
+
+			if (card.getCardTypes() != null && (card.getCardTypes().contains(CardType.CREATURE) || card.getCardTypes().contains(CardType.PLANESWALKER))) {
+				g.drawImage(Frames.PowBoxLeft, POWBOX_MAX_LEFT, POWBOX_MAX_TOP, null);
+				g.drawImage(Frames.PowBoxMid, POWBOX_MAX_LEFT + 7, POWBOX_MAX_TOP, null);
+				g.drawImage(Frames.PowBoxRight, POWBOX_MAX_LEFT + 38, POWBOX_MAX_TOP, null);
+			}
 		}
 
 	    g.dispose();
 
-		backgrounds.put(cardName, background);
+		backgrounds.put(backgroundName, background);
 		return background;
 	}
 
-	protected static Image getFrame(CardView card) {
-		if (card instanceof StackAbilityView || card instanceof AbilityView) {
-			return Frames.Effect;
-		}
+	protected static BufferedImage getFrame(CardView card) {
 
 		if (card.getCardTypes().contains(CardType.LAND)) {
 			return getLandFrame(card);
@@ -178,7 +202,7 @@ public class ImageHelper {
 		return Frames.Grey;
 	}
 
-	protected static Image getLandFrame(CardView card) {
+	protected static BufferedImage getLandFrame(CardView card) {
 		if (card.getSuperTypes().contains("Basic")) {
 			if (card.getSubTypes().contains("Forest")) {
 				return Frames.Forest;
@@ -199,8 +223,31 @@ public class ImageHelper {
 		return Frames.Land;
 	}
 
-	public static Image ScaleImage(Image image, int width, int height) {
-		return image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+	public static BufferedImage scaleImage(BufferedImage image, int width, int height) {
+		BufferedImage scaledImage = image;
+		int w = image.getWidth();
+		int h = image.getHeight();
+		do {
+			w /= 2;
+			h /= 2;
+			if (w < width || h < height) {
+				w = width;
+				h = height;
+			}
+			BufferedImage newImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+			Graphics2D graphics2D = newImage.createGraphics();
+			graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+			graphics2D.drawImage(scaledImage, 0, 0, w, h, null);
+			graphics2D.dispose();
+			scaledImage = newImage;
+		} while (w != width || h != height);
+		return scaledImage;
+	}
+
+	public static BufferedImage scaleImage(BufferedImage image, int height) {
+		double ratio = height / (double)image.getHeight();
+		int width = (int) (image.getWidth() * ratio);
+		return scaleImage(image, width, height);
 	}
 
 	public static MemoryImageSource rotate(Image image, CardDimensions dimensions) {
@@ -223,7 +270,7 @@ public class ImageHelper {
 
 	}
 
-	public static void DrawCosts(List<String> costs, Graphics2D g, int xOffset, int yOffset, ImageObserver o) {
+	public static void drawCosts(List<String> costs, Graphics2D g, int xOffset, int yOffset, ImageObserver o) {
 		if (costs.size() > 0) {
 			int costLeft = xOffset;
 			for (int i = costs.size() - 1; i >= 0; i--) {

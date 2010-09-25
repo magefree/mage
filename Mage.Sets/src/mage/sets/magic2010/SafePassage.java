@@ -31,10 +31,10 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.abilities.effects.common.PreventAllDamageToEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureOrPlayer;
-import mage.sets.Magic2010;
 
 /**
  *
@@ -43,8 +43,8 @@ import mage.sets.Magic2010;
 public class SafePassage  extends CardImpl<SafePassage> {
 
 	public SafePassage(UUID ownerId) {
-		super(ownerId, "Safe Passage", new CardType[]{CardType.INSTANT}, "{2}{W}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Safe Passage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
+		this.expansionSetCode = "M10";
 		this.color.setWhite(true);
 		this.getSpellAbility().addEffect(new PreventAllDamageToEffect(Duration.EndOfTurn, new FilterCreatureOrPlayer("you and creatures you control", ownerId)));
 	}

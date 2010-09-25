@@ -33,7 +33,6 @@ import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.RequirementAttackEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -77,6 +76,7 @@ class AttacksEachTurnEffect extends RequirementAttackEffect<AttacksEachTurnEffec
 		if (creature != null) {
 			if (creature.canAttack(game)) {
 				TargetDefender target = new TargetDefender(game.getCombat().getDefenders(), creature.getControllerId());
+				target.setRequired(true);
 				Player controller = game.getPlayer(creature.getControllerId());
 				while (!target.isChosen())
 					controller.chooseTarget(Outcome.Damage, target, source, game);

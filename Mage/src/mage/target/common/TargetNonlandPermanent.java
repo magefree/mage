@@ -39,15 +39,15 @@ import mage.target.TargetPermanent;
 public class TargetNonlandPermanent extends TargetPermanent<TargetNonlandPermanent> {
 
 	public TargetNonlandPermanent() {
-		this(1, 1, TargetController.ANY);
+		this(1, 1, TargetController.ANY, false);
 	}
 
 	public TargetNonlandPermanent(int numTargets, TargetController controller) {
-		this(numTargets, numTargets, controller);
+		this(numTargets, numTargets, controller, false);
 	}
 
-	public TargetNonlandPermanent(int minNumTargets, int maxNumTargets, TargetController controller) {
-		super(1, 1, new FilterNonlandPermanent(), controller);
+	public TargetNonlandPermanent(int minNumTargets, int maxNumTargets, TargetController controller, boolean notTarget) {
+		super(1, 1, new FilterNonlandPermanent(), controller, notTarget);
 		this.targetName = filter.getMessage();
 	}
 

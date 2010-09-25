@@ -70,7 +70,7 @@ public class BoostEquippedEffect extends ContinuousEffectImpl<BoostEquippedEffec
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Permanent equipment = game.getPermanent(source.getSourceId());
-		if (equipment.getAttachedTo() != null) {
+		if (equipment != null && equipment.getAttachedTo() != null) {
 			Permanent creature = game.getPermanent(equipment.getAttachedTo());
 			if (creature != null) {
 				creature.addPower(power);

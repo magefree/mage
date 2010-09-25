@@ -30,9 +30,9 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.sets.RiseOfTheEldrazi;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -42,8 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class FlameSlash extends CardImpl<FlameSlash> {
 
 	public FlameSlash(UUID ownerId) {
-		super(ownerId, "Flame Slash", new CardType[]{CardType.SORCERY}, "{R}");
-		this.expansionSetId = RiseOfTheEldrazi.getInstance().getId();
+		super(ownerId, "Flame Slash", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
+		this.expansionSetCode = "ROE";
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 		this.getSpellAbility().addEffect(new DamageTargetEffect(4));
@@ -60,7 +60,7 @@ public class FlameSlash extends CardImpl<FlameSlash> {
 
 	@Override
 	public String getArt() {
-		return "";
+		return "127404_typ_reg_sty_010.jpg";
 	}
 
 }

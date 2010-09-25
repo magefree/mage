@@ -35,6 +35,12 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MageObjectsImpl extends LinkedHashMap<UUID, MageObject> implements MageObjects {
+public class MageObjectsImpl<T extends MageObject> extends LinkedHashMap<UUID, T> implements MageObjects<T> {
+
+	@Override
+	public MageObjects copy() {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
 
 }

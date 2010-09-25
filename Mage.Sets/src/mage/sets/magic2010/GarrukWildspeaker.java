@@ -31,6 +31,7 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.Constants.TargetController;
 import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
@@ -43,7 +44,6 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.BeastToken;
-import mage.sets.Magic2010;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -55,8 +55,8 @@ public class GarrukWildspeaker extends CardImpl<GarrukWildspeaker> {
 	private static BeastToken beastToken = new BeastToken();
 
 	public GarrukWildspeaker(UUID ownerId) {
-		super(ownerId, "Garruk Wildspeaker", new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Garruk Wildspeaker", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G}");
+		this.expansionSetCode = "M10";
 		this.subtype.add("Garruk");
 		this.color.setGreen(true);
 		this.loyalty = new MageInt(3);
@@ -69,7 +69,7 @@ public class GarrukWildspeaker extends CardImpl<GarrukWildspeaker> {
 
 		Effects effects1 = new Effects();
 		effects1.add(new BoostControlledEffect(3, 3, Duration.EndOfTurn));
-		effects1.add(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
+		effects1.add(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, FilterCreaturePermanent.getDefault()));
 		this.addAbility(new LoyaltyAbility(effects1, -4));
 	}
 

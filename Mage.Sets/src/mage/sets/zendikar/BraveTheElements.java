@@ -31,6 +31,7 @@ package mage.sets.zendikar;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.GainAbilityControlledEffect;
 import mage.abilities.keyword.ProtectionAbility;
@@ -40,7 +41,6 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.sets.Zendikar;
 
 /**
  *
@@ -49,8 +49,8 @@ import mage.sets.Zendikar;
 public class BraveTheElements extends CardImpl<BraveTheElements> {
 
 	public BraveTheElements(UUID ownerId) {
-		super(ownerId, "Brave the Elements", new CardType[]{CardType.INSTANT}, "{W}");
-		this.expansionSetId = Zendikar.getInstance().getId();
+		super(ownerId, "Brave the Elements", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
+		this.expansionSetCode = "ZEN";
 		this.color.setWhite(true);
 		this.getSpellAbility().addChoice(new ChoiceColor());
 		this.getSpellAbility().addEffect(new BraveTheElementsEffect());

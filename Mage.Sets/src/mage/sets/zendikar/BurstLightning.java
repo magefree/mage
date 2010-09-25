@@ -30,11 +30,11 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
-import mage.sets.Zendikar;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -44,8 +44,8 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class BurstLightning extends CardImpl<BurstLightning> {
 
 	public BurstLightning(UUID ownerId) {
-		super(ownerId, "Burst Lightning", new CardType[]{CardType.INSTANT}, "{R}");
-		this.expansionSetId = Zendikar.getInstance().getId();
+		super(ownerId, "Burst Lightning", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
+		this.expansionSetCode = "ZEN";
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 		this.getSpellAbility().addEffect(new DamageTargetEffect(2));

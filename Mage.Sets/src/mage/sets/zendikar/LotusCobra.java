@@ -30,12 +30,12 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
-import mage.sets.Zendikar;
 
 /**
  *
@@ -44,8 +44,8 @@ import mage.sets.Zendikar;
 public class LotusCobra extends CardImpl<LotusCobra> {
 
 	public LotusCobra(UUID ownerId) {
-		super(ownerId, "Lotus Cobra", new CardType[]{CardType.CREATURE}, "{1}{G}");
-		this.expansionSetId = Zendikar.getInstance().getId();
+		super(ownerId, "Lotus Cobra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{G}");
+		this.expansionSetCode = "ZEN";
 		this.subtype.add("Snake");
 		this.color.setGreen(true);
 		this.power = new MageInt(2);

@@ -32,6 +32,7 @@ import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageObjectImpl;
 import mage.abilities.Ability;
@@ -46,11 +47,12 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 
 	protected UUID ownerId;
 	protected Watchers watchers = new Watchers();
-	protected UUID expansionSetId;
+	protected String expansionSetCode;
+	protected Rarity rarity;
 
-	public CardImpl(UUID ownerId, String name, CardType[] cardTypes, String costs) {
-		this.ownerId = ownerId;
-		this.name = name;
+	public CardImpl(UUID ownerId, String name, Rarity rarity, CardType[] cardTypes, String costs) {
+		this(ownerId, name);
+		this.rarity = rarity;
 		for (CardType newCardType: cardTypes)
 			this.cardType.add(newCardType);
 		this.manaCost.load(costs);
@@ -74,7 +76,8 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 	public CardImpl(final CardImpl card) {
 		super(card);
 		ownerId = card.ownerId;
-		expansionSetId = card.expansionSetId;
+		expansionSetCode = card.expansionSetCode;
+		rarity = card.rarity;
 		watchers = card.watchers.copy();
 	}
 
@@ -97,10 +100,15 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 		return ownerId;
 	}
 
-//	@Override
-//	public String getArt() {
-//		return art;
-//	}
+	@Override
+	public Rarity getRarity() {
+		return rarity;
+	}
+
+	@Override
+	public void setRarity(Rarity rarity) {
+		this.rarity = rarity;
+	}
 
 	@Override
 	public List<String> getRules() {
@@ -137,11 +145,6 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 		abilities.setControllerId(ownerId);
 	}
 
-//	@Override
-//	public Card copy() {
-//		return new Copier<Card>().copy(this);
-//	}
-
 	@Override
 	public Watchers getWatchers() {
 		return watchers;
@@ -155,7 +158,12 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 	}
 
 	@Override
-	public UUID getExpansionSetId() {
-		return expansionSetId;
+	public String getExpansionSetCode() {
+		return expansionSetCode;
+	}
+
+	@Override
+	public void setExpansionSetCode(String expansionSetCode) {
+		this.expansionSetCode = expansionSetCode;
 	}
 }

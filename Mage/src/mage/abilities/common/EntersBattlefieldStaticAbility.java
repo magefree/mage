@@ -30,7 +30,7 @@ package mage.abilities.common;
 
 import mage.Constants.Zone;
 import mage.abilities.StaticAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
+import mage.abilities.effects.Effect;
 
 /**
  *
@@ -38,17 +38,26 @@ import mage.abilities.effects.EntersBattlefieldEffect;
  */
 public class EntersBattlefieldStaticAbility extends StaticAbility<EntersBattlefieldStaticAbility> {
 
-	public EntersBattlefieldStaticAbility(EntersBattlefieldEffect effect) {
+	protected String rule;
+
+	public EntersBattlefieldStaticAbility(Effect effect, String rule) {
 		super(Zone.BATTLEFIELD, effect);
+		this.rule = rule;
 	}
 
 	public EntersBattlefieldStaticAbility(EntersBattlefieldStaticAbility ability) {
 		super(ability);
+		this.rule = ability.rule;
 	}
 
 	@Override
 	public EntersBattlefieldStaticAbility copy() {
 		return new EntersBattlefieldStaticAbility(this);
+	}
+
+	@Override
+	public String getRule() {
+		return "{this} enters the battlefield " + rule + ".";
 	}
 
 }

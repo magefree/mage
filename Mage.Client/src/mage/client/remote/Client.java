@@ -103,11 +103,7 @@ public class Client implements CallbackClient {
 		}
 		else if (callback.getMethod().equals("gameTarget")) {
 			GameClientMessage message = (GameClientMessage) callback.getData();
-			if (message.isFlag()) {
-				session.getGame().inform(message.getMessage(), message.getCardsView(), message.getGameView());
-			} else {
-				session.getGame().cancel(message.getMessage(), message.getCardsView(), message.getGameView());
-			}
+			session.getGame().pickTarget(message.getMessage(), message.getCardsView(), message.getGameView(), message.isFlag());
 		}
 		else if (callback.getMethod().equals("gameSelect")) {
 			GameClientMessage message = (GameClientMessage) callback.getData();
@@ -142,7 +138,7 @@ public class Client implements CallbackClient {
 		else if (callback.getMethod().equals("gameInform")) {
 			if (callback.getMessageId() > messageId) {
 				GameClientMessage message = (GameClientMessage) callback.getData();
-				session.getGame().inform(message.getMessage(), null, message.getGameView());
+				session.getGame().inform(message.getMessage(), message.getGameView());
 			}
 			else {
 				logger.warning("message out of sequence - ignoring");

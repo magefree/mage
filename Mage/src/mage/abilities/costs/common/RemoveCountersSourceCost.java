@@ -56,17 +56,17 @@ public class RemoveCountersSourceCost extends CostImpl<RemoveCountersSourceCost>
 	}
 
 	@Override
-	public boolean canPay(Ability source, Game game) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
+	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+		Permanent permanent = game.getPermanent(sourceId);
 		if (permanent.getCounters().getCount(name) >= amount)
 			return true;
 		return false;
 	}
 
 	@Override
-	public boolean pay(Game game, Ability source, boolean noMana) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent.getCounters().getCount(name) >= amount) {
+	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+		Permanent permanent = game.getPermanent(sourceId);
+		if (permanent != null && permanent.getCounters().getCount(name) >= amount) {
 			permanent.getCounters().removeCounter(name, amount);
 			this.paid = true;
 		}

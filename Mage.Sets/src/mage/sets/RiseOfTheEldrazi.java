@@ -29,7 +29,6 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.sets.riseoftheeldrazi.*;
 
 /**
  *
@@ -44,15 +43,7 @@ public class RiseOfTheEldrazi extends ExpansionSet {
 	}
 
 	private RiseOfTheEldrazi() {
-		this.name = "Rise Of The Eldrazi";
-		this.cards.add(Deprive.class);
-		this.cards.add(GideonJura.class);
-		this.cards.add(JoragaTreespeaker.class);
-		this.cards.add(KarganDragonlord.class);
-		this.cards.add(KozileksPredator.class);
-		this.cards.add(NestInvader.class);
-		this.cards.add(Vengevine.class);
-		this.cards.add(WallOfOmens.class);
+		super("Rise Of The Eldrazi", "ROE", "seticon_ROE", "mage.sets.riseoftheeldrazi");
 	}
 	
 }

@@ -30,6 +30,7 @@ package mage.sets.shardsofalara;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.Effects;
@@ -39,7 +40,6 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.SkipNextUntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
-import mage.sets.ShardsOfAlara;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -51,8 +51,8 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class AjaniVengeant extends CardImpl<AjaniVengeant> {
 
 	public AjaniVengeant(UUID ownerId) {
-		super(ownerId, "Ajani Vengeant", new CardType[]{CardType.PLANESWALKER}, "{2}{R}{W}");
-		this.expansionSetId = ShardsOfAlara.getInstance().getId();
+		super(ownerId, "Ajani Vengeant", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{W}");
+		this.expansionSetCode = "ALA";
 		this.subtype.add("Ajani");
 		this.color.setRed(true);
 		this.color.setWhite(true);

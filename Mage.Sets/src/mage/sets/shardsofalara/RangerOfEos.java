@@ -30,13 +30,13 @@ package mage.sets.shardsofalara;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
-import mage.sets.ShardsOfAlara;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -54,8 +54,8 @@ public class RangerOfEos extends CardImpl<RangerOfEos> {
 	}
 
 	public RangerOfEos(UUID ownerId) {
-		super(ownerId, "Ranger Of Eos", new CardType[]{CardType.CREATURE}, "{3}{W}");
-		this.expansionSetId = ShardsOfAlara.getInstance().getId();
+		super(ownerId, "Ranger Of Eos", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
+		this.expansionSetCode = "ALA";
 		this.color.setWhite(true);
 		this.subtype.add("Human");
 		this.subtype.add("Soldier");

@@ -29,8 +29,9 @@
 package mage;
 
 import java.io.Serializable;
+import mage.util.Copyable;
 
-public class MageInt implements Serializable {
+public class MageInt implements Serializable, Copyable<MageInt> {
 
 	public static MageInt EmptyMageInt = new MageInt(0, "");
 	
@@ -45,6 +46,11 @@ public class MageInt implements Serializable {
 	public MageInt(int baseValue, String cardValue) {
 		this.baseValue = baseValue;
 		this.cardValue = cardValue;
+	}
+
+	@Override
+	public MageInt copy() {
+		return new MageInt(baseValue, cardValue);
 	}
 	
 	public int getValue() {
@@ -65,4 +71,5 @@ public class MageInt implements Serializable {
 	public String toString() {
 		return cardValue;
 	}
+
 }

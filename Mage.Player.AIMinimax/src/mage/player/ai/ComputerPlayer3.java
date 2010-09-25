@@ -407,15 +407,11 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 				sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));
 				Combat simCombat = sim.getCombat().copy();
 				finishCombat(sim);
-				if (!counter) {
-					int testScore = GameStateEvaluator.evaluate(playerId, sim);
-					if (testScore < currentScore) {
-						// if score at end of combat is worse than original score don't check counterattack
-						logger.fine("simulating -- abandoning counterattack check, no immediate benefit");
-						val = testScore;
-					}
-					else
-						val = simulatePostCombatMain(sim, newNode, depth-1, alpha, beta);
+				if (sim.isGameOver()) {
+					val = GameStateEvaluator.evaluate(playerId, sim);
+				}
+				else if (!counter) {
+					val = simulatePostCombatMain(sim, newNode, depth-1, alpha, beta);
 				}
 				else
 					val = GameStateEvaluator.evaluate(playerId, sim);

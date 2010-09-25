@@ -30,10 +30,10 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.sets.Magic2010;
 
 /**
  *
@@ -42,8 +42,8 @@ import mage.sets.Magic2010;
 public class AirElemental extends CardImpl<AirElemental> {
 
 	public AirElemental(UUID ownerId) {
-		super(ownerId, "Air Elemental", new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Air Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
+		this.expansionSetCode = "M10";
 		this.color.setBlue(true);
 		this.subtype.add("Elemental");
 		this.power = new MageInt(4);

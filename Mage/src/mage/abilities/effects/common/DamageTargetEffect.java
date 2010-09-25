@@ -42,10 +42,16 @@ import mage.players.Player;
 public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
 
 	protected int amount;
+	protected boolean preventable;
 
 	public DamageTargetEffect(int amount) {
+		this(amount, true);
+	}
+
+	public DamageTargetEffect(int amount, boolean preventable) {
 		super(Outcome.Damage);
 		this.amount = amount;
+		this.preventable = preventable;
 	}
 
 	public int getAmount() {
@@ -55,6 +61,7 @@ public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
 	public DamageTargetEffect(final DamageTargetEffect effect) {
 		super(effect);
 		this.amount = effect.amount;
+		this.preventable = effect.preventable;
 	}
 
 	@Override
@@ -66,12 +73,12 @@ public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
 	public boolean apply(Game game, Ability source) {
 		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
-			permanent.damage(amount, source.getSourceId(), game);
+			permanent.damage(amount, source.getSourceId(), game, preventable);
 			return true;
 		}
 		Player player = game.getPlayer(source.getFirstTarget());
 		if (player != null) {
-			player.damage(amount, source.getSourceId(), game);
+			player.damage(amount, source.getSourceId(), game, false, preventable);
 			return true;
 		}
 		return false;
@@ -79,7 +86,12 @@ public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
 
 	@Override
 	public String getText(Ability source) {
-		return "{source} deals " + Integer.toString(amount) + " damage to target " + source.getTargets().get(0).getTargetName();
+		StringBuilder sb = new StringBuilder();
+		sb.append("{source} deals ").append(Integer.toString(amount)).append(" damage to target ");
+		sb.append(source.getTargets().get(0).getTargetName());
+		if (!preventable)
+			sb.append(". The damage can't be prevented");
+		return sb.toString();
 	}
 
 }

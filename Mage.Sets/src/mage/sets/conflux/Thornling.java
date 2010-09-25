@@ -31,6 +31,7 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,7 +42,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.sets.Conflux;
+
 
 /**
  *
@@ -50,8 +51,8 @@ import mage.sets.Conflux;
 public class Thornling extends CardImpl<Thornling> {
 
 	public Thornling(UUID ownerId) {
-		super(ownerId, "Thornling", new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-		this.expansionSetId = Conflux.getInstance().getId();
+		super(ownerId, "Thornling", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+		this.expansionSetCode = "CON";
 		this.color.setGreen(true);
 		this.subtype.add("Elemental");
 		this.subtype.add("Shapeshifter");

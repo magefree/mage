@@ -29,27 +29,16 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-import mage.cards.basiclands.Mountain;
-import mage.sets.Tenth;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Mountain1 extends Mountain<Mountain1> {
+public class Mountain1 extends mage.cards.basiclands.Mountain {
 
 	public Mountain1(UUID ownerId) {
 		super(ownerId);
-		this.expansionSetId = Tenth.getInstance().getId();
-	}
-
-	public Mountain1(final Mountain1 card) {
-		super(card);
-	}
-
-	@Override
-	public Mountain1 copy() {
-		return new Mountain1(this);
+		this.expansionSetCode = "10E";
 	}
 
 	@Override

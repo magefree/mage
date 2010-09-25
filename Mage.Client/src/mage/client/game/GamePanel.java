@@ -137,15 +137,12 @@ public class GamePanel extends javax.swing.JPanel {
 		this.players.clear();
 		this.pnlBattlefield.removeAll();
 		MageFrame.getCombatDialog().hideDialog();
-//		MageFrame.getDesktop().remove(combat);
 		this.setVisible(false);
 	}
 
 	public synchronized void init(GameView game) {
 		MageFrame.getCombatDialog().init(gameId, bigCard);
-//		MageFrame.getDesktop().add(combat, JLayeredPane.POPUP_LAYER);
 		MageFrame.getCombatDialog().setLocation(500, 300);
-//		MageFrame.getDesktop().add(pickNumber, JLayeredPane.POPUP_LAYER);
 		addPlayers(game);
 		updateGame(game);
 	}
@@ -257,20 +254,17 @@ public class GamePanel extends javax.swing.JPanel {
 		this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, true, false);
 	}
 
-	public void inform(String information, CardsView cardView, GameView gameView) {
+	public void pickTarget(String message, CardsView cardView, GameView gameView, boolean required) {
 		updateGame(gameView);
+		this.feedbackPanel.getFeedback(required?FeedbackMode.INFORM:FeedbackMode.CANCEL, message, false, gameView.getSpecial());
 		if (cardView != null && cardView.size() > 0) {
-			showCards(information, cardView);
+			showCards(message, cardView, required);
 		}
-		this.feedbackPanel.getFeedback(FeedbackMode.INFORM, information, false, gameView.getSpecial());
 	}
 
-	public void cancel(String message, CardsView cardView, GameView gameView) {
+	public void inform(String information, GameView gameView) {
 		updateGame(gameView);
-		if (cardView != null && cardView.size() > 0) {
-			showCards(message, cardView);
-		}
-		this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, false, gameView.getSpecial());
+		this.feedbackPanel.getFeedback(FeedbackMode.INFORM, information, false, gameView.getSpecial());
 	}
 
 	public void modalMessage(String message) {
@@ -310,13 +304,12 @@ public class GamePanel extends javax.swing.JPanel {
 
 	public void revealCards(String name, CardsView cards) {
 		ShowCardsDialog showCards = new ShowCardsDialog();
-		MageFrame.getDesktop().add(showCards);
-		showCards.loadCards(name, cards, bigCard, Config.dimensions, gameId);
+		showCards.loadCards(name, cards, bigCard, Config.dimensions, gameId, false);
 	}
 
-	private void showCards(String title, CardsView cards) {
+	private void showCards(String title, CardsView cards, boolean required) {
 		ShowCardsDialog showCards = new ShowCardsDialog();
-		showCards.loadCards(title, cards, bigCard, Config.dimensions, gameId);
+		showCards.loadCards(title, cards, bigCard, Config.dimensions, gameId, required);
 	}
 
 	public void getAmount(int min, int max, String message) {

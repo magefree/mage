@@ -41,12 +41,12 @@ import java.lang.reflect.Constructor;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.prefs.Preferences;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
+import mage.client.MageFrame;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.view.CardsView;
@@ -59,12 +59,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
 	private JFileChooser fcSelectDeck;
 	private Deck deck = new Deck();;
-	private Preferences prefs;
 
     /** Creates new form DeckEditorPanel */
     public DeckEditorPanel() {
         initComponents();
-		prefs = Preferences.userNodeForPackage(this.getClass());
 		fcSelectDeck = new JFileChooser();
 		fcSelectDeck.setAcceptAllFileFilterUsed(false);
 		fcSelectDeck.addChoosableFileFilter(new DeckFilter());
@@ -250,7 +248,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 	private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
-		String lastFolder = prefs.get("lastDeckFolder", "");
+		String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
 		if (!lastFolder.isEmpty())
 			fcSelectDeck.setCurrentDirectory(new File(lastFolder));
 		int ret = fcSelectDeck.showOpenDialog(this);
@@ -267,14 +265,14 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			}
 			refreshDeck();
 			try {
-				prefs.put("lastDeckFolder", file.getCanonicalPath());
+				MageFrame.getPreferences().put("lastDeckFolder", file.getCanonicalPath());
 			} catch (IOException ex) {	}
 		}
 		fcSelectDeck.setSelectedFile(null);
 	}//GEN-LAST:event_btnLoadActionPerformed
 
 	private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-		String lastFolder = prefs.get("lastDeckFolder", "");
+		String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
 		if (!lastFolder.isEmpty())
 			fcSelectDeck.setCurrentDirectory(new File(lastFolder));
 		deck.setName(this.txtDeckName.getText());
@@ -294,7 +292,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 			}
 			try {
-				prefs.put("lastDeckFolder", file.getCanonicalPath());
+				MageFrame.getPreferences().put("lastDeckFolder", file.getCanonicalPath());
 			} catch (IOException ex) {	}
 		}
 	}//GEN-LAST:event_btnSaveActionPerformed

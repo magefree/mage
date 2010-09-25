@@ -30,6 +30,7 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -38,7 +39,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
-import mage.sets.Worldwake;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -54,8 +54,8 @@ public class ArborElf extends CardImpl<ArborElf> {
 	}
 
 	public ArborElf(UUID ownerId) {
-		super(ownerId, "Arbor Elf", new CardType[]{CardType.CREATURE}, "{G}");
-		this.expansionSetId = Worldwake.getInstance().getId();
+		super(ownerId, "Arbor Elf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+		this.expansionSetCode = "WWK";
 		this.subtype.add("Elf");
 		this.subtype.add("Druid");
 		this.color.setGreen(true);

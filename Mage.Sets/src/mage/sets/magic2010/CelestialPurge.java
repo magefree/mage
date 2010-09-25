@@ -29,50 +29,16 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.TargetController;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
-import mage.filter.FilterPermanent;
-import mage.sets.Magic2010;
-import mage.target.TargetPermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CelestialPurge extends CardImpl<CelestialPurge> {
-
-	private static FilterPermanent filter = new FilterPermanent("black or red permanent");
-
-	static {
-		filter.setUseColor(true);
-		filter.setScopeColor(ComparisonScope.Any);
-		filter.getColor().setBlack(true);
-		filter.getColor().setRed(true);
-	}
+public class CelestialPurge extends mage.sets.conflux.CelestialPurge {
 
 	public CelestialPurge(UUID ownerId) {
-		super(ownerId, "Celestial Purge", new CardType[]{CardType.INSTANT}, "{1}{W}");
-		this.expansionSetId = Magic2010.getInstance().getId();
-		this.color.setWhite(true);
-		this.getSpellAbility().addTarget(new TargetPermanent(filter, TargetController.ANY));
-		this.getSpellAbility().addEffect(new ExileTargetEffect());
-	}
-
-	public CelestialPurge(final CelestialPurge card) {
-		super(card);
-	}
-
-	@Override
-	public CelestialPurge copy() {
-		return new CelestialPurge(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "118751_typ_reg_sty_010.jpg";
+		super(ownerId);
+		this.expansionSetCode = "M10";
 	}
 
 }

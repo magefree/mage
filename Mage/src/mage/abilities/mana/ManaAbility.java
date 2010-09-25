@@ -65,7 +65,7 @@ public abstract class ManaAbility<T extends ManaAbility<T>> extends ActivatedAbi
 		if (!controlsAbility(playerId, game))
 			return false;
 		//20091005 - 605.3a
-		return costs.canPay(this, game);
+		return costs.canPay(sourceId, controllerId, game);
 	}
 
 	public Mana getNetMana(Game game) {

@@ -31,6 +31,7 @@ package mage.sets.alarareborn;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.Constants.TurnPhase;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -43,7 +44,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;
-import mage.sets.AlaraReborn;
+
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -53,8 +54,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class FinestHour extends CardImpl<FinestHour> {
 
 	public FinestHour(UUID ownerId) {
-		super(ownerId, "Finest Hour", new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{W}{U}");
-		this.expansionSetId = AlaraReborn.getInstance().getId();
+		super(ownerId, "Finest Hour", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{W}{U}");
+		this.expansionSetCode = "ARB";
 		this.color.setWhite(true);
 		this.color.setGreen(true);
 		this.color.setBlue(true);

@@ -28,52 +28,17 @@
 
 package mage.sets.planechase;
 
-import mage.abilities.effects.common.ReturnFromExileEffect;
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.TargetController;
-import mage.Constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterNonlandPermanent;
-import mage.sets.Planechase;
-import mage.target.TargetPermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class OblivionRing extends CardImpl<OblivionRing> {
+public class OblivionRing extends mage.sets.shardsofalara.OblivionRing {
 
 	public OblivionRing(UUID ownerId) {
-		super(ownerId, "Oblivion Ring", new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
-		this.expansionSetId = Planechase.getInstance().getId();
-		this.color.setWhite(true);
-		FilterNonlandPermanent filter = new FilterNonlandPermanent();
-		filter.setId(this.getId());
-		filter.setNotId(true);
-		Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect(this.getId(), "Oblivion Ring exile"), false);
-		ability1.addTarget(new TargetPermanent(filter, TargetController.ANY));
-		this.addAbility(ability1);
-		Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileEffect(this.getId(), Zone.BATTLEFIELD), false);
-		this.addAbility(ability2);
-	}
-
-	public OblivionRing(final OblivionRing card) {
-		super(card);
-	}
-
-	@Override
-	public OblivionRing copy() {
-		return new OblivionRing(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "115005_typ_reg_sty_010.jpg";
+		super(ownerId);
+		this.expansionSetCode = "HOP";
 	}
 
 }

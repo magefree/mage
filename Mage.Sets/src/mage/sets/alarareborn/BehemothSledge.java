@@ -31,8 +31,8 @@ package mage.sets.alarareborn;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.MageObjectImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.BoostEquippedEffect;
@@ -41,7 +41,7 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.sets.AlaraReborn;
+
 
 /**
  *
@@ -50,8 +50,8 @@ import mage.sets.AlaraReborn;
 public class BehemothSledge extends CardImpl<BehemothSledge> {
 
 	public BehemothSledge(UUID ownerId) {
-		super(ownerId, "Behemoth Sledge", new CardType[]{CardType.ARTIFACT}, "{1}{G}{W}");
-		this.expansionSetId = AlaraReborn.getInstance().getId();
+		super(ownerId, "Behemoth Sledge", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}{G}{W}");
+		this.expansionSetCode = "ARB";
 		this.subtype.add("Equipment");
 		this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance())));

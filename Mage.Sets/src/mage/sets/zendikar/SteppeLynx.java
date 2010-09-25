@@ -31,11 +31,11 @@ package mage.sets.zendikar;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.sets.Zendikar;
 
 /**
  *
@@ -44,8 +44,8 @@ import mage.sets.Zendikar;
 public class SteppeLynx extends CardImpl<SteppeLynx> {
 
 	public SteppeLynx(UUID ownerId) {
-		super(ownerId, "Steppe Lynx", new CardType[]{CardType.CREATURE}, "{W}");
-		this.expansionSetId = Zendikar.getInstance().getId();
+		super(ownerId, "Steppe Lynx", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+		this.expansionSetCode = "ZEN";
 		this.subtype.add("Cat");
 		this.color.setWhite(true);
 		this.power = new MageInt(0);

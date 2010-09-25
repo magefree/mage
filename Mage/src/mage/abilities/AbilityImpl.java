@@ -137,17 +137,18 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 			logger.fine("activate failed - choice");
 			return false;
 		}
-		if (targets.size() > 0 && targets.choose(effects.get(0).getOutcome(), this.controllerId, this, game) == false) {
+		if (targets.size() > 0 && targets.chooseTargets(effects.get(0).getOutcome(), this.controllerId, this, game) == false) {
 			logger.fine("activate failed - target");
 			return false;
 		}
 		if (!useAlternativeCost(game)) {
-			if (!manaCosts.pay(game, this, noMana)) {
+			if (!manaCosts.pay(game, sourceId, controllerId, noMana)) {
 				logger.fine("activate failed - mana");
 				return false;
 			}
 		}
-		if (!costs.pay(game, this, noMana)) {
+		game.getObject(sourceId).adjustCosts(this, game);
+		if (!costs.pay(game, sourceId, controllerId, noMana)) {
 			logger.fine("activate failed - non mana costs");
 			return false;
 		}
@@ -161,7 +162,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 		for (AlternativeCost cost: alternativeCosts) {
 			if (cost.isAvailable(game, this)) {
 				if (game.getPlayer(this.controllerId).chooseUse(Outcome.Neutral, "Use alternative cost " + cost.getName(), game))
-					return cost.pay(game, this, false);
+					return cost.pay(game, sourceId, controllerId, false);
 			}
 		}
 		return false;

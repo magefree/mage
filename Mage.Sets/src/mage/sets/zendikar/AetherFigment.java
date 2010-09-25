@@ -30,12 +30,12 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.AddPlusOneCountersSourceEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
-import mage.sets.Zendikar;
 
 /**
  *
@@ -44,8 +44,8 @@ import mage.sets.Zendikar;
 public class AetherFigment extends CardImpl<AetherFigment> {
 
 	public AetherFigment(UUID ownerId) {
-		super(ownerId, "Æther Figment", new CardType[]{CardType.CREATURE}, "{1}{U}");
-		this.expansionSetId = Zendikar.getInstance().getId();
+		super(ownerId, "Æther Figment", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+		this.expansionSetCode = "ZEN";
 		this.subtype.add("Illusion");
 		this.color.setBlue(true);
 		this.power = new MageInt(1);

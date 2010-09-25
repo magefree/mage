@@ -79,6 +79,18 @@ public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
 	}
 
 	@Override
+	public boolean canTarget(UUID id, Game game) {
+		Permanent permanent = game.getPermanent(id);
+		if (permanent != null) {
+			return filter.match(permanent);
+		}
+		Player player = game.getPlayer(id);
+		if (player != null)
+			return filter.match(player);
+		return false;
+	}
+
+	@Override
 	public boolean canTarget(UUID id, Ability source, Game game) {
 		Permanent permanent = game.getPermanent(id);
 		MageObject targetSource = game.getObject(source.getSourceId());
@@ -109,7 +121,7 @@ public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
 					return true;
 			}
 		}
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
 			if (permanent.canBeTargetedBy(targetSource) && filter.match(permanent)) {
 				count++;
 				if (count >= this.minNumberOfTargets)
@@ -129,7 +141,7 @@ public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
 				possibleTargets.put(player.hashCode(), playerId);
 			}
 		}
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
 			if (permanent.canBeTargetedBy(targetSource) && filter.match(permanent)) {
 				possibleTargets.put(permanent.getValue().hashCode(), permanent.getId());
 			}

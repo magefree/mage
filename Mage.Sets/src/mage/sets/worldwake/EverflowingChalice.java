@@ -30,6 +30,7 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -41,7 +42,6 @@ import mage.abilities.keyword.MultikickerAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.sets.Worldwake;
 
 /**
  *
@@ -50,8 +50,8 @@ import mage.sets.Worldwake;
 public class EverflowingChalice extends CardImpl<EverflowingChalice> {
 
 	public EverflowingChalice(UUID ownerId) {
-		super(ownerId, "Everflowing Chalice", new CardType[]{CardType.ARTIFACT}, "{0}");
-		this.expansionSetId = Worldwake.getInstance().getId();
+		super(ownerId, "Everflowing Chalice", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
+		this.expansionSetCode = "WWK";
 		MultikickerAbility ability = new MultikickerAbility(new AddCountersSourceEffect("charge", 1), false);
 		ability.addManaCost(new GenericManaCost(2));
 		this.addAbility(ability);

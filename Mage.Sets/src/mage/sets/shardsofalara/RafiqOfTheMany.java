@@ -31,6 +31,7 @@ package mage.sets.shardsofalara;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
@@ -41,7 +42,6 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.sets.ShardsOfAlara;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,8 +51,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class RafiqOfTheMany extends CardImpl<RafiqOfTheMany> {
 
 	public RafiqOfTheMany(UUID ownerId) {
-		super(ownerId, "Rafiq of the Many", new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
-		this.expansionSetId = ShardsOfAlara.getInstance().getId();
+		super(ownerId, "Rafiq of the Many", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
+		this.expansionSetCode = "ALA";
 		this.color.setGreen(true);
 		this.color.setWhite(true);
 		this.color.setBlue(true);

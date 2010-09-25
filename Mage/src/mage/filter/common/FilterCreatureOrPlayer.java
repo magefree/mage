@@ -56,7 +56,7 @@ public class FilterCreatureOrPlayer extends FilterImpl<Object, FilterCreatureOrP
 
 	public FilterCreatureOrPlayer(String name) {
 		super(name);
-		creatureFilter = new FilterCreaturePermanent();
+		creatureFilter = FilterCreaturePermanent.getDefault();
 		playerFilter = new FilterPlayer();
 	}
 

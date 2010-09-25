@@ -200,7 +200,7 @@ public class PlayerPanel extends javax.swing.JPanel {
 		if (graveyard == null) {
 			graveyard = new ShowCardsDialog();
 		}
-		graveyard.loadCards(player.getName() + " graveyard", player.getGraveyard(), bigCard, Config.dimensions, gameId);
+		graveyard.loadCards(player.getName() + " graveyard", player.getGraveyard(), bigCard, Config.dimensions, gameId, false);
 	}//GEN-LAST:event_btnGraveActionPerformed
 
 

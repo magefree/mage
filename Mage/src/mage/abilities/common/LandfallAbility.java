@@ -48,7 +48,7 @@ public class LandfallAbility extends TriggeredAbilityImpl<LandfallAbility> {
 		super(Zone.BATTLEFIELD, effect, optional);
 	}
 
-	public LandfallAbility(LandfallAbility ability) {
+	public LandfallAbility(final LandfallAbility ability) {
 		super(ability);
 	}
 

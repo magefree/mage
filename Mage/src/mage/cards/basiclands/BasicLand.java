@@ -30,6 +30,7 @@ package mage.cards.basiclands;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
 
@@ -40,7 +41,7 @@ import mage.cards.CardImpl;
 public abstract class BasicLand<T extends BasicLand<T>> extends CardImpl<T> {
 
 	public BasicLand(UUID ownerId, String name, ManaAbility mana) {
-		super(ownerId, name, new CardType[]{CardType.LAND}, null);
+		super(ownerId, name, Rarity.LAND, new CardType[]{CardType.LAND}, null);
 		this.supertype.add("Basic");
 		this.subtype.add(name);
 		this.addAbility(mana);

@@ -30,7 +30,9 @@ package mage.choices;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -41,7 +43,7 @@ public class ChoiceImpl<T extends ChoiceImpl<T>> implements Choice, Serializable
 	protected boolean chosen;
 	protected boolean required;
 	protected String choice;
-	protected List<String> choices = new ArrayList<String>();
+	protected Set<String> choices = new HashSet<String>();
 	protected String message;
 
 	public ChoiceImpl() {
@@ -79,8 +81,13 @@ public class ChoiceImpl<T extends ChoiceImpl<T>> implements Choice, Serializable
 	}
 
 	@Override
-	public List<String> getChoices() {
+	public Set<String> getChoices() {
 		return choices;
+	}
+
+	@Override
+	public void setChoices(Set<String> choices) {
+		this.choices = choices;
 	}
 
 	@Override

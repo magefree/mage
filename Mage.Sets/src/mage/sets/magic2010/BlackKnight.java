@@ -30,12 +30,12 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
-import mage.sets.Magic2010;
 
 /**
  *
@@ -51,8 +51,8 @@ public class BlackKnight extends CardImpl<BlackKnight> {
 	}
 
 	public BlackKnight(UUID ownerId) {
-		super(ownerId, "Black Knight", new CardType[]{CardType.CREATURE}, "{B}{B}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Black Knight", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
+		this.expansionSetCode = "M10";
 		this.subtype.add("Human");
 		this.subtype.add("Knight");
 		this.color.setBlack(true);

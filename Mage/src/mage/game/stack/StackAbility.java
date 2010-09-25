@@ -262,4 +262,10 @@ public class StackAbility implements StackObject, Ability {
 		return new StackAbility(this);
 	}
 
+	@Override
+	public void setName(String name) { }
+
+	@Override
+	public void adjustCosts(Ability ability, Game game) {}
+
 }

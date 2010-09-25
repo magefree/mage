@@ -29,50 +29,16 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
-import mage.cards.CardImpl;
-import mage.sets.Magic2010;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BirdsOfParadise extends CardImpl<BirdsOfParadise> {
+public class BirdsOfParadise extends mage.sets.tenth.BirdsOfParadise {
 
 	public BirdsOfParadise(UUID ownerId) {
-		super(ownerId, "Birds of Paradise", new CardType[]{CardType.CREATURE}, "{G}");
-		this.expansionSetId = Magic2010.getInstance().getId();
-		this.subtype.add("Bird");
-		this.color.setGreen(true);
-		this.power = new MageInt(0);
-		this.toughness = new MageInt(1);
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new BlackManaAbility());
-		this.addAbility(new BlueManaAbility());
-		this.addAbility(new GreenManaAbility());
-		this.addAbility(new RedManaAbility());
-		this.addAbility(new WhiteManaAbility());
-	}
-
-	public BirdsOfParadise(final BirdsOfParadise card) {
-		super(card);
-	}
-
-	@Override
-	public BirdsOfParadise copy() {
-		return new BirdsOfParadise(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "88690_typ_reg_sty_010.jpg";
+		super(ownerId);
+		this.expansionSetCode = "M10";
 	}
 
 }

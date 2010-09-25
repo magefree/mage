@@ -63,7 +63,7 @@ public class GameView implements Serializable {
 
 	public GameView(GameState state, Game game) {
 		for (Player player: state.getPlayers().values()) {
-			players.add(new PlayerView(player, state, game));
+			players.add(new PlayerView(player, game));
 		}
 		for (StackObject stackObject: state.getStack()) {
 			if (stackObject instanceof StackAbility) {
@@ -92,7 +92,7 @@ public class GameView implements Serializable {
 		else
 			this.priorityPlayerName = "";
 		for (CombatGroup combatGroup: state.getCombat().getGroups()) {
-			combat.add(new CombatGroupView(combatGroup, state));
+			combat.add(new CombatGroupView(combatGroup, game));
 		}
 		this.special = state.getSpecialActions().getControlledBy(state.getPriorityPlayerId()).size() > 0;
 	}

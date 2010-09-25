@@ -66,7 +66,10 @@ import mage.client.remote.Session;
 import mage.client.util.Config;
 
 import mage.client.util.ImageHelper;
+import mage.sets.Sets;
+import mage.view.AbilityView;
 import mage.view.CardView;
+import mage.view.StackAbilityView;
 import static mage.client.util.Constants.*;
 
 /**
@@ -90,6 +93,7 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 	protected BufferedImage background;
 	protected BufferedImage image = new BufferedImage(FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT, BufferedImage.TYPE_INT_RGB);
 	protected BufferedImage small;
+	protected String backgroundName;
 
     /** Creates new form Card */
     public Card(CardView card, BigCard bigCard, CardDimensions dimension, UUID gameId) {
@@ -100,7 +104,8 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 		this.card = card;
 		this.bigCard = bigCard;
 		small = new BufferedImage(Config.dimensions.frameWidth, Config.dimensions.frameHeight, BufferedImage.TYPE_INT_RGB);
-		background = ImageHelper.getBackground(card);
+		backgroundName = getBackgroundName();
+		background = ImageHelper.getBackground(card, backgroundName);
 		
 		StyledDocument doc = text.getStyledDocument();
         Style def = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
@@ -126,6 +131,11 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 		Graphics2D gImage = image.createGraphics();
 	    Graphics2D gSmall = small.createGraphics();
 		String cardType = getType(card);
+		String testBackgroundName = getBackgroundName();
+		if (!testBackgroundName.equals(backgroundName)) {
+			backgroundName = testBackgroundName;
+			background = ImageHelper.getBackground(card, backgroundName);
+		}
 
 		popupText.setText(getText(cardType));
 
@@ -134,11 +144,11 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 		gImage.drawImage(background, 0, 0, this);
 
 		if (card.getManaCost().size() > 0)
-			ImageHelper.DrawCosts(card.getManaCost(), gImage, FRAME_MAX_WIDTH - SYMBOL_MAX_XOFFSET, SYMBOL_MAX_YOFFSET, this);
+			ImageHelper.drawCosts(card.getManaCost(), gImage, FRAME_MAX_WIDTH - SYMBOL_MAX_XOFFSET, SYMBOL_MAX_YOFFSET, this);
 
 	    gSmall.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		gSmall.setColor(Color.BLACK);
-	    gSmall.drawImage(ImageHelper.ScaleImage(image, Config.dimensions.frameWidth, Config.dimensions.frameHeight), 0, 0, this);
+	    gSmall.drawImage(ImageHelper.scaleImage(image, Config.dimensions.frameWidth, Config.dimensions.frameHeight), 0, 0, this);
 
 		gImage.setFont(new Font("Arial", Font.PLAIN, NAME_FONT_MAX_SIZE));
 		gImage.drawString(card.getName(), CONTENT_MAX_XOFFSET, NAME_MAX_YOFFSET);
@@ -172,24 +182,47 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 
 	protected String getText(String cardType) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(card.getName());
-		if (card.getManaCost().size() > 0) {
-			sb.append("\n").append(card.getManaCost());
+		if (card instanceof StackAbilityView || card instanceof AbilityView) {
+			for (String rule: getRules()) {
+				sb.append("\n").append(rule);
+			}
 		}
-		sb.append("\n").append(cardType);
-		if (card.getColor().hasColor()) {
-			sb.append("\n").append(card.getColor().toString());
+		else {
+			sb.append(card.getName());
+			if (card.getManaCost().size() > 0) {
+				sb.append("\n").append(card.getManaCost());
+			}
+			sb.append("\n").append(cardType);
+			if (card.getColor().hasColor()) {
+				sb.append("\n").append(card.getColor().toString());
+			}
+			if (card.getCardTypes().contains(CardType.CREATURE)) {
+				sb.append("\n").append(card.getPower()).append("/").append(card.getToughness());
+			}
+			else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
+				sb.append("\n").append(card.getLoyalty());
+			}
+			for (String rule: getRules()) {
+				sb.append("\n").append(rule);
+			}
+			sb.append("\n").append(Sets.getInstance().get(card.getExpansionSetCode()).getName()).append(" - ").append(card.getRarity().toString());
 		}
-		if (card.getCardTypes().contains(CardType.CREATURE)) {
-			sb.append("\n").append(card.getPower()).append("/").append(card.getToughness());
+//		sb.append("\n").append(card.getId());
+		return sb.toString();
+	}
+
+	protected String getBackgroundName() {
+		if (card instanceof StackAbilityView || card instanceof AbilityView) {
+			return "effect";
 		}
-		else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
-			sb.append("\n").append(card.getLoyalty());
+		StringBuilder sb = new StringBuilder();
+		if (card.getCardTypes().contains(CardType.LAND)) {
+			sb.append("land").append(card.getSuperTypes()).append(card.getSubTypes());
 		}
-		for (String rule: getRules()) {
-			sb.append("\n").append(rule);
+		else if (card.getCardTypes() != null && (card.getCardTypes().contains(CardType.CREATURE) || card.getCardTypes().contains(CardType.PLANESWALKER))) {
+			sb.append("creature");
 		}
-		sb.append("\n").append(card.getId());
+		sb.append(card.getColor()).append(card.getArt()).append(card.getRarity()).append(card.getExpansionSetCode());
 		return sb.toString();
 	}
 

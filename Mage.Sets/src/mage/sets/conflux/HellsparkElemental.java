@@ -30,6 +30,7 @@ package mage.sets.conflux;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -38,7 +39,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
 import mage.game.events.GameEvent.EventType;
-import mage.sets.Conflux;
+
 
 /**
  *
@@ -47,8 +48,8 @@ import mage.sets.Conflux;
 public class HellsparkElemental extends CardImpl<HellsparkElemental> {
 
 	public HellsparkElemental(UUID ownerId) {
-		super(ownerId, "Hellspark Elemental", new CardType[]{CardType.CREATURE}, "{1}{R}");
-		this.expansionSetId = Conflux.getInstance().getId();
+		super(ownerId, "Hellspark Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+		this.expansionSetCode = "CON";
 		this.subtype.add("Elemental");
 		this.color.setRed(true);
 		this.power = new MageInt(3);

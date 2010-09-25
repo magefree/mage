@@ -30,6 +30,7 @@ package mage.sets.conflux;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardTargetEffect;
@@ -37,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.sets.Conflux;
+
 import mage.target.TargetPlayer;
 
 /**
@@ -47,8 +48,8 @@ import mage.target.TargetPlayer;
 public class FontOfMythos extends CardImpl<FontOfMythos> {
 
 	public FontOfMythos(UUID ownerId) {
-		super(ownerId, "Font of Mythos", new CardType[]{CardType.ARTIFACT}, "{4}");
-		this.expansionSetId = Conflux.getInstance().getId();
+		super(ownerId, "Font of Mythos", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
+		this.expansionSetCode = "CON";
 		this.addAbility(new FontOfMythosAbility());
 	}
 

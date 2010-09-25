@@ -51,24 +51,29 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 	protected TargetController controller;
 
 	public TargetPermanent() {
-		this(1, 1, new FilterPermanent(), TargetController.ANY);
+		this(1, 1, new FilterPermanent(), TargetController.ANY, false);
+	}
+
+	public TargetPermanent(FilterPermanent filter) {
+		this(1, 1, filter, TargetController.ANY, false);
 	}
 
 	public TargetPermanent(FilterPermanent filter, TargetController controller) {
-		this(1, 1, filter, controller);
+		this(1, 1, filter, controller, false);
 	}
 
 	public TargetPermanent(int numTargets, FilterPermanent filter, TargetController controller) {
-		this(numTargets, numTargets, filter, controller);
+		this(numTargets, numTargets, filter, controller, false);
 	}
 
-	public TargetPermanent(int minNumTargets, int maxNumTargets, FilterPermanent filter, TargetController controller) {
+	public TargetPermanent(int minNumTargets, int maxNumTargets, FilterPermanent filter, TargetController controller, boolean notTarget) {
 		this.minNumberOfTargets = minNumTargets;
 		this.maxNumberOfTargets = maxNumTargets;
 		this.zone = Zone.BATTLEFIELD;
 		this.filter = filter;
 		this.targetName = filter.getMessage();
 		this.controller = controller;
+		this.notTarget = notTarget;
 	}
 
 	public TargetPermanent(final TargetPermanent<T> target) {
@@ -88,6 +93,7 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 			setController(controllerId, game);
 		if (permanent != null) {
 			if (source != null)
+				//TODO: check for replacement effects
 				return permanent.canBeTargetedBy(game.getObject(source.getSourceId())) && filter.match(permanent);
 			else
 				return filter.match(permanent);

@@ -30,13 +30,13 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
-import mage.sets.Magic2010;
 import mage.target.TargetPlayer;
 
 /**
@@ -46,8 +46,8 @@ import mage.target.TargetPlayer;
 public class JaceBeleren extends CardImpl<JaceBeleren> {
 
 	public JaceBeleren(UUID ownerId) {
-		super(ownerId, "Jace Beleren", new CardType[]{CardType.PLANESWALKER}, "{1}{U}{U}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Jace Beleren", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{U}");
+		this.expansionSetCode = "M10";
 		this.subtype.add("Jace");
 		this.color.setBlue(true);
 		this.loyalty = new MageInt(3);

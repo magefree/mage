@@ -29,48 +29,16 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.TargetController;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.sets.Magic2010;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Assassinate extends CardImpl<Assassinate> {
-
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
-
-	static {
-		filter.setTapped(true);
-		filter.setUseTapped(true);
-	}
+public class Assassinate extends mage.sets.tenth.Assassinate {
 
 	public Assassinate(UUID ownerId) {
-		super(ownerId, "Assassinate", new CardType[]{CardType.SORCERY}, "{2}{B}");
-		this.expansionSetId = Magic2010.getInstance().getId();
-		this.color.setBlack(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent(1, 1, filter, TargetController.ANY));
-		this.getSpellAbility().addEffect(new DestroyTargetEffect());
-
-	}
-
-	public Assassinate(final Assassinate card) {
-		super(card);
-	}
-
-	@Override
-	public Assassinate copy() {
-		return new Assassinate(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "97461_typ_reg_sty_010.jpg";
+		super(ownerId);
+		this.expansionSetCode = "M10";
 	}
 
 }

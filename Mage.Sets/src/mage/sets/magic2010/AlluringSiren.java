@@ -31,6 +31,7 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.MageInt;
@@ -43,7 +44,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.sets.Magic2010;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -53,8 +53,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class AlluringSiren extends CardImpl<AlluringSiren> {
 
 	public AlluringSiren(UUID ownerId) {
-		super(ownerId, "Alluring Siren", new CardType[]{CardType.CREATURE}, "{1}{U}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Alluring Siren", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+		this.expansionSetCode = "M10";
 		this.color.setBlue(true);
 		this.subtype.add("Siren");
 		this.power = new MageInt(1);
@@ -85,7 +85,7 @@ public class AlluringSiren extends CardImpl<AlluringSiren> {
 class AlluringSirenEffect extends RequirementAttackEffect<AlluringSirenEffect> {
 
 	public AlluringSirenEffect() {
-		super(Duration.OneUse);
+		super(Duration.EndOfTurn);
 	}
 
 	public AlluringSirenEffect(final AlluringSirenEffect effect) {
@@ -95,15 +95,6 @@ class AlluringSirenEffect extends RequirementAttackEffect<AlluringSirenEffect> {
 	@Override
 	public AlluringSirenEffect copy() {
 		return new AlluringSirenEffect(this);
-	}
-
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType().equals(EventType.DECLARE_ATTACKERS_STEP_PRE) && event.getPlayerId().equals(source.getFirstTarget()))
-			return true;
-		if (event.getType().equals(EventType.END_PHASE_POST) && event.getPlayerId().equals(source.getFirstTarget()))
-			used = true;
-		return false;
 	}
 
 	@Override
@@ -119,6 +110,6 @@ class AlluringSirenEffect extends RequirementAttackEffect<AlluringSirenEffect> {
 
 	@Override
 	public String getText(Ability source) {
-		return "Target creature an opponent controls attacks you this turn if able.";
+		return "Target creature an opponent controls attacks you this turn if able";
 	}
 }

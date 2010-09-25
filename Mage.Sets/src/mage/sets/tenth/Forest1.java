@@ -29,32 +29,21 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-import mage.cards.basiclands.Forest;
-import mage.sets.Tenth;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Forest1 extends Forest<Forest1> {
+public class Forest1 extends mage.cards.basiclands.Forest {
 
 	public Forest1(UUID ownerId) {
 		super(ownerId);
-		this.expansionSetId = Tenth.getInstance().getId();
-	}
-
-	public Forest1(final Forest1 card) {
-		super(card);
-	}
-
-	@Override
-	public Forest1 copy() {
-		return new Forest1(this);
+		this.expansionSetCode = "10E";
 	}
 
 	@Override
 	public String getArt() {
-		return "89160_typ_reg_sty_010.jpg";
+		return "08946_typ_reg_sty_010.jpg";
 	}
 
 }

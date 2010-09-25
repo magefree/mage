@@ -29,29 +29,40 @@
 package mage;
 
 import java.io.Serializable;
+import mage.util.Copyable;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Mana implements Comparable<Mana>, Serializable {
+public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
-	private int red = 0;
-	private int green = 0;
-	private int blue = 0;
-	private int white = 0;
-	private int black = 0;
-	private int colorless = 0;
-	private int any = 0;
+	private int red;
+	private int green;
+	private int blue;
+	private int white;
+	private int black;
+	private int colorless;
+	private int any;
 
-	public static Mana RedMana = RedMana(1);
-	public static Mana GreenMana = GreenMana(1);
-	public static Mana BlueMana = BlueMana(1);
-	public static Mana WhiteMana = WhiteMana(1);
-	public static Mana BlackMana = BlackMana(1);
-	public static Mana ColorlessMana = ColorlessMana(1);
+	public static final Mana RedMana = RedMana(1);
+	public static final Mana GreenMana = GreenMana(1);
+	public static final Mana BlueMana = BlueMana(1);
+	public static final Mana WhiteMana = WhiteMana(1);
+	public static final Mana BlackMana = BlackMana(1);
+	public static final Mana ColorlessMana = ColorlessMana(1);
 
 	public Mana() {}
+
+	public Mana(final Mana mana) {
+		red = mana.red;
+		green = mana.green;
+		blue = mana.blue;
+		white = mana.white;
+		black = mana.black;
+		colorless = mana.colorless;
+		any = mana.any;
+	}
 
 	public static Mana RedMana(int num) {
 		return new Mana(num, 0, 0, 0, 0, 0, 0);
@@ -132,7 +143,7 @@ public class Mana implements Comparable<Mana>, Serializable {
 	}
 
 	public int count() {
-		return red +green + blue + white + black + colorless + any;
+		return red + green + blue + white + black + colorless + any;
 	}
 
 	public void clear() {
@@ -165,10 +176,9 @@ public class Mana implements Comparable<Mana>, Serializable {
 		return sbMana.toString();
 	}
 
+	@Override
 	public Mana copy() {
-		Mana copy = new Mana();
-		copy.add(this);
-		return copy;
+		return new Mana(this);
 	}
 
 	public boolean enough(Mana avail) {
@@ -325,6 +335,7 @@ public class Mana implements Comparable<Mana>, Serializable {
 		this.any = any;
 	}
 
+	@Override
 	public int compareTo(Mana o) {
 		return this.count() - o.count();
 	}

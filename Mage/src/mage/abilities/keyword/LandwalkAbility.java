@@ -56,8 +56,8 @@ public class LandwalkAbility extends EvasionAbilityImpl<LandwalkAbility> {
 	}
 
 	@Override
-	public boolean canBlock(Permanent permanent, Game game) {
-		return game.getBattlefield().countAll(filter, permanent.getControllerId()) == 0;
+	public boolean canBlock(Permanent blocker, Game game) {
+		return game.getBattlefield().countAll(filter, blocker.getControllerId()) == 0;
 	}
 
 	@Override

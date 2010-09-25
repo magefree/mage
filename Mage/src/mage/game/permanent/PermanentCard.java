@@ -52,6 +52,15 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 
 	public PermanentCard(Card card, UUID controllerId) {
 		super(card.getId(), card.getOwnerId(), controllerId, card.getName());
+		init(card);
+	}
+
+	protected PermanentCard(UUID id, Card card, UUID controllerId) {
+		super(card.getId(), card.getOwnerId(), controllerId, card.getName());
+		init(card);
+	}
+
+	protected void init(Card card) {
 		copyFromCard(card);
 		if (card.getCardType().contains(CardType.PLANESWALKER)) {
 			this.loyalty = new MageInt(card.getLoyalty().getValue());
@@ -97,15 +106,17 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 		this.subtype = card.getSubtype();
 		this.supertype = card.getSupertype();
 		this.art = card.getArt();
+		this.expansionSetCode = card.getExpansionSetCode();
+		this.rarity = card.getRarity();
 	}
 
 	@Override
-	public boolean moveToZone(Zone zone, Game game, boolean sacrificed) {
+	public boolean moveToZone(Zone zone, Game game, boolean flag) {
 		if (!game.replaceEvent(new ZoneChangeEvent(this.getId(), this.getControllerId(), Zone.BATTLEFIELD, zone))) {
 			if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
 				switch (zone) {
 					case GRAVEYARD:
-						game.getPlayer(ownerId).putInGraveyard(game.getCard(objectId), game, !sacrificed);
+						game.getPlayer(ownerId).putInGraveyard(game.getCard(objectId), game, !flag);
 						break;
 					case HAND:
 						game.getPlayer(ownerId).getHand().add(game.getCard(objectId));
@@ -113,6 +124,12 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 					case EXILED:
 						game.getExile().getPermanentExile().add(game.getCard(objectId));
 						break;
+					case LIBRARY:
+						if (flag)
+							game.getPlayer(ownerId).getLibrary().putOnTop(game.getCard(objectId), game);
+						else
+							game.getPlayer(ownerId).getLibrary().putOnBottom(game.getCard(objectId), game);
+
 				}
 				game.fireEvent(new ZoneChangeEvent(this.getId(), this.getControllerId(), Zone.BATTLEFIELD, zone));
 				return true;
@@ -141,6 +158,11 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 	@Override
 	public String getArt() {
 		return art;
+	}
+
+	@Override
+	public void setArt(String art) {
+		this.art = art;
 	}
 
 	@Override

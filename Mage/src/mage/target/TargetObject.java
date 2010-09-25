@@ -43,22 +43,23 @@ public abstract class TargetObject<T extends TargetObject<T>> extends TargetImpl
 	protected TargetObject() {}
 	
 	public TargetObject(Zone zone) {
-		this(1, 1, zone);
+		this(1, 1, zone, false);
 	}
 
 	public TargetObject(int numTargets, Zone zone) {
-		this(numTargets, numTargets, zone);
+		this(numTargets, numTargets, zone, false);
 	}
 
 	public TargetObject(final TargetObject target) {
 		super(target);
 	}
 
-	public TargetObject(int minNumTargets, int maxNumTargets, Zone zone) {
+	public TargetObject(int minNumTargets, int maxNumTargets, Zone zone, boolean notTarget) {
 		this.minNumberOfTargets = minNumTargets;
 		this.maxNumberOfTargets = maxNumTargets;
 		this.zone = zone;
 		this.targetName = "card";
+		this.notTarget = notTarget;
 	}
 	
 	@Override
@@ -71,11 +72,16 @@ public abstract class TargetObject<T extends TargetObject<T>> extends TargetImpl
 	}
 
 	@Override
-	public boolean canTarget(UUID id, Ability source, Game game) {
+	public boolean canTarget(UUID id, Game game) {
 		MageObject object = game.getObject(id);
 		if (object != null && object.getZone().match(zone))
 			return getFilter().match(object);
 		return false;
+	}
+
+	@Override
+	public boolean canTarget(UUID id, Ability source, Game game) {
+		return canTarget(id, game);
 	}
 
 }

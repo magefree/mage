@@ -34,14 +34,19 @@
 
 package mage.client;
 
+import java.awt.Cursor;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.prefs.Preferences;
 import javax.swing.Box;
 import javax.swing.JDesktopPane;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import mage.client.dialog.AboutDialog;
@@ -64,6 +69,7 @@ public class MageFrame extends javax.swing.JFrame {
 	private ConnectDialog connectDialog;
 	private static CombatDialog combat;
 	private static PickNumberDialog pickNumber;
+	private static Preferences prefs = Preferences.userNodeForPackage(MageFrame.class);
 
 	/**
 	 * @return the session
@@ -74,6 +80,10 @@ public class MageFrame extends javax.swing.JFrame {
 
 	public static JDesktopPane getDesktop() {
 		return desktopPane;
+	}
+
+	public static Preferences getPreferences() {
+		return prefs;
 	}
 
     /** Creates new form MageFrame */
@@ -99,14 +109,17 @@ public class MageFrame extends javax.swing.JFrame {
 		initComponents();
 
 		session = new Session(this);
-		connectDialog = new ConnectDialog(session);
+		connectDialog = new ConnectDialog();
 		combat = new CombatDialog();
 		pickNumber = new PickNumberDialog();
 		desktopPane.add(connectDialog, JLayeredPane.POPUP_LAYER);
 		desktopPane.add(combat, JLayeredPane.POPUP_LAYER);
 		combat.hideDialog();
 		desktopPane.add(pickNumber, JLayeredPane.POPUP_LAYER);
-		disableButtons();
+		if (autoConnect())
+			enableButtons();
+		else
+			disableButtons();
     }
 
 	public void showGame(UUID gameId, UUID playerId) {
@@ -128,6 +141,32 @@ public class MageFrame extends javax.swing.JFrame {
 		this.tablesPane.setVisible(false);
 		this.gamePane.setVisible(true);
 		this.gamePane.replayGame();
+	}
+
+	public static boolean connect(String userName, String serverName, int port) {
+		return session.connect(userName, serverName, port);		
+	}
+
+	public boolean autoConnect() {
+		boolean autoConnect = Boolean.parseBoolean(prefs.get("autoConnect", "false"));
+		if (autoConnect) {
+			String userName = prefs.get("userName", "");
+			String server = prefs.get("serverAddress", "");
+			int port = Integer.parseInt(prefs.get("serverPort", ""));
+			try {
+				setCursor(new Cursor(Cursor.WAIT_CURSOR));
+				if (MageFrame.connect(userName, server, port)) {
+					return true;
+				}
+				else {
+					JOptionPane.showMessageDialog(rootPane, "Unable to connect to server");
+				}
+			}
+			finally {
+				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+		}
+		return false;
 	}
 
     /** This method is called from within the constructor to
@@ -289,7 +328,14 @@ public class MageFrame extends javax.swing.JFrame {
 	}//GEN-LAST:event_btnExitActionPerformed
 
 	private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
-		connectDialog.showDialog();
+		if (session.isConnected()) {
+			if (JOptionPane.showConfirmDialog(this, "Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				session.disconnect();
+			}
+		}
+		else {
+			connectDialog.showDialog();
+		}
 	}//GEN-LAST:event_btnConnectActionPerformed
 
 	private void btnAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutActionPerformed
@@ -305,13 +351,15 @@ public class MageFrame extends javax.swing.JFrame {
 	}
 
 	public void enableButtons() {
-		btnConnect.setEnabled(false);
+		btnConnect.setEnabled(true);
+		btnConnect.setText("Disconnect");
 		btnGames.setEnabled(true);
 		btnDeckEditor.setEnabled(true);
 	}
 
 	public void disableButtons() {
 		btnConnect.setEnabled(true);
+		btnConnect.setText("Connect");
 		btnGames.setEnabled(false);
 		btnDeckEditor.setEnabled(true);
 		this.tablesPane.setVisible(false);

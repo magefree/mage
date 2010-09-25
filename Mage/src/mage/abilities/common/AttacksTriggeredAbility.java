@@ -45,7 +45,7 @@ public class AttacksTriggeredAbility extends TriggeredAbilityImpl<AttacksTrigger
 		super(Zone.BATTLEFIELD, effect, optional);
 	}
 
-	public AttacksTriggeredAbility(AttacksTriggeredAbility ability) {
+	public AttacksTriggeredAbility(final AttacksTriggeredAbility ability) {
 		super(ability);
 	}
 

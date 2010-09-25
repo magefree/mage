@@ -31,6 +31,7 @@ package mage.sets.worldwake;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -39,7 +40,6 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
-import mage.sets.Worldwake;
 
 /**
  *
@@ -48,8 +48,8 @@ import mage.sets.Worldwake;
 public class BasiliskCollar extends CardImpl<BasiliskCollar> {
 
 	public BasiliskCollar(UUID ownerId) {
-		super(ownerId, "Basilisk Collar", new CardType[]{CardType.ARTIFACT}, "{1}");
-		this.expansionSetId = Worldwake.getInstance().getId();
+		super(ownerId, "Basilisk Collar", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
+		this.expansionSetCode = "WWK";
 		this.subtype.add("Equipment");
 		this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance())));

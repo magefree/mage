@@ -28,6 +28,9 @@
 
 package mage.abilities.costs.common;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
@@ -41,6 +44,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SacrificeTargetCost extends CostImpl<SacrificeTargetCost> {
 
+	List<Permanent> permanents = new ArrayList<Permanent>();
+
 	public SacrificeTargetCost(TargetControlledPermanent target) {
 		this.addTarget(target);
 		this.text = "Sacrifice " + target.getTargetName();
@@ -48,27 +53,37 @@ public class SacrificeTargetCost extends CostImpl<SacrificeTargetCost> {
 
 	public SacrificeTargetCost(SacrificeTargetCost cost) {
 		super(cost);
+		for (Permanent permanent: cost.permanents) {
+			this.permanents.add(permanent.copy());
+		}
 	}
 
 	@Override
-	public boolean pay(Game game, Ability source, boolean noMana) {
-		if (targets.choose(Outcome.Sacrifice, source.getControllerId(), source, game)) {
-			Permanent permanent = game.getPermanent(targets.getFirstTarget());
-			if (permanent != null) {
-				paid = permanent.sacrifice(source.getSourceId(), game);
+	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+		if (targets.choose(Outcome.Sacrifice, controllerId, game)) {
+			for (UUID targetId: targets.get(0).getTargets()) {
+				Permanent permanent = game.getPermanent(targetId);
+				if (permanent == null)
+					return false;
+				permanents.add(permanent.copy());
+				paid |= permanent.sacrifice(sourceId, game);
 			}
 		}
 		return paid;
 	}
 
 	@Override
-	public boolean canPay(Ability source, Game game) {
-		return targets.canChoose(source.getControllerId(), source.getControllerId(), game);
+	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+		return targets.canChoose(controllerId, controllerId, game);
 	}
 
 	@Override
 	public SacrificeTargetCost copy() {
 		return new SacrificeTargetCost(this);
+	}
+	
+	public List<Permanent> getPermanents() {
+		return permanents;
 	}
 
 }

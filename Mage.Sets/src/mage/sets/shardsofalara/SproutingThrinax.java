@@ -30,12 +30,12 @@ package mage.sets.shardsofalara;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.SaprolingToken;
-import mage.sets.ShardsOfAlara;
 
 /**
  *
@@ -46,8 +46,8 @@ public class SproutingThrinax extends CardImpl<SproutingThrinax> {
 	private static SaprolingToken saprolingToken = new SaprolingToken();
 
 	public SproutingThrinax(UUID ownerId) {
-		super(ownerId, "Sprouting Thrinax", new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
-		this.expansionSetId = ShardsOfAlara.getInstance().getId();
+		super(ownerId, "Sprouting Thrinax", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
+		this.expansionSetCode = "ALA";
 		this.color.setBlack(true);
 		this.color.setRed(true);
 		this.color.setGreen(true);

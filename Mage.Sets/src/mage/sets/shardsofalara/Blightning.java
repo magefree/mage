@@ -30,10 +30,10 @@ package mage.sets.shardsofalara;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.CardImpl;
-import mage.sets.ShardsOfAlara;
 import mage.target.TargetPlayer;
 
 /**
@@ -43,8 +43,8 @@ import mage.target.TargetPlayer;
 public class Blightning extends CardImpl<Blightning> {
 
 	public Blightning(UUID ownerId) {
-		super(ownerId, "Blightning", new CardType[]{CardType.SORCERY}, "{1}{B}{R}");
-		this.expansionSetId = ShardsOfAlara.getInstance().getId();
+		super(ownerId, "Blightning", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{R}");
+		this.expansionSetCode = "ALA";
 		this.color.setBlack(true);
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetPlayer());

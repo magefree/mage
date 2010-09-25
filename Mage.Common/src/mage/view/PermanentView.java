@@ -31,6 +31,7 @@ package mage.view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.cards.Card;
 import mage.counters.Counter;
 import mage.game.permanent.Permanent;
 
@@ -47,8 +48,9 @@ public class PermanentView extends CardView {
 	private int damage;
 	private List<UUID> attachments;
 	private List<CounterView> counters;
+	private CardView original;
 
-	public PermanentView(Permanent permanent) {
+	public PermanentView(Permanent permanent, Card card) {
 		super(permanent);
 		this.tapped = permanent.isTapped();
 		this.flipped = permanent.isFlipped();
@@ -65,6 +67,7 @@ public class PermanentView extends CardView {
 				counters.add(new CounterView(counter));
 			}
 		}
+		original = new CardView(card);
 	}
 
 	public boolean isTapped() {
@@ -93,5 +96,9 @@ public class PermanentView extends CardView {
 
 	public List<CounterView> getCounters() {
 		return counters;
+	}
+
+	public CardView getOriginal() {
+		return original;
 	}
 }

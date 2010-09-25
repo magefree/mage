@@ -44,19 +44,25 @@ import mage.game.permanent.Permanent;
  */
 public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledEffect> {
 
-	private int power;
-	private int toughness;
+	protected int power;
+	protected int toughness;
+	protected boolean excludeSource;
 	protected FilterCreaturePermanent filter;
 
 	public BoostControlledEffect(int power, int toughness, Duration duration) {
-		this(power, toughness, duration, new FilterCreaturePermanent());
+		this(power, toughness, duration, FilterCreaturePermanent.getDefault(), false);
 	}
 
-	public BoostControlledEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter) {
+	public BoostControlledEffect(int power, int toughness, Duration duration, boolean excludeSource) {
+		this(power, toughness, duration, FilterCreaturePermanent.getDefault(), excludeSource);
+	}
+
+	public BoostControlledEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
 		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
 		this.power = power;
 		this.toughness = toughness;
 		this.filter = filter;
+		this.excludeSource = excludeSource;
 	}
 
 	public BoostControlledEffect(final BoostControlledEffect effect) {
@@ -64,6 +70,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledE
 		this.power = effect.power;
 		this.toughness = effect.toughness;
 		this.filter = effect.filter.copy();
+		this.excludeSource = effect.excludeSource;
 	}
 
 	@Override
@@ -74,8 +81,10 @@ public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledE
 	@Override
 	public boolean apply(Game game, Ability source) {
 		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
-			perm.addPower(power);
-			perm.addToughness(toughness);
+			if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+				perm.addPower(power);
+				perm.addToughness(toughness);
+			}
 		}
 		return true;
 	}
@@ -83,6 +92,8 @@ public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledE
 	@Override
 	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
+		if (excludeSource)
+			sb.append("Other ");
 		sb.append(filter.getMessage());
 		sb.append(" you control get ").append(String.format("%1$+d/%2$+d", power, toughness));
 		sb.append((duration==Duration.EndOfTurn?" until end of turn":""));

@@ -30,7 +30,6 @@ package mage.players;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -320,7 +319,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		}
 		for (int i = 0; i < amount; i++) {
 			TargetDiscard target = new TargetDiscard(playerId);
-			chooseTarget(Outcome.Discard, target, null, game);
+			choose(Outcome.Discard, target, game);
 			discard(hand.get(target.getFirstTarget(), game), game);
 		}
 		game.fireInformEvent(name + " discards " + Integer.toString(amount) + " card" + (amount > 1?"s":""));
@@ -355,6 +354,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	protected void putOntoBattlefield(Permanent permanent, Game game) {
 		game.getBattlefield().addPermanent(permanent);
 		permanent.entersBattlefield(game);
+		game.applyEffects();
 		game.fireEvent(new ZoneChangeEvent(permanent.getId(), playerId, Zone.ALL, Zone.BATTLEFIELD));
 	}
 
@@ -623,27 +623,37 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public int loseLife(int amount, Game game) {
-		if (amount > life) {
-			int curLife = life;
-			setLife(0, game);
-			return curLife;
+		GameEvent event = new GameEvent(GameEvent.EventType.LOSE_LIFE, playerId, playerId, playerId, amount);
+		if (!game.replaceEvent(event)) {
+			if (amount > life) {
+				int curLife = life;
+				setLife(0, game);
+				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST_LIFE, playerId, playerId, playerId, curLife));
+				return curLife;
+			}
+			else {
+				setLife(this.life - amount, game);
+				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST_LIFE, playerId, playerId, playerId, amount));
+				return amount;
+			}
 		}
-		else {
-			setLife(this.life - amount, game);
-			return amount;
-		}
+		return 0;
 	}
 
 	@Override
 	public void gainLife(int amount, Game game) {
-		setLife(this.life + amount, game);
+		GameEvent event = new GameEvent(GameEvent.EventType.GAIN_LIFE, playerId, playerId, playerId, amount);
+		if (!game.replaceEvent(event)) {
+			setLife(this.life + amount, game);
+			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.GAINED_LIFE, playerId, playerId, playerId, amount));
+		}
 	}
 
 	@Override
-	public int damage(int damage, UUID sourceId, Game game) {
+	public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable) {
 		if (damage > 0 && canDamage(game.getObject(sourceId))) {
 			GameEvent event = new GameEvent(GameEvent.EventType.DAMAGE_PLAYER, playerId, sourceId, playerId, damage);
-			if (!game.replaceEvent(event)) {
+			if (!preventable || !game.replaceEvent(event)) {
 				int actualDamage = event.getAmount();
 				if (actualDamage > 0) {
 					actualDamage = this.loseLife(actualDamage, game);
@@ -653,6 +663,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 						player.gainLife(actualDamage, game);
 					}
 					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DAMAGED_PLAYER, playerId, sourceId, playerId, actualDamage));
+					if (combatDamage)
+						game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COMBAT_DAMAGED_PLAYER, playerId, sourceId, playerId, actualDamage));
+					else
+						game.fireEvent(GameEvent.getEvent(GameEvent.EventType.NONCOMBAT_DAMAGED_PLAYER, playerId, sourceId, playerId, actualDamage));
 					return actualDamage;
 				}
 			}
@@ -812,7 +826,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	@Override
 	public void declareAttacker(UUID attackerId, UUID defenderId, Game game) {
 		Permanent attacker = game.getPermanent(attackerId);
-		if (attacker.canAttack(game)) {
+		if (attacker != null && attacker.canAttack(game)) {
 			if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER, defenderId, attackerId, playerId))) {
 				game.getCombat().declareAttacker(attackerId, defenderId, game);
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ATTACKER_DECLARED, defenderId, attackerId, playerId));
@@ -824,7 +838,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	public void declareBlocker(UUID blockerId, UUID attackerId, Game game) {
 		Permanent blocker = game.getPermanent(blockerId);
 		CombatGroup group = game.getCombat().findGroup(attackerId);
-		if (group != null && group.canBlock(blocker, game)) {
+		if (blocker != null && group != null && group.canBlock(blocker, game)) {
 			group.addBlocker(blockerId, playerId, game);
 		}
 	}
@@ -838,7 +852,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 				newTarget = new TargetCardInLibrary(library.count(target.getFilter(), game), target.getMaxNumberOfTargets(), target.getFilter());
 			else
 				newTarget = target;
-			if (newTarget.choose(Outcome.Neutral, playerId, null, game)) {
+			if (newTarget.choose(Outcome.Neutral, playerId, game)) {
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SEARCHED, playerId, playerId));
 				return true;
 			}

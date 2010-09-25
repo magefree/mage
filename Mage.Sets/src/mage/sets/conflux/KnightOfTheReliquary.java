@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.MageInt;
@@ -51,7 +52,7 @@ import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.sets.Conflux;
+
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
@@ -70,8 +71,8 @@ public class KnightOfTheReliquary extends CardImpl<KnightOfTheReliquary> {
 	}
 
 	public KnightOfTheReliquary(UUID ownerId) {
-		super(ownerId, "Knight of the Reliquary", new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
-		this.expansionSetId = Conflux.getInstance().getId();
+		super(ownerId, "Knight of the Reliquary", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
+		this.expansionSetCode = "CON";
 		this.color.setWhite(true);
 		this.color.setGreen(true);
 		this.subtype.add("Human");
@@ -81,7 +82,7 @@ public class KnightOfTheReliquary extends CardImpl<KnightOfTheReliquary> {
 		TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
 		Costs costs = new CostsImpl();
 		costs.add(new TapSourceCost());
-		costs.add(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter)));
+		costs.add(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, false)));
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KnightOfTheReliquaryEffect()));
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay), costs));
 	}

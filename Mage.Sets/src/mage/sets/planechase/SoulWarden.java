@@ -29,82 +29,16 @@
 package mage.sets.planechase;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
-import mage.sets.Planechase;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SoulWarden extends CardImpl<SoulWarden> {
+public class SoulWarden extends mage.sets.magic2010.SoulWarden {
 
 	public SoulWarden(UUID ownerId) {
-		super(ownerId, "Soul Warden", new CardType[]{CardType.CREATURE}, "{W}");
-		this.expansionSetId = Planechase.getInstance().getId();
-		this.subtype.add("Human");
-		this.subtype.add("Cleric");
-		this.color.setWhite(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-		this.addAbility(new SoulWardenAbility());
-	}
-
-	public SoulWarden(final SoulWarden card) {
-		super(card);
-	}
-
-	@Override
-	public SoulWarden copy() {
-		return new SoulWarden(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "05621_typ_reg_sty_010.jpg";
-	}
-
-}
-
-class SoulWardenAbility extends TriggeredAbilityImpl<SoulWardenAbility> {
-
-	public SoulWardenAbility() {
-		super(Zone.BATTLEFIELD, new GainLifeEffect(1));
-	}
-
-	public SoulWardenAbility(final SoulWardenAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public SoulWardenAbility copy() {
-		return new SoulWardenAbility(this);
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
-			Permanent permanent = game.getPermanent(event.getTargetId());
-			if (permanent.getCardType().contains(CardType.CREATURE) && !permanent.getId().equals(this.getSourceId())) {
-				trigger(game, this.controllerId);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public String getRule() {
-		return "Whenever another creature enters the battlefield, " + super.getRule();
+		super(ownerId);
+		this.expansionSetCode = "HOP";
 	}
 
 }

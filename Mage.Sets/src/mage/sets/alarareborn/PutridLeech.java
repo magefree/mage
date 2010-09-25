@@ -31,13 +31,14 @@ package mage.sets.alarareborn;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.sets.AlaraReborn;
+
 
 /**
  *
@@ -46,8 +47,8 @@ import mage.sets.AlaraReborn;
 public class PutridLeech extends CardImpl<PutridLeech> {
 
 	public PutridLeech(UUID ownerId) {
-		super(ownerId, "Putrid Leech", new CardType[]{CardType.CREATURE}, "{B}{G}");
-		this.expansionSetId = AlaraReborn.getInstance().getId();
+		super(ownerId, "Putrid Leech", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{G}");
+		this.expansionSetCode = "ARB";
 		this.color.setBlack(true);
 		this.color.setGreen(true);
 		this.subtype.add("Zombie");

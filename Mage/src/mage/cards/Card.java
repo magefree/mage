@@ -30,6 +30,7 @@ package mage.cards;
 
 import java.util.List;
 import java.util.UUID;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -42,15 +43,19 @@ public interface Card extends MageObject {
 
 	public UUID getOwnerId();
 	public String getArt();
+	public Rarity getRarity();
+	public void setRarity(Rarity rarity);
 	public void setControllerId(UUID controllerId);
 	public void setOwnerId(UUID ownerId);
 	public void addAbility(Ability ability);
 	public SpellAbility getSpellAbility();
 	public List<String> getRules();
 	public Watchers getWatchers();
-	public UUID getExpansionSetId();
+	public String getExpansionSetCode();
+	public void setExpansionSetCode(String expansionSetCode);
 
 	public void checkTriggers(Zone zone, GameEvent event, Game game);
 
+	@Override
 	public Card copy();
 }

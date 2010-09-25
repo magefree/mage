@@ -30,12 +30,12 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.EldraziSpawnToken;
-import mage.sets.RiseOfTheEldrazi;
 
 /**
  *
@@ -44,8 +44,8 @@ import mage.sets.RiseOfTheEldrazi;
 public class EmrakulsHatcher extends CardImpl<EmrakulsHatcher> {
 
 	public EmrakulsHatcher(UUID ownerId) {
-		super(ownerId, "Emrakul's Hatcher", new CardType[]{CardType.CREATURE}, "{4}{R}");
-		this.expansionSetId = RiseOfTheEldrazi.getInstance().getId();
+		super(ownerId, "Emrakul's Hatcher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
+		this.expansionSetCode = "ROE";
 		this.subtype.add("Eldrazi");
 		this.subtype.add("Drone");
 		this.color.setRed(true);
@@ -66,7 +66,7 @@ public class EmrakulsHatcher extends CardImpl<EmrakulsHatcher> {
 
 	@Override
 	public String getArt() {
-		return "";
+		return "127298_typ_reg_sty_010.jpg";
 	}
 
 }

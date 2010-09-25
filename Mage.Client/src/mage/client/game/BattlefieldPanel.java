@@ -162,6 +162,10 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        setBackground(java.awt.Color.gray);
+        setForeground(java.awt.Color.gray);
+        setOpaque(true);
     }// </editor-fold>//GEN-END:initComponents
 
 	@Override

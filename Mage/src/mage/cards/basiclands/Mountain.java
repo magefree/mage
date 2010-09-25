@@ -35,7 +35,7 @@ import mage.abilities.mana.RedManaAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class Mountain<T extends Mountain<T>> extends BasicLand<T> {
+public class Mountain extends BasicLand<Mountain> {
 
 	public Mountain(UUID ownerId) {
 		super(ownerId, "Mountain", new RedManaAbility());
@@ -43,5 +43,15 @@ public abstract class Mountain<T extends Mountain<T>> extends BasicLand<T> {
 
 	public Mountain(Mountain land) {
 		super(land);
+	}
+
+	@Override
+	public Mountain copy() {
+		return new Mountain(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "";
 	}
 }

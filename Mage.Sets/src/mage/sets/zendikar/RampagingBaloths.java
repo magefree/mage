@@ -30,13 +30,13 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
-import mage.sets.Zendikar;
 
 /**
  *
@@ -45,8 +45,8 @@ import mage.sets.Zendikar;
 public class RampagingBaloths extends CardImpl<RampagingBaloths> {
 
 	public RampagingBaloths(UUID ownerId) {
-		super(ownerId, "Rampaging Baloths", new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-		this.expansionSetId = Zendikar.getInstance().getId();
+		super(ownerId, "Rampaging Baloths", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
+		this.expansionSetCode = "ZEN";
 		this.subtype.add("Beast");
 		this.color.setGreen(true);
 		this.power = new MageInt(6);

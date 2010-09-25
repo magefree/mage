@@ -28,6 +28,7 @@
 
 package mage.abilities.costs.mana;
 
+import java.util.UUID;
 import mage.Constants.ColoredManaSymbol;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -177,17 +178,17 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
 	}
 
 	@Override
-	public boolean canPay(Ability source, Game game) {
+	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
 		return true;
 	}
 
 	@Override
-	public boolean pay(Game game, Ability source, boolean noMana) {
+	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
 		if (noMana) {
 			setPaid();
 			return true;
 		}
-		Player player = game.getPlayer(source.getControllerId());
+		Player player = game.getPlayer(controllerId);
 		assignPayment(player.getManaPool());
 		while (!isPaid()) {
 			if (player.playMana(this, game))

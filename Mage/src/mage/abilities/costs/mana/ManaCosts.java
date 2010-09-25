@@ -29,6 +29,7 @@
 package mage.abilities.costs.mana;
 
 import java.util.List;
+import mage.abilities.costs.VariableCost;
 
 /**
  *
@@ -37,7 +38,7 @@ import java.util.List;
 public interface ManaCosts<T extends ManaCost> extends List<T>, ManaCost {
 
 	public ManaCosts<T> getUnpaidVariableCosts();
-	public List<VariableManaCost> getVariableCosts();
+	public List<VariableCost> getVariableCosts();
 	public void load(String mana);
 	public List<String> getSymbols();
 

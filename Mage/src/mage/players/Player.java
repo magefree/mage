@@ -75,7 +75,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public void setLife(int life, Game game);
 	public int loseLife(int amount, Game game);
 	public void gainLife(int amount, Game game);
-	public int damage(int damage, UUID sourceId, Game game);
+	public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable);
 	public Cards getHand();
 	public int getLandsPlayed();
 	public boolean isPassed();
@@ -96,6 +96,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public boolean putInHand(Card card, Game game);
 	public boolean removeFromHand(Card card, Game game);
 	public boolean putOntoBattlefield(Card card, Game game);
+//	public boolean putOntoBattlefield(Card copy, Card card, Game game);
 	public boolean putOntoBattlefield(Token token, Game game);
 	public boolean removeFromBattlefield(Permanent permanent, Game game);
 	public boolean putInGraveyard(Card card, Game game, boolean fromBattlefield);
@@ -129,6 +130,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public void setResponseInteger(Integer data);
 
 	public abstract void priority(Game game);
+	public abstract boolean choose(Outcome outcome, Target target, Game game);
 	public abstract boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game);
 	public abstract boolean chooseTarget(Cards cards, TargetCard target, Ability source, Game game);
 	public abstract boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game);

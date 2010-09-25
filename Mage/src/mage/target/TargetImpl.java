@@ -55,11 +55,18 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 	protected int minNumberOfTargets;
 	protected boolean required = false;
 	protected boolean chosen = false;
+	protected boolean notTarget = false;
 
 	@Override
 	public abstract T copy();
 
-	public TargetImpl() {}
+	public TargetImpl() {
+		this(false);
+	}
+
+	public TargetImpl(boolean notTarget) {
+		this.notTarget = notTarget;
+	}
 
 	public TargetImpl(final TargetImpl<T> target) {
 		this.targetName = target.targetName;
@@ -86,6 +93,11 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 	@Override
 	public String getMessage() {
 		return "Select a " + targetName;
+	}
+
+	@Override
+	public boolean isNotTarget() {
+		return notTarget;
 	}
 
 	@Override
@@ -122,6 +134,8 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 
 	@Override
 	public boolean doneChosing() {
+		if (maxNumberOfTargets == 0)
+			return false;
 		return targets.size() == maxNumberOfTargets;
 	}
 
@@ -131,12 +145,15 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 		chosen = false;
 	}
 
-	/**
-	 * 
-	 * @param id
-	 * @param game
-	 * @return true if able to add target
-	 */
+	@Override
+	public void add(UUID id, Game game) {
+		if (targets.size() < maxNumberOfTargets) {
+			if (!targets.containsKey(id)) {
+				targets.put(id, 0);
+			}
+		}
+	}
+
 	@Override
 	public void addTarget(UUID id, Ability source, Game game) {
 		//20100423 - 113.3
@@ -174,7 +191,25 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 	}
 
 	@Override
-	public boolean choose(Outcome outcome, UUID playerId, Ability source, Game game) {
+	public boolean choose(Outcome outcome, UUID playerId, Game game) {
+		Player player = game.getPlayer(playerId);
+		while (!isChosen() && !doneChosing()) {
+			chosen = targets.size() >= minNumberOfTargets;
+			if (!player.choose(outcome, this, game)) {
+				return chosen;
+			}
+			chosen = targets.size() >= minNumberOfTargets;
+		}
+		while (!doneChosing()) {
+			if (!player.choose(outcome, this, game)) {
+				break;
+			}
+		}
+		return chosen = true;
+	}
+
+	@Override
+	public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game) {
 		Player player = game.getPlayer(playerId);
 		while (!isChosen() && !doneChosing()) {
 			chosen = targets.size() >= minNumberOfTargets;
@@ -194,6 +229,8 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 	@Override
 	public boolean isLegal(Ability source, Game game) {
 		for (UUID targetId: targets.keySet()) {
+			if (game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getSourceId(), source.getControllerId())))
+				return false;
 			if (!canTarget(targetId, source, game))
 				return false;
 		}
@@ -202,7 +239,7 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 
 	@Override
 	public List<UUID> getTargets() {
-		return new ArrayList(targets.keySet());
+		return new ArrayList<UUID>(targets.keySet());
 	}
 
 	@Override

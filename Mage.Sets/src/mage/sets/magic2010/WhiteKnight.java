@@ -30,12 +30,12 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
-import mage.sets.Magic2010;
 
 /**
  *
@@ -44,8 +44,8 @@ import mage.sets.Magic2010;
 public class WhiteKnight extends CardImpl<WhiteKnight> {
 
 	public WhiteKnight(UUID ownerId) {
-		super(ownerId, "White Knight", new CardType[]{CardType.CREATURE}, "{W}{W}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "White Knight", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
+		this.expansionSetCode = "M10";
 		this.subtype.add("Human");
 		this.subtype.add("Knight");
 		this.color.setWhite(true);

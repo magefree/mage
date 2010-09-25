@@ -64,7 +64,15 @@ public class Exile implements Serializable, Copyable<Exile> {
 	public ExileZone getPermanentExile() {
 		return exileZones.get(PERMANENT);
 	}
+
+	public void add(UUID id, String name, Card card) {
+		createZone(id, name).add(card);
+	}
 	
+	public void add(Card card) {
+		exileZones.get(PERMANENT).add(card);
+	}
+
 	public ExileZone createZone(UUID id, String name) {
 		return createZone(id, name + " - Exile", false);
 	}

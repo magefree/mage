@@ -88,4 +88,5 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
 			return super.resolve(game);
 		return false;
 	}
+
 }

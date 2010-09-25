@@ -30,12 +30,12 @@ package mage.sets.magic2011;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
-import mage.sets.Magic2011;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,8 +45,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class AetherAdept extends CardImpl<AetherAdept> {
 
 	public AetherAdept(UUID ownerId) {
-		super(ownerId, "Æther Adept", new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-		this.expansionSetId = Magic2011.getInstance().getId();
+		super(ownerId, "Æther Adept", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
+		this.expansionSetCode = "M11";
 		this.subtype.add("Human");
 		this.subtype.add("Wizard");
 		this.color.setBlue(true);
@@ -69,7 +69,7 @@ public class AetherAdept extends CardImpl<AetherAdept> {
 
 	@Override
 	public String getArt() {
-		return "";
+		return "129110_typ_reg_sty_010.jpg";
 	}
 
 }

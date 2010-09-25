@@ -29,32 +29,21 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-import mage.cards.basiclands.Island;
-import mage.sets.Tenth;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Island1 extends Island<Island1> {
+public class Island1 extends mage.cards.basiclands.Island {
 
 	public Island1(UUID ownerId) {
 		super(ownerId);
-		this.expansionSetId = Tenth.getInstance().getId();
-	}
-
-	public Island1(final Island1 card) {
-		super(card);
-	}
-
-	@Override
-	public Island1 copy() {
-		return new Island1(this);
+		this.expansionSetCode = "10E";
 	}
 
 	@Override
 	public String getArt() {
-		return "80957_typ_reg_sty_010.jpg";
+		return "08754_typ_reg_sty_010.jpg";
 	}
 
 }

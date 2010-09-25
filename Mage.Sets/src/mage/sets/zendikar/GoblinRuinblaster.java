@@ -32,14 +32,17 @@ package mage.sets.zendikar;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.ColoredManaSymbol;
+import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
-import mage.sets.Zendikar;
 import mage.target.common.TargetNonBasicLandPermanent;
 
 /**
@@ -49,18 +52,19 @@ import mage.target.common.TargetNonBasicLandPermanent;
 public class GoblinRuinblaster extends CardImpl<GoblinRuinblaster> {
 
 	public GoblinRuinblaster(UUID ownerId) {
-		super(ownerId, "Goblin Ruinblaster", new CardType[]{CardType.CREATURE}, "{2}{R}");
-		this.expansionSetId = Zendikar.getInstance().getId();
+		super(ownerId, "Goblin Ruinblaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+		this.expansionSetCode = "ZEN";
 		this.color.setRed(true);
 		this.subtype.add("Goblin");
 		this.subtype.add("Shaman");
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(1);
 		this.addAbility(HasteAbility.getInstance());
-		KickerAbility ability = new KickerAbility(new EntersBattlefieldEffect(new DestroyTargetEffect()), false);
-		ability.addTarget(new TargetNonBasicLandPermanent());
-		ability.addManaCost(new ColoredManaCost(ColoredManaSymbol.R));
-		this.addAbility(ability);
+		Ability ability1 = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
+		ability1.addTarget(new TargetNonBasicLandPermanent());
+		KickerAbility ability2 = new KickerAbility(new GainAbilitySourceEffect(ability1, Duration.WhileOnBattlefield), false);
+		ability2.addManaCost(new ColoredManaCost(ColoredManaSymbol.R));
+		this.addAbility(ability1);
 
 	}
 

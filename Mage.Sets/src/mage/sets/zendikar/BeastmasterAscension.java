@@ -31,6 +31,7 @@ package mage.sets.zendikar;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -42,7 +43,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.sets.Zendikar;
 
 /**
  *
@@ -51,8 +51,8 @@ import mage.sets.Zendikar;
 public class BeastmasterAscension extends CardImpl<BeastmasterAscension> {
 
 	public BeastmasterAscension(UUID ownerId) {
-		super(ownerId, "Beastmaster Ascension", new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-		this.expansionSetId = Zendikar.getInstance().getId();
+		super(ownerId, "Beastmaster Ascension", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
+		this.expansionSetCode = "ZEN";
 		this.color.setGreen(true);
 
 		this.addAbility(new BeastmasterAscensionAbility());

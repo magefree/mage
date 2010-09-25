@@ -30,13 +30,13 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
-import mage.sets.Zendikar;
 
 /**
  *
@@ -45,8 +45,8 @@ import mage.sets.Zendikar;
 public class EmeriaAngel extends CardImpl<EmeriaAngel> {
 
 	public EmeriaAngel(UUID ownerId) {
-		super(ownerId, "Emeria Angel", new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-		this.expansionSetId = Zendikar.getInstance().getId();
+		super(ownerId, "Emeria Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+		this.expansionSetCode = "ZEN";
 		this.subtype.add("Angel");
 		this.color.setWhite(true);
 		this.power = new MageInt(3);

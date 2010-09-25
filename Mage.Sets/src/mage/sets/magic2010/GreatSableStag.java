@@ -30,6 +30,7 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -37,7 +38,6 @@ import mage.abilities.effects.common.CantCounterSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
-import mage.sets.Magic2010;
 
 /**
  *
@@ -46,8 +46,8 @@ import mage.sets.Magic2010;
 public class GreatSableStag extends CardImpl<GreatSableStag> {
 
 	public GreatSableStag(UUID ownerId) {
-		super(ownerId, "Great Sable Stag", new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Great Sable Stag", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
+		this.expansionSetCode = "M10";
 		this.subtype.add("Elk");
 		this.color.setGreen(true);
 		this.power = new MageInt(3);

@@ -29,7 +29,6 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
-import mage.sets.Magic2011;
 
 /**
  *
@@ -39,7 +38,7 @@ public class AjaniGoldmane extends mage.sets.magic2010.AjaniGoldmane {
 
 	public AjaniGoldmane(UUID ownerId) {
 		super(ownerId);
-		this.expansionSetId = Magic2011.getInstance().getId();
+		this.expansionSetCode = "M11";
 	}
 
 }

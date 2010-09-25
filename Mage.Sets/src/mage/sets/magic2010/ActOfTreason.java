@@ -31,12 +31,12 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.abilities.effects.common.GainAbilityTargetEffect;
-import mage.abilities.effects.common.GainControlTargetEOTEffect;
+import mage.abilities.effects.common.GainControlTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.sets.Magic2010;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -46,11 +46,11 @@ import mage.target.common.TargetCreaturePermanent;
 public class ActOfTreason extends CardImpl<ActOfTreason> {
 
 	public ActOfTreason(UUID ownerId) {
-		super(ownerId, "Act Of Treason", new CardType[]{CardType.SORCERY}, "{2}{R}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Act Of Treason", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
+		this.expansionSetCode = "M10";
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new GainControlTargetEOTEffect());
+		this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
 		this.getSpellAbility().addEffect(new UntapTargetEffect());
 		this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
 

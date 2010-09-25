@@ -38,6 +38,8 @@ import mage.game.permanent.Permanent;
  */
 public class FilterCreaturePermanent<T extends FilterCreaturePermanent<T>> extends FilterPermanent<FilterCreaturePermanent<T>> {
 
+	protected static FilterCreaturePermanent defaultFilter = new FilterCreaturePermanent();
+
 	protected boolean useAttacking;
 	protected boolean attacking;
 	protected boolean useBlocking;
@@ -60,6 +62,10 @@ public class FilterCreaturePermanent<T extends FilterCreaturePermanent<T>> exten
 		this.blocking = filter.blocking;
 	}
 
+	public static FilterCreaturePermanent getDefault() {
+		return defaultFilter;
+	}
+
 	@Override
 	public boolean match(Permanent permanent) {
 		if (!super.match(permanent))
@@ -76,6 +82,8 @@ public class FilterCreaturePermanent<T extends FilterCreaturePermanent<T>> exten
 
 	@Override
 	public FilterCreaturePermanent<T> copy() {
+		if (this == defaultFilter)
+			return this;
 		return new FilterCreaturePermanent<T>(this);
 	}
 }

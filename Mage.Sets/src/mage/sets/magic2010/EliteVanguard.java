@@ -30,9 +30,9 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
-import mage.sets.Magic2010;
 
 /**
  *
@@ -41,8 +41,8 @@ import mage.sets.Magic2010;
 public class EliteVanguard extends CardImpl<EliteVanguard> {
 
 	public EliteVanguard(UUID ownerId) {
-		super(ownerId, "Elite Vanguard", new CardType[]{CardType.CREATURE}, "{W}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Elite Vanguard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");
+		this.expansionSetCode = "M10";
 		this.color.setWhite(true);
 		this.subtype.add("Human");
 		this.subtype.add("Soldier");

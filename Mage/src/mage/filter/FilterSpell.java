@@ -50,7 +50,7 @@ public class FilterSpell extends FilterObject<Spell, FilterSpell> {
 		super(name);
 	}
 
-	public FilterSpell(FilterSpell filter) {
+	public FilterSpell(final FilterSpell filter) {
 		super(filter);
 		for (UUID cId: filter.controllerId) {
 			this.controllerId.add(cId);

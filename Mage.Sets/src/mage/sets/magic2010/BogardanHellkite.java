@@ -30,6 +30,7 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -37,7 +38,6 @@ import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.sets.Magic2010;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
@@ -47,8 +47,8 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
 public class BogardanHellkite extends CardImpl<BogardanHellkite> {
 
 	public BogardanHellkite(UUID ownerId) {
-		super(ownerId, "Bogardan Hellkite", new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Bogardan Hellkite", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
+		this.expansionSetCode = "M10";
 		this.subtype.add("Dragon");
 		this.color.setRed(true);
 		this.power = new MageInt(5);

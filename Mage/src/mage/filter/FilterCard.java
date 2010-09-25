@@ -43,8 +43,8 @@ public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, Filt
 
 	protected List<UUID> ownerId = new ArrayList<UUID>();
 	protected boolean notOwner;
-	protected List<UUID> expansionSetId = new ArrayList<UUID>();
-	protected boolean notExpansionSetId;
+	protected List<String> expansionSetCode = new ArrayList<String>();
+	protected boolean notExpansionSetCode;
 
 	public FilterCard() {
 		super("card");
@@ -60,10 +60,10 @@ public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, Filt
 			this.ownerId.add(oId);
 		}
 		this.notOwner = filter.notOwner;
-		for (UUID eId: filter.expansionSetId) {
-			this.expansionSetId.add(eId);
+		for (String code: filter.expansionSetCode) {
+			this.expansionSetCode.add(code);
 		}
-		this.notExpansionSetId = filter.notExpansionSetId;
+		this.notExpansionSetCode = filter.notExpansionSetCode;
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, Filt
 		if (ownerId.size() > 0 && ownerId.contains(card.getOwnerId()) == notOwner)
 			return notFilter;
 
-		if (expansionSetId.size() > 0 && expansionSetId.contains(card.getExpansionSetId()) == notExpansionSetId)
+		if (expansionSetCode.size() > 0 && expansionSetCode.contains(card.getExpansionSetCode()) == notExpansionSetCode)
 			return notFilter;
 		
 		return !notFilter;
@@ -88,12 +88,12 @@ public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, Filt
 		this.notOwner = notOwner;
 	}
 	
-	public List<UUID> getExpansionSetId() {
-		return expansionSetId;
+	public List<String> getExpansionSetCode() {
+		return expansionSetCode;
 	}
 
-	public void setNotExpansionSetId(boolean notExpansionSetId) {
-		this.notExpansionSetId = notExpansionSetId;
+	public void setNotExpansionSetCode(boolean notExpansionSetCode) {
+		this.notExpansionSetCode = notExpansionSetCode;
 	}
 
 	public boolean matchOwner(UUID testOwnerId) {

@@ -71,10 +71,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
 	public void loadCards(BigCard bigCard) {
 		this.bigCard = bigCard;
-		cbExpansionSet.setModel(new DefaultComboBoxModel(Sets.getInstance().toArray()));
+		cbExpansionSet.setModel(new DefaultComboBoxModel(Sets.getInstance().values().toArray()));
 		cbExpansionSet.insertItemAt("All sets", 0);
 		cbExpansionSet.setSelectedIndex(0);
-		for (ExpansionSet set: Sets.getInstance()) {
+		for (ExpansionSet set: Sets.getInstance().values()) {
 			allCards.addAll(set.createCards());
 		}
 		filter.setUseColor(true);
@@ -427,9 +427,9 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 	}//GEN-LAST:event_rdoPlaneswalkersActionPerformed
 
 	private void cbExpansionSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbExpansionSetActionPerformed
-		filter.getExpansionSetId().clear();
+		filter.getExpansionSetCode().clear();
 		if (cbExpansionSet.getSelectedItem() instanceof ExpansionSet) {
-			filter.getExpansionSetId().add(((ExpansionSet)this.cbExpansionSet.getSelectedItem()).getId());
+			filter.getExpansionSetCode().add(((ExpansionSet)this.cbExpansionSet.getSelectedItem()).getCode());
 		}
 		filterCards();
 	}//GEN-LAST:event_cbExpansionSetActionPerformed

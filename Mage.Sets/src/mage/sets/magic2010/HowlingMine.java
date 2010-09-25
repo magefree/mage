@@ -30,6 +30,7 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardTargetEffect;
@@ -37,7 +38,6 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.sets.Magic2010;
 import mage.target.TargetPlayer;
 
 /**
@@ -47,8 +47,8 @@ import mage.target.TargetPlayer;
 public class HowlingMine extends CardImpl<HowlingMine> {
 
 	public HowlingMine(UUID ownerId) {
-		super(ownerId, "Howling Mine", new CardType[]{CardType.ARTIFACT}, "{2}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Howling Mine", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
+		this.expansionSetCode = "M10";
 		this.addAbility(new HowlingMineAbility());
 	}
 

@@ -30,6 +30,7 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
@@ -39,7 +40,6 @@ import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.sets.Zendikar;
 
 /**
  *
@@ -48,8 +48,8 @@ import mage.sets.Zendikar;
 public class ScuteMob extends CardImpl<ScuteMob> {
 
 	public ScuteMob(UUID ownerId) {
-		super(ownerId, "Scute Mob", new CardType[]{CardType.CREATURE}, "{G}");
-		this.expansionSetId = Zendikar.getInstance().getId();
+		super(ownerId, "Scute Mob", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
+		this.expansionSetCode = "ZEN";
 		this.color.setGreen(true);
 		this.subtype.add("Insect");
 		this.power = new MageInt(1);

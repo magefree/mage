@@ -30,10 +30,10 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.abilities.effects.common.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterBasicLandCard;
-import mage.sets.Magic2010;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -43,8 +43,8 @@ import mage.target.common.TargetCardInLibrary;
 public class RampantGrowth extends CardImpl<RampantGrowth> {
 
 	public RampantGrowth(UUID ownerId){
-		super(ownerId, "Rampant Growth", new CardType[]{CardType.SORCERY}, "{1}{G}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Rampant Growth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
+		this.expansionSetCode = "M10";
 		this.color.setGreen(true);
 		TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
 		this.getSpellAbility().addTarget(target);

@@ -46,8 +46,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.PopupFactory;
+import mage.Constants.CardType;
 import mage.client.util.Config;
 import mage.client.util.ImageHelper;
+import mage.sets.Sets;
 import mage.view.CounterView;
 import mage.view.PermanentView;
 import static mage.client.util.Constants.*;
@@ -87,6 +89,34 @@ public class Permanent extends Card {
 
 	public void setLinked(boolean linked) {
 		this.linked = linked;
+	}
+
+	@Override
+	protected String getText(String cardType) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.getText(cardType));
+		sb.append("\n----- Originally -------\n");
+		sb.append(permanent.getOriginal().getName());
+		if (permanent.getOriginal().getManaCost().size() > 0) {
+			sb.append("\n").append(permanent.getOriginal().getManaCost());
+		}
+		sb.append("\n").append(getType(permanent.getOriginal()));
+		if (permanent.getOriginal().getColor().hasColor()) {
+			sb.append("\n").append(permanent.getOriginal().getColor().toString());
+		}
+		if (permanent.getOriginal().getCardTypes().contains(CardType.CREATURE)) {
+			sb.append("\n").append(permanent.getOriginal().getPower()).append("/").append(permanent.getOriginal().getToughness());
+		}
+		else if (permanent.getOriginal().getCardTypes().contains(CardType.PLANESWALKER)) {
+			sb.append("\n").append(permanent.getOriginal().getLoyalty());
+		}
+		for (String rule: getRules()) {
+			sb.append("\n").append(rule);
+		}
+		sb.append("\n").append(Sets.getInstance().get(permanent.getOriginal().getExpansionSetCode()).getName()).append(" - ").append(permanent.getOriginal().getRarity().toString());
+//		sb.append("\n").append(card.getId());
+		return sb.toString();
+
 	}
 
 	@Override

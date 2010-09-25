@@ -35,7 +35,7 @@ import mage.abilities.mana.BlackManaAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class Swamp<T extends Swamp<T>> extends BasicLand<T> {
+public class Swamp extends BasicLand<Swamp> {
 
 	public Swamp(UUID ownerId) {
 		super(ownerId, "Swamp", new BlackManaAbility());
@@ -43,5 +43,15 @@ public abstract class Swamp<T extends Swamp<T>> extends BasicLand<T> {
 
 	public Swamp(Swamp land) {
 		super(land);
+	}
+
+	@Override
+	public Swamp copy() {
+		return new Swamp(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "";
 	}
 }

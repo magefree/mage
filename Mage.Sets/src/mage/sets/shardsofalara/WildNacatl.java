@@ -30,13 +30,13 @@ package mage.sets.shardsofalara;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.BoostSourceWhileControlsEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
-import mage.sets.ShardsOfAlara;
 
 /**
  *
@@ -48,8 +48,8 @@ public class WildNacatl extends CardImpl<WildNacatl> {
 	private FilterPermanent filter2 = new FilterPermanent("Plains");
 
 	public WildNacatl(UUID ownerId) {
-		super(ownerId, "Wild Nacatl", new CardType[]{CardType.CREATURE}, "{G}");
-		this.expansionSetId = ShardsOfAlara.getInstance().getId();
+		super(ownerId, "Wild Nacatl", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+		this.expansionSetCode = "ALA";
 		this.color.setGreen(true);
 		this.subtype.add("Cat");
 		this.subtype.add("Warrior");

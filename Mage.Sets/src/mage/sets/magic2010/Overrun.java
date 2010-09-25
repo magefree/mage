@@ -31,12 +31,12 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.abilities.effects.common.BoostControlledEffect;
 import mage.abilities.effects.common.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.sets.Magic2010;
 
 /**
  *
@@ -45,12 +45,12 @@ import mage.sets.Magic2010;
 public class Overrun extends CardImpl<Overrun> {
 
     public Overrun(UUID onwerId) {
-        super(onwerId, "Overrun", new CardType[]{CardType.SORCERY},"{2}{G}{G}{G}");
-        this.expansionSetId = Magic2010.getInstance().getId();
+        super(onwerId, "Overrun", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY},"{2}{G}{G}{G}");
+        this.expansionSetCode = "M10";
 		this.color.setGreen(true);
 
         this.getSpellAbility().addEffect(new BoostControlledEffect(3, 3, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, FilterCreaturePermanent.getDefault()));
     }
 
 	public Overrun(final Overrun card) {

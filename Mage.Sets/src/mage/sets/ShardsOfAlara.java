@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.sets.shardsofalara.*;
 import mage.cards.ExpansionSet;
 
 /**
@@ -44,24 +43,7 @@ public class ShardsOfAlara extends ExpansionSet {
 	}
 
 	private ShardsOfAlara() {
-		this.name = "Shards Of Alara";
-		this.cards.add(AjaniVengeant.class);
-		this.cards.add(Angelsong.class);
-		this.cards.add(Blightning.class);
-		this.cards.add(BroodmateDragon.class);
-		this.cards.add(CrumblingNecropolis.class);
-		this.cards.add(ElspethKnightErrant.class);
-		this.cards.add(HellsThunder.class);
-		this.cards.add(JundPanorama.class);
-		this.cards.add(KnightOfTheWhiteOrchid.class);
-		this.cards.add(RafiqOfTheMany.class);
-		this.cards.add(RangerOfEos.class);
-		this.cards.add(RhoxWarMonk.class);
-		this.cards.add(SarkhanVol.class);
-		this.cards.add(SavageLands.class);
-		this.cards.add(SproutingThrinax.class);
-		this.cards.add(WildNacatl.class);
-		this.cards.add(WoollyThoctar.class);
+		super("Shards Of Alara", "ALA", "seticon_mtgala", "mage.sets.shardsofalara");
 	}
 
 }

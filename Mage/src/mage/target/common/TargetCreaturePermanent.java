@@ -39,19 +39,19 @@ import mage.target.TargetPermanent;
 public class TargetCreaturePermanent<T extends TargetCreaturePermanent<T>> extends TargetPermanent<TargetCreaturePermanent<T>> {
 
 	public TargetCreaturePermanent() {
-		this(1, 1, new FilterCreaturePermanent(), TargetController.ANY);
+		this(1, 1, FilterCreaturePermanent.getDefault(), TargetController.ANY, false);
 	}
 
 	public TargetCreaturePermanent(FilterCreaturePermanent filter) {
-		this(1, 1, filter, TargetController.ANY);
+		this(1, 1, filter, TargetController.ANY, false);
 	}
 
 	public TargetCreaturePermanent(int numTargets, TargetController controller) {
-		this(numTargets, numTargets, new FilterCreaturePermanent(), controller);
+		this(numTargets, numTargets, FilterCreaturePermanent.getDefault(), controller, false);
 	}
 
-	public TargetCreaturePermanent(int minNumTargets, int maxNumTargets, FilterCreaturePermanent filter, TargetController controller) {
-		super(1, 1, filter, controller);
+	public TargetCreaturePermanent(int minNumTargets, int maxNumTargets, FilterCreaturePermanent filter, TargetController controller, boolean notTarget) {
+		super(1, 1, filter, controller, notTarget);
 		this.targetName = filter.getMessage();
 	}
 

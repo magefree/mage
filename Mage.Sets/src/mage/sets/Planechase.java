@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.sets.planechase.*;
 import mage.cards.ExpansionSet;
 
 /**
@@ -44,9 +43,7 @@ public class Planechase extends ExpansionSet {
 	}
 
 	private Planechase() {
-		this.name = "Planechase";
-		this.cards.add(SoulWarden.class);
-		this.cards.add(OblivionRing.class);
+		super("Planechase", "HOP", "", "mage.sets.planechase");
 	}
 
 }

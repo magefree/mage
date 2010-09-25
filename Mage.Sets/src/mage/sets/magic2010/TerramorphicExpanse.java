@@ -31,6 +31,7 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -38,7 +39,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterBasicLandCard;
-import mage.sets.Magic2010;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -48,9 +48,8 @@ import mage.target.common.TargetCardInLibrary;
 public class TerramorphicExpanse extends CardImpl<TerramorphicExpanse> {
 
 	public TerramorphicExpanse(UUID ownerId) {
-		super(ownerId, "Terramorphic Expanse", new CardType[]{CardType.LAND}, null);
-		this.expansionSetId = Magic2010.getInstance().getId();
-//		this.art = "97502_typ_reg_sty_010.jpg";
+		super(ownerId, "Terramorphic Expanse", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+		this.expansionSetCode = "M10";
 		this.addAbility(new TerramorphicExpanseAbility());
 	}
 

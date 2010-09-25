@@ -30,8 +30,10 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.filter.FilterObject;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -45,16 +47,23 @@ import mage.game.stack.StackObject;
  */
 public class CantCounterControlledEffect extends ReplacementEffectImpl<CantCounterControlledEffect> {
 
-	private FilterSpell filter;
+	private FilterSpell filterTarget;
+	private FilterObject filterSource;
 
-	public CantCounterControlledEffect(FilterSpell filter) {
-		super(Duration.WhileOnStack, Outcome.Benefit);
-		this.filter = filter;
+	public CantCounterControlledEffect(FilterSpell filterTarget, FilterObject filterSource, Duration duration) {
+		super(duration, Outcome.Benefit);
+		this.filterTarget = filterTarget;
+		this.filterSource = filterSource;
+	}
+
+	public CantCounterControlledEffect(FilterSpell filterTarget, Duration duration) {
+		this(filterTarget, null, duration);
 	}
 
 	public CantCounterControlledEffect(final CantCounterControlledEffect effect) {
 		super(effect);
-		this.filter = effect.filter.copy();
+		this.filterTarget = effect.filterTarget.copy();
+		this.filterSource = effect.filterSource.copy();
 	}
 
 	@Override
@@ -75,12 +84,20 @@ public class CantCounterControlledEffect extends ReplacementEffectImpl<CantCount
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
 		if (event.getType() == EventType.COUNTER) {
-			filter.getControllerId().clear();
-			filter.getControllerId().add(source.getControllerId());
+			filterTarget.getControllerId().clear();
+			filterTarget.getControllerId().add(source.getControllerId());
 			StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
-			if (stackObject instanceof Spell) {
-				if (filter.match((Spell) stackObject))
-					return true;
+			if (stackObject != null && stackObject instanceof Spell) {
+				if (filterTarget.match((Spell) stackObject)) {
+					if (filterSource == null)
+						return true;
+					else {
+						MageObject sourceObject = game.getObject(source.getSourceId());
+						if (sourceObject != null && filterSource.match(sourceObject)) {
+							return true;
+						}
+					}
+				}
 			}
 		}
 		return false;
@@ -88,7 +105,12 @@ public class CantCounterControlledEffect extends ReplacementEffectImpl<CantCount
 
 	@Override
 	public String getText(Ability source) {
-		return filter.getMessage() + " can't be countered";
+		StringBuilder sb = new StringBuilder();
+		sb.append(filterTarget.getMessage()).append(" can't be countered");
+		if (filterSource != null) {
+			sb.append(" by ").append(filterSource.getMessage());
+		}
+		return sb.toString();
 	}
 
 }

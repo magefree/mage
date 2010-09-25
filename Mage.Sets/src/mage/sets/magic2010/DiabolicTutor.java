@@ -29,37 +29,16 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.abilities.effects.common.SearchLibraryPutInHandEffect;
-import mage.cards.CardImpl;
-import mage.sets.Magic2010;
-import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author LokiX
+ * @author BetaSteward_at_googlemail.com
  */
-public class DiabolicTutor extends CardImpl<DiabolicTutor> {
+public class DiabolicTutor extends mage.sets.tenth.DiabolicTutor {
 
-    public DiabolicTutor(UUID onwerId){
-        super(onwerId, "Diabolic Tutor", new CardType[]{CardType.INSTANT},"{2}{B}{B}");
-        this.expansionSetId = Magic2010.getInstance().getId();
-        this.color.setBlack(true);
-        TargetCardInLibrary target = new TargetCardInLibrary();
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(target));
-    }
-
-	public DiabolicTutor(final DiabolicTutor card) {
-		super(card);
+	public DiabolicTutor(UUID ownerId) {
+		super(ownerId);
+		this.expansionSetCode = "M10";
 	}
 
-	@Override
-	public DiabolicTutor copy() {
-		return new DiabolicTutor(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "101052_typ_reg_sty_010.jpg";
-	}
 }

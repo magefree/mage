@@ -31,6 +31,7 @@ package mage.sets.riseoftheeldrazi;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Abilities;
@@ -44,7 +45,6 @@ import mage.abilities.keyword.LevelAbility;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.LevelerCard;
-import mage.sets.RiseOfTheEldrazi;
 
 /**
  *
@@ -53,8 +53,8 @@ import mage.sets.RiseOfTheEldrazi;
 public class KarganDragonlord extends LevelerCard<KarganDragonlord> {
 
 	public KarganDragonlord(UUID ownerId) {
-		super(ownerId, "Kargan Dragonlord", new CardType[]{CardType.CREATURE}, "{R}{R}");
-		this.expansionSetId = RiseOfTheEldrazi.getInstance().getId();
+		super(ownerId, "Kargan Dragonlord", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{R}{R}");
+		this.expansionSetCode = "ROE";
 		this.subtype.add("Human");
 		this.subtype.add("Warrior");
 		this.color.setRed(true);

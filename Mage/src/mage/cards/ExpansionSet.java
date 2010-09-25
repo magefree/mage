@@ -28,13 +28,19 @@
 
 package mage.cards;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.Constructor;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,27 +51,39 @@ import java.util.logging.Logger;
 public abstract class ExpansionSet implements Serializable {
 
 	protected String name;
-	protected final List<Class> cards = new ArrayList<Class>();
-	protected final UUID id = UUID.randomUUID();
+	protected String code;
+	protected String symbolCode;
+	protected List<Class> cards;
+
+	public ExpansionSet(String name, String code, String symbolCode, String packageName) {
+		this.name = name;
+		this.code = code;
+		this.symbolCode = symbolCode;
+		this.cards = getCardClassesForPackage(packageName);
+	}
 
 	public List<Class> getCards() {
 		return cards;
-	}
-
-	public UUID getId() {
-		return id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public static Card createCard(Class clazz) {
+	public String getCode() {
+		return code;
+	}
+
+	public String getSymbolCode() {
+		return symbolCode;
+	}
+
+	public Card createCard(Class clazz) {
 		try {
 			Constructor<?> con = clazz.getConstructor(new Class[]{UUID.class});
 			return (Card) con.newInstance(new Object[] {null});
 		} catch (Exception ex) {
-			Logger.getLogger(ExpansionSet.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(ExpansionSet.class.getName()).log(Level.SEVERE, "Error creating card:" + clazz.getName(), ex);
 			return null;
 		}
 	}
@@ -82,4 +100,44 @@ public abstract class ExpansionSet implements Serializable {
 	public String toString() {
 		return name;
 	}
+
+	protected ArrayList<Class> getCardClassesForPackage(String packageName) {
+		ArrayList<Class> classes = new ArrayList<Class>();
+		// Get a File object for the package
+		File directory = null;
+		String fullPath;
+		String relPath = packageName.replace('.', '/');
+		URL resource = ClassLoader.getSystemClassLoader().getResource(relPath);
+		if (resource == null) {
+			throw new RuntimeException("No resource for " + relPath);
+		}
+		fullPath = resource.getFile();
+		directory = new File(fullPath);
+
+		try {
+			String jarPath = fullPath.replaceFirst("[.]jar[!].*", ".jar").replaceFirst("file:", "");
+			JarFile jarFile = new JarFile(jarPath);
+			Enumeration<JarEntry> entries = jarFile.entries();
+			while(entries.hasMoreElements()) {
+				JarEntry entry = entries.nextElement();
+				String entryName = entry.getName();
+				if(entryName.startsWith(relPath) && entryName.length() > (relPath.length() + "/".length())) {
+					String className = entryName.replace('/', '.').replace('\\', '.').replace(".class", "");
+					try {
+						Class clazz = Class.forName(className);
+						if (CardImpl.class.isAssignableFrom(clazz)) {
+							classes.add(clazz);
+						}
+					}
+					catch (ClassNotFoundException e) {
+						throw new RuntimeException("ClassNotFoundException loading " + className);
+					}
+				}
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(packageName + " (" + directory + ") does not appear to be a valid package", e);
+		}
+		return classes;
+	}
+
 }

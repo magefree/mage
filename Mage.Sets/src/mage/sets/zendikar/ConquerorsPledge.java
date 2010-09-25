@@ -30,13 +30,13 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
-import mage.sets.Zendikar;
 
 /**
  *
@@ -45,8 +45,8 @@ import mage.sets.Zendikar;
 public class ConquerorsPledge extends CardImpl<ConquerorsPledge> {
 
 	public ConquerorsPledge(UUID ownerId) {
-		super(ownerId, "Conquerors Pledge", new CardType[]{CardType.SORCERY}, "{2}{W}{W}{W}");
-		this.expansionSetId = Zendikar.getInstance().getId();
+		super(ownerId, "Conquerors Pledge", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}{W}");
+		this.expansionSetCode = "ZEN";
 		this.color.setWhite(true);
 		this.getSpellAbility().addEffect(new CreateTokenEffect(new KorSoldierToken(), 6));
 		KickerAbility ability = new KickerAbility(new CreateTokenEffect(new KorSoldierToken(), 12), true);

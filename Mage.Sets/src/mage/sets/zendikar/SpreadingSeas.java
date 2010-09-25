@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -46,7 +47,6 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.sets.Zendikar;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -57,8 +57,8 @@ import mage.target.common.TargetLandPermanent;
 public class SpreadingSeas extends CardImpl<SpreadingSeas> {
 
 	public SpreadingSeas(UUID ownerId) {
-		super(ownerId, "Spreading Seas", new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-		this.expansionSetId = Zendikar.getInstance().getId();
+		super(ownerId, "Spreading Seas", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
+		this.expansionSetCode = "ZEN";
 		this.color.setBlue(true);
 		this.subtype.add("Aura");
 
@@ -105,7 +105,7 @@ class SpreadingSeasEffect extends ContinuousEffectImpl<SpreadingSeasEffect> {
 	@Override
 	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
 		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment.getAttachedTo() != null) {
+		if (enchantment != null && enchantment.getAttachedTo() != null) {
 			Permanent land = game.getPermanent(enchantment.getAttachedTo());
 			if (land != null) {
 				switch (layer) {
@@ -140,6 +140,6 @@ class SpreadingSeasEffect extends ContinuousEffectImpl<SpreadingSeasEffect> {
 
 	@Override
 	public String getText(Ability source) {
-		return "Enchanted land is an Island.";
+		return "Enchanted land is an Island";
 	}
 }

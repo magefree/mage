@@ -31,13 +31,13 @@ package mage.sets.worldwake;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.ColoredManaSymbol;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.WolfToken;
-import mage.sets.Worldwake;
 
 /**
  *
@@ -46,8 +46,8 @@ import mage.sets.Worldwake;
 public class WolfbriarElemental extends CardImpl<WolfbriarElemental> {
 
 	public WolfbriarElemental(UUID ownerId) {
-		super(ownerId, "Wolfbriar Elemental", new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-		this.expansionSetId = Worldwake.getInstance().getId();
+		super(ownerId, "Wolfbriar Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+		this.expansionSetCode = "WWK";
 		this.subtype.add("Elemental");
 		this.color.setGreen(true);
 		this.power = new MageInt(4);

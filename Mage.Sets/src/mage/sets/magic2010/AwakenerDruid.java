@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.Constants.SubLayer;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -43,7 +44,6 @@ import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-import mage.sets.Magic2010;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -59,8 +59,8 @@ public class AwakenerDruid extends CardImpl<AwakenerDruid> {
 	}
 
 	public AwakenerDruid(UUID ownerId) {
-		super(ownerId, "Awakener Druid", new CardType[]{CardType.CREATURE}, "{2}{G}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Awakener Druid", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+		this.expansionSetCode = "M10";
 		this.color.setGreen(true);
 		this.subtype.add("Human");
 		this.subtype.add("Druid");

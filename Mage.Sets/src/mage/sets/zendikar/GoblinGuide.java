@@ -31,6 +31,7 @@ package mage.sets.zendikar;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -44,7 +45,6 @@ import mage.cards.CardsImpl;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.players.Player;
-import mage.sets.Zendikar;
 
 /**
  *
@@ -53,8 +53,8 @@ import mage.sets.Zendikar;
 public class GoblinGuide extends CardImpl<GoblinGuide> {
 
 	public GoblinGuide(UUID ownerId) {
-		super(ownerId, "Goblin Guide", new CardType[]{CardType.CREATURE}, "{R}");
-		this.expansionSetId = Zendikar.getInstance().getId();
+		super(ownerId, "Goblin Guide", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");
+		this.expansionSetCode = "ZEN";
 		this.color.setRed(true);
 		this.subtype.add("Goblin");
 		this.subtype.add("Scout");

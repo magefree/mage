@@ -155,6 +155,23 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	}
 
 	@Override
+	public boolean choose(Outcome outcome, Target target, Game game) {
+		while (!abort) {
+			game.fireSelectTargetEvent(playerId, target.getMessage(), target.isRequired());
+			waitForResponse();
+			if (response.getUUID() != null) {
+				if (target.canTarget(response.getUUID(), game)) {
+					target.add(response.getUUID(), game);
+					return true;
+				}
+			} else if (!target.isRequired()) {
+				return false;
+			}
+		}
+		return false;
+	}
+
+	@Override
 	public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
 		while (!abort) {
 			game.fireSelectTargetEvent(playerId, target.getMessage(), target.isRequired());
@@ -277,7 +294,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public boolean playXMana(VariableManaCost cost, Game game) {
-		game.firePlayXManaEvent(playerId, "Pay {X}: {X}=" + cost.getValue());
+		game.firePlayXManaEvent(playerId, "Pay {X}: {X}=" + cost.getAmount());
 		waitForResponse();
 		if (response.getBoolean() != null) {
 			if (!response.getBoolean())
@@ -382,12 +399,12 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 				int damageAmount = getAmount(0, remainingDamage, "Select amount", game);
 				Permanent permanent = game.getPermanent(target.getFirstTarget());
 				if (permanent != null) {
-					permanent.damage(damageAmount, sourceId, game);
+					permanent.damage(damageAmount, sourceId, game, true);
 				}
 				else {
 					Player player = game.getPlayer(target.getFirstTarget());
 					if (player != null) {
-						player.damage(damageAmount, sourceId, game);
+						player.damage(damageAmount, sourceId, game, false, true);
 					}
 				}
 			}

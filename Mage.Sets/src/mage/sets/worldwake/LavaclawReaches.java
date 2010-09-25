@@ -31,19 +31,19 @@ package mage.sets.worldwake;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldStaticAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.BecomesCreatureSourceEOTEffect;
-import mage.abilities.effects.common.BoostPowerSourceVariableEffect;
-import mage.abilities.effects.common.EntersBattlefieldTappedEffect;
+import mage.abilities.effects.common.BoostPowerXSourceEffect;
+import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
-import mage.sets.Worldwake;
 
 /**
  *
@@ -52,10 +52,9 @@ import mage.sets.Worldwake;
 public class LavaclawReaches extends CardImpl<LavaclawReaches> {
 
 	public LavaclawReaches(UUID ownerId) {
-		super(ownerId, "Lavaclaw Reaches", new CardType[]{CardType.LAND}, null);
-		this.expansionSetId = Worldwake.getInstance().getId();
-//		this.art = "126532_typ_reg_sty_010.jpg";
-		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
+		super(ownerId, "Lavaclaw Reaches", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		this.expansionSetCode = "WWK";
+		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
 		this.addAbility(new BlackManaAbility());
 		this.addAbility(new RedManaAbility());
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new LavaclawReachesToken(), "land"), new ManaCostsImpl("{1}{B}{R}")));
@@ -87,7 +86,7 @@ class LavaclawReachesToken extends Token {
 		color.setBlack(true);
 		power = new MageInt(2);
 		toughness = new MageInt(2);
-		addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostPowerSourceVariableEffect(Duration.EndOfTurn), new ManaCostsImpl("{X}")));
+		addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostPowerXSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{X}")));
 	}
 
 }

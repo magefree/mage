@@ -30,6 +30,7 @@ package mage.sets.shardsofalara;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -39,7 +40,6 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
 import mage.game.events.GameEvent.EventType;
-import mage.sets.ShardsOfAlara;
 
 /**
  *
@@ -48,11 +48,10 @@ import mage.sets.ShardsOfAlara;
 public class HellsThunder extends CardImpl<HellsThunder> {
 
 	public HellsThunder(UUID ownerId) {
-		super(ownerId, "Hell's Thunder", new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-		this.expansionSetId = ShardsOfAlara.getInstance().getId();
+		super(ownerId, "Hell's Thunder", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
+		this.expansionSetCode = "ALA";
 		this.subtype.add("Elemental");
 		this.color.setRed(true);
-//		this.art = "115234_typ_reg_sty_010.jpg";
 		this.power = new MageInt(4);
 		this.toughness = new MageInt(4);
 

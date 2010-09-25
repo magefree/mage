@@ -31,6 +31,7 @@ package mage.sets.riseoftheeldrazi;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -38,7 +39,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterBasicLandCard;
-import mage.sets.RiseOfTheEldrazi;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -48,8 +48,8 @@ import mage.target.common.TargetCardInLibrary;
 public class EvolvingWilds extends CardImpl<EvolvingWilds> {
 
 	public EvolvingWilds(UUID ownerId) {
-		super(ownerId, "Evolving Wilds", new CardType[]{CardType.LAND}, null);
-		this.expansionSetId = RiseOfTheEldrazi.getInstance().getId();
+		super(ownerId, "Evolving Wilds", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+		this.expansionSetCode = "ROE";
 		this.addAbility(new EvolvingWildsAbility());
 	}
 
@@ -64,7 +64,7 @@ public class EvolvingWilds extends CardImpl<EvolvingWilds> {
 
 	@Override
 	public String getArt() {
-		return "";
+		return "127296_typ_reg_sty_010.jpg";
 	}
 
 }

@@ -31,33 +31,73 @@ package mage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Zone;
 
-import mage.Constants.*;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
+import mage.abilities.Ability;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.game.Game;
 
-public abstract class MageObjectImpl implements MageObject {
+public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements MageObject {
 
-	protected UUID objectId;
+	protected final UUID objectId;
 	
 	protected String name;
-	protected ManaCosts manaCost = new ManaCosts("");
-	protected ObjectColor color = new ObjectColor();
+	protected ManaCosts<ManaCost> manaCost;
+	protected ObjectColor color;
 	protected List<CardType> cardType = new ArrayList<CardType>();
 	protected List<String> subtype = new ArrayList<String>();
 	protected List<String> supertype = new ArrayList<String>();
-	protected Abilities abilities = new AbilitiesImpl();
+	protected Abilities<Ability> abilities;
 	protected String text;
-	protected MageInt power = new MageInt(0);
-	protected MageInt toughness = new MageInt(0);
-	protected MageInt loyalty = new MageInt(0);
+	protected MageInt power;
+	protected MageInt toughness;
+	protected MageInt loyalty;
 	protected Zone zone;
+	
+	@Override
+	public abstract T copy();
 
 	public MageObjectImpl() {
-		objectId = UUID.randomUUID();
+		this(UUID.randomUUID());
 	}
-	
+
+	public MageObjectImpl(UUID id) {
+		objectId = id;
+		power = new MageInt(0);
+		toughness = new MageInt(0);
+		loyalty = new MageInt(0);
+		color = new ObjectColor();
+		manaCost = new ManaCostsImpl<ManaCost>("");
+		abilities = new AbilitiesImpl<Ability>();
+	}
+
+	public MageObjectImpl(final MageObjectImpl<T> object) {
+		objectId = object.objectId;
+		name = object.name;
+		manaCost = object.manaCost.copy();
+		text = object.text;
+		zone = object.zone;
+		color = object.color.copy();
+		power = object.power.copy();
+		toughness = object.toughness.copy();
+		loyalty = object.loyalty.copy();
+		abilities = object.abilities.copy();
+		for (CardType cType: object.cardType) {
+			cardType.add(cType);
+		}
+		for (String subType: object.subtype) {
+			this.subtype.add(subType);
+		}
+		for (String superType: object.supertype) {
+			this.supertype.add(superType);
+		}
+	}
+
 	@Override
 	public UUID getId() {
 		 return objectId;
@@ -66,6 +106,11 @@ public abstract class MageObjectImpl implements MageObject {
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
@@ -84,29 +129,23 @@ public abstract class MageObjectImpl implements MageObject {
 	}
 
 	@Override
-	public Abilities getAbilities(){
+	public Abilities<Ability> getAbilities(){
 		return abilities;
 	}
 
 	@Override
 	public MageInt getPower() {
-//		if (power != null)
-			return power;
-//		return MageInt.EmptyMageInt;
+		return power;
 	}
 
 	@Override
 	public MageInt getToughness() {
-//		if (toughness != null)
-			return toughness;
-//		return MageInt.EmptyMageInt;
+		return toughness;
 	}
 
 	@Override
 	public MageInt getLoyalty() {
-//		if (loyalty != null)
-			return loyalty;
-//		return MageInt.EmptyMageInt;
+		return loyalty;
 	}
 
 	@Override
@@ -115,7 +154,7 @@ public abstract class MageObjectImpl implements MageObject {
 	}
 
 	@Override
-	public ManaCosts getManaCost() {
+	public ManaCosts<ManaCost> getManaCost() {
 		return manaCost;
 	}
 
@@ -128,4 +167,8 @@ public abstract class MageObjectImpl implements MageObject {
 	public void setZone(Zone zone) {
 		this.zone = zone;
 	}
+
+	@Override
+	public void adjustCosts(Ability ability, Game game) {}
+
 }

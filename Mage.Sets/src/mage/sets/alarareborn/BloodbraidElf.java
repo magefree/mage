@@ -30,11 +30,12 @@ package mage.sets.alarareborn;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.CascadeAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.sets.AlaraReborn;
+
 
 /**
  *
@@ -43,8 +44,8 @@ import mage.sets.AlaraReborn;
 public class BloodbraidElf extends CardImpl<BloodbraidElf> {
 
 	public BloodbraidElf(UUID ownerId) {
-		super(ownerId, "Bloodbraid Elf", new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
-		this.expansionSetId = AlaraReborn.getInstance().getId();
+		super(ownerId, "Bloodbraid Elf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
+		this.expansionSetCode = "ARB";
 		this.color.setRed(true);
 		this.color.setGreen(true);
 		this.subtype.add("Elf");

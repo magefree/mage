@@ -46,24 +46,24 @@ public class CombatGroupView implements Serializable {
 	private CardsView blockers = new CardsView();
 	private String defenderName;
 
-	public CombatGroupView(CombatGroup combatGroup, GameState state) {
-		Player player = state.getPlayer(combatGroup.getDefenderId());
+	public CombatGroupView(CombatGroup combatGroup, Game game) {
+		Player player = game.getPlayer(combatGroup.getDefenderId());
 		if (player != null) {
 			this.defenderName = player.getName();
 		}
 		else {
-			Permanent perm = state.getPermanent(combatGroup.getDefenderId());
+			Permanent perm = game.getPermanent(combatGroup.getDefenderId());
 			this.defenderName = perm.getName();
 		}
 		for (UUID id: combatGroup.getAttackers()) {
-			Permanent attacker = state.getPermanent(id);
+			Permanent attacker = game.getPermanent(id);
 			if (attacker != null)
-				attackers.put(id, new PermanentView(attacker));
+				attackers.put(id, new PermanentView(attacker, game.getCard(attacker.getId())));
 		}
 		for (UUID id: combatGroup.getBlockers()) {
-			Permanent blocker = state.getPermanent(id);
+			Permanent blocker = game.getPermanent(id);
 			if (blocker != null)
-				blockers.put(id, new PermanentView(blocker));
+				blockers.put(id, new PermanentView(blocker, game.getCard(blocker.getId())));
 		}
 	}
 

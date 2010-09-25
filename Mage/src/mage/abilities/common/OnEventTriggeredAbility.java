@@ -51,6 +51,12 @@ public class OnEventTriggeredAbility extends TriggeredAbilityImpl<OnEventTrigger
 		this.eventName = eventName;
 	}
 
+	public OnEventTriggeredAbility(EventType eventType, String eventName, Effect effect, boolean optional) {
+		super(Zone.BATTLEFIELD, effect, optional);
+		this.eventType = eventType;
+		this.eventName = eventName;
+	}
+
 	public OnEventTriggeredAbility(EventType eventType, String eventName, boolean allPlayers, Effect effect) {
 		super(Zone.BATTLEFIELD, effect);
 		this.eventType = eventType;

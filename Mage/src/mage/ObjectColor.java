@@ -29,8 +29,9 @@
 package mage;
 
 import java.io.Serializable;
+import mage.util.Copyable;
 
-public class ObjectColor implements Serializable {
+public class ObjectColor implements Serializable, Copyable<ObjectColor> {
 
 	public static final ObjectColor WHITE = new ObjectColor("W");
 	public static final ObjectColor BLUE = new ObjectColor("U");
@@ -61,6 +62,14 @@ public class ObjectColor implements Serializable {
 				green = true;
 			}
 		}
+	}
+
+	public ObjectColor(ObjectColor color) {
+		white = color.white;
+		blue = color.blue;
+		black = color.black;
+		red = color.red;
+		green = color.green;
 	}
 
 	public int getColorCount() {
@@ -195,6 +204,11 @@ public class ObjectColor implements Serializable {
 		if (color.green & this.green)
 			return true;
 		return false;
+	}
+
+	@Override
+	public ObjectColor copy() {
+		return new ObjectColor(this);
 	}
 	
 }

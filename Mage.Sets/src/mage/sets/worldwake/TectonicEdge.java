@@ -30,6 +30,7 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,7 +45,6 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
-import mage.sets.Worldwake;
 import mage.target.common.TargetNonBasicLandPermanent;
 
 /**
@@ -54,8 +54,8 @@ import mage.target.common.TargetNonBasicLandPermanent;
 public class TectonicEdge extends CardImpl<TectonicEdge> {
 
 	public TectonicEdge(UUID ownerId) {
-		super(ownerId, "Tectonic Edge", new CardType[]{CardType.LAND}, null);
-		this.expansionSetId = Worldwake.getInstance().getId();
+		super(ownerId, "Tectonic Edge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
+		this.expansionSetCode = "WWK";
 		this.addAbility(new ColorlessManaAbility());
 		Costs costs = new CostsImpl();
 		costs.add(new TapSourceCost());
@@ -101,8 +101,8 @@ class TectonicEdgeCost extends CostImpl<TectonicEdgeCost> {
 	}
 
 	@Override
-	public boolean canPay(Ability source, Game game) {
-		for (UUID opponentId: game.getOpponents(source.getControllerId())) {
+	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+		for (UUID opponentId: game.getOpponents(controllerId)) {
 			if (game.getBattlefield().countAll(filter, opponentId) > 3) {
 				return true;
 			}
@@ -111,7 +111,7 @@ class TectonicEdgeCost extends CostImpl<TectonicEdgeCost> {
 	}
 
 	@Override
-	public boolean pay(Game game, Ability source, boolean noMana) {
+	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
 		this.paid = true;
 		return paid;
 	}

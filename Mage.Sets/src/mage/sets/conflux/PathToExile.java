@@ -31,6 +31,7 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -40,7 +41,7 @@ import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.sets.Conflux;
+
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -51,8 +52,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class PathToExile extends CardImpl<PathToExile> {
 
 	public PathToExile(UUID ownerId) {
-		super(ownerId, "Path To Exile", new CardType[]{CardType.INSTANT}, "{W}");
-		this.expansionSetId = Conflux.getInstance().getId();
+		super(ownerId, "Path To Exile", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
+		this.expansionSetCode = "CON";
 		this.color.setWhite(true);
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 		this.getSpellAbility().addEffect(new PathToExileEffect());

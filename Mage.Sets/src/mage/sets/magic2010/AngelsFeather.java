@@ -29,75 +29,16 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Zone;
-import mage.MageObject;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.sets.Magic2010;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AngelsFeather extends CardImpl<AngelsFeather> {
+public class AngelsFeather extends mage.sets.tenth.AngelsFeather {
 
 	public AngelsFeather(UUID ownerId) {
-		super(ownerId, "Angel's Feather", new CardType[]{CardType.ARTIFACT}, "{2}");
-		this.expansionSetId = Magic2010.getInstance().getId();
-		this.addAbility(new AngelsFeatherAbility());
-	}
-
-	public AngelsFeather(final AngelsFeather card) {
-		super(card);
-	}
-
-	@Override
-	public AngelsFeather copy() {
-		return new AngelsFeather(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "75223_typ_reg_sty_010.jpg";
-	}
-
-}
-
-class AngelsFeatherAbility extends TriggeredAbilityImpl<AngelsFeatherAbility> {
-
-	public AngelsFeatherAbility() {
-		super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
-	}
-
-	public AngelsFeatherAbility(final AngelsFeatherAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public AngelsFeatherAbility copy() {
-		return new AngelsFeatherAbility(this);
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.SPELL_CAST) {
-			MageObject spell = game.getObject(event.getTargetId());
-			if (spell != null && spell.getColor().isWhite()) {
-				trigger(game, event.getPlayerId());
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public String getRule() {
-		return "Whenever a player casts a white spell, you may gain 1 life.";
+		super(ownerId);
+		this.expansionSetCode = "M10";
 	}
 
 }

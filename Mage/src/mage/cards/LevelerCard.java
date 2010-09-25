@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.abilities.keyword.LevelAbility;
 
 /**
@@ -42,8 +43,8 @@ public abstract class LevelerCard<T extends LevelerCard<T>> extends CardImpl<T> 
 
 	protected List<LevelAbility> levels = new ArrayList<LevelAbility>();
 
-	public LevelerCard(UUID ownerId, String name, CardType[] cardTypes, String costs) {
-		super(ownerId, name, cardTypes, costs);
+	public LevelerCard(UUID ownerId, String name, Rarity rarity, CardType[] cardTypes, String costs) {
+		super(ownerId, name, rarity, cardTypes, costs);
 	}
 
 	public LevelerCard(LevelerCard card) {

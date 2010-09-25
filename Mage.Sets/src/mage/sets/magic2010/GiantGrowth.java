@@ -29,39 +29,16 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.abilities.effects.common.BoostTargetEffect;
-import mage.cards.CardImpl;
-import mage.sets.Magic2010;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GiantGrowth extends CardImpl<GiantGrowth> {
+public class GiantGrowth extends mage.sets.tenth.GiantGrowth {
 
 	public GiantGrowth(UUID ownerId) {
-		super(ownerId, "Giant Growth", new CardType[]{CardType.INSTANT}, "{G}");
-		this.expansionSetId = Magic2010.getInstance().getId();
-		this.color.setGreen(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
-	}
-
-	public GiantGrowth(final GiantGrowth card) {
-		super(card);
-	}
-
-	@Override
-	public GiantGrowth copy() {
-		return new GiantGrowth(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "101059_typ_reg_sty_010.jpg";
+		super(ownerId);
+		this.expansionSetCode = "M10";
 	}
 
 }

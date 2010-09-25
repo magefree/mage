@@ -30,6 +30,7 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -37,7 +38,6 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.game.events.GameEvent.EventType;
-import mage.sets.Magic2010;
 
 /**
  *
@@ -46,8 +46,8 @@ import mage.sets.Magic2010;
 public class BallLightning extends CardImpl<BallLightning> {
 
 	public BallLightning(UUID ownerId) {
-		super(ownerId, "Ball Lightning", new CardType[]{CardType.CREATURE}, "{R}{R}{R}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Ball Lightning", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}{R}{R}");
+		this.expansionSetCode = "M10";
 		this.subtype.add("Elemental");
 		this.color.setRed(true);
 		this.power = new MageInt(6);

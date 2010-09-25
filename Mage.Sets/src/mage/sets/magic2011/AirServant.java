@@ -30,6 +30,7 @@ package mage.sets.magic2011;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -39,7 +40,6 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.sets.Magic2011;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -55,8 +55,8 @@ public class AirServant extends CardImpl<AirServant> {
 	}
 
 	public AirServant(UUID ownerId) {
-		super(ownerId, "Air Servant", new CardType[]{CardType.CREATURE}, "{4}{U}");
-		this.expansionSetId = Magic2011.getInstance().getId();
+		super(ownerId, "Air Servant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
+		this.expansionSetCode = "M11";
 		this.color.setBlue(true);
 		this.subtype.add("Elemental");
 		this.power = new MageInt(4);
@@ -78,7 +78,7 @@ public class AirServant extends CardImpl<AirServant> {
 
 	@Override
 	public String getArt() {
-		return "";
+		return "129155_typ_reg_sty_010.jpg";
 	}
 
 }

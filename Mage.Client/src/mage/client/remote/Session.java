@@ -28,6 +28,7 @@
 
 package mage.client.remote;
 
+import java.awt.Cursor;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -70,9 +71,6 @@ public class Session {
 	private String userName;
 	private MageFrame frame;
 	private ServerState serverState;
-//	private String[] playerTypes;
-//	private List<GameTypeView> gameTypes;
-//	private String[] deckTypes;
 	private Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
 	private GamePanel game;
 	private CallbackClientDaemon callbackDaemon;
@@ -81,15 +79,15 @@ public class Session {
 		this.frame = frame;
 	}
 
-	public void connect(String userName, String serverName, int port) throws RemoteException, NotBoundException {
+	public boolean connect(String userName, String serverName, int port) {
 		if (isConnected()) {
 			disconnect();
 		}
-		System.setSecurityManager(null);
-		Registry reg = LocateRegistry.getRegistry(serverName, port);
-		this.server = (Server) reg.lookup(Config.remoteServer);
-		this.userName = userName;
 		try {
+			System.setSecurityManager(null);
+			Registry reg = LocateRegistry.getRegistry(serverName, port);
+			this.server = (Server) reg.lookup(Config.remoteServer);
+			this.userName = userName;
 			this.client = new Client(this, frame, userName);
 			sessionId = server.registerClient(userName, client.getId());
 			callbackDaemon = new CallbackClientDaemon(sessionId, client, server);
@@ -97,9 +95,15 @@ public class Session {
 			logger.info("Connected to RMI server at " + serverName + ":" + port);
 			frame.setStatusText("Connected to " + serverName + ":" + port + " ");
 			frame.enableButtons();
+			return true;
 		} catch (MageException ex) {
-			Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
+			logger.log(Level.SEVERE, null, ex);
+		} catch (RemoteException ex) {
+			logger.log(Level.SEVERE, "Unable to connect to server - ", ex);
+		} catch (NotBoundException ex) {
+			logger.log(Level.SEVERE, "Unable to connect to server - ", ex);
 		}
+		return false;
 	}
 
 	public void disconnect() {
@@ -119,6 +123,7 @@ public class Session {
 				logger.log(Level.SEVERE, "Error disconnecting ...", ex);
 			}
 			frame.setStatusText("Not connected ");
+			frame.disableButtons();
 		}
 	}
 

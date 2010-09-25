@@ -30,11 +30,11 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.abilities.costs.common.ReturnToHandTargetCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
-import mage.sets.RiseOfTheEldrazi;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledPermanent;
 
@@ -45,10 +45,10 @@ import mage.target.common.TargetControlledPermanent;
 public class Deprive extends CardImpl<Deprive> {
 
 	public Deprive(UUID ownerId) {
-		super(ownerId, "Deprive", new CardType[]{CardType.INSTANT}, "{U}{U}");
-		this.expansionSetId = RiseOfTheEldrazi.getInstance().getId();
+		super(ownerId, "Deprive", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
+		this.expansionSetCode = "ROE";
 		this.color.setBlue(true);
-		this.getSpellAbility().addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(1, 1, new FilterLandPermanent())));
+		this.getSpellAbility().addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(1, 1, new FilterLandPermanent(), true)));
 		this.getSpellAbility().addTarget(new TargetSpell());
 		this.getSpellAbility().addEffect(new CounterTargetEffect());
 	}

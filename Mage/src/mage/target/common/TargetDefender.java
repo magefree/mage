@@ -138,6 +138,19 @@ public class TargetDefender extends TargetImpl<TargetDefender> {
 	}
 
 	@Override
+	public boolean canTarget(UUID id, Game game) {
+		Player player = game.getPlayer(id);
+		if (player != null) {
+			return filter.match(player);
+		}
+		Permanent permanent = game.getPermanent(id);
+		if (permanent != null) {
+			return filter.match(permanent);
+		}
+		return false;
+	}
+
+	@Override
 	public boolean canTarget(UUID id, Ability source, Game game) {
 		Player player = game.getPlayer(id);
 		MageObject targetSource = game.getObject(attackerId);

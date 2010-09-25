@@ -30,13 +30,13 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.abilities.common.EntersBattlefieldStaticAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.EntersBattlefieldTappedEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
-import mage.sets.Zendikar;
 
 /**
  *
@@ -45,9 +45,9 @@ import mage.sets.Zendikar;
 public class KabiraCrossroads extends CardImpl<KabiraCrossroads> {
 
 	public KabiraCrossroads(UUID ownerId) {
-		super(ownerId, "Kabira Crossroads", new CardType[]{CardType.LAND}, null);
-		this.expansionSetId = Zendikar.getInstance().getId();
-		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
+		super(ownerId, "Kabira Crossroads", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+		this.expansionSetCode = "ZEN";
+		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
 		this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2), false));
 		this.addAbility(new WhiteManaAbility());
 	}

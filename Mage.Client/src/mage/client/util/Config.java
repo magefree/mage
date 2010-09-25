@@ -53,6 +53,7 @@ public class Config {
 	public static final String powerboxResourcePath;
 	public static final String cardArtResourcePath;
 	public static final String symbolsResourcePath;
+	public static final String setIconsResourcePath;
 	public static final String resourcePath;
 	public static final double cardScalingFactor;
 	public static final boolean useResource;
@@ -78,6 +79,7 @@ public class Config {
 			frameResourcePath = cardsResourcePath + "Frame\\";
 			powerboxResourcePath = cardsResourcePath + "PowerBox\\";
 			cardArtResourcePath = cardsResourcePath + "Pics\\";
+			setIconsResourcePath = cardsResourcePath + "Icon\\";
 			symbolsResourcePath = p.getProperty("symbols-resource-path");
 		}
 		else {
@@ -85,6 +87,7 @@ public class Config {
 			frameResourcePath = resourcePath + "cards/frame/";
 			powerboxResourcePath = resourcePath + "cards/powerbox/";
 			cardArtResourcePath = resourcePath + "cards/art/";
+			setIconsResourcePath = resourcePath + "cards/icon/";
 			symbolsResourcePath = resourcePath + "symbols/";
 		}
 	}

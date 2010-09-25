@@ -30,10 +30,10 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.sets.Zendikar;
 
 /**
  *
@@ -42,8 +42,8 @@ import mage.sets.Zendikar;
 public class DayOfJudgment extends CardImpl<DayOfJudgment> {
 
 	public DayOfJudgment(UUID ownerId) {
-		super(ownerId, "Day of Judgment", new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-		this.expansionSetId = Zendikar.getInstance().getId();
+		super(ownerId, "Day of Judgment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
+		this.expansionSetCode = "ZEN";
 		this.color.setWhite(true);
 		this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent("creatures")));
 	}

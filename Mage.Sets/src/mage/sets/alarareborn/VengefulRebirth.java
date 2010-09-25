@@ -31,6 +31,7 @@ package mage.sets.alarareborn;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
@@ -39,7 +40,7 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.sets.AlaraReborn;
+
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -50,8 +51,8 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class VengefulRebirth extends CardImpl<VengefulRebirth> {
 
 	public VengefulRebirth(UUID ownerId) {
-		super(ownerId, "Vengeful Rebirth", new CardType[]{CardType.SORCERY}, "{4}{R}{G}");
-		this.expansionSetId = AlaraReborn.getInstance().getId();
+		super(ownerId, "Vengeful Rebirth", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{G}");
+		this.expansionSetCode = "ARB";
 		this.color.setRed(true);
 		this.color.setGreen(true);
 		this.getSpellAbility().addTarget(new TargetCardInGraveyard());
@@ -100,12 +101,12 @@ class VengefulRebirthEffect extends OneShotEffect<VengefulRebirthEffect> {
 			if (!card.getCardType().contains(CardType.LAND)) {
 				Permanent permanent = game.getPermanent(source.getTargets().get(1).getTargets().get(0));
 				if (permanent != null) {
-					permanent.damage(damage, source.getSourceId(), game);
+					permanent.damage(damage, source.getSourceId(), game, true);
 					return true;
 				}
 				Player targetPlayer = game.getPlayer(source.getTargets().get(1).getTargets().get(0));
 				if (targetPlayer != null) {
-					targetPlayer.damage(damage, source.getSourceId(), game);
+					targetPlayer.damage(damage, source.getSourceId(), game, false, true);
 					return true;
 				}
 				return false;

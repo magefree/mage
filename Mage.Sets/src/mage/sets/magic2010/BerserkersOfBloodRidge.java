@@ -30,10 +30,10 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.cards.CardImpl;
-import mage.sets.Magic2010;
 
 /**
  *
@@ -42,8 +42,8 @@ import mage.sets.Magic2010;
 public class BerserkersOfBloodRidge  extends CardImpl<BerserkersOfBloodRidge> {
 
 	public BerserkersOfBloodRidge(UUID ownerId) {
-		super(ownerId, "Berserkers of Blood Ridge", new CardType[]{CardType.CREATURE}, "{4}{R}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Berserkers of Blood Ridge", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
+		this.expansionSetCode = "M10";
 		this.color.setRed(true);
 		this.subtype.add("Human");
 		this.subtype.add("Berserker");

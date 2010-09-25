@@ -31,12 +31,12 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.sets.Magic2010;
 
 /**
  *
@@ -52,10 +52,10 @@ public class HonorOfThePure extends CardImpl<HonorOfThePure> {
 	}
 
 	public HonorOfThePure(UUID ownerId) {
-		super(ownerId, "Honor of the Pure", new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Honor of the Pure", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+		this.expansionSetCode = "M10";
 		this.color.setWhite(true);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter)));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
 	}
 
 	public HonorOfThePure(final HonorOfThePure card) {

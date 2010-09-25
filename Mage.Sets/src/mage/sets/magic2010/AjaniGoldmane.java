@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.MageInt;
@@ -52,7 +53,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-import mage.sets.Magic2010;
 
 /**
  *
@@ -61,8 +61,8 @@ import mage.sets.Magic2010;
 public class AjaniGoldmane extends CardImpl<AjaniGoldmane> {
 
 	public AjaniGoldmane(UUID ownerId) {
-		super(ownerId, "Ajani Goldmane", new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
-		this.expansionSetId = Magic2010.getInstance().getId();
+		super(ownerId, "Ajani Goldmane", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
+		this.expansionSetCode = "M10";
 		this.subtype.add("Ajani");
 		this.color.setWhite(true);
 		this.loyalty = new MageInt(4);
@@ -71,7 +71,7 @@ public class AjaniGoldmane extends CardImpl<AjaniGoldmane> {
 
 		Effects effects1 = new Effects();
 		effects1.add(new AddPlusOneCountersControlledEffect(1));
-		effects1.add(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
+		effects1.add(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, FilterCreaturePermanent.getDefault()));
 		this.addAbility(new LoyaltyAbility(effects1, -1));
 
 		this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new AvatarToken()), -6));

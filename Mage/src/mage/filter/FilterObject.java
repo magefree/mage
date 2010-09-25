@@ -43,7 +43,7 @@ import mage.abilities.Ability;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class FilterObject<E extends MageObject, T extends FilterObject<E, T>> extends FilterImpl<E, T> implements Filter<E> {
+public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> extends FilterImpl<E, T> implements Filter<E> {
 	protected Abilities<Ability> abilities;
 	protected boolean notAbilities;
 	protected List<CardType> cardType = new ArrayList<CardType>();
@@ -75,7 +75,9 @@ public abstract class FilterObject<E extends MageObject, T extends FilterObject<
 	protected boolean notId;
 
 	@Override
-	public abstract FilterObject<E, T> copy();
+	public FilterObject<E, T> copy() {
+		return new FilterObject<E, T>(this);
+	}
 
 	public FilterObject(String name) {
 		super(name);

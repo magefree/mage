@@ -33,6 +33,7 @@ import mage.game.*;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -143,6 +144,17 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	}
 
 	@Override
+	public void setName(String name) {}
+
+	@Override
+	public Rarity getRarity() {
+		return card.getRarity();
+	}
+
+	@Override
+	public void setRarity(Rarity rarity) {}
+
+	@Override
 	public List<CardType> getCardType() {
 		return card.getCardType();
 	}
@@ -193,9 +205,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	}
 
 	@Override
-	public void setZone(Zone zone) {
-		
-	}
+	public void setZone(Zone zone) {}
 
 	@Override
 	public UUID getId() {
@@ -213,9 +223,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	}
 
 	@Override
-	public void addAbility(Ability ability) {
-		
-	}
+	public void addAbility(Ability ability) {}
 
 	@Override
 	public SpellAbility getSpellAbility() {
@@ -228,9 +236,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	}
 
 	@Override
-	public void setOwnerId(UUID controllerId) {
-		
-	}
+	public void setOwnerId(UUID controllerId) {}
 
 	@Override
 	public void checkTriggers(GameEvent event, Game game) {
@@ -253,12 +259,18 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	}
 
 	@Override
-	public UUID getExpansionSetId() {
-		return card.getExpansionSetId();
+	public String getExpansionSetCode() {
+		return card.getExpansionSetCode();
 	}
+
+	@Override
+	public void setExpansionSetCode(String expansionSetCode) {}
 
 	@Override
 	public Spell<T> copy() {
 		return new Spell<T>(this);
 	}
+
+	@Override
+	public void adjustCosts(Ability ability, Game game) {}
 }

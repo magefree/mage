@@ -31,14 +31,14 @@ package mage.sets.zendikar;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldStaticAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.BoostTargetEffect;
-import mage.abilities.effects.common.EntersBattlefieldTappedEffect;
+import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
-import mage.sets.Zendikar;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -48,9 +48,9 @@ import mage.target.common.TargetCreaturePermanent;
 public class TeeteringPeaks extends CardImpl<TeeteringPeaks> {
 
 	public TeeteringPeaks(UUID ownerId) {
-		super(ownerId, "Teetering Peaks", new CardType[]{CardType.LAND}, null);
-		this.expansionSetId = Zendikar.getInstance().getId();
-		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedEffect()));
+		super(ownerId, "Teetering Peaks", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+		this.expansionSetCode = "ZEN";
+		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
 		Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), false);
 		ability.addTarget(new TargetCreaturePermanent());
 		this.addAbility(ability);

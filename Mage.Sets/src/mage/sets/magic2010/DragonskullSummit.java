@@ -30,14 +30,14 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.abilities.common.EntersBattlefieldStaticAbility;
-import mage.abilities.effects.common.EntersBattlefieldTappedUnlessControlsEffect;
+import mage.abilities.effects.common.TapSourceUnlessControlsEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterLandPermanent;
-import mage.sets.Magic2010;
 
 /**
  *
@@ -55,9 +55,9 @@ public class DragonskullSummit extends CardImpl<DragonskullSummit> {
 	}
 
 	public DragonskullSummit(UUID ownerId) {
-		super(ownerId, "Dragonskull Summit", new CardType[]{CardType.LAND}, null);
-		this.expansionSetId = Magic2010.getInstance().getId();
-		this.addAbility(new EntersBattlefieldStaticAbility(new EntersBattlefieldTappedUnlessControlsEffect(filter)));
+		super(ownerId, "Dragonskull Summit", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		this.expansionSetCode = "M10";
+		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceUnlessControlsEffect(filter), "tapped unless you control a " + filter.getMessage()));
 		this.addAbility(new BlackManaAbility());
 		this.addAbility(new RedManaAbility());
 	}

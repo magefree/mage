@@ -31,6 +31,7 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpecialAction;
@@ -43,7 +44,7 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.sets.Conflux;
+
 import mage.target.TargetPlayer;
 
 /**
@@ -53,8 +54,8 @@ import mage.target.TargetPlayer;
 public class QuenchableFire extends CardImpl<QuenchableFire> {
 
 	public QuenchableFire(UUID ownerId) {
-		super(ownerId, "Quenchable Fire", new CardType[]{CardType.SORCERY}, "{3}{R}");
-		this.expansionSetId = Conflux.getInstance().getId();
+		super(ownerId, "Quenchable Fire", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
+		this.expansionSetCode = "CON";
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetPlayer());
 		this.getSpellAbility().addEffect(new DamageTargetEffect(3));

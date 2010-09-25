@@ -31,6 +31,7 @@ package mage.sets.worldwake;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
+import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -44,7 +45,6 @@ import mage.cards.CardsImpl;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.sets.Worldwake;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreaturePermanent;
@@ -57,8 +57,8 @@ public class JaceTheMindSculptor extends CardImpl<JaceTheMindSculptor> {
 
 
 	public JaceTheMindSculptor(UUID ownerId) {
-		super(ownerId, "Jace, the Mind Sculptor", new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");
-		this.expansionSetId = Worldwake.getInstance().getId();
+		super(ownerId, "Jace, the Mind Sculptor", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");
+		this.expansionSetCode = "WWK";
 		this.subtype.add("Jace");
 		this.color.setBlue(true);
 		this.loyalty = new MageInt(3);

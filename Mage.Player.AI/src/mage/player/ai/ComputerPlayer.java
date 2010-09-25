@@ -142,6 +142,72 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	@Override
+	public boolean choose(Outcome outcome, Target target, Game game) {
+		if (logger.isLoggable(Level.FINE))
+			logger.fine("chooseTarget: " + outcome.toString() + ":" + target.toString());
+		UUID opponentId = game.getOpponents(playerId).iterator().next();
+		if (target instanceof TargetPlayer) {
+			if (outcome.isGood()) {
+				if (target.canTarget(playerId, game)) {
+					target.add(playerId, game);
+					return true;
+				}
+			}
+			else {
+				if (target.canTarget(playerId, game)) {
+					target.add(opponentId, game);
+					return true;
+				}
+			}
+		}
+		if (target instanceof TargetDiscard) {
+			findPlayables(game);
+			if (unplayable.size() > 0) {
+				for (int i = unplayable.size() - 1; i >= 0; i--) {
+					if (target.canTarget(unplayable.values().toArray(new Card[0])[i].getId(), game)) {
+						target.add(unplayable.values().toArray(new Card[0])[i].getId(), game);
+						return true;
+					}
+				}
+			}
+			if (hand.size() > 0) {
+				if (target.canTarget(hand.toArray(new UUID[0])[0], game)) {
+					target.add(hand.toArray(new UUID[0])[0], game);
+					return true;
+				}
+			}
+		}
+		if (target instanceof TargetControlledPermanent) {
+			List<Permanent> targets;
+			targets = threats(playerId, ((TargetPermanent)target).getFilter(), game);
+			if (!outcome.isGood())
+				Collections.reverse(targets);
+			for (Permanent permanent: targets) {
+				if (target.canTarget(permanent.getId(), game)) {
+					target.add(permanent.getId(), game);
+					return true;
+				}
+			}
+		}
+		if (target instanceof TargetPermanent) {
+			List<Permanent> targets;
+			if (outcome.isGood()) {
+				targets = threats(playerId, ((TargetPermanent)target).getFilter(), game);
+			}
+			else {
+				targets = threats(opponentId, ((TargetPermanent)target).getFilter(), game);
+			}
+			for (Permanent permanent: targets) {
+				if (target.canTarget(permanent.getId(), game)) {
+					target.add(permanent.getId(), game);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
 	public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
 		if (logger.isLoggable(Level.FINE))
 			logger.fine("chooseTarget: " + outcome.toString() + ":" + target.toString());
@@ -219,10 +285,10 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			}
 			List<Permanent> targets;
 			if (outcome.isGood()) {
-				targets = threats(playerId, new FilterCreaturePermanent(), game);
+				targets = threats(playerId, FilterCreaturePermanent.getDefault(), game);
 			}
 			else {
-				targets = threats(opponentId, new FilterCreaturePermanent(), game);
+				targets = threats(opponentId, FilterCreaturePermanent.getDefault(), game);
 			}
 			for (Permanent permanent: targets) {
 				if (target.canTarget(permanent.getId(), source, game)) {
@@ -555,7 +621,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	public boolean choose(Outcome outcome, Choice choice, Game game) {
 		logger.fine("choose");
 		//TODO: improve this
-		choice.setChoice(choice.getChoices().get(0));
+		choice.setChoice(choice.getChoices().iterator().next());
 		return true;
 	}
 
@@ -638,7 +704,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	public void assignDamage(int damage, List<UUID> targets, UUID sourceId, Game game) {
 		logger.fine("assignDamage");
 		//TODO: improve this
-		game.getPermanent(targets.get(0)).damage(damage, sourceId, game);
+		game.getPermanent(targets.get(0)).damage(damage, sourceId, game, true);
 	}
 
 	@Override

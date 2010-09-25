@@ -28,7 +28,7 @@
 
 package mage.choices;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -41,7 +41,8 @@ public interface Choice {
 	public void clearChoice();
 	public String getMessage();
 	public void setChoice(String choice);
-	public List<String> getChoices();
+	public Set<String> getChoices();
+	public void setChoices(Set<String> choices);
 	public String getChoice();
 
 	public Choice copy();

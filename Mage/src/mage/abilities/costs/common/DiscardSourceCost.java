@@ -28,6 +28,7 @@
 
 package mage.abilities.costs.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
@@ -47,14 +48,14 @@ public class DiscardSourceCost extends CostImpl<DiscardSourceCost> {
 	}
 
 	@Override
-	public boolean canPay(Ability source, Game game) {
-		return game.getPlayer(source.getControllerId()).getHand().contains(source.getSourceId());
+	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+		return game.getPlayer(controllerId).getHand().contains(sourceId);
 	}
 
 	@Override
-	public boolean pay(Game game, Ability source, boolean noMana) {
-		Player player = game.getPlayer(source.getControllerId());
-		Card card = player.getHand().get(source.getSourceId(), game);
+	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+		Player player = game.getPlayer(controllerId);
+		Card card = player.getHand().get(sourceId, game);
 		return player.discard(card, game);
 	}
 

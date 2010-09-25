@@ -176,7 +176,6 @@ class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl<UnearthLeaves
 	@Override
 	public boolean apply(Game game, Ability source) {
 		ExileSourceEffect effect = new ExileSourceEffect();
-//		effect.setSource(source);
 		return effect.apply(game, source);
 	}
 

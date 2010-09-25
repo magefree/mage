@@ -28,7 +28,6 @@
 
 package mage.sets;
 
-import mage.sets.tenth.*;
 import mage.cards.ExpansionSet;
 
 /**
@@ -44,12 +43,7 @@ public class Tenth extends ExpansionSet {
 	}
 
 	private Tenth() {
-		this.name = "Tenth Edition";
-		this.cards.add(Forest1.class);
-		this.cards.add(Island1.class);
-		this.cards.add(Mountain1.class);
-		this.cards.add(Plains1.class);
-		this.cards.add(Swamp1.class);
+		super("Tenth Edition", "10E", "exp_symbol_mtg10e", "mage.sets.tenth");
 	}
 
 }

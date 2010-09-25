@@ -29,49 +29,16 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
-import mage.filter.FilterSpell;
-import mage.sets.Magic2010;
-import mage.target.TargetSpell;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Flashfreeze extends CardImpl<Flashfreeze> {
-
-	private static FilterSpell filter = new FilterSpell("red or green spell");
-
-	static {
-		filter.getColor().setRed(true);
-		filter.getColor().setGreen(true);
-		filter.setScopeColor(ComparisonScope.Any);
-		filter.setUseColor(true);
-	}
+public class Flashfreeze extends mage.sets.tenth.Flashfreeze {
 
 	public Flashfreeze(UUID ownerId) {
-		super(ownerId, "Flashfreeze", new CardType[]{CardType.INSTANT}, "{1}{U}");
-		this.expansionSetId = Magic2010.getInstance().getId();
-		this.color.setBlue(true);
-		this.getSpellAbility().addTarget(new TargetSpell(filter));
-		this.getSpellAbility().addEffect(new CounterTargetEffect());
-	}
-
-	public Flashfreeze(final Flashfreeze card) {
-		super(card);
-	}
-
-	@Override
-	public Flashfreeze copy() {
-		return new Flashfreeze(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "96954_typ_reg_sty_010.jpg";
+		super(ownerId);
+		this.expansionSetCode = "M10";
 	}
 
 }

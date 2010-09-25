@@ -38,6 +38,6 @@ import mage.game.permanent.Permanent;
  */
 public interface EvasionAbility extends Ability {
 
-	public boolean canBlock(Permanent permanent, Game game);
+	public boolean canBlock(Permanent blocker, Game game);
 
 }
