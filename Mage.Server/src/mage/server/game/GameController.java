@@ -35,6 +35,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.logging.Logger;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -199,11 +200,10 @@ public class GameController implements GameCallback {
 	}
 
 	public void cheat(UUID sessionId, UUID playerId, DeckCardLists deckList) {
-		Player player = game.getPlayer(playerId);
 		Deck deck = Deck.load(deckList);
 		game.loadCards(deck.getCards(), playerId);
 		for (Card card: deck.getCards()) {
-			player.putOntoBattlefield(card, game);
+			card.putOntoBattlefield(game, Zone.OUTSIDE, playerId);
 		}
 		updateGame();
 	}

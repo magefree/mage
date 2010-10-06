@@ -115,6 +115,8 @@ public class Main {
 
 	private static void deleteSavedGames() {
 		File directory = new File("saved/");
+		if (!directory.exists())
+			directory.mkdirs();
 		File[] files = directory.listFiles(
 			new FilenameFilter() {
 				@Override
