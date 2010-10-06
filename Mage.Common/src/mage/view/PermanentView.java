@@ -34,6 +34,7 @@ import java.util.UUID;
 import mage.cards.Card;
 import mage.counters.Counter;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 
 /**
  *
@@ -67,7 +68,12 @@ public class PermanentView extends CardView {
 				counters.add(new CounterView(counter));
 			}
 		}
-		original = new CardView(card);
+		if (permanent instanceof PermanentToken) {
+			original = new CardView(((PermanentToken)permanent).getToken());
+		}
+		else {
+			original = new CardView(card);
+		}
 	}
 
 	public boolean isTapped() {

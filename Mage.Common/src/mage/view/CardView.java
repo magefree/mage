@@ -37,6 +37,8 @@ import mage.Constants.Rarity;
 import mage.ObjectColor;
 import mage.cards.Card;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
+import mage.game.permanent.token.Token;
 
 /**
  *
@@ -77,13 +79,37 @@ public class CardView implements Serializable {
 		this.superTypes = card.getSupertype();
 		this.color = card.getColor();
 		this.manaCost = card.getManaCost().getSymbols();
-		this.art = card.getArt();
-		this.rarity = card.getRarity();
-		this.expansionSetCode = card.getExpansionSetCode();
+		if (card instanceof PermanentToken) {
+			this.art = "";
+			this.rarity = Rarity.NA;
+			this.expansionSetCode = "";
+		}
+		else {
+			this.art = card.getArt();
+			this.rarity = card.getRarity();
+			this.expansionSetCode = card.getExpansionSetCode();
+		}
 	}
 
 	protected CardView() {
 
+	}
+
+	CardView(Token token) {
+		this.id = token.getId();
+		this.name = token.getName();
+		this.rules = formatRules(token.getAbilities().getRules());
+		this.power = token.getPower().toString();
+		this.toughness = token.getToughness().toString();
+		this.loyalty = token.getLoyalty().toString();
+		this.cardTypes = token.getCardType();
+		this.subTypes = token.getSubtype();
+		this.superTypes = token.getSupertype();
+		this.color = token.getColor();
+		this.manaCost = token.getManaCost().getSymbols();
+		this.art = "";
+		this.rarity = Rarity.NA;
+		this.expansionSetCode = "";
 	}
 
 	protected List<String> formatRules(List<String> rules) {

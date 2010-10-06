@@ -31,12 +31,17 @@ package mage.interfaces.callback;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import mage.util.Logging;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class CallbackClientDaemon extends Thread {
+
+	private final static Logger logger = Logging.getLogger(CallbackClientDaemon.class.getName());
 
 	private static ExecutorService callbackExecutor = Executors.newCachedThreadPool();
 	private final CallbackClient client;
@@ -60,13 +65,18 @@ public class CallbackClientDaemon extends Thread {
 				new Runnable() {
 					@Override
 					public void run() {
-						client.processCallback(callback);
+						try {
+							client.processCallback(callback);
+						}
+						catch (Exception ex) {
+							logger.log(Level.SEVERE, null, ex);
+						}
 					}
 				}
 			);
          }
       } catch(Exception ex) {
-         System.out.print(ex.getMessage());
+			logger.log(Level.SEVERE, null, ex);
       }
    }
 }
