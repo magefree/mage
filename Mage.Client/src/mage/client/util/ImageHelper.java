@@ -41,6 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import javax.imageio.ImageIO;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.client.cards.CardDimensions;
 import mage.sets.Sets;
 import mage.view.AbilityView;
@@ -110,7 +111,7 @@ public class ImageHelper {
 				g.drawImage(art, CONTENT_MAX_XOFFSET, ART_MAX_YOFFSET, null);
 			}
 
-			if (card.getExpansionSetCode() != null && card.getRarity() != null) {
+			if (card.getExpansionSetCode() != null && card.getExpansionSetCode().length() > 0 && card.getRarity() != null && card.getRarity() != Rarity.NA) {
 				String symbolCode = Sets.getInstance().get(card.getExpansionSetCode()).getSymbolCode();
 				if (symbolCode != null && symbolCode.length() > 0) {
 					StringBuilder sb = new StringBuilder();

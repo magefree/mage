@@ -37,8 +37,6 @@ package mage.client;
 import java.awt.Cursor;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;

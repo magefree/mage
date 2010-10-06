@@ -28,7 +28,6 @@
 
 package mage.client.remote;
 
-import java.awt.Cursor;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;

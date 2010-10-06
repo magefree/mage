@@ -72,11 +72,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 	public void loadCards(BigCard bigCard) {
 		this.bigCard = bigCard;
 		cbExpansionSet.setModel(new DefaultComboBoxModel(Sets.getInstance().values().toArray()));
-		cbExpansionSet.insertItemAt("All sets", 0);
-		cbExpansionSet.setSelectedIndex(0);
+//		cbExpansionSet.insertItemAt("All sets", 0);
 		for (ExpansionSet set: Sets.getInstance().values()) {
 			allCards.addAll(set.createCards());
 		}
+		cbExpansionSet.setSelectedIndex(0);
 		filter.setUseColor(true);
 		filter.getColor().setBlack(true);
 		filter.getColor().setBlue(true);
@@ -95,6 +95,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		filter.getCardType().add(CardType.PLANESWALKER);
 		filter.getCardType().add(CardType.SORCERY);
 		filter.setScopeCardType(ComparisonScope.Any);
+		filter.getExpansionSetCode().add(((ExpansionSet)this.cbExpansionSet.getSelectedItem()).getCode());
 		filterCards();
 	}
 
