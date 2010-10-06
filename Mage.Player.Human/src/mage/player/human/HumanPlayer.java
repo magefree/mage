@@ -49,15 +49,17 @@ import mage.abilities.SpecialAction;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.cards.decks.Deck;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetAttackingCreature;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetDefender;
 
 /**
@@ -70,7 +72,11 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	private boolean abort;
 
-	protected transient TargetPermanent targetCombat = new TargetPermanent(new FilterCreatureForCombat(), TargetController.YOU);
+	protected static FilterCreatureForCombat filter = new FilterCreatureForCombat();
+	static {
+		filter.setTargetController(TargetController.YOU);
+	}
+	protected transient TargetCreaturePermanent targetCombat = new TargetCreaturePermanent(filter);
 
 	public HumanPlayer(String name, Deck deck, RangeOfInfluence range) {
 		super(name, deck, range);
