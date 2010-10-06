@@ -76,7 +76,7 @@ public class CounterUnlessPaysEffect extends OneShotEffect<CounterUnlessPaysEffe
 
 	@Override
 	public String getText(Ability source) {
-		return "Counter target " + source.getTargets().get(0).getTargetName() + " unless its controller pays ";
+		return "Counter target " + source.getTargets().get(0).getTargetName() + " unless its controller pays " + cost.getText();
 	}
 
 }

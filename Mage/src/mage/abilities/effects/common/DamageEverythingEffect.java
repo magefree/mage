@@ -26,53 +26,56 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.costs.common;
+package mage.abilities.effects.common;
 
 import java.util.UUID;
 import mage.Constants.Outcome;
-import mage.Constants.Zone;
-import mage.abilities.costs.CostImpl;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnToHandTargetCost extends CostImpl<ReturnToHandTargetCost> {
+public class DamageEverythingEffect extends OneShotEffect<DamageEverythingEffect> {
 
-	public ReturnToHandTargetCost(TargetControlledPermanent target) {
-		this.addTarget(target);
-		this.text = "return " + target.getTargetName() + " you control to it's owner's hand";
+	private int amount;
+
+	public DamageEverythingEffect(int amount) {
+		super(Outcome.Damage);
+		this.amount = amount;
 	}
 
-	public ReturnToHandTargetCost(ReturnToHandTargetCost cost) {
-		super(cost);
+	public DamageEverythingEffect(final DamageEverythingEffect effect) {
+		super(effect);
+		this.amount = effect.amount;
 	}
 
 	@Override
-	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		if (targets.choose(Outcome.ReturnToHand, controllerId, game)) {
-			for (UUID targetId: targets.get(0).getTargets()) {
-				Permanent permanent = game.getPermanent(targetId);
-				if (permanent == null)
-					return false;
-				paid |= permanent.moveToZone(Zone.HAND, game, false);
-			}
+	public DamageEverythingEffect copy() {
+		return new DamageEverythingEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+			permanent.damage(amount, source.getId(), game, true);
 		}
-		return paid;
+		for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
+			Player player = game.getPlayer(playerId);
+			if (player != null)
+				player.damage(amount, source.getId(), game, false, true);
+		}
+		return true;
 	}
 
 	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return targets.canChoose(controllerId, controllerId, game);
+	public String getText(Ability source) {
+		return "{source} deals " + Integer.toString(amount) + " damage to each creature and each player";
 	}
-
-	@Override
-	public ReturnToHandTargetCost copy() {
-		return new ReturnToHandTargetCost(this);
-	}
-
 
 }

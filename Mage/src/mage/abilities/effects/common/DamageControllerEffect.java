@@ -82,7 +82,6 @@ public class DamageControllerEffect extends OneShotEffect<DamageControllerEffect
 	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("{source} deals ").append(Integer.toString(amount)).append(" damage to you");
-		sb.append(source.getTargets().get(0).getTargetName());
 		if (!preventable)
 			sb.append(". The damage can't be prevented");
 		return sb.toString();

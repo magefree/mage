@@ -43,8 +43,8 @@ public class PermanentToken extends PermanentImpl<PermanentToken> {
 
 	protected Token token;
 	
-	public PermanentToken(Token token, UUID ownerId, UUID controllerId) {
-		super(ownerId, controllerId, token.getName());
+	public PermanentToken(Token token, UUID controllerId) {
+		super(controllerId, controllerId, token.getName());
 		this.token = token;
 		copyFromToken(token);
 	}
@@ -103,6 +103,10 @@ public class PermanentToken extends PermanentImpl<PermanentToken> {
 
 	@Override
 	public void setArt(String art) { }
+
+	public Token getToken() {
+		return token;
+	}
 
 	@Override
 	public PermanentToken copy() {

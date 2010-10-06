@@ -34,18 +34,26 @@ import mage.Constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.common.AttachEffect;
+import mage.filter.common.FilterLandPermanent;
 import mage.target.common.TargetLandPermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
+
+//20091005 - 702.64
 public class FortifyAbility extends ActivatedAbilityImpl<FortifyAbility> {
-	//20091005 - 702.64
+
+	private static FilterLandPermanent filter = new FilterLandPermanent("land you control");
+
+	static {
+		filter.setTargetController(TargetController.YOU);
+	}
 
 	public FortifyAbility(Zone zone, AttachEffect effect, Cost cost) {
 		super(zone, effect, cost);
-		this.addTarget(new TargetLandPermanent(1, TargetController.YOU));
+		this.addTarget(new TargetLandPermanent(filter));
 		timing = TimingRule.SORCERY;
 	}
 

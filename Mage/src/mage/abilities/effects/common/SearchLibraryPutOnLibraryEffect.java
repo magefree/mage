@@ -26,53 +26,59 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.costs.common;
+package mage.abilities.effects.common;
 
+import java.util.List;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
-import mage.abilities.costs.CostImpl;
+import mage.abilities.Ability;
+import mage.abilities.effects.SearchEffect;
+import mage.cards.Card;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.players.Player;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnToHandTargetCost extends CostImpl<ReturnToHandTargetCost> {
+public class SearchLibraryPutOnLibraryEffect extends SearchEffect<SearchLibraryPutOnLibraryEffect> {
 
-	public ReturnToHandTargetCost(TargetControlledPermanent target) {
-		this.addTarget(target);
-		this.text = "return " + target.getTargetName() + " you control to it's owner's hand";
-	}
+    public SearchLibraryPutOnLibraryEffect(TargetCardInLibrary target) {
+		super(target, Outcome.DrawCard);
+    }
 
-	public ReturnToHandTargetCost(ReturnToHandTargetCost cost) {
-		super(cost);
-	}
-
-	@Override
-	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		if (targets.choose(Outcome.ReturnToHand, controllerId, game)) {
-			for (UUID targetId: targets.get(0).getTargets()) {
-				Permanent permanent = game.getPermanent(targetId);
-				if (permanent == null)
-					return false;
-				paid |= permanent.moveToZone(Zone.HAND, game, false);
-			}
-		}
-		return paid;
+	public SearchLibraryPutOnLibraryEffect(final SearchLibraryPutOnLibraryEffect effect) {
+		super(effect);
 	}
 
 	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return targets.canChoose(controllerId, controllerId, game);
+	public SearchLibraryPutOnLibraryEffect copy() {
+		return new SearchLibraryPutOnLibraryEffect(this);
 	}
 
-	@Override
-	public ReturnToHandTargetCost copy() {
-		return new ReturnToHandTargetCost(this);
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+		player.searchLibrary(target, game);
+        if (target.getTargets().size() > 0) {
+            for (UUID cardId: (List<UUID>)target.getTargets()) {
+                Card card = player.getLibrary().remove(cardId, game);
+                if (card != null){
+					card.moveToZone(Zone.LIBRARY, game, true);
+                }
+            }
+            player.shuffleLibrary(game);
+        }
+        return true;
+    }
 
+    @Override
+    public String getText(Ability source) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Search your library for a ").append(target.getTargetName()).append(", then shuffle your library and put that card on top of it");
+		return sb.toString();
+    }
 
 }

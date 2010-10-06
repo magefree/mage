@@ -68,6 +68,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 	protected ManaCosts<ManaCost> manaCosts;
 	protected Costs<Cost> costs;
 	protected ArrayList<AlternativeCost> alternativeCosts = new ArrayList<AlternativeCost>();
+	protected Costs<Cost> optionalCosts;
 	protected Targets targets;
 	protected Choices choices;
 	protected Effects effects;
@@ -84,6 +85,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 		this.zone = zone;
 		this.manaCosts = new ManaCostsImpl<ManaCost>();
 		this.costs = new CostsImpl<Cost>();
+		this.optionalCosts = new CostsImpl<Cost>();
 		this.effects = new Effects();
 		this.targets = new Targets();
 		this.choices = new Choices();
@@ -99,6 +101,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 		this.usesStack = ability.usesStack;
 		this.manaCosts = ability.manaCosts.copy();
 		this.costs = ability.costs.copy();
+		this.optionalCosts = ability.optionalCosts.copy();
 		for (AlternativeCost cost: ability.alternativeCosts) {
 			this.alternativeCosts.add((AlternativeCost)cost.copy());
 		}
@@ -120,12 +123,15 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 	@Override
 	public boolean resolve(Game game) {
 		boolean result = true;
-		for (Effect effect: getEffects()) {
-			if (effect instanceof OneShotEffect) {
-				result &= effect.apply(game, this);
-			}
-			else {
-				game.addEffect((ContinuousEffect) effect, this);
+		//20100716 - 117.12
+		if (checkIfClause(game)) {
+			for (Effect effect: getEffects()) {
+				if (effect instanceof OneShotEffect) {
+					result &= effect.apply(game, this);
+				}
+				else {
+					game.addEffect((ContinuousEffect) effect, this);
+				}
 			}
 		}
 		return result;
@@ -169,6 +175,11 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 	}
 
 	@Override
+	public boolean checkIfClause(Game game) {
+		return true;
+	}
+
+	@Override
 	public UUID getControllerId() {
 		return controllerId;
 	}
@@ -202,6 +213,11 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 	@Override
 	public List<AlternativeCost> getAlternativeCosts() {
 		return alternativeCosts;
+	}
+
+	@Override
+	public Costs getOptionalCosts() {
+		return optionalCosts;
 	}
 
 	@Override
@@ -260,11 +276,6 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 		return sbRule.toString();
 	}
 
-//	@Override
-//	public String getName() {
-//		return "";
-//	}
-
 	@Override
 	public void addCost(Cost cost) {
 		if (cost != null) {
@@ -283,6 +294,13 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 	public void addAlternativeCost(AlternativeCost cost) {
 		if (cost != null) {
 			this.alternativeCosts.add(cost);
+		}
+	}
+
+	@Override
+	public void addOptionalCost(Cost cost) {
+		if (cost != null) {
+			this.optionalCosts.add(cost);
 		}
 	}
 

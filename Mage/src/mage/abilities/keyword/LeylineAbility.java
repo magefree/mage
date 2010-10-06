@@ -26,53 +26,40 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.costs.common;
+package mage.abilities.keyword;
 
-import java.util.UUID;
-import mage.Constants.Outcome;
+import java.io.ObjectStreamException;
 import mage.Constants.Zone;
-import mage.abilities.costs.CostImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.abilities.StaticAbility;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnToHandTargetCost extends CostImpl<ReturnToHandTargetCost> {
+public class LeylineAbility extends StaticAbility<LeylineAbility>{
 
-	public ReturnToHandTargetCost(TargetControlledPermanent target) {
-		this.addTarget(target);
-		this.text = "return " + target.getTargetName() + " you control to it's owner's hand";
+	private static final LeylineAbility fINSTANCE =  new LeylineAbility();
+
+	private Object readResolve() throws ObjectStreamException {
+		return fINSTANCE;
 	}
 
-	public ReturnToHandTargetCost(ReturnToHandTargetCost cost) {
-		super(cost);
+	public static LeylineAbility getInstance() {
+		return fINSTANCE;
 	}
 
-	@Override
-	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		if (targets.choose(Outcome.ReturnToHand, controllerId, game)) {
-			for (UUID targetId: targets.get(0).getTargets()) {
-				Permanent permanent = game.getPermanent(targetId);
-				if (permanent == null)
-					return false;
-				paid |= permanent.moveToZone(Zone.HAND, game, false);
-			}
-		}
-		return paid;
+	private LeylineAbility() {
+		super(Zone.HAND, null);
 	}
 
 	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return targets.canChoose(controllerId, controllerId, game);
+	public String getRule() {
+		return "If {this} is in your opening hand, you may begin the game with it on the battlefield.";
 	}
 
 	@Override
-	public ReturnToHandTargetCost copy() {
-		return new ReturnToHandTargetCost(this);
+	public LeylineAbility copy() {
+		return fINSTANCE;
 	}
-
 
 }

@@ -46,6 +46,7 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
 	protected Layer layer;
 	protected SubLayer sublayer;
 	protected Date timestamp;
+	protected boolean used = false;
 
 	public ContinuousEffectImpl(Duration duration, Outcome outcome) {
 		super(outcome);
@@ -65,6 +66,7 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
 		this.layer = effect.layer;
 		this.sublayer = effect.sublayer;
 		this.timestamp = new Date(effect.timestamp.getTime());
+		this.used = effect.used;
 	}
 
 	@Override
@@ -88,6 +90,11 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
 	@Override
 	public boolean hasLayer(Layer layer) {
 		return this.layer == layer;
+	}
+
+	@Override
+	public boolean isUsed() {
+		return used;
 	}
 
 }

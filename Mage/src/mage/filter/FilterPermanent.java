@@ -31,6 +31,8 @@ package mage.filter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.Constants.TargetController;
+import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
@@ -50,12 +52,13 @@ public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<
 	protected boolean faceup;
 	protected boolean usePhased;
 	protected boolean phasedIn;
+	protected TargetController controller = TargetController.ANY;
 
 	public FilterPermanent() {
 		super("permanent");
 	}
 
-	public FilterPermanent(FilterPermanent<T> filter) {
+	public FilterPermanent(final FilterPermanent<T> filter) {
 		super(filter);
 		for (UUID oId: filter.ownerId) {
 			this.ownerId.add(oId);
@@ -73,6 +76,7 @@ public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<
 		this.faceup = filter.faceup;
 		this.usePhased = filter.usePhased;
 		this.phasedIn = filter.phasedIn;
+		this.controller = filter.controller;
 	}
 
 	public FilterPermanent(String name) {
@@ -101,6 +105,30 @@ public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<
 
 		if (usePhased && permanent.isPhasedIn() != phasedIn)
 			return notFilter;
+
+		return !notFilter;
+	}
+
+	public boolean match(Permanent permanent, UUID playerId, Game game) {
+		if (!this.match(permanent))
+			return notFilter;
+
+		if (controller != TargetController.ANY && playerId != null) {
+			switch(controller) {
+				case YOU:
+					if (!permanent.getControllerId().equals(playerId))
+						return notFilter;
+					break;
+				case OPPONENT:
+					if (!game.getOpponents(playerId).contains(permanent.getControllerId()))
+						return notFilter;
+					break;
+				case NOT_YOU:
+					if (permanent.getControllerId().equals(playerId))
+						return notFilter;
+					break;
+			}
+		}
 
 		return !notFilter;
 	}
@@ -144,6 +172,30 @@ public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<
 	public void setFaceup(boolean faceup) {
 		this.faceup = faceup;
 	}
+
+	public void setTargetController(TargetController controller) {
+		this.controller = controller;
+	}
+
+//	public void setController(UUID playerId, Game game) {
+//		controllerId.clear();
+//		switch (controller) {
+//			case ANY:
+//				break;
+//			case YOU:
+//				controllerId.add(playerId);
+//				notController = false;
+//				break;
+//			case NOT_YOU:
+//				controllerId.add(playerId);
+//				notController = true;
+//				break;
+//			case OPPONENT:
+//				controllerId.addAll(game.getOpponents(playerId));
+//				notController = false;
+//				break;
+//		}
+//	}
 
 	public boolean matchOwner(UUID testOwnerId) {
 		if (ownerId.size() > 0 && ownerId.contains(testOwnerId) == notOwner)

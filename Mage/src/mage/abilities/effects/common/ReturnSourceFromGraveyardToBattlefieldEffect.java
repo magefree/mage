@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -59,8 +60,8 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect<
 		Player player = game.getPlayer(source.getControllerId());
 		Card card = player.getGraveyard().get(source.getSourceId(), game);
 		if (card != null) {
-			player.putOntoBattlefield(card, game);
 			player.removeFromGraveyard(card, game);
+			card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getControllerId());
 			return true;
 		}
 		return false;
@@ -70,6 +71,5 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect<
 	public String getText(Ability source) {
 		return "Return {this} from your graveyard to the battlefield";
 	}
-
 
 }

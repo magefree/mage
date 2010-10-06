@@ -41,6 +41,8 @@ import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.PermanentCard;
 import mage.watchers.Watchers;
 
 public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> implements Card {
@@ -166,4 +168,61 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 	public void setExpansionSetCode(String expansionSetCode) {
 		this.expansionSetCode = expansionSetCode;
 	}
+
+	@Override
+	public boolean moveToZone(Zone toZone, Game game, boolean flag) {
+		Zone fromZone = zone;
+		ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), ownerId, fromZone, toZone);
+		if (!game.replaceEvent(event)) {
+			switch (event.getToZone()) {
+				case GRAVEYARD:
+					game.getPlayer(ownerId).putInGraveyard(this, game, !flag);
+					break;
+				case HAND:
+					game.getPlayer(ownerId).getHand().add(this);
+					break;
+				case EXILED:
+					game.getExile().getPermanentExile().add(this);
+					break;
+				case LIBRARY:
+					if (flag)
+						game.getPlayer(ownerId).getLibrary().putOnTop(this, game);
+					else
+						game.getPlayer(ownerId).getLibrary().putOnBottom(this, game);
+
+			}
+			zone = event.getToZone();
+			game.fireEvent(new ZoneChangeEvent(this.getId(), ownerId, fromZone, event.getToZone()));
+			return zone == toZone;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean moveToExile(UUID exileId, String name, Game game) {
+		Zone fromZone = zone;
+		ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), ownerId, fromZone, Zone.EXILED);
+		if (!game.replaceEvent(event)) {
+			if (exileId == null) {
+				game.getExile().getPermanentExile().add(this);
+			}
+			else {
+				game.getExile().createZone(exileId, name).add(this);
+			}
+			game.fireEvent(new ZoneChangeEvent(this.getId(), ownerId, fromZone, Zone.EXILED));
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean putOntoBattlefield(Game game, Zone fromZone, UUID controllerId) {
+		PermanentCard permanent = new PermanentCard(this, controllerId);
+		game.getBattlefield().addPermanent(permanent);
+		permanent.entersBattlefield(game);
+		game.applyEffects();
+		game.fireEvent(new ZoneChangeEvent(permanent.getId(), controllerId, fromZone, Zone.BATTLEFIELD));
+		return true;
+	}
+
 }

@@ -26,53 +26,20 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.costs.common;
+package mage.abilities.effects;
 
 import java.util.UUID;
-import mage.Constants.Outcome;
-import mage.Constants.Zone;
-import mage.abilities.costs.CostImpl;
+import mage.Constants.AsThoughEffectType;
+import mage.abilities.Ability;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnToHandTargetCost extends CostImpl<ReturnToHandTargetCost> {
+public interface AsThoughEffect<T extends AsThoughEffect<T>> extends ContinuousEffect<T> {
 
-	public ReturnToHandTargetCost(TargetControlledPermanent target) {
-		this.addTarget(target);
-		this.text = "return " + target.getTargetName() + " you control to it's owner's hand";
-	}
-
-	public ReturnToHandTargetCost(ReturnToHandTargetCost cost) {
-		super(cost);
-	}
-
-	@Override
-	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		if (targets.choose(Outcome.ReturnToHand, controllerId, game)) {
-			for (UUID targetId: targets.get(0).getTargets()) {
-				Permanent permanent = game.getPermanent(targetId);
-				if (permanent == null)
-					return false;
-				paid |= permanent.moveToZone(Zone.HAND, game, false);
-			}
-		}
-		return paid;
-	}
-
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return targets.canChoose(controllerId, controllerId, game);
-	}
-
-	@Override
-	public ReturnToHandTargetCost copy() {
-		return new ReturnToHandTargetCost(this);
-	}
-
+	public boolean applies(UUID sourceId, Ability source, Game game);
+	public AsThoughEffectType getAsThoughEffectType();
 
 }

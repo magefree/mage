@@ -69,7 +69,7 @@ public class SearchLibraryRevealPutInHandEffect extends SearchEffect<SearchLibra
 			for (UUID cardId: (List<UUID>)target.getTargets()) {
 				Card card = player.getLibrary().remove(cardId, game);
 				if (card != null) {
-					player.putInHand(card, game);
+					card.moveToZone(Zone.HAND, game, false);
 					revealed.add(card);
 				}
 			}

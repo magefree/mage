@@ -29,11 +29,16 @@
 package mage.game.permanent.token;
 
 import java.util.List;
+import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Zone;
 import mage.MageObjectImpl;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.game.Game;
+import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.PermanentToken;
 
 public class Token extends MageObjectImpl<Token> {
 
@@ -74,4 +79,14 @@ public class Token extends MageObjectImpl<Token> {
 	public Token copy() {
 		return new Token(this);
 	}
+
+	public boolean putOntoBattlefield(Game game, UUID controllerId) {
+		PermanentToken permanent = new PermanentToken(this, controllerId);
+		game.getBattlefield().addPermanent(permanent);
+		permanent.entersBattlefield(game);
+		game.applyEffects();
+		game.fireEvent(new ZoneChangeEvent(permanent.getId(), controllerId, Zone.OUTSIDE, Zone.BATTLEFIELD));
+		return true;
+	}
+
 }

@@ -37,6 +37,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.UUID;
+import mage.Constants.AsThoughEffectType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.SubLayer;
@@ -46,25 +48,35 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-
-
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class ContinuousEffects implements Serializable {
 
-	private final Map<ContinuousEffect, Ability> effects = new HashMap<ContinuousEffect, Ability>();
+	private final Map<ContinuousEffect, Ability> layeredEffects = new HashMap<ContinuousEffect, Ability>();
+	private final Map<ReplacementEffect, Ability> replacementEffects = new HashMap<ReplacementEffect, Ability>();
+	private final Map<PreventionEffect, Ability> preventionEffects = new HashMap<PreventionEffect, Ability>();
+	private final Map<AsThoughEffect, Ability> asThoughEffects = new HashMap<AsThoughEffect, Ability>();
 	private final ApplyCountersEffect applyCounters;
 
 	public ContinuousEffects() {
 		applyCounters = new ApplyCountersEffect();
 	}
 
-	public ContinuousEffects(ContinuousEffects effect) {
+	public ContinuousEffects(final ContinuousEffects effect) {
 		this.applyCounters = effect.applyCounters.copy();
-		for (Entry<ContinuousEffect, Ability> entry: effect.effects.entrySet()) {
-			effects.put((ContinuousEffect)entry.getKey().copy(), entry.getValue().copy());
+		for (Entry<ContinuousEffect, Ability> entry: effect.layeredEffects.entrySet()) {
+			layeredEffects.put((ContinuousEffect)entry.getKey().copy(), entry.getValue().copy());
+		}
+		for (Entry<ReplacementEffect, Ability> entry: effect.replacementEffects.entrySet()) {
+			replacementEffects.put((ReplacementEffect)entry.getKey().copy(), entry.getValue().copy());
+		}
+		for (Entry<PreventionEffect, Ability> entry: effect.preventionEffects.entrySet()) {
+			preventionEffects.put((PreventionEffect)entry.getKey().copy(), entry.getValue().copy());
+		}
+		for (Entry<AsThoughEffect, Ability> entry: effect.asThoughEffects.entrySet()) {
+			asThoughEffects.put((AsThoughEffect)entry.getKey().copy(), entry.getValue().copy());
 		}
 	}
 
@@ -73,7 +85,22 @@ public class ContinuousEffects implements Serializable {
 	}
 
 	public void removeEndOfTurnEffects() {
-		for (Iterator<ContinuousEffect> i = effects.keySet().iterator(); i.hasNext();) {
+		for (Iterator<ContinuousEffect> i = layeredEffects.keySet().iterator(); i.hasNext();) {
+			ContinuousEffect entry = i.next();
+			if (entry.getDuration() == Duration.EndOfTurn)
+				i.remove();
+		}
+		for (Iterator<ReplacementEffect> i = replacementEffects.keySet().iterator(); i.hasNext();) {
+			ContinuousEffect entry = i.next();
+			if (entry.getDuration() == Duration.EndOfTurn)
+				i.remove();
+		}
+		for (Iterator<PreventionEffect> i = preventionEffects.keySet().iterator(); i.hasNext();) {
+			ContinuousEffect entry = i.next();
+			if (entry.getDuration() == Duration.EndOfTurn)
+				i.remove();
+		}
+		for (Iterator<AsThoughEffect> i = asThoughEffects.keySet().iterator(); i.hasNext();) {
 			ContinuousEffect entry = i.next();
 			if (entry.getDuration() == Duration.EndOfTurn)
 				i.remove();
@@ -81,81 +108,92 @@ public class ContinuousEffects implements Serializable {
 	}
 
 	public void removeInactiveEffects(Game game) {
-		for (Iterator<ContinuousEffect> i = effects.keySet().iterator(); i.hasNext();) {
+		for (Iterator<ContinuousEffect> i = layeredEffects.keySet().iterator(); i.hasNext();) {
 			ContinuousEffect entry = i.next();
 			if (entry.getDuration() == Duration.WhileOnBattlefield) {
-				Permanent permanent = game.getPermanent(effects.get(entry).getSourceId());
+				Permanent permanent = game.getPermanent(layeredEffects.get(entry).getSourceId());
 				if (permanent == null || !permanent.isPhasedIn())
 					i.remove();
 			}
-			if (entry.getDuration() == Duration.OneUse) {
-				if (entry instanceof ReplacementEffect) {
-					if (((ReplacementEffect)entry).isUsed())
-						i.remove();
-				}
+			else if (entry.getDuration() == Duration.OneUse && entry.isUsed())
+				i.remove();
+		}
+		for (Iterator<ReplacementEffect> i = replacementEffects.keySet().iterator(); i.hasNext();) {
+			ReplacementEffect entry = i.next();
+			if (entry.getDuration() == Duration.WhileOnBattlefield) {
+				Permanent permanent = game.getPermanent(replacementEffects.get(entry).getSourceId());
+				if (permanent == null || !permanent.isPhasedIn())
+					i.remove();
 			}
+			else if (entry.getDuration() == Duration.OneUse && entry.isUsed())
+				i.remove();
+		}
+		for (Iterator<PreventionEffect> i = preventionEffects.keySet().iterator(); i.hasNext();) {
+			PreventionEffect entry = i.next();
+			if (entry.getDuration() == Duration.WhileOnBattlefield) {
+				Permanent permanent = game.getPermanent(preventionEffects.get(entry).getSourceId());
+				if (permanent == null || !permanent.isPhasedIn())
+					i.remove();
+			}
+			else if (entry.getDuration() == Duration.OneUse && entry.isUsed())
+				i.remove();
+		}
+		for (Iterator<AsThoughEffect> i = asThoughEffects.keySet().iterator(); i.hasNext();) {
+			AsThoughEffect entry = i.next();
+			if (entry.getDuration() == Duration.WhileOnBattlefield) {
+				Permanent permanent = game.getPermanent(asThoughEffects.get(entry).getSourceId());
+				if (permanent == null || !permanent.isPhasedIn())
+					i.remove();
+			}
+			else if (entry.getDuration() == Duration.OneUse && entry.isUsed())
+				i.remove();
 		}
 	}
 
 	private List<ContinuousEffect> getLayeredEffects() {
-		List<ContinuousEffect> layerEffects = new ArrayList<ContinuousEffect>();
-		for (ContinuousEffect effect: effects.keySet()) {
-			if (!(effect instanceof ReplacementEffect) && !(effect instanceof PreventionEffect)) {
-				layerEffects.add(effect);
-			}
-		}
+		List<ContinuousEffect> layerEffects = new ArrayList<ContinuousEffect>(layeredEffects.keySet());
 		Collections.sort(layerEffects, new TimestampSorter());
 		return layerEffects;
 	}
 
-
 	private List<ReplacementEffect> getApplicableReplacementEffects(GameEvent event, Game game) {
-		List<ReplacementEffect> replacementEffects = new ArrayList<ReplacementEffect>();
-		for (ContinuousEffect effect: effects.keySet()) {
-			if (effect instanceof ReplacementEffect && ((ReplacementEffect)effect).applies(event, effects.get(effect), game)) {
-				if (effect.getDuration() != Duration.OneUse || !((ReplacementEffect)effect).isUsed())
-					replacementEffects.add((ReplacementEffect)effect);
+		List<ReplacementEffect> replaceEffects = new ArrayList<ReplacementEffect>();
+		for (ReplacementEffect effect: replacementEffects.keySet()) {
+			if (effect.applies(event, replacementEffects.get(effect), game)) {
+				if (effect.getDuration() != Duration.OneUse || !effect.isUsed())
+					replaceEffects.add((ReplacementEffect)effect);
 			}
 		}
-		return replacementEffects;
+		return replaceEffects;
 	}
 
-//	private List<SelfReplacementEffect> GetApplicableSelfReplacementEffects(GameEvent event, Game game) {
-//		List<SelfReplacementEffect> effects = new ArrayList<SelfReplacementEffect>();
-//		for (IEffect effect: this) {
-//			if (effect instanceof SelfReplacementEffect && ((SelfReplacementEffect)effect).Applies(event, game)) {
-//				effects.add((SelfReplacementEffect)effect);
-//			}
-//		}
-//		return effects;
-//	}
+	public boolean asThough(UUID objectId, AsThoughEffectType type, Game game) {
+		for (Entry<AsThoughEffect, Ability> entry: asThoughEffects.entrySet()) {
+			AsThoughEffect effect = entry.getKey();
+			if (effect.getAsThoughEffectType() == type) {
+				if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
+					if (effect.applies(objectId, entry.getValue(), game)) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 
 	public boolean replaceEvent(GameEvent event, Game game) {
 		boolean caught = false;
-//		List<SelfReplacementEffect> srEffects = GetApplicableSelfReplacementEffects(event, game);
-//
-//		if (srEffects.size() > 0) {
-//			if (srEffects.size() == 1) {
-//				caught = srEffects.get(0).ReplaceEvent(event, game);
-//			}
-//			else {
-//				//TODO: handle multiple
-//			}
-//		}
-
-		if (!caught) {
-			List<ReplacementEffect> rEffects = getApplicableReplacementEffects(event, game);
-			if (rEffects.size() > 0) {
-				int index;
-				if (rEffects.size() == 1) {
-					index = 0;
-				}
-				else {
-					Player player = game.getPlayer(event.getPlayerId());
-					index = player.chooseEffect(rEffects, game);
-				}
-				caught = rEffects.get(index).replaceEvent(event, effects.get(rEffects.get(index)), game);
+		List<ReplacementEffect> rEffects = getApplicableReplacementEffects(event, game);
+		if (rEffects.size() > 0) {
+			int index;
+			if (rEffects.size() == 1) {
+				index = 0;
 			}
+			else {
+				Player player = game.getPlayer(event.getPlayerId());
+				index = player.chooseEffect(rEffects, game);
+			}
+			caught = rEffects.get(index).replaceEvent(event, replacementEffects.get(rEffects.get(index)), game);
 		}
 
 		return caught;
@@ -164,95 +202,74 @@ public class ContinuousEffects implements Serializable {
 	//20091005 - 613
 	public void apply(Game game) {
 		removeInactiveEffects(game);
-		List<ContinuousEffect> layeredEffects = getLayeredEffects();
-		for (ContinuousEffect effect: layeredEffects) {
-			effect.apply(Layer.CopyEffects_1, SubLayer.CharacteristicDefining_7a, effects.get(effect), game);
+		List<ContinuousEffect> layerEffects = getLayeredEffects();
+		for (ContinuousEffect effect: layerEffects) {
+			effect.apply(Layer.CopyEffects_1, SubLayer.CharacteristicDefining_7a, layeredEffects.get(effect), game);
 		}
-		for (ContinuousEffect effect: layeredEffects) {
-			effect.apply(Layer.CopyEffects_1, SubLayer.NA, effects.get(effect), game);
+		for (ContinuousEffect effect: layerEffects) {
+			effect.apply(Layer.CopyEffects_1, SubLayer.NA, layeredEffects.get(effect), game);
 		}
-		for (ContinuousEffect effect: layeredEffects) {
-			effect.apply(Layer.ControlChangingEffects_2, SubLayer.CharacteristicDefining_7a, effects.get(effect), game);
+		for (ContinuousEffect effect: layerEffects) {
+			effect.apply(Layer.ControlChangingEffects_2, SubLayer.CharacteristicDefining_7a, layeredEffects.get(effect), game);
 		}
-		for (ContinuousEffect effect: layeredEffects) {
-			effect.apply(Layer.ControlChangingEffects_2, SubLayer.NA, effects.get(effect), game);
+		for (ContinuousEffect effect: layerEffects) {
+			effect.apply(Layer.ControlChangingEffects_2, SubLayer.NA, layeredEffects.get(effect), game);
 		}
-		for (ContinuousEffect effect: layeredEffects) {
-			effect.apply(Layer.TextChangingEffects_3, SubLayer.CharacteristicDefining_7a, effects.get(effect), game);
+		for (ContinuousEffect effect: layerEffects) {
+			effect.apply(Layer.TextChangingEffects_3, SubLayer.CharacteristicDefining_7a, layeredEffects.get(effect), game);
 		}
-		for (ContinuousEffect effect: layeredEffects) {
-			effect.apply(Layer.TextChangingEffects_3, SubLayer.NA, effects.get(effect), game);
+		for (ContinuousEffect effect: layerEffects) {
+			effect.apply(Layer.TextChangingEffects_3, SubLayer.NA, layeredEffects.get(effect), game);
 		}
-		for (ContinuousEffect effect: layeredEffects) {
-			effect.apply(Layer.TypeChangingEffects_4, SubLayer.CharacteristicDefining_7a, effects.get(effect), game);
+		for (ContinuousEffect effect: layerEffects) {
+			effect.apply(Layer.TypeChangingEffects_4, SubLayer.CharacteristicDefining_7a, layeredEffects.get(effect), game);
 		}
-		for (ContinuousEffect effect: layeredEffects) {
-			effect.apply(Layer.TypeChangingEffects_4, SubLayer.NA, effects.get(effect), game);
+		for (ContinuousEffect effect: layerEffects) {
+			effect.apply(Layer.TypeChangingEffects_4, SubLayer.NA, layeredEffects.get(effect), game);
 		}
-		for (ContinuousEffect effect: layeredEffects) {
-			effect.apply(Layer.ColorChangingEffects_5, SubLayer.CharacteristicDefining_7a, effects.get(effect), game);
+		for (ContinuousEffect effect: layerEffects) {
+			effect.apply(Layer.ColorChangingEffects_5, SubLayer.CharacteristicDefining_7a, layeredEffects.get(effect), game);
 		}
-		for (ContinuousEffect effect: layeredEffects) {
-			effect.apply(Layer.ColorChangingEffects_5, SubLayer.NA, effects.get(effect), game);
+		for (ContinuousEffect effect: layerEffects) {
+			effect.apply(Layer.ColorChangingEffects_5, SubLayer.NA, layeredEffects.get(effect), game);
 		}
-		for (ContinuousEffect effect: layeredEffects) {
-			effect.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.CharacteristicDefining_7a, effects.get(effect), game);
+		for (ContinuousEffect effect: layerEffects) {
+			effect.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.CharacteristicDefining_7a, layeredEffects.get(effect), game);
 		}
-		for (ContinuousEffect effect: layeredEffects) {
-			effect.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, effects.get(effect), game);
+		for (ContinuousEffect effect: layerEffects) {
+			effect.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, layeredEffects.get(effect), game);
 		}
-		for (ContinuousEffect effect: layeredEffects) {
-			effect.apply(Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, effects.get(effect), game);
+		for (ContinuousEffect effect: layerEffects) {
+			effect.apply(Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, layeredEffects.get(effect), game);
 		}
-		for (ContinuousEffect effect: layeredEffects) {
-			effect.apply(Layer.PTChangingEffects_7, SubLayer.SetPT_7b, effects.get(effect), game);
+		for (ContinuousEffect effect: layerEffects) {
+			effect.apply(Layer.PTChangingEffects_7, SubLayer.SetPT_7b, layeredEffects.get(effect), game);
 		}
-		for (ContinuousEffect effect: layeredEffects) {
-			effect.apply(Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, effects.get(effect), game);
+		for (ContinuousEffect effect: layerEffects) {
+			effect.apply(Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, layeredEffects.get(effect), game);
 		}
 		applyCounters.apply(Layer.PTChangingEffects_7, SubLayer.Counters_7d, null, game);
-//		for (ContinuousEffect effect: layeredEffects) {
-//			effect.apply(Layer.PTChangingEffects_7, SubLayer.Counters_7d, game);
-//		}
-		for (ContinuousEffect effect: layeredEffects) {
-			effect.apply(Layer.PTChangingEffects_7, SubLayer.SwitchPT_e, effects.get(effect), game);
+		for (ContinuousEffect effect: layerEffects) {
+			effect.apply(Layer.PTChangingEffects_7, SubLayer.SwitchPT_e, layeredEffects.get(effect), game);
 		}
-		for (ContinuousEffect effect: layeredEffects) {
-			effect.apply(Layer.PlayerEffects, SubLayer.NA, effects.get(effect), game);
+		for (ContinuousEffect effect: layerEffects) {
+			effect.apply(Layer.PlayerEffects, SubLayer.NA, layeredEffects.get(effect), game);
 		}
-		for (ContinuousEffect effect: layeredEffects) {
-			effect.apply(Layer.RulesEffects, SubLayer.NA, effects.get(effect), game);
+		for (ContinuousEffect effect: layerEffects) {
+			effect.apply(Layer.RulesEffects, SubLayer.NA, layeredEffects.get(effect), game);
 		}
 	}
-
-//	protected void applyCounters(Game game) {
-//		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
-//			for (BoostCounter counter: permanent.getCounters().getBoostCounters()) {
-//				permanent.addPower(counter.getPower() * counter.getCount());
-//				permanent.addToughness(counter.getToughness() * counter.getCount());
-//			}
-//		}
-//	}
-
-//	public String getText() {
-//		StringBuilder sbText = new StringBuilder();
-//		for (ActiveContinuousEffect effect: effects) {
-//			sbText.append(effect.getEffect().getText()).append(" ");
-//		}
-//		return sbText.toString();
-//	}
 
 	public void addEffect(ContinuousEffect effect, Ability source) {
-		effects.put(effect, source);
+		if (effect instanceof ReplacementEffect)
+			replacementEffects.put((ReplacementEffect)effect, source);
+		else if (effect instanceof PreventionEffect)
+			preventionEffects.put((PreventionEffect)effect, source);
+		else if (effect instanceof AsThoughEffect)
+			asThoughEffects.put((AsThoughEffect) effect,source);
+		else
+			layeredEffects.put(effect, source);
 	}
-
-//	public boolean effectExists(UUID abilityId) {
-//		for (ContinuousEffect effect: effects) {
-//			if (effect.getSource().getId().equals(abilityId))
-//				return true;
-//		}
-//		return false;
-//	}
 
 }
 

@@ -44,7 +44,6 @@ import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.game.events.GameEvent;
-import mage.players.Player;
 import mage.watchers.Watchers;
 
 /**
@@ -83,7 +82,8 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 				if (ability.getEffects().contains(ExileSpellEffect.getInstance()))
 					game.getExile().getPermanentExile().add(card);
 				else
-					game.getPlayers().get(controllerId).putInGraveyard(card, game, false);
+					card.moveToZone(Zone.GRAVEYARD, game, false);
+//					game.getPlayers().get(controllerId).putInGraveyard(card, game, false);
 				return result;
 			}
 			//20091005 - 608.2b
@@ -92,8 +92,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 		}
 		else if (card.getCardType().contains(CardType.ENCHANTMENT) && card.getSubtype().contains("Aura")) {
 			if (ability.getTargets().stillLegal(ability, game)) {
-				Player controller = game.getPlayers().get(controllerId);
-				if (controller.putOntoBattlefield(card, game)) {
+				if (card.putOntoBattlefield(game, Zone.HAND, controllerId)) {
 					return ability.resolve(game);
 				}
 				return false;
@@ -103,8 +102,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 			return false;
 		}
 		else {
-			Player controller = game.getPlayers().get(controllerId);
-			result = controller.putOntoBattlefield(card, game);
+			result = card.putOntoBattlefield(game, Zone.HAND, controllerId);
 			resolveKicker(game);
 			return result;
 		}
@@ -125,7 +123,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
 	@Override
 	public void counter(Game game) {
-		game.getPlayers().get(controllerId).putInGraveyard(card, game, false);
+		card.moveToZone(Zone.GRAVEYARD, game, false);
 	}
 
 	@Override
@@ -273,4 +271,19 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
 	@Override
 	public void adjustCosts(Ability ability, Game game) {}
+
+	@Override
+	public boolean moveToZone(Zone zone, Game game, boolean flag) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public boolean moveToExile(UUID exileId, String name, Game game) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public boolean putOntoBattlefield(Game game, Zone fromZone, UUID controllerId) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
 }

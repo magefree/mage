@@ -54,6 +54,9 @@ public interface Card extends MageObject {
 	public String getExpansionSetCode();
 	public void setExpansionSetCode(String expansionSetCode);
 
+	public boolean moveToZone(Zone zone, Game game, boolean flag);
+	public boolean moveToExile(UUID exileId, String name, Game game);
+	public boolean putOntoBattlefield(Game game, Zone fromZone, UUID controllerId);
 	public void checkTriggers(Zone zone, GameEvent event, Game game);
 
 	@Override

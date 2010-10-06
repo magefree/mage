@@ -53,10 +53,10 @@ import mage.abilities.TriggeredAbilities;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
+import mage.abilities.keyword.LeylineAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterEquipment;
 import mage.filter.common.FilterFortification;
@@ -342,6 +342,18 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			saveState();
 		}
 
+		//20100716 - 103.5
+		for (UUID playerId: state.getPlayerList(startingPlayerId)) {
+			Player player = getPlayer(playerId);
+			for (Card card: player.getHand().getCards(this)) {
+				if (card.getAbilities().containsKey(LeylineAbility.getInstance().getId())) {
+					if (!player.chooseUse(Outcome.PutCardInPlay, "Do you wish to put " + card.getName() + " on the battlefield?", this)) {
+						player.getHand().remove(card);
+						card.putOntoBattlefield(this, Zone.HAND, player.getId());
+					}
+				}
+			}
+		}
 	}
 
 	protected UUID findWinner() {

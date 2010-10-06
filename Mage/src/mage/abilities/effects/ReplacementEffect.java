@@ -40,6 +40,5 @@ public interface ReplacementEffect<T extends ReplacementEffect<T>> extends Conti
 
 	public boolean replaceEvent(GameEvent event, Ability source, Game game);
 	public boolean applies(GameEvent event, Ability source, Game game);
-	boolean isUsed();
 
 }

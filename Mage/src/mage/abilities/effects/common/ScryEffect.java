@@ -72,7 +72,8 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
 		while (cards.size() > 0 && player.chooseTarget(cards, target1, source, game)) {
 			Card card = cards.get(target1.getFirstTarget(), game);
 			cards.remove(card);
-			player.getLibrary().putOnBottom(card, game);
+			card.moveToZone(Zone.LIBRARY, game, false);
+//			player.getLibrary().putOnBottom(card, game);
 			target1.clearChosen();
 		}
 		if (cards.size() > 1) {
@@ -82,12 +83,16 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
 				player.chooseTarget(cards, target2, source, game);
 				Card card = cards.get(target2.getFirstTarget(), game);
 				cards.remove(card);
-				player.getLibrary().putOnTop(card, game);
+				card.moveToZone(Zone.LIBRARY, game, true);
+//				player.getLibrary().putOnTop(card, game);
 				target2.clearChosen();
 			}
 		}
-		if (cards.size() == 1)
-			player.getLibrary().putOnTop(cards.get(cards.iterator().next(), game), game);
+		if (cards.size() == 1) {
+			Card card = cards.get(cards.iterator().next(), game);
+			card.moveToZone(Zone.LIBRARY, game, true);
+//			player.getLibrary().putOnTop(cards.get(cards.iterator().next(), game), game);
+		}
 		return true;
 	}
 

@@ -26,53 +26,34 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.costs.common;
+package mage.filter.common;
 
-import java.util.UUID;
-import mage.Constants.Outcome;
-import mage.Constants.Zone;
-import mage.abilities.costs.CostImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.Constants.CardType;
+import mage.Constants.TargetController;
+import mage.filter.FilterPermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnToHandTargetCost extends CostImpl<ReturnToHandTargetCost> {
+public class FilterControlledCreaturePermanent extends FilterControlledPermanent<FilterControlledCreaturePermanent> {
 
-	public ReturnToHandTargetCost(TargetControlledPermanent target) {
-		this.addTarget(target);
-		this.text = "return " + target.getTargetName() + " you control to it's owner's hand";
+	public FilterControlledCreaturePermanent() {
+		this("creature you control");
 	}
 
-	public ReturnToHandTargetCost(ReturnToHandTargetCost cost) {
-		super(cost);
+	public FilterControlledCreaturePermanent(String name) {
+		super(name);
+		cardType.add(CardType.CREATURE);
 	}
 
-	@Override
-	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		if (targets.choose(Outcome.ReturnToHand, controllerId, game)) {
-			for (UUID targetId: targets.get(0).getTargets()) {
-				Permanent permanent = game.getPermanent(targetId);
-				if (permanent == null)
-					return false;
-				paid |= permanent.moveToZone(Zone.HAND, game, false);
-			}
-		}
-		return paid;
+	public FilterControlledCreaturePermanent(final FilterControlledCreaturePermanent filter) {
+		super(filter);
 	}
 
 	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return targets.canChoose(controllerId, controllerId, game);
+	public FilterControlledCreaturePermanent copy() {
+		return new FilterControlledCreaturePermanent(this);
 	}
-
-	@Override
-	public ReturnToHandTargetCost copy() {
-		return new ReturnToHandTargetCost(this);
-	}
-
 
 }

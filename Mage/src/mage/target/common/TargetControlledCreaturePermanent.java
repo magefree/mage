@@ -26,53 +26,35 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.costs.common;
+package mage.target.common;
 
-import java.util.UUID;
-import mage.Constants.Outcome;
-import mage.Constants.Zone;
-import mage.abilities.costs.CostImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnToHandTargetCost extends CostImpl<ReturnToHandTargetCost> {
+public class TargetControlledCreaturePermanent extends TargetControlledPermanent<TargetControlledCreaturePermanent> {
 
-	public ReturnToHandTargetCost(TargetControlledPermanent target) {
-		this.addTarget(target);
-		this.text = "return " + target.getTargetName() + " you control to it's owner's hand";
+	public TargetControlledCreaturePermanent() {
+		this(1, 1, new FilterControlledCreaturePermanent(), false);
 	}
 
-	public ReturnToHandTargetCost(ReturnToHandTargetCost cost) {
-		super(cost);
+	public TargetControlledCreaturePermanent(int numTargets) {
+		this(numTargets, numTargets, new FilterControlledCreaturePermanent(), false);
 	}
 
-	@Override
-	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		if (targets.choose(Outcome.ReturnToHand, controllerId, game)) {
-			for (UUID targetId: targets.get(0).getTargets()) {
-				Permanent permanent = game.getPermanent(targetId);
-				if (permanent == null)
-					return false;
-				paid |= permanent.moveToZone(Zone.HAND, game, false);
-			}
-		}
-		return paid;
+	public TargetControlledCreaturePermanent(int minNumTargets, int maxNumTargets, FilterControlledCreaturePermanent filter, boolean notTarget) {
+		super(1, 1, filter, notTarget);
+		this.targetName = filter.getMessage();
+	}
+
+	public TargetControlledCreaturePermanent(final TargetControlledCreaturePermanent target) {
+		super(target);
 	}
 
 	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return targets.canChoose(controllerId, controllerId, game);
+	public TargetControlledCreaturePermanent copy() {
+		return new TargetControlledCreaturePermanent(this);
 	}
-
-	@Override
-	public ReturnToHandTargetCost copy() {
-		return new ReturnToHandTargetCost(this);
-	}
-
-
 }

@@ -38,15 +38,15 @@ import mage.filter.common.FilterAttackingCreature;
 public class TargetAttackingCreature extends TargetCreaturePermanent<TargetAttackingCreature> {
 
 	public TargetAttackingCreature() {
-		this(1, 1, new FilterAttackingCreature(), TargetController.ANY, false);
+		this(1, 1, new FilterAttackingCreature(), false);
 	}
 
-	public TargetAttackingCreature(int numTargets, TargetController controller) {
-		this(numTargets, numTargets, new FilterAttackingCreature(), controller, false);
+	public TargetAttackingCreature(int numTargets) {
+		this(numTargets, numTargets, new FilterAttackingCreature(), false);
 	}
 
-	public TargetAttackingCreature(int minNumTargets, int maxNumTargets, FilterAttackingCreature filter, TargetController controller, boolean notTarget) {
-		super(1, 1, filter, controller, notTarget);
+	public TargetAttackingCreature(int minNumTargets, int maxNumTargets, FilterAttackingCreature filter, boolean notTarget) {
+		super(1, 1, filter, notTarget);
 		this.targetName = filter.getMessage();
 	}
 

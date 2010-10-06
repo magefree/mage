@@ -30,47 +30,35 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
-import mage.Constants.TargetController;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.filter.FilterObject;
-import mage.filter.FilterPermanent;
-import mage.filter.FilterStackObject;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantTargetControlledEffect extends ReplacementEffectImpl<CantTargetControlledEffect> {
+public class CantTargetControllerEffect extends ReplacementEffectImpl<CantTargetControllerEffect> {
 
-	private FilterPermanent filterTarget;
-	private FilterStackObject filterSource;
+	private FilterObject filterSource;
 
-	public CantTargetControlledEffect(FilterPermanent filterTarget, FilterStackObject filterSource, Duration duration) {
+	public CantTargetControllerEffect(FilterObject filterSource, Duration duration) {
 		super(duration, Outcome.Benefit);
-		this.filterTarget = filterTarget;
 		this.filterSource = filterSource;
 	}
 
-	public CantTargetControlledEffect(FilterPermanent filterTarget, Duration duration) {
-		this(filterTarget, null, duration);
-	}
-
-	public CantTargetControlledEffect(final CantTargetControlledEffect effect) {
+	public CantTargetControllerEffect(final CantTargetControllerEffect effect) {
 		super(effect);
-		this.filterTarget = effect.filterTarget.copy();
 		this.filterSource = effect.filterSource.copy();
 	}
 
 	@Override
-	public CantTargetControlledEffect copy() {
-		return new CantTargetControlledEffect(this);
+	public CantTargetControllerEffect copy() {
+		return new CantTargetControllerEffect(this);
 	}
 
 	@Override
@@ -85,20 +73,10 @@ public class CantTargetControlledEffect extends ReplacementEffectImpl<CantTarget
 
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.TARGET) {
-			filterTarget.setTargetController(TargetController.YOU);
-//			filterTarget.getControllerId().clear();
-//			filterTarget.getControllerId().add(source.getControllerId());
-			Permanent permanent = game.getPermanent(event.getTargetId());
-			if (permanent != null && filterTarget.match(permanent, source.getControllerId(), game)) {
-				if (filterSource == null)
-					return true;
-				else {
-					StackObject sourceObject = game.getStack().getStackObject(source.getSourceId());
-					if (sourceObject != null && filterSource.match(sourceObject)) {
-						return true;
-					}
-				}
+		if (event.getType() == EventType.TARGET && event.getTargetId().equals(source.getControllerId())) {
+			MageObject sourceObject = game.getObject(source.getSourceId());
+			if (sourceObject != null && filterSource.match(sourceObject)) {
+				return true;
 			}
 		}
 		return false;
@@ -107,13 +85,8 @@ public class CantTargetControlledEffect extends ReplacementEffectImpl<CantTarget
 	@Override
 	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(filterTarget.getMessage()).append(" can't be the targets of ");
-		if (filterSource != null) {
-			sb.append(filterSource.getMessage());
-		}
-		else {
-			sb.append("spells");
-		}
+		sb.append("{this} can't be the targets of ");
+		sb.append(filterSource.getMessage());
 		sb.append(" ").append(duration.toString());
 		return sb.toString();
 	}

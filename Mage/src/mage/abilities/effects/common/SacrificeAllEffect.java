@@ -76,7 +76,8 @@ public class SacrificeAllEffect extends OneShotEffect<SacrificeAllEffect> {
 		List<UUID> perms = new ArrayList<UUID>();
 		for (Player player: game.getPlayers().values()) {
 			int numTargets = Math.min(amount, game.getBattlefield().countAll(filter, player.getId()));
-			TargetPermanent target = new TargetPermanent(numTargets, filter, TargetController.YOU);
+			filter.setTargetController(TargetController.YOU);
+			TargetPermanent target = new TargetPermanent(numTargets, filter);
 			while (!target.isChosen()) {
 				player.choose(Outcome.Sacrifice, target, game);
 			}

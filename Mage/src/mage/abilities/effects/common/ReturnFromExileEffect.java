@@ -35,6 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
+import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
 /**
@@ -68,18 +69,7 @@ public class ReturnFromExileEffect extends OneShotEffect<ReturnFromExileEffect> 
 		Player player;
 		for (UUID cardId: game.getExile().getExileZone(exileId)) {
 			Card card = game.getCard(cardId);
-			player = game.getPlayer(card.getOwnerId());
-			switch(zone) {
-				case BATTLEFIELD:
-					player.putOntoBattlefield(card, game);
-					break;
-				case HAND:
-					player.putInHand(card, game);
-					break;
-				case GRAVEYARD:
-					player.putInGraveyard(card, game, false);
-					break;
-			}
+			card.moveToZone(zone, game, false);
 		}
 		game.getExile().getExileZone(exileId).clear();
 		return true;

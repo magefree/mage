@@ -28,19 +28,15 @@
 
 package mage.filter;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterSpell extends FilterObject<Spell, FilterSpell> {
-
-	protected List<UUID> controllerId = new ArrayList<UUID>();
-	protected boolean notController = false;
+public class FilterSpell extends FilterStackObject<FilterSpell> {
 
 	public FilterSpell() {
 		super("spell");
@@ -56,26 +52,15 @@ public class FilterSpell extends FilterObject<Spell, FilterSpell> {
 			this.controllerId.add(cId);
 		}
 		this.notController = filter.notController;
+		this.controller = filter.controller;
 	}
 
 	@Override
-	public boolean match(Spell spell) {
-
-		if (!super.match(spell))
+	public boolean match(StackObject spell) {
+		if (!(spell instanceof Spell))
 			return notFilter;
 
-		if (controllerId.size() > 0 && controllerId.contains(spell.getControllerId()) == notController)
-			return notFilter;
-
-		return !notFilter;
-	}
-
-	public List<UUID> getControllerId() {
-		return controllerId;
-	}
-
-	public void setNotController(boolean notController) {
-		this.notController = notController;
+		return super.match(spell);
 	}
 
 	@Override

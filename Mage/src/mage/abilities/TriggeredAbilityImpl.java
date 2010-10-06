@@ -63,14 +63,14 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
 	@Override
 	public void trigger(Game game, UUID controllerId) {
 		//20091005 - 603.4
-		if (checkIfClause(game)) {
+		if (checkInterveningIfClause(game)) {
 			this.controllerId = controllerId;
 			game.addTriggeredAbility(this);
 		}
 	}
 
 	@Override
-	public boolean checkIfClause(Game game) {
+	public boolean checkInterveningIfClause(Game game) {
 		return true;
 	}
 
@@ -84,7 +84,7 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
 			}
 		}
 		//20091005 - 603.4
-		if (checkIfClause(game))
+		if (checkInterveningIfClause(game))
 			return super.resolve(game);
 		return false;
 	}

@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -60,8 +61,11 @@ public class DrawCardAllEffect extends OneShotEffect<DrawCardAllEffect> {
 	@Override
 	public boolean apply(Game game, Ability source) {
 
-		for (Player player: game.getPlayers().values()) {
-			player.drawCards(amount, game);
+		Player sourcePlayer = game.getPlayer(source.getControllerId());
+		for (UUID playerId: sourcePlayer.getInRange()) {
+			Player player = game.getPlayer(playerId);
+			if (player != null)
+				player.drawCards(amount, game);
 		}
 		return true;
 	}

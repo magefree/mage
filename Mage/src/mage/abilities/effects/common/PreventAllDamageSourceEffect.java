@@ -61,7 +61,12 @@ public class PreventAllDamageSourceEffect extends PreventionEffectImpl<PreventAl
 
 	@Override
 	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		event.setAmount(0);
+		GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount());
+		if (!game.replaceEvent(preventEvent)) {
+			int damage = event.getAmount();
+			event.setAmount(0);
+			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
+		}
 		return false;
 	}
 

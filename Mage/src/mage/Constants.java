@@ -90,6 +90,7 @@ public final class Constants {
 
 	public enum Rarity {
 
+		NA ("na", "na"),
 		LAND ("Land", "common"),
 		COMMON ("Common", "common"),
 		UNCOMMON ("Uncommon", "uncommon"),
@@ -136,6 +137,16 @@ public final class Constants {
 		public String toString() {
 			return text;
 		}
+	}
+
+	public enum AsThoughEffectType {
+		BLOCK,
+		BE_BLOCKED,
+		ATTACK,
+		CAST,
+		TARGET,
+		PAY,
+		DAMAGE
 	}
 
 	public enum Duration {

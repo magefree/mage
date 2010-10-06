@@ -39,19 +39,19 @@ import mage.target.TargetPermanent;
 public class TargetLandPermanent<T extends TargetLandPermanent<T>> extends TargetPermanent<TargetLandPermanent<T>> {
 
 	public TargetLandPermanent() {
-		this(1, 1, new FilterLandPermanent(), TargetController.ANY, false);
+		this(1, 1, new FilterLandPermanent(), false);
 	}
 
 	public TargetLandPermanent(FilterLandPermanent filter) {
-		this(1, 1, filter, TargetController.ANY, false);
+		this(1, 1, filter, false);
 	}
 
-	public TargetLandPermanent(int numTargets, TargetController controller) {
-		this(numTargets, numTargets, new FilterLandPermanent(), controller, false);
+	public TargetLandPermanent(int numTargets) {
+		this(numTargets, numTargets, new FilterLandPermanent(), false);
 	}
 
-	public TargetLandPermanent(int minNumTargets, int maxNumTargets, FilterLandPermanent filter, TargetController controller, boolean notTarget) {
-		super(1, 1, filter, controller, notTarget);
+	public TargetLandPermanent(int minNumTargets, int maxNumTargets, FilterLandPermanent filter, boolean notTarget) {
+		super(1, 1, filter, notTarget);
 		this.targetName = filter.getMessage();
 	}
 

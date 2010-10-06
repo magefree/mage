@@ -37,20 +37,12 @@ import mage.Constants.Outcome;
  */
 public abstract class ReplacementEffectImpl<T extends ReplacementEffectImpl<T>> extends ContinuousEffectImpl<T> implements ReplacementEffect<T> {
 
-	protected boolean used = false;
-
 	public ReplacementEffectImpl(Duration duration, Outcome outcome) {
 		super(duration, outcome);
 	}
 
 	public ReplacementEffectImpl(final ReplacementEffectImpl effect) {
 		super(effect);
-		this.used = effect.used;
-	}
-
-	@Override
-	public boolean isUsed() {
-		return used;
 	}
 
 }

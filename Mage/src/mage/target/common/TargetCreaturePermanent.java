@@ -28,7 +28,6 @@
 
 package mage.target.common;
 
-import mage.Constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 
@@ -39,19 +38,19 @@ import mage.target.TargetPermanent;
 public class TargetCreaturePermanent<T extends TargetCreaturePermanent<T>> extends TargetPermanent<TargetCreaturePermanent<T>> {
 
 	public TargetCreaturePermanent() {
-		this(1, 1, FilterCreaturePermanent.getDefault(), TargetController.ANY, false);
+		this(1, 1, FilterCreaturePermanent.getDefault(), false);
 	}
 
 	public TargetCreaturePermanent(FilterCreaturePermanent filter) {
-		this(1, 1, filter, TargetController.ANY, false);
+		this(1, 1, filter, false);
 	}
 
-	public TargetCreaturePermanent(int numTargets, TargetController controller) {
-		this(numTargets, numTargets, FilterCreaturePermanent.getDefault(), controller, false);
+	public TargetCreaturePermanent(int numTargets) {
+		this(numTargets, numTargets, FilterCreaturePermanent.getDefault(), false);
 	}
 
-	public TargetCreaturePermanent(int minNumTargets, int maxNumTargets, FilterCreaturePermanent filter, TargetController controller, boolean notTarget) {
-		super(1, 1, filter, controller, notTarget);
+	public TargetCreaturePermanent(int minNumTargets, int maxNumTargets, FilterCreaturePermanent filter, boolean notTarget) {
+		super(1, 1, filter, notTarget);
 		this.targetName = filter.getMessage();
 	}
 

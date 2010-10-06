@@ -57,4 +57,8 @@ public class ZoneChangeEvent extends GameEvent {
 	public Zone getToZone() {
 		return toZone;
 	}
+
+	public void setToZone(Zone toZone) {
+		this.toZone = toZone;
+	}
 }

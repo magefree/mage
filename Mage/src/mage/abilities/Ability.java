@@ -58,6 +58,8 @@ public interface Ability extends Serializable {
 	public void addManaCost(ManaCost cost);
 	public List<AlternativeCost> getAlternativeCosts();
 	public void addAlternativeCost(AlternativeCost cost);
+	public Costs<Cost> getOptionalCosts();
+	public void addOptionalCost(Cost cost);
 	public Effects getEffects();
 	public void addEffect(Effect effect);
 	public Targets getTargets();
@@ -71,6 +73,7 @@ public interface Ability extends Serializable {
 	public boolean activate(Game game, boolean noMana);
 	public boolean resolve(Game game);
 	public void reset(Game game);
+	public boolean checkIfClause(Game game);
 
 	public void setControllerId(UUID controllerId);
 	public void setSourceId(UUID sourceID);

@@ -26,53 +26,33 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.costs.common;
+package mage.abilities.effects;
 
-import java.util.UUID;
+import mage.Constants.AsThoughEffectType;
+import mage.Constants.Duration;
 import mage.Constants.Outcome;
-import mage.Constants.Zone;
-import mage.abilities.costs.CostImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnToHandTargetCost extends CostImpl<ReturnToHandTargetCost> {
+public abstract class AsThoughEffectImpl<T extends AsThoughEffectImpl<T>> extends ContinuousEffectImpl<T> implements AsThoughEffect<T> {
 
-	public ReturnToHandTargetCost(TargetControlledPermanent target) {
-		this.addTarget(target);
-		this.text = "return " + target.getTargetName() + " you control to it's owner's hand";
+	protected AsThoughEffectType type;
+
+	public AsThoughEffectImpl(AsThoughEffectType type, Duration duration, Outcome outcome) {
+		super(duration, outcome);
+		this.type = type;
 	}
 
-	public ReturnToHandTargetCost(ReturnToHandTargetCost cost) {
-		super(cost);
-	}
-
-	@Override
-	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		if (targets.choose(Outcome.ReturnToHand, controllerId, game)) {
-			for (UUID targetId: targets.get(0).getTargets()) {
-				Permanent permanent = game.getPermanent(targetId);
-				if (permanent == null)
-					return false;
-				paid |= permanent.moveToZone(Zone.HAND, game, false);
-			}
-		}
-		return paid;
+	public AsThoughEffectImpl(final AsThoughEffectImpl effect) {
+		super(effect);
+		this.type = effect.type;
 	}
 
 	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return targets.canChoose(controllerId, controllerId, game);
+	public AsThoughEffectType getAsThoughEffectType() {
+		return type;
 	}
-
-	@Override
-	public ReturnToHandTargetCost copy() {
-		return new ReturnToHandTargetCost(this);
-	}
-
 
 }

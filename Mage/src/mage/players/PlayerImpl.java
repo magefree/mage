@@ -259,7 +259,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DRAW_CARD, null, playerId))) {
 			Card card = getLibrary().removeFromTop(game);
 			if (card != null) {
-				putInHand(card, game);
+				card.moveToZone(Zone.HAND, game, false);
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DREW_CARD, card.getId(), playerId));
 				return true;
 			}
@@ -293,8 +293,6 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	public boolean putInHand(Card card, Game game) {
 		if (card.getOwnerId().equals(playerId)) {
 			this.hand.add(card);
-//			if (card.getSpellAbility() != null)
-//				card.getSpellAbility().clear();
 		} else {
 			return game.getPlayer(card.getOwnerId()).putInHand(card, game);
 		}
@@ -330,32 +328,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		//20091005 - 701.1
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DISCARD_CARD, playerId, playerId))) {
 			removeFromHand(card, game);
-			putInGraveyard(card, game, false);
-			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, playerId, playerId));
-			return true;
+			if (card.moveToZone(Zone.GRAVEYARD, game, false)) {
+				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, playerId, playerId));
+				return true;
+			}
 		}
 		return false;
-	}
-
-	@Override
-	public boolean putOntoBattlefield(Card card, Game game) {
-		PermanentCard permanent = new PermanentCard(card, playerId);
-		putOntoBattlefield(permanent, game);
-		return true;
-	}
-
-	@Override
-	public boolean putOntoBattlefield(Token token, Game game) {
-		PermanentToken permanent = new PermanentToken(token, playerId, playerId);
-		putOntoBattlefield(permanent, game);
-		return true;
-	}
-
-	protected void putOntoBattlefield(Permanent permanent, Game game) {
-		game.getBattlefield().addPermanent(permanent);
-		permanent.entersBattlefield(game);
-		game.applyEffects();
-		game.fireEvent(new ZoneChangeEvent(permanent.getId(), playerId, Zone.ALL, Zone.BATTLEFIELD));
 	}
 
 	@Override
@@ -414,7 +392,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), playerId))) {
 			game.bookmarkState();
 			removeFromHand(card, game);
-			if (putOntoBattlefield(card, game)) {
+			if (card.putOntoBattlefield(game, Zone.HAND, playerId)) {
 				landsPlayed++;
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED, card.getId(), playerId));
 				game.fireInformEvent(name + " plays " + card.getName());

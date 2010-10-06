@@ -30,24 +30,29 @@ package mage.target.common;
 
 import mage.Constants.TargetController;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetControlledPermanent extends TargetPermanent<TargetControlledPermanent> {
+public class TargetControlledPermanent<T extends TargetControlledPermanent<T>> extends TargetPermanent<TargetControlledPermanent<T>> {
 
 	public TargetControlledPermanent() {
-		this(1, 1, new FilterPermanent(), false);
+		this(1, 1, new FilterControlledPermanent(), false);
 	}
 
 	public TargetControlledPermanent(int numTargets) {
-		this(numTargets, numTargets, new FilterPermanent(), false);
+		this(numTargets, numTargets, new FilterControlledPermanent(), false);
 	}
 
-	public TargetControlledPermanent(int minNumTargets, int maxNumTargets, FilterPermanent filter, boolean notTarget) {
-		super(1, 1, filter, TargetController.YOU, notTarget);
+	public TargetControlledPermanent(FilterControlledPermanent filter) {
+		this(1, 1, filter, false);
+	}
+
+	public TargetControlledPermanent(int minNumTargets, int maxNumTargets, FilterControlledPermanent filter, boolean notTarget) {
+		super(1, 1, filter, notTarget);
 		this.targetName = filter.getMessage();
 	}
 

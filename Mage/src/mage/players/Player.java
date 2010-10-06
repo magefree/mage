@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.Constants.Outcome;
+import mage.Constants.Zone;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Abilities;
@@ -95,9 +96,6 @@ public interface Player extends MageItem, Copyable<Player> {
 	public boolean cast(SpellAbility ability, Game game, boolean noMana);
 	public boolean putInHand(Card card, Game game);
 	public boolean removeFromHand(Card card, Game game);
-	public boolean putOntoBattlefield(Card card, Game game);
-//	public boolean putOntoBattlefield(Card copy, Card card, Game game);
-	public boolean putOntoBattlefield(Token token, Game game);
 	public boolean removeFromBattlefield(Permanent permanent, Game game);
 	public boolean putInGraveyard(Card card, Game game, boolean fromBattlefield);
 	public boolean removeFromGraveyard(Card card, Game game);

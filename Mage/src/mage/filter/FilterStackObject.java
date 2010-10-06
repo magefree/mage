@@ -31,16 +31,19 @@ package mage.filter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.Constants.TargetController;
+import mage.game.Game;
 import mage.game.stack.StackObject;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterStackObject extends FilterObject<StackObject, FilterStackObject> {
+public class FilterStackObject<T extends FilterStackObject<T>> extends FilterObject<StackObject, FilterStackObject<T>> {
 
 	protected List<UUID> controllerId = new ArrayList<UUID>();
 	protected boolean notController = false;
+	protected TargetController controller = TargetController.ANY;
 
 	public FilterStackObject() {
 		super("spell or ability");
@@ -50,12 +53,13 @@ public class FilterStackObject extends FilterObject<StackObject, FilterStackObje
 		super(name);
 	}
 
-	public FilterStackObject(final FilterStackObject filter) {
+	public FilterStackObject(final FilterStackObject<T> filter) {
 		super(filter);
 		for (UUID cId: filter.controllerId) {
 			this.controllerId.add(cId);
 		}
 		this.notController = filter.notController;
+		this.controller = filter.controller;
 	}
 
 	@Override
@@ -70,12 +74,40 @@ public class FilterStackObject extends FilterObject<StackObject, FilterStackObje
 		return !notFilter;
 	}
 
+	public boolean match(StackObject spell, UUID playerId, Game game) {
+		if (!this.match(spell))
+			return notFilter;
+
+		if (controller != TargetController.ANY && playerId != null) {
+			switch(controller) {
+				case YOU:
+					if (!spell.getControllerId().equals(playerId))
+						return notFilter;
+					break;
+				case OPPONENT:
+					if (!game.getOpponents(playerId).contains(spell.getControllerId()))
+						return notFilter;
+					break;
+				case NOT_YOU:
+					if (spell.getControllerId().equals(playerId))
+						return notFilter;
+					break;
+			}
+		}
+
+		return !notFilter;
+	}
+
 	public List<UUID> getControllerId() {
 		return controllerId;
 	}
 
 	public void setNotController(boolean notController) {
 		this.notController = notController;
+	}
+
+	public void setTargetController(TargetController controller) {
+		this.controller = controller;
 	}
 
 	@Override

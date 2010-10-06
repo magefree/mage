@@ -73,11 +73,12 @@ public class PutOnLibraryTargetEffect extends OneShotEffect<PutOnLibraryTargetEf
 				for (Player player: game.getPlayers().values()) {
 					if (player.getGraveyard().contains(card.getId())) {
 						player.getGraveyard().remove(card);
-						if (onTop)
-							player.getLibrary().putOnTop(card, game);
-						else
-							player.getLibrary().putOnBottom(card, game);
-						return true;
+						return card.moveToZone(Zone.LIBRARY, game, onTop);
+//						if (onTop)
+//							player.getLibrary().putOnTop(card, game);
+//						else
+//							player.getLibrary().putOnBottom(card, game);
+//						return true;
 					}
 				}
 		}

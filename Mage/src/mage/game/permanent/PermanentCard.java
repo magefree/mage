@@ -112,27 +112,11 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 
 	@Override
 	public boolean moveToZone(Zone zone, Game game, boolean flag) {
-		if (!game.replaceEvent(new ZoneChangeEvent(this.getId(), this.getControllerId(), Zone.BATTLEFIELD, zone))) {
+		ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), this.getControllerId(), Zone.BATTLEFIELD, zone);
+		if (!game.replaceEvent(event)) {
 			if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
-				switch (zone) {
-					case GRAVEYARD:
-						game.getPlayer(ownerId).putInGraveyard(game.getCard(objectId), game, !flag);
-						break;
-					case HAND:
-						game.getPlayer(ownerId).getHand().add(game.getCard(objectId));
-						break;
-					case EXILED:
-						game.getExile().getPermanentExile().add(game.getCard(objectId));
-						break;
-					case LIBRARY:
-						if (flag)
-							game.getPlayer(ownerId).getLibrary().putOnTop(game.getCard(objectId), game);
-						else
-							game.getPlayer(ownerId).getLibrary().putOnBottom(game.getCard(objectId), game);
-
-				}
-				game.fireEvent(new ZoneChangeEvent(this.getId(), this.getControllerId(), Zone.BATTLEFIELD, zone));
-				return true;
+				Card card = game.getCard(objectId);
+				return card.moveToZone(event.getToZone(), game, flag);
 			}
 		}
 		return false;
@@ -140,17 +124,8 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 
 	@Override
 	public boolean moveToExile(UUID exileId, String name, Game game) {
-		if (!game.replaceEvent(new ZoneChangeEvent(this.getId(), this.getControllerId(), Zone.BATTLEFIELD, Zone.EXILED))) {
-			if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
-				if (exileId == null) {
-					game.getExile().getPermanentExile().add(game.getCard(objectId));
-				}
-				else {
-					game.getExile().createZone(exileId, name).add(game.getCard(objectId));
-				}
-				game.fireEvent(new ZoneChangeEvent(this.getId(), this.getControllerId(), Zone.BATTLEFIELD, Zone.EXILED));
-				return true;
-			}
+		if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
+			return game.getCard(objectId).moveToExile(exileId, name, game);
 		}
 		return false;
 	}

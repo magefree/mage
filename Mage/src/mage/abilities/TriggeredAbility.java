@@ -40,6 +40,6 @@ public interface TriggeredAbility extends Ability {
 
 	public void trigger(Game game, UUID controllerId);
 	public boolean checkTrigger(GameEvent event, Game game);
-	public boolean checkIfClause(Game game);
+	public boolean checkInterveningIfClause(Game game);
 
 }

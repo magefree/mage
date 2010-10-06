@@ -87,7 +87,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount<TargetCreatureOrP
 		MageObject targetSource = game.getObject(source.getSourceId());
 		if (permanent != null) {
 			if (source != null)
-				return permanent.canBeTargetedBy(targetSource) && filter.match(permanent);
+				return permanent.canBeTargetedBy(targetSource) && filter.match(permanent, source.getControllerId(), game);
 			else
 				return filter.match(permanent);
 		}
@@ -113,7 +113,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount<TargetCreatureOrP
 			}
 		}
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
-			if (permanent.canBeTargetedBy(targetSource) && filter.match(permanent)) {
+			if (permanent.canBeTargetedBy(targetSource) && filter.match(permanent, sourceControllerId, game)) {
 				count++;
 				if (count >= this.minNumberOfTargets)
 					return true;
@@ -133,7 +133,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount<TargetCreatureOrP
 			}
 		}
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
-			if (permanent.canBeTargetedBy(targetSource) && filter.match(permanent)) {
+			if (permanent.canBeTargetedBy(targetSource) && filter.match(permanent, sourceControllerId, game)) {
 				possibleTargets.put(permanent.getValue().hashCode(), permanent.getId());
 			}
 		}

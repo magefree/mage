@@ -35,6 +35,7 @@ import mage.Constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.common.AttachEffect;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,9 +44,15 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class EquipAbility extends ActivatedAbilityImpl<EquipAbility> {
 
+	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
+
+	static {
+		filter.setTargetController(TargetController.YOU);
+	}
+
 	public EquipAbility(Outcome outcome, Cost cost) {
 		super(Zone.BATTLEFIELD, new AttachEffect(outcome), cost);
-		this.addTarget(new TargetCreaturePermanent(1, TargetController.YOU));
+		this.addTarget(new TargetCreaturePermanent(filter));
 		this.timing = TimingRule.SORCERY;
 	}
 

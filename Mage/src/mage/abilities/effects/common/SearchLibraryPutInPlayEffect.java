@@ -31,6 +31,7 @@ package mage.abilities.effects.common;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.Outcome;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
@@ -78,7 +79,7 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect<SearchLibraryPutI
 				for (UUID cardId: (List<UUID>)target.getTargets()) {
 					Card card = player.getLibrary().remove(cardId, game);
 					if (card != null) {
-						if (player.putOntoBattlefield(card, game)) {
+						if (card.putOntoBattlefield(game, Zone.HAND, source.getControllerId())) {
 							if (tapped) {
 								Permanent permanent = game.getPermanent(card.getId());
 								if (permanent != null)
@@ -110,11 +111,5 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect<SearchLibraryPutI
 		sb.append(". Then shuffle your library");
 		return sb.toString();
 	}
-
-//	@Override
-//	public void setSource(Ability ability) {
-//		super.setSource(ability);
-//		target.setAbility(ability);
-//	}
 
 }

@@ -61,5 +61,4 @@ public abstract class PreventionEffectImpl<T extends PreventionEffectImpl<T>> ex
 		}
 	}
 
-
 }
