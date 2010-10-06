@@ -95,7 +95,7 @@ class HowlingMineAbility extends TriggeredAbilityImpl<HowlingMineAbility> {
 	}
 
 	@Override
-	public boolean checkIfClause(Game game) {
+	public boolean checkInterveningIfClause(Game game) {
 		return !game.getPermanent(this.sourceId).isTapped();
 	}
 

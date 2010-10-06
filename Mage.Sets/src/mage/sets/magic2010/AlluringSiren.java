@@ -40,9 +40,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.RequirementAttackEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -52,6 +51,12 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AlluringSiren extends CardImpl<AlluringSiren> {
 
+	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+
+	static {
+		filter.setTargetController(TargetController.OPPONENT);
+	}
+
 	public AlluringSiren(UUID ownerId) {
 		super(ownerId, "Alluring Siren", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
 		this.expansionSetCode = "M10";
@@ -60,9 +65,7 @@ public class AlluringSiren extends CardImpl<AlluringSiren> {
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
 		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AlluringSirenEffect(), new TapSourceCost());
-		TargetCreaturePermanent target = new TargetCreaturePermanent();
-		target.setTargetController(TargetController.OPPONENT);
-		ability.addTarget(target);
+		ability.addTarget(new TargetCreaturePermanent(filter));
 		this.addAbility(ability);
 	}
 

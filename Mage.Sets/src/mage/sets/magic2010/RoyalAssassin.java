@@ -31,14 +31,13 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -47,6 +46,13 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LokiX
  */
 public class RoyalAssassin extends CardImpl<RoyalAssassin> {
+
+    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
+
+	static {
+		filter.setUseTapped(true);
+		filter.setTapped(true);
+	}
 
     public RoyalAssassin(UUID onwerId){
         super(onwerId,"Royal Assassin", Rarity.RARE, new CardType[]{CardType.CREATURE},"{1}{B}{B}");
@@ -57,7 +63,9 @@ public class RoyalAssassin extends CardImpl<RoyalAssassin> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new RoyalAssassinAbility());
+		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
+		ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
     }
 
 	public RoyalAssassin(final RoyalAssassin card) {
@@ -73,32 +81,4 @@ public class RoyalAssassin extends CardImpl<RoyalAssassin> {
 	public String getArt() {
 		return "48786_typ_reg_sty_010.jpg";
 	}
-}
-
-class RoyalAssassinAbility extends ActivatedAbilityImpl<RoyalAssassinAbility> {
-
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
-
-	static {
-		filter.setUseTapped(true);
-		filter.setScopeColor(ComparisonScope.Any);
-		filter.setTapped(true);
-	}
-
-    public RoyalAssassinAbility(){
-        super(Zone.BATTLEFIELD, null);
-        addTarget(new TargetCreaturePermanent(1, 1, filter, TargetController.ANY, false));
-        addCost(new TapSourceCost());
-        addEffect(new DestroyTargetEffect());
-    }
-
-	public RoyalAssassinAbility(final RoyalAssassinAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public RoyalAssassinAbility copy() {
-		return new RoyalAssassinAbility(this);
-	}
-
 }

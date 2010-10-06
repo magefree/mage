@@ -41,4 +41,13 @@ public class Cancel extends mage.sets.shardsofalara.Cancel {
 		this.expansionSetCode = "M10";
 	}
 
+	public Cancel(final Cancel card) {
+		super(card);
+	}
+
+	@Override
+	public Cancel copy() {
+		return new Cancel(this);
+	}
+
 }

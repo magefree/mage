@@ -41,4 +41,13 @@ public class DemonsHorn extends mage.sets.tenth.DemonsHorn {
 		this.expansionSetCode = "M11";
 	}
 
+	public DemonsHorn(final DemonsHorn card) {
+		super(card);
+	}
+
+	@Override
+	public DemonsHorn copy() {
+		return new DemonsHorn(this);
+	}
+
 }

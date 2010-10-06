@@ -41,4 +41,13 @@ public class IceCage extends mage.sets.magic2010.IceCage {
 		this.expansionSetCode = "M11";
 	}
 
+	public IceCage(final IceCage card) {
+		super(card);
+	}
+
+	@Override
+	public IceCage copy() {
+		return new IceCage(this);
+	}
+
 }

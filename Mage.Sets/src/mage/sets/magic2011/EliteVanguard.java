@@ -41,4 +41,13 @@ public class EliteVanguard extends mage.sets.magic2010.EliteVanguard {
 		this.expansionSetCode = "M11";
 	}
 
+	public EliteVanguard(final EliteVanguard card) {
+		super(card);
+	}
+
+	@Override
+	public EliteVanguard copy() {
+		return new EliteVanguard(this);
+	}
+
 }

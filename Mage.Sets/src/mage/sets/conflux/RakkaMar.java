@@ -59,8 +59,8 @@ public class RakkaMar extends CardImpl<RakkaMar> {
         this.color.setRed(true);
         this.power = new MageInt(2);
 	this.toughness = new MageInt(2);
-        this.abilities.add(HasteAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(token), new ManaCostsImpl("{1}{R}"));
+        this.addAbility(HasteAbility.getInstance());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(token), new ManaCostsImpl("{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -87,7 +87,7 @@ public class RakkaMar extends CardImpl<RakkaMar> {
             subtype.add("Elemental");
             power = new MageInt(3);
             toughness = new MageInt(1);
-            abilities.add(HasteAbility.getInstance());
+            addAbility(HasteAbility.getInstance());
         }
     }
 

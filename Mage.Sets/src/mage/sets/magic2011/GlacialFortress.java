@@ -41,4 +41,13 @@ public class GlacialFortress extends mage.sets.magic2010.GlacialFortress {
 		this.expansionSetCode = "M11";
 	}
 
+	public GlacialFortress(final GlacialFortress card) {
+		super(card);
+	}
+
+	@Override
+	public GlacialFortress copy() {
+		return new GlacialFortress(this);
+	}
+
 }

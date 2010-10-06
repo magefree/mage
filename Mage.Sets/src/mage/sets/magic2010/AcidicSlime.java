@@ -68,7 +68,7 @@ public class AcidicSlime extends CardImpl<AcidicSlime> {
 
 		this.addAbility(DeathtouchAbility.getInstance());
 		Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-		Target target = new TargetPermanent(filter, TargetController.ANY);
+		Target target = new TargetPermanent(filter);
 		target.setRequired(true);
 		ability.addTarget(target);
 		this.addAbility(ability);

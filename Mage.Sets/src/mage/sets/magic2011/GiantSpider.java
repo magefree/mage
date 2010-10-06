@@ -41,5 +41,14 @@ public class GiantSpider extends mage.sets.tenth.GiantSpider {
 		this.expansionSetCode = "M11";
 	}
 
+	public GiantSpider(final GiantSpider card) {
+		super(card);
+	}
+
+	@Override
+	public GiantSpider copy() {
+		return new GiantSpider(this);
+	}
+
 }
 

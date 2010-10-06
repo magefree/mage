@@ -43,11 +43,10 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -60,7 +59,7 @@ public class JinxedIdol extends CardImpl<JinxedIdol> {
 		super(ownerId, "Jinxed Idol", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
 		this.expansionSetCode = "M11";
 		this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new DamageControllerEffect(2)));
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JinxedIdolEffect(), new SacrificeTargetCost(new TargetControlledPermanent(1, 1, FilterCreaturePermanent.getDefault(), true)));
+		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JinxedIdolEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
 		ability.addTarget(new TargetOpponent());
 		this.addAbility(ability);
 	}

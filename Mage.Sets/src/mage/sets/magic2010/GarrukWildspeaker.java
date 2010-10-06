@@ -32,7 +32,6 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.TargetController;
 import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.Effects;
@@ -62,7 +61,7 @@ public class GarrukWildspeaker extends CardImpl<GarrukWildspeaker> {
 		this.loyalty = new MageInt(3);
 
 		LoyaltyAbility ability1 = new LoyaltyAbility(new UntapTargetEffect(), 1);
-		ability1.addTarget(new TargetLandPermanent(2, TargetController.ANY));
+		ability1.addTarget(new TargetLandPermanent(2));
 		this.addAbility(ability1);
 
 		this.addAbility(new LoyaltyAbility(new CreateTokenEffect(beastToken), -1));

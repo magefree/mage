@@ -41,4 +41,13 @@ public class CanyonMinotaur extends mage.sets.conflux.CanyonMinotaur {
 		this.expansionSetCode = "M11";
 	}
 
+	public CanyonMinotaur(final CanyonMinotaur card) {
+		super(card);
+	}
+
+	@Override
+	public CanyonMinotaur copy() {
+		return new CanyonMinotaur(this);
+	}
+
 }

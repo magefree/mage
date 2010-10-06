@@ -41,4 +41,13 @@ public class Fireball extends mage.sets.magic2010.Fireball {
 		this.expansionSetCode = "M11";
 	}
 
+	public Fireball(final Fireball card) {
+		super(card);
+	}
+
+	@Override
+	public Fireball copy() {
+		return new Fireball(this);
+	}
+
 }

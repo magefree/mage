@@ -41,4 +41,13 @@ public class CloudElemental extends mage.sets.tenth.CloudElemental {
 		this.expansionSetCode = "M11";
 	}
 
+	public CloudElemental(final CloudElemental card) {
+		super(card);
+	}
+
+	@Override
+	public CloudElemental copy() {
+		return new CloudElemental(this);
+	}
+
 }

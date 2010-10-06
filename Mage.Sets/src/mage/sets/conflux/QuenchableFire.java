@@ -109,6 +109,11 @@ class QuenchableFireEffect extends OneShotEffect<QuenchableFireEffect> {
 		game.getState().getSpecialActions().add(newAction);
 		return true;
 	}
+
+	@Override
+	public String getText(Ability source) {
+		return "{this} deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step";
+	}
 	
 }
 
@@ -146,11 +151,6 @@ class QuenchableFireDelayedTriggeredAbility extends DelayedTriggeredAbility<Quen
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public String getRule() {
-		return "{this} deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step";
 	}
 
 }

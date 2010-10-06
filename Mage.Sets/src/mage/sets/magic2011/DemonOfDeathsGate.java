@@ -32,15 +32,16 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -79,7 +80,7 @@ public class DemonOfDeathsGate extends CardImpl<DemonOfDeathsGate> {
 }
 
 class DemonOfDeathsGateAlternativeCost extends AlternativeCost<DemonOfDeathsGateAlternativeCost> {
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("black creature");
+	private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("black creature");
 
 	static {
 		filter.getColor().setBlack(true);

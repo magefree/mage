@@ -41,4 +41,13 @@ public class AngelsFeather extends mage.sets.tenth.AngelsFeather {
 		this.expansionSetCode = "M11";
 	}
 
+	public AngelsFeather(final AngelsFeather card) {
+		super(card);
+	}
+
+	@Override
+	public AngelsFeather copy() {
+		return new AngelsFeather(this);
+	}
+
 }

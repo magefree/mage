@@ -41,4 +41,13 @@ public class GoblinPiker extends mage.sets.tenth.GoblinPiker {
 		this.expansionSetCode = "M11";
 	}
 
+	public GoblinPiker(final GoblinPiker card) {
+		super(card);
+	}
+
+	@Override
+	public GoblinPiker copy() {
+		return new GoblinPiker(this);
+	}
+
 }

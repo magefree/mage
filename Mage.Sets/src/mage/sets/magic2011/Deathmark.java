@@ -41,4 +41,13 @@ public class Deathmark extends mage.sets.magic2010.Deathmark {
 		this.expansionSetCode = "M11";
 	}
 
+	public Deathmark(final Deathmark card) {
+		super(card);
+	}
+
+	@Override
+	public Deathmark copy() {
+		return new Deathmark(this);
+	}
+
 }

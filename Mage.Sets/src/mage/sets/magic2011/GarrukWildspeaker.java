@@ -41,4 +41,13 @@ public class GarrukWildspeaker extends mage.sets.magic2010.GarrukWildspeaker {
 		this.expansionSetCode = "M11";
 	}
 
+	public GarrukWildspeaker(final GarrukWildspeaker card) {
+		super(card);
+	}
+
+	@Override
+	public GarrukWildspeaker copy() {
+		return new GarrukWildspeaker(this);
+	}
+
 }

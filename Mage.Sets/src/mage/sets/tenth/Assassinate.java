@@ -31,7 +31,6 @@ package mage.sets.tenth;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.TargetController;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
@@ -54,7 +53,7 @@ public class Assassinate extends CardImpl<Assassinate> {
 		super(ownerId, "Assassinate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
 		this.expansionSetCode = "M10";
 		this.color.setBlack(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent(1, 1, filter, TargetController.ANY, false));
+		this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
 		this.getSpellAbility().addEffect(new DestroyTargetEffect());
 
 	}

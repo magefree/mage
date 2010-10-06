@@ -68,10 +68,8 @@ public class HoardingDragon extends CardImpl<HoardingDragon> {
 		this.toughness = new MageInt(4);
 
 		this.addAbility(FlyingAbility.getInstance());
-		Ability ability1 = new EntersBattlefieldTriggeredAbility(new HoardingDragonEffect(this.getId()), true);
-		this.addAbility(ability1);
-		Ability ability2 = new PutIntoGraveFromBattlefieldTriggeredAbility(new ReturnFromExileEffect(this.getId(), Zone.BATTLEFIELD), true);
-		this.addAbility(ability2);
+		this.addAbility(new EntersBattlefieldTriggeredAbility(new HoardingDragonEffect(this.getId()), true));
+		this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new ReturnFromExileEffect(this.getId(), Zone.BATTLEFIELD), true));
 	}
 
 	public HoardingDragon(final HoardingDragon card) {

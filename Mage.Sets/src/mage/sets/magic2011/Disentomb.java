@@ -41,4 +41,13 @@ public class Disentomb extends mage.sets.magic2010.Disentomb {
 		this.expansionSetCode = "M11";
 	}
 
+	public Disentomb(final Disentomb card) {
+		super(card);
+	}
+
+	@Override
+	public Disentomb copy() {
+		return new Disentomb(this);
+	}
+
 }

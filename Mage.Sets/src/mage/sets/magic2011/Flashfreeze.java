@@ -41,4 +41,13 @@ public class Flashfreeze extends mage.sets.tenth.Flashfreeze {
 		this.expansionSetCode = "M11";
 	}
 
+	public Flashfreeze(final Flashfreeze card) {
+		super(card);
+	}
+
+	@Override
+	public Flashfreeze copy() {
+		return new Flashfreeze(this);
+	}
+
 }

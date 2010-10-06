@@ -41,4 +41,13 @@ public class JaceBeleren extends mage.sets.magic2010.JaceBeleren {
 		this.expansionSetCode = "M11";
 	}
 
+	public JaceBeleren(final JaceBeleren card) {
+		super(card);
+	}
+
+	@Override
+	public JaceBeleren copy() {
+		return new JaceBeleren(this);
+	}
+
 }

@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -53,7 +54,7 @@ public class Fling extends CardImpl<Fling> {
 		super(ownerId, "Fling", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
 		this.expansionSetCode = "M11";
 		this.color.setRed(true);
-		this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, FilterCreaturePermanent.getDefault(), true)));
+		this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
 		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 		this.getSpellAbility().addEffect(new FlingEffect());
 	}

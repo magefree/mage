@@ -46,4 +46,13 @@ public class Deathmark extends mage.sets.tenth.Deathmark {
 		return "122155_typ_reg_sty_010.jpg";
 	}
 
+	public Deathmark(final Deathmark card) {
+		super(card);
+	}
+
+	@Override
+	public Deathmark copy() {
+		return new Deathmark(this);
+	}
+
 }

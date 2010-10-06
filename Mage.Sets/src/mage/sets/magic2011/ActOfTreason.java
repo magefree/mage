@@ -41,4 +41,13 @@ public class ActOfTreason extends mage.sets.magic2010.ActOfTreason {
 		this.expansionSetCode = "M11";
 	}
 
+	public ActOfTreason(final ActOfTreason card) {
+		super(card);
+	}
+
+	@Override
+	public ActOfTreason copy() {
+		return new ActOfTreason(this);
+	}
+
 }

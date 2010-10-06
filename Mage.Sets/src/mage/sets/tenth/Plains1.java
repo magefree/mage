@@ -46,4 +46,13 @@ public class Plains1 extends mage.cards.basiclands.Plains {
 		return "80949_typ_reg_sty_010.jpg";
 	}
 
+	public Plains1(final Plains1 card) {
+		super(card);
+	}
+
+	@Override
+	public Plains1 copy() {
+		return new Plains1(this);
+	}
+
 }

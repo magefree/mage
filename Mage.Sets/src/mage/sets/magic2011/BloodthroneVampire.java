@@ -41,4 +41,13 @@ public class BloodthroneVampire extends mage.sets.riseoftheeldrazi.BloodthroneVa
 		this.expansionSetCode = "M11";
 	}
 
+	public BloodthroneVampire(final BloodthroneVampire card) {
+		super(card);
+	}
+
+	@Override
+	public BloodthroneVampire copy() {
+		return new BloodthroneVampire(this);
+	}
+
 }

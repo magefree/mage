@@ -41,4 +41,13 @@ public class DragonsClaw extends mage.sets.tenth.DragonsClaw {
 		this.expansionSetCode = "M10";
 	}
 
+	public DragonsClaw(final DragonsClaw card) {
+		super(card);
+	}
+
+	@Override
+	public DragonsClaw copy() {
+		return new DragonsClaw(this);
+	}
+
 }

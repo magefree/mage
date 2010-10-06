@@ -41,4 +41,13 @@ public class HolyStrength extends mage.sets.tenth.HolyStrength {
 		this.expansionSetCode = "M10";
 	}
 
+	public HolyStrength(final HolyStrength card) {
+		super(card);
+	}
+
+	@Override
+	public HolyStrength copy() {
+		return new HolyStrength(this);
+	}
+
 }

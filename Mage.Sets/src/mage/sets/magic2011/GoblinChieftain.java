@@ -41,4 +41,13 @@ public class GoblinChieftain extends mage.sets.magic2010.GoblinChieftain {
 		this.expansionSetCode = "M11";
 	}
 
+	public GoblinChieftain(final GoblinChieftain card) {
+		super(card);
+	}
+
+	@Override
+	public GoblinChieftain copy() {
+		return new GoblinChieftain(this);
+	}
+
 }

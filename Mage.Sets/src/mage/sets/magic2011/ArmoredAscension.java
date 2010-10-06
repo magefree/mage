@@ -41,4 +41,13 @@ public class ArmoredAscension extends mage.sets.magic2010.ArmoredAscension {
 		this.expansionSetCode = "M11";
 	}
 
+	public ArmoredAscension(final ArmoredAscension card) {
+		super(card);
+	}
+
+	@Override
+	public ArmoredAscension copy() {
+		return new ArmoredAscension(this);
+	}
+
 }

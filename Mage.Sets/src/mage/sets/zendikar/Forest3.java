@@ -46,4 +46,13 @@ public class Forest3 extends mage.cards.basiclands.Forest {
 		return "123752_typ_reg_sty_010.jpg";
 	}
 
+	public Forest3(final Forest3 card) {
+		super(card);
+	}
+
+	@Override
+	public Forest3 copy() {
+		return new Forest3(this);
+	}
+
 }

@@ -41,4 +41,13 @@ public class GoblinTunneler extends mage.sets.riseoftheeldrazi.GoblinTunneler {
 		this.expansionSetCode = "M11";
 	}
 
+	public GoblinTunneler(final GoblinTunneler card) {
+		super(card);
+	}
+
+	@Override
+	public GoblinTunneler copy() {
+		return new GoblinTunneler(this);
+	}
+
 }

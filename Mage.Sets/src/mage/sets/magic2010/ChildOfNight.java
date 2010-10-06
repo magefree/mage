@@ -49,7 +49,7 @@ public class ChildOfNight extends CardImpl<ChildOfNight> {
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(1);
 
-		this.abilities.add(LifelinkAbility.getInstance());
+		this.addAbility(LifelinkAbility.getInstance());
 	}
 
 	public ChildOfNight(final ChildOfNight card) {

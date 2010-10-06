@@ -41,4 +41,13 @@ public class Fog extends mage.sets.magic2010.Fog {
 		this.expansionSetCode = "M11";
 	}
 
+	public Fog(final Fog card) {
+		super(card);
+	}
+
+	@Override
+	public Fog copy() {
+		return new Fog(this);
+	}
+
 }

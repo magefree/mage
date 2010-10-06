@@ -76,7 +76,7 @@ public class GideonJura extends CardImpl<GideonJura> {
 		this.addAbility(ability1);
 
 		LoyaltyAbility ability2 = new LoyaltyAbility(new DestroyTargetEffect(), -2);
-		ability2.addTarget(new TargetCreaturePermanent(1, 1, filter, TargetController.ANY, false));
+		ability2.addTarget(new TargetCreaturePermanent(filter));
 		this.addAbility(ability2);
 
 		LoyaltyAbility ability3 = new LoyaltyAbility(new BecomesCreatureSourceEOTEffect(new GideonJuraToken(), "planeswalker"), 0);

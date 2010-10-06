@@ -41,4 +41,13 @@ public class AlluringSiren extends mage.sets.magic2010.AlluringSiren {
 		this.expansionSetCode = "M11";
 	}
 
+	public AlluringSiren(final AlluringSiren card) {
+		super(card);
+	}
+
+	@Override
+	public AlluringSiren copy() {
+		return new AlluringSiren(this);
+	}
+
 }

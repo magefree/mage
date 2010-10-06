@@ -94,7 +94,8 @@ class SeeBeyondEffect extends OneShotEffect<SeeBeyondEffect> {
 			Card card = player.getHand().get(target.getFirstTarget(), game);
 			if (card != null) {
 				player.removeFromHand(card, game);
-				player.getLibrary().putOnTop(card, game);
+				card.moveToZone(Zone.LIBRARY, game, true);
+//				player.getLibrary().putOnTop(card, game);
 				player.getLibrary().shuffle();
 				return true;
 			}

@@ -41,4 +41,13 @@ public class Demolish extends mage.sets.zendikar.Demolish {
 		this.expansionSetCode = "M11";
 	}
 
+	public Demolish(final Demolish card) {
+		super(card);
+	}
+
+	@Override
+	public Demolish copy() {
+		return new Demolish(this);
+	}
+
 }

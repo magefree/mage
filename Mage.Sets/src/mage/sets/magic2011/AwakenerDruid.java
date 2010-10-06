@@ -41,4 +41,13 @@ public class AwakenerDruid extends mage.sets.magic2010.AwakenerDruid {
 		this.expansionSetCode = "M11";
 	}
 
+	public AwakenerDruid(final AwakenerDruid card) {
+		super(card);
+	}
+
+	@Override
+	public AwakenerDruid copy() {
+		return new AwakenerDruid(this);
+	}
+
 }

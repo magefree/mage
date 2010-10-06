@@ -41,4 +41,13 @@ public class FieryHellhound extends mage.sets.magic2010.FieryHellhound {
 		this.expansionSetCode = "M11";
 	}
 
+	public FieryHellhound(final FieryHellhound card) {
+		super(card);
+	}
+
+	@Override
+	public FieryHellhound copy() {
+		return new FieryHellhound(this);
+	}
+
 }

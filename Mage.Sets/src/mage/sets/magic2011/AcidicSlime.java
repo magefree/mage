@@ -41,4 +41,13 @@ public class AcidicSlime extends mage.sets.magic2010.AcidicSlime {
 		this.expansionSetCode = "M11";
 	}
 
+	public AcidicSlime(final AcidicSlime card) {
+		super(card);
+	}
+
+	@Override
+	public AcidicSlime copy() {
+		return new AcidicSlime(this);
+	}
+
 }

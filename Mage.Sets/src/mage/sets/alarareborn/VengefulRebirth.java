@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
@@ -96,7 +97,8 @@ class VengefulRebirthEffect extends OneShotEffect<VengefulRebirthEffect> {
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getControllerId());
 		Card card = (Card)game.getObject(source.getFirstTarget());
-		if (player.removeFromGraveyard(card, game) && player.putInHand(card, game)) {
+		if (player.removeFromGraveyard(card, game)) {
+			card.moveToZone(Zone.HAND, game, false);
 			int damage = card.getManaCost().convertedManaCost();
 			if (!card.getCardType().contains(CardType.LAND)) {
 				Permanent permanent = game.getPermanent(source.getTargets().get(1).getTargets().get(0));

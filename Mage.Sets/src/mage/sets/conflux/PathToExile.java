@@ -100,7 +100,7 @@ class PathToExileEffect extends OneShotEffect {
 					player.searchLibrary(target, game);
 					Card card = player.getLibrary().remove(target.getFirstTarget(), game);
 					if (card != null) {
-						if (player.putOntoBattlefield(card, game)) {
+						if (card.putOntoBattlefield(game, Zone.LIBRARY, permanent.getControllerId())) {
 							Permanent land = game.getPermanent(card.getId());
 							if (land != null)
 								land.setTapped(true);

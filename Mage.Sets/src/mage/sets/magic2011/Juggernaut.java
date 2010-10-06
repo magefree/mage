@@ -46,4 +46,13 @@ public class Juggernaut extends mage.sets.tenth.Juggernaut {
 		return "129164_typ_reg_sty_010.jpg";
 	}
 
+	public Juggernaut(final Juggernaut card) {
+		super(card);
+	}
+
+	@Override
+	public Juggernaut copy() {
+		return new Juggernaut(this);
+	}
+
 }

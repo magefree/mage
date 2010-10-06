@@ -29,25 +29,17 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.abilities.effects.common.DiscardTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.TargetPlayer;
 
 /**
  *
- * @author LokiX
+ * @author BetaSteward_at_googlemail.com
  */
-public class MindRot extends CardImpl<MindRot> {
+public class MindRot extends mage.sets.tenth.MindRot {
 
-    public MindRot(UUID onwerId){
-        super(onwerId, "Mind Rot", Rarity.COMMON, new CardType[]{CardType.SORCERY},"{2}{B}");
-        this.expansionSetCode = "M10";
-        this.color.setBlack(true);
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
-    }
+	public MindRot(UUID ownerId) {
+		super(ownerId);
+		this.expansionSetCode = "M10";
+	}
 
 	public MindRot(final MindRot card) {
 		super(card);
@@ -58,8 +50,4 @@ public class MindRot extends CardImpl<MindRot> {
 		return new MindRot(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "04716_typ_reg_sty_001.jpg";
-	}
 }

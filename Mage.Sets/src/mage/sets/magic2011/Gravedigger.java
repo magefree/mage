@@ -41,4 +41,13 @@ public class Gravedigger extends mage.sets.tenth.Gravedigger {
 		this.expansionSetCode = "M11";
 	}
 
+	public Gravedigger(final Gravedigger card) {
+		super(card);
+	}
+
+	@Override
+	public Gravedigger copy() {
+		return new Gravedigger(this);
+	}
+
 }

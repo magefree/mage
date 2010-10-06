@@ -41,4 +41,13 @@ public class BaneslayerAngel extends mage.sets.magic2010.BaneslayerAngel {
 		this.expansionSetCode = "M11";
 	}
 
+	public BaneslayerAngel(final BaneslayerAngel card) {
+		super(card);
+	}
+
+	@Override
+	public BaneslayerAngel copy() {
+		return new BaneslayerAngel(this);
+	}
+
 }

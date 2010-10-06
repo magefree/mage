@@ -46,4 +46,13 @@ public class Demolish extends mage.sets.tenth.Demolish {
 		return "123684_typ_reg_sty_010.jpg";
 	}
 
+	public Demolish(final Demolish card) {
+		super(card);
+	}
+
+	@Override
+	public Demolish copy() {
+		return new Demolish(this);
+	}
+
 }

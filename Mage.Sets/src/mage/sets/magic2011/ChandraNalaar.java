@@ -41,4 +41,13 @@ public class ChandraNalaar extends mage.sets.magic2010.ChandraNalaar {
 		this.expansionSetCode = "M11";
 	}
 
+	public ChandraNalaar(final ChandraNalaar card) {
+		super(card);
+	}
+
+	@Override
+	public ChandraNalaar copy() {
+		return new ChandraNalaar(this);
+	}
+
 }

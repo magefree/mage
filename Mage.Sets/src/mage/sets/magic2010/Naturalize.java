@@ -31,7 +31,6 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.TargetController;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
@@ -56,7 +55,7 @@ public class Naturalize extends CardImpl<Naturalize> {
 		super(onwerId, "Naturalize", Rarity.COMMON, new CardType[]{CardType.INSTANT},"{1}{G}");
 		this.expansionSetCode = "M10";
 		this.color.setGreen(true);
-		this.getSpellAbility().addTarget(new TargetPermanent(filter, TargetController.ANY));
+		this.getSpellAbility().addTarget(new TargetPermanent(filter));
 		this.getSpellAbility().addEffect(new DestroyTargetEffect());
 	}
 

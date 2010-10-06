@@ -41,6 +41,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ScryEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.players.Player;
@@ -91,7 +92,9 @@ class ElixerOfImmortalityEffect extends OneShotEffect<ElixerOfImmortalityEffect>
 		Player player = game.getPlayer(source.getControllerId());
 		player.gainLife(5, game);
 		player.removeFromBattlefield(game.getPermanent(source.getSourceId()), game);
-		player.getLibrary().putOnBottom(game.getCard(source.getSourceId()), game);
+		Card card = game.getCard(source.getSourceId());
+		card.moveToZone(Zone.LIBRARY, game, true);
+//		player.getLibrary().putOnBottom(game.getCard(source.getSourceId()), game);
 		player.getLibrary().addAll(player.getGraveyard().getCards(game));
 		player.getGraveyard().clear();
 		player.getLibrary().shuffle();

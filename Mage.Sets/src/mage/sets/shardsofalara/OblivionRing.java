@@ -56,7 +56,7 @@ public class OblivionRing extends CardImpl<OblivionRing> {
 		filter.setId(this.getId());
 		filter.setNotId(true);
 		Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect(this.getId(), "Oblivion Ring exile"), false);
-		ability1.addTarget(new TargetPermanent(filter, TargetController.ANY));
+		ability1.addTarget(new TargetPermanent(filter));
 		this.addAbility(ability1);
 		Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileEffect(this.getId(), Zone.BATTLEFIELD), false);
 		this.addAbility(ability2);

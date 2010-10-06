@@ -46,4 +46,13 @@ public class Forest2 extends mage.cards.basiclands.Forest {
 		return "121708_typ_reg_sty_010.jpg";
 	}
 
+	public Forest2(final Forest2 card) {
+		super(card);
+	}
+
+	@Override
+	public Forest2 copy() {
+		return new Forest2(this);
+	}
+
 }

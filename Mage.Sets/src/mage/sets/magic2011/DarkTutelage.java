@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -87,7 +88,8 @@ class DarkTutelageEffect extends OneShotEffect<DarkTutelageEffect> {
 		Player player = game.getPlayer(source.getControllerId());
 		Card card = player.getLibrary().removeFromTop(game);
 		if (card != null) {
-			player.putInHand(card, game);
+			card.moveToZone(Zone.HAND, game, false);
+//			player.putInHand(card, game);
 			player.loseLife(card.getManaCost().convertedManaCost(), game);
 			Cards cards = new CardsImpl();
 			cards.add(card);

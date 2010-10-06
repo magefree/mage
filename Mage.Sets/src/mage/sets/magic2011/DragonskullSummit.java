@@ -41,4 +41,13 @@ public class DragonskullSummit extends mage.sets.magic2010.DragonskullSummit {
 		this.expansionSetCode = "M11";
 	}
 
+	public DragonskullSummit(final DragonskullSummit card) {
+		super(card);
+	}
+
+	@Override
+	public DragonskullSummit copy() {
+		return new DragonskullSummit(this);
+	}
+
 }

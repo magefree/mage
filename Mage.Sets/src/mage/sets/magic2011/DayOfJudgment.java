@@ -41,4 +41,13 @@ public class DayOfJudgment extends mage.sets.zendikar.DayOfJudgment {
 		this.expansionSetCode = "M11";
 	}
 
+	public DayOfJudgment(final DayOfJudgment card) {
+		super(card);
+	}
+
+	@Override
+	public DayOfJudgment copy() {
+		return new DayOfJudgment(this);
+	}
+
 }

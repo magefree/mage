@@ -41,4 +41,13 @@ public class CudgelTroll extends mage.sets.magic2010.CudgelTroll {
 		this.expansionSetCode = "M11";
 	}
 
+	public CudgelTroll(final CudgelTroll card) {
+		super(card);
+	}
+
+	@Override
+	public CudgelTroll copy() {
+		return new CudgelTroll(this);
+	}
+
 }

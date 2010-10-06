@@ -41,4 +41,13 @@ public class Condemn extends mage.sets.tenth.Condemn {
 		this.expansionSetCode = "M11";
 	}
 
+	public Condemn(final Condemn card) {
+		super(card);
+	}
+
+	@Override
+	public Condemn copy() {
+		return new Condemn(this);
+	}
+
 }

@@ -41,4 +41,13 @@ public class KrakensEye extends mage.sets.tenth.KrakensEye {
 		this.expansionSetCode = "M10";
 	}
 
+	public KrakensEye(final KrakensEye card) {
+		super(card);
+	}
+
+	@Override
+	public KrakensEye copy() {
+		return new KrakensEye(this);
+	}
+
 }

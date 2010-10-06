@@ -44,9 +44,13 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -57,7 +61,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class CaptivatingVampire extends CardImpl<CaptivatingVampire> {
 
 	private static FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Vampire creatures");
-	private static FilterCreaturePermanent filter2 = new FilterCreaturePermanent("five untapped Vampires");
+	private static FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("five untapped Vampires");
 
 	static {
 		filter1.getSubtype().add("Vampire");
@@ -75,7 +79,7 @@ public class CaptivatingVampire extends CardImpl<CaptivatingVampire> {
 		this.toughness = new MageInt(2);
 
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter1, true)));
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CaptivatingVampireEffect(), new TapTargetCost(new TargetControlledPermanent(5, 5, filter2, true)));
+		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CaptivatingVampireEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(5, 5, filter2, true)));
 		ability.addTarget(new TargetCreaturePermanent());
 		this.addAbility(ability);
 	}

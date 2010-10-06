@@ -29,27 +29,16 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.mana.GreenManaAbility;
-import mage.cards.CardImpl;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LlanowarElves extends CardImpl<LlanowarElves> {
+public class LlanowarElves extends mage.sets.tenth.LlanowarElves {
 
 	public LlanowarElves(UUID ownerId) {
-		super(ownerId, "Llanowar Elves", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+		super(ownerId);
 		this.expansionSetCode = "M10";
-		this.subtype.add("Elf");
-		this.subtype.add("Druid");
-		this.color.setGreen(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-		this.addAbility(new GreenManaAbility());
 	}
 
 	public LlanowarElves(final LlanowarElves card) {
@@ -59,11 +48,6 @@ public class LlanowarElves extends CardImpl<LlanowarElves> {
 	@Override
 	public LlanowarElves copy() {
 		return new LlanowarElves(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "86938_typ_reg_sty_010.jpg";
 	}
 
 }

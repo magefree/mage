@@ -46,4 +46,13 @@ public class Island1 extends mage.cards.basiclands.Island {
 		return "08754_typ_reg_sty_010.jpg";
 	}
 
+	public Island1(final Island1 card) {
+		super(card);
+	}
+
+	@Override
+	public Island1 copy() {
+		return new Island1(this);
+	}
+
 }

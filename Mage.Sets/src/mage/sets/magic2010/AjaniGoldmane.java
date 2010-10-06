@@ -101,7 +101,7 @@ class AvatarToken extends Token {
 		cardType.add(CardType.CREATURE);
 		subtype.add("Avatar");
 		color.setWhite(true);
-		this.abilities.add(new SimpleStaticAbility(Zone.BATTLEFIELD, new AvatarTokenEffect()));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AvatarTokenEffect()));
 	}
 
 }

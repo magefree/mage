@@ -100,7 +100,7 @@ class ScuteMobAbility extends TriggeredAbilityImpl<ScuteMobAbility> {
 	}
 
 	@Override
-	public boolean checkIfClause(Game game) {
+	public boolean checkInterveningIfClause(Game game) {
 		return game.getBattlefield().countAll(filter, this.controllerId) >= 5;
 	}
 

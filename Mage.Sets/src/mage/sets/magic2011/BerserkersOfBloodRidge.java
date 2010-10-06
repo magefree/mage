@@ -41,4 +41,13 @@ public class BerserkersOfBloodRidge extends mage.sets.magic2010.BerserkersOfBloo
 		this.expansionSetCode = "M11";
 	}
 
+	public BerserkersOfBloodRidge(final BerserkersOfBloodRidge card) {
+		super(card);
+	}
+
+	@Override
+	public BerserkersOfBloodRidge copy() {
+		return new BerserkersOfBloodRidge(this);
+	}
+
 }

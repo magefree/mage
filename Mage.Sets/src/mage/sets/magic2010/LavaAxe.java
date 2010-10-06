@@ -41,4 +41,13 @@ public class LavaAxe extends mage.sets.tenth.LavaAxe {
 		this.expansionSetCode = "M10";
 	}
 
+	public LavaAxe(final LavaAxe card) {
+		super(card);
+	}
+
+	@Override
+	public LavaAxe copy() {
+		return new LavaAxe(this);
+	}
+
 }

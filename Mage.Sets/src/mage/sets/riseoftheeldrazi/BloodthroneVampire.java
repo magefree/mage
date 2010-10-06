@@ -38,8 +38,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -54,7 +53,7 @@ public class BloodthroneVampire extends CardImpl<BloodthroneVampire> {
 		this.subtype.add("Vampire");
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(1, 1, FilterCreaturePermanent.getDefault(), true))));
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
 	}
 
 	public BloodthroneVampire(final BloodthroneVampire card) {

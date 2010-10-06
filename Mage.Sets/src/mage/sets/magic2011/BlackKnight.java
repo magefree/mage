@@ -41,4 +41,13 @@ public class BlackKnight extends mage.sets.magic2010.BlackKnight {
 		this.expansionSetCode = "M11";
 	}
 
+	public BlackKnight(final BlackKnight card) {
+		super(card);
+	}
+
+	@Override
+	public BlackKnight copy() {
+		return new BlackKnight(this);
+	}
+
 }

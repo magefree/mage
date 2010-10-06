@@ -41,4 +41,13 @@ public class DoomBlade extends mage.sets.magic2010.DoomBlade {
 		this.expansionSetCode = "M11";
 	}
 
+	public DoomBlade(final DoomBlade card) {
+		super(card);
+	}
+
+	@Override
+	public DoomBlade copy() {
+		return new DoomBlade(this);
+	}
+
 }

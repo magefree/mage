@@ -41,4 +41,13 @@ public class HauntingEchoes extends mage.sets.magic2010.HauntingEchoes {
 		this.expansionSetCode = "M11";
 	}
 
+	public HauntingEchoes(final HauntingEchoes card) {
+		super(card);
+	}
+
+	@Override
+	public HauntingEchoes copy() {
+		return new HauntingEchoes(this);
+	}
+
 }

@@ -41,4 +41,13 @@ public class ChildOfNight extends mage.sets.magic2010.ChildOfNight {
 		this.expansionSetCode = "M11";
 	}
 
+	public ChildOfNight(final ChildOfNight card) {
+		super(card);
+	}
+
+	@Override
+	public ChildOfNight copy() {
+		return new ChildOfNight(this);
+	}
+
 }

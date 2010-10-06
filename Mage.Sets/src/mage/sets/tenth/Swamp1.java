@@ -46,4 +46,13 @@ public class Swamp1 extends mage.cards.basiclands.Swamp {
 		return "89177_typ_reg_sty_010.jpg";
 	}
 
+	public Swamp1(final Swamp1 card) {
+		super(card);
+	}
+
+	@Override
+	public Swamp1 copy() {
+		return new Swamp1(this);
+	}
+
 }

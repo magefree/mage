@@ -121,8 +121,10 @@ class JaceTheMindSculptorEffect1 extends OneShotEffect<JaceTheMindSculptorEffect
 			controller.lookAtCards(cards, game);
 			if (controller.chooseUse(outcome, "Do you wish to put card on the bottom of player's library?", game)) {
 				Card card = player.getLibrary().removeFromTop(game);
-				if (card != null)
-					player.getLibrary().putOnBottom(card, game);
+				if (card != null) {
+					card.moveToZone(Zone.LIBRARY, game, false);
+//					player.getLibrary().putOnBottom(card, game);
+				}
 			}
 			return true;
 		}
@@ -171,7 +173,8 @@ class JaceTheMindSculptorEffect2 extends OneShotEffect<JaceTheMindSculptorEffect
 		Card card = player.getHand().get(target.getFirstTarget(), game);
 		if (card != null) {
 			player.getHand().remove(card);
-			player.getLibrary().putOnTop(card, game);
+			card.moveToZone(Zone.LIBRARY, game, true);
+//			player.getLibrary().putOnTop(card, game);
 		}
 		return true;
 	}

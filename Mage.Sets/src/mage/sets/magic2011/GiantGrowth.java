@@ -41,4 +41,13 @@ public class GiantGrowth extends mage.sets.tenth.GiantGrowth {
 		this.expansionSetCode = "M11";
 	}
 
+	public GiantGrowth(final GiantGrowth card) {
+		super(card);
+	}
+
+	@Override
+	public GiantGrowth copy() {
+		return new GiantGrowth(this);
+	}
+
 }

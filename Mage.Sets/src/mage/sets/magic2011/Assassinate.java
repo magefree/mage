@@ -41,4 +41,13 @@ public class Assassinate extends mage.sets.tenth.Assassinate {
 		this.expansionSetCode = "M11";
 	}
 
+	public Assassinate(final Assassinate card) {
+		super(card);
+	}
+
+	@Override
+	public Assassinate copy() {
+		return new Assassinate(this);
+	}
+
 }

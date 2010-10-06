@@ -41,4 +41,13 @@ public class CelestialPurge extends mage.sets.conflux.CelestialPurge {
 		this.expansionSetCode = "M11";
 	}
 
+	public CelestialPurge(final CelestialPurge card) {
+		super(card);
+	}
+
+	@Override
+	public CelestialPurge copy() {
+		return new CelestialPurge(this);
+	}
+
 }

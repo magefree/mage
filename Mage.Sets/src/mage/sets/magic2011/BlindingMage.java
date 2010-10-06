@@ -41,4 +41,13 @@ public class BlindingMage extends mage.sets.magic2010.BlindingMage {
 		this.expansionSetCode = "M11";
 	}
 
+	public BlindingMage(final BlindingMage card) {
+		super(card);
+	}
+
+	@Override
+	public BlindingMage copy() {
+		return new BlindingMage(this);
+	}
+
 }

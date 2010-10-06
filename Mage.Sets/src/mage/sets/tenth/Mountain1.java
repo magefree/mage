@@ -46,4 +46,13 @@ public class Mountain1 extends mage.cards.basiclands.Mountain {
 		return "89159_typ_reg_sty_010.jpg";
 	}
 
+	public Mountain1(final Mountain1 card) {
+		super(card);
+	}
+
+	@Override
+	public Mountain1 copy() {
+		return new Mountain1(this);
+	}
+
 }

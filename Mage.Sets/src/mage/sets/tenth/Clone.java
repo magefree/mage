@@ -56,7 +56,7 @@ public class Clone extends CardImpl<Clone> {
 		this.toughness = new MageInt(0);
 
 		Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new CopyEffect());
-		ability.addTarget(new TargetCreaturePermanent(1, 1, FilterCreaturePermanent.getDefault(), TargetController.ANY, true));
+		ability.addTarget(new TargetCreaturePermanent());
 		this.addAbility(ability);
 	}
 

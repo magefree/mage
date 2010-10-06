@@ -41,4 +41,13 @@ public class Clone extends mage.sets.tenth.Clone {
 		this.expansionSetCode = "M11";
 	}
 
+	public Clone(final Clone card) {
+		super(card);
+	}
+
+	@Override
+	public Clone copy() {
+		return new Clone(this);
+	}
+
 }

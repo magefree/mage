@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCrearurePermanentYourControl;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -50,7 +50,7 @@ public class SoulsMajesty extends CardImpl<SoulsMajesty> {
         super(ownerId, "Soul's Majesty", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G}");
         this.expansionSetCode = "CON";
         this.color.setGreen(true);
-        this.getSpellAbility().addTarget(new TargetCrearurePermanentYourControl());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addEffect(new SoulsMajestyEffect());
     }
 

@@ -48,6 +48,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -98,7 +99,7 @@ class EldraziMonumentEffect extends OneShotEffect<EldraziMonumentEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		TargetControlledPermanent target = new TargetControlledPermanent(1, 1, FilterCreaturePermanent.getDefault(), true);
+		TargetControlledPermanent target = new TargetControlledCreaturePermanent();
 		target.setRequired(true);
 		Player player = game.getPlayer(source.getControllerId());
 		if (target.canChoose(source.getId(), source.getControllerId(), game)) {

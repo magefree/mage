@@ -34,6 +34,8 @@ import mage.Constants.Rarity;
 import mage.abilities.costs.common.ReturnToHandTargetCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledPermanent;
@@ -44,11 +46,18 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Deprive extends CardImpl<Deprive> {
 
+	private static FilterControlledPermanent filter = new FilterControlledPermanent("land");
+
+	static {
+		filter.getCardType().add(CardType.LAND);
+		filter.setScopeCardType(ComparisonScope.Any);
+	}
+
 	public Deprive(UUID ownerId) {
 		super(ownerId, "Deprive", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
 		this.expansionSetCode = "ROE";
 		this.color.setBlue(true);
-		this.getSpellAbility().addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(1, 1, new FilterLandPermanent(), true)));
+		this.getSpellAbility().addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
 		this.getSpellAbility().addTarget(new TargetSpell());
 		this.getSpellAbility().addEffect(new CounterTargetEffect());
 	}

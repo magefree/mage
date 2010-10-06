@@ -41,4 +41,13 @@ public class SoulWarden extends mage.sets.magic2010.SoulWarden {
 		this.expansionSetCode = "HOP";
 	}
 
+	public SoulWarden(final SoulWarden card) {
+		super(card);
+	}
+
+	@Override
+	public SoulWarden copy() {
+		return new SoulWarden(this);
+	}
+
 }

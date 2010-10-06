@@ -41,4 +41,13 @@ public class ElvishArchdruid extends mage.sets.magic2010.ElvishArchdruid {
 		this.expansionSetCode = "M11";
 	}
 
+	public ElvishArchdruid(final ElvishArchdruid card) {
+		super(card);
+	}
+
+	@Override
+	public ElvishArchdruid copy() {
+		return new ElvishArchdruid(this);
+	}
+
 }

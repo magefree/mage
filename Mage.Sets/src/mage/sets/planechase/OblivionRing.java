@@ -41,4 +41,13 @@ public class OblivionRing extends mage.sets.shardsofalara.OblivionRing {
 		this.expansionSetCode = "HOP";
 	}
 
+	public OblivionRing(final OblivionRing card) {
+		super(card);
+	}
+
+	@Override
+	public OblivionRing copy() {
+		return new OblivionRing(this);
+	}
+
 }

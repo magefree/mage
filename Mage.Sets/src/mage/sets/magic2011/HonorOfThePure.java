@@ -41,4 +41,13 @@ public class HonorOfThePure extends mage.sets.magic2010.HonorOfThePure {
 		this.expansionSetCode = "M11";
 	}
 
+	public HonorOfThePure(final HonorOfThePure card) {
+		super(card);
+	}
+
+	@Override
+	public HonorOfThePure copy() {
+		return new HonorOfThePure(this);
+	}
+
 }

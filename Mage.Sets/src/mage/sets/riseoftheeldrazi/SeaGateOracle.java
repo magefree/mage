@@ -37,6 +37,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -95,7 +96,9 @@ class SeaGateOracleEffect extends OneShotEffect<SeaGateOracleEffect> {
 		Player player = game.getPlayer(source.getControllerId());
 		if (player.getLibrary().size() > 0) {
 			if (player.getLibrary().size() == 1) {
-				player.putInHand(player.getLibrary().removeFromTop(game), game);
+				Card card = player.getLibrary().removeFromTop(game);
+				card.moveToZone(Zone.HAND, game, false);
+//				player.putInHand(player.getLibrary().removeFromTop(game), game);
 			}
 			else {
 				Cards cards = new CardsImpl(Zone.PICK);
@@ -105,9 +108,12 @@ class SeaGateOracleEffect extends OneShotEffect<SeaGateOracleEffect> {
 				target.setRequired(true);
 				player.lookAtCards(cards, game);
 				player.chooseTarget(cards, target, source, game);
-				player.putInHand(cards.get(target.getFirstTarget(), game), game);
-				for (UUID cardId: cards) {
-					player.getLibrary().putOnBottom(cards.get(cardId, game), game);
+				Card card = cards.get(target.getFirstTarget(), game);
+				card.moveToZone(Zone.HAND, game, false);
+//				player.putInHand(cards.get(target.getFirstTarget(), game), game);
+				for (Card card1: cards.getCards(game)) {
+					card1.moveToZone(Zone.LIBRARY, game, false);
+//					player.getLibrary().putOnBottom(cards.get(cardId, game), game);
 				}
 			}
 			return true;

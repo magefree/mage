@@ -41,4 +41,13 @@ public class DiabolicTutor extends mage.sets.tenth.DiabolicTutor {
 		this.expansionSetCode = "M11";
 	}
 
+	public DiabolicTutor(final DiabolicTutor card) {
+		super(card);
+	}
+
+	@Override
+	public DiabolicTutor copy() {
+		return new DiabolicTutor(this);
+	}
+
 }

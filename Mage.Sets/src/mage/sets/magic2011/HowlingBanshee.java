@@ -41,4 +41,13 @@ public class HowlingBanshee extends mage.sets.magic2010.HowlingBanshee {
 		this.expansionSetCode = "M11";
 	}
 
+	public HowlingBanshee(final HowlingBanshee card) {
+		super(card);
+	}
+
+	@Override
+	public HowlingBanshee copy() {
+		return new HowlingBanshee(this);
+	}
+
 }

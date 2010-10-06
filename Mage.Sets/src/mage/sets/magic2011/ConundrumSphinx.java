@@ -34,6 +34,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -106,10 +107,10 @@ class ConundrumSphinxEffect extends OneShotEffect<ConundrumSphinxEffect> {
 			cards.add(card);
 			player.revealCards(cards, game);
 			if (card.getName().equals(cardChoice.getChoice())) {
-				player.putInHand(card, game);
+				card.moveToZone(Zone.HAND, game, true);
 			}
 			else {
-				player.getLibrary().putOnBottom(card, game);
+				card.moveToZone(Zone.LIBRARY, game, false);
 			}
 
 		}

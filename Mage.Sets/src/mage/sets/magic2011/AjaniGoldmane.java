@@ -41,4 +41,13 @@ public class AjaniGoldmane extends mage.sets.magic2010.AjaniGoldmane {
 		this.expansionSetCode = "M11";
 	}
 
+	public AjaniGoldmane(final AjaniGoldmane card) {
+		super(card);
+	}
+
+	@Override
+	public AjaniGoldmane copy() {
+		return new AjaniGoldmane(this);
+	}
+
 }

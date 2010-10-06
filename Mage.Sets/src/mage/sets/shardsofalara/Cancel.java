@@ -45,4 +45,14 @@ public class Cancel extends mage.sets.tenth.Cancel {
 	public String getArt() {
 		return "116179_typ_reg_sty_010.jpg";
 	}
+
+	public Cancel(final Cancel card) {
+		super(card);
+	}
+
+	@Override
+	public Cancel copy() {
+		return new Cancel(this);
+	}
+
 }

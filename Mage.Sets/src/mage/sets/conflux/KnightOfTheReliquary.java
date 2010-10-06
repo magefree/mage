@@ -48,8 +48,8 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
-import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -62,9 +62,11 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class KnightOfTheReliquary extends CardImpl<KnightOfTheReliquary> {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent("Forest or Plains");
+	private static FilterControlledPermanent filter = new FilterControlledPermanent("Forest or Plains");
 
 	static {
+		filter.getCardType().add(CardType.LAND);
+		filter.setScopeCardType(ComparisonScope.Any);
 		filter.getSubtype().add("Forest");
 		filter.getSubtype().add("Plains");
 		filter.setScopeSubtype(ComparisonScope.Any);

@@ -72,6 +72,8 @@ public class MartialCoup extends CardImpl<MartialCoup> {
 
 class MartialCoupEffect extends OneShotEffect<MartialCoupEffect> {
 
+	private static SoldierToken token = new SoldierToken();
+
 	public MartialCoupEffect() {
 		super(Outcome.PutCreatureInPlay);
 	}
@@ -87,7 +89,6 @@ class MartialCoupEffect extends OneShotEffect<MartialCoupEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Player controller = game.getPlayer(source.getControllerId());
 		int amount = source.getCosts().getVariableCosts().get(0).getAmount();
 
 		if (amount > 4) {
@@ -96,7 +97,7 @@ class MartialCoupEffect extends OneShotEffect<MartialCoupEffect> {
 			}
 		}
 		for (int i = 0; i < amount; i++) {
-			controller.putOntoBattlefield(new SoldierToken(), game);
+			token.putOntoBattlefield(game, source.getControllerId());
 		}
 		return true;
 	}

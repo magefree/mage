@@ -41,4 +41,13 @@ public class BirdsOfParadise extends mage.sets.tenth.BirdsOfParadise {
 		this.expansionSetCode = "M11";
 	}
 
+	public BirdsOfParadise(final BirdsOfParadise card) {
+		super(card);
+	}
+
+	@Override
+	public BirdsOfParadise copy() {
+		return new BirdsOfParadise(this);
+	}
+
 }

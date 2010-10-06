@@ -41,4 +41,13 @@ public class Excommunicate extends mage.sets.shardsofalara.Excommunicate {
 		this.expansionSetCode = "M11";
 	}
 
+	public Excommunicate(final Excommunicate card) {
+		super(card);
+	}
+
+	@Override
+	public Excommunicate copy() {
+		return new Excommunicate(this);
+	}
+
 }

@@ -96,7 +96,7 @@ class FinestHourAbility extends TriggeredAbilityImpl<FinestHourAbility> {
 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
-		if (checkIfClause(game) && game.getActivePlayerId().equals(this.controllerId)) {
+		if (checkInterveningIfClause(game) && game.getActivePlayerId().equals(this.controllerId)) {
 			if (event.getType() == EventType.DECLARED_ATTACKERS) {
 				if (game.getCombat().attacksAlone()) {
 					this.addTarget(new TargetCreaturePermanent());
@@ -110,7 +110,7 @@ class FinestHourAbility extends TriggeredAbilityImpl<FinestHourAbility> {
 	}
 
 	@Override
-	public boolean checkIfClause(Game game) {
+	public boolean checkInterveningIfClause(Game game) {
 		return game.getTurn().getPhase(TurnPhase.COMBAT).getCount() == 0;
 	}
 
