@@ -29,25 +29,50 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.FilterCard;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Naturalize extends mage.sets.tenth.Naturalize {
+public class NaturesSpiral extends CardImpl<NaturesSpiral> {
 
-	public Naturalize(UUID ownerId) {
-		super(ownerId);
-		this.expansionSetCode = "M10";
+	private static FilterCard filter = new FilterCard("permanent card in your graveyard");
+
+	static {
+		filter.getCardType().add(CardType.ARTIFACT);
+		filter.getCardType().add(CardType.CREATURE);
+		filter.getCardType().add(CardType.ENCHANTMENT);
+		filter.getCardType().add(CardType.LAND);
+		filter.getCardType().add(CardType.PLANESWALKER);
+		filter.setScopeCardType(ComparisonScope.Any);
 	}
 
-	public Naturalize(final Naturalize card) {
+	public NaturesSpiral(UUID ownerId) {
+		super(ownerId, "Nature's Spiral", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
+		this.expansionSetCode = "M10";
+		this.color.setGreen(true);
+		this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
+		this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+	}
+
+	public NaturesSpiral(final NaturesSpiral card) {
 		super(card);
 	}
 
 	@Override
-	public Naturalize copy() {
-		return new Naturalize(this);
+	public NaturesSpiral copy() {
+		return new NaturesSpiral(this);
 	}
 
+	@Override
+	public String getArt() {
+		return "121584_typ_reg_sty_010.jpg";
+	}
 }

@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.sets.magic2011;
 
 import java.util.UUID;
 
@@ -38,7 +38,7 @@ public class Naturalize extends mage.sets.tenth.Naturalize {
 
 	public Naturalize(UUID ownerId) {
 		super(ownerId);
-		this.expansionSetCode = "M10";
+		this.expansionSetCode = "M11";
 	}
 
 	public Naturalize(final Naturalize card) {

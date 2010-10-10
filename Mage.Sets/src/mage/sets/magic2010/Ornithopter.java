@@ -34,20 +34,25 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Naturalize extends mage.sets.tenth.Naturalize {
+public class Ornithopter extends mage.sets.tenth.Ornithopter {
 
-	public Naturalize(UUID ownerId) {
+	public Ornithopter(UUID ownerId) {
 		super(ownerId);
 		this.expansionSetCode = "M10";
 	}
 
-	public Naturalize(final Naturalize card) {
+	@Override
+	public String getArt() {
+		return "122159_typ_reg_sty_010.jpg";
+	}
+
+	public Ornithopter(final Ornithopter card) {
 		super(card);
 	}
 
 	@Override
-	public Naturalize copy() {
-		return new Naturalize(this);
+	public Ornithopter copy() {
+		return new Ornithopter(this);
 	}
 
 }

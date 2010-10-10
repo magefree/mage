@@ -26,28 +26,49 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.sets.magic2011;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Rarity;
+import mage.Constants.Zone;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.BoostSourceEffect;
+import mage.cards.CardImpl;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Naturalize extends mage.sets.tenth.Naturalize {
+public class NantukoShade extends CardImpl<NantukoShade> {
 
-	public Naturalize(UUID ownerId) {
-		super(ownerId);
-		this.expansionSetCode = "M10";
+	public NantukoShade(UUID ownerId) {
+		super(ownerId, "Nantuko Shade", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");
+		this.expansionSetCode = "M11";
+		this.subtype.add("Insect");
+		this.subtype.add("Shade");
+		this.color.setBlack(true);
+		this.power = new MageInt(2);
+		this.toughness = new MageInt(1);
+
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
 	}
 
-	public Naturalize(final Naturalize card) {
+	public NantukoShade(final NantukoShade card) {
 		super(card);
 	}
 
 	@Override
-	public Naturalize copy() {
-		return new Naturalize(this);
+	public NantukoShade copy() {
+		return new NantukoShade(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "36461_typ_reg_sty_010.jpg";
 	}
 
 }

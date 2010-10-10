@@ -26,28 +26,43 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.sets.tenth;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Naturalize extends mage.sets.tenth.Naturalize {
+public class Ornithopter extends CardImpl<Ornithopter> {
 
-	public Naturalize(UUID ownerId) {
-		super(ownerId);
-		this.expansionSetCode = "M10";
+	public Ornithopter(UUID ownerId) {
+		super(ownerId, "Ornithopter", Rarity.COMMON, new CardType[]{CardType.CREATURE, CardType.ARTIFACT}, "{0}");
+		this.expansionSetCode = "10E";
+		this.subtype.add("Thopter");
+		this.power = new MageInt(0);
+		this.toughness = new MageInt(2);
+
+		this.addAbility(FlyingAbility.getInstance());
 	}
 
-	public Naturalize(final Naturalize card) {
+	public Ornithopter(final Ornithopter card) {
 		super(card);
 	}
 
 	@Override
-	public Naturalize copy() {
-		return new Naturalize(this);
+	public Ornithopter copy() {
+		return new Ornithopter(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "50214_typ_reg_sty_010.jpg";
 	}
 
 }

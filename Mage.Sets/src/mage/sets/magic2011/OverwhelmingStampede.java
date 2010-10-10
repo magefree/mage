@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.sets.magic2011;
 
 import java.util.UUID;
 import mage.Constants.CardType;
@@ -35,84 +35,79 @@ import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.SubLayer;
-import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MindControl extends CardImpl<MindControl> {
+public class OverwhelmingStampede extends CardImpl<OverwhelmingStampede> {
 
-	public MindControl(UUID ownerId) {
-		super(ownerId, "Mind Control", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
-		this.expansionSetCode = "M10";
-		this.color.setBlue(true);
-		this.subtype.add("Aura");
-
-		TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-		Ability ability = new EnchantAbility(Outcome.Detriment, auraTarget);
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MindControlEffect()));
-
+	public OverwhelmingStampede(UUID ownerId) {
+		super(ownerId, "Overwhelming Stampede", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
+		this.expansionSetCode = "M11";
+		this.color.setGreen(true);
+		this.getSpellAbility().addEffect(new OverwhelmingStampedeEffect());
 	}
 
-	public MindControl(final MindControl card) {
+	public OverwhelmingStampede(final OverwhelmingStampede card) {
 		super(card);
 	}
 
 	@Override
-	public MindControl copy() {
-		return new MindControl(this);
+	public OverwhelmingStampede copy() {
+		return new OverwhelmingStampede(this);
 	}
 
 	@Override
 	public String getArt() {
-		return "121615_typ_reg_sty_010.jpg";
+		return "129095_typ_reg_sty_010.jpg";
 	}
 }
 
-class MindControlEffect extends ContinuousEffectImpl<MindControlEffect> {
+class OverwhelmingStampedeEffect extends ContinuousEffectImpl<OverwhelmingStampedeEffect> {
 
-	public MindControlEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Detriment);
+	public OverwhelmingStampedeEffect() {
+		super(Duration.EndOfTurn, Outcome.AddAbility);
 	}
 
-	public MindControlEffect(final MindControlEffect effect) {
+	public OverwhelmingStampedeEffect(final OverwhelmingStampedeEffect effect) {
 		super(effect);
 	}
 
 	@Override
-	public MindControlEffect copy() {
-		return new MindControlEffect(this);
+	public OverwhelmingStampedeEffect copy() {
+		return new OverwhelmingStampedeEffect(this);
 	}
 
 	@Override
 	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-			if (creature != null) {
-				switch (layer) {
-					case ControlChangingEffects_2:
-						if (sublayer == SubLayer.NA) {
-							creature.changeControllerId(source.getControllerId(), game);
-						}
-						break;
-				}
-				return true;
+		int maxPower = 0;
+		for (Permanent perm: game.getBattlefield().getAllActivePermanents(FilterCreaturePermanent.getDefault(), source.getControllerId())) {
+			if (perm.getPower().getValue() > maxPower)
+				maxPower = perm.getPower().getValue();
+		}
+		for (Permanent perm: game.getBattlefield().getAllActivePermanents(FilterCreaturePermanent.getDefault(), source.getControllerId())) {
+			switch (layer) {
+				case PTChangingEffects_7:
+					if (sublayer == SubLayer.ModifyPT_7c) {
+						perm.addPower(maxPower);
+						perm.addToughness(maxPower);
+					}
+					break;
+				case AbilityAddingRemovingEffects_6:
+					if (sublayer == SubLayer.NA) {
+						perm.addAbility(TrampleAbility.getInstance());
+					}
+					break;
 			}
+			return true;
 		}
 		return false;
 	}
@@ -124,11 +119,11 @@ class MindControlEffect extends ContinuousEffectImpl<MindControlEffect> {
 
 	@Override
 	public boolean hasLayer(Layer layer) {
-		return layer == Layer.ControlChangingEffects_2;
+		return layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
 	}
 
 	@Override
 	public String getText(Ability source) {
-		return "You control enchanted creature";
+		return "Until end of turn, creatures you control gain trample and get +X/+X, where X is the greatest power among creatures you control.";
 	}
 }

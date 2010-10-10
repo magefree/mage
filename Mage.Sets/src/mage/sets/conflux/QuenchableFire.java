@@ -94,7 +94,7 @@ class QuenchableFireEffect extends OneShotEffect<QuenchableFireEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		//create delayed triggereda ability
+		//create delayed triggered ability
 		QuenchableFireDelayedTriggeredAbility delayedAbility = new QuenchableFireDelayedTriggeredAbility();
 		delayedAbility.setSourceId(source.getSourceId());
 		delayedAbility.setControllerId(source.getControllerId());

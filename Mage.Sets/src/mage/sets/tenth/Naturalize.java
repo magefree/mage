@@ -26,19 +26,37 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.sets.tenth;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.FilterPermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LokiX
  */
-public class Naturalize extends mage.sets.tenth.Naturalize {
+public class Naturalize extends CardImpl<Naturalize> {
 
-	public Naturalize(UUID ownerId) {
-		super(ownerId);
-		this.expansionSetCode = "M10";
+	private static FilterPermanent filter = new FilterPermanent("artifact or enchantment");
+
+	static {
+		filter.getCardType().add(CardType.ARTIFACT);
+		filter.getCardType().add(CardType.ENCHANTMENT);
+		filter.setScopeColor(ComparisonScope.Any);
+	}
+
+	public Naturalize(UUID onwerId){
+		super(onwerId, "Naturalize", Rarity.COMMON, new CardType[]{CardType.INSTANT},"{1}{G}");
+		this.expansionSetCode = "10E";
+		this.color.setGreen(true);
+		this.getSpellAbility().addTarget(new TargetPermanent(filter));
+		this.getSpellAbility().addEffect(new DestroyTargetEffect());
 	}
 
 	public Naturalize(final Naturalize card) {
@@ -50,4 +68,8 @@ public class Naturalize extends mage.sets.tenth.Naturalize {
 		return new Naturalize(this);
 	}
 
+	@Override
+	public String getArt() {
+		return "49669_typ_reg_sty_010.jpg";
+	}
 }

@@ -26,28 +26,42 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.sets.magic2011;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.cards.CardImpl;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Naturalize extends mage.sets.tenth.Naturalize {
+public class NetherHorror extends CardImpl<NetherHorror> {
 
-	public Naturalize(UUID ownerId) {
-		super(ownerId);
-		this.expansionSetCode = "M10";
+	public NetherHorror(UUID ownerId) {
+		super(ownerId, "Nether Horror", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+		this.expansionSetCode = "M11";
+		this.subtype.add("Horror");
+		this.color.setBlack(true);
+		this.power = new MageInt(4);
+		this.toughness = new MageInt(2);
+
 	}
 
-	public Naturalize(final Naturalize card) {
+	public NetherHorror(final NetherHorror card) {
 		super(card);
 	}
 
 	@Override
-	public Naturalize copy() {
-		return new Naturalize(this);
+	public NetherHorror copy() {
+		return new NetherHorror(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "129087_typ_reg_sty_010.jpg";
 	}
 
 }

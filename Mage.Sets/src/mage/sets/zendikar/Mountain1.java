@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.sets.zendikar;
 
 import java.util.UUID;
 
@@ -34,20 +34,26 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Naturalize extends mage.sets.tenth.Naturalize {
+public class Mountain1 extends mage.cards.basiclands.Mountain {
 
-	public Naturalize(UUID ownerId) {
+	public Mountain1(UUID ownerId) {
 		super(ownerId);
-		this.expansionSetCode = "M10";
+		this.expansionSetCode = "ZEN";
 	}
 
-	public Naturalize(final Naturalize card) {
+	@Override
+	public String getArt() {
+		return "123762_typ_reg_sty_010.jp";
+	}
+
+	public Mountain1(final Mountain1 card) {
 		super(card);
 	}
 
 	@Override
-	public Naturalize copy() {
-		return new Naturalize(this);
+	public Mountain1 copy() {
+		return new Mountain1(this);
 	}
 
 }
+

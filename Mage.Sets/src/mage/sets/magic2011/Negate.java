@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.sets.magic2011;
 
 import java.util.UUID;
 
@@ -34,20 +34,20 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Naturalize extends mage.sets.tenth.Naturalize {
+public class Negate extends mage.sets.magic2010.Negate {
 
-	public Naturalize(UUID ownerId) {
+	public Negate(UUID ownerId) {
 		super(ownerId);
-		this.expansionSetCode = "M10";
+		this.expansionSetCode = "M11";
 	}
 
-	public Naturalize(final Naturalize card) {
+	public Negate(final Negate card) {
 		super(card);
 	}
 
 	@Override
-	public Naturalize copy() {
-		return new Naturalize(this);
+	public Negate copy() {
+		return new Negate(this);
 	}
 
 }

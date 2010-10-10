@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.sets.tenth;
 
 import java.util.UUID;
 import mage.Constants.CardType;
@@ -39,10 +39,13 @@ import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -51,12 +54,12 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MindControl extends CardImpl<MindControl> {
+public class Pacifism extends CardImpl<Pacifism> {
 
-	public MindControl(UUID ownerId) {
-		super(ownerId, "Mind Control", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
-		this.expansionSetCode = "M10";
-		this.color.setBlue(true);
+	public Pacifism(UUID ownerId) {
+		super(ownerId, "Pacifism", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+		this.expansionSetCode = "10E";
+		this.color.setWhite(true);
 		this.subtype.add("Aura");
 
 		TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -64,71 +67,66 @@ public class MindControl extends CardImpl<MindControl> {
 		this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
 		Ability ability = new EnchantAbility(Outcome.Detriment, auraTarget);
 		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MindControlEffect()));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PacifismEffect()));
 
 	}
 
-	public MindControl(final MindControl card) {
+	public Pacifism(final Pacifism card) {
 		super(card);
 	}
 
 	@Override
-	public MindControl copy() {
-		return new MindControl(this);
+	public Pacifism copy() {
+		return new Pacifism(this);
 	}
 
 	@Override
 	public String getArt() {
-		return "121615_typ_reg_sty_010.jpg";
+		return "01988_typ_reg_sty_010.jpg";
 	}
 }
 
-class MindControlEffect extends ContinuousEffectImpl<MindControlEffect> {
+class PacifismEffect extends ReplacementEffectImpl<PacifismEffect> {
 
-	public MindControlEffect() {
+	public PacifismEffect() {
 		super(Duration.WhileOnBattlefield, Outcome.Detriment);
 	}
 
-	public MindControlEffect(final MindControlEffect effect) {
+	public PacifismEffect(final PacifismEffect effect) {
 		super(effect);
 	}
 
 	@Override
-	public MindControlEffect copy() {
-		return new MindControlEffect(this);
+	public PacifismEffect copy() {
+		return new PacifismEffect(this);
 	}
 
 	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+	public boolean apply(Game game, Ability source) {
+		return true;
+	}
+
+	@Override
+	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+		return true;
+	}
+
+	@Override
+	public boolean applies(GameEvent event, Ability source, Game game) {
 		Permanent enchantment = game.getPermanent(source.getSourceId());
 		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-			if (creature != null) {
-				switch (layer) {
-					case ControlChangingEffects_2:
-						if (sublayer == SubLayer.NA) {
-							creature.changeControllerId(source.getControllerId(), game);
-						}
-						break;
+			if (source.getSourceId().equals(enchantment.getAttachedTo())) {
+				if (event.getType() == EventType.DECLARE_ATTACKER || event.getType() == EventType.DECLARE_BLOCKER) {
+					return true;
 				}
-				return true;
 			}
 		}
 		return false;
 	}
 
 	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
-
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.ControlChangingEffects_2;
-	}
-
-	@Override
 	public String getText(Ability source) {
-		return "You control enchanted creature";
+		return "Enchanted creature can't attack or block";
 	}
+
 }

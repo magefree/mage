@@ -89,7 +89,7 @@ public class IceCage extends CardImpl<IceCage> {
 class IceCageEffect extends ReplacementEffectImpl<IceCageEffect> {
 
 	public IceCageEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Benefit);
+		super(Duration.WhileOnBattlefield, Outcome.Detriment);
 	}
 
 	public IceCageEffect(final IceCageEffect effect) {
