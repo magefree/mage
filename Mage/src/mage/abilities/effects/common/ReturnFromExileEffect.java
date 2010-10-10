@@ -35,7 +35,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
-import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
 /**
