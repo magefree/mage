@@ -62,7 +62,7 @@ public class SnappingDrake extends CardImpl<SnappingDrake>{
 
     @Override
     public String getArt() {
-        return "";
+        return "102614_typ_reg_sty_010.jpg";
     }
 
 }
