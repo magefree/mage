@@ -115,7 +115,7 @@ public abstract class ExpansionSet implements Serializable {
 		directory = new File(fullPath);
 
 		try {
-			String jarPath = fullPath.replaceFirst("[.]jar[!].*", ".jar").replaceFirst("file:", "");
+			String jarPath = fullPath.replaceFirst("[.]jar[!].*", ".jar").replaceFirst("file:", "").replaceAll("%20", " ");
 			JarFile jarFile = new JarFile(jarPath);
 			Enumeration<JarEntry> entries = jarFile.entries();
 			while(entries.hasMoreElements()) {
