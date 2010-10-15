@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
 public class GarruksPackleader extends CardImpl<GarruksPackleader> {
 
 	public GarruksPackleader(UUID ownerId) {
-		super(ownerId, "GarruksPackleader", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
+		super(ownerId, "Garruks Packleader", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Beast");
 		this.color.setGreen(true);

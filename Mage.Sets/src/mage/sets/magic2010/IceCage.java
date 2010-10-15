@@ -68,7 +68,6 @@ public class IceCage extends CardImpl<IceCage> {
 		this.addAbility(ability);
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IceCageEffect()));
 		this.addAbility(new IceCageAbility());
-
 	}
 
 	public IceCage(final IceCage card) {
