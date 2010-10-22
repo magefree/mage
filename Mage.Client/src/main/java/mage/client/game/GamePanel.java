@@ -39,8 +39,6 @@ import java.awt.GridBagConstraints;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -59,8 +57,6 @@ import mage.client.dialog.ShowCardsDialog;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.remote.Session;
 import mage.client.util.Config;
-import mage.client.util.Constants;
-import mage.client.util.ImageHelper;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.ImagePanel;
 import mage.util.Logging;
@@ -90,7 +86,7 @@ public class GamePanel extends javax.swing.JPanel {
         
         //FIXME: remove from here
 		try {
-			BufferedImage background = ImageIO.read(this.getClass().getResourceAsStream("/hardwoodfloor.png"));
+			BufferedImage background = ImageIO.read(this.getClass().getResourceAsStream("/green.jpg"));
 			ImagePanel bgPanel = new ImagePanel(background, ImagePanel.TILED);
 			
 	        // Override layout (I can't edit generated code)
