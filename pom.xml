@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>org.mage</groupId>
+	<artifactId>mage-root</artifactId>
+	<version>0.3</version>
+	<packaging>pom</packaging>
+	<name>Mage Root</name>	
+	<description>Mage Root POM</description>
+
+	<profiles>
+        <profile>
+            <id>normal-build</id>
+            <modules>
+                <module>Mage</module>
+                <module>Mage.Common</module>
+				<module>Mage.Server</module>
+				<module>Mage.Sets</module>
+				<module>Mage.Client</module>
+				<module>Mage.Deck.Constructed</module>
+				<module>Mage.Game.FreeForAll</module>
+				<module>Mage.Game.TwoPlayerDuel</module>
+				<module>Mage.Player.AI</module>
+				<!--<module>Mage.Player.AIMinimax</module>-->
+				<module>Mage.Player.Human</module>
+            </modules>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
+    
+    <properties>
+    	<mage-version>0.3</mage-version>
+    </properties>
+
+</project>
