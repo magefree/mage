@@ -35,8 +35,6 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
-
 import mage.client.cards.CardDimensions;
 import mage.util.Logging;
 
