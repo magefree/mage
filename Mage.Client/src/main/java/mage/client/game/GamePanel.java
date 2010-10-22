@@ -46,6 +46,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Logger;
 
+import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
@@ -89,7 +90,7 @@ public class GamePanel extends javax.swing.JPanel {
         
         //FIXME: remove from here
 		try {
-			BufferedImage background = ImageHelper.loadImage("/dk_gray.jpg");
+			BufferedImage background = ImageIO.read(this.getClass().getResourceAsStream("/dk_gray.jpg"));
 			ImagePanel bgPanel = new ImagePanel(background, ImagePanel.TILED);
 			
 	        // Override layout (I can't edit generated code)
