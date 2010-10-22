@@ -35,15 +35,6 @@
 	</dependencies>
 
 	<build>
-		<sourceDirectory>src</sourceDirectory>
-
-		<resources>
-			<resource>
-				<directory>resources</directory>
-				<filtering>false</filtering> 
-			</resource>
-		</resources>
-
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
