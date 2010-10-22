@@ -35,7 +35,7 @@ import mage.abilities.mana.GreenManaAbility;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Forest extends BasicLand<Forest> {
+public abstract class Forest extends BasicLand<Forest> {
 
 	public Forest(UUID ownerId) {
 		super(ownerId, "Forest", new GreenManaAbility());
@@ -43,16 +43,6 @@ public class Forest extends BasicLand<Forest> {
 
 	public Forest(final Forest land) {
 		super(land);
-	}
-
-	@Override
-	public Forest copy() {
-		return new Forest(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "";
 	}
 
 }
