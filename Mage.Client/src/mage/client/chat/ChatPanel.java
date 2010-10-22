@@ -58,6 +58,8 @@ public class ChatPanel extends javax.swing.JPanel {
     /** Creates new form ChatPanel */
     public ChatPanel() {
         initComponents();
+        jScrollPane1.setOpaque(false);
+        jScrollPane1.getViewport().setOpaque(false);
     }
 
 	public void connect(UUID chatId) {

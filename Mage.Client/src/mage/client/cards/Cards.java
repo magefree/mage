@@ -56,6 +56,10 @@ public class Cards extends javax.swing.JPanel {
     /** Creates new form Cards */
     public Cards() {
         initComponents();
+        setOpaque(false);
+        jScrollPane1.setOpaque(false);
+        jScrollPane1.getViewport().setOpaque(false);
+        cardArea.setOpaque(false);
     }
 
 	public boolean loadCards(CardsView cardsView, BigCard bigCard, UUID gameId) {

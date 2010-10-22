@@ -39,14 +39,20 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
+import java.util.Map.Entry;
+
+import javax.imageio.ImageIO;
+
 import mage.client.cards.BigCard;
 import mage.client.cards.Permanent;
 import mage.client.util.Config;
+import mage.client.util.gui.ImagePanel;
 import mage.view.PermanentView;
 
 /**
@@ -101,7 +107,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 		moveToFront(perm);
 		perm.update(permanent);
 	}
-
+	
 	private void groupAttachments(PermanentView permanent) {
 		Permanent perm = permanents.get(permanent.getId());
 		int position = getPosition(perm);

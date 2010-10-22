@@ -28,6 +28,8 @@
 
 package mage.client.util;
 
+import java.io.File;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -66,5 +68,4 @@ public final class Constants {
 	public static final int DAMAGE_MAX_LEFT = 180;
 
 	public static final double SCALE_FACTOR = 0.5;
-	
 }

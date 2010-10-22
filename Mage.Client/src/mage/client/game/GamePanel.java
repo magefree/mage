@@ -38,6 +38,9 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -54,8 +57,11 @@ import mage.client.dialog.PickChoiceDialog;
 import mage.client.dialog.ShowCardsDialog;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.remote.Session;
-import mage.client.util.ArrowBuilder;
 import mage.client.util.Config;
+import mage.client.util.Constants;
+import mage.client.util.ImageHelper;
+import mage.client.util.gui.ArrowBuilder;
+import mage.client.util.gui.ImagePanel;
 import mage.util.Logging;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
@@ -72,7 +78,6 @@ public class GamePanel extends javax.swing.JPanel {
 	private final static Logger logger = Logging.getLogger(GamePanel.class.getName());
 
 	private Map<UUID, PlayAreaPanel> players = new HashMap<UUID, PlayAreaPanel>();
-	//private Map<UUID, PlayAreaPanel> players = new HashMap<UUID, PlayAreaPanel>();
 	private Map<UUID, ExileZoneDialog> exiles = new HashMap<UUID, ExileZoneDialog>();
 	private UUID gameId;
 	private UUID playerId;
@@ -82,28 +87,45 @@ public class GamePanel extends javax.swing.JPanel {
     public GamePanel() {
         initComponents();
         
-        // Override layout (I can't edit generated code)
-        this.setLayout(new BorderLayout());
-		final JLayeredPane j = new JLayeredPane();
-		j.add(ArrowBuilder.getArrowsPanel(), JLayeredPane.MODAL_LAYER);
-		j.setSize(1024,768);
-		//j.setBorder(BorderFactory.createLineBorder(Color.green));
-		j.add(jSplitPane1, JLayeredPane.DEFAULT_LAYER);
-		this.add(j);
-		
-		// Enlarge jlayeredpane on resize
-		addComponentListener(new ComponentAdapter(){
-			@Override
-			public void componentResized(ComponentEvent e) {
-				int width = ((JComponent)e.getSource()).getWidth();
-				int height = ((JComponent)e.getSource()).getHeight();
-				j.setSize(width, height);
-				JPanel arrowsPanel = ArrowBuilder.getArrowsPanelRef();
-				if (arrowsPanel != null) arrowsPanel.setSize(width, height);
-				jSplitPane1.setSize(width, height);
-			}
-        });
+        //FIXME: remove from here
+		try {
+			BufferedImage background = ImageHelper.loadImage("/dk_gray.jpg");
+			ImagePanel bgPanel = new ImagePanel(background, ImagePanel.TILED);
+			
+	        // Override layout (I can't edit generated code)
+	        this.setLayout(new BorderLayout());
+			final JLayeredPane j = new JLayeredPane();
+			j.add(ArrowBuilder.getArrowsPanel(), JLayeredPane.MODAL_LAYER);
+			j.setSize(1024,768);
+			//j.setBorder(BorderFactory.createLineBorder(Color.green));
+			//this.add(j);
+			j.add(jSplitPane1, JLayeredPane.DEFAULT_LAYER);
+			
+			jSplitPane1.setOpaque(false);
+			pnlBattlefield.setOpaque(false);
+			jPanel3.setOpaque(false);
+			hand.setOpaque(false);
+			chatPanel.setOpaque(false);
+			bgPanel.add(j);
+			this.add(bgPanel);
 
+			// Enlarge jlayeredpane on resize
+			addComponentListener(new ComponentAdapter(){
+				@Override
+				public void componentResized(ComponentEvent e) {
+					int width = ((JComponent)e.getSource()).getWidth();
+					int height = ((JComponent)e.getSource()).getHeight();
+					j.setSize(width, height);
+					JPanel arrowsPanel = ArrowBuilder.getArrowsPanelRef();
+					if (arrowsPanel != null) arrowsPanel.setSize(width, height);
+					jSplitPane1.setSize(width, height);
+				}
+	        });
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
     }
 
 	public void cleanUp() {

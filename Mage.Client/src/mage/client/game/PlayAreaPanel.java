@@ -56,6 +56,10 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     /** Creates new form PlayAreaPanel */
     public PlayAreaPanel() {
         initComponents();
+        setOpaque(false);
+        jScrollPane1.setOpaque(false);
+        jScrollPane1.getViewport().setOpaque(false);
+        battlefieldPanel.setOpaque(false);
     }
 
 	public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId) {
