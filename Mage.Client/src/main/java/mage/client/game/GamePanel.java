@@ -90,7 +90,7 @@ public class GamePanel extends javax.swing.JPanel {
         
         //FIXME: remove from here
 		try {
-			BufferedImage background = ImageIO.read(this.getClass().getResourceAsStream("/dk_gray.jpg"));
+			BufferedImage background = ImageIO.read(this.getClass().getResourceAsStream("/hardwoodfloor.png"));
 			ImagePanel bgPanel = new ImagePanel(background, ImagePanel.TILED);
 			
 	        // Override layout (I can't edit generated code)
