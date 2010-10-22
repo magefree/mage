@@ -153,6 +153,10 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 	public boolean isOptimizedDrawingEnabled () {
 		return false;
 	}
+	
+	public Map<UUID, Permanent> getPermanents() {
+		return permanents;
+	}
 
     /** This method is called from within the constructor to
      * initialize the form.

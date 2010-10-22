@@ -83,6 +83,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 		this.battlefieldPanel.update(player.getBattlefield());
 	}
 
+	public mage.client.game.BattlefieldPanel getBattlefieldPanel() {
+		return battlefieldPanel;
+	}
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -160,7 +163,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private mage.client.game.BattlefieldPanel battlefieldPanel;
-    private javax.swing.JButton btnCheat;
+	private javax.swing.JButton btnCheat;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private mage.client.game.ManaPool manaPool;

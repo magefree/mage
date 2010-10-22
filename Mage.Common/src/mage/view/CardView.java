@@ -32,13 +32,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import mage.ObjectColor;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.ObjectColor;
+import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
+import mage.game.stack.Spell;
+import mage.target.Target;
 
 /**
  *
@@ -61,6 +65,8 @@ public class CardView implements Serializable {
 	protected Rarity rarity;
 	protected String expansionSetCode;
 
+	public UUID firstTarget; //TODO: there may be several targets
+	
 	public CardView(Card card) {
 		this.id = card.getId();
 		this.name = card.getName();
@@ -88,6 +94,17 @@ public class CardView implements Serializable {
 			this.art = card.getArt();
 			this.rarity = card.getRarity();
 			this.expansionSetCode = card.getExpansionSetCode();
+		}
+		
+		if (card instanceof Spell) {
+			Spell<?> spell = (Spell<?>)card;
+			if (spell.getSpellAbility().getTargets().size() > 0) {
+				Target target = spell.getSpellAbility().getTargets().get(0);
+				if (target.isChosen()) {
+					firstTarget = target.getFirstTarget();
+					System.out.println("First target: " + firstTarget);
+				}
+			}
 		}
 	}
 
@@ -180,5 +197,9 @@ public class CardView implements Serializable {
 
 	public UUID getId() {
 		return id;
+	}
+	
+	public UUID getFirstTarget() {
+		return firstTarget;
 	}
 }

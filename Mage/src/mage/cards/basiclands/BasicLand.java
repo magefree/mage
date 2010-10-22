@@ -45,6 +45,7 @@ public abstract class BasicLand<T extends BasicLand<T>> extends CardImpl<T> {
 		this.supertype.add("Basic");
 		this.subtype.add(name);
 		this.addAbility(mana);
+		setExpansionSetCode("M11");
 	}
 
 	public BasicLand(BasicLand land) {

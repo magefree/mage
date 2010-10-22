@@ -34,20 +34,27 @@
 
 package mage.client.game;
 
+import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
-import mage.client.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Logger;
+
+import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import mage.client.MageFrame;
 import mage.client.dialog.ExileZoneDialog;
 import mage.client.dialog.PickChoiceDialog;
 import mage.client.dialog.ShowCardsDialog;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.remote.Session;
+import mage.client.util.ArrowBuilder;
 import mage.client.util.Config;
 import mage.util.Logging;
 import mage.view.AbilityPickerView;
@@ -65,6 +72,7 @@ public class GamePanel extends javax.swing.JPanel {
 	private final static Logger logger = Logging.getLogger(GamePanel.class.getName());
 
 	private Map<UUID, PlayAreaPanel> players = new HashMap<UUID, PlayAreaPanel>();
+	//private Map<UUID, PlayAreaPanel> players = new HashMap<UUID, PlayAreaPanel>();
 	private Map<UUID, ExileZoneDialog> exiles = new HashMap<UUID, ExileZoneDialog>();
 	private UUID gameId;
 	private UUID playerId;
@@ -73,6 +81,29 @@ public class GamePanel extends javax.swing.JPanel {
     /** Creates new form GamePanel */
     public GamePanel() {
         initComponents();
+        
+        // Override layout (I can't edit generated code)
+        this.setLayout(new BorderLayout());
+		final JLayeredPane j = new JLayeredPane();
+		j.add(ArrowBuilder.getArrowsPanel(), JLayeredPane.MODAL_LAYER);
+		j.setSize(1024,768);
+		//j.setBorder(BorderFactory.createLineBorder(Color.green));
+		j.add(jSplitPane1, JLayeredPane.DEFAULT_LAYER);
+		this.add(j);
+		
+		// Enlarge jlayeredpane on resize
+		addComponentListener(new ComponentAdapter(){
+			@Override
+			public void componentResized(ComponentEvent e) {
+				int width = ((JComponent)e.getSource()).getWidth();
+				int height = ((JComponent)e.getSource()).getHeight();
+				j.setSize(width, height);
+				JPanel arrowsPanel = ArrowBuilder.getArrowsPanelRef();
+				if (arrowsPanel != null) arrowsPanel.setSize(width, height);
+				jSplitPane1.setSize(width, height);
+			}
+        });
+
     }
 
 	public void cleanUp() {
@@ -229,7 +260,9 @@ public class GamePanel extends javax.swing.JPanel {
 		for (PlayerView player: game.getPlayers()) {
 			players.get(player.getPlayerId()).update(player);
 		}
+		
 		this.stack.loadCards(game.getStack(), bigCard, gameId);
+		
 		for (ExileView exile: game.getExile()) {
 			if (!exiles.containsKey(exile.getId())) {
 				ExileZoneDialog newExile = new ExileZoneDialog();
@@ -324,6 +357,14 @@ public class GamePanel extends javax.swing.JPanel {
 		PickChoiceDialog pickChoice = new PickChoiceDialog();
 		pickChoice.showDialog(message, choices);
 		session.sendPlayerString(gameId, pickChoice.getChoice());
+	}
+	
+	public Map<UUID, PlayAreaPanel> getPlayers() {
+		return players;
+	}
+	
+    public javax.swing.JPanel getBattlefield() {
+		return pnlBattlefield;
 	}
 
     /** This method is called from within the constructor to
@@ -620,7 +661,7 @@ public class GamePanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblStep;
     private javax.swing.JLabel lblTurn;
     private javax.swing.JPanel pnlBattlefield;
-    private javax.swing.JPanel pnlGameInfo;
+	private javax.swing.JPanel pnlGameInfo;
     private javax.swing.JPanel pnlReplay;
     private mage.client.cards.Cards stack;
     private javax.swing.JLabel txtActivePlayer;

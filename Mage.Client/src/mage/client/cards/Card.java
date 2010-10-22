@@ -34,6 +34,17 @@
 
 package mage.client.cards;
 
+import static mage.client.util.Constants.CONTENT_MAX_XOFFSET;
+import static mage.client.util.Constants.FRAME_MAX_HEIGHT;
+import static mage.client.util.Constants.FRAME_MAX_WIDTH;
+import static mage.client.util.Constants.NAME_FONT_MAX_SIZE;
+import static mage.client.util.Constants.NAME_MAX_YOFFSET;
+import static mage.client.util.Constants.POWBOX_TEXT_MAX_LEFT;
+import static mage.client.util.Constants.POWBOX_TEXT_MAX_TOP;
+import static mage.client.util.Constants.SYMBOL_MAX_XOFFSET;
+import static mage.client.util.Constants.SYMBOL_MAX_YOFFSET;
+import static mage.client.util.Constants.TYPE_MAX_YOFFSET;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -52,6 +63,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.UUID;
+
 import javax.swing.JScrollPane;
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
@@ -60,17 +72,18 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
+
 import mage.Constants.CardType;
 import mage.client.MageFrame;
+import mage.client.game.PlayAreaPanel;
 import mage.client.remote.Session;
+import mage.client.util.ArrowBuilder;
 import mage.client.util.Config;
-
 import mage.client.util.ImageHelper;
 import mage.sets.Sets;
 import mage.view.AbilityView;
 import mage.view.CardView;
 import mage.view.StackAbilityView;
-import static mage.client.util.Constants.*;
 
 /**
  *
@@ -205,7 +218,7 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 			for (String rule: getRules()) {
 				sb.append("\n").append(rule);
 			}
-			if (card.getExpansionSetCode().length() > 0) {
+			if (card.getExpansionSetCode() != null && card.getExpansionSetCode().length() > 0) {
 				sb.append("\n").append(Sets.getInstance().get(card.getExpansionSetCode()).getName()).append(" - ").append(card.getRarity().toString());
 			}
 		}
@@ -350,6 +363,28 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 			popup = factory.getPopup(this, popupText, (int) this.getLocationOnScreen().getX() + Config.dimensions.frameWidth, (int) this.getLocationOnScreen().getY() + 40);
 			popup.show();
 			popupShowing = true;
+			
+			// Draw Arrows for targets
+			UUID uuid = card.getFirstTarget();
+			if (uuid != null) {
+				System.out.println("Getting play area panel for uuid: " + uuid);
+				
+				PlayAreaPanel p = session.getGame().getPlayers().get(uuid);
+				if (p != null) {
+					Point target = p.getLocationOnScreen();
+					Point me = this.getLocationOnScreen();
+					ArrowBuilder.addArrow((int)me.getX() + 35, (int)me.getY(), (int)target.getX() + 40, (int)target.getY() - 40, Color.red);
+				} else {
+					for (PlayAreaPanel pa : session.getGame().getPlayers().values()) {
+						Permanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
+						if (permanent != null) {
+							Point target = permanent.getLocationOnScreen();
+							Point me = this.getLocationOnScreen();
+							ArrowBuilder.addArrow((int)me.getX() + 35, (int)me.getY(), (int)target.getX() + 40, (int)target.getY() + 10, Color.red);
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -359,6 +394,7 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 		if (popup != null) {
 			popup.hide();
 			popupShowing = false;
+			ArrowBuilder.removeAllArrows();
 		}
 	}
 
