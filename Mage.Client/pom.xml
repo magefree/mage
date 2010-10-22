@@ -40,7 +40,7 @@
 		<resources>
 			<resource>
 				<directory>resources</directory>
-				<filtering>false</filtering>
+				<filtering>false</filtering> 
 			</resource>
 		</resources>
 
