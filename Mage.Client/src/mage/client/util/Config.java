@@ -34,6 +34,9 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
+
 import mage.client.cards.CardDimensions;
 import mage.util.Logging;
 
@@ -58,6 +61,11 @@ public class Config {
 	public static final double cardScalingFactor;
 	public static final boolean useResource;
 	public static final CardDimensions dimensions;
+	
+	public static final String defaultGameType;
+	public static final String defaultDeckPath;
+	public static final String defaultOtherPlayerIndex;
+	public static final String defaultComputerName;
 
 	static {
 		Properties p = new Properties();
@@ -72,6 +80,11 @@ public class Config {
 		cardsResourcePath = p.getProperty("cards-resource-path");
 		resourcePath = p.getProperty("resource-path");
 		cardScalingFactor = Double.valueOf(p.getProperty("card-scaling-factor"));
+		defaultGameType = p.getProperty("default-game-type", "Human");
+		defaultDeckPath = p.getProperty("default-deck-path");
+		defaultOtherPlayerIndex = p.getProperty("default-other-player-index");
+		defaultComputerName = p.getProperty("default-computer-name");
+		
 		dimensions = new CardDimensions(cardScalingFactor);
 		File test = new File(cardsResourcePath);
 		if (test.isDirectory()) {

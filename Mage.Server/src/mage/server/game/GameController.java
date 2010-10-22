@@ -28,31 +28,40 @@
 
 package mage.server.game;
 
+import java.io.File;
 import java.util.Collection;
-import java.util.Map.Entry;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
 import java.util.UUID;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import mage.Constants;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.game.Game;
-import mage.game.events.TableEvent;
-import mage.server.ChatManager;
-import mage.server.util.ThreadExecutor;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
+import mage.game.events.TableEvent;
 import mage.players.Player;
+import mage.server.ChatManager;
+import mage.server.util.ThreadExecutor;
 import mage.util.Logging;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
-import mage.view.ChatMessage.MessageColor;
 import mage.view.GameView;
+import mage.view.ChatMessage.MessageColor;
 
 /**
  *
@@ -205,6 +214,7 @@ public class GameController implements GameCallback {
 		for (Card card: deck.getCards()) {
 			card.putOntoBattlefield(game, Zone.OUTSIDE, playerId);
 		}
+		addCardsForTesting(game, game.getPlayer(playerId));
 		updateGame();
 	}
 
@@ -368,4 +378,93 @@ public class GameController implements GameCallback {
 		endGame(result);
 	}
 
+	/**
+	 * Replaces cards in player's hands by specified in config/init.txt.<br/>
+	 * <br/>
+	 * <b>Implementation note:</b><br/>
+	 * 1. Read init.txt line by line<br/>
+	 * 2. Parse line using the following format: line ::= <zone>:<nickname>:<card name>:<amount><br/>
+	 * 3. If zone equals to 'hand', add card to player's library<br/>
+	 *   3a. Then swap added card with any card in player's hand<br/>
+	 *   3b. Parse next line (go to 2.), If EOF go to 4.<br/>
+	 * 4. Log message to all players that cards were added (to prevent unfair play).<br/>  
+	 * 5. Exit<br/>
+	 */
+	private void addCardsForTesting(Game game, Player player) {
+		try {
+			File f = new File(Constants.INIT_FILE_PATH);
+			Pattern pattern = Pattern.compile("([a-zA-Z]*):([\\w]*):([a-zA-Z ,.!\\d]*):([\\d]*)");
+			if (!f.exists()) {
+				//TODO: log warning with Logger
+				System.err.println("WARN! Couldn't find init file: " + Constants.INIT_FILE_PATH);
+				return;
+			}
+			
+			System.err.println("Parsing init.txt for player : " + player.getName());
+			
+			Scanner scanner = new Scanner(f);
+			while (scanner.hasNextLine()) {
+				String line = scanner.nextLine().trim();
+				if (line.startsWith("#")) continue;
+				Matcher m = pattern.matcher(line);
+				if (m.matches()) {
+					
+					String zone = m.group(1);
+					String nickname = m.group(2);
+					
+					if (nickname.equals(player.getName())) {
+						Zone gameZone;
+						if ("hand".equalsIgnoreCase(zone)) {
+							gameZone = Zone.HAND;
+						} else if ("battlefield".equalsIgnoreCase(zone)) {
+							gameZone = Zone.BATTLEFIELD;
+						} else if ("graveyard".equalsIgnoreCase(zone)) {
+							gameZone = Zone.GRAVEYARD;
+						} else {
+							continue; // go parse next line
+						}
+						
+						String cardName = m.group(3);
+						Integer amount = Integer.parseInt(m.group(4));
+						for (int i = 0; i < amount; i++) {
+							Card card = CardImpl.createCard(cardName);
+							if (card != null) {
+								Set<Card> cards = new HashSet<Card>();
+								cards.add(card);
+								game.loadCards(cards, player.getId());
+								swapWithAnyCard(game, player, card, gameZone);
+							} else {
+								//TODO: log warning with Logger
+								System.err.println("ERROR! Couldn't create a card: " + cardName);
+							}
+						}
+					} else {
+						//TODO: log warning with Logger
+						System.err.println("WARN! Was skipped: " + line);
+					}
+				} else {
+					//TODO: log warning with Logger
+					System.err.println("WARN! Init string wasn't parsed: " + line);
+				}
+			}
+		} catch (Exception e) {
+			//TODO: add logger
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Swap cards between specified card from library and any hand card.
+	 * 
+	 * @param game
+	 * @param card Card to put to player's hand
+	 */
+	private void swapWithAnyCard(Game game, Player player, Card card, Zone zone) {
+		if (zone.equals(Zone.BATTLEFIELD)) {
+			card.putOntoBattlefield(game, Zone.OUTSIDE, player.getId());			
+		} else {
+			card.moveToZone(zone, game, false);	
+		}
+		System.out.println("Added card to player's " + zone.toString() + ": " + card.getName() +", player = " + player.getName());
+	}
 }

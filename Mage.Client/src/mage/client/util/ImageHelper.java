@@ -117,7 +117,8 @@ public class ImageHelper {
 					StringBuilder sb = new StringBuilder();
 					sb.append(Config.setIconsResourcePath).append("graphic_").append(symbolCode).append("_").append(card.getRarity().getSymbolCode()).append(".png");
 					BufferedImage icon = loadImage(sb.toString(), ICON_MAX_HEIGHT);
-					g.drawImage(icon, ICON_MAX_XOFFSET - icon.getWidth(), ICON_MAX_YOFFSET, null);
+					if (icon != null)
+						g.drawImage(icon, ICON_MAX_XOFFSET - icon.getWidth(), ICON_MAX_YOFFSET, null);
 				}
 			}
 

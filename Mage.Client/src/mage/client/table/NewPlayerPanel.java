@@ -39,6 +39,7 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import mage.client.MageFrame;
+import mage.client.util.Config;
 
 /**
  *
@@ -54,6 +55,8 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 		fcSelectDeck = new JFileChooser();
 		fcSelectDeck.setAcceptAllFileFilterUsed(false);
 		fcSelectDeck.addChoosableFileFilter(new DeckFilter());
+		if (Config.defaultDeckPath != null) this.txtPlayerDeck.setText(Config.defaultDeckPath);
+		if (Config.defaultComputerName != null) this.txtPlayerName.setText(Config.defaultComputerName);
     }
 
     public void setPlayerName(String playerName) {
