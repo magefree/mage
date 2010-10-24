@@ -10,7 +10,7 @@
   </parent>
   
   <groupId>org.mage</groupId>
-  <artifactId>mage-game-freeforall</artifactId>
+  <artifactId>Mage-Game-FreeForAll</artifactId>
   <packaging>jar</packaging>
   <version>0.3</version>
   <name>Mage Game Free For All</name>
@@ -19,7 +19,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.mage</groupId> 
-			<artifactId>mage</artifactId> 
+			<artifactId>Mage</artifactId> 
 			<version>${mage-version}</version> 
 		</dependency>
 	</dependencies>

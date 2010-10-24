@@ -10,10 +10,10 @@
 	</parent>
 
 	<groupId>org.mage</groupId>
-	<artifactId>mage</artifactId>
+	<artifactId>Mage</artifactId>
 	<packaging>jar</packaging>
 	<version>0.3</version>
-	<name>Mage Application</name>
+	<name>Mage Framework</name>
 	<url>http://maven.apache.org</url>
 
 	<dependencies />
