@@ -10,22 +10,24 @@
 	<name>Mage Root</name>	
 	<description>Mage Root POM</description>
 
+        <modules>
+                <module>Mage</module>
+                <module>Mage.Common</module>
+		<module>Mage.Server</module>
+		<module>Mage.Sets</module>
+		<module>Mage.Client</module>
+		<module>Mage.Deck.Constructed</module>
+		<module>Mage.Game.FreeForAll</module>
+		<module>Mage.Game.TwoPlayerDuel</module>
+		<module>Mage.Player.AI</module>
+		<!--<module>Mage.Player.AIMinimax</module>-->
+		<module>Mage.Player.Human</module>
+        </modules>
+
 	<profiles>
         <profile>
             <id>normal-build</id>
-            <modules>
-                <module>Mage</module>
-                <module>Mage.Common</module>
-				<module>Mage.Server</module>
-				<module>Mage.Sets</module>
-				<module>Mage.Client</module>
-				<module>Mage.Deck.Constructed</module>
-				<module>Mage.Game.FreeForAll</module>
-				<module>Mage.Game.TwoPlayerDuel</module>
-				<module>Mage.Player.AI</module>
-				<!--<module>Mage.Player.AIMinimax</module>-->
-				<module>Mage.Player.Human</module>
-            </modules>
+            
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
