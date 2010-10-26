@@ -20,7 +20,7 @@
 		<module>Mage.Game.FreeForAll</module>
 		<module>Mage.Game.TwoPlayerDuel</module>
 		<module>Mage.Player.AI</module>
-		<!--<module>Mage.Player.AIMinimax</module>-->
+		<module>Mage.Player.AIMinimax</module>
 		<module>Mage.Player.Human</module>
         </modules>
 
