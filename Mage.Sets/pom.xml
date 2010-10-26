@@ -19,7 +19,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.mage</groupId> 
-			<artifactId>mage</artifactId> 
+			<artifactId>Mage</artifactId>
 			<version>${mage-version}</version> 
 		</dependency>
 	</dependencies>

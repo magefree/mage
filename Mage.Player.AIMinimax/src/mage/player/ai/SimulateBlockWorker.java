@@ -38,25 +38,25 @@ import mage.util.Logging;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SimulateBlockWorker implements Callable {
-
-	private final static Logger logger = Logging.getLogger(SimulationWorker.class.getName());
-
-	private SimulationNode node;
-	private ComputerPlayer3 player;
-
-	public SimulateBlockWorker(ComputerPlayer3 player, SimulationNode node) {
-		this.player = player;
-		this.node = node;
-	}
-
-	@Override
-	public Object call() {
-		try {
-//			player.simulateBlock(node);
-		} catch (Exception ex) {
-			logger.log(Level.SEVERE, null, ex);
-		}
-		return null;
-	}
-}
+//public class SimulateBlockWorker implements Callable {
+//
+//	private final static Logger logger = Logging.getLogger(SimulationWorker.class.getName());
+//
+//	private SimulationNode node;
+////	private ComputerPlayer3 player;
+//
+//	public SimulateBlockWorker(ComputerPlayer3 player, SimulationNode node) {
+//		this.player = player;
+//		this.node = node;
+//	}
+//
+//	@Override
+//	public Object call() {
+//		try {
+////			player.simulateBlock(node);
+//		} catch (Exception ex) {
+//			logger.log(Level.SEVERE, null, ex);
+//		}
+//		return null;
+//	}
+//}
