@@ -39,7 +39,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.0.2</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
@@ -51,7 +50,26 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-
+                        <plugin>
+                            <artifactId>maven-jar-plugin</artifactId>
+                            <configuration>
+                                 <archive>
+                                    <manifest>
+                                        <addClasspath>true</addClasspath>
+                                        <classpathPrefix>lib/</classpathPrefix>
+                                        <mainClass>mage.client.MageFrame</mainClass>
+                                    </manifest>
+                                </archive>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <artifactId>maven-assembly-plugin</artifactId>
+                            <configuration>
+                                <descriptors>
+                                    <descriptor>src/main/assembly/distribution.xml</descriptor>
+                                </descriptors>                               
+                            </configuration>
+                        </plugin>
 		</plugins>
 
 		<finalName>mage-client</finalName>
