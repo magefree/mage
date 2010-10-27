@@ -20,17 +20,8 @@
   </dependencySets>
   <fileSets>
     <fileSet>
-      <directory>dist/</directory>
-      <outputDirectory>/</outputDirectory>
-      <includes>
-        <include>*.sh</include>
-        <include>*.bat</include>
-        <include>*.xml</include>
-      </includes>
-    </fileSet>
-    <fileSet>
-      <directory>config/</directory>
-      <outputDirectory>config/</outputDirectory>
-    </fileSet>
+      <directory>release/</directory>
+      <outputDirectory>/</outputDirectory>      
+    </fileSet>    
   </fileSets>
 </assembly>
