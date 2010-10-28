@@ -56,7 +56,7 @@ public class DiscardSourceCost extends CostImpl<DiscardSourceCost> {
 	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
 		Player player = game.getPlayer(controllerId);
 		Card card = player.getHand().get(sourceId, game);
-		return player.discard(card, game);
+		return player.discard(card, null, game);
 	}
 
 	@Override

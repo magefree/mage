@@ -28,8 +28,6 @@
 
 package mage.target.common;
 
-import mage.Constants.TargetController;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPermanent;
 

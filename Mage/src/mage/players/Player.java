@@ -28,12 +28,10 @@
 
 package mage.players;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.Constants.Outcome;
-import mage.Constants.Zone;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Abilities;
@@ -54,7 +52,6 @@ import mage.filter.FilterAbility;
 import mage.game.events.GameEvent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
 import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
@@ -106,9 +103,9 @@ public interface Player extends MageItem, Copyable<Player> {
 	public boolean triggerAbility(TriggeredAbility ability, Game game);
 	public boolean canBeTargetedBy(MageObject source);
 	public void checkTriggers(GameEvent event, Game game);
-	public void discard(int amount, Game game);
+	public void discard(int amount, Ability source, Game game);
 	public void discardToMax(Game game);
-	public boolean discard(Card card, Game game);
+	public boolean discard(Card card, Ability source, Game game);
 	public void lost(Game game);
 	public void won(Game game);
 	public void leaveGame(Game game);

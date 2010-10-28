@@ -79,6 +79,10 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnExit" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnImport" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -99,7 +103,9 @@
                       <Component id="btnNew" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnExit" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="188" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnImport" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="159" max="32767" attributes="0"/>
                   <Component id="bigCard" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -155,6 +161,15 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExitActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnImport">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Import"/>
+            <Property name="name" type="java.lang.String" value="btnImport" noResource="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnImportActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

@@ -175,7 +175,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 		Permanent creature = game.getPermanent(creatureId);
 		if (creature != null) {
 			creature.setAttacking(false);
-			creature.setBlocking(false);
+			creature.setBlocking(0);
 			for (CombatGroup group: groups) {
 				group.remove(creatureId);
 			}
@@ -189,14 +189,14 @@ public class Combat implements Serializable, Copyable<Combat> {
 				creature = game.getPermanent(attacker);
 				if (creature != null) {
 					creature.setAttacking(false);
-					creature.setBlocking(false);
+					creature.setBlocking(0);
 				}
 			}
 			for (UUID blocker: group.blockers) {
 				creature = game.getPermanent(blocker);
 				if (creature != null) {
 					creature.setAttacking(false);
-					creature.setBlocking(false);
+					creature.setBlocking(0);
 				}
 			}
 		}

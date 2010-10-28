@@ -58,6 +58,7 @@ import mage.view.CardsView;
 public class DeckEditorPanel extends javax.swing.JPanel {
 
 	private JFileChooser fcSelectDeck;
+	private JFileChooser fcImportDeck;
 	private Deck deck = new Deck();;
 
     /** Creates new form DeckEditorPanel */
@@ -66,6 +67,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		fcSelectDeck = new JFileChooser();
 		fcSelectDeck.setAcceptAllFileFilterUsed(false);
 		fcSelectDeck.addChoosableFileFilter(new DeckFilter());
+		fcImportDeck = new JFileChooser();
+		fcImportDeck.setAcceptAllFileFilterUsed(false);
+		fcImportDeck.addChoosableFileFilter(new ImportFilter());
     }
 
 	public void showDeckEditor() {
@@ -152,6 +156,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         btnLoad = new javax.swing.JButton();
         btnNew = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
+        btnImport = new javax.swing.JButton();
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setResizeWeight(0.5);
@@ -191,6 +196,14 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             }
         });
 
+        btnImport.setText("Import");
+        btnImport.setName("btnImport"); // NOI18N
+        btnImport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImportActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -211,7 +224,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnNew)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExit)))
+                        .addComponent(btnExit))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnImport)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -227,7 +243,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     .addComponent(btnLoad)
                     .addComponent(btnNew)
                     .addComponent(btnExit))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnImport)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
                 .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -306,10 +324,43 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		this.setVisible(false);
 	}//GEN-LAST:event_btnExitActionPerformed
 
+	private void btnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportActionPerformed
+		String lastFolder = MageFrame.getPreferences().get("lastImportFolder", "");
+		if (!lastFolder.isEmpty())
+			fcImportDeck.setCurrentDirectory(new File(lastFolder));
+		int ret = fcImportDeck.showOpenDialog(this);
+		if (ret == JFileChooser.APPROVE_OPTION) {
+			File file = fcImportDeck.getSelectedFile();
+			try {
+				setCursor(new Cursor(Cursor.WAIT_CURSOR));
+				deck = Deck.load(importDeck(file.getPath()));
+			} catch (Exception ex) {
+				Logger.getLogger(DeckEditorPanel.class.getName()).log(Level.SEVERE, null, ex);
+			}
+			finally {
+				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+			refreshDeck();
+			try {
+				MageFrame.getPreferences().put("lastImportFolder", file.getCanonicalPath());
+			} catch (IOException ex) {	}
+		}
+		fcImportDeck.setSelectedFile(null);
+	}//GEN-LAST:event_btnImportActionPerformed
+
+	public DeckCardLists importDeck(String file) {
+		DeckImporter importer;
+		if (file.endsWith("dec"))
+			importer = new DecDeckImporter();
+		else
+			importer = new MWSDeckImporter();
+		return importer.importDeck(file);
+	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private mage.client.cards.BigCard bigCard;
     private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnImport;
     private javax.swing.JButton btnLoad;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnSave;
@@ -343,5 +394,32 @@ class DeckFilter extends FileFilter {
 	@Override
 	public String getDescription() {
 		return "Deck Files";
+	}
+}
+
+class ImportFilter extends FileFilter {
+
+	@Override
+	public boolean accept(File f) {
+		if (f.isDirectory())
+			return true;
+
+        String ext = null;
+        String s = f.getName();
+        int i = s.lastIndexOf('.');
+
+        if (i > 0 &&  i < s.length() - 1) {
+            ext = s.substring(i+1).toLowerCase();
+        }
+		if (ext != null) {
+			if (ext.equals("dec") || ext.equals("mwDeck"))
+				return true;
+		}
+		return false;
+	}
+
+	@Override
+	public String getDescription() {
+		return "*.dec | *.mwDeck";
 	}
 }

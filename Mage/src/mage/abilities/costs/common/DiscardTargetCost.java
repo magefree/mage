@@ -60,7 +60,7 @@ public class DiscardTargetCost extends CostImpl<DiscardTargetCost> {
 				Card card = player.getHand().get(targetId, game);
 				if (card == null)
 					return false;
-				paid |= player.discard(card, game);
+				paid |= player.discard(card, null, game);
 			}
 		}
 		return paid;

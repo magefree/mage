@@ -147,13 +147,13 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 			logger.fine("activate failed - target");
 			return false;
 		}
+		game.getObject(sourceId).adjustCosts(this, game);
 		if (!useAlternativeCost(game)) {
 			if (!manaCosts.pay(game, sourceId, controllerId, noMana)) {
 				logger.fine("activate failed - mana");
 				return false;
 			}
 		}
-		game.getObject(sourceId).adjustCosts(this, game);
 		if (!costs.pay(game, sourceId, controllerId, noMana)) {
 			logger.fine("activate failed - non mana costs");
 			return false;

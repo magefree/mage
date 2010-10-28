@@ -43,7 +43,7 @@ public class Plains1 extends mage.cards.basiclands.Plains {
 
 	@Override
 	public String getArt() {
-		return "80949_typ_reg_sty_010.jpg";
+		return "08661_typ_reg_sty_010.jpg";
 	}
 
 	public Plains1(final Plains1 card) {

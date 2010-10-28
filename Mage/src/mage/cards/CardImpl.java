@@ -31,6 +31,8 @@ package mage.cards;
 import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -43,9 +45,12 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.PermanentCard;
+import mage.util.Logging;
 import mage.watchers.Watchers;
 
 public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> implements Card {
+
+	private final static Logger logger = Logging.getLogger(CardImpl.class.getName());
 
 	protected UUID ownerId;
 	protected Watchers watchers = new Watchers();
@@ -92,7 +97,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 			return card;
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, "Error loading card: " + name, e);
 			return null;
 		}
 	}
@@ -189,7 +194,13 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 						game.getPlayer(ownerId).getLibrary().putOnTop(this, game);
 					else
 						game.getPlayer(ownerId).getLibrary().putOnBottom(this, game);
-
+					break;
+				case BATTLEFIELD:
+					PermanentCard permanent = new PermanentCard(this, ownerId);
+					game.getBattlefield().addPermanent(permanent);
+					permanent.entersBattlefield(game);
+					game.applyEffects();
+					break;
 			}
 			zone = event.getToZone();
 			game.fireEvent(new ZoneChangeEvent(this.getId(), ownerId, fromZone, event.getToZone()));

@@ -26,56 +26,53 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.client.deckeditor;
 
-import mage.Constants.Duration;
-import mage.abilities.Ability;
-import mage.abilities.keyword.ProtectionAbility;
-import mage.choices.ChoiceColor;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import java.io.File;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import mage.cards.decks.DeckCardLists;
+import mage.client.MageFrame;
+import mage.util.Logging;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GainProtectionFromColorTargetEOTEffect extends GainAbilityTargetEffect {
+public abstract class DeckImporterImpl implements DeckImporter {
 
-	FilterCard protectionFilter;
-
-	public GainProtectionFromColorTargetEOTEffect() {
-		super(new ProtectionAbility(new FilterCard()), Duration.EndOfTurn);
-		protectionFilter = (FilterCard)((ProtectionAbility)ability).getFilter();
-		protectionFilter.setUseColor(true);
-	}
-
-	public GainProtectionFromColorTargetEOTEffect(final GainProtectionFromColorTargetEOTEffect effect) {
-		super(effect);
-		this.protectionFilter = effect.protectionFilter.copy();
-	}
+	private final static Logger logger = Logging.getLogger(DeckImporterImpl.class.getName());
+	protected StringBuilder sbMessage = new StringBuilder();
+	protected int lineCount;
 
 	@Override
-	public GainProtectionFromColorTargetEOTEffect copy() {
-		return new GainProtectionFromColorTargetEOTEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-		protectionFilter.setColor(choice.getColor());
-		protectionFilter.setMessage(choice.getChoice());
-		Permanent creature = game.getPermanent(source.getFirstTarget());
-		if (creature != null) {
-			creature.addAbility(ability);
-			return true;
+	public DeckCardLists importDeck(String file) {
+		File f = new File(file);
+		DeckCardLists deckList = new DeckCardLists();
+		lineCount = 0;
+		sbMessage.setLength(0);
+		try {
+			Scanner scanner = new Scanner(f);
+			try {
+				while (scanner.hasNextLine()) {
+					String line = scanner.nextLine().trim();
+					lineCount++;
+					readLine(line, deckList);
+				}
+				if (sbMessage.length() > 0) {
+					JOptionPane.showMessageDialog(MageFrame.getDesktop(), sbMessage.toString(), "Error importing deck", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			finally {
+				scanner.close();
+			}
+		} catch (Exception ex) {
+			logger.log(Level.SEVERE, null, ex);
 		}
-		return false;
+		return deckList;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "target creature you control gains protection from the color of your choice until end of turn";
-	}
-
+	protected abstract void readLine(String line, DeckCardLists deckList);
 }

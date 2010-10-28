@@ -75,8 +75,8 @@ public interface Permanent extends Card {
 	public boolean destroy(UUID sourceId, Game game, boolean noRegen);
 	public boolean sacrifice(UUID sourceId, Game game);
 	public void entersBattlefield(Game game);
-	public boolean moveToZone(Zone zone, Game game, boolean flag);
-	public boolean moveToExile(UUID exileId, String name, Game game);
+//	public boolean moveToZone(Zone zone, Game game, boolean flag);
+//	public boolean moveToExile(UUID exileId, String name, Game game);
 	public String getValue();
 	public void setArt(String art);
 
@@ -94,9 +94,11 @@ public interface Permanent extends Card {
 	public void addToughness(int toughness);
 
 	public boolean isAttacking();
-	public boolean isBlocking();
+	public int getBlocking();
 	public void setAttacking(boolean attacking);
-	public void setBlocking(boolean blocking);
+	public void setBlocking(int blocking);
+	public int getMaxBlocks();
+	public void setMaxBlocks(int maxBlocks);
 	public boolean canAttack(Game game);
 	public boolean canBlock(UUID attackerId, Game game);
 	public boolean removeFromCombat(Game game);

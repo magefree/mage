@@ -28,14 +28,11 @@
 
 package mage;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public final class Constants {
 	
-	public static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
-
 	public enum ColoredManaSymbol {
 		W("W"), U("U"), B("B"), R("R"), G("G");
 

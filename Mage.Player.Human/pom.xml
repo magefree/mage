@@ -10,7 +10,7 @@
   </parent>
   
   <groupId>org.mage</groupId>
-  <artifactId>Mage-Player-Human</artifactId>
+  <artifactId>mage-player-human</artifactId>
   <packaging>jar</packaging>
   <version>0.3</version>
   <name>Mage Player Human</name>
@@ -19,7 +19,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.mage</groupId> 
-			<artifactId>Mage</artifactId> 
+			<artifactId>mage</artifactId> 
 			<version>${mage-version}</version> 
 		</dependency>
 	</dependencies>

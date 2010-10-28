@@ -48,6 +48,7 @@ import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
+import mage.abilities.StateTriggeredAbility;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -97,7 +98,10 @@ public class StackAbility implements StackObject, Ability {
 	
 	@Override
 	public void counter(Game game) {
-		
+		//20100716 - 603.8
+		if (ability instanceof StateTriggeredAbility) {
+			((StateTriggeredAbility)ability).counter();
+		}
 	}
 
 	@Override

@@ -249,12 +249,15 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 				return;
 			}
 		}
-		game.getPermanent(blockerId).setBlocking(true);
-		blockers.add(blockerId);
-		blockerOrder.add(blockerId);
-		this.blocked = true;
-		for (UUID attackerId: attackers) {
-			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, attackerId, blockerId, playerId));
+		Permanent blocker = game.getPermanent(blockerId);
+		if (blockerId != null) {
+			blocker.setBlocking(blocker.getBlocking() + 1);
+			blockers.add(blockerId);
+			blockerOrder.add(blockerId);
+			this.blocked = true;
+			for (UUID attackerId: attackers) {
+				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, attackerId, blockerId, playerId));
+			}
 		}
 	}
 

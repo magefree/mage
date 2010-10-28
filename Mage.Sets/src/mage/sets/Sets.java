@@ -72,4 +72,13 @@ public class Sets extends HashMap<String, ExpansionSet> {
 		return names;
 	}
 
+	public static String findCard(String name) {
+		for (ExpansionSet set: fINSTANCE.values()) {
+			for (Card card: set.createCards()) {
+				if (name.equals(card.getName()))
+					return card.getClass().getCanonicalName();
+			}
+		}
+		return null;
+	}
 }

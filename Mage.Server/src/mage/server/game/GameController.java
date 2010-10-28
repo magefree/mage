@@ -38,6 +38,7 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -57,6 +58,7 @@ import mage.game.events.TableEvent;
 import mage.players.Player;
 import mage.server.ChatManager;
 import mage.server.util.ThreadExecutor;
+import mage.sets.Sets;
 import mage.util.Logging;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
@@ -71,6 +73,7 @@ public class GameController implements GameCallback {
 
 	private static ExecutorService gameExecutor = ThreadExecutor.getInstance().getGameExecutor();
 	private final static Logger logger = Logging.getLogger(GameController.class.getName());
+	public static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
 
 	private ConcurrentHashMap<UUID, GameSession> gameSessions = new ConcurrentHashMap<UUID, GameSession>();
 	private ConcurrentHashMap<UUID, GameWatcher> watchers = new ConcurrentHashMap<UUID, GameWatcher>();
@@ -392,64 +395,64 @@ public class GameController implements GameCallback {
 	 */
 	private void addCardsForTesting(Game game, Player player) {
 		try {
-			File f = new File(Constants.INIT_FILE_PATH);
+			File f = new File(INIT_FILE_PATH);
 			Pattern pattern = Pattern.compile("([a-zA-Z]*):([\\w]*):([a-zA-Z ,.!\\d]*):([\\d]*)");
 			if (!f.exists()) {
-				//TODO: log warning with Logger
-				System.err.println("WARN! Couldn't find init file: " + Constants.INIT_FILE_PATH);
+				logger.warning("Couldn't find init file: " + INIT_FILE_PATH);
 				return;
 			}
 			
-			System.err.println("Parsing init.txt for player : " + player.getName());
+			logger.info("Parsing init.txt for player : " + player.getName());
 			
 			Scanner scanner = new Scanner(f);
-			while (scanner.hasNextLine()) {
-				String line = scanner.nextLine().trim();
-				if (line.startsWith("#")) continue;
-				Matcher m = pattern.matcher(line);
-				if (m.matches()) {
-					
-					String zone = m.group(1);
-					String nickname = m.group(2);
-					
-					if (nickname.equals(player.getName())) {
-						Zone gameZone;
-						if ("hand".equalsIgnoreCase(zone)) {
-							gameZone = Zone.HAND;
-						} else if ("battlefield".equalsIgnoreCase(zone)) {
-							gameZone = Zone.BATTLEFIELD;
-						} else if ("graveyard".equalsIgnoreCase(zone)) {
-							gameZone = Zone.GRAVEYARD;
-						} else {
-							continue; // go parse next line
-						}
-						
-						String cardName = m.group(3);
-						Integer amount = Integer.parseInt(m.group(4));
-						for (int i = 0; i < amount; i++) {
-							Card card = CardImpl.createCard(cardName);
-							if (card != null) {
-								Set<Card> cards = new HashSet<Card>();
-								cards.add(card);
-								game.loadCards(cards, player.getId());
-								swapWithAnyCard(game, player, card, gameZone);
+			try {
+				while (scanner.hasNextLine()) {
+					String line = scanner.nextLine().trim();
+					if (line.startsWith("#")) continue;
+					Matcher m = pattern.matcher(line);
+					if (m.matches()) {
+
+						String zone = m.group(1);
+						String nickname = m.group(2);
+
+						if (nickname.equals(player.getName())) {
+							Zone gameZone;
+							if ("hand".equalsIgnoreCase(zone)) {
+								gameZone = Zone.HAND;
+							} else if ("battlefield".equalsIgnoreCase(zone)) {
+								gameZone = Zone.BATTLEFIELD;
+							} else if ("graveyard".equalsIgnoreCase(zone)) {
+								gameZone = Zone.GRAVEYARD;
 							} else {
-								//TODO: log warning with Logger
-								System.err.println("ERROR! Couldn't create a card: " + cardName);
+								continue; // go parse next line
 							}
+
+							String cardName = m.group(3);
+							Integer amount = Integer.parseInt(m.group(4));
+							for (int i = 0; i < amount; i++) {
+								Card card = CardImpl.createCard(Sets.findCard(cardName));
+								if (card != null) {
+									Set<Card> cards = new HashSet<Card>();
+									cards.add(card);
+									game.loadCards(cards, player.getId());
+									swapWithAnyCard(game, player, card, gameZone);
+								} else {
+									logger.severe("Couldn't create a card: " + cardName);
+								}
+							}
+						} else {
+							logger.warning("Was skipped: " + line);
 						}
 					} else {
-						//TODO: log warning with Logger
-						System.err.println("WARN! Was skipped: " + line);
+						logger.warning("Init string wasn't parsed: " + line);
 					}
-				} else {
-					//TODO: log warning with Logger
-					System.err.println("WARN! Init string wasn't parsed: " + line);
 				}
 			}
+			finally {
+				scanner.close();
+			}
 		} catch (Exception e) {
-			//TODO: add logger
-			e.printStackTrace();
+			logger.log(Level.SEVERE, "", e);
 		}
 	}
 	
@@ -465,6 +468,6 @@ public class GameController implements GameCallback {
 		} else {
 			card.moveToZone(zone, game, false);	
 		}
-		System.out.println("Added card to player's " + zone.toString() + ": " + card.getName() +", player = " + player.getName());
+		logger.info("Added card to player's " + zone.toString() + ": " + card.getName() +", player = " + player.getName());
 	}
 }

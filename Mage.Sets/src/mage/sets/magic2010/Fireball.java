@@ -57,7 +57,7 @@ public class Fireball extends CardImpl<Fireball> {
 
 	@Override
 	public void adjustCosts(Ability ability, Game game) {
-		int numTargets = ability.getTargets().get(0).getNumberOfTargets();
+		int numTargets = ability.getTargets().get(0).getTargets().size();
 		if (numTargets > 1) {
 			ability.getManaCosts().add(new GenericManaCost(numTargets - 1));
 		}
@@ -90,23 +90,25 @@ class FireballEffect extends OneShotEffect<FireballEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		int numTargets = source.getTargets().get(0).getNumberOfTargets();
+		int numTargets = source.getTargets().get(0).getTargets().size();
 		int damage = source.getManaCosts().getVariableCosts().get(0).getAmount();
-		int damagePer = damage/numTargets;
-		if (damagePer > 0) {
-			for (UUID targetId: source.getTargets().get(0).getTargets()) {
-				Permanent permanent = game.getPermanent(targetId);
-				if (permanent != null) {
-					permanent.damage(damagePer, source.getSourceId(), game, true);
-				}
-				else {
-					Player player = game.getPlayer(targetId);
-					if (player != null) {
-						player.damage(damagePer, source.getSourceId(), game, false, true);
+		if (numTargets > 0) {
+			int damagePer = damage/numTargets;
+			if (damagePer > 0) {
+				for (UUID targetId: source.getTargets().get(0).getTargets()) {
+					Permanent permanent = game.getPermanent(targetId);
+					if (permanent != null) {
+						permanent.damage(damagePer, source.getSourceId(), game, true);
+					}
+					else {
+						Player player = game.getPlayer(targetId);
+						if (player != null) {
+							player.damage(damagePer, source.getSourceId(), game, false, true);
+						}
 					}
 				}
+				return true;
 			}
-			return true;
 		}
 		return false;
 	}

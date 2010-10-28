@@ -127,7 +127,7 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 
 	@Override
 	public boolean isChosen() {
-		if (targets.size() == maxNumberOfTargets)
+		if (maxNumberOfTargets != 0 && targets.size() == maxNumberOfTargets)
 			return true;
 		return chosen;
 	}
@@ -157,7 +157,7 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 	@Override
 	public void addTarget(UUID id, Ability source, Game game) {
 		//20100423 - 113.3
-		if (targets.size() < maxNumberOfTargets) {
+		if (maxNumberOfTargets == 0 || targets.size() < maxNumberOfTargets) {
 			if (!targets.containsKey(id)) {
 				if (source != null) {
 					if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getSourceId(), source.getControllerId()))) {

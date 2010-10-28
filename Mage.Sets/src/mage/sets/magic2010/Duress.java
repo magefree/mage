@@ -103,7 +103,7 @@ class DuressEffect extends OneShotEffect<DuressEffect> {
 				if (you.chooseTarget(player.getHand(), target, source, game)) {
 					Card card = player.getHand().get(target.getFirstTarget(), game);
 					if (card != null) {
-						return player.discard(card, game);
+						return player.discard(card, source, game);
 					}
 				}
 			}

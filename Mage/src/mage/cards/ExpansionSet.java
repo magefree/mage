@@ -43,12 +43,15 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mage.util.Logging;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class ExpansionSet implements Serializable {
+
+	private final static Logger logger = Logging.getLogger(ExpansionSet.class.getName());
 
 	protected String name;
 	protected String code;
@@ -83,7 +86,7 @@ public abstract class ExpansionSet implements Serializable {
 			Constructor<?> con = clazz.getConstructor(new Class[]{UUID.class});
 			return (Card) con.newInstance(new Object[] {null});
 		} catch (Exception ex) {
-			Logger.getLogger(ExpansionSet.class.getName()).log(Level.SEVERE, "Error creating card:" + clazz.getName(), ex);
+			logger.log(Level.SEVERE, "Error creating card:" + clazz.getName(), ex);
 			return null;
 		}
 	}

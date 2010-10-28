@@ -69,10 +69,6 @@ import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.PermanentCard;
-import mage.game.permanent.PermanentToken;
-import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
@@ -285,7 +281,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		while (hand.size() > this.maxHandSize) {
 			TargetDiscard target = new TargetDiscard(playerId);
 			chooseTarget(Outcome.Discard, target, null, game);
-			discard(hand.get(target.getFirstTarget(), game), game);
+			discard(hand.get(target.getFirstTarget(), game), null, game);
 		}
 	}
 
@@ -306,11 +302,11 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	}
 
 	@Override
-	public void discard(int amount, Game game) {
+	public void discard(int amount, Ability source, Game game) {
 		if (amount >= hand.size()) {
 			int discardAmount = hand.size();
 			while (hand.size() > 0) {
-				discard(hand.get(hand.iterator().next(), game), game);
+				discard(hand.get(hand.iterator().next(), game), source, game);
 			}
 			game.fireInformEvent(name + " discards " + Integer.toString(discardAmount) + " card" + (discardAmount > 1?"s":""));
 			return;
@@ -318,18 +314,18 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		for (int i = 0; i < amount; i++) {
 			TargetDiscard target = new TargetDiscard(playerId);
 			choose(Outcome.Discard, target, game);
-			discard(hand.get(target.getFirstTarget(), game), game);
+			discard(hand.get(target.getFirstTarget(), game), source, game);
 		}
 		game.fireInformEvent(name + " discards " + Integer.toString(amount) + " card" + (amount > 1?"s":""));
 	}
 
 	@Override
-	public boolean discard(Card card, Game game) {
+	public boolean discard(Card card, Ability source, Game game) {
 		//20091005 - 701.1
-		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DISCARD_CARD, playerId, playerId))) {
+		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DISCARD_CARD, card.getId(), source==null?null:source.getId(), playerId))) {
 			removeFromHand(card, game);
 			if (card.moveToZone(Zone.GRAVEYARD, game, false)) {
-				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, playerId, playerId));
+				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source==null?null:source.getId(), playerId));
 				return true;
 			}
 		}
@@ -603,17 +599,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	public int loseLife(int amount, Game game) {
 		GameEvent event = new GameEvent(GameEvent.EventType.LOSE_LIFE, playerId, playerId, playerId, amount);
 		if (!game.replaceEvent(event)) {
-			if (amount > life) {
-				int curLife = life;
-				setLife(0, game);
-				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST_LIFE, playerId, playerId, playerId, curLife));
-				return curLife;
-			}
-			else {
-				setLife(this.life - amount, game);
-				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST_LIFE, playerId, playerId, playerId, amount));
-				return amount;
-			}
+			setLife(this.life - amount, game);
+			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST_LIFE, playerId, playerId, playerId, amount));
+			return amount;
 		}
 		return 0;
 	}

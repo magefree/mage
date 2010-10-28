@@ -38,6 +38,7 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.beans.Beans;
 import java.util.UUID;
 import mage.client.util.Config;
 import mage.client.util.Event;
@@ -108,7 +109,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
         cardArea = new javax.swing.JLayeredPane();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        setPreferredSize(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight));
+        setPreferredSize((!Beans.isDesignTime())?(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight)):(new Dimension(100, 100)));
         setLayout(new java.awt.BorderLayout());
 
         jScrollPane1.setViewportView(cardArea);

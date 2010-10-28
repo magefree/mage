@@ -28,6 +28,8 @@
 
 package mage.filter.common;
 
+import mage.game.permanent.Permanent;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -42,8 +44,6 @@ public class FilterCreatureForCombat extends FilterCreaturePermanent<FilterCreat
 		super(name);
 		this.attacking = false;
 		this.useAttacking = true;
-		this.blocking = false;
-		this.useBlocking = true;
 		this.tapped = false;
 		this.useTapped = true;
 		this.phasedIn = true;
@@ -52,6 +52,14 @@ public class FilterCreatureForCombat extends FilterCreaturePermanent<FilterCreat
 
 	public FilterCreatureForCombat(final FilterCreatureForCombat filter) {
 		super(filter);
+	}
+
+	@Override
+	public boolean match(Permanent permanent) {
+		if (!super.match(permanent))
+			return notFilter;
+
+		return permanent.getMaxBlocks() == 0 || permanent.getBlocking() < permanent.getMaxBlocks();
 	}
 
 	@Override

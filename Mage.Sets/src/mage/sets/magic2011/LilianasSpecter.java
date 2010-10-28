@@ -89,7 +89,7 @@ class LilianasSpecterEffect extends OneShotEffect<LilianasSpecterEffect> {
 	public boolean apply(Game game, Ability source) {
 		for (UUID playerId: game.getOpponents(source.getControllerId())) {
 			Player player = game.getPlayer(playerId);
-			player.discard(1, game);
+			player.discard(1, source, game);
 		}
 		return true;
 	}

@@ -71,7 +71,8 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	protected boolean phasedIn = true;
 	protected boolean faceUp = true;
 	protected boolean attacking;
-	protected boolean blocking;
+	protected int blocking;
+	protected int maxBlocks = 1;
 	protected boolean loyaltyUsed;
 	protected boolean deathtouched;
 	protected Counters counters;
@@ -102,6 +103,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		this.faceUp = permanent.faceUp;
 		this.attacking = permanent.attacking;
 		this.blocking = permanent.blocking;
+		this.maxBlocks = permanent.maxBlocks;
 		this.loyaltyUsed = permanent.loyaltyUsed;
 		this.deathtouched = permanent.deathtouched;
 		this.counters = permanent.counters.copy();
@@ -114,6 +116,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	@Override
 	public void reset(Game game) {
 		this.controllerId = ownerId;
+		this.maxBlocks = 1;
 	}
 
 	@Override
@@ -132,7 +135,6 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		copy.setSourceId(objectId);
 		abilities.add(copy);
 	}
-
 
 	@Override
 	public Counters getCounters() {
@@ -300,8 +302,13 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	}
 
 	@Override
-	public boolean isBlocking() {
+	public int getBlocking() {
 		return blocking;
+	}
+
+	@Override
+	public int getMaxBlocks() {
+		return maxBlocks;
 	}
 
 	@Override
@@ -558,8 +565,13 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	}
 
 	@Override
-	public void setBlocking(boolean blocking) {
+	public void setBlocking(int blocking) {
 		this.blocking = blocking;
+	}
+
+	@Override
+	public void setMaxBlocks(int maxBlocks) {
+		this.maxBlocks = maxBlocks;
 	}
 
 	@Override

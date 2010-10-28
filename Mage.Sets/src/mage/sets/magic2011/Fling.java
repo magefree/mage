@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -97,6 +98,11 @@ class FlingEffect extends OneShotEffect<FlingEffect> {
 			Permanent permanent = game.getPermanent(source.getFirstTarget());
 			if (permanent != null) {
 				permanent.damage(amount, source.getSourceId(), game, true);
+				return true;
+			}
+			Player player = game.getPlayer(source.getFirstTarget());
+			if (player != null) {
+				player.damage(amount, source.getSourceId(), game, false, true);
 				return true;
 			}
 		}
