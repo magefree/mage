@@ -10,7 +10,7 @@
   </parent>
 	
   <groupId>org.mage</groupId>
-  <artifactId>mage-server</artifactId>
+  <artifactId>Mage-Server</artifactId>
   <packaging>jar</packaging>
   <version>0.3</version>
   <name>Mage Server</name>
@@ -19,19 +19,18 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.mage</groupId> 
-			<artifactId>mage</artifactId> 
+			<artifactId>Mage</artifactId>
 			<version>${mage-version}</version> 
 		</dependency>
 		<dependency>
 			<groupId>org.mage</groupId> 
-			<artifactId>mage-common</artifactId> 
+			<artifactId>Mage-Common</artifactId>
 			<version>${mage-version}</version> 
 		</dependency>
 		<dependency>
 			<groupId>org.mage</groupId> 
-			<artifactId>mage-sets</artifactId> 
+			<artifactId>Mage-Sets</artifactId>
 			<version>${mage-version}</version>
-			<scope>runtime</scope> 
 		</dependency>
 		<dependency>
 			<groupId>com.sun.xml.bind</groupId>

@@ -43,7 +43,6 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import mage.Constants;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.cards.Card;

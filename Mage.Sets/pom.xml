@@ -10,7 +10,7 @@
   </parent>
   
   <groupId>org.mage</groupId>
-  <artifactId>mage-sets</artifactId>
+  <artifactId>Mage-Sets</artifactId>
   <packaging>jar</packaging>
   <version>0.3</version>
   <name>Mage Sets</name>
@@ -19,7 +19,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.mage</groupId> 
-			<artifactId>mage</artifactId> 
+			<artifactId>Mage</artifactId>
 			<version>${mage-version}</version> 
 		</dependency>
 	</dependencies>

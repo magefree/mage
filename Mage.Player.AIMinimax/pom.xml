@@ -19,12 +19,12 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.mage</groupId> 
-			<artifactId>mage</artifactId> 
+			<artifactId>Mage</artifactId>
 			<version>${mage-version}</version> 
 		</dependency>
 		<dependency>
 			<groupId>org.mage</groupId> 
-			<artifactId>mage-player-ai</artifactId> 
+			<artifactId>Mage-Player-AI</artifactId>
 			<version>${mage-version}</version> 
 		</dependency>
 	</dependencies>
