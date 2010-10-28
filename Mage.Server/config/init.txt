@@ -6,9 +6,6 @@
 # nickname - Player's name you connect to the game with
 #
 #
-hand:player:mage.sets.magic2010.LightningBolt:1
-hand:player:mage.sets.magic2011.Fireball:2
-battlefield:player:mage.sets.magic2011.BrindleBoar:2
-graveyard:player:mage.sets.magic2011.BrindleBoar:1
-hand:player:mage.sets.magic2011.DoomBlade:1
-battlefield:player:mage.cards.basiclands.Swamp:2
+hand:player:Fireball:2
+battlefield:player:Mountain:6
+battlefield:computer:Brindle Boar:2

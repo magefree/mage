@@ -365,22 +365,24 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 			popupShowing = true;
 			
 			// Draw Arrows for targets
-			UUID uuid = card.getFirstTarget();
-			if (uuid != null) {
-				System.out.println("Getting play area panel for uuid: " + uuid);
-				
-				PlayAreaPanel p = session.getGame().getPlayers().get(uuid);
-				if (p != null) {
-					Point target = p.getLocationOnScreen();
-					Point me = this.getLocationOnScreen();
-					ArrowBuilder.addArrow((int)me.getX() + 35, (int)me.getY(), (int)target.getX() + 40, (int)target.getY() - 40, Color.red);
-				} else {
-					for (PlayAreaPanel pa : session.getGame().getPlayers().values()) {
-						Permanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
-						if (permanent != null) {
-							Point target = permanent.getLocationOnScreen();
-							Point me = this.getLocationOnScreen();
-							ArrowBuilder.addArrow((int)me.getX() + 35, (int)me.getY(), (int)target.getX() + 40, (int)target.getY() + 10, Color.red);
+			List<UUID> targets = card.getTargets();
+			if (targets != null) {
+				for (UUID uuid : targets) {
+					System.out.println("Getting play area panel for uuid: " + uuid);
+					
+					PlayAreaPanel p = session.getGame().getPlayers().get(uuid);
+					if (p != null) {
+						Point target = p.getLocationOnScreen();
+						Point me = this.getLocationOnScreen();
+						ArrowBuilder.addArrow((int)me.getX() + 35, (int)me.getY(), (int)target.getX() + 40, (int)target.getY() - 40, Color.red);
+					} else {
+						for (PlayAreaPanel pa : session.getGame().getPlayers().values()) {
+							Permanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
+							if (permanent != null) {
+								Point target = permanent.getLocationOnScreen();
+								Point me = this.getLocationOnScreen();
+								ArrowBuilder.addArrow((int)me.getX() + 35, (int)me.getY(), (int)target.getX() + 40, (int)target.getY() + 10, Color.red);
+							}
 						}
 					}
 				}

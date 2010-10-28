@@ -36,13 +36,13 @@ import java.util.UUID;
 import mage.ObjectColor;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.target.Target;
+import mage.target.Targets;
 
 /**
  *
@@ -65,7 +65,7 @@ public class CardView implements Serializable {
 	protected Rarity rarity;
 	protected String expansionSetCode;
 
-	public UUID firstTarget; //TODO: there may be several targets
+	public List<UUID> targets;
 	
 	public CardView(Card card) {
 		this.id = card.getId();
@@ -99,10 +99,15 @@ public class CardView implements Serializable {
 		if (card instanceof Spell) {
 			Spell<?> spell = (Spell<?>)card;
 			if (spell.getSpellAbility().getTargets().size() > 0) {
-				Target target = spell.getSpellAbility().getTargets().get(0);
-				if (target.isChosen()) {
-					firstTarget = target.getFirstTarget();
-					System.out.println("First target: " + firstTarget);
+				Targets targets = spell.getSpellAbility().getTargets();
+				for (Target target : targets) {
+					if (target.isChosen()) {
+						for (UUID targetUUID : target.getTargets()) {
+							if (this.targets == null) this.targets = new ArrayList<UUID>();
+							this.targets.add(targetUUID);
+							System.out.println("Added target: " + targetUUID);
+						}
+					}	
 				}
 			}
 		}
@@ -199,7 +204,12 @@ public class CardView implements Serializable {
 		return id;
 	}
 	
-	public UUID getFirstTarget() {
-		return firstTarget;
+	/**
+	 * Returns UUIDs for targets.
+	 * Can be null if there is no target selected.
+	 * @return
+	 */
+	public List<UUID> getTargets() {
+		return targets;
 	}
 }
