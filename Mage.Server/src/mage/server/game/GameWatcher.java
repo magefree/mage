@@ -56,12 +56,15 @@ public class GameWatcher {
 		this.gameId = gameId;
 	}
 
-	public void init(final GameView gameView) {
+	public boolean init(final GameView gameView) {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null)
+			if (session != null) {
 				session.fireCallback(new ClientCallback("gameInit", gameView));
+				return true;
+			}
 		}
+		return false;
 	}
 
 	public void update(final GameView gameView) {

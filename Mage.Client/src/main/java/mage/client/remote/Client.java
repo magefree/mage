@@ -34,6 +34,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import mage.client.MageFrame;
+import mage.client.chat.ChatPanel;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.util.Logging;
@@ -81,7 +82,9 @@ public class Client implements CallbackClient {
 			}
 			else if (callback.getMethod().equals("chatMessage")) {
 				ChatMessage message = (ChatMessage) callback.getData();
-				session.getChats().get(message.getChatId()).receiveMessage(message.getMessage(), message.getColor());
+				ChatPanel panel = session.getChats().get(message.getChatId());
+				if (panel != null)
+					panel.receiveMessage(message.getMessage(), message.getColor());
 			}
 			else if (callback.getMethod().equals("replayInit")) {
 				session.getGame().init((GameView) callback.getData());
@@ -189,7 +192,7 @@ public class Client implements CallbackClient {
 	}
 
 	private void handleException(Exception ex) {
-		logger.log(Level.SEVERE, "Client error", ex);
+		logger.log(Level.SEVERE, "Client error\n", ex);
 		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Unrecoverable client error.  Disconnecting", "Error", JOptionPane.ERROR_MESSAGE);
 		session.disconnect();
 		frame.disableButtons();

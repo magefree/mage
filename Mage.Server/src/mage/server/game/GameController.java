@@ -174,7 +174,9 @@ public class GameController implements GameCallback {
 	private synchronized void startGame() {
 		if (gameFuture == null) {
 			for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
-				entry.getValue().init(getGameView(entry.getKey()));
+				if (!entry.getValue().init(getGameView(entry.getKey()))) {
+					logger.severe("Unable to initialize client");
+				}
 			}
 			GameWorker worker = new GameWorker(game, this);
 			gameFuture = gameExecutor.submit(worker);
