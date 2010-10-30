@@ -80,7 +80,7 @@ public class PrimalCocoon extends CardImpl<PrimalCocoon> {
 
 	@Override
 	public String getArt() {
-		return "";
+		return "129088_typ_reg_sty_010.jpg";
 	}
 }
 

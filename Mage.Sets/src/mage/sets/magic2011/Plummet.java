@@ -74,6 +74,6 @@ public class Plummet extends CardImpl<Plummet> {
 
 	@Override
 	public String getArt() {
-		return "";
+		return "129149_typ_reg_sty_010.jpg";
 	}
 }

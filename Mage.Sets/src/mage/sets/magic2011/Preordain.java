@@ -60,6 +60,6 @@ public class Preordain extends CardImpl<Preordain> {
 
 	@Override
 	public String getArt() {
-		return "";
+		return "129109_typ_reg_sty_010.jpg";
 	}
 }

@@ -73,7 +73,7 @@ public class PlatinumAngel extends CardImpl<PlatinumAngel> {
 
 	@Override
 	public String getArt() {
-		return "";
+		return "49681_typ_reg_sty_010.jpg";
 	}
 
 	class PlatinumAngelEffect extends ReplacementEffectImpl<PlatinumAngelEffect> {
