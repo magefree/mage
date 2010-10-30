@@ -29,25 +29,37 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.ScryEffect;
+import mage.cards.CardImpl;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Pacifism extends mage.sets.tenth.Pacifism {
+public class Preordain extends CardImpl<Preordain> {
 
-	public Pacifism(UUID ownerId) {
-		super(ownerId);
+	public Preordain(UUID ownerId) {
+		super(ownerId, "Preordain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
 		this.expansionSetCode = "M11";
+		this.color.setBlue(true);
+		this.getSpellAbility().addEffect(new ScryEffect(2));
+		this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
 	}
 
-	public Pacifism(final Pacifism card) {
+	public Preordain(final Preordain card) {
 		super(card);
 	}
 
 	@Override
-	public Pacifism copy() {
-		return new Pacifism(this);
+	public Preordain copy() {
+		return new Preordain(this);
 	}
 
+	@Override
+	public String getArt() {
+		return "";
+	}
 }

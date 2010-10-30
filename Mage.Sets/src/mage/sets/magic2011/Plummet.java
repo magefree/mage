@@ -29,25 +29,51 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.cards.CardImpl;
+
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Pacifism extends mage.sets.tenth.Pacifism {
+public class Plummet extends CardImpl<Plummet> {
 
-	public Pacifism(UUID ownerId) {
-		super(ownerId);
-		this.expansionSetCode = "M11";
+	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
+
+	static {
+		filter.getAbilities().add(FlyingAbility.getInstance());
 	}
 
-	public Pacifism(final Pacifism card) {
+	public Plummet(UUID ownerId) {
+		super(ownerId, "Plummet", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
+		this.expansionSetCode = "M11";
+		this.color.setGreen(true);
+		this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+		this.getSpellAbility().addEffect(new DestroyTargetEffect());
+	}
+
+	public Plummet(final Plummet card) {
 		super(card);
 	}
 
 	@Override
-	public Pacifism copy() {
-		return new Pacifism(this);
+	public Plummet copy() {
+		return new Plummet(this);
 	}
 
+	@Override
+	public String getArt() {
+		return "";
+	}
 }

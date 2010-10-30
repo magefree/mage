@@ -26,18 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.sets.magic2011;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.AddPlusOneCountersAttachedEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DestroySourceEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -53,103 +51,90 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class IceCage extends CardImpl<IceCage> {
+public class PrimalCocoon extends CardImpl<PrimalCocoon> {
 
-	public IceCage(UUID ownerId) {
-		super(ownerId, "Ice Cage", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-		this.expansionSetCode = "M10";
-		this.color.setBlue(true);
+	public PrimalCocoon(UUID ownerId) {
+		super(ownerId, "Primal Cocoon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
+		this.expansionSetCode = "M11";
+		this.color.setGreen(true);
 		this.subtype.add("Aura");
 
 		TargetPermanent auraTarget = new TargetCreaturePermanent();
 		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-		Ability ability = new EnchantAbility(Outcome.Detriment, auraTarget);
+		this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
+		Ability ability = new EnchantAbility(Outcome.Benefit, auraTarget);
 		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IceCageEffect()));
-		this.addAbility(new IceCageAbility());
+		this.addAbility(new PrimalCocoonAbility1());
+		this.addAbility(new PrimalCocoonAbility2());
+
 	}
 
-	public IceCage(final IceCage card) {
+	public PrimalCocoon(final PrimalCocoon card) {
 		super(card);
 	}
 
 	@Override
-	public IceCage copy() {
-		return new IceCage(this);
+	public PrimalCocoon copy() {
+		return new PrimalCocoon(this);
 	}
 
 	@Override
 	public String getArt() {
-		return "121586_typ_reg_sty_010.jpg";
+		return "";
 	}
 }
 
-class IceCageEffect extends ReplacementEffectImpl<IceCageEffect> {
+class PrimalCocoonAbility1 extends TriggeredAbilityImpl<PrimalCocoonAbility1> {
 
-	public IceCageEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Detriment);
+	public PrimalCocoonAbility1() {
+		super(Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(1));
 	}
 
-	public IceCageEffect(final IceCageEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public IceCageEffect copy() {
-		return new IceCageEffect(this);
+	public PrimalCocoonAbility1(final PrimalCocoonAbility1 ability) {
+		super(ability);
 	}
 
 	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
+	public PrimalCocoonAbility1 copy() {
+		return new PrimalCocoonAbility1(this);
 	}
 
 	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return true;
-	}
-
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			if (source.getSourceId().equals(enchantment.getAttachedTo())) {
-				if (event.getType() == EventType.DECLARE_ATTACKER || event.getType() == EventType.DECLARE_BLOCKER || event.getType() == EventType.ACTIVATE_ABILITY) {
-					return true;
-				}
-			}
+	public boolean checkTrigger(GameEvent event, Game game) {
+		if (event.getType() == EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
+			trigger(game, this.controllerId);
+			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public String getText(Ability source) {
-		return "Enchanted creature can't attack or block, and its activated abilities can't be activated";
+	public String getRule() {
+		return "At the beginning of your upkeep, put a +1/+1 counter on enchanted creature.";
 	}
-
 }
 
-class IceCageAbility extends TriggeredAbilityImpl<IceCageAbility> {
+class PrimalCocoonAbility2 extends TriggeredAbilityImpl<PrimalCocoonAbility2> {
 
-	public IceCageAbility() {
+	public PrimalCocoonAbility2() {
 		super(Zone.BATTLEFIELD, new DestroySourceEffect());
 	}
 
-	public IceCageAbility(final IceCageAbility ability) {
+	public PrimalCocoonAbility2(final PrimalCocoonAbility2 ability) {
 		super(ability);
 	}
 
 	@Override
-	public IceCageAbility copy() {
-		return new IceCageAbility(this);
+	public PrimalCocoonAbility2 copy() {
+		return new PrimalCocoonAbility2(this);
 	}
 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		Permanent enchantment = game.getPermanent(sourceId);
 		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			if (event.getTargetId().equals(enchantment.getAttachedTo()) && event.getType() == EventType.TARGETED) {
+			if (event.getSourceId().equals(enchantment.getAttachedTo()) &&
+					(event.getType() == EventType.ATTACKER_DECLARED || event.getType() == EventType.BLOCKER_DECLARED)) {
 				trigger(game, event.getPlayerId());
 				return true;
 			}
@@ -159,7 +144,7 @@ class IceCageAbility extends TriggeredAbilityImpl<IceCageAbility> {
 
 	@Override
 	public String getRule() {
-		return "When enchanted creature becomes the target of a spell or ability, destroy Ice Cage.";
+		return "When enchanted creature attacks or blocks, sacrifice Primal Cocoon.";
 	}
 
 }

@@ -166,7 +166,7 @@ class AngelicArbiterEffect1 extends ReplacementEffectImpl<AngelicArbiterEffect1>
 
 	@Override
 	public String getText(Ability source) {
-		return "Each opponent who cast a spell this turn can't attack with creatures.";
+		return "Each opponent who cast a spell this turn can't attack with creatures";
 	}
 
 }
@@ -208,7 +208,7 @@ class AngelicArbiterEffect2 extends ReplacementEffectImpl<AngelicArbiterEffect2>
 
 	@Override
 	public String getText(Ability source) {
-		return "Each opponent who attacked with a creature this turn can't cast spells.";
+		return "Each opponent who attacked with a creature this turn can't cast spells";
 	}
 
 }

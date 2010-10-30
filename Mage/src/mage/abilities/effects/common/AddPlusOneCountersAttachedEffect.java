@@ -26,28 +26,56 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.abilities.effects.common;
 
-import java.util.UUID;
+import mage.Constants.Outcome;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.counters.PlusOneCounter;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Pacifism extends mage.sets.tenth.Pacifism {
+public class AddPlusOneCountersAttachedEffect extends OneShotEffect<AddPlusOneCountersAttachedEffect> {
 
-	public Pacifism(UUID ownerId) {
-		super(ownerId);
-		this.expansionSetCode = "M11";
+	private int amount;
+
+	public AddPlusOneCountersAttachedEffect(int amount) {
+		super(Outcome.BoostCreature);
+		this.amount = amount;
 	}
 
-	public Pacifism(final Pacifism card) {
-		super(card);
+	public AddPlusOneCountersAttachedEffect(final AddPlusOneCountersAttachedEffect effect) {
+		super(effect);
+		this.amount = effect.amount;
 	}
 
 	@Override
-	public Pacifism copy() {
-		return new Pacifism(this);
+	public AddPlusOneCountersAttachedEffect copy() {
+		return new AddPlusOneCountersAttachedEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent enchantment = game.getPermanent(source.getSourceId());
+		if (enchantment != null && enchantment.getAttachedTo() != null) {
+			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
+			if (creature != null) {
+				creature.getCounters().addCounter(new PlusOneCounter(amount));
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public String getText(Ability source) {
+		if (amount > 1)
+			return "put " + Integer.toString(amount) + " +1/+1 counters on enchanted creature";
+		else
+			return "put a +1/+1 counter on enchanted creature";
 	}
 
 }

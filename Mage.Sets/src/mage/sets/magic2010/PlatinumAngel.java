@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.sets.magic2010;
 
 import java.util.UUID;
 
@@ -34,20 +34,20 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Pacifism extends mage.sets.tenth.Pacifism {
+public class PlatinumAngel extends mage.sets.tenth.PlatinumAngel {
 
-	public Pacifism(UUID ownerId) {
+	public PlatinumAngel(UUID ownerId) {
 		super(ownerId);
-		this.expansionSetCode = "M11";
+		this.expansionSetCode = "M10";
 	}
 
-	public Pacifism(final Pacifism card) {
+	public PlatinumAngel(final PlatinumAngel card) {
 		super(card);
 	}
 
 	@Override
-	public Pacifism copy() {
-		return new Pacifism(this);
+	public PlatinumAngel copy() {
+		return new PlatinumAngel(this);
 	}
 
 }
