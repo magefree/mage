@@ -112,13 +112,19 @@ public class ImageHelper {
 			}
 
 			if (card.getExpansionSetCode() != null && card.getExpansionSetCode().length() > 0 && card.getRarity() != null && card.getRarity() != Rarity.NA) {
-				String symbolCode = Sets.getInstance().get(card.getExpansionSetCode()).getSymbolCode();
-				if (symbolCode != null && symbolCode.length() > 0) {
-					StringBuilder sb = new StringBuilder();
-					sb.append(Config.setIconsResourcePath).append("graphic_").append(symbolCode).append("_").append(card.getRarity().getSymbolCode()).append(".png");
-					BufferedImage icon = loadImage(sb.toString(), ICON_MAX_HEIGHT);
-					if (icon != null)
-						g.drawImage(icon, ICON_MAX_XOFFSET - icon.getWidth(), ICON_MAX_YOFFSET, null);
+				try {
+					String symbolCode = Sets.getInstance().get(card.getExpansionSetCode()).getSymbolCode();
+					if (symbolCode != null && symbolCode.length() > 0) {
+						StringBuilder sb = new StringBuilder();
+						sb.append(Config.setIconsResourcePath).append("graphic_").append(symbolCode).append("_").append(card.getRarity().getSymbolCode()).append(".png");
+						BufferedImage icon = loadImage(sb.toString(), ICON_MAX_HEIGHT);
+						if (icon != null)
+							g.drawImage(icon, ICON_MAX_XOFFSET - icon.getWidth(), ICON_MAX_YOFFSET, null);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				} catch (Error er) {
+					er.printStackTrace();
 				}
 			}
 
