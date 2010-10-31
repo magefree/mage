@@ -37,23 +37,31 @@ package mage.client;
 import java.awt.Cursor;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
+
 import javax.swing.Box;
 import javax.swing.JDesktopPane;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+
 import mage.client.dialog.AboutDialog;
 import mage.client.dialog.CombatDialog;
 import mage.client.dialog.ConnectDialog;
 import mage.client.dialog.PickNumberDialog;
+import mage.client.plugins.impl.Plugins;
 import mage.client.remote.Session;
 import mage.client.util.EDTExceptionHandler;
+import mage.interfaces.plugin.ThemePlugin;
 import mage.util.Logging;
+import net.xeoh.plugins.base.PluginManager;
+import net.xeoh.plugins.base.impl.PluginManagerFactory;
+import net.xeoh.plugins.base.util.PluginManagerUtil;
 
 /**
  *
@@ -103,6 +111,7 @@ public class MageFrame extends javax.swing.JFrame {
 			logger.log(Level.SEVERE, null, ex);
 		}
 
+		Plugins.getInstance().loadPlugins();
 
 		initComponents();
 
@@ -344,6 +353,7 @@ public class MageFrame extends javax.swing.JFrame {
 
 	private void exitApp() {
 		session.disconnect();
+		Plugins.getInstance().shutdown();
 		dispose();
 		System.exit(0);
 	}

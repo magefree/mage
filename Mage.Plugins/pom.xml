@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>org.mage</groupId>
+		<artifactId>mage-root</artifactId>
+		<version>${mage-version}</version>
+	</parent>
+	
+	<groupId>org.mage</groupId>
+	<artifactId>Mage-Plugins</artifactId>
+	<version>${mage-version}</version>
+	<packaging>pom</packaging>
+	<name>Mage Plugins</name>	
+	<description>Mage Plugins POM</description>
+
+	<modules>
+		<module>Mage.Theme.Plugin</module>
+		<module>Mage.Card.Plugin</module>
+	</modules>
+	
+</project>

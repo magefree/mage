@@ -38,13 +38,11 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Logger;
 
-import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
@@ -55,10 +53,10 @@ import mage.client.dialog.ExileZoneDialog;
 import mage.client.dialog.PickChoiceDialog;
 import mage.client.dialog.ShowCardsDialog;
 import mage.client.game.FeedbackPanel.FeedbackMode;
+import mage.client.plugins.impl.Plugins;
 import mage.client.remote.Session;
 import mage.client.util.Config;
 import mage.client.util.gui.ArrowBuilder;
-import mage.client.util.gui.ImagePanel;
 import mage.util.Logging;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
@@ -86,8 +84,8 @@ public class GamePanel extends javax.swing.JPanel {
         
         //FIXME: remove from here
 		try {
-			BufferedImage background = ImageIO.read(this.getClass().getResourceAsStream("/green.jpg"));
-			ImagePanel bgPanel = new ImagePanel(background, ImagePanel.TILED);
+			/*BufferedImage background = ImageIO.read(this.getClass().getResourceAsStream("/green.jpg"));
+			ImagePanel bgPanel = new ImagePanel(background, ImagePanel.TILED);*/
 			
 	        // Override layout (I can't edit generated code)
 	        this.setLayout(new BorderLayout());
@@ -95,16 +93,11 @@ public class GamePanel extends javax.swing.JPanel {
 			j.add(ArrowBuilder.getArrowsPanel(), JLayeredPane.MODAL_LAYER);
 			j.setSize(1024,768);
 			//j.setBorder(BorderFactory.createLineBorder(Color.green));
-			//this.add(j);
+			this.add(j);
 			j.add(jSplitPane1, JLayeredPane.DEFAULT_LAYER);
 			
-			jSplitPane1.setOpaque(false);
-			pnlBattlefield.setOpaque(false);
-			jPanel3.setOpaque(false);
-			hand.setOpaque(false);
-			chatPanel.setOpaque(false);
-			bgPanel.add(j);
-			this.add(bgPanel);
+			Map<String, JComponent> ui = getUIComponents(j); 
+			Plugins.getInstance().updateGamePanel(ui);
 
 			// Enlarge jlayeredpane on resize
 			addComponentListener(new ComponentAdapter(){
@@ -125,6 +118,20 @@ public class GamePanel extends javax.swing.JPanel {
 		}
     }
 
+    private Map<String, JComponent> getUIComponents(JLayeredPane jLayeredPane) {
+    	Map<String, JComponent> components = new HashMap<String, JComponent>();
+    	
+		components.put("jSplitPane1", jSplitPane1);
+		components.put("pnlBattlefield", pnlBattlefield);
+		components.put("jPanel3", jPanel3);
+		components.put("hand", hand);
+		components.put("chatPanel", chatPanel);
+		components.put("jLayeredPane", jLayeredPane);
+		components.put("gamePanel", this);
+		
+		return components;
+    }
+    
 	public void cleanUp() {
 		MageFrame.getCombatDialog().hideDialog();
 		MageFrame.getPickNumberDialog().hide();

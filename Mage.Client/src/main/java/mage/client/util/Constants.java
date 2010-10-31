@@ -68,4 +68,6 @@ public final class Constants {
 	public static final int DAMAGE_MAX_LEFT = 180;
 
 	public static final double SCALE_FACTOR = 0.5;
+	
+	public static final String PLUGINS_DIRECTORY = "plugins/";
 }

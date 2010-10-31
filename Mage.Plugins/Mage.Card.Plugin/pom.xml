@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.mage</groupId>
+		<artifactId>Mage-Plugins</artifactId>
+		<version>${mage-version}</version>
+	</parent>
+
+	<groupId>org.mage</groupId>
+	<artifactId>Mage-Card-Plugin</artifactId>
+	<packaging>jar</packaging>
+	<version>${plugin-version}</version>
+	<name>Mage Card Plugin</name>
+	<description>Plugin for drawing card</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.plugins.jspf</groupId>
+			<artifactId>jspf-core</artifactId>
+			<version>${jspf-version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+
+		<finalName>mage-card-plugin</finalName>
+	</build>
+
+	<properties>
+		<plugin-version>0.3</plugin-version>
+		<jspf-version>0.9.1</jspf-version>
+	</properties>
+</project>

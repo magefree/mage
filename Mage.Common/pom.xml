@@ -22,6 +22,11 @@
 			<artifactId>Mage</artifactId> 
 			<version>${mage-version}</version> 
 		</dependency>
+		<dependency>
+			<groupId>org.plugins.jspf</groupId>
+			<artifactId>jspf-core</artifactId>
+			<version>${jspf-version}</version>
+		</dependency>
 	</dependencies>
 	
 	<build>
@@ -50,5 +55,6 @@
   
 	<properties>
 		<mage-version>0.3</mage-version>
+		<jspf-version>0.9.1</jspf-version>
 	</properties>
 </project>
