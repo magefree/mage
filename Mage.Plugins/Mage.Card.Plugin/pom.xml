@@ -21,6 +21,8 @@
 			<groupId>org.plugins.jspf</groupId>
 			<artifactId>jspf-core</artifactId>
 			<version>${jspf-version}</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/../../Mage.Client/plugins/core/jspf.core-0.9.0.jar</systemPath>
 		</dependency>
 	</dependencies>
 

@@ -6,13 +6,13 @@
 	<parent>
 		<groupId>org.mage</groupId>
 		<artifactId>mage-root</artifactId>
-		<version>0.3</version>
+		<version>${mage-version}</version>
 	</parent>
 
 	<groupId>org.mage</groupId>
 	<artifactId>Mage-Client</artifactId>
 	<packaging>jar</packaging>
-	<version>0.3</version>
+	<version>${mage-version}</version>
 	<name>Mage Client</name>
 	<url>http://maven.apache.org</url>
 
@@ -36,6 +36,8 @@
 			<groupId>org.plugins.jspf</groupId>
 			<artifactId>jspf-core</artifactId>
 			<version>${jspf-version}</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/plugins/core/jspf.core-0.9.0.jar</systemPath>
 		</dependency>
 	</dependencies>
 
@@ -86,7 +88,6 @@
 	</build>
 
 	<properties>
-		<mage-version>0.3</mage-version>
 		<jspf-version>0.9.1</jspf-version>
 	</properties>
 </project>
