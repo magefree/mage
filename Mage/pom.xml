@@ -44,6 +44,6 @@
 		<finalName>mage</finalName>
 	</build>
 
-	<properties>
-	</properties>
+	<properties/>
+	
 </project>

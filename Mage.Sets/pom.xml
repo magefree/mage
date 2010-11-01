@@ -48,7 +48,6 @@
 		<finalName>mage-sets</finalName>
 	</build>
   
-	<properties>
-		<mage-version>0.3</mage-version>
-	</properties>
+	<properties/>
+	
 </project>

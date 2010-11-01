@@ -97,6 +97,6 @@
 	<finalName>mage-server</finalName>
   </build>
   
-	<properties>
-	</properties>
+	<properties/>
+	
 </project>

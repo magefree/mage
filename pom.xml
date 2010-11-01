@@ -6,7 +6,7 @@
 	
 	<groupId>org.mage</groupId>
 	<artifactId>mage-root</artifactId>
-	<version>${mage-version}</version>
+	<version>0.3</version>
 	<packaging>pom</packaging>
 	<name>Mage Root</name>	
 	<description>Mage Root POM</description>
