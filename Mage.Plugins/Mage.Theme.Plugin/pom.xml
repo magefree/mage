@@ -23,7 +23,7 @@
 			<version>${mage-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.plugins.jspf</groupId>
+			<groupId>com.googlecode.jspf</groupId>
 			<artifactId>jspf-core</artifactId>
 			<version>${jspf-version}</version>
 		</dependency>

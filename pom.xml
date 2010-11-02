@@ -26,6 +26,13 @@
 		<module>Mage.Plugins</module>
 	</modules>
 
+       <repositories>
+           <repository>
+               <id>mage.googlecode.com</id>
+               <url>http://magic--another-game-engine.googlecode.com/svn/trunk/repository</url>
+           </repository>
+       </repositories>
+
     <properties>
     	<mage-version>0.3</mage-version>
     </properties>

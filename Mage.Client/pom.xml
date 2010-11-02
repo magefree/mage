@@ -16,7 +16,7 @@
 	<name>Mage Client</name>
 	<url>http://maven.apache.org</url>
 
-	<dependencies>
+	<dependencies>                                
 		<dependency>
 			<groupId>org.mage</groupId>
 			<artifactId>Mage</artifactId>
@@ -33,9 +33,9 @@
 			<version>${mage-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.plugins.jspf</groupId>
+			<groupId>com.googlecode.jspf</groupId>
 			<artifactId>jspf-core</artifactId>
-			<version>${jspf-version}</version>
+			<version>0.9.1</version>
 		</dependency>
 	</dependencies>
 
@@ -83,9 +83,5 @@
 		</plugins>
 
 		<finalName>mage-client</finalName>
-	</build>
-
-	<properties>
-		<jspf-version>0.9.1</jspf-version>
-	</properties>
+	</build>	
 </project>
