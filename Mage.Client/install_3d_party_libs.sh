@@ -1,0 +1,2 @@
+# installs 3d party libs to local repository
+mvn install:install-file -Dfile=plugins/core/jspf.core-0.9.0.jar -DgroupId=org.plugins.jspf -DartifactId=jspf-core -Dversion=0.9.1 -Dpackaging=jar -DgeneratePom=true -DcreateChecksum=true
