@@ -64,7 +64,6 @@ public class CardView implements Serializable {
 	protected String art;
 	protected Rarity rarity;
 	protected String expansionSetCode;
-	protected boolean tapped;
 
 	public List<UUID> targets;
 	
@@ -96,9 +95,6 @@ public class CardView implements Serializable {
 			this.rarity = card.getRarity();
 			this.expansionSetCode = card.getExpansionSetCode();
 		}
-		
-		//FIXME
-		this.tapped = false;
 		
 		if (card instanceof Spell) {
 			Spell<?> spell = (Spell<?>)card;
