@@ -1,5 +1,10 @@
 package mage.interfaces.plugin;
 
+import java.util.UUID;
+
+import mage.cards.CardDimensions;
+import mage.cards.MagePermanent;
+import mage.view.CardView;
 import net.xeoh.plugins.base.Plugin;
 
 /**
@@ -9,5 +14,5 @@ import net.xeoh.plugins.base.Plugin;
  * @author nantuko
  */
 public interface CardPlugin extends Plugin {
-
+	MagePermanent getMagePermanent(CardView card, CardDimensions dimension, UUID gameId);
 }

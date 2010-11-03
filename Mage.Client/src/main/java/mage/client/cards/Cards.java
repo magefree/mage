@@ -41,6 +41,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
+
 import mage.client.util.Config;
 import mage.view.CardView;
 import mage.view.CardsView;

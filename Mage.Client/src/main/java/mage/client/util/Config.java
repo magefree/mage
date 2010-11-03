@@ -35,7 +35,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import mage.client.cards.CardDimensions;
+import mage.cards.CardDimensions;
 import mage.util.Logging;
 
 /**

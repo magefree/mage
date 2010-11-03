@@ -28,9 +28,8 @@
 
 package mage.client.util;
 
-import java.awt.Image;
+import static mage.constants.Constants.*;
 import java.awt.image.BufferedImage;
-import static mage.client.util.Constants.*;
 
 /**
  *

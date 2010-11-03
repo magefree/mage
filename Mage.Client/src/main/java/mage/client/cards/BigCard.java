@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.UUID;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
-import static mage.client.util.Constants.*;
+import static mage.constants.Constants.*;
 
 /**
  *

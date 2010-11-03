@@ -34,16 +34,16 @@
 
 package mage.client.cards;
 
-import static mage.client.util.Constants.CONTENT_MAX_XOFFSET;
-import static mage.client.util.Constants.FRAME_MAX_HEIGHT;
-import static mage.client.util.Constants.FRAME_MAX_WIDTH;
-import static mage.client.util.Constants.NAME_FONT_MAX_SIZE;
-import static mage.client.util.Constants.NAME_MAX_YOFFSET;
-import static mage.client.util.Constants.POWBOX_TEXT_MAX_LEFT;
-import static mage.client.util.Constants.POWBOX_TEXT_MAX_TOP;
-import static mage.client.util.Constants.SYMBOL_MAX_XOFFSET;
-import static mage.client.util.Constants.SYMBOL_MAX_YOFFSET;
-import static mage.client.util.Constants.TYPE_MAX_YOFFSET;
+import static mage.constants.Constants.CONTENT_MAX_XOFFSET;
+import static mage.constants.Constants.FRAME_MAX_HEIGHT;
+import static mage.constants.Constants.FRAME_MAX_WIDTH;
+import static mage.constants.Constants.NAME_FONT_MAX_SIZE;
+import static mage.constants.Constants.NAME_MAX_YOFFSET;
+import static mage.constants.Constants.POWBOX_TEXT_MAX_LEFT;
+import static mage.constants.Constants.POWBOX_TEXT_MAX_TOP;
+import static mage.constants.Constants.SYMBOL_MAX_XOFFSET;
+import static mage.constants.Constants.SYMBOL_MAX_YOFFSET;
+import static mage.constants.Constants.TYPE_MAX_YOFFSET;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -74,6 +74,8 @@ import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
 import mage.Constants.CardType;
+import mage.cards.CardDimensions;
+import mage.cards.MagePermanent;
 import mage.client.MageFrame;
 import mage.client.game.PlayAreaPanel;
 import mage.client.remote.Session;
@@ -83,13 +85,15 @@ import mage.client.util.gui.ArrowBuilder;
 import mage.sets.Sets;
 import mage.view.AbilityView;
 import mage.view.CardView;
+import mage.view.PermanentView;
 import mage.view.StackAbilityView;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Card extends javax.swing.JPanel implements MouseMotionListener, MouseListener, FocusListener, ComponentListener {
+@SuppressWarnings("serial")
+public class Card extends MagePermanent implements MouseMotionListener, MouseListener, FocusListener, ComponentListener {
 
 	protected static Session session = MageFrame.getSession();
 
@@ -377,7 +381,7 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 						ArrowBuilder.addArrow((int)me.getX() + 35, (int)me.getY(), (int)target.getX() + 40, (int)target.getY() - 40, Color.red);
 					} else {
 						for (PlayAreaPanel pa : session.getGame().getPlayers().values()) {
-							Permanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
+							MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
 							if (permanent != null) {
 								Point target = permanent.getLocationOnScreen();
 								Point me = this.getLocationOnScreen();
@@ -436,4 +440,12 @@ public class Card extends javax.swing.JPanel implements MouseMotionListener, Mou
 			popup.hide();
 	}
 
+	@Override
+	public void update(PermanentView card) {
+	}
+
+	@Override
+	public List<MagePermanent> getLinks() {
+		return null;
+	}
 }

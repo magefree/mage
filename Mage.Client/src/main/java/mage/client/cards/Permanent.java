@@ -34,6 +34,9 @@
 
 package mage.client.cards;
 
+import static mage.constants.Constants.DAMAGE_MAX_LEFT;
+import static mage.constants.Constants.POWBOX_TEXT_MAX_TOP;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -45,24 +48,27 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import javax.swing.PopupFactory;
+
 import mage.Constants.CardType;
+import mage.cards.CardDimensions;
+import mage.cards.MagePermanent;
 import mage.client.util.Config;
 import mage.client.util.ImageHelper;
 import mage.sets.Sets;
 import mage.view.CounterView;
 import mage.view.PermanentView;
-import static mage.client.util.Constants.*;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Permanent extends Card {
+public class Permanent extends Card implements mage.cards.interfaces.PermanentInterface {
 
 	protected PermanentView permanent;
 
-	protected List<Permanent> links = new ArrayList<Permanent>();
+	protected List<MagePermanent> links = new ArrayList<MagePermanent>();
 	protected boolean linked;
 	protected BufferedImage tappedImage;
 	protected BufferedImage flippedImage;
@@ -79,7 +85,7 @@ public class Permanent extends Card {
 		return permanent.getId();
 	}
 
-	public List<Permanent> getLinks() {
+	public List<MagePermanent> getLinks() {
 		return links;
 	}
 
@@ -152,7 +158,7 @@ public class Permanent extends Card {
 			if (r.y < 0) r.y = 0;
 			this.setBounds(r);
 			this.repaint();
-			for (Permanent perm: links) {
+			for (MagePermanent perm: links) {
 				r.x += 20;
 				r.y += 20;
 				perm.setBounds(r);

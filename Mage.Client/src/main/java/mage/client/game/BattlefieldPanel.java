@@ -39,20 +39,17 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.UUID;
 import java.util.Map.Entry;
+import java.util.UUID;
 
-import javax.imageio.ImageIO;
-
+import mage.cards.MagePermanent;
 import mage.client.cards.BigCard;
 import mage.client.cards.Permanent;
+import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
-import mage.client.util.gui.ImagePanel;
 import mage.view.PermanentView;
 
 /**
@@ -61,7 +58,7 @@ import mage.view.PermanentView;
  */
 public class BattlefieldPanel extends javax.swing.JLayeredPane implements ComponentListener {
 
-	private Map<UUID, Permanent> permanents = new HashMap<UUID, Permanent>();
+	private Map<UUID, MagePermanent> permanents = new HashMap<UUID, MagePermanent>();
 	private UUID gameId;
 	private BigCard bigCard;
 
@@ -84,8 +81,8 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 				permanents.get(permanent.getId()).update(permanent);
 			}
 		}
-		for (Iterator<Entry<UUID, Permanent>> i = permanents.entrySet().iterator(); i.hasNext();) {
-			Entry<UUID, Permanent> entry = i.next();
+		for (Iterator<Entry<UUID, MagePermanent>> i = permanents.entrySet().iterator(); i.hasNext();) {
+			Entry<UUID, MagePermanent> entry = i.next();
 			if (!battlefield.containsKey(entry.getKey())) {
 				removePermanent(entry.getKey());
 				i.remove();
@@ -99,7 +96,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 	}
 
 	private void addPermanent(PermanentView permanent) {
-		Permanent perm = new Permanent(permanent, bigCard, Config.dimensions, gameId);
+		MagePermanent perm = Plugins.getInstance().getMagePermanent(permanent, bigCard, Config.dimensions, gameId);;
 		perm.addComponentListener(this);
 		perm.setBounds(findEmptySpace(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight)));
 		permanents.put(permanent.getId(), perm);
@@ -109,12 +106,12 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 	}
 	
 	private void groupAttachments(PermanentView permanent) {
-		Permanent perm = permanents.get(permanent.getId());
+		MagePermanent perm = permanents.get(permanent.getId());
 		int position = getPosition(perm);
 		perm.getLinks().clear();
 		Rectangle r = perm.getBounds();
 		for (UUID attachmentId: permanent.getAttachments()) {
-			Permanent link = permanents.get(attachmentId);
+			MagePermanent link = permanents.get(attachmentId);
 			perm.getLinks().add(link);
 			r.translate(20, 20);
 			link.setBounds(r);
@@ -138,7 +135,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 		boolean intersects;
 		while (true) {
 			intersects = false;
-			for (Permanent perm: permanents.values()) {
+			for (MagePermanent perm: permanents.values()) {
 				Rectangle pr = perm.getBounds();
 				if (r.intersects(pr)) {
 					intersects = true;
@@ -160,7 +157,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 		return false;
 	}
 	
-	public Map<UUID, Permanent> getPermanents() {
+	public Map<UUID, MagePermanent> getPermanents() {
 		return permanents;
 	}
 

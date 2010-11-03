@@ -31,7 +31,7 @@ package mage.client.util;
 import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
-import static mage.client.util.Constants.*;
+import static mage.constants.Constants.*;
 
 /**
  *

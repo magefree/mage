@@ -39,11 +39,13 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.UUID;
+
 import javax.swing.JLayeredPane;
+
+import mage.cards.CardDimensions;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.Card;
-import mage.client.cards.CardDimensions;
 import mage.client.util.Config;
 import mage.view.CardView;
 import mage.view.CardsView;

@@ -28,6 +28,8 @@
 
 package mage.client.util;
 
+import static mage.constants.Constants.*;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -39,15 +41,16 @@ import java.awt.image.PixelGrabber;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
+
 import javax.imageio.ImageIO;
+
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.client.cards.CardDimensions;
+import mage.cards.CardDimensions;
 import mage.sets.Sets;
 import mage.view.AbilityView;
 import mage.view.CardView;
 import mage.view.StackAbilityView;
-import static mage.client.util.Constants.*;
 
 /**
  *
