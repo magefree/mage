@@ -64,7 +64,7 @@ public class ArmoredAscension extends CardImpl<ArmoredAscension> {
 		TargetPermanent auraTarget = new TargetCreaturePermanent();
 		this.getSpellAbility().addTarget(auraTarget);
 		this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-		Ability ability = new EnchantAbility(Outcome.BoostCreature, auraTarget);
+		Ability ability = new EnchantAbility(auraTarget.getTargetName());
 		this.addAbility(ability);
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArmoredAscensionEffect()));
 

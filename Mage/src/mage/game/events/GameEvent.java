@@ -41,6 +41,7 @@ public class GameEvent {
 	private UUID sourceId;
 	private UUID playerId;
 	private int amount;
+	private String data;
 
 	public enum EventType {
 
@@ -109,6 +110,7 @@ public class GameEvent {
 		SACRIFICE_PERMANENT, SACRIFICED_PERMANENT,
 		ATTACH, ATTACHED,
 		UNATTACH, UNATTACHED,
+		COUNTER_REMOVED,
 
 		//combat events
 		COMBAT_DAMAGE_APPLIED,
@@ -164,4 +166,11 @@ public class GameEvent {
 		this.amount = amount;
 	}
 
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
 }

@@ -52,7 +52,7 @@ import mage.game.events.GameEvent.EventType;
 public class PlatinumAngel extends CardImpl<PlatinumAngel> {
 
 	public PlatinumAngel(UUID ownerId) {
-		super(ownerId, "Platinum Angel", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
+		super(ownerId, "Platinum Angel", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
 		this.expansionSetCode = "10E";
 		this.subtype.add("Angel");
 		this.power = new MageInt(4);

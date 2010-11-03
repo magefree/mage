@@ -62,7 +62,7 @@ public class PrimalCocoon extends CardImpl<PrimalCocoon> {
 		TargetPermanent auraTarget = new TargetCreaturePermanent();
 		this.getSpellAbility().addTarget(auraTarget);
 		this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-		Ability ability = new EnchantAbility(Outcome.Benefit, auraTarget);
+		Ability ability = new EnchantAbility(auraTarget.getTargetName());
 		this.addAbility(ability);
 		this.addAbility(new PrimalCocoonAbility1());
 		this.addAbility(new PrimalCocoonAbility2());

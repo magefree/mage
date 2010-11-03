@@ -39,7 +39,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 
 /**
  *
@@ -86,9 +85,9 @@ public class CantCounterControlledEffect extends ReplacementEffectImpl<CantCount
 		if (event.getType() == EventType.COUNTER) {
 			filterTarget.getControllerId().clear();
 			filterTarget.getControllerId().add(source.getControllerId());
-			StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
-			if (stackObject != null && stackObject instanceof Spell) {
-				if (filterTarget.match((Spell) stackObject)) {
+			Spell spell = game.getStack().getSpell(event.getTargetId());
+			if (spell != null) {
+				if (filterTarget.match(spell)) {
 					if (filterSource == null)
 						return true;
 					else {

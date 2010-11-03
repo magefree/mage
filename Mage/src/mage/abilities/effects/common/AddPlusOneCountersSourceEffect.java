@@ -62,7 +62,7 @@ public class AddPlusOneCountersSourceEffect extends OneShotEffect<AddPlusOneCoun
 	public boolean apply(Game game, Ability source) {
 		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
-			permanent.getCounters().addCounter(new PlusOneCounter(amount));
+			permanent.addCounters(new PlusOneCounter(amount));
 		}
 		return true;
 	}

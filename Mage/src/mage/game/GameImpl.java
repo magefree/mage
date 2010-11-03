@@ -57,7 +57,9 @@ import mage.abilities.keyword.LeylineAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
+import mage.filter.Filter;
 import mage.filter.Filter.ComparisonScope;
+import mage.filter.common.FilterAura;
 import mage.filter.common.FilterEquipment;
 import mage.filter.common.FilterFortification;
 import mage.filter.common.FilterLegendaryPermanent;
@@ -89,6 +91,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	private static FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
 	private static FilterLegendaryPermanent filterLegendary = new FilterLegendaryPermanent();
 	private static FilterLegendaryPermanent filterLegendName = new FilterLegendaryPermanent();
+	private static FilterAura filterAura = new FilterAura();
 	private static FilterEquipment filterEquipment = new FilterEquipment();
 	private static FilterFortification filterFortification = new FilterFortification();
 
@@ -566,6 +569,25 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 							perm.moveToZone(Zone.GRAVEYARD, this, false);
 						}
 						return true;
+					}
+				}
+			}
+		}
+		//20091005 - 704.5n
+		for (Permanent perm: getBattlefield().getAllActivePermanents(filterAura)) {
+			if (perm.getAttachedTo() == null) {
+				perm.moveToZone(Zone.GRAVEYARD, this, false);
+			}
+			else {
+				//TODO: handle player auras
+				Permanent attachedTo = getPermanent(perm.getAttachedTo());
+				if (attachedTo == null) {
+					perm.moveToZone(Zone.GRAVEYARD, this, false);
+				}
+				else {
+					Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
+					if (!auraFilter.match(attachedTo)) {
+						perm.moveToZone(Zone.GRAVEYARD, this, false);
 					}
 				}
 			}

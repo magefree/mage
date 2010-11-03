@@ -50,6 +50,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -139,6 +140,25 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	@Override
 	public Counters getCounters() {
 		return counters;
+	}
+
+	@Override
+	public void addCounters(String name, int amount) {
+		counters.addCounter(name, amount);
+	}
+
+	@Override
+	public void addCounters(Counter counter) {
+		counters.addCounter(counter);
+	}
+
+	@Override
+	public void removeCounters(String name, int amount, Game game) {
+		counters.removeCounter(name, amount);
+		GameEvent event = GameEvent.getEvent(EventType.COUNTER_REMOVED, objectId, controllerId);
+		event.setData(name);
+		for (int i = 0; i < amount; i++)
+			game.fireEvent(event);
 	}
 
 	@Override

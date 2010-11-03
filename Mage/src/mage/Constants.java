@@ -284,6 +284,7 @@ public final class Constants {
 		Tap(false),
 		Untap(true),
 		Win(true),
+		Copy(true),
 		Benefit(true),
 		Detriment(false),
 		Neutral(true);

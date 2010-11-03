@@ -62,7 +62,7 @@ public class Constructed extends DeckValidatorImpl {
 		countCards(counts, deck.getSideboard());
 		for (Entry<String, Integer> entry: counts.entrySet()) {
 			if (entry.getValue() > 4) {
-				if (!basicLandNames.contains(entry.getKey())) {
+				if (!basicLandNames.contains(entry.getKey()) && !entry.getKey().equals("Relentless Rats")) {
 					return false;
 				}
 			}

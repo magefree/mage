@@ -61,7 +61,7 @@ public class Weakness extends CardImpl<Weakness> {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
 	this.getSpellAbility().addTarget(auraTarget);
 	this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
-        Ability ability = new EnchantAbility(Outcome.BoostCreature, auraTarget);
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
 	this.addAbility(ability);
 	this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WeaknessEffect()));
     }
@@ -77,7 +77,7 @@ public class Weakness extends CardImpl<Weakness> {
 
     @Override
     public String getArt() {
-        return "102510_typ_reg_sty_010.jpg";
+        return "02510_typ_reg_sty_010.jpg";
     }
 }
 

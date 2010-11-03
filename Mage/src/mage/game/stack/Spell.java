@@ -36,14 +36,18 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.game.events.GameEvent;
+import mage.players.Player;
+import mage.target.Target;
 import mage.watchers.Watchers;
 
 /**
@@ -83,7 +87,6 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 					game.getExile().getPermanentExile().add(card);
 				else
 					card.moveToZone(Zone.GRAVEYARD, game, false);
-//					game.getPlayers().get(controllerId).putInGraveyard(card, game, false);
 				return result;
 			}
 			//20091005 - 608.2b
@@ -121,6 +124,26 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 		return replaced;
 	}
 
+	public boolean chooseNewTargets(Game game) {
+		Player player = game.getPlayer(controllerId);
+		for (Target target: ability.getTargets()) {
+			Target newTarget = target.copy();
+			newTarget.clearChosen();
+			for (UUID targetId: target.getTargets()) {
+				MageObject object = game.getObject(targetId);
+				if (player.chooseUse(ability.getEffects().get(0).getOutcome(), "Change target from " + object.getName() + "?", game)) {
+					if (!player.chooseTarget(ability.getEffects().get(0).getOutcome(), newTarget, ability, game))
+						newTarget.addTarget(targetId, ability, game);
+				}
+			}
+			target.getTargets().clear();
+			for (UUID newTargetId: newTarget.getTargets()) {
+				target.getTargets().add(newTargetId);
+			}
+		}
+		return true;
+	}
+	
 	@Override
 	public void counter(Game game) {
 		card.moveToZone(Zone.GRAVEYARD, game, false);
@@ -168,7 +191,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	}
 
 	@Override
-	public Abilities getAbilities() {
+	public Abilities<Ability> getAbilities() {
 		return card.getAbilities();
 	}
 
@@ -178,7 +201,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	}
 
 	@Override
-	public ManaCosts getManaCost() {
+	public ManaCosts<ManaCost> getManaCost() {
 		return card.getManaCost();
 	}
 

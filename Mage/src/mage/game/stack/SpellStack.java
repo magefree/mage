@@ -121,6 +121,18 @@ public class SpellStack extends Stack<StackObject> {
 		return null;
 	}
 
+	public Spell getSpell(UUID id) {
+		for (StackObject stackObject: this) {
+			if (stackObject.getId().equals(id)) {
+				if (stackObject instanceof Spell)
+					return (Spell)stackObject;
+				else
+					return null;
+			}
+		}
+		return null;
+	}
+
 	public SpellStack copy() {
 		return new SpellStack(this);
 	}

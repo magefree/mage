@@ -78,9 +78,9 @@ public class TargetSpell extends TargetObject<TargetSpell> {
 
 	@Override
 	public boolean canTarget(UUID id, Ability source, Game game) {
-		StackObject stackObject = game.getStack().getStackObject(id);
-		if (stackObject != null && stackObject instanceof Spell) {
-			return filter.match((Spell)stackObject);
+		Spell spell = game.getStack().getSpell(id);
+		if (spell != null) {
+			return filter.match(spell);
 		}
 		return false;
 	}

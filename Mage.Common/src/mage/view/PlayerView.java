@@ -80,8 +80,13 @@ public class PlayerView implements Serializable {
 		//show permanents controlled by player or attachments to permanents controlled by player
 		if (permanent.getAttachedTo() == null)
 			return permanent.getControllerId().equals(playerId);
-		else
-			return game.getPermanent(permanent.getAttachedTo()).getControllerId().equals(playerId);
+		else {
+			Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
+			if (attachedTo != null)
+				return attachedTo.getControllerId().equals(playerId);
+			else
+				return permanent.getControllerId().equals(playerId);
+		}
 	}
 
 	public int getLife() {

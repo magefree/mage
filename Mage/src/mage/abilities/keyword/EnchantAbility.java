@@ -40,13 +40,16 @@ import mage.target.TargetPermanent;
  */
 public class EnchantAbility extends StaticAbility<EnchantAbility> {
 
-	public EnchantAbility(Outcome outcome, TargetPermanent target) {
-		super(Zone.BATTLEFIELD, new AttachEffect(outcome));
-		this.addTarget(target);
+	protected String targetName;
+
+	public EnchantAbility(String targetName) {
+		super(Zone.BATTLEFIELD, null);
+		this.targetName = targetName;
 	}
 
 	public EnchantAbility(final EnchantAbility ability) {
 		super(ability);
+		this.targetName = ability.targetName;
 	}
 
 	@Override
@@ -56,7 +59,7 @@ public class EnchantAbility extends StaticAbility<EnchantAbility> {
 
 	@Override
 	public String getRule() {
-		return "Enchant " + this.getTargets().get(0).getTargetName();
+		return "Enchant " + targetName;
 	}
 
 

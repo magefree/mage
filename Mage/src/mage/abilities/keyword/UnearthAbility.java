@@ -83,40 +83,6 @@ public class UnearthAbility extends ActivatedAbilityImpl<UnearthAbility> {
 
 }
 
-//class UnearthEffect extends OneShotEffect<UnearthEffect> {
-//
-//	public UnearthEffect() {
-//		super(Outcome.PutCreatureInPlay);
-//	}
-//
-//	public UnearthEffect(final UnearthEffect effect) {
-//		super(effect);
-//	}
-//
-//	@Override
-//	public UnearthEffect copy() {
-//		return new UnearthEffect(this);
-//	}
-//
-//	@Override
-//	public boolean apply(Game game, Ability source) {
-//		Player player = game.getPlayer(source.getControllerId());
-//		Card card = player.getGraveyard().get(source.getSourceId(), game);
-//		if (card != null) {
-//			player.putOntoBattlefield(card, game);
-//			player.removeFromGraveyard(card, game);
-//			return true;
-//		}
-//		return false;
-//	}
-//
-//	@Override
-//	public String getText(Ability source) {
-//		return "Return {this} from your graveyard to the battlefield";
-//	}
-//
-//}
-
 class UnearthDelayedTriggeredAbility extends DelayedTriggeredAbility<UnearthDelayedTriggeredAbility> {
 
 	public UnearthDelayedTriggeredAbility() {

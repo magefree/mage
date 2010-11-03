@@ -34,6 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -42,12 +43,20 @@ import mage.players.Player;
  */
 public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect<ReturnSourceFromGraveyardToBattlefieldEffect> {
 
+	private boolean tapped;
+
 	public ReturnSourceFromGraveyardToBattlefieldEffect() {
+		this(false);
+	}
+
+	public ReturnSourceFromGraveyardToBattlefieldEffect(boolean tapped) {
 		super(Outcome.PutCreatureInPlay);
+		this.tapped = tapped;
 	}
 
 	public ReturnSourceFromGraveyardToBattlefieldEffect(final ReturnSourceFromGraveyardToBattlefieldEffect effect) {
 		super(effect);
+		this.tapped = effect.tapped;
 	}
 
 	@Override
@@ -61,15 +70,24 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect<
 		Card card = player.getGraveyard().get(source.getSourceId(), game);
 		if (card != null) {
 			player.removeFromGraveyard(card, game);
-			card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getControllerId());
-			return true;
+			if (card.putOntoBattlefield(game, Zone.HAND, source.getControllerId())) {
+				if (tapped) {
+					Permanent permanent = game.getPermanent(card.getId());
+					if (permanent != null)
+						permanent.setTapped(true);
+				}
+				return true;
+			}
 		}
 		return false;
 	}
 
 	@Override
 	public String getText(Ability source) {
-		return "Return {this} from your graveyard to the battlefield";
+		if (tapped)
+			return "Return {this} from your graveyard to the battlefield tapped";
+		else
+			return "Return {this} from your graveyard to the battlefield";
 	}
 
 }

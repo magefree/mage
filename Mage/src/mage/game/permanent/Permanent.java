@@ -30,10 +30,10 @@ package mage.game.permanent;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -71,12 +71,13 @@ public interface Permanent extends Card {
 	public int damage(int damage, UUID sourceId, Game game, boolean preventable);
 	public void removeAllDamage(Game game);
 	public Counters getCounters();
+	public void addCounters(String name, int amount);
+	public void addCounters(Counter counter);
+	public void removeCounters(String name, int amount, Game game);
 	public void reset(Game game);
 	public boolean destroy(UUID sourceId, Game game, boolean noRegen);
 	public boolean sacrifice(UUID sourceId, Game game);
 	public void entersBattlefield(Game game);
-//	public boolean moveToZone(Zone zone, Game game, boolean flag);
-//	public boolean moveToExile(UUID exileId, String name, Game game);
 	public String getValue();
 	public void setArt(String art);
 

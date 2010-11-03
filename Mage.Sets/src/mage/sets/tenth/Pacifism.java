@@ -65,7 +65,7 @@ public class Pacifism extends CardImpl<Pacifism> {
 		TargetPermanent auraTarget = new TargetCreaturePermanent();
 		this.getSpellAbility().addTarget(auraTarget);
 		this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-		Ability ability = new EnchantAbility(Outcome.Detriment, auraTarget);
+		Ability ability = new EnchantAbility(auraTarget.getTargetName());
 		this.addAbility(ability);
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PacifismEffect()));
 

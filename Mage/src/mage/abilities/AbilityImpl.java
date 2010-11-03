@@ -46,6 +46,8 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.cards.Card;
 import mage.choices.Choice;
 import mage.choices.Choices;
 import mage.game.Game;
@@ -139,21 +141,40 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
 	@Override
 	public boolean activate(Game game, boolean noMana) {
+		//20100716 - 601.2b
 		if (choices.size() > 0 && choices.choose(game, this) == false) {
 			logger.fine("activate failed - choice");
 			return false;
 		}
+		//20100716 - 114.1b
+//		if (game.getObject(sourceId).getSubtype().contains("Aura")) {
+//			for (Ability ability: game.getObject(sourceId).getAbilities()) {
+//				if (ability instanceof EnchantAbility) {
+//					Targets enchantTargets = ability.getTargets();
+//					if (enchantTargets.size() > 0 && enchantTargets.chooseTargets(ability.getEffects().get(0).getOutcome(), this.controllerId, this, game) == false) {
+//						logger.fine("activate failed - target");
+//						return false;
+//					}
+//					break;
+//				}
+//			}
+//		}
+		//20100716 - 601.2b
 		if (targets.size() > 0 && targets.chooseTargets(effects.get(0).getOutcome(), this.controllerId, this, game) == false) {
 			logger.fine("activate failed - target");
 			return false;
 		}
-		game.getObject(sourceId).adjustCosts(this, game);
+		//20100716 - 601.2e
+		if (game.getObject(sourceId) != null)
+			game.getObject(sourceId).adjustCosts(this, game);
 		if (!useAlternativeCost(game)) {
+			//20100716 - 601.2f
 			if (!manaCosts.pay(game, sourceId, controllerId, noMana)) {
 				logger.fine("activate failed - mana");
 				return false;
 			}
 		}
+		//20100716 - 601.2g
 		if (!costs.pay(game, sourceId, controllerId, noMana)) {
 			logger.fine("activate failed - non mana costs");
 			return false;

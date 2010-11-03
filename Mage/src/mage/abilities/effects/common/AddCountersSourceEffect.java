@@ -60,9 +60,7 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
 	public boolean apply(Game game, Ability source) {
 		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
-			Counter counter = new Counter(name);
-			counter.add(amount);
-			permanent.getCounters().addCounter(counter);
+			permanent.addCounters(name, amount);
 		}
 		return true;
 	}

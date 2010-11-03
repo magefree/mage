@@ -26,28 +26,33 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.filter.common;
 
-import java.util.UUID;
+import mage.Constants.CardType;
+import mage.filter.FilterPermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PlatinumAngel extends mage.sets.magic2010.PlatinumAngel {
+public class FilterAura extends FilterPermanent<FilterAura> {
 
-	public PlatinumAngel(UUID ownerId) {
-		super(ownerId);
-		this.expansionSetCode = "M11";
+	public FilterAura() {
+		this("aura");
 	}
 
-	public PlatinumAngel(final PlatinumAngel card) {
-		super(card);
+	public FilterAura(String name) {
+		super(name);
+		this.cardType.add(CardType.ENCHANTMENT);
+		this.getSubtype().add("Aura");
+	}
+
+	public FilterAura(final FilterAura filter) {
+		super(filter);
 	}
 
 	@Override
-	public PlatinumAngel copy() {
-		return new PlatinumAngel(this);
+	public FilterAura copy() {
+		return new FilterAura(this);
 	}
-
 }

@@ -337,7 +337,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		permanent.removeFromCombat(game);
 		game.getBattlefield().removePermanent(permanent.getId());
 		if (permanent.getAttachedTo() != null) {
-			game.getPermanent(permanent.getAttachedTo()).removeAttachment(permanent.getId(), game);
+			Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
+			if (attachedTo != null)
+				attachedTo.removeAttachment(permanent.getId(), game);
 		}
 		return true;
 	}
