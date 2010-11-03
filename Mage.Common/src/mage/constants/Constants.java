@@ -28,7 +28,6 @@
 
 package mage.constants;
 
-import java.io.File;
 
 /**
  *

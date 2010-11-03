@@ -1,6 +1,7 @@
 package mage.utils;
 
 import mage.Constants.CardType;
+import mage.cards.MagePermanent;
 import mage.view.CardView;
 
 /**
@@ -17,6 +18,22 @@ public class CardUtil {
 	
 	public static boolean isPlaneswalker(CardView card) {
 		return is(card, CardType.PLANESWALKER);
+	}
+	
+	public static boolean isLand(CardView card) {
+		return is(card, CardType.LAND);
+	}
+	
+	public static boolean isCreature(MagePermanent card) {
+		return is(card.getOriginal(), CardType.CREATURE);
+	}
+	
+	public static boolean isPlaneswalker(MagePermanent card) {
+		return is(card.getOriginal(), CardType.PLANESWALKER);
+	}
+	
+	public static boolean isLand(MagePermanent card) {
+		return is(card.getOriginal(), CardType.LAND);
 	}
 	
 	public static boolean is(CardView card, CardType type) {

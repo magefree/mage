@@ -42,8 +42,11 @@ import java.awt.event.ComponentListener;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
+import java.util.Map.Entry;
+
+import javax.swing.JComponent;
+import javax.swing.JScrollPane;
 
 import mage.cards.MagePermanent;
 import mage.client.cards.BigCard;
@@ -61,9 +64,11 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 	private Map<UUID, MagePermanent> permanents = new HashMap<UUID, MagePermanent>();
 	private UUID gameId;
 	private BigCard bigCard;
+	private Map<String, JComponent> ui = new HashMap<String, JComponent>();
 
     /** Creates new form BattlefieldPanel */
-    public BattlefieldPanel() {
+    public BattlefieldPanel(JScrollPane jScrollPane) {
+    	ui.put("jScrollPane", jScrollPane);
         initComponents();
     }
 
@@ -78,7 +83,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 				addPermanent(permanent);
 			}
 			else {
-				permanents.get(permanent.getId()).update(permanent);
+				permanents.get(permanent.getId()).updateCard(permanent);
 			}
 		}
 		for (Iterator<Entry<UUID, MagePermanent>> i = permanents.entrySet().iterator(); i.hasNext();) {
@@ -93,16 +98,20 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 				groupAttachments(permanent);
 			}
 		}
+		
+		Plugins.getInstance().sortPermanents(ui, permanents.values());
 	}
 
 	private void addPermanent(PermanentView permanent) {
 		MagePermanent perm = Plugins.getInstance().getMagePermanent(permanent, bigCard, Config.dimensions, gameId);;
 		perm.addComponentListener(this);
-		perm.setBounds(findEmptySpace(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight)));
+		if (!Plugins.getInstance().isCardPluginLoaded()) {
+			perm.setBounds(findEmptySpace(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight)));
+		}
 		permanents.put(permanent.getId(), perm);
 		this.add(perm);
 		moveToFront(perm);
-		perm.update(permanent);
+		perm.updateCard(permanent);
 	}
 	
 	private void groupAttachments(PermanentView permanent) {

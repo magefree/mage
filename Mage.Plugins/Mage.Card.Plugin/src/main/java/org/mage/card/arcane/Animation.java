@@ -9,7 +9,7 @@ import java.util.TimerTask;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 
-import org.mage.card.MageCard;
+import mage.cards.MagePermanent;
 
 abstract public class Animation {
 	static private final long TARGET_MILLIS_PER_FRAME = 30;
@@ -102,7 +102,7 @@ abstract public class Animation {
 		}
 	}
 
-	static public void tapCardToggle (final CardPanel panel, final MageCard parent) {
+	static public void tapCardToggle (final CardPanel panel, final MagePermanent parent) {
 		new Animation(300) {
 			protected void start () {
 				parent.onBeginAnimation();
@@ -303,7 +303,7 @@ abstract public class Animation {
 		};
 	}
 	
-	static public void hideCard(final CardPanel panel, final MageCard card) {
+	static public void hideCard(final CardPanel panel, final MagePermanent card) {
 		new Animation(600) {
 			protected void start () {
 			}
@@ -311,7 +311,7 @@ abstract public class Animation {
 			protected void update (float percentage) {
 				float alpha = 1 - percentage;
 				panel.setAlpha(alpha);
-				card.setTransparency(alpha);
+				card.setAlpha(alpha);
 				card.repaint();
 			}
 

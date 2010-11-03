@@ -80,6 +80,7 @@ import mage.client.MageFrame;
 import mage.client.game.PlayAreaPanel;
 import mage.client.remote.Session;
 import mage.client.util.Config;
+import mage.client.util.DefaultActionCallback;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.ArrowBuilder;
 import mage.sets.Sets;
@@ -96,7 +97,8 @@ import mage.view.StackAbilityView;
 public class Card extends MagePermanent implements MouseMotionListener, MouseListener, FocusListener, ComponentListener {
 
 	protected static Session session = MageFrame.getSession();
-
+	protected static DefaultActionCallback callback = new DefaultActionCallback();
+	
 	protected Point p;
 	protected CardDimensions dimension;
 
@@ -340,10 +342,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
+	public void mouseClicked(MouseEvent e) {
 	    requestFocusInWindow();
-		if (gameId != null)
-			session.sendPlayerUUID(gameId, card.getId());
+	    callback.mouseClicked(e, gameId, session, card);
 	}
 
 	@Override
@@ -441,11 +442,32 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 	}
 
 	@Override
-	public void update(PermanentView card) {
+	public List<MagePermanent> getLinks() {return null;}
+
+	@Override
+	public boolean isTapped() {return false;}
+
+	@Override
+	public void onBeginAnimation() {}
+
+	@Override
+	public void onEndAnimation() {}
+
+	@Override
+	public void setAlpha(float transparency) {}
+
+	@Override
+	public PermanentView getOriginal() {
+		throw new RuntimeException("Not implemented");
 	}
 
 	@Override
-	public List<MagePermanent> getLinks() {
-		return null;
+	public void setCardBounds(int x, int y, int width, int height) {
+		throw new RuntimeException("Not implemented");
+	}
+
+	@Override
+	public void updateCard(PermanentView card) {
+		update(card);
 	}
 }

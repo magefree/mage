@@ -64,7 +64,7 @@ import mage.view.PermanentView;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Permanent extends Card implements mage.cards.interfaces.PermanentInterface {
+public class Permanent extends Card {
 
 	protected PermanentView permanent;
 

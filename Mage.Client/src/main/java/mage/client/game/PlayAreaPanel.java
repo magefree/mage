@@ -105,7 +105,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         manaPool = new mage.client.game.ManaPool();
         btnCheat = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        battlefieldPanel = new mage.client.game.BattlefieldPanel();
+        battlefieldPanel = new mage.client.game.BattlefieldPanel(jScrollPane1);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 

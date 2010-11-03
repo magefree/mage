@@ -31,7 +31,7 @@ public class ThemePluginImpl implements ThemePlugin {
     }
 	
 	public String toString() {
-		return "[Theme plugin by nantuko, version 0.1]";
+		return "[Theme plugin, version 0.1]";
 	}
 	
 	public void apply(Map<String, JComponent> ui) {

@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
-import org.mage.card.constants.Constants;
+import org.mage.plugins.card.constants.Constants;
 
 public class ManaSymbols {
 	private static final Logger log = Logger.getLogger(ManaSymbols.class);

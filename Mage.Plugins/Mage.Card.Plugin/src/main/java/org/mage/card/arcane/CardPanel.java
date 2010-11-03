@@ -10,15 +10,19 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.event.ComponentEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
+import mage.cards.MagePermanent;
+import mage.cards.interfaces.ActionCallback;
 import mage.utils.CardUtil;
 import mage.view.PermanentView;
 
@@ -26,7 +30,7 @@ import org.mage.card.arcane.ScaledImagePanel.MultipassType;
 import org.mage.card.arcane.ScaledImagePanel.ScalingType;
 
 @SuppressWarnings({"unchecked","rawtypes"})
-public class CardPanel extends JPanel {
+public class CardPanel extends MagePermanent {
 	private static final long serialVersionUID = -3272134219262184410L;
 	static public final double TAPPED_ANGLE = Math.PI / 2;
 	static public final float ASPECT_RATIO = 3.5f / 2.5f;
@@ -62,9 +66,17 @@ public class CardPanel extends JPanel {
 	private boolean showCastingCost;
 	private boolean hasImage = false;
 	private float alpha = 1.0f;
+	
+	private ActionCallback callback;
 
-	public CardPanel (PermanentView newGameCard, boolean loadImage) {
+	public CardPanel (PermanentView newGameCard, boolean loadImage, ActionCallback callback) {
 		this.gameCard = newGameCard;
+		this.callback = callback;
+		
+		addMouseListener(this);
+	    addFocusListener(this);
+	    addMouseMotionListener(this);
+		addComponentListener(this);
 		
 		//for container debug (don't remove)
 		//setBorder(BorderFactory.createLineBorder(Color.green));
@@ -302,6 +314,7 @@ public class CardPanel extends JPanel {
 		return gameCard.toString();
 	}
 
+	@Override
 	public void setCardBounds (int x, int y, int width, int height) {
 		cardWidth = width;
 		cardHeight = height;
@@ -353,28 +366,7 @@ public class CardPanel extends JPanel {
 		return this.gameCard;
 	}
 	
-	public void setCard(PermanentView card) {
-		if (CardUtil.isCreature(card) && CardUtil.isPlaneswalker(card)) {
-			ptText.setText(card.getPower() + "/" + card.getToughness() + " (" + card.getLoyalty() + ")");
-		} else if (CardUtil.isCreature(card)) {
-			ptText.setText(card.getPower() + "/" + card.getToughness());
-		} else if (CardUtil.isPlaneswalker(card)) {
-			ptText.setText(card.getLoyalty());
-		} else {
-			ptText.setText("");
-		}
-		setText(card);
-		this.gameCard = card;
-		//TODO: uncomment
-		/*if (gameCard.hasSickness() && gameCard.isCreature() && gameCard.getTableID() != 0) {
-			overlayPanel.setVisible(true);
-		} else {
-			overlayPanel.setVisible(false);
-		}*/
-		
-		repaint();
-	}
-	
+	@Override
 	public void setAlpha(float alpha) {
 		this.alpha = alpha;
 	}
@@ -407,4 +399,129 @@ public class CardPanel extends JPanel {
 			});
 		}
 	}
+
+	@Override
+	public List<MagePermanent> getLinks() {
+		return null;
+	}
+
+	@Override
+	public boolean isTapped() {
+		return false;
+	}
+
+	@Override
+	public void onBeginAnimation() {
+	}
+
+	@Override
+	public void onEndAnimation() {
+	}
+
+	@Override
+	public void updateCard(PermanentView card) {
+		if (this.gameCard.isTapped() != card.isTapped()) {
+			Animation.tapCardToggle(this, this);
+		}
+		if (CardUtil.isCreature(card) && CardUtil.isPlaneswalker(card)) {
+			ptText.setText(card.getPower() + "/" + card.getToughness() + " (" + card.getLoyalty() + ")");
+		} else if (CardUtil.isCreature(card)) {
+			ptText.setText(card.getPower() + "/" + card.getToughness());
+		} else if (CardUtil.isPlaneswalker(card)) {
+			ptText.setText(card.getLoyalty());
+		} else {
+			ptText.setText("");
+		}
+		setText(card);
+		this.gameCard = card;
+		//TODO: uncomment
+		/*if (gameCard.hasSickness() && gameCard.isCreature() && gameCard.getTableID() != 0) {
+			overlayPanel.setVisible(true);
+		} else {
+			overlayPanel.setVisible(false);
+		}*/
+		
+		repaint();
+	}
+
+	@Override
+	public boolean contains(int x, int y) {
+		if (containsThis(x, y, true))
+		return true;
+
+		/*
+		 * if (attachedCount > 0) { for (MWCardImpl card :
+		 * mwAttachedCards.keySet()) { if (card.contains(x, y)) return true; } }
+		 */
+
+		return false;
+	}
+	
+	public boolean containsThis(int x, int y, boolean root) {
+		int dy = getLocation().y;
+		if (root) dy = 0;
+		int cx = getCardX();
+		int cy = getCardY() + dy;
+		int cw = getCardWidth();
+		int ch = getCardHeight();
+		if (isTapped()) {
+			cy = ch - cw + cx /*+ attachedDy*attachedCount*/;
+			ch = cw;
+			cw = getCardHeight();
+		}
+		//int dx = drawIcons ? 19 : 0;
+		int dx = 0;
+		if (x >= cx && x <= cx + cw + dx && y >= cy && y <= cy + ch) {
+			return true;
+		}
+    	return false;
+    }
+
+	 
+	@Override
+	public PermanentView getOriginal() {
+		return this.gameCard;
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		System.out.println("clicked: " + this.gameCard.getId());
+		callback.mouseClicked(e);
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+
+	@Override
+	public void mouseExited(MouseEvent e) {	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {}
+
+	@Override
+	public void focusGained(FocusEvent e) {	}
+
+	@Override
+	public void focusLost(FocusEvent e) {}
+
+	@Override
+	public void componentHidden(ComponentEvent e) {	}
+
+	@Override
+	public void componentMoved(ComponentEvent e) {}
+
+	@Override
+	public void componentResized(ComponentEvent e) {}
+
+	@Override
+	public void componentShown(ComponentEvent e) {}
 }
