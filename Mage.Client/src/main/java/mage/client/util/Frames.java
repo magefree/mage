@@ -30,6 +30,7 @@ package mage.client.util;
 
 import static mage.constants.Constants.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 /**
  *
@@ -62,7 +63,7 @@ public class Frames {
 	public static BufferedImage Swamp = ImageHelper.loadImage(Config.frameResourcePath + "8 land mana black.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
 	public static BufferedImage Land = ImageHelper.loadImage(Config.frameResourcePath + "8 multiland nomana colorless.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
 
-	public static BufferedImage Effect = ImageHelper.loadImage(Config.frameResourcePath + "Effects\\effect0.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
+	public static BufferedImage Effect = ImageHelper.loadImage(Config.frameResourcePath + "Effects" + File.separator +"effect0.png", FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
 
 	public static BufferedImage PowBoxLeft = ImageHelper.loadImage(Config.powerboxResourcePath + "graphic_card_powerbox_a_left.png");
 	public static BufferedImage PowBoxMid = ImageHelper.loadImage(Config.powerboxResourcePath + "graphic_card_powerbox_a_middle.png");

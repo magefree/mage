@@ -87,10 +87,10 @@ public class Config {
 		File test = new File(cardsResourcePath);
 		if (test.isDirectory()) {
 			useResource = false;
-			frameResourcePath = cardsResourcePath + "Frame\\";
-			powerboxResourcePath = cardsResourcePath + "PowerBox\\";
-			cardArtResourcePath = cardsResourcePath + "Pics\\";
-			setIconsResourcePath = cardsResourcePath + "Icon\\";
+			frameResourcePath = cardsResourcePath + "Frame" + File.separator;
+			powerboxResourcePath = cardsResourcePath + "PowerBox" + File.separator;
+			cardArtResourcePath = cardsResourcePath + "Pics" + File.separator;
+			setIconsResourcePath = cardsResourcePath + "Icon"  + File.separator;
 			symbolsResourcePath = p.getProperty("symbols-resource-path");
 		}
 		else {
