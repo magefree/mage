@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class RafiqOfTheMany extends CardImpl<RafiqOfTheMany> {
 
 	public RafiqOfTheMany(UUID ownerId) {
-		super(ownerId, "Rafiq of the Many", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
+		super(ownerId, 185, "Rafiq of the Many", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
 		this.expansionSetCode = "ALA";
 		this.color.setGreen(true);
 		this.color.setWhite(true);

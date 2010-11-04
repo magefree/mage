@@ -58,7 +58,7 @@ import mage.target.common.TargetCardInLibrary;
 public class PrimevalTitan extends CardImpl<PrimevalTitan> {
 
 	public PrimevalTitan(UUID ownerId) {
-		super(ownerId, "Primeval Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
+		super(ownerId, 192, "Primeval Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Giant");
 		this.color.setGreen(true);

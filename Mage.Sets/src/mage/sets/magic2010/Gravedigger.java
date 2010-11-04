@@ -38,6 +38,7 @@ public class Gravedigger extends mage.sets.tenth.Gravedigger {
 
 	public Gravedigger(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 97;
 		this.expansionSetCode = "M10";
 	}
 

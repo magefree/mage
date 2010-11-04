@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class ZephyrSprite extends CardImpl<ZephyrSprite> {
 
     public ZephyrSprite(UUID ownerId) {
-        super(ownerId, "Zephyr Sprite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
+        super(ownerId, 82, "Zephyr Sprite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
         this.expansionSetCode = "M10";
         this.subtype.add("Faerie");
         this.color.setBlue(true);

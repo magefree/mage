@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
 public class LilianasCaress extends CardImpl<LilianasCaress> {
 
 	public LilianasCaress(UUID ownerId) {
-		super(ownerId, "Liliana's Caress", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
+		super(ownerId, 103, "Liliana's Caress", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 		this.expansionSetCode = "M11";
 		this.color.setBlack(true);
 		this.addAbility(new LilianasCaressAbility());

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class BituminousBlast extends CardImpl<BituminousBlast> {
 
 	public BituminousBlast(UUID ownerId) {
-		super(ownerId, "Bituminous Blast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{B}{R}");
+		super(ownerId, 34, "Bituminous Blast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{B}{R}");
 		this.expansionSetCode = "ARB";
 		this.color.setBlack(true);
 		this.color.setRed(true);

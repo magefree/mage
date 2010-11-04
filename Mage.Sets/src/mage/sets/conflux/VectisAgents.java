@@ -49,7 +49,7 @@ import mage.cards.CardImpl;
 public class VectisAgents extends CardImpl<VectisAgents> {
 
     public VectisAgents(UUID ownerId) {
-        super(ownerId, "Vectis Agents", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{U}{B}");
+        super(ownerId, 131, "Vectis Agents", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{U}{B}");
         this.expansionSetCode = "CON";
         this.color.setBlue(true);
         this.color.setBlack(true);

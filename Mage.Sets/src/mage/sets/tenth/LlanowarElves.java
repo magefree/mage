@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class LlanowarElves extends CardImpl<LlanowarElves> {
 
 	public LlanowarElves(UUID ownerId) {
-		super(ownerId, "Llanowar Elves", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+		super(ownerId, 0, "Llanowar Elves", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
 		this.expansionSetCode = "10E";
 		this.subtype.add("Elf");
 		this.subtype.add("Druid");

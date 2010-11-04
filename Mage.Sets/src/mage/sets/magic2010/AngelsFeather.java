@@ -37,7 +37,8 @@ import java.util.UUID;
 public class AngelsFeather extends mage.sets.tenth.AngelsFeather {
 
 	public AngelsFeather(UUID ownerId) {
-		super(ownerId);
+		super(ownerId);this.cardNumber = 0;
+		this.cardNumber = 206;
 		this.expansionSetCode = "M10";
 	}
 

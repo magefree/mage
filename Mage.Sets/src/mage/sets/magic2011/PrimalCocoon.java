@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class PrimalCocoon extends CardImpl<PrimalCocoon> {
 
 	public PrimalCocoon(UUID ownerId) {
-		super(ownerId, "Primal Cocoon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
+		super(ownerId, 191, "Primal Cocoon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
 		this.expansionSetCode = "M11";
 		this.color.setGreen(true);
 		this.subtype.add("Aura");

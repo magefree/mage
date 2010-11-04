@@ -58,7 +58,7 @@ public class ElvishArchdruid extends CardImpl<ElvishArchdruid> {
 	}
 
 	public ElvishArchdruid(UUID ownerId) {
-		super(ownerId, "Elvish Archdruid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
+		super(ownerId, 176, "Elvish Archdruid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Elf");
 		this.subtype.add("Druid");

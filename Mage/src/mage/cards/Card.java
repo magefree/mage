@@ -42,6 +42,7 @@ import mage.watchers.Watchers;
 public interface Card extends MageObject {
 
 	public UUID getOwnerId();
+	public int getCardNumber();
 	public String getArt();
 	public Rarity getRarity();
 	public void setRarity(Rarity rarity);

@@ -57,7 +57,7 @@ import mage.target.common.TargetLandPermanent;
 public class SpreadingSeas extends CardImpl<SpreadingSeas> {
 
 	public SpreadingSeas(UUID ownerId) {
-		super(ownerId, "Spreading Seas", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
+		super(ownerId, 0, "Spreading Seas", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 		this.expansionSetCode = "ZEN";
 		this.color.setBlue(true);
 		this.subtype.add("Aura");

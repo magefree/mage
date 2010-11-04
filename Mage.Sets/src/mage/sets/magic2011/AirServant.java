@@ -55,7 +55,7 @@ public class AirServant extends CardImpl<AirServant> {
 	}
 
 	public AirServant(UUID ownerId) {
-		super(ownerId, "Air Servant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
+		super(ownerId, 42, "Air Servant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
 		this.expansionSetCode = "M11";
 		this.color.setBlue(true);
 		this.subtype.add("Elemental");

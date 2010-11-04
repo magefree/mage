@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class MistyRainforest extends CardImpl<MistyRainforest> {
 
 	public MistyRainforest(UUID ownerId) {
-		super(ownerId, "Misty Rainforest", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 0, "Misty Rainforest", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ZEN";
 		this.addAbility(new FetchLandActivatedAbility(new String[] {"Forest", "Island"}));
 	}

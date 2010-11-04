@@ -48,7 +48,7 @@ import mage.players.Player;
 public class Earthquake extends CardImpl<Earthquake> {
 
 	public Earthquake(UUID ownerId) {
-		super(ownerId, "Earthquake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
+		super(ownerId, 134, "Earthquake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
 		this.expansionSetCode = "M10";
 		this.color.setRed(true);
 		this.getSpellAbility().addEffect(new EarthquakeEffect());

@@ -53,7 +53,7 @@ public class InkwellLeviathan extends CardImpl<InkwellLeviathan> {
     }
 
     public InkwellLeviathan(UUID ownerId) {
-        super(ownerId, "Inkwell Leviathan", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}{U}{U}" );
+        super(ownerId, 30, "Inkwell Leviathan", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}{U}{U}" );
         this.expansionSetCode = "CON";
         this.subtype.add("Leviathan");
         this.color.setBlue(true);

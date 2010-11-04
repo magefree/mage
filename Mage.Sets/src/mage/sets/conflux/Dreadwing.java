@@ -48,7 +48,7 @@ import mage.cards.CardImpl;
 public class Dreadwing extends CardImpl<Dreadwing> {
 
     public Dreadwing(UUID ownerId) {
-        super(ownerId, "Dreadwing", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");
+        super(ownerId, 43, "Dreadwing", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");
         this.expansionSetCode = "CON";
         this.subtype.add("Zombie");
         this.color.setBlack(true);

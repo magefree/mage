@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
 public class BoneSaw extends CardImpl<BoneSaw> {
 
     public BoneSaw(UUID ownerId) {
-        super(ownerId, "Bone Saw", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
+        super(ownerId, 135, "Bone Saw", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
         this.expansionSetCode = "CON";
         this.subtype.add("Equipment");
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));

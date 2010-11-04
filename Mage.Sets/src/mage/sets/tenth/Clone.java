@@ -31,14 +31,12 @@ package mage.sets.tenth;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CopyEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -48,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Clone extends CardImpl<Clone> {
 
 	public Clone(UUID ownerId) {
-		super(ownerId, "Clone", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
+		super(ownerId, 73, "Clone", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
 		this.expansionSetCode = "10E";
 		this.color.setBlue(true);
 		this.subtype.add("Shapeshifter");

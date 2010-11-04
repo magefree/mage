@@ -38,6 +38,7 @@ public class BerserkersOfBloodRidge extends mage.sets.magic2010.BerserkersOfBloo
 
 	public BerserkersOfBloodRidge(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 124;
 		this.expansionSetCode = "M11";
 	}
 

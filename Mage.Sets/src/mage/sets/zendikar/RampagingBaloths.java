@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
 public class RampagingBaloths extends CardImpl<RampagingBaloths> {
 
 	public RampagingBaloths(UUID ownerId) {
-		super(ownerId, "Rampaging Baloths", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
+		super(ownerId, 0, "Rampaging Baloths", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
 		this.expansionSetCode = "ZEN";
 		this.subtype.add("Beast");
 		this.color.setGreen(true);

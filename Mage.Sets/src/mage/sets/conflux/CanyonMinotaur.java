@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class CanyonMinotaur extends CardImpl<CanyonMinotaur> {
 
 	public CanyonMinotaur(UUID ownerId) {
-		super(ownerId, "Canyon Minotaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+		super(ownerId, 60, "Canyon Minotaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
 		this.expansionSetCode = "CON";
 		this.color.setRed(true);
 		this.subtype.add("Minotaur");

@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class ScarlandThrinax extends CardImpl<ScarlandThrinax> {
 
     public ScarlandThrinax(UUID ownerId) {
-        super(ownerId, "Scarland Thrinax", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
+        super(ownerId, 123, "Scarland Thrinax", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
         this.expansionSetCode = "CON";
         this.color.setBlack(true);
         this.color.setRed(true);

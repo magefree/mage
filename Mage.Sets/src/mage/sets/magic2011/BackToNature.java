@@ -48,7 +48,7 @@ public class BackToNature extends CardImpl<BackToNature> {
 	}
 
 	public BackToNature(UUID ownerId) {
-		super(ownerId, "Back to Nature", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
+		super(ownerId, 164, "Back to Nature", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
 		this.expansionSetCode = "M11";
 		this.color.setGreen(true);
 		this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

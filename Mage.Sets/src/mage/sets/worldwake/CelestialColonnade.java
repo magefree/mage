@@ -52,7 +52,7 @@ import mage.game.permanent.token.Token;
 public class CelestialColonnade extends CardImpl<CelestialColonnade> {
 
 	public CelestialColonnade(UUID ownerId) {
-		super(ownerId, "Celestial Colonnade", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 0, "Celestial Colonnade", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "WWK";
 		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
 		this.addAbility(new BlueManaAbility());

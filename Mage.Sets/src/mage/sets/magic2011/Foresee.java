@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class Foresee extends CardImpl<Foresee> {
 
 	public Foresee(UUID ownerId) {
-		super(ownerId, "Foresee", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
+		super(ownerId, 54, "Foresee", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
 		this.expansionSetCode = "M11";
 		this.color.setBlue(true);
 		this.getSpellAbility().addEffect(new ScryEffect(4));

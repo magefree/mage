@@ -38,6 +38,7 @@ public class Disentomb extends mage.sets.magic2010.Disentomb {
 
 	public Disentomb(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 94;
 		this.expansionSetCode = "M11";
 	}
 

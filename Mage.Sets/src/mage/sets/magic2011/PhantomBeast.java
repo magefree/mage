@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
 public class PhantomBeast extends CardImpl<PhantomBeast> {
 
 	public PhantomBeast(UUID ownerId) {
-		super(ownerId, "Phantom Beast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+		super(ownerId, 69, "Phantom Beast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Illusion");
 		this.subtype.add("Beast");

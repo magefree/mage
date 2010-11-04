@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
 public class GoldenglowMoth extends CardImpl<GoldenglowMoth> {
 
 	public GoldenglowMoth(UUID ownerId) {
-		super(ownerId, "Goldenglow Moth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+		super(ownerId, 15, "Goldenglow Moth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Insect");
 		this.color.setWhite(true);

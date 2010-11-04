@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
 public class SavageLands extends CardImpl<SavageLands> {
 
 	public SavageLands(UUID ownerId) {
-		super(ownerId, "Savage Lands", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 228, "Savage Lands", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ALA";
 		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
 		this.addAbility(new RedManaAbility());

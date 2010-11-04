@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInLibrary;
 public class FaunaShaman extends CardImpl<FaunaShaman> {
 
 	public FaunaShaman(UUID ownerId) {
-		super(ownerId, "Fauna Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
+		super(ownerId, 172, "Fauna Shaman", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Elf");
 		this.subtype.add("Shaman");

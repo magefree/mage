@@ -48,7 +48,7 @@ public class AntQueen extends CardImpl<AntQueen> {
 	private static InsectToken insectToken = new InsectToken();
 
 	public AntQueen(UUID ownerId) {
-		super(ownerId, "Ant Queen", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+		super(ownerId, 166, "Ant Queen", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Insect");
 		this.color.setGreen(true);

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class MaritimeGuard extends CardImpl<MaritimeGuard> {
 
 	public MaritimeGuard(UUID ownerId) {
-		super(ownerId, "Maritime Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+		super(ownerId, 63, "Maritime Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
 		this.expansionSetCode = "M11";
 		this.color.setBlue(true);
 		this.subtype.add("Merfolk");

@@ -38,6 +38,7 @@ public class MerfolkSovereign extends mage.sets.magic2010.MerfolkSovereign {
 
 	public MerfolkSovereign(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 65;
 		this.expansionSetCode = "M11";
 	}
 

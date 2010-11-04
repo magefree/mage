@@ -50,7 +50,7 @@ public class AerieMystics extends CardImpl<AerieMystics> {
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures");
 
     public AerieMystics(UUID ownerId) {
-        super(ownerId, "Aerie Mystics", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
+        super(ownerId, 1, "Aerie Mystics", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.expansionSetCode = "CON";
         this.color.setWhite(true);
         this.subtype.add("Bird");

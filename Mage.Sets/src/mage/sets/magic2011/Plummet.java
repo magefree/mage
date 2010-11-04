@@ -56,7 +56,7 @@ public class Plummet extends CardImpl<Plummet> {
 	}
 
 	public Plummet(UUID ownerId) {
-		super(ownerId, "Plummet", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
+		super(ownerId, 190, "Plummet", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
 		this.expansionSetCode = "M11";
 		this.color.setGreen(true);
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

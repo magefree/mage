@@ -52,7 +52,7 @@ import mage.game.permanent.token.Token;
 public class LavaclawReaches extends CardImpl<LavaclawReaches> {
 
 	public LavaclawReaches(UUID ownerId) {
-		super(ownerId, "Lavaclaw Reaches", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 0, "Lavaclaw Reaches", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "WWK";
 		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
 		this.addAbility(new BlackManaAbility());

@@ -52,7 +52,7 @@ import mage.players.Player;
 public class MassPolymorph extends CardImpl<MassPolymorph> {
 
 	public MassPolymorph(UUID ownerId) {
-		super(ownerId, "Mass Polymorph", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{U}");
+		super(ownerId, 64, "Mass Polymorph", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{U}");
 		this.expansionSetCode = "M11";
 		this.color.setBlue(true);
 		this.getSpellAbility().addEffect(new MassPolymorphEffect());

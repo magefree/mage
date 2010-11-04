@@ -50,7 +50,7 @@ import mage.game.stack.StackObject;
 public class FireServant extends CardImpl<FireServant> {
 
 	public FireServant(UUID ownerId) {
-		super(ownerId, "Fire Servant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
+		super(ownerId, 137, "Fire Servant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Elemental");
 		this.color.setRed(true);

@@ -38,6 +38,7 @@ public class LavaAxe extends mage.sets.tenth.LavaAxe {
 
 	public LavaAxe(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 147;
 		this.expansionSetCode = "M11";
 	}
 

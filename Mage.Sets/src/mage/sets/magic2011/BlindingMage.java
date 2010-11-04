@@ -38,6 +38,7 @@ public class BlindingMage extends mage.sets.magic2010.BlindingMage {
 
 	public BlindingMage(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 8;
 		this.expansionSetCode = "M11";
 	}
 

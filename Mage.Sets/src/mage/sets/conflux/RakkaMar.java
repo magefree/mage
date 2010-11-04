@@ -51,7 +51,7 @@ public class RakkaMar extends CardImpl<RakkaMar> {
     private static ElementalToken token = new ElementalToken();
 
     public RakkaMar(UUID ownerId) {
-        super(ownerId, "Rakka Mar", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        super(ownerId, 71, "Rakka Mar", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.expansionSetCode = "CON";
         this.supertype.add("Legendary");
         this.subtype.add("Human");

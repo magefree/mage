@@ -60,7 +60,7 @@ public class MasterOfTheWildHunt extends CardImpl<MasterOfTheWildHunt> {
 	private static WolfToken wolfToken = new WolfToken();
 
 	public MasterOfTheWildHunt(UUID ownerId) {
-		super(ownerId, "Master of the Wild Hunt", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+		super(ownerId, 191, "Master of the Wild Hunt", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Human");
 		this.subtype.add("Shaman");

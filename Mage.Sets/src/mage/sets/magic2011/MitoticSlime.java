@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
 public class MitoticSlime extends CardImpl<MitoticSlime> {
 
 	public MitoticSlime(UUID ownerId) {
-		super(ownerId, "Mitotic Slime", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");
+		super(ownerId, 185, "Mitotic Slime", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Ooze");
 		this.color.setGreen(true);

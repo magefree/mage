@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class BaronyVampire extends CardImpl<BaronyVampire> {
 
 	public BaronyVampire(UUID ownerId) {
-		super(ownerId, "Barony Vampire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+		super(ownerId, 82, "Barony Vampire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
 		this.expansionSetCode = "M11";
 		this.color.setBlack(true);
 		this.subtype.add("Vampire");

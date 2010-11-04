@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class TeeteringPeaks extends CardImpl<TeeteringPeaks> {
 
 	public TeeteringPeaks(UUID ownerId) {
-		super(ownerId, "Teetering Peaks", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 0, "Teetering Peaks", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ZEN";
 		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
 		Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), false);

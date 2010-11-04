@@ -54,8 +54,8 @@ public class RoyalAssassin extends CardImpl<RoyalAssassin> {
 		filter.setTapped(true);
 	}
 
-    public RoyalAssassin(UUID onwerId){
-        super(onwerId,"Royal Assassin", Rarity.RARE, new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+    public RoyalAssassin(UUID ownerId){
+        super(ownerId, 110, "Royal Assassin", Rarity.RARE, new CardType[]{CardType.CREATURE},"{1}{B}{B}");
         this.expansionSetCode = "M10";
         this.color.setBlack(true);
         this.subtype.add("Human");

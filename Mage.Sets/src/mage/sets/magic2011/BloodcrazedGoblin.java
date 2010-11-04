@@ -52,7 +52,7 @@ import mage.watchers.WatcherImpl;
 public class BloodcrazedGoblin extends CardImpl<BloodcrazedGoblin> {
 
 	public BloodcrazedGoblin(UUID ownerId) {
-		super(ownerId, "Bloodcrazed Goblin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
+		super(ownerId, 125, "Bloodcrazed Goblin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Goblin");
 		this.subtype.add("Berserker");

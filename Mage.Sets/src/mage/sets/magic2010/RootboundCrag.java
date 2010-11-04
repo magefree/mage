@@ -55,7 +55,7 @@ public class RootboundCrag extends CardImpl<RootboundCrag> {
 	}
 
 	public RootboundCrag(UUID ownerId) {
-		super(ownerId, "Rootbound Crag", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 227, "Rootbound Crag", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "M10";
 		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceUnlessControlsEffect(filter), "tapped unless you control a " + filter.getMessage()));
 		this.addAbility(new RedManaAbility());

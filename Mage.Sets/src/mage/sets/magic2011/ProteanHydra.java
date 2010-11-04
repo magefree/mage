@@ -39,6 +39,7 @@ public class ProteanHydra extends mage.sets.magic2010.ProteanHydra {
 
 	public ProteanHydra(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 194;
 		this.expansionSetCode = "M11";
 		this.rarity = Rarity.RARE;
 	}

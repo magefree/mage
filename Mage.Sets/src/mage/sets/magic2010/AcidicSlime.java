@@ -31,7 +31,6 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.TargetController;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -59,7 +58,7 @@ public class AcidicSlime extends CardImpl<AcidicSlime> {
 	}
 
 	public AcidicSlime(UUID ownerId) {
-		super(ownerId, "Acidic Slime", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+		super(ownerId, 165, "Acidic Slime", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Ooze");
 		this.color.setGreen(true);

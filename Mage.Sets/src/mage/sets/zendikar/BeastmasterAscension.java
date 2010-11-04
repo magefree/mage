@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
 public class BeastmasterAscension extends CardImpl<BeastmasterAscension> {
 
 	public BeastmasterAscension(UUID ownerId) {
-		super(ownerId, "Beastmaster Ascension", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
+		super(ownerId, 0, "Beastmaster Ascension", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 		this.expansionSetCode = "ZEN";
 		this.color.setGreen(true);
 

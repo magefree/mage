@@ -58,7 +58,7 @@ public class AutumnsVeil extends CardImpl<AutumnsVeil> {
 	}
 
 	public AutumnsVeil(UUID ownerId) {
-		super(ownerId, "Autumn's Veil", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
+		super(ownerId, 162, "Autumn's Veil", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
 		this.expansionSetCode = "M11";
 		this.color.setGreen(true);
 		this.getSpellAbility().addEffect(new CantCounterControlledEffect(filterTarget1, filterSource, Duration.EndOfTurn));

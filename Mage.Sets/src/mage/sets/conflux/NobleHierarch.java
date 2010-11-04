@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
 public class NobleHierarch extends CardImpl<NobleHierarch> {
 
 	public NobleHierarch(UUID ownerId) {
-		super(ownerId, "Noble Hierarch", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
+		super(ownerId, 87, "Noble Hierarch", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
 		this.expansionSetCode = "CON";
 		this.color.setGreen(true);
 		this.subtype.add("Human");

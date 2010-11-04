@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
 public class ScepterOfInsight extends CardImpl<ScepterOfInsight> {
 
     public ScepterOfInsight(UUID ownerId) {
-        super(ownerId, "Scepter of Insight", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}{U}{U}");
+        super(ownerId, 33, "Scepter of Insight", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}{U}{U}");
         this.expansionSetCode = "CON";
         this.color.setBlue(true);
 

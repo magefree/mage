@@ -52,7 +52,7 @@ import mage.game.events.ZoneChangeEvent;
 public class InfernoTitan extends CardImpl<InfernoTitan> {
 
 	public InfernoTitan(UUID ownerId) {
-		super(ownerId, "Inferno Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
+		super(ownerId, 146, "Inferno Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Giant");
 		this.color.setRed(true);

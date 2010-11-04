@@ -53,7 +53,7 @@ import mage.watchers.WatcherImpl;
 public class AngelicArbiter extends CardImpl<AngelicArbiter> {
 
 	public AngelicArbiter(UUID ownerId) {
-		super(ownerId, "Angelic Arbiter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
+		super(ownerId, 4, "Angelic Arbiter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Angel");
 		this.color.setWhite(true);

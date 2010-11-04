@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
 public class CloudElemental extends CardImpl<CloudElemental> {
 
 	public CloudElemental(UUID ownerId) {
-		super(ownerId, "Cloud Elemental", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+		super(ownerId, 74, "Cloud Elemental", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
 		this.expansionSetCode = "10E";
 		this.subtype.add("Elemental");
 		this.color.setBlue(true);

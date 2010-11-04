@@ -58,7 +58,7 @@ public class AlluringSiren extends CardImpl<AlluringSiren> {
 	}
 
 	public AlluringSiren(UUID ownerId) {
-		super(ownerId, "Alluring Siren", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+		super(ownerId, 43, "Alluring Siren", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
 		this.expansionSetCode = "M10";
 		this.color.setBlue(true);
 		this.subtype.add("Siren");

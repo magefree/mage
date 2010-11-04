@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Excommunicate extends CardImpl<Excommunicate> {
 
 	public Excommunicate(UUID ownerId) {
-		super(ownerId, "Excommunicate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
+		super(ownerId, 11, "Excommunicate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
 		this.expansionSetCode = "ALA";
 		this.color.setWhite(true);
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());

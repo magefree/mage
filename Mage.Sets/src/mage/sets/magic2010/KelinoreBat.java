@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class KelinoreBat extends CardImpl<KelinoreBat> {
 
     public KelinoreBat(UUID ownerId) {
-        super(ownerId, "Kelinore Bat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        super(ownerId, 101, "Kelinore Bat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "M10";
         this.subtype.add("Bat");
         this.color.setBlack(true);

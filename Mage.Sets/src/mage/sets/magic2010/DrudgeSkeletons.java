@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
 public class DrudgeSkeletons extends CardImpl<DrudgeSkeletons>{
 
     public DrudgeSkeletons(UUID ownerId) {
-        super(ownerId, "Drudge Skeletons", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        super(ownerId, 95, "Drudge Skeletons", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "M10";
         this.subtype.add("Skeleton");
         this.color.setBlack(true);

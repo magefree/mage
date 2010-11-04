@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class SejiriSteppe extends CardImpl<SejiriSteppe> {
 
 	public SejiriSteppe(UUID ownerId) {
-		super(ownerId, "Sejiri Steppe", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 0, "Sejiri Steppe", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "WWK";
 		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
 		EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), false);

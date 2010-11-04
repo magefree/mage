@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
 public class GriffinSentinel extends CardImpl<GriffinSentinel> {
 
     public GriffinSentinel(UUID ownerId) {
-        super(ownerId, "Griffin Sentinel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        super(ownerId, 12, "Griffin Sentinel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "M10";
         this.subtype.add("Griffin");
         this.color.setWhite(true);

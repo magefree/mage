@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
 public class OblivionRing extends CardImpl<OblivionRing> {
 
 	public OblivionRing(UUID ownerId) {
-		super(ownerId, "Oblivion Ring", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
+		super(ownerId, 20, "Oblivion Ring", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 		this.expansionSetCode = "ALA";
 		this.color.setWhite(true);
 		FilterNonlandPermanent filter = new FilterNonlandPermanent();

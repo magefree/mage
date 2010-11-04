@@ -48,7 +48,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class Fireball extends CardImpl<Fireball> {
 
 	public Fireball(UUID ownerId) {
-		super(ownerId, "Fireball", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}");
+		super(ownerId, 136, "Fireball", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}");
 		this.expansionSetCode = "M10";
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(0, 0));

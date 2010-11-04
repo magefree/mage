@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class QuagSickness extends CardImpl<QuagSickness> {
 
 	public QuagSickness(UUID ownerId) {
-		super(ownerId, "Quag Sickness", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
+		super(ownerId, 111, "Quag Sickness", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 		this.expansionSetCode = "M11";
 		this.color.setBlack(true);
 		this.subtype.add("Aura");

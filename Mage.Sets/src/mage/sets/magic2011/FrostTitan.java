@@ -53,7 +53,7 @@ import mage.target.TargetStackObject;
 public class FrostTitan extends CardImpl<FrostTitan> {
 
 	public FrostTitan(UUID ownerId) {
-		super(ownerId, "FrostTitan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
+		super(ownerId, 55, "FrostTitan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Giant");
 		this.color.setBlue(true);

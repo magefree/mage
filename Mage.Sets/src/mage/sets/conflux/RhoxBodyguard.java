@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
 public class RhoxBodyguard extends CardImpl<RhoxBodyguard> {
 
     public RhoxBodyguard(UUID ownerId) {
-        super(ownerId, "Rhox Bodyguard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{W}");
+        super(ownerId, 122, "Rhox Bodyguard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{W}");
         this.expansionSetCode = "CON";
         this.color.setGreen(true);
         this.color.setWhite(true);

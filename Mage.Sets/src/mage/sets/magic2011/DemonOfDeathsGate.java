@@ -38,10 +38,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -51,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
 public class DemonOfDeathsGate extends CardImpl<DemonOfDeathsGate> {
 
 	public DemonOfDeathsGate(UUID ownerId) {
-		super(ownerId, "Demon Of Death's Gate", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{B}{B}{B}");
+		super(ownerId, 92, "Demon Of Death's Gate", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{B}{B}{B}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Demon");
 		this.color.setBlack(true);

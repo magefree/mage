@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Weakness extends CardImpl<Weakness> {
 
     public Weakness(UUID ownerId) {
-        super(ownerId, "Weakness", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
+        super(ownerId, 121, "Weakness", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "M10";
         this.color.setBlack(true);
         this.subtype.add("Aura");

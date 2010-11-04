@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Incite extends CardImpl<Incite> {
 
 	public Incite(UUID ownerId) {
-		super(ownerId, "Incite", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
+		super(ownerId, 145, "Incite", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
 		this.expansionSetCode = "M11";
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());

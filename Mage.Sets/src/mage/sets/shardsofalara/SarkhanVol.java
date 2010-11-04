@@ -56,7 +56,7 @@ public class SarkhanVol extends CardImpl<SarkhanVol> {
 	private static DragonToken dragonToken = new DragonToken();
 
 	public SarkhanVol(UUID ownerId) {
-		super(ownerId, "Sarkhan Vol", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
+		super(ownerId, 191, "Sarkhan Vol", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
 		this.expansionSetCode = "ALA";
 		this.subtype.add("Sarkhan");
 		this.color.setRed(true);

@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class AncientHellkite extends CardImpl<AncientHellkite> {
 
 	public AncientHellkite(UUID ownerId) {
-		super(ownerId, "Ancient Hellkite", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{R}");
+		super(ownerId, 122, "Ancient Hellkite", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{R}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Dragon");
 		this.color.setRed(true);

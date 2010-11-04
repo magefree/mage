@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class BlindingMage extends CardImpl<BlindingMage> {
 
 	public BlindingMage(UUID ownerId) {
-		super(ownerId, "Blinding Mage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+		super(ownerId, 5, "Blinding Mage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Human");
 		this.subtype.add("Wizard");

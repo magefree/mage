@@ -47,7 +47,7 @@ import mage.game.permanent.token.Token;
 public class KhalniGarden extends CardImpl<KhalniGarden> {
 
 	public KhalniGarden(UUID ownerId) {
-		super(ownerId, "Khalni Garden", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 0, "Khalni Garden", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "WWK";
 		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
 		this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PlantToken()), false));

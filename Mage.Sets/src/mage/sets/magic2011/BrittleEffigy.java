@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class BrittleEffigy extends CardImpl<BrittleEffigy> {
 
 	public BrittleEffigy(UUID ownerId) {
-		super(ownerId, "Brittle Effigy", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
+		super(ownerId, 202, "Brittle Effigy", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
 		this.expansionSetCode = "M11";
 		Costs costs = new CostsImpl();
 		costs.add(new GenericManaCost(4));

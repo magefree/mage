@@ -46,7 +46,7 @@ public class SproutingThrinax extends CardImpl<SproutingThrinax> {
 	private static SaprolingToken saprolingToken = new SaprolingToken();
 
 	public SproutingThrinax(UUID ownerId) {
-		super(ownerId, "Sprouting Thrinax", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
+		super(ownerId, 197, "Sprouting Thrinax", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
 		this.expansionSetCode = "ALA";
 		this.color.setBlack(true);
 		this.color.setRed(true);

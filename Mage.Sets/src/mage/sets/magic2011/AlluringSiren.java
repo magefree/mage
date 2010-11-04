@@ -38,6 +38,7 @@ public class AlluringSiren extends mage.sets.magic2010.AlluringSiren {
 
 	public AlluringSiren(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 43;
 		this.expansionSetCode = "M11";
 	}
 

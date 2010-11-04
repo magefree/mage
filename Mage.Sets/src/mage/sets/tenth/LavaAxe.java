@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
 public class LavaAxe extends CardImpl<LavaAxe> {
 
 	public LavaAxe(UUID ownerId) {
-		super(ownerId, "Lava Axe", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
+		super(ownerId, 0, "Lava Axe", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
 		this.expansionSetCode = "10E";
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetPlayer());

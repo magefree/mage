@@ -55,7 +55,7 @@ public class DragonskullSummit extends CardImpl<DragonskullSummit> {
 	}
 
 	public DragonskullSummit(UUID ownerId) {
-		super(ownerId, "Dragonskull Summit", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 223, "Dragonskull Summit", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "M10";
 		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceUnlessControlsEffect(filter), "tapped unless you control a " + filter.getMessage()));
 		this.addAbility(new BlackManaAbility());

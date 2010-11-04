@@ -55,7 +55,7 @@ public class SpellbreakerBehemoth extends CardImpl<SpellbreakerBehemoth> {
 	}
 
 	public SpellbreakerBehemoth(UUID ownerId) {
-		super(ownerId, "Spellbreaker Behemoth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{G}");
+		super(ownerId, 60, "Spellbreaker Behemoth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{G}");
 		this.expansionSetCode = "ARB";
 		this.color.setRed(true);
 		this.color.setGreen(true);

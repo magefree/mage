@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
 public class AvenSquire extends CardImpl<AvenSquire> {
 
     public AvenSquire(UUID ownerId) {
-        super(ownerId, "Aven Squire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        super(ownerId, 3, "Aven Squire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "CON";
         this.color.setWhite(true);
         this.subtype.add("Bird");

@@ -47,7 +47,7 @@ import mage.game.events.GameEvent.EventType;
 public class DragonsClaw extends CardImpl<DragonsClaw> {
 
 	public DragonsClaw(UUID ownerId) {
-		super(ownerId, "Dragon's Claw", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+		super(ownerId, 0, "Dragon's Claw", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
 		this.expansionSetCode = "10E";
 		this.addAbility(new DragonsClawAbility());
 	}

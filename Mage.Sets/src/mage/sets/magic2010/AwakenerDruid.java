@@ -59,7 +59,7 @@ public class AwakenerDruid extends CardImpl<AwakenerDruid> {
 	}
 
 	public AwakenerDruid(UUID ownerId) {
-		super(ownerId, "Awakener Druid", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+		super(ownerId, 167, "Awakener Druid", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
 		this.expansionSetCode = "M10";
 		this.color.setGreen(true);
 		this.subtype.add("Human");

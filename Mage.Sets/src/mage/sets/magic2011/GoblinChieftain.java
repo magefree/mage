@@ -38,6 +38,7 @@ public class GoblinChieftain extends mage.sets.magic2010.GoblinChieftain {
 
 	public GoblinChieftain(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 141;
 		this.expansionSetCode = "M11";
 	}
 

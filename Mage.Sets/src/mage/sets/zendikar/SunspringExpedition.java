@@ -50,7 +50,7 @@ import mage.cards.CardImpl;
 public class SunspringExpedition extends CardImpl<SunspringExpedition> {
 
 	public SunspringExpedition(UUID ownerId) {
-		super(ownerId, "Sunspring Expedition", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
+		super(ownerId, 0, "Sunspring Expedition", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
 		this.expansionSetCode = "ZEN";
 		this.color.setWhite(true);
 

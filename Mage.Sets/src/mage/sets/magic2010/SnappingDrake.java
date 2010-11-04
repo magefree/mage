@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class SnappingDrake extends CardImpl<SnappingDrake>{
 
     public SnappingDrake(UUID ownerId) {
-        super(ownerId, "Snapping Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        super(ownerId, 72, "Snapping Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "M10";
         this.color.setBlue(true);
         this.subtype.add("Drake");

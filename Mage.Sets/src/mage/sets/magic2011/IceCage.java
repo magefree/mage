@@ -38,6 +38,7 @@ public class IceCage extends mage.sets.magic2010.IceCage {
 
 	public IceCage(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 57;
 		this.expansionSetCode = "M11";
 	}
 

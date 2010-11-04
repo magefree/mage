@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
 public class LoomingShade extends CardImpl<LoomingShade> {
 
     public LoomingShade(UUID ownerId) {
-        super(ownerId, "Looming Shade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        super(ownerId, 103, "Looming Shade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "M10";
         this.subtype.add("Shade");
 	this.color.setBlack(true);

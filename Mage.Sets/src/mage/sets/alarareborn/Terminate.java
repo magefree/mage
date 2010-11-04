@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Terminate extends CardImpl<Terminate> {
 
 	public Terminate(UUID ownerId) {
-		super(ownerId, "Terminate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{R}");
+		super(ownerId, 46, "Terminate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{R}");
 		this.expansionSetCode = "ARB";
 		this.color.setBlack(true);
 		this.color.setRed(true);

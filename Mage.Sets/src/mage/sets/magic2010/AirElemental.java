@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class AirElemental extends CardImpl<AirElemental> {
 
 	public AirElemental(UUID ownerId) {
-		super(ownerId, "Air Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
+		super(ownerId, 42, "Air Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
 		this.expansionSetCode = "M10";
 		this.color.setBlue(true);
 		this.subtype.add("Elemental");

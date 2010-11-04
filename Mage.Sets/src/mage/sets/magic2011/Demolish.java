@@ -38,6 +38,7 @@ public class Demolish extends mage.sets.zendikar.Demolish {
 
 	public Demolish(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 132;
 		this.expansionSetCode = "M11";
 	}
 

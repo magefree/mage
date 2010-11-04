@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class NetherHorror extends CardImpl<NetherHorror> {
 
 	public NetherHorror(UUID ownerId) {
-		super(ownerId, "Nether Horror", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+		super(ownerId, 108, "Nether Horror", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Horror");
 		this.color.setBlack(true);

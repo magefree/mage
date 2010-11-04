@@ -47,7 +47,7 @@ import mage.cards.CardImpl;
 public class CrystalBall extends CardImpl<CrystalBall> {
 
 	public CrystalBall(UUID ownerId) {
-		super(ownerId, "Crystal Ball", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
+		super(ownerId, 203, "Crystal Ball", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
 		this.expansionSetCode = "M11";
 		Costs costs = new CostsImpl();
 		costs.add(new GenericManaCost(1));

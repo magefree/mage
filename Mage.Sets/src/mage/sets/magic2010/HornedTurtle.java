@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class HornedTurtle extends CardImpl<HornedTurtle>{
 
     public HornedTurtle(UUID ownerId) {
-        super(ownerId, "Horned Turtle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        super(ownerId, 55, "Horned Turtle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "M10";
         this.color.setBlue(true);
         this.subtype.add("Turtle");

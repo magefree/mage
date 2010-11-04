@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
 public class BrindleBoar extends CardImpl<BrindleBoar> {
 
 	public BrindleBoar(UUID ownerId) {
-		super(ownerId, "Brindle Boar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+		super(ownerId, 166, "Brindle Boar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
 		this.expansionSetCode = "M11";
 		this.color.setGreen(true);
 		this.subtype.add("Boar");

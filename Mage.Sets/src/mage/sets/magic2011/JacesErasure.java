@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
 public class JacesErasure extends CardImpl<JacesErasure> {
 
 	public JacesErasure(UUID ownerId) {
-		super(ownerId, "Jace's Erasure", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
+		super(ownerId, 59, "Jace's Erasure", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 		this.expansionSetCode = "M11";
 		this.color.setBlue(true);
 		Ability ability = new JacesErasureAbility();

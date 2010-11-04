@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreatureOrPlayer;
 public class SafePassage  extends CardImpl<SafePassage> {
 
 	public SafePassage(UUID ownerId) {
-		super(ownerId, "Safe Passage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
+		super(ownerId, 28, "Safe Passage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
 		this.expansionSetCode = "M10";
 		this.color.setWhite(true);
 		this.getSpellAbility().addEffect(new PreventAllDamageToEffect(Duration.EndOfTurn, new FilterCreatureOrPlayer("you and creatures you control", ownerId)));

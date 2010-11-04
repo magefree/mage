@@ -43,8 +43,8 @@ public abstract class LevelerCard<T extends LevelerCard<T>> extends CardImpl<T> 
 
 	protected List<LevelAbility> levels = new ArrayList<LevelAbility>();
 
-	public LevelerCard(UUID ownerId, String name, Rarity rarity, CardType[] cardTypes, String costs) {
-		super(ownerId, name, rarity, cardTypes, costs);
+	public LevelerCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
+		super(ownerId, cardNumber, name, rarity, cardTypes, costs);
 	}
 
 	public LevelerCard(LevelerCard card) {

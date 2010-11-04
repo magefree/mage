@@ -44,7 +44,7 @@ import mage.filter.common.FilterLandPermanent;
 public class DestructiveForce extends CardImpl<DestructiveForce> {
 
 	public DestructiveForce(UUID ownerId) {
-		super(ownerId, "Destructive Force", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
+		super(ownerId, 133, "Destructive Force", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
 		this.expansionSetCode = "M11";
 		this.color.setRed(true);
 		this.getSpellAbility().addEffect(new SacrificeAllEffect(5, new FilterLandPermanent()));

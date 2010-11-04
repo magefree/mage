@@ -44,7 +44,7 @@ import mage.filter.FilterCard;
 public class WhiteKnight extends CardImpl<WhiteKnight> {
 
 	public WhiteKnight(UUID ownerId) {
-		super(ownerId, "White Knight", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
+		super(ownerId, 41, "White Knight", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Human");
 		this.subtype.add("Knight");

@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class InspiredCharge extends CardImpl<InspiredCharge> {
 
 	public InspiredCharge(UUID ownerId) {
-		super(ownerId, "Inspired Charge", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
+		super(ownerId, 19, "Inspired Charge", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
 		this.expansionSetCode = "M11";
 		this.color.setWhite(true);
 		this.getSpellAbility().addEffect(new BoostControlledEffect(2, 1, Duration.EndOfTurn));

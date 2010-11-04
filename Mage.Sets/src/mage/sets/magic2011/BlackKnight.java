@@ -38,6 +38,7 @@ public class BlackKnight extends mage.sets.magic2010.BlackKnight {
 
 	public BlackKnight(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 83;
 		this.expansionSetCode = "M11";
 	}
 

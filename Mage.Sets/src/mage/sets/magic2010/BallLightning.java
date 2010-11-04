@@ -46,7 +46,7 @@ import mage.game.events.GameEvent.EventType;
 public class BallLightning extends CardImpl<BallLightning> {
 
 	public BallLightning(UUID ownerId) {
-		super(ownerId, "Ball Lightning", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}{R}{R}");
+		super(ownerId, 125, "Ball Lightning", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}{R}{R}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Elemental");
 		this.color.setRed(true);

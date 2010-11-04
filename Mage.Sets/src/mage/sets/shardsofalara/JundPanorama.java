@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
 public class JundPanorama extends CardImpl<JundPanorama> {
 
 	public JundPanorama(UUID ownerId) {
-		super(ownerId, "Jund Panorama", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 225, "Jund Panorama", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ALA";
 		this.addAbility(new ColorlessManaAbility());
 		this.addAbility(new JundPanoramaAbility());

@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
 public class PalaceGuard extends CardImpl<PalaceGuard> {
 
 	public PalaceGuard(UUID ownerId) {
-		super(ownerId, "Palace Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+		super(ownerId, 23, "Palace Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Human");
 		this.subtype.add("Soldier");

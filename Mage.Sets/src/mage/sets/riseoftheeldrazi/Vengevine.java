@@ -51,7 +51,7 @@ import mage.watchers.WatcherImpl;
 public class Vengevine extends CardImpl<Vengevine> {
 
 	public Vengevine(UUID ownerId) {
-		super(ownerId, "Vengevine", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+		super(ownerId, 212, "Vengevine", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
 		this.expansionSetCode = "ROE";
 		this.subtype.add("Elemental");
 		this.color.setGreen(true);

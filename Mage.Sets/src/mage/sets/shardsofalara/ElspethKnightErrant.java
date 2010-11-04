@@ -55,7 +55,7 @@ public class ElspethKnightErrant extends CardImpl<ElspethKnightErrant> {
 	private static SoldierToken soldierToken = new SoldierToken();
 
 	public ElspethKnightErrant(UUID ownerId) {
-		super(ownerId, "Elspeth, Knight-Errant", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
+		super(ownerId, 9, "Elspeth, Knight-Errant", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
 		this.expansionSetCode = "ALA";
 		this.subtype.add("Elspeth");
 		this.color.setWhite(true);

@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
 public class OverwhelmingStampede extends CardImpl<OverwhelmingStampede> {
 
 	public OverwhelmingStampede(UUID ownerId) {
-		super(ownerId, "Overwhelming Stampede", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
+		super(ownerId, 189, "Overwhelming Stampede", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
 		this.expansionSetCode = "M11";
 		this.color.setGreen(true);
 		this.getSpellAbility().addEffect(new OverwhelmingStampedeEffect());

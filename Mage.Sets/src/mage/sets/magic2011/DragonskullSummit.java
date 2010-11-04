@@ -38,6 +38,7 @@ public class DragonskullSummit extends mage.sets.magic2010.DragonskullSummit {
 
 	public DragonskullSummit(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 223;
 		this.expansionSetCode = "M11";
 	}
 

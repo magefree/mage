@@ -44,7 +44,7 @@ import mage.game.permanent.token.EldraziSpawnToken;
 public class EmrakulsHatcher extends CardImpl<EmrakulsHatcher> {
 
 	public EmrakulsHatcher(UUID ownerId) {
-		super(ownerId, "Emrakul's Hatcher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
+		super(ownerId, 142, "Emrakul's Hatcher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
 		this.expansionSetCode = "ROE";
 		this.subtype.add("Eldrazi");
 		this.subtype.add("Drone");

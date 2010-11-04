@@ -47,7 +47,7 @@ import mage.cards.CardImpl;
 public class PutridLeech extends CardImpl<PutridLeech> {
 
 	public PutridLeech(UUID ownerId) {
-		super(ownerId, "Putrid Leech", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{G}");
+		super(ownerId, 95, "Putrid Leech", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{G}");
 		this.expansionSetCode = "ARB";
 		this.color.setBlack(true);
 		this.color.setGreen(true);

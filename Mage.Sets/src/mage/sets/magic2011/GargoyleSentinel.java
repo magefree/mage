@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
 public class GargoyleSentinel extends CardImpl<GargoyleSentinel> {
 
 	public GargoyleSentinel(UUID ownerId) {
-		super(ownerId, "Gargoyle Sentinel", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+		super(ownerId, 207, "Gargoyle Sentinel", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Gargoyle");
 		this.power = new MageInt(3);

@@ -38,6 +38,7 @@ public class EliteVanguard extends mage.sets.magic2010.EliteVanguard {
 
 	public EliteVanguard(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 13;
 		this.expansionSetCode = "M11";
 	}
 

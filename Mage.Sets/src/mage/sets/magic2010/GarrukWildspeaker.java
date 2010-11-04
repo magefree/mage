@@ -54,7 +54,7 @@ public class GarrukWildspeaker extends CardImpl<GarrukWildspeaker> {
 	private static BeastToken beastToken = new BeastToken();
 
 	public GarrukWildspeaker(UUID ownerId) {
-		super(ownerId, "Garruk Wildspeaker", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G}");
+		super(ownerId, 183, "Garruk Wildspeaker", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Garruk");
 		this.color.setGreen(true);

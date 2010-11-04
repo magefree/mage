@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class HolyStrength extends CardImpl<HolyStrength> {
 
 	public HolyStrength(UUID ownerId) {
-		super(ownerId, "Holy Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
+		super(ownerId, 0, "Holy Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
 		this.expansionSetCode = "10E";
 		this.color.setWhite(true);
 		this.subtype.add("Aura");

@@ -38,6 +38,7 @@ public class Excommunicate extends mage.sets.shardsofalara.Excommunicate {
 
 	public Excommunicate(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 10;
 		this.expansionSetCode = "M10";
 	}
 

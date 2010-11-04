@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
 public class HowlingMine extends CardImpl<HowlingMine> {
 
 	public HowlingMine(UUID ownerId) {
-		super(ownerId, "Howling Mine", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
+		super(ownerId, 212, "Howling Mine", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
 		this.expansionSetCode = "M10";
 		this.addAbility(new HowlingMineAbility());
 	}

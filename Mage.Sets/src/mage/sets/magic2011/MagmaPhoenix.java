@@ -38,6 +38,7 @@ public class MagmaPhoenix extends mage.sets.magic2010.MagmaPhoenix {
 
 	public MagmaPhoenix(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 150;
 		this.expansionSetCode = "M11";
 	}
 

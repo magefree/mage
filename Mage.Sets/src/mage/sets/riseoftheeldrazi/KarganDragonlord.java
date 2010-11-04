@@ -53,7 +53,7 @@ import mage.cards.LevelerCard;
 public class KarganDragonlord extends LevelerCard<KarganDragonlord> {
 
 	public KarganDragonlord(UUID ownerId) {
-		super(ownerId, "Kargan Dragonlord", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{R}{R}");
+		super(ownerId, 152, "Kargan Dragonlord", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{R}{R}");
 		this.expansionSetCode = "ROE";
 		this.subtype.add("Human");
 		this.subtype.add("Warrior");

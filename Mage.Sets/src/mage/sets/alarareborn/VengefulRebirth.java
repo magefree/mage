@@ -52,7 +52,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class VengefulRebirth extends CardImpl<VengefulRebirth> {
 
 	public VengefulRebirth(UUID ownerId) {
-		super(ownerId, "Vengeful Rebirth", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{G}");
+		super(ownerId, 62, "Vengeful Rebirth", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{G}");
 		this.expansionSetCode = "ARB";
 		this.color.setRed(true);
 		this.color.setGreen(true);

@@ -46,7 +46,7 @@ import mage.game.permanent.token.WolfToken;
 public class WolfbriarElemental extends CardImpl<WolfbriarElemental> {
 
 	public WolfbriarElemental(UUID ownerId) {
-		super(ownerId, "Wolfbriar Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+		super(ownerId, 0, "Wolfbriar Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
 		this.expansionSetCode = "WWK";
 		this.subtype.add("Elemental");
 		this.color.setGreen(true);

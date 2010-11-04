@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class FlameSlash extends CardImpl<FlameSlash> {
 
 	public FlameSlash(UUID ownerId) {
-		super(ownerId, "Flame Slash", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
+		super(ownerId, 145, "Flame Slash", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
 		this.expansionSetCode = "ROE";
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());

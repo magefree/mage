@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class VampireAristocrat extends CardImpl<VampireAristocrat> {
 
     public VampireAristocrat(UUID ownerId) {
-        super(ownerId, "Vampire Aristocrat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        super(ownerId, 117, "Vampire Aristocrat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "M10";
         this.subtype.add("Vampire");
         this.subtype.add("Rogue");

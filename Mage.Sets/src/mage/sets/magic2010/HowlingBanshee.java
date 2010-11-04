@@ -48,7 +48,7 @@ import mage.players.Player;
 public class HowlingBanshee extends CardImpl<HowlingBanshee> {
 
 	public HowlingBanshee(UUID ownerId) {
-		super(ownerId, "Howling Banshee", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+		super(ownerId, 99, "Howling Banshee", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Spirit");
 		this.color.setBlack(true);

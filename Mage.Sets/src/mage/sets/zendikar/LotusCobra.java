@@ -44,7 +44,7 @@ import mage.choices.ChoiceColor;
 public class LotusCobra extends CardImpl<LotusCobra> {
 
 	public LotusCobra(UUID ownerId) {
-		super(ownerId, "Lotus Cobra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{G}");
+		super(ownerId, 0, "Lotus Cobra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{G}");
 		this.expansionSetCode = "ZEN";
 		this.subtype.add("Snake");
 		this.color.setGreen(true);

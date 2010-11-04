@@ -37,7 +37,7 @@ import java.util.UUID;
 public class LilianaVess extends mage.sets.magic2010.LilianaVess {
 
 	public LilianaVess(UUID ownerId) {
-		super(ownerId);
+		super(ownerId);this.cardNumber = 102;
 		this.expansionSetCode = "M11";
 	}
 

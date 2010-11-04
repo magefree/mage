@@ -52,7 +52,7 @@ public class Reverberate extends CardImpl<Reverberate> {
 	}
 
 	public Reverberate(UUID ownerId) {
-		super(ownerId, "Reverberate", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");
+		super(ownerId, 155, "Reverberate", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");
 		this.expansionSetCode = "M11";
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetSpell(filter));

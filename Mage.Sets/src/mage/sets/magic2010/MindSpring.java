@@ -45,7 +45,7 @@ import mage.players.Player;
 public class MindSpring extends CardImpl<MindSpring> {
 
 	public MindSpring(UUID ownerId) {
-		super(ownerId, "Mind Spring", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
+		super(ownerId, 64, "Mind Spring", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
 		this.expansionSetCode = "M10";
 		this.color.setBlue(true);
 		this.getSpellAbility().addEffect(new MindSpringEffect());

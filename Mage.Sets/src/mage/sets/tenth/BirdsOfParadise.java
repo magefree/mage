@@ -47,7 +47,7 @@ import mage.cards.CardImpl;
 public class BirdsOfParadise extends CardImpl<BirdsOfParadise> {
 
 	public BirdsOfParadise(UUID ownerId) {
-		super(ownerId, "Birds of Paradise", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
+		super(ownerId, 252, "Birds of Paradise", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Bird");
 		this.color.setGreen(true);

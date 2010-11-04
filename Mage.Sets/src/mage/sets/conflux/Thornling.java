@@ -51,7 +51,7 @@ import mage.cards.CardImpl;
 public class Thornling extends CardImpl<Thornling> {
 
 	public Thornling(UUID ownerId) {
-		super(ownerId, "Thornling", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+		super(ownerId, 95, "Thornling", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
 		this.expansionSetCode = "CON";
 		this.color.setGreen(true);
 		this.subtype.add("Elemental");

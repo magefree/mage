@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInLibrary;
 public class Cultivate extends CardImpl<Cultivate> {
 
 	public Cultivate(UUID ownerId) {
-		super(ownerId, "Cultivate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
+		super(ownerId, 168, "Cultivate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
 		this.expansionSetCode = "M11";
 		this.color.setGreen(true);
 		this.getSpellAbility().addEffect(new CultivateEffect());

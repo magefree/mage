@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class GarruksCompanion extends CardImpl<GarruksCompanion> {
 
 	public GarruksCompanion(UUID ownerId) {
-		super(ownerId, "Garruk's Companion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");
+		super(ownerId, 176, "Garruk's Companion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Beast");
 		this.color.setGreen(true);

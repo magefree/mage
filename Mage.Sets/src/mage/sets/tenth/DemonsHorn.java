@@ -47,7 +47,7 @@ import mage.game.events.GameEvent.EventType;
 public class DemonsHorn extends CardImpl<DemonsHorn> {
 
 	public DemonsHorn(UUID ownerId) {
-		super(ownerId, "Demon's Horn", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+		super(ownerId, 320, "Demon's Horn", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
 		this.expansionSetCode = "10E";
 		this.addAbility(new DemonsHornAbility());
 	}

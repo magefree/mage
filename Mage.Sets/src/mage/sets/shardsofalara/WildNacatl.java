@@ -48,7 +48,7 @@ public class WildNacatl extends CardImpl<WildNacatl> {
 	private FilterPermanent filter2 = new FilterPermanent("Plains");
 
 	public WildNacatl(UUID ownerId) {
-		super(ownerId, "Wild Nacatl", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+		super(ownerId, 152, "Wild Nacatl", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
 		this.expansionSetCode = "ALA";
 		this.color.setGreen(true);
 		this.subtype.add("Cat");

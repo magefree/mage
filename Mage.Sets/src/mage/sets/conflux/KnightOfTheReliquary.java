@@ -73,7 +73,7 @@ public class KnightOfTheReliquary extends CardImpl<KnightOfTheReliquary> {
 	}
 
 	public KnightOfTheReliquary(UUID ownerId) {
-		super(ownerId, "Knight of the Reliquary", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
+		super(ownerId, 113, "Knight of the Reliquary", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
 		this.expansionSetCode = "CON";
 		this.color.setWhite(true);
 		this.color.setGreen(true);

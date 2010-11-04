@@ -50,7 +50,7 @@ import mage.game.permanent.token.Token;
 public class GargoyleCastle extends CardImpl<GargoyleCastle> {
 
 	public GargoyleCastle(UUID ownerId) {
-		super(ownerId, "Gargoyle Castle", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 225, "Gargoyle Castle", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "M10";
 		this.addAbility(new ColorlessManaAbility());
 		this.addAbility(new GargoyleCastleAbility());

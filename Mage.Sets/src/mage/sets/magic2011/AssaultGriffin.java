@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class AssaultGriffin extends CardImpl<AssaultGriffin> {
 
 	public AssaultGriffin(UUID ownerId) {
-		super(ownerId, "Assault Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+		super(ownerId, 6, "Assault Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
 		this.expansionSetCode = "M11";
 		this.color.setWhite(true);
 		this.subtype.add("Griffin");

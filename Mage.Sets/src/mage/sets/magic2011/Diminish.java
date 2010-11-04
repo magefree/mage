@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Diminish extends CardImpl<Diminish> {
 
 	public Diminish(UUID ownerId) {
-		super(ownerId, "Diminish", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
+		super(ownerId, 52, "Diminish", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
 		this.expansionSetCode = "M11";
 		this.color.setBlue(true);
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());

@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
 public class Redirect extends CardImpl<Redirect> {
 
 	public Redirect(UUID ownerId) {
-		super(ownerId, "Redirect", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
+		super(ownerId, 71, "Redirect", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
 		this.expansionSetCode = "M11";
 		this.color.setBlue(true);
 		this.getSpellAbility().addTarget(new TargetSpell());

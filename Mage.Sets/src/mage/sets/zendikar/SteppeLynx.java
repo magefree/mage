@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
 public class SteppeLynx extends CardImpl<SteppeLynx> {
 
 	public SteppeLynx(UUID ownerId) {
-		super(ownerId, "Steppe Lynx", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+		super(ownerId, 0, "Steppe Lynx", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
 		this.expansionSetCode = "ZEN";
 		this.subtype.add("Cat");
 		this.color.setWhite(true);

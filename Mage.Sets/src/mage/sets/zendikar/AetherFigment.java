@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
 public class AetherFigment extends CardImpl<AetherFigment> {
 
 	public AetherFigment(UUID ownerId) {
-		super(ownerId, "Æther Figment", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+		super(ownerId, 0, "Æther Figment", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
 		this.expansionSetCode = "ZEN";
 		this.subtype.add("Illusion");
 		this.color.setBlue(true);

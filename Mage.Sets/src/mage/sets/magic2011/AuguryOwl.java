@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
 public class AuguryOwl extends CardImpl<AuguryOwl> {
 
 	public AuguryOwl(UUID ownerId) {
-		super(ownerId, "Augury Owl", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+		super(ownerId, 45, "Augury Owl", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Bird");
 		this.color.setBlue(true);

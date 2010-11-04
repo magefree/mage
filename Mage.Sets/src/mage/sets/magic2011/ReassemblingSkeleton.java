@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
 public class ReassemblingSkeleton extends CardImpl<ReassemblingSkeleton> {
 
 	public ReassemblingSkeleton(UUID ownerId) {
-		super(ownerId, "Reassembling Skeleton", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+		super(ownerId, 112, "Reassembling Skeleton", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Human");
 		this.subtype.add("Knight");

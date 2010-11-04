@@ -64,7 +64,7 @@ public class GideonJura extends CardImpl<GideonJura> {
 	}
 
 	public GideonJura(UUID ownerId) {
-		super(ownerId, "Gideon Jura", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
+		super(ownerId, 21, "Gideon Jura", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
 		this.expansionSetCode = "ROE";
 		this.subtype.add("Gideon");
 		this.color.setWhite(true);

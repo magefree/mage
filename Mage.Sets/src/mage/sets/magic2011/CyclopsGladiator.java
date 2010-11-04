@@ -42,7 +42,6 @@ import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -52,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class CyclopsGladiator extends CardImpl<CyclopsGladiator> {
 
 	public CyclopsGladiator(UUID ownerId) {
-		super(ownerId, "Cyclops Gladiator", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}{R}");
+		super(ownerId, 131, "Cyclops Gladiator", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}{R}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Cyclops");
 		this.subtype.add("Warrior");

@@ -37,12 +37,10 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -52,7 +50,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class Fling extends CardImpl<Fling> {
 
 	public Fling(UUID ownerId) {
-		super(ownerId, "Fling", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
+		super(ownerId, 139, "Fling", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
 		this.expansionSetCode = "M11";
 		this.color.setRed(true);
 		this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));

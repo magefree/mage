@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
 public class FontOfMythos extends CardImpl<FontOfMythos> {
 
 	public FontOfMythos(UUID ownerId) {
-		super(ownerId, "Font of Mythos", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
+		super(ownerId, 136, "Font of Mythos", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
 		this.expansionSetCode = "CON";
 		this.addAbility(new FontOfMythosAbility());
 	}

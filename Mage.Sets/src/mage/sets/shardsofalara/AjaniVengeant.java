@@ -51,7 +51,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class AjaniVengeant extends CardImpl<AjaniVengeant> {
 
 	public AjaniVengeant(UUID ownerId) {
-		super(ownerId, "Ajani Vengeant", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{W}");
+		super(ownerId, 154, "Ajani Vengeant", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{W}");
 		this.expansionSetCode = "ALA";
 		this.subtype.add("Ajani");
 		this.color.setRed(true);

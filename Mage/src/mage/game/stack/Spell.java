@@ -309,4 +309,9 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	public boolean putOntoBattlefield(Game game, Zone fromZone, UUID controllerId) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
+
+	@Override
+	public int getCardNumber() {
+		return card.getCardNumber();
+	}
 }

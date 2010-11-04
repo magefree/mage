@@ -48,7 +48,7 @@ import mage.players.Player;
 public class LilianasSpecter extends CardImpl<LilianasSpecter> {
 
 	public LilianasSpecter(UUID ownerId) {
-		super(ownerId, "Liliana's Specter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
+		super(ownerId, 104, "Liliana's Specter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Specter");
 		this.color.setBlack(true);

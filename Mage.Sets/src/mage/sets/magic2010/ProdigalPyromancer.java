@@ -39,6 +39,7 @@ public class ProdigalPyromancer extends mage.sets.tenth.ProdigalPyromancer {
 
 	public ProdigalPyromancer(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 151;
 		this.expansionSetCode = "M10";
 		this.rarity = Rarity.UNCOMMON;
 	}

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class ArmoredCancrix extends CardImpl<ArmoredCancrix> {
 
 	public ArmoredCancrix(UUID ownerId) {
-		super(ownerId, "Armored Cancrix", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
+		super(ownerId, 44, "Armored Cancrix", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
 		this.expansionSetCode = "M11";
 		this.color.setBlue(true);
 		this.subtype.add("Crab");

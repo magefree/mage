@@ -61,7 +61,7 @@ public class JoragaTreespeaker extends LevelerCard<JoragaTreespeaker> {
 	}
 
 	public JoragaTreespeaker(UUID ownerId) {
-		super(ownerId, "Joraga Treespeaker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
+		super(ownerId, 190, "Joraga Treespeaker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
 		this.expansionSetCode = "ROE";
 		this.subtype.add("Elf");
 		this.subtype.add("Druid");

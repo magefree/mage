@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInGraveyard;
 public class Gravedigger extends CardImpl<Gravedigger> {
 
 	public Gravedigger(UUID ownerId) {
-		super(ownerId, "Gravedigger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+		super(ownerId, 0, "Gravedigger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
 		this.expansionSetCode = "10E";
 		this.subtype.add("Zombie");
 		this.color.setBlack(true);

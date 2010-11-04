@@ -51,7 +51,7 @@ import mage.game.events.GameEvent.EventType;
 public class ChandrasSpitfire extends CardImpl<ChandrasSpitfire> {
 
 	public ChandrasSpitfire(UUID ownerId) {
-		super(ownerId, "Chandra's Spitfire", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+		super(ownerId, 129, "Chandra's Spitfire", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Elemental");
 		this.color.setRed(true);

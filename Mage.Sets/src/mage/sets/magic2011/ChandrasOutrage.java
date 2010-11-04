@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class ChandrasOutrage extends CardImpl<ChandrasOutrage> {
 
 	public ChandrasOutrage(UUID ownerId) {
-		super(ownerId, "Chandra's Outrage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
+		super(ownerId, 128, "Chandra's Outrage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
 		this.expansionSetCode = "M11";
 		this.color.setRed(true);
 		this.getSpellAbility().addEffect(new ChandrasOutrageEffect());

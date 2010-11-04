@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class WoollyThoctar extends CardImpl<WoollyThoctar> {
 
 	public WoollyThoctar(UUID ownerId) {
-		super(ownerId, "Woolly Thoctar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
+		super(ownerId, 209, "Woolly Thoctar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
 		this.expansionSetCode = "ALA";
 		this.color.setRed(true);
 		this.color.setGreen(true);

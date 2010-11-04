@@ -48,7 +48,7 @@ import mage.game.events.GameEvent.EventType;
 public class HellsparkElemental extends CardImpl<HellsparkElemental> {
 
 	public HellsparkElemental(UUID ownerId) {
-		super(ownerId, "Hellspark Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+		super(ownerId, 65, "Hellspark Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
 		this.expansionSetCode = "CON";
 		this.subtype.add("Elemental");
 		this.color.setRed(true);

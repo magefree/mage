@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
 public class WallOfBone extends CardImpl<WallOfBone> {
 
     public WallOfBone(UUID ownerId) {
-        super(ownerId, "Wall of Bone", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        super(ownerId, 119, "Wall of Bone", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "M10";
         this.subtype.add("Skeleton");
         this.subtype.add("Wall");

@@ -61,7 +61,7 @@ public class PhylacteryLich extends CardImpl<PhylacteryLich> {
 	}
 
 	public PhylacteryLich(UUID ownerId) {
-		super(ownerId, "Phylactery Lich", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}{B}");
+		super(ownerId, 110, "Phylactery Lich", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}{B}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Zombie");
 		this.color.setBlack(true);

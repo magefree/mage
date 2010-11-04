@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
 public class FieryHellhound extends CardImpl<FieryHellhound> {
 
 	public FieryHellhound(UUID ownerId) {
-		super(ownerId, "Fiery Hellhound", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
+		super(ownerId, 135, "Fiery Hellhound", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Elemental");
 		this.subtype.add("Hound");

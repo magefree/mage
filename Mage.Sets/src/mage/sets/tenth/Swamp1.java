@@ -37,7 +37,7 @@ import java.util.UUID;
 public class Swamp1 extends mage.cards.basiclands.Swamp {
 
 	public Swamp1(UUID ownerId) {
-		super(ownerId);
+		super(ownerId, 0);
 		this.expansionSetCode = "10E";
 	}
 

@@ -58,7 +58,7 @@ import mage.game.permanent.Permanent;
 public class ProteanHydra extends CardImpl<ProteanHydra> {
 
 	public ProteanHydra(UUID ownerId) {
-		super(ownerId, "Protean Hydra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{X}{G}");
+		super(ownerId, 200, "Protean Hydra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{X}{G}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Hydra");
 		this.color.setGreen(true);

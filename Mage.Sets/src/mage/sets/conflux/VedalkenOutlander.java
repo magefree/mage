@@ -49,7 +49,7 @@ public class VedalkenOutlander extends CardImpl<VedalkenOutlander> {
     }
 
     public VedalkenOutlander(UUID ownerId) {
-        super(ownerId, "Vedalken Outlander", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{W}{U}");
+        super(ownerId, 132, "Vedalken Outlander", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{W}{U}");
         this.expansionSetCode = "CON";
         this.color.setWhite(true);
         this.color.setBlue(true);

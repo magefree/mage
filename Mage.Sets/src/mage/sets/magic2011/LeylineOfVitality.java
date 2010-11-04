@@ -53,7 +53,7 @@ import mage.game.permanent.Permanent;
 public class LeylineOfVitality extends CardImpl<LeylineOfVitality> {
 
 	public LeylineOfVitality(UUID ownerId) {
-		super(ownerId, "Leyline of Vitality", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
+		super(ownerId, 183, "Leyline of Vitality", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
 		this.expansionSetCode = "M11";
 		this.color.setGreen(true);
 		this.addAbility(LeylineAbility.getInstance());

@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
 public class UnifiedWill extends CardImpl<UnifiedWill> {
 
 	public UnifiedWill(UUID ownerId) {
-		super(ownerId, "Unified Will", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+		super(ownerId, 92, "Unified Will", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
 		this.expansionSetCode = "ROE";
 		this.color.setBlue(true);
 		this.getSpellAbility().addTarget(new TargetSpell());

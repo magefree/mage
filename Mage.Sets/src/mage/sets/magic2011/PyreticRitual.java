@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class PyreticRitual extends CardImpl<PyreticRitual> {
 
 	public PyreticRitual(UUID ownerId) {
-		super(ownerId, "Pyretic Ritual", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
+		super(ownerId, 153, "Pyretic Ritual", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
 		this.expansionSetCode = "M11";
 		this.color.setRed(true);
 		this.getSpellAbility().addEffect(new ManaEffect(Mana.RedMana(3)));

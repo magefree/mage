@@ -38,6 +38,7 @@ public class GoblinPiker extends mage.sets.tenth.GoblinPiker {
 
 	public GoblinPiker(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 140;
 		this.expansionSetCode = "M10";
 	}
 

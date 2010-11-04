@@ -45,7 +45,7 @@ import mage.game.events.GameEvent.EventType;
 public class ArcRunner extends CardImpl<ArcRunner> {
 
 	public ArcRunner(UUID ownerId) {
-		super(ownerId, "Arc Runner", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+		super(ownerId, 123, "Arc Runner", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Elemental");
 		this.subtype.add("Ox");

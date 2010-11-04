@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class AngelsMercy extends CardImpl<AngelsMercy> {
 
 	public AngelsMercy(UUID ownerId) {
-		super(ownerId, "Angel's Mercy", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{W}");
+		super(ownerId, 2, "Angel's Mercy", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{W}");
 		this.expansionSetCode = "M10";
 		this.color.setWhite(true);
 		this.getSpellAbility().addEffect(new GainLifeEffect(7));

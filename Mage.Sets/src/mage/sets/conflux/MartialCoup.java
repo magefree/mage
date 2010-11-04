@@ -49,7 +49,7 @@ import mage.players.Player;
 public class MartialCoup extends CardImpl<MartialCoup> {
 
 	public MartialCoup(UUID ownerId) {
-		super(ownerId, "Martial Coup", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{W}{W}");
+		super(ownerId, 11, "Martial Coup", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{W}{W}");
 		this.expansionSetCode = "CON";
 		this.color.setWhite(true);
 		this.getSpellAbility().addEffect(new MartialCoupEffect());

@@ -51,7 +51,7 @@ public class BogRaiders extends CardImpl<BogRaiders> {
 	}
 
 	public BogRaiders(UUID ownerId) {
-		super(ownerId, "Bog Raiders", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+		super(ownerId, 86, "Bog Raiders", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
 		this.expansionSetCode = "M11";
 		this.color.setBlack(true);
 		this.subtype.add("Zombie");

@@ -39,7 +39,6 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -52,7 +51,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class EmberHauler extends CardImpl<EmberHauler> {
 
 	public EmberHauler(UUID ownerId) {
-		super(ownerId, "Ember Hauler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{R}");
+		super(ownerId, 135, "Ember Hauler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{R}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Goblin");
 		this.color.setRed(true);

@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
 public class HuntersFeast extends CardImpl<HuntersFeast> {
 
 	public HuntersFeast(UUID ownerId) {
-		super(ownerId, "Hunters' Feast", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
+		super(ownerId, 182, "Hunters' Feast", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
 		this.expansionSetCode = "M11";
 		this.color.setGreen(true);
 		this.getSpellAbility().addTarget(new TargetPlayer(0));

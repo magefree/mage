@@ -54,7 +54,7 @@ public class GoblinChieftain extends CardImpl<GoblinChieftain> {
 	}
 
 	public GoblinChieftain(UUID ownerId) {
-		super(ownerId, "Goblin Chieftain", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
+		super(ownerId, 139, "Goblin Chieftain", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Goblin");
 		this.color.setRed(true);

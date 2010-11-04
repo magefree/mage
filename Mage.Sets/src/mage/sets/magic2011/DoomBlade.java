@@ -38,6 +38,7 @@ public class DoomBlade extends mage.sets.magic2010.DoomBlade {
 
 	public DoomBlade(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 95;
 		this.expansionSetCode = "M11";
 	}
 

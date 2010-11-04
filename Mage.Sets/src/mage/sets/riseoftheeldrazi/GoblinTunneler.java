@@ -58,7 +58,7 @@ public class GoblinTunneler extends CardImpl<GoblinTunneler> {
 	}
 
 	public GoblinTunneler(UUID ownerId) {
-		super(ownerId, "Goblin Tunneler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+		super(ownerId, 148, "Goblin Tunneler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
 		this.expansionSetCode = "ROE";
 		this.subtype.add("Goblin");
 		this.subtype.add("Rogue");

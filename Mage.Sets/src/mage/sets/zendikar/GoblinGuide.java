@@ -53,7 +53,7 @@ import mage.players.Player;
 public class GoblinGuide extends CardImpl<GoblinGuide> {
 
 	public GoblinGuide(UUID ownerId) {
-		super(ownerId, "Goblin Guide", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");
+		super(ownerId, 0, "Goblin Guide", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");
 		this.expansionSetCode = "ZEN";
 		this.color.setRed(true);
 		this.subtype.add("Goblin");

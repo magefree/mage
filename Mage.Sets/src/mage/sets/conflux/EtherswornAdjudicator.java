@@ -61,7 +61,7 @@ public class EtherswornAdjudicator extends CardImpl<EtherswornAdjudicator> {
     }
 
     public EtherswornAdjudicator(UUID ownerId) {
-        super(ownerId, "Ethersworn Adjudicator", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{W}");
+        super(ownerId, 26, "Ethersworn Adjudicator", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{W}");
         this.expansionSetCode = "CON";
         this.supertype.add("Legendary");
         this.subtype.add("Vedalken");

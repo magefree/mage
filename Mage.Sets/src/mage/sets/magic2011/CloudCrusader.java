@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
 public class CloudCrusader extends CardImpl<CloudCrusader> {
 
 	public CloudCrusader(UUID ownerId) {
-		super(ownerId, "Cloud Crusader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+		super(ownerId, 10, "Cloud Crusader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Human");
 		this.subtype.add("Knight");

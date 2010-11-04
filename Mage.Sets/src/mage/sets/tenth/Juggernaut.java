@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
 public class Juggernaut extends CardImpl<Juggernaut> {
 
 	public Juggernaut(UUID ownerId) {
-		super(ownerId, "Juggernaut", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+		super(ownerId, 0, "Juggernaut", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
 		this.expansionSetCode = "10E";
 		this.subtype.add("Juggernaut");
 		this.power = new MageInt(5);

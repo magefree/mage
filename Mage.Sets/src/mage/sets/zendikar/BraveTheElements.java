@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
 public class BraveTheElements extends CardImpl<BraveTheElements> {
 
 	public BraveTheElements(UUID ownerId) {
-		super(ownerId, "Brave the Elements", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
+		super(ownerId, 0, "Brave the Elements", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
 		this.expansionSetCode = "ZEN";
 		this.color.setWhite(true);
 		this.getSpellAbility().addChoice(new ChoiceColor());

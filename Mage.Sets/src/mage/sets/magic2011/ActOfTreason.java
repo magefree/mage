@@ -37,7 +37,7 @@ import java.util.UUID;
 public class ActOfTreason extends mage.sets.magic2010.ActOfTreason {
 
 	public ActOfTreason(UUID ownerId) {
-		super(ownerId);
+		super(ownerId);this.cardNumber = 121;
 		this.expansionSetCode = "M11";
 	}
 

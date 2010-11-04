@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class RhoxWarMonk extends CardImpl<RhoxWarMonk> {
 
 	public RhoxWarMonk(UUID ownerId) {
-		super(ownerId, "Rhox War Monk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
+		super(ownerId, 188, "Rhox War Monk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
 		this.expansionSetCode = "ALA";
 		this.subtype.add("Rhino");
 		this.subtype.add("Monk");

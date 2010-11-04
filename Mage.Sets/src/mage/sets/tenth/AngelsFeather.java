@@ -47,7 +47,7 @@ import mage.game.events.GameEvent.EventType;
 public class AngelsFeather extends CardImpl<AngelsFeather> {
 
 	public AngelsFeather(UUID ownerId) {
-		super(ownerId, "Angel's Feather", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+		super(ownerId, 311, "Angel's Feather", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
 		this.expansionSetCode = "10E";
 		this.addAbility(new AngelsFeatherAbility());
 	}

@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInLibrary;
 public class LilianaVess extends CardImpl<LilianaVess> {
 
 	public LilianaVess(UUID ownerId) {
-		super(ownerId, "Liliana Vess", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");
+		super(ownerId, 102, "Liliana Vess", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Liliana");
 		this.color.setBlack(true);

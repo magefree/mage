@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInLibrary;
 public class KnightOfTheWhiteOrchid extends CardImpl<KnightOfTheWhiteOrchid> {
 
 	public KnightOfTheWhiteOrchid(UUID ownerId) {
-		super(ownerId, "Knight of the White Orchid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}");
+		super(ownerId, 16, "Knight of the White Orchid", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}");
 		this.expansionSetCode = "ALA";
 		this.subtype.add("Human");
 		this.subtype.add("Knight");

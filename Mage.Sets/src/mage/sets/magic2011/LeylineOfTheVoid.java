@@ -51,7 +51,7 @@ import mage.game.events.ZoneChangeEvent;
 public class LeylineOfTheVoid extends CardImpl<LeylineOfTheVoid> {
 
 	public LeylineOfTheVoid(UUID ownerId) {
-		super(ownerId, "Leyline of the Void", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
+		super(ownerId, 101, "Leyline of the Void", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
 		this.expansionSetCode = "M11";
 		this.color.setBlack(true);
 		this.addAbility(LeylineAbility.getInstance());

@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class EsperCormorants extends CardImpl<EsperCormorants> {
 
     public EsperCormorants(UUID ownerId) {
-        super(ownerId, "Esper Cormorants", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{W}{U}");
+        super(ownerId, 105, "Esper Cormorants", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{W}{U}");
         this.expansionSetCode = "CON";
         this.subtype.add("Bird");
         this.color.setWhite(true);

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class WarpathGhoul extends CardImpl<WarpathGhoul> {
 
     public WarpathGhoul(UUID ownerId) {
-        super(ownerId, "Warpath Ghoul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        super(ownerId, 120, "Warpath Ghoul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "M10";
         this.subtype.add("Zombie");
         this.color.setBlack(true);

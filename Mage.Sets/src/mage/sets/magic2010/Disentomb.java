@@ -46,7 +46,7 @@ public class Disentomb extends CardImpl<Disentomb> {
 	private static FilterCreatureCard filter = new FilterCreatureCard();
 
 	public Disentomb(UUID ownerId) {
-		super(ownerId, "Disentomb", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
+		super(ownerId, 92, "Disentomb", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
 		this.expansionSetCode = "M10";
 		this.color.setBlack(true);
 		this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));

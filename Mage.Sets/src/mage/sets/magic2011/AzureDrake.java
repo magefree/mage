@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class AzureDrake extends CardImpl<AzureDrake> {
 
 	public AzureDrake(UUID ownerId) {
-		super(ownerId, "Azure Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+		super(ownerId, 46, "Azure Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
 		this.expansionSetCode = "M11";
 		this.color.setBlue(true);
 		this.subtype.add("Drake");

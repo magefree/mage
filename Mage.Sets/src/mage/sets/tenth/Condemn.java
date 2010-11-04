@@ -48,7 +48,7 @@ import mage.target.common.TargetAttackingCreature;
 public class Condemn extends CardImpl<Condemn> {
 
 	public Condemn(UUID ownerId) {
-		super(ownerId, "Condemn", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
+		super(ownerId, 13, "Condemn", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
 		this.expansionSetCode = "10E";
 		this.color.setWhite(true);
 		this.getSpellAbility().addTarget(new TargetAttackingCreature());

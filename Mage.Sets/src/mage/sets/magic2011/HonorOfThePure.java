@@ -38,6 +38,7 @@ public class HonorOfThePure extends mage.sets.magic2010.HonorOfThePure {
 
 	public HonorOfThePure(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 17;
 		this.expansionSetCode = "M11";
 	}
 

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class BurstLightning extends CardImpl<BurstLightning> {
 
 	public BurstLightning(UUID ownerId) {
-		super(ownerId, "Burst Lightning", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
+		super(ownerId, 0, "Burst Lightning", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
 		this.expansionSetCode = "ZEN";
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

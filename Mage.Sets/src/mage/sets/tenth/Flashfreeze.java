@@ -53,7 +53,7 @@ public class Flashfreeze extends CardImpl<Flashfreeze> {
 	}
 
 	public Flashfreeze(UUID ownerId) {
-		super(ownerId, "Flashfreeze", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+		super(ownerId, 0, "Flashfreeze", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
 		this.expansionSetCode = "10E";
 		this.color.setBlue(true);
 		this.getSpellAbility().addTarget(new TargetSpell(filter));

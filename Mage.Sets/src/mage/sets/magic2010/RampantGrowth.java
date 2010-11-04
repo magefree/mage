@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
 public class RampantGrowth extends CardImpl<RampantGrowth> {
 
 	public RampantGrowth(UUID ownerId){
-		super(ownerId, "Rampant Growth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
+		super(ownerId, 201, "Rampant Growth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
 		this.expansionSetCode = "M10";
 		this.color.setGreen(true);
 		TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());

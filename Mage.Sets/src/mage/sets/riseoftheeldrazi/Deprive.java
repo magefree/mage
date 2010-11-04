@@ -53,7 +53,7 @@ public class Deprive extends CardImpl<Deprive> {
 	}
 
 	public Deprive(UUID ownerId) {
-		super(ownerId, "Deprive", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
+		super(ownerId, 59, "Deprive", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
 		this.expansionSetCode = "ROE";
 		this.color.setBlue(true);
 		this.getSpellAbility().addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));

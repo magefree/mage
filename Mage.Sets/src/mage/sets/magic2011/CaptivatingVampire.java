@@ -71,7 +71,7 @@ public class CaptivatingVampire extends CardImpl<CaptivatingVampire> {
 	}
 
 	public CaptivatingVampire(UUID ownerId) {
-		super(ownerId, "Captivating Vampire", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
+		super(ownerId, 87, "Captivating Vampire", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
 		this.expansionSetCode = "M11";
 		this.color.setBlack(true);
 		this.subtype.add("Vampire");

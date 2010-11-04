@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class Preordain extends CardImpl<Preordain> {
 
 	public Preordain(UUID ownerId) {
-		super(ownerId, "Preordain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
+		super(ownerId, 70, "Preordain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
 		this.expansionSetCode = "M11";
 		this.color.setBlue(true);
 		this.getSpellAbility().addEffect(new ScryEffect(2));

@@ -38,6 +38,7 @@ public class GlacialFortress extends mage.sets.magic2010.GlacialFortress {
 
 	public GlacialFortress(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 225;
 		this.expansionSetCode = "M11";
 	}
 

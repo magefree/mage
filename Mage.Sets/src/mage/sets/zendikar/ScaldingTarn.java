@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class ScaldingTarn extends CardImpl<ScaldingTarn> {
 
 	public ScaldingTarn(UUID ownerId) {
-		super(ownerId, "Scalding Tarn", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 0, "Scalding Tarn", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ZEN";
 		this.addAbility(new FetchLandActivatedAbility(new String[] {"Island", "Mountain"}));
 	}

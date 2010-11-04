@@ -56,7 +56,7 @@ import mage.players.Player;
 public class ObstinateBaloth extends CardImpl<ObstinateBaloth> {
 
 	public ObstinateBaloth(UUID ownerId) {
-		super(ownerId, "Obstinate Baloth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+		super(ownerId, 188, "Obstinate Baloth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Beast");
 		this.color.setGreen(true);

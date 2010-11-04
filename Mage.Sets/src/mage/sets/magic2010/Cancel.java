@@ -38,6 +38,7 @@ public class Cancel extends mage.sets.shardsofalara.Cancel {
 
 	public Cancel(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 44;
 		this.expansionSetCode = "M10";
 	}
 

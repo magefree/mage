@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
 public class Kranioceros extends CardImpl<Kranioceros> {
 
     public Kranioceros(UUID ownerId) {
-        super(ownerId, "Kranioceros", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
+        super(ownerId, 67, "Kranioceros", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.expansionSetCode = "CON";
         this.subtype.add("Beast");
         this.color.setRed(true);

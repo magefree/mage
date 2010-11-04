@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
 public class TerramorphicExpanse extends CardImpl<TerramorphicExpanse> {
 
 	public TerramorphicExpanse(UUID ownerId) {
-		super(ownerId, "Terramorphic Expanse", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 229, "Terramorphic Expanse", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "M10";
 		this.addAbility(new TerramorphicExpanseAbility());
 	}

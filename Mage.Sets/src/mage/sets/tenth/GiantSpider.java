@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class GiantSpider extends CardImpl<GiantSpider> {
 
 	public GiantSpider(UUID ownerId) {
-		super(ownerId, "Giant Spider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+		super(ownerId, 0, "Giant Spider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
 		this.expansionSetCode = "10E";
 		this.subtype.add("Spider");
 		this.color.setGreen(true);

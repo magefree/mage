@@ -55,7 +55,7 @@ public class GlacialFortress extends CardImpl<GlacialFortress> {
 	}
 
 	public GlacialFortress(UUID ownerId) {
-		super(ownerId, "Glacial Fortress", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 226, "Glacial Fortress", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "M10";
 		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceUnlessControlsEffect(filter), "tapped unless you control a " + filter.getMessage()));
 		this.addAbility(new BlueManaAbility());

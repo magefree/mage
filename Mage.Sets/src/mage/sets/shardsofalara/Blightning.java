@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
 public class Blightning extends CardImpl<Blightning> {
 
 	public Blightning(UUID ownerId) {
-		super(ownerId, "Blightning", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{R}");
+		super(ownerId, 156, "Blightning", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{R}");
 		this.expansionSetCode = "ALA";
 		this.color.setBlack(true);
 		this.color.setRed(true);

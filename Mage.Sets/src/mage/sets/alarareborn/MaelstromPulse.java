@@ -43,7 +43,7 @@ import mage.target.common.TargetNonlandPermanent;
 public class MaelstromPulse extends CardImpl<MaelstromPulse> {
 
 	public MaelstromPulse(UUID ownerId) {
-		super(ownerId, "Maelstrom Pulse", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}{G}");
+		super(ownerId, 92, "Maelstrom Pulse", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}{G}");
 		this.expansionSetCode = "ARB";
 		this.color.setBlack(true);
 		this.color.setGreen(true);

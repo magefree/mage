@@ -42,7 +42,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class HornetSting extends CardImpl<HornetSting> {
 
 	public HornetSting(UUID ownerId) {
-		super(ownerId, "Hornet Sting", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
+		super(ownerId, 181, "Hornet Sting", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
 		this.expansionSetCode = "M11";
 		this.color.setGreen(true);
 		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

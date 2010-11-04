@@ -44,7 +44,7 @@ import mage.game.permanent.token.WolfToken;
 public class BestialMenace extends CardImpl<BestialMenace> {
 
 	public BestialMenace(UUID ownerId) {
-		super(ownerId, "Bestial Menace", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
+		super(ownerId, 0, "Bestial Menace", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
 		this.expansionSetCode = "WWK";
 		this.color.setGreen(true);
 		this.getSpellAbility().addEffect(new CreateTokenEffect(new SnakeToken()));

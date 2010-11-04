@@ -50,7 +50,7 @@ import mage.game.Game;
 public class LeylineOfAnticipation extends CardImpl<LeylineOfAnticipation> {
 
 	public LeylineOfAnticipation(UUID ownerId) {
-		super(ownerId, "Leyline of Anticipation", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
+		super(ownerId, 61, "Leyline of Anticipation", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
 		this.expansionSetCode = "M11";
 		this.color.setBlue(true);
 		this.addAbility(LeylineAbility.getInstance());

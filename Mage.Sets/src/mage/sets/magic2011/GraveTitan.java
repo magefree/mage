@@ -50,7 +50,7 @@ import mage.game.permanent.token.ZombieToken;
 public class GraveTitan extends CardImpl<GraveTitan> {
 
 	public GraveTitan(UUID ownerId) {
-		super(ownerId, "Grave Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
+		super(ownerId, 97, "Grave Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Giant");
 		this.color.setBlack(true);

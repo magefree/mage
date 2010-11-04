@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
 public class SoulWarden extends CardImpl<SoulWarden> {
 
 	public SoulWarden(UUID ownerId) {
-		super(ownerId, "Soul Warden", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+		super(ownerId, 34, "Soul Warden", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Human");
 		this.subtype.add("Cleric");

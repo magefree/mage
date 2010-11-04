@@ -37,7 +37,7 @@ import java.util.UUID;
 public class Demolish extends mage.sets.tenth.Demolish {
 
 	public Demolish(UUID ownerId) {
-		super(ownerId);
+		super(ownerId);this.cardNumber = 0;
 		this.expansionSetCode = "ZEN";
 	}
 

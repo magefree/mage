@@ -55,7 +55,7 @@ public class ManicVandal extends CardImpl<ManicVandal> {
 	}
 
 	public ManicVandal(UUID ownerId) {
-		super(ownerId, "Manic Vandal", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+		super(ownerId, 151, "Manic Vandal", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Human");
 		this.subtype.add("Warrior");

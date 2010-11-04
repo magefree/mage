@@ -47,7 +47,7 @@ import mage.cards.CardImpl;
 public class DarklitGargoyle extends CardImpl<DarklitGargoyle> {
 
     public DarklitGargoyle(UUID ownerId) {
-        super(ownerId, "Darklit Gargoyle", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W}");
+        super(ownerId, 7, "Darklit Gargoyle", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "CON";
         this.color.setWhite(true);
         this.subtype.add("Gargoyle");

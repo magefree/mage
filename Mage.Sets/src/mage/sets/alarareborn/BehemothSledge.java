@@ -50,7 +50,7 @@ import mage.cards.CardImpl;
 public class BehemothSledge extends CardImpl<BehemothSledge> {
 
 	public BehemothSledge(UUID ownerId) {
-		super(ownerId, "Behemoth Sledge", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}{G}{W}");
+		super(ownerId, 65, "Behemoth Sledge", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}{G}{W}");
 		this.expansionSetCode = "ARB";
 		this.subtype.add("Equipment");
 		this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));

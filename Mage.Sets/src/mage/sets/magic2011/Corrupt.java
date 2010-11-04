@@ -49,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class Corrupt extends CardImpl<Corrupt> {
 
 	public Corrupt(UUID ownerId) {
-		super(ownerId, "Corrupt", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{B}");
+		super(ownerId, 89, "Corrupt", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{B}");
 		this.expansionSetCode = "M11";
 		this.color.setBlack(true);
 		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

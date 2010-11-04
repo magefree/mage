@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class DryadsFavor extends CardImpl<DryadsFavor> {
 
 	public DryadsFavor(UUID ownerId) {
-		super(ownerId, "Dryad's Favor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
+		super(ownerId, 169, "Dryad's Favor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
 		this.expansionSetCode = "M11";
 		this.color.setGreen(true);
 		this.subtype.add("Aura");

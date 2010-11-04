@@ -63,7 +63,7 @@ public class MystifyingMaze extends CardImpl<MystifyingMaze> {
 	}
 
 	public MystifyingMaze(UUID ownerId) {
-		super(ownerId, "Mystifying Maze", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 226, "Mystifying Maze", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "M11";
 		this.addAbility(new ColorlessManaAbility());
 		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MystifyingMazeEffect(), new ManaCostsImpl("{4}"));

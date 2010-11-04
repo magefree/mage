@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
 public class EarthServant extends CardImpl<EarthServant> {
 
 	public EarthServant(UUID ownerId) {
-		super(ownerId, "Earth Servant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
+		super(ownerId, 134, "Earth Servant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Elemental");
 		this.color.setRed(true);

@@ -48,7 +48,7 @@ import mage.cards.CardImpl;
 public class MagmaPhoenix extends CardImpl<MagmaPhoenix> {
 
 	public MagmaPhoenix(UUID ownerId) {
-		super(ownerId, "Magma Phoenix", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
+		super(ownerId, 148, "Magma Phoenix", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Phoenix");
 		this.color.setRed(true);

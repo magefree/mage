@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class MightyLeap extends CardImpl<MightyLeap> {
 
 	public MightyLeap(UUID ownerId) {
-		super(ownerId, "Mighty Leap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
+		super(ownerId, 22, "Mighty Leap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
 		this.expansionSetCode = "M11";
 		this.color.setWhite(true);
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());

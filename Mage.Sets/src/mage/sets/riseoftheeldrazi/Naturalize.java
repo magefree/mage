@@ -34,10 +34,11 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Naturalize extends mage.cards.basiclands.Mountain {
+public class Naturalize extends mage.sets.tenth.Naturalize {
 
 	public Naturalize(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 199;
 		this.expansionSetCode = "ROE";
 	}
 

@@ -36,7 +36,6 @@ import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -46,7 +45,7 @@ import mage.cards.CardImpl;
 public class CudgelTroll extends CardImpl<CudgelTroll> {
 
 	public CudgelTroll(UUID ownerId) {
-		super(ownerId, "Cudgel Troll", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+		super(ownerId, 174, "Cudgel Troll", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
 		this.expansionSetCode = "M10";
 		this.color.setGreen(true);
 		this.subtype.add("Troll");

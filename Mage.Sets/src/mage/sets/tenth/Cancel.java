@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
 public class Cancel extends CardImpl<Cancel> {
 
 	public Cancel(UUID ownerId) {
-		super(ownerId, "Cancel", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
+		super(ownerId, 71, "Cancel", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
 		this.expansionSetCode = "10E";
 		this.color.setBlue(true);
 		this.getSpellAbility().addTarget(new TargetSpell());

@@ -63,7 +63,7 @@ public class MerfolkSpy extends CardImpl<MerfolkSpy> {
 	}
 
 	public MerfolkSpy(UUID ownerId) {
-		super(ownerId, "Merfolk Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
+		super(ownerId, 66, "Merfolk Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Merfolk");
 		this.subtype.add("Rogue");

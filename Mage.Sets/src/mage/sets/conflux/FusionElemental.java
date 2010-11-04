@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class FusionElemental extends CardImpl<FusionElemental> {
 
     public FusionElemental(UUID ownerId) {
-        super(ownerId, "Fusion Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
+        super(ownerId, 107, "Fusion Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
         this.expansionSetCode = "CON";
         this.subtype.add("Elemental");
         this.color.setBlack(true);

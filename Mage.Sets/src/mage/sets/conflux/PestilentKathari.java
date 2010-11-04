@@ -49,7 +49,7 @@ import mage.cards.CardImpl;
 public class PestilentKathari extends CardImpl<PestilentKathari> {
 
     public PestilentKathari(UUID ownerId) {
-        super(ownerId, "Pestilent Kathari", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        super(ownerId, 50, "Pestilent Kathari", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "CON";
         this.subtype.add("Bird");
         this.subtype.add("Warrior");        

@@ -50,7 +50,7 @@ import mage.game.events.GameEvent.EventType;
 public class LeylineOfPunishment extends CardImpl<LeylineOfPunishment> {
 
 	public LeylineOfPunishment(UUID ownerId) {
-		super(ownerId, "Leyline of Punishment", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
+		super(ownerId, 148, "Leyline of Punishment", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
 		this.expansionSetCode = "M11";
 		this.color.setRed(true);
 		this.addAbility(LeylineAbility.getInstance());

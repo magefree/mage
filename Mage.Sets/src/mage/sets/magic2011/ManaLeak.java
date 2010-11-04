@@ -36,7 +36,6 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.target.TargetSpell;
@@ -48,7 +47,7 @@ import mage.target.TargetSpell;
 public class ManaLeak extends CardImpl<ManaLeak> {
 
 	public ManaLeak(UUID ownerId) {
-		super(ownerId, "Mana Leak", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+		super(ownerId, 62, "Mana Leak", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
 		this.expansionSetCode = "M11";
 		this.color.setBlue(true);
 		this.getSpellAbility().addTarget(new TargetSpell());

@@ -46,7 +46,7 @@ import mage.filter.FilterCard;
 public class GreatSableStag extends CardImpl<GreatSableStag> {
 
 	public GreatSableStag(UUID ownerId) {
-		super(ownerId, "Great Sable Stag", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
+		super(ownerId, 186, "Great Sable Stag", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Elk");
 		this.color.setGreen(true);

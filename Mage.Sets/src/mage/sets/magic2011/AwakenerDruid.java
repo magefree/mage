@@ -38,6 +38,7 @@ public class AwakenerDruid extends mage.sets.magic2010.AwakenerDruid {
 
 	public AwakenerDruid(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 163;
 		this.expansionSetCode = "M11";
 	}
 

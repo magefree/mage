@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
 public class CrumblingNecropolis extends CardImpl<CrumblingNecropolis> {
 
 	public CrumblingNecropolis(UUID ownerId) {
-		super(ownerId, "Crumbling Necropolis", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 222, "Crumbling Necropolis", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ALA";
 		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
 		this.addAbility(new RedManaAbility());

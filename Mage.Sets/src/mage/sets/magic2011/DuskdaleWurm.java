@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class DuskdaleWurm extends CardImpl<DuskdaleWurm> {
 
 	public DuskdaleWurm(UUID ownerId) {
-		super(ownerId, "Duskdale Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
+		super(ownerId, 170, "Duskdale Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Wurm");
 		this.color.setGreen(true);

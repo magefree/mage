@@ -38,6 +38,7 @@ public class PalaceGuard extends mage.sets.magic2010.PalaceGuard {
 
 	public PalaceGuard(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 24;
 		this.expansionSetCode = "M11";
 	}
 

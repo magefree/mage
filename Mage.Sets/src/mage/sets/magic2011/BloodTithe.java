@@ -44,7 +44,7 @@ import mage.game.Game;
 public class BloodTithe extends CardImpl<BloodTithe> {
 
 	public BloodTithe(UUID ownerId) {
-		super(ownerId, "Blood Tithe", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
+		super(ownerId, 84, "Blood Tithe", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
 		this.expansionSetCode = "M11";
 		this.getColor().setBlack(true);
 

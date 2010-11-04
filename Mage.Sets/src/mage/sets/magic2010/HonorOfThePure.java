@@ -52,7 +52,7 @@ public class HonorOfThePure extends CardImpl<HonorOfThePure> {
 	}
 
 	public HonorOfThePure(UUID ownerId) {
-		super(ownerId, "Honor of the Pure", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+		super(ownerId, 16, "Honor of the Pure", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 		this.expansionSetCode = "M10";
 		this.color.setWhite(true);
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));

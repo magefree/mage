@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
 public class PrizedUnicorn extends CardImpl<PrizedUnicorn> {
 
 	public PrizedUnicorn(UUID ownerId) {
-		super(ownerId, "Prized Unicorn", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+		super(ownerId, 199, "Prized Unicorn", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Unicorn");
 		this.color.setGreen(true);

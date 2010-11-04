@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class GiantGrowth extends CardImpl<GiantGrowth> {
 
 	public GiantGrowth(UUID ownerId) {
-		super(ownerId, "Giant Growth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
+		super(ownerId, 0, "Giant Growth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
 		this.expansionSetCode = "10E";
 		this.color.setGreen(true);
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());

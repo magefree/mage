@@ -54,7 +54,7 @@ import mage.target.TargetPlayer;
 public class QuenchableFire extends CardImpl<QuenchableFire> {
 
 	public QuenchableFire(UUID ownerId) {
-		super(ownerId, "Quenchable Fire", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
+		super(ownerId, 70, "Quenchable Fire", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
 		this.expansionSetCode = "CON";
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetPlayer());

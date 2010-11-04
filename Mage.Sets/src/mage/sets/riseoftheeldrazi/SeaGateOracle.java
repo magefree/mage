@@ -53,7 +53,7 @@ import mage.target.TargetCard;
 public class SeaGateOracle extends CardImpl<SeaGateOracle> {
 
 	public SeaGateOracle(UUID ownerId) {
-		super(ownerId, "Sea Gate Oracle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+		super(ownerId, 85, "Sea Gate Oracle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
 		this.expansionSetCode = "ROE";
 		this.color.setBlue(true);
 		this.subtype.add("Human");

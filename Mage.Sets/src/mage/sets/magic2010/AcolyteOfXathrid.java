@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
 public class AcolyteOfXathrid extends CardImpl {
 
 	public AcolyteOfXathrid(UUID ownerId) {
-		super(ownerId, "Acolyte Of Xathrid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
+		super(ownerId, 83, "Acolyte Of Xathrid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Human");
 		this.subtype.add("Cleric");

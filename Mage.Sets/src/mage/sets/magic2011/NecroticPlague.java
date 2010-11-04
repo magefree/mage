@@ -63,7 +63,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class NecroticPlague extends CardImpl<NecroticPlague> {
 
 	public NecroticPlague(UUID ownerId) {
-		super(ownerId, "Necrotic Plague", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
+		super(ownerId, 107, "Necrotic Plague", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
 		this.expansionSetCode = "M11";
 		this.color.setBlack(true);
 		this.subtype.add("Aura");

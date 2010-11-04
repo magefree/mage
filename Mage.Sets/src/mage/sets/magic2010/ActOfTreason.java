@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class ActOfTreason extends CardImpl<ActOfTreason> {
 
 	public ActOfTreason(UUID ownerId) {
-		super(ownerId, "Act Of Treason", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
+		super(ownerId, 124, "Act Of Treason", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
 		this.expansionSetCode = "M10";
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());

@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Disorient extends CardImpl<Disorient> {
 
     public Disorient(UUID ownerId) {
-        super(ownerId, "Disorient", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
+        super(ownerId, 48, "Disorient", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "M10";
         this.color.setBlue(true);
 

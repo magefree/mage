@@ -38,6 +38,7 @@ public class FieryHellhound extends mage.sets.magic2010.FieryHellhound {
 
 	public FieryHellhound(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 136;
 		this.expansionSetCode = "M11";
 	}
 

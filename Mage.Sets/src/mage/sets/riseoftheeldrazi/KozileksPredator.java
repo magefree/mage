@@ -44,7 +44,7 @@ import mage.game.permanent.token.EldraziSpawnToken;
 public class KozileksPredator extends CardImpl<KozileksPredator> {
 
 	public KozileksPredator(UUID ownerId) {
-		super(ownerId, "Kozilek's Predator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+		super(ownerId, 193, "Kozilek's Predator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
 		this.expansionSetCode = "ROE";
 		this.subtype.add("Eldrazi");
 		this.subtype.add("Drone");

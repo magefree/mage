@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class MarshFlats extends CardImpl<MarshFlats> {
 
 	public MarshFlats(UUID ownerId) {
-		super(ownerId, "Marsh Flats", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 0, "Marsh Flats", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ZEN";
 		this.addAbility(new FetchLandActivatedAbility(new String[] {"Swamp", "Plains"}));
 	}

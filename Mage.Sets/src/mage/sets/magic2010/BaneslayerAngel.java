@@ -47,7 +47,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public class BaneslayerAngel extends CardImpl<BaneslayerAngel> {
 
 	public BaneslayerAngel(UUID ownerId) {
-		super(ownerId, "Baneslayer Angel", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+		super(ownerId, 4, "Baneslayer Angel", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Angel");
 		this.color.setWhite(true);

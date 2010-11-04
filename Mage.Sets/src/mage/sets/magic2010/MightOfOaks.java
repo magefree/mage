@@ -42,8 +42,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MightOfOaks extends CardImpl<MightOfOaks> {
 
-    public MightOfOaks(UUID onwerId){
-        super(onwerId, "Might of Oaks", Rarity.RARE, new CardType[]{CardType.INSTANT},"{3}{G}");
+    public MightOfOaks(UUID ownerId){
+        super(ownerId, 192, "Might of Oaks", Rarity.RARE, new CardType[]{CardType.INSTANT},"{3}{G}");
         this.expansionSetCode = "M10";
 		this.color.setGreen(true);
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());

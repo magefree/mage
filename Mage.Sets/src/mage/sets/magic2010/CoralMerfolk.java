@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class CoralMerfolk extends CardImpl<CoralMerfolk> {
 
     public CoralMerfolk(UUID ownerId) {
-        super(ownerId, "Coral Merfolk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        super(ownerId, 47, "Coral Merfolk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "M10";
         this.color.setBlue(true);
         this.subtype.add("Merfolk");

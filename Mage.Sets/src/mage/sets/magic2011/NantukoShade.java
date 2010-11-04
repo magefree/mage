@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
 public class NantukoShade extends CardImpl<NantukoShade> {
 
 	public NantukoShade(UUID ownerId) {
-		super(ownerId, "Nantuko Shade", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");
+		super(ownerId, 106, "Nantuko Shade", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{B}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Insect");
 		this.subtype.add("Shade");

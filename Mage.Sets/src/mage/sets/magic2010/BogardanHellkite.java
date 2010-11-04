@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayerAmount;
 public class BogardanHellkite extends CardImpl<BogardanHellkite> {
 
 	public BogardanHellkite(UUID ownerId) {
-		super(ownerId, "Bogardan Hellkite", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
+		super(ownerId, 127, "Bogardan Hellkite", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Dragon");
 		this.color.setRed(true);

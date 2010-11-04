@@ -38,6 +38,7 @@ public class Flashfreeze extends mage.sets.tenth.Flashfreeze {
 
 	public Flashfreeze(UUID ownerId) {
 		super(ownerId);
+		this.cardNumber = 53;
 		this.expansionSetCode = "M11";
 	}
 

@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class WindDrake extends CardImpl<WindDrake> {
 
     public WindDrake(UUID ownerId) {
-        super(ownerId, "Wind Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        super(ownerId, 81, "Wind Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "M10";
         this.subtype.add("Drake");
         this.color.setBlue(true);

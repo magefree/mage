@@ -47,7 +47,7 @@ import mage.cards.CardImpl;
 public class GoblinBalloonBrigade extends CardImpl<GoblinBalloonBrigade> {
 
 	public GoblinBalloonBrigade(UUID ownerId) {
-		super(ownerId, "Goblin Balloon Brigade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
+		super(ownerId, 140, "Goblin Balloon Brigade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Goblin");
 		this.subtype.add("Warrior");

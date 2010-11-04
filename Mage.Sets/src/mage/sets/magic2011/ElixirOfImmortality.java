@@ -53,7 +53,7 @@ import mage.players.Player;
 public class ElixirOfImmortality extends CardImpl<ElixirOfImmortality> {
 
 	public ElixirOfImmortality(UUID ownerId) {
-		super(ownerId, "Elixir Of Immortality", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
+		super(ownerId, 206, "Elixir Of Immortality", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
 		this.expansionSetCode = "M11";
 		Costs costs = new CostsImpl();
 		costs.add(new GenericManaCost(2));

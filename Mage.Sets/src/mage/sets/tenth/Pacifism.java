@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Pacifism extends CardImpl<Pacifism> {
 
 	public Pacifism(UUID ownerId) {
-		super(ownerId, "Pacifism", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+		super(ownerId, 0, "Pacifism", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 		this.expansionSetCode = "10E";
 		this.color.setWhite(true);
 		this.subtype.add("Aura");

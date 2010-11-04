@@ -50,8 +50,8 @@ import mage.target.common.TargetOpponent;
  */
 public class Duress extends CardImpl<Duress> {
 
-    public Duress(UUID onwerId){
-        super(onwerId, "Duress", Rarity.COMMON, new CardType[]{CardType.SORCERY},"{B}");
+    public Duress(UUID ownerId){
+        super(ownerId, 96, "Duress", Rarity.COMMON, new CardType[]{CardType.SORCERY},"{B}");
         this.expansionSetCode = "M10";
         this.color.setBlack(true);
         this.getSpellAbility().addTarget(new TargetOpponent());

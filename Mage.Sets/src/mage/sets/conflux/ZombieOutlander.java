@@ -49,7 +49,7 @@ public class ZombieOutlander extends CardImpl<ZombieOutlander> {
     }
 
     public ZombieOutlander(UUID ownerId) {
-        super(ownerId, "Zombie Outlander", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{B}");
+        super(ownerId, 133, "Zombie Outlander", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{B}");
         this.expansionSetCode = "CON";
         this.color.setBlack(true);
         this.color.setBlue(true);

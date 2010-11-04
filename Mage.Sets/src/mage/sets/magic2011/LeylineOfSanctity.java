@@ -53,7 +53,7 @@ public class LeylineOfSanctity extends CardImpl<LeylineOfSanctity> {
 	}
 
 	public LeylineOfSanctity(UUID ownerId) {
-		super(ownerId, "Leyline of Sanctity", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
+		super(ownerId, 21, "Leyline of Sanctity", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 		this.expansionSetCode = "M11";
 		this.color.setWhite(true);
 		this.addAbility(LeylineAbility.getInstance());

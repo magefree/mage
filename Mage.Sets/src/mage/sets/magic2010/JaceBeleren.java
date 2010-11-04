@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
 public class JaceBeleren extends CardImpl<JaceBeleren> {
 
 	public JaceBeleren(UUID ownerId) {
-		super(ownerId, "Jace Beleren", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{U}");
+		super(ownerId, 58, "Jace Beleren", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{U}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Jace");
 		this.color.setBlue(true);

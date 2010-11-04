@@ -61,7 +61,7 @@ import mage.players.Player;
 public class AjaniGoldmane extends CardImpl<AjaniGoldmane> {
 
 	public AjaniGoldmane(UUID ownerId) {
-		super(ownerId, "Ajani Goldmane", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
+		super(ownerId, 1, "Ajani Goldmane", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Ajani");
 		this.color.setWhite(true);

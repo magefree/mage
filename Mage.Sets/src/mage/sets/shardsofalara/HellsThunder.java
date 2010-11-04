@@ -48,7 +48,7 @@ import mage.game.events.GameEvent.EventType;
 public class HellsThunder extends CardImpl<HellsThunder> {
 
 	public HellsThunder(UUID ownerId) {
-		super(ownerId, "Hell's Thunder", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
+		super(ownerId, 103, "Hell's Thunder", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
 		this.expansionSetCode = "ALA";
 		this.subtype.add("Elemental");
 		this.color.setRed(true);

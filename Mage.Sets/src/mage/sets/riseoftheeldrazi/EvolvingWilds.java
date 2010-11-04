@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
 public class EvolvingWilds extends CardImpl<EvolvingWilds> {
 
 	public EvolvingWilds(UUID ownerId) {
-		super(ownerId, "Evolving Wilds", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 228, "Evolving Wilds", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ROE";
 		this.addAbility(new EvolvingWildsAbility());
 	}

@@ -47,7 +47,7 @@ import mage.game.events.GameEvent.EventType;
 public class KrakensEye extends CardImpl<KrakensEye> {
 
 	public KrakensEye(UUID ownerId) {
-		super(ownerId, "Kraken's Eye", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+		super(ownerId, 0, "Kraken's Eye", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
 		this.expansionSetCode = "10E";
 		this.addAbility(new KrakensEyeAbility());
 	}

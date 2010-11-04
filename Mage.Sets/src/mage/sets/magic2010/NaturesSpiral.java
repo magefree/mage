@@ -55,7 +55,7 @@ public class NaturesSpiral extends CardImpl<NaturesSpiral> {
 	}
 
 	public NaturesSpiral(UUID ownerId) {
-		super(ownerId, "Nature's Spiral", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
+		super(ownerId, 196, "Nature's Spiral", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
 		this.expansionSetCode = "M10";
 		this.color.setGreen(true);
 		this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));

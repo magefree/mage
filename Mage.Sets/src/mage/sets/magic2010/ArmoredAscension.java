@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class ArmoredAscension extends CardImpl<ArmoredAscension> {
 
 	public ArmoredAscension(UUID ownerId) {
-		super(ownerId, "Armored Ascension", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
+		super(ownerId, 3, "Armored Ascension", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 		this.expansionSetCode = "M10";
 		this.color.setWhite(true);
 		this.subtype.add("Aura");

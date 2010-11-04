@@ -60,7 +60,7 @@ public class HoardingDragon extends CardImpl<HoardingDragon> {
 	}
 
 	public HoardingDragon(UUID ownerId) {
-		super(ownerId, "Hoarding Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
+		super(ownerId, 144, "Hoarding Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Dragon");
 		this.color.setRed(true);

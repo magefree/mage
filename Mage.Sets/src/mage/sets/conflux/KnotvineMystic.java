@@ -31,12 +31,9 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.BasicManaAbility;
@@ -49,7 +46,7 @@ import mage.cards.CardImpl;
 public class KnotvineMystic extends CardImpl<KnotvineMystic>{
 
     public KnotvineMystic(UUID ownerId) {
-        super(ownerId, "Knotvine Mystic", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{R}{G}");
+        super(ownerId, 114, "Knotvine Mystic", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{R}{G}");
         this.expansionSetCode = "CON";
         this.color.setRed(true);
         this.color.setGreen(true);

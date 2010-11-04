@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class SoulsMajesty extends CardImpl<SoulsMajesty> {
 
     public SoulsMajesty(UUID ownerId) {
-        super(ownerId, "Soul's Majesty", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G}");
+        super(ownerId, 92, "Soul's Majesty", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G}");
         this.expansionSetCode = "CON";
         this.color.setGreen(true);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());

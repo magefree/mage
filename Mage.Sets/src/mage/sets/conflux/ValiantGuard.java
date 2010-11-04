@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class ValiantGuard extends CardImpl<ValiantGuard> {
 
     public ValiantGuard(UUID ownerId) {
-        super(ownerId, "Valiant Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        super(ownerId, 19, "Valiant Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
         this.expansionSetCode = "CON";
         this.color.setWhite(true);
         this.subtype.add("Human");

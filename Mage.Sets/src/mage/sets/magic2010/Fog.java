@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class Fog extends CardImpl<Fog> {
 
 	public Fog(UUID ownerId) {
-		super(ownerId, "Fog", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
+		super(ownerId, 182, "Fog", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
 		this.expansionSetCode = "M10";
 		this.color.setGreen(true);
 		this.getSpellAbility().addEffect(new PreventAllCombatDamageEffect(Duration.EndOfTurn));

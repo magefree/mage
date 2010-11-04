@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class BloodthroneVampire extends CardImpl<BloodthroneVampire> {
 
 	public BloodthroneVampire(UUID ownerId) {
-		super(ownerId, "Bloodthrone Vampire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+		super(ownerId, 98, "Bloodthrone Vampire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
 		this.expansionSetCode = "ROE";
 		this.color.setBlack(true);
 		this.subtype.add("Vampire");

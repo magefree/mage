@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class Ornithopter extends CardImpl<Ornithopter> {
 
 	public Ornithopter(UUID ownerId) {
-		super(ownerId, "Ornithopter", Rarity.COMMON, new CardType[]{CardType.CREATURE, CardType.ARTIFACT}, "{0}");
+		super(ownerId, 0, "Ornithopter", Rarity.COMMON, new CardType[]{CardType.CREATURE, CardType.ARTIFACT}, "{0}");
 		this.expansionSetCode = "10E";
 		this.subtype.add("Thopter");
 		this.power = new MageInt(0);

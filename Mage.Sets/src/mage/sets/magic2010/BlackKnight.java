@@ -51,7 +51,7 @@ public class BlackKnight extends CardImpl<BlackKnight> {
 	}
 
 	public BlackKnight(UUID ownerId) {
-		super(ownerId, "Black Knight", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
+		super(ownerId, 85, "Black Knight", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
 		this.expansionSetCode = "M10";
 		this.subtype.add("Human");
 		this.subtype.add("Knight");

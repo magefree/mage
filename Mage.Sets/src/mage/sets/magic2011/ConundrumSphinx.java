@@ -57,7 +57,7 @@ import mage.sets.Sets;
 public class ConundrumSphinx extends CardImpl<ConundrumSphinx> {
 
 	public ConundrumSphinx(UUID ownerId) {
-		super(ownerId, "Conundrum Sphinx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
+		super(ownerId, 51, "Conundrum Sphinx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Sphinx");
 		this.color.setBlue(true);

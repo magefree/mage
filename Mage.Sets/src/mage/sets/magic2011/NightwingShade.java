@@ -47,7 +47,7 @@ import mage.cards.CardImpl;
 public class NightwingShade extends CardImpl<NightwingShade> {
 
 	public NightwingShade(UUID ownerId) {
-		super(ownerId, "Nightwing Shade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
+		super(ownerId, 109, "Nightwing Shade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Shade");
 		this.color.setBlack(true);

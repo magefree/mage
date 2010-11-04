@@ -56,7 +56,7 @@ import mage.target.common.TargetOpponent;
 public class JinxedIdol extends CardImpl<JinxedIdol> {
 
 	public JinxedIdol(UUID ownerId) {
-		super(ownerId, "Jinxed Idol", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
+		super(ownerId, 208, "Jinxed Idol", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
 		this.expansionSetCode = "M11";
 		this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new DamageControllerEffect(2)));
 		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JinxedIdolEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent()));

@@ -55,7 +55,7 @@ public class DrownedCatacomb extends CardImpl<DrownedCatacomb> {
 	}
 
 	public DrownedCatacomb(UUID ownerId) {
-		super(ownerId, "Drowned Catacomb", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 224, "Drowned Catacomb", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "M10";
 		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceUnlessControlsEffect(filter), "tapped unless you control a " + filter.getMessage()));
 		this.addAbility(new BlackManaAbility());

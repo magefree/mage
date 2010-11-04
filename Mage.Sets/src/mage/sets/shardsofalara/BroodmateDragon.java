@@ -47,7 +47,7 @@ public class BroodmateDragon extends CardImpl<BroodmateDragon> {
 	private static DragonToken dragonToken = new DragonToken();
 
 	public BroodmateDragon(UUID ownerId) {
-		super(ownerId, "Broodmate Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{R}{G}");
+		super(ownerId, 160, "Broodmate Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{R}{G}");
 		this.expansionSetCode = "ALA";
 		this.subtype.add("Dragon");
 		this.color.setRed(true);

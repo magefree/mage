@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
 public class TukatongueThallid extends CardImpl<TukatongueThallid> {
 
     public TukatongueThallid(UUID ownerId) {
-        super(ownerId, "Tukatongue Thallid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        super(ownerId, 96, "Tukatongue Thallid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
         this.expansionSetCode = "CON";
         this.color.setGreen(true);
         this.subtype.add("Fungus");
