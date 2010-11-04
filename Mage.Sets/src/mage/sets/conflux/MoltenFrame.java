@@ -52,7 +52,7 @@ public class MoltenFrame extends CardImpl<MoltenFrame> {
     }
 
     public MoltenFrame(UUID ownerId) {
-        super(ownerId, "Molten Frame", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
+        super(ownerId, 69, "Molten Frame", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "CON";
         this.color.setRed(true);
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

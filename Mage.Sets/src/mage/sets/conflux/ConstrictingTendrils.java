@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class ConstrictingTendrils extends CardImpl<ConstrictingTendrils> {
 
     public ConstrictingTendrils(UUID ownerId) {
-        super(ownerId, "Constricting Tendrils", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
+        super(ownerId, 22, "Constricting Tendrils", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "CON";
         this.color.setBlue(true);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
