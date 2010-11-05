@@ -71,7 +71,11 @@ public class Plugins implements MagePlugins {
 			return cardPlugin.getMagePermanent(card, dimension, gameId, new ActionCallback() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					defaultCallback.mouseClicked(e, gameId, MageFrame.getSession(), card);
+					//defaultCallback.mouseClicked(e, gameId, MageFrame.getSession(), card);
+				}
+				@Override
+				public void mouseMoved(MouseEvent e) {
+					//defaultCallback.mouseClicked(e, gameId, MageFrame.getSession(), card);
 				}
 			});
 		} else {

@@ -14,9 +14,11 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
@@ -26,12 +28,16 @@ import mage.cards.interfaces.ActionCallback;
 import mage.utils.CardUtil;
 import mage.view.PermanentView;
 
+import org.apache.log4j.Logger;
 import org.mage.card.arcane.ScaledImagePanel.MultipassType;
 import org.mage.card.arcane.ScaledImagePanel.ScalingType;
 
 @SuppressWarnings({"unchecked","rawtypes"})
 public class CardPanel extends MagePermanent {
 	private static final long serialVersionUID = -3272134219262184410L;
+	
+	private static final Logger log = Logger.getLogger(CardPanel.class);
+	
 	static public final double TAPPED_ANGLE = Math.PI / 2;
 	static public final float ASPECT_RATIO = 3.5f / 2.5f;
 	//static public final float ASPECT_RATIO = 1.0f;
@@ -72,11 +78,6 @@ public class CardPanel extends MagePermanent {
 	public CardPanel (PermanentView newGameCard, boolean loadImage, ActionCallback callback) {
 		this.gameCard = newGameCard;
 		this.callback = callback;
-		
-		addMouseListener(this);
-	    addFocusListener(this);
-	    addMouseMotionListener(this);
-		addComponentListener(this);
 		
 		//for container debug (don't remove)
 		//setBorder(BorderFactory.createLineBorder(Color.green));
@@ -127,13 +128,22 @@ public class CardPanel extends MagePermanent {
 		
 		Util.threadPool.submit(new Runnable() {
 			public void run () {
-				BufferedImage srcImage = null; //TODO: ImageCache.getImageOriginal(gameCard);
+				//BufferedImage srcImage = null; //TODO: ImageCache.getImageOriginal(gameCard);
 				tappedAngle = gameCard.isTapped() ? CardPanel.TAPPED_ANGLE : 0;
-				if (srcImage != null) {
-					//setImage(srcImage, ImageUtil.getBlurredImage(srcImage, 3, 1.0f));
-					hasImage = true;
-					setText(gameCard);
-					setImage(srcImage, srcImage);
+				
+				try {
+					log.info("loading image...");
+					BufferedImage srcImage = ImageIO.read(CardPanel.class.getClassLoader().getResourceAsStream("Mountain.40.full.jpg"));
+					srcImage = null;
+					log.info("done, image="+srcImage);
+					if (srcImage != null) {
+						//setImage(srcImage, ImageUtil.getBlurredImage(srcImage, 3, 1.0f));
+						hasImage = true;
+						setText(gameCard);
+						setImage(srcImage, srcImage);
+					}
+				} catch (IOException io) {
+					io.printStackTrace();
 				}
 			}
 		});
@@ -143,7 +153,7 @@ public class CardPanel extends MagePermanent {
 		if (hasImage) {
 			titleText.setText("");
 		} else {
-			titleText.setText(card.getName());
+			titleText.setText(card.getName() + card.getId());
 		}
 	}
 
@@ -226,14 +236,11 @@ public class CardPanel extends MagePermanent {
 		}
 		
 		//TODO:uncomment
-		/*
-		if (!hasImage && gameCard.getTableID() > 0) {
+		if (!hasImage /*&& gameCard.getTableID() > 0*/) {
 			g2d.setColor(new Color(30,200,200,120));
 		} else {
 			g2d.setColor(new Color(0,0,0,200));	
 		}
-		*/
-		g2d.setColor(new Color(30,200,200,120));
 		
 		//for debug repainting
 		//g2d.setColor(new Color(MyRandom.random.nextInt(255),MyRandom.random.nextInt(255),MyRandom.random.nextInt(255),150));
@@ -259,6 +266,19 @@ public class CardPanel extends MagePermanent {
 				g2d.drawRoundRect(cardXOffset - i, cardYOffset - i + offset, cardWidth + i * 2 - 1, cardHeight + i * 2 - 1,
 					cornerSize, cornerSize);
 		}*/
+		
+		
+		Point component = getLocation();
+		
+		int cx = getCardX() + component.x;
+		int cy = getCardY() + component.y;
+		int cw = getCardWidth();
+		int ch = getCardHeight();
+		
+		System.out.println("x="+component.x);
+		
+		g2d.setColor(Color.white);
+		g2d.drawRect(getCardX() - component.x, getCardY() - component.y, cw, ch);
 	}
 
 	protected void paintChildren (Graphics g) {
@@ -419,7 +439,7 @@ public class CardPanel extends MagePermanent {
 	}
 
 	@Override
-	public void updateCard(PermanentView card) {
+	public void update(PermanentView card) {
 		if (this.gameCard.isTapped() != card.isTapped()) {
 			Animation.tapCardToggle(this, this);
 		}
@@ -446,8 +466,7 @@ public class CardPanel extends MagePermanent {
 
 	@Override
 	public boolean contains(int x, int y) {
-		if (containsThis(x, y, true))
-		return true;
+		if (containsThis(x, y, true)) return true;
 
 		/*
 		 * if (attachedCount > 0) { for (MWCardImpl card :
@@ -458,70 +477,38 @@ public class CardPanel extends MagePermanent {
 	}
 	
 	public boolean containsThis(int x, int y, boolean root) {
-		int dy = getLocation().y;
-		if (root) dy = 0;
-		int cx = getCardX();
-		int cy = getCardY() + dy;
+		//log.info("x="+x+", y="+y);
+		Point component = getLocation();
+		
+		//int dy = component.y;
+		//if (root) dy = 0;
+		
+		int cx = getCardX() - component.x;
+		int cy = getCardY() - component.y;
 		int cw = getCardWidth();
 		int ch = getCardHeight();
 		if (isTapped()) {
+			//log.info("tapped");
 			cy = ch - cw + cx /*+ attachedDy*attachedCount*/;
 			ch = cw;
 			cw = getCardHeight();
 		}
 		//int dx = drawIcons ? 19 : 0;
-		int dx = 0;
-		if (x >= cx && x <= cx + cw + dx && y >= cy && y <= cy + ch) {
+		//int dx = 0;
+		
+		if (x >= cx && x <= cx + cw && y >= cy && y <= cy + ch) {
+			//log.info("!cx="+cx+", cy="+cy+", dx="+cw +", ch="+ch);
+			//log.info(getOriginal().getId());
 			return true;
+		} else {
+			//log.info("cx="+cx+", cy="+cy+", dx="+cw +", ch="+ch);	
 		}
     	return false;
     }
-
-	 
+	
 	@Override
 	public PermanentView getOriginal() {
 		return this.gameCard;
 	}
 
-	@Override
-	public void mouseDragged(MouseEvent e) {}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		System.out.println("clicked: " + this.gameCard.getId());
-		callback.mouseClicked(e);
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {}
-
-	@Override
-	public void mouseExited(MouseEvent e) {	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {}
-
-	@Override
-	public void focusGained(FocusEvent e) {	}
-
-	@Override
-	public void focusLost(FocusEvent e) {}
-
-	@Override
-	public void componentHidden(ComponentEvent e) {	}
-
-	@Override
-	public void componentMoved(ComponentEvent e) {}
-
-	@Override
-	public void componentResized(ComponentEvent e) {}
-
-	@Override
-	public void componentShown(ComponentEvent e) {}
 }

@@ -53,6 +53,7 @@ import mage.client.cards.BigCard;
 import mage.client.cards.Permanent;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
+import mage.client.util.DefaultActionCallback;
 import mage.view.PermanentView;
 
 /**
@@ -65,11 +66,51 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 	private UUID gameId;
 	private BigCard bigCard;
 	private Map<String, JComponent> ui = new HashMap<String, JComponent>();
+	
+	//TODO: made it singleton
+	protected static DefaultActionCallback defaultCallback = new DefaultActionCallback();
 
     /** Creates new form BattlefieldPanel */
     public BattlefieldPanel(JScrollPane jScrollPane) {
     	ui.put("jScrollPane", jScrollPane);
         initComponents();
+        
+        /*addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (e.getButton() == MouseEvent.BUTTON1) {
+					int count = e.getClickCount();
+					//System.out.println("pressed");
+					if (count > 0) {
+						Object o = getComponentAt(e.getPoint());
+						//System.out.println("obj="+o);
+						//System.out.println("e: "+e.getX());
+						if (o instanceof MagePermanent) {
+							System.out.println("ok");
+							MagePermanent selectedCard = (MagePermanent) o;
+							//TODO: uncomment when attached cards works in plugin
+							/*
+							int x = e.getX() - selectedCard.getX();
+							int y = e.getY() - selectedCard.getY();
+							CardView card = selectedCard.getCardByPosition(x, y);
+							*/
+							/*defaultCallback.mouseClicked(e, gameId, MageFrame.getSession(), selectedCard.getOriginal());
+						}
+					}
+				}
+			}
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				System.out.println("e: "+e.getX());
+				Object o = getComponentAt(e.getPoint());
+				if (o instanceof MagePermanent) {
+					MagePermanent card = (MagePermanent) o;
+					System.out.println("card: "+card.getOriginal().getId());
+					bigCard.setCard(card.getOriginal().getId(), null, card.getOriginal().getRules());
+				}
+			}
+		});*/
+
     }
 
 	public void init(UUID gameId, BigCard bigCard) {
@@ -83,7 +124,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 				addPermanent(permanent);
 			}
 			else {
-				permanents.get(permanent.getId()).updateCard(permanent);
+				permanents.get(permanent.getId()).update(permanent);
 			}
 		}
 		for (Iterator<Entry<UUID, MagePermanent>> i = permanents.entrySet().iterator(); i.hasNext();) {
@@ -100,6 +141,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 		}
 		
 		Plugins.getInstance().sortPermanents(ui, permanents.values());
+		invalidate();
 	}
 
 	private void addPermanent(PermanentView permanent) {
@@ -109,9 +151,9 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 			perm.setBounds(findEmptySpace(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight)));
 		}
 		permanents.put(permanent.getId(), perm);
-		this.add(perm);
+		this.add(perm, 10);
 		moveToFront(perm);
-		perm.updateCard(permanent);
+		perm.update(permanent);
 	}
 	
 	private void groupAttachments(PermanentView permanent) {

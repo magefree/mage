@@ -145,6 +145,10 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 		return card.getId();
 	}
 
+	public void update(PermanentView permanent) {
+		this.update(permanent.getOriginal());
+	}
+	
 	public void update(CardView card) {
 		this.card = card;
 		Graphics2D gImage = image.createGraphics();
@@ -464,10 +468,5 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 	@Override
 	public void setCardBounds(int x, int y, int width, int height) {
 		throw new RuntimeException("Not implemented");
-	}
-
-	@Override
-	public void updateCard(PermanentView card) {
-		update(card);
 	}
 }
