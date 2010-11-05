@@ -8,7 +8,7 @@ import javax.swing.JComponent;
 
 import mage.cards.CardDimensions;
 import mage.cards.MagePermanent;
-import mage.cards.interfaces.ActionCallback;
+import mage.cards.action.ActionCallback;
 import mage.view.PermanentView;
 import net.xeoh.plugins.base.Plugin;
 

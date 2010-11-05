@@ -52,6 +52,8 @@ import mage.view.AbilityView;
 import mage.view.CardView;
 import mage.view.StackAbilityView;
 
+import com.mortennobel.imagescaling.ResampleOp;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -297,6 +299,16 @@ public class ImageHelper {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Returns an image scaled to the size appropriate for the card picture
+	 * panel
+	 */
+	public static BufferedImage getResizedImage(BufferedImage original, int width, int height) {
+		ResampleOp resampleOp = new ResampleOp(width, height);
+		BufferedImage image = resampleOp.filter(original, null);
+		return image;
 	}
 
 }

@@ -42,6 +42,11 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.9</version>
 		</dependency>
+		<dependency>
+			<groupId>com.mortennobel</groupId>
+			<artifactId>java-image-scaling</artifactId>
+			<version>0.8.4</version>
+		</dependency>
 	</dependencies>
 
 	<build>

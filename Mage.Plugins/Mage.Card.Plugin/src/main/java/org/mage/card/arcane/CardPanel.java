@@ -10,9 +10,6 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
-import java.awt.event.ComponentEvent;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +21,7 @@ import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
 import mage.cards.MagePermanent;
-import mage.cards.interfaces.ActionCallback;
+import mage.cards.action.ActionCallback;
 import mage.utils.CardUtil;
 import mage.view.PermanentView;
 
@@ -132,10 +129,8 @@ public class CardPanel extends MagePermanent {
 				tappedAngle = gameCard.isTapped() ? CardPanel.TAPPED_ANGLE : 0;
 				
 				try {
-					log.info("loading image...");
+					log.info(gameCard.getCardNumber() + " " + gameCard.getName() + " " + gameCard.getExpansionSetCode());
 					BufferedImage srcImage = ImageIO.read(CardPanel.class.getClassLoader().getResourceAsStream("Mountain.40.full.jpg"));
-					srcImage = null;
-					log.info("done, image="+srcImage);
 					if (srcImage != null) {
 						//setImage(srcImage, ImageUtil.getBlurredImage(srcImage, 3, 1.0f));
 						hasImage = true;
@@ -153,7 +148,7 @@ public class CardPanel extends MagePermanent {
 		if (hasImage) {
 			titleText.setText("");
 		} else {
-			titleText.setText(card.getName() + card.getId());
+			titleText.setText(card.getName());
 		}
 	}
 
@@ -268,6 +263,9 @@ public class CardPanel extends MagePermanent {
 		}*/
 		
 		
+		//for debugging
+		// REMOVEME
+		/*
 		Point component = getLocation();
 		
 		int cx = getCardX() + component.x;
@@ -275,10 +273,9 @@ public class CardPanel extends MagePermanent {
 		int cw = getCardWidth();
 		int ch = getCardHeight();
 		
-		System.out.println("x="+component.x);
-		
 		g2d.setColor(Color.white);
 		g2d.drawRect(getCardX() - component.x, getCardY() - component.y, cw, ch);
+		*/
 	}
 
 	protected void paintChildren (Graphics g) {
@@ -488,7 +485,6 @@ public class CardPanel extends MagePermanent {
 		int cw = getCardWidth();
 		int ch = getCardHeight();
 		if (isTapped()) {
-			//log.info("tapped");
 			cy = ch - cw + cx /*+ attachedDy*attachedCount*/;
 			ch = cw;
 			cw = getCardHeight();
@@ -509,6 +505,11 @@ public class CardPanel extends MagePermanent {
 	@Override
 	public PermanentView getOriginal() {
 		return this.gameCard;
+	}
+
+	@Override
+	public Image getImage() {
+		return this.imagePanel.getSrcImage();
 	}
 
 }

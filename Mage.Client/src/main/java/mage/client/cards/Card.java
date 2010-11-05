@@ -50,6 +50,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
@@ -97,7 +98,7 @@ import mage.view.StackAbilityView;
 public class Card extends MagePermanent implements MouseMotionListener, MouseListener, FocusListener, ComponentListener {
 
 	protected static Session session = MageFrame.getSession();
-	protected static DefaultActionCallback callback = new DefaultActionCallback();
+	protected static DefaultActionCallback callback = DefaultActionCallback.getInstance();
 	
 	protected Point p;
 	protected CardDimensions dimension;
@@ -468,5 +469,10 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 	@Override
 	public void setCardBounds(int x, int y, int width, int height) {
 		throw new RuntimeException("Not implemented");
+	}
+
+	@Override
+	public Image getImage() {
+		return image;
 	}
 }

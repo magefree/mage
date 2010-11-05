@@ -172,6 +172,10 @@ public class ScaledImagePanel extends JPanel {
 		if (info.srcWidth / 2 < info.targetWidth || info.srcHeight / 2 < info.targetHeight) return srcImage;
 		return srcImageBlurred;
 	}
+	
+	public Image getSrcImage() {
+		return srcImage;
+	}
 
 	static private class ScalingInfo {
 		public int targetWidth;

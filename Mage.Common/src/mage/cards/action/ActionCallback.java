@@ -1,4 +1,4 @@
-package mage.cards.interfaces;
+package mage.cards.action;
 
 import java.awt.event.MouseEvent;
 

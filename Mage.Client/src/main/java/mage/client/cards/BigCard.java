@@ -53,10 +53,14 @@ public class BigCard extends javax.swing.JPanel {
 	protected Image bigImage;
 	protected UUID cardId;
 
-    public BigCard() {
+	public BigCard() {
         initComponents();
     }
 
+    public void removeTextComponent() {
+    	remove(this.scrollPane);
+    }
+    
 	public void setCard(UUID cardId, Image image, List<String> strings) {
 		if (this.cardId == null || !this.cardId.equals(cardId)) {
 			this.cardId = cardId;
@@ -66,6 +70,10 @@ public class BigCard extends javax.swing.JPanel {
 		}
 	}
 
+    public UUID getCardId() {
+		return cardId;
+	}
+    
 	private void drawText(java.util.List<String> strings) {
 		text.setText("");
 		StyledDocument doc = text.getStyledDocument();

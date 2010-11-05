@@ -1,19 +1,21 @@
 package org.mage.plugins.card;
 
+import java.awt.Color;
 import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.swing.BorderFactory;
 import javax.swing.JComponent;
+import javax.swing.JLayeredPane;
 import javax.swing.JScrollPane;
 
 import mage.cards.CardDimensions;
 import mage.cards.MagePermanent;
-import mage.cards.interfaces.ActionCallback;
+import mage.cards.action.ActionCallback;
 import mage.interfaces.plugin.CardPlugin;
 import mage.utils.CardUtil;
 import mage.view.PermanentView;
@@ -66,7 +68,7 @@ public class CardPluginImpl implements CardPlugin {
 	@Override
 	public MagePermanent getMagePermanent(PermanentView permanent, CardDimensions dimension, UUID gameId, ActionCallback callback) {
 		//log.debug("Card plugin: building mage permanent [w="+dimension.frameWidth+",h="+dimension.frameHeight+"]");
-		CardPanel cardPanel = new CardPanel(permanent, false, callback);
+		CardPanel cardPanel = new CardPanel(permanent, true, callback);
 		cardPanel.setShowCastingCost(true);
 		cardPanel.setCardBounds(0, 0, dimension.frameWidth, dimension.frameHeight);
 		//cardPanel.setBorder(BorderFactory.createLineBorder(Color.red));
@@ -78,12 +80,18 @@ public class CardPluginImpl implements CardPlugin {
 		if (ui == null)
 			throw new RuntimeException("Error: no components");
 		JComponent component = ui.get("jScrollPane");
+		JComponent component2 = ui.get("battlefieldPanel");
 		if (component == null)
 			throw new RuntimeException("Error: jScrollPane is missing");
+		if (component2 == null)
+			throw new RuntimeException("Error: battlefieldPanel is missing");
 		if (!(component instanceof JScrollPane))
 			throw new RuntimeException("Error: jScrollPane has wrong type.");
+		if (!(component instanceof JScrollPane))
+			throw new RuntimeException("Error: battlefieldPanel is missing");
 		
 		JScrollPane jScrollPane = (JScrollPane)component;
+		JLayeredPane battlefieldPanel = (JLayeredPane)component2;
 		
 		Row allLands = new Row();
 
@@ -203,11 +211,12 @@ public class CardPluginImpl implements CardPlugin {
 				for (int panelIndex = 0, panelCount = stack.size(); panelIndex < panelCount; panelIndex++) {
 					MagePermanent panel = stack.get(panelIndex);
 					int stackPosition = panelCount - panelIndex - 1;
-					//setComponentZOrder((Component)panel, panelIndex);
+					///setComponentZOrder((Component)panel, panelIndex);
 					int panelX = x + (stackPosition * stackSpacingX);
 					int panelY = y + (stackPosition * stackSpacingY);
-					///panel.setLocation(panelX, panelY);
-					panel.setCardBounds(panelX, panelY, cardWidth, cardHeight);
+					//panel.setLocation(panelX, panelY);
+					battlefieldPanel.moveToBack(panel);
+					panel.setCardBounds(panelX + 100, panelY+70, cardWidth, cardHeight);
 				}
 				rowBottom = Math.max(rowBottom, y + stack.getHeight());
 				x += stack.getWidth();

@@ -96,6 +96,8 @@ public class CardView implements Serializable {
 			this.rarity = card.getRarity();
 			this.expansionSetCode = card.getExpansionSetCode();
 		}
+		//TODO:remove me
+		//System.out.println("**** CARD NUMBER **** : " + card.getCardNumber() + " : " + card.getName() + " : " + card.getExpansionSetCode());
 		this.cardNumber = card.getCardNumber();
 		
 		if (card instanceof Spell) {

@@ -1,6 +1,5 @@
 package mage.client.plugins.impl;
 
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.Collection;
 import java.util.Map;
@@ -12,12 +11,10 @@ import javax.swing.JComponent;
 
 import mage.cards.CardDimensions;
 import mage.cards.MagePermanent;
-import mage.cards.interfaces.ActionCallback;
-import mage.client.MageFrame;
+import mage.cards.action.impl.EmptyCallback;
 import mage.client.cards.BigCard;
 import mage.client.cards.Permanent;
 import mage.client.plugins.MagePlugins;
-import mage.client.remote.Session;
 import mage.client.util.Config;
 import mage.client.util.DefaultActionCallback;
 import mage.constants.Constants;
@@ -36,7 +33,8 @@ public class Plugins implements MagePlugins {
 	private static PluginManager pm;
 	private final static Logger logger = Logging.getLogger(Plugins.class.getName());
 	private CardPlugin cardPlugin = null;
-	protected static DefaultActionCallback defaultCallback = new DefaultActionCallback();
+	protected static DefaultActionCallback defaultCallback = DefaultActionCallback.getInstance();
+	private static final EmptyCallback emptyCallback = new EmptyCallback();
 	
 	public static MagePlugins getInstance() {
 		return fINSTANCE;
@@ -68,16 +66,7 @@ public class Plugins implements MagePlugins {
 	@Override
 	public MagePermanent getMagePermanent(final PermanentView card, BigCard bigCard, CardDimensions dimension, final UUID gameId) {
 		if (cardPlugin != null) {
-			return cardPlugin.getMagePermanent(card, dimension, gameId, new ActionCallback() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					//defaultCallback.mouseClicked(e, gameId, MageFrame.getSession(), card);
-				}
-				@Override
-				public void mouseMoved(MouseEvent e) {
-					//defaultCallback.mouseClicked(e, gameId, MageFrame.getSession(), card);
-				}
-			});
+			return cardPlugin.getMagePermanent(card, dimension, gameId, emptyCallback);
 		} else {
 			return new Permanent(card, bigCard, Config.dimensions, gameId);
 		}

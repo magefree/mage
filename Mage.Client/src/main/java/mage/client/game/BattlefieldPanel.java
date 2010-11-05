@@ -36,9 +36,14 @@ package mage.client.game;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -49,11 +54,16 @@ import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 
 import mage.cards.MagePermanent;
+import mage.client.MageFrame;
 import mage.client.cards.BigCard;
+import mage.client.cards.Card;
 import mage.client.cards.Permanent;
+import mage.client.plugins.adapters.MageMouseAdapter;
+import mage.client.plugins.adapters.MageMouseMotionAdapter;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
 import mage.client.util.DefaultActionCallback;
+import mage.client.util.ImageHelper;
 import mage.view.PermanentView;
 
 /**
@@ -66,61 +76,32 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 	private UUID gameId;
 	private BigCard bigCard;
 	private Map<String, JComponent> ui = new HashMap<String, JComponent>();
-	
-	//TODO: made it singleton
-	protected static DefaultActionCallback defaultCallback = new DefaultActionCallback();
+
+	protected static DefaultActionCallback defaultCallback = DefaultActionCallback.getInstance();
 
     /** Creates new form BattlefieldPanel */
     public BattlefieldPanel(JScrollPane jScrollPane) {
     	ui.put("jScrollPane", jScrollPane);
+    	ui.put("battlefieldPanel", this);
         initComponents();
-        
-        /*addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (e.getButton() == MouseEvent.BUTTON1) {
-					int count = e.getClickCount();
-					//System.out.println("pressed");
-					if (count > 0) {
-						Object o = getComponentAt(e.getPoint());
-						//System.out.println("obj="+o);
-						//System.out.println("e: "+e.getX());
-						if (o instanceof MagePermanent) {
-							System.out.println("ok");
-							MagePermanent selectedCard = (MagePermanent) o;
-							//TODO: uncomment when attached cards works in plugin
-							/*
-							int x = e.getX() - selectedCard.getX();
-							int y = e.getY() - selectedCard.getY();
-							CardView card = selectedCard.getCardByPosition(x, y);
-							*/
-							/*defaultCallback.mouseClicked(e, gameId, MageFrame.getSession(), selectedCard.getOriginal());
-						}
-					}
-				}
-			}
-			@Override
-			public void mouseMoved(MouseEvent e) {
-				System.out.println("e: "+e.getX());
-				Object o = getComponentAt(e.getPoint());
-				if (o instanceof MagePermanent) {
-					MagePermanent card = (MagePermanent) o;
-					System.out.println("card: "+card.getOriginal().getId());
-					bigCard.setCard(card.getOriginal().getId(), null, card.getOriginal().getRules());
-				}
-			}
-		});*/
 
+        addMouseListener(new MageMouseAdapter(this, gameId));			
+        addMouseMotionListener(new MageMouseMotionAdapter(this, bigCard));
     }
 
 	public void init(UUID gameId, BigCard bigCard) {
 		this.gameId = gameId;
 		this.bigCard = bigCard;
+        if (Plugins.getInstance().isCardPluginLoaded()) {
+        	bigCard.removeTextComponent();
+        }
 	}
 
 	public void update(Map<UUID, PermanentView> battlefield) {
 		for (PermanentView permanent: battlefield.values()) {
 			if (!permanents.containsKey(permanent.getId())) {
+				//TODO: remove me
+				//System.out.println("Add permanent: " + permanent.getCardNumber());
 				addPermanent(permanent);
 			}
 			else {
