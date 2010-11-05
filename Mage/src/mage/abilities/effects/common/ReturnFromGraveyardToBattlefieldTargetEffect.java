@@ -41,42 +41,44 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect<ReturnSourceFromGraveyardToBattlefieldEffect> {
+public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect<ReturnFromGraveyardToBattlefieldTargetEffect> {
 
 	private boolean tapped;
 
-	public ReturnSourceFromGraveyardToBattlefieldEffect() {
+	public ReturnFromGraveyardToBattlefieldTargetEffect() {
 		this(false);
 	}
 
-	public ReturnSourceFromGraveyardToBattlefieldEffect(boolean tapped) {
+	public ReturnFromGraveyardToBattlefieldTargetEffect(boolean tapped) {
 		super(Outcome.PutCreatureInPlay);
 		this.tapped = tapped;
 	}
 
-	public ReturnSourceFromGraveyardToBattlefieldEffect(final ReturnSourceFromGraveyardToBattlefieldEffect effect) {
+	public ReturnFromGraveyardToBattlefieldTargetEffect(final ReturnFromGraveyardToBattlefieldTargetEffect effect) {
 		super(effect);
 		this.tapped = effect.tapped;
 	}
 
 	@Override
-	public ReturnSourceFromGraveyardToBattlefieldEffect copy() {
-		return new ReturnSourceFromGraveyardToBattlefieldEffect(this);
+	public ReturnFromGraveyardToBattlefieldTargetEffect copy() {
+		return new ReturnFromGraveyardToBattlefieldTargetEffect(this);
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		Card card = player.getGraveyard().get(source.getSourceId(), game);
+		Card card = game.getCard(source.getFirstTarget());
 		if (card != null) {
-			player.removeFromGraveyard(card, game);
-			if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getControllerId())) {
-				if (tapped) {
-					Permanent permanent = game.getPermanent(card.getId());
-					if (permanent != null)
-						permanent.setTapped(true);
+			Player player = game.getPlayer(card.getOwnerId());
+			if (player != null) {
+				player.removeFromGraveyard(card, game);
+				if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getControllerId())) {
+					if (tapped) {
+						Permanent permanent = game.getPermanent(card.getId());
+						if (permanent != null)
+							permanent.setTapped(true);
+					}
+					return true;
 				}
-				return true;
 			}
 		}
 		return false;
@@ -84,10 +86,12 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect<
 
 	@Override
 	public String getText(Ability source) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Put target ").append(source.getTargets().get(0).getTargetName()).append(" onto the battlefield");
 		if (tapped)
-			return "Return {this} from your graveyard to the battlefield tapped";
-		else
-			return "Return {this} from your graveyard to the battlefield";
+			sb.append(" tapped");
+		sb.append(" under your control");
+		return sb.toString();
 	}
 
 }

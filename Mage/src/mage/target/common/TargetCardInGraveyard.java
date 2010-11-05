@@ -56,7 +56,7 @@ public class TargetCardInGraveyard extends TargetCard<TargetCardInGraveyard> {
 
 	public TargetCardInGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
 		super(minNumTargets, maxNumTargets, Zone.HAND, filter);
-		this.targetName = filter.getMessage();
+		this.targetName = filter.getMessage() + " in a graveyard";
 	}
 
 	public TargetCardInGraveyard(final TargetCardInGraveyard target) {
@@ -65,8 +65,8 @@ public class TargetCardInGraveyard extends TargetCard<TargetCardInGraveyard> {
 
 	@Override
 	public boolean canTarget(UUID id, Ability source, Game game) {
-		Card card = game.getPlayer(source.getControllerId()).getGraveyard().get(id, game);
-		if (card != null)
+		Card card = game.getCard(id);
+		if (card != null && card.getZone() == Zone.GRAVEYARD)
 			return filter.match(card);
 		return false;
 	}

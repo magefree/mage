@@ -26,68 +26,55 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.target.common;
 
-import mage.Constants.Outcome;
+import java.util.UUID;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.target.TargetCard;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect<ReturnSourceFromGraveyardToBattlefieldEffect> {
+public class TargetCardInYourGraveyard extends TargetCard<TargetCardInYourGraveyard> {
 
-	private boolean tapped;
-
-	public ReturnSourceFromGraveyardToBattlefieldEffect() {
-		this(false);
+	public TargetCardInYourGraveyard() {
+		this(1, 1, new FilterCard());
 	}
 
-	public ReturnSourceFromGraveyardToBattlefieldEffect(boolean tapped) {
-		super(Outcome.PutCreatureInPlay);
-		this.tapped = tapped;
+	public TargetCardInYourGraveyard(FilterCard filter) {
+		this(1, 1, filter);
 	}
 
-	public ReturnSourceFromGraveyardToBattlefieldEffect(final ReturnSourceFromGraveyardToBattlefieldEffect effect) {
-		super(effect);
-		this.tapped = effect.tapped;
+	public TargetCardInYourGraveyard(int numTargets, FilterCard filter) {
+		this(numTargets, numTargets, filter);
+	}
+
+	public TargetCardInYourGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
+		super(minNumTargets, maxNumTargets, Zone.HAND, filter);
+		this.targetName = filter.getMessage() + " in your graveyard";
+	}
+
+	public TargetCardInYourGraveyard(final TargetCardInYourGraveyard target) {
+		super(target);
 	}
 
 	@Override
-	public ReturnSourceFromGraveyardToBattlefieldEffect copy() {
-		return new ReturnSourceFromGraveyardToBattlefieldEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		Card card = player.getGraveyard().get(source.getSourceId(), game);
-		if (card != null) {
-			player.removeFromGraveyard(card, game);
-			if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getControllerId())) {
-				if (tapped) {
-					Permanent permanent = game.getPermanent(card.getId());
-					if (permanent != null)
-						permanent.setTapped(true);
-				}
-				return true;
-			}
-		}
+	public boolean canTarget(UUID id, Ability source, Game game) {
+		Card card = game.getCard(id);
+		if (card != null && card.getZone() == Zone.GRAVEYARD)
+			if (game.getPlayer(source.getControllerId()).getGraveyard().contains(id))
+				return filter.match(card);
 		return false;
 	}
 
 	@Override
-	public String getText(Ability source) {
-		if (tapped)
-			return "Return {this} from your graveyard to the battlefield tapped";
-		else
-			return "Return {this} from your graveyard to the battlefield";
+	public TargetCardInYourGraveyard copy() {
+		return new TargetCardInYourGraveyard(this);
 	}
 
 }
