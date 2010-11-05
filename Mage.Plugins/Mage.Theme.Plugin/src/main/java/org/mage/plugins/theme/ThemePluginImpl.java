@@ -31,16 +31,16 @@ public class ThemePluginImpl implements ThemePlugin {
     }
 	
 	public String toString() {
-		return "[Theme plugin, version 0.1]";
+		return "[Theme plugin, version 0.2]";
 	}
 	
 	public void apply(Map<String, JComponent> ui) {
-		log.info("Adding background...");
+		//log.info("Adding background...");
 		try {
-			BufferedImage background = ImageIO.read(this.getClass().getResourceAsStream("/green.jpg"));
+			BufferedImage background = ImageIO.read(this.getClass().getResourceAsStream("/dk_gray.jpg"));
 			
 			if (background == null)
-				throw new FileNotFoundException("Couldn't find green.jpg in resources.");
+				throw new FileNotFoundException("Couldn't find dk_gray.jpg in resources.");
 			
 			if (ui.containsKey("gamePanel") && ui.containsKey("jLayeredPane")) {
 				ImagePanel bgPanel = new ImagePanel(background, ImagePanel.TILED);
@@ -62,7 +62,7 @@ public class ThemePluginImpl implements ThemePlugin {
 			return;
 		}
 		
-		log.info("Done.");
+		//log.info("Done.");
 	}
 	
 	private void unsetOpaque(JComponent c) {
