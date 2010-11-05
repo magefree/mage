@@ -58,7 +58,7 @@ public class RelentlessRats extends CardImpl<RelentlessRats> {
 	}
 
 	public RelentlessRats(UUID ownerId) {
-		super(ownerId, 0, "Relentless Rats", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
+		super(ownerId, 173, "Relentless Rats", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
 		this.expansionSetCode = "10E";
 		this.subtype.add("Rat");
 		this.color.setBlack(true);

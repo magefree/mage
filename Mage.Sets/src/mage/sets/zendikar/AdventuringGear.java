@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
 public class AdventuringGear extends CardImpl<AdventuringGear> {
 
 	public AdventuringGear(UUID ownerId) {
-		super(ownerId, 0, "Adventuring Gear", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
+		super(ownerId, 195, "Adventuring Gear", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
 		this.expansionSetCode = "ZEN";
 		this.subtype.add("Equipment");
 		this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));

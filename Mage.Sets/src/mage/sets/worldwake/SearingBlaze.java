@@ -54,7 +54,7 @@ import mage.watchers.WatcherImpl;
 public class SearingBlaze extends CardImpl<SearingBlaze> {
 
 	public SearingBlaze(UUID ownerId) {
-		super(ownerId, 0, "Searing Blaze", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}{R}");
+		super(ownerId, 90, "Searing Blaze", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}{R}");
 		this.expansionSetCode = "WWK";
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetPlayer());

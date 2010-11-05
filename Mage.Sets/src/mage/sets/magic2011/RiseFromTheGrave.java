@@ -26,41 +26,29 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.tenth;
+package mage.sets.magic2011;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.abilities.effects.common.BoostTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GiantGrowth extends CardImpl<GiantGrowth> {
+public class RiseFromTheGrave extends mage.sets.magic2010.RiseFromTheGrave {
 
-	public GiantGrowth(UUID ownerId) {
-		super(ownerId, 266, "Giant Growth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
-		this.expansionSetCode = "10E";
-		this.color.setGreen(true);
-		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-		this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
+	public RiseFromTheGrave(UUID ownerId) {
+		super(ownerId);
+		this.cardNumber = 114;
+		this.expansionSetCode = "M11";
 	}
 
-	public GiantGrowth(final GiantGrowth card) {
+	public RiseFromTheGrave(final RiseFromTheGrave card) {
 		super(card);
 	}
 
 	@Override
-	public GiantGrowth copy() {
-		return new GiantGrowth(this);
+	public RiseFromTheGrave copy() {
+		return new RiseFromTheGrave(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "101059_typ_reg_sty_010.jpg";
-	}
 }

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class GoblinPiker extends CardImpl<GoblinPiker> {
 
 	public GoblinPiker(UUID ownerId) {
-		super(ownerId, 0, "GoblinPiker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+		super(ownerId, 209, "GoblinPiker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
 		this.expansionSetCode = "10E";
 		this.subtype.add("Goblin");
 		this.subtype.add("Warrier");

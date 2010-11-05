@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public class DayOfJudgment extends CardImpl<DayOfJudgment> {
 
 	public DayOfJudgment(UUID ownerId) {
-		super(ownerId, 0, "Day of Judgment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
+		super(ownerId, 9, "Day of Judgment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
 		this.expansionSetCode = "ZEN";
 		this.color.setWhite(true);
 		this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent("creatures")));

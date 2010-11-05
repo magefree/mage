@@ -37,7 +37,6 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -52,7 +51,7 @@ import mage.game.events.GameEvent.EventType;
 public class PlatinumAngel extends CardImpl<PlatinumAngel> {
 
 	public PlatinumAngel(UUID ownerId) {
-		super(ownerId, 0, "Platinum Angel", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
+		super(ownerId, 339, "Platinum Angel", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
 		this.expansionSetCode = "10E";
 		this.subtype.add("Angel");
 		this.power = new MageInt(4);

@@ -41,8 +41,8 @@ import mage.target.TargetPlayer;
  */
 public class MindRot extends CardImpl<MindRot> {
 
-    public MindRot(UUID onwerId){
-        super(onwerId, "Mind Rot", Rarity.COMMON, new CardType[]{CardType.SORCERY},"{2}{B}");
+    public MindRot(UUID ownerId){
+        super(ownerId, 159, "Mind Rot", Rarity.COMMON, new CardType[]{CardType.SORCERY},"{2}{B}");
         this.expansionSetCode = "10E";
         this.color.setBlack(true);
         this.getSpellAbility().addTarget(new TargetPlayer());

@@ -26,22 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.sets.magic2011;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldStaticAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.BecomesCreatureSourceEOTEffect;
-import mage.abilities.effects.common.TapSourceEffect;
+import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.VigilanceAbility;
-import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
 
@@ -49,45 +43,46 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CelestialColonnade extends CardImpl<CelestialColonnade> {
+public class RocEgg extends CardImpl<RocEgg> {
 
-	public CelestialColonnade(UUID ownerId) {
-		super(ownerId, 133, "Celestial Colonnade", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "WWK";
-		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
-		this.addAbility(new BlueManaAbility());
-		this.addAbility(new WhiteManaAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new CelestialColonnadeToken(), "land"), new ManaCostsImpl("{3}{W}{U}")));
+	private static RocEggToken rocEggToken = new RocEggToken();
+
+	public RocEgg(UUID ownerId) {
+		super(ownerId, 25, "Roc Egg", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+		this.expansionSetCode = "M11";
+		this.subtype.add("Bird");
+		this.color.setWhite(true);
+		this.power = new MageInt(0);
+		this.toughness = new MageInt(3);
+
+		this.addAbility(DefenderAbility.getInstance());
+		this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new CreateTokenEffect(rocEggToken, 1), false));
 	}
 
-	public CelestialColonnade(final CelestialColonnade card) {
+	public RocEgg(final RocEgg card) {
 		super(card);
 	}
 
 	@Override
-	public CelestialColonnade copy() {
-		return new CelestialColonnade(this);
+	public RocEgg copy() {
+		return new RocEgg(this);
 	}
 
 	@Override
 	public String getArt() {
-		return "126518_typ_reg_sty_010.jpg";
+		return "";
 	}
 
 }
+class RocEggToken extends Token {
 
-class CelestialColonnadeToken extends Token {
-
-	public CelestialColonnadeToken() {
-		super("", "4/4 white and blue Elemental creature with flying and vigilance");
+	public RocEggToken() {
+		super("Bird", "3/3 white Bird creature token with flying");
 		cardType.add(CardType.CREATURE);
-		subtype.add("Elemental");
-		color.setBlue(true);
+		subtype.add("Bird");
 		color.setWhite(true);
-		power = new MageInt(4);
-		toughness = new MageInt(4);
+		power = new MageInt(3);
+		toughness = new MageInt(3);
 		addAbility(FlyingAbility.getInstance());
-		addAbility(VigilanceAbility.getInstance());
 	}
-
 }

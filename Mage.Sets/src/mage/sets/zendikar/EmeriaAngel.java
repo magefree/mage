@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
 public class EmeriaAngel extends CardImpl<EmeriaAngel> {
 
 	public EmeriaAngel(UUID ownerId) {
-		super(ownerId, 0, "Emeria Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+		super(ownerId, 11, "Emeria Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
 		this.expansionSetCode = "ZEN";
 		this.subtype.add("Angel");
 		this.color.setWhite(true);

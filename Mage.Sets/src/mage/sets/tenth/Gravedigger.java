@@ -36,7 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInGraveyard;
 public class Gravedigger extends CardImpl<Gravedigger> {
 
 	public Gravedigger(UUID ownerId) {
-		super(ownerId, 0, "Gravedigger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+		super(ownerId, 146, "Gravedigger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
 		this.expansionSetCode = "10E";
 		this.subtype.add("Zombie");
 		this.color.setBlack(true);
@@ -53,7 +53,7 @@ public class Gravedigger extends CardImpl<Gravedigger> {
 		this.toughness = new MageInt(3);
 
 		Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
-		ability.addTarget(new TargetCardInGraveyard());
+		ability.addTarget(new TargetCardInYourGraveyard());
 		this.addAbility(ability);
 	}
 

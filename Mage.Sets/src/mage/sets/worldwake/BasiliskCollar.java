@@ -48,7 +48,7 @@ import mage.cards.CardImpl;
 public class BasiliskCollar extends CardImpl<BasiliskCollar> {
 
 	public BasiliskCollar(UUID ownerId) {
-		super(ownerId, 0, "Basilisk Collar", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
+		super(ownerId, 122, "Basilisk Collar", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
 		this.expansionSetCode = "WWK";
 		this.subtype.add("Equipment");
 		this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));

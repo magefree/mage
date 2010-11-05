@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
@@ -43,7 +44,7 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class NaturesSpiral extends CardImpl<NaturesSpiral> {
 
-	private static FilterCard filter = new FilterCard("permanent card in your graveyard");
+	private static FilterCard filter = new FilterCard("permanent card");
 
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);
@@ -58,7 +59,7 @@ public class NaturesSpiral extends CardImpl<NaturesSpiral> {
 		super(ownerId, 196, "Nature's Spiral", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
 		this.expansionSetCode = "M10";
 		this.color.setGreen(true);
-		this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
+		this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
 		this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
 	}
 

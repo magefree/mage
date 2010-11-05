@@ -50,7 +50,7 @@ import mage.watchers.WatcherImpl;
 public class ArchiveTrap extends CardImpl<ArchiveTrap> {
 
 	public ArchiveTrap(UUID ownerId) {
-		super(ownerId, 0, "Archive Trap", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
+		super(ownerId, 41, "Archive Trap", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
 		this.expansionSetCode = "ZEN";
 		this.color.setBlue(true);
 		this.getSpellAbility().addTarget(new TargetOpponent());

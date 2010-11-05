@@ -57,7 +57,7 @@ public class JaceTheMindSculptor extends CardImpl<JaceTheMindSculptor> {
 
 
 	public JaceTheMindSculptor(UUID ownerId) {
-		super(ownerId, 0, "Jace, the Mind Sculptor", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");
+		super(ownerId, 31, "Jace, the Mind Sculptor", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");
 		this.expansionSetCode = "WWK";
 		this.subtype.add("Jace");
 		this.color.setBlue(true);

@@ -37,7 +37,7 @@ import java.util.UUID;
 public class Mountain1 extends mage.cards.basiclands.Mountain {
 
 	public Mountain1(UUID ownerId) {
-		super(ownerId, 0);
+		super(ownerId, 376);
 		this.expansionSetCode = "10E";
 	}
 

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class ProdigalPyromancer extends CardImpl<ProdigalPyromancer> {
 
 	public ProdigalPyromancer(UUID ownerId) {
-		super(ownerId, 0, "Prodigal Pyromancer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+		super(ownerId, 221, "Prodigal Pyromancer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
 		this.expansionSetCode = "10E";
 		this.subtype.add("Human");
 		this.subtype.add("Wizard");

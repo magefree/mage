@@ -34,8 +34,7 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
-import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
@@ -49,7 +48,7 @@ public class Disentomb extends CardImpl<Disentomb> {
 		super(ownerId, 92, "Disentomb", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
 		this.expansionSetCode = "M10";
 		this.color.setBlack(true);
-		this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
+		this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
 		this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
 	}
 

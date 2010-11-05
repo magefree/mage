@@ -32,7 +32,6 @@ import mage.abilities.effects.common.ReturnFromExileEffect;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;

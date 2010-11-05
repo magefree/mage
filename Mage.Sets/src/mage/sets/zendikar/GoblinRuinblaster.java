@@ -52,7 +52,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
 public class GoblinRuinblaster extends CardImpl<GoblinRuinblaster> {
 
 	public GoblinRuinblaster(UUID ownerId) {
-		super(ownerId, 0, "Goblin Ruinblaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+		super(ownerId, 127, "Goblin Ruinblaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
 		this.expansionSetCode = "ZEN";
 		this.color.setRed(true);
 		this.subtype.add("Goblin");

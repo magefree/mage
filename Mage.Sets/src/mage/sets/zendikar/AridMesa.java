@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class AridMesa extends CardImpl<AridMesa> {
 
 	public AridMesa(UUID ownerId) {
-		super(ownerId, 0, "Arid Mesa", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 211, "Arid Mesa", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ZEN";
 		this.addAbility(new FetchLandActivatedAbility(new String[] {"Mountain", "Plains"}));
 	}

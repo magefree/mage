@@ -47,7 +47,7 @@ import mage.game.permanent.token.Token;
 public class DreadStatuary extends CardImpl<DreadStatuary> {
 
 	public DreadStatuary(UUID ownerId) {
-		super(ownerId, 0, "Dread Statuary", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 135, "Dread Statuary", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "WWK";
 		this.addAbility(new ColorlessManaAbility());
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new DreadStatuaryToken(), "land"), new ManaCostsImpl("{4}")));

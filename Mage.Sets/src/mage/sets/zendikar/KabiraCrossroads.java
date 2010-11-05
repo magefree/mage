@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
 public class KabiraCrossroads extends CardImpl<KabiraCrossroads> {
 
 	public KabiraCrossroads(UUID ownerId) {
-		super(ownerId, 0, "Kabira Crossroads", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 216, "Kabira Crossroads", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ZEN";
 		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
 		this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2), false));

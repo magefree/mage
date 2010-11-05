@@ -42,7 +42,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -56,7 +56,7 @@ public class VengefulRebirth extends CardImpl<VengefulRebirth> {
 		this.expansionSetCode = "ARB";
 		this.color.setRed(true);
 		this.color.setGreen(true);
-		this.getSpellAbility().addTarget(new TargetCardInGraveyard());
+		this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
 		this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 		this.getSpellAbility().addEffect(new VengefulRebirthEffect());
 		this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());

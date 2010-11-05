@@ -41,8 +41,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class DiabolicTutor extends CardImpl<DiabolicTutor> {
 
-    public DiabolicTutor(UUID onwerId){
-        super(onwerId, "Diabolic Tutor", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT},"{2}{B}{B}");
+    public DiabolicTutor(UUID ownerId){
+        super(ownerId, 135, "Diabolic Tutor", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT},"{2}{B}{B}");
         this.expansionSetCode = "10E";
         this.color.setBlack(true);
         TargetCardInLibrary target = new TargetCardInLibrary();

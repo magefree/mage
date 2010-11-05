@@ -58,7 +58,7 @@ import mage.target.common.TargetControlledPermanent;
 public class EldraziMonument extends CardImpl<EldraziMonument> {
 
 	public EldraziMonument(UUID ownerId) {
-		super(ownerId, 0, "Eldrazi Monument", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{5}");
+		super(ownerId, 199, "Eldrazi Monument", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{5}");
 		this.expansionSetCode = "ZEN";
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, FilterCreaturePermanent.getDefault(), false)));
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, FilterCreaturePermanent.getDefault())));

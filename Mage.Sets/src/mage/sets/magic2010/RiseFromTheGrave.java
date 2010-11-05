@@ -26,104 +26,104 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.tenth;
+package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.Constants.SubLayer;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Pacifism extends CardImpl<Pacifism> {
+public class RiseFromTheGrave extends CardImpl<RiseFromTheGrave> {
 
-	public Pacifism(UUID ownerId) {
-		super(ownerId, 31, "Pacifism", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-		this.expansionSetCode = "10E";
-		this.color.setWhite(true);
-		this.subtype.add("Aura");
+	private static FilterCreatureCard filter = new FilterCreatureCard();
 
-		TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PacifismEffect()));
-
+	public RiseFromTheGrave(UUID ownerId) {
+		super(ownerId, 109, "Rise from the Grave", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
+		this.expansionSetCode = "M10";
+		this.color.setBlack(true);
+		this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
+		this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
+		this.getSpellAbility().addEffect(new RiseFromTheGraveEffect());
 	}
 
-	public Pacifism(final Pacifism card) {
+	public RiseFromTheGrave(final RiseFromTheGrave card) {
 		super(card);
 	}
 
 	@Override
-	public Pacifism copy() {
-		return new Pacifism(this);
+	public RiseFromTheGrave copy() {
+		return new RiseFromTheGrave(this);
 	}
 
 	@Override
 	public String getArt() {
-		return "01988_typ_reg_sty_010.jpg";
+		return "";
 	}
 }
 
-class PacifismEffect extends ReplacementEffectImpl<PacifismEffect> {
+class RiseFromTheGraveEffect extends ContinuousEffectImpl<RiseFromTheGraveEffect> {
 
-	public PacifismEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Detriment);
+	public RiseFromTheGraveEffect() {
+		super(Duration.WhileOnBattlefield, Outcome.Neutral);
 	}
 
-	public PacifismEffect(final PacifismEffect effect) {
+	public RiseFromTheGraveEffect(final RiseFromTheGraveEffect effect) {
 		super(effect);
 	}
 
 	@Override
-	public PacifismEffect copy() {
-		return new PacifismEffect(this);
+	public RiseFromTheGraveEffect copy() {
+		return new RiseFromTheGraveEffect(this);
 	}
 
 	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
-
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return true;
-	}
-
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			if (source.getSourceId().equals(enchantment.getAttachedTo())) {
-				if (event.getType() == EventType.DECLARE_ATTACKER || event.getType() == EventType.DECLARE_BLOCKER) {
-					return true;
-				}
+	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+		Permanent creature = game.getPermanent(source.getFirstTarget());
+		if (creature != null) {
+			switch (layer) {
+				case TypeChangingEffects_4:
+					if (sublayer == SubLayer.NA) {
+						creature.getSubtype().add("Zombie");
+					}
+					break;
+				case ColorChangingEffects_5:
+					if (sublayer == SubLayer.NA) {
+						creature.getColor().setBlack(true);
+					}
+					break;
 			}
+			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public String getText(Ability source) {
-		return "Enchanted creature can't attack or block";
+	public boolean apply(Game game, Ability source) {
+		return false;
 	}
 
+	@Override
+	public boolean hasLayer(Layer layer) {
+		return layer == Layer.ColorChangingEffects_5 || layer == layer.TypeChangingEffects_4;
+	}
+
+	@Override
+	public String getText(Ability source) {
+		return "That creature is a black Zombie in addition to its other colors and types.";
+	}
 }

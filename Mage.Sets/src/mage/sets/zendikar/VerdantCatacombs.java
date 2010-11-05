@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class VerdantCatacombs extends CardImpl<VerdantCatacombs> {
 
 	public VerdantCatacombs(UUID ownerId) {
-		super(ownerId, 0, "Verdant Catacombs", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 229, "Verdant Catacombs", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ZEN";
 		this.addAbility(new FetchLandActivatedAbility(new String[] {"Forest", "Swamp"}));
 	}

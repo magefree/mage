@@ -51,7 +51,7 @@ import mage.game.permanent.token.Token;
 public class StirringWildwood extends CardImpl<StirringWildwood> {
 
 	public StirringWildwood(UUID ownerId) {
-		super(ownerId, 0, "Stirring Wildwood", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 144, "Stirring Wildwood", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "WWK";
 		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
 		this.addAbility(new GreenManaAbility());

@@ -53,7 +53,7 @@ import mage.game.permanent.Permanent;
 public class OranRiefTheVastwood extends CardImpl<OranRiefTheVastwood> {
 
 	public OranRiefTheVastwood(UUID ownerId) {
-		super(ownerId, 0, "Oran-Rief, the Vastwood", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 221, "Oran-Rief, the Vastwood", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ZEN";
 		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
 		this.addAbility(new GreenManaAbility());

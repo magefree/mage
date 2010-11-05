@@ -51,8 +51,8 @@ public class Naturalize extends CardImpl<Naturalize> {
 		filter.setScopeColor(ComparisonScope.Any);
 	}
 
-	public Naturalize(UUID onwerId){
-		super(onwerId, "Naturalize", Rarity.COMMON, new CardType[]{CardType.INSTANT},"{1}{G}");
+	public Naturalize(UUID ownerId){
+		super(ownerId, 282, "Naturalize", Rarity.COMMON, new CardType[]{CardType.INSTANT},"{1}{G}");
 		this.expansionSetCode = "10E";
 		this.color.setGreen(true);
 		this.getSpellAbility().addTarget(new TargetPermanent(filter));

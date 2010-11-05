@@ -37,7 +37,8 @@ import java.util.UUID;
 public class Cancel extends mage.sets.shardsofalara.Cancel {
 
 	public Cancel(UUID ownerId) {
-		super(ownerId);this.cardNumber = 0;
+		super(ownerId);
+		this.cardNumber = 44;
 		this.expansionSetCode = "ZEN";
 	}
 

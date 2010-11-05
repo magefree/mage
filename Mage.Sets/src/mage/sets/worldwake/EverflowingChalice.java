@@ -50,7 +50,7 @@ import mage.game.Game;
 public class EverflowingChalice extends CardImpl<EverflowingChalice> {
 
 	public EverflowingChalice(UUID ownerId) {
-		super(ownerId, 0, "Everflowing Chalice", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
+		super(ownerId, 123, "Everflowing Chalice", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
 		this.expansionSetCode = "WWK";
 		MultikickerAbility ability = new MultikickerAbility(new AddCountersSourceEffect("charge", 1), false);
 		ability.addManaCost(new GenericManaCost(2));

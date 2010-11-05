@@ -52,7 +52,7 @@ import mage.game.permanent.token.Token;
 public class RagingRavine extends CardImpl<RagingRavine> {
 
 	public RagingRavine(UUID ownerId) {
-		super(ownerId, 0, "Raging Ravine", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 141, "Raging Ravine", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "WWK";
 		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
 		this.addAbility(new GreenManaAbility());

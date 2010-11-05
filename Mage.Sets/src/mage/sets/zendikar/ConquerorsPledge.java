@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
 public class ConquerorsPledge extends CardImpl<ConquerorsPledge> {
 
 	public ConquerorsPledge(UUID ownerId) {
-		super(ownerId, 0, "Conquerors Pledge", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}{W}");
+		super(ownerId, 8, "Conquerors Pledge", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}{W}");
 		this.expansionSetCode = "ZEN";
 		this.color.setWhite(true);
 		this.getSpellAbility().addEffect(new CreateTokenEffect(new KorSoldierToken(), 6));

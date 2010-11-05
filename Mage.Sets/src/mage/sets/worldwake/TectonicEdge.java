@@ -54,7 +54,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
 public class TectonicEdge extends CardImpl<TectonicEdge> {
 
 	public TectonicEdge(UUID ownerId) {
-		super(ownerId, 0, "Tectonic Edge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 145, "Tectonic Edge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "WWK";
 		this.addAbility(new ColorlessManaAbility());
 		Costs costs = new CostsImpl();

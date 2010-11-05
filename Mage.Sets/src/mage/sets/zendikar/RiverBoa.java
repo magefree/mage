@@ -55,7 +55,7 @@ public class RiverBoa extends CardImpl<RiverBoa> {
 	}
 
 	public RiverBoa(UUID ownerId) {
-		super(ownerId, 0, "River Boa", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+		super(ownerId, 180, "River Boa", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
 		this.expansionSetCode = "ZEN";
 		this.color.setGreen(true);
 		this.subtype.add("Snake");

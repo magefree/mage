@@ -54,7 +54,7 @@ public class ArborElf extends CardImpl<ArborElf> {
 	}
 
 	public ArborElf(UUID ownerId) {
-		super(ownerId, 0, "Arbor Elf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+		super(ownerId, 95, "Arbor Elf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
 		this.expansionSetCode = "WWK";
 		this.subtype.add("Elf");
 		this.subtype.add("Druid");

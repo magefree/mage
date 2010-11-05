@@ -48,7 +48,7 @@ import mage.game.events.GameEvent.EventType;
 public class ScuteMob extends CardImpl<ScuteMob> {
 
 	public ScuteMob(UUID ownerId) {
-		super(ownerId, 0, "Scute Mob", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
+		super(ownerId, 182, "Scute Mob", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
 		this.expansionSetCode = "ZEN";
 		this.color.setGreen(true);
 		this.subtype.add("Insect");
