@@ -64,6 +64,7 @@ public class CardView implements Serializable {
 	protected String art;
 	protected Rarity rarity;
 	protected String expansionSetCode;
+	protected int cardNumber;
 
 	public List<UUID> targets;
 	
@@ -95,6 +96,7 @@ public class CardView implements Serializable {
 			this.rarity = card.getRarity();
 			this.expansionSetCode = card.getExpansionSetCode();
 		}
+		this.cardNumber = card.getCardNumber();
 		
 		if (card instanceof Spell) {
 			Spell<?> spell = (Spell<?>)card;
@@ -202,6 +204,10 @@ public class CardView implements Serializable {
 
 	public UUID getId() {
 		return id;
+	}
+	
+	public int getCardNumber() {
+		return cardNumber;
 	}
 	
 	/**
