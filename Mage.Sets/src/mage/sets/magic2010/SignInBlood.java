@@ -29,26 +29,39 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.cards.CardImpl;
+import mage.target.TargetPlayer;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RoyalAssassin extends mage.sets.tenth.RoyalAssassin {
+public class SignInBlood extends CardImpl<SignInBlood> {
 
-	public RoyalAssassin(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 110;
+	public SignInBlood(UUID ownerId) {
+		super(ownerId, 112, "Sign in Blood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
 		this.expansionSetCode = "M10";
+		this.color.setBlack(true);
+		this.getSpellAbility().addTarget(new TargetPlayer());
+		this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));
+		this.getSpellAbility().addEffect(new LoseLifeTargetEffect(2));
 	}
 
-	public RoyalAssassin(final RoyalAssassin card) {
+	public SignInBlood(final SignInBlood card) {
 		super(card);
 	}
 
 	@Override
-	public RoyalAssassin copy() {
-		return new RoyalAssassin(this);
+	public SignInBlood copy() {
+		return new SignInBlood(this);
 	}
 
+	@Override
+	public String getArt() {
+		return "121620_typ_reg_sty_010.jpg";
+	}
 }

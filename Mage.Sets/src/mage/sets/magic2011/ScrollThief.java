@@ -26,29 +26,46 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.sets.magic2011;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.cards.CardImpl;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RoyalAssassin extends mage.sets.tenth.RoyalAssassin {
+public class ScrollThief extends CardImpl<ScrollThief> {
 
-	public RoyalAssassin(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 110;
-		this.expansionSetCode = "M10";
+	public ScrollThief(UUID ownerId) {
+		super(ownerId, 72, "Scroll Thief", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+		this.expansionSetCode = "M11";
+		this.subtype.add("Merfolk");
+		this.subtype.add("Rogue");
+		this.color.setBlue(true);
+		this.power = new MageInt(1);
+		this.toughness = new MageInt(3);
+
+		this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardControllerEffect(1), false));
 	}
 
-	public RoyalAssassin(final RoyalAssassin card) {
+	public ScrollThief(final ScrollThief card) {
 		super(card);
 	}
 
 	@Override
-	public RoyalAssassin copy() {
-		return new RoyalAssassin(this);
+	public ScrollThief copy() {
+		return new ScrollThief(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "129096_typ_reg_sty_010.jpg";
 	}
 
 }

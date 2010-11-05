@@ -26,21 +26,47 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.sets.tenth;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.Constants.Zone;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LokiX
  */
-public class RoyalAssassin extends mage.sets.tenth.RoyalAssassin {
+public class RoyalAssassin extends CardImpl<RoyalAssassin> {
 
-	public RoyalAssassin(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 110;
-		this.expansionSetCode = "M10";
+    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
+
+	static {
+		filter.setUseTapped(true);
+		filter.setTapped(true);
 	}
+
+    public RoyalAssassin(UUID ownerId){
+        super(ownerId, 174, "Royal Assassin", Rarity.RARE, new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+        this.expansionSetCode = "10E";
+        this.color.setBlack(true);
+        this.subtype.add("Human");
+        this.subtype.add("Assassin");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
+		ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
 
 	public RoyalAssassin(final RoyalAssassin card) {
 		super(card);
@@ -51,4 +77,8 @@ public class RoyalAssassin extends mage.sets.tenth.RoyalAssassin {
 		return new RoyalAssassin(this);
 	}
 
+	@Override
+	public String getArt() {
+		return "48786_typ_reg_sty_010.jpg";
+	}
 }

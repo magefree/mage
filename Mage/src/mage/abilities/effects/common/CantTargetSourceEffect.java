@@ -85,7 +85,7 @@ public class CantTargetSourceEffect extends ReplacementEffectImpl<CantTargetSour
 	@Override
 	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("{this} can't be the targets of ");
+		sb.append("{this} can't be the target of ");
 		sb.append(filterSource.getMessage());
 		sb.append(" ").append(duration.toString());
 		return sb.toString();

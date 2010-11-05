@@ -29,26 +29,39 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.cards.CardImpl;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RoyalAssassin extends mage.sets.tenth.RoyalAssassin {
+public class RuneclawBear extends CardImpl<RuneclawBear> {
 
-	public RoyalAssassin(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 110;
+	public RuneclawBear(UUID ownerId) {
+		super(ownerId, 203, "Runeclaw Bear", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
 		this.expansionSetCode = "M10";
+		this.subtype.add("Bear");
+		this.color.setGreen(true);
+		this.power = new MageInt(2);
+		this.toughness = new MageInt(2);
+
 	}
 
-	public RoyalAssassin(final RoyalAssassin card) {
+	public RuneclawBear(final RuneclawBear card) {
 		super(card);
 	}
 
 	@Override
-	public RoyalAssassin copy() {
-		return new RoyalAssassin(this);
+	public RuneclawBear copy() {
+		return new RuneclawBear(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "121566_typ_reg_sty_010.jpg";
 	}
 
 }

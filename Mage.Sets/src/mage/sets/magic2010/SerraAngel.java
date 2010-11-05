@@ -29,26 +29,28 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
+import mage.Constants.Rarity;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RoyalAssassin extends mage.sets.tenth.RoyalAssassin {
+public class SerraAngel extends mage.sets.tenth.SerraAngel {
 
-	public RoyalAssassin(UUID ownerId) {
+	public SerraAngel(UUID ownerId) {
 		super(ownerId);
-		this.cardNumber = 110;
+		this.rarity = Rarity.UNCOMMON;
+		this.cardNumber = 29;
 		this.expansionSetCode = "M10";
 	}
 
-	public RoyalAssassin(final RoyalAssassin card) {
+	public SerraAngel(final SerraAngel card) {
 		super(card);
 	}
 
 	@Override
-	public RoyalAssassin copy() {
-		return new RoyalAssassin(this);
+	public SerraAngel copy() {
+		return new SerraAngel(this);
 	}
 
 }

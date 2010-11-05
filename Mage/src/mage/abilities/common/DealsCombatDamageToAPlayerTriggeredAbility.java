@@ -26,29 +26,49 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.abilities.common;
 
-import java.util.UUID;
+import mage.Constants.Zone;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+import mage.target.TargetPlayer;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RoyalAssassin extends mage.sets.tenth.RoyalAssassin {
+public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl<DealsCombatDamageToAPlayerTriggeredAbility> {
 
-	public RoyalAssassin(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 110;
-		this.expansionSetCode = "M10";
+	public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional) {
+		super(Zone.BATTLEFIELD, effect, optional);
 	}
 
-	public RoyalAssassin(final RoyalAssassin card) {
-		super(card);
+	public DealsCombatDamageToAPlayerTriggeredAbility(final DealsCombatDamageToAPlayerTriggeredAbility ability) {
+		super(ability);
 	}
 
 	@Override
-	public RoyalAssassin copy() {
-		return new RoyalAssassin(this);
+	public DealsCombatDamageToAPlayerTriggeredAbility copy() {
+		return new DealsCombatDamageToAPlayerTriggeredAbility(this);
+	}
+
+	@Override
+	public boolean checkTrigger(GameEvent event, Game game) {
+		if (event.getType() == EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)) {
+			this.addTarget(new TargetPlayer());
+			this.targets.get(0).add(event.getPlayerId(), game);
+			trigger(game, event.getPlayerId());
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public String getRule() {
+		return "Whenever {this} deals combat damage to a player, " + super.getRule();
 	}
 
 }

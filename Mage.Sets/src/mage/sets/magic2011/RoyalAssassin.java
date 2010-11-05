@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.sets.magic2011;
 
 import java.util.UUID;
 
@@ -38,8 +38,8 @@ public class RoyalAssassin extends mage.sets.tenth.RoyalAssassin {
 
 	public RoyalAssassin(UUID ownerId) {
 		super(ownerId);
-		this.cardNumber = 110;
-		this.expansionSetCode = "M10";
+		this.cardNumber = 116;
+		this.expansionSetCode = "M11";
 	}
 
 	public RoyalAssassin(final RoyalAssassin card) {

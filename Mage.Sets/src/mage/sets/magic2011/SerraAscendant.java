@@ -30,92 +30,108 @@ package mage.sets.magic2011;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.SubLayer;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.LandwalkAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.filter.Filter.ComparisonScope;
-import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MerfolkSpy extends CardImpl<MerfolkSpy> {
+public class SerraAscendant extends CardImpl<SerraAscendant> {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent("Island");
-
-	static {
-		filter.getSubtype().add("Island");
-		filter.setScopeSubtype(ComparisonScope.Any);
-	}
-
-	public MerfolkSpy(UUID ownerId) {
-		super(ownerId, 66, "Merfolk Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
+	public SerraAscendant(UUID ownerId) {
+		super(ownerId, 28, "Serra Ascendant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}");
 		this.expansionSetCode = "M11";
-		this.subtype.add("Merfolk");
-		this.subtype.add("Rogue");
-		this.color.setBlue(true);
+		this.subtype.add("Human");
+		this.subtype.add("Monk");
+		this.color.setWhite(true);
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
 
-		this.addAbility(new LandwalkAbility(filter));
-		this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MerfolkSpyEffect(), false));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SerraAscendantEffect()));
 	}
 
-	public MerfolkSpy(final MerfolkSpy card) {
+	public SerraAscendant(final SerraAscendant card) {
 		super(card);
 	}
 
 	@Override
-	public MerfolkSpy copy() {
-		return new MerfolkSpy(this);
+	public SerraAscendant copy() {
+		return new SerraAscendant(this);
 	}
 
 	@Override
 	public String getArt() {
-		return "129100_typ_reg_sty_010.jpg";
+		return "129083_typ_reg_sty_010.jpg";
 	}
 
 }
 
-class MerfolkSpyEffect extends OneShotEffect<MerfolkSpyEffect> {
+class SerraAscendantEffect extends ContinuousEffectImpl<SerraAscendantEffect> {
 
-	public MerfolkSpyEffect() {
-		super(Outcome.Detriment);
+	public SerraAscendantEffect() {
+		super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
 	}
 
-	public MerfolkSpyEffect(final MerfolkSpyEffect effect) {
+	public SerraAscendantEffect(final SerraAscendantEffect effect) {
 		super(effect);
 	}
 
 	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null && player.getHand().size() > 0) {
-			Cards revealed = new CardsImpl();
-			revealed.add(player.getHand().getRandom(game));
-			player.revealCards(revealed, game);
-			return true;
+	public SerraAscendantEffect copy() {
+		return new SerraAscendantEffect(this);
+	}
+
+	@Override
+	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+		Permanent creature = game.getPermanent(source.getSourceId());
+		if (creature != null) {
+			Player player = game.getPlayer(creature.getControllerId());
+			if (player != null && player.getLife() >= 30) {
+				switch (layer) {
+					case PTChangingEffects_7:
+						if (sublayer == SubLayer.ModifyPT_7c) {
+							creature.addPower(5);
+							creature.addToughness(5);
+						}
+						break;
+					case AbilityAddingRemovingEffects_6:
+						if (sublayer == SubLayer.NA) {
+							creature.addAbility(FlyingAbility.getInstance());
+						}
+						break;
+				}
+				return true;
+			}
 		}
 		return false;
 	}
 
 	@Override
-	public MerfolkSpyEffect copy() {
-		return new MerfolkSpyEffect(this);
+	public boolean apply(Game game, Ability source) {
+		return false;
+	}
+
+	@Override
+	public boolean hasLayer(Layer layer) {
+		return layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
 	}
 
 	@Override
 	public String getText(Ability source) {
-		return "that player reveals a card at random from his or her hand";
+		return "As long as you have 30 or more life, Serra Ascendant gets +5/+5 and has flying";
 	}
 }

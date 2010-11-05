@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.sets.magic2011;
 
 import java.util.UUID;
 import mage.Constants.CardType;
@@ -35,79 +35,95 @@ import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.SubLayer;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.BoostEnchantedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RiseFromTheGrave extends CardImpl<RiseFromTheGrave> {
+public class ShivsEmbrace extends CardImpl<ShivsEmbrace> {
 
-	private static FilterCreatureCard filter = new FilterCreatureCard();
+	public ShivsEmbrace(UUID ownerId) {
+		super(ownerId, 156, "Shiv's Embrace", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
+		this.expansionSetCode = "M11";
+		this.color.setRed(true);
+		this.subtype.add("Aura");
 
-	public RiseFromTheGrave(UUID ownerId) {
-		super(ownerId, 109, "Rise from the Grave", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
-		this.expansionSetCode = "M10";
-		this.color.setBlack(true);
-		this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
-		this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
-		this.getSpellAbility().addEffect(new RiseFromTheGraveEffect());
+		TargetPermanent auraTarget = new TargetCreaturePermanent();
+		this.getSpellAbility().addTarget(auraTarget);
+		this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+		Ability ability = new EnchantAbility(auraTarget.getTargetName());
+		this.addAbility(ability);
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ShivsEmbraceEffect()));
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+
 	}
 
-	public RiseFromTheGrave(final RiseFromTheGrave card) {
+	public ShivsEmbrace(final ShivsEmbrace card) {
 		super(card);
 	}
 
 	@Override
-	public RiseFromTheGrave copy() {
-		return new RiseFromTheGrave(this);
+	public ShivsEmbrace copy() {
+		return new ShivsEmbrace(this);
 	}
 
 	@Override
 	public String getArt() {
-		return "121611_typ_reg_sty_010.jpg";
+		return "129169_typ_reg_sty_010.jpg";
 	}
 }
 
-class RiseFromTheGraveEffect extends ContinuousEffectImpl<RiseFromTheGraveEffect> {
+class ShivsEmbraceEffect extends ContinuousEffectImpl<ShivsEmbraceEffect> {
 
-	public RiseFromTheGraveEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Neutral);
+	public ShivsEmbraceEffect() {
+		super(Duration.WhileOnBattlefield, Outcome.Detriment);
 	}
 
-	public RiseFromTheGraveEffect(final RiseFromTheGraveEffect effect) {
+	public ShivsEmbraceEffect(final ShivsEmbraceEffect effect) {
 		super(effect);
 	}
 
 	@Override
-	public RiseFromTheGraveEffect copy() {
-		return new RiseFromTheGraveEffect(this);
+	public ShivsEmbraceEffect copy() {
+		return new ShivsEmbraceEffect(this);
 	}
 
 	@Override
 	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent creature = game.getPermanent(source.getFirstTarget());
-		if (creature != null) {
-			switch (layer) {
-				case TypeChangingEffects_4:
-					if (sublayer == SubLayer.NA) {
-						creature.getSubtype().add("Zombie");
-					}
-					break;
-				case ColorChangingEffects_5:
-					if (sublayer == SubLayer.NA) {
-						creature.getColor().setBlack(true);
-					}
-					break;
+		Permanent enchantment = game.getPermanent(source.getSourceId());
+		if (enchantment != null && enchantment.getAttachedTo() != null) {
+			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
+			if (creature != null) {
+				switch (layer) {
+					case PTChangingEffects_7:
+						if (sublayer == SubLayer.ModifyPT_7c) {
+							creature.addPower(2);
+							creature.addToughness(2);
+						}
+						break;
+					case AbilityAddingRemovingEffects_6:
+						if (sublayer == SubLayer.NA) {
+							creature.addAbility(FlyingAbility.getInstance());
+						}
+						break;
+				}
+				return true;
 			}
-			return true;
 		}
 		return false;
 	}
@@ -119,11 +135,11 @@ class RiseFromTheGraveEffect extends ContinuousEffectImpl<RiseFromTheGraveEffect
 
 	@Override
 	public boolean hasLayer(Layer layer) {
-		return layer == Layer.ColorChangingEffects_5 || layer == layer.TypeChangingEffects_4;
+		return layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
 	}
 
 	@Override
 	public String getText(Ability source) {
-		return "That creature is a black Zombie in addition to its other colors and types.";
+		return "Enchanted creature gets +2/+2 and has flying";
 	}
 }

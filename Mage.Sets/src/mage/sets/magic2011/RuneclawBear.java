@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.sets.magic2011;
 
 import java.util.UUID;
 
@@ -34,21 +34,21 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RoyalAssassin extends mage.sets.tenth.RoyalAssassin {
+public class RuneclawBear extends mage.sets.magic2010.RuneclawBear {
 
-	public RoyalAssassin(UUID ownerId) {
+	public RuneclawBear(UUID ownerId) {
 		super(ownerId);
-		this.cardNumber = 110;
-		this.expansionSetCode = "M10";
+		this.cardNumber = 195;
+		this.expansionSetCode = "M11";
 	}
 
-	public RoyalAssassin(final RoyalAssassin card) {
+	public RuneclawBear(final RuneclawBear card) {
 		super(card);
 	}
 
 	@Override
-	public RoyalAssassin copy() {
-		return new RoyalAssassin(this);
+	public RuneclawBear copy() {
+		return new RuneclawBear(this);
 	}
 
 }

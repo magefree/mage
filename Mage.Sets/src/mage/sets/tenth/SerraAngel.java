@@ -26,29 +26,46 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.sets.tenth;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.VigilanceAbility;
+import mage.cards.CardImpl;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RoyalAssassin extends mage.sets.tenth.RoyalAssassin {
+public class SerraAngel extends CardImpl<SerraAngel> {
 
-	public RoyalAssassin(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 110;
-		this.expansionSetCode = "M10";
+	public SerraAngel(UUID ownerId) {
+		super(ownerId, 39, "Serra Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+		this.expansionSetCode = "10E";
+		this.subtype.add("Angel");
+		this.color.setWhite(true);
+		this.power = new MageInt(4);
+		this.toughness = new MageInt(4);
+
+		this.addAbility(FlyingAbility.getInstance());
+		this.addAbility(VigilanceAbility.getInstance());
 	}
 
-	public RoyalAssassin(final RoyalAssassin card) {
+	public SerraAngel(final SerraAngel card) {
 		super(card);
 	}
 
 	@Override
-	public RoyalAssassin copy() {
-		return new RoyalAssassin(this);
+	public SerraAngel copy() {
+		return new SerraAngel(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "86905_typ_reg_sty_010.jpg";
 	}
 
 }

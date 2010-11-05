@@ -26,29 +26,56 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.sets.magic2011;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Rarity;
+import mage.Constants.TargetController;
+import mage.Constants.Zone;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.CantTargetSourceEffect;
+import mage.cards.CardImpl;
+import mage.filter.FilterStackObject;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RoyalAssassin extends mage.sets.tenth.RoyalAssassin {
+public class SacredWolf extends CardImpl<SacredWolf> {
 
-	public RoyalAssassin(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 110;
-		this.expansionSetCode = "M10";
+	private static FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
+
+	static {
+		filter.setTargetController(TargetController.OPPONENT);
 	}
 
-	public RoyalAssassin(final RoyalAssassin card) {
+	public SacredWolf(UUID ownerId) {
+		super(ownerId, 196, "Sacred Wolf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+		this.expansionSetCode = "M11";
+		this.subtype.add("Wolf");
+		this.color.setGreen(true);
+		this.power = new MageInt(3);
+		this.toughness = new MageInt(1);
+
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantTargetSourceEffect(filter, Duration.WhileOnBattlefield)));
+	}
+
+	public SacredWolf(final SacredWolf card) {
 		super(card);
 	}
 
 	@Override
-	public RoyalAssassin copy() {
-		return new RoyalAssassin(this);
+	public SacredWolf copy() {
+		return new SacredWolf(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "129113_typ_reg_sty_010.jpg";
 	}
 
 }
+

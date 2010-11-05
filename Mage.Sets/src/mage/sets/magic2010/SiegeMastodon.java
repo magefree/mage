@@ -29,26 +29,39 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.cards.CardImpl;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RoyalAssassin extends mage.sets.tenth.RoyalAssassin {
+public class SiegeMastodon extends CardImpl<SiegeMastodon> {
 
-	public RoyalAssassin(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 110;
+	public SiegeMastodon(UUID ownerId) {
+		super(ownerId, 30, "Siege Mastodon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
 		this.expansionSetCode = "M10";
+		this.subtype.add("Elephant");
+		this.color.setWhite(true);
+		this.power = new MageInt(3);
+		this.toughness = new MageInt(5);
+
 	}
 
-	public RoyalAssassin(final RoyalAssassin card) {
+	public SiegeMastodon(final SiegeMastodon card) {
 		super(card);
 	}
 
 	@Override
-	public RoyalAssassin copy() {
-		return new RoyalAssassin(this);
+	public SiegeMastodon copy() {
+		return new SiegeMastodon(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123434_typ_reg_sty_010.jpg";
 	}
 
 }

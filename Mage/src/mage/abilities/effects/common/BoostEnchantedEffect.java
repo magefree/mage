@@ -26,29 +26,63 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.abilities.effects.common;
 
-import java.util.UUID;
+import mage.Constants.Duration;
+import mage.Constants.Layer;
+import mage.Constants.Outcome;
+import mage.Constants.SubLayer;
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RoyalAssassin extends mage.sets.tenth.RoyalAssassin {
+public class BoostEnchantedEffect extends ContinuousEffectImpl<BoostEnchantedEffect> {
 
-	public RoyalAssassin(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 110;
-		this.expansionSetCode = "M10";
+	private int power;
+	private int toughness;
+
+	public BoostEnchantedEffect(int power, int toughness, Duration duration) {
+		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+		this.power = power;
+		this.toughness = toughness;
 	}
 
-	public RoyalAssassin(final RoyalAssassin card) {
-		super(card);
+	public BoostEnchantedEffect(final BoostEnchantedEffect effect) {
+		super(effect);
+		this.power = effect.power;
+		this.toughness = effect.toughness;
 	}
 
 	@Override
-	public RoyalAssassin copy() {
-		return new RoyalAssassin(this);
+	public BoostEnchantedEffect copy() {
+		return new BoostEnchantedEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent enchantment = game.getPermanent(source.getSourceId());
+		if (enchantment != null && enchantment.getAttachedTo() != null) {
+			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
+			if (creature != null) {
+				creature.addPower(power);
+				creature.addToughness(toughness);
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public String getText(Ability source) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Enchanted creatures gets ").append(String.format("%1$+d/%2$+d", power, toughness));
+		if (duration != Duration.WhileOnBattlefield)
+			sb.append(" ").append(duration.toString());
+		return sb.toString();
 	}
 
 }

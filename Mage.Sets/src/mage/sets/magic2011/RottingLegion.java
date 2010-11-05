@@ -26,29 +26,45 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.sets.magic2011;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldStaticAbility;
+import mage.abilities.effects.common.TapSourceEffect;
+import mage.cards.CardImpl;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RoyalAssassin extends mage.sets.tenth.RoyalAssassin {
+public class RottingLegion extends CardImpl<RottingLegion> {
 
-	public RoyalAssassin(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 110;
-		this.expansionSetCode = "M10";
+	public RottingLegion(UUID ownerId) {
+		super(ownerId, 115, "Rotting Legion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
+		this.expansionSetCode = "M11";
+		this.subtype.add("Zombie");
+		this.color.setBlack(true);
+		this.power = new MageInt(4);
+		this.toughness = new MageInt(5);
+
+		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
 	}
 
-	public RoyalAssassin(final RoyalAssassin card) {
+	public RottingLegion(final RottingLegion card) {
 		super(card);
 	}
 
 	@Override
-	public RoyalAssassin copy() {
-		return new RoyalAssassin(this);
+	public RottingLegion copy() {
+		return new RottingLegion(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "129136_typ_reg_sty_010.jpg";
 	}
 
 }
