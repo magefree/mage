@@ -24,6 +24,7 @@ public class MageMouseMotionAdapter extends MouseMotionAdapter {
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		if (!Plugins.getInstance().isCardPluginLoaded()) return;
+		if (bigCard == null) return;
 		Object o = parent.getComponentAt(e.getPoint());
 		if (o instanceof MagePermanent) {
 			MagePermanent card = (MagePermanent) o;

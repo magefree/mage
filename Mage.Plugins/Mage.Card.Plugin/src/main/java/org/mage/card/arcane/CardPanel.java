@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
@@ -28,6 +27,8 @@ import mage.view.PermanentView;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ScaledImagePanel.MultipassType;
 import org.mage.card.arcane.ScaledImagePanel.ScalingType;
+import org.mage.plugins.card.images.ImageCache;
+
 
 @SuppressWarnings({"unchecked","rawtypes"})
 public class CardPanel extends MagePermanent {
@@ -125,21 +126,15 @@ public class CardPanel extends MagePermanent {
 		
 		Util.threadPool.submit(new Runnable() {
 			public void run () {
-				//BufferedImage srcImage = null; //TODO: ImageCache.getImageOriginal(gameCard);
-				tappedAngle = gameCard.isTapped() ? CardPanel.TAPPED_ANGLE : 0;
-				
-				try {
-					log.info(gameCard.getCardNumber() + " " + gameCard.getName() + " " + gameCard.getExpansionSetCode());
-					BufferedImage srcImage = ImageIO.read(CardPanel.class.getClassLoader().getResourceAsStream("Mountain.40.full.jpg"));
+					tappedAngle = gameCard.isTapped() ? CardPanel.TAPPED_ANGLE : 0;
+					BufferedImage srcImage = ImageCache.getImageOriginal(gameCard);
 					if (srcImage != null) {
 						//setImage(srcImage, ImageUtil.getBlurredImage(srcImage, 3, 1.0f));
 						hasImage = true;
 						setText(gameCard);
 						setImage(srcImage, srcImage);
 					}
-				} catch (IOException io) {
-					io.printStackTrace();
-				}
+				
 			}
 		});
 	}
@@ -424,7 +419,7 @@ public class CardPanel extends MagePermanent {
 
 	@Override
 	public boolean isTapped() {
-		return false;
+		return gameCard.isTapped();
 	}
 
 	@Override

@@ -2,14 +2,18 @@ package mage.client.plugins.impl;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JComponent;
 
+import mage.cards.Card;
 import mage.cards.CardDimensions;
+import mage.cards.ExpansionSet;
 import mage.cards.MagePermanent;
 import mage.cards.action.impl.EmptyCallback;
 import mage.client.cards.BigCard;
@@ -20,6 +24,7 @@ import mage.client.util.DefaultActionCallback;
 import mage.constants.Constants;
 import mage.interfaces.plugin.CardPlugin;
 import mage.interfaces.plugin.ThemePlugin;
+import mage.sets.Sets;
 import mage.util.Logging;
 import mage.view.PermanentView;
 import net.xeoh.plugins.base.PluginManager;
@@ -80,5 +85,10 @@ public class Plugins implements MagePlugins {
 	@Override
 	public void sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents) {
 		if (this.cardPlugin != null) this.cardPlugin.sortPermanents(ui, permanents);
+	}
+
+	@Override
+	public void downloadImage(Set<Card> allCards) {
+		if (this.cardPlugin != null) this.cardPlugin.downloadImages(allCards);
 	}
 }

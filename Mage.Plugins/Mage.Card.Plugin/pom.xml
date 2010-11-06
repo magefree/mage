@@ -18,8 +18,8 @@
 
 	<dependencies>
 		<dependency>
-  			<groupId>org.mage</groupId>
-  			<artifactId>Mage-Common</artifactId>
+			<groupId>org.mage</groupId>
+			<artifactId>Mage-Common</artifactId>
 			<version>${mage-version}</version>
 		</dependency>
 		<dependency>
@@ -31,6 +31,18 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.9</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.collections</groupId>
+			<artifactId>google-collections</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.mortennobel</groupId>
+			<artifactId>java-image-scaling</artifactId>
+			<version>0.8.4</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

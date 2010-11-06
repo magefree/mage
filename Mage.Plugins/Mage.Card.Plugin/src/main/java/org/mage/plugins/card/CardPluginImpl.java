@@ -1,18 +1,18 @@
 package org.mage.plugins.card;
 
-import java.awt.Color;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
-import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
 import javax.swing.JScrollPane;
 
+import mage.cards.Card;
 import mage.cards.CardDimensions;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
@@ -27,7 +27,14 @@ import net.xeoh.plugins.base.annotations.meta.Author;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardPanel;
 import org.mage.plugins.card.constants.Constants;
+import org.mage.plugins.card.images.DownloadPictures;
 
+/**
+ * {@link CardPlugin} implementation.
+ * 
+ * @version 0.1 01.11.2010
+ * @author nantuko
+ */
 @PluginImplementation
 @Author(name = "nantuko")
 public class CardPluginImpl implements CardPlugin {
@@ -62,7 +69,7 @@ public class CardPluginImpl implements CardPlugin {
 	}
 
 	public String toString() {
-		return "[Card plugin, version 0.1]";
+		return "[Card plugin, version 0.2]";
 	}
 
 	@Override
@@ -216,7 +223,7 @@ public class CardPluginImpl implements CardPlugin {
 					int panelY = y + (stackPosition * stackSpacingY);
 					//panel.setLocation(panelX, panelY);
 					battlefieldPanel.moveToBack(panel);
-					panel.setCardBounds(panelX + 100, panelY+70, cardWidth, cardHeight);
+					panel.setCardBounds(panelX, panelY, cardWidth, cardHeight);
 				}
 				rowBottom = Math.max(rowBottom, y + stack.getHeight());
 				x += stack.getWidth();
@@ -370,5 +377,8 @@ public class CardPluginImpl implements CardPlugin {
 		}
 	}
 
-
+	@Override
+	public void downloadImages(Set<Card> allCards) {
+		DownloadPictures.startDownload(null, allCards);
+	}
 }

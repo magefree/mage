@@ -37,19 +37,24 @@ package mage.client;
 import java.awt.Cursor;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 
 import javax.swing.Box;
+import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
+import javax.swing.JToolBar.Separator;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import mage.cards.Card;
+import mage.cards.ExpansionSet;
 import mage.client.dialog.AboutDialog;
 import mage.client.dialog.CombatDialog;
 import mage.client.dialog.ConnectDialog;
@@ -57,11 +62,8 @@ import mage.client.dialog.PickNumberDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.remote.Session;
 import mage.client.util.EDTExceptionHandler;
-import mage.interfaces.plugin.ThemePlugin;
+import mage.sets.Sets;
 import mage.util.Logging;
-import net.xeoh.plugins.base.PluginManager;
-import net.xeoh.plugins.base.impl.PluginManagerFactory;
-import net.xeoh.plugins.base.util.PluginManagerUtil;
 
 /**
  *
@@ -127,7 +129,31 @@ public class MageFrame extends javax.swing.JFrame {
 			enableButtons();
 		else
 			disableButtons();
+		
+		//TODO:
+		Separator separator = new javax.swing.JToolBar.Separator();
+		mageToolbar.add(separator);
+		
+		JButton btnDownload = new JButton("Images");
+		btnDownload.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+		btnDownload.setFocusable(false);
+		btnDownload.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		btnDownload.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+		btnDownload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImagesActionPerformed(evt);
+            }
+        });
+        mageToolbar.add(btnDownload);
     }
+    
+    private void  btnImagesActionPerformed(java.awt.event.ActionEvent evt) {
+    	Set<Card> allCards = new LinkedHashSet<Card>();
+    	for (ExpansionSet set: Sets.getInstance().values()) {
+			allCards.addAll(set.createCards());
+		}
+    	Plugins.getInstance().downloadImage(allCards);
+	}
 
 	public void showGame(UUID gameId, UUID playerId) {
 		this.tablesPane.hideTables();

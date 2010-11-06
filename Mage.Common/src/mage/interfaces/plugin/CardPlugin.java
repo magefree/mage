@@ -2,10 +2,12 @@ package mage.interfaces.plugin;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.swing.JComponent;
 
+import mage.cards.Card;
 import mage.cards.CardDimensions;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
@@ -21,4 +23,5 @@ import net.xeoh.plugins.base.Plugin;
 public interface CardPlugin extends Plugin {
 	MagePermanent getMagePermanent(PermanentView permanent, CardDimensions dimension, UUID gameId, ActionCallback callback);
 	void sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> cards);
+	void downloadImages(Set<Card> allCards);
 }

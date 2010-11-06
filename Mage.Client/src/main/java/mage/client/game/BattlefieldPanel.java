@@ -84,9 +84,6 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
     	ui.put("jScrollPane", jScrollPane);
     	ui.put("battlefieldPanel", this);
         initComponents();
-
-        addMouseListener(new MageMouseAdapter(this, gameId));			
-        addMouseMotionListener(new MageMouseMotionAdapter(this, bigCard));
     }
 
 	public void init(UUID gameId, BigCard bigCard) {
@@ -95,13 +92,13 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
         if (Plugins.getInstance().isCardPluginLoaded()) {
         	bigCard.removeTextComponent();
         }
+        addMouseListener(new MageMouseAdapter(this, gameId));			
+        addMouseMotionListener(new MageMouseMotionAdapter(this, bigCard));
 	}
 
 	public void update(Map<UUID, PermanentView> battlefield) {
 		for (PermanentView permanent: battlefield.values()) {
 			if (!permanents.containsKey(permanent.getId())) {
-				//TODO: remove me
-				//System.out.println("Add permanent: " + permanent.getCardNumber());
 				addPermanent(permanent);
 			}
 			else {
@@ -133,8 +130,10 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 		}
 		permanents.put(permanent.getId(), perm);
 		this.add(perm, 10);
-		moveToFront(perm);
-		perm.update(permanent);
+		if (!Plugins.getInstance().isCardPluginLoaded()) {
+			moveToFront(perm);
+			perm.update(permanent);
+		}
 	}
 	
 	private void groupAttachments(PermanentView permanent) {
@@ -228,7 +227,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 	}
 
 	private void resizeBattlefield() {
-        Dimension area = new Dimension(0, 0);
+        /*Dimension area = new Dimension(0, 0);
         Dimension size = getPreferredSize();
 
         for (Component comp: getComponents()) {
@@ -244,7 +243,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
         	setPreferredSize(area);
         	revalidate();
         	repaint();
-       }
+       }*/
 
 	}
 
