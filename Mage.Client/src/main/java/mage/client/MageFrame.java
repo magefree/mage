@@ -131,20 +131,22 @@ public class MageFrame extends javax.swing.JFrame {
 			disableButtons();
 		
 		//TODO:
+		if (Plugins.getInstance().isCardPluginLoaded()) {
 		Separator separator = new javax.swing.JToolBar.Separator();
-		mageToolbar.add(separator);
-		
-		JButton btnDownload = new JButton("Images");
-		btnDownload.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-		btnDownload.setFocusable(false);
-		btnDownload.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-		btnDownload.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-		btnDownload.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImagesActionPerformed(evt);
-            }
-        });
-        mageToolbar.add(btnDownload);
+			mageToolbar.add(separator);
+			
+			JButton btnDownload = new JButton("Images");
+			btnDownload.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+			btnDownload.setFocusable(false);
+			btnDownload.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+			btnDownload.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+			btnDownload.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                btnImagesActionPerformed(evt);
+	            }
+	        });
+	        mageToolbar.add(btnDownload);
+		}
     }
     
     private void  btnImagesActionPerformed(java.awt.event.ActionEvent evt) {

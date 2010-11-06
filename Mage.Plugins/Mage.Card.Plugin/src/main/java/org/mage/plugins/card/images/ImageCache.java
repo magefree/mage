@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import mage.view.CardView;
 
 import org.apache.log4j.Logger;
+import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.utils.CardImageUtils;
 
 import com.google.common.base.Function;
@@ -138,16 +139,16 @@ public class ImageCache {
 
 		return image;
 	}
-
+	
 	/**
 	 * Returns an image scaled to the size given
 	 */
-	/*private static BufferedImage getNormalSizeImage(BufferedImage original) {
+	public static BufferedImage getNormalSizeImage(BufferedImage original) {
 		int srcWidth = original.getWidth();
 		int srcHeight = original.getHeight();
 		
-		int tgtWidth = SettingsManager.getManager().getCardSize().width;
-		int tgtHeight = SettingsManager.getManager().getCardSize().height;
+		int tgtWidth = Constants.CARD_SIZE_FULL.width;
+		int tgtHeight = Constants.CARD_SIZE_FULL.height;
 		
 		if (srcWidth == tgtWidth && srcHeight == tgtHeight)
 			return original;
@@ -155,7 +156,7 @@ public class ImageCache {
 		ResampleOp resampleOp = new ResampleOp(tgtWidth, tgtHeight);
 		BufferedImage image = resampleOp.filter(original, null);
 		return image;
-	}*/
+	}
 
 	/**
 	 * Returns an image scaled to the size appropriate for the card picture
@@ -173,7 +174,7 @@ public class ImageCache {
 	 * Returns an image scaled to the size appropriate for the card picture
 	 * panel
 	 */
-	private static BufferedImage getResizedImage(BufferedImage original, Rectangle sizeNeed) {
+	public static BufferedImage getResizedImage(BufferedImage original, Rectangle sizeNeed) {
 		ResampleOp resampleOp = new ResampleOp(sizeNeed.width, sizeNeed.height);
 		BufferedImage image = resampleOp.filter(original, null);
 		return image;

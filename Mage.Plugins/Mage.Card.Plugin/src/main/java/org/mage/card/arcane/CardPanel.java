@@ -11,7 +11,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,7 +110,7 @@ public class CardPanel extends MagePermanent {
 		overlayPanel.setScalingMultiPassType(MultipassType.none);
 		
 		//TODO: Image sickness = ImageManager.getSicknessImage();
-		Image sickness = null;
+		BufferedImage sickness = null;
 		overlayPanel.setImage(sickness, sickness);
 
 		imagePanel = new ScaledImagePanel();
@@ -129,6 +128,7 @@ public class CardPanel extends MagePermanent {
 				try {
 					tappedAngle = gameCard.isTapped() ? CardPanel.TAPPED_ANGLE : 0;
 					BufferedImage srcImage = ImageCache.getImageOriginal(gameCard);
+					srcImage = ImageCache.getNormalSizeImage(srcImage);
 					if (srcImage != null) {
 						hasImage = true;
 						setText(gameCard);
@@ -510,7 +510,7 @@ public class CardPanel extends MagePermanent {
 
 	@Override
 	public Image getImage() {
-		return this.imagePanel.getSrcImage();
+		return ImageCache.getImageOriginal(gameCard);
 	}
 
 }
