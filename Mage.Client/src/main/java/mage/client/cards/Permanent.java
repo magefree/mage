@@ -120,7 +120,9 @@ public class Permanent extends Card {
 			sb.append("\n").append(rule);
 		}
 		if (permanent.getOriginal().getExpansionSetCode().length() > 0) {
-			sb.append("\n").append(Sets.getInstance().get(permanent.getOriginal().getExpansionSetCode()).getName()).append(" - ").append(permanent.getOriginal().getRarity().toString());
+			sb.append("\n").append(permanent.getCardNumber()).append(" - ");
+			sb.append("\n").append(Sets.getInstance().get(permanent.getOriginal().getExpansionSetCode()).getName()).append(" - ");
+			sb.append(permanent.getOriginal().getRarity().toString());
 		}
 //		sb.append("\n").append(card.getId());
 		return sb.toString();

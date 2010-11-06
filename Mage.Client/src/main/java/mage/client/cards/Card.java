@@ -230,7 +230,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 				sb.append("\n").append(rule);
 			}
 			if (card.getExpansionSetCode() != null && card.getExpansionSetCode().length() > 0) {
-				sb.append("\n").append(Sets.getInstance().get(card.getExpansionSetCode()).getName()).append(" - ").append(card.getRarity().toString());
+				sb.append("\n").append(card.getCardNumber()).append(" - ");
+				sb.append(Sets.getInstance().get(card.getExpansionSetCode()).getName()).append(" - ");
+				sb.append(card.getRarity().toString());
 			}
 		}
 //		sb.append("\n").append(card.getId());

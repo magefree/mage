@@ -108,6 +108,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 		this.art = card.getArt();
 		this.expansionSetCode = card.getExpansionSetCode();
 		this.rarity = card.getRarity();
+		this.cardNumber = card.getCardNumber();
 	}
 
 	@Override
