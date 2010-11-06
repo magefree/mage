@@ -30,6 +30,7 @@ package mage.abilities.effects;
 
 import mage.Constants.Outcome;
 import mage.target.TargetCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
@@ -37,9 +38,9 @@ import mage.target.TargetCard;
  */
 public abstract class SearchEffect<T extends SearchEffect<T>> extends OneShotEffect<T> {
 
-	protected TargetCard target;
+	protected TargetCardInLibrary target;
 
-	public SearchEffect(TargetCard target, Outcome outcome) {
+	public SearchEffect(TargetCardInLibrary target, Outcome outcome) {
 		super(outcome);
 		this.target = target;
 	}

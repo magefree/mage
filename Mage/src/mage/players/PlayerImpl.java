@@ -812,10 +812,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	}
 
 	@Override
-	public boolean searchLibrary(TargetCard target, Game game) {
+	public boolean searchLibrary(TargetCardInLibrary target, Game game) {
 		//20091005 - 701.14c
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY, playerId, playerId))) {
-			TargetCard newTarget;
+			TargetCardInLibrary newTarget;
 			if (library.count(target.getFilter(), game) < target.getNumberOfTargets())
 				newTarget = new TargetCardInLibrary(library.count(target.getFilter(), game), target.getMaxNumberOfTargets(), target.getFilter());
 			else

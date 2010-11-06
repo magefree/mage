@@ -55,6 +55,7 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
+import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
 
 /**
@@ -96,7 +97,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public boolean removeFromBattlefield(Permanent permanent, Game game);
 	public boolean putInGraveyard(Card card, Game game, boolean fromBattlefield);
 	public boolean removeFromGraveyard(Card card, Game game);
-	public boolean searchLibrary(TargetCard target, Game game);
+	public boolean searchLibrary(TargetCardInLibrary target, Game game);
 	public boolean canPlayLand();
 	public boolean playLand(Card card, Game game);
 	public boolean activateAbility(ActivatedAbility ability, Game game);
