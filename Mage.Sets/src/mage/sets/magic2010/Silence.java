@@ -26,48 +26,84 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.Ability;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReassemblingSkeleton extends CardImpl<ReassemblingSkeleton> {
+public class Silence extends CardImpl<Silence> {
 
-	public ReassemblingSkeleton(UUID ownerId) {
-		super(ownerId, 112, "Reassembling Skeleton", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Human");
-		this.subtype.add("Knight");
+	public Silence(UUID ownerId) {
+		super(ownerId, 31, "Silence", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}");
+		this.expansionSetCode = "M10";
 		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(3);
-
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new ManaCostsImpl("{1}{B}")));
+		this.getSpellAbility().addEffect(new SilenceEffect());
 	}
 
-	public ReassemblingSkeleton(final ReassemblingSkeleton card) {
+	public Silence(final Silence card) {
 		super(card);
 	}
 
 	@Override
-	public ReassemblingSkeleton copy() {
-		return new ReassemblingSkeleton(this);
+	public Silence copy() {
+		return new Silence(this);
 	}
 
 	@Override
 	public String getArt() {
-		return "129152_typ_reg_sty_010.jpg";
+		return "121665_typ_reg_sty_010.jpg";
+	}
+}
+
+class SilenceEffect extends ReplacementEffectImpl<SilenceEffect> {
+
+	public SilenceEffect() {
+		super(Duration.EndOfTurn, Outcome.Benefit);
+	}
+
+	public SilenceEffect(final SilenceEffect effect) {
+		super(effect);
+	}
+
+	@Override
+	public SilenceEffect copy() {
+		return new SilenceEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		return true;
+	}
+
+	@Override
+	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+		return true;
+	}
+
+	@Override
+	public boolean applies(GameEvent event, Ability source, Game game) {
+		if (event.getType() == EventType.CAST_SPELL && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public String getText(Ability source) {
+		return "Your opponents can't cast spells this turn. ";
 	}
 
 }

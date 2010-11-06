@@ -26,48 +26,42 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReassemblingSkeleton extends CardImpl<ReassemblingSkeleton> {
+public class SilvercoatLion extends CardImpl<SilvercoatLion> {
 
-	public ReassemblingSkeleton(UUID ownerId) {
-		super(ownerId, 112, "Reassembling Skeleton", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Human");
-		this.subtype.add("Knight");
+	public SilvercoatLion(UUID ownerId) {
+		super(ownerId, 32, "Silvercoat Lion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+		this.expansionSetCode = "M10";
+		this.subtype.add("Cat");
 		this.color.setWhite(true);
 		this.power = new MageInt(2);
-		this.toughness = new MageInt(3);
+		this.toughness = new MageInt(2);
 
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new ManaCostsImpl("{1}{B}")));
 	}
 
-	public ReassemblingSkeleton(final ReassemblingSkeleton card) {
+	public SilvercoatLion(final SilvercoatLion card) {
 		super(card);
 	}
 
 	@Override
-	public ReassemblingSkeleton copy() {
-		return new ReassemblingSkeleton(this);
+	public SilvercoatLion copy() {
+		return new SilvercoatLion(this);
 	}
 
 	@Override
 	public String getArt() {
-		return "129152_typ_reg_sty_010.jpg";
+		return "102612_typ_reg_sty_010.jpg";
 	}
 
 }

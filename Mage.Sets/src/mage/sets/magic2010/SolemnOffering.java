@@ -26,48 +26,52 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.FilterPermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReassemblingSkeleton extends CardImpl<ReassemblingSkeleton> {
+public class SolemnOffering extends CardImpl<SolemnOffering> {
 
-	public ReassemblingSkeleton(UUID ownerId) {
-		super(ownerId, 112, "Reassembling Skeleton", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Human");
-		this.subtype.add("Knight");
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(3);
+	private static FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new ManaCostsImpl("{1}{B}")));
+	static {
+		filter.getCardType().add(CardType.ARTIFACT);
+		filter.getCardType().add(CardType.ENCHANTMENT);
+		filter.setScopeColor(ComparisonScope.Any);
 	}
 
-	public ReassemblingSkeleton(final ReassemblingSkeleton card) {
+	public SolemnOffering(UUID ownerId) {
+		super(ownerId, 33, "Solemn Offering", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
+		this.expansionSetCode = "M10";
+		this.color.setWhite(true);
+		this.getSpellAbility().addTarget(new TargetPermanent(filter));
+		this.getSpellAbility().addEffect(new DestroyTargetEffect());
+		this.getSpellAbility().addEffect(new GainLifeEffect(4));
+	}
+
+	public SolemnOffering(final SolemnOffering card) {
 		super(card);
 	}
 
 	@Override
-	public ReassemblingSkeleton copy() {
-		return new ReassemblingSkeleton(this);
+	public SolemnOffering copy() {
+		return new SolemnOffering(this);
 	}
 
 	@Override
 	public String getArt() {
-		return "129152_typ_reg_sty_010.jpg";
+		return "122138_typ_reg_sty_010.jpg";
 	}
-
 }

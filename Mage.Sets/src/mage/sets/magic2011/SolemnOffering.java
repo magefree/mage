@@ -29,45 +29,26 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
-import mage.cards.CardImpl;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReassemblingSkeleton extends CardImpl<ReassemblingSkeleton> {
+public class SolemnOffering extends mage.sets.magic2010.SolemnOffering {
 
-	public ReassemblingSkeleton(UUID ownerId) {
-		super(ownerId, 112, "Reassembling Skeleton", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+	public SolemnOffering(UUID ownerId) {
+		super(ownerId);
+		this.cardNumber = 32;
 		this.expansionSetCode = "M11";
-		this.subtype.add("Human");
-		this.subtype.add("Knight");
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(3);
-
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new ManaCostsImpl("{1}{B}")));
 	}
 
-	public ReassemblingSkeleton(final ReassemblingSkeleton card) {
+	public SolemnOffering(final SolemnOffering card) {
 		super(card);
 	}
 
 	@Override
-	public ReassemblingSkeleton copy() {
-		return new ReassemblingSkeleton(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "129152_typ_reg_sty_010.jpg";
+	public SolemnOffering copy() {
+		return new SolemnOffering(this);
 	}
 
 }
