@@ -51,7 +51,6 @@
 			<groupId>com.google.collections</groupId>
 			<artifactId>google-collections</artifactId>
 			<version>1.0</version>
-			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 

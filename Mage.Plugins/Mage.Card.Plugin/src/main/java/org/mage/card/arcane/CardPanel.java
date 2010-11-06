@@ -126,15 +126,21 @@ public class CardPanel extends MagePermanent {
 		
 		Util.threadPool.submit(new Runnable() {
 			public void run () {
+				try {
 					tappedAngle = gameCard.isTapped() ? CardPanel.TAPPED_ANGLE : 0;
 					BufferedImage srcImage = ImageCache.getImageOriginal(gameCard);
 					if (srcImage != null) {
-						//setImage(srcImage, ImageUtil.getBlurredImage(srcImage, 3, 1.0f));
 						hasImage = true;
 						setText(gameCard);
 						setImage(srcImage, srcImage);
+					} else {
+						log.warn("image wasn't found, card=" + gameCard.getName() + ", set=" + gameCard.getExpansionSetCode() + ", cid=" + gameCard.getCardNumber());
 					}
-				
+				} catch (Exception e) {
+					e.printStackTrace();
+				} catch (Error err) {
+					err.printStackTrace();
+				}
 			}
 		});
 	}
