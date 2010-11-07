@@ -147,7 +147,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 	}
 
 	public void update(PermanentView permanent) {
-		this.update(permanent.getOriginal());
+		this.update((CardView)permanent);
 	}
 	
 	public void update(CardView card) {

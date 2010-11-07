@@ -10,7 +10,7 @@
   </parent>
   
   <groupId>org.mage</groupId>
-  <artifactId>Mage-Deck-Contructed</artifactId>
+  <artifactId>Mage-Deck-Constructed</artifactId>
   <packaging>jar</packaging>
   <version>0.3</version>
   <name>Mage Deck Constructed</name>
@@ -45,7 +45,7 @@
 
 	    </plugins>
     
-		<finalName>mage-deck-contructed</finalName>
+		<finalName>mage-deck-constructed</finalName>
 	</build>
   
 	<properties/>

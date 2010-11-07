@@ -218,7 +218,7 @@ public class GameController implements GameCallback {
 		for (Card card: deck.getCards()) {
 			card.putOntoBattlefield(game, Zone.OUTSIDE, playerId);
 		}
-		addCardsForTesting(game, game.getPlayer(playerId));
+		addCardsForTesting(game);
 		updateGame();
 	}
 
@@ -394,7 +394,7 @@ public class GameController implements GameCallback {
 	 * 4. Log message to all players that cards were added (to prevent unfair play).<br/>  
 	 * 5. Exit<br/>
 	 */
-	private void addCardsForTesting(Game game, Player player) {
+	private void addCardsForTesting(Game game) {
 		try {
 			File f = new File(INIT_FILE_PATH);
 			Pattern pattern = Pattern.compile("([a-zA-Z]*):([\\w]*):([a-zA-Z ,.!\\d]*):([\\d]*)");
@@ -403,7 +403,7 @@ public class GameController implements GameCallback {
 				return;
 			}
 			
-			logger.info("Parsing init.txt for player : " + player.getName());
+			//logger.info("Parsing init.txt for player : " + player.getName());
 			
 			Scanner scanner = new Scanner(f);
 			try {
@@ -416,7 +416,8 @@ public class GameController implements GameCallback {
 						String zone = m.group(1);
 						String nickname = m.group(2);
 
-						if (nickname.equals(player.getName())) {
+						Player player = findPlayer(game, nickname);
+						if (player != null) {
 							Zone gameZone;
 							if ("hand".equalsIgnoreCase(zone)) {
 								gameZone = Zone.HAND;
@@ -470,5 +471,13 @@ public class GameController implements GameCallback {
 			card.moveToZone(zone, game, false);	
 		}
 		logger.info("Added card to player's " + zone.toString() + ": " + card.getName() +", player = " + player.getName());
+	}
+
+	private Player findPlayer(Game game, String name) {
+		for (Player player: game.getPlayers().values()) {
+			if (player.getName().equals(name))
+				return player;
+		}
+		return null;
 	}
 }
