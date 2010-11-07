@@ -31,46 +31,47 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.CyclingAbility;
+import mage.MageInt;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
-import mage.filter.FilterPermanent;
-import mage.target.TargetPermanent;
+import mage.filter.FilterCard;
 
 /**
  *
  * @author Loki
  */
-public class MoltenFrame extends CardImpl<MoltenFrame> {
-
-    private static FilterPermanent filter = new FilterPermanent("artifact");
+public class NacatlOutlander extends CardImpl<NacatlOutlander> {
+    private static FilterCard filter = new FilterCard("blue");
 
     static {
-	filter.getCardType().add(CardType.ARTIFACT);
-	filter.setScopeCardType(ComparisonScope.Any);
+    	filter.setUseColor(true);
+	filter.getColor().setBlue(true);
     }
 
-    public MoltenFrame(UUID ownerId) {
-        super(ownerId, 69, "Molten Frame", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
+    public NacatlOutlander(UUID ownerId) {
+        super(ownerId, 119, "Nacatl Outlander", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}{G}");
         this.expansionSetCode = "CON";
         this.color.setRed(true);
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        this.color.setGreen(true);
+        this.subtype.add("Cat");
+        this.subtype.add("Scout");
+        this.power = new MageInt(2);
+	this.toughness = new MageInt(2);
+        this.addAbility(new ProtectionAbility(filter));
     }
 
-    public MoltenFrame (final MoltenFrame card) {
+    public NacatlOutlander(final NacatlOutlander card) {
         super(card);
     }
 
     @Override
-    public MoltenFrame copy() {
-        return new MoltenFrame(this);
+    public NacatlOutlander copy() {
+        return new NacatlOutlander(this);
     }
 
     @Override
     public String getArt() {
-        return "118759_typ_reg_sty_010.jpg";
+        return "118770_typ_reg_sty_010.jpg";
     }
 
 }
