@@ -32,23 +32,14 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.keyword.LandwalkAbility;
+import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
-import mage.filter.common.FilterLandPermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class BogRaiders extends CardImpl<BogRaiders> {
-
-	private static FilterLandPermanent filter = new FilterLandPermanent("Swamp");
-
-	static {
-		filter.getSubtype().add("Swamp");
-		filter.setScopeSubtype(ComparisonScope.Any);
-	}
 
 	public BogRaiders(UUID ownerId) {
 		super(ownerId, 86, "Bog Raiders", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -57,7 +48,7 @@ public class BogRaiders extends CardImpl<BogRaiders> {
 		this.subtype.add("Zombie");
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
-		this.addAbility(new LandwalkAbility(filter));
+		this.addAbility(SwampwalkAbility.getInstance());
 	}
 
 	public BogRaiders(final BogRaiders card) {

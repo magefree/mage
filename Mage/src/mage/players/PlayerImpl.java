@@ -35,6 +35,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import mage.Constants.Outcome;
@@ -72,7 +73,6 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
 import mage.watchers.Watcher;
@@ -826,6 +826,15 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 			}
 		}
 		return false;
+	}
+
+	/**
+	 *
+	 * @return true if player won the toss
+	 */
+	@Override
+	public boolean flipCoin() {
+		return new Random().nextBoolean();
 	}
 
 	@Override

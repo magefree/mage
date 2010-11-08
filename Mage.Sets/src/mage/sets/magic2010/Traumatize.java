@@ -26,45 +26,29 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.keyword;
+package mage.sets.magic2010;
 
-import mage.abilities.EvasionAbilityImpl;
-import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import java.util.UUID;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LandwalkAbility extends EvasionAbilityImpl<LandwalkAbility> {
+public class Traumatize extends mage.sets.tenth.Traumatize {
 
-	protected FilterLandPermanent filter;
-
-	protected LandwalkAbility() {}
-
-	public LandwalkAbility(FilterLandPermanent filter) {
-		this.filter = filter;
+	public Traumatize(UUID ownerId) {
+		super(ownerId);
+		this.cardNumber = 77;
+		this.expansionSetCode = "M10";
 	}
 
-	public LandwalkAbility(final LandwalkAbility ability) {
-		super(ability);
-		this.filter = ability.filter.copy();
+	public Traumatize(final Traumatize card) {
+		super(card);
 	}
 
 	@Override
-	public LandwalkAbility copy() {
-		return new LandwalkAbility(this);
-	}
-
-	@Override
-	public boolean canBlock(Permanent blocker, Game game) {
-		return game.getBattlefield().countAll(filter, blocker.getControllerId()) == 0;
-	}
-
-	@Override
-	public String getRule() {
-		return filter.getMessage() + "walk";
+	public Traumatize copy() {
+		return new Traumatize(this);
 	}
 
 }

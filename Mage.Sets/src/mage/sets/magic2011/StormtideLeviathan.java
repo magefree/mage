@@ -31,77 +31,110 @@ package mage.sets.magic2011;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.SubLayer;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HarborSerpent extends CardImpl<HarborSerpent> {
+public class StormtideLeviathan extends CardImpl<StormtideLeviathan> {
 
-	public HarborSerpent(UUID ownerId) {
-		super(ownerId, 56, "Harbor Serpent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
+	public StormtideLeviathan(UUID ownerId) {
+		super(ownerId, 74, "Stormtide Leviathan", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}{U}");
 		this.expansionSetCode = "M11";
-		this.subtype.add("Serpent");
+		this.subtype.add("Leviathan");
 		this.color.setBlue(true);
-		this.power = new MageInt(5);
-		this.toughness = new MageInt(5);
+		this.power = new MageInt(8);
+		this.toughness = new MageInt(8);
 
 		this.addAbility(IslandwalkAbility.getInstance());
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StormtideLeviathanEffect()));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StormtideLeviathanEffect2()));
+
 	}
 
-	public HarborSerpent(final HarborSerpent card) {
+	public StormtideLeviathan(final StormtideLeviathan card) {
 		super(card);
 	}
 
 	@Override
-	public HarborSerpent copy() {
-		return new HarborSerpent(this);
+	public StormtideLeviathan copy() {
+		return new StormtideLeviathan(this);
 	}
 
 	@Override
 	public String getArt() {
-		return "129069_typ_reg_sty_010.jpg";
+		return "129118_typ_reg_sty_010.jpg";
 	}
 
 }
 
-class HarborSerpentEffect extends ReplacementEffectImpl<HarborSerpentEffect> {
+class StormtideLeviathanEffect extends ContinuousEffectImpl<StormtideLeviathanEffect> {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent("Island");
-
-	static {
-		filter.getSubtype().add("Island");
-		filter.setScopeSubtype(ComparisonScope.Any);
+	public StormtideLeviathanEffect() {
+		super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
 	}
 
-	public HarborSerpentEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Benefit);
-	}
-
-	public HarborSerpentEffect(final HarborSerpentEffect effect) {
+	public StormtideLeviathanEffect(final StormtideLeviathanEffect effect) {
 		super(effect);
 	}
 
 	@Override
-	public HarborSerpentEffect copy() {
-		return new HarborSerpentEffect(this);
+	public StormtideLeviathanEffect copy() {
+		return new StormtideLeviathanEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterLandPermanent(), source.getControllerId(), game)) {
+			if (!permanent.getSubtype().contains("Island"))
+				permanent.getSubtype().add("Island");
+		}
+		return true;
+	}
+
+	@Override
+	public String getText(Ability source) {
+		return "All lands are Islands in addition to their other types";
+	}
+}
+
+class StormtideLeviathanEffect2 extends ReplacementEffectImpl<StormtideLeviathanEffect2> {
+
+	public StormtideLeviathanEffect2() {
+		super(Duration.WhileOnBattlefield, Outcome.Detriment);
+	}
+
+	public StormtideLeviathanEffect2(final StormtideLeviathanEffect2 effect) {
+		super(effect);
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
 		return true;
+	}
+
+	@Override
+	public StormtideLeviathanEffect2 copy() {
+		return new StormtideLeviathanEffect2(this);
 	}
 
 	@Override
@@ -111,17 +144,23 @@ class HarborSerpentEffect extends ReplacementEffectImpl<HarborSerpentEffect> {
 
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.DECLARE_ATTACKER && source.getSourceId().equals(event.getSourceId())) {
-			int count = game.getBattlefield().countAll(filter);
-			if (count < 5)
-				return true;
+		if (event.getType() == EventType.DECLARE_ATTACKER) {
+			Permanent permanent = game.getPermanent(event.getSourceId());
+			if (permanent != null) {
+				Player player = game.getPlayer(source.getControllerId());
+				if (player.getInRange().contains(permanent.getControllerId())) {
+					if (!permanent.getAbilities().contains(FlyingAbility.getInstance()) &&
+						!permanent.getAbilities().contains(IslandwalkAbility.getInstance()))
+						return true;
+				}
+			}
 		}
 		return false;
 	}
 
 	@Override
 	public String getText(Ability source) {
-		return "Harbor Serpent can't attack unless there are five or more Islands on the battlefield";
+		return "Creatures without flying or islandwalk can't attack";
 	}
 
 }

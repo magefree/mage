@@ -26,87 +26,42 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.sets.tenth;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MerfolkSpy extends CardImpl<MerfolkSpy> {
+public class SpinedWurm extends CardImpl<SpinedWurm> {
 
-	public MerfolkSpy(UUID ownerId) {
-		super(ownerId, 66, "Merfolk Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Merfolk");
-		this.subtype.add("Rogue");
-		this.color.setBlue(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+	public SpinedWurm(UUID ownerId) {
+		super(ownerId, 298, "Spined Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
+		this.expansionSetCode = "10E";
+		this.subtype.add("Wurm");
+		this.color.setGreen(true);
+		this.power = new MageInt(5);
+		this.toughness = new MageInt(4);
 
-		this.addAbility(IslandwalkAbility.getInstance());
-		this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MerfolkSpyEffect(), false));
 	}
 
-	public MerfolkSpy(final MerfolkSpy card) {
+	public SpinedWurm(final SpinedWurm card) {
 		super(card);
 	}
 
 	@Override
-	public MerfolkSpy copy() {
-		return new MerfolkSpy(this);
+	public SpinedWurm copy() {
+		return new SpinedWurm(this);
 	}
 
 	@Override
 	public String getArt() {
-		return "129100_typ_reg_sty_010.jpg";
+		return "27799_typ_reg_sty_010.jpg";
 	}
 
-}
-
-class MerfolkSpyEffect extends OneShotEffect<MerfolkSpyEffect> {
-
-	public MerfolkSpyEffect() {
-		super(Outcome.Detriment);
-	}
-
-	public MerfolkSpyEffect(final MerfolkSpyEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null && player.getHand().size() > 0) {
-			Cards revealed = new CardsImpl();
-			revealed.add(player.getHand().getRandom(game));
-			player.revealCards(revealed, game);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public MerfolkSpyEffect copy() {
-		return new MerfolkSpyEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "that player reveals a card at random from his or her hand";
-	}
 }

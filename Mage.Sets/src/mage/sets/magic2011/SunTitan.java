@@ -35,65 +35,83 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.SearchLibraryPutInPlayEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.Filter.ComparisonType;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PrimevalTitan extends CardImpl<PrimevalTitan> {
+public class SunTitan extends CardImpl<SunTitan> {
 
-	public PrimevalTitan(UUID ownerId) {
-		super(ownerId, 192, "Primeval Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
+	public SunTitan(UUID ownerId) {
+		super(ownerId, 35, "Sun Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Giant");
-		this.color.setGreen(true);
+		this.color.setWhite(true);
 		this.power = new MageInt(6);
 		this.toughness = new MageInt(6);
 
-		this.addAbility(TrampleAbility.getInstance());
-		this.addAbility(new PrimevalTitanAbility());
+		this.addAbility(VigilanceAbility.getInstance());
+		this.addAbility(new SunTitanAbility());
 	}
 
-	public PrimevalTitan(final PrimevalTitan card) {
+	public SunTitan(final SunTitan card) {
 		super(card);
 	}
 
 	@Override
-	public PrimevalTitan copy() {
-		return new PrimevalTitan(this);
+	public SunTitan copy() {
+		return new SunTitan(this);
 	}
 
 	@Override
 	public String getArt() {
-		return "129116_typ_reg_sty_010.jpg";
+		return "129119_typ_reg_sty_010.jpg";
 	}
 
 }
 
-class PrimevalTitanAbility extends TriggeredAbilityImpl<PrimevalTitanAbility> {
+class SunTitanAbility extends TriggeredAbilityImpl<SunTitanAbility> {
 
-	public PrimevalTitanAbility() {
-		super(Zone.BATTLEFIELD, null, true);
-		TargetCardInLibrary target = new TargetCardInLibrary(2, new FilterLandCard());
-		this.addEffect(new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay));
+	private static FilterCard filter = new FilterCard("permanent card with converted mana cost 3 or less");
+
+	static {
+		filter.getCardType().add(CardType.ARTIFACT);
+		filter.getCardType().add(CardType.CREATURE);
+		filter.getCardType().add(CardType.ENCHANTMENT);
+		filter.getCardType().add(CardType.LAND);
+		filter.getCardType().add(CardType.PLANESWALKER);
+		filter.setScopeCardType(ComparisonScope.Any);
+		filter.setConvertedManaCost(4);
+		filter.setConvertedManaCostComparison(ComparisonType.LessThan);
 	}
 
-	public PrimevalTitanAbility(final PrimevalTitanAbility ability) {
+	public SunTitanAbility() {
+		super(Zone.BATTLEFIELD, null, true);
+		this.addTarget(new TargetCardInYourGraveyard(filter));
+		this.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
+	}
+
+	public SunTitanAbility(final SunTitanAbility ability) {
 		super(ability);
 	}
 
 	@Override
-	public PrimevalTitanAbility copy() {
-		return new PrimevalTitanAbility(this);
+	public SunTitanAbility copy() {
+		return new SunTitanAbility(this);
 	}
 
 	@Override

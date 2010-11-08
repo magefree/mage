@@ -32,81 +32,49 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.IslandwalkAbility;
+import mage.Constants.Zone;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.BoostEquippedEffect;
+import mage.abilities.effects.common.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EquipAbility;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.game.Game;
-import mage.players.Player;
+
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MerfolkSpy extends CardImpl<MerfolkSpy> {
+public class SwordOfVengeance extends CardImpl<SwordOfVengeance> {
 
-	public MerfolkSpy(UUID ownerId) {
-		super(ownerId, 66, "Merfolk Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
+	public SwordOfVengeance(UUID ownerId) {
+		super(ownerId, 216, "Sword of Vengeance", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
 		this.expansionSetCode = "M11";
-		this.subtype.add("Merfolk");
-		this.subtype.add("Rogue");
-		this.color.setBlue(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-
-		this.addAbility(IslandwalkAbility.getInstance());
-		this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MerfolkSpyEffect(), false));
+		this.subtype.add("Equipment");
+		this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance())));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance())));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance())));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance())));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
 	}
 
-	public MerfolkSpy(final MerfolkSpy card) {
-		super(card);
+	protected SwordOfVengeance(SwordOfVengeance me) {
+		super(me);
 	}
 
 	@Override
-	public MerfolkSpy copy() {
-		return new MerfolkSpy(this);
+	public SwordOfVengeance copy() {
+		return new SwordOfVengeance(this);
 	}
 
 	@Override
 	public String getArt() {
-		return "129100_typ_reg_sty_010.jpg";
+		return "129133_typ_reg_sty_010.jpg";
 	}
 
-}
-
-class MerfolkSpyEffect extends OneShotEffect<MerfolkSpyEffect> {
-
-	public MerfolkSpyEffect() {
-		super(Outcome.Detriment);
-	}
-
-	public MerfolkSpyEffect(final MerfolkSpyEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null && player.getHand().size() > 0) {
-			Cards revealed = new CardsImpl();
-			revealed.add(player.getHand().getRandom(game));
-			player.revealCards(revealed, game);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public MerfolkSpyEffect copy() {
-		return new MerfolkSpyEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "that player reveals a card at random from his or her hand";
-	}
 }

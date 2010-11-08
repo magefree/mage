@@ -30,83 +30,52 @@ package mage.sets.magic2011;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.IslandwalkAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.AddPlusOneCountersControlledEffect;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.game.Game;
-import mage.players.Player;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.FilterPermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MerfolkSpy extends CardImpl<MerfolkSpy> {
+public class SteelOverseer extends CardImpl<SteelOverseer> {
 
-	public MerfolkSpy(UUID ownerId) {
-		super(ownerId, 66, "Merfolk Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
+	private static FilterPermanent filter = new FilterPermanent("artifact creature");
+
+	static {
+		filter.getCardType().add(CardType.ARTIFACT);
+		filter.getCardType().add(CardType.CREATURE);
+		filter.setScopeCardType(ComparisonScope.All);
+	}
+
+	public SteelOverseer(UUID ownerId) {
+		super(ownerId, 214, "Steel Overseer", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
 		this.expansionSetCode = "M11";
-		this.subtype.add("Merfolk");
-		this.subtype.add("Rogue");
-		this.color.setBlue(true);
+		this.subtype.add("Construct");
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
 
-		this.addAbility(IslandwalkAbility.getInstance());
-		this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MerfolkSpyEffect(), false));
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddPlusOneCountersControlledEffect(1, filter), new TapSourceCost()));
 	}
 
-	public MerfolkSpy(final MerfolkSpy card) {
+	public SteelOverseer(final SteelOverseer card) {
 		super(card);
 	}
 
 	@Override
-	public MerfolkSpy copy() {
-		return new MerfolkSpy(this);
+	public SteelOverseer copy() {
+		return new SteelOverseer(this);
 	}
 
 	@Override
 	public String getArt() {
-		return "129100_typ_reg_sty_010.jpg";
+		return "129125_typ_reg_sty_010.jpg";
 	}
 
-}
-
-class MerfolkSpyEffect extends OneShotEffect<MerfolkSpyEffect> {
-
-	public MerfolkSpyEffect() {
-		super(Outcome.Detriment);
-	}
-
-	public MerfolkSpyEffect(final MerfolkSpyEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null && player.getHand().size() > 0) {
-			Cards revealed = new CardsImpl();
-			revealed.add(player.getHand().getRandom(game));
-			player.revealCards(revealed, game);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public MerfolkSpyEffect copy() {
-		return new MerfolkSpyEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "that player reveals a card at random from his or her hand";
-	}
 }

@@ -187,8 +187,4 @@ class NecroticPlagueEffect2 extends OneShotEffect<NecroticPlagueEffect2> {
 		return new NecroticPlagueEffect2(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "";
-	}
 }

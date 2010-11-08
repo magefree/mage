@@ -30,83 +30,48 @@ package mage.sets.magic2011;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.IslandwalkAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.game.Game;
-import mage.players.Player;
+import mage.filter.common.FilterBasicLandCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MerfolkSpy extends CardImpl<MerfolkSpy> {
+public class SylvanRanger extends CardImpl<SylvanRanger> {
 
-	public MerfolkSpy(UUID ownerId) {
-		super(ownerId, 66, "Merfolk Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
+	private static FilterBasicLandCard filter = new FilterBasicLandCard();
+
+	public SylvanRanger(UUID ownerId) {
+		super(ownerId, 198, "Sylvan Ranger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
 		this.expansionSetCode = "M11";
-		this.subtype.add("Merfolk");
-		this.subtype.add("Rogue");
-		this.color.setBlue(true);
+		this.subtype.add("Elf");
+		this.subtype.add("Scout");
+		this.color.setGreen(true);
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
 
-		this.addAbility(IslandwalkAbility.getInstance());
-		this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MerfolkSpyEffect(), false));
+		TargetCardInLibrary target = new TargetCardInLibrary(filter);
+		this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(target)));
 	}
 
-	public MerfolkSpy(final MerfolkSpy card) {
+	public SylvanRanger(final SylvanRanger card) {
 		super(card);
 	}
 
 	@Override
-	public MerfolkSpy copy() {
-		return new MerfolkSpy(this);
+	public SylvanRanger copy() {
+		return new SylvanRanger(this);
 	}
 
 	@Override
 	public String getArt() {
-		return "129100_typ_reg_sty_010.jpg";
+		return "102617_typ_reg_sty_010.jpg";
 	}
 
 }
 
-class MerfolkSpyEffect extends OneShotEffect<MerfolkSpyEffect> {
-
-	public MerfolkSpyEffect() {
-		super(Outcome.Detriment);
-	}
-
-	public MerfolkSpyEffect(final MerfolkSpyEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null && player.getHand().size() > 0) {
-			Cards revealed = new CardsImpl();
-			revealed.add(player.getHand().getRandom(game));
-			player.revealCards(revealed, game);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public MerfolkSpyEffect copy() {
-		return new MerfolkSpyEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "that player reveals a card at random from his or her hand";
-	}
-}

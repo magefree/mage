@@ -43,7 +43,7 @@ public class Swamp1 extends mage.cards.basiclands.Swamp {
 
 	@Override
 	public String getArt() {
-		return "89177_typ_reg_sty_010.jpg";
+		return "08633_typ_reg_sty_010.jpg";
 	}
 
 	public Swamp1(final Swamp1 card) {

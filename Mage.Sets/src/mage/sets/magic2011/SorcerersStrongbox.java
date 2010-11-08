@@ -32,81 +32,84 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.MageInt;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.Costs;
+import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.IslandwalkAbility;
+import mage.abilities.effects.common.ScryEffect;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MerfolkSpy extends CardImpl<MerfolkSpy> {
+public class SorcerersStrongbox extends CardImpl<SorcerersStrongbox> {
 
-	public MerfolkSpy(UUID ownerId) {
-		super(ownerId, 66, "Merfolk Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
+	public SorcerersStrongbox(UUID ownerId) {
+		super(ownerId, 213, "Sorcerer's Strongbox", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
 		this.expansionSetCode = "M11";
-		this.subtype.add("Merfolk");
-		this.subtype.add("Rogue");
-		this.color.setBlue(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-
-		this.addAbility(IslandwalkAbility.getInstance());
-		this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MerfolkSpyEffect(), false));
+		Costs costs = new CostsImpl();
+		costs.add(new GenericManaCost(2));
+		costs.add(new TapSourceCost());
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(2), costs));
 	}
 
-	public MerfolkSpy(final MerfolkSpy card) {
+	public SorcerersStrongbox(final SorcerersStrongbox card) {
 		super(card);
 	}
 
 	@Override
-	public MerfolkSpy copy() {
-		return new MerfolkSpy(this);
+	public SorcerersStrongbox copy() {
+		return new SorcerersStrongbox(this);
 	}
 
 	@Override
 	public String getArt() {
-		return "129100_typ_reg_sty_010.jpg";
+		return "129154_typ_reg_sty_010.jpg";
 	}
 
 }
 
-class MerfolkSpyEffect extends OneShotEffect<MerfolkSpyEffect> {
+class SorcerersStrongboxEffect extends OneShotEffect<SorcerersStrongboxEffect> {
 
-	public MerfolkSpyEffect() {
-		super(Outcome.Detriment);
+	public SorcerersStrongboxEffect() {
+		super(Outcome.DrawCard);
 	}
 
-	public MerfolkSpyEffect(final MerfolkSpyEffect effect) {
+	public SorcerersStrongboxEffect(final SorcerersStrongboxEffect effect) {
 		super(effect);
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null && player.getHand().size() > 0) {
-			Cards revealed = new CardsImpl();
-			revealed.add(player.getHand().getRandom(game));
-			player.revealCards(revealed, game);
-			return true;
+		Player player = game.getPlayer(source.getControllerId());
+		if (player != null) {
+			if (player.flipCoin()) {
+				Permanent perm = game.getPermanent(source.getSourceId());
+				if (perm != null) {
+					perm.sacrifice(source.getId(), game);
+				}
+				player.drawCards(3, game);
+				return true;
+			}
 		}
 		return false;
 	}
 
 	@Override
-	public MerfolkSpyEffect copy() {
-		return new MerfolkSpyEffect(this);
+	public SorcerersStrongboxEffect copy() {
+		return new SorcerersStrongboxEffect(this);
 	}
 
 	@Override
 	public String getText(Ability source) {
-		return "that player reveals a card at random from his or her hand";
+		return "Flip a coin. If you win the flip, sacrifice Sorcerer's Strongbox and draw three cards";
 	}
 }

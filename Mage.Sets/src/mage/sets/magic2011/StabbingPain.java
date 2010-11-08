@@ -30,83 +30,39 @@ package mage.sets.magic2011;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.IslandwalkAbility;
+import mage.abilities.effects.common.BoostTargetEffect;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.game.Game;
-import mage.players.Player;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MerfolkSpy extends CardImpl<MerfolkSpy> {
+public class StabbingPain extends CardImpl<StabbingPain> {
 
-	public MerfolkSpy(UUID ownerId) {
-		super(ownerId, 66, "Merfolk Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
+	public StabbingPain(UUID ownerId) {
+		super(ownerId, 118, "Stabbing Pain", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
 		this.expansionSetCode = "M11";
-		this.subtype.add("Merfolk");
-		this.subtype.add("Rogue");
-		this.color.setBlue(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-
-		this.addAbility(IslandwalkAbility.getInstance());
-		this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MerfolkSpyEffect(), false));
+		this.color.setBlack(true);
+		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+		this.getSpellAbility().addEffect(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
+		this.getSpellAbility().addEffect(new TapTargetEffect());
 	}
 
-	public MerfolkSpy(final MerfolkSpy card) {
+	public StabbingPain(final StabbingPain card) {
 		super(card);
 	}
 
 	@Override
-	public MerfolkSpy copy() {
-		return new MerfolkSpy(this);
+	public StabbingPain copy() {
+		return new StabbingPain(this);
 	}
 
 	@Override
 	public String getArt() {
-		return "129100_typ_reg_sty_010.jpg";
-	}
-
-}
-
-class MerfolkSpyEffect extends OneShotEffect<MerfolkSpyEffect> {
-
-	public MerfolkSpyEffect() {
-		super(Outcome.Detriment);
-	}
-
-	public MerfolkSpyEffect(final MerfolkSpyEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null && player.getHand().size() > 0) {
-			Cards revealed = new CardsImpl();
-			revealed.add(player.getHand().getRandom(game));
-			player.revealCards(revealed, game);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public MerfolkSpyEffect copy() {
-		return new MerfolkSpyEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "that player reveals a card at random from his or her hand";
+		return "129137_typ_reg_sty_010.jpg";
 	}
 }

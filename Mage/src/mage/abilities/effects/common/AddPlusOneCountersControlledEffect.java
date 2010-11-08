@@ -28,14 +28,9 @@
 
 package mage.abilities.effects.common;
 
-import mage.Constants.Duration;
-import mage.Constants.Layer;
 import mage.Constants.Outcome;
-import mage.Constants.SubLayer;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.counters.Counter;
 import mage.counters.PlusOneCounter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;

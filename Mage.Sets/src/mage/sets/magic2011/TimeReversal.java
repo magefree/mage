@@ -32,14 +32,10 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.IslandwalkAbility;
+import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -47,66 +43,65 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MerfolkSpy extends CardImpl<MerfolkSpy> {
+public class TimeReversal extends CardImpl<TimeReversal> {
 
-	public MerfolkSpy(UUID ownerId) {
-		super(ownerId, 66, "Merfolk Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
+	public TimeReversal(UUID ownerId) {
+		super(ownerId, 75, "Time Reversal", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
 		this.expansionSetCode = "M11";
-		this.subtype.add("Merfolk");
-		this.subtype.add("Rogue");
 		this.color.setBlue(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-
-		this.addAbility(IslandwalkAbility.getInstance());
-		this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MerfolkSpyEffect(), false));
+		this.getSpellAbility().addEffect(new TimeReversalEffect());
+		this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
 	}
 
-	public MerfolkSpy(final MerfolkSpy card) {
+	public TimeReversal(final TimeReversal card) {
 		super(card);
 	}
 
 	@Override
-	public MerfolkSpy copy() {
-		return new MerfolkSpy(this);
+	public TimeReversal copy() {
+		return new TimeReversal(this);
 	}
 
 	@Override
 	public String getArt() {
-		return "129100_typ_reg_sty_010.jpg";
+		return "129112_typ_reg_sty_010.jpg";
 	}
-
 }
 
-class MerfolkSpyEffect extends OneShotEffect<MerfolkSpyEffect> {
+class TimeReversalEffect extends OneShotEffect<TimeReversalEffect> {
 
-	public MerfolkSpyEffect() {
-		super(Outcome.Detriment);
+	public TimeReversalEffect() {
+		super(Outcome.Neutral);
 	}
 
-	public MerfolkSpyEffect(final MerfolkSpyEffect effect) {
+	public TimeReversalEffect(final TimeReversalEffect effect) {
 		super(effect);
 	}
-
+	
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null && player.getHand().size() > 0) {
-			Cards revealed = new CardsImpl();
-			revealed.add(player.getHand().getRandom(game));
-			player.revealCards(revealed, game);
-			return true;
+		Player sourcePlayer = game.getPlayer(source.getControllerId());
+		for (UUID playerId: sourcePlayer.getInRange()) {
+			Player player = game.getPlayer(playerId);
+			if (player != null) {
+				player.getLibrary().addAll(player.getHand().getCards(game));
+				player.getLibrary().addAll(player.getGraveyard().getCards(game));
+				player.getLibrary().shuffle();
+				player.getHand().clear();
+				player.getGraveyard().clear();
+				player.drawCards(7, game);
+			}
 		}
-		return false;
+		return true;
 	}
 
 	@Override
-	public MerfolkSpyEffect copy() {
-		return new MerfolkSpyEffect(this);
+	public TimeReversalEffect copy() {
+		return new TimeReversalEffect(this);
 	}
 
 	@Override
 	public String getText(Ability source) {
-		return "that player reveals a card at random from his or her hand";
+		return "Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards";
 	}
 }

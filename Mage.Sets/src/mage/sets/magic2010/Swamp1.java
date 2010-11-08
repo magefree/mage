@@ -26,45 +26,33 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.keyword;
+package mage.sets.magic2010;
 
-import mage.abilities.EvasionAbilityImpl;
-import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import java.util.UUID;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LandwalkAbility extends EvasionAbilityImpl<LandwalkAbility> {
+public class Swamp1 extends mage.cards.basiclands.Swamp {
 
-	protected FilterLandPermanent filter;
-
-	protected LandwalkAbility() {}
-
-	public LandwalkAbility(FilterLandPermanent filter) {
-		this.filter = filter;
-	}
-
-	public LandwalkAbility(final LandwalkAbility ability) {
-		super(ability);
-		this.filter = ability.filter.copy();
+	public Swamp1(UUID ownerId) {
+		super(ownerId, 238);
+		this.expansionSetCode = "M10";
 	}
 
 	@Override
-	public LandwalkAbility copy() {
-		return new LandwalkAbility(this);
+	public String getArt() {
+		return "43243_typ_reg_sty_010.jpg";
+	}
+
+	public Swamp1(final Swamp1 card) {
+		super(card);
 	}
 
 	@Override
-	public boolean canBlock(Permanent blocker, Game game) {
-		return game.getBattlefield().countAll(filter, blocker.getControllerId()) == 0;
-	}
-
-	@Override
-	public String getRule() {
-		return filter.getMessage() + "walk";
+	public Swamp1 copy() {
+		return new Swamp1(this);
 	}
 
 }

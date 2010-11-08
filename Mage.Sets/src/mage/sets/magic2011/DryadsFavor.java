@@ -41,10 +41,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.LandwalkAbility;
+import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
-import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -88,13 +86,6 @@ public class DryadsFavor extends CardImpl<DryadsFavor> {
 
 class DryadsFavorEffect extends ContinuousEffectImpl<DryadsFavorEffect> {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent("Forest");
-
-	static {
-		filter.getSubtype().add("Forest");
-		filter.setScopeSubtype(ComparisonScope.Any);
-	}
-
 	public DryadsFavorEffect() {
 		super(Duration.WhileOnBattlefield, Outcome.Detriment);
 	}
@@ -117,7 +108,7 @@ class DryadsFavorEffect extends ContinuousEffectImpl<DryadsFavorEffect> {
 				switch (layer) {
 					case AbilityAddingRemovingEffects_6:
 						if (sublayer == SubLayer.NA) {
-							creature.addAbility(new LandwalkAbility(filter));
+							creature.addAbility(ForestwalkAbility.getInstance());
 						}
 						break;
 				}

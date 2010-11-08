@@ -26,45 +26,29 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.keyword;
+package mage.sets.planechase;
 
-import mage.abilities.EvasionAbilityImpl;
-import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import java.util.UUID;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LandwalkAbility extends EvasionAbilityImpl<LandwalkAbility> {
+public class TerramorphicExpanse extends mage.sets.tenth.TerramorphicExpanse {
 
-	protected FilterLandPermanent filter;
-
-	protected LandwalkAbility() {}
-
-	public LandwalkAbility(FilterLandPermanent filter) {
-		this.filter = filter;
+	public TerramorphicExpanse(UUID ownerId) {
+		super(ownerId);
+		this.cardNumber = 139;
+		this.expansionSetCode = "HOP";
 	}
 
-	public LandwalkAbility(final LandwalkAbility ability) {
-		super(ability);
-		this.filter = ability.filter.copy();
+	public TerramorphicExpanse(final TerramorphicExpanse card) {
+		super(card);
 	}
 
 	@Override
-	public LandwalkAbility copy() {
-		return new LandwalkAbility(this);
-	}
-
-	@Override
-	public boolean canBlock(Permanent blocker, Game game) {
-		return game.getBattlefield().countAll(filter, blocker.getControllerId()) == 0;
-	}
-
-	@Override
-	public String getRule() {
-		return filter.getMessage() + "walk";
+	public TerramorphicExpanse copy() {
+		return new TerramorphicExpanse(this);
 	}
 
 }

@@ -32,25 +32,16 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.keyword.LandwalkAbility;
+import mage.abilities.keyword.IslandwalkAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
-import mage.filter.common.FilterLandPermanent;
 
 /**
  *
  * @author Loki
  */
 public class InkwellLeviathan extends CardImpl<InkwellLeviathan> {
-
-    private final static FilterLandPermanent filter = new FilterLandPermanent("Island");
-
-    static {
-	filter.getSubtype().add("Island");
-	filter.setScopeSubtype(ComparisonScope.Any);
-    }
 
     public InkwellLeviathan(UUID ownerId) {
         super(ownerId, 30, "Inkwell Leviathan", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}{U}{U}" );
@@ -60,7 +51,7 @@ public class InkwellLeviathan extends CardImpl<InkwellLeviathan> {
         this.power = new MageInt(7);
         this.toughness = new MageInt(11);
 
-        this.addAbility(new LandwalkAbility(filter));
+        this.addAbility(IslandwalkAbility.getInstance());
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(ShroudAbility.getInstance());
     }

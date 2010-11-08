@@ -26,87 +26,66 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2011;
+package mage.sets.tenth;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.IslandwalkAbility;
+import mage.Constants.Zone;
+import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.game.Game;
-import mage.players.Player;
+import mage.filter.common.FilterBasicLandCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MerfolkSpy extends CardImpl<MerfolkSpy> {
+public class TerramorphicExpanse extends CardImpl<TerramorphicExpanse> {
 
-	public MerfolkSpy(UUID ownerId) {
-		super(ownerId, 66, "Merfolk Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Merfolk");
-		this.subtype.add("Rogue");
-		this.color.setBlue(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-
-		this.addAbility(IslandwalkAbility.getInstance());
-		this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MerfolkSpyEffect(), false));
+	public TerramorphicExpanse(UUID ownerId) {
+		super(ownerId, 360, "Terramorphic Expanse", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+		this.expansionSetCode = "10E";
+		this.addAbility(new TerramorphicExpanseAbility());
 	}
 
-	public MerfolkSpy(final MerfolkSpy card) {
+	public TerramorphicExpanse(final TerramorphicExpanse card) {
 		super(card);
 	}
 
 	@Override
-	public MerfolkSpy copy() {
-		return new MerfolkSpy(this);
+	public TerramorphicExpanse copy() {
+		return new TerramorphicExpanse(this);
 	}
 
 	@Override
 	public String getArt() {
-		return "129100_typ_reg_sty_010.jpg";
+		return "97502_typ_reg_sty_010.jpg";
 	}
 
 }
 
-class MerfolkSpyEffect extends OneShotEffect<MerfolkSpyEffect> {
+class TerramorphicExpanseAbility extends ActivatedAbilityImpl<TerramorphicExpanseAbility> {
 
-	public MerfolkSpyEffect() {
-		super(Outcome.Detriment);
+	public TerramorphicExpanseAbility() {
+		super(Zone.BATTLEFIELD, null);
+		addCost(new TapSourceCost());
+		addCost(new SacrificeSourceCost());
+		TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
+		addEffect(new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay));
 	}
 
-	public MerfolkSpyEffect(final MerfolkSpyEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null && player.getHand().size() > 0) {
-			Cards revealed = new CardsImpl();
-			revealed.add(player.getHand().getRandom(game));
-			player.revealCards(revealed, game);
-			return true;
-		}
-		return false;
+	public TerramorphicExpanseAbility(final TerramorphicExpanseAbility ability) {
+		super(ability);
 	}
 
 	@Override
-	public MerfolkSpyEffect copy() {
-		return new MerfolkSpyEffect(this);
+	public TerramorphicExpanseAbility copy() {
+		return new TerramorphicExpanseAbility(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "that player reveals a card at random from his or her hand";
-	}
 }

@@ -28,43 +28,30 @@
 
 package mage.abilities.keyword;
 
-import mage.abilities.EvasionAbilityImpl;
+import java.io.ObjectStreamException;
+import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LandwalkAbility extends EvasionAbilityImpl<LandwalkAbility> {
+public class ForestwalkAbility extends LandwalkAbility {
 
-	protected FilterLandPermanent filter;
+	private static final ForestwalkAbility fINSTANCE =  new ForestwalkAbility();
 
-	protected LandwalkAbility() {}
-
-	public LandwalkAbility(FilterLandPermanent filter) {
-		this.filter = filter;
+	private Object readResolve() throws ObjectStreamException {
+		return fINSTANCE;
 	}
 
-	public LandwalkAbility(final LandwalkAbility ability) {
-		super(ability);
-		this.filter = ability.filter.copy();
+	public static ForestwalkAbility getInstance() {
+		return fINSTANCE;
 	}
 
-	@Override
-	public LandwalkAbility copy() {
-		return new LandwalkAbility(this);
-	}
-
-	@Override
-	public boolean canBlock(Permanent blocker, Game game) {
-		return game.getBattlefield().countAll(filter, blocker.getControllerId()) == 0;
-	}
-
-	@Override
-	public String getRule() {
-		return filter.getMessage() + "walk";
+	private ForestwalkAbility() {
+		filter = new FilterLandPermanent("Forest");
+		filter.getSubtype().add("Forest");
+		filter.setScopeSubtype(ComparisonScope.Any);
 	}
 
 }

@@ -36,23 +36,14 @@ import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.keyword.LandwalkAbility;
+import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
-import mage.filter.common.FilterLandPermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class RiverBoa extends CardImpl<RiverBoa> {
-
-	private static FilterLandPermanent filter = new FilterLandPermanent("Island");
-
-	static {
-		filter.getSubtype().add("Island");
-		filter.setScopeSubtype(ComparisonScope.Any);
-	}
 
 	public RiverBoa(UUID ownerId) {
 		super(ownerId, 180, "River Boa", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -61,7 +52,7 @@ public class RiverBoa extends CardImpl<RiverBoa> {
 		this.subtype.add("Snake");
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(1);
-		this.addAbility(new LandwalkAbility(filter));
+		this.addAbility(IslandwalkAbility.getInstance());
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
 	}
 
