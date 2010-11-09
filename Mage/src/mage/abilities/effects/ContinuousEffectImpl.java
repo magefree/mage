@@ -97,4 +97,7 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
 		return used;
 	}
 
+	@Override
+	public void init(Ability source, Game game) {}
+
 }

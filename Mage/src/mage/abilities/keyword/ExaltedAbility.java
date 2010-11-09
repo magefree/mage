@@ -62,7 +62,7 @@ public class ExaltedAbility extends TriggeredAbilityImpl<ExaltedAbility> {
 			if (game.getCombat().attacksAlone()) {
 				TargetCreaturePermanent target = new TargetCreaturePermanent();
 				this.addTarget(target);
-				this.getTargets().get(0).addTarget(game.getCombat().getAttackers().get(0), null, game);
+				this.getTargets().get(0).add(game.getCombat().getAttackers().get(0),game);
 				trigger(game, event.getPlayerId());
 				return true;
 			}

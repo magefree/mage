@@ -88,7 +88,7 @@ class FontOfMythosAbility extends TriggeredAbilityImpl<FontOfMythosAbility> {
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.DRAW_STEP_PRE) {
 			this.addTarget(new TargetPlayer());
-			this.targets.get(0).addTarget(event.getPlayerId(), this, game);
+			this.targets.get(0).add(event.getPlayerId(),game);
 			trigger(game, event.getPlayerId());
 			return true;
 		}

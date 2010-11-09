@@ -26,52 +26,32 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.costs.common;
+package mage.abilities.keyword;
 
-import java.util.UUID;
-import mage.Constants.Outcome;
-import mage.abilities.costs.CostImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
+import java.io.ObjectStreamException;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.common.FilterLandPermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TapTargetCost extends CostImpl<TapTargetCost> {
+public class MountainwalkAbility extends LandwalkAbility {
 
-	public TapTargetCost(TargetControlledPermanent target) {
-		this.addTarget(target);
-		this.text = "tap " + target.getTargetName() + " you control";
+	private static final MountainwalkAbility fINSTANCE =  new MountainwalkAbility();
+
+	private Object readResolve() throws ObjectStreamException {
+		return fINSTANCE;
 	}
 
-	public TapTargetCost(final TapTargetCost cost) {
-		super(cost);
+	public static MountainwalkAbility getInstance() {
+		return fINSTANCE;
 	}
 
-	@Override
-	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		if (targets.choose(Outcome.Tap, controllerId, game)) {
-			for (UUID targetId: targets.get(0).getTargets()) {
-				Permanent permanent = game.getPermanent(targetId);
-				if (permanent == null)
-					return false;
-				paid |= permanent.tap(game);
-			}
-		}
-		return paid;
+	private MountainwalkAbility() {
+		filter = new FilterLandPermanent("Mountain");
+		filter.getSubtype().add("Mountain");
+		filter.setScopeSubtype(ComparisonScope.Any);
 	}
-
-	@Override
-	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return targets.canChoose(controllerId, controllerId, game);
-	}
-
-	@Override
-	public TapTargetCost copy() {
-		return new TapTargetCost(this);
-	}
-
 
 }

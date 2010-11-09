@@ -89,7 +89,10 @@ class MartialCoupEffect extends OneShotEffect<MartialCoupEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		int amount = source.getCosts().getVariableCosts().get(0).getAmount();
+		int amount = 0;
+		if (source.getCosts().getVariableCosts().size() > 0) {
+			amount = source.getCosts().getVariableCosts().get(0).getAmount();
+		}
 
 		if (amount > 4) {
 			for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), source.getControllerId(), game)) {

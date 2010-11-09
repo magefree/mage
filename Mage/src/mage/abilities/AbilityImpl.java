@@ -132,7 +132,9 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 					result &= effect.apply(game, this);
 				}
 				else {
-					game.addEffect((ContinuousEffect) effect, this);
+					ContinuousEffect cEffect = (ContinuousEffect) effect;
+					cEffect.init(this, game);
+					game.addEffect(cEffect, this);
 				}
 			}
 		}
@@ -146,19 +148,6 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 			logger.fine("activate failed - choice");
 			return false;
 		}
-		//20100716 - 114.1b
-//		if (game.getObject(sourceId).getSubtype().contains("Aura")) {
-//			for (Ability ability: game.getObject(sourceId).getAbilities()) {
-//				if (ability instanceof EnchantAbility) {
-//					Targets enchantTargets = ability.getTargets();
-//					if (enchantTargets.size() > 0 && enchantTargets.chooseTargets(ability.getEffects().get(0).getOutcome(), this.controllerId, this, game) == false) {
-//						logger.fine("activate failed - target");
-//						return false;
-//					}
-//					break;
-//				}
-//			}
-//		}
 		//20100716 - 601.2b
 		if (targets.size() > 0 && targets.chooseTargets(effects.get(0).getOutcome(), this.controllerId, this, game) == false) {
 			logger.fine("activate failed - target");
