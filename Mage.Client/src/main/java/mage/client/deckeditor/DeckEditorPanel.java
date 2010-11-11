@@ -42,6 +42,7 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
@@ -49,6 +50,7 @@ import mage.cards.decks.DeckCardLists;
 import mage.client.MageFrame;
 import mage.client.util.Event;
 import mage.client.util.Listener;
+import mage.game.GameException;
 import mage.view.CardsView;
 
 /**
@@ -275,6 +277,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			try {
 				setCursor(new Cursor(Cursor.WAIT_CURSOR));
 				deck = Deck.load(DeckCardLists.load(file.getPath()));
+			} catch (GameException ex) {
+				JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
 			} catch (Exception ex) {
 				Logger.getLogger(DeckEditorPanel.class.getName()).log(Level.SEVERE, null, ex);
 			}

@@ -26,29 +26,29 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets.planechase;
-
-import java.util.UUID;
-
-/**
- *
- * @author BetaSteward_at_googlemail.com
- */
-public class OblivionRing extends mage.sets.shardsofalara.OblivionRing {
-
-	public OblivionRing(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 4;
-		this.expansionSetCode = "HOP";
-	}
-
-	public OblivionRing(final OblivionRing card) {
-		super(card);
-	}
-
-	@Override
-	public OblivionRing copy() {
-		return new OblivionRing(this);
-	}
-
-}
+//package mage.sets.planechase;
+//
+//import java.util.UUID;
+//
+///**
+// *
+// * @author BetaSteward_at_googlemail.com
+// */
+//public class OblivionRing extends mage.sets.shardsofalara.OblivionRing {
+//
+//	public OblivionRing(UUID ownerId) {
+//		super(ownerId);
+//		this.cardNumber = 4;
+//		this.expansionSetCode = "HOP";
+//	}
+//
+//	public OblivionRing(final OblivionRing card) {
+//		super(card);
+//	}
+//
+//	@Override
+//	public OblivionRing copy() {
+//		return new OblivionRing(this);
+//	}
+//
+//}

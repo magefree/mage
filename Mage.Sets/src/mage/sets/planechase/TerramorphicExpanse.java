@@ -26,29 +26,29 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.planechase;
-
-import java.util.UUID;
-
-/**
- *
- * @author BetaSteward_at_googlemail.com
- */
-public class TerramorphicExpanse extends mage.sets.tenth.TerramorphicExpanse {
-
-	public TerramorphicExpanse(UUID ownerId) {
-		super(ownerId);
-		this.cardNumber = 139;
-		this.expansionSetCode = "HOP";
-	}
-
-	public TerramorphicExpanse(final TerramorphicExpanse card) {
-		super(card);
-	}
-
-	@Override
-	public TerramorphicExpanse copy() {
-		return new TerramorphicExpanse(this);
-	}
-
-}
+//package mage.sets.planechase;
+//
+//import java.util.UUID;
+//
+///**
+// *
+// * @author BetaSteward_at_googlemail.com
+// */
+//public class TerramorphicExpanse extends mage.sets.tenth.TerramorphicExpanse {
+//
+//	public TerramorphicExpanse(UUID ownerId) {
+//		super(ownerId);
+//		this.cardNumber = 139;
+//		this.expansionSetCode = "HOP";
+//	}
+//
+//	public TerramorphicExpanse(final TerramorphicExpanse card) {
+//		super(card);
+//	}
+//
+//	@Override
+//	public TerramorphicExpanse copy() {
+//		return new TerramorphicExpanse(this);
+//	}
+//
+//}

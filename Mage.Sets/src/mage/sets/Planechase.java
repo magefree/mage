@@ -26,24 +26,24 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets;
-
-import mage.cards.ExpansionSet;
-
-/**
- *
- * @author BetaSteward_at_googlemail.com
- */
-public class Planechase extends ExpansionSet {
-
-	private static final Planechase fINSTANCE =  new Planechase();
-
-	public static Planechase getInstance() {
-		return fINSTANCE;
-	}
-
-	private Planechase() {
-		super("Planechase", "HOP", "", "mage.sets.planechase");
-	}
-
-}
+//package mage.sets;
+//
+//import mage.cards.ExpansionSet;
+//
+///**
+// *
+// * @author BetaSteward_at_googlemail.com
+// */
+//public class Planechase extends ExpansionSet {
+//
+//	private static final Planechase fINSTANCE =  new Planechase();
+//
+//	public static Planechase getInstance() {
+//		return fINSTANCE;
+//	}
+//
+//	private Planechase() {
+//		super("Planechase", "HOP", "", "mage.sets.planechase");
+//	}
+//
+//}

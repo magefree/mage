@@ -101,12 +101,12 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
 	private void filterCards() {
 		try {
+			setCursor(new Cursor(Cursor.WAIT_CURSOR));
 			cards.clear();
 			for (Card card: allCards) {
 				if (filter.match(card))
 					cards.add(card);
 			}
-			setCursor(new Cursor(Cursor.WAIT_CURSOR));
 			this.cardGrid.loadCards(new CardsView(cards), bigCard, null);
 		}
 		finally {
@@ -139,6 +139,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         rdoWhite = new javax.swing.JRadioButton();
         rdoColorless = new javax.swing.JRadioButton();
         cbExpansionSet = new javax.swing.JComboBox();
+        btnBooster = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         cardGrid = new mage.client.cards.CardGrid();
         tbTypes = new javax.swing.JToolBar();
@@ -233,6 +235,28 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbColor.add(cbExpansionSet);
 
+        btnBooster.setText("Open Booster");
+        btnBooster.setFocusable(false);
+        btnBooster.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBooster.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnBooster.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBoosterActionPerformed(evt);
+            }
+        });
+        tbColor.add(btnBooster);
+
+        btnClear.setText("Clear");
+        btnClear.setFocusable(false);
+        btnClear.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnClear.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
+        tbColor.add(btnClear);
+
         jScrollPane1.setViewportView(cardGrid);
 
         tbTypes.setFloatable(false);
@@ -326,9 +350,9 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tbColor, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
-            .addComponent(tbTypes, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
+            .addComponent(tbColor, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)
+            .addComponent(tbTypes, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -435,8 +459,23 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		filterCards();
 	}//GEN-LAST:event_cbExpansionSetActionPerformed
 
+	private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+		cards.clear();
+		this.cardGrid.loadCards(new CardsView(cards), bigCard, null);
+	}//GEN-LAST:event_btnClearActionPerformed
+
+	private void btnBoosterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoosterActionPerformed
+		List<Card> booster = ((ExpansionSet)this.cbExpansionSet.getSelectedItem()).createBooster();
+		for (Card card: booster) {
+			cards.add(card);
+		}
+		this.cardGrid.loadCards(new CardsView(cards), bigCard, null);
+	}//GEN-LAST:event_btnBoosterActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBooster;
+    private javax.swing.JButton btnClear;
     private mage.client.cards.CardGrid cardGrid;
     private javax.swing.JComboBox cbExpansionSet;
     private javax.swing.JScrollPane jScrollPane1;

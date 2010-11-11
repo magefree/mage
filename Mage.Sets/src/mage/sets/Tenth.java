@@ -28,6 +28,7 @@
 
 package mage.sets;
 
+import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 
 /**
@@ -43,7 +44,12 @@ public class Tenth extends ExpansionSet {
 	}
 
 	private Tenth() {
-		super("Tenth Edition", "10E", "exp_symbol_mtg10e", "mage.sets.tenth");
+		super("Tenth Edition", "10E", "exp_symbol_mtg10e", "mage.sets.tenth", new GregorianCalendar(2007, 6, 14).getTime(), true);
+		this.numBoosterLands = 1;
+		this.numBoosterCommon = 10;
+		this.numBoosterUncommon = 3;
+		this.numBoosterRare = 1;
+		this.ratioBoosterMythic = 0;
 	}
 
 }

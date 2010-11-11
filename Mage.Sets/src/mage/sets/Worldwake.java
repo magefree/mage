@@ -28,6 +28,7 @@
 
 package mage.sets;
 
+import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 
 /**
@@ -43,7 +44,13 @@ public class Worldwake extends ExpansionSet {
 	}
 
 	private Worldwake() {
-		super("Worldwake", "WWK", "seticon_WWK", "mage.sets.worldwake");
+		super("Worldwake", "WWK", "seticon_WWK", "mage.sets.worldwake", new GregorianCalendar(2010, 0, 30).getTime(), false);
+		this.blockName = "Zendikar";
+		this.numBoosterLands = 1;
+		this.numBoosterCommon = 10;
+		this.numBoosterUncommon = 3;
+		this.numBoosterRare = 1;
+		this.ratioBoosterMythic = 8;
 	}
 
 }

@@ -32,6 +32,7 @@ import mage.cards.*;
 import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import mage.game.GameException;
 
 public class Deck implements Serializable {
 
@@ -39,14 +40,22 @@ public class Deck implements Serializable {
 	private Set<Card> cards = new LinkedHashSet<Card>();
 	private Set<Card> sideboard = new LinkedHashSet<Card>();
 
-	public static Deck load(DeckCardLists deckCardLists) {
+	public static Deck load(DeckCardLists deckCardLists) throws GameException {
 		Deck deck = new Deck();
 		deck.setName(deckCardLists.getName());
 		for (String cardName: deckCardLists.getCards()) {
-			deck.cards.add(CardImpl.createCard(cardName));
+			Card card = CardImpl.createCard(cardName);
+			if (card != null)
+				deck.cards.add(CardImpl.createCard(cardName));
+			else
+				throw new GameException("Error loading card - " + cardName + " for deck - " + deck.getName());
 		}
 		for (String cardName: deckCardLists.getSideboard()) {
-			deck.sideboard.add(CardImpl.createCard(cardName));
+			Card card = CardImpl.createCard(cardName);
+			if (card != null)
+				deck.sideboard.add(CardImpl.createCard(cardName));
+			else
+				throw new GameException("Error loading card - " + cardName + " for deck - " + deck.getName());
 		}
 
 		return deck;

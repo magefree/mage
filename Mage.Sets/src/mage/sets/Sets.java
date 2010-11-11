@@ -53,7 +53,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
 		this.addSet(Conflux.getInstance());
 		this.addSet(Magic2010.getInstance());
 		this.addSet(Magic2011.getInstance());
-		this.addSet(Planechase.getInstance());
+//		this.addSet(Planechase.getInstance());
 		this.addSet(RiseOfTheEldrazi.getInstance());
 		this.addSet(ShardsOfAlara.getInstance());
 		this.addSet(Tenth.getInstance());

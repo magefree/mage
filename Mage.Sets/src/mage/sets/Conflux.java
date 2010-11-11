@@ -28,6 +28,7 @@
 
 package mage.sets;
 
+import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 
 /**
@@ -43,7 +44,13 @@ public class Conflux extends ExpansionSet {
 	}
 
 	private Conflux() {
-		super("Conflux", "CON", "seticon_conflux", "mage.sets.conflux");
+		super("Conflux", "CON", "seticon_conflux", "mage.sets.conflux", new GregorianCalendar(2009, 0, 31).getTime(), false);
+		this.blockName = "Shards of Alara";
+		this.numBoosterLands = 1;
+		this.numBoosterCommon = 10;
+		this.numBoosterUncommon = 3;
+		this.numBoosterRare = 1;
+		this.ratioBoosterMythic = 8;
 	}
 
 }

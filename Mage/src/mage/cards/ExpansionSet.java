@@ -34,15 +34,20 @@ import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mage.Constants.Rarity;
 import mage.util.Logging;
 
 /**
@@ -53,16 +58,32 @@ public abstract class ExpansionSet implements Serializable {
 
 	private final static Logger logger = Logging.getLogger(ExpansionSet.class.getName());
 
+	protected static Random rnd = new Random();
+
 	protected String name;
 	protected String code;
 	protected String symbolCode;
+	protected Date releaseDate;
+	protected ExpansionSet parentSet;
 	protected List<Class> cards;
+	protected boolean core;
+	protected Map<Rarity, List<Class>> rarities;
 
-	public ExpansionSet(String name, String code, String symbolCode, String packageName) {
+	protected String blockName;
+	protected int numBoosterLands;
+	protected int numBoosterCommon;
+	protected int numBoosterUncommon;
+	protected int numBoosterRare;
+	protected int ratioBoosterMythic;
+
+	public ExpansionSet(String name, String code, String symbolCode, String packageName, Date releaseDate, boolean core) {
 		this.name = name;
 		this.code = code;
 		this.symbolCode = symbolCode;
+		this.releaseDate = releaseDate;
+		this.core = core;
 		this.cards = getCardClassesForPackage(packageName);
+		this.rarities = getCardsByRarity();
 	}
 
 	public List<Class> getCards() {
@@ -79,6 +100,14 @@ public abstract class ExpansionSet implements Serializable {
 
 	public String getSymbolCode() {
 		return symbolCode;
+	}
+
+	public Date getReleaseDate() {
+		return releaseDate;
+	}
+	
+	public boolean isCore() {
+		return core;
 	}
 
 	public Card createCard(Class clazz) {
@@ -143,4 +172,53 @@ public abstract class ExpansionSet implements Serializable {
 		return classes;
 	}
 
+	private Map<Rarity, List<Class>> getCardsByRarity() {
+		Map<Rarity, List<Class>> cardsByRarity = new HashMap<Rarity, List<Class>>();
+
+		for (Class clazz: cards) {
+			Card card = createCard(clazz);
+			if (!cardsByRarity.containsKey(card.getRarity()))
+				cardsByRarity.put(card.getRarity(), new ArrayList<Class>());
+			cardsByRarity.get(card.getRarity()).add(clazz);
+		}
+
+		return cardsByRarity;
+	}
+
+	public List<Card> createBooster() {
+		List<Card> booster = new ArrayList<Card>();
+
+		if (parentSet != null) {
+			parentSet.getRandom(Rarity.LAND);
+		}
+		else {
+			booster.add(getRandom(Rarity.LAND));
+		}
+		for (int i = 0; i < numBoosterCommon; i++) {
+			booster.add(getRandom(Rarity.COMMON));
+		}
+		for (int i = 0; i < numBoosterUncommon; i++) {
+			booster.add(getRandom(Rarity.UNCOMMON));
+		}
+		for (int i = 0; i < numBoosterRare; i++) {
+			if (rnd.nextInt(ratioBoosterMythic) == 1) {
+				booster.add(getRandom(Rarity.MYTHIC));
+			}
+			else {
+				booster.add(getRandom(Rarity.RARE));
+			}
+		}
+
+		return booster;
+	}
+
+	protected Card getRandom(Rarity rarity) {
+		if (!rarities.containsKey(rarity))
+			return null;
+		int size = rarities.get(rarity).size();
+		if (size > 0) {
+			return createCard(rarities.get(rarity).get(rnd.nextInt(size)));
+		}
+		return null;
+	}
 }

@@ -51,6 +51,7 @@ import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.game.Game;
+import mage.game.GameException;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
@@ -213,10 +214,15 @@ public class GameController implements GameCallback {
 	}
 
 	public void cheat(UUID sessionId, UUID playerId, DeckCardLists deckList) {
-		Deck deck = Deck.load(deckList);
-		game.loadCards(deck.getCards(), playerId);
-		for (Card card: deck.getCards()) {
-			card.putOntoBattlefield(game, Zone.OUTSIDE, playerId);
+		Deck deck;
+		try {
+			deck = Deck.load(deckList);
+			game.loadCards(deck.getCards(), playerId);
+			for (Card card: deck.getCards()) {
+				card.putOntoBattlefield(game, Zone.OUTSIDE, playerId);
+			}
+		} catch (GameException ex) {
+			logger.warning(ex.getMessage());
 		}
 		addCardsForTesting(game);
 		updateGame();

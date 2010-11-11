@@ -28,6 +28,11 @@
 
 package mage.sets;
 
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.List;
+import mage.Constants.Rarity;
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
 
 /**
@@ -43,7 +48,13 @@ public class ShardsOfAlara extends ExpansionSet {
 	}
 
 	private ShardsOfAlara() {
-		super("Shards Of Alara", "ALA", "seticon_mtgala", "mage.sets.shardsofalara");
+		super("Shards of Alara", "ALA", "seticon_mtgala", "mage.sets.shardsofalara", new GregorianCalendar(2008, 8, 27).getTime(), false);
+		this.blockName = "Shards of Alara";
+		this.numBoosterLands = 1;
+		this.numBoosterCommon = 10;
+		this.numBoosterUncommon = 3;
+		this.numBoosterRare = 1;
+		this.ratioBoosterMythic = 8;
 	}
 
 }

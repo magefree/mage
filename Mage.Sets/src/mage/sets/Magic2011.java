@@ -28,6 +28,7 @@
 
 package mage.sets;
 
+import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 
 /**
@@ -43,6 +44,12 @@ public class Magic2011 extends ExpansionSet {
 	}
 
 	private Magic2011() {
-		super("Magic 2011", "M11", "seticon_M11", "mage.sets.magic2011");
+		super("Magic 2011", "M11", "seticon_M11", "mage.sets.magic2011", new GregorianCalendar(2010, 6, 16).getTime(), true);
+		this.numBoosterLands = 1;
+		this.numBoosterCommon = 10;
+		this.numBoosterUncommon = 3;
+		this.numBoosterRare = 1;
+		this.ratioBoosterMythic = 8;
 	}
+
 }
