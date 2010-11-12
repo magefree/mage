@@ -155,12 +155,6 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		this.left = false;
 		this.passed = false;
 		this.passedTurn = false;
-		for (Card card: library.getCards(game)) {
-			for (Watcher watcher: card.getWatchers()) {
-				watcher.setControllerId(playerId);
-				game.getState().getWatchers().add(watcher);
-			}
-		}
 		findRange(game);
 	}
 

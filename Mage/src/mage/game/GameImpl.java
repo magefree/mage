@@ -83,6 +83,7 @@ import mage.players.PlayerList;
 import mage.players.Players;
 import mage.target.TargetPlayer;
 import mage.util.Logging;
+import mage.watchers.Watcher;
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
 
@@ -156,6 +157,10 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		for (Card card: cards) {
 			card.setOwnerId(ownerId);
 			gameCards.put(card.getId(), card);
+			for (Watcher watcher: card.getWatchers()) {
+				watcher.setControllerId(ownerId);
+				state.getWatchers().add(watcher);
+			}
 		}
 	}
 

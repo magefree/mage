@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class AetherAdept extends CardImpl<AetherAdept> {
 
 	public AetherAdept(UUID ownerId) {
-		super(ownerId, 41, "Æther Adept", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
+		super(ownerId, 41, "AEther Adept", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Human");
 		this.subtype.add("Wizard");

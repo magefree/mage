@@ -43,4 +43,12 @@ public class MinusOneCounter extends BoostCounter<MinusOneCounter> {
 		this.count = amount;
 	}
 
+	public MinusOneCounter(final MinusOneCounter counter) {
+		super(counter);
+	}
+
+	@Override
+	public MinusOneCounter copy() {
+		return new MinusOneCounter(this);
+	}
 }

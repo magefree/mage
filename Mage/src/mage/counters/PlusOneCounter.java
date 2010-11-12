@@ -42,4 +42,13 @@ public class PlusOneCounter extends BoostCounter<PlusOneCounter> {
 		super(1, 1);
 		this.count = amount;
 	}
+
+	public PlusOneCounter(final PlusOneCounter counter) {
+		super(counter);
+	}
+
+	@Override
+	public PlusOneCounter copy() {
+		return new PlusOneCounter(this);
+	}
 }
