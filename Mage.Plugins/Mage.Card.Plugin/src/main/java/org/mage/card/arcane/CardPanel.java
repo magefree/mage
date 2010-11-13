@@ -420,7 +420,12 @@ public class CardPanel extends MagePermanent {
 
 	@Override
 	public List<MagePermanent> getLinks() {
-		return null;
+		List<MagePermanent> list = new ArrayList<MagePermanent>();
+		if (attachedPanels == null) return list;
+		for (MagePermanent p : attachedPanels) {
+			list.add(p);
+		}
+		return list;
 	}
 
 	@Override

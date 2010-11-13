@@ -84,7 +84,7 @@ public class ImageCache {
 
 	public static BufferedImage getImageOriginal(CardView card) {
 		String key = getKey(card);
-		log.debug("#key: " + key);
+		//log.debug("#key: " + key);
 		return getImage(key);
 	}
 

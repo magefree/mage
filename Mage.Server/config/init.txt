@@ -7,5 +7,7 @@
 #
 #
 hand:player:Fireball:2
-battlefield:player:Mountain:5
-battlefield:computer:Brindle Boar:2
+battlefield:player:Plains:5
+battlefield:player:Brindle Boar:1
+battlefield:computer:Brindle Boar:1
+hand:player:Holy Strength:2
