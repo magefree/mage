@@ -132,8 +132,8 @@ class BloodcrazedGoblinEffect extends ReplacementEffectImpl<BloodcrazedGoblinEff
 	public boolean applies(GameEvent event, Ability source, Game game) {
 		if (event.getType() == EventType.DECLARE_ATTACKER && source.getSourceId().equals(event.getSourceId())) {
 			Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "OpponentDamaged");
-			if (watcher != null && watcher.conditionMet())
-				return true;
+			if (watcher != null)
+				return !watcher.conditionMet();
 		}
 		return false;
 	}

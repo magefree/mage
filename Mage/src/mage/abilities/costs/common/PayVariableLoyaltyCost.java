@@ -29,7 +29,6 @@
 package mage.abilities.costs.common;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.VariableCost;
 import mage.game.Game;
@@ -45,7 +44,7 @@ public class PayVariableLoyaltyCost extends CostImpl<PayVariableLoyaltyCost> imp
 	protected int amountPaid = 0;
 
 	public PayVariableLoyaltyCost() {
-		this.text = "X loyalty";
+		this.text = "-X loyalty";
 	}
 
 	public PayVariableLoyaltyCost(final PayVariableLoyaltyCost cost) {

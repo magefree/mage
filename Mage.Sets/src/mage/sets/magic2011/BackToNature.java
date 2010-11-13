@@ -41,7 +41,7 @@ import mage.filter.FilterPermanent;
  */
 public class BackToNature extends CardImpl<BackToNature> {
 
-	private static FilterPermanent filter = new FilterPermanent();
+	private static FilterPermanent filter = new FilterPermanent("enchantments");
 
 	static {
 		filter.getCardType().add(CardType.ENCHANTMENT);

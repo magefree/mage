@@ -92,4 +92,9 @@ class BloodTitheEffect extends OneShotEffect<BloodTitheEffect> {
 		return new BloodTitheEffect(this);
 	}
 
+	@Override
+	public String getText(Ability source) {
+		return "Each opponent loses 3 life. You gain life equal to the life lost this way";
+	}
+
 }

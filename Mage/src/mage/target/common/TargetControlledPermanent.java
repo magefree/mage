@@ -50,7 +50,7 @@ public class TargetControlledPermanent<T extends TargetControlledPermanent<T>> e
 	}
 
 	public TargetControlledPermanent(int minNumTargets, int maxNumTargets, FilterControlledPermanent filter, boolean notTarget) {
-		super(1, 1, filter, notTarget);
+		super(minNumTargets, maxNumTargets, filter, notTarget);
 		this.targetName = filter.getMessage();
 	}
 

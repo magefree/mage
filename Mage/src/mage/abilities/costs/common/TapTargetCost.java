@@ -28,6 +28,7 @@
 
 package mage.abilities.costs.common;
 
+import java.util.List;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.costs.CostImpl;
@@ -41,19 +42,22 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class TapTargetCost extends CostImpl<TapTargetCost> {
 
+	TargetControlledPermanent target;
+
 	public TapTargetCost(TargetControlledPermanent target) {
-		this.addTarget(target);
-		this.text = "tap " + target.getTargetName() + " you control";
+		this.target = target;
+		this.text = "tap " + target.getMaxNumberOfTargets() + " " + target.getTargetName() + " you control";
 	}
 
 	public TapTargetCost(final TapTargetCost cost) {
 		super(cost);
+		this.target = cost.target.copy();
 	}
 
 	@Override
 	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-		if (targets.choose(Outcome.Tap, controllerId, game)) {
-			for (UUID targetId: targets.get(0).getTargets()) {
+		if (target.choose(Outcome.Tap, controllerId, game)) {
+			for (UUID targetId: (List<UUID>)target.getTargets()) {
 				Permanent permanent = game.getPermanent(targetId);
 				if (permanent == null)
 					return false;
@@ -65,7 +69,7 @@ public class TapTargetCost extends CostImpl<TapTargetCost> {
 
 	@Override
 	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return targets.canChoose(controllerId, controllerId, game);
+		return target.canChoose(controllerId, controllerId, game);
 	}
 
 	@Override

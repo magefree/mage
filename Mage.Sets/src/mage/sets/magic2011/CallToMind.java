@@ -54,7 +54,7 @@ public class CallToMind extends CardImpl<CallToMind> {
 	}
 
 	public CallToMind(UUID ownerId) {
-		super(ownerId, 47, "CallToMind", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
+		super(ownerId, 47, "Call to Mind", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
 		this.expansionSetCode = "M11";
 		this.color.setBlue(true);
 

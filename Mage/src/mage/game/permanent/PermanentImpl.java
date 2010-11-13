@@ -358,11 +358,14 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	@Override
 	public boolean addAttachment(UUID permanentId, Game game) {
 		if (!this.attachments.contains(permanentId)) {
-			if (!game.replaceEvent(new GameEvent(GameEvent.EventType.ATTACH, objectId, permanentId, controllerId, damage))) {
+			if (!game.replaceEvent(new GameEvent(GameEvent.EventType.ATTACH, objectId, permanentId, controllerId))) {
 				this.attachments.add(permanentId);
-				game.getPermanent(permanentId).attachTo(objectId);
-				game.fireEvent(new GameEvent(GameEvent.EventType.ATTACHED, objectId, permanentId, controllerId, damage));
-				return true;
+				Permanent attachment = game.getPermanent(permanentId);
+				if (attachment != null) {
+					attachment.attachTo(objectId);
+					game.fireEvent(new GameEvent(GameEvent.EventType.ATTACHED, objectId, permanentId, controllerId));
+					return true;
+				}
 			}
 		}
 		return false;
@@ -371,10 +374,13 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	@Override
 	public boolean removeAttachment(UUID permanentId, Game game) {
 		if (this.attachments.contains(permanentId)) {
-			if (!game.replaceEvent(new GameEvent(GameEvent.EventType.UNATTACH, objectId, permanentId, controllerId, damage))) {
+			if (!game.replaceEvent(new GameEvent(GameEvent.EventType.UNATTACH, objectId, permanentId, controllerId))) {
 				this.attachments.remove(permanentId);
-				game.getPermanent(permanentId).attachTo(null);
-				game.fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, objectId, permanentId, controllerId, damage));
+				Permanent attachment = game.getPermanent(permanentId);
+				if (attachment != null) {
+					attachment.attachTo(null);
+				}
+				game.fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, objectId, permanentId, controllerId));
 				return true;
 			}
 		}
