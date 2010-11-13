@@ -276,7 +276,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			File file = fcSelectDeck.getSelectedFile();
 			try {
 				setCursor(new Cursor(Cursor.WAIT_CURSOR));
-				deck = Deck.load(DeckCardLists.load(file.getPath()));
+				deck = Deck.load(DeckCardLists.load(file.getPath()), true);
 			} catch (GameException ex) {
 				JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
 			} catch (Exception ex) {

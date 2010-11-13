@@ -41,21 +41,29 @@ public class Deck implements Serializable {
 	private Set<Card> sideboard = new LinkedHashSet<Card>();
 
 	public static Deck load(DeckCardLists deckCardLists) throws GameException {
+		return Deck.load(deckCardLists, false);
+	}
+
+	public static Deck load(DeckCardLists deckCardLists, boolean ignoreErrors) throws GameException {
 		Deck deck = new Deck();
 		deck.setName(deckCardLists.getName());
 		for (String cardName: deckCardLists.getCards()) {
 			Card card = CardImpl.createCard(cardName);
 			if (card != null)
 				deck.cards.add(CardImpl.createCard(cardName));
-			else
-				throw new GameException("Error loading card - " + cardName + " for deck - " + deck.getName());
+			else {
+				if (!ignoreErrors)
+					throw new GameException("Error loading card - " + cardName + " for deck - " + deck.getName());
+			}
 		}
 		for (String cardName: deckCardLists.getSideboard()) {
 			Card card = CardImpl.createCard(cardName);
 			if (card != null)
 				deck.sideboard.add(CardImpl.createCard(cardName));
-			else
-				throw new GameException("Error loading card - " + cardName + " for deck - " + deck.getName());
+			else {
+				if (!ignoreErrors)
+					throw new GameException("Error loading card - " + cardName + " for deck - " + deck.getName());
+			}
 		}
 
 		return deck;
