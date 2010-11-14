@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 import java.io.File;
 
 public class Constants {
-	public static final String RESOURCE_PATH = "/images";
+	public static final String RESOURCE_PATH = "/plugin.images";
 	public static final String RESOURCE_PATH_MANA = resourcePath("mana");
 	public static final Rectangle CARD_SIZE_FULL = new Rectangle(101, 149);
 	
