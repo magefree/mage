@@ -352,6 +352,23 @@ public final class Constants {
 		}
 	}
 
+	public enum SetType {
+		CORE("Core"),
+		EXPANSION("Expansion"),
+		REPRINT("Reprint");
+
+		private String text;
+
+		SetType(String text) {
+			this.text = text;
+		}
+
+		@Override
+		public String toString() {
+			return text;
+		}
+	}
+
 	public static final List<String> PlaneswalkerTypes = new ArrayList<String>()
 		{{add("Ajani"); add("Bolas"); add("Chandra"); add("Elspeth");add("Garruk"); add("Jace"); add("Liliana"); add("Nissa"); add("Sarkhan"); add("Sorin"); add("Tezzeret");}};
 	

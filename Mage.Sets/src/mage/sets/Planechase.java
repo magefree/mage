@@ -36,22 +36,16 @@ import mage.cards.ExpansionSet;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Magic2011 extends ExpansionSet {
+public class Planechase extends ExpansionSet {
 
-	private static final Magic2011 fINSTANCE =  new Magic2011();
+	private static final Planechase fINSTANCE =  new Planechase();
 
-	public static Magic2011 getInstance() {
+	public static Planechase getInstance() {
 		return fINSTANCE;
 	}
 
-	private Magic2011() {
-		super("Magic 2011", "M11", "seticon_M11", "mage.sets.magic2011", new GregorianCalendar(2010, 6, 16).getTime(), SetType.CORE);
-		this.hasBoosters = true;
-		this.numBoosterLands = 1;
-		this.numBoosterCommon = 10;
-		this.numBoosterUncommon = 3;
-		this.numBoosterRare = 1;
-		this.ratioBoosterMythic = 8;
+	private Planechase() {
+		super("Planechase", "HOP", "", "mage.sets.planechase", new GregorianCalendar(2009, 8, 4).getTime(), SetType.REPRINT);
 	}
 
 }

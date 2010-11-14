@@ -29,6 +29,7 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
+import mage.Constants.SetType;
 import mage.cards.ExpansionSet;
 
 /**
@@ -44,8 +45,10 @@ public class RiseOfTheEldrazi extends ExpansionSet {
 	}
 
 	private RiseOfTheEldrazi() {
-		super("Rise of the Eldrazi", "ROE", "seticon_ROE", "mage.sets.riseoftheeldrazi", new GregorianCalendar(2010, 3, 17).getTime(), false);
+		super("Rise of the Eldrazi", "ROE", "seticon_ROE", "mage.sets.riseoftheeldrazi", new GregorianCalendar(2010, 3, 17).getTime(), SetType.EXPANSION);
 		this.blockName = "Zendikar";
+		this.parentSet = Zendikar.getInstance();
+		this.hasBoosters = true;
 		this.numBoosterLands = 1;
 		this.numBoosterCommon = 10;
 		this.numBoosterUncommon = 3;

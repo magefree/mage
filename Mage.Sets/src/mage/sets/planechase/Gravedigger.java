@@ -26,66 +26,29 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets;
+package mage.sets.planechase;
 
-import java.util.HashMap;
-import java.util.Set;
-import java.util.TreeSet;
-import mage.cards.Card;
-import mage.cards.ExpansionSet;
+import java.util.UUID;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Sets extends HashMap<String, ExpansionSet> {
+public class Gravedigger extends mage.sets.tenth.Gravedigger {
 
-	private static final Sets fINSTANCE =  new Sets();
-	private static Set<String> names;
-
-	public static Sets getInstance() {
-		return fINSTANCE;
+	public Gravedigger(UUID ownerId) {
+		super(ownerId);
+		this.cardNumber = 29;
+		this.expansionSetCode = "HOP";
 	}
 
-	private Sets() {
-		names = new TreeSet<String>();
-		this.addSet(AlaraReborn.getInstance());
-		this.addSet(Conflux.getInstance());
-		this.addSet(Magic2010.getInstance());
-		this.addSet(Magic2011.getInstance());
-		this.addSet(Planechase.getInstance());
-		this.addSet(RiseOfTheEldrazi.getInstance());
-		this.addSet(ShardsOfAlara.getInstance());
-		this.addSet(Tenth.getInstance());
-		this.addSet(Worldwake.getInstance());
-		this.addSet(Zendikar.getInstance());
+	public Gravedigger(final Gravedigger card) {
+		super(card);
 	}
 
-	private void addSet(ExpansionSet set) {
-		this.put(set.getCode(), set);
-		for (Card card: set.createCards()) {
-			names.add(card.getName());
-		}
+	@Override
+	public Gravedigger copy() {
+		return new Gravedigger(this);
 	}
 
-	public static Set<String> getCardNames() {
-		return names;
-	}
-
-	public static String findCard(String name) {
-		for (ExpansionSet set: fINSTANCE.values()) {
-			String cardName = set.findCard(name);
-			if (cardName != null)
-				return cardName;
-		}
-		return null;
-	}
-	
-	public static ExpansionSet findSet(String code) {
-		for (ExpansionSet set: fINSTANCE.values()) {
-			if (set.getCode().equals(code))
-				return set;
-		}
-		return null;
-	}
 }

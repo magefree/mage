@@ -48,6 +48,7 @@ import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mage.Constants.Rarity;
+import mage.Constants.SetType;
 import mage.util.Logging;
 
 /**
@@ -66,22 +67,23 @@ public abstract class ExpansionSet implements Serializable {
 	protected Date releaseDate;
 	protected ExpansionSet parentSet;
 	protected List<Class> cards;
-	protected boolean core;
+	protected SetType setType;
 	protected Map<Rarity, List<Class>> rarities;
 
 	protected String blockName;
+	protected boolean hasBoosters = false;
 	protected int numBoosterLands;
 	protected int numBoosterCommon;
 	protected int numBoosterUncommon;
 	protected int numBoosterRare;
 	protected int ratioBoosterMythic;
 
-	public ExpansionSet(String name, String code, String symbolCode, String packageName, Date releaseDate, boolean core) {
+	public ExpansionSet(String name, String code, String symbolCode, String packageName, Date releaseDate, SetType setType) {
 		this.name = name;
 		this.code = code;
 		this.symbolCode = symbolCode;
 		this.releaseDate = releaseDate;
-		this.core = core;
+		this.setType = setType;
 		this.cards = getCardClassesForPackage(packageName);
 		this.rarities = getCardsByRarity();
 	}
@@ -106,8 +108,8 @@ public abstract class ExpansionSet implements Serializable {
 		return releaseDate;
 	}
 	
-	public boolean isCore() {
-		return core;
+	public SetType getSetType() {
+		return setType;
 	}
 
 	public Card createCard(Class clazz) {
@@ -196,28 +198,41 @@ public abstract class ExpansionSet implements Serializable {
 	public List<Card> createBooster() {
 		List<Card> booster = new ArrayList<Card>();
 
+		if (!hasBoosters)
+			return booster;
+
 		if (parentSet != null) {
-			parentSet.getRandom(Rarity.LAND);
+			for (int i = 0; i < numBoosterLands; i++) {
+				addToBooster(booster, parentSet, Rarity.LAND);
+			}
 		}
 		else {
-			booster.add(getRandom(Rarity.LAND));
+			for (int i = 0; i < numBoosterLands; i++) {
+				addToBooster(booster, this, Rarity.LAND);
+			}
 		}
 		for (int i = 0; i < numBoosterCommon; i++) {
-			booster.add(getRandom(Rarity.COMMON));
+			addToBooster(booster, this, Rarity.COMMON);
 		}
 		for (int i = 0; i < numBoosterUncommon; i++) {
-			booster.add(getRandom(Rarity.UNCOMMON));
+			addToBooster(booster, this, Rarity.UNCOMMON);
 		}
 		for (int i = 0; i < numBoosterRare; i++) {
 			if (rnd.nextInt(ratioBoosterMythic) == 1) {
-				booster.add(getRandom(Rarity.MYTHIC));
+				addToBooster(booster, this, Rarity.MYTHIC);
 			}
 			else {
-				booster.add(getRandom(Rarity.RARE));
+				addToBooster(booster, this, Rarity.RARE);
 			}
 		}
 
 		return booster;
+	}
+
+	protected void addToBooster(List<Card> booster, ExpansionSet set, Rarity rarity) {
+		Card card = set.getRandom(rarity);
+		if (card != null)
+			booster.add(card);
 	}
 
 	protected Card getRandom(Rarity rarity) {

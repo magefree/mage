@@ -29,6 +29,7 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
+import mage.Constants.SetType;
 import mage.cards.ExpansionSet;
 
 /**
@@ -44,8 +45,10 @@ public class AlaraReborn extends ExpansionSet {
 	}
 
 	private AlaraReborn() {
-		super("Alara Reborn", "ARB", "seticon_mtgarb", "mage.sets.alarareborn", new GregorianCalendar(2009, 3, 25).getTime(), false);
+		super("Alara Reborn", "ARB", "seticon_mtgarb", "mage.sets.alarareborn", new GregorianCalendar(2009, 3, 25).getTime(), SetType.EXPANSION);
 		this.blockName = "Shards of Alara";
+		this.parentSet = ShardsOfAlara.getInstance();
+		this.hasBoosters = true;
 		this.numBoosterLands = 1;
 		this.numBoosterCommon = 10;
 		this.numBoosterUncommon = 3;

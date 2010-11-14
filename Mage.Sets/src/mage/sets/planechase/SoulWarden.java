@@ -26,32 +26,29 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.sets;
+package mage.sets.planechase;
 
-import java.util.GregorianCalendar;
-import mage.Constants.SetType;
-import mage.cards.ExpansionSet;
+import java.util.UUID;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Magic2011 extends ExpansionSet {
+public class SoulWarden extends mage.sets.magic2010.SoulWarden {
 
-	private static final Magic2011 fINSTANCE =  new Magic2011();
-
-	public static Magic2011 getInstance() {
-		return fINSTANCE;
+	public SoulWarden(UUID ownerId) {
+		super(ownerId);
+		this.cardNumber = 7;
+		this.expansionSetCode = "HOP";
 	}
 
-	private Magic2011() {
-		super("Magic 2011", "M11", "seticon_M11", "mage.sets.magic2011", new GregorianCalendar(2010, 6, 16).getTime(), SetType.CORE);
-		this.hasBoosters = true;
-		this.numBoosterLands = 1;
-		this.numBoosterCommon = 10;
-		this.numBoosterUncommon = 3;
-		this.numBoosterRare = 1;
-		this.ratioBoosterMythic = 8;
+	public SoulWarden(final SoulWarden card) {
+		super(card);
+	}
+
+	@Override
+	public SoulWarden copy() {
+		return new SoulWarden(this);
 	}
 
 }

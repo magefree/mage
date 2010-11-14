@@ -29,6 +29,7 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
+import mage.Constants.SetType;
 import mage.cards.ExpansionSet;
 
 /**
@@ -44,8 +45,9 @@ public class Zendikar extends ExpansionSet {
 	}
 
 	private Zendikar() {
-		super("Zendikar", "ZEN", "seticon_ZEN", "mage.sets.zendikar", new GregorianCalendar(2009, 8, 26).getTime(), false);
+		super("Zendikar", "ZEN", "seticon_ZEN", "mage.sets.zendikar", new GregorianCalendar(2009, 8, 26).getTime(), SetType.EXPANSION);
 		this.blockName = "Zendikar";
+		this.hasBoosters = true;
 		this.numBoosterLands = 1;
 		this.numBoosterCommon = 10;
 		this.numBoosterUncommon = 3;
