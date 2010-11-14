@@ -10,11 +10,11 @@
 	</parent>
 
 	<groupId>org.mage</groupId>
-	<artifactId>Mage-Card-Plugin</artifactId>
+	<artifactId>Mage-Counter-Plugin</artifactId>
 	<packaging>jar</packaging>
-	<version>${plugin-version}</version>
-	<name>Mage Card Plugin</name>
-	<description>Plugin for drawing card</description>
+	<version>0.3</version>
+	<name>Mage Counter Plugin</name>
+	<description>Implements game counter to display amount of games played</description>
 
 	<dependencies>
 		<dependency>
@@ -33,18 +33,6 @@
 			<version>1.2.9</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.google.collections</groupId>
-			<artifactId>google-collections</artifactId>
-			<version>1.0</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.mortennobel</groupId>
-			<artifactId>java-image-scaling</artifactId>
-			<version>0.8.4</version>
-			<scope>provided</scope>
-		</dependency>
 	</dependencies>
 
 	<build>
@@ -57,10 +45,10 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
-			
+
 		</plugins>
 
-		<finalName>mage-card-plugin</finalName>
+		<finalName>mage-counter-plugin</finalName>
 	</build>
 
 	<properties>

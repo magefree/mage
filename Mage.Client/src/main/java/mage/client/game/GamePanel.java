@@ -35,6 +35,7 @@
 package mage.client.game;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -44,6 +45,7 @@ import java.util.UUID;
 import java.util.logging.Logger;
 
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -84,15 +86,11 @@ public class GamePanel extends javax.swing.JPanel {
         
         //FIXME: remove from here
 		try {
-			/*BufferedImage background = ImageIO.read(this.getClass().getResourceAsStream("/green.jpg"));
-			ImagePanel bgPanel = new ImagePanel(background, ImagePanel.TILED);*/
-			
 	        // Override layout (I can't edit generated code)
 	        this.setLayout(new BorderLayout());
 			final JLayeredPane j = new JLayeredPane();
 			j.add(ArrowBuilder.getArrowsPanel(), JLayeredPane.MODAL_LAYER);
 			j.setSize(1024,768);
-			//j.setBorder(BorderFactory.createLineBorder(Color.green));
 			this.add(j);
 			j.add(jSplitPane1, JLayeredPane.DEFAULT_LAYER);
 			

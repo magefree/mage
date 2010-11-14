@@ -35,6 +35,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
+import mage.client.plugins.impl.Plugins;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.util.Logging;
@@ -168,6 +169,10 @@ public class Client implements CallbackClient {
 		}
 		catch (Exception ex) {
 			handleException(ex);
+		}
+		
+		if (Plugins.getInstance().isCounterPluginLoaded()) {
+			Plugins.getInstance().addGamesPlayed();
 		}
 	}
 

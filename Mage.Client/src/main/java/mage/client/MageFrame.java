@@ -34,6 +34,7 @@
 
 package mage.client;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -47,6 +48,7 @@ import java.util.prefs.Preferences;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JToolBar.Separator;
@@ -130,9 +132,9 @@ public class MageFrame extends javax.swing.JFrame {
 		else
 			disableButtons();
 		
-		//TODO:
+		//TODO: move to plugin impl
 		if (Plugins.getInstance().isCardPluginLoaded()) {
-		Separator separator = new javax.swing.JToolBar.Separator();
+			Separator separator = new javax.swing.JToolBar.Separator();
 			mageToolbar.add(separator);
 			
 			JButton btnDownload = new JButton("Images");
@@ -146,6 +148,15 @@ public class MageFrame extends javax.swing.JFrame {
 	            }
 	        });
 	        mageToolbar.add(btnDownload);
+		}
+		
+		if (Plugins.getInstance().isCounterPluginLoaded()) {
+			int i = Plugins.getInstance().getGamesPlayed();
+			JLabel label = new JLabel(" Games played: " + String.valueOf(i));
+			desktopPane.add(label);
+			label.setVisible(true);
+			label.setForeground(Color.white);
+			label.setBounds(0, 0, 100, 30);
 		}
     }
     

@@ -20,6 +20,7 @@
 	<modules>
 		<module>Mage.Theme.Plugin</module>
 		<module>Mage.Card.Plugin</module>
+		<module>Mage.Counter.Plugin</module>
 	</modules>
 	
 </project>

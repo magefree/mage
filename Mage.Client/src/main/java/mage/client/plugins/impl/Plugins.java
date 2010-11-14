@@ -2,7 +2,6 @@ package mage.client.plugins.impl;
 
 import java.io.File;
 import java.util.Collection;
-import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -13,7 +12,6 @@ import javax.swing.JComponent;
 
 import mage.cards.Card;
 import mage.cards.CardDimensions;
-import mage.cards.ExpansionSet;
 import mage.cards.MagePermanent;
 import mage.cards.action.impl.EmptyCallback;
 import mage.client.cards.BigCard;
@@ -22,9 +20,10 @@ import mage.client.plugins.MagePlugins;
 import mage.client.util.Config;
 import mage.client.util.DefaultActionCallback;
 import mage.constants.Constants;
+import mage.interfaces.PluginException;
 import mage.interfaces.plugin.CardPlugin;
+import mage.interfaces.plugin.CounterPlugin;
 import mage.interfaces.plugin.ThemePlugin;
-import mage.sets.Sets;
 import mage.util.Logging;
 import mage.view.PermanentView;
 import net.xeoh.plugins.base.PluginManager;
@@ -38,6 +37,7 @@ public class Plugins implements MagePlugins {
 	private static PluginManager pm;
 	private final static Logger logger = Logging.getLogger(Plugins.class.getName());
 	private CardPlugin cardPlugin = null;
+	private CounterPlugin counterPlugin = null;
 	protected static DefaultActionCallback defaultCallback = DefaultActionCallback.getInstance();
 	private static final EmptyCallback emptyCallback = new EmptyCallback();
 	
@@ -51,6 +51,7 @@ public class Plugins implements MagePlugins {
 		pm = PluginManagerFactory.createPluginManager();
 		pm.addPluginsFrom(new File(Constants.PLUGINS_DIRECTORY).toURI());
 		this.cardPlugin = pm.getPlugin(CardPlugin.class);
+		this.counterPlugin = pm.getPlugin(CounterPlugin.class);
 		logger.log(Level.INFO, "Done.");
 	}
 	
@@ -90,5 +91,40 @@ public class Plugins implements MagePlugins {
 	@Override
 	public void downloadImage(Set<Card> allCards) {
 		if (this.cardPlugin != null) this.cardPlugin.downloadImages(allCards);
+	}
+
+	@Override
+	public int getGamesPlayed() {
+		if (this.counterPlugin != null) {
+			synchronized(Plugins.class) {
+				try {
+					return this.counterPlugin.getGamePlayed();
+				} catch (PluginException e) {
+					logger.log(Level.SEVERE, e.getMessage());
+					throw new RuntimeException(e);
+				}
+			}
+		}
+		return -1;
+	}
+
+	@Override
+	public int addGamesPlayed() {
+		if (this.counterPlugin != null) {
+			synchronized(Plugins.class) {
+				try {
+					this.counterPlugin.addGamePlayed();
+				} catch (PluginException e) {
+					logger.log(Level.SEVERE, e.getMessage());
+					throw new RuntimeException(e);
+				}
+			}
+		}
+		return 0;
+	}
+
+	@Override
+	public boolean isCounterPluginLoaded() {
+		return this.counterPlugin != null;
 	}
 }
