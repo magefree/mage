@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
 public class DemonOfDeathsGate extends CardImpl<DemonOfDeathsGate> {
 
 	public DemonOfDeathsGate(UUID ownerId) {
-		super(ownerId, 92, "Demon Of Death's Gate", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{B}{B}{B}");
+		super(ownerId, 92, "Demon of Death's Gate", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{B}{B}{B}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Demon");
 		this.color.setBlack(true);

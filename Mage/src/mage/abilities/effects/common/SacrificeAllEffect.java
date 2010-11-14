@@ -36,10 +36,12 @@ import mage.Constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -48,13 +50,13 @@ import mage.target.TargetPermanent;
 public class SacrificeAllEffect extends OneShotEffect<SacrificeAllEffect> {
 
 	protected int amount;
-	protected FilterPermanent filter;
+	protected FilterControlledPermanent filter;
 
-	public SacrificeAllEffect(FilterPermanent filter) {
+	public SacrificeAllEffect(FilterControlledPermanent filter) {
 		this(1, filter);
 	}
 
-	public SacrificeAllEffect(int amount, FilterPermanent filter) {
+	public SacrificeAllEffect(int amount, FilterControlledPermanent filter) {
 		super(Outcome.Sacrifice);
 		this.amount = amount;
 		this.filter = filter;
@@ -77,7 +79,7 @@ public class SacrificeAllEffect extends OneShotEffect<SacrificeAllEffect> {
 		for (Player player: game.getPlayers().values()) {
 			int numTargets = Math.min(amount, game.getBattlefield().countAll(filter, player.getId()));
 			filter.setTargetController(TargetController.YOU);
-			TargetPermanent target = new TargetPermanent(numTargets, filter);
+			TargetControlledPermanent target = new TargetControlledPermanent(numTargets, numTargets, filter, false);
 			while (!target.isChosen()) {
 				player.choose(Outcome.Sacrifice, target, game);
 			}
@@ -85,7 +87,8 @@ public class SacrificeAllEffect extends OneShotEffect<SacrificeAllEffect> {
 		}
 		for (UUID permID: perms) {
 			Permanent permanent = game.getPermanent(permID);
-			permanent.sacrifice(source.getSourceId(), game);
+			if (permanent != null)
+				permanent.sacrifice(source.getSourceId(), game);
 		}
 		return true;
 	}

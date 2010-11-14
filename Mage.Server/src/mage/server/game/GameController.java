@@ -304,7 +304,7 @@ public class GameController implements GameCallback {
 		informOthers(playerId);
 	}
 
-	private synchronized void choose(UUID playerId, String message, String[] choices) {
+	private synchronized void choose(UUID playerId, String message, Set<String> choices) {
 		if (gameSessions.containsKey(playerId))
 			gameSessions.get(playerId).choose(message, choices);
 		informOthers(playerId);

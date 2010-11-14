@@ -28,11 +28,7 @@
 
 package mage.sets;
 
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.List;
-import mage.Constants.Rarity;
-import mage.cards.Card;
 import mage.cards.ExpansionSet;
 
 /**

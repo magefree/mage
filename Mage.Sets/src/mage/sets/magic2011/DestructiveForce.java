@@ -34,6 +34,7 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 
@@ -43,11 +44,17 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class DestructiveForce extends CardImpl<DestructiveForce> {
 
+	private static FilterControlledPermanent filter = new FilterControlledPermanent("land");
+
+	static {
+		filter.getCardType().add(CardType.LAND);
+	}
+
 	public DestructiveForce(UUID ownerId) {
 		super(ownerId, 133, "Destructive Force", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
 		this.expansionSetCode = "M11";
 		this.color.setRed(true);
-		this.getSpellAbility().addEffect(new SacrificeAllEffect(5, new FilterLandPermanent()));
+		this.getSpellAbility().addEffect(new SacrificeAllEffect(5, filter));
 		this.getSpellAbility().addEffect(new DamageAllEffect(5, FilterCreaturePermanent.getDefault()));
 	}
 

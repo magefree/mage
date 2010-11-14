@@ -28,11 +28,7 @@
 
 package mage.sets;
 
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.List;
-import mage.Constants.Rarity;
-import mage.cards.Card;
 import mage.cards.ExpansionSet;
 
 /**
@@ -48,7 +44,7 @@ public class RiseOfTheEldrazi extends ExpansionSet {
 	}
 
 	private RiseOfTheEldrazi() {
-		super("Rise Of The Eldrazi", "ROE", "seticon_ROE", "mage.sets.riseoftheeldrazi", new GregorianCalendar(2010, 3, 17).getTime(), false);
+		super("Rise of the Eldrazi", "ROE", "seticon_ROE", "mage.sets.riseoftheeldrazi", new GregorianCalendar(2010, 3, 17).getTime(), false);
 		this.blockName = "Zendikar";
 		this.numBoosterLands = 1;
 		this.numBoosterCommon = 10;

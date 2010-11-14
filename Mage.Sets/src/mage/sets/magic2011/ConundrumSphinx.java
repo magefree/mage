@@ -28,7 +28,6 @@
 
 package mage.sets.magic2011;
 
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.Constants.CardType;

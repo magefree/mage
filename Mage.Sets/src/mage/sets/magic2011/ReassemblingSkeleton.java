@@ -45,13 +45,13 @@ import mage.cards.CardImpl;
 public class ReassemblingSkeleton extends CardImpl<ReassemblingSkeleton> {
 
 	public ReassemblingSkeleton(UUID ownerId) {
-		super(ownerId, 112, "Reassembling Skeleton", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+		super(ownerId, 112, "Reassembling Skeleton", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
 		this.expansionSetCode = "M11";
-		this.subtype.add("Human");
-		this.subtype.add("Knight");
-		this.color.setWhite(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(3);
+		this.subtype.add("Skeleton");
+		this.subtype.add("Warrior");
+		this.color.setBlack(true);
+		this.power = new MageInt(1);
+		this.toughness = new MageInt(1);
 
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new ManaCostsImpl("{1}{B}")));
 	}

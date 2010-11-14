@@ -36,6 +36,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CantCounterSourceEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -51,6 +52,7 @@ public class Combust extends CardImpl<Combust> {
 		filter.getColor().setWhite(true);
 		filter.getColor().setBlue(true);
 		filter.setUseColor(true);
+		filter.setScopeColor(ComparisonScope.Any);
 	}
 
 	public Combust(UUID ownerId) {

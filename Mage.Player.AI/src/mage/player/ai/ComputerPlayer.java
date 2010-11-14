@@ -183,7 +183,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			if (!outcome.isGood())
 				Collections.reverse(targets);
 			for (Permanent permanent: targets) {
-				if (target.canTarget(permanent.getId(), game)) {
+				if (target.canTarget(permanent.getId(), game) && !target.getTargets().contains(permanent.getId())) {
 					target.add(permanent.getId(), game);
 					return true;
 				}
@@ -198,7 +198,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				targets = threats(opponentId, ((TargetPermanent)target).getFilter(), game);
 			}
 			for (Permanent permanent: targets) {
-				if (target.canTarget(permanent.getId(), game)) {
+				if (target.canTarget(permanent.getId(), game) && !target.getTargets().contains(permanent.getId())) {
 					target.add(permanent.getId(), game);
 					return true;
 				}

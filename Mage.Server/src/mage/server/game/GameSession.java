@@ -28,6 +28,7 @@
 
 package mage.server.game;
 
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -97,12 +98,12 @@ public class GameSession extends GameWatcher {
 		}
 	}
 
-	public void choose(final String message, final String[] choices) {
+	public void choose(final String message, final Set<String> choices) {
 		if (!killed) {
 			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("gameChoose", new GameClientMessage(choices, message)));
+				session.fireCallback(new ClientCallback("gameChoose", new GameClientMessage(choices.toArray(new String[0]), message)));
 		}
 	}
 

@@ -40,7 +40,7 @@ import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ScryEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -53,12 +53,14 @@ import mage.players.Player;
 public class ElixirOfImmortality extends CardImpl<ElixirOfImmortality> {
 
 	public ElixirOfImmortality(UUID ownerId) {
-		super(ownerId, 206, "Elixir Of Immortality", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
+		super(ownerId, 206, "Elixir of Immortality", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
 		this.expansionSetCode = "M11";
 		Costs costs = new CostsImpl();
 		costs.add(new GenericManaCost(2));
 		costs.add(new TapSourceCost());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(2), costs));
+		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(5), costs);
+		ability.addEffect(new ElixerOfImmortalityEffect());
+		this.addAbility(ability);
 	}
 
 	public ElixirOfImmortality(final ElixirOfImmortality card) {
@@ -94,7 +96,6 @@ class ElixerOfImmortalityEffect extends OneShotEffect<ElixerOfImmortalityEffect>
 		player.removeFromBattlefield(game.getPermanent(source.getSourceId()), game);
 		Card card = game.getCard(source.getSourceId());
 		card.moveToZone(Zone.LIBRARY, game, true);
-//		player.getLibrary().putOnBottom(game.getCard(source.getSourceId()), game);
 		player.getLibrary().addAll(player.getGraveyard().getCards(game));
 		player.getGraveyard().clear();
 		player.getLibrary().shuffle();

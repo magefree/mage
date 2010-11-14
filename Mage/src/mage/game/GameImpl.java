@@ -728,7 +728,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public void fireChooseEvent(UUID playerId, Choice choice) {
-		playerQueryEventSource.choose(playerId, choice.getMessage(), ((List<String>)choice.getChoices()).toArray(new String[0]));
+		playerQueryEventSource.choose(playerId, choice.getMessage(), choice.getChoices());
 	}
 
 	@Override

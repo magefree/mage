@@ -30,6 +30,7 @@ package mage.game.events;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbilities;
@@ -84,7 +85,7 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
 		dispatcher.fireEvent(PlayerQueryEvent.amountEvent(playerId, message, min, max));
 	}
 
-	public void choose(UUID playerId, String message, String[] choices) {
+	public void choose(UUID playerId, String message, Set<String> choices) {
 		dispatcher.fireEvent(PlayerQueryEvent.chooseEvent(playerId, message, choices));
 	}
 

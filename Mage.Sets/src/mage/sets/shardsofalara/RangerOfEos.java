@@ -54,7 +54,7 @@ public class RangerOfEos extends CardImpl<RangerOfEos> {
 	}
 
 	public RangerOfEos(UUID ownerId) {
-		super(ownerId, 21, "Ranger Of Eos", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
+		super(ownerId, 21, "Ranger of Eos", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
 		this.expansionSetCode = "ALA";
 		this.color.setWhite(true);
 		this.subtype.add("Human");

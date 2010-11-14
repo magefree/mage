@@ -51,7 +51,7 @@ import mage.players.Player;
 public class DarkTutelage extends CardImpl<DarkTutelage> {
 
 	public DarkTutelage(UUID ownerId) {
-		super(ownerId, 90, "DarkTutelage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
+		super(ownerId, 90, "Dark Tutelage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 		this.expansionSetCode = "M11";
 		this.getColor().setBlack(true);
 		this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new DarkTutelageEffect(), false));

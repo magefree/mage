@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
 public class WallOfOmens extends CardImpl<WallOfOmens> {
 
 	public WallOfOmens(UUID ownerId) {
-		super(ownerId, 53, "Wall Of Omens", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+		super(ownerId, 53, "Wall of Omens", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
 		this.expansionSetCode = "ROE";
 		this.subtype.add("Wall");
 		this.color.setWhite(true);

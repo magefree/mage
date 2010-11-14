@@ -31,6 +31,7 @@ package mage.game.events;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.EventObject;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -49,7 +50,7 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 
 	private String message;
 	private Collection<? extends Ability> abilities;
-	private String[] choices;
+	private Set<String> choices;
 	private Cards cards;
 	private QueryType queryType;
 	private UUID playerId;
@@ -57,7 +58,7 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 	private int min;
 	private int max;
 
-	private PlayerQueryEvent(UUID playerId, String message, Collection<? extends Ability> abilities, String[] choices, Cards cards, QueryType queryType, int min, int max, boolean required) {
+	private PlayerQueryEvent(UUID playerId, String message, Collection<? extends Ability> abilities, Set<String> choices, Cards cards, QueryType queryType, int min, int max, boolean required) {
 		super(playerId);
 		this.queryType = queryType;
 		this.message = message;
@@ -77,7 +78,7 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 	public static PlayerQueryEvent chooseAbilityEvent(UUID playerId, String message, Collection<? extends ActivatedAbility> choices) {
 		return new PlayerQueryEvent(playerId, message, choices, null, null, QueryType.CHOOSE_ABILITY, 0, 0, false);
 	}
-	public static PlayerQueryEvent chooseEvent(UUID playerId, String message, String[] choices) {
+	public static PlayerQueryEvent chooseEvent(UUID playerId, String message, Set<String> choices) {
 		return new PlayerQueryEvent(playerId, message, null, choices, null, QueryType.CHOOSE, 0, 0, false);
 	}
 
@@ -125,7 +126,7 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 		return abilities;
 	}
 
-	public String[] getChoices() {
+	public Set<String> getChoices() {
 		return choices;
 	}
 
