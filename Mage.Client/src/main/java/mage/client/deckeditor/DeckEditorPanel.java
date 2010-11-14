@@ -337,7 +337,13 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			File file = fcImportDeck.getSelectedFile();
 			try {
 				setCursor(new Cursor(Cursor.WAIT_CURSOR));
-				deck = Deck.load(importDeck(file.getPath()));
+				DeckImporter importer = getDeckImporter(file.getPath());
+				if (importer != null) {
+					deck = Deck.load(importer.importDeck(file.getPath()));
+				}
+				else {
+					JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Unknown deck format", "Error importing deck", JOptionPane.ERROR_MESSAGE);
+				}
 			} catch (Exception ex) {
 				Logger.getLogger(DeckEditorPanel.class.getName()).log(Level.SEVERE, null, ex);
 			}
@@ -352,13 +358,15 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		fcImportDeck.setSelectedFile(null);
 	}//GEN-LAST:event_btnImportActionPerformed
 
-	public DeckCardLists importDeck(String file) {
-		DeckImporter importer;
-		if (file.endsWith("dec"))
-			importer = new DecDeckImporter();
+	public DeckImporter getDeckImporter(String file) {
+		if (file.toLowerCase().endsWith("dec"))
+			return new DecDeckImporter();
+		else if (file.toLowerCase().endsWith("mwdeck"))
+			return new MWSDeckImporter();
+		else if (file.toLowerCase().endsWith("txt"))
+			return new TxtDeckImporter();
 		else
-			importer = new MWSDeckImporter();
-		return importer.importDeck(file);
+			return null;
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -416,7 +424,7 @@ class ImportFilter extends FileFilter {
             ext = s.substring(i+1).toLowerCase();
         }
 		if (ext != null) {
-			if (ext.equals("dec") || ext.equals("mwDeck"))
+			if (ext.toLowerCase().equals("dec") || ext.toLowerCase().equals("mwdeck") || ext.toLowerCase().equals("txt"))
 				return true;
 		}
 		return false;
@@ -424,6 +432,6 @@ class ImportFilter extends FileFilter {
 
 	@Override
 	public String getDescription() {
-		return "*.dec | *.mwDeck";
+		return "*.dec | *.mwDeck | *.txt";
 	}
 }

@@ -26,65 +26,46 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets;
+package mage.client.deckeditor;
 
-import java.util.HashMap;
-import java.util.Set;
-import java.util.TreeSet;
-import mage.cards.Card;
-import mage.cards.ExpansionSet;
+import mage.cards.decks.DeckCardLists;
+import mage.sets.Sets;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Sets extends HashMap<String, ExpansionSet> {
+public class TxtDeckImporter extends DeckImporterImpl {
 
-	private static final Sets fINSTANCE =  new Sets();
-	private static Set<String> names;
+	private boolean sideboard = false;
 
-	public static Sets getInstance() {
-		return fINSTANCE;
-	}
-
-	private Sets() {
-		names = new TreeSet<String>();
-		this.addSet(AlaraReborn.getInstance());
-		this.addSet(Conflux.getInstance());
-		this.addSet(Magic2010.getInstance());
-		this.addSet(Magic2011.getInstance());
-		this.addSet(RiseOfTheEldrazi.getInstance());
-		this.addSet(ShardsOfAlara.getInstance());
-		this.addSet(Tenth.getInstance());
-		this.addSet(Worldwake.getInstance());
-		this.addSet(Zendikar.getInstance());
-	}
-
-	private void addSet(ExpansionSet set) {
-		this.put(set.getCode(), set);
-		for (Card card: set.createCards()) {
-			names.add(card.getName());
+	@Override
+	protected void readLine(String line, DeckCardLists deckList) {
+		if (line.length() == 0 || line.startsWith("//")) return;
+		if (line.startsWith("Sideboard")) {
+			sideboard = true;
+			return;
+		}
+		int delim = line.indexOf(' ');
+		String lineNum = line.substring(0, delim).trim();
+		String lineName = line.substring(delim).trim();
+		try {
+			int num = Integer.parseInt(lineNum);
+			String cardName = Sets.findCard(lineName);
+			if (cardName == null)
+				sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append("\n");
+			else {
+				for (int i = 0; i < num; i++) {
+					if (!sideboard)
+						deckList.getCards().add(cardName);
+					else
+						deckList.getSideboard().add(cardName);
+				}
+			}
+		}
+		catch (NumberFormatException nfe) {
+			sbMessage.append("Invalid number: ").append(lineNum).append(" at line ").append(lineCount).append("\n");
 		}
 	}
 
-	public static Set<String> getCardNames() {
-		return names;
-	}
-
-	public static String findCard(String name) {
-		for (ExpansionSet set: fINSTANCE.values()) {
-			String cardName = set.findCard(name);
-			if (cardName != null)
-				return cardName;
-		}
-		return null;
-	}
-	
-	public static ExpansionSet findSet(String code) {
-		for (ExpansionSet set: fINSTANCE.values()) {
-			if (set.getCode().equals(code))
-				return set;
-		}
-		return null;
-	}
 }

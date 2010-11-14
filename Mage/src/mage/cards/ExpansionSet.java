@@ -133,6 +133,14 @@ public abstract class ExpansionSet implements Serializable {
 		return name;
 	}
 
+	public String findCard(String name) {
+		for (Card card: createCards()) {
+			if (name.equals(card.getName()))
+				return card.getClass().getCanonicalName();
+		}
+		return null;
+	}
+
 	protected ArrayList<Class> getCardClassesForPackage(String packageName) {
 		ArrayList<Class> classes = new ArrayList<Class>();
 		// Get a File object for the package

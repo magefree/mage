@@ -28,7 +28,9 @@
 
 package mage.client.deckeditor;
 
+import mage.cards.ExpansionSet;
 import mage.cards.decks.DeckCardLists;
+import mage.sets.Sets;
 
 /**
  *
@@ -38,7 +40,42 @@ public class MWSDeckImporter extends DeckImporterImpl {
 
 	@Override
 	protected void readLine(String line, DeckCardLists deckList) {
-		//TODO: implement this
+		if (line.length() == 0 || line.startsWith("//")) return;
+		boolean sideboard = false;
+		if (line.startsWith("SB:")) {
+			line = line.substring(3).trim();
+			sideboard = true;
+		}
+		int delim = line.indexOf(' ');
+		String lineNum = line.substring(0, delim).trim();
+		int setStart = line.indexOf('[') + 1;
+		int setEnd = line.indexOf(']');
+		String setCode = line.substring(setStart, setEnd).trim();
+		String lineName = line.substring(setEnd + 1).trim();
+		try {
+			int num = Integer.parseInt(lineNum);
+			ExpansionSet set = Sets.findSet(setCode);
+			String cardName;
+			if (set != null) {
+				cardName = set.findCard(lineName);
+			}
+			else {
+				cardName = Sets.findCard(lineName);
+			}
+			if (cardName == null)
+				sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append("\n");
+			else {
+				for (int i = 0; i < num; i++) {
+					if (!sideboard)
+						deckList.getCards().add(cardName);
+					else
+						deckList.getSideboard().add(cardName);
+				}
+			}
+		}
+		catch (NumberFormatException nfe) {
+			sbMessage.append("Invalid number: ").append(lineNum).append(" at line ").append(lineCount).append("\n");
+		}
 	}
 
 }
