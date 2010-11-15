@@ -103,7 +103,7 @@ class SilenceEffect extends ReplacementEffectImpl<SilenceEffect> {
 
 	@Override
 	public String getText(Ability source) {
-		return "Your opponents can't cast spells this turn. ";
+		return "Your opponents can't cast spells this turn";
 	}
 
 }

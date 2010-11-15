@@ -92,6 +92,6 @@ class TimeWarpEffect extends OneShotEffect<TimeWarpEffect> {
 
 	@Override
 	public String getText(Ability source) {
-		return "Target player takes an extra turn after this one.";
+		return "Target player takes an extra turn after this one";
 	}
 }

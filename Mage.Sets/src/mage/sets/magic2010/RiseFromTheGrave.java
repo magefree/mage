@@ -124,6 +124,6 @@ class RiseFromTheGraveEffect extends ContinuousEffectImpl<RiseFromTheGraveEffect
 
 	@Override
 	public String getText(Ability source) {
-		return "That creature is a black Zombie in addition to its other colors and types.";
+		return "That creature is a black Zombie in addition to its other colors and types";
 	}
 }
