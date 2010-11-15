@@ -97,7 +97,7 @@ class FrostTitanAbility1 extends TriggeredAbilityImpl<FrostTitanAbility1> {
 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.TARGET && event.getTargetId().equals(this.getSourceId()) && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
+		if (event.getType() == EventType.TARGETED && event.getTargetId().equals(this.getSourceId()) && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
 			this.getTargets().clear();
 			TargetStackObject target = new TargetStackObject();
 			target.add(event.getSourceId(), game);

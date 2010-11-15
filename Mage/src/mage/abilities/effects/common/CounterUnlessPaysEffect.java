@@ -51,7 +51,7 @@ public class CounterUnlessPaysEffect extends OneShotEffect<CounterUnlessPaysEffe
 
 	public CounterUnlessPaysEffect(final CounterUnlessPaysEffect effect) {
 		super(effect);
-		this.cost = effect.cost;
+		this.cost = effect.cost.copy();
 	}
 
 	@Override

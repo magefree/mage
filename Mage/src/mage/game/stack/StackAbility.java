@@ -70,10 +70,8 @@ public class StackAbility implements StackObject, Ability {
 
 	private Ability ability;
 	private UUID controllerId;
-	private UUID id;
 
 	public StackAbility(Ability ability, UUID controllerId) {
-		this.id = UUID.randomUUID();
 		this.ability = ability;
 		this.controllerId = controllerId;
 	}
@@ -81,7 +79,6 @@ public class StackAbility implements StackObject, Ability {
 	public StackAbility(final StackAbility spell) {
 		this.ability = spell.ability.copy();
 		this.controllerId = spell.controllerId;
-		this.id = spell.id;
 	}
 
 	@Override
@@ -164,7 +161,7 @@ public class StackAbility implements StackObject, Ability {
 
 	@Override
 	public UUID getId() {
-		return this.id;
+		return this.ability.getId();
 	}
 
 	@Override

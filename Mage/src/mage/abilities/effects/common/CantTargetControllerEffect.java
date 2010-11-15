@@ -34,9 +34,11 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.filter.FilterObject;
+import mage.filter.FilterStackObject;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.stack.StackObject;
 
 /**
  *
@@ -44,9 +46,9 @@ import mage.game.events.GameEvent.EventType;
  */
 public class CantTargetControllerEffect extends ReplacementEffectImpl<CantTargetControllerEffect> {
 
-	private FilterObject filterSource;
+	private FilterStackObject filterSource;
 
-	public CantTargetControllerEffect(FilterObject filterSource, Duration duration) {
+	public CantTargetControllerEffect(FilterStackObject filterSource, Duration duration) {
 		super(duration, Outcome.Benefit);
 		this.filterSource = filterSource;
 	}
@@ -74,7 +76,7 @@ public class CantTargetControllerEffect extends ReplacementEffectImpl<CantTarget
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
 		if (event.getType() == EventType.TARGET && event.getTargetId().equals(source.getControllerId())) {
-			MageObject sourceObject = game.getObject(source.getSourceId());
+			StackObject sourceObject = game.getStack().getStackObject(source.getSourceId());
 			if (sourceObject != null && filterSource.match(sourceObject)) {
 				return true;
 			}

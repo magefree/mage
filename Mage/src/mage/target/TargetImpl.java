@@ -160,10 +160,10 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 		if (maxNumberOfTargets == 0 || targets.size() < maxNumberOfTargets) {
 			if (!targets.containsKey(id)) {
 				if (source != null) {
-					if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getSourceId(), source.getControllerId()))) {
+					if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getId(), source.getControllerId()))) {
 						targets.put(id, 0);
 						chosen = targets.size() >= minNumberOfTargets;
-						game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getSourceId(), source.getControllerId()));
+						game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getId(), source.getControllerId()));
 					}
 				}
 				else {
@@ -179,10 +179,10 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 			amount += targets.get(id);
 		}
 		if (source != null) {
-			if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getSourceId(), source.getControllerId()))) {
+			if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, id, source.getId(), source.getControllerId()))) {
 				targets.put(id, amount);
 				chosen = targets.size() >= minNumberOfTargets;
-				game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getSourceId(), source.getControllerId()));
+				game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getId(), source.getControllerId()));
 			}
 		}
 		else {
@@ -229,7 +229,7 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 	@Override
 	public boolean isLegal(Ability source, Game game) {
 		for (UUID targetId: targets.keySet()) {
-			if (game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getSourceId(), source.getControllerId())))
+			if (game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getId(), source.getControllerId())))
 				return false;
 			if (!canTarget(targetId, source, game))
 				return false;

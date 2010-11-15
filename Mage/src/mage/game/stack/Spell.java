@@ -230,7 +230,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
 	@Override
 	public UUID getId() {
-		return card.getId();
+		return ability.getId();
 	}
 
 	@Override

@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
@@ -67,8 +68,11 @@ public class CantCounterSourceEffect extends ReplacementEffectImpl<CantCounterSo
 
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.COUNTER && event.getTargetId().equals(source.getSourceId()))
-			return true;
+		if (event.getType() == EventType.COUNTER) {
+			UUID spellId = game.getCard(source.getSourceId()).getSpellAbility().getId();
+			if (event.getTargetId().equals(spellId))
+				return true;
+		}
 		return false;
 	}
 

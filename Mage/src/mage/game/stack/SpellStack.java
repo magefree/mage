@@ -115,7 +115,8 @@ public class SpellStack extends Stack<StackObject> {
 
 	public StackObject getStackObject(UUID id) {
 		for (StackObject stackObject: this) {
-			if (stackObject.getId().equals(id))
+			UUID objectId = stackObject.getId();
+			if (objectId.equals(id))
 				return stackObject;
 		}
 		return null;
