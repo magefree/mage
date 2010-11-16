@@ -54,9 +54,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JToolBar.Separator;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.plaf.synth.SynthLookAndFeel;
 
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.client.components.MageSynthStyleFactory;
 import mage.client.dialog.AboutDialog;
 import mage.client.dialog.CombatDialog;
 import mage.client.dialog.ConnectDialog;
@@ -111,6 +113,8 @@ public class MageFrame extends javax.swing.JFrame {
 
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+			MageSynthStyleFactory f = new MageSynthStyleFactory(SynthLookAndFeel.getStyleFactory());
+			SynthLookAndFeel.setStyleFactory(f);
 		} catch (Exception ex) {
 			logger.log(Level.SEVERE, null, ex);
 		}
@@ -152,11 +156,11 @@ public class MageFrame extends javax.swing.JFrame {
 		
 		if (Plugins.getInstance().isCounterPluginLoaded()) {
 			int i = Plugins.getInstance().getGamesPlayed();
-			JLabel label = new JLabel(" Games played: " + String.valueOf(i));
+			JLabel label = new JLabel("  Games played: " + String.valueOf(i));
 			desktopPane.add(label);
 			label.setVisible(true);
 			label.setForeground(Color.white);
-			label.setBounds(0, 0, 100, 30);
+			label.setBounds(0, 0, 180, 30);
 		}
     }
     

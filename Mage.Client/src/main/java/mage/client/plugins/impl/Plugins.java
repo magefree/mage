@@ -65,7 +65,16 @@ public class Plugins implements MagePlugins {
 		PluginManagerUtil pmu = new PluginManagerUtil(pm);
 		
 		for (ThemePlugin pl : pmu.getPlugins(ThemePlugin.class)) {
-			pl.apply(ui);
+			pl.applyInGame(ui);
+		}
+	}
+
+	@Override
+	public void updateOnTable(Map<String, JComponent> ui) {
+		PluginManagerUtil pmu = new PluginManagerUtil(pm);
+		
+		for (ThemePlugin pl : pmu.getPlugins(ThemePlugin.class)) {
+			pl.applyOnTable(ui);
 		}
 	}
 	

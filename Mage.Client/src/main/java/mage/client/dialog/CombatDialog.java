@@ -34,11 +34,16 @@
 
 package mage.client.dialog;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.beans.PropertyVetoException;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JPanel;
+
 import mage.client.cards.BigCard;
 import mage.client.game.CombatGroup;
 import mage.view.CombatGroupView;
@@ -56,8 +61,23 @@ public class CombatDialog extends MageDialog {
 
     /** Creates new form CombatDialog */
     public CombatDialog() {
+    	
+        JPanel contentPane = new JPanel() {
+			private static final long serialVersionUID = -8283955788355547309L;
+			public void paintComponent(Graphics g) {
+				g.setColor(new Color(50, 50, 50, 100));
+				g.fillRect(0, 0, getWidth(), getHeight());
+			}
+		};
+        setContentPane(contentPane);
+    	
         initComponents();
 		this.setModal(false);
+		
+        combatArea.setOpaque(false);
+        jScrollPane1.setOpaque(false);
+        jScrollPane1.getViewport().setOpaque(false);
+        getRootPane().setOpaque(false);
     }
 
 	public void init(UUID gameId, BigCard bigCard) {
