@@ -13,5 +13,6 @@ import net.xeoh.plugins.base.Plugin;
  * @author nantuko
  */
 public interface ThemePlugin extends Plugin {
-	void apply(Map<String, JComponent> ui);
+	void applyInGame(Map<String, JComponent> ui);
+	void applyOnTable(Map<String, JComponent> ui);
 }

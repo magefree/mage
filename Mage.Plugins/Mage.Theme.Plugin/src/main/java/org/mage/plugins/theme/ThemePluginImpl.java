@@ -1,6 +1,7 @@
 package org.mage.plugins.theme;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
@@ -31,16 +32,21 @@ public class ThemePluginImpl implements ThemePlugin {
     }
 	
 	public String toString() {
-		return "[Theme plugin, version 0.2]";
+		return "[Theme plugin, version 0.3]";
 	}
 	
-	public void apply(Map<String, JComponent> ui) {
-		//log.info("Adding background...");
+	public void applyInGame(Map<String, JComponent> ui) {
+		String filename = "/wood.png";
 		try {
-			BufferedImage background = ImageIO.read(this.getClass().getResourceAsStream("/dk_gray.jpg"));
+			InputStream is = this.getClass().getResourceAsStream(filename);
+			
+			if (is == null)
+				throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
+			
+			BufferedImage background = ImageIO.read(is);
 			
 			if (background == null)
-				throw new FileNotFoundException("Couldn't find dk_gray.jpg in resources.");
+				throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
 			
 			if (ui.containsKey("gamePanel") && ui.containsKey("jLayeredPane")) {
 				ImagePanel bgPanel = new ImagePanel(background, ImagePanel.TILED);
@@ -61,8 +67,40 @@ public class ThemePluginImpl implements ThemePlugin {
 			log.error(e.getMessage(), e);
 			return;
 		}
-		
-		//log.info("Done.");
+	}
+	
+	public void applyOnTable(Map<String, JComponent> ui) {
+		String filename = "/regret.jpg";
+		try {
+			InputStream is = this.getClass().getResourceAsStream(filename);
+			
+			if (is == null)
+				throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
+			
+			BufferedImage background = ImageIO.read(is);
+			
+			if (background == null)
+				throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
+			
+			if (ui.containsKey("gamePanel") && ui.containsKey("jLayeredPane")) {
+				ImagePanel bgPanel = new ImagePanel(background, ImagePanel.TILED);
+
+				unsetOpaque(ui.get("jSplitPane1"));
+				unsetOpaque(ui.get("pnlBattlefield"));
+				unsetOpaque(ui.get("jPanel3"));
+				unsetOpaque(ui.get("hand"));
+				unsetOpaque(ui.get("chatPanel"));
+
+				ui.get("gamePanel").remove(ui.get("jLayeredPane"));
+				bgPanel.add(ui.get("jLayeredPane"));
+				ui.get("gamePanel").add(bgPanel);
+			} else {
+				log.error("error: no components");
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			return;
+		}
 	}
 	
 	private void unsetOpaque(JComponent c) {
