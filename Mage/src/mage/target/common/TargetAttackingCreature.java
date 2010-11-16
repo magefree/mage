@@ -46,7 +46,7 @@ public class TargetAttackingCreature extends TargetCreaturePermanent<TargetAttac
 	}
 
 	public TargetAttackingCreature(int minNumTargets, int maxNumTargets, FilterAttackingCreature filter, boolean notTarget) {
-		super(1, 1, filter, notTarget);
+		super(minNumTargets, maxNumTargets, filter, notTarget);
 		this.targetName = filter.getMessage();
 	}
 

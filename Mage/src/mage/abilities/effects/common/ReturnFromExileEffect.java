@@ -34,6 +34,7 @@ import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -65,13 +66,16 @@ public class ReturnFromExileEffect extends OneShotEffect<ReturnFromExileEffect> 
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Player player;
-		for (UUID cardId: game.getExile().getExileZone(exileId)) {
-			Card card = game.getCard(cardId);
-			card.moveToZone(zone, game, false);
+		ExileZone exile = game.getExile().getExileZone(exileId);
+		if (exile != null) {
+			for (UUID cardId: exile) {
+				Card card = game.getCard(cardId);
+				card.moveToZone(zone, game, false);
+			}
+			exile.clear();
+			return true;
 		}
-		game.getExile().getExileZone(exileId).clear();
-		return true;
+		return false;
 	}
 
 	@Override

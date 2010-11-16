@@ -51,7 +51,7 @@ public class TargetLandPermanent<T extends TargetLandPermanent<T>> extends Targe
 	}
 
 	public TargetLandPermanent(int minNumTargets, int maxNumTargets, FilterLandPermanent filter, boolean notTarget) {
-		super(1, 1, filter, notTarget);
+		super(minNumTargets, maxNumTargets, filter, notTarget);
 		this.targetName = filter.getMessage();
 	}
 

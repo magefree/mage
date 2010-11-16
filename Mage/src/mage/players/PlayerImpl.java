@@ -409,12 +409,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	protected boolean playAbility(ActivatedAbility ability, Game game) {
 		//20091005 - 602.2a
-		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, ability.getId(), playerId))) {
+		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, ability.getSourceId(), ability.getId(), playerId))) {
 			game.bookmarkState();
 			game.getStack().push(new StackAbility(ability, playerId));
 			String message = ability.getActivatedMessage(game);
 			if (ability.activate(game, false)) {
-				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, ability.getId(), playerId));
+				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, ability.getSourceId(), ability.getId(), playerId));
 				game.fireInformEvent(name + message);
 				game.removeLastBookmark();
 				return true;
@@ -426,10 +426,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	protected boolean specialAction(SpecialAction action, Game game) {
 		//20091005 - 114
-		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, action.getId(), playerId))) {
+		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, action.getSourceId(), action.getId(), playerId))) {
 			game.bookmarkState();
 			if (action.activate(game, false)) {
-				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, action.getId(), playerId));
+				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, action.getSourceId(), action.getId(), playerId));
 				game.fireInformEvent(name + action.getActivatedMessage(game));
 				if (action.resolve(game)) {
 					game.removeLastBookmark();

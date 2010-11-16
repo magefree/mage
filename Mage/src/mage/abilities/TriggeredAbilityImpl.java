@@ -31,6 +31,7 @@ package mage.abilities;
 import java.util.UUID;
 import mage.Constants.AbilityType;
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -78,8 +79,14 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
 	public boolean resolve(Game game) {
 		if (optional) {
 			Player player = game.getPlayer(this.getControllerId());
-			Permanent permanent = game.getPermanent(sourceId);
-			if (!player.chooseUse(this.effects.get(0).getOutcome(), "Use " + this.getRule() + " ability from " + permanent.getName() + "?", game)) {
+			MageObject object = game.getObject(sourceId);
+			StringBuilder sb = new StringBuilder();
+			sb.append("Use ").append(this.getRule()).append("ability");
+			if (object != null) {
+				sb.append(" from ").append(object.getName());
+			}
+			sb.append("?");
+			if (!player.chooseUse(this.effects.get(0).getOutcome(), sb.toString(), game)) {
 				return false;
 			}
 		}

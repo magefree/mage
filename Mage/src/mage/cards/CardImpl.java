@@ -228,6 +228,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 			else {
 				game.getExile().createZone(exileId, name).add(this);
 			}
+			zone = event.getToZone();
 			game.fireEvent(new ZoneChangeEvent(this.getId(), ownerId, fromZone, Zone.EXILED));
 			return true;
 		}
@@ -238,6 +239,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 	public boolean putOntoBattlefield(Game game, Zone fromZone, UUID controllerId) {
 		PermanentCard permanent = new PermanentCard(this, controllerId);
 		game.getBattlefield().addPermanent(permanent);
+		zone = Zone.BATTLEFIELD;
 		permanent.entersBattlefield(game);
 		game.applyEffects();
 		game.fireEvent(new ZoneChangeEvent(permanent.getId(), controllerId, fromZone, Zone.BATTLEFIELD));

@@ -112,10 +112,10 @@ class IceCageEffect extends ReplacementEffectImpl<IceCageEffect> {
 
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			if (source.getSourceId().equals(enchantment.getAttachedTo())) {
-				if (event.getType() == EventType.DECLARE_ATTACKER || event.getType() == EventType.DECLARE_BLOCKER || event.getType() == EventType.ACTIVATE_ABILITY) {
+		if (event.getType() == EventType.DECLARE_ATTACKER || event.getType() == EventType.DECLARE_BLOCKER || event.getType() == EventType.ACTIVATE_ABILITY) {
+			Permanent enchantment = game.getPermanent(source.getSourceId());
+			if (enchantment != null && enchantment.getAttachedTo() != null) {
+				if (event.getSourceId().equals(enchantment.getAttachedTo())) {
 					return true;
 				}
 			}
@@ -147,11 +147,13 @@ class IceCageAbility extends TriggeredAbilityImpl<IceCageAbility> {
 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
-		Permanent enchantment = game.getPermanent(sourceId);
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			if (event.getTargetId().equals(enchantment.getAttachedTo()) && event.getType() == EventType.TARGETED) {
-				trigger(game, event.getPlayerId());
-				return true;
+		if (event.getType() == EventType.TARGETED) {
+			Permanent enchantment = game.getPermanent(sourceId);
+			if (enchantment != null && enchantment.getAttachedTo() != null) {
+				if (event.getTargetId().equals(enchantment.getAttachedTo())) {
+					trigger(game, event.getPlayerId());
+					return true;
+				}
 			}
 		}
 		return false;
