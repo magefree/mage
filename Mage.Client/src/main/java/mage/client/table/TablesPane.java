@@ -34,9 +34,22 @@
 
 package mage.client.table;
 
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
+
+import javax.imageio.ImageIO;
+import javax.swing.JComponent;
+import javax.swing.JLayeredPane;
+
 import mage.client.MageFrame;
 import mage.client.MagePane;
+import mage.client.plugins.impl.Plugins;
+import mage.client.util.gui.ImagePanel;
 
 /**
  *
@@ -46,9 +59,24 @@ public class TablesPane extends MagePane {
 
     /** Creates new form TablesPane */
     public TablesPane() {
-        initComponents();
+    	boolean initialized = false;
+    	if (Plugins.getInstance().isThemePluginLoaded()) {
+    		tablesPanel = new mage.client.table.TablesPanel();
+    		Map<String, JComponent> ui = tablesPanel.getUIComponents(); 
+    		JComponent container = Plugins.getInstance().updateTablePanel(ui);
+    		if (container != null) {
+    			initComponents(container);
+    			container.add(tablesPanel);
+    			//ui.get("jScrollPane1ViewPort").setBackground(new Color(20,20,20,50));
+    			container.setOpaque(false);
+    			initialized = true;
+    		}
+    	}
+    	if (!initialized) {
+    		initComponents();
+    	}
     }
-
+    
 	public void showTables() {
 		UUID roomId = MageFrame.getSession().getMainRoomId();
 		if (roomId != null) {
@@ -86,6 +114,20 @@ public class TablesPane extends MagePane {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void initComponents(JComponent container) {
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+        );
+        pack();
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

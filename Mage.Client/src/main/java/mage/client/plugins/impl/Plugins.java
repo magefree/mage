@@ -36,6 +36,7 @@ public class Plugins implements MagePlugins {
 	private static final MagePlugins fINSTANCE =  new Plugins();
 	private static PluginManager pm;
 	private final static Logger logger = Logging.getLogger(Plugins.class.getName());
+	private ThemePlugin themePlugin = null;
 	private CardPlugin cardPlugin = null;
 	private CounterPlugin counterPlugin = null;
 	protected static DefaultActionCallback defaultCallback = DefaultActionCallback.getInstance();
@@ -52,6 +53,7 @@ public class Plugins implements MagePlugins {
 		pm.addPluginsFrom(new File(Constants.PLUGINS_DIRECTORY).toURI());
 		this.cardPlugin = pm.getPlugin(CardPlugin.class);
 		this.counterPlugin = pm.getPlugin(CounterPlugin.class);
+		this.themePlugin = pm.getPlugin(ThemePlugin.class);
 		logger.log(Level.INFO, "Done.");
 	}
 	
@@ -62,20 +64,12 @@ public class Plugins implements MagePlugins {
 
 	@Override
 	public void updateGamePanel(Map<String, JComponent> ui) {
-		PluginManagerUtil pmu = new PluginManagerUtil(pm);
-		
-		for (ThemePlugin pl : pmu.getPlugins(ThemePlugin.class)) {
-			pl.applyInGame(ui);
-		}
+		themePlugin.applyInGame(ui);
 	}
 
 	@Override
-	public void updateOnTable(Map<String, JComponent> ui) {
-		PluginManagerUtil pmu = new PluginManagerUtil(pm);
-		
-		for (ThemePlugin pl : pmu.getPlugins(ThemePlugin.class)) {
-			pl.applyOnTable(ui);
-		}
+	public JComponent updateTablePanel(Map<String, JComponent> ui) {
+		return themePlugin.updateTable(ui);
 	}
 	
 	@Override
@@ -135,5 +129,10 @@ public class Plugins implements MagePlugins {
 	@Override
 	public boolean isCounterPluginLoaded() {
 		return this.counterPlugin != null;
+	}
+	
+	@Override
+	public boolean isThemePluginLoaded() {
+		return this.themePlugin != null;
 	}
 }

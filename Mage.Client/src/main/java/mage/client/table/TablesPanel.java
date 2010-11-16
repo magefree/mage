@@ -37,18 +37,32 @@ package mage.client.table;
 import mage.client.dialog.NewTableDialog;
 import mage.client.dialog.JoinTableDialog;
 import mage.client.dialog.TableWaitingDialog;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.table.AbstractTableModel;
 import mage.cards.decks.DeckCardLists;
@@ -56,6 +70,8 @@ import mage.client.MageFrame;
 import mage.client.remote.MageRemoteException;
 import mage.client.remote.Session;
 import mage.client.util.ButtonColumn;
+import mage.client.util.gui.ArrowBuilder;
+import mage.client.util.gui.ImagePanel;
 import mage.util.Logging;
 import mage.view.TableView;
 
@@ -113,9 +129,24 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 		};
 
 		ButtonColumn buttonColumn = new ButtonColumn(tableTables, join, 4);
-
+		
+		jSplitPane1.setOpaque(false);
+		jScrollPane1.setOpaque(false);
+		jPanel1.setOpaque(false);
+		jScrollPane1.getViewport().setBackground(new Color(20,20,20,150));
     }
 
+    public Map<String, JComponent> getUIComponents() {
+    	Map<String, JComponent> components = new HashMap<String, JComponent>();
+    	
+		components.put("jScrollPane1", jScrollPane1);
+		components.put("jScrollPane1ViewPort", jScrollPane1.getViewport());
+		components.put("jPanel1", jPanel1);
+		components.put("tablesPanel", this);
+		
+		return components;
+    }
+    
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		try {

@@ -17,8 +17,9 @@ public interface MagePlugins {
 	void loadPlugins();
 	void shutdown();
 	void updateGamePanel(Map<String, JComponent> ui);
-	void updateOnTable(Map<String, JComponent> ui);
+	JComponent updateTablePanel(Map<String, JComponent> ui);
 	MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, CardDimensions dimension, UUID gameId);
+	boolean isThemePluginLoaded();
 	boolean isCardPluginLoaded();
 	boolean isCounterPluginLoaded();
 	void sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents);

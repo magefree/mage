@@ -14,5 +14,5 @@ import net.xeoh.plugins.base.Plugin;
  */
 public interface ThemePlugin extends Plugin {
 	void applyInGame(Map<String, JComponent> ui);
-	void applyOnTable(Map<String, JComponent> ui);
+	JComponent updateTable(Map<String, JComponent> ui);
 }
