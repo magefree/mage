@@ -148,6 +148,6 @@ class SearingBlazeEffect extends OneShotEffect<SearingBlazeEffect> {
 
 	@Override
 	public String getText(Ability source) {
-		return "{this} deals 1 damage to target player and 1 damage to target creature that player controls.  \nLandfall — If you had a land enter the battlefield under your control this turn, {this} deals 3 damage to that player and 3 damage to that creature instead.";
+		return "{this} deals 1 damage to target player and 1 damage to target creature that player controls.  \nLandfall - If you had a land enter the battlefield under your control this turn, {this} deals 3 damage to that player and 3 damage to that creature instead.";
 	}
 }

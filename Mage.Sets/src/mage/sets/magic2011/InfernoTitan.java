@@ -44,6 +44,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
+import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
  *
@@ -83,6 +84,7 @@ class InfernoTitanAbility extends TriggeredAbilityImpl<InfernoTitanAbility> {
 
 	public InfernoTitanAbility() {
 		super(Zone.BATTLEFIELD, new DamageMultiEffect(3), false);
+		this.addTarget(new TargetCreatureOrPlayerAmount(3));
 	}
 
 	public InfernoTitanAbility(final InfernoTitanAbility ability) {

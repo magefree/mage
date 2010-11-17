@@ -261,14 +261,26 @@ public class ContinuousEffects implements Serializable {
 	}
 
 	public void addEffect(ContinuousEffect effect, Ability source) {
-		if (effect instanceof ReplacementEffect)
-			replacementEffects.put((ReplacementEffect)effect, source);
-		else if (effect instanceof PreventionEffect)
-			preventionEffects.put((PreventionEffect)effect, source);
-		else if (effect instanceof AsThoughEffect)
-			asThoughEffects.put((AsThoughEffect) effect,source);
-		else
-			layeredEffects.put(effect, source);
+		if (effect instanceof ReplacementEffect) {
+			ReplacementEffect newEffect = (ReplacementEffect)effect.copy();
+			newEffect.setTimestamp();
+			replacementEffects.put(newEffect, source);
+		}
+		else if (effect instanceof PreventionEffect) {
+			PreventionEffect newEffect = (PreventionEffect)effect.copy();
+			newEffect.setTimestamp();
+			preventionEffects.put(newEffect, source);
+		}
+		else if (effect instanceof AsThoughEffect) {
+			AsThoughEffect newEffect = (AsThoughEffect)effect.copy();
+			newEffect.setTimestamp();
+			asThoughEffects.put(newEffect,source);
+		}
+		else {
+			ContinuousEffect newEffect = (ContinuousEffect)effect.copy();
+			newEffect.setTimestamp();
+			layeredEffects.put(newEffect, source);
+		}
 	}
 
 }

@@ -82,7 +82,7 @@ class JuggernautAbility extends EvasionAbilityImpl<JuggernautAbility> {
 
 	@Override
 	public boolean canBlock(Permanent blocker, Game game) {
-		return !blocker.getAbilities().containsKey(DefenderAbility.getInstance().getId());
+		return !blocker.getSubtype().contains("Wall");
 	}
 
 	@Override

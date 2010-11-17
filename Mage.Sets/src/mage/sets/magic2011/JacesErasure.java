@@ -51,9 +51,7 @@ public class JacesErasure extends CardImpl<JacesErasure> {
 		super(ownerId, 59, "Jace's Erasure", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 		this.expansionSetCode = "M11";
 		this.color.setBlue(true);
-		Ability ability = new JacesErasureAbility();
-		ability.addTarget(new TargetPlayer());
-		this.addAbility(ability);
+		this.addAbility(new JacesErasureAbility());
 	}
 
 	public JacesErasure(final JacesErasure card) {
@@ -75,7 +73,8 @@ public class JacesErasure extends CardImpl<JacesErasure> {
 class JacesErasureAbility extends TriggeredAbilityImpl<JacesErasureAbility> {
 
 	public JacesErasureAbility() {
-		super(Zone.GRAVEYARD, new PutLibraryIntoGraveTargetEffect(1), true);
+		super(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(1), true);
+		this.addTarget(new TargetPlayer());
 	}
 
 	public JacesErasureAbility(final JacesErasureAbility ability) {
