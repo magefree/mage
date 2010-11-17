@@ -156,6 +156,10 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
         		if (((Permanent)comp).getPermanentId().equals(permanentId)) {
 					this.remove(comp);
         		}
+        	} else if (comp instanceof MagePermanent) {
+        		if (((MagePermanent)comp).getOriginal().getId().equals(permanentId)) {
+        			this.remove(comp);
+        		}
         	}
         }
 	}
