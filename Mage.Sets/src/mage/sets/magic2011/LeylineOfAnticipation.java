@@ -104,4 +104,9 @@ class LeylineOfAnticipationEffect extends AsThoughEffectImpl<LeylineOfAnticipati
 		return false;
 	}
 
+	@Override
+	public String getText(Ability source) {
+		return "You may cast nonland cards as though they had flash";
+	}
+
 }

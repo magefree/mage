@@ -62,7 +62,7 @@ public class LilianaVess extends CardImpl<LilianaVess> {
 		this.color.setBlack(true);
 		this.loyalty = new MageInt(5);
 
-		LoyaltyAbility ability1 = new LoyaltyAbility(new DiscardTargetEffect(1), -1);
+		LoyaltyAbility ability1 = new LoyaltyAbility(new DiscardTargetEffect(1), 1);
 		ability1.addTarget(new TargetPlayer());
 		this.addAbility(ability1);
 

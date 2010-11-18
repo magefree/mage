@@ -55,6 +55,7 @@ public class LeylineOfPunishment extends CardImpl<LeylineOfPunishment> {
 		this.color.setRed(true);
 		this.addAbility(LeylineAbility.getInstance());
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeylineOfPunishmentEffect1()));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeylineOfPunishmentEffect2()));
 	}
 
 	public LeylineOfPunishment(final LeylineOfPunishment card) {

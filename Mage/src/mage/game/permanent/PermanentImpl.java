@@ -116,7 +116,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
 	@Override
 	public void reset(Game game) {
-		this.controllerId = ownerId;
+//		this.controllerId = ownerId;
 		this.maxBlocks = 1;
 	}
 

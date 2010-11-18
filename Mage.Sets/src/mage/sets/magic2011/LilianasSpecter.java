@@ -56,7 +56,7 @@ public class LilianasSpecter extends CardImpl<LilianasSpecter> {
 		this.toughness = new MageInt(1);
 
 		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new LilianasSpecterEffect(), true));
+		this.addAbility(new EntersBattlefieldTriggeredAbility(new LilianasSpecterEffect(), false));
 	}
 
 	public LilianasSpecter(final LilianasSpecter card) {

@@ -72,7 +72,7 @@ public class LilianasCaress extends CardImpl<LilianasCaress> {
 class LilianasCaressAbility extends TriggeredAbilityImpl<LilianasCaressAbility> {
 
 	public LilianasCaressAbility() {
-		super(Zone.GRAVEYARD, new LoseLifeTargetEffect(2), true);
+		super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), false);
 	}
 
 	public LilianasCaressAbility(final LilianasCaressAbility ability) {

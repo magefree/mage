@@ -359,7 +359,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		//20091005 - 601.2a
 		Card card = game.getCard(ability.getSourceId());
 		if (card != null) {
-			if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, card.getId(), playerId))) {
+			if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getId(), playerId))) {
 				game.bookmarkState();
 				removeFromHand(card, game);
 				game.getStack().push(new Spell(card, ability, playerId));
@@ -367,7 +367,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 					for (KickerAbility kicker: card.getAbilities().getKickerAbilities()) {
 						kicker.activate(game, false);
 					}
-					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, card.getId(), playerId));
+					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, ability.getId(), playerId));
 					game.fireInformEvent(name + " casts " + card.getName());
 					game.removeLastBookmark();
 					return true;

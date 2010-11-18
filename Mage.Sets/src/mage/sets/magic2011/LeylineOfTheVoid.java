@@ -104,7 +104,6 @@ class LeylineOfTheVoidEffect extends ReplacementEffectImpl<LeylineOfTheVoidEffec
 		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD) {
 			if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
 				((ZoneChangeEvent)event).setToZone(Zone.EXILED);
-				return true;
 			}
 		}
 		return false;

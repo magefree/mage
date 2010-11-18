@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.Outcome;
@@ -62,14 +63,17 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect<SearchLibraryP
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
 		player.searchLibrary(target, game);
+		List<Card> cards = new ArrayList<Card>();
         if (target.getTargets().size() > 0) {
             for (UUID cardId: (List<UUID>)target.getTargets()) {
                 Card card = player.getLibrary().remove(cardId, game);
-                if (card != null){
-					card.moveToZone(Zone.LIBRARY, game, true);
-                }
+                if (card != null)
+					cards.add(card);
             }
             player.shuffleLibrary(game);
+			for (Card card: cards) {
+				card.moveToZone(Zone.LIBRARY, game, true);
+			}
         }
         return true;
     }

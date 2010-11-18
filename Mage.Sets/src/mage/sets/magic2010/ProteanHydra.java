@@ -171,7 +171,7 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 	class ProteanHydraAbility extends TriggeredAbilityImpl<ProteanHydraAbility> {
 
 		public ProteanHydraAbility() {
-			super(Zone.GRAVEYARD, new CreateDelayedTriggeredAbilityEffect(new ProteanHydraDelayedTriggeredAbility()), true);
+			super(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new ProteanHydraDelayedTriggeredAbility()), true);
 		}
 
 		public ProteanHydraAbility(final ProteanHydraAbility ability) {

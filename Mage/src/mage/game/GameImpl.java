@@ -355,7 +355,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			Player player = getPlayer(playerId);
 			for (Card card: player.getHand().getCards(this)) {
 				if (card.getAbilities().containsKey(LeylineAbility.getInstance().getId())) {
-					if (!player.chooseUse(Outcome.PutCardInPlay, "Do you wish to put " + card.getName() + " on the battlefield?", this)) {
+					if (player.chooseUse(Outcome.PutCardInPlay, "Do you wish to put " + card.getName() + " on the battlefield?", this)) {
 						player.getHand().remove(card);
 						card.putOntoBattlefield(this, Zone.HAND, player.getId());
 					}

@@ -76,7 +76,7 @@ public class CantTargetControllerEffect extends ReplacementEffectImpl<CantTarget
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
 		if (event.getType() == EventType.TARGET && event.getTargetId().equals(source.getControllerId())) {
-			StackObject sourceObject = game.getStack().getStackObject(source.getSourceId());
+			StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
 			if (sourceObject != null && filterSource.match(sourceObject)) {
 				return true;
 			}
@@ -87,7 +87,7 @@ public class CantTargetControllerEffect extends ReplacementEffectImpl<CantTarget
 	@Override
 	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("{this} can't be the targets of ");
+		sb.append("You can't be the targets of ");
 		sb.append(filterSource.getMessage());
 		sb.append(" ").append(duration.toString());
 		return sb.toString();
