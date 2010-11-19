@@ -56,10 +56,6 @@ public class BigCard extends javax.swing.JPanel {
 	public BigCard() {
         initComponents();
     }
-
-    public void removeTextComponent() {
-    	remove(this.scrollPane);
-    }
     
 	public void setCard(UUID cardId, Image image, List<String> strings) {
 		if (this.cardId == null || !this.cardId.equals(cardId)) {
@@ -92,6 +88,18 @@ public class BigCard extends javax.swing.JPanel {
 			graphics.drawImage(bigImage, 0, 0, this);
 		super.paintComponent(graphics);
  	}
+	
+    public void removeTextComponent() {
+    	remove(this.scrollPane);
+    }
+    
+    public void hideTextComponent() {
+    	this.scrollPane.setVisible(false);
+    }
+
+    public void showTextComponent() {
+    	this.scrollPane.setVisible(true);
+    }
 
 
     /** This method is called from within the constructor to

@@ -89,9 +89,6 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 	public void init(UUID gameId, BigCard bigCard) {
 		this.gameId = gameId;
 		this.bigCard = bigCard;
-        /*if (Plugins.getInstance().isCardPluginLoaded()) {
-        	bigCard.removeTextComponent();
-        }*/
         addMouseListener(new MageMouseAdapter(this, gameId));			
         addMouseMotionListener(new MageMouseMotionAdapter(this, bigCard));
 	}

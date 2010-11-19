@@ -33,6 +33,7 @@ public class MageMouseMotionAdapter extends MouseMotionAdapter {
 				if (image != null && image instanceof BufferedImage) {
 					image = ImageHelper.getResizedImage((BufferedImage) image, bigCard.getWidth(), bigCard.getHeight());
 					bigCard.setCard(card.getOriginal().getId(), image, card.getOriginal().getRules());
+					bigCard.hideTextComponent();
 				} else {
 					//TODO: add description panel
 				}

@@ -345,6 +345,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
+		this.bigCard.showTextComponent();
 		this.bigCard.setCard(card.getId(), image, getRules());
 	}
 
