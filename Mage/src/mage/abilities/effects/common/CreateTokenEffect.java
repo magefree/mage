@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
-import mage.players.Player;
 
 /**
  *

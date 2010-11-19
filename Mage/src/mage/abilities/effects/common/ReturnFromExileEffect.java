@@ -36,7 +36,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -46,17 +45,24 @@ public class ReturnFromExileEffect extends OneShotEffect<ReturnFromExileEffect> 
 
 	private UUID exileId;
 	private Zone zone;
+	private boolean tapped;
 
 	public ReturnFromExileEffect(UUID exileId, Zone zone) {
+		this(exileId, zone, false);
+	}
+
+	public ReturnFromExileEffect(UUID exileId, Zone zone, boolean tapped) {
 		super(Outcome.PutCardInPlay);
 		this.exileId = exileId;
 		this.zone = zone;
+		this.tapped = tapped;
 	}
 
 	public ReturnFromExileEffect(final ReturnFromExileEffect effect) {
 		super(effect);
 		this.exileId = effect.exileId;
 		this.zone = effect.zone;
+		this.tapped = effect.tapped;
 	}
 
 	@Override
@@ -70,7 +76,7 @@ public class ReturnFromExileEffect extends OneShotEffect<ReturnFromExileEffect> 
 		if (exile != null) {
 			for (UUID cardId: exile) {
 				Card card = game.getCard(cardId);
-				card.moveToZone(zone, game, false);
+				card.moveToZone(zone, game, tapped);
 			}
 			exile.clear();
 			return true;
@@ -85,6 +91,8 @@ public class ReturnFromExileEffect extends OneShotEffect<ReturnFromExileEffect> 
 		switch(zone) {
 			case BATTLEFIELD:
 				sb.append("to the battlefield under its owner's control");
+				if (tapped)
+					sb.append(" tapped");
 				break;
 			case HAND:
 				sb.append("to their owner's hand");

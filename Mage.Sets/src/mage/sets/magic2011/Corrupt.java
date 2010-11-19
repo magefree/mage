@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -74,6 +75,14 @@ public class Corrupt extends CardImpl<Corrupt> {
 
 class CorruptEffect extends OneShotEffect<CorruptEffect> {
 
+	private static FilterLandPermanent filter = new FilterLandPermanent("Swamps");
+
+	static {
+		filter.getSubtype().add("Swamp");
+		filter.setScopeSubtype(ComparisonScope.Any);
+		filter.setTargetController(TargetController.YOU);
+	}
+
 	public CorruptEffect() {
 		super(Outcome.Damage);
 	}
@@ -84,10 +93,6 @@ class CorruptEffect extends OneShotEffect<CorruptEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		FilterLandPermanent filter = new FilterLandPermanent("Swamps");
-		filter.getSubtype().add("Swamp");
-		filter.setScopeSubtype(ComparisonScope.Any);
-		filter.getControllerId().add(source.getControllerId());
 		int amount = game.getBattlefield().count(filter, source.getControllerId(), game);
 		if (amount > 0) {
 			int damageDealt = amount;

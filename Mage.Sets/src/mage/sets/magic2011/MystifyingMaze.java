@@ -127,7 +127,7 @@ class MystifyingMazeEffect extends OneShotEffect<MystifyingMazeEffect> {
 class MystifyingMazeDelayedTriggeredAbility extends DelayedTriggeredAbility<MystifyingMazeDelayedTriggeredAbility> {
 
 	public MystifyingMazeDelayedTriggeredAbility(UUID exileId) {
-		super(new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD));
+		super(new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD, true));
 	}
 
 	public MystifyingMazeDelayedTriggeredAbility(final MystifyingMazeDelayedTriggeredAbility ability) {

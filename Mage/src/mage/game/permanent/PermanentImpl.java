@@ -344,6 +344,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 				this.removeFromCombat(game);
 				this.controlledFromStartOfTurn = false;
 				this.controllerId = controllerId;
+				this.abilities.setControllerId(controllerId);
 				return true;
 			}
 		}

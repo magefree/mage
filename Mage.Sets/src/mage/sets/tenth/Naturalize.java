@@ -48,7 +48,7 @@ public class Naturalize extends CardImpl<Naturalize> {
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);
 		filter.getCardType().add(CardType.ENCHANTMENT);
-		filter.setScopeColor(ComparisonScope.Any);
+		filter.setScopeCardType(ComparisonScope.Any);
 	}
 
 	public Naturalize(UUID ownerId){

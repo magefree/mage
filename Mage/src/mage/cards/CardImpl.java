@@ -182,10 +182,9 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 		this.expansionSetCode = expansionSetCode;
 	}
 
-	@Override
-	public boolean moveToZone(Zone toZone, Game game, boolean flag) {
+	public boolean moveToZone(Zone toZone, UUID controllerId, Game game, boolean flag) {
 		Zone fromZone = zone;
-		ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), ownerId, fromZone, toZone);
+		ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), controllerId, fromZone, toZone);
 		if (!game.replaceEvent(event)) {
 			switch (event.getToZone()) {
 				case GRAVEYARD:
@@ -208,13 +207,20 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 					game.getBattlefield().addPermanent(permanent);
 					permanent.entersBattlefield(game);
 					game.applyEffects();
+					if (flag)
+						permanent.setTapped(true);
 					break;
 			}
 			zone = event.getToZone();
-			game.fireEvent(new ZoneChangeEvent(this.getId(), ownerId, fromZone, event.getToZone()));
+			game.fireEvent(event);
 			return zone == toZone;
 		}
 		return false;
+	}
+
+	@Override
+	public boolean moveToZone(Zone toZone, Game game, boolean flag) {
+		return moveToZone(toZone, ownerId, game, flag);
 	}
 
 	@Override

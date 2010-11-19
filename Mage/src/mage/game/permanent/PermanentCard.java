@@ -37,6 +37,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.keyword.LevelAbility;
 import mage.cards.Card;
+import mage.cards.CardImpl;
 import mage.cards.LevelerCard;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
@@ -116,8 +117,8 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 		ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), this.getControllerId(), Zone.BATTLEFIELD, zone);
 		if (!game.replaceEvent(event)) {
 			if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
-				Card card = game.getCard(objectId);
-				return card.moveToZone(event.getToZone(), game, flag);
+				CardImpl card = (CardImpl) game.getCard(objectId);
+				return card.moveToZone(event.getToZone(), controllerId, game, flag);
 			}
 		}
 		return false;

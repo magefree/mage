@@ -49,7 +49,7 @@ public class SolemnOffering extends CardImpl<SolemnOffering> {
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);
 		filter.getCardType().add(CardType.ENCHANTMENT);
-		filter.setScopeColor(ComparisonScope.Any);
+		filter.setScopeCardType(ComparisonScope.Any);
 	}
 
 	public SolemnOffering(UUID ownerId) {
