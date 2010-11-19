@@ -34,15 +34,24 @@
 
 package mage.client.cards;
 
+import static mage.constants.Constants.CONTENT_MAX_XOFFSET;
+import static mage.constants.Constants.FRAME_MAX_HEIGHT;
+import static mage.constants.Constants.FRAME_MAX_WIDTH;
+import static mage.constants.Constants.TEXT_MAX_HEIGHT;
+import static mage.constants.Constants.TEXT_MAX_WIDTH;
+import static mage.constants.Constants.TEXT_MAX_YOFFSET;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.util.List;
 import java.util.UUID;
+
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
-import static mage.constants.Constants.*;
+
+import org.jdesktop.swingx.JXPanel;
 
 /**
  *
@@ -52,6 +61,7 @@ public class BigCard extends javax.swing.JPanel {
 
 	protected Image bigImage;
 	protected UUID cardId;
+	protected JXPanel panel;
 
 	public BigCard() {
         initComponents();
@@ -59,6 +69,7 @@ public class BigCard extends javax.swing.JPanel {
     
 	public void setCard(UUID cardId, Image image, List<String> strings) {
 		if (this.cardId == null || !this.cardId.equals(cardId)) {
+			if (this.panel != null) remove(this.panel);
 			this.cardId = cardId;
 			bigImage = image;
 			this.repaint();
@@ -101,6 +112,16 @@ public class BigCard extends javax.swing.JPanel {
     	this.scrollPane.setVisible(true);
     }
 
+    public void addJXPanel(UUID cardId, JXPanel jxPanel) {
+    	bigImage = null;
+		synchronized (this) {
+			if (this.panel != null) remove(this.panel);
+			this.panel = jxPanel;
+			add(jxPanel);	
+		}
+		this.repaint();
+    }
+    
 
     /** This method is called from within the constructor to
      * initialize the form.

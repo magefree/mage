@@ -10,6 +10,9 @@ import mage.cards.MagePermanent;
 import mage.client.cards.BigCard;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.ImageHelper;
+import mage.client.util.gui.GuiDisplayUtil;
+
+import org.jdesktop.swingx.JXPanel;
 
 public class MageMouseMotionAdapter extends MouseMotionAdapter {
 	
@@ -35,7 +38,12 @@ public class MageMouseMotionAdapter extends MouseMotionAdapter {
 					bigCard.setCard(card.getOriginal().getId(), image, card.getOriginal().getRules());
 					bigCard.hideTextComponent();
 				} else {
-					//TODO: add description panel
+					if (card.getOriginal().getId() != bigCard.getCardId()) {
+						JXPanel panel = GuiDisplayUtil.getDescription(card.getOriginal(), bigCard.getWidth(), bigCard.getHeight());
+						panel.setVisible(true);
+						bigCard.hideTextComponent();
+						bigCard.addJXPanel(card.getOriginal().getId(), panel);
+					}
 				}
 			}
 		}

@@ -144,6 +144,10 @@ public class ImageCache {
 	 * Returns an image scaled to the size given
 	 */
 	public static BufferedImage getNormalSizeImage(BufferedImage original) {
+		if (original == null) {
+			return null;
+		}
+		
 		int srcWidth = original.getWidth();
 		int srcHeight = original.getHeight();
 		
