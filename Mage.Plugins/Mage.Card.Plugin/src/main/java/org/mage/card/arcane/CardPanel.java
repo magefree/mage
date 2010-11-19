@@ -97,7 +97,7 @@ public class CardPanel extends MagePermanent implements MouseListener {
 		setBackground(Color.black);
 		setOpaque(false);
 		
-		addMouseListener(this);
+		//addMouseListener(this);
 
 		titleText = new GlowText();
 		setText(gameCard);
