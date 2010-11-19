@@ -10,27 +10,38 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JRootPane;
+import javax.swing.Popup;
+import javax.swing.PopupFactory;
 import javax.swing.SwingUtilities;
 
+import mage.Constants.CardType;
 import mage.cards.MagePermanent;
+import mage.cards.TextPopup;
 import mage.cards.action.ActionCallback;
 import mage.utils.CardUtil;
+import mage.view.AbilityView;
+import mage.view.CardView;
 import mage.view.PermanentView;
+import mage.view.StackAbilityView;
 
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ScaledImagePanel.MultipassType;
 import org.mage.card.arcane.ScaledImagePanel.ScalingType;
 import org.mage.plugins.card.images.ImageCache;
 
+import com.google.common.collect.Sets;
+
 
 @SuppressWarnings({"unchecked","rawtypes"})
-public class CardPanel extends MagePermanent {
+public class CardPanel extends MagePermanent implements MouseListener {
 	private static final long serialVersionUID = -3272134219262184410L;
 	
 	private static final Logger log = Logger.getLogger(CardPanel.class);
@@ -71,6 +82,10 @@ public class CardPanel extends MagePermanent {
 	private float alpha = 1.0f;
 	
 	private ActionCallback callback;
+	
+	protected Popup popup;
+	protected boolean popupShowing;
+	protected TextPopup popupText = new TextPopup();
 
 	public CardPanel (PermanentView newGameCard, boolean loadImage, ActionCallback callback) {
 		this.gameCard = newGameCard;
@@ -81,6 +96,8 @@ public class CardPanel extends MagePermanent {
 
 		setBackground(Color.black);
 		setOpaque(false);
+		
+		addMouseListener(this);
 
 		titleText = new GlowText();
 		setText(gameCard);
@@ -120,6 +137,9 @@ public class CardPanel extends MagePermanent {
 		imagePanel.setScalingType(ScalingType.nearestNeighbor);
 		imagePanel.setScalingBlur(true);
 		imagePanel.setScalingMultiPassType(MultipassType.none);
+		
+		String cardType = getType(newGameCard);
+		popupText.setText(getText(cardType, newGameCard));
 		
 		if (!loadImage) return;
 		
@@ -457,6 +477,10 @@ public class CardPanel extends MagePermanent {
 		}
 		setText(card);
 		this.gameCard = card;
+		
+		String cardType = getType(card);
+		popupText.setText(getText(cardType, card));
+		
 		//TODO: uncomment
 		/*if (gameCard.hasSickness() && gameCard.isCreature() && gameCard.getTableID() != 0) {
 			overlayPanel.setVisible(true);
@@ -518,4 +542,94 @@ public class CardPanel extends MagePermanent {
 		return ImageCache.getImageOriginal(gameCard);
 	}
 
+	@Override
+	public void mouseClicked(MouseEvent e) {}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		if (!popupShowing) {
+			if (popup != null)
+				popup.hide();
+			PopupFactory factory = PopupFactory.getSharedInstance();
+			popup = factory.getPopup(this, popupText, (int) this.getLocationOnScreen().getX() + cardWidth + cardXOffset, (int) this.getLocationOnScreen().getY() + 40);
+			popup.show();
+			//hack to get popup to resize to fit text
+			popup.hide();
+			popup = factory.getPopup(this, popupText, (int) this.getLocationOnScreen().getX() + cardWidth + cardXOffset, (int) this.getLocationOnScreen().getY() + 40);
+			popup.show();
+			popupShowing = true;
+		}
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		if(getMousePosition(true) != null) return;
+		if (popup != null) {
+			popup.hide();
+			popupShowing = false;
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {}
+
+	protected String getType(CardView card) {
+		StringBuilder sbType = new StringBuilder();
+
+		for (String superType: card.getSuperTypes()) {
+			sbType.append(superType).append(" ");
+		}
+
+		for (mage.Constants.CardType cardType: card.getCardTypes()) {
+			sbType.append(cardType.toString()).append(" ");
+		}
+
+		if (card.getSubTypes().size() > 0) {
+			sbType.append("- ");
+			for (String subType: card.getSubTypes()) {
+				sbType.append(subType).append(" ");
+			}
+		}
+
+		return sbType.toString();
+	}
+	
+	protected String getText(String cardType, CardView card) {
+		StringBuilder sb = new StringBuilder();
+		if (card instanceof StackAbilityView || card instanceof AbilityView) {
+			for (String rule: card.getRules()) {
+				sb.append("\n").append(rule);
+			}
+		}
+		else {
+			sb.append(card.getName());
+			if (card.getManaCost().size() > 0) {
+				sb.append("\n").append(card.getManaCost());
+			}
+			sb.append("\n").append(cardType);
+			if (card.getColor().hasColor()) {
+				sb.append("\n").append(card.getColor().toString());
+			}
+			if (card.getCardTypes().contains(CardType.CREATURE)) {
+				sb.append("\n").append(card.getPower()).append("/").append(card.getToughness());
+			}
+			else if (card.getCardTypes().contains(CardType.PLANESWALKER)) {
+				sb.append("\n").append(card.getLoyalty());
+			}
+			for (String rule: card.getRules()) {
+				sb.append("\n").append(rule);
+			}
+			if (card.getExpansionSetCode() != null && card.getExpansionSetCode().length() > 0) {
+				sb.append("\n").append(card.getCardNumber()).append(" - ");
+				//sb.append(Sets.getInstance().get(card.getExpansionSetCode()).getName()).append(" - ");
+				sb.append(card.getExpansionSetCode()).append(" - ");
+				sb.append(card.getRarity().toString());
+			}
+		}
+//		sb.append("\n").append(card.getId());
+		return sb.toString();
+	}
 }

@@ -77,6 +77,7 @@ import javax.swing.text.StyledDocument;
 import mage.Constants.CardType;
 import mage.cards.CardDimensions;
 import mage.cards.MagePermanent;
+import mage.cards.TextPopup;
 import mage.client.MageFrame;
 import mage.client.game.PlayAreaPanel;
 import mage.client.remote.Session;
