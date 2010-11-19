@@ -18,10 +18,12 @@ public class GuiDisplayUtil {
 	
     public static JXPanel getDescription(CardView card, int width, int height) {
     	JXPanel descriptionPanel = new JXPanel();
-		descriptionPanel.setAlpha(.8f);
+		
+    	//descriptionPanel.setAlpha(.8f);
 		descriptionPanel.setBounds(0, 0,  width, height);
 		descriptionPanel.setVisible(false);
 		descriptionPanel.setLayout(null);
+		
 		//descriptionPanel.setBorder(BorderFactory.createLineBorder(Color.green));
 		
 		JButton j = new JButton("");
