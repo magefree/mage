@@ -26,30 +26,29 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.game.permanent.token;
+package mage.abilities.mana;
 
-import mage.Constants.CardType;
 import mage.Constants.Zone;
-import mage.MageInt;
-import mage.Mana;
-import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.Cost;
 import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.SimpleManaAbility;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EldraziSpawnToken extends Token {
+public class SimpleManaAbility extends ManaAbility<SimpleManaAbility> {
 
-	public EldraziSpawnToken() {
-		super("Eldrazi Spawn", "0/1 colorless Eldrazi Spawn creature with \"Sacrifice this creature: Add {1} to your mana pool.\"");
-		cardType.add(CardType.CREATURE);
-		subtype.add("Eldrazi");
-		subtype.add("Spawn");
-		power = new MageInt(0);
-		toughness = new MageInt(1);
-		addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new ManaEffect(Mana.ColorlessMana), new SacrificeSourceCost()));
+	public SimpleManaAbility(Zone zone, ManaEffect effect, Cost cost) {
+		super(zone, effect, cost);
+	}
+
+	public SimpleManaAbility(final SimpleManaAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public SimpleManaAbility copy() {
+		return new SimpleManaAbility(this);
 	}
 
 }

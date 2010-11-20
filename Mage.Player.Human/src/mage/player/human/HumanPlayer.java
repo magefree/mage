@@ -46,6 +46,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.SpecialAction;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.cards.decks.Deck;
@@ -434,15 +435,17 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	protected void activateAbility(Map<UUID, ? extends ActivatedAbility> abilities, Game game) {
 		if (abilities.size() == 1) {
-			activateAbility(abilities.values().iterator().next(), game);
-		}
-		else {
-			game.fireGetChoiceEvent(playerId, name, abilities.values());
-			waitForResponse();
-			if (response.getUUID() != null) {
-				if (abilities.containsKey(response.getUUID()))
-					activateAbility(abilities.get(response.getUUID()), game);
+			ActivatedAbility ability = abilities.values().iterator().next();
+			if (ability.getTargets().size() != 0 || !(ability.getCosts().size() == 1 && ability.getCosts().get(0) instanceof SacrificeSourceCost)) {
+				activateAbility(ability, game);
+				return;
 			}
+		}
+		game.fireGetChoiceEvent(playerId, name, abilities.values());
+		waitForResponse();
+		if (response.getUUID() != null) {
+			if (abilities.containsKey(response.getUUID()))
+				activateAbility(abilities.get(response.getUUID()), game);
 		}
 	}
 
