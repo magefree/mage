@@ -18,6 +18,7 @@ import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
 import mage.interfaces.plugin.CardPlugin;
 import mage.utils.CardUtil;
+import mage.view.CardView;
 import mage.view.PermanentView;
 import net.xeoh.plugins.base.annotations.PluginImplementation;
 import net.xeoh.plugins.base.annotations.events.Init;
@@ -32,7 +33,9 @@ import org.mage.plugins.card.images.DownloadPictures;
 /**
  * {@link CardPlugin} implementation.
  * 
- * @version 0.1 01.11.2010
+ * @version 0.3 07.11.2010 Mage cards.
+ * @version 0.2 07.11.2010 Downloading images.
+ * @version 0.1 01.11.2010 Mage permanents. Sorting card layout.
  * @author nantuko
  */
 @PluginImplementation
@@ -69,16 +72,22 @@ public class CardPluginImpl implements CardPlugin {
 	}
 
 	public String toString() {
-		return "[Card plugin, version 0.2]";
+		return "[Card plugin, version 0.3]";
 	}
 
 	@Override
 	public MagePermanent getMagePermanent(PermanentView permanent, CardDimensions dimension, UUID gameId, ActionCallback callback) {
-		//log.debug("Card plugin: building mage permanent [w="+dimension.frameWidth+",h="+dimension.frameHeight+"]");
 		CardPanel cardPanel = new CardPanel(permanent, true, callback);
 		cardPanel.setShowCastingCost(true);
 		cardPanel.setCardBounds(0, 0, dimension.frameWidth, dimension.frameHeight);
-		//cardPanel.setBorder(BorderFactory.createLineBorder(Color.red));
+		return cardPanel;
+	}
+	
+	@Override
+	public MagePermanent getMageCard(CardView permanent, CardDimensions dimension, UUID gameId, ActionCallback callback) {
+		CardPanel cardPanel = new CardPanel(permanent, true, callback);
+		cardPanel.setShowCastingCost(true);
+		cardPanel.setCardBounds(0, 0, dimension.frameWidth, dimension.frameHeight);
 		return cardPanel;
 	}
 

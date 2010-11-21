@@ -479,4 +479,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 	public Image getImage() {
 		return image;
 	}
+
+	@Override
+	public PermanentView getOriginalPermanent() {
+		return null;
+	}
 }

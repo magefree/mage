@@ -34,14 +34,23 @@
 
 package mage.client.cards;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 
+import javax.swing.BorderFactory;
+
+import mage.cards.CardDimensions;
+import mage.cards.MageCard;
+import mage.client.plugins.adapters.MageMouseAdapter;
+import mage.client.plugins.adapters.MageMouseMotionAdapter;
+import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
 import mage.view.CardView;
 import mage.view.CardsView;
@@ -52,8 +61,9 @@ import mage.view.CardsView;
  */
 public class Cards extends javax.swing.JPanel {
 
-	private Map<UUID, Card> cards = new HashMap<UUID, Card>();
-
+	private Map<UUID, MageCard> cards = new HashMap<UUID, MageCard>();
+	private boolean mouseHandlingEnabled = false;
+	
     /** Creates new form Cards */
     public Cards() {
         initComponents();
@@ -61,25 +71,39 @@ public class Cards extends javax.swing.JPanel {
         jScrollPane1.setOpaque(false);
         jScrollPane1.getViewport().setOpaque(false);
         cardArea.setOpaque(false);
+        if (Plugins.getInstance().isCardPluginLoaded()) {
+        	cardArea.setLayout(null);
+        }
     }
 
 	public boolean loadCards(CardsView cardsView, BigCard bigCard, UUID gameId) {
 		boolean changed = false;
 		for (CardView card: cardsView.values()) {
 			if (!cards.containsKey(card.getId())) {
-				Card cardImg = new Card(card, bigCard, Config.dimensions, gameId);
-				cards.put(card.getId(), cardImg);
-				cardArea.add(cardImg);
+				addCard(card, bigCard, gameId);
 				changed = true;
 			}
 			cards.get(card.getId()).update(card);
 		}
-		for (Iterator<Entry<UUID, Card>> i = cards.entrySet().iterator(); i.hasNext();) {
-			Entry<UUID, Card> entry = i.next();
+		for (Iterator<Entry<UUID, MageCard>> i = cards.entrySet().iterator(); i.hasNext();) {
+			Entry<UUID, MageCard> entry = i.next();
 			if (!cardsView.containsKey(entry.getKey())) {
 				removeCard(entry.getKey());
 				i.remove();
 				changed = true;
+			}
+		}
+		
+		if (!mouseHandlingEnabled) {
+			synchronized (this) {
+				if (!mouseHandlingEnabled) {
+					mouseHandlingEnabled = true;
+					//cardArea.addMouseListener(new MageMouseAdapter(this, gameId));			
+					//cardArea.addMouseMotionListener(new MageMouseMotionAdapter(this, bigCard));
+					jScrollPane1.addMouseListener(new MageMouseAdapter(cardArea, gameId));
+					jScrollPane1.addMouseMotionListener(new MageMouseMotionAdapter(cardArea, bigCard));
+					//addMouseListener(new MageMouseAdapter(this, gameId));
+				}
 			}
 		}
 
@@ -88,17 +112,44 @@ public class Cards extends javax.swing.JPanel {
 		cardArea.repaint();
 		this.revalidate();
 		this.repaint();
+		if (changed) {
+			layoutCards(Config.dimensions);
+		}
 		return changed;
 	}
 
+	private void addCard(CardView card, BigCard bigCard, UUID gameId) {
+		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, Config.dimensions, gameId);
+		cards.put(card.getId(), cardImg);
+		cardArea.add(cardImg);
+		/*if (Plugins.getInstance().isCardPluginLoaded()) {
+			cardImg.setBorder(BorderFactory.createLineBorder(Color.red));
+		}*/
+	}
+	
 	private void removeCard(UUID cardId) {
         for (Component comp: cardArea.getComponents()) {
         	if (comp instanceof Card) {
         		if (((Card)comp).getCardId().equals(cardId)) {
 					cardArea.remove(comp);
         		}
+        	} else if (comp instanceof MageCard) {
+        		if (((MageCard)comp).getOriginal().equals(cardId)) {
+					cardArea.remove(comp);
+        		}
         	}
         }
+	}
+	
+	private void layoutCards(CardDimensions dimension) {
+		if (Plugins.getInstance().isCardPluginLoaded()) {
+			int dx = 0;
+			for (MageCard card: cards.values()) {
+				card.setLocation(dx, 0);
+				card.setCardBounds(dx, 0, dimension.frameWidth, dimension.frameHeight);
+				dx += dimension.frameWidth + 5;
+			}
+		}
 	}
 
 

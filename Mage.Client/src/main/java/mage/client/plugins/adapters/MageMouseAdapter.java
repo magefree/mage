@@ -1,23 +1,14 @@
 package mage.client.plugins.adapters;
 
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.List;
 import java.util.UUID;
 
-import javax.swing.Popup;
-import javax.swing.PopupFactory;
-
-import mage.cards.MagePermanent;
+import mage.cards.MageCard;
 import mage.client.MageFrame;
-import mage.client.game.PlayAreaPanel;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.Config;
 import mage.client.util.DefaultActionCallback;
-import mage.client.util.gui.ArrowBuilder;
 
 public class MageMouseAdapter extends MouseAdapter {
 	
@@ -38,8 +29,8 @@ public class MageMouseAdapter extends MouseAdapter {
 			int count = e.getClickCount();
 			if (count > 0) {
 				Object o = parent.getComponentAt(e.getPoint());
-				if (o instanceof MagePermanent) {
-					MagePermanent selectedCard = (MagePermanent) o;
+				if (o instanceof MageCard) {
+					MageCard selectedCard = (MageCard) o;
 					// TODO: uncomment when attached cards works in plugin
 					/*
 					 * int x = e.getX() - selectedCard.getX(); int y = e.getY()

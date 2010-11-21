@@ -37,8 +37,6 @@ import org.mage.card.arcane.ScaledImagePanel.MultipassType;
 import org.mage.card.arcane.ScaledImagePanel.ScalingType;
 import org.mage.plugins.card.images.ImageCache;
 
-import com.google.common.collect.Sets;
-
 
 @SuppressWarnings({"unchecked","rawtypes"})
 public class CardPanel extends MagePermanent implements MouseListener {
@@ -62,7 +60,8 @@ public class CardPanel extends MagePermanent implements MouseListener {
 	static private final float rotCenterToTopCorner = 1.0295630140987000315797369464196f;
 	static private final float rotCenterToBottomCorner = 0.7071067811865475244008443621048f;
 
-	public PermanentView gameCard;
+	public CardView gameCard;
+	public PermanentView gamePermanent;
 	public CardPanel attachedToPanel;
 	public List<CardPanel> attachedPanels = new ArrayList();
 	public double tappedAngle = 0;
@@ -86,10 +85,17 @@ public class CardPanel extends MagePermanent implements MouseListener {
 	protected Popup popup;
 	protected boolean popupShowing;
 	protected TextPopup popupText = new TextPopup();
+	
+	private boolean isPermanent;
 
-	public CardPanel (PermanentView newGameCard, boolean loadImage, ActionCallback callback) {
+	public CardPanel(CardView newGameCard, boolean loadImage, ActionCallback callback) {
 		this.gameCard = newGameCard;
 		this.callback = callback;
+		this.isPermanent = this.gameCard instanceof PermanentView;
+		
+		if (isPermanent) {
+			this.gamePermanent = (PermanentView) this.gameCard;
+		}
 		
 		//for container debug (don't remove)
 		//setBorder(BorderFactory.createLineBorder(Color.green));
@@ -111,7 +117,7 @@ public class CardPanel extends MagePermanent implements MouseListener {
 		if (CardUtil.isCreature(gameCard)) {
 			ptText.setText(gameCard.getPower() + "/" + gameCard.getToughness());
 		} else if (CardUtil.isPlaneswalker(gameCard)) {
-			ptText.setText(gameCard.getOriginal().getLoyalty());
+			ptText.setText(gameCard.getLoyalty());
 		}
 		ptText.setFont(getFont().deriveFont(Font.BOLD, 13f));
 		ptText.setForeground(Color.white);
@@ -146,7 +152,7 @@ public class CardPanel extends MagePermanent implements MouseListener {
 		Util.threadPool.submit(new Runnable() {
 			public void run () {
 				try {
-					tappedAngle = gameCard.isTapped() ? CardPanel.TAPPED_ANGLE : 0;
+					tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
 					BufferedImage srcImage = ImageCache.getImageOriginal(gameCard);
 					srcImage = ImageCache.getNormalSizeImage(srcImage);
 					if (srcImage != null) {
@@ -165,7 +171,7 @@ public class CardPanel extends MagePermanent implements MouseListener {
 		});
 	}
 	
-	private void setText(PermanentView card) {
+	private void setText(CardView card) {
 		if (hasImage) {
 			titleText.setText("");
 		} else {
@@ -400,7 +406,7 @@ public class CardPanel extends MagePermanent implements MouseListener {
 		return p;
 	}
 
-	public PermanentView getCard() {
+	public CardView getCard() {
 		return this.gameCard;
 	}
 	
@@ -426,13 +432,13 @@ public class CardPanel extends MagePermanent implements MouseListener {
 			Util.threadPool.submit(new Runnable() {
 				public void run () {
 					//TODO: BufferedImage srcImage = ImageCache.getImageOriginal(gameCard);
-					BufferedImage srcImage = null;
-					tappedAngle = gameCard.isTapped() ? CardPanel.TAPPED_ANGLE : 0;
-					if (srcImage != null) {
+					//BufferedImage srcImage = null;
+					//tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
+					/*if (srcImage != null) {
 						hasImage = true;
 						setText(gameCard);
 						setImage(srcImage, srcImage);
-					}
+					}*/
 				}
 			});
 		}
@@ -450,7 +456,10 @@ public class CardPanel extends MagePermanent implements MouseListener {
 
 	@Override
 	public boolean isTapped() {
-		return gameCard.isTapped();
+		if (isPermanent) {
+			return ((PermanentView)gameCard).isTapped();
+		}
+		return false;
 	}
 
 	@Override
@@ -462,9 +471,11 @@ public class CardPanel extends MagePermanent implements MouseListener {
 	}
 
 	@Override
-	public void update(PermanentView card) {
-		if (this.gameCard.isTapped() != card.isTapped()) {
-			Animation.tapCardToggle(this, this);
+	public void update(CardView card) {
+		if (isPermanent) {
+			if (isTapped() != ((PermanentView)card).isTapped()) {
+				Animation.tapCardToggle(this, this);
+			}
 		}
 		if (CardUtil.isCreature(card) && CardUtil.isPlaneswalker(card)) {
 			ptText.setText(card.getPower() + "/" + card.getToughness() + " (" + card.getLoyalty() + ")");
@@ -533,7 +544,7 @@ public class CardPanel extends MagePermanent implements MouseListener {
     }
 	
 	@Override
-	public PermanentView getOriginal() {
+	public CardView getOriginal() {
 		return this.gameCard;
 	}
 
@@ -631,5 +642,15 @@ public class CardPanel extends MagePermanent implements MouseListener {
 		}
 //		sb.append("\n").append(card.getId());
 		return sb.toString();
+	}
+
+	@Override
+	public void update(PermanentView card) {
+		update((CardView)card);
+	}
+
+	@Override
+	public PermanentView getOriginalPermanent() {
+		throw new IllegalStateException("Is not permanent.");
 	}
 }

@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
 
+import mage.cards.MageCard;
 import mage.cards.MagePermanent;
 import mage.client.cards.BigCard;
 import mage.client.plugins.impl.Plugins;
@@ -29,8 +30,8 @@ public class MageMouseMotionAdapter extends MouseMotionAdapter {
 		if (!Plugins.getInstance().isCardPluginLoaded()) {return;}
 		if (bigCard == null) {return;}
 		Object o = parent.getComponentAt(e.getPoint());
-		if (o instanceof MagePermanent) {
-			MagePermanent card = (MagePermanent) o;
+		if (o instanceof MageCard) {
+			MageCard card = (MageCard) o;
 			if (card.getOriginal().getId() != bigCard.getCardId()) {
 				synchronized (MageMouseAdapter.class) {
 					if (card.getOriginal().getId() != bigCard.getCardId()) {

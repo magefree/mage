@@ -120,7 +120,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 	}
 
 	private void addPermanent(PermanentView permanent) {
-		MagePermanent perm = Plugins.getInstance().getMagePermanent(permanent, bigCard, Config.dimensions, gameId);;
+		MagePermanent perm = Plugins.getInstance().getMagePermanent(permanent, bigCard, Config.dimensions, gameId);
 		perm.addComponentListener(this);
 		if (!Plugins.getInstance().isCardPluginLoaded()) {
 			perm.setBounds(findEmptySpace(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight)));

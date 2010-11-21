@@ -9,8 +9,10 @@ import javax.swing.JComponent;
 
 import mage.cards.Card;
 import mage.cards.CardDimensions;
+import mage.cards.MageCard;
 import mage.cards.MagePermanent;
 import mage.client.cards.BigCard;
+import mage.view.CardView;
 import mage.view.PermanentView;
 
 public interface MagePlugins {
@@ -19,6 +21,7 @@ public interface MagePlugins {
 	void updateGamePanel(Map<String, JComponent> ui);
 	JComponent updateTablePanel(Map<String, JComponent> ui);
 	MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, CardDimensions dimension, UUID gameId);
+	MageCard getMageCard(CardView card, BigCard bigCard, CardDimensions dimension, UUID gameId);
 	boolean isThemePluginLoaded();
 	boolean isCardPluginLoaded();
 	boolean isCounterPluginLoaded();

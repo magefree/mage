@@ -110,12 +110,12 @@ abstract public class Animation {
 
 			protected void update (float percentage) {
 				panel.tappedAngle = CardPanel.TAPPED_ANGLE * percentage;
-				if (!panel.gameCard.isTapped()) panel.tappedAngle = CardPanel.TAPPED_ANGLE - panel.tappedAngle;
+				if (!panel.isTapped()) panel.tappedAngle = CardPanel.TAPPED_ANGLE - panel.tappedAngle;
 				panel.repaint();
 			}
 
 			protected void end () {
-				panel.tappedAngle = panel.gameCard.isTapped() ? CardPanel.TAPPED_ANGLE : 0;
+				panel.tappedAngle = panel.isTapped() ? CardPanel.TAPPED_ANGLE : 0;
 				parent.onEndAnimation();
 				parent.repaint();
 			}
