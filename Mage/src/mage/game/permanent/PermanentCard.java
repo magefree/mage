@@ -37,10 +37,10 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.keyword.LevelAbility;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.LevelerCard;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
+import mage.players.Player;
 
 /**
  *
@@ -112,17 +112,57 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 		this.cardNumber = card.getCardNumber();
 	}
 
+//	@Override
+//	public boolean moveToZone(Zone zone, Game game, boolean flag) {
+//		ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), this.getControllerId(), Zone.BATTLEFIELD, zone);
+//		if (!game.replaceEvent(event)) {
+//			if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
+//				CardImpl card = (CardImpl) game.getCard(objectId);
+//				return card.moveToZone(event.getToZone(), controllerId, game, flag);
+//			}
+//		}
+//		return false;
+//	}
+
 	@Override
-	public boolean moveToZone(Zone zone, Game game, boolean flag) {
-		ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), this.getControllerId(), Zone.BATTLEFIELD, zone);
+	public boolean moveToZone(Zone toZone, Game game, boolean flag) {
+		Zone fromZone = zone;
+		ZoneChangeEvent event = new ZoneChangeEvent(this, controllerId, fromZone, toZone);
 		if (!game.replaceEvent(event)) {
-			if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
-				CardImpl card = (CardImpl) game.getCard(objectId);
-				return card.moveToZone(event.getToZone(), controllerId, game, flag);
+			Player controller = game.getPlayer(controllerId);
+			if (controller != null && controller.removeFromBattlefield(this, game)) {
+				Card card = game.getCard(objectId);
+				Player owner = game.getPlayer(ownerId);
+				if (owner != null) {
+					switch (event.getToZone()) {
+						case GRAVEYARD:
+							owner.putInGraveyard(card, game, !flag);
+							break;
+						case HAND:
+							owner.getHand().add(card);
+							break;
+						case EXILED:
+							game.getExile().getPermanentExile().add(card);
+							break;
+						case LIBRARY:
+							if (flag)
+								owner.getLibrary().putOnTop(card, game);
+							else
+								owner.getLibrary().putOnBottom(card, game);
+							break;
+						case BATTLEFIELD:
+							//should never happen
+							break;
+					}
+					zone = event.getToZone();
+					game.fireEvent(event);
+					return zone == toZone;
+				}
 			}
 		}
 		return false;
 	}
+
 
 	@Override
 	public boolean moveToExile(UUID exileId, String name, Game game) {

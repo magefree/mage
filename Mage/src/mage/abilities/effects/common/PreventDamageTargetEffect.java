@@ -64,7 +64,7 @@ public class PreventDamageTargetEffect extends PreventionEffectImpl<PreventDamag
 
 	@Override
 	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount());
+		GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
 		if (!game.replaceEvent(preventEvent)) {
 			if (event.getAmount() >= this.amount) {
 				int damage = event.getAmount();

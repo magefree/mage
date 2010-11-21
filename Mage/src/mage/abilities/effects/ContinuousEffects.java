@@ -59,13 +59,16 @@ public class ContinuousEffects implements Serializable {
 	private final Map<PreventionEffect, Ability> preventionEffects = new HashMap<PreventionEffect, Ability>();
 	private final Map<AsThoughEffect, Ability> asThoughEffects = new HashMap<AsThoughEffect, Ability>();
 	private final ApplyCountersEffect applyCounters;
+	private final PlaneswalkerRedirectionEffect planeswalkerRedirectionEffect;
 
 	public ContinuousEffects() {
 		applyCounters = new ApplyCountersEffect();
+		planeswalkerRedirectionEffect = new PlaneswalkerRedirectionEffect();
 	}
 
 	public ContinuousEffects(final ContinuousEffects effect) {
 		this.applyCounters = effect.applyCounters.copy();
+		this.planeswalkerRedirectionEffect = effect.planeswalkerRedirectionEffect.copy();
 		for (Entry<ContinuousEffect, Ability> entry: effect.layeredEffects.entrySet()) {
 			layeredEffects.put((ContinuousEffect)entry.getKey().copy(), entry.getValue().copy());
 		}
@@ -158,10 +161,12 @@ public class ContinuousEffects implements Serializable {
 
 	private List<ReplacementEffect> getApplicableReplacementEffects(GameEvent event, Game game) {
 		List<ReplacementEffect> replaceEffects = new ArrayList<ReplacementEffect>();
+		if (planeswalkerRedirectionEffect.applies(event, null, game))
+			replaceEffects.add(planeswalkerRedirectionEffect);
 		for (ReplacementEffect effect: replacementEffects.keySet()) {
 			if (effect.applies(event, replacementEffects.get(effect), game)) {
 				if (effect.getDuration() != Duration.OneUse || !effect.isUsed())
-					replaceEffects.add((ReplacementEffect)effect);
+					replaceEffects.add(effect);
 			}
 		}
 		return replaceEffects;

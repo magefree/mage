@@ -281,6 +281,7 @@ public final class Constants {
 		PutManaInPool(true),
 		Regenerate(true),
 		PreventDamage(true),
+		RedirectDamage(true),
 		Tap(false),
 		Untap(true),
 		Win(true),

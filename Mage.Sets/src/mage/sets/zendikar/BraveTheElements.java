@@ -74,20 +74,23 @@ public class BraveTheElements extends CardImpl<BraveTheElements> {
 
 class BraveTheElementsEffect extends GainAbilityControlledEffect {
 
-	FilterCreaturePermanent filter1 = new FilterCreaturePermanent();
+	private static FilterCreaturePermanent filter1 = new FilterCreaturePermanent();
+
+	static {
+		filter1.setUseColor(true);
+		filter1.getColor().setWhite(true);
+	}
+
 	FilterCard filter2;
 
 	public BraveTheElementsEffect() {
-		super(new ProtectionAbility(new FilterCard()), Duration.EndOfTurn);
-		filter1.setUseColor(true);
-		filter1.getColor().setWhite(true);
+		super(new ProtectionAbility(new FilterCard()), Duration.EndOfTurn, filter1);
 		filter2 = (FilterCard)((ProtectionAbility)ability).getFilter();
 		filter2.setUseColor(true);
 	}
 
 	public BraveTheElementsEffect(final BraveTheElementsEffect effect) {
 		super(effect);
-		this.filter1 = effect.filter1.copy();
 		this.filter2 = effect.filter2.copy();
 	}
 
@@ -101,10 +104,8 @@ class BraveTheElementsEffect extends GainAbilityControlledEffect {
 		ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
 		filter2.setColor(choice.getColor());
 		filter2.setMessage(choice.getChoice());
-		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter1, source.getControllerId())) {
-			perm.addAbility(ability);
-		}
-		return true;
+		ability = new ProtectionAbility(new FilterCard(filter2));
+		return super.apply(game, source);
 	}
 
 	@Override

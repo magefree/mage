@@ -59,12 +59,12 @@ public class DamageXTargetEffect extends OneShotEffect<DamageXTargetEffect> {
 		int amount = source.getCosts().getVariableCosts().get(0).getAmount();
 		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
-			permanent.damage(amount, source.getSourceId(), game, true);
+			permanent.damage(amount, source.getId(), game, true);
 			return true;
 		}
 		Player player = game.getPlayer(source.getFirstTarget());
 		if (player != null) {
-			player.damage(amount, source.getSourceId(), game, false, true);
+			player.damage(amount, source.getId(), game, false, true);
 			return true;
 		}
 		return false;

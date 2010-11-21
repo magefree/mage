@@ -184,7 +184,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 
 	public boolean moveToZone(Zone toZone, UUID controllerId, Game game, boolean flag) {
 		Zone fromZone = zone;
-		ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), controllerId, fromZone, toZone);
+		ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, controllerId, fromZone, toZone);
 		if (!game.replaceEvent(event)) {
 			switch (event.getToZone()) {
 				case GRAVEYARD:
@@ -226,7 +226,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 	@Override
 	public boolean moveToExile(UUID exileId, String name, Game game) {
 		Zone fromZone = zone;
-		ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), ownerId, fromZone, Zone.EXILED);
+		ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, ownerId, fromZone, Zone.EXILED);
 		if (!game.replaceEvent(event)) {
 			if (exileId == null) {
 				game.getExile().getPermanentExile().add(this);
@@ -235,7 +235,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 				game.getExile().createZone(exileId, name).add(this);
 			}
 			zone = event.getToZone();
-			game.fireEvent(new ZoneChangeEvent(this.getId(), ownerId, fromZone, Zone.EXILED));
+			game.fireEvent(new ZoneChangeEvent(this.objectId, ownerId, fromZone, Zone.EXILED));
 			return true;
 		}
 		return false;
@@ -248,7 +248,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 		zone = Zone.BATTLEFIELD;
 		permanent.entersBattlefield(game);
 		game.applyEffects();
-		game.fireEvent(new ZoneChangeEvent(permanent.getId(), controllerId, fromZone, Zone.BATTLEFIELD));
+		game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));
 		return true;
 	}
 

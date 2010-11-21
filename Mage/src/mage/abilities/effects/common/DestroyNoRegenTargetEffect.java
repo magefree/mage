@@ -56,7 +56,7 @@ public class DestroyNoRegenTargetEffect extends OneShotEffect<DestroyNoRegenTarg
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		permanent.destroy(source.getSourceId(), game, true);
+		permanent.destroy(source.getId(), game, true);
 		return true;
 	}
 

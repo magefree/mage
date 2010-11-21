@@ -40,6 +40,7 @@ import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -117,7 +118,7 @@ class NecroticPlagueEffect extends ContinuousEffectImpl<NecroticPlagueEffect> {
 					case AbilityAddingRemovingEffects_6:
 						if (sublayer == SubLayer.NA) {
 							creature.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new SacrificeSourceEffect()));
-							creature.addAbility(new LeavesBattlefieldTriggeredAbility(new NecroticPlagueEffect2(source.getSourceId()), false));
+							creature.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new NecroticPlagueEffect2(source.getSourceId()), false));
 						}
 						break;
 				}
@@ -185,6 +186,11 @@ class NecroticPlagueEffect2 extends OneShotEffect<NecroticPlagueEffect2> {
 	@Override
 	public NecroticPlagueEffect2 copy() {
 		return new NecroticPlagueEffect2(this);
+	}
+
+	@Override
+	public String getText(Ability source) {
+		return "its controller chooses target creature one of his or her opponents controls. Return Necrotic Plague from its owner's graveyard to the battlefield attached to that creature.";
 	}
 
 }

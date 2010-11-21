@@ -61,7 +61,7 @@ public class DestroyAllNamedPermanentsEffect extends OneShotEffect<DestroyAllNam
 		permanent.destroy(source.getSourceId(), game, false);
 		for (Permanent perm: game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
 			if (perm.getName().equals(name))
-				perm.destroy(source.getSourceId(), game, false);
+				perm.destroy(source.getId(), game, false);
 		}
 
 		return true;

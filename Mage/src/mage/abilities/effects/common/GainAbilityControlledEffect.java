@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
 public class GainAbilityControlledEffect extends ContinuousEffectImpl<GainAbilityControlledEffect> {
 
 	protected Ability ability;
-        protected boolean excludeSource;
+	protected boolean excludeSource;
 	protected FilterPermanent permanentFilter;
 
 	public GainAbilityControlledEffect(Ability ability, Duration duration) {
@@ -56,18 +56,18 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl<GainAbilit
 		this(ability, duration, filter, false);
 	}
 
-        public GainAbilityControlledEffect(Ability ability, Duration duration, FilterPermanent filter, boolean excludeSource) {
+	public GainAbilityControlledEffect(Ability ability, Duration duration, FilterPermanent filter, boolean excludeSource) {
 		super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
 		this.ability = ability;
 		this.permanentFilter = filter;
-                this.excludeSource = excludeSource;
+		this.excludeSource = excludeSource;
 	}
 
 	public GainAbilityControlledEffect(final GainAbilityControlledEffect effect) {
 		super(effect);
 		this.ability = effect.ability.copy();
 		this.permanentFilter = effect.permanentFilter.copy();
-                this.excludeSource = effect.excludeSource;
+		this.excludeSource = effect.excludeSource;
 	}
 
 	@Override
@@ -78,9 +78,9 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl<GainAbilit
 	@Override
 	public boolean apply(Game game, Ability source) {
 		for (Permanent perm: game.getBattlefield().getAllActivePermanents(permanentFilter, source.getControllerId())) {
-                    if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
-                        perm.addAbility(ability.copy());
-                    }
+			if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+				perm.addAbility(ability.copy());
+			}
 		}
 		return true;
 	}
@@ -88,7 +88,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl<GainAbilit
 	@Override
 	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
-                if (excludeSource)
+		if (excludeSource)
 			sb.append("Other ");
 		sb.append(permanentFilter.getMessage()).append(" you control gain ").append(ability.getRule());
 		sb.append(" ").append(duration.toString());

@@ -41,6 +41,7 @@ public class GameEvent {
 	private UUID sourceId;
 	private UUID playerId;
 	private int amount;
+	private boolean flag;
 	private String data;
 
 	public enum EventType {
@@ -119,19 +120,20 @@ public class GameEvent {
 	}
 
 	public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId) {
-		this(type, targetId, sourceId, playerId, 0);
+		this(type, targetId, sourceId, playerId, 0, false);
 	}
 
-	public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, int amount) {
+	public GameEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, int amount, boolean flag) {
 		this.type = type;
 		this.targetId = targetId;
 		this.sourceId = sourceId;
 		this.amount = amount;
 		this.playerId = playerId;
+		this.flag = flag;
 	}
 
 	public static GameEvent getEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, int amount) {
-		return new GameEvent(type, targetId, sourceId, playerId, amount);
+		return new GameEvent(type, targetId, sourceId, playerId, amount, false);
 	}
 
 	public static GameEvent getEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId) {
@@ -160,6 +162,10 @@ public class GameEvent {
 
 	public int getAmount() {
 		return amount;
+	}
+
+	public boolean getFlag() {
+		return flag;
 	}
 
 	public void setAmount(int amount) {

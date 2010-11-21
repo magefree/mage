@@ -65,7 +65,7 @@ public class DestroySourceEffect extends OneShotEffect<DestroySourceEffect> {
 	public boolean apply(Game game, Ability source) {
 		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
-			permanent.destroy(source.getSourceId(), game, noRegen);
+			permanent.destroy(source.getId(), game, noRegen);
 			return true;
 		}
 		return false;

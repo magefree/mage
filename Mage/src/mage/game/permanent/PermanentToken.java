@@ -76,9 +76,9 @@ public class PermanentToken extends PermanentImpl<PermanentToken> {
 
 	@Override
 	public boolean moveToZone(Zone zone, Game game, boolean flag) {
-		if (!game.replaceEvent(new ZoneChangeEvent(this.getId(), this.getControllerId(), Zone.BATTLEFIELD, zone))) {
+		if (!game.replaceEvent(new ZoneChangeEvent(this, this.getControllerId(), Zone.BATTLEFIELD, zone))) {
 			if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
-				game.fireEvent(new ZoneChangeEvent(this.getId(), this.getControllerId(), Zone.BATTLEFIELD, zone));
+				game.fireEvent(new ZoneChangeEvent(this, this.getControllerId(), Zone.BATTLEFIELD, zone));
 				return true;
 			}
 		}
@@ -87,9 +87,9 @@ public class PermanentToken extends PermanentImpl<PermanentToken> {
 
 	@Override
 	public boolean moveToExile(UUID exileId, String name, Game game) {
-		if (!game.replaceEvent(new ZoneChangeEvent(this.getId(), this.getControllerId(), Zone.BATTLEFIELD, Zone.EXILED))) {
+		if (!game.replaceEvent(new ZoneChangeEvent(this, this.getControllerId(), Zone.BATTLEFIELD, Zone.EXILED))) {
 			if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
-				game.fireEvent(new ZoneChangeEvent(this.getId(), this.getControllerId(), Zone.BATTLEFIELD, Zone.EXILED));
+				game.fireEvent(new ZoneChangeEvent(this, this.getControllerId(), Zone.BATTLEFIELD, Zone.EXILED));
 				return true;
 			}
 		}

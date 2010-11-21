@@ -44,6 +44,8 @@ import mage.abilities.TriggeredAbilities;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.game.combat.Combat;
+import mage.game.events.GameEvent.EventType;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
@@ -295,14 +297,20 @@ public class GameState implements Serializable, Copyable<GameState> {
 	public void handleEvent(GameEvent event, Game game) {
 		watchers.watch(event, game);
 		if (!replaceEvent(event, game)) {
+			if (event.getType() == EventType.ZONE_CHANGE) {
+				ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+				if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
+					zEvent.getTarget().checkTriggers(zEvent.getToZone(), event, game);
+				}
+			}
 			for (Player player: players.values()) {
 				player.checkTriggers(event, game);
 			}
+			battlefield.checkTriggers(event, game);
+			stack.checkTriggers(event, game);
+			delayed.checkTriggers(event, game);
+			exile.checkTriggers(event, game);
 		}
-		battlefield.checkTriggers(event, game);
-		stack.checkTriggers(event, game);
-		delayed.checkTriggers(event, game);
-		exile.checkTriggers(event, game);
 	}
 
 	public boolean replaceEvent(GameEvent event, Game game) {

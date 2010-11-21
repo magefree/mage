@@ -112,7 +112,7 @@ class VengefulArchonEffect extends PreventionEffectImpl<VengefulArchonEffect> {
 
 	@Override
 	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getControllerId(), source.getId(), source.getControllerId(), event.getAmount());
+		GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getControllerId(), source.getId(), source.getControllerId(), event.getAmount(), false);
 		if (!game.replaceEvent(preventEvent)) {
 			Player player = game.getPlayer(source.getFirstTarget());
 			if (player != null) {

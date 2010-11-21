@@ -64,7 +64,7 @@ public class DamageAllEffect extends OneShotEffect<DamageAllEffect> {
 	@Override
 	public boolean apply(Game game, Ability source) {
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-			permanent.damage(amount, source.getSourceId(), game, true);
+			permanent.damage(amount, source.getId(), game, true);
 		}
 		return true;
 	}

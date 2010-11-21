@@ -26,76 +26,74 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.abilities.effects;
 
+import java.util.UUID;
 import mage.Constants.Duration;
+import mage.Constants.Outcome;
 import mage.abilities.Ability;
-import mage.abilities.effects.PreventionEffectImpl;
-import mage.filter.Filter;
+import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PreventAllDamageToEffect extends PreventionEffectImpl<PreventAllDamageToEffect> {
+public class PlaneswalkerRedirectionEffect extends RedirectionEffect<PlaneswalkerRedirectionEffect> {
 
-	protected Filter filter;
+	private static FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent();
 
-	public PreventAllDamageToEffect(Duration duration, Filter filter) {
-		super(duration);
-		this.filter = filter;
+	public PlaneswalkerRedirectionEffect() {
+		super(Duration.EndOfGame);
 	}
 
-	public PreventAllDamageToEffect(final PreventAllDamageToEffect effect) {
+	public PlaneswalkerRedirectionEffect(final PlaneswalkerRedirectionEffect effect) {
 		super(effect);
-		this.filter = effect.filter.copy();
 	}
 
 	@Override
-	public PreventAllDamageToEffect copy() {
-		return new PreventAllDamageToEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
-
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
-		if (!game.replaceEvent(preventEvent)) {
-			int damage = event.getAmount();
-			event.setAmount(0);
-			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-		}
-		return false;
+	public PlaneswalkerRedirectionEffect copy() {
+		return new PlaneswalkerRedirectionEffect(this);
 	}
 
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (super.applies(event, source, game)) {
-			Permanent permanent = game.getPermanent(event.getTargetId());
-			if (permanent != null) {
-				if (filter.match(permanent))
-					return true;
-			}
-			else {
-				Player player = game.getPlayer(event.getTargetId());
-				if (player != null && filter.match(player))
-					return true;
+		if (event.getType() == EventType.DAMAGE_PLAYER) {
+			UUID playerId = getSourceControllerId(event.getSourceId(), game);
+			if (game.getOpponents(event.getTargetId()).contains(playerId)) {
+				Player target = game.getPlayer(event.getTargetId());
+				Player player = game.getPlayer(playerId);
+				if (target != null) {
+					int numPlaneswalkers = game.getBattlefield().countAll(filter, target.getId());
+					if (numPlaneswalkers > 0 && player.chooseUse(outcome, "Redirect damage to planeswalker?", game)) {
+						redirectTarget = new TargetPermanent(filter);
+						if (numPlaneswalkers == 1) {
+							redirectTarget.add(game.getBattlefield().getAllActivePermanents(filter, target.getId()).get(0).getId(), game);
+						}
+						else {
+							player.choose(Outcome.Damage, redirectTarget, game);
+						}
+						return true;
+					}
+				}
 			}
 		}
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Prevent all damage that would be dealt to " + filter.getMessage() + " " + duration.toString();
+	private UUID getSourceControllerId(UUID sourceId, Game game) {
+		StackObject source = game.getStack().getStackObject(sourceId);
+		if (source != null)
+			return source.getControllerId();
+		Permanent permanent = game.getBattlefield().getPermanent(sourceId);
+		if (permanent != null)
+			return permanent.getControllerId();
+		return null;
 	}
-
 }

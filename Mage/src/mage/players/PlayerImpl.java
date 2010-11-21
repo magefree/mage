@@ -593,7 +593,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public int loseLife(int amount, Game game) {
-		GameEvent event = new GameEvent(GameEvent.EventType.LOSE_LIFE, playerId, playerId, playerId, amount);
+		GameEvent event = new GameEvent(GameEvent.EventType.LOSE_LIFE, playerId, playerId, playerId, amount, false);
 		if (!game.replaceEvent(event)) {
 			setLife(this.life - amount, game);
 			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST_LIFE, playerId, playerId, playerId, amount));
@@ -604,7 +604,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public void gainLife(int amount, Game game) {
-		GameEvent event = new GameEvent(GameEvent.EventType.GAIN_LIFE, playerId, playerId, playerId, amount);
+		GameEvent event = new GameEvent(GameEvent.EventType.GAIN_LIFE, playerId, playerId, playerId, amount, false);
 		if (!game.replaceEvent(event)) {
 			setLife(this.life + amount, game);
 			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.GAINED_LIFE, playerId, playerId, playerId, amount));
@@ -614,8 +614,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	@Override
 	public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable) {
 		if (damage > 0 && canDamage(game.getObject(sourceId))) {
-			GameEvent event = new GameEvent(GameEvent.EventType.DAMAGE_PLAYER, playerId, sourceId, playerId, damage);
-			if (!preventable || !game.replaceEvent(event)) {
+			GameEvent event = new GameEvent(GameEvent.EventType.DAMAGE_PLAYER, playerId, sourceId, playerId, damage, preventable);
+			if (!game.replaceEvent(event)) {
 				int actualDamage = event.getAmount();
 				if (actualDamage > 0) {
 					actualDamage = this.loseLife(actualDamage, game);
