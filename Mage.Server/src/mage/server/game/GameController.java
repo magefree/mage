@@ -438,14 +438,19 @@ public class GameController implements GameCallback {
 							String cardName = m.group(3);
 							Integer amount = Integer.parseInt(m.group(4));
 							for (int i = 0; i < amount; i++) {
-								Card card = CardImpl.createCard(Sets.findCard(cardName));
-								if (card != null) {
-									Set<Card> cards = new HashSet<Card>();
-									cards.add(card);
-									game.loadCards(cards, player.getId());
-									swapWithAnyCard(game, player, card, gameZone);
+								String clazz = Sets.findCard(cardName);
+								if (clazz != null) {
+									Card card = CardImpl.createCard(clazz);
+									if (card != null) {
+										Set<Card> cards = new HashSet<Card>();
+										cards.add(card);
+										game.loadCards(cards, player.getId());
+										swapWithAnyCard(game, player, card, gameZone);
+									} else {
+										logger.severe("Couldn't create a card: " + cardName);
+									}
 								} else {
-									logger.severe("Couldn't create a card: " + cardName);
+									logger.severe("Couldn't find a card: " + cardName);
 								}
 							}
 						} else {

@@ -129,11 +129,11 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
         	if (comp instanceof Card) {
         		if (((Card)comp).getCardId().equals(cardId)) {
 					remove(comp);
-        		} else if (comp instanceof MageCard) {
-            		if (((MageCard)comp).getOriginal().getId().equals(cardId)) {
-    					remove(comp);
-            		}
-            	}
+        		} 
+        	} else if (comp instanceof MageCard) {
+        		if (((MageCard)comp).getOriginal().getId().equals(cardId)) {
+					remove(comp);
+        		}
         	}
         }
 	}
