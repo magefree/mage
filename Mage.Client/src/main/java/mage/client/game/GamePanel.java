@@ -282,7 +282,15 @@ public class GamePanel extends javax.swing.JPanel {
 		this.txtPriority.setText(game.getPriorityPlayerName());
 		this.txtTurn.setText(Integer.toString(game.getTurn()));
 		for (PlayerView player: game.getPlayers()) {
-			players.get(player.getPlayerId()).update(player);
+			if (player != null) {
+				if (players.containsKey(player.getPlayerId())) {
+					players.get(player.getPlayerId()).update(player);
+				} else {
+					logger.warning("Couldn't find player.");
+				}
+			} else {
+				logger.warning("Player object is null.");
+			}
 		}
 		
 		this.stack.loadCards(game.getStack(), bigCard, gameId);

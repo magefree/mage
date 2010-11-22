@@ -34,17 +34,13 @@
 
 package mage.client.cards;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
-
-import javax.swing.BorderFactory;
 
 import mage.cards.CardDimensions;
 import mage.cards.MageCard;
@@ -98,11 +94,8 @@ public class Cards extends javax.swing.JPanel {
 			synchronized (this) {
 				if (!mouseHandlingEnabled) {
 					mouseHandlingEnabled = true;
-					//cardArea.addMouseListener(new MageMouseAdapter(this, gameId));			
-					//cardArea.addMouseMotionListener(new MageMouseMotionAdapter(this, bigCard));
 					jScrollPane1.addMouseListener(new MageMouseAdapter(cardArea, gameId));
 					jScrollPane1.addMouseMotionListener(new MageMouseMotionAdapter(cardArea, bigCard));
-					//addMouseListener(new MageMouseAdapter(this, gameId));
 				}
 			}
 		}
@@ -122,9 +115,6 @@ public class Cards extends javax.swing.JPanel {
 		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, Config.dimensions, gameId);
 		cards.put(card.getId(), cardImg);
 		cardArea.add(cardImg);
-		/*if (Plugins.getInstance().isCardPluginLoaded()) {
-			cardImg.setBorder(BorderFactory.createLineBorder(Color.red));
-		}*/
 	}
 	
 	private void removeCard(UUID cardId) {
@@ -134,7 +124,7 @@ public class Cards extends javax.swing.JPanel {
 					cardArea.remove(comp);
         		}
         	} else if (comp instanceof MageCard) {
-        		if (((MageCard)comp).getOriginal().equals(cardId)) {
+        		if (((MageCard)comp).getOriginal().getId().equals(cardId)) {
 					cardArea.remove(comp);
         		}
         	}
@@ -151,7 +141,6 @@ public class Cards extends javax.swing.JPanel {
 			}
 		}
 	}
-
 
     /** This method is called from within the constructor to
      * initialize the form.

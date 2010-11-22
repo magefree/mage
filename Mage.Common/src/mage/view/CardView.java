@@ -220,4 +220,9 @@ public class CardView implements Serializable {
 	public List<UUID> getTargets() {
 		return targets;
 	}
+	
+	@Override
+	public String toString() {
+		return getName() + " [" + getId() + "]";
+	}
 }

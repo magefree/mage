@@ -122,7 +122,7 @@ public class Plugins implements MagePlugins {
 	}
 
 	@Override
-	public int addGamesPlayed() {
+	public void addGamesPlayed() {
 		if (this.counterPlugin != null) {
 			synchronized(Plugins.class) {
 				try {
@@ -133,7 +133,6 @@ public class Plugins implements MagePlugins {
 				}
 			}
 		}
-		return 0;
 	}
 
 	@Override

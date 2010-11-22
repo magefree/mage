@@ -28,5 +28,5 @@ public interface MagePlugins {
 	void sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents);
 	void downloadImage(Set<Card> allCards);
 	int getGamesPlayed();
-	int addGamesPlayed();
+	void addGamesPlayed();
 }
