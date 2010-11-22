@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class PathToExile extends CardImpl<PathToExile> {
 
 	public PathToExile(UUID ownerId) {
-		super(ownerId, 15, "Path To Exile", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
+		super(ownerId, 15, "Path to Exile", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
 		this.expansionSetCode = "CON";
 		this.color.setWhite(true);
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
