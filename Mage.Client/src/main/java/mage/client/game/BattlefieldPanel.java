@@ -107,13 +107,15 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 				i.remove();
 			}
 		}
+		
+		Plugins.getInstance().sortPermanents(ui, permanents.values());
+		
 		for (PermanentView permanent: battlefield.values()) {
 			if (permanent.getAttachments() != null) {
 				groupAttachments(permanent);
 			}
 		}
 		
-		Plugins.getInstance().sortPermanents(ui, permanents.values());
 		invalidate();
 	}
 
@@ -136,13 +138,26 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 		int position = getPosition(perm);
 		perm.getLinks().clear();
 		Rectangle r = perm.getBounds();
-		for (UUID attachmentId: permanent.getAttachments()) {
-			MagePermanent link = permanents.get(attachmentId);
-			perm.getLinks().add(link);
-			r.translate(20, 20);
-			link.setBounds(r);
-			setPosition(link, ++position);
+		if (!Plugins.getInstance().isCardPluginLoaded()) {
+			for (UUID attachmentId: permanent.getAttachments()) {
+				MagePermanent link = permanents.get(attachmentId);
+				perm.getLinks().add(link);
+				r.translate(20, 20);
+				link.setBounds(r);
+				setPosition(link, ++position);
+			}
+		} else {
+			for (UUID attachmentId: permanent.getAttachments()) {
+				MagePermanent link = permanents.get(attachmentId);
+				link.setBounds(r);
+				perm.getLinks().add(link);
+				r.translate(8, 10);
+				perm.setBounds(r);
+				moveToFront(link);
+				moveToFront(perm);
+			}
 		}
+		
 	}
 
 	private void removePermanent(UUID permanentId) {
