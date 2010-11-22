@@ -612,6 +612,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 	 */
 	private TransferData getTransferDataForMouseEntered() {
 		data.component = this;
+		data.card = this.gameCard;
 		data.popupText = popupText;
 		data.popupOffsetX = cardWidth + cardXOffset;
 		data.popupOffsetY = 40;

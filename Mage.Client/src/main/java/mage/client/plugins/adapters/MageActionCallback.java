@@ -1,25 +1,32 @@
 package mage.client.plugins.adapters;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.List;
+import java.util.UUID;
 
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
 
-import org.jdesktop.swingx.JXPanel;
-
 import mage.cards.MageCard;
+import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
 import mage.cards.action.TransferData;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
+import mage.client.game.PlayAreaPanel;
 import mage.client.plugins.impl.Plugins;
 import mage.client.remote.Session;
 import mage.client.util.DefaultActionCallback;
 import mage.client.util.ImageHelper;
+import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.GuiDisplayUtil;
+
+import org.jdesktop.swingx.JXPanel;
 
 public class MageActionCallback implements ActionCallback {
 
@@ -59,6 +66,30 @@ public class MageActionCallback implements ActionCallback {
 		popup.hide();
 		popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
 		popup.show();
+		
+		// Draw Arrows for targets
+		List<UUID> targets = data.card.getTargets();
+		if (targets != null) {
+			for (UUID uuid : targets) {
+				//System.out.println("Getting play area panel for uuid: " + uuid);
+				
+				PlayAreaPanel p = session.getGame().getPlayers().get(uuid);
+				if (p != null) {
+					Point target = p.getLocationOnScreen();
+					Point me = data.locationOnScreen;
+					ArrowBuilder.addArrow((int)me.getX() + 35, (int)me.getY(), (int)target.getX() + 40, (int)target.getY() - 40, Color.red);
+				} else {
+					for (PlayAreaPanel pa : session.getGame().getPlayers().values()) {
+						MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
+						if (permanent != null) {
+							Point target = permanent.getLocationOnScreen();
+							Point me = data.locationOnScreen;
+							ArrowBuilder.addArrow((int)me.getX() + 35, (int)me.getY(), (int)target.getX() + 40, (int)target.getY() + 10, Color.red);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	@Override
@@ -90,6 +121,7 @@ public class MageActionCallback implements ActionCallback {
 	public void mouseExited(MouseEvent e) {
 		if (popup != null) {
 			popup.hide();
+			ArrowBuilder.removeAllArrows();
 		}
 	}
 
