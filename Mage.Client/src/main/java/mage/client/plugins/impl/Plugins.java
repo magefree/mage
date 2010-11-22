@@ -18,6 +18,7 @@ import mage.client.cards.BigCard;
 import mage.client.cards.Card;
 import mage.client.cards.Permanent;
 import mage.client.plugins.MagePlugins;
+import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.util.Config;
 import mage.client.util.DefaultActionCallback;
 import mage.constants.Constants;
@@ -34,14 +35,16 @@ import net.xeoh.plugins.base.impl.PluginManagerFactory;
 
 public class Plugins implements MagePlugins {
 
-	private static final MagePlugins fINSTANCE =  new Plugins();
-	private static PluginManager pm;
+	private final static MagePlugins fINSTANCE =  new Plugins();
 	private final static Logger logger = Logging.getLogger(Plugins.class.getName());
+	private static PluginManager pm;
+	
 	private ThemePlugin themePlugin = null;
 	private CardPlugin cardPlugin = null;
 	private CounterPlugin counterPlugin = null;
 	protected static DefaultActionCallback defaultCallback = DefaultActionCallback.getInstance();
 	private static final EmptyCallback emptyCallback = new EmptyCallback();
+	private static final MageActionCallback mageActionCallback = new MageActionCallback();
 	
 	public static MagePlugins getInstance() {
 		return fINSTANCE;
@@ -76,7 +79,9 @@ public class Plugins implements MagePlugins {
 	@Override
 	public MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, CardDimensions dimension, UUID gameId) {
 		if (cardPlugin != null) {
-			return cardPlugin.getMagePermanent(card, dimension, gameId, emptyCallback);
+			mageActionCallback.refreshSession();
+			mageActionCallback.setCardPreviewComponent(bigCard);
+			return cardPlugin.getMagePermanent(card, dimension, gameId, mageActionCallback);
 		} else {
 			return new Permanent(card, bigCard, Config.dimensions, gameId);
 		}
@@ -85,7 +90,9 @@ public class Plugins implements MagePlugins {
 	@Override
 	public MageCard getMageCard(CardView card, BigCard bigCard, CardDimensions dimension, UUID gameId) {
 		if (cardPlugin != null) {
-			return cardPlugin.getMageCard(card, dimension, gameId, emptyCallback);
+			mageActionCallback.refreshSession();
+			mageActionCallback.setCardPreviewComponent(bigCard);
+			return cardPlugin.getMageCard(card, dimension, gameId, mageActionCallback);
 		} else {
 			return new Card(card, bigCard, Config.dimensions, gameId);
 		}

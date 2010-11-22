@@ -96,8 +96,6 @@ public class CardView implements Serializable {
 			this.rarity = card.getRarity();
 			this.expansionSetCode = card.getExpansionSetCode();
 		}
-		//TODO:remove me
-		//System.out.println("**** CARD NUMBER **** : " + card.getCardNumber() + " : " + card.getName() + " : " + card.getExpansionSetCode());
 		this.cardNumber = card.getCardNumber();
 		
 		if (card instanceof Spell) {
@@ -109,7 +107,6 @@ public class CardView implements Serializable {
 						for (UUID targetUUID : target.getTargets()) {
 							if (this.targets == null) this.targets = new ArrayList<UUID>();
 							this.targets.add(targetUUID);
-							System.out.println("Added target: " + targetUUID);
 						}
 					}	
 				}

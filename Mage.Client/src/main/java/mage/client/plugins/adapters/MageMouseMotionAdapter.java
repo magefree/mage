@@ -7,7 +7,6 @@ import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
 
 import mage.cards.MageCard;
-import mage.cards.MagePermanent;
 import mage.client.cards.BigCard;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.ImageHelper;

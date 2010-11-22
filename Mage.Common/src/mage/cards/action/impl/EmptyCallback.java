@@ -3,6 +3,7 @@ package mage.cards.action.impl;
 import java.awt.event.MouseEvent;
 
 import mage.cards.action.ActionCallback;
+import mage.cards.action.TransferData;
 
 /**
  * Callback that does nothing on any action 
@@ -12,11 +13,19 @@ import mage.cards.action.ActionCallback;
 public class EmptyCallback implements ActionCallback {
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void mouseMoved(MouseEvent e, TransferData data) {
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent e) {
+	public void mouseEntered(MouseEvent e, TransferData data) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e, TransferData data) {
 	}
 
 }

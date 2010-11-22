@@ -12,20 +12,21 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.swing.BorderFactory;
 import javax.swing.JRootPane;
-import javax.swing.Popup;
-import javax.swing.PopupFactory;
 import javax.swing.SwingUtilities;
 
 import mage.Constants.CardType;
 import mage.cards.MagePermanent;
 import mage.cards.TextPopup;
 import mage.cards.action.ActionCallback;
+import mage.cards.action.TransferData;
 import mage.utils.CardUtil;
 import mage.view.AbilityView;
 import mage.view.CardView;
@@ -39,7 +40,7 @@ import org.mage.plugins.card.images.ImageCache;
 
 
 @SuppressWarnings({"unchecked","rawtypes"})
-public class CardPanel extends MagePermanent implements MouseListener {
+public class CardPanel extends MagePermanent implements MouseListener, MouseMotionListener {
 	private static final long serialVersionUID = -3272134219262184410L;
 	
 	private static final Logger log = Logger.getLogger(CardPanel.class);
@@ -82,15 +83,17 @@ public class CardPanel extends MagePermanent implements MouseListener {
 	
 	private ActionCallback callback;
 	
-	protected Popup popup;
 	protected boolean popupShowing;
 	protected TextPopup popupText = new TextPopup();
+	protected UUID gameId;
+	private TransferData data = new TransferData();
 	
 	private boolean isPermanent;
-
-	public CardPanel(CardView newGameCard, boolean loadImage, ActionCallback callback) {
+	
+	public CardPanel(CardView newGameCard, UUID gameId, boolean loadImage, ActionCallback callback) {
 		this.gameCard = newGameCard;
 		this.callback = callback;
+		this.gameId = gameId;
 		this.isPermanent = this.gameCard instanceof PermanentView;
 		
 		if (isPermanent) {
@@ -103,8 +106,9 @@ public class CardPanel extends MagePermanent implements MouseListener {
 		setBackground(Color.black);
 		setOpaque(false);
 		
-		//addMouseListener(this);
-
+		addMouseListener(this);
+		addMouseMotionListener(this);
+		
 		titleText = new GlowText();
 		setText(gameCard);
 		titleText.setFont(getFont().deriveFont(Font.BOLD, 13f));
@@ -554,30 +558,44 @@ public class CardPanel extends MagePermanent implements MouseListener {
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		if (!popupShowing) {
-			if (popup != null)
-				popup.hide();
-			PopupFactory factory = PopupFactory.getSharedInstance();
-			popup = factory.getPopup(this, popupText, (int) this.getLocationOnScreen().getX() + cardWidth + cardXOffset, (int) this.getLocationOnScreen().getY() + 40);
-			popup.show();
-			//hack to get popup to resize to fit text
-			popup.hide();
-			popup = factory.getPopup(this, popupText, (int) this.getLocationOnScreen().getX() + cardWidth + cardXOffset, (int) this.getLocationOnScreen().getY() + 40);
-			popup.show();
-			popupShowing = true;
-		}
+	public void mouseClicked(MouseEvent e) {
+		data.component = this;
+		data.card = this.gameCard;
+		data.gameId = this.gameId;
+		callback.mouseClicked(e, data);
 	}
 
 	@Override
-	public void mouseExited(MouseEvent arg0) {
+	public void mouseEntered(MouseEvent e) {
+		if (!popupShowing) {
+			synchronized (this) {
+				if (!popupShowing) {
+					popupShowing = true;
+					callback.mouseEntered(e, getTransferDataForMouseEntered());
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void mouseDragged(MouseEvent e) {}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		data.component = this;
+		callback.mouseMoved(e, data);
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
 		if(getMousePosition(true) != null) return;
-		if (popup != null) {
-			popup.hide();
-			popupShowing = false;
+		if (popupShowing) {
+			synchronized (this) {
+				if (popupShowing) {
+					popupShowing = false;
+					callback.mouseExited(e);
+				}
+			}
 		}
 	}
 
@@ -587,6 +605,20 @@ public class CardPanel extends MagePermanent implements MouseListener {
 	@Override
 	public void mouseReleased(MouseEvent e) {}
 
+	/**
+	 * Prepares data to be sent to action callback on client side.
+	 * 
+	 * @return
+	 */
+	private TransferData getTransferDataForMouseEntered() {
+		data.component = this;
+		data.popupText = popupText;
+		data.popupOffsetX = cardWidth + cardXOffset;
+		data.popupOffsetY = 40;
+		data.locationOnScreen = this.getLocationOnScreen();
+		return data;
+	}
+	
 	protected String getType(CardView card) {
 		StringBuilder sbType = new StringBuilder();
 

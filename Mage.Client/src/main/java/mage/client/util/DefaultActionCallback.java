@@ -18,7 +18,6 @@ public class DefaultActionCallback {
 	}
 	
 	public void mouseClicked(MouseEvent e, UUID gameId, Session session, CardView card) {
-		System.out.println("gameId:" + gameId);
 		if (gameId != null)
 			session.sendPlayerUUID(gameId, card.getId());
 	}

@@ -58,7 +58,6 @@ import mage.view.CardsView;
 public class Cards extends javax.swing.JPanel {
 
 	private Map<UUID, MageCard> cards = new HashMap<UUID, MageCard>();
-	private boolean mouseHandlingEnabled = false;
 	
     /** Creates new form Cards */
     public Cards() {
@@ -90,16 +89,6 @@ public class Cards extends javax.swing.JPanel {
 			}
 		}
 		
-		if (!mouseHandlingEnabled) {
-			synchronized (this) {
-				if (!mouseHandlingEnabled) {
-					mouseHandlingEnabled = true;
-					jScrollPane1.addMouseListener(new MageMouseAdapter(cardArea, gameId));
-					jScrollPane1.addMouseMotionListener(new MageMouseMotionAdapter(cardArea, bigCard));
-				}
-			}
-		}
-
 		cardArea.setPreferredSize(new Dimension(cards.size() * Config.dimensions.frameWidth, Config.dimensions.frameHeight));
 		cardArea.revalidate();
 		cardArea.repaint();

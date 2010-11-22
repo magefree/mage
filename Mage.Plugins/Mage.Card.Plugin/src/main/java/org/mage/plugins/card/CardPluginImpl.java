@@ -77,7 +77,7 @@ public class CardPluginImpl implements CardPlugin {
 
 	@Override
 	public MagePermanent getMagePermanent(PermanentView permanent, CardDimensions dimension, UUID gameId, ActionCallback callback) {
-		CardPanel cardPanel = new CardPanel(permanent, true, callback);
+		CardPanel cardPanel = new CardPanel(permanent, gameId, true, callback);
 		cardPanel.setShowCastingCost(true);
 		cardPanel.setCardBounds(0, 0, dimension.frameWidth, dimension.frameHeight);
 		return cardPanel;
@@ -85,7 +85,7 @@ public class CardPluginImpl implements CardPlugin {
 	
 	@Override
 	public MagePermanent getMageCard(CardView permanent, CardDimensions dimension, UUID gameId, ActionCallback callback) {
-		CardPanel cardPanel = new CardPanel(permanent, true, callback);
+		CardPanel cardPanel = new CardPanel(permanent, gameId, true, callback);
 		cardPanel.setShowCastingCost(true);
 		cardPanel.setCardBounds(0, 0, dimension.frameWidth, dimension.frameHeight);
 		return cardPanel;
