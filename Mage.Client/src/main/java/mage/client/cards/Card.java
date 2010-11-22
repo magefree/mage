@@ -466,13 +466,13 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 	public void setAlpha(float transparency) {}
 
 	@Override
-	public PermanentView getOriginal() {
-		throw new RuntimeException("Not implemented");
+	public CardView getOriginal() {
+		return card; 
 	}
 
 	@Override
 	public void setCardBounds(int x, int y, int width, int height) {
-		throw new RuntimeException("Not implemented");
+		// do nothing
 	}
 
 	@Override

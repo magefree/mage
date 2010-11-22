@@ -40,6 +40,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.beans.Beans;
 import java.util.UUID;
+
+import mage.cards.MageCard;
+import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
 import mage.client.util.Event;
 import mage.client.util.Listener;
@@ -60,17 +63,13 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
     }
 
 	public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
+		//FIXME: why we remove all cards? for performance it's better to merge changes
 		cardArea.removeAll();
 		if (showCards != null && showCards.size() > 0) {
 			Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 			int count = 0;
 			for (CardView card: showCards.values()) {
-				Card cardImg = new Card(card, bigCard, Config.dimensions, gameId);
-				cardImg.setBounds(rectangle);
-				cardArea.add(cardImg);
-				cardArea.moveToFront(cardImg);
-				cardImg.update(card);
-				cardImg.addMouseListener(this);
+				addCard(card, bigCard, gameId, rectangle);
 				if (count >= 10) {
 					rectangle.translate(Config.dimensions.frameWidth, -200);
 					count = 0;
@@ -87,7 +86,16 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
 		this.setVisible(true);
 	}
 
-
+	private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle) {
+		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, Config.dimensions, gameId);
+		cardImg.setBounds(rectangle);
+		cardArea.add(cardImg);
+		cardArea.moveToFront(cardImg);
+		cardImg.update(card);
+		cardImg.addMouseListener(this);
+		cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+	}
+	
 	public void addCardEventListener(Listener<Event> listener) {
 		cardEventSource.addListener(listener);
 	}
@@ -127,7 +135,12 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getClickCount() == 2 && !e.isConsumed()) {
 			e.consume();
-			cardEventSource.doubleClick(((Card)e.getSource()).getCardId(), "double-click");
+			Object obj = e.getSource(); 
+			if (obj instanceof Card) {
+				cardEventSource.doubleClick(((Card)obj).getCardId(), "double-click");
+			} else if (obj instanceof MageCard) {
+				cardEventSource.doubleClick(((MageCard)obj).getOriginal().getId(), "double-click");
+			}
 		}
 	}
 

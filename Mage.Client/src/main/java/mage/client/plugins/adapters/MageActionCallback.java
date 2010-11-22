@@ -45,8 +45,6 @@ public class MageActionCallback implements ActionCallback {
 	@Override
 	public void mouseClicked(MouseEvent e, TransferData data) {
 		data.component.requestFocusInWindow();
-		System.out.println("data="+data);
-		System.out.println("session="+session+",gameId="+data.gameId+",card="+data.card);
 		defaultCallback.mouseClicked(e, data.gameId, session, data.card);
 	}
 

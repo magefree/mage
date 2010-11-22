@@ -40,15 +40,17 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
+import java.util.Map.Entry;
+
+import mage.cards.MageCard;
+import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
 import mage.client.util.Event;
 import mage.client.util.Listener;
@@ -64,7 +66,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
 	protected CardEventSource cardEventSource = new CardEventSource();
 	protected BigCard bigCard;
 	protected UUID gameId;
-	private Map<UUID, Card> cards = new HashMap<UUID, Card>();
+	private Map<UUID, MageCard> cards = new HashMap<UUID, MageCard>();
 
     public CardGrid() {
         initComponents();
@@ -75,15 +77,11 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
 		this.gameId = gameId;
 		for (CardView card: showCards.values()) {
 			if (!cards.containsKey(card.getId())) {
-				Card cardImg = new Card(card, bigCard, Config.dimensions, gameId);
-				cardImg.addMouseListener(this);
-				add(cardImg);
-				cardImg.update(card);
-				cards.put(card.getId(), cardImg);
+				addCard(card, bigCard, gameId);
 			}
 		}
-		for (Iterator<Entry<UUID, Card>> i = cards.entrySet().iterator(); i.hasNext();) {
-			Entry<UUID, Card> entry = i.next();
+		for (Iterator<Entry<UUID, MageCard>> i = cards.entrySet().iterator(); i.hasNext();) {
+			Entry<UUID, MageCard> entry = i.next();
 			if (!showCards.containsKey(entry.getKey())) {
 				removeCard(entry.getKey());
 				i.remove();
@@ -91,6 +89,15 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
 		}
 		drawCards();
 		this.setVisible(true);
+	}
+	
+	private void addCard(CardView card, BigCard bigCard, UUID gameId) {
+		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, Config.dimensions, gameId);
+		cards.put(card.getId(), cardImg);
+		cardImg.addMouseListener(this);
+		add(cardImg);
+		cardImg.update(card);
+		cards.put(card.getId(), cardImg);
 	}
 
 	public void drawCards() {
@@ -100,11 +107,12 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
 		int curRow = 0;
 		if (cards.size() > 0) {
 			Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-			List<Card> sortedCards = new ArrayList<Card>(cards.values());
+			List<MageCard> sortedCards = new ArrayList<MageCard>(cards.values());
 			Collections.sort(sortedCards, new CardComparator());
-			for (Card cardImg: sortedCards) {
+			for (MageCard cardImg: sortedCards) {
 				rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
 				cardImg.setBounds(rectangle);
+				cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 				moveToFront(cardImg);
 				curColumn++;
 				if (curColumn == numColumns) {
@@ -121,7 +129,11 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
         	if (comp instanceof Card) {
         		if (((Card)comp).getCardId().equals(cardId)) {
 					remove(comp);
-        		}
+        		} else if (comp instanceof MageCard) {
+            		if (((MageCard)comp).getOriginal().getId().equals(cardId)) {
+    					remove(comp);
+            		}
+            	}
         	}
         }
 	}
@@ -164,7 +176,12 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
 	public void mouseClicked(MouseEvent e) {
 		if (e.getClickCount() == 2 && !e.isConsumed()) {
 			e.consume();
-			cardEventSource.doubleClick(((Card)e.getSource()).getCardId(), "double-click");
+			Object obj = e.getSource();
+			if (obj instanceof Card) {
+				cardEventSource.doubleClick(((Card)obj).getCardId(), "double-click");
+			} else if (obj instanceof MageCard) {
+				cardEventSource.doubleClick(((MageCard)obj).getOriginal().getId(), "double-click");
+			}
 		}
 	}
 
@@ -202,11 +219,11 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
 	}
 }
 
-class CardComparator implements Comparator<Card> {
+class CardComparator implements Comparator<MageCard> {
 
 	@Override
-	public int compare(Card o1, Card o2) {
-		return o1.card.getName().compareTo(o2.card.getName());
+	public int compare(MageCard o1, MageCard o2) {
+		return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
 	}
 
 }
