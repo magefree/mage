@@ -44,7 +44,42 @@
 			<version>1.2.14</version>
 			<type>jar</type>
 		</dependency>
-		
+	 <dependency>
+	  <groupId>${project.groupId}</groupId>
+	  <artifactId>Mage-Player-AI</artifactId>
+	  <version>${project.version}</version>
+	  <scope>runtime</scope>
+	 </dependency>
+	 <dependency>
+	  <groupId>${project.groupId}</groupId>
+	  <artifactId>Mage-Deck-Constructed</artifactId>
+	  <version>${project.version}</version>
+	  <scope>runtime</scope>
+	 </dependency>
+	 <dependency>
+	  <groupId>${project.groupId}</groupId>
+	  <artifactId>Mage-Game-FreeForAll</artifactId>
+	  <version>${project.version}</version>
+	  <scope>runtime</scope>
+	 </dependency>
+	 <dependency>
+	  <groupId>${project.groupId}</groupId>
+	  <artifactId>Mage-Game-TwoPlayerDuel</artifactId>
+	  <version>${project.version}</version>
+	  <scope>runtime</scope>
+	 </dependency>
+	 <dependency>
+	  <groupId>${project.groupId}</groupId>
+	  <artifactId>Mage-Player-Human</artifactId>
+	  <version>${project.version}</version>
+	  <scope>runtime</scope>
+	 </dependency>
+	 <dependency>
+	  <groupId>${project.groupId}</groupId>
+	  <artifactId>Mage-Player-AIMinimax</artifactId>
+	  <version>${project.version}</version>
+	  <scope>runtime</scope>
+	 </dependency>
 	</dependencies>
 	
 	 <pluginRepositories>
@@ -57,15 +92,15 @@
 	
   <build>	
     <plugins>
-		<plugin>
-			<groupId>org.jvnet.jaxb2.maven2</groupId>
-			<artifactId>maven-jaxb2-plugin</artifactId>
-			<version>0.7.3</version>
-			<configuration>
-				<generatePackage>mage.server.util.config</generatePackage>
+        <plugin>
+            <groupId>org.jvnet.jaxb2.maven2</groupId>
+	    <artifactId>maven-jaxb2-plugin</artifactId>
+	    <version>0.7.3</version>
+	    <configuration>
+	        <generatePackage>mage.server.util.config</generatePackage>
 				<schemaDirectory>./src/main/xml-resources/jaxb/Config/</schemaDirectory> 
 				<arguments>-Xcommons-lang</arguments> 
-			</configuration>
+	    </configuration>
 			<executions>
 				<execution>
 					<goals>
@@ -75,16 +110,36 @@
 			</executions>
 		</plugin>
 		<plugin>
-        	<groupId>org.apache.maven.plugins</groupId>
+            <groupId>org.apache.maven.plugins</groupId>
         	<artifactId>maven-compiler-plugin</artifactId>
         	<version>2.0.2</version>
         	<configuration>
-          		<source>1.6</source>
+                <source>1.6</source>
           		<target>1.6</target>
         	</configuration>
       	</plugin>
+        <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+			<configuration>
+				<descriptors>
+					<descriptor>src/main/assembly/distribution.xml</descriptor>
+				</descriptors>
+			</configuration>
+		</plugin>
+        <plugin>
+			<artifactId>maven-jar-plugin</artifactId>
+			<configuration>
+				<archive>
+					<manifest>
+						<addClasspath>true</addClasspath>
+						<classpathPrefix>lib/</classpathPrefix>
+						<mainClass>mage.server.Main</mainClass>
+					</manifest>
+				</archive>
+			</configuration>
+		</plugin>
       	<plugin>
-			<artifactId>maven-resources-plugin</artifactId>
+            <artifactId>maven-resources-plugin</artifactId>
 			<configuration>
 				<encoding>UTF-8</encoding>
 			</configuration>
