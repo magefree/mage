@@ -55,10 +55,7 @@
 		</pluginRepository>
 	</pluginRepositories>
 	
-  <build>
-
-	<sourceDirectory>src</sourceDirectory>
-	
+  <build>	
     <plugins>
 		<plugin>
 			<groupId>org.jvnet.jaxb2.maven2</groupId>
@@ -66,7 +63,7 @@
 			<version>0.7.3</version>
 			<configuration>
 				<generatePackage>mage.server.util.config</generatePackage>
-				<schemaDirectory>./src/main/java/xml-resources/jaxb/Config/</schemaDirectory> 
+				<schemaDirectory>./src/main/xml-resources/jaxb/Config/</schemaDirectory> 
 				<arguments>-Xcommons-lang</arguments> 
 			</configuration>
 			<executions>
