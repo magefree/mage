@@ -92,9 +92,12 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 	}
 
 	public void update(Map<UUID, PermanentView> battlefield) {
+		boolean changed = false;
+		
 		for (PermanentView permanent: battlefield.values()) {
 			if (!permanents.containsKey(permanent.getId())) {
 				addPermanent(permanent);
+				changed = true;
 			}
 			else {
 				permanents.get(permanent.getId()).update(permanent);
@@ -105,10 +108,13 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 			if (!battlefield.containsKey(entry.getKey())) {
 				removePermanent(entry.getKey());
 				i.remove();
+				changed = true;
 			}
 		}
 		
-		Plugins.getInstance().sortPermanents(ui, permanents.values());
+		if (changed) {
+			Plugins.getInstance().sortPermanents(ui, permanents.values());
+		}
 		
 		for (PermanentView permanent: battlefield.values()) {
 			if (permanent.getAttachments() != null) {
