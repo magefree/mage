@@ -139,6 +139,27 @@ public final class Constants {
 		}
 	}
 
+	public enum EffectType {
+
+		ONESHOT("One Shot Effect"),
+		CONTINUOUS("Continuous Effect"),
+		REPLACEMENT("Replacement Effect"),
+		PREVENTION("Prevention Effect"),
+		REDIRECTION("Redirection Effect"),
+		ASTHOUGH("As Though Effect");
+
+		private String text;
+
+		EffectType(String text) {
+			this.text = text;
+		}
+
+		@Override
+		public String toString() {
+			return text;
+		}
+	}
+
 	public enum AsThoughEffectType {
 		BLOCK,
 		BE_BLOCKED,

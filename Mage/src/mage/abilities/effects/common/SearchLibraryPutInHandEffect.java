@@ -66,7 +66,7 @@ public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutI
             for (UUID cardId: (List<UUID>)target.getTargets()) {
                 Card card = player.getLibrary().remove(cardId, game);
                 if (card != null){
-					card.moveToZone(Zone.HAND, game, false);
+					card.moveToZone(Zone.HAND, source.getId(), game, false);
                 }
             }
             player.shuffleLibrary(game);

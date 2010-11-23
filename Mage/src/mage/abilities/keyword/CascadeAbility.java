@@ -31,6 +31,7 @@ package mage.abilities.keyword;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -39,6 +40,7 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
@@ -58,9 +60,12 @@ public class CascadeAbility extends TriggeredAbilityImpl<CascadeAbility> {
 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.SPELL_CAST && event.getTargetId().equals(this.getSourceId()) ) {
-			trigger(game, event.getPlayerId());
-			return true;
+		if (event.getType() == EventType.SPELL_CAST) {
+			Spell spell = game.getStack().getSpell(event.getTargetId());
+			if (spell != null && spell.getSourceId().equals(this.getSourceId())) {
+				trigger(game, event.getPlayerId());
+				return true;
+			}
 		}
 		return false;
 	}
@@ -96,7 +101,7 @@ class CascadeEffect extends OneShotEffect<CascadeEffect> {
 			card = player.getLibrary().removeFromTop(game);
 			if (card == null)
 				break;
-			card.moveToExile(exile.getId(), exile.getName(), game);
+			card.moveToExile(exile.getId(), exile.getName(), source.getId(), game);
 		} while (card.getCardType().contains(CardType.LAND) || card.getManaCost().convertedManaCost() >= sourceCost);
 
 		if (card != null) {
@@ -109,7 +114,7 @@ class CascadeEffect extends OneShotEffect<CascadeEffect> {
 		while (exile.size() > 0) {
 			card = exile.getRandom(game);
 			exile.remove(card.getId());
-			card.moveToZone(Zone.LIBRARY, game, false);
+			card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
 		}
 
 		return true;

@@ -72,7 +72,7 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect<SearchLibraryP
             }
             player.shuffleLibrary(game);
 			for (Card card: cards) {
-				card.moveToZone(Zone.LIBRARY, game, true);
+				card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
 			}
         }
         return true;

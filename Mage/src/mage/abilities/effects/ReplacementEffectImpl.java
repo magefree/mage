@@ -29,6 +29,7 @@
 package mage.abilities.effects;
 
 import mage.Constants.Duration;
+import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 
 /**
@@ -39,6 +40,7 @@ public abstract class ReplacementEffectImpl<T extends ReplacementEffectImpl<T>> 
 
 	public ReplacementEffectImpl(Duration duration, Outcome outcome) {
 		super(duration, outcome);
+		this.effectType = EffectType.REPLACEMENT;
 	}
 
 	public ReplacementEffectImpl(final ReplacementEffectImpl effect) {

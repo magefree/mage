@@ -81,8 +81,8 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 	@Override
 	public void add(Card card) {
 		this.add(card.getId());
-		if (zone != null)
-			card.setZone(zone);
+//		if (zone != null)
+//			card.setZone(zone);
 	}
 
 	@Override

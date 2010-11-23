@@ -74,7 +74,7 @@ public class SpellStack extends Stack<StackObject> {
 		if (stackObject != null) {
 			if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, sourceId, stackObject.getControllerId()))) {
 				this.remove(stackObject);
-				stackObject.counter(game);
+				stackObject.counter(sourceId, game);
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, objectId, sourceId, stackObject.getControllerId()));
 				return true;
 			}

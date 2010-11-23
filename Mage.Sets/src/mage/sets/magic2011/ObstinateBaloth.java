@@ -100,10 +100,13 @@ class ObstinateBalothEffect extends ReplacementEffectImpl<ObstinateBalothEffect>
 
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.DISCARD_CARD && event.getTargetId().equals(source.getSourceId())) {
-			StackObject spell = game.getStack().getStackObject(event.getSourceId());
-			if (spell != null && game.getOpponents(source.getControllerId()).contains(spell.getControllerId())) {
-				return true;
+		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
+			ZoneChangeEvent zcEvent = (ZoneChangeEvent) event;
+			if (zcEvent.getFromZone() == Zone.HAND && zcEvent.getToZone() == Zone.GRAVEYARD) {
+				StackObject spell = game.getStack().getStackObject(event.getSourceId());
+				if (spell != null && game.getOpponents(source.getControllerId()).contains(spell.getControllerId())) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -115,7 +118,6 @@ class ObstinateBalothEffect extends ReplacementEffectImpl<ObstinateBalothEffect>
 		if (card != null) {
 			Player player = game.getPlayer(card.getOwnerId());
 			if (player != null) {
-				player.removeFromHand(card, game);
 				if (card.putOntoBattlefield(game, Zone.HAND, player.getId())) {
 					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source.getId(), player.getId()));
 					return true;

@@ -70,12 +70,10 @@ import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
-import mage.watchers.Watcher;
 
 public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Serializable {
 
@@ -99,6 +97,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	protected boolean left;
 	protected RangeOfInfluence range;
 	protected Set<UUID> inRange = new HashSet<UUID>();
+	protected Deck deck;
 
 	@Override
 	public abstract T copy();
@@ -107,13 +106,13 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		this(UUID.randomUUID());
 		this.name = name;
 		this.range = range;
+		this.deck = deck;
 		hand = new CardsImpl(Zone.HAND);
 		graveyard = new CardsImpl(Zone.GRAVEYARD);
 		abilities = new AbilitiesImpl<Ability>();
 		counters = new Counters();
 		manaPool = new ManaPool();
 		library = new Library(playerId);
-		library.addAll(deck.getCards());
 	}
 
 	protected PlayerImpl(UUID id) {
@@ -147,6 +146,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public void init(Game game) {
+		library.addAll(deck.getCards(), game);
 		this.hand.clear();
 		this.graveyard.clear();
 		this.abilities.clear();
@@ -246,14 +246,14 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	}
 
 	protected boolean drawCard(Game game) {
-		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DRAW_CARD, null, playerId))) {
+//		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DRAW_CARD, null, playerId))) {
 			Card card = getLibrary().removeFromTop(game);
 			if (card != null) {
-				card.moveToZone(Zone.HAND, game, false);
+				card.moveToZone(Zone.HAND, null, game, false);
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DREW_CARD, card.getId(), playerId));
 				return true;
 			}
-		}
+//		}
 		return false;
 	}
 
@@ -315,15 +315,11 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public boolean discard(Card card, Ability source, Game game) {
-		//20091005 - 701.1
-		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DISCARD_CARD, card.getId(), source==null?null:source.getId(), playerId))) {
-			removeFromHand(card, game);
-			if (card.moveToZone(Zone.GRAVEYARD, game, false)) {
-				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source==null?null:source.getId(), playerId));
-				return true;
-			}
-		}
-		return false;
+		//20100716 - 701.7
+		removeFromHand(card, game);
+		card.moveToZone(Zone.GRAVEYARD, source==null?null:source.getId(), game, false);
+		game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source==null?null:source.getId(), playerId));
+		return true;
 	}
 
 	@Override
@@ -362,12 +358,13 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 			if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getId(), playerId))) {
 				game.bookmarkState();
 				removeFromHand(card, game);
-				game.getStack().push(new Spell(card, ability, playerId));
-				if (ability.activate(game, noMana)) {
+				card.moveToZone(Zone.STACK, ability.getId(), game, false);
+				Ability spellAbility = game.getStack().getSpell(ability.getId()).getSpellAbility();
+				if (spellAbility.activate(game, noMana)) {
 					for (KickerAbility kicker: card.getAbilities().getKickerAbilities()) {
 						kicker.activate(game, false);
 					}
-					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, ability.getId(), playerId));
+					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, spellAbility.getId(), playerId));
 					game.fireInformEvent(name + " casts " + card.getName());
 					game.removeLastBookmark();
 					return true;
@@ -460,7 +457,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 			result = playManaAbility((ManaAbility)ability.copy(), game);
 		}
 		else if (ability instanceof SpellAbility) {
-			result = cast((SpellAbility)ability.copy(), game, false);
+			result = cast((SpellAbility)ability, game, false);
 		}
 		else {
 			result = playAbility((ActivatedAbility)ability.copy(), game);
@@ -733,7 +730,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		for (Iterator<Permanent> it = game.getBattlefield().getAllPermanents().iterator(); it.hasNext();) {
 			Permanent perm = it.next();
 			if (perm.getControllerId().equals(playerId)) {
-				perm.moveToExile(null, "", game);
+				perm.moveToExile(null, "", null, game);
 			}
 		}
 	}

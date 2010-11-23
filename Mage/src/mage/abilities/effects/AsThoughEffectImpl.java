@@ -30,6 +30,7 @@ package mage.abilities.effects;
 
 import mage.Constants.AsThoughEffectType;
 import mage.Constants.Duration;
+import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 
 /**
@@ -43,6 +44,7 @@ public abstract class AsThoughEffectImpl<T extends AsThoughEffectImpl<T>> extend
 	public AsThoughEffectImpl(AsThoughEffectType type, Duration duration, Outcome outcome) {
 		super(duration, outcome);
 		this.type = type;
+		this.effectType = EffectType.ASTHOUGH;
 	}
 
 	public AsThoughEffectImpl(final AsThoughEffectImpl effect) {

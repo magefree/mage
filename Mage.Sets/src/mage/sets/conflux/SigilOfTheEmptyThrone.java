@@ -33,7 +33,6 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -43,6 +42,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.Token;
+import mage.game.stack.Spell;
 
 /**
  *
@@ -90,13 +90,13 @@ class SigilOfTheEmptyThroneAbility extends TriggeredAbilityImpl<SigilOfTheEmptyT
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.SPELL_CAST) {
-            MageObject spell = game.getObject(event.getTargetId());
-            if (spell != null && spell.getCardType().contains(CardType.ENCHANTMENT) && event.getPlayerId() == getControllerId()) {
-		trigger(game, event.getPlayerId());
-		return true;
+			Spell spell = game.getStack().getSpell(event.getTargetId());
+			if (spell != null && spell.getCardType().contains(CardType.ENCHANTMENT) && event.getPlayerId().equals(getControllerId())) {
+				trigger(game, event.getPlayerId());
+				return true;
             }
-	}
-	return false;
+		}
+		return false;
     }
 
     @Override

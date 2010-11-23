@@ -38,11 +38,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.LeylineAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -96,14 +98,26 @@ class LeylineOfTheVoidEffect extends ReplacementEffectImpl<LeylineOfTheVoidEffec
 
 	@Override
 	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return true;
+		if (((ZoneChangeEvent)event).getFromZone() == Zone.BATTLEFIELD) {
+			Permanent permanent = ((ZoneChangeEvent)event).getTarget();
+			if (permanent != null) {
+				return permanent.moveToExile(null, "", source.getId(), game);
+			}
+		}
+		else {
+			Card card = game.getCard(event.getTargetId());
+			if (card != null) {
+				return card.moveToExile(null, "", source.getId(), game);
+			}
+		}
+		return false;
 	}
 
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
 		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD) {
 			if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-				((ZoneChangeEvent)event).setToZone(Zone.EXILED);
+				return true;
 			}
 		}
 		return false;

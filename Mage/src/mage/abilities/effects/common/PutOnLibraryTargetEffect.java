@@ -66,19 +66,14 @@ public class PutOnLibraryTargetEffect extends OneShotEffect<PutOnLibraryTargetEf
 			case BATTLEFIELD:
 				Permanent permanent = game.getPermanent(source.getFirstTarget());
 				if (permanent != null) {
-					return permanent.moveToZone(Zone.LIBRARY, game, onTop);
+					return permanent.moveToZone(Zone.LIBRARY, source.getId(), game, onTop);
 				}
 			case GRAVEYARD:
 				Card card = game.getCard(source.getFirstTarget());
 				for (Player player: game.getPlayers().values()) {
 					if (player.getGraveyard().contains(card.getId())) {
 						player.getGraveyard().remove(card);
-						return card.moveToZone(Zone.LIBRARY, game, onTop);
-//						if (onTop)
-//							player.getLibrary().putOnTop(card, game);
-//						else
-//							player.getLibrary().putOnBottom(card, game);
-//						return true;
+						return card.moveToZone(Zone.LIBRARY, source.getId(), game, onTop);
 					}
 				}
 		}

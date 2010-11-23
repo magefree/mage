@@ -57,7 +57,7 @@ public class ExileSourceEffect extends OneShotEffect<ExileSourceEffect> {
 	public boolean apply(Game game, Ability source) {
 		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
-			return permanent.moveToExile(null, "", game);
+			return permanent.moveToExile(null, "", source.getId(), game);
 		}
 		return false;
 	}

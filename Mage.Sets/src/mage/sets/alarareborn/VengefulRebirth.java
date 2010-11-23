@@ -98,7 +98,7 @@ class VengefulRebirthEffect extends OneShotEffect<VengefulRebirthEffect> {
 		Player player = game.getPlayer(source.getControllerId());
 		Card card = (Card)game.getObject(source.getFirstTarget());
 		if (player.removeFromGraveyard(card, game)) {
-			card.moveToZone(Zone.HAND, game, false);
+			card.moveToZone(Zone.HAND, source.getId(), game, false);
 			int damage = card.getManaCost().convertedManaCost();
 			if (!card.getCardType().contains(CardType.LAND)) {
 				Permanent permanent = game.getPermanent(source.getTargets().get(1).getTargets().get(0));

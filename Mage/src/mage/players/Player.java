@@ -128,6 +128,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
 	public abstract void priority(Game game);
 	public abstract boolean choose(Outcome outcome, Target target, Game game);
+	public abstract boolean choose(Cards cards, TargetCard target, Game game);
 	public abstract boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game);
 	public abstract boolean chooseTarget(Cards cards, TargetCard target, Ability source, Game game);
 	public abstract boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game);

@@ -154,7 +154,7 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
 			return true;
 		else {
 			Card card = (Card)game.getObject(this.sourceId);
-			if (card != null && card.getZone() != Zone.BATTLEFIELD)
+			if (card != null && game.getZone(this.sourceId) != Zone.BATTLEFIELD)
 				return card.getOwnerId().equals(playerId);
 		}
 		return false;

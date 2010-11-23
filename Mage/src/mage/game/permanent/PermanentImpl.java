@@ -499,12 +499,22 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	}
 
 	protected void addEffects(Game game) {
-		for (StaticAbility ability: abilities.getStaticAbilities(Zone.BATTLEFIELD)) {
-			if (ability.activate(game, false)) {
+//		for (StaticAbility ability: abilities.getStaticAbilities(Zone.BATTLEFIELD)) {
+//			if (ability.activate(game, false)) {
+//				for (Effect effect: ability.getEffects()) {
+//					if (effect instanceof ContinuousEffect)
+//						game.addEffect((ContinuousEffect)effect, ability);
+//					else if (ability instanceof EntersBattlefieldStaticAbility && effect instanceof OneShotEffect) {
+//						//20100423 - 603.6e
+//						effect.apply(game, ability);
+//					}
+//				}
+//			}
+//		}
+		for (Ability ability: abilities.getStaticAbilities(Zone.BATTLEFIELD)) {
+			if (ability instanceof EntersBattlefieldStaticAbility) {
 				for (Effect effect: ability.getEffects()) {
-					if (effect instanceof ContinuousEffect)
-						game.addEffect((ContinuousEffect)effect, ability);
-					else if (ability instanceof EntersBattlefieldStaticAbility && effect instanceof OneShotEffect) {
+					if (effect instanceof OneShotEffect) {
 						//20100423 - 603.6e
 						effect.apply(game, ability);
 					}
@@ -519,7 +529,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		//TODO: handle noRegen
 		if (!game.replaceEvent(GameEvent.getEvent(EventType.DESTROY_PERMANENT, objectId, sourceId, controllerId, noRegen?1:0))) {
 			if (!this.getAbilities().containsKey(IndestructibleAbility.getInstance().getId())) {
-				if (moveToZone(Zone.GRAVEYARD, game, false)) {
+				if (moveToZone(Zone.GRAVEYARD, sourceId, game, false)) {
 					game.fireEvent(GameEvent.getEvent(EventType.DESTROYED_PERMANENT, objectId, sourceId, controllerId));
 					return true;
 				}
@@ -532,7 +542,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	public boolean sacrifice(UUID sourceId, Game game) {
 		//20091005 - 701.13
 		if (!game.replaceEvent(GameEvent.getEvent(EventType.SACRIFICE_PERMANENT, objectId, sourceId, controllerId))) {
-			if (moveToZone(Zone.GRAVEYARD, game, true)) {
+			if (moveToZone(Zone.GRAVEYARD, sourceId, game, true)) {
 				game.fireEvent(GameEvent.getEvent(EventType.SACRIFICED_PERMANENT, objectId, sourceId, controllerId));
 				return true;
 			}

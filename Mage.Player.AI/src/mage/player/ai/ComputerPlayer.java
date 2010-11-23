@@ -642,6 +642,22 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	@Override
+	public boolean choose(Cards cards, TargetCard target, Game game)  {
+		logger.fine("choose");
+		//TODO: improve this
+		//return first match
+		if (!target.doneChosing()) {
+			for (Card card: cards.getCards(target.getFilter(), game)) {
+				target.add(card.getId(), game);
+				if (target.doneChosing())
+					return true;
+			}
+			return false;
+		}
+		return true;
+	}
+
+	@Override
 	public void selectAttackers(Game game) {
 		logger.fine("selectAttackers");
 		UUID opponentId = game.getCombat().getDefenders().iterator().next();

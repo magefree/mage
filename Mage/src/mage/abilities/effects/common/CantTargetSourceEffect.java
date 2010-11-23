@@ -30,10 +30,8 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.filter.FilterObject;
 import mage.filter.FilterStackObject;
 import mage.game.Game;
 import mage.game.events.GameEvent;

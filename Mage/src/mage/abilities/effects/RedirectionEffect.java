@@ -30,6 +30,7 @@ package mage.abilities.effects;
 
 import java.util.UUID;
 import mage.Constants.Duration;
+import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.game.Game;
@@ -51,6 +52,7 @@ public abstract class RedirectionEffect<T extends RedirectionEffect<T>> extends 
 
 	public RedirectionEffect(Duration duration) {
 		super(duration, Outcome.RedirectDamage);
+		this.effectType = EffectType.REDIRECTION;
 	}
 
 	public RedirectionEffect(final RedirectionEffect effect) {

@@ -62,7 +62,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEf
 			case BATTLEFIELD:
 				Permanent permanent = game.getPermanent(source.getFirstTarget());
 				if (permanent != null) {
-					return permanent.moveToZone(Zone.HAND, game, false);
+					return permanent.moveToZone(Zone.HAND, source.getId(), game, false);
 				}
 			case GRAVEYARD:
 				Card card = game.getCard(source.getFirstTarget());

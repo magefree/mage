@@ -42,6 +42,7 @@ import mage.game.*;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.EffectType;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -86,7 +87,7 @@ public class StackAbility implements StackObject, Ability {
 		if (ability.getTargets().stillLegal(ability, game)) {
 			return ability.resolve(game);
 		}
-		counter(game);
+		counter(null, game);
 		return false;
 	}
 
@@ -94,7 +95,7 @@ public class StackAbility implements StackObject, Ability {
 	public void reset(Game game) { }
 	
 	@Override
-	public void counter(Game game) {
+	public void counter(UUID sourceId, Game game) {
 		//20100716 - 603.8
 		if (ability instanceof StateTriggeredAbility) {
 			((StateTriggeredAbility)ability).counter();
@@ -153,11 +154,8 @@ public class StackAbility implements StackObject, Ability {
 
 	@Override
 	public Zone getZone() {
-		return Zone.STACK;
+		return this.ability.getZone();
 	}
-
-	@Override
-	public void setZone(Zone zone) {}
 
 	@Override
 	public UUID getId() {
@@ -182,6 +180,11 @@ public class StackAbility implements StackObject, Ability {
 	@Override
 	public Effects getEffects() {
 		return ability.getEffects();
+	}
+
+	@Override
+	public Effects getEffects(EffectType effectType) {
+		return ability.getEffects(effectType);
 	}
 
 	@Override

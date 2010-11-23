@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.target.TargetCard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
@@ -44,10 +45,9 @@ import mage.target.TargetCard;
  */
 public class CallToMind extends CardImpl<CallToMind> {
 
-	private static FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
+	private static FilterCard filter = new FilterCard("instant or sorcery card");
 
 	static {
-		filter.setZone(Zone.GRAVEYARD);
 		filter.getCardType().add(CardType.INSTANT);
 		filter.getCardType().add(CardType.SORCERY);
 		filter.setScopeCardType(ComparisonScope.Any);
@@ -59,7 +59,7 @@ public class CallToMind extends CardImpl<CallToMind> {
 		this.color.setBlue(true);
 
 		this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-		this.getSpellAbility().addTarget(new TargetCard(Zone.GRAVEYARD, filter));
+		this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
 	}
 
 	public CallToMind(final CallToMind card) {

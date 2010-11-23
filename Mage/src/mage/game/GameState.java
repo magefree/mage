@@ -88,6 +88,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 	private TurnMods turnMods;
 	private Watchers watchers;
 	private Map<String, Object> values = new HashMap<String, Object>();
+	private Map<UUID, Zone> zones = new HashMap<UUID, Zone>();
 
 	public GameState() {
 		players = new Players();
@@ -127,6 +128,9 @@ public class GameState implements Serializable, Copyable<GameState> {
 			values.put(key, state.values.get(key));
 			//TODO: might have to change value to Copyable
 		}
+		for (UUID key: state.zones.keySet()) {
+			zones.put(key, state.zones.get(key));
+		}
 	}
 
 	@Override
@@ -140,11 +144,6 @@ public class GameState implements Serializable, Copyable<GameState> {
 	}
 
 	public int getValue() {
-//		final int prime = 31;
-//		int result = 1;
-//		result *= prime + turnNum;
-//		result *= prime + turn.getPhaseType().toString().hashCode();
-
 		StringBuilder sb = new StringBuilder(1024);
 
 		sb.append(turnNum).append(turn.getPhaseType()).append(turn.getStepType()).append(activePlayerId).append(priorityPlayerId);
@@ -275,10 +274,20 @@ public class GameState implements Serializable, Copyable<GameState> {
 		Permanent permanent;
 		if (battlefield.containsPermanent(permanentId)) {
 			permanent = battlefield.getPermanent(permanentId);
-			permanent.setZone(Zone.BATTLEFIELD);
+			setZone(permanent.getId(), Zone.BATTLEFIELD);
 			return permanent;
 		}
 		return null;
+	}
+
+	public Zone getZone(UUID id) {
+		if (zones.containsKey(id))
+			return zones.get(id);
+		return null;
+	}
+
+	public void setZone(UUID id, Zone zone) {
+		zones.put(id, zone);
 	}
 
 	public void restore(GameState state) {
@@ -288,6 +297,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 		this.combat = state.combat;
 		this.exile = state.exile;
 		this.battlefield = state.battlefield;
+		this.zones = state.zones;
 		for (Player copyPlayer: state.players.values()) {
 			Player origPlayer = players.get(copyPlayer.getId());
 			origPlayer.restore(copyPlayer);

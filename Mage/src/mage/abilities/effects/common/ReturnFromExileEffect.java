@@ -76,7 +76,7 @@ public class ReturnFromExileEffect extends OneShotEffect<ReturnFromExileEffect> 
 		if (exile != null) {
 			for (UUID cardId: exile) {
 				Card card = game.getCard(cardId);
-				card.moveToZone(zone, game, tapped);
+				card.moveToZone(zone, source.getId(), game, tapped);
 			}
 			exile.clear();
 			return true;

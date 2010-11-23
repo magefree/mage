@@ -32,6 +32,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.AbilityType;
+import mage.Constants.EffectType;
 import mage.Constants.Zone;
 import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.Cost;
@@ -61,6 +62,7 @@ public interface Ability extends Serializable {
 	public Costs<Cost> getOptionalCosts();
 	public void addOptionalCost(Cost cost);
 	public Effects getEffects();
+	public Effects getEffects(EffectType effectType);
 	public void addEffect(Effect effect);
 	public Targets getTargets();
 	public UUID getFirstTarget();

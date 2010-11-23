@@ -29,6 +29,7 @@
 package mage.abilities.effects;
 
 import mage.Constants.Duration;
+import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.game.Game;
@@ -43,6 +44,7 @@ public abstract class PreventionEffectImpl<T extends PreventionEffectImpl<T>> ex
 
 	public PreventionEffectImpl(Duration duration) {
 		super(duration, Outcome.PreventDamage);
+		this.effectType = EffectType.PREVENTION;
 	}
 
 	public PreventionEffectImpl(final PreventionEffectImpl effect) {

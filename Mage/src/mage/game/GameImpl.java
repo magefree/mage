@@ -165,6 +165,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	}
 
 	@Override
+	public Collection<Card> getCards() {
+		return gameCards.values();
+	}
+
+	@Override
 	public void addPlayer(Player player) throws GameException {
 		state.addPlayer(player);
 	}
@@ -189,7 +194,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		MageObject object;
 		if (state.getBattlefield().containsPermanent(objectId)) {
 			object = state.getBattlefield().getPermanent(objectId);
-			object.setZone(Zone.BATTLEFIELD);
+			state.setZone(objectId, Zone.BATTLEFIELD);
 			return object;
 		}
 		object = getCard(objectId);
@@ -197,7 +202,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			return object;
 		for (StackObject item: state.getStack()) {
 			if (item.getId().equals(objectId)) {
-				item.setZone(Zone.STACK);
+				state.setZone(objectId, Zone.STACK);
 				return item;
 			}
 		}
@@ -213,6 +218,16 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	@Override
 	public Card getCard(UUID cardId) {
 		return gameCards.get(cardId);
+	}
+
+	@Override
+	public Zone getZone(UUID objectId) {
+		return state.getZone(objectId);
+	}
+
+	@Override
+	public void setZone(UUID objectId, Zone zone) {
+		state.setZone(objectId, zone);
 	}
 
 	@Override
@@ -404,7 +419,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	public void mulligan(UUID playerId) {
 		Player player = getPlayer(playerId);
 		int numCards = player.getHand().size();
-		player.getLibrary().addAll(player.getHand().getCards(this));
+		player.getLibrary().addAll(player.getHand().getCards(this), this);
 		player.getHand().clear();
 		player.shuffleLibrary(this);
 		player.drawCards(numCards - 1, this);
@@ -546,20 +561,20 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		for (Permanent perm: getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
 			//20091005 - 704.5f
 			if (perm.getToughness().getValue() == 0) {
-				perm.moveToZone(Zone.GRAVEYARD, this, false);
-				somethingHappened = true;
+				if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
+					somethingHappened = true;
 			}
 			//20091005 - 704.5g/704.5h
 			else if (perm.getToughness().getValue() <= perm.getDamage() || perm.isDeathtouched()) {
-				perm.destroy(null, this, false);
-				somethingHappened = true;
+				if (perm.destroy(null, this, false))
+					somethingHappened = true;
 			}
 		}
 		//20091005 - 704.5i
 		for (Permanent perm: getBattlefield().getAllActivePermanents(CardType.PLANESWALKER)) {
 			if (perm.getLoyalty().getValue() == 0) {
-				perm.moveToZone(Zone.GRAVEYARD, this, false);
-				return true;
+				if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
+					return true;
 			}
 		}
 		//20091005 - 704.5j, 801.14
@@ -571,7 +586,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 					filterPlaneswalker.setScopeSubtype(ComparisonScope.Any);
 					if (getBattlefield().count(filterPlaneswalker, planeswalker.getControllerId(), this) > 1) {
 						for (Permanent perm: getBattlefield().getActivePermanents(filterPlaneswalker, planeswalker.getControllerId(), this)) {
-							perm.moveToZone(Zone.GRAVEYARD, this, false);
+							perm.moveToZone(Zone.GRAVEYARD, null, this, false);
 						}
 						return true;
 					}
@@ -581,18 +596,21 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		//20091005 - 704.5n
 		for (Permanent perm: getBattlefield().getAllActivePermanents(filterAura)) {
 			if (perm.getAttachedTo() == null) {
-				perm.moveToZone(Zone.GRAVEYARD, this, false);
+				if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
+					somethingHappened = true;
 			}
 			else {
 				//TODO: handle player auras
 				Permanent attachedTo = getPermanent(perm.getAttachedTo());
 				if (attachedTo == null) {
-					perm.moveToZone(Zone.GRAVEYARD, this, false);
+					if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
+						somethingHappened = true;
 				}
 				else {
 					Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
 					if (!auraFilter.match(attachedTo)) {
-						perm.moveToZone(Zone.GRAVEYARD, this, false);
+						if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
+							somethingHappened = true;
 					}
 				}
 			}
@@ -604,7 +622,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 				filterLegendName.getName().add(legend.getName());
 				if (getBattlefield().count(filterLegendName, legend.getControllerId(), this) > 1) {
 					for (Permanent dupLegend: getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
-						dupLegend.moveToZone(Zone.GRAVEYARD, this, false);
+						dupLegend.moveToZone(Zone.GRAVEYARD, null, this, false);
 					}
 					return true;
 				}
@@ -618,8 +636,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 					perm.attachTo(null);
 				}
 				else if (!creature.getCardType().contains(CardType.CREATURE)) {
-					creature.removeAttachment(perm.getId(), this);
-					somethingHappened = true;
+					if (creature.removeAttachment(perm.getId(), this))
+						somethingHappened = true;
 				}
 			}
 		}
@@ -630,8 +648,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 					perm.attachTo(null);
 				}
 				else if (!land.getCardType().contains(CardType.LAND)) {
-					land.removeAttachment(perm.getId(), this);
-					somethingHappened = true;
+					if (land.removeAttachment(perm.getId(), this))
+						somethingHappened = true;
 				}
 			}
 		}
@@ -643,8 +661,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 					if (!(attachment.getSubtype().contains("Aura") ||
 							attachment.getSubtype().contains("Equipment") ||
 							attachment.getSubtype().contains("Fortification"))) {
-						perm.removeAttachment(id, this);
-						return true;
+						if (perm.removeAttachment(id, this))
+							return true;
 					}
 				}
 			}

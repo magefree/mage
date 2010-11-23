@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 import mage.Constants.AbilityType;
+import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.costs.AlternativeCost;
@@ -46,8 +47,6 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.Card;
 import mage.choices.Choice;
 import mage.choices.Choices;
 import mage.game.Game;
@@ -233,6 +232,17 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 	@Override
 	public Effects getEffects() {
 		return effects;
+	}
+
+	@Override
+	public Effects getEffects(EffectType effectType) {
+		Effects typedEffects = new Effects();
+		for (Effect effect: effects) {
+			if (effect.getEffectType() == effectType) {
+				typedEffects.add(effect);
+			}
+		}
+		return typedEffects;
 	}
 
 	@Override

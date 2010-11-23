@@ -45,6 +45,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.PermanentCard;
+import mage.game.stack.Spell;
 import mage.util.Logging;
 import mage.watchers.Watchers;
 
@@ -96,7 +97,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 			Class<?> theClass  = Class.forName(name);
 			Constructor<?> con = theClass.getConstructor(new Class[]{UUID.class});
 			Card card = (Card) con.newInstance(new Object[] {null});
-			card.setZone(Zone.OUTSIDE);
+//			card.setZone(Zone.OUTSIDE);
 			return card;
 		}
 		catch (Exception e) {
@@ -182,9 +183,10 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 		this.expansionSetCode = expansionSetCode;
 	}
 
-	public boolean moveToZone(Zone toZone, UUID controllerId, Game game, boolean flag) {
-		Zone fromZone = zone;
-		ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, controllerId, fromZone, toZone);
+	@Override
+	public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag) {
+		Zone fromZone = game.getZone(objectId);
+		ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, toZone);
 		if (!game.replaceEvent(event)) {
 			switch (event.getToZone()) {
 				case GRAVEYARD:
@@ -192,6 +194,9 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 					break;
 				case HAND:
 					game.getPlayer(ownerId).getHand().add(this);
+					break;
+				case STACK:
+					game.getStack().push(new Spell(this, this.getSpellAbility().copy(), ownerId));
 					break;
 				case EXILED:
 					game.getExile().getPermanentExile().add(this);
@@ -211,22 +216,17 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 						permanent.setTapped(true);
 					break;
 			}
-			zone = event.getToZone();
+			game.setZone(objectId, event.getToZone());
 			game.fireEvent(event);
-			return zone == toZone;
+			return game.getZone(objectId) == toZone;
 		}
 		return false;
 	}
 
 	@Override
-	public boolean moveToZone(Zone toZone, Game game, boolean flag) {
-		return moveToZone(toZone, ownerId, game, flag);
-	}
-
-	@Override
-	public boolean moveToExile(UUID exileId, String name, Game game) {
-		Zone fromZone = zone;
-		ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, ownerId, fromZone, Zone.EXILED);
+	public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
+		Zone fromZone = game.getZone(objectId);
+		ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, Zone.EXILED);
 		if (!game.replaceEvent(event)) {
 			if (exileId == null) {
 				game.getExile().getPermanentExile().add(this);
@@ -234,8 +234,8 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 			else {
 				game.getExile().createZone(exileId, name).add(this);
 			}
-			zone = event.getToZone();
-			game.fireEvent(new ZoneChangeEvent(this.objectId, ownerId, fromZone, Zone.EXILED));
+			game.setZone(objectId, event.getToZone());
+			game.fireEvent(event);
 			return true;
 		}
 		return false;
@@ -245,7 +245,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 	public boolean putOntoBattlefield(Game game, Zone fromZone, UUID controllerId) {
 		PermanentCard permanent = new PermanentCard(this, controllerId);
 		game.getBattlefield().addPermanent(permanent);
-		zone = Zone.BATTLEFIELD;
+		game.setZone(objectId, Zone.BATTLEFIELD);
 		permanent.entersBattlefield(game);
 		game.applyEffects();
 		game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));

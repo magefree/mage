@@ -97,23 +97,24 @@ class SeaGateOracleEffect extends OneShotEffect<SeaGateOracleEffect> {
 		if (player.getLibrary().size() > 0) {
 			if (player.getLibrary().size() == 1) {
 				Card card = player.getLibrary().removeFromTop(game);
-				card.moveToZone(Zone.HAND, game, false);
-//				player.putInHand(player.getLibrary().removeFromTop(game), game);
+				card.moveToZone(Zone.HAND, source.getId(), game, false);
 			}
 			else {
 				Cards cards = new CardsImpl(Zone.PICK);
-				cards.add(player.getLibrary().removeFromTop(game));
-				cards.add(player.getLibrary().removeFromTop(game));
+				Card card = player.getLibrary().removeFromTop(game);
+				cards.add(card);
+				game.setZone(card.getId(), Zone.PICK);
+				card = player.getLibrary().removeFromTop(game);
+				cards.add(card);
+				game.setZone(card.getId(), Zone.PICK);
 				TargetCard target = new TargetCard(Zone.PICK, filter);
 				target.setRequired(true);
 				player.lookAtCards(cards, game);
-				player.chooseTarget(cards, target, source, game);
-				Card card = cards.get(target.getFirstTarget(), game);
-				card.moveToZone(Zone.HAND, game, false);
-//				player.putInHand(cards.get(target.getFirstTarget(), game), game);
+				player.choose(cards, target, game);
+				card = cards.get(target.getFirstTarget(), game);
+				card.moveToZone(Zone.HAND, source.getId(), game, false);
 				for (Card card1: cards.getCards(game)) {
-					card1.moveToZone(Zone.LIBRARY, game, false);
-//					player.getLibrary().putOnBottom(cards.get(cardId, game), game);
+					card1.moveToZone(Zone.LIBRARY, source.getId(), game, false);
 				}
 			}
 			return true;

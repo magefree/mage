@@ -479,7 +479,7 @@ public class GameController implements GameCallback {
 		if (zone.equals(Zone.BATTLEFIELD)) {
 			card.putOntoBattlefield(game, Zone.OUTSIDE, player.getId());			
 		} else {
-			card.moveToZone(zone, game, false);	
+			card.moveToZone(zone, null, game, false);
 		}
 		logger.info("Added card to player's " + zone.toString() + ": " + card.getName() +", player = " + player.getName());
 	}

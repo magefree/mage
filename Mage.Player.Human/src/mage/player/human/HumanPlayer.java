@@ -50,6 +50,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.cards.decks.Deck;
+import mage.choices.ChoiceImpl;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -72,8 +73,11 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	private boolean abort;
 
 	protected static FilterCreatureForCombat filter = new FilterCreatureForCombat();
+	protected static Choice replacementEffectChoice = new ChoiceImpl(true);
+
 	static {
 		filter.setTargetController(TargetController.YOU);
+		replacementEffectChoice.setMessage("Choose replacement effect");
 	}
 	protected transient TargetCreaturePermanent targetCombat = new TargetCreaturePermanent(filter);
 
@@ -140,7 +144,23 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public int chooseEffect(List<ReplacementEffect> rEffects, Game game) {
-		//TODO: implement this
+		replacementEffectChoice.getChoices().clear();
+		for (ReplacementEffect effect: rEffects) {
+			replacementEffectChoice.getChoices().add(effect.getText(null));
+		}
+		if (replacementEffectChoice.getChoices().size() == 1)
+			return 0;
+		while (!abort) {
+			game.fireChooseEvent(playerId, replacementEffectChoice);
+			waitForResponse();
+			if (response.getString() != null) {
+				replacementEffectChoice.setChoice(response.getString());
+				for (int i = 0; i < rEffects.size(); i++) {
+					if (replacementEffectChoice.getChoice().equals(rEffects.get(i).getText(null)))
+						return i;
+				}
+			}
+		}
 		return 0;
 	}
 
@@ -194,9 +214,26 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	}
 
 	@Override
-	public boolean chooseTarget(Cards cards, TargetCard target, Ability source, Game game) {
-		game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired());
+	public boolean choose(Cards cards, TargetCard target, Game game) {
 		while (!abort) {
+			game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired());
+			waitForResponse();
+			if (response.getUUID() != null) {
+				if (target.canTarget(response.getUUID(), cards, game)) {
+					target.add(response.getUUID(), game);
+					return true;
+				}
+			} else if (!target.isRequired()) {
+				return false;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean chooseTarget(Cards cards, TargetCard target, Ability source, Game game) {
+		while (!abort) {
+			game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired());
 			waitForResponse();
 			if (response.getUUID() != null) {
 				if (target.canTarget(response.getUUID(), cards, game)) {
@@ -210,11 +247,10 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 		return false;
 	}
 
-
 	@Override
 	public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
-		game.fireSelectTargetEvent(playerId, target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), target.isRequired());
 		while (!abort) {
+			game.fireSelectTargetEvent(playerId, target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), target.isRequired());
 			waitForResponse();
 			if (response.getUUID() != null) {
 				if (target.canTarget(response.getUUID(), source, game)) {
@@ -251,7 +287,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 				MageObject object = game.getObject(response.getUUID());
 				if (object != null) {
 					Map<UUID, ActivatedAbility> useableAbilities = null;
-					switch (object.getZone()) {
+					switch (game.getZone(object.getId())) {
 						case HAND:
 							useableAbilities = getUseableAbilities(object.getAbilities().getActivatedAbilities(Zone.HAND), game);
 							break;
@@ -314,7 +350,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	protected void playManaAbilities(Game game) {
 		MageObject object = game.getObject(response.getUUID());
 		Map<UUID, ActivatedAbility> useableAbilities;
-		switch (object.getZone()) {
+		switch (game.getZone(object.getId())) {
 			case HAND:
 				useableAbilities = getUseableAbilities(object.getAbilities().getManaAbilities(Zone.HAND), game);
 				if (useableAbilities.size() > 0) {
@@ -399,17 +435,19 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 		int remainingDamage = damage;
 		while (remainingDamage > 0) {
 			Target target = new TargetCreatureOrPlayer();
-			chooseTarget(Outcome.Damage, target, null, game);
+			choose(Outcome.Damage, target, game);
 			if (targets.size() == 0 || targets.contains(target.getFirstTarget())) {
 				int damageAmount = getAmount(0, remainingDamage, "Select amount", game);
 				Permanent permanent = game.getPermanent(target.getFirstTarget());
 				if (permanent != null) {
 					permanent.damage(damageAmount, sourceId, game, true);
+					remainingDamage -= damageAmount;
 				}
 				else {
 					Player player = game.getPlayer(target.getFirstTarget());
 					if (player != null) {
 						player.damage(damageAmount, sourceId, game, false, true);
+						remainingDamage -= damageAmount;
 					}
 				}
 			}

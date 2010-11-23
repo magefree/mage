@@ -30,6 +30,7 @@ package mage.abilities.effects;
 
 import java.util.Date;
 import mage.Constants.Duration;
+import mage.Constants.EffectType;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
@@ -52,6 +53,7 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
 		super(outcome);
 		this.duration = duration;
 		this.timestamp = new Date();
+		this.effectType = EffectType.CONTINUOUS;
 	}
 
 	public ContinuousEffectImpl(Duration duration, Layer layer, SubLayer sublayer, Outcome outcome) {

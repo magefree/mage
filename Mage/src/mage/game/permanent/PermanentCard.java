@@ -125,12 +125,12 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 //	}
 
 	@Override
-	public boolean moveToZone(Zone toZone, Game game, boolean flag) {
-		Zone fromZone = zone;
-		ZoneChangeEvent event = new ZoneChangeEvent(this, controllerId, fromZone, toZone);
-		if (!game.replaceEvent(event)) {
-			Player controller = game.getPlayer(controllerId);
-			if (controller != null && controller.removeFromBattlefield(this, game)) {
+	public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag) {
+		Zone fromZone = game.getZone(objectId);
+		Player controller = game.getPlayer(controllerId);
+		if (controller != null && controller.removeFromBattlefield(this, game)) {
+			ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone);
+			if (!game.replaceEvent(event)) {
 				Card card = game.getCard(objectId);
 				Player owner = game.getPlayer(ownerId);
 				if (owner != null) {
@@ -154,9 +154,9 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 							//should never happen
 							break;
 					}
-					zone = event.getToZone();
+					game.setZone(objectId, event.getToZone());
 					game.fireEvent(event);
-					return zone == toZone;
+					return game.getZone(objectId) == toZone;
 				}
 			}
 		}
@@ -165,9 +165,23 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 
 
 	@Override
-	public boolean moveToExile(UUID exileId, String name, Game game) {
-		if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
-			return game.getCard(objectId).moveToExile(exileId, name, game);
+	public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
+		Zone fromZone = game.getZone(objectId);
+		Player controller = game.getPlayer(controllerId);
+		if (controller != null && controller.removeFromBattlefield(this, game)) {
+			ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED);
+			if (!game.replaceEvent(event)) {
+				Card card = game.getCard(this.objectId);
+				if (exileId == null) {
+					game.getExile().getPermanentExile().add(card);
+				}
+				else {
+					game.getExile().createZone(exileId, name).add(card);
+				}
+				game.setZone(objectId, event.getToZone());
+				game.fireEvent(event);
+				return true;
+			}
 		}
 		return false;
 	}

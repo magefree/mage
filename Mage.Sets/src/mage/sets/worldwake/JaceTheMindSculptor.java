@@ -122,8 +122,7 @@ class JaceTheMindSculptorEffect1 extends OneShotEffect<JaceTheMindSculptorEffect
 			if (controller.chooseUse(outcome, "Do you wish to put card on the bottom of player's library?", game)) {
 				Card card = player.getLibrary().removeFromTop(game);
 				if (card != null) {
-					card.moveToZone(Zone.LIBRARY, game, false);
-//					player.getLibrary().putOnBottom(card, game);
+					card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
 				}
 			}
 			return true;
@@ -168,13 +167,11 @@ class JaceTheMindSculptorEffect2 extends OneShotEffect<JaceTheMindSculptorEffect
 	private boolean putOnLibrary(Player player, Ability source, Game game) {
 		TargetCardInHand target = new TargetCardInHand();
 		target.setRequired(true);
-//		target.setAbility(source);
 		player.chooseTarget(Outcome.ReturnToHand, target, source, game);
 		Card card = player.getHand().get(target.getFirstTarget(), game);
 		if (card != null) {
 			player.getHand().remove(card);
-			card.moveToZone(Zone.LIBRARY, game, true);
-//			player.getLibrary().putOnTop(card, game);
+			card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
 		}
 		return true;
 	}
@@ -212,7 +209,7 @@ class JaceTheMindSculptorEffect3 extends OneShotEffect<JaceTheMindSculptorEffect
 				Card card = player.getLibrary().removeFromTop(game);
 				exile.add(card);
 			}
-			player.getLibrary().addAll(player.getHand().getCards(game));
+			player.getLibrary().addAll(player.getHand().getCards(game), game);
 			player.getLibrary().shuffle();
 			player.getHand().clear();
 			return true;

@@ -101,7 +101,7 @@ class MystifyingMazeEffect extends OneShotEffect<MystifyingMazeEffect> {
 	public boolean apply(Game game, Ability source) {
 		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
-			if (permanent.moveToExile(source.getSourceId(), "Mystifying Maze Exile", game)) {
+			if (permanent.moveToExile(source.getSourceId(), "Mystifying Maze Exile", source.getId(), game)) {
 				//create delayed triggered ability
 				MystifyingMazeDelayedTriggeredAbility delayedAbility = new MystifyingMazeDelayedTriggeredAbility(source.getSourceId());
 				delayedAbility.setSourceId(source.getSourceId());

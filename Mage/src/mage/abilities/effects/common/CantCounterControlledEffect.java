@@ -61,8 +61,10 @@ public class CantCounterControlledEffect extends ReplacementEffectImpl<CantCount
 
 	public CantCounterControlledEffect(final CantCounterControlledEffect effect) {
 		super(effect);
-		this.filterTarget = effect.filterTarget.copy();
-		this.filterSource = effect.filterSource.copy();
+		if (effect.filterTarget != null)
+			this.filterTarget = effect.filterTarget.copy();
+		if (effect.filterSource != null)
+			this.filterSource = effect.filterSource.copy();
 	}
 
 	@Override

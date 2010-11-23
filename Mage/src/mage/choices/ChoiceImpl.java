@@ -79,6 +79,11 @@ public class ChoiceImpl<T extends ChoiceImpl<T>> implements Choice, Serializable
 	}
 
 	@Override
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	@Override
 	public Set<String> getChoices() {
 		return choices;
 	}

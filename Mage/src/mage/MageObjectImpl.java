@@ -57,7 +57,7 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
 	protected MageInt power;
 	protected MageInt toughness;
 	protected MageInt loyalty;
-	protected Zone zone;
+//	protected Zone zone;
 	
 	@Override
 	public abstract T copy();
@@ -81,7 +81,7 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
 		name = object.name;
 		manaCost = object.manaCost.copy();
 		text = object.text;
-		zone = object.zone;
+//		zone = object.zone;
 		color = object.color.copy();
 		power = object.power.copy();
 		toughness = object.toughness.copy();
@@ -158,15 +158,15 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
 		return manaCost;
 	}
 
-	@Override
-	public Zone getZone() {
-		return zone;
-	}
-
-	@Override
-	public void setZone(Zone zone) {
-		this.zone = zone;
-	}
+//	@Override
+//	public Zone getZone() {
+//		return zone;
+//	}
+//
+//	@Override
+//	public void setZone(Zone zone) {
+//		this.zone = zone;
+//	}
 
 	@Override
 	public void adjustCosts(Ability ability, Game game) {}

@@ -28,6 +28,7 @@
 
 package mage.abilities.effects;
 
+import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 
@@ -38,6 +39,7 @@ import mage.abilities.Ability;
 public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 
 	protected final Outcome outcome;
+	protected EffectType effectType;
 
 	public EffectImpl(Outcome outcome) {
 		this.outcome = outcome;
@@ -45,6 +47,7 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 
 	public EffectImpl(final EffectImpl effect) {
 		this.outcome = effect.outcome;
+		this.effectType = effect.effectType;
 	}
 
 	@Override
@@ -55,5 +58,10 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 	@Override
 	public Outcome getOutcome() {
 		return outcome;
+	}
+
+	@Override
+	public EffectType getEffectType() {
+		return effectType;
 	}
 }

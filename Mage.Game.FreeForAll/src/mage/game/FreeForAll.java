@@ -96,7 +96,7 @@ public class FreeForAll extends GameImpl<FreeForAll> {
 			numCards += 1;
 			mulliganed.add(playerId);
 		}
-		player.getLibrary().addAll(player.getHand().getCards(this));
+		player.getLibrary().addAll(player.getHand().getCards(this), this);
 		player.getHand().clear();
 		player.shuffleLibrary(this);
 		player.drawCards(numCards - 1, this);

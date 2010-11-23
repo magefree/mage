@@ -66,7 +66,7 @@ public class TargetCardInYourGraveyard extends TargetCard<TargetCardInYourGravey
 	@Override
 	public boolean canTarget(UUID id, Ability source, Game game) {
 		Card card = game.getCard(id);
-		if (card != null && card.getZone() == Zone.GRAVEYARD)
+		if (card != null && game.getZone(card.getId()) == Zone.GRAVEYARD)
 			if (game.getPlayer(source.getControllerId()).getGraveyard().contains(id))
 				return filter.match(card);
 		return false;

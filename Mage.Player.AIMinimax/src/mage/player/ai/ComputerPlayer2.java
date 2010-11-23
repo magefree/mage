@@ -474,6 +474,23 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		return true;
 	}
 
+	@Override
+	public boolean choose(Cards cards, TargetCard target, Game game)  {
+		if (targets.size() == 0)
+			return super.choose(cards, target, game);
+		if (!target.doneChosing()) {
+			for (UUID targetId: targets) {
+				target.add(targetId, game);
+				if (target.doneChosing()) {
+					targets.clear();
+					return true;
+				}
+			}
+			return false;
+		}
+		return true;
+	}
+
 	public void playNext(Game game, UUID activePlayerId, SimulationNode node) {
 		boolean skip = false;
 		while (true) {

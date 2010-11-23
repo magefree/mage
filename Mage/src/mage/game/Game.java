@@ -37,6 +37,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
+import mage.Constants.Zone;
 import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -46,7 +47,6 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.cards.Cards;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.game.combat.Combat;
 import mage.game.events.GameEvent;
 import mage.game.events.TableEvent;
@@ -71,11 +71,14 @@ public interface Game extends MageItem, Serializable {
 	
 	//game data methods
 	public void loadCards(Set<Card> cards, UUID ownerId);
+	public Collection<Card> getCards();
 	public Object getCustomData();
 	public void setCustomData(Object data);
 	public MageObject getObject(UUID objectId);
 	public Permanent getPermanent(UUID permanentId);
 	public Card getCard(UUID cardId);
+	public Zone getZone(UUID objectId);
+	public void setZone(UUID objectId, Zone zone);
 	public void addPlayer(Player player) throws GameException;
 	public Player getPlayer(UUID playerId);
 	public Players getPlayers();

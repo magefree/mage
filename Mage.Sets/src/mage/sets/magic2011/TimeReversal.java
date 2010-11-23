@@ -84,8 +84,8 @@ class TimeReversalEffect extends OneShotEffect<TimeReversalEffect> {
 		for (UUID playerId: sourcePlayer.getInRange()) {
 			Player player = game.getPlayer(playerId);
 			if (player != null) {
-				player.getLibrary().addAll(player.getHand().getCards(game));
-				player.getLibrary().addAll(player.getGraveyard().getCards(game));
+				player.getLibrary().addAll(player.getHand().getCards(game), game);
+				player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
 				player.getLibrary().shuffle();
 				player.getHand().clear();
 				player.getGraveyard().clear();

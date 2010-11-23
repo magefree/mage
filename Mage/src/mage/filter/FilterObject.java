@@ -63,8 +63,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 	protected List<String> supertype = new ArrayList<String>();
 	protected ComparisonScope scopeSupertype = ComparisonScope.All;
 	protected boolean notSupertype;
-	protected Zone zone;
-	protected boolean notZone;
 	protected int convertedManaCost;
 	protected ComparisonType convertedManaCostComparison;
 	protected int power;
@@ -114,8 +112,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 		}
 		this.scopeSupertype = filter.scopeSupertype;
 		this.notSupertype = filter.notSupertype;
-		this.zone = filter.zone;
-		this.notZone = filter.notZone;
 		this.convertedManaCost = filter.convertedManaCost;
 		this.convertedManaCostComparison = filter.convertedManaCostComparison;
 		this.power = filter.power;
@@ -136,11 +132,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 
 		if (name.size() > 0) {
 			if (name.contains(object.getName()) == notName)
-				return notFilter;
-		}
-
-		if (zone != null) {
-			if (object.getZone().match(zone) == notZone)
 				return notFilter;
 		}
 
@@ -314,12 +305,4 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 		this.notId = notId;
 	}
 
-	public void setZone(Zone zone) {
-		this.zone = zone;
-	}
-
-	public void setNotZone(boolean notZone) {
-		this.notZone = notZone;
-	}
-	
 }

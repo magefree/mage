@@ -32,13 +32,13 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.stack.Spell;
 
 /**
  *
@@ -86,7 +86,7 @@ class AngelsFeatherAbility extends TriggeredAbilityImpl<AngelsFeatherAbility> {
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.SPELL_CAST) {
-			MageObject spell = game.getObject(event.getTargetId());
+			Spell spell = game.getStack().getSpell(event.getTargetId());
 			if (spell != null && spell.getColor().isWhite()) {
 				trigger(game, event.getPlayerId());
 				return true;

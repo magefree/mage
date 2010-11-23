@@ -40,6 +40,7 @@ public interface Choice {
 	public boolean isRequired();
 	public void clearChoice();
 	public String getMessage();
+	public void setMessage(String message);
 	public void setChoice(String choice);
 	public Set<String> getChoices();
 	public void setChoices(Set<String> choices);

@@ -31,10 +31,8 @@ package mage.abilities.effects.common;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.TargetController;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.filter.FilterObject;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterStackObject;
 import mage.game.Game;
@@ -64,8 +62,10 @@ public class CantTargetControlledEffect extends ReplacementEffectImpl<CantTarget
 
 	public CantTargetControlledEffect(final CantTargetControlledEffect effect) {
 		super(effect);
-		this.filterTarget = effect.filterTarget.copy();
-		this.filterSource = effect.filterSource.copy();
+		if (effect.filterTarget != null)
+			this.filterTarget = effect.filterTarget.copy();
+		if (effect.filterSource != null)
+			this.filterSource = effect.filterSource.copy();
 	}
 
 	@Override

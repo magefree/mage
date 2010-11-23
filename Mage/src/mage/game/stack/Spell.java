@@ -86,11 +86,11 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 				if (ability.getEffects().contains(ExileSpellEffect.getInstance()))
 					game.getExile().getPermanentExile().add(card);
 				else
-					card.moveToZone(Zone.GRAVEYARD, game, false);
+					card.moveToZone(Zone.GRAVEYARD, ability.getId(), game, false);
 				return result;
 			}
 			//20091005 - 608.2b
-			counter(game);
+			counter(null, game);
 			return false;
 		}
 		else if (card.getCardType().contains(CardType.ENCHANTMENT) && card.getSubtype().contains("Aura")) {
@@ -101,7 +101,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 				return false;
 			}
 			//20091005 - 608.2b
-			counter(game);
+			counter(null, game);
 			return false;
 		}
 		else {
@@ -145,8 +145,8 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	}
 	
 	@Override
-	public void counter(Game game) {
-		card.moveToZone(Zone.GRAVEYARD, game, false);
+	public void counter(UUID sourceId, Game game) {
+		card.moveToZone(Zone.GRAVEYARD, sourceId, game, false);
 	}
 
 	@Override
@@ -221,14 +221,6 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	}
 
 	@Override
-	public Zone getZone() {
-		return Zone.STACK;
-	}
-
-	@Override
-	public void setZone(Zone zone) {}
-
-	@Override
 	public UUID getId() {
 		return ability.getId();
 	}
@@ -296,12 +288,12 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	public void adjustCosts(Ability ability, Game game) {}
 
 	@Override
-	public boolean moveToZone(Zone zone, Game game, boolean flag) {
+	public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	@Override
-	public boolean moveToExile(UUID exileId, String name, Game game) {
+	public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 

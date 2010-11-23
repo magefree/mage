@@ -40,7 +40,7 @@ public interface StackObject extends MageObject {
 	public UUID getSourceId();
 	public UUID getControllerId();
 	public void checkTriggers(GameEvent event, Game game);
-	public void counter(Game game);
+	public void counter(UUID sourceId, Game game);
 	@Override
 	public StackObject copy();
 }

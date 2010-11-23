@@ -134,7 +134,7 @@ class VengevineWatcher extends WatcherImpl<VengevineWatcher> {
 	@Override
 	public void watch(GameEvent event, Game game) {
 		if (event.getType() == EventType.SPELL_CAST && event.getPlayerId().equals(controllerId)) {
-			Spell spell = (Spell)game.getStack().getStackObject(event.getTargetId());
+			Spell spell = game.getStack().getSpell(event.getTargetId());
 			if (spell != null && spell.getCardType().contains(CardType.CREATURE)) {
 				creatureSpellCount++;
 				if (creatureSpellCount == 2)
