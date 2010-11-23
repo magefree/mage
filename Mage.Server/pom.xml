@@ -66,7 +66,7 @@
 			<version>0.7.3</version>
 			<configuration>
 				<generatePackage>mage.server.util.config</generatePackage>
-				<schemaDirectory>./xml-resources/jaxb/Config/</schemaDirectory> 
+				<schemaDirectory>./src/main/java/xml-resources/jaxb/Config/</schemaDirectory> 
 				<arguments>-Xcommons-lang</arguments> 
 			</configuration>
 			<executions>
