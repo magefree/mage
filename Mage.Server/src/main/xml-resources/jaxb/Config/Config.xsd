@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="config">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="server"/>
+				<xs:element ref="playerTypes"/>
+				<xs:element ref="gameTypes"/>
+				<xs:element ref="deckTypes"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+    
+	<xs:element name="server">
+		<xs:complexType>
+			<xs:attribute name="serverAddress" type="xs:string" use="required"/>
+			<xs:attribute name="serverName" type="xs:string" use="required"/>
+			<xs:attribute name="port" type="xs:positiveInteger" use="required"/>
+			<xs:attribute name="maxGameThreads" type="xs:positiveInteger" use="required"/>
+			<xs:attribute name="maxSecondsIdle" type="xs:positiveInteger" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="plugin">
+		<xs:attribute name="name" type="xs:string"/>
+		<xs:attribute name="jar" type="xs:string"/>
+		<xs:attribute name="className" type="xs:string"/>
+	</xs:complexType>
+
+	<xs:complexType name="gamePlugin">
+		<xs:complexContent>
+			<xs:extension base="plugin">
+				<xs:attribute name="typeName" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="playerTypes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="playerType" type="plugin" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+    
+	<xs:element name="gameTypes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="gameType" type="gamePlugin" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="deckTypes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="deckType" type="plugin" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>
