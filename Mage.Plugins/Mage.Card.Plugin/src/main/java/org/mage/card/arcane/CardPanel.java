@@ -47,6 +47,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 	
 	static public final double TAPPED_ANGLE = Math.PI / 2;
 	static public final float ASPECT_RATIO = 3.5f / 2.5f;
+	static public final int POPUP_X_GAP = 1; // prevent popup window from blinking
 	//static public final float ASPECT_RATIO = 1.0f;
 
 	static public CardPanel dragAnimationPanel;
@@ -614,7 +615,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		data.component = this;
 		data.card = this.gameCard;
 		data.popupText = popupText;
-		data.popupOffsetX = cardWidth + cardXOffset;
+		data.popupOffsetX = isTapped() ? cardHeight + cardXOffset + POPUP_X_GAP : cardWidth + cardXOffset + POPUP_X_GAP;
 		data.popupOffsetY = 40;
 		data.locationOnScreen = this.getLocationOnScreen();
 		return data;
