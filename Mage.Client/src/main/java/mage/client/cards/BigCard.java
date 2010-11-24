@@ -151,8 +151,8 @@ public class BigCard extends javax.swing.JPanel {
         scrollPane.setViewportView(text);
 
         add(scrollPane);
-        scrollPane.setBounds(20, 230, 210, 120);
-        scrollPane.setBounds(new Rectangle(CONTENT_MAX_XOFFSET, TEXT_MAX_YOFFSET, TEXT_MAX_WIDTH, TEXT_MAX_HEIGHT));
+        //scrollPane.setBounds(20, 230, 210, 120);
+        //scrollPane.setBounds(new Rectangle(CONTENT_MAX_XOFFSET, TEXT_MAX_YOFFSET, TEXT_MAX_WIDTH, TEXT_MAX_HEIGHT));
     }// </editor-fold>//GEN-END:initComponents
 
 
