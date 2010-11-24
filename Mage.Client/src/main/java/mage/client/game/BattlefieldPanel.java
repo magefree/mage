@@ -36,14 +36,9 @@ package mage.client.game;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -54,16 +49,11 @@ import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 
 import mage.cards.MagePermanent;
-import mage.client.MageFrame;
 import mage.client.cards.BigCard;
-import mage.client.cards.Card;
 import mage.client.cards.Permanent;
-import mage.client.plugins.adapters.MageMouseAdapter;
-import mage.client.plugins.adapters.MageMouseMotionAdapter;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
 import mage.client.util.DefaultActionCallback;
-import mage.client.util.ImageHelper;
 import mage.view.PermanentView;
 
 /**
