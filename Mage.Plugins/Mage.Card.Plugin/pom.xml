@@ -45,6 +45,12 @@
 			<version>0.8.4</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jetlang</groupId>
+  			<artifactId>jetlang</artifactId>
+  			<version>0.2.4</version>
+  			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

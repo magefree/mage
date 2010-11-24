@@ -28,4 +28,5 @@ public interface CardPlugin extends Plugin {
 	MagePermanent getMageCard(CardView permanent, CardDimensions dimension, UUID gameId, ActionCallback callback);
 	void sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> cards);
 	void downloadImages(Set<Card> allCards);
+	void downloadSymbols();
 }

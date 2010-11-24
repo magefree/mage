@@ -314,10 +314,13 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		super.paintChildren(g);
 
 		if (showCastingCost && !isAnimationPanel && cardWidth < 200 && cardWidth > 60) {
-			//TODO:uncomment
-			/*int width = ManaSymbols.getWidth(gameCard.getManaCost());
-			ManaSymbols.draw(g, gameCard.getManaCost(), cardXOffset + 8, cardHeight - 9);
-			*/
+			String manaCost = ManaSymbols.getStringManaCost(gameCard.getManaCost());
+			int width = ManaSymbols.getWidth(manaCost);
+			if (hasImage) {
+                ManaSymbols.draw(g, manaCost, cardXOffset + cardWidth - width - 5, cardYOffset + 5);
+			} else {
+                ManaSymbols.draw(g, manaCost, cardXOffset + 8, cardHeight - 9);
+        	}
 		}
 	}
 

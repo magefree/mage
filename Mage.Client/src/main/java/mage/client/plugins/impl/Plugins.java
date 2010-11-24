@@ -112,6 +112,11 @@ public class Plugins implements MagePlugins {
 	public void downloadImage(Set<mage.cards.Card> allCards) {
 		if (this.cardPlugin != null) this.cardPlugin.downloadImages(allCards);
 	}
+	
+	@Override
+	public void downloadSymbols() {
+		if (this.cardPlugin != null) this.cardPlugin.downloadSymbols();
+	}
 
 	@Override
 	public int getGamesPlayed() {

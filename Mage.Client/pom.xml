@@ -57,6 +57,11 @@
 			<artifactId>swingx</artifactId>
 			<version>1.6.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.jetlang</groupId>
+  			<artifactId>jetlang</artifactId>
+  			<version>0.2.4</version>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -1,6 +1,10 @@
 package org.mage.plugins.card;
 
+import java.awt.BorderLayout;
+import java.awt.Frame;
 import java.awt.Rectangle;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -9,6 +13,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JLayeredPane;
 import javax.swing.JScrollPane;
 
@@ -27,7 +32,12 @@ import net.xeoh.plugins.base.annotations.meta.Author;
 
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardPanel;
+import org.mage.card.arcane.ManaSymbols;
 import org.mage.plugins.card.constants.Constants;
+import org.mage.plugins.card.dl.DownloadGui;
+import org.mage.plugins.card.dl.DownloadJob;
+import org.mage.plugins.card.dl.Downloader;
+import org.mage.plugins.card.dl.sources.GathererSymbols;
 import org.mage.plugins.card.images.DownloadPictures;
 
 /**
@@ -68,6 +78,7 @@ public class CardPluginImpl implements CardPlugin {
 
 	@PluginLoaded
 	public void newPlugin(CardPlugin plugin) {
+		ManaSymbols.loadImages();
 		log.info(plugin.toString() + " has been loaded.");
 	}
 
@@ -80,6 +91,7 @@ public class CardPluginImpl implements CardPlugin {
 		CardPanel cardPanel = new CardPanel(permanent, gameId, true, callback);
 		cardPanel.setShowCastingCost(true);
 		cardPanel.setCardBounds(0, 0, dimension.frameWidth, dimension.frameHeight);
+		cardPanel.setShowCastingCost(true);
 		return cardPanel;
 	}
 	
@@ -88,6 +100,7 @@ public class CardPluginImpl implements CardPlugin {
 		CardPanel cardPanel = new CardPanel(permanent, gameId, true, callback);
 		cardPanel.setShowCastingCost(true);
 		cardPanel.setCardBounds(0, 0, dimension.frameWidth, dimension.frameHeight);
+		cardPanel.setShowCastingCost(true);
 		return cardPanel;
 	}
 
@@ -389,5 +402,29 @@ public class CardPluginImpl implements CardPlugin {
 	@Override
 	public void downloadImages(Set<Card> allCards) {
 		DownloadPictures.startDownload(null, allCards);
+	}
+	
+	@Override
+	public void downloadSymbols() {
+		final DownloadGui g = new DownloadGui(new Downloader());
+
+		Iterable<DownloadJob> it = new GathererSymbols();
+        
+        for(DownloadJob job:it) {
+            g.getDownloader().add(job);
+        }
+		
+		JDialog d = new JDialog((Frame) null, "Download pictures", false);
+		d.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		d.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				g.getDownloader().dispose();
+			}
+		});
+		d.setLayout(new BorderLayout());
+		d.add(g);
+		d.pack();
+		d.setVisible(true);		
 	}
 }

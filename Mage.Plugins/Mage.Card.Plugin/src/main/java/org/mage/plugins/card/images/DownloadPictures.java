@@ -1,10 +1,14 @@
 package org.mage.plugins.card.images;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -42,6 +46,10 @@ import mage.cards.Card;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.CardUrl;
 import org.mage.plugins.card.constants.Constants;
+import org.mage.plugins.card.dl.DownloadGui;
+import org.mage.plugins.card.dl.DownloadJob;
+import org.mage.plugins.card.dl.Downloader;
+import org.mage.plugins.card.dl.sources.GathererSymbols;
 import org.mage.plugins.card.properties.SettingsManager;
 import org.mage.plugins.card.utils.CardImageUtils;
 
@@ -60,6 +68,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 	private JLabel jLabel1;
 	private static boolean offlineMode = false;
 	private JCheckBox checkBox;
+	private JButton downloadSymbols;
 
 	public static final Proxy.Type[] types = Proxy.Type.values();
 
@@ -70,10 +79,10 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 	public static void startDownload(JFrame frame, Set<Card> allCards) {
 		ArrayList<CardUrl> cards = getNeededCards(allCards);
 
-		if (cards == null || cards.size() == 0) {
+		/*if (cards == null || cards.size() == 0) {
 			JOptionPane.showMessageDialog(null, "All card pictures have been downloaded.");
 			return;
-		}
+		}*/
 
 		DownloadPictures download = new DownloadPictures(cards);
 		JDialog dlg = download.getDlg(frame);
@@ -147,7 +156,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		jComboBox1.setAlignmentX(Component.LEFT_ALIGNMENT);
 		p0.add(jComboBox1);
 		p0.add(Box.createVerticalStrut(5));
-
+		
 		// Start
 		final JButton b = new JButton("Start download");
 		b.addActionListener(new ActionListener() {

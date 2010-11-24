@@ -143,6 +143,21 @@ public class MageFrame extends javax.swing.JFrame {
 			Separator separator = new javax.swing.JToolBar.Separator();
 			mageToolbar.add(separator);
 			
+	        JButton btnDownloadSymbols = new JButton("Symbols");
+	        btnDownloadSymbols.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+	        btnDownloadSymbols.setFocusable(false);
+	        btnDownloadSymbols.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+	        btnDownloadSymbols.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+	        btnDownloadSymbols.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                btnSymbolsActionPerformed(evt);
+	            }
+	        });
+	        mageToolbar.add(btnDownloadSymbols);
+	        
+	        separator = new javax.swing.JToolBar.Separator();
+			mageToolbar.add(separator);
+			
 			JButton btnDownload = new JButton("Images");
 			btnDownload.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 			btnDownload.setFocusable(false);
@@ -172,6 +187,12 @@ public class MageFrame extends javax.swing.JFrame {
 			allCards.addAll(set.createCards());
 		}
     	Plugins.getInstance().downloadImage(allCards);
+	}
+    
+    private void  btnSymbolsActionPerformed(java.awt.event.ActionEvent evt) {
+    	if (JOptionPane.showConfirmDialog(null, "Do you want to download mana symbols?") == JOptionPane.OK_OPTION) {
+    		Plugins.getInstance().downloadSymbols();
+    	}
 	}
 
 	public void showGame(UUID gameId, UUID playerId) {

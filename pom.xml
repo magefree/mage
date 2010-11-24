@@ -36,6 +36,11 @@
 	            <name>Java Image Scaling Repository Released</name>
 	            <url>svn:https://java-image-scaling.googlecode.com/svn/repo/released</url>
 	        </repository>
+			<repository>
+				<id>jetlang.googlecode.com</id>
+				<name>Jetlang Repository for Maven</name>
+				<url>http://jetlang.googlecode.com/svn/repo/</url>
+			</repository>
        </repositories>
 
     <properties>
