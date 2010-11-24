@@ -22,6 +22,10 @@
     <fileSet>
       <directory>release/</directory>
       <outputDirectory>/</outputDirectory>      
-    </fileSet>    
+    </fileSet>
+    <fileSet>
+      <directory>plugins/*.jar</directory>
+      <outputDirectory>plugins/</outputDirectory>
+    </fileSet>
   </fileSets>
 </assembly>
