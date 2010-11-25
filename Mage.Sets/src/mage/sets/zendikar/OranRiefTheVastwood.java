@@ -54,7 +54,7 @@ public class OranRiefTheVastwood extends CardImpl<OranRiefTheVastwood> {
 	public OranRiefTheVastwood(UUID ownerId) {
 		super(ownerId, 221, "Oran-Rief, the Vastwood", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ZEN";
-		this.addAbility(EntersBattlefieldTappedAbility.getInstance());
+		this.addAbility(new EntersBattlefieldTappedAbility());
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new OranRiefTheVastwoodEffect(), new TapSourceCost()));
 	}

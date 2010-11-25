@@ -52,7 +52,7 @@ public class StirringWildwood extends CardImpl<StirringWildwood> {
 	public StirringWildwood(UUID ownerId) {
 		super(ownerId, 144, "Stirring Wildwood", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "WWK";
-		this.addAbility(EntersBattlefieldTappedAbility.getInstance());
+		this.addAbility(new EntersBattlefieldTappedAbility());
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new WhiteManaAbility());
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new StirringWildwoodToken(), "land"), new ManaCostsImpl("{1}{G}{W}")));

@@ -46,7 +46,7 @@ public class SavageLands extends CardImpl<SavageLands> {
 	public SavageLands(UUID ownerId) {
 		super(ownerId, 228, "Savage Lands", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ALA";
-		this.addAbility(EntersBattlefieldTappedAbility.getInstance());
+		this.addAbility(new EntersBattlefieldTappedAbility());
 		this.addAbility(new RedManaAbility());
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new BlackManaAbility());

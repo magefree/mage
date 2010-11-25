@@ -53,7 +53,7 @@ public class RagingRavine extends CardImpl<RagingRavine> {
 	public RagingRavine(UUID ownerId) {
 		super(ownerId, 141, "Raging Ravine", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "WWK";
-		this.addAbility(EntersBattlefieldTappedAbility.getInstance());
+		this.addAbility(new EntersBattlefieldTappedAbility());
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new RedManaAbility());
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new RagingRavineToken(), "land"), new ManaCostsImpl("{2}{R}{G}")));

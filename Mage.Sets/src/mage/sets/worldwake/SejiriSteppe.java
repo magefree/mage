@@ -49,7 +49,7 @@ public class SejiriSteppe extends CardImpl<SejiriSteppe> {
 	public SejiriSteppe(UUID ownerId) {
 		super(ownerId, 142, "Sejiri Steppe", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "WWK";
-		this.addAbility(EntersBattlefieldTappedAbility.getInstance());
+		this.addAbility(new EntersBattlefieldTappedAbility());
 		EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), false);
 		ability.addTarget(new TargetControlledCreaturePermanent());
 		ability.addChoice(new ChoiceColor());

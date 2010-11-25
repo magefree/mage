@@ -49,7 +49,7 @@ public class RottingLegion extends CardImpl<RottingLegion> {
 		this.power = new MageInt(4);
 		this.toughness = new MageInt(5);
 
-		this.addAbility(EntersBattlefieldTappedAbility.getInstance());
+		this.addAbility(new EntersBattlefieldTappedAbility());
 	}
 
 	public RottingLegion(final RottingLegion card) {

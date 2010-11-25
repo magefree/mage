@@ -46,7 +46,7 @@ public class CrumblingNecropolis extends CardImpl<CrumblingNecropolis> {
 	public CrumblingNecropolis(UUID ownerId) {
 		super(ownerId, 222, "Crumbling Necropolis", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ALA";
-		this.addAbility(EntersBattlefieldTappedAbility.getInstance());
+		this.addAbility(new EntersBattlefieldTappedAbility());
 		this.addAbility(new RedManaAbility());
 		this.addAbility(new BlueManaAbility());
 		this.addAbility(new BlackManaAbility());

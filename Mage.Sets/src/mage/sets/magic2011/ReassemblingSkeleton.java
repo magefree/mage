@@ -53,7 +53,7 @@ public class ReassemblingSkeleton extends CardImpl<ReassemblingSkeleton> {
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
 
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new ManaCostsImpl("{1}{B}")));
+		this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new ManaCostsImpl("{1}{B}")));
 	}
 
 	public ReassemblingSkeleton(final ReassemblingSkeleton card) {

@@ -40,18 +40,12 @@ import mage.abilities.effects.common.TapSourceEffect;
  */
 public class EntersBattlefieldTappedAbility extends StaticAbility<EntersBattlefieldTappedAbility> {
 
-	private static final EntersBattlefieldTappedAbility fINSTANCE =  new EntersBattlefieldTappedAbility();
-
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
-
-	public static EntersBattlefieldTappedAbility getInstance() {
-		return fINSTANCE;
-	}
-
-	private EntersBattlefieldTappedAbility() {
+	public EntersBattlefieldTappedAbility() {
 		super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new TapSourceEffect()));
+	}
+
+	public EntersBattlefieldTappedAbility(final EntersBattlefieldTappedAbility ability) {
+		super(ability);
 	}
 
 	@Override
@@ -61,7 +55,7 @@ public class EntersBattlefieldTappedAbility extends StaticAbility<EntersBattlefi
 
 	@Override
 	public EntersBattlefieldTappedAbility copy() {
-		return fINSTANCE;
+		return new EntersBattlefieldTappedAbility(this);
 	}
 
 }

@@ -135,10 +135,13 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 					if (!player.chooseTarget(ability.getEffects().get(0).getOutcome(), newTarget, ability, game))
 						newTarget.addTarget(targetId, ability, game);
 				}
+				else {
+					newTarget.addTarget(targetId, ability, game);
+				}
 			}
-			target.getTargets().clear();
+			target.clearChosen();
 			for (UUID newTargetId: newTarget.getTargets()) {
-				target.getTargets().add(newTargetId);
+				target.addTarget(newTargetId, ability, game);
 			}
 		}
 		return true;

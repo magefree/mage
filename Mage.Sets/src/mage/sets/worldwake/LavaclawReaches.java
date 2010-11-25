@@ -53,7 +53,7 @@ public class LavaclawReaches extends CardImpl<LavaclawReaches> {
 	public LavaclawReaches(UUID ownerId) {
 		super(ownerId, 139, "Lavaclaw Reaches", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "WWK";
-		this.addAbility(EntersBattlefieldTappedAbility.getInstance());
+		this.addAbility(new EntersBattlefieldTappedAbility());
 		this.addAbility(new BlackManaAbility());
 		this.addAbility(new RedManaAbility());
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new LavaclawReachesToken(), "land"), new ManaCostsImpl("{1}{B}{R}")));

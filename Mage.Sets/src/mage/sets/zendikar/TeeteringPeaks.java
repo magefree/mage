@@ -49,7 +49,7 @@ public class TeeteringPeaks extends CardImpl<TeeteringPeaks> {
 	public TeeteringPeaks(UUID ownerId) {
 		super(ownerId, 226, "Teetering Peaks", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ZEN";
-		this.addAbility(EntersBattlefieldTappedAbility.getInstance());
+		this.addAbility(new EntersBattlefieldTappedAbility());
 		Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), false);
 		ability.addTarget(new TargetCreaturePermanent());
 		this.addAbility(ability);

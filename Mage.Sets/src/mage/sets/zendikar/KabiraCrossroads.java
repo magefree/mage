@@ -46,7 +46,7 @@ public class KabiraCrossroads extends CardImpl<KabiraCrossroads> {
 	public KabiraCrossroads(UUID ownerId) {
 		super(ownerId, 216, "Kabira Crossroads", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ZEN";
-		this.addAbility(EntersBattlefieldTappedAbility.getInstance());
+		this.addAbility(new EntersBattlefieldTappedAbility());
 		this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2), false));
 		this.addAbility(new WhiteManaAbility());
 	}
