@@ -112,18 +112,6 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 		this.cardNumber = card.getCardNumber();
 	}
 
-//	@Override
-//	public boolean moveToZone(Zone zone, Game game, boolean flag) {
-//		ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), this.getControllerId(), Zone.BATTLEFIELD, zone);
-//		if (!game.replaceEvent(event)) {
-//			if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
-//				CardImpl card = (CardImpl) game.getCard(objectId);
-//				return card.moveToZone(event.getToZone(), controllerId, game, flag);
-//			}
-//		}
-//		return false;
-//	}
-
 	@Override
 	public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag) {
 		Zone fromZone = game.getZone(objectId);

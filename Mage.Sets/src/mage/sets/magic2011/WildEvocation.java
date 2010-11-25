@@ -127,7 +127,7 @@ class WildEvocationEffect extends OneShotEffect<WildEvocationEffect> {
 			cards.add(card);
 			player.revealCards(cards, game);
 			if (card.getCardType().contains(CardType.LAND)) {
-				card.putOntoBattlefield(game, Zone.HAND, player.getId());
+				card.putOntoBattlefield(game, Zone.HAND, source.getId(), player.getId());
 			}
 			else {
 				player.cast(card.getSpellAbility(), game, true);

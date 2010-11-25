@@ -31,7 +31,7 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.common.EntersBattlefieldStaticAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.TapSourceUnlessControlsEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.RedManaAbility;
@@ -57,7 +57,7 @@ public class DragonskullSummit extends CardImpl<DragonskullSummit> {
 	public DragonskullSummit(UUID ownerId) {
 		super(ownerId, 223, "Dragonskull Summit", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "M10";
-		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceUnlessControlsEffect(filter), "tapped unless you control a " + filter.getMessage()));
+		this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessControlsEffect(filter), "tapped unless you control a " + filter.getMessage()));
 		this.addAbility(new BlackManaAbility());
 		this.addAbility(new RedManaAbility());
 	}

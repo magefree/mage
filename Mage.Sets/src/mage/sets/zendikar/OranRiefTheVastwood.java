@@ -34,11 +34,10 @@ import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldStaticAbility;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.counters.PlusOneCounter;
@@ -55,7 +54,7 @@ public class OranRiefTheVastwood extends CardImpl<OranRiefTheVastwood> {
 	public OranRiefTheVastwood(UUID ownerId) {
 		super(ownerId, 221, "Oran-Rief, the Vastwood", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ZEN";
-		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
+		this.addAbility(EntersBattlefieldTappedAbility.getInstance());
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new OranRiefTheVastwoodEffect(), new TapSourceCost()));
 	}

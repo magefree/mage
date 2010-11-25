@@ -34,12 +34,11 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldStaticAbility;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.BecomesCreatureSourceEOTEffect;
 import mage.abilities.effects.common.BoostPowerXSourceEffect;
-import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
@@ -54,7 +53,7 @@ public class LavaclawReaches extends CardImpl<LavaclawReaches> {
 	public LavaclawReaches(UUID ownerId) {
 		super(ownerId, 139, "Lavaclaw Reaches", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "WWK";
-		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
+		this.addAbility(EntersBattlefieldTappedAbility.getInstance());
 		this.addAbility(new BlackManaAbility());
 		this.addAbility(new RedManaAbility());
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new LavaclawReachesToken(), "land"), new ManaCostsImpl("{1}{B}{R}")));

@@ -26,53 +26,42 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.abilities.common;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.TapSourceUnlessControlsEffect;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.BlueManaAbility;
-import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
-import mage.filter.common.FilterLandPermanent;
+import java.io.ObjectStreamException;
+import mage.Constants.Zone;
+import mage.abilities.StaticAbility;
+import mage.abilities.effects.EntersBattlefieldEffect;
+import mage.abilities.effects.common.TapSourceEffect;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DrownedCatacomb extends CardImpl<DrownedCatacomb> {
+public class EntersBattlefieldTappedAbility extends StaticAbility<EntersBattlefieldTappedAbility> {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent();
+	private static final EntersBattlefieldTappedAbility fINSTANCE =  new EntersBattlefieldTappedAbility();
 
-	static {
-		filter.getSubtype().add("Swamp");
-		filter.getSubtype().add("Island");
-		filter.setScopeSubtype(ComparisonScope.Any);
-		filter.setMessage("Island or a Swamp");
+	private Object readResolve() throws ObjectStreamException {
+		return fINSTANCE;
 	}
 
-	public DrownedCatacomb(UUID ownerId) {
-		super(ownerId, 224, "Drowned Catacomb", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "M10";
-		this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessControlsEffect(filter), "tapped unless you control a " + filter.getMessage()));
-		this.addAbility(new BlackManaAbility());
-		this.addAbility(new BlueManaAbility());
+	public static EntersBattlefieldTappedAbility getInstance() {
+		return fINSTANCE;
 	}
 
-	public DrownedCatacomb(final DrownedCatacomb card) {
-		super(card);
+	private EntersBattlefieldTappedAbility() {
+		super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new TapSourceEffect()));
 	}
 
 	@Override
-	public DrownedCatacomb copy() {
-		return new DrownedCatacomb(this);
+	public String getRule() {
+		return "{this} enters the battlefield tapped";
 	}
 
 	@Override
-	public String getArt() {
-		return "121655_typ_reg_sty_010.jpg";
+	public EntersBattlefieldTappedAbility copy() {
+		return fINSTANCE;
 	}
+
 }

@@ -79,7 +79,7 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect<SearchLibraryPutI
 				for (UUID cardId: (List<UUID>)target.getTargets()) {
 					Card card = player.getLibrary().remove(cardId, game);
 					if (card != null) {
-						if (card.putOntoBattlefield(game, Zone.HAND, source.getControllerId())) {
+						if (card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId())) {
 							if (tapped) {
 								Permanent permanent = game.getPermanent(card.getId());
 								if (permanent != null)

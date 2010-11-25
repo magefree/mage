@@ -236,24 +236,29 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 			if (abilities.containsKey(ShroudAbility.getInstance().getId()))
 				return false;
 
-			for (ProtectionAbility ability: abilities.getProtectionAbilities()) {
-				if (!ability.canTarget(source))
-					return false;
-			}
+			if (hasProtectionFrom(source))
+				return false;
 		}
 
 		return true;
 	}
 
-	protected boolean drawCard(Game game) {
-//		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DRAW_CARD, null, playerId))) {
-			Card card = getLibrary().removeFromTop(game);
-			if (card != null) {
-				card.moveToZone(Zone.HAND, null, game, false);
-				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DREW_CARD, card.getId(), playerId));
+	@Override
+	public boolean hasProtectionFrom(MageObject source) {
+		for (ProtectionAbility ability: abilities.getProtectionAbilities()) {
+			if (!ability.canTarget(source))
 				return true;
-			}
-//		}
+		}
+		return false;
+	}
+
+	protected boolean drawCard(Game game) {
+		Card card = getLibrary().removeFromTop(game);
+		if (card != null) {
+			card.moveToZone(Zone.HAND, null, game, false);
+			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DREW_CARD, card.getId(), playerId));
+			return true;
+		}
 		return false;
 	}
 
@@ -381,7 +386,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), playerId))) {
 			game.bookmarkState();
 			removeFromHand(card, game);
-			if (card.putOntoBattlefield(game, Zone.HAND, playerId)) {
+			if (card.putOntoBattlefield(game, Zone.HAND, null, playerId)) {
 				landsPlayed++;
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED, card.getId(), playerId));
 				game.fireInformEvent(name + " plays " + card.getName());

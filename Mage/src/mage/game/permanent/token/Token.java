@@ -80,10 +80,10 @@ public class Token extends MageObjectImpl<Token> {
 		return new Token(this);
 	}
 
-	public boolean putOntoBattlefield(Game game, UUID controllerId) {
+	public boolean putOntoBattlefield(Game game, UUID sourceId, UUID controllerId) {
 		PermanentToken permanent = new PermanentToken(this, controllerId);
 		game.getBattlefield().addPermanent(permanent);
-		permanent.entersBattlefield(game);
+		permanent.entersBattlefield(sourceId, game);
 		game.applyEffects();
 		game.fireEvent(new ZoneChangeEvent(permanent, controllerId, Zone.OUTSIDE, Zone.BATTLEFIELD));
 		return true;

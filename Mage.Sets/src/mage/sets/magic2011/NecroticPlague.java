@@ -38,7 +38,6 @@ import mage.Constants.SubLayer;
 import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -172,7 +171,7 @@ class NecroticPlagueEffect2 extends OneShotEffect<NecroticPlagueEffect2> {
 			if (controller.choose(Outcome.Detriment, target, game)) {
 				Card card = game.getCard(cardId);
 				if (card != null) {
-					card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getControllerId());
+					card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
 					Permanent permanent = game.getPermanent(target.getFirstTarget());
 					if (permanent != null) {
 						return permanent.addAttachment(cardId, game);

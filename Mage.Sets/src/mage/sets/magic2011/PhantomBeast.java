@@ -39,7 +39,6 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -90,12 +89,9 @@ public class PhantomBeast extends CardImpl<PhantomBeast> {
 
 		@Override
 		public boolean checkTrigger(GameEvent event, Game game) {
-			Permanent perm = game.getPermanent(sourceId);
-			if (perm != null) {
-				if (event.getTargetId().equals(perm.getId()) && event.getType() == EventType.TARGETED) {
-					trigger(game, event.getPlayerId());
-					return true;
-				}
+			if (event.getType() == EventType.TARGETED && event.getTargetId().equals(sourceId)) {
+				trigger(game, event.getPlayerId());
+				return true;
 			}
 			return false;
 		}

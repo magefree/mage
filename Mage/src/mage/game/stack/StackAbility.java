@@ -98,7 +98,7 @@ public class StackAbility implements StackObject, Ability {
 	public void counter(UUID sourceId, Game game) {
 		//20100716 - 603.8
 		if (ability instanceof StateTriggeredAbility) {
-			((StateTriggeredAbility)ability).counter();
+			((StateTriggeredAbility)ability).counter(game);
 		}
 	}
 

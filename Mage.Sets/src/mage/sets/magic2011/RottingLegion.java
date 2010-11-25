@@ -32,8 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldStaticAbility;
-import mage.abilities.effects.common.TapSourceEffect;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -50,7 +49,7 @@ public class RottingLegion extends CardImpl<RottingLegion> {
 		this.power = new MageInt(4);
 		this.toughness = new MageInt(5);
 
-		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
+		this.addAbility(EntersBattlefieldTappedAbility.getInstance());
 	}
 
 	public RottingLegion(final RottingLegion card) {

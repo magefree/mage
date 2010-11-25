@@ -57,7 +57,7 @@ public interface Card extends MageObject {
 
 	public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag);
 	public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game);
-	public boolean putOntoBattlefield(Game game, Zone fromZone, UUID controllerId);
+	public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId);
 	public void checkTriggers(Zone zone, GameEvent event, Game game);
 
 	@Override

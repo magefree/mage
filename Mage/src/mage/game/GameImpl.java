@@ -372,7 +372,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 				if (card.getAbilities().containsKey(LeylineAbility.getInstance().getId())) {
 					if (player.chooseUse(Outcome.PutCardInPlay, "Do you wish to put " + card.getName() + " on the battlefield?", this)) {
 						player.getHand().remove(card);
-						card.putOntoBattlefield(this, Zone.HAND, player.getId());
+						card.putOntoBattlefield(this, Zone.HAND, null, player.getId());
 					}
 				}
 			}
@@ -555,7 +555,6 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		for (Player player: state.getPlayers().values()) {
 			if (!player.hasLost() && (player.getLife() <= 0 || player.isEmptyDraw() || player.getCounters().getCount("Poison") >= 10)) {
 				player.lost(this);
-				return false;
 			}
 		}
 		for (Permanent perm: getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
@@ -593,7 +592,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 				}
 			}
 		}
-		//20091005 - 704.5n
+		//20091005 - 704.5n, 702.14c
 		for (Permanent perm: getBattlefield().getAllActivePermanents(filterAura)) {
 			if (perm.getAttachedTo() == null) {
 				if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
@@ -608,7 +607,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 				}
 				else {
 					Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
-					if (!auraFilter.match(attachedTo)) {
+					if (!auraFilter.match(attachedTo) || attachedTo.hasProtectionFrom(perm)) {
 						if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
 							somethingHappened = true;
 					}
@@ -628,14 +627,14 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 				}
 			}
 		}
-		//20091005 - 704.5p
+		//20091005 - 704.5p, 702.14d
 		for (Permanent perm: getBattlefield().getAllActivePermanents(filterEquipment)) {
 			if (perm.getAttachedTo() != null) {
 				Permanent creature = getPermanent(perm.getAttachedTo());
 				if (creature == null) {
 					perm.attachTo(null);
 				}
-				else if (!creature.getCardType().contains(CardType.CREATURE)) {
+				else if (!creature.getCardType().contains(CardType.CREATURE) || creature.hasProtectionFrom(perm)) {
 					if (creature.removeAttachment(perm.getId(), this))
 						somethingHappened = true;
 				}
@@ -647,7 +646,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 				if (land == null) {
 					perm.attachTo(null);
 				}
-				else if (!land.getCardType().contains(CardType.LAND)) {
+				else if (!land.getCardType().contains(CardType.LAND) || land.hasProtectionFrom(perm)) {
 					if (land.removeAttachment(perm.getId(), this))
 						somethingHappened = true;
 				}

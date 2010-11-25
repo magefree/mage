@@ -177,13 +177,13 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 		for (T ability: abilities) {
 			boolean found = false;
 			for (T test: this) {
-				if (ability.getRule().equals(test.getRule())) {
+				if (ability.getId().equals(test.getId()) || ability.getRule().equals(test.getRule())) {
 					found = true;
 					break;
 				}
-				if (!found)
-					return false;
 			}
+			if (!found)
+				return false;
 		}
 		return true;
 	}

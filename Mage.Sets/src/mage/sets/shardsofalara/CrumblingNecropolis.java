@@ -31,8 +31,7 @@ package mage.sets.shardsofalara;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.common.EntersBattlefieldStaticAbility;
-import mage.abilities.effects.common.TapSourceEffect;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.RedManaAbility;
@@ -47,7 +46,7 @@ public class CrumblingNecropolis extends CardImpl<CrumblingNecropolis> {
 	public CrumblingNecropolis(UUID ownerId) {
 		super(ownerId, 222, "Crumbling Necropolis", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ALA";
-		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
+		this.addAbility(EntersBattlefieldTappedAbility.getInstance());
 		this.addAbility(new RedManaAbility());
 		this.addAbility(new BlueManaAbility());
 		this.addAbility(new BlackManaAbility());

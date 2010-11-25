@@ -112,7 +112,7 @@ class CultivateEffect extends OneShotEffect<CultivateEffect> {
 				target2.setRequired(true);
 				player.choose(revealed, target2, game);
 				Card card = revealed.get(target2.getFirstTarget(), game);
-				card.putOntoBattlefield(game, Zone.LIBRARY, source.getControllerId());
+				card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
 				revealed.remove(card);
 				Permanent permanent = game.getPermanent(card.getId());
 				if (permanent != null)
@@ -122,7 +122,7 @@ class CultivateEffect extends OneShotEffect<CultivateEffect> {
 			}
 			else if (target.getTargets().size() == 1) {
 				Card card = revealed.getCards(game).iterator().next();
-				card.putOntoBattlefield(game, Zone.LIBRARY, source.getControllerId());
+				card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
 				Permanent permanent = game.getPermanent(card.getId());
 				if (permanent != null)
 					permanent.setTapped(true);

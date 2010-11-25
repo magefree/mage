@@ -310,6 +310,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 			if (event.getType() == EventType.ZONE_CHANGE) {
 				ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
 				if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
+					zEvent.getTarget().checkTriggers(zEvent.getFromZone(), event, game);
 					zEvent.getTarget().checkTriggers(zEvent.getToZone(), event, game);
 				}
 			}

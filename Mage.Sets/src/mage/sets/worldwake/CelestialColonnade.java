@@ -33,11 +33,10 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldStaticAbility;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.BecomesCreatureSourceEOTEffect;
-import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.BlueManaAbility;
@@ -54,7 +53,7 @@ public class CelestialColonnade extends CardImpl<CelestialColonnade> {
 	public CelestialColonnade(UUID ownerId) {
 		super(ownerId, 133, "Celestial Colonnade", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "WWK";
-		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
+		this.addAbility(EntersBattlefieldTappedAbility.getInstance());
 		this.addAbility(new BlueManaAbility());
 		this.addAbility(new WhiteManaAbility());
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new CelestialColonnadeToken(), "land"), new ManaCostsImpl("{3}{W}{U}")));

@@ -67,7 +67,7 @@ public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
 	@Override
 	public boolean apply(Game game, Ability source) {
 		for (int i = 0; i < amount; i++) {
-			token.putOntoBattlefield(game, source.getControllerId());
+			token.putOntoBattlefield(game, source.getId(), source.getControllerId());
 		}
 		return true;
 	}

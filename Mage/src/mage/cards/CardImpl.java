@@ -210,7 +210,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 				case BATTLEFIELD:
 					PermanentCard permanent = new PermanentCard(this, ownerId);
 					game.getBattlefield().addPermanent(permanent);
-					permanent.entersBattlefield(game);
+					permanent.entersBattlefield(sourceId, game);
 					game.applyEffects();
 					if (flag)
 						permanent.setTapped(true);
@@ -242,11 +242,11 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 	}
 
 	@Override
-	public boolean putOntoBattlefield(Game game, Zone fromZone, UUID controllerId) {
+	public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId) {
 		PermanentCard permanent = new PermanentCard(this, controllerId);
 		game.getBattlefield().addPermanent(permanent);
 		game.setZone(objectId, Zone.BATTLEFIELD);
-		permanent.entersBattlefield(game);
+		permanent.entersBattlefield(sourceId, game);
 		game.applyEffects();
 		game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));
 		return true;

@@ -38,10 +38,11 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.EntersBattlefieldStaticAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.AddPlusOneCountersSourceEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.CardImpl;
@@ -65,7 +66,8 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 		this.power = new MageInt(0);
 		this.toughness = new MageInt(0);
 
-		this.addAbility(new EntersBattlefieldStaticAbility(new ProteanHydraEffect1(), "with X +1/+1 counters on it"));
+		this.addAbility(new EntersBattlefieldAbility(new ProteanHydraEffect1(), "with X +1/+1 counters on it"));
+		this.addAbility(new ProteanHydraAbility());
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProteanHydraEffect2()));
 	}
 
@@ -95,9 +97,9 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 
 		@Override
 		public boolean apply(Game game, Ability source) {
-			int amount = source.getCosts().getVariableCosts().get(0).getAmount();
 			Permanent permanent = game.getPermanent(source.getSourceId());
 			if (permanent != null) {
+				int amount = source.getManaCosts().getVariableCosts().get(0).getAmount();
 				permanent.addCounters(new PlusOneCounter(amount));
 			}
 			return true;
@@ -112,6 +114,7 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 		public String getText(Ability source) {
 			return "Protean Hydra enters the battlefield with X +1/+1 counters on it";
 		}
+
 	}
 
 	class ProteanHydraEffect2 extends PreventionEffectImpl<ProteanHydraEffect2> {
@@ -154,7 +157,7 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 		@Override
 		public boolean applies(GameEvent event, Ability source, Game game) {
 			if (super.applies(event, source, game)) {
-				if (event.getTargetId().equals(source.getId())) {
+				if (event.getTargetId().equals(source.getSourceId())) {
 					return true;
 				}
 			}
@@ -171,7 +174,7 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 	class ProteanHydraAbility extends TriggeredAbilityImpl<ProteanHydraAbility> {
 
 		public ProteanHydraAbility() {
-			super(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new ProteanHydraDelayedTriggeredAbility()), true);
+			super(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new ProteanHydraDelayedTriggeredAbility()), false);
 		}
 
 		public ProteanHydraAbility(final ProteanHydraAbility ability) {

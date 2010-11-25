@@ -31,7 +31,9 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.common.EntersBattlefieldStaticAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.TapSourceUnlessControlsEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
@@ -57,7 +59,7 @@ public class GlacialFortress extends CardImpl<GlacialFortress> {
 	public GlacialFortress(UUID ownerId) {
 		super(ownerId, 226, "Glacial Fortress", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "M10";
-		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceUnlessControlsEffect(filter), "tapped unless you control a " + filter.getMessage()));
+		this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessControlsEffect(filter), "tapped unless you control a " + filter.getMessage()));
 		this.addAbility(new BlueManaAbility());
 		this.addAbility(new WhiteManaAbility());
 	}

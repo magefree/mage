@@ -39,22 +39,22 @@ import mage.game.Game;
  */
 public abstract class StateTriggeredAbility<T extends StateTriggeredAbility<T>> extends TriggeredAbilityImpl<T> {
 
-	protected boolean triggered;
-
 	public StateTriggeredAbility(Zone zone, Effect effect) {
 		super(zone, effect);
 	}
 
 	public StateTriggeredAbility(final StateTriggeredAbility ability) {
 		super(ability);
-		this.triggered = ability.triggered;
 	}
 
 	@Override
 	public void trigger(Game game, UUID controllerId) {
 		//20100716 - 603.8
+		Boolean triggered = (Boolean) game.getState().getValue(this.id.toString() + "triggered");
+		if (triggered == null)
+			triggered = Boolean.FALSE;
 		if (!triggered) {
-			triggered = true;
+			game.getState().setValue(this.id.toString() + "triggered", Boolean.TRUE);
 			super.trigger(game, controllerId);
 		}
 	}
@@ -62,11 +62,11 @@ public abstract class StateTriggeredAbility<T extends StateTriggeredAbility<T>> 
 	@Override
 	public boolean resolve(Game game) {
 		//20100716 - 603.8
-		triggered = false;
+		game.getState().setValue(this.id.toString() + "triggered", Boolean.FALSE);
 		return super.resolve(game);
 	}
 
-	public void counter() {
-		triggered = false;
+	public void counter(Game game) {
+		game.getState().setValue(this.id.toString() + "triggered", Boolean.FALSE);
 	}
 }

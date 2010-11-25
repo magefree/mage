@@ -31,8 +31,7 @@ package mage.sets.shardsofalara;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.common.EntersBattlefieldStaticAbility;
-import mage.abilities.effects.common.TapSourceEffect;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
@@ -47,7 +46,7 @@ public class SavageLands extends CardImpl<SavageLands> {
 	public SavageLands(UUID ownerId) {
 		super(ownerId, 228, "Savage Lands", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ALA";
-		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
+		this.addAbility(EntersBattlefieldTappedAbility.getInstance());
 		this.addAbility(new RedManaAbility());
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new BlackManaAbility());

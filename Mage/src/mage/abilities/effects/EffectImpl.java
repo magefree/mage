@@ -28,6 +28,7 @@
 
 package mage.abilities.effects;
 
+import java.util.UUID;
 import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
@@ -38,16 +39,24 @@ import mage.abilities.Ability;
  */
 public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 
+	protected final UUID id;
 	protected final Outcome outcome;
 	protected EffectType effectType;
 
 	public EffectImpl(Outcome outcome) {
+		this.id = UUID.randomUUID();
 		this.outcome = outcome;
 	}
 
 	public EffectImpl(final EffectImpl effect) {
+		this.id = effect.id;
 		this.outcome = effect.outcome;
 		this.effectType = effect.effectType;
+	}
+
+	@Override
+	public UUID getId() {
+		return id;
 	}
 
 	@Override

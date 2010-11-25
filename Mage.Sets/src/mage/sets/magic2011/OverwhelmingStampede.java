@@ -107,9 +107,8 @@ class OverwhelmingStampedeEffect extends ContinuousEffectImpl<OverwhelmingStampe
 					}
 					break;
 			}
-			return true;
 		}
-		return false;
+		return true;
 	}
 
 	@Override

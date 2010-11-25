@@ -32,10 +32,9 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.common.EntersBattlefieldStaticAbility;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainProtectionFromColorTargetEffect;
-import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
@@ -50,7 +49,7 @@ public class SejiriSteppe extends CardImpl<SejiriSteppe> {
 	public SejiriSteppe(UUID ownerId) {
 		super(ownerId, 142, "Sejiri Steppe", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "WWK";
-		this.addAbility(new EntersBattlefieldStaticAbility(new TapSourceEffect(), "tapped"));
+		this.addAbility(EntersBattlefieldTappedAbility.getInstance());
 		EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), false);
 		ability.addTarget(new TargetControlledCreaturePermanent());
 		ability.addChoice(new ChoiceColor());

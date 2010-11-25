@@ -29,6 +29,7 @@
 package mage.abilities.effects;
 
 import java.io.Serializable;
+import java.util.UUID;
 import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
@@ -40,6 +41,7 @@ import mage.game.Game;
  */
 public interface Effect<T extends Effect<T>> extends Serializable {
 
+	public UUID getId();
 	public String getText(Ability source);
 	public boolean apply(Game game, Ability source);
 	public Outcome getOutcome();

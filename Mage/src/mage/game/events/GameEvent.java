@@ -97,6 +97,7 @@ public class GameEvent {
 		SEARCH_LIBRARY, LIBRARY_SEARCHED,
 
 		//permanent events
+		ENTERS_THE_BATTLEFIELD,
 		TAP, TAPPED,
 		UNTAP, UNTAPPED,
 		FLIP, FLIPPED,

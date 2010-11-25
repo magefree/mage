@@ -67,6 +67,7 @@ public interface Permanent extends Card {
 	public UUID getControllerId();
 	public boolean changeControllerId(UUID controllerId, Game game);
 	public boolean canBeTargetedBy(MageObject source);
+	public boolean hasProtectionFrom(MageObject source);
 	public int getDamage();
 	public int damage(int damage, UUID sourceId, Game game, boolean preventable);
 	public void removeAllDamage(Game game);
@@ -77,7 +78,7 @@ public interface Permanent extends Card {
 	public void reset(Game game);
 	public boolean destroy(UUID sourceId, Game game, boolean noRegen);
 	public boolean sacrifice(UUID sourceId, Game game);
-	public void entersBattlefield(Game game);
+	public void entersBattlefield(UUID sourceId, Game game);
 	public String getValue();
 	public void setArt(String art);
 

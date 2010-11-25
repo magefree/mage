@@ -31,33 +31,25 @@ package mage.abilities.common;
 import mage.Constants.Zone;
 import mage.abilities.StaticAbility;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.EntersBattlefieldEffect;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EntersBattlefieldStaticAbility extends StaticAbility<EntersBattlefieldStaticAbility> {
+public class EntersBattlefieldAbility extends StaticAbility<EntersBattlefieldAbility> {
 
-	protected String rule;
-
-	public EntersBattlefieldStaticAbility(Effect effect, String rule) {
-		super(Zone.BATTLEFIELD, effect);
-		this.rule = rule;
+	public EntersBattlefieldAbility(Effect effect, String rule) {
+		super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect, rule));
 	}
 
-	public EntersBattlefieldStaticAbility(EntersBattlefieldStaticAbility ability) {
+	public EntersBattlefieldAbility(EntersBattlefieldAbility ability) {
 		super(ability);
-		this.rule = ability.rule;
 	}
 
 	@Override
-	public EntersBattlefieldStaticAbility copy() {
-		return new EntersBattlefieldStaticAbility(this);
-	}
-
-	@Override
-	public String getRule() {
-		return "{this} enters the battlefield " + rule + ".";
+	public EntersBattlefieldAbility copy() {
+		return new EntersBattlefieldAbility(this);
 	}
 
 }

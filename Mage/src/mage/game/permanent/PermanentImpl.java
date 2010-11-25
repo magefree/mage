@@ -36,12 +36,7 @@ import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
-import mage.abilities.StaticAbility;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.EntersBattlefieldStaticAbility;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -279,7 +274,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		if (!phasedIn) {
 			if (!replaceEvent(EventType.PHASE_IN, game)) {
 				this.phasedIn = true;
-				addEffects(game);
+//				addEffects(game);
 				fireEvent(EventType.PHASED_IN, game);
 				return true;
 			}
@@ -470,9 +465,9 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	}
 
 	@Override
-	public void entersBattlefield(Game game) {
+	public void entersBattlefield(UUID sourceId, Game game) {
 		controlledFromStartOfTurn = false;
-		addEffects(game);
+		game.replaceEvent(GameEvent.getEvent(EventType.ENTERS_THE_BATTLEFIELD, objectId, sourceId, ownerId));
 	}
 
 	@Override
@@ -481,47 +476,38 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 			if (abilities.containsKey(ShroudAbility.getInstance().getId()))
 				return false;
 
-			for (ProtectionAbility ability: abilities.getProtectionAbilities()) {
-				if (!ability.canTarget(source))
-					return false;
-			}
+			if (hasProtectionFrom(source))
+				return false;
 		}
 
 		return true;
+	}
+
+	@Override
+	public boolean hasProtectionFrom(MageObject source) {
+		for (ProtectionAbility ability: abilities.getProtectionAbilities()) {
+			if (!ability.canTarget(source))
+				return true;
+		}
+		return false;
 	}
 
 	protected boolean canDamage(MageObject source) {
-		for (ProtectionAbility ability: abilities.getProtectionAbilities()) {
-			if (!ability.canTarget(source))
-				return false;
-		}
-		return true;
+		return (!hasProtectionFrom(source));
 	}
 
-	protected void addEffects(Game game) {
-//		for (StaticAbility ability: abilities.getStaticAbilities(Zone.BATTLEFIELD)) {
-//			if (ability.activate(game, false)) {
+//	protected void addEffects(Game game) {
+//		for (Ability ability: abilities.getStaticAbilities(Zone.BATTLEFIELD)) {
+//			if (ability instanceof EntersBattlefieldStaticAbility) {
 //				for (Effect effect: ability.getEffects()) {
-//					if (effect instanceof ContinuousEffect)
-//						game.addEffect((ContinuousEffect)effect, ability);
-//					else if (ability instanceof EntersBattlefieldStaticAbility && effect instanceof OneShotEffect) {
+//					if (effect instanceof OneShotEffect) {
 //						//20100423 - 603.6e
 //						effect.apply(game, ability);
 //					}
 //				}
 //			}
 //		}
-		for (Ability ability: abilities.getStaticAbilities(Zone.BATTLEFIELD)) {
-			if (ability instanceof EntersBattlefieldStaticAbility) {
-				for (Effect effect: ability.getEffects()) {
-					if (effect instanceof OneShotEffect) {
-						//20100423 - 603.6e
-						effect.apply(game, ability);
-					}
-				}
-			}
-		}
-	}
+//	}
 
 	@Override
 	public boolean destroy(UUID sourceId, Game game, boolean noRegen) {
@@ -589,10 +575,8 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 			if (!ability.canBlock(this, game))
 				return false;
 		}
-		for (ProtectionAbility ability: attacker.getAbilities().getProtectionAbilities()) {
-			if (!ability.canTarget(this))
-				return false;
-		}
+		if (attacker.hasProtectionFrom(this))
+			return false;
 		return true;
 	}
 

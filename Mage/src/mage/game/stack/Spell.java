@@ -95,7 +95,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 		}
 		else if (card.getCardType().contains(CardType.ENCHANTMENT) && card.getSubtype().contains("Aura")) {
 			if (ability.getTargets().stillLegal(ability, game)) {
-				if (card.putOntoBattlefield(game, Zone.HAND, controllerId)) {
+				if (card.putOntoBattlefield(game, Zone.HAND, ability.getId(), controllerId)) {
 					return ability.resolve(game);
 				}
 				return false;
@@ -105,7 +105,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 			return false;
 		}
 		else {
-			result = card.putOntoBattlefield(game, Zone.HAND, controllerId);
+			result = card.putOntoBattlefield(game, Zone.HAND, ability.getId(), controllerId);
 			resolveKicker(game);
 			return result;
 		}
@@ -298,7 +298,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	}
 
 	@Override
-	public boolean putOntoBattlefield(Game game, Zone fromZone, UUID controllerId) {
+	public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 

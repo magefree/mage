@@ -38,9 +38,6 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DiscardTargetEffect;
-import mage.abilities.effects.common.DrawCardAllEffect;
-import mage.abilities.effects.common.DrawCardTargetEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.common.SearchLibraryPutOnLibraryEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -104,7 +101,7 @@ class LilianaVessEffect extends OneShotEffect<LilianaVessEffect> {
 			for (Card card: player.getGraveyard().getCards(game)) {
 				if (card.getCardType().contains(CardType.CREATURE)) {
 					player.getGraveyard().remove(card);
-					card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getControllerId());
+					card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
 				}
 			}
 		}

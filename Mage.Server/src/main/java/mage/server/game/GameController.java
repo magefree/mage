@@ -219,7 +219,7 @@ public class GameController implements GameCallback {
 			deck = Deck.load(deckList);
 			game.loadCards(deck.getCards(), playerId);
 			for (Card card: deck.getCards()) {
-				card.putOntoBattlefield(game, Zone.OUTSIDE, playerId);
+				card.putOntoBattlefield(game, Zone.OUTSIDE, null, playerId);
 			}
 		} catch (GameException ex) {
 			logger.warning(ex.getMessage());
@@ -477,7 +477,7 @@ public class GameController implements GameCallback {
 	 */
 	private void swapWithAnyCard(Game game, Player player, Card card, Zone zone) {
 		if (zone.equals(Zone.BATTLEFIELD)) {
-			card.putOntoBattlefield(game, Zone.OUTSIDE, player.getId());			
+			card.putOntoBattlefield(game, Zone.OUTSIDE, null, player.getId());
 		} else {
 			card.moveToZone(zone, null, game, false);
 		}
