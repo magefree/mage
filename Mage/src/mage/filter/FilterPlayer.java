@@ -31,6 +31,8 @@ package mage.filter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.Constants.TargetController;
+import mage.game.Game;
 import mage.players.Player;
 
 /**
@@ -41,6 +43,7 @@ public class FilterPlayer extends FilterImpl<Player, FilterPlayer> implements Fi
 
 	protected List<UUID> playerId = new ArrayList<UUID>();
 	protected boolean notPlayer;
+	protected TargetController playerTarget = TargetController.ANY;
 
 	public FilterPlayer() {
 		super("player");
@@ -52,6 +55,7 @@ public class FilterPlayer extends FilterImpl<Player, FilterPlayer> implements Fi
 			this.playerId.add(pId);
 		}
 		this.notPlayer = filter.notPlayer;
+		this.playerTarget = filter.playerTarget;
 	}
 
 	@Override
@@ -63,12 +67,40 @@ public class FilterPlayer extends FilterImpl<Player, FilterPlayer> implements Fi
 		return !notFilter;
 	}
 
+	public boolean match(Player player, UUID playerId, Game game) {
+		if (!this.match(player))
+			return notFilter;
+
+		if (playerTarget != TargetController.ANY && playerId != null) {
+			switch(playerTarget) {
+				case YOU:
+					if (!player.getId().equals(playerId))
+						return notFilter;
+					break;
+				case OPPONENT:
+					if (!game.getOpponents(playerId).contains(player.getId()))
+						return notFilter;
+					break;
+				case NOT_YOU:
+					if (player.getId().equals(playerId))
+						return notFilter;
+					break;
+			}
+		}
+
+		return !notFilter;
+	}
+
 	public List<UUID> getPlayerId() {
 		return playerId;
 	}
 
 	public void setNotPlayer(boolean notPlayer) {
 		this.notPlayer = notPlayer;
+	}
+
+	public void setPlayerTarget(TargetController playerTarget) {
+		this.playerTarget = playerTarget;
 	}
 
 	@Override

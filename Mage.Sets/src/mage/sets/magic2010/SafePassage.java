@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.abilities.effects.common.PreventAllDamageToEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureOrPlayer;
@@ -42,11 +43,18 @@ import mage.filter.common.FilterCreatureOrPlayer;
  */
 public class SafePassage  extends CardImpl<SafePassage> {
 
+	private static FilterCreatureOrPlayer filter = new FilterCreatureOrPlayer("you and creatures you control");
+
+	static {
+		filter.getCreatureFilter().setTargetController(TargetController.YOU);
+		filter.getPlayerFilter().setPlayerTarget(TargetController.YOU);
+	}
+
 	public SafePassage(UUID ownerId) {
 		super(ownerId, 28, "Safe Passage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
 		this.expansionSetCode = "M10";
 		this.color.setWhite(true);
-		this.getSpellAbility().addEffect(new PreventAllDamageToEffect(Duration.EndOfTurn, new FilterCreatureOrPlayer("you and creatures you control", ownerId)));
+		this.getSpellAbility().addEffect(new PreventAllDamageToEffect(Duration.EndOfTurn, filter));
 	}
 
 	public SafePassage(final SafePassage card) {

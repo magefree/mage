@@ -62,7 +62,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
 	private final static transient Logger logger = Logging.getLogger(AbilityImpl.class.getName());
 
-	protected final UUID id;
+	protected UUID id;
 	protected AbilityType abilityType;
 	protected UUID controllerId;
 	protected UUID sourceId;

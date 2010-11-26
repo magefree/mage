@@ -32,6 +32,7 @@ import mage.Constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.filter.Filter;
+import mage.filter.FilterInPlay;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -43,9 +44,9 @@ import mage.players.Player;
  */
 public class PreventAllDamageToEffect extends PreventionEffectImpl<PreventAllDamageToEffect> {
 
-	protected Filter filter;
+	protected FilterInPlay filter;
 
-	public PreventAllDamageToEffect(Duration duration, Filter filter) {
+	public PreventAllDamageToEffect(Duration duration, FilterInPlay filter) {
 		super(duration);
 		this.filter = filter;
 	}
@@ -81,12 +82,12 @@ public class PreventAllDamageToEffect extends PreventionEffectImpl<PreventAllDam
 		if (super.applies(event, source, game)) {
 			Permanent permanent = game.getPermanent(event.getTargetId());
 			if (permanent != null) {
-				if (filter.match(permanent))
+				if (filter.match(permanent, source.getControllerId(), game))
 					return true;
 			}
 			else {
 				Player player = game.getPlayer(event.getTargetId());
-				if (player != null && filter.match(player))
+				if (player != null && filter.match(player, source.getControllerId(), game))
 					return true;
 			}
 		}

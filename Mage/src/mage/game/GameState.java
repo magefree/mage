@@ -48,6 +48,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 import mage.game.stack.StackObject;
 import mage.game.turn.Turn;
 import mage.game.turn.TurnMods;
@@ -307,11 +308,17 @@ public class GameState implements Serializable, Copyable<GameState> {
 	public void handleEvent(GameEvent event, Game game) {
 		watchers.watch(event, game);
 		if (!replaceEvent(event, game)) {
+			//TODO: this is awkward - improve
 			if (event.getType() == EventType.ZONE_CHANGE) {
 				ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
 				if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-					zEvent.getTarget().checkTriggers(zEvent.getFromZone(), event, game);
-					zEvent.getTarget().checkTriggers(zEvent.getToZone(), event, game);
+					if (zEvent.getTarget() instanceof PermanentCard) {
+						((PermanentCard)zEvent.getTarget()).checkPermanentOnlyTriggers(zEvent, game);
+					}
+					else {
+						zEvent.getTarget().checkTriggers(zEvent.getFromZone(), event, game);
+						zEvent.getTarget().checkTriggers(zEvent.getToZone(), event, game);
+					}
 				}
 			}
 			for (Player player: players.values()) {

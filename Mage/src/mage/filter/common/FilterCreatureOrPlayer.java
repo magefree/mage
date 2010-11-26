@@ -31,6 +31,7 @@ package mage.filter.common;
 import java.util.UUID;
 import mage.filter.Filter;
 import mage.filter.FilterImpl;
+import mage.filter.FilterInPlay;
 import mage.filter.FilterPlayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -40,7 +41,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FilterCreatureOrPlayer extends FilterImpl<Object, FilterCreatureOrPlayer> implements Filter<Object> {
+public class FilterCreatureOrPlayer extends FilterImpl<Object, FilterCreatureOrPlayer> implements FilterInPlay<Object> {
 
 	protected FilterCreaturePermanent creatureFilter;
 	protected FilterPlayer playerFilter;
@@ -80,9 +81,10 @@ public class FilterCreatureOrPlayer extends FilterImpl<Object, FilterCreatureOrP
 		return notFilter;
 	}
 
+	@Override
 	public boolean match(Object o, UUID playerId, Game game) {
 		if (o instanceof Player) {
-			return playerFilter.match((Player)o);
+			return playerFilter.match((Player)o, playerId, game);
 		}
 		else if (o instanceof Permanent) {
 			return creatureFilter.match((Permanent)o, playerId, game);
@@ -90,6 +92,13 @@ public class FilterCreatureOrPlayer extends FilterImpl<Object, FilterCreatureOrP
 		return notFilter;
 	}
 
+	public FilterCreaturePermanent getCreatureFilter() {
+		return this.creatureFilter;
+	}
+
+	public FilterPlayer getPlayerFilter() {
+		return this.playerFilter;
+	}
 
 	@Override
 	public FilterCreatureOrPlayer copy() {

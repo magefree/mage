@@ -35,10 +35,12 @@ import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.keyword.LevelAbility;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
@@ -111,6 +113,21 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 		this.rarity = card.getRarity();
 		this.cardNumber = card.getCardNumber();
 	}
+
+	public void checkPermanentOnlyTriggers(ZoneChangeEvent event, Game game) {
+		// we only want to trigger abilities that are not on the underlying card ie. have been added by another effect
+		// card abilities will get triggered later when the card hits the new zone
+		Card card = game.getCard(objectId).copy();
+		for (TriggeredAbility ability: abilities.getTriggeredAbilities(event.getFromZone())) {
+			if (!card.getAbilities().containsKey(ability.getId()))
+				ability.checkTrigger(event, game);
+		}
+		for (TriggeredAbility ability: abilities.getTriggeredAbilities(event.getToZone())) {
+			if (!card.getAbilities().containsKey(ability.getId()))
+				ability.checkTrigger(event, game);
+		}
+	}
+
 
 	@Override
 	public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag) {

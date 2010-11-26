@@ -40,7 +40,7 @@ import mage.game.events.GameEvent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class PreventionEffectImpl<T extends PreventionEffectImpl<T>> extends ReplacementEffectImpl<T> {
+public abstract class PreventionEffectImpl<T extends PreventionEffectImpl<T>> extends ReplacementEffectImpl<T> implements PreventionEffect<T> {
 
 	public PreventionEffectImpl(Duration duration) {
 		super(duration, Outcome.PreventDamage);

@@ -496,19 +496,6 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		return (!hasProtectionFrom(source));
 	}
 
-//	protected void addEffects(Game game) {
-//		for (Ability ability: abilities.getStaticAbilities(Zone.BATTLEFIELD)) {
-//			if (ability instanceof EntersBattlefieldStaticAbility) {
-//				for (Effect effect: ability.getEffects()) {
-//					if (effect instanceof OneShotEffect) {
-//						//20100423 - 603.6e
-//						effect.apply(game, ability);
-//					}
-//				}
-//			}
-//		}
-//	}
-
 	@Override
 	public boolean destroy(UUID sourceId, Game game, boolean noRegen) {
 		//20091005 - 701.6

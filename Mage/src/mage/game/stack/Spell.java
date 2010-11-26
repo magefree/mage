@@ -283,10 +283,14 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	public void setExpansionSetCode(String expansionSetCode) {}
 
 	@Override
-	public Spell<T> copy() {
-		return new Spell<T>(this);
+	public Spell copy() {
+		return new Spell(this);
 	}
 
+	public Spell copySpell() {
+		return new Spell(this.card.copy(), this.ability.copySpell(), this.controllerId);
+	}
+	
 	@Override
 	public void adjustCosts(Ability ability, Game game) {}
 

@@ -90,4 +90,10 @@ public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
 		return new SpellAbility(this);
 	}
 
+	public SpellAbility copySpell() {
+		SpellAbility spell = new SpellAbility(this);
+		spell.id = UUID.randomUUID();
+		return spell;
+	}
+
 }

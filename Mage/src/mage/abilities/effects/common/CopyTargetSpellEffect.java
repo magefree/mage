@@ -53,7 +53,7 @@ public class CopyTargetSpellEffect extends OneShotEffect<CopyTargetSpellEffect> 
 	public boolean apply(Game game, Ability source) {
 		Spell spell = game.getStack().getSpell(source.getFirstTarget());
 		if (spell != null) {
-			Spell copy = spell.copy();
+			Spell copy = spell.copySpell();
 			copy.setControllerId(source.getControllerId());
 			game.getStack().push(copy);
 			copy.chooseNewTargets(game);

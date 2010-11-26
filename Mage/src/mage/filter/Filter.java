@@ -34,7 +34,7 @@ import java.io.Serializable;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface Filter<T> extends Serializable {
+public interface Filter<E> extends Serializable {
 
 	public enum ComparisonType {
 		GreaterThan, Equal, LessThan
@@ -44,11 +44,11 @@ public interface Filter<T> extends Serializable {
 		Any, All
 	}
 	
-	public boolean match(T o);
+	public boolean match(E o);
 	public String getMessage();
 	public void setMessage(String message);
 	public void setNotFilter(boolean notFilter);
 	
-	public Filter<T> copy();
+	public Filter<E> copy();
 	
 }
