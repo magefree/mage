@@ -93,7 +93,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 	private TransferData data = new TransferData();
 	
 	private boolean isPermanent;
-	private boolean hasSickness = true;
+	private boolean hasSickness;
 	
 	public CardPanel(CardView newGameCard, UUID gameId, boolean loadImage, ActionCallback callback) {
 		this.gameCard = newGameCard;
@@ -103,6 +103,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		
 		if (isPermanent) {
 			this.gamePermanent = (PermanentView) this.gameCard;
+			this.hasSickness = this.gamePermanent.hasSummoningSickness();
 		}
 		
 		//for container debug (don't remove)
@@ -678,6 +679,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 	@Override
 	public void update(PermanentView card) {
 		update((CardView)card);
+		this.hasSickness = card.hasSummoningSickness();
 	}
 
 	@Override
