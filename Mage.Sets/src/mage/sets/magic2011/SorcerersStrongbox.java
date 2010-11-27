@@ -58,7 +58,7 @@ public class SorcerersStrongbox extends CardImpl<SorcerersStrongbox> {
 		Costs costs = new CostsImpl();
 		costs.add(new GenericManaCost(2));
 		costs.add(new TapSourceCost());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(2), costs));
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SorcerersStrongboxEffect(), costs));
 	}
 
 	public SorcerersStrongbox(final SorcerersStrongbox card) {

@@ -57,7 +57,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class SunTitan extends CardImpl<SunTitan> {
 
 	public SunTitan(UUID ownerId) {
-		super(ownerId, 35, "Sun Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
+		super(ownerId, 35, "Sun Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Giant");
 		this.color.setWhite(true);
@@ -117,13 +117,13 @@ class SunTitanAbility extends TriggeredAbilityImpl<SunTitanAbility> {
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-			trigger(game, event.getPlayerId());
+			trigger(game, this.controllerId);
 			return true;
 		}
 		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId()) ) {
 			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
 			if (zEvent.getToZone() == Zone.BATTLEFIELD) {
-				trigger(game, event.getPlayerId());
+				trigger(game, this.controllerId);
 				return true;
 			}
 		}
@@ -132,7 +132,7 @@ class SunTitanAbility extends TriggeredAbilityImpl<SunTitanAbility> {
 
 	@Override
 	public String getRule() {
-		return "Whenever Primeval Titan enters the battlefield or attacks, you may search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library.";
+		return "Whenever Sun Titan enters the battlefield or attacks, you may return target permanent card with converted mana cost 3 or less from your graveyard to the battlefield.";
 	}
 
 }

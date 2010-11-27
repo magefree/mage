@@ -99,7 +99,7 @@ class VengevineAbility extends TriggeredAbilityImpl<VengevineAbility> {
 		if (event.getType() == EventType.SPELL_CAST && event.getPlayerId().equals(controllerId)) {
 			Watcher watcher = game.getState().getWatchers().get(controllerId, "CreatureCast");
 			if (watcher != null && watcher.conditionMet()) {
-				trigger(game, event.getPlayerId());
+				trigger(game, this.controllerId);
 				return true;
 			}
 		}

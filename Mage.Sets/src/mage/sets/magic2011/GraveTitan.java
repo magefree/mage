@@ -95,13 +95,13 @@ class GraveTitanAbility extends TriggeredAbilityImpl<GraveTitanAbility> {
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-			trigger(game, event.getPlayerId());
+			trigger(game, this.controllerId);
 			return true;
 		}
 		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId()) ) {
 			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
 			if (zEvent.getToZone() == Zone.BATTLEFIELD) {
-				trigger(game, event.getPlayerId());
+				trigger(game, this.controllerId);
 				return true;
 			}
 		}

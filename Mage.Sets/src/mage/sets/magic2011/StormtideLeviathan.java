@@ -149,8 +149,8 @@ class StormtideLeviathanEffect2 extends ReplacementEffectImpl<StormtideLeviathan
 			if (permanent != null) {
 				Player player = game.getPlayer(source.getControllerId());
 				if (player.getInRange().contains(permanent.getControllerId())) {
-					if (!permanent.getAbilities().contains(FlyingAbility.getInstance()) &&
-						!permanent.getAbilities().contains(IslandwalkAbility.getInstance()))
+					if (!(permanent.getAbilities().containsKey(FlyingAbility.getInstance().getId()) ||
+						permanent.getAbilities().containsKey(IslandwalkAbility.getInstance().getId())))
 						return true;
 				}
 			}

@@ -89,7 +89,7 @@ class JacesErasureAbility extends TriggeredAbilityImpl<JacesErasureAbility> {
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.DREW_CARD && event.getPlayerId().equals(controllerId)) {
-			trigger(game, event.getPlayerId());
+			trigger(game, this.controllerId);
 			return true;
 		}
 		return false;

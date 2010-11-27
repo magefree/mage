@@ -131,9 +131,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 					result &= effect.apply(game, this);
 				}
 				else {
-					ContinuousEffect cEffect = (ContinuousEffect) effect;
-					cEffect.init(this, game);
-					game.addEffect(cEffect, this);
+					game.addEffect((ContinuousEffect) effect, this);
 				}
 			}
 		}

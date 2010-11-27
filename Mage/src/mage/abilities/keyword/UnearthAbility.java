@@ -101,7 +101,7 @@ class UnearthDelayedTriggeredAbility extends DelayedTriggeredAbility<UnearthDela
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.END_TURN_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-			trigger(game, event.getPlayerId());
+			trigger(game, this.controllerId);
 			return true;
 		}
 		return false;

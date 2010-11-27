@@ -55,7 +55,7 @@ public class PutIntoGraveFromBattlefieldTriggeredAbility extends TriggeredAbilit
 		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId()) ) {
 			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
 			if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
-				trigger(game, event.getPlayerId());
+				trigger(game, this.controllerId);
 				return true;
 			}
 		}

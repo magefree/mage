@@ -92,7 +92,7 @@ class SigilOfTheEmptyThroneAbility extends TriggeredAbilityImpl<SigilOfTheEmptyT
         if (event.getType() == EventType.SPELL_CAST) {
 			Spell spell = game.getStack().getSpell(event.getTargetId());
 			if (spell != null && spell.getCardType().contains(CardType.ENCHANTMENT) && event.getPlayerId().equals(getControllerId())) {
-				trigger(game, event.getPlayerId());
+				trigger(game, this.controllerId);
 				return true;
             }
 		}

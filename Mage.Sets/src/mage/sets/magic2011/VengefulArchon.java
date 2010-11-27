@@ -101,8 +101,8 @@ class VengefulArchonEffect extends PreventionEffectImpl<VengefulArchonEffect> {
 
 	@Override
 	public void init(Ability source, Game game) {
-		if (source.getCosts().getVariableCosts().size() > 0)
-			amount = source.getCosts().getVariableCosts().get(0).getAmount();
+		if (source.getManaCosts().getVariableCosts().size() > 0)
+			amount = source.getManaCosts().getVariableCosts().get(0).getAmount();
 	}
 
 	@Override
@@ -140,6 +140,11 @@ class VengefulArchonEffect extends PreventionEffectImpl<VengefulArchonEffect> {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public String getText(Ability source) {
+		return "Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, Vengeful Archon deals that much damage to target player";
 	}
 
 }

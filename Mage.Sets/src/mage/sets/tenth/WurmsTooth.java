@@ -88,7 +88,7 @@ class WurmsToothAbility extends TriggeredAbilityImpl<WurmsToothAbility> {
 		if (event.getType() == EventType.SPELL_CAST) {
 			Spell spell = game.getStack().getSpell(event.getTargetId());
 			if (spell != null && spell.getColor().isGreen()) {
-				trigger(game, event.getPlayerId());
+				trigger(game, this.controllerId);
 				return true;
 			}
 		}

@@ -84,7 +84,7 @@ class MindSpringEffect extends OneShotEffect<MindSpringEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		int amount = source.getCosts().getVariableCosts().get(0).getAmount();
+		int amount = source.getManaCosts().getVariableCosts().get(0).getAmount();
 		Player player = game.getPlayer(source.getControllerId());
 		if (player != null) {
 			player.drawCards(amount, game);

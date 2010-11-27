@@ -134,7 +134,7 @@ class PrimalCocoonAbility2 extends TriggeredAbilityImpl<PrimalCocoonAbility2> {
 		if (event.getType() == EventType.ATTACKER_DECLARED || event.getType() == EventType.BLOCKER_DECLARED) {
 			Permanent enchantment = game.getPermanent(sourceId);
 			if (enchantment != null && enchantment.getAttachedTo() != null && event.getSourceId() != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
-				trigger(game, event.getPlayerId());
+				trigger(game, this.controllerId);
 				return true;
 			}
 		}

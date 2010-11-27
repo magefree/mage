@@ -90,7 +90,7 @@ public class PhantomBeast extends CardImpl<PhantomBeast> {
 		@Override
 		public boolean checkTrigger(GameEvent event, Game game) {
 			if (event.getType() == EventType.TARGETED && event.getTargetId().equals(sourceId)) {
-				trigger(game, event.getPlayerId());
+				trigger(game, this.controllerId);
 				return true;
 			}
 			return false;

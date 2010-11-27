@@ -89,7 +89,7 @@ class LilianasCaressAbility extends TriggeredAbilityImpl<LilianasCaressAbility> 
 		if (event.getType() == EventType.DISCARDED_CARD && game.getOpponents(controllerId).contains(event.getPlayerId())) {
 			this.addTarget(new TargetPlayer());
 			this.targets.get(0).add(event.getPlayerId(), game);
-			trigger(game, event.getPlayerId());
+			trigger(game, this.controllerId);
 			return true;
 		}
 		return false;

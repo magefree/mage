@@ -56,7 +56,7 @@ public class DamageXTargetEffect extends OneShotEffect<DamageXTargetEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		int amount = source.getCosts().getVariableCosts().get(0).getAmount();
+		int amount = source.getManaCosts().getVariableCosts().get(0).getAmount();
 		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
 			permanent.damage(amount, source.getId(), game, true);

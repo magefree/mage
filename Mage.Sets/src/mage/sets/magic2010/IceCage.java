@@ -151,7 +151,7 @@ class IceCageAbility extends TriggeredAbilityImpl<IceCageAbility> {
 			Permanent enchantment = game.getPermanent(sourceId);
 			if (enchantment != null && enchantment.getAttachedTo() != null) {
 				if (event.getTargetId().equals(enchantment.getAttachedTo())) {
-					trigger(game, event.getPlayerId());
+					trigger(game, this.controllerId);
 					return true;
 				}
 			}

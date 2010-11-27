@@ -503,6 +503,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public void addEffect(ContinuousEffect continuousEffect, Ability source) {
+		continuousEffect.init(source, this);
 		state.addEffect(continuousEffect, source);
 	}
 

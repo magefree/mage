@@ -41,6 +41,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -61,6 +62,7 @@ public class SerraAscendant extends CardImpl<SerraAscendant> {
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
 
+		this.addAbility(LifelinkAbility.getInstance());
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SerraAscendantEffect()));
 	}
 

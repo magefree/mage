@@ -61,7 +61,7 @@ public class SquadronHawk extends CardImpl<SquadronHawk> {
 
 		this.addAbility(FlyingAbility.getInstance());
 		TargetCardInLibrary target = new TargetCardInLibrary(3, filter);
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(target)));
+		this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(target), true));
 	}
 
 	public SquadronHawk(final SquadronHawk card) {

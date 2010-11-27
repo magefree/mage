@@ -431,6 +431,8 @@ public class GameController implements GameCallback {
 								gameZone = Zone.BATTLEFIELD;
 							} else if ("graveyard".equalsIgnoreCase(zone)) {
 								gameZone = Zone.GRAVEYARD;
+							} else if ("library".equalsIgnoreCase(zone)) {
+								gameZone = Zone.LIBRARY;
 							} else {
 								continue; // go parse next line
 							}
