@@ -104,15 +104,15 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 		
 		if (changed) {
 			Plugins.getInstance().sortPermanents(ui, permanents.values());
-		}
-		
-		for (PermanentView permanent: battlefield.values()) {
-			if (permanent.getAttachments() != null) {
-				groupAttachments(permanent);
+			
+			for (PermanentView permanent: battlefield.values()) {
+				if (permanent.getAttachments() != null) {
+					groupAttachments(permanent);
+				}
 			}
+			
+			invalidate();
 		}
-		
-		invalidate();
 	}
 
 	private void addPermanent(PermanentView permanent) {
