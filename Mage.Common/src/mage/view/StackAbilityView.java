@@ -29,6 +29,7 @@
 package mage.view;
 
 import java.util.ArrayList;
+
 import mage.game.stack.StackAbility;
 
 /**
@@ -38,11 +39,13 @@ import mage.game.stack.StackAbility;
 public class StackAbilityView extends CardView {
 
 	private String sourceName;
+	private CardView sourceCard;
 
-	public StackAbilityView(StackAbility ability, String sourceName) {
+	public StackAbilityView(StackAbility ability, String sourceName, CardView sourceCard) {
 		this.id = ability.getId();
 		this.name = "Ability";
 		this.sourceName = sourceName;
+		this.sourceCard = sourceCard;
 		this.rules = new ArrayList<String>();
 		rules.add(formatRule(ability.getRule()));
 		this.power = ability.getPower().toString();
@@ -54,6 +57,7 @@ public class StackAbilityView extends CardView {
 		this.color = ability.getColor();
 		this.manaCost = ability.getManaCost().getSymbols();
 		this.art = "";
+		setTargets(ability.getTargets());
 	}
 
 	@Override
@@ -62,5 +66,8 @@ public class StackAbilityView extends CardView {
 		newRule.replace("{source}", this.sourceName);
 		return newRule;
 	}
-
+	
+	public CardView getSourceCard() {
+		return this.sourceCard;
+	}
 }

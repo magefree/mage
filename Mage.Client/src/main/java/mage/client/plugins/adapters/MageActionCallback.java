@@ -11,6 +11,7 @@ import java.util.UUID;
 
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
+import javax.swing.SwingUtilities;
 
 import mage.cards.MageCard;
 import mage.cards.MagePermanent;
@@ -70,23 +71,42 @@ public class MageActionCallback implements ActionCallback {
 		// Draw Arrows for targets
 		List<UUID> targets = data.card.getTargets();
 		if (targets != null) {
+			Point parent = SwingUtilities.getRoot(data.component).getLocationOnScreen();
+			Point me = new Point(data.locationOnScreen);
+			me.translate(-parent.x, -parent.y);
 			for (UUID uuid : targets) {
 				//System.out.println("Getting play area panel for uuid: " + uuid);
 				
 				PlayAreaPanel p = session.getGame().getPlayers().get(uuid);
 				if (p != null) {
 					Point target = p.getLocationOnScreen();
-					Point me = data.locationOnScreen;
+					target.translate(-parent.x, -parent.y);
 					ArrowBuilder.addArrow((int)me.getX() + 35, (int)me.getY(), (int)target.getX() + 40, (int)target.getY() - 40, Color.red);
 				} else {
 					for (PlayAreaPanel pa : session.getGame().getPlayers().values()) {
 						MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
 						if (permanent != null) {
 							Point target = permanent.getLocationOnScreen();
-							Point me = data.locationOnScreen;
+							target.translate(-parent.x, -parent.y);
 							ArrowBuilder.addArrow((int)me.getX() + 35, (int)me.getY(), (int)target.getX() + 40, (int)target.getY() + 10, Color.red);
 						}
 					}
+				}
+			}
+		}
+		
+		// Draw Arrows for source
+		if (data.card.isAbility()) {
+			Point parent = SwingUtilities.getRoot(data.component).getLocationOnScreen();
+			Point me = new Point(data.locationOnScreen);
+			me.translate(-parent.x, -parent.y);
+			UUID uuid = data.card.getId();
+			for (PlayAreaPanel pa : session.getGame().getPlayers().values()) {
+				MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
+				if (permanent != null) {
+					Point source = permanent.getLocationOnScreen();
+					source.translate(-parent.x, -parent.y);
+					ArrowBuilder.addArrow((int)source.getX() + 40, (int)source.getY() + 10, (int)me.getX() + 35, (int)me.getY() + 20, Color.blue);
 				}
 			}
 		}
@@ -99,13 +119,18 @@ public class MageActionCallback implements ActionCallback {
 
 		MageCard card = (MageCard) data.component;
 		if (card.getOriginal().getId() != bigCard.getCardId()) {
-			synchronized (MageMouseAdapter.class) {
+			synchronized (MageActionCallback.class) {
 				if (card.getOriginal().getId() != bigCard.getCardId()) {
 					Image image = card.getImage();
 					if (image != null && image instanceof BufferedImage) {
 						image = ImageHelper.getResizedImage((BufferedImage) image, bigCard.getWidth(), bigCard.getHeight());
 						bigCard.setCard(card.getOriginal().getId(), image, card.getOriginal().getRules());
-						bigCard.hideTextComponent();
+						bigCard.showTextComponent();
+						if (card.getOriginal().isAbility()) {
+							bigCard.showTextComponent();
+						} else {
+							bigCard.hideTextComponent();
+						};  
 					} else {
 						JXPanel panel = GuiDisplayUtil.getDescription(card.getOriginal(), bigCard.getWidth(), bigCard.getHeight());
 						panel.setVisible(true);

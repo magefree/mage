@@ -60,6 +60,7 @@ public class AbilityPicker extends JPopupMenu implements PopupMenuListener {
 	}
 
 	public void show(AbilityPickerView choices, Point p) {
+		if (p == null) return;
 		this.removeAll();
 		for (Entry<UUID, String> choice: choices.getChoices().entrySet()) {
 			this.add(new AbilityPickerAction(choice.getKey(), choice.getValue()));

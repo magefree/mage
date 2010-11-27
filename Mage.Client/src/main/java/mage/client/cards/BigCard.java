@@ -51,6 +51,8 @@ import java.util.UUID;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 
+import mage.client.plugins.impl.Plugins;
+
 import org.jdesktop.swingx.JXPanel;
 
 /**
@@ -62,10 +64,20 @@ public class BigCard extends javax.swing.JPanel {
 	protected Image bigImage;
 	protected UUID cardId;
 	protected JXPanel panel;
+	protected boolean initState;
 
 	public BigCard() {
         initComponents();
+        if (!Plugins.getInstance().isCardPluginLoaded()) {
+        	initBounds();
+        }
     }
+	
+	protected void initBounds() {
+    	initState = true;
+        scrollPane.setBounds(20, 230, 210, 120);
+        scrollPane.setBounds(new Rectangle(CONTENT_MAX_XOFFSET, TEXT_MAX_YOFFSET, TEXT_MAX_WIDTH, TEXT_MAX_HEIGHT));
+	}
     
 	public void setCard(UUID cardId, Image image, List<String> strings) {
 		if (this.cardId == null || !this.cardId.equals(cardId)) {
@@ -99,16 +111,13 @@ public class BigCard extends javax.swing.JPanel {
 			graphics.drawImage(bigImage, 0, 0, this);
 		super.paintComponent(graphics);
  	}
-	
-    public void removeTextComponent() {
-    	remove(this.scrollPane);
-    }
-    
+
     public void hideTextComponent() {
     	this.scrollPane.setVisible(false);
     }
 
     public void showTextComponent() {
+    	if (!initState) {initBounds();}
     	this.scrollPane.setVisible(true);
     }
 
@@ -151,8 +160,6 @@ public class BigCard extends javax.swing.JPanel {
         scrollPane.setViewportView(text);
 
         add(scrollPane);
-        //scrollPane.setBounds(20, 230, 210, 120);
-        //scrollPane.setBounds(new Rectangle(CONTENT_MAX_XOFFSET, TEXT_MAX_YOFFSET, TEXT_MAX_WIDTH, TEXT_MAX_HEIGHT));
     }// </editor-fold>//GEN-END:initComponents
 
 

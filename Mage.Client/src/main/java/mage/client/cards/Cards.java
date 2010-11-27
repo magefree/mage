@@ -36,20 +36,19 @@ package mage.client.cards;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
+import java.util.Map.Entry;
 
 import mage.cards.CardDimensions;
 import mage.cards.MageCard;
-import mage.client.plugins.adapters.MageMouseAdapter;
-import mage.client.plugins.adapters.MageMouseMotionAdapter;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
 import mage.view.CardView;
 import mage.view.CardsView;
+import mage.view.StackAbilityView;
 
 /**
  *
@@ -57,7 +56,7 @@ import mage.view.CardsView;
  */
 public class Cards extends javax.swing.JPanel {
 
-	private Map<UUID, MageCard> cards = new HashMap<UUID, MageCard>();
+	private Map<UUID, MageCard> cards = new LinkedHashMap<UUID, MageCard>();
 	
     /** Creates new form Cards */
     public Cards() {
@@ -73,13 +72,7 @@ public class Cards extends javax.swing.JPanel {
 
 	public boolean loadCards(CardsView cardsView, BigCard bigCard, UUID gameId) {
 		boolean changed = false;
-		for (CardView card: cardsView.values()) {
-			if (!cards.containsKey(card.getId())) {
-				addCard(card, bigCard, gameId);
-				changed = true;
-			}
-			cards.get(card.getId()).update(card);
-		}
+		
 		for (Iterator<Entry<UUID, MageCard>> i = cards.entrySet().iterator(); i.hasNext();) {
 			Entry<UUID, MageCard> entry = i.next();
 			if (!cardsView.containsKey(entry.getKey())) {
@@ -87,6 +80,21 @@ public class Cards extends javax.swing.JPanel {
 				i.remove();
 				changed = true;
 			}
+		}
+		
+		for (CardView card: cardsView.values()) {
+			if (card instanceof StackAbilityView) {
+				CardView tmp = ((StackAbilityView)card).getSourceCard();
+				tmp.overrideRules(card.getRules());
+				tmp.setIsAbility(true);
+				tmp.overrideTargets(card.getTargets());
+				card = tmp;
+			}
+			if (!cards.containsKey(card.getId())) {
+				addCard(card, bigCard, gameId);
+				changed = true;
+			}
+			cards.get(card.getId()).update(card);
 		}
 		
 		cardArea.setPreferredSize(new Dimension(cards.size() * Config.dimensions.frameWidth, Config.dimensions.frameHeight));

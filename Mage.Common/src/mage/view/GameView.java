@@ -31,9 +31,11 @@ package mage.view;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import mage.MageObject;
 import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
-import mage.MageObject;
+import mage.cards.Card;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.GameState;
@@ -68,10 +70,11 @@ public class GameView implements Serializable {
 		for (StackObject stackObject: state.getStack()) {
 			if (stackObject instanceof StackAbility) {
 				MageObject object = game.getObject(stackObject.getSourceId());
+				Card card = game.getCard(stackObject.getSourceId());
 				if (object != null)
-					stack.put(stackObject.getId(), new StackAbilityView((StackAbility)stackObject, object.getName()));
+					stack.put(stackObject.getId(), new StackAbilityView((StackAbility)stackObject, object.getName(), new CardView(card)));
 				else
-					stack.put(stackObject.getId(), new StackAbilityView((StackAbility)stackObject, ""));
+					stack.put(stackObject.getId(), new StackAbilityView((StackAbility)stackObject, "", new CardView(card)));
 			}
 			else {
 				stack.put(stackObject.getId(), new CardView((Spell)stackObject));

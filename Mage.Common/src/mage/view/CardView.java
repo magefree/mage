@@ -36,11 +36,13 @@ import java.util.UUID;
 import mage.ObjectColor;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.target.Target;
 import mage.target.Targets;
 
@@ -65,6 +67,7 @@ public class CardView implements Serializable {
 	protected Rarity rarity;
 	protected String expansionSetCode;
 	protected int cardNumber;
+	protected boolean isAbility;
 
 	public List<UUID> targets;
 	
@@ -101,15 +104,7 @@ public class CardView implements Serializable {
 		if (card instanceof Spell) {
 			Spell<?> spell = (Spell<?>)card;
 			if (spell.getSpellAbility().getTargets().size() > 0) {
-				Targets targets = spell.getSpellAbility().getTargets();
-				for (Target target : targets) {
-					if (target.isChosen()) {
-						for (UUID targetUUID : target.getTargets()) {
-							if (this.targets == null) this.targets = new ArrayList<UUID>();
-							this.targets.add(targetUUID);
-						}
-					}	
-				}
+				setTargets(spell.getSpellAbility().getTargets());
 			}
 		}
 	}
@@ -135,6 +130,17 @@ public class CardView implements Serializable {
 		this.expansionSetCode = "";
 	}
 
+	protected void setTargets(Targets targets) {
+		for (Target target : targets) {
+			if (target.isChosen()) {
+				for (UUID targetUUID : target.getTargets()) {
+					if (this.targets == null) this.targets = new ArrayList<UUID>();
+					this.targets.add(targetUUID);
+				}
+			}	
+		}
+	}
+	
 	protected List<String> formatRules(List<String> rules) {
 		List<String> newRules = new ArrayList<String>();
 		for (String rule: rules) {
@@ -156,7 +162,19 @@ public class CardView implements Serializable {
 	public List<String> getRules() {
 		return rules;
 	}
+	
+	public void overrideRules(List<String> rules) {
+		this.rules = rules;
+	}
 
+	public void setIsAbility(boolean isAbility) {
+		this.isAbility = isAbility;
+	}
+	
+	public boolean isAbility() {
+		return isAbility;
+	}
+	
 	public String getPower() {
 		return power;
 	}
@@ -216,6 +234,10 @@ public class CardView implements Serializable {
 	 */
 	public List<UUID> getTargets() {
 		return targets;
+	}
+	
+	public void overrideTargets(List<UUID> newTargets) {
+		this.targets = newTargets;
 	}
 	
 	@Override
