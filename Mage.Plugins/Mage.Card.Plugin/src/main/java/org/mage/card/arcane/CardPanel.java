@@ -37,6 +37,9 @@ import org.apache.log4j.Logger;
 import org.mage.card.arcane.ScaledImagePanel.MultipassType;
 import org.mage.card.arcane.ScaledImagePanel.ScalingType;
 import org.mage.plugins.card.images.ImageCache;
+import org.mage.plugins.card.utils.BufferedImageBuilder;
+import org.mage.plugins.card.utils.ImagePanel;
+import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 
 @SuppressWarnings({"unchecked","rawtypes"})
@@ -68,7 +71,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 	public List<CardPanel> attachedPanels = new ArrayList();
 	public double tappedAngle = 0;
 	public ScaledImagePanel imagePanel;
-	public ScaledImagePanel overlayPanel;
+	public ImagePanel overlayPanel;
 
 	private GlowText titleText;
 	private GlowText ptText;
@@ -90,6 +93,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 	private TransferData data = new TransferData();
 	
 	private boolean isPermanent;
+	private boolean hasSickness = true;
 	
 	public CardPanel(CardView newGameCard, UUID gameId, boolean loadImage, ActionCallback callback) {
 		this.gameCard = newGameCard;
@@ -129,17 +133,10 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		ptText.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
 		add(ptText);
 		
-		overlayPanel = new ScaledImagePanel();
-		overlayPanel.setBorder(BorderFactory.createLineBorder(Color.white));
+		BufferedImage sickness = ImageManagerImpl.getInstance().getSicknessImage();
+		overlayPanel = new ImagePanel(sickness, ImagePanel.SCALED);
+		overlayPanel.setOpaque(false);
 		add(overlayPanel);
-		overlayPanel.setScaleLarger(true);
-		overlayPanel.setScalingType(ScalingType.nearestNeighbor);
-		overlayPanel.setScalingBlur(true);
-		overlayPanel.setScalingMultiPassType(MultipassType.none);
-		
-		//TODO: Image sickness = ImageManager.getSicknessImage();
-		BufferedImage sickness = null;
-		overlayPanel.setImage(sickness, sickness);
 
 		imagePanel = new ScaledImagePanel();
 		imagePanel.setBorder(BorderFactory.createLineBorder(Color.white));
@@ -324,19 +321,17 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		}
 	}
 
-	public void layout () {
+	public void layout() {
 		int borderSize = Math.round(cardWidth * BLACK_BORDER_SIZE);
 		imagePanel.setLocation(cardXOffset + borderSize, cardYOffset + borderSize);
 		imagePanel.setSize(cardWidth - borderSize * 2, cardHeight - borderSize * 2);
 		
-		//TODO: uncomment
-		/*if (gameCard.hasSickness() && gameCard.isCreature() && gameCard.getTableID() != 0) {
+		if (hasSickness && CardUtil.isCreature(gameCard) && isPermanent) {
 			overlayPanel.setLocation(cardXOffset + borderSize, cardYOffset + borderSize);
 			overlayPanel.setSize(cardWidth - borderSize * 2, cardHeight - borderSize * 2);
 		} else {
 			overlayPanel.setVisible(false);
-		}*/
-		overlayPanel.setVisible(false);
+		}
 		
 		int fontHeight = Math.round(cardHeight * (27f / 680));
 		boolean showText = (!isAnimationPanel && fontHeight < 12);
@@ -500,12 +495,11 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		String cardType = getType(card);
 		popupText.setText(getText(cardType, card));
 		
-		//TODO: uncomment
-		/*if (gameCard.hasSickness() && gameCard.isCreature() && gameCard.getTableID() != 0) {
+		if (hasSickness && CardUtil.isCreature(gameCard) && isPermanent) {
 			overlayPanel.setVisible(true);
 		} else {
 			overlayPanel.setVisible(false);
-		}*/
+		}
 		
 		repaint();
 	}
