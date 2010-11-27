@@ -46,6 +46,7 @@ public class PermanentView extends CardView {
 	private boolean flipped;
 	private boolean phasedIn;
 	private boolean faceUp;
+	private boolean summoningSickness;
 	private int damage;
 	private List<UUID> attachments;
 	private List<CounterView> counters;
@@ -57,6 +58,7 @@ public class PermanentView extends CardView {
 		this.flipped = permanent.isFlipped();
 		this.phasedIn = permanent.isPhasedIn();
 		this.faceUp = permanent.isFaceUp();
+		this.summoningSickness = permanent.hasSummoningSickness();
 		this.damage = permanent.getDamage();
 		if (permanent.getAttachments().size() > 0) {
 			attachments = new ArrayList<UUID>();
@@ -94,6 +96,10 @@ public class PermanentView extends CardView {
 
 	public boolean isFaceUp() {
 		return faceUp;
+	}
+
+	public boolean hasSummoningSickness(){
+		return summoningSickness;
 	}
 
 	public List<UUID> getAttachments() {

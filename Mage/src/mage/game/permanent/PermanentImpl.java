@@ -274,7 +274,6 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		if (!phasedIn) {
 			if (!replaceEvent(EventType.PHASE_IN, game)) {
 				this.phasedIn = true;
-//				addEffects(game);
 				fireEvent(EventType.PHASED_IN, game);
 				return true;
 			}
@@ -309,6 +308,11 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	public boolean turnFaceDown(Game game) {
 		//TODO: implement this
 		return false;
+	}
+
+	@Override
+	public boolean hasSummoningSickness() {
+		return !this.controlledFromStartOfTurn;
 	}
 
 	@Override
