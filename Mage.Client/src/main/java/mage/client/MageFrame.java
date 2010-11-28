@@ -35,10 +35,13 @@
 package mage.client;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -48,6 +51,7 @@ import java.util.prefs.Preferences;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
@@ -58,6 +62,7 @@ import javax.swing.plaf.synth.SynthLookAndFeel;
 
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.client.components.MageComponents;
 import mage.client.components.MageSynthStyleFactory;
 import mage.client.dialog.AboutDialog;
 import mage.client.dialog.CombatDialog;
@@ -115,8 +120,8 @@ public class MageFrame extends javax.swing.JFrame {
 
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-			MageSynthStyleFactory f = new MageSynthStyleFactory(SynthLookAndFeel.getStyleFactory());
-			SynthLookAndFeel.setStyleFactory(f);
+			//MageSynthStyleFactory f = new MageSynthStyleFactory(SynthLookAndFeel.getStyleFactory());
+			//SynthLookAndFeel.setStyleFactory(f);
 		} catch (Exception ex) {
 			logger.log(Level.SEVERE, null, ex);
 		}
@@ -124,6 +129,8 @@ public class MageFrame extends javax.swing.JFrame {
 		Plugins.getInstance().loadPlugins();
 
 		initComponents();
+		setSize(1024,768);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		session = new Session(this);
 		connectDialog = new ConnectDialog();
@@ -179,6 +186,8 @@ public class MageFrame extends javax.swing.JFrame {
 			label.setForeground(Color.white);
 			label.setBounds(0, 0, 180, 30);
 		}
+		
+		session.getUI().addButton(MageComponents.TABLES_MENU_BUTTON, btnGames);
     }
     
     private void  btnImagesActionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,7 +277,7 @@ public class MageFrame extends javax.swing.JFrame {
         lblStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1024, 768));
+        //setMinimumSize(new java.awt.Dimension(1024, 768));
 
         desktopPane.setBackground(new java.awt.Color(204, 204, 204));
         tablesPane.setBounds(20, 10, 560, 440);
@@ -417,7 +426,7 @@ public class MageFrame extends javax.swing.JFrame {
 		aboutDialog.showDialog();
 	}//GEN-LAST:event_btnAboutActionPerformed
 
-	private void exitApp() {
+	public void exitApp() {
 		session.disconnect();
 		Plugins.getInstance().shutdown();
 		dispose();

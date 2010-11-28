@@ -44,6 +44,7 @@ import java.util.logging.Logger;
 import javax.swing.Timer;
 import javax.swing.table.AbstractTableModel;
 import mage.Constants.TableState;
+import mage.client.components.MageComponents;
 import mage.client.remote.Session;
 import mage.util.Logging;
 import mage.view.SeatView;
@@ -72,6 +73,7 @@ public class TableWaitingDialog extends MageDialog implements Observer {
 		initComponents();
 
 		tableSeats.createDefaultColumnsFromModel();
+		session.getUI().addButton(MageComponents.TABLE_WAITING_START_BUTTON, btnStart);
     }
 
 	@Override

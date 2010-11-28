@@ -34,6 +34,7 @@
 
 package mage.client.table;
 
+import mage.client.components.MageComponents;
 import mage.client.dialog.NewTableDialog;
 import mage.client.dialog.JoinTableDialog;
 import mage.client.dialog.TableWaitingDialog;
@@ -184,6 +185,8 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 		else {
 			hideTables();
 		}
+		
+		session.getUI().addButton(MageComponents.NEW_GAME_BUTTON, btnNewTable);
 	}
 
 	public void hideTables() {

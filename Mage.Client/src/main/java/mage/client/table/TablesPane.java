@@ -67,7 +67,6 @@ public class TablesPane extends MagePane {
     		if (container != null) {
     			initComponents(container);
     			container.add(tablesPanel);
-    			//ui.get("jScrollPane1ViewPort").setBackground(new Color(20,20,20,50));
     			container.setOpaque(false);
     			initialized = true;
     		}

@@ -28,6 +28,7 @@
 
 package mage.client.remote;
 
+import java.awt.Component;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -45,6 +46,8 @@ import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.DeckCardLists;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
+import mage.client.components.MageComponents;
+import mage.client.components.MageUI;
 import mage.client.game.GamePanel;
 import mage.client.util.Config;
 import mage.game.GameException;
@@ -73,6 +76,7 @@ public class Session {
 	private Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
 	private GamePanel game;
 	private CallbackClientDaemon callbackDaemon;
+	private MageUI ui = new MageUI();
 
 	public Session(MageFrame frame) {
 		this.frame = frame;
@@ -551,4 +555,7 @@ public class Session {
 		return userName;
 	}
 
+	public MageUI getUI() {
+		return ui;
+	}
 }

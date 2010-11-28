@@ -68,11 +68,13 @@ public class Plugins implements MagePlugins {
 
 	@Override
 	public void updateGamePanel(Map<String, JComponent> ui) {
+		if (themePlugin == null) return;
 		themePlugin.applyInGame(ui);
 	}
 
 	@Override
 	public JComponent updateTablePanel(Map<String, JComponent> ui) {
+		if (themePlugin == null) return null;
 		return themePlugin.updateTable(ui);
 	}
 	
