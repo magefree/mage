@@ -10,8 +10,6 @@ import mage.client.components.MageComponents;
 import mage.client.components.MageUI;
 import mage.util.Logging;
 
-import org.junit.Test;
-
 public class StartMultiGamesTest {
 
 	private final static Logger logger = Logging.getLogger(StartMultiGamesTest.class.getName());
@@ -25,7 +23,12 @@ public class StartMultiGamesTest {
 	private Object sync = new Object();
 	private MageUI ui;
 
-	@Test
+	public static void main(String[] argv) throws Exception {
+		new StartMultiGamesTest().test();
+		
+	}
+	
+	//@Test
 	public void test() throws Exception {
 		for (int i = 0; i < GAME_START_COUNT; i++) {
 			logger.log(Level.INFO, "Starting game");
