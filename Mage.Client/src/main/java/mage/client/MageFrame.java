@@ -34,9 +34,12 @@
 
 package mage.client;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Graphics2D;
+import java.awt.SplashScreen;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
@@ -458,10 +461,25 @@ public class MageFrame extends javax.swing.JFrame {
 		return pickNumber;
 	}
 
+	static void renderSplashFrame(Graphics2D g) {
+        g.setComposite(AlphaComposite.Clear);
+        g.fillRect(120,140,200,40);
+        g.setPaintMode();
+        g.setColor(Color.BLACK);
+    }
+	
     /**
     * @param args the command line arguments
     */
     public static void main(String args[]) {
+    	final SplashScreen splash = SplashScreen.getSplashScreen();
+    	if (splash != null) {
+    		Graphics2D g = splash.createGraphics();
+    		if (g != null) {
+    			renderSplashFrame(g);
+    		}
+    	}
+    	
 		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
 			public void uncaughtException(Thread t, Throwable e) {
 				logger.log(Level.SEVERE, null, e);

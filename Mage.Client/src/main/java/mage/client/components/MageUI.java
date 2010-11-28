@@ -3,7 +3,6 @@ package mage.client.components;
 import java.awt.Component;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 
 import javax.swing.JButton;
 
@@ -60,12 +59,12 @@ public class MageUI {
 		while (!j.isEnabled()) {
 			Thread.sleep(10);
 		}
-    	Thread t = new Thread(new Runnable()  {
+		Thread t = new Thread(new Runnable()  {
 			@Override
 			public void run() {
 				j.doClick();
 			}
 		});
-    	t.start();
+		t.start();
 	}
 }
