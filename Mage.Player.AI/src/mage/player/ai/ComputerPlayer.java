@@ -720,7 +720,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	public void assignDamage(int damage, List<UUID> targets, UUID sourceId, Game game) {
 		logger.fine("assignDamage");
 		//TODO: improve this
-		game.getPermanent(targets.get(0)).damage(damage, sourceId, game, true);
+		game.getPermanent(targets.get(0)).damage(damage, sourceId, game, true, false);
 	}
 
 	@Override

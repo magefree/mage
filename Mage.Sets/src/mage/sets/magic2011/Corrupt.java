@@ -98,7 +98,7 @@ class CorruptEffect extends OneShotEffect<CorruptEffect> {
 			int damageDealt = amount;
 			Permanent permanent = game.getPermanent(source.getFirstTarget());
 			if (permanent != null) {
-				damageDealt = permanent.damage(amount, source.getSourceId(), game, true);
+				damageDealt = permanent.damage(amount, source.getSourceId(), game, true, false);
 			}
 			else {
 				Player player = game.getPlayer(source.getFirstTarget());

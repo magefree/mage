@@ -34,6 +34,7 @@ import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -67,15 +68,16 @@ public abstract class RedirectionEffect<T extends RedirectionEffect<T>> extends 
 
 	@Override
 	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+		DamageEvent damageEvent = (DamageEvent)event;
 		Permanent permanent = game.getPermanent(redirectTarget.getFirstTarget());
-		Ability damageSource = getSource(event.getSourceId(), game);
+		Ability damageSource = getSource(damageEvent.getSourceId(), game);
 		if (permanent != null) {
-			permanent.damage(event.getAmount(), damageSource.getId(), game, event.getFlag());
+			permanent.damage(damageEvent.getAmount(), damageSource.getId(), game, damageEvent.isPreventable(), damageEvent.isCombatDamage());
 			return true;
 		}
 		Player player = game.getPlayer(redirectTarget.getFirstTarget());
 		if (player != null) {
-			player.damage(event.getAmount(), damageSource.getId(), game, false, event.getFlag());
+			player.damage(damageEvent.getAmount(), damageSource.getId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
 			return true;
 		}
 		return false;

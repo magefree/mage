@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -48,6 +49,8 @@ import mage.util.Copyable;
  * @author BetaSteward_at_googlemail.com
  */
 public class Combat implements Serializable, Copyable<Combat> {
+
+	private static FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
 
 	protected List<CombatGroup> groups = new ArrayList<CombatGroup>();
 	protected Set<UUID> defenders = new HashSet<UUID>();
@@ -118,12 +121,9 @@ public class Combat implements Serializable, Copyable<Combat> {
 
 	public void selectBlockers(Game game) {
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, attackerId, attackerId))) {
-			for (UUID defenderId: defenders) {
-				//check if defender is being attacked
-				if (isAttacked(defenderId, game)) {
-					game.getPlayer(defenderId).selectBlockers(game);
-					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
-				}
+			for (UUID defenderId: getPlayerDefenders(game)) {
+				game.getPlayer(defenderId).selectBlockers(game);
+				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
 			}
 		}
 	}
@@ -137,7 +137,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 				while (true) {
 					Player opponent = players.getNext(game);
 					if (opponents.contains(opponent.getId())) {
-						defenders.add(opponent.getId());
+						addDefender(opponent.getId(), game);
 						break;
 					}
 				}
@@ -147,14 +147,23 @@ public class Combat implements Serializable, Copyable<Combat> {
 				while (true) {
 					Player opponent = players.getPrevious(game);
 					if (opponents.contains(opponent.getId())) {
-						defenders.add(opponent.getId());
+						addDefender(opponent.getId(), game);
 						break;
 					}
 				}
 				break;
 			case MULITPLE:
-				defenders.addAll(game.getOpponents(attackerId));
+				for (UUID opponentId: game.getOpponents(attackerId)) {
+					addDefender(opponentId, game);
+				}
 				break;
+		}
+	}
+
+	private void addDefender(UUID defenderId, Game game) {
+		defenders.add(defenderId);
+		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filterPlaneswalker, defenderId)) {
+			defenders.add(permanent.getId());
 		}
 	}
 
@@ -250,6 +259,21 @@ public class Combat implements Serializable, Copyable<Combat> {
 			}
 		}
 		return false;
+	}
+
+	private Set<UUID> getPlayerDefenders(Game game) {
+		Set<UUID> playerDefenders = new HashSet<UUID>();
+		for (CombatGroup group: groups) {
+			if (group.defenderIsPlaneswalker) {
+				Permanent permanent = game.getPermanent(group.getDefenderId());
+				if (permanent != null)
+					playerDefenders.add(permanent.getControllerId());
+			}
+			else {
+				playerDefenders.add(group.getDefenderId());
+			}
+		}
+		return playerDefenders;
 	}
 
 	public void damageAssignmentOrder(Game game) {

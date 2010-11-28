@@ -132,7 +132,7 @@ class SearingBlazeEffect extends OneShotEffect<SearingBlazeEffect> {
 				player.damage(3, source.getId(), game, false, true);
 			}
 			if (creature != null) {
-				creature.damage(3, source.getId(), game, true);
+				creature.damage(3, source.getId(), game, true, false);
 			}
 		}
 		else {
@@ -140,7 +140,7 @@ class SearingBlazeEffect extends OneShotEffect<SearingBlazeEffect> {
 				player.damage(1, source.getId(), game, false, true);
 			}
 			if (creature != null) {
-				creature.damage(1, source.getId(), game, true);
+				creature.damage(1, source.getId(), game, true, false);
 			}
 		}
 		return true;

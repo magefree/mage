@@ -26,52 +26,29 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.game.events;
 
-import mage.Constants.Outcome;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import java.util.UUID;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DamageAllControlledTargetEffect extends OneShotEffect<DamageAllControlledTargetEffect> {
+public abstract class DamageEvent extends GameEvent {
 
-	private FilterCreaturePermanent filter;
-	private int amount;
+	protected boolean combat;
 
-	public DamageAllControlledTargetEffect(int amount, FilterCreaturePermanent filter) {
-		super(Outcome.Damage);
-		this.amount = amount;
-		this.filter = filter;
+	public DamageEvent(EventType type, UUID targetId, UUID sourceId, UUID playerId, int amount, boolean preventable, boolean combat) {
+		super(type, targetId, sourceId, playerId, amount, preventable);
+		this.combat = combat;
+	}
+	
+	public boolean isCombatDamage() {
+		return combat;
 	}
 
-	public DamageAllControlledTargetEffect(final DamageAllControlledTargetEffect effect) {
-		super(effect);
-		this.amount = effect.amount;
-		this.filter = effect.filter.copy();
-	}
-
-	@Override
-	public DamageAllControlledTargetEffect copy() {
-		return new DamageAllControlledTargetEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget())) {
-			permanent.damage(amount, source.getId(), game, true, false);
-		}
-		return true;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "{source} deals " + Integer.toString(amount) + " damage to each " +  filter.getMessage() + " controlled by target player";
+	public boolean isPreventable() {
+		return flag;
 	}
 
 }

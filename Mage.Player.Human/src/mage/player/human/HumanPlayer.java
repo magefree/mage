@@ -440,7 +440,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 				int damageAmount = getAmount(0, remainingDamage, "Select amount", game);
 				Permanent permanent = game.getPermanent(target.getFirstTarget());
 				if (permanent != null) {
-					permanent.damage(damageAmount, sourceId, game, true);
+					permanent.damage(damageAmount, sourceId, game, true, false);
 					remainingDamage -= damageAmount;
 				}
 				else {

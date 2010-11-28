@@ -96,7 +96,7 @@ class EarthquakeEffect extends OneShotEffect<EarthquakeEffect> {
 		int amount = source.getManaCosts().getVariableCosts().get(0).getAmount();
 
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-			permanent.damage(amount, source.getId(), game, true);
+			permanent.damage(amount, source.getId(), game, true, false);
 		}
 		for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
 			Player player = game.getPlayer(playerId);

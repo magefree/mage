@@ -68,6 +68,8 @@ import mage.filter.common.FilterCreatureForAttack;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
+import mage.game.events.DamagePlayerEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.permanent.Permanent;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackAbility;
@@ -616,7 +618,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	@Override
 	public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable) {
 		if (damage > 0 && canDamage(game.getObject(sourceId))) {
-			GameEvent event = new GameEvent(GameEvent.EventType.DAMAGE_PLAYER, playerId, sourceId, playerId, damage, preventable);
+			GameEvent event = new DamagePlayerEvent(playerId, sourceId, playerId, damage, preventable, combatDamage);
 			if (!game.replaceEvent(event)) {
 				int actualDamage = event.getAmount();
 				if (actualDamage > 0) {
@@ -626,11 +628,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 						Player player = game.getPlayer(source.getControllerId());
 						player.gainLife(actualDamage, game);
 					}
-					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DAMAGED_PLAYER, playerId, sourceId, playerId, actualDamage));
-					if (combatDamage)
-						game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COMBAT_DAMAGED_PLAYER, playerId, sourceId, playerId, actualDamage));
-					else
-						game.fireEvent(GameEvent.getEvent(GameEvent.EventType.NONCOMBAT_DAMAGED_PLAYER, playerId, sourceId, playerId, actualDamage));
+					game.fireEvent(new DamagedPlayerEvent(playerId, sourceId, playerId, actualDamage, combatDamage));
+//					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DAMAGED_PLAYER, playerId, sourceId, playerId, actualDamage));
+//					if (combatDamage)
+//						game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COMBAT_DAMAGED_PLAYER, playerId, sourceId, playerId, actualDamage));
+//					else
+//						game.fireEvent(GameEvent.getEvent(GameEvent.EventType.NONCOMBAT_DAMAGED_PLAYER, playerId, sourceId, playerId, actualDamage));
 					return actualDamage;
 				}
 			}

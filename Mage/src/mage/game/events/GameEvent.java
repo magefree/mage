@@ -36,13 +36,13 @@ import java.util.UUID;
  */
 public class GameEvent {
 
-	private EventType type;
-	private UUID targetId;
-	private UUID sourceId;
-	private UUID playerId;
-	private int amount;
-	private boolean flag;
-	private String data;
+	protected EventType type;
+	protected UUID targetId;
+	protected UUID sourceId;
+	protected UUID playerId;
+	protected int amount;
+	protected boolean flag;
+	protected String data;
 
 	public enum EventType {
 
@@ -79,8 +79,6 @@ public class GameEvent {
 		DISCARDED_CARD,
 		CYCLE_CARD, CYCLED_CARD,
 		DAMAGE_PLAYER, DAMAGED_PLAYER,
-		COMBAT_DAMAGE_PLAYER, COMBAT_DAMAGED_PLAYER,
-		NONCOMBAT_DAMAGE_PLAYER, NONCOMBAT_DAMAGED_PLAYER,
 		PLAYER_LIFE_CHANGE,
 		GAIN_LIFE, GAINED_LIFE,
 		LOSE_LIFE, LOST_LIFE,

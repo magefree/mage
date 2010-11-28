@@ -34,6 +34,7 @@ import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -65,8 +66,9 @@ public class PlaneswalkerRedirectionEffect extends RedirectionEffect<Planeswalke
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
 		if (event.getType() == EventType.DAMAGE_PLAYER) {
+			DamageEvent damageEvent = (DamageEvent)event;
 			UUID playerId = getSourceControllerId(event.getSourceId(), game);
-			if (game.getOpponents(event.getTargetId()).contains(playerId)) {
+			if (!damageEvent.isCombatDamage() && game.getOpponents(event.getTargetId()).contains(playerId)) {
 				Player target = game.getPlayer(event.getTargetId());
 				Player player = game.getPlayer(playerId);
 				if (target != null) {

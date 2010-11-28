@@ -98,7 +98,7 @@ class FireballEffect extends OneShotEffect<FireballEffect> {
 				for (UUID targetId: source.getTargets().get(0).getTargets()) {
 					Permanent permanent = game.getPermanent(targetId);
 					if (permanent != null) {
-						permanent.damage(damagePer, source.getSourceId(), game, true);
+						permanent.damage(damagePer, source.getSourceId(), game, true, false);
 					}
 					else {
 						Player player = game.getPlayer(targetId);

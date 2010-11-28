@@ -41,6 +41,7 @@ import mage.abilities.effects.common.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 
@@ -90,9 +91,12 @@ class ChandrasSpitfireAbility extends TriggeredAbilityImpl<ChandrasSpitfireAbili
 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.NONCOMBAT_DAMAGED_PLAYER && game.getOpponents(controllerId).contains(event.getTargetId()) && game.getTurn().getStepType() != PhaseStep.COMBAT_DAMAGE) {
-			trigger(game, this.controllerId);
-			return true;
+		if (event instanceof DamagedPlayerEvent) {
+			DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
+			if (!damageEvent.isCombatDamage() && game.getOpponents(controllerId).contains(event.getTargetId())) {
+				trigger(game, this.controllerId);
+				return true;
+			}
 		}
 		return false;
 	}

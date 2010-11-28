@@ -28,13 +28,17 @@
 
 package mage.abilities.effects;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 import mage.Constants.Duration;
 import mage.Constants.EffectType;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.game.Game;
 
 /**
@@ -48,6 +52,8 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
 	protected SubLayer sublayer;
 	protected Date timestamp;
 	protected boolean used = false;
+	protected boolean affectedObjectsSet = false;
+	protected List<UUID> objects = new ArrayList<UUID>();
 
 	public ContinuousEffectImpl(Duration duration, Outcome outcome) {
 		super(outcome);
@@ -62,13 +68,17 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
 		this.sublayer = sublayer;
 	}
 
-	public ContinuousEffectImpl(final ContinuousEffectImpl effect) {
+	public ContinuousEffectImpl(final ContinuousEffectImpl<T> effect) {
 		super(effect);
 		this.duration = effect.duration;
 		this.layer = effect.layer;
 		this.sublayer = effect.sublayer;
 		this.timestamp = new Date(effect.timestamp.getTime());
 		this.used = effect.used;
+		this.affectedObjectsSet = effect.affectedObjectsSet;
+		for (UUID objectId: effect.objects) {
+			this.objects.add(objectId);
+		}
 	}
 
 	@Override
@@ -105,6 +115,20 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
 	}
 
 	@Override
-	public void init(Ability source, Game game) {}
+	public void init(Ability source, Game game) {
+		//20100716 - 611.2c
+		if (source instanceof ActivatedAbility) {
+			switch (layer) {
+				case CopyEffects_1:
+				case ControlChangingEffects_2:
+				case TextChangingEffects_3:
+				case TypeChangingEffects_4:
+				case ColorChangingEffects_5:
+				case AbilityAddingRemovingEffects_6:
+				case PTChangingEffects_7:
+					this.affectedObjectsSet = true;
+			}
+		}
+	}
 
 }

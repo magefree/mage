@@ -70,7 +70,7 @@ public interface Permanent extends Card {
 	public boolean hasProtectionFrom(MageObject source);
 	public boolean hasSummoningSickness();
 	public int getDamage();
-	public int damage(int damage, UUID sourceId, Game game, boolean preventable);
+	public int damage(int damage, UUID sourceId, Game game, boolean preventable, boolean combat);
 	public void removeAllDamage(Game game);
 	public Counters getCounters();
 	public void addCounters(String name, int amount);

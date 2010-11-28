@@ -48,6 +48,10 @@ import mage.cards.CardImpl;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
+import mage.game.events.DamageCreatureEvent;
+import mage.game.events.DamagePlaneswalkerEvent;
+import mage.game.events.DamagedCreatureEvent;
+import mage.game.events.DamagedPlaneswalkerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
@@ -408,14 +412,14 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	}
 
 	@Override
-	public int damage(int damageAmount, UUID sourceId, Game game, boolean preventable) {
+	public int damage(int damageAmount, UUID sourceId, Game game, boolean preventable, boolean combat) {
 		int damageDone = 0;
 		if (damageAmount > 0 && canDamage(game.getObject(sourceId))) {
 			if (cardType.contains(CardType.PLANESWALKER)) {
-				damageDone = damagePlaneswalker(damageAmount, sourceId, game, preventable);
+				damageDone = damagePlaneswalker(damageAmount, sourceId, game, preventable, combat);
 			}
 			else {
-				damageDone = damageCreature(damageAmount, sourceId, game, preventable);
+				damageDone = damageCreature(damageAmount, sourceId, game, preventable, combat);
 			}
 			if (damageDone > 0) {
 				Permanent source = game.getPermanent(sourceId);
@@ -436,8 +440,8 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		damage = 0;
 	}
 
-	protected int damagePlaneswalker(int damage, UUID sourceId, Game game, boolean preventable) {
-		GameEvent event = new GameEvent(GameEvent.EventType.DAMAGE_PLANESWALKER, objectId, sourceId, controllerId, damage, preventable);
+	protected int damagePlaneswalker(int damage, UUID sourceId, Game game, boolean preventable, boolean combat) {
+		GameEvent event = new DamagePlaneswalkerEvent(objectId, sourceId, controllerId, damage, preventable, combat);
 		if (!game.replaceEvent(event)) {
 			int actualDamage = event.getAmount();
 			if (actualDamage > 0) {
@@ -445,15 +449,15 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 					actualDamage = this.loyalty.getValue();
 				}
 				this.loyalty.boostValue(-actualDamage);
-				game.fireEvent(GameEvent.getEvent(EventType.DAMAGED_PLANESWALKER, objectId, sourceId, controllerId, actualDamage));
+				game.fireEvent(new DamagedPlaneswalkerEvent(objectId, sourceId, controllerId, actualDamage, combat));
 				return actualDamage;
 			}
 		}
 		return 0;
 	}
 
-	protected int damageCreature(int damage, UUID sourceId, Game game, boolean preventable) {
-		GameEvent event = new GameEvent(GameEvent.EventType.DAMAGE_CREATURE, objectId, sourceId, controllerId, damage, preventable);
+	protected int damageCreature(int damage, UUID sourceId, Game game, boolean preventable, boolean combat) {
+		GameEvent event = new DamageCreatureEvent(objectId, sourceId, controllerId, damage, preventable, combat);
 		if (!game.replaceEvent(event)) {
 			int actualDamage = event.getAmount();
 			if (actualDamage > 0) {
@@ -461,7 +465,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 					actualDamage = this.toughness.getValue() - this.damage;
 				}
 				this.damage += actualDamage;
-				game.fireEvent(GameEvent.getEvent(EventType.DAMAGED_CREATURE, objectId, sourceId, controllerId, actualDamage));
+				game.fireEvent(new DamagedCreatureEvent(objectId, sourceId, controllerId, actualDamage, combat));
 				return actualDamage;
 			}
 		}

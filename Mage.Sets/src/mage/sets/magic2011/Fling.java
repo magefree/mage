@@ -95,7 +95,7 @@ class FlingEffect extends OneShotEffect<FlingEffect> {
 		if (amount > 0) {
 			Permanent permanent = game.getPermanent(source.getFirstTarget());
 			if (permanent != null) {
-				permanent.damage(amount, source.getSourceId(), game, true);
+				permanent.damage(amount, source.getSourceId(), game, true, false);
 				return true;
 			}
 			Player player = game.getPlayer(source.getFirstTarget());

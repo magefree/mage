@@ -31,7 +31,6 @@ package mage.view;
 import java.io.Serializable;
 import java.util.UUID;
 import mage.game.Game;
-import mage.game.GameState;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -44,7 +43,7 @@ public class CombatGroupView implements Serializable {
 
 	private CardsView attackers = new CardsView();
 	private CardsView blockers = new CardsView();
-	private String defenderName;
+	private String defenderName = "";
 
 	public CombatGroupView(CombatGroup combatGroup, Game game) {
 		Player player = game.getPlayer(combatGroup.getDefenderId());
@@ -53,7 +52,8 @@ public class CombatGroupView implements Serializable {
 		}
 		else {
 			Permanent perm = game.getPermanent(combatGroup.getDefenderId());
-			this.defenderName = perm.getName();
+			if (perm != null)
+				this.defenderName = perm.getName();
 		}
 		for (UUID id: combatGroup.getAttackers()) {
 			Permanent attacker = game.getPermanent(id);

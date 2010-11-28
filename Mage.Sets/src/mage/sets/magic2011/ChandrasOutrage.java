@@ -86,7 +86,7 @@ class ChandrasOutrageEffect extends OneShotEffect<ChandrasOutrageEffect> {
 		if (permanent != null) {
 			Player player = game.getPlayer(permanent.getControllerId());
 			if (player != null) {
-				permanent.damage(4, source.getSourceId(), game, true);
+				permanent.damage(4, source.getSourceId(), game, true, false);
 				player.damage(2, source.getSourceId(), game, false, true);
 				return true;
 			}

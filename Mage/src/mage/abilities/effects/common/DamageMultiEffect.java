@@ -70,7 +70,7 @@ public class DamageMultiEffect extends OneShotEffect<DamageMultiEffect> {
 		for (UUID target: multiTarget.getTargets()) {
 			Permanent permanent = game.getPermanent(target);
 			if (permanent != null) {
-				permanent.damage(multiTarget.getTargetAmount(target), source.getId(), game, true);
+				permanent.damage(multiTarget.getTargetAmount(target), source.getId(), game, true, false);
 			}
 			else {
 				Player player = game.getPlayer(target);

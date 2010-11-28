@@ -73,7 +73,7 @@ public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
 	public boolean apply(Game game, Ability source) {
 		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
-			permanent.damage(amount, source.getId(), game, preventable);
+			permanent.damage(amount, source.getId(), game, preventable, false);
 			return true;
 		}
 		Player player = game.getPlayer(source.getFirstTarget());

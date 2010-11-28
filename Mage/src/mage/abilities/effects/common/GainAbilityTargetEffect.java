@@ -64,8 +64,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
 	public boolean apply(Game game, Ability source) {
 		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
-			permanent.addAbility(ability);
-			//TODO: should copy ability before adding
+			permanent.addAbility(ability.copy());
 			return true;
 		}
 		return false;
