@@ -36,37 +36,40 @@ package mage.client;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Graphics2D;
 import java.awt.SplashScreen;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.HashMap;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedHashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JToolBar.Separator;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.plaf.synth.SynthLookAndFeel;
 
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.client.components.MageComponents;
-import mage.client.components.MageSynthStyleFactory;
 import mage.client.dialog.AboutDialog;
 import mage.client.dialog.CombatDialog;
 import mage.client.dialog.ConnectDialog;
@@ -74,6 +77,8 @@ import mage.client.dialog.PickNumberDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.remote.Session;
 import mage.client.util.EDTExceptionHandler;
+import mage.client.util.gui.ArrowBuilder;
+import mage.client.util.gui.ImagePanel;
 import mage.sets.Sets;
 import mage.util.Logging;
 
@@ -148,6 +153,26 @@ public class MageFrame extends javax.swing.JFrame {
 		else
 			disableButtons();
 		
+		String filename = "/background.jpg";
+		try {
+			InputStream is = this.getClass().getResourceAsStream(filename);
+			BufferedImage background = ImageIO.read(is);
+			backgroundPane = new ImagePanel(background, ImagePanel.SCALED);
+			backgroundPane.setSize(1024, 768);
+			desktopPane.add(backgroundPane, JLayeredPane.DEFAULT_LAYER);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		desktopPane.addComponentListener(new ComponentAdapter(){
+			@Override
+			public void componentResized(ComponentEvent e) {
+				int width = ((JComponent)e.getSource()).getWidth();
+				int height = ((JComponent)e.getSource()).getHeight();
+				backgroundPane.setSize(width, height);
+			}
+        });
+		
 		//TODO: move to plugin impl
 		if (Plugins.getInstance().isCardPluginLoaded()) {
 			Separator separator = new javax.swing.JToolBar.Separator();
@@ -184,7 +209,7 @@ public class MageFrame extends javax.swing.JFrame {
 		if (Plugins.getInstance().isCounterPluginLoaded()) {
 			int i = Plugins.getInstance().getGamesPlayed();
 			JLabel label = new JLabel("  Games played: " + String.valueOf(i));
-			desktopPane.add(label);
+			desktopPane.add(label, JLayeredPane.DEFAULT_LAYER + 1);
 			label.setVisible(true);
 			label.setForeground(Color.white);
 			label.setBounds(0, 0, 180, 30);
@@ -282,7 +307,7 @@ public class MageFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         //setMinimumSize(new java.awt.Dimension(1024, 768));
 
-        desktopPane.setBackground(new java.awt.Color(204, 204, 204));
+        //desktopPane.setBackground(new java.awt.Color(204, 204, 204));
         tablesPane.setBounds(20, 10, 560, 440);
         desktopPane.add(tablesPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
         try {
@@ -509,6 +534,8 @@ public class MageFrame extends javax.swing.JFrame {
     private javax.swing.JToolBar mageToolbar;
     private mage.client.table.TablesPane tablesPane;
     // End of variables declaration//GEN-END:variables
+    
+    private ImagePanel backgroundPane;
 
 	public void setStatusText(String status) {
 		this.lblStatus.setText(status);
