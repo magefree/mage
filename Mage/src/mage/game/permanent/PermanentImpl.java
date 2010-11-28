@@ -177,7 +177,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
 	@Override
 	public void checkTriggers(GameEvent event, Game game) {
-		if (event.getType() == EventType.BEGINNING_PHASE_PRE && game.getActivePlayerId().equals(controllerId))
+		if (event.getType() == EventType.BEGINNING_PHASE_PRE)
 			this.controlledFromStartOfTurn = true;
 		for (TriggeredAbility ability: abilities.getTriggeredAbilities(Zone.BATTLEFIELD)) {
 			ability.checkTrigger(event, game);
@@ -207,7 +207,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	@Override
 	public boolean canTap() {
 		//20100423 - 302.6
-		if (!cardType.contains(CardType.CREATURE) || this.controlledFromStartOfTurn || this.abilities.containsKey(HasteAbility.getInstance().getId())) {
+		if (!cardType.contains(CardType.CREATURE) || !hasSummoningSickness()) {
 			return true;
 		}
 		return false;
@@ -316,7 +316,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
 	@Override
 	public boolean hasSummoningSickness() {
-		return !this.controlledFromStartOfTurn;
+		return !(this.controlledFromStartOfTurn || this.abilities.containsKey(HasteAbility.getInstance().getId()));
 	}
 
 	@Override
@@ -554,7 +554,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	public boolean canAttack(Game game) {
 		if (tapped)
 			return false;
-		if (!controlledFromStartOfTurn && !abilities.containsKey(HasteAbility.getInstance().getId()))
+		if (hasSummoningSickness())
 			return false;
 		if (abilities.containsKey(DefenderAbility.getInstance().getId()))
 			return false;
