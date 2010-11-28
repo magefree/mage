@@ -41,6 +41,7 @@ import java.awt.event.ComponentEvent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JComponent;
@@ -87,7 +88,6 @@ public class GamePanel extends javax.swing.JPanel {
 	        // Override layout (I can't edit generated code)
 	        this.setLayout(new BorderLayout());
 			final JLayeredPane j = new JLayeredPane();
-			j.add(ArrowBuilder.getArrowsPanel(), JLayeredPane.MODAL_LAYER);
 			j.setSize(1024,768);
 			this.add(j);
 			j.add(jSplitPane1, JLayeredPane.DEFAULT_LAYER);
@@ -102,8 +102,6 @@ public class GamePanel extends javax.swing.JPanel {
 					int width = ((JComponent)e.getSource()).getWidth();
 					int height = ((JComponent)e.getSource()).getHeight();
 					j.setSize(width, height);
-					JPanel arrowsPanel = ArrowBuilder.getArrowsPanelRef();
-					if (arrowsPanel != null) arrowsPanel.setSize(width, height);
 					jSplitPane1.setSize(width, height);
 				}
 	        });
@@ -188,15 +186,18 @@ public class GamePanel extends javax.swing.JPanel {
 	public void hideGame() {
 		this.chatPanel.disconnect();
 		this.players.clear();
+		logger.log(Level.FINE, "players clear.");
 		this.pnlBattlefield.removeAll();
 		MageFrame.getCombatDialog().hideDialog();
 		this.setVisible(false);
 	}
 
 	public synchronized void init(GameView game) {
+		logger.log(Level.FINE, "init.");
 		MageFrame.getCombatDialog().init(gameId, bigCard);
 		MageFrame.getCombatDialog().setLocation(500, 300);
 		addPlayers(game);
+		logger.log(Level.FINE, "added players.");
 		updateGame(game);
 	}
 

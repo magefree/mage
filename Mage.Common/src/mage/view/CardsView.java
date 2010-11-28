@@ -59,8 +59,9 @@ public class CardsView extends HashMap<UUID, CardView> {
 
 	public CardsView(Collection<? extends Ability> abilities, GameState state) {
 		for (Ability ability: abilities) {
-			String sourceName = state.getPermanent(ability.getSourceId()).getName();
-			this.put(ability.getId(), new AbilityView(ability, sourceName));
+			Card sourceCard = state.getPermanent(ability.getSourceId());
+			String sourceName = sourceCard.getName();
+			this.put(ability.getId(), new AbilityView(ability, sourceName, new CardView(sourceCard)));
 		}
 	}
 

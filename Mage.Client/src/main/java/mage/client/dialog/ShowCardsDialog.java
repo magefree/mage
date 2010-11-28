@@ -43,10 +43,12 @@ import java.util.UUID;
 import javax.swing.JLayeredPane;
 
 import mage.cards.CardDimensions;
+import mage.cards.MageCard;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
-import mage.client.cards.Card;
+import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
+import mage.view.AbilityView;
 import mage.view.CardView;
 import mage.view.CardsView;
 
@@ -82,15 +84,28 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 	private void loadCardsFew(CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId) {
 		Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 		for (CardView card: showCards.values()) {
-			Card cardImg = new Card(card, bigCard, dimension, gameId);
-			cardImg.setBounds(rectangle);
-			cardArea.add(cardImg);
-			cardArea.moveToFront(cardImg);
-			cardImg.update(card);
-			cardImg.addMouseListener(this);
+			addCard(card, bigCard, gameId, rectangle, dimension);
 			rectangle.translate(Config.dimensions.frameWidth, 0);
 		}
 		cardArea.setPreferredSize(new Dimension(Config.dimensions.frameWidth * showCards.size(), Config.dimensions.frameHeight));
+	}
+	
+	private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle, CardDimensions dimension) {
+		if (card instanceof AbilityView) {
+			CardView tmp = ((AbilityView)card).getSourceCard();
+			tmp.overrideRules(card.getRules());
+			tmp.setIsAbility(true);
+			tmp.overrideTargets(card.getTargets());
+			tmp.setAbility(card); // cross-reference, required for ability picker
+			card = tmp;
+		}
+		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, dimension, gameId);
+		cardImg.setBounds(rectangle);
+		cardArea.add(cardImg);
+		cardArea.moveToFront(cardImg);
+		cardImg.update(card);
+		cardImg.addMouseListener(this);
+		cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 	}
 
 	private void loadCardsMany(CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId) {
@@ -99,12 +114,7 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 			Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 			int count = 0;
 			for (CardView card: showCards.values()) {
-				Card cardImg = new Card(card, bigCard, dimension, gameId);
-				cardImg.setBounds(rectangle);
-				cardArea.add(cardImg);
-				cardArea.moveToFront(cardImg);
-				cardImg.update(card);
-				cardImg.addMouseListener(this);
+				addCard(card, bigCard, gameId, rectangle, dimension);
 				if (count >= 20) {
 					rectangle.translate(Config.dimensions.frameWidth, -400);
 					columns++;

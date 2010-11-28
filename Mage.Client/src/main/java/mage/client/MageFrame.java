@@ -164,12 +164,16 @@ public class MageFrame extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
 		
+		desktopPane.add(ArrowBuilder.getArrowsPanel(), JLayeredPane.DRAG_LAYER);
+		
 		desktopPane.addComponentListener(new ComponentAdapter(){
 			@Override
 			public void componentResized(ComponentEvent e) {
 				int width = ((JComponent)e.getSource()).getWidth();
 				int height = ((JComponent)e.getSource()).getHeight();
 				backgroundPane.setSize(width, height);
+				JPanel arrowsPanel = ArrowBuilder.getArrowsPanelRef();
+				if (arrowsPanel != null) arrowsPanel.setSize(width, height);
 			}
         });
 		

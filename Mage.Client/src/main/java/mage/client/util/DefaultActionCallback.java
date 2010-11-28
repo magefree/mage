@@ -18,7 +18,12 @@ public class DefaultActionCallback {
 	}
 	
 	public void mouseClicked(MouseEvent e, UUID gameId, Session session, CardView card) {
-		if (gameId != null)
-			session.sendPlayerUUID(gameId, card.getId());
+		if (gameId != null) {
+			if (card.isAbility() && card.getAbility() != null) {
+				session.sendPlayerUUID(gameId, card.getAbility().getId());
+			} else {
+				session.sendPlayerUUID(gameId, card.getId());
+			}
+		}
 	}
 }

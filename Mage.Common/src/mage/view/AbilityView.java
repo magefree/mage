@@ -40,11 +40,13 @@ import mage.abilities.Ability;
 public class AbilityView extends CardView {
 
 	private String sourceName;
+	private CardView sourceCard;
 
-	public AbilityView(Ability ability, String sourceName) {
+	public AbilityView(Ability ability, String sourceName, CardView sourceCard) {
 		this.id = ability.getId();
 		this.name = "Ability";
 		this.sourceName = sourceName;
+		this.sourceCard = sourceCard;
 		this.rules = new ArrayList<String>();
 		rules.add(formatRule(ability.getRule()));
 		this.power = "";
@@ -65,5 +67,7 @@ public class AbilityView extends CardView {
 		return newRule;
 	}
 
-
+	public CardView getSourceCard() {
+		return this.sourceCard;
+	}
 }

@@ -68,6 +68,7 @@ public class CardView implements Serializable {
 	protected String expansionSetCode;
 	protected int cardNumber;
 	protected boolean isAbility;
+	protected CardView ability;
 
 	public List<UUID> targets;
 	
@@ -238,6 +239,14 @@ public class CardView implements Serializable {
 	
 	public void overrideTargets(List<UUID> newTargets) {
 		this.targets = newTargets;
+	}
+	
+	public void setAbility(CardView ability) {
+		this.ability = ability;
+	}
+	
+	public CardView getAbility() {
+		return this.ability;
 	}
 	
 	@Override
