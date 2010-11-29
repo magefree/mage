@@ -494,7 +494,8 @@ public class MageFrame extends javax.swing.JFrame {
         g.setComposite(AlphaComposite.Clear);
         g.fillRect(120,140,200,40);
         g.setPaintMode();
-        g.setColor(Color.BLACK);
+        g.setColor(Color.white);
+        g.drawString("Version 0.5", 560, 460);
     }
 	
     /**
@@ -508,6 +509,7 @@ public class MageFrame extends javax.swing.JFrame {
     			renderSplashFrame(g);
     		}
     	}
+    	splash.update();
     	
 		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
 			public void uncaughtException(Thread t, Throwable e) {
@@ -517,6 +519,7 @@ public class MageFrame extends javax.swing.JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 new MageFrame().setVisible(true);
+                splash.close();
             }
         });
     }

@@ -66,6 +66,7 @@ public class AboutDialog extends MageDialog {
         lblVersion = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setTitle("About MAGE");
 
@@ -76,13 +77,15 @@ public class AboutDialog extends MageDialog {
             }
         });
 
-        jLabel1.setText("MAGE client");
+        jLabel1.setText("MAGE client, version 0.5");
 
         lblVersion.setText("version");
 
         jLabel2.setText("Courtesy: BetaSteward@googlemail.com");
+        
+        jLabel3.setText("Devs: BetaSteward, Nantuko84, Eugen.Rivniy");
 
-        jLabel3.setText("Thanks: KLo, Cosmo & Fritz");
+        jLabel4.setText("Thanks: KLo, Cosmo & Fritz");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,6 +108,10 @@ public class AboutDialog extends MageDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
                 .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -118,6 +125,8 @@ public class AboutDialog extends MageDialog {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(btnOk)
                 .addContainerGap())
@@ -135,6 +144,7 @@ public class AboutDialog extends MageDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblVersion;
     // End of variables declaration//GEN-END:variables
 
