@@ -193,11 +193,11 @@ public class GamePanel extends javax.swing.JPanel {
 	}
 
 	public synchronized void init(GameView game) {
-		logger.log(Level.FINE, "init.");
+		logger.warning("init.");
 		MageFrame.getCombatDialog().init(gameId, bigCard);
 		MageFrame.getCombatDialog().setLocation(500, 300);
 		addPlayers(game);
-		logger.log(Level.FINE, "added players.");
+		logger.warning("added players.");
 		updateGame(game);
 	}
 

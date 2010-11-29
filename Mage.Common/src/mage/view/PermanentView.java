@@ -113,4 +113,8 @@ public class PermanentView extends CardView {
 	public CardView getOriginal() {
 		return original;
 	}
+	
+	public void overrideTapped(boolean tapped) {
+		this.tapped = tapped;
+	}
 }

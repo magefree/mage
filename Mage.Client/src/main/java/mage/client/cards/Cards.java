@@ -48,6 +48,7 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
 import mage.view.CardView;
 import mage.view.CardsView;
+import mage.view.PermanentView;
 import mage.view.StackAbilityView;
 
 /**
@@ -57,8 +58,9 @@ import mage.view.StackAbilityView;
 public class Cards extends javax.swing.JPanel {
 
 	private Map<UUID, MageCard> cards = new LinkedHashMap<UUID, MageCard>();
-	
-    /** Creates new form Cards */
+	private boolean dontDisplayTapped = false;
+
+	/** Creates new form Cards */
     public Cards() {
         initComponents();
         setOpaque(false);
@@ -83,6 +85,11 @@ public class Cards extends javax.swing.JPanel {
 		}
 		
 		for (CardView card: cardsView.values()) {
+			if (dontDisplayTapped) {
+				if (card instanceof PermanentView) {
+					((PermanentView)card).overrideTapped(false);
+				}
+			}
 			if (card instanceof StackAbilityView) {
 				CardView tmp = ((StackAbilityView)card).getSourceCard();
 				tmp.overrideRules(card.getRules());
@@ -168,4 +175,7 @@ public class Cards extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
+    public void setDontDisplayTapped(boolean dontDisplayTapped) {
+		this.dontDisplayTapped = dontDisplayTapped;
+	}
 }

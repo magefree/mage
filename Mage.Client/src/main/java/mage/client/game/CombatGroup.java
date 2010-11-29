@@ -34,8 +34,8 @@
 
 package mage.client.game;
 
-import java.awt.Dimension;
 import java.util.UUID;
+
 import mage.client.cards.BigCard;
 import mage.client.util.Config;
 import mage.view.CombatGroupView;
@@ -52,6 +52,7 @@ public class CombatGroup extends javax.swing.JPanel {
     /** Creates new form CombatGroup */
     public CombatGroup() {
         initComponents();
+        attackers.setDontDisplayTapped(true);
     }
 
 	public void init(UUID gameId, BigCard bigCard) {
