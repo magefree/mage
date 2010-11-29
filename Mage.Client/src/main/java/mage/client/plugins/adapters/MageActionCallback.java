@@ -1,7 +1,6 @@
 package mage.client.plugins.adapters;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -26,16 +25,17 @@ import mage.client.util.DefaultActionCallback;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.GuiDisplayUtil;
+import mage.view.CardView;
 
 import org.jdesktop.swingx.JXPanel;
 
 public class MageActionCallback implements ActionCallback {
 
 	private Popup popup;
-	private Component parent;
 	private BigCard bigCard; 
 	protected static DefaultActionCallback defaultCallback = DefaultActionCallback.getInstance();
 	protected static Session session = MageFrame.getSession();
+	private CardView popupCard;
 	
 	public MageActionCallback() {
 	}
@@ -57,16 +57,11 @@ public class MageActionCallback implements ActionCallback {
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent e, TransferData data) {
-		if (popup != null)
+	public void mouseEntered(MouseEvent e, final TransferData data) {
+		this.popupCard = data.card;
+		if (popup != null) {
 			popup.hide();
-		PopupFactory factory = PopupFactory.getSharedInstance();
-		popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
-		popup.show();
-		//hack to get popup to resize to fit text
-		popup.hide();
-		popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
-		popup.show();
+		}
 		
 		// Draw Arrows for targets
 		List<UUID> targets = data.card.getTargets();
@@ -110,6 +105,27 @@ public class MageActionCallback implements ActionCallback {
 				}
 			}
 		}
+		
+		
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e1) {}
+				if (MageActionCallback.this.popupCard == data.card) {
+					PopupFactory factory = PopupFactory.getSharedInstance();
+					popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
+					popup.show();
+				}
+			}
+		});
+		t.start();
+		
+		//hack to get popup to resize to fit text
+		/*popup.hide();
+		popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
+		popup.show();*/
 	}
 
 	@Override
