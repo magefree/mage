@@ -160,6 +160,7 @@ public class MageActionCallback implements ActionCallback {
 
 	@Override
 	public void mouseExited(MouseEvent e) {
+		this.popupCard = null;
 		if (popup != null) {
 			popup.hide();
 			ArrowBuilder.removeAllArrows();

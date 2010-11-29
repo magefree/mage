@@ -35,6 +35,7 @@
 package mage.client.game;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -410,6 +411,7 @@ public class GamePanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // </editor-fold>//GEN-END:initComponents
     private void initComponents() {
 
         abilityPicker = new mage.client.game.AbilityPicker();
@@ -440,8 +442,9 @@ public class GamePanel extends javax.swing.JPanel {
         chatPanel = new mage.client.chat.ChatPanel();
 
         jSplitPane1.setBorder(null);
-        jSplitPane1.setDividerSize(3);
+        jSplitPane1.setDividerSize(7);
         jSplitPane1.setResizeWeight(1.0);
+        jSplitPane1.setOneTouchExpandable(true);
         jSplitPane1.setMinimumSize(new java.awt.Dimension(26, 48));
 
         pnlGameInfo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -636,6 +639,7 @@ public class GamePanel extends javax.swing.JPanel {
             .addComponent(pnlGameInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jPanel3.setMinimumSize(new Dimension(1024, 768));
         jSplitPane1.setLeftComponent(jPanel3);
 
         chatPanel.setMinimumSize(new java.awt.Dimension(100, 48));
@@ -651,7 +655,7 @@ public class GamePanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
         );
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
 	private void btnConcedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcedeActionPerformed
 		if (modalQuestion("Are you sure you want to concede?", "Confirm concede") == JOptionPane.YES_OPTION) {

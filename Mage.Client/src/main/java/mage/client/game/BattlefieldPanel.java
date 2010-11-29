@@ -37,6 +37,7 @@ package mage.client.game;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.util.HashMap;
@@ -68,12 +69,20 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 	private Map<String, JComponent> ui = new HashMap<String, JComponent>();
 
 	protected static DefaultActionCallback defaultCallback = DefaultActionCallback.getInstance();
-
+	protected static Map<UUID, PermanentView> battlefield;
+	
     /** Creates new form BattlefieldPanel */
     public BattlefieldPanel(JScrollPane jScrollPane) {
     	ui.put("jScrollPane", jScrollPane);
     	ui.put("battlefieldPanel", this);
         initComponents();
+        
+        addComponentListener(new ComponentAdapter(){
+			@Override
+			public void componentResized(ComponentEvent e) {
+				sortLayout();
+			}
+        });
     }
 
 	public void init(UUID gameId, BigCard bigCard) {
@@ -103,16 +112,22 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 		}
 		
 		if (changed) {
-			Plugins.getInstance().sortPermanents(ui, permanents.values());
-			
-			for (PermanentView permanent: battlefield.values()) {
-				if (permanent.getAttachments() != null) {
-					groupAttachments(permanent);
-				}
-			}
-			
-			invalidate();
+			BattlefieldPanel.battlefield = battlefield;
+			sortLayout();
 		}
+	}
+	
+	public void sortLayout() {
+		Plugins.getInstance().sortPermanents(ui, permanents.values());
+		if (battlefield == null) {return;}
+		
+		for (PermanentView permanent: battlefield.values()) {
+			if (permanent.getAttachments() != null) {
+				groupAttachments(permanent);
+			}
+		}
+		
+		invalidate();
 	}
 
 	private void addPermanent(PermanentView permanent) {
