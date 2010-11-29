@@ -118,15 +118,24 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
 	public void init(Ability source, Game game) {
 		//20100716 - 611.2c
 		if (source instanceof ActivatedAbility) {
-			switch (layer) {
-				case CopyEffects_1:
-				case ControlChangingEffects_2:
-				case TextChangingEffects_3:
-				case TypeChangingEffects_4:
-				case ColorChangingEffects_5:
-				case AbilityAddingRemovingEffects_6:
-				case PTChangingEffects_7:
+			if (layer != null) {
+				switch (layer) {
+					case CopyEffects_1:
+					case ControlChangingEffects_2:
+					case TextChangingEffects_3:
+					case TypeChangingEffects_4:
+					case ColorChangingEffects_5:
+					case AbilityAddingRemovingEffects_6:
+					case PTChangingEffects_7:
+						this.affectedObjectsSet = true;
+				}
+			}
+			else {
+				if (hasLayer(Layer.CopyEffects_1) || hasLayer(Layer.ControlChangingEffects_2) || hasLayer(Layer.TextChangingEffects_3) ||
+					hasLayer(Layer.TypeChangingEffects_4) || hasLayer(Layer.ColorChangingEffects_5) || hasLayer(Layer.AbilityAddingRemovingEffects_6) ||
+					hasLayer(Layer.PTChangingEffects_7)) {
 					this.affectedObjectsSet = true;
+				}
 			}
 		}
 	}

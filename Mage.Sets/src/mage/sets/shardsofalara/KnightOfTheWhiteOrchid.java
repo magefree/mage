@@ -34,16 +34,13 @@ import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.common.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -81,13 +78,18 @@ public class KnightOfTheWhiteOrchid extends CardImpl<KnightOfTheWhiteOrchid> {
 
 }
 
-class KnightOfTheWhiteOrchidAbility extends EntersBattlefieldTriggeredAbility<KnightOfTheWhiteOrchidAbility> {
+class KnightOfTheWhiteOrchidAbility extends ZoneChangeTriggeredAbility<KnightOfTheWhiteOrchidAbility> {
+
+	private static FilterCard filter1 = new FilterCard("Plains");
+	private static FilterLandPermanent filter2 = new FilterLandPermanent();
+
+	static {
+		filter1.getName().add("Plains");
+	}
 
 	public KnightOfTheWhiteOrchidAbility() {
-		super(null, true);
-		FilterCard filter = new FilterCard("Plains");
-		filter.getName().add("Plains");
-		TargetCardInLibrary target = new TargetCardInLibrary(filter);
+		super(Zone.BATTLEFIELD, null, "When {this} enters the battlefield, if an opponent controls more lands than you, you may ", true);
+		TargetCardInLibrary target = new TargetCardInLibrary(filter1);
 		addEffect(new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay));
 	}
 
@@ -101,33 +103,14 @@ class KnightOfTheWhiteOrchidAbility extends EntersBattlefieldTriggeredAbility<Kn
 	}
 
 	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId()) ) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-			if (zEvent.getToZone() == Zone.BATTLEFIELD) {
-				trigger(game, this.controllerId);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
 	public boolean checkInterveningIfClause(Game game) {
-		FilterLandPermanent filter = new FilterLandPermanent();
-		int numLands = game.getBattlefield().countAll(filter, this.controllerId);
+		int numLands = game.getBattlefield().countAll(filter2, this.controllerId);
 		for (UUID opponentId: game.getOpponents(this.controllerId)) {
-			if (numLands < game.getBattlefield().countAll(filter, opponentId)) {
+			if (numLands < game.getBattlefield().countAll(filter2, opponentId)) {
 				return true;
 			}
 		}
 		return false;
-	}
-
-
-	@Override
-	public String getRule() {
-		return "When {this} enters the battlefield, if an opponent controls more lands than you, you may " + super.getRule();
 	}
 
 }

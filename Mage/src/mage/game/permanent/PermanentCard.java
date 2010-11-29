@@ -36,6 +36,7 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
+import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.keyword.LevelAbility;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
@@ -116,11 +117,18 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 
 	public void checkPermanentOnlyTriggers(ZoneChangeEvent event, Game game) {
 		// we only want to trigger abilities that are not on the underlying card ie. have been added by another effect
+		// or we want to trigger abilities that only trigger on leaving the battlefield
 		// card abilities will get triggered later when the card hits the new zone
 		Card card = game.getCard(objectId).copy();
 		for (TriggeredAbility ability: abilities.getTriggeredAbilities(event.getFromZone())) {
 			if (!card.getAbilities().containsKey(ability.getId()))
 				ability.checkTrigger(event, game);
+			else if (ability instanceof ZoneChangeTriggeredAbility && event.getFromZone() == Zone.BATTLEFIELD) {
+				ZoneChangeTriggeredAbility zcAbility = (ZoneChangeTriggeredAbility)ability;
+				if (zcAbility.getToZone() == null) {
+					ability.checkTrigger(event, game);
+				}
+			}
 		}
 		for (TriggeredAbility ability: abilities.getTriggeredAbilities(event.getToZone())) {
 			if (!card.getAbilities().containsKey(ability.getId()))

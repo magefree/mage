@@ -29,42 +29,20 @@
 package mage.abilities.common;
 
 import mage.Constants.Zone;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LeavesBattlefieldTriggeredAbility extends TriggeredAbilityImpl<LeavesBattlefieldTriggeredAbility> {
+public class LeavesBattlefieldTriggeredAbility extends ZoneChangeTriggeredAbility<LeavesBattlefieldTriggeredAbility> {
 
 	public LeavesBattlefieldTriggeredAbility(Effect effect, boolean optional) {
-		super(Zone.BATTLEFIELD, effect, optional);
+		super(Zone.BATTLEFIELD, null, effect, "When {this} leaves the battlefield, ", optional);
 	}
 
 	public LeavesBattlefieldTriggeredAbility(LeavesBattlefieldTriggeredAbility ability) {
 		super(ability);
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId()) ) {
-			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-			if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-				trigger(game, this.controllerId);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public String getRule() {
-		return "When {this} leaves the battlefield, " + super.getRule();
 	}
 
 	@Override
