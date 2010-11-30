@@ -99,6 +99,7 @@ public class Client implements CallbackClient {
 			}
 			else if (callback.getMethod().equals("gameInit")) {
 				session.getGame().init((GameView) callback.getData());
+				session.ack("gameInit");
 			}
 			else if (callback.getMethod().equals("gameOver")) {
 				session.getGame().modalMessage((String) callback.getData());

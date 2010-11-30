@@ -508,8 +508,8 @@ public class MageFrame extends javax.swing.JFrame {
     		if (g != null) {
     			renderSplashFrame(g);
     		}
+	    	splash.update();
     	}
-    	splash.update();
     	
 		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
 			public void uncaughtException(Thread t, Throwable e) {

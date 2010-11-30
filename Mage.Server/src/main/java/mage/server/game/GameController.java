@@ -165,10 +165,15 @@ public class GameController implements GameCallback {
 		GameSession gameSession = new GameSession(game, sessionId, playerId);
 		gameSessions.put(playerId, gameSession);
 		logger.info("player " + playerId + " has joined game " + game.getId());
-//		gameSession.init(getGameView(playerId));
 		ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(playerId).getName() + " has joined the game", MessageColor.BLACK);
 		if (allJoined()) {
-			startGame();
+			ThreadExecutor.getInstance().getRMIExecutor().execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						startGame();
+					}
+			});
 		}
 	}
 
@@ -177,6 +182,8 @@ public class GameController implements GameCallback {
 			for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
 				if (!entry.getValue().init(getGameView(entry.getKey()))) {
 					logger.severe("Unable to initialize client");
+					//TODO: generate client error message
+					return;
 				}
 			}
 			GameWorker worker = new GameWorker(game, this);

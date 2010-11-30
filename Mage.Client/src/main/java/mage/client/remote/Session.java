@@ -28,7 +28,6 @@
 
 package mage.client.remote;
 
-import java.awt.Component;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -46,7 +45,6 @@ import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.DeckCardLists;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
-import mage.client.components.MageComponents;
 import mage.client.components.MageUI;
 import mage.client.game.GamePanel;
 import mage.client.util.Config;
@@ -127,6 +125,16 @@ public class Session {
 			}
 			frame.setStatusText("Not connected ");
 			frame.disableButtons();
+		}
+	}
+
+	public void ack(String message) {
+		try {
+			server.ack(message, sessionId);
+		} catch (RemoteException ex) {
+			handleRemoteException(ex);
+		} catch (MageException ex) {
+			handleMageException(ex);
 		}
 	}
 

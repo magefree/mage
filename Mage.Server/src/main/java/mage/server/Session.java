@@ -49,6 +49,7 @@ public class Session {
 	private UUID clientId;
 	private String username;
 	private int messageId = 0;
+	private String ackMessage;
 	private final CallbackServerSession callback = new CallbackServerSession();
 
 	public Session(String userName, UUID clientId) {
@@ -77,11 +78,11 @@ public class Session {
 		return null;
 	}
 
-	public synchronized void fireCallback(ClientCallback call) {
+	public synchronized void fireCallback(final ClientCallback call) {
+		call.setMessageId(messageId++);
+		if (logger.isLoggable(Level.FINE))
+			logger.fine(sessionId + " - " + call.getMessageId() + " - " + call.getMethod());
 		try {
-			call.setMessageId(messageId++);
-			if (logger.isLoggable(Level.FINE))
-				logger.fine(sessionId + " - " + call.getMessageId() + " - " + call.getMethod());
 			callback.setCallback(call);
 		} catch (InterruptedException ex) {
 			logger.log(Level.SEVERE, null, ex);
@@ -98,6 +99,18 @@ public class Session {
 
 	public void replayGame() {
 		fireCallback(new ClientCallback("replayGame", null));
+	}
+
+	public void ack(String message) {
+		this.ackMessage = message;
+	}
+
+	public String getAckMessage() {
+		return ackMessage;
+	}
+
+	public void clearAck() {
+		this.ackMessage = "";
 	}
 
 	public String getUsername() {

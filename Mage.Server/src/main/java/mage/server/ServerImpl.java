@@ -54,7 +54,6 @@ import mage.server.game.ReplayManager;
 import mage.server.game.TableManager;
 import mage.util.Logging;
 import mage.view.ChatMessage.MessageColor;
-import mage.view.GameTypeView;
 import mage.view.TableView;
 
 /**
@@ -89,6 +88,11 @@ public class ServerImpl extends RemoteServer implements Server {
 	@Override
 	public ClientCallback callback(UUID sessionId) {
 		return SessionManager.getInstance().getSession(sessionId).callback();
+	}
+
+	@Override
+	public void ack(String message, UUID sessionId) throws RemoteException, MageException {
+		SessionManager.getInstance().getSession(sessionId).ack(message);
 	}
 
 	@Override
@@ -446,39 +450,6 @@ public class ServerImpl extends RemoteServer implements Server {
 		}
 		return null;
 	}
-
-//	@Override
-//	public List<GameTypeView> getGameTypes() throws MageException {
-//		try {
-//			return GameFactory.getInstance().getGameTypes();
-//		}
-//		catch (Exception ex) {
-//			handleException(ex);
-//		}
-//		return null;
-//	}
-//
-//	@Override
-//	public String[] getPlayerTypes() throws MageException {
-//		try {
-//			return PlayerFactory.getInstance().getPlayerTypes().toArray(new String[0]);
-//		}
-//		catch (Exception ex) {
-//			handleException(ex);
-//		}
-//		return null;
-//	}
-//
-//	@Override
-//	public String[] getDeckTypes() throws MageException {
-//		try {
-//			return DeckValidatorFactory.getInstance().getDeckTypes().toArray(new String[0]);
-//		}
-//		catch (Exception ex) {
-//			handleException(ex);
-//		}
-//		return null;
-//	}
 
 	@Override
 	public void cheat(UUID gameId, UUID sessionId, UUID playerId, DeckCardLists deckList) throws MageException {

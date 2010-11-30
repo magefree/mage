@@ -48,6 +48,7 @@ public interface Server extends Remote, CallbackServer {
 
 	public UUID registerClient(String userName, UUID clientId) throws RemoteException, MageException;
 	public void deregisterClient(UUID sessionId) throws RemoteException, MageException;
+	public void ack(String message, UUID sessionId) throws RemoteException, MageException;
 
 	public ServerState getServerState() throws RemoteException, MageException;
 

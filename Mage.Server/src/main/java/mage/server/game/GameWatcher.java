@@ -60,11 +60,21 @@ public class GameWatcher {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
+				session.clearAck();
 				session.fireCallback(new ClientCallback("gameInit", gameView));
-				return true;
+				if (waitForAck("gameInit"))
+					return true;
 			}
 		}
 		return false;
+	}
+
+	public boolean waitForAck(String message) {
+		Session session = SessionManager.getInstance().getSession(sessionId);
+		do {
+			//TODO: add timeout
+		} while (!session.getAckMessage().equals(message) && !killed);
+		return true;
 	}
 
 	public void update(final GameView gameView) {
