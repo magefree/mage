@@ -63,9 +63,9 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JToolBar.Separator;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.JToolBar.Separator;
 
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
@@ -519,7 +519,9 @@ public class MageFrame extends javax.swing.JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 new MageFrame().setVisible(true);
-                splash.close();
+                if (splash != null) {
+                	splash.close();
+                }
             }
         });
     }
