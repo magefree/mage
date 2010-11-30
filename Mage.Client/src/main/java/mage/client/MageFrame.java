@@ -46,8 +46,6 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.LinkedHashSet;
-import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -58,7 +56,6 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDesktopPane;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
@@ -67,8 +64,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.JToolBar.Separator;
 
-import mage.cards.Card;
-import mage.cards.ExpansionSet;
+import mage.client.cards.CardsStorage;
 import mage.client.components.MageComponents;
 import mage.client.dialog.AboutDialog;
 import mage.client.dialog.CombatDialog;
@@ -79,7 +75,6 @@ import mage.client.remote.Session;
 import mage.client.util.EDTExceptionHandler;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.ImagePanel;
-import mage.sets.Sets;
 import mage.util.Logging;
 
 /**
@@ -138,7 +133,7 @@ public class MageFrame extends javax.swing.JFrame {
 
 		initComponents();
 		setSize(1024,768);
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		session = new Session(this);
 		connectDialog = new ConnectDialog();
@@ -223,11 +218,7 @@ public class MageFrame extends javax.swing.JFrame {
     }
     
     private void  btnImagesActionPerformed(java.awt.event.ActionEvent evt) {
-    	Set<Card> allCards = new LinkedHashSet<Card>();
-    	for (ExpansionSet set: Sets.getInstance().values()) {
-			allCards.addAll(set.createCards());
-		}
-    	Plugins.getInstance().downloadImage(allCards);
+    	Plugins.getInstance().downloadImage(CardsStorage.getAllCards());
 	}
     
     private void  btnSymbolsActionPerformed(java.awt.event.ActionEvent evt) {
@@ -544,10 +535,10 @@ public class MageFrame extends javax.swing.JFrame {
     private mage.client.table.TablesPane tablesPane;
     // End of variables declaration//GEN-END:variables
     
+	private static final long serialVersionUID = -9104885239063142218L;
     private ImagePanel backgroundPane;
 
 	public void setStatusText(String status) {
 		this.lblStatus.setText(status);
 	}
-
 }

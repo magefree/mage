@@ -47,6 +47,7 @@ import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardGrid;
+import mage.client.cards.CardsStorage;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.sets.Sets;
@@ -58,7 +59,6 @@ import mage.view.CardsView;
  */
 public class CardSelector extends javax.swing.JPanel implements ComponentListener {
 
-	private final Set<Card> allCards = new LinkedHashSet<Card>();
 	private final List<Card> cards = new ArrayList<Card>();
 	private final FilterCard filter = new FilterCard();
 	private BigCard bigCard;
@@ -73,9 +73,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		this.bigCard = bigCard;
 		cbExpansionSet.setModel(new DefaultComboBoxModel(Sets.getInstance().values().toArray()));
 //		cbExpansionSet.insertItemAt("All sets", 0);
-		for (ExpansionSet set: Sets.getInstance().values()) {
-			allCards.addAll(set.createCards());
-		}
 		cbExpansionSet.setSelectedIndex(0);
 		filter.setUseColor(true);
 		filter.getColor().setBlack(true);
@@ -103,7 +100,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		try {
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
 			cards.clear();
-			for (Card card: allCards) {
+			for (Card card: CardsStorage.getAllCards()) {
 				if (filter.match(card))
 					cards.add(card);
 			}

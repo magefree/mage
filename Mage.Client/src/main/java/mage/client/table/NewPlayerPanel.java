@@ -34,12 +34,30 @@
 
 package mage.client.table;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
+
+import mage.cards.Card;
+import mage.cards.ExpansionSet;
 import mage.client.MageFrame;
+import mage.client.deck.generator.DeckGenerator;
 import mage.client.util.Config;
+import mage.client.util.gui.ColorsChooser;
+import mage.sets.Sets;
 
 /**
  *
@@ -80,6 +98,13 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 		fcSelectDeck.setSelectedFile(null);
 	}
 
+	protected void generateDeck() {
+		String path = DeckGenerator.generateDeck();
+		if (path != null) {
+			this.txtPlayerDeck.setText(path);
+		}
+	}
+	
 	public String getPlayerName() {
 		return this.txtPlayerName.getText();
 	}
@@ -95,6 +120,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // </editor-fold>//GEN-END:initComponents    
     private void initComponents() {
 
         lblPlayerName = new javax.swing.JLabel();
@@ -102,7 +128,8 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         lblPlayerDeck = new javax.swing.JLabel();
         txtPlayerDeck = new javax.swing.JTextField();
         btnPlayerDeck = new javax.swing.JButton();
-
+        btnGenerate = new javax.swing.JButton();
+        
         lblPlayerName.setLabelFor(txtPlayerName);
         lblPlayerName.setText("Name:");
 
@@ -113,6 +140,13 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         btnPlayerDeck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPlayerDeckActionPerformed(evt);
+            }
+        });
+        
+        btnGenerate.setText("Generate deck");
+        btnGenerate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerateActionPerformed(evt);
             }
         });
 
@@ -131,7 +165,10 @@ public class NewPlayerPanel extends javax.swing.JPanel {
                     .addComponent(txtPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
                     .addComponent(txtPlayerDeck, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            )
+            .addComponent(btnGenerate)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,14 +180,22 @@ public class NewPlayerPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPlayerDeck)
                     .addComponent(txtPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(3, 3, 3)
+            	.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                	.addComponent(btnGenerate)
+            	)
+            )
         );
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
 	private void btnPlayerDeckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayerDeckActionPerformed
 		playerLoadDeck();
 	}//GEN-LAST:event_btnPlayerDeckActionPerformed
 
+	private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {
+		generateDeck();
+	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPlayerDeck;
@@ -160,6 +205,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtPlayerName;
     // End of variables declaration//GEN-END:variables
 
+    private javax.swing.JButton btnGenerate;
 }
 
 class DeckFilter extends FileFilter {

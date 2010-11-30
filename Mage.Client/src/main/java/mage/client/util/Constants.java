@@ -28,7 +28,8 @@
 
 package mage.client.util;
 
-import java.io.File;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 
 /**
  *
@@ -66,6 +67,8 @@ public final class Constants {
 	public static final int POWBOX_TEXT_MAX_TOP = 352;
 	public static final int POWBOX_TEXT_MAX_LEFT = 212;
 	public static final int DAMAGE_MAX_LEFT = 180;
+
+	public static final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(2,2,2,2);
 
 	public static final double SCALE_FACTOR = 0.5;
 	

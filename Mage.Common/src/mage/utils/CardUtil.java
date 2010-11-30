@@ -1,6 +1,7 @@
 package mage.utils;
 
 import mage.Constants.CardType;
+import mage.cards.Card;
 import mage.cards.MagePermanent;
 import mage.view.CardView;
 
@@ -38,5 +39,9 @@ public class CardUtil {
 	
 	public static boolean is(CardView card, CardType type) {
 		return card.getCardTypes().contains(type);
+	}
+	
+	public static boolean isBasicLand(Card card) {
+		return card.getSupertype().contains("Basic");
 	}
 }
