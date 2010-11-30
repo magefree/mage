@@ -36,6 +36,8 @@ public class MageActionCallback implements ActionCallback {
 	protected static DefaultActionCallback defaultCallback = DefaultActionCallback.getInstance();
 	protected static Session session = MageFrame.getSession();
 	private CardView popupCard;
+	private Thread t;
+	private int state = 0;
 	
 	public MageActionCallback() {
 	}
@@ -60,7 +62,10 @@ public class MageActionCallback implements ActionCallback {
 	public void mouseEntered(MouseEvent e, final TransferData data) {
 		this.popupCard = data.card;
 		if (popup != null) {
-			popup.hide();
+			//synchronized (MageActionCallback.this) {
+				popup.hide();
+				state = 0;
+			//}
 		}
 		
 		// Draw Arrows for targets
@@ -113,21 +118,33 @@ public class MageActionCallback implements ActionCallback {
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException e1) {}
-				if (MageActionCallback.this.popupCard == data.card) {
-					PopupFactory factory = PopupFactory.getSharedInstance();
-					popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
-					popup.show();
-				}
+				state = 1;
 			}
 		});
 		t.start();
-		
-		//hack to get popup to resize to fit text
-		/*popup.hide();
-		popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
-		popup.show();*/
+		showPopup(data);
 	}
 
+	private void showPopup( final TransferData data) {
+		while (state == 0) {
+			try {
+				Thread.sleep(10);
+			} catch (Exception e) {
+				
+			}
+		}
+		if (state > 1) {
+			return;
+		}
+		PopupFactory factory = PopupFactory.getSharedInstance();
+		popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
+		popup.show();
+		// hack to get popup to resize to fit text
+		//popup.hide();
+		//popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
+		//popup.show();
+	}
+	
 	@Override
 	public void mouseMoved(MouseEvent e, TransferData data) {
 		if (!Plugins.getInstance().isCardPluginLoaded()) {return;}
@@ -162,7 +179,15 @@ public class MageActionCallback implements ActionCallback {
 	public void mouseExited(MouseEvent e) {
 		this.popupCard = null;
 		if (popup != null) {
-			popup.hide();
+			//synchronized (MageActionCallback.this) {
+				if (t != null) {
+					try {
+						t.stop();
+					} catch (Exception e1) {}
+				}
+				popup.hide();
+				state = 0;
+			//}
 			ArrowBuilder.removeAllArrows();
 		}
 	}
