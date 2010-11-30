@@ -1,5 +1,6 @@
 package mage.interfaces.plugin;
 
+import java.awt.Image;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -29,4 +30,5 @@ public interface CardPlugin extends Plugin {
 	void sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> cards);
 	void downloadImages(Set<Card> allCards);
 	void downloadSymbols();
+	Image getManaSymbolImage(String symbol);
 }

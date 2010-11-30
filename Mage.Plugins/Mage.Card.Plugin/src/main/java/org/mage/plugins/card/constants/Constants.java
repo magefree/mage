@@ -4,7 +4,8 @@ import java.awt.Rectangle;
 import java.io.File;
 
 public class Constants {
-	public static final String RESOURCE_PATH_MANA = IO.imageBaseDir + "symbols" + File.separator + "large";
+	public static final String RESOURCE_PATH_MANA_LARGE = IO.imageBaseDir + "symbols" + File.separator + "large";
+	public static final String RESOURCE_PATH_MANA_MEDIUM = IO.imageBaseDir + "symbols" + File.separator + "medium";
 	
 	public static final Rectangle CARD_SIZE_FULL = new Rectangle(101, 149);
 	

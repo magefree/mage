@@ -10,9 +10,6 @@ import mage.client.components.MageComponents;
 import mage.client.components.MageUI;
 import mage.util.Logging;
 
-import org.junit.Ignore;
-import org.junit.Test;
-
 public class StartMultiGamesTest {
 
 	private final static Logger logger = Logging.getLogger(StartMultiGamesTest.class.getName());
@@ -31,7 +28,7 @@ public class StartMultiGamesTest {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testEmpty() {
 		
 	}

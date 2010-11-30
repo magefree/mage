@@ -19,13 +19,14 @@ import org.mage.plugins.card.utils.BufferedImageBuilder;
 public class ManaSymbols {
 	private static final Logger log = Logger.getLogger(ManaSymbols.class);
 	static private final Map<String, Image> manaImages = new HashMap<String, Image>();
+	static private final Map<String, Image> manaImagesOriginal = new HashMap<String, Image>();
 	static private Pattern replaceSymbolsPattern = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
 
 	static public void loadImages () {
 		String[] symbols = new String[] {"0", "1", "10", "11", "12", "15", "16", "2", "3", "4", "5", "6", "7", "8", "9", "B", "BG",
 			"BR", "G", "GU", "GW", "R", "RG", "RW", "S", "T", "U", "UB", "UR", "W", "WB", "WU", "X", "Y", "Z", "slash"};
 		for (String symbol : symbols) {
-			File file = new File(Constants.RESOURCE_PATH_MANA + "/" + symbol + ".jpg");
+			File file = new File(Constants.RESOURCE_PATH_MANA_LARGE + "/" + symbol + ".jpg");
 			BufferedImageBuilder builder = new BufferedImageBuilder();
 			Rectangle r = new Rectangle(11, 11);
 			try {
@@ -33,9 +34,18 @@ public class ManaSymbols {
 				BufferedImage resized = ImageCache.getResizedImage(builder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
 				manaImages.put(symbol, resized);
 			} catch (Exception e) {}
+			file = new File(Constants.RESOURCE_PATH_MANA_MEDIUM + "/" + symbol + ".jpg");
+			try {
+				Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
+				manaImagesOriginal.put(symbol, image);
+			} catch (Exception e) {}
 		}
 	}
 
+	static public Image getManaSymbolImage(String symbol) {
+		return manaImagesOriginal.get(symbol);
+	}
+	
 	static public void draw (Graphics g, String manaCost, int x, int y) {
 		if (manaCost.length() == 0) return;
 		manaCost = manaCost.replace("\\", "");

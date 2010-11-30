@@ -1,5 +1,6 @@
 package mage.client.plugins;
 
+import java.awt.Image;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -30,4 +31,5 @@ public interface MagePlugins {
 	void downloadSymbols();
 	int getGamesPlayed();
 	void addGamesPlayed();
+	Image getManaSymbolImage(String symbol);
 }

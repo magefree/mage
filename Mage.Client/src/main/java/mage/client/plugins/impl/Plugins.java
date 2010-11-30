@@ -1,5 +1,6 @@
 package mage.client.plugins.impl;
 
+import java.awt.Image;
 import java.io.File;
 import java.util.Collection;
 import java.util.Map;
@@ -157,5 +158,13 @@ public class Plugins implements MagePlugins {
 	@Override
 	public boolean isThemePluginLoaded() {
 		return this.themePlugin != null;
+	}
+	
+	@Override
+	public Image getManaSymbolImage(String symbol) {
+		if (this.cardPlugin != null) {
+			return this.cardPlugin.getManaSymbolImage(symbol);
+		}
+		return null;
 	}
 }

@@ -2,6 +2,7 @@ package org.mage.plugins.card;
 
 import java.awt.BorderLayout;
 import java.awt.Frame;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -426,5 +427,10 @@ public class CardPluginImpl implements CardPlugin {
 		d.add(g);
 		d.pack();
 		d.setVisible(true);		
+	}
+
+	@Override
+	public Image getManaSymbolImage(String symbol) {
+		return ManaSymbols.getManaSymbolImage(symbol);
 	}
 }

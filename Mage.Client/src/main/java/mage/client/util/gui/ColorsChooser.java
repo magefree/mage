@@ -1,16 +1,23 @@
 package mage.client.util.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 
+import mage.client.plugins.impl.Plugins;
 import mage.client.util.Constants;
 
 public class ColorsChooser extends JComboBox implements ListCellRenderer {
@@ -41,7 +48,7 @@ public class ColorsChooser extends JComboBox implements ListCellRenderer {
 	public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected,
 			final boolean cellHasFocus) {
 
-		final JPanel panel = new JPanel(new GridLayout(1, 3));
+		final JPanel panel = new JPanel(new FlowLayout());
 		drawOn(panel, (String) value);
 		panel.setBorder(Constants.EMPTY_BORDER);
 		if (isSelected) {
@@ -51,7 +58,30 @@ public class ColorsChooser extends JComboBox implements ListCellRenderer {
 	}
 	
 	private void drawOn(JPanel panel, String value) {
-		String s = value.replace("b", "{B}").replace("r", "{R}").replace("g", "{G}").replace("w", "{W}").replace("u", "{U}");
-		panel.add(new JLabel(s));
+		List<Image> images = new ArrayList<Image>();
+		value = value.toUpperCase();
+		for (int i = 0; i < value.length(); i++) {
+			char symbol = value.charAt(i);
+			Image image = Plugins.getInstance().getManaSymbolImage(String.valueOf(symbol));
+			if (image != null) {
+				images.add(image);
+			}
+		}
+		
+		if (images.size() == value.length()) {
+			int dx = 0;
+			for (Image image : images) {
+				ImageIcon icon = new ImageIcon(image);
+				JLabel imageLabel = new JLabel();
+				imageLabel.setSize(11, 11);
+				imageLabel.setLocation(dx, 0);
+				imageLabel.setIcon(icon);
+				panel.add(imageLabel);
+				dx += 13;
+			}
+		} else {
+			String s = value.replace("B", "{B}").replace("R", "{R}").replace("G", "{G}").replace("W", "{W}").replace("U", "{U}");
+			panel.add(new JLabel(s));	
+		}
 	}
 }
