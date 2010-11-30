@@ -86,7 +86,7 @@ public class DeckGenerator {
 				tmp.createNewFile();
 				deck.setName("Generated-Deck-" + UUID.randomUUID());
 				deck.getDeckCardLists().save(tmp.getAbsolutePath());
-				JOptionPane.showMessageDialog(null, "Deck has been generated.");
+				//JOptionPane.showMessageDialog(null, "Deck has been generated.");
 				return tmp.getAbsolutePath();
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -510,9 +510,6 @@ public class MageFrame extends javax.swing.JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 new MageFrame().setVisible(true);
-                if (splash != null) {
-                	splash.close();
-                }
             }
         });
     }
