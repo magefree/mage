@@ -1,6 +1,7 @@
 package mage.client.plugins.adapters;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -8,8 +9,9 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.UUID;
 
+import javax.swing.JDesktopPane;
+import javax.swing.JLayeredPane;
 import javax.swing.Popup;
-import javax.swing.PopupFactory;
 import javax.swing.SwingUtilities;
 
 import mage.cards.MageCard;
@@ -18,9 +20,11 @@ import mage.cards.action.ActionCallback;
 import mage.cards.action.TransferData;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
+import mage.client.components.MageComponents;
 import mage.client.game.PlayAreaPanel;
 import mage.client.plugins.impl.Plugins;
 import mage.client.remote.Session;
+import mage.client.thread.DelayedViewerThread;
 import mage.client.util.DefaultActionCallback;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.ArrowBuilder;
@@ -62,10 +66,7 @@ public class MageActionCallback implements ActionCallback {
 	public void mouseEntered(MouseEvent e, final TransferData data) {
 		this.popupCard = data.card;
 		if (popup != null) {
-			//synchronized (MageActionCallback.this) {
-				popup.hide();
-				state = 0;
-			//}
+			//DelayedViewerThread.getInstance().hide(data.popupText);
 		}
 		
 		// Draw Arrows for targets
@@ -111,34 +112,22 @@ public class MageActionCallback implements ActionCallback {
 			}
 		}
 		
-		
-		Thread t = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(500);
-				} catch (InterruptedException e1) {}
-				state = 1;
-			}
-		});
-		t.start();
-		showPopup(data);
+		//showPopup(data);
 	}
 
-	private void showPopup( final TransferData data) {
-		while (state == 0) {
-			try {
-				Thread.sleep(10);
-			} catch (Exception e) {
-				
-			}
+	private void showPopup(final TransferData data) {
+		try {
+			((JDesktopPane)session.getUI().getComponent(MageComponents.DESKTOP_PANE)).add(data.popupText, JLayeredPane.POPUP_LAYER);
+			data.popupText.setBounds((int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40, 200, 200);
+			data.popupText.setText("Test");
+			DelayedViewerThread.getInstance().show((Component)data.popupText, 500);
+		} catch (InterruptedException ie) {
+			ie.printStackTrace();
 		}
-		if (state > 1) {
-			return;
-		}
-		PopupFactory factory = PopupFactory.getSharedInstance();
-		popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
-		popup.show();
+		
+		//PopupFactory factory = PopupFactory.getSharedInstance();
+		//popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
+		//popup.show();
 		// hack to get popup to resize to fit text
 		//popup.hide();
 		//popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
@@ -176,20 +165,13 @@ public class MageActionCallback implements ActionCallback {
 	}
 
 	@Override
-	public void mouseExited(MouseEvent e) {
+	public void mouseExited(MouseEvent e, final TransferData data) {
 		this.popupCard = null;
+		//DelayedViewerThread.getInstance().hide(data.popupText);
 		if (popup != null) {
-			//synchronized (MageActionCallback.this) {
-				if (t != null) {
-					try {
-						t.stop();
-					} catch (Exception e1) {}
-				}
-				popup.hide();
-				state = 0;
-			//}
-			ArrowBuilder.removeAllArrows();
+			//popup.hide();
 		}
+		ArrowBuilder.removeAllArrows();
 	}
 
 }
