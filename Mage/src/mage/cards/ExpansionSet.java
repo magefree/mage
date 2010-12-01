@@ -218,7 +218,7 @@ public abstract class ExpansionSet implements Serializable {
 			addToBooster(booster, this, Rarity.UNCOMMON);
 		}
 		for (int i = 0; i < numBoosterRare; i++) {
-			if (rnd.nextInt(ratioBoosterMythic) == 1) {
+			if (ratioBoosterMythic > 0 && rnd.nextInt(ratioBoosterMythic) == 1) {
 				addToBooster(booster, this, Rarity.MYTHIC);
 			}
 			else {
