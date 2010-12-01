@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -53,6 +54,8 @@ public class ScarlandThrinax extends CardImpl<ScarlandThrinax> {
         this.color.setRed(true);
         this.color.setGreen(true);
         this.subtype.add("Lizard");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddPlusOneCountersSourceEffect(1), new ManaCostsImpl());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         this.addAbility(ability);
