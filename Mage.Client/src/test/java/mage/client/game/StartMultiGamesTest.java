@@ -24,8 +24,7 @@ public class StartMultiGamesTest {
 	private MageUI ui;
 
 	public static void main(String[] argv) throws Exception {
-		new StartMultiGamesTest().testMultiGames();
-		
+		new StartMultiGamesTest().startMultiGames();
 	}
 	
 	//@Test
@@ -33,7 +32,7 @@ public class StartMultiGamesTest {
 		
 	}
 	
-	public void testMultiGames() throws Exception {
+	public void startMultiGames() throws Exception {
 		for (int i = 0; i < GAME_START_COUNT; i++) {
 			logger.log(Level.INFO, "Starting game");
 			startGame();
