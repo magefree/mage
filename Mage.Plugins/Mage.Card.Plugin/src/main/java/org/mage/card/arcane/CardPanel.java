@@ -592,7 +592,10 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 			synchronized (this) {
 				if (popupShowing) {
 					popupShowing = false;
-					callback.mouseExited(e);
+					data.component = this;
+					data.card = this.gameCard;
+					data.popupText = popupText;
+					callback.mouseExited(e, data);
 				}
 			}
 		}

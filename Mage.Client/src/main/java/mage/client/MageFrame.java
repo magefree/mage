@@ -143,6 +143,7 @@ public class MageFrame extends javax.swing.JFrame {
 		desktopPane.add(combat, JLayeredPane.POPUP_LAYER);
 		combat.hideDialog();
 		desktopPane.add(pickNumber, JLayeredPane.POPUP_LAYER);
+		session.getUI().addComponent(MageComponents.DESKTOP_PANE, desktopPane);
 		if (autoConnect())
 			enableButtons();
 		else

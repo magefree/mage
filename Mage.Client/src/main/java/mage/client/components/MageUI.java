@@ -35,6 +35,27 @@ public class MageUI {
 		}
 
 	}
+	
+	public Component getComponent(MageComponents name) throws InterruptedException {
+		Object componentSync;
+		synchronized (ui) {
+			if (ui.containsKey(name)) {
+				return ui.get(name);
+			} else {
+				componentSync = new Object();
+				sync.put(name, componentSync);
+			}
+		}
+
+		synchronized (componentSync) {
+			componentSync.wait();
+			if (!ui.containsKey(name)) {
+				throw new IllegalStateException("Component wasn't initialized. This should not happen.");
+			}
+			return ui.get(name);
+		}
+
+	}
 
 	public void addButton(MageComponents name, JButton button) {
 		synchronized (ui) {
@@ -43,6 +64,17 @@ public class MageUI {
 			if (sync.containsKey(name)) {
 				synchronized (sync.get(name)) {
 					//System.out.println("notifyAll - " + name);
+					sync.get(name).notifyAll();	
+				}
+			}
+		}
+	}
+	
+	public void addComponent(MageComponents name, Component component) {
+		synchronized (ui) {
+			ui.put(name, component);
+			if (sync.containsKey(name)) {
+				synchronized (sync.get(name)) {
 					sync.get(name).notifyAll();	
 				}
 			}

@@ -6,5 +6,5 @@ public interface ActionCallback {
 	void mouseClicked(MouseEvent e, TransferData data);
 	void mouseMoved(MouseEvent e, TransferData data);
 	void mouseEntered(MouseEvent e, TransferData data);
-	void mouseExited(MouseEvent e);
+	void mouseExited(MouseEvent e, TransferData dat);
 }
