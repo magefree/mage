@@ -29,6 +29,8 @@
 package mage;
 
 import java.io.Serializable;
+
+import mage.Constants.ColoredManaSymbol;
 import mage.util.Copyable;
 
 /**
@@ -360,6 +362,25 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 			return true;
 		
 		return false;
+	}
+	
+	public int getColor(ColoredManaSymbol color) {
+		if (color.equals(ColoredManaSymbol.G)) {
+			return getGreen();
+		}
+		if (color.equals(ColoredManaSymbol.R)) {
+			return getRed();
+		}
+		if (color.equals(ColoredManaSymbol.B)) {
+			return getBlack();
+		}
+		if (color.equals(ColoredManaSymbol.U)) {
+			return getBlue();
+		}
+		if (color.equals(ColoredManaSymbol.W)) {
+			return getWhite();
+		}
+		return 0;
 	}
 
 }

@@ -44,4 +44,8 @@ public class CardUtil {
 	public static boolean isBasicLand(Card card) {
 		return card.getSupertype().contains("Basic");
 	}
+	
+	public static boolean isLand(Card card) {
+		return card.getCardType().contains(CardType.LAND);
+	}
 }

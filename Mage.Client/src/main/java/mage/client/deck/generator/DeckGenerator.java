@@ -1,6 +1,5 @@
 package mage.client.deck.generator;
 
-import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -21,10 +20,12 @@ import javax.swing.JPanel;
 
 import mage.Constants.CardType;
 import mage.Constants.ColoredManaSymbol;
+import mage.Mana;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
+import mage.client.cards.CardsStorage;
 import mage.client.util.gui.ColorsChooser;
 import mage.sets.Sets;
 import mage.utils.CardUtil;
@@ -118,16 +119,40 @@ public class DeckGenerator {
 					} else {
 						if (!CardUtil.isBasicLand(card)) {
 							if (nonBasicLandCount < MAX_NON_BASIC_SOURCE) {
-								nonBasicLandCount++;
-								landCardPool.add(card);
+								int score = 0;
+								for (Mana mana : card.getMana()) {
+									for (ColoredManaSymbol color : allowedColors) {
+										score += mana.getColor(color);
+									}
+								}
+								if (score > 1) {
+									nonBasicLandCount++;
+									landCardPool.add(card);
+								}
 							}
-						} else {
-							landCardPool.add(card);
 						}
 					}
 				}
 			} catch (Exception e) {
 				//ignore
+			}
+		}
+		out: 
+		while (nonBasicLandCount < MAX_NON_BASIC_SOURCE) {
+			for (Card card : CardsStorage.getLandCards()) {
+				int score = 0;
+				for (Mana mana : card.getMana()) {
+					for (ColoredManaSymbol color : allowedColors) {
+						score += mana.getColor(color);
+					}
+				}
+				if (score > 1) {
+					nonBasicLandCount++;
+					landCardPool.add(card);
+				}
+				if (nonBasicLandCount > MAX_NON_BASIC_SOURCE) {
+					break out;
+				}
 			}
 		}
 		System.out.println("deck generator card pool: spells=" + spellCardPool.size() + ", lands=" + landCardPool.size());
@@ -200,15 +225,24 @@ public class DeckGenerator {
 			}
 		}	
 			
-		
-
 		// Add suitable non basic lands to deck in order of pack.
 		final Map<String, Integer> colorSource = new HashMap<String, Integer>();
 		for (final ColoredManaSymbol color : ColoredManaSymbol.values()) {
 			colorSource.put(color.toString(), 0);
 		}
-		for (final Card card : landCardPool) {
-			//TODO: add non basic lands: need to get know what mana a land can produce
+		for (final Card landCard : landCardPool) {
+			deck.getCards().add(landCard);
+			for (Mana mana : landCard.getMana()) {
+				for (ColoredManaSymbol color : allowedColors) {
+					int amount = mana.getColor(color);
+					if (amount > 0) {
+						Integer count = colorSource.get(color.toString());
+						count += amount;
+						colorSource.put(color.toString(), count);
+					}
+				}
+			}
+
 		}
 
 		// Add optimal basic lands to deck.
