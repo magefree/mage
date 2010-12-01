@@ -33,6 +33,7 @@ import java.util.UUID;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageObject;
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.game.Game;
@@ -59,6 +60,8 @@ public interface Card extends MageObject {
 	public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game);
 	public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId);
 	public void checkTriggers(Zone zone, GameEvent event, Game game);
+
+	public List<Mana> getMana();
 
 	@Override
 	public Card copy();

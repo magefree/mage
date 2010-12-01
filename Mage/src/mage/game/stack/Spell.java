@@ -28,6 +28,7 @@
 
 package mage.game.stack;
 
+import mage.Mana;
 import mage.abilities.SpellAbility;
 import mage.game.*;
 import java.util.List;
@@ -312,5 +313,10 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	@Override
 	public int getCardNumber() {
 		return card.getCardNumber();
+	}
+
+	@Override
+	public List<Mana> getMana() {
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 }

@@ -44,6 +44,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -92,14 +93,16 @@ class ElixerOfImmortalityEffect extends OneShotEffect<ElixerOfImmortalityEffect>
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getControllerId());
-		player.gainLife(5, game);
-		player.removeFromBattlefield(game.getPermanent(source.getSourceId()), game);
-		Card card = game.getCard(source.getSourceId());
-		card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
-		player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
-		player.getGraveyard().clear();
-		player.getLibrary().shuffle();
-		return true;
+		Permanent permanent = game.getPermanent(source.getSourceId());
+		if (player != null && permanent != null) {
+			player.gainLife(5, game);
+			permanent.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+			player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
+			player.getGraveyard().clear();
+			player.getLibrary().shuffle();
+			return true;
+		}
+		return false;
 	}
 
 	@Override

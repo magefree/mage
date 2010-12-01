@@ -29,6 +29,7 @@
 package mage.cards;
 
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -37,10 +38,12 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageObjectImpl;
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
+import mage.abilities.mana.ManaAbility;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -97,7 +100,6 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 			Class<?> theClass  = Class.forName(name);
 			Constructor<?> con = theClass.getConstructor(new Class[]{UUID.class});
 			Card card = (Card) con.newInstance(new Object[] {null});
-//			card.setZone(Zone.OUTSIDE);
 			return card;
 		}
 		catch (Exception e) {
@@ -181,6 +183,15 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 	@Override
 	public void setExpansionSetCode(String expansionSetCode) {
 		this.expansionSetCode = expansionSetCode;
+	}
+
+	@Override
+	public List<Mana> getMana() {
+		List<Mana> mana = new ArrayList<Mana>();
+		for (ManaAbility ability: this.abilities.getManaAbilities(Zone.BATTLEFIELD)) {
+			mana.add(ability.getNetMana(null));
+		}
+		return mana;
 	}
 
 	@Override
