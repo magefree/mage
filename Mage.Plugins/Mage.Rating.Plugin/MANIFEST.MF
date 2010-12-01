@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: natfullina
+Build-Jdk: 1.6.0_16
+Main-Class: org.mage.plugins.rating.RateFrame
+Class-Path: lib/mage-sets.jar

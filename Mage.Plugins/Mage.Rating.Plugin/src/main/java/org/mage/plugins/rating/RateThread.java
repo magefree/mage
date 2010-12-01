@@ -96,6 +96,13 @@ public class RateThread extends Thread {
 		generateNext();
 	}
 	
+	public void forceSave() {
+		if (results.size() > 0) {
+			ResultHandler.getInstance().save(results);
+			results.clear();
+		}
+	}
+	
 	private void removeCard(Component component) {
 		if (component != null) {
 			frame.remove(component);

@@ -3,6 +3,8 @@ package org.mage.plugins.rating;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -20,7 +22,7 @@ public class RateFrame extends JFrame {
 
 	private static Logger log = Logger.getLogger(RateFrame.class);
 	private BigCard bigCard;
-	
+
 	public RateFrame() {
 		setTitle("Mage Rate Cards, version 0.1");
 
@@ -30,24 +32,34 @@ public class RateFrame extends JFrame {
 			log.error(ex.getMessage(), ex);
 		}
 
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				if (JOptionPane.showConfirmDialog(null, "Do you want to save recent compares?", "Save before exit", JOptionPane.YES_NO_OPTION) == JOptionPane.OK_OPTION) {
+					RateThread.getInstance().forceSave();
+				}
+			}
+		});
+
 		int width = 621;
 		int height = 384;
 		setSize(width, height);
+		setResizable(false);
 		int w = getGraphicsConfiguration().getBounds().width;
 		int h = getGraphicsConfiguration().getBounds().height;
-		setLocation((w - width)/2, (h - height)/2);
+		setLocation((w - width) / 2, (h - height) / 2);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLayout(null);
-		
+
 		bigCard = new BigCard();
 		bigCard.setBounds(20, 10, RateThread.bigCardDimension.frameWidth, RateThread.bigCardDimension.frameHeight);
 		bigCard.setBorder(BorderFactory.createLineBorder(Color.gray));
 		add(bigCard);
-		
+
 		JLabel label = new JLabel("The results are stored for every 10 compare.");
 		label.setBounds(290, 270, 300, 30);
 		add(label);
-		
+
 		JButton rate = new JButton("Create results.txt");
 		rate.setBounds(340, 230, 120, 25);
 		rate.addActionListener(new ActionListener() {
@@ -63,8 +75,10 @@ public class RateFrame extends JFrame {
 			}
 		});
 		add(rate);
+
+		System.out.println("test");
 	}
-	
+
 	public void startRating() {
 		RateThread.getInstance().start(this, this.bigCard);
 	}
