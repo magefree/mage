@@ -144,10 +144,6 @@ public class MageFrame extends javax.swing.JFrame {
 		combat.hideDialog();
 		desktopPane.add(pickNumber, JLayeredPane.POPUP_LAYER);
 		session.getUI().addComponent(MageComponents.DESKTOP_PANE, desktopPane);
-		if (autoConnect())
-			enableButtons();
-		else
-			disableButtons();
 		
 		String filename = "/background.jpg";
 		try {
@@ -216,6 +212,15 @@ public class MageFrame extends javax.swing.JFrame {
 		}
 		
 		session.getUI().addButton(MageComponents.TABLES_MENU_BUTTON, btnGames);
+		
+		SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+        		if (autoConnect())
+        			enableButtons();
+        		else
+        			disableButtons();
+            }
+        });
     }
     
     private void  btnImagesActionPerformed(java.awt.event.ActionEvent evt) {
