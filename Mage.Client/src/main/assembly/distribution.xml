@@ -20,11 +20,15 @@
   </dependencySets>
   <fileSets>
     <fileSet>
+      <filtered>true</filtered>
       <directory>release/</directory>
       <outputDirectory>/</outputDirectory>      
     </fileSet>
     <fileSet>
-      <directory>plugins/*.jar</directory>
+      <directory>plugins/</directory>
+      <includes>
+          <include>*.jar</include>
+      </includes>
       <outputDirectory>plugins/</outputDirectory>
     </fileSet>
   </fileSets>

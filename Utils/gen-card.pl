@@ -2,6 +2,7 @@
 
 use WWW::Mechanize;
 use HTML::TreeBuilder;
+use Parse::RecDescent;
 use Text::Template;
 use strict;
 
@@ -231,6 +232,9 @@ $mana{'Green or White'} = 'G\\\\W';
 $mana{'Black or Green'} = 'B\\\\G';
 $mana{'Black or Red'} = 'B\\\\R';
 $mana{'Red or Green'} = 'R\\\\G';
+
+my $parser = new Parse::RecDescent(q{
+});
 
 my %normalid;
 

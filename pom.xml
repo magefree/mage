@@ -2,48 +2,48 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 	
-	<groupId>org.mage</groupId>
-	<artifactId>mage-root</artifactId>
-	<version>0.3</version>
-	<packaging>pom</packaging>
-	<name>Mage Root</name>	
-	<description>Mage Root POM</description>
+    <groupId>org.mage</groupId>
+    <artifactId>mage-root</artifactId>
+    <version>0.5</version>
+    <packaging>pom</packaging>
+    <name>Mage Root</name>
+    <description>Mage Root POM</description>
 
-	<modules>
-		<module>Mage</module>
-		<module>Mage.Common</module>
-		<module>Mage.Server</module>
-		<module>Mage.Sets</module>
-		<module>Mage.Client</module>
-		<module>Mage.Deck.Constructed</module>
-		<module>Mage.Game.FreeForAll</module>
-		<module>Mage.Game.TwoPlayerDuel</module>
-		<module>Mage.Player.AI</module>
-		<module>Mage.Player.AIMinimax</module>
-		<module>Mage.Player.Human</module>
-		<module>Mage.Plugins</module>
-	</modules>
+    <modules>
+        <module>Mage</module>
+        <module>Mage.Common</module>
+        <module>Mage.Server</module>
+        <module>Mage.Sets</module>
+        <module>Mage.Client</module>
+        <module>Mage.Deck.Constructed</module>
+        <module>Mage.Game.FreeForAll</module>
+        <module>Mage.Game.TwoPlayerDuel</module>
+        <module>Mage.Player.AI</module>
+        <module>Mage.Player.AIMinimax</module>
+        <module>Mage.Player.Human</module>
+        <module>Mage.Plugins</module>
+    </modules>
 
-       <repositories>
-           <repository>
-               <id>mage.googlecode.com</id>
-               <url>http://magic--another-game-engine.googlecode.com/svn/trunk/repository</url>
-           </repository>
-		   <repository>
-	            <id>java-image-scaling</id>
-	            <name>Java Image Scaling Repository Released</name>
-	            <url>svn:https://java-image-scaling.googlecode.com/svn/repo/released</url>
-	        </repository>
-			<repository>
-				<id>jetlang.googlecode.com</id>
-				<name>Jetlang Repository for Maven</name>
-				<url>http://jetlang.googlecode.com/svn/repo/</url>
-			</repository>
-       </repositories>
+    <repositories>
+        <repository>
+            <id>mage.googlecode.com</id>
+            <url>http://magic--another-game-engine.googlecode.com/svn/trunk/repository</url>
+        </repository>
+        <repository>
+            <id>java-image-scaling</id>
+            <name>Java Image Scaling Repository Released</name>
+            <url>svn:https://java-image-scaling.googlecode.com/svn/repo/released</url>
+        </repository>
+        <repository>
+            <id>jetlang.googlecode.com</id>
+            <name>Jetlang Repository for Maven</name>
+            <url>http://jetlang.googlecode.com/svn/repo/</url>
+        </repository>
+    </repositories>
 
     <properties>
-    	<mage-version>0.3</mage-version>
+        <mage-version>0.5</mage-version>
     </properties>
 </project>

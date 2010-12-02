@@ -7,12 +7,10 @@
 	<parent>
 		<groupId>org.mage</groupId>
 		<artifactId>mage-root</artifactId>
-		<version>0.3</version>
+		<version>0.5</version>
 	</parent>
 	
-	<groupId>org.mage</groupId>
 	<artifactId>Mage-Plugins</artifactId>
-	<version>0.3</version>
 	<packaging>pom</packaging>
 	<name>Mage Plugins</name>	
 	<description>Mage Plugins POM</description>
