@@ -257,8 +257,8 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 		PermanentCard permanent = new PermanentCard(this, controllerId);
 		game.getBattlefield().addPermanent(permanent);
 		game.setZone(objectId, Zone.BATTLEFIELD);
-		permanent.entersBattlefield(sourceId, game);
 		game.applyEffects();
+		permanent.entersBattlefield(sourceId, game);
 		game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));
 		return true;
 	}

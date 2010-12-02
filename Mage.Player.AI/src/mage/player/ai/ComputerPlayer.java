@@ -67,6 +67,7 @@ import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.effects.common.BecomesCreatureSourceEOTEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.mana.ManaAbility;
@@ -457,6 +458,8 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
 			for (ActivatedAbility ability: permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
 				if (!(ability instanceof ManaAbility) && ability.canActivate(playerId, game)) {
+					if (ability instanceof EquipAbility && permanent.getAttachedTo() != null)
+						continue;
 					ManaOptions abilityOptions = ability.getManaCosts().getOptions();
 					if (ability.getManaCosts().getVariableCosts().size() > 0) {
 						//don't use variable mana costs unless there is at least 3 extra mana for X
@@ -464,6 +467,25 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 							option.add(Mana.ColorlessMana(3));
 						}
 					}
+					if (abilityOptions.size() == 0) {
+						playableAbilities.add(ability);
+					}
+					else {
+						for (Mana mana: abilityOptions) {
+							for (Mana avail: available) {
+								if (mana.enough(avail)) {
+									playableAbilities.add(ability);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		for (Card card: graveyard.getCards(game)) {
+			for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.GRAVEYARD)) {
+				if (ability.canActivate(playerId, game)) {
+					ManaOptions abilityOptions = ability.getManaCosts().getOptions();
 					if (abilityOptions.size() == 0) {
 						playableAbilities.add(ability);
 					}
@@ -911,7 +933,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			for (Card card: this.playableInstant) {
 				if (card.getSpellAbility().canActivate(playerId, game)) {
 					for (Effect effect: card.getSpellAbility().getEffects()) {
-						if (effect.getOutcome().equals(Outcome.DestroyPermanent)) {
+						if (effect.getOutcome().equals(Outcome.DestroyPermanent) || effect.getOutcome().equals(Outcome.ReturnToHand)) {
 							if (card.getSpellAbility().getTargets().get(0).canTarget(creatureId, card.getSpellAbility(), game)) {
 								if (this.activateAbility(card.getSpellAbility(), game))
 									return;

@@ -30,11 +30,16 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.AddPlusOneCountersSourceEffect;
+import mage.abilities.effects.common.GainAbilitySourceEffect;
 import mage.abilities.keyword.KickerAbility;
+import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -44,16 +49,18 @@ import mage.cards.CardImpl;
 public class AetherFigment extends CardImpl<AetherFigment> {
 
 	public AetherFigment(UUID ownerId) {
-		super(ownerId, 40, "Æther Figment", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+		super(ownerId, 40, "AEther Figment", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
 		this.expansionSetCode = "ZEN";
 		this.subtype.add("Illusion");
 		this.color.setBlue(true);
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
 
-		KickerAbility ability = new KickerAbility(new AddPlusOneCountersSourceEffect(2), false);
-		ability.addManaCost(new GenericManaCost(3));
-		this.addAbility(ability);
+		this.addAbility(UnblockableAbility.getInstance());
+		Ability ability1 = new EntersBattlefieldTriggeredAbility(new AddPlusOneCountersSourceEffect(2));
+		KickerAbility ability2 = new KickerAbility(new GainAbilitySourceEffect(ability1, Duration.WhileOnBattlefield), false);
+		ability2.addManaCost(new GenericManaCost(3));
+		this.addAbility(ability2);
 	}
 
 	public AetherFigment(final AetherFigment card) {

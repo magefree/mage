@@ -106,8 +106,8 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 			return false;
 		}
 		else {
-			result = card.putOntoBattlefield(game, Zone.HAND, ability.getId(), controllerId);
 			resolveKicker(game);
+			result = card.putOntoBattlefield(game, Zone.HAND, ability.getId(), controllerId);
 			return result;
 		}
 	}

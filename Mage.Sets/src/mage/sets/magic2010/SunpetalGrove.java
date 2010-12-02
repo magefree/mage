@@ -48,10 +48,10 @@ public class SunpetalGrove extends CardImpl<SunpetalGrove> {
 	private static FilterLandPermanent filter = new FilterLandPermanent();
 
 	static {
-		filter.getSubtype().add("Swamp");
-		filter.getSubtype().add("Mountain");
+		filter.getSubtype().add("Forest");
+		filter.getSubtype().add("Plains");
 		filter.setScopeSubtype(ComparisonScope.Any);
-		filter.setMessage("Swamp or a Mountain");
+		filter.setMessage("Forest or a Plains");
 	}
 
 	public SunpetalGrove(UUID ownerId) {

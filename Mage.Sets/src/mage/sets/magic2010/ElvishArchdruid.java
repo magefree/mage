@@ -36,11 +36,11 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.BoostControlledEffect;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -67,8 +67,7 @@ public class ElvishArchdruid extends CardImpl<ElvishArchdruid> {
 		this.toughness = new MageInt(2);
 
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ElvishArchdruidEffect(), new TapSourceCost());
-		this.addAbility(ability);
+		this.addAbility(new ElvishArchdruidAbility());
 	}
 
 	public ElvishArchdruid(final ElvishArchdruid card) {
@@ -85,40 +84,58 @@ public class ElvishArchdruid extends CardImpl<ElvishArchdruid> {
 		return "121692_typ_reg_sty_010.jpg";
 	}
 
+	class ElvishArchdruidAbility extends ManaAbility<ElvishArchdruidAbility> {
+
+		public ElvishArchdruidAbility() {
+			super(Zone.BATTLEFIELD, new ElvishArchdruidEffect(), new TapSourceCost());
+		}
+
+		public ElvishArchdruidAbility(final ElvishArchdruidAbility ability) {
+			super(ability);
+		}
+
+		@Override
+		public ElvishArchdruidAbility copy() {
+			return new ElvishArchdruidAbility(this);
+		}
+
+		@Override
+		public Mana getNetMana(Game game) {
+			if (game == null)
+				return new Mana();
+			return Mana.GreenMana(game.getBattlefield().countAll(filter, controllerId));
+		}
+
+	}
+
+	class ElvishArchdruidEffect extends ManaEffect {
+
+		public ElvishArchdruidEffect() {
+			super(new Mana());
+		}
+
+		public ElvishArchdruidEffect(final ElvishArchdruidEffect effect) {
+			super(effect);
+		}
+
+		@Override
+		public ElvishArchdruidEffect copy() {
+			return new ElvishArchdruidEffect(this);
+		}
+
+		@Override
+		public boolean apply(Game game, Ability source) {
+			this.mana.clear();
+			int amount = game.getBattlefield().countAll(filter, source.getControllerId());
+			this.mana.setGreen(amount);
+			return super.apply(game, source);
+		}
+
+		@Override
+		public String getText(Ability source) {
+			return "Add {G} to your mana pool for each Elf you control";
+		}
+
+	}
 }
 
-class ElvishArchdruidEffect extends ManaEffect {
-
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
-
-	static {
-		filter.getSubtype().add("Elf");
-	}
-
-	public ElvishArchdruidEffect() {
-		super(new Mana());
-	}
-
-	public ElvishArchdruidEffect(final ElvishArchdruidEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public ElvishArchdruidEffect copy() {
-		return new ElvishArchdruidEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		this.mana.clear();
-		int amount = game.getBattlefield().countAll(filter, source.getControllerId());
-		this.mana.setGreen(amount);
-		return super.apply(game, source);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Add {G} to your mana pool for each Elf you control";
-	}
-
-}

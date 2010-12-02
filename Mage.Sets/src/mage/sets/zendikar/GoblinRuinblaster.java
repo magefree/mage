@@ -64,7 +64,7 @@ public class GoblinRuinblaster extends CardImpl<GoblinRuinblaster> {
 		ability1.addTarget(new TargetNonBasicLandPermanent());
 		KickerAbility ability2 = new KickerAbility(new GainAbilitySourceEffect(ability1, Duration.WhileOnBattlefield), false);
 		ability2.addManaCost(new ColoredManaCost(ColoredManaSymbol.R));
-		this.addAbility(ability1);
+		this.addAbility(ability2);
 
 	}
 

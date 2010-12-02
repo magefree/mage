@@ -33,7 +33,6 @@ import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;

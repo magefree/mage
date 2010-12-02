@@ -28,7 +28,6 @@
 
 package mage.abilities.common;
 
-import java.io.ObjectStreamException;
 import mage.Constants.Zone;
 import mage.abilities.StaticAbility;
 import mage.abilities.effects.EntersBattlefieldEffect;

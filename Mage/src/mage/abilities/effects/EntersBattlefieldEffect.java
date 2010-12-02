@@ -78,17 +78,17 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlef
 	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
 		Spell spell = game.getStack().getSpell(event.getSourceId());
 		for (Effect effect: baseEffects) {
-			if (effect instanceof ContinuousEffect) {
-				if (spell != null)
-					game.addEffect((ContinuousEffect) effect, spell.getSpellAbility());
-				else
+			if (source.activate(game, false)) {
+				if (effect instanceof ContinuousEffect) {
 					game.addEffect((ContinuousEffect) effect, source);
+				}
+				else {
+					if (spell != null)
+						effect.apply(game, spell.getSpellAbility());
+					else
+						effect.apply(game, source);
+				}
 			}
-			else
-				if (spell != null)
-					effect.apply(game, spell.getSpellAbility());
-				else
-					effect.apply(game, source);
 		}
 		return false;
 	}
