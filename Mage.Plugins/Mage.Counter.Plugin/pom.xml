@@ -51,7 +51,7 @@
     </build>
 
     <properties>
-        <plugin-version>0.3</plugin-version>
+        <plugin-version>0.1</plugin-version>
         <jspf-version>0.9.1</jspf-version>
     </properties>
 </project>
