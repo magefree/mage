@@ -14,12 +14,13 @@
     <packaging>jar</packaging>
     <name>Mage Counter Plugin</name>
     <description>Implements game counter to display amount of games played</description>
+    <version>${plugin-version}</version>
 
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Mage-Common</artifactId>
-            <version>${project.version}</version>
+            <version>${mage-version}</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.jspf</groupId>
@@ -44,7 +45,6 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
-
         </plugins>
 
         <finalName>mage-counter-plugin</finalName>
