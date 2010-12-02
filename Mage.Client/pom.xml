@@ -69,6 +69,24 @@
 			<scope>test</scope>
 		</dependency>
 		 -->
+	 <dependency>
+	  <groupId>${project.groupId}</groupId>
+	  <artifactId>Mage-Theme-Plugin</artifactId>
+	  <version>${project.version}</version>
+	  <scope>runtime</scope>
+	 </dependency>
+	 <dependency>
+	  <groupId>${project.groupId}</groupId>
+	  <artifactId>Mage-Card-Plugin</artifactId>
+	  <version>0.3</version>
+	  <scope>runtime</scope>
+	 </dependency>
+	 <dependency>
+	  <groupId>${project.groupId}</groupId>
+	  <artifactId>Mage-Counter-Plugin</artifactId>
+	  <version>${project.version}</version>
+	  <scope>runtime</scope>
+	 </dependency>
 	</dependencies>
 
 	<build>

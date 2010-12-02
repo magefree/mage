@@ -17,19 +17,20 @@
     <dependencySet>
       <outputDirectory>/lib/</outputDirectory>
     </dependencySet>
+    <dependencySet>
+        <outputDirectory>/plugins</outputDirectory>
+        <includes>
+            <include>org.mage:Mage-Theme-Plugin</include>
+            <include>org.mage:Mage-Card-Plugin</include>
+            <include>org.mage:Mage-Counter-Plugin</include>           
+        </includes>
+    </dependencySet>
   </dependencySets>
   <fileSets>
     <fileSet>
       <filtered>true</filtered>
       <directory>release/</directory>
       <outputDirectory>/</outputDirectory>      
-    </fileSet>
-    <fileSet>
-      <directory>plugins/</directory>
-      <includes>
-          <include>*.jar</include>
-      </includes>
-      <outputDirectory>plugins/</outputDirectory>
-    </fileSet>
+    </fileSet>    
   </fileSets>
 </assembly>
