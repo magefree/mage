@@ -94,9 +94,9 @@ public class ResultHandler {
 				if (loserRating == null)
 					loserRating = 1000;
 				Integer newWinnerRating = coundEloRating(winnerRating, loserRating, true);
-				Integer newLoserRating = coundEloRating(winnerRating, loserRating, false);
-				log.info("Winner: " + winnerRating + " >> " + newWinnerRating);
-				log.info("Loser: " + loserRating + " >> " + newLoserRating);
+				Integer newLoserRating = coundEloRating(loserRating, winnerRating, false);
+				log.info("Winner(" + winner + "): " + winnerRating + " >> " + newWinnerRating);
+				log.info("Loser(" + loser + "): " + loserRating + " >> " + newLoserRating);
 				ratings.put(winner, newWinnerRating);
 				ratings.put(loser, newLoserRating);
 			} else {
