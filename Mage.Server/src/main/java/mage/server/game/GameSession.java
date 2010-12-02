@@ -71,12 +71,12 @@ public class GameSession extends GameWatcher {
 		}
 	}
 
-	public void target(final String question, final CardsView cardView, final boolean required, final GameView gameView) {
+	public void target(final String question, final CardsView cardView, final Set<UUID> targets, final boolean required, final GameView gameView) {
 		if (!killed) {
 			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("gameTarget", new GameClientMessage(gameView, question, cardView, required)));
+				session.fireCallback(new ClientCallback("gameTarget", new GameClientMessage(gameView, question, cardView, targets, required)));
 		}
 	}
 

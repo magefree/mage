@@ -28,8 +28,8 @@
 
 package mage.target;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -98,8 +98,8 @@ public class TargetStackObject extends TargetObject<TargetStackObject> {
 	}
 
 	@Override
-	public List<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-		List<UUID> possibleTargets = new ArrayList<UUID>();
+	public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+		Set<UUID> possibleTargets = new HashSet<UUID>();
 		for (StackObject stackObject: game.getStack()) {
 			if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject)) {
 				possibleTargets.add(stackObject.getId());

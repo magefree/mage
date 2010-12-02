@@ -28,11 +28,9 @@
 
 package mage.target.common;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -104,8 +102,8 @@ public class TargetDefender extends TargetImpl<TargetDefender> {
 	}
 
 	@Override
-	public List<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-		List<UUID> possibleTargets = new ArrayList<UUID>();
+	public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+		Set<UUID> possibleTargets = new HashSet<UUID>();
 		MageObject targetSource = game.getObject(sourceId);
 		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
 			Player player = game.getPlayer(playerId);

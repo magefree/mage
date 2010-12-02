@@ -29,6 +29,8 @@
 package mage.view;
 
 import java.io.Serializable;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -42,6 +44,7 @@ public class GameClientMessage implements Serializable {
 	private AbilityPickerView abilityView;
 	private boolean flag;
 	private String[] strings;
+	private Set<UUID> targets;
 	private int min;
 	private int max;
 
@@ -54,10 +57,11 @@ public class GameClientMessage implements Serializable {
 		this.message = message;
 	}
 
-	public GameClientMessage(GameView gameView, String question, CardsView cardView, boolean required) {
+	public GameClientMessage(GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required) {
 		this.gameView = gameView;
 		this.message = question;
 		this.cardsView = cardView;
+		this.targets = targets;
 		this.flag = required;
 	}
 
@@ -99,6 +103,10 @@ public class GameClientMessage implements Serializable {
 
 	public String[] getStrings() {
 		return strings;
+	}
+
+	public Set<UUID> getTargets() {
+		return targets;
 	}
 
 	public int getMin() {

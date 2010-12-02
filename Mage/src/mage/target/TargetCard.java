@@ -28,10 +28,8 @@
 
 package mage.target;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.Constants.Zone;
 import mage.cards.Card;
@@ -78,23 +76,6 @@ public class TargetCard<T extends TargetCard<T>> extends TargetObject<TargetCard
 		return this.filter;
 	}
 
-//	public boolean choose(Cards cards, Game game) {
-//		Player player = game.getPlayer(this.source.getControllerId());
-//		while (!isChosen() && !doneChosing()) {
-//			chosen = targets.size() >= minNumberOfTargets;
-//			if (!player.chooseTarget(cards, this, game)) {
-//				return chosen;
-//			}
-//			chosen = targets.size() >= minNumberOfTargets;
-//		}
-//		while (!doneChosing()) {
-//			if (!player.chooseTarget(cards, this, game)) {
-//				break;
-//			}
-//		}
-//		return chosen = true;
-//	}
-
 	@Override
 	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
 		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
@@ -122,30 +103,30 @@ public class TargetCard<T extends TargetCard<T>> extends TargetObject<TargetCard
 	}
 
 	@Override
-	public List<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-		Map<String, UUID> possibleTargets = new HashMap<String, UUID>();
+	public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+		Set<UUID> possibleTargets = new HashSet<UUID>();
 		Player player = game.getPlayer(sourceControllerId);
 		if (player != null) {
 			switch (zone) {
 				case HAND:
 					for (Card card: player.getHand().getCards(filter, game)) {
-						possibleTargets.put(card.getName(), card.getId());
+						possibleTargets.add(card.getId());
 					}
 					break;
 				case GRAVEYARD:
 					for (Card card: player.getGraveyard().getCards(filter, game)) {
-						possibleTargets.put(card.getName(), card.getId());
+						possibleTargets.add(card.getId());
 					}
 					break;
 				case LIBRARY:
 					for (Card card: player.getLibrary().getUniqueCards(game)) {
 						if (filter.match(card))
-							possibleTargets.put(card.getName(), card.getId());
+							possibleTargets.add(card.getId());
 					}
 					break;
 			}
 		}
-		return new ArrayList<UUID>(possibleTargets.values());
+		return possibleTargets;
 	}
 
 	public boolean canTarget(UUID id, Cards cards, Game game) {

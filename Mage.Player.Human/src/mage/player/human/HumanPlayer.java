@@ -182,7 +182,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	@Override
 	public boolean choose(Outcome outcome, Target target, Game game) {
 		while (!abort) {
-			game.fireSelectTargetEvent(playerId, target.getMessage(), target.isRequired());
+			game.fireSelectTargetEvent(playerId, target.getMessage(), target.possibleTargets(null, playerId, game), target.isRequired());
 			waitForResponse();
 			if (response.getUUID() != null) {
 				if (target.canTarget(response.getUUID(), game)) {
@@ -199,7 +199,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	@Override
 	public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
 		while (!abort) {
-			game.fireSelectTargetEvent(playerId, target.getMessage(), target.isRequired());
+			game.fireSelectTargetEvent(playerId, target.getMessage(), target.possibleTargets(source==null?null:source.getId(), playerId, game), target.isRequired());
 			waitForResponse();
 			if (response.getUUID() != null) {
 				if (target.canTarget(response.getUUID(), source, game)) {
@@ -250,7 +250,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	@Override
 	public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
 		while (!abort) {
-			game.fireSelectTargetEvent(playerId, target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), target.isRequired());
+			game.fireSelectTargetEvent(playerId, target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), target.possibleTargets(source==null?null:source.getId(), playerId, game), target.isRequired());
 			waitForResponse();
 			if (response.getUUID() != null) {
 				if (target.canTarget(response.getUUID(), source, game)) {
@@ -421,7 +421,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	protected void selectCombatGroup(UUID blockerId, Game game) {
 		TargetAttackingCreature target = new TargetAttackingCreature();
-		game.fireSelectTargetEvent(playerId, "Select attacker to block", target.isRequired());
+		game.fireSelectTargetEvent(playerId, "Select attacker to block", target.possibleTargets(null, playerId, game), target.isRequired());
 		waitForResponse();
 		if (response.getBoolean() != null) {
 			return;

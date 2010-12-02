@@ -41,6 +41,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -324,7 +325,7 @@ public class GamePanel extends javax.swing.JPanel {
 		this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, true, false);
 	}
 
-	public void pickTarget(String message, CardsView cardView, GameView gameView, boolean required) {
+	public void pickTarget(String message, CardsView cardView, GameView gameView, Set<UUID> targets, boolean required) {
 		updateGame(gameView);
 		this.feedbackPanel.getFeedback(required?FeedbackMode.INFORM:FeedbackMode.CANCEL, message, false, gameView.getSpecial());
 		if (cardView != null && cardView.size() > 0) {

@@ -30,6 +30,7 @@ package mage.target;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
@@ -48,7 +49,7 @@ public interface Target extends Serializable {
 	public void clearChosen();
 	public boolean isNotTarget();
 	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game);
-	public List<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game);
+	public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game);
 	public boolean choose(Outcome outcome, UUID playerId, Game game);
 	public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game);
 	public String getMessage();

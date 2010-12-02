@@ -51,6 +51,7 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 	private String message;
 	private Collection<? extends Ability> abilities;
 	private Set<String> choices;
+	private Set<UUID> targets;
 	private Cards cards;
 	private QueryType queryType;
 	private UUID playerId;
@@ -58,13 +59,14 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 	private int min;
 	private int max;
 
-	private PlayerQueryEvent(UUID playerId, String message, Collection<? extends Ability> abilities, Set<String> choices, Cards cards, QueryType queryType, int min, int max, boolean required) {
+	private PlayerQueryEvent(UUID playerId, String message, Collection<? extends Ability> abilities, Set<String> choices, Set<UUID> targets, Cards cards, QueryType queryType, int min, int max, boolean required) {
 		super(playerId);
 		this.queryType = queryType;
 		this.message = message;
 		this.playerId = playerId;
 		this.abilities = abilities;
 		this.choices = choices;
+		this.targets = targets;
 		this.cards = cards;
 		this.required = required;
 		this.min = min;
@@ -72,46 +74,46 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 	}
 
 	public static PlayerQueryEvent askEvent(UUID playerId, String message) {
-		return new PlayerQueryEvent(playerId, message, null, null, null, QueryType.ASK, 0, 0, false);
+		return new PlayerQueryEvent(playerId, message, null, null, null, null, QueryType.ASK, 0, 0, false);
 	}
 	
 	public static PlayerQueryEvent chooseAbilityEvent(UUID playerId, String message, Collection<? extends ActivatedAbility> choices) {
-		return new PlayerQueryEvent(playerId, message, choices, null, null, QueryType.CHOOSE_ABILITY, 0, 0, false);
+		return new PlayerQueryEvent(playerId, message, choices, null, null, null, QueryType.CHOOSE_ABILITY, 0, 0, false);
 	}
 	public static PlayerQueryEvent chooseEvent(UUID playerId, String message, Set<String> choices) {
-		return new PlayerQueryEvent(playerId, message, null, choices, null, QueryType.CHOOSE, 0, 0, false);
+		return new PlayerQueryEvent(playerId, message, null, choices, null, null, QueryType.CHOOSE, 0, 0, false);
 	}
 
-	public static PlayerQueryEvent targetEvent(UUID playerId, String message, boolean required) {
-		return new PlayerQueryEvent(playerId, message, null, null, null, QueryType.PICK_TARGET, 0, 0, required);
+	public static PlayerQueryEvent targetEvent(UUID playerId, String message, Set<UUID> targets, boolean required) {
+		return new PlayerQueryEvent(playerId, message, null, null, targets, null, QueryType.PICK_TARGET, 0, 0, required);
 	}
 
 	public static PlayerQueryEvent targetEvent(UUID playerId, String message, Cards cards, boolean required) {
-		return new PlayerQueryEvent(playerId, message, null, null, cards, QueryType.PICK_TARGET, 0, 0, required);
+		return new PlayerQueryEvent(playerId, message, null, null, null, cards, QueryType.PICK_TARGET, 0, 0, required);
 	}
 
 	public static PlayerQueryEvent targetEvent(UUID playerId, String message, TriggeredAbilities abilities, boolean required) {
-		return new PlayerQueryEvent(playerId, message, abilities, null, null, QueryType.PICK_ABILITY, 0, 0, required);
+		return new PlayerQueryEvent(playerId, message, abilities, null, null, null, QueryType.PICK_ABILITY, 0, 0, required);
 	}
 
 	public static PlayerQueryEvent selectEvent(UUID playerId, String message) {
-		return new PlayerQueryEvent(playerId, message, null, null, null, QueryType.SELECT, 0, 0, false);
+		return new PlayerQueryEvent(playerId, message, null, null, null, null, QueryType.SELECT, 0, 0, false);
 	}
 
 	public static PlayerQueryEvent playManaEvent(UUID playerId, String message) {
-		return new PlayerQueryEvent(playerId, message, null, null, null, QueryType.PLAY_MANA, 0, 0, false);
+		return new PlayerQueryEvent(playerId, message, null, null, null, null, QueryType.PLAY_MANA, 0, 0, false);
 	}
 
 	public static PlayerQueryEvent playXManaEvent(UUID playerId, String message) {
-		return new PlayerQueryEvent(playerId, message, null, null, null, QueryType.PLAY_X_MANA, 0, 0, false);
+		return new PlayerQueryEvent(playerId, message, null, null, null, null, QueryType.PLAY_X_MANA, 0, 0, false);
 	}
 
 	public static PlayerQueryEvent amountEvent(UUID playerId, String message, int min , int max) {
-		return new PlayerQueryEvent(playerId, message, null, null, null, QueryType.AMOUNT, min, max, false);
+		return new PlayerQueryEvent(playerId, message, null, null, null, null, QueryType.AMOUNT, min, max, false);
 	}
 
 	public static PlayerQueryEvent lookEvent(UUID playerId, String message, Cards cards) {
-		return new PlayerQueryEvent(playerId, message, null, null, cards, QueryType.LOOK, 0, 0, false);
+		return new PlayerQueryEvent(playerId, message, null, null, cards, null, QueryType.LOOK, 0, 0, false);
 	}
 	
 	public String getMessage() {
@@ -128,6 +130,10 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 
 	public Set<String> getChoices() {
 		return choices;
+	}
+
+	public Set<UUID> getTargets() {
+		return targets;
 	}
 
 	public UUID getPlayerId() {

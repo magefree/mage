@@ -124,7 +124,7 @@ public class GameController implements GameCallback {
 							ask(event.getPlayerId(), event.getMessage());
 							break;
 						case PICK_TARGET:
-							target(event.getPlayerId(), event.getMessage(), event.getCards(), event.isRequired());
+							target(event.getPlayerId(), event.getMessage(), event.getCards(), event.getTargets(), event.isRequired());
 							break;
 						case PICK_ABILITY:
 							target(event.getPlayerId(), event.getMessage(), event.getAbilities(), event.isRequired());
@@ -317,19 +317,19 @@ public class GameController implements GameCallback {
 		informOthers(playerId);
 	}
 
-	private synchronized void target(UUID playerId, String question, Cards cards, boolean required) {
+	private synchronized void target(UUID playerId, String question, Cards cards, Set<UUID> targets, boolean required) {
 		if (gameSessions.containsKey(playerId)) {
 			if (cards != null)
-				gameSessions.get(playerId).target(question, new CardsView(cards.getCards(game)), required, getGameView(playerId));
+				gameSessions.get(playerId).target(question, new CardsView(cards.getCards(game)), targets, required, getGameView(playerId));
 			else
-				gameSessions.get(playerId).target(question, new CardsView(), required, getGameView(playerId));
+				gameSessions.get(playerId).target(question, new CardsView(), targets, required, getGameView(playerId));
 		}
 		informOthers(playerId);
 	}
 
 	private synchronized void target(UUID playerId, String question, Collection<? extends Ability> abilities, boolean required) {
 		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).target(question, new CardsView(abilities, game.getState()), required, getGameView(playerId));
+			gameSessions.get(playerId).target(question, new CardsView(abilities, game.getState()), null, required, getGameView(playerId));
 		informOthers(playerId);
 	}
 

@@ -111,7 +111,7 @@ public class Client implements CallbackClient {
 			}
 			else if (callback.getMethod().equals("gameTarget")) {
 				GameClientMessage message = (GameClientMessage) callback.getData();
-				session.getGame().pickTarget(message.getMessage(), message.getCardsView(), message.getGameView(), message.isFlag());
+				session.getGame().pickTarget(message.getMessage(), message.getCardsView(), message.getGameView(), message.getTargets(), message.isFlag());
 			}
 			else if (callback.getMethod().equals("gameSelect")) {
 				GameClientMessage message = (GameClientMessage) callback.getData();

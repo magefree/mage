@@ -28,10 +28,8 @@
 
 package mage.target;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.Constants.Zone;
 import mage.MageObject;
@@ -111,15 +109,15 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 	}
 
 	@Override
-	public List<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-		Map<Integer, UUID> possibleTargets = new HashMap<Integer, UUID>();
+	public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+		Set<UUID> possibleTargets = new HashSet<UUID>();
 		MageObject targetSource = game.getObject(sourceId);
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, game)) {
 			if (permanent.canBeTargetedBy(targetSource)) {
-				possibleTargets.put(permanent.getValue().hashCode(), permanent.getId());
+				possibleTargets.add(permanent.getId());
 			}
 		}
-		return new ArrayList<UUID>(possibleTargets.values());
+		return possibleTargets;
 	}
 
 	@Override

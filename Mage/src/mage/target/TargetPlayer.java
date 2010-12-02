@@ -28,8 +28,8 @@
 
 package mage.target;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -88,8 +88,8 @@ public class TargetPlayer<T extends TargetPlayer<T>> extends TargetImpl<TargetPl
 	}
 
 	@Override
-	public List<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-		List<UUID> possibleTargets = new ArrayList<UUID>();
+	public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+		Set<UUID> possibleTargets = new HashSet<UUID>();
 		MageObject targetSource = game.getObject(sourceId);
 		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
 			Player player = game.getPlayer(playerId);
