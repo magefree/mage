@@ -1,0 +1,126 @@
+|Generate|TOK:SOM|Cat|
+|Generate|TOK:SOM|Soldier|
+|Generate|TOK:SOM|Goblin|
+|Generate|TOK:SOM|Insect|
+|Generate|TOK:SOM|Wolf|
+|Generate|TOK:SOM|Golem|
+|Generate|TOK:SOM|Myr|
+|Generate|TOK:SOM|Wurm 1|
+|Generate|TOK:SOM|Wurm 2|
+
+|Generate|TOK:M11|Avatar|
+|Generate|TOK:M11|Bird|
+|Generate|TOK:M11|Zombie|
+|Generate|TOK:M11|Beast|
+|Generate|TOK:M11|Ooze 1|
+|Generate|TOK:M11|Ooze 2|
+
+|Generate|TOK:ROE|Eldrazi Spawn 1|
+|Generate|TOK:ROE|Eldrazi Spawn 2|
+|Generate|TOK:ROE|Eldrazi Spawn 3|
+|Generate|TOK:ROE|Elemental|
+|Generate|TOK:ROE|Ooze|
+|Generate|TOK:ROE|Tuktuk the Returned|
+
+|Generate|TOK:PVC|Saproling|
+|Generate|TOK:PVC|Hornet|
+|Generate|TOK:PVC|Minion|
+
+|Generate|TOK:WWK|Soldier Ally|
+|Generate|TOK:WWK|Dragon|
+|Generate|TOK:WWK|Ogre|
+|Generate|TOK:WWK|Elephant|
+|Generate|TOK:WWK|Plant|
+|Generate|TOK:WWK|Construct|
+
+|Generate|TOK:ZEN|Angel|
+|Generate|TOK:ZEN|Bird|
+|Generate|TOK:ZEN|Kor Soldier|
+|Generate|TOK:ZEN|Illusion|
+|Generate|TOK:ZEN|Merfolk|
+|Generate|TOK:ZEN|Vampire|
+|Generate|TOK:ZEN|Zombie Giant|
+|Generate|TOK:ZEN|Elemental|
+|Generate|TOK:ZEN|Beast|
+|Generate|TOK:ZEN|Snake|
+|Generate|TOK:ZEN|Wolf|
+
+|Generate|TOK:M10|Avatar|
+|Generate|TOK:M10|Beast|
+|Generate|TOK:M10|Gargoyle|
+|Generate|TOK:M10|Goblin|
+|Generate|TOK:M10|Insect|
+|Generate|TOK:M10|Soldier|
+|Generate|TOK:M10|Wolf|
+|Generate|TOK:M10|Zombie|
+
+|Generate|TOK:ARB|Bird Soldier|
+|Generate|TOK:ARB|Lizard|
+|Generate|TOK:ARB|Dragon|
+|Generate|TOK:ARB|Zombie Wizard|
+
+|Generate|TOK:CON|Angel|
+|Generate|TOK:CON|Elemental|
+
+|Generate|TOK:JVC|Elemental Shaman|
+
+|Generate|TOK:ALA|Soldier|
+|Generate|TOK:ALA|Beast|
+|Generate|TOK:ALA|Homunculus|
+|Generate|TOK:ALA|Thopter|
+|Generate|TOK:ALA|Skeleton|
+|Generate|TOK:ALA|Zombie|
+|Generate|TOK:ALA|Dragon|
+|Generate|TOK:ALA|Goblin|
+|Generate|TOK:ALA|Ooze|
+|Generate|TOK:ALA|Saproling|
+
+|Generate|TOK:EVE|Goat|
+|Generate|TOK:EVE|Bird|
+|Generate|TOK:EVE|Beast|
+|Generate|TOK:EVE|Spirit|
+|Generate|TOK:EVE|Elemental|
+|Generate|TOK:EVE|Worm|
+|Generate|TOK:EVE|Goblin Soldier|
+
+|Generate|TOK:SHM|Kithkin Soldier|
+|Generate|TOK:SHM|Spirit|
+|Generate|TOK:SHM|Rat|
+|Generate|TOK:SHM|Elemental 1|
+|Generate|TOK:SHM|Elf Warrior|
+|Generate|TOK:SHM|Spider|
+|Generate|TOK:SHM|Wolf|
+|Generate|TOK:SHM|Faerie Rogue|
+|Generate|TOK:SHM|Elemental 2|
+|Generate|TOK:SHM|Giant Warrior|
+|Generate|TOK:SHM|Goblin Warrior|
+|Generate|TOK:SHM|Elf Warrior|
+
+|Generate|TOK:EVG|Elemental|
+|Generate|TOK:EVG|Elf Warrior|
+|Generate|TOK:EVG|Goblin|
+
+|Generate|TOK:MOR|Giant Warrior|
+|Generate|TOK:MOR|Faerie Rogue|
+|Generate|TOK:MOR|Treefolk Shaman|
+
+|Generate|TOK:LRW|Avatar|
+|Generate|TOK:LRW|Elemental 1|
+|Generate|TOK:LRW|Kithkin Soldier|
+|Generate|TOK:LRW|Merfolk Wizard|
+|Generate|TOK:LRW|Goblin Rogue|
+|Generate|TOK:LRW|Elemental Shaman|
+|Generate|TOK:LRW|Beast|
+|Generate|TOK:LRW|Elemental 2|
+|Generate|TOK:LRW|Elf Warrior|
+|Generate|TOK:LRW|Wolf|
+|Generate|TOK:LRW|Shapeshifter|
+
+|Generate|TOK:10E|Soldier|
+|Generate|TOK:10E|Zombie|
+|Generate|TOK:10E|Dragon|
+|Generate|TOK:10E|Goblin|
+|Generate|TOK:10E|Saproling|
+|Generate|TOK:10E|Wasp|
+
+|Generate|TOK:CSP|Marit Lage|

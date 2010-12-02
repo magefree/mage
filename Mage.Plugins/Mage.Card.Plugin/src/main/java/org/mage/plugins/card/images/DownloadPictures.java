@@ -1,23 +1,24 @@
 package org.mage.plugins.card.images;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.swing.AbstractButton;
@@ -46,10 +47,6 @@ import mage.cards.Card;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.CardUrl;
 import org.mage.plugins.card.constants.Constants;
-import org.mage.plugins.card.dl.DownloadGui;
-import org.mage.plugins.card.dl.DownloadJob;
-import org.mage.plugins.card.dl.Downloader;
-import org.mage.plugins.card.dl.sources.GathererSymbols;
 import org.mage.plugins.card.properties.SettingsManager;
 import org.mage.plugins.card.utils.CardImageUtils;
 
@@ -68,7 +65,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 	private JLabel jLabel1;
 	private static boolean offlineMode = false;
 	private JCheckBox checkBox;
-	private JButton downloadSymbols;
 
 	public static final Proxy.Type[] types = Proxy.Type.values();
 
@@ -79,10 +75,11 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 	public static void startDownload(JFrame frame, Set<Card> allCards) {
 		ArrayList<CardUrl> cards = getNeededCards(allCards);
 
-		/*if (cards == null || cards.size() == 0) {
-			JOptionPane.showMessageDialog(null, "All card pictures have been downloaded.");
-			return;
-		}*/
+		/*
+		 * if (cards == null || cards.size() == 0) {
+		 * JOptionPane.showMessageDialog(null,
+		 * "All card pictures have been downloaded."); return; }
+		 */
 
 		DownloadPictures download = new DownloadPictures(cards);
 		JDialog dlg = download.getDlg(frame);
@@ -156,7 +153,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		jComboBox1.setAlignmentX(Component.LEFT_ALIGNMENT);
 		p0.add(jComboBox1);
 		p0.add(Box.createVerticalStrut(5));
-		
+
 		// Start
 		final JButton b = new JButton("Start download");
 		b.addActionListener(new ActionListener() {
@@ -213,7 +210,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		/**
 		 * read all card names and urls
 		 */
-		ArrayList<CardUrl> allcards = new ArrayList<CardUrl>();
+		ArrayList<CardUrl> allCardsUrls = new ArrayList<CardUrl>();
 
 		try {
 			offlineMode = true;
@@ -221,7 +218,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 			for (Card card : allCards) {
 				if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()) {
 					CardUrl url = new CardUrl(card.getName(), card.getExpansionSetCode(), card.getCardNumber(), false);
-					allcards.add(url);
+					allCardsUrls.add(url);
 				} else {
 					if (card.getCardNumber() < 1) {
 						System.err.println("There was a critical error!");
@@ -232,6 +229,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 					}
 				}
 			}
+
+			allCardsUrls.addAll(getTokenCardUrls());
 		} catch (Exception e) {
 			log.error(e);
 		}
@@ -241,7 +240,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		/**
 		 * check to see which cards we already have
 		 */
-		for (CardUrl card : allcards) {
+		for (CardUrl card : allCardsUrls) {
 			boolean withCollectorId = false;
 			if (card.name.equals("Forest") || card.name.equals("Mountain") || card.name.equals("Swamp") || card.name.equals("Island")
 					|| card.name.equals("Plains")) {
@@ -267,6 +266,116 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		}
 
 		return cardsToDownload;
+	}
+
+	private static ArrayList<CardUrl> getTokenCardUrls() throws RuntimeException {
+		ArrayList<CardUrl> list = new ArrayList<CardUrl>();
+		HashSet<String> filter = new HashSet<String>();
+		InputStream in = DownloadPictures.class.getClassLoader().getResourceAsStream("card-pictures-tok.txt");
+		readImageURLsFromFile(in, list, filter);
+		return list;
+	}
+
+	private static void readImageURLsFromFile(InputStream in, ArrayList<CardUrl> list, Set<String> filter) throws RuntimeException {
+		if (in == null) {
+			log.error("resources input stream is null");
+			return;
+		}
+
+		BufferedReader reader = null;
+		InputStreamReader input = null;
+		try {
+			input = new InputStreamReader(in);
+			reader = new BufferedReader(input);
+			String line;
+
+			line = reader.readLine();
+			while (line != null) {
+				line = line.trim();
+				if (line.startsWith("|")) { // new format
+					String[] params = line.split("\\|");
+					if (params.length >= 4) {
+						if (params[1].toLowerCase().equals("generate") && params[2].startsWith("TOK:")) {
+							String set = params[2].substring(4);
+							CardUrl cardUrl = new CardUrl(params[3], set, 0, true);
+							cardUrl.token = true;
+							cardUrl.url = generateTokenUrl(params[3], set);
+							list.add(cardUrl);
+						} else {
+							CardUrl cardUrl = new CardUrl(params[2], params[1].toUpperCase(), 0, false);
+							cardUrl.url = params[3];
+							if (cardUrl.set.startsWith("TOK:")) {
+								cardUrl.token = true;
+								cardUrl.set = cardUrl.set.substring(4);
+							}
+							list.add(cardUrl);
+						}
+					} else {
+						log.error("wrong format for image urls: " + line);
+					}
+				}
+				line = reader.readLine();
+			}
+
+		} catch (Exception ex) {
+			log.error(ex);
+			throw new RuntimeException("DownloadPictures : readFile() error");
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
+	}
+
+	final static Map<String, String> setNameReplacement = new HashMap<String, String>() {
+		{
+			put("SOM", "scars-of-mirrodin");
+			put("M11", "magic-2011");
+			put("ROE", "rise-of-the-eldrazi");
+			put("PVC", "duel-decks-phyrexia-vs-the-coalition");
+			put("WWK", "worldwake");
+			put("ZEN", "zendikar");
+			put("HOP", "planechase");
+			put("M10", "magic-2010");
+			put("GVL", "duel-decks-garruk-vs-liliana");
+			put("ARB", "alara-reborn");
+			put("DVD", "duel-decks-divine-vs-demonic");
+			put("CON", "conflux");
+			put("JVC", "duel-decks-jace-vs-chandra");
+			put("ALA", "shards-of-alara");
+			put("EVE", "eventide");
+			put("SHM", "shadowmoor");
+			put("EVG", "duel-decks-elves-vs-goblins");
+			put("MOR", "morningtide");
+			put("LRW", "lorwyn");
+			put("10E", "tenth-edition");
+			put("CSP", "coldsnap");
+		}
+		private static final long serialVersionUID = 1L;
+	};
+
+	private static String generateTokenUrl(String name, String set) {
+		String _name = name.replaceAll(" ", "-").toLowerCase();
+		String _set = "not-supported-set";
+		if (setNameReplacement.containsKey(set)) {
+			_set = setNameReplacement.get(set);
+		} else {
+			_set += "-" + set;
+		}
+		String url = "http://magiccards.info/extras/token/" + _set + "/" + _name + ".jpg";
+		return url;
 	}
 
 	private class ProxyHandler implements ChangeListener {

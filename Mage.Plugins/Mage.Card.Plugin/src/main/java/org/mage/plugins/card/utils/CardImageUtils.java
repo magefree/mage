@@ -28,6 +28,7 @@ public class CardImageUtils {
 	    String cardname = c.name;
 	    String set = c.set;
 		
+	    if (cardname != null) { cardname = cardname.replace("'", ""); }
 		CardUrl card = new CardUrl(cardname, set, c.collectorId, c.isToken);
 		
 		File file = null;
@@ -99,8 +100,9 @@ public class CardImageUtils {
 		String path = "";
 		CardUrl c = new CardUrl(card.name, card.set, 0, card.token);
 		boolean found = false; // search only in older sets
+		
 		for (String set : SettingsManager.getIntance().getTokenLookupOrder()) {
-			if (found) { // start looking for image only if we have found card.set in the list (as this list is ordered)
+			if (found || card.set.isEmpty()) { // start looking for image only if we have found card.set in the list (as this list is ordered)
 				c.set = set;
 				path = getTokenImagePath(c);
 				file = new File(path);
@@ -109,7 +111,7 @@ public class CardImageUtils {
 					return path;
 				}
 			}
-			if (set.equals(card.set)) found = true;
+			//if (set.equals(card.set)) found = true;
 		}
 		return "";
 	}
