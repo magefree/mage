@@ -27,6 +27,14 @@
     </dependencySet>
     <dependencySet>
       <outputDirectory>/lib/</outputDirectory>
+      <excludes>
+          <exclude>org.mage:Mage-Deck-Constructed</exclude>
+          <exclude>org.mage:Mage-Game-FreeForAll</exclude>
+          <exclude>org.mage:Mage-Game-TwoPlayerDuel</exclude>
+          <exclude>org.mage:Mage-Player-AI</exclude>
+          <exclude>org.mage:Mage-Player-AIMinimax</exclude>
+          <exclude>org.mage:Mage-Player-Human</exclude>
+      </excludes>
     </dependencySet>    
   </dependencySets>
   <fileSets>
