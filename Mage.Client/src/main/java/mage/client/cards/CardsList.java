@@ -60,6 +60,9 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
     /** Creates new form Cards */
     public CardsList() {
         initComponents();
+        jScrollPane1.setOpaque(false);
+        cardArea.setOpaque(false);
+        jScrollPane1.getViewport().setOpaque(false);
     }
 
 	public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {

@@ -67,6 +67,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     public CardSelector() {
         initComponents();
 		this.addComponentListener(this);
+		setOpaque(false);
+	    cardGrid.setOpaque(false);
+	    jScrollPane1.setOpaque(false);
+	    jScrollPane1.getViewport().setOpaque(false);
     }
 
 	public void loadCards(BigCard bigCard) {

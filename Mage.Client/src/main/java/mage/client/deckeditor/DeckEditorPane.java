@@ -34,7 +34,14 @@
 
 package mage.client.deckeditor;
 
-import mage.client.*;
+import java.awt.Component;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.JComponent;
+
+import mage.client.MagePane;
+import mage.client.plugins.impl.Plugins;
 
 /**
  *
@@ -44,7 +51,23 @@ public class DeckEditorPane extends MagePane {
 
     /** Creates new form TablesPane */
     public DeckEditorPane() {
-        initComponents();
+        
+        boolean initialized = false;
+        if (Plugins.getInstance().isThemePluginLoaded()) {
+        	Map<String, JComponent> ui = new HashMap<String, JComponent>();
+	        JComponent container = Plugins.getInstance().updateTablePanel(ui);
+			if (container != null) {
+				deckEditorPanel1 = new mage.client.deckeditor.DeckEditorPanel();
+				initComponents(container);
+    			container.add(deckEditorPanel1);
+    			container.setOpaque(false);
+    			deckEditorPanel1.setOpaque(false);
+				initialized = true;
+			}
+        }
+        if (!initialized) {
+        	initComponents();
+        }
     }
 
 	public void showTables() {
@@ -78,6 +101,21 @@ public class DeckEditorPane extends MagePane {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void initComponents(Component container) {
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 885, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
+        );
+
+        pack();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private mage.client.deckeditor.DeckEditorPanel deckEditorPanel1;

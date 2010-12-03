@@ -46,6 +46,9 @@ public class DeckArea extends javax.swing.JPanel {
     /** Creates new form DeckArea */
     public DeckArea() {
         initComponents();
+        jSplitPane1.setOpaque(false);
+        deckList.setOpaque(false);
+        sideboardList.setOpaque(false);
     }
 
 	public CardsList getDeckList() {

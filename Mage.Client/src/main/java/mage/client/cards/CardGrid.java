@@ -70,6 +70,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
 
     public CardGrid() {
         initComponents();
+        setOpaque(false);
     }
 
 	public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {

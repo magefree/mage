@@ -34,6 +34,7 @@
 
 package mage.client.deckeditor;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.io.File;
 import java.io.IOException;
@@ -41,15 +42,21 @@ import java.lang.reflect.Constructor;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.plaf.ColorUIResource;
+
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.client.MageFrame;
 import mage.client.util.Event;
 import mage.client.util.Listener;
+import mage.client.util.gui.DividerColorUtill;
 import mage.game.GameException;
 import mage.view.CardsView;
 
@@ -72,6 +79,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		fcImportDeck = new JFileChooser();
 		fcImportDeck.setAcceptAllFileFilterUsed(false);
 		fcImportDeck.addChoosableFileFilter(new ImportFilter());
+		
+		deckArea.setOpaque(false);
+	    jPanel1.setOpaque(false);
+	    jSplitPane1.setOpaque(false);
     }
 
 	public void showDeckEditor() {
