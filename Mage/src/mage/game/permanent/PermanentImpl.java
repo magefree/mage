@@ -177,7 +177,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
 	@Override
 	public void checkTriggers(GameEvent event, Game game) {
-		if (event.getType() == EventType.BEGINNING_PHASE_PRE)
+		if (event.getType() == EventType.BEGINNING_PHASE_PRE && game.getActivePlayerId().equals(controllerId))
 			this.controlledFromStartOfTurn = true;
 		for (TriggeredAbility ability: abilities.getTriggeredAbilities(Zone.BATTLEFIELD)) {
 			ability.checkTrigger(event, game);
