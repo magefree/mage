@@ -20,6 +20,9 @@ public class CardsStorage {
 				if (CardUtil.isLand(card)) {
 					landCards.add(card);
 				}
+				if (card.getName().contains("Pledge")) {
+					System.out.println(card.getName());
+				}
 			}
 		}
 	}

@@ -28,7 +28,6 @@ public class CardImageUtils {
 	    String cardname = c.name;
 	    String set = c.set;
 		
-	    if (cardname != null) { cardname = cardname.replace("'", ""); }
 		CardUrl card = new CardUrl(cardname, set, c.collectorId, c.isToken);
 		
 		File file = null;
