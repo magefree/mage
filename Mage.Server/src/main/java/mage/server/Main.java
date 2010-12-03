@@ -53,6 +53,7 @@ public class Main {
 
 	private final static String testModeArg = "-testMode=";
 	private final static String pluginFolder = "plugins";
+	private final static String version = "0.5";
 
 	public static PluginClassLoader classLoader = new PluginClassLoader();
 	public static ServerImpl server;
@@ -62,7 +63,7 @@ public class Main {
      */
     public static void main(String[] args) {
 
-		logger.info("Starting MAGE server version " + Main.class.getPackage().getImplementationVersion());
+		logger.info("Starting MAGE server version " + version);
 		logger.info("Logging level: " + Logging.getLevel(logger));
 		deleteSavedGames();
 		ConfigSettings config = ConfigSettings.getInstance();

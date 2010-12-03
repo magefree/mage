@@ -112,8 +112,10 @@ class SeaGateOracleEffect extends OneShotEffect<SeaGateOracleEffect> {
 				player.lookAtCards(cards, game);
 				player.choose(cards, target, game);
 				card = cards.get(target.getFirstTarget(), game);
-				card.moveToZone(Zone.HAND, source.getId(), game, false);
-				cards.remove(card);
+				if (card != null) {
+					card.moveToZone(Zone.HAND, source.getId(), game, false);
+					cards.remove(card);
+				}
 				for (Card card1: cards.getCards(game)) {
 					card1.moveToZone(Zone.LIBRARY, source.getId(), game, false);
 				}

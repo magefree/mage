@@ -113,7 +113,7 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 	}
 
 	public static PlayerQueryEvent lookEvent(UUID playerId, String message, Cards cards) {
-		return new PlayerQueryEvent(playerId, message, null, null, cards, null, QueryType.LOOK, 0, 0, false);
+		return new PlayerQueryEvent(playerId, message, null, null, null, cards, QueryType.LOOK, 0, 0, false);
 	}
 	
 	public String getMessage() {

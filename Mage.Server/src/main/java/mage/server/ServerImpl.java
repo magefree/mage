@@ -31,6 +31,7 @@ package mage.server;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.ExportException;
 import java.rmi.server.RemoteServer;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
@@ -76,6 +77,8 @@ public class ServerImpl extends RemoteServer implements Server {
 			logger.info("Started MAGE server - listening on port " + port);
 			if (testMode)
 				logger.info("MAGE server running in test mode");
+		} catch (ExportException ex) {
+			logger.severe("ERROR:  Unable to start Mage Server - another server is likely running");
 		} catch (RemoteException ex) {
 			logger.log(Level.SEVERE, "Failed to start RMI server at port " + port, ex);
 		}
