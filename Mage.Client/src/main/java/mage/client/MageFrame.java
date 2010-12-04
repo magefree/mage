@@ -185,6 +185,18 @@ public class MageFrame extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
 		
+		filename = "/icon-mage.png";
+		try {
+			InputStream is = this.getClass().getResourceAsStream(filename);
+			
+	    	if (is != null) {
+	    		BufferedImage image = ImageIO.read(is);
+	    		setIconImage(image);
+	    	}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		desktopPane.add(ArrowBuilder.getArrowsPanel(), JLayeredPane.DRAG_LAYER);
 		
 		desktopPane.addComponentListener(new ComponentAdapter(){
