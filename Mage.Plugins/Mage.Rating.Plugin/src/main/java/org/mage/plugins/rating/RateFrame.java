@@ -75,8 +75,6 @@ public class RateFrame extends JFrame {
 			}
 		});
 		add(rate);
-
-		System.out.println("test");
 	}
 
 	public void startRating() {

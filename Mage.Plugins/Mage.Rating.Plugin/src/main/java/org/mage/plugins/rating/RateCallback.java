@@ -30,6 +30,10 @@ public class RateCallback implements ActionCallback {
 	
 	@Override
 	public void mouseClicked(MouseEvent arg0, TransferData arg1) {
+	}
+	
+	@Override
+	public void mousePressed(MouseEvent arg0, TransferData arg1) {
 		this.callback.reportResult(card1, card2);
 	}
 

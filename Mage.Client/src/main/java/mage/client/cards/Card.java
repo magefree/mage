@@ -352,12 +352,12 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-	    requestFocusInWindow();
-	    callback.mouseClicked(e, gameId, session, card);
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
+	public void mousePressed(MouseEvent e) {
+	    requestFocusInWindow();
+	    callback.mouseClicked(e, gameId, session, card);
 	}
 
 	@Override

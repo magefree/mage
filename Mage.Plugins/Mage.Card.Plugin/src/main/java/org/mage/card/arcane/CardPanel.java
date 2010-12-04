@@ -37,7 +37,6 @@ import org.apache.log4j.Logger;
 import org.mage.card.arcane.ScaledImagePanel.MultipassType;
 import org.mage.card.arcane.ScaledImagePanel.ScalingType;
 import org.mage.plugins.card.images.ImageCache;
-import org.mage.plugins.card.utils.BufferedImageBuilder;
 import org.mage.plugins.card.utils.ImagePanel;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
@@ -558,10 +557,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		data.component = this;
-		data.card = this.gameCard;
-		data.gameId = this.gameId;
-		callback.mouseClicked(e, data);
 	}
 
 	@Override
@@ -602,7 +597,12 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {
+		data.component = this;
+		data.card = this.gameCard;
+		data.gameId = this.gameId;
+		callback.mousePressed(e, data);
+	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {}
