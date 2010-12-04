@@ -18,6 +18,7 @@
         <outputDirectory>/plugins</outputDirectory>
         <includes>
             <include>org.mage:Mage-Deck-Constructed</include>
+            <include>org.mage:Mage-Deck-Limited</include>
             <include>org.mage:Mage-Game-FreeForAll</include>
             <include>org.mage:Mage-Game-TwoPlayerDuel</include>
             <include>org.mage:Mage-Player-AI</include>
@@ -29,6 +30,7 @@
       <outputDirectory>/lib/</outputDirectory>
       <excludes>
           <exclude>org.mage:Mage-Deck-Constructed</exclude>
+          <exclude>org.mage:Mage-Deck-Limited</exclude>
           <exclude>org.mage:Mage-Game-FreeForAll</exclude>
           <exclude>org.mage:Mage-Game-TwoPlayerDuel</exclude>
           <exclude>org.mage:Mage-Player-AI</exclude>

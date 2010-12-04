@@ -55,6 +55,12 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>Mage-Deck-Limited</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>Mage-Game-FreeForAll</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
