@@ -27,6 +27,7 @@ import mage.cards.MagePermanent;
 import mage.cards.TextPopup;
 import mage.cards.action.ActionCallback;
 import mage.cards.action.TransferData;
+import mage.components.ImagePanel;
 import mage.utils.CardUtil;
 import mage.view.AbilityView;
 import mage.view.CardView;
@@ -37,7 +38,6 @@ import org.apache.log4j.Logger;
 import org.mage.card.arcane.ScaledImagePanel.MultipassType;
 import org.mage.card.arcane.ScaledImagePanel.ScalingType;
 import org.mage.plugins.card.images.ImageCache;
-import org.mage.plugins.card.utils.ImagePanel;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 

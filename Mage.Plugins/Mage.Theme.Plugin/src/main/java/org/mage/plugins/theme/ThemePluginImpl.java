@@ -1,7 +1,6 @@
 package org.mage.plugins.theme;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -9,8 +8,8 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 
+import mage.components.ImagePanel;
 import mage.interfaces.plugin.ThemePlugin;
 import net.xeoh.plugins.base.annotations.PluginImplementation;
 import net.xeoh.plugins.base.annotations.events.Init;
@@ -18,7 +17,6 @@ import net.xeoh.plugins.base.annotations.events.PluginLoaded;
 import net.xeoh.plugins.base.annotations.meta.Author;
 
 import org.apache.log4j.Logger;
-import org.mage.plugins.component.ImagePanel;
 
 @PluginImplementation
 @Author(name = "nantuko")
@@ -95,7 +93,7 @@ public class ThemePluginImpl implements ThemePlugin {
 			unsetOpaque(ui.get("tablesPanel"));
 			JComponent viewport = ui.get("jScrollPane1ViewPort");
 			if (viewport != null) {
-				viewport.setBackground(new Color(20,20,20,50));
+				viewport.setBackground(new Color(255,255,255,50));
 			}
 			return bgPanel;
 		} catch (Exception e) {

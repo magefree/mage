@@ -34,19 +34,9 @@
 
 package mage.client.table;
 
-import mage.client.components.MageComponents;
-import mage.client.dialog.NewTableDialog;
-import mage.client.dialog.JoinTableDialog;
-import mage.client.dialog.TableWaitingDialog;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.image.BufferedImage;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,22 +47,22 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
-import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.table.AbstractTableModel;
+
 import mage.cards.decks.DeckCardLists;
 import mage.client.MageFrame;
+import mage.client.components.MageComponents;
+import mage.client.dialog.JoinTableDialog;
+import mage.client.dialog.NewTableDialog;
+import mage.client.dialog.TableWaitingDialog;
 import mage.client.remote.MageRemoteException;
 import mage.client.remote.Session;
 import mage.client.util.ButtonColumn;
-import mage.client.util.gui.ArrowBuilder;
-import mage.client.util.gui.ImagePanel;
 import mage.util.Logging;
 import mage.view.TableView;
 

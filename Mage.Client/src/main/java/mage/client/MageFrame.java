@@ -46,6 +46,8 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -60,9 +62,9 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JToolBar.Separator;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.JToolBar.Separator;
 
 import mage.client.cards.CardsStorage;
 import mage.client.components.MageComponents;
@@ -74,7 +76,7 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.remote.Session;
 import mage.client.util.EDTExceptionHandler;
 import mage.client.util.gui.ArrowBuilder;
-import mage.client.util.gui.ImagePanel;
+import mage.components.ImagePanel;
 import mage.util.Logging;
 
 /**
@@ -147,9 +149,14 @@ public class MageFrame extends javax.swing.JFrame {
 		
 		String filename = "/background.jpg";
 		try {
-			InputStream is = this.getClass().getResourceAsStream(filename);
-			BufferedImage background = ImageIO.read(is);
-			backgroundPane = new ImagePanel(background, ImagePanel.SCALED);
+			if (Plugins.getInstance().isThemePluginLoaded()) {
+				Map<String, JComponent> ui = new HashMap<String, JComponent>();
+				backgroundPane = (ImagePanel) Plugins.getInstance().updateTablePanel(ui);
+			} else {
+				InputStream is = this.getClass().getResourceAsStream(filename);
+				BufferedImage background = ImageIO.read(is);
+				backgroundPane = new ImagePanel(background, ImagePanel.SCALED);
+			}
 			backgroundPane.setSize(1024, 768);
 			desktopPane.add(backgroundPane, JLayeredPane.DEFAULT_LAYER);
 		} catch (IOException e) {

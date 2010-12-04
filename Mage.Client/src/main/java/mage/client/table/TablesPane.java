@@ -34,22 +34,14 @@
 
 package mage.client.table;
 
-import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.imageio.ImageIO;
 import javax.swing.JComponent;
-import javax.swing.JLayeredPane;
 
 import mage.client.MageFrame;
 import mage.client.MagePane;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.gui.ImagePanel;
 
 /**
  *
