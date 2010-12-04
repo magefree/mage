@@ -35,11 +35,9 @@
 package mage.client;
 
 import java.awt.AlphaComposite;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.SplashScreen;
 import java.awt.event.ComponentAdapter;
@@ -57,7 +55,6 @@ import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -83,8 +80,6 @@ import mage.client.util.EDTExceptionHandler;
 import mage.client.util.gui.ArrowBuilder;
 import mage.components.ImagePanel;
 import mage.util.Logging;
-
-import org.mage.plugins.card.utils.ImageManager;
 
 /**
  *
