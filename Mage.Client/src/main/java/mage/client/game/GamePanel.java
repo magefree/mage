@@ -85,6 +85,8 @@ public class GamePanel extends javax.swing.JPanel {
     public GamePanel() {
         initComponents();
         
+        hand.setHScrollSpeed(8);
+        
         //FIXME: remove from here
 		try {
 	        // Override layout (I can't edit generated code)

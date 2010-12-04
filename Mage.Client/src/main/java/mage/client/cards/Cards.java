@@ -178,4 +178,12 @@ public class Cards extends javax.swing.JPanel {
     public void setDontDisplayTapped(boolean dontDisplayTapped) {
 		this.dontDisplayTapped = dontDisplayTapped;
 	}
+    
+    public void setHScrollSpeed(int unitIncrement) {
+    	jScrollPane1.getHorizontalScrollBar().setUnitIncrement(unitIncrement);
+    }
+    
+    public void setVScrollSpeed(int unitIncrement) {
+    	jScrollPane1.getVerticalScrollBar().setUnitIncrement(unitIncrement);
+    }
 }
