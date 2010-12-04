@@ -17,13 +17,8 @@
         <module>Mage.Server</module>
         <module>Mage.Sets</module>
         <module>Mage.Client</module>
-        <module>Mage.Deck.Constructed</module>
-        <module>Mage.Game.FreeForAll</module>
-        <module>Mage.Game.TwoPlayerDuel</module>
-        <module>Mage.Player.AI</module>
-        <module>Mage.Player.AIMinimax</module>
-        <module>Mage.Player.Human</module>
         <module>Mage.Plugins</module>
+        <module>Mage.Server.Plugins</module>
     </modules>
 
     <repositories>
