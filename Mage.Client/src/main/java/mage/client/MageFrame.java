@@ -35,9 +35,12 @@
 package mage.client;
 
 import java.awt.AlphaComposite;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.SplashScreen;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -54,7 +57,9 @@ import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDesktopPane;
@@ -79,6 +84,8 @@ import mage.client.util.gui.ArrowBuilder;
 import mage.components.ImagePanel;
 import mage.util.Logging;
 
+import org.mage.plugins.card.utils.ImageManager;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -92,7 +99,9 @@ public class MageFrame extends javax.swing.JFrame {
 	private static CombatDialog combat;
 	private static PickNumberDialog pickNumber;
 	private static Preferences prefs = Preferences.userNodeForPackage(MageFrame.class);
-
+	private JLabel title;
+	private Rectangle titleRectangle;
+	
 	/**
 	 * @return the session
 	 */
@@ -163,6 +172,24 @@ public class MageFrame extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
 		
+		filename = "/label-mage.png";
+		try {
+			InputStream is = this.getClass().getResourceAsStream(filename);
+			
+			float ratio = 1179.0f / 678.0f;
+	    	titleRectangle = new Rectangle(640, (int)(640 / ratio));
+	    	if (is != null) {
+	    		BufferedImage image = ImageIO.read(is);
+	    		//ImageIcon resized = new ImageIcon(image.getScaledInstance(titleRectangle.width, titleRectangle.height, java.awt.Image.SCALE_SMOOTH));
+				title = new JLabel();
+	    		title.setIcon(new ImageIcon(image));
+	    		backgroundPane.setLayout(null);
+				backgroundPane.add(title);
+	    	}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		desktopPane.add(ArrowBuilder.getArrowsPanel(), JLayeredPane.DRAG_LAYER);
 		
 		desktopPane.addComponentListener(new ComponentAdapter(){
@@ -173,6 +200,10 @@ public class MageFrame extends javax.swing.JFrame {
 				backgroundPane.setSize(width, height);
 				JPanel arrowsPanel = ArrowBuilder.getArrowsPanelRef();
 				if (arrowsPanel != null) arrowsPanel.setSize(width, height);
+				if (title != null) {
+					//title.setBorder(BorderFactory.createLineBorder(Color.red));
+					title.setBounds((int)(width - titleRectangle.getWidth())/2, 180, titleRectangle.width, titleRectangle.height);
+				}
 			}
         });
 		
