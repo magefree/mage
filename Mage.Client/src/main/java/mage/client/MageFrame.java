@@ -97,7 +97,6 @@ public class MageFrame extends javax.swing.JFrame {
 	private static Preferences prefs = Preferences.userNodeForPackage(MageFrame.class);
 	private JLabel title;
 	private Rectangle titleRectangle;
-	public final static String testModeArg = "-testMode=";
 	
 	/**
 	 * @return the session
@@ -554,12 +553,6 @@ public class MageFrame extends javax.swing.JFrame {
     		}
 	    	splash.update();
     	}
-    	
-    	for (String arg: args) {
-			if (arg.startsWith(testModeArg)) {
-				System.setProperty(testModeArg, "true");
-			}
-		}
     	
 		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
 			public void uncaughtException(Thread t, Throwable e) {

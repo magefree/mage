@@ -152,7 +152,9 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 
 		this.roomId = roomId;
 		session = MageFrame.getSession();
-		btnQuickStart.setVisible(System.getProperty(MageFrame.testModeArg) != null);
+		if (session != null) {
+			btnQuickStart.setVisible(session.isTestMode());
+		}
 		if (newTableDialog == null) {
 			newTableDialog = new NewTableDialog();
 			MageFrame.getDesktop().add(newTableDialog);
