@@ -27,9 +27,6 @@ public interface MageObject extends MageItem, Serializable {
 	public MageInt getToughness();
 	public MageInt getLoyalty();
 
-//	public Zone getZone();
-//	public void setZone(Zone zone);
-
 	public void adjustCosts(Ability ability, Game game);
 
 	public MageObject copy();

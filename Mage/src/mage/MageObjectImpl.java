@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Zone;
 
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -57,7 +56,6 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
 	protected MageInt power;
 	protected MageInt toughness;
 	protected MageInt loyalty;
-//	protected Zone zone;
 	
 	@Override
 	public abstract T copy();
@@ -81,7 +79,6 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
 		name = object.name;
 		manaCost = object.manaCost.copy();
 		text = object.text;
-//		zone = object.zone;
 		color = object.color.copy();
 		power = object.power.copy();
 		toughness = object.toughness.copy();
@@ -157,16 +154,6 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
 	public ManaCosts<ManaCost> getManaCost() {
 		return manaCost;
 	}
-
-//	@Override
-//	public Zone getZone() {
-//		return zone;
-//	}
-//
-//	@Override
-//	public void setZone(Zone zone) {
-//		this.zone = zone;
-//	}
 
 	@Override
 	public void adjustCosts(Ability ability, Game game) {}

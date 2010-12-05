@@ -57,6 +57,7 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -185,7 +186,13 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 			game.fireSelectTargetEvent(playerId, target.getMessage(), target.possibleTargets(null, playerId, game), target.isRequired());
 			waitForResponse();
 			if (response.getUUID() != null) {
-				if (target.canTarget(response.getUUID(), game)) {
+				if (target instanceof TargetPermanent) {
+					if (((TargetPermanent)target).canTarget(playerId, response.getUUID(), null, game)) {
+						target.add(response.getUUID(), game);
+						return true;
+					}
+				}
+				else if (target.canTarget(response.getUUID(), game)) {
 					target.add(response.getUUID(), game);
 					return true;
 				}
