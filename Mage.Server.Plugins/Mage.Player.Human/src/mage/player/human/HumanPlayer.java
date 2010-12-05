@@ -209,7 +209,13 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 			game.fireSelectTargetEvent(playerId, target.getMessage(), target.possibleTargets(source==null?null:source.getId(), playerId, game), target.isRequired());
 			waitForResponse();
 			if (response.getUUID() != null) {
-				if (target.canTarget(response.getUUID(), source, game)) {
+				if (target instanceof TargetPermanent) {
+					if (((TargetPermanent)target).canTarget(playerId, response.getUUID(), null, game)) {
+						target.add(response.getUUID(), game);
+						return true;
+					}
+				}
+				else if (target.canTarget(response.getUUID(), source, game)) {
 					target.addTarget(response.getUUID(), source, game);
 					return true;
 				}

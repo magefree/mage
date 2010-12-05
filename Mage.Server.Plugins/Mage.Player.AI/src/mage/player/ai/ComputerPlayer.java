@@ -180,11 +180,11 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		}
 		if (target instanceof TargetControlledPermanent) {
 			List<Permanent> targets;
-			targets = threats(playerId, ((TargetPermanent)target).getFilter(), game);
+			targets = threats(playerId, ((TargetControlledPermanent)target).getFilter(), game);
 			if (!outcome.isGood())
 				Collections.reverse(targets);
 			for (Permanent permanent: targets) {
-				if (target.canTarget(permanent.getId(), game) && !target.getTargets().contains(permanent.getId())) {
+				if (((TargetControlledPermanent)target).canTarget(playerId, permanent.getId(), null, game) && !target.getTargets().contains(permanent.getId())) {
 					target.add(permanent.getId(), game);
 					return true;
 				}
@@ -199,7 +199,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				targets = threats(opponentId, ((TargetPermanent)target).getFilter(), game);
 			}
 			for (Permanent permanent: targets) {
-				if (target.canTarget(permanent.getId(), game) && !target.getTargets().contains(permanent.getId())) {
+				if (((TargetPermanent)target).canTarget(playerId, permanent.getId(), null, game) && !target.getTargets().contains(permanent.getId())) {
 					target.add(permanent.getId(), game);
 					return true;
 				}
@@ -246,11 +246,11 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		}
 		if (target instanceof TargetControlledPermanent) {
 			List<Permanent> targets;
-			targets = threats(playerId, ((TargetPermanent)target).getFilter(), game);
+			targets = threats(playerId, ((TargetControlledPermanent)target).getFilter(), game);
 			if (!outcome.isGood())
 				Collections.reverse(targets);
 			for (Permanent permanent: targets) {
-				if (target.canTarget(permanent.getId(), source, game)) {
+				if (((TargetControlledPermanent)target).canTarget(playerId, permanent.getId(), source, game)) {
 					target.addTarget(permanent.getId(), source, game);
 					return true;
 				}
@@ -265,7 +265,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				targets = threats(opponentId, ((TargetPermanent)target).getFilter(), game);
 			}
 			for (Permanent permanent: targets) {
-				if (target.canTarget(permanent.getId(), source, game)) {
+				if (((TargetPermanent)target).canTarget(playerId, permanent.getId(), source, game)) {
 					target.addTarget(permanent.getId(), source, game);
 					return true;
 				}

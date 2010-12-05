@@ -250,18 +250,21 @@ public class Battlefield implements Serializable {
 	 * @see Permanent
 	 */
 	public List<Permanent> getActivePermanents(FilterPermanent filter, UUID sourcePlayerId, Game game) {
+		List<Permanent> active = new ArrayList<Permanent>();
 		if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
-			return getAllActivePermanents(filter);
+			for (Permanent perm: field.values()) {
+				if (perm.isPhasedIn() && filter.match(perm, sourcePlayerId, game))
+					active.add(perm);
+			}
 		}
 		else {
-			List<Permanent> active = new ArrayList<Permanent>();
 			Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
 			for (Permanent perm: field.values()) {
 				if (perm.isPhasedIn() && range.contains(perm.getControllerId()) && filter.match(perm, sourcePlayerId, game))
 					active.add(perm);
 			}
-			return active;
 		}
+		return active;
 	}
 
 	/**

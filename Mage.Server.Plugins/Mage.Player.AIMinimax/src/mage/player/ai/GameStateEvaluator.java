@@ -57,7 +57,7 @@ public class GameStateEvaluator {
 
 		int handScore = 0;
 		handScore = 7 - opponent.getHand().size();
-		handScore = Math.min(7, player.getHand().size());
+		handScore += Math.min(7, player.getHand().size());
 		handScore *= HAND_FACTOR;
 
 		int score = lifeScore + permanentScore + handScore;

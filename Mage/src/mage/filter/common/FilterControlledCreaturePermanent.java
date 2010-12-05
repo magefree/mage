@@ -29,8 +29,6 @@
 package mage.filter.common;
 
 import mage.Constants.CardType;
-import mage.Constants.TargetController;
-import mage.filter.FilterPermanent;
 
 /**
  *
