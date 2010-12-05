@@ -1,0 +1,363 @@
+1317 : Serra Angel
+1317 : Day of Judgment
+1299 : Baneslayer Angel
+1288 : Chandra Nalaar
+1287 : Condemn
+1285 : Oblivion Ring
+1278 : Prodigal Pyromancer
+1263 : Garruk Wildspeaker
+1258 : Primeval Titan
+1239 : Whispersilk Cloak
+1233 : Lightning Bolt
+1231 : Jace Beleren
+1230 : Terminate
+1216 : Cudgel Troll
+1214 : Behemoth Sledge
+1207 : Mind Control
+1199 : Platinum Angel
+1196 : Magma Phoenix
+1195 : Gideon Jura
+1193 : Pacifism
+1192 : Martial Coup
+1192 : Grave Titan
+1192 : Doom Blade
+1189 : Royal Assassin
+1187 : Rampaging Baloths
+1182 : Overrun
+1179 : Fireball
+1179 : Mitotic Slime
+1177 : Reassembling Skeleton
+1174 : Knight of the White Orchid
+1169 : Inferno Titan
+1169 : Ajani Vengeant
+1167 : Brittle Effigy
+1166 : Ajani Goldmane
+1162 : Blinding Mage
+1160 : Jace's Ingenuity
+1157 : Bituminous Blast
+1157 : Thornling
+1153 : Sylvan Ranger
+1151 : Sword of Vengeance
+1150 : Bloodbraid Elf
+1149 : Burst Lightning
+1148 : Assassinate
+1147 : Honor of the Pure
+1146 : Woolly Thoctar
+1143 : Earthquake
+1142 : Conundrum Sphinx
+1141 : Rise from the Grave
+1140 : Eldrazi Monument
+1140 : Ancient Hellkite
+1139 : Noble Hierarch
+1138 : Cloud Crusader
+1136 : Armored Ascension
+1135 : Pyroclasm
+1134 : Bloodhall Ooze
+1133 : Frost Titan
+1130 : Sleep
+1129 : Path to Exile
+1126 : Chandra's Outrage
+1125 : Kargan Dragonlord
+1122 : Nantuko Shade
+1119 : Master of the Wild Hunt
+1119 : Awakening Zone
+1114 : Looming Shade
+1114 : Acidic Slime
+1111 : Foresee
+1111 : Triskelion
+1110 : Protean Hydra
+1108 : Act of Treason
+1108 : Goblin Ruinblaster
+1108 : Elspeth, Knight-Errant
+1106 : Obstinate Baloth
+1106 : Weakness
+1105 : Corrupt
+1105 : Steppe Lynx
+1105 : Jace, the Mind Sculptor
+1103 : Emeria Angel
+1102 : Sea Gate Oracle
+1100 : Air Servant
+1100 : Maelstrom Pulse
+1096 : Assault Griffin
+1096 : Quag Sickness
+1096 : Sarkhan Vol
+1095 : Liliana Vess
+1095 : Vampire Aristocrat
+1095 : Joraga Treespeaker
+1094 : Steel Overseer
+1093 : Wild Griffin
+1092 : Birds of Paradise
+1092 : Putrid Leech
+1091 : Great Sable Stag
+1090 : Black Knight
+1089 : Chandra's Spitfire
+1088 : Aven Squire
+1087 : Knight Exemplar
+1087 : Mind Spring
+1087 : Scepter of Dominance
+1087 : Flame Slash
+1086 : Sign in Blood
+1086 : Azure Drake
+1085 : Sprouting Thrinax
+1080 : Ranger of Eos
+1080 : Roc Egg
+1079 : Deadly Recluse
+1079 : Crystal Ball
+1079 : Hell's Thunder
+1078 : Ant Queen
+1074 : Mana Leak
+1073 : Garruk's Companion
+1073 : Basilisk Collar
+1071 : Squadron Hawk
+1068 : Kozilek's Predator
+1068 : Air Elemental
+1067 : Inspired Charge
+1067 : Ethersworn Adjudicator
+1066 : Knight of the Reliquary
+1066 : Finest Hour
+1066 : Warlord's Axe
+1066 : Wind Drake
+1065 : Wall of Omens
+1065 : Vengevine
+1062 : Llanowar Elves
+1062 : Grixis Slavedriver
+1061 : Arbor Elf
+1060 : Gaea's Revenge
+1058 : Sun Titan
+1058 : Stone Golem
+1058 : Snapping Drake
+1057 : Fling
+1057 : Adventuring Gear
+1054 : Drudge Skeletons
+1053 : Necrotic Plague
+1053 : Shiv's Embrace
+1051 : Runeclaw Bear
+1050 : Broodmate Dragon
+1049 : Barony Vampire
+1049 : Rafiq of the Many
+1048 : Cultivate
+1048 : Blightning
+1047 : Water Servant
+1046 : Brave the Elements
+1046 : Howling Banshee
+1044 : Ember Hauler
+1044 : Soul's Majesty
+1044 : Hoarding Dragon
+1041 : Ice Cage
+1041 : Infantry Veteran
+1041 : River Boa
+1039 : Conquerors Pledge
+1039 : Goblin Chieftain
+1038 : Awakener Druid
+1038 : Sigil of the Empty Throne
+1036 : Giant Spider
+1036 : Mist Leopard
+1035 : Greater Basilisk
+1035 : Stabbing Pain
+1035 : Ball Lightning
+1035 : Cloud Elemental
+1031 : Scarland Thrinax
+1030 : Darklit Gargoyle
+1029 : Rhox Pikemaster
+1028 : Esper Cormorants
+1027 : Fauna Shaman
+1025 : Bogardan Hellkite
+1025 : Overwhelming Stampede
+1025 : Liliana's Specter
+1024 : Stormfront Pegasus
+1024 : Juggernaut
+1023 : Child of Night
+1022 : Preordain
+1021 : Brindle Boar
+1020 : Æther Figment
+1020 : Reverberate
+1019 : Pestilent Kathari
+1019 : Goblin Guide
+1018 : Emerald Oryx
+1018 : Searing Blaze
+1017 : Wall of Frost
+1017 : Fire Servant
+1016 : Duskdale Wurm
+1015 : Vengeful Archon
+1015 : Bestial Menace
+1013 : Warpath Ghoul
+1011 : Angelic Arbiter
+1010 : Rhox War Monk
+1010 : Primal Cocoon
+1009 : Goblin Outlander
+1006 : Hellspark Elemental
+1005 : Rhox Bodyguard
+1004 : Jinxed Idol
+1003 : Sacred Wolf
+1002 : Emrakul's Hatcher
+1002 : Rakka Mar
+1001 : Griffin Sentinel
+997 : Zombie Outlander
+996 : Wild Nacatl
+996 : Vulshok Berserker
+995 : Negate
+991 : Demon of Death's Gate
+991 : Nacatl Outlander
+991 : Zephyr Sprite
+990 : Dark Tutelage
+990 : Garruk's Packleader
+989 : Manic Vandal
+989 : Spined Wurm
+989 : Time Warp
+989 : Temple Bell
+985 : Wolfbriar Elemental
+984 : Horned Turtle
+984 : Combust
+981 : War Priest of Thune
+980 : Scute Mob
+980 : Spellbreaker Behemoth
+978 : AEther Adept
+977 : Nether Horror
+976 : Bone Saw
+974 : Rotting Legion
+974 : Lotus Cobra
+973 : Phylactery Lich
+972 : Nest Invader
+971 : Volcanic Strength
+969 : Deprive
+968 : Armored Cancrix
+966 : Augury Owl
+964 : Molten Frame
+962 : Scroll Thief
+961 : Leyline of Vitality
+959 : Howling Mine
+956 : Might of Oaks
+955 : Excommunicate
+954 : Celestial Purge
+953 : Everflowing Chalice
+951 : Elvish Archdruid
+951 : Beacon Behemoth
+951 : Scepter of Insight
+950 : Kelinore Bat
+948 : Plummet
+946 : Bloodthrone Vampire
+946 : Vengeful Rebirth
+946 : White Knight
+945 : Soul Warden
+944 : See Beyond
+943 : Fiery Hellhound
+940 : Destructive Force
+940 : Phantom Beast
+939 : Wild Evocation
+939 : Wall of Faith
+936 : Redirect
+936 : Goblin Tunneler
+936 : Aerie Mystics
+934 : Quenchable Fire
+932 : Hornet Sting
+931 : Serra Ascendant
+930 : Constricting Tendrils
+928 : Valeron Outlander
+928 : Time Reversal
+927 : Captivating Vampire
+926 : Beastmaster Ascension
+925 : Tireless Missionaries
+923 : Thunder Strike
+922 : Goblin Balloon Brigade
+922 : Dryad's Favor
+921 : Cyclops Gladiator
+919 : Kranioceros
+918 : Earth Servant
+917 : Bog Wraith
+917 : Knotvine Mystic
+915 : Elixir of Immortality
+911 : Prized Unicorn
+911 : Fusion Elemental
+911 : Wall of Bone
+909 : Ajani's Mantra
+908 : Mind Rot
+907 : Silvercoat Lion
+906 : Canyon Minotaur
+904 : Acolyte of Xathrid
+901 : Vedalken Outlander
+901 : Ajani's Pridemate
+900 : Harbor Serpent
+900 : Font of Mythos
+900 : Siege Mastodon
+898 : Vectis Agents
+895 : Stoneforge Mystic
+893 : Clone
+893 : Arc Runner
+892 : Mass Polymorph
+890 : Valiant Guard
+887 : Giant Growth
+885 : Goldenglow Moth
+883 : Blood Tithe
+883 : Wall of Vines
+880 : Unsummon
+880 : Disorient
+877 : Hunters' Feast
+877 : Gargoyle Sentinel
+876 : Nightwing Shade
+876 : Dreadwing
+874 : Maritime Guard
+871 : Angelsong
+869 : Yavimaya Wurm
+869 : Autumn's Veil
+868 : Leyline of Punishment
+866 : Archive Trap
+865 : Silence
+865 : Diminish
+865 : Oakenform
+862 : Sunspring Expedition
+859 : Lava Axe
+858 : Elite Vanguard
+856 : Naturalize
+852 : Berserkers of Blood Ridge
+851 : Diabolic Tutor
+850 : Rampant Growth
+850 : Unholy Strength
+850 : Stormtide Leviathan
+850 : Angel's Mercy
+847 : Demolish
+847 : Jace's Erasure
+847 : Holy Strength
+847 : Leyline of the Void
+847 : Viscera Seer
+845 : Goblin Piker
+844 : Solemn Offering
+844 : Tukatongue Thallid
+842 : Relentless Rats
+842 : Disentomb
+841 : Merfolk Sovereign
+840 : Sorcerer's Strongbox
+839 : Bloodcrazed Goblin
+830 : Leyline of Sanctity
+828 : Unified Will
+827 : Safe Passage
+826 : Duress
+826 : Call to Mind
+817 : Gravedigger
+815 : Merfolk Spy
+813 : Pyretic Ritual
+805 : Leyline of Anticipation
+801 : Palace Guard
+801 : Liliana's Caress
+798 : Traumatize
+797 : Spreading Seas
+796 : Back to Nature
+795 : Inkwell Leviathan
+792 : Fog
+788 : Bog Raiders
+784 : Voltaic Key
+779 : Coral Merfolk
+775 : Nature's Spiral
+752 : Alluring Siren
+745 : Tome Scour
+743 : Incite
+737 : Cancel
+735 : Mighty Leap
+721 : Deathmark
+703 : Ornithopter
+697 : Flashfreeze
+685 : Haunting Echoes
+674 : Demon's Horn
+659 : Angel's Feather
+636 : Kraken's Eye
+605 : Dragon's Claw
+561 : Wurm's Tooth
