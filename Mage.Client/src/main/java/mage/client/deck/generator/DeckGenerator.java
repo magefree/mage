@@ -139,6 +139,7 @@ public class DeckGenerator {
 		}
 		out: 
 		while (nonBasicLandCount < MAX_NON_BASIC_SOURCE) {
+			boolean found = false;
 			for (Card card : CardsStorage.getLandCards()) {
 				int score = 0;
 				for (Mana mana : card.getMana()) {
@@ -149,10 +150,14 @@ public class DeckGenerator {
 				if (score > 1) {
 					nonBasicLandCount++;
 					landCardPool.add(card);
+					found = true;
 				}
 				if (nonBasicLandCount > MAX_NON_BASIC_SOURCE) {
 					break out;
 				}
+			}
+			if (!found) { //there is no compatible non basic land
+				break out;
 			}
 		}
 		System.out.println("deck generator card pool: spells=" + spellCardPool.size() + ", lands=" + landCardPool.size());
@@ -320,9 +325,11 @@ public class DeckGenerator {
 				type = 6;
 			}
 
-			this.score = // 5*card.getValue() + // not possible now
-			// 3*card.getRemoval() + // not possible now
-			type + getManaCostScore(card, allowedColors);
+			this.score = 
+				// 5*card.getValue() + // not possible now
+				3 * CardsStorage.rateCard(card) + 
+				// 3*card.getRemoval() + // not possible now
+				type + getManaCostScore(card, allowedColors);
 		}
 
 		private int getManaCostScore(Card card, List<ColoredManaSymbol> allowedColors) {
