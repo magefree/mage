@@ -71,6 +71,8 @@ public class NewTableDialog extends MageDialog {
 	private Session session;
 	private List<TablePlayerPanel> players = new ArrayList<TablePlayerPanel>();
 	
+	private static final String LIMITED = "Limited";
+	
     /** Creates new form NewTableDialog */
     public NewTableDialog() {
         initComponents();
@@ -376,6 +378,7 @@ public class NewTableDialog extends MageDialog {
 		this.player1Panel.setPlayerName(session.getUserName());
 		cbGameType.setModel(new DefaultComboBoxModel(session.getGameTypes().toArray()));
 		cbDeckType.setModel(new DefaultComboBoxModel(session.getDeckTypes()));
+		selectLimitedByDefault();
 		cbRange.setModel(new DefaultComboBoxModel(RangeOfInfluence.values()));
 		cbAttackOption.setModel(new DefaultComboBoxModel(MultiplayerAttackOption.values()));
 		this.roomId = roomId;
@@ -391,6 +394,16 @@ public class NewTableDialog extends MageDialog {
 
 	public UUID getPlayerId() {
 		return playerId;
+	}
+	
+	private void selectLimitedByDefault() {
+		for (int i = 0; i < cbDeckType.getItemCount(); i++) {
+			String name = (String)cbDeckType.getItemAt(i);
+			if (name.equals(LIMITED)) {
+				cbDeckType.setSelectedIndex(i);
+				break;
+			}
+		}
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

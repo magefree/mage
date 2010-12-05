@@ -357,7 +357,7 @@ public class DeckGenerator {
 					maxSingleCount = Math.max(maxSingleCount, typeCount);
 				}
 			}
-			return 2 * converted + +3 * (10 - SINGLE_PENALTY[maxSingleCount]/*-DOUBLE_PENALTY[doubleCount]*/);
+			return 2 * converted + 3 * (10 - SINGLE_PENALTY[maxSingleCount]/*-DOUBLE_PENALTY[doubleCount]*/);
 		}
 
 		public int getScore() {
