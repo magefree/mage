@@ -1,7 +1,10 @@
 package mage.client.util.gui;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Insets;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -101,4 +104,23 @@ public class GuiDisplayUtil {
         return out.toString().toLowerCase();
     }
 
+
+	public static void keepComponentInsideScreen(int x, int y, Component c) {
+		Dimension screenDim = c.getToolkit().getScreenSize();
+		Insets insets =	c.getToolkit().getScreenInsets(c.getGraphicsConfiguration());
+
+		if (x + c.getWidth() > screenDim.width - insets.right) {
+			x = (screenDim.width - insets.right) - c.getWidth();
+		} else if (x < insets.left) {
+			x = insets.left;
+		}
+
+		if (y + c.getHeight() > screenDim.height - insets.bottom) {
+			y = (screenDim.height - insets.bottom) - c.getHeight();
+		} else if (y < insets.top) {
+			y = insets.top;
+		}
+
+		c.setLocation(x, y);
+	}
 }

@@ -39,6 +39,7 @@ import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import mage.client.MageFrame;
 import mage.client.remote.Session;
+import mage.client.util.gui.GuiDisplayUtil;
 import mage.view.AbilityPickerView;
 
 /**
@@ -66,6 +67,7 @@ public class AbilityPicker extends JPopupMenu implements PopupMenuListener {
 			this.add(new AbilityPickerAction(choice.getKey(), choice.getValue()));
 		}
 		this.show(MageFrame.getDesktop(), p.x, p.y);
+		GuiDisplayUtil.keepComponentInsideScreen(p.x, p.y, this);
 	}
 
 	@Override
