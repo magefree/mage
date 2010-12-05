@@ -59,6 +59,7 @@ public class Cards extends javax.swing.JPanel {
 
 	private Map<UUID, MageCard> cards = new LinkedHashMap<UUID, MageCard>();
 	private boolean dontDisplayTapped = false;
+	private static final int GAP_X = 5;
 
 	/** Creates new form Cards */
     public Cards() {
@@ -104,14 +105,16 @@ public class Cards extends javax.swing.JPanel {
 			cards.get(card.getId()).update(card);
 		}
 		
-		cardArea.setPreferredSize(new Dimension(cards.size() * Config.dimensions.frameWidth, Config.dimensions.frameHeight));
+		if (changed) {
+			layoutCards(Config.dimensions);
+		}
+		
+		cardArea.setPreferredSize(new Dimension(cards.size() * (Config.dimensions.frameWidth + GAP_X), Config.dimensions.frameHeight));
 		cardArea.revalidate();
 		cardArea.repaint();
 		this.revalidate();
 		this.repaint();
-		if (changed) {
-			layoutCards(Config.dimensions);
-		}
+		
 		return changed;
 	}
 
@@ -141,7 +144,7 @@ public class Cards extends javax.swing.JPanel {
 			for (MageCard card: cards.values()) {
 				card.setLocation(dx, 0);
 				card.setCardBounds(dx, 0, dimension.frameWidth, dimension.frameHeight);
-				dx += dimension.frameWidth + 5;
+				dx += dimension.frameWidth + GAP_X;
 			}
 		}
 	}
