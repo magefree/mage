@@ -61,14 +61,14 @@ public class EtherswornAdjudicator extends CardImpl<EtherswornAdjudicator> {
     }
 
     public EtherswornAdjudicator(UUID ownerId) {
-        super(ownerId, 26, "Ethersworn Adjudicator", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{W}");
+        super(ownerId, 26, "Ethersworn Adjudicator", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{U}");
         this.expansionSetCode = "CON";
         this.supertype.add("Legendary");
         this.subtype.add("Vedalken");
         this.subtype.add("Knight");
         this.color.setBlue(true);
         this.power = new MageInt(4);
-	this.toughness = new MageInt(4);
+        this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{W}{B}"));
         ability.addCost(new TapSourceCost());
