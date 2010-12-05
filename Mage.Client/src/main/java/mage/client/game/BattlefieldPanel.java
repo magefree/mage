@@ -146,6 +146,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 	
 	private void groupAttachments(PermanentView permanent) {
 		MagePermanent perm = permanents.get(permanent.getId());
+		if (perm == null) return;
 		int position = getPosition(perm);
 		perm.getLinks().clear();
 		Rectangle r = perm.getBounds();

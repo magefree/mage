@@ -346,7 +346,7 @@ public class DeckGenerator {
 						}
 					}
 					if (count == 0) {
-						return 0;
+						return -10;
 					}
 					Integer typeCount = singleCount.get(symbol);
 					if (typeCount == null) {
