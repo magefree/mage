@@ -31,18 +31,25 @@ package mage.sets.shardsofalara;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Layer;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.SubLayer;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.BoostTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.GainAbilityControlledEffect;
 import mage.abilities.effects.common.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SoldierToken;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -70,12 +77,7 @@ public class ElspethKnightErrant extends CardImpl<ElspethKnightErrant> {
 		ability1.addTarget(new TargetCreaturePermanent());
 		this.addAbility(ability1);
 
-		FilterPermanent filter = new FilterPermanent("artifacts, creatures, enchantments and lands");
-		filter.getCardType().add(CardType.ARTIFACT);
-		filter.getCardType().add(CardType.CREATURE);
-		filter.getCardType().add(CardType.ENCHANTMENT);
-		filter.getCardType().add(CardType.LAND);
-		this.addAbility(new LoyaltyAbility(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.EndOfGame, filter), -8));
+		this.addAbility(new LoyaltyAbility(new ElspethKnightErrantEffect(), -8));
 
 	}
 
@@ -91,6 +93,46 @@ public class ElspethKnightErrant extends CardImpl<ElspethKnightErrant> {
 	@Override
 	public String getArt() {
 		return "114973_typ_reg_sty_010.jpg";
+	}
+
+}
+
+class ElspethKnightErrantEffect extends ContinuousEffectImpl<ElspethKnightErrantEffect> {
+
+	private static FilterPermanent filter = new FilterPermanent("artifacts, creatures, enchantments and lands");
+
+	static {
+		filter.getCardType().add(CardType.ARTIFACT);
+		filter.getCardType().add(CardType.CREATURE);
+		filter.getCardType().add(CardType.ENCHANTMENT);
+		filter.getCardType().add(CardType.LAND);
+		filter.setScopeCardType(ComparisonScope.Any);
+	}
+
+	public ElspethKnightErrantEffect() {
+		super(Duration.EndOfGame, Layer.RulesEffects, SubLayer.NA, Outcome.AddAbility);
+	}
+
+	public ElspethKnightErrantEffect(final ElspethKnightErrantEffect effect) {
+		super(effect);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
+			perm.addAbility(IndestructibleAbility.getInstance());
+		}
+		return true;
+	}
+
+	@Override
+	public ElspethKnightErrantEffect copy() {
+		return new ElspethKnightErrantEffect(this);
+	}
+
+	@Override
+	public String getText(Ability source) {
+		return "For the rest of the game artifacts, creature, enchantments and lands you control are indestructible";
 	}
 
 }

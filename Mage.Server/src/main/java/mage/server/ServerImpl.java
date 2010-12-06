@@ -36,6 +36,7 @@ import java.rmi.server.RemoteServer;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mage.Constants.MultiplayerAttackOption;
@@ -53,6 +54,7 @@ import mage.server.game.GamesRoomManager;
 import mage.server.game.PlayerFactory;
 import mage.server.game.ReplayManager;
 import mage.server.game.TableManager;
+import mage.server.util.ThreadExecutor;
 import mage.util.Logging;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.TableView;
@@ -64,6 +66,7 @@ import mage.view.TableView;
 public class ServerImpl extends RemoteServer implements Server {
 
 	private final static Logger logger = Logging.getLogger("Mage Server");
+	private static ExecutorService rmiExecutor = ThreadExecutor.getInstance().getRMIExecutor();
 
 	private boolean testMode;
 
@@ -125,9 +128,16 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void removeTable(UUID sessionId, UUID roomId, UUID tableId) throws MageException {
+	public void removeTable(final UUID sessionId, final UUID roomId, final UUID tableId) throws MageException {
 		try {
-			GamesRoomManager.getInstance().getRoom(roomId).removeTable(sessionId, tableId);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						GamesRoomManager.getInstance().getRoom(roomId).removeTable(sessionId, tableId);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -172,10 +182,17 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void deregisterClient(UUID sessionId) throws MageException {
+	public void deregisterClient(final UUID sessionId) throws MageException {
 		try {
-			SessionManager.getInstance().getSession(sessionId).kill();
-			logger.info("Client deregistered ...");
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						SessionManager.getInstance().getSession(sessionId).kill();
+						logger.info("Client deregistered ...");
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -183,9 +200,16 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void startGame(UUID sessionId, UUID roomId, UUID tableId) throws MageException {
+	public void startGame(final UUID sessionId, final UUID roomId, final UUID tableId) throws MageException {
 		try {
-			TableManager.getInstance().startGame(sessionId, roomId, tableId);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						TableManager.getInstance().startGame(sessionId, roomId, tableId);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -193,9 +217,16 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void sendChatMessage(UUID chatId, String userName, String message) throws MageException {
+	public void sendChatMessage(final UUID chatId, final String userName, final String message) throws MageException {
 		try {
-			ChatManager.getInstance().broadcast(chatId, userName, message, MessageColor.BLUE);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						ChatManager.getInstance().broadcast(chatId, userName, message, MessageColor.BLUE);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -203,9 +234,16 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void joinChat(UUID chatId, UUID sessionId, String userName) throws MageException {
+	public void joinChat(final UUID chatId, final UUID sessionId, final String userName) throws MageException {
 		try {
-			ChatManager.getInstance().joinChat(chatId, sessionId, userName);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						ChatManager.getInstance().joinChat(chatId, sessionId, userName);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -213,9 +251,16 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void leaveChat(UUID chatId, UUID sessionId) throws MageException {
+	public void leaveChat(final UUID chatId, final UUID sessionId) throws MageException {
 		try {
-			ChatManager.getInstance().leaveChat(chatId, sessionId);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						ChatManager.getInstance().leaveChat(chatId, sessionId);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -256,9 +301,16 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void swapSeats(UUID sessionId, UUID roomId, UUID tableId, int seatNum1, int seatNum2) throws RemoteException, MageException {
+	public void swapSeats(final UUID sessionId, final UUID roomId, final UUID tableId, final int seatNum1, final int seatNum2) throws RemoteException, MageException {
 		try {
-			TableManager.getInstance().swapSeats(tableId, sessionId, seatNum1, seatNum2);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						TableManager.getInstance().swapSeats(tableId, sessionId, seatNum1, seatNum2);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -266,9 +318,16 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void leaveTable(UUID sessionId, UUID roomId, UUID tableId) throws MageException {
+	public void leaveTable(final UUID sessionId, final UUID roomId, final UUID tableId) throws MageException {
 		try {
-			GamesRoomManager.getInstance().getRoom(roomId).leaveTable(sessionId, tableId);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						GamesRoomManager.getInstance().getRoom(roomId).leaveTable(sessionId, tableId);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -287,9 +346,16 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void joinGame(UUID gameId, UUID sessionId) throws MageException {
+	public void joinGame(final UUID gameId, final UUID sessionId) throws MageException {
 		try {
-			GameManager.getInstance().joinGame(gameId, sessionId);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						GameManager.getInstance().joinGame(gameId, sessionId);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -308,9 +374,16 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void sendPlayerUUID(UUID gameId, UUID sessionId, UUID data) throws MageException {
+	public void sendPlayerUUID(final UUID gameId, final UUID sessionId, final UUID data) throws MageException {
 		try {
-			GameManager.getInstance().sendPlayerUUID(gameId, sessionId, data);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						GameManager.getInstance().sendPlayerUUID(gameId, sessionId, data);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -318,9 +391,16 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void sendPlayerString(UUID gameId, UUID sessionId, String data) throws MageException {
+	public void sendPlayerString(final UUID gameId, final UUID sessionId, final String data) throws MageException {
 		try {
-			GameManager.getInstance().sendPlayerString(gameId, sessionId, data);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						GameManager.getInstance().sendPlayerString(gameId, sessionId, data);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -328,9 +408,16 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void sendPlayerBoolean(UUID gameId, UUID sessionId, Boolean data) throws MageException {
+	public void sendPlayerBoolean(final UUID gameId, final UUID sessionId, final Boolean data) throws MageException {
 		try {
-			GameManager.getInstance().sendPlayerBoolean(gameId, sessionId, data);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						GameManager.getInstance().sendPlayerBoolean(gameId, sessionId, data);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -338,9 +425,16 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void sendPlayerInteger(UUID gameId, UUID sessionId, Integer data) throws RemoteException, MageException {
+	public void sendPlayerInteger(final UUID gameId, final UUID sessionId, final Integer data) throws RemoteException, MageException {
 		try {
-			GameManager.getInstance().sendPlayerInteger(gameId, sessionId, data);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						GameManager.getInstance().sendPlayerInteger(gameId, sessionId, data);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -348,9 +442,16 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void concedeGame(UUID gameId, UUID sessionId) throws MageException {
+	public void concedeGame(final UUID gameId, final UUID sessionId) throws MageException {
 		try {
-			GameManager.getInstance().concedeGame(gameId, sessionId);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						GameManager.getInstance().concedeGame(gameId, sessionId);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -369,9 +470,16 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void watchGame(UUID gameId, UUID sessionId) throws MageException {
+	public void watchGame(final UUID gameId, final UUID sessionId) throws MageException {
 		try {
-			GameManager.getInstance().watchGame(gameId, sessionId);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						GameManager.getInstance().watchGame(gameId, sessionId);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -379,9 +487,16 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void stopWatching(UUID gameId, UUID sessionId) throws MageException {
+	public void stopWatching(final UUID gameId, final UUID sessionId) throws MageException {
 		try {
-			GameManager.getInstance().stopWatching(gameId, sessionId);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						GameManager.getInstance().stopWatching(gameId, sessionId);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -389,9 +504,16 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void replayGame(UUID sessionId) throws MageException {
+	public void replayGame(final UUID sessionId) throws MageException {
 		try {
-			ReplayManager.getInstance().startReplay(sessionId);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						ReplayManager.getInstance().startReplay(sessionId);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -399,9 +521,16 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void stopReplay(UUID sessionId) throws MageException {
+	public void stopReplay(final UUID sessionId) throws MageException {
 		try {
-			ReplayManager.getInstance().stopReplay(sessionId);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						ReplayManager.getInstance().stopReplay(sessionId);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -409,9 +538,16 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void nextPlay(UUID sessionId) throws MageException {
+	public void nextPlay(final UUID sessionId) throws MageException {
 		try {
-			ReplayManager.getInstance().nextPlay(sessionId);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						ReplayManager.getInstance().nextPlay(sessionId);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -419,9 +555,16 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void previousPlay(UUID sessionId) throws MageException {
+	public void previousPlay(final UUID sessionId) throws MageException {
 		try {
-			ReplayManager.getInstance().previousPlay(sessionId);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						ReplayManager.getInstance().previousPlay(sessionId);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -455,10 +598,17 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void cheat(UUID gameId, UUID sessionId, UUID playerId, DeckCardLists deckList) throws MageException {
+	public void cheat(final UUID gameId, final UUID sessionId, final UUID playerId, final DeckCardLists deckList) throws MageException {
 		try {
-			if (testMode)
-				GameManager.getInstance().cheat(gameId, sessionId, playerId, deckList);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						if (testMode)
+							GameManager.getInstance().cheat(gameId, sessionId, playerId, deckList);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
