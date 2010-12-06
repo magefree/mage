@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.Zone;
+import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ManaAbility;
@@ -129,6 +130,12 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 		for (T ability: this) {
 			if (ability instanceof TriggeredAbility && ability.getZone().match(zone)) {
 				zonedAbilities.add((TriggeredAbility)ability);
+			}
+			else if (ability instanceof ZoneChangeTriggeredAbility) {
+				ZoneChangeTriggeredAbility zcAbility = (ZoneChangeTriggeredAbility)ability;
+				if (zcAbility.getToZone() != null && zcAbility.getToZone().match(zone)) {
+					zonedAbilities.add((ZoneChangeTriggeredAbility)ability);
+				}
 			}
 		}
 		return zonedAbilities;
