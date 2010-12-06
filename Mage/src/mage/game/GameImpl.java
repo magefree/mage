@@ -658,7 +658,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			if (perm.getAttachments().size() > 0) {
 				for (UUID attachmentId: perm.getAttachments()) {
 					Permanent attachment = getPermanent(attachmentId);
-					if (!(attachment.getSubtype().contains("Aura") ||
+					if (attachment != null && !(attachment.getSubtype().contains("Aura") ||
 							attachment.getSubtype().contains("Equipment") ||
 							attachment.getSubtype().contains("Fortification"))) {
 						if (perm.removeAttachment(id, this))
