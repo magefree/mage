@@ -211,7 +211,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 			if (response.getUUID() != null) {
 				if (target instanceof TargetPermanent) {
 					if (((TargetPermanent)target).canTarget(playerId, response.getUUID(), null, game)) {
-						target.add(response.getUUID(), game);
+						target.addTarget(response.getUUID(), source, game);
 						return true;
 					}
 				}
