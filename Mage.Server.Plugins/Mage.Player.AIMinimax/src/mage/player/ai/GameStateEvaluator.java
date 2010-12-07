@@ -67,17 +67,17 @@ public class GameStateEvaluator {
 	}
 
 	public static int evaluatePermanent(Permanent permanent, Game game) {
-		int value = permanent.isTapped()?1:2;
+		int value = permanent.isTapped()?4:5;
 		if (permanent.getCardType().contains(CardType.CREATURE)) {
 			value += evaluateCreature(permanent, game) * CREATURE_FACTOR;
 		}
 		value += permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD).size();
 		for (ActivatedAbility ability: permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
 			if (!(ability instanceof ManaAbility) && ability.canActivate(ability.getControllerId(), game))
-				value += ability.getEffects().getOutcomeTotal();
+				value += ability.getEffects().size();
 		}
-		value += permanent.getAbilities().getStaticAbilities(Zone.BATTLEFIELD).getOutcomeTotal();
-		value += permanent.getAbilities().getTriggeredAbilities(Zone.BATTLEFIELD).getOutcomeTotal();
+		value += permanent.getAbilities().getStaticAbilities(Zone.BATTLEFIELD).size();
+		value += permanent.getAbilities().getTriggeredAbilities(Zone.BATTLEFIELD).size();
 		value += permanent.getManaCost().convertedManaCost();
 		//TODO: add a difficulty to calculation to ManaCost - sort permanents by difficulty for casting when evaluating game states
 		return value;
@@ -91,8 +91,8 @@ public class GameStateEvaluator {
 //			value += creature.getPower().getValue();
 //		if (!creature.isTapped())
 //			value += 2;
-		value += creature.getAbilities().getEvasionAbilities().getOutcomeTotal();
-		value += creature.getAbilities().getProtectionAbilities().getOutcomeTotal();
+		value += creature.getAbilities().getEvasionAbilities().size();
+		value += creature.getAbilities().getProtectionAbilities().size();
 		value += creature.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId())?1:0;
 		value += creature.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId())?2:0;
 		value += creature.getAbilities().containsKey(TrampleAbility.getInstance().getId())?1:0;

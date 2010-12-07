@@ -99,7 +99,7 @@ class SearingBlazeWatcher extends WatcherImpl<SearingBlazeWatcher> {
 	public void watch(GameEvent event, Game game) {
 		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
 			Permanent permanent = game.getPermanent(event.getTargetId());
-			if (permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(event.getPlayerId())) {
+			if (permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.controllerId)) {
 				condition = true;
 			}
 		}
