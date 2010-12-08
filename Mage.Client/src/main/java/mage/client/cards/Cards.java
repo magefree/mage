@@ -96,6 +96,7 @@ public class Cards extends javax.swing.JPanel {
 				tmp.overrideRules(card.getRules());
 				tmp.setIsAbility(true);
 				tmp.overrideTargets(card.getTargets());
+				tmp.overrideId(card.getId());
 				card = tmp;
 			}
 			if (!cards.containsKey(card.getId())) {

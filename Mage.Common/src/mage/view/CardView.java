@@ -241,6 +241,10 @@ public class CardView implements Serializable {
 		this.targets = newTargets;
 	}
 	
+	public void overrideId(UUID id) {
+		this.id = id;
+	}
+	
 	public void setAbility(CardView ability) {
 		this.ability = ability;
 	}
