@@ -210,7 +210,7 @@ public class MageFrame extends javax.swing.JFrame {
 				if (arrowsPanel != null) arrowsPanel.setSize(width, height);
 				if (title != null) {
 					//title.setBorder(BorderFactory.createLineBorder(Color.red));
-					title.setBounds((int)(width - titleRectangle.getWidth())/2, 180, titleRectangle.width, titleRectangle.height);
+					title.setBounds((int)(width - titleRectangle.getWidth())/2, (int)(height - titleRectangle.getHeight())/2, titleRectangle.width, titleRectangle.height);
 				}
 			}
         });
@@ -311,6 +311,7 @@ public class MageFrame extends javax.swing.JFrame {
 			String server = prefs.get("serverAddress", "");
 			int port = Integer.parseInt(prefs.get("serverPort", ""));
 			try {
+				server = "192.168.121.201";
 				setCursor(new Cursor(Cursor.WAIT_CURSOR));
 				if (MageFrame.connect(userName, server, port)) {
 					return true;

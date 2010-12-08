@@ -70,6 +70,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 
 	protected static DefaultActionCallback defaultCallback = DefaultActionCallback.getInstance();
 	protected static Map<UUID, PermanentView> battlefield;
+	protected static Map<UUID, Integer> attachmentCache = new HashMap<UUID, Integer>();
 	
     /** Creates new form BattlefieldPanel */
     public BattlefieldPanel(JScrollPane jScrollPane) {
@@ -99,6 +100,14 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 				changed = true;
 			}
 			else {
+				MagePermanent p = permanents.get(permanent.getId());
+				if (!changed) {
+					int s1 = permanent.getAttachments() == null ? 0 : permanent.getAttachments().size();
+					int s2 = p.getLinks().size();
+					if (s1 != s2) {
+						changed = true;
+					}
+				}
 				permanents.get(permanent.getId()).update(permanent);
 			}
 		}
