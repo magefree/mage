@@ -45,6 +45,7 @@ public interface ContinuousEffect<T extends ContinuousEffect<T>> extends Effect<
 	public Duration getDuration();
 	public Date getTimestamp();
 	public void setTimestamp();
+	public void newId();
 	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game);
 	public boolean hasLayer(Layer layer);
 	public void init(Ability source, Game game);

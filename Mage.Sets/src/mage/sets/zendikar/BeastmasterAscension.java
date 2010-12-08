@@ -95,7 +95,6 @@ class BeastmasterAscensionAbility extends TriggeredAbilityImpl<BeastmasterAscens
 		if (event.getType() == EventType.ATTACKER_DECLARED) {
 			Permanent source = game.getPermanent(event.getSourceId());
 			if (source != null && source.getControllerId().equals(controllerId)) {
-				trigger(game, this.controllerId);
 				return true;
 			}
 		}

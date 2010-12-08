@@ -88,7 +88,6 @@ class DemonsHornAbility extends TriggeredAbilityImpl<DemonsHornAbility> {
 		if (event.getType() == EventType.SPELL_CAST) {
 			Spell spell = game.getStack().getSpell(event.getTargetId());
 			if (spell != null && spell.getColor().isBlack()) {
-				trigger(game, this.controllerId);
 				return true;
 			}
 		}

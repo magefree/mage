@@ -73,6 +73,13 @@ public class Battlefield implements Serializable {
 		field.clear();
 	}
 
+	/**
+	 * Returns a count of all {@link Permanent} that match the filter.
+	 * This method ignores the range of influence.
+	 *
+	 * @param filter
+	 * @return count
+	 */
 	public int countAll(FilterPermanent filter) {
 		int count = 0;
 		for (Permanent permanent: field.values()) {
@@ -83,6 +90,14 @@ public class Battlefield implements Serializable {
 		return count;
 	}
 
+	/**
+	 * Returns a count of all {@link Permanent} that match the filter and are controlled by controllerId.
+	 * This method ignores the range of influence.
+	 *
+	 * @param filter
+	 * @param controllerId
+	 * @return count
+	 */
 	public int countAll(FilterPermanent filter, UUID controllerId) {
 		int count = 0;
 		for (Permanent permanent: field.values()) {
@@ -93,7 +108,15 @@ public class Battlefield implements Serializable {
 		return count;
 	}
 
-
+	/**
+	 * Returns a count of all {@link Permanent} that are within the range of influence  of the specified player id
+	 * and that match the supplied filter.
+	 *
+	 * @param filter
+	 * @param sourcePlayerId
+	 * @param game
+	 * @return count
+	 */
 	public int count(FilterPermanent filter, UUID sourcePlayerId, Game game) {
 		int count = 0;
 		if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
@@ -171,11 +194,11 @@ public class Battlefield implements Serializable {
 	}
 
 	/**
-	 * Returns all Permanents on the battlefield that are controlled by the specified
+	 * Returns all {@link Permanent} on the battlefield that are controlled by the specified
 	 * player id.  The method ignores the range of influence.
 	 * 
 	 * @param controllerId
-	 * @return a list of Permanent
+	 * @return a list of {@link Permanent}
 	 * @see Permanent
 	 */
 	public List<Permanent> getAllActivePermanents(UUID controllerId) {
@@ -188,11 +211,11 @@ public class Battlefield implements Serializable {
 	}
 
 	/**
-	 * Returns all Permanents on the battlefield that match the specified CardType.
+	 * Returns all {@link Permanent} on the battlefield that match the specified {@link CardType}.
 	 * This method ignores the range of influence.
 	 * 
 	 * @param type
-	 * @return a list of Permanent
+	 * @return a list of {@link Permanent}
 	 * @see Permanent
 	 */
 	public List<Permanent> getAllActivePermanents(CardType type) {
@@ -205,11 +228,11 @@ public class Battlefield implements Serializable {
 	}
 
 	/**
-	 * Returns all Permanents on the battlefield that match the supplied filter.  
+	 * Returns all {@link Permanent} on the battlefield that match the supplied filter.
 	 * This method ignores the range of influence.
 	 * 
 	 * @param filter
-	 * @return a list of Permanent
+	 * @return a list of {@link Permanent}
 	 * @see Permanent
 	 */
 	public List<Permanent> getAllActivePermanents(FilterPermanent filter) {
@@ -222,12 +245,12 @@ public class Battlefield implements Serializable {
 	}
 
 	/**
-	 * Returns all Permanents that match the filter and are controlled by controllerId.
+	 * Returns all {@link Permanent} that match the filter and are controlled by controllerId.
 	 * This method ignores the range of influence.
 	 *
 	 * @param filter
 	 * @param controllerId
-	 * @return a list of Permanent
+	 * @return a list of {@link Permanent}
 	 * @see Permanent
 	 */
 	public List<Permanent> getAllActivePermanents(FilterPermanent filter, UUID controllerId) {
@@ -240,13 +263,13 @@ public class Battlefield implements Serializable {
 	}
 
 	/**
-	 * Returns all Permanents that are within the range of influence  of the specified player id
+	 * Returns all {@link Permanent} that are within the range of influence  of the specified player id
 	 * and that match the supplied filter.
 	 * 
 	 * @param filter
 	 * @param sourcePlayerId
 	 * @param game
-	 * @return a list of Permanent
+	 * @return a list of {@link Permanent}
 	 * @see Permanent
 	 */
 	public List<Permanent> getActivePermanents(FilterPermanent filter, UUID sourcePlayerId, Game game) {
@@ -268,11 +291,11 @@ public class Battlefield implements Serializable {
 	}
 
 	/**
-	 * Returns all Permanents that are within the range of influence  of the specified player id.
+	 * Returns all {@link Permanent} that are within the range of influence  of the specified player id.
 	 * 
 	 * @param sourcePlayerId
 	 * @param game
-	 * @return a list of Permanent
+	 * @return a list of {@link Permanent}
 	 * @see Permanent
 	 */
 	public List<Permanent> getActivePermanents(UUID sourcePlayerId, Game game) {

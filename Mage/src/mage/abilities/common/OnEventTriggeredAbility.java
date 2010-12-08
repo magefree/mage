@@ -75,7 +75,6 @@ public class OnEventTriggeredAbility extends TriggeredAbilityImpl<OnEventTrigger
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == eventType) {
 			if (allPlayers || event.getPlayerId().equals(this.controllerId) ) {
-				trigger(game, this.controllerId);
 				return true;
 			}
 		}

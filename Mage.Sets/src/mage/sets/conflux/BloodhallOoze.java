@@ -100,7 +100,6 @@ class BloodhallOozeTriggeredAbility1 extends TriggeredAbilityImpl<BloodhallOozeT
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-            trigger(game, this.controllerId);
             return true;
         }
         return false;
@@ -142,7 +141,6 @@ class BloodhallOozeTriggeredAbility2 extends TriggeredAbilityImpl<BloodhallOozeT
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-            trigger(game, this.controllerId);
             return true;
         }
         return false;

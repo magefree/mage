@@ -88,7 +88,6 @@ class KrakensEyeAbility extends TriggeredAbilityImpl<KrakensEyeAbility> {
 		if (event.getType() == EventType.SPELL_CAST) {
 			Spell spell = game.getStack().getSpell(event.getTargetId());
 			if (spell != null && spell.getColor().isBlue()) {
-				trigger(game, this.controllerId);
 				return true;
 			}
 		}

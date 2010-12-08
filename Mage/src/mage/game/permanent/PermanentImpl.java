@@ -180,7 +180,9 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		if (event.getType() == EventType.BEGINNING_PHASE_PRE && game.getActivePlayerId().equals(controllerId))
 			this.controlledFromStartOfTurn = true;
 		for (TriggeredAbility ability: abilities.getTriggeredAbilities(Zone.BATTLEFIELD)) {
-			ability.checkTrigger(event, game);
+			if (ability.checkTrigger(event, game)) {
+				ability.trigger(game, controllerId);
+			}
 		}
 	}
 

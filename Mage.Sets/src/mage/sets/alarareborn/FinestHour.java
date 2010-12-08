@@ -101,7 +101,6 @@ class FinestHourAbility extends TriggeredAbilityImpl<FinestHourAbility> {
 				if (game.getCombat().attacksAlone()) {
 					this.addTarget(new TargetCreaturePermanent());
 					this.targets.get(0).add(game.getCombat().getAttackers().get(0), game);
-					trigger(game, this.controllerId);
 					return true;
 				}
 			}

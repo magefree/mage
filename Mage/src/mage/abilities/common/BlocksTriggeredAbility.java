@@ -52,7 +52,6 @@ public class BlocksTriggeredAbility extends TriggeredAbilityImpl<BlocksTriggered
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.BLOCKER_DECLARED && event.getSourceId().equals(this.getSourceId()) ) {
-			trigger(game, this.controllerId);
 			return true;
 		}
 		return false;

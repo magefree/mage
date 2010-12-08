@@ -39,7 +39,7 @@ import mage.abilities.Ability;
  */
 public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 
-	protected final UUID id;
+	protected UUID id;
 	protected final Outcome outcome;
 	protected EffectType effectType;
 

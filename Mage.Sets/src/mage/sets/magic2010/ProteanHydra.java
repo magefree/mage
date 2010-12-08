@@ -189,7 +189,6 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 		@Override
 		public boolean checkTrigger(GameEvent event, Game game) {
 			if (event.getType() == EventType.COUNTER_REMOVED && event.getData().equals("+1/+1") && event.getTargetId().equals(this.getSourceId())) {
-				trigger(game, this.controllerId);
 				return true;
 			}
 			return false;
@@ -220,7 +219,6 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 		@Override
 		public boolean checkTrigger(GameEvent event, Game game) {
 			if (event.getType() == EventType.END_TURN_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-				trigger(game, this.controllerId);
 				return true;
 			}
 			return false;

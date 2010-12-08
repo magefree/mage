@@ -95,7 +95,6 @@ class SoulWardenAbility extends TriggeredAbilityImpl<SoulWardenAbility> {
 		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
 			Permanent permanent = game.getPermanent(event.getTargetId());
 			if (permanent.getCardType().contains(CardType.CREATURE) && !permanent.getId().equals(this.getSourceId())) {
-				trigger(game, this.controllerId);
 				return true;
 			}
 		}

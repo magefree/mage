@@ -105,6 +105,11 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
 	}
 
 	@Override
+	public void newId() {
+		this.id = UUID.randomUUID();
+	}
+
+	@Override
 	public boolean hasLayer(Layer layer) {
 		return this.layer == layer;
 	}

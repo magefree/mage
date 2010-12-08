@@ -57,7 +57,6 @@ public class LandfallAbility extends TriggeredAbilityImpl<LandfallAbility> {
 		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
 			Permanent permanent = game.getPermanent(event.getTargetId());
 			if (permanent != null && permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.controllerId)) {
-				trigger(game, this.controllerId);
 				return true;
 			}
 		}

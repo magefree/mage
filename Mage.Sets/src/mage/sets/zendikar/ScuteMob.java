@@ -93,7 +93,6 @@ class ScuteMobAbility extends TriggeredAbilityImpl<ScuteMobAbility> {
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-			trigger(game, this.controllerId);
 			return true;
 		}
 		return false;

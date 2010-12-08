@@ -97,7 +97,6 @@ class GarruksPackleaderAbility extends TriggeredAbilityImpl<GarruksPackleaderAbi
 			if (zEvent.getToZone() == Zone.BATTLEFIELD) {
 				Permanent permanent = game.getPermanent(event.getTargetId());
 				if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) && permanent.getPower().getValue() > 2) {
-					trigger(game, this.controllerId);
 					return true;
 				}
 			}

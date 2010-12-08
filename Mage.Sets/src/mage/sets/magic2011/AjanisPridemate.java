@@ -92,7 +92,6 @@ class AjanisPridemateAbility extends TriggeredAbilityImpl<AjanisPridemateAbility
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.GAINED_LIFE && event.getPlayerId().equals(controllerId)) {
-			trigger(game, this.controllerId);
 			return true;
 		}
 		return false;

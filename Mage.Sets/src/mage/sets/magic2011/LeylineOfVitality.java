@@ -97,7 +97,6 @@ class LeylineOfVitalityAbility extends TriggeredAbilityImpl<LeylineOfVitalityAbi
 		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
 			Permanent permanent = game.getPermanent(event.getTargetId());
 			if (permanent.getCardType().contains(CardType.CREATURE) && permanent.getControllerId().equals(this.controllerId)) {
-				trigger(game, this.controllerId);
 				return true;
 			}
 		}

@@ -121,18 +121,25 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 		// card abilities will get triggered later when the card hits the new zone
 		Card card = game.getCard(objectId).copy();
 		for (TriggeredAbility ability: abilities.getTriggeredAbilities(event.getFromZone())) {
-			if (!card.getAbilities().containsKey(ability.getId()))
-				ability.checkTrigger(event, game);
-			else if (ability instanceof ZoneChangeTriggeredAbility && event.getFromZone() == Zone.BATTLEFIELD) {
+			if (!card.getAbilities().containsKey(ability.getId())) {
+				if (ability.checkTrigger(event, game)) {
+					ability.trigger(game, controllerId);
+				}
+			} else if (ability instanceof ZoneChangeTriggeredAbility && event.getFromZone() == Zone.BATTLEFIELD) {
 				ZoneChangeTriggeredAbility zcAbility = (ZoneChangeTriggeredAbility)ability;
 				if (zcAbility.getToZone() == null) {
-					ability.checkTrigger(event, game);
+					if (ability.checkTrigger(event, game)) {
+						ability.trigger(game, controllerId);
+					}
 				}
 			}
 		}
 		for (TriggeredAbility ability: abilities.getTriggeredAbilities(event.getToZone())) {
-			if (!card.getAbilities().containsKey(ability.getId()))
-				ability.checkTrigger(event, game);
+			if (!card.getAbilities().containsKey(ability.getId())) {
+				if (ability.checkTrigger(event, game)) {
+					ability.trigger(game, controllerId);
+				}
+			}
 		}
 	}
 

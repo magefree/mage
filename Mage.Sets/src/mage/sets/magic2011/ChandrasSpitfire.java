@@ -94,7 +94,6 @@ class ChandrasSpitfireAbility extends TriggeredAbilityImpl<ChandrasSpitfireAbili
 		if (event instanceof DamagedPlayerEvent) {
 			DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
 			if (!damageEvent.isCombatDamage() && game.getOpponents(controllerId).contains(event.getTargetId())) {
-				trigger(game, this.controllerId);
 				return true;
 			}
 		}

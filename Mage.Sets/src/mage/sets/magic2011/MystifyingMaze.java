@@ -142,7 +142,6 @@ class MystifyingMazeDelayedTriggeredAbility extends DelayedTriggeredAbility<Myst
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.END_TURN_STEP_PRE) {
-			trigger(game, this.controllerId);
 			return true;
 		}
 		return false;

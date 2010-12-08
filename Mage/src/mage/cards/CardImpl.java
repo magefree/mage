@@ -171,7 +171,9 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 	@Override
 	public void checkTriggers(Zone zone, GameEvent event, Game game) {
 		for (TriggeredAbility ability: abilities.getTriggeredAbilities(zone)) {
-			ability.checkTrigger(event, game);
+			if (ability.checkTrigger(event, game)) {
+				ability.trigger(game, ownerId);
+			}
 		}
 	}
 

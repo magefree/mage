@@ -97,7 +97,6 @@ class WallOfFrostAbility extends TriggeredAbilityImpl<WallOfFrostAbility> {
 		if (event.getType() == EventType.BLOCKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
 			this.addTarget(new TargetCreaturePermanent());
 			this.getTargets().get(0).add(event.getTargetId(), game);
-			trigger(game, this.controllerId);
 			return true;
 		}
 		return false;

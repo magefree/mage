@@ -72,7 +72,6 @@ public class ZoneChangeTriggeredAbility<T extends ZoneChangeTriggeredAbility<T>>
 		if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
 			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
 			if ((fromZone == null || zEvent.getFromZone() == fromZone) && (toZone == null || zEvent.getToZone() == toZone)) {
-				trigger(game, this.controllerId);
 				return true;
 			}
 		}

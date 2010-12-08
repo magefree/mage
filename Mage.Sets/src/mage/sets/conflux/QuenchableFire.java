@@ -141,7 +141,6 @@ class QuenchableFireDelayedTriggeredAbility extends DelayedTriggeredAbility<Quen
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-			trigger(game, this.controllerId);
 			for (SpecialAction action: game.getState().getSpecialActions()) {
 				if (action.getId().equals(specialActionId)) {
 					game.getState().getSpecialActions().remove(action);

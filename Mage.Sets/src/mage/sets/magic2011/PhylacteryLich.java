@@ -104,7 +104,6 @@ public class PhylacteryLich extends CardImpl<PhylacteryLich> {
 				if (perm.getCounters().getCount("phylactery") > 0)
 					return false;
 			}
-			trigger(game, controllerId);
 			return true;
 		}
 		
