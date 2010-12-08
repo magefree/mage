@@ -67,7 +67,7 @@ public class RateThread extends Thread {
 	}
 	
 	protected Card getRandomUniqueNonLandCard(Card previousCard) {
-		int count = CardsStorage.getAllCards().size();
+		int count = CardsStorage.getUniqueCards().size();
 		Card card1 = CardsStorage.getAllCards().get((int)(Math.random()*count));
 		while (card1.getCardType().contains(CardType.LAND) || card1.getName().equals(previousCard)) {
 			card1 = CardsStorage.getAllCards().get((int)(Math.random()*count));
