@@ -167,4 +167,18 @@ public class Plugins implements MagePlugins {
 		}
 		return null;
 	}
+
+	@Override
+	public void onAddCard(MagePermanent card) {
+		if (this.cardPlugin != null) {
+			this.cardPlugin.onAddCard(card);
+		}
+	}
+
+	@Override
+	public void onRemoveCard(MagePermanent card) {
+		if (this.cardPlugin != null) {
+			this.cardPlugin.onRemoveCard(card);
+		}
+	}
 }

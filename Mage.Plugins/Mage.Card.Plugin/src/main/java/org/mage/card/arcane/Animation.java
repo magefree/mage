@@ -287,30 +287,30 @@ abstract public class Animation {
 		}
 	}
 	
-	static public void showCard(final CardPanel panel) {
+	static public void showCard(final MagePermanent card) {
 		new Animation(600) {
 			protected void start () {
 			}
 
 			protected void update (float percentage) {
 				float alpha = percentage;
-				panel.setAlpha(alpha);
-				panel.repaint();
+				card.setAlpha(alpha);
+				card.repaint();
 			}
 
 			protected void end () {
+				card.setAlpha(1.f);
 			}
 		};
 	}
 	
-	static public void hideCard(final CardPanel panel, final MagePermanent card) {
+	static public void hideCard(final MagePermanent card) {
 		new Animation(600) {
 			protected void start () {
 			}
 
 			protected void update (float percentage) {
 				float alpha = 1 - percentage;
-				panel.setAlpha(alpha);
 				card.setAlpha(alpha);
 				card.repaint();
 			}

@@ -32,4 +32,6 @@ public interface MagePlugins {
 	int getGamesPlayed();
 	void addGamesPlayed();
 	Image getManaSymbolImage(String symbol);
+	void onAddCard(MagePermanent card);
+	void onRemoveCard(MagePermanent card);
 }

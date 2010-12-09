@@ -39,15 +39,18 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.Map.Entry;
+import java.util.UUID;
 
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
+
+import com.sun.swing.internal.plaf.synth.resources.synth;
 
 import mage.cards.MagePermanent;
 import mage.client.cards.BigCard;
@@ -61,7 +64,7 @@ import mage.view.PermanentView;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BattlefieldPanel extends javax.swing.JLayeredPane implements ComponentListener {
+public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
 	private Map<UUID, MagePermanent> permanents = new HashMap<UUID, MagePermanent>();
 	private UUID gameId;
@@ -71,6 +74,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 	protected static DefaultActionCallback defaultCallback = DefaultActionCallback.getInstance();
 	protected static Map<UUID, PermanentView> battlefield;
 	protected static Map<UUID, Integer> attachmentCache = new HashMap<UUID, Integer>();
+	protected static List<Thread> threads = new ArrayList<Thread>();
 	
     /** Creates new form BattlefieldPanel */
     public BattlefieldPanel(JScrollPane jScrollPane) {
@@ -123,6 +127,12 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 		if (changed) {
 			BattlefieldPanel.battlefield = battlefield;
 			sortLayout();
+			synchronized (this) {
+				for (Thread t : threads) {
+					t.start();
+				}
+				threads.clear();
+			}
 		}
 	}
 	
@@ -137,19 +147,32 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 		}
 		
 		invalidate();
+		repaint();
 	}
 
 	private void addPermanent(PermanentView permanent) {
-		MagePermanent perm = Plugins.getInstance().getMagePermanent(permanent, bigCard, Config.dimensions, gameId);
-		perm.addComponentListener(this);
+		final MagePermanent perm = Plugins.getInstance().getMagePermanent(permanent, bigCard, Config.dimensions, gameId);
 		if (!Plugins.getInstance().isCardPluginLoaded()) {
 			perm.setBounds(findEmptySpace(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight)));
+		} else {
+			perm.setAlpha(0);
 		}
 		permanents.put(permanent.getId(), perm);
-		this.add(perm, 10);
+		
+		BattlefieldPanel.this.add(perm, 10);
 		if (!Plugins.getInstance().isCardPluginLoaded()) {
 			moveToFront(perm);
 			perm.update(permanent);
+		} else {
+			Thread t = new Thread(new Runnable() {
+				@Override
+				public void run() {
+        			Plugins.getInstance().onAddCard(perm);
+				}
+			});
+			synchronized (this) {
+				threads.add(t);
+			}
 		}
 	}
 	
@@ -162,34 +185,46 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
 		if (!Plugins.getInstance().isCardPluginLoaded()) {
 			for (UUID attachmentId: permanent.getAttachments()) {
 				MagePermanent link = permanents.get(attachmentId);
-				perm.getLinks().add(link);
-				r.translate(20, 20);
-				link.setBounds(r);
-				setPosition(link, ++position);
+				if (link != null) {
+					perm.getLinks().add(link);
+					r.translate(20, 20);
+					link.setBounds(r);
+					setPosition(link, ++position);
+				}
 			}
 		} else {
 			for (UUID attachmentId: permanent.getAttachments()) {
 				MagePermanent link = permanents.get(attachmentId);
-				link.setBounds(r);
-				perm.getLinks().add(link);
-				r.translate(8, 10);
-				perm.setBounds(r);
-				moveToFront(link);
-				moveToFront(perm);
+				if (link != null) {
+					link.setBounds(r);
+					perm.getLinks().add(link);
+					r.translate(8, 10);
+					perm.setBounds(r);
+					moveToFront(link);
+					moveToFront(perm);
+				}
 			}
 		}
 		
 	}
 
 	private void removePermanent(UUID permanentId) {
-        for (Component comp: this.getComponents()) {
+        for (Component c: this.getComponents()) {
+        	final Component comp = c;
         	if (comp instanceof Permanent) {
         		if (((Permanent)comp).getPermanentId().equals(permanentId)) {
 					this.remove(comp);
         		}
         	} else if (comp instanceof MagePermanent) {
         		if (((MagePermanent)comp).getOriginal().getId().equals(permanentId)) {
-        			this.remove(comp);
+        			Thread t = new Thread(new Runnable() {
+						@Override
+						public void run() {
+		        			Plugins.getInstance().onRemoveCard((MagePermanent)comp);
+							BattlefieldPanel.this.remove(comp);
+						}
+					});
+        			t.start();
         		}
         	}
         }
@@ -240,48 +275,6 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane implements Compon
         setForeground(java.awt.Color.gray);
         setOpaque(true);
     }// </editor-fold>//GEN-END:initComponents
-
-	@Override
-	public void componentResized(ComponentEvent e) {
-		resizeBattlefield();
-	}
-
-	@Override
-	public void componentMoved(ComponentEvent e) {
-		resizeBattlefield();
-	}
-
-	@Override
-	public void componentShown(ComponentEvent e) {
-		resizeBattlefield();
-	}
-
-	@Override
-	public void componentHidden(ComponentEvent e) {
-		resizeBattlefield();
-	}
-
-	private void resizeBattlefield() {
-        /*Dimension area = new Dimension(0, 0);
-        Dimension size = getPreferredSize();
-
-        for (Component comp: getComponents()) {
-        	Rectangle r = comp.getBounds();
-        	if (r.x + r.width > area.width) {
-        		area.width = r.x + r.width;
-        	}
-        	if (r.y + r.height > area.height) {
-        		area.height = r.y + r.height;
-        	}
-        }
-        if (size.height != area.height || size.width != area.width) {
-        	setPreferredSize(area);
-        	revalidate();
-        	repaint();
-       }*/
-
-	}
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

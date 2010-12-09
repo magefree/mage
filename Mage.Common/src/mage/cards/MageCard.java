@@ -14,6 +14,7 @@ public abstract class MageCard extends JPanel {
 	abstract public void onEndAnimation();
 	abstract public boolean isTapped();
 	abstract public void setAlpha(float transparency);
+	abstract public float getAlpha();
 	abstract public CardView getOriginal();
 	abstract public void setCardBounds(int x, int y, int width, int height);
 	abstract public void update(CardView card);

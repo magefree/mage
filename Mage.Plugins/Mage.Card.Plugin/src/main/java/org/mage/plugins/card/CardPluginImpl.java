@@ -32,6 +32,7 @@ import net.xeoh.plugins.base.annotations.events.PluginLoaded;
 import net.xeoh.plugins.base.annotations.meta.Author;
 
 import org.apache.log4j.Logger;
+import org.mage.card.arcane.Animation;
 import org.mage.card.arcane.CardPanel;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.plugins.card.constants.Constants;
@@ -432,5 +433,33 @@ public class CardPluginImpl implements CardPlugin {
 	@Override
 	public Image getManaSymbolImage(String symbol) {
 		return ManaSymbols.getManaSymbolImage(symbol);
+	}
+
+	@Override
+	public void onAddCard(MagePermanent card) {
+		if (card != null) {
+			Animation.showCard((CardPanel) card);
+			try {
+				while ((card).getAlpha() + 0.05f < 1) {
+					Thread.sleep(30);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void onRemoveCard(MagePermanent card) {
+		if (card != null) {
+			Animation.hideCard((CardPanel) card);
+			try {
+				while ((card).getAlpha() - 0.05f > 0) {
+					Thread.sleep(30);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
