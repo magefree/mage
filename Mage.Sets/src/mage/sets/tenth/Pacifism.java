@@ -110,10 +110,10 @@ class PacifismEffect extends ReplacementEffectImpl<PacifismEffect> {
 
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			if (source.getSourceId().equals(enchantment.getAttachedTo())) {
-				if (event.getType() == EventType.DECLARE_ATTACKER || event.getType() == EventType.DECLARE_BLOCKER) {
+		if (event.getType() == EventType.DECLARE_ATTACKER || event.getType() == EventType.DECLARE_BLOCKER) {
+			Permanent enchantment = game.getPermanent(source.getSourceId());
+			if (enchantment != null && enchantment.getAttachedTo() != null) {
+				if (event.getSourceId().equals(enchantment.getAttachedTo())) {
 					return true;
 				}
 			}

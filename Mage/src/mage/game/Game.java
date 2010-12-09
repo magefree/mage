@@ -41,6 +41,7 @@ import mage.Constants.Zone;
 import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilities;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -138,6 +139,7 @@ public interface Game extends MageItem, Serializable {
 	public void emptyManaPools();
 	public void addEffect(ContinuousEffect continuousEffect, Ability source);
 	public void addTriggeredAbility(TriggeredAbility ability);
+	public void addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility);
 	public void applyEffects();
 	public boolean checkStateAndTriggered();
 	public void playPriority(UUID activePlayerId);

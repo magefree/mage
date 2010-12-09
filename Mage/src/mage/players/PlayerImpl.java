@@ -415,6 +415,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		//20091005 - 602.2a
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, ability.getSourceId(), ability.getId(), playerId))) {
 			game.bookmarkState();
+			ability.newId();
 			game.getStack().push(new StackAbility(ability, playerId));
 			String message = ability.getActivatedMessage(game);
 			if (ability.activate(game, false)) {

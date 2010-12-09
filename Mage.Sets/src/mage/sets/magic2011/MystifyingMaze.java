@@ -106,7 +106,7 @@ class MystifyingMazeEffect extends OneShotEffect<MystifyingMazeEffect> {
 				MystifyingMazeDelayedTriggeredAbility delayedAbility = new MystifyingMazeDelayedTriggeredAbility(source.getSourceId());
 				delayedAbility.setSourceId(source.getSourceId());
 				delayedAbility.setControllerId(source.getControllerId());
-				game.getState().addDelayedTriggeredAbility(delayedAbility);
+				game.addDelayedTriggeredAbility(delayedAbility);
 				return true;
 			}
 		}

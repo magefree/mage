@@ -142,7 +142,7 @@ class GideonJuraEffect extends RequirementAttackEffect<GideonJuraEffect> {
 		if (player != null) {
 			for (Permanent creature: game.getBattlefield().getAllActivePermanents(new FilterCreatureForCombat(), player.getId())) {
 				if (creature.canAttack(game)) {
-					game.getCombat().declareAttacker(creature.getId(), source.getControllerId(), game);
+					game.getCombat().declareAttacker(creature.getId(), source.getSourceId(), game);
 				}
 			}
 			return true;

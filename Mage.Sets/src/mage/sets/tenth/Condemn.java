@@ -52,8 +52,8 @@ public class Condemn extends CardImpl<Condemn> {
 		this.expansionSetCode = "10E";
 		this.color.setWhite(true);
 		this.getSpellAbility().addTarget(new TargetAttackingCreature());
-		this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(false));
 		this.getSpellAbility().addEffect(new CondemnEffect());
+		this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(false));
 
 	}
 

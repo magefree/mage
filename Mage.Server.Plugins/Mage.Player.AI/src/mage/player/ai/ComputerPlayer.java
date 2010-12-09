@@ -317,6 +317,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 					break;
 				case DRAW:
 					logState(game);
+					break;
 				case PRECOMBAT_MAIN:
 					findPlayables(game);
 					if (playableAbilities.size() > 0) {
@@ -336,10 +337,14 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 					}
 					break;
 				case DECLARE_BLOCKERS:
+					findPlayables(game);
 					playRemoval(game.getCombat().getBlockers(), game);
 					playDamage(game.getCombat().getBlockers(), game);
+					break;
 				case END_COMBAT:
+					findPlayables(game);
 					playDamage(game.getCombat().getBlockers(), game);
+					break;
 				case POSTCOMBAT_MAIN:
 					findPlayables(game);
 					if (game.getStack().isEmpty()) {
@@ -370,11 +375,16 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			switch (game.getTurn().getStepType()) {
 				case UPKEEP:
 					findPlayables(game);
+					break;
 				case DECLARE_ATTACKERS:
+					findPlayables(game);
 					playRemoval(game.getCombat().getAttackers(), game);
 					playDamage(game.getCombat().getAttackers(), game);
+					break;
 				case END_COMBAT:
+					findPlayables(game);
 					playDamage(game.getCombat().getAttackers(), game);
+					break;
 			}
 		}
 		pass();

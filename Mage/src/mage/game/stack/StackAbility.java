@@ -287,4 +287,9 @@ public class StackAbility implements StackObject, Ability {
 		return true;
 	}
 
+	@Override
+	public void newId() {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
 }

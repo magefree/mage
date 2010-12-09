@@ -382,32 +382,24 @@ public class ContinuousEffects implements Serializable {
 	public void addEffect(ContinuousEffect effect, Ability source) {
 		switch (effect.getEffectType()) {
 			case REPLACEMENT:
-				ReplacementEffect newReplacementEffect = (ReplacementEffect)effect.copy();
-				newReplacementEffect.setTimestamp();
-				newReplacementEffect.newId();
+				ReplacementEffect newReplacementEffect = (ReplacementEffect)effect;
 				replacementEffects.add(newReplacementEffect);
-				abilityMap.put(newReplacementEffect.getId(), source.copy());
+				abilityMap.put(newReplacementEffect.getId(), source);
 				break;
 			case PREVENTION:
-				PreventionEffect newPreventionEffect = (PreventionEffect)effect.copy();
-				newPreventionEffect.setTimestamp();
-				newPreventionEffect.newId();
+				PreventionEffect newPreventionEffect = (PreventionEffect)effect;
 				preventionEffects.add(newPreventionEffect);
-				abilityMap.put(newPreventionEffect.getId(), source.copy());
+				abilityMap.put(newPreventionEffect.getId(), source);
 				break;
 			case ASTHOUGH:
-				AsThoughEffect newAsThoughEffect = (AsThoughEffect)effect.copy();
-				newAsThoughEffect.setTimestamp();
-				newAsThoughEffect.newId();
+				AsThoughEffect newAsThoughEffect = (AsThoughEffect)effect;
 				asThoughEffects.add(newAsThoughEffect);
-				abilityMap.put(newAsThoughEffect.getId(), source.copy());
+				abilityMap.put(newAsThoughEffect.getId(), source);
 				break;
 			default:
-				ContinuousEffect newEffect = (ContinuousEffect)effect.copy();
-				newEffect.setTimestamp();
-				newEffect.newId();
+				ContinuousEffect newEffect = (ContinuousEffect)effect;
 				layeredEffects.add(newEffect);
-				abilityMap.put(newEffect.getId(), source.copy());
+				abilityMap.put(newEffect.getId(), source);
 				break;
 		}
 	}

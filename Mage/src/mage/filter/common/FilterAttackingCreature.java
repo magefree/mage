@@ -35,7 +35,7 @@ package mage.filter.common;
 public class FilterAttackingCreature extends FilterCreaturePermanent<FilterAttackingCreature> {
 
 	public FilterAttackingCreature() {
-		this("");
+		this("attacking creature");
 	}
 
 	public FilterAttackingCreature(String name) {

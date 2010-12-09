@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -73,7 +72,7 @@ public class PreventAllDamageSourceEffect extends PreventionEffectImpl<PreventAl
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
 		if (super.applies(event, source, game)) {
-			if (event.getTargetId().equals(source.getId())) {
+			if (event.getTargetId().equals(source.getSourceId())) {
 				return true;
 			}
 		}

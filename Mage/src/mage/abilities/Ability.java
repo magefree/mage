@@ -50,6 +50,7 @@ import mage.target.Targets;
 public interface Ability extends Serializable {
 
 	public UUID getId();
+	public void newId();
 	public AbilityType getAbilityType();
 	public UUID getControllerId();
 	public UUID getSourceId();

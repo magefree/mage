@@ -49,6 +49,7 @@ import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilities;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -503,15 +504,28 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public void addEffect(ContinuousEffect continuousEffect, Ability source) {
-		continuousEffect.init(source, this);
-		state.addEffect(continuousEffect, source);
+		ContinuousEffect newEffect = (ContinuousEffect)continuousEffect.copy();
+		Ability newAbility = source.copy();
+		newEffect.newId();
+		newEffect.setTimestamp();
+		newEffect.init(newAbility, this);
+		state.addEffect(newEffect, newAbility);
 	}
 
 	@Override
 	public void addTriggeredAbility(TriggeredAbility ability) {
-		state.addTriggeredAbility((TriggeredAbility) ability.copy());
+		TriggeredAbility newAbility = (TriggeredAbility) ability.copy();
+		newAbility.newId();
+		state.addTriggeredAbility(newAbility);
 	}
 	
+	@Override
+	public void addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility) {
+		DelayedTriggeredAbility newAbility = (DelayedTriggeredAbility) delayedAbility.copy();
+		newAbility.newId();
+		state.addDelayedTriggeredAbility(newAbility);
+	}
+
 	@Override
 	public boolean checkStateAndTriggered() {
 		boolean somethingHappened = false;
