@@ -53,6 +53,7 @@ import mage.target.Targets;
 public class CardView implements Serializable {
 
 	protected UUID id;
+	protected UUID parentId;
 	protected String name;
 	protected List<String> rules;
 	protected String power;
@@ -242,7 +243,17 @@ public class CardView implements Serializable {
 	}
 	
 	public void overrideId(UUID id) {
+		if (parentId == null) {
+			parentId = this.id;
+		}
 		this.id = id;
+	}
+	
+	public UUID getParentId() {
+		if (parentId != null) {
+			return parentId;
+		}
+		return id;
 	}
 	
 	public void setAbility(CardView ability) {

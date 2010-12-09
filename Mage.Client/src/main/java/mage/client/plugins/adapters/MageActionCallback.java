@@ -102,7 +102,7 @@ public class MageActionCallback implements ActionCallback {
 			Point parent = SwingUtilities.getRoot(data.component).getLocationOnScreen();
 			Point me = new Point(data.locationOnScreen);
 			me.translate(-parent.x, -parent.y);
-			UUID uuid = data.card.getId();
+			UUID uuid = data.card.getParentId();
 			for (PlayAreaPanel pa : session.getGame().getPlayers().values()) {
 				MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
 				if (permanent != null) {
