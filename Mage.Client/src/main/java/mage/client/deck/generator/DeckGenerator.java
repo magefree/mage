@@ -346,7 +346,7 @@ public class DeckGenerator {
 						}
 					}
 					if (count == 0) {
-						return -10;
+						return -30;
 					}
 					Integer typeCount = singleCount.get(symbol);
 					if (typeCount == null) {
@@ -378,7 +378,7 @@ public class DeckGenerator {
 	}
 
 	public static void main(String[] args) {
-		/*for (Card card : CardsStorage.getAllCards()) {
+		for (Card card : CardsStorage.getAllCards()) {
 			System.out.println(card.getName());
 			System.out.print("     ");
 			for (String symbol : card.getManaCost().getSymbols()) {
@@ -387,16 +387,16 @@ public class DeckGenerator {
 			}
 			System.out.println(CardUtil.isBasicLand(card));
 			List<ColoredManaSymbol> allowedColors = new ArrayList<ColoredManaSymbol>();
-			allowedColors.add(ColoredManaSymbol.lookup('W'));
+			allowedColors.add(ColoredManaSymbol.lookup('B'));
 			allowedColors.add(ColoredManaSymbol.lookup('G'));
 			DeckGenerator.MageScoredCard m = new DeckGenerator.MageScoredCard(card, allowedColors);
 
 			System.out.println();
 			System.out.println("  score: " + m.getScore());
 			System.out.println();
-		}*/
+		}
 		
-		System.out.println("Done! Path: " + generateDeck());
+		//System.out.println("Done! Path: " + generateDeck());
 		
 	}
 }
