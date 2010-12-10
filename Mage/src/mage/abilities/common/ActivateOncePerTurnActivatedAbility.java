@@ -52,7 +52,7 @@ public class ActivateOncePerTurnActivatedAbility extends ActivatedAbilityImpl<Ac
 
 	@Override
 	public boolean canActivate(UUID playerId, Game game) {
-		Boolean activated = (Boolean)game.getState().getValue(this.id.toString() + "activated");
+		Boolean activated = (Boolean)game.getState().getValue(this.originalId.toString() + "activated");
 		if (activated == null)
 			return true;
 		else
@@ -63,7 +63,7 @@ public class ActivateOncePerTurnActivatedAbility extends ActivatedAbilityImpl<Ac
 	public boolean activate(Game game, boolean noMana) {
 		if (canActivate(this.controllerId, game)) {
 			if (super.activate(game, noMana)) {
-				game.getState().setValue(this.id.toString() + "activated", Boolean.TRUE);
+				game.getState().setValue(this.originalId.toString() + "activated", Boolean.TRUE);
 				return true;
 			}
 		}
@@ -72,7 +72,7 @@ public class ActivateOncePerTurnActivatedAbility extends ActivatedAbilityImpl<Ac
 
 	@Override
 	public void reset(Game game) {
-		game.getState().setValue(this.id.toString() + "activated", Boolean.FALSE);
+		game.getState().setValue(this.originalId.toString() + "activated", Boolean.FALSE);
 	}
 
 	@Override

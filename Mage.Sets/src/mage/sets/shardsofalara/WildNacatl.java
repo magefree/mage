@@ -36,6 +36,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.BoostSourceWhileControlsEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
 
 /**
@@ -44,8 +45,15 @@ import mage.filter.FilterPermanent;
  */
 public class WildNacatl extends CardImpl<WildNacatl> {
 
-	private FilterPermanent filter1 = new FilterPermanent("Mountain");
-	private FilterPermanent filter2 = new FilterPermanent("Plains");
+	private static FilterPermanent filter1 = new FilterPermanent("Mountain");
+	private static FilterPermanent filter2 = new FilterPermanent("Plains");
+
+	static {
+		filter1.getSubtype().add("Mountain");
+		filter1.setScopeSubtype(ComparisonScope.Any);
+		filter2.getSubtype().add("Plains");
+		filter2.setScopeSubtype(ComparisonScope.Any);
+	}
 
 	public WildNacatl(UUID ownerId) {
 		super(ownerId, 152, "Wild Nacatl", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
@@ -55,8 +63,6 @@ public class WildNacatl extends CardImpl<WildNacatl> {
 		this.subtype.add("Warrior");
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
-		filter1.getName().add("Mountain");
-		filter2.getName().add("Plains");
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter1, 1, 1)));
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter2, 1, 1)));
 	}

@@ -63,6 +63,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 	private final static transient Logger logger = Logging.getLogger(AbilityImpl.class.getName());
 
 	protected UUID id;
+	protected UUID originalId;
 	protected AbilityType abilityType;
 	protected UUID controllerId;
 	protected UUID sourceId;
@@ -82,6 +83,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
 	public AbilityImpl(AbilityType abilityType, Zone zone) {
 		this.id = UUID.randomUUID();
+		this.originalId = id;
 		this.abilityType = abilityType;
 		this.zone = zone;
 		this.manaCosts = new ManaCostsImpl<ManaCost>();
@@ -94,6 +96,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
 	public AbilityImpl(AbilityImpl<T> ability) {
 		this.id = ability.id;
+		this.originalId = ability.originalId;
 		this.abilityType = ability.abilityType;
 		this.controllerId = ability.controllerId;
 		this.sourceId = ability.sourceId;
