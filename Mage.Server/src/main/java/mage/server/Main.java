@@ -28,9 +28,11 @@
 
 package mage.server;
 
+import java.net.UnknownHostException;
 import mage.server.util.PluginClassLoader;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.net.InetAddress;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mage.game.GameType;
@@ -83,7 +85,16 @@ public class Main {
 			}
 		}
 		Copier.setLoader(classLoader);
-		System.setProperty("java.rmi.server.hostname", config.getServerAddress());
+		String ip = config.getServerAddress();
+		try {
+			if (ip.equals("localhost")) {
+				ip = InetAddress.getLocalHost().getHostAddress();
+			}
+		} catch (UnknownHostException ex) {
+			logger.log(Level.WARNING, "Could not get server address: ", ex);
+		}
+		System.setProperty("java.rmi.server.hostname", ip);
+		logger.info("MAGE server - using address " + ip);
 		server = new ServerImpl(config.getPort(), config.getServerName(), testMode);
 
     }
