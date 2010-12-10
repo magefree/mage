@@ -85,7 +85,12 @@ public class Main {
 			}
 		}
 		Copier.setLoader(classLoader);
-		String ip = config.getServerAddress();
+		setServerAddress(config.getServerAddress());
+		server = new ServerImpl(config.getPort(), config.getServerName(), testMode);
+
+    }
+
+	private static void setServerAddress(String ip) {
 		try {
 			if (ip.equals("localhost")) {
 				ip = InetAddress.getLocalHost().getHostAddress();
@@ -93,12 +98,14 @@ public class Main {
 		} catch (UnknownHostException ex) {
 			logger.log(Level.WARNING, "Could not get server address: ", ex);
 		}
+		String ipParam = System.getProperty("server");
+		if (ipParam != null) {
+			ip = ipParam;
+		}
 		System.setProperty("java.rmi.server.hostname", ip);
 		logger.info("MAGE server - using address " + ip);
-		server = new ServerImpl(config.getPort(), config.getServerName(), testMode);
-
-    }
-
+	}
+	
 	private static Class<?> loadPlugin(Plugin plugin) {
 		try {
 			classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
