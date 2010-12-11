@@ -1,0 +1,8 @@
+syntax: glob
+Mage.Client/plugins/images
+Mage.Client/plugins/plugin.data
+Mage.Server/saved
+
+syntax: regexp
+target
+nbactions.xml
