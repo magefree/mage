@@ -39,9 +39,15 @@ import java.io.IOException;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JDesktopPane;
+import javax.swing.JLayeredPane;
+
 import mage.cards.decks.DeckCardLists;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
+import mage.client.components.MageComponents;
+import mage.client.dialog.PhasesDialog;
 import mage.view.PlayerView;
 
 /**
@@ -52,6 +58,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
 	UUID playerId;
 	UUID gameId;
+	PhasesDialog phasesDialog;
 
     /** Creates new form PlayAreaPanel */
     public PlayAreaPanel() {
@@ -104,6 +111,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         playerPanel = new mage.client.game.PlayerPanel();
         manaPool = new mage.client.game.ManaPool();
         btnCheat = new javax.swing.JButton();
+        btnPhases = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         battlefieldPanel = new mage.client.game.BattlefieldPanel(jScrollPane1);
 
@@ -115,6 +123,13 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 btnCheatActionPerformed(evt);
             }
         });
+        
+        btnPhases.setText("Phases");
+        btnPhases.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPhasesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -123,6 +138,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             .addComponent(manaPool, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
             .addComponent(playerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnCheat, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+            .addComponent(btnPhases, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,7 +147,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(manaPool, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(btnCheat))
+                .addComponent(btnCheat)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(btnPhases))
         );
 
         jScrollPane1.setViewportView(battlefieldPanel);
@@ -164,6 +182,16 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 		}
 	}//GEN-LAST:event_btnCheatActionPerformed
 
+	private void btnPhasesActionPerformed(java.awt.event.ActionEvent evt) {
+		if (phasesDialog == null) {
+			synchronized (this) {
+				if (phasesDialog == null) {
+					phasesDialog = new PhasesDialog(null);
+				}
+			}
+		}
+		phasesDialog.showDialog();
+	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private mage.client.game.BattlefieldPanel battlefieldPanel;
@@ -172,6 +200,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private mage.client.game.ManaPool manaPool;
     private mage.client.game.PlayerPanel playerPanel;
+	private javax.swing.JButton btnPhases;
     // End of variables declaration//GEN-END:variables
 
 }
