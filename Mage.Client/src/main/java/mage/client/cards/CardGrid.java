@@ -125,7 +125,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
 		resizeArea();
 	}
 
-	private void removeCard(UUID cardId) {
+	public void removeCard(UUID cardId) {
         for (Component comp: getComponents()) {
         	if (comp instanceof Card) {
         		if (((Card)comp).getCardId().equals(cardId)) {

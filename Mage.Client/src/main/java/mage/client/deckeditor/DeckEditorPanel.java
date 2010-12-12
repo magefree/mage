@@ -93,7 +93,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 						for (Card card: cardSelector.getCards()) {
 							if (card.getId().equals((UUID)event.getSource())) {
 								deck.getCards().add(createCard(card.getClass()));
-								break;
+                                if (System.getProperty("draft") != null) {
+                                    cardSelector.getCardsList().removeCard(card.getId());
+                                }
+                                break;
 							}
 						}
 						refreshDeck();
@@ -106,6 +109,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			new Listener<Event> () {
 				@Override
 				public void event(Event event) {
+                    if (System.getProperty("draft") != null) {
+                        return;
+                    }
 					if (event.getEventName().equals("double-click")) {
 						for (Card card: deck.getCards()) {
 							if (card.getId().equals((UUID)event.getSource())) {
