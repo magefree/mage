@@ -698,7 +698,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		if (this.canPlaySorcery(playerId))
 			message += " - play spells and sorceries.";
 		else
-			message +=  " - play instants and activated abilites.";
+			message +=  " - play instants and activated abilities.";
 
 		playerQueryEventSource.select(playerId, message);
 	}
