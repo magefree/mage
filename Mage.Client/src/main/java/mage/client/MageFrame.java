@@ -71,10 +71,7 @@ import javax.swing.UIManager;
 
 import mage.client.cards.CardsStorage;
 import mage.client.components.MageComponents;
-import mage.client.dialog.AboutDialog;
-import mage.client.dialog.CombatDialog;
-import mage.client.dialog.ConnectDialog;
-import mage.client.dialog.PickNumberDialog;
+import mage.client.dialog.*;
 import mage.client.plugins.impl.Plugins;
 import mage.client.remote.Session;
 import mage.client.util.EDTExceptionHandler;
@@ -341,10 +338,12 @@ public class MageFrame extends javax.swing.JFrame {
         deckEditorPane = new mage.client.deckeditor.DeckEditorPane();
         mageToolbar = new javax.swing.JToolBar();
         btnConnect = new javax.swing.JButton();
-        jSeparator4 = new javax.swing.JToolBar.Separator();
+        jSeparator5 = new javax.swing.JToolBar.Separator();
         btnGames = new javax.swing.JButton();
-        jSeparator3 = new javax.swing.JToolBar.Separator();
+        jSeparator4 = new javax.swing.JToolBar.Separator();
         btnDeckEditor = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JToolBar.Separator();
+        btnPreferences = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         btnAbout = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
@@ -418,6 +417,19 @@ public class MageFrame extends javax.swing.JFrame {
         });
         mageToolbar.add(btnDeckEditor);
         mageToolbar.add(jSeparator2);
+        
+        btnPreferences.setText("Preferences");
+        btnPreferences.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnPreferences.setFocusable(false);
+        btnPreferences.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPreferences.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPreferences.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreferencesActionPerformed(evt);
+            }
+        });
+        mageToolbar.add(btnPreferences);
+        mageToolbar.add(jSeparator5);
 
         btnAbout.setText("About");
         btnAbout.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -473,6 +485,10 @@ public class MageFrame extends javax.swing.JFrame {
 		this.deckEditorPane.showTables();
 	}//GEN-LAST:event_btnDeckEditorActionPerformed
 
+	private void btnPreferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeckEditorActionPerformed
+        PhasesDialog.main(new String[]{});
+	}
+	
 	private void btnGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGamesActionPerformed
 		this.gamePane.setVisible(false);
 		this.deckEditorPane.setVisible(false);
@@ -570,6 +586,7 @@ public class MageFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnAbout;
     private javax.swing.JButton btnConnect;
     private javax.swing.JButton btnDeckEditor;
+    private javax.swing.JButton btnPreferences;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnGames;
     private mage.client.deckeditor.DeckEditorPane deckEditorPane;
@@ -579,6 +596,7 @@ public class MageFrame extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
+    private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JToolBar mageToolbar;
     private mage.client.table.TablesPane tablesPane;

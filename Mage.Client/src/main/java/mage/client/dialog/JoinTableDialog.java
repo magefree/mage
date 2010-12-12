@@ -42,6 +42,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import mage.cards.decks.DeckCardLists;
 import mage.client.remote.Session;
+import mage.client.util.PhaseManager;
 import mage.util.Logging;
 
 /**
@@ -136,6 +137,7 @@ public class JoinTableDialog extends MageDialog {
 	private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
 		Session session = MageFrame.getSession();
 		try {
+            PhaseManager.getInstance().setName(this.newPlayerPanel.getPlayerName());
 			joined = session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), DeckCardLists.load(this.newPlayerPanel.getDeckFile()));
 		} catch (Exception ex) {
 			handleError(ex);
