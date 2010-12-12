@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GraphicsConfiguration;
 import java.awt.Insets;
 
 import javax.swing.JButton;
@@ -107,20 +108,25 @@ public class GuiDisplayUtil {
 
 	public static void keepComponentInsideScreen(int x, int y, Component c) {
 		Dimension screenDim = c.getToolkit().getScreenSize();
-		Insets insets =	c.getToolkit().getScreenInsets(c.getGraphicsConfiguration());
-
-		if (x + c.getWidth() > screenDim.width - insets.right) {
-			x = (screenDim.width - insets.right) - c.getWidth();
-		} else if (x < insets.left) {
-			x = insets.left;
+		GraphicsConfiguration g = c.getGraphicsConfiguration();
+		if (g != null) {
+			Insets insets =	c.getToolkit().getScreenInsets(g);
+	
+			if (x + c.getWidth() > screenDim.width - insets.right) {
+				x = (screenDim.width - insets.right) - c.getWidth();
+			} else if (x < insets.left) {
+				x = insets.left;
+			}
+	
+			if (y + c.getHeight() > screenDim.height - insets.bottom) {
+				y = (screenDim.height - insets.bottom) - c.getHeight();
+			} else if (y < insets.top) {
+				y = insets.top;
+			}
+	
+			c.setLocation(x, y);
+		} else {
+			System.out.println("null");
 		}
-
-		if (y + c.getHeight() > screenDim.height - insets.bottom) {
-			y = (screenDim.height - insets.bottom) - c.getHeight();
-		} else if (y < insets.top) {
-			y = insets.top;
-		}
-
-		c.setLocation(x, y);
 	}
 }
