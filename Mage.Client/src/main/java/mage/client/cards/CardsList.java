@@ -136,19 +136,19 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (e.getClickCount() == 2 && !e.isConsumed()) {
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+        if (e.getClickCount() == 2 && !e.isConsumed()) {
 			e.consume();
-			Object obj = e.getSource(); 
+			Object obj = e.getSource();
 			if (obj instanceof Card) {
 				cardEventSource.doubleClick(((Card)obj).getCardId(), "double-click");
 			} else if (obj instanceof MageCard) {
 				cardEventSource.doubleClick(((MageCard)obj).getOriginal().getId(), "double-click");
 			}
 		}
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
 	}
 
 	@Override

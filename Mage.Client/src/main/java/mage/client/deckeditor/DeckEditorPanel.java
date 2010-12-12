@@ -63,7 +63,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
 	private JFileChooser fcSelectDeck;
 	private JFileChooser fcImportDeck;
-	private Deck deck = new Deck();;
+	private Deck deck = new Deck();
 
     /** Creates new form DeckEditorPanel */
     public DeckEditorPanel() {
