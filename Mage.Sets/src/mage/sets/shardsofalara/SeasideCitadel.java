@@ -60,9 +60,4 @@ public class SeasideCitadel extends CardImpl<SeasideCitadel> {
     public SeasideCitadel copy() {
         return new SeasideCitadel(this);
     }
-
-    @Override
-    public String getArt() {
-        return "";
-    }
 }
