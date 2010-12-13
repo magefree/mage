@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="mage.client.dialog.PhasesDialog">
+  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="FormLayout">
+    <rowspec value="center:d:noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:258px:noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <colspec value="fill:324px:noGrow"/>
+    <constraints>
+      <xy x="20" y="20" width="338" height="328"/>
+    </constraints>
+    <properties>
+      <preferredSize width="324" height="324"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="9fb3d" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms top="5" left="10" bottom="0" right="0"/>
+        </constraints>
+        <properties>
+          <maximumSize width="88" height="20"/>
+          <minimumSize width="88" height="20"/>
+          <preferredSize width="88" height="20"/>
+          <text value="Stop on (yes/no)"/>
+        </properties>
+      </component>
+      <grid id="fdb69" layout-manager="GridLayoutManager" row-count="8" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="9" fill="0" indent="1" use-parent-layout="false"/>
+          <forms top="0" left="18" bottom="0" right="0" defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <minimumSize width="0" height="0"/>
+          <preferredSize width="300" height="250"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="7d72e" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="107" height="16"/>
+              </grid>
+            </constraints>
+            <properties>
+              <text value="Upkeep:"/>
+            </properties>
+          </component>
+          <component id="1c51d" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="107" height="16"/>
+              </grid>
+            </constraints>
+            <properties>
+              <text value="Draw:"/>
+            </properties>
+          </component>
+          <component id="223" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="107" height="16"/>
+              </grid>
+            </constraints>
+            <properties>
+              <text value="Main:"/>
+            </properties>
+          </component>
+          <component id="af314" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="107" height="16"/>
+              </grid>
+            </constraints>
+            <properties>
+              <text value="Before combat:"/>
+            </properties>
+          </component>
+          <component id="466d5" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="107" height="16"/>
+              </grid>
+            </constraints>
+            <properties>
+              <text value="End of combat:"/>
+            </properties>
+          </component>
+          <component id="9f357" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="107" height="16"/>
+              </grid>
+            </constraints>
+            <properties>
+              <text value="Main 2:"/>
+            </properties>
+          </component>
+          <component id="8b3cb" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="107" height="16"/>
+              </grid>
+            </constraints>
+            <properties>
+              <text value="End of turn:"/>
+            </properties>
+          </component>
+          <component id="f062b" class="javax.swing.JCheckBox" binding="checkBoxUpkeepYou" default-binding="true">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="10" height="21"/>
+              </grid>
+            </constraints>
+            <properties>
+              <selected value="true"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="d1440" class="javax.swing.JCheckBox" binding="checkBoxDrawYou">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="10" height="21"/>
+              </grid>
+            </constraints>
+            <properties>
+              <selected value="true"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="155dc" class="javax.swing.JCheckBox" binding="checkBoxMainYou">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="10" height="21"/>
+              </grid>
+            </constraints>
+            <properties>
+              <selected value="true"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="88fe1" class="javax.swing.JCheckBox" binding="checkBoxBeforeCYou">
+            <constraints>
+              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="10" height="21"/>
+              </grid>
+            </constraints>
+            <properties>
+              <selected value="true"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="7b4cb" class="javax.swing.JCheckBox" binding="checkBoxEndCYou">
+            <constraints>
+              <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="10" height="21"/>
+              </grid>
+            </constraints>
+            <properties>
+              <selected value="true"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="97db2" class="javax.swing.JCheckBox" binding="checkBoxMain2You">
+            <constraints>
+              <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="10" height="21"/>
+              </grid>
+            </constraints>
+            <properties>
+              <selected value="true"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="8cc2a" class="javax.swing.JCheckBox" binding="checkBoxEndTurnYou">
+            <constraints>
+              <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="10" height="21"/>
+              </grid>
+            </constraints>
+            <properties>
+              <selected value="true"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="b48fc" class="javax.swing.JCheckBox" binding="checkBoxUpkeepOthers">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="10" height="21"/>
+              </grid>
+            </constraints>
+            <properties>
+              <selected value="true"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="55967" class="javax.swing.JCheckBox" binding="checkBoxDrawOthers">
+            <constraints>
+              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="10" height="21"/>
+              </grid>
+            </constraints>
+            <properties>
+              <selected value="true"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="f142a" class="javax.swing.JCheckBox" binding="checkBoxMainOthers">
+            <constraints>
+              <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="10" height="21"/>
+              </grid>
+            </constraints>
+            <properties>
+              <selected value="true"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="a600b" class="javax.swing.JCheckBox" binding="checkBoxBeforeCOthers">
+            <constraints>
+              <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="10" height="21"/>
+              </grid>
+            </constraints>
+            <properties>
+              <selected value="true"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="e145c" class="javax.swing.JCheckBox" binding="checkBoxEndCOthers">
+            <constraints>
+              <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="10" height="21"/>
+              </grid>
+            </constraints>
+            <properties>
+              <selected value="true"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="2c120" class="javax.swing.JCheckBox" binding="checkBoxMain2Others">
+            <constraints>
+              <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="10" height="21"/>
+              </grid>
+            </constraints>
+            <properties>
+              <selected value="true"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="167d6" class="javax.swing.JCheckBox" binding="checkBoxEndTurnOthers">
+            <constraints>
+              <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="10" height="21"/>
+              </grid>
+            </constraints>
+            <properties>
+              <selected value="true"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="e8c16" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="107" height="0"/>
+              </grid>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="dd6f6" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="61" height="16"/>
+              </grid>
+            </constraints>
+            <properties>
+              <horizontalTextPosition value="0"/>
+              <text value="Your turn"/>
+            </properties>
+          </component>
+          <component id="75ed" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="61" height="16"/>
+              </grid>
+            </constraints>
+            <properties>
+              <horizontalTextPosition value="0"/>
+              <text value="Others turn"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="576d2" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="2">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="322f" class="javax.swing.JButton" binding="OKButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <inheritsPopupMenu value="true"/>
+              <label value="Save"/>
+              <text value="Save"/>
+            </properties>
+          </component>
+          <component id="5adbd" class="javax.swing.JButton" binding="cancelButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="&amp;Cancel"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

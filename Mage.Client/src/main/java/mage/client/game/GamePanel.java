@@ -59,6 +59,7 @@ import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.impl.Plugins;
 import mage.client.remote.Session;
 import mage.client.util.Config;
+import mage.client.util.PhaseManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.util.Logging;
 import mage.view.AbilityPickerView;
@@ -355,6 +356,9 @@ public class GamePanel extends javax.swing.JPanel {
 	public void select(String message, GameView gameView) {
 		updateGame(gameView);
 		this.feedbackPanel.getFeedback(FeedbackMode.SELECT, message, false, gameView.getSpecial());
+        if (PhaseManager.getInstance().isSkip(gameView, message)) {
+            this.feedbackPanel.doClick();
+        }
 	}
 
 	public void playMana(String message, GameView gameView) {

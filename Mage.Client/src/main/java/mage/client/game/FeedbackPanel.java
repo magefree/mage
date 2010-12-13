@@ -114,6 +114,10 @@ public class FeedbackPanel extends javax.swing.JPanel {
 			startModal();
 	}
 
+    public void doClick() {
+        this.btnRight.doClick();
+    }
+
 	public void clear() {
 		stopModal();
 		this.btnLeft.setVisible(false);

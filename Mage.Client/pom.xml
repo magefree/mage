@@ -60,6 +60,16 @@
   			<artifactId>jetlang</artifactId>
   			<version>0.2.4</version>
 		</dependency>
+        <dependency>
+			<groupId>com.jgoodies</groupId>
+  			<artifactId>forms</artifactId>
+  			<version>1.2.1</version>
+		</dependency>
+        <dependency>
+          <groupId>com.intellij</groupId>
+          <artifactId>forms_rt</artifactId>
+          <version>7.0.3</version>
+        </dependency>
 		<!-- 
 		<dependency>
 			<groupId>junit</groupId>

@@ -265,4 +265,8 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 		return true;
 	}
 
+    @Override
+    public String getArt() {
+        return "";
+    }
 }
