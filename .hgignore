@@ -6,3 +6,4 @@ Mage.Server/saved
 syntax: regexp
 target
 nbactions.xml
+glob:Mage.Client/cheat.dck
