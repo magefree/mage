@@ -28,9 +28,11 @@
 
 package mage.abilities.common;
 
+import java.util.UUID;
 import mage.Constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.effects.common.PassEffect;
+import mage.game.Game;
 
 /**
  *
@@ -49,6 +51,11 @@ public class PassAbility extends ActivatedAbilityImpl<PassAbility> {
 	@Override
 	public PassAbility copy() {
 		return new PassAbility(this);
+	}
+
+	@Override
+	public boolean canActivate(UUID playerId, Game game) {
+		return true;
 	}
 
 	@Override

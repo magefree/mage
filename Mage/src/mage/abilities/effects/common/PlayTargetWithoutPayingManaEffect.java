@@ -58,7 +58,10 @@ public class PlayTargetWithoutPayingManaEffect extends OneShotEffect<PlayTargetW
 	public boolean apply(Game game, Ability source) {
 		Player controller = game.getPlayer(source.getControllerId());
 		Card target = (Card) game.getObject(source.getFirstTarget());
-		return controller.cast(target.getSpellAbility(), game, true);
+		if (controller != null && target != null) {
+			return controller.cast(target.getSpellAbility(), game, true);
+		}
+		return false;
 	}
 
 	@Override

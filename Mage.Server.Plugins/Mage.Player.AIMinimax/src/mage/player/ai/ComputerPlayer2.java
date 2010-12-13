@@ -372,13 +372,14 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		}
 		node.setGameValue(game.getState().getValue());
 		SimulatedPlayer currentPlayer = (SimulatedPlayer) game.getPlayer(game.getPlayerList().get());
+		logger.fine("simulating -- player " + currentPlayer.getName());
 		SimulationNode bestNode = null;
 		List<Ability> allActions = currentPlayer.simulatePriority(game, filter);
 		if (logger.isLoggable(Level.FINE))
 			logger.fine("simulating -- adding " + allActions.size() + " children:" + allActions);
 		for (Ability action: allActions) {
 			Game sim = game.copy();
-			if (sim.getPlayer(playerId).activateAbility((ActivatedAbility) action.copy(), sim)) {
+			if (sim.getPlayer(currentPlayer.getId()).activateAbility((ActivatedAbility) action.copy(), sim)) {
 				sim.applyEffects();
 				if (!sim.isGameOver() && action.isUsesStack()) {
 					// only pass if the last action uses the stack

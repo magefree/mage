@@ -230,13 +230,13 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 					else {
 						switch (game.getTurn().getStepType()) {
 							case PRECOMBAT_MAIN:
-									val = simulateCombat(game, node, depth-1, alpha, beta, false);
+								val = -simulateCombat(game, node, depth-1, alpha, beta, false);
 								break;
 							case POSTCOMBAT_MAIN:
-									val = simulateCounterAttack(game, node, depth-1, alpha, beta);
+								val = -simulateCounterAttack(game, node, depth-1, alpha, beta);
 								break;
 							default:
-									val = GameStateEvaluator.evaluate(playerId, game);
+								val = -GameStateEvaluator.evaluate(playerId, game);
 								break;
 						}
 					}

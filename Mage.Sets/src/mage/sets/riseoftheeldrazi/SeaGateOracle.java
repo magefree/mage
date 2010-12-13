@@ -59,7 +59,7 @@ public class SeaGateOracle extends CardImpl<SeaGateOracle> {
 		this.subtype.add("Human");
 		this.subtype.add("Wizard");
 		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+		this.toughness = new MageInt(3);
 		this.addAbility(new EntersBattlefieldTriggeredAbility(new SeaGateOracleEffect(), false));
 	}
 
