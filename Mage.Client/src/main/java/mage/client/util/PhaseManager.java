@@ -44,10 +44,10 @@ public class PhaseManager {
     private static Map<String, String> mapOthers = new HashMap<String, String>() {{
         put("Upkeep - play instants and activated abilities.", UPKEEP_OTHERS);
         put("Draw - play instants and activated abilities.", DRAW_OTHERS);
-        put("Precombat Main - play spells and sorceries.", MAIN_OTHERS);
+        put("Precombat Main - play instants and activated abilities.", MAIN_OTHERS);
         put("Begin Combat - play instants and activated abilities.", BEFORE_COMBAT_OTHERS);
         put("End Combat - play instants and activated abilities.", END_OF_COMBAT_OTHERS);
-        put("Postcombat Main - play spells and sorceries.", MAIN_2_OTHERS);
+        put("Postcombat Main - play instants and activated abilities.", MAIN_2_OTHERS);
         put("End Turn - play instants and activated abilities.", END_OF_TURN_OTHERS);
     }};
 
