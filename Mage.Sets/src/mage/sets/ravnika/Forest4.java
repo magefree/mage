@@ -26,38 +26,26 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.conflux;
+package mage.sets.ravnika;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.keyword.BasicLandcyclingAbility;
-import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
- * @author Loki
+ * User: Loki
  */
-public class FieryFall extends CardImpl<FieryFall> {
+public class Forest4 extends mage.cards.basiclands.Forest {
 
-    public FieryFall (UUID ownerId) {
-        super(ownerId, 63, "Fiery Fall", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{5}{R}");
-        this.expansionSetCode = "CON";        
-        this.color.setRed(true);
-        this.getSpellAbility().addEffect(new DamageTargetEffect(5));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{1}{R}")));
-    }
+    public Forest4(UUID ownerId) {
+		super(ownerId, 306);
+		this.expansionSetCode = "RAV";
+	}
 
-    public FieryFall (final FieryFall card) {
-        super(card);
-    }
+	public Forest4(final Forest4 card) {
+		super(card);
+	}
 
-    @Override
-    public FieryFall copy() {
-        return new FieryFall(this);
-    }
+	@Override
+	public Forest4 copy() {
+		return new Forest4(this);
+	}
 }
