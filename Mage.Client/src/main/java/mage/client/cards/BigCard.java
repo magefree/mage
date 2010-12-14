@@ -66,8 +66,6 @@ public class BigCard extends javax.swing.JPanel {
 	protected JXPanel panel;
 	protected boolean initState;
 
-    protected CardInfoPane cardInfoPane;
-
 	public BigCard() {
         initComponents();
         if (!Plugins.getInstance().isCardPluginLoaded()) {
