@@ -33,4 +33,5 @@ public interface CardPlugin extends Plugin {
 	Image getManaSymbolImage(String symbol);
 	void onAddCard(MagePermanent card);
 	void onRemoveCard(MagePermanent card);
+    JComponent getCardInfoPane();
 }

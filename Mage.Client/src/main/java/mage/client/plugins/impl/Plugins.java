@@ -181,4 +181,14 @@ public class Plugins implements MagePlugins {
 			this.cardPlugin.onRemoveCard(card);
 		}
 	}
+
+    @Override
+    public JComponent getCardInfoPane() {
+        if (this.cardPlugin != null) {
+			return this.cardPlugin.getCardInfoPane();
+		}
+        return null;
+    }
+
+
 }

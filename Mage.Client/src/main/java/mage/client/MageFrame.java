@@ -137,7 +137,7 @@ public class MageFrame extends javax.swing.JFrame {
 
 		initComponents();
 		setSize(1024,768);
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		session = new Session(this);
 		connectDialog = new ConnectDialog();

@@ -51,6 +51,7 @@ import java.util.UUID;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 
+import mage.client.components.CardInfoPane;
 import mage.client.plugins.impl.Plugins;
 
 import org.jdesktop.swingx.JXPanel;
@@ -65,6 +66,8 @@ public class BigCard extends javax.swing.JPanel {
 	protected UUID cardId;
 	protected JXPanel panel;
 	protected boolean initState;
+
+    protected CardInfoPane cardInfoPane;
 
 	public BigCard() {
         initComponents();

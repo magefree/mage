@@ -22,6 +22,7 @@ import mage.cards.Card;
 import mage.cards.CardDimensions;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
+import mage.components.CardInfoPane;
 import mage.interfaces.plugin.CardPlugin;
 import mage.utils.CardUtil;
 import mage.view.CardView;
@@ -41,6 +42,7 @@ import org.mage.plugins.card.dl.DownloadJob;
 import org.mage.plugins.card.dl.Downloader;
 import org.mage.plugins.card.dl.sources.GathererSymbols;
 import org.mage.plugins.card.images.DownloadPictures;
+import org.mage.plugins.card.info.CardInfoPaneImpl;
 
 /**
  * {@link CardPlugin} implementation.
@@ -462,4 +464,9 @@ public class CardPluginImpl implements CardPlugin {
 			}
 		}
 	}
+
+    @Override
+    public JComponent getCardInfoPane() {
+        return new CardInfoPaneImpl();
+    }
 }

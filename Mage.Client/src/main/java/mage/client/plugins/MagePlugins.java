@@ -34,4 +34,5 @@ public interface MagePlugins {
 	Image getManaSymbolImage(String symbol);
 	void onAddCard(MagePermanent card);
 	void onRemoveCard(MagePermanent card);
+    JComponent getCardInfoPane();
 }
