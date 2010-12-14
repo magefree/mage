@@ -120,6 +120,7 @@ $fulltoshort{'Weatherlight'} = 'WTH';
 $fulltoshort{'Worldwake'} = 'WWK';
 $fulltoshort{'Zendikar'} = 'ZEN';
 $fulltoshort{'Archenemy'} = 'ARC';
+$fulltoshort{'Scars of Mirrodin'} = 'SOM';
 
 my %wizardstous;
 $wizardstous{'6E'} = '6ED';
@@ -201,6 +202,7 @@ $wizardstous{'PS'} = 'PLS';
 $wizardstous{'LGN'} = 'LGN';
 $wizardstous{'AN'} = 'ARN';
 $wizardstous{'WWK'} = 'WWK';
+$wizardstous{'SOM'} = 'SOM';
 
 my %knownSets;
 $knownSets{'ARB'} = 'alarareborn';
@@ -213,6 +215,7 @@ $knownSets{'ALA'} = 'shardsofalara';
 $knownSets{'10E'} = 'tenth';
 $knownSets{'WWK'} = 'worldwake';
 $knownSets{'ZEN'} = 'zendikar';
+$knownSets{'SOM'} = 'scarsofmirrodin';
 
 my %raritiesConversion;
 $raritiesConversion{'C'} = 'COMMON';
