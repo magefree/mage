@@ -51,7 +51,6 @@ import java.util.UUID;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 
-import mage.client.components.CardInfoPane;
 import mage.client.plugins.impl.Plugins;
 
 import org.jdesktop.swingx.JXPanel;
