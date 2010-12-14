@@ -7,3 +7,4 @@ syntax: regexp
 target
 nbactions.xml
 glob:Mage.Client/cheat.dck
+glob:Mage.Client/test.dck
