@@ -43,11 +43,14 @@ import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.components.CardInfoPane;
 import mage.game.GameException;
+import mage.view.CardView;
 import mage.view.CardsView;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -98,7 +101,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                     cardSelector.getCardsList().removeCard(card.getId());
                                 }
                                 if (cardInfoPane instanceof  CardInfoPane)  {
-                                    ((CardInfoPane)cardInfoPane).setCard(card);
+                                    ((CardInfoPane)cardInfoPane).setCard(new CardView(card));
                                 }
                                 break;
 							}
@@ -178,7 +181,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         cardInfoPane = Plugins.getInstance().getCardInfoPane();
         if (cardInfoPane != null && System.getProperty("testCardInfo") != null) {
-            cardInfoPane.setPreferredSize(new Dimension(170,230));
+            cardInfoPane.setPreferredSize(new Dimension(170,150));
             cardInfoPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
             isShowCardInfo = true;
         } else {
@@ -456,4 +459,6 @@ class ImportFilter extends FileFilter {
 	public String getDescription() {
 		return "*.dec | *.mwDeck | *.txt";
 	}
+
+
 }

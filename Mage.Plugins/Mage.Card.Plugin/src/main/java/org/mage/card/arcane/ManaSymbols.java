@@ -84,10 +84,10 @@ public class ManaSymbols {
 
 	static public synchronized String replaceSymbolsWithHTML (String value, boolean small) {
 		if (small)
-			return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:plugins/images/symbols/small/$1$2.jpg' width=11 height=11>");
+			return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:plugins/images/symbols/small/$1$2.jpg' alt='$1$2' width=11 height=11>");
 		else {
-			value = value.replace("{slash}", "<img src='file:plugins/images/symbols/medium/slash.jpg' width=10 height=13>");
-			return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:plugins/images/symbols/medium/$1$2.jpg' width=13 height=13>");
+			value = value.replace("{slash}", "<img src='file:plugins/images/symbols/medium/slash.jpg' alt='slash' width=10 height=13>");
+			return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:plugins/images/symbols/medium/$1$2.jpg' alt='$1$2' width=13 height=13>");
 		}
 	}
 }

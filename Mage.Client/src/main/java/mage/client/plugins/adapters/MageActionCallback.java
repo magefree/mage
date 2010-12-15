@@ -1,16 +1,13 @@
 package mage.client.plugins.adapters;
 
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.Point;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.UUID;
 
-import javax.swing.Popup;
-import javax.swing.PopupFactory;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 import mage.cards.MageCard;
 import mage.cards.MagePermanent;
@@ -25,6 +22,8 @@ import mage.client.util.DefaultActionCallback;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.GuiDisplayUtil;
+import mage.components.CardInfoPane;
+import mage.utils.ThreadUtils;
 import mage.view.CardView;
 
 import org.jdesktop.swingx.JXPanel;
@@ -32,12 +31,14 @@ import org.jdesktop.swingx.JXPanel;
 public class MageActionCallback implements ActionCallback {
 
 	private Popup popup;
+    private JPopupMenu jPopupMenu;
 	private BigCard bigCard; 
 	protected static DefaultActionCallback defaultCallback = DefaultActionCallback.getInstance();
 	protected static Session session = MageFrame.getSession();
 	private CardView popupCard;
 	private Thread t;
 	private int state = 0;
+    private JComponent cardInfoPane;
 	
 	public MageActionCallback() {
 	}
@@ -50,6 +51,9 @@ public class MageActionCallback implements ActionCallback {
 		if (session == null) {
 			session = MageFrame.getSession();
 		}
+        if (cardInfoPane == null) {
+            cardInfoPane = Plugins.getInstance().getCardInfoPane();
+        }
 	}
 	
 	@Override
@@ -125,15 +129,44 @@ public class MageActionCallback implements ActionCallback {
 		} catch (InterruptedException ie) {
 			ie.printStackTrace();
 		}*/
-		
-		PopupFactory factory = PopupFactory.getSharedInstance();
-		popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
-		popup.show();
-		// hack to get popup to resize to fit text
-		popup.hide();
-		popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
-		popup.show();
-	}
+
+        if (cardInfoPane == null) {
+            PopupFactory factory = PopupFactory.getSharedInstance();
+            popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
+            popup.show();
+            // hack to get popup to resize to fit text
+            popup.hide();
+            popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
+            popup.show();
+        } else {
+
+            ThreadUtils.threadPool2.submit(new Runnable() {
+                @Override
+                public void run() {
+                      ThreadUtils.threadPool2.submit(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Thread.sleep(900);
+                            } catch (InterruptedException ie) {
+                                ie.printStackTrace();
+                            }
+                            if (!popupCard.equals(data.card)) {
+                                return;
+                            }
+                            PopupFactory factory = PopupFactory.getSharedInstance();
+                            ((CardInfoPane)cardInfoPane).setCard(data.card);
+                            cardInfoPane.setSize(161, 221);
+                            cardInfoPane.setPreferredSize(new Dimension(161, 221));
+                            popup = factory.getPopup(data.component, cardInfoPane, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
+                            popup.show();
+                        }
+                      });
+                }
+            });
+
+        }
+    }
 	
 	@Override
 	public void mouseMoved(MouseEvent e, TransferData data) {
@@ -172,6 +205,9 @@ public class MageActionCallback implements ActionCallback {
 		if (popup != null) {
 			popup.hide();
 		}
+        if (jPopupMenu != null) {
+            jPopupMenu.setVisible(false);
+        }
 		ArrowBuilder.removeAllArrows();
 	}
 

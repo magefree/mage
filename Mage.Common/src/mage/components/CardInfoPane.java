@@ -1,6 +1,7 @@
 package mage.components;
 
 import mage.cards.Card;
+import mage.view.CardView;
 
 /**
  * Card info pane for displaying card rules.
@@ -9,6 +10,6 @@ import mage.cards.Card;
  * @author nantuko
  */
 public interface CardInfoPane {
-    public void setCard (final Card card);
-    public boolean isCurrentCard (Card card);
+    public void setCard (final CardView card);
+    public boolean isCurrentCard (CardView card);
 }

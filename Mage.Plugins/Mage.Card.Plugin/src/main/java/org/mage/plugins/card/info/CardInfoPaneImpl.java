@@ -1,11 +1,11 @@
 package org.mage.plugins.card.info;
 
 import mage.Constants;
-import mage.cards.Card;
 import mage.components.CardInfoPane;
 import mage.utils.CardUtil;
+import mage.utils.ThreadUtils;
+import mage.view.CardView;
 import org.mage.card.arcane.ManaSymbols;
-import org.mage.card.arcane.ThreadUtils;
 import org.mage.card.arcane.UI;
 
 import javax.swing.*;
@@ -20,15 +20,16 @@ import java.util.List;
  */
 public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 
-    private Card currentCard;
+    private CardView currentCard;
 
     public CardInfoPaneImpl() {
         UI.setHTMLEditorKit(this);
 		setEditable(false);
 		setBackground(Color.white);
+        setSize(170, Integer.MAX_VALUE);
     }
 
-    public void setCard (final Card card) {
+    public void setCard (final CardView card) {
         if (card == null) return;
 		if (isCurrentCard(card)) return;
 		currentCard = card;
@@ -37,7 +38,11 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 			public void run () {
 				if (!card.equals(currentCard)) return;
 
-                String castingCost = UI.getDisplayManaCost(card.getManaCost().getText());
+                String manaCost = "";
+                for (String m : card.getManaCost()) {
+                    manaCost += m;
+                }
+                String castingCost = UI.getDisplayManaCost(manaCost);
 				castingCost = ManaSymbols.replaceSymbolsWithHTML(castingCost, false);
 
                 int symbolCount = 0;
@@ -111,13 +116,13 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 				}
 
                 String pt = "";
-                if (card.getCardType().contains(Constants.CardType.CREATURE)) {
+                if (CardUtil.isCreature(card)) {
                     pt = card.getPower() + "/" + card.getToughness();
-                } else if (card.getCardType().contains(Constants.CardType.PLANESWALKER)) {
+                } else if (CardUtil.isPlaneswalker(card)) {
                     pt = card.getLoyalty().toString();
                 }
                 if (pt.length() > 0) {
-                    buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'><tr><td>");
+                    buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%' valign='bottom'><tr><td>");
                     buffer.append("</td><td align='right'>");
 					buffer.append("<b>");
 					buffer.append(pt);
@@ -131,7 +136,7 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 					public void run () {
 						if (!card.equals(currentCard)) return;
 						setText(buffer.toString());
-                        System.out.println(buffer.toString());
+                        //System.out.println(buffer.toString());
 						setCaretPosition(0);
 					}
 				});
@@ -139,24 +144,24 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
         });
     }
 
-    private String getTypes(Card card) {
+    private String getTypes(CardView card) {
         String types = "";
-        for (String superType : card.getSupertype()) {
+        for (String superType : card.getSuperTypes()) {
             types += superType + " ";
         }
-        for (Constants.CardType cardType : card.getCardType()) {
+        for (Constants.CardType cardType : card.getCardTypes()) {
             types += cardType.toString() + " ";
         }
-        if (card.getSubtype().size() > 0) {
+        if (card.getSubTypes().size() > 0) {
             types += "- ";
         }
-        for (String subType : card.getSubtype()) {
+        for (String subType : card.getSubTypes()) {
             types += subType + " ";
         }
         return types.trim();
     }
 
-    public boolean isCurrentCard (Card card) {
+    public boolean isCurrentCard (CardView card) {
 		return currentCard != null && card.equals(currentCard);
 	}
 }
