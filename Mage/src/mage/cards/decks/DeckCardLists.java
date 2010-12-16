@@ -28,19 +28,9 @@
 
 package mage.cards.decks;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -49,38 +39,9 @@ import java.util.logging.Logger;
 public class DeckCardLists implements Serializable {
 
 	private String name;
+	private String author;
 	private List<String> cards = new ArrayList<String>();
 	private List<String> sideboard = new ArrayList<String>();
-
-	public static DeckCardLists load(String file) throws FileNotFoundException, IOException, ClassNotFoundException {
-
-		DeckCardLists deckList = new DeckCardLists();
-
-		FileInputStream fis;
-		ObjectInputStream ois;
-
-		fis = new FileInputStream(file);
-		ois = new ObjectInputStream(fis);
-		try {
-			deckList = (DeckCardLists) ois.readObject();
-			return deckList;
-		} finally {
-			ois.close();
-		}
-
-	}
-
-	public void save(String file) throws FileNotFoundException, IOException {
-
-		FileOutputStream fs = new FileOutputStream(file);
-		ObjectOutputStream os = new ObjectOutputStream(fs);
-		try {
-			os.writeObject(this);
-		} finally {
-			os.close();
-		}
-
-	}
 
 	/**
 	 * @return the cards
@@ -118,4 +79,11 @@ public class DeckCardLists implements Serializable {
 		this.name = name;
 	}
 
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
 }

@@ -63,6 +63,7 @@ import mage.client.dialog.TableWaitingDialog;
 import mage.client.remote.MageRemoteException;
 import mage.client.remote.Session;
 import mage.client.util.ButtonColumn;
+import mage.sets.Sets;
 import mage.util.Logging;
 import mage.view.TableView;
 
@@ -293,13 +294,13 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 					roomId,
 					table.getTableId(),
 					"Human",
-					DeckCardLists.load("test.dck")
+					Sets.loadDeck("test.dck")
 			);
 			session.joinTable(
 					roomId,
 					table.getTableId(),
 					"Computer",
-					DeckCardLists.load("test.dck")
+					Sets.loadDeck("test.dck")
 			);
 			hideTables();
 			session.startGame(roomId, table.getTableId());

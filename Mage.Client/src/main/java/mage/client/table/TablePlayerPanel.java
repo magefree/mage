@@ -47,6 +47,7 @@ import mage.client.remote.Session;
 import mage.client.util.Config;
 import mage.client.util.Event;
 import mage.client.util.Listener;
+import mage.sets.Sets;
 import mage.util.Logging;
 
 /**
@@ -81,7 +82,7 @@ public class TablePlayerPanel extends javax.swing.JPanel {
 
 	public boolean joinTable(UUID roomId, UUID tableId) throws FileNotFoundException, IOException, ClassNotFoundException {
 		if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
-			return session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), DeckCardLists.load(this.newPlayerPanel.getDeckFile()));
+			return session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), Sets.loadDeck(this.newPlayerPanel.getDeckFile()));
  		}
 		return true;
 	}

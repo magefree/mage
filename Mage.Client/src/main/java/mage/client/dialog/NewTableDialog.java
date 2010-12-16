@@ -53,6 +53,7 @@ import mage.client.remote.Session;
 import mage.client.table.TablePlayerPanel;
 import mage.client.util.Event;
 import mage.client.util.Listener;
+import mage.sets.Sets;
 import mage.util.Logging;
 import mage.view.GameTypeView;
 import mage.view.TableView;
@@ -289,7 +290,7 @@ public class NewTableDialog extends MageDialog {
 				(MultiplayerAttackOption)this.cbAttackOption.getSelectedItem(), 
 				(RangeOfInfluence)this.cbRange.getSelectedItem());
 		try {
-			if (session.joinTable(roomId, table.getTableId(), this.player1Panel.getPlayerName(), DeckCardLists.load(this.player1Panel.getDeckFile()))) {
+			if (session.joinTable(roomId, table.getTableId(), this.player1Panel.getPlayerName(), Sets.loadDeck(this.player1Panel.getDeckFile()))) {
 				for (TablePlayerPanel player: players) {
 					if (!player.getPlayerType().equals("Human")) {
 						if (!player.joinTable(roomId, table.getTableId())) {

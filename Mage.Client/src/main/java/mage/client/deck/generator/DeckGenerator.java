@@ -86,7 +86,7 @@ public class DeckGenerator {
 				File tmp = File.createTempFile("tempDeck" + UUID.randomUUID().toString(), ".dck");
 				tmp.createNewFile();
 				deck.setName("Generated-Deck-" + UUID.randomUUID());
-				deck.getDeckCardLists().save(tmp.getAbsolutePath());
+				Sets.saveDeck(tmp.getAbsolutePath(), deck.getDeckCardLists());
 				//JOptionPane.showMessageDialog(null, "Deck has been generated.");
 				return tmp.getAbsolutePath();
 			} catch (Exception e) {

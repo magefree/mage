@@ -43,6 +43,7 @@ import java.util.logging.Logger;
 import mage.cards.decks.DeckCardLists;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
+import mage.sets.Sets;
 import mage.view.PlayerView;
 
 /**
@@ -156,12 +157,10 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
 	private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheatActionPerformed
 		try {
-			MageFrame.getSession().cheat(gameId, playerId, DeckCardLists.load("cheat.dck"));
+			MageFrame.getSession().cheat(gameId, playerId, Sets.loadDeck("cheat.dck"));
 		} catch (FileNotFoundException ex) {
 			Logger.getLogger(PlayAreaPanel.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (IOException ex) {
-			Logger.getLogger(PlayAreaPanel.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (ClassNotFoundException ex) {
 			Logger.getLogger(PlayAreaPanel.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}//GEN-LAST:event_btnCheatActionPerformed

@@ -57,6 +57,7 @@ import java.lang.reflect.Constructor;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mage.sets.Sets;
 
 /**
  *
@@ -300,7 +301,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			File file = fcSelectDeck.getSelectedFile();
 			try {
 				setCursor(new Cursor(Cursor.WAIT_CURSOR));
-				deck = Deck.load(DeckCardLists.load(file.getPath()), true);
+				deck = Deck.load(Sets.loadDeck(file.getPath()), true);
 			} catch (GameException ex) {
 				JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
 			} catch (Exception ex) {
@@ -330,7 +331,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				if (!fileName.endsWith(".dck"))
 					fileName += ".dck";
 				setCursor(new Cursor(Cursor.WAIT_CURSOR));
-				deck.getDeckCardLists().save(fileName);
+				Sets.saveDeck(fileName, deck.getDeckCardLists());
 			} catch (Exception ex) {
 				Logger.getLogger(DeckEditorPanel.class.getName()).log(Level.SEVERE, null, ex);
 			}
