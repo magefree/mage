@@ -48,7 +48,7 @@ public class BirdsOfParadise extends CardImpl<BirdsOfParadise> {
 
 	public BirdsOfParadise(UUID ownerId) {
 		super(ownerId, 252, "Birds of Paradise", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
-		this.expansionSetCode = "M10";
+		this.expansionSetCode = "10E";
 		this.subtype.add("Bird");
 		this.color.setGreen(true);
 		this.power = new MageInt(0);
