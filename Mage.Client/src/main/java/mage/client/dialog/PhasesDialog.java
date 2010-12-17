@@ -17,7 +17,7 @@ import java.util.prefs.Preferences;
 
 /**
  * Created by IntelliJ IDEA.
- * User: Администратор
+ * User: Administrator
  * Date: 12.12.10
  * Time: 13:48
  * To change this template use File | Settings | File Templates.
