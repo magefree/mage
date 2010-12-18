@@ -96,9 +96,9 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlef
 	@Override
 	public String getText(Ability source) {
 		if (text.length() == 0)
-			return "{this} enters the battlefield " + baseEffects.getText(source);
+			return "When {this} enters the battlefield, " + baseEffects.getText(source);
 		else
-			return "{this} enters the battlefield " + text;
+			return "When {this} enters the battlefield, " + text;
 	}
 
 	@Override
