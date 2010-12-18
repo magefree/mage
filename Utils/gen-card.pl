@@ -2,8 +2,8 @@
 
 use WWW::Mechanize;
 use HTML::TreeBuilder;
-use Parse::RecDescent;
 use Text::Template;
+use Data::Dumper;
 use strict;
 
 my $datafile = "mtg-cards-data.txt";
@@ -210,6 +210,7 @@ $knownSets{'CON'} = 'conflux';
 $knownSets{'M10'} = 'magic2010';
 $knownSets{'M11'} = 'magic2011';
 $knownSets{'HOP'} = 'planechase';
+$knownSets{'RAV'} = 'ravnika';
 $knownSets{'ROE'} = 'riseoftheeldrazi';
 $knownSets{'ALA'} = 'shardsofalara';
 $knownSets{'10E'} = 'tenth';
@@ -236,8 +237,12 @@ $mana{'Black or Green'} = 'B\\\\G';
 $mana{'Black or Red'} = 'B\\\\R';
 $mana{'Red or Green'} = 'R\\\\G';
 
-my $parser = new Parse::RecDescent(q{
-});
+my %manatocolor;
+$manatocolor{'Black'} = "		creature.color.setBlack(true);";
+$manatocolor{'Blue'} = "		creature.color.setBlue(true);"; 
+$manatocolor{'Green'} = "		creature.color.setGreen(true);";
+$manatocolor{'Red'} = "		creature.color.setRed(true);";
+$manatocolor{'White'} = "		creature.color.setWhite(true);";
 
 my %normalid;
 
@@ -299,6 +304,7 @@ foreach my $div (@divs) {
 	    }
 	}
 	if ($id =~m/manaRow/) {
+	    my $findedcolors;
 	    foreach my $sub ($div->look_down('_tag', 'img')) {	    	
 		if (defined($sub->attr('alt'))) {
 			my $m = $sub->attr('alt'); 		
@@ -307,11 +313,14 @@ foreach my $div (@divs) {
 			} else { 				
 		    	die "unknown manacost: " . $m unless defined $mana{$m};
 		    	$manacost .= $mana{$m};
+		    	$findedcolors .= "\n" . $manatocolor{$m};  		    	
 			}
 		}
 	    }
 	    $manacost =~ s/^\s*(\S*(?:\s+\S+)*)\s*$/$1/; 
-	    $vars{'manacost'} = $manacost;
+	    $vars{'manacost'} = $manacost;	    
+	    $vars{'colors'} = $findedcolors;
+		print Dumper(%vars);
 	}
 	if ($id =~/ptRow/) {
 		foreach my $sub ($div->look_down('_tag', 'div')) {
