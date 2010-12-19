@@ -41,7 +41,7 @@ public class SoldierToken extends Token {
 	public SoldierToken() {
 		super("Soldier", "1/1 white Soldier creature token");
 		cardType.add(CardType.CREATURE);
-		color = ObjectColor.GREEN;
+		color = ObjectColor.WHITE;
 		subtype.add("Soldier");
 		power = new MageInt(1);
 		toughness = new MageInt(1);

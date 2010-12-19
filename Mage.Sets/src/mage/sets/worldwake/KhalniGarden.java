@@ -31,13 +31,12 @@ package mage.sets.worldwake;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.PlantToken;
 
 /**
  *
@@ -65,19 +64,6 @@ public class KhalniGarden extends CardImpl<KhalniGarden> {
 	@Override
 	public String getArt() {
 		return "123552_typ_reg_sty_010.jpg";
-	}
-
-}
-
-class PlantToken extends Token {
-
-	public PlantToken() {
-		super("Plant", "0/1 green Plant creature");
-		cardType.add(CardType.CREATURE);
-		color.setGreen(true);
-		subtype.add("Plant");
-		power = new MageInt(0);
-		toughness = new MageInt(1);
 	}
 
 }
