@@ -1,4 +1,4 @@
-package mage.server.bdd;
+package org.mage.test.base;
 
 import mage.interfaces.MageException;
 import mage.interfaces.Server;
@@ -10,28 +10,40 @@ import mage.server.Main;
 import mage.sets.Sets;
 import mage.util.Logging;
 import mage.view.*;
-import org.junit.Test;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Proof of concept of running game from tests.\
- * Will be removed later when BDD is finished.
+ * Base for starting Mage server.
+ * Controls interactions between MageAPI and Mage Server.
  *
  * @author nantuko
  */
-public class StoryRunPOC {
+public class MageBase {
+    /**
+     * MageBase single instance
+     */
+    private static MageBase fInstance = new MageBase();
 
-    private static Logger logger = Logging.getLogger(StoryRunPOC.class.getName());
+    /**
+     * Default logger
+     */
+    private static Logger logger = Logging.getLogger(MageBase.class.getName());
+
+    public static MageBase getInstance() {
+        return fInstance;
+    }
 
     private static UUID sessionId;
-    private static Server server;
+    public static Server server;
     private static String userName;
     private static ServerState serverState;
     private static CallbackClientDaemon callbackDaemon;
@@ -39,25 +51,26 @@ public class StoryRunPOC {
     private static UUID playerId;
     private static CardView cardPlayed;
 
-    @Test
-    public void testEmpty() {
+    private static GameView gameView;
+    private static String phaseToWait;
+    private static Object sync = new Object();
 
-    }
+    public void start() throws Exception {
+        if (server == null) {
+            String[] args = new String[]{"-testMode=true"};
+            Main.main(args);
+            connect("player", "localhost", 17171);
+            UUID roomId = server.getMainRoomId();
 
-    public static void main(String[] argv) throws Exception {
-        String[] args = new String[] {"-testMode=true"};
-        Main.main(args);
-        connect("player", "localhost", 17171);
-        UUID roomId = server.getMainRoomId();
-
-        List<String> playerTypes = new ArrayList<String>();
-        playerTypes.add("Human");
-        playerTypes.add("Computer - default");
-        TableView table = server.createTable(sessionId, roomId, "Two Player Duel", "Limited", playerTypes, null, null);
-        System.out.println("Cards in the deck: " + Sets.loadDeck("UW Control.dck").getCards().size());
-        server.joinTable(sessionId, roomId, table.getTableId(), "Human", Sets.loadDeck("UW Control.dck"));
-        server.joinTable(sessionId, roomId, table.getTableId(), "Computer", Sets.loadDeck("UW Control.dck"));
-        server.startGame(sessionId, roomId, table.getTableId());
+            List<String> playerTypes = new ArrayList<String>();
+            playerTypes.add("Human");
+            playerTypes.add("Computer - default");
+            TableView table = server.createTable(sessionId, roomId, "Two Player Duel", "Limited", playerTypes, null, null);
+            System.out.println("Cards in the deck: " + Sets.loadDeck("UW Control.dck").getCards().size());
+            server.joinTable(sessionId, roomId, table.getTableId(), "Human", Sets.loadDeck("UW Control.dck"));
+            server.joinTable(sessionId, roomId, table.getTableId(), "Computer", Sets.loadDeck("UW Control.dck"));
+            server.startGame(sessionId, roomId, table.getTableId());
+        }
     }
 
     public static void connect(String userName, String serverName, int port) {
@@ -94,7 +107,18 @@ public class StoryRunPOC {
                         } else if (callback.getMethod().equals("gameSelect")) {
 				            GameClientMessage message = (GameClientMessage) callback.getData();
 				            logger.info("SELECT >> " + message.getMessage());
-                            if (!message.getMessage().startsWith("Precombat Main - play spells and sorceries.")) {
+                            if (phaseToWait == null) {
+                                synchronized (sync) {
+                                    sync.wait();
+                                }
+                            }
+                            if (!message.getMessage().startsWith(phaseToWait)) {
+                                server.sendPlayerBoolean(gameId, sessionId, false);
+                            } else {
+                                phaseToWait = null;
+                            }
+
+                            /*if (!message.getMessage().startsWith("Precombat Main - play spells and sorceries.")) {
                                 server.sendPlayerBoolean(gameId, sessionId, false);
                             } else {
                                 if (cardPlayed == null) {
@@ -132,7 +156,8 @@ public class StoryRunPOC {
                                     logger.info("  found land: " + foundLand);
                                     System.exit(0);
                                 }
-                            }
+
+                            }  */
 			            }
                     } catch (Exception e) {
                         logger.info(e.getMessage());
@@ -149,4 +174,72 @@ public class StoryRunPOC {
             logger.log(Level.SEVERE, "Unable to connect to server - ", ex);
         }
     }
+
+
+    public void giveme(String cardName) throws Exception {
+        server.cheat(gameId, sessionId, playerId, cardName);
+    }
+
+    public boolean checkIhave(String cardName) throws Exception {
+        if (cardName == null) {
+            return false;
+        }
+        gameView = server.getGameView(gameId, sessionId, playerId);
+        for (CardView card : gameView.getHand().values()) {
+            if (card.getName().equals(cardName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void goToPhase(String phase) {
+        phaseToWait = phase;
+        synchronized (sync) {
+            sync.notify();
+        }
+    }
+
+    public void playCard(String cardName) throws Exception {
+        gameView = server.getGameView(gameId, sessionId, playerId);
+        CardsView cards = gameView.getHand();
+        CardView cardToPlay = null;
+        for (CardView card : cards.values()) {
+            if (card.getName().equals(cardName)) {
+                cardToPlay = card;
+            }
+        }
+        if (cardToPlay == null) {
+            throw new IllegalArgumentException("Couldn't find " + cardName + " in the hand.");
+        }
+        if (cardToPlay != null) {
+            logger.info("Playing " + cardToPlay);
+            server.sendPlayerUUID(gameId, sessionId, cardToPlay.getId());
+            cardPlayed = cardToPlay;
+        }
+    }
+
+     public boolean checkBattlefield(String cardName) throws Exception {
+         gameView = server.getGameView(gameId, sessionId, playerId);
+         for (PlayerView player: gameView.getPlayers()) {
+            if (player.getPlayerId().equals(playerId)) {
+                for (PermanentView permanent : player.getBattlefield().values()) {
+                    if (permanent.getName().equals(cardName)) {
+                        return true;
+                    }
+                }
+            }
+         }
+         return false;
+     }
+
+     public boolean checkGraveyardsEmpty() throws Exception {
+         gameView = server.getGameView(gameId, sessionId, playerId);
+         for (PlayerView player: gameView.getPlayers()) {
+            if (player.getGraveyard().size() > 0) {
+                return false;
+            }
+         }
+         return true;
+     }
 }

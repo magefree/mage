@@ -39,6 +39,7 @@ import mage.game.GameException;
 import mage.interfaces.callback.CallbackServer;
 import mage.view.GameTypeView;
 import mage.view.TableView;
+import mage.view.GameView;
 
 /**
  *
@@ -94,5 +95,6 @@ public interface Server extends Remote, CallbackServer {
 
 	//test methods
 	public void cheat(UUID gameId, UUID sessionId, UUID playerId, DeckCardLists deckList) throws RemoteException, MageException;
-	
+    public void cheat(UUID gameId, UUID sessionId, UUID playerId, String cardName) throws RemoteException, MageException;
+    public GameView getGameView(UUID gameId, UUID sessionId, UUID playerId) throws RemoteException, MageException;
 }

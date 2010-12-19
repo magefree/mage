@@ -235,6 +235,17 @@ public class GameController implements GameCallback {
 		updateGame();
 	}
 
+    public void cheat(UUID sessionId, UUID playerId, String cardName) {
+        String clazz = Sets.findCard(cardName);
+        if (clazz != null) {
+            Card card = CardImpl.createCard(clazz);
+            Set<Card> cards = new HashSet<Card>();
+			cards.add(card);
+            game.loadCards(cards, playerId);
+            updateGame();
+        }
+	}
+
 	public void kill(UUID sessionId) {
 		if (sessionPlayerMap.containsKey(sessionId)) {
 			gameSessions.get(sessionPlayerMap.get(sessionId)).setKilled();
@@ -384,7 +395,7 @@ public class GameController implements GameCallback {
 		return new GameView(game.getState(), game);
 	}
 
-	private GameView getGameView(UUID playerId) {
+	public GameView getGameView(UUID playerId) {
 		GameView gameView = new GameView(game.getState(), game);
 		gameView.setHand(new CardsView(game.getPlayer(playerId).getHand().getCards(game)));
 		return gameView;

@@ -19,6 +19,7 @@
         <module>Mage.Client</module>
         <module>Mage.Plugins</module>
         <module>Mage.Server.Plugins</module>
+		<module>Mage.Tests</module>
     </modules>
 
     <repositories>
