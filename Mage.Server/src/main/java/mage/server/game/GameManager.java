@@ -32,6 +32,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.cards.decks.DeckCardLists;
 import mage.game.Game;
+import mage.view.GameView;
 
 /**
  *
@@ -112,6 +113,10 @@ public class GameManager {
 		gameControllers.get(gameId).cheat(sessionId, playerId, deckList);
 	}
 
+    public void cheat(UUID gameId, UUID sessionId, UUID playerId, String cardName) {
+		gameControllers.get(gameId).cheat(sessionId, playerId, cardName);
+	}
+
 	void timeout(UUID gameId, UUID sessionId) {
 		gameControllers.get(gameId).timeout(sessionId);
 	}
@@ -120,4 +125,7 @@ public class GameManager {
 		gameControllers.remove(gameId);
 	}
 
+    public GameView getGameView(UUID gameId, UUID sessionId, UUID playerId) {
+        return gameControllers.get(gameId).getGameView(playerId);
+    }
 }
