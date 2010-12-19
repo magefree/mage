@@ -89,4 +89,12 @@ public class PreventDamageTargetEffect extends PreventionEffectImpl<PreventDamag
 		return false;
 	}
 
+	@Override
+	public String getText(Ability source) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Prevent the next ").append(amount).append(" damage that would be dealt to target ");
+		sb.append(source.getTargets().get(0).getTargetName()).append(" ").append(duration.toString());
+		return sb.toString();
+	}
+
 }
