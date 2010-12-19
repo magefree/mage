@@ -37,6 +37,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.TriggeredAbility;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -558,6 +559,11 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 			return false;
 		if (hasSummoningSickness())
 			return false;
+		//20101001 - 508.1c
+		for (RestrictionEffect effect: game.getContinuousEffects().getApplicableRestrictionEffects(this, game)) {
+			if (!effect.canAttack(game))
+				return false;
+		}
 		if (abilities.containsKey(DefenderAbility.getInstance().getId()))
 			return false;
 		return true;
@@ -568,10 +574,15 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		if (tapped)
 			return false;
 		Permanent attacker = game.getPermanent(attackerId);
-		for (EvasionAbility ability: attacker.getAbilities().getEvasionAbilities()) {
-			if (!ability.canBlock(this, game))
+		//20101001 - 509.1b
+		for (RestrictionEffect effect: game.getContinuousEffects().getApplicableRestrictionEffects(this, game)) {
+			if (!effect.canBlock(attacker, game))
 				return false;
 		}
+//		for (EvasionAbility ability: attacker.getAbilities().getEvasionAbilities()) {
+//			if (!ability.canBlock(this, game))
+//				return false;
+//		}
 		if (attacker.hasProtectionFrom(this))
 			return false;
 		return true;

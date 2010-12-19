@@ -28,16 +28,21 @@
 
 package mage.abilities;
 
-import java.util.UUID;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.Constants.AbilityType;
+import mage.Constants.Zone;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface EvasionAbility extends Ability {
+public abstract class EvasionAbility<T extends EvasionAbility<T>> extends StaticAbility<T> {
 
-	public boolean canBlock(Permanent blocker, Game game);
+	public EvasionAbility() {
+		super(AbilityType.EVASION, Zone.BATTLEFIELD);
+	}
+
+	public EvasionAbility(final EvasionAbility ability) {
+		super(ability);
+	}
 
 }

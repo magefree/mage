@@ -29,7 +29,10 @@
 package mage.abilities.keyword;
 
 import java.io.ObjectStreamException;
-import mage.abilities.EvasionAbilityImpl;
+import mage.Constants.Duration;
+import mage.abilities.Ability;
+import mage.abilities.EvasionAbility;
+import mage.abilities.effects.RestrictionEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -37,7 +40,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class UnblockableAbility extends EvasionAbilityImpl<UnblockableAbility> {
+public class UnblockableAbility extends EvasionAbility<UnblockableAbility> {
 
 	private static final UnblockableAbility fINSTANCE =  new UnblockableAbility();
 
@@ -49,11 +52,8 @@ public class UnblockableAbility extends EvasionAbilityImpl<UnblockableAbility> {
 		return fINSTANCE;
 	}
 
-	private UnblockableAbility() {}
-
-	@Override
-	public boolean canBlock(Permanent blocker, Game game) {
-		return false;
+	private UnblockableAbility() {
+		this.addEffect(new UnblockableEffect());
 	}
 
 	@Override
@@ -64,6 +64,36 @@ public class UnblockableAbility extends EvasionAbilityImpl<UnblockableAbility> {
 	@Override
 	public UnblockableAbility copy() {
 		return fINSTANCE;
+	}
+
+}
+
+class UnblockableEffect extends RestrictionEffect<UnblockableEffect> {
+
+	public UnblockableEffect() {
+		super(Duration.WhileOnBattlefield);
+	}
+
+	public UnblockableEffect(final UnblockableEffect effect) {
+		super(effect);
+	}
+
+	@Override
+	public boolean applies(Permanent permanent, Ability source, Game game) {
+		if (permanent.getId().equals(source.getSourceId())) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean canBlock(Permanent blocker, Game game) {
+		return false;
+	}
+
+	@Override
+	public UnblockableEffect copy() {
+		return new UnblockableEffect(this);
 	}
 
 }

@@ -65,7 +65,7 @@ public class StormtideLeviathan extends CardImpl<StormtideLeviathan> {
 		this.power = new MageInt(8);
 		this.toughness = new MageInt(8);
 
-		this.addAbility(IslandwalkAbility.getInstance());
+		this.addAbility(new IslandwalkAbility());
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StormtideLeviathanEffect()));
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StormtideLeviathanEffect2()));
 
@@ -119,6 +119,8 @@ class StormtideLeviathanEffect extends ContinuousEffectImpl<StormtideLeviathanEf
 
 class StormtideLeviathanEffect2 extends ReplacementEffectImpl<StormtideLeviathanEffect2> {
 
+	private static IslandwalkAbility islandwalk = new IslandwalkAbility();
+
 	public StormtideLeviathanEffect2() {
 		super(Duration.WhileOnBattlefield, Outcome.Detriment);
 	}
@@ -150,7 +152,7 @@ class StormtideLeviathanEffect2 extends ReplacementEffectImpl<StormtideLeviathan
 				Player player = game.getPlayer(source.getControllerId());
 				if (player.getInRange().contains(permanent.getControllerId())) {
 					if (!(permanent.getAbilities().containsKey(FlyingAbility.getInstance().getId()) ||
-						permanent.getAbilities().containsKey(IslandwalkAbility.getInstance().getId())))
+						permanent.getAbilities().contains(islandwalk)))
 						return true;
 				}
 			}

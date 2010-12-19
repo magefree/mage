@@ -29,38 +29,40 @@
 package mage.abilities.effects;
 
 import mage.Constants.Duration;
+import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class RequirementAttackEffect<T extends RequirementAttackEffect<T>> extends ReplacementEffectImpl<T> {
+public abstract class RestrictionEffect<T extends RestrictionEffect<T>> extends ContinuousEffectImpl<T> {
 
-	public RequirementAttackEffect(Duration duration) {
+	public RestrictionEffect(Duration duration) {
 		super(duration, Outcome.Detriment);
+		this.effectType = EffectType.RESTRICTION;
 	}
 
-	public RequirementAttackEffect(final RequirementAttackEffect effect) {
+	public RestrictionEffect(final RestrictionEffect effect) {
 		super(effect);
 	}
 
 	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		apply(game, source);
-		return false;
+	public boolean apply(Game game, Ability source) {
+		throw new UnsupportedOperationException("Not supported.");
 	}
 
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType().equals(EventType.DECLARE_ATTACKERS_STEP_PRE))
-			return true;
-		return false;
+	public abstract boolean applies(Permanent permanent, Ability source, Game game);
+
+	public boolean canAttack(Game game) {
+		return true;
 	}
 
-
+	public boolean canBlock(Permanent blocker, Game game) {
+		return true;
+	}
+	
 }

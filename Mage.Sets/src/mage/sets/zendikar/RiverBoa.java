@@ -52,7 +52,7 @@ public class RiverBoa extends CardImpl<RiverBoa> {
 		this.subtype.add("Snake");
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(1);
-		this.addAbility(IslandwalkAbility.getInstance());
+		this.addAbility(new IslandwalkAbility());
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
 	}
 

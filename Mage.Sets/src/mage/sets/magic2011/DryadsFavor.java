@@ -108,7 +108,7 @@ class DryadsFavorEffect extends ContinuousEffectImpl<DryadsFavorEffect> {
 				switch (layer) {
 					case AbilityAddingRemovingEffects_6:
 						if (sublayer == SubLayer.NA) {
-							creature.addAbility(ForestwalkAbility.getInstance());
+							creature.addAbility(new ForestwalkAbility());
 						}
 						break;
 				}

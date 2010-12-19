@@ -55,7 +55,7 @@ public class Incite extends CardImpl<Incite> {
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 		this.getSpellAbility().addEffect(new InciteEffect());
-		this.getSpellAbility().addEffect(new AttacksIfAbleTargetEffect());
+		this.getSpellAbility().addEffect(new AttacksIfAbleTargetEffect(Duration.EndOfTurn));
 	}
 
 	public Incite(final Incite card) {
@@ -93,6 +93,10 @@ class InciteEffect extends ContinuousEffectImpl<InciteEffect> {
 		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
 			permanent.getColor().setRed(true);
+			permanent.getColor().setWhite(false);
+			permanent.getColor().setGreen(false);
+			permanent.getColor().setBlue(false);
+			permanent.getColor().setBlack(false);
 			return true;
 		}
 		return false;

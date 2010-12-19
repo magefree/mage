@@ -30,7 +30,7 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Duration;
 import mage.abilities.Ability;
-import mage.abilities.effects.RequirementEffect;
+import mage.abilities.effects.RestrictionEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -38,46 +38,32 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AttacksIfAbleTargetEffect extends RequirementEffect<AttacksIfAbleTargetEffect> {
+public class CantBlockSourceEffect extends RestrictionEffect<CantBlockSourceEffect> {
 
-	public AttacksIfAbleTargetEffect(Duration duration) {
+	public CantBlockSourceEffect(Duration duration) {
 		super(duration);
 	}
 
-	public AttacksIfAbleTargetEffect(final AttacksIfAbleTargetEffect effect) {
+	public CantBlockSourceEffect(final CantBlockSourceEffect effect) {
 		super(effect);
 	}
 
 	@Override
-	public AttacksIfAbleTargetEffect copy() {
-		return new AttacksIfAbleTargetEffect(this);
-	}
-
-	@Override
 	public boolean applies(Permanent permanent, Ability source, Game game) {
-		Permanent creature = game.getPermanent(source.getFirstTarget());
-		if (creature != null && creature.getId().equals(permanent.getId())) {
+		if (permanent.getId().equals(source.getSourceId())) {
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public boolean mustAttack(Game game) {
-		return true;
-	}
-
-	@Override
-	public boolean mustBlock(Game game) {
+	public boolean canBlock(Permanent blocker, Game game) {
 		return false;
 	}
 
 	@Override
-	public String getText(Ability source) {
-		if (this.duration == Duration.EndOfTurn)
-			return "Target " + source.getTargets().get(0).getTargetName() + " attacks this turn if able";
-		else
-			return "Target " + source.getTargets().get(0).getTargetName() + " attacks each turn if able";
+	public CantBlockSourceEffect copy() {
+		return new CantBlockSourceEffect(this);
 	}
 
 }

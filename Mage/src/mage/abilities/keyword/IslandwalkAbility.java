@@ -38,20 +38,23 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class IslandwalkAbility extends LandwalkAbility {
 
-	private static final IslandwalkAbility fINSTANCE =  new IslandwalkAbility();
+	private static final IslandwalkAbility fINSTANCE =  new IslandwalkAbility();	private static FilterLandPermanent filter = new FilterLandPermanent("Island");
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
-
-	public static IslandwalkAbility getInstance() {
-		return fINSTANCE;
-	}
-
-	private IslandwalkAbility() {
-		filter = new FilterLandPermanent("Island");
+	static {
 		filter.getSubtype().add("Island");
 		filter.setScopeSubtype(ComparisonScope.Any);
 	}
 
+	public IslandwalkAbility() {
+		super(filter);
+	}
+
+	public IslandwalkAbility(final IslandwalkAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public IslandwalkAbility copy() {
+		return new IslandwalkAbility(this);
+	}
 }

@@ -48,7 +48,7 @@ public class BogRaiders extends CardImpl<BogRaiders> {
 		this.subtype.add("Zombie");
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
-		this.addAbility(SwampwalkAbility.getInstance());
+		this.addAbility(new SwampwalkAbility());
 	}
 
 	public BogRaiders(final BogRaiders card) {

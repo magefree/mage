@@ -49,7 +49,7 @@ public class CliffThreader extends CardImpl<CliffThreader> {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.addAbility(MountainwalkAbility.getInstance());
+        this.addAbility(new MountainwalkAbility());
     }
 
     public CliffThreader (final CliffThreader card) {

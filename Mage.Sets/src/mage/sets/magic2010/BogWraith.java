@@ -48,7 +48,7 @@ public class BogWraith extends CardImpl<BogWraith> {
 		this.subtype.add("Wraith");
 		this.power = new MageInt(3);
 		this.toughness = new MageInt(3);
-		this.addAbility(SwampwalkAbility.getInstance());
+		this.addAbility(new SwampwalkAbility());
 	}
 
 	public BogWraith(final BogWraith card) {

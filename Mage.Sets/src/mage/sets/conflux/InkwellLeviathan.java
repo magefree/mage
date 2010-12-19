@@ -51,7 +51,7 @@ public class InkwellLeviathan extends CardImpl<InkwellLeviathan> {
         this.power = new MageInt(7);
         this.toughness = new MageInt(11);
 
-        this.addAbility(IslandwalkAbility.getInstance());
+        this.addAbility(new IslandwalkAbility());
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(ShroudAbility.getInstance());
     }

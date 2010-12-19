@@ -26,88 +26,57 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.magic2010;
+package mage.abilities.effects.common;
 
-import java.util.UUID;
-import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
-import mage.Constants.Zone;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.RequirementEffect;
-import mage.abilities.effects.common.AttacksIfAbleTargetEffect;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AlluringSiren extends CardImpl<AlluringSiren> {
+public class AttacksIfAbleSourceEffect extends RequirementEffect<AttacksIfAbleSourceEffect> {
 
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-	static {
-		filter.setTargetController(TargetController.OPPONENT);
+	public AttacksIfAbleSourceEffect(Duration duration) {
+		super(duration);
 	}
 
-	public AlluringSiren(UUID ownerId) {
-		super(ownerId, 43, "Alluring Siren", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-		this.expansionSetCode = "M10";
-		this.color.setBlue(true);
-		this.subtype.add("Siren");
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AlluringSirenEffect(), new TapSourceCost());
-		ability.addTarget(new TargetCreaturePermanent(filter));
-		this.addAbility(ability);
-	}
-
-	public AlluringSiren(final AlluringSiren card) {
-		super(card);
-	}
-
-	@Override
-	public AlluringSiren copy() {
-		return new AlluringSiren(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "121568_typ_reg_sty_010.jpg";
-	}
-
-}
-
-class AlluringSirenEffect extends AttacksIfAbleTargetEffect {
-
-	public AlluringSirenEffect() {
-		super(Duration.EndOfTurn);
-	}
-
-	public AlluringSirenEffect(final AlluringSirenEffect effect) {
+	public AttacksIfAbleSourceEffect(final AttacksIfAbleSourceEffect effect) {
 		super(effect);
 	}
 
 	@Override
-	public AlluringSirenEffect copy() {
-		return new AlluringSirenEffect(this);
+	public AttacksIfAbleSourceEffect copy() {
+		return new AttacksIfAbleSourceEffect(this);
 	}
 
 	@Override
-	public UUID mustAttackDefender(Ability source, Game game) {
-		return source.getControllerId();
+	public boolean applies(Permanent permanent, Ability source, Game game) {
+		if (permanent.getId().equals(source.getSourceId())) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean mustAttack(Game game) {
+		return true;
+	}
+
+	@Override
+	public boolean mustBlock(Game game) {
+		return false;
 	}
 
 	@Override
 	public String getText(Ability source) {
-		return "Target creature an opponent controls attacks you this turn if able";
+		if (this.duration == Duration.EndOfTurn)
+			return "{this} attacks this turn if able";
+		else
+			return "{this} attacks each turn if able";
 	}
+
 }

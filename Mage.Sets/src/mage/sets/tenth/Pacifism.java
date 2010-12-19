@@ -36,13 +36,11 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -83,10 +81,10 @@ public class Pacifism extends CardImpl<Pacifism> {
 	}
 }
 
-class PacifismEffect extends ReplacementEffectImpl<PacifismEffect> {
+class PacifismEffect extends RestrictionEffect<PacifismEffect> {
 
 	public PacifismEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Detriment);
+		super(Duration.WhileOnBattlefield);
 	}
 
 	public PacifismEffect(final PacifismEffect effect) {
@@ -94,31 +92,26 @@ class PacifismEffect extends ReplacementEffectImpl<PacifismEffect> {
 	}
 
 	@Override
-	public PacifismEffect copy() {
-		return new PacifismEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
-
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return true;
-	}
-
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.DECLARE_ATTACKER || event.getType() == EventType.DECLARE_BLOCKER) {
-			Permanent enchantment = game.getPermanent(source.getSourceId());
-			if (enchantment != null && enchantment.getAttachedTo() != null) {
-				if (event.getSourceId().equals(enchantment.getAttachedTo())) {
-					return true;
-				}
-			}
+	public boolean applies(Permanent permanent, Ability source, Game game) {
+		if (permanent.getAttachments().contains((source.getSourceId()))) {
+			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public boolean canAttack(Game game) {
+		return false;
+	}
+
+	@Override
+	public boolean canBlock(Permanent blocker, Game game) {
+		return false;
+	}
+
+	@Override
+	public PacifismEffect copy() {
+		return new PacifismEffect(this);
 	}
 
 	@Override

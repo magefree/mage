@@ -55,6 +55,7 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
 	public boolean containsKey(UUID abilityId);
 	public T get(UUID abilityId);
 
+	public boolean contains(T ability);
 	public boolean containsAll(Abilities<T> abilities);
 
 	public Abilities<T> copy();

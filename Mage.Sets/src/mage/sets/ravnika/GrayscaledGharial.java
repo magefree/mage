@@ -48,7 +48,7 @@ public class GrayscaledGharial extends CardImpl<GrayscaledGharial> {
         this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(IslandwalkAbility.getInstance());
+        this.addAbility(new IslandwalkAbility());
     }
 
     public GrayscaledGharial (final GrayscaledGharial card) {

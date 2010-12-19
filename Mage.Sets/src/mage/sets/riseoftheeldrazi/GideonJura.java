@@ -32,10 +32,11 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.TurnPhase;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.effects.RequirementAttackEffect;
+import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.BecomesCreatureSourceEOTEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.PreventAllDamageSourceEffect;
@@ -112,10 +113,10 @@ class GideonJuraToken extends Token {
 
 }
 
-class GideonJuraEffect extends RequirementAttackEffect<GideonJuraEffect> {
+class GideonJuraEffect extends RequirementEffect<GideonJuraEffect> {
 
 	public GideonJuraEffect() {
-		super(Duration.OneUse);
+		super(Duration.Custom);
 	}
 
 	public GideonJuraEffect(final GideonJuraEffect effect) {
@@ -128,30 +129,32 @@ class GideonJuraEffect extends RequirementAttackEffect<GideonJuraEffect> {
 	}
 
 	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType().equals(EventType.DECLARE_ATTACKERS_STEP_PRE) && event.getPlayerId().equals(source.getFirstTarget()))
-			return true;
-		if (event.getType().equals(EventType.END_PHASE_POST) && event.getPlayerId().equals(source.getFirstTarget()))
-			used = true;
-		return false;
+	public boolean applies(Permanent permanent, Ability source, Game game) {
+		return permanent.getControllerId().equals(source.getFirstTarget());
 	}
 
 	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null) {
-			for (Permanent creature: game.getBattlefield().getAllActivePermanents(new FilterCreatureForCombat(), player.getId())) {
-				if (creature.canAttack(game)) {
-					game.getCombat().declareAttacker(creature.getId(), source.getSourceId(), game);
-				}
-			}
-			return true;
-		}
-		return false;
+	public boolean isInactive(Ability source, Game game) {
+		return (game.getPhase().getType() == TurnPhase.END && game.getActivePlayerId().equals(source.getFirstTarget()));
 	}
 
 	@Override
 	public String getText(Ability source) {
-		return "During target opponent's next turn, creatures that player controls attack {this} if able";
+		return "During target opponent's next turn, creatures that player controls attack Gideon Jura if able";
+	}
+
+	@Override
+	public UUID mustAttackDefender(Ability source, Game game) {
+		return source.getSourceId();
+	}
+
+	@Override
+	public boolean mustAttack(Game game) {
+		return true;
+	}
+
+	@Override
+	public boolean mustBlock(Game game) {
+		return false;
 	}
 }

@@ -178,18 +178,21 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 	}
 
 	@Override
+	public boolean contains(T ability) {
+		for (T test: this) {
+			if (ability.getId().equals(test.getId()) || ability.getRule().equals(test.getRule())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
 	public boolean containsAll(Abilities<T> abilities) {
 		if (this.size() < abilities.size())
 			return false;
 		for (T ability: abilities) {
-			boolean found = false;
-			for (T test: this) {
-				if (ability.getId().equals(test.getId()) || ability.getRule().equals(test.getRule())) {
-					found = true;
-					break;
-				}
-			}
-			if (!found)
+			if (!contains(ability))
 				return false;
 		}
 		return true;

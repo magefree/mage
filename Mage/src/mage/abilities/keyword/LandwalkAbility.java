@@ -28,7 +28,10 @@
 
 package mage.abilities.keyword;
 
-import mage.abilities.EvasionAbilityImpl;
+import mage.Constants.Duration;
+import mage.abilities.Ability;
+import mage.abilities.EvasionAbility;
+import mage.abilities.effects.RestrictionEffect;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,24 +40,35 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LandwalkAbility extends EvasionAbilityImpl<LandwalkAbility> {
-
-	protected FilterLandPermanent filter;
-
-	protected LandwalkAbility() {}
+public class LandwalkAbility extends EvasionAbility<LandwalkAbility> {
 
 	public LandwalkAbility(FilterLandPermanent filter) {
-		this.filter = filter;
+		this.addEffect(new LandwalkEffect(filter));
 	}
 
 	public LandwalkAbility(final LandwalkAbility ability) {
 		super(ability);
-		this.filter = ability.filter.copy();
 	}
 
 	@Override
 	public LandwalkAbility copy() {
 		return new LandwalkAbility(this);
+	}
+
+}
+
+class LandwalkEffect extends RestrictionEffect<LandwalkEffect> {
+
+	protected FilterLandPermanent filter;
+
+	public LandwalkEffect(FilterLandPermanent filter) {
+		super(Duration.WhileOnBattlefield);
+		this.filter = filter;
+	}
+
+	public LandwalkEffect(final LandwalkEffect effect) {
+		super(effect);
+		this.filter = effect.filter.copy();
 	}
 
 	@Override
@@ -63,7 +77,20 @@ public class LandwalkAbility extends EvasionAbilityImpl<LandwalkAbility> {
 	}
 
 	@Override
-	public String getRule() {
+	public boolean applies(Permanent permanent, Ability source, Game game) {
+		if (permanent.getId().equals(source.getSourceId())) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public LandwalkEffect copy() {
+		return new LandwalkEffect(this);
+	}
+
+	@Override
+	public String getText(Ability source) {
 		return filter.getMessage() + "walk";
 	}
 

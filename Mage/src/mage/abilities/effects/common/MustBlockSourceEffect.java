@@ -28,23 +28,25 @@
 
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.Constants.Duration;
 import mage.abilities.Ability;
-import mage.abilities.effects.RequirementBlockEffect;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.abilities.effects.RequirementEffect;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MustBlockSourceEffect extends RequirementBlockEffect<MustBlockSourceEffect> {
+public class MustBlockSourceEffect extends RequirementEffect<MustBlockSourceEffect> {
 
 	public MustBlockSourceEffect() {
 		super(Duration.WhileOnBattlefield);
+	}
+
+	public MustBlockSourceEffect(Duration duration) {
+		super(duration);
 	}
 
 	public MustBlockSourceEffect(final MustBlockSourceEffect effect) {
@@ -52,29 +54,23 @@ public class MustBlockSourceEffect extends RequirementBlockEffect<MustBlockSourc
 	}
 
 	@Override
-	public boolean apply(Game game, Ability source) {
-		CombatGroup group = game.getCombat().findGroup(source.getSourceId());
-		if (group != null) {
-			Player defender = null;
-			if (group.isDefenderIsPlaneswalker()) {
-				Permanent planeswalker = game.getPermanent(group.getDefenderId());
-				if (planeswalker != null) {
-					defender = game.getPlayer(planeswalker.getControllerId());
-				}
-			}
-			else {
-				defender = game.getPlayer(group.getDefenderId());
-			}
-			if (defender != null) {
-				for (Permanent creature: game.getBattlefield().getAllActivePermanents(FilterCreaturePermanent.getDefault(), defender.getId())) {
-					if (group.canBlock(creature, game)) {
-						group.addBlocker(creature.getId(), creature.getControllerId(), game);
-					}
-				}
-				return true;
-			}
-		}
+	public boolean applies(Permanent permanent, Ability source, Game game) {
+		return true;
+	}
+
+	@Override
+	public boolean mustAttack(Game game) {
 		return false;
+	}
+
+	@Override
+	public boolean mustBlock(Game game) {
+		return true;
+	}
+
+	@Override
+	public UUID mustBlockAttacker(Ability source, Game game) {
+		return source.getSourceId();
 	}
 
 	@Override

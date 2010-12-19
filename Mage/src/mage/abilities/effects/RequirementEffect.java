@@ -26,11 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.abilities.effects;
 
+import java.util.UUID;
 import mage.Constants.Duration;
+import mage.Constants.EffectType;
+import mage.Constants.Outcome;
 import mage.abilities.Ability;
-import mage.abilities.effects.RequirementEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -38,46 +40,34 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AttacksIfAbleTargetEffect extends RequirementEffect<AttacksIfAbleTargetEffect> {
+public abstract class RequirementEffect<T extends RequirementEffect<T>> extends ContinuousEffectImpl<T> {
 
-	public AttacksIfAbleTargetEffect(Duration duration) {
-		super(duration);
+	public RequirementEffect(Duration duration) {
+		super(duration, Outcome.Detriment);
+		this.effectType = EffectType.REQUIREMENT;
 	}
 
-	public AttacksIfAbleTargetEffect(final AttacksIfAbleTargetEffect effect) {
+	public RequirementEffect(final RequirementEffect effect) {
 		super(effect);
 	}
 
 	@Override
-	public AttacksIfAbleTargetEffect copy() {
-		return new AttacksIfAbleTargetEffect(this);
+	public boolean apply(Game game, Ability source) {
+		throw new UnsupportedOperationException("Not supported.");
 	}
 
-	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		Permanent creature = game.getPermanent(source.getFirstTarget());
-		if (creature != null && creature.getId().equals(permanent.getId())) {
-			return true;
-		}
-		return false;
+	public abstract boolean applies(Permanent permanent, Ability source, Game game);
+
+	public abstract boolean mustAttack(Game game);
+
+	public abstract boolean mustBlock(Game game);
+
+	public UUID mustAttackDefender(Ability source, Game game) {
+		return null;
 	}
 
-	@Override
-	public boolean mustAttack(Game game) {
-		return true;
-	}
-
-	@Override
-	public boolean mustBlock(Game game) {
-		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		if (this.duration == Duration.EndOfTurn)
-			return "Target " + source.getTargets().get(0).getTargetName() + " attacks this turn if able";
-		else
-			return "Target " + source.getTargets().get(0).getTargetName() + " attacks each turn if able";
+	public UUID mustBlockAttacker(Ability source, Game game) {
+		return null;
 	}
 
 }

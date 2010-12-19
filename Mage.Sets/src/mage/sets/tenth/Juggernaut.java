@@ -30,11 +30,12 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.EvasionAbilityImpl;
+import mage.abilities.EvasionAbility;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
-import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.effects.common.CantBlockSourceEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -72,17 +73,14 @@ public class Juggernaut extends CardImpl<Juggernaut> {
 
 }
 
-class JuggernautAbility extends EvasionAbilityImpl<JuggernautAbility> {
+class JuggernautAbility extends EvasionAbility<JuggernautAbility> {
 
-	public JuggernautAbility() {}
+	public JuggernautAbility() {
+		this.addEffect(new JuggernautEffect());
+	}
 
 	public JuggernautAbility(final JuggernautAbility ability) {
 		super(ability);
-	}
-
-	@Override
-	public boolean canBlock(Permanent blocker, Game game) {
-		return !blocker.getSubtype().contains("Wall");
 	}
 
 	@Override
@@ -93,6 +91,28 @@ class JuggernautAbility extends EvasionAbilityImpl<JuggernautAbility> {
 	@Override
 	public JuggernautAbility copy() {
 		return new JuggernautAbility(this);
+	}
+
+}
+
+class JuggernautEffect extends CantBlockSourceEffect {
+
+	public JuggernautEffect() {
+		super(Duration.WhileOnBattlefield);
+	}
+
+	public JuggernautEffect(final JuggernautEffect effect) {
+		super(effect);
+	}
+
+	@Override
+	public boolean canBlock(Permanent blocker, Game game) {
+		return !blocker.getSubtype().contains("Wall");
+	}
+
+	@Override
+	public JuggernautEffect copy() {
+		return new JuggernautEffect(this);
 	}
 
 }

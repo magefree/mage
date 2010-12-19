@@ -60,7 +60,7 @@ public class HarborSerpent extends CardImpl<HarborSerpent> {
 		this.power = new MageInt(5);
 		this.toughness = new MageInt(5);
 
-		this.addAbility(IslandwalkAbility.getInstance());
+		this.addAbility(new IslandwalkAbility());
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HarborSerpentEffect()));
 	}
 

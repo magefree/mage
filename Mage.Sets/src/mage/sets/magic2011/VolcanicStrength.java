@@ -114,7 +114,7 @@ class VolcanicStrengthEffect extends ContinuousEffectImpl<VolcanicStrengthEffect
 						break;
 					case AbilityAddingRemovingEffects_6:
 						if (sublayer == SubLayer.NA) {
-							creature.addAbility(MountainwalkAbility.getInstance());
+							creature.addAbility(new MountainwalkAbility());
 						}
 						break;
 				}

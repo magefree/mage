@@ -29,15 +29,9 @@
 package mage.abilities.common;
 
 import mage.Constants.Duration;
-import mage.Constants.Outcome;
 import mage.Constants.Zone;
-import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
-import mage.abilities.effects.RequirementAttackEffect;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetDefender;
+import mage.abilities.effects.common.AttacksIfAbleSourceEffect;
 
 /**
  *
@@ -46,7 +40,7 @@ import mage.target.common.TargetDefender;
 public class AttacksEachTurnStaticAbility extends StaticAbility<AttacksEachTurnStaticAbility> {
 
 	public AttacksEachTurnStaticAbility() {
-		super(Zone.BATTLEFIELD, new AttacksEachTurnEffect());
+		super(Zone.BATTLEFIELD, new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield));
 	}
 
 	public AttacksEachTurnStaticAbility(AttacksEachTurnStaticAbility ability) {
@@ -58,42 +52,4 @@ public class AttacksEachTurnStaticAbility extends StaticAbility<AttacksEachTurnS
 		return new AttacksEachTurnStaticAbility(this);
 	}
 	
-}
-
-class AttacksEachTurnEffect extends RequirementAttackEffect<AttacksEachTurnEffect> {
-
-	public AttacksEachTurnEffect() {
-		super(Duration.WhileOnBattlefield);
-	}
-
-	public AttacksEachTurnEffect(final AttacksEachTurnEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent creature = game.getPermanent(source.getSourceId());
-		if (creature != null) {
-			if (creature.canAttack(game)) {
-				TargetDefender target = new TargetDefender(game.getCombat().getDefenders(), creature.getControllerId());
-				target.setRequired(true);
-				Player controller = game.getPlayer(creature.getControllerId());
-				while (!target.isChosen())
-					controller.chooseTarget(Outcome.Damage, target, source, game);
-				game.getCombat().declareAttacker(creature.getId(), target.getFirstTarget(), game);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "{this} attacks each turn if able.";
-	}
-
-	@Override
-	public AttacksEachTurnEffect copy() {
-		return new AttacksEachTurnEffect(this);
-	}
 }

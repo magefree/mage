@@ -145,4 +145,9 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
 		}
 	}
 
+	@Override
+	public boolean isInactive(Ability source, Game game) {
+		return false;
+	}
+
 }

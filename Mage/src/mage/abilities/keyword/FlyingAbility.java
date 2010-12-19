@@ -29,7 +29,10 @@
 package mage.abilities.keyword;
 
 import java.io.ObjectStreamException;
-import mage.abilities.EvasionAbilityImpl;
+import mage.Constants.Duration;
+import mage.abilities.Ability;
+import mage.abilities.EvasionAbility;
+import mage.abilities.effects.RestrictionEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -37,7 +40,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FlyingAbility extends EvasionAbilityImpl<FlyingAbility> {
+public class FlyingAbility extends EvasionAbility<FlyingAbility> {
 
 	private static final FlyingAbility fINSTANCE =  new FlyingAbility();
 
@@ -49,13 +52,8 @@ public class FlyingAbility extends EvasionAbilityImpl<FlyingAbility> {
 		return fINSTANCE;
 	}
 
-	private FlyingAbility() {}
-
-	@Override
-	public boolean canBlock(Permanent blocker, Game game) {
-		if (blocker.getAbilities().containsKey(id) || blocker.getAbilities().containsKey(ReachAbility.getInstance().getId()))
-			return true;
-		return false;
+	private FlyingAbility() {
+		this.addEffect(new FlyingEffect());
 	}
 
 	@Override
@@ -66,6 +64,38 @@ public class FlyingAbility extends EvasionAbilityImpl<FlyingAbility> {
 	@Override
 	public FlyingAbility copy() {
 		return fINSTANCE;
+	}
+
+}
+
+class FlyingEffect extends RestrictionEffect<FlyingEffect> {
+
+	public FlyingEffect() {
+		super(Duration.WhileOnBattlefield);
+	}
+
+	public FlyingEffect(final FlyingEffect effect) {
+		super(effect);
+	}
+
+	@Override
+	public boolean applies(Permanent permanent, Ability source, Game game) {
+		if (permanent.getAbilities().containsKey(FlyingAbility.getInstance().getId())) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean canBlock(Permanent blocker, Game game) {
+		if (blocker.getAbilities().containsKey(FlyingAbility.getInstance().getId()) || blocker.getAbilities().containsKey(ReachAbility.getInstance().getId()))
+			return true;
+		return false;
+	}
+
+	@Override
+	public FlyingEffect copy() {
+		return new FlyingEffect(this);
 	}
 
 }

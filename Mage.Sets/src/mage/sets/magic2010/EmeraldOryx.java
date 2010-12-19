@@ -48,7 +48,7 @@ public class EmeraldOryx extends CardImpl<EmeraldOryx> {
         this.subtype.add("Antelope");
         this.power = new MageInt(2);
 	this.toughness = new MageInt(3);
-        this.addAbility(ForestwalkAbility.getInstance());
+        this.addAbility(new ForestwalkAbility());
     }
 
     public EmeraldOryx(final EmeraldOryx card) {

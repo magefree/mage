@@ -49,7 +49,7 @@ public class GoblinMountaineer extends CardImpl<GoblinMountaineer> {
         this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(MountainwalkAbility.getInstance());
+        this.addAbility(new MountainwalkAbility());
     }
 
     public GoblinMountaineer (final GoblinMountaineer card) {

@@ -146,7 +146,9 @@ public final class Constants {
 		REPLACEMENT("Replacement Effect"),
 		PREVENTION("Prevention Effect"),
 		REDIRECTION("Redirection Effect"),
-		ASTHOUGH("As Though Effect");
+		ASTHOUGH("As Though Effect"), 
+		RESTRICTION("Restriction Effect"),
+		REQUIREMENT("Requirement Effect");
 
 		private String text;
 
@@ -176,7 +178,8 @@ public final class Constants {
 		WhileOnBattlefield(""),
 		WhileOnStack(""),
 		EndOfTurn("until end of turn"),
-		EndOfCombat("until end of combat");
+		EndOfCombat("until end of combat"),
+		Custom("");
 
 		private String text;
 

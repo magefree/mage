@@ -34,13 +34,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import mage.Constants.Outcome;
+import mage.abilities.effects.RequirementEffect;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.filter.common.FilterCreatureForAttack;
+import mage.filter.common.FilterCreatureForCombat;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.players.PlayerList;
+import mage.target.common.TargetDefender;
 import mage.util.Copyable;
 
 
@@ -51,6 +56,8 @@ import mage.util.Copyable;
 public class Combat implements Serializable, Copyable<Combat> {
 
 	private static FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
+	private static FilterCreatureForAttack filterAttackers = new FilterCreatureForAttack();
+	private static FilterCreatureForCombat filterBlockers = new FilterCreatureForCombat();
 
 	protected List<CombatGroup> groups = new ArrayList<CombatGroup>();
 	protected Set<UUID> defenders = new HashSet<UUID>();
@@ -113,17 +120,67 @@ public class Combat implements Serializable, Copyable<Combat> {
 
 	public void selectAttackers(Game game) {
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackerId, attackerId))) {
-			game.getPlayer(attackerId).selectAttackers(game);
+			Player player = game.getPlayer(attackerId);
+			//20101001 - 508.1d
+			checkAttackRequirements(player, game);
+			player.selectAttackers(game);
 			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackerId, attackerId));
-			game.fireInformEvent(game.getPlayer(attackerId).getName() + " attacks with " + groups.size() + " creatures");
+			game.fireInformEvent(player.getName() + " attacks with " + groups.size() + " creatures");
+		}
+	}
+
+	protected void checkAttackRequirements(Player player, Game game) {
+		//20101001 - 508.1d
+		for (Permanent creature: game.getBattlefield().getAllActivePermanents(filterAttackers, player.getId())) {
+			for (RequirementEffect effect: game.getContinuousEffects().getApplicableRequirementEffects(creature, game)) {
+				if (effect.mustAttack(game)) {
+					UUID defenderId = effect.mustAttackDefender(game.getContinuousEffects().getAbility(effect.getId()), game);
+					if (defenderId == null) {
+						if (defenders.size() == 1) {
+							player.declareAttacker(creature.getId(), defenders.iterator().next(), game);
+						}
+						else {
+							TargetDefender target = new TargetDefender(defenders, creature.getId());
+							target.setRequired(true);
+							if (player.chooseTarget(Outcome.Damage, target, null, game)) {
+								player.declareAttacker(creature.getId(), target.getFirstTarget(), game);
+							}
+						}
+					}
+					else {
+						player.declareAttacker(creature.getId(), defenderId, game);
+					}
+				}
+			}
 		}
 	}
 
 	public void selectBlockers(Game game) {
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, attackerId, attackerId))) {
+			Player player = game.getPlayer(attackerId);
+			//20101001 - 509.1c
+			checkBlockRequirements(player, game);
 			for (UUID defenderId: getPlayerDefenders(game)) {
 				game.getPlayer(defenderId).selectBlockers(game);
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
+			}
+		}
+	}
+
+	protected void checkBlockRequirements(Player player, Game game) {
+		//20101001 - 509.1c
+		//TODO: handle case where more than one attacker must be blocked
+		for (Permanent creature: game.getBattlefield().getActivePermanents(filterBlockers, player.getId(), game)) {
+			if (game.getOpponents(attackerId).contains(creature.getControllerId())) {
+				for (RequirementEffect effect: game.getContinuousEffects().getApplicableRequirementEffects(creature, game)) {
+					if (effect.mustBlock(game)) {
+						UUID attackId = effect.mustBlockAttacker(game.getContinuousEffects().getAbility(effect.getId()), game);
+						Player defender = game.getPlayer(creature.getControllerId());
+						if (attackId != null && defender != null) {
+							defender.declareBlocker(creature.getId(), attackId, game);
+						}
+					}
+				}
 			}
 		}
 	}

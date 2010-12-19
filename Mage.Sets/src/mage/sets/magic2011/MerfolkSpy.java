@@ -58,7 +58,7 @@ public class MerfolkSpy extends CardImpl<MerfolkSpy> {
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
 
-		this.addAbility(IslandwalkAbility.getInstance());
+		this.addAbility(new IslandwalkAbility());
 		this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MerfolkSpyEffect(), false));
 	}
 

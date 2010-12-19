@@ -38,20 +38,23 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class MountainwalkAbility extends LandwalkAbility {
 
-	private static final MountainwalkAbility fINSTANCE =  new MountainwalkAbility();
+	private static FilterLandPermanent filter = new FilterLandPermanent("Mountain");
 
-	private Object readResolve() throws ObjectStreamException {
-		return fINSTANCE;
-	}
-
-	public static MountainwalkAbility getInstance() {
-		return fINSTANCE;
-	}
-
-	private MountainwalkAbility() {
-		filter = new FilterLandPermanent("Mountain");
+	static {
 		filter.getSubtype().add("Mountain");
 		filter.setScopeSubtype(ComparisonScope.Any);
 	}
 
+	public MountainwalkAbility() {
+		super(filter);
+	}
+
+	public MountainwalkAbility(final MountainwalkAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public MountainwalkAbility copy() {
+		return new MountainwalkAbility(this);
+	}
 }
