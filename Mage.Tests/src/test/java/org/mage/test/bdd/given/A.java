@@ -2,6 +2,7 @@ package org.mage.test.bdd.given;
 
 import org.mage.test.base.MageAPI;
 import org.mage.test.base.MageBase;
+import org.mage.test.base.exception.CardNotFoundException;
 import org.mage.test.bdd.StepController;
 import org.mage.test.bdd.StepState;
 
@@ -14,11 +15,11 @@ public class A {
         StepState current = MageAPI.defineStep(this.step);
         if (current.equals(StepState.GIVEN)) {
             if (!MageBase.getInstance().giveme(cardName)) {
-                throw new IllegalStateException("Couldn't create card: " + cardName);
+                throw new CardNotFoundException("Couldn't create card: " + cardName);
             }
         } else if (current.equals(StepState.THEN)) {
             if (!MageBase.getInstance().checkIhave(cardName)) {
-                throw new IllegalStateException("Couldn't find requested card in hand: " + cardName);
+                throw new CardNotFoundException("Couldn't find requested card in hand: " + cardName);
             }
         }
     }

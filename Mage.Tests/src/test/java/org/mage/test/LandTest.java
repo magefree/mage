@@ -19,17 +19,4 @@ public class LandTest extends MageAPI {
         Then.battlefield.has("Mountain");
         And.graveyards.empty();
     }
-
-    /*@Test
-    public void testLightningHelix() throws Exception {
-        Given.I.have.a.card("Lightning Helix");
-        And.battlefield.has("Mountain","Plains");
-        And.phase.is("End of Turn", ai);
-        And.lifes(20,20);
-        When.I.play("Lightning Helix");
-        Then.my.life(23);
-        And.ai.life(17);
-        And.my.graveyard.has("Lightning Helix");
-        And.ai.graveyard.empty();
-    }*/
 }
