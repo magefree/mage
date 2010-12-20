@@ -16,6 +16,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -54,6 +55,7 @@ public class MageBase {
     private static GameView gameView;
     private static String phaseToWait;
     private static Object sync = new Object();
+    private static Object syncStart = new Object();
 
     public void start() throws Exception {
         if (server == null) {
@@ -70,6 +72,16 @@ public class MageBase {
             server.joinTable(sessionId, roomId, table.getTableId(), "Human", Sets.loadDeck("UW Control.dck"));
             server.joinTable(sessionId, roomId, table.getTableId(), "Computer", Sets.loadDeck("UW Control.dck"));
             server.startGame(sessionId, roomId, table.getTableId());
+
+            synchronized (syncStart) {
+                int waitTime = 7000;
+                Date prev = new Date();
+                syncStart.wait(waitTime);
+                Date intermediate = new Date();
+                if (intermediate.getTime() - prev.getTime() > waitTime - 500) {
+                    throw new IllegalStateException("Couldn't start server");
+                }
+            }
         }
     }
 
@@ -96,6 +108,9 @@ public class MageBase {
                             logger.info("ASK >> " + message.getMessage());
                             if (message.getMessage().equals("Do you want to take a mulligan?")) {
                                 server.sendPlayerBoolean(gameId, sessionId, false);
+                            }
+                            synchronized (syncStart) {
+                                syncStart.notify();
                             }
 			            } else if (callback.getMethod().equals("gameTarget")) {
                             GameClientMessage message = (GameClientMessage) callback.getData();
@@ -176,8 +191,8 @@ public class MageBase {
     }
 
 
-    public void giveme(String cardName) throws Exception {
-        server.cheat(gameId, sessionId, playerId, cardName);
+    public boolean giveme(String cardName) throws Exception {
+        return server.cheat(gameId, sessionId, playerId, cardName);
     }
 
     public boolean checkIhave(String cardName) throws Exception {

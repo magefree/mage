@@ -56,6 +56,7 @@ import mage.server.game.ReplayManager;
 import mage.server.game.TableManager;
 import mage.server.util.ThreadExecutor;
 import mage.util.Logging;
+import mage.view.CardView;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.GameView;
 import mage.view.TableView;
@@ -617,21 +618,12 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
     @Override
-	public void cheat(final UUID gameId, final UUID sessionId, final UUID playerId, final String cardName) throws MageException {
-		try {
-			rmiExecutor.execute(
-				new Runnable() {
-					@Override
-					public void run() {
-						if (testMode)
-							GameManager.getInstance().cheat(gameId, sessionId, playerId, cardName);
-					}
-				}
-			);
-		}
-		catch (Exception ex) {
-			handleException(ex);
-		}
+	public boolean cheat(final UUID gameId, final UUID sessionId, final UUID playerId, final String cardName) throws MageException {
+        if (testMode) {
+            return GameManager.getInstance().cheat(gameId, sessionId, playerId, cardName);
+        } else {
+            return false;
+        }
 	}
 
 	public void handleException(Exception ex) throws MageException {

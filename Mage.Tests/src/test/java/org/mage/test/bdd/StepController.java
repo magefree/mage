@@ -15,5 +15,5 @@ package org.mage.test.bdd;
  *
  */
 public class StepController {
-    public static StepState currentState = StepState.NONE;
+    public static StepState currentState = StepState.UNKNOWN;
 }

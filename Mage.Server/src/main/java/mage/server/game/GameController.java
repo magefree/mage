@@ -235,14 +235,17 @@ public class GameController implements GameCallback {
 		updateGame();
 	}
 
-    public void cheat(UUID sessionId, UUID playerId, String cardName) {
+    public boolean cheat(UUID sessionId, UUID playerId, String cardName) {
         String clazz = Sets.findCard(cardName);
         if (clazz != null) {
             Card card = CardImpl.createCard(clazz);
             Set<Card> cards = new HashSet<Card>();
 			cards.add(card);
             game.loadCards(cards, playerId);
-            updateGame();
+            card.moveToZone(Zone.HAND, null, game, false);
+            return true;
+        } else {
+            return false;
         }
 	}
 

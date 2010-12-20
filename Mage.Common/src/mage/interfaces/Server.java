@@ -95,6 +95,6 @@ public interface Server extends Remote, CallbackServer {
 
 	//test methods
 	public void cheat(UUID gameId, UUID sessionId, UUID playerId, DeckCardLists deckList) throws RemoteException, MageException;
-    public void cheat(UUID gameId, UUID sessionId, UUID playerId, String cardName) throws RemoteException, MageException;
+    public boolean cheat(UUID gameId, UUID sessionId, UUID playerId, String cardName) throws RemoteException, MageException;
     public GameView getGameView(UUID gameId, UUID sessionId, UUID playerId) throws RemoteException, MageException;
 }

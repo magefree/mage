@@ -113,8 +113,8 @@ public class GameManager {
 		gameControllers.get(gameId).cheat(sessionId, playerId, deckList);
 	}
 
-    public void cheat(UUID gameId, UUID sessionId, UUID playerId, String cardName) {
-		gameControllers.get(gameId).cheat(sessionId, playerId, cardName);
+    public boolean cheat(UUID gameId, UUID sessionId, UUID playerId, String cardName) {
+		return gameControllers.get(gameId).cheat(sessionId, playerId, cardName);
 	}
 
 	void timeout(UUID gameId, UUID sessionId) {

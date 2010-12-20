@@ -13,11 +13,10 @@ public class LandTest extends MageAPI {
 
     @Test
     public void testPlayingLandInMainPhase() throws Exception {
-        //TODO: add test framework callback for synchronization and removing Thread.sleep calls
-        Given.I.have.a.card("Island");
+        Given.I.have.a.card("Mountain");
         And.phase.is("Precombat Main", mine);
-        When.I.play("Island");
-        Then.battlefield.has("Island");
+        When.I.play("Mountain");
+        Then.battlefield.has("Mountain");
         And.graveyards.empty();
     }
 

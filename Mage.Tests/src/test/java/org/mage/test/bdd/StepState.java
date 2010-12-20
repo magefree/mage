@@ -4,5 +4,5 @@ public enum StepState {
         GIVEN,
         WHEN,
         THEN,
-        NONE
+        UNKNOWN
 }
