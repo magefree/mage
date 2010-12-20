@@ -26,59 +26,50 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.game;
 
-import mage.Constants.Outcome;
-import mage.Constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.cards.decks.Deck;
 import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEffect> {
+public class MatchPlayer {
+	private int wins;
+	private int loses;
+	private Deck deck;
+	private Player player;
 
-	public ReturnToHandTargetEffect() {
-		super(Outcome.ReturnToHand);
+	public MatchPlayer(Player player, Deck deck) {
+		this.player = player;
+		this.deck = deck;
+		this.wins = 0;
+		this.loses = 0;
 	}
 
-	public ReturnToHandTargetEffect(final ReturnToHandTargetEffect effect) {
-		super(effect);
+	public int getWins() {
+		return wins;
 	}
 
-	@Override
-	public ReturnToHandTargetEffect copy() {
-		return new ReturnToHandTargetEffect(this);
+	public void addWin() {
+		this.wins++;
 	}
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		switch (source.getTargets().get(0).getZone()) {
-			case BATTLEFIELD:
-				Permanent permanent = game.getPermanent(source.getFirstTarget());
-				if (permanent != null) {
-					return permanent.moveToZone(Zone.HAND, source.getId(), game, false);
-				}
-				break;
-			case GRAVEYARD:
-				Card card = game.getCard(source.getFirstTarget());
-				if (card != null) {
-					return card.moveToZone(Zone.HAND, source.getId(), game, true);
-				}
-				break;
-		}
-		return false;
+	public int getLoses() {
+		return loses;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Return target " + source.getTargets().get(0).getTargetName() + " to it's owner's hand";
-
+	public void addLose() {
+		this.loses++;
 	}
-	
+
+	public Deck getDeck() {
+		return deck;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
 }

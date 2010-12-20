@@ -26,59 +26,37 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.game;
 
-import mage.Constants.Outcome;
-import mage.Constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEffect> {
+public class Match {
 
-	public ReturnToHandTargetEffect() {
-		super(Outcome.ReturnToHand);
+	protected List<MatchPlayer> players = new ArrayList<MatchPlayer>();
+	protected List<Game> games = new ArrayList<Game>();
+	protected int winsNeeded;
+	
+	public Match(int winsNeeded) {
+		this.winsNeeded = winsNeeded;
 	}
 
-	public ReturnToHandTargetEffect(final ReturnToHandTargetEffect effect) {
-		super(effect);
+	public void playDuel() {
+
 	}
 
-	@Override
-	public ReturnToHandTargetEffect copy() {
-		return new ReturnToHandTargetEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		switch (source.getTargets().get(0).getZone()) {
-			case BATTLEFIELD:
-				Permanent permanent = game.getPermanent(source.getFirstTarget());
-				if (permanent != null) {
-					return permanent.moveToZone(Zone.HAND, source.getId(), game, false);
-				}
-				break;
-			case GRAVEYARD:
-				Card card = game.getCard(source.getFirstTarget());
-				if (card != null) {
-					return card.moveToZone(Zone.HAND, source.getId(), game, true);
-				}
-				break;
+	public boolean isMatchOver() {
+		for (MatchPlayer player: players) {
+			if (player.getWins() >= winsNeeded) {
+				return true;
+			}
 		}
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Return target " + source.getTargets().get(0).getTargetName() + " to it's owner's hand";
 
-	}
-	
 }
