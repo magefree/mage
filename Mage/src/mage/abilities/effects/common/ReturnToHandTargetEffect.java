@@ -64,15 +64,13 @@ public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEf
 				if (permanent != null) {
 					return permanent.moveToZone(Zone.HAND, source.getId(), game, false);
 				}
+				break;
 			case GRAVEYARD:
 				Card card = game.getCard(source.getFirstTarget());
-				for (Player player: game.getPlayers().values()) {
-					if (player.getGraveyard().contains(card.getId())) {
-						player.getHand().add(card);
-						player.getGraveyard().remove(card);
-						return true;
-					}
+				if (card != null) {
+					return card.moveToZone(Zone.HAND, source.getId(), game, true);
 				}
+				break;
 		}
 		return false;
 	}
@@ -82,4 +80,5 @@ public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEf
 		return "Return target " + source.getTargets().get(0).getTargetName() + " to it's owner's hand";
 
 	}
+	
 }

@@ -28,6 +28,7 @@
 
 package mage.target.common;
 
+import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.filter.Filter.ComparisonScope;
 import mage.target.TargetCard;
@@ -42,7 +43,7 @@ public class TargetBasicLandCard extends TargetCard<TargetBasicLandCard> {
 		super(zone);
 		filter.getSupertype().add("Basic");
 		filter.setScopeSupertype(ComparisonScope.Any);
-		filter.getCardType().add("Land");
+		filter.getCardType().add(CardType.LAND);
 		filter.setScopeCardType(ComparisonScope.Any);
 	}
 

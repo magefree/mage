@@ -26,44 +26,50 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.game;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.mana.GreenManaAbility;
-import mage.cards.CardImpl;
-import mage.game.permanent.token.PlantToken;
+import mage.cards.decks.Deck;
+import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class KhalniGarden extends CardImpl<KhalniGarden> {
+public class MatchPlayer {
+	private int wins;
+	private int loses;
+	private Deck deck;
+	private Player player;
 
-	public KhalniGarden(UUID ownerId) {
-		super(ownerId, 138, "Khalni Garden", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
-		this.expansionSetCode = "WWK";
-		this.addAbility(new EntersBattlefieldTappedAbility());
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PlantToken()), false));
-		this.addAbility(new GreenManaAbility());
+	public MatchPlayer(Player player, Deck deck) {
+		this.player = player;
+		this.deck = deck;
+		this.wins = 0;
+		this.loses = 0;
 	}
 
-	public KhalniGarden(final KhalniGarden card) {
-		super(card);
+	public int getWins() {
+		return wins;
 	}
 
-	@Override
-	public KhalniGarden copy() {
-		return new KhalniGarden(this);
+	public void addWin() {
+		this.wins++;
 	}
 
-	@Override
-	public String getArt() {
-		return "123552_typ_reg_sty_010.jpg";
+	public int getLoses() {
+		return loses;
+	}
+
+	public void addLose() {
+		this.loses++;
+	}
+
+	public Deck getDeck() {
+		return deck;
+	}
+
+	public Player getPlayer() {
+		return player;
 	}
 
 }
