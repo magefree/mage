@@ -60,6 +60,8 @@ public class Sets extends HashMap<String, ExpansionSet> {
 		names = new TreeSet<String>();
 		this.addSet(AlaraReborn.getInstance());
 		this.addSet(Conflux.getInstance());
+        this.addSet(Dissension.getInstance());
+        this.addSet(Guildpact.getInstance());
 		this.addSet(Magic2010.getInstance());
 		this.addSet(Magic2011.getInstance());
 		this.addSet(Planechase.getInstance());
