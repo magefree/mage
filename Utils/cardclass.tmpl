@@ -42,14 +42,13 @@ import mage.cards.CardImpl;
 public class [=$classname=] extends CardImpl<[=$classname=]> {
 
     public [=$classname=] (UUID ownerId) {
-        super(ownerId, [=$collector=], "[=$name=]", Rarity.[=$rarity=], new CardType[]{}, "[=$manacost=]");
+        super(ownerId, [=$collector=], "[=$name=]", Rarity.[=$rarity=], new CardType[]{[=$type=]}, "[=$manacost=]");
         this.expansionSetCode = "[=$setcode=]";
         this.subtype.add("");[= $colors=]        
         [=if (defined($power)) {
-         $OUT .= "this.power = new MageInt($power);"; 
-        }=]
-        [=if (defined($toughness)) {
-         $OUT .= "this.toughness = new MageInt($toughness);";
+         $OUT .= "this.power = new MageInt($power);\n"; 
+        }=][=if (defined($toughness)) {
+         $OUT .= "      this.toughness = new MageInt($toughness);";
         }=]
     }
 

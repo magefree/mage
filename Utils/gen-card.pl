@@ -217,6 +217,8 @@ $knownSets{'10E'} = 'tenth';
 $knownSets{'WWK'} = 'worldwake';
 $knownSets{'ZEN'} = 'zendikar';
 $knownSets{'SOM'} = 'scarsofmirrodin';
+$knownSets{'GPT'} = 'guildpact';
+$knownSets{'DIS'} = 'dissension';
 
 my %raritiesConversion;
 $raritiesConversion{'C'} = 'COMMON';
@@ -238,11 +240,11 @@ $mana{'Black or Red'} = 'B\\\\R';
 $mana{'Red or Green'} = 'R\\\\G';
 
 my %manatocolor;
-$manatocolor{'Black'} = "		creature.color.setBlack(true);";
-$manatocolor{'Blue'} = "		creature.color.setBlue(true);"; 
-$manatocolor{'Green'} = "		creature.color.setGreen(true);";
-$manatocolor{'Red'} = "		creature.color.setRed(true);";
-$manatocolor{'White'} = "		creature.color.setWhite(true);";
+$manatocolor{'Black'} = "		this.color.setBlack(true);";
+$manatocolor{'Blue'} = "		this.color.setBlue(true);";
+$manatocolor{'Green'} = "		this.color.setGreen(true);";
+$manatocolor{'Red'} = "		this.color.setRed(true);";
+$manatocolor{'White'} = "		this.color.setWhite(true);";
 
 my %normalid;
 
