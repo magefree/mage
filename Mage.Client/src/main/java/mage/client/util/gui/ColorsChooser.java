@@ -39,6 +39,18 @@ public class ColorsChooser extends JComboBox implements ListCellRenderer {
 		model.addElement("gr");
 		model.addElement("gw");
 		model.addElement("rw");
+
+		model.addElement("bur");
+        model.addElement("buw");
+        model.addElement("bug");
+        model.addElement("brg");
+        model.addElement("brw");
+        model.addElement("bgw");
+        model.addElement("wur");
+        model.addElement("wug");
+        model.addElement("wrg");
+        model.addElement("rgu");
+
 		setModel(model);
 		setSelectedItem(colors);
 		this.setFocusable(false);
