@@ -556,7 +556,7 @@ public class MageFrame extends javax.swing.JFrame {
         g.fillRect(120,140,200,40);
         g.setPaintMode();
         g.setColor(Color.white);
-        g.drawString("Version 0.5", 560, 460);
+        g.drawString("Version 0.5.1", 560, 460);
     }
 	
     /**
