@@ -37,10 +37,7 @@ package mage.client.deckeditor;
 import java.awt.Cursor;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import javax.swing.DefaultComboBoxModel;
 import mage.Constants.CardType;
 import mage.cards.Card;
@@ -75,7 +72,14 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
 	public void loadCards(BigCard bigCard) {
 		this.bigCard = bigCard;
-		cbExpansionSet.setModel(new DefaultComboBoxModel(Sets.getInstance().values().toArray()));
+		Object[] l = Sets.getInstance().values().toArray();
+		Arrays.sort(l, new Comparator<Object>() {
+		    @Override
+		    public int compare(Object o1, Object o2) {
+		        return ((ExpansionSet)o1).getName().compareTo(((ExpansionSet)o2).getName());
+		    }
+		});
+		cbExpansionSet.setModel(new DefaultComboBoxModel(l));
 //		cbExpansionSet.insertItemAt("All sets", 0);
 		cbExpansionSet.setSelectedIndex(0);
 		filter.setUseColor(true);
