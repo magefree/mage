@@ -53,7 +53,7 @@ public class StompingGround extends CardImpl<StompingGround> {
         this.subtype.add("Forest");
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());
-        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Stomping Ground enters the battlefield, you may pay 2 life. If you don't, Stomping Ground enters the battlefield tapped."));
+        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Stomping Ground enters the battlefield, you may pay 2 life. If you don't, Stomping Ground enters the battlefield tapped"));
     }
 
     public StompingGround (final StompingGround card) {

@@ -53,7 +53,7 @@ public class BreedingPool extends CardImpl<BreedingPool> {
         this.subtype.add("Island");
         this.addAbility(new GreenManaAbility());
         this.addAbility(new BlueManaAbility());
-        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Breeding Pool enters the battlefield, you may pay 2 life. If you don't, Breeding Pool enters the battlefield tapped."));
+        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Breeding Pool enters the battlefield, you may pay 2 life. If you don't, Breeding Pool enters the battlefield tapped"));
     }
 
     public BreedingPool (final BreedingPool card) {

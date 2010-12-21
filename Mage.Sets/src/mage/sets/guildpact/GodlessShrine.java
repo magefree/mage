@@ -53,7 +53,7 @@ public class GodlessShrine extends CardImpl<GodlessShrine> {
         this.subtype.add("Swamp");
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlackManaAbility());
-        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Godless Shrine enters the battlefield, you may pay 2 life. If you don't, Godless Shrine enters the battlefield tapped."));
+        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Godless Shrine enters the battlefield, you may pay 2 life. If you don't, Godless Shrine enters the battlefield tapped"));
     }
 
     public GodlessShrine (final GodlessShrine card) {

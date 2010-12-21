@@ -51,7 +51,7 @@ public class WateryGrave extends CardImpl<WateryGrave> {
 		this.subtype.add("Swamp");
 		this.addAbility(new BlueManaAbility());
 		this.addAbility(new BlackManaAbility());
-		this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Watery Grave enters the battlefield, you may pay 2 life. If you don't, Watery Grave enters the battlefield tapped."));
+		this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Watery Grave enters the battlefield, you may pay 2 life. If you don't, Watery Grave enters the battlefield tapped"));
 	}
 
 	public WateryGrave(final WateryGrave card) {

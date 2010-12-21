@@ -53,7 +53,7 @@ public class HallowedFountain extends CardImpl<HallowedFountain> {
         this.subtype.add("Island");
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlueManaAbility());
-        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Hallowed Fountain enters the battlefield, you may pay 2 life. If you don't, Hallowed Fountain enters the battlefield tapped."));
+        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Hallowed Fountain enters the battlefield, you may pay 2 life. If you don't, Hallowed Fountain enters the battlefield tapped"));
     }
 
     public HallowedFountain (final HallowedFountain card) {

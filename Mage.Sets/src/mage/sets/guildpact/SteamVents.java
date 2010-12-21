@@ -53,7 +53,7 @@ public class SteamVents extends CardImpl<SteamVents> {
         this.subtype.add("Mountain");
         this.addAbility(new BlueManaAbility());
         this.addAbility(new RedManaAbility());
-        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Steam Vents enters the battlefield, you may pay 2 life. If you don't, Steam Vents enters the battlefield tapped."));
+        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Steam Vents enters the battlefield, you may pay 2 life. If you don't, Steam Vents enters the battlefield tapped"));
     }
 
     public SteamVents (final SteamVents card) {

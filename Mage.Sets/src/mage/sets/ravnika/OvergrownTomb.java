@@ -53,7 +53,7 @@ public class OvergrownTomb extends CardImpl<OvergrownTomb> {
         this.subtype.add("Forest");
         this.addAbility(new BlackManaAbility());
         this.addAbility(new GreenManaAbility());
-        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Overgrown Tomb enters the battlefield, you may pay 2 life. If you don't, Overgrown Tomb enters the battlefield tapped."));
+        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Overgrown Tomb enters the battlefield, you may pay 2 life. If you don't, Overgrown Tomb enters the battlefield tapped"));
     }
 
     public OvergrownTomb (final OvergrownTomb card) {

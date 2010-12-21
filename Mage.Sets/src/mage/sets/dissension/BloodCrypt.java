@@ -53,7 +53,7 @@ public class BloodCrypt extends CardImpl<BloodCrypt> {
         this.subtype.add("Mountain");
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());
-        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Blood Crypt enters the battlefield, you may pay 2 life. If you don't, Blood Crypt enters the battlefield tapped."));
+        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Blood Crypt enters the battlefield, you may pay 2 life. If you don't, Blood Crypt enters the battlefield tapped"));
     }
 
     public BloodCrypt (final BloodCrypt card) {
