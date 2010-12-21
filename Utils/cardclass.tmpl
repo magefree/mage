@@ -44,7 +44,7 @@ public class [=$classname=] extends CardImpl<[=$classname=]> {
     public [=$classname=] (UUID ownerId) {
         super(ownerId, [=$collector=], "[=$name=]", Rarity.[=$rarity=], new CardType[]{[=$type=]}, "[=$manacost=]");
         this.expansionSetCode = "[=$setcode=]";
-		[=$subtype=]
+[=$subtype=]
         [=$colors=]        
         [=if (defined($power)) {
          $OUT .= "this.power = new MageInt($power);\n"; 
