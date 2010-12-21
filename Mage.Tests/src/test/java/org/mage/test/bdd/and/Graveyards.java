@@ -19,7 +19,7 @@ public class Graveyards {
             Assert.assertThat(empty, is(true));
             return empty;
         } else {
-            throw new AssertionError("Graveyards are not empty.");
+            throw new AssertionError("Not implemented for step="+current);
         }
     }
 }

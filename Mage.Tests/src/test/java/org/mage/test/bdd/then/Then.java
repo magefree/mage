@@ -4,6 +4,6 @@ import org.mage.test.bdd.StepState;
 import org.mage.test.bdd.and.Graveyards;
 
 public class Then {
-    public static Battlefield battlefield = new Battlefield();
+    public static Battlefield battlefield = new Battlefield(StepState.THEN);
     public static Graveyards graveyards = new Graveyards(StepState.THEN);
 }
