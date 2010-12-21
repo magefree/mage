@@ -72,8 +72,9 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 		else
 			loadCardsMany(showCards, bigCard, dimension, gameId);
 		cardArea.revalidate();
-		if (getParent() != MageFrame.getDesktop() || this.isClosed)
-			MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
+		if (getParent() != MageFrame.getDesktop() /*|| this.isClosed*/) {
+			MageFrame.getDesktop().add(this, JLayeredPane.POPUP_LAYER);
+		}
 		pack();
 		this.revalidate();
 		this.repaint();
