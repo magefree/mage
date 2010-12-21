@@ -15,6 +15,7 @@ import mage.cards.action.ActionCallback;
 import mage.cards.action.TransferData;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
+import mage.client.components.MageComponents;
 import mage.client.game.PlayAreaPanel;
 import mage.client.plugins.impl.Plugins;
 import mage.client.remote.Session;
@@ -68,32 +69,31 @@ public class MageActionCallback implements ActionCallback {
 
 	@Override
 	public void mouseEntered(MouseEvent e, final TransferData data) {
-		this.popupCard = data.card;
-		if (popup != null) {
-			//DelayedViewerThread.getInstance().hide(data.popupText);
-			popup.hide();
-		}
-		
+		hidePopup();
+        this.popupCard = data.card;
+
+        Component parentComponent = SwingUtilities.getRoot(data.component);
+        Point parentPoint = parentComponent.getLocationOnScreen();
+
 		// Draw Arrows for targets
 		List<UUID> targets = data.card.getTargets();
 		if (targets != null) {
-			Point parent = SwingUtilities.getRoot(data.component).getLocationOnScreen();
 			Point me = new Point(data.locationOnScreen);
-			me.translate(-parent.x, -parent.y);
+			me.translate(-parentPoint.x, -parentPoint.y);
 			for (UUID uuid : targets) {
 				//System.out.println("Getting play area panel for uuid: " + uuid);
 				
 				PlayAreaPanel p = session.getGame().getPlayers().get(uuid);
 				if (p != null) {
 					Point target = p.getLocationOnScreen();
-					target.translate(-parent.x, -parent.y);
+					target.translate(-parentPoint.x, -parentPoint.y);
 					ArrowBuilder.addArrow((int)me.getX() + 35, (int)me.getY(), (int)target.getX() + 40, (int)target.getY() - 40, Color.red);
 				} else {
 					for (PlayAreaPanel pa : session.getGame().getPlayers().values()) {
 						MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
 						if (permanent != null) {
 							Point target = permanent.getLocationOnScreen();
-							target.translate(-parent.x, -parent.y);
+							target.translate(-parentPoint.x, -parentPoint.y);
 							ArrowBuilder.addArrow((int)me.getX() + 35, (int)me.getY(), (int)target.getX() + 40, (int)target.getY() + 10, Color.red);
 						}
 					}
@@ -103,33 +103,23 @@ public class MageActionCallback implements ActionCallback {
 		
 		// Draw Arrows for source
 		if (data.card.isAbility()) {
-			Point parent = SwingUtilities.getRoot(data.component).getLocationOnScreen();
 			Point me = new Point(data.locationOnScreen);
-			me.translate(-parent.x, -parent.y);
+			me.translate(-parentPoint.x, -parentPoint.y);
 			UUID uuid = data.card.getParentId();
 			for (PlayAreaPanel pa : session.getGame().getPlayers().values()) {
 				MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
 				if (permanent != null) {
 					Point source = permanent.getLocationOnScreen();
-					source.translate(-parent.x, -parent.y);
+					source.translate(-parentPoint.x, -parentPoint.y);
 					ArrowBuilder.addArrow((int)source.getX() + 40, (int)source.getY() + 10, (int)me.getX() + 35, (int)me.getY() + 20, Color.blue);
 				}
 			}
 		}
 		
-		showPopup(data);
+		showPopup(data, parentComponent, parentPoint);
 	}
 
-	private void showPopup(final TransferData data) {
-		/*try {
-			((JDesktopPane)session.getUI().getComponent(MageComponents.DESKTOP_PANE)).add(data.popupText, JLayeredPane.POPUP_LAYER);
-			data.popupText.setBounds((int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40, 200, 200);
-			data.popupText.setText("Test");
-			DelayedViewerThread.getInstance().show((Component)data.popupText, 500);
-		} catch (InterruptedException ie) {
-			ie.printStackTrace();
-		}*/
-
+	private void showPopup(final TransferData data, final Component parentComponent, final Point parentPoint) {
         if (cardInfoPane == null) {
             PopupFactory factory = PopupFactory.getSharedInstance();
             popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
@@ -146,20 +136,31 @@ public class MageActionCallback implements ActionCallback {
                       ThreadUtils.threadPool2.submit(new Runnable() {
                         @Override
                         public void run() {
-                            try {
-                                Thread.sleep(900);
-                            } catch (InterruptedException ie) {
-                                ie.printStackTrace();
-                            }
+                            ThreadUtils.sleep(900);
+
                             if (!popupCard.equals(data.card)) {
                                 return;
                             }
-                            PopupFactory factory = PopupFactory.getSharedInstance();
+
+                            /*PopupFactory factory = PopupFactory.getSharedInstance();
                             ((CardInfoPane)cardInfoPane).setCard(data.card);
                             cardInfoPane.setSize(161, 221);
                             cardInfoPane.setPreferredSize(new Dimension(161, 221));
                             popup = factory.getPopup(data.component, cardInfoPane, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
                             popup.show();
+                            */
+
+                            try {
+                                Component popup2 = session.getUI().getComponent(MageComponents.CARD_INFO_PANE);
+                                ((CardInfoPane)popup2).setCard(data.card);
+                                Point location = new Point((int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);
+                                location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, popup2, parentComponent);
+                                location.translate(-parentPoint.x, -parentPoint.y);
+                                popup2.setLocation(location);
+                                popup2.setVisible(true);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                       });
                 }
@@ -198,16 +199,25 @@ public class MageActionCallback implements ActionCallback {
 		}
 	}
 
-	@Override
-	public void mouseExited(MouseEvent e, final TransferData data) {
-		this.popupCard = null;
-		//DelayedViewerThread.getInstance().hide(data.popupText);
-		if (popup != null) {
-			popup.hide();
-		}
+    private void hidePopup() {
+        this.popupCard = null;
+        if (popup != null) {
+            popup.hide();
+        }
         if (jPopupMenu != null) {
             jPopupMenu.setVisible(false);
         }
+        try {
+            Component popup2 = session.getUI().getComponent(MageComponents.CARD_INFO_PANE);
+            popup2.setVisible(false);
+        } catch (Exception e2) {
+            e2.printStackTrace();;
+        }
+    }
+
+	@Override
+	public void mouseExited(MouseEvent e, final TransferData data) {
+        hidePopup();
 		ArrowBuilder.removeAllArrows();
 	}
 

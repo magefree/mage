@@ -34,12 +34,7 @@
 
 package mage.client;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.SplashScreen;
+import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
@@ -148,7 +143,14 @@ public class MageFrame extends javax.swing.JFrame {
 		combat.hideDialog();
 		desktopPane.add(pickNumber, JLayeredPane.POPUP_LAYER);
 		session.getUI().addComponent(MageComponents.DESKTOP_PANE, desktopPane);
-		
+
+        JComponent cardInfoPane = Plugins.getInstance().getCardInfoPane();
+        cardInfoPane.setSize(161, 221);
+        cardInfoPane.setPreferredSize(new Dimension(161, 221));
+        cardInfoPane.setVisible(false);
+        session.getUI().addComponent(MageComponents.CARD_INFO_PANE, cardInfoPane);
+        desktopPane.add(cardInfoPane, JLayeredPane.POPUP_LAYER);
+
 		String filename = "/background.jpg";
 		try {
 			if (Plugins.getInstance().isThemePluginLoaded()) {

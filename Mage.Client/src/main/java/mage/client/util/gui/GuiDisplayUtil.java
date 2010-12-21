@@ -1,11 +1,6 @@
 package mage.client.util.gui;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GraphicsConfiguration;
-import java.awt.Insets;
+import java.awt.*;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -19,6 +14,7 @@ import org.jdesktop.swingx.JXPanel;
 
 public class GuiDisplayUtil {
 	private static final Font cardNameFont = new Font("Calibri", Font.BOLD, 15);
+    private static Insets DEFAULT_INSETS = new Insets(0,0, 68, 15);
 	
     public static JXPanel getDescription(CardView card, int width, int height) {
     	JXPanel descriptionPanel = new JXPanel();
@@ -128,5 +124,19 @@ public class GuiDisplayUtil {
 		} else {
 			System.out.println("null");
 		}
+	}
+
+    public static Point keepComponentInsideParent(Point l, Point parentPoint, Component c, Component parent) {
+        int dx = parentPoint.x + parent.getWidth() - DEFAULT_INSETS.right;
+        if (l.x + c.getWidth() > dx) {
+            l.x = dx - c.getWidth();
+        }
+
+        int dy = parentPoint.y + parent.getHeight() - DEFAULT_INSETS.bottom;
+        if (l.y + c.getHeight() > dy) {
+            l.y = Math.max(10, dy - c.getHeight());
+        }
+
+        return l;
 	}
 }
