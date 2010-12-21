@@ -246,6 +246,12 @@ $manatocolor{'Green'} = "		this.color.setGreen(true);";
 $manatocolor{'Red'} = "		this.color.setRed(true);";
 $manatocolor{'White'} = "		this.color.setWhite(true);";
 
+my %cardtypes;
+$cardtypes{'Artifact'} = "CardType.ARTIFACT";
+$cardtypes{'Creature'} = "CardType.CREATURE";
+$cardtypes{'Instant'} = "CardType.INSTANT";
+$cardtypes{'Sorcery'} = "CardType.SORCERY";
+
 my %normalid;
 
 print "Enter a card name: ";
@@ -295,15 +301,28 @@ foreach my $div (@divs) {
 	    }
 	}
 	if ($id =~m/typeRow/) {
+	    my $typestring = "";
+	    my $subtype = "";
 	    foreach my $sub ($div->look_down('_tag', 'div')) {
 			if (defined($sub->attr('class')) && $sub->attr('class') eq 'value') {
 		    	my $type = $sub->as_text();
 		    	chomp $type;
 		    	while ( $type =~ m/([a-zA-z]+)( )*/g ) {
 		        	push @types, $1;
+		        	if (exists($cardtypes{$1})) {
+                        if (length($typestring) > 0) {
+                            $typestring .= ", " . $cardtypes{$1};
+                        } else {
+                            $typestring = $cardtypes{$1};
+                        }
+		        	} else {
+						$subtype .= "        this.subtype.add(\"$1\");\n";
+					}
 		    	}
 			}
 	    }
+	    $vars{'type'} = $typestring;
+		$vars{'subtype'} = $subtype;
 	}
 	if ($id =~m/manaRow/) {
 	    my $findedcolors;
