@@ -108,7 +108,7 @@ public class MageFrame extends javax.swing.JFrame {
     /** Creates new form MageFrame */
     public MageFrame() {
 
-    	setTitle("Mage, version 0.5");
+    	setTitle("Mage, version 0.5.1");
     	
 		EDTExceptionHandler.registerExceptionHandler();
 		addWindowListener(new WindowAdapter()

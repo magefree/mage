@@ -6,9 +6,5 @@
 # nickname - Player's name you connect to the game with
 #
 #
-hand:player:Fiery Fall:1
-hand:player:Constricting Tendrils:1
-battlefield:player:Mountain:5
-battlefield:player:Island:5
-battlefield:computer:Bloodbraid Elf:1
+graveyard:player:Plains:1
 
