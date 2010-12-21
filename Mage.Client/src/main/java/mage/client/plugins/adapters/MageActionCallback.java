@@ -136,7 +136,7 @@ public class MageActionCallback implements ActionCallback {
                       ThreadUtils.threadPool2.submit(new Runnable() {
                         @Override
                         public void run() {
-                            ThreadUtils.sleep(900);
+                            ThreadUtils.sleep(700);
 
                             if (!popupCard.equals(data.card)) {
                                 return;
@@ -157,6 +157,7 @@ public class MageActionCallback implements ActionCallback {
                                 location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, popup2, parentComponent);
                                 location.translate(-parentPoint.x, -parentPoint.y);
                                 popup2.setLocation(location);
+                                ThreadUtils.sleep(200);
                                 popup2.setVisible(true);
                             } catch (Exception e) {
                                 e.printStackTrace();
