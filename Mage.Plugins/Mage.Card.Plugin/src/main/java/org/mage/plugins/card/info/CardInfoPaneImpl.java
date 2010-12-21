@@ -103,8 +103,9 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 				    legal = legal.replace("\r\n", "<div style='font-size:5pt'></div>");
 					legal += "<br>";
 					for (String ruling : rulings) {
+                        legal += "<p style='margin: 2px'>";
 						legal += ruling;
-						legal += "<br><br>";
+						legal += "</p>";
 					}
 				}
 
@@ -136,7 +137,7 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 					public void run () {
 						if (!card.equals(currentCard)) return;
 						setText(buffer.toString());
-                        //System.out.println(buffer.toString());
+                        System.out.println(buffer.toString());
 						setCaretPosition(0);
 					}
 				});
