@@ -137,7 +137,7 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 					public void run () {
 						if (!card.equals(currentCard)) return;
 						setText(buffer.toString());
-                        System.out.println(buffer.toString());
+                        //System.out.println(buffer.toString());
 						setCaretPosition(0);
 					}
 				});
