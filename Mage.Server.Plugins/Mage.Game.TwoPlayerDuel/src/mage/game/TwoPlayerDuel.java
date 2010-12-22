@@ -61,15 +61,6 @@ public class TwoPlayerDuel extends GameImpl<TwoPlayerDuel> {
 		return 20;
 	}
 
-//	@Override
-//	public boolean playDrawStep(UUID activePlayerId) {
-//		//20091005 - 103.7a
-//		if (getTurnNum() != 1 || !activePlayerId.equals(startingPlayerId)) {
-//			return super.playDrawStep(activePlayerId);
-//		}
-//		return false;
-//	}
-
 	@Override
 	public void init() {
 		super.init();
