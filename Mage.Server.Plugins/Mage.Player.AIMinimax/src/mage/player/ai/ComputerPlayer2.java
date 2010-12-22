@@ -620,9 +620,11 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		logger.fine("selectBlockers");
 		if (combat != null && combat.getGroups().size() > 0) {
 			List<CombatGroup> groups = game.getCombat().getGroups();
-			for (int i = 0; i< groups.size(); i++) {
-				for (UUID blockerId: combat.getGroups().get(i).getBlockers()) {
-					this.declareBlocker(blockerId, groups.get(i).getAttackers().get(0), game);
+			for (int i = 0; i < groups.size(); i++) {
+				if (i < combat.getGroups().size()) {
+					for (UUID blockerId: combat.getGroups().get(i).getBlockers()) {
+						this.declareBlocker(blockerId, groups.get(i).getAttackers().get(0), game);
+					}
 				}
 			}
 		}

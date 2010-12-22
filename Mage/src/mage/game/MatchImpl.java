@@ -28,6 +28,7 @@
 
 package mage.game;
 
+import java.util.ArrayList;
 import java.util.List;
 import mage.cards.decks.Deck;
 import mage.players.Player;
@@ -36,13 +37,52 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface Match {
+public class MatchImpl implements Match {
 
-	public boolean isMatchOver();
-	public List<MatchPlayer> getPlayers();
-	public void addPlayer(Player player, Deck deck);
-	public int getMaxPlayers();
-	public int getMinPlayers();
-	public void startMatch();
+	protected List<MatchPlayer> players = new ArrayList<MatchPlayer>();
+	protected List<Game> games = new ArrayList<Game>();
+	protected int winsNeeded;
+	protected int maxPlayers;
+	protected int minPlayers;
 	
+	public MatchImpl(int winsNeeded) {
+		this.winsNeeded = winsNeeded;
+	}
+
+	@Override
+	public List<MatchPlayer> getPlayers() {
+		return players;
+	}
+
+	@Override
+	public void addPlayer(Player player, Deck deck) {
+		MatchPlayer mPlayer = new MatchPlayer(player, deck);
+		players.add(mPlayer);
+	}
+
+	@Override
+	public void startMatch() {
+
+	}
+
+	@Override
+	public boolean isMatchOver() {
+		for (MatchPlayer player: players) {
+			if (player.getWins() >= winsNeeded) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public int getMaxPlayers() {
+		return this.maxPlayers;
+	}
+
+	@Override
+	public int getMinPlayers() {
+		return this.minPlayers;
+	}
+
 }
