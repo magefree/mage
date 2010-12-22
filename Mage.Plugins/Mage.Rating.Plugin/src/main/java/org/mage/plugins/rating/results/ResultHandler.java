@@ -85,16 +85,15 @@ public class ResultHandler {
 			String line = s.nextLine();
 			Matcher m = scorePattern.matcher(line);
 			if (m.matches()) {
-				String winner = m.group(1);
-				String loser = m.group(2);
+				String winner = m.group(1);String loser = m.group(2);
 				Integer winnerRating = ratings.get(winner);
 				if (winnerRating == null)
 					winnerRating = 1000;
 				Integer loserRating = ratings.get(loser);
 				if (loserRating == null)
 					loserRating = 1000;
-				Integer newWinnerRating = coundEloRating(winnerRating, loserRating, true);
-				Integer newLoserRating = coundEloRating(loserRating, winnerRating, false);
+				Integer newWinnerRating = countEloRating(winnerRating, loserRating, true);
+				Integer newLoserRating = countEloRating(loserRating, winnerRating, false);
 				log.info("Winner(" + winner + "): " + winnerRating + " >> " + newWinnerRating);
 				log.info("Loser(" + loser + "): " + loserRating + " >> " + newLoserRating);
 				ratings.put(winner, newWinnerRating);
@@ -113,7 +112,7 @@ public class ResultHandler {
 	 * @param rb
 	 * @return
 	 */
-	private Integer coundEloRating(Integer ra, Integer rb, boolean firstWon) {
+	private Integer countEloRating(Integer ra, Integer rb, boolean firstWon) {
 		double d = (rb - ra) / 400.0;
 		double expected = 1.0d / (1 + Math.pow(10, d));
 		double actual = firstWon ? 1 : 0;
