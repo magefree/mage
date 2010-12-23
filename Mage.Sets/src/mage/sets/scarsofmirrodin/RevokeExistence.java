@@ -30,8 +30,11 @@ package mage.sets.scarsofmirrodin;
 
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.FilterPermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -39,23 +42,30 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class RazorfieldThresher extends CardImpl<RazorfieldThresher> {
+public class RevokeExistence extends CardImpl<RevokeExistence> {
+    private static FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
-    public RazorfieldThresher (UUID ownerId) {
-        super(ownerId, 197, "Razorfield Thresher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Construct");
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(4);
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.setScopeCardType(ComparisonScope.Any);
     }
 
-    public RazorfieldThresher (final RazorfieldThresher card) {
+    public RevokeExistence (UUID ownerId) {
+        super(ownerId, 18, "Revoke Existence", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
+        this.expansionSetCode = "SOM";
+		this.color.setWhite(true);
+        this.getSpellAbility().addEffect(new ExileTargetEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+    }
+
+    public RevokeExistence (final RevokeExistence card) {
         super(card);
     }
 
     @Override
-    public RazorfieldThresher copy() {
-        return new RazorfieldThresher(this);
+    public RevokeExistence copy() {
+        return new RevokeExistence(this);
     }
 
 }

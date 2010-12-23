@@ -28,7 +28,6 @@
 
 package mage.sets.scarsofmirrodin;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -39,6 +38,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+
+import java.util.UUID;
 
 /**
  *

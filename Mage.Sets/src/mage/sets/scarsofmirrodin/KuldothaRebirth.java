@@ -28,11 +28,8 @@
 
 package mage.sets.scarsofmirrodin;
 
-import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -42,6 +39,8 @@ import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *

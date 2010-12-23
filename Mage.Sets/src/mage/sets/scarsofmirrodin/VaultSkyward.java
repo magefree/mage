@@ -28,34 +28,39 @@
 
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.cards.CardImpl;
-
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Rarity;
+import mage.Constants.Zone;
+import mage.abilities.effects.common.GainAbilityTargetEffect;
+import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class RazorfieldThresher extends CardImpl<RazorfieldThresher> {
+public class VaultSkyward extends CardImpl<VaultSkyward> {
 
-    public RazorfieldThresher (UUID ownerId) {
-        super(ownerId, 197, "Razorfield Thresher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
+    public VaultSkyward (UUID ownerId) {
+        super(ownerId, 51, "Vault Skyward", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Construct");
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(4);
+		this.color.setBlue(true);
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new UntapTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public RazorfieldThresher (final RazorfieldThresher card) {
+    public VaultSkyward (final VaultSkyward card) {
         super(card);
     }
 
     @Override
-    public RazorfieldThresher copy() {
-        return new RazorfieldThresher(this);
+    public VaultSkyward copy() {
+        return new VaultSkyward(this);
     }
 
 }

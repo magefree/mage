@@ -28,34 +28,55 @@
 
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.cards.CardImpl;
-
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Rarity;
+import mage.Constants.Zone;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.BoostSourceEffect;
+import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author Loki
  */
-public class RazorfieldThresher extends CardImpl<RazorfieldThresher> {
+public class Ferrovore extends CardImpl<Ferrovore> {
+     private static FilterControlledPermanent filter = new FilterControlledPermanent("artifact");
 
-    public RazorfieldThresher (UUID ownerId) {
-        super(ownerId, 197, "Razorfield Thresher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Construct");
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(4);
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public RazorfieldThresher (final RazorfieldThresher card) {
+    public Ferrovore (UUID ownerId) {
+        super(ownerId, 88, "Ferrovore", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Beast");
+        
+		this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        this.addAbility(ability);
+    }
+
+    public Ferrovore (final Ferrovore card) {
         super(card);
     }
 
     @Override
-    public RazorfieldThresher copy() {
-        return new RazorfieldThresher(this);
+    public Ferrovore copy() {
+        return new Ferrovore(this);
     }
 
 }

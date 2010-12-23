@@ -28,7 +28,6 @@
 
 package mage.sets.scarsofmirrodin;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -40,6 +39,8 @@ import mage.abilities.effects.common.AddCountersSourceEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *

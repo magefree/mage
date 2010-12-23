@@ -31,6 +31,8 @@ package mage.sets.scarsofmirrodin;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 
 import java.util.UUID;
@@ -39,23 +41,24 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class RazorfieldThresher extends CardImpl<RazorfieldThresher> {
+public class DarkslickDrake extends CardImpl<DarkslickDrake> {
 
-    public RazorfieldThresher (UUID ownerId) {
-        super(ownerId, 197, "Razorfield Thresher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
+    public DarkslickDrake (UUID ownerId) {
+        super(ownerId, 30, "Darkslick Drake", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Construct");
-        this.power = new MageInt(6);
+        this.subtype.add("Drake");
+		this.color.setBlue(true);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(4);
+        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DrawCardControllerEffect(1), false));
     }
 
-    public RazorfieldThresher (final RazorfieldThresher card) {
+    public DarkslickDrake (final DarkslickDrake card) {
         super(card);
     }
 
     @Override
-    public RazorfieldThresher copy() {
-        return new RazorfieldThresher(this);
+    public DarkslickDrake copy() {
+        return new DarkslickDrake(this);
     }
-
 }

@@ -39,23 +39,25 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class RazorfieldThresher extends CardImpl<RazorfieldThresher> {
+public class LoxodonWayfarer extends CardImpl<LoxodonWayfarer> {
 
-    public RazorfieldThresher (UUID ownerId) {
-        super(ownerId, 197, "Razorfield Thresher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
+    public LoxodonWayfarer (UUID ownerId) {
+        super(ownerId, 15, "Loxodon Wayfarer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Construct");
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(4);
+        this.subtype.add("Elephant");
+        this.subtype.add("Monk");
+		this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(5);
     }
 
-    public RazorfieldThresher (final RazorfieldThresher card) {
+    public LoxodonWayfarer (final LoxodonWayfarer card) {
         super(card);
     }
 
     @Override
-    public RazorfieldThresher copy() {
-        return new RazorfieldThresher(this);
+    public LoxodonWayfarer copy() {
+        return new LoxodonWayfarer(this);
     }
 
 }

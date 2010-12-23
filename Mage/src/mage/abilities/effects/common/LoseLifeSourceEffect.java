@@ -26,51 +26,55 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.abilities.effects.common;
 
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.Constants.Outcome;
 import mage.abilities.Ability;
-import mage.abilities.costs.common.MetalcraftCost;
-import mage.abilities.mana.*;
-import mage.cards.CardImpl;
-
-import java.util.UUID;
+import mage.abilities.effects.OneShotEffect;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MoxOpal extends CardImpl<MoxOpal> {
+public class LoseLifeSourceEffect extends OneShotEffect<LoseLifeSourceEffect> {
 
-	public MoxOpal(UUID ownerId) {
-		super(ownerId, 179, "Mox Opal", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{0}");
-		this.supertype.add("Legendary");
-		this.expansionSetCode = "SOM";
-		Ability ability1 = new WhiteManaAbility();
-		ability1.addCost(new MetalcraftCost());
-		this.addAbility(ability1);
-		Ability ability2 = new RedManaAbility();
-		ability2.addCost(new MetalcraftCost());
-		this.addAbility(ability2);
-		Ability ability3 = new BlueManaAbility();
-		ability3.addCost(new MetalcraftCost());
-		this.addAbility(ability3);
-		Ability ability4 = new BlackManaAbility();
-		ability4.addCost(new MetalcraftCost());
-		this.addAbility(ability4);
-		Ability ability5 = new GreenManaAbility();
-		ability5.addCost(new MetalcraftCost());
-		this.addAbility(ability5);
+	protected int amount;
+
+	public LoseLifeSourceEffect(int amount) {
+		super(Outcome.Damage);
+		this.amount = amount;
 	}
 
-	public MoxOpal(final MoxOpal card) {
-		super(card);
+	public int getAmount() {
+		return amount;
+	}
+
+	public LoseLifeSourceEffect(final LoseLifeSourceEffect effect) {
+		super(effect);
+		this.amount = effect.amount;
 	}
 
 	@Override
-	public MoxOpal copy() {
-		return new MoxOpal(this);
+	public LoseLifeSourceEffect copy() {
+		return new LoseLifeSourceEffect(this);
 	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+		if (player != null) {
+			player.loseLife(amount, game);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public String getText(Ability source) {
+		return "You lose " + Integer.toString(amount) + " life";
+	}
+
 
 }

@@ -28,34 +28,37 @@
 
 package mage.sets.scarsofmirrodin;
 
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.LoseLifeSourceEffect;
 import mage.cards.CardImpl;
-
-import java.util.UUID;
 
 /**
  *
  * @author Loki
  */
-public class RazorfieldThresher extends CardImpl<RazorfieldThresher> {
+public class NecrogenScudder extends CardImpl<NecrogenScudder> {
 
-    public RazorfieldThresher (UUID ownerId) {
-        super(ownerId, 197, "Razorfield Thresher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
+    public NecrogenScudder (UUID ownerId) {
+        super(ownerId, 71, "Necrogen Scudder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Construct");
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(4);
+        this.subtype.add("Horror");
+		this.color.setBlack(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeSourceEffect(3)));
     }
 
-    public RazorfieldThresher (final RazorfieldThresher card) {
+    public NecrogenScudder (final NecrogenScudder card) {
         super(card);
     }
 
     @Override
-    public RazorfieldThresher copy() {
-        return new RazorfieldThresher(this);
+    public NecrogenScudder copy() {
+        return new NecrogenScudder(this);
     }
 
 }

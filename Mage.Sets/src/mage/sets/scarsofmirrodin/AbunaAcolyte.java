@@ -29,7 +29,6 @@
 package mage.sets.scarsofmirrodin;
 
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -44,6 +43,8 @@ import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 
 /**

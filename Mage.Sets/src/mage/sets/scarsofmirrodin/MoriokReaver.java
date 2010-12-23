@@ -28,34 +28,35 @@
 
 package mage.sets.scarsofmirrodin;
 
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
 
-import java.util.UUID;
-
 /**
  *
  * @author Loki
  */
-public class RazorfieldThresher extends CardImpl<RazorfieldThresher> {
+public class MoriokReaver extends CardImpl<MoriokReaver> {
 
-    public RazorfieldThresher (UUID ownerId) {
-        super(ownerId, 197, "Razorfield Thresher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
+    public MoriokReaver (UUID ownerId) {
+        super(ownerId, 70, "Moriok Reaver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Construct");
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(4);
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
+		this.color.setBlack(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
     }
 
-    public RazorfieldThresher (final RazorfieldThresher card) {
+    public MoriokReaver (final MoriokReaver card) {
         super(card);
     }
 
     @Override
-    public RazorfieldThresher copy() {
-        return new RazorfieldThresher(this);
+    public MoriokReaver copy() {
+        return new MoriokReaver(this);
     }
 
 }

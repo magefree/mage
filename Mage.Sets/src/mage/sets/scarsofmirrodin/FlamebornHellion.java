@@ -28,34 +28,39 @@
 
 package mage.sets.scarsofmirrodin;
 
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-
-import java.util.UUID;
 
 /**
  *
  * @author Loki
  */
-public class RazorfieldThresher extends CardImpl<RazorfieldThresher> {
+public class FlamebornHellion extends CardImpl<FlamebornHellion> {
 
-    public RazorfieldThresher (UUID ownerId) {
-        super(ownerId, 197, "Razorfield Thresher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
+    public FlamebornHellion (UUID ownerId) {
+        super(ownerId, 89, "Flameborn Hellion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Construct");
-        this.power = new MageInt(6);
+        this.subtype.add("Hellion");
+        
+		this.color.setRed(true);
+        this.power = new MageInt(5);
         this.toughness = new MageInt(4);
+        this.addAbility(HasteAbility.getInstance());
+        this.addAbility(new AttacksEachTurnStaticAbility());
     }
 
-    public RazorfieldThresher (final RazorfieldThresher card) {
+    public FlamebornHellion (final FlamebornHellion card) {
         super(card);
     }
 
     @Override
-    public RazorfieldThresher copy() {
-        return new RazorfieldThresher(this);
+    public FlamebornHellion copy() {
+        return new FlamebornHellion(this);
     }
 
 }

@@ -30,7 +30,7 @@ package mage.sets.scarsofmirrodin;
 
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 
 import java.util.UUID;
@@ -39,23 +39,22 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class RazorfieldThresher extends CardImpl<RazorfieldThresher> {
+public class WhitesunsPassage extends CardImpl<WhitesunsPassage> {
 
-    public RazorfieldThresher (UUID ownerId) {
-        super(ownerId, 197, "Razorfield Thresher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
+    public WhitesunsPassage (UUID ownerId) {
+        super(ownerId, 27, "Whitesun's Passage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Construct");
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(4);
+		this.color.setWhite(true);
+        this.getSpellAbility().addEffect(new GainLifeEffect(5));
     }
 
-    public RazorfieldThresher (final RazorfieldThresher card) {
+    public WhitesunsPassage (final WhitesunsPassage card) {
         super(card);
     }
 
     @Override
-    public RazorfieldThresher copy() {
-        return new RazorfieldThresher(this);
+    public WhitesunsPassage copy() {
+        return new WhitesunsPassage(this);
     }
 
 }

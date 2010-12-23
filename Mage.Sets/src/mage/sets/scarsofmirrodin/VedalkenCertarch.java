@@ -30,8 +30,16 @@ package mage.sets.scarsofmirrodin;
 
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.MetalcraftActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.FilterPermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -39,23 +47,36 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class RazorfieldThresher extends CardImpl<RazorfieldThresher> {
+public class VedalkenCertarch extends CardImpl<VedalkenCertarch> {
+    private static FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
 
-    public RazorfieldThresher (UUID ownerId) {
-        super(ownerId, 197, "Razorfield Thresher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Construct");
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(4);
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.getCardType().add(CardType.CREATURE);
+        filter.getCardType().add(CardType.LAND);
+        filter.setScopeCardType(ComparisonScope.Any);
     }
 
-    public RazorfieldThresher (final RazorfieldThresher card) {
+    public VedalkenCertarch (UUID ownerId) {
+        super(ownerId, 52, "Vedalken Certarch", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Vedalken");
+        this.subtype.add("Wizard");
+		this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        Ability ability = new MetalcraftActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public VedalkenCertarch (final VedalkenCertarch card) {
         super(card);
     }
 
     @Override
-    public RazorfieldThresher copy() {
-        return new RazorfieldThresher(this);
+    public VedalkenCertarch copy() {
+        return new VedalkenCertarch(this);
     }
 
 }

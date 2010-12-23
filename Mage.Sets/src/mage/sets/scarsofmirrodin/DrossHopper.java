@@ -28,34 +28,46 @@
 
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.cards.CardImpl;
-
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Rarity;
+import mage.Constants.Zone;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.GainAbilitySourceEffect;
+import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class RazorfieldThresher extends CardImpl<RazorfieldThresher> {
+public class DrossHopper extends CardImpl<DrossHopper> {
 
-    public RazorfieldThresher (UUID ownerId) {
-        super(ownerId, 197, "Razorfield Thresher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
+    public DrossHopper (UUID ownerId) {
+        super(ownerId, 60, "Dross Hopper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Construct");
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(4);
+        this.subtype.add("Insect");
+        this.subtype.add("Horror");
+		this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
     }
 
-    public RazorfieldThresher (final RazorfieldThresher card) {
+    public DrossHopper (final DrossHopper card) {
         super(card);
     }
 
     @Override
-    public RazorfieldThresher copy() {
-        return new RazorfieldThresher(this);
+    public DrossHopper copy() {
+        return new DrossHopper(this);
     }
 
 }

@@ -29,9 +29,13 @@
 package mage.sets.scarsofmirrodin;
 
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.MageInt;
+import mage.abilities.effects.common.BoostTargetEffect;
+import mage.abilities.effects.common.GainAbilityTargetEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -39,23 +43,24 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class RazorfieldThresher extends CardImpl<RazorfieldThresher> {
+public class SeizetheInitiative extends CardImpl<SeizetheInitiative> {
 
-    public RazorfieldThresher (UUID ownerId) {
-        super(ownerId, 197, "Razorfield Thresher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
+    public SeizetheInitiative (UUID ownerId) {
+        super(ownerId, 20, "Seize the Initiative", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Construct");
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(4);
+		this.color.setWhite(true);
+        this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public RazorfieldThresher (final RazorfieldThresher card) {
+    public SeizetheInitiative (final SeizetheInitiative card) {
         super(card);
     }
 
     @Override
-    public RazorfieldThresher copy() {
-        return new RazorfieldThresher(this);
+    public SeizetheInitiative copy() {
+        return new SeizetheInitiative(this);
     }
 
 }

@@ -28,13 +28,12 @@
 
 package mage.sets.scarsofmirrodin;
 
-import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.cards.CardImpl;
+
+import java.util.UUID;
 
 /**
  *

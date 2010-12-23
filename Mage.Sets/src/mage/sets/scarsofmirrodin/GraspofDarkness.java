@@ -28,34 +28,35 @@
 
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.cards.CardImpl;
-
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.BoostTargetEffect;
+import mage.cards.CardImpl;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class RazorfieldThresher extends CardImpl<RazorfieldThresher> {
+public class GraspofDarkness extends CardImpl<GraspofDarkness> {
 
-    public RazorfieldThresher (UUID ownerId) {
-        super(ownerId, 197, "Razorfield Thresher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
+    public GraspofDarkness (UUID ownerId) {
+        super(ownerId, 65, "Grasp of Darkness", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Construct");
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(4);
+		this.color.setBlack(true);
+        this.getSpellAbility().addEffect(new BoostTargetEffect(-4, -4, Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public RazorfieldThresher (final RazorfieldThresher card) {
+    public GraspofDarkness (final GraspofDarkness card) {
         super(card);
     }
 
     @Override
-    public RazorfieldThresher copy() {
-        return new RazorfieldThresher(this);
+    public GraspofDarkness copy() {
+        return new GraspofDarkness(this);
     }
 
 }

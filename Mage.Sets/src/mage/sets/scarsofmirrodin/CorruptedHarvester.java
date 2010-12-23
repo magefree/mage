@@ -28,34 +28,46 @@
 
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.cards.CardImpl;
-
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Rarity;
+import mage.Constants.Zone;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.cards.CardImpl;
+import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author Loki
  */
-public class RazorfieldThresher extends CardImpl<RazorfieldThresher> {
+public class CorruptedHarvester extends CardImpl<CorruptedHarvester> {
 
-    public RazorfieldThresher (UUID ownerId) {
-        super(ownerId, 197, "Razorfield Thresher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
+    public CorruptedHarvester (UUID ownerId) {
+        super(ownerId, 59, "Corrupted Harvester", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Construct");
+        this.subtype.add("Horror");
+		this.color.setBlack(true);
         this.power = new MageInt(6);
-        this.toughness = new MageInt(4);
+        this.toughness = new MageInt(3);
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}"));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.addAbility(ability);
     }
 
-    public RazorfieldThresher (final RazorfieldThresher card) {
+    public CorruptedHarvester (final CorruptedHarvester card) {
         super(card);
     }
 
     @Override
-    public RazorfieldThresher copy() {
-        return new RazorfieldThresher(this);
+    public CorruptedHarvester copy() {
+        return new CorruptedHarvester(this);
     }
 
 }

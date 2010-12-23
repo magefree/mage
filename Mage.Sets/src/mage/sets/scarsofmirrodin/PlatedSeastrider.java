@@ -39,23 +39,24 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class RazorfieldThresher extends CardImpl<RazorfieldThresher> {
+public class PlatedSeastrider extends CardImpl<PlatedSeastrider> {
 
-    public RazorfieldThresher (UUID ownerId) {
-        super(ownerId, 197, "Razorfield Thresher", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
+    public PlatedSeastrider (UUID ownerId) {
+        super(ownerId, 38, "Plated Seastrider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{U}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Construct");
-        this.power = new MageInt(6);
+        this.subtype.add("Beast");
+		this.color.setBlue(true);
+        this.power = new MageInt(1);
         this.toughness = new MageInt(4);
     }
 
-    public RazorfieldThresher (final RazorfieldThresher card) {
+    public PlatedSeastrider (final PlatedSeastrider card) {
         super(card);
     }
 
     @Override
-    public RazorfieldThresher copy() {
-        return new RazorfieldThresher(this);
+    public PlatedSeastrider copy() {
+        return new PlatedSeastrider(this);
     }
 
 }

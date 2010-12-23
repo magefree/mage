@@ -28,11 +28,8 @@
 
 package mage.sets.scarsofmirrodin;
 
-import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -41,6 +38,8 @@ import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
