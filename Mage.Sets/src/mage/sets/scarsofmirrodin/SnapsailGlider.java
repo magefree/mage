@@ -28,26 +28,20 @@
 
 package mage.sets.scarsofmirrodin;
 
-import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.Metalcraft;
 import mage.abilities.decorator.ConditionalEffect;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -64,7 +58,7 @@ public class SnapsailGlider extends CardImpl<SnapsailGlider> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         ContinuousEffect effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalEffect(effect, Metalcraft.getIntance(), text)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalEffect(effect, Metalcraft.getInstance(), text)));
     }
 
     public SnapsailGlider (final SnapsailGlider card) {

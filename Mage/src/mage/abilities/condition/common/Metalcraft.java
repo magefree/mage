@@ -21,7 +21,7 @@ public class Metalcraft implements Condition {
 
     private static Metalcraft fInstance = new Metalcraft();
 
-    public static Condition getIntance() {
+    public static Condition getInstance() {
         return fInstance;
     }
 
