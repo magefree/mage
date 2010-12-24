@@ -63,7 +63,7 @@ public class ExileFromGraveCost extends CostImpl<ExileFromGraveCost> {
 		if (targets.choose(Outcome.Exile, controllerId, game)) {
 			Player player = game.getPlayer(controllerId);
 			for (UUID targetId: targets.get(0).getTargets()) {
-				Card card = player.getHand().get(targetId, game);
+				Card card = player.getGraveyard().get(targetId, game);
 				if (card == null) {
 					return false;
                 }
