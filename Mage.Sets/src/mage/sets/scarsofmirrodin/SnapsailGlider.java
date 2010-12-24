@@ -38,9 +38,12 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.decorator.ConditionalEffect;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -48,9 +51,11 @@ import mage.game.permanent.Permanent;
 
 /**
  *
- * @author Loki
+ * @author Loki, nantuko
  */
 public class SnapsailGlider extends CardImpl<SnapsailGlider> {
+
+    protected static String text = "Metalcraft - Snapsail Glider has flying as long as you control three or more artifacts";
 
     public SnapsailGlider (UUID ownerId) {
         super(ownerId, 203, "Snapsail Glider", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
@@ -58,7 +63,8 @@ public class SnapsailGlider extends CardImpl<SnapsailGlider> {
         this.subtype.add("Construct");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SnapsailGliderAbility()));
+        ContinuousEffect effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalEffect(effect, Metalcraft.getIntance(), text)));
     }
 
     public SnapsailGlider (final SnapsailGlider card) {
@@ -69,57 +75,4 @@ public class SnapsailGlider extends CardImpl<SnapsailGlider> {
     public SnapsailGlider copy() {
         return new SnapsailGlider(this);
     }
-}
-
-class SnapsailGliderAbility extends ContinuousEffectImpl<SnapsailGliderAbility> {
-
-    private static FilterPermanent filter = new FilterPermanent("artifact");
-
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-	}
-
-    public SnapsailGliderAbility() {
-        super(Duration.WhileOnBattlefield, Constants.Outcome.AddAbility);
-    }
-
-    public SnapsailGliderAbility(final SnapsailGliderAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SnapsailGliderAbility copy() {
-        return new SnapsailGliderAbility(this);
-    }
-
-    @Override
-	public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
-		Permanent card = game.getPermanent(source.getSourceId());
-		if (card != null && game.getBattlefield().countAll(filter, source.getControllerId()) >= 3) {
-			switch (layer) {
-				case AbilityAddingRemovingEffects_6:
-					if (sublayer == Constants.SubLayer.NA) {
-						card.addAbility(FlyingAbility.getInstance());
-					}
-					break;
-			}
-			return true;
-		}
-		return false;
-	}
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-	public boolean hasLayer(Constants.Layer layer) {
-		return layer == Constants.Layer.AbilityAddingRemovingEffects_6;
-	}
-
-    @Override
-	public String getText(Ability source) {
-		return "Metalcraft - Snapsail Glider has flying as long as you control three or more artifacts";
-	}
 }

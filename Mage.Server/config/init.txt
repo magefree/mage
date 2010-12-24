@@ -7,4 +7,7 @@
 #
 #
 graveyard:player:Plains:1
-
+battlefield:player:Snapsail Glider:1
+battlefield:player:Whispersilk Cloak:1
+battlefield:player:Plains:3
+hand:player:Whispersilk Cloak:1

@@ -150,4 +150,12 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
 		return false;
 	}
 
+	public Layer getLayer() {
+		return layer;
+	}
+
+	public SubLayer getSublayer() {
+		return sublayer;
+	}
+
 }

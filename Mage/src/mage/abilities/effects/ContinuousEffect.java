@@ -50,5 +50,6 @@ public interface ContinuousEffect<T extends ContinuousEffect<T>> extends Effect<
 	public boolean hasLayer(Layer layer);
 	public boolean isInactive(Ability source, Game game);
 	public void init(Ability source, Game game);
-	
+	public Layer getLayer();
+	public SubLayer getSublayer();
 }
