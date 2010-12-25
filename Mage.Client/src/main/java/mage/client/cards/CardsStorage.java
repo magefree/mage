@@ -31,7 +31,7 @@ public class CardsStorage {
 			Set<Card> cards = set.createCards();
 			allCards.addAll(cards);
 			for (Card card : cards) {
-				if (CardUtil.isLand(card)) {
+				if (CardUtil.isLand(card) && !CardUtil.isBasicLand(card)) {
 					landCards.add(card);
 				}
 			}
