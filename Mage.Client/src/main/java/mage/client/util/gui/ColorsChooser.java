@@ -1,10 +1,8 @@
 package mage.client.util.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +15,8 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 
+import mage.client.constants.Constants;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.Constants;
 
 public class ColorsChooser extends JComboBox implements ListCellRenderer {
 

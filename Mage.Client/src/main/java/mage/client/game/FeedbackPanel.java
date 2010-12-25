@@ -45,6 +45,7 @@ import java.util.UUID;
 import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import mage.client.MageFrame;
+import mage.client.components.MageTextArea;
 import mage.client.remote.Session;
 import mage.util.Logging;
 
@@ -182,7 +183,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
         btnRight = new javax.swing.JButton();
         btnLeft = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        lblMessage = new javax.swing.JTextArea();
+        //lblMessage = new javax.swing.JTextArea();
+        lblMessage = new MageTextArea();
         btnSpecial = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
@@ -204,14 +206,16 @@ public class FeedbackPanel extends javax.swing.JPanel {
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        lblMessage.setBackground(new java.awt.Color(204, 204, 204));
-        lblMessage.setColumns(20);
+        //lblMessage.setBackground(new java.awt.Color(204, 204, 204));
+        /*lblMessage.setColumns(20);
         lblMessage.setEditable(false);
         lblMessage.setLineWrap(true);
         lblMessage.setRows(2);
-        lblMessage.setWrapStyleWord(true);
+        lblMessage.setWrapStyleWord(true);*/
+
         lblMessage.setBorder(null);
         jScrollPane1.setViewportView(lblMessage);
+        jScrollPane1.setBorder(null);
 
         btnSpecial.setText("Special");
         btnSpecial.addActionListener(new java.awt.event.ActionListener() {
@@ -265,12 +269,10 @@ public class FeedbackPanel extends javax.swing.JPanel {
 	}//GEN-LAST:event_btnSpecialActionPerformed
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLeft;
     private javax.swing.JButton btnRight;
     private javax.swing.JButton btnSpecial;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea lblMessage;
-    // End of variables declaration//GEN-END:variables
-
+    //private javax.swing.JTextArea lblMessage;
+    private MageTextArea lblMessage;
 }

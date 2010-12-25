@@ -66,6 +66,7 @@ import javax.swing.UIManager;
 
 import mage.client.cards.CardsStorage;
 import mage.client.components.MageComponents;
+import mage.client.components.arcane.ManaSymbols;
 import mage.client.dialog.*;
 import mage.client.plugins.impl.Plugins;
 import mage.client.remote.Session;
@@ -150,6 +151,8 @@ public class MageFrame extends javax.swing.JFrame {
         cardInfoPane.setVisible(false);
         session.getUI().addComponent(MageComponents.CARD_INFO_PANE, cardInfoPane);
         desktopPane.add(cardInfoPane, JLayeredPane.POPUP_LAYER);
+
+        ManaSymbols.loadImages();
 
 		String filename = "/background.jpg";
 		try {

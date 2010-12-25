@@ -26,10 +26,11 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.client.util;
+package mage.client.constants;
 
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
+import java.io.File;
 
 /**
  *
@@ -73,4 +74,12 @@ public final class Constants {
 	public static final double SCALE_FACTOR = 0.5;
 	
 	public static final String PLUGINS_DIRECTORY = "plugins/";
+
+    public static final String RESOURCE_PATH_MANA_LARGE = IO.imageBaseDir + "symbols" + File.separator + "large";
+	public static final String RESOURCE_PATH_MANA_MEDIUM = IO.imageBaseDir + "symbols" + File.separator + "medium";
+
+    public interface IO {
+		public static final String imageBaseDir = "plugins" + File.separator + "images" + File.separator;
+		public static final String IMAGE_PROPERTIES_FILE = "image.url.properties";
+	}
 }
