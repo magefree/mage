@@ -62,6 +62,9 @@ public class PhaseManager {
     }
 
     public boolean isSkip(GameView gameView, String message) {
+        if (GameManager.getInstance().getStackSize() > 0) {
+            return false;
+        }
         Map<String, String> map = gameView.getActivePlayerName().equals(DEFAULT_PLAYER_NAME) ? mapYou : mapOthers;
         for (Map.Entry<String, String> entry : map.entrySet()) {
             if (message.equals(entry.getKey())) {

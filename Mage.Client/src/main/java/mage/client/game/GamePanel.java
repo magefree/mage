@@ -59,6 +59,7 @@ import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.impl.Plugins;
 import mage.client.remote.Session;
 import mage.client.util.Config;
+import mage.client.util.GameManager;
 import mage.client.util.PhaseManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.util.Logging;
@@ -303,6 +304,7 @@ public class GamePanel extends javax.swing.JPanel {
 		}
 		
 		this.stack.loadCards(game.getStack(), bigCard, gameId);
+        GameManager.getInstance().setStackSize(game.getStack().size());
 		
 		for (ExileView exile: game.getExile()) {
 			if (!exiles.containsKey(exile.getId())) {
