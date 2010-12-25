@@ -201,6 +201,15 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 		Zone fromZone = game.getZone(objectId);
 		ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, toZone);
 		if (!game.replaceEvent(event)) {
+            if (event.getFromZone() != null) {
+                switch (event.getFromZone()) {
+                    case GRAVEYARD:
+                        game.getPlayer(ownerId).removeFromGraveyard(this, game);
+                        break;
+                    default:
+                        logger.warning("moveToZone, not fully implemented: from="+event.getFromZone() + ", to="+event.getToZone());
+                }
+            }
 			switch (event.getToZone()) {
 				case GRAVEYARD:
 					game.getPlayer(ownerId).putInGraveyard(this, game, !flag);
