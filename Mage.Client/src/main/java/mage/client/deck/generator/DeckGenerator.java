@@ -46,6 +46,8 @@ public class DeckGenerator {
 	private static final int MIN_SOURCE = 16;
 	private static final int MAX_NON_BASIC_SOURCE = DECK_LANDS / 2;
 
+    private static final boolean GENERATE_RANDOM_BASIC_LAND = true;
+
 	private static Deck deck = new Deck();
 	private static String manaSource;
 
@@ -283,19 +285,19 @@ public class DeckGenerator {
 	private static Card getBestBasicLand(ColoredManaSymbol color) {
 		manaSource = color.toString();
 		if (color.equals(ColoredManaSymbol.G)) {
-			return CardImpl.createCard(Sets.findCard("Forest"));
+			return CardImpl.createCard(Sets.findCard("Forest", GENERATE_RANDOM_BASIC_LAND));
 		}
 		if (color.equals(ColoredManaSymbol.R)) {
-			return CardImpl.createCard(Sets.findCard("Mountain"));
+			return CardImpl.createCard(Sets.findCard("Mountain", GENERATE_RANDOM_BASIC_LAND));
 		}
 		if (color.equals(ColoredManaSymbol.B)) {
-			return CardImpl.createCard(Sets.findCard("Swamp"));
+			return CardImpl.createCard(Sets.findCard("Swamp", GENERATE_RANDOM_BASIC_LAND));
 		}
 		if (color.equals(ColoredManaSymbol.U)) {
-			return CardImpl.createCard(Sets.findCard("Island"));
+			return CardImpl.createCard(Sets.findCard("Island", GENERATE_RANDOM_BASIC_LAND));
 		}
 		if (color.equals(ColoredManaSymbol.W)) {
-			return CardImpl.createCard(Sets.findCard("Plains"));
+			return CardImpl.createCard(Sets.findCard("Plains", GENERATE_RANDOM_BASIC_LAND));
 		}
 
 		return null;
