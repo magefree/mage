@@ -343,7 +343,7 @@ public class GameController implements GameCallback {
 
 	private synchronized void target(UUID playerId, String question, Collection<? extends Ability> abilities, boolean required) {
 		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).target(question, new CardsView(abilities, game.getState()), null, required, getGameView(playerId));
+			gameSessions.get(playerId).target(question, new CardsView(abilities, game), null, required, getGameView(playerId));
 		informOthers(playerId);
 	}
 

@@ -31,8 +31,10 @@ package mage.view;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.UUID;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.game.Game;
 import mage.game.GameState;
 
 /**
@@ -56,6 +58,25 @@ public class CardsView extends HashMap<UUID, CardView> {
 //				this.add(new CardView(card));
 //			}
 //	}
+
+	public CardsView ( Collection<? extends Ability> abilities, Game game ) {
+		for ( Ability ability : abilities ) {
+			Card sourceCard = null;
+			String sourceName = null;
+			switch ( ability.getZone() ) {
+				case EXILED:
+				case GRAVEYARD:
+					sourceCard = game.getCard(ability.getSourceId());
+					sourceName = sourceCard.getName();
+					break;
+				case BATTLEFIELD:
+					sourceCard = game.getState().getPermanent(ability.getSourceId());
+					sourceName = sourceCard.getName();
+					break;
+			}
+			this.put(ability.getId(), new AbilityView(ability, sourceName, new CardView(sourceCard)));
+		}
+	}
 
 	public CardsView(Collection<? extends Ability> abilities, GameState state) {
 		for (Ability ability: abilities) {
