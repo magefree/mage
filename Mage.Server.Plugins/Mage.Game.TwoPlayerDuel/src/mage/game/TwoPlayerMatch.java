@@ -26,67 +26,26 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.view;
+package mage.game;
 
-import java.io.Serializable;
-import mage.game.match.MatchType;
+import mage.game.match.MatchImpl;
+import mage.game.match.MatchOptions;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GameTypeView implements Serializable {
+public class TwoPlayerMatch extends MatchImpl<TwoPlayerDuel> {
 
-	private String name;
-	private int minPlayers;
-	private int maxPlayers;
-	private int numTeams;
-	private int playersPerTeam;
-	private boolean useRange;
-	private boolean useAttackOption;
-
-	public GameTypeView(MatchType gameType) {
-		this.name = gameType.getName();
-		this.minPlayers = gameType.getMinPlayers();
-		this.maxPlayers = gameType.getMaxPlayers();
-		this.numTeams = gameType.getNumTeams();
-		this.playersPerTeam = gameType.getPlayersPerTeam();
-		this.useAttackOption = gameType.isUseAttackOption();
-		this.useRange = gameType.isUseRange();
+	public TwoPlayerMatch(MatchOptions options) {
+		super(options);
 	}
 
 	@Override
-	public String toString() {
-		return name;
+	public void startGame() throws GameException {
+		TwoPlayerDuel game = new TwoPlayerDuel(options.getAttackOption(), options.getRange());
+		initGame(game);
+		games.add(game);
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public int getMinPlayers() {
-		return minPlayers;
-	}
-
-	public int getMaxPlayers() {
-		return maxPlayers;
-	}
-
-	public int getNumTeams() {
-		return numTeams;
-	}
-
-	public int getPlayersPerTeam() {
-		return playersPerTeam;
-	}
-
-	public boolean isUseRange() {
-		return useRange;
-	}
-
-	public boolean isUseAttackOption() {
-		return useAttackOption;
-	}
-
-
+	
 }

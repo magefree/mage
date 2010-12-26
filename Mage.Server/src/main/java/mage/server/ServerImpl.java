@@ -43,7 +43,9 @@ import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
+import mage.game.match.MatchType;
 import mage.interfaces.MageException;
+import mage.game.match.MatchOptions;
 import mage.interfaces.Server;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
@@ -117,9 +119,9 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public TableView createTable(UUID sessionId, UUID roomId, String gameType, String deckType, List<String> playerTypes, MultiplayerAttackOption attackOption, RangeOfInfluence range) throws MageException {
+	public TableView createTable(UUID sessionId, UUID roomId, MatchOptions options) throws MageException {
 		try {
-			TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(sessionId, gameType, deckType, playerTypes, attackOption, range);
+			TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(sessionId, options);
 			logger.info("Table " + table.getTableId() + " created");
 			return table;
 		}
@@ -202,13 +204,13 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void startGame(final UUID sessionId, final UUID roomId, final UUID tableId) throws MageException {
+	public void startMatch(final UUID sessionId, final UUID roomId, final UUID tableId) throws MageException {
 		try {
 			rmiExecutor.execute(
 				new Runnable() {
 					@Override
 					public void run() {
-						TableManager.getInstance().startGame(sessionId, roomId, tableId);
+						TableManager.getInstance().startMatch(sessionId, roomId, tableId);
 					}
 				}
 			);

@@ -28,11 +28,13 @@
 
 package mage.game;
 
+import mage.game.match.MatchType;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FreeForAllType extends GameType {
+public class FreeForAllType extends MatchType<FreeForAllType> {
 
 	public FreeForAllType() {
 		this.name = "Free For All";
@@ -41,5 +43,14 @@ public class FreeForAllType extends GameType {
 		this.numTeams = 0;
 		this.useAttackOption = true;
 		this.useRange = true;
+	}
+
+	protected FreeForAllType(final FreeForAllType matchType) {
+		super(matchType);
+	}
+
+	@Override
+	public FreeForAllType copy() {
+		return new FreeForAllType(this);
 	}
 }

@@ -39,6 +39,8 @@ import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
+import mage.game.match.MatchType;
+import mage.game.match.MatchOptions;
 import mage.util.Logging;
 import mage.view.TableView;
 
@@ -71,8 +73,8 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 	}
 
 	@Override
-	public TableView createTable(UUID sessionId, String gameType, String deckType, List<String> playerTypes, MultiplayerAttackOption attackOption, RangeOfInfluence range) {
-		Table table = TableManager.getInstance().createTable(sessionId, gameType, deckType, playerTypes, attackOption, range);
+	public TableView createTable(UUID sessionId, MatchOptions options) {
+		Table table = TableManager.getInstance().createTable(sessionId, options);
 		tables.put(table.getId(), table);
 		return new TableView(table);
 	}

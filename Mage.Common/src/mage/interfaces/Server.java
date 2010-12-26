@@ -28,16 +28,14 @@
 
 package mage.interfaces;
 
+import mage.game.match.MatchOptions;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.MultiplayerAttackOption;
-import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
 import mage.interfaces.callback.CallbackServer;
-import mage.view.GameTypeView;
 import mage.view.TableView;
 import mage.view.GameView;
 
@@ -54,7 +52,7 @@ public interface Server extends Remote, CallbackServer {
 	public ServerState getServerState() throws RemoteException, MageException;
 
 	//table methods
-	public TableView createTable(UUID sessionId, UUID roomId, String gameType, String deckType, List<String> playerTypes, MultiplayerAttackOption attackOption, RangeOfInfluence range) throws RemoteException, MageException;
+	public TableView createTable(UUID sessionId, UUID roomId, MatchOptions matchOptions) throws RemoteException, MageException;
 	public boolean joinTable(UUID sessionId, UUID roomId, UUID tableId, String name, DeckCardLists deckList) throws RemoteException, MageException, GameException;
 	public boolean watchTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
 	public boolean replayTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
@@ -77,7 +75,7 @@ public interface Server extends Remote, CallbackServer {
 	public UUID getMainRoomId() throws RemoteException, MageException;
 
 	//game methods
-	public void startGame(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
+	public void startMatch(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
 	public void joinGame(UUID gameId, UUID sessionId) throws RemoteException, MageException;
 	public void watchGame(UUID gameId, UUID sessionId) throws RemoteException, MageException;
 	public void stopWatching(UUID gameId, UUID sessionId) throws RemoteException, MageException;

@@ -35,7 +35,7 @@ import java.io.FilenameFilter;
 import java.net.InetAddress;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mage.game.GameType;
+import mage.game.match.MatchType;
 import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.PlayerFactory;
@@ -119,11 +119,11 @@ public class Main {
 		return null;
 	}
 
-	private static GameType loadGameType(GamePlugin plugin) {
+	private static MatchType loadGameType(GamePlugin plugin) {
 		try {
 			classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
 			logger.info("Loading game type: " + plugin.getClassName());
-			return (GameType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
+			return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
 		} catch (ClassNotFoundException ex) {
 			logger.log(Level.SEVERE, "Game type not found:" + plugin.getJar() + " - check plugin folder");
 		} catch (Exception ex) {

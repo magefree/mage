@@ -53,6 +53,7 @@ import mage.client.remote.Session;
 import mage.client.table.TablePlayerPanel;
 import mage.client.util.Event;
 import mage.client.util.Listener;
+import mage.game.match.MatchOptions;
 import mage.sets.Sets;
 import mage.util.Logging;
 import mage.view.GameTypeView;
@@ -277,18 +278,16 @@ public class NewTableDialog extends MageDialog {
 
 	private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
 		GameTypeView gameType = (GameTypeView) cbGameType.getSelectedItem();
-		List<String> playerTypes = new ArrayList<String>();
-		playerTypes.add("Human");
+		MatchOptions options = new MatchOptions("Quick Start Game", gameType.getName());
+		options.getPlayerTypes().add("Human");
 		for (TablePlayerPanel player: players) {
-			playerTypes.add(player.getPlayerType());
+			options.getPlayerTypes().add(player.getPlayerType());
 		}
-		table = session.createTable(
-				roomId,
-				gameType.getName(),
-				(String)this.cbDeckType.getSelectedItem(),
-				playerTypes,
-				(MultiplayerAttackOption)this.cbAttackOption.getSelectedItem(), 
-				(RangeOfInfluence)this.cbRange.getSelectedItem());
+		options.setDeckType((String) this.cbDeckType.getSelectedItem());
+		options.setAttackOption((MultiplayerAttackOption) this.cbAttackOption.getSelectedItem());
+		options.setRange((RangeOfInfluence) this.cbRange.getSelectedItem());
+		options.setWinsNeeded(1);
+		table = session.createTable(roomId, options);
 		try {
 			if (session.joinTable(roomId, table.getTableId(), this.player1Panel.getPlayerName(), Sets.loadDeck(this.player1Panel.getDeckFile()))) {
 				for (TablePlayerPanel player: players) {

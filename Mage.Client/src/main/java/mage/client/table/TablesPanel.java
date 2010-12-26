@@ -37,9 +37,7 @@ package mage.client.table;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -53,8 +51,9 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.AbstractTableModel;
+import mage.Constants.MultiplayerAttackOption;
+import mage.Constants.RangeOfInfluence;
 
-import mage.cards.decks.DeckCardLists;
 import mage.client.MageFrame;
 import mage.client.components.MageComponents;
 import mage.client.dialog.JoinTableDialog;
@@ -63,6 +62,7 @@ import mage.client.dialog.TableWaitingDialog;
 import mage.client.remote.MageRemoteException;
 import mage.client.remote.Session;
 import mage.client.util.ButtonColumn;
+import mage.game.match.MatchOptions;
 import mage.sets.Sets;
 import mage.util.Logging;
 import mage.view.TableView;
@@ -280,16 +280,14 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 	private void btnQuickStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartActionPerformed
 		TableView table;
 		try {
-			List<String> playerTypes = new ArrayList<String>();
-			playerTypes.add("Human");
-			playerTypes.add("Computer - default");
-			table = session.createTable(
-					roomId,
-					"Two Player Duel",
-					"Constructed",
-					playerTypes,
-					null, null
-			);
+			MatchOptions options = new MatchOptions("1", "Two Player Duel");
+			options.getPlayerTypes().add("Human");
+			options.getPlayerTypes().add("Computer - default");
+			options.setDeckType("Limited");
+			options.setAttackOption(MultiplayerAttackOption.LEFT);
+			options.setRange(RangeOfInfluence.ALL);
+			options.setWinsNeeded(1);
+			table = session.createTable(roomId,	options);
 			session.joinTable(
 					roomId,
 					table.getTableId(),

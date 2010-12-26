@@ -28,21 +28,24 @@
 
 package mage.game;
 
-import java.util.List;
-import mage.cards.decks.Deck;
-import mage.players.Player;
+import mage.game.match.MatchImpl;
+import mage.game.match.MatchOptions;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface Match {
+public class FreeForAllMatch extends MatchImpl<FreeForAll> {
 
-	public boolean isMatchOver();
-	public List<MatchPlayer> getPlayers();
-	public void addPlayer(Player player, Deck deck);
-	public int getMaxPlayers();
-	public int getMinPlayers();
-	public void startMatch();
-	
+	public FreeForAllMatch(MatchOptions options) {
+		super(options);
+	}
+
+	@Override
+	public void startGame() throws GameException {
+		FreeForAll game = new FreeForAll(options.getAttackOption(), options.getRange());
+		initGame(game);
+		games.add(game);
+	}
+
 }

@@ -26,50 +26,28 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.game;
+package mage.game.match;
 
+import java.util.List;
+import java.util.UUID;
 import mage.cards.decks.Deck;
+import mage.game.Game;
+import mage.game.GameException;
 import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MatchPlayer {
-	private int wins;
-	private int loses;
-	private Deck deck;
-	private Player player;
+public interface Match {
 
-	public MatchPlayer(Player player, Deck deck) {
-		this.player = player;
-		this.deck = deck;
-		this.wins = 0;
-		this.loses = 0;
-	}
-
-	public int getWins() {
-		return wins;
-	}
-
-	public void addWin() {
-		this.wins++;
-	}
-
-	public int getLoses() {
-		return loses;
-	}
-
-	public void addLose() {
-		this.loses++;
-	}
-
-	public Deck getDeck() {
-		return deck;
-	}
-
-	public Player getPlayer() {
-		return player;
-	}
-
+	public UUID getId();
+	public boolean isMatchOver();
+	public List<MatchPlayer> getPlayers();
+	public void addPlayer(Player player, Deck deck);
+	public void startMatch() throws GameException;
+	public void startGame() throws GameException;
+	public void endGame();
+	public Game getGame();
+	
 }

@@ -26,67 +26,50 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.view;
+package mage.game.match;
 
-import java.io.Serializable;
-import mage.game.match.MatchType;
+import mage.cards.decks.Deck;
+import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GameTypeView implements Serializable {
+public class MatchPlayer {
+	private int wins;
+	private int loses;
+	private Deck deck;
+	private Player player;
 
-	private String name;
-	private int minPlayers;
-	private int maxPlayers;
-	private int numTeams;
-	private int playersPerTeam;
-	private boolean useRange;
-	private boolean useAttackOption;
-
-	public GameTypeView(MatchType gameType) {
-		this.name = gameType.getName();
-		this.minPlayers = gameType.getMinPlayers();
-		this.maxPlayers = gameType.getMaxPlayers();
-		this.numTeams = gameType.getNumTeams();
-		this.playersPerTeam = gameType.getPlayersPerTeam();
-		this.useAttackOption = gameType.isUseAttackOption();
-		this.useRange = gameType.isUseRange();
+	public MatchPlayer(Player player, Deck deck) {
+		this.player = player;
+		this.deck = deck;
+		this.wins = 0;
+		this.loses = 0;
 	}
 
-	@Override
-	public String toString() {
-		return name;
+	public int getWins() {
+		return wins;
 	}
 
-	public String getName() {
-		return name;
+	public void addWin() {
+		this.wins++;
 	}
 
-	public int getMinPlayers() {
-		return minPlayers;
+	public int getLoses() {
+		return loses;
 	}
 
-	public int getMaxPlayers() {
-		return maxPlayers;
+	public void addLose() {
+		this.loses++;
 	}
 
-	public int getNumTeams() {
-		return numTeams;
+	public Deck getDeck() {
+		return deck;
 	}
 
-	public int getPlayersPerTeam() {
-		return playersPerTeam;
+	public Player getPlayer() {
+		return player;
 	}
-
-	public boolean isUseRange() {
-		return useRange;
-	}
-
-	public boolean isUseAttackOption() {
-		return useAttackOption;
-	}
-
 
 }

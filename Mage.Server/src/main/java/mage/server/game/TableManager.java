@@ -38,6 +38,8 @@ import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
+import mage.game.match.MatchType;
+import mage.game.match.MatchOptions;
 import mage.util.Logging;
 
 /**
@@ -56,8 +58,8 @@ public class TableManager {
 		return INSTANCE;
 	}
 
-	public Table createTable(UUID sessionId, String gameType, String deckType, List<String> playerTypes, MultiplayerAttackOption attackOption, RangeOfInfluence range) {
-		TableController tableController = new TableController(sessionId, gameType, deckType, playerTypes, attackOption, range);
+	public Table createTable(UUID sessionId, MatchOptions options) {
+		TableController tableController = new TableController(sessionId, options);
 		controllers.put(tableController.getTable().getId(), tableController);
 		tables.put(tableController.getTable().getId(), tableController.getTable());
 		return tableController.getTable();
@@ -100,8 +102,8 @@ public class TableManager {
 		return controllers.get(tableId).getChatId();
 	}
 
-	public void startGame(UUID sessionId, UUID roomId, UUID tableId) {
-		controllers.get(tableId).startGame(sessionId);
+	public void startMatch(UUID sessionId, UUID roomId, UUID tableId) {
+		controllers.get(tableId).startMatch(sessionId);
 	}
 
 	public boolean watchTable(UUID sessionId, UUID tableId) {

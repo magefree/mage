@@ -26,63 +26,79 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.game;
+package mage.game.match;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import mage.cards.decks.Deck;
-import mage.players.Player;
+import mage.Constants.MultiplayerAttackOption;
+import mage.Constants.RangeOfInfluence;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MatchImpl implements Match {
+public class MatchOptions implements Serializable {
 
-	protected List<MatchPlayer> players = new ArrayList<MatchPlayer>();
-	protected List<Game> games = new ArrayList<Game>();
+	protected String name;
+	protected MultiplayerAttackOption attackOption;
+	protected RangeOfInfluence range;
 	protected int winsNeeded;
-	protected int maxPlayers;
-	protected int minPlayers;
-	
-	public MatchImpl(int winsNeeded) {
+	protected String gameType;
+	protected String deckType;
+	protected List<String> playerTypes = new ArrayList<String>();
+
+	public MatchOptions(String name, String gameType) {
+		this.name = name;
+		this.gameType = gameType;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public MultiplayerAttackOption getAttackOption() {
+		return attackOption;
+	}
+
+	public void setAttackOption(MultiplayerAttackOption attackOption) {
+		this.attackOption = attackOption;
+	}
+
+	public RangeOfInfluence getRange() {
+		return range;
+	}
+
+	public void setRange(RangeOfInfluence range) {
+		this.range = range;
+	}
+
+	public int getWinsNeeded() {
+		return winsNeeded;
+	}
+
+	public void setWinsNeeded(int winsNeeded) {
 		this.winsNeeded = winsNeeded;
 	}
 
-	@Override
-	public List<MatchPlayer> getPlayers() {
-		return players;
+	public String getGameType() {
+		return gameType;
 	}
 
-	@Override
-	public void addPlayer(Player player, Deck deck) {
-		MatchPlayer mPlayer = new MatchPlayer(player, deck);
-		players.add(mPlayer);
+	public void setGameType(String gameType) {
+		this.gameType = gameType;
 	}
 
-	@Override
-	public void startMatch() {
-
+	public String getDeckType() {
+		return deckType;
 	}
 
-	@Override
-	public boolean isMatchOver() {
-		for (MatchPlayer player: players) {
-			if (player.getWins() >= winsNeeded) {
-				return true;
-			}
-		}
-		return false;
+	public void setDeckType(String deckType) {
+		this.deckType = deckType;
 	}
 
-	@Override
-	public int getMaxPlayers() {
-		return this.maxPlayers;
-	}
-
-	@Override
-	public int getMinPlayers() {
-		return this.minPlayers;
+	public List<String> getPlayerTypes() {
+		return playerTypes;
 	}
 
 }

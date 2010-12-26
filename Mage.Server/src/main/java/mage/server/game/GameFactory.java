@@ -30,17 +30,15 @@ package mage.server.game;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mage.Constants.MultiplayerAttackOption;
-import mage.Constants.RangeOfInfluence;
-import mage.game.Game;
+import mage.game.match.Match;
+import mage.game.match.MatchOptions;
 import mage.util.Logging;
-import mage.game.GameType;
+import mage.game.match.MatchType;
 import mage.view.GameTypeView;
 
 /**
@@ -52,8 +50,8 @@ public class GameFactory {
 	private final static GameFactory INSTANCE = new GameFactory();
 	private final static Logger logger = Logging.getLogger(GameFactory.class.getName());
 
-	private Map<String, Class<Game>> games = new HashMap<String, Class<Game>>();
-	private Map<String, GameType> gameTypes = new HashMap<String, GameType>();
+	private Map<String, Class<Match>> games = new HashMap<String, Class<Match>>();
+	private Map<String, MatchType> gameTypes = new HashMap<String, MatchType>();
 	private List<GameTypeView> gameTypeViews = new ArrayList<GameTypeView>();
 
 
@@ -63,31 +61,31 @@ public class GameFactory {
 
 	private GameFactory() {}
 
-	public Game createGame(String gameType, MultiplayerAttackOption attackOption, RangeOfInfluence range) {
+	public Match createMatch(String gameType, MatchOptions options) {
 
-		Game game;
-		Constructor<Game> con;
+		Match match;
+		Constructor<Match> con;
 		try {
-			con = games.get(gameType).getConstructor(new Class[]{MultiplayerAttackOption.class, RangeOfInfluence.class});
-			game = con.newInstance(new Object[] {attackOption, range});
+			con = games.get(gameType).getConstructor(new Class[]{MatchOptions.class});
+			match = con.newInstance(new Object[] {options});
 		} catch (Exception ex) {
 			logger.log(Level.SEVERE, null, ex);
 			return null;
 		}
-		logger.info("Game created: " + game.getId().toString());
+		logger.info("Game created: " + gameType); // + game.getId().toString());
 
-		return game;
+		return match;
 	}
 
 	public List<GameTypeView> getGameTypes() {
 		return gameTypeViews;
 	}
 
-	public void addGameType(String name, GameType gameType, Class game) {
+	public void addGameType(String name, MatchType matchType, Class game) {
 		if (game != null) {
 			this.games.put(name, game);
-			this.gameTypes.put(name, gameType);
-			this.gameTypeViews.add(new GameTypeView(gameType));
+			this.gameTypes.put(name, matchType);
+			this.gameTypeViews.add(new GameTypeView(matchType));
 		}
 	}
 

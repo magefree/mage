@@ -49,7 +49,9 @@ import mage.client.components.MageUI;
 import mage.client.game.GamePanel;
 import mage.client.util.Config;
 import mage.game.GameException;
+import mage.game.match.MatchType;
 import mage.interfaces.MageException;
+import mage.game.match.MatchOptions;
 import mage.interfaces.Server;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.CallbackClientDaemon;
@@ -396,9 +398,9 @@ public class Session {
 		return false;
 	}
 
-	public TableView createTable(UUID roomId, String gameType, String deckType, List<String> playerTypes, MultiplayerAttackOption attackOption, RangeOfInfluence range) {
+	public TableView createTable(UUID roomId, MatchOptions matchOptions) {
 		try {
-			return server.createTable(sessionId, roomId, gameType, deckType, playerTypes, attackOption, range);
+			return server.createTable(sessionId, roomId, matchOptions);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -456,7 +458,7 @@ public class Session {
 
 	public boolean startGame(UUID roomId, UUID tableId) {
 		try {
-			server.startGame(sessionId, roomId, tableId);
+			server.startMatch(sessionId, roomId, tableId);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);

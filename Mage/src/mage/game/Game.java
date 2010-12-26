@@ -28,6 +28,7 @@
 
 package mage.game;
 
+import mage.game.match.MatchType;
 import mage.cards.Card;
 import mage.game.stack.SpellStack;
 import mage.MageObject;
@@ -64,7 +65,7 @@ import mage.players.Players;
 
 public interface Game extends MageItem, Serializable {
 
-	public GameType getGameType();
+	public MatchType getGameType();
 	public int getNumPlayers();
 	public int getLife();
 	public RangeOfInfluence getRangeOfInfluence();

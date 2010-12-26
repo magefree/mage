@@ -28,6 +28,7 @@
 
 package mage.game;
 
+import mage.game.match.MatchType;
 import java.io.IOException;
 import mage.game.stack.SpellStack;
 import java.io.Serializable;
@@ -315,7 +316,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			player = players.getNext(this);
 		}
 
-		winnerId = findWinner();
+		winnerId = findWinnersAndLosers();
 
 		saveState();
 	}
@@ -380,13 +381,21 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		}
 	}
 
-	protected UUID findWinner() {
+	protected UUID findWinnersAndLosers() {
+		UUID winner = null;
 		for (Player player: state.getPlayers().values()) {
 			if (player.hasWon() || (!player.hasLost() && !player.hasLeft())) {
-				return player.getId();
+				player.won(this);
+				winner = player.getId();
+				break;
 			}
 		}
-		return null;
+		for (Player player: state.getPlayers().values()) {
+			if (winner != null && !player.getId().equals(winner)) {
+				player.lost(this);
+			}
+		}
+		return winner;
 	}
 
 	protected void endOfTurn() {
