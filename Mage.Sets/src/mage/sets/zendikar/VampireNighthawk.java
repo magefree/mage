@@ -25,48 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
-
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.Metalcraft;
-import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.GainAbilitySourceEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
+package mage.sets.zendikar;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.cards.CardImpl;
 
 /**
  *
- * @author Loki, nantuko
+ * @author Loki
  */
-public class SnapsailGlider extends CardImpl<SnapsailGlider> {
+public class VampireNighthawk extends CardImpl<VampireNighthawk> {
 
-    protected static String text = "Metalcraft - Snapsail Glider has flying as long as you control three or more artifacts";
+	public VampireNighthawk(UUID ownerId) {
+		super(ownerId, 116, "Vampire Nighthawk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
+		this.expansionSetCode = "ZEN";
+		this.subtype.add("Vampire");
+		this.subtype.add("Shaman");
 
-    public SnapsailGlider (UUID ownerId) {
-        super(ownerId, 203, "Snapsail Glider", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Construct");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-        ContinuousEffect effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect, Metalcraft.getInstance(), text)));
-    }
+		this.color.setBlack(true);
+		this.power = new MageInt(2);
+		this.toughness = new MageInt(3);
 
-    public SnapsailGlider (final SnapsailGlider card) {
-        super(card);
-    }
+		this.addAbility(FlyingAbility.getInstance());
+		this.addAbility(DeathtouchAbility.getInstance());
+		this.addAbility(LifelinkAbility.getInstance());
+	}
 
-    @Override
-    public SnapsailGlider copy() {
-        return new SnapsailGlider(this);
-    }
+	public VampireNighthawk(final VampireNighthawk card) {
+		super(card);
+	}
+
+	@Override
+	public VampireNighthawk copy() {
+		return new VampireNighthawk(this);
+	}
 }

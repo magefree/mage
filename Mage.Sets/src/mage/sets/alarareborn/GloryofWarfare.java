@@ -39,7 +39,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurn;
 import mage.abilities.condition.common.NotMyTurn;
-import mage.abilities.decorator.ConditionalEffect;
+import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.BoostControlledEffect;
 import mage.cards.CardImpl;
@@ -57,8 +57,8 @@ public class GloryofWarfare extends CardImpl<GloryofWarfare> {
         this.subtype.add("Enchantment");
 		this.color.setRed(true);
 		this.color.setWhite(true);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn), MyTurn.getInstance(), "As long as it's your turn, creatures you control get +2/+0")));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalEffect(new BoostControlledEffect(0, 2, Duration.EndOfTurn), NotMyTurn.getInstance(), "As long as it's not your turn, creatures you control get +0/+2")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn), MyTurn.getInstance(), "As long as it's your turn, creatures you control get +2/+0")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostControlledEffect(0, 2, Duration.EndOfTurn), NotMyTurn.getInstance(), "As long as it's not your turn, creatures you control get +0/+2")));
     }
 
     public GloryofWarfare (final GloryofWarfare card) {

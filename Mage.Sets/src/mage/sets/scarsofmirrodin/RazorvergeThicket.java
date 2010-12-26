@@ -28,45 +28,51 @@
 
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.Metalcraft;
-import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.GainAbilitySourceEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.Controls;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.TapSourceEffect;
+import mage.abilities.mana.GreenManaAbility;
+import mage.abilities.mana.WhiteManaAbility;
+import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.common.FilterLandPermanent;
 
 /**
  *
- * @author Loki, nantuko
+ * @author maurer.it_at_gmail.com
  */
-public class SnapsailGlider extends CardImpl<SnapsailGlider> {
+public class RazorvergeThicket extends CardImpl<RazorvergeThicket> {
 
-    protected static String text = "Metalcraft - Snapsail Glider has flying as long as you control three or more artifacts";
+	private static FilterLandPermanent filter = new FilterLandPermanent();
 
-    public SnapsailGlider (UUID ownerId) {
-        super(ownerId, 203, "Snapsail Glider", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+	static {
+		filter.setScopeSubtype(ComparisonScope.Any);
+		filter.setMessage("lands");
+	}
+	
+    public RazorvergeThicket (UUID ownerId) {
+        super(ownerId, 228, "Razorverge Thicket", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "SOM";
-        this.subtype.add("Construct");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-        ContinuousEffect effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect, Metalcraft.getInstance(), text)));
+
+        Condition controls = new Controls(filter, Controls.CountType.FEWER_THAN, 3);
+		String text = "tap it unless you control fewer than 3 " + filter.getMessage();
+		this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, text), text));
+		this.addAbility(new GreenManaAbility());
+		this.addAbility(new WhiteManaAbility());
     }
 
-    public SnapsailGlider (final SnapsailGlider card) {
+    public RazorvergeThicket (final RazorvergeThicket card) {
         super(card);
     }
 
     @Override
-    public SnapsailGlider copy() {
-        return new SnapsailGlider(this);
+    public RazorvergeThicket copy() {
+        return new RazorvergeThicket(this);
     }
+
 }
