@@ -65,9 +65,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 	static private final float rotCenterToBottomCorner = 0.7071067811865475244008443621048f;
 
 	public CardView gameCard;
-	public PermanentView gamePermanent;
-	public CardPanel attachedToPanel;
-	public List<CardPanel> attachedPanels = new ArrayList();
+	//public List<CardPanel> attachedPanels = new ArrayList();
+    private List<MagePermanent> links = new ArrayList<MagePermanent>();
 	public double tappedAngle = 0;
 	public ScaledImagePanel imagePanel;
 	public ImagePanel overlayPanel;
@@ -101,8 +100,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		this.isPermanent = this.gameCard instanceof PermanentView;
 		
 		if (isPermanent) {
-			this.gamePermanent = (PermanentView) this.gameCard;
-			this.hasSickness = this.gamePermanent.hasSummoningSickness();
+			this.hasSickness = ((PermanentView) this.gameCard).hasSummoningSickness();
 		}
 		
 		//for container debug (don't remove)
@@ -456,12 +454,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
 	@Override
 	public List<MagePermanent> getLinks() {
-		List<MagePermanent> list = new ArrayList<MagePermanent>();
-		if (attachedPanels == null) return list;
-		for (MagePermanent p : attachedPanels) {
-			list.add(p);
-		}
-		return list;
+		return links;
 	}
 
 	@Override
