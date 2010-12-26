@@ -8,17 +8,17 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 
 /**
- * Adds condition to effect. Acts as decorator.
+ * Adds condition to {@link ContinuousEffect}. Acts as decorator.
  *
  * @author nantuko
  */
-public class ConditionalEffect extends ContinuousEffectImpl<ConditionalEffect> {
+public class ConditionalContinousEffect extends ContinuousEffectImpl<ConditionalContinousEffect> {
 
     protected ContinuousEffect effect;
     protected Condition condition;
     protected String text;
 
-    public ConditionalEffect(ContinuousEffect effect, Condition condition, String text) {
+    public ConditionalContinousEffect(ContinuousEffect effect, Condition condition, String text) {
         super(effect.getDuration(), effect.getLayer(), effect.getSublayer(), effect.getOutcome());
         this.effect = effect;
         this.condition = condition;
@@ -47,8 +47,8 @@ public class ConditionalEffect extends ContinuousEffectImpl<ConditionalEffect> {
     }
 
     @Override
-    public ConditionalEffect copy() {
-        return new ConditionalEffect(effect, condition, text);
+    public ConditionalContinousEffect copy() {
+        return new ConditionalContinousEffect(effect, condition, text);
     }
 
     @Override
