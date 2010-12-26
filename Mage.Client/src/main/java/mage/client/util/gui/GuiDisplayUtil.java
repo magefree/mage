@@ -11,10 +11,12 @@ import mage.utils.CardUtil;
 import mage.view.CardView;
 
 import org.jdesktop.swingx.JXPanel;
+import sun.plugin.com.event.COMEventHandler;
 
 public class GuiDisplayUtil {
 	private static final Font cardNameFont = new Font("Calibri", Font.BOLD, 15);
-    private static Insets DEFAULT_INSETS = new Insets(0,0, 68, 15);
+    private static Insets DEFAULT_INSETS = new Insets(0, 0, 70, 25);
+    private static Insets COMPONENT_INSETS = new Insets(0, 0, 40, 40);
 	
     public static JXPanel getDescription(CardView card, int width, int height) {
     	JXPanel descriptionPanel = new JXPanel();
@@ -127,12 +129,12 @@ public class GuiDisplayUtil {
 	}
 
     public static Point keepComponentInsideParent(Point l, Point parentPoint, Component c, Component parent) {
-        int dx = parentPoint.x + parent.getWidth() - DEFAULT_INSETS.right;
+        int dx = parentPoint.x + parent.getWidth() - DEFAULT_INSETS.right - COMPONENT_INSETS.right;
         if (l.x + c.getWidth() > dx) {
             l.x = dx - c.getWidth();
         }
 
-        int dy = parentPoint.y + parent.getHeight() - DEFAULT_INSETS.bottom;
+        int dy = parentPoint.y + parent.getHeight() - DEFAULT_INSETS.bottom - COMPONENT_INSETS.bottom;
         if (l.y + c.getHeight() > dy) {
             l.y = Math.max(10, dy - c.getHeight());
         }

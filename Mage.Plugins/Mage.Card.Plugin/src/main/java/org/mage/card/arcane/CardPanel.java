@@ -416,6 +416,13 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 	@Override
 	public void setAlpha(float alpha) {
 		this.alpha = alpha;
+        if (alpha == 0) {
+            this.ptText.setVisible(false);
+            this.titleText.setVisible(false);
+        } else if (alpha == 1.0f) {
+            this.ptText.setVisible(true);
+            this.titleText.setVisible(true);
+        }
 	}
 	
 	public float getAlpha() {
