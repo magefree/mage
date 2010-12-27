@@ -93,7 +93,7 @@ public class LevelAbility extends StaticAbility<LevelAbility> {
 		else
 			sb.append("-").append(level2);
 		sb.append(": ").append(power).append("/").append(toughness).append(" ");
-		for (String rule: abilities.getRules()) {
+		for (String rule: abilities.getRules("{this}")) {
 			sb.append(rule).append(" ");
 		}
 		return sb.toString();

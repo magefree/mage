@@ -81,9 +81,12 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
 			Player player = game.getPlayer(this.getControllerId());
 			MageObject object = game.getObject(sourceId);
 			StringBuilder sb = new StringBuilder();
-			sb.append("Use ").append(this.getRule()).append("ability");
 			if (object != null) {
+				sb.append("Use ").append(this.getRule(object.getName())).append("ability");
 				sb.append(" from ").append(object.getName());
+			}
+			else {
+				sb.append("Use ").append(this.getRule()).append("ability");
 			}
 			sb.append("?");
 			if (!player.chooseUse(this.effects.get(0).getOutcome(), sb.toString(), game)) {

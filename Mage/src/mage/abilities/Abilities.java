@@ -39,7 +39,7 @@ import mage.filter.FilterAbility;
 
 public interface Abilities<T extends Ability> extends List<T>, Serializable {
 
-	public List<String> getRules();
+	public List<String> getRules(String source);
 	public Abilities<ActivatedAbility> getActivatedAbilities(Zone zone);
 	public Abilities<ActivatedAbility> getActivatedAbilities(Zone zone, FilterAbility filter);
 	public Abilities<ManaAbility> getManaAbilities(Zone zone);

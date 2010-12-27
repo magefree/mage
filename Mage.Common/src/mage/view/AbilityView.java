@@ -48,7 +48,7 @@ public class AbilityView extends CardView {
 		this.sourceName = sourceName;
 		this.sourceCard = sourceCard;
 		this.rules = new ArrayList<String>();
-		rules.add(formatRule(ability.getRule()));
+		rules.add(ability.getRule(sourceName));
 		this.power = "";
 		this.toughness = "";
 		this.loyalty = "";
@@ -58,13 +58,6 @@ public class AbilityView extends CardView {
 		this.color = new ObjectColor();
 		this.manaCost = ability.getManaCosts().getSymbols();
 		this.art = "";
-	}
-
-	@Override
-	protected String formatRule(String rule) {
-		String newRule = rule.replace("{this}", this.sourceName);
-		newRule.replace("{source}", this.sourceName);
-		return newRule;
 	}
 
 	public CardView getSourceCard() {

@@ -58,7 +58,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 	}
 
 	@Override
-	public List<String> getRules() {
+	public List<String> getRules(String source) {
 		List<String> rules = new ArrayList<String>();
 
 		for (T ability:this) {

@@ -30,15 +30,17 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect<SacrificeSour
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-		if (player != null && player.chooseUse(Outcome.Benefit, cost.getText() + " or sacrifice {this}?", game)) {
-			cost.clearPaid();
-			if (cost.pay(game, source.getId(), source.getControllerId(), false))
-				return true;
-		}
 		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null)
+		if (player != null && permanent != null) { 
+			if (player.chooseUse(Outcome.Benefit, cost.getText() + " or sacrifice " + permanent.getName() + "?", game)) {
+				cost.clearPaid();
+				if (cost.pay(game, source.getId(), source.getControllerId(), false))
+					return true;
+			}
 			permanent.sacrifice(source.getSourceId(), game);
-		return true;
+			return true;
+		}
+		return false;
     }
 
     @Override
@@ -48,6 +50,6 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect<SacrificeSour
 
     @Override
     public String getText(Ability source) {
-        return "sacrifice it unless you pay " + cost.getText();
+        return "sacrifice {this} unless you pay " + cost.getText();
     }
 }

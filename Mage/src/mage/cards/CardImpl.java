@@ -130,9 +130,9 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 
 	@Override
 	public List<String> getRules() {
-		List<String> rules = abilities.getRules();
+		List<String> rules = abilities.getRules(this.name);
 		if (cardType.contains(CardType.INSTANT) || cardType.contains(CardType.SORCERY)) {
-			rules.add(0, getSpellAbility().getRule());
+			rules.add(0, getSpellAbility().getRule(this.name));
 		}
 		return rules;
 	}
