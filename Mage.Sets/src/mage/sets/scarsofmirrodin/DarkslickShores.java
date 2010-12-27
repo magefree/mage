@@ -60,8 +60,8 @@ public class DarkslickShores extends CardImpl<DarkslickShores> {
         this.expansionSetCode = "SOM";
 
         Condition controls = new Controls(filter, Controls.CountType.FEWER_THAN, 3);
-		String text = "tap it unless you control fewer than 3 " + filter.getMessage();
-		this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, text), text));
+		String abilityText = "tap it unless you control fewer than 3 " + filter.getMessage();
+		this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
 		this.addAbility(new BlueManaAbility());
 		this.addAbility(new BlackManaAbility());
     }

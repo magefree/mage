@@ -60,8 +60,8 @@ public class RazorvergeThicket extends CardImpl<RazorvergeThicket> {
         this.expansionSetCode = "SOM";
 
         Condition controls = new Controls(filter, Controls.CountType.FEWER_THAN, 3);
-		String text = "tap it unless you control fewer than 3 " + filter.getMessage();
-		this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, text), text));
+		String abilityText = "tap it unless you control fewer than 3 " + filter.getMessage();
+		this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new WhiteManaAbility());
     }
