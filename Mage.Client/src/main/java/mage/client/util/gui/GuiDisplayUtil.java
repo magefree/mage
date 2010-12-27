@@ -11,7 +11,6 @@ import mage.utils.CardUtil;
 import mage.view.CardView;
 
 import org.jdesktop.swingx.JXPanel;
-import sun.plugin.com.event.COMEventHandler;
 
 public class GuiDisplayUtil {
 	private static final Font cardNameFont = new Font("Calibri", Font.BOLD, 15);
