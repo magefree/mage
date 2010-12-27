@@ -32,7 +32,10 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.TapSourceUnlessControlsEffect;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.Controls;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
@@ -57,7 +60,10 @@ public class DrownedCatacomb extends CardImpl<DrownedCatacomb> {
 	public DrownedCatacomb(UUID ownerId) {
 		super(ownerId, 224, "Drowned Catacomb", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "M10";
-		this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessControlsEffect(filter), "tapped unless you control a " + filter.getMessage()));
+
+		Condition controls = new Controls(filter, Controls.CountType.MORE_THAN, 0);
+		String abilityText = "tap it unless you control a " + filter.getMessage();
+		this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
 		this.addAbility(new BlackManaAbility());
 		this.addAbility(new BlueManaAbility());
 	}
