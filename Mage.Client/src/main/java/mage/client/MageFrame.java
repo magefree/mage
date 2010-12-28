@@ -138,71 +138,13 @@ public class MageFrame extends javax.swing.JFrame {
 		desktopPane.add(pickNumber, JLayeredPane.POPUP_LAYER);
 		session.getUI().addComponent(MageComponents.DESKTOP_PANE, desktopPane);
 
-        final JEditorPane cardInfoPane = (JEditorPane) Plugins.getInstance().getCardInfoPane();
-        cardInfoPane.setSize(320, 201);
-        cardInfoPane.setLocation(40, 40);
-        cardInfoPane.setBackground(new Color(0,0,0,0));
-
-        MageRoundPane popupContainer = new MageRoundPane();
-        popupContainer.setLayout(null);
-
-        popupContainer.add(cardInfoPane);
-        popupContainer.setVisible(false);
-        popupContainer.setBounds(0, 0, 320 + 80, 201 + 80);
-
-        desktopPane.add(popupContainer, JLayeredPane.POPUP_LAYER);
-
-        session.getUI().addComponent(MageComponents.CARD_INFO_PANE, cardInfoPane);
-        session.getUI().addComponent(MageComponents.POPUP_CONTAINER, popupContainer);
-
         ManaSymbols.loadImages();
 
-		String filename = "/background.jpg";
-		try {
-			if (Plugins.getInstance().isThemePluginLoaded()) {
-				Map<String, JComponent> ui = new HashMap<String, JComponent>();
-				backgroundPane = (ImagePanel) Plugins.getInstance().updateTablePanel(ui);
-			} else {
-				InputStream is = this.getClass().getResourceAsStream(filename);
-				BufferedImage background = ImageIO.read(is);
-				backgroundPane = new ImagePanel(background, ImagePanel.SCALED);
-			}
-			backgroundPane.setSize(1024, 768);
-			desktopPane.add(backgroundPane, JLayeredPane.DEFAULT_LAYER);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		filename = "/label-mage.png";
-		try {
-			InputStream is = this.getClass().getResourceAsStream(filename);
-			
-			float ratio = 1179.0f / 678.0f;
-	    	titleRectangle = new Rectangle(640, (int)(640 / ratio));
-	    	if (is != null) {
-	    		BufferedImage image = ImageIO.read(is);
-	    		//ImageIcon resized = new ImageIcon(image.getScaledInstance(titleRectangle.width, titleRectangle.height, java.awt.Image.SCALE_SMOOTH));
-				title = new JLabel();
-	    		title.setIcon(new ImageIcon(image));
-	    		backgroundPane.setLayout(null);
-				backgroundPane.add(title);
-	    	}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		filename = "/icon-mage.png";
-		try {
-			InputStream is = this.getClass().getResourceAsStream(filename);
-			
-	    	if (is != null) {
-	    		BufferedImage image = ImageIO.read(is);
-	    		setIconImage(image);
-	    	}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+        addTooltipContainer();
+        setBackground();
+		addMageLabel();
+		setAppIcon();
+
 		desktopPane.add(ArrowBuilder.getArrowsPanel(), JLayeredPane.DRAG_LAYER);
 		
 		desktopPane.addComponentListener(new ComponentAdapter(){
@@ -272,6 +214,77 @@ public class MageFrame extends javax.swing.JFrame {
         			disableButtons();
             }
         });
+    }
+
+    private void addTooltipContainer() {
+        final JEditorPane cardInfoPane = (JEditorPane) Plugins.getInstance().getCardInfoPane();
+        cardInfoPane.setSize(320, 201);
+        cardInfoPane.setLocation(40, 40);
+        cardInfoPane.setBackground(new Color(0,0,0,0));
+
+        MageRoundPane popupContainer = new MageRoundPane();
+        popupContainer.setLayout(null);
+
+        popupContainer.add(cardInfoPane);
+        popupContainer.setVisible(false);
+        popupContainer.setBounds(0, 0, 320 + 80, 201 + 80);
+
+        desktopPane.add(popupContainer, JLayeredPane.POPUP_LAYER);
+
+        session.getUI().addComponent(MageComponents.CARD_INFO_PANE, cardInfoPane);
+        session.getUI().addComponent(MageComponents.POPUP_CONTAINER, popupContainer);
+    }
+
+    private void setBackground() {
+        String filename = "/background.jpg";
+        try {
+            if (Plugins.getInstance().isThemePluginLoaded()) {
+                Map<String, JComponent> ui = new HashMap<String, JComponent>();
+                backgroundPane = (ImagePanel) Plugins.getInstance().updateTablePanel(ui);
+            } else {
+                InputStream is = this.getClass().getResourceAsStream(filename);
+                BufferedImage background = ImageIO.read(is);
+                backgroundPane = new ImagePanel(background, ImagePanel.SCALED);
+            }
+            backgroundPane.setSize(1024, 768);
+            desktopPane.add(backgroundPane, JLayeredPane.DEFAULT_LAYER);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addMageLabel() {
+        String filename = "/label-mage.png";
+		try {
+			InputStream is = this.getClass().getResourceAsStream(filename);
+
+			float ratio = 1179.0f / 678.0f;
+	    	titleRectangle = new Rectangle(640, (int)(640 / ratio));
+	    	if (is != null) {
+	    		BufferedImage image = ImageIO.read(is);
+	    		//ImageIcon resized = new ImageIcon(image.getScaledInstance(titleRectangle.width, titleRectangle.height, java.awt.Image.SCALE_SMOOTH));
+				title = new JLabel();
+	    		title.setIcon(new ImageIcon(image));
+	    		backgroundPane.setLayout(null);
+				backgroundPane.add(title);
+	    	}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+
+    private void setAppIcon() {
+        String filename = "/icon-mage.png";
+		try {
+			InputStream is = this.getClass().getResourceAsStream(filename);
+
+	    	if (is != null) {
+	    		BufferedImage image = ImageIO.read(is);
+	    		setIconImage(image);
+	    	}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     
     private void  btnImagesActionPerformed(java.awt.event.ActionEvent evt) {
