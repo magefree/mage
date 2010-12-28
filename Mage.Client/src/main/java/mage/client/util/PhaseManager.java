@@ -2,9 +2,11 @@ package mage.client.util;
 
 import mage.client.MageFrame;
 import mage.view.GameView;
+import mage.view.PlayerView;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.prefs.Preferences;
 
 public class PhaseManager {
@@ -51,21 +53,27 @@ public class PhaseManager {
         put("End Turn - play instants and activated abilities.", END_OF_TURN_OTHERS);
     }};
 
-    private String yourName;
-
     public static PhaseManager getInstance() {
         return fInstance;
-    }
-
-    public void setName(String yourName) {
-        this.yourName = yourName;
     }
 
     public boolean isSkip(GameView gameView, String message) {
         if (GameManager.getInstance().getStackSize() > 0) {
             return false;
         }
-        Map<String, String> map = gameView.getActivePlayerName().equals(DEFAULT_PLAYER_NAME) ? mapYou : mapOthers;
+        UUID activePlayer = null;
+        Map<String, String> map = mapOthers;
+        for (PlayerView playerView : gameView.getPlayers()) {
+            if (playerView.isActive()) {
+                activePlayer = playerView.getPlayerId();
+                if (activePlayer.equals(GameManager.getInstance().getCurrentPlayerUUID())) {
+                    map = mapYou;
+                }
+            }
+        }
+        if (activePlayer == null) {
+            throw new IllegalStateException("No active player found.");
+        }
         for (Map.Entry<String, String> entry : map.entrySet()) {
             if (message.equals(entry.getKey())) {
                 Preferences prefs = MageFrame.getPreferences();

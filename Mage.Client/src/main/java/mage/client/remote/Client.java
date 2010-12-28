@@ -36,6 +36,7 @@ import javax.swing.JOptionPane;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.GameManager;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.util.Logging;
@@ -73,6 +74,7 @@ public class Client implements CallbackClient {
 		try {
 			if (callback.getMethod().equals("startGame")) {
 				UUID[] data = (UUID[]) callback.getData();
+                GameManager.getInstance().setCurrentPlayerUUID(data[1]);
 				gameStarted(data[0], data[1]);
 			}
 			else if (callback.getMethod().equals("replayGame")) {
