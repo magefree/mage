@@ -39,6 +39,7 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,6 +63,8 @@ public class BoostSourceWhileControlsEffect extends WhileConditionContiniousEffe
 		super(effect);
 		this.power = effect.power;
 		this.toughness = effect.toughness;
+        this.filterDescription = new ArrayList<String>();
+        this.filterDescription.addAll(effect.filterDescription);
 	}
 
 	@Override
