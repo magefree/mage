@@ -30,11 +30,8 @@ package mage.server.game;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.MultiplayerAttackOption;
-import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
-import mage.game.match.MatchType;
 import mage.game.match.MatchOptions;
 import mage.view.TableView;
 

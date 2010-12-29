@@ -54,11 +54,13 @@ import javax.swing.*;
 import javax.swing.JToolBar.Separator;
 
 import com.sun.java.swing.Painter;
+import mage.cards.decks.Deck;
 import mage.client.cards.CardsStorage;
 import mage.client.components.MageComponents;
 import mage.client.components.MageJDesktop;
 import mage.client.components.MageRoundPane;
 import mage.client.components.arcane.ManaSymbols;
+import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.dialog.*;
 import mage.client.plugins.impl.Plugins;
 import mage.client.remote.Session;
@@ -502,11 +504,10 @@ public class MageFrame extends javax.swing.JFrame {
 	private void btnDeckEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeckEditorActionPerformed
 		this.gamePane.setVisible(false);
 		this.tablesPane.setVisible(false);
-		this.deckEditorPane.setVisible(true);
-		this.deckEditorPane.showTables();
+		showDeckEditor(DeckEditorMode.Constructed, null, null);
 	}//GEN-LAST:event_btnDeckEditorActionPerformed
 
-	private void btnPreferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeckEditorActionPerformed
+	private void btnPreferencesActionPerformed(java.awt.event.ActionEvent evt) {                                              
         PhasesDialog.main(new String[]{});
 	}
 	
@@ -560,6 +561,11 @@ public class MageFrame extends javax.swing.JFrame {
 		this.tablesPane.setVisible(false);
 		this.gamePane.setVisible(false);
 		this.deckEditorPane.setVisible(false);
+	}
+
+	public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId) {
+		this.deckEditorPane.setVisible(true);
+		this.deckEditorPane.show(mode, deck, tableId);
 	}
 
 	public static CombatDialog getCombatDialog() {

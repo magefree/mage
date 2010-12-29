@@ -26,65 +26,46 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.game.match;
+package mage.view;
 
+import java.io.Serializable;
+import java.util.UUID;
 import mage.cards.decks.Deck;
-import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MatchPlayer {
-	private int wins;
-	private int loses;
+public class TableClientMessage implements Serializable {
+
 	private Deck deck;
-	private Player player;
-	private boolean doneSideboarding;
+	private UUID tableId;
+	private UUID gameId;
+	private UUID playerId;
 
-	public MatchPlayer(Player player, Deck deck) {
-		this.player = player;
+	public TableClientMessage(Deck deck, UUID tableId) {
 		this.deck = deck;
-		this.wins = 0;
-		this.loses = 0;
-		this.doneSideboarding = true;
+		this.tableId = tableId;
 	}
 
-	public int getWins() {
-		return wins;
-	}
-
-	public void addWin() {
-		this.wins++;
-	}
-
-	public int getLoses() {
-		return loses;
-	}
-
-	public void addLose() {
-		this.loses++;
+	public TableClientMessage(UUID gameId, UUID playerId) {
+		this.gameId = gameId;
+		this.playerId = playerId;
 	}
 
 	public Deck getDeck() {
 		return deck;
 	}
 
-	public void submitDeck(Deck deck) {
-		this.deck = deck;
-		this.doneSideboarding = true;
+	public UUID getTableId() {
+		return tableId;
 	}
 
-	public Player getPlayer() {
-		return player;
+	public UUID getGameId() {
+		return gameId;
 	}
 
-	public void setSideboarding() {
-		this.doneSideboarding = false;
+	public UUID getPlayerId() {
+		return playerId;
 	}
-
-	public boolean isDoneSideboarding() {
-		return this.doneSideboarding;
-	}
-
 }

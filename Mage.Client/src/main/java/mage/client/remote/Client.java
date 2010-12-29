@@ -33,8 +33,10 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import mage.cards.decks.Deck;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
+import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.GameManager;
 import mage.interfaces.callback.CallbackClient;
@@ -44,6 +46,7 @@ import mage.view.AbilityPickerView;
 import mage.view.ChatMessage;
 import mage.view.GameClientMessage;
 import mage.view.GameView;
+import mage.view.TableClientMessage;
 
 /**
  *
@@ -73,9 +76,9 @@ public class Client implements CallbackClient {
 		logger.info(callback.getMessageId() + " - " + callback.getMethod());
 		try {
 			if (callback.getMethod().equals("startGame")) {
-				UUID[] data = (UUID[]) callback.getData();
-                GameManager.getInstance().setCurrentPlayerUUID(data[1]);
-				gameStarted(data[0], data[1]);
+				TableClientMessage message = (TableClientMessage) callback.getData();
+                GameManager.getInstance().setCurrentPlayerUUID(message.getPlayerId());
+				gameStarted(message.getGameId(), message.getPlayerId());
 			}
 			else if (callback.getMethod().equals("replayGame")) {
 				replayGame();
@@ -154,6 +157,10 @@ public class Client implements CallbackClient {
 					logger.warning("message out of sequence - ignoring");
 				}
 			}
+			else if (callback.getMethod().equals("sideboard")) {
+				TableClientMessage message = (TableClientMessage) callback.getData();
+				sideboard(message.getDeck(), message.getTableId());
+			}
 			messageId = callback.getMessageId();
 		}
 		catch (Exception ex) {
@@ -197,6 +204,10 @@ public class Client implements CallbackClient {
 		catch (Exception ex) {
 			handleException(ex);
 		}
+	}
+
+	protected void sideboard(Deck deck, UUID tableId) {
+		frame.showDeckEditor(DeckEditorMode.Sideboard, deck, tableId);
 	}
 
 	private void handleException(Exception ex) {

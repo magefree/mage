@@ -57,6 +57,15 @@ public abstract class MatchImpl<T extends Game> implements Match {
 	}
 
 	@Override
+	public MatchPlayer getPlayer(UUID playerId) {
+		for (MatchPlayer player: players) {
+			if (player.getPlayer().getId().equals(playerId))
+				return player;
+		}
+		return null;
+	}
+
+	@Override
 	public void addPlayer(Player player, Deck deck) {
 		MatchPlayer mPlayer = new MatchPlayer(player, deck);
 		players.add(mPlayer);
@@ -87,6 +96,11 @@ public abstract class MatchImpl<T extends Game> implements Match {
 		return games.get(games.size() -1);
 	}
 
+	@Override
+	public int getNumGames() {
+		return games.size();
+	}
+
 	protected void initGame(Game game) throws GameException {
 		for (MatchPlayer matchPlayer: this.players) {
 			game.addPlayer(matchPlayer.getPlayer());
@@ -108,4 +122,28 @@ public abstract class MatchImpl<T extends Game> implements Match {
 			}
 		}
 	}
+
+	@Override
+	public UUID getChooser() {
+		UUID loserId = null;
+		Game game = getGame();
+		for (MatchPlayer player: this.players) {
+			Player p = game.getPlayer(player.getPlayer().getId());
+			if (p != null) {
+				if (p.hasLost())
+					loserId = p.getId();
+			}
+		}
+		return loserId;
+	}
+
+	@Override
+	public boolean isDoneSideboarding() {
+		for (MatchPlayer player: this.players) {
+			if (!player.isDoneSideboarding())
+				return false;
+		}
+		return true;
+	}
+
 }

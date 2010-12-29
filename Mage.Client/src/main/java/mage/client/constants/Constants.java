@@ -82,4 +82,11 @@ public final class Constants {
 		public static final String imageBaseDir = "plugins" + File.separator + "images" + File.separator;
 		public static final String IMAGE_PROPERTIES_FILE = "image.url.properties";
 	}
+
+	public enum DeckEditorMode {
+		Constructed,
+		Limited,
+		Sideboard
+	}
+
 }

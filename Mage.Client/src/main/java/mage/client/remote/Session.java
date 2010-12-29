@@ -40,8 +40,6 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import mage.Constants.MultiplayerAttackOption;
-import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.DeckCardLists;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
@@ -49,7 +47,6 @@ import mage.client.components.MageUI;
 import mage.client.game.GamePanel;
 import mage.client.util.Config;
 import mage.game.GameException;
-import mage.game.match.MatchType;
 import mage.interfaces.MageException;
 import mage.game.match.MatchOptions;
 import mage.interfaces.Server;
@@ -464,6 +461,20 @@ public class Session {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
 			handleMageException(ex);
+		}
+		return false;
+	}
+
+	public boolean submitDeck(UUID tableId, DeckCardLists deck) {
+		try {
+			server.submitDeck(sessionId, tableId, deck);
+			return true;
+		} catch (RemoteException ex) {
+			handleRemoteException(ex);
+		} catch (MageException ex) {
+			handleMageException(ex);
+		} catch (GameException ex) {
+			handleGameException(ex);
 		}
 		return false;
 	}

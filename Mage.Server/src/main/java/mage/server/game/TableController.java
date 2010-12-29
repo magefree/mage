@@ -39,7 +39,6 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.util.List;
 import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -47,8 +46,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
-import mage.Constants.MultiplayerAttackOption;
-import mage.Constants.RangeOfInfluence;
 import mage.Constants.TableState;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
@@ -56,9 +53,11 @@ import mage.game.Game;
 import mage.game.GameException;
 import mage.game.GameStates;
 import mage.game.match.Match;
-import mage.game.match.MatchType;
 import mage.game.Seat;
+import mage.game.events.Listener;
+import mage.game.events.TableEvent;
 import mage.game.match.MatchOptions;
+import mage.game.match.MatchPlayer;
 import mage.players.Player;
 import mage.server.ChatManager;
 import mage.server.Main;
@@ -76,7 +75,6 @@ public class TableController {
 
 	private UUID sessionId;
 	private UUID chatId;
-	//private UUID gameId;
 	private Table table;
 	private Match match;
 	private MatchOptions options;
@@ -87,8 +85,26 @@ public class TableController {
 		chatId = ChatManager.getInstance().createChatSession();
 		this.options = options;
 		match = GameFactory.getInstance().createMatch(options.getGameType(), options);
-		//gameId = game.getId();
-		table = new Table(options.getGameType(), DeckValidatorFactory.getInstance().createDeckValidator(options.getDeckType()), options.getPlayerTypes());
+		table = new Table(options.getGameType(), options.getName(), DeckValidatorFactory.getInstance().createDeckValidator(options.getDeckType()), options.getPlayerTypes());
+		init();
+	}
+
+	private void init() {
+		table.addTableEventListener(
+			new Listener<TableEvent> () {
+				@Override
+				public void event(TableEvent event) {
+					switch (event.getEventType()) {
+						case SIDEBOARD:
+							sideboard(event.getPlayerId());
+							break;
+						case SUBMIT_DECK:
+							submitDeck(event.getPlayerId(), event.getDeck());
+							break;
+					}
+				}
+			}
+		);
 	}
 
 	public synchronized boolean joinTable(UUID sessionId, String name, DeckCardLists deckList) throws GameException {
@@ -114,6 +130,24 @@ public class TableController {
 		}
 
 		return true;
+	}
+
+	public synchronized boolean submitDeck(UUID sessionId, DeckCardLists deckList) throws GameException {
+		if (table.getState() != TableState.SIDEBOARDING) {
+			return false;
+		}
+		MatchPlayer player = match.getPlayer(sessionPlayerMap.get(sessionId));
+		Deck deck = Deck.load(deckList);
+		if (!Main.server.isTestMode() && !validDeck(deck)) {
+			throw new GameException(player.getPlayer().getName() + " has an invalid deck for this format");
+		}
+		submitDeck(sessionPlayerMap.get(sessionId), deck);
+		return true;
+	}
+
+	private void submitDeck(UUID playerId, Deck deck) {
+		MatchPlayer player = match.getPlayer(playerId);
+		player.submitDeck(deck);
 	}
 
 	public boolean watchTable(UUID sessionId) {
@@ -159,30 +193,53 @@ public class TableController {
 		if (sessionId.equals(this.sessionId) && table.getState() == TableState.STARTING) {
 			try {
 				match.startMatch();
-				startGame();
+				startGame(null);
 			} catch (GameException ex) {
 				logger.log(Level.SEVERE, null, ex);
 			}
 		}
 	}
 
-	private void startGame() throws GameException {
+	private void startGame(UUID choosingPlayerId) throws GameException {
 		match.startGame();
-		GameManager.getInstance().createGameSession(match.getGame(), sessionPlayerMap, table.getId());
+		table.initGame();
+		GameManager.getInstance().createGameSession(match.getGame(), sessionPlayerMap, table.getId(), choosingPlayerId);
 		SessionManager sessionManager = SessionManager.getInstance();
 		for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
 			sessionManager.getSession(entry.getKey()).gameStarted(match.getGame().getId(), entry.getValue());
 		}
 	}
 
+	private void sideboard() {
+		table.sideboard();
+		for (MatchPlayer player: match.getPlayers()) {
+			player.setSideboarding();
+			player.getPlayer().sideboard(table);
+		}
+		while (!match.isDoneSideboarding()){}
+	}
+
+	private void sideboard(UUID playerId) {
+		SessionManager sessionManager = SessionManager.getInstance();
+		for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
+			if (entry.getValue().equals(playerId)) {
+				MatchPlayer player = match.getPlayer(entry.getValue());
+				sessionManager.getSession(entry.getKey()).sideboard(player.getDeck(), table.getId());
+				break;
+			}
+		}
+	}
+
 	public void endGame() {
+		UUID choosingPlayerId = match.getChooser();
 		match.endGame();
 		table.endGame();
 		saveGame();
 		GameManager.getInstance().removeGame(match.getGame().getId());
 		try {
 			if (!match.isMatchOver()) {
-				startGame();
+				sideboard();
+				startGame(choosingPlayerId);
 			}
 		} catch (GameException ex) {
 			logger.log(Level.SEVERE, null, ex);

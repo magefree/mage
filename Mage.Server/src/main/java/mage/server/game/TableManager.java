@@ -30,15 +30,11 @@ package mage.server.game;
 
 import mage.game.Table;
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
-import mage.Constants.MultiplayerAttackOption;
-import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
-import mage.game.match.MatchType;
 import mage.game.match.MatchOptions;
 import mage.util.Logging;
 
@@ -75,6 +71,10 @@ public class TableManager {
 
 	public boolean joinTable(UUID sessionId, UUID tableId, String name, DeckCardLists deckList) throws GameException {
 		return controllers.get(tableId).joinTable(sessionId, name, deckList);
+	}
+
+	public boolean submitDeck(UUID sessionId, UUID tableId, DeckCardLists deckList) throws GameException {
+		return controllers.get(tableId).submitDeck(sessionId, deckList);
 	}
 
 	public void removeSession(UUID sessionId) {

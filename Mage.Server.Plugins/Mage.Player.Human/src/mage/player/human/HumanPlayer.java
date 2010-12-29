@@ -53,6 +53,7 @@ import mage.cards.decks.Deck;
 import mage.choices.ChoiceImpl;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.game.Game;
+import mage.game.Table;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetAmount;
@@ -71,8 +72,6 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	final transient PlayerResponse response = new PlayerResponse();
 
-	private boolean abort;
-
 	protected static FilterCreatureForCombat filter = new FilterCreatureForCombat();
 	protected static Choice replacementEffectChoice = new ChoiceImpl(true);
 
@@ -89,7 +88,6 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	public HumanPlayer(final HumanPlayer player) {
 		super(player);
-		this.abort = player.abort;
 	}
 
 	protected void waitForResponse() {
@@ -474,6 +472,11 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 		return response.getInteger();
 	}
 
+	@Override
+	public void sideboard(Table table) {
+		table.fireSideboardEvent(playerId);
+	}
+
 	protected void specialAction(Game game) {
 		Map<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId);
 		game.fireGetChoiceEvent(playerId, name, specialActions.values());
@@ -539,6 +542,8 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 			response.notify();
 		}
 	}
+
+	
 
 	@Override
 	public HumanPlayer copy() {

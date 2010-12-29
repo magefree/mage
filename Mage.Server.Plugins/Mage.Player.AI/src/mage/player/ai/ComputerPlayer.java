@@ -86,6 +86,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
+import mage.game.Table;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -111,7 +112,6 @@ import mage.util.TreeNode;
 public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> implements Player {
 
 	private final static transient Logger logger = Logging.getLogger(ComputerPlayer.class.getName());
-	private boolean abort;
 	private transient Map<Mana, Card> unplayable = new TreeMap<Mana, Card>();
 	private transient List<Card> playableNonInstant = new ArrayList<Card>();
 	private transient List<Card> playableInstant = new ArrayList<Card>();
@@ -128,7 +128,6 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 	public ComputerPlayer(final ComputerPlayer player) {
 		super(player);
-		this.abort = player.abort;
 	}
 	
 	@Override
@@ -766,6 +765,12 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	protected List<Permanent> getAvailableManaProducers(Game game) {
 //		logger.fine("getAvailableManaProducers");
 		return super.getAvailableManaProducers(game);
+	}
+
+	@Override
+	public void sideboard(Table table) {
+		//TODO: improve this
+		table.fireSubmitDeckEvent(playerId, deck);
 	}
 
 	protected Attackers getPotentialAttackers(Game game) {

@@ -46,11 +46,13 @@ import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.counters.Counters;
 import mage.filter.FilterAbility;
 import mage.game.events.GameEvent;
 import mage.game.Game;
+import mage.game.Table;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetAmount;
@@ -144,6 +146,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public abstract void selectBlockers(Game game);
 	public abstract void assignDamage(int damage, List<UUID> targets, UUID sourceId, Game game);
 	public abstract int getAmount(int min, int max, String message, Game game);
+	public abstract void sideboard(Table table);
 	
 	public void declareAttacker(UUID attackerId, UUID defenderId, Game game);
 	public void declareBlocker(UUID blockerId, UUID attackerId, Game game);

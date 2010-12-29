@@ -131,8 +131,8 @@ public interface Game extends MageItem, Serializable {
 	public boolean replaceEvent(GameEvent event);
 
 	//game play methods
-	public void init();
-	public void start();
+//	public void init(UUID choosingPlayerId);
+	public void start(UUID choosingPlayerId);
 	public void end();
 	public void mulligan(UUID playerId);
 	public void quit(UUID playerId);

@@ -79,6 +79,7 @@ import mage.target.common.TargetDiscard;
 
 public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Serializable {
 
+	protected boolean abort;
 	protected final UUID playerId;
 	protected String name;
 	protected boolean human;
@@ -122,6 +123,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	}
 
 	public PlayerImpl(final PlayerImpl<T> player) {
+		this.abort = player.abort;
 		this.playerId = player.playerId;
 		this.name = player.name;
 		this.human = player.human;
@@ -148,6 +150,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public void init(Game game) {
+		this.abort = false;
 		library.addAll(deck.getCards(), game);
 		this.hand.clear();
 		this.graveyard.clear();
