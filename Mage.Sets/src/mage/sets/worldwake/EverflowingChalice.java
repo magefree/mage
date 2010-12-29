@@ -44,6 +44,7 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.game.Game;
 
 /**
@@ -55,7 +56,7 @@ public class EverflowingChalice extends CardImpl<EverflowingChalice> {
 	public EverflowingChalice(UUID ownerId) {
 		super(ownerId, 123, "Everflowing Chalice", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
 		this.expansionSetCode = "WWK";
-		Ability ability1 = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect("charge", 1));
+		Ability ability1 = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.getName(), 1));
 		MultikickerAbility ability = new MultikickerAbility(new GainAbilitySourceEffect(ability1, Duration.WhileOnBattlefield), false);
 		ability.addManaCost(new GenericManaCost(2));
 		this.addAbility(ability);
@@ -120,7 +121,7 @@ class EverflowingChaliceEffect extends ManaEffect {
 	@Override
 	public boolean apply(Game game, Ability source) {
 		this.mana.clear();
-		this.mana.setColorless(game.getPermanent(source.getSourceId()).getCounters().getCount("charge"));
+		this.mana.setColorless(game.getPermanent(source.getSourceId()).getCounters().getCount(CounterType.CHARGE));
 		return super.apply(game, source);
 	}
 

@@ -193,6 +193,11 @@ public class StackAbility implements StackObject, Ability {
 	}
 
 	@Override
+	public String getRule(String source) {
+		return ability.getRule(source);
+	}
+
+	@Override
 	public void setControllerId(UUID controllerId) {
 		this.controllerId = controllerId;
 	}

@@ -28,11 +28,13 @@
 
 package mage.game;
 
+import mage.game.match.MatchType;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TwoPlayerDuelType extends GameType {
+public class TwoPlayerDuelType extends MatchType<TwoPlayerDuelType> {
 
 	public TwoPlayerDuelType() {
 		this.name = "Two Player Duel";
@@ -41,6 +43,15 @@ public class TwoPlayerDuelType extends GameType {
 		this.numTeams = 0;
 		this.useAttackOption = false;
 		this.useRange = false;
+	}
+
+	protected TwoPlayerDuelType(final TwoPlayerDuelType matchType) {
+		super(matchType);
+	}
+
+	@Override
+	public TwoPlayerDuelType copy() {
+		return new TwoPlayerDuelType(this);
 	}
 
 }

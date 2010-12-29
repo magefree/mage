@@ -38,6 +38,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AddCountersSourceEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -51,9 +52,9 @@ public class LuxCannon extends CardImpl<LuxCannon> {
     public LuxCannon (UUID ownerId) {
         super(ownerId, 173, "Lux Cannon", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "SOM";
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect("charge", 1), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.getName(), 1), new TapSourceCost()));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
-        ability.addCost(new RemoveCountersSourceCost("charge", 3));
+        ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.getName(), 3));
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }

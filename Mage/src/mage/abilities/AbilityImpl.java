@@ -303,6 +303,17 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 	}
 
 	@Override
+	public String getRule(String source) {
+		return formatRule(getRule(), source);
+	}
+
+	protected String formatRule(String rule, String source) {
+		String replace = rule.replace("{this}", source);
+		replace = replace.replace("{source}", source);
+		return replace;
+	}
+
+	@Override
 	public void addCost(Cost cost) {
 		if (cost != null) {
 			this.costs.add(cost);

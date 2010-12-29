@@ -28,6 +28,7 @@
 
 package mage.game;
 
+import mage.game.match.MatchType;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -59,7 +60,7 @@ public class FreeForAll extends GameImpl<FreeForAll> {
 	}
 
 	@Override
-	public GameType getGameType() {
+	public MatchType getGameType() {
 		return new FreeForAllType();
 	}
 

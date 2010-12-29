@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mage.Constants.MultiplayerAttackOption;
+import mage.Constants.RangeOfInfluence;
+import mage.game.match.MatchOptions;
 
 /**
  * Base for starting Mage server.
@@ -64,14 +67,18 @@ public class MageBase {
             connect("player", "localhost", 17171);
             UUID roomId = server.getMainRoomId();
 
-            List<String> playerTypes = new ArrayList<String>();
-            playerTypes.add("Human");
-            playerTypes.add("Computer - default");
-            TableView table = server.createTable(sessionId, roomId, "Two Player Duel", "Limited", playerTypes, null, null);
+			MatchOptions options = new MatchOptions("1", "Two Player Duel");
+			options.getPlayerTypes().add("Human");
+			options.getPlayerTypes().add("Computer - default");
+			options.setDeckType("Limited");
+			options.setAttackOption(MultiplayerAttackOption.LEFT);
+			options.setRange(RangeOfInfluence.ALL);
+			options.setWinsNeeded(1);
+            TableView table = server.createTable(sessionId, roomId, options);
             System.out.println("Cards in the deck: " + Sets.loadDeck("UW Control.dck").getCards().size());
             server.joinTable(sessionId, roomId, table.getTableId(), "Human", Sets.loadDeck("UW Control.dck"));
             server.joinTable(sessionId, roomId, table.getTableId(), "Computer", Sets.loadDeck("UW Control.dck"));
-            server.startGame(sessionId, roomId, table.getTableId());
+            server.startMatch(sessionId, roomId, table.getTableId());
 
             synchronized (syncStart) {
                 int waitTime = 7000;

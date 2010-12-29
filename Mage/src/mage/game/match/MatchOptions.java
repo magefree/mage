@@ -26,50 +26,79 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.game;
+package mage.game.match;
 
-import mage.cards.decks.Deck;
-import mage.players.Player;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import mage.Constants.MultiplayerAttackOption;
+import mage.Constants.RangeOfInfluence;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MatchPlayer {
-	private int wins;
-	private int loses;
-	private Deck deck;
-	private Player player;
+public class MatchOptions implements Serializable {
 
-	public MatchPlayer(Player player, Deck deck) {
-		this.player = player;
-		this.deck = deck;
-		this.wins = 0;
-		this.loses = 0;
+	protected String name;
+	protected MultiplayerAttackOption attackOption;
+	protected RangeOfInfluence range;
+	protected int winsNeeded;
+	protected String gameType;
+	protected String deckType;
+	protected List<String> playerTypes = new ArrayList<String>();
+
+	public MatchOptions(String name, String gameType) {
+		this.name = name;
+		this.gameType = gameType;
 	}
 
-	public int getWins() {
-		return wins;
+	public String getName() {
+		return name;
 	}
 
-	public void addWin() {
-		this.wins++;
+	public MultiplayerAttackOption getAttackOption() {
+		return attackOption;
 	}
 
-	public int getLoses() {
-		return loses;
+	public void setAttackOption(MultiplayerAttackOption attackOption) {
+		this.attackOption = attackOption;
 	}
 
-	public void addLose() {
-		this.loses++;
+	public RangeOfInfluence getRange() {
+		return range;
 	}
 
-	public Deck getDeck() {
-		return deck;
+	public void setRange(RangeOfInfluence range) {
+		this.range = range;
 	}
 
-	public Player getPlayer() {
-		return player;
+	public int getWinsNeeded() {
+		return winsNeeded;
+	}
+
+	public void setWinsNeeded(int winsNeeded) {
+		this.winsNeeded = winsNeeded;
+	}
+
+	public String getGameType() {
+		return gameType;
+	}
+
+	public void setGameType(String gameType) {
+		this.gameType = gameType;
+	}
+
+	public String getDeckType() {
+		return deckType;
+	}
+
+	public void setDeckType(String deckType) {
+		this.deckType = deckType;
+	}
+
+	public List<String> getPlayerTypes() {
+		return playerTypes;
 	}
 
 }

@@ -76,7 +76,7 @@ public class CardView implements Serializable {
 	public CardView(Card card) {
 		this.id = card.getId();
 		this.name = card.getName();
-		this.rules = formatRules(card.getRules());
+		this.rules = card.getRules();
 		if (card instanceof Permanent) {
 			this.power = Integer.toString(card.getPower().getValue());
 			this.toughness = Integer.toString(card.getToughness().getValue());
@@ -118,7 +118,7 @@ public class CardView implements Serializable {
 	CardView(Token token) {
 		this.id = token.getId();
 		this.name = token.getName();
-		this.rules = formatRules(token.getAbilities().getRules());
+		this.rules = token.getAbilities().getRules(this.name);
 		this.power = token.getPower().toString();
 		this.toughness = token.getToughness().toString();
 		this.loyalty = token.getLoyalty().toString();
@@ -143,19 +143,19 @@ public class CardView implements Serializable {
 		}
 	}
 	
-	protected List<String> formatRules(List<String> rules) {
-		List<String> newRules = new ArrayList<String>();
-		for (String rule: rules) {
-			newRules.add(formatRule(rule));
-		}
-		return newRules;
-	}
-
-	protected String formatRule(String rule) {
-		String replace = rule.replace("{this}", this.name);
-		replace = replace.replace("{source}", this.name);
-		return replace;
-	}
+//	protected List<String> formatRules(List<String> rules) {
+//		List<String> newRules = new ArrayList<String>();
+//		for (String rule: rules) {
+//			newRules.add(formatRule(rule));
+//		}
+//		return newRules;
+//	}
+//
+//	protected String formatRule(String rule) {
+//		String replace = rule.replace("{this}", this.name);
+//		replace = replace.replace("{source}", this.name);
+//		return replace;
+//	}
 
 	public String getName() {
 		return name;

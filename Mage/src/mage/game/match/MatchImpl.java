@@ -26,32 +26,43 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.game;
+package mage.game.match;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import mage.cards.decks.Deck;
+import mage.game.Game;
+import mage.game.GameException;
 import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MatchImpl implements Match {
+public abstract class MatchImpl<T extends Game> implements Match {
 
+	protected UUID id = UUID.randomUUID();
 	protected List<MatchPlayer> players = new ArrayList<MatchPlayer>();
-	protected List<Game> games = new ArrayList<Game>();
-	protected int winsNeeded;
-	protected int maxPlayers;
-	protected int minPlayers;
+	protected List<T> games = new ArrayList<T>();
+	protected MatchOptions options;
 	
-	public MatchImpl(int winsNeeded) {
-		this.winsNeeded = winsNeeded;
+	public MatchImpl(MatchOptions options) {
+		this.options = options;
 	}
 
 	@Override
 	public List<MatchPlayer> getPlayers() {
 		return players;
+	}
+
+	@Override
+	public MatchPlayer getPlayer(UUID playerId) {
+		for (MatchPlayer player: players) {
+			if (player.getPlayer().getId().equals(playerId))
+				return player;
+		}
+		return null;
 	}
 
 	@Override
@@ -61,14 +72,19 @@ public class MatchImpl implements Match {
 	}
 
 	@Override
-	public void startMatch() {
+	public void startMatch() throws GameException {
 
+	}
+
+	@Override
+	public UUID getId() {
+		return id;
 	}
 
 	@Override
 	public boolean isMatchOver() {
 		for (MatchPlayer player: players) {
-			if (player.getWins() >= winsNeeded) {
+			if (player.getWins() >= options.getWinsNeeded()) {
 				return true;
 			}
 		}
@@ -76,13 +92,58 @@ public class MatchImpl implements Match {
 	}
 
 	@Override
-	public int getMaxPlayers() {
-		return this.maxPlayers;
+	public T getGame() {
+		return games.get(games.size() -1);
 	}
 
 	@Override
-	public int getMinPlayers() {
-		return this.minPlayers;
+	public int getNumGames() {
+		return games.size();
+	}
+
+	protected void initGame(Game game) throws GameException {
+		for (MatchPlayer matchPlayer: this.players) {
+			game.addPlayer(matchPlayer.getPlayer());
+			game.loadCards(matchPlayer.getDeck().getCards(), matchPlayer.getPlayer().getId());
+			game.loadCards(matchPlayer.getDeck().getSideboard(), matchPlayer.getPlayer().getId());
+		}
+	}
+
+	@Override
+	public void endGame() {
+		Game game = getGame();
+		for (MatchPlayer player: this.players) {
+			Player p = game.getPlayer(player.getPlayer().getId());
+			if (p != null) {
+				if (p.hasWon())
+					player.addWin();
+				if (p.hasLost())
+					player.addLose();
+			}
+		}
+	}
+
+	@Override
+	public UUID getChooser() {
+		UUID loserId = null;
+		Game game = getGame();
+		for (MatchPlayer player: this.players) {
+			Player p = game.getPlayer(player.getPlayer().getId());
+			if (p != null) {
+				if (p.hasLost())
+					loserId = p.getId();
+			}
+		}
+		return loserId;
+	}
+
+	@Override
+	public boolean isDoneSideboarding() {
+		for (MatchPlayer player: this.players) {
+			if (!player.isDoneSideboarding())
+				return false;
+		}
+		return true;
 	}
 
 }

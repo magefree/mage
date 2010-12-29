@@ -47,7 +47,7 @@ public class StackAbilityView extends CardView {
 		this.sourceName = sourceName;
 		this.sourceCard = sourceCard;
 		this.rules = new ArrayList<String>();
-		rules.add(formatRule(ability.getRule()));
+		rules.add(ability.getRule(sourceName));
 		this.power = ability.getPower().toString();
 		this.toughness = ability.getToughness().toString();
 		this.loyalty = ability.getLoyalty().toString();
@@ -60,13 +60,6 @@ public class StackAbilityView extends CardView {
 		setTargets(ability.getTargets());
 	}
 
-	@Override
-	protected String formatRule(String rule) {
-		String newRule = rule.replace("{this}", this.sourceName);
-		newRule.replace("{source}", this.sourceName);
-		return newRule;
-	}
-	
 	public CardView getSourceCard() {
 		return this.sourceCard;
 	}

@@ -30,10 +30,9 @@ package mage.server.game;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.MultiplayerAttackOption;
-import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
+import mage.game.match.MatchOptions;
 import mage.view.TableView;
 
 /**
@@ -44,7 +43,7 @@ public interface GamesRoom extends Room {
 
 	public List<TableView> getTables();
 	public boolean joinTable(UUID sessionId, UUID tableId, String name, DeckCardLists deckList) throws GameException;
-	public TableView createTable(UUID sessionId, String gameType, String deckType, List<String> playerTypes, MultiplayerAttackOption attackOption, RangeOfInfluence range);
+	public TableView createTable(UUID sessionId, MatchOptions options);
 	public void removeTable(UUID sessionId, UUID tableId);
 	public TableView getTable(UUID tableId);
 	public void leaveTable(UUID sessionId, UUID tableId);

@@ -287,8 +287,11 @@ abstract public class Animation {
 		}
 	}
 	
-	static public void showCard(final MagePermanent card) {
-		new Animation(600) {
+	static public void showCard(final MagePermanent card, int count) {
+		if (count == 0) {
+            count = 1;
+        }
+        new Animation(600 / count) {
 			protected void start () {
 			}
 
@@ -304,8 +307,11 @@ abstract public class Animation {
 		};
 	}
 	
-	static public void hideCard(final MagePermanent card) {
-		new Animation(600) {
+	static public void hideCard(final MagePermanent card, int count) {
+	    if (count == 0) {
+            count = 1;
+        }
+        new Animation(600 / count) {
 			protected void start () {
 			}
 

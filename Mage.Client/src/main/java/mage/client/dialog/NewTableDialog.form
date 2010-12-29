@@ -23,7 +23,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="358" max="32767" attributes="0"/>
+              <EmptySpace pref="395" max="32767" attributes="0"/>
               <Component id="btnOK" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
@@ -32,7 +32,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lbDeckType" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="426" max="32767" attributes="0"/>
+              <EmptySpace pref="463" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -41,17 +41,22 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblNumPlayers" min="-2" max="-2" attributes="0"/>
-                          <Component id="spnNumPlayers" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="spnNumPlayers" min="-2" pref="57" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblRange" min="-2" max="-2" attributes="1"/>
-                          <Component id="cbRange" min="-2" pref="141" max="-2" attributes="1"/>
+                          <Component id="cbRange" min="-2" pref="143" max="-2" attributes="1"/>
                       </Group>
-                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblAttack" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbAttackOption" alignment="0" min="-2" pref="199" max="-2" attributes="0"/>
+                          <Component id="cbAttackOption" pref="235" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="spnNumWins" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Component id="lblNumWins" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="lblGameType" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -61,34 +66,34 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jSeparator2" pref="466" max="32767" attributes="0"/>
+              <Component id="jSeparator2" pref="503" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="396" max="32767" attributes="0"/>
+              <EmptySpace pref="433" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="player1Panel" pref="466" max="32767" attributes="0"/>
+              <Component id="player1Panel" pref="503" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="399" max="32767" attributes="0"/>
+              <EmptySpace pref="436" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jSeparator1" pref="466" max="32767" attributes="0"/>
+              <Component id="jSeparator1" pref="503" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Component id="pnlOtherPlayers" alignment="0" min="-2" pref="486" max="-2" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSeparator3" pref="466" max="32767" attributes="0"/>
+                  <Component id="jSeparator3" pref="503" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -105,25 +110,32 @@
               <Component id="lblGameType" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
               <Component id="cbGameType" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="lblAttack" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                      <Component id="cbAttackOption" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="lblNumPlayers" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                      <Component id="spnNumPlayers" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="lblNumPlayers" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                          <Component id="spnNumPlayers" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="lblRange" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                          <Component id="cbRange" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="lblAttack" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                          <Component id="cbAttackOption" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="lblRange" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblNumWins" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                      <Component id="cbRange" min="-2" max="-2" attributes="0"/>
+                      <Component id="spnNumWins" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -132,21 +144,21 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlOtherPlayers" pref="83" max="32767" attributes="0"/>
+              <Component id="pnlOtherPlayers" pref="97" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jSeparator1" pref="4" max="32767" attributes="0"/>
+              <Component id="jSeparator1" pref="19" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnOK" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="223" max="-2" attributes="0"/>
                   <Component id="jSeparator3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="149" max="32767" attributes="0"/>
+                  <EmptySpace pref="159" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -259,6 +271,19 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Other Players"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblNumWins">
+      <Properties>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="spnNumWins"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Wins"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="spnNumWins">
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnNumWinsnumPlayersChanged"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

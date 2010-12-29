@@ -28,6 +28,8 @@
 
 package mage.game;
 
+import mage.counters.CounterType;
+import mage.game.match.MatchType;
 import java.io.IOException;
 import mage.game.stack.SpellStack;
 import java.io.Serializable;
@@ -108,8 +110,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	protected Map<UUID, Card> gameCards = new HashMap<UUID, Card>();
 	protected GameState state;
 	protected UUID startingPlayerId;
-	protected UUID choosingPlayerId;
+//	protected UUID choosingPlayerId;
 	protected UUID winnerId;
+
 	protected transient GameStates gameStates = new GameStates();
 	protected RangeOfInfluence range;
 	protected MultiplayerAttackOption attackOption;
@@ -128,7 +131,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		this.id = game.id;
 		this.ready = game.ready;
 		this.startingPlayerId = game.startingPlayerId;
-		this.choosingPlayerId = game.choosingPlayerId;
+//		this.choosingPlayerId = game.choosingPlayerId;
 		this.winnerId = game.winnerId;
 		this.range = game.range;
 		this.attackOption = game.attackOption;
@@ -298,8 +301,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	}
 
 	@Override
-	public void start() {
-		init();
+	public void start(UUID choosingPlayerId) {
+		init(choosingPlayerId);
 		PlayerList players = state.getPlayerList(startingPlayerId);
 		Player player = getPlayer(players.get());
 		while (!isGameOver()) {
@@ -315,13 +318,12 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			player = players.getNext(this);
 		}
 
-		winnerId = findWinner();
+		winnerId = findWinnersAndLosers();
 
 		saveState();
 	}
 
-	@Override
-	public void init() {
+	protected void init(UUID choosingPlayerId) {
 		for (Player player: state.getPlayers().values()) {
 			player.init(this);
 		}
@@ -334,19 +336,24 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		}
 
 		//20091005 - 103.2
-		if (startingPlayerId == null) {
-			TargetPlayer targetPlayer = new TargetPlayer();
-			targetPlayer.setRequired(true);
-			targetPlayer.setTargetName("starting player");
-			Player choosingPlayer = getPlayer(pickChoosingPlayer());
-			if (choosingPlayer.chooseTarget(Outcome.Benefit, targetPlayer, null, this)) {
-				startingPlayerId = ((List<UUID>)targetPlayer.getTargets()).get(0);
-				fireInformEvent(state.getPlayer(startingPlayerId).getName() + " will start");
-			}
-			else {
-				return;
-			}
+		TargetPlayer targetPlayer = new TargetPlayer();
+		targetPlayer.setRequired(true);
+		targetPlayer.setTargetName("starting player");
+		Player choosingPlayer;
+		if (choosingPlayerId == null) {
+			choosingPlayer = getPlayer(pickChoosingPlayer());
 		}
+		else {
+			choosingPlayer = this.getPlayer(choosingPlayerId);
+		}
+		if (choosingPlayer.chooseTarget(Outcome.Benefit, targetPlayer, null, this)) {
+			startingPlayerId = ((List<UUID>)targetPlayer.getTargets()).get(0);
+			fireInformEvent(state.getPlayer(startingPlayerId).getName() + " will start");
+		}
+		else {
+			return;
+		}
+
 		saveState();
 
 		//20091005 - 103.3
@@ -380,13 +387,21 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		}
 	}
 
-	protected UUID findWinner() {
+	protected UUID findWinnersAndLosers() {
+		UUID winner = null;
 		for (Player player: state.getPlayers().values()) {
 			if (player.hasWon() || (!player.hasLost() && !player.hasLeft())) {
-				return player.getId();
+				player.won(this);
+				winner = player.getId();
+				break;
 			}
 		}
-		return null;
+		for (Player player: state.getPlayers().values()) {
+			if (winner != null && !player.getId().equals(winner)) {
+				player.lost(this);
+			}
+		}
+		return winner;
 	}
 
 	protected void endOfTurn() {
@@ -568,7 +583,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 		//20091005 - 704.5a/704.5b/704.5c
 		for (Player player: state.getPlayers().values()) {
-			if (!player.hasLost() && (player.getLife() <= 0 || player.isEmptyDraw() || player.getCounters().getCount("Poison") >= 10)) {
+			if (!player.hasLost() && (player.getLife() <= 0 || player.isEmptyDraw() || player.getCounters().getCount(CounterType.POISON) >= 10)) {
 				player.lost(this);
 			}
 		}

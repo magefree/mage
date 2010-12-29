@@ -39,11 +39,10 @@ import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mage.Constants.MultiplayerAttackOption;
-import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
 import mage.interfaces.MageException;
+import mage.game.match.MatchOptions;
 import mage.interfaces.Server;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
@@ -56,7 +55,6 @@ import mage.server.game.ReplayManager;
 import mage.server.game.TableManager;
 import mage.server.util.ThreadExecutor;
 import mage.util.Logging;
-import mage.view.CardView;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.GameView;
 import mage.view.TableView;
@@ -117,9 +115,9 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public TableView createTable(UUID sessionId, UUID roomId, String gameType, String deckType, List<String> playerTypes, MultiplayerAttackOption attackOption, RangeOfInfluence range) throws MageException {
+	public TableView createTable(UUID sessionId, UUID roomId, MatchOptions options) throws MageException {
 		try {
-			TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(sessionId, gameType, deckType, playerTypes, attackOption, range);
+			TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(sessionId, options);
 			logger.info("Table " + table.getTableId() + " created");
 			return table;
 		}
@@ -151,6 +149,21 @@ public class ServerImpl extends RemoteServer implements Server {
 		try {
 			boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTable(sessionId, tableId, name, deckList);
 			logger.info("Session " + sessionId + " joined table " + tableId);
+			return ret;
+		}
+		catch (Exception ex) {
+			if (ex instanceof GameException)
+				throw (GameException)ex;
+			handleException(ex);
+		}
+		return false;
+	}
+
+	@Override
+	public boolean submitDeck(UUID sessionId, UUID tableId, DeckCardLists deckList) throws MageException, GameException {
+		try {
+			boolean ret = TableManager.getInstance().submitDeck(sessionId, tableId, deckList);
+			logger.info("Session " + sessionId + " submitted deck");
 			return ret;
 		}
 		catch (Exception ex) {
@@ -202,13 +215,13 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void startGame(final UUID sessionId, final UUID roomId, final UUID tableId) throws MageException {
+	public void startMatch(final UUID sessionId, final UUID roomId, final UUID tableId) throws MageException {
 		try {
 			rmiExecutor.execute(
 				new Runnable() {
 					@Override
 					public void run() {
-						TableManager.getInstance().startGame(sessionId, roomId, tableId);
+						TableManager.getInstance().startMatch(sessionId, roomId, tableId);
 					}
 				}
 			);

@@ -28,7 +28,8 @@
 
 package mage.abilities.effects.common;
 
-import mage.abilities.effects.WhileControlsContinuousEffect;
+import mage.abilities.condition.common.ControlsPermanent;
+import mage.abilities.effects.WhileConditionContiniousEffect;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
@@ -38,25 +39,32 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BoostSourceWhileControlsEffect extends WhileControlsContinuousEffect<BoostSourceWhileControlsEffect> {
+public class BoostSourceWhileControlsEffect extends WhileConditionContiniousEffect<BoostSourceWhileControlsEffect> {
 
 	private int power;
 	private int toughness;
+    private List<String> filterDescription;
 
 	public BoostSourceWhileControlsEffect(FilterPermanent filter, int power, int toughness) {
-		super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, filter, Outcome.BoostCreature);
+		super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, new ControlsPermanent(filter), Outcome.BoostCreature);
 		this.power = power;
 		this.toughness = toughness;
+        this.filterDescription = filter.getName();
 	}
 
 	public BoostSourceWhileControlsEffect(final BoostSourceWhileControlsEffect effect) {
 		super(effect);
 		this.power = effect.power;
 		this.toughness = effect.toughness;
+        this.filterDescription = new ArrayList<String>();
+        this.filterDescription.addAll(effect.filterDescription);
 	}
 
 	@Override
@@ -76,6 +84,6 @@ public class BoostSourceWhileControlsEffect extends WhileControlsContinuousEffec
 
 	@Override
 	public String getText(Ability source) {
-		return "{this} gets " + String.format("%1$+d/%2$+d", power, toughness) + " as long as you control a " + filter.getName();
+		return "{this} gets " + String.format("%1$+d/%2$+d", power, toughness) + " as long as you control a " + filterDescription;
 	}
 }

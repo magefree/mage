@@ -28,6 +28,7 @@
 
 package mage.game;
 
+import mage.game.match.MatchType;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -39,7 +40,7 @@ import mage.game.turn.TurnMod;
 public class TwoPlayerDuel extends GameImpl<TwoPlayerDuel> {
 
 	public TwoPlayerDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range) {
-		super(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL);
+		super(attackOption, range);
 	}
 
 	public TwoPlayerDuel(final TwoPlayerDuel game) {
@@ -47,7 +48,7 @@ public class TwoPlayerDuel extends GameImpl<TwoPlayerDuel> {
 	}
 
 	@Override
-	public GameType getGameType() {
+	public MatchType getGameType() {
 		return new TwoPlayerDuelType();
 	}
 
@@ -62,8 +63,8 @@ public class TwoPlayerDuel extends GameImpl<TwoPlayerDuel> {
 	}
 
 	@Override
-	public void init() {
-		super.init();
+	protected void init(UUID choosingPlayerId) {
+		super.init(choosingPlayerId);
 		state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
 	}
 

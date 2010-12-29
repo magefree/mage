@@ -26,44 +26,31 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.abilities.effects;
+package mage.counters.common;
 
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.SubLayer;
-import mage.abilities.Ability;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
+import mage.counters.BoostCounter;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class WhileControlsContinuousEffect<T extends WhileControlsContinuousEffect<T>> extends ContinuousEffectImpl<T> {
+public class MinusOneCounter extends BoostCounter<MinusOneCounter> {
 
-	protected FilterPermanent filter;
-	
-	public WhileControlsContinuousEffect(Duration duration, Layer layer, SubLayer sublayer, FilterPermanent filter, Outcome outcome) {
-		super(duration, outcome);
-		this.filter = filter;
-		this.layer = layer;
-		this.sublayer = sublayer;
+	public MinusOneCounter() {
+		super(-1, -1);
 	}
 
-	public WhileControlsContinuousEffect(WhileControlsContinuousEffect effect) {
-		super(effect);
-		this.filter = effect.filter.copy();
+	public MinusOneCounter(int amount) {
+		super(-1, -1);
+		this.count = amount;
 	}
-	
+
+	public MinusOneCounter(final MinusOneCounter counter) {
+		super(counter);
+	}
+
 	@Override
-	public boolean apply(Game game, Ability source) {
-		if (game.getBattlefield().countAll(filter, source.getControllerId()) > 0) {
-			return applyEffect(game, source);
-		}
-		return false;
+	public MinusOneCounter copy() {
+		return new MinusOneCounter(this);
 	}
-
-	protected abstract boolean applyEffect(Game game, Ability source);
-
 }

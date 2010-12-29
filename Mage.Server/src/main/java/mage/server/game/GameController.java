@@ -82,15 +82,17 @@ public class GameController implements GameCallback {
 	private Game game;
 	private UUID chatId;
 	private UUID tableId;
+	private UUID choosingPlayerId;
 	private Future<?> gameFuture;
 
 
-	public GameController(Game game, ConcurrentHashMap<UUID, UUID> sessionPlayerMap, UUID tableId) {
+	public GameController(Game game, ConcurrentHashMap<UUID, UUID> sessionPlayerMap, UUID tableId, UUID choosingPlayerId) {
 		gameSessionId = UUID.randomUUID();
 		this.sessionPlayerMap = sessionPlayerMap;
 		chatId = ChatManager.getInstance().createChatSession();
 		this.game = game;
 		this.tableId = tableId;
+		this.choosingPlayerId = choosingPlayerId;
 		init();
 	}
 
@@ -186,7 +188,7 @@ public class GameController implements GameCallback {
 					return;
 				}
 			}
-			GameWorker worker = new GameWorker(game, this);
+			GameWorker worker = new GameWorker(game, choosingPlayerId, this);
 			gameFuture = gameExecutor.submit(worker);
 		}
 	}

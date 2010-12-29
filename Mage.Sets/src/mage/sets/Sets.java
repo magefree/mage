@@ -31,11 +31,7 @@ package mage.sets;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import mage.cards.Card;
@@ -51,6 +47,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
 
 	private static final Sets fINSTANCE =  new Sets();
 	private static Set<String> names;
+    protected static Random rnd = new Random();
 
 	public static Sets getInstance() {
 		return fINSTANCE;
@@ -91,6 +88,24 @@ public class Sets extends HashMap<String, ExpansionSet> {
 			if (cardName != null)
 				return cardName;
 		}
+		return null;
+	}
+
+    public static String findCard(String name, boolean random) {
+        if (!random) {
+            return findCard(name);
+        } else {
+            List<String> cards = new ArrayList<String>();
+            for (ExpansionSet set: fINSTANCE.values()) {
+                String cardName = set.findCard(name, true);
+                if (cardName != null) {
+                    cards.add(cardName);
+                }
+            }
+            if (cards.size() > 0) {
+                return cards.get(rnd.nextInt(cards.size()));
+            }
+        }
 		return null;
 	}
 	

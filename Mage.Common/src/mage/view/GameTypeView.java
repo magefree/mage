@@ -29,7 +29,7 @@
 package mage.view;
 
 import java.io.Serializable;
-import mage.game.GameType;
+import mage.game.match.MatchType;
 
 /**
  *
@@ -45,7 +45,7 @@ public class GameTypeView implements Serializable {
 	private boolean useRange;
 	private boolean useAttackOption;
 
-	public GameTypeView(GameType gameType) {
+	public GameTypeView(MatchType gameType) {
 		this.name = gameType.getName();
 		this.minPlayers = gameType.getMinPlayers();
 		this.maxPlayers = gameType.getMaxPlayers();

@@ -50,23 +50,17 @@ import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 
 import javax.imageio.ImageIO;
-import javax.swing.Box;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JDesktopPane;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.JToolBar.Separator;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 
+import com.sun.java.swing.Painter;
+import mage.cards.decks.Deck;
 import mage.client.cards.CardsStorage;
 import mage.client.components.MageComponents;
+import mage.client.components.MageJDesktop;
+import mage.client.components.MageRoundPane;
 import mage.client.components.arcane.ManaSymbols;
+import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.dialog.*;
 import mage.client.plugins.impl.Plugins;
 import mage.client.remote.Session;
@@ -122,7 +116,8 @@ public class MageFrame extends javax.swing.JFrame {
 		});
 
 		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+            UIManager.put("desktop", new Color(0,0,0,0));
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 			//MageSynthStyleFactory f = new MageSynthStyleFactory(SynthLookAndFeel.getStyleFactory());
 			//SynthLookAndFeel.setStyleFactory(f);
 		} catch (Exception ex) {
@@ -145,61 +140,13 @@ public class MageFrame extends javax.swing.JFrame {
 		desktopPane.add(pickNumber, JLayeredPane.POPUP_LAYER);
 		session.getUI().addComponent(MageComponents.DESKTOP_PANE, desktopPane);
 
-        JComponent cardInfoPane = Plugins.getInstance().getCardInfoPane();
-        cardInfoPane.setSize(161, 221);
-        cardInfoPane.setPreferredSize(new Dimension(161, 221));
-        cardInfoPane.setVisible(false);
-        session.getUI().addComponent(MageComponents.CARD_INFO_PANE, cardInfoPane);
-        desktopPane.add(cardInfoPane, JLayeredPane.POPUP_LAYER);
-
         ManaSymbols.loadImages();
 
-		String filename = "/background.jpg";
-		try {
-			if (Plugins.getInstance().isThemePluginLoaded()) {
-				Map<String, JComponent> ui = new HashMap<String, JComponent>();
-				backgroundPane = (ImagePanel) Plugins.getInstance().updateTablePanel(ui);
-			} else {
-				InputStream is = this.getClass().getResourceAsStream(filename);
-				BufferedImage background = ImageIO.read(is);
-				backgroundPane = new ImagePanel(background, ImagePanel.SCALED);
-			}
-			backgroundPane.setSize(1024, 768);
-			desktopPane.add(backgroundPane, JLayeredPane.DEFAULT_LAYER);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		filename = "/label-mage.png";
-		try {
-			InputStream is = this.getClass().getResourceAsStream(filename);
-			
-			float ratio = 1179.0f / 678.0f;
-	    	titleRectangle = new Rectangle(640, (int)(640 / ratio));
-	    	if (is != null) {
-	    		BufferedImage image = ImageIO.read(is);
-	    		//ImageIcon resized = new ImageIcon(image.getScaledInstance(titleRectangle.width, titleRectangle.height, java.awt.Image.SCALE_SMOOTH));
-				title = new JLabel();
-	    		title.setIcon(new ImageIcon(image));
-	    		backgroundPane.setLayout(null);
-				backgroundPane.add(title);
-	    	}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		filename = "/icon-mage.png";
-		try {
-			InputStream is = this.getClass().getResourceAsStream(filename);
-			
-	    	if (is != null) {
-	    		BufferedImage image = ImageIO.read(is);
-	    		setIconImage(image);
-	    	}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+        addTooltipContainer();
+        setBackground();
+		addMageLabel();
+		setAppIcon();
+
 		desktopPane.add(ArrowBuilder.getArrowsPanel(), JLayeredPane.DRAG_LAYER);
 		
 		desktopPane.addComponentListener(new ComponentAdapter(){
@@ -270,6 +217,77 @@ public class MageFrame extends javax.swing.JFrame {
             }
         });
     }
+
+    private void addTooltipContainer() {
+        final JEditorPane cardInfoPane = (JEditorPane) Plugins.getInstance().getCardInfoPane();
+        cardInfoPane.setSize(320, 201);
+        cardInfoPane.setLocation(40, 40);
+        cardInfoPane.setBackground(new Color(0,0,0,0));
+
+        MageRoundPane popupContainer = new MageRoundPane();
+        popupContainer.setLayout(null);
+
+        popupContainer.add(cardInfoPane);
+        popupContainer.setVisible(false);
+        popupContainer.setBounds(0, 0, 320 + 80, 201 + 80);
+
+        desktopPane.add(popupContainer, JLayeredPane.POPUP_LAYER);
+
+        session.getUI().addComponent(MageComponents.CARD_INFO_PANE, cardInfoPane);
+        session.getUI().addComponent(MageComponents.POPUP_CONTAINER, popupContainer);
+    }
+
+    private void setBackground() {
+        String filename = "/background.jpg";
+        try {
+            if (Plugins.getInstance().isThemePluginLoaded()) {
+                Map<String, JComponent> ui = new HashMap<String, JComponent>();
+                backgroundPane = (ImagePanel) Plugins.getInstance().updateTablePanel(ui);
+            } else {
+                InputStream is = this.getClass().getResourceAsStream(filename);
+                BufferedImage background = ImageIO.read(is);
+                backgroundPane = new ImagePanel(background, ImagePanel.SCALED);
+            }
+            backgroundPane.setSize(1024, 768);
+            desktopPane.add(backgroundPane, JLayeredPane.DEFAULT_LAYER);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addMageLabel() {
+        String filename = "/label-mage.png";
+		try {
+			InputStream is = this.getClass().getResourceAsStream(filename);
+
+			float ratio = 1179.0f / 678.0f;
+	    	titleRectangle = new Rectangle(640, (int)(640 / ratio));
+	    	if (is != null) {
+	    		BufferedImage image = ImageIO.read(is);
+	    		//ImageIcon resized = new ImageIcon(image.getScaledInstance(titleRectangle.width, titleRectangle.height, java.awt.Image.SCALE_SMOOTH));
+				title = new JLabel();
+	    		title.setIcon(new ImageIcon(image));
+	    		backgroundPane.setLayout(null);
+				backgroundPane.add(title);
+	    	}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+
+    private void setAppIcon() {
+        String filename = "/icon-mage.png";
+		try {
+			InputStream is = this.getClass().getResourceAsStream(filename);
+
+	    	if (is != null) {
+	    		BufferedImage image = ImageIO.read(is);
+	    		setIconImage(image);
+	    	}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
     
     private void  btnImagesActionPerformed(java.awt.event.ActionEvent evt) {
     	Plugins.getInstance().downloadImage(CardsStorage.getAllCards());
@@ -337,7 +355,7 @@ public class MageFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        desktopPane = new javax.swing.JDesktopPane();
+        desktopPane = new MageJDesktop();
         tablesPane = new mage.client.table.TablesPane();
         gamePane = new mage.client.game.GamePane();
         deckEditorPane = new mage.client.deckeditor.DeckEditorPane();
@@ -486,11 +504,10 @@ public class MageFrame extends javax.swing.JFrame {
 	private void btnDeckEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeckEditorActionPerformed
 		this.gamePane.setVisible(false);
 		this.tablesPane.setVisible(false);
-		this.deckEditorPane.setVisible(true);
-		this.deckEditorPane.showTables();
+		showDeckEditor(DeckEditorMode.Constructed, null, null);
 	}//GEN-LAST:event_btnDeckEditorActionPerformed
 
-	private void btnPreferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeckEditorActionPerformed
+	private void btnPreferencesActionPerformed(java.awt.event.ActionEvent evt) {                                              
         PhasesDialog.main(new String[]{});
 	}
 	
@@ -546,6 +563,11 @@ public class MageFrame extends javax.swing.JFrame {
 		this.deckEditorPane.setVisible(false);
 	}
 
+	public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId) {
+		this.deckEditorPane.setVisible(true);
+		this.deckEditorPane.show(mode, deck, tableId);
+	}
+
 	public static CombatDialog getCombatDialog() {
 		return combat;
 	}
@@ -595,7 +617,7 @@ public class MageFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnGames;
     private mage.client.deckeditor.DeckEditorPane deckEditorPane;
-    private static javax.swing.JDesktopPane desktopPane;
+    private static MageJDesktop desktopPane;
     private mage.client.game.GamePane gamePane;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;

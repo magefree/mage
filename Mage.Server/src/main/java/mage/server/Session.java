@@ -31,11 +31,13 @@ package mage.server;
 import java.util.logging.Level;
 import java.util.UUID;
 import java.util.logging.Logger;
+import mage.cards.decks.Deck;
 import mage.interfaces.callback.CallbackServerSession;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.game.GameManager;
 import mage.server.game.TableManager;
 import mage.util.Logging;
+import mage.view.TableClientMessage;
 
 /**
  *
@@ -90,7 +92,11 @@ public class Session {
 	}
 
 	public void gameStarted(final UUID gameId, final UUID playerId) {
-		fireCallback(new ClientCallback("startGame", new UUID[] {gameId, playerId}));
+		fireCallback(new ClientCallback("startGame", new TableClientMessage(gameId, playerId)));
+	}
+
+	public void sideboard(final Deck deck, final UUID tableId) {
+		fireCallback(new ClientCallback("sideboard", new TableClientMessage(deck, tableId)));
 	}
 
 	public void watchGame(final UUID gameId) {

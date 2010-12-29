@@ -36,7 +36,6 @@ package mage.client.deckeditor;
 
 import mage.cards.Card;
 import mage.cards.decks.Deck;
-import mage.cards.decks.DeckCardLists;
 import mage.client.MageFrame;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Event;
@@ -49,14 +48,13 @@ import mage.view.CardsView;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mage.client.constants.Constants.DeckEditorMode;
 import mage.sets.Sets;
 
 /**
@@ -69,6 +67,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 	private JFileChooser fcImportDeck;
 	private Deck deck = new Deck();
     private boolean isShowCardInfo = false;
+	private UUID tableId;
 
     /** Creates new form DeckEditorPanel */
     public DeckEditorPanel() {
@@ -85,10 +84,18 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 	    jSplitPane1.setOpaque(false);
     }
 
-	public void showDeckEditor() {
+	public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId) {
+		if (deck != null)
+			this.deck = deck;
+		this.tableId = tableId;
+		showDeckEditor(mode);
+	}
+
+	public void showDeckEditor(DeckEditorMode mode) {
 		this.cardSelector.loadCards(this.bigCard);
 		this.cardSelector.setVisible(true);
 		this.jPanel1.setVisible(true);
+		this.btnSubmit.setVisible(mode == DeckEditorMode.Sideboard);
 		this.cardSelector.getCardsList().clearCardEventListeners();
 		this.cardSelector.getCardsList().addCardEventListener(
 			new Listener<Event> () {
@@ -132,6 +139,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				}
 			}
 		);
+		refreshDeck();
 		this.setVisible(true);
 		this.repaint();
 	}
@@ -172,6 +180,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         btnNew = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
         btnImport = new javax.swing.JButton();
+        btnSubmit = new javax.swing.JButton();
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setResizeWeight(0.5);
@@ -229,7 +238,15 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        btnSubmit.setText("Submit");
+        btnSubmit.setName("btnSubmit"); // NOI18N
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
+
+		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,7 +270,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         .addComponent(btnExit))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnImport)))
+                        .addComponent(btnImport)
+						.addContainerGap()
+						.addComponent(btnSubmit)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -270,7 +289,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         .addComponent(btnNew)
                         .addComponent(btnExit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnImport)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnImport)
+                        .addComponent(btnSubmit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, isShowCardInfo ? 30 : 159, Short.MAX_VALUE)
                 .addComponent(cardInfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -383,6 +404,11 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		fcImportDeck.setSelectedFile(null);
 	}//GEN-LAST:event_btnImportActionPerformed
 
+	private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {
+		MageFrame.getSession().submitDeck(tableId, deck.getDeckCardLists());
+		this.setVisible(false);
+	}
+
 	public DeckImporter getDeckImporter(String file) {
 		if (file.toLowerCase().endsWith("dec"))
 			return new DecDeckImporter();
@@ -410,6 +436,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private JComponent cardInfoPane;
+	private javax.swing.JButton btnSubmit;
 }
 
 class DeckFilter extends FileFilter {

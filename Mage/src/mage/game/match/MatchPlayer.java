@@ -26,9 +26,8 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.game;
+package mage.game.match;
 
-import java.util.List;
 import mage.cards.decks.Deck;
 import mage.players.Player;
 
@@ -36,13 +35,56 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface Match {
+public class MatchPlayer {
+	private int wins;
+	private int loses;
+	private Deck deck;
+	private Player player;
+	private boolean doneSideboarding;
 
-	public boolean isMatchOver();
-	public List<MatchPlayer> getPlayers();
-	public void addPlayer(Player player, Deck deck);
-	public int getMaxPlayers();
-	public int getMinPlayers();
-	public void startMatch();
-	
+	public MatchPlayer(Player player, Deck deck) {
+		this.player = player;
+		this.deck = deck;
+		this.wins = 0;
+		this.loses = 0;
+		this.doneSideboarding = true;
+	}
+
+	public int getWins() {
+		return wins;
+	}
+
+	public void addWin() {
+		this.wins++;
+	}
+
+	public int getLoses() {
+		return loses;
+	}
+
+	public void addLose() {
+		this.loses++;
+	}
+
+	public Deck getDeck() {
+		return deck;
+	}
+
+	public void submitDeck(Deck deck) {
+		this.deck = deck;
+		this.doneSideboarding = true;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setSideboarding() {
+		this.doneSideboarding = false;
+	}
+
+	public boolean isDoneSideboarding() {
+		return this.doneSideboarding;
+	}
+
 }

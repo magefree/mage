@@ -28,6 +28,7 @@
 
 package mage.game;
 
+import mage.game.match.MatchType;
 import mage.cards.Card;
 import mage.game.stack.SpellStack;
 import mage.MageObject;
@@ -64,7 +65,7 @@ import mage.players.Players;
 
 public interface Game extends MageItem, Serializable {
 
-	public GameType getGameType();
+	public MatchType getGameType();
 	public int getNumPlayers();
 	public int getLife();
 	public RangeOfInfluence getRangeOfInfluence();
@@ -130,8 +131,8 @@ public interface Game extends MageItem, Serializable {
 	public boolean replaceEvent(GameEvent event);
 
 	//game play methods
-	public void init();
-	public void start();
+//	public void init(UUID choosingPlayerId);
+	public void start(UUID choosingPlayerId);
 	public void end();
 	public void mulligan(UUID playerId);
 	public void quit(UUID playerId);

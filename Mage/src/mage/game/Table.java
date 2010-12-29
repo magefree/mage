@@ -32,7 +32,12 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.TableState;
+import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
+import mage.game.events.Listener;
+import mage.game.events.TableEvent;
+import mage.game.events.TableEvent.EventType;
+import mage.game.events.TableEventSource;
 import mage.players.Player;
 
 /**
@@ -49,10 +54,13 @@ public class Table implements Serializable {
 	private DeckValidator validator;
 	private TableState state = TableState.WAITING;
 
-	public Table(String gameType, DeckValidator validator, List<String> playerTypes) {
+	protected TableEventSource tableEventSource = new TableEventSource();
+
+	public Table(String gameType, String name, DeckValidator validator, List<String> playerTypes) {
 		tableId = UUID.randomUUID();
 		this.numSeats = playerTypes.size();
 		this.gameType = gameType;
+		this.name = name;
 		createSeats(playerTypes);
 		this.validator = validator;
 	}
@@ -70,10 +78,7 @@ public class Table implements Serializable {
 		return tableId;
 	}
 
-	public void initGame(Game game) throws GameException {
-		for (int i = 0; i < numSeats; i++ ) {
-			game.addPlayer(seats[i].getPlayer());
-		}
+	public void initGame() {
 		state = TableState.DUELING;
 	}
 
@@ -134,4 +139,23 @@ public class Table implements Serializable {
 		return this.validator;
 	}
 
+	public void sideboard() {
+		state = TableState.SIDEBOARDING;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void fireSideboardEvent(UUID playerId) {
+		tableEventSource.fireTableEvent(EventType.SIDEBOARD, playerId, null);
+	}
+
+	public void fireSubmitDeckEvent(UUID playerId, Deck deck) {
+		tableEventSource.fireTableEvent(EventType.SUBMIT_DECK, playerId, deck);
+	}
+
+	public void addTableEventListener(Listener<TableEvent> listener) {
+		tableEventSource.addListener(listener);
+	}
 }

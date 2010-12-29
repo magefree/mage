@@ -28,53 +28,24 @@
 
 package mage.game;
 
-import java.io.Serializable;
+import mage.game.match.MatchImpl;
+import mage.game.match.MatchOptions;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class GameType implements Serializable {
+public class FreeForAllMatch extends MatchImpl<FreeForAll> {
 
-	protected String name;
-	protected int minPlayers;
-	protected int maxPlayers;
-	protected int numTeams;
-	protected int playersPerTeam;
-	protected boolean useRange;
-	protected boolean useAttackOption;
+	public FreeForAllMatch(MatchOptions options) {
+		super(options);
+	}
 
 	@Override
-	public String toString() {
-		return name;
-	}
-	
-	public String getName() {
-		return name;
-	}
-
-	public int getMinPlayers() {
-		return minPlayers;
-	}
-
-	public int getMaxPlayers() {
-		return maxPlayers;
-	}
-
-	public int getNumTeams() {
-		return numTeams;
-	}
-
-	public int getPlayersPerTeam() {
-		return playersPerTeam;
-	}
-
-	public boolean isUseRange() {
-		return useRange;
-	}
-
-	public boolean isUseAttackOption() {
-		return useAttackOption;
+	public void startGame() throws GameException {
+		FreeForAll game = new FreeForAll(options.getAttackOption(), options.getRange());
+		initGame(game);
+		games.add(game);
 	}
 
 }

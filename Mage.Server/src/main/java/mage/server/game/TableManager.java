@@ -30,14 +30,12 @@ package mage.server.game;
 
 import mage.game.Table;
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
-import mage.Constants.MultiplayerAttackOption;
-import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
+import mage.game.match.MatchOptions;
 import mage.util.Logging;
 
 /**
@@ -56,8 +54,8 @@ public class TableManager {
 		return INSTANCE;
 	}
 
-	public Table createTable(UUID sessionId, String gameType, String deckType, List<String> playerTypes, MultiplayerAttackOption attackOption, RangeOfInfluence range) {
-		TableController tableController = new TableController(sessionId, gameType, deckType, playerTypes, attackOption, range);
+	public Table createTable(UUID sessionId, MatchOptions options) {
+		TableController tableController = new TableController(sessionId, options);
 		controllers.put(tableController.getTable().getId(), tableController);
 		tables.put(tableController.getTable().getId(), tableController.getTable());
 		return tableController.getTable();
@@ -73,6 +71,10 @@ public class TableManager {
 
 	public boolean joinTable(UUID sessionId, UUID tableId, String name, DeckCardLists deckList) throws GameException {
 		return controllers.get(tableId).joinTable(sessionId, name, deckList);
+	}
+
+	public boolean submitDeck(UUID sessionId, UUID tableId, DeckCardLists deckList) throws GameException {
+		return controllers.get(tableId).submitDeck(sessionId, deckList);
 	}
 
 	public void removeSession(UUID sessionId) {
@@ -100,8 +102,8 @@ public class TableManager {
 		return controllers.get(tableId).getChatId();
 	}
 
-	public void startGame(UUID sessionId, UUID roomId, UUID tableId) {
-		controllers.get(tableId).startGame(sessionId);
+	public void startMatch(UUID sessionId, UUID roomId, UUID tableId) {
+		controllers.get(tableId).startMatch(sessionId);
 	}
 
 	public boolean watchTable(UUID sessionId, UUID tableId) {

@@ -52,16 +52,14 @@ import mage.abilities.SpecialAction;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
-import mage.abilities.keyword.KickerAbility;
-import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.keyword.ProtectionAbility;
-import mage.abilities.keyword.ShroudAbility;
+import mage.abilities.keyword.*;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.decks.Deck;
+import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.filter.FilterAbility;
 import mage.filter.common.FilterCreatureForAttack;
@@ -79,6 +77,7 @@ import mage.target.common.TargetDiscard;
 
 public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Serializable {
 
+	protected boolean abort;
 	protected final UUID playerId;
 	protected String name;
 	protected boolean human;
@@ -122,6 +121,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	}
 
 	public PlayerImpl(final PlayerImpl<T> player) {
+		this.abort = player.abort;
 		this.playerId = player.playerId;
 		this.name = player.name;
 		this.human = player.human;
@@ -148,6 +148,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public void init(Game game) {
+		this.abort = false;
 		library.addAll(deck.getCards(), game);
 		this.hand.clear();
 		this.graveyard.clear();
@@ -623,8 +624,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 			if (!game.replaceEvent(event)) {
 				int actualDamage = event.getAmount();
 				if (actualDamage > 0) {
-					actualDamage = this.loseLife(actualDamage, game);
 					Permanent source = game.getPermanent(sourceId);
+					if (source != null && (source.getAbilities().containsKey(InfectAbility.getInstance().getId()))) {
+						getCounters().addCounter(CounterType.POISON.getInstance(actualDamage));
+					} else {
+						actualDamage = this.loseLife(actualDamage, game);
+					}
 					if (source != null && source.getAbilities().containsKey(LifelinkAbility.getInstance().getId())) {
 						Player player = game.getPlayer(source.getControllerId());
 						player.gainLife(actualDamage, game);

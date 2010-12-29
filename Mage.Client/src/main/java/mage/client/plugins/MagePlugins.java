@@ -32,7 +32,7 @@ public interface MagePlugins {
 	int getGamesPlayed();
 	void addGamesPlayed();
 	Image getManaSymbolImage(String symbol);
-	void onAddCard(MagePermanent card);
-	void onRemoveCard(MagePermanent card);
+	void onAddCard(MagePermanent card, int count);
+	void onRemoveCard(MagePermanent card, int count);
     JComponent getCardInfoPane();
 }

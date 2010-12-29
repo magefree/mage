@@ -35,19 +35,13 @@ import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.EvasionAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.IndestructibleAbility;
-import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.keyword.ProtectionAbility;
-import mage.abilities.keyword.ShroudAbility;
+import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.counters.Counter;
 import mage.counters.Counters;
+import mage.counters.common.MinusOneCounter;
 import mage.game.Game;
 import mage.game.events.DamageCreatureEvent;
 import mage.game.events.DamagePlaneswalkerEvent;
@@ -467,7 +461,13 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 				if (this.damage + event.getAmount() > this.toughness.getValue()) {
 					actualDamage = this.toughness.getValue() - this.damage;
 				}
-				this.damage += actualDamage;
+				Permanent source = game.getPermanent(sourceId);
+				if (source != null && (source.getAbilities().containsKey(InfectAbility.getInstance().getId())
+					|| source.getAbilities().containsKey(WitherAbility.getInstance().getId()))) {
+					addCounters(new MinusOneCounter(actualDamage));
+				} else {
+					this.damage += actualDamage;
+				}
 				game.fireEvent(new DamagedCreatureEvent(objectId, sourceId, controllerId, actualDamage, combat));
 				return actualDamage;
 			}

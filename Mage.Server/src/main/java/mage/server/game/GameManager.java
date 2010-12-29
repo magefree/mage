@@ -49,8 +49,8 @@ public class GameManager {
 
 	private ConcurrentHashMap<UUID, GameController> gameControllers = new ConcurrentHashMap<UUID, GameController>();
 
-	public UUID createGameSession(Game game, ConcurrentHashMap<UUID, UUID> sessionPlayerMap, UUID tableId) {
-		GameController gameController = new GameController(game, sessionPlayerMap, tableId);
+	public UUID createGameSession(Game game, ConcurrentHashMap<UUID, UUID> sessionPlayerMap, UUID tableId, UUID choosingPlayerId) {
+		GameController gameController = new GameController(game, sessionPlayerMap, tableId, choosingPlayerId);
 		gameControllers.put(game.getId(), gameController);
 		return gameController.getSessionId();
 	}

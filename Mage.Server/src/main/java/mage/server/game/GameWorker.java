@@ -28,6 +28,7 @@
 
 package mage.server.game;
 
+import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,16 +45,18 @@ public class GameWorker implements Callable {
 
 	private GameCallback result;
 	private Game game;
+	private UUID choosingPlayerId;
 
-	public GameWorker(Game game, GameCallback result) {
+	public GameWorker(Game game, UUID choosingPlayerId, GameCallback result) {
 		this.game = game;
+		this.choosingPlayerId = choosingPlayerId;
 		this.result = result;
 	}
 
 	@Override
 	public Object call() {
 		try {
-			game.start();
+			game.start(choosingPlayerId);
 			result.gameResult(game.getWinner());
 		} catch (Exception ex) {
 			logger.log(Level.SEVERE, null, ex);

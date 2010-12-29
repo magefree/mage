@@ -26,29 +26,50 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.counters;
+package mage.abilities.keyword;
+
+import mage.Constants.Zone;
+import mage.abilities.StaticAbility;
+
+import java.io.ObjectStreamException;
 
 /**
+ * 702.77. Wither
  *
- * @author BetaSteward_at_googlemail.com
+ *   702.77a. Wither is a static ability. Damage dealt to a creature by a source with wither isn't marked on that creature. Rather, it causes that many -1/-1 counters to be put on that creature. See rule 119.3.
+ *
+ *   702.77b. If a permanent leaves the battlefield before an effect causes it to deal damage, its last known information is used to determine whether it had wither.
+ *
+ *   702.77c. The wither rules function no matter what zone an object with wither deals damage from.
+ *
+ *   702.77d. Multiple instances of wither on the same object are redundant.
+ *
+ *  @author nantuko
  */
-public class PlusOneCounter extends BoostCounter<PlusOneCounter> {
+public class WitherAbility extends StaticAbility<WitherAbility> {
 
-	public PlusOneCounter() {
-		this(1);
+	private static final WitherAbility fINSTANCE =  new WitherAbility();
+
+	private Object readResolve() throws ObjectStreamException {
+		return fINSTANCE;
 	}
 
-	public PlusOneCounter(int amount) {
-		super(1, 1);
-		this.count = amount;
+	public static WitherAbility getInstance() {
+		return fINSTANCE;
 	}
 
-	public PlusOneCounter(final PlusOneCounter counter) {
-		super(counter);
+	private WitherAbility() {
+		super(Zone.ALL, null);
 	}
 
 	@Override
-	public PlusOneCounter copy() {
-		return new PlusOneCounter(this);
+	public String getRule() {
+		return "Wither";
 	}
+
+	@Override
+	public WitherAbility copy() {
+		return fINSTANCE;
+	}
+
 }

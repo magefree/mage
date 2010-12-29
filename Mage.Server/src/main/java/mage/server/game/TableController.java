@@ -39,7 +39,6 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.util.List;
 import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -47,15 +46,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
-import mage.Constants.MultiplayerAttackOption;
-import mage.Constants.RangeOfInfluence;
 import mage.Constants.TableState;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.GameStates;
+import mage.game.match.Match;
 import mage.game.Seat;
+import mage.game.events.Listener;
+import mage.game.events.TableEvent;
+import mage.game.match.MatchOptions;
+import mage.game.match.MatchPlayer;
 import mage.players.Player;
 import mage.server.ChatManager;
 import mage.server.Main;
@@ -73,17 +75,36 @@ public class TableController {
 
 	private UUID sessionId;
 	private UUID chatId;
-	private UUID gameId;
 	private Table table;
-	private Game game;
+	private Match match;
+	private MatchOptions options;
 	private ConcurrentHashMap<UUID, UUID> sessionPlayerMap = new ConcurrentHashMap<UUID, UUID>();
 
-	public TableController(UUID sessionId, String gameType, String deckType, List<String> playerTypes, MultiplayerAttackOption attackOption, RangeOfInfluence range) {
+	public TableController(UUID sessionId, MatchOptions options) {
 		this.sessionId = sessionId;
 		chatId = ChatManager.getInstance().createChatSession();
-		game = GameFactory.getInstance().createGame(gameType, attackOption, range);
-		gameId = game.getId();
-		table = new Table(gameType, DeckValidatorFactory.getInstance().createDeckValidator(deckType), playerTypes);
+		this.options = options;
+		match = GameFactory.getInstance().createMatch(options.getGameType(), options);
+		table = new Table(options.getGameType(), options.getName(), DeckValidatorFactory.getInstance().createDeckValidator(options.getDeckType()), options.getPlayerTypes());
+		init();
+	}
+
+	private void init() {
+		table.addTableEventListener(
+			new Listener<TableEvent> () {
+				@Override
+				public void event(TableEvent event) {
+					switch (event.getEventType()) {
+						case SIDEBOARD:
+							sideboard(event.getPlayerId());
+							break;
+						case SUBMIT_DECK:
+							submitDeck(event.getPlayerId(), event.getDeck());
+							break;
+					}
+				}
+			}
+		);
 	}
 
 	public synchronized boolean joinTable(UUID sessionId, String name, DeckCardLists deckList) throws GameException {
@@ -100,8 +121,7 @@ public class TableController {
 		}
 		
 		Player player = createPlayer(name, deck, seat.getPlayerType());
-		game.loadCards(deck.getCards(), player.getId());
-		game.loadCards(deck.getSideboard(), player.getId());
+		match.addPlayer(player, deck);
 		table.joinTable(player, seat);
 		logger.info("player joined " + player.getId());
 		//only add human players to sessionPlayerMap
@@ -112,11 +132,29 @@ public class TableController {
 		return true;
 	}
 
+	public synchronized boolean submitDeck(UUID sessionId, DeckCardLists deckList) throws GameException {
+		if (table.getState() != TableState.SIDEBOARDING) {
+			return false;
+		}
+		MatchPlayer player = match.getPlayer(sessionPlayerMap.get(sessionId));
+		Deck deck = Deck.load(deckList);
+		if (!Main.server.isTestMode() && !validDeck(deck)) {
+			throw new GameException(player.getPlayer().getName() + " has an invalid deck for this format");
+		}
+		submitDeck(sessionPlayerMap.get(sessionId), deck);
+		return true;
+	}
+
+	private void submitDeck(UUID playerId, Deck deck) {
+		MatchPlayer player = match.getPlayer(playerId);
+		player.submitDeck(deck);
+	}
+
 	public boolean watchTable(UUID sessionId) {
 		if (table.getState() != TableState.DUELING) {
 			return false;
 		}
-		SessionManager.getInstance().getSession(sessionId).watchGame(game.getId());
+		SessionManager.getInstance().getSession(sessionId).watchGame(match.getGame().getId());
 		return true;
 	}
 
@@ -141,7 +179,7 @@ public class TableController {
 	}
 
 	private Player createPlayer(String name, Deck deck, String playerType) {
-		Player player = PlayerFactory.getInstance().createPlayer(playerType, name, deck, game.getRangeOfInfluence());
+		Player player = PlayerFactory.getInstance().createPlayer(playerType, name, deck, options.getRange());
 		logger.info("Player created " + player.getId());
 		return player;
 	}
@@ -151,26 +189,66 @@ public class TableController {
 			table.leaveTable(sessionPlayerMap.get(sessionId));
 	}
 
-	public synchronized void startGame(UUID sessionId) {
+	public synchronized void startMatch(UUID sessionId) {
 		if (sessionId.equals(this.sessionId) && table.getState() == TableState.STARTING) {
 			try {
-				table.initGame(game);
+				match.startMatch();
+				startGame(null);
 			} catch (GameException ex) {
 				logger.log(Level.SEVERE, null, ex);
 			}
-			GameManager.getInstance().createGameSession(game, sessionPlayerMap, table.getId());
-			SessionManager sessionManager = SessionManager.getInstance();
-			for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
-				sessionManager.getSession(entry.getKey()).gameStarted(game.getId(), entry.getValue());
+		}
+	}
+
+	private void startGame(UUID choosingPlayerId) throws GameException {
+		match.startGame();
+		table.initGame();
+		GameManager.getInstance().createGameSession(match.getGame(), sessionPlayerMap, table.getId(), choosingPlayerId);
+		SessionManager sessionManager = SessionManager.getInstance();
+		for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
+			sessionManager.getSession(entry.getKey()).gameStarted(match.getGame().getId(), entry.getValue());
+		}
+	}
+
+	private void sideboard() {
+		table.sideboard();
+		for (MatchPlayer player: match.getPlayers()) {
+			player.setSideboarding();
+			player.getPlayer().sideboard(table);
+		}
+		while (!match.isDoneSideboarding()){}
+	}
+
+	private void sideboard(UUID playerId) {
+		SessionManager sessionManager = SessionManager.getInstance();
+		for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
+			if (entry.getValue().equals(playerId)) {
+				MatchPlayer player = match.getPlayer(entry.getValue());
+				sessionManager.getSession(entry.getKey()).sideboard(player.getDeck(), table.getId());
+				break;
 			}
 		}
 	}
 
 	public void endGame() {
+		UUID choosingPlayerId = match.getChooser();
+		match.endGame();
 		table.endGame();
 		saveGame();
-		GameManager.getInstance().removeGame(game.getId());
-		game = null;
+		GameManager.getInstance().removeGame(match.getGame().getId());
+		try {
+			if (!match.isMatchOver()) {
+				sideboard();
+				startGame(choosingPlayerId);
+			}
+		} catch (GameException ex) {
+			logger.log(Level.SEVERE, null, ex);
+		}
+		endMatch();
+	}
+
+	public void endMatch() {
+		match = null;
 	}
 
 	public void swapSeats(int seatNum1, int seatNum2) {
@@ -188,17 +266,17 @@ public class TableController {
 
 	private void saveGame() {
 		try {
-			OutputStream file = new FileOutputStream("saved/" + game.getId().toString() + ".game");
+			OutputStream file = new FileOutputStream("saved/" + match.getGame().getId().toString() + ".game");
 			OutputStream buffer = new BufferedOutputStream(file);
 			ObjectOutput output = new ObjectOutputStream(new GZIPOutputStream(buffer));
 			try {
-				output.writeObject(game);
-				output.writeObject(game.getGameStates());
+				output.writeObject(match.getGame());
+				output.writeObject(match.getGame().getGameStates());
 			}
 			finally {
 				output.close();
 			}
-			logger.log(Level.INFO, "Saved game:" + game.getId());
+			logger.log(Level.INFO, "Saved game:" + match.getGame().getId());
 		}
 		catch(IOException ex) {
 			logger.log(Level.SEVERE, "Cannot save game.", ex);
@@ -207,7 +285,7 @@ public class TableController {
 
 	private Game loadGame() {
 		try{
-			InputStream file = new FileInputStream("saved/" + gameId.toString() + ".game");
+			InputStream file = new FileInputStream("saved/" + match.getGame().toString() + ".game");
 			InputStream buffer = new BufferedInputStream(file);
 			ObjectInput input = new CopierObjectInputStream(Main.classLoader, new GZIPInputStream(buffer));
 			try {
@@ -224,7 +302,7 @@ public class TableController {
 			logger.log(Level.SEVERE, "Cannot load game. Class not found.", ex);
 		}
 		catch(IOException ex) {
-			logger.log(Level.SEVERE, "Cannot load game:" + game.getId(), ex);
+			logger.log(Level.SEVERE, "Cannot load game:" + match.getGame().getId(), ex);
 		}
 		return null;
 	}

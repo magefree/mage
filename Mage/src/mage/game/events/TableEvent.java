@@ -30,7 +30,9 @@ package mage.game.events;
 
 import java.io.Serializable;
 import java.util.EventObject;
+import java.util.UUID;
 import mage.cards.Cards;
+import mage.cards.decks.Deck;
 import mage.game.Game;
 
 /**
@@ -40,19 +42,28 @@ import mage.game.Game;
 public class TableEvent extends EventObject implements ExternalEvent, Serializable {
 
 	public enum EventType {
-		UPDATE, INFO, REVEAL, LOOK
+		UPDATE, INFO, REVEAL, LOOK, SIDEBOARD, SUBMIT_DECK
 	}
 
 	private Game game;
 	private EventType eventType;
 	private String message;
 	private Cards cards;
+	private UUID playerId;
+	private Deck deck;
 
 	public TableEvent(EventType eventType, String message, Cards cards, Game game) {
 		super(game);
 		this.game = game;
 		this.message = message;
 		this.cards = cards;
+		this.eventType = eventType;
+	}
+
+	public TableEvent(EventType eventType, UUID playerId, Deck deck) {
+		super(playerId);
+		this.playerId = playerId;
+		this.deck = deck;
 		this.eventType = eventType;
 	}
 
@@ -72,4 +83,11 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
 		return cards;
 	}
 
+	public UUID getPlayerId() {
+		return playerId;
+	}
+
+	public Deck getDeck() {
+		return deck;
+	}
 }
