@@ -627,7 +627,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 				if (actualDamage > 0) {
 					Permanent source = game.getPermanent(sourceId);
 					if (source != null && (source.getAbilities().containsKey(InfectAbility.getInstance().getId()))) {
-						getCounters().addCounter(CounterType.POISON.getInstance());
+						getCounters().addCounter(CounterType.POISON.getInstance(actualDamage));
 					} else {
 						actualDamage = this.loseLife(actualDamage, game);
 					}
