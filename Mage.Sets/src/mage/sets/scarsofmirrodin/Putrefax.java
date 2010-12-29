@@ -30,13 +30,11 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.InfectAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.game.events.GameEvent;
@@ -55,7 +53,7 @@ public class Putrefax extends CardImpl<Putrefax> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
         this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(HasteAbility.getInstance());
+        this.addAbility(InfectAbility.getInstance());
         this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", new SacrificeSourceEffect()));
     }
 
