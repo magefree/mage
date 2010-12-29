@@ -27,7 +27,7 @@
  */
 package mage.sets.zendikar;
 
-import mage.abilities.effects.common.CantBlockSourceEffect;
+import mage.abilities.common.CantBlockAbility;
 import mage.Constants.Duration;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.TenOrLessLife;
@@ -62,10 +62,10 @@ public class Bloodghast extends CardImpl<Bloodghast> {
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(1);
 
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockSourceEffect(Duration.WhileOnBattlefield, true)));
+		this.addAbility(CantBlockAbility.getInstance());
 		this.addAbility(new LandfallAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), true));
 		ContinuousEffect effect = new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect, new TenOrLessLife(AN_OPPONENT), text)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect, new TenOrLessLife(AN_OPPONENT), "Bloodghast has haste as long as an opponent has 10 or less life.")));
 	}
 
 	public Bloodghast(final Bloodghast card) {
@@ -76,6 +76,4 @@ public class Bloodghast extends CardImpl<Bloodghast> {
 	public Bloodghast copy() {
 		return new Bloodghast(this);
 	}
-
-	
 }
