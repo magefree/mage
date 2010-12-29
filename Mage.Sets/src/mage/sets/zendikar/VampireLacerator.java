@@ -34,7 +34,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleTriggeredAbility;
-import mage.abilities.condition.common.Not;
+import mage.abilities.condition.common.Unless;
 import mage.abilities.condition.common.TenOrLessLife;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.LoseLifeSourceEffect;
@@ -79,7 +79,7 @@ class VampireLaceratorTriggeredAbility extends SimpleTriggeredAbility {
 		super(Zone.BATTLEFIELD, EventType.UPKEEP_STEP_PRE,
 				new ConditionalOneShotEffect(
 					new LoseLifeSourceEffect(1),
-					new Not( new TenOrLessLife(AN_OPPONENT)),
+					new Unless( new TenOrLessLife(AN_OPPONENT)),
 					"At the beginning of your upkeep, you lose 1 "
 					+ "life unless an opponent has 10 or less life."));
 	}

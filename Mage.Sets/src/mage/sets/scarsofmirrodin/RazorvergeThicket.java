@@ -34,6 +34,7 @@ import mage.Constants.Rarity;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.ControlsPermanent;
+import mage.abilities.condition.common.Unless;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
@@ -59,7 +60,7 @@ public class RazorvergeThicket extends CardImpl<RazorvergeThicket> {
         super(ownerId, 228, "Razorverge Thicket", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "SOM";
 
-        Condition controls = new ControlsPermanent(filter, ControlsPermanent.CountType.FEWER_THAN, 3);
+        Condition controls = new Unless(new ControlsPermanent(filter, ControlsPermanent.CountType.FEWER_THAN, 4));
 		String abilityText = "tap it unless you control fewer than 3 " + filter.getMessage();
 		this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
 		this.addAbility(new GreenManaAbility());
