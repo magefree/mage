@@ -52,17 +52,16 @@ import mage.abilities.SpecialAction;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
-import mage.abilities.keyword.KickerAbility;
-import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.keyword.ProtectionAbility;
-import mage.abilities.keyword.ShroudAbility;
+import mage.abilities.keyword.*;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.decks.Deck;
+import mage.counters.CounterType;
 import mage.counters.Counters;
+import mage.counters.MinusOneCounter;
 import mage.filter.FilterAbility;
 import mage.filter.common.FilterCreatureForAttack;
 import mage.filter.common.FilterCreatureForCombat;
@@ -626,8 +625,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 			if (!game.replaceEvent(event)) {
 				int actualDamage = event.getAmount();
 				if (actualDamage > 0) {
-					actualDamage = this.loseLife(actualDamage, game);
 					Permanent source = game.getPermanent(sourceId);
+					if (source != null && (source.getAbilities().containsKey(InfectAbility.getInstance().getId()))) {
+						getCounters().addCounter(CounterType.POISON.getInstance());
+					} else {
+						actualDamage = this.loseLife(actualDamage, game);
+					}
 					if (source != null && source.getAbilities().containsKey(LifelinkAbility.getInstance().getId())) {
 						Player player = game.getPlayer(source.getControllerId());
 						player.gainLife(actualDamage, game);
