@@ -1,7 +1,5 @@
 package mage.client.cards;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -9,20 +7,14 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-import javax.imageio.ImageIO;
-import javax.swing.JComponent;
-import javax.swing.JLayeredPane;
-
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
-import mage.client.plugins.impl.Plugins;
-import mage.components.ImagePanel;
 import mage.sets.Sets;
 import mage.utils.CardUtil;
 
 public class CardsStorage {
 	private static Set<Card> allCards = new LinkedHashSet<Card>();
-	private static Set<Card> landCards = new LinkedHashSet<Card>();
+	private static Set<Card> nonBasicLandCards = new LinkedHashSet<Card>();
 	private static Map<String, Integer> ratings;
 	private static Integer min = Integer.MAX_VALUE, max = 0;
 
@@ -32,7 +24,7 @@ public class CardsStorage {
 			allCards.addAll(cards);
 			for (Card card : cards) {
 				if (CardUtil.isLand(card) && !CardUtil.isBasicLand(card)) {
-					landCards.add(card);
+					nonBasicLandCards.add(card);
 				}
 			}
 		}
@@ -42,8 +34,8 @@ public class CardsStorage {
 		return allCards;
 	}
 
-	public static Set<Card> getLandCards() {
-		return landCards;
+	public static Set<Card> getNonBasicLandCards() {
+		return nonBasicLandCards;
 	}
 
 	/**
