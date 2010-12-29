@@ -31,7 +31,7 @@ package mage.abilities.effects.common;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.counters.PlusOneCounter;
+import mage.counters.common.PlusOneCounter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 

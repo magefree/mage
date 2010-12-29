@@ -26,22 +26,24 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.counters;
+package mage.counters.common;
+
+import mage.counters.Counter;
 
 /**
- * Poison counter.
+ * Time counter.
  *
  * @author nantuko
  */
-public class PoisonCounter extends Counter<PoisonCounter> {
+public class TimeCounter extends Counter<TimeCounter> {
 
-    public PoisonCounter() {
-        super("Poison");
+    public TimeCounter() {
+        super("Time");
         this.count = 1;
     }
 
-    public PoisonCounter(int amount) {
-        super("Poison");
+    public TimeCounter(int amount) {
+        super("Time");
         this.count = amount;
     }
 }

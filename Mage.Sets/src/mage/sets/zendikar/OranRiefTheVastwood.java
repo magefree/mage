@@ -40,7 +40,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
-import mage.counters.PlusOneCounter;
+import mage.counters.common.PlusOneCounter;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;

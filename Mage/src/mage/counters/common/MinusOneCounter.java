@@ -26,29 +26,31 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.counters;
+package mage.counters.common;
+
+import mage.counters.BoostCounter;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PlusOneCounter extends BoostCounter<PlusOneCounter> {
+public class MinusOneCounter extends BoostCounter<MinusOneCounter> {
 
-	public PlusOneCounter() {
-		this(1);
+	public MinusOneCounter() {
+		super(-1, -1);
 	}
 
-	public PlusOneCounter(int amount) {
-		super(1, 1);
+	public MinusOneCounter(int amount) {
+		super(-1, -1);
 		this.count = amount;
 	}
 
-	public PlusOneCounter(final PlusOneCounter counter) {
+	public MinusOneCounter(final MinusOneCounter counter) {
 		super(counter);
 	}
 
 	@Override
-	public PlusOneCounter copy() {
-		return new PlusOneCounter(this);
+	public MinusOneCounter copy() {
+		return new MinusOneCounter(this);
 	}
 }

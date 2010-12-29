@@ -28,6 +28,8 @@
 
 package mage.counters;
 
+import mage.counters.common.*;
+
 /**
  * Enum for counters, names and instances.
  *
@@ -36,7 +38,15 @@ package mage.counters;
 public enum CounterType {
     P1P1(new PlusOneCounter().name),
     M1M1(new MinusOneCounter().name),
-    POISON(new PoisonCounter().name);
+    POISON(new PoisonCounter().name),
+    CHARGE(new ChargeCounter().name),
+    LEVEL(new LevelCounter().name),
+    TIME(new TimeCounter().name),
+    FADE(new FadeCounter().name),
+    FEATHER(new FeatherCounter().name),
+    QUEST(new QuestCounter().name),
+    ARROWHEAD(new ArrowheadCounter().name),
+    EON(new EonCounter().name);
 
     private String name;
 
@@ -63,7 +73,7 @@ public enum CounterType {
     }
 
     /**
-     * Get instance of counter type with defined amount of the given type.
+     * Get instance of counter type with defined amount of counters of the given type.
      *
      * @param amount amount of counters of the given type.
      * @return
@@ -76,6 +86,22 @@ public enum CounterType {
                 return new MinusOneCounter(amount);
             case POISON:
                 return new PoisonCounter(amount);
+            case CHARGE:
+                return new ChargeCounter(amount);
+            case LEVEL:
+                return new LevelCounter(amount);
+            case TIME:
+                return new TimeCounter(amount);
+            case FADE:
+                return new FadeCounter(amount);
+            case FEATHER:
+                return new FeatherCounter(amount);
+            case QUEST:
+                return new QuestCounter(amount);
+            case ARROWHEAD:
+                return new ArrowheadCounter(amount);
+            case EON:
+                return new EonCounter(amount);
         }
         return null;
     }

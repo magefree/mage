@@ -61,7 +61,6 @@ import mage.cards.CardsImpl;
 import mage.cards.decks.Deck;
 import mage.counters.CounterType;
 import mage.counters.Counters;
-import mage.counters.MinusOneCounter;
 import mage.filter.FilterAbility;
 import mage.filter.common.FilterCreatureForAttack;
 import mage.filter.common.FilterCreatureForCombat;
