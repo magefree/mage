@@ -77,5 +77,6 @@ public enum CounterType {
             case POISON:
                 return new PoisonCounter(amount);
         }
+        return null;
     }
 }
