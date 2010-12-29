@@ -30,13 +30,16 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.AddCountersSourceEffect;
+import mage.abilities.effects.common.GainAbilitySourceEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.abilities.mana.ManaAbility;
@@ -52,7 +55,8 @@ public class EverflowingChalice extends CardImpl<EverflowingChalice> {
 	public EverflowingChalice(UUID ownerId) {
 		super(ownerId, 123, "Everflowing Chalice", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
 		this.expansionSetCode = "WWK";
-		MultikickerAbility ability = new MultikickerAbility(new AddCountersSourceEffect("charge", 1), false);
+		Ability ability1 = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect("charge", 1));
+		MultikickerAbility ability = new MultikickerAbility(new GainAbilitySourceEffect(ability1, Duration.WhileOnBattlefield), false);
 		ability.addManaCost(new GenericManaCost(2));
 		this.addAbility(ability);
 		this.addAbility(new EverflowingChaliceAbility());

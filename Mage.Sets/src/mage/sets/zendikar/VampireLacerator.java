@@ -27,42 +27,70 @@
  */
 package mage.sets.zendikar;
 
+import mage.abilities.condition.common.MyTurn;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.common.SimpleTriggeredAbility;
+import mage.abilities.condition.common.Not;
+import mage.abilities.condition.common.TenOrLessLife;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.LoseLifeSourceEffect;
 import mage.cards.CardImpl;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+
+import static mage.abilities.condition.common.TenOrLessLife.CheckType.*;
 
 /**
  *
  * @author maurer.it_at_gmail.com
  */
-public class VampireNighthawk extends CardImpl<VampireNighthawk> {
+public class VampireLacerator extends CardImpl<VampireLacerator> {
 
-	public VampireNighthawk(UUID ownerId) {
-		super(ownerId, 116, "Vampire Nighthawk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
+	public VampireLacerator(UUID ownerId) {
+		super(ownerId, 115, "Vampire Lacerator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
 		this.expansionSetCode = "ZEN";
 		this.subtype.add("Vampire");
-		this.subtype.add("Shaman");
+		this.subtype.add("Warrior");
 
 		this.color.setBlack(true);
 		this.power = new MageInt(2);
-		this.toughness = new MageInt(3);
+		this.toughness = new MageInt(2);
 
-		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(DeathtouchAbility.getInstance());
-		this.addAbility(LifelinkAbility.getInstance());
+		this.addAbility(new VampireLaceratorTriggeredAbility());
 	}
 
-	public VampireNighthawk(final VampireNighthawk card) {
+	public VampireLacerator(final VampireLacerator card) {
 		super(card);
 	}
 
 	@Override
-	public VampireNighthawk copy() {
-		return new VampireNighthawk(this);
+	public VampireLacerator copy() {
+		return new VampireLacerator(this);
+	}
+}
+
+class VampireLaceratorTriggeredAbility extends SimpleTriggeredAbility {
+	VampireLaceratorTriggeredAbility ( ) {
+		super(Zone.BATTLEFIELD, EventType.UPKEEP_STEP_PRE,
+				new ConditionalOneShotEffect(
+					new LoseLifeSourceEffect(1),
+					new Not( new TenOrLessLife(AN_OPPONENT)),
+					"At the beginning of your upkeep, you lose 1 "
+					+ "life unless an opponent has 10 or less life."));
+	}
+
+	@Override
+	public boolean checkTrigger(GameEvent event, Game game) {
+		return super.checkTrigger(event, game) && MyTurn.getInstance().apply(game, this);
+	}
+
+	@Override
+	public String getRule() {
+		return super.getRule();
 	}
 }
