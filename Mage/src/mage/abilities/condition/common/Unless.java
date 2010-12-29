@@ -16,11 +16,11 @@ import mage.game.Game;
  * 
  * @author maurer.it_at_gmail.com
  */
-public class Not implements Condition {
+public class Unless implements Condition {
 
 	private Condition condition;
 
-	public Not ( Condition condition ) {
+	public Unless ( Condition condition ) {
 		this.condition = condition;
 	}
 
