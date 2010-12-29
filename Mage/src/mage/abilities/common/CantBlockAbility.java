@@ -10,14 +10,12 @@ import mage.Constants.Duration;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.ReachAbility;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
  *
- * @author matthew.maurer
+ * @author maurer.it_at_gmail.com
  */
 public class CantBlockAbility extends SimpleStaticAbility {
 
@@ -59,18 +57,12 @@ class CantBlockEffect extends RestrictionEffect<CantBlockEffect> {
 
 	@Override
 	public boolean applies(Permanent permanent, Ability source, Game game) {
-		if (permanent.getAbilities().containsKey(CantBlockAbility.getInstance().getId())) {
-			return true;
-		}
-		return false;
+		return permanent.getAbilities().containsKey(CantBlockAbility.getInstance().getId()) || source.getId().equals(CantBlockAbility.getInstance().getId());
 	}
 
 	@Override
 	public boolean canBlock(Permanent blocker, Game game) {
-		if (blocker.getAbilities().containsKey(CantBlockAbility.getInstance().getId())) {
-			return false;
-		}
-		return true;
+		return !blocker.getAbilities().containsKey(CantBlockAbility.getInstance().getId());
 	}
 
 	@Override
