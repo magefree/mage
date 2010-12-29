@@ -32,40 +32,35 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.InfectAbility;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.FlashAbility;
+import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
-import mage.game.events.GameEvent;
 
 /**
  *
  * @author Loki
  */
-public class Putrefax extends CardImpl<Putrefax> {
+public class DarksteelSentinel extends CardImpl<DarksteelSentinel> {
 
-    public Putrefax (UUID ownerId) {
-        super(ownerId, 126, "Putrefax", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+    public DarksteelSentinel (UUID ownerId) {
+        super(ownerId, 152, "Darksteel Sentinel", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Horror");
-		this.color.setGreen(true);
-        this.power = new MageInt(5);
+        this.subtype.add("Golem");
+        this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(HasteAbility.getInstance());
-        this.addAbility(InfectAbility.getInstance());
-        this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", new SacrificeSourceEffect()));
+        this.addAbility(FlashAbility.getInstance());
+        this.addAbility(VigilanceAbility.getInstance());
+        this.addAbility(IndestructibleAbility.getInstance());
     }
 
-    public Putrefax (final Putrefax card) {
+    public DarksteelSentinel (final DarksteelSentinel card) {
         super(card);
     }
 
     @Override
-    public Putrefax copy() {
-        return new Putrefax(this);
+    public DarksteelSentinel copy() {
+        return new DarksteelSentinel(this);
     }
 
 }

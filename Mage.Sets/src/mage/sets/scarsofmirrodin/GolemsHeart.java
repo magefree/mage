@@ -30,42 +30,68 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.InfectAbility;
-import mage.abilities.keyword.TrampleAbility;
+import mage.Constants.Zone;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 
 /**
  *
  * @author Loki
  */
-public class Putrefax extends CardImpl<Putrefax> {
+public class GolemsHeart extends CardImpl<GolemsHeart> {
 
-    public Putrefax (UUID ownerId) {
-        super(ownerId, 126, "Putrefax", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+    public GolemsHeart (UUID ownerId) {
+        super(ownerId, 161, "Golem's Heart", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Horror");
-		this.color.setGreen(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(3);
-        this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(HasteAbility.getInstance());
-        this.addAbility(InfectAbility.getInstance());
-        this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", new SacrificeSourceEffect()));
+        this.addAbility(new GolemsHeartAbility());
     }
 
-    public Putrefax (final Putrefax card) {
+    public GolemsHeart (final GolemsHeart card) {
         super(card);
     }
 
     @Override
-    public Putrefax copy() {
-        return new Putrefax(this);
+    public GolemsHeart copy() {
+        return new GolemsHeart(this);
     }
+
+}
+
+class GolemsHeartAbility extends TriggeredAbilityImpl<GolemsHeartAbility> {
+
+	public GolemsHeartAbility() {
+		super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
+	}
+
+	public GolemsHeartAbility(final GolemsHeartAbility ability) {
+		super(ability);
+	}
+
+	@Override
+	public GolemsHeartAbility copy() {
+		return new GolemsHeartAbility(this);
+	}
+
+	@Override
+	public boolean checkTrigger(GameEvent event, Game game) {
+		if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+			Spell spell = game.getStack().getSpell(event.getTargetId());
+			if (spell != null && spell.getCardType().contains(CardType.ARTIFACT)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public String getRule() {
+		return "Whenever a player casts an artifact spell, you may gain 1 life.";
+	}
 
 }

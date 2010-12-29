@@ -32,40 +32,31 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.InfectAbility;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
-import mage.game.events.GameEvent;
 
 /**
  *
  * @author Loki
  */
-public class Putrefax extends CardImpl<Putrefax> {
+public class DarksteelMyr extends CardImpl<DarksteelMyr> {
 
-    public Putrefax (UUID ownerId) {
-        super(ownerId, 126, "Putrefax", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+    public DarksteelMyr (UUID ownerId) {
+        super(ownerId, 151, "Darksteel Myr", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Horror");
-		this.color.setGreen(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(3);
-        this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(HasteAbility.getInstance());
-        this.addAbility(InfectAbility.getInstance());
-        this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", new SacrificeSourceEffect()));
+        this.subtype.add("Myr");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(1);
+        this.addAbility(IndestructibleAbility.getInstance());
     }
 
-    public Putrefax (final Putrefax card) {
+    public DarksteelMyr (final DarksteelMyr card) {
         super(card);
     }
 
     @Override
-    public Putrefax copy() {
-        return new Putrefax(this);
+    public DarksteelMyr copy() {
+        return new DarksteelMyr(this);
     }
 
 }
