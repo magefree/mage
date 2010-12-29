@@ -40,7 +40,7 @@ import mage.game.Game;
  * @see #Controls(mage.filter.Filter)
  * @see #Controls(mage.filter.Filter, mage.abilities.condition.Condition)
  * 
- * @author matthew.maurer
+ * @author maurer.it_at_gmail.com
  */
 public class Controls implements Condition {
 
