@@ -48,7 +48,7 @@ public class AbilityView extends CardView {
 		this.sourceName = sourceName;
 		this.sourceCard = sourceCard;
 		this.rules = new ArrayList<String>();
-		rules.add(ability.getRule(sourceName));
+		rules.add(ability.getRule());
 		this.power = "";
 		this.toughness = "";
 		this.loyalty = "";
