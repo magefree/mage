@@ -28,6 +28,7 @@
 
 package mage.game;
 
+import mage.counters.CounterType;
 import mage.game.match.MatchType;
 import java.io.IOException;
 import mage.game.stack.SpellStack;
@@ -582,7 +583,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 		//20091005 - 704.5a/704.5b/704.5c
 		for (Player player: state.getPlayers().values()) {
-			if (!player.hasLost() && (player.getLife() <= 0 || player.isEmptyDraw() || player.getCounters().getCount("Poison") >= 10)) {
+			if (!player.hasLost() && (player.getLife() <= 0 || player.isEmptyDraw() || player.getCounters().getCount(CounterType.POISON) >= 10)) {
 				player.lost(this);
 			}
 		}

@@ -86,6 +86,12 @@ public class Counters extends HashMap<String, Counter> implements Serializable {
 		return 0;
 	}
 
+	public int getCount(CounterType type) {
+		if (this.containsKey(type.getName()))
+			return this.get(type.getName()).getCount();
+		return 0;
+	}
+
 	public List<BoostCounter> getBoostCounters() {
 		List<BoostCounter> boosters = new ArrayList<BoostCounter>();
 		for (Counter counter: this.values()) {
