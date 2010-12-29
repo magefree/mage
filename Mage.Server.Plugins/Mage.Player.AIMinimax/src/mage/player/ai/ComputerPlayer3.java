@@ -83,8 +83,8 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 
 	}
 
-	public ComputerPlayer3(String name, Deck deck, RangeOfInfluence range) {
-		super(name, deck, range);
+	public ComputerPlayer3(String name, RangeOfInfluence range) {
+		super(name, range);
 		maxDepth = Config.maxDepth;
 		maxNodes = Config.maxNodes;
 	}

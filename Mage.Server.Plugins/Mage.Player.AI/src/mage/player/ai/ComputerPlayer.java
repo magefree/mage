@@ -117,8 +117,8 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	private transient List<Card> playableInstant = new ArrayList<Card>();
 	private transient List<ActivatedAbility> playableAbilities = new ArrayList<ActivatedAbility>();
 
-	public ComputerPlayer(String name, Deck deck, RangeOfInfluence range) {
-		super(name, deck, range);
+	public ComputerPlayer(String name, RangeOfInfluence range) {
+		super(name, range);
 		human = false;
 	}
 
@@ -768,7 +768,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	@Override
-	public void sideboard(Table table) {
+	public void sideboard(Table table, Deck deck) {
 		//TODO: improve this
 		table.fireSubmitDeckEvent(playerId, deck);
 	}

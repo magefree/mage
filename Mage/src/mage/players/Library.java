@@ -94,7 +94,8 @@ public class Library implements Serializable {
 	 * @see Card
 	 */
 	public Card removeFromTop(Game game) {
-		Card card = game.getCard(library.pollFirst());
+		UUID cardId = library.pollFirst();
+		Card card = game.getCard(cardId);
 		if (card == null) {
 			emptyDraw = true;
 		}

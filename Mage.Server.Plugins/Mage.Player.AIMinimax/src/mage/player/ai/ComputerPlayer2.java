@@ -99,8 +99,8 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 	protected int currentScore;
 	protected SimulationNode root;
 
-	public ComputerPlayer2(String name, Deck deck, RangeOfInfluence range) {
-		super(name, deck, range);
+	public ComputerPlayer2(String name, RangeOfInfluence range) {
+		super(name, range);
 		maxDepth = Config.maxDepth;
 		maxNodes = Config.maxNodes;
 	}

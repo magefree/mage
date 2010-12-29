@@ -147,8 +147,8 @@ public class Table implements Serializable {
 		return this.name;
 	}
 
-	public void fireSideboardEvent(UUID playerId) {
-		tableEventSource.fireTableEvent(EventType.SIDEBOARD, playerId, null);
+	public void fireSideboardEvent(UUID playerId, Deck deck) {
+		tableEventSource.fireTableEvent(EventType.SIDEBOARD, playerId, deck);
 	}
 
 	public void fireSubmitDeckEvent(UUID playerId, Deck deck) {

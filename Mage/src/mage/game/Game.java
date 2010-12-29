@@ -48,6 +48,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.cards.Cards;
+import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.game.combat.Combat;
 import mage.game.events.GameEvent;
@@ -81,7 +82,7 @@ public interface Game extends MageItem, Serializable {
 	public Card getCard(UUID cardId);
 	public Zone getZone(UUID objectId);
 	public void setZone(UUID objectId, Zone zone);
-	public void addPlayer(Player player) throws GameException;
+	public void addPlayer(Player player, Deck deck) throws GameException;
 	public Player getPlayer(UUID playerId);
 	public Players getPlayers();
 	public PlayerList getPlayerList();
