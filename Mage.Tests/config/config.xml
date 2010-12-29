@@ -9,8 +9,8 @@
 		<playerType name="Computer - minimax hybrid" jar="mage-player-aiminimax.jar" className="mage.player.ai.ComputerPlayer3"/>
 	</playerTypes>
 	<gameTypes>
-		<gameType name="Two Player Duel" jar="mage-game-twoplayerduel.jar" className="mage.game.TwoPlayerDuel" typeName="mage.game.TwoPlayerDuelType"/>
-		<gameType name="Free For All" jar="mage-game-freeforall.jar" className="mage.game.FreeForAll" typeName="mage.game.FreeForAllType"/>
+		<gameType name="Two Player Duel" jar="mage-game-twoplayerduel.jar" className="mage.game.TwoPlayerMatch" typeName="mage.game.TwoPlayerDuelType"/>
+		<gameType name="Free For All" jar="mage-game-freeforall.jar" className="mage.game.FreeForAllMatch" typeName="mage.game.FreeForAllType"/>
 	</gameTypes>
 	<deckTypes>
 		<deckType name="Constructed" jar="mage-deck-constructed.jar" className="mage.deck.Constructed"/>

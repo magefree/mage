@@ -15,9 +15,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -104,9 +102,9 @@ public class MageBase {
                     logger.info("IN >> " + callback.getMessageId() + " - " + callback.getMethod());
                     try {
                         if (callback.getMethod().equals("startGame")) {
-                            UUID[] data = (UUID[]) callback.getData();
-                            gameId = data[0];
-                            playerId = data[1];
+                            TableClientMessage data = (TableClientMessage) callback.getData();
+                            gameId = data.getGameId();
+                            playerId = data.getPlayerId();
                             server.joinGame(gameId, sessionId);
                         } else if (callback.getMethod().equals("gameInit")) {
                             server.ack("gameInit", sessionId);
