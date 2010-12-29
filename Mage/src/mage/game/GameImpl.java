@@ -59,6 +59,7 @@ import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.keyword.LeylineAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.filter.Filter;
 import mage.filter.Filter.ComparisonScope;
@@ -110,7 +111,6 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	protected Map<UUID, Card> gameCards = new HashMap<UUID, Card>();
 	protected GameState state;
 	protected UUID startingPlayerId;
-//	protected UUID choosingPlayerId;
 	protected UUID winnerId;
 
 	protected transient GameStates gameStates = new GameStates();
@@ -131,7 +131,6 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		this.id = game.id;
 		this.ready = game.ready;
 		this.startingPlayerId = game.startingPlayerId;
-//		this.choosingPlayerId = game.choosingPlayerId;
 		this.winnerId = game.winnerId;
 		this.range = game.range;
 		this.attackOption = game.attackOption;
@@ -161,6 +160,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		for (Card card: cards) {
 			card.setOwnerId(ownerId);
 			gameCards.put(card.getId(), card);
+			state.setZone(card.getId(), Zone.OUTSIDE);
 			for (Watcher watcher: card.getWatchers()) {
 				watcher.setControllerId(ownerId);
 				state.getWatchers().add(watcher);
@@ -174,7 +174,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	}
 
 	@Override
-	public void addPlayer(Player player) throws GameException {
+	public void addPlayer(Player player, Deck deck) throws GameException {
+		player.useDeck(deck, this);
 		state.addPlayer(player);
 	}
 

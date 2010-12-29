@@ -81,8 +81,8 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	}
 	protected transient TargetCreaturePermanent targetCombat = new TargetCreaturePermanent(filter);
 
-	public HumanPlayer(String name, Deck deck, RangeOfInfluence range) {
-		super(name, deck, range);
+	public HumanPlayer(String name, RangeOfInfluence range) {
+		super(name, range);
 		human = true;
 	}
 
@@ -473,8 +473,8 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	}
 
 	@Override
-	public void sideboard(Table table) {
-		table.fireSideboardEvent(playerId);
+	public void sideboard(Table table, Deck deck) {
+		table.fireSideboardEvent(playerId, deck);
 	}
 
 	protected void specialAction(Game game) {

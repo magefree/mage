@@ -103,9 +103,9 @@ public abstract class MatchImpl<T extends Game> implements Match {
 
 	protected void initGame(Game game) throws GameException {
 		for (MatchPlayer matchPlayer: this.players) {
-			game.addPlayer(matchPlayer.getPlayer());
 			game.loadCards(matchPlayer.getDeck().getCards(), matchPlayer.getPlayer().getId());
 			game.loadCards(matchPlayer.getDeck().getSideboard(), matchPlayer.getPlayer().getId());
+			game.addPlayer(matchPlayer.getPlayer(), matchPlayer.getDeck());
 		}
 	}
 

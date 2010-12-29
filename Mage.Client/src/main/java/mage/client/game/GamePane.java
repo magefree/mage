@@ -79,14 +79,17 @@ public class GamePane extends MagePane {
 
 	public void showGame(UUID gameId, UUID playerId) {
 		gamePanel.showGame(gameId, playerId);
+		this.toFront();
 	}
 
 	public void watchGame(UUID gameId) {
 		gamePanel.watchGame(gameId);
+		this.toFront();
 	}
 
 	public void replayGame() {
 		gamePanel.replayGame();
+		this.toFront();
 	}
 
     /** This method is called from within the constructor to

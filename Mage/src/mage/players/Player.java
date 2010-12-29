@@ -90,6 +90,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public Set<UUID> getInRange();
 	
 	public void init(Game game);
+	public void useDeck(Deck deck, Game game);
 	public void reset();
 	public void shuffleLibrary(Game game);
 	public int drawCards(int num, Game game);
@@ -146,7 +147,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public abstract void selectBlockers(Game game);
 	public abstract void assignDamage(int damage, List<UUID> targets, UUID sourceId, Game game);
 	public abstract int getAmount(int min, int max, String message, Game game);
-	public abstract void sideboard(Table table);
+	public abstract void sideboard(Table table, Deck deck);
 	
 	public void declareAttacker(UUID attackerId, UUID defenderId, Game game);
 	public void declareBlocker(UUID blockerId, UUID attackerId, Game game);

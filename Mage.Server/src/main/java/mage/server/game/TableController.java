@@ -96,7 +96,7 @@ public class TableController {
 				public void event(TableEvent event) {
 					switch (event.getEventType()) {
 						case SIDEBOARD:
-							sideboard(event.getPlayerId());
+							sideboard(event.getPlayerId(), event.getDeck());
 							break;
 						case SUBMIT_DECK:
 							submitDeck(event.getPlayerId(), event.getDeck());
@@ -120,7 +120,7 @@ public class TableController {
 			throw new GameException(name + " has an invalid deck for this format");
 		}
 		
-		Player player = createPlayer(name, deck, seat.getPlayerType());
+		Player player = createPlayer(name, seat.getPlayerType());
 		match.addPlayer(player, deck);
 		table.joinTable(player, seat);
 		logger.info("player joined " + player.getId());
@@ -178,8 +178,8 @@ public class TableController {
 		return table.getValidator().validate(deck);
 	}
 
-	private Player createPlayer(String name, Deck deck, String playerType) {
-		Player player = PlayerFactory.getInstance().createPlayer(playerType, name, deck, options.getRange());
+	private Player createPlayer(String name, String playerType) {
+		Player player = PlayerFactory.getInstance().createPlayer(playerType, name, options.getRange());
 		logger.info("Player created " + player.getId());
 		return player;
 	}
@@ -214,17 +214,16 @@ public class TableController {
 		table.sideboard();
 		for (MatchPlayer player: match.getPlayers()) {
 			player.setSideboarding();
-			player.getPlayer().sideboard(table);
+			player.getPlayer().sideboard(table, player.getDeck());
 		}
 		while (!match.isDoneSideboarding()){}
 	}
 
-	private void sideboard(UUID playerId) {
+	private void sideboard(UUID playerId, Deck deck) {
 		SessionManager sessionManager = SessionManager.getInstance();
 		for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
 			if (entry.getValue().equals(playerId)) {
-				MatchPlayer player = match.getPlayer(entry.getValue());
-				sessionManager.getSession(entry.getKey()).sideboard(player.getDeck(), table.getId());
+				sessionManager.getSession(entry.getKey()).sideboard(deck, table.getId());
 				break;
 			}
 		}
@@ -244,11 +243,6 @@ public class TableController {
 		} catch (GameException ex) {
 			logger.log(Level.SEVERE, null, ex);
 		}
-		endMatch();
-	}
-
-	public void endMatch() {
-		match = null;
 	}
 
 	public void swapSeats(int seatNum1, int seatNum2) {
