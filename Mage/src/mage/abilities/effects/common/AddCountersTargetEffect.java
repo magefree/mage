@@ -43,6 +43,7 @@ public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffe
 
 	private int amount;
 	private String name;
+	private Counter counter;
 
 	public AddCountersTargetEffect(String name, int amount) {
 		super(Outcome.Benefit);
@@ -50,17 +51,27 @@ public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffe
 		this.amount = amount;
 	}
 
+	public AddCountersTargetEffect(Counter counter) {
+		super(Outcome.Benefit);
+		this.counter = counter;
+	}
+
 	public AddCountersTargetEffect(final AddCountersTargetEffect effect) {
 		super(effect);
 		this.amount = effect.amount;
 		this.name = effect.name;
+		this.counter = effect.counter;
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
-			permanent.addCounters(name, amount);
+			if (counter != null) {
+				permanent.addCounters(counter);
+			} else {
+				permanent.addCounters(name, amount);
+			}
 		}
 		return true;
 	}

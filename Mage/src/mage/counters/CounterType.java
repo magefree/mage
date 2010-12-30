@@ -64,21 +64,21 @@ public enum CounterType {
     }
 
     /**
-     * Get instance of counter type with amount equal to 1.
+     * Create instance of counter type with amount equal to 1.
      *
      * @return
      */
-    public Counter getInstance() {
-        return getInstance(1);
+    public Counter createInstance() {
+        return createInstance(1);
     }
 
     /**
-     * Get instance of counter type with defined amount of counters of the given type.
+     * Create instance of counter type with defined amount of counters of the given type.
      *
      * @param amount amount of counters of the given type.
      * @return
      */
-    public Counter getInstance(int amount) {
+    public Counter createInstance(int amount) {
         switch(this) {
             case P1P1:
                 return new PlusOneCounter(amount);

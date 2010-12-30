@@ -98,7 +98,7 @@ class EverflowingChaliceAbility extends ManaAbility<EverflowingChaliceAbility> {
 	public Mana getNetMana(Game game) {
 		if (game == null)
 			return new Mana();
-		return Mana.ColorlessMana(game.getPermanent(this.getSourceId()).getCounters().getCount("charge"));
+		return Mana.ColorlessMana(game.getPermanent(this.getSourceId()).getCounters().getCount(CounterType.CHARGE));
 	}
 
 }
