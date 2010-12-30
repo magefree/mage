@@ -36,7 +36,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffect> {
@@ -48,6 +47,12 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
 		super(Outcome.Benefit);
 		this.name = name;
 		this.amount = amount;
+	}
+
+	public AddCountersSourceEffect(Counter counter) {
+		super(Outcome.Benefit);
+		this.name = counter.getName();
+		this.amount = counter.getCount();
 	}
 
 	public AddCountersSourceEffect(final AddCountersSourceEffect effect) {
@@ -71,8 +76,7 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
 			StringBuilder sb = new StringBuilder();
 			sb.append("put ").append(Integer.toString(amount)).append(" ").append(name).append("counters on {this}");
 			return sb.toString();
-		}
-		else
+		} else
 			return "put a " + name + " counter on {this}";
 	}
 

@@ -40,6 +40,7 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.counters.common.MinusOneCounter;
 import mage.game.Game;
@@ -464,7 +465,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 				Permanent source = game.getPermanent(sourceId);
 				if (source != null && (source.getAbilities().containsKey(InfectAbility.getInstance().getId())
 					|| source.getAbilities().containsKey(WitherAbility.getInstance().getId()))) {
-					addCounters(new MinusOneCounter(actualDamage));
+					addCounters(CounterType.M1M1.createInstance(actualDamage));
 				} else {
 					this.damage += actualDamage;
 				}

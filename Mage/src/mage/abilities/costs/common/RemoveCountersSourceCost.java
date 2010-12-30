@@ -31,6 +31,7 @@ package mage.abilities.costs.common;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
+import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -46,6 +47,12 @@ public class RemoveCountersSourceCost extends CostImpl<RemoveCountersSourceCost>
 	public RemoveCountersSourceCost(String name, int amount) {
 		this.amount = amount;
 		this.name = name;
+		this.text = "Remove " + amount + " " + name + " counters from {this}";
+	}
+
+    public RemoveCountersSourceCost(Counter counter) {
+		this.amount = counter.getCount();
+		this.name = counter.getName();
 		this.text = "Remove " + amount + " " + name + " counters from {this}";
 	}
 
