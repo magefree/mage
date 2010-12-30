@@ -29,58 +29,38 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.Metalcraft;
-import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.BoostControlledEffect;
-import mage.abilities.effects.common.GainAbilityControlledEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.ShroudAbility;
+import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
- * @author nantuko
+ *
+ * @author Loki
  */
-public class IndomitableArchangel extends CardImpl<IndomitableArchangel> {
+public class BlackcleaveGoblin extends CardImpl<BlackcleaveGoblin> {
 
-    private final String text = "Metalcraft - Artifacts you control have shroud as long as you control three or more artifacts.";
-
-    private static FilterPermanent filter = new FilterPermanent("Artifacts");
-
-    static {
-		filter.getCardType().add(CardType.ARTIFACT);
-	}
-
-    public IndomitableArchangel(UUID ownerId) {
-        super(ownerId, 11, "Indomitable Archangel", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+    public BlackcleaveGoblin (UUID ownerId) {
+        super(ownerId, 54, "Blackcleave Goblin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Angel");
-        this.color.setWhite(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-        this.addAbility(FlyingAbility.getInstance());
-        ContinuousEffect gainAbilityEffect = new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, filter);
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(gainAbilityEffect, Metalcraft.getInstance(), text);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.subtype.add("Goblin");
+        this.subtype.add("Zombie");
+		this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+        this.addAbility(HasteAbility.getInstance());
+        this.addAbility(InfectAbility.getInstance());
     }
 
-    public IndomitableArchangel(final IndomitableArchangel card) {
+    public BlackcleaveGoblin (final BlackcleaveGoblin card) {
         super(card);
     }
 
     @Override
-    public IndomitableArchangel copy() {
-        return new IndomitableArchangel(this);
+    public BlackcleaveGoblin copy() {
+        return new BlackcleaveGoblin(this);
     }
 
 }

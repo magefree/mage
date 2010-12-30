@@ -29,7 +29,6 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -39,48 +38,37 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.Metalcraft;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.BoostControlledEffect;
-import mage.abilities.effects.common.GainAbilityControlledEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.ShroudAbility;
+import mage.abilities.effects.common.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
- * @author nantuko
+ *
+ * @author Loki
  */
-public class IndomitableArchangel extends CardImpl<IndomitableArchangel> {
+public class GhalmasWarden extends CardImpl<GhalmasWarden> {
 
-    private final String text = "Metalcraft - Artifacts you control have shroud as long as you control three or more artifacts.";
+    private final String text = "Metalcraft - Ghalma's Warden gets +2/+2 as long as you control three or more artifacts";
 
-    private static FilterPermanent filter = new FilterPermanent("Artifacts");
-
-    static {
-		filter.getCardType().add(CardType.ARTIFACT);
-	}
-
-    public IndomitableArchangel(UUID ownerId) {
-        super(ownerId, 11, "Indomitable Archangel", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+    public GhalmasWarden (UUID ownerId) {
+        super(ownerId, 8, "Ghalma's Warden", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Angel");
-        this.color.setWhite(true);
-        this.power = new MageInt(4);
+        this.subtype.add("Elephant");
+        this.subtype.add("Soldier");
+		this.color.setWhite(true);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(4);
-        this.addAbility(FlyingAbility.getInstance());
-        ContinuousEffect gainAbilityEffect = new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, filter);
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(gainAbilityEffect, Metalcraft.getInstance(), text);
+        ContinuousEffect boostSource = new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield);
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(boostSource, Metalcraft.getInstance(), text);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public IndomitableArchangel(final IndomitableArchangel card) {
+    public GhalmasWarden (final GhalmasWarden card) {
         super(card);
     }
 
     @Override
-    public IndomitableArchangel copy() {
-        return new IndomitableArchangel(this);
+    public GhalmasWarden copy() {
+        return new GhalmasWarden(this);
     }
 
 }
