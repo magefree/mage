@@ -30,19 +30,14 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AddPlusOneCountersSourceEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
 import mage.target.TargetPlayer;
 
 /**
@@ -54,6 +49,7 @@ public class ObNixilistheFallen extends CardImpl<ObNixilistheFallen> {
     public ObNixilistheFallen (UUID ownerId) {
         super(ownerId, 107, "Ob Nixilis, the Fallen", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.expansionSetCode = "ZEN";
+		this.supertype.add("Legendary");
         this.subtype.add("Demon");
         this.color.setBlack(true);
         this.power = new MageInt(3);
