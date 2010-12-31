@@ -53,6 +53,7 @@ public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffe
 
 	public AddCountersTargetEffect(Counter counter) {
 		super(Outcome.Benefit);
+		this.name = counter.getName();
 		this.counter = counter;
 	}
 

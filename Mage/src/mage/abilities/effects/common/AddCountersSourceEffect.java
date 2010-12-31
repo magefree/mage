@@ -74,7 +74,7 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
 	public String getText(Ability source) {
 		if (amount > 1) {
 			StringBuilder sb = new StringBuilder();
-			sb.append("put ").append(Integer.toString(amount)).append(" ").append(name).append("counters on {this}");
+			sb.append("put ").append(Integer.toString(amount)).append(" ").append(name).append(" counters on {this}");
 			return sb.toString();
 		} else
 			return "put a " + name + " counter on {this}";
