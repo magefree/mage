@@ -39,6 +39,7 @@ import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterNonlandPermanent;
+import mage.target.Target;
 import mage.target.TargetPermanent;
 
 /**
@@ -55,7 +56,9 @@ public class OblivionRing extends CardImpl<OblivionRing> {
 		filter.setId(this.getId());
 		filter.setNotId(true);
 		Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect(this.getId(), "Oblivion Ring exile"), false);
-		ability1.addTarget(new TargetPermanent(filter));
+		Target target = new TargetPermanent(filter);
+        target.setRequired(true);
+        ability1.addTarget(target);
 		this.addAbility(ability1);
 		Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileEffect(this.getId(), Zone.BATTLEFIELD), false);
 		this.addAbility(ability2);
