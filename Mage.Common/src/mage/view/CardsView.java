@@ -64,6 +64,7 @@ public class CardsView extends HashMap<UUID, CardView> {
 			Card sourceCard = null;
 			String sourceName = null;
 			switch ( ability.getZone() ) {
+				case ALL:
 				case EXILED:
 				case GRAVEYARD:
 					sourceCard = game.getCard(ability.getSourceId());
