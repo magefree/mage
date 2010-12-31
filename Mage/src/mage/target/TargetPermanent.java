@@ -94,6 +94,15 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 		return this.filter;
 	}
 
+	/**
+	 * Checks if there are enough {@link Permanent} that can be chosen.  Should only be used
+	 * for Ability targets since this checks for protection, shroud etc.
+	 *
+	 * @param sourceId - the target event source
+	 * @param sourceControllerId - controller of the target event source
+	 * @param game
+	 * @return - true if enough valid {@link Permanent} exist
+	 */
 	@Override
 	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
 		int count = 0;
@@ -108,6 +117,19 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 		return false;
 	}
 
+	/**
+	 * Checks if there are enough {@link Permanent} that can be selected.  Should not be used
+	 * for Ability targets since this does not check for protection, shroud etc.
+	 * 
+	 * @param sourceControllerId - controller of the select event
+	 * @param game
+	 * @return - true if enough valid {@link Permanent} exist
+	 */
+	@Override
+	public boolean canChoose(UUID sourceControllerId, Game game) {
+		return game.getBattlefield().count(filter, sourceControllerId, game) >= this.minNumberOfTargets;
+	}
+
 	@Override
 	public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
 		Set<UUID> possibleTargets = new HashSet<UUID>();
@@ -116,6 +138,15 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 			if (permanent.canBeTargetedBy(targetSource)) {
 				possibleTargets.add(permanent.getId());
 			}
+		}
+		return possibleTargets;
+	}
+
+	@Override
+	public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+		Set<UUID> possibleTargets = new HashSet<UUID>();
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, game)) {
+			possibleTargets.add(permanent.getId());
 		}
 		return possibleTargets;
 	}

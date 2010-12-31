@@ -76,8 +76,28 @@ public class TargetCard<T extends TargetCard<T>> extends TargetObject<TargetCard
 		return this.filter;
 	}
 
+	/**
+	 * Checks if there are enough {@link Card} that can be chosen.
+	 *
+	 * @param sourceId - the target event source
+	 * @param sourceControllerId - controller of the target event source
+	 * @param game
+	 * @return - true if enough valid {@link Card} exist
+	 */
 	@Override
 	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+		return canChoose(sourceControllerId, game);
+	}
+
+	/**
+	 * Checks if there are enough {@link Card} that can be selected.
+	 *
+	 * @param sourceControllerId - controller of the select event
+	 * @param game
+	 * @return - true if enough valid {@link Card} exist
+	 */
+	@Override
+	public boolean canChoose(UUID sourceControllerId, Game game) {
 		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
 			if (filter.matchOwner(playerId)) {
 				Player player = game.getPlayer(playerId);
@@ -104,6 +124,11 @@ public class TargetCard<T extends TargetCard<T>> extends TargetObject<TargetCard
 
 	@Override
 	public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+		return possibleTargets(sourceControllerId, game);
+	}
+
+	@Override
+	public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
 		Set<UUID> possibleTargets = new HashSet<UUID>();
 		Player player = game.getPlayer(sourceControllerId);
 		if (player != null) {

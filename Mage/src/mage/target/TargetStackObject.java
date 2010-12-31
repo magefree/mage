@@ -86,6 +86,11 @@ public class TargetStackObject extends TargetObject<TargetStackObject> {
 
 	@Override
 	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+		return canChoose(sourceControllerId, game);
+	}
+
+	@Override
+	public boolean canChoose(UUID sourceControllerId, Game game) {
 		int count = 0;
 		for (StackObject stackObject: game.getStack()) {
 			if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject)) {
@@ -99,6 +104,11 @@ public class TargetStackObject extends TargetObject<TargetStackObject> {
 
 	@Override
 	public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+		return possibleTargets(sourceControllerId, game);
+	}
+
+	@Override
+	public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
 		Set<UUID> possibleTargets = new HashSet<UUID>();
 		for (StackObject stackObject: game.getStack()) {
 			if (game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match(stackObject)) {
