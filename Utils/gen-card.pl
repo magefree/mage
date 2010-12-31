@@ -249,6 +249,7 @@ $manatocolor{'White'} = "		this.color.setWhite(true);";
 my %cardtypes;
 $cardtypes{'Artifact'} = "CardType.ARTIFACT";
 $cardtypes{'Creature'} = "CardType.CREATURE";
+$cardtypes{'Enchantment'} = "CardType.ENCHANTMENT";
 $cardtypes{'Instant'} = "CardType.INSTANT";
 $cardtypes{'Sorcery'} = "CardType.SORCERY";
 
