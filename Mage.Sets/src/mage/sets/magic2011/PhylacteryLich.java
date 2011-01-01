@@ -138,7 +138,7 @@ class PhylacteryLichEffect extends OneShotEffect<PhylacteryLichEffect> {
 		Player player = game.getPlayer(source.getControllerId());
 		if (player != null) {
 			TargetControlledPermanent target = new TargetControlledPermanent(filter);
-			if (target.canChoose(null, source.getControllerId(), game)) {
+			if (target.canChoose(source.getControllerId(), game)) {
 				target.setRequired(true);
 				if (player.choose(Outcome.Neutral, target, game)) {
 					Permanent permanent = game.getPermanent(target.getFirstTarget());

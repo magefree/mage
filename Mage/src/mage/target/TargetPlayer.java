@@ -146,11 +146,12 @@ public class TargetPlayer<T extends TargetPlayer<T>> extends TargetImpl<TargetPl
 
 	@Override
 	public boolean isLegal(Ability source, Game game) {
+		//20101001 - 608.2b
 		for (UUID playerId: targets.keySet()) {
-			if (!canTarget(playerId, source, game))
-				return false;
+			if (canTarget(playerId, source, game))
+				return true;
 		}
-		return true;
+		return false;
 	}
 
 	@Override
