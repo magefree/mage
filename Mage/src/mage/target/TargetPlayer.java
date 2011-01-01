@@ -70,6 +70,15 @@ public class TargetPlayer<T extends TargetPlayer<T>> extends TargetImpl<TargetPl
 		return filter;
 	}
 
+	/**
+	 * Checks if there are enough {@link Player} that can be chosen.  Should only be used
+	 * for Ability targets since this checks for protection, shroud etc.
+	 *
+	 * @param sourceId - the target event source
+	 * @param sourceControllerId - controller of the target event source
+	 * @param game
+	 * @return - true if enough valid {@link Player} exist
+	 */
 	@Override
 	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
 		int count = 0;
@@ -82,6 +91,28 @@ public class TargetPlayer<T extends TargetPlayer<T>> extends TargetImpl<TargetPl
 					if (count >= this.minNumberOfTargets)
 						return true;
 				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Checks if there are enough {@link Player} that can be selected.  Should not be used
+	 * for Ability targets since this does not check for protection, shroud etc.
+	 *
+	 * @param sourceControllerId - controller of the select event
+	 * @param game
+	 * @return - true if enough valid {@link Player} exist
+	 */
+	@Override
+	public boolean canChoose(UUID sourceControllerId, Game game) {
+		int count = 0;
+		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+			Player player = game.getPlayer(playerId);
+			if (player != null && !player.hasLeft() && filter.match(player)) {
+				count++;
+				if (count >= this.minNumberOfTargets)
+					return true;
 			}
 		}
 		return false;
@@ -102,12 +133,25 @@ public class TargetPlayer<T extends TargetPlayer<T>> extends TargetImpl<TargetPl
 	}
 
 	@Override
-	public boolean isLegal(Ability source, Game game) {
-		for (UUID playerId: targets.keySet()) {
-			if (!canTarget(playerId, source, game))
-				return false;
+	public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+		Set<UUID> possibleTargets = new HashSet<UUID>();
+		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+			Player player = game.getPlayer(playerId);
+			if (player != null && !player.hasLeft() && filter.match(player)) {
+				possibleTargets.add(playerId);
+			}
 		}
-		return true;
+		return possibleTargets;
+	}
+
+	@Override
+	public boolean isLegal(Ability source, Game game) {
+		//20101001 - 608.2b
+		for (UUID playerId: targets.keySet()) {
+			if (canTarget(playerId, source, game))
+				return true;
+		}
+		return false;
 	}
 
 	@Override

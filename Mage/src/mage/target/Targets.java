@@ -74,6 +74,8 @@ public class Targets extends ArrayList<Target> {
 
 	public boolean choose(Outcome outcome, UUID playerId, Game game) {
 		if (this.size() > 0) {
+			if (!canChoose(playerId, game))
+				return false;
 			while (!isChosen()) {
 				Target target = this.getUnchosen().get(0);
 				if (!target.choose(outcome, playerId, game))
@@ -85,6 +87,8 @@ public class Targets extends ArrayList<Target> {
 
 	public boolean chooseTargets(Outcome outcome, UUID playerId, Ability source, Game game) {
 		if (this.size() > 0) {
+			if (!canChoose(source.getSourceId(), playerId, game))
+				return false;
 			while (!isChosen()) {
 				Target target = this.getUnchosen().get(0);
 				if (!target.chooseTarget(outcome, playerId, source, game))
@@ -103,9 +107,34 @@ public class Targets extends ArrayList<Target> {
 		return true;
 	}
 
+	/**
+	 * Checks if there are enough targets that can be chosen.  Should only be used
+	 * for Ability targets since this checks for protection, shroud etc.
+	 *
+	 * @param sourceId - the target event source
+	 * @param sourceControllerId - controller of the target event source
+	 * @param game
+	 * @return - true if enough valid targets exist
+	 */
 	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
 		for (Target target: this) {
 			if (!target.canChoose(sourceId, sourceControllerId, game))
+				return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Checks if there are enough objects that can be selected.  Should not be used
+	 * for Ability targets since this does not check for protection, shroud etc.
+	 *
+	 * @param sourceControllerId - controller of the select event
+	 * @param game
+	 * @return - true if enough valid objects exist
+	 */
+	public boolean canChoose(UUID sourceControllerId, Game game) {
+		for (Target target: this) {
+			if (!target.canChoose(sourceControllerId, game))
 				return false;
 		}
 		return true;

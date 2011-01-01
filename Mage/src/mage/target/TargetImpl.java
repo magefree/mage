@@ -29,7 +29,7 @@
 package mage.target;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -47,7 +47,7 @@ import mage.players.Player;
  */
 public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 
-	protected Map<UUID, Integer> targets = new HashMap<UUID, Integer>();
+	protected Map<UUID, Integer> targets = new LinkedHashMap<UUID, Integer>();
 
 	protected String targetName;
 	protected Zone zone;
@@ -228,13 +228,14 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 
 	@Override
 	public boolean isLegal(Ability source, Game game) {
+		//20101001 - 608.2b
 		for (UUID targetId: targets.keySet()) {
-			if (game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getId(), source.getControllerId())))
-				return false;
-			if (!canTarget(targetId, source, game))
-				return false;
+			if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getId(), source.getControllerId())))
+				return true;
+			if (canTarget(targetId, source, game))
+				return true;
 		}
-		return true;
+		return false;
 	}
 
 	@Override

@@ -66,7 +66,7 @@ public class GatekeeperofMalakir extends CardImpl<GatekeeperofMalakir> {
 		this.toughness = new MageInt(2);
 
 		EntersBattlefieldTriggeredAbility sacAbility =
-				new EntersBattlefieldTriggeredAbility(new SacrificeEffect(filter, "target player"));
+				new EntersBattlefieldTriggeredAbility(new SacrificeEffect(filter, 1, "target player"));
 		sacAbility.addTarget(new TargetPlayer());
 		KickerAbility ability = new KickerAbility(new GainAbilitySourceEffect(sacAbility, Duration.OneUse), false);
 		ability.addCost(new ManaCostsImpl("{B}"));

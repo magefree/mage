@@ -87,6 +87,11 @@ public class TargetSpell extends TargetObject<TargetSpell> {
 
 	@Override
 	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+		return canChoose(sourceControllerId, game);
+	}
+
+	@Override
+	public boolean canChoose(UUID sourceControllerId, Game game) {
 		int count = 0;
 		for (StackObject stackObject: game.getStack()) {
 			if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell)stackObject)) {
@@ -100,6 +105,11 @@ public class TargetSpell extends TargetObject<TargetSpell> {
 
 	@Override
 	public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+		return possibleTargets(sourceControllerId, game);
+	}
+
+	@Override
+	public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
 		Set<UUID> possibleTargets = new HashSet<UUID>();
 		for (StackObject stackObject: game.getStack()) {
 			if (stackObject instanceof Spell && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getControllerId()) && filter.match((Spell)stackObject)) {

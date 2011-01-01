@@ -107,6 +107,15 @@ public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
 		return false;
 	}
 
+	/**
+	 * Checks if there are enough {@link Permanent} or {@link Player} that can be chosen.  Should only be used
+	 * for Ability targets since this checks for protection, shroud etc.
+	 *
+	 * @param sourceId - the target event source
+	 * @param sourceControllerId - controller of the target event source
+	 * @param game
+	 * @return - true if enough valid {@link Permanent} or {@link Player} exist
+	 */
 	@Override
 	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
 		int count = 0;
@@ -129,6 +138,35 @@ public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
 		return false;
 	}
 
+	/**
+	 * Checks if there are enough {@link Permanent} or {@link Player} that can be selected.  Should not be used
+	 * for Ability targets since this does not check for protection, shroud etc.
+	 *
+	 * @param sourceControllerId - controller of the select event
+	 * @param game
+	 * @return - true if enough valid {@link Permanent} or {@link Player} exist
+	 */
+	@Override
+	public boolean canChoose(UUID sourceControllerId, Game game) {
+		int count = 0;
+		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+			Player player = game.getPlayer(playerId);
+			if (player != null && filter.match(player)) {
+				count++;
+				if (count >= this.minNumberOfTargets)
+					return true;
+			}
+		}
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
+			if (filter.match(permanent, sourceControllerId, game)) {
+				count++;
+				if (count >= this.minNumberOfTargets)
+					return true;
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
 		Set<UUID> possibleTargets = new HashSet<UUID>();
@@ -141,6 +179,23 @@ public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
 		}
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
 			if (permanent.canBeTargetedBy(targetSource) && filter.match(permanent, sourceControllerId, game)) {
+				possibleTargets.add(permanent.getId());
+			}
+		}
+		return possibleTargets;
+	}
+
+	@Override
+	public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+		Set<UUID> possibleTargets = new HashSet<UUID>();
+		for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+			Player player = game.getPlayer(playerId);
+			if (player != null && filter.match(player)) {
+				possibleTargets.add(playerId);
+			}
+		}
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
+			if (filter.match(permanent, sourceControllerId, game)) {
 				possibleTargets.add(permanent.getId());
 			}
 		}
