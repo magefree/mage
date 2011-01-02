@@ -76,7 +76,7 @@ public class CopperhornScout extends CardImpl<CopperhornScout> {
 class CopperhornScoutTriggeredAbility extends TriggeredAbilityImpl<CopperhornScoutTriggeredAbility> {
 
 	public CopperhornScoutTriggeredAbility() {
-		super(Zone.BATTLEFIELD, new CopperhornScoutUntapEffect(), true);
+		super(Zone.BATTLEFIELD, new CopperhornScoutUntapEffect(), false);
 	}
 
 	public CopperhornScoutTriggeredAbility(final CopperhornScoutTriggeredAbility ability) {

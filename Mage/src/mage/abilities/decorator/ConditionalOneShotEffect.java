@@ -52,7 +52,7 @@ public class ConditionalOneShotEffect extends OneShotEffect<ConditionalOneShotEf
 	}
 
 	public ConditionalOneShotEffect ( ConditionalOneShotEffect effect ) {
-		this(effect, effect.condition, effect.text);
+		this(effect.effect, effect.condition, effect.text);
 	}
 
 	@Override

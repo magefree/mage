@@ -25,81 +25,108 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.sets.worldwake;
 
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.condition.common.MyTurn;
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.condition.common.Unless;
-import mage.abilities.condition.common.TenOrLessLife;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-
-import static mage.abilities.condition.common.TenOrLessLife.CheckType.*;
+import mage.players.Player;
+import mage.players.Players;
 
 /**
  *
  * @author maurer.it_at_gmail.com
  */
-public class VampireLacerator extends CardImpl<VampireLacerator> {
+public class PulseTracker extends CardImpl<PulseTracker> {
 
-	public VampireLacerator(UUID ownerId) {
-		super(ownerId, 115, "Vampire Lacerator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-		this.expansionSetCode = "ZEN";
+	public PulseTracker(UUID ownerId) {
+		super(ownerId, 62, "Pulse Tracker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
+		this.expansionSetCode = "WWK";
 		this.subtype.add("Vampire");
-		this.subtype.add("Warrior");
+		this.subtype.add("Rogue");
 
 		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+		this.power = new MageInt(1);
+		this.toughness = new MageInt(1);
 
-		this.addAbility(new VampireLaceratorTriggeredAbility());
+		this.addAbility(new PulseTrackerTriggeredAbility());
 	}
 
-	public VampireLacerator(final VampireLacerator card) {
+	public PulseTracker(final PulseTracker card) {
 		super(card);
 	}
 
 	@Override
-	public VampireLacerator copy() {
-		return new VampireLacerator(this);
+	public PulseTracker copy() {
+		return new PulseTracker(this);
 	}
 }
 
-class VampireLaceratorTriggeredAbility extends TriggeredAbilityImpl<VampireLaceratorTriggeredAbility> {
-	VampireLaceratorTriggeredAbility ( ) {
-		super(Zone.BATTLEFIELD,
-				new ConditionalOneShotEffect(
-					new LoseLifeSourceEffect(1),
-					new Unless( new TenOrLessLife(AN_OPPONENT) ),
-					"At the beginning of your upkeep, you lose 1 "
-					+ "life unless an opponent has 10 or less life."));
+class PulseTrackerTriggeredAbility extends TriggeredAbilityImpl<PulseTrackerTriggeredAbility> {
+
+	public PulseTrackerTriggeredAbility() {
+		super(Zone.BATTLEFIELD, new PulseTrackerLoseLifeEffect(), false);
 	}
 
-	VampireLaceratorTriggeredAbility ( VampireLaceratorTriggeredAbility ability ) {
+	public PulseTrackerTriggeredAbility(final PulseTrackerTriggeredAbility ability) {
 		super(ability);
 	}
 
 	@Override
+	public PulseTrackerTriggeredAbility copy() {
+		return new PulseTrackerTriggeredAbility(this);
+	}
+
+	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
-		return MyTurn.getInstance().apply(game, this) && event.getType() == EventType.UPKEEP_STEP_PRE;
+		if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public String getRule() {
-		return super.getRule();
+		return "Whenever Pulse Tracker attacks, each opponent loses 1 life.";
+	}
+}
+
+class PulseTrackerLoseLifeEffect extends OneShotEffect<PulseTrackerLoseLifeEffect> {
+
+	PulseTrackerLoseLifeEffect ( ) {
+		super(Outcome.Damage);
+	}
+
+	PulseTrackerLoseLifeEffect ( PulseTrackerLoseLifeEffect effect ) {
+		super(effect);
 	}
 
 	@Override
-	public VampireLaceratorTriggeredAbility copy() {
-		return new VampireLaceratorTriggeredAbility(this);
+	public boolean apply(Game game, Ability source) {
+		Players players = game.getPlayers();
+
+		for ( Player player : players.values() ) {
+			if ( !player.getId().equals(source.getControllerId()) ) {
+				player.loseLife(1, game);
+			}
+		}
+
+		return true;
 	}
+
+	@Override
+	public PulseTrackerLoseLifeEffect copy() {
+		return new PulseTrackerLoseLifeEffect(this);
+	}
+
 }
