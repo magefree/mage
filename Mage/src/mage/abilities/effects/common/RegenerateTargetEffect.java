@@ -96,7 +96,7 @@ public class RegenerateTargetEffect  extends ReplacementEffectImpl<RegenerateTar
 		StringBuilder sb = new StringBuilder();
 		sb.append("Regenerate ");
 		if ( source != null ) {
-		  sb.append(source.getTargets().get(0).getMessage());
+		  sb.append(source.getTargets().get(0).getTargetName()).append(".");
 		}
 		return sb.toString();
 	}

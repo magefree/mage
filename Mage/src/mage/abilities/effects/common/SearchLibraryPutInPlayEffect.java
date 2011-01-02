@@ -100,11 +100,16 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect<SearchLibraryPutI
 		StringBuilder sb = new StringBuilder();
 		sb.append("Search your library for ");
 		if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
-			sb.append("up to ").append(target.getMaxNumberOfTargets()).append(" ");
-			sb.append(target.getTargetName()).append(", and put them onto the battlefield");
+			if ( target.getMaxNumberOfTargets() == Integer.MAX_VALUE ) {
+				sb.append("any number of ").append(" ");
+			}
+			else {
+				sb.append("up to ").append(target.getMaxNumberOfTargets()).append(" ");
+			}
+			sb.append(target.getTargetName()).append(" and put them onto the battlefield");
 		}
 		else {
-			sb.append("a ").append(target.getTargetName()).append(", and put it onto the battlefield");
+			sb.append("a ").append(target.getTargetName()).append(" and put it onto the battlefield");
 		}
 		if (tapped)
 			sb.append(" tapped");

@@ -75,7 +75,9 @@ public class EzuriRenegadeLeader extends CardImpl<EzuriRenegadeLeader> {
 		this.toughness = new MageInt(2);
 
 		Ability ezuriRegen = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{G}"));
-		ezuriRegen.addTarget(new TargetControlledCreaturePermanent(1, 1, notEzuri, false));
+		TargetControlledCreaturePermanent regenTarget = new TargetControlledCreaturePermanent(1, 1, notEzuri, false);
+		regenTarget.setTargetName("another target Elf");
+		ezuriRegen.addTarget(regenTarget);
 		this.addAbility(ezuriRegen);
 
 		Ability ezuriBoost = new SimpleActivatedAbility(Zone.BATTLEFIELD,
