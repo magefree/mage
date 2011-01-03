@@ -28,6 +28,7 @@
 package mage.sets.zendikar;
 
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BeginningOfControllerUpkeepTriggeredAbility;
 import mage.abilities.condition.common.MyTurn;
 import java.util.UUID;
 import mage.Constants.CardType;
@@ -56,12 +57,16 @@ public class VampireLacerator extends CardImpl<VampireLacerator> {
 		this.expansionSetCode = "ZEN";
 		this.subtype.add("Vampire");
 		this.subtype.add("Warrior");
-
 		this.color.setBlack(true);
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
 
-		this.addAbility(new VampireLaceratorTriggeredAbility());
+        this.addAbility(new BeginningOfControllerUpkeepTriggeredAbility(
+            new ConditionalOneShotEffect(
+					new LoseLifeSourceEffect(1),
+					new Unless( new TenOrLessLife(AN_OPPONENT) ),
+					"At the beginning of your upkeep, you lose 1 "
+					+ "life unless an opponent has 10 or less life."), false));
 	}
 
 	public VampireLacerator(final VampireLacerator card) {
@@ -71,35 +76,5 @@ public class VampireLacerator extends CardImpl<VampireLacerator> {
 	@Override
 	public VampireLacerator copy() {
 		return new VampireLacerator(this);
-	}
-}
-
-class VampireLaceratorTriggeredAbility extends TriggeredAbilityImpl<VampireLaceratorTriggeredAbility> {
-	VampireLaceratorTriggeredAbility ( ) {
-		super(Zone.BATTLEFIELD,
-				new ConditionalOneShotEffect(
-					new LoseLifeSourceEffect(1),
-					new Unless( new TenOrLessLife(AN_OPPONENT) ),
-					"At the beginning of your upkeep, you lose 1 "
-					+ "life unless an opponent has 10 or less life."));
-	}
-
-	VampireLaceratorTriggeredAbility ( VampireLaceratorTriggeredAbility ability ) {
-		super(ability);
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		return MyTurn.getInstance().apply(game, this) && event.getType() == EventType.UPKEEP_STEP_PRE;
-	}
-
-	@Override
-	public String getRule() {
-		return super.getRule();
-	}
-
-	@Override
-	public VampireLaceratorTriggeredAbility copy() {
-		return new VampireLaceratorTriggeredAbility(this);
 	}
 }
