@@ -34,6 +34,7 @@ import java.util.UUID;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.game.Game;
+import mage.game.draft.Draft;
 
 /**
  *
@@ -46,6 +47,7 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
 	}
 
 	private Game game;
+	private Draft draft;
 	private EventType eventType;
 	private String message;
 	private Cards cards;
@@ -67,8 +69,19 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
 		this.eventType = eventType;
 	}
 
+	public TableEvent(EventType eventType, String message, Draft draft) {
+		super(draft);
+		this.draft = draft;
+		this.message = message;
+		this.eventType = eventType;
+	}
+
 	public Game getGame() {
 		return game;
+	}
+
+	public Draft getDraft() {
+		return draft;
 	}
 
 	public EventType getEventType() {

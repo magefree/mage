@@ -321,6 +321,18 @@ public class Session {
 		return false;
 	}
 
+	public boolean sendCardPick(UUID draftId, UUID cardId) {
+		try {
+			server.sendPlayerUUID(draftId, sessionId, cardId);
+			return true;
+		} catch (RemoteException ex) {
+			handleRemoteException(ex);
+		} catch (MageException ex) {
+			handleMageException(ex);
+		}
+		return false;
+	}
+
 	public boolean joinChat(UUID chatId, ChatPanel chat) {
 		try {
 			server.joinChat(chatId, sessionId, userName);
@@ -456,6 +468,18 @@ public class Session {
 	public boolean startGame(UUID roomId, UUID tableId) {
 		try {
 			server.startMatch(sessionId, roomId, tableId);
+			return true;
+		} catch (RemoteException ex) {
+			handleRemoteException(ex);
+		} catch (MageException ex) {
+			handleMageException(ex);
+		}
+		return false;
+	}
+
+	public boolean startDraft(UUID roomId, UUID tableId) {
+		try {
+			server.startDraft(sessionId, roomId, tableId);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);

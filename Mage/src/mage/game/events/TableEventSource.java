@@ -33,6 +33,7 @@ import java.util.UUID;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.game.Game;
+import mage.game.draft.Draft;
 import mage.game.events.TableEvent.EventType;
 
 /**
@@ -50,6 +51,10 @@ public class TableEventSource implements EventSource<TableEvent>, Serializable {
 
 	public void fireTableEvent(EventType eventType, String message, Game game) {
 		dispatcher.fireEvent(new TableEvent(eventType, message, null, game));
+	}
+
+	public void fireTableEvent(EventType eventType, String message, Draft draft) {
+		dispatcher.fireEvent(new TableEvent(eventType, message, draft));
 	}
 
 	public void fireTableEvent(EventType eventType, String message, Cards cards, Game game) {

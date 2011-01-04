@@ -30,10 +30,12 @@ package mage.game.events;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbilities;
+import mage.cards.Card;
 import mage.cards.Cards;
 
 /**
@@ -91,6 +93,10 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
 
 	public void playXMana(UUID playerId, String message) {
 		dispatcher.fireEvent(PlayerQueryEvent.playXManaEvent(playerId, message));
+	}
+
+	public void pickCard(UUID playerId, String message, List<Card> booster) {
+		dispatcher.fireEvent(PlayerQueryEvent.pickCard(playerId, message, booster));
 	}
 
 }

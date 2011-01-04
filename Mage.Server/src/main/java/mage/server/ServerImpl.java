@@ -232,6 +232,23 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
+	public void startDraft(final UUID sessionId, final UUID roomId, final UUID draftId) throws MageException {
+		try {
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+//						TableManager.getInstance().startMatch(sessionId, roomId, tableId);
+					}
+				}
+			);
+		}
+		catch (Exception ex) {
+			handleException(ex);
+		}
+	}
+
+	@Override
 	public void sendChatMessage(final UUID chatId, final String userName, final String message) throws MageException {
 		try {
 			rmiExecutor.execute(
@@ -447,6 +464,23 @@ public class ServerImpl extends RemoteServer implements Server {
 					@Override
 					public void run() {
 						GameManager.getInstance().sendPlayerInteger(gameId, sessionId, data);
+					}
+				}
+			);
+		}
+		catch (Exception ex) {
+			handleException(ex);
+		}
+	}
+
+	@Override
+	public void sendCardPick(final UUID gameId, final UUID sessionId, final UUID cardPick) throws MageException {
+		try {
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+//						GameManager.getInstance().sendPlayerUUID(gameId, sessionId, data);
 					}
 				}
 			);

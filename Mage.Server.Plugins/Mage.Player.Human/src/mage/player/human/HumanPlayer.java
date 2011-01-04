@@ -32,8 +32,10 @@ import java.util.List;
 import mage.abilities.TriggeredAbilities;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.effects.ReplacementEffect;
+import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
+import mage.game.draft.Draft;
 import mage.players.*;
 import java.util.Map;
 import java.util.Set;
@@ -477,6 +479,11 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 		table.fireSideboardEvent(playerId, deck);
 	}
 
+	@Override
+	public void pickCard(List<Card> cards, Deck deck, Draft draft) {
+		draft.firePickCardEvent(playerId);
+	}
+
 	protected void specialAction(Game game) {
 		Map<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId);
 		game.fireGetChoiceEvent(playerId, name, specialActions.values());
@@ -542,8 +549,6 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 			response.notify();
 		}
 	}
-
-	
 
 	@Override
 	public HumanPlayer copy() {

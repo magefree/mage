@@ -72,6 +72,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.ManaOptions;
+import mage.game.draft.Draft;
 import mage.player.ai.simulators.CombatGroupSimulator;
 import mage.player.ai.simulators.CombatSimulator;
 import mage.player.ai.simulators.CreatureSimulator;
@@ -771,6 +772,12 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	public void sideboard(Table table, Deck deck) {
 		//TODO: improve this
 		table.fireSubmitDeckEvent(playerId, deck);
+	}
+
+	@Override
+	public void pickCard(List<Card> cards, Deck deck, Draft draft) {
+		//TODO: improve this
+		draft.addPick(playerId, cards.get(0).getId());
 	}
 
 	protected Attackers getPotentialAttackers(Game game) {

@@ -31,11 +31,13 @@ package mage.game.events;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.EventObject;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbilities;
+import mage.cards.Card;
 import mage.cards.Cards;
 
 /**
@@ -45,7 +47,7 @@ import mage.cards.Cards;
 public class PlayerQueryEvent extends EventObject implements ExternalEvent, Serializable {
 
 	public enum QueryType {
-		ASK, CHOOSE, CHOOSE_ABILITY, PICK_TARGET, PICK_ABILITY, SELECT, PLAY_MANA, PLAY_X_MANA, AMOUNT, LOOK
+		ASK, CHOOSE, CHOOSE_ABILITY, PICK_TARGET, PICK_ABILITY, SELECT, PLAY_MANA, PLAY_X_MANA, AMOUNT, LOOK, PICK_CARD
 	}
 
 	private String message;
@@ -53,6 +55,7 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 	private Set<String> choices;
 	private Set<UUID> targets;
 	private Cards cards;
+	private List<Card> booster;
 	private QueryType queryType;
 	private UUID playerId;
 	private boolean required;
@@ -71,6 +74,14 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 		this.required = required;
 		this.min = min;
 		this.max = max;
+	}
+
+	private PlayerQueryEvent(UUID playerId, String message, List<Card> booster, QueryType queryType) {
+		super(playerId);
+		this.queryType = queryType;
+		this.message = message;
+		this.playerId = playerId;
+		this.booster = booster;
 	}
 
 	public static PlayerQueryEvent askEvent(UUID playerId, String message) {
@@ -116,6 +127,10 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 		return new PlayerQueryEvent(playerId, message, null, null, null, cards, QueryType.LOOK, 0, 0, false);
 	}
 	
+	public static PlayerQueryEvent pickCard(UUID playerId, String message, List<Card> booster) {
+		return new PlayerQueryEvent(playerId, message, booster, QueryType.PICK_CARD);
+	}
+
 	public String getMessage() {
 		return message;
 	}
@@ -146,6 +161,10 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 
 	public Cards getCards() {
 		return cards;
+	}
+
+	public List<Card> getBooster() {
+		return booster;
 	}
 
 	public int getMin() {
