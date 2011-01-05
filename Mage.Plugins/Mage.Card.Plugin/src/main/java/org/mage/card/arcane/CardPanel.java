@@ -199,13 +199,14 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     public void setFoil(boolean foil) {
         this.isFoil = foil;
         if (foil) {
-            /*BufferedImage source = BufferedImageBuilder.bufferImage(imagePanel.getSrcImage());
+            BufferedImage source = BufferedImageBuilder.bufferImage(imagePanel.getSrcImage());
             HueFilter filter = FilterFactory.getHueFilter();
-            filter.setHue(0.1sf);
+            filter.setHue(0.1f);
             BufferedImage dest = filter.filter(source, null);
             imagePanel.setImage(dest);
-            imagePanel.repaint();*/
+            imagePanel.repaint();
 
+            /*
             Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -238,7 +239,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             });
             thread.setDaemon(false);
             thread.start();
-
+            */
         }
     }
 

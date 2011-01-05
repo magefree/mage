@@ -67,8 +67,11 @@ public class BigCard extends JComponent {
     protected boolean foilState;
     protected Thread foilThread;
     protected float hue = 0.005f;
+    protected float dh = 0.005f;
 
     static private final int DEFAULT_DELAY_PERIOD = 25;
+    static private final float LEFT_BOUNDARY = -0.3f;
+    static private final float RIGHT_BOUNDARY = 0.1f;
 
     public BigCard() {
         initComponents();
@@ -175,6 +178,7 @@ public class BigCard extends JComponent {
                     return;
                 }
                 final HueFilter filter = FilterFactory.getHueFilter();
+                int sign = 1;
                 while (true) {
                     boolean prevState = foilState;
                     while (!foilState) {
@@ -183,9 +187,16 @@ public class BigCard extends JComponent {
                     if (prevState == foilState) {
                         ThreadUtils.sleep(DEFAULT_DELAY_PERIOD);
                     }
-                    hue += 0.005F;
-                    if (hue >= 1.0D) {
+                    hue += dh * sign;
+                    /*if (hue >= 1.0D) {
                         hue = 0.000F;
+                    }*/
+                    if (hue < LEFT_BOUNDARY) {
+                        sign *= -1;
+                        hue = LEFT_BOUNDARY;
+                    } else if (hue > RIGHT_BOUNDARY) {
+                        sign *= -1;
+                        hue = RIGHT_BOUNDARY;
                     }
                     filter.setHue(hue);
                     BufferedImage f = null;
