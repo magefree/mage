@@ -41,13 +41,11 @@ import mage.filters.impl.HueFilter;
 import mage.utils.ThreadUtils;
 import org.jdesktop.swingx.JXPanel;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.List;
 import java.util.UUID;
 
@@ -149,22 +147,20 @@ public class BigCard extends JComponent {
     }
 
     public void setFoil(boolean foil) {
-        if (foil) {
-            if (foilThread == null) {
-                synchronized (this) {
-                    if (foilThread == null) {
-                        foilThread = getFoilThread();
-                        foilThread.setDaemon(true);
-                        foilThread.start();
-                    }
+        if (foilThread == null) {
+            synchronized (this) {
+                if (foilThread == null) {
+                    foilThread = getFoilThread();
+                    foilThread.setDaemon(true);
+                    foilThread.start();
                 }
             }
-            if (foil != foilState) {
-                synchronized (this) {
-                    if (foil != foilState) {
-                        hue = 0.005f;
-                        foilState = foil;
-                    }
+        }
+        if (foil != foilState) {
+            synchronized (this) {
+                if (foil != foilState) {
+                    hue = 0.005f;
+                    foilState = foil;
                 }
             }
         }
