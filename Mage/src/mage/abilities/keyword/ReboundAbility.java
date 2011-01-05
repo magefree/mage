@@ -72,6 +72,7 @@ import mage.players.Player;
 public class ReboundAbility extends TriggeredAbilityImpl<ReboundAbility> {
 	//20101001 - 702.85
 	private boolean installReboundEffect;
+	private static String reboundText = "Rebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)";
 
 	public ReboundAbility ( ) {
 		super(Zone.STACK, null);
@@ -111,7 +112,7 @@ public class ReboundAbility extends TriggeredAbilityImpl<ReboundAbility> {
 
 	@Override
 	public String getRule() {
-		return "Rebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)";
+		return reboundText;
 	}
 
 	@Override
@@ -165,6 +166,7 @@ class ReboundEffect extends OneShotEffect<ReboundEffect> {
  */
 class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl<ReboundCastFromHandReplacementEffect> {
 
+	private static String replacementText = "Rebound - If you cast {this} from your hand, exile it as it resolves";
 	private UUID cardId;
 
 	ReboundCastFromHandReplacementEffect ( UUID cardId ) {
@@ -212,7 +214,7 @@ class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl<Rebound
 
 	@Override
 	public String getText(Ability source) {
-		return "Rebound - If you cast {this} from your hand, exile it as it resolves";
+		return replacementText;
 	}
 }
 
@@ -258,6 +260,7 @@ class ReboundEffectCastFromExileDelayedTrigger extends DelayedTriggeredAbility<R
  */
 class ReboundCastSpellFromExileEffect extends OneShotEffect<ReboundCastSpellFromExileEffect> {
 
+	private static String castFromExileText = "Rebound - You may cast {this} from exile without paying its mana cost";
 	private UUID cardId;
 
 	ReboundCastSpellFromExileEffect ( UUID cardId ) {
@@ -290,6 +293,6 @@ class ReboundCastSpellFromExileEffect extends OneShotEffect<ReboundCastSpellFrom
 
 	@Override
 	public String getText(Ability source) {
-		return "Rebound - You may cast {this} from exile without paying its mana cost";
+		return castFromExileText;
 	}
 }
