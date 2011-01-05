@@ -47,6 +47,7 @@ import mage.interfaces.Server;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.game.DeckValidatorFactory;
+import mage.server.game.DraftManager;
 import mage.server.game.GameFactory;
 import mage.server.game.GameManager;
 import mage.server.game.GamesRoomManager;
@@ -160,6 +161,21 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
+	public boolean joinDraftTable(UUID sessionId, UUID roomId, UUID tableId, String name) throws MageException, GameException {
+		try {
+			boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinDraftTable(sessionId, tableId, name);
+			logger.info("Session " + sessionId + " joined table " + tableId);
+			return ret;
+		}
+		catch (Exception ex) {
+			if (ex instanceof GameException)
+				throw (GameException)ex;
+			handleException(ex);
+		}
+		return false;
+	}
+
+	@Override
 	public boolean submitDeck(UUID sessionId, UUID tableId, DeckCardLists deckList) throws MageException, GameException {
 		try {
 			boolean ret = TableManager.getInstance().submitDeck(sessionId, tableId, deckList);
@@ -232,13 +248,13 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void startDraft(final UUID sessionId, final UUID roomId, final UUID draftId) throws MageException {
+	public void startDraft(final UUID sessionId, final UUID roomId, final UUID tableId) throws MageException {
 		try {
 			rmiExecutor.execute(
 				new Runnable() {
 					@Override
 					public void run() {
-//						TableManager.getInstance().startMatch(sessionId, roomId, tableId);
+						TableManager.getInstance().startDraft(sessionId, roomId, tableId);
 					}
 				}
 			);
@@ -395,6 +411,23 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
+	public void joinDraft(final UUID draftId, final UUID sessionId) throws MageException {
+		try {
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						DraftManager.getInstance().joinDraft(draftId, sessionId);
+					}
+				}
+			);
+		}
+		catch (Exception ex) {
+			handleException(ex);
+		}
+	}
+
+	@Override
 	public UUID getGameChatId(UUID gameId) throws MageException {
 		try {
 			return GameManager.getInstance().getChatId(gameId);
@@ -474,13 +507,13 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void sendCardPick(final UUID gameId, final UUID sessionId, final UUID cardPick) throws MageException {
+	public void sendCardPick(final UUID draftId, final UUID sessionId, final UUID cardPick) throws MageException {
 		try {
 			rmiExecutor.execute(
 				new Runnable() {
 					@Override
 					public void run() {
-//						GameManager.getInstance().sendPlayerUUID(gameId, sessionId, data);
+						DraftManager.getInstance().sendCardPick(draftId, sessionId, cardPick);
 					}
 				}
 			);

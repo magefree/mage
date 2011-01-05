@@ -37,6 +37,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
+import mage.game.draft.DraftOptions;
 import mage.game.match.MatchOptions;
 import mage.util.Logging;
 import mage.view.TableView;
@@ -72,6 +73,22 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 	@Override
 	public TableView createTable(UUID sessionId, MatchOptions options) {
 		Table table = TableManager.getInstance().createTable(sessionId, options);
+		tables.put(table.getId(), table);
+		return new TableView(table);
+	}
+
+	@Override
+	public boolean joinDraftTable(UUID sessionId, UUID tableId, String name) throws GameException {
+		if (tables.containsKey(tableId)) {
+			return TableManager.getInstance().joinDraft(sessionId, tableId, name);
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public TableView createDraftTable(UUID sessionId, DraftOptions options) {
+		Table table = TableManager.getInstance().createDraftTable(sessionId, options);
 		tables.put(table.getId(), table);
 		return new TableView(table);
 	}

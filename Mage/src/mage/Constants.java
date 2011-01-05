@@ -218,6 +218,7 @@ public final class Constants {
 	public enum TableState {
 		WAITING ("Waiting for players"),
 		STARTING ("Waiting to start"),
+		DRAFTING ("Drafting"),
 		DUELING ("Dueling"),
 		SIDEBOARDING ("Sideboarding"),
 		FINISHED ("Finished");

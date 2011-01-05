@@ -28,6 +28,7 @@
 
 package mage.game.draft;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,9 +61,9 @@ public class DraftImpl<T extends DraftImpl<T>> implements Draft {
 	protected transient TableEventSource tableEventSource = new TableEventSource();
 	protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
 
-	public DraftImpl(List<ExpansionSet> sets) {
+	public DraftImpl(DraftOptions options) {
 		id = UUID.randomUUID();
-		this.sets = sets;
+		this.sets = options.getSets();
 	}
 
 	@Override
@@ -75,6 +76,26 @@ public class DraftImpl<T extends DraftImpl<T>> implements Draft {
 		DraftPlayer draftPlayer = new DraftPlayer(player);
 		players.put(draftPlayer.getId(), draftPlayer);
 		table.add(draftPlayer.getId());
+	}
+
+	@Override
+	public Collection<DraftPlayer> getPlayers() {
+		return players.values();
+	}
+
+	@Override
+	public DraftPlayer getPlayer(UUID playerId) {
+		return players.get(playerId);
+	}
+
+	@Override
+	public void leave(UUID playerId) {
+		//TODO: implement this
+	}
+
+	@Override
+	public void autoPick(UUID playerId) {
+		//TODO: implement this
 	}
 
 	protected void passLeft() {
@@ -163,6 +184,7 @@ public class DraftImpl<T extends DraftImpl<T>> implements Draft {
 				fireUpdatePlayersEvent();
 			}
 		}
+		startTournament();
 	}
 
 	@Override
@@ -194,6 +216,10 @@ public class DraftImpl<T extends DraftImpl<T>> implements Draft {
 				break;
 			}
 		}
+	}
+
+	protected void startTournament() {
+		//TODO: implement this
 	}
 
 }

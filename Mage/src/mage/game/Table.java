@@ -82,6 +82,10 @@ public class Table implements Serializable {
 		state = TableState.DUELING;
 	}
 
+	public void initDraft() {
+		state = TableState.DRAFTING;
+	}
+
 	public void endGame() {
 		state = TableState.FINISHED;
 	}

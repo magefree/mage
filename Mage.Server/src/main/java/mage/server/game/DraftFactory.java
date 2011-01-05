@@ -28,29 +28,52 @@
 
 package mage.server.game;
 
-import java.util.List;
-import java.util.UUID;
-import mage.cards.decks.DeckCardLists;
-import mage.game.GameException;
+import java.lang.reflect.Constructor;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import mage.game.draft.Draft;
 import mage.game.draft.DraftOptions;
-import mage.game.match.MatchOptions;
-import mage.view.TableView;
+import mage.util.Logging;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface GamesRoom extends Room {
+public class DraftFactory {
 
-	public List<TableView> getTables();
-	public boolean joinTable(UUID sessionId, UUID tableId, String name, DeckCardLists deckList) throws GameException;
-	public boolean joinDraftTable(UUID sessionId, UUID tableId, String name) throws GameException;
-	public TableView createTable(UUID sessionId, MatchOptions options);
-	public TableView createDraftTable(UUID sessionId, DraftOptions options);
-	public void removeTable(UUID sessionId, UUID tableId);
-	public TableView getTable(UUID tableId);
-	public void leaveTable(UUID sessionId, UUID tableId);
+	private final static DraftFactory INSTANCE = new DraftFactory();
+	private final static Logger logger = Logging.getLogger(DraftFactory.class.getName());
 
-	public boolean watchTable(UUID sessionId, UUID tableId);
+	private Map<String, Class<Draft>> drafts = new HashMap<String, Class<Draft>>();
+
+	public static DraftFactory getInstance() {
+		return INSTANCE;
+	}
+
+	private DraftFactory() {}
+
+	public Draft createDraft(String draftType, DraftOptions options) {
+
+		Draft draft;
+		Constructor<Draft> con;
+		try {
+			con = drafts.get(draftType).getConstructor(new Class[]{DraftOptions.class});
+			draft = con.newInstance(new Object[] {options});
+		} catch (Exception ex) {
+			logger.log(Level.SEVERE, null, ex);
+			return null;
+		}
+		logger.info("Draft created: " + draftType); // + game.getId().toString());
+
+		return draft;
+	}
+
+	public void addDraftType(String name, Class draft) {
+		if (draft != null) {
+			this.drafts.put(name, draft);
+		}
+	}
 
 }

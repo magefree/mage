@@ -28,29 +28,63 @@
 
 package mage.server.game;
 
-import java.util.List;
 import java.util.UUID;
-import mage.cards.decks.DeckCardLists;
-import mage.game.GameException;
-import mage.game.draft.DraftOptions;
-import mage.game.match.MatchOptions;
-import mage.view.TableView;
+import java.util.concurrent.ConcurrentHashMap;
+import mage.game.draft.Draft;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface GamesRoom extends Room {
+public class DraftManager {
+	private final static DraftManager INSTANCE = new DraftManager();
 
-	public List<TableView> getTables();
-	public boolean joinTable(UUID sessionId, UUID tableId, String name, DeckCardLists deckList) throws GameException;
-	public boolean joinDraftTable(UUID sessionId, UUID tableId, String name) throws GameException;
-	public TableView createTable(UUID sessionId, MatchOptions options);
-	public TableView createDraftTable(UUID sessionId, DraftOptions options);
-	public void removeTable(UUID sessionId, UUID tableId);
-	public TableView getTable(UUID tableId);
-	public void leaveTable(UUID sessionId, UUID tableId);
+	public static DraftManager getInstance() {
+		return INSTANCE;
+	}
 
-	public boolean watchTable(UUID sessionId, UUID tableId);
+	private DraftManager() {}
+
+	private ConcurrentHashMap<UUID, DraftController> draftControllers = new ConcurrentHashMap<UUID, DraftController>();
+
+	public UUID createDraftSession(Draft draft, ConcurrentHashMap<UUID, UUID> sessionPlayerMap, UUID tableId) {
+		DraftController draftController = new DraftController(draft, sessionPlayerMap, tableId);
+		draftControllers.put(draft.getId(), draftController);
+		return draftController.getSessionId();
+	}
+
+	public void joinDraft(UUID draftId, UUID sessionId) {
+		draftControllers.get(draftId).join(sessionId);
+	}
+
+	public void destroyChatSession(UUID gameId) {
+		draftControllers.remove(gameId);
+	}
+
+	public UUID getChatId(UUID draftId) {
+		return draftControllers.get(draftId).getChatId();
+	}
+
+	public void sendCardPick(UUID draftId, UUID sessionId, UUID cardId) {
+		draftControllers.get(draftId).sendCardPick(sessionId, cardId);
+	}
+
+	public void removeSession(UUID sessionId) {
+		for (DraftController controller: draftControllers.values()) {
+			controller.kill(sessionId);
+		}
+	}
+
+	public void kill(UUID draftId, UUID sessionId) {
+		draftControllers.get(draftId).kill(sessionId);
+	}
+
+	void timeout(UUID gameId, UUID sessionId) {
+		draftControllers.get(gameId).timeout(sessionId);
+	}
+
+	void removeDraft(UUID draftId) {
+		draftControllers.remove(draftId);
+	}
 
 }

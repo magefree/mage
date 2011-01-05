@@ -80,6 +80,10 @@ public class Client implements CallbackClient {
                 GameManager.getInstance().setCurrentPlayerUUID(message.getPlayerId());
 				gameStarted(message.getGameId(), message.getPlayerId());
 			}
+			else if(callback.getMethod().equals("startDraft")) {
+				TableClientMessage message = (TableClientMessage) callback.getData();
+                //TODO: add code to start draft
+			}
 			else if (callback.getMethod().equals("replayGame")) {
 				replayGame();
 			}

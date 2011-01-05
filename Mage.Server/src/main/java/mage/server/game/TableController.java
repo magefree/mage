@@ -54,6 +54,8 @@ import mage.game.GameException;
 import mage.game.GameStates;
 import mage.game.match.Match;
 import mage.game.Seat;
+import mage.game.draft.Draft;
+import mage.game.draft.DraftOptions;
 import mage.game.events.Listener;
 import mage.game.events.TableEvent;
 import mage.game.match.MatchOptions;
@@ -78,6 +80,8 @@ public class TableController {
 	private Table table;
 	private Match match;
 	private MatchOptions options;
+	private Draft draft;
+	private DraftOptions draftOptions;
 	private ConcurrentHashMap<UUID, UUID> sessionPlayerMap = new ConcurrentHashMap<UUID, UUID>();
 
 	public TableController(UUID sessionId, MatchOptions options) {
@@ -86,6 +90,15 @@ public class TableController {
 		this.options = options;
 		match = GameFactory.getInstance().createMatch(options.getGameType(), options);
 		table = new Table(options.getGameType(), options.getName(), DeckValidatorFactory.getInstance().createDeckValidator(options.getDeckType()), options.getPlayerTypes());
+		init();
+	}
+
+	public TableController(UUID sessionId, DraftOptions options) {
+		this.sessionId = sessionId;
+		chatId = ChatManager.getInstance().createChatSession();
+		this.draftOptions = options;
+		draft = DraftFactory.getInstance().createDraft(options.getDraftType(), options);
+		table = new Table(options.getDraftType(), options.getName(), DeckValidatorFactory.getInstance().createDeckValidator("Limited"), options.getPlayerTypes());
 		init();
 	}
 
@@ -105,6 +118,26 @@ public class TableController {
 				}
 			}
 		);
+	}
+
+	public synchronized boolean joinDraft(UUID sessionId, String name) throws GameException {
+		if (table.getState() != TableState.WAITING) {
+			return false;
+		}
+		Seat seat = table.getNextAvailableSeat();
+		if (seat == null) {
+			throw new GameException("No available seats.");
+		}
+		Player player = createPlayer(name, seat.getPlayerType());
+		draft.addPlayer(player);
+		table.joinTable(player, seat);
+		logger.info("player joined " + player.getId());
+		//only add human players to sessionPlayerMap
+		if (seat.getPlayer().isHuman()) {
+			sessionPlayerMap.put(sessionId, player.getId());
+		}
+
+		return true;
 	}
 
 	public synchronized boolean joinTable(UUID sessionId, String name, DeckCardLists deckList) throws GameException {
@@ -207,6 +240,18 @@ public class TableController {
 		SessionManager sessionManager = SessionManager.getInstance();
 		for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
 			sessionManager.getSession(entry.getKey()).gameStarted(match.getGame().getId(), entry.getValue());
+		}
+	}
+
+	public synchronized void startDraft(UUID sessionId) {
+		if (sessionId.equals(this.sessionId) && table.getState() == TableState.STARTING) {
+			draft.start();
+			table.initDraft();
+			DraftManager.getInstance().createDraftSession(draft, sessionPlayerMap, table.getId());
+			SessionManager sessionManager = SessionManager.getInstance();
+			for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
+				sessionManager.getSession(entry.getKey()).draftStarted(draft.getId(), entry.getValue());
+			}
 		}
 	}
 

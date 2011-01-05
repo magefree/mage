@@ -54,6 +54,7 @@ public interface Server extends Remote, CallbackServer {
 	//table methods
 	public TableView createTable(UUID sessionId, UUID roomId, MatchOptions matchOptions) throws RemoteException, MageException;
 	public boolean joinTable(UUID sessionId, UUID roomId, UUID tableId, String name, DeckCardLists deckList) throws RemoteException, MageException, GameException;
+	public boolean joinDraftTable(UUID sessionId, UUID roomId, UUID tableId, String name) throws RemoteException, MageException, GameException;
 	public boolean submitDeck(UUID sessionId, UUID tableId, DeckCardLists deckList) throws RemoteException, MageException, GameException;
 	public boolean watchTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
 	public boolean replayTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
@@ -88,6 +89,7 @@ public interface Server extends Remote, CallbackServer {
 
 	//draft methods
 	public void startDraft(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
+	public void joinDraft(UUID draftId, UUID sessionId) throws RemoteException, MageException;
 	public void sendCardPick(UUID draftId, UUID sessionId, UUID cardId) throws RemoteException, MageException;
 
 	//replay methods

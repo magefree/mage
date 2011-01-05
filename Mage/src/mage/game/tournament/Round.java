@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
  * 
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -26,34 +26,29 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.game.draft;
+package mage.game.tournament;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.UUID;
-import mage.MageItem;
-import mage.game.events.Listener;
-import mage.game.events.PlayerQueryEvent;
-import mage.game.events.TableEvent;
+import java.util.ArrayList;
+import java.util.List;
+import mage.game.match.Match;
 import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface Draft extends MageItem, Serializable {
+public class Round {
 
-	public void addPlayer(Player player);
-	public Collection<DraftPlayer> getPlayers();
-	public DraftPlayer getPlayer(UUID playerId);
-	public void addPick(UUID playerId, UUID cardId);
-	public void start();
-	public void leave(UUID playerId);
-	public void autoPick(UUID playerId);
+	private int roundNum;
+	private List<Match> matches = new ArrayList<Match>();
 
-	public void addTableEventListener(Listener<TableEvent> listener);
-	public void fireUpdatePlayersEvent();
-	public void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener);
-	public void firePickCardEvent(UUID playerId);
+	public Round(int roundNum, List<Player> players) {
+		this.roundNum = roundNum;
+
+	}
+
+	public List<Match> getMatches() {
+		return matches;
+	}
 
 }

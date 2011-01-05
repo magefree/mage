@@ -95,6 +95,10 @@ public class Session {
 		fireCallback(new ClientCallback("startGame", new TableClientMessage(gameId, playerId)));
 	}
 
+	public void draftStarted(final UUID draftId, final UUID playerId) {
+		fireCallback(new ClientCallback("startDraft", new TableClientMessage(draftId, playerId)));
+	}
+
 	public void sideboard(final Deck deck, final UUID tableId) {
 		fireCallback(new ClientCallback("sideboard", new TableClientMessage(deck, tableId)));
 	}

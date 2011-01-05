@@ -35,6 +35,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
+import mage.game.draft.DraftOptions;
 import mage.game.match.MatchOptions;
 import mage.util.Logging;
 
@@ -61,6 +62,13 @@ public class TableManager {
 		return tableController.getTable();
 	}
 
+	public Table createDraftTable(UUID sessionId, DraftOptions options) {
+		TableController tableController = new TableController(sessionId, options);
+		controllers.put(tableController.getTable().getId(), tableController);
+		tables.put(tableController.getTable().getId(), tableController.getTable());
+		return tableController.getTable();
+	}
+
 	public Table getTable(UUID tableId) {
 		return tables.get(tableId);
 	}
@@ -71,6 +79,10 @@ public class TableManager {
 
 	public boolean joinTable(UUID sessionId, UUID tableId, String name, DeckCardLists deckList) throws GameException {
 		return controllers.get(tableId).joinTable(sessionId, name, deckList);
+	}
+
+	public boolean joinDraft(UUID sessionId, UUID tableId, String name) throws GameException {
+		return controllers.get(tableId).joinDraft(sessionId, name);
 	}
 
 	public boolean submitDeck(UUID sessionId, UUID tableId, DeckCardLists deckList) throws GameException {
@@ -104,6 +116,10 @@ public class TableManager {
 
 	public void startMatch(UUID sessionId, UUID roomId, UUID tableId) {
 		controllers.get(tableId).startMatch(sessionId);
+	}
+
+	public void startDraft(UUID sessionId, UUID roomId, UUID tableId) {
+		controllers.get(tableId).startDraft(sessionId);
 	}
 
 	public boolean watchTable(UUID sessionId, UUID tableId) {
