@@ -41,7 +41,8 @@ import org.mage.plugins.card.info.CardInfoPaneImpl;
 
 /**
  * {@link CardPlugin} implementation.
- * 
+ *
+ * @version 0.4 05.01.2011 Added support for foil cards.
  * @version 0.3 07.11.2010 Mage cards.
  * @version 0.2 07.11.2010 Downloading images.
  * @version 0.1 01.11.2010 Mage permanents. Sorting card layout.
@@ -82,7 +83,7 @@ public class CardPluginImpl implements CardPlugin {
 	}
 
 	public String toString() {
-		return "[Card plugin, version 0.3]";
+		return "[Card plugin, version 0.4]";
 	}
 
 	@Override

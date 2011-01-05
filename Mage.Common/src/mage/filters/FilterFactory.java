@@ -9,9 +9,7 @@ import mage.filters.impl.HueFilter;
  */
 public class FilterFactory {
 
-    private static final HueFilter hueFilter = new HueFilter();
-
     public static HueFilter getHueFilter() {
-        return hueFilter;
+        return new HueFilter();
     }
 }
