@@ -37,6 +37,7 @@ package mage.client.deckeditor;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
+import mage.client.deckeditor.collection.viewer.Huerotator2;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Event;
 import mage.client.util.Listener;

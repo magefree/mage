@@ -34,105 +34,199 @@
 
 package mage.client.cards;
 
-import static mage.constants.Constants.CONTENT_MAX_XOFFSET;
-import static mage.constants.Constants.FRAME_MAX_HEIGHT;
-import static mage.constants.Constants.FRAME_MAX_WIDTH;
-import static mage.constants.Constants.TEXT_MAX_HEIGHT;
-import static mage.constants.Constants.TEXT_MAX_WIDTH;
-import static mage.constants.Constants.TEXT_MAX_YOFFSET;
+import mage.client.plugins.impl.Plugins;
+import mage.client.util.gui.BufferedImageBuilder;
+import mage.filters.FilterFactory;
+import mage.filters.impl.HueFilter;
+import mage.utils.ThreadUtils;
+import org.jdesktop.swingx.JXPanel;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Rectangle;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.StyledDocument;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.List;
 import java.util.UUID;
 
-import javax.swing.text.BadLocationException;
-import javax.swing.text.StyledDocument;
-
-import mage.client.plugins.impl.Plugins;
-
-import org.jdesktop.swingx.JXPanel;
+import static mage.constants.Constants.*;
 
 /**
+ * Class for displaying big image of the card
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, nantuko
  */
-public class BigCard extends javax.swing.JPanel {
+public class BigCard extends JComponent {
 
-	protected Image bigImage;
-	protected UUID cardId;
-	protected JXPanel panel;
-	protected boolean initState;
+    protected Image bigImage;
+    protected BufferedImage source;
+    protected volatile BufferedImage foil;
+    protected UUID cardId;
+    protected JXPanel panel;
+    protected boolean initState;
+    protected boolean foilState;
+    protected Thread foilThread;
+    protected float hue = 0.005f;
 
-	public BigCard() {
+    static private final int DEFAULT_DELAY_PERIOD = 25;
+
+    public BigCard() {
         initComponents();
         if (!Plugins.getInstance().isCardPluginLoaded()) {
-        	initBounds();
+            initBounds();
         }
+        setDoubleBuffered(true);
+        setOpaque(true);
     }
-	
-	protected void initBounds() {
-    	initState = true;
+
+    protected void initBounds() {
+        initState = true;
         scrollPane.setBounds(20, 230, 210, 120);
         scrollPane.setBounds(new Rectangle(CONTENT_MAX_XOFFSET, TEXT_MAX_YOFFSET, TEXT_MAX_WIDTH, TEXT_MAX_HEIGHT));
-	}
-    
-	public void setCard(UUID cardId, Image image, List<String> strings) {
-		if (this.cardId == null || !this.cardId.equals(cardId)) {
-			if (this.panel != null) remove(this.panel);
-			this.cardId = cardId;
-			bigImage = image;
-			this.repaint();
-			drawText(strings);
-		}
-	}
+    }
+
+    public void setCard(UUID cardId, Image image, List<String> strings, boolean foil) {
+        if (this.cardId == null || !this.cardId.equals(cardId)) {
+            if (this.panel != null) remove(this.panel);
+            this.cardId = cardId;
+            bigImage = image;
+            synchronized (this) {
+                source = null;
+                hue = 0.000f;
+            }
+            drawText(strings);
+            setFoil(foil);
+        }
+    }
 
     public UUID getCardId() {
-		return cardId;
-	}
-    
-	private void drawText(java.util.List<String> strings) {
-		text.setText("");
-		StyledDocument doc = text.getStyledDocument();
+        return cardId;
+    }
 
-		try {
-			for (String line: strings) {
-				doc.insertString(doc.getLength(), line + "\n", doc.getStyle("regular"));
-			}
-		} catch (BadLocationException ble) { }
-		text.setCaretPosition(0);
-	}
+    private void drawText(java.util.List<String> strings) {
+        text.setText("");
+        StyledDocument doc = text.getStyledDocument();
 
-	@Override
-	public void paintComponent(Graphics graphics) {
-		if (bigImage != null)
-			graphics.drawImage(bigImage, 0, 0, this);
-		super.paintComponent(graphics);
- 	}
+        try {
+            for (String line : strings) {
+                doc.insertString(doc.getLength(), line + "\n", doc.getStyle("regular"));
+            }
+        } catch (BadLocationException ble) {
+        }
+        text.setCaretPosition(0);
+    }
+
+    @Override
+    public void paintComponent(Graphics graphics) {
+
+        if (foilState) {
+            if (source != null) {
+                synchronized (BigCard.class) {
+                    if (source != null) {
+                        graphics.drawImage(foil, 0, 0, this);
+                    }
+                }
+            }
+        } else {
+            if (bigImage != null) {
+                graphics.drawImage(bigImage, 0, 0, this);
+            }
+        }
+        super.paintComponent(graphics);
+    }
 
     public void hideTextComponent() {
-    	this.scrollPane.setVisible(false);
+        this.scrollPane.setVisible(false);
     }
 
     public void showTextComponent() {
-    	if (!initState) {initBounds();}
-    	this.scrollPane.setVisible(true);
+        if (!initState) {
+            initBounds();
+        }
+        this.scrollPane.setVisible(true);
+    }
+
+    public void setFoil(boolean foil) {
+        if (foil) {
+            if (foilThread == null) {
+                synchronized (this) {
+                    if (foilThread == null) {
+                        foilThread = getFoilThread();
+                        foilThread.setDaemon(true);
+                        foilThread.start();
+                    }
+                }
+            }
+            if (foil != foilState) {
+                synchronized (this) {
+                    if (foil != foilState) {
+                        hue = 0.005f;
+                        foilState = foil;
+                    }
+                }
+            }
+        }
+        repaint();
+    }
+
+    private Thread getFoilThread() {
+        return new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (bigImage == null) {
+                    return;
+                }
+                final HueFilter filter = FilterFactory.getHueFilter();
+                while (true) {
+                    boolean prevState = foilState;
+                    while (!foilState) {
+                        ThreadUtils.sleep(10);
+                    }
+                    if (prevState == foilState) {
+                        ThreadUtils.sleep(DEFAULT_DELAY_PERIOD);
+                    }
+                    hue += 0.005F;
+                    if (hue >= 1.0D) {
+                        hue = 0.000F;
+                    }
+                    filter.setHue(hue);
+                    BufferedImage f = null;
+                    synchronized (BigCard.this) {
+                        if (source == null) {
+                            source = BufferedImageBuilder.bufferImage(bigImage);
+                        }
+                        f = filter.filter(source, null);
+                    }
+                    synchronized (BigCard.class) {
+                        foil = f;
+                    }
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            BigCard.this.repaint();
+                        }
+                    });
+
+                }
+            }
+        });
     }
 
     public void addJXPanel(UUID cardId, JXPanel jxPanel) {
-    	bigImage = null;
-		synchronized (this) {
-			if (this.panel != null) remove(this.panel);
-			this.panel = jxPanel;
-			add(jxPanel);	
-		}
-		this.repaint();
+        bigImage = null;
+        synchronized (this) {
+            if (this.panel != null) remove(this.panel);
+            this.panel = jxPanel;
+            add(jxPanel);
+        }
+        this.repaint();
     }
-    
 
-    /** This method is called from within the constructor to
+
+    /**
+     * This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
      * always regenerated by the Form Editor.

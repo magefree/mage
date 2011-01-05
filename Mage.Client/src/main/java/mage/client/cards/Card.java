@@ -135,12 +135,12 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         Style s = doc.addStyle("small", regular);
         StyleConstants.setFontSize(s, 9);
 
-		addMouseListener(this);
-		text.addMouseListener(this);
-	    addFocusListener(this);
-	    addMouseMotionListener(this);
-		text.addMouseMotionListener(this);
-		addComponentListener(this);
+		//addMouseListener(this);
+		//text.addMouseListener(this);
+	    //addFocusListener(this);
+	    //addMouseMotionListener(this);
+		//text.addMouseMotionListener(this);
+		//addComponentListener(this);
     }
 
 	public UUID getCardId() {
@@ -347,7 +347,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
 		this.bigCard.showTextComponent();
-		this.bigCard.setCard(card.getId(), image, getRules());
+		this.bigCard.setCard(card.getId(), image, getRules(), false);
 	}
 
 	@Override
@@ -480,7 +480,16 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 		return image;
 	}
 
-	@Override
+    @Override
+    public void setFoil(boolean foil) {
+    }
+
+    @Override
+    public boolean isFoil() {
+        return false;
+    }
+
+    @Override
 	public PermanentView getOriginalPermanent() {
 		return null;
 	}

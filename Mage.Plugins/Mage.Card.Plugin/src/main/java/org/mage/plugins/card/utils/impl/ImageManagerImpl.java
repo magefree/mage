@@ -29,8 +29,7 @@ public class ImageManagerImpl implements ImageManager {
 			Image image = getImageFromResourceTransparent("/sickness.png", Color.WHITE, new Rectangle(296, 265));
 			Toolkit tk = Toolkit.getDefaultToolkit();
 			image = tk.createImage(new FilteredImageSource(image.getSource(), new CropImageFilter(0, 0, 200, 285)));
-			BufferedImageBuilder builder = new BufferedImageBuilder();
-			imageSickness = builder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+			imageSickness = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
 		}
 		return imageSickness;
 	}

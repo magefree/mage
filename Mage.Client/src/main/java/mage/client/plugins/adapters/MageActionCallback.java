@@ -184,14 +184,13 @@ public class MageActionCallback implements ActionCallback {
                     Image image = card.getImage();
                     if (image != null && image instanceof BufferedImage) {
                         image = ImageHelper.getResizedImage((BufferedImage) image, bigCard.getWidth(), bigCard.getHeight());
-                        bigCard.setCard(card.getOriginal().getId(), image, card.getOriginal().getRules());
+                        bigCard.setCard(card.getOriginal().getId(), image, card.getOriginal().getRules(), card.isFoil());
                         bigCard.showTextComponent();
                         if (card.getOriginal().isAbility()) {
                             bigCard.showTextComponent();
                         } else {
                             bigCard.hideTextComponent();
                         }
-                        ;
                     } else {
                         JXPanel panel = GuiDisplayUtil.getDescription(card.getOriginal(), bigCard.getWidth(), bigCard.getHeight());
                         panel.setVisible(true);
