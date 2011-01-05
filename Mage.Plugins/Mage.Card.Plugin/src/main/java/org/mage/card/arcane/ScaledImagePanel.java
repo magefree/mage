@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 public class ScaledImagePanel extends JPanel {
 	private static final long serialVersionUID = -1523279873208605664L;
 	public volatile Image srcImage;
-	public volatile Image srcImageBlurred;
+	//public volatile Image srcImageBlurred;
 
 	private ScalingType scalingType = ScalingType.bilinear;
 	private boolean scaleLarger;
@@ -23,9 +23,8 @@ public class ScaledImagePanel extends JPanel {
 		setOpaque(false);
 	}
 
-	public void setImage (Image srcImage, Image srcImageBlurred) {
+    public void setImage(Image srcImage) {
 		this.srcImage = srcImage;
-		this.srcImageBlurred = srcImageBlurred;
 	}
 
 	public void clearImage () {
@@ -168,9 +167,10 @@ public class ScaledImagePanel extends JPanel {
 	}
 
 	private Image getSourceImage (ScalingInfo info) {
-		if (!blur || srcImageBlurred == null) return srcImage;
-		if (info.srcWidth / 2 < info.targetWidth || info.srcHeight / 2 < info.targetHeight) return srcImage;
-		return srcImageBlurred;
+        return srcImage;
+		//if (!blur || srcImageBlurred == null) return srcImage;
+		//if (info.srcWidth / 2 < info.targetWidth || info.srcHeight / 2 < info.targetHeight) return srcImage;
+        //return srcImageBlurred;
 	}
 	
 	public Image getSrcImage() {

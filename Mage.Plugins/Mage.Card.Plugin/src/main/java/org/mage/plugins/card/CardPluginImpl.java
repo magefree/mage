@@ -6,12 +6,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -92,7 +87,8 @@ public class CardPluginImpl implements CardPlugin {
 
 	@Override
 	public MagePermanent getMagePermanent(PermanentView permanent, CardDimensions dimension, UUID gameId, ActionCallback callback) {
-		CardPanel cardPanel = new CardPanel(permanent, gameId, true, callback);
+        boolean foil = (new Random()).nextInt(5) == 0;
+ 		CardPanel cardPanel = new CardPanel(permanent, gameId, true, callback, foil);
 		cardPanel.setShowCastingCost(true);
 		cardPanel.setCardBounds(0, 0, dimension.frameWidth, dimension.frameHeight);
 		cardPanel.setShowCastingCost(true);
@@ -101,10 +97,12 @@ public class CardPluginImpl implements CardPlugin {
 	
 	@Override
 	public MagePermanent getMageCard(CardView permanent, CardDimensions dimension, UUID gameId, ActionCallback callback) {
-		CardPanel cardPanel = new CardPanel(permanent, gameId, true, callback);
+		boolean foil = (new Random()).nextInt(5) == 0;
+        CardPanel cardPanel = new CardPanel(permanent, gameId, true, callback, foil);
 		cardPanel.setShowCastingCost(true);
 		cardPanel.setCardBounds(0, 0, dimension.frameWidth, dimension.frameHeight);
 		cardPanel.setShowCastingCost(true);
+
 		return cardPanel;
 	}
 

@@ -27,11 +27,10 @@ public class ManaSymbols {
 			"BR", "G", "GU", "GW", "R", "RG", "RW", "S", "T", "U", "UB", "UR", "W", "WB", "WU", "X", "Y", "Z", "slash"};
 		for (String symbol : symbols) {
 			File file = new File(Constants.RESOURCE_PATH_MANA_LARGE + "/" + symbol + ".jpg");
-			BufferedImageBuilder builder = new BufferedImageBuilder();
 			Rectangle r = new Rectangle(11, 11);
 			try {
 				Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
-				BufferedImage resized = ImageCache.getResizedImage(builder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
+				BufferedImage resized = ImageCache.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
 				manaImages.put(symbol, resized);
 			} catch (Exception e) {}
 			file = new File(Constants.RESOURCE_PATH_MANA_MEDIUM + "/" + symbol + ".jpg");

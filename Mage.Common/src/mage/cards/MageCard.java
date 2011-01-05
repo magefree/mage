@@ -19,4 +19,6 @@ public abstract class MageCard extends JPanel {
 	abstract public void setCardBounds(int x, int y, int width, int height);
 	abstract public void update(CardView card);
 	abstract public Image getImage();
+    abstract public void setFoil(boolean foil);
+    abstract public boolean isFoil();
 }
