@@ -31,15 +31,12 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.players.Players;
 
@@ -59,7 +56,7 @@ public class PulseTracker extends CardImpl<PulseTracker> {
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
 
-		this.addAbility(new PulseTrackerTriggeredAbility());
+		this.addAbility(new AttacksTriggeredAbility(new PulseTrackerLoseLifeEffect(), false));
 	}
 
 	public PulseTracker(final PulseTracker card) {
@@ -72,36 +69,9 @@ public class PulseTracker extends CardImpl<PulseTracker> {
 	}
 }
 
-class PulseTrackerTriggeredAbility extends TriggeredAbilityImpl<PulseTrackerTriggeredAbility> {
-
-	public PulseTrackerTriggeredAbility() {
-		super(Zone.BATTLEFIELD, new PulseTrackerLoseLifeEffect(), false);
-	}
-
-	public PulseTrackerTriggeredAbility(final PulseTrackerTriggeredAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public PulseTrackerTriggeredAbility copy() {
-		return new PulseTrackerTriggeredAbility(this);
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public String getRule() {
-		return "Whenever Pulse Tracker attacks, each opponent loses 1 life.";
-	}
-}
-
 class PulseTrackerLoseLifeEffect extends OneShotEffect<PulseTrackerLoseLifeEffect> {
+
+	private static final String effectText = "each opponent loses 1 life";
 
 	PulseTrackerLoseLifeEffect ( ) {
 		super(Outcome.Damage);
@@ -129,4 +99,8 @@ class PulseTrackerLoseLifeEffect extends OneShotEffect<PulseTrackerLoseLifeEffec
 		return new PulseTrackerLoseLifeEffect(this);
 	}
 
+	@Override
+	public String getText(Ability source) {
+		return effectText;
+	}
 }
