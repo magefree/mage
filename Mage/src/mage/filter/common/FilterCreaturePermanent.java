@@ -80,6 +80,22 @@ public class FilterCreaturePermanent<T extends FilterCreaturePermanent<T>> exten
 		return !notFilter;
 	}
 
+	public void setUseAttacking ( boolean useAttacking ) {
+		this.useAttacking = useAttacking;
+	}
+
+	public void setAttacking ( boolean attacking ) {
+		this.attacking = attacking;
+	}
+
+	public void setUseBlocking ( boolean useBlocking ) {
+		this.useBlocking = useBlocking;
+	}
+
+	public void setBlocking ( boolean blocking ) {
+		this.blocking = blocking;
+	}
+
 	@Override
 	public FilterCreaturePermanent<T> copy() {
 		if (this == defaultFilter)

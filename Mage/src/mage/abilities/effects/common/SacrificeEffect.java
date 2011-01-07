@@ -31,11 +31,11 @@ import mage.Constants.Outcome;
 import mage.Constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -43,11 +43,11 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 
-	private FilterControlledPermanent filter;
+	private FilterPermanent filter;
 	private String preText;
 	private int count;
 
-	public SacrificeEffect ( FilterControlledPermanent filter, int count, String preText ) {
+	public SacrificeEffect ( FilterPermanent filter, int count, String preText ) {
 		super(Outcome.Sacrifice);
 		this.filter = filter;
 		this.count = count;
@@ -60,12 +60,16 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 		this.count = effect.count;
 		this.preText = effect.preText;
 	}
+
+	public void setCount ( int count ) {
+		this.count = count;
+	}
 	
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getTargets().getFirstTarget());
 		filter.setTargetController(TargetController.YOU);
-		TargetControlledPermanent target = new TargetControlledPermanent(count, count, filter, false);
+		TargetPermanent target = new TargetPermanent(count, count, filter, false);
 
 		//A spell or ability could have removed the only legal target this player
 		//had, if thats the case this ability should fizzle.
