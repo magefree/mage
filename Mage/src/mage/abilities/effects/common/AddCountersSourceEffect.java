@@ -60,6 +60,7 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
 		super(effect);
 		this.amount = effect.amount;
 		this.name = effect.name;
+        this.counter = effect.counter;
 	}
 
 	@Override
