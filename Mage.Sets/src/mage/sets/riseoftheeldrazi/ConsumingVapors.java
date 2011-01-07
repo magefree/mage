@@ -25,82 +25,97 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.worldwake;
+package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.MageInt;
+import mage.Constants.TargetController;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.players.Players;
+import mage.target.TargetPermanent;
+import mage.target.TargetPlayer;
 
 /**
  *
  * @author maurer.it_at_gmail.com
  */
-public class PulseTracker extends CardImpl<PulseTracker> {
+public class ConsumingVapors extends CardImpl<ConsumingVapors> {
 
-	public PulseTracker(UUID ownerId) {
-		super(ownerId, 62, "Pulse Tracker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-		this.expansionSetCode = "WWK";
-		this.subtype.add("Vampire");
-		this.subtype.add("Rogue");
+	
+
+	public ConsumingVapors(UUID ownerId) {
+		super(ownerId, 101, "Consuming Vapors", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
+		this.expansionSetCode = "ROE";
 
 		this.color.setBlack(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-
-		this.addAbility(new AttacksTriggeredAbility(new PulseTrackerLoseLifeEffect(), false));
+		this.getSpellAbility().addEffect(new ConsumingVaporsEffect());
+		this.getSpellAbility().addTarget(new TargetPlayer());
+		this.addAbility(new ReboundAbility());
 	}
 
-	public PulseTracker(final PulseTracker card) {
+	public ConsumingVapors(final ConsumingVapors card) {
 		super(card);
 	}
 
 	@Override
-	public PulseTracker copy() {
-		return new PulseTracker(this);
+	public ConsumingVapors copy() {
+		return new ConsumingVapors(this);
 	}
 }
 
-class PulseTrackerLoseLifeEffect extends OneShotEffect<PulseTrackerLoseLifeEffect> {
+class ConsumingVaporsEffect extends OneShotEffect<ConsumingVaporsEffect> {
 
-	private static final String effectText = "each opponent loses 1 life";
+	protected static final FilterControlledPermanent filter;
 
-	PulseTrackerLoseLifeEffect ( ) {
-		super(Outcome.Damage);
+	static {
+		filter = new FilterControlledPermanent();
+		filter.getCardType().add(CardType.CREATURE);
+		filter.setMessage(" a creature");
 	}
 
-	PulseTrackerLoseLifeEffect ( PulseTrackerLoseLifeEffect effect ) {
+	ConsumingVaporsEffect ( ) {
+		super(Outcome.Sacrifice);
+	}
+
+	ConsumingVaporsEffect ( ConsumingVaporsEffect effect ) {
 		super(effect);
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Players players = game.getPlayers();
+		Player player = game.getPlayer(source.getTargets().getFirstTarget());
+		Player controller = game.getPlayer(source.getControllerId());
+		filter.setTargetController(TargetController.YOU);
+		TargetPermanent target = new TargetPermanent(1, 1, filter, false);
 
-		for ( Player player : players.values() ) {
-			if ( !player.getId().equals(source.getControllerId()) ) {
-				player.loseLife(1, game);
+		//A spell or ability could have removed the only legal target this player
+		//had, if thats the case this ability should fizzle.
+		if (target.canChoose(player.getId(), game)) {
+			while (!target.isChosen()) {
+				player.choose(Outcome.Sacrifice, target, game);
+			}
+
+			Permanent permanent = game.getPermanent(target.getFirstTarget());
+
+			if ( permanent != null ) {
+				controller.gainLife(permanent.getToughness().getValue(), game);
+				return permanent.sacrifice(source.getId(), game);
 			}
 		}
-
-		return true;
+		return false;
 	}
 
 	@Override
-	public PulseTrackerLoseLifeEffect copy() {
-		return new PulseTrackerLoseLifeEffect(this);
+	public ConsumingVaporsEffect copy() {
+		return new ConsumingVaporsEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return effectText;
-	}
 }
