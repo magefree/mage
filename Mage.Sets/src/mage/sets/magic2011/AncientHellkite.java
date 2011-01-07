@@ -83,7 +83,7 @@ public class AncientHellkite extends CardImpl<AncientHellkite> {
 
 class AncientHellkiteAbility extends ActivatedAbilityImpl<AncientHellkiteAbility> {
 
-	private FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defender player controls");
+	private FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
 	public AncientHellkiteAbility() {
 		super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
@@ -104,13 +104,7 @@ class AncientHellkiteAbility extends ActivatedAbilityImpl<AncientHellkiteAbility
 
 	@Override
 	public boolean activate(Game game, boolean noMana) {
-		UUID defenderId = null;
-		for (CombatGroup group: game.getCombat().getGroups()) {
-			if (group.getAttackers().contains(this.sourceId)) {
-				defenderId = group.getDefenderId();
-				break;
-			}
-		}
+		UUID defenderId = game.getCombat().getDefendingPlayer(sourceId);
 		if (defenderId != null) {
 			filter.getControllerId().clear();
 			filter.getControllerId().add(defenderId);

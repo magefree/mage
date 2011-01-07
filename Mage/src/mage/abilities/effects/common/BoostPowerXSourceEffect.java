@@ -58,7 +58,7 @@ public class BoostPowerXSourceEffect extends ContinuousEffectImpl<BoostPowerXSou
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		int amount = source.getManaCosts().getVariableCosts().get(0).getAmount();
+		int amount = source.getCosts().getVariableCosts().get(0).getAmount();
 		Permanent target = (Permanent) game.getPermanent(source.getSourceId());
 		if (target != null) {
 			target.addPower(amount);

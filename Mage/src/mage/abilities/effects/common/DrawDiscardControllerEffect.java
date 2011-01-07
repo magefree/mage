@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
  * 
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -32,39 +32,33 @@ import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DamageXTargetEffect extends OneShotEffect<DamageXTargetEffect> {
+public class DrawDiscardControllerEffect extends OneShotEffect<DrawDiscardControllerEffect> {
 
-	public DamageXTargetEffect() {
-		super(Outcome.Damage);
+	public DrawDiscardControllerEffect() {
+		super(Outcome.DrawCard);
 	}
 
-	public DamageXTargetEffect(final DamageXTargetEffect effect) {
+	public DrawDiscardControllerEffect(final DrawDiscardControllerEffect effect) {
 		super(effect);
 	}
 
 	@Override
-	public DamageXTargetEffect copy() {
-		return new DamageXTargetEffect(this);
+	public DrawDiscardControllerEffect copy() {
+		return new DrawDiscardControllerEffect(this);
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		int amount = source.getCosts().getVariableCosts().get(0).getAmount();
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			permanent.damage(amount, source.getId(), game, true, false);
-			return true;
-		}
-		Player player = game.getPlayer(source.getFirstTarget());
+		Player player = game.getPlayer(source.getControllerId());
 		if (player != null) {
-			player.damage(amount, source.getId(), game, false, true);
+			player.drawCards(1, game);
+			player.discard(1, source, game);
 			return true;
 		}
 		return false;
@@ -72,7 +66,8 @@ public class DamageXTargetEffect extends OneShotEffect<DamageXTargetEffect> {
 
 	@Override
 	public String getText(Ability source) {
-		return "{source} deals X damage to target " + source.getTargets().get(0).getTargetName();
+		return "Draw a card, then discard a card";
 	}
+
 
 }
