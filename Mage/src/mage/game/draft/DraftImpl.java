@@ -159,6 +159,7 @@ public class DraftImpl<T extends DraftImpl<T>> implements Draft {
 				Thread.sleep(1000);
 			} catch (InterruptedException ex) {
 				Logger.getLogger(DraftImpl.class.getName()).log(Level.SEVERE, null, ex);
+				break;
 			}
 		}
 		return true;

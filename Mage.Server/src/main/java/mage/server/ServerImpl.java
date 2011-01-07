@@ -41,6 +41,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
+import mage.game.draft.DraftOptions;
 import mage.interfaces.MageException;
 import mage.game.match.MatchOptions;
 import mage.interfaces.Server;
@@ -120,6 +121,19 @@ public class ServerImpl extends RemoteServer implements Server {
 		try {
 			TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(sessionId, options);
 			logger.info("Table " + table.getTableId() + " created");
+			return table;
+		}
+		catch (Exception ex) {
+			handleException(ex);
+		}
+		return null;
+	}
+
+	@Override
+	public TableView createDraftTable(UUID sessionId, UUID roomId, DraftOptions options) throws MageException {
+		try {
+			TableView table = GamesRoomManager.getInstance().getRoom(roomId).createDraftTable(sessionId, options);
+			logger.info("Draft table " + table.getTableId() + " created");
 			return table;
 		}
 		catch (Exception ex) {

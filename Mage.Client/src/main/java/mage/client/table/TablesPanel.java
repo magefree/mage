@@ -62,6 +62,7 @@ import mage.client.dialog.TableWaitingDialog;
 import mage.client.remote.MageRemoteException;
 import mage.client.remote.Session;
 import mage.client.util.ButtonColumn;
+import mage.game.draft.DraftOptions;
 import mage.game.match.MatchOptions;
 import mage.sets.Sets;
 import mage.util.Logging;
@@ -203,6 +204,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
         jPanel1 = new javax.swing.JPanel();
         btnNewTable = new javax.swing.JButton();
         btnQuickStart = new javax.swing.JButton();
+        btnNewDraft = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         chatPanel = new mage.client.chat.ChatPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -222,6 +224,13 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
             }
         });
 
+        btnNewDraft.setText("New Draft");
+        btnNewDraft.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewDraftActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -229,9 +238,11 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnNewTable)
+                .addGap(6, 6, 6)
+                .addComponent(btnNewDraft)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnQuickStart)
-                .addContainerGap(537, Short.MAX_VALUE))
+                .addContainerGap(450, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,7 +250,8 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNewTable)
-                    .addComponent(btnQuickStart))
+                    .addComponent(btnQuickStart)
+                    .addComponent(btnNewDraft))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -307,6 +319,32 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 		}
 	}//GEN-LAST:event_btnQuickStartActionPerformed
 
+	private void btnNewDraftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewDraftActionPerformed
+		DraftOptions options = new DraftOptions("testDraft");
+		options.getPlayerTypes().add("Human");
+		options.getPlayerTypes().add("Computer - default");
+		options.getPlayerTypes().add("Computer - default");
+		options.getPlayerTypes().add("Computer - default");
+		options.getPlayerTypes().add("Computer - default");
+		options.getPlayerTypes().add("Computer - default");
+		options.getPlayerTypes().add("Computer - default");
+		options.getPlayerTypes().add("Computer - default");
+		options.getSets().add(Sets.findSet("M11"));
+		options.getSets().add(Sets.findSet("M11"));
+		options.getSets().add(Sets.findSet("M11"));
+		TableView table = session.createDraftTable(roomId, options);
+		session.joinDraftTable(roomId, table.getTableId(), "Human");
+		session.joinDraftTable(roomId, table.getTableId(), "Computer 1");
+		session.joinDraftTable(roomId, table.getTableId(), "Computer 2");
+		session.joinDraftTable(roomId, table.getTableId(), "Computer 3");
+		session.joinDraftTable(roomId, table.getTableId(), "Computer 4");
+		session.joinDraftTable(roomId, table.getTableId(), "Computer 5");
+		session.joinDraftTable(roomId, table.getTableId(), "Computer 6");
+		session.joinDraftTable(roomId, table.getTableId(), "Computer 7");
+		hideTables();
+		session.startDraft(roomId, table.getTableId());
+	}//GEN-LAST:event_btnNewDraftActionPerformed
+
 	private void handleError(Exception ex) {
 		logger.log(Level.SEVERE, "Error loading deck", ex);
 		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error loading deck.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -314,6 +352,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNewDraft;
     private javax.swing.JButton btnNewTable;
     private javax.swing.JButton btnQuickStart;
     private mage.client.chat.ChatPanel chatPanel;
