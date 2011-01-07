@@ -318,6 +318,17 @@ public class Combat implements Serializable, Copyable<Combat> {
 		return false;
 	}
 
+	public UUID getDefendingPlayer(UUID attackerId) {
+		UUID defenderId = null;
+		for (CombatGroup group: groups) {
+			if (group.getAttackers().contains(attackerId)) {
+				defenderId = group.getDefenderId();
+				break;
+			}
+		}
+		return defenderId;
+	}
+
 	private Set<UUID> getPlayerDefenders(Game game) {
 		Set<UUID> playerDefenders = new HashSet<UUID>();
 		for (CombatGroup group: groups) {

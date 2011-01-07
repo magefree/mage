@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
  * 
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -26,96 +26,99 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.zendikar;
+package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.HasteAbility;
+import mage.abilities.mana.BlueManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
 import mage.players.Player;
+import mage.target.TargetCard;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GoblinGuide extends CardImpl<GoblinGuide> {
+public class HalimarDepths extends CardImpl<HalimarDepths> {
 
-	public GoblinGuide(UUID ownerId) {
-		super(ownerId, 126, "Goblin Guide", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");
-		this.expansionSetCode = "ZEN";
-		this.color.setRed(true);
-		this.subtype.add("Goblin");
-		this.subtype.add("Scout");
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
-		this.addAbility(HasteAbility.getInstance());
-		this.addAbility(new AttacksTriggeredAbility(new GoblinGuideEffect(), false));
+	public HalimarDepths(UUID ownerId) {
+		super(ownerId, 137, "Halimar Depths", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
+		this.expansionSetCode = "WWK";
+        this.addAbility(new EntersBattlefieldTappedAbility());
+		this.addAbility(new EntersBattlefieldTriggeredAbility(new HalimarDepthsEffect()));
+		this.addAbility(new BlueManaAbility());
 	}
 
-	public GoblinGuide(final GoblinGuide card) {
+	public HalimarDepths(final HalimarDepths card) {
 		super(card);
 	}
 
 	@Override
-	public GoblinGuide copy() {
-		return new GoblinGuide(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "123540_typ_reg_sty_010.jpg";
+	public HalimarDepths copy() {
+		return new HalimarDepths(this);
 	}
 
 }
 
-class GoblinGuideEffect extends OneShotEffect<GoblinGuideEffect> {
+class HalimarDepthsEffect extends OneShotEffect<HalimarDepthsEffect> {
 
-	public GoblinGuideEffect() {
-		super(Outcome.DrawCard);
+	protected static FilterCard filter2 = new FilterCard("card to put on the top of your library");
+
+	public HalimarDepthsEffect() {
+		super(Outcome.Benefit);
 	}
 
-	public GoblinGuideEffect(final GoblinGuideEffect effect) {
+	public HalimarDepthsEffect(final HalimarDepthsEffect effect) {
 		super(effect);
 	}
 
 	@Override
-	public GoblinGuideEffect copy() {
-		return new GoblinGuideEffect(this);
+	public boolean apply(Game game, Ability source) {
+		Player player = game.getPlayer(source.getControllerId());
+		Cards cards = new CardsImpl(Zone.PICK);
+		for (int i = 0; i < 3; i++) {
+			Card card = player.getLibrary().removeFromTop(game);
+			cards.add(card);
+			game.setZone(card.getId(), Zone.PICK);
+		}
+		if (cards.size() > 1) {
+			TargetCard target2 = new TargetCard(Zone.PICK, filter2);
+			target2.setRequired(true);
+			while (cards.size() > 1) {
+				player.choose(cards, target2, game);
+				Card card = cards.get(target2.getFirstTarget(), game);
+				cards.remove(card);
+				card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+				target2.clearChosen();
+			}
+		}
+		if (cards.size() == 1) {
+			Card card = cards.get(cards.iterator().next(), game);
+			card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+		}
+		return true;
 	}
 
 	@Override
-	public boolean apply(Game game, Ability source) {
-		UUID defenderId = game.getCombat().getDefendingPlayer(source.getSourceId());
-		Player defender = game.getPlayer(defenderId);
-		if (defender != null) {
-			Cards cards = new CardsImpl();
-			Card card = defender.getLibrary().getFromTop(game);
-			if (card != null) {
-				cards.add(card);
-				defender.revealCards(cards, game);
-				if (card.getCardType().contains(CardType.LAND)) {
-					defender.getLibrary().removeFromTop(game);
-					card.moveToZone(Zone.HAND, source.getId(), game, true);
-				}
-			}
-		}
-		return false;
+	public HalimarDepthsEffect copy() {
+		return new HalimarDepthsEffect(this);
 	}
 
 	@Override
 	public String getText(Ability source) {
-		return "defending player reveals the top card of his or her library. If it's a land card, that player puts it into his or her hand";
+		return "look at the top three cards of your library, then put them back in any order";
 	}
+
 }

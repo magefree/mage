@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
  * 
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -26,53 +26,75 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.abilities.costs.common;
 
+import java.util.List;
+import java.util.UUID;
 import mage.Constants.Outcome;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.VariableCost;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DamageXTargetEffect extends OneShotEffect<DamageXTargetEffect> {
+public class TapVariableTargetCost extends CostImpl<TapVariableTargetCost> implements VariableCost {
 
-	public DamageXTargetEffect() {
-		super(Outcome.Damage);
+	protected int amountPaid = 0;
+	protected TargetControlledPermanent target;
+
+	public TapVariableTargetCost(TargetControlledPermanent target) {
+		this.target = target;
+		this.text = "tap X " + target.getTargetName() + " you control";
 	}
 
-	public DamageXTargetEffect(final DamageXTargetEffect effect) {
-		super(effect);
+	public TapVariableTargetCost(final TapVariableTargetCost cost) {
+		super(cost);
+		this.target = cost.target.copy();
+		this.amountPaid = cost.amountPaid;
 	}
 
 	@Override
-	public DamageXTargetEffect copy() {
-		return new DamageXTargetEffect(this);
+	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+		return target.canChoose(controllerId, game);
 	}
 
 	@Override
-	public boolean apply(Game game, Ability source) {
-		int amount = source.getCosts().getVariableCosts().get(0).getAmount();
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			permanent.damage(amount, source.getId(), game, true, false);
-			return true;
+	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+		amountPaid = 0;
+		while (true) {
+			target.clearChosen();
+			if (target.choose(Outcome.Tap, controllerId, game)) {
+				Permanent permanent = game.getPermanent(target.getFirstTarget());
+				if (permanent != null && permanent.tap(game)) {
+					amountPaid++;
+				}
+			}
+			else {
+				break;
+			}
 		}
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null) {
-			player.damage(amount, source.getId(), game, false, true);
-			return true;
-		}
-		return false;
+		paid = true;
+		return true;
 	}
 
 	@Override
-	public String getText(Ability source) {
-		return "{source} deals X damage to target " + source.getTargets().get(0).getTargetName();
+	public void clearPaid() {
+		paid = false;
+		amountPaid = 0;
+	}
+
+	@Override
+	public int getAmount() {
+		return amountPaid;
+	}
+
+	@Override
+	public TapVariableTargetCost copy() {
+		return new TapVariableTargetCost(this);
 	}
 
 }

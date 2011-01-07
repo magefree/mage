@@ -37,7 +37,7 @@ package mage.client.deckeditor;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
-import mage.client.deckeditor.collection.viewer.Huerotator2;
+//import mage.client.deckeditor.collection.viewer.Huerotator2;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Event;
 import mage.client.util.Listener;
@@ -149,8 +149,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		try {
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
 			this.txtDeckName.setText(deck.getName());
-			deckArea.getDeckList().loadCards(new CardsView(deck.getCards()), bigCard, null);
-			deckArea.getSideboardList().loadCards(new CardsView(deck.getSideboard()), bigCard, null);
+			deckArea.getDeckList().loadCards(new CardsView(deck.getCards()), bigCard, null, true);
+			deckArea.getSideboardList().loadCards(new CardsView(deck.getSideboard()), bigCard, null, true);
 		}
 		finally {
 			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));

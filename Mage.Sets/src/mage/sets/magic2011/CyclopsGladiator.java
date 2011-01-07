@@ -91,16 +91,10 @@ class CyclopsGladiatorEffect extends OneShotEffect<CyclopsGladiatorEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Player defender = null;
-		for (CombatGroup group: game.getCombat().getGroups()) {
-			if (group.getAttackers().contains(source.getSourceId())) {
-				defender = game.getPlayer(group.getDefenderId());
-				break;
-			}
-		}
-		if (defender != null) {
-			FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player owns");
-			filter.getControllerId().add(defender.getId());
+		UUID defenderId = game.getCombat().getDefendingPlayer(source.getSourceId());
+		if (defenderId != null) {
+			FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
+			filter.getControllerId().add(defenderId);
 			TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
 			Player player = game.getPlayer(source.getControllerId());
 			player.choose(Outcome.Damage, target, game);

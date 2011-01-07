@@ -39,6 +39,10 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.beans.Beans;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.UUID;
 
 import mage.cards.MageCard;
@@ -66,12 +70,19 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
     }
 
 	public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
+		loadCards(showCards, bigCard, gameId, false);
+	}
+
+	public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId, boolean sorted) {
 		//FIXME: why we remove all cards? for performance it's better to merge changes
 		cardArea.removeAll();
 		if (showCards != null && showCards.size() > 0) {
 			Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 			int count = 0;
-			for (CardView card: showCards.values()) {
+			List<CardView> sortedCards = new ArrayList<CardView>(showCards.values());
+			if (sorted)
+				Collections.sort(sortedCards, new CardViewComparator());
+			for (CardView card: sortedCards) {
 				addCard(card, bigCard, gameId, rectangle);
 				if (count >= 10) {
 					rectangle.translate(Config.dimensions.frameWidth, -200);
@@ -161,6 +172,15 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {
+	}
+
+}
+
+class CardViewComparator implements Comparator<CardView> {
+
+	@Override
+	public int compare(CardView o1, CardView o2) {
+		return o1.getName().compareTo(o2.getName());
 	}
 
 }

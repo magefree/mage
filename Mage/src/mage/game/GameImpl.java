@@ -191,11 +191,15 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public Player getPlayer(UUID playerId) {
+		if (playerId == null)
+			return null;
 		return state.getPlayer(playerId);
 	}
 
 	@Override
 	public MageObject getObject(UUID objectId) {
+		if (objectId == null)
+			return null;
 		MageObject object;
 		if (state.getBattlefield().containsPermanent(objectId)) {
 			object = state.getBattlefield().getPermanent(objectId);
@@ -217,16 +221,22 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public Permanent getPermanent(UUID permanentId) {
+		if (permanentId == null)
+			return null;
 		return state.getPermanent(permanentId);
 	}
 
 	@Override
 	public Card getCard(UUID cardId) {
+		if (cardId == null)
+			return null;
 		return gameCards.get(cardId);
 	}
 
 	@Override
 	public Zone getZone(UUID objectId) {
+		if (objectId == null)
+			return null;
 		return state.getZone(objectId);
 	}
 

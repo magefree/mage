@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
  * 
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -26,53 +26,37 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.sets.zendikar;
 
-import mage.Constants.Outcome;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.cards.CardImpl;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DamageXTargetEffect extends OneShotEffect<DamageXTargetEffect> {
+public class KrakenHatchling extends CardImpl<KrakenHatchling> {
 
-	public DamageXTargetEffect() {
-		super(Outcome.Damage);
+	public KrakenHatchling(UUID ownerId) {
+		super(ownerId, 50, "Kraken Hatchling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
+		this.expansionSetCode = "ZEN";
+		this.subtype.add("Kraken");
+		this.color.setBlue(true);
+		this.power = new MageInt(0);
+		this.toughness = new MageInt(4);
+
 	}
 
-	public DamageXTargetEffect(final DamageXTargetEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public DamageXTargetEffect copy() {
-		return new DamageXTargetEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		int amount = source.getCosts().getVariableCosts().get(0).getAmount();
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			permanent.damage(amount, source.getId(), game, true, false);
-			return true;
-		}
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null) {
-			player.damage(amount, source.getId(), game, false, true);
-			return true;
-		}
-		return false;
+	public KrakenHatchling(final KrakenHatchling card) {
+		super(card);
 	}
 
 	@Override
-	public String getText(Ability source) {
-		return "{source} deals X damage to target " + source.getTargets().get(0).getTargetName();
+	public KrakenHatchling copy() {
+		return new KrakenHatchling(this);
 	}
 
 }
