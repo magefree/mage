@@ -42,6 +42,7 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
 
 	private int amount;
 	private String name;
+    private Counter counter;
 
 	public AddCountersSourceEffect(String name, int amount) {
 		super(Outcome.Benefit);
@@ -52,7 +53,7 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
 	public AddCountersSourceEffect(Counter counter) {
 		super(Outcome.Benefit);
 		this.name = counter.getName();
-		this.amount = counter.getCount();
+		this.counter = counter;
 	}
 
 	public AddCountersSourceEffect(final AddCountersSourceEffect effect) {
@@ -65,7 +66,11 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
 	public boolean apply(Game game, Ability source) {
 		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
-			permanent.addCounters(name, amount);
+			if (counter != null) {
+				permanent.addCounters(counter);
+			} else {
+				permanent.addCounters(name, amount);
+			}
 		}
 		return true;
 	}
