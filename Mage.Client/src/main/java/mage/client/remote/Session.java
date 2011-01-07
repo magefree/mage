@@ -47,6 +47,7 @@ import mage.client.components.MageUI;
 import mage.client.game.GamePanel;
 import mage.client.util.Config;
 import mage.game.GameException;
+import mage.game.draft.DraftOptions;
 import mage.interfaces.MageException;
 import mage.game.match.MatchOptions;
 import mage.interfaces.Server;
@@ -261,6 +262,19 @@ public class Session {
 		return false;
 	}
 
+	public boolean joinDraftTable(UUID roomId, UUID tableId, String playerName) {
+		try {
+			return server.joinDraftTable(sessionId, roomId, tableId, playerName);
+		} catch (RemoteException ex) {
+			handleRemoteException(ex);
+		} catch (MageException ex) {
+			handleMageException(ex);
+		} catch (GameException ex) {
+			handleGameException(ex);
+		}
+		return false;
+	}
+
 	public Collection<TableView> getTables(UUID roomId) throws MageRemoteException {
 		try {
 			return server.getTables(roomId);
@@ -410,6 +424,17 @@ public class Session {
 	public TableView createTable(UUID roomId, MatchOptions matchOptions) {
 		try {
 			return server.createTable(sessionId, roomId, matchOptions);
+		} catch (RemoteException ex) {
+			handleRemoteException(ex);
+		} catch (MageException ex) {
+			handleMageException(ex);
+		}
+		return null;
+	}
+
+	public TableView createDraftTable(UUID roomId, DraftOptions draftOptions) {
+		try {
+			return server.createDraftTable(sessionId, roomId, draftOptions);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {

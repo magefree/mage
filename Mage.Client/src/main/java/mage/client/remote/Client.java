@@ -44,6 +44,7 @@ import mage.interfaces.callback.ClientCallback;
 import mage.util.Logging;
 import mage.view.AbilityPickerView;
 import mage.view.ChatMessage;
+import mage.view.DraftClientMessage;
 import mage.view.GameClientMessage;
 import mage.view.GameView;
 import mage.view.TableClientMessage;
@@ -164,6 +165,21 @@ public class Client implements CallbackClient {
 			else if (callback.getMethod().equals("sideboard")) {
 				TableClientMessage message = (TableClientMessage) callback.getData();
 				sideboard(message.getDeck(), message.getTableId());
+			}
+			else if (callback.getMethod().equals("draftPick")) {
+				DraftClientMessage message = (DraftClientMessage) callback.getData();
+
+			}
+			else if (callback.getMethod().equals("draftInform")) {
+				if (callback.getMessageId() > messageId) {
+					DraftClientMessage message = (DraftClientMessage) callback.getData();
+				}
+				else {
+					logger.warning("message out of sequence - ignoring");
+				}
+			}
+			else if (callback.getMethod().equals("draftInit")) {
+
 			}
 			messageId = callback.getMessageId();
 		}
