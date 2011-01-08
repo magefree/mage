@@ -35,6 +35,7 @@ import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.dl.DownloadGui;
 import org.mage.plugins.card.dl.DownloadJob;
 import org.mage.plugins.card.dl.Downloader;
+import org.mage.plugins.card.dl.sources.GathererSets;
 import org.mage.plugins.card.dl.sources.GathererSymbols;
 import org.mage.plugins.card.images.DownloadPictures;
 import org.mage.plugins.card.info.CardInfoPaneImpl;
@@ -416,7 +417,13 @@ public class CardPluginImpl implements CardPlugin {
         for(DownloadJob job:it) {
             g.getDownloader().add(job);
         }
-		
+
+		it = new GathererSets();
+        for(DownloadJob job:it) {
+            g.getDownloader().add(job);
+        }
+
+
 		JDialog d = new JDialog((Frame) null, "Download pictures", false);
 		d.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		d.addWindowListener(new WindowAdapter() {
