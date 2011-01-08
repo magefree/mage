@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.Constants.TargetController;
 import mage.abilities.Ability;
@@ -60,10 +61,6 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 		this.count = effect.count;
 		this.preText = effect.preText;
 	}
-
-	public void setCount ( int count ) {
-		this.count = count;
-	}
 	
 	@Override
 	public boolean apply(Game game, Ability source) {
@@ -74,15 +71,20 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 		//A spell or ability could have removed the only legal target this player
 		//had, if thats the case this ability should fizzle.
 		if (target.canChoose(player.getId(), game)) {
+			boolean abilityApplied = false;
 			while (!target.isChosen()) {
 				player.choose(Outcome.Sacrifice, target, game);
 			}
 
-			Permanent permanent = game.getPermanent(target.getFirstTarget());
+			for ( int idx = 0; idx < target.getTargets().size(); idx++) {
+				Permanent permanent = game.getPermanent((UUID)target.getTargets().get(idx));
 
-			if ( permanent != null ) {
-				return permanent.sacrifice(source.getId(), game);
+				if ( permanent != null ) {
+					abilityApplied |= permanent.sacrifice(source.getId(), game);
+				}
 			}
+
+			return abilityApplied;
 		}
 		return false;
 	}
