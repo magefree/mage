@@ -46,7 +46,7 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
 		int curRow = 0;
 		Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 		for (CardView card: booster.values()) {
-			MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, Config.dimensions, null);
+			MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, Config.dimensions, null, false);
 			cardImg.addMouseListener(this);
 			add(cardImg);
 			cardImg.update(card);
