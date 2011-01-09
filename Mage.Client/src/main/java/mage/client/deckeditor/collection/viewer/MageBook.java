@@ -37,6 +37,7 @@ import mage.client.components.HoverButton;
 import mage.client.components.arcane.GlowText;
 import mage.client.components.arcane.ManaSymbols;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.AudioManager;
 import mage.client.util.Command;
 import mage.client.util.ImageHelper;
 import mage.components.ImagePanel;
@@ -94,6 +95,7 @@ public class MageBook extends JComponent {
                     pageLeft.setVisible(false);
                 }
                 pageRight.setVisible(true);
+                AudioManager.playPrevPage();
                 showCards();
             }
         });
@@ -107,6 +109,7 @@ public class MageBook extends JComponent {
                 currentPage++;
                 pageLeft.setVisible(true);
                 pageRight.setVisible(false);
+                AudioManager.playNextPage();
                 showCards();
             }
         });
