@@ -278,4 +278,9 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     public String getArt() {
         return "";
     }
+
+    @Override
+    public void setCardNumber(int cid) {
+        this.cardNumber = cid;
+    }
 }

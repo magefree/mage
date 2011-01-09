@@ -315,7 +315,12 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 		return card.getCardNumber();
 	}
 
-	@Override
+    @Override
+    public void setCardNumber(int cid) {
+        card.setCardNumber(cid);
+    }
+
+    @Override
 	public List<Mana> getMana() {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}

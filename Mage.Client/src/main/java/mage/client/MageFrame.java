@@ -62,10 +62,8 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
@@ -298,7 +296,10 @@ public class MageFrame extends javax.swing.JFrame {
     }
 
     private void btnImagesActionPerformed(java.awt.event.ActionEvent evt) {
-        Plugins.getInstance().downloadImage(new HashSet<Card>(CardsStorage.getAllCards()));
+        HashSet<Card> cards = new HashSet<Card>(CardsStorage.getAllCards());
+        List<Card> notImplemented = CardsStorage.getNotImplementedCards();
+        cards.addAll(notImplemented);
+        Plugins.getInstance().downloadImage(cards);
     }
 
     private void btnSymbolsActionPerformed(java.awt.event.ActionEvent evt) {

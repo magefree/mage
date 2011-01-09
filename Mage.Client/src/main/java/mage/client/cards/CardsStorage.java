@@ -1,7 +1,10 @@
 package mage.client.cards;
 
 import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardsImpl;
 import mage.cards.ExpansionSet;
+import mage.sets.ScarsOfMirrodin;
 import mage.sets.Sets;
 import mage.utils.CardUtil;
 
@@ -21,6 +24,7 @@ public class CardsStorage {
     private static Integer min = Integer.MAX_VALUE, max = 0;
     private static int cardsCount;
     private static List<String> setCodes = new ArrayList<String>();
+    private static List<Card> notImplementedCards;
 
     static {
         for (ExpansionSet set : Sets.getInstance().values()) {
@@ -129,6 +133,46 @@ public class CardsStorage {
         }
     }
 
+    /**
+     * Get list of not implemented cards.
+     * Used in collection viewer to show what cards need to be done for the latest set.
+     *
+     * @return
+     */
+    public static List<Card> getNotImplementedCards() {
+        List<Card> cards = new ArrayList<Card>();
+        if (notImplementedCards == null) {
+            String filename = "/som.txt";
+            if (allCards.size() == 0) {
+                return cards;
+            }
+            Card tmp = allCards.get(0);
+            try {
+                InputStream is = CardsStorage.class.getResourceAsStream(filename);
+                Scanner scanner = new Scanner(is);
+                String set = "SOM";
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    String[] s = line.split("\\|");
+                    if (s.length == 6) {
+                        String name = s[1].trim();
+                        Integer cid = Integer.parseInt(s[5]);
+                        Card card = tmp.copy();
+                        card.setName(name);
+                        card.setExpansionSetCode(set);
+                        card.setCardNumber(cid);
+                        card.getRules().clear();
+                        card.getRules().add("Not implemented");
+                        cards.add(card);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return cards;
+    }
+
     public static void main(String[] argv) {
         for (Card card : getAllCards()) {
             String name = card.getName();
@@ -175,6 +219,9 @@ public class CardsStorage {
         }
     }
 
+    /**
+     * Set comparator. Puts latest set on top.
+     */
     private static class SetComparator implements Comparator<String> {
         private static final String LATEST_SET_CODE = "SOM";
 

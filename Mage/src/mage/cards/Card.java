@@ -44,6 +44,7 @@ public interface Card extends MageObject {
 
 	public UUID getOwnerId();
 	public int getCardNumber();
+    public void setCardNumber(int cid);
 	public String getArt();
 	public Rarity getRarity();
 	public void setRarity(Rarity rarity);
