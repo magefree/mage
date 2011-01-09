@@ -28,6 +28,7 @@
 
 package mage.view;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import mage.game.tournament.Tournament;
@@ -36,7 +37,7 @@ import mage.game.tournament.Tournament;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TournamentView {
+public class TournamentView implements Serializable {
 
 	List<RoundView> rounds = new ArrayList<RoundView>();
 

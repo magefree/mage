@@ -110,9 +110,9 @@ public class DraftSession {
 		}
 	}
 
-	public void pickCard(final DraftPickView draftPickView) {
+	public void pickCard(final DraftPickView draftPickView, int timeout) {
 		if (!killed) {
-			setupTimeout(20);
+			setupTimeout(timeout);
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
 				session.fireCallback(new ClientCallback("draftPick", new DraftClientMessage(draftPickView)));

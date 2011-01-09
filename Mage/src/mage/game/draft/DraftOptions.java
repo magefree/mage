@@ -41,7 +41,7 @@ public class DraftOptions implements Serializable {
 
 	protected String name;
 	protected String draftType;
-	protected List<ExpansionSet> sets;
+	protected List<ExpansionSet> sets = new ArrayList<ExpansionSet>();
 	protected List<String> playerTypes = new ArrayList<String>();
 	protected TimingOption timing;
 

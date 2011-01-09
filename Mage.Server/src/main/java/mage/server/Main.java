@@ -37,6 +37,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import mage.game.match.MatchType;
 import mage.server.game.DeckValidatorFactory;
+import mage.server.game.DraftFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.PlayerFactory;
 import mage.server.util.ConfigSettings;
@@ -71,6 +72,9 @@ public class Main {
 		ConfigSettings config = ConfigSettings.getInstance();
 		for (GamePlugin plugin: config.getGameTypes()) {
 			GameFactory.getInstance().addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
+		}
+		for (Plugin plugin: config.getDraftTypes()) {
+			DraftFactory.getInstance().addDraftType(plugin.getName(), loadPlugin(plugin));
 		}
 		for (Plugin plugin: config.getPlayerTypes()) {
 			PlayerFactory.getInstance().addPlayerType(plugin.getName(), loadPlugin(plugin));

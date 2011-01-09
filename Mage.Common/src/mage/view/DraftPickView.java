@@ -28,17 +28,21 @@
 
 package mage.view;
 
+import java.io.Serializable;
+import mage.game.draft.DraftPlayer;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DraftPickView {
+public class DraftPickView implements Serializable {
 
 	protected CardsView booster;
 	protected CardsView picks;
 
-	public DraftPickView() {
-
+	public DraftPickView(DraftPlayer player) {
+		this.booster = new CardsView(player.getBooster());
+		this.picks = new CardsView(player.getDeck().getSideboard());
 	}
 
 	public CardsView getBooster() {

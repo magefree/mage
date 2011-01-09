@@ -93,7 +93,7 @@ public class DraftController {
 				public void event(PlayerQueryEvent event) {
 					switch (event.getQueryType()) {
 						case PICK_CARD:
-							pickCard(event.getPlayerId());
+							pickCard(event.getPlayerId(), event.getMax());
 							break;
 					}
 				}
@@ -130,6 +130,7 @@ public class DraftController {
 				return;
 			}
 		}
+		draft.start();
 	}
 
 	private boolean allJoined() {
@@ -186,9 +187,9 @@ public class DraftController {
 		}
 	}
 
-	private synchronized void pickCard(UUID playerId) {
+	private synchronized void pickCard(UUID playerId, int timeout) {
 		if (draftSessions.containsKey(playerId))
-			draftSessions.get(playerId).pickCard(getDraftPickView(playerId));
+			draftSessions.get(playerId).pickCard(getDraftPickView(playerId), timeout);
 	}
 
 	private DraftView getDraftView() {
@@ -196,7 +197,7 @@ public class DraftController {
 	}
 
 	private DraftPickView getDraftPickView(UUID playerId) {
-		return new DraftPickView();
+		return new DraftPickView(draft.getPlayer(playerId));
 	}
 
 }

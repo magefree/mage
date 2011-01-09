@@ -103,6 +103,10 @@ public class Session {
 		fireCallback(new ClientCallback("sideboard", new TableClientMessage(deck, tableId)));
 	}
 
+	public void construct(final Deck deck, final UUID tableId) {
+		fireCallback(new ClientCallback("construct", new TableClientMessage(deck, tableId)));
+	}
+
 	public void watchGame(final UUID gameId) {
 		fireCallback(new ClientCallback("watchGame", gameId));
 	}

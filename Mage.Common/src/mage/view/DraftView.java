@@ -28,6 +28,7 @@
 
 package mage.view;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import mage.game.draft.Draft;
@@ -36,7 +37,7 @@ import mage.game.draft.Draft;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DraftView {
+public class DraftView implements Serializable {
 
 	private List<TournamentPlayerView> players = new ArrayList<TournamentPlayerView>();
 

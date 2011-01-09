@@ -92,6 +92,10 @@ public class ConfigSettings {
 		return config.getGameTypes().getGameType();
 	}
 
+	public List<Plugin> getDraftTypes() {
+		return config.getDraftTypes().getDraftType();
+	}
+
 	public List<Plugin> getDeckTypes() {
 		return config.getDeckTypes().getDeckType();
 	}

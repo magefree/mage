@@ -76,12 +76,13 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 		this.max = max;
 	}
 
-	private PlayerQueryEvent(UUID playerId, String message, List<Card> booster, QueryType queryType) {
+	private PlayerQueryEvent(UUID playerId, String message, List<Card> booster, QueryType queryType, int time) {
 		super(playerId);
 		this.queryType = queryType;
 		this.message = message;
 		this.playerId = playerId;
 		this.booster = booster;
+		this.max = time;
 	}
 
 	public static PlayerQueryEvent askEvent(UUID playerId, String message) {
@@ -127,8 +128,8 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 		return new PlayerQueryEvent(playerId, message, null, null, null, cards, QueryType.LOOK, 0, 0, false);
 	}
 	
-	public static PlayerQueryEvent pickCard(UUID playerId, String message, List<Card> booster) {
-		return new PlayerQueryEvent(playerId, message, booster, QueryType.PICK_CARD);
+	public static PlayerQueryEvent pickCard(UUID playerId, String message, List<Card> booster, int time) {
+		return new PlayerQueryEvent(playerId, message, booster, QueryType.PICK_CARD, time);
 	}
 
 	public String getMessage() {

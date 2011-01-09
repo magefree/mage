@@ -44,6 +44,7 @@ import mage.cards.decks.DeckCardLists;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
 import mage.client.components.MageUI;
+import mage.client.draft.DraftPanel;
 import mage.client.game.GamePanel;
 import mage.client.util.Config;
 import mage.game.GameException;
@@ -73,6 +74,7 @@ public class Session {
 	private ServerState serverState;
 	private Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
 	private GamePanel game;
+	private DraftPanel draft;
 	private CallbackClientDaemon callbackDaemon;
 	private MageUI ui = new MageUI();
 
@@ -168,6 +170,14 @@ public class Session {
 
 	public void setGame(GamePanel gamePanel) {
 		game = gamePanel;
+	}
+
+	public DraftPanel getDraft() {
+		return draft;
+	}
+
+	public void setDraft(DraftPanel draftPanel) {
+		draft = draftPanel;
 	}
 
 	public UUID getMainRoomId() {
@@ -337,7 +347,7 @@ public class Session {
 
 	public boolean sendCardPick(UUID draftId, UUID cardId) {
 		try {
-			server.sendPlayerUUID(draftId, sessionId, cardId);
+			server.sendCardPick(draftId, sessionId, cardId);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
@@ -388,6 +398,18 @@ public class Session {
 	public boolean joinGame(UUID gameId) {
 		try {
 			server.joinGame(gameId, sessionId);
+			return true;
+		} catch (RemoteException ex) {
+			handleRemoteException(ex);
+		} catch (MageException ex) {
+			handleMageException(ex);
+		}
+		return false;
+	}
+
+	public boolean joinDraft(UUID draftId) {
+		try {
+			server.joinDraft(draftId, sessionId);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);

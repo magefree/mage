@@ -46,6 +46,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+import mage.Constants.RangeOfInfluence;
 import mage.Constants.TableState;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
@@ -212,7 +213,13 @@ public class TableController {
 	}
 
 	private Player createPlayer(String name, String playerType) {
-		Player player = PlayerFactory.getInstance().createPlayer(playerType, name, options.getRange());
+		Player player;
+		if (options == null) {
+			player = PlayerFactory.getInstance().createPlayer(playerType, name, RangeOfInfluence.ALL);
+		}
+		else {
+			player = PlayerFactory.getInstance().createPlayer(playerType, name, options.getRange());
+		}
 		logger.info("Player created " + player.getId());
 		return player;
 	}
@@ -245,7 +252,6 @@ public class TableController {
 
 	public synchronized void startDraft(UUID sessionId) {
 		if (sessionId.equals(this.sessionId) && table.getState() == TableState.STARTING) {
-			draft.start();
 			table.initDraft();
 			DraftManager.getInstance().createDraftSession(draft, sessionPlayerMap, table.getId());
 			SessionManager sessionManager = SessionManager.getInstance();
@@ -269,6 +275,16 @@ public class TableController {
 		for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
 			if (entry.getValue().equals(playerId)) {
 				sessionManager.getSession(entry.getKey()).sideboard(deck, table.getId());
+				break;
+			}
+		}
+	}
+
+	private void construct(UUID playerId, Deck deck) {
+		SessionManager sessionManager = SessionManager.getInstance();
+		for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
+			if (entry.getValue().equals(playerId)) {
+				sessionManager.getSession(entry.getKey()).construct(deck, table.getId());
 				break;
 			}
 		}

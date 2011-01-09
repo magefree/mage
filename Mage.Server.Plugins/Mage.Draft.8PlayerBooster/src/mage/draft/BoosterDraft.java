@@ -26,19 +26,34 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.view;
+package mage.draft;
 
-import java.io.Serializable;
-import mage.game.tournament.Round;
+import mage.game.draft.DraftImpl;
+import mage.game.draft.DraftOptions;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RoundView implements Serializable {
+public class BoosterDraft extends DraftImpl<BoosterDraft> {
 
-	public RoundView(Round round) {
+	public BoosterDraft(DraftOptions options) {
+		super(options);
+	}
 
+	@Override
+	public void start() {
+		while (boosterNum < sets.size()) {
+			openBooster();
+			while (pickCards()) {
+				if (boosterNum % 2 == 1)
+					passLeft();
+				else
+					passRight();
+				fireUpdatePlayersEvent();
+			}
+		}
+		startTournament();
 	}
 
 }

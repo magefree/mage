@@ -53,4 +53,11 @@ public class DraftClientMessage implements Serializable {
 		this.draftView = draftView;
 	}
 
+	public DraftPickView getDraftPickView() {
+		return draftPickView;
+	}
+
+	public DraftView getDraftView() {
+		return draftView;
+	}
 }

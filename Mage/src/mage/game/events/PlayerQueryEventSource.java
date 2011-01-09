@@ -95,8 +95,8 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
 		dispatcher.fireEvent(PlayerQueryEvent.playXManaEvent(playerId, message));
 	}
 
-	public void pickCard(UUID playerId, String message, List<Card> booster) {
-		dispatcher.fireEvent(PlayerQueryEvent.pickCard(playerId, message, booster));
+	public void pickCard(UUID playerId, String message, List<Card> booster, int time) {
+		dispatcher.fireEvent(PlayerQueryEvent.pickCard(playerId, message, booster, time));
 	}
 
 }

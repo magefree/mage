@@ -50,7 +50,7 @@ import mage.players.PlayerList;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DraftImpl<T extends DraftImpl<T>> implements Draft {
+public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
 
 	protected final UUID id;
 	protected Map<UUID, DraftPlayer> players = new HashMap<UUID, DraftPlayer>();
@@ -74,8 +74,8 @@ public class DraftImpl<T extends DraftImpl<T>> implements Draft {
 	@Override
 	public void addPlayer(Player player) {
 		DraftPlayer draftPlayer = new DraftPlayer(player);
-		players.put(draftPlayer.getId(), draftPlayer);
-		table.add(draftPlayer.getId());
+		players.put(player.getId(), draftPlayer);
+		table.add(player.getId());
 	}
 
 	@Override
@@ -139,7 +139,7 @@ public class DraftImpl<T extends DraftImpl<T>> implements Draft {
 	}
 
 	protected void openBooster() {
-		if (sets.size() < boosterNum) {
+		if (boosterNum < sets.size()) {
 			for (DraftPlayer player: players.values()) {
 				player.setBooster(sets.get(boosterNum).createBooster());
 			}
@@ -151,8 +151,8 @@ public class DraftImpl<T extends DraftImpl<T>> implements Draft {
 		for (DraftPlayer player: players.values()) {
 			if (player.getBooster().size() == 0)
 				return false;
-			player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
 			player.setPicking();
+			player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
 		}
 		while (!donePicking()) {
 			try {
@@ -174,21 +174,6 @@ public class DraftImpl<T extends DraftImpl<T>> implements Draft {
 	}
 
 	@Override
-	public void start() {
-		while (boosterNum < sets.size()) {
-			openBooster();
-			while (pickCards()) {
-				if (boosterNum % 2 == 1)
-					passLeft();
-				else
-					passRight();
-				fireUpdatePlayersEvent();
-			}
-		}
-		startTournament();
-	}
-
-	@Override
 	public void addTableEventListener(Listener<TableEvent> listener) {
 		tableEventSource.addListener(listener);
 	}
@@ -205,7 +190,7 @@ public class DraftImpl<T extends DraftImpl<T>> implements Draft {
 
 	@Override
 	public void firePickCardEvent(UUID playerId) {
-		playerQueryEventSource.pickCard(playerId, "Pick card", players.get(playerId).booster);
+		playerQueryEventSource.pickCard(playerId, "Pick card", players.get(playerId).booster, 20);
 	}
 
 	@Override
@@ -214,6 +199,7 @@ public class DraftImpl<T extends DraftImpl<T>> implements Draft {
 		for (Card card: player.booster) {
 			if (card.getId().equals(cardId)) {
 				player.addPick(card);
+				player.booster.remove(card);
 				break;
 			}
 		}

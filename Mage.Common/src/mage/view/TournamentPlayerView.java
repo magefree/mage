@@ -28,10 +28,12 @@
 
 package mage.view;
 
+import java.io.Serializable;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TournamentPlayerView {
+public class TournamentPlayerView implements Serializable {
 
 }

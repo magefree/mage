@@ -69,6 +69,7 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
+import mage.client.draft.DraftPane;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -140,6 +141,14 @@ public class MageFrame extends javax.swing.JFrame {
         combat.hideDialog();
         desktopPane.add(pickNumber, JLayeredPane.POPUP_LAYER);
         session.getUI().addComponent(MageComponents.DESKTOP_PANE, desktopPane);
+
+		draftPane = new DraftPane();
+        desktopPane.add(draftPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        try {
+            draftPane.setMaximum(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
 
         addTooltipContainer();
         setBackground();
@@ -301,6 +310,7 @@ public class MageFrame extends javax.swing.JFrame {
     public void showGame(UUID gameId, UUID playerId) {
         this.tablesPane.hideTables();
         this.tablesPane.setVisible(false);
+		this.draftPane.setVisible(false);
         this.gamePane.setVisible(true);
         this.gamePane.showGame(gameId, playerId);
     }
@@ -308,6 +318,7 @@ public class MageFrame extends javax.swing.JFrame {
     public void watchGame(UUID gameId) {
         this.tablesPane.hideTables();
         this.tablesPane.setVisible(false);
+		this.draftPane.setVisible(false);
         this.gamePane.setVisible(true);
         this.gamePane.watchGame(gameId);
     }
@@ -315,9 +326,18 @@ public class MageFrame extends javax.swing.JFrame {
     public void replayGame() {
         this.tablesPane.hideTables();
         this.tablesPane.setVisible(false);
+		this.draftPane.setVisible(false);
         this.gamePane.setVisible(true);
         this.gamePane.replayGame();
     }
+
+	public void showDraft(UUID draftId) {
+		this.tablesPane.hideTables();
+		this.tablesPane.setVisible(false);
+		this.gamePane.setVisible(false);
+		this.draftPane.setVisible(true);
+		this.draftPane.showDraft(draftId);
+	}
 
     public static boolean connect(String userName, String serverName, int port) {
         return session.connect(userName, serverName, port);
@@ -524,6 +544,7 @@ public class MageFrame extends javax.swing.JFrame {
     private void btnDeckEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeckEditorActionPerformed
         this.gamePane.setVisible(false);
         this.tablesPane.setVisible(false);
+		this.draftPane.setVisible(false);
         this.collectionViewerPane.setVisible(false);
         showDeckEditor(DeckEditorMode.Constructed, null, null);
     }//GEN-LAST:event_btnDeckEditorActionPerformed
@@ -589,6 +610,7 @@ public class MageFrame extends javax.swing.JFrame {
         this.tablesPane.setVisible(false);
         this.gamePane.setVisible(false);
         this.deckEditorPane.setVisible(false);
+		this.draftPane.setVisible(false);
         this.collectionViewerPane.setVisible(false);
     }
 
@@ -667,6 +689,7 @@ public class MageFrame extends javax.swing.JFrame {
 
     private static final long serialVersionUID = -9104885239063142218L;
     private ImagePanel backgroundPane;
+	private DraftPane draftPane;
 
     public void setStatusText(String status) {
         this.lblStatus.setText(status);

@@ -83,7 +83,7 @@ public class Client implements CallbackClient {
 			}
 			else if(callback.getMethod().equals("startDraft")) {
 				TableClientMessage message = (TableClientMessage) callback.getData();
-                //TODO: add code to start draft
+                draftStarted(message.getGameId(), message.getPlayerId());
 			}
 			else if (callback.getMethod().equals("replayGame")) {
 				replayGame();
@@ -166,9 +166,13 @@ public class Client implements CallbackClient {
 				TableClientMessage message = (TableClientMessage) callback.getData();
 				sideboard(message.getDeck(), message.getTableId());
 			}
+			else if (callback.getMethod().equals("construct")) {
+				TableClientMessage message = (TableClientMessage) callback.getData();
+				construct(message.getDeck(), message.getTableId());
+			}
 			else if (callback.getMethod().equals("draftPick")) {
 				DraftClientMessage message = (DraftClientMessage) callback.getData();
-
+				session.getDraft().loadBooster(message.getDraftPickView());
 			}
 			else if (callback.getMethod().equals("draftInform")) {
 				if (callback.getMessageId() > messageId) {
@@ -179,7 +183,7 @@ public class Client implements CallbackClient {
 				}
 			}
 			else if (callback.getMethod().equals("draftInit")) {
-
+				session.ack("draftInit");
 			}
 			messageId = callback.getMessageId();
 		}
@@ -206,6 +210,16 @@ public class Client implements CallbackClient {
 		}
 	}
 
+	protected void draftStarted(UUID draftId, UUID playerId) {
+		try {
+			frame.showDraft(draftId);
+			logger.info("Draft " + draftId + " started for player " + playerId);
+		}
+		catch (Exception ex) {
+			handleException(ex);
+		}
+	}
+
 	protected void watchGame(UUID gameId) {
 		try {
 			frame.watchGame(gameId);
@@ -228,6 +242,10 @@ public class Client implements CallbackClient {
 
 	protected void sideboard(Deck deck, UUID tableId) {
 		frame.showDeckEditor(DeckEditorMode.Sideboard, deck, tableId);
+	}
+
+	protected void construct(Deck deck, UUID tableId) {
+		frame.showDeckEditor(DeckEditorMode.Limited, deck, tableId);
 	}
 
 	private void handleException(Exception ex) {

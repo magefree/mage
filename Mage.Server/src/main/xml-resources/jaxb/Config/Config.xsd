@@ -8,6 +8,7 @@
 				<xs:element ref="server"/>
 				<xs:element ref="playerTypes"/>
 				<xs:element ref="gameTypes"/>
+				<xs:element ref="draftTypes"/>
 				<xs:element ref="deckTypes"/>
 			</xs:sequence>
 		</xs:complexType>
@@ -49,6 +50,14 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="gameType" type="gamePlugin" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="draftTypes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="draftType" type="plugin" maxOccurs="unbounded"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

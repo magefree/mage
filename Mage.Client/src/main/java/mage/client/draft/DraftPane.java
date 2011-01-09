@@ -34,6 +34,7 @@
 
 package mage.client.draft;
 
+import java.util.UUID;
 import mage.client.MagePane;
 
 /**
@@ -46,6 +47,10 @@ public class DraftPane extends MagePane {
     public DraftPane() {
         initComponents();
     }
+
+	public void showDraft(UUID draftId) {
+		this.draftPanel1.showDraft(draftId);
+	}
 
     /** This method is called from within the constructor to
      * initialize the form.
