@@ -10,6 +10,7 @@ import java.util.UUID;
 
 import javax.swing.*;
 
+import mage.Constants;
 import mage.cards.MageCard;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
@@ -122,6 +123,10 @@ public class MageActionCallback implements ActionCallback {
     }
 
     private void showPopup(final TransferData data, final Component parentComponent, final Point parentPoint) {
+        // skip popup for not implemented cards (they have Rarity.NA)
+        if (data.card.getRarity().equals(Constants.Rarity.NA)) {
+            return;
+        }
         if (cardInfoPane == null) {
             PopupFactory factory = PopupFactory.getSharedInstance();
             popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);

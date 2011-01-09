@@ -34,15 +34,12 @@ import mage.cards.MageCard;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardsStorage;
 import mage.client.components.HoverButton;
-import mage.client.components.ImageButton;
 import mage.client.components.arcane.GlowText;
 import mage.client.components.arcane.ManaSymbols;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Command;
-import mage.client.util.Config;
 import mage.client.util.ImageHelper;
 import mage.components.ImagePanel;
-import mage.utils.ThreadUtils;
 import mage.view.CardView;
 import org.apache.log4j.Logger;
 
@@ -87,8 +84,8 @@ public class MageBook extends JComponent {
         jPanelCenter.add(jLayeredPane, BorderLayout.CENTER);
 
         Image image = ImageHelper.loadImage(LEFT_PAGE_BUTTON_IMAGE_PATH);
-        pageLeft = new HoverButton(null, image, image, image, new Rectangle(64,64));
-        pageLeft.setBounds(0,0,64,64);
+        pageLeft = new HoverButton(null, image, image, image, new Rectangle(64, 64));
+        pageLeft.setBounds(0, 0, 64, 64);
         pageLeft.setVisible(false);
         pageLeft.setObserver(new Command() {
             public void execute() {
@@ -102,8 +99,8 @@ public class MageBook extends JComponent {
         });
 
         image = ImageHelper.loadImage(RIGHT_PAGE_BUTTON_IMAGE_PATH);
-        pageRight = new HoverButton(null, image, image, image, new Rectangle(64,64));
-        pageRight.setBounds(WIDTH - 2*LEFT_RIGHT_PAGES_WIDTH - 64,0,64,64);
+        pageRight = new HoverButton(null, image, image, image, new Rectangle(64, 64));
+        pageRight.setBounds(WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH - 64, 0, 64, 64);
         pageRight.setVisible(false);
         pageRight.setObserver(new Command() {
             public void execute() {
@@ -149,7 +146,7 @@ public class MageBook extends JComponent {
         int count = 0;
         JPanel currentPanel = jPanelLeft;
         for (String set : CardsStorage.getSetCodes()) {
-            HoverButton tab = new HoverButton(null, image, image, image, new Rectangle(39,120));
+            HoverButton tab = new HoverButton(null, image, image, image, new Rectangle(39, 120));
             Image setImage = ManaSymbols.getSetSymbolImage(set);
             if (setImage != null) {
                 tab.setOverlayImage(setImage);
@@ -196,8 +193,8 @@ public class MageBook extends JComponent {
         }
 
         // calculate the x offset of the second (right) page
-        int second_page_x = (WIDTH - 2*LEFT_RIGHT_PAGES_WIDTH) -
-                (cardDimensions.frameWidth+ CardPosition.GAP_X)*3 + CardPosition.GAP_X - OFFSET_X;
+        int second_page_x = (WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH) -
+                (cardDimensions.frameWidth + CardPosition.GAP_X) * 3 + CardPosition.GAP_X - OFFSET_X;
 
         rectangle.setLocation(second_page_x, OFFSET_Y);
         for (int i = CARDS_PER_PAGE / 2; i < Math.min(CARDS_PER_PAGE, size); i++) {
@@ -215,17 +212,20 @@ public class MageBook extends JComponent {
         cardImg.update(card);
         cardImg.setCardBounds(rectangle.x, rectangle.y, cardDimensions.frameWidth, cardDimensions.frameHeight);
 
+        boolean implemented = !card.getRarity().equals(mage.Constants.Rarity.NA);
+
         GlowText label = new GlowText();
-        label.setGlow(Color.green, 12, 0.0f);
-        label.setText("Implemented");
-        label.setBounds(rectangle.x + 15, rectangle.y + cardDimensions.frameHeight + 7, 100, 30);
+        label.setGlow(implemented ? Color.green : NOT_IMPLEMENTED, 12, 0.0f);
+        label.setText(implemented ? "Implemented" : "Not implemented");
+        int dx = implemented ? 15 : 5;
+        label.setBounds(rectangle.x + dx, rectangle.y + cardDimensions.frameHeight + 7, 110, 30);
         jLayeredPane.add(label);
     }
 
     private java.util.List<Card> getCards(int page, String set) {
         int start = page * CARDS_PER_PAGE;
         int end = (page + 1) * CARDS_PER_PAGE;
-        java.util.List<Card> cards = CardsStorage.getAllCards(start, end, currentSet);
+        java.util.List<Card> cards = CardsStorage.getAllCards(start, end, currentSet, false);
         if (cards.size() > CARDS_PER_PAGE) {
             pageRight.setVisible(true);
         }
@@ -263,13 +263,13 @@ public class MageBook extends JComponent {
 
         public static Rectangle translatePosition(int index, Rectangle r) {
             Rectangle rect = new Rectangle(r);
-            rect.translate((cardDimensions.frameWidth+GAP_X) * dx[index],
+            rect.translate((cardDimensions.frameWidth + GAP_X) * dx[index],
                     (cardDimensions.frameHeight + GAP_Y) * dy[index]);
             return rect;
         }
 
-        private static final int[] dx = {1, 1, -2, 1, 1, -2, 1, 1,  2, 1, -2, 1, 1, -2, 1, 1};
-        private static final int[] dy = {0, 0,  1, 0, 0,  1, 0, 0, -2, 0,  1, 0, 0,  1, 0, 0};
+        private static final int[] dx = {1, 1, -2, 1, 1, -2, 1, 1, 2, 1, -2, 1, 1, -2, 1, 1};
+        private static final int[] dy = {0, 0, 1, 0, 0, 1, 0, 0, -2, 0, 1, 0, 0, 1, 0, 0};
         public static final int GAP_X = 17;
         public static final int GAP_Y = 45;
         private static int cardWidth;
@@ -285,7 +285,7 @@ public class MageBook extends JComponent {
     private HoverButton pageRight;
 
     private int currentPage = 0;
-    private String currentSet = "M10";
+    private String currentSet = "SOM";
 
     private static CardDimensions cardDimensions = new CardDimensions(1.2d);
     private static Font font = new Font("Arial", Font.PLAIN, 14);
@@ -304,4 +304,5 @@ public class MageBook extends JComponent {
     static private final int OFFSET_X = 25;
     static private final int OFFSET_Y = 20;
     static private final int LEFT_RIGHT_PAGES_WIDTH = 40;
+    static private final Color NOT_IMPLEMENTED = new Color(220, 220, 220, 150);
 }

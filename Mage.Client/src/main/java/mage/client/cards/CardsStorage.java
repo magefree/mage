@@ -1,5 +1,6 @@
 package mage.client.cards;
 
+import mage.Constants;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
@@ -53,9 +54,10 @@ public class CardsStorage {
      * @param start
      * @param end
      * @param set   Cards set code. Can be null.
+     * @param onlyImplemented return only implemented cards
      * @return
      */
-    public static List<Card> getAllCards(int start, int end, String set) {
+    public static List<Card> getAllCards(int start, int end, String set, boolean onlyImplemented) {
         List<Card> cards = new ArrayList<Card>();
         List<Card> pool;
         if (set == null) {
@@ -67,6 +69,14 @@ public class CardsStorage {
                     pool.add(card);
                 }
             }
+        }
+        if (!onlyImplemented) {
+            for (Card card : getNotImplementedCards()) {
+                if (card.getExpansionSetCode().equals(set)) {
+                    pool.add(card);
+                }
+            }
+            Collections.sort(pool, new CardComparator());
         }
         for (int i = start; i < Math.min(end + 1, pool.size()); i++) {
             cards.add(pool.get(i));
@@ -147,6 +157,10 @@ public class CardsStorage {
                 return cards;
             }
             Card tmp = allCards.get(0);
+            Set<String> names = new HashSet<String>();
+            for (Card card : allCards) {
+                names.add(card.getExpansionSetCode() + card.getName());
+            }
             try {
                 InputStream is = CardsStorage.class.getResourceAsStream(filename);
                 Scanner scanner = new Scanner(is);
@@ -156,19 +170,23 @@ public class CardsStorage {
                     String[] s = line.split("\\|");
                     if (s.length == 6) {
                         String name = s[1].trim();
-                        Integer cid = Integer.parseInt(s[5]);
-                        Card card = tmp.copy();
-                        card.setName(name);
-                        card.setExpansionSetCode(set);
-                        card.setCardNumber(cid);
-                        card.getRules().clear();
-                        card.getRules().add("Not implemented");
-                        cards.add(card);
+                        if (!names.contains(set + name)) {
+                            Integer cid = Integer.parseInt(s[5]);
+                            Card card = tmp.copy();
+                            card.setName(name);
+                            card.setExpansionSetCode(set);
+                            card.setCardNumber(cid);
+                            card.setRarity(Constants.Rarity.NA); // mark as not implemented
+                            card.getCardType().clear();
+                            cards.add(card);
+                        }
                     }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            names.clear();
+            names = null;
         }
         return cards;
     }
