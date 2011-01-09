@@ -204,6 +204,8 @@ public class MageBook extends JComponent {
             addCard(new CardView(cards.get(i)), bigCard, null, rectangle);
             rectangle = CardPosition.translatePosition(i - CARDS_PER_PAGE / 2, rectangle);
         }
+
+        jLayeredPane.repaint();
     }
 
     private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle) {
