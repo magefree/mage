@@ -80,22 +80,22 @@ public class Plugins implements MagePlugins {
 	}
 	
 	@Override
-	public MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, CardDimensions dimension, UUID gameId) {
+	public MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean canBeFoil) {
 		if (cardPlugin != null) {
 			mageActionCallback.refreshSession();
 			mageActionCallback.setCardPreviewComponent(bigCard);
-			return cardPlugin.getMagePermanent(card, dimension, gameId, mageActionCallback);
+			return cardPlugin.getMagePermanent(card, dimension, gameId, mageActionCallback, canBeFoil);
 		} else {
 			return new Permanent(card, bigCard, Config.dimensions, gameId);
 		}
 	}
 	
 	@Override
-	public MageCard getMageCard(CardView card, BigCard bigCard, CardDimensions dimension, UUID gameId) {
+	public MageCard getMageCard(CardView card, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean canBeFoil) {
 		if (cardPlugin != null) {
 			mageActionCallback.refreshSession();
 			mageActionCallback.setCardPreviewComponent(bigCard);
-			return cardPlugin.getMageCard(card, dimension, gameId, mageActionCallback);
+			return cardPlugin.getMageCard(card, dimension, gameId, mageActionCallback, canBeFoil);
 		} else {
 			return new Card(card, bigCard, Config.dimensions, gameId);
 		}

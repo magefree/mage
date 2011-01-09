@@ -34,6 +34,7 @@
 
 package mage.client;
 
+import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.client.cards.CardsStorage;
 import mage.client.components.MageComponents;
@@ -41,6 +42,7 @@ import mage.client.components.MageJDesktop;
 import mage.client.components.MageRoundPane;
 import mage.client.components.arcane.ManaSymbols;
 import mage.client.constants.Constants.DeckEditorMode;
+import mage.client.deckeditor.collection.viewer.CollectionViewerPane;
 import mage.client.dialog.*;
 import mage.client.plugins.impl.Plugins;
 import mage.client.remote.Session;
@@ -61,6 +63,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -122,6 +125,7 @@ public class MageFrame extends javax.swing.JFrame {
         }
 
         Plugins.getInstance().loadPlugins();
+        ManaSymbols.loadImages();
 
         initComponents();
         setSize(1024, 768);
@@ -136,8 +140,6 @@ public class MageFrame extends javax.swing.JFrame {
         combat.hideDialog();
         desktopPane.add(pickNumber, JLayeredPane.POPUP_LAYER);
         session.getUI().addComponent(MageComponents.DESKTOP_PANE, desktopPane);
-
-        ManaSymbols.loadImages();
 
         addTooltipContainer();
         setBackground();
@@ -287,7 +289,7 @@ public class MageFrame extends javax.swing.JFrame {
     }
 
     private void btnImagesActionPerformed(java.awt.event.ActionEvent evt) {
-        Plugins.getInstance().downloadImage(CardsStorage.getAllCards());
+        Plugins.getInstance().downloadImage(new HashSet<Card>(CardsStorage.getAllCards()));
     }
 
     private void btnSymbolsActionPerformed(java.awt.event.ActionEvent evt) {
@@ -355,6 +357,7 @@ public class MageFrame extends javax.swing.JFrame {
         tablesPane = new mage.client.table.TablesPane();
         gamePane = new mage.client.game.GamePane();
         deckEditorPane = new mage.client.deckeditor.DeckEditorPane();
+        collectionViewerPane = new CollectionViewerPane();
         mageToolbar = new javax.swing.JToolBar();
         btnConnect = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
@@ -368,11 +371,12 @@ public class MageFrame extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnExit = new javax.swing.JButton();
         lblStatus = new javax.swing.JLabel();
+        jSeparator6 = new javax.swing.JToolBar.Separator();
+        btnCollectionViewer = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         //setMinimumSize(new java.awt.Dimension(1024, 768));
 
-        //desktopPane.setBackground(new java.awt.Color(204, 204, 204));
         tablesPane.setBounds(20, 10, 560, 440);
         desktopPane.add(tablesPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
         try {
@@ -391,6 +395,13 @@ public class MageFrame extends javax.swing.JFrame {
         desktopPane.add(deckEditorPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
         try {
             deckEditorPane.setMaximum(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
+        collectionViewerPane.setBounds(140, 50, -1, -1);
+        desktopPane.add(collectionViewerPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        try {
+            collectionViewerPane.setMaximum(true);
         } catch (java.beans.PropertyVetoException e1) {
             e1.printStackTrace();
         }
@@ -436,6 +447,19 @@ public class MageFrame extends javax.swing.JFrame {
         });
         mageToolbar.add(btnDeckEditor);
         mageToolbar.add(jSeparator2);
+
+        btnCollectionViewer.setText("Collection Viewer");
+        btnCollectionViewer.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnCollectionViewer.setFocusable(false);
+        btnCollectionViewer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCollectionViewer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCollectionViewer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCollectionViewerActionPerformed(evt);
+            }
+        });
+        mageToolbar.add(btnCollectionViewer);
+        mageToolbar.add(jSeparator6);
 
         btnPreferences.setText("Preferences");
         btnPreferences.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -500,8 +524,16 @@ public class MageFrame extends javax.swing.JFrame {
     private void btnDeckEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeckEditorActionPerformed
         this.gamePane.setVisible(false);
         this.tablesPane.setVisible(false);
+        this.collectionViewerPane.setVisible(false);
         showDeckEditor(DeckEditorMode.Constructed, null, null);
     }//GEN-LAST:event_btnDeckEditorActionPerformed
+
+    private void btnCollectionViewerActionPerformed(java.awt.event.ActionEvent evt) {
+        this.gamePane.setVisible(false);
+        this.tablesPane.setVisible(false);
+        this.deckEditorPane.setVisible(false);
+        showCollectionViewer();
+    }
 
     private void btnPreferencesActionPerformed(java.awt.event.ActionEvent evt) {
         PhasesDialog.main(new String[]{});
@@ -510,6 +542,7 @@ public class MageFrame extends javax.swing.JFrame {
     private void btnGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGamesActionPerformed
         this.gamePane.setVisible(false);
         this.deckEditorPane.setVisible(false);
+        this.collectionViewerPane.setVisible(false);
         this.tablesPane.setVisible(true);
         this.tablesPane.showTables();
     }//GEN-LAST:event_btnGamesActionPerformed
@@ -556,11 +589,16 @@ public class MageFrame extends javax.swing.JFrame {
         this.tablesPane.setVisible(false);
         this.gamePane.setVisible(false);
         this.deckEditorPane.setVisible(false);
+        this.collectionViewerPane.setVisible(false);
     }
 
     public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId) {
         this.deckEditorPane.setVisible(true);
         this.deckEditorPane.show(mode, deck, tableId);
+    }
+
+    public void showCollectionViewer() {
+        this.collectionViewerPane.setVisible(true);
     }
 
     public static CombatDialog getCombatDialog() {
@@ -608,10 +646,12 @@ public class MageFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnAbout;
     private javax.swing.JButton btnConnect;
     private javax.swing.JButton btnDeckEditor;
+    private javax.swing.JButton btnCollectionViewer;
     private javax.swing.JButton btnPreferences;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnGames;
     private mage.client.deckeditor.DeckEditorPane deckEditorPane;
+    private CollectionViewerPane collectionViewerPane;
     private static MageJDesktop desktopPane;
     private mage.client.game.GamePane gamePane;
     private javax.swing.JToolBar.Separator jSeparator1;
@@ -619,6 +659,7 @@ public class MageFrame extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator5;
+    private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JToolBar mageToolbar;
     private mage.client.table.TablesPane tablesPane;

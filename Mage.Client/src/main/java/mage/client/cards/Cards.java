@@ -120,7 +120,7 @@ public class Cards extends javax.swing.JPanel {
 	}
 
 	private void addCard(CardView card, BigCard bigCard, UUID gameId) {
-		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, Config.dimensions, gameId);
+		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, Config.dimensions, gameId, true);
 		cards.put(card.getId(), cardImg);
 		cardArea.add(cardImg);
 	}

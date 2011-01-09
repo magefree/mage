@@ -142,6 +142,9 @@ public class MageActionCallback implements ActionCallback {
                     }
 
                     try {
+                        if (session == null) {
+                            return;
+                        }
                         final Component popupContainer = session.getUI().getComponent(MageComponents.POPUP_CONTAINER);
                         Component popup2 = session.getUI().getComponent(MageComponents.CARD_INFO_PANE);
                         ((CardInfoPane) popup2).setCard(data.card);
@@ -211,6 +214,9 @@ public class MageActionCallback implements ActionCallback {
             jPopupMenu.setVisible(false);
         }
         try {
+            if (session == null) {
+                return;
+            }
             Component popupContainer = session.getUI().getComponent(MageComponents.POPUP_CONTAINER);
             popupContainer.setVisible(false);
         } catch (Exception e2) {

@@ -101,7 +101,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
 	}
 
 	private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle) {
-		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, Config.dimensions, gameId);
+		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, Config.dimensions, gameId, true);
 		cardImg.setBounds(rectangle);
 		cardArea.add(cardImg);
 		cardArea.moveToFront(cardImg);

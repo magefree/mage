@@ -21,8 +21,8 @@ public interface MagePlugins {
 	void shutdown();
 	void updateGamePanel(Map<String, JComponent> ui);
 	JComponent updateTablePanel(Map<String, JComponent> ui);
-	MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, CardDimensions dimension, UUID gameId);
-	MageCard getMageCard(CardView card, BigCard bigCard, CardDimensions dimension, UUID gameId);
+	MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean canBeFoil);
+	MageCard getMageCard(CardView card, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean canBeFoil);
 	boolean isThemePluginLoaded();
 	boolean isCardPluginLoaded();
 	boolean isCounterPluginLoaded();

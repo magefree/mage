@@ -1,5 +1,6 @@
 package mage.client.components.arcane;
 
+import mage.client.cards.CardsStorage;
 import mage.client.constants.Constants;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.client.util.gui.ImageResizeUtil;
@@ -18,6 +19,7 @@ public class ManaSymbols {
 	private static final Logger log = Logger.getLogger(ManaSymbols.class);
 	static private final Map<String, Image> manaImages = new HashMap<String, Image>();
 	static private final Map<String, Image> manaImagesOriginal = new HashMap<String, Image>();
+    static private final Map<String, Image> setImages = new HashMap<String, Image>();
 	static private Pattern replaceSymbolsPattern = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
     static private boolean noManaSymbols = false;
 
@@ -40,10 +42,32 @@ public class ManaSymbols {
 				manaImagesOriginal.put(symbol, image);
 			} catch (Exception e) {}
 		}
+        for (String set : CardsStorage.getSetCodes()) {
+            String _set = set.equals("CON") ? "CFX" : set;
+            File file = new File(Constants.RESOURCE_PATH_SET + _set + ".jpg");
+            try {
+				Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
+                int width = image.getWidth(null);
+                if (width > 21) {
+                    int h = image.getHeight(null);
+                    if (h > 0) {
+                        Rectangle r = new Rectangle(21, (int)(h * 21.0f / width));
+                        BufferedImage resized = ImageResizeUtil.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
+                        setImages.put(set, resized);
+                    }
+                } else {
+				    setImages.put(set, image);
+                }
+			} catch (Exception e) {}
+        }
 	}
 
 	static public Image getManaSymbolImage(String symbol) {
 		return manaImagesOriginal.get(symbol);
+	}
+
+    static public Image getSetSymbolImage(String set) {
+		return setImages.get(set);
 	}
 	
 	static public void draw (Graphics g, String manaCost, int x, int y) {
