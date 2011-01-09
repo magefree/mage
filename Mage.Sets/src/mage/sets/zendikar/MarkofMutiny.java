@@ -35,6 +35,7 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.AddCountersTargetEffect;
 import mage.abilities.effects.common.GainAbilityTargetEffect;
 import mage.abilities.effects.common.GainControlTargetEffect;
+import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.counters.common.PlusOneCounter;
@@ -55,6 +56,7 @@ public class MarkofMutiny extends CardImpl<MarkofMutiny> {
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
 		this.getSpellAbility().addEffect(new AddCountersTargetEffect(new PlusOneCounter()));
 		this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+		this.getSpellAbility().addEffect(new UntapTargetEffect());
     }
 
     public MarkofMutiny (final MarkofMutiny card) {
