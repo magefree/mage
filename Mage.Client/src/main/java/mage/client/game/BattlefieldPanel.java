@@ -156,7 +156,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 	}
 
 	private void addPermanent(PermanentView permanent, final int count) {
-		final MagePermanent perm = Plugins.getInstance().getMagePermanent(permanent, bigCard, Config.dimensions, gameId);
+		final MagePermanent perm = Plugins.getInstance().getMagePermanent(permanent, bigCard, Config.dimensions, gameId, true);
 		if (!Plugins.getInstance().isCardPluginLoaded()) {
 			perm.setBounds(findEmptySpace(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight)));
 		} else {

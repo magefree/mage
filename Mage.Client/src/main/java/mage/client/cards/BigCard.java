@@ -69,9 +69,9 @@ public class BigCard extends JComponent {
     protected float hue = 0.005f;
     protected float dh = 0.005f;
 
-    static private final int DEFAULT_DELAY_PERIOD = 40;
+    static private final int DEFAULT_DELAY_PERIOD = 30;
     static private final float LEFT_BOUNDARY = 0.0f;
-    static private final float RIGHT_BOUNDARY = 0.1f;
+    static private final float RIGHT_BOUNDARY = 1f;
 
     public BigCard() {
         initComponents();
@@ -247,6 +247,7 @@ public class BigCard extends JComponent {
 
         setFocusable(false);
         setMinimumSize(new Dimension(FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT));
+        setMaximumSize(new Dimension(FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT));
         setOpaque(false);
         setPreferredSize(getMinimumSize());
         setLayout(null);

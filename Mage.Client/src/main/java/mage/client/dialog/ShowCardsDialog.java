@@ -100,7 +100,7 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 			tmp.setAbility(card); // cross-reference, required for ability picker
 			card = tmp;
 		}
-		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, dimension, gameId);
+		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, dimension, gameId, true);
 		cardImg.setBounds(rectangle);
 		cardArea.add(cardImg);
 		cardArea.moveToFront(cardImg);

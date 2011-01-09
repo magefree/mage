@@ -77,6 +77,7 @@ public final class Constants {
 
     public static final String RESOURCE_PATH_MANA_LARGE = IO.imageBaseDir + "symbols" + File.separator + "large";
 	public static final String RESOURCE_PATH_MANA_MEDIUM = IO.imageBaseDir + "symbols" + File.separator + "medium";
+    public static final String RESOURCE_PATH_SET = IO.imageBaseDir + "sets" + File.separator;
 
     public interface IO {
 		public static final String imageBaseDir = "plugins" + File.separator + "images" + File.separator;

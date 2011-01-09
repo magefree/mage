@@ -25,8 +25,8 @@ import net.xeoh.plugins.base.Plugin;
  * @author nantuko
  */
 public interface CardPlugin extends Plugin {
-	MagePermanent getMagePermanent(PermanentView permanent, CardDimensions dimension, UUID gameId, ActionCallback callback);
-	MagePermanent getMageCard(CardView permanent, CardDimensions dimension, UUID gameId, ActionCallback callback);
+	MagePermanent getMagePermanent(PermanentView permanent, CardDimensions dimension, UUID gameId, ActionCallback callback, boolean canBeFoil);
+	MagePermanent getMageCard(CardView permanent, CardDimensions dimension, UUID gameId, ActionCallback callback, boolean canBeFoil);
 	void sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> cards);
 	void downloadImages(Set<Card> allCards);
 	void downloadSymbols();
