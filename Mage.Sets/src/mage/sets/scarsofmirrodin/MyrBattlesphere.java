@@ -47,6 +47,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.token.MyrToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -78,18 +79,6 @@ public class MyrBattlesphere extends CardImpl<MyrBattlesphere> {
 		return new MyrBattlesphere(this);
 	}
 
-}
-
-class MyrToken extends Token {
-
-	public MyrToken() {
-		super("Myr", "1/1 colorless Myr artifact creature");
-		cardType.add(CardType.CREATURE);
-		cardType.add(CardType.ARTIFACT);
-		subtype.add("Myr");
-		power = new MageInt(1);
-		toughness = new MageInt(1);
-	}
 }
 
 class MyrBattlesphereAbility extends TriggeredAbilityImpl<MyrBattlesphereAbility> {
