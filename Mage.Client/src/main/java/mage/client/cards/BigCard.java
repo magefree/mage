@@ -106,6 +106,10 @@ public class BigCard extends JComponent {
         return cardId;
     }
 
+    public void resetCardId() {
+        this.cardId = null;
+    }
+
     private void drawText(java.util.List<String> strings) {
         text.setText("");
         StyledDocument doc = text.getStyledDocument();

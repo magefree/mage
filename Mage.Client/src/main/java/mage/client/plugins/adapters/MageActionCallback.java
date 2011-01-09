@@ -40,9 +40,8 @@ public class MageActionCallback implements ActionCallback {
     protected static DefaultActionCallback defaultCallback = DefaultActionCallback.getInstance();
     protected static Session session = MageFrame.getSession();
     private CardView popupCard;
-    private Thread t;
-    private int state = 0;
     private JComponent cardInfoPane;
+    private volatile boolean state = false;
 
     public MageActionCallback() {
     }
@@ -186,14 +185,17 @@ public class MageActionCallback implements ActionCallback {
         }
 
         MageCard card = (MageCard) data.component;
-        if (card.getOriginal().getId() != bigCard.getCardId()) {
+        if (!state || card.getOriginal().getId() != bigCard.getCardId()) {
             synchronized (MageActionCallback.class) {
-                if (card.getOriginal().getId() != bigCard.getCardId()) {
+                if (!state || card.getOriginal().getId() != bigCard.getCardId()) {
+                    if (!state) {
+                        bigCard.resetCardId();
+                    }
+                    state = true;
                     Image image = card.getImage();
                     if (image != null && image instanceof BufferedImage) {
                         image = ImageHelper.getResizedImage((BufferedImage) image, bigCard.getWidth(), bigCard.getHeight());
                         bigCard.setCard(card.getOriginal().getId(), image, card.getOriginal().getRules(), card.isFoil());
-                        bigCard.showTextComponent();
                         if (card.getOriginal().isAbility()) {
                             bigCard.showTextComponent();
                         } else {
@@ -232,6 +234,7 @@ public class MageActionCallback implements ActionCallback {
     @Override
     public void mouseExited(MouseEvent e, final TransferData data) {
         hidePopup();
+        this.state = false;
         ArrowBuilder.removeAllArrows();
     }
 
