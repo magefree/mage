@@ -169,6 +169,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		for (Ability ability: this.abilities) {
 			ability.reset(game);
 		}
+        this.controllerId = this.ownerId;
 	}
 
 	@Override
