@@ -11,8 +11,8 @@ import static org.mage.plugins.card.dl.DownloadJob.toFile;
 
 public class GathererSets implements Iterable<DownloadJob> {
     private static final File     outDir  = new File("plugins/images/sets");
-    private static final String[] symbols = { "M10", "M11", "ARB", "DIS", "GPT", "RAV", "ALA",
-                                              "ZEN", "WWK", "ROE", "SOM", "10E", "CFX", "HOP" };
+    private static final String[] symbols = { "M10", "M11", "ARB", "DIS", "GPT", "RAV", "ALA", "MRD",
+                                              "ZEN", "WWK", "ROE", "SOM", "10E", "CFX", "HOP", };
 
     @Override
     public Iterator<DownloadJob> iterator() {
