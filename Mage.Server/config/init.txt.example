@@ -1,3 +1,7 @@
+#
+# Rename this file to init.txt if you want to start using it
+#
+
 # You may add any card to any zone here
 #
 # Format: <zone>:<nickname>:<card name>:<amount>
@@ -6,12 +10,9 @@
 # nickname - Player's name you connect to the game with
 #
 #
-hand:player:Giant Grows:1
-graveyard:player:Snapsail Glider:2
-graveyard:computer:Snapsail Glider:2
-battlefield:player:Wild Nacatl:1
-battlefield:player:Spikeshot Elder:1
-battlefield:player:Mountain:5
-battlefield:player:Forest:5
-
-
+graveyard:player:Plains:1
+battlefield:player:Snapsail Glider:1
+battlefield:computer:Island:2
+battlefield:player:Plains:3
+hand:player:Whispersilk Cloak:1
+hand:computer:Lightning Bolt:1
