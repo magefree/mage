@@ -26,40 +26,38 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.zendikar;
+package mage.filter.common;
 
-import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.abilities.effects.common.DestroyAllEffect;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterCard;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author nantuko
  */
-public class DayOfJudgment extends CardImpl<DayOfJudgment> {
+public class FilterArtifactCard extends FilterCard<FilterArtifactCard> {
 
-	public DayOfJudgment(UUID ownerId) {
-		super(ownerId, 9, "Day of Judgment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-		this.expansionSetCode = "ZEN";
-		this.color.setWhite(true);
-		this.getSpellAbility().addEffect(new DestroyAllEffect(FilterCreaturePermanent.getDefault()));
+	private static final FilterArtifactCard defaultFilter = new FilterArtifactCard();
+
+	public FilterArtifactCard() {
+		this("artifact");
 	}
 
-	public DayOfJudgment(final DayOfJudgment card) {
-		super(card);
+	public FilterArtifactCard(String name) {
+		super(name);
+		this.cardType.add(CardType.ARTIFACT);
+	}
+
+	public FilterArtifactCard(final FilterArtifactCard filter) {
+		super(filter);
+	}
+
+	public static FilterArtifactCard getDefault() {
+		return defaultFilter;
 	}
 
 	@Override
-	public DayOfJudgment copy() {
-		return new DayOfJudgment(this);
+	public FilterArtifactCard copy() {
+		return new FilterArtifactCard(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "123645_typ_reg_sty_010.jpg";
-	}
-
 }
