@@ -14,6 +14,7 @@ Mage.Server.Plugins/Mage.Game.TwoPlayerDuel/target
 Mage.Server.Plugins/Mage.Player.AI/target
 Mage.Server.Plugins/Mage.Player.AIMinimax/target
 Mage.Server.Plugins/Mage.Player.Human/target
+Mage.Server.Plugins/Mage.Draft.8PlayerBooster/target
 Mage.Server/target
 Mage.Sets/target
 Mage.Tests/target
