@@ -72,7 +72,7 @@ public class DraftPanel extends javax.swing.JPanel {
 			new Listener<Event> () {
 				@Override
 				public void event(Event event) {
-					if (event.getEventName().equals("double-click")) {
+					if (event.getEventName().equals("pick-a-card")) {
 						session.sendCardPick(draftId, (UUID)event.getSource());
 					}
 				}
