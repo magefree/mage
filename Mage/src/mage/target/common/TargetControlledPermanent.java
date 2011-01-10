@@ -28,6 +28,7 @@
 
 package mage.target.common;
 
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPermanent;
 
@@ -49,7 +50,7 @@ public class TargetControlledPermanent<T extends TargetControlledPermanent<T>> e
 		this(1, 1, filter, false);
 	}
 
-	public TargetControlledPermanent(int minNumTargets, int maxNumTargets, FilterControlledPermanent filter, boolean notTarget) {
+	public TargetControlledPermanent(int minNumTargets, int maxNumTargets, FilterPermanent filter, boolean notTarget) {
 		super(minNumTargets, maxNumTargets, filter, notTarget);
 		this.targetName = filter.getMessage();
 	}

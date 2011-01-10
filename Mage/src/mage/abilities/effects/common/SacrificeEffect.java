@@ -36,7 +36,8 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
+import mage.target.Target;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -66,13 +67,13 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getTargets().getFirstTarget());
 		filter.setTargetController(TargetController.YOU);
-		TargetPermanent target = new TargetPermanent(count, count, filter, false);
+		Target target = new TargetControlledPermanent(count, count, filter, false);
 
 		//A spell or ability could have removed the only legal target this player
 		//had, if thats the case this ability should fizzle.
 		if (target.canChoose(player.getId(), game)) {
 			boolean abilityApplied = false;
-			while (!target.isChosen()) {
+			while (!target.isChosen() && target.canChoose(player.getId(), game)) {
 				player.choose(Outcome.Sacrifice, target, game);
 			}
 

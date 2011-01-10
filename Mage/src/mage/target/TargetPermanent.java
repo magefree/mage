@@ -127,7 +127,9 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 	 */
 	@Override
 	public boolean canChoose(UUID sourceControllerId, Game game) {
-		return game.getBattlefield().count(filter, sourceControllerId, game) >= this.minNumberOfTargets;
+		int possibleTargets = game.getBattlefield().count(filter, sourceControllerId, game);
+		return possibleTargets >= this.minNumberOfTargets &&
+				this.getTargets().size() < possibleTargets;
 	}
 
 	@Override
