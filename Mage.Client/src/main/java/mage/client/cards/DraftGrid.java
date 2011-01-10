@@ -59,7 +59,7 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
 				curRow++;
 			}
 		}
-		
+		repaint();
 	}
 
 	public void addCardEventListener(Listener<Event> listener) {
