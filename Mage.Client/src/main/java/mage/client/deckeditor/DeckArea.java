@@ -51,6 +51,10 @@ public class DeckArea extends javax.swing.JPanel {
         sideboardList.setOpaque(false);
     }
 
+	public void showSideboard(boolean show) {
+		this.sideboardList.setVisible(show);
+	}
+
 	public CardsList getDeckList() {
 		return deckList;
 	}

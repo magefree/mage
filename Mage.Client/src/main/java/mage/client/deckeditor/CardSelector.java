@@ -70,15 +70,17 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 	    jScrollPane1.getViewport().setOpaque(false);
     }
 
-	public void loadCards(List<Card> cards, BigCard bigCard) {
+	public void loadCards(List<Card> sideboard, BigCard bigCard) {
 		this.bigCard = bigCard;
 		this.btnBooster.setVisible(false);
 		this.btnClear.setVisible(false);
 		this.cbExpansionSet.setVisible(false);
-		cards.clear();
-		for (Card card: cards) {
-			cards.add(card);
+		this.cards.clear();
+		for (Card card: sideboard) {
+			this.cards.add(card);
 		}
+		initFilter();
+		filterCards();
 	}
 
 	public void loadCards(BigCard bigCard) {
@@ -96,6 +98,12 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		cbExpansionSet.setModel(new DefaultComboBoxModel(l));
 //		cbExpansionSet.insertItemAt("All sets", 0);
 		cbExpansionSet.setSelectedIndex(0);
+		initFilter();
+		filter.getExpansionSetCode().add(((ExpansionSet)this.cbExpansionSet.getSelectedItem()).getCode());
+		filterCards();
+	}
+
+	private void initFilter() {
 		filter.setUseColor(true);
 		filter.getColor().setBlack(true);
 		filter.getColor().setBlue(true);
@@ -114,8 +122,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		filter.getCardType().add(CardType.PLANESWALKER);
 		filter.getCardType().add(CardType.SORCERY);
 		filter.setScopeCardType(ComparisonScope.Any);
-		filter.getExpansionSetCode().add(((ExpansionSet)this.cbExpansionSet.getSelectedItem()).getCode());
-		filterCards();
 	}
 
 	private void filterCards() {
@@ -145,8 +151,20 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		return this.cardGrid;
 	}
 
-	public List<Card> getCards() {
-		return cards;
+	public Card getCard(UUID cardId) {
+		if (!cards.isEmpty()) {
+			for (Card card: cards) {
+				if (card.getId().equals(cardId))
+					return card;
+			}
+		}
+		else {
+			for (Card card: CardsStorage.getAllCards()) {
+				if (card.getId().equals(cardId))
+					return card;
+			}
+		}
+		return null;
 	}
 
     /** This method is called from within the constructor to

@@ -70,6 +70,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 	private Deck deck = new Deck();
     private boolean isShowCardInfo = false;
 	private UUID tableId;
+	private DeckEditorMode mode;
 
 
     /** Creates new form DeckEditorPanel */
@@ -91,11 +92,14 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		if (deck != null) {
 			this.deck = deck;
 			this.tableId = tableId;
+			this.mode = mode;
 			this.btnSubmit.setVisible(mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited);
 			this.cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard);
+			this.deckArea.showSideboard(false);
 		}
 		else {
 			this.cardSelector.loadCards(this.bigCard);
+			this.deckArea.showSideboard(true);
 		}
 		init();
 	}
@@ -109,16 +113,14 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				@Override
 				public void event(Event event) {
 					if (event.getEventName().equals("double-click")) {
-						for (Card card: cardSelector.getCards()) {
-							if (card.getId().equals((UUID)event.getSource())) {
-								deck.getCards().add(createCard(card.getClass()));
-                                if (System.getProperty("draft") != null) {
-                                    cardSelector.getCardsList().removeCard(card.getId());
-                                }
-                                if (cardInfoPane instanceof  CardInfoPane)  {
-                                    ((CardInfoPane)cardInfoPane).setCard(new CardView(card));
-                                }
-                                break;
+						Card card = cardSelector.getCard((UUID) event.getSource());
+						if (card != null) {
+							deck.getCards().add(createCard(card.getClass()));
+							if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
+								cardSelector.getCardsList().removeCard(card.getId());
+							}
+							if (cardInfoPane instanceof  CardInfoPane)  {
+								((CardInfoPane)cardInfoPane).setCard(new CardView(card));
 							}
 						}
 						refreshDeck();
