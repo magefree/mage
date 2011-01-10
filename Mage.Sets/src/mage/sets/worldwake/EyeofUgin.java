@@ -96,6 +96,8 @@ public class EyeofUgin extends CardImpl<EyeofUgin> {
  */
 class EyeofUginCostReductionAbility extends TriggeredAbilityImpl<EyeofUginCostReductionAbility> {
 
+	private static final String abilityText = "Colorless Eldrazi spells you cast cost {2} less to cast.";
+
 	EyeofUginCostReductionAbility() {
 		super(Zone.BATTLEFIELD, null);
 	}
@@ -123,5 +125,10 @@ class EyeofUginCostReductionAbility extends TriggeredAbilityImpl<EyeofUginCostRe
 	@Override
 	public EyeofUginCostReductionAbility copy() {
 		return new EyeofUginCostReductionAbility(this);
+	}
+
+	@Override
+	public String getRule() {
+		return abilityText;
 	}
 }
