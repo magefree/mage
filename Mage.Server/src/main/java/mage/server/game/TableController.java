@@ -57,6 +57,7 @@ import mage.game.match.Match;
 import mage.game.Seat;
 import mage.game.draft.Draft;
 import mage.game.draft.DraftOptions;
+import mage.game.draft.DraftPlayer;
 import mage.game.events.Listener;
 import mage.game.events.TableEvent;
 import mage.game.match.MatchOptions;
@@ -111,6 +112,9 @@ public class TableController {
 					switch (event.getEventType()) {
 						case SIDEBOARD:
 							sideboard(event.getPlayerId(), event.getDeck());
+							break;
+						case CONSTRUCT:
+							construct(event.getPlayerId(), event.getDeck());
 							break;
 						case SUBMIT_DECK:
 							submitDeck(event.getPlayerId(), event.getDeck());
@@ -167,21 +171,35 @@ public class TableController {
 	}
 
 	public synchronized boolean submitDeck(UUID sessionId, DeckCardLists deckList) throws GameException {
-		if (table.getState() != TableState.SIDEBOARDING) {
+		if (table.getState() != TableState.SIDEBOARDING && table.getState() != TableState.CONSTRUCTING) {
 			return false;
 		}
-		MatchPlayer player = match.getPlayer(sessionPlayerMap.get(sessionId));
+		String playerName;
+		if (table.getState() == TableState.SIDEBOARDING) {
+			MatchPlayer player = match.getPlayer(sessionPlayerMap.get(sessionId));
+			playerName = player.getPlayer().getName();
+		}
+		else {
+			DraftPlayer player = draft.getPlayer(sessionPlayerMap.get(sessionId));
+			playerName = player.getPlayer().getName();
+		}
 		Deck deck = Deck.load(deckList);
 		if (!Main.server.isTestMode() && !validDeck(deck)) {
-			throw new GameException(player.getPlayer().getName() + " has an invalid deck for this format");
+			throw new GameException(playerName + " has an invalid deck for this format");
 		}
 		submitDeck(sessionPlayerMap.get(sessionId), deck);
 		return true;
 	}
 
 	private void submitDeck(UUID playerId, Deck deck) {
-		MatchPlayer player = match.getPlayer(playerId);
-		player.submitDeck(deck);
+		if (table.getState() == TableState.SIDEBOARDING) {
+			MatchPlayer player = match.getPlayer(playerId);
+			player.submitDeck(deck);
+		}
+		else if (table.getState() == TableState.CONSTRUCTING) {
+			DraftPlayer player = draft.getPlayer(playerId);
+			player.submitDeck(deck);
+		}
 	}
 
 	public boolean watchTable(UUID sessionId) {
@@ -198,7 +216,6 @@ public class TableController {
 		}
 		return null;
 	}
-
 
 	public boolean replayTable(UUID sessionId) {
 		if (table.getState() != TableState.FINISHED) {
@@ -280,6 +297,15 @@ public class TableController {
 		}
 	}
 
+	private void construct() {
+		table.construct();
+		for (DraftPlayer player: draft.getPlayers()) {
+			player.setConstructing();
+			player.getPlayer().construct(table, player.getDeck());
+		}
+		while (!draft.isDoneConstructing()){}
+	}
+
 	private void construct(UUID playerId, Deck deck) {
 		SessionManager sessionManager = SessionManager.getInstance();
 		for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
@@ -304,6 +330,11 @@ public class TableController {
 		} catch (GameException ex) {
 			logger.log(Level.SEVERE, null, ex);
 		}
+	}
+
+	public void endDraft() {
+		construct();
+		
 	}
 
 	public void swapSeats(int seatNum1, int seatNum2) {

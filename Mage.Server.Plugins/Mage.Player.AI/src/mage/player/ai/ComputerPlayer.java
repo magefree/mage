@@ -775,6 +775,19 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	@Override
+	public void construct(Table table, Deck deck) {
+		//TODO: improve this
+		if (deck.getCards().size() < 40) {
+			while (deck.getCards().size() < 40) {
+				Card card = deck.getSideboard().iterator().next();
+				deck.getCards().add(card);
+				deck.getSideboard().remove(card);
+			}
+		}
+		table.fireSubmitDeckEvent(playerId, deck);
+	}
+
+	@Override
 	public void pickCard(List<Card> cards, Deck deck, Draft draft) {
 		//TODO: improve this
 		draft.addPick(playerId, cards.get(0).getId());

@@ -70,8 +70,22 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 	    jScrollPane1.getViewport().setOpaque(false);
     }
 
+	public void loadCards(List<Card> cards, BigCard bigCard) {
+		this.bigCard = bigCard;
+		this.btnBooster.setVisible(false);
+		this.btnClear.setVisible(false);
+		this.cbExpansionSet.setVisible(false);
+		cards.clear();
+		for (Card card: cards) {
+			cards.add(card);
+		}
+	}
+
 	public void loadCards(BigCard bigCard) {
 		this.bigCard = bigCard;
+		this.btnBooster.setVisible(true);
+		this.btnClear.setVisible(true);
+		this.cbExpansionSet.setVisible(true);
 		Object[] l = Sets.getInstance().values().toArray();
 		Arrays.sort(l, new Comparator<Object>() {
 		    @Override
@@ -106,13 +120,21 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
 	private void filterCards() {
 		try {
+			List<Card> filteredCards = new ArrayList<Card>();
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			cards.clear();
-			for (Card card: CardsStorage.getAllCards()) {
-				if (filter.match(card))
-					cards.add(card);
+			if (!cards.isEmpty()) {
+				for (Card card: cards) {
+					if (filter.match(card))
+						filteredCards.add(card);
+				}
 			}
-			this.cardGrid.loadCards(new CardsView(cards), bigCard, null);
+			else {
+				for (Card card: CardsStorage.getAllCards()) {
+					if (filter.match(card))
+						filteredCards.add(card);
+				}
+			}
+			this.cardGrid.loadCards(new CardsView(filteredCards), bigCard, null);
 		}
 		finally {
 			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -466,7 +488,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
 	private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
 		cards.clear();
-		this.cardGrid.loadCards(new CardsView(cards), bigCard, null);
+		filterCards();
+//		this.cardGrid.loadCards(new CardsView(cards), bigCard, null);
 	}//GEN-LAST:event_btnClearActionPerformed
 
 	private void btnBoosterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoosterActionPerformed
@@ -474,7 +497,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		for (Card card: booster) {
 			cards.add(card);
 		}
-		this.cardGrid.loadCards(new CardsView(cards), bigCard, null);
+		filterCards();
+//		this.cardGrid.loadCards(new CardsView(cards), bigCard, null);
 	}//GEN-LAST:event_btnBoosterActionPerformed
 
 

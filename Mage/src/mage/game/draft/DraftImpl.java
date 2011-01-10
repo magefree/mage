@@ -184,6 +184,11 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
 	}
 
 	@Override
+	public void fireEndDraftEvent() {
+		tableEventSource.fireTableEvent(EventType.END, null, this);
+	}
+
+	@Override
 	public void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener) {
 		playerQueryEventSource.addListener(listener);
 	}
@@ -207,6 +212,15 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
 
 	protected void startTournament() {
 		//TODO: implement this
+	}
+
+	@Override
+	public boolean isDoneConstructing() {
+		for (DraftPlayer player: this.players.values()) {
+			if (!player.isDoneConstructing())
+				return false;
+		}
+		return true;
 	}
 
 }

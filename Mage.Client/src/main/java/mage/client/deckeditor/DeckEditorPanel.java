@@ -52,6 +52,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -70,6 +71,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private boolean isShowCardInfo = false;
 	private UUID tableId;
 
+
     /** Creates new form DeckEditorPanel */
     public DeckEditorPanel() {
         initComponents();
@@ -86,17 +88,21 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }
 
 	public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId) {
-		if (deck != null)
+		if (deck != null) {
 			this.deck = deck;
-		this.tableId = tableId;
-		showDeckEditor(mode);
+			this.tableId = tableId;
+			this.btnSubmit.setVisible(mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited);
+			this.cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard);
+		}
+		else {
+			this.cardSelector.loadCards(this.bigCard);
+		}
+		init();
 	}
 
-	public void showDeckEditor(DeckEditorMode mode) {
-		this.cardSelector.loadCards(this.bigCard);
+	private void init() {
 		this.cardSelector.setVisible(true);
 		this.jPanel1.setVisible(true);
-		this.btnSubmit.setVisible(mode == DeckEditorMode.Sideboard);
 		this.cardSelector.getCardsList().clearCardEventListeners();
 		this.cardSelector.getCardsList().addCardEventListener(
 			new Listener<Event> () {

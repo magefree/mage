@@ -46,6 +46,7 @@ public class DraftPlayer {
 	protected Deck deck;
 	protected List<Card> booster;
 	protected boolean picking;
+	protected boolean doneConstructing;
 
 	public DraftPlayer(Player player) {
 		id = UUID.randomUUID();
@@ -89,6 +90,19 @@ public class DraftPlayer {
 
 	public boolean isPicking() {
 		return picking;
+	}
+
+	public void setConstructing() {
+		this.doneConstructing = false;
+	}
+
+	public void submitDeck(Deck deck) {
+		this.deck = deck;
+		this.doneConstructing = true;
+	}
+
+	public boolean isDoneConstructing() {
+		return this.doneConstructing;
 	}
 
 }

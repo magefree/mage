@@ -221,6 +221,7 @@ public final class Constants {
 		DRAFTING ("Drafting"),
 		DUELING ("Dueling"),
 		SIDEBOARDING ("Sideboarding"),
+		CONSTRUCTING ("Constructing"),
 		FINISHED ("Finished");
 
 		private String text;

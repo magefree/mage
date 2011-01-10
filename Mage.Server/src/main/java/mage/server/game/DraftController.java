@@ -53,12 +53,10 @@ import mage.view.DraftView;
  */
 public class DraftController {
 
-//	private static ExecutorService gameExecutor = ThreadExecutor.getInstance().getGameExecutor();
 	private final static Logger logger = Logging.getLogger(GameController.class.getName());
 	public static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
 
 	private ConcurrentHashMap<UUID, DraftSession> draftSessions = new ConcurrentHashMap<UUID, DraftSession>();
-//	private ConcurrentHashMap<UUID, GameWatcher> watchers = new ConcurrentHashMap<UUID, GameWatcher>();
 	private ConcurrentHashMap<UUID, UUID> sessionPlayerMap;
 	private UUID draftSessionId;
 	private Draft draft;
@@ -82,6 +80,9 @@ public class DraftController {
 					switch (event.getEventType()) {
 						case UPDATE:
 							updateDraft();
+							break;
+						case END:
+							endDraft();
 							break;
 					}
 				}
@@ -146,6 +147,10 @@ public class DraftController {
 		draft.leave(getPlayerId(sessionId));
 	}
 
+	private void endDraft() {
+		TableManager.getInstance().endDraft(tableId);
+	}
+
 	public void kill(UUID sessionId) {
 		if (sessionPlayerMap.containsKey(sessionId)) {
 			draftSessions.get(sessionPlayerMap.get(sessionId)).setKilled();
@@ -166,7 +171,7 @@ public class DraftController {
 		for (final DraftSession draftSession: draftSessions.values()) {
 			draftSession.gameOver(message);
 		}
-		TableManager.getInstance().endGame(tableId);
+		TableManager.getInstance().endDraft(tableId);
 	}
 
 	public UUID getSessionId() {

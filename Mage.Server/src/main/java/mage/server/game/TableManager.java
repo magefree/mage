@@ -134,6 +134,10 @@ public class TableManager {
 		controllers.get(tableId).endGame();
 	}
 
+	public void endDraft(UUID tableId) {
+		controllers.get(tableId).endDraft();
+	}
+
 	public GameReplay createReplay(UUID tableId) {
 		return controllers.get(tableId).createReplay();
 	}

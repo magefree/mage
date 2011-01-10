@@ -53,7 +53,7 @@ public class BoosterDraft extends DraftImpl<BoosterDraft> {
 				fireUpdatePlayersEvent();
 			}
 		}
-		startTournament();
+		this.fireEndDraftEvent();
 	}
 
 }

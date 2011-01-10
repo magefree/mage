@@ -43,7 +43,7 @@ import mage.game.draft.Draft;
 public class TableEvent extends EventObject implements ExternalEvent, Serializable {
 
 	public enum EventType {
-		UPDATE, INFO, REVEAL, LOOK, SIDEBOARD, SUBMIT_DECK
+		UPDATE, INFO, REVEAL, LOOK, SIDEBOARD, CONSTRUCT, SUBMIT_DECK, END
 	}
 
 	private Game game;

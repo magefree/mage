@@ -480,6 +480,11 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	}
 
 	@Override
+	public void construct(Table table, Deck deck) {
+		table.fireConstructEvent(playerId, deck);
+	}
+
+	@Override
 	public void pickCard(List<Card> cards, Deck deck, Draft draft) {
 		draft.firePickCardEvent(playerId);
 	}

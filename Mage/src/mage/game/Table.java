@@ -147,12 +147,20 @@ public class Table implements Serializable {
 		state = TableState.SIDEBOARDING;
 	}
 
+	public void construct() {
+		state = TableState.CONSTRUCTING;
+	}
+
 	public String getName() {
 		return this.name;
 	}
 
 	public void fireSideboardEvent(UUID playerId, Deck deck) {
 		tableEventSource.fireTableEvent(EventType.SIDEBOARD, playerId, deck);
+	}
+
+	public void fireConstructEvent(UUID playerId, Deck deck) {
+		tableEventSource.fireTableEvent(EventType.CONSTRUCT, playerId, deck);
 	}
 
 	public void fireSubmitDeckEvent(UUID playerId, Deck deck) {
@@ -162,4 +170,5 @@ public class Table implements Serializable {
 	public void addTableEventListener(Listener<TableEvent> listener) {
 		tableEventSource.addListener(listener);
 	}
+
 }
