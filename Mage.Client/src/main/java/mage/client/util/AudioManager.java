@@ -24,7 +24,7 @@ public class AudioManager {
     public static AudioManager getManager() {
         if (audioManager == null) {
             audioManager = new AudioManager();
-            audioManager.nextPageClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnNextPage.wav");
+            audioManager.nextPageClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPrevPage.wav"); //sounds better than OnNextPage
             audioManager.prevPageClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPrevPage.wav");
             audioManager.nextPhaseClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnNextPhase.wav");
             audioManager.endTurnClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnEndTurn.wav");
