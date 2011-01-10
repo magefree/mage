@@ -189,7 +189,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 		String[] symbols = mana.split("^\\{|\\}\\{|\\}$");
 		for (String symbol: symbols) {
 			if (symbol.length() > 0) {
-				if (symbol.length() == 1) {
+				if (symbol.length() == 1 || isNumeric(symbol)) {
 					if (Character.isDigit(symbol.charAt(0))) {
 						this.add((T)new GenericManaCost(Integer.valueOf(symbol)));
 					}
@@ -210,6 +210,16 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 					}
 				}
 			}
+		}
+	}
+
+	private boolean isNumeric ( String symbol ) {
+		try {
+			Integer.parseInt(symbol);
+			return true;
+		}
+		catch ( NumberFormatException e ) {
+			return false;
 		}
 	}
 
