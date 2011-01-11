@@ -12,6 +12,9 @@
 		<gameType name="Two Player Duel" jar="Mage-Game-TwoPlayerDuel-${project.version}.jar" className="mage.game.TwoPlayerMatch" typeName="mage.game.TwoPlayerDuelType"/>
 		<gameType name="Free For All" jar="Mage-Game-FreeForAll-${project.version}.jar" className="mage.game.FreeForAllMatch" typeName="mage.game.FreeForAllType"/>
 	</gameTypes>
+	<draftTypes>
+		<draftType name="8 Player Booster" jar="mage-draft-8playerbooster.jar" className="mage.draft.BoosterDraft"/>
+	</draftTypes>
 	<deckTypes>
 		<deckType name="Constructed" jar="Mage-Deck-Constructed-${project.version}.jar" className="mage.deck.Constructed"/>
 		<deckType name="Limited" jar="Mage-Deck-Limited-${project.version}.jar" className="mage.deck.Limited"/>

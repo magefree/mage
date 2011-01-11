@@ -132,3 +132,66 @@ class EyeofUginCostReductionAbility extends TriggeredAbilityImpl<EyeofUginCostRe
 		return abilityText;
 	}
 }
+
+//class EyeofUginCostReductionEffect extends ContinuousEffectImpl<EyeofUginCostReductionEffect> {
+//
+//	private static final String effectText = "Colorless Eldrazi spells you cast cost {2} less to cast";
+//
+//	EyeofUginCostReductionEffect ( ) {
+//		super(Duration.WhileOnBattlefield, Layer.TextChangingEffects_3, SubLayer.NA, Outcome.Benefit);
+//	}
+//
+//	EyeofUginCostReductionEffect(EyeofUginCostReductionEffect effect) {
+//		super(effect);
+//	}
+//
+//	@Override
+//	public void init(Ability source, Game game) {
+//		super.init(source, game);
+//		if (this.affectedObjectsSet) {
+//			SpellStack stack = game.getStack();
+//			for ( int idx = 0; idx < stack.size(); idx++ ) {
+//				StackObject stackObject = stack.get(idx);
+//
+//				if ( stackObject instanceof Spell &&
+//					 !objects.contains(stackObject.getId()) &&
+//					 ((Spell)stackObject).getSubtype().contains("Eldrazi"))
+//				{
+//					objects.add(stackObject.getId());
+//				}
+//			}
+//		}
+//	}
+//
+//	@Override
+//	public boolean apply(Game game, Ability source) {
+//		SpellStack stack = game.getStack();
+//		boolean applied = false;
+//
+//		for ( int idx = 0; idx < stack.size(); idx++ ) {
+//			StackObject stackObject = stack.get(idx);
+//
+//			if ( stackObject instanceof Spell &&
+//				 !objects.contains(stackObject.getId()) &&
+//				 ((Spell)stackObject).getSubtype().contains("Eldrazi"))
+//			{
+//				SpellAbility spell = ((Spell)stackObject).getSpellAbility();
+//				int previousCost = spell.getManaCosts().convertedManaCost();
+//				spell.getManaCosts().load("{" + (previousCost - 2) + "}");
+//				applied |= objects.add(stackObject.getId());
+//			}
+//		}
+//
+//		return applied;
+//	}
+//
+//	@Override
+//	public EyeofUginCostReductionEffect copy() {
+//		return new EyeofUginCostReductionEffect(this);
+//	}
+//
+//	@Override
+//	public String getText(Ability source) {
+//		return effectText;
+//	}
+//}
