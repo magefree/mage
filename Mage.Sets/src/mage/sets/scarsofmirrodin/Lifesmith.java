@@ -55,6 +55,7 @@ public class Lifesmith extends CardImpl<Lifesmith> {
 		this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
+        this.addAbility(new LifesmithTriggeredAbility());
     }
 
     public Lifesmith (final Lifesmith card) {
