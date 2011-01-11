@@ -69,7 +69,7 @@ public class Lifesmith extends CardImpl<Lifesmith> {
 
 class LifesmithTriggeredAbility extends TriggeredAbilityImpl<LifesmithTriggeredAbility> {
     public LifesmithTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new GainLifeEffect(2));
+        super(Constants.Zone.BATTLEFIELD, new GainLifeEffect(3));
 
     }
 
