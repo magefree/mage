@@ -60,7 +60,7 @@ public interface Permanent extends Card {
 
 	public List<UUID> getAttachments();
 	public UUID getAttachedTo();
-	public void attachTo(UUID permanentId);
+	public void attachTo(UUID permanentId, Game game);
 	public boolean addAttachment(UUID permanentId, Game game);
 	public boolean removeAttachment(UUID permanentId, Game game);
 	

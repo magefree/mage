@@ -29,7 +29,6 @@
 package mage.game;
 
 import mage.counters.CounterType;
-import mage.game.match.MatchType;
 import java.io.IOException;
 import mage.game.stack.SpellStack;
 import java.io.Serializable;
@@ -390,7 +389,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			for (Card card: player.getHand().getCards(this)) {
 				if (card.getAbilities().containsKey(LeylineAbility.getInstance().getId())) {
 					if (player.chooseUse(Outcome.PutCardInPlay, "Do you wish to put " + card.getName() + " on the battlefield?", this)) {
-						player.getHand().remove(card);
+						player.getHand().remove(card.getId());
 						card.putOntoBattlefield(this, Zone.HAND, null, player.getId());
 					}
 				}
@@ -673,7 +672,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			if (perm.getAttachedTo() != null) {
 				Permanent creature = getPermanent(perm.getAttachedTo());
 				if (creature == null) {
-					perm.attachTo(null);
+					perm.attachTo(null, this);
 				}
 				else if (!creature.getCardType().contains(CardType.CREATURE) || creature.hasProtectionFrom(perm)) {
 					if (creature.removeAttachment(perm.getId(), this))
@@ -685,7 +684,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			if (perm.getAttachedTo() != null) {
 				Permanent land = getPermanent(perm.getAttachedTo());
 				if (land == null) {
-					perm.attachTo(null);
+					perm.attachTo(null, this);
 				}
 				else if (!land.getCardType().contains(CardType.LAND) || land.hasProtectionFrom(perm)) {
 					if (land.removeAttachment(perm.getId(), this))

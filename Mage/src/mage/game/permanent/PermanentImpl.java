@@ -365,7 +365,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 				this.attachments.add(permanentId);
 				Permanent attachment = game.getPermanent(permanentId);
 				if (attachment != null) {
-					attachment.attachTo(objectId);
+					attachment.attachTo(objectId, game);
 					game.fireEvent(new GameEvent(GameEvent.EventType.ATTACHED, objectId, permanentId, controllerId));
 					return true;
 				}
@@ -381,7 +381,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 				this.attachments.remove(permanentId);
 				Permanent attachment = game.getPermanent(permanentId);
 				if (attachment != null) {
-					attachment.attachTo(null);
+					attachment.attachTo(null, game);
 				}
 				game.fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, objectId, permanentId, controllerId));
 				return true;
@@ -396,7 +396,13 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	}
 
 	@Override
-	public void attachTo(UUID permanentId) {
+	public void attachTo(UUID permanentId, Game game) {
+		if (this.attachedTo != null) {
+			Permanent attachment = game.getPermanent(this.attachedTo);
+			if (attachment != null) {
+				attachment.removeAttachment(this.objectId, game);
+			}
+		}
 		this.attachedTo = permanentId;
 	}
 
