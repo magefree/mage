@@ -30,11 +30,15 @@ package mage.sets.riseoftheeldrazi;
 import java.util.Iterator;
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -62,6 +66,7 @@ public class KhalniHydra extends CardImpl<KhalniHydra> {
 		this.color.setGreen(true);
 		this.power = new MageInt(8);
 		this.toughness = new MageInt(8);
+		this.addAbility(new SimpleStaticAbility(Zone.STACK, new KhalniHydraCostReductionEffect()));
 		this.addAbility(TrampleAbility.getInstance());
 	}
 
@@ -86,4 +91,33 @@ public class KhalniHydra extends CardImpl<KhalniHydra> {
 	public KhalniHydra copy() {
 		return new KhalniHydra(this);
 	}
+}
+
+class KhalniHydraCostReductionEffect extends OneShotEffect<KhalniHydraCostReductionEffect> {
+	private static final String effectText = "Khalni Hydra costs {G} less to cast for each green creature you control";
+
+	KhalniHydraCostReductionEffect ( ) {
+		super(Outcome.Benefit);
+	}
+
+	KhalniHydraCostReductionEffect ( KhalniHydraCostReductionEffect effect ) {
+		super(effect);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		return false;
+	}
+
+	@Override
+	public KhalniHydraCostReductionEffect copy() {
+		return new KhalniHydraCostReductionEffect(this);
+	}
+
+	@Override
+	public String getText(Ability source) {
+		return effectText;
+	}
+
+
 }
