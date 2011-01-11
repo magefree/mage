@@ -28,6 +28,8 @@
 
 package mage.sets.magic2011;
 
+import mage.Constants;
+
 import java.util.UUID;
 
 /**
@@ -38,6 +40,7 @@ public class SerraAngel extends mage.sets.tenth.SerraAngel {
 
 	public SerraAngel(UUID ownerId) {
 		super(ownerId);
+		this.rarity = Constants.Rarity.UNCOMMON;
 		this.cardNumber = 27;
 		this.expansionSetCode = "M11";
 	}
