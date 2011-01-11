@@ -84,7 +84,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
 		for (Iterator<Entry<UUID, MageCard>> i = cards.entrySet().iterator(); i.hasNext();) {
 			Entry<UUID, MageCard> entry = i.next();
 			if (!showCards.containsKey(entry.getKey())) {
-				removeCard(entry.getKey());
+				removeCardImg(entry.getKey());
 				i.remove();
 			}
 		}
@@ -123,20 +123,27 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
 			}
 		}
 		resizeArea();
+       	revalidate();
+       	repaint();
 	}
 
-	public void removeCard(UUID cardId) {
+	private void removeCardImg(UUID cardId) {
         for (Component comp: getComponents()) {
         	if (comp instanceof Card) {
         		if (((Card)comp).getCardId().equals(cardId)) {
 					remove(comp);
-        		} 
+        		}
         	} else if (comp instanceof MageCard) {
         		if (((MageCard)comp).getOriginal().getId().equals(cardId)) {
 					remove(comp);
         		}
         	}
         }
+	}
+
+	public void removeCard(UUID cardId) {
+		removeCardImg(cardId);
+		cards.remove(cardId);
 	}
 
 
@@ -213,8 +220,6 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
         }
         if (size.height != area.height || size.width != area.width) {
         	setPreferredSize(area);
-        	revalidate();
-        	repaint();
        }
 
 	}

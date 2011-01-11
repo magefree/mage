@@ -135,19 +135,19 @@ public abstract class ExpansionSet implements Serializable {
 		return name;
 	}
 
-	public String findCard(String name) {
+	public Card findCard(String name) {
 		for (Card card: createCards()) {
 			if (name.equals(card.getName()))
-				return card.getClass().getCanonicalName();
+				return card;
 		}
 		return null;
 	}
 
-    public String findCard(String name, boolean random) {
-        List<String> cards = new ArrayList<String>();
+    public Card findCard(String name, boolean random) {
+        List<Card> cards = new ArrayList<Card>();
 		for (Card card: createCards()) {
 			if (name.equals(card.getName())) {
-				cards.add(card.getClass().getCanonicalName());
+				cards.add(card);
             }
 		}
         if (cards.size() > 0) {

@@ -57,10 +57,10 @@ public class MWSDeckImporter extends DeckImporterImpl {
 			ExpansionSet set = Sets.findSet(setCode);
 			String cardName;
 			if (set != null) {
-				cardName = set.findCard(lineName);
+				cardName = set.findCard(lineName).getClass().getCanonicalName();
 			}
 			else {
-				cardName = Sets.findCard(lineName);
+				cardName = Sets.findCard(lineName).getClass().getCanonicalName();
 			}
 			if (cardName == null)
 				sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append("\n");

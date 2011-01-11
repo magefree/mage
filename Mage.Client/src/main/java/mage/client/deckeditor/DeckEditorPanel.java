@@ -37,14 +37,12 @@ package mage.client.deckeditor;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
-//import mage.client.deckeditor.collection.viewer.Huerotator2;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.components.CardInfoPane;
 import mage.game.GameException;
 import mage.view.CardView;
-import mage.view.CardsView;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
@@ -56,7 +54,9 @@ import java.util.ArrayList;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mage.client.cards.BigCard;
 import mage.client.constants.Constants.DeckEditorMode;
+import mage.client.dialog.AddLandDialog;
 import mage.sets.Sets;
 
 /**
@@ -93,8 +93,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			this.deck = deck;
 		this.tableId = tableId;
 		this.mode = mode;
+		this.btnAddLand.setVisible(false);
 		switch (mode) {
 			case Limited:
+				this.btnAddLand.setVisible(true);
 			case Sideboard:
 				this.btnSubmit.setVisible(true);
 				this.cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
@@ -126,8 +128,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 					if (event.getEventName().equals("double-click")) {
 						Card card = cardSelector.getCard((UUID) event.getSource());
 						if (card != null) {
-							deck.getCards().add(createCard(card.getClass()));
+							deck.getCards().add(Sets.createCard(card.getClass()));
 							if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
+								deck.getSideboard().remove(card);
 								cardSelector.getCardsList().removeCard(card.getId());
 							}
 							if (cardInfoPane instanceof  CardInfoPane)  {
@@ -139,18 +142,19 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				}
 			}
 		);
-		this.deckArea.getDeckList().clearCardEventListeners();
-		this.deckArea.getDeckList().addCardEventListener(
+		this.deckArea.clearDeckEventListeners();
+		this.deckArea.addDeckEventListener(
 			new Listener<Event> () {
 				@Override
 				public void event(Event event) {
-                    if (System.getProperty("draft") != null) {
-                        return;
-                    }
 					if (event.getEventName().equals("double-click")) {
 						for (Card card: deck.getCards()) {
 							if (card.getId().equals((UUID)event.getSource())) {
 								deck.getCards().remove(card);
+								if (mode == DeckEditorMode.Limited || mode == DeckEditorMode.Sideboard) {
+									deck.getSideboard().add(card);
+									cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), getBigCard(), mode == DeckEditorMode.Limited);
+								}
 								break;
 							}
 						}
@@ -164,25 +168,18 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		this.repaint();
 	}
 
+	private BigCard getBigCard() {
+		return this.bigCard;
+	}
+
 	private void refreshDeck() {
 		try {
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
 			this.txtDeckName.setText(deck.getName());
-			deckArea.getDeckList().loadCards(new CardsView(deck.getCards()), bigCard, null, true);
-			deckArea.getSideboardList().loadCards(new CardsView(deck.getSideboard()), bigCard, null, true);
+			deckArea.loadDeck(deck, bigCard);
 		}
 		finally {
 			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-		}
-	}
-
-	private Card createCard(Class clazz) {
-		try {
-			Constructor<?> con = clazz.getConstructor(new Class[]{UUID.class});
-			return (Card) con.newInstance(new Object[] {null});
-		} catch (Exception ex) {
-			Logger.getLogger(DeckEditorPanel.class.getName()).log(Level.SEVERE, null, ex);
-			return null;
 		}
 	}
 
@@ -201,6 +198,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         btnExit = new javax.swing.JButton();
         btnImport = new javax.swing.JButton();
         btnSubmit = new javax.swing.JButton();
+		btnAddLand = new javax.swing.JButton();
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setResizeWeight(0.5);
@@ -266,6 +264,14 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             }
         });
 
+        btnAddLand.setText("Add Land");
+        btnAddLand.setName("btnAddLand"); // NOI18N
+        btnAddLand.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddLandActionPerformed(evt);
+            }
+        });
+
 		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -292,6 +298,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(btnImport)
 						.addContainerGap()
+                        .addComponent(btnAddLand)
+						.addContainerGap()
 						.addComponent(btnSubmit)))
                 .addContainerGap())
         );
@@ -311,6 +319,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnImport)
+						.addComponent(btnAddLand)
                         .addComponent(btnSubmit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, isShowCardInfo ? 30 : 159, Short.MAX_VALUE)
                 .addComponent(cardInfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -386,7 +395,16 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 	}//GEN-LAST:event_btnSaveActionPerformed
 
 	private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-		deck = new Deck();
+		if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
+			for (Card card: deck.getCards()) {
+				deck.getSideboard().add(card);
+			}
+			deck.getCards().clear();
+			cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
+		}
+		else {
+			deck = new Deck();
+		}
 		refreshDeck();
 	}//GEN-LAST:event_btnNewActionPerformed
 
@@ -429,6 +447,12 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		this.setVisible(false);
 	}
 
+	private void btnAddLandActionPerformed(java.awt.event.ActionEvent evt) {
+		AddLandDialog addLand = new AddLandDialog();
+		addLand.showDialog(deck);
+		refreshDeck();
+	}
+
 	public DeckImporter getDeckImporter(String file) {
 		if (file.toLowerCase().endsWith("dec"))
 			return new DecDeckImporter();
@@ -457,6 +481,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
     private JComponent cardInfoPane;
 	private javax.swing.JButton btnSubmit;
+	private javax.swing.JButton btnAddLand;
 }
 
 class DeckFilter extends FileFilter {

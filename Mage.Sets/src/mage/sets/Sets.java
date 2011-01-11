@@ -31,13 +31,18 @@ package mage.sets;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.DeckCardLists;
+import mage.util.Logging;
 
 /**
  *
@@ -45,6 +50,7 @@ import mage.cards.decks.DeckCardLists;
  */
 public class Sets extends HashMap<String, ExpansionSet> {
 
+	private final static Logger logger = Logging.getLogger(Sets.class.getName());
 	private static final Sets fINSTANCE =  new Sets();
 	private static Set<String> names;
     protected static Random rnd = new Random();
@@ -83,24 +89,24 @@ public class Sets extends HashMap<String, ExpansionSet> {
 		return names;
 	}
 
-	public static String findCard(String name) {
+	public static Card findCard(String name) {
 		for (ExpansionSet set: fINSTANCE.values()) {
-			String cardName = set.findCard(name);
-			if (cardName != null)
-				return cardName;
+			Card card = set.findCard(name);
+			if (card != null)
+				return card;
 		}
 		return null;
 	}
 
-    public static String findCard(String name, boolean random) {
+    public static Card findCard(String name, boolean random) {
         if (!random) {
             return findCard(name);
         } else {
-            List<String> cards = new ArrayList<String>();
+            List<Card> cards = new ArrayList<Card>();
             for (ExpansionSet set: fINSTANCE.values()) {
-                String cardName = set.findCard(name, true);
-                if (cardName != null) {
-                    cards.add(cardName);
+                Card card = set.findCard(name, true);
+                if (card != null) {
+                    cards.add(card);
                 }
             }
             if (cards.size() > 0) {
@@ -109,7 +115,18 @@ public class Sets extends HashMap<String, ExpansionSet> {
         }
 		return null;
 	}
-	
+
+	public static Card createCard(Class clazz) {
+		try {
+			Constructor<?> con = clazz.getConstructor(new Class[]{UUID.class});
+			return (Card) con.newInstance(new Object[] {null});
+		} catch (Exception ex) {
+			logger.log(Level.SEVERE, "Error creating card:" + clazz.getName(), ex);
+			return null;
+		}
+	}
+
+
 	public static ExpansionSet findSet(String code) {
 		for (ExpansionSet set: fINSTANCE.values()) {
 			if (set.getCode().equals(code))

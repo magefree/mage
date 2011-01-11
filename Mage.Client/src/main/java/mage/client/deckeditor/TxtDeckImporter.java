@@ -51,7 +51,7 @@ public class TxtDeckImporter extends DeckImporterImpl {
 		String lineName = line.substring(delim).trim();
 		try {
 			int num = Integer.parseInt(lineNum);
-			String cardName = Sets.findCard(lineName);
+			String cardName = Sets.findCard(lineName).getClass().getCanonicalName();
 			if (cardName == null)
 				sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append("\n");
 			else {
