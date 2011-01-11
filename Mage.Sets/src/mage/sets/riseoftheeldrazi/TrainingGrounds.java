@@ -91,6 +91,7 @@ class TrainingGroundsCostReductionEffect extends ContinuousEffectImpl<TrainingGr
 
 	@Override
 	public boolean apply(Game game, Ability source) {
+		boolean applied = false;
 		List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter);
 
 		if ( permanents != null && !permanents.isEmpty() ) {
@@ -106,10 +107,12 @@ class TrainingGroundsCostReductionEffect extends ContinuousEffectImpl<TrainingGr
 								if ( costCount == 1 && (amount - 2) <= 0 ) {
 									adjustedAmount = 1;
 								}
-								else if ( !((amount - 2) < 0) ) {
-									adjustedAmount = amount - 2;
+								else {
+									//In case the adjusted amount goes below 0.
+									adjustedAmount = Math.max(0, amount - 2);
 								}
 								costCasted.setMana(adjustedAmount);
+								applied = true;
 							}
 						}
 					}
@@ -117,7 +120,7 @@ class TrainingGroundsCostReductionEffect extends ContinuousEffectImpl<TrainingGr
 			}
 		}
 		
-		return false;
+		return applied;
 	}
 
 	@Override
