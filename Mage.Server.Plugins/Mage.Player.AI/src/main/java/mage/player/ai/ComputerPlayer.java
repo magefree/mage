@@ -90,6 +90,7 @@ import mage.game.Game;
 import mage.game.Table;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
+import mage.player.ai.utils.RateCard;
 import mage.players.Player;
 import mage.players.PlayerImpl;
 import mage.target.Target;
@@ -789,8 +790,24 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 	@Override
 	public void pickCard(List<Card> cards, Deck deck, Draft draft) {
-		//TODO: improve this
-		draft.addPick(playerId, cards.get(0).getId());
+		if (cards.size() == 0) {
+			throw new IllegalArgumentException("No cards to pick from.");
+		}
+		try {
+			Card bestCard = null;
+			int maxScore = 0;
+			for (Card card : cards) {
+				int score = RateCard.rateCard(card, null);
+				if (bestCard == null || score > maxScore) {
+					maxScore = score;
+					bestCard = card;
+				}
+			}
+			System.out.println("[DEBUG] AI picked: " + bestCard.getName() + ", score=" + maxScore);
+			draft.addPick(playerId, bestCard.getId());
+		} catch (Exception e) {
+			draft.addPick(playerId, cards.get(0).getId());
+		}
 	}
 
 	protected Attackers getPotentialAttackers(Game game) {
