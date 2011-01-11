@@ -28,7 +28,7 @@ public class CardsStorage {
     private static List<Card> notImplementedCards;
 
 	/**
-	 * Rating that is given for new card.
+	 * Rating that is given for new cards.
 	 * Ratings are in [1,10] range, so setting it high will make new cards appear more often.
 	 */
 	private static final int DEFAULT_NOT_RATED_CARD_RATING = 6;
