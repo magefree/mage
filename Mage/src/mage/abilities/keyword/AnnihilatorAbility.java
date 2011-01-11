@@ -107,6 +107,12 @@ class AnnihilatorEffect extends OneShotEffect<AnnihilatorEffect> {
 		UUID defenderId = game.getCombat().getDefendingPlayer(source.getSourceId());
 		Player player = game.getPlayer(defenderId);
 
+		//Defender may be a planeswalker.
+		if ( player == null ) {
+			Permanent permanent = game.getPermanent(defenderId);
+			player = game.getPlayer(permanent.getControllerId());
+		}
+
 		filter.setTargetController(TargetController.YOU);
 		Target target = new TargetControlledPermanent(1, count, filter, false);
 
