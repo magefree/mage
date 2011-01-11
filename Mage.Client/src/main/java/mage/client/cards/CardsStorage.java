@@ -115,7 +115,8 @@ public class CardsStorage {
         if (ratings.containsKey(card.getName())) {
             int r = ratings.get(card.getName());
             float f = 10.0f * (r - min) / (max - min);
-            return (int) Math.round(f); // normalize to [1..10]
+	        // normalize to [1..10]
+            return (int) Math.round(f);
         }
         return DEFAULT_NOT_RATED_CARD_RATING;
     }
