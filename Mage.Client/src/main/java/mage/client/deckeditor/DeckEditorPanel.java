@@ -89,17 +89,28 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }
 
 	public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId) {
-		if (deck != null) {
+		if (deck != null)
 			this.deck = deck;
-			this.tableId = tableId;
-			this.mode = mode;
-			this.btnSubmit.setVisible(mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited);
-			this.cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard);
-			this.deckArea.showSideboard(false);
-		}
-		else {
-			this.cardSelector.loadCards(this.bigCard);
-			this.deckArea.showSideboard(true);
+		this.tableId = tableId;
+		this.mode = mode;
+		switch (mode) {
+			case Limited:
+			case Sideboard:
+				this.btnSubmit.setVisible(true);
+				this.cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
+				this.btnExit.setVisible(false);
+				this.btnImport.setVisible(false);
+				this.btnLoad.setVisible(false);
+				this.deckArea.showSideboard(false);
+				break;
+			case Constructed:
+				this.btnSubmit.setVisible(false);
+				this.cardSelector.loadCards(this.bigCard);
+				this.btnExit.setVisible(true);
+				this.btnImport.setVisible(true);
+				this.btnLoad.setVisible(true);
+				this.deckArea.showSideboard(true);
+				break;
 		}
 		init();
 	}

@@ -70,10 +70,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 	    jScrollPane1.getViewport().setOpaque(false);
     }
 
-	public void loadCards(List<Card> sideboard, BigCard bigCard) {
+	public void loadCards(List<Card> sideboard, BigCard bigCard, boolean construct) {
 		this.bigCard = bigCard;
 		this.btnBooster.setVisible(false);
 		this.btnClear.setVisible(false);
+		this.btnAddLand.setVisible(construct);
 		this.cbExpansionSet.setVisible(false);
 		this.cards.clear();
 		for (Card card: sideboard) {
@@ -87,6 +88,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		this.bigCard = bigCard;
 		this.btnBooster.setVisible(true);
 		this.btnClear.setVisible(true);
+		this.btnAddLand.setVisible(false);
 		this.cbExpansionSet.setVisible(true);
 		Object[] l = Sets.getInstance().values().toArray();
 		Arrays.sort(l, new Comparator<Object>() {
@@ -186,6 +188,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         cbExpansionSet = new javax.swing.JComboBox();
         btnBooster = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
+        btnAddLand = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         cardGrid = new mage.client.cards.CardGrid();
         tbTypes = new javax.swing.JToolBar();
@@ -301,6 +304,17 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
         tbColor.add(btnClear);
+
+        btnAddLand.setText("Add Land");
+        btnAddLand.setFocusable(false);
+        btnAddLand.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAddLand.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAddLand.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddLandActionPerformed(evt);
+            }
+        });
+        tbColor.add(btnAddLand);
 
         jScrollPane1.setViewportView(cardGrid);
 
@@ -507,7 +521,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 	private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
 		cards.clear();
 		filterCards();
-//		this.cardGrid.loadCards(new CardsView(cards), bigCard, null);
 	}//GEN-LAST:event_btnClearActionPerformed
 
 	private void btnBoosterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoosterActionPerformed
@@ -516,11 +529,15 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 			cards.add(card);
 		}
 		filterCards();
-//		this.cardGrid.loadCards(new CardsView(cards), bigCard, null);
 	}//GEN-LAST:event_btnBoosterActionPerformed
+
+	private void btnAddLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLandActionPerformed
+		 
+	}//GEN-LAST:event_btnAddLandActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddLand;
     private javax.swing.JButton btnBooster;
     private javax.swing.JButton btnClear;
     private mage.client.cards.CardGrid cardGrid;
