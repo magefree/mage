@@ -27,6 +27,12 @@ public class CardsStorage {
     private static List<String> setCodes = new ArrayList<String>();
     private static List<Card> notImplementedCards;
 
+	/**
+	 * Rating that is given for new card.
+	 * Ratings are in [1,10] range, so setting it high will make new cards appear more often.
+	 */
+	private static final int DEFAULT_NOT_RATED_CARD_RATING = 6;
+
     static {
         for (ExpansionSet set : Sets.getInstance().values()) {
             setCodes.add(set.getCode());
@@ -111,7 +117,7 @@ public class CardsStorage {
             float f = 10.0f * (r - min) / (max - min);
             return (int) Math.round(f); // normalize to [1..10]
         }
-        return 0;
+        return DEFAULT_NOT_RATED_CARD_RATING;
     }
 
     private synchronized static void readRatings() {
