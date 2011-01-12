@@ -24,6 +24,7 @@
             <include>org.mage:Mage-Player-AI</include>
             <include>org.mage:Mage-Player-AIMinimax</include>
             <include>org.mage:Mage-Player-Human</include>
+			<include>org.mage:Mage-Draft-8PlayerBooster</include>
         </includes>
     </dependencySet>
     <dependencySet>

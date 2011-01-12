@@ -13,7 +13,7 @@
 		<gameType name="Free For All" jar="Mage-Game-FreeForAll-${project.version}.jar" className="mage.game.FreeForAllMatch" typeName="mage.game.FreeForAllType"/>
 	</gameTypes>
 	<draftTypes>
-		<draftType name="8 Player Booster" jar="mage-draft-8playerbooster.jar" className="mage.draft.BoosterDraft"/>
+		<draftType name="8 Player Booster" jar="Mage-Draft-8PlayerBooster-${project.version}.jar" className="mage.draft.BoosterDraft"/>
 	</draftTypes>
 	<deckTypes>
 		<deckType name="Constructed" jar="Mage-Deck-Constructed-${project.version}.jar" className="mage.deck.Constructed"/>
