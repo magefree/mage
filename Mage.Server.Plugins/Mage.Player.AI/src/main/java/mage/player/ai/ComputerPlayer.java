@@ -30,21 +30,12 @@ package mage.player.ai;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
@@ -118,6 +109,8 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	private transient List<Card> playableNonInstant = new ArrayList<Card>();
 	private transient List<Card> playableInstant = new ArrayList<Card>();
 	private transient List<ActivatedAbility> playableAbilities = new ArrayList<ActivatedAbility>();
+	private transient List<PickedCard> pickedCards;
+	private transient List<Constants.ColoredManaSymbol> chosenColors;
 
 	public ComputerPlayer(String name, RangeOfInfluence range) {
 		super(name, range);
@@ -797,16 +790,105 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			Card bestCard = null;
 			int maxScore = 0;
 			for (Card card : cards) {
-				int score = RateCard.rateCard(card, null);
+				int score = RateCard.rateCard(card, chosenColors);
 				if (bestCard == null || score > maxScore) {
 					maxScore = score;
 					bestCard = card;
 				}
 			}
-			System.out.println("[DEBUG] AI picked: " + bestCard.getName() + ", score=" + maxScore);
+			String colors = "not chosen yet";
+			// remember card if colors are not chosen yet
+			if (chosenColors == null) {
+				rememberPick(bestCard, maxScore);
+				chosenColors = chooseDeckColorsIfPossible();
+			}
+			if (chosenColors != null) {
+				colors = "";
+				for (Constants.ColoredManaSymbol symbol : chosenColors) {
+					colors += symbol.toString();
+				}
+			}
+			System.out.println("[DEBUG] AI picked: " + bestCard.getName() + ", score=" + maxScore + ", deck colors=" + colors);
 			draft.addPick(playerId, bestCard.getId());
 		} catch (Exception e) {
+			e.printStackTrace();
 			draft.addPick(playerId, cards.get(0).getId());
+		}
+	}
+
+	/**
+	 * Remember picked card with its score.
+	 *
+	 * @param card
+	 * @param score
+	 */
+	protected void rememberPick(Card card, int score) {
+		if (pickedCards == null) {
+			pickedCards = new ArrayList<PickedCard>();
+		}
+		pickedCards.add(new PickedCard(card, score));
+	}
+
+	/**
+	 * Choose 2 deck colors for draft:
+	 * 1. there should be at least 3 cards in card pool
+	 * 2. at least 2 cards should have different colors
+	 * 3. get card colors as chosen starting from most rated card
+	 */
+	protected List<Constants.ColoredManaSymbol> chooseDeckColorsIfPossible() {
+		if (pickedCards.size() > 2) {
+			// sort by score and color mana symbol count in descending order
+			Collections.sort(pickedCards, new Comparator<PickedCard>() {
+				@Override
+				public int compare(PickedCard o1, PickedCard o2) {
+					if (o1.score.equals(o2.score)) {
+						Integer i1 = RateCard.getColorManaCount(o1.card);
+						Integer i2 = RateCard.getColorManaCount(o2.card);
+						return -i1.compareTo(i2);
+					}
+					return -o1.score.compareTo(o2.score);
+				}
+			});
+			Set<String> chosenSymbols = new HashSet<String>();
+			for (PickedCard picked : pickedCards) {
+				int differentColorsInCost = RateCard.getDifferentColorManaCount(picked.card);
+				// choose only color card, but only if they are not too gold
+				if (differentColorsInCost > 0 && differentColorsInCost < 3) {
+					// if some colors were already chosen, total amount shouldn't be more than 3
+					if (chosenSymbols.size() + differentColorsInCost < 4) {
+						for (String symbol : picked.card.getManaCost().getSymbols()) {
+							symbol = symbol.replace("{", "").replace("}", "");
+							if (RateCard.isColoredMana(symbol)) {
+								chosenSymbols.add(symbol);
+							}
+						}
+					}
+				}
+				// only two or three color decks are allowed
+				if (chosenSymbols.size() >  1 && chosenSymbols.size() < 4) {
+					List<Constants.ColoredManaSymbol> chosenColors = new ArrayList<Constants.ColoredManaSymbol>();
+					for (String symbol : chosenSymbols) {
+						Constants.ColoredManaSymbol manaSymbol = Constants.ColoredManaSymbol.lookup(symbol.charAt(0));
+						if (manaSymbol != null) {
+							chosenColors.add(manaSymbol);
+						}
+					}
+					if (chosenColors.size() > 1) {
+						// no need to remember picks anymore
+						pickedCards = null;
+						return chosenColors;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	private class PickedCard {
+		public Card card;
+		public Integer score;
+		public PickedCard(Card card, int score) {
+			this.card = card; this.score = score;
 		}
 	}
 

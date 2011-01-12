@@ -4,10 +4,7 @@ import mage.Constants;
 import mage.cards.Card;
 
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Class responsible for reading ratings from resources and rating gived cards.
@@ -162,8 +159,45 @@ public class RateCard {
  	 * @param symbol
 	 * @return
 	 */
-	private static boolean isColoredMana(String symbol) {
-        return symbol.equals("W") || symbol.equals("G") || symbol.equals("U") || symbol.equals("B") || symbol.equals("R");
+	public static boolean isColoredMana(String symbol) {
+		String s = symbol;
+		if (s.length() > 1) {
+			s = s.replace("{","").replace("}","");
+		}
+		if (s.length() > 1) {
+			return false;
+		}
+		return s.equals("W") || s.equals("G") || s.equals("U") || s.equals("B") || s.equals("R");
     }
+
+	/**
+	 * Return number of color mana symbols in manacost.
+	 * @param card
+	 * @return
+	 */
+	public static int getColorManaCount(Card card) {
+		int count = 0;
+		for (String symbol : card.getManaCost().getSymbols()) {
+			if (isColoredMana(symbol)) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	/**
+	 * Return number of different color mana symbols in manacost.
+	 * @param card
+	 * @return
+	 */
+	public static int getDifferentColorManaCount(Card card) {
+		Set<String> symbols = new HashSet<String>();
+		for (String symbol : card.getManaCost().getSymbols()) {
+			if (isColoredMana(symbol)) {
+				symbols.add(symbol);
+			}
+		}
+		return symbols.size();
+	}
 
 }
