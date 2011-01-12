@@ -53,7 +53,7 @@ public class SylvokReplica extends CardImpl<SylvokReplica> {
 
     static {
         filter.getCardType().add(CardType.ARTIFACT);
-        filter.getCardType().add(CardType.CREATURE);
+        filter.getCardType().add(CardType.ENCHANTMENT);
         filter.setScopeCardType(ComparisonScope.Any);
     }
 
