@@ -52,14 +52,19 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor> {
 			switch (color.charAt(i)) {
 			case 'W':
 				white = true;
+				break;
 			case 'U':
 				blue = true;
+				break;
 			case 'B':
 				black = true;
+				break;
 			case 'R':
 				red = true;
+				break;
 			case 'G':
 				green = true;
+				break;
 			}
 		}
 	}
@@ -206,9 +211,38 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor> {
 		return false;
 	}
 
+	public boolean shares(ObjectColor color) {
+		if (this == color)
+			return true;
+		if (!hasColor() && !color.hasColor())
+			return true;
+		return color.white && white || color.blue && blue || color.black && black ||
+				color.red && red || color.green && green;
+	}
+
 	@Override
 	public ObjectColor copy() {
 		return new ObjectColor(this);
+	}
+
+	public static void main(String[] args) {
+		System.out.println(new ObjectColor().shares(new ObjectColor()));
+		System.out.println(new ObjectColor("W").shares(new ObjectColor("W")));
+		System.out.println(new ObjectColor("U").shares(new ObjectColor("U")));
+		System.out.println(new ObjectColor("B").shares(new ObjectColor("B")));
+		System.out.println(new ObjectColor("R").shares(new ObjectColor("R")));
+		System.out.println(new ObjectColor("G").shares(new ObjectColor("G")));
+		System.out.println(new ObjectColor("RG").shares(new ObjectColor("GW")));
+		System.out.println(new ObjectColor("BRGUW").shares(new ObjectColor("U")));
+		System.out.println(new ObjectColor("{2}").shares(new ObjectColor("{1}")));
+		System.out.println(new ObjectColor("WRB").shares(new ObjectColor("UGR")));
+		System.out.println("should be false:");
+		System.out.println(new ObjectColor("RG").shares(new ObjectColor("WU")));
+		System.out.println(new ObjectColor("WRB").shares(new ObjectColor("UG")));
+		System.out.println(new ObjectColor("U").shares(new ObjectColor("R")));
+		System.out.println(new ObjectColor("G").shares(new ObjectColor("B")));
+		System.out.println(new ObjectColor("W").shares(new ObjectColor("1")));
+
 	}
 	
 }
