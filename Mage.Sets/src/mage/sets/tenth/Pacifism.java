@@ -105,7 +105,7 @@ class PacifismEffect extends RestrictionEffect<PacifismEffect> {
 	}
 
 	@Override
-	public boolean canBlock(Permanent blocker, Game game) {
+	public boolean canBlock(Permanent attacker, Permanent blocker, Game game) {
 		return false;
 	}
 

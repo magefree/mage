@@ -584,7 +584,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		Permanent attacker = game.getPermanent(attackerId);
 		//20101001 - 509.1b
 		for (RestrictionEffect effect: game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game)) {
-			if (!effect.canBlock(this, game))
+			if (!effect.canBlock(attacker, this, game))
 				return false;
 		}
 		if (attacker.hasProtectionFrom(this))

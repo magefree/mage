@@ -160,12 +160,15 @@ public class MageBook extends JComponent {
             final String _set = set;
             tab.setObserver(new Command() {
                 public void execute() {
-                    currentPage = 0;
-                    currentSet = _set;
-                    pageLeft.setVisible(false);
-                    pageRight.setVisible(false);
-                    addSetTabs();
-                    showCards();
+					if (currentSet != _set || currentPage != 0) {
+						AudioManager.playAnotherTab();
+						currentPage = 0;
+						currentSet = _set;
+						pageLeft.setVisible(false);
+						pageRight.setVisible(false);
+						addSetTabs();
+						showCards();
+					}
                 }
             });
             currentPanel.add(tab, JLayeredPane.DEFAULT_LAYER + count++, 0);
