@@ -34,12 +34,16 @@
 
 package mage.client.draft;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.UUID;
+import javax.swing.Timer;
 import mage.client.MageFrame;
 import mage.client.remote.Session;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.view.DraftPickView;
+import mage.view.DraftView;
 
 /**
  *
@@ -49,11 +53,26 @@ public class DraftPanel extends javax.swing.JPanel {
 
 	private UUID draftId;
 	private Session session;
+	private Timer countdown;
+	private int timeout;
 	
     /** Creates new form DraftPanel */
     public DraftPanel() {
         initComponents();
-
+		countdown = new Timer(1000,
+			new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if (--timeout > 0) {
+						setTimeout(Integer.toString(timeout));
+					}
+					else {
+						setTimeout("0");
+						countdown.stop();
+					}
+				}
+			}
+		);
     }
 
 	public synchronized void showDraft(UUID draftId) {
@@ -64,6 +83,16 @@ public class DraftPanel extends javax.swing.JPanel {
 			hideDraft();
 	}
 	
+	public void updateDraft(DraftView draftView) {		
+		this.txtPack1.setText(draftView.getSets().get(0));
+		this.txtPack2.setText(draftView.getSets().get(1));
+		this.txtPack3.setText(draftView.getSets().get(2));
+		this.chkPack1.setSelected(draftView.getBoosterNum() > 0);
+		this.chkPack2.setSelected(draftView.getBoosterNum() > 1);
+		this.chkPack3.setSelected(draftView.getBoosterNum() > 2);
+		this.txtCardNo.setText(Integer.toString(draftView.getCardNum()));
+	}
+
 	public void loadBooster(DraftPickView draftPickView) {
 		draftBooster.loadBooster(draftPickView.getBooster(), bigCard);
 		draftPicks.loadCards(draftPickView.getPicks(), bigCard, null);
@@ -73,11 +102,21 @@ public class DraftPanel extends javax.swing.JPanel {
 				@Override
 				public void event(Event event) {
 					if (event.getEventName().equals("pick-a-card")) {
+						countdown.stop();
 						session.sendCardPick(draftId, (UUID)event.getSource());
 					}
 				}
 			}
 		);
+		this.timeout = draftPickView.getTimeout();
+		setTimeout(Integer.toString(timeout));
+		if (timeout != 0) {
+			countdown.start();
+		}
+	}
+
+	private void setTimeout(String text) {
+		this.txtTimeRemaining.setText(text);
 	}
 
 	public void hideDraft() {
@@ -96,21 +135,125 @@ public class DraftPanel extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         bigCard = new mage.client.cards.BigCard();
+        lblCardNo = new javax.swing.JLabel();
+        lblPack1 = new javax.swing.JLabel();
+        lblPack2 = new javax.swing.JLabel();
+        lblPack3 = new javax.swing.JLabel();
+        txtPack1 = new javax.swing.JTextField();
+        txtPack2 = new javax.swing.JTextField();
+        txtPack3 = new javax.swing.JTextField();
+        txtCardNo = new javax.swing.JTextField();
+        chkPack1 = new javax.swing.JCheckBox();
+        chkPack2 = new javax.swing.JCheckBox();
+        chkPack3 = new javax.swing.JCheckBox();
+        txtTimeRemaining = new javax.swing.JTextField();
         draftBooster = new mage.client.cards.DraftGrid();
         draftPicks = new mage.client.cards.CardGrid();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblCardNo.setText("Card #:");
+
+        lblPack1.setText("Pack 1:");
+
+        lblPack2.setText("Pack 2:");
+
+        lblPack3.setText("Pack 3:");
+
+        txtPack1.setEditable(false);
+        txtPack1.setEnabled(false);
+        txtPack1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPack1ActionPerformed(evt);
+            }
+        });
+
+        txtPack2.setEditable(false);
+        txtPack2.setEnabled(false);
+
+        txtPack3.setEditable(false);
+        txtPack3.setEnabled(false);
+        txtPack3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPack3ActionPerformed(evt);
+            }
+        });
+
+        txtCardNo.setEditable(false);
+        txtCardNo.setEnabled(false);
+        txtCardNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCardNoActionPerformed(evt);
+            }
+        });
+
+        txtTimeRemaining.setEditable(false);
+        txtTimeRemaining.setForeground(java.awt.Color.red);
+        txtTimeRemaining.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtTimeRemaining.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtTimeRemaining.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimeRemainingActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblCardNo))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblPack2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPack2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblPack1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPack1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblPack3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCardNo, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                            .addComponent(txtPack3)
+                            .addComponent(txtTimeRemaining, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chkPack3)
+                    .addComponent(chkPack2)
+                    .addComponent(chkPack1)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(186, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPack1)
+                    .addComponent(txtPack1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chkPack1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPack2)
+                    .addComponent(txtPack2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chkPack2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPack3)
+                    .addComponent(txtPack3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chkPack3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCardNo)
+                    .addComponent(txtCardNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(txtTimeRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -124,7 +267,7 @@ public class DraftPanel extends javax.swing.JPanel {
         );
         draftBoosterLayout.setVerticalGroup(
             draftBoosterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
+            .addGap(0, 452, Short.MAX_VALUE)
         );
 
         draftPicks.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -144,19 +287,47 @@ public class DraftPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(draftPicks, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                .addComponent(draftPicks, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(draftBooster, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+	private void txtPack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPack1ActionPerformed
+		// TODO add your handling code here:
+	}//GEN-LAST:event_txtPack1ActionPerformed
+
+	private void txtPack3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPack3ActionPerformed
+		// TODO add your handling code here:
+	}//GEN-LAST:event_txtPack3ActionPerformed
+
+	private void txtCardNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCardNoActionPerformed
+		// TODO add your handling code here:
+	}//GEN-LAST:event_txtCardNoActionPerformed
+
+	private void txtTimeRemainingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimeRemainingActionPerformed
+		// TODO add your handling code here:
+	}//GEN-LAST:event_txtTimeRemainingActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private mage.client.cards.BigCard bigCard;
+    private javax.swing.JCheckBox chkPack1;
+    private javax.swing.JCheckBox chkPack2;
+    private javax.swing.JCheckBox chkPack3;
     private mage.client.cards.DraftGrid draftBooster;
     private mage.client.cards.CardGrid draftPicks;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblCardNo;
+    private javax.swing.JLabel lblPack1;
+    private javax.swing.JLabel lblPack2;
+    private javax.swing.JLabel lblPack3;
+    private javax.swing.JTextField txtCardNo;
+    private javax.swing.JTextField txtPack1;
+    private javax.swing.JTextField txtPack2;
+    private javax.swing.JTextField txtPack3;
+    private javax.swing.JTextField txtTimeRemaining;
     // End of variables declaration//GEN-END:variables
 
 }

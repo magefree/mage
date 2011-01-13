@@ -46,7 +46,19 @@ public class DraftOptions implements Serializable {
 	protected TimingOption timing;
 
 	public enum TimingOption {
-		REGULAR, BEGINNER, NONE
+		REGULAR (1),
+		BEGINNER (2),
+		NONE (0);
+		
+		private int factor;
+
+		TimingOption(int factor) {
+			this.factor = factor;
+		}
+
+		public int getFactor() {
+			return this.factor;
+		}
 	}
 
 	public DraftOptions(String name) {

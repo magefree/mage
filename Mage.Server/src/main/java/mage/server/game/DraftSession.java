@@ -35,6 +35,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mage.game.draft.Draft;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.Session;
 import mage.server.SessionManager;
@@ -54,15 +55,17 @@ public class DraftSession {
 	protected final static Logger logger = Logging.getLogger(GameWatcher.class.getName());
 
 	protected UUID sessionId;
-	protected UUID draftId;
+	protected UUID playerId;
+	protected Draft draft;
 	protected boolean killed = false;
 
 	private ScheduledFuture<?> futureTimeout;
 	protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
 
-	public DraftSession(UUID sessionId, UUID draftId) {
+	public DraftSession(Draft draft, UUID sessionId, UUID playerId) {
 		this.sessionId = sessionId;
-		this.draftId = draftId;
+		this.draft = draft;
+		this.playerId = playerId;
 	}
 
 	public boolean init(final DraftView draftView) {
@@ -121,15 +124,17 @@ public class DraftSession {
 
 	private synchronized void setupTimeout(int seconds) {
 		cancelTimeout();
-		futureTimeout = timeoutExecutor.schedule(
-			new Runnable() {
-				@Override
-				public void run() {
-					DraftManager.getInstance().timeout(draftId, sessionId);
-				}
-			},
-			seconds, TimeUnit.SECONDS
-		);
+		if (seconds > 0) {
+			futureTimeout = timeoutExecutor.schedule(
+				new Runnable() {
+					@Override
+					public void run() {
+						DraftManager.getInstance().timeout(draft.getId(), sessionId);
+					}
+				},
+				seconds, TimeUnit.SECONDS
+			);
+		}
 	}
 
 	private synchronized void cancelTimeout() {
@@ -140,11 +145,16 @@ public class DraftSession {
 
 	protected void handleRemoteException(RemoteException ex) {
 		logger.log(Level.SEVERE, null, ex);
-		DraftManager.getInstance().kill(draftId, sessionId);
+		DraftManager.getInstance().kill(draft.getId(), sessionId);
 	}
 
 	public void setKilled() {
 		killed = true;
+	}
+
+	public void sendCardPick(UUID cardId) {
+		cancelTimeout();
+		draft.addPick(playerId, cardId);
 	}
 
 }

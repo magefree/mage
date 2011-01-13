@@ -108,7 +108,7 @@ public class DraftController {
 
 	public void join(UUID sessionId) {
 		UUID playerId = sessionPlayerMap.get(sessionId);
-		DraftSession draftSession = new DraftSession(sessionId, draft.getId());
+		DraftSession draftSession = new DraftSession(draft, sessionId, playerId);
 		draftSessions.put(playerId, draftSession);
 		logger.info("player " + playerId + " has joined draft " + draft.getId());
 		ChatManager.getInstance().broadcast(chatId, "", draft.getPlayer(playerId).getPlayer().getName() + " has joined the draft", MessageColor.BLACK);
@@ -183,7 +183,7 @@ public class DraftController {
 	}
 
 	public void sendCardPick(UUID sessionId, UUID cardId) {
-		draft.addPick(sessionPlayerMap.get(sessionId), cardId);
+		draftSessions.get(sessionPlayerMap.get(sessionId)).sendCardPick(cardId);
 	}
 
 	private synchronized void updateDraft() {
@@ -194,15 +194,15 @@ public class DraftController {
 
 	private synchronized void pickCard(UUID playerId, int timeout) {
 		if (draftSessions.containsKey(playerId))
-			draftSessions.get(playerId).pickCard(getDraftPickView(playerId), timeout);
+			draftSessions.get(playerId).pickCard(getDraftPickView(playerId, timeout), timeout);
 	}
 
 	private DraftView getDraftView() {
 		return new DraftView(draft);
 	}
 
-	private DraftPickView getDraftPickView(UUID playerId) {
-		return new DraftPickView(draft.getPlayer(playerId));
+	private DraftPickView getDraftPickView(UUID playerId, int timeout) {
+		return new DraftPickView(draft.getPlayer(playerId), timeout);
 	}
 
 }

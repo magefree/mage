@@ -37,6 +37,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.game.draft.DraftOptions.TimingOption;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.PlayerQueryEventSource;
@@ -57,6 +58,9 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
 	protected PlayerList table = new PlayerList();
 	protected List<ExpansionSet> sets;
 	protected int boosterNum = 0;
+	protected int cardNum = 0;
+	protected TimingOption timing;
+	protected int[] times = {40, 40, 35, 30, 25, 25, 20, 20, 15, 10, 10, 5, 5, 5, 5};
 
 	protected transient TableEventSource tableEventSource = new TableEventSource();
 	protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
@@ -64,6 +68,7 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
 	public DraftImpl(DraftOptions options) {
 		id = UUID.randomUUID();
 		this.sets = options.getSets();
+		this.timing = options.getTiming();
 	}
 
 	@Override
@@ -89,13 +94,28 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
 	}
 
 	@Override
+	public List<ExpansionSet> getSets() {
+		return sets;
+	}
+
+	@Override
+	public int getBoosterNum() {
+		return boosterNum;
+	}
+
+	@Override
+	public int getCardNum() {
+		return cardNum;
+	}
+
+	@Override
 	public void leave(UUID playerId) {
 		//TODO: implement this
 	}
 
 	@Override
 	public void autoPick(UUID playerId) {
-		//TODO: implement this
+		this.addPick(playerId, players.get(playerId).getBooster().get(0).getId());
 	}
 
 	protected void passLeft() {
@@ -145,9 +165,12 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
 			}
 		}
 		boosterNum++;
+		cardNum = 1;
+		fireUpdatePlayersEvent();
 	}
 
 	protected boolean pickCards() {
+		cardNum++;
 		for (DraftPlayer player: players.values()) {
 			if (player.getBooster().size() == 0)
 				return false;
@@ -195,7 +218,11 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
 
 	@Override
 	public void firePickCardEvent(UUID playerId) {
-		playerQueryEventSource.pickCard(playerId, "Pick card", players.get(playerId).booster, 20);
+		DraftPlayer player = players.get(playerId);
+		if (cardNum > 15)
+			cardNum = 15;
+		int time = times[cardNum - 1] * timing.getFactor();
+		playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);
 	}
 
 	@Override

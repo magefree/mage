@@ -31,6 +31,7 @@ package mage.view;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import mage.cards.ExpansionSet;
 import mage.game.draft.Draft;
 
 /**
@@ -39,11 +40,27 @@ import mage.game.draft.Draft;
  */
 public class DraftView implements Serializable {
 
-	private List<TournamentPlayerView> players = new ArrayList<TournamentPlayerView>();
+	private List<String> sets = new ArrayList<String>();
+	private int boosterNum;
+	private int cardNum;
 
 	public DraftView(Draft draft) {
-
+		for (ExpansionSet set: draft.getSets()) {
+			sets.add(set.getName());
+		}
+		this.boosterNum = draft.getBoosterNum();
+		this.cardNum = draft.getCardNum();
 	}
 
+	public List<String> getSets() {
+		return sets;
+	}
 
+	public int getBoosterNum() {
+		return boosterNum;
+	}
+
+	public int getCardNum() {
+		return cardNum;
+	}
 }

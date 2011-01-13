@@ -322,6 +322,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 	private void btnNewDraftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewDraftActionPerformed
 		DraftOptions options = new DraftOptions("testDraft");
 		options.setDraftType("8 Player Booster");
+		options.setTiming(DraftOptions.TimingOption.REGULAR);
 		options.getPlayerTypes().add("Human");
 		options.getPlayerTypes().add("Computer - default");
 		options.getPlayerTypes().add("Computer - default");

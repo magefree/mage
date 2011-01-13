@@ -30,8 +30,10 @@ package mage.game.draft;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 import mage.MageItem;
+import mage.cards.ExpansionSet;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
@@ -46,6 +48,9 @@ public interface Draft extends MageItem, Serializable {
 	public void addPlayer(Player player);
 	public Collection<DraftPlayer> getPlayers();
 	public DraftPlayer getPlayer(UUID playerId);
+	public List<ExpansionSet> getSets();
+	public int getBoosterNum();
+	public int getCardNum();
 	public void addPick(UUID playerId, UUID cardId);
 	public void start();
 	public void leave(UUID playerId);
