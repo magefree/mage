@@ -41,6 +41,7 @@ public interface StackObject extends MageObject {
 	public UUID getControllerId();
 	public void checkTriggers(GameEvent event, Game game);
 	public void counter(UUID sourceId, Game game);
+	public void reset ( Game game );
 	@Override
 	public StackObject copy();
 }

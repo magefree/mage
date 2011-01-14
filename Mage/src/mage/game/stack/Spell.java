@@ -41,12 +41,16 @@ import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.abilities.costs.AlternativeCost;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.game.events.GameEvent;
+import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.Target;
 import mage.watchers.Watchers;
@@ -151,6 +155,28 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	@Override
 	public void counter(UUID sourceId, Game game) {
 		card.moveToZone(Zone.GRAVEYARD, sourceId, game, false);
+	}
+
+	@Override
+	public void reset ( Game game ) {
+		Mana oldPayment = ability.getManaCosts().getPayment();
+		ManaPool tmpPool = new ManaPool();
+		tmpPool.changeMana(oldPayment);
+		List<AlternativeCost> oldAltCosts = ability.getAlternativeCosts();
+		Costs<Cost> oldOptionalCosts = ability.getOptionalCosts();
+		Costs<Cost> oldCosts = ability.getCosts();
+
+		//Get a fresh copy of the spell ability.
+		ability = card.getSpellAbility().copy();
+
+		//Reload all the payments for all costs.
+		ability.getManaCosts().assignPayment(tmpPool);
+		ability.getAlternativeCosts().clear();
+		ability.getAlternativeCosts().addAll(oldAltCosts);
+		ability.getOptionalCosts().clear();
+		ability.getOptionalCosts().addAll(oldOptionalCosts);
+		ability.getCosts().clear();
+		ability.getCosts().addAll(oldCosts);
 	}
 
 	@Override
