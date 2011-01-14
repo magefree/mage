@@ -44,7 +44,7 @@ public class ManaSymbols {
 		}
         for (String set : CardsStorage.getSetCodes()) {
             String _set = set.equals("CON") ? "CFX" : set;
-            File file = new File(Constants.RESOURCE_PATH_SET + _set + ".jpg");
+            File file = new File(Constants.RESOURCE_PATH_SET + _set + "-C.jpg");
             try {
 				Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
                 int width = image.getWidth(null);
