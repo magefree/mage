@@ -30,23 +30,26 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Layer;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.SearchLibraryRevealPutInHandEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
+import mage.game.stack.SpellStack;
+import mage.game.stack.StackObject;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -70,7 +73,7 @@ public class EyeofUgin extends CardImpl<EyeofUgin> {
         this.supertype.add("Legendary");
         this.subtype.add("Land");
 
-		this.addAbility(new EyeofUginCostReductionAbility());
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EyeofUginCostReductionEffect()));
 		Ability searchAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
 		searchAbility.addCost(new ManaCostsImpl("{7}"));
         this.addAbility(searchAbility);
@@ -86,112 +89,50 @@ public class EyeofUgin extends CardImpl<EyeofUgin> {
     }
 }
 
-/**
- * Implemented as a {@link TriggeredAbilityImpl} for now as there currently is
- * no other way of interacting with a cards casting cost from an external object.
- * This ability has no effect as of right now until a better way of implementing
- * this form of object interaction is designed and implemented.
- * 
- * @author maurer.it_at_gmail.com
- */
-class EyeofUginCostReductionAbility extends TriggeredAbilityImpl<EyeofUginCostReductionAbility> {
+class EyeofUginCostReductionEffect extends ContinuousEffectImpl<EyeofUginCostReductionEffect> {
 
-	private static final String abilityText = "Colorless Eldrazi spells you cast cost {2} less to cast.";
+	private static final String effectText = "Colorless Eldrazi spells you cast cost {2} less to cast";
 
-	EyeofUginCostReductionAbility() {
-		super(Zone.BATTLEFIELD, null);
+	EyeofUginCostReductionEffect ( ) {
+		super(Duration.WhileOnBattlefield, Layer.TextChangingEffects_3, SubLayer.NA, Outcome.Benefit);
 	}
 
-	EyeofUginCostReductionAbility ( EyeofUginCostReductionAbility effect ) {
+	EyeofUginCostReductionEffect(EyeofUginCostReductionEffect effect) {
 		super(effect);
 	}
 
 	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if ( event.getType() == EventType.ZONE_CHANGE &&
-			 event.getPlayerId().equals(this.getControllerId()) &&
-			 ((ZoneChangeEvent)event).getToZone() == Zone.STACK )
-		{
-			Card card = (Card)game.getObject(event.getTargetId());
-			Spell spell = (Spell)game.getObject(event.getSourceId());
-			if ( card.getSubtype().contains("Eldrazi") ) {
-				ManaCosts costs = spell.getSpellAbility().getManaCosts();
-				costs.load("{" + (card.getManaCost().convertedManaCost() - 2) + "}");
+	public boolean apply(Game game, Ability source) {
+		SpellStack stack = game.getStack();
+		boolean applied = false;
+
+		for ( int idx = 0; idx < stack.size(); idx++ ) {
+			StackObject stackObject = stack.get(idx);
+
+			if ( stackObject instanceof Spell &&
+				 ((Spell)stackObject).getSubtype().contains("Eldrazi"))
+			{
+				SpellAbility spell = ((Spell)stackObject).getSpellAbility();
+				int previousCost = spell.getManaCosts().convertedManaCost();
+				int adjustedCost = 0;
+				if ( (previousCost - 2) > 0 ) {
+					adjustedCost = previousCost - 2;
+				}
+				spell.getManaCosts().load("{" + adjustedCost + "}");
+				applied = true;
 			}
 		}
-		return false;
+
+		return applied;
 	}
 
 	@Override
-	public EyeofUginCostReductionAbility copy() {
-		return new EyeofUginCostReductionAbility(this);
+	public EyeofUginCostReductionEffect copy() {
+		return new EyeofUginCostReductionEffect(this);
 	}
 
 	@Override
-	public String getRule() {
-		return abilityText;
+	public String getText(Ability source) {
+		return effectText;
 	}
 }
-
-//class EyeofUginCostReductionEffect extends ContinuousEffectImpl<EyeofUginCostReductionEffect> {
-//
-//	private static final String effectText = "Colorless Eldrazi spells you cast cost {2} less to cast";
-//
-//	EyeofUginCostReductionEffect ( ) {
-//		super(Duration.WhileOnBattlefield, Layer.TextChangingEffects_3, SubLayer.NA, Outcome.Benefit);
-//	}
-//
-//	EyeofUginCostReductionEffect(EyeofUginCostReductionEffect effect) {
-//		super(effect);
-//	}
-//
-//	@Override
-//	public void init(Ability source, Game game) {
-//		super.init(source, game);
-//		if (this.affectedObjectsSet) {
-//			SpellStack stack = game.getStack();
-//			for ( int idx = 0; idx < stack.size(); idx++ ) {
-//				StackObject stackObject = stack.get(idx);
-//
-//				if ( stackObject instanceof Spell &&
-//					 !objects.contains(stackObject.getId()) &&
-//					 ((Spell)stackObject).getSubtype().contains("Eldrazi"))
-//				{
-//					objects.add(stackObject.getId());
-//				}
-//			}
-//		}
-//	}
-//
-//	@Override
-//	public boolean apply(Game game, Ability source) {
-//		SpellStack stack = game.getStack();
-//		boolean applied = false;
-//
-//		for ( int idx = 0; idx < stack.size(); idx++ ) {
-//			StackObject stackObject = stack.get(idx);
-//
-//			if ( stackObject instanceof Spell &&
-//				 !objects.contains(stackObject.getId()) &&
-//				 ((Spell)stackObject).getSubtype().contains("Eldrazi"))
-//			{
-//				SpellAbility spell = ((Spell)stackObject).getSpellAbility();
-//				int previousCost = spell.getManaCosts().convertedManaCost();
-//				spell.getManaCosts().load("{" + (previousCost - 2) + "}");
-//				applied |= objects.add(stackObject.getId());
-//			}
-//		}
-//
-//		return applied;
-//	}
-//
-//	@Override
-//	public EyeofUginCostReductionEffect copy() {
-//		return new EyeofUginCostReductionEffect(this);
-//	}
-//
-//	@Override
-//	public String getText(Ability source) {
-//		return effectText;
-//	}
-//}
