@@ -134,12 +134,6 @@ public class SpellStack extends Stack<StackObject> {
 		return null;
 	}
 
-	public void reset ( Game game ) {
-		for ( StackObject stackObject : this ) {
-			stackObject.reset(game);
-		}
-	}
-
 	public SpellStack copy() {
 		return new SpellStack(this);
 	}

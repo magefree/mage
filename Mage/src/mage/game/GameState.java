@@ -240,7 +240,6 @@ public class GameState implements Serializable, Copyable<GameState> {
 		for (Player player: players.values()) {
 			player.reset();
 		}
-		stack.reset(game);
 		battlefield.reset(game);
 		effects.apply(game);
 	}
