@@ -33,6 +33,8 @@ import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -43,23 +45,31 @@ import mage.game.permanent.Permanent;
  */
 public class BoostEquippedEffect extends ContinuousEffectImpl<BoostEquippedEffect> {
 
-	private int power;
-	private int toughness;
+	private DynamicValue power;
+	private DynamicValue toughness;
 
 	public BoostEquippedEffect(int power, int toughness) {
 		this(power, toughness, Duration.WhileOnBattlefield);
 	}
 
 	public BoostEquippedEffect(int power, int toughness, Duration duration) {
-		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-		this.power = power;
-		this.toughness = toughness;
+        this(new StaticValue(power), new StaticValue(toughness), duration);
 	}
+
+    public BoostEquippedEffect(DynamicValue powerDynamicValue, DynamicValue toughnessDynamicValue) {
+        this(powerDynamicValue, toughnessDynamicValue, Duration.WhileOnBattlefield);
+    }
+
+    public BoostEquippedEffect(DynamicValue powerDynamicValue, DynamicValue toughnessDynamicValue, Duration duration) {
+        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+        this.power = powerDynamicValue;
+        this.toughness = toughnessDynamicValue;
+    }
 
 	public BoostEquippedEffect(final BoostEquippedEffect effect) {
 		super(effect);
-		this.power = effect.power;
-		this.toughness = effect.toughness;
+		this.power = effect.power.clone();
+		this.toughness = effect.toughness.clone();
 	}
 
 	@Override
@@ -73,8 +83,8 @@ public class BoostEquippedEffect extends ContinuousEffectImpl<BoostEquippedEffec
 		if (equipment != null && equipment.getAttachedTo() != null) {
 			Permanent creature = game.getPermanent(equipment.getAttachedTo());
 			if (creature != null) {
-				creature.addPower(power);
-				creature.addToughness(toughness);
+				creature.addPower(power.calculate(game, source));
+				creature.addToughness(toughness.calculate(game, source));
 			}
 		}
 		return true;
@@ -83,7 +93,7 @@ public class BoostEquippedEffect extends ContinuousEffectImpl<BoostEquippedEffec
 	@Override
 	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Equipped creatures gets ").append(String.format("%1$+d/%2$+d", power, toughness));
+		sb.append("Equipped creatures gets ").append(power.toString()).append("/").append(toughness.toString());
 		if (duration != Duration.WhileOnBattlefield)
 			sb.append(" ").append(duration.toString());
 		return sb.toString();
