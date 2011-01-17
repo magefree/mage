@@ -126,8 +126,8 @@ public class MageFrame extends javax.swing.JFrame {
             logger.log(Level.SEVERE, null, ex);
         }
 
+		ManaSymbols.loadImages();
         Plugins.getInstance().loadPlugins();
-        ManaSymbols.loadImages();
 
         initComponents();
         setSize(1024, 768);
@@ -229,6 +229,9 @@ public class MageFrame extends javax.swing.JFrame {
 
     private void addTooltipContainer() {
         final JEditorPane cardInfoPane = (JEditorPane) Plugins.getInstance().getCardInfoPane();
+		if (cardInfoPane == null) {
+			return;
+		}
         cardInfoPane.setSize(320, 201);
         cardInfoPane.setLocation(40, 40);
         cardInfoPane.setBackground(new Color(0, 0, 0, 0));

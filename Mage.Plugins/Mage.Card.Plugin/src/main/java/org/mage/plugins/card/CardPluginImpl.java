@@ -73,7 +73,7 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     public String toString() {
-        return "[Card plugin, version 0.4]";
+        return "[Card plugin, version 0.5]";
     }
 
     @Override

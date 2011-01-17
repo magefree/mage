@@ -90,19 +90,21 @@ public final class Constants {
 
 	public enum Rarity {
 
-		NA ("na", "na"),
-		LAND ("Land", "common"),
-		COMMON ("Common", "common"),
-		UNCOMMON ("Uncommon", "uncommon"),
-		RARE ("Rare", "rare"),
-		MYTHIC ("Mythic", "mythic");
+		NA ("na", "na", "N"),
+		LAND ("Land", "common", "C"),
+		COMMON ("Common", "common", "C"),
+		UNCOMMON ("Uncommon", "uncommon", "U"),
+		RARE ("Rare", "rare", "R"),
+		MYTHIC ("Mythic", "mythic", "M");
 
 		private String text;
 		private String symbolCode;
+		private String code;
 
-		Rarity(String text, String symbolCode) {
+		Rarity(String text, String symbolCode, String code) {
 			this.text = text;
 			this.symbolCode = symbolCode;
+			this.code = code;
 		}
 
 		@Override
@@ -114,6 +116,9 @@ public final class Constants {
 			return symbolCode;
 		}
 
+		public String getCode() {
+			return code;
+		}
 	}
 
 	public enum AbilityType {

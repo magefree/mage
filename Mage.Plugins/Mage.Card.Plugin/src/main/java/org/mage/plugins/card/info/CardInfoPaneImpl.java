@@ -92,8 +92,9 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                         buffer.append("<b color='#D5330B'>");
                         break;
                 }
-                buffer.append(card.getExpansionSetCode().toUpperCase());
-                buffer.append("</td></tr></table>");
+				String rarity = card.getRarity().getCode();
+				buffer.append(ManaSymbols.replaceSetCodeWithHTML(card.getExpansionSetCode().toUpperCase(), rarity));
+				buffer.append("</td></tr></table>");
 
                 String pt = "";
                 if (CardUtil.isCreature(card)) {
@@ -137,6 +138,7 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                         setText(buffer.toString());
                         //System.out.println(buffer.toString());
                         setCaretPosition(0);
+						//ThreadUtils.sleep(300);
                     }
                 });
             }
