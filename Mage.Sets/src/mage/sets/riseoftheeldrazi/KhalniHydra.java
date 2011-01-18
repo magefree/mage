@@ -78,7 +78,7 @@ public class KhalniHydra extends CardImpl<KhalniHydra> {
 	public void adjustCosts(Ability ability, Game game) {
 		super.adjustCosts(ability, game);
 		int reductionAmount = game.getBattlefield().getAllActivePermanents(filter).size();
-		Iterator<ManaCost> iter = ability.getManaCosts().iterator();
+		Iterator<ManaCost> iter = ability.getManaCostsToPay().iterator();
 
 		while ( reductionAmount > 0 && iter.hasNext() ) {
 			iter.next();

@@ -57,6 +57,7 @@ public interface Ability extends Serializable {
 	public Costs<Cost> getCosts();
 	public void addCost(Cost cost);
 	public ManaCosts<ManaCost> getManaCosts();
+	public ManaCosts<ManaCost> getManaCostsToPay();
 	public void addManaCost(ManaCost cost);
 	public List<AlternativeCost> getAlternativeCosts();
 	public void addAlternativeCost(AlternativeCost cost);

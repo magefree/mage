@@ -251,6 +251,11 @@ public class StackAbility implements StackObject, Ability {
 	}
 
 	@Override
+	public ManaCosts<ManaCost> getManaCostsToPay ( ) {
+		return ability.getManaCostsToPay();
+	}
+
+	@Override
 	public void addManaCost(ManaCost cost) { }
 
 	@Override

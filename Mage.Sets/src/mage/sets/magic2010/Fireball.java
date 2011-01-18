@@ -59,7 +59,7 @@ public class Fireball extends CardImpl<Fireball> {
 	public void adjustCosts(Ability ability, Game game) {
 		int numTargets = ability.getTargets().get(0).getTargets().size();
 		if (numTargets > 1) {
-			ability.getManaCosts().add(new GenericManaCost(numTargets - 1));
+			ability.getManaCostsToPay().add(new GenericManaCost(numTargets - 1));
 		}
 	}
 
