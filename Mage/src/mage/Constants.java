@@ -153,7 +153,8 @@ public final class Constants {
 		REDIRECTION("Redirection Effect"),
 		ASTHOUGH("As Though Effect"), 
 		RESTRICTION("Restriction Effect"),
-		REQUIREMENT("Requirement Effect");
+		REQUIREMENT("Requirement Effect"),
+		COSTMODIFICATION("Cost Modification Effect");
 
 		private String text;
 

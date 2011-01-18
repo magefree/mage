@@ -31,10 +31,8 @@ package mage.sets.worldwake;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -42,14 +40,12 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.CostModificationEffectImpl;
 import mage.abilities.effects.common.SearchLibraryRevealPutInHandEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.game.stack.SpellStack;
-import mage.game.stack.StackObject;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -89,12 +85,12 @@ public class EyeofUgin extends CardImpl<EyeofUgin> {
     }
 }
 
-class EyeofUginCostReductionEffect extends ContinuousEffectImpl<EyeofUginCostReductionEffect> {
+class EyeofUginCostReductionEffect extends CostModificationEffectImpl<EyeofUginCostReductionEffect> {
 
 	private static final String effectText = "Colorless Eldrazi spells you cast cost {2} less to cast";
 
 	EyeofUginCostReductionEffect ( ) {
-		super(Duration.WhileOnBattlefield, Layer.TextChangingEffects_3, SubLayer.NA, Outcome.Benefit);
+		super(Duration.WhileOnBattlefield, Outcome.Benefit);
 	}
 
 	EyeofUginCostReductionEffect(EyeofUginCostReductionEffect effect) {
@@ -102,28 +98,27 @@ class EyeofUginCostReductionEffect extends ContinuousEffectImpl<EyeofUginCostRed
 	}
 
 	@Override
-	public boolean apply(Game game, Ability source) {
-		SpellStack stack = game.getStack();
-		boolean applied = false;
+	public boolean apply(Game game, Ability source, Ability abilityToModify) {
+		SpellAbility spellAbility = (SpellAbility)abilityToModify;
+		int previousCost = spellAbility.getManaCostsToPay().convertedManaCost();
+		int adjustedCost = 0;
+		if ( (previousCost - 2) > 0 ) {
+			adjustedCost = previousCost - 2;
+		}
+		spellAbility.getManaCostsToPay().load("{" + adjustedCost + "}");
 
-		for ( int idx = 0; idx < stack.size(); idx++ ) {
-			StackObject stackObject = stack.get(idx);
-
-			if ( stackObject instanceof Spell &&
-				 ((Spell)stackObject).getSubtype().contains("Eldrazi"))
-			{
-				SpellAbility spell = ((Spell)stackObject).getSpellAbility();
-				int previousCost = spell.getManaCosts().convertedManaCost();
-				int adjustedCost = 0;
-				if ( (previousCost - 2) > 0 ) {
-					adjustedCost = previousCost - 2;
-				}
-				spell.getManaCosts().load("{" + adjustedCost + "}");
-				applied = true;
+		return true;
+	}
+	
+	@Override
+	public boolean applies(Ability abilityToModify, Ability source, Game game) {
+		if ( abilityToModify instanceof SpellAbility ) {
+			Card sourceCard = game.getCard(((SpellAbility)abilityToModify).getSourceId());
+			if ( sourceCard != null && sourceCard.getSubtype().contains("Eldrazi") && sourceCard.getOwnerId().equals(source.getControllerId()) ) {
+				return true;
 			}
 		}
-
-		return applied;
+		return false;
 	}
 
 	@Override

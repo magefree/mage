@@ -65,6 +65,7 @@ public class ContinuousEffects implements Serializable {
 	private final List<RequirementEffect> requirementEffects = new ArrayList<RequirementEffect>();
 	private final List<RestrictionEffect> restrictionEffects = new ArrayList<RestrictionEffect>();
 	private final List<AsThoughEffect> asThoughEffects = new ArrayList<AsThoughEffect>();
+	private final List<CostModificationEffect> costModificationEffects = new ArrayList<CostModificationEffect>();
 
 	//map Abilities to Continuous effects
 	private final Map<UUID, Ability> abilityMap = new HashMap<UUID, Ability>();
@@ -97,6 +98,9 @@ public class ContinuousEffects implements Serializable {
 		}
 		for (AsThoughEffect entry: effect.asThoughEffects) {
 			asThoughEffects.add((AsThoughEffect)entry.copy());
+		}
+		for ( CostModificationEffect entry : effect.costModificationEffects ) {
+			costModificationEffects.add(entry);
 		}
 		for (Entry<UUID, Ability> entry: effect.abilityMap.entrySet()) {
 			abilityMap.put(entry.getKey(), entry.getValue().copy());
@@ -150,6 +154,11 @@ public class ContinuousEffects implements Serializable {
 			if (entry.getDuration() == Duration.EndOfTurn)
 				i.remove();
 		}
+		for (Iterator<CostModificationEffect> i = costModificationEffects.iterator(); i.hasNext();) {
+			ContinuousEffect entry = i.next();
+			if (entry.getDuration() == Duration.EndOfTurn)
+				i.remove();
+		}
 	}
 
 	public void removeInactiveEffects(Game game) {
@@ -174,6 +183,10 @@ public class ContinuousEffects implements Serializable {
 				i.remove();
 		}
 		for (Iterator<AsThoughEffect> i = asThoughEffects.iterator(); i.hasNext();) {
+			if (isInactive(i.next(), game))
+				i.remove();
+		}
+		for (Iterator<CostModificationEffect> i = costModificationEffects.iterator(); i.hasNext();) {
 			if (isInactive(i.next(), game))
 				i.remove();
 		}
@@ -357,6 +370,33 @@ public class ContinuousEffects implements Serializable {
 		return false;
 	}
 
+	/**
+	 * Inspects all {@link Permanent permanent's} {@link Ability abilities} on the battlefied
+	 * for {@link CostModificationEffect cost modification effects} and applies them if necessary.
+	 * 
+	 * @param objectId
+	 * @param abilityToModify
+	 * @param game
+	 * @return
+	 */
+	public void costModification ( Ability abilityToModify, Game game ) {
+		for ( Permanent permanent : game.getBattlefield().getAllPermanents() ) {
+			for ( Ability ability : permanent.getAbilities().getStaticAbilities(Zone.BATTLEFIELD) ) {
+				for ( Effect effect : ability.getEffects(EffectType.COSTMODIFICATION) ) {
+					CostModificationEffect rEffect = (CostModificationEffect)effect;
+					if ( rEffect.applies(abilityToModify, ability, game) ) {
+						rEffect.apply(game, ability, abilityToModify);
+					}
+				}
+			}
+		}
+		for ( CostModificationEffect effect : costModificationEffects ) {
+			if ( effect.applies(abilityToModify, abilityMap.get(effect.getId()), game) ) {
+				effect.apply(game, abilityMap.get(effect.getId()), abilityToModify);
+			}
+		}
+	}
+
 	public boolean replaceEvent(GameEvent event, Game game) {
 		boolean caught = false;
 		List<ReplacementEffect> rEffects = getApplicableReplacementEffects(event, game);
@@ -473,6 +513,11 @@ public class ContinuousEffects implements Serializable {
 				AsThoughEffect newAsThoughEffect = (AsThoughEffect)effect;
 				asThoughEffects.add(newAsThoughEffect);
 				abilityMap.put(newAsThoughEffect.getId(), source);
+				break;
+			case COSTMODIFICATION:
+				CostModificationEffect newCostModificationEffect = (CostModificationEffect)effect;
+				costModificationEffects.add(newCostModificationEffect);
+				abilityMap.put(newCostModificationEffect.getId(), source);
 				break;
 			default:
 				ContinuousEffect newEffect = (ContinuousEffect)effect;

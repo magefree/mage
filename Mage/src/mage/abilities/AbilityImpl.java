@@ -68,6 +68,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 	protected UUID controllerId;
 	protected UUID sourceId;
 	protected ManaCosts<ManaCost> manaCosts;
+	protected ManaCosts<ManaCost> manaCostsToPay;
 	protected Costs<Cost> costs;
 	protected ArrayList<AlternativeCost> alternativeCosts = new ArrayList<AlternativeCost>();
 	protected Costs<Cost> optionalCosts;
@@ -87,6 +88,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 		this.abilityType = abilityType;
 		this.zone = zone;
 		this.manaCosts = new ManaCostsImpl<ManaCost>();
+		this.manaCostsToPay = new ManaCostsImpl<ManaCost>();
 		this.costs = new CostsImpl<Cost>();
 		this.optionalCosts = new CostsImpl<Cost>();
 		this.effects = new Effects();
@@ -104,6 +106,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 		this.name = ability.name;
 		this.usesStack = ability.usesStack;
 		this.manaCosts = ability.manaCosts.copy();
+		this.manaCostsToPay = ability.manaCostsToPay.copy();
 		this.costs = ability.costs.copy();
 		this.optionalCosts = ability.optionalCosts.copy();
 		for (AlternativeCost cost: ability.alternativeCosts) {
@@ -162,8 +165,11 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 		if (game.getObject(sourceId) != null)
 			game.getObject(sourceId).adjustCosts(this, game);
 		if (!useAlternativeCost(game)) {
+			//20101001 - 601.2e
+			game.getContinuousEffects().costModification(this, game);
+			
 			//20100716 - 601.2f
-			if (!manaCosts.pay(game, sourceId, controllerId, noMana)) {
+			if (!manaCostsToPay.pay(game, sourceId, controllerId, noMana)) {
 				logger.fine("activate failed - mana");
 				return false;
 			}
@@ -223,6 +229,16 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 	@Override
 	public ManaCosts<ManaCost> getManaCosts() {
 		return manaCosts;
+	}
+
+	/**
+	 * Should be used by {@link mage.abilities.effects.CostModificationEffect cost modification effects}
+	 * to manipulate what is actually paid before resolution.
+	 * 
+	 * @return
+	 */
+	public ManaCosts<ManaCost> getManaCostsToPay ( ) {
+		return manaCostsToPay;
 	}
 
 	@Override
@@ -324,6 +340,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 	public void addManaCost(ManaCost cost) {
 		if (cost != null) {
 			this.manaCosts.add(cost);
+			this.manaCostsToPay.add(cost);
 		}
 	}
 
