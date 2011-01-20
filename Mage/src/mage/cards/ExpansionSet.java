@@ -164,44 +164,50 @@ public abstract class ExpansionSet implements Serializable {
 		return null;
 	}
 
-	protected ArrayList<Class> getCardClassesForPackage(String packageName) {
-		ArrayList<Class> classes = new ArrayList<Class>();
-		// Get a File object for the package
-		File directory = null;
-		String fullPath;
-		String relPath = packageName.replace('.', '/');
-		URL resource = ClassLoader.getSystemClassLoader().getResource(relPath);
-		if (resource == null) {
-			throw new RuntimeException("No resource for " + relPath);
-		}
-		fullPath = resource.getFile();
-		directory = new File(fullPath);
+       private ArrayList<Class> getCardClassesForPackage(String packageName) {
+           ClassLoader classLoader = this.getClass().getClassLoader();
+           assert classLoader != null;
+           String path = packageName.replace('.', '/');
+           Enumeration<URL> resources = null;
+           try {
+               resources = classLoader.getResources(path);
+           } catch (IOException e) {
+               e.printStackTrace();
+           }
+           List<File> dirs = new ArrayList<File>();
+           while (resources.hasMoreElements()) {
+               URL resource = resources.nextElement();
+               dirs.add(new File(resource.getFile()));
+           }
+           ArrayList<Class> classes = new ArrayList<Class>();
+           for (File directory : dirs) {
+               try {
+                   classes.addAll(findClasses(directory, packageName));
+               } catch (ClassNotFoundException e) {
+                   e.printStackTrace();
+               }
+           }
+           return classes;
+       }
 
-		try {
-			String jarPath = fullPath.replaceFirst("[.]jar[!].*", ".jar").replaceFirst("file:", "").replaceAll("%20", " ");
-			JarFile jarFile = new JarFile(jarPath);
-			Enumeration<JarEntry> entries = jarFile.entries();
-			while(entries.hasMoreElements()) {
-				JarEntry entry = entries.nextElement();
-				String entryName = entry.getName();
-				if(entryName.startsWith(relPath) && entryName.length() > (relPath.length() + "/".length())) {
-					String className = entryName.replace('/', '.').replace('\\', '.').replace(".class", "");
-					try {
-						Class clazz = Class.forName(className);
-						if (CardImpl.class.isAssignableFrom(clazz)) {
-							classes.add(clazz);
-						}
-					}
-					catch (ClassNotFoundException e) {
-						throw new RuntimeException("ClassNotFoundException loading " + className);
-					}
-				}
-			}
-		} catch (IOException e) {
-			throw new RuntimeException(packageName + " (" + directory + ") does not appear to be a valid package", e);
-		}
-		return classes;
-	}
+       private static List<Class> findClasses(File directory, String packageName) throws ClassNotFoundException {
+           List<Class> classes = new ArrayList<Class>();
+           if (!directory.exists()) {
+               return classes;
+           }
+           File[] files = directory.listFiles();
+           for (File file : files) {
+               if (file.isDirectory()) {
+                   assert !file.getName().contains(".");
+                   classes.addAll(findClasses(file, packageName + "." + file.getName()));
+               } else if (file.getName().endsWith(".class")) {
+                   Class c = Class.forName(packageName + '.' + file.getName().substring(0, file.getName().length() - 6));
+                   if (CardImpl.class.isAssignableFrom(c))
+                       classes.add(c);
+               }
+           }
+           return classes;
+       }
 
 	private Map<Rarity, List<Class>> getCardsByRarity() {
 		Map<Rarity, List<Class>> cardsByRarity = new HashMap<Rarity, List<Class>>();
