@@ -473,37 +473,39 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public void playPriority(UUID activePlayerId) {
-		while (!isGameOver()) {
-			state.getPlayers().resetPassed();
-			state.getPlayerList().setCurrent(activePlayerId);
-			Player player;
+		try {
 			while (!isGameOver()) {
-				player = getPlayer(state.getPlayerList().get());
-				state.setPriorityPlayerId(player.getId());
-				while (!player.isPassed() && !player.hasLost() && !player.hasLeft()&& !isGameOver()) {
-					checkStateAndTriggered();
-					if (isGameOver()) return;
-					// resetPassed should be called if player performs any action
-					player.priority(this);
-					if (isGameOver()) return;
-					applyEffects();
-					resetLKI();
-				}
-				if (isGameOver()) return;
-				if (allPassed()) {
-					if (!state.getStack().isEmpty()) {
-						//20091005 - 115.4
-						state.getStack().resolve(this);
+				state.getPlayers().resetPassed();
+				state.getPlayerList().setCurrent(activePlayerId);
+				Player player;
+				while (!isGameOver()) {
+					player = getPlayer(state.getPlayerList().get());
+					state.setPriorityPlayerId(player.getId());
+					while (!player.isPassed() && !player.hasLost() && !player.hasLeft() && !isGameOver()) {
+						checkStateAndTriggered();
+						if (isGameOver()) return;
+						// resetPassed should be called if player performs any action
+						player.priority(this);
+						if (isGameOver()) return;
 						applyEffects();
-						state.getPlayers().resetPassed();
-						fireUpdatePlayersEvent();
-						break;
 					}
-					else
-						return;
+					if (isGameOver()) return;
+					if (allPassed()) {
+						if (!state.getStack().isEmpty()) {
+							//20091005 - 115.4
+							state.getStack().resolve(this);
+							applyEffects();
+							state.getPlayers().resetPassed();
+							fireUpdatePlayersEvent();
+							break;
+						} else
+							return;
+					}
+					state.getPlayerList().getNext();
 				}
-				state.getPlayerList().getNext();
 			}
+		} finally {
+			resetLKI();
 		}
 	}
 

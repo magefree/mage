@@ -85,16 +85,18 @@ public class RatchetBomb extends CardImpl<RatchetBomb> {
         @Override
         public boolean apply(Game game, Ability source) {
             Permanent p = game.getBattlefield().getPermanent(source.getSourceId());
-            if (p == null) {
+	        if (p == null) {
                 p = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-                if (p == null)
+                if (p == null) {
                     return false;
+                }
             }
 
             int count = p.getCounters().getCount(CounterType.CHARGE);
             for (Permanent perm: game.getBattlefield().getAllActivePermanents()) {
-			    if (perm.getManaCost().convertedManaCost() == count && !(perm.getCardType().contains(CardType.LAND)))
+			    if (perm.getManaCost().convertedManaCost() == count && !(perm.getCardType().contains(CardType.LAND))) {
 				    perm.destroy(source.getId(), game, false);
+			    }
 		    }
 
             return true;

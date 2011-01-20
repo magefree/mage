@@ -153,6 +153,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 			if (!game.replaceEvent(event)) {
 				Card card = game.getCard(objectId);
 				Player owner = game.getPlayer(ownerId);
+				game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
 				if (owner != null) {
 					switch (event.getToZone()) {
 						case GRAVEYARD:
