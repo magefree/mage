@@ -97,7 +97,7 @@ class MyrsmithTriggeredAbility extends TriggeredAbilityImpl<MyrsmithTriggeredAbi
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.getControllerId())) {
 			Spell spell = game.getStack().getSpell(event.getTargetId());
 			if (spell != null && spell.getCardType().contains(CardType.ARTIFACT)) {
 				return true;

@@ -29,82 +29,44 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.BoostTargetEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainAbilityTargetEffect;
-import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class Painsmith extends CardImpl<Painsmith> {
+public class NeurokInvisimancer extends CardImpl<NeurokInvisimancer> {
 
-    public Painsmith (UUID ownerId) {
-        super(ownerId, 74, "Painsmith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+    public NeurokInvisimancer (UUID ownerId) {
+        super(ownerId, 37, "Neurok Invisimancer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Human");
-        this.subtype.add("Artificer");
-		this.color.setBlack(true);
+        this.subtype.add("Wizard");
+		this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.addAbility(new PainsmithTriggeredAbility());
+        this.addAbility(UnblockableAbility.getInstance());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new GainAbilityTargetEffect(UnblockableAbility.getInstance(), Duration.EndOfTurn));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public Painsmith (final Painsmith card) {
+    public NeurokInvisimancer (final NeurokInvisimancer card) {
         super(card);
     }
 
     @Override
-    public Painsmith copy() {
-        return new Painsmith(this);
-    }
-}
-
-class PainsmithTriggeredAbility extends TriggeredAbilityImpl<PainsmithTriggeredAbility> {
-    public PainsmithTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn));
-        this.addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
-        this.addTarget(new TargetCreaturePermanent());
+    public NeurokInvisimancer copy() {
+        return new NeurokInvisimancer(this);
     }
 
-    public PainsmithTriggeredAbility(final PainsmithTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public PainsmithTriggeredAbility copy() {
-        return new PainsmithTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST  && event.getPlayerId().equals(this.getControllerId())) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (spell != null && spell.getCardType().contains(CardType.ARTIFACT)) {
-				return true;
-			}
-		}
-		return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cast an artifact spell, you may have target creature get +2/+0 and gain deathtouch until end of turn.";
-    }
 }

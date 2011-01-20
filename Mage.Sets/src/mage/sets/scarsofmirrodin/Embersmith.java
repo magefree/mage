@@ -32,85 +32,88 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
- *
  * @author Loki
  */
-public class Lifesmith extends CardImpl<Lifesmith> {
+public class Embersmith extends CardImpl<Embersmith> {
 
-    public Lifesmith (UUID ownerId) {
-        super(ownerId, 124, "Lifesmith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+    public Embersmith(UUID ownerId) {
+        super(ownerId, 87, "Embersmith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Human");
         this.subtype.add("Artificer");
-		this.color.setGreen(true);
+        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.addAbility(new LifesmithTriggeredAbility());
+        this.addAbility(new EmbersmithTriggeredAbility());
     }
 
-    public Lifesmith (final Lifesmith card) {
+    public Embersmith(final Embersmith card) {
         super(card);
     }
 
     @Override
-    public Lifesmith copy() {
-        return new Lifesmith(this);
+    public Embersmith copy() {
+        return new Embersmith(this);
     }
+
 }
 
-class LifesmithTriggeredAbility extends TriggeredAbilityImpl<LifesmithTriggeredAbility> {
-    public LifesmithTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new LifesmithEffect());
-
+class EmbersmithTriggeredAbility extends TriggeredAbilityImpl<EmbersmithTriggeredAbility> {
+    EmbersmithTriggeredAbility() {
+        super(Constants.Zone.BATTLEFIELD, new EmbersmithEffect());
+        this.addTarget(new TargetCreatureOrPlayer());
     }
 
-    public LifesmithTriggeredAbility(final LifesmithTriggeredAbility ability) {
+    EmbersmithTriggeredAbility(final EmbersmithTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public LifesmithTriggeredAbility copy() {
-        return new LifesmithTriggeredAbility(this);
+    public EmbersmithTriggeredAbility copy() {
+        return new EmbersmithTriggeredAbility(this);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.getControllerId())) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (spell != null && spell.getCardType().contains(CardType.ARTIFACT)) {
-				return true;
-			}
-		}
-		return false;
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null && spell.getCardType().contains(CardType.ARTIFACT)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever you cast an artifact spell, you may pay {1}. If you do, you gain 3 life.";
+        return "Whenever you cast an artifact spell, you may pay {1}. If you do, Embersmith deals 1 damage to target creature or player.";
     }
 }
 
-class LifesmithEffect extends OneShotEffect<LifesmithEffect> {
-    LifesmithEffect() {
-        super(Constants.Outcome.GainLife);
+class EmbersmithEffect extends OneShotEffect<EmbersmithEffect> {
+    EmbersmithEffect() {
+        super(Constants.Outcome.Damage);
     }
 
-    LifesmithEffect(final LifesmithEffect effect) {
+    EmbersmithEffect(final EmbersmithEffect effect) {
         super(effect);
     }
 
@@ -119,22 +122,28 @@ class LifesmithEffect extends OneShotEffect<LifesmithEffect> {
         Cost cost = new GenericManaCost(1);
         cost.clearPaid();
         if (cost.pay(game, source.getId(), source.getControllerId(), false)) {
-            Player player = game.getPlayer(source.getControllerId());
-            if (player != null) {
-                player.gainLife(3, game);
+            Permanent permanent = game.getPermanent(source.getFirstTarget());
+            if (permanent != null) {
+                permanent.damage(1, source.getId(), game, true, false);
                 return true;
             }
+            Player player = game.getPlayer(source.getFirstTarget());
+            if (player != null) {
+                player.damage(1, source.getId(), game, false, true);
+                return true;
+            }
+            return false;
         }
         return false;
     }
 
     @Override
-    public LifesmithEffect copy() {
-        return new LifesmithEffect(this);
+    public EmbersmithEffect copy() {
+        return new EmbersmithEffect(this);
     }
 
     @Override
     public String getText(Ability source) {
-        return "you may pay {1}. If you do, you gain 3 life";
+        return "you may pay {1}. If you do, Embersmith deals 1 damage to target creature or player";
     }
 }
