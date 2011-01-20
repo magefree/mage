@@ -209,6 +209,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     default:
                         logger.warning("moveToZone, not fully implemented: from="+event.getFromZone() + ", to="+event.getToZone());
                 }
+	            game.rememberLKI(objectId, event.getFromZone(), this);
             }
 			switch (event.getToZone()) {
 				case GRAVEYARD:

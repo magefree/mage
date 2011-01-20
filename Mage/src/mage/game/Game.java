@@ -106,6 +106,9 @@ public interface Game extends MageItem, Serializable {
 	public GameStates getGameStates();
 	public void loadGameStates(GameStates states);
 	public Game copy();
+	public Card getLastKnownInformation(UUID objectId, Zone zone);
+	public void rememberLKI(UUID objectId, Zone zone, Card card);
+	public void resetLKI();
 
 	//client event methods
 	public void addTableEventListener(Listener<TableEvent> listener);

@@ -108,6 +108,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
 
 	protected Map<UUID, Card> gameCards = new HashMap<UUID, Card>();
+	protected Map<UUID, Card> lki = new HashMap<UUID, Card>();
 	protected GameState state;
 	protected UUID startingPlayerId;
 	protected UUID winnerId;
@@ -486,6 +487,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 					player.priority(this);
 					if (isGameOver()) return;
 					applyEffects();
+					resetLKI();
 				}
 				if (isGameOver()) return;
 				if (allPassed()) {
@@ -905,4 +907,36 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		gameStates = new GameStates();
 	}
 
+	/**
+	 * Gets last known information about object in the zone.
+	 * At the moment doesn't take into account zone (it is expected that it doesn't really matter, if not, then Map<UUID, Map<Zone, Card>> should be used instead).
+	 *
+	 * Can return null.
+	 *
+	 * @param objectId
+	 * @param zone
+	 * @return
+	 */
+	public Card getLastKnownInformation(UUID objectId, Zone zone) {
+		return lki.get(objectId);
+	}
+
+	/**
+	 * Remembers object state to be used as Last Known Information.
+	 *
+	 * @param objectId
+	 * @param zone
+	 * @param card
+	 */
+	public void rememberLKI(UUID objectId, Zone zone, Card card) {
+		Card copy = card.copy();
+		lki.put(objectId, copy);
+	}
+
+	/**
+	 * Reset objects stored for Last Known Information.
+	 */
+	public void resetLKI() {
+		lki.clear();
+	}
 }

@@ -108,7 +108,10 @@ public class RazorHippogriff extends CardImpl<RazorHippogriff> {
 		public boolean apply(Game game, Ability source) {
 			Player player = game.getPlayer(source.getControllerId());
 			if (player != null) {
-				MageObject card = game.getObject(source.getFirstTarget());
+				Card card = player.getGraveyard().get(source.getFirstTarget(), game);
+				if (card == null) {
+					card = game.getLastKnownInformation(source.getFirstTarget(), Zone.GRAVEYARD);
+				}
 				if (card != null) {
 					player.gainLife(card.getManaCost().convertedManaCost(), game);
 				}
