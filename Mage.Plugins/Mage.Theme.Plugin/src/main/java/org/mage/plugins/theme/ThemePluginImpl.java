@@ -34,7 +34,7 @@ public class ThemePluginImpl implements ThemePlugin {
 	}
 
 	public String toString() {
-		return "[Theme plugin, version 0.3]";
+		return "[Theme plugin, version 0.4]";
 	}
 
 	public void applyInGame(Map<String, JComponent> ui) {
@@ -74,7 +74,7 @@ public class ThemePluginImpl implements ThemePlugin {
 	}
 
 	public JComponent updateTable(Map<String, JComponent> ui) {
-		String filename = "/regret.jpg";
+		String filename = "/background.png";
 		try {
 			InputStream is = this.getClass().getResourceAsStream(filename);
 
@@ -86,7 +86,7 @@ public class ThemePluginImpl implements ThemePlugin {
 			if (background == null)
 				throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
 
-			ImagePanel bgPanel = new ImagePanel(background, ImagePanel.TILED);
+			ImagePanel bgPanel = new ImagePanel(background, ImagePanel.SCALED);
 
 			unsetOpaque(ui.get("jScrollPane1"));
 			unsetOpaque(ui.get("jPanel1"));

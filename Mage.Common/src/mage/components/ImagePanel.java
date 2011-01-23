@@ -1,11 +1,6 @@
 package mage.components;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
 import java.awt.image.ConvolveOp;
@@ -22,16 +17,16 @@ public class ImagePanel extends JPanel {
 	public static final int SCALED = 1;
 	public static final int ACTUAL = 2;
 
-	private BufferedImage image;
+	private Image image;
 	private int style;
 	private float alignmentX = 0.5f;
 	private float alignmentY = 0.5f;
 
-	public ImagePanel(BufferedImage image) {
+	public ImagePanel(Image image) {
 		this(image, TILED);
 	}
 
-	public ImagePanel(BufferedImage image, int style) {
+	public ImagePanel(Image image, int style) {
 		this.image = image;
 		this.style = style;
 		setLayout(new BorderLayout());
@@ -103,8 +98,8 @@ public class ImagePanel extends JPanel {
 
 	private void drawActual(Graphics g) {
 		Dimension d = getSize();
-		float x = (d.width - image.getWidth()) * alignmentX;
-		float y = (d.height - image.getHeight()) * alignmentY;
+		float x = (d.width - image.getWidth(null)) * alignmentX;
+		float y = (d.height - image.getHeight(null)) * alignmentY;
 		g.drawImage(image, (int) x, (int) y, this);
 	}
 }
