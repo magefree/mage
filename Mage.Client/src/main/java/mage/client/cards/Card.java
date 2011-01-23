@@ -382,8 +382,6 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 			List<UUID> targets = card.getTargets();
 			if (targets != null) {
 				for (UUID uuid : targets) {
-					//System.out.println("Getting play area panel for uuid: " + uuid);
-					
 					PlayAreaPanel p = session.getGame().getPlayers().get(uuid);
 					if (p != null) {
 						Point target = p.getLocationOnScreen();

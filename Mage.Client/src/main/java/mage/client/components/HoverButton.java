@@ -168,4 +168,8 @@ public class HoverButton extends JPanel implements MouseListener {
     public void changeSelected() {
         this.isSelected = !this.isSelected;
     }
+
+	public void setText(String text) {
+		this.text = text;
+	}
 }

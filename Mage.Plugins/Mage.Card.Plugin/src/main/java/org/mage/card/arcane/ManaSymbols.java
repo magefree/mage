@@ -113,10 +113,14 @@ public class ManaSymbols {
 	}
 
 	static public String replaceSetCodeWithHTML(String set, String rarity) {
-		if (setImagesExist.containsKey(set)) {
-			Integer width = setImagesExist.get(set).width;
-			Integer height = setImagesExist.get(set).height;
-			return "<img src='file:plugins/images/sets/small/" + set + "-" + rarity + ".png' alt='" + rarity + " ' width=" + width + " height=" + height + ">";
+		String _set = set;
+		if (_set.equals("CON")) {
+			_set = "CFX";
+		}
+		if (setImagesExist.containsKey(_set)) {
+			Integer width = setImagesExist.get(_set).width;
+			Integer height = setImagesExist.get(_set).height;
+			return "<img src='file:plugins/images/sets/small/" + _set + "-" + rarity + ".png' alt='" + rarity + " ' width=" + width + " height=" + height + ">";
 		} else {
 			return set;
 		}

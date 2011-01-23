@@ -71,9 +71,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 	private BigCard bigCard;
 	private Map<String, JComponent> ui = new HashMap<String, JComponent>();
 
-	protected static DefaultActionCallback defaultCallback = DefaultActionCallback.getInstance();
 	protected static Map<UUID, PermanentView> battlefield;
-	protected static Map<UUID, Integer> attachmentCache = new HashMap<UUID, Integer>();
 	protected static List<Thread> threads = new ArrayList<Thread>();
 	
     /** Creates new form BattlefieldPanel */
@@ -277,8 +275,8 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(java.awt.Color.gray);
-        setForeground(java.awt.Color.gray);
+        //setBackground(java.awt.Color.gray);
+        //setForeground(java.awt.Color.gray);
         setOpaque(true);
     }// </editor-fold>//GEN-END:initComponents
 

@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 
 public class ManaSymbols {
 	private static final Logger log = Logger.getLogger(ManaSymbols.class);
-	static private final Map<String, Image> manaImages = new HashMap<String, Image>();
+	static private final Map<String, BufferedImage> manaImages = new HashMap<String, BufferedImage>();
 	static private final Map<String, Image> manaImagesOriginal = new HashMap<String, Image>();
 	static private final Map<String, Image> setImages = new HashMap<String, Image>();
 	static private Pattern replaceSymbolsPattern = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
@@ -105,6 +105,10 @@ public class ManaSymbols {
 
 	static public Image getManaSymbolImage(String symbol) {
 		return manaImagesOriginal.get(symbol);
+	}
+
+	static public BufferedImage getManaSymbolImageSmall(String symbol) {
+		return manaImages.get(symbol);
 	}
 
 	static public Image getSetSymbolImage(String set) {

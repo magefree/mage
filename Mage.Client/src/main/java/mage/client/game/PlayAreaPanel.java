@@ -34,17 +34,21 @@
 
 package mage.client.game;
 
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import mage.cards.decks.DeckCardLists;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.sets.Sets;
 import mage.view.PlayerView;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -56,16 +60,17 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 	UUID gameId;
 
     /** Creates new form PlayAreaPanel */
-    public PlayAreaPanel() {
-        initComponents();
-        setOpaque(false);
+    public PlayAreaPanel(boolean me) {
+        initComponents(me);
+		setOpaque(false);
+		jPanel1.setOpaque(false);
         jScrollPane1.setOpaque(false);
         jScrollPane1.getViewport().setOpaque(false);
         battlefieldPanel.setOpaque(false);
-    }
+	}
 
-	public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId) {
-		this();
+	public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId, boolean me) {
+		this(me);
 		init(player, bigCard, gameId);
 		update(player);
 	}
@@ -85,7 +90,6 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
 	public void update(PlayerView player) {
 		this.playerPanel.update(player);
-		this.manaPool.update(player.getManaPool());
 		this.battlefieldPanel.update(player.getBattlefield());
 	}
 
@@ -100,16 +104,17 @@ public class PlayAreaPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
+    private void initComponents(boolean me) {
+		setBorder(BorderFactory.createLineBorder(new Color(0,0,0,0)));
         jPanel1 = new javax.swing.JPanel();
-        playerPanel = new mage.client.game.PlayerPanel();
-        manaPool = new mage.client.game.ManaPool();
+        playerPanel = new PlayerPanelExt(me);
+		playerPanel.setPreferredSize(new Dimension(92, 250));
+		//manaPool = new mage.client.game.ManaPool();
         btnCheat = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         battlefieldPanel = new mage.client.game.BattlefieldPanel(jScrollPane1);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        //jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnCheat.setText("Cheat");
         btnCheat.addActionListener(new java.awt.event.ActionListener() {
@@ -118,26 +123,29 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         });
 
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(manaPool, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+            //.addComponent(manaPool, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
             .addComponent(playerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnCheat, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+            //.addComponent(btnCheat, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(playerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(manaPool, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(btnCheat))
+                //.addGap(0, 0, 0)
+                //.addComponent(manaPool, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                //.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                //.addComponent(btnCheat)
+			)
         );
 
         jScrollPane1.setViewportView(battlefieldPanel);
+		Border empty = new EmptyBorder(0,0,0,0);
+		jScrollPane1.setBorder(empty);
+		jScrollPane1.setViewportBorder(empty);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -146,11 +154,12 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+			)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -170,8 +179,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 	private javax.swing.JButton btnCheat;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private mage.client.game.ManaPool manaPool;
-    private mage.client.game.PlayerPanel playerPanel;
+    //private mage.client.game.ManaPool manaPool;
+    private PlayerPanelExt playerPanel;
     // End of variables declaration//GEN-END:variables
 
 }

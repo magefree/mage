@@ -39,6 +39,8 @@ import java.awt.image.ImageObserver;
 import java.awt.image.MemoryImageSource;
 import java.awt.image.PixelGrabber;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 
@@ -47,6 +49,7 @@ import javax.imageio.ImageIO;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.cards.CardDimensions;
+import mage.client.components.arcane.UI;
 import mage.sets.Sets;
 import mage.view.AbilityView;
 import mage.view.CardView;
@@ -311,4 +314,24 @@ public class ImageHelper {
 		return image;
 	}
 
+	/**
+	 * Get image using relative path in resources.
+	 * @param path
+	 * @return
+	 */
+	public static Image getImageFromResources(String path) {
+		InputStream stream;
+		stream = UI.class.getResourceAsStream(path);
+		if (stream == null) {
+			throw new IllegalArgumentException("Couldn't find image in resources: " + path);
+		}
+
+		try {
+			BufferedImage image = ImageIO.read(stream);
+			return image;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

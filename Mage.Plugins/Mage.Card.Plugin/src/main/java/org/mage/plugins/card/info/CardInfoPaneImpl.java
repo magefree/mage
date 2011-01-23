@@ -123,6 +123,8 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                     }
                 }
 
+
+
                 if (legal.length() > 0) {
                     //buffer.append("<br>");
                     legal = legal.replaceAll("\\{this\\}", card.getName());

@@ -34,7 +34,6 @@
 
 package mage.client;
 
-import java.io.FileNotFoundException;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.client.cards.CardsStorage;
@@ -50,7 +49,6 @@ import mage.client.remote.Session;
 import mage.client.util.EDTExceptionHandler;
 import mage.client.util.gui.ArrowBuilder;
 import mage.components.ImagePanel;
-import mage.game.GameException;
 import mage.util.Logging;
 
 import javax.imageio.ImageIO;
@@ -70,7 +68,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 import mage.client.draft.DraftPane;
-import mage.sets.Sets;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -155,6 +152,11 @@ public class MageFrame extends javax.swing.JFrame {
         setBackground();
         addMageLabel();
         setAppIcon();
+
+		//PlayerPanelNew n = new PlayerPanelNew();
+		//n.setBounds(100,100,100,300);
+		//n.setVisible(true);
+		//backgroundPane.add(n);
 
         desktopPane.add(ArrowBuilder.getArrowsPanel(), JLayeredPane.DRAG_LAYER);
 

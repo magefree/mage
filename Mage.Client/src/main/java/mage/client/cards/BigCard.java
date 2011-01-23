@@ -35,6 +35,7 @@
 package mage.client.cards;
 
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.filters.FilterFactory;
 import mage.filters.impl.HueFilter;
@@ -69,9 +70,9 @@ public class BigCard extends JComponent {
     protected float hue = 0.005f;
     protected float dh = 0.005f;
 
-    static private final int DEFAULT_DELAY_PERIOD = 30;
-    static private final float LEFT_BOUNDARY = 0.0f;
-    static private final float RIGHT_BOUNDARY = 1f;
+    static private final int DEFAULT_DELAY_PERIOD = 50;
+    static private final float LEFT_BOUNDARY = -0.15f;
+    static private final float RIGHT_BOUNDARY = 0.15f;
 
     public BigCard() {
         initComponents();
@@ -79,7 +80,6 @@ public class BigCard extends JComponent {
             initBounds();
         }
         setDoubleBuffered(true);
-        setOpaque(true);
     }
 
     protected void initBounds() {
@@ -252,9 +252,9 @@ public class BigCard extends JComponent {
         setFocusable(false);
         setMinimumSize(new Dimension(FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT));
         setMaximumSize(new Dimension(FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT));
-        setOpaque(false);
         setPreferredSize(getMinimumSize());
         setLayout(null);
+		//setBackground(new Color(255,255,255,200));
 
         scrollPane.setBorder(null);
         scrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -268,6 +268,10 @@ public class BigCard extends JComponent {
         add(scrollPane);
     }// </editor-fold>//GEN-END:initComponents
 
+	public void setDefaultImage() {
+	   	bigImage = ImageHelper.getImageFromResources("/empty.png");
+		bigImage = ImageHelper.getResizedImage((BufferedImage) bigImage, getWidth(), getHeight());
+	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane scrollPane;

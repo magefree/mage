@@ -187,7 +187,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
         lblMessage = new MageTextArea();
         btnSpecial = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(204, 204, 204));
+        setBackground(new java.awt.Color(255,255,255,200));
 
         btnRight.setText("Cancel");
         btnRight.addActionListener(new java.awt.event.ActionListener() {

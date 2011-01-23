@@ -66,7 +66,7 @@ public class CollectionViewerPane extends MagePane {
     }
 
     private void initComponents(Component container) {
-        Component component = container != null ? container : collectionViewerPanel;
+        Component component = container != null ? container : new CollectionViewerPanel();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

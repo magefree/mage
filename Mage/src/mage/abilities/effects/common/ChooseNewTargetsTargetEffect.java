@@ -62,4 +62,8 @@ public class ChooseNewTargetsTargetEffect extends OneShotEffect<ChooseNewTargets
 		return new ChooseNewTargetsTargetEffect(this);
 	}
 
+	@Override
+	public String getText(Ability source) {
+		return "You may choose new targets for target " + source.getTargets().get(0).getTargetName();
+	}
 }

@@ -51,6 +51,10 @@ import mage.view.CardsView;
 import mage.view.PermanentView;
 import mage.view.StackAbilityView;
 
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -63,15 +67,29 @@ public class Cards extends javax.swing.JPanel {
 
 	/** Creates new form Cards */
     public Cards() {
-        initComponents();
+    	this(false);
+    }
+
+	public Cards(boolean skipAddingScrollPane) {
+		initComponents(skipAddingScrollPane);
         setOpaque(false);
-        jScrollPane1.setOpaque(false);
-        jScrollPane1.getViewport().setOpaque(false);
-        cardArea.setOpaque(false);
+		cardArea.setOpaque(false);
+        if (!skipAddingScrollPane) {
+			jScrollPane1.setOpaque(false);
+			jScrollPane1.getViewport().setOpaque(false);
+		}
         if (Plugins.getInstance().isCardPluginLoaded()) {
         	cardArea.setLayout(null);
         }
-    }
+	}
+
+	public void setBorder(Border border) {
+		super.setBorder(border);
+		if (jScrollPane1 != null) {
+			jScrollPane1.setViewportBorder(border);
+			jScrollPane1.setBorder(border);
+		}
+	}
 
 	public boolean loadCards(CardsView cardsView, BigCard bigCard, UUID gameId) {
 		boolean changed = false;
@@ -157,20 +175,21 @@ public class Cards extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
-        jScrollPane1 = new javax.swing.JScrollPane();
-        cardArea = new javax.swing.JPanel();
-
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    private void initComponents(boolean skipAddingScrollPane) {
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0, 0)));
         setLayout(new java.awt.BorderLayout());
 
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		cardArea = new javax.swing.JPanel();
+		cardArea.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
 
-        cardArea.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
-        jScrollPane1.setViewportView(cardArea);
-
-        add(jScrollPane1, java.awt.BorderLayout.CENTER);
+		if (skipAddingScrollPane) {
+			add(cardArea, java.awt.BorderLayout.CENTER);
+		} else{
+			jScrollPane1 = new javax.swing.JScrollPane();
+			jScrollPane1.setViewportView(cardArea);
+			jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+			add(jScrollPane1, java.awt.BorderLayout.CENTER);
+		}
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -184,10 +203,14 @@ public class Cards extends javax.swing.JPanel {
 	}
     
     public void setHScrollSpeed(int unitIncrement) {
-    	jScrollPane1.getHorizontalScrollBar().setUnitIncrement(unitIncrement);
+    	if (jScrollPane1 != null) {
+			jScrollPane1.getHorizontalScrollBar().setUnitIncrement(unitIncrement);
+		}
     }
     
     public void setVScrollSpeed(int unitIncrement) {
-    	jScrollPane1.getVerticalScrollBar().setUnitIncrement(unitIncrement);
+    	if (jScrollPane1 != null) {
+			jScrollPane1.getVerticalScrollBar().setUnitIncrement(unitIncrement);
+		}
     }
 }

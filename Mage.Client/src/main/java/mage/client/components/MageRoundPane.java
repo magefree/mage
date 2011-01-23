@@ -18,10 +18,10 @@ import javax.swing.JPanel;
  */
 public class MageRoundPane extends JPanel {
 
-    private static int X_OFFSET = 30;
-    private static int Y_OFFSET = 30;
+    private int X_OFFSET = 30;
+    private int Y_OFFSET = 30;
     private BufferedImage shadow = null;
-    private Color backgroundColor = new Color(255, 255, 255, 220);
+    private Color backgroundColor = new Color(255, 255, 255, 200);
     private int alpha = 0;
 
     @Override
@@ -65,6 +65,14 @@ public class MageRoundPane extends JPanel {
 
         g2.dispose();
     }
+
+	public void setXOffset(int x_offset) {
+		X_OFFSET = x_offset;
+	}
+
+	public void setYOffset(int y_offset) {
+		Y_OFFSET = y_offset;
+	}
 
     @Override
     public void setBounds(int x, int y, int width, int height) {
