@@ -43,6 +43,7 @@ import mage.players.Player;
  * @author BetaSteward_at_googlemail.com
  */
 public class PlayerView implements Serializable {
+    private static final long serialVersionUID = 1L;
 
 	private UUID playerId;
 	private String name;

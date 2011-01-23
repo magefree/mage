@@ -36,6 +36,7 @@ import mage.players.ManaPool;
  * @author BetaSteward_at_googlemail.com
  */
 public class ManaPoolView implements Serializable {
+    private static final long serialVersionUID = 1L;
 
 	private int red;
 	private int green;

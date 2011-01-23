@@ -38,6 +38,7 @@ import mage.abilities.Ability;
  * @author BetaSteward_at_googlemail.com
  */
 public class AbilityView extends CardView {
+    private static final long serialVersionUID = 1L;
 
 	private String sourceName;
 	private CardView sourceCard;

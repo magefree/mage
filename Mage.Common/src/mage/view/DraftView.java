@@ -39,6 +39,7 @@ import mage.game.draft.Draft;
  * @author BetaSteward_at_googlemail.com
  */
 public class DraftView implements Serializable {
+    private static final long serialVersionUID = 1L;
 
 	private List<String> sets = new ArrayList<String>();
 	private int boosterNum;

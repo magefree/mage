@@ -36,6 +36,7 @@ import mage.game.draft.DraftPlayer;
  * @author BetaSteward_at_googlemail.com
  */
 public class DraftPickView implements Serializable {
+    private static final long serialVersionUID = 1L;
 
 	protected CardsView booster;
 	protected CardsView picks;

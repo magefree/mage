@@ -50,6 +50,7 @@ import mage.players.Player;
  * @author BetaSteward_at_googlemail.com
  */
 public class GameView implements Serializable {
+    private static final long serialVersionUID = 1L;
 
 	private List<PlayerView> players = new ArrayList<PlayerView>();
 	private CardsView hand;

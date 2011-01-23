@@ -35,6 +35,7 @@ import java.io.Serializable;
  * @author BetaSteward_at_googlemail.com
  */
 public class DraftClientMessage implements Serializable {
+    private static final long serialVersionUID = 1L;
 
 	private DraftView draftView;
 	private DraftPickView draftPickView;

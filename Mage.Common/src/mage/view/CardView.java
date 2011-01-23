@@ -36,13 +36,12 @@ import java.util.UUID;
 import mage.ObjectColor;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.counters.Counters;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.target.Target;
 import mage.target.Targets;
 
@@ -51,6 +50,7 @@ import mage.target.Targets;
  * @author BetaSteward_at_googlemail.com
  */
 public class CardView implements Serializable {
+    private static final long serialVersionUID = 1L;
 
 	protected UUID id;
 	protected UUID parentId;
@@ -70,6 +70,7 @@ public class CardView implements Serializable {
 	protected int cardNumber;
 	protected boolean isAbility;
 	protected CardView ability;
+    protected Counters counters;
 
 	public List<UUID> targets;
 	
@@ -81,6 +82,7 @@ public class CardView implements Serializable {
 			this.power = Integer.toString(card.getPower().getValue());
 			this.toughness = Integer.toString(card.getToughness().getValue());
 			this.loyalty = Integer.toString(card.getLoyalty().getValue());
+            this.counters = ((Permanent) card).getCounters().copy();
 		} else {
 			this.power = card.getPower().toString();
 			this.toughness = card.getToughness().toString();

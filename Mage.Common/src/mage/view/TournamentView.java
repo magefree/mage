@@ -38,6 +38,7 @@ import mage.game.tournament.Tournament;
  * @author BetaSteward_at_googlemail.com
  */
 public class TournamentView implements Serializable {
+    private static final long serialVersionUID = 1L;
 
 	List<RoundView> rounds = new ArrayList<RoundView>();
 

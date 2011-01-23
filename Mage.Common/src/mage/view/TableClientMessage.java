@@ -37,6 +37,7 @@ import mage.cards.decks.Deck;
  * @author BetaSteward_at_googlemail.com
  */
 public class TableClientMessage implements Serializable {
+    private static final long serialVersionUID = 1L;
 
 	private Deck deck;
 	private UUID tableId;

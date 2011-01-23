@@ -41,6 +41,7 @@ import mage.game.permanent.PermanentToken;
  * @author BetaSteward_at_googlemail.com
  */
 public class PermanentView extends CardView {
+    private static final long serialVersionUID = 1L;
 
 	private boolean tapped;
 	private boolean flipped;

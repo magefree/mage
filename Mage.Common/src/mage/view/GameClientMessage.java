@@ -37,6 +37,7 @@ import java.util.UUID;
  * @author BetaSteward_at_googlemail.com
  */
 public class GameClientMessage implements Serializable {
+    private static final long serialVersionUID = 1L;
 
 	private GameView gameView;
 	private CardsView cardsView;

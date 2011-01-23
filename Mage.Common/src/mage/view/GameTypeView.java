@@ -36,6 +36,7 @@ import mage.game.match.MatchType;
  * @author BetaSteward_at_googlemail.com
  */
 public class GameTypeView implements Serializable {
+    private static final long serialVersionUID = 1L;
 
 	private String name;
 	private int minPlayers;

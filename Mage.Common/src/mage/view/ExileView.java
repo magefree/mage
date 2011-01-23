@@ -38,6 +38,7 @@ import mage.game.Game;
  * @author BetaSteward_at_googlemail.com
  */
 public class ExileView extends CardsView {
+    private static final long serialVersionUID = 1L;
 
 	private String name;
 	private UUID id;

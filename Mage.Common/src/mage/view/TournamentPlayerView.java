@@ -35,5 +35,6 @@ import java.io.Serializable;
  * @author BetaSteward_at_googlemail.com
  */
 public class TournamentPlayerView implements Serializable {
+    private static final long serialVersionUID = 1L;
 
 }

@@ -37,6 +37,7 @@ import mage.game.stack.StackAbility;
  * @author BetaSteward_at_googlemail.com
  */
 public class StackAbilityView extends CardView {
+    private static final long serialVersionUID = 1L;
 
 	private String sourceName;
 	private CardView sourceCard;

@@ -41,6 +41,7 @@ import mage.game.Table;
  * @author BetaSteward_at_googlemail.com
  */
 public class TableView implements Serializable {
+    private static final long serialVersionUID = 1L;
 	
 	private UUID tableId;
 	private String gameType;

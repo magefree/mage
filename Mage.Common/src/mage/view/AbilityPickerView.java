@@ -40,6 +40,7 @@ import mage.abilities.Ability;
  * @author BetaSteward_at_googlemail.com
  */
 public class AbilityPickerView implements Serializable {
+    private static final long serialVersionUID = 1L;
 
 	private Map<UUID, String> choices = new HashMap<UUID, String>();
 

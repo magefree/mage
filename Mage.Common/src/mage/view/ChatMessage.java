@@ -36,6 +36,7 @@ import java.util.UUID;
  * @author BetaSteward_at_googlemail.com
  */
 public class ChatMessage implements Serializable {
+    private static final long serialVersionUID = 1L;
 
 	private UUID chatId;
 	private String message;

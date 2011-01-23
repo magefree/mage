@@ -40,6 +40,7 @@ import mage.players.Player;
  * @author BetaSteward_at_googlemail.com
  */
 public class CombatGroupView implements Serializable {
+    private static final long serialVersionUID = 1L;
 
 	private CardsView attackers = new CardsView();
 	private CardsView blockers = new CardsView();

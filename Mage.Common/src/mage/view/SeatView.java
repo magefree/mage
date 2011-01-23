@@ -37,6 +37,7 @@ import mage.game.Seat;
  * @author BetaSteward_at_googlemail.com
  */
 public class SeatView implements Serializable {
+    private static final long serialVersionUID = 1L;
 
 	private UUID playerId;
 	private String playerName;
