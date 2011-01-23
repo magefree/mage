@@ -59,7 +59,9 @@ public class SigilofDistinction extends CardImpl<SigilofDistinction> {
         this.subtype.add("Equipment");
         this.addAbility(new EntersBattlefieldAbility(new SigilofDistinctionEffect(), "Sigil of Distinction enters the battlefield with X charge counters on it"));
         this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new RemoveCountersSourceCost(CounterType.CHARGE.createInstance())));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new CountersCount(CounterType.CHARGE), new CountersCount(CounterType.CHARGE))));
+        BoostEquippedEffect effect = new BoostEquippedEffect(new CountersCount(CounterType.CHARGE), new CountersCount(CounterType.CHARGE));
+        effect.setStaticText("Equipped creature gets +1/+1 for each charge counter on Sigil of Distinction");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public SigilofDistinction (final SigilofDistinction card) {
