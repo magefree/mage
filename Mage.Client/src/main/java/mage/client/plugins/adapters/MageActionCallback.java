@@ -146,7 +146,7 @@ public class MageActionCallback implements ActionCallback {
                     }
 
                     try {
-                        if (session == null) {
+                        if (session == null || !state) {
                             return;
                         }
                         final Component popupContainer = session.getUI().getComponent(MageComponents.POPUP_CONTAINER);
@@ -161,6 +161,9 @@ public class MageActionCallback implements ActionCallback {
                         SwingUtilities.invokeLater(new Runnable() {
                             @Override
                             public void run() {
+								if (!state) {
+									return;
+								}
                                 popupContainer.setVisible(true);
                                 c.repaint();
                             }
