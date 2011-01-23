@@ -40,6 +40,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.ControlEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -64,7 +65,7 @@ public class MindControl extends CardImpl<MindControl> {
 		this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
 		Ability ability = new EnchantAbility(auraTarget.getTargetName());
 		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MindControlEffect()));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
 
 	}
 
@@ -76,59 +77,5 @@ public class MindControl extends CardImpl<MindControl> {
 	public MindControl copy() {
 		return new MindControl(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "121615_typ_reg_sty_010.jpg";
-	}
 }
 
-class MindControlEffect extends ContinuousEffectImpl<MindControlEffect> {
-
-	public MindControlEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Detriment);
-	}
-
-	public MindControlEffect(final MindControlEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public MindControlEffect copy() {
-		return new MindControlEffect(this);
-	}
-
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-			if (creature != null) {
-				switch (layer) {
-					case ControlChangingEffects_2:
-						if (sublayer == SubLayer.NA) {
-							creature.changeControllerId(source.getControllerId(), game);
-						}
-						break;
-				}
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
-
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.ControlChangingEffects_2;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "You control enchanted creature";
-	}
-}

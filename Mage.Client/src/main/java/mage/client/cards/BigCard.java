@@ -70,9 +70,9 @@ public class BigCard extends JComponent {
     protected float hue = 0.005f;
     protected float dh = 0.005f;
 
-    static private final int DEFAULT_DELAY_PERIOD = 50;
-    static private final float LEFT_BOUNDARY = -0.15f;
-    static private final float RIGHT_BOUNDARY = 0.15f;
+    static private final int DEFAULT_DELAY_PERIOD = 30;
+    static private final float LEFT_BOUNDARY = 0f;
+    static private final float RIGHT_BOUNDARY = 0.5f;
 
     public BigCard() {
         initComponents();
