@@ -42,6 +42,7 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 	protected UUID id;
 	protected final Outcome outcome;
 	protected EffectType effectType;
+    protected String staticText = "";
 
 	public EffectImpl(Outcome outcome) {
 		this.id = UUID.randomUUID();
@@ -52,6 +53,7 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 		this.id = effect.id;
 		this.outcome = effect.outcome;
 		this.effectType = effect.effectType;
+        this.staticText = effect.staticText;
 	}
 
 	@Override
@@ -61,8 +63,20 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 
 	@Override
 	public String getText(Ability source) {
-		return "";
+        if (staticText.equals("")) {
+            return getDynamicText(source);
+        } else {
+            return staticText;
+        }
 	}
+
+    protected String getDynamicText(Ability source) {
+        return "";
+    }
+
+    public void setStaticText(String staticText) {
+        this.staticText = staticText;
+    }
 
 	@Override
 	public Outcome getOutcome() {

@@ -30,6 +30,8 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.players.Player;
@@ -40,16 +42,20 @@ import mage.players.Player;
  */
 public class GainLifeEffect extends OneShotEffect<GainLifeEffect> {
 
-	private int life;
+	private DynamicValue life;
 
-	public GainLifeEffect(int life) {
+    public GainLifeEffect(int life) {
+        this(new StaticValue(life));
+    }
+
+	public GainLifeEffect(DynamicValue life) {
 		super(Outcome.GainLife);
 		this.life = life;
 	}
 
 	public GainLifeEffect(final GainLifeEffect effect) {
 		super(effect);
-		this.life = effect.life;
+		this.life = effect.life.clone();
 	}
 
 	@Override
@@ -61,14 +67,14 @@ public class GainLifeEffect extends OneShotEffect<GainLifeEffect> {
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getControllerId());
 		if (player != null) {
-			player.gainLife(life, game);
+			player.gainLife(life.calculate(game, source), game);
 		}
 		return true;
 	}
 
 	@Override
-	public String getText(Ability source) {
-		return "you gain " + Integer.toString(life) + " life";
+	public String getDynamicText(Ability source) {
+		return "you gain " + life.toString() + " life";
 	}
 
 }

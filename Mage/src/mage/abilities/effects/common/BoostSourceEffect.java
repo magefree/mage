@@ -33,6 +33,8 @@ import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -42,20 +44,23 @@ import mage.game.permanent.Permanent;
  * @author BetaSteward_at_googlemail.com
  */
 public class BoostSourceEffect extends ContinuousEffectImpl<BoostSourceEffect> {
-
-	private int power;
-	private int toughness;
+	private DynamicValue power;
+	private DynamicValue toughness;
 
 	public BoostSourceEffect(int power, int toughness, Duration duration) {
-		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-		this.power = power;
-		this.toughness = toughness;
+		this(new StaticValue(power), new StaticValue(toughness), duration);
 	}
+
+    public BoostSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
+        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+        this.power = power;
+		this.toughness = toughness;
+    }
 
 	public BoostSourceEffect(final BoostSourceEffect effect) {
 		super(effect);
-		this.power = effect.power;
-		this.toughness = effect.toughness;
+		this.power = effect.power.clone();
+		this.toughness = effect.toughness.clone();
 	}
 
 	@Override
@@ -65,18 +70,18 @@ public class BoostSourceEffect extends ContinuousEffectImpl<BoostSourceEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Permanent target = (Permanent) game.getPermanent(source.getSourceId());
+		Permanent target = game.getPermanent(source.getSourceId());
 		if (target != null) {
-			target.addPower(power);
-			target.addToughness(toughness);
+			target.addPower(power.calculate(game, source));
+			target.addToughness(toughness.calculate(game, source));
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public String getText(Ability source) {
-		return "{this} gets " + String.format("%1$+d/%2$+d", power, toughness) + " " + duration.toString();
+	public String getDynamicText(Ability source) {
+		return "{this} gets " + power.toString() + "/" + toughness.toString() + " " + duration.toString();
 	}
 
 }

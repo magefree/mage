@@ -121,6 +121,8 @@ $fulltoshort{'Worldwake'} = 'WWK';
 $fulltoshort{'Zendikar'} = 'ZEN';
 $fulltoshort{'Archenemy'} = 'ARC';
 $fulltoshort{'Scars of Mirrodin'} = 'SOM';
+$fulltoshort{'From the Vault: Relics'} = 'FVR';
+$fulltoshort{'Duel Decks: Elspeth vs. Tezzeret'} = 'DDF';
 
 my %wizardstous;
 $wizardstous{'6E'} = '6ED';
@@ -203,6 +205,8 @@ $wizardstous{'LGN'} = 'LGN';
 $wizardstous{'AN'} = 'ARN';
 $wizardstous{'WWK'} = 'WWK';
 $wizardstous{'SOM'} = 'SOM';
+$wizardstous{'V10'} = 'FVR';
+$wizardstous{'DDF'} = 'DDF';
 
 my %knownSets;
 $knownSets{'ARB'} = 'alarareborn';
@@ -219,6 +223,8 @@ $knownSets{'ZEN'} = 'zendikar';
 $knownSets{'SOM'} = 'scarsofmirrodin';
 $knownSets{'GPT'} = 'guildpact';
 $knownSets{'DIS'} = 'dissension';
+$knownSets{'MRD'} = 'mirrodin';
+$knownSets{'DDF'} = 'elspethvstezzeret';
 
 my %raritiesConversion;
 $raritiesConversion{'C'} = 'COMMON';
