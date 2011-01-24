@@ -20,12 +20,12 @@
 		<dependency>
 			<groupId>org.mage</groupId>
 			<artifactId>Mage-Card-Plugin</artifactId> 
-			<version>0.3</version>
+			<version>0.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mage</groupId>
 			<artifactId>Mage-Sets</artifactId>
-			<version>0.3</version>
+			<version>0.5.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.googlecode.jspf</groupId>
