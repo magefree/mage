@@ -81,7 +81,7 @@
 			
 		</plugins>
 
-		<finalName>mage-card-plugin</finalName>
+		<finalName>mage-rate-plugin</finalName>
 	</build>
 
 	<properties>
