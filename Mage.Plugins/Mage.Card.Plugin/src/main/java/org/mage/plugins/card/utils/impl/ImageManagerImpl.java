@@ -24,7 +24,7 @@ public class ImageManagerImpl implements ImageManager {
 	}
 	
 	@Override
-	public Image getSicknessImage() {
+	public BufferedImage getSicknessImage() {
 		if (imageSickness == null) {
 			Image image = getImageFromResourceTransparent("/sickness.png", Color.WHITE, new Rectangle(296, 265));
 			Toolkit tk = Toolkit.getDefaultToolkit();
@@ -53,5 +53,5 @@ public class ImageManagerImpl implements ImageManager {
         return resized;
     }
 
-	private static Image imageSickness = null;
+	private static BufferedImage imageSickness = null;
 }
