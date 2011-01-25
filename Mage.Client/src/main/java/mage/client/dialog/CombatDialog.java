@@ -42,7 +42,7 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import mage.client.cards.BigCard;
 import mage.client.game.CombatGroup;
@@ -78,6 +78,8 @@ public class CombatDialog extends MageDialog {
         jScrollPane1.setOpaque(false);
         jScrollPane1.getViewport().setOpaque(false);
         getRootPane().setOpaque(false);
+
+		setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
     }
 
 	public void init(UUID gameId, BigCard bigCard) {
