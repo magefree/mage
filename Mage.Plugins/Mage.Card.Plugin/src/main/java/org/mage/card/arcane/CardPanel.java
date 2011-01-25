@@ -127,7 +127,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         ptText.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
         add(ptText);
 
-        BufferedImage sickness = ImageManagerImpl.getInstance().getSicknessImage();
+        Image sickness = ImageManagerImpl.getInstance().getSicknessImage();
         overlayPanel = new ImagePanel(sickness, ImagePanel.SCALED);
         overlayPanel.setOpaque(false);
         add(overlayPanel);
