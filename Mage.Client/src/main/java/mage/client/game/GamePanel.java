@@ -38,9 +38,7 @@ import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -53,7 +51,6 @@ import javax.swing.border.LineBorder;
 
 import mage.client.MageFrame;
 import mage.client.cards.Cards;
-import mage.client.deckeditor.collection.viewer.MageBook;
 import mage.client.dialog.ExileZoneDialog;
 import mage.client.dialog.PickChoiceDialog;
 import mage.client.dialog.ShowCardsDialog;
@@ -63,14 +60,12 @@ import mage.client.remote.Session;
 import mage.client.util.Config;
 import mage.client.util.GameManager;
 import mage.client.util.PhaseManager;
-import mage.client.util.gui.ArrowBuilder;
 import mage.util.Logging;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ExileView;
 import mage.view.GameView;
 import mage.view.PlayerView;
-import mage.view.RevealedView;
 
 /**
  *
