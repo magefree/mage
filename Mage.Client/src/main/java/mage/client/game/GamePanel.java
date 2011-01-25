@@ -38,7 +38,9 @@ import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -68,6 +70,7 @@ import mage.view.CardsView;
 import mage.view.ExileView;
 import mage.view.GameView;
 import mage.view.PlayerView;
+import mage.view.RevealedView;
 
 /**
  *
@@ -195,7 +198,12 @@ public class GamePanel extends javax.swing.JPanel {
 		logger.log(Level.FINE, "players clear.");
 		this.pnlBattlefield.removeAll();
 		MageFrame.getCombatDialog().hideDialog();
-		this.setVisible(false);
+		Component c = this.getParent();
+		while (c != null && !(c instanceof GamePane)) {
+			c = c.getParent();
+		}
+		if (c != null)
+			c.setVisible(false);
 	}
 
 	public synchronized void init(GameView game) {
