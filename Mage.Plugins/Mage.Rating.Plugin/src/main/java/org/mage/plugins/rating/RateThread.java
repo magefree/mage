@@ -3,6 +3,7 @@ package org.mage.plugins.rating;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import javax.swing.JFrame;
@@ -30,6 +31,7 @@ public class RateThread extends Thread {
 	private MageCard mageCard2;
 	private BigCard bigCard;
 	private boolean stop = false;
+	private Random random = new Random();
 	
 	private static List<Rating> results = new ArrayList<Rating>();
 	
@@ -68,9 +70,11 @@ public class RateThread extends Thread {
 	
 	protected Card getRandomUniqueNonLandCard(Card previousCard) {
 		int count = CardsStorage.getUniqueCards().size();
-		Card card1 = CardsStorage.getAllCards().get((int)(Math.random()*count));
+		int index = random.nextInt(count);
+		Card card1 = CardsStorage.getUniqueCards().get(index);
 		while (card1.getCardType().contains(CardType.LAND) || card1.getName().equals(previousCard)) {
-			card1 = CardsStorage.getAllCards().get((int)(Math.random()*count));
+			index = random.nextInt(count);
+			card1 = CardsStorage.getUniqueCards().get(index);
 		}
 		return card1;
 	}
