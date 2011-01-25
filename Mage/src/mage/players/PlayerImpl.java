@@ -98,7 +98,6 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	protected boolean left;
 	protected RangeOfInfluence range;
 	protected Set<UUID> inRange = new HashSet<UUID>();
-//	protected Deck deck;
 
 	@Override
 	public abstract T copy();
@@ -107,7 +106,6 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		this(UUID.randomUUID());
 		this.name = name;
 		this.range = range;
-//		this.deck = deck;
 		hand = new CardsImpl(Zone.HAND);
 		graveyard = new CardsImpl(Zone.GRAVEYARD);
 		abilities = new AbilitiesImpl<Ability>();
@@ -529,8 +527,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	}
 
 	@Override
-	public void revealCards(Cards cards, Game game) {
-		game.fireRevealCardsEvent(this.name + " revealed", cards);
+	public void revealCards(String name, Cards cards, Game game) {
+		game.getState().getRevealed().add(name, cards);
+//		game.fireRevealCardsEvent(this.name + " revealed", cards);
 	}
 
 	@Override
@@ -663,6 +662,16 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	@Override
 	public Abilities getAbilities() {
 		return this.abilities;
+	}
+
+	@Override
+	public int getLandsPerTurn() {
+		return this.landsPerTurn;
+	}
+
+	@Override
+	public void setLandsPerTurn(int landsPerTurn) {
+		this.landsPerTurn = landsPerTurn;
 	}
 
 	@Override

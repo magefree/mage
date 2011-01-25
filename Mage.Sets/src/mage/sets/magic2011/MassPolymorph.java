@@ -103,7 +103,7 @@ class MassPolymorphEffect extends OneShotEffect<MassPolymorphEffect> {
 			else
 				nonCreatureCards.add(card);
 		}
-		player.revealCards(revealed, game);
+		player.revealCards("Mass Polymorph", revealed, game);
 		for (Card creatureCard: creatureCards.getCards(game)) {
 			creatureCard.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
 		}

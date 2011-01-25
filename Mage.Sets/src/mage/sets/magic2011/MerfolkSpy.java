@@ -94,7 +94,7 @@ class MerfolkSpyEffect extends OneShotEffect<MerfolkSpyEffect> {
 		if (player != null && player.getHand().size() > 0) {
 			Cards revealed = new CardsImpl();
 			revealed.add(player.getHand().getRandom(game));
-			player.revealCards(revealed, game);
+			player.revealCards("Merfolk Spy", revealed, game);
 			return true;
 		}
 		return false;

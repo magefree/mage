@@ -497,6 +497,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 							applyEffects();
 							state.getPlayers().resetPassed();
 							fireUpdatePlayersEvent();
+						state.getRevealed().reset();
 							break;
 						} else
 							return;
@@ -772,10 +773,10 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		playerQueryEventSource.target(playerId, message, abilities, required);
 	}
 
-	@Override
-	public void fireRevealCardsEvent(String message, Cards cards) {
-		tableEventSource.fireTableEvent(EventType.REVEAL, message, cards, this);
-	}
+//	@Override
+//	public void fireRevealCardsEvent(String message, Cards cards) {
+//		tableEventSource.fireTableEvent(EventType.REVEAL, message, cards, this);
+//	}
 
 	@Override
 	public void fireLookAtCardsEvent(UUID playerId, String message, Cards cards) {

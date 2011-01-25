@@ -80,6 +80,8 @@ public interface Player extends MageItem, Copyable<Player> {
 	public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable);
 	public Cards getHand();
 	public int getLandsPlayed();
+	public int getLandsPerTurn();
+	public void setLandsPerTurn(int landsPerTurn);
 	public boolean isPassed();
 	public boolean isEmptyDraw();
 	public void pass();
@@ -119,7 +121,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public void concede(Game game);
 	public void abort();
 	
-	public void revealCards(Cards cards, Game game);
+	public void revealCards(String name, Cards cards, Game game);
 	public void lookAtCards(Cards cards, Game game);
 	
 	@Override

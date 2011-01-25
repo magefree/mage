@@ -38,7 +38,9 @@ import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -51,6 +53,7 @@ import javax.swing.border.LineBorder;
 
 import mage.client.MageFrame;
 import mage.client.cards.Cards;
+import mage.client.deckeditor.collection.viewer.MageBook;
 import mage.client.dialog.ExileZoneDialog;
 import mage.client.dialog.PickChoiceDialog;
 import mage.client.dialog.ShowCardsDialog;
@@ -60,12 +63,14 @@ import mage.client.remote.Session;
 import mage.client.util.Config;
 import mage.client.util.GameManager;
 import mage.client.util.PhaseManager;
+import mage.client.util.gui.ArrowBuilder;
 import mage.util.Logging;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ExileView;
 import mage.view.GameView;
 import mage.view.PlayerView;
+import mage.view.RevealedView;
 
 /**
  *
@@ -77,6 +82,7 @@ public class GamePanel extends javax.swing.JPanel {
 
 	private Map<UUID, PlayAreaPanel> players = new HashMap<UUID, PlayAreaPanel>();
 	private Map<UUID, ExileZoneDialog> exiles = new HashMap<UUID, ExileZoneDialog>();
+	private Map<String, ShowCardsDialog> revealed = new HashMap<String, ShowCardsDialog>();
 	private UUID gameId;
 	private UUID playerId;
 	private Session session;
@@ -135,6 +141,9 @@ public class GamePanel extends javax.swing.JPanel {
 		MageFrame.getPickNumberDialog().hide();
 		for (ExileZoneDialog exile: exiles.values()) {
 			exile.hide();
+		}
+		for (ShowCardsDialog reveal: revealed.values()) {
+			reveal.hide();
 		}
 	}
 
@@ -321,6 +330,7 @@ public class GamePanel extends javax.swing.JPanel {
 			}
 			exiles.get(exile.getId()).loadCards(exile, bigCard, gameId);
 		}
+		showRevealed(game);
 		if (game.getCombat().size() > 0) {
 			MageFrame.getCombatDialog().showDialog(game.getCombat());
 		}
@@ -329,6 +339,19 @@ public class GamePanel extends javax.swing.JPanel {
 		}
 		this.revalidate();
 		this.repaint();
+	}
+
+	private void showRevealed(GameView game) {
+		for (ShowCardsDialog reveal: revealed.values()) {
+			reveal.clearReloaded();
+		}
+		for (RevealedView reveal: game.getRevealed()) {
+			if (!revealed.containsKey(reveal.getName())) {
+				ShowCardsDialog newReveal = new ShowCardsDialog();
+				revealed.put(reveal.getName(), newReveal);
+			}
+			revealed.get(reveal.getName()).loadCards("Revealed " + reveal.getName(), reveal.getCards(), bigCard, Config.dimensions, gameId, false);
+		}
 	}
 
 	public void ask(String question, GameView gameView) {
@@ -387,11 +410,11 @@ public class GamePanel extends javax.swing.JPanel {
 		this.abilityPicker.show(choices, MageFrame.getDesktop().getMousePosition());
 	}
 
-	public void revealCards(String name, CardsView cards) {
-		ShowCardsDialog showCards = new ShowCardsDialog();
-		showCards.loadCards(name, cards, bigCard, Config.dimensions, gameId, false);
-	}
-
+//	public void revealCards(String name, CardsView cards) {
+//		ShowCardsDialog showCards = new ShowCardsDialog();
+//		showCards.loadCards(name, cards, bigCard, Config.dimensions, gameId, false);
+//	}
+//
 	private void showCards(String title, CardsView cards, boolean required) {
 		ShowCardsDialog showCards = new ShowCardsDialog();
 		showCards.loadCards(title, cards, bigCard, Config.dimensions, gameId, required);

@@ -107,7 +107,7 @@ class SarkhantheMadRevealAndDrawEffect extends OneShotEffect<SarkhantheMadReveal
 			permanent.damage(card.getManaCost().convertedManaCost(), this.getId(), game, false, false);
 			Cards cards = new CardsImpl();
 			cards.add(card);
-			player.revealCards(cards, game);
+			player.revealCards("Sarkhan the Mad", cards, game);
 			return true;
 		}
 		return false;

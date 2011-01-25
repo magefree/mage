@@ -36,6 +36,7 @@ import mage.MageObject;
 import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
 import mage.cards.Card;
+import mage.cards.Cards;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.GameState;
@@ -56,6 +57,7 @@ public class GameView implements Serializable {
 	private CardsView hand;
 	private CardsView stack = new CardsView();
 	private List<ExileView> exiles = new ArrayList<ExileView>();
+	private List<RevealedView> revealed = new ArrayList<RevealedView>();
 	private List<CombatGroupView> combat = new ArrayList<CombatGroupView>();
 	private TurnPhase phase;
 	private PhaseStep step;
@@ -83,6 +85,9 @@ public class GameView implements Serializable {
 		}
 		for (ExileZone exileZone: state.getExile().getExileZones()) {
 			exiles.add(new ExileView(exileZone, game));
+		}
+		for (String name: state.getRevealed().keySet()) {
+			revealed.add(new RevealedView(name, state.getRevealed().get(name), game));
 		}
 		this.phase = state.getTurn().getPhaseType();
 		this.step = state.getTurn().getStepType();
@@ -127,6 +132,10 @@ public class GameView implements Serializable {
 
 	public List<ExileView> getExile() {
 		return exiles;
+	}
+
+	public List<RevealedView> getRevealed() {
+		return revealed;
 	}
 
 	public List<CombatGroupView> getCombat() {

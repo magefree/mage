@@ -118,7 +118,7 @@ public interface Game extends MageItem, Serializable {
 	public void fireSelectTargetEvent(UUID playerId, String message, Set<UUID> targets, boolean required);
 	public void fireSelectTargetEvent(UUID playerId, String message, Cards cards, boolean required);
 	public void fireSelectTargetEvent(UUID playerId, String message, TriggeredAbilities abilities, boolean required);
-	public void fireRevealCardsEvent(String message, Cards cards);
+//	public void fireRevealCardsEvent(String message, Cards cards);
 	public void fireSelectEvent(UUID playerId, String message);
 	public void fireLookAtCardsEvent(UUID playerId, String message, Cards cards);
 	public void firePriorityEvent(UUID playerId);

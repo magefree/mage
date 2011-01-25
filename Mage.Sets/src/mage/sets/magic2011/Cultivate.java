@@ -106,7 +106,7 @@ class CultivateEffect extends OneShotEffect<CultivateEffect> {
 				Card card = player.getLibrary().remove(cardId, game);
 				revealed.add(card);
 			}
-			player.revealCards(revealed, game);
+			player.revealCards("Cultivate", revealed, game);
 			if (target.getTargets().size() == 2) {
 				TargetCard target2 = new TargetCard(Zone.PICK, filter);
 				target2.setRequired(true);

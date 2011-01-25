@@ -96,7 +96,7 @@ class DuressEffect extends OneShotEffect<DuressEffect> {
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getFirstTarget());
 		if (player != null) {
-			player.revealCards(player.getHand(), game);
+			player.revealCards("Duress", player.getHand(), game);
 			Player you = game.getPlayer(source.getControllerId());
 			if (you != null) {
 				TargetCard target = new TargetCard(Zone.PICK, filter);

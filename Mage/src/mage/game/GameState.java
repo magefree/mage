@@ -77,6 +77,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 	private Turn turn;
 	private SpellStack stack;
 	private Exile exile;
+	private Revealed revealed;
 	private Battlefield battlefield;
 	private int turnNum;
 	private boolean gameOver;
@@ -97,6 +98,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 		turn = new Turn();
 		stack = new SpellStack();
 		exile = new Exile();
+		revealed = new Revealed();
 		battlefield = new Battlefield();
 		effects = new ContinuousEffects();
 		triggers = new TriggeredAbilities();
@@ -198,6 +200,10 @@ public class GameState implements Serializable, Copyable<GameState> {
 
 	public Exile getExile() {
 		return exile;
+	}
+
+	public Revealed getRevealed() {
+		return revealed;
 	}
 
 	public Turn getTurn() {

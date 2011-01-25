@@ -74,7 +74,7 @@ public class SearchLibraryRevealPutInHandEffect extends SearchEffect<SearchLibra
 				}
 			}
 			player.shuffleLibrary(game);
-			player.revealCards(revealed, game);
+			player.revealCards("Search", revealed, game);
 		}
 		return true;
 	}

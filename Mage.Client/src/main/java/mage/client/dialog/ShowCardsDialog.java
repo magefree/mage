@@ -58,6 +58,8 @@ import mage.view.CardsView;
  */
 public class ShowCardsDialog extends MageDialog implements MouseListener {
 
+	private boolean reloaded = false;
+
     /** Creates new form ShowCardsDialog */
     public ShowCardsDialog() {
         initComponents();
@@ -65,6 +67,7 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
     }
 
 	public void loadCards(String name, CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean modal) {
+		this.reloaded = true;
 		this.title = name;
 		cardArea.removeAll();
 		if (showCards != null && showCards.size() < 10)
@@ -127,6 +130,14 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 			}
 		}
 		cardArea.setPreferredSize(new Dimension(Config.dimensions.frameWidth * columns, Config.dimensions.frameHeight + 400));
+	}
+
+	public boolean isReloaded() {
+		return this.reloaded;
+	}
+
+	public void clearReloaded() {
+		this.reloaded = false;
 	}
 
     /** This method is called from within the constructor to
