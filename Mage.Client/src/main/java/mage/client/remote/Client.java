@@ -147,10 +147,10 @@ public class Client implements CallbackClient {
 				GameClientMessage message = (GameClientMessage) callback.getData();
 				session.getGame().getAmount(message.getMin(), message.getMax(), message.getMessage());
 			}
-			else if (callback.getMethod().equals("gameReveal")) {
+			/*else if (callback.getMethod().equals("gameReveal")) {
 				GameClientMessage message = (GameClientMessage) callback.getData();
 				session.getGame().revealCards(message.getMessage(), message.getCardsView());
-			}
+			}*/
 			else if (callback.getMethod().equals("gameUpdate")) {
 				session.getGame().updateGame((GameView) callback.getData());
 			}

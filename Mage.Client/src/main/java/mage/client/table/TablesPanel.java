@@ -34,28 +34,8 @@
 
 package mage.client.table;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JComponent;
-import javax.swing.JOptionPane;
-import javax.swing.Timer;
-import javax.swing.table.AbstractTableModel;
 import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
-
 import mage.client.MageFrame;
 import mage.client.components.MageComponents;
 import mage.client.dialog.JoinTableDialog;
@@ -64,12 +44,20 @@ import mage.client.dialog.TableWaitingDialog;
 import mage.client.remote.MageRemoteException;
 import mage.client.remote.Session;
 import mage.client.util.ButtonColumn;
-import mage.game.draft.DraftOptions;
 import mage.game.match.MatchOptions;
-import mage.game.tournament.TournamentOptions;
 import mage.sets.Sets;
 import mage.util.Logging;
 import mage.view.TableView;
+
+import javax.swing.*;
+import javax.swing.Timer;
+import javax.swing.table.AbstractTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
