@@ -278,7 +278,7 @@ die "card not found" unless $finded;
 my $mech = WWW::Mechanize->new( autocheck => 1 );
 my $parser = HTML::TreeBuilder->new();
 
-$ENV{'HTTP_PROXY'} = 'http://login:password@proxyserver';
+$ENV{'HTTP_PROXY'} = 'http://login:password@proxyserver:port';
 $mech->env_proxy();
 
 $mech->get("http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=" . $multiverses[0] );
