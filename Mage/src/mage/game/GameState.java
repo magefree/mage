@@ -117,6 +117,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 		this.turn = state.turn.copy();
 		this.stack = state.stack.copy();
 		this.exile = state.exile.copy();
+		this.revealed = state.revealed.copy();
 		this.battlefield = state.battlefield.copy();
 		this.turnNum = state.turnNum;
 		this.gameOver = state.gameOver;
