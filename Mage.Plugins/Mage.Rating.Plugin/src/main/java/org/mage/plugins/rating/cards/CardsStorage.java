@@ -14,9 +14,8 @@ public class CardsStorage {
 	private static List<Card> uniqueCards = new ArrayList<Card>();
 	
 	static {
-		System.out.println("sets count: " + Sets.getInstance().values().size());
     	for (ExpansionSet set: Sets.getInstance().values()) {
-			allCards.addAll(set.createCards());
+		    allCards.addAll(set.createCards());
 		}
     	Set<String> names = new HashSet<String>();
     	for (Card card : allCards) {

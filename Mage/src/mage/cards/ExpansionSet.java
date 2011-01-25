@@ -28,31 +28,24 @@
 
 package mage.cards;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
-import java.lang.reflect.Constructor;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mage.Constants.Rarity;
 import mage.Constants.SetType;
 import mage.util.Logging;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.Serializable;
+import java.lang.reflect.Constructor;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.*;
+import java.util.jar.JarEntry;
+import java.util.jar.JarInputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class ExpansionSet implements Serializable {
@@ -107,7 +100,7 @@ public abstract class ExpansionSet implements Serializable {
 	public Date getReleaseDate() {
 		return releaseDate;
 	}
-	
+
 	public SetType getSetType() {
 		return setType;
 	}
@@ -115,16 +108,17 @@ public abstract class ExpansionSet implements Serializable {
 	public Card createCard(Class clazz) {
 		try {
 			Constructor<?> con = clazz.getConstructor(new Class[]{UUID.class});
-			return (Card) con.newInstance(new Object[] {null});
+			return (Card) con.newInstance(new Object[]{null});
 		} catch (Exception ex) {
 			logger.log(Level.SEVERE, "Error creating card:" + clazz.getName(), ex);
+			ex.printStackTrace();
 			return null;
 		}
 	}
 
 	public Set<Card> createCards() {
 		Set<Card> created = new HashSet<Card>();
-		for (Class clazz: cards) {
+		for (Class clazz : cards) {
 			created.add(createCard(clazz));
 		}
 		return created;
@@ -136,83 +130,144 @@ public abstract class ExpansionSet implements Serializable {
 	}
 
 	public Card findCard(String name) {
-		for (Card card: createCards()) {
+		for (Card card : createCards()) {
 			if (name.equals(card.getName()))
 				return card;
 		}
 		return null;
 	}
 
-    public Card findCard(String name, boolean random) {
-        List<Card> cards = new ArrayList<Card>();
-		for (Card card: createCards()) {
+	public Card findCard(String name, boolean random) {
+		List<Card> cards = new ArrayList<Card>();
+		for (Card card : createCards()) {
 			if (name.equals(card.getName())) {
 				cards.add(card);
-            }
+			}
 		}
-        if (cards.size() > 0) {
-            return cards.get(rnd.nextInt(cards.size()));
-        }
+		if (cards.size() > 0) {
+			return cards.get(rnd.nextInt(cards.size()));
+		}
 		return null;
 	}
 
 	public String findCard(int cardNum) {
-		for (Card card: createCards()) {
+		for (Card card : createCards()) {
 			if (card.getCardNumber() == cardNum)
 				return card.getClass().getCanonicalName();
 		}
 		return null;
 	}
 
-       private ArrayList<Class> getCardClassesForPackage(String packageName) {
-           ClassLoader classLoader = this.getClass().getClassLoader();
-           assert classLoader != null;
-           String path = packageName.replace('.', '/');
-           Enumeration<URL> resources = null;
-           try {
-               resources = classLoader.getResources(path);
-           } catch (IOException e) {
-               e.printStackTrace();
-           }
-           List<File> dirs = new ArrayList<File>();
-           while (resources.hasMoreElements()) {
-               URL resource = resources.nextElement();
-               dirs.add(new File(resource.getFile()));
-           }
-           ArrayList<Class> classes = new ArrayList<Class>();
-           for (File directory : dirs) {
-               try {
-                   classes.addAll(findClasses(directory, packageName));
-               } catch (ClassNotFoundException e) {
-                   e.printStackTrace();
-               }
-           }
-           return classes;
-       }
+	private ArrayList<Class> getCardClassesForPackage(String packageName) {
+		ClassLoader classLoader = this.getClass().getClassLoader();
+		assert classLoader != null;
+		String path = packageName.replace('.', '/');
+		Enumeration<URL> resources = null;
+		try {
+			resources = classLoader.getResources(path);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		List<File> dirs = new ArrayList<File>();
+		boolean isLoadingFromJar = false;
+		String jarPath = null;
+		while (resources.hasMoreElements()) {
+			URL resource = resources.nextElement();
+			if (resource.toString().startsWith("jar:")) {
+				isLoadingFromJar = true;
+				jarPath = resource.getFile();
+				break;
+			}
+			dirs.add(new File(resource.getFile()));
+		}
+		ArrayList<Class> classes = new ArrayList<Class>();
+		if (isLoadingFromJar) {
+			if (jarPath.contains("!")) {
+				jarPath = jarPath.substring(0, jarPath.lastIndexOf('!'));
+			}
+			if (jarPath.startsWith("file:/")) {
+				jarPath = jarPath.substring(jarPath.indexOf("file:/") + "file:/".length());
+			}
+			try {
+				classes.addAll(findClassesInJar(new File(jarPath), path));
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		} else { // faster but doesn't work for jars
+			for (File directory : dirs) {
+				try {
+					classes.addAll(findClasses(directory, packageName));
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return classes;
+	}
 
-       private static List<Class> findClasses(File directory, String packageName) throws ClassNotFoundException {
-           List<Class> classes = new ArrayList<Class>();
-           if (!directory.exists()) {
-               return classes;
-           }
-           File[] files = directory.listFiles();
-           for (File file : files) {
-               if (file.isDirectory()) {
-                   assert !file.getName().contains(".");
-                   classes.addAll(findClasses(file, packageName + "." + file.getName()));
-               } else if (file.getName().endsWith(".class")) {
-                   Class c = Class.forName(packageName + '.' + file.getName().substring(0, file.getName().length() - 6));
-                   if (CardImpl.class.isAssignableFrom(c))
-                       classes.add(c);
-               }
-           }
-           return classes;
-       }
+	private static List<Class> findClasses(File directory, String packageName) throws ClassNotFoundException {
+		List<Class> classes = new ArrayList<Class>();
+		if (!directory.exists()) {
+			return classes;
+		}
+		File[] files = directory.listFiles();
+		if (files == null) {
+			return classes;
+		}
+		for (File file : files) {
+			if (file.isDirectory()) {
+				assert !file.getName().contains(".");
+				classes.addAll(findClasses(file, packageName + "." + file.getName()));
+			} else if (file.getName().endsWith(".class")) {
+				Class c = Class.forName(packageName + '.' + file.getName().substring(0, file.getName().length() - 6));
+				if (CardImpl.class.isAssignableFrom(c)) {
+					classes.add(c);
+				}
+			}
+		}
+		return classes;
+	}
+
+	private static List<Class> findClassesInJar(File file, String packageName) throws ClassNotFoundException {
+		List<Class> classes = new ArrayList<Class>();
+
+		if (!file.exists()) {
+			return classes;
+		}
+
+		try {
+			URL url = file.toURL();
+			URL[] urls = new URL[]{url};
+			ClassLoader cl = new URLClassLoader(urls);
+
+			JarInputStream jarFile = new JarInputStream(new FileInputStream(file));
+			JarEntry jarEntry;
+
+			while (true) {
+				jarEntry = jarFile.getNextJarEntry();
+				if (jarEntry == null) {
+					break;
+				}
+				if ((jarEntry.getName().startsWith(packageName)) && (jarEntry.getName().endsWith(".class"))) {
+					String clazz = jarEntry.getName().replaceAll("/", "\\.").replace(".class", "");
+					Class c = cl.loadClass(clazz);
+					if (CardImpl.class.isAssignableFrom(c)) {
+						classes.add(c);
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+
+		return classes;
+	}
 
 	private Map<Rarity, List<Class>> getCardsByRarity() {
 		Map<Rarity, List<Class>> cardsByRarity = new HashMap<Rarity, List<Class>>();
 
-		for (Class clazz: cards) {
+		for (Class clazz : cards) {
 			Card card = createCard(clazz);
 			if (!cardsByRarity.containsKey(card.getRarity()))
 				cardsByRarity.put(card.getRarity(), new ArrayList<Class>());
@@ -232,8 +287,7 @@ public abstract class ExpansionSet implements Serializable {
 			for (int i = 0; i < numBoosterLands; i++) {
 				addToBooster(booster, parentSet, Rarity.LAND);
 			}
-		}
-		else {
+		} else {
 			for (int i = 0; i < numBoosterLands; i++) {
 				addToBooster(booster, this, Rarity.LAND);
 			}
@@ -247,8 +301,7 @@ public abstract class ExpansionSet implements Serializable {
 		for (int i = 0; i < numBoosterRare; i++) {
 			if (ratioBoosterMythic > 0 && rnd.nextInt(ratioBoosterMythic) == 1) {
 				addToBooster(booster, this, Rarity.MYTHIC);
-			}
-			else {
+			} else {
 				addToBooster(booster, this, Rarity.RARE);
 			}
 		}
