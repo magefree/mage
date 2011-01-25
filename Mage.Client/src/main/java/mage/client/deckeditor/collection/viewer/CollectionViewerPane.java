@@ -48,6 +48,7 @@ public class CollectionViewerPane extends MagePane {
 
     public CollectionViewerPane() {
         boolean initialized = false;
+		this.setTitle("Collection Viewier");
         if (Plugins.getInstance().isThemePluginLoaded()) {
         	Map<String, JComponent> ui = new HashMap<String, JComponent>();
 	        JComponent container = Plugins.getInstance().updateTablePanel(ui);

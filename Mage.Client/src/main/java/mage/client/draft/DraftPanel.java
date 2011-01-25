@@ -34,6 +34,7 @@
 
 package mage.client.draft;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.UUID;
@@ -120,7 +121,12 @@ public class DraftPanel extends javax.swing.JPanel {
 	}
 
 	public void hideDraft() {
-		this.setVisible(false);
+		Component c = this.getParent();
+		while (c != null && !(c instanceof DraftPane)) {
+			c = c.getParent();
+		}
+		if (c != null)
+			c.setVisible(false);
 	}
 
     /** This method is called from within the constructor to
@@ -162,40 +168,20 @@ public class DraftPanel extends javax.swing.JPanel {
 
         txtPack1.setEditable(false);
         txtPack1.setEnabled(false);
-        txtPack1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPack1ActionPerformed(evt);
-            }
-        });
 
         txtPack2.setEditable(false);
         txtPack2.setEnabled(false);
 
         txtPack3.setEditable(false);
         txtPack3.setEnabled(false);
-        txtPack3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPack3ActionPerformed(evt);
-            }
-        });
 
         txtCardNo.setEditable(false);
         txtCardNo.setEnabled(false);
-        txtCardNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCardNoActionPerformed(evt);
-            }
-        });
 
         txtTimeRemaining.setEditable(false);
         txtTimeRemaining.setForeground(java.awt.Color.red);
         txtTimeRemaining.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTimeRemaining.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtTimeRemaining.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimeRemainingActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -292,22 +278,6 @@ public class DraftPanel extends javax.swing.JPanel {
                 .addComponent(draftBooster, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-	private void txtPack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPack1ActionPerformed
-		// TODO add your handling code here:
-	}//GEN-LAST:event_txtPack1ActionPerformed
-
-	private void txtPack3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPack3ActionPerformed
-		// TODO add your handling code here:
-	}//GEN-LAST:event_txtPack3ActionPerformed
-
-	private void txtCardNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCardNoActionPerformed
-		// TODO add your handling code here:
-	}//GEN-LAST:event_txtCardNoActionPerformed
-
-	private void txtTimeRemainingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimeRemainingActionPerformed
-		// TODO add your handling code here:
-	}//GEN-LAST:event_txtTimeRemainingActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

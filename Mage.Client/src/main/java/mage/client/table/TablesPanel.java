@@ -35,8 +35,10 @@
 package mage.client.table;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
@@ -64,6 +66,7 @@ import mage.client.remote.Session;
 import mage.client.util.ButtonColumn;
 import mage.game.draft.DraftOptions;
 import mage.game.match.MatchOptions;
+import mage.game.tournament.TournamentOptions;
 import mage.sets.Sets;
 import mage.util.Logging;
 import mage.view.TableView;
@@ -143,7 +146,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		try {
-			tableModel.loadData(roomId);
+			tableModel.loadData(MageFrame.getSession().getTables(roomId));
 			this.tableTables.repaint();
 		} catch (MageRemoteException ex) {
 			hideTables();
@@ -171,7 +174,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 		}
 		UUID chatRoomId = session.getRoomChatId(roomId);
 		if (chatRoomId != null) {
-			this.chatPanel.connect(session.getRoomChatId(roomId));
+			this.chatPanel.connect(chatRoomId);
 			tablesWatchdog.addObserver(this);
 			this.setVisible(true);
 			this.repaint();
@@ -189,7 +192,13 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 		}
 		tablesWatchdog.deleteObservers();
 		this.chatPanel.disconnect();
-		this.setVisible(false);
+
+		Component c = this.getParent();
+		while (c != null && !(c instanceof TablesPane)) {
+			c = c.getParent();
+		}
+		if (c != null)
+			c.setVisible(false);
 	}
 
     /** This method is called from within the constructor to
@@ -320,31 +329,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 	}//GEN-LAST:event_btnQuickStartActionPerformed
 
 	private void btnNewDraftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewDraftActionPerformed
-		DraftOptions options = new DraftOptions("testDraft");
-		options.setDraftType("8 Player Booster");
-		options.setTiming(DraftOptions.TimingOption.REGULAR);
-		options.getPlayerTypes().add("Human");
-		options.getPlayerTypes().add("Computer - default");
-		options.getPlayerTypes().add("Computer - default");
-		options.getPlayerTypes().add("Computer - default");
-		options.getPlayerTypes().add("Computer - default");
-		options.getPlayerTypes().add("Computer - default");
-		options.getPlayerTypes().add("Computer - default");
-		options.getPlayerTypes().add("Computer - default");
-		options.getSets().add(Sets.findSet("M11"));
-		options.getSets().add(Sets.findSet("M11"));
-		options.getSets().add(Sets.findSet("M11"));
-		TableView table = session.createDraftTable(roomId, options);
-		session.joinDraftTable(roomId, table.getTableId(), "Human");
-		session.joinDraftTable(roomId, table.getTableId(), "Computer 1");
-		session.joinDraftTable(roomId, table.getTableId(), "Computer 2");
-		session.joinDraftTable(roomId, table.getTableId(), "Computer 3");
-		session.joinDraftTable(roomId, table.getTableId(), "Computer 4");
-		session.joinDraftTable(roomId, table.getTableId(), "Computer 5");
-		session.joinDraftTable(roomId, table.getTableId(), "Computer 6");
-		session.joinDraftTable(roomId, table.getTableId(), "Computer 7");
-		hideTables();
-		session.startDraft(roomId, table.getTableId());
+
 	}//GEN-LAST:event_btnNewDraftActionPerformed
 
 	private void handleError(Exception ex) {
@@ -371,8 +356,8 @@ class TableTableModel extends AbstractTableModel {
 	private TableView[] tables = new TableView[0];
 
 
-	public void loadData(UUID roomId) throws MageRemoteException {
-		tables = MageFrame.getSession().getTables(roomId).toArray(new TableView[0]);
+	public void loadData(Collection<TableView> tables) throws MageRemoteException {
+		this.tables = tables.toArray(new TableView[0]);
 		this.fireTableDataChanged();
 	}
 

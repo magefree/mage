@@ -55,11 +55,16 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.JToolBar.Separator;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
@@ -67,6 +72,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 import mage.client.draft.DraftPane;
 
 /**
@@ -104,7 +111,7 @@ public class MageFrame extends javax.swing.JFrame {
      */
     public MageFrame() {
 
-        setTitle("Mage, version 0.5.1");
+        setTitle("Mage, version 0.6");
 
         EDTExceptionHandler.registerExceptionHandler();
         addWindowListener(new WindowAdapter() {
@@ -148,7 +155,7 @@ public class MageFrame extends javax.swing.JFrame {
             e1.printStackTrace();
         }
 
-        addTooltipContainer();
+		addTooltipContainer();
         setBackground();
         addMageLabel();
         setAppIcon();
@@ -175,6 +182,9 @@ public class MageFrame extends javax.swing.JFrame {
             }
         });
 
+		mageToolbar.add(new javax.swing.JToolBar.Separator());
+		mageToolbar.add(createWindowsButton());
+		
         //TODO: move to plugin impl
         if (Plugins.getInstance().isCardPluginLoaded()) {
             Separator separator = new javax.swing.JToolBar.Separator();
@@ -303,6 +313,63 @@ public class MageFrame extends javax.swing.JFrame {
         }
     }
 
+	private AbstractButton createWindowsButton() {
+		final JToggleButton windowButton = new JToggleButton("Windows");
+		windowButton.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					createAndShowMenu((JComponent) e.getSource(), windowButton);
+				}
+			}
+		});
+		windowButton.setFocusable(false);
+		windowButton.setHorizontalTextPosition(SwingConstants.LEADING);
+		return windowButton;
+	}
+
+	private void createAndShowMenu(final JComponent component, final AbstractButton windowButton) {
+		JPopupMenu menu = new JPopupMenu();
+		JInternalFrame[] windows = desktopPane.getAllFramesInLayer(javax.swing.JLayeredPane.DEFAULT_LAYER);
+		MagePaneMenuItem menuItem;
+
+		for (int i = 0; i < windows.length; i++) {
+			JInternalFrame window = windows[i];
+			if (window.isVisible()) {
+				menuItem = new MagePaneMenuItem(window);
+				menuItem.setState(i == 0);
+				menuItem.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent ae) {
+						JInternalFrame frame = ((MagePaneMenuItem) ae.getSource()).getFrame();
+						frame.toFront();
+						frame.setVisible(true);
+						//frame.moveToFront();
+						try {
+							frame.setSelected(true);
+						} catch (PropertyVetoException e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				menuItem.setIcon(window.getFrameIcon());
+				menu.add(menuItem);
+			}
+		}
+
+		menu.addPopupMenuListener(new PopupMenuListener() {
+			public void popupMenuWillBecomeVisible(PopupMenuEvent e) { }
+
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+				windowButton.setSelected(false);
+			}
+
+			public void popupMenuCanceled(PopupMenuEvent e) {
+				windowButton.setSelected(false);
+			}
+		});
+
+		menu.show(component, 0, component.getHeight());
+	}
+
     private void btnImagesActionPerformed(java.awt.event.ActionEvent evt) {
         HashSet<Card> cards = new HashSet<Card>(CardsStorage.getAllCards());
         List<Card> notImplemented = CardsStorage.getNotImplementedCards();
@@ -317,38 +384,30 @@ public class MageFrame extends javax.swing.JFrame {
     }
 
     public void showGame(UUID gameId, UUID playerId) {
-        this.tablesPane.hideTables();
-        this.tablesPane.setVisible(false);
-		this.draftPane.setVisible(false);
         this.gamePane.setVisible(true);
+		this.gamePane.toFront();
         this.gamePane.showGame(gameId, playerId);
     }
 
     public void watchGame(UUID gameId) {
-        this.tablesPane.hideTables();
-        this.tablesPane.setVisible(false);
-		this.draftPane.setVisible(false);
         this.gamePane.setVisible(true);
+		this.gamePane.toFront();
         this.gamePane.watchGame(gameId);
     }
 
     public void replayGame() {
-        this.tablesPane.hideTables();
-        this.tablesPane.setVisible(false);
-		this.draftPane.setVisible(false);
         this.gamePane.setVisible(true);
+		this.gamePane.toFront();
         this.gamePane.replayGame();
     }
 
 	public void showDraft(UUID draftId) {
-		this.tablesPane.hideTables();
-		this.tablesPane.setVisible(false);
-		this.gamePane.setVisible(false);
 		this.draftPane.setVisible(true);
+		this.draftPane.toFront();
 		this.draftPane.showDraft(draftId);
 	}
 
-    public static boolean connect(String userName, String serverName, int port) {
+   public static boolean connect(String userName, String serverName, int port) {
         return session.connect(userName, serverName, port);
     }
 
@@ -551,17 +610,10 @@ public class MageFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeckEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeckEditorActionPerformed
-        this.gamePane.setVisible(false);
-        this.tablesPane.setVisible(false);
-		this.draftPane.setVisible(false);
-        this.collectionViewerPane.setVisible(false);
 		showDeckEditor(DeckEditorMode.Constructed, null, null);
     }//GEN-LAST:event_btnDeckEditorActionPerformed
 
     private void btnCollectionViewerActionPerformed(java.awt.event.ActionEvent evt) {
-        this.gamePane.setVisible(false);
-        this.tablesPane.setVisible(false);
-        this.deckEditorPane.setVisible(false);
         showCollectionViewer();
     }
 
@@ -570,9 +622,6 @@ public class MageFrame extends javax.swing.JFrame {
     }
 
     private void btnGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGamesActionPerformed
-        this.gamePane.setVisible(false);
-        this.deckEditorPane.setVisible(false);
-        this.collectionViewerPane.setVisible(false);
         this.tablesPane.setVisible(true);
         this.tablesPane.showTables();
     }//GEN-LAST:event_btnGamesActionPerformed
@@ -616,20 +665,17 @@ public class MageFrame extends javax.swing.JFrame {
         btnConnect.setText("Connect");
         btnGames.setEnabled(false);
         btnDeckEditor.setEnabled(true);
-        this.tablesPane.setVisible(false);
-        this.gamePane.setVisible(false);
-        this.deckEditorPane.setVisible(false);
-		this.draftPane.setVisible(false);
-        this.collectionViewerPane.setVisible(false);
     }
 
     public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId) {
         this.deckEditorPane.setVisible(true);
+		this.deckEditorPane.toFront();
         this.deckEditorPane.show(mode, deck, tableId);
     }
 
     public void showCollectionViewer() {
         this.collectionViewerPane.setVisible(true);
+		this.collectionViewerPane.toFront();
     }
 
     public static CombatDialog getCombatDialog() {
@@ -703,4 +749,17 @@ public class MageFrame extends javax.swing.JFrame {
     public void setStatusText(String status) {
         this.lblStatus.setText(status);
     }
+}
+
+class MagePaneMenuItem extends JCheckBoxMenuItem {
+	private JInternalFrame frame;
+
+	public MagePaneMenuItem(JInternalFrame frame) {
+		super(frame.getTitle());
+		this.frame = frame;
+	}
+
+	public JInternalFrame getFrame() {
+		return frame;
+	}
 }

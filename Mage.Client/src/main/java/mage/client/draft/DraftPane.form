@@ -19,12 +19,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jScrollPane1" alignment="0" pref="394" max="32767" attributes="0"/>
+          <Component id="jScrollPane1" alignment="0" pref="868" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jScrollPane1" alignment="0" pref="282" max="32767" attributes="0"/>
+          <Component id="jScrollPane1" alignment="0" pref="582" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>

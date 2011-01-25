@@ -78,6 +78,7 @@ public class GamePane extends MagePane {
     }
 
 	public void showGame(UUID gameId, UUID playerId) {
+		this.setTitle("Game " + gameId);
 		gamePanel.showGame(gameId, playerId);
 		this.toFront();
 	}

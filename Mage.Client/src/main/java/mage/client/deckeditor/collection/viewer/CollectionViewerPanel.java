@@ -48,8 +48,11 @@ public class CollectionViewerPanel extends JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel1.setOpaque(false);
         bigCard = new BigCard();
-        BoxLayout boxlayout = new BoxLayout(jPanel1, BoxLayout.X_AXIS);
+        BoxLayout boxlayout = new BoxLayout(jPanel1, BoxLayout.Y_AXIS);
         jPanel1.setLayout(boxlayout);
+        btnExit = new javax.swing.JButton();
+        jPanel1.add(btnExit);
+		jPanel1.add(Box.createVerticalGlue());
         bigCard.setAlignmentY(Component.BOTTOM_ALIGNMENT);
         bigCard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(bigCard);
@@ -71,7 +74,24 @@ public class CollectionViewerPanel extends JPanel {
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
         );
+
+        btnExit.setText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+
     }
+
+	private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {
+		Component c = this.getParent();
+		while (c != null && !(c instanceof CollectionViewerPane)) {
+			c = c.getParent();
+		}
+		if (c != null)
+			c.setVisible(false);
+	}
 
     private class MageBookContainer extends JPanel {
         public MageBookContainer() {
@@ -99,5 +119,6 @@ public class CollectionViewerPanel extends JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private mage.client.cards.BigCard bigCard;
+	private javax.swing.JButton btnExit;
 
 }

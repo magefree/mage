@@ -54,6 +54,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mage.client.MagePane;
 import mage.client.cards.BigCard;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.dialog.AddLandDialog;
@@ -409,7 +410,12 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 	}//GEN-LAST:event_btnNewActionPerformed
 
 	private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-		this.setVisible(false);
+		Component c = this.getParent();
+		while (c != null && !(c instanceof DeckEditorPane)) {
+			c = c.getParent();
+		}
+		if (c != null)
+			c.setVisible(false);
 	}//GEN-LAST:event_btnExitActionPerformed
 
 	private void btnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportActionPerformed
