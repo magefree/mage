@@ -28,9 +28,6 @@
 
 package mage.game.permanent;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.MageObject;
@@ -42,18 +39,16 @@ import mage.cards.CardImpl;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
-import mage.counters.common.MinusOneCounter;
 import mage.game.Game;
-import mage.game.events.DamageCreatureEvent;
-import mage.game.events.DamagePlaneswalkerEvent;
-import mage.game.events.DamagedCreatureEvent;
-import mage.game.events.DamagedPlaneswalkerEvent;
-import mage.game.events.GameEvent;
+import mage.game.events.*;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl<T> implements Permanent {
@@ -103,7 +98,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		this.loyaltyUsed = permanent.loyaltyUsed;
 		this.deathtouched = permanent.deathtouched;
 		this.counters = permanent.counters.copy();
-		for (UUID attachmentId: permanent.attachments) {
+		for (UUID attachmentId : permanent.attachments) {
 			this.attachments.add(attachmentId);
 		}
 		this.attachedTo = permanent.attachedTo;
@@ -166,17 +161,17 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		this.damage = 0;
 		this.loyaltyUsed = false;
 		this.turnsOnBattlefield++;
-		for (Ability ability: this.abilities) {
+		for (Ability ability : this.abilities) {
 			ability.reset(game);
 		}
-        this.controllerId = this.ownerId;
+		this.controllerId = this.ownerId;
 	}
 
 	@Override
 	public void checkTriggers(GameEvent event, Game game) {
 		if (event.getType() == EventType.BEGINNING_PHASE_PRE && game.getActivePlayerId().equals(controllerId))
 			this.controlledFromStartOfTurn = true;
-		for (TriggeredAbility ability: abilities.getTriggeredAbilities(Zone.BATTLEFIELD)) {
+		for (TriggeredAbility ability : abilities.getTriggeredAbilities(Zone.BATTLEFIELD)) {
 			if (ability.checkTrigger(event, game)) {
 				ability.trigger(game, controllerId);
 			}
@@ -422,8 +417,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		if (damageAmount > 0 && canDamage(game.getObject(sourceId))) {
 			if (cardType.contains(CardType.PLANESWALKER)) {
 				damageDone = damagePlaneswalker(damageAmount, sourceId, game, preventable, combat);
-			}
-			else {
+			} else {
 				damageDone = damageCreature(damageAmount, sourceId, game, preventable, combat);
 			}
 			if (damageDone > 0) {
@@ -471,7 +465,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 				}
 				Permanent source = game.getPermanent(sourceId);
 				if (source != null && (source.getAbilities().containsKey(InfectAbility.getInstance().getId())
-					|| source.getAbilities().containsKey(WitherAbility.getInstance().getId()))) {
+						|| source.getAbilities().containsKey(WitherAbility.getInstance().getId()))) {
 					addCounters(CounterType.M1M1.createInstance(actualDamage));
 				} else {
 					this.damage += actualDamage;
@@ -504,7 +498,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
 	@Override
 	public boolean hasProtectionFrom(MageObject source) {
-		for (ProtectionAbility ability: abilities.getProtectionAbilities()) {
+		for (ProtectionAbility ability : abilities.getProtectionAbilities()) {
 			if (!ability.canTarget(source))
 				return true;
 		}
@@ -519,7 +513,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	public boolean destroy(UUID sourceId, Game game, boolean noRegen) {
 		//20091005 - 701.6
 		//TODO: handle noRegen
-		if (!game.replaceEvent(GameEvent.getEvent(EventType.DESTROY_PERMANENT, objectId, sourceId, controllerId, noRegen?1:0))) {
+		if (!game.replaceEvent(GameEvent.getEvent(EventType.DESTROY_PERMANENT, objectId, sourceId, controllerId, noRegen ? 1 : 0))) {
 			if (!this.getAbilities().containsKey(IndestructibleAbility.getInstance().getId())) {
 				if (moveToZone(Zone.GRAVEYARD, sourceId, game, false)) {
 					game.fireEvent(GameEvent.getEvent(EventType.DESTROYED_PERMANENT, objectId, sourceId, controllerId));
@@ -568,7 +562,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		if (hasSummoningSickness())
 			return false;
 		//20101001 - 508.1c
-		for (RestrictionEffect effect: game.getContinuousEffects().getApplicableRestrictionEffects(this, game)) {
+		for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(this, game)) {
 			if (!effect.canAttack(game))
 				return false;
 		}
@@ -583,7 +577,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 			return false;
 		Permanent attacker = game.getPermanent(attackerId);
 		//20101001 - 509.1b
-		for (RestrictionEffect effect: game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game)) {
+		for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game)) {
 			if (!effect.canBlock(attacker, this, game))
 				return false;
 		}

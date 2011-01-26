@@ -55,6 +55,7 @@ public class PermanentView extends CardView {
 
 	public PermanentView(Permanent permanent, Card card) {
 		super(permanent);
+		this.rules = permanent.getRules();
 		this.tapped = permanent.isTapped();
 		this.flipped = permanent.isFlipped();
 		this.phasedIn = permanent.isPhasedIn();

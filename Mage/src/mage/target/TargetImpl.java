@@ -95,7 +95,11 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 		if (maxNumberOfTargets > 1) {
 			StringBuilder sb = new StringBuilder();
 			sb.append("Select ").append(targetName);
-			sb.append(" (").append(targets.size()).append("/").append(maxNumberOfTargets).append(")");
+			if (maxNumberOfTargets != Integer.MAX_VALUE) {
+				sb.append(" (").append(targets.size()).append("/").append(maxNumberOfTargets).append(")");
+			} else {
+				sb.append(" (").append(targets.size()).append(")");
+			}
 			return sb.toString();
 		}
 		return "Select a " + targetName;
