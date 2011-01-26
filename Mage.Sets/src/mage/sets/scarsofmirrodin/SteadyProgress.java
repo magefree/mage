@@ -29,25 +29,35 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Rarity;
+import mage.Constants.Zone;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.ProliferateEffect;
+import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class IronMyr extends mage.sets.mirrodin.IronMyr {
+public class SteadyProgress extends CardImpl<SteadyProgress> {
 
-    public IronMyr (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 168;
+    public SteadyProgress (UUID ownerId) {
+        super(ownerId, 45, "Steady Progress", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "SOM";
+		this.color.setBlue(true);
+		this.getSpellAbility().addEffect(new ProliferateEffect());
+		this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
     }
 
-    public IronMyr (final IronMyr card) {
+    public SteadyProgress (final SteadyProgress card) {
         super(card);
     }
 
     @Override
-    public IronMyr copy() {
-        return new IronMyr(this);
+    public SteadyProgress copy() {
+        return new SteadyProgress(this);
     }
+
 }
