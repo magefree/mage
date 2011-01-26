@@ -33,9 +33,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.target.Target;
+
+import java.util.UUID;
 
 /**
- *
  * @author nantuko
  */
 public class PreventDamageFromTargetEffect extends PreventionEffectImpl<PreventDamageFromTargetEffect> {
@@ -72,33 +74,49 @@ public class PreventDamageFromTargetEffect extends PreventionEffectImpl<PreventD
 
 	@Override
 	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
-		if (!game.replaceEvent(preventEvent)) {
-			if (all) {
-				int damage = event.getAmount();
-				event.setAmount(0);
-				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-			} else {
-				if (event.getAmount() >= this.amount) {
-					int damage = event.getAmount();
-					event.setAmount(event.getAmount() - amount);
-					this.used = true;
-					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-				} else {
-					int damage = event.getAmount();
-					event.setAmount(0);
-					amount -= damage;
-					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
+		for (Target target : source.getTargets()) {
+			for (UUID chosen : target.getTargets()) {
+				if (event.getSourceId().equals(chosen)) {
+					preventDamage(event, source, chosen, game);
 				}
 			}
 		}
 		return false;
 	}
 
+	private void preventDamage(GameEvent event, Ability source, UUID target, Game game) {
+		GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, target, source.getId(), source.getControllerId(), event.getAmount(), false);
+		if (!game.replaceEvent(preventEvent)) {
+			if (all) {
+				int damage = event.getAmount();
+				event.setAmount(0);
+				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getId(), source.getControllerId(), damage));
+			} else {
+				if (event.getAmount() >= this.amount) {
+					int damage = event.getAmount();
+					event.setAmount(event.getAmount() - amount);
+					this.used = true;
+					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getId(), source.getControllerId(), damage));
+				} else {
+					int damage = event.getAmount();
+					event.setAmount(0);
+					amount -= damage;
+					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getId(), source.getControllerId(), damage));
+				}
+			}
+		}
+	}
+
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (!this.used && super.applies(event, source, game) && event.getSourceId().equals(source.getFirstTarget())) {
-			return true;
+		if (!this.used && super.applies(event, source, game)) {
+			for (Target target : source.getTargets()) {
+				for (UUID chosen : target.getTargets()) {
+					if (event.getSourceId().equals(chosen)) {
+						return true;
+					}
+				}
+			}
 		}
 		return false;
 	}

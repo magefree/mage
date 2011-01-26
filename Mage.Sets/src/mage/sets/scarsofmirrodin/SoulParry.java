@@ -49,6 +49,7 @@ public class SoulParry extends CardImpl<SoulParry> {
         this.expansionSetCode = "SOM";
 		this.color.setWhite(true);
 	    Target target = new TargetCreaturePermanent(1,2);
+		target.setTargetName("one or two creatures");
 	    this.getSpellAbility().addEffect(new PreventDamageFromTargetEffect(Duration.EndOfTurn, true));
 	    this.getSpellAbility().addTarget(target);
     }

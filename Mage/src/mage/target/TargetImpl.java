@@ -92,6 +92,12 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 
 	@Override
 	public String getMessage() {
+		if (maxNumberOfTargets > 1) {
+			StringBuilder sb = new StringBuilder();
+			sb.append("Select ").append(targetName);
+			sb.append(" (").append(targets.size()).append("/").append(maxNumberOfTargets).append(")");
+			return sb.toString();
+		}
 		return "Select a " + targetName;
 	}
 
