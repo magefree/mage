@@ -28,6 +28,7 @@
 
 package mage.cards;
 
+import java.io.UnsupportedEncodingException;
 import mage.Constants.Rarity;
 import mage.Constants.SetType;
 import mage.util.Logging;
@@ -39,6 +40,7 @@ import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.net.URLDecoder;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
@@ -178,7 +180,12 @@ public abstract class ExpansionSet implements Serializable {
 				jarPath = resource.getFile();
 				break;
 			}
-			dirs.add(new File(resource.getFile()));
+			try {
+				dirs.add(new File(URLDecoder.decode(resource.getFile(), "UTF-8")));
+			} catch (UnsupportedEncodingException e) {
+				logger.log(Level.SEVERE, "Error decoding director - " + resource.getFile(), e);
+				e.printStackTrace();
+			}
 		}
 		ArrayList<Class> classes = new ArrayList<Class>();
 		if (isLoadingFromJar) {
@@ -186,7 +193,12 @@ public abstract class ExpansionSet implements Serializable {
 				jarPath = jarPath.substring(0, jarPath.lastIndexOf('!'));
 			}
 			if (jarPath.startsWith("file:/")) {
-				jarPath = jarPath.substring(jarPath.indexOf("file:/") + "file:/".length());
+				try {
+					jarPath = URLDecoder.decode(jarPath.substring(jarPath.indexOf("file:/") + "file:/".length()), "UTF-8");
+				} catch (UnsupportedEncodingException e) {
+					logger.log(Level.SEVERE, "Error decoding file - " + jarPath, e);
+					e.printStackTrace();
+				}
 			}
 			try {
 				classes.addAll(findClassesInJar(new File(jarPath), path));
