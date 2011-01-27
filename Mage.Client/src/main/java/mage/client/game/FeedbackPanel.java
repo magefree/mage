@@ -111,6 +111,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 				break;
 		}
 		this.btnSpecial.setVisible(special);
+		handleOptions(options);
 		this.revalidate();
 		this.repaint();
 		if (modal)
