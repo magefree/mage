@@ -28,6 +28,8 @@
 
 package mage.server.game;
 
+import java.io.Serializable;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
@@ -71,12 +73,12 @@ public class GameSession extends GameWatcher {
 		}
 	}
 
-	public void target(final String question, final CardsView cardView, final Set<UUID> targets, final boolean required, final GameView gameView) {
+	public void target(final String question, final CardsView cardView, final Set<UUID> targets, final boolean required, final GameView gameView, final Map<String, Serializable> options) {
 		if (!killed) {
 			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("gameTarget", new GameClientMessage(gameView, question, cardView, targets, required)));
+				session.fireCallback(new ClientCallback("gameTarget", new GameClientMessage(gameView, question, cardView, targets, required, options)));
 		}
 	}
 

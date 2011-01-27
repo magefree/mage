@@ -29,11 +29,8 @@
 package mage.server.game;
 
 import java.io.File;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.UUID;
+import java.io.Serializable;
+import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
@@ -126,10 +123,10 @@ public class GameController implements GameCallback {
 							ask(event.getPlayerId(), event.getMessage());
 							break;
 						case PICK_TARGET:
-							target(event.getPlayerId(), event.getMessage(), event.getCards(), event.getTargets(), event.isRequired());
+							target(event.getPlayerId(), event.getMessage(), event.getCards(), event.getTargets(), event.isRequired(), event.getOptions());
 							break;
 						case PICK_ABILITY:
-							target(event.getPlayerId(), event.getMessage(), event.getAbilities(), event.isRequired());
+							target(event.getPlayerId(), event.getMessage(), event.getAbilities(), event.isRequired(), event.getOptions());
 							break;
 						case SELECT:
 							select(event.getPlayerId(), event.getMessage());
@@ -332,19 +329,19 @@ public class GameController implements GameCallback {
 		informOthers(playerId);
 	}
 
-	private synchronized void target(UUID playerId, String question, Cards cards, Set<UUID> targets, boolean required) {
+	private synchronized void target(UUID playerId, String question, Cards cards, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
 		if (gameSessions.containsKey(playerId)) {
 			if (cards != null)
-				gameSessions.get(playerId).target(question, new CardsView(cards.getCards(game)), targets, required, getGameView(playerId));
+				gameSessions.get(playerId).target(question, new CardsView(cards.getCards(game)), targets, required, getGameView(playerId), options);
 			else
-				gameSessions.get(playerId).target(question, new CardsView(), targets, required, getGameView(playerId));
+				gameSessions.get(playerId).target(question, new CardsView(), targets, required, getGameView(playerId), options);
 		}
 		informOthers(playerId);
 	}
 
-	private synchronized void target(UUID playerId, String question, Collection<? extends Ability> abilities, boolean required) {
+	private synchronized void target(UUID playerId, String question, Collection<? extends Ability> abilities, boolean required, Map<String, Serializable> options) {
 		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).target(question, new CardsView(abilities, game), null, required, getGameView(playerId));
+			gameSessions.get(playerId).target(question, new CardsView(abilities, game), null, required, getGameView(playerId), options);
 		informOthers(playerId);
 	}
 

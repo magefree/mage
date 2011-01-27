@@ -41,6 +41,8 @@ import java.awt.EventQueue;
 import java.awt.MenuComponent;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+import java.io.Serializable;
+import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
@@ -76,7 +78,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 		session = MageFrame.getSession();
 	}
 
-	public void getFeedback(FeedbackMode mode, String message, boolean modal, boolean special) {
+	public void getFeedback(FeedbackMode mode, String message, boolean modal, boolean special, Map<String, Serializable> options) {
 		this.lblMessage.setText(message);
 		this.selected = false;
 		this.mode = mode;
@@ -113,6 +115,14 @@ public class FeedbackPanel extends javax.swing.JPanel {
 		this.repaint();
 		if (modal)
 			startModal();
+	}
+
+	private void handleOptions(Map<String, Serializable> options) {
+		if (options != null) {
+			if (options.containsKey("UI.right.btn.text")) {
+				this.btnRight.setText((String)options.get("UI.right.btn.text"));
+			}
+		}
 	}
 
     public void doClick() {

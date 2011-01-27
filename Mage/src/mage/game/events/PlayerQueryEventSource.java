@@ -29,10 +29,8 @@
 package mage.game.events;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
 import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbilities;
 import mage.cards.Card;
@@ -65,6 +63,10 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
 
 	public void target(UUID playerId, String message, Set<UUID> targets, boolean required) {
 		dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, targets, required));
+	}
+
+	public void target(UUID playerId, String message, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
+		dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, targets, required, options));
 	}
 
 	public void target(UUID playerId, String message, Cards cards, boolean required) {

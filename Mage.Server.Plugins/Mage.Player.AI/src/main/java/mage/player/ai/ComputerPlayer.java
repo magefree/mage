@@ -30,6 +30,7 @@ package mage.player.ai;
 
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.logging.Level;
@@ -138,6 +139,11 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 	@Override
 	public boolean choose(Outcome outcome, Target target, Game game) {
+		return choose(outcome, target, game, null);
+	}
+
+	@Override
+	public boolean choose(Outcome outcome, Target target, Game game, Map<String, Serializable> options) {
 		if (logger.isLoggable(Level.FINE))
 			logger.fine("chooseTarget: " + outcome.toString() + ":" + target.toString());
 		UUID opponentId = game.getOpponents(playerId).iterator().next();

@@ -623,6 +623,7 @@ public class MageFrame extends javax.swing.JFrame {
 
     private void btnGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGamesActionPerformed
         this.tablesPane.setVisible(true);
+	    this.tablesPane.toFront();
         this.tablesPane.showTables();
     }//GEN-LAST:event_btnGamesActionPerformed
 

@@ -75,6 +75,7 @@ public class TablesPane extends MagePane {
 			tablesPanel.showTables(roomId);
 			this.repaint();
 		}
+
 	}
 
 	public void hideTables() {

@@ -39,9 +39,8 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetPermanentOrPlayerWithCounter;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @author nantuko
@@ -65,8 +64,10 @@ public class ProliferateEffect extends OneShotEffect<ProliferateEffect> {
 		//had, if thats the case this ability should fizzle.
 		if (target.canChoose(controller.getId(), game)) {
 			boolean abilityApplied = false;
+			Map<String, Serializable> options = new HashMap<String, Serializable>();
+			options.put("UI.right.btn.text", "Done");
 			while (target.canChoose(controller.getId(), game)) {
-				if (!controller.choose(Outcome.Benefit, target, game)) {
+				if (!controller.choose(Outcome.Benefit, target, game, options)) {
 					break;
 				}
 			}

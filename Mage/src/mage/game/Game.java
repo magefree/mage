@@ -34,6 +34,7 @@ import mage.game.stack.SpellStack;
 import mage.MageObject;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import mage.Constants.MultiplayerAttackOption;
@@ -115,7 +116,7 @@ public interface Game extends MageItem, Serializable {
 	public void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener);
 	public void fireAskPlayerEvent(UUID playerId, String message);
 	public void fireChooseEvent(UUID playerId, Choice choice);
-	public void fireSelectTargetEvent(UUID playerId, String message, Set<UUID> targets, boolean required);
+	public void fireSelectTargetEvent(UUID playerId, String message, Set<UUID> targets, boolean required, Map<String, Serializable> options);
 	public void fireSelectTargetEvent(UUID playerId, String message, Cards cards, boolean required);
 	public void fireSelectTargetEvent(UUID playerId, String message, TriggeredAbilities abilities, boolean required);
 //	public void fireRevealCardsEvent(String message, Cards cards);

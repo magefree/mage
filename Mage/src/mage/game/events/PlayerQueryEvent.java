@@ -29,11 +29,8 @@
 package mage.game.events;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.EventObject;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbilities;
@@ -61,6 +58,12 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 	private boolean required;
 	private int min;
 	private int max;
+	private Map<String, Serializable> options;
+
+	private PlayerQueryEvent(UUID playerId, String message, Collection<? extends Ability> abilities, Set<String> choices, Set<UUID> targets, Cards cards, QueryType queryType, int min, int max, boolean required, Map<String, Serializable> options) {
+		this(playerId, message, abilities, choices, targets, cards, queryType, min, max, required);
+		this.options = options;
+	}
 
 	private PlayerQueryEvent(UUID playerId, String message, Collection<? extends Ability> abilities, Set<String> choices, Set<UUID> targets, Cards cards, QueryType queryType, int min, int max, boolean required) {
 		super(playerId);
@@ -98,6 +101,10 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 
 	public static PlayerQueryEvent targetEvent(UUID playerId, String message, Set<UUID> targets, boolean required) {
 		return new PlayerQueryEvent(playerId, message, null, null, targets, null, QueryType.PICK_TARGET, 0, 0, required);
+	}
+
+	public static PlayerQueryEvent targetEvent(UUID playerId, String message, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
+		return new PlayerQueryEvent(playerId, message, null, null, targets, null, QueryType.PICK_TARGET, 0, 0, required, options);
 	}
 
 	public static PlayerQueryEvent targetEvent(UUID playerId, String message, Cards cards, boolean required) {
@@ -174,5 +181,9 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 
 	public int getMax() {
 		return max;
+	}
+
+	public Map<String, Serializable> getOptions() {
+		return options;
 	}
 }

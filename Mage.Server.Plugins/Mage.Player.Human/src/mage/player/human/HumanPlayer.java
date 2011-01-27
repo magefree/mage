@@ -28,6 +28,7 @@
 
 package mage.player.human;
 
+import java.io.Serializable;
 import java.util.List;
 import mage.abilities.TriggeredAbilities;
 import mage.abilities.TriggeredAbility;
@@ -182,8 +183,13 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public boolean choose(Outcome outcome, Target target, Game game) {
+		 return choose(outcome, target, game, null);
+	}
+
+	@Override
+	public boolean choose(Outcome outcome, Target target, Game game, Map<String, Serializable> options) {
 		while (!abort) {
-			game.fireSelectTargetEvent(playerId, target.getMessage(), target.possibleTargets(null, playerId, game), target.isRequired());
+			game.fireSelectTargetEvent(playerId, target.getMessage(), target.possibleTargets(null, playerId, game), target.isRequired(), options);
 			waitForResponse();
 			if (response.getUUID() != null) {
 				if (target instanceof TargetPermanent) {
@@ -206,7 +212,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	@Override
 	public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
 		while (!abort) {
-			game.fireSelectTargetEvent(playerId, target.getMessage(), target.possibleTargets(source==null?null:source.getId(), playerId, game), target.isRequired());
+			game.fireSelectTargetEvent(playerId, target.getMessage(), target.possibleTargets(source==null?null:source.getId(), playerId, game), target.isRequired(), null);
 			waitForResponse();
 			if (response.getUUID() != null) {
 				if (target instanceof TargetPermanent) {
@@ -263,7 +269,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	@Override
 	public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
 		while (!abort) {
-			game.fireSelectTargetEvent(playerId, target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), target.possibleTargets(source==null?null:source.getId(), playerId, game), target.isRequired());
+			game.fireSelectTargetEvent(playerId, target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), target.possibleTargets(source==null?null:source.getId(), playerId, game), target.isRequired(), null);
 			waitForResponse();
 			if (response.getUUID() != null) {
 				if (target.canTarget(response.getUUID(), source, game)) {
@@ -434,7 +440,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	protected void selectCombatGroup(UUID blockerId, Game game) {
 		TargetAttackingCreature target = new TargetAttackingCreature();
-		game.fireSelectTargetEvent(playerId, "Select attacker to block", target.possibleTargets(null, playerId, game), target.isRequired());
+		game.fireSelectTargetEvent(playerId, "Select attacker to block", target.possibleTargets(null, playerId, game), target.isRequired(), null);
 		waitForResponse();
 		if (response.getBoolean() != null) {
 			return;

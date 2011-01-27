@@ -29,6 +29,7 @@
 package mage.view;
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -48,6 +49,7 @@ public class GameClientMessage implements Serializable {
 	private Set<UUID> targets;
 	private int min;
 	private int max;
+	private Map<String, Serializable> options;
 
 	public GameClientMessage(GameView gameView) {
 		this.gameView = gameView;
@@ -58,12 +60,17 @@ public class GameClientMessage implements Serializable {
 		this.message = message;
 	}
 
-	public GameClientMessage(GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required) {
+	private GameClientMessage(GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required) {
 		this.gameView = gameView;
 		this.message = question;
 		this.cardsView = cardView;
 		this.targets = targets;
 		this.flag = required;
+	}
+
+	public GameClientMessage(GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
+		this(gameView, question, cardView, targets, required);
+		this.options = options;
 	}
 
 	public GameClientMessage(String[] choices, String message) {
@@ -118,4 +125,7 @@ public class GameClientMessage implements Serializable {
 		return max;
 	}
 
+	public Map<String, Serializable> getOptions() {
+		return options;
+	}
 }

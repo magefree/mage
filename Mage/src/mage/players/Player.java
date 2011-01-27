@@ -28,7 +28,9 @@
 
 package mage.players;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import mage.Constants.Outcome;
@@ -135,6 +137,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
 	public abstract void priority(Game game);
 	public abstract boolean choose(Outcome outcome, Target target, Game game);
+	public abstract boolean choose(Outcome outcome, Target target, Game game, Map<String, Serializable> options);
 	public abstract boolean choose(Cards cards, TargetCard target, Game game);
 	public abstract boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game);
 	public abstract boolean chooseTarget(Cards cards, TargetCard target, Ability source, Game game);
