@@ -2,14 +2,18 @@ package org.mage.plugins.card.info;
 
 import mage.Constants;
 import mage.components.CardInfoPane;
+import mage.game.permanent.Permanent;
 import mage.utils.CardUtil;
 import mage.utils.ThreadUtils;
 import mage.view.CardView;
+import mage.view.CounterView;
+import mage.view.PermanentView;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,7 +53,27 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                 while ((offset = castingCost.indexOf("<img", offset) + 1) != 0)
                     symbolCount++;
 
-                List<String> rulings = card.getRules();
+                List<String> rules = card.getRules();
+				List<String> rulings = new ArrayList<String>(rules);
+				if (card instanceof PermanentView) {
+					int count = ((PermanentView)card).getCounters().size();
+					if (count > 0) {
+						StringBuilder sb = new StringBuilder();
+						int index = 0;
+						for (CounterView counter: ((PermanentView)card).getCounters()) {
+							if (counter.getCount() > 0) {
+								if (index == 0) {
+									sb.append("<b>Counters:</b> ");
+								} else {
+									sb.append(", ");
+								}
+								sb.append(counter.getCount() + "x<i>" + counter.getName() + "</i>");
+								index++;
+							}
+						}
+						rulings.add(sb.toString());
+					}
+				}
 
                 boolean smallImages = true;
                 int fontSize = 11;

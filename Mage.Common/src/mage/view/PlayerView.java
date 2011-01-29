@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import mage.cards.Card;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.permanent.Permanent;
@@ -48,6 +49,7 @@ public class PlayerView implements Serializable {
 	private UUID playerId;
 	private String name;
 	private int life;
+	private int poison;
 	private int libraryCount;
 	private int handCount;
 	private boolean isActive;
@@ -60,6 +62,7 @@ public class PlayerView implements Serializable {
 		this.playerId = player.getId();
 		this.name = player.getName();
 		this.life = player.getLife();
+		this.poison = player.getCounters().getCount(CounterType.POISON);
 		this.libraryCount = player.getLibrary().size();
 		this.handCount = player.getHand().size();
 		this.manaPool = new ManaPoolView(player.getManaPool());
@@ -92,6 +95,10 @@ public class PlayerView implements Serializable {
 
 	public int getLife() {
 		return this.life;
+	}
+
+	public int getPoison() {
+		return this.poison;
 	}
 
 	public int getLibraryCount() {

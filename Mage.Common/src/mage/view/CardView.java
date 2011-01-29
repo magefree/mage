@@ -70,7 +70,6 @@ public class CardView implements Serializable {
 	protected int cardNumber;
 	protected boolean isAbility;
 	protected CardView ability;
-    protected Counters counters;
 
 	public List<UUID> targets;
 	
@@ -82,7 +81,6 @@ public class CardView implements Serializable {
 			this.power = Integer.toString(card.getPower().getValue());
 			this.toughness = Integer.toString(card.getToughness().getValue());
 			this.loyalty = Integer.toString(card.getLoyalty().getValue());
-            this.counters = ((Permanent) card).getCounters().copy();
 		} else {
 			this.power = card.getPower().toString();
 			this.toughness = card.getToughness().toString();

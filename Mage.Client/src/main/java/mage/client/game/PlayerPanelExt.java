@@ -107,6 +107,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 	public void update(PlayerView player) {
 		this.player = player;
 		lifeLabel.setText(Integer.toString(player.getLife()));
+		poisonLabel.setText(Integer.toString(player.getPoison()));
 		handLabel.setText(Integer.toString(player.getHandCount()));
 		libraryLabel.setText(Integer.toString(player.getLibraryCount()));
 		graveLabel.setText(Integer.toString(player.getGraveyard().size()));
