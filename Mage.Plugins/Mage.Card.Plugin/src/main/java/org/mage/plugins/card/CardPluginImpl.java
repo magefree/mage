@@ -50,7 +50,7 @@ public class CardPluginImpl implements CardPlugin {
     static private final float CARD_SPACING_Y = 0.03f;
     static private final float STACK_SPACING_X = 0.07f;
     static private final float STACK_SPACING_Y = 0.13f;
-    static private final int MW_GUIDE_HEIGHT = 30;
+    //static private final int MW_GUIDE_HEIGHT = 30;
 
     private int landStackMax = 5;
     private int cardWidthMin = 50, cardWidthMax = Constants.CARD_SIZE_FULL.width;
@@ -77,20 +77,20 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     @Override
-    public MagePermanent getMagePermanent(PermanentView permanent, CardDimensions dimension, UUID gameId, ActionCallback callback, boolean canBeFoil) {
+    public MagePermanent getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil) {
         boolean foil = canBeFoil && (new Random()).nextInt(5) == 0;
         CardPanel cardPanel = new CardPanel(permanent, gameId, true, callback, foil);
-        cardPanel.setCardBounds(0, 0, dimension.frameWidth, dimension.frameHeight);
+        cardPanel.setCardBounds(0, 0, dimension.width, dimension.height);
         boolean implemented = !permanent.getRarity().equals(mage.Constants.Rarity.NA);
         cardPanel.setShowCastingCost(implemented);
         return cardPanel;
     }
 
     @Override
-    public MagePermanent getMageCard(CardView permanent, CardDimensions dimension, UUID gameId, ActionCallback callback, boolean canBeFoil) {
+    public MagePermanent getMageCard(CardView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil) {
         boolean foil = canBeFoil && (new Random()).nextInt(5) == 0;
         CardPanel cardPanel = new CardPanel(permanent, gameId, true, callback, foil);
-        cardPanel.setCardBounds(0, 0, dimension.frameWidth, dimension.frameHeight);
+        cardPanel.setCardBounds(0, 0, dimension.width, dimension.height);
         boolean implemented = !permanent.getRarity().equals(mage.Constants.Rarity.NA);
         cardPanel.setShowCastingCost(implemented);
         return cardPanel;
@@ -158,7 +158,7 @@ public class CardPluginImpl implements CardPlugin {
         cardWidth = cardWidthMax;
         Rectangle rect = jScrollPane.getVisibleRect();
         playAreaWidth = rect.width;
-        playAreaHeight = rect.height - MW_GUIDE_HEIGHT;
+        playAreaHeight = rect.height;
         while (true) {
             rows.clear();
             cardHeight = Math.round(cardWidth * CardPanel.ASPECT_RATIO);

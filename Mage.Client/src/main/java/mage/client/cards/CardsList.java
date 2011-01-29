@@ -60,6 +60,7 @@ import mage.view.CardsView;
 public class CardsList extends javax.swing.JPanel implements MouseListener {
 
 	protected CardEventSource cardEventSource = new CardEventSource();
+    private Dimension cardDimension;
 
     /** Creates new form Cards */
     public CardsList() {
@@ -101,7 +102,10 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
 	}
 
 	private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle) {
-		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, Config.dimensions, gameId, true);
+		if (cardDimension == null) {
+			cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+		}
+		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, true);
 		cardImg.setBounds(rectangle);
 		cardArea.add(cardImg);
 		cardArea.moveToFront(cardImg);

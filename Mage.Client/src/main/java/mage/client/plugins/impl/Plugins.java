@@ -1,6 +1,6 @@
 package mage.client.plugins.impl;
 
-import java.awt.Image;
+import java.awt.*;
 import java.io.File;
 import java.util.Collection;
 import java.util.Map;
@@ -80,7 +80,7 @@ public class Plugins implements MagePlugins {
 	}
 	
 	@Override
-	public MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean canBeFoil) {
+	public MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean canBeFoil) {
 		if (cardPlugin != null) {
 			mageActionCallback.refreshSession();
 			mageActionCallback.setCardPreviewComponent(bigCard);
@@ -91,7 +91,7 @@ public class Plugins implements MagePlugins {
 	}
 	
 	@Override
-	public MageCard getMageCard(CardView card, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean canBeFoil) {
+	public MageCard getMageCard(CardView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean canBeFoil) {
 		if (cardPlugin != null) {
 			mageActionCallback.refreshSession();
 			mageActionCallback.setCardPreviewComponent(bigCard);

@@ -88,6 +88,8 @@ public class GamePanel extends javax.swing.JPanel {
 	private UUID playerId;
 	private Session session;
 
+	private static final Dimension handCardDimension = new Dimension(75, (int)(75 * 3.5f / 2.5f));
+
     /** Creates new form GamePanel */
     public GamePanel() {
         initComponents();
@@ -289,7 +291,7 @@ public class GamePanel extends javax.swing.JPanel {
 		} else {
 			this.hand.loadCards(game.getHand(), bigCard, gameId);
 			int count = game.getHand().size();
-			hand.setPreferredSize(new java.awt.Dimension((Config.dimensions.frameWidth + 5) * count + 5, Config.dimensions.frameHeight + 20)); // for scroll
+			hand.setPreferredSize(new java.awt.Dimension((handCardDimension.width + 5) * count + 5, handCardDimension.height + 20)); // for scroll
 		}
 		if (game.getPhase() != null)
 			this.txtPhase.setText(game.getPhase().toString());
@@ -381,9 +383,9 @@ public class GamePanel extends javax.swing.JPanel {
 		return JOptionPane.showConfirmDialog(this, message, title, JOptionPane.YES_NO_OPTION);
 	}
 
-	public JPanel getHand() {
+	/*public JPanel getHand() {
 		return hand;
-	}
+	}*/
 
 	public void select(String message, GameView gameView) {
 		updateGame(gameView);
@@ -439,9 +441,9 @@ public class GamePanel extends javax.swing.JPanel {
 		return players;
 	}
 	
-    public javax.swing.JPanel getBattlefield() {
+    /*public javax.swing.JPanel getBattlefield() {
 		return pnlBattlefield;
-	}
+	}*/
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -479,6 +481,8 @@ public class GamePanel extends javax.swing.JPanel {
         pnlBattlefield = new javax.swing.JPanel();
         hand = new mage.client.cards.Cards(true);
         chatPanel = new mage.client.chat.ChatPanel();
+
+	    hand.setCardDimension(handCardDimension);
 
         jSplitPane1.setBorder(null);
         jSplitPane1.setDividerSize(7);

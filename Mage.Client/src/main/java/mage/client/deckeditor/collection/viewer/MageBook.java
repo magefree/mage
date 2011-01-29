@@ -39,6 +39,7 @@ import mage.client.components.arcane.ManaSymbols;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.AudioManager;
 import mage.client.util.Command;
+import mage.client.util.Config;
 import mage.client.util.ImageHelper;
 import mage.components.ImagePanel;
 import mage.view.CardView;
@@ -212,7 +213,10 @@ public class MageBook extends JComponent {
     }
 
     private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle) {
-        final MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, cardDimensions, gameId, false);
+	    if (cardDimension == null) {
+		    cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+	    }
+        final MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, false);
         cardImg.setBounds(rectangle);
         jLayeredPane.add(cardImg, JLayeredPane.DEFAULT_LAYER, 10);
         cardImg.update(card);
@@ -296,6 +300,7 @@ public class MageBook extends JComponent {
     private static CardDimensions cardDimensions = new CardDimensions(1.2d);
     private static Font font = new Font("Arial", Font.PLAIN, 14);
     private static final Logger log = Logger.getLogger(MageBook.class);
+	private Dimension cardDimension;
 
     static private final String CENTER_PANEL_IMAGE_PATH = "/book_bg.jpg";
     static private final String RIGHT_PANEL_IMAGE_PATH = "/book_right.jpg";

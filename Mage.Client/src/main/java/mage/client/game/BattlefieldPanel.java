@@ -73,6 +73,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
 	protected static Map<UUID, PermanentView> battlefield;
 	protected static List<Thread> threads = new ArrayList<Thread>();
+	private static Dimension cardDimension;
 	
     /** Creates new form BattlefieldPanel */
     public BattlefieldPanel(JScrollPane jScrollPane) {
@@ -154,7 +155,10 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 	}
 
 	private void addPermanent(PermanentView permanent, final int count) {
-		final MagePermanent perm = Plugins.getInstance().getMagePermanent(permanent, bigCard, Config.dimensions, gameId, true);
+		if (cardDimension == null) {
+			cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+		}
+		final MagePermanent perm = Plugins.getInstance().getMagePermanent(permanent, bigCard, cardDimension, gameId, true);
 		if (!Plugins.getInstance().isCardPluginLoaded()) {
 			perm.setBounds(findEmptySpace(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight)));
 		} else {

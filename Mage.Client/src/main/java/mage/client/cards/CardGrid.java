@@ -67,6 +67,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
 	protected BigCard bigCard;
 	protected UUID gameId;
 	private Map<UUID, MageCard> cards = new HashMap<UUID, MageCard>();
+	private Dimension cardDimension;
 
     public CardGrid() {
         initComponents();
@@ -93,7 +94,10 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
 	}
 	
 	private void addCard(CardView card, BigCard bigCard, UUID gameId) {
-		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, Config.dimensions, gameId, true);
+		if (cardDimension == null) {
+			cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+		}
+		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, true);
 		cards.put(card.getId(), cardImg);
 		cardImg.addMouseListener(this);
 		add(cardImg);

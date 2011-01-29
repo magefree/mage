@@ -71,9 +71,9 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 		this.title = name;
 		cardArea.removeAll();
 		if (showCards != null && showCards.size() < 10)
-			loadCardsFew(showCards, bigCard, dimension, gameId);
+			loadCardsFew(showCards, bigCard, gameId);
 		else
-			loadCardsMany(showCards, bigCard, dimension, gameId);
+			loadCardsMany(showCards, bigCard, gameId);
 		cardArea.revalidate();
 		if (getParent() != MageFrame.getDesktop() /*|| this.isClosed*/) {
 			MageFrame.getDesktop().add(this, JLayeredPane.POPUP_LAYER);
@@ -85,8 +85,9 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 		this.setVisible(true);
 	}
 
-	private void loadCardsFew(CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId) {
+	private void loadCardsFew(CardsView showCards, BigCard bigCard, UUID gameId) {
 		Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+		Dimension dimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 		for (CardView card: showCards.values()) {
 			addCard(card, bigCard, gameId, rectangle, dimension);
 			rectangle.translate(Config.dimensions.frameWidth, 0);
@@ -94,7 +95,7 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 		cardArea.setPreferredSize(new Dimension(Config.dimensions.frameWidth * showCards.size(), Config.dimensions.frameHeight));
 	}
 	
-	private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle, CardDimensions dimension) {
+	private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle, Dimension dimension) {
 		if (card instanceof AbilityView) {
 			CardView tmp = ((AbilityView)card).getSourceCard();
 			tmp.overrideRules(card.getRules());
@@ -112,10 +113,11 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 		cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 	}
 
-	private void loadCardsMany(CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId) {
+	private void loadCardsMany(CardsView showCards, BigCard bigCard, UUID gameId) {
 		int columns = 1;
 		if (showCards != null && showCards.size() > 0) {
 			Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+			Dimension dimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 			int count = 0;
 			for (CardView card: showCards.values()) {
 				addCard(card, bigCard, gameId, rectangle, dimension);

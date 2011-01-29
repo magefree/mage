@@ -11,10 +11,12 @@
 
 package mage.client.cards;
 
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.UUID;
+
+import mage.cards.CardDimensions;
 import mage.cards.MageCard;
 import mage.client.MageFrame;
 import mage.client.plugins.impl.Plugins;
@@ -45,8 +47,9 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
 		int curColumn = 0;
 		int curRow = 0;
 		Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+		Dimension dimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 		for (CardView card: booster.values()) {
-			MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, Config.dimensions, null, false);
+			MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, dimension, null, false);
 			cardImg.addMouseListener(this);
 			add(cardImg);
 			cardImg.update(card);

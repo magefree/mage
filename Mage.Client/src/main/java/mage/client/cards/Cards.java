@@ -65,6 +65,8 @@ public class Cards extends javax.swing.JPanel {
 	private boolean dontDisplayTapped = false;
 	private static final int GAP_X = 5;
 
+	private Dimension cardDimension;
+
 	/** Creates new form Cards */
     public Cards() {
     	this(false);
@@ -125,7 +127,7 @@ public class Cards extends javax.swing.JPanel {
 		}
 		
 		if (changed) {
-			layoutCards(Config.dimensions);
+			layoutCards(getCardDimension());
 		}
 		
 		cardArea.setPreferredSize(new Dimension(cards.size() * (Config.dimensions.frameWidth + GAP_X), Config.dimensions.frameHeight));
@@ -137,8 +139,15 @@ public class Cards extends javax.swing.JPanel {
 		return changed;
 	}
 
+	private Dimension getCardDimension() {
+	   	if (cardDimension == null) {
+			cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+		}
+		return cardDimension;
+	}
+
 	private void addCard(CardView card, BigCard bigCard, UUID gameId) {
-		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, Config.dimensions, gameId, true);
+		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, getCardDimension(), gameId, true);
 		cards.put(card.getId(), cardImg);
 		cardArea.add(cardImg);
 	}
@@ -157,13 +166,13 @@ public class Cards extends javax.swing.JPanel {
         }
 	}
 	
-	private void layoutCards(CardDimensions dimension) {
+	private void layoutCards(Dimension dimension) {
 		if (Plugins.getInstance().isCardPluginLoaded()) {
 			int dx = 0;
 			for (MageCard card: cards.values()) {
 				card.setLocation(dx, 0);
-				card.setCardBounds(dx, 0, dimension.frameWidth, dimension.frameHeight);
-				dx += dimension.frameWidth + GAP_X;
+				card.setCardBounds(dx, 0, dimension.width, dimension.height);
+				dx += dimension.width + GAP_X;
 			}
 		}
 	}
@@ -213,4 +222,8 @@ public class Cards extends javax.swing.JPanel {
 			jScrollPane1.getVerticalScrollBar().setUnitIncrement(unitIncrement);
 		}
     }
+
+	public void setCardDimension(Dimension dimension) {
+		this.cardDimension = dimension;
+	}
 }

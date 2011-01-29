@@ -208,6 +208,9 @@ public class BigCard extends JComponent {
                         if (source == null) {
                             source = BufferedImageBuilder.bufferImage(bigImage);
                         }
+	                    if (source == null) {
+		                    return;
+	                    }
                         f = filter.filter(source, null);
                     }
                     synchronized (BigCard.class) {

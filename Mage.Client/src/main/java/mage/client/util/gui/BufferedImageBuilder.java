@@ -25,6 +25,9 @@ public class BufferedImageBuilder {
     }
 
     public static BufferedImage bufferImage(Image image, int type) {
+	    if (image == null) {
+		    return null;
+	    }
         BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), type);
         Graphics2D g = bufferedImage.createGraphics();
         g.drawImage(image, null, null);

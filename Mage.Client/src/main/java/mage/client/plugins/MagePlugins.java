@@ -1,6 +1,6 @@
 package mage.client.plugins;
 
-import java.awt.Image;
+import java.awt.*;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -21,8 +21,8 @@ public interface MagePlugins {
 	void shutdown();
 	void updateGamePanel(Map<String, JComponent> ui);
 	JComponent updateTablePanel(Map<String, JComponent> ui);
-	MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean canBeFoil);
-	MageCard getMageCard(CardView card, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean canBeFoil);
+	MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean canBeFoil);
+	MageCard getMageCard(CardView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean canBeFoil);
 	boolean isThemePluginLoaded();
 	boolean isCardPluginLoaded();
 	boolean isCounterPluginLoaded();
