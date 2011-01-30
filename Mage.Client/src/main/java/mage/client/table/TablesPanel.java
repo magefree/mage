@@ -227,6 +227,8 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
                 btnNewDraftActionPerformed(evt);
             }
         });
+		//FIXME: removed on released 0.6 version
+		btnNewDraft.setVisible(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

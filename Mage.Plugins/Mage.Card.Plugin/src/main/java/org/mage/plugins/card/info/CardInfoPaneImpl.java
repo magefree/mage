@@ -33,15 +33,15 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
     }
 
     public void setCard(final CardView card) {
-        if (card == null) return;
+	    if (card == null) return;
         if (isCurrentCard(card)) return;
-        currentCard = card;
+	    currentCard = card;
 
         ThreadUtils.threadPool.submit(new Runnable() {
             public void run() {
-                if (!card.equals(currentCard)) return;
+            	if (!card.equals(currentCard)) return;
 
-                String manaCost = "";
+			    String manaCost = "";
                 for (String m : card.getManaCost()) {
                     manaCost += m;
                 }
@@ -55,24 +55,29 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 
                 List<String> rules = card.getRules();
 				List<String> rulings = new ArrayList<String>(rules);
-				if (card instanceof PermanentView) {
-					int count = ((PermanentView)card).getCounters().size();
-					if (count > 0) {
-						StringBuilder sb = new StringBuilder();
-						int index = 0;
-						for (CounterView counter: ((PermanentView)card).getCounters()) {
-							if (counter.getCount() > 0) {
-								if (index == 0) {
-									sb.append("<b>Counters:</b> ");
-								} else {
-									sb.append(", ");
+				try {
+					if (card instanceof PermanentView) {
+						List<CounterView> counters = ((PermanentView)card).getCounters();
+						int count = counters != null ? counters.size() : 0;
+						if (count > 0) {
+							StringBuilder sb = new StringBuilder();
+							int index = 0;
+							for (CounterView counter: ((PermanentView)card).getCounters()) {
+								if (counter.getCount() > 0) {
+									if (index == 0) {
+										sb.append("<b>Counters:</b> ");
+									} else {
+										sb.append(", ");
+									}
+									sb.append(counter.getCount() + "x<i>" + counter.getName() + "</i>");
+									index++;
 								}
-								sb.append(counter.getCount() + "x<i>" + counter.getName() + "</i>");
-								index++;
 							}
+							rulings.add(sb.toString());
 						}
-						rulings.add(sb.toString());
 					}
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 
                 boolean smallImages = true;

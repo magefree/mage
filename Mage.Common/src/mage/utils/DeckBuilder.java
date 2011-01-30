@@ -249,6 +249,7 @@ public class DeckBuilder {
 					maxSingleCount = Math.max(maxSingleCount, typeCount);
 				}
 			}
+			maxSingleCount = Math.min(maxSingleCount, SINGLE_PENALTY.length - 1);
 			return 2 * converted + 3 * (10 - SINGLE_PENALTY[maxSingleCount]/*-DOUBLE_PENALTY[doubleCount]*/);
 		}
 
