@@ -77,15 +77,15 @@ public class AboutDialog extends MageDialog {
             }
         });
 
-        jLabel1.setText("MAGE client, version 0.5.1");
+        jLabel1.setText("MAGE client, version 0.6");
 
         lblVersion.setText("version");
 
         jLabel2.setText("Courtesy: BetaSteward@googlemail.com");
         
-        jLabel3.setText("Devs: BetaSteward, Nantuko84, Eugen.Rivniy");
+        jLabel3.setText("Devs: BetaSteward, Nantuko84, Eugen.Rivniy, maurer.it");
 
-        jLabel4.setText("Thanks: KLo, Cosmo & Fritz");
+        //jLabel4.setText("Thanks: KLo, Cosmo & Fritz");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

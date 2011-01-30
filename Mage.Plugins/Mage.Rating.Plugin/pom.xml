@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.mage</groupId>
 		<artifactId>Mage-Plugins</artifactId>
-		<version>0.5.1</version>
+		<version>0.6</version>
 	</parent>
 
 	<groupId>org.mage</groupId>
@@ -25,7 +25,7 @@
 		<dependency>
 			<groupId>org.mage</groupId>
 			<artifactId>Mage-Sets</artifactId>
-			<version>0.5.1</version>
+			<version>0.6</version>
 		</dependency>
 		<dependency>
 			<groupId>com.googlecode.jspf</groupId>

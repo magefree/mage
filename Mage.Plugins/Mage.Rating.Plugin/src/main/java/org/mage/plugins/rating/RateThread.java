@@ -1,6 +1,6 @@
 package org.mage.plugins.rating;
 
-import java.awt.Component;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -25,6 +25,7 @@ public class RateThread extends Thread {
 	private static RateThread fInstance = new RateThread();
 	private CardPluginImpl impl = new CardPluginImpl();
 	public static CardDimensions dimensions = new CardDimensions(0.4);
+	public static Dimension cardDimension = new Dimension(dimensions.frameWidth, dimensions.frameHeight);
 	public static CardDimensions bigCardDimension = new CardDimensions(0.8);
 	private JFrame frame;
 	private MageCard mageCard1;
@@ -51,11 +52,11 @@ public class RateThread extends Thread {
 				Card card1 = getRandomUniqueNonLandCard(null);
 				Card card2 = getRandomUniqueNonLandCard(card1);
 				
-				mageCard1 = impl.getMageCard(new CardView(card1), dimensions, UUID.randomUUID(), new RateCallback(card1, card2, this, bigCard), false);
+				mageCard1 = impl.getMageCard(new CardView(card1), cardDimension, UUID.randomUUID(), new RateCallback(card1, card2, this, bigCard), false);
 				mageCard1.setCardBounds(bigCardDimension.frameWidth + 80, 10, dimensions.frameWidth, dimensions.frameHeight);
 				frame.add(mageCard1);
 				
-				mageCard2 = impl.getMageCard(new CardView(card2), dimensions, UUID.randomUUID(), new RateCallback(card2, card1, this, bigCard), false);
+				mageCard2 = impl.getMageCard(new CardView(card2), cardDimension, UUID.randomUUID(), new RateCallback(card2, card1, this, bigCard), false);
 				mageCard2.setCardBounds(bigCardDimension.frameWidth + 80 + dimensions.frameWidth + 30, 10, dimensions.frameWidth, dimensions.frameHeight);
 				frame.add(mageCard2);
 				

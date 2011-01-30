@@ -15,6 +15,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import org.apache.log4j.Logger;
+import org.mage.plugins.rating.cards.CardsStorage;
 import org.mage.plugins.rating.results.ResultHandler;
 import org.mage.plugins.rating.ui.BigCard;
 
@@ -22,6 +23,7 @@ public class RateFrame extends JFrame {
 
 	private static Logger log = Logger.getLogger(RateFrame.class);
 	private BigCard bigCard;
+	private JLabel label;
 
 	public RateFrame() {
 		setTitle("Mage Rate Cards, version 0.1");
@@ -56,7 +58,8 @@ public class RateFrame extends JFrame {
 		bigCard.setBorder(BorderFactory.createLineBorder(Color.gray));
 		add(bigCard);
 
-		JLabel label = new JLabel("The results are stored for every 10 compare.");
+		//JLabel label = new JLabel("The results are stored for every 10 compare.");
+		label = new JLabel("Loading cards...Please wait.");
 		label.setBounds(290, 270, 300, 30);
 		add(label);
 
@@ -78,6 +81,8 @@ public class RateFrame extends JFrame {
 	}
 
 	public void startRating() {
+		CardsStorage.getAllCards();
+		label.setText("The results are stored for every 10 compare.");
 		RateThread.getInstance().start(this, this.bigCard);
 	}
 
