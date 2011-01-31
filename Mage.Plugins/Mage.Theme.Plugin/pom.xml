@@ -10,7 +10,8 @@
 	</parent>
 	
 	<artifactId>Mage-Theme-Plugin</artifactId>
-	<packaging>jar</packaging>	
+	<packaging>jar</packaging>
+	<version>${plugin-version}</version>	
 	<name>Mage Theme Plugin</name>
 	<description>Contains resources for drawing background</description>
 
@@ -49,7 +50,7 @@
 	</build>
 
 	<properties>
-		<plugin-version>0.3</plugin-version>
+		<plugin-version>0.4</plugin-version>
 		<jspf-version>0.9.1</jspf-version>
 	</properties>
 </project>

@@ -82,13 +82,13 @@
 	 <dependency>
 	  <groupId>${project.groupId}</groupId>
 	  <artifactId>Mage-Theme-Plugin</artifactId>
-	  <version>${project.version}</version>
+	  <version>0.4</version>
 	  <scope>runtime</scope>
 	 </dependency>
 	 <dependency>
 	  <groupId>${project.groupId}</groupId>
 	  <artifactId>Mage-Card-Plugin</artifactId>
-	  <version>0.3</version>
+	  <version>0.5</version>
 	  <scope>runtime</scope>
 	 </dependency>
 	 <dependency>
