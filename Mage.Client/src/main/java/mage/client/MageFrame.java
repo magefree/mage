@@ -111,7 +111,7 @@ public class MageFrame extends javax.swing.JFrame {
      */
     public MageFrame() {
 
-        setTitle("Mage, version 0.6");
+        setTitle("Mage, version 0.6.1");
 
         EDTExceptionHandler.registerExceptionHandler();
         addWindowListener(new WindowAdapter() {

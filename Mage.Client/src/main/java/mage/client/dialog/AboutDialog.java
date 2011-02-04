@@ -77,7 +77,7 @@ public class AboutDialog extends MageDialog {
             }
         });
 
-        jLabel1.setText("MAGE client, version 0.6");
+        jLabel1.setText("MAGE client, version 0.6.1");
 
         lblVersion.setText("version");
 
