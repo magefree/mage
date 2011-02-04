@@ -80,14 +80,20 @@ public class TableWaitingDialog extends MageDialog implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		TableView table = session.getTable(roomId, tableId);
 		if (table != null) {
-			if (table.getTableState() == TableState.STARTING) {
-				this.btnStart.setEnabled(true);
-				this.btnMoveDown.setEnabled(true);
-				this.btnMoveUp.setEnabled(true);
-			} else {
-				this.btnStart.setEnabled(false);
-				this.btnMoveDown.setEnabled(false);
-				this.btnMoveUp.setEnabled(false);
+			switch (table.getTableState()) {
+				case STARTING:
+					this.btnStart.setEnabled(true);
+					this.btnMoveDown.setEnabled(true);
+					this.btnMoveUp.setEnabled(true);
+					break;
+				case DUELING:
+					closeDialog();
+					return;
+				default:
+					this.btnStart.setEnabled(false);
+					this.btnMoveDown.setEnabled(false);
+					this.btnMoveUp.setEnabled(false);
+					break;
 			}
 			int row = this.tableSeats.getSelectedRow();
 			tableWaitModel.loadData(table);
