@@ -295,10 +295,9 @@ public class MageBook extends JComponent {
     private HoverButton pageRight;
 
     private int currentPage = 0;
-    private String currentSet = "SOM";
+    private String currentSet = "MBS";
 
     private static CardDimensions cardDimensions = new CardDimensions(1.2d);
-    private static Font font = new Font("Arial", Font.PLAIN, 14);
     private static final Logger log = Logger.getLogger(MageBook.class);
 	private Dimension cardDimension;
 
