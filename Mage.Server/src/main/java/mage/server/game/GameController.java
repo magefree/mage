@@ -28,6 +28,7 @@
 
 package mage.server.game;
 
+import mage.server.TableManager;
 import java.io.File;
 import java.io.Serializable;
 import java.util.*;
@@ -43,7 +44,6 @@ import java.util.regex.Pattern;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
@@ -153,6 +153,12 @@ public class GameController implements GameCallback {
 				}
 			}
 		);
+		for (Player player: game.getPlayers().values()) {
+			if (!player.isHuman()) {
+				ChatManager.getInstance().broadcast(chatId, "", player.getName() + " has joined the game", MessageColor.BLACK);
+			}
+		}
+		checkStart();
 	}
 
 	private UUID getPlayerId(UUID sessionId) {
@@ -165,15 +171,7 @@ public class GameController implements GameCallback {
 		gameSessions.put(playerId, gameSession);
 		logger.info("player " + playerId + " has joined game " + game.getId());
 		ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(playerId).getName() + " has joined the game", MessageColor.BLACK);
-		if (allJoined()) {
-			ThreadExecutor.getInstance().getRMIExecutor().execute(
-				new Runnable() {
-					@Override
-					public void run() {
-						startGame();
-					}
-			});
-		}
+		checkStart();
 	}
 
 	private synchronized void startGame() {
@@ -187,6 +185,18 @@ public class GameController implements GameCallback {
 			}
 			GameWorker worker = new GameWorker(game, choosingPlayerId, this);
 			gameFuture = gameExecutor.submit(worker);
+		}
+	}
+
+	private void checkStart() {
+		if (allJoined()) {
+			ThreadExecutor.getInstance().getRMIExecutor().execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						startGame();
+					}
+			});
 		}
 	}
 

@@ -34,7 +34,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import mage.interfaces.callback.ClientCallback;
 import mage.util.Logging;

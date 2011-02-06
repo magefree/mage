@@ -41,25 +41,27 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
-import mage.game.draft.DraftOptions;
 import mage.interfaces.MageException;
 import mage.game.match.MatchOptions;
+import mage.game.tournament.TournamentOptions;
 import mage.interfaces.Server;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.game.DeckValidatorFactory;
-import mage.server.game.DraftManager;
+import mage.server.draft.DraftManager;
 import mage.server.game.GameFactory;
 import mage.server.game.GameManager;
 import mage.server.game.GamesRoomManager;
 import mage.server.game.PlayerFactory;
 import mage.server.game.ReplayManager;
-import mage.server.game.TableManager;
+import mage.server.tournament.TournamentFactory;
+import mage.server.tournament.TournamentManager;
 import mage.server.util.ThreadExecutor;
 import mage.util.Logging;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.GameView;
 import mage.view.TableView;
+import mage.view.TournamentView;
 
 /**
  *
@@ -130,10 +132,10 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public TableView createDraftTable(UUID sessionId, UUID roomId, DraftOptions options) throws MageException {
+	public TableView createTournamentTable(UUID sessionId, UUID roomId, TournamentOptions options) throws MageException {
 		try {
-			TableView table = GamesRoomManager.getInstance().getRoom(roomId).createDraftTable(sessionId, options);
-			logger.info("Draft table " + table.getTableId() + " created");
+			TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTournamentTable(sessionId, options);
+			logger.log(Level.INFO, "Tournament table {0} created", table.getTableId());
 			return table;
 		}
 		catch (Exception ex) {
@@ -175,9 +177,9 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public boolean joinDraftTable(UUID sessionId, UUID roomId, UUID tableId, String name) throws MageException, GameException {
+	public boolean joinTournamentTable(UUID sessionId, UUID roomId, UUID tableId, String name) throws MageException, GameException {
 		try {
-			boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinDraftTable(sessionId, tableId, name);
+			boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTournamentTable(sessionId, tableId, name);
 			logger.info("Session " + sessionId + " joined table " + tableId);
 			return ret;
 		}
@@ -262,13 +264,13 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void startDraft(final UUID sessionId, final UUID roomId, final UUID tableId) throws MageException {
+	public void startTournament(final UUID sessionId, final UUID roomId, final UUID tableId) throws MageException {
 		try {
 			rmiExecutor.execute(
 				new Runnable() {
 					@Override
 					public void run() {
-						TableManager.getInstance().startDraft(sessionId, roomId, tableId);
+						TableManager.getInstance().startTournament(sessionId, roomId, tableId);
 					}
 				}
 			);
@@ -276,6 +278,17 @@ public class ServerImpl extends RemoteServer implements Server {
 		catch (Exception ex) {
 			handleException(ex);
 		}
+	}
+
+	@Override
+	public TournamentView getTournament(UUID tournamentId) throws RemoteException, MageException {
+		try {
+			return TournamentManager.getInstance().getTournamentView(tournamentId);
+		}
+		catch (Exception ex) {
+			handleException(ex);
+		}
+		return null;
 	}
 
 	@Override
@@ -442,9 +455,37 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
+	public void joinTournament(final UUID tournamentId, final UUID sessionId) throws MageException {
+		try {
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						TournamentManager.getInstance().joinTournament(tournamentId, sessionId);
+					}
+				}
+			);
+		}
+		catch (Exception ex) {
+			handleException(ex);
+		}
+	}
+
+	@Override
 	public UUID getGameChatId(UUID gameId) throws MageException {
 		try {
 			return GameManager.getInstance().getChatId(gameId);
+		}
+		catch (Exception ex) {
+			handleException(ex);
+		}
+		return null;
+	}
+
+	@Override
+	public UUID getTournamentChatId(UUID tournamentId) throws MageException {
+		try {
+			return TournamentManager.getInstance().getChatId(tournamentId);
 		}
 		catch (Exception ex) {
 			handleException(ex);
@@ -683,6 +724,7 @@ public class ServerImpl extends RemoteServer implements Server {
 		try {
 			return new ServerState(
 					GameFactory.getInstance().getGameTypes(),
+					TournamentFactory.getInstance().getTournamentTypes(),
 					PlayerFactory.getInstance().getPlayerTypes().toArray(new String[0]),
 					DeckValidatorFactory.getInstance().getDeckTypes().toArray(new String[0]),
 					testMode);
@@ -722,7 +764,7 @@ public class ServerImpl extends RemoteServer implements Server {
 
 	public void handleException(Exception ex) throws MageException {
 		logger.log(Level.SEVERE, "", ex);
-		throw new MageException("Server error");
+		throw new MageException("Server error: " + ex.getMessage());
 	}
 
     public GameView getGameView(final UUID gameId, final UUID sessionId, final UUID playerId) {

@@ -75,6 +75,7 @@ import java.util.prefs.Preferences;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import mage.client.draft.DraftPane;
+import mage.client.tournament.TournamentPane;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -151,6 +152,14 @@ public class MageFrame extends javax.swing.JFrame {
         desktopPane.add(draftPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
         try {
             draftPane.setMaximum(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
+
+		tournamentPane = new TournamentPane();
+        desktopPane.add(tournamentPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        try {
+            tournamentPane.setMaximum(true);
         } catch (java.beans.PropertyVetoException e1) {
             e1.printStackTrace();
         }
@@ -405,6 +414,12 @@ public class MageFrame extends javax.swing.JFrame {
 		this.draftPane.setVisible(true);
 		this.draftPane.toFront();
 		this.draftPane.showDraft(draftId);
+	}
+
+ 	public void showTournament(UUID tournamentId) {
+		this.tournamentPane.setVisible(true);
+		this.tournamentPane.toFront();
+		this.tournamentPane.showTournament(tournamentId);
 	}
 
    public static boolean connect(String userName, String serverName, int port) {
@@ -746,6 +761,7 @@ public class MageFrame extends javax.swing.JFrame {
     private static final long serialVersionUID = -9104885239063142218L;
     private ImagePanel backgroundPane;
 	private DraftPane draftPane;
+	private TournamentPane tournamentPane;
 
     public void setStatusText(String status) {
         this.lblStatus.setText(status);

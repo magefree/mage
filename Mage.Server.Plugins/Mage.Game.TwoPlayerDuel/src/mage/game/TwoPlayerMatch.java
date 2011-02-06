@@ -35,7 +35,7 @@ import mage.game.match.MatchOptions;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TwoPlayerMatch extends MatchImpl<TwoPlayerDuel> {
+public class TwoPlayerMatch extends MatchImpl {
 
 	public TwoPlayerMatch(MatchOptions options) {
 		super(options);

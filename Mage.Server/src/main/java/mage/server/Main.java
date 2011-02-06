@@ -36,10 +36,11 @@ import java.net.InetAddress;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mage.game.match.MatchType;
+import mage.game.tournament.TournamentType;
 import mage.server.game.DeckValidatorFactory;
-import mage.server.game.DraftFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.PlayerFactory;
+import mage.server.tournament.TournamentFactory;
 import mage.server.util.ConfigSettings;
 import mage.server.util.config.Plugin;
 import mage.server.util.config.GamePlugin;
@@ -73,8 +74,8 @@ public class Main {
 		for (GamePlugin plugin: config.getGameTypes()) {
 			GameFactory.getInstance().addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
 		}
-		for (Plugin plugin: config.getDraftTypes()) {
-			DraftFactory.getInstance().addDraftType(plugin.getName(), loadPlugin(plugin));
+		for (GamePlugin plugin: config.getTournamentTypes()) {
+			TournamentFactory.getInstance().addTournamentType(plugin.getName(), loadTournamentType(plugin), loadPlugin(plugin));
 		}
 		for (Plugin plugin: config.getPlayerTypes()) {
 			PlayerFactory.getInstance().addPlayerType(plugin.getName(), loadPlugin(plugin));
@@ -130,6 +131,19 @@ public class Main {
 			return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
 		} catch (ClassNotFoundException ex) {
 			logger.log(Level.SEVERE, "Game type not found:" + plugin.getJar() + " - check plugin folder");
+		} catch (Exception ex) {
+			logger.log(Level.SEVERE, "Error loading game type " + plugin.getJar(), ex);
+		}
+		return null;
+	}
+
+	private static TournamentType loadTournamentType(GamePlugin plugin) {
+		try {
+			classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
+			logger.info("Loading tournament type: " + plugin.getClassName());
+			return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
+		} catch (ClassNotFoundException ex) {
+			logger.log(Level.SEVERE, "Tournament type not found:" + plugin.getJar() + " - check plugin folder");
 		} catch (Exception ex) {
 			logger.log(Level.SEVERE, "Error loading game type " + plugin.getJar(), ex);
 		}

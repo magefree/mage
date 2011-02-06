@@ -46,17 +46,20 @@ import mage.client.chat.ChatPanel;
 import mage.client.components.MageUI;
 import mage.client.draft.DraftPanel;
 import mage.client.game.GamePanel;
+import mage.client.tournament.TournamentPanel;
 import mage.client.util.Config;
 import mage.game.GameException;
-import mage.game.draft.DraftOptions;
 import mage.interfaces.MageException;
 import mage.game.match.MatchOptions;
+import mage.game.tournament.TournamentOptions;
 import mage.interfaces.Server;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.CallbackClientDaemon;
 import mage.util.Logging;
 import mage.view.GameTypeView;
 import mage.view.TableView;
+import mage.view.TournamentTypeView;
+import mage.view.TournamentView;
 
 /**
  *
@@ -75,6 +78,7 @@ public class Session {
 	private Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
 	private GamePanel game;
 	private DraftPanel draft;
+	private TournamentPanel tournament;
 	private CallbackClientDaemon callbackDaemon;
 	private MageUI ui = new MageUI();
 
@@ -101,6 +105,7 @@ public class Session {
 			return true;
 		} catch (MageException ex) {
 			logger.log(Level.SEVERE, null, ex);
+			JOptionPane.showMessageDialog(frame, "Unable to connect to server. "  + ex.getMessage());
 		} catch (RemoteException ex) {
 			logger.log(Level.SEVERE, "Unable to connect to server - ", ex);
 		} catch (NotBoundException ex) {
@@ -156,6 +161,10 @@ public class Session {
 		return serverState.getDeckTypes();
 	}
 
+	public List<TournamentTypeView> getTournamentTypes() {
+		return serverState.getTournamentTypes();
+	}
+
 	public boolean isTestMode() {
 		return serverState.isTestMode();
 	}
@@ -178,6 +187,10 @@ public class Session {
 
 	public void setDraft(DraftPanel draftPanel) {
 		draft = draftPanel;
+	}
+
+	public void setTournament(TournamentPanel tournament) {
+		this.tournament = tournament;
 	}
 
 	public UUID getMainRoomId() {
@@ -272,9 +285,9 @@ public class Session {
 		return false;
 	}
 
-	public boolean joinDraftTable(UUID roomId, UUID tableId, String playerName) {
+	public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName) {
 		try {
-			return server.joinDraftTable(sessionId, roomId, tableId, playerName);
+			return server.joinTournamentTable(sessionId, roomId, tableId, playerName);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -295,6 +308,29 @@ public class Session {
 			handleMageException(ex);
 			throw new MageRemoteException();
 		}
+	}
+
+	public TournamentView getTournament(UUID tournamentId) throws MageRemoteException {
+		try {
+			return server.getTournament(tournamentId);
+		} catch (RemoteException ex) {
+			handleRemoteException(ex);
+			throw new MageRemoteException();
+		} catch (MageException ex) {
+			handleMageException(ex);
+			throw new MageRemoteException();
+		}
+	}
+
+	public UUID getTournamentChatId(UUID tournamentId) {
+		try {
+			return server.getTournamentChatId(tournamentId);
+		} catch (RemoteException ex) {
+			handleRemoteException(ex);
+		} catch (MageException ex) {
+			handleMageException(ex);
+		}
+		return null;
 	}
 
 	public boolean sendPlayerUUID(UUID gameId, UUID data) {
@@ -419,6 +455,18 @@ public class Session {
 		return false;
 	}
 
+	public boolean joinTournament(UUID tournamentId) {
+		try {
+			server.joinTournament(tournamentId, sessionId);
+			return true;
+		} catch (RemoteException ex) {
+			handleRemoteException(ex);
+		} catch (MageException ex) {
+			handleMageException(ex);
+		}
+		return false;
+	}
+
 	public boolean watchGame(UUID gameId) {
 		try {
 			server.watchGame(gameId, sessionId);
@@ -454,9 +502,9 @@ public class Session {
 		return null;
 	}
 
-	public TableView createDraftTable(UUID roomId, DraftOptions draftOptions) {
+	public TableView createTournamentTable(UUID roomId, TournamentOptions tournamentOptions) {
 		try {
-			return server.createDraftTable(sessionId, roomId, draftOptions);
+			return server.createTournamentTable(sessionId, roomId, tournamentOptions);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -524,9 +572,9 @@ public class Session {
 		return false;
 	}
 
-	public boolean startDraft(UUID roomId, UUID tableId) {
+	public boolean startTournament(UUID roomId, UUID tableId) {
 		try {
-			server.startDraft(sessionId, roomId, tableId);
+			server.startTournament(sessionId, roomId, tableId);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
@@ -650,4 +698,5 @@ public class Session {
 	public MageUI getUI() {
 		return ui;
 	}
+
 }

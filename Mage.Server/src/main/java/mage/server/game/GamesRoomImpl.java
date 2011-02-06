@@ -28,6 +28,8 @@
 
 package mage.server.game;
 
+import mage.server.TableManager;
+import mage.server.RoomImpl;
 import mage.game.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -39,6 +41,7 @@ import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
 import mage.game.draft.DraftOptions;
 import mage.game.match.MatchOptions;
+import mage.game.tournament.TournamentOptions;
 import mage.util.Logging;
 import mage.view.TableView;
 
@@ -78,17 +81,17 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 	}
 
 	@Override
-	public boolean joinDraftTable(UUID sessionId, UUID tableId, String name) throws GameException {
+	public boolean joinTournamentTable(UUID sessionId, UUID tableId, String name) throws GameException {
 		if (tables.containsKey(tableId)) {
-			return TableManager.getInstance().joinDraft(sessionId, tableId, name);
+			return TableManager.getInstance().joinTournament(sessionId, tableId, name);
 		} else {
 			return false;
 		}
 	}
 
 	@Override
-	public TableView createDraftTable(UUID sessionId, DraftOptions options) {
-		Table table = TableManager.getInstance().createDraftTable(sessionId, options);
+	public TableView createTournamentTable(UUID sessionId, TournamentOptions options) {
+		Table table = TableManager.getInstance().createTournamentTable(sessionId, options);
 		tables.put(table.getId(), table);
 		return new TableView(table);
 	}

@@ -30,6 +30,7 @@ package mage.server;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import mage.interfaces.MageException;
 
 /**
  *
@@ -49,15 +50,25 @@ public class SessionManager {
 		return sessions.get(sessionId);
 	}
 
-	public UUID createSession(String userName, UUID clientId) {
-		Session session = new Session(userName, clientId);
-		sessions.put(session.getId(), session);
-		return session.getId();
+	public UUID createSession(String userName, UUID clientId) throws MageException {
+		if (!isNameUsed(userName)) {
+			Session session = new Session(userName, clientId);
+			sessions.put(session.getId(), session);
+			return session.getId();
+		}
+		throw new MageException("User name already in use");
 	}
 
 	public void removeSession(UUID sessionId) {
 		sessions.remove(sessionId);
 	}
 
+	private boolean isNameUsed(String name) {
+		for (Session session: sessions.values()) {
+			if (session.getUsername().equals(name))
+				return true;
+		}
+		return false;
+	}
 	
 }

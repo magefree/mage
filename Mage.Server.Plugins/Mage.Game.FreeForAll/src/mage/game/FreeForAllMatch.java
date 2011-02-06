@@ -35,7 +35,7 @@ import mage.game.match.MatchOptions;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FreeForAllMatch extends MatchImpl<FreeForAll> {
+public class FreeForAllMatch extends MatchImpl {
 
 	public FreeForAllMatch(MatchOptions options) {
 		super(options);

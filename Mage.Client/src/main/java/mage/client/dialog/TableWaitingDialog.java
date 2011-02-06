@@ -60,6 +60,7 @@ public class TableWaitingDialog extends MageDialog implements Observer {
 
 	private UUID tableId;
 	private UUID roomId;
+	private boolean isTournament;
 	private Session session;
 	private TableWaitModel tableWaitModel;
 	private SeatsWatchdog seatsWatchdog = new SeatsWatchdog();
@@ -105,9 +106,10 @@ public class TableWaitingDialog extends MageDialog implements Observer {
 		}
 	}
 
-	public void showDialog(UUID roomId, UUID tableId) {
+	public void showDialog(UUID roomId, UUID tableId, boolean isTournament) {
 		this.roomId = roomId;
 		this.tableId = tableId;
+		this.isTournament = isTournament;
 		session = MageFrame.getSession();
 		if (session.isTableOwner(roomId, tableId)) {
 			this.btnStart.setVisible(true);
@@ -235,7 +237,10 @@ public class TableWaitingDialog extends MageDialog implements Observer {
 
 	private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
 		closeDialog();
-		session.startGame(roomId, tableId);
+		if (!isTournament)
+			session.startGame(roomId, tableId);
+		else
+			session.startTournament(roomId, tableId);
 	}//GEN-LAST:event_btnStartActionPerformed
 
 	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed

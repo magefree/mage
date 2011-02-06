@@ -26,41 +26,61 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.server.game;
+package mage.server.draft;
 
 import java.util.UUID;
-import mage.server.ChatManager;
+import java.util.concurrent.ConcurrentHashMap;
+import mage.game.draft.Draft;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class RoomImpl implements Room {
+public class DraftManager {
+	private final static DraftManager INSTANCE = new DraftManager();
 
-	private UUID chatId;
-	private UUID roomId;
-
-	public RoomImpl() {
-		roomId = UUID.randomUUID();
-		chatId = ChatManager.getInstance().createChatSession();
+	public static DraftManager getInstance() {
+		return INSTANCE;
 	}
 
-	/**
-	 * @return the chatId
-	 */
-	@Override
-	public UUID getChatId() {
-		return chatId;
+	private DraftManager() {}
+
+	private ConcurrentHashMap<UUID, DraftController> draftControllers = new ConcurrentHashMap<UUID, DraftController>();
+
+	public UUID createDraftSession(Draft draft, ConcurrentHashMap<UUID, UUID> sessionPlayerMap, UUID tableId) {
+		DraftController draftController = new DraftController(draft, sessionPlayerMap, tableId);
+		draftControllers.put(draft.getId(), draftController);
+		return draftController.getSessionId();
 	}
 
-	/**
-	 * @return the roomId
-	 */
-	@Override
-	public UUID getRoomId() {
-		return roomId;
+	public void joinDraft(UUID draftId, UUID sessionId) {
+		draftControllers.get(draftId).join(sessionId);
 	}
 
+	public void destroyChatSession(UUID gameId) {
+		draftControllers.remove(gameId);
+	}
 
+	public void sendCardPick(UUID draftId, UUID sessionId, UUID cardId) {
+		draftControllers.get(draftId).sendCardPick(sessionId, cardId);
+	}
+
+	public void removeSession(UUID sessionId) {
+		for (DraftController controller: draftControllers.values()) {
+			controller.kill(sessionId);
+		}
+	}
+
+	public void kill(UUID draftId, UUID sessionId) {
+		draftControllers.get(draftId).kill(sessionId);
+	}
+
+	void timeout(UUID gameId, UUID sessionId) {
+		draftControllers.get(gameId).timeout(sessionId);
+	}
+
+	void removeDraft(UUID draftId) {
+		draftControllers.remove(draftId);
+	}
 
 }

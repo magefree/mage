@@ -26,8 +26,11 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.server.game;
+package mage.server;
 
+import mage.server.draft.DraftManager;
+import mage.server.tournament.TournamentFactory;
+import mage.server.tournament.TournamentManager;
 import mage.game.Table;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -56,16 +59,24 @@ import mage.game.GameStates;
 import mage.game.match.Match;
 import mage.game.Seat;
 import mage.game.draft.Draft;
-import mage.game.draft.DraftOptions;
 import mage.game.draft.DraftPlayer;
 import mage.game.events.Listener;
 import mage.game.events.TableEvent;
 import mage.game.match.MatchOptions;
 import mage.game.match.MatchPlayer;
+import mage.game.tournament.Tournament;
+import mage.game.tournament.TournamentOptions;
+import mage.game.tournament.TournamentPlayer;
 import mage.players.Player;
 import mage.server.ChatManager;
 import mage.server.Main;
 import mage.server.SessionManager;
+import mage.server.game.DeckValidatorFactory;
+import mage.server.game.GameFactory;
+import mage.server.game.GameManager;
+import mage.server.game.GameReplay;
+import mage.server.game.PlayerFactory;
+import mage.server.game.ReplayManager;
 import mage.util.CopierObjectInputStream;
 import mage.util.Logging;
 
@@ -82,8 +93,8 @@ public class TableController {
 	private Table table;
 	private Match match;
 	private MatchOptions options;
-	private Draft draft;
-	private DraftOptions draftOptions;
+	private Tournament tournament;
+	private TournamentOptions tournamentOptions;
 	private ConcurrentHashMap<UUID, UUID> sessionPlayerMap = new ConcurrentHashMap<UUID, UUID>();
 
 	public TableController(UUID sessionId, MatchOptions options) {
@@ -95,12 +106,12 @@ public class TableController {
 		init();
 	}
 
-	public TableController(UUID sessionId, DraftOptions options) {
+	public TableController(UUID sessionId, TournamentOptions options) {
 		this.sessionId = sessionId;
 		chatId = ChatManager.getInstance().createChatSession();
-		this.draftOptions = options;
-		draft = DraftFactory.getInstance().createDraft(options.getDraftType(), options);
-		table = new Table(options.getDraftType(), options.getName(), DeckValidatorFactory.getInstance().createDeckValidator("Limited"), options.getPlayerTypes());
+		this.tournamentOptions = options;
+		tournament = TournamentFactory.getInstance().createTournament(options.getTournamentType(), options);
+		table = new Table(options.getTournamentType(), options.getName(), DeckValidatorFactory.getInstance().createDeckValidator(options.getMatchOptions().getDeckType()), options.getPlayerTypes());
 		init();
 	}
 
@@ -125,7 +136,7 @@ public class TableController {
 		);
 	}
 
-	public synchronized boolean joinDraft(UUID sessionId, String name) throws GameException {
+	public synchronized boolean joinTournament(UUID sessionId, String name) throws GameException {
 		if (table.getState() != TableState.WAITING) {
 			return false;
 		}
@@ -134,7 +145,7 @@ public class TableController {
 			throw new GameException("No available seats.");
 		}
 		Player player = createPlayer(name, seat.getPlayerType());
-		draft.addPlayer(player);
+		tournament.addPlayer(player, seat.getPlayerType());
 		table.joinTable(player, seat);
 		logger.info("player joined " + player.getId());
 		//only add human players to sessionPlayerMap
@@ -170,6 +181,21 @@ public class TableController {
 		return true;
 	}
 
+	public void addPlayer(UUID sessionId, Player player, Deck deck) throws GameException  {
+		if (table.getState() != TableState.WAITING) {
+			return;
+		}
+		Seat seat = table.getNextAvailableSeat();
+		if (seat == null) {
+			throw new GameException("No available seats.");
+		}
+		match.addPlayer(player, deck);
+		table.joinTable(player, seat);
+		if (player.isHuman()) {
+			sessionPlayerMap.put(sessionId, player.getId());
+		}
+	}
+
 	public synchronized boolean submitDeck(UUID sessionId, DeckCardLists deckList) throws GameException {
 		if (table.getState() != TableState.SIDEBOARDING && table.getState() != TableState.CONSTRUCTING) {
 			return false;
@@ -180,7 +206,7 @@ public class TableController {
 			playerName = player.getPlayer().getName();
 		}
 		else {
-			DraftPlayer player = draft.getPlayer(sessionPlayerMap.get(sessionId));
+			TournamentPlayer player = tournament.getPlayer(sessionPlayerMap.get(sessionId));
 			playerName = player.getPlayer().getName();
 		}
 		Deck deck = Deck.load(deckList);
@@ -196,9 +222,8 @@ public class TableController {
 			MatchPlayer player = match.getPlayer(playerId);
 			player.submitDeck(deck);
 		}
-		else if (table.getState() == TableState.CONSTRUCTING) {
-			DraftPlayer player = draft.getPlayer(playerId);
-			player.submitDeck(deck);
+		else {
+			tournament.submitDeck(playerId, deck);
 		}
 	}
 
@@ -267,14 +292,22 @@ public class TableController {
 		}
 	}
 
-	public synchronized void startDraft(UUID sessionId) {
+	public synchronized void startTournament(UUID sessionId) {
 		if (sessionId.equals(this.sessionId) && table.getState() == TableState.STARTING) {
-			table.initDraft();
-			DraftManager.getInstance().createDraftSession(draft, sessionPlayerMap, table.getId());
+			TournamentManager.getInstance().createTournamentSession(tournament, sessionPlayerMap, table.getId());
 			SessionManager sessionManager = SessionManager.getInstance();
 			for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
-				sessionManager.getSession(entry.getKey()).draftStarted(draft.getId(), entry.getValue());
+				sessionManager.getSession(entry.getKey()).tournamentStarted(tournament.getId(), entry.getValue());
 			}
+		}
+	}
+
+	public void startDraft(Draft draft) {
+		table.initDraft();
+		DraftManager.getInstance().createDraftSession(draft, sessionPlayerMap, table.getId());
+		SessionManager sessionManager = SessionManager.getInstance();
+		for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
+			sessionManager.getSession(entry.getKey()).draftStarted(draft.getId(), entry.getValue());
 		}
 	}
 
@@ -297,13 +330,12 @@ public class TableController {
 		}
 	}
 
-	private void construct() {
+	public void construct() {
 		table.construct();
-		for (DraftPlayer player: draft.getPlayers()) {
+		for (TournamentPlayer player: tournament.getPlayers()) {
 			player.setConstructing();
 			player.getPlayer().construct(table, player.getDeck());
 		}
-		while (!draft.isDoneConstructing()){}
 	}
 
 	private void construct(UUID playerId, Deck deck) {
@@ -332,9 +364,11 @@ public class TableController {
 		}
 	}
 
-	public void endDraft() {
-		construct();
-		
+	public void endDraft(Draft draft) {
+		for (DraftPlayer player: draft.getPlayers()) {
+			tournament.getPlayer(player.getPlayer().getId()).setDeck(player.getDeck());
+		}
+		tournament.nextStep();
 	}
 
 	public void swapSeats(int seatNum1, int seatNum2) {
@@ -405,4 +439,7 @@ public class TableController {
 		return chatId;
 	}
 
+	public Match getMatch() {
+		return match;
+	}
 }

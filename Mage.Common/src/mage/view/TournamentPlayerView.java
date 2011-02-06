@@ -29,6 +29,10 @@
 package mage.view;
 
 import java.io.Serializable;
+import mage.game.tournament.Round;
+import mage.game.tournament.Tournament;
+import mage.game.tournament.TournamentPairing;
+import mage.game.tournament.TournamentPlayer;
 
 /**
  *
@@ -37,4 +41,25 @@ import java.io.Serializable;
 public class TournamentPlayerView implements Serializable {
     private static final long serialVersionUID = 1L;
 
+	private String name;
+	private String results;
+	private int points;
+
+	TournamentPlayerView(TournamentPlayer player) {
+		this.name = player.getPlayer().getName();
+		this.points = player.getPoints();
+		this.results = player.getResults();
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public int getPoints() {
+		return this.points;
+	}
+
+	public String getResults() {
+		return results;
+	}
 }

@@ -35,7 +35,6 @@ import mage.cards.decks.Deck;
 import mage.interfaces.callback.CallbackServerSession;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.game.GameManager;
-import mage.server.game.TableManager;
 import mage.util.Logging;
 import mage.view.TableClientMessage;
 
@@ -97,6 +96,10 @@ public class Session {
 
 	public void draftStarted(final UUID draftId, final UUID playerId) {
 		fireCallback(new ClientCallback("startDraft", new TableClientMessage(draftId, playerId)));
+	}
+
+	public void tournamentStarted(final UUID tournamentId, final UUID playerId) {
+		fireCallback(new ClientCallback("startTournament", new TableClientMessage(tournamentId, playerId)));
 	}
 
 	public void sideboard(final Deck deck, final UUID tableId) {

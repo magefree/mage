@@ -28,6 +28,7 @@
 
 package mage.server.game;
 
+import mage.server.TableManager;
 import java.util.UUID;
 import java.util.logging.Logger;
 import mage.game.Game;

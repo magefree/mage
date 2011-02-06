@@ -92,8 +92,8 @@ public class ConfigSettings {
 		return config.getGameTypes().getGameType();
 	}
 
-	public List<Plugin> getDraftTypes() {
-		return config.getDraftTypes().getDraftType();
+	public List<GamePlugin> getTournamentTypes() {
+		return config.getTournamentTypes().getTournamentType();
 	}
 
 	public List<Plugin> getDeckTypes() {

@@ -22,7 +22,7 @@
 		<module>Mage.Player.AI</module>
 		<module>Mage.Player.AIMinimax</module>
 		<module>Mage.Player.Human</module>
-		<module>Mage.Draft.8PlayerBooster</module>
+		<module>Mage.Tournament.BoosterDraft</module>
   </modules>
 	
 </project>

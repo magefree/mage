@@ -50,6 +50,8 @@ public interface Match {
 	public void startGame() throws GameException;
 	public void endGame();
 	public Game getGame();
+	public List<Game> getGames();
+    public int getWinsNeeded();
 	public int getNumGames();
 	public boolean isDoneSideboarding();
 	public UUID getChooser();

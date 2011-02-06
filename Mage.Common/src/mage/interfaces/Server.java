@@ -35,10 +35,11 @@ import java.util.List;
 import java.util.UUID;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
-import mage.game.draft.DraftOptions;
+import mage.game.tournament.TournamentOptions;
 import mage.interfaces.callback.CallbackServer;
 import mage.view.TableView;
 import mage.view.GameView;
+import mage.view.TournamentView;
 
 /**
  *
@@ -54,9 +55,9 @@ public interface Server extends Remote, CallbackServer {
 
 	//table methods
 	public TableView createTable(UUID sessionId, UUID roomId, MatchOptions matchOptions) throws RemoteException, MageException;
-	public TableView createDraftTable(UUID sessionId, UUID roomId, DraftOptions draftOptions) throws RemoteException, MageException;
+	public TableView createTournamentTable(UUID sessionId, UUID roomId, TournamentOptions tournamentOptions) throws RemoteException, MageException;
 	public boolean joinTable(UUID sessionId, UUID roomId, UUID tableId, String name, DeckCardLists deckList) throws RemoteException, MageException, GameException;
-	public boolean joinDraftTable(UUID sessionId, UUID roomId, UUID tableId, String name) throws RemoteException, MageException, GameException;
+	public boolean joinTournamentTable(UUID sessionId, UUID roomId, UUID tableId, String name) throws RemoteException, MageException, GameException;
 	public boolean submitDeck(UUID sessionId, UUID tableId, DeckCardLists deckList) throws RemoteException, MageException, GameException;
 	public boolean watchTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
 	public boolean replayTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
@@ -74,6 +75,7 @@ public interface Server extends Remote, CallbackServer {
 	public UUID getTableChatId(UUID tableId) throws RemoteException, MageException;
 	public UUID getGameChatId(UUID gameId) throws RemoteException, MageException;
 	public UUID getRoomChatId(UUID roomId) throws RemoteException, MageException;
+	public UUID getTournamentChatId(UUID tournamentId) throws RemoteException, MageException;
 
 	//room methods
 	public UUID getMainRoomId() throws RemoteException, MageException;
@@ -89,8 +91,12 @@ public interface Server extends Remote, CallbackServer {
 	public void sendPlayerInteger(UUID gameId, UUID sessionId, Integer data) throws RemoteException, MageException;
 	public void concedeGame(UUID gameId, UUID sessionId) throws RemoteException, MageException;
 
+	//tournament methods
+	public void startTournament(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
+	public void joinTournament(UUID draftId, UUID sessionId) throws RemoteException, MageException;
+	public TournamentView getTournament(UUID tournamentId) throws RemoteException, MageException;
+
 	//draft methods
-	public void startDraft(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
 	public void joinDraft(UUID draftId, UUID sessionId) throws RemoteException, MageException;
 	public void sendCardPick(UUID draftId, UUID sessionId, UUID cardId) throws RemoteException, MageException;
 

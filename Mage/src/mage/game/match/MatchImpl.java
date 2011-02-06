@@ -31,20 +31,24 @@ package mage.game.match;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Logger;
 import mage.cards.decks.Deck;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.players.Player;
+import mage.util.Logging;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class MatchImpl<T extends Game> implements Match {
+public abstract class MatchImpl implements Match {
+
+	private final static Logger logger = Logging.getLogger(MatchImpl.class.getName());
 
 	protected UUID id = UUID.randomUUID();
 	protected List<MatchPlayer> players = new ArrayList<MatchPlayer>();
-	protected List<T> games = new ArrayList<T>();
+	protected List<Game> games = new ArrayList<Game>();
 	protected MatchOptions options;
 	
 	public MatchImpl(MatchOptions options) {
@@ -92,13 +96,23 @@ public abstract class MatchImpl<T extends Game> implements Match {
 	}
 
 	@Override
-	public T getGame() {
+	public Game getGame() {
 		return games.get(games.size() -1);
+	}
+
+	@Override
+	public List<Game> getGames() {
+		return games;
 	}
 
 	@Override
 	public int getNumGames() {
 		return games.size();
+	}
+
+	@Override
+	public int getWinsNeeded() {
+		return options.getWinsNeeded();
 	}
 
 	protected void initGame(Game game) throws GameException {

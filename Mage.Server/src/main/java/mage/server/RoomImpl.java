@@ -26,16 +26,41 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.server.game;
+package mage.server;
 
-import java.rmi.Remote;
 import java.util.UUID;
+import mage.server.ChatManager;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface Room extends Remote {
-	public UUID getChatId();
-	public UUID getRoomId();
+public abstract class RoomImpl implements Room {
+
+	private UUID chatId;
+	private UUID roomId;
+
+	public RoomImpl() {
+		roomId = UUID.randomUUID();
+		chatId = ChatManager.getInstance().createChatSession();
+	}
+
+	/**
+	 * @return the chatId
+	 */
+	@Override
+	public UUID getChatId() {
+		return chatId;
+	}
+
+	/**
+	 * @return the roomId
+	 */
+	@Override
+	public UUID getRoomId() {
+		return roomId;
+	}
+
+
+
 }

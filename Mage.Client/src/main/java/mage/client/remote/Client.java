@@ -86,6 +86,10 @@ public class Client implements CallbackClient {
 						GameManager.getInstance().setCurrentPlayerUUID(message.getPlayerId());
 						gameStarted(message.getGameId(), message.getPlayerId());
 					}
+					else if(callback.getMethod().equals("startTournament")) {
+						TableClientMessage message = (TableClientMessage) callback.getData();
+						tournamentStarted(message.getGameId(), message.getPlayerId());
+					}
 					else if(callback.getMethod().equals("startDraft")) {
 						TableClientMessage message = (TableClientMessage) callback.getData();
 						draftStarted(message.getGameId(), message.getPlayerId());
@@ -171,6 +175,9 @@ public class Client implements CallbackClient {
 						TableClientMessage message = (TableClientMessage) callback.getData();
 						construct(message.getDeck(), message.getTableId());
 					}
+					else if (callback.getMethod().equals("draftOver")) {
+						session.getDraft().hideDraft();
+					}
 					else if (callback.getMethod().equals("draftPick")) {
 						DraftClientMessage message = (DraftClientMessage) callback.getData();
 						session.getDraft().loadBooster(message.getDraftPickView());
@@ -189,6 +196,9 @@ public class Client implements CallbackClient {
 					else if (callback.getMethod().equals("draftInit")) {
 						session.ack("draftInit");
 					}
+					else if (callback.getMethod().equals("tournamentInit")) {
+						session.ack("tournamentInit");
+					}
 					messageId = callback.getMessageId();
 				}
 				catch (Exception ex) {
@@ -202,7 +212,7 @@ public class Client implements CallbackClient {
 		return clientId;
 	}
 
-	protected void gameStarted(UUID gameId, UUID playerId) {
+	protected void gameStarted(final UUID gameId, final UUID playerId) {
 		try {
 			frame.showGame(gameId, playerId);
 			logger.info("Game " + gameId + " started for player " + playerId);
@@ -210,7 +220,7 @@ public class Client implements CallbackClient {
 		catch (Exception ex) {
 			handleException(ex);
 		}
-		
+
 		if (Plugins.getInstance().isCounterPluginLoaded()) {
 			Plugins.getInstance().addGamesPlayed();
 		}
@@ -220,6 +230,16 @@ public class Client implements CallbackClient {
 		try {
 			frame.showDraft(draftId);
 			logger.info("Draft " + draftId + " started for player " + playerId);
+		}
+		catch (Exception ex) {
+			handleException(ex);
+		}
+	}
+
+	protected void tournamentStarted(UUID tournamentId, UUID playerId) {
+		try {
+			frame.showTournament(tournamentId);
+			logger.info("Tournament " + tournamentId + " started for player " + playerId);
 		}
 		catch (Exception ex) {
 			handleException(ex);

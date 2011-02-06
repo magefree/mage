@@ -39,10 +39,8 @@ import mage.cards.ExpansionSet;
  */
 public class DraftOptions implements Serializable {
 
-	protected String name;
 	protected String draftType;
 	protected List<ExpansionSet> sets = new ArrayList<ExpansionSet>();
-	protected List<String> playerTypes = new ArrayList<String>();
 	protected TimingOption timing;
 
 	public enum TimingOption {
@@ -61,20 +59,8 @@ public class DraftOptions implements Serializable {
 		}
 	}
 
-	public DraftOptions(String name) {
-		this.name = name;
-	}
-
-	public String getName() {
-		return name;
-	}
-
 	public List<ExpansionSet> getSets() {
 		return sets;
-	}
-
-	public List<String> getPlayerTypes() {
-		return playerTypes;
 	}
 
 	public String getDraftType() {

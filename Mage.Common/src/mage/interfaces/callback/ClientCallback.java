@@ -47,6 +47,10 @@ public class ClientCallback implements Serializable {
 		this.data = data;
 	}
 
+	public ClientCallback(String method) {
+		this(method, null);
+	}
+
 	public void clear() {
 		method = null;
 		data = null;

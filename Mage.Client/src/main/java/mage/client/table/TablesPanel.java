@@ -58,6 +58,9 @@ import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mage.client.dialog.NewTournamentDialog;
+import mage.game.draft.DraftOptions;
+import mage.game.tournament.TournamentOptions;
 
 
 /**
@@ -73,6 +76,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 	private TablesWatchdog tablesWatchdog = new TablesWatchdog();
 	private JoinTableDialog joinTableDialog;
 	private NewTableDialog newTableDialog;
+	private NewTournamentDialog newTournamentDialog;
 	private TableWaitingDialog tableWaitingDialog;
 	private Session session;
 
@@ -99,7 +103,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 
 					joinTableDialog.showDialog(roomId, tableId);
 					if (joinTableDialog.isJoined())
-						tableWaitingDialog.showDialog(roomId, tableId);
+						tableWaitingDialog.showDialog(roomId, tableId, false);
 				} else if (state.equals("Watch")) {
 					logger.info("Watching table " + tableId);
 					if (!session.watchTable(roomId, tableId))
@@ -152,6 +156,10 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 			newTableDialog = new NewTableDialog();
 			MageFrame.getDesktop().add(newTableDialog);
 		}
+		if (newTournamentDialog == null) {
+			newTournamentDialog = new NewTournamentDialog();
+			MageFrame.getDesktop().add(newTournamentDialog);
+		}
 		if (joinTableDialog == null) {
 			joinTableDialog = new JoinTableDialog();
 			MageFrame.getDesktop().add(joinTableDialog);
@@ -201,7 +209,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
         jPanel1 = new javax.swing.JPanel();
         btnNewTable = new javax.swing.JButton();
         btnQuickStart = new javax.swing.JButton();
-        btnNewDraft = new javax.swing.JButton();
+        btnNewTournament = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
         chatPanel = new mage.client.chat.ChatPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -221,14 +229,12 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
             }
         });
 
-        btnNewDraft.setText("New Draft");
-        btnNewDraft.addActionListener(new java.awt.event.ActionListener() {
+        btnNewTournament.setText("New Tournament");
+        btnNewTournament.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewDraftActionPerformed(evt);
+                btnNewTournamentActionPerformed(evt);
             }
         });
-		//FIXME: removed on released 0.6 version
-		btnNewDraft.setVisible(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -238,10 +244,10 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
                 .addContainerGap()
                 .addComponent(btnNewTable)
                 .addGap(6, 6, 6)
-                .addComponent(btnNewDraft)
+                .addComponent(btnNewTournament)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnQuickStart)
-                .addContainerGap(450, Short.MAX_VALUE))
+                .addContainerGap(416, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,7 +256,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNewTable)
                     .addComponent(btnQuickStart)
-                    .addComponent(btnNewDraft))
+                    .addComponent(btnNewTournament))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -284,7 +290,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 	private void btnNewTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTableActionPerformed
 		newTableDialog.showDialog(roomId);
 		if (newTableDialog.getTable() != null) {
-			tableWaitingDialog.showDialog(roomId, newTableDialog.getTable().getTableId());
+			tableWaitingDialog.showDialog(roomId, newTableDialog.getTable().getTableId(), false);
 		}
 }//GEN-LAST:event_btnNewTableActionPerformed
 
@@ -318,9 +324,12 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 		}
 	}//GEN-LAST:event_btnQuickStartActionPerformed
 
-	private void btnNewDraftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewDraftActionPerformed
-
-	}//GEN-LAST:event_btnNewDraftActionPerformed
+	private void btnNewTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTournamentActionPerformed
+		newTournamentDialog.showDialog(roomId);
+		if (newTournamentDialog.getTable() != null) {
+			tableWaitingDialog.showDialog(roomId, newTournamentDialog.getTable().getTableId(), true);
+		}
+	}//GEN-LAST:event_btnNewTournamentActionPerformed
 
 	private void handleError(Exception ex) {
 		logger.log(Level.SEVERE, "Error loading deck", ex);
@@ -329,8 +338,8 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnNewDraft;
     private javax.swing.JButton btnNewTable;
+    private javax.swing.JButton btnNewTournament;
     private javax.swing.JButton btnQuickStart;
     private mage.client.chat.ChatPanel chatPanel;
     private javax.swing.JPanel jPanel1;

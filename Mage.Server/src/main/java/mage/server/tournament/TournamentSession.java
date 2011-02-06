@@ -26,55 +26,44 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.server.game;
+package mage.server.tournament;
 
 import java.rmi.RemoteException;
 import java.util.UUID;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mage.game.draft.Draft;
+import mage.game.tournament.Tournament;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.Session;
 import mage.server.SessionManager;
-import mage.server.util.ThreadExecutor;
 import mage.util.Logging;
-import mage.view.DraftClientMessage;
-import mage.view.DraftPickView;
-import mage.view.DraftView;
-import mage.view.GameClientMessage;
+import mage.view.TournamentView;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DraftSession {
-
-	protected final static Logger logger = Logging.getLogger(GameWatcher.class.getName());
+public class TournamentSession {
+	protected final static Logger logger = Logging.getLogger(TournamentSession.class.getName());
 
 	protected UUID sessionId;
 	protected UUID playerId;
-	protected Draft draft;
+	protected Tournament tournament;
 	protected boolean killed = false;
 
-	private ScheduledFuture<?> futureTimeout;
-	protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
-
-	public DraftSession(Draft draft, UUID sessionId, UUID playerId) {
+	public TournamentSession(Tournament tournament, UUID sessionId, UUID playerId) {
 		this.sessionId = sessionId;
-		this.draft = draft;
+		this.tournament = tournament;
 		this.playerId = playerId;
 	}
 
-	public boolean init(final DraftView draftView) {
+	public boolean init(final TournamentView tournamentView) {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
 				session.clearAck();
-				session.fireCallback(new ClientCallback("draftInit", draftView));
-				if (waitForAck("draftInit"))
+				session.fireCallback(new ClientCallback("tournamentInit", tournamentView));
+				if (waitForAck("tournamentInit"))
 					return true;
 			}
 		}
@@ -89,19 +78,11 @@ public class DraftSession {
 		return true;
 	}
 
-	public void update(final DraftView draftView) {
+	public void update(final TournamentView tournamentView) {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("draftUpdate", draftView));
-		}
-	}
-
-	public void inform(final String message, final DraftView draftView) {
-		if (!killed) {
-			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null)
-				session.fireCallback(new ClientCallback("draftInform", new DraftClientMessage(draftView, message)));
+				session.fireCallback(new ClientCallback("tournamentUpdate", tournamentView));
 		}
 	}
 
@@ -109,52 +90,17 @@ public class DraftSession {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("gameOver", message));
-		}
-	}
-
-	public void pickCard(final DraftPickView draftPickView, int timeout) {
-		if (!killed) {
-			setupTimeout(timeout);
-			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null)
-				session.fireCallback(new ClientCallback("draftPick", new DraftClientMessage(draftPickView)));
-		}
-	}
-
-	private synchronized void setupTimeout(int seconds) {
-		cancelTimeout();
-		if (seconds > 0) {
-			futureTimeout = timeoutExecutor.schedule(
-				new Runnable() {
-					@Override
-					public void run() {
-						DraftManager.getInstance().timeout(draft.getId(), sessionId);
-					}
-				},
-				seconds, TimeUnit.SECONDS
-			);
-		}
-	}
-
-	private synchronized void cancelTimeout() {
-		if (futureTimeout != null) {
-			futureTimeout.cancel(false);
+				session.fireCallback(new ClientCallback("tournamentOver", message));
 		}
 	}
 
 	protected void handleRemoteException(RemoteException ex) {
 		logger.log(Level.SEVERE, null, ex);
-		DraftManager.getInstance().kill(draft.getId(), sessionId);
+		TournamentManager.getInstance().kill(tournament.getId(), sessionId);
 	}
 
 	public void setKilled() {
 		killed = true;
-	}
-
-	public void sendCardPick(UUID cardId) {
-		cancelTimeout();
-		draft.addPick(playerId, cardId);
 	}
 
 }

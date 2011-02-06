@@ -31,7 +31,9 @@ package mage.view;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import mage.game.tournament.Round;
 import mage.game.tournament.Tournament;
+import mage.game.tournament.TournamentPlayer;
 
 /**
  *
@@ -41,8 +43,22 @@ public class TournamentView implements Serializable {
     private static final long serialVersionUID = 1L;
 
 	List<RoundView> rounds = new ArrayList<RoundView>();
+	List<TournamentPlayerView> players = new ArrayList<TournamentPlayerView>();
 
 	public TournamentView(Tournament tournament) {
+		for (TournamentPlayer player: tournament.getPlayers()) {
+			players.add(new TournamentPlayerView(player));
+		}
+		for (Round round: tournament.getRounds()) {
+			rounds.add(new RoundView(round));
+		}
+	}
 
+	public List<TournamentPlayerView> getPlayers() {
+		return players;
+	}
+
+	public List<RoundView> getRounds() {
+		return rounds;
 	}
 }

@@ -46,7 +46,7 @@ public class DraftPlayer {
 	protected Deck deck;
 	protected List<Card> booster;
 	protected boolean picking;
-	protected boolean doneConstructing;
+	protected boolean joined = false;
 
 	public DraftPlayer(Player player) {
 		id = UUID.randomUUID();
@@ -92,17 +92,12 @@ public class DraftPlayer {
 		return picking;
 	}
 
-	public void setConstructing() {
-		this.doneConstructing = false;
+	public boolean isJoined() {
+		return joined;
 	}
 
-	public void submitDeck(Deck deck) {
-		this.deck = deck;
-		this.doneConstructing = true;
-	}
-
-	public boolean isDoneConstructing() {
-		return this.doneConstructing;
+	public void setJoined() {
+		this.joined = true;
 	}
 
 }

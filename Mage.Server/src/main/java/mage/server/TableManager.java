@@ -26,17 +26,22 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.server.game;
+package mage.server;
 
 import mage.game.Table;
 import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
+import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
-import mage.game.draft.DraftOptions;
+import mage.game.draft.Draft;
+import mage.game.match.Match;
 import mage.game.match.MatchOptions;
+import mage.game.tournament.TournamentOptions;
+import mage.players.Player;
+import mage.server.game.GameReplay;
 import mage.util.Logging;
 
 /**
@@ -62,7 +67,7 @@ public class TableManager {
 		return tableController.getTable();
 	}
 
-	public Table createDraftTable(UUID sessionId, DraftOptions options) {
+	public Table createTournamentTable(UUID sessionId, TournamentOptions options) {
 		TableController tableController = new TableController(sessionId, options);
 		controllers.put(tableController.getTable().getId(), tableController);
 		tables.put(tableController.getTable().getId(), tableController.getTable());
@@ -73,6 +78,10 @@ public class TableManager {
 		return tables.get(tableId);
 	}
 
+	public Match getMatch(UUID tableId) {
+		return controllers.get(tableId).getMatch();
+	}
+
 	public Collection<Table> getTables() {
 		return tables.values();
 	}
@@ -81,8 +90,8 @@ public class TableManager {
 		return controllers.get(tableId).joinTable(sessionId, name, deckList);
 	}
 
-	public boolean joinDraft(UUID sessionId, UUID tableId, String name) throws GameException {
-		return controllers.get(tableId).joinDraft(sessionId, name);
+	public boolean joinTournament(UUID sessionId, UUID tableId, String name) throws GameException {
+		return controllers.get(tableId).joinTournament(sessionId, name);
 	}
 
 	public boolean submitDeck(UUID sessionId, UUID tableId, DeckCardLists deckList) throws GameException {
@@ -118,8 +127,12 @@ public class TableManager {
 		controllers.get(tableId).startMatch(sessionId);
 	}
 
-	public void startDraft(UUID sessionId, UUID roomId, UUID tableId) {
-		controllers.get(tableId).startDraft(sessionId);
+	public void startTournament(UUID sessionId, UUID roomId, UUID tableId) {
+		controllers.get(tableId).startTournament(sessionId);
+	}
+
+	public void startDraft(UUID tableId, Draft draft) {
+		controllers.get(tableId).startDraft(draft);
 	}
 
 	public boolean watchTable(UUID sessionId, UUID tableId) {
@@ -129,13 +142,13 @@ public class TableManager {
 	public boolean replayTable(UUID sessionId, UUID tableId) {
 		return controllers.get(tableId).replayTable(sessionId);
 	}
-	
+
 	public void endGame(UUID tableId) {
 		controllers.get(tableId).endGame();
 	}
 
-	public void endDraft(UUID tableId) {
-		controllers.get(tableId).endDraft();
+	public void endDraft(UUID tableId, Draft draft) {
+		controllers.get(tableId).endDraft(draft);
 	}
 
 	public GameReplay createReplay(UUID tableId) {
@@ -146,5 +159,13 @@ public class TableManager {
 		if (isTableOwner(tableId, sessionId)) {
 			controllers.get(tableId).swapSeats(seatNum1, seatNum2);
 		}
+	}
+
+	public void construct(UUID tableId) {
+		controllers.get(tableId).construct();
+	}
+
+	public void addPlayer(UUID sessionId, UUID tableId, Player player, Deck deck) throws GameException {
+		controllers.get(tableId).addPlayer(sessionId, player, deck);
 	}
 }

@@ -26,34 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.draft;
-
-import mage.game.draft.DraftImpl;
-import mage.game.draft.DraftOptions;
+package mage.game.tournament;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BoosterDraft extends DraftImpl<BoosterDraft> {
+public class TournamentSealedOptions extends TournamentOptions {
 
-	public BoosterDraft(DraftOptions options) {
-		super(options);
-	}
-
-	@Override
-	public void start() {
-		while (boosterNum < sets.size()) {
-			openBooster();
-			while (pickCards()) {
-				if (boosterNum % 2 == 1)
-					passLeft();
-				else
-					passRight();
-				fireUpdatePlayersEvent();
-			}
-		}
-		this.fireEndDraftEvent();
+	public TournamentSealedOptions(String name) {
+		super(name);
 	}
 
 }

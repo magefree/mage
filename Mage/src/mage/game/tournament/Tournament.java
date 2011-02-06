@@ -28,12 +28,30 @@
 
 package mage.game.tournament;
 
+import java.util.Collection;
+import java.util.UUID;
+import mage.cards.decks.Deck;
+import mage.game.events.Listener;
+import mage.game.events.TableEvent;
+import mage.players.Player;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public interface Tournament {
 
-	public void playRound();
+	public UUID getId();
+	public void addPlayer(Player player, String playerType);
+	public TournamentPlayer getPlayer(UUID playerId);
+	public Collection<TournamentPlayer> getPlayers();
+	public Collection<Round> getRounds();
+	public void submitDeck(UUID playerId, Deck deck);
+	public boolean allJoined();
+	public boolean isDoneConstructing();
+	public void leave(UUID playerId);
+	public void nextStep();
+
+	public void addTableEventListener(Listener<TableEvent> listener);
 
 }

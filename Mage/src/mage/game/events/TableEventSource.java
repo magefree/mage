@@ -35,6 +35,8 @@ import mage.cards.decks.Deck;
 import mage.game.Game;
 import mage.game.draft.Draft;
 import mage.game.events.TableEvent.EventType;
+import mage.game.match.MatchOptions;
+import mage.game.tournament.TournamentPairing;
 
 /**
  *
@@ -47,6 +49,10 @@ public class TableEventSource implements EventSource<TableEvent>, Serializable {
 	@Override
 	public void addListener(Listener<TableEvent> listener) {
 		dispatcher.addListener(listener);
+	}
+
+	public void fireTableEvent(EventType eventType) {
+		dispatcher.fireEvent(new TableEvent(eventType));
 	}
 
 	public void fireTableEvent(EventType eventType, String message, Game game) {
@@ -63,5 +69,9 @@ public class TableEventSource implements EventSource<TableEvent>, Serializable {
 
 	public void fireTableEvent(EventType eventType, UUID playerId, Deck deck) {
 		dispatcher.fireEvent(new TableEvent(eventType, playerId, deck));
+	}
+
+	public void fireTableEvent(EventType eventType, TournamentPairing pair, MatchOptions options) {
+		dispatcher.fireEvent(new TableEvent(eventType, pair, options));
 	}
 }

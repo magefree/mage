@@ -117,11 +117,11 @@ public class GameManager {
 		return gameControllers.get(gameId).cheat(sessionId, playerId, cardName);
 	}
 
-	void timeout(UUID gameId, UUID sessionId) {
+	public void timeout(UUID gameId, UUID sessionId) {
 		gameControllers.get(gameId).timeout(sessionId);
 	}
 
-	void removeGame(UUID gameId) {
+	public void removeGame(UUID gameId) {
 		gameControllers.remove(gameId);
 	}
 

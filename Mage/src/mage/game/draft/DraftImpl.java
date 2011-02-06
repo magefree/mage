@@ -33,8 +33,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.game.draft.DraftOptions.TimingOption;
@@ -177,12 +175,11 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
 			player.setPicking();
 			player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
 		}
-		while (!donePicking()) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException ex) {
-				Logger.getLogger(DraftImpl.class.getName()).log(Level.SEVERE, null, ex);
-				break;
+		synchronized(this) {
+			while (!donePicking()) {
+				try {
+					this.wait();
+				} catch (InterruptedException ex) { }
 			}
 		}
 		return true;
@@ -190,7 +187,16 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
 
 	protected boolean donePicking() {
 		for (DraftPlayer player: players.values()) {
-			if (player.picking)
+			if (player.isPicking())
+				return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean allJoined() {
+		for (DraftPlayer player: this.players.values()) {
+			if (!player.isJoined())
 				return false;
 		}
 		return true;
@@ -235,19 +241,9 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
 				break;
 			}
 		}
-	}
-
-	protected void startTournament() {
-		//TODO: implement this
-	}
-
-	@Override
-	public boolean isDoneConstructing() {
-		for (DraftPlayer player: this.players.values()) {
-			if (!player.isDoneConstructing())
-				return false;
+		synchronized(this) {
+			this.notifyAll();
 		}
-		return true;
 	}
 
 }

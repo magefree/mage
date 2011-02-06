@@ -35,6 +35,8 @@ import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.game.Game;
 import mage.game.draft.Draft;
+import mage.game.match.MatchOptions;
+import mage.game.tournament.TournamentPairing;
 
 /**
  *
@@ -43,8 +45,7 @@ import mage.game.draft.Draft;
 public class TableEvent extends EventObject implements ExternalEvent, Serializable {
 
 	public enum EventType {
-		UPDATE, INFO, REVEAL, LOOK, SIDEBOARD, CONSTRUCT, SUBMIT_DECK, END
-	}
+		UPDATE, INFO, REVEAL, LOOK, START_DRAFT, START_MATCH, SIDEBOARD, CONSTRUCT, SUBMIT_DECK, END}
 
 	private Game game;
 	private Draft draft;
@@ -53,6 +54,13 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
 	private Cards cards;
 	private UUID playerId;
 	private Deck deck;
+	private TournamentPairing pair;
+	private MatchOptions options;
+
+	public TableEvent(EventType eventType) {
+		super(eventType);
+		this.eventType = eventType;
+	}
 
 	public TableEvent(EventType eventType, String message, Cards cards, Game game) {
 		super(game);
@@ -73,6 +81,13 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
 		super(draft);
 		this.draft = draft;
 		this.message = message;
+		this.eventType = eventType;
+	}
+
+	public TableEvent(EventType eventType, TournamentPairing pair, MatchOptions options) {
+		super(options);
+		this.pair = pair;
+		this.options = options;
 		this.eventType = eventType;
 	}
 
@@ -102,5 +117,13 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
 
 	public Deck getDeck() {
 		return deck;
+	}
+
+	public TournamentPairing getPair() {
+		return pair;
+	}
+
+	public MatchOptions getMatchOptions() {
+		return options;
 	}
 }

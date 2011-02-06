@@ -1,5 +1,5 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+* Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -26,54 +26,47 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.server.game;
+package mage.server.tournament;
 
-import java.lang.reflect.Constructor;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import mage.game.draft.Draft;
-import mage.game.draft.DraftOptions;
-import mage.util.Logging;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import mage.game.tournament.Tournament;
+import mage.view.TournamentView;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DraftFactory {
+public class TournamentManager {
 
-	private final static DraftFactory INSTANCE = new DraftFactory();
-	private final static Logger logger = Logging.getLogger(DraftFactory.class.getName());
+	private final static TournamentManager INSTANCE = new TournamentManager();
 
-	private Map<String, Class<Draft>> drafts = new HashMap<String, Class<Draft>>();
+	private ConcurrentHashMap<UUID, TournamentController> controllers = new ConcurrentHashMap<UUID, TournamentController>();
 
-	public static DraftFactory getInstance() {
+	public static TournamentManager getInstance() {
 		return INSTANCE;
 	}
 
-	private DraftFactory() {}
-
-	public Draft createDraft(String draftType, DraftOptions options) {
-
-		Draft draft;
-		Constructor<Draft> con;
-		try {
-			con = drafts.get(draftType).getConstructor(new Class[]{DraftOptions.class});
-			draft = con.newInstance(new Object[] {options});
-		} catch (Exception ex) {
-			logger.log(Level.SEVERE, null, ex);
-			return null;
-		}
-		logger.info("Draft created: " + draftType); // + game.getId().toString());
-
-		return draft;
+	public UUID createTournamentSession(Tournament tournament, ConcurrentHashMap<UUID, UUID> sessionPlayerMap, UUID tableId) {
+		TournamentController tournamentController = new TournamentController(tournament, sessionPlayerMap, tableId);
+		controllers.put(tournament.getId(), tournamentController);
+		return tournamentController.getSessionId();
 	}
 
-	public void addDraftType(String name, Class draft) {
-		if (draft != null) {
-			this.drafts.put(name, draft);
-		}
+	public void joinTournament(UUID tournamentId, UUID sessionId) {
+		controllers.get(tournamentId).join(sessionId);
+	}
+
+	public void kill(UUID tournamentId, UUID sessionId) {
+		controllers.get(tournamentId).kill(sessionId);
+	}
+
+	public TournamentView getTournamentView(UUID tournamentId) {
+		return controllers.get(tournamentId).getTournamentView();
+	}
+
+	public UUID getChatId(UUID tournamentId) {
+		return controllers.get(tournamentId).getChatId();
 	}
 
 }

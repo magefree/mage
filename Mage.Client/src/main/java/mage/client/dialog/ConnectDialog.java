@@ -35,13 +35,9 @@
 package mage.client.dialog;
 
 import java.awt.Cursor;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import mage.client.MageFrame;
-import mage.client.remote.Session;
 import mage.client.util.Config;
 import mage.util.Logging;
 
@@ -211,9 +207,6 @@ public class ConnectDialog extends MageDialog {
 				MageFrame.getPreferences().put("userName", txtUserName.getText());
 				MageFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
 				this.setVisible(false);
-			}
-			else {
-				JOptionPane.showMessageDialog(rootPane, "Unable to connect to server");
 			}
 		}
 		finally {

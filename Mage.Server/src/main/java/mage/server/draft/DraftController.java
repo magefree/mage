@@ -26,13 +26,12 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.server.game;
+package mage.server.draft;
 
 import java.io.File;
 import java.util.UUID;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
 import java.util.logging.Logger;
 
 import mage.game.draft.Draft;
@@ -40,11 +39,11 @@ import mage.game.draft.DraftPlayer;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
-import mage.server.ChatManager;
+import mage.server.game.GameController;
+import mage.server.TableManager;
 import mage.server.util.ThreadExecutor;
 import mage.util.Logging;
 import mage.view.DraftPickView;
-import mage.view.ChatMessage.MessageColor;
 import mage.view.DraftView;
 
 /**
@@ -60,13 +59,11 @@ public class DraftController {
 	private ConcurrentHashMap<UUID, UUID> sessionPlayerMap;
 	private UUID draftSessionId;
 	private Draft draft;
-	private UUID chatId;
 	private UUID tableId;
 
 	public DraftController(Draft draft, ConcurrentHashMap<UUID, UUID> sessionPlayerMap, UUID tableId) {
 		draftSessionId = UUID.randomUUID();
 		this.sessionPlayerMap = sessionPlayerMap;
-		chatId = ChatManager.getInstance().createChatSession();
 		this.draft = draft;
 		this.tableId = tableId;
 		init();
@@ -100,6 +97,13 @@ public class DraftController {
 				}
 			}
 		);
+		for (DraftPlayer player: draft.getPlayers()) {
+			if (!player.getPlayer().isHuman()) {
+				player.setJoined();
+				logger.info("player " + player.getPlayer().getId() + " has joined draft " + draft.getId());
+			}
+		}
+		checkStart();
 	}
 
 	private UUID getPlayerId(UUID sessionId) {
@@ -111,16 +115,8 @@ public class DraftController {
 		DraftSession draftSession = new DraftSession(draft, sessionId, playerId);
 		draftSessions.put(playerId, draftSession);
 		logger.info("player " + playerId + " has joined draft " + draft.getId());
-		ChatManager.getInstance().broadcast(chatId, "", draft.getPlayer(playerId).getPlayer().getName() + " has joined the draft", MessageColor.BLACK);
-		if (allJoined()) {
-			ThreadExecutor.getInstance().getRMIExecutor().execute(
-				new Runnable() {
-					@Override
-					public void run() {
-						startDraft();
-					}
-			});
-		}
+		draft.getPlayer(playerId).setJoined();
+		checkStart();
 	}
 
 	private synchronized void startDraft() {
@@ -134,7 +130,21 @@ public class DraftController {
 		draft.start();
 	}
 
+	private void checkStart() {
+		if (allJoined()) {
+			ThreadExecutor.getInstance().getRMIExecutor().execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						startDraft();
+					}
+			});
+		}
+	}
+
 	private boolean allJoined() {
+		if (!draft.allJoined())
+			return false;
 		for (DraftPlayer player: draft.getPlayers()) {
 			if (player.getPlayer().isHuman() && draftSessions.get(player.getPlayer().getId()) == null) {
 				return false;
@@ -148,7 +158,10 @@ public class DraftController {
 	}
 
 	private void endDraft() {
-		TableManager.getInstance().endDraft(tableId);
+		for (final DraftSession draftSession: draftSessions.values()) {
+			draftSession.draftOver();
+		}
+		TableManager.getInstance().endDraft(tableId, draft);
 	}
 
 	public void kill(UUID sessionId) {
@@ -162,24 +175,13 @@ public class DraftController {
 
 	public void timeout(UUID sessionId) {
 		if (sessionPlayerMap.containsKey(sessionId)) {
-			ChatManager.getInstance().broadcast(chatId, "", draft.getPlayer(sessionPlayerMap.get(sessionId)).getPlayer().getName() + " has timed out.  Auto picking.", MessageColor.BLACK);
+//			ChatManager.getInstance().broadcast(chatId, "", draft.getPlayer(sessionPlayerMap.get(sessionId)).getPlayer().getName() + " has timed out.  Auto picking.", MessageColor.BLACK);
 			draft.autoPick(sessionPlayerMap.get(sessionId));
 		}
 	}
 
-	public void endDraft(final String message) {
-		for (final DraftSession draftSession: draftSessions.values()) {
-			draftSession.gameOver(message);
-		}
-		TableManager.getInstance().endDraft(tableId);
-	}
-
 	public UUID getSessionId() {
 		return this.draftSessionId;
-	}
-
-	public UUID getChatId() {
-		return chatId;
 	}
 
 	public void sendCardPick(UUID sessionId, UUID cardId) {

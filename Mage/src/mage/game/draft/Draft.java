@@ -53,9 +53,9 @@ public interface Draft extends MageItem, Serializable {
 	public int getCardNum();
 	public void addPick(UUID playerId, UUID cardId);
 	public void start();
+	public boolean allJoined();
 	public void leave(UUID playerId);
 	public void autoPick(UUID playerId);
-	public boolean isDoneConstructing();
 
 	public void addTableEventListener(Listener<TableEvent> listener);
 	public void fireUpdatePlayersEvent();

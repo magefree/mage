@@ -40,10 +40,10 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnNewTable" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                  <Component id="btnNewDraft" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnNewTournament" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnQuickStart" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="450" max="32767" attributes="0"/>
+                  <EmptySpace pref="416" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -54,7 +54,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnNewTable" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnQuickStart" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnNewDraft" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnNewTournament" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="16" max="32767" attributes="0"/>
               </Group>
@@ -78,12 +78,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuickStartActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnNewDraft">
+        <Component class="javax.swing.JButton" name="btnNewTournament">
           <Properties>
-            <Property name="text" type="java.lang.String" value="New Draft"/>
+            <Property name="text" type="java.lang.String" value="New Tournament"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewDraftActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewTournamentActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

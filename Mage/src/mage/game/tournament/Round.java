@@ -30,8 +30,7 @@ package mage.game.tournament;
 
 import java.util.ArrayList;
 import java.util.List;
-import mage.game.match.Match;
-import mage.players.Player;
+import java.util.UUID;
 
 /**
  *
@@ -40,15 +39,39 @@ import mage.players.Player;
 public class Round {
 
 	private int roundNum;
-	private List<Match> matches = new ArrayList<Match>();
+	private List<TournamentPairing> pairs = new ArrayList<TournamentPairing>();
 
-	public Round(int roundNum, List<Player> players) {
+	public Round(int roundNum) {
 		this.roundNum = roundNum;
-
 	}
 
-	public List<Match> getMatches() {
-		return matches;
+	public void addPairing(TournamentPairing match) {
+		this.pairs.add(match);
 	}
 
+	public TournamentPairing getPairing(UUID pairId) {
+		for (TournamentPairing pair: pairs) {
+			if (pair.getId().equals(pairId)) {
+				return pair;
+			}
+		}
+		return null;
+	}
+
+	public List<TournamentPairing> getPairs() {
+		return pairs;
+	}
+
+	public int getRoundNumber() {
+		return this.roundNum;
+	}
+
+	public boolean isRoundOver() {
+		for (TournamentPairing pair: pairs) {
+			if (!pair.getMatch().isMatchOver()) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
