@@ -207,7 +207,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                         game.getPlayer(ownerId).removeFromGraveyard(this, game);
                         break;
                     default:
-                        logger.warning("moveToZone, not fully implemented: from="+event.getFromZone() + ", to="+event.getToZone());
+                        //logger.warning("moveToZone, not fully implemented: from="+event.getFromZone() + ", to="+event.getToZone());
                 }
 	            game.rememberLKI(objectId, event.getFromZone(), this);
             }
