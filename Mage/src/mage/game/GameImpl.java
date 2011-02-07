@@ -28,31 +28,9 @@
 
 package mage.game;
 
-import mage.counters.CounterType;
-import java.io.IOException;
-import mage.game.stack.SpellStack;
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.Stack;
-import java.util.UUID;
-import java.util.logging.Logger;
-import mage.Constants.CardType;
-import mage.Constants.MultiplayerAttackOption;
-import mage.Constants.Outcome;
-import mage.Constants.PhaseStep;
-import mage.Constants.RangeOfInfluence;
-import mage.Constants.Zone;
+import mage.Constants.*;
 import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.TriggeredAbilities;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.keyword.LeylineAbility;
@@ -60,33 +38,31 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
+import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.Filter.ComparisonScope;
-import mage.filter.common.FilterAura;
-import mage.filter.common.FilterEquipment;
-import mage.filter.common.FilterFortification;
-import mage.filter.common.FilterLegendaryPermanent;
-import mage.filter.common.FilterPlaneswalkerPermanent;
+import mage.filter.common.*;
 import mage.game.combat.Combat;
-import mage.game.events.GameEvent;
-import mage.players.Player;
-import mage.game.events.Listener;
-import mage.game.events.TableEvent;
+import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
-import mage.game.events.TableEventSource;
-import mage.game.events.PlayerQueryEvent;
-import mage.game.events.PlayerQueryEventSource;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
+import mage.game.stack.SpellStack;
 import mage.game.stack.StackObject;
 import mage.game.turn.Phase;
 import mage.game.turn.Step;
 import mage.game.turn.Turn;
+import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
 import mage.target.TargetPlayer;
 import mage.util.Logging;
 import mage.watchers.Watcher;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import java.util.logging.Logger;
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
 
@@ -135,8 +111,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		this.range = game.range;
 		this.attackOption = game.attackOption;
 		this.state = game.state.copy();
-		for (UUID cardId: game.gameCards.keySet()) {
-			this.gameCards.put(cardId, game.gameCards.get(cardId).copy());
+		for (Map.Entry<UUID, Card> entry: game.gameCards.entrySet()) {
+			this.gameCards.put(entry.getKey(), entry.getValue().copy());
 		}
 	}
 

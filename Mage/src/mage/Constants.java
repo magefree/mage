@@ -90,21 +90,23 @@ public final class Constants {
 
 	public enum Rarity {
 
-		NA ("na", "na", "N"),
-		LAND ("Land", "common", "C"),
-		COMMON ("Common", "common", "C"),
-		UNCOMMON ("Uncommon", "uncommon", "U"),
-		RARE ("Rare", "rare", "R"),
-		MYTHIC ("Mythic", "mythic", "M");
+		NA ("na", "na", "N", 0),
+		LAND ("Land", "common", "C", 1),
+		COMMON ("Common", "common", "C", 1),
+		UNCOMMON ("Uncommon", "uncommon", "U", 2),
+		RARE ("Rare", "rare", "R", 3),
+		MYTHIC ("Mythic", "mythic", "M", 3);
 
 		private String text;
 		private String symbolCode;
 		private String code;
+		private int rating;
 
-		Rarity(String text, String symbolCode, String code) {
+		Rarity(String text, String symbolCode, String code, int rating) {
 			this.text = text;
 			this.symbolCode = symbolCode;
 			this.code = code;
+			this.rating = rating;
 		}
 
 		@Override
@@ -118,6 +120,10 @@ public final class Constants {
 
 		public String getCode() {
 			return code;
+		}
+
+		public int getRating() {
+			return rating;
 		}
 	}
 
