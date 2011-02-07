@@ -26,46 +26,58 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.sets.conflux;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.common.BeginningOfControllerUpkeepTriggeredAbility;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.Filter;
+import mage.filter.common.FilterControlledPermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author Loki
  */
-public class FumeSpitter extends CardImpl<FumeSpitter> {
+public class Esperzoa extends CardImpl<Esperzoa> {
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("artifact");
 
-    public FumeSpitter (UUID ownerId) {
-        super(ownerId, 63, "Fume Spitter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Horror");
-		this.color.setBlack(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    }
+
+    public Esperzoa (UUID ownerId) {
+        super(ownerId, 25, "Esperzoa", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "CON";
+        this.subtype.add("Jellyfish");
+		this.color.setBlue(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
+        this.addAbility(FlyingAbility.getInstance());
+        Ability ability = new BeginningOfControllerUpkeepTriggeredAbility(new ReturnToHandTargetEffect(), false);
+        TargetControlledPermanent t = new TargetControlledPermanent(filter);
+        t.setRequired(true);
+        ability.addTarget(t);
         this.addAbility(ability);
     }
 
-    public FumeSpitter (final FumeSpitter card) {
+    public Esperzoa (final Esperzoa card) {
         super(card);
     }
 
     @Override
-    public FumeSpitter copy() {
-        return new FumeSpitter(this);
+    public Esperzoa copy() {
+        return new Esperzoa(this);
     }
 
 }

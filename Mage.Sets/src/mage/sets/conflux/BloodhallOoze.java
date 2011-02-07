@@ -34,8 +34,9 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.AddPlusOneCountersSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -85,7 +86,7 @@ class BloodhallOozeTriggeredAbility1 extends TriggeredAbilityImpl<BloodhallOozeT
     }
 
     public BloodhallOozeTriggeredAbility1() {
-        super(Zone.BATTLEFIELD, new AddPlusOneCountersSourceEffect(1), true);
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true);
     }
 
     public BloodhallOozeTriggeredAbility1(final BloodhallOozeTriggeredAbility1 ability) {
@@ -126,7 +127,7 @@ class BloodhallOozeTriggeredAbility2 extends TriggeredAbilityImpl<BloodhallOozeT
     }
 
     public BloodhallOozeTriggeredAbility2() {
-        super(Zone.BATTLEFIELD, new AddPlusOneCountersSourceEffect(1), true);
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true);
     }
 
     public BloodhallOozeTriggeredAbility2(final BloodhallOozeTriggeredAbility2 ability) {

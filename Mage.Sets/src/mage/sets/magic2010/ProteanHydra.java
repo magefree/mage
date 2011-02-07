@@ -42,9 +42,10 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.abilities.effects.common.AddPlusOneCountersSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.counters.common.PlusOneCounter;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -203,7 +204,7 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 	class ProteanHydraDelayedTriggeredAbility extends DelayedTriggeredAbility<ProteanHydraDelayedTriggeredAbility> {
 
 		public ProteanHydraDelayedTriggeredAbility() {
-			super(new AddPlusOneCountersSourceEffect(2));
+			super(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)));
 		}
 
 		public ProteanHydraDelayedTriggeredAbility(final ProteanHydraDelayedTriggeredAbility ability) {

@@ -34,8 +34,9 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.AddPlusOneCountersSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -78,7 +79,7 @@ class ScuteMobAbility extends TriggeredAbilityImpl<ScuteMobAbility> {
 	private FilterLandPermanent filter = new FilterLandPermanent();
 
 	public ScuteMobAbility() {
-		super(Zone.BATTLEFIELD, new AddPlusOneCountersSourceEffect(4));
+		super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)));
 	}
 
 	public ScuteMobAbility(final ScuteMobAbility ability) {

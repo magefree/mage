@@ -42,7 +42,7 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effects;
-import mage.abilities.effects.common.AddPlusOneCountersControlledEffect;
+import mage.abilities.effects.common.counter.AddPlusOneCountersControlledEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainAbilityControlledEffect;
 import mage.abilities.effects.common.GainLifeEffect;

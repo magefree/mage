@@ -34,8 +34,9 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.AddPlusOneCountersSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -77,7 +78,7 @@ public class AjanisPridemate extends CardImpl<AjanisPridemate> {
 class AjanisPridemateAbility extends TriggeredAbilityImpl<AjanisPridemateAbility> {
 
 	public AjanisPridemateAbility() {
-		super(Zone.BATTLEFIELD, new AddPlusOneCountersSourceEffect(1), true);
+		super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true);
 	}
 
 	public AjanisPridemateAbility(final AjanisPridemateAbility ability) {

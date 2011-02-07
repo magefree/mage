@@ -37,13 +37,13 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AddCountersSourceEffect;
-import mage.abilities.effects.common.RemoveCounterSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -65,7 +65,7 @@ public class ClockworkDragon extends CardImpl<ClockworkDragon> {
         this.toughness = new MageInt(0);
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(6)), "Clockwork Dragon enters the battlefield with six +1/+1 counters on it"));
-        this.addAbility(new ClockworkDragonTriggeredAbility());
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(new ClockworkDragonEffect(), false));
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new GenericManaCost(3)));
     }
 
@@ -76,36 +76,6 @@ public class ClockworkDragon extends CardImpl<ClockworkDragon> {
     @Override
     public ClockworkDragon copy() {
         return new ClockworkDragon(this);
-    }
-}
-
-class ClockworkDragonTriggeredAbility extends TriggeredAbilityImpl<ClockworkDragonTriggeredAbility> {
-    ClockworkDragonTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ClockworkDragonEffect());
-    }
-
-    ClockworkDragonTriggeredAbility(final ClockworkDragonTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ClockworkDragonTriggeredAbility copy() {
-        return new ClockworkDragonTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED || event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
-            if (event.getSourceId().equals(this.getSourceId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever Clockwork Dragon attacks or blocks, remove a +1/+1 counter from it at end of combat";
     }
 }
 

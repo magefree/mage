@@ -37,11 +37,12 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.AddPlusOneCountersSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.BecomesCreatureSourceEOTEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.game.permanent.token.Token;
 
 /**
@@ -85,6 +86,6 @@ class RagingRavineToken extends Token {
 		color.setGreen(true);
 		power = new MageInt(3);
 		toughness = new MageInt(3);
-		addAbility(new AttacksTriggeredAbility(new AddPlusOneCountersSourceEffect(1), false));
+		addAbility(new AttacksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
 	}
 }

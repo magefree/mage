@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.AddCountersTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.common.GainAbilityTargetEffect;
 import mage.abilities.effects.common.GainControlTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
