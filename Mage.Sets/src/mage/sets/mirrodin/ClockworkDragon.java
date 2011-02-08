@@ -40,6 +40,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -92,10 +93,10 @@ class ClockworkDragonEffect extends OneShotEffect<ClockworkDragonEffect> {
     public boolean apply(Game game, Ability source) {
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
-            ClockworkDragonDelayedTriggeredAbility delayedAbility = new ClockworkDragonDelayedTriggeredAbility();
-            delayedAbility.setSourceId(source.getSourceId());
-			delayedAbility.setControllerId(source.getControllerId());
-			game.addDelayedTriggeredAbility(delayedAbility);
+            AtTheEndOfCombatDelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(new RemoveCounterSourceEffect(CounterType.P1P1.createInstance()));
+            ability.setSourceId(source.getSourceId());
+			ability.setControllerId(source.getControllerId());
+			game.addDelayedTriggeredAbility(ability);
         }
         return false;
     }
@@ -108,28 +109,5 @@ class ClockworkDragonEffect extends OneShotEffect<ClockworkDragonEffect> {
     @Override
     public String getText(Ability source) {
         return "remove a +1/+1 counter from Clockwork Dragon at end of combat";
-    }
-}
-
-class ClockworkDragonDelayedTriggeredAbility extends DelayedTriggeredAbility<ClockworkDragonDelayedTriggeredAbility> {
-    ClockworkDragonDelayedTriggeredAbility() {
-        super(new RemoveCounterSourceEffect(CounterType.P1P1.createInstance()));
-    }
-
-    ClockworkDragonDelayedTriggeredAbility(final ClockworkDragonDelayedTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ClockworkDragonDelayedTriggeredAbility copy() {
-        return new ClockworkDragonDelayedTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.COMBAT_PHASE_POST) {
-            return true;
-        }
-        return false;
     }
 }

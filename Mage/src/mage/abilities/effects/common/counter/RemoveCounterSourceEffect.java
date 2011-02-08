@@ -34,4 +34,14 @@ public class RemoveCounterSourceEffect extends OneShotEffect<RemoveCounterSource
     public RemoveCounterSourceEffect copy() {
         return new RemoveCounterSourceEffect(this);
     }
+
+    @Override
+    public String getText(Ability source) {
+        if (counter.getCount() > 1) {
+			StringBuilder sb = new StringBuilder();
+			sb.append("remove ").append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters from {this}");
+			return sb.toString();
+		} else
+			return "remove a " + counter.getName() + " counter from {this}";
+    }
 }
