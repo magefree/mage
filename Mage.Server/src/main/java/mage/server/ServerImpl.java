@@ -59,6 +59,7 @@ import mage.server.tournament.TournamentManager;
 import mage.server.util.ThreadExecutor;
 import mage.util.Logging;
 import mage.view.ChatMessage.MessageColor;
+import mage.view.DraftPickView;
 import mage.view.GameView;
 import mage.view.TableView;
 import mage.view.TournamentView;
@@ -162,9 +163,9 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public boolean joinTable(UUID sessionId, UUID roomId, UUID tableId, String name, DeckCardLists deckList) throws MageException, GameException {
+	public boolean joinTable(UUID sessionId, UUID roomId, UUID tableId, String name, String playerType, DeckCardLists deckList) throws MageException, GameException {
 		try {
-			boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTable(sessionId, tableId, name, deckList);
+			boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTable(sessionId, tableId, name, playerType, deckList);
 			logger.info("Session " + sessionId + " joined table " + tableId);
 			return ret;
 		}
@@ -177,9 +178,9 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public boolean joinTournamentTable(UUID sessionId, UUID roomId, UUID tableId, String name) throws MageException, GameException {
+	public boolean joinTournamentTable(UUID sessionId, UUID roomId, UUID tableId, String name, String playerType) throws MageException, GameException {
 		try {
-			boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTournamentTable(sessionId, tableId, name);
+			boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTournamentTable(sessionId, tableId, name, playerType);
 			logger.info("Session " + sessionId + " joined table " + tableId);
 			return ret;
 		}
@@ -562,20 +563,14 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void sendCardPick(final UUID draftId, final UUID sessionId, final UUID cardPick) throws MageException {
+	public DraftPickView sendCardPick(final UUID draftId, final UUID sessionId, final UUID cardPick) throws MageException {
 		try {
-			rmiExecutor.execute(
-				new Runnable() {
-					@Override
-					public void run() {
-						DraftManager.getInstance().sendCardPick(draftId, sessionId, cardPick);
-					}
-				}
-			);
+			return DraftManager.getInstance().sendCardPick(draftId, sessionId, cardPick);
 		}
 		catch (Exception ex) {
 			handleException(ex);
 		}
+		return null;
 	}
 
 	@Override

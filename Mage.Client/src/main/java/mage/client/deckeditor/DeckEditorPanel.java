@@ -449,8 +449,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 	}//GEN-LAST:event_btnImportActionPerformed
 
 	private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {
-		MageFrame.getSession().submitDeck(tableId, deck.getDeckCardLists());
-		this.setVisible(false);
+		if (MageFrame.getSession().submitDeck(tableId, deck.getDeckCardLists()))
+			this.setVisible(false);
 	}
 
 	private void btnAddLandActionPerformed(java.awt.event.ActionEvent evt) {

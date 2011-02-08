@@ -47,6 +47,7 @@ public class TableView implements Serializable {
 	private String gameType;
 	private String deckType;
 	private TableState tableState;
+	private boolean isTournament;
 	private List<SeatView> seats = new ArrayList<SeatView>();
 
 	public TableView(Table table) {
@@ -54,6 +55,7 @@ public class TableView implements Serializable {
 		this.gameType = table.getGameType();
 		this.deckType = table.getDeckType();
 		this.tableState = table.getState();
+		this.isTournament = table.isTournament();
 		for (Seat seat: table.getSeats()) {
 			seats.add(new SeatView(seat));
 		}
@@ -79,5 +81,8 @@ public class TableView implements Serializable {
 		return seats;
 	}
 
+	public boolean isTournament() {
+		return this.isTournament;
+	}
 
 }

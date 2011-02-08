@@ -59,7 +59,7 @@
               <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-              <Component id="pnlPacks" pref="47" max="32767" attributes="0"/>
+              <Component id="pnlPacks" pref="49" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="spnNumPlayers" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -164,7 +164,7 @@
                       <Component id="txtPlayer1Name" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="pnlOtherPlayers" pref="58" max="32767" attributes="0"/>
+                  <Component id="pnlOtherPlayers" pref="60" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

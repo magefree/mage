@@ -87,14 +87,14 @@ public class TableWaitingDialog extends MageDialog implements Observer {
 					this.btnMoveDown.setEnabled(true);
 					this.btnMoveUp.setEnabled(true);
 					break;
-				case DUELING:
-					closeDialog();
-					return;
-				default:
+				case WAITING:
 					this.btnStart.setEnabled(false);
 					this.btnMoveDown.setEnabled(false);
 					this.btnMoveUp.setEnabled(false);
 					break;
+				default:
+					closeDialog();
+					return;
 			}
 			int row = this.tableSeats.getSelectedRow();
 			tableWaitModel.loadData(table);

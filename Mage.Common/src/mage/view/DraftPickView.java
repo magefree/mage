@@ -40,11 +40,13 @@ public class DraftPickView implements Serializable {
 
 	protected CardsView booster;
 	protected CardsView picks;
+	protected boolean picking;
 	protected int timeout;
 
 	public DraftPickView(DraftPlayer player, int timeout) {
 		this.booster = new CardsView(player.getBooster());
 		this.picks = new CardsView(player.getDeck().getSideboard());
+		this.picking = player.isPicking();
 		this.timeout = timeout;
 	}
 
@@ -54,6 +56,10 @@ public class DraftPickView implements Serializable {
 
 	public CardsView getPicks() {
 		return picks;
+	}
+
+	public boolean isPicking() {
+		return this.picking;
 	}
 
 	public int getTimeout() {

@@ -56,6 +56,7 @@ public class DraftPanel extends javax.swing.JPanel {
 	private Session session;
 	private Timer countdown;
 	private int timeout;
+	private boolean picked;
 	
     /** Creates new form DraftPanel */
     public DraftPanel() {
@@ -103,12 +104,18 @@ public class DraftPanel extends javax.swing.JPanel {
 				@Override
 				public void event(Event event) {
 					if (event.getEventName().equals("pick-a-card")) {
-						countdown.stop();
-						session.sendCardPick(draftId, (UUID)event.getSource());
+						DraftPickView view = session.sendCardPick(draftId, (UUID)event.getSource());
+						if (view != null) {
+							draftBooster.loadBooster(view.getBooster(), bigCard);
+							draftPicks.loadCards(view.getPicks(), bigCard, null);
+							setMessage("Waiting for other players");
+						}
 					}
 				}
 			}
 		);
+		setMessage("");
+		countdown.stop();
 		this.timeout = draftPickView.getTimeout();
 		setTimeout(Integer.toString(timeout));
 		if (timeout != 0) {
@@ -127,6 +134,10 @@ public class DraftPanel extends javax.swing.JPanel {
 		}
 		if (c != null)
 			c.setVisible(false);
+	}
+
+	protected void setMessage(String message) {
+		this.lblMessage.setText(message);
 	}
 
     /** This method is called from within the constructor to
@@ -153,6 +164,7 @@ public class DraftPanel extends javax.swing.JPanel {
         chkPack2 = new javax.swing.JCheckBox();
         chkPack3 = new javax.swing.JCheckBox();
         txtTimeRemaining = new javax.swing.JTextField();
+        lblMessage = new javax.swing.JLabel();
         draftBooster = new mage.client.cards.DraftGrid();
         draftPicks = new mage.client.cards.CardGrid();
 
@@ -182,6 +194,8 @@ public class DraftPanel extends javax.swing.JPanel {
         txtTimeRemaining.setForeground(java.awt.Color.red);
         txtTimeRemaining.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTimeRemaining.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -214,6 +228,10 @@ public class DraftPanel extends javax.swing.JPanel {
                     .addComponent(chkPack3)
                     .addComponent(chkPack2)
                     .addComponent(chkPack1)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,7 +257,9 @@ public class DraftPanel extends javax.swing.JPanel {
                     .addComponent(txtCardNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(txtTimeRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -290,6 +310,7 @@ public class DraftPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblCardNo;
+    private javax.swing.JLabel lblMessage;
     private javax.swing.JLabel lblPack1;
     private javax.swing.JLabel lblPack2;
     private javax.swing.JLabel lblPack3;

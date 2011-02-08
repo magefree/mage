@@ -232,18 +232,21 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
 	}
 
 	@Override
-	public void addPick(UUID playerId, UUID cardId) {
+	public boolean addPick(UUID playerId, UUID cardId) {
 		DraftPlayer player = players.get(playerId);
-		for (Card card: player.booster) {
-			if (card.getId().equals(cardId)) {
-				player.addPick(card);
-				player.booster.remove(card);
-				break;
+		if (player.isPicking()) {
+			for (Card card: player.booster) {
+				if (card.getId().equals(cardId)) {
+					player.addPick(card);
+					player.booster.remove(card);
+					break;
+				}
+			}
+			synchronized(this) {
+				this.notifyAll();
 			}
 		}
-		synchronized(this) {
-			this.notifyAll();
-		}
+		return !player.isPicking();
 	}
 
 }

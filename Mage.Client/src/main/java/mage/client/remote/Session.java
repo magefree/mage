@@ -56,6 +56,7 @@ import mage.interfaces.Server;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.CallbackClientDaemon;
 import mage.util.Logging;
+import mage.view.DraftPickView;
 import mage.view.GameTypeView;
 import mage.view.TableView;
 import mage.view.TournamentTypeView;
@@ -105,6 +106,7 @@ public class Session {
 			return true;
 		} catch (MageException ex) {
 			logger.log(Level.SEVERE, null, ex);
+			disconnect();
 			JOptionPane.showMessageDialog(frame, "Unable to connect to server. "  + ex.getMessage());
 		} catch (RemoteException ex) {
 			logger.log(Level.SEVERE, "Unable to connect to server - ", ex);
@@ -272,9 +274,9 @@ public class Session {
 		return false;
 	}
 
-	public boolean joinTable(UUID roomId, UUID tableId, String playerName, DeckCardLists deckList) {
+	public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, DeckCardLists deckList) {
 		try {
-			return server.joinTable(sessionId, roomId, tableId, playerName, deckList);
+			return server.joinTable(sessionId, roomId, tableId, playerName, playerType, deckList);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -285,9 +287,9 @@ public class Session {
 		return false;
 	}
 
-	public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName) {
+	public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String playerType) {
 		try {
-			return server.joinTournamentTable(sessionId, roomId, tableId, playerName);
+			return server.joinTournamentTable(sessionId, roomId, tableId, playerName, playerType);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -381,16 +383,15 @@ public class Session {
 		return false;
 	}
 
-	public boolean sendCardPick(UUID draftId, UUID cardId) {
+	public DraftPickView sendCardPick(UUID draftId, UUID cardId) {
 		try {
-			server.sendCardPick(draftId, sessionId, cardId);
-			return true;
+			return server.sendCardPick(draftId, sessionId, cardId);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
 			handleMageException(ex);
 		}
-		return false;
+		return null;
 	}
 
 	public boolean joinChat(UUID chatId, ChatPanel chat) {
@@ -586,8 +587,7 @@ public class Session {
 
 	public boolean submitDeck(UUID tableId, DeckCardLists deck) {
 		try {
-			server.submitDeck(sessionId, tableId, deck);
-			return true;
+			return server.submitDeck(sessionId, tableId, deck);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {

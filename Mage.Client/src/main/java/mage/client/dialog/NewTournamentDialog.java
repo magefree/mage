@@ -259,7 +259,7 @@ public class NewTournamentDialog extends MageDialog {
 		tOptions.getMatchOptions().setAttackOption(MultiplayerAttackOption.LEFT);
 		tOptions.getMatchOptions().setRange(RangeOfInfluence.ALL);
 		table = session.createTournamentTable(roomId, tOptions);
-		if (session.joinTournamentTable(roomId, table.getTableId(), this.txtPlayer1Name.getText())) {
+		if (session.joinTournamentTable(roomId, table.getTableId(), this.txtPlayer1Name.getText(), "Human")) {
 			for (TournamentPlayerPanel player: players) {
 				if (!player.getPlayerType().equals("Human")) {
 					if (!player.joinTournamentTable(roomId, table.getTableId())) {

@@ -51,7 +51,7 @@ public interface Draft extends MageItem, Serializable {
 	public List<ExpansionSet> getSets();
 	public int getBoosterNum();
 	public int getCardNum();
-	public void addPick(UUID playerId, UUID cardId);
+	public boolean addPick(UUID playerId, UUID cardId);
 	public void start();
 	public boolean allJoined();
 	public void leave(UUID playerId);

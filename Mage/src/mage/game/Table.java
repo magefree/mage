@@ -51,16 +51,18 @@ public class Table implements Serializable {
 	private String gameType;
 	private Seat[] seats;
 	private int numSeats;
+	private boolean isTournament;
 	private DeckValidator validator;
 	private TableState state = TableState.WAITING;
 
 	protected TableEventSource tableEventSource = new TableEventSource();
 
-	public Table(String gameType, String name, DeckValidator validator, List<String> playerTypes) {
+	public Table(String gameType, String name, DeckValidator validator, List<String> playerTypes, boolean isTournament) {
 		tableId = UUID.randomUUID();
 		this.numSeats = playerTypes.size();
 		this.gameType = gameType;
 		this.name = name;
+		this.isTournament = isTournament;
 		createSeats(playerTypes);
 		this.validator = validator;
 	}
@@ -98,6 +100,10 @@ public class Table implements Serializable {
 		return validator.getName();
 	}
 
+	public boolean isTournament() {
+		return this.isTournament;
+	}
+
 	public UUID joinTable(Player player, Seat seat) throws GameException {
 		if (seat.getPlayer() != null) {
 			throw new GameException("Seat is occupied.");
@@ -120,9 +126,9 @@ public class Table implements Serializable {
 		return seats;
 	}
 
-	public Seat getNextAvailableSeat() {
+	public Seat getNextAvailableSeat(String playerType) {
 		for (int i = 0; i < numSeats; i++ ) {
-			if (seats[i].getPlayer() == null)
+			if (seats[i].getPlayer() == null && seats[i].getPlayerType().equals(playerType))
 				return seats[i];
 		}
 		return null;

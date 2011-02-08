@@ -151,9 +151,10 @@ public class DraftSession {
 		killed = true;
 	}
 
-	public void sendCardPick(UUID cardId) {
+	public boolean sendCardPick(UUID cardId) {
 		cancelTimeout();
-		draft.addPick(playerId, cardId);
+		return draft.addPick(playerId, cardId);
+
 	}
 
 }

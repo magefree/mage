@@ -40,9 +40,7 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import mage.cards.decks.DeckCardLists;
 import mage.client.remote.Session;
-import mage.client.util.PhaseManager;
 import mage.sets.Sets;
 import mage.util.Logging;
 
@@ -138,7 +136,7 @@ public class JoinTableDialog extends MageDialog {
 	private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
 		Session session = MageFrame.getSession();
 		try {
-			joined = session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), Sets.loadDeck(this.newPlayerPanel.getDeckFile()));
+			joined = session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), "Human", Sets.loadDeck(this.newPlayerPanel.getDeckFile()));
 		} catch (Exception ex) {
 			handleError(ex);
 		}

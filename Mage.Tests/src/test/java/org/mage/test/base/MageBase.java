@@ -74,8 +74,8 @@ public class MageBase {
 			options.setWinsNeeded(1);
             TableView table = server.createTable(sessionId, roomId, options);
             System.out.println("Cards in the deck: " + Sets.loadDeck("UW Control.dck").getCards().size());
-            server.joinTable(sessionId, roomId, table.getTableId(), "Human", Sets.loadDeck("UW Control.dck"));
-            server.joinTable(sessionId, roomId, table.getTableId(), "Computer", Sets.loadDeck("UW Control.dck"));
+            server.joinTable(sessionId, roomId, table.getTableId(), "Human", "Human", Sets.loadDeck("UW Control.dck"));
+            server.joinTable(sessionId, roomId, table.getTableId(), "Computer", "Computer - default", Sets.loadDeck("UW Control.dck"));
             server.startMatch(sessionId, roomId, table.getTableId());
 
             synchronized (syncStart) {

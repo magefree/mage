@@ -310,7 +310,7 @@ public class NewTableDialog extends MageDialog {
 		options.setWinsNeeded((Integer)this.spnNumWins.getValue());
 		table = session.createTable(roomId, options);
 		try {
-			if (session.joinTable(roomId, table.getTableId(), this.player1Panel.getPlayerName(), Sets.loadDeck(this.player1Panel.getDeckFile()))) {
+			if (session.joinTable(roomId, table.getTableId(), this.player1Panel.getPlayerName(), "Human", Sets.loadDeck(this.player1Panel.getDeckFile()))) {
 				for (TablePlayerPanel player: players) {
 					if (!player.getPlayerType().equals("Human")) {
 						if (!player.joinTable(roomId, table.getTableId())) {

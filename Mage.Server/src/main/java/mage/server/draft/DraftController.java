@@ -184,8 +184,11 @@ public class DraftController {
 		return this.draftSessionId;
 	}
 
-	public void sendCardPick(UUID sessionId, UUID cardId) {
-		draftSessions.get(sessionPlayerMap.get(sessionId)).sendCardPick(cardId);
+	public DraftPickView sendCardPick(UUID sessionId, UUID cardId) {
+		if (draftSessions.get(sessionPlayerMap.get(sessionId)).sendCardPick(cardId)) {
+			return getDraftPickView(sessionPlayerMap.get(sessionId), 0);
+		}
+		return null;
 	}
 
 	private synchronized void updateDraft() {

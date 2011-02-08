@@ -242,8 +242,10 @@ public class MageFrame extends javax.swing.JFrame {
             public void run() {
                 if (autoConnect())
                     enableButtons();
-                else
+                else {
                     disableButtons();
+					connectDialog.showDialog();
+				}
             }
         });
     }

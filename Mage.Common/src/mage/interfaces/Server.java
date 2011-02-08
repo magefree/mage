@@ -37,6 +37,7 @@ import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
 import mage.game.tournament.TournamentOptions;
 import mage.interfaces.callback.CallbackServer;
+import mage.view.DraftPickView;
 import mage.view.TableView;
 import mage.view.GameView;
 import mage.view.TournamentView;
@@ -56,8 +57,8 @@ public interface Server extends Remote, CallbackServer {
 	//table methods
 	public TableView createTable(UUID sessionId, UUID roomId, MatchOptions matchOptions) throws RemoteException, MageException;
 	public TableView createTournamentTable(UUID sessionId, UUID roomId, TournamentOptions tournamentOptions) throws RemoteException, MageException;
-	public boolean joinTable(UUID sessionId, UUID roomId, UUID tableId, String name, DeckCardLists deckList) throws RemoteException, MageException, GameException;
-	public boolean joinTournamentTable(UUID sessionId, UUID roomId, UUID tableId, String name) throws RemoteException, MageException, GameException;
+	public boolean joinTable(UUID sessionId, UUID roomId, UUID tableId, String name, String playerType, DeckCardLists deckList) throws RemoteException, MageException, GameException;
+	public boolean joinTournamentTable(UUID sessionId, UUID roomId, UUID tableId, String name, String playerType) throws RemoteException, MageException, GameException;
 	public boolean submitDeck(UUID sessionId, UUID tableId, DeckCardLists deckList) throws RemoteException, MageException, GameException;
 	public boolean watchTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
 	public boolean replayTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
@@ -98,7 +99,7 @@ public interface Server extends Remote, CallbackServer {
 
 	//draft methods
 	public void joinDraft(UUID draftId, UUID sessionId) throws RemoteException, MageException;
-	public void sendCardPick(UUID draftId, UUID sessionId, UUID cardId) throws RemoteException, MageException;
+	public DraftPickView sendCardPick(UUID draftId, UUID sessionId, UUID cardId) throws RemoteException, MageException;
 
 	//replay methods
 	public void replayGame(UUID sessionId) throws RemoteException, MageException;

@@ -97,13 +97,20 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 				int modelRow = Integer.valueOf( e.getActionCommand() );
 				UUID tableId = UUID.fromString((String)tableModel.getValueAt(modelRow, 0));
 				String state = (String)tableModel.getValueAt(modelRow, 4);
+				boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, 5);
 
 				if (state.equals("Join")) {
-					logger.info("Joining table " + tableId);
-
-					joinTableDialog.showDialog(roomId, tableId);
-					if (joinTableDialog.isJoined())
-						tableWaitingDialog.showDialog(roomId, tableId, false);
+					if (isTournament) {
+						logger.info("Joining tournament " + tableId);
+						if (session.joinTournamentTable(roomId, tableId, session.getUserName(), "Human"))
+							tableWaitingDialog.showDialog(roomId, tableId, true);
+					}
+					else {
+						logger.info("Joining table " + tableId);
+						joinTableDialog.showDialog(roomId, tableId);
+						if (joinTableDialog.isJoined())
+							tableWaitingDialog.showDialog(roomId, tableId, false);
+					}
 				} else if (state.equals("Watch")) {
 					logger.info("Watching table " + tableId);
 					if (!session.watchTable(roomId, tableId))
@@ -305,18 +312,8 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 			options.setRange(RangeOfInfluence.ALL);
 			options.setWinsNeeded(1);
 			table = session.createTable(roomId,	options);
-			session.joinTable(
-					roomId,
-					table.getTableId(),
-					"Human",
-					Sets.loadDeck("test.dck")
-			);
-			session.joinTable(
-					roomId,
-					table.getTableId(),
-					"Computer",
-					Sets.loadDeck("test.dck")
-			);
+			session.joinTable(roomId, table.getTableId(), "Human", "Human", Sets.loadDeck("test.dck"));
+			session.joinTable(roomId, table.getTableId(), "Computer", "Computer - default", Sets.loadDeck("test.dck"));
 			hideTables();
 			session.startGame(roomId, table.getTableId());
 		} catch (Exception ex) {
@@ -392,6 +389,8 @@ class TableTableModel extends AbstractTableModel {
 					default:
 						return "";
 				}
+			case 5:
+				return tables[arg0].isTournament();
 		}
 		return "";
 	}

@@ -102,7 +102,7 @@ public class TableController {
 		chatId = ChatManager.getInstance().createChatSession();
 		this.options = options;
 		match = GameFactory.getInstance().createMatch(options.getGameType(), options);
-		table = new Table(options.getGameType(), options.getName(), DeckValidatorFactory.getInstance().createDeckValidator(options.getDeckType()), options.getPlayerTypes());
+		table = new Table(options.getGameType(), options.getName(), DeckValidatorFactory.getInstance().createDeckValidator(options.getDeckType()), options.getPlayerTypes(), false);
 		init();
 	}
 
@@ -111,7 +111,7 @@ public class TableController {
 		chatId = ChatManager.getInstance().createChatSession();
 		this.tournamentOptions = options;
 		tournament = TournamentFactory.getInstance().createTournament(options.getTournamentType(), options);
-		table = new Table(options.getTournamentType(), options.getName(), DeckValidatorFactory.getInstance().createDeckValidator(options.getMatchOptions().getDeckType()), options.getPlayerTypes());
+		table = new Table(options.getTournamentType(), options.getName(), DeckValidatorFactory.getInstance().createDeckValidator(options.getMatchOptions().getDeckType()), options.getPlayerTypes(), true);
 		init();
 	}
 
@@ -136,11 +136,11 @@ public class TableController {
 		);
 	}
 
-	public synchronized boolean joinTournament(UUID sessionId, String name) throws GameException {
+	public synchronized boolean joinTournament(UUID sessionId, String name, String playerType) throws GameException {
 		if (table.getState() != TableState.WAITING) {
 			return false;
 		}
-		Seat seat = table.getNextAvailableSeat();
+		Seat seat = table.getNextAvailableSeat(playerType);
 		if (seat == null) {
 			throw new GameException("No available seats.");
 		}
@@ -156,11 +156,11 @@ public class TableController {
 		return true;
 	}
 
-	public synchronized boolean joinTable(UUID sessionId, String name, DeckCardLists deckList) throws GameException {
+	public synchronized boolean joinTable(UUID sessionId, String name, String playerType, DeckCardLists deckList) throws GameException {
 		if (table.getState() != TableState.WAITING) {
 			return false;
 		}
-		Seat seat = table.getNextAvailableSeat();
+		Seat seat = table.getNextAvailableSeat(playerType);
 		if (seat == null) {
 			throw new GameException("No available seats.");
 		}
@@ -181,11 +181,11 @@ public class TableController {
 		return true;
 	}
 
-	public void addPlayer(UUID sessionId, Player player, Deck deck) throws GameException  {
+	public void addPlayer(UUID sessionId, Player player, String playerType, Deck deck) throws GameException  {
 		if (table.getState() != TableState.WAITING) {
 			return;
 		}
-		Seat seat = table.getNextAvailableSeat();
+		Seat seat = table.getNextAvailableSeat(playerType);
 		if (seat == null) {
 			throw new GameException("No available seats.");
 		}

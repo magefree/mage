@@ -31,6 +31,7 @@ package mage.server.draft;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.game.draft.Draft;
+import mage.view.DraftPickView;
 
 /**
  *
@@ -61,8 +62,8 @@ public class DraftManager {
 		draftControllers.remove(gameId);
 	}
 
-	public void sendCardPick(UUID draftId, UUID sessionId, UUID cardId) {
-		draftControllers.get(draftId).sendCardPick(sessionId, cardId);
+	public DraftPickView sendCardPick(UUID draftId, UUID sessionId, UUID cardId) {
+		return draftControllers.get(draftId).sendCardPick(sessionId, cardId);
 	}
 
 	public void removeSession(UUID sessionId) {

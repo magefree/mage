@@ -106,7 +106,7 @@ public class TournamentController {
 		checkStart();
 	}
 
-	public void join(UUID sessionId) {
+	public synchronized void join(UUID sessionId) {
 		UUID playerId = sessionPlayerMap.get(sessionId);
 		TournamentSession tournamentSession = new TournamentSession(tournament, sessionId, playerId);
 		tournamentSessions.put(playerId, tournamentSession);
@@ -157,8 +157,8 @@ public class TournamentController {
 			Table table = tableManager.createTable(sessionId, matchOptions);
 			TournamentPlayer player1 = pair.getPlayer1();
 			TournamentPlayer player2 = pair.getPlayer2();
-			tableManager.addPlayer(getPlayerSessionId(player1.getPlayer().getId()), table.getId(), player1.getPlayer(), player1.getDeck());
-			tableManager.addPlayer(getPlayerSessionId(player2.getPlayer().getId()), table.getId(), player2.getPlayer(), player2.getDeck());
+			tableManager.addPlayer(getPlayerSessionId(player1.getPlayer().getId()), table.getId(), player1.getPlayer(), player1.getPlayerType(), player1.getDeck());
+			tableManager.addPlayer(getPlayerSessionId(player2.getPlayer().getId()), table.getId(), player2.getPlayer(), player2.getPlayerType(), player2.getDeck());
 			tableManager.startMatch(sessionId, null, table.getId());
 			pair.setMatch(tableManager.getMatch(table.getId()));
 		} catch (GameException ex) {

@@ -65,7 +65,7 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
 
 	public boolean joinTournamentTable(UUID roomId, UUID tableId) {
 		if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
-			return session.joinTournamentTable(roomId, tableId, this.txtPlayerName.getText());
+			return session.joinTournamentTable(roomId, tableId, this.txtPlayerName.getText(), (String)this.cbPlayerType.getSelectedItem());
  		}
 		return true;
 	}
