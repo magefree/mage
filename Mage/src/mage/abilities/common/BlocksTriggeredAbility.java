@@ -34,6 +34,7 @@ import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -52,6 +53,8 @@ public class BlocksTriggeredAbility extends TriggeredAbilityImpl<BlocksTriggered
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.BLOCKER_DECLARED && event.getSourceId().equals(this.getSourceId()) ) {
+            this.addTarget(new TargetCreaturePermanent());
+			this.getTargets().get(0).add(event.getTargetId(), game);
 			return true;
 		}
 		return false;
