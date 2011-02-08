@@ -1,0 +1,145 @@
+WWK|Basilisk Collar|1|5.30
+WWK|Jace, the Mind Sculptor|1|94.93
+WWK|Omnath, Locus of Mana|1|3.60
+WWK|Abyssal Persecutor|1|14.46
+WWK|Dragonmaster Outcast|1|4.05
+WWK|Kazuul, Tyrant of the Cliffs|1|0.40
+WWK|Anowon, the Ruin Sage|1|0.76
+WWK|Admonition Angel|1.02|2.74
+WWK|Avenger of Zendikar|1.02|13.09
+WWK|Archon of Redemption|1.02|0.39
+WWK|Goliath Sphinx|1.09|0.37
+WWK|Wolfbriar Elemental|1.11|0.97
+WWK|Wrexial, the Risen Deep|1.17|1.32
+WWK|Stirring Wildwood|1.29|2.03
+WWK|Comet Storm|1.31|2.06
+WWK|Creeping Tar Pit|1.34|5.86
+WWK|Harabaz Druid|1.35|1.17
+WWK|Celestial Colonnade|1.42|4.93
+WWK|Terastodon|1.47|0.93
+WWK|Stone Idol Trap|1.53|0.34
+WWK|Chain Reaction|1.54|0.61
+WWK|Kalastria Highborn|1.55|8.10
+WWK|Jwari Shapeshifter|1.58|0.99
+WWK|Stoneforge Mystic|1.76|10.04
+WWK|Strength of the Tajuru|1.78|0.40
+WWK|Mordant Dragon|2.01|0.39
+WWK|Talus Paladin|2.03|1.08
+WWK|Agadeem Occultist|2.15|0.41
+WWK|Raging Ravine|2.16|3.40
+WWK|Seer's Sundial|2.18|0.36
+WWK|Cunning Sparkmage|2.19|0.44
+WWK|Butcher of Malakir|2.2|0.61
+WWK|Novablast Wurm|2.27|1.26
+WWK|Marshal's Anthem|2.4|0.53
+WWK|Joraga Warcaller|2.6|2.82
+WWK|Lavaclaw Reaches|2.61|2.80
+WWK|Lodestone Golem|2.61|2.09
+WWK|Hada Freeblade|4.04|0.48
+WWK|Eye of Ugin|4.05|3.59
+WWK|Death's Shadow|4.06|0.54
+WWK|Smother|4.1|0.37
+WWK|Urge to Feed|4.15|0.37
+WWK|Lightkeeper of Emeria|4.16|0.20
+WWK|Leatherback Baloth|4.22|0.51
+WWK|Kor Firewalker|4.31|0.68
+WWK|Bestial Menace|4.38|0.21
+WWK|Voyager Drake|4.7|0.18
+WWK|Vapor Snare|4.94|0.18
+WWK|Tomb Hex|4.98|0.12
+WWK|Searing Blaze|5.17|0.26
+WWK|Tideforce Elemental|5.21|0.18
+WWK|Caustic Crawler|5.42|0.19
+WWK|Bloodhusk Ritualist|5.63|0.27
+WWK|Hammer of Ruin|5.87|0.18
+WWK|Thada Adel, Acquisitor|6.17|0.59
+WWK|Horizon Drake|6.28|0.18
+WWK|Join the Ranks|6.33|0.16
+WWK|Iona's Judgment|6.37|0.12
+WWK|Deathforge Shaman|6.61|0.19
+WWK|Apex Hawks|6.89|0.12
+WWK|Dead Reckoning|6.89|0.12
+WWK|Graypelt Hunter|7.01|0.13
+WWK|Refraction Trap|7.16|0.19
+WWK|Jagwasp Swarm|7.18|0.12
+WWK|Loam Lion|7.6|0.37
+WWK|Shoreline Salvager|7.61|0.19
+WWK|Canopy Cover|7.69|0.30
+WWK|Everflowing Chalice|7.72|1.66
+WWK|Perimeter Captain|7.74|0.27
+WWK|Fledgling Griffin|7.78|0.12
+WWK|Kitesail|7.79|0.12
+WWK|Explore|7.8|0.37
+WWK|Nemesis Trap|7.88|0.19
+WWK|Tuktuk Scrapper|7.93|0.20
+WWK|Ruthless Cullblade|7.93|0.13
+WWK|Calcite Snapper|7.94|0.13
+WWK|Bojuka Brigand|8|0.12
+WWK|Groundswell|8.02|0.17
+WWK|Treasure Hunt|8.02|0.18
+WWK|Wind Zendikon|8.15|0.13
+WWK|Akoum Battlesinger|8.25|0.12
+WWK|Sejiri Merfolk|8.26|0.24
+WWK|Arbor Elf|8.31|0.22
+WWK|Vastwood Animist|8.41|0.19
+WWK|Halimar Excavator|8.43|0.13
+WWK|Mysteries of the Deep|8.47|0.13
+WWK|Marsh Threader|8.48|0.12
+WWK|Halimar Depths|8.48|0.36
+WWK|Aether Tradewinds|8.53|0.12
+WWK|Summit Apes|8.62|0.18
+WWK|Slavering Nulls|8.67|0.19
+WWK|Gnarlid Pack|8.7|0.12
+WWK|Bazaar Trader|8.96|0.43
+WWK|Pilgrim's Eye|8.97|0.13
+WWK|Spell Contortion|8.99|0.19
+WWK|Quest for Renewal|9.06|0.23
+WWK|Permafrost Trap|9.07|0.18
+WWK|Battle Hurda|9.16|0.12
+WWK|Amulet of Vigor|9.2|0.56
+WWK|Goblin Roughrider|9.23|0.12
+WWK|Snapping Creeper|9.25|0.12
+WWK|Slingbow Trap|9.35|0.19
+WWK|Quag Vampires|9.44|0.13
+WWK|Pulse Tracker|9.46|0.17
+WWK|Quest for Ula's Temple|9.58|0.41
+WWK|Grappler Spider|9.58|0.12
+WWK|Skitter of Lizards|9.64|0.12
+WWK|Quest for the Nihil Stone|9.65|0.65
+WWK|Enclave Elite|9.7|0.12
+WWK|Ruin Ghost|9.73|0.19
+WWK|Surrakar Banisher|9.79|0.12
+WWK|Dread Statuary|9.79|0.23
+WWK|Corrupted Zendikon|9.89|0.13
+WWK|Terra Eternal|9.94|0.36
+WWK|Twitch|9.96|0.12
+WWK|Quicksand|10|0.16
+WWK|Khalni Garden|10|0.22
+WWK|Ricochet Trap|10.04|0.21
+WWK|Vastwood Zendikon|10.05|0.12
+WWK|Claws of Valakut|10.07|0.13
+WWK|Selective Memory|10.18|0.45
+WWK|Grotag Thrasher|10.2|0.12
+WWK|Sejiri Steppe|10.21|0.15
+WWK|Cosi's Ravager|10.24|0.12
+WWK|Crusher Zendikon|10.3|0.12
+WWK|Scrib Nibblers|10.35|0.19
+WWK|Brink of Disaster|10.47|0.12
+WWK|Kitesail Apprentice|10.48|0.13
+WWK|Guardian Zendikon|10.5|0.13
+WWK|Veteran's Reflexes|10.57|0.12
+WWK|Nature's Claim|10.63|0.17
+WWK|Smoldering Spires|10.84|0.16
+WWK|Rest for the Weary|10.93|0.15
+WWK|Bull Rush|11.14|0.12
+WWK|Mire's Toll|11.34|0.13
+WWK|Hedron Rover|11.42|0.12
+WWK|Roiling Terrain|11.48|0.13
+WWK|Bojuka Bog|11.54|0.17
+WWK|Dispel|11.7|0.19
+WWK|Razor Boomerang|11.76|0.17
+WWK|Feral Contest|11.77|0.12
+WWK|Walking Atlas|11.83|0.13
+WWK|Quest for the Goblin Lord|12.13|0.23
+WWK|Rumbling Aftershocks|12.29|0.18
+WWK|Tectonic Edge|14.92|2.06

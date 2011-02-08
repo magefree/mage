@@ -1,0 +1,225 @@
+ROE|Gideon Jura|1|21.33
+ROE|Kargan Dragonlord|1|13.49
+ROE|Sarkhan the Mad|1|6.83
+ROE|Vengevine|1|33.90
+ROE|Transcendent Master|1|3.94
+ROE|Guul Draz Assassin|1|2.09
+ROE|Kozilek, Butcher of Truth|1|9.77
+ROE|Eldrazi Conscription|1.01|1.89
+ROE|Drana, Kalastria Bloodchief|1.01|0.94
+ROE|Conquering Manticore|1.01|0.39
+ROE|Mul Daya Channelers|1.02|1.15
+ROE|Lord of Shatterskull Pass|1.02|0.55
+ROE|Consuming Vapors|1.02|4.23
+ROE|Khalni Hydra|1.05|4.30
+ROE|Deathless Angel|1.06|0.78
+ROE|Linvala, Keeper of Silence|1.07|7.18
+ROE|Student of Warfare|1.08|5.24
+ROE|Kazandu Tuskcaller|1.16|0.48
+ROE|Emrakul, the Aeons Torn|1.17|10.49
+ROE|Ulamog, the Infinite Gyre|1.17|11.06
+ROE|Coralhelm Commander|1.17|3.50
+ROE|Nirkana Revenant|1.19|5.09
+ROE|Awakening Zone|1.2|2.74
+ROE|Consume the Meek|1.22|2.72
+ROE|Lighthouse Chronologist|1.22|4.40
+ROE|It That Betrays|1.27|1.40
+ROE|All Is Dust|1.28|13.36
+ROE|Pestilence Demon|1.3|0.41
+ROE|Pelakka Wurm|1.37|0.36
+ROE|Bear Umbra|1.43|0.83
+ROE|Sphinx of Magosi|1.52|0.49
+ROE|Spawnsire of Ulamog|1.55|0.76
+ROE|Hellcarver Demon|1.59|0.99
+ROE|Magmaw|1.71|0.35
+ROE|Joraga Treespeaker|1.81|1.92
+ROE|Momentous Fall|2.5|0.84
+ROE|Gelatinous Genesis|2.57|0.41
+ROE|Flame Slash|2.69|0.24
+ROE|Gigantomancer|2.83|0.44
+ROE|Echo Mage|3.06|0.83
+ROE|Rage Nimbus|3.1|0.42
+ROE|Tuktuk the Explorer|3.1|0.62
+ROE|Disaster Radius|3.2|0.35
+ROE|Staggershock|3.21|0.26
+ROE|Rapacious One|3.28|0.21
+ROE|Brimstone Mage|3.45|0.19
+ROE|Rise of the Eldrazi|3|0.19
+ROE|Kabira Vindicator|3.77|0.23
+ROE|Hellion Eruption|3.87|0.39
+ROE|Boar Umbra|3.94|0.22
+ROE|Ulamog's Crusher|3.97|0.16
+ROE|Artisan of Kozilek|4.01|0.35
+ROE|Hedron Matrix|4.09|0.42
+ROE|Kozilek's Predator|4.13|0.17
+ROE|Domestication|4.15|0.20
+ROE|Vendetta|4.21|0.15
+ROE|Broodwarden|4.23|0.23
+ROE|Nomads' Assembly|4.35|0.46
+ROE|Knight of Cliffhaven|4.35|0.12
+ROE|Training Grounds|4.46|1.44
+ROE|Beastbreaker of Bala Ged|4.49|0.20
+ROE|Enclave Cryptologist|4.52|0.28
+ROE|Pathrazer of Ulamog|4.58|0.34
+ROE|Forked Bolt|4.62|0.46
+ROE|Nirkana Cutthroat|4.7|0.27
+ROE|Heat Ray|4.73|0.12
+ROE|Narcolepsy|5.04|0.13
+ROE|Wall of Omens|5.1|2.05
+ROE|Venerated Teacher|5.19|0.13
+ROE|Splinter Twin|5.2|1.47
+ROE|Nest Invader|5.24|0.23
+ROE|Hada Spy Patrol|5.25|0.20
+ROE|World at War|5.3|0.39
+ROE|Traitorous Instinct|5.33|0.18
+ROE|Ondu Giant|5.34|0.12
+ROE|Overgrown Battlement|5.42|0.28
+ROE|Growth Spasm|5.45|0.23
+ROE|Emrakul's Hatcher|5.54|0.14
+ROE|Induce Despair|5.61|0.12
+ROE|Kor Spiritdancer|5.67|0.87
+ROE|Skywatcher Adept|5.72|0.12
+ROE|Mortician Beetle|5.77|0.58
+ROE|Eldrazi Temple|5.78|3.95
+ROE|Ogre's Cleaver|6.08|0.18
+ROE|Thought Gorger|6.16|0.39
+ROE|Guard Gomazoa|6.16|0.25
+ROE|Last Kiss|6.16|0.12
+ROE|Merfolk Skyscout|6.21|0.18
+ROE|Keening Stone|6.35|0.68
+ROE|Dawnglare Invoker|6.38|0.12
+ROE|Caravan Escort|6.42|0.13
+ROE|Wildheart Invoker|6.43|0.12
+ROE|Oust|6.57|0.37
+ROE|Renegade Doppelganger|6.71|0.75
+ROE|Tajuru Preserver|6.71|1.10
+ROE|Frostwind Invoker|6.73|0.12
+ROE|Drake Umbra|6.82|0.18
+ROE|Hand of Emrakul|6.85|0.13
+ROE|Smite|6.96|0.12
+ROE|Pawn of Ulamog|7.05|0.25
+ROE|Skeletal Wurm|7.16|0.18
+ROE|Makindi Griffin|7.22|0.11
+ROE|Mammoth Umbra|7.24|0.18
+ROE|Champion's Drake|7.39|0.12
+ROE|Aura Gnarlid|7.55|0.13
+ROE|Spawning Breath|7.61|0.13
+ROE|Puncturing Light|7.68|0.12
+ROE|Lightmine Field|7.7|0.43
+ROE|Cadaver Imp|7.73|0.13
+ROE|Surrakar Spellblade|7.78|0.40
+ROE|Sea Gate Oracle|7.81|0.17
+ROE|Virulent Swipe|7.83|0.27
+ROE|Time of Heroes|7.84|0.21
+ROE|Snake Umbra|7.87|0.13
+ROE|Regress|7.93|0.12
+ROE|Devastating Summons|7.94|0.93
+ROE|Recurring Insight|7.96|0.36
+ROE|Reality Spasm|7.99|0.18
+ROE|Bramblesnap|8.01|0.19
+ROE|Daggerback Basilisk|8.03|0.12
+ROE|Prey's Vengeance|8.04|0.25
+ROE|Soulsurge Elemental|8.1|0.18
+ROE|Dread Drone|8.17|0.12
+ROE|See Beyond|8.2|0.20
+ROE|Repel the Darkness|8.24|0.12
+ROE|Gravitational Shift|8.24|0.34
+ROE|Guard Duty|8.25|0.12
+ROE|Hyena Umbra|8.27|0.13
+ROE|Umbra Mystic|8.3|0.40
+ROE|Akoum Boulderfoot|8.3|0.18
+ROE|Mnemonic Wall|8.32|0.13
+ROE|Emerge Unscathed|8.35|0.26
+ROE|Rise of the Eldrazi|1|0.21
+ROE|Survival Cache|8.39|0.27
+ROE|Jaddi Lifestrider|8.4|0.19
+ROE|Bala Ged Scorpion|8.43|0.11
+ROE|Lust for War|8.49|0.19
+ROE|Realms Uncharted|8.49|0.52
+ROE|Rise of the Eldrazi|5|0.37
+ROE|Eel Umbra|8.54|0.12
+ROE|Warmonger's Chariot|8.64|0.19
+ROE|Affa Guard Hound|8.66|0.18
+ROE|Spider Umbra|8.79|0.12
+ROE|Valakut Fireboar|8.82|0.18
+ROE|Inquisition of Kozilek|8.86|1.82
+ROE|Kiln Fiend|8.88|0.27
+ROE|Wrap in Flames|8.94|0.11
+ROE|Stomper Cub|8.96|0.11
+ROE|Lavafume Invoker|8.97|0.12
+ROE|Deprive|8.99|0.28
+ROE|Sporecap Spider|8.99|0.11
+ROE|Lone Missionary|9.06|0.14
+ROE|Ikiral Outrider|9.08|0.12
+ROE|Null Champion|9.08|0.12
+ROE|Might of the Masses|9.1|0.13
+ROE|Halimar Wavewatch|9.14|0.12
+ROE|Vent Sentinel|9.18|0.12
+ROE|Gloomhunter|9.18|0.12
+ROE|Rise of the Eldrazi|9.26|0.12
+ROE|Brood Birthing|9.3|0.14
+ROE|Bloodthrone Vampire|9.32|0.13
+ROE|Escaped Null|9.38|0.18
+ROE|Soulbound Guardians|9.45|0.17
+ROE|Distortion Strike|9.53|0.18
+ROE|Prophetic Prism|9.56|0.15
+ROE|Pennon Blade|9.66|0.19
+ROE|Lagac Lizard|9.69|0.11
+ROE|Lay Bare|9.74|0.12
+ROE|Rise of the Eldrazi|2|0.12
+ROE|Suffer the Past|9.87|0.25
+ROE|Dreamstone Hedron|9.9|0.24
+ROE|Surreal Memoir|9.98|0.19
+ROE|Rise of the Eldrazi|10.08|0.18
+ROE|Baneful Omen|10.09|0.38
+ROE|Explosive Revelation|10.1|0.18
+ROE|Rise of the Eldrazi|5|0.12
+ROE|Goblin Arsonist|10.26|0.13
+ROE|Cast Through Time|10.34|0.90
+ROE|Eland Umbra|10.4|0.12
+ROE|Luminous Wake|10.44|0.20
+ROE|Ogre Sentry|10.45|0.12
+ROE|Glory Seeker|10.45|0.11
+ROE|Naturalize|10.47|0.13
+ROE|Zof Shade|10.54|0.12
+ROE|Dormant Gomazoa|10.59|0.37
+ROE|Leaf Arrow|10.6|0.12
+ROE|Unified Will|10.64|0.21
+ROE|Irresistible Prey|10.73|0.18
+ROE|Shrivel|10.78|0.12
+ROE|Jwari Scuttler|10.85|0.11
+ROE|Evolving Wilds|10.89|0.35
+ROE|Rise of the Eldrazi|2|0.11
+ROE|Nema Siltlurker|10.96|0.12
+ROE|Goblin Tunneler|11.03|0.11
+ROE|Harmless Assault|11.04|0.12
+ROE|Merfolk Observer|11.24|0.11
+ROE|Repay In Kind|11.29|0.36
+ROE|Haze Frog|11.32|0.11
+ROE|Curse of Wizardry|11.37|0.19
+ROE|Shared Discovery|11.39|0.12
+ROE|Fleeting Distraction|11.42|0.11
+ROE|Raid Bombardment|11.45|0.12
+ROE|Phantasmal Abomination|11.54|0.17
+ROE|Perish the Thought|11.55|0.11
+ROE|Demystify|11.56|0.12
+ROE|Skittering Invasion|11.61|0.27
+ROE|Death Cultist|11.61|0.12
+ROE|Crab Umbra|11.61|0.18
+ROE|Ancient Stirrings|11.65|0.13
+ROE|Gravity Well|11.65|0.20
+ROE|Contaminated Ground|12.52|0.12
+ROE|Enatu Golem|12.61|0.20
+ROE|Aura Finesse|12.64|0.12
+ROE|Demonic Appetite|12.68|0.12
+ROE|Nighthaze|12.82|0.12
+ROE|Reinforced Bulwark|12.96|0.12
+ROE|Fissure Vent|13.18|0.12
+ROE|Living Destiny|13.21|0.12
+ROE|Runed Servitor|13.32|0.18
+ROE|Not Of This World|13.83|0.25
+ROE|Plains|14|0.13
+ROE|Island|14|0.13
+ROE|Swamp|14|0.12
+ROE|Mountain|14|0.12
+ROE|Forest|14|0.12

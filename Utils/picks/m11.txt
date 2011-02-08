@@ -1,0 +1,229 @@
+M11|Baneslayer Angel|1|13.85
+M11|Frost Titan|1|15.48
+M11|Liliana Vess|1|4.90
+M11|Sword of Vengeance|1|1.77
+M11|Ajani Goldmane|1|5.22
+M11|Garruk Wildspeaker|1.01|7.78
+M11|Platinum Angel|1.01|2.39
+M11|Gaea's Revenge|1.04|4.94
+M11|Mitotic Slime|1.11|0.69
+M11|Angelic Arbiter|1.19|0.48
+M11|Inferno Titan|1.23|7.63
+M11|Primeval Titan|1.28|39.95
+M11|Triskelion|1.42|0.49
+M11|Nantuko Shade|1.53|1.49
+M11|Vengeful Archon|1.58|0.48
+M11|Brittle Effigy|1.59|2.02
+M11|Fauna Shaman|1.68|7.75
+M11|Royal Assassin|1.79|0.69
+M11|Day of Judgment|1.87|3.02
+M11|Mystifying Maze|1.91|0.98
+M11|Chandra Nalaar|2|3.07
+M11|Grave Titan|2|21.93
+M11|Sun Titan|2|6.42
+M11|Jace Beleren|2|9.01
+M11|Conundrum Sphinx|2.05|0.49
+M11|Fireball|2.09|0.19
+M11|Protean Hydra|2.1|0.52
+M11|Overwhelming Stampede|2.15|1.50
+M11|Doom Blade|2.31|0.27
+M11|Lightning Bolt|2.37|0.75
+M11|Serra Angel|2.41|0.22
+M11|Ancient Hellkite|2.49|0.39
+M11|Obstinate Baloth|2.51|2.63
+M11|Mind Control|2.58|0.20
+M11|Demon of Death's Gate|2.65|5.49
+M11|Magma Phoenix|2.85|0.37
+M11|Air Servant|2.89|0.16
+M11|Hoarding Dragon|2.9|0.47
+M11|Pacifism|3.36|0.12
+M11|Cyclops Gladiator|3.4|0.45
+M11|Condemn|3.75|0.60
+M11|Birds of Paradise|3.78|3.63
+M11|Cudgel Troll|3.79|0.17
+M11|Stormtide Leviathan|3.89|0.67
+M11|Pyroclasm|3.94|0.34
+M11|Chandra's Outrage|4|0.13
+M11|Blinding Mage|4.11|0.11
+M11|Knight Exemplar|4.2|6.63
+M11|Assassinate|4.37|0.11
+M11|Aether Adept|4.41|0.13
+M11|Water Servant|4.44|0.17
+M11|Clone|4.57|0.49
+M11|Acidic Slime|4.57|0.24
+M11|Garruk's Packleader|4.6|0.21
+M11|Azure Drake|4.64|0.14
+M11|Crystal Ball|4.67|0.43
+M11|Cloud Crusader|4.86|0.11
+M11|Prodigal Pyromancer|4.86|0.17
+M11|Howling Banshee|4.87|0.16
+M11|Reassembling Skeleton|4.88|0.27
+M11|White Knight|4.88|0.24
+M11|Ember Hauler|4.91|0.38
+M11|Assault Griffin|4.93|0.11
+M11|Destructive Force|4.96|0.79
+M11|Liliana's Specter|5.02|0.14
+M11|Stormfront Pegasus|5.03|0.11
+M11|Jace's Ingenuity|5.14|0.40
+M11|Duskdale Wurm|5.29|0.17
+M11|Elvish Archdruid|5.34|3.46
+M11|Cultivate|5.35|0.41
+M11|Wild Griffin|5.42|0.11
+M11|Black Knight|5.45|0.25
+M11|Foresee|5.49|0.14
+M11|Mana Leak|5.54|0.65
+M11|Honor of the Pure|5.57|1.75
+M11|Cloud Elemental|5.57|0.11
+M11|Squadron Hawk|5.77|0.18
+M11|Gravedigger|5.81|0.11
+M11|Quag Sickness|5.84|0.11
+M11|Greater Basilisk|6.01|0.11
+M11|Yavimaya Wurm|6.07|0.12
+M11|Phylactery Lich|6.12|1.47
+M11|Garruk's Companion|6.4|0.15
+M11|Captivating Vampire|6.46|2.68
+M11|Fire Servant|6.55|0.23
+M11|Juggernaut|6.56|0.17
+M11|Child of Night|6.6|0.12
+M11|War Priest of Thune|6.65|0.27
+M11|Sylvan Ranger|6.66|0.17
+M11|Llanowar Elves|6.69|0.24
+M11|Spined Wurm|6.75|0.11
+M11|Augury Owl|6.83|0.13
+M11|Whispersilk Cloak|6.84|0.34
+M11|Corrupt|6.85|0.20
+M11|Rise from the Grave|6.85|0.17
+M11|Sleep|6.91|0.17
+M11|Glacial Fortress|7.09|3.08
+M11|Scroll Thief|7.18|0.12
+M11|Sign in Blood|7.2|0.23
+M11|Warlord's Axe|7.2|0.16
+M11|Ajani's Pridemate|7.24|0.46
+M11|Act of Treason|7.25|0.15
+M11|Nightwing Shade|7.35|0.11
+M11|Giant Spider|7.37|0.11
+M11|Barony Vampire|7.55|0.12
+M11|Roc Egg|7.62|0.17
+M11|Diminish|7.63|0.12
+M11|Traumatize|7.68|0.96
+M11|Diabolic Tutor|7.71|0.46
+M11|Rootbound Crag|7.88|1.69
+M11|Wall of Frost|7.9|0.18
+M11|Time Reversal|7.92|1.70
+M11|Elite Vanguard|7.96|0.24
+M11|Drowned Catacomb|7.98|3.08
+M11|Dragonskull Summit|7.98|2.55
+M11|Ice Cage|7.98|0.11
+M11|Giant Growth|8.14|0.12
+M11|Armored Ascension|8.15|0.19
+M11|Reverberate|8.25|1.37
+M11|Preordain|8.27|0.57
+M11|Awakener Druid|8.33|0.17
+M11|Shiv's Embrace|8.34|0.16
+M11|Bloodthrone Vampire|8.35|0.12
+M11|Deathmark|8.36|0.31
+M11|Fling|8.37|0.15
+M11|Berserkers of Blood Ridge|8.38|0.11
+M11|Merfolk Sovereign|8.41|0.65
+M11|Sunpetal Grove|8.44|1.92
+M11|Cancel|8.45|0.13
+M11|Vulshok Berserker|8.45|0.11
+M11|Stabbing Pain|8.54|0.11
+M11|Chandra's Spitfire|8.58|0.21
+M11|Sacred Wolf|8.59|0.12
+M11|Prized Unicorn|8.6|0.16
+M11|Alluring Siren|8.77|0.16
+M11|Leyline of Vitality|8.8|0.91
+M11|Redirect|8.82|0.80
+M11|Runeclaw Bear|8.82|0.11
+M11|Unsummon|8.85|0.11
+M11|Plummet|8.9|0.12
+M11|Serra Ascendant|8.92|2.26
+M11|Celestial Purge|9.04|0.22
+M11|Goblin Chieftain|9.09|1.71
+M11|Silvercoat Lion|9.11|0.12
+M11|Manic Vandal|9.2|0.12
+M11|Inspired Charge|9.24|0.18
+M11|Terramorphic Expanse|9.38|0.27
+M11|Earth Servant|9.38|0.17
+M11|Canyon Minotaur|9.45|0.11
+M11|Combust|9.56|0.25
+M11|Fiery Hellhound|9.6|0.11
+M11|Leyline of Anticipation|9.62|0.91
+M11|Stone Golem|9.64|0.16
+M11|Arc Runner|9.66|0.12
+M11|Silence|9.7|1.07
+M11|Infantry Veteran|9.71|0.11
+M11|Mind Rot|9.76|0.12
+M11|Negate|9.77|0.19
+M11|Temple Bell|9.79|0.92
+M11|Thunder Strike|9.84|0.11
+M11|Goblin Piker|9.86|0.11
+M11|Flashfreeze|9.94|0.30
+M11|Safe Passage|9.98|0.12
+M11|Steel Overseer|9.99|3.47
+M11|Nether Horror|10.02|0.11
+M11|Excommunicate|10.13|0.11
+M11|Duress|10.16|0.25
+M11|Lava Axe|10.18|0.11
+M11|Mighty Leap|10.21|0.11
+M11|Call to Mind|10.21|0.25
+M11|Dark Tutelage|10.32|1.41
+M11|Rotting Legion|10.32|0.11
+M11|Maritime Guard|10.37|0.11
+M11|Viscera Seer|10.37|0.15
+M11|Leyline of Sanctity|10.42|3.66
+M11|Palace Guard|10.42|0.11
+M11|Bog Raiders|10.42|0.11
+M11|Necrotic Plague|10.44|0.38
+M11|Nature's Spiral|10.45|0.19
+M11|Harbor Serpent|10.46|0.11
+M11|Siege Mastodon|10.46|0.11
+M11|Brindle Boar|10.46|0.11
+M11|Goblin Balloon Brigade|10.49|0.11
+M11|Leyline of Punishment|10.62|0.87
+M11|Phantom Beast|10.65|0.11
+M11|Relentless Rats|10.74|0.94
+M11|Solemn Offering|10.76|0.11
+M11|Volcanic Strength|10.79|0.11
+M11|Goblin Tunneler|10.91|0.11
+M11|Pyretic Ritual|10.93|0.18
+M11|Mass Polymorph|10.94|0.54
+M11|Jace's Erasure|10.95|0.16
+M11|Armored Cancrix|10.99|0.11
+M11|Hornet Sting|11.17|0.12
+M11|Disentomb|11.23|0.11
+M11|Leyline of the Void|11.29|1.36
+M11|Naturalize|11.31|0.12
+M11|Unholy Strength|11.37|0.11
+M11|Gargoyle Sentinel|11.38|0.17
+M11|Holy Strength|11.49|0.11
+M11|Fog|11.53|0.14
+M11|Tireless Missionaries|11.53|0.11
+M11|Ajani's Mantra|11.56|0.13
+M11|Merfolk Spy|11.58|0.11
+M11|Haunting Echoes|11.59|0.53
+M11|Tome Scour|11.65|0.15
+M11|Back to Nature|11.73|0.23
+M11|Wall of Vines|11.8|0.11
+M11|Goldenglow Moth|11.81|0.12
+M11|Demolish|11.83|0.11
+M11|Bloodcrazed Goblin|11.86|0.11
+M11|Blood Tithe|11.89|0.12
+M11|Elixir of Immortality|11.96|0.55
+M11|Primal Cocoon|12.14|0.11
+M11|Autumn's Veil|12.23|0.23
+M11|Wild Evocation|12.37|0.36
+M11|Jinxed Idol|12.43|0.59
+M11|Liliana's Caress|12.75|0.61
+M11|Dryad's Favor|13.04|0.11
+M11|Hunters' Feast|13.48|0.11
+M11|Ornithopter|13.65|0.47
+M11|Incite|13.76|0.11
+M11|Sorcerer's Strongbox|13.85|0.17
+M11|Forest|14.68|0.08
+M11|Angel's Feather|14.83|0.17
+M11|Wurm's Tooth|14.84|0.17
+M11|Plains|14.84|0.51
+M11|Voltaic Key|14.89|0.69
+M11|Island|14.89|0.08
