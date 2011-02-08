@@ -3,8 +3,13 @@
 use Switch;
 use strict;
 
-my $source = "zendikar-pick.htm";
-my $destination = "result.txt";
+print "Enter a set name: ";
+my $set = <STDIN>; 
+chomp $set;
+my $lset = lc($set); 
+
+my $source = "$lset.htm";
+my $destination = "$lset.txt";
 
 open SRC, "< $source" or die "Can't open source: $!\n";
 open DST, "> $destination" or die "Can't open destination: $!\n";
@@ -17,6 +22,7 @@ my $max;
 my $med;
 my $min;
 
+	
 while (<SRC>) {
 	my $s = $_;
 	chomp $s;
@@ -72,7 +78,9 @@ while (<SRC>) {
 			$state = 11;			
 		}
 	} elsif ($state == 11) {
-		print "$name|$rate|$med\n";
+		print DST "$set|$name|$rate|$med\n";
 		$state = 1;
 	}	
 }
+
+close DST; 
