@@ -30,13 +30,13 @@ package mage.sets.alarareborn;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.AddPlusOneCountersSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -69,7 +69,7 @@ public class LorescaleCoatl extends CardImpl<LorescaleCoatl> {
 
 class LorescaleCoatlAbility extends TriggeredAbilityImpl<LorescaleCoatlAbility> {
     public LorescaleCoatlAbility() {
-        super(Zone.BATTLEFIELD, new AddPlusOneCountersSourceEffect(1), true);
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true);
     }
 
     public LorescaleCoatlAbility(final LorescaleCoatlAbility ability) {

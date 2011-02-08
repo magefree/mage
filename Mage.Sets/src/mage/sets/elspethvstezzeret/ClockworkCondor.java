@@ -26,46 +26,29 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.sets.elspethvstezzeret;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.cards.CardImpl;
-import mage.counters.CounterType;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class FumeSpitter extends CardImpl<FumeSpitter> {
+public class ClockworkCondor extends mage.sets.mirrodin.ClockworkCondor {
 
-    public FumeSpitter (UUID ownerId) {
-        super(ownerId, 63, "Fume Spitter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Horror");
-		this.color.setBlack(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new SacrificeSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+    public ClockworkCondor (UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 50;
+        this.expansionSetCode = "DDF";
     }
 
-    public FumeSpitter (final FumeSpitter card) {
+    public ClockworkCondor (final ClockworkCondor card) {
         super(card);
     }
 
     @Override
-    public FumeSpitter copy() {
-        return new FumeSpitter(this);
+    public ClockworkCondor copy() {
+        return new ClockworkCondor(this);
     }
 
 }

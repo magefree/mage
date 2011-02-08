@@ -35,9 +35,10 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
-import mage.abilities.effects.common.AddPlusOneCountersSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.target.TargetPlayer;
 
 /**
@@ -56,7 +57,7 @@ public class ObNixilistheFallen extends CardImpl<ObNixilistheFallen> {
         this.toughness = new MageInt(3);
 
         Ability ability = new LandfallAbility(new LoseLifeTargetEffect(3), true);
-        ability.addEffect(new AddPlusOneCountersSourceEffect(3));
+        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

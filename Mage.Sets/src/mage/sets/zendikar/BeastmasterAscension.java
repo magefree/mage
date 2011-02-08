@@ -36,7 +36,7 @@ import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AddCountersSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;

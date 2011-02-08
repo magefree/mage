@@ -31,7 +31,7 @@ package mage.sets.scarsofmirrodin;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.AddCountersTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;

@@ -26,64 +26,61 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
  *
  * @author Loki
  */
-public class CarnifexDemon extends CardImpl<CarnifexDemon> {
+public class ClockworkCondor extends CardImpl<ClockworkCondor> {
 
-    public CarnifexDemon (UUID ownerId) {
-        super(ownerId, 57, "Carnifex Demon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Demon");
-		this.color.setBlack(true);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
+    public ClockworkCondor (UUID ownerId) {
+        super(ownerId, 154, "Clockwork Condor", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Bird");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(2)), "Carnifex Demon enters the battlefield with two -1/-1 counters on it"));
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CarnifexDemonEffect(), new ManaCostsImpl("{B}"));
-        ability.addCost(new RemoveCountersSourceCost(CounterType.M1M1.createInstance()));
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), "Clockwork Condor enters the battlefield with three +1/+1 counters on it"));
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(new ClockworkCondorEffect(), false));
     }
 
-    public CarnifexDemon (final CarnifexDemon card) {
+    public ClockworkCondor (final ClockworkCondor card) {
         super(card);
     }
 
     @Override
-    public CarnifexDemon copy() {
-        return new CarnifexDemon(this);
+    public ClockworkCondor copy() {
+        return new ClockworkCondor(this);
     }
 }
 
-class CarnifexDemonEffect extends OneShotEffect<CarnifexDemonEffect> {
-    public CarnifexDemonEffect() {
+class ClockworkCondorEffect extends OneShotEffect<ClockworkCondorEffect> {
+    ClockworkCondorEffect() {
         super(Constants.Outcome.UnboostCreature);
     }
 
-    public CarnifexDemonEffect(final CarnifexDemonEffect effect) {
+    ClockworkCondorEffect(final ClockworkCondorEffect effect) {
         super(effect);
     }
 
@@ -91,21 +88,44 @@ class CarnifexDemonEffect extends OneShotEffect<CarnifexDemonEffect> {
     public boolean apply(Game game, Ability source) {
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
-            for (Permanent t : game.getBattlefield().getAllActivePermanents()) {
-                if (t.getCardType().contains(CardType.CREATURE) && !t.getId().equals(source.getSourceId()))
-                    t.addCounters(CounterType.M1M1.createInstance());
-            }
+            ClockworkDragonDelayedTriggeredAbility delayedAbility = new ClockworkDragonDelayedTriggeredAbility();
+            delayedAbility.setSourceId(source.getSourceId());
+			delayedAbility.setControllerId(source.getControllerId());
+			game.addDelayedTriggeredAbility(delayedAbility);
         }
         return false;
     }
 
     @Override
-    public CarnifexDemonEffect copy() {
-        return new CarnifexDemonEffect(this);
+    public ClockworkCondorEffect copy() {
+        return new ClockworkCondorEffect(this);
     }
 
     @Override
     public String getText(Ability source) {
-        return "Put a -1/-1 counter on each other creature";
+        return "remove a +1/+1 counter from Clockwork Condor at end of combat";
+    }
+}
+
+class ClockworkCondorDelayedTriggeredAbility extends DelayedTriggeredAbility<ClockworkCondorDelayedTriggeredAbility> {
+    ClockworkCondorDelayedTriggeredAbility() {
+        super(new RemoveCounterSourceEffect(CounterType.P1P1.createInstance()));
+    }
+
+    ClockworkCondorDelayedTriggeredAbility(final ClockworkCondorDelayedTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public ClockworkCondorDelayedTriggeredAbility copy() {
+        return new ClockworkCondorDelayedTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.COMBAT_PHASE_POST) {
+            return true;
+        }
+        return false;
     }
 }

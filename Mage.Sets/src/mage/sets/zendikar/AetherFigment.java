@@ -36,11 +36,12 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.AddPlusOneCountersSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.GainAbilitySourceEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 
 /**
  *
@@ -57,7 +58,7 @@ public class AetherFigment extends CardImpl<AetherFigment> {
 		this.toughness = new MageInt(1);
 
 		this.addAbility(UnblockableAbility.getInstance());
-		Ability ability1 = new EntersBattlefieldTriggeredAbility(new AddPlusOneCountersSourceEffect(2));
+		Ability ability1 = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)));
 		KickerAbility ability2 = new KickerAbility(new GainAbilitySourceEffect(ability1, Duration.WhileOnBattlefield), false);
 		ability2.addManaCost(new GenericManaCost(3));
 		this.addAbility(ability2);

@@ -26,12 +26,14 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.counter;
 
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.counters.common.PlusOneCounter;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -39,40 +41,47 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AddPlusOneCountersSourceEffect extends OneShotEffect<AddPlusOneCountersSourceEffect> {
+public class AddPlusOneCountersControlledEffect extends OneShotEffect<AddPlusOneCountersControlledEffect> {
 
 	private int amount;
+	private FilterPermanent filter;
 
-	public AddPlusOneCountersSourceEffect(int amount) {
-		super(Outcome.BoostCreature);
-		this.amount = amount;
+	public AddPlusOneCountersControlledEffect(int amount) {
+		this(amount, FilterCreaturePermanent.getDefault());
 	}
 
-	public AddPlusOneCountersSourceEffect(final AddPlusOneCountersSourceEffect effect) {
+	public AddPlusOneCountersControlledEffect(int amount, FilterPermanent filter) {
+		super(Outcome.Benefit);
+		this.amount = amount;
+		this.filter = filter;
+	}
+
+	public AddPlusOneCountersControlledEffect(final AddPlusOneCountersControlledEffect effect) {
 		super(effect);
 		this.amount = effect.amount;
+		this.filter = effect.filter.copy();
 	}
 
 	@Override
-	public AddPlusOneCountersSourceEffect copy() {
-		return new AddPlusOneCountersSourceEffect(this);
+	public AddPlusOneCountersControlledEffect copy() {
+		return new AddPlusOneCountersControlledEffect(this);
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-			permanent.addCounters(new PlusOneCounter(amount));
-		}
+		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
+			perm.getCounters().addCounter(new PlusOneCounter(amount));		}
 		return true;
 	}
 
 	@Override
 	public String getText(Ability source) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Put ").append(amount).append(" +1/+1 counter");
 		if (amount > 1)
-			return "put " + Integer.toString(amount) + " +1/+1 counters on {this}";
-		else
-			return "put a +1/+1 counter on {this}";
+			sb.append("s");
+		sb.append(" on each ").append(filter.getName()).append(" you control");
+		return sb.toString();
 	}
 
 }

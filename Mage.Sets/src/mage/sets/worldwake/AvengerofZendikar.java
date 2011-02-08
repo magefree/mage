@@ -32,15 +32,13 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AddPlusOneCountersControlledEffect;
+import mage.abilities.effects.common.counter.AddPlusOneCountersControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;

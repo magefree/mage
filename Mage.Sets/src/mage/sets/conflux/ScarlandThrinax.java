@@ -37,8 +37,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.AddPlusOneCountersSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -56,7 +57,7 @@ public class ScarlandThrinax extends CardImpl<ScarlandThrinax> {
         this.subtype.add("Lizard");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddPlusOneCountersSourceEffect(1), new ManaCostsImpl());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         this.addAbility(ability);
     }

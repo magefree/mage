@@ -30,16 +30,14 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.effects.common.AddCountersSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
