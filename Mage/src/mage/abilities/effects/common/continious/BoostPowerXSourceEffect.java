@@ -26,15 +26,13 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.continious;
 
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -43,60 +41,35 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BoostEquippedEffect extends ContinuousEffectImpl<BoostEquippedEffect> {
+public class BoostPowerXSourceEffect extends ContinuousEffectImpl<BoostPowerXSourceEffect> {
 
-	private DynamicValue power;
-	private DynamicValue toughness;
-
-	public BoostEquippedEffect(int power, int toughness) {
-		this(power, toughness, Duration.WhileOnBattlefield);
+	public BoostPowerXSourceEffect(Duration duration) {
+		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
 	}
 
-	public BoostEquippedEffect(int power, int toughness, Duration duration) {
-        this(new StaticValue(power), new StaticValue(toughness), duration);
-	}
-
-    public BoostEquippedEffect(DynamicValue powerDynamicValue, DynamicValue toughnessDynamicValue) {
-        this(powerDynamicValue, toughnessDynamicValue, Duration.WhileOnBattlefield);
-    }
-
-    public BoostEquippedEffect(DynamicValue powerDynamicValue, DynamicValue toughnessDynamicValue, Duration duration) {
-        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        this.power = powerDynamicValue;
-        this.toughness = toughnessDynamicValue;
-    }
-
-	public BoostEquippedEffect(final BoostEquippedEffect effect) {
+	public BoostPowerXSourceEffect(final BoostPowerXSourceEffect effect) {
 		super(effect);
-		this.power = effect.power.clone();
-		this.toughness = effect.toughness.clone();
 	}
 
 	@Override
-	public BoostEquippedEffect copy() {
-		return new BoostEquippedEffect(this);
+	public BoostPowerXSourceEffect copy() {
+		return new BoostPowerXSourceEffect(this);
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Permanent equipment = game.getPermanent(source.getSourceId());
-		if (equipment != null && equipment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(equipment.getAttachedTo());
-			if (creature != null) {
-				creature.addPower(power.calculate(game, source));
-				creature.addToughness(toughness.calculate(game, source));
-			}
+		int amount = source.getCosts().getVariableCosts().get(0).getAmount();
+		Permanent target = (Permanent) game.getPermanent(source.getSourceId());
+		if (target != null) {
+			target.addPower(amount);
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	@Override
-	public String getDynamicText(Ability source) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Equipped creatures gets ").append(power.toString()).append("/").append(toughness.toString());
-		if (duration != Duration.WhileOnBattlefield)
-			sb.append(" ").append(duration.toString());
-		return sb.toString();
+	public String getText(Ability source) {
+		return "{this} gets " + String.format("+X/+0") + " " + duration.toString();
 	}
 
 }

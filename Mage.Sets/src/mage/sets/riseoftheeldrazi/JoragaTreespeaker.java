@@ -40,7 +40,7 @@ import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.keyword.LevelAbility;
 import mage.abilities.keyword.LevelUpAbility;

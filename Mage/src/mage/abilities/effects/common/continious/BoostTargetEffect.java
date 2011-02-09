@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.continious;
 
 import mage.Constants.Duration;
 import mage.Constants.Layer;
@@ -41,34 +41,34 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SetPowerToughnessTargetEffect extends ContinuousEffectImpl<SetPowerToughnessTargetEffect> {
+public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
 
 	private int power;
 	private int toughness;
 
-	public SetPowerToughnessTargetEffect(int power, int toughness, Duration duration) {
-		super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
+	public BoostTargetEffect(int power, int toughness, Duration duration) {
+		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
 		this.power = power;
 		this.toughness = toughness;
 	}
 
-	public SetPowerToughnessTargetEffect(final SetPowerToughnessTargetEffect effect) {
+	public BoostTargetEffect(final BoostTargetEffect effect) {
 		super(effect);
 		this.power = effect.power;
 		this.toughness = effect.toughness;
 	}
 
 	@Override
-	public SetPowerToughnessTargetEffect copy() {
-		return new SetPowerToughnessTargetEffect(this);
+	public BoostTargetEffect copy() {
+		return new BoostTargetEffect(this);
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Permanent target = (Permanent) game.getPermanent(source.getFirstTarget());
 		if (target != null) {
-			target.getPower().setValue(power);
-			target.getToughness().setValue(toughness);
+			target.addPower(power);
+			target.addToughness(toughness);
 			return true;
 		}
 		return false;
@@ -77,8 +77,8 @@ public class SetPowerToughnessTargetEffect extends ContinuousEffectImpl<SetPower
 	@Override
 	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("target ").append(source.getTargets().get(0).getTargetName()).append(" becomes ");
-		sb.append(power).append("/").append(toughness).append(" ").append(duration.toString());
+		sb.append("target ").append(source.getTargets().get(0).getTargetName()).append(" gets ");
+		sb.append(String.format("%1$+d/%2$+d", power, toughness)).append(" ").append(duration.toString());
 		return sb.toString();
 	}
 

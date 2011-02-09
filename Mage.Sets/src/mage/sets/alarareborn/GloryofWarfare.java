@@ -30,20 +30,16 @@ package mage.sets.alarareborn;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurn;
 import mage.abilities.condition.common.NotMyTurn;
 import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.BoostControlledEffect;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
 
 /**
  *

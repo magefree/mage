@@ -36,6 +36,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
 import mage.abilities.keyword.UnblockableAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
@@ -54,7 +55,7 @@ public class CreepingTarPit extends CardImpl<CreepingTarPit> {
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new mage.abilities.effects.common.BecomesCreatureSourceEOTEffect(new CreepingTarPitToken(), "land"), new ManaCostsImpl("{1}{U}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new CreepingTarPitToken(), "land"), new ManaCostsImpl("{1}{U}{B}")));
     }
 
     public CreepingTarPit (final CreepingTarPit card) {

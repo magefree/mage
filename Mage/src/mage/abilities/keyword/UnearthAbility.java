@@ -39,7 +39,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
-import mage.abilities.effects.common.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.game.Game;
 import mage.game.events.GameEvent;

@@ -31,7 +31,7 @@ package mage.sets.scarsofmirrodin;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;

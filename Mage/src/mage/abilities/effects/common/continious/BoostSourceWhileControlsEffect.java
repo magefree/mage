@@ -26,47 +26,64 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.continious;
 
+import mage.abilities.condition.common.ControlsPermanent;
+import mage.abilities.effects.WhileConditionContiniousEffect;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GainControlTargetEffect extends ContinuousEffectImpl<GainControlTargetEffect> {
+public class BoostSourceWhileControlsEffect extends WhileConditionContiniousEffect<BoostSourceWhileControlsEffect> {
 
-	public GainControlTargetEffect(Duration duration) {
-		super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
+	private int power;
+	private int toughness;
+    private List<String> filterDescription;
+
+	public BoostSourceWhileControlsEffect(FilterPermanent filter, int power, int toughness) {
+		super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, new ControlsPermanent(filter), Outcome.BoostCreature);
+		this.power = power;
+		this.toughness = toughness;
+        this.filterDescription = filter.getName();
 	}
 
-	public GainControlTargetEffect(final GainControlTargetEffect effect) {
+	public BoostSourceWhileControlsEffect(final BoostSourceWhileControlsEffect effect) {
 		super(effect);
+		this.power = effect.power;
+		this.toughness = effect.toughness;
+        this.filterDescription = new ArrayList<String>();
+        this.filterDescription.addAll(effect.filterDescription);
 	}
 
 	@Override
-	public GainControlTargetEffect copy() {
-		return new GainControlTargetEffect(this);
+	public BoostSourceWhileControlsEffect copy() {
+		return new BoostSourceWhileControlsEffect(this);
 	}
 
 	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
+	public boolean applyEffect(Game game, Ability source) {
+		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
-			return permanent.changeControllerId(source.getControllerId(), game);
+			permanent.addPower(power);
+			permanent.addToughness(toughness);
 		}
-		return false;
+		return true;
 	}
 
 	@Override
 	public String getText(Ability source) {
-		return "Gain control of target " + source.getTargets().get(0).getTargetName() + " " + duration.toString();
+		return "{this} gets " + String.format("%1$+d/%2$+d", power, toughness) + " as long as you control a " + filterDescription;
 	}
 }

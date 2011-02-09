@@ -39,14 +39,11 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.Metalcraft;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.BoostControlledEffect;
-import mage.abilities.effects.common.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
  * @author nantuko

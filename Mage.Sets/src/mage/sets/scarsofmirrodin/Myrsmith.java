@@ -32,7 +32,6 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
@@ -41,16 +40,11 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.BoostTargetEffect;
-import mage.abilities.effects.common.GainAbilityTargetEffect;
-import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.MyrToken;
-import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *

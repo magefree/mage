@@ -40,7 +40,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.TapVariableTargetCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.BoostPowerXSourceEffect;
+import mage.abilities.effects.common.continious.BoostPowerXSourceEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -48,7 +48,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.MyrToken;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 

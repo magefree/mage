@@ -34,7 +34,7 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.LandfallAbility;
-import mage.abilities.effects.common.BoostSourceEffect;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 
 /**

@@ -32,7 +32,7 @@ import mage.Constants.Duration;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.TenOrLessLife;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import java.util.UUID;
 import mage.Constants.CardType;

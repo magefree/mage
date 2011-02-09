@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.continious;
 
 import mage.Constants.Duration;
 import mage.Constants.Layer;
@@ -41,41 +41,39 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySourceEffect> {
+public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityAttachedEffect> {
 
 	protected Ability ability;
 
-	public GainAbilitySourceEffect(Ability ability, Duration duration) {
-		super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+	public GainAbilityAttachedEffect(Ability ability) {
+		super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
 		this.ability = ability;
 	}
 
-	public GainAbilitySourceEffect(final GainAbilitySourceEffect effect) {
+	public GainAbilityAttachedEffect(final GainAbilityAttachedEffect effect) {
 		super(effect);
 		this.ability = effect.ability.copy();
 	}
 
 	@Override
-	public GainAbilitySourceEffect copy() {
-		return new GainAbilitySourceEffect(this);
+	public GainAbilityAttachedEffect copy() {
+		return new GainAbilityAttachedEffect(this);
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-			permanent.addAbility(ability.copy());
-			return true;
+		Permanent equipment = game.getPermanent(source.getSourceId());
+		if (equipment != null && equipment.getAttachedTo() != null) {
+			Permanent creature = game.getPermanent(equipment.getAttachedTo());
+			if (creature != null)
+				creature.addAbility(ability.copy());
 		}
-		return false;
+		return true;
 	}
 
 	@Override
 	public String getText(Ability source) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("{this} gains ").append(ability.getRule()).append(" ").append(duration.toString());
-		return sb.toString();
+		return "Equipped creature gains " + ability.getRule();
 	}
-
 
 }

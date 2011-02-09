@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.continious;
 
 import mage.Constants.Duration;
 import mage.Constants.Layer;
@@ -41,48 +41,41 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BoostEnchantedEffect extends ContinuousEffectImpl<BoostEnchantedEffect> {
+public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySourceEffect> {
 
-	private int power;
-	private int toughness;
+	protected Ability ability;
 
-	public BoostEnchantedEffect(int power, int toughness, Duration duration) {
-		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-		this.power = power;
-		this.toughness = toughness;
+	public GainAbilitySourceEffect(Ability ability, Duration duration) {
+		super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+		this.ability = ability;
 	}
 
-	public BoostEnchantedEffect(final BoostEnchantedEffect effect) {
+	public GainAbilitySourceEffect(final GainAbilitySourceEffect effect) {
 		super(effect);
-		this.power = effect.power;
-		this.toughness = effect.toughness;
+		this.ability = effect.ability.copy();
 	}
 
 	@Override
-	public BoostEnchantedEffect copy() {
-		return new BoostEnchantedEffect(this);
+	public GainAbilitySourceEffect copy() {
+		return new GainAbilitySourceEffect(this);
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-			if (creature != null) {
-				creature.addPower(power);
-				creature.addToughness(toughness);
-			}
+		Permanent permanent = game.getPermanent(source.getSourceId());
+		if (permanent != null) {
+			permanent.addAbility(ability.copy());
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	@Override
 	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Enchanted creatures gets ").append(String.format("%1$+d/%2$+d", power, toughness));
-		if (duration != Duration.WhileOnBattlefield)
-			sb.append(" ").append(duration.toString());
+		sb.append("{this} gains ").append(ability.getRule()).append(" ").append(duration.toString());
 		return sb.toString();
 	}
+
 
 }

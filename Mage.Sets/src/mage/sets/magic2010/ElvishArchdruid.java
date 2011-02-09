@@ -38,7 +38,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.BoostControlledEffect;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;

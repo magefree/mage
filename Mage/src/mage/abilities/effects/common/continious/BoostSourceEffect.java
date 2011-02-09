@@ -26,13 +26,15 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.continious;
 
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -41,41 +43,45 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GainAbilityTargetEffect extends ContinuousEffectImpl {
+public class BoostSourceEffect extends ContinuousEffectImpl<BoostSourceEffect> {
+	private DynamicValue power;
+	private DynamicValue toughness;
 
-	protected Ability ability;
-
-	public GainAbilityTargetEffect(Ability ability, Duration duration) {
-		super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-		this.ability = ability;
+	public BoostSourceEffect(int power, int toughness, Duration duration) {
+		this(new StaticValue(power), new StaticValue(toughness), duration);
 	}
 
-	public GainAbilityTargetEffect(final GainAbilityTargetEffect effect) {
+    public BoostSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
+        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+        this.power = power;
+		this.toughness = toughness;
+    }
+
+	public BoostSourceEffect(final BoostSourceEffect effect) {
 		super(effect);
-		this.ability = effect.ability.copy();
+		this.power = effect.power.clone();
+		this.toughness = effect.toughness.clone();
 	}
 
 	@Override
-	public GainAbilityTargetEffect copy() {
-		return new GainAbilityTargetEffect(this);
+	public BoostSourceEffect copy() {
+		return new BoostSourceEffect(this);
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			permanent.addAbility(ability.copy());
+		Permanent target = game.getPermanent(source.getSourceId());
+		if (target != null) {
+			target.addPower(power.calculate(game, source));
+			target.addToughness(toughness.calculate(game, source));
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public String getText(Ability source) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Target ").append(source.getTargets().get(0).getTargetName()).append(" gains ");
-		sb.append(ability.getRule()).append(" ").append(duration.toString());
-		return sb.toString();
+	public String getDynamicText(Ability source) {
+		return "{this} gets " + power.toString() + "/" + toughness.toString() + " " + duration.toString();
 	}
 
 }

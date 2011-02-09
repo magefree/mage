@@ -34,7 +34,7 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.GainProtectionFromColorTargetEffect;
+import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;

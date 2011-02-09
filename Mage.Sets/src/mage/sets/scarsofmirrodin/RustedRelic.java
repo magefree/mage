@@ -32,16 +32,13 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.Metalcraft;
-import mage.abilities.condition.common.MyTurn;
 import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.common.BecomesCreatureSourceEOTEffect;
-import mage.abilities.effects.common.BoostControlledEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
 

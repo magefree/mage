@@ -36,7 +36,7 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.effects.common.BoostSourceEffect;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 
 
