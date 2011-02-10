@@ -31,7 +31,7 @@ package mage.player.ai;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mage.game.Game;
+
 import mage.util.Logging;
 
 /**
@@ -43,9 +43,9 @@ public class SimulateBlockWorker implements Callable {
 	private final static Logger logger = Logging.getLogger(SimulationWorker.class.getName());
 
 	private SimulationNode node;
-	private ComputerPlayer3 player;
+	private ComputerPlayer5 player;
 
-	public SimulateBlockWorker(ComputerPlayer3 player, SimulationNode node) {
+	public SimulateBlockWorker(ComputerPlayer5 player, SimulationNode node) {
 		this.player = player;
 		this.node = node;
 	}

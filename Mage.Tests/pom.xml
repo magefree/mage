@@ -39,6 +39,12 @@
             <artifactId>junit</artifactId>
             <version>4.8.2</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Mage-Game-TwoPlayerDuel</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
 		
         <dependency>
             <groupId>log4j</groupId>

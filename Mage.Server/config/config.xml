@@ -7,7 +7,7 @@
 		<playerType name="Computer - default" jar="mage-player-ai.jar" className="mage.player.ai.ComputerPlayer"/>
 		<playerType name="Computer - minimax" jar="mage-player-aiminimax.jar" className="mage.player.ai.ComputerPlayer2"/>
 		<playerType name="Computer - minimax hybrid" jar="mage-player-aiminimax.jar" className="mage.player.ai.ComputerPlayer3"/>
-		<playerType name="Computer - mad" jar="mage-player-ai-ma.jar" className="mage.player.ai.ComputerPlayer3"/>
+		<playerType name="Computer - mad" jar="mage-player-ai-ma.jar" className="mage.player.ai.ComputerPlayer5"/>
 	</playerTypes>
 	<gameTypes>
 		<gameType name="Two Player Duel" jar="mage-game-twoplayerduel.jar" className="mage.game.TwoPlayerMatch" typeName="mage.game.TwoPlayerDuelType"/>
