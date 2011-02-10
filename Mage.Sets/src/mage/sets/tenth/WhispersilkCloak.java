@@ -29,6 +29,8 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
+
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -53,8 +55,8 @@ public class WhispersilkCloak extends CardImpl<WhispersilkCloak> {
 		this.expansionSetCode = "10E";
 		this.subtype.add("Equipment");
 		this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(UnblockableAbility.getInstance())));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance())));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(UnblockableAbility.getInstance(), AttachmentType.EQUIPMENT)));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.EQUIPMENT)));
 	}
 
 	protected WhispersilkCloak(WhispersilkCloak me) {

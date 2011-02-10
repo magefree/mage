@@ -29,6 +29,8 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -54,8 +56,8 @@ public class BehemothSledge extends CardImpl<BehemothSledge> {
 		this.expansionSetCode = "ARB";
 		this.subtype.add("Equipment");
 		this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance())));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance())));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
 	}
 

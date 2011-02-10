@@ -29,6 +29,8 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -52,8 +54,8 @@ public class BasiliskCollar extends CardImpl<BasiliskCollar> {
 		this.expansionSetCode = "WWK";
 		this.subtype.add("Equipment");
 		this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance())));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DeathtouchAbility.getInstance())));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DeathtouchAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
 	}
 
 	public BasiliskCollar(final BasiliskCollar card) {

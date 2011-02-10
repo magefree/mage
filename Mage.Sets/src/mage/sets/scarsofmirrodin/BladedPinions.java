@@ -31,6 +31,7 @@ package mage.sets.scarsofmirrodin;
 import java.util.UUID;
 
 import mage.Constants;
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -53,8 +54,8 @@ public class BladedPinions extends CardImpl<BladedPinions> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Equipment");
         this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance())));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance())));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
     }
 
     public BladedPinions (final BladedPinions card) {

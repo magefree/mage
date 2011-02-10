@@ -76,7 +76,7 @@ public class SwordofBodyandMind extends CardImpl<SwordofBodyandMind> {
         this.subtype.add("Equipment");
         this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(filter))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(filter), Constants.AttachmentType.EQUIPMENT)));
         this.addAbility(new SwordofBodyandMindAbility());
     }
 

@@ -53,7 +53,7 @@ public class AccordersShield extends CardImpl<AccordersShield> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Equipment");
         this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(3)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance())));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(0, 3)));
     }
 

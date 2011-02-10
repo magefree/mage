@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common.continious;
 
+import mage.Constants.AttachmentType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
@@ -44,15 +45,18 @@ import mage.game.permanent.Permanent;
 public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityAttachedEffect> {
 
 	protected Ability ability;
+    protected AttachmentType attachmentType;
 
-	public GainAbilityAttachedEffect(Ability ability) {
+	public GainAbilityAttachedEffect(Ability ability, AttachmentType attachmentType) {
 		super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
 		this.ability = ability;
+        this.attachmentType = attachmentType;
 	}
 
 	public GainAbilityAttachedEffect(final GainAbilityAttachedEffect effect) {
 		super(effect);
 		this.ability = effect.ability.copy();
+        this.attachmentType = effect.attachmentType;
 	}
 
 	@Override
@@ -73,7 +77,12 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityA
 
 	@Override
 	public String getText(Ability source) {
-		return "Equipped creature gains " + ability.getRule();
+        String prefix = "";
+        if (attachmentType == AttachmentType.AURA)
+            prefix = "Enchanted";
+        else if (attachmentType == AttachmentType.EQUIPMENT)
+            prefix = "Equipped";
+		return prefix + " creature gains " + ability.getRule();
 	}
 
 }

@@ -408,6 +408,11 @@ public final class Constants {
 		}
 	}
 
+    public enum AttachmentType {
+        EQUIPMENT,
+        AURA
+    }
+
 	public static final List<String> PlaneswalkerTypes = new ArrayList<String>()
 		{{add("Ajani"); add("Bolas"); add("Chandra"); add("Elspeth");add("Garruk"); add("Jace"); add("Liliana"); add("Nissa"); add("Sarkhan"); add("Sorin"); add("Tezzeret");}};
 	

@@ -79,7 +79,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl<BoostEnchantedEff
 	@Override
 	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Enchanted creatures gets ").append(String.format("%1$+d/%2$+d", power, toughness));
+		sb.append("Enchanted creature gets ").append(String.format("%1$+d/%2$+d", power, toughness));
 		if (duration != Duration.WhileOnBattlefield)
 			sb.append(" ").append(duration.toString());
 		return sb.toString();

@@ -36,8 +36,13 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.keyword.AnnihilatorAbility;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -59,6 +64,10 @@ public class EldraziConscription extends CardImpl<EldraziConscription> {
 		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
 		Ability ability = new EnchantAbility(auraTarget.getTargetName());
 		this.addAbility(ability);
+
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(10, 10, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), Constants.AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new AnnihilatorAbility(2), Constants.AttachmentType.AURA)));
     }
 
     public EldraziConscription (final EldraziConscription card) {
