@@ -40,7 +40,7 @@ import mage.game.combat.Combat;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SimulationNode implements Serializable {
+public class SimulationNode2 implements Serializable {
 
 	protected static int nodeCount;
 
@@ -48,13 +48,13 @@ public class SimulationNode implements Serializable {
 	protected int gameValue;
 	protected List<Ability> abilities;
 	protected int depth;
-	protected List<SimulationNode> children = new ArrayList<SimulationNode>();
+	protected List<SimulationNode2> children = new ArrayList<SimulationNode2>();
 	protected List<UUID> targets = new ArrayList<UUID>();
 	protected List<String> choices = new ArrayList<String>();
 	protected UUID playerId;
 	protected Combat combat;
 
-	public SimulationNode(Game game, int depth, UUID playerId) {
+	public SimulationNode2(Game game, int depth, UUID playerId) {
 		this.game = game;
 		this.depth = depth;
 		this.playerId = playerId;
@@ -62,12 +62,12 @@ public class SimulationNode implements Serializable {
 		nodeCount++;
 	}
 
-	public SimulationNode(Game game, List<Ability> abilities, int depth, UUID playerId) {
+	public SimulationNode2(Game game, List<Ability> abilities, int depth, UUID playerId) {
 		this(game, depth, playerId);
 		this.abilities = abilities;
 	}
 
-	public SimulationNode(Game game, Ability ability, int depth, UUID playerId) {
+	public SimulationNode2(Game game, Ability ability, int depth, UUID playerId) {
 		this(game, depth, playerId);
 		this.abilities = new ArrayList<Ability>();
 		abilities.add(ability);
@@ -97,7 +97,7 @@ public class SimulationNode implements Serializable {
 		return this.abilities;
 	}
 
-	public List<SimulationNode> getChildren() {
+	public List<SimulationNode2> getChildren() {
 		return this.children;
 	}
 

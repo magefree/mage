@@ -28,35 +28,25 @@
 
 package mage.player.ai;
 
-import java.util.concurrent.Callable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import mage.util.Logging;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeMap;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SimulateBlockWorker implements Callable {
+public class Attackers2 extends TreeMap<Integer, List<Permanent>> {
 
-	private final static Logger logger = Logging.getLogger(SimulationWorker.class.getName());
-
-	private SimulationNode node;
-	private ComputerPlayer5 player;
-
-	public SimulateBlockWorker(ComputerPlayer5 player, SimulationNode node) {
-		this.player = player;
-		this.node = node;
-	}
-
-	@Override
-	public Object call() {
-		try {
-//			player.simulateBlock(node);
-		} catch (Exception ex) {
-			logger.log(Level.SEVERE, null, ex);
+	public List<Permanent> getAttackers() {
+		List<Permanent> attackers = new ArrayList<Permanent>();
+		for (List<Permanent> l: this.values()) {
+			for (Permanent permanent: l) {
+				attackers.add(permanent);
+			}
 		}
-		return null;
+		return attackers;
 	}
+
 }

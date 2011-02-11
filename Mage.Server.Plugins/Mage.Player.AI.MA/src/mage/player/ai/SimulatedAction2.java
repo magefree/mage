@@ -28,25 +28,41 @@
 
 package mage.player.ai;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
-import mage.game.permanent.Permanent;
+import mage.abilities.Ability;
+import mage.game.Game;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Attackers extends TreeMap<Integer, List<Permanent>> {
+public class SimulatedAction2 {
 
-	public List<Permanent> getAttackers() {
-		List<Permanent> attackers = new ArrayList<Permanent>();
-		for (List<Permanent> l: this.values()) {
-			for (Permanent permanent: l) {
-				attackers.add(permanent);
-			}
-		}
-		return attackers;
+	private Game game;
+	private List<Ability> abilities;
+
+	public SimulatedAction2(Game game, List<Ability> abilities) {
+		this.game = game;
+		this.abilities = abilities;
 	}
 
+	public Game getGame() {
+		return this.game;
+	}
+
+	public List<Ability> getAbilities() {
+		return this.abilities;
+	}
+
+	@Override
+	public String toString() {
+		return this.abilities.toString();
+	}
+
+	public boolean usesStack() {
+		if (abilities != null && abilities.size() > 0) {
+			return abilities.get(abilities.size() -1).isUsesStack();
+		}
+		return true;
+	}
 }

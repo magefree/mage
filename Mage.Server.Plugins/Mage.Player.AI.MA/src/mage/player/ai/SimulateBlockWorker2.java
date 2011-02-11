@@ -31,39 +31,32 @@ package mage.player.ai;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mage.abilities.Ability;
-import mage.game.Game;
+
 import mage.util.Logging;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SimulationWorker implements Callable {
+public class SimulateBlockWorker2 implements Callable {
 
-	private final static Logger logger = Logging.getLogger(SimulationWorker.class.getName());
+	private final static Logger logger = Logging.getLogger(SimulationWorker2.class.getName());
 
-	private Game game;
-	private SimulatedAction previousActions;
-	private Ability action;
-	private SimulatedPlayer player;
+	private SimulationNode2 node;
+	private ComputerPlayer5 player;
 
-	public SimulationWorker(Game game, SimulatedPlayer player, SimulatedAction previousActions, Ability action) {
-		this.game = game;
+	public SimulateBlockWorker2(ComputerPlayer5 player, SimulationNode2 node) {
 		this.player = player;
-		this.previousActions = previousActions;
-		this.action = action;
+		this.node = node;
 	}
 
 	@Override
 	public Object call() {
 		try {
-//			player.simulateAction(game, previousActions, action);
+//			player.simulateBlock(node);
 		} catch (Exception ex) {
 			logger.log(Level.SEVERE, null, ex);
 		}
 		return null;
 	}
-
 }
-

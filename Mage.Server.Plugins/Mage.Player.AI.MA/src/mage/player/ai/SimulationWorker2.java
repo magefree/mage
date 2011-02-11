@@ -28,48 +28,42 @@
 
 package mage.player.ai;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.Properties;
+import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mage.abilities.Ability;
+import mage.game.Game;
 import mage.util.Logging;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Config {
+public class SimulationWorker2 implements Callable {
 
-	private final static Logger logger = Logging.getLogger(Config.class.getName());
+	private final static Logger logger = Logging.getLogger(SimulationWorker2.class.getName());
 
-	public static final int maxDepth;
-	public static final int maxNodes;
-	public static final int evaluatorLifeFactor;
-	public static final int evaluatorPermanentFactor;
-	public static final int evaluatorCreatureFactor;
-	public static final int evaluatorHandFactor;
-	public static final int maxThinkSeconds;
+	private Game game;
+	private SimulatedAction2 previousActions;
+	private Ability action;
+	private SimulatedPlayer2 player;
 
-	static {
-		Properties p = new Properties();
+	public SimulationWorker2(Game game, SimulatedPlayer2 player, SimulatedAction2 previousActions, Ability action) {
+		this.game = game;
+		this.player = player;
+		this.previousActions = previousActions;
+		this.action = action;
+	}
+
+	@Override
+	public Object call() {
 		try {
-			File file = new File(Config.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
-			p.load(new FileInputStream(new File(file.getParent() + File.separator + "AIMinimax.properties")));
-		} catch (IOException ex) {
+//			player.simulateAction(game, previousActions, action);
+		} catch (Exception ex) {
 			logger.log(Level.SEVERE, null, ex);
-		} catch (URISyntaxException ex) {
-			Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		maxDepth = Integer.parseInt(p.getProperty("maxDepth"));
-		maxNodes = Integer.parseInt(p.getProperty("maxNodes"));
-		evaluatorLifeFactor = Integer.parseInt(p.getProperty("evaluatorLifeFactor"));
-		evaluatorPermanentFactor = Integer.parseInt(p.getProperty("evaluatorPermanentFactor"));
-		evaluatorCreatureFactor = Integer.parseInt(p.getProperty("evaluatorCreatureFactor"));
-		evaluatorHandFactor = Integer.parseInt(p.getProperty("evaluatorHandFactor"));
-		maxThinkSeconds = Integer.parseInt(p.getProperty("maxThinkSeconds"));
+		return null;
 	}
 
 }
+

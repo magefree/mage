@@ -8,13 +8,7 @@ package mage.player.ai;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mage.Constants.CardType;
-import mage.Constants.Zone;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.mana.ManaAbility;
+
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.player.ai.ma.ArtificialScoringSystem;
@@ -28,9 +22,9 @@ import mage.util.Logging;
  * this evaluator is only good for two player games
  *
  */
-public class GameStateEvaluator {
+public class GameStateEvaluator2 {
 
-	private final static transient Logger logger = Logging.getLogger(GameStateEvaluator.class.getName());
+	private final static transient Logger logger = Logging.getLogger(GameStateEvaluator2.class.getName());
 
 	static {
 		logger.setLevel(Level.ALL);
@@ -40,10 +34,10 @@ public class GameStateEvaluator {
 	public static final int LOSE_GAME_SCORE = -WIN_GAME_SCORE;
 
 
-	private static final int LIFE_FACTOR = Config.evaluatorLifeFactor;
-	private static final int PERMANENT_FACTOR = Config.evaluatorPermanentFactor;
-	private static final int CREATURE_FACTOR = Config.evaluatorCreatureFactor;
-	private static final int HAND_FACTOR = Config.evaluatorHandFactor;
+	private static final int LIFE_FACTOR = Config2.evaluatorLifeFactor;
+	private static final int PERMANENT_FACTOR = Config2.evaluatorPermanentFactor;
+	private static final int CREATURE_FACTOR = Config2.evaluatorCreatureFactor;
+	private static final int HAND_FACTOR = Config2.evaluatorHandFactor;
 
 	public static int evaluate(UUID playerId, Game game) {
 		Player player = game.getPlayer(playerId);

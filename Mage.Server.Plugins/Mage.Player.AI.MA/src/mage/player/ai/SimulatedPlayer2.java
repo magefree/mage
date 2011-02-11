@@ -31,18 +31,13 @@ package mage.player.ai;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.mana.ManaOptions;
@@ -54,28 +49,27 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.target.Target;
-import mage.util.Copier;
 import mage.util.Logging;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
+public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
 
-	private final static transient Logger logger = Logging.getLogger(SimulatedPlayer.class.getName());
+	private final static transient Logger logger = Logging.getLogger(SimulatedPlayer2.class.getName());
 	private boolean isSimulatedPlayer;
 	private FilterAbility filter;
 	private transient ConcurrentLinkedQueue<Ability> allActions;
 	private static PassAbility pass = new PassAbility();
 
-	public SimulatedPlayer(UUID id, boolean isSimulatedPlayer) {
+	public SimulatedPlayer2(UUID id, boolean isSimulatedPlayer) {
 		super(id);
 		pass.setControllerId(playerId);
 		this.isSimulatedPlayer = isSimulatedPlayer;
 	}
 
-	public SimulatedPlayer(final SimulatedPlayer player) {
+	public SimulatedPlayer2(final SimulatedPlayer2 player) {
 		super(player);
 		this.isSimulatedPlayer = player.isSimulatedPlayer;
 		if (player.filter != null)
@@ -83,8 +77,8 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 	}
 
 	@Override
-	public SimulatedPlayer copy() {
-		return new SimulatedPlayer(this);
+	public SimulatedPlayer2 copy() {
+		return new SimulatedPlayer2(this);
 	}
 
 	public List<Ability> simulatePriority(Game game, FilterAbility filter) {
@@ -213,7 +207,7 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 			game.getPlayers().resetPassed();
 		}
 		else {
-			SimulationNode parent = (SimulationNode) game.getCustomData();
+			SimulationNode2 parent = (SimulationNode2) game.getCustomData();
 			int depth = parent.getDepth() - 1;
 			if (depth == 0) return true;
 			logger.fine("simulating -- triggered ability - adding children:" + options.size());
@@ -224,13 +218,13 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 		return true;
 	}
 
-	protected void addAbilityNode(SimulationNode parent, Ability ability, int depth, Game game) {
+	protected void addAbilityNode(SimulationNode2 parent, Ability ability, int depth, Game game) {
 		Game sim = game.copy();
 		sim.getStack().push(new StackAbility(ability, playerId));
 		ability.activate(sim, false);
 		sim.applyEffects();
-		SimulationNode newNode = new SimulationNode(sim, depth, playerId);
-		logger.fine("simulating -- node #:" + SimulationNode.getCount() + " triggered ability option");
+		SimulationNode2 newNode = new SimulationNode2(sim, depth, playerId);
+		logger.fine("simulating -- node #:" + SimulationNode2.getCount() + " triggered ability option");
 		for (Target target: ability.getTargets()) {
 			for (UUID targetId: target.getTargets()) {
 				newNode.getTargets().add(targetId);
