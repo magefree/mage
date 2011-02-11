@@ -26,51 +26,23 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.game.tournament;
+package mage.tournament;
 
-import java.io.Serializable;
+import mage.game.tournament.TournamentType;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TournamentType <T extends TournamentType<T>> implements Serializable {
+public class SealedEliminationTournamentType extends TournamentType<SealedEliminationTournamentType> {
 
-	protected String name;
-	protected int minPlayers;
-	protected int maxPlayers;
-	protected int numBoosters;
-	protected boolean draft;
-	protected boolean limited;
-
-	protected TournamentType() {}
-
-	@Override
-	public String toString() {
-		return name;
+	public SealedEliminationTournamentType() {
+		this.name = "Sealed Elimination";
+		this.maxPlayers = 16;
+		this.minPlayers = 4;
+		this.numBoosters = 6;
+		this.draft = false;
+		this.limited = true;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public int getMinPlayers() {
-		return minPlayers;
-	}
-
-	public int getMaxPlayers() {
-		return maxPlayers;
-	}
-
-	public int getNumBoosters() {
-		return numBoosters;
-	}
-
-	public boolean isDraft() {
-		return draft;
-	}
-
-	public boolean isLimited() {
-		return limited;
-	}
 }

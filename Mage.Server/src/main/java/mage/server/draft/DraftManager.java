@@ -76,11 +76,11 @@ public class DraftManager {
 		draftControllers.get(draftId).kill(sessionId);
 	}
 
-	void timeout(UUID gameId, UUID sessionId) {
+	public void timeout(UUID gameId, UUID sessionId) {
 		draftControllers.get(gameId).timeout(sessionId);
 	}
 
-	void removeDraft(UUID draftId) {
+	public void removeDraft(UUID draftId) {
 		draftControllers.remove(draftId);
 	}
 

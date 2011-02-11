@@ -38,8 +38,12 @@ import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mage.cards.Card;
+import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
 import mage.game.events.Listener;
+import mage.game.events.PlayerQueryEvent;
+import mage.game.events.PlayerQueryEventSource;
 import mage.game.events.TableEvent;
 import mage.game.events.TableEvent.EventType;
 import mage.game.events.TableEventSource;
@@ -60,6 +64,7 @@ public abstract class TournamentImpl implements Tournament {
 	protected TournamentOptions options;
 
 	protected transient TableEventSource tableEventSource = new TableEventSource();
+	protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
 
 	public TournamentImpl(TournamentOptions options) {
 		this.options = options;
@@ -78,6 +83,13 @@ public abstract class TournamentImpl implements Tournament {
 	@Override
 	public TournamentPlayer getPlayer(UUID playerId) {
 		return players.get(playerId);
+	}
+
+	@Override
+	public void autoSubmit(UUID playerId, Deck deck) {
+		if (players.containsKey(playerId)) {
+			players.get(playerId).submitDeck(deck);
+		}
 	}
 
 	@Override
@@ -195,13 +207,45 @@ public abstract class TournamentImpl implements Tournament {
 		tableEventSource.addListener(listener);
 	}
 
+	@Override
+	public void fireSubmitDeckEvent(UUID playerId, Deck deck) {
+		tableEventSource.fireTableEvent(EventType.SUBMIT_DECK, playerId, deck);
+	}
+
+	@Override
+	public void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener) {
+		playerQueryEventSource.addListener(listener);
+	}
+
+	@Override
+	public void fireConstructEvent(UUID playerId, Deck deck) {
+		TournamentPlayer player = players.get(playerId);
+		playerQueryEventSource.construct(playerId, "Construct", deck, 600);
+	}
+
 	public void construct() {
-		tableEventSource.fireTableEvent(EventType.CONSTRUCT);
+		for (TournamentPlayer player: players.values()) {
+			player.setConstructing();
+			player.getPlayer().construct(this, player.getDeck());
+		}
 		synchronized(this) {
 			while (!isDoneConstructing()) {
 				try {
 					this.wait();
 				} catch (InterruptedException ex) { }
+			}
+		}
+		nextStep();
+	}
+
+	protected void openBoosters() {
+		for (TournamentPlayer player: this.players.values()) {
+			player.setDeck(new Deck());
+			for (ExpansionSet set: options.limitedOptions.getSets()) {
+				List<Card> booster = set.createBooster();
+				for (Card card: booster) {
+					player.getDeck().getSideboard().add(card);
+				}
 			}
 		}
 		nextStep();

@@ -11,7 +11,7 @@
 	
 	<artifactId>Mage-Server-Plugins</artifactId>
 	<packaging>pom</packaging>
-	<name>Mage Server Plugins</name>	
+	<name>Mage Server Plugins</name>
 	<description>Mage Server Plugins POM</description>
 
 	<modules>
@@ -24,6 +24,7 @@
 		<module>Mage.Player.AI.MA</module>
 		<module>Mage.Player.Human</module>
 		<module>Mage.Tournament.BoosterDraft</module>
-  </modules>
+		<module>Mage.Tournament.Sealed</module>
+	</modules>
 	
 </project>

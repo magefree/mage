@@ -81,6 +81,7 @@ import mage.game.Game;
 import mage.game.Table;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
+import mage.game.tournament.Tournament;
 import mage.player.ai.utils.RateCard;
 import mage.players.Player;
 import mage.players.PlayerImpl;
@@ -774,7 +775,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	@Override
-	public void construct(Table table, Deck deck) {
+	public void construct(Tournament tournament, Deck deck) {
 		//TODO: improve this
 		if (deck.getCards().size() < 40) {
 			while (deck.getCards().size() < 40) {
@@ -783,7 +784,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				deck.getSideboard().remove(card);
 			}
 		}
-		table.fireSubmitDeckEvent(playerId, deck);
+		tournament.submitDeck(playerId, deck);
 	}
 
 	@Override

@@ -58,6 +58,7 @@ import mage.filter.common.FilterCreatureForCombat;
 import mage.game.Game;
 import mage.game.Table;
 import mage.game.permanent.Permanent;
+import mage.game.tournament.Tournament;
 import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
@@ -486,8 +487,8 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	}
 
 	@Override
-	public void construct(Table table, Deck deck) {
-		table.fireConstructEvent(playerId, deck);
+	public void construct(Tournament tournament, Deck deck) {
+		tournament.fireConstructEvent(playerId, deck);
 	}
 
 	@Override

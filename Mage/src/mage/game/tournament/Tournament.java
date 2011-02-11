@@ -32,6 +32,7 @@ import java.util.Collection;
 import java.util.UUID;
 import mage.cards.decks.Deck;
 import mage.game.events.Listener;
+import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
 import mage.players.Player;
 
@@ -47,11 +48,15 @@ public interface Tournament {
 	public Collection<TournamentPlayer> getPlayers();
 	public Collection<Round> getRounds();
 	public void submitDeck(UUID playerId, Deck deck);
+	public void autoSubmit(UUID playerId, Deck deck);
 	public boolean allJoined();
 	public boolean isDoneConstructing();
 	public void leave(UUID playerId);
 	public void nextStep();
 
 	public void addTableEventListener(Listener<TableEvent> listener);
-
+	public void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener);
+	public void fireConstructEvent(UUID playerId, Deck deck);
+	public void fireSubmitDeckEvent(UUID playerId, Deck deck);
+	
 }

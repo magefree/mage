@@ -29,48 +29,20 @@
 package mage.game.tournament;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import mage.cards.ExpansionSet;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TournamentType <T extends TournamentType<T>> implements Serializable {
+public class LimitedOptions implements Serializable {
 
-	protected String name;
-	protected int minPlayers;
-	protected int maxPlayers;
-	protected int numBoosters;
-	protected boolean draft;
-	protected boolean limited;
+	protected List<ExpansionSet> sets = new ArrayList<ExpansionSet>();
 
-	protected TournamentType() {}
-
-	@Override
-	public String toString() {
-		return name;
+	public List<ExpansionSet> getSets() {
+		return sets;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public int getMinPlayers() {
-		return minPlayers;
-	}
-
-	public int getMaxPlayers() {
-		return maxPlayers;
-	}
-
-	public int getNumBoosters() {
-		return numBoosters;
-	}
-
-	public boolean isDraft() {
-		return draft;
-	}
-
-	public boolean isLimited() {
-		return limited;
-	}
 }

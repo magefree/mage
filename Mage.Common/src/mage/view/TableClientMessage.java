@@ -43,10 +43,12 @@ public class TableClientMessage implements Serializable {
 	private UUID tableId;
 	private UUID gameId;
 	private UUID playerId;
+	private int time;
 
-	public TableClientMessage(Deck deck, UUID tableId) {
+	public TableClientMessage(Deck deck, UUID tableId, int time) {
 		this.deck = deck;
 		this.tableId = tableId;
+		this.time = time;
 	}
 
 	public TableClientMessage(UUID gameId, UUID playerId) {
@@ -68,5 +70,9 @@ public class TableClientMessage implements Serializable {
 
 	public UUID getPlayerId() {
 		return playerId;
+	}
+
+	public int getTime() {
+		return time;
 	}
 }

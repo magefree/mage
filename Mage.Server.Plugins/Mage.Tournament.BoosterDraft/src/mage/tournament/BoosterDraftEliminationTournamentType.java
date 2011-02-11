@@ -42,6 +42,7 @@ public class BoosterDraftEliminationTournamentType extends TournamentType<Booste
 		this.minPlayers = 4;
 		this.numBoosters = 3;
 		this.draft = true;
+		this.limited = true;
 	}
 
 }

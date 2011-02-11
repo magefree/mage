@@ -30,12 +30,17 @@ package mage.server.tournament;
 
 import java.rmi.RemoteException;
 import java.util.UUID;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mage.cards.decks.Deck;
 import mage.game.tournament.Tournament;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.Session;
 import mage.server.SessionManager;
+import mage.server.util.ThreadExecutor;
 import mage.util.Logging;
 import mage.view.TournamentView;
 
@@ -48,13 +53,18 @@ public class TournamentSession {
 
 	protected UUID sessionId;
 	protected UUID playerId;
+	protected UUID tableId;
 	protected Tournament tournament;
 	protected boolean killed = false;
 
-	public TournamentSession(Tournament tournament, UUID sessionId, UUID playerId) {
+	private ScheduledFuture<?> futureTimeout;
+	protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
+
+	public TournamentSession(Tournament tournament, UUID sessionId, UUID tableId, UUID playerId) {
 		this.sessionId = sessionId;
 		this.tournament = tournament;
 		this.playerId = playerId;
+		this.tableId = tableId;
 	}
 
 	public boolean init(final TournamentView tournamentView) {
@@ -94,6 +104,20 @@ public class TournamentSession {
 		}
 	}
 
+	public void construct(Deck deck, int timeout) {
+		if (!killed) {
+			setupTimeout(timeout);
+			Session session = SessionManager.getInstance().getSession(sessionId);
+			if (session != null)
+				session.construct(deck, tableId, timeout);
+		}
+	}
+
+	public void submitDeck(Deck deck) {
+		cancelTimeout();
+		tournament.submitDeck(playerId, deck);
+	}
+
 	protected void handleRemoteException(RemoteException ex) {
 		logger.log(Level.SEVERE, null, ex);
 		TournamentManager.getInstance().kill(tournament.getId(), sessionId);
@@ -101,6 +125,27 @@ public class TournamentSession {
 
 	public void setKilled() {
 		killed = true;
+	}
+
+	private synchronized void setupTimeout(int seconds) {
+		cancelTimeout();
+		if (seconds > 0) {
+			futureTimeout = timeoutExecutor.schedule(
+				new Runnable() {
+					@Override
+					public void run() {
+						TournamentManager.getInstance().timeout(tournament.getId(), sessionId);
+					}
+				},
+				seconds, TimeUnit.SECONDS
+			);
+		}
+	}
+
+	private synchronized void cancelTimeout() {
+		if (futureTimeout != null) {
+			futureTimeout.cancel(false);
+		}
 	}
 
 }

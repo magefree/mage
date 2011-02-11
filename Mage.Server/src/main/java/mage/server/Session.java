@@ -102,12 +102,12 @@ public class Session {
 		fireCallback(new ClientCallback("startTournament", new TableClientMessage(tournamentId, playerId)));
 	}
 
-	public void sideboard(final Deck deck, final UUID tableId) {
-		fireCallback(new ClientCallback("sideboard", new TableClientMessage(deck, tableId)));
+	public void sideboard(final Deck deck, final UUID tableId, final int time) {
+		fireCallback(new ClientCallback("sideboard", new TableClientMessage(deck, tableId, time)));
 	}
 
-	public void construct(final Deck deck, final UUID tableId) {
-		fireCallback(new ClientCallback("construct", new TableClientMessage(deck, tableId)));
+	public void construct(final Deck deck, final UUID tableId, final int time) {
+		fireCallback(new ClientCallback("construct", new TableClientMessage(deck, tableId, time)));
 	}
 
 	public void watchGame(final UUID gameId) {

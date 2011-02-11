@@ -47,14 +47,14 @@ import mage.view.CardView;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mage.client.MagePane;
 import mage.client.cards.BigCard;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.dialog.AddLandDialog;
@@ -72,6 +72,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private boolean isShowCardInfo = false;
 	private UUID tableId;
 	private DeckEditorMode mode;
+	private int timeout;
+	private Timer countdown;
 
 
     /** Creates new form DeckEditorPanel */
@@ -87,9 +89,23 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		deckArea.setOpaque(false);
 	    jPanel1.setOpaque(false);
 	    jSplitPane1.setOpaque(false);
-    }
+ 		countdown = new Timer(1000,
+			new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if (--timeout > 0) {
+						setTimeout(Integer.toString(timeout));
+					}
+					else {
+						setTimeout("0");
+						countdown.stop();
+					}
+				}
+			}
+		);
+   }
 
-	public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId) {
+	public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
 		if (deck != null)
 			this.deck = deck;
 		this.tableId = tableId;
@@ -98,6 +114,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		switch (mode) {
 			case Limited:
 				this.btnAddLand.setVisible(true);
+				this.txtTimeRemaining.setVisible(true);
 			case Sideboard:
 				this.btnSubmit.setVisible(true);
 				this.cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
@@ -105,6 +122,12 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				this.btnImport.setVisible(false);
 				this.btnLoad.setVisible(false);
 				this.deckArea.showSideboard(false);
+				countdown.stop();
+				this.timeout = time;
+				setTimeout(Integer.toString(timeout));
+				if (timeout != 0) {
+					countdown.start();
+				}
 				break;
 			case Constructed:
 				this.btnSubmit.setVisible(false);
@@ -113,6 +136,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				this.btnImport.setVisible(true);
 				this.btnLoad.setVisible(true);
 				this.deckArea.showSideboard(true);
+				this.txtTimeRemaining.setVisible(false);
 				break;
 		}
 		init();
@@ -184,7 +208,11 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		}
 	}
 
-    private void initComponents() {
+	private void setTimeout(String text) {
+		this.txtTimeRemaining.setText(text);
+	}
+
+	private void initComponents() {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         cardSelector = new mage.client.deckeditor.CardSelector();
@@ -200,6 +228,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         btnImport = new javax.swing.JButton();
         btnSubmit = new javax.swing.JButton();
 		btnAddLand = new javax.swing.JButton();
+		txtTimeRemaining = new javax.swing.JTextField();
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setResizeWeight(0.5);
@@ -273,6 +302,11 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             }
         });
 
+        txtTimeRemaining.setEditable(false);
+        txtTimeRemaining.setForeground(java.awt.Color.red);
+        txtTimeRemaining.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtTimeRemaining.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
 		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -301,7 +335,11 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 						.addContainerGap()
                         .addComponent(btnAddLand)
 						.addContainerGap()
-						.addComponent(btnSubmit)))
+						.addComponent(btnSubmit))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtTimeRemaining))
+					)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -322,6 +360,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         .addComponent(btnImport)
 						.addComponent(btnAddLand)
                         .addComponent(btnSubmit))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtTimeRemaining))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, isShowCardInfo ? 30 : 159, Short.MAX_VALUE)
                 .addComponent(cardInfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -488,6 +529,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private JComponent cardInfoPane;
 	private javax.swing.JButton btnSubmit;
 	private javax.swing.JButton btnAddLand;
+	private javax.swing.JTextField txtTimeRemaining;
 }
 
 class DeckFilter extends FileFilter {

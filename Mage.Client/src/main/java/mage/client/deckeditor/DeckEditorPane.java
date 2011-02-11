@@ -73,12 +73,12 @@ public class DeckEditorPane extends MagePane {
         }
     }
 
-	public void show(DeckEditorMode mode, Deck deck, UUID tableId) {
+	public void show(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
 		if (deck != null)
 			this.setTitle("Deck Editor - " + deck.getName());
 		else
 			this.setTitle("Deck Editor");
-		this.deckEditorPanel1.showDeckEditor(mode, deck, tableId);
+		this.deckEditorPanel1.showDeckEditor(mode, deck, tableId, time);
 		this.repaint();
 	}
 

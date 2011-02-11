@@ -161,9 +161,9 @@ public class TableManager {
 		}
 	}
 
-	public void construct(UUID tableId) {
-		controllers.get(tableId).construct();
-	}
+//	public void construct(UUID tableId) {
+//		controllers.get(tableId).construct();
+//	}
 
 	public void addPlayer(UUID sessionId, UUID tableId, Player player, String playerType, Deck deck) throws GameException {
 		controllers.get(tableId).addPlayer(sessionId, player, playerType, deck);

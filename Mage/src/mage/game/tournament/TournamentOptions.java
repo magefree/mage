@@ -31,7 +31,6 @@ package mage.game.tournament;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import mage.game.draft.DraftOptions;
 import mage.game.match.MatchOptions;
 
 /**
@@ -44,7 +43,7 @@ public class TournamentOptions implements Serializable {
 	protected String tournamentType;
 	protected List<String> playerTypes = new ArrayList<String>();
 	protected MatchOptions matchOptions = new MatchOptions("", "Two Player Duel");
-	protected DraftOptions draftOptions = new DraftOptions();
+	protected LimitedOptions limitedOptions;
 
 	public TournamentOptions(String name) {
 		this.name = name;
@@ -70,8 +69,12 @@ public class TournamentOptions implements Serializable {
 		return matchOptions;
 	}
 
-	public DraftOptions getDraftOptions() {
-		return draftOptions;
+	public void setLimitedOptions(LimitedOptions limitedOptions) {
+		this.limitedOptions = limitedOptions;
+	}
+
+	public LimitedOptions getLimitedOptions() {
+		return limitedOptions;
 	}
 
 }

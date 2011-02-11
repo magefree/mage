@@ -15,6 +15,7 @@
 	</gameTypes>
 	<tournamentTypes>
 		<tournamentType name="Elimination Booster Draft" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftEliminationTournament" typeName="mage.tournament.BoosterDraftEliminationTournamentType"/>
+		<tournamentType name="Sealed Elimination" jar="mage-tournament-sealed.jar" className="mage.tournament.SealedEliminationTournament" typeName="mage.tournament.SealedEliminationTournamentType"/>
 	</tournamentTypes>
 	<deckTypes>
 		<deckType name="Constructed" jar="mage-deck-constructed.jar" className="mage.deck.Constructed"/>

@@ -9,20 +9,15 @@
         <artifactId>Mage-Server-Plugins</artifactId>
         <version>0.6</version>
     </parent>
-  
-    <artifactId>Mage-Player-AIMinimax</artifactId>
+
+    <artifactId>Mage-Tournament-Sealed</artifactId>
     <packaging>jar</packaging>
-    <name>Mage Player AI Minimax</name>
+    <name>Mage Tournament Sealed</name>    
 	
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Mage</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Player-AI</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
@@ -48,7 +43,7 @@
 
         </plugins>
     
-        <finalName>mage-player-aiminimax</finalName>
+        <finalName>mage-tournament-sealed</finalName>
     </build>
   
     <properties/>

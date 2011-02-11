@@ -36,6 +36,7 @@ import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbilities;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.cards.decks.Deck;
 
 /**
  *
@@ -44,7 +45,7 @@ import mage.cards.Cards;
 public class PlayerQueryEvent extends EventObject implements ExternalEvent, Serializable {
 
 	public enum QueryType {
-		ASK, CHOOSE, CHOOSE_ABILITY, PICK_TARGET, PICK_ABILITY, SELECT, PLAY_MANA, PLAY_X_MANA, AMOUNT, LOOK, PICK_CARD
+		ASK, CHOOSE, CHOOSE_ABILITY, PICK_TARGET, PICK_ABILITY, SELECT, PLAY_MANA, PLAY_X_MANA, AMOUNT, LOOK, PICK_CARD, CONSTRUCT
 	}
 
 	private String message;
@@ -58,6 +59,7 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 	private boolean required;
 	private int min;
 	private int max;
+	private Deck deck;
 	private Map<String, Serializable> options;
 
 	private PlayerQueryEvent(UUID playerId, String message, Collection<? extends Ability> abilities, Set<String> choices, Set<UUID> targets, Cards cards, QueryType queryType, int min, int max, boolean required, Map<String, Serializable> options) {
@@ -85,6 +87,15 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 		this.message = message;
 		this.playerId = playerId;
 		this.booster = booster;
+		this.max = time;
+	}
+
+	private PlayerQueryEvent(UUID playerId, String message, QueryType queryType, Deck deck, int time) {
+		super(playerId);
+		this.queryType = queryType;
+		this.message = message;
+		this.playerId = playerId;
+		this.deck = deck;
 		this.max = time;
 	}
 
@@ -139,6 +150,11 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 		return new PlayerQueryEvent(playerId, message, booster, QueryType.PICK_CARD, time);
 	}
 
+	public static PlayerQueryEvent construct(UUID playerId, String message, Deck deck, int time) {
+		return new PlayerQueryEvent(playerId, message, QueryType.CONSTRUCT, deck, time);
+	}
+
+
 	public String getMessage() {
 		return message;
 	}
@@ -181,6 +197,10 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 
 	public int getMax() {
 		return max;
+	}
+
+	public Deck getDeck() {
+		return deck;
 	}
 
 	public Map<String, Serializable> getOptions() {

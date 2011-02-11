@@ -33,10 +33,12 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mage.cards.decks.Deck;
 import mage.game.GameException;
 import mage.game.Table;
 import mage.game.draft.Draft;
 import mage.game.events.Listener;
+import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.Tournament;
@@ -64,6 +66,8 @@ public class TournamentController {
 	private ConcurrentHashMap<UUID, UUID> sessionPlayerMap = new ConcurrentHashMap<UUID, UUID>();
 	private ConcurrentHashMap<UUID, TournamentSession> tournamentSessions = new ConcurrentHashMap<UUID, TournamentSession>();
 
+	private static final int CONSTRUCT_TIME = 600;
+
 	public TournamentController(Tournament tournament, ConcurrentHashMap<UUID, UUID> sessionPlayerMap, UUID tableId) {
 		sessionId = UUID.randomUUID();
 		this.sessionPlayerMap = sessionPlayerMap;
@@ -83,14 +87,26 @@ public class TournamentController {
 							ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK);
 							logger.finest(tournament.getId() + " " + event.getMessage());
 							break;
-						case CONSTRUCT:
-							construct();
-							break;
 						case START_DRAFT:
 							startDraft(event.getDraft());
 							break;
 						case START_MATCH:
 							startMatch(event.getPair(), event.getMatchOptions());
+							break;
+						case SUBMIT_DECK:
+							submitDeck(event.getPlayerId(), event.getDeck());
+							break;
+					}
+				}
+			}
+		);
+		tournament.addPlayerQueryEventListener(
+			new Listener<PlayerQueryEvent> () {
+				@Override
+				public void event(PlayerQueryEvent event) {
+					switch (event.getQueryType()) {
+						case CONSTRUCT:
+							construct(event.getPlayerId(), event.getDeck(), event.getMax());
 							break;
 					}
 				}
@@ -108,7 +124,7 @@ public class TournamentController {
 
 	public synchronized void join(UUID sessionId) {
 		UUID playerId = sessionPlayerMap.get(sessionId);
-		TournamentSession tournamentSession = new TournamentSession(tournament, sessionId, playerId);
+		TournamentSession tournamentSession = new TournamentSession(tournament, sessionId, tableId, playerId);
 		tournamentSessions.put(playerId, tournamentSession);
 		TournamentPlayer player = tournament.getPlayer(playerId);
 		player.setJoined();
@@ -170,8 +186,21 @@ public class TournamentController {
 		TableManager.getInstance().startDraft(tableId, draft);
 	}
 
-	private void construct() {
-		TableManager.getInstance().construct(tableId);
+	private synchronized void construct(UUID sessionId, Deck deck, int timeout) {
+		if (tournamentSessions.containsKey(sessionId))
+			tournamentSessions.get(sessionId).construct(deck, timeout);
+	}
+
+
+	public void submitDeck(UUID sessionId, Deck deck) {
+		tournamentSessions.get(sessionPlayerMap.get(sessionId)).submitDeck(deck);
+	}
+
+	public void timeout(UUID sessionId) {
+		if (sessionPlayerMap.containsKey(sessionId)) {
+			TournamentPlayer player = tournament.getPlayer(sessionPlayerMap.get(sessionId));
+			tournament.autoSubmit(sessionPlayerMap.get(sessionId), player.getDeck());
+		}
 	}
 
 	public UUID getSessionId() {

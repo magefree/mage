@@ -153,10 +153,6 @@ public class Table implements Serializable {
 		state = TableState.SIDEBOARDING;
 	}
 
-	public void construct() {
-		state = TableState.CONSTRUCTING;
-	}
-
 	public String getName() {
 		return this.name;
 	}
@@ -175,6 +171,10 @@ public class Table implements Serializable {
 
 	public void addTableEventListener(Listener<TableEvent> listener) {
 		tableEventSource.addListener(listener);
+	}
+
+	public void initTournament() {
+		state = TableState.CONSTRUCTING;
 	}
 
 }

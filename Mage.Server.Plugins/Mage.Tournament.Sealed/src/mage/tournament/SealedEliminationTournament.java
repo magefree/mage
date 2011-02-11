@@ -1,16 +1,16 @@
 /*
  *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
- *
+ * 
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- *
+ * 
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- *
+ * 
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- *
+ * 
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,57 +20,58 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
+ * 
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.game.tournament;
+package mage.tournament;
 
-import java.io.Serializable;
+import mage.game.tournament.TournamentOptions;
+import mage.game.tournament.TournamentSingleElimination;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TournamentType <T extends TournamentType<T>> implements Serializable {
+public class SealedEliminationTournament extends TournamentSingleElimination {
 
-	protected String name;
-	protected int minPlayers;
-	protected int maxPlayers;
-	protected int numBoosters;
-	protected boolean draft;
-	protected boolean limited;
+	protected enum TournamentStep {
+		START, OPEN_BOOSTERS, CONSTRUCT, COMPETE, WINNERS
+	}
 
-	protected TournamentType() {}
+	protected TournamentStep currentStep;
+
+	public SealedEliminationTournament(TournamentOptions options) {
+		super(options);
+		currentStep = TournamentStep.START;
+	}
+
+	protected void winners() {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
 
 	@Override
-	public String toString() {
-		return name;
+	public void nextStep() {
+		switch (currentStep) {
+			case START:
+				currentStep = TournamentStep.OPEN_BOOSTERS;
+				openBoosters();
+				break;
+			case OPEN_BOOSTERS:
+				currentStep = TournamentStep.CONSTRUCT;
+				construct();
+				break;
+			case CONSTRUCT:
+				currentStep = TournamentStep.COMPETE;
+				runTournament();
+				break;
+			case COMPETE:
+				currentStep = TournamentStep.WINNERS;
+				winners();
+				break;
+		}
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public int getMinPlayers() {
-		return minPlayers;
-	}
-
-	public int getMaxPlayers() {
-		return maxPlayers;
-	}
-
-	public int getNumBoosters() {
-		return numBoosters;
-	}
-
-	public boolean isDraft() {
-		return draft;
-	}
-
-	public boolean isLimited() {
-		return limited;
-	}
 }

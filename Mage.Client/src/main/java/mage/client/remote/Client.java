@@ -169,11 +169,11 @@ public class Client implements CallbackClient {
 					}
 					else if (callback.getMethod().equals("sideboard")) {
 						TableClientMessage message = (TableClientMessage) callback.getData();
-						sideboard(message.getDeck(), message.getTableId());
+						sideboard(message.getDeck(), message.getTableId(), message.getTime());
 					}
 					else if (callback.getMethod().equals("construct")) {
 						TableClientMessage message = (TableClientMessage) callback.getData();
-						construct(message.getDeck(), message.getTableId());
+						construct(message.getDeck(), message.getTableId(), message.getTime());
 					}
 					else if (callback.getMethod().equals("draftOver")) {
 						session.getDraft().hideDraft();
@@ -266,12 +266,12 @@ public class Client implements CallbackClient {
 		}
 	}
 
-	protected void sideboard(Deck deck, UUID tableId) {
-		frame.showDeckEditor(DeckEditorMode.Sideboard, deck, tableId);
+	protected void sideboard(Deck deck, UUID tableId, int time) {
+		frame.showDeckEditor(DeckEditorMode.Sideboard, deck, tableId, time);
 	}
 
-	protected void construct(Deck deck, UUID tableId) {
-		frame.showDeckEditor(DeckEditorMode.Limited, deck, tableId);
+	protected void construct(Deck deck, UUID tableId, int time) {
+		frame.showDeckEditor(DeckEditorMode.Limited, deck, tableId, time);
 	}
 
 	private void handleException(Exception ex) {

@@ -35,6 +35,7 @@ import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbilities;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.cards.decks.Deck;
 
 /**
  *
@@ -99,6 +100,10 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
 
 	public void pickCard(UUID playerId, String message, List<Card> booster, int time) {
 		dispatcher.fireEvent(PlayerQueryEvent.pickCard(playerId, message, booster, time));
+	}
+
+	public void construct(UUID playerId, String message, Deck deck, int time) {
+		dispatcher.fireEvent(PlayerQueryEvent.construct(playerId, message, deck, time));
 	}
 
 }

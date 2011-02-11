@@ -29,18 +29,15 @@
 package mage.game.draft;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import mage.cards.ExpansionSet;
+import mage.game.tournament.LimitedOptions;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DraftOptions implements Serializable {
+public class DraftOptions extends LimitedOptions implements Serializable {
 
 	protected String draftType;
-	protected List<ExpansionSet> sets = new ArrayList<ExpansionSet>();
 	protected TimingOption timing;
 
 	public enum TimingOption {
@@ -57,10 +54,6 @@ public class DraftOptions implements Serializable {
 		public int getFactor() {
 			return this.factor;
 		}
-	}
-
-	public List<ExpansionSet> getSets() {
-		return sets;
 	}
 
 	public String getDraftType() {

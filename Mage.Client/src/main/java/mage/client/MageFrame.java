@@ -627,7 +627,7 @@ public class MageFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeckEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeckEditorActionPerformed
-		showDeckEditor(DeckEditorMode.Constructed, null, null);
+		showDeckEditor(DeckEditorMode.Constructed, null, null, 0);
     }//GEN-LAST:event_btnDeckEditorActionPerformed
 
     private void btnCollectionViewerActionPerformed(java.awt.event.ActionEvent evt) {
@@ -685,10 +685,10 @@ public class MageFrame extends javax.swing.JFrame {
         btnDeckEditor.setEnabled(true);
     }
 
-    public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId) {
+    public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
         this.deckEditorPane.setVisible(true);
 		this.deckEditorPane.toFront();
-        this.deckEditorPane.show(mode, deck, tableId);
+        this.deckEditorPane.show(mode, deck, tableId, time);
     }
 
     public void showCollectionViewer() {

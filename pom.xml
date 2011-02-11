@@ -25,12 +25,7 @@
     <repositories>
         <repository>
             <id>mage.googlecode.com</id>
-            <url>http://magic--another-game-engine.googlecode.com/svn/trunk/repository</url>
-        </repository>
-        <repository>
-            <id>java-image-scaling</id>
-            <name>Java Image Scaling Repository Released</name>
-            <url>svn:https://java-image-scaling.googlecode.com/svn/repo/released</url>
+            <url>http://mage.googlecode.com/svn/trunk/repository</url>
         </repository>
         <repository>
             <id>jetlang.googlecode.com</id>

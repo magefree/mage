@@ -175,7 +175,6 @@ public class DraftController {
 
 	public void timeout(UUID sessionId) {
 		if (sessionPlayerMap.containsKey(sessionId)) {
-//			ChatManager.getInstance().broadcast(chatId, "", draft.getPlayer(sessionPlayerMap.get(sessionId)).getPlayer().getName() + " has timed out.  Auto picking.", MessageColor.BLACK);
 			draft.autoPick(sessionPlayerMap.get(sessionId));
 		}
 	}

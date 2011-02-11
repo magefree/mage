@@ -30,6 +30,7 @@ package mage.server.tournament;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import mage.cards.decks.Deck;
 import mage.game.tournament.Tournament;
 import mage.view.TournamentView;
 
@@ -59,6 +60,14 @@ public class TournamentManager {
 
 	public void kill(UUID tournamentId, UUID sessionId) {
 		controllers.get(tournamentId).kill(sessionId);
+	}
+
+	public void timeout(UUID tournamentId, UUID sessionId) {
+		controllers.get(tournamentId).timeout(sessionId);
+	}
+
+	public void submitDeck(UUID tournamentId, UUID sessionId, Deck deck) {
+		controllers.get(tournamentId).submitDeck(sessionId, deck);
 	}
 
 	public TournamentView getTournamentView(UUID tournamentId) {

@@ -43,6 +43,7 @@ public class TournamentTypeView implements Serializable {
 	private int maxPlayers;
 	private int numBoosters;
 	private boolean draft;
+	private boolean limited;
 
 	public TournamentTypeView(TournamentType tournamentType) {
 		this.name = tournamentType.getName();
@@ -50,6 +51,7 @@ public class TournamentTypeView implements Serializable {
 		this.maxPlayers = tournamentType.getMaxPlayers();
 		this.numBoosters = tournamentType.getNumBoosters();
 		this.draft = tournamentType.isDraft();
+		this.limited = tournamentType.isLimited();
 	}
 
 	@Override
@@ -75,5 +77,9 @@ public class TournamentTypeView implements Serializable {
 
 	public boolean isDraft() {
 		return draft;
+	}
+
+	public boolean isLimited() {
+		return limited;
 	}
 }

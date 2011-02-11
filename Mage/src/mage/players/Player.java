@@ -57,6 +57,7 @@ import mage.game.Game;
 import mage.game.Table;
 import mage.game.draft.Draft;
 import mage.game.permanent.Permanent;
+import mage.game.tournament.Tournament;
 import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
@@ -154,7 +155,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public abstract void assignDamage(int damage, List<UUID> targets, UUID sourceId, Game game);
 	public abstract int getAmount(int min, int max, String message, Game game);
 	public abstract void sideboard(Table table, Deck deck);
-	public abstract void construct(Table table, Deck deck);
+	public abstract void construct(Tournament tournament, Deck deck);
 	public abstract void pickCard(List<Card> cards, Deck deck, Draft draft);
 	
 	public void declareAttacker(UUID attackerId, UUID defenderId, Game game);

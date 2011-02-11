@@ -90,7 +90,7 @@
         </dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>Mage-Draft-8PlayerBooster</artifactId>
+			<artifactId>Mage-Tournament-BoosterDraft</artifactId>
 			<version>${project.version}</version>
 			<scope>runtime</scope>
 		</dependency>
