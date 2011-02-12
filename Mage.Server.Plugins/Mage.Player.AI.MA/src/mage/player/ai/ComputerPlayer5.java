@@ -171,7 +171,7 @@ public class ComputerPlayer5 extends ComputerPlayer4 implements Player {
 	}
 
 	protected void calculatePreCombatActions(Game game) {
-		if (!getNextAction(game)) {
+		//if (!getNextAction(game)) {
 			currentScore = GameStateEvaluator2.evaluate(playerId, game);
 			Game sim = createSimulation(game);
 			SimulationNode2.resetCount();
@@ -184,7 +184,7 @@ public class ComputerPlayer5 extends ComputerPlayer4 implements Player {
 				actions = new LinkedList<Ability>(root.abilities);
 				combat = root.combat;
 			}
-		}
+		//}
 	}
 
 	protected void calculatePostCombatActions(Game game) {
@@ -406,11 +406,14 @@ public class ComputerPlayer5 extends ComputerPlayer4 implements Player {
 					break;
 				}
 				Game sim = game.copy();
-				for (CombatGroup group: engagement.getGroups()) {
-					UUID attackerId = group.getAttackers().get(0);
-					for (UUID blockerId: group.getBlockers()) {
-						sim.getPlayer(defenderId).declareBlocker(blockerId, attackerId, sim);
+				for (CombatGroup group : engagement.getGroups()) {
+					if (group.getAttackers().size() > 0) {
+						UUID attackerId = group.getAttackers().get(0);
+						for (UUID blockerId : group.getBlockers()) {
+							sim.getPlayer(defenderId).declareBlocker(blockerId, attackerId, sim);
+						}
 					}
+
 				}
 				sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, playerId, playerId));
 				SimulationNode2 newNode = new SimulationNode2(sim, depth, defenderId);

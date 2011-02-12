@@ -299,14 +299,14 @@ public class ComputerPlayer4 extends ComputerPlayer<ComputerPlayer4> implements 
 		});
 		pool.execute(task);
 		try {
-			task.get(Config2.maxThinkSeconds, TimeUnit.SECONDS);
+			task.get(Config2.maxThinkSeconds, TimeUnit.MINUTES);
 		} catch (TimeoutException e) {
 			logger.info("simulating - timed out");
 			task.cancel(true);
 		} catch (ExecutionException e) {
-
+			e.printStackTrace();
 		} catch (InterruptedException e) {
-
+			e.printStackTrace();
 		}
 	}
 
