@@ -64,6 +64,7 @@ public class CardView implements Serializable {
 	protected List<String> superTypes;
 	protected ObjectColor color;
 	protected List<String> manaCost;
+	protected int convertedManaCost;
 	protected String art;
 	protected Rarity rarity;
 	protected String expansionSetCode;
@@ -91,6 +92,7 @@ public class CardView implements Serializable {
 		this.superTypes = card.getSupertype();
 		this.color = card.getColor();
 		this.manaCost = card.getManaCost().getSymbols();
+		this.convertedManaCost = card.getManaCost().convertedManaCost();
 		if (card instanceof PermanentToken) {
 			this.art = "";
 			this.rarity = Rarity.NA;
@@ -207,6 +209,10 @@ public class CardView implements Serializable {
 
 	public List<String> getManaCost() {
 		return manaCost;
+	}
+
+	public int getConvertedManaCost() {
+		return convertedManaCost;
 	}
 
 	public String getArt() {

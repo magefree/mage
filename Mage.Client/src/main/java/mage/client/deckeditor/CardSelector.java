@@ -45,6 +45,7 @@ import mage.cards.ExpansionSet;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardGrid;
 import mage.client.cards.CardsStorage;
+import mage.client.constants.Constants.SortBy;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.sets.Sets;
@@ -68,13 +69,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 	    cardGrid.setOpaque(false);
 	    jScrollPane1.setOpaque(false);
 	    jScrollPane1.getViewport().setOpaque(false);
+		cbSortBy.setModel(new DefaultComboBoxModel(SortBy.values()));
     }
 
 	public void loadCards(List<Card> sideboard, BigCard bigCard, boolean construct) {
 		this.bigCard = bigCard;
 		this.btnBooster.setVisible(false);
 		this.btnClear.setVisible(false);
-		this.btnAddLand.setVisible(construct);
 		this.cbExpansionSet.setVisible(false);
 		this.cards.clear();
 		for (Card card: sideboard) {
@@ -88,7 +89,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		this.bigCard = bigCard;
 		this.btnBooster.setVisible(true);
 		this.btnClear.setVisible(true);
-		this.btnAddLand.setVisible(false);
 		this.cbExpansionSet.setVisible(true);
 		Object[] l = Sets.getInstance().values().toArray();
 		Arrays.sort(l, new Comparator<Object>() {
@@ -142,7 +142,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 						filteredCards.add(card);
 				}
 			}
-			this.cardGrid.loadCards(new CardsView(filteredCards), bigCard, null);
+			this.cardGrid.loadCards(new CardsView(filteredCards), (SortBy) cbSortBy.getSelectedItem(), bigCard, null);
 		}
 		finally {
 			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -188,7 +188,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         cbExpansionSet = new javax.swing.JComboBox();
         btnBooster = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
-        btnAddLand = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         cardGrid = new mage.client.cards.CardGrid();
         tbTypes = new javax.swing.JToolBar();
@@ -199,6 +198,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         rdoInstants = new javax.swing.JRadioButton();
         rdoSorceries = new javax.swing.JRadioButton();
         rdoPlaneswalkers = new javax.swing.JRadioButton();
+        cbSortBy = new javax.swing.JComboBox();
 
         tbColor.setFloatable(false);
         tbColor.setRollover(true);
@@ -305,17 +305,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbColor.add(btnClear);
 
-        btnAddLand.setText("Add Land");
-        btnAddLand.setFocusable(false);
-        btnAddLand.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnAddLand.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnAddLand.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddLandActionPerformed(evt);
-            }
-        });
-        tbColor.add(btnAddLand);
-
         jScrollPane1.setViewportView(cardGrid);
 
         tbTypes.setFloatable(false);
@@ -404,6 +393,14 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
         tbTypes.add(rdoPlaneswalkers);
+
+        cbSortBy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbSortBy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSortByActionPerformed(evt);
+            }
+        });
+        tbTypes.add(cbSortBy);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -531,17 +528,18 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		filterCards();
 	}//GEN-LAST:event_btnBoosterActionPerformed
 
-	private void btnAddLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLandActionPerformed
-		 
-	}//GEN-LAST:event_btnAddLandActionPerformed
+	private void cbSortByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSortByActionPerformed
+		if (cbSortBy.getSelectedItem() instanceof SortBy)
+			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem());
+	}//GEN-LAST:event_cbSortByActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddLand;
     private javax.swing.JButton btnBooster;
     private javax.swing.JButton btnClear;
     private mage.client.cards.CardGrid cardGrid;
     private javax.swing.JComboBox cbExpansionSet;
+    private javax.swing.JComboBox cbSortBy;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton rdoArtifacts;
     private javax.swing.JRadioButton rdoBlack;
@@ -562,22 +560,26 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
 	@Override
 	public void componentResized(ComponentEvent e) {
-		this.cardGrid.drawCards();
+		if (cbSortBy.getSelectedItem() instanceof SortBy)
+			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem());
 	}
 
 	@Override
 	public void componentMoved(ComponentEvent e) {
-		this.cardGrid.drawCards();
+		if (cbSortBy.getSelectedItem() instanceof SortBy)
+			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem());
 	}
 
 	@Override
 	public void componentShown(ComponentEvent e) {
-		this.cardGrid.drawCards();
+		if (cbSortBy.getSelectedItem() instanceof SortBy)
+			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem());
 	}
 
 	@Override
 	public void componentHidden(ComponentEvent e) {
-		this.cardGrid.drawCards();
+		if (cbSortBy.getSelectedItem() instanceof SortBy)
+			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem());
 	}
 
 }

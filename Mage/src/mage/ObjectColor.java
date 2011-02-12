@@ -31,7 +31,7 @@ package mage;
 import java.io.Serializable;
 import mage.util.Copyable;
 
-public class ObjectColor implements Serializable, Copyable<ObjectColor> {
+public class ObjectColor implements Serializable, Copyable<ObjectColor>, Comparable<ObjectColor> {
 
 	public static final ObjectColor WHITE = new ObjectColor("W");
 	public static final ObjectColor BLUE = new ObjectColor("U");
@@ -243,6 +243,42 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor> {
 		System.out.println(new ObjectColor("G").shares(new ObjectColor("B")));
 		System.out.println(new ObjectColor("W").shares(new ObjectColor("1")));
 
+	}
+
+	@Override
+	public int compareTo(ObjectColor o) {
+		int o1 = 0;
+		int o2 = 0;
+
+		if (this.isMulticolored())
+			o1 = 6;
+		else if(this.isColorless())
+			o1 = 0;
+		else if(this.isBlack())
+			o1 = 1;
+		else if(this.isBlue())
+			o1 = 2;
+		else if(this.isGreen())
+			o1 = 3;
+		else if(this.isRed())
+			o1 = 4;
+		else if(this.isWhite())
+			o1 = 5;
+		if (o.isMulticolored())
+			o2 = 6;
+		else if(o.isColorless())
+			o2 = 0;
+		else if(o.isBlack())
+			o2 = 1;
+		else if(o.isBlue())
+			o2 = 2;
+		else if(o.isGreen())
+			o2 = 3;
+		else if(o.isRed())
+			o2 = 4;
+		else if(o.isWhite())
+			o2 = 5;
+		return o1 - o2;
 	}
 	
 }

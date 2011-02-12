@@ -92,4 +92,23 @@ public final class Constants {
 		Sideboard
 	}
 
+	public enum SortBy {
+		CASTING_COST ("Casting Cost"),
+		RARITY ("Rarity"),
+		COLOR ("Color"),
+		NAME ("Name"),
+		UNSORTED ("Unsorted");
+
+		private String text;
+
+		SortBy(String text) {
+			this.text = text;
+		}
+
+		@Override
+		public String toString() {
+			return text;
+		}
+	}
+
 }

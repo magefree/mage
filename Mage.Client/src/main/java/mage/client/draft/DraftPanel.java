@@ -40,6 +40,7 @@ import java.awt.event.ActionListener;
 import java.util.UUID;
 import javax.swing.Timer;
 import mage.client.MageFrame;
+import mage.client.constants.Constants.SortBy;
 import mage.client.remote.Session;
 import mage.client.util.Event;
 import mage.client.util.Listener;
@@ -97,7 +98,7 @@ public class DraftPanel extends javax.swing.JPanel {
 
 	public void loadBooster(DraftPickView draftPickView) {
 		draftBooster.loadBooster(draftPickView.getBooster(), bigCard);
-		draftPicks.loadCards(draftPickView.getPicks(), bigCard, null);
+		draftPicks.loadCards(draftPickView.getPicks(), SortBy.NAME, bigCard, null);
 		this.draftBooster.clearCardEventListeners();
 		this.draftBooster.addCardEventListener(
 			new Listener<Event> () {
@@ -107,7 +108,7 @@ public class DraftPanel extends javax.swing.JPanel {
 						DraftPickView view = session.sendCardPick(draftId, (UUID)event.getSource());
 						if (view != null) {
 							draftBooster.loadBooster(view.getBooster(), bigCard);
-							draftPicks.loadCards(view.getPicks(), bigCard, null);
+							draftPicks.loadCards(view.getPicks(), SortBy.NAME, bigCard, null);
 							setMessage("Waiting for other players");
 						}
 					}

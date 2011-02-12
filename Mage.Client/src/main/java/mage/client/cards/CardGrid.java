@@ -50,6 +50,7 @@ import java.util.UUID;
 import java.util.Map.Entry;
 
 import mage.cards.MageCard;
+import mage.client.constants.Constants.SortBy;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
 import mage.client.util.Event;
@@ -74,7 +75,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
         setOpaque(false);
     }
 
-	public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
+	public void loadCards(CardsView showCards, SortBy sortBy, BigCard bigCard, UUID gameId) {
 		this.bigCard = bigCard;
 		this.gameId = gameId;
 		for (CardView card: showCards.values()) {
@@ -89,7 +90,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
 				i.remove();
 			}
 		}
-		drawCards();
+		drawCards(sortBy);
 		this.setVisible(true);
 	}
 	
@@ -105,7 +106,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
 		cards.put(card.getId(), cardImg);
 	}
 
-	public void drawCards() {
+	public void drawCards(SortBy sortBy) {
 		int maxWidth = this.getParent().getWidth();
 		int numColumns = maxWidth / Config.dimensions.frameWidth;
 		int curColumn = 0;
@@ -113,7 +114,20 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
 		if (cards.size() > 0) {
 			Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 			List<MageCard> sortedCards = new ArrayList<MageCard>(cards.values());
-			Collections.sort(sortedCards, new CardComparator());
+			switch (sortBy) {
+				case NAME:
+					Collections.sort(sortedCards, new CardNameComparator());
+					break;
+				case RARITY:
+					Collections.sort(sortedCards, new CardRarityComparator());
+					break;
+				case COLOR:
+					Collections.sort(sortedCards, new CardColorComparator());
+					break;
+				case CASTING_COST:
+					Collections.sort(sortedCards, new CardCostComparator());
+					break;
+			}
 			for (MageCard cardImg: sortedCards) {
 				rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
 				cardImg.setBounds(rectangle);
@@ -229,11 +243,38 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
 	}
 }
 
-class CardComparator implements Comparator<MageCard> {
+class CardNameComparator implements Comparator<MageCard> {
 
 	@Override
 	public int compare(MageCard o1, MageCard o2) {
 		return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
+	}
+
+}
+
+class CardRarityComparator implements Comparator<MageCard> {
+
+	@Override
+	public int compare(MageCard o1, MageCard o2) {
+		return o1.getOriginal().getRarity().compareTo(o2.getOriginal().getRarity());
+	}
+
+}
+
+class CardCostComparator implements Comparator<MageCard> {
+
+	@Override
+	public int compare(MageCard o1, MageCard o2) {
+		return Integer.valueOf(o1.getOriginal().getConvertedManaCost()).compareTo(Integer.valueOf(o2.getOriginal().getConvertedManaCost()));
+	}
+
+}
+
+class CardColorComparator implements Comparator<MageCard> {
+
+	@Override
+	public int compare(MageCard o1, MageCard o2) {
+		return o1.getOriginal().getColor().compareTo(o2.getOriginal().getColor());
 	}
 
 }
