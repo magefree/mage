@@ -42,6 +42,7 @@ import mage.game.permanent.Permanent;
  * @author BetaSteward_at_googlemail.com
  */
 public class BoostPowerXSourceEffect extends ContinuousEffectImpl<BoostPowerXSourceEffect> {
+    private int amount = -1;
 
 	public BoostPowerXSourceEffect(Duration duration) {
 		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
@@ -58,7 +59,8 @@ public class BoostPowerXSourceEffect extends ContinuousEffectImpl<BoostPowerXSou
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		int amount = source.getCosts().getVariableCosts().get(0).getAmount();
+        if (amount < 0)
+		    amount = source.getCosts().getVariableCosts().get(0).getAmount();
 		Permanent target = (Permanent) game.getPermanent(source.getSourceId());
 		if (target != null) {
 			target.addPower(amount);
