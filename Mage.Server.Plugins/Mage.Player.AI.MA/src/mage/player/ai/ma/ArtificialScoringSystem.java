@@ -26,7 +26,7 @@ public class ArtificialScoringSystem {
 	private static final int LIFE_ABOVE_MULTIPLIER = 100;
 
 	public static int getCardDefinitionScore(final Game game, final Card card) {
-		int value = 0; //TODO: add new rating system card value
+		int value = 3; //TODO: add new rating system card value
 		if (card.getCardType().contains(Constants.CardType.LAND)) {
 			int score = (int) ((value / 2.0f) * 50);
 			//TODO: check this for "any color" lands

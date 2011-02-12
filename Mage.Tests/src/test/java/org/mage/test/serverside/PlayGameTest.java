@@ -32,7 +32,7 @@ public class PlayGameTest extends MageTestBase {
 		game.loadCards(deck.getCards(), player.getId());
 
 		Player player2 = createPlayer("computer2", "Computer - mad");
-		Deck deck2 = Deck.load(Sets.loadDeck("UW Control.dck"));
+		Deck deck2 = Deck.load(Sets.loadDeck("RB Aggro.dck"));
 		if (deck2.getCards().size() < 40) {
 			throw new IllegalArgumentException("Couldn't load deck, deck side=" + deck2.getCards().size());
 		}

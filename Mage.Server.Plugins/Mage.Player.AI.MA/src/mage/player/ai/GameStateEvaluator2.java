@@ -61,11 +61,15 @@ public class GameStateEvaluator2 {
 		}
 
 		int permanentScore = 0;
-		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
-			permanentScore += evaluatePermanent(permanent, game);
-		}
-		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(opponent.getId())) {
-			permanentScore -= evaluatePermanent(permanent, game);
+		try {
+			for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
+				permanentScore += evaluatePermanent(permanent, game);
+			}
+			for (Permanent permanent: game.getBattlefield().getAllActivePermanents(opponent.getId())) {
+				permanentScore -= evaluatePermanent(permanent, game);
+			}
+		} catch (Throwable t) {
+			t.printStackTrace();
 		}
 		//permanentScore *= PERMANENT_FACTOR;
 

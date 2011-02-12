@@ -33,9 +33,12 @@ import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
+import mage.abilities.costs.VariableCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
 
 /**
  *
@@ -50,6 +53,7 @@ public class BoostPowerXSourceEffect extends ContinuousEffectImpl<BoostPowerXSou
 
 	public BoostPowerXSourceEffect(final BoostPowerXSourceEffect effect) {
 		super(effect);
+		this.amount = effect.amount;
 	}
 
 	@Override
@@ -59,8 +63,15 @@ public class BoostPowerXSourceEffect extends ContinuousEffectImpl<BoostPowerXSou
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-        if (amount < 0)
-		    amount = source.getCosts().getVariableCosts().get(0).getAmount();
+        if (amount < 0) {
+			List<VariableCost> varCost = source.getCosts().getVariableCosts();
+			if (varCost.size() > 0) {
+		    	amount = varCost.get(0).getAmount();
+			} else {
+				amount = 0;
+				return false;
+			}
+		}
 		Permanent target = (Permanent) game.getPermanent(source.getSourceId());
 		if (target != null) {
 			target.addPower(amount);

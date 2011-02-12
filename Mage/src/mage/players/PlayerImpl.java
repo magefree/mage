@@ -962,7 +962,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		for (UUID targetId: option.getTargets().getUnchosen().get(targetNum).possibleTargets(option.getSourceId(), playerId, game)) {
 			Ability newOption = option.copy();
 			newOption.getTargets().get(targetNum).addTarget(targetId, option, game);
-			if (targetNum < option.getTargets().size() - 1) {
+			if (targetNum < option.getTargets().size() - 2) {
+				//addTargetOptions(options, newOption, targetNum + 1, game);
+				// ayrat: bug fix
 				addTargetOptions(options, newOption, targetNum + 1, game);
 			}
 			else {
