@@ -100,7 +100,7 @@ class HowlingBansheeEffect extends OneShotEffect<HowlingBansheeEffect> {
 
 	@Override
 	public String getText(Ability source) {
-		return "When Howling Banshee enters the battlefield, each player loses 3 life";
+		return "each player loses 3 life";
 	}
 
 

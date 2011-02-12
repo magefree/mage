@@ -33,6 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,17 +66,23 @@ public class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			permanent.destroy(source.getId(), game, noRegen);
-			return true;
-		}
-		return false;
+        int affectedTargets = 0;
+        for (UUID permanentId : source.getTargets().get(0).getTargets()) {
+            Permanent permanent = game.getPermanent(permanentId);
+            if (permanent != null) {
+			    permanent.destroy(source.getId(), game, noRegen);
+                affectedTargets++;
+            }
+        }
+		return affectedTargets > 0;
 	}
 
 	@Override
 	public String getText(Ability source) {
-		return "Destroy target " + source.getTargets().get(0).getTargetName();
+        if (source.getTargets().get(0).getNumberOfTargets() == 1)
+		    return "Destroy target " + source.getTargets().get(0).getTargetName();
+        else
+            return "Destroy " + source.getTargets().get(0).getNumberOfTargets() + " target " + source.getTargets().get(0).getTargetName();
 	}
 
 }
