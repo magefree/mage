@@ -64,6 +64,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.ManaOptions;
+import mage.filter.common.*;
 import mage.game.draft.Draft;
 import mage.player.ai.simulators.CombatGroupSimulator;
 import mage.player.ai.simulators.CombatSimulator;
@@ -73,10 +74,6 @@ import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreatureForCombat;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterLandCard;
-import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.game.Table;
 import mage.game.combat.CombatGroup;
@@ -90,6 +87,7 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetDiscard;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlayerAmount;
@@ -267,6 +265,34 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			for (Permanent permanent: targets) {
 				if (((TargetPermanent)target).canTarget(playerId, permanent.getId(), source, game)) {
 					target.addTarget(permanent.getId(), source, game);
+					return true;
+				}
+			}
+		}
+		if (target instanceof TargetCreatureOrPlayer) {
+			List<Permanent> targets;
+			TargetCreatureOrPlayer t = ((TargetCreatureOrPlayer)target);
+			if (outcome.isGood()) {
+				targets = threats(playerId, ((FilterCreatureOrPlayer)t.getFilter()).getCreatureFilter(), game);
+			}
+			else {
+				targets = threats(opponentId, ((FilterCreatureOrPlayer)t.getFilter()).getCreatureFilter(), game);
+			}
+			for (Permanent permanent: targets) {
+				if (((TargetPermanent)target).canTarget(playerId, permanent.getId(), source, game)) {
+					target.addTarget(permanent.getId(), source, game);
+					return true;
+				}
+			}
+			if (outcome.isGood()) {
+				if (target.canTarget(playerId, source, game)) {
+					target.addTarget(playerId, source, game);
+					return true;
+				}
+			}
+			else {
+				if (target.canTarget(playerId, source, game)) {
+					target.addTarget(opponentId, source, game);
 					return true;
 				}
 			}

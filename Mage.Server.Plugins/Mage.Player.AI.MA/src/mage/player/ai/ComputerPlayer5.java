@@ -112,6 +112,7 @@ public class ComputerPlayer5 extends ComputerPlayer4 implements Player {
 			case PRECOMBAT_MAIN:
 				if (game.getActivePlayerId().equals(playerId)) {
 					Player player = game.getPlayer(playerId);
+					System.out.println("Turn:"+game.getTurnNum());
 					System.out.println("[" + game.getPlayer(playerId).getName() + "] Precombat Main, life=" + player.getLife());
 					String s = "[";
 					for (Card card : player.getHand().getCards(game)) {
@@ -181,8 +182,11 @@ public class ComputerPlayer5 extends ComputerPlayer4 implements Player {
 			addActionsTimed(new FilterAbility());
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
-				actions = new LinkedList<Ability>(root.abilities);
-				combat = root.combat;
+				int bestScore = GameStateEvaluator2.evaluate(playerId, root.getGame());
+				if (bestScore > currentScore) {
+					actions = new LinkedList<Ability>(root.abilities);
+					combat = root.combat;
+				}
 			}
 		//}
 	}
@@ -197,8 +201,11 @@ public class ComputerPlayer5 extends ComputerPlayer4 implements Player {
 			addActionsTimed(new FilterAbility());
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
-				actions = new LinkedList<Ability>(root.abilities);
-				combat = root.combat;
+				int bestScore = GameStateEvaluator2.evaluate(playerId, root.getGame());
+				if (bestScore > currentScore) {
+					actions = new LinkedList<Ability>(root.abilities);
+					combat = root.combat;
+				}
 			}
 		}
 	}
@@ -240,7 +247,7 @@ public class ComputerPlayer5 extends ComputerPlayer4 implements Player {
 				logger.fine("step finished");
 				int testScore = GameStateEvaluator2.evaluate(playerId, game);
 				if (game.getActivePlayerId().equals(playerId)) {
-					if (testScore < currentScore) {
+					if (testScore <= currentScore) {
 						// if score at end of step is worse than original score don't check further
 						logger.fine("simulating -- abandoning check, no immediate benefit");
 						val = testScore;
