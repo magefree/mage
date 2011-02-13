@@ -304,9 +304,11 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 			logger.fine("simulating - timed out");
 			task.cancel(true);
 		} catch (ExecutionException e) {
-
+			logger.log(Level.SEVERE, "Simulation error", e);
+			task.cancel(true);
 		} catch (InterruptedException e) {
-
+			logger.log(Level.SEVERE, "Simulation interrupted", e);
+			task.cancel(true);
 		}
 	}
 
