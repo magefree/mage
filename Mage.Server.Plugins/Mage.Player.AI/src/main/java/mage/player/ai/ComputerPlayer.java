@@ -77,6 +77,7 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.Table;
 import mage.game.combat.CombatGroup;
+import mage.game.match.Match;
 import mage.game.permanent.Permanent;
 import mage.game.tournament.Tournament;
 import mage.player.ai.utils.RateCard;
@@ -795,9 +796,9 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	@Override
-	public void sideboard(Table table, Deck deck) {
+	public void sideboard(Match match, Deck deck) {
 		//TODO: improve this
-		table.fireSubmitDeckEvent(playerId, deck);
+		match.submitDeck(playerId, deck);
 	}
 
 	@Override
