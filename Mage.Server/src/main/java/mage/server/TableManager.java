@@ -67,6 +67,13 @@ public class TableManager {
 		return tableController.getTable();
 	}
 
+	public Table createTable(MatchOptions options) {
+		TableController tableController = new TableController(UUID.randomUUID(), options);
+		controllers.put(tableController.getTable().getId(), tableController);
+		tables.put(tableController.getTable().getId(), tableController.getTable());
+		return tableController.getTable();
+	}
+
 	public Table createTournamentTable(UUID sessionId, TournamentOptions options) {
 		TableController tableController = new TableController(sessionId, options);
 		controllers.put(tableController.getTable().getId(), tableController);
@@ -127,6 +134,10 @@ public class TableManager {
 		controllers.get(tableId).startMatch(sessionId);
 	}
 
+	public void startMatch(UUID roomId, UUID tableId) {
+		controllers.get(tableId).startMatch();
+	}
+
 	public void startTournament(UUID sessionId, UUID roomId, UUID tableId) {
 		controllers.get(tableId).startTournament(sessionId);
 	}
@@ -161,11 +172,12 @@ public class TableManager {
 		}
 	}
 
-//	public void construct(UUID tableId) {
-//		controllers.get(tableId).construct();
-//	}
+	public void construct(UUID tableId) {
+		controllers.get(tableId).construct();
+	}
 
 	public void addPlayer(UUID sessionId, UUID tableId, Player player, String playerType, Deck deck) throws GameException {
 		controllers.get(tableId).addPlayer(sessionId, player, playerType, deck);
 	}
+
 }

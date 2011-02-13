@@ -35,6 +35,10 @@ import java.util.logging.Logger;
 import mage.cards.decks.Deck;
 import mage.game.Game;
 import mage.game.GameException;
+import mage.game.events.Listener;
+import mage.game.events.TableEvent;
+import mage.game.events.TableEvent.EventType;
+import mage.game.events.TableEventSource;
 import mage.players.Player;
 import mage.util.Logging;
 
@@ -45,11 +49,14 @@ import mage.util.Logging;
 public abstract class MatchImpl implements Match {
 
 	private final static Logger logger = Logging.getLogger(MatchImpl.class.getName());
+	private static final int SIDEBOARD_TIME = 180;
 
 	protected UUID id = UUID.randomUUID();
 	protected List<MatchPlayer> players = new ArrayList<MatchPlayer>();
 	protected List<Game> games = new ArrayList<Game>();
 	protected MatchOptions options;
+
+	protected TableEventSource tableEventSource = new TableEventSource();
 	
 	public MatchImpl(MatchOptions options) {
 		this.options = options;
@@ -152,12 +159,51 @@ public abstract class MatchImpl implements Match {
 	}
 
 	@Override
+	public void addTableEventListener(Listener<TableEvent> listener) {
+		tableEventSource.addListener(listener);
+	}
+
+	@Override
+	public void sideboard() {
+		for (MatchPlayer player: this.players) {
+			player.setSideboarding();
+			player.getPlayer().sideboard(this, player.getDeck());
+		}
+		synchronized(this) {
+			while (!isDoneSideboarding()) {
+				try {
+					this.wait();
+				} catch (InterruptedException ex) { }
+			}
+		}
+	}
+
+	@Override
 	public boolean isDoneSideboarding() {
 		for (MatchPlayer player: this.players) {
 			if (!player.isDoneSideboarding())
 				return false;
 		}
 		return true;
+	}
+
+	@Override
+	public void fireSideboardEvent(UUID playerId, Deck deck) {
+		MatchPlayer player = getPlayer(playerId);
+		if (player != null) {
+			tableEventSource.fireTableEvent(EventType.SIDEBOARD, playerId, deck, SIDEBOARD_TIME);
+		}
+	}
+
+	@Override
+	public void submitDeck(UUID playerId, Deck deck) {
+		MatchPlayer player = getPlayer(playerId);
+		if (player != null) {
+			player.submitDeck(deck);
+		}
+		synchronized (this) {
+			this.notifyAll();
+		}
 	}
 
 }

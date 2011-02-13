@@ -41,6 +41,7 @@ import java.util.logging.Logger;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
+import mage.game.Table;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.PlayerQueryEventSource;
@@ -63,8 +64,10 @@ public abstract class TournamentImpl implements Tournament {
 	protected String matchName;
 	protected TournamentOptions options;
 
-	protected transient TableEventSource tableEventSource = new TableEventSource();
-	protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
+	protected TableEventSource tableEventSource = new TableEventSource();
+	protected PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
+
+	private static final int CONSTRUCT_TIME = 600;
 
 	public TournamentImpl(TournamentOptions options) {
 		this.options = options;
@@ -209,7 +212,7 @@ public abstract class TournamentImpl implements Tournament {
 
 	@Override
 	public void fireSubmitDeckEvent(UUID playerId, Deck deck) {
-		tableEventSource.fireTableEvent(EventType.SUBMIT_DECK, playerId, deck);
+		tableEventSource.fireTableEvent(EventType.SUBMIT_DECK, playerId, deck, 0);
 	}
 
 	@Override
@@ -220,10 +223,11 @@ public abstract class TournamentImpl implements Tournament {
 	@Override
 	public void fireConstructEvent(UUID playerId, Deck deck) {
 		TournamentPlayer player = players.get(playerId);
-		playerQueryEventSource.construct(playerId, "Construct", deck, 600);
+		playerQueryEventSource.construct(playerId, "Construct", deck, CONSTRUCT_TIME);
 	}
 
 	public void construct() {
+		tableEventSource.fireTableEvent(EventType.CONSTRUCT);
 		for (TournamentPlayer player: players.values()) {
 			player.setConstructing();
 			player.getPlayer().construct(this, player.getDeck());

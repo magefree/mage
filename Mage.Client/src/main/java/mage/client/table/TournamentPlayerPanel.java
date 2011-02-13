@@ -36,6 +36,7 @@ package mage.client.table;
 
 import java.util.UUID;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import mage.client.MageFrame;
 import mage.client.remote.Session;
 
@@ -59,8 +60,8 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
 		this.lblPlayerNum.setText("Player " + playerNum);
 	}
 
-	public String getPlayerType() {
-		return (String) this.cbPlayerType.getSelectedItem();
+	public JComboBox getPlayerType() {
+		return this.cbPlayerType;
 	}
 
 	public boolean joinTournamentTable(UUID roomId, UUID tableId) {

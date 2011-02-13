@@ -66,8 +66,6 @@ public class TournamentController {
 	private ConcurrentHashMap<UUID, UUID> sessionPlayerMap = new ConcurrentHashMap<UUID, UUID>();
 	private ConcurrentHashMap<UUID, TournamentSession> tournamentSessions = new ConcurrentHashMap<UUID, TournamentSession>();
 
-	private static final int CONSTRUCT_TIME = 600;
-
 	public TournamentController(Tournament tournament, ConcurrentHashMap<UUID, UUID> sessionPlayerMap, UUID tableId) {
 		sessionId = UUID.randomUUID();
 		this.sessionPlayerMap = sessionPlayerMap;
@@ -95,6 +93,9 @@ public class TournamentController {
 							break;
 						case SUBMIT_DECK:
 							submitDeck(event.getPlayerId(), event.getDeck());
+							break;
+						case CONSTRUCT:
+							construct();
 							break;
 					}
 				}
@@ -170,12 +171,12 @@ public class TournamentController {
 	private void startMatch(TournamentPairing pair, MatchOptions matchOptions) {
 		try {
 			TableManager tableManager = TableManager.getInstance();
-			Table table = tableManager.createTable(sessionId, matchOptions);
+			Table table = tableManager.createTable(matchOptions);
 			TournamentPlayer player1 = pair.getPlayer1();
 			TournamentPlayer player2 = pair.getPlayer2();
 			tableManager.addPlayer(getPlayerSessionId(player1.getPlayer().getId()), table.getId(), player1.getPlayer(), player1.getPlayerType(), player1.getDeck());
 			tableManager.addPlayer(getPlayerSessionId(player2.getPlayer().getId()), table.getId(), player2.getPlayer(), player2.getPlayerType(), player2.getDeck());
-			tableManager.startMatch(sessionId, null, table.getId());
+			tableManager.startMatch(null, table.getId());
 			pair.setMatch(tableManager.getMatch(table.getId()));
 		} catch (GameException ex) {
 			Logger.getLogger(TournamentController.class.getName()).log(Level.SEVERE, null, ex);
@@ -186,11 +187,14 @@ public class TournamentController {
 		TableManager.getInstance().startDraft(tableId, draft);
 	}
 
+	private void construct() {
+		TableManager.getInstance().construct(tableId);
+	}
+
 	private synchronized void construct(UUID sessionId, Deck deck, int timeout) {
 		if (tournamentSessions.containsKey(sessionId))
 			tournamentSessions.get(sessionId).construct(deck, timeout);
 	}
-
 
 	public void submitDeck(UUID sessionId, Deck deck) {
 		tournamentSessions.get(sessionPlayerMap.get(sessionId)).submitDeck(deck);
