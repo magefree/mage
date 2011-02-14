@@ -256,7 +256,13 @@ class CardRarityComparator implements Comparator<MageCard> {
 
 	@Override
 	public int compare(MageCard o1, MageCard o2) {
-		return o1.getOriginal().getRarity().compareTo(o2.getOriginal().getRarity());
+		int val = o1.getOriginal().getRarity().compareTo(o2.getOriginal().getRarity());
+		if (val == 0) {
+			return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
+		}
+		else {
+			return val;
+		}
 	}
 
 }
@@ -265,7 +271,13 @@ class CardCostComparator implements Comparator<MageCard> {
 
 	@Override
 	public int compare(MageCard o1, MageCard o2) {
-		return Integer.valueOf(o1.getOriginal().getConvertedManaCost()).compareTo(Integer.valueOf(o2.getOriginal().getConvertedManaCost()));
+		int val = Integer.valueOf(o1.getOriginal().getConvertedManaCost()).compareTo(Integer.valueOf(o2.getOriginal().getConvertedManaCost()));
+		if (val == 0) {
+			return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
+		}
+		else {
+			return val;
+		}
 	}
 
 }
@@ -274,7 +286,13 @@ class CardColorComparator implements Comparator<MageCard> {
 
 	@Override
 	public int compare(MageCard o1, MageCard o2) {
-		return o1.getOriginal().getColor().compareTo(o2.getOriginal().getColor());
+		int val = o1.getOriginal().getColor().compareTo(o2.getOriginal().getColor());
+		if (val == 0) {
+			return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
+		}
+		else {
+			return val;
+		}
 	}
 
 }
