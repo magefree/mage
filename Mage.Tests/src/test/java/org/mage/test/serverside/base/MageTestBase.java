@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 /**
  * @author ayratn
@@ -28,6 +29,8 @@ public class MageTestBase {
 	public static PluginClassLoader classLoader = new PluginClassLoader();
 
 	private final static String pluginFolder = "plugins";
+
+	protected Pattern pattern = Pattern.compile("([a-zA-Z]*):([\\w]*):([a-zA-Z ,\\-.!'\\d]*):([\\d]*)");
 
 	@BeforeClass
 	public static void init() {

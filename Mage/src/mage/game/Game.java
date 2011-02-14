@@ -28,15 +28,14 @@
 
 package mage.game;
 
+import mage.Constants;
 import mage.game.match.MatchType;
 import mage.cards.Card;
 import mage.game.stack.SpellStack;
 import mage.MageObject;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
 import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
 import mage.Constants.Zone;
@@ -61,6 +60,7 @@ import mage.game.permanent.Permanent;
 import mage.game.turn.Phase;
 import mage.game.turn.Step;
 import mage.game.turn.Turn;
+import mage.players.Library;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
@@ -136,8 +136,9 @@ public interface Game extends MageItem, Serializable {
 	public boolean replaceEvent(GameEvent event);
 
 	//game play methods
-//	public void init(UUID choosingPlayerId);
+	//public void init(UUID choosingPlayerId);
 	public void start(UUID choosingPlayerId);
+	public void start(UUID choosingPlayerId, boolean testMode);
 	public void end();
 	public void mulligan(UUID playerId);
 	public void quit(UUID playerId);
@@ -156,4 +157,7 @@ public interface Game extends MageItem, Serializable {
 	public void restoreState();
 	public void removeLastBookmark();
 
+	// game cheats (for tests only)
+	public void cheat(UUID ownerId, Map<Zone, String> commands);
+	public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<Card> battlefield, List<Card> graveyard);
 }

@@ -47,11 +47,13 @@ import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 import mage.game.stack.SpellStack;
 import mage.game.stack.StackObject;
 import mage.game.turn.Phase;
 import mage.game.turn.Step;
 import mage.game.turn.Turn;
+import mage.players.Library;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
@@ -289,7 +291,12 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public void start(UUID choosingPlayerId) {
-		init(choosingPlayerId);
+		start(choosingPlayerId, false);
+	}
+
+	@Override
+	public void start(UUID choosingPlayerId, boolean testMode) {
+		init(choosingPlayerId, testMode);
 		PlayerList players = state.getPlayerList(startingPlayerId);
 		Player player = getPlayer(players.get());
 		while (!isGameOver()) {
@@ -311,8 +318,12 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	}
 
 	protected void init(UUID choosingPlayerId) {
+		init(choosingPlayerId, false);
+	}
+
+	protected void init(UUID choosingPlayerId, boolean testMode) {
 		for (Player player: state.getPlayers().values()) {
-			player.init(this);
+			player.init(this, testMode);
 		}
 		fireInformEvent("game has started");
 		saveState();
@@ -347,7 +358,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		for (UUID playerId: state.getPlayerList(startingPlayerId)) {
 			Player player = getPlayer(playerId);
 			player.setLife(this.getLife(), this);
-			player.drawCards(7, this);
+			if (!testMode) {
+				player.drawCards(7, this);
+			}
 		}
 
 		//20091005 - 103.4
@@ -917,5 +930,101 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	 */
 	public void resetLKI() {
 		lki.clear();
+	}
+
+	public void cheat(UUID ownerId, Map<Zone, String> commands) {
+		if (commands != null) {
+			Player player = getPlayer(ownerId);
+			if (player != null) {
+				for (Map.Entry<Zone, String> command : commands.entrySet()) {
+					switch (command.getKey()) {
+						case HAND:
+							if (command.getValue().equals("clear")) {
+								removeCards(player.getHand());
+							}
+							break;
+						case LIBRARY:
+							if (command.getValue().equals("clear")) {
+								for (UUID card : player.getLibrary().getCardList()) {
+									gameCards.remove(card);
+								}
+								player.getLibrary().clear();
+							}
+							break;
+					}
+				}
+			}
+		}
+	}
+
+	private void removeCards(Cards cards) {
+		for (UUID card : cards) {
+			gameCards.remove(card);
+		}
+		cards.clear();
+	}
+
+	public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<Card> battlefield, List<Card> graveyard) {
+		Player player = getPlayer(ownerId);
+		if (player != null) {
+			loadCards(ownerId, library);
+			loadCards(ownerId, hand);
+			loadCards(ownerId, battlefield);
+			loadCards(ownerId, graveyard);
+
+			for (Card card : library) {
+				setZone(card.getId(), Zone.LIBRARY);
+				player.getLibrary().putOnTop(card, this);
+			}
+			for (Card card : hand) {
+				setZone(card.getId(), Zone.HAND);
+				player.getHand().add(card);
+			}
+			for (Card card : graveyard) {
+				setZone(card.getId(), Zone.GRAVEYARD);
+				player.getGraveyard().add(card);
+			}
+			List<Card> permanents = new ArrayList<Card>();
+			for (Card card : battlefield) {
+				card.setOwnerId(ownerId);
+				PermanentCard permanent = new PermanentCard(card, ownerId);
+				getBattlefield().addPermanent(permanent);
+			}
+			applyEffects();
+		}
+	}
+
+	private void loadCards(UUID ownerId, List<Card> cards) {
+		if (cards == null) {
+			return;
+		}
+		Set<Card> set = new HashSet<Card>();
+		for (Card card : cards) {
+			set.add(card);
+		}
+		loadCards(set, ownerId);
+	}
+
+	public void replaceLibrary(List<Card> cardsDownToTop, UUID ownerId) {
+		Player player = getPlayer(ownerId);
+		if (player != null) {
+			for (UUID card : player.getLibrary().getCardList()) {
+				gameCards.remove(card);
+			}
+			player.getLibrary().clear();
+			Set<Card> cards = new HashSet<Card>();
+			for (Card card : cardsDownToTop) {
+				cards.add(card);
+			}
+			loadCards(cards, ownerId);
+
+			for (Card card : cards) {
+				player.getLibrary().putOnTop(card, this);
+			}
+		}
+	}
+
+	public void clearGraveyard(UUID playerId) {
+
 	}
 }

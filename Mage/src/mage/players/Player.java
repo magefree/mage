@@ -97,6 +97,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public Set<UUID> getInRange();
 	
 	public void init(Game game);
+	public void init(Game game, boolean testMode);
 	public void useDeck(Deck deck, Game game);
 	public void reset();
 	public void shuffleLibrary(Game game);
