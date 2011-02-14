@@ -11,20 +11,19 @@ import mage.server.util.PluginClassLoader;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 import mage.util.Copier;
-import mage.util.Logging;
 import org.junit.BeforeClass;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import java.util.regex.Pattern;
 
 /**
  * @author ayratn
  */
 public class MageTestBase {
-	protected static Logger logger = Logging.getLogger(MageTestBase.class.getName());
+	protected static Logger logger = Logger.getLogger(MageTestBase.class);
 
 	public static PluginClassLoader classLoader = new PluginClassLoader();
 
@@ -34,8 +33,9 @@ public class MageTestBase {
 
 	@BeforeClass
 	public static void init() {
+		Logger.getRootLogger().setLevel(Level.DEBUG);
 		logger.info("Starting MAGE tests");
-		logger.info("Logging level: " + Logging.getLevel(logger));
+		logger.info("Logging level: " + logger.getLevel());
 		deleteSavedGames();
 		ConfigSettings config = ConfigSettings.getInstance();
 		for (GamePlugin plugin : config.getGameTypes()) {
@@ -59,9 +59,9 @@ public class MageTestBase {
 			logger.info("Loading plugin: " + plugin.getClassName());
 			return Class.forName(plugin.getClassName(), true, classLoader);
 		} catch (ClassNotFoundException ex) {
-			logger.log(Level.SEVERE, "Plugin not Found:" + plugin.getJar() + " - check plugin folder");
+			logger.warn("Plugin not Found:" + plugin.getJar() + " - check plugin folder");
 		} catch (Exception ex) {
-			logger.log(Level.SEVERE, "Error loading plugin " + plugin.getJar(), ex);
+			logger.fatal("Error loading plugin " + plugin.getJar(), ex);
 		}
 		return null;
 	}
@@ -72,9 +72,9 @@ public class MageTestBase {
 			logger.info("Loading game type: " + plugin.getClassName());
 			return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
 		} catch (ClassNotFoundException ex) {
-			logger.log(Level.SEVERE, "Game type not found:" + plugin.getJar() + " - check plugin folder");
+			logger.warn("Game type not found:" + plugin.getJar() + " - check plugin folder");
 		} catch (Exception ex) {
-			logger.log(Level.SEVERE, "Error loading game type " + plugin.getJar(), ex);
+			logger.fatal("Error loading game type " + plugin.getJar(), ex);
 		}
 		return null;
 	}
@@ -85,9 +85,9 @@ public class MageTestBase {
 			logger.info("Loading tournament type: " + plugin.getClassName());
 			return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
 		} catch (ClassNotFoundException ex) {
-			logger.log(Level.SEVERE, "Tournament type not found:" + plugin.getJar() + " - check plugin folder");
+			logger.warn("Tournament type not found:" + plugin.getJar() + " - check plugin folder");
 		} catch (Exception ex) {
-			logger.log(Level.SEVERE, "Error loading game type " + plugin.getJar(), ex);
+			logger.fatal("Error loading game type " + plugin.getJar(), ex);
 		}
 		return null;
 	}

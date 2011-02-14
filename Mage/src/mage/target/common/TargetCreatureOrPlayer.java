@@ -90,13 +90,18 @@ public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
 
 	@Override
 	public boolean canTarget(UUID id, Ability source, Game game) {
+		return canTarget(null, id, source, game);
+	}
+
+	public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
 		Permanent permanent = game.getPermanent(id);
 		MageObject targetSource = game.getObject(source.getSourceId());
 		if (permanent != null) {
 			if (source != null)
-				return permanent.canBeTargetedBy(targetSource) && filter.match(permanent, source.getControllerId(), game);
+				//TODO: check for replacement effects
+				return permanent.canBeTargetedBy(game.getObject(source.getSourceId())) && filter.match(permanent, controllerId, game);
 			else
-				return filter.match(permanent);
+				return filter.match(permanent, controllerId, game);
 		}
 		Player player = game.getPlayer(id);
 		if (player != null)

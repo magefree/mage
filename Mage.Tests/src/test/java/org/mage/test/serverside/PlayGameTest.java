@@ -127,16 +127,16 @@ public class PlayGameTest extends MageTestBase {
 								if (card != null) {
 									cards.add(card);
 								} else {
-									logger.severe("Couldn't find a card: " + cardName);
-									logger.severe("line: " + line);
+									logger.fatal("Couldn't find a card: " + cardName);
+									logger.fatal("line: " + line);
 								}
 							}
 						}
 					} else {
-						logger.warning("Unknown player: " + nickname);
+						logger.warn("Unknown player: " + nickname);
 					}
 				} else {
-					logger.warning("Init string wasn't parsed: " + line);
+					logger.warn("Init string wasn't parsed: " + line);
 				}
 			}
 		} finally {
