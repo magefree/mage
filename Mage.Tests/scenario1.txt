@@ -1,0 +1,21 @@
+### ComputerA ###
+# Battlefield
+battlefield:ComputerA:Island:1
+# Hand
+hand:ComputerA:Mountain:2
+hand:ComputerA:Lightning Bolt:5
+# Library
+# from down to top
+library:ComputerA:clear:0
+library:ComputerA:Lightning Bolt:10
+
+### ComputerB ###
+# Battlefield
+battlefield:ComputerB:Plains:1
+# Hand
+hand:ComputerB:Plains:2
+# Library
+# from down to top
+library:ComputerB:clear:0
+library:ComputerB:Plains:10
+

@@ -4,7 +4,7 @@
 	<server serverAddress="localhost" serverName="mage-server" port="17171" maxGameThreads="10" maxSecondsIdle="600"/>
 	<playerTypes>
 		<playerType name="Computer - minimax hybrid" jar="mage-player-aiminimax.jar" className="mage.player.ai.ComputerPlayer3"/>
-		<playerType name="Computer - mad" jar="mage-player-ai-ma.jar" className="mage.player.ai.ComputerPlayer4"/>
+		<playerType name="Computer - mad" jar="mage-player-ai-ma.jar" className="mage.player.ai.ComputerPlayer6"/>
 	</playerTypes>
 	<gameTypes>
 		<gameType name="Two Player Duel" jar="mage-game-twoplayerduel.jar" className="mage.game.TwoPlayerMatch" typeName="mage.game.TwoPlayerDuelType"/>

@@ -33,6 +33,8 @@ import java.util.UUID;
 import mage.cards.decks.Deck;
 import mage.game.Game;
 import mage.game.GameException;
+import mage.game.events.Listener;
+import mage.game.events.TableEvent;
 import mage.players.Player;
 
 /**
@@ -46,8 +48,10 @@ public interface Match {
 	public List<MatchPlayer> getPlayers();
 	public MatchPlayer getPlayer(UUID playerId);
 	public void addPlayer(Player player, Deck deck);
+	public void submitDeck(UUID playerId, Deck deck);
 	public void startMatch() throws GameException;
 	public void startGame() throws GameException;
+	public void sideboard();
 	public void endGame();
 	public Game getGame();
 	public List<Game> getGames();
@@ -55,5 +59,8 @@ public interface Match {
 	public int getNumGames();
 	public boolean isDoneSideboarding();
 	public UUID getChooser();
+
+	public void addTableEventListener(Listener<TableEvent> listener);
+	public void fireSideboardEvent(UUID playerId, Deck deck);
 
 }

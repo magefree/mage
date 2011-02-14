@@ -33,8 +33,6 @@ import mage.server.util.PluginClassLoader;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.net.InetAddress;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
 import mage.server.game.DeckValidatorFactory;
@@ -45,7 +43,7 @@ import mage.server.util.ConfigSettings;
 import mage.server.util.config.Plugin;
 import mage.server.util.config.GamePlugin;
 import mage.util.Copier;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -53,7 +51,7 @@ import mage.util.Logging;
  */
 public class Main {
 
-	private static Logger logger = Logging.getLogger(Main.class.getName());
+	private static Logger logger = Logger.getLogger(Main.class);
 
 	private final static String testModeArg = "-testMode=";
 	private final static String pluginFolder = "plugins";
@@ -68,7 +66,7 @@ public class Main {
     public static void main(String[] args) {
 
 		logger.info("Starting MAGE server version " + version);
-		logger.info("Logging level: " + Logging.getLevel(logger));
+		logger.info("Logging level: " + logger.getLevel());
 		deleteSavedGames();
 		ConfigSettings config = ConfigSettings.getInstance();
 		for (GamePlugin plugin: config.getGameTypes()) {
@@ -101,7 +99,7 @@ public class Main {
 				ip = InetAddress.getLocalHost().getHostAddress();
 			}
 		} catch (UnknownHostException ex) {
-			logger.log(Level.WARNING, "Could not get server address: ", ex);
+			logger.warn("Could not get server address: ", ex);
 		}
 		String ipParam = System.getProperty("server");
 		if (ipParam != null) {
@@ -117,9 +115,9 @@ public class Main {
 			logger.info("Loading plugin: " + plugin.getClassName());
 			return Class.forName(plugin.getClassName(), true, classLoader);
 		} catch (ClassNotFoundException ex) {
-			logger.log(Level.SEVERE, "Plugin not Found:" + plugin.getJar() + " - check plugin folder");
+			logger.warn("Plugin not Found:" + plugin.getJar() + " - check plugin folder");
 		} catch (Exception ex) {
-			logger.log(Level.SEVERE, "Error loading plugin " + plugin.getJar(), ex);
+			logger.fatal("Error loading plugin " + plugin.getJar(), ex);
 		}
 		return null;
 	}
@@ -130,9 +128,9 @@ public class Main {
 			logger.info("Loading game type: " + plugin.getClassName());
 			return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
 		} catch (ClassNotFoundException ex) {
-			logger.log(Level.SEVERE, "Game type not found:" + plugin.getJar() + " - check plugin folder");
+			logger.warn("Game type not found:" + plugin.getJar() + " - check plugin folder");
 		} catch (Exception ex) {
-			logger.log(Level.SEVERE, "Error loading game type " + plugin.getJar(), ex);
+			logger.fatal("Error loading game type " + plugin.getJar(), ex);
 		}
 		return null;
 	}
@@ -143,9 +141,9 @@ public class Main {
 			logger.info("Loading tournament type: " + plugin.getClassName());
 			return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
 		} catch (ClassNotFoundException ex) {
-			logger.log(Level.SEVERE, "Tournament type not found:" + plugin.getJar() + " - check plugin folder");
+			logger.warn("Tournament type not found:" + plugin.getJar() + " - check plugin folder");
 		} catch (Exception ex) {
-			logger.log(Level.SEVERE, "Error loading game type " + plugin.getJar(), ex);
+			logger.fatal("Error loading game type " + plugin.getJar(), ex);
 		}
 		return null;
 	}

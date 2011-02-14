@@ -152,9 +152,16 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public void init(Game game) {
+		init(game, false);
+	}
+
+	@Override
+	public void init(Game game, boolean testMode) {
 		this.abort = false;
-		this.hand.clear();
-		this.graveyard.clear();
+		if (!testMode) {
+			this.hand.clear();
+			this.graveyard.clear();
+		}
 		this.abilities.clear();
 		this.wins = false;
 		this.loses = false;

@@ -292,7 +292,13 @@ class CardViewRarityComparator implements Comparator<CardView> {
 
 	@Override
 	public int compare(CardView o1, CardView o2) {
-		return o1.getRarity().compareTo(o2.getRarity());
+		int val = o1.getRarity().compareTo(o2.getRarity());
+		if (val == 0) {
+			return o1.getName().compareTo(o2.getName());
+		}
+		else {
+			return val;
+		}
 	}
 
 }
@@ -301,7 +307,13 @@ class CardViewCostComparator implements Comparator<CardView> {
 
 	@Override
 	public int compare(CardView o1, CardView o2) {
-		return Integer.valueOf(o1.getConvertedManaCost()).compareTo(Integer.valueOf(o2.getConvertedManaCost()));
+		int val = Integer.valueOf(o1.getConvertedManaCost()).compareTo(Integer.valueOf(o2.getConvertedManaCost()));
+		if (val == 0) {
+			return o1.getName().compareTo(o2.getName());
+		}
+		else {
+			return val;
+		}
 	}
 
 }
@@ -310,7 +322,13 @@ class CardViewColorComparator implements Comparator<CardView> {
 
 	@Override
 	public int compare(CardView o1, CardView o2) {
-		return o1.getColor().compareTo(o2.getColor());
+		int val = o1.getColor().compareTo(o2.getColor());
+		if (val == 0) {
+			return o1.getName().compareTo(o2.getName());
+		}
+		else {
+			return val;
+		}
 	}
 
 }

@@ -31,18 +31,11 @@ package mage.player.ai;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.mana.ManaOptions;
@@ -54,8 +47,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.target.Target;
-import mage.util.Copier;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -63,7 +55,7 @@ import mage.util.Logging;
  */
 public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 
-	private final static transient Logger logger = Logging.getLogger(SimulatedPlayer.class.getName());
+	private final static transient Logger logger = Logger.getLogger(SimulatedPlayer.class);
 	private boolean isSimulatedPlayer;
 	private FilterAbility filter;
 	private transient ConcurrentLinkedQueue<Ability> allActions;
@@ -154,10 +146,10 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 					sim.getCombat().declareAttacker(attackersList.get(j).getId(), defenderId, sim);
 			}
 			if (engagements.put(sim.getCombat().getValue(sim), sim.getCombat()) != null) {
-				logger.fine("simulating -- found redundant attack combination");
+				logger.debug("simulating -- found redundant attack combination");
 			}
-			else if (logger.isLoggable(Level.FINE)) {
-				logger.fine("simulating -- attack:" + sim.getCombat().getGroups().size());
+			else if (logger.isDebugEnabled()) {
+				logger.debug("simulating -- attack:" + sim.getCombat().getGroups().size());
 			}
 		}
 		return new ArrayList<Combat>(engagements.values());
@@ -185,15 +177,15 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 		int numGroups = game.getCombat().getGroups().size();
 		//try to block each attacker with each potential blocker
 		Permanent blocker = blockers.get(0);
-		if (logger.isLoggable(Level.FINE))
-			logger.fine("simulating -- block:" + blocker);
+		if (logger.isDebugEnabled())
+			logger.debug("simulating -- block:" + blocker);
 		List<Permanent> remaining = remove(blockers, blocker);
 		for (int i = 0; i < numGroups; i++) {
 			if (game.getCombat().getGroups().get(i).canBlock(blocker, game)) {
 				Game sim = game.copy();
 				sim.getCombat().getGroups().get(i).addBlocker(blocker.getId(), playerId, sim);
 				if (engagements.put(sim.getCombat().getValue(sim), sim.getCombat()) != null)
-					logger.fine("simulating -- found redundant block combination");
+					logger.debug("simulating -- found redundant block combination");
 				addBlocker(sim, remaining, engagements);  // and recurse minus the used blocker
 			}
 		}
@@ -205,8 +197,8 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 		Ability ability = source.copy();
 		List<Ability> options = getPlayableOptions(ability, game);
 		if (options.size() == 0) {
-			if (logger.isLoggable(Level.FINE))
-				logger.fine("simulating -- triggered ability:" + ability);
+			if (logger.isDebugEnabled())
+				logger.debug("simulating -- triggered ability:" + ability);
 			game.getStack().push(new StackAbility(ability, playerId));
 			ability.activate(game, false);
 			game.applyEffects();
@@ -216,7 +208,7 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 			SimulationNode parent = (SimulationNode) game.getCustomData();
 			int depth = parent.getDepth() - 1;
 			if (depth == 0) return true;
-			logger.fine("simulating -- triggered ability - adding children:" + options.size());
+			logger.debug("simulating -- triggered ability - adding children:" + options.size());
 			for (Ability option: options) {
 				addAbilityNode(parent, option, depth, game);
 			}
@@ -230,7 +222,7 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 		ability.activate(sim, false);
 		sim.applyEffects();
 		SimulationNode newNode = new SimulationNode(sim, depth, playerId);
-		logger.fine("simulating -- node #:" + SimulationNode.getCount() + " triggered ability option");
+		logger.debug("simulating -- node #:" + SimulationNode.getCount() + " triggered ability option");
 		for (Target target: ability.getTargets()) {
 			for (UUID targetId: target.getTargets()) {
 				newNode.getTargets().add(targetId);

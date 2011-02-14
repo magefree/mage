@@ -276,7 +276,7 @@ public class NewTournamentDialog extends MageDialog {
 		tOptions.setTournamentType(tournamentType.getName());
 		tOptions.getPlayerTypes().add("Human");
 		for (TournamentPlayerPanel player: players) {
-			tOptions.getPlayerTypes().add(player.getPlayerType());
+			tOptions.getPlayerTypes().add((String) player.getPlayerType().getSelectedItem());
 		}
 		if (tournamentType.isDraft()) {
 			DraftOptions options = new DraftOptions();
@@ -347,10 +347,31 @@ public class NewTournamentDialog extends MageDialog {
 			pack.setModel(new DefaultComboBoxModel(Sets.getInstance().values().toArray()));
 			pnlPacks.add(pack);
 			packs.add(pack);
+			pack.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent evt) {
+					packActionPerformed(evt);
+				}
+			});
 		}
 		this.pack();
 		this.revalidate();
 		this.repaint();
+	}
+
+	private void packActionPerformed(java.awt.event.ActionEvent evt) {
+		boolean start = false;
+		int selectedIndex = 0;
+		for (JComboBox pack: packs) {
+			if (!start) {
+				if (evt.getSource().equals(pack)) {
+					start = true;
+					selectedIndex = pack.getSelectedIndex();
+				}
+			}
+			else {
+				pack.setSelectedIndex(selectedIndex);
+			}
+		}
 	}
 
 	private void createPlayers(int numPlayers) {
@@ -373,10 +394,31 @@ public class NewTournamentDialog extends MageDialog {
 		this.pnlOtherPlayers.removeAll();
 		for (TournamentPlayerPanel panel: players) {
 			this.pnlOtherPlayers.add(panel);
+			panel.getPlayerType().addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent evt) {
+					playerActionPerformed(evt);
+				}
+			});
 		}
 		this.pack();
 		this.revalidate();
 		this.repaint();
+	}
+
+	private void playerActionPerformed(java.awt.event.ActionEvent evt) {
+		boolean start = false;
+		int selectedIndex = 0;
+		for (TournamentPlayerPanel player: players) {
+			if (!start) {
+				if (evt.getSource().equals(player.getPlayerType())) {
+					start = true;
+					selectedIndex = player.getPlayerType().getSelectedIndex();
+				}
+			}
+			else {
+				player.getPlayerType().setSelectedIndex(selectedIndex);
+			}
+		}
 	}
 
 	public TableView getTable() {

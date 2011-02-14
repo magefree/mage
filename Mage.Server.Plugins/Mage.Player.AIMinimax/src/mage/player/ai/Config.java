@@ -33,9 +33,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -43,7 +41,7 @@ import mage.util.Logging;
  */
 public class Config {
 
-	private final static Logger logger = Logging.getLogger(Config.class.getName());
+	private final static Logger logger = Logger.getLogger(Config.class);
 
 	public static final int maxDepth;
 	public static final int maxNodes;
@@ -59,9 +57,9 @@ public class Config {
 			File file = new File(Config.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
 			p.load(new FileInputStream(new File(file.getParent() + File.separator + "AIMinimax.properties")));
 		} catch (IOException ex) {
-			logger.log(Level.SEVERE, null, ex);
+			logger.fatal("", ex);
 		} catch (URISyntaxException ex) {
-			Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+			logger.fatal("", ex);
 		}
 		maxDepth = Integer.parseInt(p.getProperty("maxDepth"));
 		maxNodes = Integer.parseInt(p.getProperty("maxNodes"));

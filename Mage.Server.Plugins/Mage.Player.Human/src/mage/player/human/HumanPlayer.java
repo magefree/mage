@@ -57,6 +57,7 @@ import mage.choices.ChoiceImpl;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.game.Game;
 import mage.game.Table;
+import mage.game.match.Match;
 import mage.game.permanent.Permanent;
 import mage.game.tournament.Tournament;
 import mage.target.Target;
@@ -482,8 +483,8 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	}
 
 	@Override
-	public void sideboard(Table table, Deck deck) {
-		table.fireSideboardEvent(playerId, deck);
+	public void sideboard(Match match, Deck deck) {
+		match.fireSideboardEvent(playerId, deck);
 	}
 
 	@Override

@@ -84,8 +84,16 @@ public class Table implements Serializable {
 		state = TableState.DUELING;
 	}
 
+	public void initTournament() {
+		state = TableState.DUELING;
+	}
+
 	public void initDraft() {
 		state = TableState.DRAFTING;
+	}
+
+	public void construct() {
+		state = TableState.CONSTRUCTING;
 	}
 
 	public void endGame() {
@@ -157,24 +165,8 @@ public class Table implements Serializable {
 		return this.name;
 	}
 
-	public void fireSideboardEvent(UUID playerId, Deck deck) {
-		tableEventSource.fireTableEvent(EventType.SIDEBOARD, playerId, deck);
-	}
-
-	public void fireConstructEvent(UUID playerId, Deck deck) {
-		tableEventSource.fireTableEvent(EventType.CONSTRUCT, playerId, deck);
-	}
-
-	public void fireSubmitDeckEvent(UUID playerId, Deck deck) {
-		tableEventSource.fireTableEvent(EventType.SUBMIT_DECK, playerId, deck);
-	}
-
 	public void addTableEventListener(Listener<TableEvent> listener) {
 		tableEventSource.addListener(listener);
-	}
-
-	public void initTournament() {
-		state = TableState.CONSTRUCTING;
 	}
 
 }

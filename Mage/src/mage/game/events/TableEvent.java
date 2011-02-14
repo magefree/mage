@@ -56,6 +56,7 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
 	private Deck deck;
 	private TournamentPairing pair;
 	private MatchOptions options;
+	private int timeout;
 
 	public TableEvent(EventType eventType) {
 		super(eventType);
@@ -70,11 +71,12 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
 		this.eventType = eventType;
 	}
 
-	public TableEvent(EventType eventType, UUID playerId, Deck deck) {
+	public TableEvent(EventType eventType, UUID playerId, Deck deck, int timeout) {
 		super(playerId);
 		this.playerId = playerId;
 		this.deck = deck;
 		this.eventType = eventType;
+		this.timeout = timeout;
 	}
 
 	public TableEvent(EventType eventType, String message, Draft draft) {
@@ -125,5 +127,9 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
 
 	public MatchOptions getMatchOptions() {
 		return options;
+	}
+
+	public int getTimeout() {
+		return timeout;
 	}
 }
