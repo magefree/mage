@@ -112,18 +112,6 @@ public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
 		return false;
 	}
 
-	public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-		Permanent permanent = game.getPermanent(id);
-		if (permanent != null) {
-			if (source != null)
-				//TODO: check for replacement effects
-				return permanent.canBeTargetedBy(game.getObject(source.getSourceId())) && filter.match(permanent, controllerId, game);
-			else
-				return filter.match(permanent, controllerId, game);
-		}
-		return false;
-	}
-
 	/**
 	 * Checks if there are enough {@link Permanent} or {@link Player} that can be chosen.  Should only be used
 	 * for Ability targets since this checks for protection, shroud etc.
