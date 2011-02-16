@@ -123,6 +123,7 @@ $fulltoshort{'Archenemy'} = 'ARC';
 $fulltoshort{'Scars of Mirrodin'} = 'SOM';
 $fulltoshort{'From the Vault: Relics'} = 'FVR';
 $fulltoshort{'Duel Decks: Elspeth vs. Tezzeret'} = 'DDF';
+$fulltoshort{'Mirrodin Besieged'} = 'MBS';
 
 my %wizardstous;
 $wizardstous{'6E'} = '6ED';
@@ -225,6 +226,7 @@ $knownSets{'GPT'} = 'guildpact';
 $knownSets{'DIS'} = 'dissension';
 $knownSets{'MRD'} = 'mirrodin';
 $knownSets{'DDF'} = 'elspethvstezzeret';
+$knownSets{'MBS'} = 'mirrodinbesieged';
 
 my %raritiesConversion;
 $raritiesConversion{'C'} = 'COMMON';
