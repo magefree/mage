@@ -208,6 +208,7 @@ $wizardstous{'WWK'} = 'WWK';
 $wizardstous{'SOM'} = 'SOM';
 $wizardstous{'V10'} = 'FVR';
 $wizardstous{'DDF'} = 'DDF';
+$wizardstous{'MBS'} = 'MBS';
 
 my %knownSets;
 $knownSets{'ARB'} = 'alarareborn';
