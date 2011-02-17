@@ -23,6 +23,9 @@ Mage/target
 syntax: regexp
 .class
 .jar
+.iml
+.ipr
+.iws
 nbactions.xml
 glob:Mage.Client/cheat.dck
 glob:Mage.Client/test.dck
