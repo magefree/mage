@@ -56,7 +56,7 @@ public class PlayGameTest extends MageTestBase {
 		game.addPlayer(computerB, deck2);
 		game.loadCards(deck2.getCards(), computerB.getId());
 
-		parseScenario("scenario1.txt");
+		//parseScenario("scenario1.txt");
 		game.cheat(computerA.getId(), commandsA);
 		game.cheat(computerA.getId(), libraryCardsA, handCardsA, battlefieldCardsA, graveyardCardsA);
 		game.cheat(computerB.getId(), commandsB);

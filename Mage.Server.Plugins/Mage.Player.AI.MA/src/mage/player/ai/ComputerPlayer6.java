@@ -116,6 +116,11 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 				pass();
 				break;
 			case PRECOMBAT_MAIN:
+			case BEGIN_COMBAT:
+			case DECLARE_ATTACKERS:
+			case DECLARE_BLOCKERS:
+			case COMBAT_DAMAGE:
+			case END_COMBAT:
 			case POSTCOMBAT_MAIN:
 				if (game.getActivePlayerId().equals(playerId)) {
 					Player player = game.getPlayer(playerId);
@@ -141,11 +146,6 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 				}
 				act(game);
 				break;
-						case BEGIN_COMBAT:
-			case DECLARE_ATTACKERS:
-			case DECLARE_BLOCKERS:
-			case COMBAT_DAMAGE:
-			case END_COMBAT:
 			case END_TURN:
 				pass();
 				break;
