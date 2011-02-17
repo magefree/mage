@@ -46,6 +46,7 @@ public class SimulationNode2 implements Serializable {
 
 	protected Game game;
 	protected int gameValue;
+	protected int score;
 	protected List<Ability> abilities;
 	protected int depth;
 	protected List<SimulationNode2> children = new ArrayList<SimulationNode2>();
@@ -123,5 +124,13 @@ public class SimulationNode2 implements Serializable {
 
 	public List<String> getChoices() {
 		return this.choices;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
 	}
 }

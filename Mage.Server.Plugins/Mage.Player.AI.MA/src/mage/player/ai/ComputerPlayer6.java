@@ -179,10 +179,12 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 			SimulationNode2.resetCount();
 			root = new SimulationNode2(sim, maxDepth, playerId);
 			logger.info("simulating actions");
+			//int bestScore = addActionsTimed(new FilterAbility());
 			addActionsTimed(new FilterAbility());
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
-				int bestScore = GameStateEvaluator2.evaluate(playerId, root.getGame());
+				//GameStateEvaluator2.evaluate(playerId, root.getGame());
+				int bestScore = root.getScore();
 				if (bestScore > currentScore) {
 					actions = new LinkedList<Ability>(root.abilities);
 					combat = root.combat;
@@ -294,7 +296,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 		game.getPlayerList().setCurrent(game.getActivePlayerId());
 	}
 
-	protected void addActionsTimed(final FilterAbility filter) {
+	protected Integer addActionsTimed(final FilterAbility filter) {
 		FutureTask<Integer> task = new FutureTask<Integer>(new Callable<Integer>() {
 			public Integer call() throws Exception
 			{
@@ -303,7 +305,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 		});
 		pool.execute(task);
 		try {
-			task.get(Config2.maxThinkSeconds, TimeUnit.MINUTES);
+			return task.get(Config2.maxThinkSeconds, TimeUnit.MINUTES);
 		} catch (TimeoutException e) {
 			logger.info("simulating - timed out");
 			task.cancel(true);
@@ -314,6 +316,8 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 			e.printStackTrace();
 			task.cancel(true);
 		}
+		//TODO: timeout handling
+		return 0;
 	}
 
 	protected int addActions(SimulationNode2 node, FilterAbility filter, int depth, int alpha, int beta) {
@@ -399,6 +403,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 					if (val < beta) {
 						beta = val;
 						bestNode = newNode;
+						bestNode.setScore(val);
 						node.setCombat(newNode.getCombat());
 					}
 				}
@@ -406,6 +411,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 					if (val > alpha) {
 						alpha = val;
 						bestNode = newNode;
+						bestNode.setScore(val);
 						node.setCombat(newNode.getCombat());
 						if (node.getTargets().size() > 0)
 							targets = node.getTargets();
@@ -426,6 +432,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 		if (bestNode != null) {
 			node.children.clear();
 			node.children.add(bestNode);
+			node.setScore(bestNode.getScore());
 		}
 		if (!currentPlayer.getId().equals(playerId)) {
 			//logger.info("returning priority beta: " + beta);
