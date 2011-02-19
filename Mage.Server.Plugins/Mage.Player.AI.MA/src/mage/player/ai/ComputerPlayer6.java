@@ -33,12 +33,14 @@ import mage.Constants.PhaseStep;
 import mage.Constants.RangeOfInfluence;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.common.PassAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
 import mage.filter.FilterAbility;
+import mage.filter.common.FilterCreatureForAttack;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
@@ -116,35 +118,35 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 				pass();
 				break;
 			case PRECOMBAT_MAIN:
-			case BEGIN_COMBAT:
-			case DECLARE_ATTACKERS:
 			case DECLARE_BLOCKERS:
-			case COMBAT_DAMAGE:
-			case END_COMBAT:
 			case POSTCOMBAT_MAIN:
 				if (game.getActivePlayerId().equals(playerId)) {
-					Player player = game.getPlayer(playerId);
-					System.out.println("Turn::"+game.getTurnNum());
-					System.out.println("[" + game.getPlayer(playerId).getName() + "] " + game.getTurn().getStepType().name() +", life=" + player.getLife());
-					String s = "[";
-					for (Card card : player.getHand().getCards(game)) {
-						s += card.getName() + ";";
+					printOutState(game, playerId);
+					if (actions.size() == 0) {
+						calculateActions(game);
 					}
-					s += "]";
-					System.out.println("Hand: " + s);
-					s = "[";
-					for (Permanent permanent : game.getBattlefield().getAllPermanents()) {
-						 if (permanent.getOwnerId().equals(player.getId())) {
-							 s += permanent.getName() + ";";
-						 }
+					act(game);
+				} else {
+					pass();
+				}
+				break;
+			case BEGIN_COMBAT:
+			case COMBAT_DAMAGE:
+			case END_COMBAT:
+				pass();
+				break;
+			case DECLARE_ATTACKERS:
+				if (!game.getActivePlayerId().equals(playerId)) {
+					printOutState(game, playerId);
+					printOutState(game, game.getOpponents(playerId).iterator().next());
+					if (actions.size() == 0) {
+						calculateActions(game);
 					}
-					s += "]";
-					System.out.println("Permanents: " + s);
+					act(game);
+					printOutState(game, playerId);
+				} else {
+					pass();
 				}
-				if (actions.size() == 0) {
-					calculateActions(game);
-				}
-				act(game);
 				break;
 			case END_TURN:
 				pass();
@@ -153,6 +155,36 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 				pass();
 				break;
 		}
+	}
+
+	private void printOutState(Game game, UUID playerId) {
+		Player player = game.getPlayer(playerId);
+		System.out.println("Turn::"+game.getTurnNum());
+		System.out.println("[" + game.getPlayer(playerId).getName() + "] " + game.getTurn().getStepType().name() +", life=" + player.getLife());
+		Player opponent = game.getPlayer(game.getOpponents(playerId).iterator().next());
+		System.out.println("[Opponent] life=" + opponent.getLife());
+
+		String s = "[";
+		for (Card card : player.getHand().getCards(game)) {
+			s += card.getName() + ";";
+		}
+		s += "]";
+		System.out.println("Hand: " + s);
+		s = "[";
+		for (Permanent permanent : game.getBattlefield().getAllPermanents()) {
+			 if (permanent.getOwnerId().equals(player.getId())) {
+				 s += permanent.getName();
+				 if (permanent.isTapped()) {
+					s+="(tapped)";
+				 }
+				 if (permanent.isAttacking()) {
+					s+="(attacking)";
+				 }
+				 s+=";";
+			 }
+		}
+		s += "]";
+		System.out.println("Permanents: " + s);
 	}
 
 	protected void act(Game game) {
@@ -177,7 +209,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 		if (!getNextAction(game)) {
 			Game sim = createSimulation(game);
 			SimulationNode2.resetCount();
-			root = new SimulationNode2(sim, maxDepth, playerId);
+			root = new SimulationNode2(null, sim, maxDepth, playerId);
 			logger.info("simulating actions");
 			//int bestScore = addActionsTimed(new FilterAbility());
 			addActionsTimed(new FilterAbility());
@@ -203,6 +235,19 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 			}
 			logger.info("simlating -- game value:" + game.getState().getValue() + " test value:" + test.gameValue);
 			if (root.playerId.equals(playerId) && root.abilities != null && game.getState().getValue() == test.gameValue) {
+
+				// Try to fix horizon effect
+				if (root.combat == null || root.combat.getAttackers().size() == 0) {
+					FilterCreatureForAttack attackFilter = new FilterCreatureForAttack();
+					attackFilter.getControllerId().add(playerId);
+					List<Permanent> attackers = game.getBattlefield().getAllActivePermanents(attackFilter);
+					if (attackers.size() > 0) {
+						// we have attackers but don't attack with any of them
+						// let's try once again to avoid possible horizon effect
+						return false;
+					}
+				}
+
 				logger.info("simulating -- continuing previous action chain");
 				actions = new LinkedList<Ability>(root.abilities);
 				combat = root.combat;
@@ -219,6 +264,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 		UUID currentPlayerId = node.getGame().getPlayerList().get();
 		SimulationNode2 bestChild = null;
 		for (SimulationNode2 child: node.getChildren()) {
+			Combat _combat = child.getCombat();
 			if (alpha >= beta) {
 				logger.info("alpha beta pruning");
 				break;
@@ -232,16 +278,20 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 				if (val < beta) {
 					beta = val;
 					bestChild = child;
-					if (node.getCombat() == null)
-						node.setCombat(child.getCombat());
+					if (node.getCombat() == null) {
+						node.setCombat(_combat);
+						bestChild.setCombat(_combat);
+					}
 				}
 			}
 			else {
 				if (val > alpha) {
 					alpha = val;
 					bestChild = child;
-					if (node.getCombat() == null)
-						node.setCombat(child.getCombat());
+					if (node.getCombat() == null) {
+						node.setCombat(_combat);
+						bestChild.setCombat(_combat);
+					}
 				}
 			}
 		}
@@ -280,7 +330,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 						SearchEffect newEffect = getSearchEffect((StackAbility) newAbility);
 						newEffect.getTarget().addTarget(targetId, newAbility, sim);
 						sim.getStack().push(newAbility);
-						SimulationNode2 newNode = new SimulationNode2(sim, depth, ability.getControllerId());
+						SimulationNode2 newNode = new SimulationNode2(node, sim, depth, ability.getControllerId());
 						node.children.add(newNode);
 						newNode.getTargets().add(targetId);
 						logger.fine("simulating search -- node#: " + SimulationNode2.getCount() + "for player: " + sim.getPlayer(ability.getControllerId()).getName());
@@ -313,6 +363,9 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 			e.printStackTrace();
 			task.cancel(true);
 		} catch (InterruptedException e) {
+			e.printStackTrace();
+			task.cancel(true);
+		} catch (Exception e) {
 			e.printStackTrace();
 			task.cancel(true);
 		}
@@ -389,12 +442,14 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 			Game sim = game.copy();
 			if (sim.getPlayer(currentPlayer.getId()).activateAbility((ActivatedAbility) action.copy(), sim)) {
 				sim.applyEffects();
+				if (checkForRepeatedAction(sim, node, action, currentPlayer.getId()))
+					continue;
 				if (!sim.isGameOver() && action.isUsesStack()) {
 					// only pass if the last action uses the stack
 					sim.getPlayer(currentPlayer.getId()).pass();
 					sim.getPlayerList().getNext();
 				}
-				SimulationNode2 newNode = new SimulationNode2(sim, action, depth, currentPlayer.getId());
+				SimulationNode2 newNode = new SimulationNode2(node, sim, action, depth, currentPlayer.getId());
 				if (logger.isLoggable(Level.FINE))
 					logger.fine("simulating -- node #:" + SimulationNode2.getCount() + " actions:" + action);
 				sim.checkStateAndTriggered();
@@ -572,7 +627,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 								}
 							}
 							sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, playerId, playerId));
-							SimulationNode2 newNode = new SimulationNode2(sim, node.getDepth()-1, activePlayerId);
+							SimulationNode2 newNode = new SimulationNode2(node, sim, node.getDepth()-1, activePlayerId);
 							logger.info("simulating -- node #:" + SimulationNode2.getCount() + " declare attakers");
 							newNode.setCombat(sim.getCombat());
 							node.children.add(newNode);
@@ -593,7 +648,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 										}
 									}
 									sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, playerId, playerId));
-									SimulationNode2 newNode = new SimulationNode2(sim, node.getDepth()-1, defenderId);
+									SimulationNode2 newNode = new SimulationNode2(node, sim, node.getDepth()-1, defenderId);
 									logger.info("simulating -- node #:" + SimulationNode2.getCount() + " declare blockers");
 									newNode.setCombat(sim.getCombat());
 									node.children.add(newNode);
@@ -660,4 +715,19 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 		return sim;
 	}
 
+	private boolean checkForRepeatedAction(Game sim, SimulationNode2 node, Ability action, UUID playerId) {
+		if (action instanceof PassAbility)
+			return false;
+		int val = GameStateEvaluator2.evaluate(playerId, sim);
+		SimulationNode2 test = node.getParent();
+		while (test != null && !test.getPlayerId().equals(playerId)) {
+			test = test.getParent();
+		}
+		if (test != null && test.getAbilities() != null && test.getAbilities().size() == 1) {
+			if (action.toString().equals(test.getAbilities().get(0).toString()) && GameStateEvaluator2.evaluate(playerId, sim) == val) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

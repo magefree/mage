@@ -357,7 +357,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		//20091005 - 103.3
 		for (UUID playerId: state.getPlayerList(startingPlayerId)) {
 			Player player = getPlayer(playerId);
-			player.setLife(this.getLife(), this);
+			if (!testMode || player.getLife() == 0) {
+				player.setLife(this.getLife(), this);
+			}
 			if (!testMode) {
 				player.drawCards(7, this);
 			}
@@ -949,6 +951,22 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 									gameCards.remove(card);
 								}
 								player.getLibrary().clear();
+							}
+							break;
+						case OUTSIDE:
+							if (command.getValue().contains("life:")) {
+								String[] s = command.getValue().split(":");
+								if (s.length == 2) {
+									try {
+										Integer amount = Integer.parseInt(s[1]);
+										player.setLife(amount, this);
+										logger.info("Setting player's life: ");
+									} catch (NumberFormatException e) {
+										e.printStackTrace();
+									}
+								}
+
+
 							}
 							break;
 					}

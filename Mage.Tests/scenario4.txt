@@ -1,14 +1,13 @@
 ### ComputerA ###
 # Battlefield
-battlefield:ComputerA:Island:1
-#battlefield:ComputerA:Goblin Guide:1
+battlefield:ComputerA:Swamp:1
+battlefield:ComputerA:Mountain:2
 # Hand
-hand:ComputerA:Mountain:2
-hand:ComputerA:Hellspark Elemental:5
+hand:ComputerA:Blightning:5
 # Library
 # from down to top
 library:ComputerA:clear:0
-library:ComputerA:Hellspark Elemental:10
+library:ComputerA:Blightning:15
 
 ### ComputerB ###
 # Battlefield

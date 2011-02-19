@@ -225,6 +225,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 					return true;
 				}
 			}
+			return false;
 		}
 		if (target instanceof TargetDiscard) {
 			findPlayables(game);
@@ -242,6 +243,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 					return true;
 				}
 			}
+			return false;
 		}
 		if (target instanceof TargetControlledPermanent) {
 			List<Permanent> targets;
@@ -269,6 +271,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 					return true;
 				}
 			}
+			return false;
 		}
 		if (target instanceof TargetCreatureOrPlayer) {
 			List<Permanent> targets;
@@ -297,8 +300,9 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 					return true;
 				}
 			}
+			return false;
 		}
-		return false;
+		throw new IllegalStateException("Target wasn't handled. class:" + target.getClass().toString());
 	}
 
 	@Override

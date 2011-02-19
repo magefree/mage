@@ -44,9 +44,9 @@ public class GameStateEvaluator2 {
 		Player opponent = game.getPlayer(game.getOpponents(playerId).iterator().next());
 		if (game.isGameOver()) {
 			if (player.hasLost() || opponent.hasWon())
-				return Integer.MIN_VALUE;
+				return LOSE_GAME_SCORE;
 			if (opponent.hasLost() || player.hasWon())
-				return Integer.MAX_VALUE;
+				return WIN_GAME_SCORE;
 		}
 		//int lifeScore = (player.getLife() - opponent.getLife()) * LIFE_FACTOR;
 
@@ -73,12 +73,11 @@ public class GameStateEvaluator2 {
 		}
 		//permanentScore *= PERMANENT_FACTOR;
 
-		/*int handScore = 0;
-		handScore = 7 - opponent.getHand().size();
-		handScore += Math.min(7, player.getHand().size());
-		handScore *= HAND_FACTOR;*/
+		int handScore = 0;
+		handScore = player.getHand().size() - opponent.getHand().size();
+		handScore *= 5;
 
-		int score = lifeScore + permanentScore /*+ handScore*/;
+		int score = lifeScore + permanentScore + handScore;
 		//if (logger.isLoggable(Level.FINE))
 			logger.fine("game state evaluated to- lifeScore:" + lifeScore + " permanentScore:" + permanentScore /*+ " handScore:" + handScore*/ + "total:" + score);
 		return score;

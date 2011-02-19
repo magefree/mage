@@ -56,7 +56,7 @@ public class PlayGameTest extends MageTestBase {
 		game.addPlayer(computerB, deck2);
 		game.loadCards(deck2.getCards(), computerB.getId());
 
-		//parseScenario("scenario1.txt");
+		//parseScenario("scenario4.txt");
 		game.cheat(computerA.getId(), commandsA);
 		game.cheat(computerA.getId(), libraryCardsA, handCardsA, battlefieldCardsA, graveyardCardsA);
 		game.cheat(computerB.getId(), commandsB);
@@ -108,6 +108,16 @@ public class PlayGameTest extends MageTestBase {
 						} else if ("library".equalsIgnoreCase(zone)) {
 							gameZone = Constants.Zone.LIBRARY;
 							cards = nickname.equals("ComputerA") ? libraryCardsA : libraryCardsB;
+						} else if ("player".equalsIgnoreCase(zone)) {
+							String command = m.group(3);
+							if ("life".equals(command)) {
+								if (nickname.equals("ComputerA")) {
+									commandsA.put(Constants.Zone.OUTSIDE, "life:" + m.group(4));
+								} else {
+									commandsB.put(Constants.Zone.OUTSIDE, "life:" + m.group(4));
+								}
+							}
+							continue;
 						} else {
 							continue; // go parse next line
 						}

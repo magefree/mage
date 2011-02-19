@@ -50,12 +50,14 @@ public class SimulationNode2 implements Serializable {
 	protected List<Ability> abilities;
 	protected int depth;
 	protected List<SimulationNode2> children = new ArrayList<SimulationNode2>();
+	protected SimulationNode2 parent;
 	protected List<UUID> targets = new ArrayList<UUID>();
 	protected List<String> choices = new ArrayList<String>();
 	protected UUID playerId;
 	protected Combat combat;
 
-	public SimulationNode2(Game game, int depth, UUID playerId) {
+	public SimulationNode2(SimulationNode2 parent, Game game, int depth, UUID playerId) {
+		this.parent = parent;
 		this.game = game;
 		this.depth = depth;
 		this.playerId = playerId;
@@ -63,13 +65,13 @@ public class SimulationNode2 implements Serializable {
 		nodeCount++;
 	}
 
-	public SimulationNode2(Game game, List<Ability> abilities, int depth, UUID playerId) {
-		this(game, depth, playerId);
+	public SimulationNode2(SimulationNode2 parent, Game game, List<Ability> abilities, int depth, UUID playerId) {
+		this(parent, game, depth, playerId);
 		this.abilities = abilities;
 	}
 
-	public SimulationNode2(Game game, Ability ability, int depth, UUID playerId) {
-		this(game, depth, playerId);
+	public SimulationNode2(SimulationNode2 parent, Game game, Ability ability, int depth, UUID playerId) {
+		this(parent, game, depth, playerId);
 		this.abilities = new ArrayList<Ability>();
 		abilities.add(ability);
 	}
@@ -96,6 +98,10 @@ public class SimulationNode2 implements Serializable {
 
 	public List<Ability> getAbilities() {
 		return this.abilities;
+	}
+
+	public SimulationNode2 getParent() {
+		return this.parent;
 	}
 
 	public List<SimulationNode2> getChildren() {

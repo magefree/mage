@@ -223,7 +223,7 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
 		sim.getStack().push(new StackAbility(ability, playerId));
 		ability.activate(sim, false);
 		sim.applyEffects();
-		SimulationNode2 newNode = new SimulationNode2(sim, depth, playerId);
+		SimulationNode2 newNode = new SimulationNode2(parent, sim, depth, playerId);
 		logger.fine("simulating -- node #:" + SimulationNode2.getCount() + " triggered ability option");
 		for (Target target: ability.getTargets()) {
 			for (UUID targetId: target.getTargets()) {
