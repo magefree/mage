@@ -39,6 +39,8 @@ public class MonoHybridManaCost extends ManaCostImpl<MonoHybridManaCost> {
 
 	public MonoHybridManaCost(ColoredManaSymbol mana) {
 		this.mana = mana;
+		this.cost = new Mana(mana);
+		this.cost.add(Mana.ColorlessMana(2));
 		addColoredOption(mana);
 		options.add(Mana.ColorlessMana(2));
 	}
@@ -52,10 +54,6 @@ public class MonoHybridManaCost extends ManaCostImpl<MonoHybridManaCost> {
 	@Override
 	public int convertedManaCost() {
 		return 2;
-	}
-
-	public ColoredManaSymbol getMana() {
-		return mana;
 	}
 
 	@Override

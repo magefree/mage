@@ -228,9 +228,15 @@ public abstract class TournamentImpl implements Tournament {
 
 	public void construct() {
 		tableEventSource.fireTableEvent(EventType.CONSTRUCT);
-		for (TournamentPlayer player: players.values()) {
+		for (final TournamentPlayer player: players.values()) {
 			player.setConstructing();
-			player.getPlayer().construct(this, player.getDeck());
+			new Thread(
+				new Runnable() {
+					public void run() {
+						player.getPlayer().construct(TournamentImpl.this, player.getDeck());
+					}
+				}
+			).start();
 		}
 		synchronized(this) {
 			while (!isDoneConstructing()) {

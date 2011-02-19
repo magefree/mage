@@ -6,8 +6,6 @@
 package mage.player.ai;
 
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.abilities.ActivatedAbility;
@@ -18,7 +16,7 @@ import mage.abilities.mana.ManaAbility;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -29,7 +27,7 @@ import mage.util.Logging;
  */
 public class GameStateEvaluator {
 
-	private final static transient Logger logger = Logging.getLogger(GameStateEvaluator.class.getName());
+	private final static transient Logger logger = Logger.getLogger(GameStateEvaluator.class);
 
 	private static final int LIFE_FACTOR = Config.evaluatorLifeFactor;
 	private static final int PERMANENT_FACTOR = Config.evaluatorPermanentFactor;
@@ -56,13 +54,12 @@ public class GameStateEvaluator {
 		permanentScore *= PERMANENT_FACTOR;
 
 		int handScore = 0;
-		handScore = 7 - opponent.getHand().size();
-		handScore += Math.min(7, player.getHand().size());
+		handScore = player.getHand().size() - opponent.getHand().size();
 		handScore *= HAND_FACTOR;
 
 		int score = lifeScore + permanentScore + handScore;
-		if (logger.isLoggable(Level.FINE))
-			logger.fine("game state evaluated to- lifeScore:" + lifeScore + " permanentScore:" + permanentScore + " handScore:" + handScore + " total:" + score);
+		if (logger.isDebugEnabled())
+			logger.debug("game state evaluated to- lifeScore:" + lifeScore + " permanentScore:" + permanentScore + " handScore:" + handScore + " total:" + score);
 		return score;
 	}
 

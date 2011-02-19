@@ -98,6 +98,8 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 	@Override
 	public void priority(Game game) {
 		logState(game);
+		if (logger.isDebugEnabled())
+			logger.debug("Game State: Turn-" + game.getTurnNum() + " Step-" + game.getTurn().getStepType() + " ActivePlayer-" + game.getPlayer(game.getActivePlayerId()).getName() + " PriorityPlayer-" + name);
 		game.firePriorityEvent(playerId);
 		switch (game.getTurn().getStepType()) {
 			case UPKEEP:
@@ -154,7 +156,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 			currentScore = GameStateEvaluator.evaluate(playerId, game);
 			Game sim = createSimulation(game);
 			SimulationNode.resetCount();
-			root = new SimulationNode(sim, maxDepth, playerId);
+			root = new SimulationNode(null, sim, maxDepth, playerId);
 			logger.debug("simulating pre combat actions -----------------------------------------------------------------------------------------");
 
 			addActionsTimed(new FilterAbility());
@@ -171,7 +173,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 			currentScore = GameStateEvaluator.evaluate(playerId, game);
 			Game sim = createSimulation(game);
 			SimulationNode.resetCount();
-			root = new SimulationNode(sim, maxDepth, playerId);
+			root = new SimulationNode(null, sim, maxDepth, playerId);
 			logger.debug("simulating post combat actions ----------------------------------------------------------------------------------------");
 			addActionsTimed(new FilterAbility());
 			if (root.children.size() > 0) {
@@ -227,13 +229,13 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 					else {
 						switch (game.getTurn().getStepType()) {
 							case PRECOMBAT_MAIN:
-								val = -simulateCombat(game, node, depth-1, alpha, beta, false);
+								val = simulateCombat(game, node, depth-1, alpha, beta, false);
 								break;
 							case POSTCOMBAT_MAIN:
-								val = -simulateCounterAttack(game, node, depth-1, alpha, beta);
+								val = simulateCounterAttack(game, node, depth-1, alpha, beta);
 								break;
 							default:
-								val = -GameStateEvaluator.evaluate(playerId, game);
+								val = GameStateEvaluator.evaluate(playerId, game);
 								break;
 						}
 					}
@@ -316,6 +318,8 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 		SimulationNode bestNode = null;
 		SimulatedPlayer attacker = (SimulatedPlayer) game.getPlayer(attackerId);
 
+		if (logger.isDebugEnabled())
+			logger.debug(attacker.getName() + "'s possible attackers: " + attacker.getAvailableAttackers(game));
 		for (Combat engagement: attacker.addAttackers(game)) {
 			if (alpha >= beta) {
 				logger.debug("simulating -- pruning attackers");
@@ -329,9 +333,9 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 				}
 			}
 			sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, playerId, playerId));
-			SimulationNode newNode = new SimulationNode(sim, depth, game.getActivePlayerId());
+			SimulationNode newNode = new SimulationNode(node, sim, depth, attackerId);
 			if (logger.isDebugEnabled())
-				logger.debug("simulating attack -- node#: " + SimulationNode.getCount());
+				logger.debug("simulating attack for player:" + game.getPlayer(newNode.getPlayerId()).getName());
 			sim.checkStateAndTriggered();
 			while (!sim.getStack().isEmpty()) {
 				sim.getStack().resolve(sim);
@@ -379,6 +383,8 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 		//check if defender is being attacked
 		if (game.getCombat().isAttacked(defenderId, game)) {
 			SimulatedPlayer defender = (SimulatedPlayer) game.getPlayer(defenderId);
+			if (logger.isDebugEnabled())
+				logger.debug(defender.getName() + "'s possible blockers: " + defender.getAvailableBlockers(game));
 			for (Combat engagement: defender.addBlockers(game)) {
 				if (alpha >= beta) {
 					logger.debug("simulating -- pruning blockers");
@@ -394,9 +400,9 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 					}
 				}
 				sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, playerId, playerId));
-				SimulationNode newNode = new SimulationNode(sim, depth, defenderId);
+				SimulationNode newNode = new SimulationNode(node, sim, depth, defenderId);
 				if (logger.isDebugEnabled())
-					logger.debug("simulating block -- node#: " + SimulationNode.getCount());
+					logger.debug("simulating block for player:" + game.getPlayer(newNode.getPlayerId()).getName());
 				sim.checkStateAndTriggered();
 				while (!sim.getStack().isEmpty()) {
 					sim.getStack().resolve(sim);

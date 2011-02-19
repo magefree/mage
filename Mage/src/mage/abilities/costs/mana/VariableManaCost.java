@@ -43,6 +43,7 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements 
 
 	public VariableManaCost() {
 		this(1);
+		this.cost = new Mana();
 		options.add(new Mana());
 	}
 	

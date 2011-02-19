@@ -66,6 +66,26 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 		any = mana.any;
 	}
 
+	public Mana(ColoredManaSymbol color) {
+		switch (color) {
+			case G:
+				green = 1;
+				break;
+			case R:
+				red = 1;
+				break;
+			case B:
+				black = 1;
+				break;
+			case U:
+				blue = 1;
+				break;
+			case W:
+				white = 1;
+				break;
+		}
+	}
+
 	public static Mana RedMana(int num) {
 		return new Mana(num, 0, 0, 0, 0, 0, 0);
 	}

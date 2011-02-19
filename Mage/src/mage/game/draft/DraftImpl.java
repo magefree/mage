@@ -58,7 +58,7 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
 	protected int boosterNum = 0;
 	protected int cardNum = 0;
 	protected TimingOption timing;
-	protected int[] times = {40, 40, 35, 30, 25, 25, 20, 20, 15, 10, 10, 5, 5, 5, 5};
+	protected int[] times = {75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5};
 
 	protected transient TableEventSource tableEventSource = new TableEventSource();
 	protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();

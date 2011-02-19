@@ -44,6 +44,7 @@ import mage.Constants.PhaseStep;
 import mage.Constants.RangeOfInfluence;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.common.PassAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Cards;
@@ -161,6 +162,8 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 			while (actions.peek() != null) {
 				Ability ability = actions.poll();
 				this.activateAbility((ActivatedAbility) ability, game);
+				if (logger.isDebugEnabled())
+					logger.debug("activating: " + ability);
 				if (ability.isUsesStack())
 					usedStack = true;
 			}
@@ -174,7 +177,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		if (!getNextAction(game)) {
 			Game sim = createSimulation(game);
 			SimulationNode.resetCount();
-			root = new SimulationNode(sim, maxDepth, playerId);
+			root = new SimulationNode(null, sim, maxDepth, playerId);
 			logger.debug("simulating actions");
 			addActionsTimed(new FilterAbility());
 			if (root.children.size() > 0) {
@@ -224,7 +227,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 				if (val < beta) {
 					beta = val;
 					bestChild = child;
-					if (node.getCombat() == null)
+//					if (node.getCombat() == null)
 						node.setCombat(child.getCombat());
 				}
 			}
@@ -232,7 +235,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 				if (val > alpha) {
 					alpha = val;
 					bestChild = child;
-					if (node.getCombat() == null)
+//					if (node.getCombat() == null)
 						node.setCombat(child.getCombat());
 				}
 			}
@@ -272,7 +275,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 						SearchEffect newEffect = getSearchEffect((StackAbility) newAbility);
 						newEffect.getTarget().addTarget(targetId, newAbility, sim);
 						sim.getStack().push(newAbility);
-						SimulationNode newNode = new SimulationNode(sim, depth, ability.getControllerId());
+						SimulationNode newNode = new SimulationNode(node, sim, depth, ability.getControllerId());
 						node.children.add(newNode);
 						newNode.getTargets().add(targetId);
 						logger.debug("simulating search -- node#: " + SimulationNode.getCount() + "for player: " + sim.getPlayer(ability.getControllerId()).getName());
@@ -381,12 +384,14 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 			Game sim = game.copy();
 			if (sim.getPlayer(currentPlayer.getId()).activateAbility((ActivatedAbility) action.copy(), sim)) {
 				sim.applyEffects();
+				if (checkForRepeatedAction(sim, node, action, currentPlayer.getId()))
+					continue;
 				if (!sim.isGameOver() && action.isUsesStack()) {
 					// only pass if the last action uses the stack
 					sim.getPlayer(currentPlayer.getId()).pass();
 					sim.getPlayerList().getNext();
 				}
-				SimulationNode newNode = new SimulationNode(sim, action, depth, currentPlayer.getId());
+				SimulationNode newNode = new SimulationNode(node, sim, action, depth, currentPlayer.getId());
 				if (logger.isDebugEnabled())
 					logger.debug("simulating -- node #:" + SimulationNode.getCount() + " actions:" + action);
 				sim.checkStateAndTriggered();
@@ -561,7 +566,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 								}
 							}
 							sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, playerId, playerId));
-							SimulationNode newNode = new SimulationNode(sim, node.getDepth()-1, activePlayerId);
+							SimulationNode newNode = new SimulationNode(node, sim, node.getDepth()-1, activePlayerId);
 							logger.debug("simulating -- node #:" + SimulationNode.getCount() + " declare attakers");
 							newNode.setCombat(sim.getCombat());
 							node.children.add(newNode);
@@ -582,7 +587,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 										}
 									}
 									sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, playerId, playerId));
-									SimulationNode newNode = new SimulationNode(sim, node.getDepth()-1, defenderId);
+									SimulationNode newNode = new SimulationNode(node, sim, node.getDepth()-1, defenderId);
 									logger.debug("simulating -- node #:" + SimulationNode.getCount() + " declare blockers");
 									newNode.setCombat(sim.getCombat());
 									node.children.add(newNode);
@@ -648,4 +653,22 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		return sim;
 	}
 
+	private boolean checkForRepeatedAction(Game sim, SimulationNode node, Ability action, UUID playerId) {
+		if (action instanceof PassAbility)
+			return false;
+		int val = GameStateEvaluator.evaluate(playerId, sim);
+		SimulationNode test = node.getParent();
+		while (test != null && !test.getPlayerId().equals(playerId)) {
+			test = test.getParent();
+		}
+		if (test != null && test.getAbilities() != null && test.getAbilities().size() == 1) {
+			if (action.toString().equals(test.getAbilities().get(0).toString()) && GameStateEvaluator.evaluate(playerId, sim) == val) {
+				if (logger.isDebugEnabled())
+					logger.debug("found repeated action " + action);
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }

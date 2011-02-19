@@ -191,7 +191,7 @@ public class TournamentController {
 		TableManager.getInstance().construct(tableId);
 	}
 
-	private synchronized void construct(UUID sessionId, Deck deck, int timeout) {
+	private void construct(UUID sessionId, Deck deck, int timeout) {
 		if (tournamentSessions.containsKey(sessionId))
 			tournamentSessions.get(sessionId).construct(deck, timeout);
 	}

@@ -28,6 +28,7 @@
 
 package mage.game.draft;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.cards.Card;
@@ -68,12 +69,16 @@ public class DraftPlayer {
 
 	public void addPick(Card card) {
 		deck.getSideboard().add(card);
-		booster.remove(card);
+		synchronized(booster) {
+			booster.remove(card);
+		}
 		picking = false;
 	}
 
 	public void openBooster(ExpansionSet set) {
-		booster = set.createBooster();
+		synchronized(booster) {
+			booster = set.createBooster();
+		}
 	}
 
 	public void setBooster(List<Card> booster) {
@@ -81,7 +86,9 @@ public class DraftPlayer {
 	}
 
 	public List<Card> getBooster() {
-		return booster;
+		synchronized(booster) {
+			return new ArrayList<Card>(booster);
+		}
 	}
 
 	public void setPicking() {

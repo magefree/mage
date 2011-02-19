@@ -37,16 +37,13 @@ public class GenericManaCost extends ManaCostImpl<GenericManaCost> {
 
 	public GenericManaCost(int mana) {
 		this.mana = mana;
+		this.cost = Mana.ColorlessMana(mana);
 		this.options.addMana(Mana.ColorlessMana(mana));
 	}
 
 	public GenericManaCost(GenericManaCost cost) {
 		super(cost);
 		this.mana = cost.mana;
-	}
-
-	public int getMana() {
-		return mana;
 	}
 
 	public void setMana(int mana) {

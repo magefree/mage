@@ -105,6 +105,11 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	}
 
 	@Override
+	public String toString() {
+		return this.name + "-" + this.expansionSetCode;
+	}
+
+	@Override
 	public void reset(Game game) {
 //		this.controllerId = ownerId;
 		this.maxBlocks = 1;

@@ -36,6 +36,7 @@ import mage.players.ManaPool;
 public interface ManaCost extends Cost {
 
 	public int convertedManaCost();
+	public Mana getMana();
 	public Mana getPayment();
 	public void assignPayment(ManaPool pool);
 	@Override
@@ -46,4 +47,5 @@ public interface ManaCost extends Cost {
 
 	@Override
 	public ManaCost copy();
+
 }

@@ -38,16 +38,13 @@ public class ColoredManaCost extends ManaCostImpl<ColoredManaCost> {
 
 	public ColoredManaCost(ColoredManaSymbol mana) {
 		this.mana = mana;
+		this.cost = new Mana(mana);
 		addColoredOption(mana);
 	}
 
 	public ColoredManaCost(ColoredManaCost cost) {
 		super(cost);
 		this.mana = cost.mana;
-	}
-
-	public ColoredManaSymbol getMana() {
-		return mana;
 	}
 
 	@Override

@@ -39,6 +39,8 @@ public class HybridManaCost extends ManaCostImpl<HybridManaCost> {
 	public HybridManaCost(ColoredManaSymbol mana1, ColoredManaSymbol mana2) {
 		this.mana1 = mana1;
 		this.mana2 = mana2;
+		this.cost = new Mana(mana1);
+		this.cost.add(new Mana(mana2));
 		addColoredOption(mana1);
 		addColoredOption(mana2);
 	}
@@ -52,14 +54,6 @@ public class HybridManaCost extends ManaCostImpl<HybridManaCost> {
 	@Override
 	public int convertedManaCost() {
 		return 1;
-	}
-
-	public ColoredManaSymbol getMana1() {
-		return mana1;
-	}
-
-	public ColoredManaSymbol getMana2() {
-		return mana2;
 	}
 
 	@Override

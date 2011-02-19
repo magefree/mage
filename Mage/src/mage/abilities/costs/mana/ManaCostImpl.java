@@ -31,7 +31,6 @@ package mage.abilities.costs.mana;
 import java.util.UUID;
 import mage.Constants.ColoredManaSymbol;
 import mage.Mana;
-import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.game.Game;
@@ -41,6 +40,7 @@ import mage.players.Player;
 public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T> implements ManaCost {
 
 	protected Mana payment;
+	protected Mana cost;
 	protected ManaOptions options;
 
 	@Override
@@ -60,6 +60,11 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
 	@Override
 	public Mana getPayment() {
 		return payment;
+	}
+
+	@Override
+	public Mana getMana() {
+		return cost;
 	}
 
 	@Override
