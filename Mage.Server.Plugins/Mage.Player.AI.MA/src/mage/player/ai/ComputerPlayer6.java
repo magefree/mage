@@ -643,9 +643,12 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 								for (Combat engagement: ((SimulatedPlayer2)game.getPlayer(defenderId)).addBlockers(game)) {
 									Game sim = game.copy();
 									for (CombatGroup group: engagement.getGroups()) {
-										for (UUID blockerId: group.getBlockers()) {
+										List<UUID> blockers = new ArrayList<UUID>();
+										blockers.addAll(group.getBlockers());
+										for (UUID blockerId: blockers) {
 											group.addBlocker(blockerId, defenderId, sim);
 										}
+										blockers = null;
 									}
 									sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, playerId, playerId));
 									SimulationNode2 newNode = new SimulationNode2(node, sim, node.getDepth()-1, defenderId);
