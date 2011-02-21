@@ -142,7 +142,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 						filteredCards.add(card);
 				}
 			}
-			this.cardGrid.loadCards(new CardsView(filteredCards), (SortBy) cbSortBy.getSelectedItem(), bigCard, null);
+			this.cardGrid.loadCards(new CardsView(filteredCards), (SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected(), bigCard, null);
 		}
 		finally {
 			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -198,6 +198,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         rdoInstants = new javax.swing.JRadioButton();
         rdoSorceries = new javax.swing.JRadioButton();
         rdoPlaneswalkers = new javax.swing.JRadioButton();
+        chkPiles = new javax.swing.JCheckBox();
         cbSortBy = new javax.swing.JComboBox();
 
         tbColor.setFloatable(false);
@@ -394,6 +395,17 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbTypes.add(rdoPlaneswalkers);
 
+        chkPiles.setText("Piles");
+        chkPiles.setFocusable(false);
+        chkPiles.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        chkPiles.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        chkPiles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkPilesActionPerformed(evt);
+            }
+        });
+        tbTypes.add(chkPiles);
+
         cbSortBy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbSortBy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -530,8 +542,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
 	private void cbSortByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSortByActionPerformed
 		if (cbSortBy.getSelectedItem() instanceof SortBy)
-			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem());
+			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
 	}//GEN-LAST:event_cbSortByActionPerformed
+
+	private void chkPilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPilesActionPerformed
+		if (cbSortBy.getSelectedItem() instanceof SortBy)
+			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+	}//GEN-LAST:event_chkPilesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -540,6 +557,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private mage.client.cards.CardGrid cardGrid;
     private javax.swing.JComboBox cbExpansionSet;
     private javax.swing.JComboBox cbSortBy;
+    private javax.swing.JCheckBox chkPiles;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton rdoArtifacts;
     private javax.swing.JRadioButton rdoBlack;
@@ -561,25 +579,25 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 	@Override
 	public void componentResized(ComponentEvent e) {
 		if (cbSortBy.getSelectedItem() instanceof SortBy)
-			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem());
+			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
 	}
 
 	@Override
 	public void componentMoved(ComponentEvent e) {
 		if (cbSortBy.getSelectedItem() instanceof SortBy)
-			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem());
+			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
 	}
 
 	@Override
 	public void componentShown(ComponentEvent e) {
 		if (cbSortBy.getSelectedItem() instanceof SortBy)
-			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem());
+			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
 	}
 
 	@Override
 	public void componentHidden(ComponentEvent e) {
 		if (cbSortBy.getSelectedItem() instanceof SortBy)
-			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem());
+			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
 	}
 
 }

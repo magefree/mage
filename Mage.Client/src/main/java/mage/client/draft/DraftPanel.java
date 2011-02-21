@@ -98,7 +98,7 @@ public class DraftPanel extends javax.swing.JPanel {
 
 	public void loadBooster(DraftPickView draftPickView) {
 		draftBooster.loadBooster(draftPickView.getBooster(), bigCard);
-		draftPicks.loadCards(draftPickView.getPicks(), SortBy.NAME, bigCard, null);
+		draftPicks.loadCards(draftPickView.getPicks(), SortBy.NAME, false, bigCard, null);
 		this.draftBooster.clearCardEventListeners();
 		this.draftBooster.addCardEventListener(
 			new Listener<Event> () {
@@ -108,7 +108,7 @@ public class DraftPanel extends javax.swing.JPanel {
 						DraftPickView view = session.sendCardPick(draftId, (UUID)event.getSource());
 						if (view != null) {
 							draftBooster.loadBooster(view.getBooster(), bigCard);
-							draftPicks.loadCards(view.getPicks(), SortBy.NAME, bigCard, null);
+							draftPicks.loadCards(view.getPicks(), SortBy.NAME, false, bigCard, null);
 							setMessage("Waiting for other players");
 						}
 					}
