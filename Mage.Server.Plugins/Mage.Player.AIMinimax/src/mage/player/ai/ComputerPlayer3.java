@@ -160,6 +160,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 			logger.debug("simulating pre combat actions -----------------------------------------------------------------------------------------");
 
 			addActionsTimed(new FilterAbility());
+//			addActions(root, new FilterAbility(), maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE);
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
 				actions = new LinkedList<Ability>(root.abilities);
@@ -176,6 +177,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 			root = new SimulationNode(null, sim, maxDepth, playerId);
 			logger.debug("simulating post combat actions ----------------------------------------------------------------------------------------");
 			addActionsTimed(new FilterAbility());
+//			addActions(root, new FilterAbility(), maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE);
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
 				actions = new LinkedList<Ability>(root.abilities);
@@ -296,8 +298,8 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 			}
 			else if (!counter) {
 				finishCombat(game);
-				val = GameStateEvaluator.evaluate(playerId, game);
-//				val = simulateCounterAttack(game, node, depth, alpha, beta);
+//				val = GameStateEvaluator.evaluate(playerId, game);
+				val = simulateCounterAttack(game, node, depth, alpha, beta);
 			}
 		}
 		if (val == null)
@@ -326,16 +328,16 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 				break;
 			}
 			Game sim = game.copy();
-			UUID defenderId = game.getOpponents(playerId).iterator().next();
+			UUID defenderId = game.getOpponents(attackerId).iterator().next();
 			for (CombatGroup group: engagement.getGroups()) {
 				for (UUID attackId: group.getAttackers()) {
 					sim.getPlayer(attackerId).declareAttacker(attackId, defenderId, sim);
 				}
 			}
-			sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, playerId, playerId));
+			sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackerId, attackerId));
 			SimulationNode newNode = new SimulationNode(node, sim, depth, attackerId);
 			if (logger.isDebugEnabled())
-				logger.debug("simulating attack for player:" + game.getPlayer(newNode.getPlayerId()).getName());
+				logger.debug("simulating attack for player:" + game.getPlayer(attackerId).getName());
 			sim.checkStateAndTriggered();
 			while (!sim.getStack().isEmpty()) {
 				sim.getStack().resolve(sim);
@@ -399,10 +401,10 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 						}
 					}
 				}
-				sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, playerId, playerId));
+				sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
 				SimulationNode newNode = new SimulationNode(node, sim, depth, defenderId);
 				if (logger.isDebugEnabled())
-					logger.debug("simulating block for player:" + game.getPlayer(newNode.getPlayerId()).getName());
+					logger.debug("simulating block for player:" + game.getPlayer(defenderId).getName());
 				sim.checkStateAndTriggered();
 				while (!sim.getStack().isEmpty()) {
 					sim.getStack().resolve(sim);
@@ -455,9 +457,9 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 		}
 		Integer val = null;
 		if (!game.isGameOver()) {
-			logger.debug("simulating -- counter attack");
 			simulateToEnd(game);
 			game.getState().setActivePlayerId(game.getState().getPlayerList(game.getActivePlayerId()).getNext());
+			logger.debug("simulating -- counter attack for player " + game.getPlayer(game.getActivePlayerId()).getName());
 			game.getTurn().setPhase(new BeginningPhase());
 			if (game.getPhase().beginPhase(game, game.getActivePlayerId())) {
 				simulateStep(game, new UntapStep());
