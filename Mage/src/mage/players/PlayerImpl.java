@@ -168,7 +168,6 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		this.left = false;
 		this.passed = false;
 		this.passedTurn = false;
-		findRange(game);
 	}
 
 	@Override

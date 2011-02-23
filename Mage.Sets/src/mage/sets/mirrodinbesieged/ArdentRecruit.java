@@ -26,72 +26,49 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
 
 /**
- *
  * @author Loki
  */
-public class Exsanguinate extends CardImpl<Exsanguinate> {
+public class ArdentRecruit extends CardImpl<ArdentRecruit> {
 
-    public Exsanguinate (UUID ownerId) {
-        super(ownerId, 61, "Exsanguinate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
-        this.expansionSetCode = "SOM";
-		this.color.setBlack(true);
-        this.getSpellAbility().addEffect(new ExsanguinateEffect());
+    private final String myText = "Metalcraft - Ardent Recruit gets +2/+2 as long as you control three or more artifacts";
+
+    public ArdentRecruit(UUID ownerId) {
+        super(ownerId, 2, "Ardent Recruit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        this.expansionSetCode = "MBS";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        ContinuousEffect boostSource = new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield);
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(boostSource, Metalcraft.getInstance(), myText);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public Exsanguinate (final Exsanguinate card) {
+    public ArdentRecruit(final ArdentRecruit card) {
         super(card);
     }
 
     @Override
-    public Exsanguinate copy() {
-        return new Exsanguinate(this);
+    public ArdentRecruit copy() {
+        return new ArdentRecruit(this);
     }
 
-}
-
-class ExsanguinateEffect extends OneShotEffect<ExsanguinateEffect> {
-    public ExsanguinateEffect() {
-        super(Constants.Outcome.Damage);
-    }
-
-    public ExsanguinateEffect(final ExsanguinateEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int loseLife = 0;
-        int damage = source.getManaCostsToPay().getVariableCosts().get(0).getAmount();
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            loseLife += game.getPlayer(opponentId).loseLife(damage, game);
-        }
-        if (loseLife > 0)
-            game.getPlayer(source.getControllerId()).gainLife(loseLife, game);
-        return true;
-    }
-
-    @Override
-    public ExsanguinateEffect copy() {
-        return new ExsanguinateEffect(this);
-    }
-
-    @Override
-    public String getText(Ability source) {
-        return "Each opponent loses X life. You gain life equal to the life lost this way";
-    }
 }

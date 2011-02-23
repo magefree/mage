@@ -93,7 +93,7 @@ class EarthquakeEffect extends OneShotEffect<EarthquakeEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		int amount = source.getManaCosts().getVariableCosts().get(0).getAmount();
+		int amount = source.getManaCostsToPay().getVariableCosts().get(0).getAmount();
 
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
 			permanent.damage(amount, source.getId(), game, true, false);

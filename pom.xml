@@ -25,7 +25,7 @@
     <repositories>
         <repository>
             <id>mage.googlecode.com</id>
-            <url>http://mage.googlecode.com/svn/trunk/repository</url>
+            <url>https://mage.googlecode.com/hg/repository/</url>
         </repository>
         <repository>
             <id>jetlang.googlecode.com</id>

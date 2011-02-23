@@ -44,6 +44,7 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilities;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
@@ -225,7 +226,8 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 					return true;
 				}
 			}
-			return false;
+			if (!target.isRequired())
+				return false;
 		}
 		if (target instanceof TargetDiscard) {
 			findPlayables(game);
@@ -243,7 +245,8 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 					return true;
 				}
 			}
-			return false;
+			if (!target.isRequired())
+				return false;
 		}
 		if (target instanceof TargetControlledPermanent) {
 			List<Permanent> targets;
@@ -271,7 +274,8 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 					return true;
 				}
 			}
-			return false;
+			if (!target.isRequired())
+				return false;
 		}
 		if (target instanceof TargetCreatureOrPlayer) {
 			List<Permanent> targets;
@@ -300,7 +304,8 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 					return true;
 				}
 			}
-			return false;
+			if (!target.isRequired())
+				return false;
 		}
 		throw new IllegalStateException("Target wasn't handled. class:" + target.getClass().toString());
 	}
@@ -484,10 +489,13 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			for (Mana mana: options) {
 				for (Mana avail: available) {
 					if (mana.enough(avail)) {
-						if (card.getCardType().contains(CardType.INSTANT))
-							playableInstant.add(card);
-						else
-							playableNonInstant.add(card);
+						SpellAbility ability = card.getSpellAbility();
+						if (ability != null && ability.canActivate(playerId, game)) {
+							if (card.getCardType().contains(CardType.INSTANT))
+								playableInstant.add(card);
+							else
+								playableNonInstant.add(card);
+						}
 					}
 					else {
 						if (!playableInstant.contains(card) && !playableNonInstant.contains(card))

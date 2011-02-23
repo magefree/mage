@@ -26,72 +26,42 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.MageInt;
+import mage.abilities.keyword.InfectAbility;
+import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
 
 /**
  *
  * @author Loki
  */
-public class Exsanguinate extends CardImpl<Exsanguinate> {
+public class Flensermite extends CardImpl<Flensermite> {
 
-    public Exsanguinate (UUID ownerId) {
-        super(ownerId, 61, "Exsanguinate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
-        this.expansionSetCode = "SOM";
+    public Flensermite (UUID ownerId) {
+        super(ownerId, 41, "Flensermite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "MBS";
+        this.subtype.add("Gremlin");
 		this.color.setBlack(true);
-        this.getSpellAbility().addEffect(new ExsanguinateEffect());
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+		this.addAbility(InfectAbility.getInstance());
+		this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public Exsanguinate (final Exsanguinate card) {
+    public Flensermite (final Flensermite card) {
         super(card);
     }
 
     @Override
-    public Exsanguinate copy() {
-        return new Exsanguinate(this);
+    public Flensermite copy() {
+        return new Flensermite(this);
     }
 
-}
-
-class ExsanguinateEffect extends OneShotEffect<ExsanguinateEffect> {
-    public ExsanguinateEffect() {
-        super(Constants.Outcome.Damage);
-    }
-
-    public ExsanguinateEffect(final ExsanguinateEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int loseLife = 0;
-        int damage = source.getManaCostsToPay().getVariableCosts().get(0).getAmount();
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            loseLife += game.getPlayer(opponentId).loseLife(damage, game);
-        }
-        if (loseLife > 0)
-            game.getPlayer(source.getControllerId()).gainLife(loseLife, game);
-        return true;
-    }
-
-    @Override
-    public ExsanguinateEffect copy() {
-        return new ExsanguinateEffect(this);
-    }
-
-    @Override
-    public String getText(Ability source) {
-        return "Each opponent loses X life. You gain life equal to the life lost this way";
-    }
 }

@@ -75,7 +75,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
         setOpaque(false);
     }
 
-	public void loadCards(CardsView showCards, SortBy sortBy, BigCard bigCard, UUID gameId) {
+	public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId) {
 		this.bigCard = bigCard;
 		this.gameId = gameId;
 		for (CardView card: showCards.values()) {
@@ -90,7 +90,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
 				i.remove();
 			}
 		}
-		drawCards(sortBy);
+		drawCards(sortBy, piles);
 		this.setVisible(true);
 	}
 	
@@ -106,7 +106,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
 		cards.put(card.getId(), cardImg);
 	}
 
-	public void drawCards(SortBy sortBy) {
+	public void drawCards(SortBy sortBy, boolean piles) {
 		int maxWidth = this.getParent().getWidth();
 		int numColumns = maxWidth / Config.dimensions.frameWidth;
 		int curColumn = 0;
@@ -128,15 +128,54 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener 
 					Collections.sort(sortedCards, new CardCostComparator());
 					break;
 			}
+			MageCard lastCard = null;
 			for (MageCard cardImg: sortedCards) {
-				rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
-				cardImg.setBounds(rectangle);
-				cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-				moveToFront(cardImg);
-				curColumn++;
-				if (curColumn == numColumns) {
-					curColumn = 0;
+				if (piles) {
+					if (lastCard == null)
+						lastCard = cardImg;
+					switch (sortBy) {
+						case NAME:
+							if (!cardImg.getOriginal().getName().equals(lastCard.getOriginal().getName())) {
+								curColumn++;
+								curRow = 0;
+							}
+							break;
+						case RARITY:
+							if (!cardImg.getOriginal().getRarity().equals(lastCard.getOriginal().getRarity())) {
+								curColumn++;
+								curRow = 0;
+							}
+							break;
+						case COLOR:
+							if (cardImg.getOriginal().getColor().compareTo(lastCard.getOriginal().getColor()) != 0) {
+								curColumn++;
+								curRow = 0;
+							}
+							break;
+						case CASTING_COST:
+							if (cardImg.getOriginal().getConvertedManaCost() != lastCard.getOriginal().getConvertedManaCost()) {
+								curColumn++;
+								curRow = 0;
+							}
+							break;
+					}
+					rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
+					cardImg.setBounds(rectangle);
+					cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+					moveToFront(cardImg);
 					curRow++;
+					lastCard = cardImg;
+				}
+				else {
+					rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
+					cardImg.setBounds(rectangle);
+					cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
+					moveToFront(cardImg);
+					curColumn++;
+					if (curColumn == numColumns) {
+						curColumn = 0;
+						curRow++;
+					}
 				}
 			}
 		}

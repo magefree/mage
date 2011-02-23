@@ -46,6 +46,7 @@ import java.util.List;
 import java.util.UUID;
 import javax.swing.DefaultComboBoxModel;
 import mage.Constants.CardType;
+import mage.ObjectColor;
 
 import mage.cards.MageCard;
 import mage.client.constants.Constants.SortBy;
@@ -115,17 +116,58 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
 					Collections.sort(sortedCards, new CardViewCostComparator());
 					break;
 			}
+			CardView lastCard = null;
 			for (CardView card: sortedCards) {
-				rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
-				addCard(card, bigCard, gameId, rectangle);
-				if (card.getCardTypes().contains(CardType.LAND))
-					landCount++;
-				if (card.getCardTypes().contains(CardType.CREATURE))
-					creatureCount++;
-				curColumn++;
-				if (curColumn == numColumns) {
-					curColumn = 0;
+				if (chkPiles.isSelected()) {
+					if (lastCard == null)
+						lastCard = card;
+					switch (sortBy) {
+						case NAME:
+							if (!card.getName().equals(lastCard.getName())) {
+								curColumn++;
+								curRow = 0;
+							}
+							break;
+						case RARITY:
+							if (!card.getRarity().equals(lastCard.getRarity())) {
+								curColumn++;
+								curRow = 0;
+							}
+							break;
+						case COLOR:
+							if (card.getColor().compareTo(lastCard.getColor()) != 0) {
+								curColumn++;
+								curRow = 0;
+							}
+							break;
+						case CASTING_COST:
+							if (card.getConvertedManaCost() != lastCard.getConvertedManaCost()) {
+								curColumn++;
+								curRow = 0;
+							}
+							break;
+					}
+					rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
+					addCard(card, bigCard, gameId, rectangle);
+					if (card.getCardTypes().contains(CardType.LAND))
+						landCount++;
+					if (card.getCardTypes().contains(CardType.CREATURE))
+						creatureCount++;
 					curRow++;
+					lastCard = card;
+				}
+				else {
+					rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
+					addCard(card, bigCard, gameId, rectangle);
+					if (card.getCardTypes().contains(CardType.LAND))
+						landCount++;
+					if (card.getCardTypes().contains(CardType.CREATURE))
+						creatureCount++;
+					curColumn++;
+					if (curColumn == numColumns) {
+						curColumn = 0;
+						curRow++;
+					}
 				}
 			}
 		}
@@ -176,6 +218,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
         lblCount = new javax.swing.JLabel();
         lblCreatureCount = new javax.swing.JLabel();
         lblLandCount = new javax.swing.JLabel();
+        chkPiles = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setPreferredSize((!Beans.isDesignTime())?(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight)):(new Dimension(100, 100)));
@@ -195,6 +238,13 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
 
         lblLandCount.setText("Land Count");
 
+        chkPiles.setText("Piles");
+        chkPiles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkPilesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -205,8 +255,10 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
                 .addComponent(lblCreatureCount, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblLandCount, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbSortBy, 0, 353, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkPiles)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbSortBy, 0, 300, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,7 +266,8 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
                 .addComponent(cbSortBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(lblCount)
                 .addComponent(lblCreatureCount)
-                .addComponent(lblLandCount))
+                .addComponent(lblLandCount)
+                .addComponent(chkPiles))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -222,14 +275,14 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -237,10 +290,15 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
 		drawCards((SortBy) cbSortBy.getSelectedItem());
 	}//GEN-LAST:event_cbSortByActionPerformed
 
+	private void chkPilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPilesActionPerformed
+		drawCards((SortBy) cbSortBy.getSelectedItem());
+	}//GEN-LAST:event_chkPilesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane cardArea;
     private javax.swing.JComboBox cbSortBy;
+    private javax.swing.JCheckBox chkPiles;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCount;

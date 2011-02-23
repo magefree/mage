@@ -59,7 +59,7 @@ public class GameStateEvaluator {
 
 		int score = lifeScore + permanentScore + handScore;
 		if (logger.isDebugEnabled())
-			logger.debug("game state evaluated to- lifeScore:" + lifeScore + " permanentScore:" + permanentScore + " handScore:" + handScore + " total:" + score);
+			logger.debug("game state for player " + player.getName() + " evaluated to- lifeScore:" + lifeScore + " permanentScore:" + permanentScore + " handScore:" + handScore + " total:" + score);
 		return score;
 	}
 
