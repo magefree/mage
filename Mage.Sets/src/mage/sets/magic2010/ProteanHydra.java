@@ -99,7 +99,7 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 		public boolean apply(Game game, Ability source) {
 			Permanent permanent = game.getPermanent(source.getSourceId());
 			if (permanent != null) {
-				int amount = source.getManaCosts().getVariableCosts().get(0).getAmount();
+				int amount = source.getManaCostsToPay().getVariableCosts().get(0).getAmount();
 				permanent.addCounters(new PlusOneCounter(amount));
 			}
 			return true;

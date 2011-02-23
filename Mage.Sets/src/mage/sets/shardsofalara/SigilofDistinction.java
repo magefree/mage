@@ -85,7 +85,7 @@ class SigilofDistinctionEffect extends OneShotEffect<SigilofDistinctionEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = source.getManaCosts().getVariableCosts().get(0).getAmount();
+        int amount = source.getManaCostsToPay().getVariableCosts().get(0).getAmount();
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
             p.addCounters(CounterType.CHARGE.createInstance(amount));

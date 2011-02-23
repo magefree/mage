@@ -36,8 +36,6 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,11 +54,11 @@ import mage.players.Player;
 import mage.server.ChatManager;
 import mage.server.util.ThreadExecutor;
 import mage.sets.Sets;
-import mage.util.Logging;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.GameView;
 import mage.view.ChatMessage.MessageColor;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -69,7 +67,7 @@ import mage.view.ChatMessage.MessageColor;
 public class GameController implements GameCallback {
 
 	private static ExecutorService gameExecutor = ThreadExecutor.getInstance().getGameExecutor();
-	private final static Logger logger = Logging.getLogger(GameController.class.getName());
+	private final static Logger logger = Logger.getLogger(GameController.class);
 	public static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
 
 	private ConcurrentHashMap<UUID, GameSession> gameSessions = new ConcurrentHashMap<UUID, GameSession>();
@@ -104,7 +102,7 @@ public class GameController implements GameCallback {
 							break;
 						case INFO:
 							ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK);
-							logger.finest(game.getId() + " " + event.getMessage());
+							logger.debug(game.getId() + " " + event.getMessage());
 							break;
 						case REVEAL:
 							revealCards(event.getMessage(), event.getCards());
@@ -178,7 +176,7 @@ public class GameController implements GameCallback {
 		if (gameFuture == null) {
 			for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
 				if (!entry.getValue().init(getGameView(entry.getKey()))) {
-					logger.severe("Unable to initialize client");
+					logger.fatal("Unable to initialize client");
 					//TODO: generate client error message
 					return;
 				}
@@ -238,7 +236,7 @@ public class GameController implements GameCallback {
 				card.putOntoBattlefield(game, Zone.OUTSIDE, null, playerId);
 			}
 		} catch (GameException ex) {
-			logger.warning(ex.getMessage());
+			logger.warn(ex.getMessage());
 		}
 		addCardsForTesting(game);
 		updateGame();
@@ -434,7 +432,7 @@ public class GameController implements GameCallback {
 			File f = new File(INIT_FILE_PATH);
 			Pattern pattern = Pattern.compile("([a-zA-Z]*):([\\w]*):([a-zA-Z ,\\-.!'\\d]*):([\\d]*)");
 			if (!f.exists()) {
-				logger.warning("Couldn't find init file: " + INIT_FILE_PATH);
+				logger.warn("Couldn't find init file: " + INIT_FILE_PATH);
 				return;
 			}
 			
@@ -444,7 +442,7 @@ public class GameController implements GameCallback {
 			try {
 				while (scanner.hasNextLine()) {
 					String line = scanner.nextLine().trim();
-					if (line.startsWith("#")) continue;
+					if (line.trim().length() == 0 || line.startsWith("#")) continue;
 					Matcher m = pattern.matcher(line);
 					if (m.matches()) {
 
@@ -476,14 +474,14 @@ public class GameController implements GameCallback {
 									game.loadCards(cards, player.getId());
 									swapWithAnyCard(game, player, card, gameZone);
 								} else {
-									logger.severe("Couldn't find a card: " + cardName);
+									logger.fatal("Couldn't find a card: " + cardName);
 								}
 							}
 						} else {
-							logger.warning("Was skipped: " + line);
+							logger.warn("Was skipped: " + line);
 						}
 					} else {
-						logger.warning("Init string wasn't parsed: " + line);
+						logger.warn("Init string wasn't parsed: " + line);
 					}
 				}
 			}
@@ -491,7 +489,7 @@ public class GameController implements GameCallback {
 				scanner.close();
 			}
 		} catch (Exception e) {
-			logger.log(Level.SEVERE, "", e);
+			logger.fatal("", e);
 		}
 	}
 	
