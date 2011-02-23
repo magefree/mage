@@ -325,6 +325,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		for (Player player: state.getPlayers().values()) {
 			player.init(this, testMode);
 		}
+		for (Player player: state.getPlayers().values()) {
+			player.beginTurn(this);
+		}
 		fireInformEvent("game has started");
 		saveState();
 
@@ -344,7 +347,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		else {
 			choosingPlayer = this.getPlayer(choosingPlayerId);
 		}
-		if (choosingPlayer.chooseTarget(Outcome.Benefit, targetPlayer, null, this)) {
+		if (choosingPlayer.choose(Outcome.Benefit, targetPlayer, this)) {
 			startingPlayerId = ((List<UUID>)targetPlayer.getTargets()).get(0);
 			fireInformEvent(state.getPlayer(startingPlayerId).getName() + " will start");
 		}
