@@ -107,10 +107,12 @@ class NissasChosenEffect extends ReplacementEffectImpl<NissasChosenEffect> {
 
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
-		if ( event.getType() == EventType.DESTROY_PERMANENT ||
-			 event.getType() == EventType.DESTROYED_PERMANENT )
+		if ( event.getType() == EventType.ZONE_CHANGE )
 		{
-			return true;
+                    ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+                    if ( zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD ) {
+                        return true;
+                    }
 		}
 		return false;
 	}
