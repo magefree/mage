@@ -60,7 +60,7 @@ public class KalastriaHighborn extends CardImpl<KalastriaHighborn> {
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
 
-		this.addAbility(new KalastriaHighbornTriggerAbility());
+		this.addAbility(new KalastriaHighbornTriggeredAbility());
 	}
 
 	public KalastriaHighborn(final KalastriaHighborn card) {
@@ -73,21 +73,21 @@ public class KalastriaHighborn extends CardImpl<KalastriaHighborn> {
 	}
 }
 
-class KalastriaHighbornTriggerAbility extends TriggeredAbilityImpl<KalastriaHighbornTriggerAbility> {
-	KalastriaHighbornTriggerAbility ( ) {
-		super(Zone.ALL, new GainLifeEffect(2), false);
+class KalastriaHighbornTriggeredAbility extends TriggeredAbilityImpl<KalastriaHighbornTriggeredAbility> {
+	KalastriaHighbornTriggeredAbility ( ) {
+		super(Zone.ALL, new LoseLifeTargetEffect(2), false);
 		this.addCost(new ManaCostsImpl("{B}"));
 		this.addTarget(new TargetPlayer());
-		this.getEffects().add(new LoseLifeTargetEffect(2));
+		this.getEffects().add(new GainLifeEffect(2));
 	}
 
-	KalastriaHighbornTriggerAbility ( KalastriaHighbornTriggerAbility ability ) {
+	KalastriaHighbornTriggeredAbility ( KalastriaHighbornTriggeredAbility ability ) {
 		super(ability);
 	}
 
 	@Override
-	public KalastriaHighbornTriggerAbility copy() {
-		return new KalastriaHighbornTriggerAbility(this);
+	public KalastriaHighbornTriggeredAbility copy() {
+		return new KalastriaHighbornTriggeredAbility(this);
 	}
 
 	@Override
