@@ -666,10 +666,15 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		//put everything into X
 		for (Permanent perm: this.getAvailableManaProducers(game)) {
 			for (ManaAbility ability: perm.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
-				if (activateAbility(ability, game))
-					return true;
+				activateAbility(ability, game);
 			}
 		}
+
+		// don't allow X=0
+		if (getManaPool().count() == 0) {
+			return false;
+		}
+
 		cost.setPaid();
 		return true;
 	}
