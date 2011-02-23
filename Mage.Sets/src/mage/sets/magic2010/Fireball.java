@@ -91,7 +91,7 @@ class FireballEffect extends OneShotEffect<FireballEffect> {
 	@Override
 	public boolean apply(Game game, Ability source) {
 		int numTargets = source.getTargets().get(0).getTargets().size();
-		int damage = source.getManaCosts().getVariableCosts().get(0).getAmount();
+		int damage = source.getManaCostsToPay().getVariableCosts().get(0).getAmount();
 		if (numTargets > 0) {
 			int damagePer = damage/numTargets;
 			if (damagePer > 0) {
