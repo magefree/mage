@@ -247,6 +247,28 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 	}
 
 	@Override
+	public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
+		ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, ability.getId(), controllerId, fromZone, Zone.STACK);
+		if (!game.replaceEvent(event)) {
+			if (event.getFromZone() != null) {
+				switch (event.getFromZone()) {
+					case GRAVEYARD:
+						game.getPlayer(ownerId).removeFromGraveyard(this, game);
+						break;
+					default:
+						//logger.warning("moveToZone, not fully implemented: from="+event.getFromZone() + ", to="+event.getToZone());
+				}
+				game.rememberLKI(objectId, event.getFromZone(), this);
+			}
+			game.getStack().push(new Spell(this, ability.copy(), controllerId));
+			game.setZone(objectId, event.getToZone());
+			game.fireEvent(event);
+			return game.getZone(objectId) == Zone.STACK;
+		}
+		return false;
+	}
+
+	@Override
 	public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
 		Zone fromZone = game.getZone(objectId);
 		ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, Zone.EXILED);

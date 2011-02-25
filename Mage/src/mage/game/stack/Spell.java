@@ -297,17 +297,17 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
 	@Override
 	public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException("Unsupported operation");
 	}
 
 	@Override
 	public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException("Unsupported operation");
 	}
 
 	@Override
 	public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException("Unsupported operation");
 	}
 
 	@Override
@@ -322,6 +322,11 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
     @Override
 	public List<Mana> getMana() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		return card.getMana();
+	}
+
+	@Override
+	public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
+		throw new UnsupportedOperationException("Unsupported operation");
 	}
 }

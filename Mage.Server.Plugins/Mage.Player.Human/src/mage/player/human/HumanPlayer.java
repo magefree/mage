@@ -51,6 +51,7 @@ import mage.abilities.ActivatedAbility;
 import mage.abilities.SpecialAction;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.cards.decks.Deck;
 import mage.choices.ChoiceImpl;
@@ -355,7 +356,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	}
 
 	@Override
-	public boolean playXMana(VariableManaCost cost, Game game) {
+	public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
 		game.firePlayXManaEvent(playerId, "Pay {X}: {X}=" + cost.getAmount());
 		waitForResponse();
 		if (response.getBoolean() != null) {

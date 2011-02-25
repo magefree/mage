@@ -42,9 +42,14 @@ import java.util.concurrent.TimeoutException;
 import mage.Constants.Outcome;
 import mage.Constants.PhaseStep;
 import mage.Constants.RangeOfInfluence;
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.common.PassAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Cards;
@@ -497,6 +502,20 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		return true;
 	}
 
+	@Override
+	public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
+		//SimulatedPlayer.simulateVariableCosts method adds a generic mana cost for each option
+		for (ManaCost manaCost: costs) {
+			if (manaCost instanceof GenericManaCost) {
+				cost.setPayment(manaCost.getPayment());
+				logger.debug("using X = " + cost.getPayment().count());
+				break;
+			}
+		}
+		cost.setPaid();
+		return true;
+	}
+
 	public void playNext(Game game, UUID activePlayerId, SimulationNode node) {
 		boolean skip = false;
 		while (true) {
@@ -611,12 +630,15 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 
 	@Override
 	public void selectAttackers(Game game) {
-		logger.debug("selectAttackers");
+		if (logger.isDebugEnabled() && combat == null || combat.getGroups().isEmpty())
+			logger.debug("not attacking");
 		if (combat != null) {
 			UUID opponentId = game.getCombat().getDefenders().iterator().next();
 			for (UUID attackerId: combat.getAttackers()) {
 				this.declareAttacker(attackerId, opponentId, game);
-			}
+				if (logger.isDebugEnabled())
+					logger.debug("attacking with:" + game.getPermanent(attackerId).getName());
+ 			}
 		}
 	}
 
@@ -629,6 +651,8 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 				if (i < combat.getGroups().size()) {
 					for (UUID blockerId: combat.getGroups().get(i).getBlockers()) {
 						this.declareBlocker(blockerId, groups.get(i).getAttackers().get(0), game);
+						if (logger.isDebugEnabled())
+							logger.debug("blocking with:" + game.getPermanent(blockerId).getName());
 					}
 				}
 			}

@@ -116,7 +116,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 		for (ManaCost cost: this.getUnpaidVariableCosts()) {
 			VariableManaCost vCost = (VariableManaCost) cost;
 			while (!vCost.isPaid()) {
-				if (player.playXMana(vCost, game))
+				if (player.playXMana(vCost, (ManaCosts<ManaCost>) this, game))
 					vCost.assignPayment(player.getManaPool());
 				else
 					return false;
@@ -154,6 +154,9 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 		}
 		return variableCosts;
 	}
+
+	@Override
+	public void setPayment(Mana mana) {	}
 
 	@Override
 	public void assignPayment(ManaPool pool) {

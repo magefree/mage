@@ -39,6 +39,7 @@ public interface ManaCost extends Cost {
 	public Mana getMana();
 	public Mana getPayment();
 	public void assignPayment(ManaPool pool);
+	public void setPayment(Mana mana);
 	@Override
 	public String getText();
 	public ManaCost getUnpaid();

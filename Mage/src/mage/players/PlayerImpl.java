@@ -375,7 +375,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 			if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getId(), playerId))) {
 				game.bookmarkState();
 				removeFromHand(card, game);
-				card.moveToZone(Zone.STACK, ability.getId(), game, false);
+				card.cast(game, Zone.HAND, ability, playerId);
 				Ability spellAbility = game.getStack().getSpell(ability.getId()).getSpellAbility();
 				if (spellAbility.activate(game, noMana)) {
 					for (KickerAbility kicker: card.getAbilities().getKickerAbilities()) {

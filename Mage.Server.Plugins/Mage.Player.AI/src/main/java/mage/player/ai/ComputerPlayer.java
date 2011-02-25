@@ -669,7 +669,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	@Override
-	public boolean playXMana(VariableManaCost cost, Game game) {
+	public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
 		logger.debug("playXMana");
 		//put everything into X
 		for (Permanent perm: this.getAvailableManaProducers(game)) {

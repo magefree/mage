@@ -43,6 +43,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilities;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.mana.ManaOptions;
@@ -149,7 +150,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public abstract boolean chooseUse(Outcome outcome, String message, Game game);
 	public abstract boolean choose(Outcome outcome, Choice choice, Game game);
 	public abstract boolean playMana(ManaCost unpaid, Game game);
-	public abstract boolean playXMana(VariableManaCost cost, Game game);
+	public abstract boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game);
 	public abstract int chooseEffect(List<ReplacementEffect> rEffects, Game game);
 	public abstract TriggeredAbility chooseTriggeredAbility(TriggeredAbilities abilities, Game game);
 	public abstract void selectAttackers(Game game);

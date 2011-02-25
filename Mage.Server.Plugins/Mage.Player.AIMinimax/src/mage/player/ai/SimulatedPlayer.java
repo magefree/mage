@@ -38,6 +38,10 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.mana.ManaOptions;
 import mage.choices.Choice;
 import mage.filter.FilterAbility;
@@ -99,13 +103,23 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 		for (Ability ability: playables) {
 			List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
 			if (options.size() == 0) {
-				allActions.add(ability);
+				if (ability.getManaCosts().getVariableCosts().size() > 0) {
+					simulateVariableCosts(ability, game);
+				}
+				else {
+					allActions.add(ability);
+				}
 //				simulateAction(game, previousActions, ability);
 			}
 			else {
 //				ExecutorService simulationExecutor = Executors.newFixedThreadPool(4);
 				for (Ability option: options) {
-					allActions.add(option);
+					if (ability.getManaCosts().getVariableCosts().size() > 0) {
+						simulateVariableCosts(option, game);
+					}
+					else {
+						allActions.add(option);
+					}
 //					SimulationWorker worker = new SimulationWorker(game, this, previousActions, option);
 //					simulationExecutor.submit(worker);
 				}
@@ -125,6 +139,30 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 //			allActions.add(new SimulatedAction(sim, actions));
 //		}
 //	}
+
+	//add a generic mana cost for each amount possible
+	protected void simulateVariableCosts(Ability ability, Game game) {
+		int numAvailable = getAvailableManaProducers(game).size();
+		for (int i = 0; i < numAvailable; i++) {
+			Ability newAbility = ability.copy();
+			newAbility.addManaCost(new GenericManaCost(i));
+			allActions.add(newAbility);
+		}
+	}
+
+	@Override
+	public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
+		//simulateVariableCosts method adds a generic mana cost for each option
+		for (ManaCost manaCost: costs) {
+			if (manaCost instanceof GenericManaCost) {
+				cost.setPayment(manaCost.getPayment());
+				logger.debug("simulating -- X = " + cost.getPayment().count());
+				break;
+			}
+		}
+		cost.setPaid();
+		return true;
+	}
 
 	public List<Combat> addAttackers(Game game) {
 		Map<Integer, Combat> engagements = new HashMap<Integer, Combat>();

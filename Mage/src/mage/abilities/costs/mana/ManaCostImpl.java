@@ -209,6 +209,11 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
 		this.paid = true;
 	}
 
+	@Override
+	public void setPayment(Mana mana) {
+		this.payment.add(mana);
+	}
+
 	protected void addColoredOption(ColoredManaSymbol symbol) {
 		switch (symbol) {
 			case B:
