@@ -3,9 +3,9 @@
 ### ComputerA ###
 # Battlefield
 battlefield:ComputerA:Island:2
-battlefield:ComputerA:Mountain:1
+battlefield:ComputerA:Mountain:3
 battlefield:ComputerA:Dragonskull Summit:1
-battlefield:ComputerA:Lavaclaw Reaches:1
+battlefield:ComputerA:Lavaclaw Reaches:0
 # Hand
 hand:ComputerA:Mountain:0
 hand:ComputerA:Earthquake:1

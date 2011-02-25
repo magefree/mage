@@ -43,31 +43,35 @@ public class PlayGameTest extends MageTestBase {
 		Deck deck = Deck.load(Sets.loadDeck("RB Aggro.dck"));
 
 		if (deck.getCards().size() < 40) {
-			throw new IllegalArgumentException("Couldn't load deck, deck side=" + deck.getCards().size());
+			throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
 		}
 		game.addPlayer(computerA, deck);
 		game.loadCards(deck.getCards(), computerA.getId());
 
-		Player computerB = createPlayer("ComputerB", "Computer - mad");
+		Player computerB = createPlayer("ComputerB", "Computer - minimax hybrid");
 		Deck deck2 = Deck.load(Sets.loadDeck("RB Aggro.dck"));
 		if (deck2.getCards().size() < 40) {
-			throw new IllegalArgumentException("Couldn't load deck, deck side=" + deck2.getCards().size());
+			throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck2.getCards().size());
 		}
 		game.addPlayer(computerB, deck2);
 		game.loadCards(deck2.getCards(), computerB.getId());
 
-		parseScenario("scenario5.txt");
+		/*parseScenario("scenario7.txt");
 		game.cheat(computerA.getId(), commandsA);
 		game.cheat(computerA.getId(), libraryCardsA, handCardsA, battlefieldCardsA, graveyardCardsA);
 		game.cheat(computerB.getId(), commandsB);
 		game.cheat(computerB.getId(), libraryCardsB, handCardsB, battlefieldCardsB, graveyardCardsB);
+		*/
 
 		long t1 = System.nanoTime();
-		game.start(computerA.getId(), true);
+		game.start(computerA.getId(), false);
 		long t2 = System.nanoTime();
 
 		logger.info("Winner: " + game.getWinner());
 		logger.info("Time: " + (t2 - t1) / 1000000 + " ms");
+		/*if (!game.getWinner().equals("Player ComputerA is the winner")) {
+			throw new RuntimeException("Lost :(");
+		}*/
 	}
 
 	private void addCard(List<Card> cards, String name, int count) {
