@@ -124,6 +124,7 @@ public abstract class MatchImpl implements Match {
 
 	protected void initGame(Game game) throws GameException {
 		for (MatchPlayer matchPlayer: this.players) {
+			matchPlayer.getPlayer().init(game);
 			game.loadCards(matchPlayer.getDeck().getCards(), matchPlayer.getPlayer().getId());
 			game.loadCards(matchPlayer.getDeck().getSideboard(), matchPlayer.getPlayer().getId());
 			game.addPlayer(matchPlayer.getPlayer(), matchPlayer.getDeck());

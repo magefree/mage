@@ -323,9 +323,6 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	protected void init(UUID choosingPlayerId, boolean testMode) {
 		for (Player player: state.getPlayers().values()) {
-			player.init(this, testMode);
-		}
-		for (Player player: state.getPlayers().values()) {
 			player.beginTurn(this);
 		}
 		fireInformEvent("game has started");

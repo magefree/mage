@@ -369,7 +369,7 @@ public class TableController {
 
 	private Game loadGame() {
 		try{
-			InputStream file = new FileInputStream("saved/" + match.getGame().toString() + ".game");
+			InputStream file = new FileInputStream("saved/" + match.getGame().getId().toString() + ".game");
 			InputStream buffer = new BufferedInputStream(file);
 			ObjectInput input = new CopierObjectInputStream(Main.classLoader, new GZIPInputStream(buffer));
 			try {
