@@ -41,16 +41,18 @@ import java.awt.event.MouseListener;
 import java.beans.Beans;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.DefaultComboBoxModel;
 import mage.Constants.CardType;
-import mage.ObjectColor;
 
 import mage.cards.MageCard;
 import mage.client.constants.Constants.SortBy;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.CardViewColorComparator;
+import mage.client.util.CardViewCostComparator;
+import mage.client.util.CardViewNameComparator;
+import mage.client.util.CardViewRarityComparator;
 import mage.client.util.Config;
 import mage.client.util.Event;
 import mage.client.util.Listener;
@@ -258,7 +260,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkPiles)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbSortBy, 0, 300, Short.MAX_VALUE))
+                .addComponent(cbSortBy, 0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,14 +277,14 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -333,60 +335,6 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-	}
-
-}
-
-class CardViewNameComparator implements Comparator<CardView> {
-
-	@Override
-	public int compare(CardView o1, CardView o2) {
-		return o1.getName().compareTo(o2.getName());
-	}
-
-}
-
-class CardViewRarityComparator implements Comparator<CardView> {
-
-	@Override
-	public int compare(CardView o1, CardView o2) {
-		int val = o1.getRarity().compareTo(o2.getRarity());
-		if (val == 0) {
-			return o1.getName().compareTo(o2.getName());
-		}
-		else {
-			return val;
-		}
-	}
-
-}
-
-class CardViewCostComparator implements Comparator<CardView> {
-
-	@Override
-	public int compare(CardView o1, CardView o2) {
-		int val = Integer.valueOf(o1.getConvertedManaCost()).compareTo(Integer.valueOf(o2.getConvertedManaCost()));
-		if (val == 0) {
-			return o1.getName().compareTo(o2.getName());
-		}
-		else {
-			return val;
-		}
-	}
-
-}
-
-class CardViewColorComparator implements Comparator<CardView> {
-
-	@Override
-	public int compare(CardView o1, CardView o2) {
-		int val = o1.getColor().compareTo(o2.getColor());
-		if (val == 0) {
-			return o1.getName().compareTo(o2.getName());
-		}
-		else {
-			return val;
-		}
 	}
 
 }

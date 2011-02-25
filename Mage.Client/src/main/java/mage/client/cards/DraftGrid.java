@@ -34,13 +34,17 @@
 
 package mage.client.cards;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import mage.cards.CardDimensions;
 import mage.cards.MageCard;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.CardViewRarityComparator;
 import mage.client.util.Config;
 import mage.view.CardView;
 import mage.view.CardsView;
@@ -69,7 +73,9 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
 		int curRow = 0;
 		Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 		Dimension dimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-		for (CardView card: booster.values()) {
+		List<CardView> sortedCards = new ArrayList<CardView>(booster.values());
+		Collections.sort(sortedCards, new CardViewRarityComparator());
+		for (CardView card: sortedCards) {
 			MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, dimension, null, false);
 			cardImg.addMouseListener(this);
 			add(cardImg);

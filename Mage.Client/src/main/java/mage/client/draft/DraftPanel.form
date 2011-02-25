@@ -23,9 +23,9 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="draftBooster" max="32767" attributes="0"/>
-                  <Component id="draftPicks" alignment="0" pref="570" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="draftPicks" pref="582" max="32767" attributes="0"/>
+                  <Component id="draftBooster" alignment="0" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -34,7 +34,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
-              <Component id="draftPicks" pref="103" max="32767" attributes="0"/>
+              <Component id="draftPicks" pref="106" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
               <Component id="draftBooster" min="-2" max="-2" attributes="0"/>
           </Group>
@@ -125,7 +125,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="txtTimeRemaining" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblMessage" pref="29" max="32767" attributes="0"/>
+                  <Component id="lblMessage" pref="32" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="bigCard" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -218,7 +218,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="568" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="580" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -228,16 +228,7 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Container class="mage.client.cards.CardGrid" name="draftPicks">
-      <Properties>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder/>
-          </Border>
-        </Property>
-      </Properties>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout"/>
-    </Container>
+    <Component class="mage.client.cards.CardsList" name="draftPicks">
+    </Component>
   </SubComponents>
 </Form>

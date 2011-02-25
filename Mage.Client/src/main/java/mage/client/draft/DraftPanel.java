@@ -98,7 +98,7 @@ public class DraftPanel extends javax.swing.JPanel {
 
 	public void loadBooster(DraftPickView draftPickView) {
 		draftBooster.loadBooster(draftPickView.getBooster(), bigCard);
-		draftPicks.loadCards(draftPickView.getPicks(), SortBy.NAME, false, bigCard, null);
+		draftPicks.loadCards(draftPickView.getPicks(), bigCard, null);
 		this.draftBooster.clearCardEventListeners();
 		this.draftBooster.addCardEventListener(
 			new Listener<Event> () {
@@ -108,7 +108,7 @@ public class DraftPanel extends javax.swing.JPanel {
 						DraftPickView view = session.sendCardPick(draftId, (UUID)event.getSource());
 						if (view != null) {
 							draftBooster.loadBooster(view.getBooster(), bigCard);
-							draftPicks.loadCards(view.getPicks(), SortBy.NAME, false, bigCard, null);
+							draftPicks.loadCards(view.getPicks(), bigCard, null);
 							setMessage("Waiting for other players");
 						}
 					}
@@ -167,7 +167,7 @@ public class DraftPanel extends javax.swing.JPanel {
         txtTimeRemaining = new javax.swing.JTextField();
         lblMessage = new javax.swing.JLabel();
         draftBooster = new mage.client.cards.DraftGrid();
-        draftPicks = new mage.client.cards.CardGrid();
+        draftPicks = new mage.client.cards.CardsList();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -259,7 +259,7 @@ public class DraftPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(txtTimeRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                .addComponent(lblMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -270,14 +270,12 @@ public class DraftPanel extends javax.swing.JPanel {
         draftBooster.setLayout(draftBoosterLayout);
         draftBoosterLayout.setHorizontalGroup(
             draftBoosterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 568, Short.MAX_VALUE)
+            .addGap(0, 580, Short.MAX_VALUE)
         );
         draftBoosterLayout.setVerticalGroup(
             draftBoosterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 452, Short.MAX_VALUE)
         );
-
-        draftPicks.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -286,15 +284,15 @@ public class DraftPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(draftBooster, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(draftPicks, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(draftPicks, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
+                    .addComponent(draftBooster, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(draftPicks, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                .addComponent(draftPicks, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(draftBooster, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -307,7 +305,7 @@ public class DraftPanel extends javax.swing.JPanel {
     private javax.swing.JCheckBox chkPack2;
     private javax.swing.JCheckBox chkPack3;
     private mage.client.cards.DraftGrid draftBooster;
-    private mage.client.cards.CardGrid draftPicks;
+    private mage.client.cards.CardsList draftPicks;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblCardNo;

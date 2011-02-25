@@ -27,7 +27,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-          <Component id="jScrollPane1" alignment="0" pref="625" max="32767" attributes="0"/>
+          <Component id="jScrollPane1" alignment="0" pref="636" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -35,7 +35,7 @@
           <Group type="102" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="258" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="366" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -65,7 +65,7 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="chkPiles" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="cbSortBy" pref="300" max="32767" attributes="0"/>
+                  <Component id="cbSortBy" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
