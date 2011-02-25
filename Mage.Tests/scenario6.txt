@@ -1,0 +1,29 @@
+# Test killing with Lavaclaw Reaches with X: +1\+0 ability
+
+### ComputerA ###
+# Battlefield
+battlefield:ComputerA:Island:2
+battlefield:ComputerA:Mountain:3
+battlefield:ComputerA:Dragonskull Summit:1
+battlefield:ComputerA:Lavaclaw Reaches:1
+# Hand
+hand:ComputerA:Mountain:1
+# Library
+# from down to top
+library:ComputerA:clear:0
+library:ComputerA:Mountain:15
+# Life
+player:ComputerA:life:5
+
+### ComputerB ###
+# Battlefield
+battlefield:ComputerB:Plains:1
+# Hand
+hand:ComputerB:Plains:2
+# Library
+# from down to top
+library:ComputerB:clear:0
+library:ComputerB:Plains:10
+# Life
+player:ComputerB:life:5
+
