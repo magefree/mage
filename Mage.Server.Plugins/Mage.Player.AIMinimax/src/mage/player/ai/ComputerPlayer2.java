@@ -218,6 +218,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 	protected int minimaxAB(SimulationNode node, FilterAbility filter, int depth, int alpha, int beta) {
 		UUID currentPlayerId = node.getGame().getPlayerList().get();
 		SimulationNode bestChild = null;
+		boolean isSimulatedPlayer = currentPlayerId.equals(playerId);
 		for (SimulationNode child: node.getChildren()) {
 			if (alpha >= beta) {
 				logger.debug("alpha beta pruning");
@@ -228,27 +229,33 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 				break;
 			}
 			int val = addActions(child, filter, depth-1, alpha, beta);
-			if (!currentPlayerId.equals(playerId)) {
+			if (!isSimulatedPlayer) {
 				if (val < beta) {
 					beta = val;
 					bestChild = child;
-//					if (node.getCombat() == null)
-						node.setCombat(child.getCombat());
+					node.setCombat(child.getCombat());
+				}
+				if (val == GameStateEvaluator.LOSE_SCORE) {
+					logger.debug("simulating -- lose, can't do worse than this");
+					break;
 				}
 			}
 			else {
 				if (val > alpha) {
 					alpha = val;
 					bestChild = child;
-//					if (node.getCombat() == null)
-						node.setCombat(child.getCombat());
+					node.setCombat(child.getCombat());
+				}
+				if (val == GameStateEvaluator.WIN_SCORE) {
+					logger.debug("simulating -- win, can't do better than this");
+					break;
 				}
 			}
 		}
 		node.children.clear();
 		if (bestChild != null)
 			node.children.add(bestChild);
-		if (!currentPlayerId.equals(playerId)) {
+		if (!isSimulatedPlayer) {
 			logger.debug("returning minimax beta: " + beta);
 			return beta;
 		}
@@ -380,6 +387,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		}
 		node.setGameValue(game.getState().getValue());
 		SimulatedPlayer currentPlayer = (SimulatedPlayer) game.getPlayer(game.getPlayerList().get());
+		boolean isSimulatedPlayer = currentPlayer.getId().equals(playerId);
 		logger.debug("simulating -- player " + currentPlayer.getName());
 		SimulationNode bestNode = null;
 		List<Ability> allActions = currentPlayer.simulatePriority(game, filter);
@@ -401,11 +409,15 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 					logger.debug("simulating -- node #:" + SimulationNode.getCount() + " actions:" + action);
 				sim.checkStateAndTriggered();
 				int val = addActions(newNode, filter, depth-1, alpha, beta);
-				if (!currentPlayer.getId().equals(playerId)) {
+				if (!isSimulatedPlayer) {
 					if (val < beta) {
 						beta = val;
 						bestNode = newNode;
 						node.setCombat(newNode.getCombat());
+					}
+					if (val == GameStateEvaluator.LOSE_SCORE) {
+						logger.debug("simulating -- lose, can't do worse than this");
+						break;
 					}
 				}
 				else {
@@ -417,6 +429,10 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 							targets = node.getTargets();
 						if (node.getChoices().size() > 0)
 							choices = node.getChoices();
+					}
+					if (val == GameStateEvaluator.WIN_SCORE) {
+						logger.debug("simulating -- win, can't do better than this");
+						break;
 					}
 				}
 				if (alpha >= beta) {
@@ -433,7 +449,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 			node.children.clear();
 			node.children.add(bestNode);
 		}
-		if (!currentPlayer.getId().equals(playerId)) {
+		if (!isSimulatedPlayer) {
 			logger.debug("returning priority beta: " + beta);
 			return beta;
 		}

@@ -59,14 +59,17 @@ public class GameStateEvaluator {
 	private static final int CREATURE_FACTOR = Config.evaluatorCreatureFactor;
 	private static final int HAND_FACTOR = Config.evaluatorHandFactor;
 
+	public static final int WIN_SCORE = Integer.MAX_VALUE - 1;
+	public static final int LOSE_SCORE = Integer.MIN_VALUE + 1;
+
 	public static int evaluate(UUID playerId, Game game) {
 		Player player = game.getPlayer(playerId);
 		Player opponent = game.getPlayer(game.getOpponents(playerId).iterator().next());
 		if (game.isGameOver()) {
 			if (player.hasLost() || opponent.hasWon())
-				return Integer.MIN_VALUE + 1;
+				return LOSE_SCORE;
 			if (opponent.hasLost() || player.hasWon())
-				return Integer.MAX_VALUE - 1;
+				return WIN_SCORE;
 		}
 		int lifeScore = (player.getLife() - opponent.getLife()) * LIFE_FACTOR;
 		int permanentScore = 0;

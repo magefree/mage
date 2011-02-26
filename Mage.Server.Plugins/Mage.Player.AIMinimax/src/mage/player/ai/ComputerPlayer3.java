@@ -298,7 +298,6 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 			}
 			else if (!counter) {
 				finishCombat(game);
-//				val = GameStateEvaluator.evaluate(playerId, game);
 				val = simulateCounterAttack(game, node, depth, alpha, beta);
 			}
 		}
