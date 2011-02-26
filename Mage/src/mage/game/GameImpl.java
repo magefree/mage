@@ -317,10 +317,10 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		saveState();
 	}
 
-	protected void init(UUID choosingPlayerId) {
-		init(choosingPlayerId, false);
-	}
-
+//	protected void init(UUID choosingPlayerId) {
+//		init(choosingPlayerId, false);
+//	}
+//
 	protected void init(UUID choosingPlayerId, boolean testMode) {
 		for (Player player: state.getPlayers().values()) {
 			player.beginTurn(this);
