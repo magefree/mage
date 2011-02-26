@@ -81,15 +81,11 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
     }
 
 	public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
-		loadCards(showCards, bigCard, gameId, SortBy.UNSORTED);
-	}
-
-	public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId, SortBy sortBy) {
 		//FIXME: why we remove all cards? for performance it's better to merge changes
 		cards = showCards;
 		this.bigCard = bigCard;
 		this.gameId = gameId;
-		drawCards(sortBy);
+		drawCards((SortBy) cbSortBy.getSelectedItem());
 	}
 
 	private void drawCards(SortBy sortBy) {
