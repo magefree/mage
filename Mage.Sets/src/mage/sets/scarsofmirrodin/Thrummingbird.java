@@ -87,7 +87,7 @@ class ThrummingbirdTriggeredAbility extends TriggeredAbilityImpl<ThrummingbirdTr
 		if (event instanceof DamagedPlayerEvent) {
 			DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
 			Permanent p = game.getPermanent(event.getSourceId());
-			if (damageEvent.isCombatDamage() && p != null && p.getId().equals(event.getSourceId())) {
+			if (damageEvent.isCombatDamage() && p != null && p.getId().equals(this.getSourceId())) {
 				return true;
 			}
 		}
