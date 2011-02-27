@@ -365,6 +365,7 @@ foreach my $div (@divs) {
 		}
 	}
 	if ($id =~m/currentSetSymbol/) {
+		print "*** " . $div->as_HTML();
 		my ($imgurl) = $div->look_down('_tag', 'img');
 		$imgurl->attr('src') =~m/set=(\w+)\&.*rarity=(\w+)/;
 		my $multiverseid = $multiverses[0];

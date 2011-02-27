@@ -37,6 +37,8 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -62,15 +64,19 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			permanent.addAbility(ability.copy());
-			return true;
+		int affectedTargets = 0;
+		for (UUID permanentId : source.getTargets().get(0).getTargets()) {
+			Permanent permanent = game.getPermanent(permanentId);
+			if (permanent != null) {
+				permanent.addAbility(ability.copy());
+				affectedTargets++;
+			}
 		}
-		return false;
+		return affectedTargets > 0;
 	}
 
 	@Override
+	//TODO redone text for multiple targets
 	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Target ").append(source.getTargets().get(0).getTargetName()).append(" gains ");

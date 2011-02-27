@@ -30,9 +30,7 @@ package mage.sets.[=$longset=];
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;[= if (defined($power)) {$OUT .= "\nimport mage.MageInt;"}=]
+import mage.Constants.Rarity;[= if (defined($power)) {$OUT .= "\nimport mage.MageInt;"}=]
 import mage.cards.CardImpl;
 
 /**
@@ -48,7 +46,7 @@ public class [=$classname=] extends CardImpl<[=$classname=]> {
         [=if (defined($power)) {
          $OUT .= "this.power = new MageInt($power);\n"; 
         }=][=if (defined($toughness)) {
-         $OUT .= "      this.toughness = new MageInt($toughness);";
+         $OUT .= "        this.toughness = new MageInt($toughness);";
         }=]
     }
 
