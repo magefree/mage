@@ -646,7 +646,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 
 	@Override
 	public void selectAttackers(Game game) {
-		if (logger.isDebugEnabled() && combat == null || combat.getGroups().isEmpty())
+		if (logger.isDebugEnabled() && (combat == null || combat.getGroups().isEmpty()))
 			logger.debug("not attacking");
 		if (combat != null) {
 			UUID opponentId = game.getCombat().getDefenders().iterator().next();
