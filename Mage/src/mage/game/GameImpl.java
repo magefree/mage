@@ -1002,7 +1002,6 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 				setZone(card.getId(), Zone.GRAVEYARD);
 				player.getGraveyard().add(card);
 			}
-			List<Card> permanents = new ArrayList<Card>();
 			for (Card card : battlefield) {
 				card.setOwnerId(ownerId);
 				PermanentCard permanent = new PermanentCard(card, ownerId);

@@ -1,4 +1,4 @@
-# Reproduces game where AI didn't attack though could win
+# This scenario makes AI frozen
 
 ### ComputerA ###
 # Battlefield
@@ -20,10 +20,10 @@ player:ComputerA:life:3
 
 ### ComputerB ###
 # Battlefield
-battlefield:ComputerB:Mountain:4:{tapped}
-battlefield:ComputerB:Dragonskull Summit:1:{tapped}
-battlefield:ComputerB:Arid Mesa:1:{tapped}
-battlefield:ComputerB:Lavaclaw Reaches:1:{tapped}
+battlefield:ComputerB:Mountain:4
+battlefield:ComputerB:Dragonskull Summit:1
+battlefield:ComputerB:Arid Mesa:1
+battlefield:ComputerB:Lavaclaw Reaches:1
 # Hand
 hand:ComputerB:Ball Lightning:2
 # Library

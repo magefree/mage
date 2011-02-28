@@ -160,7 +160,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 		}
 	}
 
-	private void printOutState(Game game, UUID playerId) {
+	protected void printOutState(Game game, UUID playerId) {
 		Player player = game.getPlayer(playerId);
 		System.out.println("Turn::"+game.getTurnNum());
 		System.out.println("[" + game.getPlayer(playerId).getName() + "] " + game.getTurn().getStepType().name() +", life=" + player.getLife());
@@ -239,6 +239,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 			logger.info("simlating -- game value:" + game.getState().getValue() + " test value:" + test.gameValue);
 			if (root.playerId.equals(playerId) && root.abilities != null && game.getState().getValue() == test.gameValue) {
 
+				/*
 				// Try to fix horizon effect
 				if (root.combat == null || root.combat.getAttackers().size() == 0) {
 					FilterCreatureForAttack attackFilter = new FilterCreatureForAttack();
@@ -250,6 +251,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 						return false;
 					}
 				}
+				*/
 
 				logger.info("simulating -- continuing previous action chain");
 				actions = new LinkedList<Ability>(root.abilities);
@@ -286,6 +288,11 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 						bestChild.setCombat(_combat);
 					}
 				}
+				// no need to check other actions
+				if (val == GameStateEvaluator2.LOSE_GAME_SCORE) {
+					logger.debug("lose - break");
+					break;
+				}
 			}
 			else {
 				if (val > alpha) {
@@ -295,6 +302,11 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 						node.setCombat(_combat);
 						bestChild.setCombat(_combat);
 					}
+				}
+				// no need to check other actions
+				if (val == GameStateEvaluator2.WIN_GAME_SCORE) {
+					logger.debug("win - break");
+					break;
 				}
 			}
 		}
@@ -467,6 +479,12 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 						bestNode.setScore(val);
 						node.setCombat(newNode.getCombat());
 					}
+
+					// no need to check other actions
+					if (val == GameStateEvaluator2.LOSE_GAME_SCORE) {
+						logger.debug("lose - break");
+						break;
+					}
 				}
 				else {
 					if (val > alpha) {
@@ -478,7 +496,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 							targets = node.getTargets();
 						if (node.getChoices().size() > 0)
 							choices = node.getChoices();
-						if (depth == 20) {
+						if (depth == Config2.maxDepth) {
 							logger.info("saved");
 							node.children.clear();
 							node.children.add(bestNode);
@@ -488,7 +506,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
 					// no need to check other actions
 					if (val == GameStateEvaluator2.WIN_GAME_SCORE) {
-						logger.info("win - break");
+						logger.debug("win - break");
 						break;
 					}
 				}
@@ -710,10 +728,12 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 		logger.debug("selectAttackers");
 		if (combat != null) {
 			UUID opponentId = game.getCombat().getDefenders().iterator().next();
+			String attackers = "";
 			for (UUID attackerId: combat.getAttackers()) {
-				logger.debug("declare attacker: " + game.getCard(attackerId).getName());
+				attackers = "[" + game.getCard(attackerId).getName() + "]";
 				this.declareAttacker(attackerId, opponentId, game);
 			}
+			logger.info("declare attackers: " + (attackers.isEmpty() ? "none" : attackers));
 		}
 	}
 

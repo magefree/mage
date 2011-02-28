@@ -1,3 +1,5 @@
+# Test attacking with Hellspark Elemental
+
 ### ComputerA ###
 # Battlefield
 battlefield:ComputerA:Island:2

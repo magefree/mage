@@ -1,3 +1,5 @@
+# Test playing Blightning
+
 ### ComputerA ###
 # Battlefield
 battlefield:ComputerA:Swamp:1
