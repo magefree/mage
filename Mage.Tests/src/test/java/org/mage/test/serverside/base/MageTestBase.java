@@ -29,7 +29,7 @@ public class MageTestBase {
 
 	private final static String pluginFolder = "plugins";
 
-	protected Pattern pattern = Pattern.compile("([a-zA-Z]*):([\\w]*):([a-zA-Z ,\\-.!'\\d]*):([\\d]*)");
+	protected Pattern pattern = Pattern.compile("([a-zA-Z]*):([\\w]*):([a-zA-Z ,\\-.!'\\d]*):([\\d]*)(:\\{tapped\\})?");
 
 	@BeforeClass
 	public static void init() {
