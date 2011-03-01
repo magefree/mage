@@ -93,14 +93,14 @@ class FlameblastDragonEffect extends OneShotEffect<FlameblastDragonEffect> {
                 cost.clearPaid();
                 if (cost.pay(game, source.getId(), source.getControllerId(), false)) {
                     int costX = ((VariableCost) cost.getVariableCosts().get(0)).getAmount();
-                    Permanent permanent = game.getPermanent(source.getFirstTarget());
+					Permanent permanent = game.getPermanent(source.getFirstTarget());
                     if (permanent != null) {
                         permanent.damage(costX, source.getId(), game, true, false);
                         return true;
                     }
                     Player targetPlayer = game.getPlayer(source.getFirstTarget());
                     if (targetPlayer != null) {
-                        player.damage(costX, source.getId(), game, true, false);
+                        targetPlayer.damage(costX, source.getId(), game, true, false);
                         return true;
                     }
                     return false;
