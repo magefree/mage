@@ -1,0 +1,34 @@
+# Test playing Burn the Impure
+
+### ComputerA ###
+
+# Battlefield
+battlefield:ComputerA:Mountain:2
+
+# Hand
+hand:ComputerA:Mountain:4
+hand:ComputerA:Burn the Impure:1
+
+# Library
+# from down to top
+library:ComputerA:clear:0
+library:ComputerA:Mountain:10
+
+### ComputerB ###
+
+# Battlefield
+battlefield:ComputerB:Plains:1
+battlefield:ComputerB:Tine Shrike:1
+#battlefield:ComputerB:Runeclaw Bear:1
+
+# Hand
+hand:ComputerB:Plains:2
+
+# Library
+# from down to top
+library:ComputerB:clear:0
+library:ComputerB:Plains:10
+
+# Life
+player:ComputerB:life:3
+

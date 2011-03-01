@@ -61,7 +61,7 @@ public class PlayGameTest extends MageTestBase {
 		game.addPlayer(computerB, deck2);
 		game.loadCards(deck2.getCards(), computerB.getId());
 
-		parseScenario("scenario2.txt");
+		parseScenario("tests/Burn the Impure.test");
 		game.cheat(computerA.getId(), commandsA);
 		game.cheat(computerA.getId(), libraryCardsA, handCardsA, battlefieldCardsA, graveyardCardsA);
 		game.cheat(computerB.getId(), commandsB);
