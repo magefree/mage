@@ -41,6 +41,10 @@ public class PutIntoGraveFromBattlefieldTriggeredAbility extends ZoneChangeTrigg
 		super(Zone.BATTLEFIELD, Zone.GRAVEYARD, effect, "When {this} is put into a graveyard from the battlefield, ", optional);
 	}
 
+	public PutIntoGraveFromBattlefieldTriggeredAbility(Effect effect) {
+		this(effect, false);
+	}
+
 	public PutIntoGraveFromBattlefieldTriggeredAbility(PutIntoGraveFromBattlefieldTriggeredAbility ability) {
 		super(ability);
 	}

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author ayratn
  */
 public class BurntheImpure extends CardImpl<BurntheImpure> {
 
