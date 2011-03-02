@@ -16,7 +16,8 @@
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
  *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
  *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR P N CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
@@ -28,41 +29,56 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continious.BoostEquippedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EquipAbility;
+import mage.MageInt;
 import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.InfectAbility;
+import mage.abilities.keyword.ProtectionAbility;
+import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.filter.FilterCard;
 
 /**
  *
- * @author Loki
+ * @author Viserion
  */
-public class ViridianClaw extends CardImpl<ViridianClaw> {
+public class PhyrexianCrusader extends CardImpl<PhyrexianCrusader> {
 
-    public ViridianClaw (UUID ownerId) {
-        super(ownerId, 143, "Viridian Claw", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+	private static FilterCard filter = new FilterCard("Red");
+	private static FilterCard filter2 = new FilterCard("White");
+
+	static {
+		filter.setUseColor(true);
+		filter.getColor().setRed(true);
+		
+		filter2.setUseColor(true);
+		filter2.getColor().setWhite(true);
+	}
+	
+    public PhyrexianCrusader (UUID ownerId) {
+        super(ownerId, 50, "Phyrexian Crusader", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.expansionSetCode = "MBS";
-        this.subtype.add("Equipment");
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
+        this.subtype.add("Zombie");
+        this.subtype.add("Knight");
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+        this.addAbility(FirstStrikeAbility.getInstance());
+        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(new ProtectionAbility(filter2));
+        this.addAbility(InfectAbility.getInstance());
     }
 
-    public ViridianClaw (final ViridianClaw card) {
+    public PhyrexianCrusader (final PhyrexianCrusader card) {
         super(card);
     }
 
     @Override
-    public ViridianClaw copy() {
-        return new ViridianClaw(this);
+    public PhyrexianCrusader copy() {
+        return new PhyrexianCrusader(this);
     }
 
 }

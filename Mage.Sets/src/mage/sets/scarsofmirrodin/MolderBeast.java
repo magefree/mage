@@ -35,63 +35,68 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.counter.ProliferateEffect;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
 /**
+ *
  * @author Loki
  */
-public class Thrummingbird extends CardImpl<Thrummingbird> {
+public class MolderBeast extends CardImpl<MolderBeast> {
 
-	public Thrummingbird(UUID ownerId) {
-		super(ownerId, 47, "Thrummingbird", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Bird");
-		this.subtype.add("Horror");
-		this.color.setBlue(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-		this.addAbility(new ThrummingbirdTriggeredAbility());
-	}
+    public MolderBeast (UUID ownerId) {
+        super(ownerId, 125, "Molder Beast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Beast");
+		this.color.setGreen(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(3);
+		this.addAbility(new MolderBeastTriggeredAbility());
+    }
 
-	public Thrummingbird(final Thrummingbird card) {
-		super(card);
-	}
+    public MolderBeast (final MolderBeast card) {
+        super(card);
+    }
 
-	@Override
-	public Thrummingbird copy() {
-		return new Thrummingbird(this);
-	}
+    @Override
+    public MolderBeast copy() {
+        return new MolderBeast(this);
+    }
+
 }
 
-class ThrummingbirdTriggeredAbility extends TriggeredAbilityImpl<ThrummingbirdTriggeredAbility> {
-	ThrummingbirdTriggeredAbility() {
-		super(Constants.Zone.BATTLEFIELD, new ProliferateEffect());
+class MolderBeastTriggeredAbility extends TriggeredAbilityImpl<MolderBeastTriggeredAbility> {
+	MolderBeastTriggeredAbility() {
+		super(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Constants.Duration.EndOfTurn));
 	}
 
-	ThrummingbirdTriggeredAbility(final ThrummingbirdTriggeredAbility ability) {
+	MolderBeastTriggeredAbility(final MolderBeastTriggeredAbility ability) {
 		super(ability);
 	}
 
 	@Override
-	public ThrummingbirdTriggeredAbility copy() {
-		return new ThrummingbirdTriggeredAbility(this);
+	public MolderBeastTriggeredAbility copy() {
+		return new MolderBeastTriggeredAbility(this);
 	}
 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event instanceof DamagedPlayerEvent) {
-			DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-			Permanent p = game.getPermanent(event.getSourceId());
-			if (damageEvent.isCombatDamage() && p != null && p.getId().equals(this.getSourceId())) {
+		if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+			if (zEvent.getFromZone() == Constants.Zone.BATTLEFIELD && zEvent.getToZone() == Constants.Zone.GRAVEYARD && zEvent.getTarget().getCardType().contains(CardType.ARTIFACT)) {
 				return true;
 			}
 		}
 		return false;
+	}
 
+	@Override
+	public String getRule() {
+		return "Whenever an artifact is put into a graveyard from the battlefield, Molder Beast gets +2/+0 until end of turn.";
 	}
 }

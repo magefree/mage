@@ -16,7 +16,8 @@
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
  *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
  *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR P N CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
@@ -25,44 +26,61 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.sets.shardsofalara;
 
 import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continious.BoostEquippedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EquipAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.game.permanent.token.Token;
 
 /**
  *
  * @author Loki
  */
-public class ViridianClaw extends CardImpl<ViridianClaw> {
+public class Godsire extends CardImpl<Godsire> {
 
-    public ViridianClaw (UUID ownerId) {
-        super(ownerId, 143, "Viridian Claw", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "MBS";
-        this.subtype.add("Equipment");
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
+    public Godsire (UUID ownerId) {
+        super(ownerId, 170, "Godsire", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{R}{G}{G}{W}");
+        this.expansionSetCode = "ALA";
+        this.subtype.add("Beast");
+		this.color.setRed(true);
+		this.color.setGreen(true);
+		this.color.setWhite(true);
+        this.power = new MageInt(8);
+        this.toughness = new MageInt(8);
+		this.addAbility(VigilanceAbility.getInstance());
+		this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new BeastToken()), new TapSourceCost()));
     }
 
-    public ViridianClaw (final ViridianClaw card) {
+    public Godsire (final Godsire card) {
         super(card);
     }
 
     @Override
-    public ViridianClaw copy() {
-        return new ViridianClaw(this);
+    public Godsire copy() {
+        return new Godsire(this);
     }
 
+}
+
+class BeastToken extends Token {
+	BeastToken() {
+		super("Beast", "an 8/8 Beast creature token that's red, green, and white");
+		cardType.add(CardType.CREATURE);
+		color.setGreen(true);
+		color.setWhite(true);
+		color.setRed(true);
+		subtype.add("Beast");
+		power = new MageInt(8);
+		toughness = new MageInt(8);
+	}
 }

@@ -26,32 +26,47 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.abilities.common;
+package mage.sets.zendikar;
 
-import mage.Constants.Zone;
-import mage.abilities.effects.Effect;
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.keyword.KickerAbility;
+import mage.cards.CardImpl;
+import mage.target.common.TargetNonlandPermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author Viserion
  */
-public class PutIntoGraveFromBattlefieldTriggeredAbility extends ZoneChangeTriggeredAbility<PutIntoGraveFromBattlefieldTriggeredAbility> {
+public class IntoTheRoil extends CardImpl<IntoTheRoil> {
 
-	public PutIntoGraveFromBattlefieldTriggeredAbility(Effect effect, boolean optional) {
-		super(Zone.BATTLEFIELD, Zone.GRAVEYARD, effect, "When {this} is put into a graveyard from the battlefield, ", optional);
+	public IntoTheRoil(UUID ownerId) {
+		super(ownerId, 48, "Into the Roil", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+		this.expansionSetCode = "ZEN";
+		this.color.setBlue(true);
+		this.getSpellAbility().addTarget(new TargetNonlandPermanent());
+		this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+		KickerAbility ability = new KickerAbility(new DrawCardControllerEffect(1), false);
+		ability.addManaCost(new ManaCostsImpl("{1}{U}"));
+		this.addAbility(ability);
 	}
 
-	public PutIntoGraveFromBattlefieldTriggeredAbility(Effect effect) {
-		this(effect, false);
-	}
-
-	public PutIntoGraveFromBattlefieldTriggeredAbility(PutIntoGraveFromBattlefieldTriggeredAbility ability) {
-		super(ability);
+	public IntoTheRoil(final IntoTheRoil card) {
+		super(card);
 	}
 
 	@Override
-	public PutIntoGraveFromBattlefieldTriggeredAbility copy() {
-		return new PutIntoGraveFromBattlefieldTriggeredAbility(this);
+	public IntoTheRoil copy() {
+		return new IntoTheRoil(this);
+	}
+
+	@Override
+	public String getArt() {
+		return "123560_typ_reg_sty_010.jpg";
 	}
 
 }

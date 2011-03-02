@@ -7,6 +7,9 @@ import mage.cards.decks.Deck;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.TwoPlayerDuel;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentImpl;
 import mage.players.Player;
 import mage.server.game.PlayerFactory;
 import mage.sets.Sets;
@@ -39,6 +42,7 @@ public class PlayGameTest extends MageTestBase {
 	public void playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
 		Game game = new TwoPlayerDuel(Constants.MultiplayerAttackOption.LEFT, Constants.RangeOfInfluence.ALL);
 
+		//Player computerA = createPlayer("ComputerA", "Computer - minimax hybrid");
 		Player computerA = createPlayer("ComputerA", "Computer - mad");
 		Deck deck = Deck.load(Sets.loadDeck("RB Aggro.dck"));
 
@@ -48,7 +52,8 @@ public class PlayGameTest extends MageTestBase {
 		game.addPlayer(computerA, deck);
 		game.loadCards(deck.getCards(), computerA.getId());
 
-		Player computerB = createPlayer("ComputerB", "Computer - minimax hybrid");
+		//Player computerB = createPlayer("ComputerB", "Computer - minimax hybrid");
+		Player computerB = createPlayer("ComputerB", "Computer - mad");
 		Deck deck2 = Deck.load(Sets.loadDeck("RB Aggro.dck"));
 		if (deck2.getCards().size() < 40) {
 			throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck2.getCards().size());
@@ -56,15 +61,17 @@ public class PlayGameTest extends MageTestBase {
 		game.addPlayer(computerB, deck2);
 		game.loadCards(deck2.getCards(), computerB.getId());
 
-		/*parseScenario("scenario7.txt");
+		parseScenario("tests/Burn the Impure.test");
 		game.cheat(computerA.getId(), commandsA);
 		game.cheat(computerA.getId(), libraryCardsA, handCardsA, battlefieldCardsA, graveyardCardsA);
 		game.cheat(computerB.getId(), commandsB);
 		game.cheat(computerB.getId(), libraryCardsB, handCardsB, battlefieldCardsB, graveyardCardsB);
-		*/
+
+		//boolean testMode = false;
+		boolean testMode = true;
 
 		long t1 = System.nanoTime();
-		game.start(computerA.getId(), false);
+		game.start(computerA.getId(), testMode);
 		long t2 = System.nanoTime();
 
 		logger.info("Winner: " + game.getWinner());
@@ -90,7 +97,7 @@ public class PlayGameTest extends MageTestBase {
 		try {
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine().trim();
-				if (line.startsWith("#")) continue;
+				if (line == null || line.isEmpty() || line.startsWith("#")) continue;
 				Matcher m = pattern.matcher(line);
 				if (m.matches()) {
 
@@ -128,6 +135,7 @@ public class PlayGameTest extends MageTestBase {
 
 						String cardName = m.group(3);
 						Integer amount = Integer.parseInt(m.group(4));
+						boolean tapped = m.group(5) != null && m.group(5).equals(":{tapped}");
 
 						if (cardName.equals("clear")) {
 							if (nickname.equals("ComputerA")) {
@@ -139,7 +147,13 @@ public class PlayGameTest extends MageTestBase {
 							for (int i = 0; i < amount; i++) {
 								Card card = Sets.findCard(cardName, true);
 								if (card != null) {
-									cards.add(card);
+									if (gameZone.equals(Constants.Zone.BATTLEFIELD)) {
+										PermanentCard p = new PermanentCard(card, null);
+										p.setTapped(tapped);
+										cards.add(p);
+									} else {
+										cards.add(card);
+									}
 								} else {
 									logger.fatal("Couldn't find a card: " + cardName);
 									logger.fatal("line: " + line);

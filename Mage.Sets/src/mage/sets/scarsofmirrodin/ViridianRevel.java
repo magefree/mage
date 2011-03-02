@@ -33,65 +33,64 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.counter.ProliferateEffect;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.game.events.ZoneChangeEvent;
 
 /**
+ *
  * @author Loki
  */
-public class Thrummingbird extends CardImpl<Thrummingbird> {
+public class ViridianRevel extends CardImpl<ViridianRevel> {
 
-	public Thrummingbird(UUID ownerId) {
-		super(ownerId, 47, "Thrummingbird", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Bird");
-		this.subtype.add("Horror");
-		this.color.setBlue(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-		this.addAbility(new ThrummingbirdTriggeredAbility());
-	}
+    public ViridianRevel (UUID ownerId) {
+        super(ownerId, 132, "Viridian Revel", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
+        this.expansionSetCode = "SOM";
+		this.color.setGreen(true);
+		this.addAbility(new ViridianRevelTriggeredAbility());
+    }
 
-	public Thrummingbird(final Thrummingbird card) {
-		super(card);
-	}
+    public ViridianRevel (final ViridianRevel card) {
+        super(card);
+    }
 
-	@Override
-	public Thrummingbird copy() {
-		return new Thrummingbird(this);
-	}
+    @Override
+    public ViridianRevel copy() {
+        return new ViridianRevel(this);
+    }
 }
 
-class ThrummingbirdTriggeredAbility extends TriggeredAbilityImpl<ThrummingbirdTriggeredAbility> {
-	ThrummingbirdTriggeredAbility() {
-		super(Constants.Zone.BATTLEFIELD, new ProliferateEffect());
+class ViridianRevelTriggeredAbility extends TriggeredAbilityImpl<ViridianRevelTriggeredAbility> {
+	ViridianRevelTriggeredAbility() {
+		super(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
 	}
 
-	ThrummingbirdTriggeredAbility(final ThrummingbirdTriggeredAbility ability) {
+	ViridianRevelTriggeredAbility(final ViridianRevelTriggeredAbility ability) {
 		super(ability);
 	}
 
 	@Override
-	public ThrummingbirdTriggeredAbility copy() {
-		return new ThrummingbirdTriggeredAbility(this);
+	public ViridianRevelTriggeredAbility copy() {
+		return new ViridianRevelTriggeredAbility(this);
 	}
 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event instanceof DamagedPlayerEvent) {
-			DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-			Permanent p = game.getPermanent(event.getSourceId());
-			if (damageEvent.isCombatDamage() && p != null && p.getId().equals(this.getSourceId())) {
+		if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+			if (zEvent.getFromZone() == Constants.Zone.BATTLEFIELD && zEvent.getToZone() == Constants.Zone.GRAVEYARD && game.getOpponents(this.getControllerId()).contains(zEvent.getPlayerId())) {
 				return true;
 			}
 		}
 		return false;
+	}
 
+	@Override
+	public String getRule() {
+		return "Whenever an artifact is put into an opponent's graveyard from the battlefield, you may draw a card.";
 	}
 }

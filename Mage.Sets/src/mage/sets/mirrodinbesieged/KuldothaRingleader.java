@@ -16,7 +16,8 @@
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
  *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
  *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR P N CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
@@ -28,41 +29,38 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continious.BoostEquippedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EquipAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.MageInt;
+import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.keyword.BattleCryAbility;
 import mage.cards.CardImpl;
 
 /**
  *
- * @author Loki
+ * @author ayratn
  */
-public class ViridianClaw extends CardImpl<ViridianClaw> {
+public class KuldothaRingleader extends CardImpl<KuldothaRingleader> {
 
-    public ViridianClaw (UUID ownerId) {
-        super(ownerId, 143, "Viridian Claw", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+    public KuldothaRingleader (UUID ownerId) {
+        super(ownerId, 70, "Kuldotha Ringleader", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.expansionSetCode = "MBS";
-        this.subtype.add("Equipment");
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
+        this.subtype.add("Giant");
+        this.subtype.add("Berserker");
+    	this.color.setRed(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+		this.addAbility(new BattleCryAbility());
+		this.addAbility(new AttacksEachTurnStaticAbility());
     }
 
-    public ViridianClaw (final ViridianClaw card) {
+    public KuldothaRingleader (final KuldothaRingleader card) {
         super(card);
     }
 
     @Override
-    public ViridianClaw copy() {
-        return new ViridianClaw(this);
+    public KuldothaRingleader copy() {
+        return new KuldothaRingleader(this);
     }
 
 }
