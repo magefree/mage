@@ -2,14 +2,11 @@ package org.mage.test.serverside;
 
 import mage.Constants;
 import mage.cards.Card;
-import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.TwoPlayerDuel;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
-import mage.game.permanent.PermanentImpl;
 import mage.players.Player;
 import mage.server.game.PlayerFactory;
 import mage.sets.Sets;
@@ -28,8 +25,8 @@ public class PlayGameTest extends MageTestBase {
 
 	private List<Card> handCardsA = new ArrayList<Card>();
 	private List<Card> handCardsB = new ArrayList<Card>();
-	private List<Card> battlefieldCardsA = new ArrayList<Card>();
-	private List<Card> battlefieldCardsB = new ArrayList<Card>();
+	private List<PermanentCard> battlefieldCardsA = new ArrayList<PermanentCard>();
+	private List<PermanentCard> battlefieldCardsB = new ArrayList<PermanentCard>();
 	private List<Card> graveyardCardsA = new ArrayList<Card>();
 	private List<Card> graveyardCardsB = new ArrayList<Card>();
 	private List<Card> libraryCardsA = new ArrayList<Card>();
@@ -42,8 +39,8 @@ public class PlayGameTest extends MageTestBase {
 	public void playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
 		Game game = new TwoPlayerDuel(Constants.MultiplayerAttackOption.LEFT, Constants.RangeOfInfluence.ALL);
 
-		//Player computerA = createPlayer("ComputerA", "Computer - minimax hybrid");
-		Player computerA = createPlayer("ComputerA", "Computer - mad");
+		Player computerA = createPlayer("ComputerA", "Computer - minimax hybrid");
+//		Player computerA = createPlayer("ComputerA", "Computer - mad");
 		Deck deck = Deck.load(Sets.loadDeck("RB Aggro.dck"));
 
 		if (deck.getCards().size() < 40) {
@@ -52,8 +49,8 @@ public class PlayGameTest extends MageTestBase {
 		game.addPlayer(computerA, deck);
 		game.loadCards(deck.getCards(), computerA.getId());
 
-		//Player computerB = createPlayer("ComputerB", "Computer - minimax hybrid");
-		Player computerB = createPlayer("ComputerB", "Computer - mad");
+		Player computerB = createPlayer("ComputerB", "Computer - minimax hybrid");
+//		Player computerB = createPlayer("ComputerB", "Computer - mad");
 		Deck deck2 = Deck.load(Sets.loadDeck("RB Aggro.dck"));
 		if (deck2.getCards().size() < 40) {
 			throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck2.getCards().size());
@@ -61,7 +58,7 @@ public class PlayGameTest extends MageTestBase {
 		game.addPlayer(computerB, deck2);
 		game.loadCards(deck2.getCards(), computerB.getId());
 
-		parseScenario("tests/Burn the Impure.test");
+		parseScenario("scenario8.txt");
 		game.cheat(computerA.getId(), commandsA);
 		game.cheat(computerA.getId(), libraryCardsA, handCardsA, battlefieldCardsA, graveyardCardsA);
 		game.cheat(computerB.getId(), commandsB);
@@ -105,14 +102,15 @@ public class PlayGameTest extends MageTestBase {
 					String nickname = m.group(2);
 
 					if (nickname.equals("ComputerA") || nickname.equals("ComputerB")) {
-						List<Card> cards;
+						List<Card> cards = null;
+						List<PermanentCard> perms = null;
 						Constants.Zone gameZone;
 						if ("hand".equalsIgnoreCase(zone)) {
 							gameZone = Constants.Zone.HAND;
 							cards = nickname.equals("ComputerA") ? handCardsA : handCardsB;
 						} else if ("battlefield".equalsIgnoreCase(zone)) {
 							gameZone = Constants.Zone.BATTLEFIELD;
-							cards = nickname.equals("ComputerA") ? battlefieldCardsA : battlefieldCardsB;
+							perms = nickname.equals("ComputerA") ? battlefieldCardsA : battlefieldCardsB;
 						} else if ("graveyard".equalsIgnoreCase(zone)) {
 							gameZone = Constants.Zone.GRAVEYARD;
 							cards = nickname.equals("ComputerA") ? graveyardCardsA : graveyardCardsB;
@@ -150,7 +148,7 @@ public class PlayGameTest extends MageTestBase {
 									if (gameZone.equals(Constants.Zone.BATTLEFIELD)) {
 										PermanentCard p = new PermanentCard(card, null);
 										p.setTapped(tapped);
-										cards.add(p);
+										perms.add(p);
 									} else {
 										cards.add(card);
 									}

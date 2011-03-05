@@ -57,6 +57,7 @@ import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 import mage.game.turn.Phase;
 import mage.game.turn.Step;
 import mage.game.turn.Turn;
@@ -159,5 +160,5 @@ public interface Game extends MageItem, Serializable {
 
 	// game cheats (for tests only)
 	public void cheat(UUID ownerId, Map<Zone, String> commands);
-	public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<Card> battlefield, List<Card> graveyard);
+	public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard);
 }

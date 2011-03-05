@@ -394,6 +394,11 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		if (logger.isDebugEnabled())
 			logger.debug("simulating -- adding " + allActions.size() + " children:" + allActions);
 		for (Ability action: allActions) {
+			if (Thread.interrupted()) {
+				Thread.currentThread().interrupt();
+				logger.debug("interrupted");
+				break;
+			}
 			Game sim = game.copy();
 			if (sim.getPlayer(currentPlayer.getId()).activateAbility((ActivatedAbility) action.copy(), sim)) {
 				sim.applyEffects();

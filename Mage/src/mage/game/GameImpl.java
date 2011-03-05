@@ -911,6 +911,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	 * @param zone
 	 * @return
 	 */
+	@Override
 	public Card getLastKnownInformation(UUID objectId, Zone zone) {
 		return lki.get(objectId);
 	}
@@ -922,6 +923,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	 * @param zone
 	 * @param card
 	 */
+	@Override
 	public void rememberLKI(UUID objectId, Zone zone, Card card) {
 		Card copy = card.copy();
 		lki.put(objectId, copy);
@@ -930,10 +932,12 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	/**
 	 * Reset objects stored for Last Known Information.
 	 */
+	@Override
 	public void resetLKI() {
 		lki.clear();
 	}
 
+	@Override
 	public void cheat(UUID ownerId, Map<Zone, String> commands) {
 		if (commands != null) {
 			Player player = getPlayer(ownerId);
@@ -982,7 +986,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		cards.clear();
 	}
 
-	public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<Card> battlefield, List<Card> graveyard) {
+	@Override
+	public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard) {
 		Player player = getPlayer(ownerId);
 		if (player != null) {
 			loadCards(ownerId, library);
@@ -1002,23 +1007,21 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 				setZone(card.getId(), Zone.GRAVEYARD);
 				player.getGraveyard().add(card);
 			}
-			for (Card card : battlefield) {
+			for (PermanentCard card : battlefield) {
 				card.setOwnerId(ownerId);
 				PermanentCard permanent = new PermanentCard(card, ownerId);
+				permanent.setTapped(card.isTapped());
 				getBattlefield().addPermanent(permanent);
 			}
 			applyEffects();
 		}
 	}
 
-	private void loadCards(UUID ownerId, List<Card> cards) {
+	private void loadCards(UUID ownerId, List<? extends Card> cards) {
 		if (cards == null) {
 			return;
 		}
-		Set<Card> set = new HashSet<Card>();
-		for (Card card : cards) {
-			set.add(card);
-		}
+		Set<Card> set = new HashSet<Card>(cards);
 		loadCards(set, ownerId);
 	}
 
