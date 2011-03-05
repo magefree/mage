@@ -61,7 +61,7 @@ public class GameWatcher {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
 				session.clearAck();
-				session.fireCallback(new ClientCallback("gameInit", gameView));
+				session.fireCallback(new ClientCallback("gameInit", gameId, gameView));
 				if (waitForAck("gameInit"))
 					return true;
 			}
@@ -81,7 +81,7 @@ public class GameWatcher {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("gameUpdate", gameView));
+				session.fireCallback(new ClientCallback("gameUpdate", gameId, gameView));
 		}
 	}
 
@@ -89,7 +89,7 @@ public class GameWatcher {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("gameInform", new GameClientMessage(gameView, message)));
+				session.fireCallback(new ClientCallback("gameInform", gameId, new GameClientMessage(gameView, message)));
 		}
 	}
 
@@ -97,7 +97,7 @@ public class GameWatcher {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("gameOver", message));
+				session.fireCallback(new ClientCallback("gameOver", gameId, message));
 		}
 	}
 

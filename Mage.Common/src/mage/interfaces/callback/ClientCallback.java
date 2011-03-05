@@ -29,31 +29,42 @@
 package mage.interfaces.callback;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class ClientCallback implements Serializable {
-	
+
+	private UUID objectId;
 	private Object data;
 	private String method;
 	private int messageId;
 
 	public ClientCallback() {}
 
-	public ClientCallback(String method, Object data) {
+	public ClientCallback(String method, UUID objectId, Object data) {
 		this.method = method;
+		this.objectId = objectId;
 		this.data = data;
 	}
 
-	public ClientCallback(String method) {
-		this(method, null);
+	public ClientCallback(String method, UUID objectId) {
+		this(method, objectId, null);
 	}
 
 	public void clear() {
 		method = null;
 		data = null;
+	}
+
+	public UUID getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(UUID objectId) {
+		this.objectId = objectId;
 	}
 
 	public Object getData() {

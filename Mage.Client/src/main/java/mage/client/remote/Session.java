@@ -77,9 +77,9 @@ public class Session {
 	private MageFrame frame;
 	private ServerState serverState;
 	private Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
-	private GamePanel game;
-	private DraftPanel draft;
-	private TournamentPanel tournament;
+	private Map<UUID, GamePanel> games = new HashMap<UUID, GamePanel>();
+	private Map<UUID, DraftPanel> drafts = new HashMap<UUID, DraftPanel>();
+	private Map<UUID, TournamentPanel> tournaments = new HashMap<UUID, TournamentPanel>();
 	private CallbackClientDaemon callbackDaemon;
 	private MageUI ui = new MageUI();
 
@@ -171,28 +171,28 @@ public class Session {
 		return serverState.isTestMode();
 	}
 
-	public Map<UUID, ChatPanel> getChats() {
-		return chats;
+	public ChatPanel getChat(UUID chatId) {
+		return chats.get(chatId);
 	}
 
-	public GamePanel getGame() {
-		return game;
+	public GamePanel getGame(UUID gameId) {
+		return games.get(gameId);
 	}
 
-	public void setGame(GamePanel gamePanel) {
-		game = gamePanel;
+	public void addGame(UUID gameId, GamePanel gamePanel) {
+		games.put(gameId, gamePanel);
 	}
 
-	public DraftPanel getDraft() {
-		return draft;
+	public DraftPanel getDraft(UUID draftId) {
+		return drafts.get(draftId);
 	}
 
-	public void setDraft(DraftPanel draftPanel) {
-		draft = draftPanel;
+	public void addDraft(UUID draftId, DraftPanel draftPanel) {
+		drafts.put(draftId, draftPanel);
 	}
 
-	public void setTournament(TournamentPanel tournament) {
-		this.tournament = tournament;
+	public void addTournament(UUID tournamentId, TournamentPanel tournament) {
+		tournaments.put(tournamentId, tournament);
 	}
 
 	public UUID getMainRoomId() {
@@ -480,9 +480,9 @@ public class Session {
 		return false;
 	}
 
-	public boolean replayGame() {
+	public boolean replayGame(UUID gameId) {
 		try {
-			server.replayGame(sessionId);
+			server.replayGame(gameId, sessionId);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);

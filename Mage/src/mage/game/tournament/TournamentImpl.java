@@ -41,7 +41,6 @@ import java.util.logging.Logger;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
-import mage.game.Table;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.PlayerQueryEventSource;

@@ -43,7 +43,7 @@
                   <Component id="btnNewTournament" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnQuickStart" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="416" max="32767" attributes="0"/>
+                  <EmptySpace pref="414" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -64,7 +64,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnNewTable">
           <Properties>
-            <Property name="text" type="java.lang.String" value="New Table"/>
+            <Property name="text" type="java.lang.String" value="New Match"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewTableActionPerformed"/>

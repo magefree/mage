@@ -49,7 +49,6 @@ import mage.client.remote.Session;
 import mage.client.util.EDTExceptionHandler;
 import mage.client.util.gui.ArrowBuilder;
 import mage.components.ImagePanel;
-import mage.util.Logging;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -69,25 +68,25 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
+import mage.client.deckeditor.DeckEditorPane;
 import mage.client.draft.DraftPane;
+import mage.client.game.GamePane;
+import mage.client.table.TablesPane;
 import mage.client.tournament.TournamentPane;
+import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class MageFrame extends javax.swing.JFrame {
 
-    private final static Logger logger = Logging.getLogger(MageFrame.class.getName());
+    private final static Logger logger = Logger.getLogger(MageFrame.class);
 
     private static Session session;
     private ConnectDialog connectDialog;
-    private static CombatDialog combat;
-    private static PickNumberDialog pickNumber;
     private static Preferences prefs = Preferences.userNodeForPackage(MageFrame.class);
     private JLabel title;
     private Rectangle titleRectangle;
@@ -128,7 +127,7 @@ public class MageFrame extends javax.swing.JFrame {
             //MageSynthStyleFactory f = new MageSynthStyleFactory(SynthLookAndFeel.getStyleFactory());
             //SynthLookAndFeel.setStyleFactory(f);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, null, ex);
+            logger.fatal(null, ex);
         }
 
 		ManaSymbols.loadImages();
@@ -140,29 +139,21 @@ public class MageFrame extends javax.swing.JFrame {
 
         session = new Session(this);
         connectDialog = new ConnectDialog();
-        combat = new CombatDialog();
-        pickNumber = new PickNumberDialog();
         desktopPane.add(connectDialog, JLayeredPane.POPUP_LAYER);
-        desktopPane.add(combat, JLayeredPane.POPUP_LAYER);
-        combat.hideDialog();
-        desktopPane.add(pickNumber, JLayeredPane.POPUP_LAYER);
         session.getUI().addComponent(MageComponents.DESKTOP_PANE, desktopPane);
 
-		draftPane = new DraftPane();
-        desktopPane.add(draftPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        try {
-            draftPane.setMaximum(true);
-        } catch (java.beans.PropertyVetoException e1) {
-            e1.printStackTrace();
-        }
+		try {
+			tablesPane = new TablesPane();
+			desktopPane.add(tablesPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+			tablesPane.setMaximum(true);
 
-		tournamentPane = new TournamentPane();
-        desktopPane.add(tournamentPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        try {
-            tournamentPane.setMaximum(true);
-        } catch (java.beans.PropertyVetoException e1) {
-            e1.printStackTrace();
-        }
+			collectionViewerPane = new CollectionViewerPane();
+			desktopPane.add(collectionViewerPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+			collectionViewerPane.setMaximum(true);
+
+		} catch (PropertyVetoException ex) {
+			logger.fatal(null, ex);
+		}
 
 		addTooltipContainer();
         setBackground();
@@ -395,33 +386,68 @@ public class MageFrame extends javax.swing.JFrame {
     }
 
     public void showGame(UUID gameId, UUID playerId) {
-        this.gamePane.setVisible(true);
-		this.gamePane.toFront();
-        this.gamePane.showGame(gameId, playerId);
+		try {
+			GamePane gamePane = new GamePane();
+			desktopPane.add(gamePane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+			gamePane.setMaximum(true);
+			gamePane.setVisible(true);
+			gamePane.toFront();
+			gamePane.showGame(gameId, playerId);
+		} catch (PropertyVetoException ex) {
+			logger.fatal(null, ex);
+		}
     }
 
     public void watchGame(UUID gameId) {
-        this.gamePane.setVisible(true);
-		this.gamePane.toFront();
-        this.gamePane.watchGame(gameId);
+		try {
+			GamePane gamePane = new GamePane();
+			desktopPane.add(gamePane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+			gamePane.setMaximum(true);
+			gamePane.setVisible(true);
+			gamePane.toFront();
+			gamePane.watchGame(gameId);
+		} catch (PropertyVetoException ex) {
+			logger.fatal(null, ex);
+		}
     }
 
-    public void replayGame() {
-        this.gamePane.setVisible(true);
-		this.gamePane.toFront();
-        this.gamePane.replayGame();
+    public void replayGame(UUID gameId) {
+		try {
+			GamePane gamePane = new GamePane();
+			desktopPane.add(gamePane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+			gamePane.setMaximum(true);
+			gamePane.setVisible(true);
+			gamePane.toFront();
+			gamePane.replayGame(gameId);
+		} catch (PropertyVetoException ex) {
+			logger.fatal(null, ex);
+		}
     }
 
 	public void showDraft(UUID draftId) {
-		this.draftPane.setVisible(true);
-		this.draftPane.toFront();
-		this.draftPane.showDraft(draftId);
+		try {
+			DraftPane draftPane = new DraftPane();
+			desktopPane.add(draftPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+			draftPane.setMaximum(true);
+			draftPane.setVisible(true);
+			draftPane.toFront();
+			draftPane.showDraft(draftId);
+		} catch (PropertyVetoException ex) {
+			logger.fatal(null, ex);
+		}
 	}
 
  	public void showTournament(UUID tournamentId) {
-		this.tournamentPane.setVisible(true);
-		this.tournamentPane.toFront();
-		this.tournamentPane.showTournament(tournamentId);
+		try {
+			TournamentPane tournamentPane = new TournamentPane();
+			desktopPane.add(tournamentPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+			tournamentPane.setMaximum(true);
+			tournamentPane.setVisible(true);
+			tournamentPane.toFront();
+			tournamentPane.showTournament(tournamentId);
+		} catch (PropertyVetoException ex) {
+			logger.fatal(null, ex);
+		}
 	}
 
    public static boolean connect(String userName, String serverName, int port) {
@@ -459,10 +485,6 @@ public class MageFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         desktopPane = new MageJDesktop();
-        tablesPane = new mage.client.table.TablesPane();
-        gamePane = new mage.client.game.GamePane();
-        deckEditorPane = new mage.client.deckeditor.DeckEditorPane();
-        collectionViewerPane = new CollectionViewerPane();
         mageToolbar = new javax.swing.JToolBar();
         btnConnect = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
@@ -482,34 +504,6 @@ public class MageFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         //setMinimumSize(new java.awt.Dimension(1024, 768));
 
-        tablesPane.setBounds(20, 10, 560, 440);
-        desktopPane.add(tablesPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        try {
-            tablesPane.setMaximum(true);
-        } catch (java.beans.PropertyVetoException e1) {
-            e1.printStackTrace();
-        }
-        gamePane.setBounds(20, 30, -1, -1);
-        desktopPane.add(gamePane, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        try {
-            gamePane.setMaximum(true);
-        } catch (java.beans.PropertyVetoException e1) {
-            e1.printStackTrace();
-        }
-        deckEditorPane.setBounds(140, 50, -1, -1);
-        desktopPane.add(deckEditorPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        try {
-            deckEditorPane.setMaximum(true);
-        } catch (java.beans.PropertyVetoException e1) {
-            e1.printStackTrace();
-        }
-        collectionViewerPane.setBounds(140, 50, -1, -1);
-        desktopPane.add(collectionViewerPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        try {
-            collectionViewerPane.setMaximum(true);
-        } catch (java.beans.PropertyVetoException e1) {
-            e1.printStackTrace();
-        }
 
         mageToolbar.setFloatable(false);
         mageToolbar.setRollover(true);
@@ -686,9 +680,16 @@ public class MageFrame extends javax.swing.JFrame {
     }
 
     public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
-        this.deckEditorPane.setVisible(true);
-		this.deckEditorPane.toFront();
-        this.deckEditorPane.show(mode, deck, tableId, time);
+		try {
+			DeckEditorPane deckEditorPane = new DeckEditorPane();
+			desktopPane.add(deckEditorPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+			deckEditorPane.setMaximum(true);
+			deckEditorPane.setVisible(true);
+			deckEditorPane.toFront();
+			deckEditorPane.show(mode, deck, tableId, time);
+		} catch (PropertyVetoException ex) {
+			logger.fatal(null, ex);
+		}
     }
 
     public void showCollectionViewer() {
@@ -696,20 +697,12 @@ public class MageFrame extends javax.swing.JFrame {
 		this.collectionViewerPane.toFront();
     }
 
-    public static CombatDialog getCombatDialog() {
-        return combat;
-    }
-
-    public static PickNumberDialog getPickNumberDialog() {
-        return pickNumber;
-    }
-
     static void renderSplashFrame(Graphics2D g) {
         g.setComposite(AlphaComposite.Clear);
         g.fillRect(120, 140, 200, 40);
         g.setPaintMode();
         g.setColor(Color.white);
-        g.drawString("Version 0.5.1", 560, 460);
+        g.drawString("Version 0.6.1", 560, 460);
     }
 
     /**
@@ -727,7 +720,7 @@ public class MageFrame extends javax.swing.JFrame {
 
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
             public void uncaughtException(Thread t, Throwable e) {
-                logger.log(Level.SEVERE, null, e);
+                logger.fatal(null, e);
             }
         });
         SwingUtilities.invokeLater(new Runnable() {
@@ -745,10 +738,7 @@ public class MageFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnPreferences;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnGames;
-    private mage.client.deckeditor.DeckEditorPane deckEditorPane;
-    private CollectionViewerPane collectionViewerPane;
     private static MageJDesktop desktopPane;
-    private mage.client.game.GamePane gamePane;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
@@ -757,13 +747,12 @@ public class MageFrame extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JToolBar mageToolbar;
-    private mage.client.table.TablesPane tablesPane;
     // End of variables declaration//GEN-END:variables
 
     private static final long serialVersionUID = -9104885239063142218L;
     private ImagePanel backgroundPane;
-	private DraftPane draftPane;
-	private TournamentPane tournamentPane;
+	private TablesPane tablesPane;
+	private CollectionViewerPane collectionViewerPane;
 
     public void setStatusText(String status) {
         this.lblStatus.setText(status);

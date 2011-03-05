@@ -58,7 +58,7 @@ public class PlayerView implements Serializable {
 	private CardsView graveyard = new CardsView();
 	private Map<UUID, PermanentView> battlefield = new HashMap<UUID, PermanentView>();
 
-	public PlayerView(Player player, Game game) {
+	public PlayerView(Player player, GameState state, Game game) {
 		this.playerId = player.getId();
 		this.name = player.getName();
 		this.life = player.getLife();
@@ -66,26 +66,26 @@ public class PlayerView implements Serializable {
 		this.libraryCount = player.getLibrary().size();
 		this.handCount = player.getHand().size();
 		this.manaPool = new ManaPoolView(player.getManaPool());
-		this.isActive = (player.getId().equals(game.getActivePlayerId()));
+		this.isActive = (player.getId().equals(state.getActivePlayerId()));
 		this.hasLeft = player.hasLeft();
 		for (Card card: player.getGraveyard().getCards(game)) {
 			graveyard.put(card.getId(), new CardView(card));
 		}
-		for (Permanent permanent: game.getBattlefield().getAllPermanents()) {
-			if (showInBattlefield(permanent, game)) {
+		for (Permanent permanent: state.getBattlefield().getAllPermanents()) {
+			if (showInBattlefield(permanent, state)) {
 				PermanentView view = new PermanentView(permanent, game.getCard(permanent.getId()));
 				battlefield.put(view.getId(), view);
 			}
 		}
 	}
 
-	private boolean showInBattlefield(Permanent permanent, Game game) {
+	private boolean showInBattlefield(Permanent permanent, GameState state) {
 
 		//show permanents controlled by player or attachments to permanents controlled by player
 		if (permanent.getAttachedTo() == null)
 			return permanent.getControllerId().equals(playerId);
 		else {
-			Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
+			Permanent attachedTo = state.getPermanent(permanent.getAttachedTo());
 			if (attachedTo != null)
 				return attachedTo.getControllerId().equals(playerId);
 			else

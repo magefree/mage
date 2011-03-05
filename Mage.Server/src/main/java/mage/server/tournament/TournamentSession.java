@@ -72,7 +72,7 @@ public class TournamentSession {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
 				session.clearAck();
-				session.fireCallback(new ClientCallback("tournamentInit", tournamentView));
+				session.fireCallback(new ClientCallback("tournamentInit", tournament.getId(), tournamentView));
 				if (waitForAck("tournamentInit"))
 					return true;
 			}
@@ -92,7 +92,7 @@ public class TournamentSession {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("tournamentUpdate", tournamentView));
+				session.fireCallback(new ClientCallback("tournamentUpdate", tournament.getId(), tournamentView));
 		}
 	}
 
@@ -100,7 +100,7 @@ public class TournamentSession {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("tournamentOver", message));
+				session.fireCallback(new ClientCallback("tournamentOver", tournament.getId(), message));
 		}
 	}
 

@@ -377,18 +377,18 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 			popup = factory.getPopup(this, popupText, (int) this.getLocationOnScreen().getX() + Config.dimensions.frameWidth, (int) this.getLocationOnScreen().getY() + 40);
 			popup.show();
 			popupShowing = true;
-			
+
 			// Draw Arrows for targets
 			List<UUID> targets = card.getTargets();
 			if (targets != null) {
 				for (UUID uuid : targets) {
-					PlayAreaPanel p = session.getGame().getPlayers().get(uuid);
+					PlayAreaPanel p = session.getGame(gameId).getPlayers().get(uuid);
 					if (p != null) {
 						Point target = p.getLocationOnScreen();
 						Point me = this.getLocationOnScreen();
 						ArrowBuilder.addArrow((int)me.getX() + 35, (int)me.getY(), (int)target.getX() + 40, (int)target.getY() - 40, Color.red);
 					} else {
-						for (PlayAreaPanel pa : session.getGame().getPlayers().values()) {
+						for (PlayAreaPanel pa : session.getGame(gameId).getPlayers().values()) {
 							MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
 							if (permanent != null) {
 								Point target = permanent.getLocationOnScreen();

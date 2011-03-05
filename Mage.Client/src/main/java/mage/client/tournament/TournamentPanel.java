@@ -34,6 +34,7 @@
 
 package mage.client.tournament;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -41,21 +42,25 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.UUID;
-import javax.swing.Timer;
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import mage.client.MageFrame;
 import mage.client.remote.MageRemoteException;
 import mage.client.remote.Session;
+import mage.client.util.ButtonColumn;
 import mage.view.RoundView;
 import mage.view.TournamentGameView;
 import mage.view.TournamentPlayerView;
 import mage.view.TournamentView;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class TournamentPanel extends javax.swing.JPanel implements Observer {
+
+	private final static Logger logger = Logger.getLogger(TournamentPanel.class);
 
 	private UUID tournamentId;
 	private Session session;
@@ -73,12 +78,30 @@ public class TournamentPanel extends javax.swing.JPanel implements Observer {
 		tablePlayers.createDefaultColumnsFromModel();
 		tableMatches.createDefaultColumnsFromModel();
 
+		Action action = new AbstractAction()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				int modelRow = Integer.valueOf( e.getActionCommand() );
+				UUID tableId = UUID.fromString((String)tableMatches.getValueAt(modelRow, 3));
+				String state = (String)tableMatches.getValueAt(modelRow, 4);
+
+				if (state.equals("Finished")) {
+					logger.info("Replaying table " + tableId);
+					session.replayTable(null, tableId);
+				}
+			}
+		};
+
+		ButtonColumn buttonColumn = new ButtonColumn(tableMatches, action, 6);
+
     }
 
 	public synchronized void showTournament(UUID tournamentId) {
 		this.tournamentId = tournamentId;
 		session = MageFrame.getSession();
-		session.setTournament(this);
+		session.addTournament(tournamentId, this);
 		UUID chatRoomId = session.getTournamentChatId(tournamentId);
 		if (session.joinTournament(tournamentId) && chatRoomId != null) {
 			this.chatPanel1.connect(chatRoomId);
@@ -218,7 +241,7 @@ class TournamentPlayersTableModel extends AbstractTableModel {
 }
 
 class TournamentMatchesTableModel extends AbstractTableModel {
-    private String[] columnNames = new String[]{"Round Number", "Players", "Match Id", "Game Id", "State", "Result"};
+    private String[] columnNames = new String[]{"Round Number", "Players", "Match Id", "Game Id", "State", "Result", "Action"};
 	private TournamentGameView[] games = new TournamentGameView[0];
 
 	public void loadData(TournamentView tournament) {
@@ -257,6 +280,11 @@ class TournamentMatchesTableModel extends AbstractTableModel {
 				return games[arg0].getState();
 			case 5:
 				return games[arg0].getResult();
+			case 6:
+				if (games[arg0].getState().equals("Finished")) {
+					return "Replay";
+				}
+				return "";
 		}
 		return "";
 	}
@@ -278,7 +306,9 @@ class TournamentMatchesTableModel extends AbstractTableModel {
 
 	@Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return false;
+		if (columnIndex != 6)
+			return false;
+		return true;
     }
 
 }

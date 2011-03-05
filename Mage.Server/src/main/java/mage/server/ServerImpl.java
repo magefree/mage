@@ -636,7 +636,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void replayGame(final UUID sessionId) throws MageException {
+	public void replayGame(final UUID gameID, final UUID sessionId) throws MageException {
 		try {
 			rmiExecutor.execute(
 				new Runnable() {

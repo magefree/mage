@@ -69,7 +69,7 @@ public class GameSession extends GameWatcher {
 			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("gameAsk", new GameClientMessage(gameView, question)));
+				session.fireCallback(new ClientCallback("gameAsk", game.getId(), new GameClientMessage(gameView, question)));
 		}
 	}
 
@@ -78,7 +78,7 @@ public class GameSession extends GameWatcher {
 			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("gameTarget", new GameClientMessage(gameView, question, cardView, targets, required, options)));
+				session.fireCallback(new ClientCallback("gameTarget", game.getId(), new GameClientMessage(gameView, question, cardView, targets, required, options)));
 		}
 	}
 
@@ -87,7 +87,7 @@ public class GameSession extends GameWatcher {
 			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("gameSelect", new GameClientMessage(gameView, message)));
+				session.fireCallback(new ClientCallback("gameSelect", game.getId(), new GameClientMessage(gameView, message)));
 		}
 	}
 
@@ -96,7 +96,7 @@ public class GameSession extends GameWatcher {
 			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("gameChooseAbility", abilities));
+				session.fireCallback(new ClientCallback("gameChooseAbility", game.getId(), abilities));
 		}
 	}
 
@@ -105,7 +105,7 @@ public class GameSession extends GameWatcher {
 			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("gameChoose", new GameClientMessage(choices.toArray(new String[0]), message)));
+				session.fireCallback(new ClientCallback("gameChoose", game.getId(), new GameClientMessage(choices.toArray(new String[0]), message)));
 		}
 	}
 
@@ -114,7 +114,7 @@ public class GameSession extends GameWatcher {
 			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("gamePlayMana", new GameClientMessage(gameView, message)));
+				session.fireCallback(new ClientCallback("gamePlayMana", game.getId(), new GameClientMessage(gameView, message)));
 		}
 	}
 
@@ -123,7 +123,7 @@ public class GameSession extends GameWatcher {
 			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("gamePlayXMana", new GameClientMessage(gameView, message)));
+				session.fireCallback(new ClientCallback("gamePlayXMana", game.getId(), new GameClientMessage(gameView, message)));
 		}
 	}
 
@@ -132,7 +132,7 @@ public class GameSession extends GameWatcher {
 			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("gameSelectAmount", new GameClientMessage(message, min, max)));
+				session.fireCallback(new ClientCallback("gameSelectAmount", game.getId(), new GameClientMessage(message, min, max)));
 		}
 	}
 
@@ -140,7 +140,7 @@ public class GameSession extends GameWatcher {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("gameReveal", new GameClientMessage(cardView, name)));
+				session.fireCallback(new ClientCallback("gameReveal", game.getId(), new GameClientMessage(cardView, name)));
 		}
 	}
 

@@ -78,7 +78,7 @@ public class ChatSession {
 		for (UUID sessionId: clients.keySet()) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("chatMessage", new ChatMessage(chatId, msg, color)));
+				session.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(msg, color)));
 			else
 				kill(sessionId);
 		}

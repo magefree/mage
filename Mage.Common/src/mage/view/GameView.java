@@ -31,6 +31,7 @@ package mage.view;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import mage.MageObject;
 import mage.Constants.PhaseStep;
@@ -68,7 +69,7 @@ public class GameView implements Serializable {
 
 	public GameView(GameState state, Game game) {
 		for (Player player: state.getPlayers().values()) {
-			players.add(new PlayerView(player, game));
+			players.add(new PlayerView(player, state, game));
 		}
 		for (StackObject stackObject: state.getStack()) {
 			if (stackObject instanceof StackAbility) {

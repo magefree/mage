@@ -85,13 +85,13 @@ public class MageActionCallback implements ActionCallback {
             for (UUID uuid : targets) {
                 //System.out.println("Getting play area panel for uuid: " + uuid);
 
-                PlayAreaPanel p = session.getGame().getPlayers().get(uuid);
+                PlayAreaPanel p = session.getGame(data.gameId).getPlayers().get(uuid);
                 if (p != null) {
                     Point target = p.getLocationOnScreen();
                     target.translate(-parentPoint.x, -parentPoint.y);
                     ArrowBuilder.addArrow((int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() - 40, Color.red);
                 } else {
-                    for (PlayAreaPanel pa : session.getGame().getPlayers().values()) {
+                    for (PlayAreaPanel pa : session.getGame(data.gameId).getPlayers().values()) {
                         MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
                         if (permanent != null) {
                             Point target = permanent.getLocationOnScreen();
@@ -108,7 +108,7 @@ public class MageActionCallback implements ActionCallback {
             Point me = new Point(data.locationOnScreen);
             me.translate(-parentPoint.x, -parentPoint.y);
             UUID uuid = data.card.getParentId();
-            for (PlayAreaPanel pa : session.getGame().getPlayers().values()) {
+            for (PlayAreaPanel pa : session.getGame(data.gameId).getPlayers().values()) {
                 MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
                 if (permanent != null) {
                     Point source = permanent.getLocationOnScreen();

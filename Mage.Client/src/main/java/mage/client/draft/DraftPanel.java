@@ -81,7 +81,7 @@ public class DraftPanel extends javax.swing.JPanel {
 	public synchronized void showDraft(UUID draftId) {
 		this.draftId = draftId;
 		session = MageFrame.getSession();
-		session.setDraft(this);
+		session.addDraft(draftId, this);
 		if (!session.joinDraft(draftId))
 			hideDraft();
 	}

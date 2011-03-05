@@ -102,7 +102,7 @@ public interface Server extends Remote, CallbackServer {
 	public DraftPickView sendCardPick(UUID draftId, UUID sessionId, UUID cardId) throws RemoteException, MageException;
 
 	//replay methods
-	public void replayGame(UUID sessionId) throws RemoteException, MageException;
+	public void replayGame(UUID gameId, UUID sessionId) throws RemoteException, MageException;
 	public void stopReplay(UUID sessionId) throws RemoteException, MageException;
 	public void nextPlay(UUID sessionId) throws RemoteException, MageException;
 	public void previousPlay(UUID sessionId) throws RemoteException, MageException;

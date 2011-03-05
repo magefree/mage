@@ -59,8 +59,6 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mage.client.dialog.NewTournamentDialog;
-import mage.game.draft.DraftOptions;
-import mage.game.tournament.TournamentOptions;
 
 
 /**
@@ -222,7 +220,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableTables = new javax.swing.JTable();
 
-        btnNewTable.setText("New Table");
+        btnNewTable.setText("New Match");
         btnNewTable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewTableActionPerformed(evt);
@@ -254,7 +252,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
                 .addComponent(btnNewTournament)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnQuickStart)
-                .addContainerGap(416, Short.MAX_VALUE))
+                .addContainerGap(414, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

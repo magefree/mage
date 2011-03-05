@@ -87,6 +87,7 @@ public class CallbackServerSession {
 			}
 			callback.setMethod(call.getMethod());
 			callback.setData(call.getData());
+			callback.setObjectId(call.getObjectId());
 			callback.setMessageId(call.getMessageId());
 			callbackCalled.signal();
 		}

@@ -59,7 +59,7 @@ public class ReplaySession implements GameCallback {
 		replay.start();
 		Session session = SessionManager.getInstance().getSession(sessionId);
 		if (session != null)
-			session.fireCallback(new ClientCallback("replayInit", new GameView(replay.next(), replay.getGame())));
+			session.fireCallback(new ClientCallback("replayInit", replay.getGame().getId(), new GameView(replay.next(), replay.getGame())));
 	}
 
 	public void stop() {
@@ -78,7 +78,7 @@ public class ReplaySession implements GameCallback {
 	public void gameResult(final String result) {
 		Session session = SessionManager.getInstance().getSession(sessionId);
 		if (session != null)
-			session.fireCallback(new ClientCallback("replayDone", result));
+			session.fireCallback(new ClientCallback("replayDone", replay.getGame().getId(), result));
 	}
 
 	private void updateGame(final GameState state, Game game) {
@@ -88,7 +88,7 @@ public class ReplaySession implements GameCallback {
 		else {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("replayUpdate", new GameView(state, game)));
+				session.fireCallback(new ClientCallback("replayUpdate", replay.getGame().getId(), new GameView(state, game)));
 		}
 	}
 

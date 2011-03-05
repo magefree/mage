@@ -38,7 +38,6 @@ import java.util.UUID;
 public class ChatMessage implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	private UUID chatId;
 	private String message;
 	private MessageColor color;
 
@@ -46,18 +45,13 @@ public class ChatMessage implements Serializable {
 		BLACK, RED, GREEN, BLUE, ORANGE;
 	}
 
-	public ChatMessage(UUID chatId, String message, MessageColor color) {
-		this.chatId = chatId;
+	public ChatMessage(String message, MessageColor color) {
 		this.message = message;
 		this.color = color;
 	}
 
 	public String getMessage() {
 		return message;
-	}
-
-	public UUID getChatId() {
-		return chatId;
 	}
 
 	public MessageColor getColor() {

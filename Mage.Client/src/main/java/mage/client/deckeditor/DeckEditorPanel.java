@@ -120,7 +120,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				this.cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
 				this.btnExit.setVisible(false);
 				this.btnImport.setVisible(false);
-				this.btnLoad.setVisible(false);
+				if (!MageFrame.getSession().isTestMode())
+					this.btnLoad.setVisible(false);
 				this.deckArea.showSideboard(false);
 				countdown.stop();
 				this.timeout = time;
@@ -134,7 +135,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				this.cardSelector.loadCards(this.bigCard);
 				this.btnExit.setVisible(true);
 				this.btnImport.setVisible(true);
-				this.btnLoad.setVisible(true);
+				if (!MageFrame.getSession().isTestMode())
+					this.btnLoad.setVisible(true);
 				this.deckArea.showSideboard(true);
 				this.txtTimeRemaining.setVisible(false);
 				break;
@@ -191,6 +193,15 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		refreshDeck();
 		this.setVisible(true);
 		this.repaint();
+	}
+
+	public void hideDeckEditor() {
+		Component c = this.getParent();
+		while (c != null && !(c instanceof DeckEditorPane)) {
+			c = c.getParent();
+		}
+		if (c != null)
+			c.setVisible(false);
 	}
 
 	private BigCard getBigCard() {
@@ -451,12 +462,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 	}//GEN-LAST:event_btnNewActionPerformed
 
 	private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-		Component c = this.getParent();
-		while (c != null && !(c instanceof DeckEditorPane)) {
-			c = c.getParent();
-		}
-		if (c != null)
-			c.setVisible(false);
+		hideDeckEditor();
 	}//GEN-LAST:event_btnExitActionPerformed
 
 	private void btnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportActionPerformed
@@ -491,7 +497,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
 	private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {
 		if (MageFrame.getSession().submitDeck(tableId, deck.getDeckCardLists()))
-			this.setVisible(false);
+			hideDeckEditor();
 	}
 
 	private void btnAddLandActionPerformed(java.awt.event.ActionEvent evt) {

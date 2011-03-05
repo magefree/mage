@@ -39,9 +39,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -54,9 +52,10 @@ import javax.swing.border.LineBorder;
 
 import mage.client.MageFrame;
 import mage.client.cards.Cards;
-import mage.client.deckeditor.collection.viewer.MageBook;
+import mage.client.dialog.CombatDialog;
 import mage.client.dialog.ExileZoneDialog;
 import mage.client.dialog.PickChoiceDialog;
+import mage.client.dialog.PickNumberDialog;
 import mage.client.dialog.ShowCardsDialog;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.impl.Plugins;
@@ -64,7 +63,6 @@ import mage.client.remote.Session;
 import mage.client.util.Config;
 import mage.client.util.GameManager;
 import mage.client.util.PhaseManager;
-import mage.client.util.gui.ArrowBuilder;
 import mage.util.Logging;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
@@ -87,6 +85,8 @@ public class GamePanel extends javax.swing.JPanel {
 	private UUID gameId;
 	private UUID playerId;
 	private Session session;
+    private CombatDialog combat;
+    private PickNumberDialog pickNumber;
 
 	private static final Dimension handCardDimension = new Dimension(75, (int)(75 * 3.5f / 2.5f));
 
@@ -95,7 +95,12 @@ public class GamePanel extends javax.swing.JPanel {
         initComponents();
         
         hand.setHScrollSpeed(8);
-        
+        combat = new CombatDialog();
+        pickNumber = new PickNumberDialog();
+        MageFrame.getDesktop().add(combat, JLayeredPane.POPUP_LAYER);
+        combat.hideDialog();
+        MageFrame.getDesktop().add(pickNumber, JLayeredPane.POPUP_LAYER);
+
         //FIXME: remove from here
 		try {
 	        // Override layout (I can't edit generated code)
@@ -104,8 +109,8 @@ public class GamePanel extends javax.swing.JPanel {
 			j.setSize(1024,768);
 			this.add(j);
 			j.add(jSplitPane1, JLayeredPane.DEFAULT_LAYER);
-			
-			Map<String, JComponent> ui = getUIComponents(j); 
+
+			Map<String, JComponent> ui = getUIComponents(j);
 			Plugins.getInstance().updateGamePanel(ui);
 
 			// Enlarge jlayeredpane on resize
@@ -118,7 +123,7 @@ public class GamePanel extends javax.swing.JPanel {
 					jSplitPane1.setSize(width, height);
 				}
 	        });
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -140,8 +145,8 @@ public class GamePanel extends javax.swing.JPanel {
     }
     
 	public void cleanUp() {
-		MageFrame.getCombatDialog().hideDialog();
-		MageFrame.getPickNumberDialog().hide();
+		combat.hideDialog();
+		pickNumber.hide();
 		for (ExileZoneDialog exile: exiles.values()) {
 			exile.hide();
 		}
@@ -154,7 +159,7 @@ public class GamePanel extends javax.swing.JPanel {
 		this.gameId = gameId;
 		this.playerId = playerId;
 		session = MageFrame.getSession();
-		session.setGame(this);
+		session.addGame(gameId, this);
 		this.feedbackPanel.init(gameId);
 		this.feedbackPanel.clear();
 		this.abilityPicker.init(session, gameId);
@@ -172,7 +177,7 @@ public class GamePanel extends javax.swing.JPanel {
 		this.gameId = gameId;
 		this.playerId = null;
 		session = MageFrame.getSession();
-		session.setGame(this);
+		session.addGame(gameId, this);
 		this.feedbackPanel.init(gameId);
 		this.feedbackPanel.clear();
 		this.btnConcede.setVisible(false);
@@ -185,17 +190,18 @@ public class GamePanel extends javax.swing.JPanel {
 			hideGame();
 	}
 
-	public synchronized void replayGame() {
+	public synchronized void replayGame(UUID gameId) {
+		this.gameId = gameId;
 		this.playerId = null;
 		session = MageFrame.getSession();
-		session.setGame(this);
+		session.addGame(gameId, this);
 		this.feedbackPanel.clear();
 		this.btnConcede.setVisible(false);
 		this.btnStopWatching.setVisible(false);
 		this.pnlReplay.setVisible(true);
 		this.setVisible(true);
 		this.chatPanel.clear();
-		if (!session.replayGame())
+		if (!session.replayGame(gameId))
 			hideGame();
 	}
 
@@ -204,7 +210,7 @@ public class GamePanel extends javax.swing.JPanel {
 		this.players.clear();
 		logger.log(Level.FINE, "players clear.");
 		this.pnlBattlefield.removeAll();
-		MageFrame.getCombatDialog().hideDialog();
+		combat.hideDialog();
 		Component c = this.getParent();
 		while (c != null && !(c instanceof GamePane)) {
 			c = c.getParent();
@@ -215,8 +221,8 @@ public class GamePanel extends javax.swing.JPanel {
 
 	public synchronized void init(GameView game) {
 		logger.warning("init.");
-		MageFrame.getCombatDialog().init(gameId, bigCard);
-		MageFrame.getCombatDialog().setLocation(500, 300);
+		combat.init(gameId, bigCard);
+		combat.setLocation(500, 300);
 		addPlayers(game);
 		logger.warning("added players.");
 		updateGame(game);
@@ -335,10 +341,10 @@ public class GamePanel extends javax.swing.JPanel {
 		}
 		showRevealed(game);
 		if (game.getCombat().size() > 0) {
-			MageFrame.getCombatDialog().showDialog(game.getCombat());
+			combat.showDialog(game.getCombat());
 		}
 		else {
-			MageFrame.getCombatDialog().hideDialog();
+			combat.hideDialog();
 		}
 		this.revalidate();
 		this.repaint();
@@ -424,11 +430,11 @@ public class GamePanel extends javax.swing.JPanel {
 	}
 
 	public void getAmount(int min, int max, String message) {
-		MageFrame.getPickNumberDialog().showDialog(min, max, message);
-		if (MageFrame.getPickNumberDialog().isCancel())
+		pickNumber.showDialog(min, max, message);
+		if (pickNumber.isCancel())
 			session.sendPlayerBoolean(gameId, false);
 		else
-			session.sendPlayerInteger(gameId, MageFrame.getPickNumberDialog().getAmount());
+			session.sendPlayerInteger(gameId, pickNumber.getAmount());
 	}
 
 	public void getChoice(String message, String[] choices) {

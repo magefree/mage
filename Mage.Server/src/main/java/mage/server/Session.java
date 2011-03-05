@@ -91,23 +91,23 @@ public class Session {
 	}
 
 	public void gameStarted(final UUID gameId, final UUID playerId) {
-		fireCallback(new ClientCallback("startGame", new TableClientMessage(gameId, playerId)));
+		fireCallback(new ClientCallback("startGame", gameId, new TableClientMessage(gameId, playerId)));
 	}
 
 	public void draftStarted(final UUID draftId, final UUID playerId) {
-		fireCallback(new ClientCallback("startDraft", new TableClientMessage(draftId, playerId)));
+		fireCallback(new ClientCallback("startDraft", draftId, new TableClientMessage(draftId, playerId)));
 	}
 
 	public void tournamentStarted(final UUID tournamentId, final UUID playerId) {
-		fireCallback(new ClientCallback("startTournament", new TableClientMessage(tournamentId, playerId)));
+		fireCallback(new ClientCallback("startTournament", tournamentId, new TableClientMessage(tournamentId, playerId)));
 	}
 
 	public void sideboard(final Deck deck, final UUID tableId, final int time) {
-		fireCallback(new ClientCallback("sideboard", new TableClientMessage(deck, tableId, time)));
+		fireCallback(new ClientCallback("sideboard", tableId, new TableClientMessage(deck, tableId, time)));
 	}
 
 	public void construct(final Deck deck, final UUID tableId, final int time) {
-		fireCallback(new ClientCallback("construct", new TableClientMessage(deck, tableId, time)));
+		fireCallback(new ClientCallback("construct", tableId, new TableClientMessage(deck, tableId, time)));
 	}
 
 	public void watchGame(final UUID gameId) {

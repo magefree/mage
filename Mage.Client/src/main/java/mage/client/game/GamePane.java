@@ -88,8 +88,8 @@ public class GamePane extends MagePane {
 		this.toFront();
 	}
 
-	public void replayGame() {
-		gamePanel.replayGame();
+	public void replayGame(UUID gameId) {
+		gamePanel.replayGame(gameId);
 		this.toFront();
 	}
 

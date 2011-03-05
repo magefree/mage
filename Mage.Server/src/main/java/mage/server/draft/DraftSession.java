@@ -72,7 +72,7 @@ public class DraftSession {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
 				session.clearAck();
-				session.fireCallback(new ClientCallback("draftInit", draftView));
+				session.fireCallback(new ClientCallback("draftInit", draft.getId(), draftView));
 				if (waitForAck("draftInit"))
 					return true;
 			}
@@ -92,7 +92,7 @@ public class DraftSession {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("draftUpdate", draftView));
+				session.fireCallback(new ClientCallback("draftUpdate", draft.getId(), draftView));
 		}
 	}
 
@@ -100,7 +100,7 @@ public class DraftSession {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("draftInform", new DraftClientMessage(draftView, message)));
+				session.fireCallback(new ClientCallback("draftInform", draft.getId(), new DraftClientMessage(draftView, message)));
 		}
 	}
 
@@ -108,7 +108,7 @@ public class DraftSession {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("draftOver"));
+				session.fireCallback(new ClientCallback("draftOver", draft.getId()));
 		}
 	}
 
@@ -117,7 +117,7 @@ public class DraftSession {
 			setupTimeout(timeout);
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("draftPick", new DraftClientMessage(draftPickView)));
+				session.fireCallback(new ClientCallback("draftPick", draft.getId(), new DraftClientMessage(draftPickView)));
 		}
 	}
 
