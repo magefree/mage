@@ -28,6 +28,6 @@ public class StaticValue implements DynamicValue {
 
     @Override
     public String toString() {
-        return String.format("%1$+d", value);
+        return Integer.toString(value);
     }
 }
