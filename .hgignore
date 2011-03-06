@@ -2,6 +2,7 @@ syntax: glob
 Mage.Client/plugins/images
 Mage.Client/plugins/plugin.data
 Mage.Server/saved
+Mage.Server/config/init.txt
 Mage.Client/target
 Mage.Common/target
 Mage.Plugins/Mage.Card.Plugin/target
