@@ -19,6 +19,7 @@
 		<module>Mage.Theme.Plugin</module>
 		<module>Mage.Card.Plugin</module>
 		<module>Mage.Counter.Plugin</module>
+        <module>Mage.Rating.Plugin</module>
 	</modules>
 	
 </project>
