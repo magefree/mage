@@ -37,12 +37,12 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -98,9 +98,9 @@ class NissasChosenEffect extends ReplacementEffectImpl<NissasChosenEffect> {
 
 	@Override
 	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		Permanent permanent = game.getPermanent(event.getTargetId());
-		if ( permanent != null && event.getTargetId().equals(source.getSourceId()) ) {
-			return permanent.moveToZone(Zone.LIBRARY, source.getId(), game, onTop);
+		Card card = game.getCard(event.getTargetId());
+		if ( card != null && event.getTargetId().equals(source.getSourceId()) ) {
+			return card.moveToZone(Zone.LIBRARY, source.getId(), game, onTop);
 		}
 		return false;
 	}
