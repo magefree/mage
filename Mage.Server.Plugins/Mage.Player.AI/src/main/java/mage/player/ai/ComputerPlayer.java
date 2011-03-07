@@ -287,9 +287,12 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				targets = threats(opponentId, ((FilterCreatureOrPlayer)t.getFilter()).getCreatureFilter(), game);
 			}
 			for (Permanent permanent: targets) {
+                            List<UUID> alreadyTargetted = target.getTargets();
 				if (t.canTarget(playerId, permanent.getId(), source, game)) {
-					target.addTarget(permanent.getId(), source, game);
-					return true;
+                                    if ( alreadyTargetted != null && !alreadyTargetted.contains(permanent.getId()) ) {
+                                            target.addTarget(permanent.getId(), source, game);
+                                            return true;
+                                    }
 				}
 			}
 			if (outcome.isGood()) {
