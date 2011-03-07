@@ -58,6 +58,7 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)) {
+			this.targets.clear();
 			this.addTarget(new TargetPlayer());
 			this.targets.get(0).add(event.getPlayerId(), game);
 			return true;
