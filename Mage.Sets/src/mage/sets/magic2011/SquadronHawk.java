@@ -60,7 +60,7 @@ public class SquadronHawk extends CardImpl<SquadronHawk> {
 		this.toughness = new MageInt(1);
 
 		this.addAbility(FlyingAbility.getInstance());
-		TargetCardInLibrary target = new TargetCardInLibrary(3, filter);
+		TargetCardInLibrary target = new TargetCardInLibrary(0, 3, filter);
 		this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(target), true));
 	}
 

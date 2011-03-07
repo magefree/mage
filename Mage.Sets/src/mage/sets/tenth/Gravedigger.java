@@ -50,7 +50,7 @@ public class Gravedigger extends CardImpl<Gravedigger> {
 		this.subtype.add("Zombie");
 		this.color.setBlack(true);
 		this.power = new MageInt(2);
-		this.toughness = new MageInt(3);
+		this.toughness = new MageInt(2);
 
 		Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
 		ability.addTarget(new TargetCardInYourGraveyard());
