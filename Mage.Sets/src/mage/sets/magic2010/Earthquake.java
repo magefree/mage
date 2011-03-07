@@ -101,7 +101,7 @@ class EarthquakeEffect extends OneShotEffect<EarthquakeEffect> {
 		for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
 			Player player = game.getPlayer(playerId);
 			if (player != null)
-				player.damage(amount, source.getId(), game, false, true);
+				player.damage(amount, source.getSourceId(), game, false, true);
 		}
 		return true;
 	}

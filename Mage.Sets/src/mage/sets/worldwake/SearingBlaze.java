@@ -129,18 +129,18 @@ class SearingBlazeEffect extends OneShotEffect<SearingBlazeEffect> {
 		Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
 		if (watcher != null && watcher.conditionMet()) {
 			if (player != null) {
-				player.damage(3, source.getId(), game, false, true);
+				player.damage(3, source.getSourceId(), game, false, true);
 			}
 			if (creature != null) {
-				creature.damage(3, source.getId(), game, true, false);
+				creature.damage(3, source.getSourceId(), game, true, false);
 			}
 		}
 		else {
 			if (player != null) {
-				player.damage(1, source.getId(), game, false, true);
+				player.damage(1, source.getSourceId(), game, false, true);
 			}
 			if (creature != null) {
-				creature.damage(1, source.getId(), game, true, false);
+				creature.damage(1, source.getSourceId(), game, true, false);
 			}
 		}
 		return true;

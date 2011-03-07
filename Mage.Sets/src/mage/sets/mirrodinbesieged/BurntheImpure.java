@@ -98,7 +98,7 @@ public class BurntheImpure extends CardImpl<BurntheImpure> {
 			if (permanent.getAbilities().contains(InfectAbility.getInstance())) {
 				Player controller = game.getPlayer(permanent.getControllerId());
 				if (controller != null) {
-					controller.damage(amount, source.getId(), game, true, false);
+					controller.damage(amount, source.getSourceId(), game, true, false);
 				}
 			}
 			return true;

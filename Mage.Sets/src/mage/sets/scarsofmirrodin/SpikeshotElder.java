@@ -94,7 +94,7 @@ class SpikeshotElderEffect extends OneShotEffect<SpikeshotElderEffect> {
 		}
 		Player player = game.getPlayer(source.getFirstTarget());
 		if (sourcePermanent != null && player != null) {
-			player.damage(sourcePermanent.getPower().getValue(), source.getId(), game, false, true);
+			player.damage(sourcePermanent.getPower().getValue(), source.getSourceId(), game, false, true);
 			return true;
 		}
 		return false;
