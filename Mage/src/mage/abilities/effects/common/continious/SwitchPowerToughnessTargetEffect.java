@@ -26,49 +26,55 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.common;
+package mage.abilities.effects.common.continious;
 
-import mage.Constants.Zone;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.Constants.Duration;
+import mage.Constants.Layer;
+import mage.Constants.Outcome;
+import mage.Constants.SubLayer;
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.target.TargetPlayer;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author ayratn
  */
-public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl<DealsCombatDamageToAPlayerTriggeredAbility> {
+public class SwitchPowerToughnessTargetEffect extends ContinuousEffectImpl<SwitchPowerToughnessTargetEffect> {
 
-	public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional) {
-		super(Zone.BATTLEFIELD, effect, optional);
+	public SwitchPowerToughnessTargetEffect(Duration duration) {
+		super(duration, Layer.PTChangingEffects_7, SubLayer.SwitchPT_e, Outcome.BoostCreature);
 	}
 
-	public DealsCombatDamageToAPlayerTriggeredAbility(final DealsCombatDamageToAPlayerTriggeredAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public DealsCombatDamageToAPlayerTriggeredAbility copy() {
-		return new DealsCombatDamageToAPlayerTriggeredAbility(this);
+	public SwitchPowerToughnessTargetEffect(final SwitchPowerToughnessTargetEffect effect) {
+		super(effect);
 	}
 
 	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)) {
-			this.targets.clear();
-			this.addTarget(new TargetPlayer());
-			this.targets.get(0).add(event.getPlayerId(), game);
+	public SwitchPowerToughnessTargetEffect copy() {
+		return new SwitchPowerToughnessTargetEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Permanent target = (Permanent) game.getPermanent(source.getFirstTarget());
+		if (target != null) {
+			int power = target.getPower().getValue();
+			target.getPower().setValue(target.getToughness().getValue());
+			target.getToughness().setValue(power);
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public String getRule() {
-		return "Whenever {this} deals combat damage to a player, " + super.getRule();
+	public String getText(Ability source) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Switch target ").append(source.getTargets().get(0).getTargetName()).append("'s power and toughness")
+			.append(" ").append(duration.toString());
+		return sb.toString();
 	}
+
 
 }

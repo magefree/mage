@@ -329,4 +329,9 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
 		throw new UnsupportedOperationException("Unsupported operation");
 	}
+
+	public Ability getStackAbility() {
+		return this.ability;
+	}
 }
+

@@ -61,13 +61,14 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect<PutLibraryInt
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getFirstTarget());
-		Card card;
-		for (int i = 0; i < amount; i++) {
-			card = player.getLibrary().removeFromTop(game);
-			if (card != null)
-				player.getGraveyard().add(card);
-			else
-				break;
+		if (player != null) {
+			for (int i = 0; i < amount; i++) {
+				Card card = player.getLibrary().removeFromTop(game);
+				if (card != null)
+					player.getGraveyard().add(card);
+				else
+					break;
+			}
 		}
 		return true;
 	}
