@@ -65,6 +65,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.logging.Logger;
+import mage.game.permanent.PermanentImpl;
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
 
@@ -317,10 +318,6 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		saveState();
 	}
 
-//	protected void init(UUID choosingPlayerId) {
-//		init(choosingPlayerId, false);
-//	}
-//
 	protected void init(UUID choosingPlayerId, boolean testMode) {
 		for (Player player: state.getPlayers().values()) {
 			player.beginTurn(this);
@@ -1011,6 +1008,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 				card.setOwnerId(ownerId);
 				PermanentCard permanent = new PermanentCard(card, ownerId);
 				permanent.setTapped(card.isTapped());
+				((PermanentImpl)permanent).removeSummoningSickness();
 				getBattlefield().addPermanent(permanent);
 			}
 			applyEffects();

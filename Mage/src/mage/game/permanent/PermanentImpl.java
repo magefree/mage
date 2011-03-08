@@ -313,6 +313,10 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		return false;
 	}
 
+	public void removeSummoningSickness() {
+		this.controlledFromStartOfTurn = true;
+	}
+
 	@Override
 	public boolean hasSummoningSickness() {
 		return !(this.controlledFromStartOfTurn || this.abilities.containsKey(HasteAbility.getInstance().getId()));
