@@ -63,6 +63,10 @@ public class GameStateEvaluator {
 	public static final int LOSE_SCORE = Integer.MIN_VALUE + 1;
 
 	public static int evaluate(UUID playerId, Game game) {
+		return evaluate(playerId, game, false);
+	}
+
+	public static int evaluate(UUID playerId, Game game, boolean ignoreTapped) {
 		Player player = game.getPlayer(playerId);
 		Player opponent = game.getPlayer(game.getOpponents(playerId).iterator().next());
 		if (game.isGameOver()) {
@@ -74,10 +78,10 @@ public class GameStateEvaluator {
 		int lifeScore = (player.getLife() - opponent.getLife()) * LIFE_FACTOR;
 		int permanentScore = 0;
 		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
-			permanentScore += evaluatePermanent(permanent, game);
+			permanentScore += evaluatePermanent(permanent, game, ignoreTapped);
 		}
 		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(opponent.getId())) {
-			permanentScore -= evaluatePermanent(permanent, game);
+			permanentScore -= evaluatePermanent(permanent, game, ignoreTapped);
 		}
 		permanentScore *= PERMANENT_FACTOR;
 
@@ -91,8 +95,12 @@ public class GameStateEvaluator {
 		return score;
 	}
 
-	public static int evaluatePermanent(Permanent permanent, Game game) {
-		int value = permanent.isTapped()?4:5;
+	public static int evaluatePermanent(Permanent permanent, Game game, boolean ignoreTapped) {
+		int value = 0;
+		if (ignoreTapped)
+			value = 5;
+		else
+			value = permanent.isTapped()?4:5;
 		if (permanent.getCardType().contains(CardType.CREATURE)) {
 			value += evaluateCreature(permanent, game) * CREATURE_FACTOR;
 		}

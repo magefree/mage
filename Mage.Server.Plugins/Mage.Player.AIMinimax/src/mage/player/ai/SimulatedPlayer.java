@@ -29,6 +29,7 @@
 package mage.player.ai;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -64,9 +65,11 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 	private FilterAbility filter;
 	private transient ConcurrentLinkedQueue<Ability> allActions;
 	private static PassAbility pass = new PassAbility();
+	protected int maxDepth;
 
 	public SimulatedPlayer(UUID id, boolean isSimulatedPlayer) {
 		super(id);
+		maxDepth = Config.maxDepth;
 		pass.setControllerId(playerId);
 		this.isSimulatedPlayer = isSimulatedPlayer;
 	}
@@ -91,6 +94,7 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 		simulateOptions(sim, pass);
 
 		ArrayList<Ability> list = new ArrayList<Ability>(allActions);
+		//Collections.shuffle(list);
 		Collections.reverse(list);
 		return list;
 	}
@@ -244,23 +248,22 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 		}
 		else {
 			SimulationNode parent = (SimulationNode) game.getCustomData();
-			int depth = parent.getDepth() - 1;
-			if (depth == 0) return true;
-			logger.debug("simulating -- triggered ability - adding children:" + options.size());
+			if (parent.getDepth() == maxDepth) return true;
+			logger.debug(indent(parent.getDepth()) + "simulating -- triggered ability - adding children:" + options.size());
 			for (Ability option: options) {
-				addAbilityNode(parent, option, depth, game);
+				addAbilityNode(parent, option, game);
 			}
 		}
 		return true;
 	}
 
-	protected void addAbilityNode(SimulationNode parent, Ability ability, int depth, Game game) {
+	protected void addAbilityNode(SimulationNode parent, Ability ability, Game game) {
 		Game sim = game.copy();
 		sim.getStack().push(new StackAbility(ability, playerId));
 		ability.activate(sim, false);
 		sim.applyEffects();
-		SimulationNode newNode = new SimulationNode(parent, sim, depth, playerId);
-		logger.debug("simulating -- node #:" + SimulationNode.getCount() + " triggered ability option");
+		SimulationNode newNode = new SimulationNode(parent, sim, playerId);
+		logger.debug(indent(newNode.getDepth()) + "simulating -- node #:" + SimulationNode.getCount() + " triggered ability option");
 		for (Target target: ability.getTargets()) {
 			for (UUID targetId: target.getTargets()) {
 				newNode.getTargets().add(targetId);
@@ -275,6 +278,12 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 	@Override
 	public void priority(Game game) {
 		//should never get here
+	}
+
+	protected String indent(int num) {
+		char[] fill = new char[num];
+		Arrays.fill(fill, ' ');
+		return new String(fill);
 	}
 
 }

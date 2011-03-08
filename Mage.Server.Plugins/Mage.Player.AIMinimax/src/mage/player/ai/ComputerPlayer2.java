@@ -29,6 +29,7 @@
 package mage.player.ai;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -39,6 +40,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.logging.Level;
 import mage.Constants.Outcome;
 import mage.Constants.PhaseStep;
 import mage.Constants.RangeOfInfluence;
@@ -182,14 +184,18 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		if (!getNextAction(game)) {
 			Game sim = createSimulation(game);
 			SimulationNode.resetCount();
-			root = new SimulationNode(null, sim, maxDepth, playerId);
+			root = new SimulationNode(null, sim, playerId);
 			logger.debug("simulating actions");
 			addActionsTimed(new FilterAbility());
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
 				actions = new LinkedList<Ability>(root.abilities);
 				combat = root.combat;
+				if (logger.isDebugEnabled())
+					logger.debug("adding actions:" + actions);
 			}
+			else
+				logger.debug("no actions added");
 		}
 	}
 
@@ -215,20 +221,20 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		return false;
 	}
 
-	protected int minimaxAB(SimulationNode node, FilterAbility filter, int depth, int alpha, int beta) {
+	protected int minimaxAB(SimulationNode node, FilterAbility filter, int alpha, int beta) {
 		UUID currentPlayerId = node.getGame().getPlayerList().get();
 		SimulationNode bestChild = null;
 		boolean isSimulatedPlayer = currentPlayerId.equals(playerId);
 		for (SimulationNode child: node.getChildren()) {
 			if (alpha >= beta) {
-				logger.debug("alpha beta pruning");
+				logger.debug(indent(node.depth) + "alpha beta pruning");
 				break;
 			}
-			if (SimulationNode.nodeCount > maxNodes) {
-				logger.debug("simulating -- reached end-state");
-				break;
-			}
-			int val = addActions(child, filter, depth-1, alpha, beta);
+//			if (SimulationNode.nodeCount > maxNodes) {
+//				logger.debug(indent(node.depth) + "simulating -- reached end-state");
+//				break;
+//			}
+			int val = addActions(child, filter, alpha, beta);
 			if (!isSimulatedPlayer) {
 				if (val < beta) {
 					beta = val;
@@ -236,7 +242,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 					node.setCombat(child.getCombat());
 				}
 				if (val == GameStateEvaluator.LOSE_SCORE) {
-					logger.debug("simulating -- lose, can't do worse than this");
+					logger.debug(indent(node.depth) + "simulating -- lose, can't do worse than this");
 					break;
 				}
 			}
@@ -247,7 +253,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 					node.setCombat(child.getCombat());
 				}
 				if (val == GameStateEvaluator.WIN_SCORE) {
-					logger.debug("simulating -- win, can't do better than this");
+					logger.debug(indent(node.depth) + "simulating -- win, can't do better than this");
 					break;
 				}
 			}
@@ -256,11 +262,11 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		if (bestChild != null)
 			node.children.add(bestChild);
 		if (!isSimulatedPlayer) {
-			logger.debug("returning minimax beta: " + beta);
+			logger.debug(indent(node.depth) + "returning minimax beta: " + beta);
 			return beta;
 		}
 		else {
-			logger.debug("returning minimax alpha: " + alpha);
+			logger.debug(indent(node.depth) + "returning minimax alpha: " + alpha);
 			return alpha;
 		}
 	}
@@ -274,7 +280,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		return null;
 	}
 
-	protected void resolve(SimulationNode node, int depth, Game game) {
+	protected void resolve(SimulationNode node, Game game) {
 		StackObject ability = game.getStack().pop();
 		if (ability instanceof StackAbility) {
 			SearchEffect effect = getSearchEffect((StackAbility) ability);
@@ -287,16 +293,16 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 						SearchEffect newEffect = getSearchEffect((StackAbility) newAbility);
 						newEffect.getTarget().addTarget(targetId, newAbility, sim);
 						sim.getStack().push(newAbility);
-						SimulationNode newNode = new SimulationNode(node, sim, depth, ability.getControllerId());
+						SimulationNode newNode = new SimulationNode(node, sim, ability.getControllerId());
 						node.children.add(newNode);
 						newNode.getTargets().add(targetId);
-						logger.debug("simulating search -- node#: " + SimulationNode.getCount() + "for player: " + sim.getPlayer(ability.getControllerId()).getName());
+						logger.debug(indent(node.depth) + "simulating search -- node#: " + SimulationNode.getCount() + "for player: " + sim.getPlayer(ability.getControllerId()).getName());
 					}
 					return;
 				}
 			}
 		}
-		logger.debug("simulating resolve ");
+		logger.debug(indent(node.depth) + "simulating resolve ");
 		ability.resolve(game);
 		game.applyEffects();
 		game.getPlayers().resetPassed();
@@ -307,7 +313,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		FutureTask<Integer> task = new FutureTask<Integer>(new Callable<Integer>() {
 			public Integer call() throws Exception
 			{
-				return addActions(root, filter, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE);
+				return addActions(root, filter, Integer.MIN_VALUE, Integer.MAX_VALUE);
 			}
 		});
 		pool.execute(task);
@@ -316,6 +322,12 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		} catch (TimeoutException e) {
 			logger.debug("simulating - timed out");
 			task.cancel(true);
+			// sleep for 1 second to allow cleanup to finish
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException ex) {
+				logger.fatal("can't sleep");
+			}
 		} catch (ExecutionException e) {
 			logger.fatal("Simulation error", e);
 			task.cancel(true);
@@ -325,28 +337,28 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		}
 	}
 
-	protected int addActions(SimulationNode node, FilterAbility filter, int depth, int alpha, int beta) {
+	protected int addActions(SimulationNode node, FilterAbility filter, int alpha, int beta) {
 		Game game = node.getGame();
-		int val;
 		if (Thread.interrupted()) {
 			Thread.currentThread().interrupt();
-			logger.debug("interrupted");
+			logger.debug(indent(node.depth) + "interrupted");
 			return GameStateEvaluator.evaluate(playerId, game);
 		}
-		if (depth <= 0 || SimulationNode.nodeCount > maxNodes || game.isGameOver()) {
-			logger.debug("simulating -- reached end state");
+		int val;
+		if (node.depth > maxDepth || game.isGameOver()) {
+			logger.debug(indent(node.depth) + "simulating -- reached end state");
 			val = GameStateEvaluator.evaluate(playerId, game);
 		}
 		else if (node.getChildren().size() > 0) {
-			logger.debug("simulating -- somthing added children:" + node.getChildren().size());
-			val = minimaxAB(node, filter, depth-1, alpha, beta);
+			logger.debug(indent(node.depth) + "simulating -- somthing added children:" + node.getChildren().size());
+			val = minimaxAB(node, filter, alpha, beta);
 		}
 		else {
 			if (logger.isDebugEnabled())
-				logger.debug("simulating -- alpha: " + alpha + " beta: " + beta + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + (node.getPlayerId().equals(playerId)?"yes":"no"));
+				logger.debug(indent(node.depth) + "simulating -- alpha: " + alpha + " beta: " + beta + " depth:" + node.depth + " step:" + game.getTurn().getStepType() + " for player:" + (node.getPlayerId().equals(playerId)?"yes":"no"));
 			if (allPassed(game)) {
 				if (!game.getStack().isEmpty()) {
-					resolve(node, depth, game);
+					resolve(node, game);
 				}
 				else {
 //					int testScore = GameStateEvaluator.evaluate(playerId, game);
@@ -365,55 +377,57 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 			}
 			else if (node.getChildren().size() > 0) {
 				//declared attackers or blockers or triggered abilities
-				logger.debug("simulating -- attack/block/trigger added children:" + node.getChildren().size());
-				val = minimaxAB(node, filter, depth-1, alpha, beta);
+				logger.debug(indent(node.depth) + "simulating -- attack/block/trigger added children:" + node.getChildren().size());
+				val = minimaxAB(node, filter, alpha, beta);
 			}
 			else {
-				val = simulatePriority(node, game, filter, depth, alpha, beta);
+				val = simulatePriority(node, game, filter, alpha, beta);
 			}
 		}
 
 		if (logger.isDebugEnabled())
-			logger.debug("returning -- score: " + val + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + game.getPlayer(node.getPlayerId()).getName());
+			logger.debug(indent(node.depth) + "returning -- score: " + val + " depth:" + node.depth + " step:" + game.getTurn().getStepType() + " for player:" + game.getPlayer(node.getPlayerId()).getName());
 		return val;
 
 	}
 
-	protected int simulatePriority(SimulationNode node, Game game, FilterAbility filter, int depth, int alpha, int beta) {
+	protected int simulatePriority(SimulationNode node, Game game, FilterAbility filter, int alpha, int beta) {
 		if (Thread.interrupted()) {
 			Thread.currentThread().interrupt();
-			logger.debug("interrupted");
+			logger.debug(indent(node.depth) + "interrupted");
 			return GameStateEvaluator.evaluate(playerId, game);
 		}
 		node.setGameValue(game.getState().getValue());
 		SimulatedPlayer currentPlayer = (SimulatedPlayer) game.getPlayer(game.getPlayerList().get());
 		boolean isSimulatedPlayer = currentPlayer.getId().equals(playerId);
-		logger.debug("simulating -- player " + currentPlayer.getName());
+		logger.debug(indent(node.depth) + "simulating -- player " + currentPlayer.getName());
 		SimulationNode bestNode = null;
 		List<Ability> allActions = currentPlayer.simulatePriority(game, filter);
 		if (logger.isDebugEnabled())
-			logger.debug("simulating -- adding " + allActions.size() + " children:" + allActions);
+			logger.debug(indent(node.depth) + "simulating -- adding " + allActions.size() + " children:" + allActions);
 		for (Ability action: allActions) {
 			if (Thread.interrupted()) {
 				Thread.currentThread().interrupt();
-				logger.debug("interrupted");
+				logger.debug(indent(node.depth) + "interrupted");
 				break;
 			}
 			Game sim = game.copy();
 			if (sim.getPlayer(currentPlayer.getId()).activateAbility((ActivatedAbility) action.copy(), sim)) {
 				sim.applyEffects();
-				if (checkForRepeatedAction(sim, node, action, currentPlayer.getId()))
+				if (checkForUselessAction(sim, node, action, currentPlayer.getId())) {
+					logger.debug(indent(node.depth) + "found useless action: " + action);
 					continue;
+				}
 				if (!sim.isGameOver() && action.isUsesStack()) {
 					// only pass if the last action uses the stack
 					sim.getPlayer(currentPlayer.getId()).pass();
 					sim.getPlayerList().getNext();
 				}
-				SimulationNode newNode = new SimulationNode(node, sim, action, depth, currentPlayer.getId());
+				SimulationNode newNode = new SimulationNode(node, sim, action, currentPlayer.getId());
 				if (logger.isDebugEnabled())
-					logger.debug("simulating -- node #:" + SimulationNode.getCount() + " actions:" + action);
+					logger.debug(indent(node.depth) + "simulating -- node #:" + SimulationNode.getCount() + " actions:" + action);
 				sim.checkStateAndTriggered();
-				int val = addActions(newNode, filter, depth-1, alpha, beta);
+				int val = addActions(newNode, filter, alpha, beta);
 				if (!isSimulatedPlayer) {
 					if (val < beta) {
 						beta = val;
@@ -421,7 +435,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 						node.setCombat(newNode.getCombat());
 					}
 					if (val == GameStateEvaluator.LOSE_SCORE) {
-						logger.debug("simulating -- lose, can't do worse than this");
+						logger.debug(indent(node.depth) + "simulating -- lose, can't do worse than this");
 						break;
 					}
 				}
@@ -436,18 +450,18 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 							choices = node.getChoices();
 					}
 					if (val == GameStateEvaluator.WIN_SCORE) {
-						logger.debug("simulating -- win, can't do better than this");
+						logger.debug(indent(node.depth) + "simulating -- win, can't do better than this");
 						break;
 					}
 				}
 				if (alpha >= beta) {
-					logger.debug("simulating -- pruning");
+					logger.debug(indent(node.depth) + "simulating -- pruning");
 					break;
 				}
-				if (SimulationNode.nodeCount > maxNodes) {
-					logger.debug("simulating -- reached end-state");
-					break;
-				}
+//				if (SimulationNode.nodeCount > maxNodes) {
+//					logger.debug(indent(node.depth) + "simulating -- reached end-state");
+//					break;
+//				}
 			}
 		}
 		if (bestNode != null) {
@@ -455,11 +469,11 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 			node.children.add(bestNode);
 		}
 		if (!isSimulatedPlayer) {
-			logger.debug("returning priority beta: " + beta);
+			logger.debug(indent(node.depth) + "returning priority beta: " + beta);
 			return beta;
 		}
 		else {
-			logger.debug("returning priority alpha: " + alpha);
+			logger.debug(indent(node.depth) + "returning priority alpha: " + alpha);
 			return alpha;
 		}
 	}
@@ -606,8 +620,8 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 								}
 							}
 							sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, playerId, playerId));
-							SimulationNode newNode = new SimulationNode(node, sim, node.getDepth()-1, activePlayerId);
-							logger.debug("simulating -- node #:" + SimulationNode.getCount() + " declare attakers");
+							SimulationNode newNode = new SimulationNode(node, sim, activePlayerId);
+							logger.debug(indent(node.depth) + "simulating -- node #:" + SimulationNode.getCount() + " declare attakers");
 							newNode.setCombat(sim.getCombat());
 							node.children.add(newNode);
 						}
@@ -627,8 +641,8 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 										}
 									}
 									sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, playerId, playerId));
-									SimulationNode newNode = new SimulationNode(node, sim, node.getDepth()-1, defenderId);
-									logger.debug("simulating -- node #:" + SimulationNode.getCount() + " declare blockers");
+									SimulationNode newNode = new SimulationNode(node, sim, defenderId);
+									logger.debug(indent(node.depth) + "simulating -- node #:" + SimulationNode.getCount() + " declare blockers");
 									newNode.setCombat(sim.getCombat());
 									node.children.add(newNode);
 								}
@@ -698,22 +712,43 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		return sim;
 	}
 
-	private boolean checkForRepeatedAction(Game sim, SimulationNode node, Ability action, UUID playerId) {
+	/**
+	 * resolve current ability on the stack if there is one, then
+	 * check if current game state is the same as the previous, if so then
+	 * action has no effect and is not useful
+	 * 
+	 * @param sim
+	 * @param node
+	 * @param action
+	 * @param playerId
+	 * @return
+	 */
+	private boolean checkForUselessAction(Game sim, SimulationNode node, Ability action, UUID playerId) {
+		int currentVal = 0;
+		int prevVal = 0;
 		if (action instanceof PassAbility)
 			return false;
-		int val = GameStateEvaluator.evaluate(playerId, sim);
 		SimulationNode test = node.getParent();
-		while (test != null && !test.getPlayerId().equals(playerId)) {
-			test = test.getParent();
+		if (test == null)
+			return false;
+		if (action.isUsesStack()) {
+			Game testSim = sim.copy();
+			StackObject ability = testSim.getStack().pop();
+			ability.resolve(testSim);
+			testSim.applyEffects();
+			currentVal = GameStateEvaluator.evaluate(playerId, testSim, true);
 		}
-		if (test != null && test.getAbilities() != null && test.getAbilities().size() == 1) {
-			if (action.toString().equals(test.getAbilities().get(0).toString()) && GameStateEvaluator.evaluate(playerId, sim) == val) {
-				if (logger.isDebugEnabled())
-					logger.debug("found repeated action " + action);
-				return true;
-			}
+		else {
+			currentVal = GameStateEvaluator.evaluate(playerId, sim, true);
 		}
-		return false;
+		prevVal = GameStateEvaluator.evaluate(playerId, test.getGame(), true);
+		return currentVal == prevVal;
+	}
+
+	protected String indent(int num) {
+		char[] fill = new char[num];
+		Arrays.fill(fill, ' ');
+		return Integer.toString(num) + new String(fill);
 	}
 	
 }

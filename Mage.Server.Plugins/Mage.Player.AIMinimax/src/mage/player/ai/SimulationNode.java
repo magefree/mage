@@ -55,22 +55,25 @@ public class SimulationNode implements Serializable {
 	protected UUID playerId;
 	protected Combat combat;
 
-	public SimulationNode(SimulationNode parent, Game game, int depth, UUID playerId) {
+	public SimulationNode(SimulationNode parent, Game game, UUID playerId) {
 		this.parent = parent;
 		this.game = game;
-		this.depth = depth;
+		if (parent == null)
+			this.depth = 1;
+		else
+			this.depth = parent.getDepth() + 1;
 		this.playerId = playerId;
 		game.setCustomData(this);
 		nodeCount++;
 	}
 
-	public SimulationNode(SimulationNode parent, Game game, List<Ability> abilities, int depth, UUID playerId) {
-		this(parent, game, depth, playerId);
+	public SimulationNode(SimulationNode parent, Game game, List<Ability> abilities, UUID playerId) {
+		this(parent, game, playerId);
 		this.abilities = abilities;
 	}
 
-	public SimulationNode(SimulationNode parent, Game game, Ability ability, int depth, UUID playerId) {
-		this(parent, game, depth, playerId);
+	public SimulationNode(SimulationNode parent, Game game, Ability ability, UUID playerId) {
+		this(parent, game, playerId);
 		this.abilities = new ArrayList<Ability>();
 		abilities.add(ability);
 	}

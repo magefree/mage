@@ -53,7 +53,7 @@ public class PayLifeCost extends CostImpl<PayLifeCost> {
 
 	@Override
 	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-		return game.getPlayer(controllerId).getLife() >= amount;
+		return game.getPlayer(controllerId).getLife() > amount;
 	}
 
 	@Override
