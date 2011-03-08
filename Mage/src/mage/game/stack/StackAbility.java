@@ -302,4 +302,7 @@ public class StackAbility implements StackObject, Ability {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
+	public Ability getStackAbility() {
+		return ability;
+	}
 }
