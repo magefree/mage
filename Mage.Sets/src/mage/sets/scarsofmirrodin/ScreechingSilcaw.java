@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
 
 /**
  *
- * @author Loki
+ * @author ayratn
  */
 public class ScreechingSilcaw extends CardImpl<ScreechingSilcaw> {
 

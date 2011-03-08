@@ -50,7 +50,7 @@ import mage.game.Game;
 
 /**
  *
- * @author Loki
+ * @author ayratn
  */
 public class ScrapdiverSerpent extends CardImpl<ScrapdiverSerpent> {
 
