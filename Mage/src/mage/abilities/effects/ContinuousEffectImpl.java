@@ -39,6 +39,7 @@ import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.TriggeredAbility;
 import mage.game.Game;
 
 /**
@@ -122,7 +123,7 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
 	@Override
 	public void init(Ability source, Game game) {
 		//20100716 - 611.2c
-		if (source instanceof ActivatedAbility) {
+		if (source instanceof ActivatedAbility || source instanceof TriggeredAbility) {
 			if (layer != null) {
 				switch (layer) {
 					case CopyEffects_1:
