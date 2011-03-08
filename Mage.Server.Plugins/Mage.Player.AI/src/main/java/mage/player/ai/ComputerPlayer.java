@@ -89,10 +89,7 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreatureOrPlayer;
-import mage.target.common.TargetDiscard;
-import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.*;
 import mage.util.Copier;
 import mage.util.TreeNode;
 import org.apache.log4j.Logger;
@@ -309,6 +306,26 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			}
 			if (!target.isRequired())
 				return false;
+		}
+		if (target instanceof TargetCardInGraveyard) {
+			//TODO: implement
+			logger.error("Needs to be implemented");
+			return false;
+		}
+		if (target instanceof TargetCardInHand) {
+			//TODO: implement
+			logger.error("Needs to be implemented");
+			return false;
+		}
+		if (target instanceof TargetCardInLibrary) {
+			//TODO: implement
+			logger.error("Needs to be implemented");
+			return false;
+		}
+		if (target instanceof TargetCardInYourGraveyard) {
+			//TODO: implement
+			logger.error("Needs to be implemented");
+			return false;
 		}
 		throw new IllegalStateException("Target wasn't handled. class:" + target.getClass().toString());
 	}
