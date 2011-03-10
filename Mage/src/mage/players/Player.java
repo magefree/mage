@@ -96,6 +96,9 @@ public interface Player extends MageItem, Copyable<Player> {
 	public boolean hasLeft();
 	public ManaPool getManaPool();
 	public Set<UUID> getInRange();
+
+	public boolean isTestMode();
+	public void setTestMode(boolean value);
 	
 	public void init(Game game);
 	public void init(Game game, boolean testMode);

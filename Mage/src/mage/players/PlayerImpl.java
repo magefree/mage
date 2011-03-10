@@ -98,6 +98,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	protected boolean left;
 	protected RangeOfInfluence range;
 	protected Set<UUID> inRange = new HashSet<UUID>();
+	protected boolean isTestMode = false;
 
 	@Override
 	public abstract T copy();
@@ -1013,4 +1014,11 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		}
 	}
 
+	public boolean isTestMode() {
+		return isTestMode;
+	}
+
+	public void setTestMode(boolean value) {
+		this.isTestMode = value;
+	}
 }

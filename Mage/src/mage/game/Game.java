@@ -139,7 +139,7 @@ public interface Game extends MageItem, Serializable {
 	//game play methods
 	//public void init(UUID choosingPlayerId);
 	public void start(UUID choosingPlayerId);
-	public void start(UUID choosingPlayerId, boolean testMode);
+	public void start(UUID choosingPlayerId, GameOptions options);
 	public void end();
 	public void mulligan(UUID playerId);
 	public void quit(UUID playerId);

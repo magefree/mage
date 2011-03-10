@@ -1,0 +1,31 @@
+# Default init game state for white player (that plays with Plains)
+
+### ComputerA ###
+
+# Battlefield
+battlefield:ComputerA:Plains:5
+battlefield:ComputerA:Forest:5
+
+# Hand
+hand:ComputerA:Plains:2
+hand:ComputerA:Forest:2
+
+# Library
+# from down to top
+library:ComputerA:clear:0
+library:ComputerA:Plains:5
+library:ComputerA:Forest:5
+
+### ComputerB ###
+
+# Battlefield
+battlefield:ComputerB:Mountain:2
+
+# Hand
+hand:ComputerB:Mountain:2
+
+# Library
+# from down to top
+library:ComputerB:clear:0
+library:ComputerB:Mountain:10
+

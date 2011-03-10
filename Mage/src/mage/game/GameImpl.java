@@ -292,19 +292,20 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public void start(UUID choosingPlayerId) {
-		start(choosingPlayerId, false);
+		start(choosingPlayerId, GameOptions.getDefault());
 	}
 
 	@Override
-	public void start(UUID choosingPlayerId, boolean testMode) {
-		init(choosingPlayerId, testMode);
+	public void start(UUID choosingPlayerId, GameOptions options) {
+		init(choosingPlayerId, options.testMode);
 		PlayerList players = state.getPlayerList(startingPlayerId);
 		Player player = getPlayer(players.get());
 		while (!isGameOver()) {
-			if (player.getId().equals(startingPlayerId)) {
+			//if (player.getId().equals(startingPlayerId)) {
 				state.setTurnNum(state.getTurnNum() + 1);
 				fireInformEvent("Turn " + Integer.toString(state.getTurnNum()));
-			}
+			//}
+			if (checkStopOnTurnOption(options)) return;
 			state.setActivePlayerId(player.getId());
 			state.getTurn().play(this, player.getId());
 			if (isGameOver())
@@ -316,6 +317,17 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		winnerId = findWinnersAndLosers();
 
 		saveState();
+	}
+
+	private boolean checkStopOnTurnOption(GameOptions options) {
+		if (options.stopOnTurn != null) {
+			if (options.stopOnTurn.equals(state.getTurnNum())) {
+				winnerId = null; //DRAW
+				saveState();
+				return true;
+			}
+		}
+		return false;
 	}
 
 	protected void init(UUID choosingPlayerId, boolean testMode) {

@@ -126,7 +126,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	@Override
 	public boolean chooseMulligan(Game game) {
 		logger.debug("chooseMulligan");
-		if (hand.size() < 6)
+		if (hand.size() < 6 || isTestMode())
 			return false;
 		Set<Card> lands = hand.getCards(new FilterLandCard(), game);
 		if (lands.size() < 2 || lands.size() > hand.size() - 2)

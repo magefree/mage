@@ -5,6 +5,7 @@ import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.game.Game;
 import mage.game.GameException;
+import mage.game.GameOptions;
 import mage.game.TwoPlayerDuel;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
@@ -22,18 +23,6 @@ import java.util.regex.Matcher;
  * @author ayratn
  */
 public class PlayGameTest extends MageTestBase {
-
-	private List<Card> handCardsA = new ArrayList<Card>();
-	private List<Card> handCardsB = new ArrayList<Card>();
-	private List<PermanentCard> battlefieldCardsA = new ArrayList<PermanentCard>();
-	private List<PermanentCard> battlefieldCardsB = new ArrayList<PermanentCard>();
-	private List<Card> graveyardCardsA = new ArrayList<Card>();
-	private List<Card> graveyardCardsB = new ArrayList<Card>();
-	private List<Card> libraryCardsA = new ArrayList<Card>();
-	private List<Card> libraryCardsB = new ArrayList<Card>();
-
-	private Map<Constants.Zone, String> commandsA = new HashMap<Constants.Zone, String>();
-	private Map<Constants.Zone, String> commandsB = new HashMap<Constants.Zone, String>();
 
 	@Test
 	public void playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
@@ -68,7 +57,9 @@ public class PlayGameTest extends MageTestBase {
 		boolean testMode = true;
 
 		long t1 = System.nanoTime();
-		game.start(computerA.getId(), testMode);
+		GameOptions options = new GameOptions();
+		options.testMode = true;
+		game.start(computerA.getId(), options);
 		long t2 = System.nanoTime();
 
 		logger.info("Winner: " + game.getWinner());
@@ -76,101 +67,5 @@ public class PlayGameTest extends MageTestBase {
 		/*if (!game.getWinner().equals("Player ComputerA is the winner")) {
 			throw new RuntimeException("Lost :(");
 		}*/
-	}
-
-	private void addCard(List<Card> cards, String name, int count) {
-		for (int i = 0; i < count; i++) {
-			Card card = Sets.findCard(name, true);
-			if (card == null) {
-				throw new IllegalArgumentException("Couldn't find a card for test: " + name);
-			}
-			cards.add(card);
-		}
-	}
-
-	private void parseScenario(String filename) throws FileNotFoundException {
-		File f = new File(filename);
-		Scanner scanner = new Scanner(f);
-		try {
-			while (scanner.hasNextLine()) {
-				String line = scanner.nextLine().trim();
-				if (line == null || line.isEmpty() || line.startsWith("#")) continue;
-				Matcher m = pattern.matcher(line);
-				if (m.matches()) {
-
-					String zone = m.group(1);
-					String nickname = m.group(2);
-
-					if (nickname.equals("ComputerA") || nickname.equals("ComputerB")) {
-						List<Card> cards = null;
-						List<PermanentCard> perms = null;
-						Constants.Zone gameZone;
-						if ("hand".equalsIgnoreCase(zone)) {
-							gameZone = Constants.Zone.HAND;
-							cards = nickname.equals("ComputerA") ? handCardsA : handCardsB;
-						} else if ("battlefield".equalsIgnoreCase(zone)) {
-							gameZone = Constants.Zone.BATTLEFIELD;
-							perms = nickname.equals("ComputerA") ? battlefieldCardsA : battlefieldCardsB;
-						} else if ("graveyard".equalsIgnoreCase(zone)) {
-							gameZone = Constants.Zone.GRAVEYARD;
-							cards = nickname.equals("ComputerA") ? graveyardCardsA : graveyardCardsB;
-						} else if ("library".equalsIgnoreCase(zone)) {
-							gameZone = Constants.Zone.LIBRARY;
-							cards = nickname.equals("ComputerA") ? libraryCardsA : libraryCardsB;
-						} else if ("player".equalsIgnoreCase(zone)) {
-							String command = m.group(3);
-							if ("life".equals(command)) {
-								if (nickname.equals("ComputerA")) {
-									commandsA.put(Constants.Zone.OUTSIDE, "life:" + m.group(4));
-								} else {
-									commandsB.put(Constants.Zone.OUTSIDE, "life:" + m.group(4));
-								}
-							}
-							continue;
-						} else {
-							continue; // go parse next line
-						}
-
-						String cardName = m.group(3);
-						Integer amount = Integer.parseInt(m.group(4));
-						boolean tapped = m.group(5) != null && m.group(5).equals(":{tapped}");
-
-						if (cardName.equals("clear")) {
-							if (nickname.equals("ComputerA")) {
-								commandsA.put(gameZone, "clear");
-							} else {
-								commandsB.put(gameZone, "clear");
-							}
-						} else {
-							for (int i = 0; i < amount; i++) {
-								Card card = Sets.findCard(cardName, true);
-								if (card != null) {
-									if (gameZone.equals(Constants.Zone.BATTLEFIELD)) {
-										PermanentCard p = new PermanentCard(card, null);
-										p.setTapped(tapped);
-										perms.add(p);
-									} else {
-										cards.add(card);
-									}
-								} else {
-									logger.fatal("Couldn't find a card: " + cardName);
-									logger.fatal("line: " + line);
-								}
-							}
-						}
-					} else {
-						logger.warn("Unknown player: " + nickname);
-					}
-				} else {
-					logger.warn("Init string wasn't parsed: " + line);
-				}
-			}
-		} finally {
-			scanner.close();
-		}
-	}
-
-	private Player createPlayer(String name, String playerType) {
-		return PlayerFactory.getInstance().createPlayer(playerType, name, Constants.RangeOfInfluence.ALL);
 	}
 }

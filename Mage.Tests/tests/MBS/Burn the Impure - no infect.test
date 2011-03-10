@@ -1,0 +1,30 @@
+### Test playing Burn the Impure    ###
+### Target: creature with no Infect ###
+#######################################
+
+$include red.default
+
+### ComputerA ###
+# Hand
+hand:ComputerA:Burn the Impure:1
+
+### ComputerB ###
+# Battlefield
+battlefield:ComputerB:Runeclaw Bear:1
+# Life
+player:ComputerB:life:3
+
+$options
+
+exit_on_turn:2
+
+$expected
+
+turn:1
+result:draw
+life:ComputerA:20
+life:ComputerB:3
+#battlefield:ComputerB:Runeclaw Bear:0
+#graveyard:ComputerB:Runeclaw Bear:1
+
+

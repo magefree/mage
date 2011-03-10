@@ -1,0 +1,29 @@
+### Test playing Honor of the Pure  ###
+#######################################
+
+$include green.white.default
+
+### ComputerA ###
+# Hand
+hand:ComputerA:Honor of the Pure:1
+# Battlefield
+battlefield:ComputerB:Tine Shrike:1
+battlefield:ComputerB:Runeclaw Bear:1
+
+
+### ComputerB ###
+# nothing
+
+$options
+
+exit_on_turn:2
+
+$expected
+
+turn:1
+result:draw
+life:ComputerA:20
+life:ComputerB:20
+battlefield:ComputerA:Tine Shrike:1
+battlefield:ComputerA:Runeclaw Bear:1
+# note: abilities are tested in code
