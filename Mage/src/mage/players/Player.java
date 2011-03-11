@@ -55,7 +55,6 @@ import mage.counters.Counters;
 import mage.filter.FilterAbility;
 import mage.game.events.GameEvent;
 import mage.game.Game;
-import mage.game.Table;
 import mage.game.draft.Draft;
 import mage.game.match.Match;
 import mage.game.permanent.Permanent;
@@ -126,7 +125,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public boolean discard(Card card, Ability source, Game game);
 	public void lost(Game game);
 	public void won(Game game);
-	public void leaveGame(Game game);
+	public void leave();
 	public void concede(Game game);
 	public void abort();
 	

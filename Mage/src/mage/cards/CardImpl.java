@@ -30,6 +30,7 @@ package mage.cards;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -66,8 +67,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 		this(ownerId, name);
 		this.rarity = rarity;
 		this.cardNumber = cardNumber;
-		for (CardType newCardType: cardTypes)
-			this.cardType.add(newCardType);
+		this.cardType.addAll(Arrays.asList(cardTypes));
 		this.manaCost.load(costs);
 		if (cardType.contains(CardType.LAND))
 			addAbility(new PlayLandAbility(name));
@@ -93,6 +93,12 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 		expansionSetCode = card.expansionSetCode;
 		rarity = card.rarity;
 		watchers = card.watchers.copy();
+	}
+
+	@Override
+	public void assignNewId() {
+		this.objectId = UUID.randomUUID();
+		this.abilities.setSourceId(objectId);
 	}
 
 	public static Card createCard(String name) {

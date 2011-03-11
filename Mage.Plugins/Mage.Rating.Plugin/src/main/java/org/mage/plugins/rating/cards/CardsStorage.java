@@ -15,7 +15,7 @@ public class CardsStorage {
 	
 	static {
     	for (ExpansionSet set: Sets.getInstance().values()) {
-		    allCards.addAll(set.createCards());
+		    allCards.addAll(set.getCards());
 		}
     	Set<String> names = new HashSet<String>();
     	for (Card card : allCards) {

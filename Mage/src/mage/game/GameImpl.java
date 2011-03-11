@@ -53,7 +53,6 @@ import mage.game.stack.StackObject;
 import mage.game.turn.Phase;
 import mage.game.turn.Step;
 import mage.game.turn.Turn;
-import mage.players.Library;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
@@ -114,9 +113,10 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		this.range = game.range;
 		this.attackOption = game.attackOption;
 		this.state = game.state.copy();
-		for (Map.Entry<UUID, Card> entry: game.gameCards.entrySet()) {
-			this.gameCards.put(entry.getKey(), entry.getValue().copy());
-		}
+//		for (Map.Entry<UUID, Card> entry: game.gameCards.entrySet()) {
+//			this.gameCards.put(entry.getKey(), entry.getValue().copy());
+//		}
+		this.gameCards = game.gameCards;
 	}
 
 	@Override
@@ -457,7 +457,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	public synchronized void quit(UUID playerId) {
 		Player player = state.getPlayer(playerId);
 		if (player != null) {
-			player.leaveGame(this);
+			leave(playerId);
 			fireInformEvent(player.getName() + " has left the game.");
 		}
 	}
@@ -867,6 +867,36 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	@Override
 	public boolean canPlaySorcery(UUID playerId) {
 		return getActivePlayerId().equals(playerId) && getStack().isEmpty() && isMainPhase();
+	}
+
+	@Override
+	public void leave(UUID playerId) {
+		Player player = getPlayer(playerId);
+		player.leave();
+		//20100423 - 800.4a
+		for (Iterator<Permanent> it = getBattlefield().getAllPermanents().iterator(); it.hasNext();) {
+			Permanent perm = it.next();
+			if (perm.getOwnerId().equals(playerId)) {
+				if (perm.getAttachedTo() != null) {
+					Permanent attachedTo = getPermanent(perm.getAttachedTo());
+					if (attachedTo != null)
+						attachedTo.removeAttachment(perm.getId(), this);
+				}
+				it.remove();
+			}
+		}
+		for (Iterator<StackObject> it = getStack().iterator(); it.hasNext();) {
+			StackObject object = it.next();
+			if (object.getControllerId().equals(playerId)) {
+				it.remove();
+			}
+		}
+		for (Iterator<Permanent> it = getBattlefield().getAllPermanents().iterator(); it.hasNext();) {
+			Permanent perm = it.next();
+			if (perm.getControllerId().equals(playerId)) {
+				perm.moveToExile(null, "", null, this);
+			}
+		}
 	}
 
 	@Override

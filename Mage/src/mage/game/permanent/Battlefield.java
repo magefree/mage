@@ -34,6 +34,7 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 import mage.Constants.CardType;
@@ -54,8 +55,8 @@ public class Battlefield implements Serializable {
 	public Battlefield () {}
 
 	public Battlefield(final Battlefield battlefield) {
-		for (UUID permId: battlefield.field.keySet()) {
-			field.put(permId, battlefield.field.get(permId).copy());
+		for (Entry<UUID, Permanent> entry: battlefield.field.entrySet()) {
+			field.put(entry.getKey(), entry.getValue().copy());
 		}
 	}
 

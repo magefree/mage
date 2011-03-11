@@ -61,9 +61,9 @@ public abstract class ExpansionSet implements Serializable {
 	protected String symbolCode;
 	protected Date releaseDate;
 	protected ExpansionSet parentSet;
-	protected List<Class> cards;
+	protected List<Card> cards;
 	protected SetType setType;
-	protected Map<Rarity, List<Class>> rarities;
+	protected Map<Rarity, List<Card>> rarities;
 
 	protected String blockName;
 	protected boolean hasBoosters = false;
@@ -83,7 +83,7 @@ public abstract class ExpansionSet implements Serializable {
 		this.rarities = getCardsByRarity();
 	}
 
-	public List<Class> getCards() {
+	public List<Card> getCards() {
 		return cards;
 	}
 
@@ -107,7 +107,7 @@ public abstract class ExpansionSet implements Serializable {
 		return setType;
 	}
 
-	public Card createCard(Class clazz) {
+	private Card createCard(Class clazz) {
 		try {
 			Constructor<?> con = clazz.getConstructor(new Class[]{UUID.class});
 			return (Card) con.newInstance(new Object[]{null});
@@ -118,49 +118,46 @@ public abstract class ExpansionSet implements Serializable {
 		}
 	}
 
-	public Set<Card> createCards() {
-		Set<Card> created = new HashSet<Card>();
-		for (Class clazz : cards) {
-			created.add(createCard(clazz));
-		}
-		return created;
-	}
-
 	@Override
 	public String toString() {
 		return name;
 	}
 
 	public Card findCard(String name) {
-		for (Card card : createCards()) {
-			if (name.equals(card.getName()))
-				return card;
+		for (Card card : cards) {
+			if (name.equals(card.getName())) {
+				Card newCard = card.copy();
+				newCard.assignNewId();
+				return newCard;
+			}
 		}
 		return null;
 	}
 
 	public Card findCard(String name, boolean random) {
-		List<Card> cards = new ArrayList<Card>();
-		for (Card card : createCards()) {
+		List<Card> foundCards = new ArrayList<Card>();
+		for (Card card : cards) {
 			if (name.equals(card.getName())) {
-				cards.add(card);
+				foundCards.add(card);
 			}
 		}
-		if (cards.size() > 0) {
-			return cards.get(rnd.nextInt(cards.size()));
+		if (foundCards.size() > 0) {
+			Card newCard = foundCards.get(rnd.nextInt(foundCards.size())).copy();
+			newCard.assignNewId();
+			return newCard;
 		}
 		return null;
 	}
 
 	public String findCard(int cardNum) {
-		for (Card card : createCards()) {
+		for (Card card : cards) {
 			if (card.getCardNumber() == cardNum)
 				return card.getClass().getCanonicalName();
 		}
 		return null;
 	}
 
-	private ArrayList<Class> getCardClassesForPackage(String packageName) {
+	private List<Card> getCardClassesForPackage(String packageName) {
 		ClassLoader classLoader = this.getClass().getClassLoader();
 		assert classLoader != null;
 		String path = packageName.replace('.', '/');
@@ -187,7 +184,7 @@ public abstract class ExpansionSet implements Serializable {
 				e.printStackTrace();
 			}
 		}
-		ArrayList<Class> classes = new ArrayList<Class>();
+		List<Class> classes = new ArrayList<Class>();
 		if (isLoadingFromJar) {
 			if (jarPath.contains("!")) {
 				jarPath = jarPath.substring(0, jarPath.lastIndexOf('!'));
@@ -214,7 +211,11 @@ public abstract class ExpansionSet implements Serializable {
 				}
 			}
 		}
-		return classes;
+		List<Card> newCards = new ArrayList<Card>();
+		for (Class clazz: classes) {
+			newCards.add(createCard(clazz));
+		}
+		return newCards;
 	}
 
 	private static List<Class> findClasses(File directory, String packageName) throws ClassNotFoundException {
@@ -276,14 +277,13 @@ public abstract class ExpansionSet implements Serializable {
 		return classes;
 	}
 
-	private Map<Rarity, List<Class>> getCardsByRarity() {
-		Map<Rarity, List<Class>> cardsByRarity = new HashMap<Rarity, List<Class>>();
+	private Map<Rarity, List<Card>> getCardsByRarity() {
+		Map<Rarity, List<Card>> cardsByRarity = new HashMap<Rarity, List<Card>>();
 
-		for (Class clazz : cards) {
-			Card card = createCard(clazz);
+		for (Card card : cards) {
 			if (!cardsByRarity.containsKey(card.getRarity()))
-				cardsByRarity.put(card.getRarity(), new ArrayList<Class>());
-			cardsByRarity.get(card.getRarity()).add(clazz);
+				cardsByRarity.put(card.getRarity(), new ArrayList<Card>());
+			cardsByRarity.get(card.getRarity()).add(card);
 		}
 
 		return cardsByRarity;
@@ -332,7 +332,7 @@ public abstract class ExpansionSet implements Serializable {
 			return null;
 		int size = rarities.get(rarity).size();
 		if (size > 0) {
-			return createCard(rarities.get(rarity).get(rnd.nextInt(size)));
+			return rarities.get(rarity).get(rnd.nextInt(size)).copy();
 		}
 		return null;
 	}

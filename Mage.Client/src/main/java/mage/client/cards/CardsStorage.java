@@ -33,7 +33,7 @@ public class CardsStorage {
 	static {
 		for (ExpansionSet set : Sets.getInstance().values()) {
 			setCodes.add(set.getCode());
-			Set<Card> cards = set.createCards();
+			List<Card> cards = set.getCards();
 			allCards.addAll(cards);
 			for (Card card : cards) {
 				if (CardUtil.isLand(card) && !CardUtil.isBasicLand(card)) {

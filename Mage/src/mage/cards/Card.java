@@ -57,6 +57,7 @@ public interface Card extends MageObject {
 	public String getExpansionSetCode();
 	public void setExpansionSetCode(String expansionSetCode);
 
+	public void assignNewId();
 	public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag);
 	public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game);
 	public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId);

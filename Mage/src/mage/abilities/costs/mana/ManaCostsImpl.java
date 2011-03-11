@@ -29,11 +29,12 @@
 package mage.abilities.costs.mana;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import mage.Constants.ColoredManaSymbol;
 import mage.Mana;
-import mage.abilities.Ability;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.mana.ManaOptions;
 import mage.game.Game;
@@ -46,6 +47,8 @@ import mage.target.Targets;
  * @author BetaSteward_at_googlemail.com
  */
 public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements ManaCosts<T> {
+
+	private static Map<String, ManaCosts> costs = new HashMap<String, ManaCosts>();
 
 	public ManaCostsImpl() {}
 
@@ -196,32 +199,41 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 	@Override
 	public void load(String mana) {
 		this.clear();
-		if (mana == null || mana.length() == 0)
-			return;
-		String[] symbols = mana.split("^\\{|\\}\\{|\\}$");
-		for (String symbol: symbols) {
-			if (symbol.length() > 0) {
-				if (symbol.length() == 1 || isNumeric(symbol)) {
-					if (Character.isDigit(symbol.charAt(0))) {
-						this.add((T)new GenericManaCost(Integer.valueOf(symbol)));
+		if (costs.containsKey(mana)) {
+			ManaCosts<T> savedCosts = costs.get(mana);
+			for (ManaCost cost: savedCosts) {
+				this.add((T)cost.copy());
+			}
+		}
+		else {
+			if (mana == null || mana.length() == 0)
+				return;
+			String[] symbols = mana.split("^\\{|\\}\\{|\\}$");
+			for (String symbol: symbols) {
+				if (symbol.length() > 0) {
+					if (symbol.length() == 1 || isNumeric(symbol)) {
+						if (Character.isDigit(symbol.charAt(0))) {
+							this.add((T)new GenericManaCost(Integer.valueOf(symbol)));
+						}
+						else {
+							if (!symbol.equals("X"))
+								this.add((T)new ColoredManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
+							else
+								this.add((T)new VariableManaCost());
+							//TODO: handle multiple {X} and/or {Y} symbols
+						}
 					}
 					else {
-						if (!symbol.equals("X"))
-							this.add((T)new ColoredManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
-						else
-							this.add((T)new VariableManaCost());
-						//TODO: handle multiple {X} and/or {Y} symbols
-					}
-				}
-				else {
-					if (Character.isDigit(symbol.charAt(0))) {
-						this.add((T)new MonoHybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(2))));
-					}
-					else {
-						this.add((T)new HybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(0)), ColoredManaSymbol.lookup(symbol.charAt(2))));
+						if (Character.isDigit(symbol.charAt(0))) {
+							this.add((T)new MonoHybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(2))));
+						}
+						else {
+							this.add((T)new HybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(0)), ColoredManaSymbol.lookup(symbol.charAt(2))));
+						}
 					}
 				}
 			}
+			costs.put(mana, this.copy());
 		}
 	}
 

@@ -85,6 +85,11 @@ public class TwoPlayerDuel extends GameImpl<TwoPlayerDuel> {
 	}
 
 	@Override
+	public void leave(UUID playerId) {
+		
+	}
+
+	@Override
 	public TwoPlayerDuel copy() {
 		return new TwoPlayerDuel(this);
 	}

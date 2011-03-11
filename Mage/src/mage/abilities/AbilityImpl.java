@@ -96,7 +96,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 		this.choices = new Choices();
 	}
 
-	public AbilityImpl(AbilityImpl<T> ability) {
+	public AbilityImpl(final AbilityImpl<T> ability) {
 		this.id = ability.id;
 		this.originalId = ability.originalId;
 		this.abilityType = ability.abilityType;

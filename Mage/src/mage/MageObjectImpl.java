@@ -43,7 +43,7 @@ import mage.game.Game;
 
 public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements MageObject {
 
-	protected final UUID objectId;
+	protected UUID objectId;
 	
 	protected String name;
 	protected ManaCosts<ManaCost> manaCost;

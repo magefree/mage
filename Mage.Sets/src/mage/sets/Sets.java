@@ -82,7 +82,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
 
 	private void addSet(ExpansionSet set) {
 		this.put(set.getCode(), set);
-		for (Card card: set.createCards()) {
+		for (Card card: set.getCards()) {
 			names.add(card.getName());
 		}
 	}

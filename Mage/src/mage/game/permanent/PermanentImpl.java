@@ -55,6 +55,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
 	protected boolean tapped;
 	protected boolean flipped;
+	protected UUID originalControllerId;
 	protected UUID controllerId;
 	protected int damage;
 	protected boolean controlledFromStartOfTurn;
@@ -72,12 +73,14 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
 	public PermanentImpl(UUID ownerId, UUID controllerId, String name) {
 		super(ownerId, name);
+		this.originalControllerId = controllerId;
 		this.controllerId = controllerId;
 		this.counters = new Counters();
 	}
 
 	public PermanentImpl(UUID id, UUID ownerId, UUID controllerId, String name) {
 		super(id, ownerId, name);
+		this.originalControllerId = controllerId;
 		this.controllerId = controllerId;
 		this.counters = new Counters();
 	}
@@ -86,6 +89,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		super(permanent);
 		this.tapped = permanent.tapped;
 		this.flipped = permanent.flipped;
+		this.originalControllerId = permanent.originalControllerId;
 		this.controllerId = permanent.controllerId;
 		this.damage = permanent.damage;
 		this.controlledFromStartOfTurn = permanent.controlledFromStartOfTurn;
@@ -111,7 +115,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
 	@Override
 	public void reset(Game game) {
-//		this.controllerId = ownerId;
+		this.controllerId = originalControllerId;
 		this.maxBlocks = 1;
 	}
 
@@ -169,7 +173,6 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		for (Ability ability : this.abilities) {
 			ability.reset(game);
 		}
-		this.controllerId = this.ownerId;
 	}
 
 	@Override

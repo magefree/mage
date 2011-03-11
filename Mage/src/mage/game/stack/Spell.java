@@ -330,8 +330,14 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 		throw new UnsupportedOperationException("Unsupported operation");
 	}
 
+	@Override
 	public Ability getStackAbility() {
 		return this.ability;
+	}
+
+	@Override
+	public void assignNewId() {
+		throw new UnsupportedOperationException("Unsupported operation");
 	}
 }
 

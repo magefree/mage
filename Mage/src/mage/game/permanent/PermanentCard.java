@@ -83,20 +83,32 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 	public void reset(Game game) {
 		// when the permanent is reset copy all original values from the card
 		// must copy card each reset so that the original values don't get modified
-		Card copy = game.getCard(objectId).copy();
-		copyFromCard(copy);
+//		Card copy = game.getCard(objectId).copy();
+		copyFromCard(game.getCard(objectId));
 		super.reset(game);
 	}
 
 	protected void copyFromCard(Card card) {
 		this.name = card.getName();
-		this.abilities = card.getAbilities();
-		this.abilities.setControllerId(this.controllerId);
-		this.cardType = card.getCardType();
-		this.color = card.getColor();
-		this.manaCost = card.getManaCost();
-		this.power = card.getPower();
-		this.toughness = card.getToughness();
+		this.manaCost = card.getManaCost().copy();
+		this.color = card.getColor().copy();
+		this.power = card.getPower().copy();
+		this.toughness = card.getToughness().copy();
+		this.loyalty = card.getLoyalty().copy();
+		this.abilities = card.getAbilities().copy();
+		this.abilities.setControllerId(controllerId);
+		this.cardType.clear();
+		for (CardType cType: card.getCardType()) {
+			this.cardType.add(cType);
+		}
+		this.subtype.clear();
+		for (String subType: card.getSubtype()) {
+			this.subtype.add(subType);
+		}
+		this.supertype.clear();
+		for (String superType: card.getSupertype()) {
+			this.supertype.add(superType);
+		}
 		if (card instanceof LevelerCard) {
 			LevelAbility level = ((LevelerCard)card).getLevel(this.getCounters().getCount("Level"));
 			if (level != null) {
@@ -107,8 +119,6 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 				}
 			}
 		}
-		this.subtype = card.getSubtype();
-		this.supertype = card.getSupertype();
 		this.art = card.getArt();
 		this.expansionSetCode = card.getExpansionSetCode();
 		this.rarity = card.getRarity();

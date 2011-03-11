@@ -28,7 +28,6 @@
 
 package mage.game;
 
-import mage.Constants;
 import mage.game.match.MatchType;
 import mage.cards.Card;
 import mage.game.stack.SpellStack;
@@ -61,7 +60,6 @@ import mage.game.permanent.PermanentCard;
 import mage.game.turn.Phase;
 import mage.game.turn.Step;
 import mage.game.turn.Turn;
-import mage.players.Library;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
@@ -97,6 +95,7 @@ public interface Game extends MageItem, Serializable {
 	public boolean canPlaySorcery(UUID playerId);
 	public UUID getActivePlayerId();
 	public UUID getPriorityPlayerId();
+	public void leave(UUID playerId);
 	public boolean isGameOver();
 	public Battlefield getBattlefield();
 	public SpellStack getStack();

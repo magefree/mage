@@ -732,11 +732,13 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public void concede(Game game) {
-		leaveGame(game);
+		this.loses = true;
+		this.abort();
+		game.leave(playerId);
 	}
 
 	@Override
-	public void leaveGame(Game game) {
+	public void leave() {
 		this.passed = true;
 		this.abort();
 		this.loses = true;
@@ -745,29 +747,6 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		this.hand.clear();
 		this.graveyard.clear();
 		this.library.clear();
-		for (Iterator<Permanent> it = game.getBattlefield().getAllPermanents().iterator(); it.hasNext();) {
-			Permanent perm = it.next();
-			if (perm.getOwnerId().equals(playerId)) {
-				if (perm.getAttachedTo() != null) {
-					Permanent attachedTo = game.getPermanent(perm.getAttachedTo());
-					if (attachedTo != null)
-						attachedTo.removeAttachment(perm.getId(), game);
-				}
-				it.remove();
-			}
-		}
-		for (Iterator<StackObject> it = game.getStack().iterator(); it.hasNext();) {
-			StackObject object = it.next();
-			if (object.getControllerId().equals(playerId)) {
-				it.remove();
-			}
-		}
-		for (Iterator<Permanent> it = game.getBattlefield().getAllPermanents().iterator(); it.hasNext();) {
-			Permanent perm = it.next();
-			if (perm.getControllerId().equals(playerId)) {
-				perm.moveToExile(null, "", null, game);
-			}
-		}
 	}
 
 	@Override
@@ -782,7 +761,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 			//20100423 - 603.9
 			if (!this.wins)
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST, null, null, playerId));
-			leaveGame(game);
+			game.leave(playerId);
 		}
 	}
 
