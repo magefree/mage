@@ -29,6 +29,7 @@
 package mage.player.ai;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 import mage.Constants.AbilityType;
 import mage.Constants.PhaseStep;
@@ -159,8 +160,10 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 			root = new SimulationNode(null, sim, playerId);
 			logger.debug("simulating pre combat actions -----------------------------------------------------------------------------------------");
 
-			addActionsTimed(new FilterAbility());
-//			addActions(root, new FilterAbility(), maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE);
+			if (!isTestMode)
+				addActionsTimed(new FilterAbility());
+			else
+				addActions(root, new FilterAbility(), Integer.MIN_VALUE, Integer.MAX_VALUE);
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
 				actions = new LinkedList<Ability>(root.abilities);
@@ -180,8 +183,10 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 			SimulationNode.resetCount();
 			root = new SimulationNode(null, sim, playerId);
 			logger.debug("simulating post combat actions ----------------------------------------------------------------------------------------");
-			addActionsTimed(new FilterAbility());
-//			addActions(root, new FilterAbility(), maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE);
+			if (!isTestMode)
+				addActionsTimed(new FilterAbility());
+			else
+				addActions(root, new FilterAbility(), Integer.MIN_VALUE, Integer.MAX_VALUE);
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
 				actions = new LinkedList<Ability>(root.abilities);
@@ -291,7 +296,6 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 					}
 				}
 				else if (!counter) {
-					simulateToEnd(game);
 					val = simulatePostCombatMain(game, node, alpha, beta);
 				}
 			}
@@ -329,7 +333,8 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 
 		if (logger.isDebugEnabled())
 			logger.debug(indent(node.depth) + attacker.getName() + "'s possible attackers: " + attacker.getAvailableAttackers(game));
-		for (Combat engagement: attacker.addAttackers(game)) {
+		List<Combat> engagements = attacker.addAttackers(game);
+		for (Combat engagement: engagements) {
 			if (alpha >= beta) {
 				logger.debug(indent(node.depth) + "simulating -- pruning attackers");
 				break;
@@ -464,6 +469,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 		}
 		Integer val = null;
 		if (!game.isGameOver()) {
+			logger.debug(indent(node.depth) + "simulating -- ending turn");
 			simulateToEnd(game);
 			game.getState().setActivePlayerId(game.getState().getPlayerList(game.getActivePlayerId()).getNext());
 			logger.debug(indent(node.depth) + "simulating -- counter attack for player " + game.getPlayer(game.getActivePlayerId()).getName());
@@ -474,6 +480,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 				simulateStep(game, new DrawStep());
 				game.getPhase().endPhase(game, game.getActivePlayerId());
 			}
+			//TODO: calculate opponent actions before combat
 			val = simulateCombat(game, node, alpha, beta, true);
 			if (logger.isDebugEnabled())
 				logger.debug(indent(node.depth) + "returning -- counter attack score: " + val + " depth:" + node.depth + " for player:" + game.getPlayer(node.getPlayerId()).getName());

@@ -37,6 +37,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -147,7 +148,15 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 	//add a generic mana cost for each amount possible
 	protected void simulateVariableCosts(Ability ability, Game game) {
 		int numAvailable = getAvailableManaProducers(game).size();
-		for (int i = 0; i < numAvailable; i++) {
+		int start = 0;
+		if (!(ability instanceof SpellAbility)) {
+			//only use x=0 on spell abilities
+			if (numAvailable == 0)
+				return;
+			else
+				start = 1;
+		}
+		for (int i = start; i < numAvailable; i++) {
 			Ability newAbility = ability.copy();
 			newAbility.addManaCost(new GenericManaCost(i));
 			allActions.add(newAbility);

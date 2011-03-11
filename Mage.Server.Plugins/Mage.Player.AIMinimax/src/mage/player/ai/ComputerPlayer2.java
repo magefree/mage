@@ -186,7 +186,10 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 			SimulationNode.resetCount();
 			root = new SimulationNode(null, sim, playerId);
 			logger.debug("simulating actions");
-			addActionsTimed(new FilterAbility());
+			if (!isTestMode)
+				addActionsTimed(new FilterAbility());
+			else
+				addActions(root, new FilterAbility(), Integer.MIN_VALUE, Integer.MAX_VALUE);
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
 				actions = new LinkedList<Ability>(root.abilities);
@@ -400,7 +403,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		node.setGameValue(game.getState().getValue());
 		SimulatedPlayer currentPlayer = (SimulatedPlayer) game.getPlayer(game.getPlayerList().get());
 		boolean isSimulatedPlayer = currentPlayer.getId().equals(playerId);
-		logger.debug(indent(node.depth) + "simulating -- player " + currentPlayer.getName());
+		logger.debug(indent(node.depth) + "simulating priority -- player " + currentPlayer.getName());
 		SimulationNode bestNode = null;
 		List<Ability> allActions = currentPlayer.simulatePriority(game, filter);
 		if (logger.isDebugEnabled())
@@ -425,7 +428,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 				}
 				SimulationNode newNode = new SimulationNode(node, sim, action, currentPlayer.getId());
 				if (logger.isDebugEnabled())
-					logger.debug(indent(node.depth) + "simulating -- node #:" + SimulationNode.getCount() + " actions:" + action);
+					logger.debug(indent(newNode.depth) + "simulating -- node #:" + SimulationNode.getCount() + " actions:" + action);
 				sim.checkStateAndTriggered();
 				int val = addActions(newNode, filter, alpha, beta);
 				if (!isSimulatedPlayer) {
