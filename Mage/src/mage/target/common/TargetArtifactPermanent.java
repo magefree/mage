@@ -26,75 +26,45 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.abilities.keyword;
+package mage.target.common;
 
-import mage.Constants.Zone;
-import mage.MageObject;
-import mage.abilities.StaticAbility;
-import mage.cards.Card;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
-import mage.filter.FilterObject;
-import mage.filter.FilterPermanent;
-import mage.filter.FilterSpell;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
+import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPermanent;
 
 /**
- *
- * @author BetaSteward_at_googlemail.com
+ * @author ayratn
  */
-public class ProtectionAbility extends StaticAbility<ProtectionAbility> {
+public class TargetArtifactPermanent<T extends TargetArtifactPermanent<T>> extends TargetPermanent<TargetArtifactPermanent<T>> {
 
-	protected Filter filter;
-
-	public ProtectionAbility(Filter filter) {
-		super(Zone.BATTLEFIELD, null);
-		this.filter = filter;
+	public TargetArtifactPermanent() {
+		this(1, 1, FilterArtifactPermanent.getDefault(), false);
 	}
 
-	public ProtectionAbility(final ProtectionAbility ability) {
-		super(ability);
-		this.filter = ability.filter.copy();
+	public TargetArtifactPermanent(FilterArtifactPermanent filter) {
+		this(1, 1, filter, false);
+	}
+
+	public TargetArtifactPermanent(int numTargets) {
+		this(numTargets, numTargets, FilterArtifactPermanent.getDefault(), false);
+	}
+
+	public TargetArtifactPermanent(int minNumTargets, int maxNumTargets) {
+		this(minNumTargets, maxNumTargets, FilterArtifactPermanent.getDefault(), false);
+	}
+
+	public TargetArtifactPermanent(int minNumTargets, int maxNumTargets, FilterArtifactPermanent filter, boolean notTarget) {
+		super(minNumTargets, maxNumTargets, filter, notTarget);
+		this.targetName = filter.getMessage();
+	}
+
+	public TargetArtifactPermanent(final TargetArtifactPermanent target) {
+		super(target);
 	}
 
 	@Override
-	public ProtectionAbility copy() {
-		return new ProtectionAbility(this);
+	public TargetArtifactPermanent copy() {
+		return new TargetArtifactPermanent(this);
 	}
 
-	@Override
-	public String getRule() {
-		return "Protection from " + filter.getMessage();
-	}
-
-	public boolean canTarget(MageObject source) {
-		if (filter instanceof FilterPermanent) {
-			if (source instanceof Permanent)
-				return !filter.match(source);
-			return true;
-		}
-		if (filter instanceof FilterSpell) {
-			if (source instanceof Spell)
-				return !filter.match(source);
-			return true;
-		}
-		if (filter instanceof FilterCard) {
-			if (source instanceof Card)
-				return !filter.match(source);
-			return true;
-		}
-		if (filter instanceof FilterObject) {
-			return !filter.match(source);
-		}
-		return true;
-	}
-
-	public Filter getFilter() {
-		return filter;
-	}
-
-	public void setFilter(FilterCard filter) {
-		this.filter = filter;
-	}
 }

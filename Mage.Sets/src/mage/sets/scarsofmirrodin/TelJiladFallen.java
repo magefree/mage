@@ -26,36 +26,42 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
-
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.cards.CardImpl;
+package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.keyword.ProtectionAbility;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterArtifactCard;
+import mage.filter.common.FilterArtifactPermanent;
 
 /**
+ *
  * @author ayratn
  */
-public class IchorWellspring extends CardImpl<IchorWellspring> {
+public class TelJiladFallen extends CardImpl<TelJiladFallen> {
 
-	public IchorWellspring(UUID ownerId) {
-		super(ownerId, 110, "Ichor Wellspring", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-		this.expansionSetCode = "MBS";
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
-		this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
-	}
+    public TelJiladFallen (UUID ownerId) {
+        super(ownerId, 130, "Tel-Jilad Fallen", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Elf");
+        this.subtype.add("Warrior");
+		this.color.setGreen(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(1);
+	    this.addAbility(new ProtectionAbility(new FilterArtifactCard("artifacts")));
+    }
 
-	public IchorWellspring(final IchorWellspring card) {
-		super(card);
-	}
+    public TelJiladFallen (final TelJiladFallen card) {
+        super(card);
+    }
 
-	@Override
-	public IchorWellspring copy() {
-		return new IchorWellspring(this);
-	}
+    @Override
+    public TelJiladFallen copy() {
+        return new TelJiladFallen(this);
+    }
 
 }

@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
+ * 
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- *
+ * 
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- *
+ * 
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- *
+ * 
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,72 +20,54 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
+ * 
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.continious;
 
 import mage.Constants.Duration;
+import mage.Constants.Layer;
 import mage.Constants.Outcome;
+import mage.Constants.SubLayer;
 import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
  *
- * @author maurer.it_at_gmail.com
+ * @author ayratn
  */
-public class RegenerateTargetEffect  extends ReplacementEffectImpl<RegenerateTargetEffect> {
+public class BoostPowerToughnessXTargetEffect extends ContinuousEffectImpl<BoostPowerToughnessXTargetEffect> {
+    private int amount = -1;
 
-	public RegenerateTargetEffect ( ) {
-		super(Duration.EndOfTurn, Outcome.Regenerate);
+	public BoostPowerToughnessXTargetEffect(Duration duration) {
+		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
 	}
 
-	public RegenerateTargetEffect(final RegenerateTargetEffect effect) {
+	public BoostPowerToughnessXTargetEffect(final BoostPowerToughnessXTargetEffect effect) {
 		super(effect);
+		this.amount = effect.amount;
+	}
+
+	@Override
+	public BoostPowerToughnessXTargetEffect copy() {
+		return new BoostPowerToughnessXTargetEffect(this);
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		return false;
-	}
-
-	@Override
-	public RegenerateTargetEffect copy() {
-		return new RegenerateTargetEffect(this);
-	}
-
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		if ( source.getFirstTarget().equals(event.getTargetId())) {
-			Permanent permanent = game.getPermanent(source.getFirstTarget());
-			if (permanent != null) {
-				permanent.setTapped(true);
-				permanent.removeFromCombat(game);
-				permanent.removeAllDamage(game);
-				this.used = true;
-				return true;
-			}
+		int amount = source.getManaCostsToPay().getVariableCosts().get(0).getAmount();
+		if (amount == 0) {
+			return false;
 		}
-		return false;
-	}
-
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		boolean eventApplies = (event.getType() == EventType.DAMAGE_CREATURE ||
-				                event.getType() == EventType.DAMAGED_CREATURE ||
-								event.getType() == EventType.DESTROYED_PERMANENT ||
-								event.getType() == EventType.DESTROY_PERMANENT);
-		eventApplies &= (event.getAmount() >= 0 &&
-				         event.getTargetId().equals(source.getTargets().get(0).getFirstTarget()) &&
-						 !this.used);
-		if (eventApplies) {
+		Permanent target = game.getPermanent(source.getFirstTarget());
+		if (target != null) {
+			target.addPower(amount);
+			target.addToughness(amount);
 			return true;
 		}
 		return false;
@@ -94,10 +76,8 @@ public class RegenerateTargetEffect  extends ReplacementEffectImpl<RegenerateTar
 	@Override
 	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Regenerate target ");
-		if ( source != null ) {
-		  sb.append(source.getTargets().get(0).getTargetName());
-		}
+		sb.append("Target ").append(source.getTargets().get(0).getTargetName()).append(" gets ");
+		sb.append(String.format("+X/+X")).append(" ").append(duration.toString());
 		return sb.toString();
 	}
 

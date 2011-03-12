@@ -26,36 +26,40 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.sets.scarsofmirrodin;
 
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.continious.GainProtectionFromTypeTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterArtifactCard;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
 /**
  * @author ayratn
  */
-public class IchorWellspring extends CardImpl<IchorWellspring> {
+public class TelJiladDefiance extends CardImpl<TelJiladDefiance> {
 
-	public IchorWellspring(UUID ownerId) {
-		super(ownerId, 110, "Ichor Wellspring", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-		this.expansionSetCode = "MBS";
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
-		this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
+	public TelJiladDefiance(UUID ownerId) {
+		super(ownerId, 129, "Tel-Jilad Defiance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
+		this.expansionSetCode = "SOM";
+		this.color.setGreen(true);
+		this.getSpellAbility().addEffect(new GainProtectionFromTypeTargetEffect(Constants.Duration.EndOfTurn, new FilterArtifactCard("artifacts")));
+		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+		this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
 	}
 
-	public IchorWellspring(final IchorWellspring card) {
+	public TelJiladDefiance(final TelJiladDefiance card) {
 		super(card);
 	}
 
 	@Override
-	public IchorWellspring copy() {
-		return new IchorWellspring(this);
+	public TelJiladDefiance copy() {
+		return new TelJiladDefiance(this);
 	}
 
 }

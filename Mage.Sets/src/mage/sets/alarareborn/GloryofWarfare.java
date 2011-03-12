@@ -50,7 +50,6 @@ public class GloryofWarfare extends CardImpl<GloryofWarfare> {
     public GloryofWarfare (UUID ownerId) {
         super(ownerId, 98, "Glory of Warfare", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{W}");
         this.expansionSetCode = "ARB";
-        this.subtype.add("Enchantment");
 		this.color.setRed(true);
 		this.color.setWhite(true);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn), MyTurn.getInstance(), "As long as it's your turn, creatures you control get +2/+0")));
