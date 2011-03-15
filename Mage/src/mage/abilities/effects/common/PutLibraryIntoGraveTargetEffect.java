@@ -82,7 +82,7 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect<PutLibraryInt
 			sb.append(amount).append(" card ");
 		else
 			sb.append(amount).append(" cards ");
-		sb.append("of his or her library into his or her graveyard.");
+		sb.append("of his or her library into his or her graveyard");
 		return sb.toString();
 	}
 
