@@ -30,7 +30,6 @@ package mage.game.permanent;
 
 import mage.game.permanent.token.Token;
 import java.util.UUID;
-import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.game.Game;
@@ -57,25 +56,22 @@ public class PermanentToken extends PermanentImpl<PermanentToken> {
 
 	@Override
 	public void reset(Game game) {
-//		Token copy = token.copy();
-		copyFromToken(token);
+		Token copy = token.copy();
+		copyFromToken(copy);
 		super.reset(game);
 	}
 
 	protected void copyFromToken(Token token) {
 		this.name = token.getName();
-		this.abilities = token.getAbilities().copy();
-		this.cardType.clear();
-		for (CardType cType: token.getCardType()) {
-			this.cardType.add(cType);
+		this.abilities.clear();
+		for (Ability ability: token.getAbilities()) {
+			this.addAbility(ability);
 		}
-		this.subtype.clear();
-		for (String subType: token.getSubtype()) {
-			this.subtype.add(subType);
-		}
-		this.color = token.getColor().copy();
-		this.power = token.getPower().copy();
-		this.toughness = token.getToughness().copy();
+		this.cardType = token.getCardType();
+		this.color = token.getColor();
+		this.power = token.getPower();
+		this.toughness = token.getToughness();
+		this.subtype = token.getSubtype();
 	}
 
 	@Override
