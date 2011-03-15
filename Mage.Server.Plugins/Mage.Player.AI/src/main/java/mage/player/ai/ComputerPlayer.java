@@ -226,20 +226,31 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			if (!target.isRequired())
 				return false;
 		}
-		if (target instanceof TargetDiscard) {
-			findPlayables(game);
-			if (unplayable.size() > 0) {
-				for (int i = unplayable.size() - 1; i >= 0; i--) {
-					if (target.canTarget(unplayable.values().toArray(new Card[0])[i].getId(), source, game)) {
-						target.addTarget(unplayable.values().toArray(new Card[0])[i].getId(), source, game);
+		if (target instanceof TargetDiscard || target instanceof TargetCardInHand) {
+			if (outcome.isGood()) {
+				Card card = pickBestCard(new ArrayList<Card>(hand.getCards(game)), null);
+				if (card != null) {
+					if (target.canTarget(card.getId(), source, game)) {
+						target.addTarget(card.getId(), source, game);
 						return true;
 					}
 				}
 			}
-			if (hand.size() > 0) {
-				if (target.canTarget(hand.toArray(new UUID[0])[0], source, game)) {
-					target.addTarget(hand.toArray(new UUID[0])[0], source, game);
-					return true;
+			else {
+				findPlayables(game);
+				if (unplayable.size() > 0) {
+					for (int i = unplayable.size() - 1; i >= 0; i--) {
+						if (target.canTarget(unplayable.values().toArray(new Card[0])[i].getId(), source, game)) {
+							target.addTarget(unplayable.values().toArray(new Card[0])[i].getId(), source, game);
+							return true;
+						}
+					}
+				}
+				if (hand.size() > 0) {
+					if (target.canTarget(hand.toArray(new UUID[0])[0], source, game)) {
+						target.addTarget(hand.toArray(new UUID[0])[0], source, game);
+						return true;
+					}
 				}
 			}
 			if (!target.isRequired())
@@ -308,28 +319,57 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				return false;
 		}
 		if (target instanceof TargetCardInGraveyard) {
-			//TODO: implement
-			logger.error("Needs to be implemented");
-			return false;
-		}
-		if (target instanceof TargetCardInHand) {
-			//TODO: implement
-			logger.error("Needs to be implemented");
-			return false;
+			List<Card> cards = new ArrayList<Card>();
+			for (Player player: game.getPlayers().values()) {
+				cards.addAll(player.getGraveyard().getCards(game));
+			}
+			Card card = pickTarget(cards, outcome, target, source, game);
+			if (card != null) {
+				target.addTarget(card.getId(), source, game);
+				return true;
+			}
+			if (!target.isRequired())
+				return false;
 		}
 		if (target instanceof TargetCardInLibrary) {
-			//TODO: implement
-			logger.error("Needs to be implemented");
-			return false;
+			List<Card> cards = new ArrayList<Card>(game.getPlayer(playerId).getLibrary().getCards(game));
+			Card card = pickTarget(cards, outcome, target, source, game);
+			if (card != null) {
+				target.addTarget(card.getId(), source, game);
+				return true;
+			}
+			if (!target.isRequired())
+				return false;
 		}
 		if (target instanceof TargetCardInYourGraveyard) {
-			//TODO: implement
-			logger.error("Needs to be implemented");
-			return false;
+			List<Card> cards = new ArrayList<Card>(game.getPlayer(playerId).getGraveyard().getCards(game));
+			Card card = pickTarget(cards, outcome, target, source, game);
+			if (card != null) {
+				target.addTarget(card.getId(), source, game);
+				return true;
+			}
+			if (!target.isRequired())
+				return false;
 		}
 		throw new IllegalStateException("Target wasn't handled. class:" + target.getClass().toString());
 	}
 
+	protected Card pickTarget(List<Card> cards, Outcome outcome, Target target, Ability source, Game game) {
+		Card card = null;
+		while (!cards.isEmpty()) {
+			if (outcome.isGood()) {
+				card = pickBestCard(cards, null);
+			}
+			else {
+				card = pickWorstCard(cards, null);
+			}
+			if (target.canTarget(card.getId(), source, game)) {
+				return card;
+			}
+			cards.remove(card);
+		}
+		return null;
+	}
 	@Override
 	public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
 		if (logger.isDebugEnabled())
@@ -918,21 +958,46 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		tournament.submitDeck(playerId, deck);
 	}
 
+	public Card pickBestCard(List<Card> cards, List<Constants.ColoredManaSymbol> chosenColors) {
+		if (cards.size() == 0) {
+			return null;
+		}
+		Card bestCard = null;
+		int maxScore = 0;
+		for (Card card : cards) {
+			int score = RateCard.rateCard(card, chosenColors);
+			if (bestCard == null || score > maxScore) {
+				maxScore = score;
+				bestCard = card;
+			}
+		}
+		return bestCard;
+	}
+
+	public Card pickWorstCard(List<Card> cards, List<Constants.ColoredManaSymbol> chosenColors) {
+		if (cards.size() == 0) {
+			return null;
+		}
+		Card worstCard = null;
+		int minScore = Integer.MAX_VALUE;
+		for (Card card : cards) {
+			int score = RateCard.rateCard(card, chosenColors);
+			if (worstCard == null || score < minScore) {
+				minScore = score;
+				worstCard = card;
+			}
+		}
+		return worstCard;
+	}
+
 	@Override
 	public void pickCard(List<Card> cards, Deck deck, Draft draft) {
 		if (cards.size() == 0) {
 			throw new IllegalArgumentException("No cards to pick from.");
 		}
 		try {
-			Card bestCard = null;
-			int maxScore = 0;
-			for (Card card : cards) {
-				int score = RateCard.rateCard(card, chosenColors);
-				if (bestCard == null || score > maxScore) {
-					maxScore = score;
-					bestCard = card;
-				}
-			}
+			Card bestCard = pickBestCard(cards, chosenColors);
+			int maxScore = RateCard.rateCard(bestCard, chosenColors);
 			String colors = "not chosen yet";
 			// remember card if colors are not chosen yet
 			if (chosenColors == null) {
