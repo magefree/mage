@@ -42,6 +42,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -94,7 +95,7 @@ class ConsumingVaporsEffect extends OneShotEffect<ConsumingVaporsEffect> {
 		Player player = game.getPlayer(source.getTargets().getFirstTarget());
 		Player controller = game.getPlayer(source.getControllerId());
 		filter.setTargetController(TargetController.YOU);
-		TargetPermanent target = new TargetPermanent(1, 1, filter, false);
+		TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
 
 		//A spell or ability could have removed the only legal target this player
 		//had, if thats the case this ability should fizzle.
