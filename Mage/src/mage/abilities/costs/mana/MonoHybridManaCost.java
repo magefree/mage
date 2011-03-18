@@ -45,10 +45,10 @@ public class MonoHybridManaCost extends ManaCostImpl<MonoHybridManaCost> {
 		options.add(Mana.ColorlessMana(2));
 	}
 
-	public MonoHybridManaCost(MonoHybridManaCost cost) {
-		super(cost);
-		this.mana = cost.mana;
-		this.mana2 = cost.mana2;
+	public MonoHybridManaCost(MonoHybridManaCost manaCost) {
+		super(manaCost);
+		this.mana = manaCost.mana;
+		this.mana2 = manaCost.mana2;
 	}
 
 	@Override

@@ -45,28 +45,28 @@ public class ReplayManager {
 
 	private ReplayManager() {}
 
-	private ConcurrentHashMap<UUID, ReplaySession> replaySessions = new ConcurrentHashMap<UUID, ReplaySession>();
+	private ConcurrentHashMap<String, ReplaySession> replaySessions = new ConcurrentHashMap<String, ReplaySession>();
 
-	public void replayGame(UUID sessionId, UUID tableId) {
-		ReplaySession replaySession = new ReplaySession(tableId, sessionId);
-		replaySessions.put(sessionId, replaySession);
-		SessionManager.getInstance().getSession(sessionId).replayGame();
+	public void replayGame(UUID gameId, UUID sessionId) {
+		ReplaySession replaySession = new ReplaySession(gameId, sessionId);
+		replaySessions.put(gameId.toString() + sessionId.toString(), replaySession);
+		SessionManager.getInstance().getSession(sessionId).replayGame(gameId);
 	}
 
-	public void startReplay(UUID sessionId) {
-		replaySessions.get(sessionId).replay();
+	public void startReplay(UUID gameId, UUID sessionId) {
+		replaySessions.get(gameId.toString() + sessionId.toString()).replay();
 	}
 
-	public void stopReplay(UUID sessionId) {
-		replaySessions.get(sessionId).stop();
+	public void stopReplay(UUID gameId, UUID sessionId) {
+		replaySessions.get(gameId.toString() + sessionId.toString()).stop();
 	}
 
-	public void nextPlay(UUID sessionId) {
-		replaySessions.get(sessionId).next();
+	public void nextPlay(UUID gameId, UUID sessionId) {
+		replaySessions.get(gameId.toString() + sessionId.toString()).next();
 	}
 
-	public void previousPlay(UUID sessionId) {
-		replaySessions.get(sessionId).previous();
+	public void previousPlay(UUID gameId, UUID sessionId) {
+		replaySessions.get(gameId.toString() + sessionId.toString()).previous();
 	}
 
 }

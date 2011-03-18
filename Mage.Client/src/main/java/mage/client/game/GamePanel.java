@@ -201,7 +201,7 @@ public class GamePanel extends javax.swing.JPanel {
 		this.pnlReplay.setVisible(true);
 		this.setVisible(true);
 		this.chatPanel.clear();
-		if (!session.replayGame(gameId))
+		if (!session.startReplay(gameId))
 			hideGame();
 	}
 
@@ -734,16 +734,16 @@ public class GamePanel extends javax.swing.JPanel {
 
 	private void btnStopReplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopReplayActionPerformed
 		if (modalQuestion("Are you sure you want to stop replay?", "Stop replay") == JOptionPane.YES_OPTION) {
-			session.stopReplay();
+			session.stopReplay(gameId);
 		}
 	}//GEN-LAST:event_btnStopReplayActionPerformed
 
 	private void btnNextPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextPlayActionPerformed
-		session.nextPlay();
+		session.nextPlay(gameId);
 	}//GEN-LAST:event_btnNextPlayActionPerformed
 
 	private void btnPreviousPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousPlayActionPerformed
-		session.previousPlay();
+		session.previousPlay(gameId);
 	}//GEN-LAST:event_btnPreviousPlayActionPerformed
 
 	private class HandContainer extends JPanel {

@@ -28,8 +28,14 @@
 
 package mage.server.game;
 
+import java.io.BufferedOutputStream;
 import mage.server.TableManager;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
@@ -38,6 +44,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.zip.GZIPOutputStream;
 
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -413,6 +420,25 @@ public class GameController implements GameCallback {
 	@Override
 	public void gameResult(String result) {
 		endGame(result);
+	}
+
+	public void saveGame() {
+		try {
+			OutputStream file = new FileOutputStream("saved/" + game.getId().toString() + ".game");
+			OutputStream buffer = new BufferedOutputStream(file);
+			ObjectOutput output = new ObjectOutputStream(new GZIPOutputStream(buffer));
+			try {
+				output.writeObject(game);
+				output.writeObject(game.getGameStates());
+			}
+			finally {
+				output.close();
+			}
+			logger.info("Saved game:" + game.getId());
+		}
+		catch(IOException ex) {
+			logger.fatal("Cannot save game.", ex);
+		}
 	}
 
 	/**

@@ -262,18 +262,6 @@ public class Session {
 		return false;
 	}
 
-	public boolean replayTable(UUID roomId, UUID tableId) {
-		try {
-			server.replayTable(sessionId, roomId, tableId);
-			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
-		} catch (MageException ex) {
-			handleMageException(ex);
-		}
-		return false;
-	}
-
 	public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, DeckCardLists deckList) {
 		try {
 			return server.joinTable(sessionId, roomId, tableId, playerName, playerType, deckList);
@@ -622,9 +610,9 @@ public class Session {
 		return false;
 	}
 
-	public boolean stopReplay() {
+	public boolean startReplay(UUID gameId) {
 		try {
-			server.stopReplay(sessionId);
+			server.startReplay(gameId, sessionId);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
@@ -634,9 +622,9 @@ public class Session {
 		return false;
 	}
 
-	public boolean nextPlay() {
+	public boolean stopReplay(UUID gameId) {
 		try {
-			server.nextPlay(sessionId);
+			server.stopReplay(gameId, sessionId);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
@@ -646,9 +634,21 @@ public class Session {
 		return false;
 	}
 
-	public boolean previousPlay() {
+	public boolean nextPlay(UUID gameId) {
 		try {
-			server.previousPlay(sessionId);
+			server.nextPlay(gameId, sessionId);
+			return true;
+		} catch (RemoteException ex) {
+			handleRemoteException(ex);
+		} catch (MageException ex) {
+			handleMageException(ex);
+		}
+		return false;
+	}
+
+	public boolean previousPlay(UUID gameId) {
+		try {
+			server.previousPlay(gameId, sessionId);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);

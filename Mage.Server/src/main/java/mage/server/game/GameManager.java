@@ -105,10 +105,6 @@ public class GameManager {
 		gameControllers.get(gameId).kill(sessionId);
 	}
 
-//	public GameReplay createReplay(UUID gameId) {
-//		return gameControllers.get(gameId).createReplay();
-//	}
-
 	public void cheat(UUID gameId, UUID sessionId, UUID playerId, DeckCardLists deckList) {
 		gameControllers.get(gameId).cheat(sessionId, playerId, deckList);
 	}
@@ -125,7 +121,12 @@ public class GameManager {
 		gameControllers.remove(gameId);
 	}
 
+	public void saveGame(UUID gameId) {
+		gameControllers.get(gameId).saveGame();
+	}
+
     public GameView getGameView(UUID gameId, UUID sessionId, UUID playerId) {
         return gameControllers.get(gameId).getGameView(playerId);
     }
+
 }

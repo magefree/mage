@@ -50,9 +50,9 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements 
 		this.multiplier = multiplier;
 	}
 
-	public VariableManaCost(VariableManaCost cost) {
-		super(cost);
-		this.multiplier = cost.multiplier;
+	public VariableManaCost(VariableManaCost manaCost) {
+		super(manaCost);
+		this.multiplier = manaCost.multiplier;
 	}
 
 	@Override

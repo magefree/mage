@@ -51,10 +51,11 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
 		options = new ManaOptions();
 	}
 
-	public ManaCostImpl(final ManaCostImpl cost) {
-		super(cost);
-		this.payment = cost.payment.copy();
-		this.options = cost.options.copy();
+	public ManaCostImpl(final ManaCostImpl manaCost) {
+		super(manaCost);
+		this.payment = manaCost.payment.copy();
+		this.cost = manaCost.cost.copy();
+		this.options = manaCost.options.copy();
 	}
 
 	@Override

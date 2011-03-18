@@ -69,7 +69,7 @@ public class ChatPanel extends javax.swing.JPanel {
 	}
 
 	public void disconnect() {
-		if (session.isConnected())
+		if (session != null && session.isConnected())
 			session.leaveChat(chatId);
 	}
 

@@ -84,12 +84,12 @@ public class TournamentPanel extends javax.swing.JPanel implements Observer {
 			public void actionPerformed(ActionEvent e)
 			{
 				int modelRow = Integer.valueOf( e.getActionCommand() );
-				UUID tableId = UUID.fromString((String)tableMatches.getValueAt(modelRow, 3));
+				UUID gameId = UUID.fromString((String)tableMatches.getValueAt(modelRow, 3));
 				String state = (String)tableMatches.getValueAt(modelRow, 4);
 
 				if (state.equals("Finished")) {
-					logger.info("Replaying table " + tableId);
-					session.replayTable(null, tableId);
+					logger.info("Replaying game " + gameId);
+					session.replayGame(gameId);
 				}
 			}
 		};

@@ -114,8 +114,8 @@ public class Session {
 		fireCallback(new ClientCallback("watchGame", gameId));
 	}
 
-	public void replayGame() {
-		fireCallback(new ClientCallback("replayGame", null));
+	public void replayGame(final UUID gameId) {
+		fireCallback(new ClientCallback("replayGame", gameId));
 	}
 
 	public void ack(String message) {

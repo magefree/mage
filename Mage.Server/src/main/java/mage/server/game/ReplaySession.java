@@ -28,15 +28,12 @@
 
 package mage.server.game;
 
-import mage.server.TableManager;
 import java.util.UUID;
-import java.util.logging.Logger;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.Session;
 import mage.server.SessionManager;
-import mage.util.Logging;
 import mage.view.GameView;
 
 /**
@@ -45,13 +42,11 @@ import mage.view.GameView;
  */
 public class ReplaySession implements GameCallback {
 
-	private final static Logger logger = Logging.getLogger(ReplaySession.class.getName());
-
 	private GameReplay replay;
 	protected UUID sessionId;
 
-	ReplaySession(UUID tableId, UUID sessionId) {
-		this.replay = TableManager.getInstance().createReplay(tableId);
+	ReplaySession(UUID gameId, UUID sessionId) {
+		this.replay = new GameReplay(gameId);
 		this.sessionId = sessionId;
 	}
 

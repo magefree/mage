@@ -94,6 +94,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 			{
 				int modelRow = Integer.valueOf( e.getActionCommand() );
 				UUID tableId = UUID.fromString((String)tableModel.getValueAt(modelRow, 0));
+				UUID gameId = (UUID)tableModel.getValueAt(modelRow, 6);
 				String state = (String)tableModel.getValueAt(modelRow, 4);
 				boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, 5);
 
@@ -114,8 +115,8 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 					if (!session.watchTable(roomId, tableId))
 						hideTables();
 				} else if (state.equals("Replay")) {
-					logger.info("Replaying table " + tableId);
-					if (!session.replayTable(roomId, tableId))
+					logger.info("Replaying game " + gameId);
+					if (!session.replayGame(gameId))
 						hideTables();
 				}
 			}
@@ -346,7 +347,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 }
 
 class TableTableModel extends AbstractTableModel {
-    private String[] columnNames = new String[]{"Game Id", "Game Type", "Deck Type", "Status", "Action"};
+    private String[] columnNames = new String[]{"Table Id", "Game Type", "Deck Type", "Status", "Action"};
 	private TableView[] tables = new TableView[0];
 
 
@@ -389,6 +390,10 @@ class TableTableModel extends AbstractTableModel {
 				}
 			case 5:
 				return tables[arg0].isTournament();
+			case 6:
+				if (!tables[arg0].getGames().isEmpty())
+					return tables[arg0].getGames().get(0);
+				return null;
 		}
 		return "";
 	}

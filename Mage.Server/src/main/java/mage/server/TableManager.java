@@ -162,10 +162,6 @@ public class TableManager {
 		controllers.get(tableId).endDraft(draft);
 	}
 
-	public GameReplay createReplay(UUID tableId) {
-		return controllers.get(tableId).createReplay();
-	}
-
 	public void swapSeats(UUID tableId, UUID sessionId, int seatNum1, int seatNum2) {
 		if (isTableOwner(tableId, sessionId)) {
 			controllers.get(tableId).swapSeats(seatNum1, seatNum2);

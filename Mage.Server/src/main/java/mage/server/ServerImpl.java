@@ -37,8 +37,6 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
 import mage.interfaces.MageException;
@@ -57,12 +55,12 @@ import mage.server.game.ReplayManager;
 import mage.server.tournament.TournamentFactory;
 import mage.server.tournament.TournamentManager;
 import mage.server.util.ThreadExecutor;
-import mage.util.Logging;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.DraftPickView;
 import mage.view.GameView;
 import mage.view.TableView;
 import mage.view.TournamentView;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -70,7 +68,7 @@ import mage.view.TournamentView;
  */
 public class ServerImpl extends RemoteServer implements Server {
 
-	private final static Logger logger = Logging.getLogger("Mage Server");
+	private final static Logger logger = Logger.getLogger("Mage Server");
 	private static ExecutorService rmiExecutor = ThreadExecutor.getInstance().getRMIExecutor();
 
 	private boolean testMode;
@@ -86,9 +84,9 @@ public class ServerImpl extends RemoteServer implements Server {
 			if (testMode)
 				logger.info("MAGE server running in test mode");
 		} catch (ExportException ex) {
-			logger.severe("ERROR:  Unable to start Mage Server - another server is likely running");
+			logger.fatal("ERROR:  Unable to start Mage Server - another server is likely running");
 		} catch (RemoteException ex) {
-			logger.log(Level.SEVERE, "Failed to start RMI server at port " + port, ex);
+			logger.fatal("Failed to start RMI server at port " + port, ex);
 		}
 	}
 
@@ -136,7 +134,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	public TableView createTournamentTable(UUID sessionId, UUID roomId, TournamentOptions options) throws MageException {
 		try {
 			TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTournamentTable(sessionId, options);
-			logger.log(Level.INFO, "Tournament table {0} created", table.getTableId());
+			logger.info("Tournament table " + table.getTableId() + " created");
 			return table;
 		}
 		catch (Exception ex) {
@@ -636,13 +634,13 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void replayGame(final UUID gameID, final UUID sessionId) throws MageException {
+	public void replayGame(final UUID gameId, final UUID sessionId) throws MageException {
 		try {
 			rmiExecutor.execute(
 				new Runnable() {
 					@Override
 					public void run() {
-						ReplayManager.getInstance().startReplay(sessionId);
+						ReplayManager.getInstance().replayGame(gameId, sessionId);
 					}
 				}
 			);
@@ -653,13 +651,13 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void stopReplay(final UUID sessionId) throws MageException {
+	public void startReplay(final UUID gameId, final UUID sessionId) throws MageException {
 		try {
 			rmiExecutor.execute(
 				new Runnable() {
 					@Override
 					public void run() {
-						ReplayManager.getInstance().stopReplay(sessionId);
+						ReplayManager.getInstance().startReplay(gameId, sessionId);
 					}
 				}
 			);
@@ -670,13 +668,13 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void nextPlay(final UUID sessionId) throws MageException {
+	public void stopReplay(final UUID gameId, final UUID sessionId) throws MageException {
 		try {
 			rmiExecutor.execute(
 				new Runnable() {
 					@Override
 					public void run() {
-						ReplayManager.getInstance().nextPlay(sessionId);
+						ReplayManager.getInstance().stopReplay(gameId, sessionId);
 					}
 				}
 			);
@@ -687,13 +685,13 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void previousPlay(final UUID sessionId) throws MageException {
+	public void nextPlay(final UUID gameId, final UUID sessionId) throws MageException {
 		try {
 			rmiExecutor.execute(
 				new Runnable() {
 					@Override
 					public void run() {
-						ReplayManager.getInstance().previousPlay(sessionId);
+						ReplayManager.getInstance().nextPlay(gameId, sessionId);
 					}
 				}
 			);
@@ -704,14 +702,20 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public boolean replayTable(UUID sessionId, UUID roomId, UUID tableId) throws MageException {
+	public void previousPlay(final UUID gameId, final UUID sessionId) throws MageException {
 		try {
-			return TableManager.getInstance().replayTable(sessionId, tableId);
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						ReplayManager.getInstance().previousPlay(gameId, sessionId);
+					}
+				}
+			);
 		}
 		catch (Exception ex) {
 			handleException(ex);
 		}
-		return false;
 	}
 
 	@Override
@@ -758,7 +762,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	public void handleException(Exception ex) throws MageException {
-		logger.log(Level.SEVERE, "", ex);
+		logger.fatal("", ex);
 		throw new MageException("Server error: " + ex.getMessage());
 	}
 

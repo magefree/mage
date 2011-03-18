@@ -323,8 +323,11 @@ public abstract class ExpansionSet implements Serializable {
 
 	protected void addToBooster(List<Card> booster, ExpansionSet set, Rarity rarity) {
 		Card card = set.getRandom(rarity);
-		if (card != null)
-			booster.add(card);
+		if (card != null) {
+			Card newCard = card.copy();
+			newCard.assignNewId();
+			booster.add(newCard);
+		}
 	}
 
 	protected Card getRandom(Rarity rarity) {

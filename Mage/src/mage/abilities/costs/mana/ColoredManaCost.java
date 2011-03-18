@@ -42,9 +42,9 @@ public class ColoredManaCost extends ManaCostImpl<ColoredManaCost> {
 		addColoredOption(mana);
 	}
 
-	public ColoredManaCost(ColoredManaCost cost) {
-		super(cost);
-		this.mana = cost.mana;
+	public ColoredManaCost(ColoredManaCost manaCost) {
+		super(manaCost);
+		this.mana = manaCost.mana;
 	}
 
 	@Override

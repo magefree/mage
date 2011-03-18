@@ -61,7 +61,6 @@ public interface Server extends Remote, CallbackServer {
 	public boolean joinTournamentTable(UUID sessionId, UUID roomId, UUID tableId, String name, String playerType) throws RemoteException, MageException, GameException;
 	public boolean submitDeck(UUID sessionId, UUID tableId, DeckCardLists deckList) throws RemoteException, MageException, GameException;
 	public boolean watchTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
-	public boolean replayTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
 	public void leaveTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
 	public void swapSeats(UUID sessionId, UUID roomId, UUID tableId, int seatNum1, int seatNum2) throws RemoteException, MageException;
 	public void removeTable(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
@@ -103,9 +102,10 @@ public interface Server extends Remote, CallbackServer {
 
 	//replay methods
 	public void replayGame(UUID gameId, UUID sessionId) throws RemoteException, MageException;
-	public void stopReplay(UUID sessionId) throws RemoteException, MageException;
-	public void nextPlay(UUID sessionId) throws RemoteException, MageException;
-	public void previousPlay(UUID sessionId) throws RemoteException, MageException;
+	public void startReplay(UUID gameId, UUID sessionId) throws RemoteException, MageException;
+	public void stopReplay(UUID gameId, UUID sessionId) throws RemoteException, MageException;
+	public void nextPlay(UUID gameId, UUID sessionId) throws RemoteException, MageException;
+	public void previousPlay(UUID gameId, UUID sessionId) throws RemoteException, MageException;
 
 	//test methods
 	public void cheat(UUID gameId, UUID sessionId, UUID playerId, DeckCardLists deckList) throws RemoteException, MageException;

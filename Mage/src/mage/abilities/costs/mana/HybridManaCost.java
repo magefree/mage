@@ -45,10 +45,10 @@ public class HybridManaCost extends ManaCostImpl<HybridManaCost> {
 		addColoredOption(mana2);
 	}
 
-	public HybridManaCost(HybridManaCost cost) {
-		super(cost);
-		this.mana1 = cost.mana1;
-		this.mana2 = cost.mana2;
+	public HybridManaCost(HybridManaCost manaCost) {
+		super(manaCost);
+		this.mana1 = manaCost.mana1;
+		this.mana2 = manaCost.mana2;
 	}
 
 	@Override

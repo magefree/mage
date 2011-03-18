@@ -32,30 +32,14 @@ import mage.server.draft.DraftManager;
 import mage.server.tournament.TournamentFactory;
 import mage.server.tournament.TournamentManager;
 import mage.game.Table;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 import mage.Constants.RangeOfInfluence;
 import mage.Constants.TableState;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
-import mage.game.Game;
 import mage.game.GameException;
-import mage.game.GameStates;
 import mage.game.match.Match;
 import mage.game.Seat;
 import mage.game.draft.Draft;
@@ -63,18 +47,15 @@ import mage.game.draft.DraftPlayer;
 import mage.game.events.Listener;
 import mage.game.events.TableEvent;
 import mage.game.match.MatchOptions;
-import mage.game.match.MatchPlayer;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
 import mage.players.Player;
 import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.GameManager;
-import mage.server.game.GameReplay;
 import mage.server.game.PlayerFactory;
 import mage.server.game.ReplayManager;
-import mage.util.CopierObjectInputStream;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -82,7 +63,7 @@ import mage.util.Logging;
  */
 public class TableController {
 
-	private final static Logger logger = Logging.getLogger(TableController.class.getName());
+	private final static Logger logger = Logger.getLogger(TableController.class);
 
 	private UUID sessionId;
 	private UUID chatId;
@@ -97,7 +78,7 @@ public class TableController {
 		chatId = ChatManager.getInstance().createChatSession();
 		this.options = options;
 		match = GameFactory.getInstance().createMatch(options.getGameType(), options);
-		table = new Table(options.getGameType(), options.getName(), DeckValidatorFactory.getInstance().createDeckValidator(options.getDeckType()), options.getPlayerTypes(), false);
+		table = new Table(options.getGameType(), options.getName(), DeckValidatorFactory.getInstance().createDeckValidator(options.getDeckType()), options.getPlayerTypes(), match);
 		init();
 	}
 
@@ -105,7 +86,7 @@ public class TableController {
 		this.sessionId = sessionId;
 		chatId = ChatManager.getInstance().createChatSession();
 		tournament = TournamentFactory.getInstance().createTournament(options.getTournamentType(), options);
-		table = new Table(options.getTournamentType(), options.getName(), DeckValidatorFactory.getInstance().createDeckValidator(options.getMatchOptions().getDeckType()), options.getPlayerTypes(), true);
+		table = new Table(options.getTournamentType(), options.getName(), DeckValidatorFactory.getInstance().createDeckValidator(options.getMatchOptions().getDeckType()), options.getPlayerTypes(), tournament);
 	}
 
 	private void init() {
@@ -215,13 +196,6 @@ public class TableController {
 		return true;
 	}
 
-	public GameReplay createReplay() {
-		if (table.getState() == TableState.FINISHED) {
-			return new GameReplay(loadGame());
-		}
-		return null;
-	}
-
 	public boolean replayTable(UUID sessionId) {
 		if (table.getState() != TableState.FINISHED) {
 			return false;
@@ -263,7 +237,7 @@ public class TableController {
 				match.startMatch();
 				startGame(null);
 			} catch (GameException ex) {
-				logger.log(Level.SEVERE, null, ex);
+				logger.fatal(null, ex);
 			}
 		}
 	}
@@ -315,7 +289,7 @@ public class TableController {
 		UUID choosingPlayerId = match.getChooser();
 		match.endGame();
 		table.endGame();
-		saveGame();
+		GameManager.getInstance().saveGame(match.getGame().getId());
 		GameManager.getInstance().removeGame(match.getGame().getId());
 		try {
 			if (!match.isMatchOver()) {
@@ -324,7 +298,7 @@ public class TableController {
 				startGame(choosingPlayerId);
 			}
 		} catch (GameException ex) {
-			logger.log(Level.SEVERE, null, ex);
+			logger.fatal(null, ex);
 		}
 	}
 
@@ -346,49 +320,6 @@ public class TableController {
 				table.getSeats()[seatNum2].setPlayerType(swapType);
 			}
 		}
-	}
-
-	private void saveGame() {
-		try {
-			OutputStream file = new FileOutputStream("saved/" + match.getGame().getId().toString() + ".game");
-			OutputStream buffer = new BufferedOutputStream(file);
-			ObjectOutput output = new ObjectOutputStream(new GZIPOutputStream(buffer));
-			try {
-				output.writeObject(match.getGame());
-				output.writeObject(match.getGame().getGameStates());
-			}
-			finally {
-				output.close();
-			}
-			logger.log(Level.INFO, "Saved game:" + match.getGame().getId());
-		}
-		catch(IOException ex) {
-			logger.log(Level.SEVERE, "Cannot save game.", ex);
-		}
-	}
-
-	private Game loadGame() {
-		try{
-			InputStream file = new FileInputStream("saved/" + match.getGame().getId().toString() + ".game");
-			InputStream buffer = new BufferedInputStream(file);
-			ObjectInput input = new CopierObjectInputStream(Main.classLoader, new GZIPInputStream(buffer));
-			try {
-				Game game = (Game)input.readObject();
-				GameStates states = (GameStates)input.readObject();
-				game.loadGameStates(states);
-				return game;
-			}
-			finally {
-				input.close();
-			}
-		}
-		catch(ClassNotFoundException ex) {
-			logger.log(Level.SEVERE, "Cannot load game. Class not found.", ex);
-		}
-		catch(IOException ex) {
-			logger.log(Level.SEVERE, "Cannot load game:" + match.getGame().getId(), ex);
-		}
-		return null;
 	}
 
 	public boolean isOwner(UUID sessionId) {

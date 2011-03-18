@@ -32,12 +32,12 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.TableState;
-import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
 import mage.game.events.Listener;
 import mage.game.events.TableEvent;
-import mage.game.events.TableEvent.EventType;
 import mage.game.events.TableEventSource;
+import mage.game.match.Match;
+import mage.game.tournament.Tournament;
 import mage.players.Player;
 
 /**
@@ -54,15 +54,28 @@ public class Table implements Serializable {
 	private boolean isTournament;
 	private DeckValidator validator;
 	private TableState state = TableState.WAITING;
+	private Match match;
+	private Tournament tournament;
 
 	protected TableEventSource tableEventSource = new TableEventSource();
 
-	public Table(String gameType, String name, DeckValidator validator, List<String> playerTypes, boolean isTournament) {
+	public Table(String gameType, String name, DeckValidator validator, List<String> playerTypes, Tournament tournament) {
+		this(gameType, name, validator, playerTypes);
+		this.tournament = tournament;
+		this.isTournament = true;
+	}
+
+	public Table(String gameType, String name, DeckValidator validator, List<String> playerTypes, Match match) {
+		this(gameType, name, validator, playerTypes);
+		this.match = match;
+		this.isTournament = false;
+	}
+
+	protected Table(String gameType, String name, DeckValidator validator, List<String> playerTypes) {
 		tableId = UUID.randomUUID();
 		this.numSeats = playerTypes.size();
 		this.gameType = gameType;
 		this.name = name;
-		this.isTournament = isTournament;
 		createSeats(playerTypes);
 		this.validator = validator;
 	}
@@ -167,6 +180,14 @@ public class Table implements Serializable {
 
 	public void addTableEventListener(Listener<TableEvent> listener) {
 		tableEventSource.addListener(listener);
+	}
+
+	public Match getMatch() {
+		return match;
+	}
+
+	public Tournament getTournament() {
+		return tournament;
 	}
 
 }

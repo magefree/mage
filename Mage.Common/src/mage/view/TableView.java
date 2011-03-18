@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.TableState;
+import mage.game.Game;
 import mage.game.Seat;
 import mage.game.Table;
 
@@ -49,6 +50,7 @@ public class TableView implements Serializable {
 	private TableState tableState;
 	private boolean isTournament;
 	private List<SeatView> seats = new ArrayList<SeatView>();
+	private List<UUID> games = new ArrayList<UUID>();
 
 	public TableView(Table table) {
 		this.tableId = table.getId();
@@ -58,6 +60,11 @@ public class TableView implements Serializable {
 		this.isTournament = table.isTournament();
 		for (Seat seat: table.getSeats()) {
 			seats.add(new SeatView(seat));
+		}
+		if (!table.isTournament()) {
+			for (Game game: table.getMatch().getGames()) {
+				games.add(game.getId());
+			}
 		}
 	}
 
@@ -79,6 +86,10 @@ public class TableView implements Serializable {
 
 	public List<SeatView> getSeats() {
 		return seats;
+	}
+
+	public List<UUID> getGames() {
+		return games;
 	}
 
 	public boolean isTournament() {
