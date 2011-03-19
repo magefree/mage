@@ -53,11 +53,13 @@ public class RegenerateSourceEffect extends ReplacementEffectImpl<RegenerateSour
 
 	@Override
 	public boolean apply(Game game, Ability source) {
+		//20110204 - 701.11
 		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
 			permanent.setTapped(true);
 			permanent.removeFromCombat(game);
 			permanent.removeAllDamage(game);
+			this.used = true;
 			return true;
 		}
 		return false;
@@ -75,7 +77,8 @@ public class RegenerateSourceEffect extends ReplacementEffectImpl<RegenerateSour
 
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.DESTROY_PERMANENT && event.getAmount() == 0 && event.getTargetId().equals(source.getSourceId())) {
+		//20110204 - 701.11c - event.getAmount() is used to signal if regeneration is allowed
+		if (event.getType() == EventType.DESTROY_PERMANENT && event.getAmount() == 0 && event.getTargetId().equals(source.getSourceId()) && !this.used) {
 			return true;
 		}
 		return false;

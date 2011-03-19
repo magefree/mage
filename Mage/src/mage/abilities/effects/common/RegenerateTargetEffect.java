@@ -53,6 +53,15 @@ public class RegenerateTargetEffect  extends ReplacementEffectImpl<RegenerateTar
 
 	@Override
 	public boolean apply(Game game, Ability source) {
+		//20110204 - 701.11
+		Permanent permanent = game.getPermanent(source.getFirstTarget());
+		if (permanent != null) {
+			permanent.setTapped(true);
+			permanent.removeFromCombat(game);
+			permanent.removeAllDamage(game);
+			this.used = true;
+			return true;
+		}
 		return false;
 	}
 
@@ -63,29 +72,13 @@ public class RegenerateTargetEffect  extends ReplacementEffectImpl<RegenerateTar
 
 	@Override
 	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		if ( source.getFirstTarget().equals(event.getTargetId())) {
-			Permanent permanent = game.getPermanent(source.getFirstTarget());
-			if (permanent != null) {
-				permanent.setTapped(true);
-				permanent.removeFromCombat(game);
-				permanent.removeAllDamage(game);
-				this.used = true;
-				return true;
-			}
-		}
-		return false;
+		return apply(game, source);
 	}
 
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
-		boolean eventApplies = (event.getType() == EventType.DAMAGE_CREATURE ||
-				                event.getType() == EventType.DAMAGED_CREATURE ||
-								event.getType() == EventType.DESTROYED_PERMANENT ||
-								event.getType() == EventType.DESTROY_PERMANENT);
-		eventApplies &= (event.getAmount() >= 0 &&
-				         event.getTargetId().equals(source.getTargets().get(0).getFirstTarget()) &&
-						 !this.used);
-		if (eventApplies) {
+		//20110204 - 701.11c - event.getAmount() is used to signal if regeneration is allowed
+		if (event.getType() == EventType.DESTROY_PERMANENT && event.getAmount() == 0 && event.getTargetId().equals(source.getFirstTarget()) && !this.used) {
 			return true;
 		}
 		return false;
