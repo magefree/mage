@@ -30,6 +30,7 @@ package mage.sets.riseoftheeldrazi;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageObject;
 import mage.Mana;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.BasicManaAbility;
@@ -87,6 +88,9 @@ class EldraziTempleManaAbility extends BasicManaAbility<EldraziTempleManaAbility
             StackObject stackObject = stack.get(idx);
             if ( stackObject.getControllerId().equals(playerId) ) {
                 eldraziSpellBeingCast |= stackObject.getSubtype().contains("Eldrazi");
+				MageObject source = game.getObject(stackObject.getSourceId());
+				if (source != null)
+					eldraziSpellBeingCast |= source.getSubtype().contains("Eldrazi");
             }
         }
         

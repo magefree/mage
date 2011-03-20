@@ -37,6 +37,7 @@ import mage.Constants.Rarity;
 import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -46,12 +47,16 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.SpellStack;
+import mage.game.stack.StackObject;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -61,15 +66,10 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class GrandArchitect extends CardImpl<GrandArchitect> {
 
 	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blue creatures");
-	private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("untapped blue creature");
 
 	static {
 		filter.getColor().setBlue(true);
 		filter.setUseColor(true);
-		filter2.getColor().setBlue(true);
-		filter2.setUseColor(true);
-		filter2.setTapped(false);
-		filter2.setUseTapped(true);
 	}
 
 	public GrandArchitect(UUID ownerId) {
@@ -83,8 +83,7 @@ public class GrandArchitect extends CardImpl<GrandArchitect> {
 
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
 		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrandArchitectEffect(), new ManaCostsImpl("{U}")));
-		this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new ManaEffect(Mana.ColorlessMana(2)), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter2, true))));
-		//TODO: add filter to mana
+		this.addAbility(new GrandArchitectManaAbility());
 	}
 
 	public GrandArchitect(final GrandArchitect card) {
@@ -131,4 +130,60 @@ class GrandArchitectEffect extends ContinuousEffectImpl<GrandArchitectEffect> {
 	public String getText(Ability source) {
 		return "Target artifact creature becomes blue until end of turn";
 	}
+}
+
+class GrandArchitectManaAbility extends ManaAbility<GrandArchitectManaAbility> {
+
+    private static final String abilityText = "Spend this mana only to cast artifact spells or activate abilities of artifacts. "
+            + "<b>(Mage Tip: This ability can only be activated when an artifact spell or ability is on the stack.)</b>";
+	private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped blue creature");
+
+	static {
+		filter.getColor().setBlue(true);
+		filter.setUseColor(true);
+		filter.setTapped(false);
+		filter.setUseTapped(true);
+	}
+	
+    GrandArchitectManaAbility ( ) {
+        super(Zone.BATTLEFIELD, new ManaEffect(Mana.ColorlessMana(2)), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
+        this.netMana.setColorless(2);
+    }
+
+    GrandArchitectManaAbility ( GrandArchitectManaAbility ability ) {
+        super(ability);
+    }
+
+    @Override
+    public boolean canActivate(UUID playerId, Game game) {
+        boolean artifactSpellBeingCast = false;
+
+        SpellStack stack = game.getStack();
+        for ( int idx = 0; idx < stack.size(); idx++ ) {
+            StackObject stackObject = stack.get(idx);
+            if ( stackObject.getControllerId().equals(playerId) ) {
+                artifactSpellBeingCast |= stackObject.getCardType().contains(CardType.ARTIFACT);
+				MageObject source = game.getObject(stackObject.getSourceId());
+				if (source != null)
+					artifactSpellBeingCast |= source.getCardType().contains(CardType.ARTIFACT);
+            }
+        }
+
+        return super.canActivate(playerId, game) && artifactSpellBeingCast;
+    }
+
+    @Override
+    public String getRule() {
+        return super.getRule() + "  " + abilityText;
+    }
+
+    @Override
+    public String getRule(String source) {
+        return super.getRule(source);
+    }
+
+    @Override
+    public GrandArchitectManaAbility copy ( ) {
+        return new GrandArchitectManaAbility(this);
+    }
 }
