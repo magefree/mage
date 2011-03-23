@@ -79,7 +79,7 @@ public class ReboundAbility extends TriggeredAbilityImpl<ReboundAbility> {
 		this.installReboundEffect = false;
 	}
 
-	public ReboundAbility ( ReboundAbility ability ) {
+	public ReboundAbility ( final ReboundAbility ability ) {
 		super(ability);
 		this.installReboundEffect = ability.installReboundEffect;
 	}
