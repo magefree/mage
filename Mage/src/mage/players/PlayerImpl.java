@@ -32,7 +32,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -71,7 +70,6 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.permanent.Permanent;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackAbility;
-import mage.game.stack.StackObject;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
 
@@ -375,8 +373,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		if (card != null) {
 			if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getId(), playerId))) {
 				game.bookmarkState();
+				card.cast(game, game.getZone(card.getId()), ability, playerId);
 				removeFromHand(card, game);
-				card.cast(game, Zone.HAND, ability, playerId);
 				Ability spellAbility = game.getStack().getSpell(ability.getId()).getSpellAbility();
 				if (spellAbility.activate(game, noMana)) {
 					for (KickerAbility kicker: card.getAbilities().getKickerAbilities()) {
@@ -993,10 +991,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		}
 	}
 
+	@Override
 	public boolean isTestMode() {
 		return isTestMode;
 	}
 
+	@Override
 	public void setTestMode(boolean value) {
 		this.isTestMode = value;
 	}
