@@ -107,6 +107,8 @@ public interface Game extends MageItem, Serializable {
 	public GameStates getGameStates();
 	public void loadGameStates(GameStates states);
 	public Game copy();
+	public boolean isSimulation();
+	public void setSimulation(boolean simulation);
 	public Card getLastKnownInformation(UUID objectId, Zone zone);
 	public void rememberLKI(UUID objectId, Zone zone, Card card);
 	public void resetLKI();
@@ -119,7 +121,6 @@ public interface Game extends MageItem, Serializable {
 	public void fireSelectTargetEvent(UUID playerId, String message, Set<UUID> targets, boolean required, Map<String, Serializable> options);
 	public void fireSelectTargetEvent(UUID playerId, String message, Cards cards, boolean required);
 	public void fireSelectTargetEvent(UUID playerId, String message, TriggeredAbilities abilities, boolean required);
-//	public void fireRevealCardsEvent(String message, Cards cards);
 	public void fireSelectEvent(UUID playerId, String message);
 	public void fireLookAtCardsEvent(UUID playerId, String message, Cards cards);
 	public void firePriorityEvent(UUID playerId);
@@ -136,7 +137,6 @@ public interface Game extends MageItem, Serializable {
 	public boolean replaceEvent(GameEvent event);
 
 	//game play methods
-	//public void init(UUID choosingPlayerId);
 	public void start(UUID choosingPlayerId);
 	public void start(UUID choosingPlayerId, GameOptions options);
 	public void end();

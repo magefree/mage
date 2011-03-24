@@ -79,6 +79,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	private transient Stack<Integer> savedStates = new Stack<Integer>();
 	private transient Object customData;
+	protected boolean simulation = false;
 
 	protected final UUID id;
 	protected boolean ready;
@@ -113,10 +114,18 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		this.range = game.range;
 		this.attackOption = game.attackOption;
 		this.state = game.state.copy();
-//		for (Map.Entry<UUID, Card> entry: game.gameCards.entrySet()) {
-//			this.gameCards.put(entry.getKey(), entry.getValue().copy());
-//		}
 		this.gameCards = game.gameCards;
+		this.simulation = game.simulation;
+	}
+
+	@Override
+	public boolean isSimulation() {
+		return simulation;
+	}
+	
+	@Override
+	public void setSimulation(boolean simulation) {
+		this.simulation = simulation;
 	}
 
 	@Override
@@ -273,21 +282,27 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public void bookmarkState() {
-		saveState();
-		logger.fine("Bookmarking state: " + gameStates.getSize());
-		savedStates.push(gameStates.getSize() - 1);
+		if (!simulation) {
+			saveState();
+			logger.fine("Bookmarking state: " + gameStates.getSize());
+			savedStates.push(gameStates.getSize() - 1);
+		}
 	}
 
 	@Override
 	public void restoreState() {
-		GameState restore = gameStates.rollback(savedStates.pop());
-		if (restore != null)
-			state.restore(restore);
+		if (!simulation) {
+			GameState restore = gameStates.rollback(savedStates.pop());
+			if (restore != null)
+				state.restore(restore);
+		}
 	}
 
 	@Override
 	public void removeLastBookmark() {
-		savedStates.pop();
+		if (!simulation) {
+			savedStates.pop();
+		}
 	}
 
 	@Override
@@ -622,13 +637,13 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			}
 		}
 		//20091005 - 704.5j, 801.14
-		if (getBattlefield().countAll(filterPlaneswalker) > 1) {  //don't bother checking if less than 2 planeswalkers in play
+		if (getBattlefield().contains(filterPlaneswalker, 2)) {  //don't bother checking if less than 2 planeswalkers in play
 			for (Permanent planeswalker: getBattlefield().getAllActivePermanents(CardType.PLANESWALKER)) {
 				for (String planeswalkertype: planeswalker.getSubtype()) {
 					filterPlaneswalker.getSubtype().clear();
 					filterPlaneswalker.getSubtype().add(planeswalkertype);
 					filterPlaneswalker.setScopeSubtype(ComparisonScope.Any);
-					if (getBattlefield().count(filterPlaneswalker, planeswalker.getControllerId(), this) > 1) {
+					if (getBattlefield().contains(filterPlaneswalker, planeswalker.getControllerId(), this, 2)) {
 						for (Permanent perm: getBattlefield().getActivePermanents(filterPlaneswalker, planeswalker.getControllerId(), this)) {
 							perm.moveToZone(Zone.GRAVEYARD, null, this, false);
 						}
@@ -660,11 +675,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			}
 		}
 		//20091005 - 704.5k, 801.12
-		if (getBattlefield().countAll(filterLegendary) > 1) {  //don't bother checking if less than 2 legends in play
+		if (getBattlefield().contains(filterLegendary, 2)) {  //don't bother checking if less than 2 legends in play
 			for (Permanent legend: getBattlefield().getAllActivePermanents(filterLegendary)) {
 				filterLegendName.getName().clear();
 				filterLegendName.getName().add(legend.getName());
-				if (getBattlefield().count(filterLegendName, legend.getControllerId(), this) > 1) {
+				if (getBattlefield().contains(filterLegendName, legend.getControllerId(), this, 2)) {
 					for (Permanent dupLegend: getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
 						dupLegend.moveToZone(Zone.GRAVEYARD, null, this, false);
 					}

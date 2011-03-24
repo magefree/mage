@@ -40,11 +40,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import java.util.logging.Level;
 import mage.Constants.Outcome;
 import mage.Constants.PhaseStep;
 import mage.Constants.RangeOfInfluence;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.common.PassAbility;
@@ -55,7 +53,6 @@ import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Cards;
-import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.filter.FilterAbility;
 import mage.game.Game;
@@ -98,6 +95,8 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 
 	protected int maxDepth;
 	protected int maxNodes;
+	protected int nodeCount = 0;
+	protected long thinkTime = 0;
 	protected LinkedList<Ability> actions = new LinkedList<Ability>();
 	protected List<UUID> targets = new ArrayList<UUID>();
 	protected List<String> choices = new ArrayList<String>();
@@ -190,6 +189,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 				addActionsTimed(new FilterAbility());
 			else
 				addActions(root, new FilterAbility(), Integer.MIN_VALUE, Integer.MAX_VALUE);
+			logger.info(name + " simulated " + nodeCount + " nodes in " + thinkTime/1000000000.0 + "s - average " + nodeCount/(thinkTime/1000000000.0) + " nodes/s");
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
 				actions = new LinkedList<Ability>(root.abilities);
@@ -319,9 +319,15 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 				return addActions(root, filter, Integer.MIN_VALUE, Integer.MAX_VALUE);
 			}
 		});
+		long startTime = System.nanoTime();
 		pool.execute(task);
 		try {
 			task.get(Config.maxThinkSeconds, TimeUnit.SECONDS);
+			long endTime = System.nanoTime();
+			long duration = endTime - startTime;
+			logger.info("Calculated " + root.nodeCount + " nodes in " + duration/1000000000.0 + "s");
+			nodeCount += root.nodeCount;
+			thinkTime += duration;
 		} catch (TimeoutException e) {
 			logger.debug("simulating - timed out");
 			task.cancel(true);
@@ -331,6 +337,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 			} catch (InterruptedException ex) {
 				logger.fatal("can't sleep");
 			}
+			logger.info("Calculated " + root.nodeCount + " nodes in 30s");
 		} catch (ExecutionException e) {
 			logger.fatal("Simulation error", e);
 			task.cancel(true);
@@ -712,6 +719,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 			newPlayer.restore(origPlayer);
 			sim.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
 		}
+		sim.setSimulation(true);
 		return sim;
 	}
 

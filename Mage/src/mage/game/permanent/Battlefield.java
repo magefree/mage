@@ -138,6 +138,81 @@ public class Battlefield implements Serializable {
 		return count;
 	}
 
+	/**
+	 * Returns true if the battlefield contains at least 1 {@link Permanent}
+	 * that matches the filter.
+	 * This method ignores the range of influence.
+	 *
+	 * @param filter
+	 * @return boolean
+	 */
+	public boolean contains(FilterPermanent filter, int num) {
+		int count = 0;
+		for (Permanent permanent: field.values()) {
+			if (filter.match(permanent)) {
+				count++;
+				if (num == count)
+					return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Returns true if the battlefield contains at least 1 {@link Permanent}
+	 * that matches the filter and is controlled by controllerId.
+	 * This method ignores the range of influence.
+	 *
+	 * @param filter
+	 * @param controllerId
+	 * @return boolean
+	 */
+	public boolean contains(FilterPermanent filter, UUID controllerId, int num) {
+		int count = 0;
+		for (Permanent permanent: field.values()) {
+			if (permanent.getControllerId().equals(controllerId) && filter.match(permanent)) {
+				count++;
+				if (num == count)
+					return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Returns true if the battlefield contains at least 1 {@link Permanent}
+	 * that is within the range of influence of the specified player id
+	 * and that matches the supplied filter.
+	 *
+	 * @param filter
+	 * @param sourcePlayerId
+	 * @param game
+	 * @return boolean
+	 */
+	public boolean contains(FilterPermanent filter, UUID sourcePlayerId, Game game, int num) {
+		int count = 0;
+		if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
+			for (Permanent permanent: field.values()) {
+				if (filter.match(permanent, sourcePlayerId, game)) {
+					count++;
+					if (num == count)
+						return true;
+				}
+			}
+		}
+		else {
+			Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
+			for (Permanent permanent: field.values()) {
+				if (range.contains(permanent.getControllerId()) && filter.match(permanent, sourcePlayerId, game)) {
+					count++;
+					if (num == count)
+						return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public void addPermanent(Permanent permanent) {
 		field.put(permanent.getId(), permanent);
 	}

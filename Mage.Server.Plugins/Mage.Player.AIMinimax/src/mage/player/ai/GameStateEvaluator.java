@@ -38,6 +38,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.counters.BoostCounter;
 import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -76,6 +77,7 @@ public class GameStateEvaluator {
 				return WIN_SCORE;
 		}
 		int lifeScore = (player.getLife() - opponent.getLife()) * LIFE_FACTOR;
+		int poisonScore = (opponent.getCounters().getCount(CounterType.POISON) - player.getCounters().getCount(CounterType.POISON)) * LIFE_FACTOR * 2;
 		int permanentScore = 0;
 		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
 			permanentScore += evaluatePermanent(permanent, game, ignoreTapped);
@@ -89,7 +91,7 @@ public class GameStateEvaluator {
 		handScore = player.getHand().size() - opponent.getHand().size();
 		handScore *= HAND_FACTOR;
 
-		int score = lifeScore + permanentScore + handScore;
+		int score = lifeScore + poisonScore + permanentScore + handScore;
 		if (logger.isDebugEnabled())
 			logger.debug("game state for player " + player.getName() + " evaluated to- lifeScore:" + lifeScore + " permanentScore:" + permanentScore + " handScore:" + handScore + " total:" + score);
 		return score;

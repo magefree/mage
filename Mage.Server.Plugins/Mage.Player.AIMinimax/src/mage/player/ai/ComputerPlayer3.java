@@ -164,6 +164,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 				addActionsTimed(new FilterAbility());
 			else
 				addActions(root, new FilterAbility(), Integer.MIN_VALUE, Integer.MAX_VALUE);
+			logger.info(name + " simulated " + nodeCount + " nodes in " + thinkTime/1000000000.0 + "s - average " + nodeCount/(thinkTime/1000000000.0) + " nodes/s");
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
 				actions = new LinkedList<Ability>(root.abilities);
@@ -187,6 +188,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
 				addActionsTimed(new FilterAbility());
 			else
 				addActions(root, new FilterAbility(), Integer.MIN_VALUE, Integer.MAX_VALUE);
+			logger.info(name + " simulated " + nodeCount + " nodes in " + thinkTime/1000000000.0 + "s - average " + nodeCount/(thinkTime/1000000000.0) + " nodes/s");
 			if (root.children.size() > 0) {
 				root = root.children.get(0);
 				actions = new LinkedList<Ability>(root.abilities);
