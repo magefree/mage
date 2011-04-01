@@ -71,7 +71,7 @@ public abstract class RedirectionEffect<T extends RedirectionEffect<T>> extends 
 		DamageEvent damageEvent = (DamageEvent)event;
 		Permanent permanent = game.getPermanent(redirectTarget.getFirstTarget());
 		Ability damageSource = getSource(damageEvent.getSourceId(), game);
-		if (permanent != null) {
+		if (permanent != null && damageSource != null) {
 			permanent.damage(damageEvent.getAmount(), damageSource.getId(), game, damageEvent.isPreventable(), damageEvent.isCombatDamage());
 			return true;
 		}

@@ -28,6 +28,7 @@
 
 package mage.sets.magic2011;
 
+import java.util.Iterator;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
@@ -102,9 +103,10 @@ class GargoyleSentinelEffect extends ContinuousEffectImpl<GargoyleSentinelEffect
 			switch (layer) {
 				case AbilityAddingRemovingEffects_6:
 					if (sublayer == SubLayer.NA) {
-						for (Ability ability: permanent.getAbilities()) {
-							if (ability.getId().equals(DefenderAbility.getInstance().getId()))
-								permanent.getAbilities().remove(ability);
+						for (Iterator<Ability> i = permanent.getAbilities().iterator(); i.hasNext();) {
+							Ability entry = i.next();
+							if (entry.getId().equals(DefenderAbility.getInstance().getId()))
+								i.remove();
 						}
 						permanent.getAbilities().add(FlyingAbility.getInstance());
 					}

@@ -318,7 +318,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 			//TODO: this is awkward - improve
 			if (event.getType() == EventType.ZONE_CHANGE) {
 				ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-				if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
+				if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getTarget() != null) {
 					if (zEvent.getTarget() instanceof PermanentCard) {
 						((PermanentCard)zEvent.getTarget()).checkPermanentOnlyTriggers(zEvent, game);
 					}

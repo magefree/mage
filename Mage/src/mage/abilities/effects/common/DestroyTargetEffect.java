@@ -67,13 +67,15 @@ public class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
 	@Override
 	public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        for (UUID permanentId : source.getTargets().get(0).getTargets()) {
-            Permanent permanent = game.getPermanent(permanentId);
-            if (permanent != null) {
-			    permanent.destroy(source.getId(), game, noRegen);
-                affectedTargets++;
-            }
-        }
+		if (source.getTargets().size() > 0) {
+			for (UUID permanentId : source.getTargets().get(0).getTargets()) {
+				Permanent permanent = game.getPermanent(permanentId);
+				if (permanent != null) {
+					permanent.destroy(source.getId(), game, noRegen);
+					affectedTargets++;
+				}
+			}
+		}
 		return affectedTargets > 0;
 	}
 
