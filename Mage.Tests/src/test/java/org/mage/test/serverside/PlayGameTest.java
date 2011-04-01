@@ -1,11 +1,14 @@
 package org.mage.test.serverside;
 
 import mage.Constants;
+import mage.Constants.ColoredManaSymbol;
+import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.GameOptions;
 import mage.game.TwoPlayerDuel;
+import mage.player.ai.ComputerPlayer;
 import mage.players.Player;
 import mage.sets.Sets;
 import org.junit.Test;
@@ -16,16 +19,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import mage.Constants.ColoredManaSymbol;
-import mage.cards.Card;
-import mage.player.ai.ComputerPlayer;
 
 /**
  * @author ayratn
  */
 public class PlayGameTest extends MageTestBase {
 
-	private static List<String> colorChoices = Arrays.asList("bu","bg","br","bw","ug","ur","uw","gr","gw","rw","bur","buw","bug","brg","brw","bgw","wur","wug","wrg","rgu");
+	private static List<String> colorChoices = Arrays.asList("bu", "bg", "br", "bw", "ug", "ur", "uw", "gr", "gw", "rw", "bur", "buw", "bug", "brg", "brw", "bgw", "wur", "wug", "wrg", "rgu");
 
 	@Test
 	public void playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
@@ -76,12 +76,12 @@ public class PlayGameTest extends MageTestBase {
 
 	private Deck generateRandomDeck() {
 		String selectedColors = colorChoices.get(new Random().nextInt(colorChoices.size())).toUpperCase();
-        List<ColoredManaSymbol> allowedColors = new ArrayList<ColoredManaSymbol>();
+		List<ColoredManaSymbol> allowedColors = new ArrayList<ColoredManaSymbol>();
 		logger.info("Building deck with colors: " + selectedColors);
-        for (int i = 0; i < selectedColors.length(); i++) {
-            char c = selectedColors.charAt(i);
-            allowedColors.add(ColoredManaSymbol.lookup(c));
-        }
+		for (int i = 0; i < selectedColors.length(); i++) {
+			char c = selectedColors.charAt(i);
+			allowedColors.add(ColoredManaSymbol.lookup(c));
+		}
 		List<Card> cardPool = Sets.generateRandomCardPool(45, allowedColors);
 		return ComputerPlayer.buildDeck(cardPool, allowedColors);
 	}

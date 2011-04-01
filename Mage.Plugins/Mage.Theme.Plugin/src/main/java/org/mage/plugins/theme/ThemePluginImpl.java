@@ -1,6 +1,6 @@
 package org.mage.plugins.theme;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -23,6 +23,7 @@ import org.apache.log4j.Logger;
 public class ThemePluginImpl implements ThemePlugin {
 
 	private final static Logger log = Logger.getLogger(ThemePluginImpl.class);
+	private static BufferedImage background;
 
 	@Init
 	public void init() {
@@ -73,33 +74,43 @@ public class ThemePluginImpl implements ThemePlugin {
 		}
 	}
 
+
 	public JComponent updateTable(Map<String, JComponent> ui) {
-		String filename = "/background.png";
-		try {
-			InputStream is = this.getClass().getResourceAsStream(filename);
+		ImagePanel bgPanel = createImagePanelInstance();
 
-			if (is == null)
-				throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
-
-			BufferedImage background = ImageIO.read(is);
-
-			if (background == null)
-				throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
-
-			ImagePanel bgPanel = new ImagePanel(background, ImagePanel.SCALED);
-
-			unsetOpaque(ui.get("jScrollPane1"));
-			unsetOpaque(ui.get("jPanel1"));
-			unsetOpaque(ui.get("tablesPanel"));
-			JComponent viewport = ui.get("jScrollPane1ViewPort");
-			if (viewport != null) {
-				viewport.setBackground(new Color(255,255,255,50));
-			}
-			return bgPanel;
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-			return null;
+		unsetOpaque(ui.get("jScrollPane1"));
+		unsetOpaque(ui.get("jPanel1"));
+		unsetOpaque(ui.get("tablesPanel"));
+		JComponent viewport = ui.get("jScrollPane1ViewPort");
+		if (viewport != null) {
+			viewport.setBackground(new Color(255,255,255,50));
 		}
+		return bgPanel;
+	}
+
+	private ImagePanel createImagePanelInstance() {
+		if (background == null) {
+			synchronized (ThemePluginImpl.class) {
+				if (background == null) {
+					String filename = "/background.png";
+					try {
+						InputStream is = this.getClass().getResourceAsStream(filename);
+
+						if (is == null)
+							throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
+
+						background = ImageIO.read(is);
+
+						if (background == null)
+							throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
+					} catch (Exception e) {
+						log.error(e.getMessage(), e);
+						return null;
+					}
+				}
+			}
+		}
+		return new ImagePanel(background, ImagePanel.SCALED);
 	}
 
 	private void unsetOpaque(JComponent c) {
