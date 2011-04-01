@@ -363,13 +363,19 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			else {
 				card = pickWorstCard(cards, null);
 			}
-			if (target.canTarget(card.getId(), source, game)) {
+			if (source != null) {
+				if (target.canTarget(card.getId(), source, game)) {
+					return card;
+				}
+			}
+			else {
 				return card;
 			}
 			cards.remove(card);
 		}
 		return null;
 	}
+
 	@Override
 	public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
 		if (logger.isDebugEnabled())
@@ -768,33 +774,35 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	@Override
-	public boolean chooseTarget(Cards cards, TargetCard target, Ability source, Game game)  {
+	public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game)  {
 		logger.debug("chooseTarget");
-		//TODO: improve this
-		//return first match
-		if (!target.doneChosing()) {
-			for (Card card: cards.getCards(target.getFilter(), game)) {
-				target.addTarget(card.getId(), source, game);
-				if (target.doneChosing())
-					return true;
+		while (!target.doneChosing()) {
+			if (cards.isEmpty()) {
+				if (!target.isRequired())
+					return false;
+				return true;
 			}
-			return false;
+			Card card = pickTarget(new ArrayList<Card>(cards.getCards(target.getFilter(), game)), outcome, target, source, game);
+			if (card != null) {
+				target.addTarget(card.getId(), source, game);
+			}
 		}
 		return true;
 	}
 
 	@Override
-	public boolean choose(Cards cards, TargetCard target, Game game)  {
+	public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game)  {
 		logger.debug("choose");
-		//TODO: improve this
-		//return first match
-		if (!target.doneChosing()) {
-			for (Card card: cards.getCards(target.getFilter(), game)) {
-				target.add(card.getId(), game);
-				if (target.doneChosing())
-					return true;
+		while (!target.doneChosing()) {
+			if (cards.isEmpty()) {
+				if (!target.isRequired())
+					return false;
+				return true;
 			}
-			return false;
+			Card card = pickTarget(new ArrayList<Card>(cards.getCards(target.getFilter(), game)), outcome, target, null, game);
+			if (card != null) {
+				target.add(card.getId(), game);
+			}
 		}
 		return true;
 	}
@@ -884,6 +892,77 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		match.submitDeck(playerId, deck);
 	}
 
+	public static Deck buildDeck(List<Card> cardPool, final List<Constants.ColoredManaSymbol> colors) {
+		Deck deck = new Deck();
+		List<Card> sortedCards = new ArrayList<Card>(cardPool);
+		Collections.sort(sortedCards, new Comparator<Card>() {
+			@Override
+			public int compare(Card o1, Card o2) {
+				Integer score1 = RateCard.rateCard(o1, colors);
+				Integer score2 = RateCard.rateCard(o2, colors);
+				return score2.compareTo(score1);
+			}
+		});
+		int cardNum = 0;
+		while (deck.getCards().size() < 23 && sortedCards.size() > cardNum) {
+			Card card = sortedCards.get(cardNum);
+			if (!card.getSupertype().contains("Basic")) {
+				deck.getCards().add(card);
+				deck.getSideboard().remove(card);
+			}
+			cardNum++;
+		}
+		// add basic lands
+		// TODO:  compensate for non basic lands
+		Mana mana = new Mana();
+		for (Card card: deck.getCards()) {
+			mana.add(card.getManaCost().getMana());
+		}
+		double total = mana.getBlack() + mana.getBlue() + mana.getGreen() + mana.getRed() + mana.getWhite();
+		if (mana.getGreen() > 0) {
+			int numGreen = (int) Math.round(mana.getGreen() / total * 17);
+			for (int i = 0; i < numGreen; i++) {
+				Card land = Sets.findCard("Forest", true);
+				deck.getCards().add(land);
+			}
+		}
+		if (mana.getBlack() > 0) {
+			int numBlack = (int) Math.round(mana.getBlack() / total * 17);
+			for (int i = 0; i < numBlack; i++) {
+				Card land = Sets.findCard("Swamp", true);
+				deck.getCards().add(land);
+			}
+		}
+		if (mana.getBlue() > 0) {
+			int numBlue = (int) Math.round(mana.getBlue() / total * 17);
+			for (int i = 0; i < numBlue; i++) {
+				Card land = Sets.findCard("Island", true);
+				deck.getCards().add(land);
+			}
+		}
+		if (mana.getWhite() > 0) {
+			int numWhite = (int) Math.round(mana.getWhite() / total * 17);
+			for (int i = 0; i < numWhite; i++) {
+				Card land = Sets.findCard("Plains", true);
+				deck.getCards().add(land);
+			}
+		}
+		if (mana.getRed() > 0) {
+			int numRed = (int) Math.round(mana.getRed() / total * 17);
+			for (int i = 0; i < numRed; i++) {
+				Card land = Sets.findCard("Mountain", true);
+				deck.getCards().add(land);
+			}
+		}
+		while (deck.getCards().size() < 40) {
+			//TODO: improve this
+			Card land = Sets.findCard("Forest", true);
+			deck.getCards().add(land);
+		}
+			
+		return deck;
+	}
+
 	@Override
 	public void construct(Tournament tournament, Deck deck) {
 		if (deck.getCards().size() < 40) {
@@ -894,66 +973,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				}
 				chosenColors = chooseDeckColorsIfPossible();
 			}
-			List<Card> sortedCards = new ArrayList<Card>(deck.getSideboard());
-			Collections.sort(sortedCards, new Comparator<Card>() {
-				@Override
-				public int compare(Card o1, Card o2) {
-					Integer score1 = RateCard.rateCard(o1, chosenColors);
-					Integer score2 = RateCard.rateCard(o2, chosenColors);
-					return score2.compareTo(score1);
-				}
-			});
-			int cardNum = 0;
-			while (deck.getCards().size() < 23 && sortedCards.size() > cardNum) {
-				Card card = sortedCards.get(cardNum);
-				if (!card.getSupertype().contains("Basic")) {
-					deck.getCards().add(card);
-					deck.getSideboard().remove(card);
-				}
-				cardNum++;
-			}
-			// add basic lands
-			// TODO:  compensate for non basic lands
-			Mana mana = new Mana();
-			for (Card card: deck.getCards()) {
-				mana.add(card.getManaCost().getMana());
-			}
-			double total = mana.getBlack() + mana.getBlue() + mana.getGreen() + mana.getRed() + mana.getWhite();
-			if (mana.getGreen() > 0) {
-				int numGreen = (int) Math.round(mana.getGreen() / total * 17);
-				for (int i = 0; i < numGreen; i++) {
-					Card land = Sets.findCard("Forest", true);
-					deck.getCards().add(land);
-				}
-			}
-			if (mana.getBlack() > 0) {
-				int numBlack = (int) Math.round(mana.getBlack() / total * 17);
-				for (int i = 0; i < numBlack; i++) {
-					Card land = Sets.findCard("Swamp", true);
-					deck.getCards().add(land);
-				}
-			}
-			if (mana.getBlue() > 0) {
-				int numBlue = (int) Math.round(mana.getBlue() / total * 17);
-				for (int i = 0; i < numBlue; i++) {
-					Card land = Sets.findCard("Island", true);
-					deck.getCards().add(land);
-				}
-			}
-			if (mana.getWhite() > 0) {
-				int numWhite = (int) Math.round(mana.getWhite() / total * 17);
-				for (int i = 0; i < numWhite; i++) {
-					Card land = Sets.findCard("Plains", true);
-					deck.getCards().add(land);
-				}
-			}
-			if (mana.getRed() > 0) {
-				int numRed = (int) Math.round(mana.getRed() / total * 17);
-				for (int i = 0; i < numRed; i++) {
-					Card land = Sets.findCard("Mountain", true);
-					deck.getCards().add(land);
-				}
-			}
+			deck = buildDeck(new ArrayList<Card>(deck.getSideboard()), chosenColors);
 		}
 		tournament.submitDeck(playerId, deck);
 	}

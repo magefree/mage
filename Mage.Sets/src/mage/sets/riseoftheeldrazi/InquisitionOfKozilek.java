@@ -103,7 +103,7 @@ class InquisitionOfKozilekEffect extends OneShotEffect<InquisitionOfKozilekEffec
 			Player you = game.getPlayer(source.getControllerId());
 			if (you != null) {
 				TargetCard target = new TargetCard(Zone.PICK, filter);
-				if (you.choose(player.getHand(), target, game)) {
+				if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
 					Card card = player.getHand().get(target.getFirstTarget(), game);
 					if (card != null) {
 						return player.discard(card, source, game);

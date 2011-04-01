@@ -97,7 +97,7 @@ class HalimarDepthsEffect extends OneShotEffect<HalimarDepthsEffect> {
 			TargetCard target2 = new TargetCard(Zone.PICK, filter2);
 			target2.setRequired(true);
 			while (cards.size() > 1) {
-				player.choose(cards, target2, game);
+				player.choose(Outcome.Detriment, cards, target2, game);
 				Card card = cards.get(target2.getFirstTarget(), game);
 				cards.remove(card);
 				card.moveToZone(Zone.LIBRARY, source.getId(), game, true);

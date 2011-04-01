@@ -110,7 +110,7 @@ class SeaGateOracleEffect extends OneShotEffect<SeaGateOracleEffect> {
 				TargetCard target = new TargetCard(Zone.PICK, filter);
 				target.setRequired(true);
 				player.lookAtCards(cards, game);
-				player.choose(cards, target, game);
+				player.choose(Outcome.Benefit, cards, target, game);
 				card = cards.get(target.getFirstTarget(), game);
 				if (card != null) {
 					card.moveToZone(Zone.HAND, source.getId(), game, false);

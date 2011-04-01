@@ -514,9 +514,9 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 	}
 
 	@Override
-	public boolean chooseTarget(Cards cards, TargetCard target, Ability source, Game game)  {
+	public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game)  {
 		if (targets.size() == 0)
-			return super.chooseTarget(cards, target, source, game);
+			return super.chooseTarget(outcome, cards, target, source, game);
 		if (!target.doneChosing()) {
 			for (UUID targetId: targets) {
 				target.addTarget(targetId, source, game);
@@ -531,9 +531,9 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 	}
 
 	@Override
-	public boolean choose(Cards cards, TargetCard target, Game game)  {
+	public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game)  {
 		if (targets.size() == 0)
-			return super.choose(cards, target, game);
+			return super.choose(outcome, cards, target, game);
 		if (!target.doneChosing()) {
 			for (UUID targetId: targets) {
 				target.add(targetId, game);

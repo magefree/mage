@@ -236,7 +236,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	}
 
 	@Override
-	public boolean choose(Cards cards, TargetCard target, Game game) {
+	public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
 		while (!abort) {
 			game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired());
 			waitForResponse();
@@ -253,7 +253,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	}
 
 	@Override
-	public boolean chooseTarget(Cards cards, TargetCard target, Ability source, Game game) {
+	public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
 		while (!abort) {
 			game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired());
 			waitForResponse();

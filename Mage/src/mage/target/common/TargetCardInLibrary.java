@@ -70,13 +70,13 @@ public class TargetCardInLibrary extends TargetCard<TargetCardInLibrary> {
 		Player player = game.getPlayer(playerId);
 		while (!isChosen() && !doneChosing()) {
 			chosen = targets.size() >= minNumberOfTargets;
-			if (!player.choose(new CardsImpl(Zone.LIBRARY, player.getLibrary().getCards(game)), this, game)) {
+			if (!player.choose(outcome, new CardsImpl(Zone.LIBRARY, player.getLibrary().getCards(game)), this, game)) {
 				return chosen;
 			}
 			chosen = targets.size() >= minNumberOfTargets;
 		}
 		while (!doneChosing()) {
-			if (!player.choose(new CardsImpl(Zone.LIBRARY, player.getLibrary().getCards(game)), this, game)) {
+			if (!player.choose(outcome, new CardsImpl(Zone.LIBRARY, player.getLibrary().getCards(game)), this, game)) {
 				break;
 			}
 		}
