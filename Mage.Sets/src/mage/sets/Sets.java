@@ -38,9 +38,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import mage.Constants.CardType;
+import mage.Constants.ColoredManaSymbol;
+import mage.Mana;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.ExpansionSet;
+import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.util.Logging;
 
@@ -53,6 +57,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
 	private final static Logger logger = Logging.getLogger(Sets.class.getName());
 	private static final Sets fINSTANCE =  new Sets();
 	private static Set<String> names;
+	private static List<Card> cards;
     protected static Random rnd = new Random();
 
 	public static Sets getInstance() {
@@ -61,6 +66,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
 
 	private Sets() {
 		names = new TreeSet<String>();
+		cards = new ArrayList<Card>();
 		this.addSet(AlaraReborn.getInstance());
 		this.addSet(Conflux.getInstance());
         this.addSet(Dissension.getInstance());
@@ -83,12 +89,104 @@ public class Sets extends HashMap<String, ExpansionSet> {
 	private void addSet(ExpansionSet set) {
 		this.put(set.getCode(), set);
 		for (Card card: set.getCards()) {
+			cards.add(card);
 			names.add(card.getName());
 		}
 	}
 
 	public static Set<String> getCardNames() {
 		return names;
+	}
+
+	public static Card getRandomCard() {
+		return cards.get(rnd.nextInt(cards.size()));
+	}
+
+    /**
+     * Generates card pool of cardsCount cards that have manacost of allowed colors.
+     *
+     * @param cardsCount
+     * @param allowedColors
+     * @return
+     */
+    public static List<Card> generateRandomCardPool(int cardsCount, List<ColoredManaSymbol> allowedColors) {
+        List<Card> cardPool = new ArrayList<Card>();
+
+        int count = 0;
+		int tries = 0;
+		while (count < cardsCount) {
+			Card card = getRandomCard();
+			if (!card.getCardType().contains(CardType.LAND)) {
+				if (cardFitsChosenColors(card, allowedColors)) {
+					cardPool.add(card);
+					count++;
+				}
+			}
+			tries++;
+			if (tries > 4096) { // to avoid infinite loop
+				throw new IllegalStateException("Not enough cards for chosen colors to generate deck: " + allowedColors);
+			}
+		}
+
+        return cardPool;
+    }
+
+	/**
+     * Check that card can be played using chosen (allowed) colors.
+     *
+     * @param card
+     * @param allowedColors
+     * @return
+     */
+    private static boolean cardFitsChosenColors(Card card, List<ColoredManaSymbol> allowedColors) {
+		if (card.getCardType().contains(CardType.LAND))  {
+			if (!card.getSupertype().contains("Basic")) {
+				int score = 0;
+				for (Mana mana : card.getMana()) {
+					for (ColoredManaSymbol color : allowedColors) {
+						score += mana.getColor(color);
+					}
+				}
+				if (score > 1) {
+					return true;
+				}
+			}
+		}
+		else {
+			for (String symbol : card.getManaCost().getSymbols()) {
+				boolean found = false;
+				symbol = symbol.replace("{", "").replace("}", "");
+				if (isColoredMana(symbol)) {
+					for (ColoredManaSymbol allowed : allowedColors) {
+						if (allowed.toString().equals(symbol)) {
+							found = true;
+							break;
+						}
+					}
+					if (!found) {
+						return false;
+					}
+				}
+	        }
+	        return true;
+		}
+		return false;
+    }
+
+    protected static boolean isColoredMana(String symbol) {
+        return symbol.equals("W") || symbol.equals("G") || symbol.equals("U") || symbol.equals("B") || symbol.equals("R");
+    }
+
+	public static Deck generateDeck() {
+		List<ColoredManaSymbol> allowedColors = new ArrayList<ColoredManaSymbol>();
+		int numColors = rnd.nextInt(2) + 1;
+        int cardPoolSize = 60;
+        if (numColors > 2) {
+            cardPoolSize += 20;
+        }
+		Deck deck = new Deck();
+
+		return deck;
 	}
 
 	public static Card findCard(String name) {

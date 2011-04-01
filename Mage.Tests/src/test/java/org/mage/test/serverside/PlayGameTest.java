@@ -1,28 +1,31 @@
 package org.mage.test.serverside;
 
 import mage.Constants;
-import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.GameOptions;
 import mage.game.TwoPlayerDuel;
-import mage.game.permanent.PermanentCard;
 import mage.players.Player;
-import mage.server.game.PlayerFactory;
 import mage.sets.Sets;
 import org.junit.Test;
 import org.mage.test.serverside.base.MageTestBase;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
-import java.util.regex.Matcher;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import mage.Constants.ColoredManaSymbol;
+import mage.cards.Card;
+import mage.player.ai.ComputerPlayer;
 
 /**
  * @author ayratn
  */
 public class PlayGameTest extends MageTestBase {
+
+	private static List<String> colorChoices = Arrays.asList("bu","bg","br","bw","ug","ur","uw","gr","gw","rw","bur","buw","bug","brg","brw","bgw","wur","wug","wrg","rgu");
 
 	@Test
 	public void playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
@@ -30,7 +33,8 @@ public class PlayGameTest extends MageTestBase {
 
 		Player computerA = createPlayer("ComputerA", "Computer - minimax hybrid");
 //		Player computerA = createPlayer("ComputerA", "Computer - mad");
-		Deck deck = Deck.load(Sets.loadDeck("RB Aggro.dck"));
+//		Deck deck = Deck.load(Sets.loadDeck("RB Aggro.dck"));
+		Deck deck = generateRandomDeck();
 
 		if (deck.getCards().size() < 40) {
 			throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
@@ -40,18 +44,19 @@ public class PlayGameTest extends MageTestBase {
 
 		Player computerB = createPlayer("ComputerB", "Computer - minimax hybrid");
 //		Player computerB = createPlayer("ComputerB", "Computer - mad");
-		Deck deck2 = Deck.load(Sets.loadDeck("RB Aggro.dck"));
+//		Deck deck2 = Deck.load(Sets.loadDeck("RB Aggro.dck"));
+		Deck deck2 = generateRandomDeck();
 		if (deck2.getCards().size() < 40) {
 			throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck2.getCards().size());
 		}
 		game.addPlayer(computerB, deck2);
 		game.loadCards(deck2.getCards(), computerB.getId());
 
-		parseScenario("scenario8.txt");
-		game.cheat(computerA.getId(), commandsA);
-		game.cheat(computerA.getId(), libraryCardsA, handCardsA, battlefieldCardsA, graveyardCardsA);
-		game.cheat(computerB.getId(), commandsB);
-		game.cheat(computerB.getId(), libraryCardsB, handCardsB, battlefieldCardsB, graveyardCardsB);
+//		parseScenario("scenario1.txt");
+//		game.cheat(computerA.getId(), commandsA);
+//		game.cheat(computerA.getId(), libraryCardsA, handCardsA, battlefieldCardsA, graveyardCardsA);
+//		game.cheat(computerB.getId(), commandsB);
+//		game.cheat(computerB.getId(), libraryCardsB, handCardsB, battlefieldCardsB, graveyardCardsB);
 
 		//boolean testMode = false;
 		boolean testMode = true;
@@ -67,5 +72,17 @@ public class PlayGameTest extends MageTestBase {
 		/*if (!game.getWinner().equals("Player ComputerA is the winner")) {
 			throw new RuntimeException("Lost :(");
 		}*/
+	}
+
+	private Deck generateRandomDeck() {
+		String selectedColors = colorChoices.get(new Random().nextInt(colorChoices.size())).toUpperCase();
+        List<ColoredManaSymbol> allowedColors = new ArrayList<ColoredManaSymbol>();
+		logger.info("Building deck with colors: " + selectedColors);
+        for (int i = 0; i < selectedColors.length(); i++) {
+            char c = selectedColors.charAt(i);
+            allowedColors.add(ColoredManaSymbol.lookup(c));
+        }
+		List<Card> cardPool = Sets.generateRandomCardPool(45, allowedColors);
+		return ComputerPlayer.buildDeck(cardPool, allowedColors);
 	}
 }
