@@ -17,6 +17,7 @@
     <dependencySet>
       <outputDirectory>/lib/</outputDirectory>
       <excludes>
+          <exclude>org.mage:Mage-Client</exclude>
           <exclude>org.mage:Mage-Theme-Plugin</exclude>
           <exclude>org.mage:Mage-Card-Plugin</exclude>
           <exclude>org.mage:Mage-Counter-Plugin</exclude>

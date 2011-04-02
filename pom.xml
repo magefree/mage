@@ -6,7 +6,7 @@
 	
     <groupId>org.mage</groupId>
     <artifactId>mage-root</artifactId>
-    <version>0.6</version>
+    <version>0.7</version>
     <packaging>pom</packaging>
     <name>Mage Root</name>
     <description>Mage Root POM</description>
@@ -19,7 +19,6 @@
         <module>Mage.Client</module>
         <module>Mage.Plugins</module>
         <module>Mage.Server.Plugins</module>
-		<module>Mage.Tests</module>
     </modules>
 
     <repositories>
@@ -35,6 +34,6 @@
     </repositories>
 
     <properties>
-        <mage-version>0.6</mage-version>
+        <mage-version>0.7</mage-version>
     </properties>
 </project>
