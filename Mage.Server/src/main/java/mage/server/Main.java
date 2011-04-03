@@ -55,7 +55,7 @@ public class Main {
 
 	private final static String testModeArg = "-testMode=";
 	private final static String pluginFolder = "plugins";
-	private final static String version = "0.7";
+	private final static String version = "0.7.1";
 
 	public static PluginClassLoader classLoader = new PluginClassLoader();
 	public static ServerImpl server;
