@@ -38,7 +38,7 @@ public class Swamp extends mage.cards.basiclands.Swamp {
 
 	public Swamp(UUID ownerId) {
 		super(ownerId, 5);
-		this.expansionSetCode = "GURU";
+		this.expansionSetCode = "GUR";
 	}
 
 	public Swamp(final Swamp card) {

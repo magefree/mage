@@ -38,7 +38,7 @@ public class Island extends mage.cards.basiclands.Island {
 
 	public Island(UUID ownerId) {
 		super(ownerId, 2);
-		this.expansionSetCode = "GURU";
+		this.expansionSetCode = "GUR";
 	}
 
 	public Island(final Island card) {
