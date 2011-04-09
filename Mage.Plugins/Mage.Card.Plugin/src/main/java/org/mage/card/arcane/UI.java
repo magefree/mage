@@ -140,7 +140,7 @@ public class UI {
 	}
 
 	static public String getDisplayManaCost (String manaCost) {
-		manaCost = manaCost.replace("/", "{slash}");
+		manaCost = manaCost.replace("/", "");
 		// A pipe in the cost means "process left of the pipe as the card color, but display right of the pipe as the cost".
 		int pipePosition = manaCost.indexOf("{|}");
 		if (pipePosition != -1) manaCost = manaCost.substring(pipePosition + 3);

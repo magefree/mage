@@ -244,11 +244,12 @@ $mana{'Green'} = '{G}';
 $mana{'Red'} = '{R}';
 $mana{'White'} = '{W}';
 $mana{'Variable Colorless'} = '{X}';
-$mana{'White or Black'} = 'W\\\\B';
-$mana{'Green or White'} = 'G\\\\W';
-$mana{'Black or Green'} = 'B\\\\G';
-$mana{'Black or Red'} = 'B\\\\R';
-$mana{'Red or Green'} = 'R\\\\G';
+$mana{'White or Black'} = 'W/B';
+$mana{'Green or White'} = 'G/W';
+$mana{'Black or Green'} = 'B/G';
+$mana{'Black or Red'} = 'B/R';
+$mana{'Blue or Red'} = 'U/R';
+$mana{'Red or Green'} = 'R/G';
 
 my %manatocolor;
 $manatocolor{'Black'} = "		this.color.setBlack(true);";
