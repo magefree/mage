@@ -250,6 +250,7 @@ $mana{'Black or Green'} = 'B/G';
 $mana{'Black or Red'} = 'B/R';
 $mana{'Blue or Red'} = 'U/R';
 $mana{'Red or Green'} = 'R/G';
+$mana{'Red or White'} = 'R/W';
 
 my %manatocolor;
 $manatocolor{'Black'} = "		this.color.setBlack(true);";
@@ -257,6 +258,7 @@ $manatocolor{'Blue'} = "		this.color.setBlue(true);";
 $manatocolor{'Green'} = "		this.color.setGreen(true);";
 $manatocolor{'Red'} = "		this.color.setRed(true);";
 $manatocolor{'White'} = "		this.color.setWhite(true);";
+$manatocolor{'Red or White'} = "		this.color.setWhite(true);\n		this.color.setRed(true);";
 
 my %cardtypes;
 $cardtypes{'Artifact'} = "CardType.ARTIFACT";
