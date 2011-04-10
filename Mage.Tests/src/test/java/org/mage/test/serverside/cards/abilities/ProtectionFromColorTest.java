@@ -18,6 +18,7 @@ public class ProtectionFromColorTest extends CardTestBase {
 
 		// tapped White Knight with Protection from Black
 		addCard(Constants.Zone.BATTLEFIELD, computerB, "White Knight", 1, true);
+		addCard(Constants.Zone.BATTLEFIELD, computerB, "Runeclaw Bear", 1, true);
 		// one not tapped White Knight to prevent AI from attacking
 		addCard(Constants.Zone.BATTLEFIELD, computerB, "White Knight", 1, false);
 
@@ -31,6 +32,7 @@ public class ProtectionFromColorTest extends CardTestBase {
 
 		// no one should be destroyed
 		assertPermanentCount(computerB, "White Knight", 2);
+		assertPermanentCount(computerB, "Runeclaw Bear", 0);
 	}
 
 	@Test
