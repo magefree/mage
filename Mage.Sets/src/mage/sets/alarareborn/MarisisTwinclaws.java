@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class MarisisTwinclaws extends CardImpl<MarisisTwinclaws> {
 
     public MarisisTwinclaws (UUID ownerId) {
-        super(ownerId, 140, "Marisi's Twinclaws", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}R/W{G}");
+        super(ownerId, 140, "Marisi's Twinclaws", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R/W}{G}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Cat");
         this.subtype.add("Warrior");
