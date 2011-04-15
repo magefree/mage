@@ -119,4 +119,8 @@ class ConsumingVaporsEffect extends OneShotEffect<ConsumingVaporsEffect> {
 		return new ConsumingVaporsEffect(this);
 	}
 
+    @Override
+    public String getText(Ability source) {
+        return "Target player sacrifices a creature. You gain life equal to that creature's toughness";
+    }
 }

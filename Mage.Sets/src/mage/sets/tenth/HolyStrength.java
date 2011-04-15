@@ -40,6 +40,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -64,8 +65,7 @@ public class HolyStrength extends CardImpl<HolyStrength> {
 		this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
 		Ability ability = new EnchantAbility(auraTarget.getTargetName());
 		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HolyStrengthEffect()));
-
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield)));
 	}
 
 	public HolyStrength(final HolyStrength card) {
@@ -75,61 +75,5 @@ public class HolyStrength extends CardImpl<HolyStrength> {
 	@Override
 	public HolyStrength copy() {
 		return new HolyStrength(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "104527_typ_reg_sty_010.jpg";
-	}
-}
-
-class HolyStrengthEffect extends ContinuousEffectImpl<HolyStrengthEffect> {
-
-	public HolyStrengthEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-	}
-
-	public HolyStrengthEffect(final HolyStrengthEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public HolyStrengthEffect copy() {
-		return new HolyStrengthEffect(this);
-	}
-
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-			if (creature != null) {
-				switch (layer) {
-					case PTChangingEffects_7:
-						if (sublayer == SubLayer.ModifyPT_7c) {
-							creature.addPower(1);
-							creature.addToughness(2);
-						}
-						break;
-				}
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
-
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.PTChangingEffects_7;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Enchanted creature gets +1/+2";
 	}
 }
