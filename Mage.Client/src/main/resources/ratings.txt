@@ -20,6 +20,9 @@
 1153 : Martial Coup
 1151 : Burst Lightning
 1147 : Pyroclasm
+1147 : Rhox War Monk
+1147 : Gatekeeper of Malakir
+1147 : Arrest
 1147 : Grave Titan
 1146 : Steel Overseer
 1146 : Whispersilk Cloak
@@ -28,9 +31,11 @@
 1135 : Frost Titan
 1134 : Gideon Jura
 1132 : Ob Nixilis, the Fallen
+1130 : Grasp of Darkness
 1129 : Bloodbraid Elf
 1128 : Howling Banshee
 1128 : Doom Blade
+1125 : Bonds of Quicksilver
 1124 : Ajani Vengeant
 1122 : Armored Ascension
 1121 : Kor Skyfisher
@@ -101,7 +106,6 @@
 1077 : Mitotic Slime
 1076 : Sphinx of the Steel Wind
 1076 : Lorescale Coatl
-1076 : Grasp of Darkness
 1075 : Grand Architect
 1075 : Spikeshot Elder
 1075 : Tattered Drake
@@ -123,9 +127,6 @@
 1068 : Sword of Body and Mind
 1066 : Plated Geopede
 1065 : Protean Hydra
-1065 : Rhox War Monk
-1065 : Gatekeeper of Malakir
-1065 : Arrest
 1065 : Ice Cage
 1065 : Acidic Slime
 1064 : Madrush Cyclops
@@ -134,7 +135,6 @@
 1063 : Crystal Ball
 1063 : Joraga Treespeaker
 1063 : Arbor Elf
-1062 : Bonds of Quicksilver
 1062 : Ancient Hellkite
 1062 : Jenara, Asura of War
 1062 : Jagwasp Swarm

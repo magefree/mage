@@ -76,7 +76,11 @@ public class TablePlayerPanel extends javax.swing.JPanel {
 			try {
 				Integer index = Integer.parseInt(Config.defaultOtherPlayerIndex); 
 				cbPlayerType.setSelectedIndex(index);
-			} catch (NumberFormatException e) {}
+			}
+			catch (NumberFormatException e) {}
+			catch (IllegalArgumentException iae) {
+				logger.warning("Wrong parameter for default AI type in config.");
+			}
 		}
 	}
 
