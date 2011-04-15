@@ -32,6 +32,7 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -61,7 +62,7 @@ public class PistonSledge extends CardImpl<PistonSledge> {
         this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new PistonSledgeEquipCost()));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1)));
 
-		Ability ability = new EntersBattlefieldTriggeredAbility(new AttachEffect(Constants.Outcome.AddAbility), false);
+		Ability ability = new EntersBattlefieldTriggeredAbility(new PistonSledgeEffect(Constants.Outcome.AddAbility), false);
 		ability.addTarget(new TargetControlledCreaturePermanent());
 		this.addAbility(ability);
     }
@@ -74,10 +75,6 @@ public class PistonSledge extends CardImpl<PistonSledge> {
     public PistonSledge copy() {
         return new PistonSledge(this);
     }
-    
-	public String getText(Ability source) {
-		return "When Piston Sledge enters the battlefield, attach it to target creature you control.\nEquipped creature gets +3/+1.\nEquip-Sacrifice an artifact";
-	}
 }
 
 class PistonSledgeEquipCost extends AlternativeCost<PistonSledgeEquipCost> {
@@ -106,4 +103,19 @@ class PistonSledgeEquipCost extends AlternativeCost<PistonSledgeEquipCost> {
 		return " sacrifice an artifact";
 	}
 
+}
+
+class PistonSledgeEffect extends AttachEffect{
+	public PistonSledgeEffect(Outcome outcome) {
+		super(outcome);
+	}
+
+	public PistonSledgeEffect(final AttachEffect effect) {
+		super(effect);
+	}
+
+	@Override
+	public String getText(Ability source) {
+		return "attach it to target creature you control";
+	}
 }
