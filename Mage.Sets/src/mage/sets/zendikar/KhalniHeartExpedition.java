@@ -40,7 +40,7 @@ import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.effects.common.SearchLibraryPutInPlayEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;

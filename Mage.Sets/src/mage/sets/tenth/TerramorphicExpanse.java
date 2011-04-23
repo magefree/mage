@@ -36,7 +36,7 @@ import mage.Constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.SearchLibraryPutInPlayEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;

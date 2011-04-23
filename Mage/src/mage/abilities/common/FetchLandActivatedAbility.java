@@ -35,7 +35,7 @@ import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.SearchLibraryPutInPlayEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInLibrary;

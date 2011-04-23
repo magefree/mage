@@ -33,7 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.SearchLibraryRevealPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;

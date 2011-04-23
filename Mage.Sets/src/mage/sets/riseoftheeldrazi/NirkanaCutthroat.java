@@ -26,51 +26,61 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.worldwake;
+package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.LevelAbility;
+import mage.abilities.keyword.LevelUpAbility;
+import mage.cards.LevelerCard;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class PilgrimsEye extends CardImpl<PilgrimsEye> {
-    private static FilterCard filter = new FilterCard("basic land card");
+public class NirkanaCutthroat extends LevelerCard<NirkanaCutthroat> {
 
-    static {
-        filter.getSupertype().add("Basic");
-		filter.setScopeSupertype(Filter.ComparisonScope.Any);
-		filter.getCardType().add(CardType.LAND);
-		filter.setScopeCardType(Filter.ComparisonScope.Any);
+    public NirkanaCutthroat (UUID ownerId) {
+        super(ownerId, 119, "Nirkana Cutthroat", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Vampire");
+        this.subtype.add("Warrior");
+		this.color.setBlack(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
+        this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}{B}")));
+
+        Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
+        abilities1.add(DeathtouchAbility.getInstance());
+        this.getLevels().add(new LevelAbility(1, 2, abilities1, 4, 3));
+
+        Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
+        abilities2.add(FirstStrikeAbility.getInstance());
+        abilities2.add(DeathtouchAbility.getInstance());
+        this.getLevels().add(new LevelAbility(3, -1, abilities2, 5, 4));
     }
 
-    public PilgrimsEye (UUID ownerId) {
-        super(ownerId, 128, "Pilgrim's Eye", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "WWK";
-        this.subtype.add("Thopter");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new EntersBattlefieldAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter)), "you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library"));
-    }
-
-    public PilgrimsEye (final PilgrimsEye card) {
+    public NirkanaCutthroat (final NirkanaCutthroat card) {
         super(card);
     }
 
     @Override
-    public PilgrimsEye copy() {
-        return new PilgrimsEye(this);
+    public NirkanaCutthroat copy() {
+        return new NirkanaCutthroat(this);
     }
 
 }

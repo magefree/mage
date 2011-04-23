@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.search;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,59 +35,70 @@ import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author LokiX, BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com
  */
-public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutInHandEffect> {
+public class SearchLibraryRevealPutInHandEffect extends SearchEffect<SearchLibraryRevealPutInHandEffect> {
 
-    public SearchLibraryPutInHandEffect(TargetCardInLibrary target) {
+	public SearchLibraryRevealPutInHandEffect(TargetCardInLibrary target) {
 		super(target, Outcome.DrawCard);
-    }
+	}
 
-	public SearchLibraryPutInHandEffect(final SearchLibraryPutInHandEffect effect) {
+	public SearchLibraryRevealPutInHandEffect(final SearchLibraryRevealPutInHandEffect effect) {
 		super(effect);
 	}
 
 	@Override
-	public SearchLibraryPutInHandEffect copy() {
-		return new SearchLibraryPutInHandEffect(this);
+	public SearchLibraryRevealPutInHandEffect copy() {
+		return new SearchLibraryRevealPutInHandEffect(this);
 	}
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Player player = game.getPlayer(source.getControllerId());
 		player.searchLibrary(target, game);
-        if (target.getTargets().size() > 0) {
-            for (UUID cardId: (List<UUID>)target.getTargets()) {
-                Card card = player.getLibrary().remove(cardId, game);
-                if (card != null){
+		if (target.getTargets().size() > 0) {
+			Cards revealed = new CardsImpl();
+			for (UUID cardId: (List<UUID>)target.getTargets()) {
+				Card card = player.getLibrary().remove(cardId, game);
+				if (card != null) {
 					card.moveToZone(Zone.HAND, source.getId(), game, false);
-                }
-            }
-            player.shuffleLibrary(game);
-        }
-        return true;
-    }
+					revealed.add(card);
+				}
+			}
+			player.shuffleLibrary(game);
+			player.revealCards("Search", revealed, game);
+		}
+		return true;
+	}
 
-    @Override
-    public String getText(Ability source) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Search your library for ");
-        if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
+	@Override
+	public String getText(Ability source) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Search your library for ");
+		if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
 			sb.append("up to ").append(target.getMaxNumberOfTargets()).append(" ");
-			sb.append(target.getTargetName()).append(" and put them into your hand");
+			sb.append(target.getTargetName()).append(", reveal them, and put them into your hand");
 		}
 		else {
-			sb.append("a ").append(target.getTargetName()).append(" and put that card into your hand");
+			sb.append("a ").append(target.getTargetName()).append(", reveal that card, and put it into your hand");
 		}
 		sb.append(". Then shuffle your library");
 
 		return sb.toString();
-    }
+	}
+
+//	@Override
+//	public void setSource(Ability ability) {
+//		super.setSource(ability);
+//		target.setAbility(ability);
+//	}
 
 }

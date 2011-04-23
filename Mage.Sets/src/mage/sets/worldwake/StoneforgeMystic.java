@@ -38,7 +38,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PlayTargetWithoutPayingManaEffect;
-import mage.abilities.effects.common.SearchLibraryRevealPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInHand;

@@ -38,7 +38,7 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DiscardTargetEffect;
-import mage.abilities.effects.common.SearchLibraryPutOnLibraryEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;

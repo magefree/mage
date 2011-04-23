@@ -42,7 +42,7 @@ import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.SearchLibraryRevealPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInHand;

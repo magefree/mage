@@ -32,7 +32,7 @@ import mage.Constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.DiscardSourceCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.effects.common.SearchLibraryPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInLibrary;

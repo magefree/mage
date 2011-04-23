@@ -41,7 +41,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.CostModificationEffectImpl;
-import mage.abilities.effects.common.SearchLibraryRevealPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;

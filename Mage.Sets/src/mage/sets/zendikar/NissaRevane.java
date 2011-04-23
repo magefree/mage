@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SearchLibraryPutInPlayEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;

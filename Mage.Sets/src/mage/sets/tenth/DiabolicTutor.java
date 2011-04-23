@@ -31,7 +31,7 @@ package mage.sets.tenth;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.SearchLibraryPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCardInLibrary;
 

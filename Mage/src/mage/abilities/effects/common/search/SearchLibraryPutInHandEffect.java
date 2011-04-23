@@ -26,9 +26,8 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.search;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.Outcome;
@@ -42,38 +41,35 @@ import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LokiX, BetaSteward_at_googlemail.com
  */
-public class SearchLibraryPutOnLibraryEffect extends SearchEffect<SearchLibraryPutOnLibraryEffect> {
+public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutInHandEffect> {
 
-    public SearchLibraryPutOnLibraryEffect(TargetCardInLibrary target) {
+    public SearchLibraryPutInHandEffect(TargetCardInLibrary target) {
 		super(target, Outcome.DrawCard);
     }
 
-	public SearchLibraryPutOnLibraryEffect(final SearchLibraryPutOnLibraryEffect effect) {
+	public SearchLibraryPutInHandEffect(final SearchLibraryPutInHandEffect effect) {
 		super(effect);
 	}
 
 	@Override
-	public SearchLibraryPutOnLibraryEffect copy() {
-		return new SearchLibraryPutOnLibraryEffect(this);
+	public SearchLibraryPutInHandEffect copy() {
+		return new SearchLibraryPutInHandEffect(this);
 	}
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
 		player.searchLibrary(target, game);
-		List<Card> cards = new ArrayList<Card>();
         if (target.getTargets().size() > 0) {
             for (UUID cardId: (List<UUID>)target.getTargets()) {
                 Card card = player.getLibrary().remove(cardId, game);
-                if (card != null)
-					cards.add(card);
+                if (card != null){
+					card.moveToZone(Zone.HAND, source.getId(), game, false);
+                }
             }
             player.shuffleLibrary(game);
-			for (Card card: cards) {
-				card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
-			}
         }
         return true;
     }
@@ -81,7 +77,16 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect<SearchLibraryP
     @Override
     public String getText(Ability source) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Search your library for a ").append(target.getTargetName()).append(", then shuffle your library and put that card on top of it");
+        sb.append("Search your library for ");
+        if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
+			sb.append("up to ").append(target.getMaxNumberOfTargets()).append(" ");
+			sb.append(target.getTargetName()).append(" and put them into your hand");
+		}
+		else {
+			sb.append("a ").append(target.getTargetName()).append(" and put that card into your hand");
+		}
+		sb.append(". Then shuffle your library");
+
 		return sb.toString();
     }
 
