@@ -32,11 +32,12 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
-import mage.filter.FilterPermanent;
-import mage.target.TargetPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -44,7 +45,7 @@ import mage.target.TargetPermanent;
  */
 public class MoltenFrame extends CardImpl<MoltenFrame> {
 
-    private static FilterPermanent filter = new FilterPermanent("artifact");
+    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
 
     static {
 	filter.getCardType().add(CardType.ARTIFACT);
@@ -55,7 +56,8 @@ public class MoltenFrame extends CardImpl<MoltenFrame> {
         super(ownerId, 69, "Molten Frame", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "CON";
         this.color.setRed(true);
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
