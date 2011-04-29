@@ -30,7 +30,6 @@ package mage.client.util;
 
 import static mage.constants.Constants.*;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
@@ -38,7 +37,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.awt.image.MemoryImageSource;
 import java.awt.image.PixelGrabber;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -46,14 +44,9 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
 import mage.cards.CardDimensions;
 import mage.client.components.arcane.UI;
-import mage.sets.Sets;
-import mage.view.AbilityView;
 import mage.view.CardView;
-import mage.view.StackAbilityView;
 
 import com.mortennobel.imagescaling.ResampleOp;
 
@@ -88,10 +81,7 @@ public class ImageHelper {
 	public static BufferedImage loadImage(String ref) {
 		if (!images.containsKey(ref)) {
 			try {
-				if (Config.useResource)
-					images.put(ref, ImageIO.read(ImageHelper.class.getResourceAsStream(ref)));
-				else
-					images.put(ref, ImageIO.read(new File(ref)));
+				images.put(ref, ImageIO.read(ImageHelper.class.getResourceAsStream(ref)));
 			} catch (Exception e) {
 				return null;
 			}
@@ -105,139 +95,10 @@ public class ImageHelper {
 		}
 		
 		BufferedImage background = new BufferedImage(FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT, BufferedImage.TYPE_INT_RGB);
-		Graphics2D g = (Graphics2D) background.getGraphics();
-	    g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT);
-		if (card instanceof StackAbilityView || card instanceof AbilityView) {
-			g.drawImage(Frames.Effect, 0, 0, Color.WHITE, null);
-		}
-		else {
-			g.drawImage(getFrame(card), 0, 0, Color.WHITE, null);
-			if (card.getArt() != null && !card.getArt().equals("")) {
-				BufferedImage art = loadImage(Config.cardArtResourcePath + card.getArt(), ART_MAX_WIDTH, ART_MAX_HEIGHT);
-				g.drawImage(art, CONTENT_MAX_XOFFSET, ART_MAX_YOFFSET, null);
-			}
-
-			if (card.getExpansionSetCode() != null && card.getExpansionSetCode().length() > 0 && card.getRarity() != null && card.getRarity() != Rarity.NA) {
-				try {
-					String symbolCode = Sets.getInstance().get(card.getExpansionSetCode()).getSymbolCode();
-					if (symbolCode != null && symbolCode.length() > 0) {
-						StringBuilder sb = new StringBuilder();
-						sb.append(Config.setIconsResourcePath).append("graphic_").append(symbolCode).append("_").append(card.getRarity().getSymbolCode()).append(".png");
-						BufferedImage icon = loadImage(sb.toString(), ICON_MAX_HEIGHT);
-						if (icon != null)
-							g.drawImage(icon, ICON_MAX_XOFFSET - icon.getWidth(), ICON_MAX_YOFFSET, null);
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				} catch (Error er) {
-					er.printStackTrace();
-				}
-			}
-
-			if (card.getCardTypes() != null && (card.getCardTypes().contains(CardType.CREATURE) || card.getCardTypes().contains(CardType.PLANESWALKER))) {
-				g.drawImage(Frames.PowBoxLeft, POWBOX_MAX_LEFT, POWBOX_MAX_TOP, null);
-				g.drawImage(Frames.PowBoxMid, POWBOX_MAX_LEFT + 7, POWBOX_MAX_TOP, null);
-				g.drawImage(Frames.PowBoxRight, POWBOX_MAX_LEFT + 38, POWBOX_MAX_TOP, null);
-			}
-		}
-
-	    g.dispose();
-
 		backgrounds.put(backgroundName, background);
 		return background;
 	}
 
-	protected static BufferedImage getFrame(CardView card) {
-
-		if (card.getCardTypes().contains(CardType.LAND)) {
-			return getLandFrame(card);
-		}
-		else {
-			if (card.getColor().isColorless()) {
-				return Frames.Grey;
-			} else if (card.getColor().isMulticolored()) {
-				if (card.getColor().getColorCount() > 2)
-					return Frames.Gold;
-				if (card.getColor().isBlack() && card.getColor().isRed()) {
-					if (Frames.BlackRed != null)
-						return Frames.BlackRed;
-				}
-				else if (card.getColor().isBlack() && card.getColor().isGreen()) {
-					if (Frames.BlackGreen != null)
-						return Frames.BlackGreen;
-				}
-				else if (card.getColor().isBlack() && card.getColor().isBlue()) {
-					if (Frames.BlueBlack != null)
-						return Frames.BlueBlack;
-				}
-				else if (card.getColor().isRed() && card.getColor().isBlue()) {
-					if (Frames.BlueRed != null)
-						return Frames.BlueRed;
-				}
-				else if (card.getColor().isGreen() && card.getColor().isBlue()) {
-					if (Frames.GreenBlue != null)
-						return Frames.GreenBlue;
-				}
-				else if (card.getColor().isGreen() && card.getColor().isWhite()) {
-					if (Frames.GreenWhite != null)
-						return Frames.GreenWhite;
-				}
-				else if (card.getColor().isRed() && card.getColor().isGreen()) {
-					if (Frames.RedGreen != null)
-						return Frames.RedGreen;
-				}
-				else if (card.getColor().isRed() && card.getColor().isWhite()) {
-					if (Frames.RedWhite != null)
-						return Frames.RedWhite;
-				}
-				else if (card.getColor().isWhite() && card.getColor().isBlack()) {
-					if (Frames.WhiteBlack != null)
-						return Frames.WhiteBlack;
-				}
-				else if (card.getColor().isWhite() && card.getColor().isBlue()) {
-					if (Frames.WhiteBlue != null)
-						return Frames.WhiteBlue;
-				}
-				return Frames.Gold;
-			} else {
-				if (card.getColor().isBlack()) {
-					return Frames.Black;
-				} else if (card.getColor().isBlue()) {
-					return Frames.Blue;
-				} else if (card.getColor().isRed()) {
-					return Frames.Red;
-				} else if (card.getColor().isGreen()) {
-					return Frames.Green;
-				} else if (card.getColor().isWhite()) {
-					return Frames.White;
-				}
-			}
-		}
-		return Frames.Grey;
-	}
-
-	protected static BufferedImage getLandFrame(CardView card) {
-		if (card.getSuperTypes().contains("Basic")) {
-			if (card.getSubTypes().contains("Forest")) {
-				return Frames.Forest;
-			}
-			else if (card.getSubTypes().contains("Island")) {
-				return Frames.Island;
-			}
-			else if (card.getSubTypes().contains("Mountain")) {
-				return Frames.Mountain;
-			}
-			else if (card.getSubTypes().contains("Plains")) {
-				return Frames.Plains;
-			}
-			else if (card.getSubTypes().contains("Swamp")) {
-				return Frames.Swamp;
-			}
-		}
-		return Frames.Land;
-	}
 
 	public static BufferedImage scaleImage(BufferedImage image, int width, int height) {
 		BufferedImage scaledImage = image;
@@ -291,15 +152,8 @@ public class ImageHelper {
 			int costLeft = xOffset;
 			for (int i = costs.size() - 1; i >= 0; i--) {
 				String symbol = costs.get(i);
-				Image image = Symbols.getSymbol(symbol);
-				if (image != null) {
-					g.drawImage(image, costLeft, yOffset, o);
-					costLeft -= SYMBOL_MAX_SPACE;
-				}
-				else {
-					g.drawString(symbol, costLeft, yOffset + SYMBOL_MAX_SPACE);
-					costLeft -= SYMBOL_MAX_SPACE + 4;
-				}
+				g.drawString(symbol, costLeft, yOffset + SYMBOL_MAX_SPACE);
+				costLeft -= SYMBOL_MAX_SPACE + 4;
 			}
 		}
 	}

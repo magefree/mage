@@ -6,11 +6,23 @@
 	
     <groupId>org.mage</groupId>
     <artifactId>mage-root</artifactId>
-    <version>0.7</version>
+    <version>0.7.2</version>
     <packaging>pom</packaging>
     <name>Mage Root</name>
     <description>Mage Root POM</description>
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <modules>
         <module>Mage</module>
         <module>Mage.Common</module>
@@ -34,6 +46,6 @@
     </repositories>
 
     <properties>
-        <mage-version>0.7</mage-version>
+        <mage-version>0.7.2</mage-version>
     </properties>
 </project>

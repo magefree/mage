@@ -30,6 +30,7 @@ package mage.interfaces;
 
 import java.io.Serializable;
 import java.util.List;
+import mage.utils.MageVersion;
 import mage.view.GameTypeView;
 import mage.view.TournamentTypeView;
 
@@ -44,13 +45,15 @@ public class ServerState implements Serializable {
 	private String[] playerTypes;
 	private String[] deckTypes;
 	private boolean testMode;
+	private MageVersion version;
 
-	public ServerState(List<GameTypeView> gameTypes, List<TournamentTypeView> tournamentTypes, String[] playerTypes, String[] deckTypes, boolean testMode) {
+	public ServerState(List<GameTypeView> gameTypes, List<TournamentTypeView> tournamentTypes, String[] playerTypes, String[] deckTypes, boolean testMode, MageVersion version) {
 		this.gameTypes = gameTypes;
 		this.tournamentTypes = tournamentTypes;
 		this.playerTypes = playerTypes;
 		this.deckTypes = deckTypes;
 		this.testMode = testMode;
+		this.version = version;
 	}
 
 	public List<GameTypeView> getGameTypes() {
@@ -73,4 +76,7 @@ public class ServerState implements Serializable {
 		return testMode;
 	}
 
+	public MageVersion getVersion() {
+		return version;
+	}
 }

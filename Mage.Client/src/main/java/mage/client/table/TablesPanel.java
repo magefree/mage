@@ -101,7 +101,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 				if (state.equals("Join")) {
 					if (isTournament) {
 						logger.info("Joining tournament " + tableId);
-						if (session.joinTournamentTable(roomId, tableId, session.getUserName(), "Human"))
+						if (session.joinTournamentTable(roomId, tableId, session.getUserName(), "Human", 1))
 							tableWaitingDialog.showDialog(roomId, tableId, true);
 					}
 					else {
@@ -311,8 +311,8 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 			options.setRange(RangeOfInfluence.ALL);
 			options.setWinsNeeded(1);
 			table = session.createTable(roomId,	options);
-			session.joinTable(roomId, table.getTableId(), "Human", "Human", Sets.loadDeck("test.dck"));
-			session.joinTable(roomId, table.getTableId(), "Computer", "Computer - default", Sets.loadDeck("test.dck"));
+			session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, Sets.loadDeck("test.dck"));
+			session.joinTable(roomId, table.getTableId(), "Computer", "Computer - default", 1, Sets.loadDeck("test.dck"));
 			hideTables();
 			session.startGame(roomId, table.getTableId());
 		} catch (Exception ex) {

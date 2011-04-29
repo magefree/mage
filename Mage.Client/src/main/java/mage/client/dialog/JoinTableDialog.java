@@ -136,7 +136,7 @@ public class JoinTableDialog extends MageDialog {
 	private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
 		Session session = MageFrame.getSession();
 		try {
-			joined = session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), "Human", Sets.loadDeck(this.newPlayerPanel.getDeckFile()));
+			joined = session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), "Human", 1, Sets.loadDeck(this.newPlayerPanel.getDeckFile()));
 		} catch (Exception ex) {
 			handleError(ex);
 		}

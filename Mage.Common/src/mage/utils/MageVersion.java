@@ -1,5 +1,5 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+* Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -26,54 +26,52 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.client.util;
+package mage.utils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import mage.cards.CardDimensions;
-import mage.util.Logging;
+import java.io.Serializable;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Config {
+public class MageVersion implements Serializable, Comparable<MageVersion> {
 
-	private final static Logger logger = Logging.getLogger(Config.class.getName());
+	private int major;
+	private int minor;
+	private int patch;
 
-	public static final String remoteServer;
-	public static final String serverName;
-	public static final int port;
-	public static final double cardScalingFactor;
-	public static final CardDimensions dimensions;
+	public MageVersion(int major, int minor, int patch) {
+		this.major = major;
+		this.minor = minor;
+		this.patch = patch;
+	}
 	
-	public static final String defaultGameType;
-	public static final String defaultDeckPath;
-	public static final String defaultOtherPlayerIndex;
-	public static final String defaultComputerName;
+	public int getMajor() {
+		return major;
+	}
 
-	static {
-		Properties p = new Properties();
-		try {
-			p.load(new FileInputStream(new File("config/config.properties")));
-		} catch (IOException ex) {
-			logger.log(Level.SEVERE, null, ex);
-		}
-		serverName = p.getProperty("server-name");
-		port = Integer.parseInt(p.getProperty("port"));
-		remoteServer = p.getProperty("remote-server");
-		cardScalingFactor = Double.valueOf(p.getProperty("card-scaling-factor"));
-		defaultGameType = p.getProperty("default-game-type", "Human");
-		defaultDeckPath = p.getProperty("default-deck-path");
-		defaultOtherPlayerIndex = p.getProperty("default-other-player-index");
-		defaultComputerName = p.getProperty("default-computer-name");
-		
-		dimensions = new CardDimensions(cardScalingFactor);
+	public int getMinor() {
+		return minor;
+	}
+
+	public int getPatch() {
+		return patch;
+	}
+
+	@Override
+	public String toString() {
+		return major + "." + minor + "." + patch;
+	}
+
+	@Override
+	public int compareTo(MageVersion o) {
+		if (major != o.major)
+			return major - o.major;
+		if (minor != o.minor)
+			return minor - o.minor;
+		if (patch != o.patch)
+			return patch - o.patch;
+		return 0;
 	}
 
 }

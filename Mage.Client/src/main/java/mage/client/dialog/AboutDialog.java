@@ -34,6 +34,8 @@
 
 package mage.client.dialog;
 
+import mage.client.MageFrame;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -47,7 +49,7 @@ public class AboutDialog extends MageDialog {
     }
 
 	public void showDialog() {
-		this.lblVersion.setText(MageDialog.class.getPackage().getImplementationVersion());
+		this.lblVersion.setText(MageFrame.getVersion().toString());
 		this.setLocation(100, 100);
 		this.setVisible(true);
 	}
@@ -66,7 +68,6 @@ public class AboutDialog extends MageDialog {
         lblVersion = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
 
         setTitle("About MAGE");
 
@@ -77,42 +78,35 @@ public class AboutDialog extends MageDialog {
             }
         });
 
-        jLabel1.setText("MAGE client, version 0.7.1");
+        jLabel1.setText("MAGE client");
 
-        lblVersion.setText("version");
+        lblVersion.setText("0.0.0");
 
         jLabel2.setText("Courtesy: BetaSteward@googlemail.com");
-        
-        jLabel3.setText("Devs: BetaSteward, Nantuko84, Eugen.Rivniy, maurer.it");
 
-        //jLabel4.setText("Thanks: KLo, Cosmo & Fritz");
+        jLabel3.setText("Devs: BetaSteward, Nantuko84, Eugen.Rivniy, maurer.it, Viserion Dragonbourne");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(159, Short.MAX_VALUE)
-                .addComponent(btnOk)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblVersion)
-                .addContainerGap(109, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnOk)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblVersion)
+                        .addContainerGap(311, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addContainerGap(203, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,10 +118,8 @@ public class AboutDialog extends MageDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnOk)
                 .addContainerGap())
         );
@@ -144,7 +136,6 @@ public class AboutDialog extends MageDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblVersion;
     // End of variables declaration//GEN-END:variables
 

@@ -176,6 +176,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 			if (usedStack)
 				pass();
 		}
+		logger.info("Turn " + game.getTurnNum() + " Step " + game.getStep().toString() + " Player " + name + " Life " + life);
 	}
 
 	protected void calculateActions(Game game) {
@@ -337,7 +338,11 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 			} catch (InterruptedException ex) {
 				logger.fatal("can't sleep");
 			}
-			logger.info("Calculated " + root.nodeCount + " nodes in 30s");
+			long endTime = System.nanoTime();
+			long duration = endTime - startTime;
+			logger.info("Timeout - Calculated " + root.nodeCount + " nodes in " + duration/1000000000.0 + "s");
+			nodeCount += root.nodeCount;
+			thinkTime += duration;
 		} catch (ExecutionException e) {
 			logger.fatal("Simulation error", e);
 			task.cancel(true);

@@ -43,6 +43,7 @@ import mage.server.util.ConfigSettings;
 import mage.server.util.config.Plugin;
 import mage.server.util.config.GamePlugin;
 import mage.util.Copier;
+import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 
 /**
@@ -55,7 +56,7 @@ public class Main {
 
 	private final static String testModeArg = "-testMode=";
 	private final static String pluginFolder = "plugins";
-	private final static String version = "0.7.1";
+	private static MageVersion version = new MageVersion(0, 7, 2);
 
 	public static PluginClassLoader classLoader = new PluginClassLoader();
 	public static ServerImpl server;
@@ -164,6 +165,10 @@ public class Main {
 		{
 			file.delete();
 		}
+	}
+
+	public static MageVersion getVersion() {
+		return version;
 	}
 
 }

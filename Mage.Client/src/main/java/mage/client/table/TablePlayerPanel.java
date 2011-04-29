@@ -73,20 +73,18 @@ public class TablePlayerPanel extends javax.swing.JPanel {
 		cbPlayerType.setModel(new DefaultComboBoxModel(session.getPlayerTypes()));
 		this.lblPlayerNum.setText("Player " + playerNum);
 		if (Config.defaultOtherPlayerIndex != null) {
-			try {
+			if (Integer.valueOf(Config.defaultOtherPlayerIndex) >= cbPlayerType.getItemCount())
+				cbPlayerType.setSelectedIndex(cbPlayerType.getItemCount() - 1);
+			else {
 				Integer index = Integer.parseInt(Config.defaultOtherPlayerIndex); 
 				cbPlayerType.setSelectedIndex(index);
-			}
-			catch (NumberFormatException e) {}
-			catch (IllegalArgumentException iae) {
-				logger.warning("Wrong parameter for default AI type in config.");
 			}
 		}
 	}
 
 	public boolean joinTable(UUID roomId, UUID tableId) throws FileNotFoundException, IOException, ClassNotFoundException {
 		if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
-			return session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), (String)this.cbPlayerType.getSelectedItem(), Sets.loadDeck(this.newPlayerPanel.getDeckFile()));
+			return session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), (String)this.cbPlayerType.getSelectedItem(), this.newPlayerPanel.getLevel(), Sets.loadDeck(this.newPlayerPanel.getDeckFile()));
  		}
 		return true;
 	}

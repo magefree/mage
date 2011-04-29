@@ -55,6 +55,7 @@ import mage.server.game.ReplayManager;
 import mage.server.tournament.TournamentFactory;
 import mage.server.tournament.TournamentManager;
 import mage.server.util.ThreadExecutor;
+import mage.utils.MageVersion;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.DraftPickView;
 import mage.view.GameView;
@@ -105,10 +106,13 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public UUID registerClient(String userName, UUID clientId) throws MageException, RemoteException {
+	public UUID registerClient(String userName, UUID clientId, MageVersion version) throws MageException, RemoteException {
 
-		UUID sessionId = SessionManager.getInstance().createSession(userName, clientId);
+		UUID sessionId = null;
 		try {
+			if (version.compareTo(Main.getVersion()) != 0)
+				throw new MageException("Wrong client version " + version + ", expecting version " + Main.getVersion());
+			sessionId = SessionManager.getInstance().createSession(userName, clientId);
 			logger.info("Session " + sessionId + " created for user " + userName + " at " + getClientHost());
 		} catch (Exception ex) {
 			handleException(ex);
@@ -161,7 +165,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public boolean joinTable(UUID sessionId, UUID roomId, UUID tableId, String name, String playerType, DeckCardLists deckList) throws MageException, GameException {
+	public boolean joinTable(UUID sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException, GameException {
 		try {
 			boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTable(sessionId, tableId, name, playerType, deckList);
 			logger.info("Session " + sessionId + " joined table " + tableId);
@@ -176,7 +180,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public boolean joinTournamentTable(UUID sessionId, UUID roomId, UUID tableId, String name, String playerType) throws MageException, GameException {
+	public boolean joinTournamentTable(UUID sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill) throws MageException, GameException {
 		try {
 			boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTournamentTable(sessionId, tableId, name, playerType);
 			logger.info("Session " + sessionId + " joined table " + tableId);
@@ -726,7 +730,8 @@ public class ServerImpl extends RemoteServer implements Server {
 					TournamentFactory.getInstance().getTournamentTypes(),
 					PlayerFactory.getInstance().getPlayerTypes().toArray(new String[0]),
 					DeckValidatorFactory.getInstance().getDeckTypes().toArray(new String[0]),
-					testMode);
+					testMode,
+					Main.getVersion());
 		}
 		catch (Exception ex) {
 			handleException(ex);

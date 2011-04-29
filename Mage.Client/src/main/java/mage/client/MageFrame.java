@@ -76,6 +76,7 @@ import mage.client.draft.DraftPane;
 import mage.client.game.GamePane;
 import mage.client.table.TablesPane;
 import mage.client.tournament.TournamentPane;
+import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 
 /**
@@ -90,6 +91,7 @@ public class MageFrame extends javax.swing.JFrame {
     private static Preferences prefs = Preferences.userNodeForPackage(MageFrame.class);
     private JLabel title;
     private Rectangle titleRectangle;
+	private static MageVersion version = new MageVersion(0, 7, 2);
 
     /**
      * @return the session
@@ -106,12 +108,16 @@ public class MageFrame extends javax.swing.JFrame {
         return prefs;
     }
 
+	public static MageVersion getVersion() {
+		return version;
+	}
+
     /**
      * Creates new form MageFrame
      */
     public MageFrame() {
 
-        setTitle("Mage, version 0.7.1");
+        setTitle("Mage, version " + version);
 
         EDTExceptionHandler.registerExceptionHandler();
         addWindowListener(new WindowAdapter() {

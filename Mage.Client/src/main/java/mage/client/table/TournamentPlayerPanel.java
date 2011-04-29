@@ -66,7 +66,7 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
 
 	public boolean joinTournamentTable(UUID roomId, UUID tableId) {
 		if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
-			return session.joinTournamentTable(roomId, tableId, this.txtPlayerName.getText(), (String)this.cbPlayerType.getSelectedItem());
+			return session.joinTournamentTable(roomId, tableId, this.txtPlayerName.getText(), (String)this.cbPlayerType.getSelectedItem(), Integer.valueOf((String)this.cbLevel.getSelectedItem()));
  		}
 		return true;
 	}
@@ -87,6 +87,8 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
         pnlPlayerName = new javax.swing.JPanel();
         txtPlayerName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        cbLevel = new javax.swing.JComboBox();
 
         jLabel1.setLabelFor(cbPlayerType);
         jLabel1.setText("Type:");
@@ -98,24 +100,34 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
             }
         });
 
-        lblPlayerNum.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblPlayerNum.setFont(new java.awt.Font("Tahoma", 1, 11));
         lblPlayerNum.setText("Player Num:");
 
         jLabel2.setText("Name:");
+
+        jLabel3.setText("Skill:");
+
+        cbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
 
         javax.swing.GroupLayout pnlPlayerNameLayout = new javax.swing.GroupLayout(pnlPlayerName);
         pnlPlayerName.setLayout(pnlPlayerNameLayout);
         pnlPlayerNameLayout.setHorizontalGroup(
             pnlPlayerNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPlayerNameLayout.createSequentialGroup()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
+                .addComponent(txtPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
         );
         pnlPlayerNameLayout.setVerticalGroup(
             pnlPlayerNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPlayerNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(txtPlayerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3)
                 .addComponent(jLabel2))
         );
 
@@ -128,7 +140,7 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbPlayerType, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbPlayerType, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -158,9 +170,11 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox cbLevel;
     private javax.swing.JComboBox cbPlayerType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblPlayerNum;
     private javax.swing.JPanel pnlPlayerName;
     private javax.swing.JTextField txtPlayerName;

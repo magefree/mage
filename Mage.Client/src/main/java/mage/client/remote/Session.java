@@ -97,7 +97,7 @@ public class Session {
 			this.server = (Server) reg.lookup(Config.remoteServer);
 			this.userName = userName;
 			this.client = new Client(this, frame, userName);
-			sessionId = server.registerClient(userName, client.getId());
+			sessionId = server.registerClient(userName, client.getId(), frame.getVersion());
 			callbackDaemon = new CallbackClientDaemon(sessionId, client, server);
 			serverState = server.getServerState();
 			logger.info("Connected to RMI server at " + serverName + ":" + port);
@@ -262,9 +262,9 @@ public class Session {
 		return false;
 	}
 
-	public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, DeckCardLists deckList) {
+	public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList) {
 		try {
-			return server.joinTable(sessionId, roomId, tableId, playerName, playerType, deckList);
+			return server.joinTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -275,9 +275,9 @@ public class Session {
 		return false;
 	}
 
-	public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String playerType) {
+	public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill) {
 		try {
-			return server.joinTournamentTable(sessionId, roomId, tableId, playerName, playerType);
+			return server.joinTournamentTable(sessionId, roomId, tableId, playerName, playerType, skill);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
