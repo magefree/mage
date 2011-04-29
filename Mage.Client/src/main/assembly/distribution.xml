@@ -28,7 +28,8 @@
         <includes>
             <include>org.mage:Mage-Theme-Plugin</include>
             <include>org.mage:Mage-Card-Plugin</include>
-            <include>org.mage:Mage-Counter-Plugin</include>           
+            <include>org.mage:Mage-Counter-Plugin</include>
+            <include>org.mage:Mage-Counter-Plugin</include>
         </includes>
     </dependencySet>
   </dependencySets>
@@ -37,6 +38,14 @@
       <filtered>true</filtered>
       <directory>release/</directory>
       <outputDirectory>/</outputDirectory>      
-    </fileSet>    
+    </fileSet>
+    <fileSet>
+        <filtered>false</filtered>
+        <directory>target/</directory>
+        <includes>
+            <include>*.exe</include>
+        </includes>
+        <outputDirectory>/</outputDirectory>
+    </fileSet>
   </fileSets>
 </assembly>

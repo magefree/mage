@@ -1,18 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
-  
+
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-root</artifactId>
         <version>0.7.2</version>
     </parent>
-	
+
     <artifactId>Mage-Server</artifactId>
     <packaging>jar</packaging>
-    <name>Mage Server</name>   
-	
+    <name>Mage Server</name>
+
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -39,7 +39,7 @@
             <artifactId>jaxb-impl</artifactId>
             <version>2.1.12</version>
         </dependency>
-		
+
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -94,20 +94,20 @@
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>Mage-Tournament-BoosterDraft</artifactId>
-			<version>${project.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>Mage-Tournament-Sealed</artifactId>
-			<version>${project.version}</version>
-			<scope>runtime</scope>
-		</dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Mage-Tournament-BoosterDraft</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Mage-Tournament-Sealed</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
-	
+
     <pluginRepositories>
         <pluginRepository>
             <id>maven2-repository.dev.java.net</id>
@@ -115,7 +115,7 @@
             <url>http://download.java.net/maven/2</url>
         </pluginRepository>
     </pluginRepositories>
-	
+
     <build>
         <plugins>
             <plugin>
@@ -171,11 +171,49 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>l4j-mage-server</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <headerType>console</headerType>
+                            <outfile>target/mage-server-${project.version}.exe</outfile>
+                            <jar>target/mage-server.jar</jar>
+                            <errTitle>Mage Server</errTitle>
+                            <classPath>
+                                <mainClass>mage.server.Main</mainClass>
+                                <addDependencies>true</addDependencies>
+                                <preCp>anything</preCp>
+                            </classPath>
+                            <jre>
+                                <minVersion>1.5.0</minVersion>
+                            </jre>
+                            <versionInfo>
+                                <fileVersion>0.7.2.0</fileVersion>
+                                <txtFileVersion>MAGE Server</txtFileVersion>
+                                <fileDescription>Mage Server</fileDescription>
+                                <copyright>(C) Mage Development Team</copyright>
+                                <productVersion>0.7.2.0</productVersion>
+                                <txtProductVersion>MAGE Server</txtProductVersion>
+                                <productName>MAGE</productName>
+                                <internalName>Mage-Server</internalName>
+                                <originalFilename>original.exe</originalFilename>
+                            </versionInfo>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
-    
+
         <finalName>mage-server</finalName>
     </build>
-  
+
     <properties/>
-	
+
 </project>
