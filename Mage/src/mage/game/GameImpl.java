@@ -95,6 +95,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	protected transient GameStates gameStates = new GameStates();
 	protected RangeOfInfluence range;
 	protected MultiplayerAttackOption attackOption;
+	protected GameOptions gameOptions;
 
 	@Override
 	public abstract T copy();
@@ -307,7 +308,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public void start(UUID choosingPlayerId) {
-		start(choosingPlayerId, GameOptions.getDefault());
+		start(choosingPlayerId, this.gameOptions != null ? gameOptions : GameOptions.getDefault());
 	}
 
 	@Override
@@ -1101,5 +1102,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	public void clearGraveyard(UUID playerId) {
 
+	}
+
+	public void setGameOptions(GameOptions options) {
+		this.gameOptions = options;
 	}
 }

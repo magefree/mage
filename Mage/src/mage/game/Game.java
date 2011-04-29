@@ -157,6 +157,9 @@ public interface Game extends MageItem, Serializable {
 	public void restoreState();
 	public void removeLastBookmark();
 
+	// game options
+	public void setGameOptions(GameOptions options);
+
 	// game cheats (for tests only)
 	public void cheat(UUID ownerId, Map<Zone, String> commands);
 	public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard);

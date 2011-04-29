@@ -34,6 +34,7 @@
 
 package mage.client;
 
+import mage.Constants;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.client.cards.CardsStorage;
@@ -76,7 +77,10 @@ import mage.client.draft.DraftPane;
 import mage.client.game.GamePane;
 import mage.client.table.TablesPane;
 import mage.client.tournament.TournamentPane;
+import mage.game.match.MatchOptions;
 import mage.utils.MageVersion;
+import mage.sets.Sets;
+import mage.view.TableView;
 import org.apache.log4j.Logger;
 
 /**
@@ -506,10 +510,11 @@ public class MageFrame extends javax.swing.JFrame {
         lblStatus = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JToolBar.Separator();
         btnCollectionViewer = new JButton();
+	    jSeparator7 = new javax.swing.JToolBar.Separator();
+        btnChallenges = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         //setMinimumSize(new java.awt.Dimension(1024, 768));
-
 
         mageToolbar.setFloatable(false);
         mageToolbar.setRollover(true);
@@ -565,6 +570,19 @@ public class MageFrame extends javax.swing.JFrame {
         });
         mageToolbar.add(btnCollectionViewer);
         mageToolbar.add(jSeparator6);
+
+		btnChallenges.setText("Challenges");
+        btnChallenges.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnChallenges.setFocusable(false);
+        btnChallenges.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnChallenges.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnChallenges.addActionListener(new java.awt.event.ActionListener() {
+	        public void actionPerformed(java.awt.event.ActionEvent evt) {
+		        btnChallengesActionPerformed(evt);
+	        }
+        });
+        mageToolbar.add(btnChallenges);
+        mageToolbar.add(jSeparator7);
 
         btnPreferences.setText("Preferences");
         btnPreferences.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -633,6 +651,31 @@ public class MageFrame extends javax.swing.JFrame {
     private void btnCollectionViewerActionPerformed(java.awt.event.ActionEvent evt) {
         showCollectionViewer();
     }
+
+	private void btnChallengesActionPerformed(java.awt.event.ActionEvent evt) {
+				TableView table;
+		try {
+			MatchOptions options = new MatchOptions("1", "Two Player Duel");
+			options.getPlayerTypes().add("Human");
+			options.getPlayerTypes().add("Computer - default");
+			options.setDeckType("Limited");
+			options.setAttackOption(Constants.MultiplayerAttackOption.LEFT);
+			options.setRange(Constants.RangeOfInfluence.ALL);
+			options.setWinsNeeded(1);
+
+			//TODO: maybe we should have separate room id for quests (so they won't be visible in main tables list)
+			UUID roomId = MageFrame.getSession().getMainRoomId();
+
+			table = session.createTable(roomId,	options);
+			session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, Sets.loadDeck("UW Control.dck"));
+			session.joinTable(roomId, table.getTableId(), "Computer", "Computer - default", 1, Sets.loadDeck("UW Control.dck"));
+
+			//hideTables();
+			session.startChallenge(roomId, table.getTableId(), UUID.randomUUID());
+		} catch (Exception ex) {
+			//handleError(ex);
+		}
+	}
 
     private void btnPreferencesActionPerformed(java.awt.event.ActionEvent evt) {
         PhasesDialog.main(new String[]{});
@@ -741,6 +784,7 @@ public class MageFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnConnect;
     private javax.swing.JButton btnDeckEditor;
     private javax.swing.JButton btnCollectionViewer;
+	private javax.swing.JButton btnChallenges;
     private javax.swing.JButton btnPreferences;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnGames;
@@ -751,6 +795,7 @@ public class MageFrame extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator6;
+	private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JToolBar mageToolbar;
     // End of variables declaration//GEN-END:variables

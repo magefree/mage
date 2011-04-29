@@ -267,6 +267,23 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
+	public void startChallenge(final UUID sessionId, final UUID roomId, final UUID tableId, final UUID challengeId) throws RemoteException, MageException {
+		try {
+			rmiExecutor.execute(
+				new Runnable() {
+					@Override
+					public void run() {
+						TableManager.getInstance().startChallenge(sessionId, roomId, tableId, challengeId);
+					}
+				}
+			);
+		}
+		catch (Exception ex) {
+			handleException(ex);
+		}
+	}
+
+	@Override
 	public void startTournament(final UUID sessionId, final UUID roomId, final UUID tableId) throws MageException {
 		try {
 			rmiExecutor.execute(

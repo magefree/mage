@@ -101,6 +101,9 @@ public interface Server extends Remote, CallbackServer {
 	public void joinDraft(UUID draftId, UUID sessionId) throws RemoteException, MageException;
 	public DraftPickView sendCardPick(UUID draftId, UUID sessionId, UUID cardId) throws RemoteException, MageException;
 
+	//challenge methods
+	public void startChallenge(UUID sessionId, UUID roomId, UUID tableId, UUID challengeId) throws RemoteException, MageException;
+
 	//replay methods
 	public void replayGame(UUID gameId, UUID sessionId) throws RemoteException, MageException;
 	public void startReplay(UUID gameId, UUID sessionId) throws RemoteException, MageException;

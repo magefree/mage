@@ -573,6 +573,18 @@ public class Session {
 		return false;
 	}
 
+	public boolean startChallenge(UUID roomId, UUID tableId, UUID challengeId) {
+		try {
+			server.startChallenge(sessionId, roomId, tableId, challengeId);
+			return true;
+		} catch (RemoteException ex) {
+			handleRemoteException(ex);
+		} catch (MageException ex) {
+			handleMageException(ex);
+		}
+		return false;
+	}
+
 	public boolean submitDeck(UUID tableId, DeckCardLists deck) {
 		try {
 			return server.submitDeck(sessionId, tableId, deck);
@@ -697,6 +709,10 @@ public class Session {
 
 	public MageUI getUI() {
 		return ui;
+	}
+
+	public Server getServerRef() {
+		return server;
 	}
 
 }

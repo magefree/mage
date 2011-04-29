@@ -138,6 +138,10 @@ public class TableManager {
 		controllers.get(tableId).startMatch();
 	}
 
+	public void startChallenge(UUID sessionId, UUID roomId, UUID tableId, UUID challengeId) {
+		controllers.get(tableId).startChallenge(sessionId, challengeId);
+	}
+
 	public void startTournament(UUID sessionId, UUID roomId, UUID tableId) {
 		controllers.get(tableId).startTournament(sessionId);
 	}

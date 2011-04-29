@@ -28,34 +28,33 @@
 
 package mage.server;
 
-import mage.server.draft.DraftManager;
-import mage.server.tournament.TournamentFactory;
-import mage.server.tournament.TournamentManager;
-import mage.game.Table;
-import java.util.Map.Entry;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import mage.Constants.RangeOfInfluence;
 import mage.Constants.TableState;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
-import mage.game.match.Match;
+import mage.game.GameOptions;
 import mage.game.Seat;
+import mage.game.Table;
 import mage.game.draft.Draft;
 import mage.game.draft.DraftPlayer;
 import mage.game.events.Listener;
 import mage.game.events.TableEvent;
+import mage.game.match.Match;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
 import mage.players.Player;
-import mage.server.game.DeckValidatorFactory;
-import mage.server.game.GameFactory;
-import mage.server.game.GameManager;
-import mage.server.game.PlayerFactory;
-import mage.server.game.ReplayManager;
+import mage.server.challenge.ChallengeManager;
+import mage.server.draft.DraftManager;
+import mage.server.game.*;
+import mage.server.tournament.TournamentFactory;
+import mage.server.tournament.TournamentManager;
 import org.apache.log4j.Logger;
+
+import java.util.Map.Entry;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -229,6 +228,38 @@ public class TableController {
 		if (sessionId.equals(this.sessionId)) {
 			startMatch();
 		}
+	}
+
+	public synchronized void startChallenge(UUID sessionId, UUID challengeId) {
+		if (sessionId.equals(this.sessionId)) {
+			try {
+				match.startMatch();
+				match.startGame();
+				table.initGame();
+				GameOptions options = new GameOptions();
+				options.testMode = true;
+				match.getGame().setGameOptions(options);
+				GameManager.getInstance().createGameSession(match.getGame(), sessionPlayerMap, table.getId(), null);
+				ChallengeManager.getInstance().prepareChallenge(getPlayerId(), match);
+				SessionManager sessionManager = SessionManager.getInstance();
+				for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
+					sessionManager.getSession(entry.getKey()).gameStarted(match.getGame().getId(), entry.getValue());
+				}
+			} catch (GameException ex) {
+				logger.fatal(null, ex);
+			}
+		}
+	}
+
+	private UUID getPlayerId() throws GameException {
+		UUID playerId = null;
+		for (Entry<UUID, UUID> entry : sessionPlayerMap.entrySet()) {
+			playerId = entry.getValue();
+			break;
+		}
+		if (playerId == null)
+			throw new GameException("Couldn't find a player in challenge mode.");
+		return playerId;
 	}
 
 	public synchronized void startMatch() {
