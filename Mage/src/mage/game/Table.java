@@ -157,8 +157,12 @@ public class Table implements Serializable {
 
 	public void leaveTable(UUID playerId) {
 		for (int i = 0; i < numSeats; i++ ) {
-			if (seats[i].getPlayer().getId().equals(playerId))
+			if (seats[i].getPlayer().getId().equals(playerId)) {
 				seats[i].setPlayer(null);
+				if (state == TableState.STARTING)
+					state = TableState.WAITING;
+				break;
+			}
 		}
 	}
 

@@ -100,6 +100,11 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 		return Integer.valueOf((String)this.cbLevel.getSelectedItem());
 	}
 
+	public void showLevel(boolean show) {
+		this.cbLevel.setVisible(show);
+		this.lblLevel.setVisible(show);
+	}
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

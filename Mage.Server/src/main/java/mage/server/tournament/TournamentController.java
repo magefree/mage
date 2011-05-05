@@ -31,8 +31,6 @@ package mage.server.tournament;
 import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mage.cards.decks.Deck;
 import mage.game.GameException;
 import mage.game.Table;
@@ -47,9 +45,9 @@ import mage.game.tournament.TournamentPlayer;
 import mage.server.ChatManager;
 import mage.server.TableManager;
 import mage.server.util.ThreadExecutor;
-import mage.util.Logging;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.TournamentView;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -57,7 +55,7 @@ import mage.view.TournamentView;
  */
 public class TournamentController {
 
-	private final static Logger logger = Logging.getLogger(TournamentController.class.getName());
+	private final static Logger logger = Logger.getLogger(TournamentController.class);
 
 	private UUID sessionId;
 	private UUID chatId;
@@ -83,7 +81,7 @@ public class TournamentController {
 					switch (event.getEventType()) {
 						case INFO:
 							ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK);
-							logger.finest(tournament.getId() + " " + event.getMessage());
+							logger.debug(tournament.getId() + " " + event.getMessage());
 							break;
 						case START_DRAFT:
 							startDraft(event.getDraft());
@@ -160,7 +158,7 @@ public class TournamentController {
 	private synchronized void startTournament() {
 		for (final Entry<UUID, TournamentSession> entry: tournamentSessions.entrySet()) {
 			if (!entry.getValue().init(getTournamentView())) {
-				logger.severe("Unable to initialize client");
+				logger.fatal("Unable to initialize client");
 				//TODO: generate client error message
 				return;
 			}
@@ -179,7 +177,7 @@ public class TournamentController {
 			tableManager.startMatch(null, table.getId());
 			pair.setMatch(tableManager.getMatch(table.getId()));
 		} catch (GameException ex) {
-			Logger.getLogger(TournamentController.class.getName()).log(Level.SEVERE, null, ex);
+			logger.fatal("TournamentController startMatch error", ex);
 		}
 	}
 

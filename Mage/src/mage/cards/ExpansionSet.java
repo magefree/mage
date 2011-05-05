@@ -31,7 +31,6 @@ package mage.cards;
 import java.io.UnsupportedEncodingException;
 import mage.Constants.Rarity;
 import mage.Constants.SetType;
-import mage.util.Logging;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,15 +43,14 @@ import java.net.URLDecoder;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class ExpansionSet implements Serializable {
 
-	private final static Logger logger = Logging.getLogger(ExpansionSet.class.getName());
+	private final static Logger logger = Logger.getLogger(ExpansionSet.class);
 
 	protected static Random rnd = new Random();
 
@@ -112,8 +110,7 @@ public abstract class ExpansionSet implements Serializable {
 			Constructor<?> con = clazz.getConstructor(new Class[]{UUID.class});
 			return (Card) con.newInstance(new Object[]{null});
 		} catch (Exception ex) {
-			logger.log(Level.SEVERE, "Error creating card:" + clazz.getName(), ex);
-			ex.printStackTrace();
+			logger.fatal("Error creating card:" + clazz.getName(), ex);
 			return null;
 		}
 	}
@@ -165,7 +162,7 @@ public abstract class ExpansionSet implements Serializable {
 		try {
 			resources = classLoader.getResources(path);
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.fatal("Error loading resource - " + path, e);
 		}
 		List<File> dirs = new ArrayList<File>();
 		boolean isLoadingFromJar = false;
@@ -180,8 +177,7 @@ public abstract class ExpansionSet implements Serializable {
 			try {
 				dirs.add(new File(URLDecoder.decode(resource.getFile(), "UTF-8")));
 			} catch (UnsupportedEncodingException e) {
-				logger.log(Level.SEVERE, "Error decoding director - " + resource.getFile(), e);
-				e.printStackTrace();
+				logger.fatal("Error decoding director - " + resource.getFile(), e);
 			}
 		}
 		List<Class> classes = new ArrayList<Class>();
@@ -193,21 +189,20 @@ public abstract class ExpansionSet implements Serializable {
 				try {
 					jarPath = URLDecoder.decode(jarPath.substring(jarPath.indexOf("file:/") + "file:/".length()), "UTF-8");
 				} catch (UnsupportedEncodingException e) {
-					logger.log(Level.SEVERE, "Error decoding file - " + jarPath, e);
-					e.printStackTrace();
+					logger.fatal("Error decoding file - " + jarPath, e);
 				}
 			}
 			try {
 				classes.addAll(findClassesInJar(new File(jarPath), path));
 			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
+				logger.fatal("Error loading classes - " + jarPath, e);
 			}
 		} else { // faster but doesn't work for jars
 			for (File directory : dirs) {
 				try {
 					classes.addAll(findClasses(directory, packageName));
 				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
+					logger.fatal("Error loading classes - " + jarPath, e);
 				}
 			}
 		}
@@ -270,9 +265,8 @@ public abstract class ExpansionSet implements Serializable {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.fatal("Error loading classes - " + file, e);
 		}
-
 
 		return classes;
 	}

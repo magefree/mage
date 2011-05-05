@@ -34,11 +34,10 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Logger;
 import mage.interfaces.callback.ClientCallback;
-import mage.util.Logging;
 import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -46,7 +45,7 @@ import mage.view.ChatMessage.MessageColor;
  */
 public class ChatSession {
 
-	private final static Logger logger = Logging.getLogger(ChatSession.class.getName());
+	private final static Logger logger = Logger.getLogger(ChatSession.class);
 	private ConcurrentHashMap<UUID, String> clients = new ConcurrentHashMap<UUID, String>();
 	private UUID chatId;
 	private DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);

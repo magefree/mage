@@ -30,14 +30,12 @@ package mage.server.game;
 
 import java.rmi.RemoteException;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.Session;
 import mage.server.SessionManager;
-import mage.util.Logging;
 import mage.view.GameClientMessage;
 import mage.view.GameView;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -45,7 +43,7 @@ import mage.view.GameView;
  */
 public class GameWatcher {
 
-	protected final static Logger logger = Logging.getLogger(GameWatcher.class.getName());
+	protected final static Logger logger = Logger.getLogger(GameWatcher.class);
 
 	protected UUID sessionId;
 	protected UUID gameId;
@@ -102,7 +100,7 @@ public class GameWatcher {
 	}
 
 	protected void handleRemoteException(RemoteException ex) {
-		logger.log(Level.SEVERE, null, ex);
+		logger.fatal("GameWatcher error", ex);
 		GameManager.getInstance().kill(gameId, sessionId);
 	}
 	

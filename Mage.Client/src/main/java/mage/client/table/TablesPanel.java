@@ -112,12 +112,10 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 					}
 				} else if (state.equals("Watch")) {
 					logger.info("Watching table " + tableId);
-					if (!session.watchTable(roomId, tableId))
-						hideTables();
+					session.watchTable(roomId, tableId);
 				} else if (state.equals("Replay")) {
 					logger.info("Replaying game " + gameId);
-					if (!session.replayGame(gameId))
-						hideTables();
+					session.replayGame(gameId);
 				}
 			}
 		};
@@ -146,7 +144,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 		try {
 			tableModel.loadData(MageFrame.getSession().getTables(roomId));
 			this.tableTables.repaint();
-		} catch (MageRemoteException ex) {
+		} catch (Exception ex) {
 			hideTables();
 		}
 	}
@@ -313,7 +311,6 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 			table = session.createTable(roomId,	options);
 			session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, Sets.loadDeck("test.dck"));
 			session.joinTable(roomId, table.getTableId(), "Computer", "Computer - default", 1, Sets.loadDeck("test.dck"));
-			hideTables();
 			session.startGame(roomId, table.getTableId());
 		} catch (Exception ex) {
 			handleError(ex);

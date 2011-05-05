@@ -32,7 +32,6 @@ import mage.game.Table;
 import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Logger;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
@@ -41,8 +40,7 @@ import mage.game.match.Match;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.players.Player;
-import mage.server.game.GameReplay;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -51,7 +49,7 @@ import mage.util.Logging;
 public class TableManager {
 
 	private final static TableManager INSTANCE = new TableManager();
-	private final static Logger logger = Logging.getLogger(TableManager.class.getName());
+	//private final static Logger logger = Logger.getLogger(TableManager.class);
 
 	private ConcurrentHashMap<UUID, TableController> controllers = new ConcurrentHashMap<UUID, TableController>();
 	private ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<UUID, Table>();

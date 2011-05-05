@@ -95,7 +95,7 @@ public class MageFrame extends javax.swing.JFrame {
     private static Preferences prefs = Preferences.userNodeForPackage(MageFrame.class);
     private JLabel title;
     private Rectangle titleRectangle;
-	private static MageVersion version = new MageVersion(0, 7, 2);
+	private final static MageVersion version = new MageVersion(0, 7, 2);
 
     /**
      * @return the session
@@ -727,6 +727,10 @@ public class MageFrame extends javax.swing.JFrame {
         btnGames.setEnabled(false);
         btnDeckEditor.setEnabled(true);
     }
+
+	public void hideTables() {
+		this.tablesPane.hideTables();
+	}
 
     public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
 		try {

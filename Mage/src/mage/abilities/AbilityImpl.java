@@ -31,7 +31,6 @@ package mage.abilities;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Logger;
 import mage.Constants.AbilityType;
 import mage.Constants.EffectType;
 import mage.Constants.Outcome;
@@ -52,7 +51,7 @@ import mage.choices.Choices;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.Targets;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -60,7 +59,7 @@ import mage.util.Logging;
  */
 public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
-	private final static transient Logger logger = Logging.getLogger(AbilityImpl.class.getName());
+	private final static transient Logger logger = Logger.getLogger(AbilityImpl.class);
 
 	protected UUID id;
 	protected UUID originalId;
@@ -153,12 +152,12 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 	public boolean activate(Game game, boolean noMana) {
 		//20100716 - 601.2b
 		if (choices.size() > 0 && choices.choose(game, this) == false) {
-			logger.fine("activate failed - choice");
+			logger.debug("activate failed - choice");
 			return false;
 		}
 		//20100716 - 601.2b
 		if (targets.size() > 0 && targets.chooseTargets(effects.get(0).getOutcome(), this.controllerId, this, game) == false) {
-			logger.fine("activate failed - target");
+			logger.debug("activate failed - target");
 			return false;
 		}
 		//20100716 - 601.2e
@@ -170,13 +169,13 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 			
 			//20100716 - 601.2f
 			if (!manaCostsToPay.pay(game, sourceId, controllerId, noMana)) {
-				logger.fine("activate failed - mana");
+				logger.debug("activate failed - mana");
 				return false;
 			}
 		}
 		//20100716 - 601.2g
 		if (!costs.pay(game, sourceId, controllerId, noMana)) {
-			logger.fine("activate failed - non mana costs");
+			logger.debug("activate failed - non mana costs");
 			return false;
 		}
 		return true;

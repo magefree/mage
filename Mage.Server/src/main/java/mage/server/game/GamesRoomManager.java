@@ -30,8 +30,7 @@ package mage.server.game;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Logger;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -40,7 +39,7 @@ import mage.util.Logging;
 public class GamesRoomManager {
 
 	private final static GamesRoomManager INSTANCE = new GamesRoomManager();
-	private final static Logger logger = Logging.getLogger(GamesRoomManager.class.getName());
+//	private final static Logger logger = Logger.getLogger(GamesRoomManager.class);
 
 	private ConcurrentHashMap<UUID, GamesRoom> rooms = new ConcurrentHashMap<UUID, GamesRoom>();
 	private UUID mainRoomId;

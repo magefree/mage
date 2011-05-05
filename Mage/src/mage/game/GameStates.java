@@ -31,9 +31,8 @@ package mage.game;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Logger;
 import mage.util.Copier;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -41,7 +40,7 @@ import mage.util.Logging;
  */
 public class GameStates implements Serializable {
 
-	private final static transient Logger logger = Logging.getLogger(GameStates.class.getName());
+	private final static transient Logger logger = Logger.getLogger(GameStates.class);
 
 //	private List<byte[]> states = new LinkedList<byte[]>();
 	private List<GameState> states = new LinkedList<GameState>();
@@ -49,7 +48,7 @@ public class GameStates implements Serializable {
 	public void save(GameState gameState) {
 //		states.add(new Copier<GameState>().copyCompressed(gameState));
 		states.add(gameState.copy());
-		logger.fine("Saved game state: " + states.size());
+		logger.debug("Saved game state: " + states.size());
 	}
 
 	public int getSize() {
@@ -62,7 +61,7 @@ public class GameStates implements Serializable {
 				states.remove(states.size() - 1);
 			}
 //			return new Copier<GameState>().uncompressCopy(states.get(index));
-			logger.fine("Rolling back state: " + index);
+			logger.debug("Rolling back state: " + index);
 			return states.get(index);
 		}
 		return null;

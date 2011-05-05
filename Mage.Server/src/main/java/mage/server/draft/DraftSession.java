@@ -33,17 +33,15 @@ import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mage.game.draft.Draft;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.Session;
 import mage.server.SessionManager;
 import mage.server.util.ThreadExecutor;
-import mage.util.Logging;
 import mage.view.DraftClientMessage;
 import mage.view.DraftPickView;
 import mage.view.DraftView;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -51,7 +49,7 @@ import mage.view.DraftView;
  */
 public class DraftSession {
 
-	protected final static Logger logger = Logging.getLogger(DraftSession.class.getName());
+	protected final static Logger logger = Logger.getLogger(DraftSession.class);
 
 	protected UUID sessionId;
 	protected UUID playerId;
@@ -143,7 +141,7 @@ public class DraftSession {
 	}
 
 	protected void handleRemoteException(RemoteException ex) {
-		logger.log(Level.SEVERE, null, ex);
+		logger.fatal("DraftSession error ", ex);
 		DraftManager.getInstance().kill(draft.getId(), sessionId);
 	}
 

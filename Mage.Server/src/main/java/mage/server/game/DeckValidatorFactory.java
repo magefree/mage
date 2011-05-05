@@ -32,11 +32,8 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
 import mage.cards.decks.*;
-import java.util.logging.Logger;
-import mage.Constants;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -45,7 +42,7 @@ import mage.util.Logging;
 public class DeckValidatorFactory {
 
 	private final static DeckValidatorFactory INSTANCE = new DeckValidatorFactory();
-	private final static Logger logger = Logging.getLogger(DeckValidatorFactory.class.getName());
+	private final static Logger logger = Logger.getLogger(DeckValidatorFactory.class);
 
 	private Map<String, Class> deckTypes = new HashMap<String, Class>();
 
@@ -63,7 +60,7 @@ public class DeckValidatorFactory {
 			con = deckTypes.get(deckType).getConstructor(new Class[]{});
 			validator = (DeckValidator)con.newInstance(new Object[] {});
 		} catch (Exception ex) {
-			logger.log(Level.SEVERE, null, ex);
+			logger.fatal("DeckValidatorFactory error", ex);
 			return null;
 		}
 		logger.info("Deck validator created: " + validator.getName());

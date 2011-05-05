@@ -33,13 +33,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
 import mage.game.tournament.TournamentType;
-import mage.util.Logging;
 import mage.view.TournamentTypeView;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -47,7 +45,7 @@ import mage.view.TournamentTypeView;
  */
 public class TournamentFactory {
 	private final static TournamentFactory INSTANCE = new TournamentFactory();
-	private final static Logger logger = Logging.getLogger(TournamentFactory.class.getName());
+	private final static Logger logger = Logger.getLogger(TournamentFactory.class);
 
 	private Map<String, Class<Tournament>> tournaments = new HashMap<String, Class<Tournament>>();
 	private Map<String, TournamentType> tournamentTypes = new HashMap<String, TournamentType>();
@@ -67,7 +65,7 @@ public class TournamentFactory {
 			con = tournaments.get(tournamentType).getConstructor(new Class[]{TournamentOptions.class});
 			tournament = con.newInstance(new Object[] {options});
 		} catch (Exception ex) {
-			logger.log(Level.SEVERE, null, ex);
+			logger.fatal("TournamentFactory error ", ex);
 			return null;
 		}
 		logger.info("Tournament created: " + tournamentType); // + game.getId().toString());

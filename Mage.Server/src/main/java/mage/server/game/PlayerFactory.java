@@ -29,16 +29,12 @@
 package mage.server.game;
 
 import java.lang.reflect.Constructor;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mage.Constants.RangeOfInfluence;
-import mage.cards.decks.Deck;
 import mage.players.Player;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -47,7 +43,7 @@ import mage.util.Logging;
 public class PlayerFactory {
 
 	private final static PlayerFactory INSTANCE = new PlayerFactory();
-	private final static Logger logger = Logging.getLogger(PlayerFactory.class.getName());
+	private final static Logger logger = Logger.getLogger(PlayerFactory.class);
 
 	private Map<String, Class> playerTypes = new LinkedHashMap<String, Class>();
 
@@ -64,7 +60,7 @@ public class PlayerFactory {
 			con = playerTypes.get(playerType).getConstructor(new Class[]{String.class, RangeOfInfluence.class});
 			player = (Player)con.newInstance(new Object[] {name, range});
 		} catch (Exception ex) {
-			logger.log(Level.SEVERE, null, ex);
+			logger.fatal("PlayerFactory error ", ex);
 			return null;
 		}
 		logger.info("Player created: " + name + "-" + player.getId().toString());

@@ -32,7 +32,6 @@ import java.io.File;
 import java.util.UUID;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Logger;
 
 import mage.game.draft.Draft;
 import mage.game.draft.DraftPlayer;
@@ -42,9 +41,9 @@ import mage.game.events.TableEvent;
 import mage.server.game.GameController;
 import mage.server.TableManager;
 import mage.server.util.ThreadExecutor;
-import mage.util.Logging;
 import mage.view.DraftPickView;
 import mage.view.DraftView;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -52,7 +51,7 @@ import mage.view.DraftView;
  */
 public class DraftController {
 
-	private final static Logger logger = Logging.getLogger(GameController.class.getName());
+	private final static Logger logger = Logger.getLogger(GameController.class);
 	public static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
 
 	private ConcurrentHashMap<UUID, DraftSession> draftSessions = new ConcurrentHashMap<UUID, DraftSession>();
@@ -122,7 +121,7 @@ public class DraftController {
 	private synchronized void startDraft() {
 		for (final Entry<UUID, DraftSession> entry: draftSessions.entrySet()) {
 			if (!entry.getValue().init(getDraftView())) {
-				logger.severe("Unable to initialize client");
+				logger.fatal("Unable to initialize client");
 				//TODO: generate client error message
 				return;
 			}

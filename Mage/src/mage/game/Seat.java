@@ -29,8 +29,8 @@
 package mage.game;
 
 import java.io.Serializable;
-import java.util.logging.Logger;
 import mage.players.Player;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -38,7 +38,7 @@ import mage.players.Player;
  */
 public class Seat implements Serializable {
 
-	private final static Logger logger = Logger.getLogger(Seat.class.getName());
+//	private final static Logger logger = Logger.getLogger(Seat.class);
 
 	private String playerType;
 	private Player player;

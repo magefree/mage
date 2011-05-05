@@ -33,8 +33,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -50,12 +48,12 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
-import mage.util.Logging;
 import mage.watchers.Watchers;
+import org.apache.log4j.Logger;
 
 public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> implements Card {
 
-	private final static Logger logger = Logging.getLogger(CardImpl.class.getName());
+	private final static Logger logger = Logger.getLogger(CardImpl.class);
 
 	protected UUID ownerId;
 	protected int cardNumber;
@@ -109,7 +107,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 			return card;
 		}
 		catch (Exception e) {
-			logger.log(Level.SEVERE, "Error loading card: " + name, e);
+			logger.fatal("Error loading card: " + name, e);
 			return null;
 		}
 	}

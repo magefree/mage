@@ -30,22 +30,21 @@ package mage.server.util;
 
 import java.io.File;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import mage.server.util.config.Config;
 import mage.server.util.config.Plugin;
 import mage.server.util.config.GamePlugin;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class ConfigSettings {
 
-	private final static Logger logger = Logging.getLogger(ConfigSettings.class.getName());
+	private final static Logger logger = Logger.getLogger(ConfigSettings.class);
 	private final static ConfigSettings INSTANCE = new ConfigSettings();
 	
 	private Config config;
@@ -60,7 +59,7 @@ public class ConfigSettings {
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 			config = (Config) unmarshaller.unmarshal(new File("config/config.xml"));
 		} catch (JAXBException ex) {
-			logger.log(Level.SEVERE, null, ex);
+			logger.fatal("ConfigSettings error", ex);
 		}
 	}
 

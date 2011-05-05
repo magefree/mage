@@ -30,10 +30,8 @@ package mage.server.game;
 
 import java.util.UUID;
 import java.util.concurrent.Callable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mage.game.Game;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -41,7 +39,7 @@ import mage.util.Logging;
  */
 public class GameWorker implements Callable {
 
-	private final static Logger logger = Logging.getLogger(GameWorker.class.getName());
+	private final static Logger logger = Logger.getLogger(GameWorker.class);
 
 	private GameCallback result;
 	private Game game;
@@ -59,7 +57,7 @@ public class GameWorker implements Callable {
 			game.start(choosingPlayerId);
 			result.gameResult(game.getWinner());
 		} catch (Exception ex) {
-			logger.log(Level.SEVERE, null, ex);
+			logger.fatal("GameWorker error ", ex);
 			result.gameResult("Server Error");
 		}
 		return null;

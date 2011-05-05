@@ -30,13 +30,12 @@ package mage.server;
 
 import java.util.logging.Level;
 import java.util.UUID;
-import java.util.logging.Logger;
 import mage.cards.decks.Deck;
 import mage.interfaces.callback.CallbackServerSession;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.game.GameManager;
-import mage.util.Logging;
 import mage.view.TableClientMessage;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -44,7 +43,7 @@ import mage.view.TableClientMessage;
  */
 public class Session {
 
-	private final static Logger logger = Logging.getLogger(Session.class.getName());
+	private final static Logger logger = Logger.getLogger(Session.class);
 
 	private UUID sessionId;
 	private UUID clientId;
@@ -63,6 +62,10 @@ public class Session {
 		return sessionId;
 	}
 
+	public UUID getClientId() {
+		return clientId;
+	}
+
 	public void kill() {
 		SessionManager.getInstance().removeSession(sessionId);
 		TableManager.getInstance().removeSession(sessionId);
@@ -74,19 +77,19 @@ public class Session {
 		try {
 			return callback.callback();
 		} catch (InterruptedException ex) {
-			logger.log(Level.SEVERE, null, ex);
+			logger.fatal("Session callback error", ex);
 		}
 		return null;
 	}
 
 	public synchronized void fireCallback(final ClientCallback call) {
 		call.setMessageId(messageId++);
-		if (logger.isLoggable(Level.FINE))
-			logger.fine(sessionId + " - " + call.getMessageId() + " - " + call.getMethod());
+		if (logger.isDebugEnabled())
+			logger.debug(sessionId + " - " + call.getMessageId() + " - " + call.getMethod());
 		try {
 			callback.setCallback(call);
 		} catch (InterruptedException ex) {
-			logger.log(Level.SEVERE, null, ex);
+			logger.fatal("Session fireCallback error", ex);
 		}
 	}
 

@@ -57,18 +57,17 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
 import mage.target.TargetPlayer;
-import mage.util.Logging;
 import mage.watchers.Watcher;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
-import java.util.logging.Logger;
 import mage.game.permanent.PermanentImpl;
+import org.apache.log4j.Logger;
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
 
-	private final static transient Logger logger = Logging.getLogger(GameImpl.class.getName());
+	private final static transient Logger logger = Logger.getLogger(GameImpl.class);
 
 	private static FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
 	private static FilterLegendaryPermanent filterLegendary = new FilterLegendaryPermanent();
@@ -285,7 +284,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	public void bookmarkState() {
 		if (!simulation) {
 			saveState();
-			logger.fine("Bookmarking state: " + gameStates.getSize());
+			if (logger.isDebugEnabled())
+				logger.debug("Bookmarking state: " + gameStates.getSize());
 			savedStates.push(gameStates.getSize() - 1);
 		}
 	}
@@ -317,10 +317,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		PlayerList players = state.getPlayerList(startingPlayerId);
 		Player player = getPlayer(players.get());
 		while (!isGameOver()) {
-			//if (player.getId().equals(startingPlayerId)) {
-				state.setTurnNum(state.getTurnNum() + 1);
-				fireInformEvent("Turn " + Integer.toString(state.getTurnNum()));
-			//}
+			state.setTurnNum(state.getTurnNum() + 1);
+			fireInformEvent("Turn " + Integer.toString(state.getTurnNum()));
 			if (checkStopOnTurnOption(options)) return;
 			state.setActivePlayerId(player.getId());
 			state.getTurn().play(this, player.getId());
@@ -1021,7 +1019,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 										player.setLife(amount, this);
 										logger.info("Setting player's life: ");
 									} catch (NumberFormatException e) {
-										e.printStackTrace();
+										logger.fatal("error setting life", e);
 									}
 								}
 

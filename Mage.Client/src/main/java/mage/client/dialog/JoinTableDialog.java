@@ -59,6 +59,7 @@ public class JoinTableDialog extends MageDialog {
     /** Creates new form JoinTableDialog */
     public JoinTableDialog() {
         initComponents();
+		newPlayerPanel.showLevel(false);
     }
 
 	public void showDialog(UUID roomId, UUID tableId) {

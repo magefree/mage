@@ -45,6 +45,7 @@ import mage.server.util.config.GamePlugin;
 import mage.util.Copier;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
@@ -67,7 +68,7 @@ public class Main {
     public static void main(String[] args) {
 
 		logger.info("Starting MAGE server version " + version);
-		logger.info("Logging level: " + logger.getLevel());
+		logger.info("Logging level: " + logger.getEffectiveLevel());
 		deleteSavedGames();
 		ConfigSettings config = ConfigSettings.getInstance();
 		for (GamePlugin plugin: config.getGameTypes()) {
@@ -107,6 +108,7 @@ public class Main {
 			ip = ipParam;
 		}
 		System.setProperty("java.rmi.server.hostname", ip);
+		System.setProperty("sun.rmi.transport.tcp.readTimeout", "30000");
 		logger.info("MAGE server - using address " + ip);
 	}
 	

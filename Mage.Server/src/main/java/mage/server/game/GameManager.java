@@ -64,7 +64,9 @@ public class GameManager {
 	}
 
 	public UUID getChatId(UUID gameId) {
-		return gameControllers.get(gameId).getChatId();
+		if (gameControllers.containsKey(gameId))
+			return gameControllers.get(gameId).getChatId();
+		return null;
 	}
 
 	public void sendPlayerUUID(UUID gameId, UUID sessionId, UUID data) {

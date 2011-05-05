@@ -32,10 +32,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import mage.Constants.CardType;
@@ -46,7 +43,7 @@ import mage.cards.CardImpl;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -54,7 +51,7 @@ import mage.util.Logging;
  */
 public class Sets extends HashMap<String, ExpansionSet> {
 
-	private final static Logger logger = Logging.getLogger(Sets.class.getName());
+	private final static Logger logger = Logger.getLogger(Sets.class);
 	private static final Sets fINSTANCE =  new Sets();
 	private static Set<String> names;
 	private static List<Card> cards;
@@ -222,7 +219,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
 			Constructor<?> con = clazz.getConstructor(new Class[]{UUID.class});
 			return (Card) con.newInstance(new Object[] {null});
 		} catch (Exception ex) {
-			logger.log(Level.SEVERE, "Error creating card:" + clazz.getName(), ex);
+			logger.fatal("Error creating card:" + clazz.getName(), ex);
 			return null;
 		}
 	}

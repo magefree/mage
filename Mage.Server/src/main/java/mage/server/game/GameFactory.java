@@ -33,13 +33,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mage.game.match.Match;
 import mage.game.match.MatchOptions;
-import mage.util.Logging;
 import mage.game.match.MatchType;
 import mage.view.GameTypeView;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -48,7 +46,7 @@ import mage.view.GameTypeView;
 public class GameFactory {
 
 	private final static GameFactory INSTANCE = new GameFactory();
-	private final static Logger logger = Logging.getLogger(GameFactory.class.getName());
+	private final static Logger logger = Logger.getLogger(GameFactory.class);
 
 	private Map<String, Class<Match>> games = new HashMap<String, Class<Match>>();
 	private Map<String, MatchType> gameTypes = new HashMap<String, MatchType>();
@@ -69,7 +67,7 @@ public class GameFactory {
 			con = games.get(gameType).getConstructor(new Class[]{MatchOptions.class});
 			match = con.newInstance(new Object[] {options});
 		} catch (Exception ex) {
-			logger.log(Level.SEVERE, null, ex);
+			logger.fatal("Error creating match - " + gameType, ex);
 			return null;
 		}
 		logger.info("Game created: " + gameType); // + game.getId().toString());

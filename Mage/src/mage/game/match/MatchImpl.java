@@ -40,7 +40,6 @@ import mage.game.events.TableEvent;
 import mage.game.events.TableEvent.EventType;
 import mage.game.events.TableEventSource;
 import mage.players.Player;
-import mage.util.Logging;
 
 /**
  *
@@ -48,7 +47,7 @@ import mage.util.Logging;
  */
 public abstract class MatchImpl implements Match {
 
-	private final static Logger logger = Logging.getLogger(MatchImpl.class.getName());
+//	private final static Logger logger = Logging.getLogger(MatchImpl.class.getName());
 	private static final int SIDEBOARD_TIME = 180;
 
 	protected UUID id = UUID.randomUUID();

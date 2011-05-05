@@ -36,14 +36,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Logger;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
-import mage.game.draft.DraftOptions;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
-import mage.util.Logging;
 import mage.view.TableView;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -51,7 +49,7 @@ import mage.view.TableView;
  */
 public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
-	private final static Logger logger = Logging.getLogger(GamesRoomImpl.class.getName());
+//	private final static Logger logger = Logger.getLogger(GamesRoomImpl.class);
 
 	private ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<UUID, Table>();
 
@@ -98,7 +96,9 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
 	@Override
 	public TableView getTable(UUID tableId) {
-		return new TableView(tables.get(tableId));
+		if (tables.containsKey(tableId))
+			return new TableView(tables.get(tableId));
+		return null;
 	}
 
 	@Override

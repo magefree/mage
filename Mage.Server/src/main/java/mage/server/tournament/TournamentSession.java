@@ -33,23 +33,21 @@ import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mage.cards.decks.Deck;
 import mage.game.tournament.Tournament;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.Session;
 import mage.server.SessionManager;
 import mage.server.util.ThreadExecutor;
-import mage.util.Logging;
 import mage.view.TournamentView;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class TournamentSession {
-	protected final static Logger logger = Logging.getLogger(TournamentSession.class.getName());
+	protected final static Logger logger = Logger.getLogger(TournamentSession.class);
 
 	protected UUID sessionId;
 	protected UUID playerId;
@@ -119,7 +117,7 @@ public class TournamentSession {
 	}
 
 	protected void handleRemoteException(RemoteException ex) {
-		logger.log(Level.SEVERE, null, ex);
+		logger.fatal("TournamentSession error ", ex);
 		TournamentManager.getInstance().kill(tournament.getId(), sessionId);
 	}
 

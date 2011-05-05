@@ -30,9 +30,7 @@ package mage.server.util;
 
 import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -40,14 +38,14 @@ import mage.util.Logging;
  */
 public class Config {
 
-	private final static Logger logger = Logging.getLogger(Config.class.getName());
+	private final static Logger logger = Logger.getLogger(Config.class);
 
 	static {
 		Properties p = new Properties();
 		try {
 			p.load(Config.class.getResourceAsStream("resources/config.properties"));
 		} catch (IOException ex) {
-			logger.log(Level.SEVERE, null, ex);
+			logger.fatal("Config error", ex);
 		}
 		port = Integer.parseInt(p.getProperty("port"));
 		remoteServer = p.getProperty("remote-server");

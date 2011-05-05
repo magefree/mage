@@ -110,6 +110,8 @@ public class Session {
 			JOptionPane.showMessageDialog(frame, "Unable to connect to server. "  + ex.getMessage());
 		} catch (RemoteException ex) {
 			logger.log(Level.SEVERE, "Unable to connect to server - ", ex);
+			disconnect();
+			JOptionPane.showMessageDialog(frame, "Unable to connect to server. "  + ex.getMessage());
 		} catch (NotBoundException ex) {
 			logger.log(Level.SEVERE, "Unable to connect to server - ", ex);
 		}
@@ -120,9 +122,15 @@ public class Session {
 
 		if (isConnected()) {
 			try {
+				frame.hideTables();
 				for (UUID chatId: chats.keySet()) {
 					server.leaveChat(chatId, sessionId);
 				}
+			}
+			catch (Exception ex) {
+				//swallow all exceptions at this point
+			}
+			try {
 				//TODO: stop daemon
 				server.deregisterClient(sessionId);
 				server = null;

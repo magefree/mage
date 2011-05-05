@@ -36,8 +36,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
@@ -49,6 +47,7 @@ import mage.game.events.TableEvent.EventType;
 import mage.game.events.TableEventSource;
 import mage.game.match.Match;
 import mage.players.Player;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -145,7 +144,7 @@ public abstract class TournamentImpl implements Tournament {
 				//TODO: improve this
 				Thread.sleep(1000);
 			} catch (InterruptedException ex) {
-				Logger.getLogger(TournamentImpl.class.getName()).log(Level.SEVERE, null, ex);
+				Logger.getLogger(TournamentImpl.class).warn("TournamentImpl playRound error ", ex);
 				break;
 			}
 		}
