@@ -75,7 +75,7 @@ public class KalastriaHighborn extends CardImpl<KalastriaHighborn> {
 
 class KalastriaHighbornTriggeredAbility extends TriggeredAbilityImpl<KalastriaHighbornTriggeredAbility> {
 	KalastriaHighbornTriggeredAbility ( ) {
-		super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), false);
+		super(Zone.ALL, new LoseLifeTargetEffect(2), false);
 		this.addCost(new ManaCostsImpl("{B}"));
 		this.addTarget(new TargetPlayer());
 		this.getEffects().add(new GainLifeEffect(2));
@@ -93,6 +93,16 @@ class KalastriaHighbornTriggeredAbility extends TriggeredAbilityImpl<KalastriaHi
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if ( event.getType() == EventType.ZONE_CHANGE ) {
+
+			// ayrat: make sure Kalastria Highborn is on battlefield
+			UUID sourceId = getSourceId();
+			if (game.getPermanent(sourceId) == null) {
+				// or it is being removed
+				if (game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD) == null) {
+					return false;
+				}
+			}
+
 			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
 			Permanent permanent = zEvent.getTarget();
 			
