@@ -220,7 +220,7 @@ public class TableController {
 	}
 
 	public synchronized void leaveTable(UUID sessionId) {
-		if (table.getState() == TableState.WAITING)
+		if (table.getState() == TableState.WAITING || table.getState() == TableState.STARTING)
 			table.leaveTable(sessionPlayerMap.get(sessionId));
 	}
 
