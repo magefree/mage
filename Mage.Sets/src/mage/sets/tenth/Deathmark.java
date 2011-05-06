@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -48,6 +49,7 @@ public class Deathmark extends CardImpl<Deathmark> {
 		filter.getColor().setGreen(true);
 		filter.getColor().setWhite(true);
 		filter.setUseColor(true);
+		filter.setScopeColor(Filter.ComparisonScope.Any);
 	}
 
 	public Deathmark(UUID ownerId) {
