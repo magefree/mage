@@ -38,6 +38,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DiscardEachPlayerEffect;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -57,7 +58,7 @@ public class RottingRats extends CardImpl<RottingRats> {
 		this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new RottingRatsEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect()));
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{1}{B}")));
     }
 
@@ -68,37 +69,5 @@ public class RottingRats extends CardImpl<RottingRats> {
     @Override
     public RottingRats copy() {
         return new RottingRats(this);
-    }
-}
-
-class RottingRatsEffect extends OneShotEffect<RottingRatsEffect> {
-    RottingRatsEffect() {
-        super(Constants.Outcome.Discard);
-    }
-
-    RottingRatsEffect(final RottingRatsEffect effect) {
-        super(effect);
-    }
-
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getPlayerList()) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.discard(1, source, game);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public RottingRatsEffect copy() {
-        return new RottingRatsEffect(this);
-    }
-
-    @Override
-    public String getText(Ability source) {
-        return "each player discards a card";
     }
 }
