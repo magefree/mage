@@ -65,7 +65,7 @@ public class KnightExemplar extends CardImpl<KnightExemplar> {
 
 		this.addAbility(FirstStrikeAbility.getInstance());
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
 	}
 
 	public KnightExemplar(final KnightExemplar card) {
