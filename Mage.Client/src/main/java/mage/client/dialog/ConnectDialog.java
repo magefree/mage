@@ -59,11 +59,37 @@ public class ConnectDialog extends MageDialog {
 		this.txtPort.setText(MageFrame.getPreferences().get("serverPort", Integer.toString(Config.port)));
 		this.txtUserName.setText(MageFrame.getPreferences().get("userName", ""));
 		this.chkAutoConnect.setSelected(Boolean.parseBoolean(MageFrame.getPreferences().get("autoConnect", "false")));
+		this.txtProxyServer.setText(MageFrame.getPreferences().get("proxyAddress", Config.serverName));
+		this.txtProxyPort.setText(MageFrame.getPreferences().get("proxyPort", Integer.toString(Config.port)));
+		this.chkUseProxy.setSelected(Boolean.parseBoolean(MageFrame.getPreferences().get("useProxy", "false")));
+		this.showProxySettings();
 		this.setModal(true);
 		this.setLocation(50, 50);
 		this.setVisible(true);
 	}
-	
+
+	private void showProxySettings() {
+		if (chkUseProxy.isSelected()) {
+			this.pnlProxy.setVisible(true);
+		}
+		else {
+			this.pnlProxy.setVisible(false);
+		}
+		this.pack();
+		this.revalidate();
+		this.repaint();
+	}
+
+	private void saveSettings() {
+		MageFrame.getPreferences().put("serverAddress", txtServer.getText());
+		MageFrame.getPreferences().put("serverPort", txtPort.getText());
+		MageFrame.getPreferences().put("userName", txtUserName.getText());
+		MageFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
+		MageFrame.getPreferences().put("proxyAddress", txtProxyServer.getText());
+		MageFrame.getPreferences().put("proxyPort", txtProxyPort.getText());
+		MageFrame.getPreferences().put("useProxy", Boolean.toString(chkUseProxy.isSelected()));
+	}
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -82,6 +108,12 @@ public class ConnectDialog extends MageDialog {
         btnConnect = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         chkAutoConnect = new javax.swing.JCheckBox();
+        chkUseProxy = new javax.swing.JCheckBox();
+        pnlProxy = new javax.swing.JPanel();
+        lblProxyServer = new javax.swing.JLabel();
+        txtProxyServer = new javax.swing.JTextField();
+        lblProxyPort = new javax.swing.JLabel();
+        txtProxyPort = new javax.swing.JTextField();
 
         setTitle("Connect");
         setNormalBounds(new java.awt.Rectangle(100, 100, 410, 307));
@@ -122,31 +154,81 @@ public class ConnectDialog extends MageDialog {
             }
         });
 
+        chkUseProxy.setText("Use Proxy");
+        chkUseProxy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkUseProxyActionPerformed(evt);
+            }
+        });
+
+        lblProxyServer.setLabelFor(txtServer);
+        lblProxyServer.setText("Server:");
+
+        lblProxyPort.setLabelFor(txtPort);
+        lblProxyPort.setText("Port:");
+
+        txtProxyPort.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtProxyPortkeyTyped(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlProxyLayout = new javax.swing.GroupLayout(pnlProxy);
+        pnlProxy.setLayout(pnlProxyLayout);
+        pnlProxyLayout.setHorizontalGroup(
+            pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlProxyLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblProxyPort)
+                    .addComponent(lblProxyServer))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtProxyPort, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtProxyServer, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        pnlProxyLayout.setVerticalGroup(
+            pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlProxyLayout.createSequentialGroup()
+                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProxyServer)
+                    .addComponent(txtProxyServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProxyPort)
+                    .addComponent(txtProxyPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnConnect)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancel))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblPort)
-                            .addComponent(lblServer)
-                            .addComponent(lblUserName))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(131, 131, 131))
-                            .addComponent(txtServer, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                            .addComponent(txtUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                            .addComponent(chkAutoConnect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                                .addComponent(btnConnect)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCancel))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblPort)
+                                    .addComponent(lblServer)
+                                    .addComponent(lblUserName))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(131, 131, 131))
+                                    .addComponent(txtServer, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                                    .addComponent(txtUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                                    .addComponent(chkAutoConnect, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                                    .addComponent(chkUseProxy, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))))
+                        .addContainerGap())
+                    .addComponent(pnlProxy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,7 +247,11 @@ public class ConnectDialog extends MageDialog {
                     .addComponent(lblUserName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkAutoConnect)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkUseProxy)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlProxy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
                     .addComponent(btnConnect))
@@ -201,12 +287,17 @@ public class ConnectDialog extends MageDialog {
 		}
 		try {
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			if (MageFrame.connect(txtUserName.getText(), txtServer.getText(), Integer.valueOf(txtPort.getText()))) {
-				MageFrame.getPreferences().put("serverAddress", txtServer.getText());
-				MageFrame.getPreferences().put("serverPort", txtPort.getText());
-				MageFrame.getPreferences().put("userName", txtUserName.getText());
-				MageFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
-				this.setVisible(false);
+			if (chkUseProxy.isSelected()) {
+				if (MageFrame.connect(txtUserName.getText(), txtServer.getText(), Integer.valueOf(txtPort.getText()), txtProxyServer.getText(), Integer.valueOf(txtProxyPort.getText()))) {
+					this.saveSettings();
+					this.setVisible(false);
+				}
+			}
+			else {
+				if (MageFrame.connect(txtUserName.getText(), txtServer.getText(), Integer.valueOf(txtPort.getText()))) {
+					this.saveSettings();
+					this.setVisible(false);
+				}
 			}
 		}
 		finally {
@@ -226,15 +317,29 @@ public class ConnectDialog extends MageDialog {
 		// TODO add your handling code here:
 	}//GEN-LAST:event_chkAutoConnectActionPerformed
 
+	private void txtProxyPortkeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProxyPortkeyTyped
+		// TODO add your handling code here:
+	}//GEN-LAST:event_txtProxyPortkeyTyped
+
+	private void chkUseProxyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkUseProxyActionPerformed
+		this.showProxySettings();
+	}//GEN-LAST:event_chkUseProxyActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnConnect;
     private javax.swing.JCheckBox chkAutoConnect;
+    private javax.swing.JCheckBox chkUseProxy;
     private javax.swing.JLabel lblPort;
+    private javax.swing.JLabel lblProxyPort;
+    private javax.swing.JLabel lblProxyServer;
     private javax.swing.JLabel lblServer;
     private javax.swing.JLabel lblUserName;
+    private javax.swing.JPanel pnlProxy;
     private javax.swing.JTextField txtPort;
+    private javax.swing.JTextField txtProxyPort;
+    private javax.swing.JTextField txtProxyServer;
     private javax.swing.JTextField txtServer;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables

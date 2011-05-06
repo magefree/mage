@@ -60,15 +60,13 @@ public class Client implements CallbackClient {
 	private final static Logger logger = Logger.getLogger(Client.class);
 
 	private UUID clientId;
-	private String userName;
 	private MageFrame frame;
 	private Session session;
 	private int messageId = 0;
 
-	public Client(Session session, MageFrame frame, String userName) {
+	public Client(Session session, MageFrame frame) {
 
 		this.clientId = UUID.randomUUID();
-		this.userName = userName;
 		this.frame = frame;
 		this.session = session;
 

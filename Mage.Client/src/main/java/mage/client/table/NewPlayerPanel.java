@@ -60,7 +60,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 		if (Config.defaultComputerName != null) this.txtPlayerName.setText(Config.defaultComputerName);
     }
 
-	    public void setPlayerName(String playerName) {
+	public void setPlayerName(String playerName) {
 		this.txtPlayerName.setText(playerName);
 		this.txtPlayerName.setEditable(false);
 		this.txtPlayerName.setEnabled(false);

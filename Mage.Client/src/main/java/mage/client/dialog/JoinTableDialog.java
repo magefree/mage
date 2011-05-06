@@ -65,6 +65,7 @@ public class JoinTableDialog extends MageDialog {
 	public void showDialog(UUID roomId, UUID tableId) {
 		this.roomId = roomId;
 		this.tableId = tableId;
+		this.newPlayerPanel.setPlayerName(MageFrame.getSession().getUserName());
 		this.setModal(true);
 		this.setLocation(100, 100);
 		this.setVisible(true);

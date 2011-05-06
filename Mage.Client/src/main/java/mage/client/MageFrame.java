@@ -464,15 +464,22 @@ public class MageFrame extends javax.swing.JFrame {
         return session.connect(userName, serverName, port);
     }
 
+	public static boolean connect(String userName, String serverName, int port, String proxyServer, int proxyPort) {
+        return session.connect(userName, serverName, port, proxyServer, proxyPort);
+    }
+
     public boolean autoConnect() {
         boolean autoConnect = Boolean.parseBoolean(prefs.get("autoConnect", "false"));
         if (autoConnect) {
             String userName = prefs.get("userName", "");
             String server = prefs.get("serverAddress", "");
             int port = Integer.parseInt(prefs.get("serverPort", ""));
+            String proxyServer = prefs.get("proxyAddress", "");
+            int proxyPort = Integer.parseInt(prefs.get("proxyPort", ""));
+			boolean useProxy = Boolean.parseBoolean(prefs.get("useProxy", "false"));
             try {
                 setCursor(new Cursor(Cursor.WAIT_CURSOR));
-                if (MageFrame.connect(userName, server, port)) {
+                if (MageFrame.connect(userName, server, port, useProxy?proxyServer:"", useProxy?proxyPort:0)) {
                     return true;
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Unable to connect to server");

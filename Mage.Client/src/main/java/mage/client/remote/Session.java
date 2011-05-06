@@ -86,17 +86,29 @@ public class Session {
 	public Session(MageFrame frame) {
 		this.frame = frame;
 	}
-
 	public boolean connect(String userName, String serverName, int port) {
+		return connect(userName, serverName, port, "", 0);
+	}
+	
+	public boolean connect(String userName, String serverName, int port, String proxyServer, int proxyPort) {
 		if (isConnected()) {
 			disconnect();
 		}
 		try {
 			System.setSecurityManager(null);
+			if (proxyServer.length() > 0) {
+				System.setProperty("socksProxyHost", proxyServer);
+				System.setProperty("socksProxyPort", Integer.toString(proxyPort));
+			}
+			else {
+				System.clearProperty("socksProxyHost");
+				System.clearProperty("socksProxyPort");
+			}
 			Registry reg = LocateRegistry.getRegistry(serverName, port);
 			this.server = (Server) reg.lookup(Config.remoteServer);
 			this.userName = userName;
-			this.client = new Client(this, frame, userName);
+			if (client == null)
+				client = new Client(this, frame);
 			sessionId = server.registerClient(userName, client.getId(), frame.getVersion());
 			callbackDaemon = new CallbackClientDaemon(sessionId, client, server);
 			serverState = server.getServerState();
