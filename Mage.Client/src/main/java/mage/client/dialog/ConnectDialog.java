@@ -272,11 +272,11 @@ public class ConnectDialog extends MageDialog {
 			JOptionPane.showMessageDialog(rootPane, "Please provide a user name");
 			return;
 		}
-		if (txtServer.getText().isEmpty()) {
+		if (txtServer.getText().trim().isEmpty()) {
 			JOptionPane.showMessageDialog(rootPane, "Please provide a server address");
 			return;
 		}
-		if (txtPort.getText().isEmpty()) {
+		if (txtPort.getText().trim().isEmpty()) {
 			JOptionPane.showMessageDialog(rootPane, "Please provide a port number");
 			return;
 		}
@@ -288,13 +288,13 @@ public class ConnectDialog extends MageDialog {
 		try {
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
 			if (chkUseProxy.isSelected()) {
-				if (MageFrame.connect(txtUserName.getText(), txtServer.getText(), Integer.valueOf(txtPort.getText()), txtProxyServer.getText(), Integer.valueOf(txtProxyPort.getText()))) {
+				if (MageFrame.connect(txtUserName.getText(), txtServer.getText().trim(), Integer.valueOf(txtPort.getText()), txtProxyServer.getText().trim(), Integer.valueOf(txtProxyPort.getText()))) {
 					this.saveSettings();
 					this.setVisible(false);
 				}
 			}
 			else {
-				if (MageFrame.connect(txtUserName.getText(), txtServer.getText(), Integer.valueOf(txtPort.getText()))) {
+				if (MageFrame.connect(txtUserName.getText(), txtServer.getText().trim(), Integer.valueOf(txtPort.getText()))) {
 					this.saveSettings();
 					this.setVisible(false);
 				}
