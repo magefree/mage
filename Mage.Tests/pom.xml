@@ -45,6 +45,12 @@
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
+		<dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Mage-Player-AI</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
 		
         <dependency>
             <groupId>log4j</groupId>

@@ -1,9 +1,15 @@
 package mage.client.components;
 
-import com.sun.java.swing.Painter;
+//import com.sun.java.swing.Painter;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
+
+import javax.swing.JDesktopPane;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
+
+import org.jdesktop.swingx.painter.Painter;
 
 /**
  * Overrides JDesktopPane settings for Nimbus LAF.
