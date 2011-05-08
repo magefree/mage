@@ -78,7 +78,7 @@ public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
 		if (all) {
 			return super.getRule(all) + name;
 		}
-		return super.getRule();
+		return super.getRule(false);
 	}
 
 	public void clear() {
