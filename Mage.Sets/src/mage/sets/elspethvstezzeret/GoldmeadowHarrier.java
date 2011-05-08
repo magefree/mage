@@ -26,29 +26,48 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.sets.elspethvstezzeret;
 
 import java.util.UUID;
+
+import mage.Constants;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Abilities;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.TapTargetEffect;
+import mage.cards.CardImpl;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class PhyrexianRager extends mage.sets.tenth.PhyrexianRager {
+public class GoldmeadowHarrier extends CardImpl<GoldmeadowHarrier> {
 
-    public PhyrexianRager (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 51;
-        this.expansionSetCode = "MBS";
+    public GoldmeadowHarrier (UUID ownerId) {
+        super(ownerId, 3, "Goldmeadow Harrier", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        this.expansionSetCode = "DDF";
+        this.subtype.add("Kithkin");
+        this.subtype.add("Soldier");
+		this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public PhyrexianRager (final PhyrexianRager card) {
+    public GoldmeadowHarrier (final GoldmeadowHarrier card) {
         super(card);
     }
 
     @Override
-    public PhyrexianRager copy() {
-        return new PhyrexianRager(this);
+    public GoldmeadowHarrier copy() {
+        return new GoldmeadowHarrier(this);
     }
 
 }

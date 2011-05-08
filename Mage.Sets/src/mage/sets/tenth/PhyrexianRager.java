@@ -26,20 +26,34 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.sets.tenth;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class PhyrexianRager extends mage.sets.tenth.PhyrexianRager {
+public class PhyrexianRager extends CardImpl<PhyrexianRager> {
 
     public PhyrexianRager (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 51;
-        this.expansionSetCode = "MBS";
+        super(ownerId, 167, "Phyrexian Rager", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "10E";
+        this.subtype.add("Horror");
+		this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1), false);
+        ability.addEffect(new LoseLifeSourceEffect(1));
+        this.addAbility(ability);
     }
 
     public PhyrexianRager (final PhyrexianRager card) {
