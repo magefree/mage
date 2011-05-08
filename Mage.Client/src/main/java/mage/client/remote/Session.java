@@ -188,7 +188,9 @@ public class Session {
 	}
 
 	public boolean isTestMode() {
-		return serverState.isTestMode();
+		if (serverState != null)
+			return serverState.isTestMode();
+		return false;
 	}
 
 	public ChatPanel getChat(UUID chatId) {
