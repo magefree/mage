@@ -157,7 +157,7 @@ public abstract class ExpansionSet implements Serializable {
 	private List<Card> getCardClassesForPackage(String packageName) {
 		ClassLoader classLoader = this.getClass().getClassLoader();
 		assert classLoader != null;
-		String path = packageName.replace(".", File.separator);
+		String path = packageName.replace(".", "/");
 		Enumeration<URL> resources = null;
 		try {
 			resources = classLoader.getResources(path);
@@ -185,7 +185,7 @@ public abstract class ExpansionSet implements Serializable {
 			if (jarPath.contains("!")) {
 				jarPath = jarPath.substring(0, jarPath.lastIndexOf('!'));
 			}
-			String filePathElement = "file:" + File.separator;
+			String filePathElement = "file:";
 			if (jarPath.startsWith(filePathElement)) {
 				try {
 					jarPath = URLDecoder.decode(jarPath.substring(jarPath.indexOf(filePathElement) + filePathElement.length()), "UTF-8");
@@ -258,7 +258,7 @@ public abstract class ExpansionSet implements Serializable {
 					break;
 				}
 				if ((jarEntry.getName().startsWith(packageName)) && (jarEntry.getName().endsWith(".class"))) {
-					String clazz = jarEntry.getName().replaceAll(File.separator, "\\.").replace(".class", "");
+					String clazz = jarEntry.getName().replaceAll("/", "\\.").replace(".class", "");
 					Class c = cl.loadClass(clazz);
 					if (CardImpl.class.isAssignableFrom(c)) {
 						classes.add(c);
