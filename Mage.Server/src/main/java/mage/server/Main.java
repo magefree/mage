@@ -32,7 +32,12 @@ import java.net.UnknownHostException;
 import mage.server.util.PluginClassLoader;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.net.Inet4Address;
 import java.net.InetAddress;
+import java.net.InterfaceAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
 import mage.server.game.DeckValidatorFactory;
@@ -45,7 +50,6 @@ import mage.server.util.config.GamePlugin;
 import mage.util.Copier;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
@@ -96,16 +100,33 @@ public class Main {
     }
 
 	private static void setServerAddress(String ip) {
-		try {
-			if (ip.equals("localhost")) {
-				ip = InetAddress.getLocalHost().getHostAddress();
-			}
-		} catch (UnknownHostException ex) {
-			logger.warn("Could not get server address: ", ex);
-		}
 		String ipParam = System.getProperty("server");
 		if (ipParam != null) {
 			ip = ipParam;
+		}
+		if (ip.equals("localhost")) {
+			try {
+				String foundIP = "";
+				for (Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces(); interfaces.hasMoreElements(); ) {
+					NetworkInterface iface = interfaces.nextElement( );
+					if (iface.isLoopback())
+						continue;
+					for (InterfaceAddress addr: iface.getInterfaceAddresses())
+					{
+						InetAddress iaddr = addr.getAddress();
+						if (iaddr instanceof Inet4Address) {
+							foundIP = iaddr.getHostAddress();
+							break;
+						}
+					}
+					if (foundIP.length() > 0)
+						break;
+				}
+				if (foundIP.length() > 0)
+					ip = foundIP;
+			} catch (SocketException ex) {
+				logger.warn("Could not get server address: ", ex);
+			}
 		}
 		System.setProperty("java.rmi.server.hostname", ip);
 		System.setProperty("sun.rmi.transport.tcp.readTimeout", "30000");
