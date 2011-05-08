@@ -187,6 +187,33 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 						}
 						refreshDeck();
 					}
+					else if (event.getEventName().equals("shift-double-click") && mode == DeckEditorMode.Constructed) {
+						for (Card card: deck.getCards()) {
+							if (card.getId().equals((UUID)event.getSource())) {
+								deck.getCards().remove(card);
+								deck.getSideboard().add(card);
+								break;
+							}
+						}
+						refreshDeck();
+					}
+				}
+			}
+		);
+		this.deckArea.addSideboardEventListener(
+			new Listener<Event> () {
+				@Override
+				public void event(Event event) {
+					if (event.getEventName().equals("double-click")) {
+						for (Card card: deck.getSideboard()) {
+							if (card.getId().equals((UUID)event.getSource())) {
+								deck.getSideboard().remove(card);
+								deck.getCards().add(card);
+								break;
+							}
+						}
+						refreshDeck();
+					}
 				}
 			}
 		);

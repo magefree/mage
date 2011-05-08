@@ -314,9 +314,15 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
 			e.consume();
 			Object obj = e.getSource();
 			if (obj instanceof Card) {
-				cardEventSource.doubleClick(((Card)obj).getCardId(), "double-click");
+				if (e.isShiftDown())
+					cardEventSource.shiftDoubleClick(((Card)obj).getCardId(), "shift-double-click");
+				else
+					cardEventSource.doubleClick(((Card)obj).getCardId(), "double-click");
 			} else if (obj instanceof MageCard) {
-				cardEventSource.doubleClick(((MageCard)obj).getOriginal().getId(), "double-click");
+				if (e.isShiftDown())
+					cardEventSource.shiftDoubleClick(((MageCard)obj).getOriginal().getId(), "shift-double-click");
+				else
+					cardEventSource.doubleClick(((MageCard)obj).getOriginal().getId(), "double-click");
 			}
 		}
 	}
