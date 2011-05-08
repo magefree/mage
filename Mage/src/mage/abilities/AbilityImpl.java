@@ -283,9 +283,14 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
 	@Override
 	public String getRule() {
+		return getRule(false);
+	}
+
+	@Override
+	public String getRule(boolean all) {
 		StringBuilder sbRule = new StringBuilder();
 
-		if (!(this.abilityType == AbilityType.SPELL)) {
+		if (all || this.abilityType != AbilityType.SPELL) {
 			if (manaCosts.size() > 0) {
 				sbRule.append(manaCosts.getText());
 			}

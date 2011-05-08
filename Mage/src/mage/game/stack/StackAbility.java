@@ -193,6 +193,11 @@ public class StackAbility implements StackObject, Ability {
 	}
 
 	@Override
+	public String getRule(boolean all) {
+		return ability.getRule(all);
+	}
+
+	@Override
 	public String getRule(String source) {
 		return ability.getRule(source);
 	}

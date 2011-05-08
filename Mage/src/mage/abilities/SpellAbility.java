@@ -73,6 +73,14 @@ public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
 		return " casts " + getMessageText(game);
 	}
 
+	@Override
+	public String getRule(boolean all) {
+		if (all) {
+			return super.getRule(all) + name;
+		}
+		return "";
+	}
+
 	public void clear() {
 		this.choices.clearChosen();
 		this.targets.clearChosen();

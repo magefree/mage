@@ -46,7 +46,7 @@ public class AbilityPickerView implements Serializable {
 
 	public AbilityPickerView(Collection<? extends Ability> abilities) {
 		for (Ability ability: abilities) {
-			choices.put(ability.getId(), ability.getRule());
+			choices.put(ability.getId(), ability.getRule(true));
 		}
 	}
 

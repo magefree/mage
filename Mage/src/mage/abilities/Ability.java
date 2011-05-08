@@ -74,6 +74,7 @@ public interface Ability extends Serializable {
 	public Zone getZone();
 	public boolean isUsesStack();
 	public String getRule();
+	public String getRule(boolean all);
 	public String getRule(String source);
 	public boolean activate(Game game, boolean noMana);
 	public boolean resolve(Game game);
