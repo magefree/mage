@@ -72,6 +72,20 @@ public class TargetCardInYourGraveyard extends TargetCard<TargetCardInYourGravey
 		return false;
 	}
 
+	/**
+	 * Checks if there are enough {@link Card} that can be selected.
+	 *
+	 * @param sourceControllerId - controller of the select event
+	 * @param game
+	 * @return - true if enough valid {@link Card} exist
+	 */
+	@Override
+	public boolean canChoose(UUID sourceControllerId, Game game) {
+		if (game.getPlayer(sourceControllerId).getGraveyard().count(filter, game) >= this.minNumberOfTargets)
+			return true;
+		return false;
+	}
+
 	@Override
 	public TargetCardInYourGraveyard copy() {
 		return new TargetCardInYourGraveyard(this);

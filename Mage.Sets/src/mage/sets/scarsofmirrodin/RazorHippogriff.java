@@ -32,16 +32,12 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -50,7 +46,7 @@ import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
@@ -71,7 +67,7 @@ public class RazorHippogriff extends CardImpl<RazorHippogriff> {
 
 		Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
 		//TargetCard target = new TargetCard(Zone.GRAVEYARD, FilterArtifactCard.getDefault());
-		TargetCard target = new TargetCardInGraveyard(FilterArtifactCard.getDefault());
+		TargetCard target = new TargetCardInYourGraveyard(FilterArtifactCard.getDefault());
 		target.setRequired(true);
 		target.setTargetName("artifact card in your graveyard");
 		ability.addTarget(target);
