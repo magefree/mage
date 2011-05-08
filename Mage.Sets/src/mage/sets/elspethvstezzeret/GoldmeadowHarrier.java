@@ -34,10 +34,10 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
@@ -56,7 +56,8 @@ public class GoldmeadowHarrier extends CardImpl<GoldmeadowHarrier> {
 		this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{W}"));
+        ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
