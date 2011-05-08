@@ -158,7 +158,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 							deck.getCards().add(Sets.createCard(card.getClass()));
 							if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
 								deck.getSideboard().remove(card);
-								cardSelector.getCardsList().removeCard(card.getId());
+								cardSelector.removeCard(card.getId());
 							}
 							if (cardInfoPane instanceof  CardInfoPane)  {
 								((CardInfoPane)cardInfoPane).setCard(new CardView(card));

@@ -153,6 +153,16 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		return this.cardGrid;
 	}
 
+	public void removeCard(UUID cardId) {
+		this.cardGrid.removeCard(cardId);
+		for (Card card: cards) {
+			if (card.getId().equals(cardId)) {
+				cards.remove(card);
+				break;
+			}
+		}
+	}
+
 	public Card getCard(UUID cardId) {
 		if (!cards.isEmpty()) {
 			for (Card card: cards) {
