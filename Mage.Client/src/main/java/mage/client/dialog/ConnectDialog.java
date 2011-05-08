@@ -35,11 +35,23 @@
 package mage.client.dialog;
 
 import java.awt.Cursor;
-import java.util.logging.Logger;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import mage.client.MageFrame;
 import mage.client.util.Config;
-import mage.util.Logging;
+
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -47,7 +59,8 @@ import mage.util.Logging;
  */
 public class ConnectDialog extends MageDialog {
 
-	private final static Logger logger = Logging.getLogger(ConnectDialog.class.getName());
+	private final static Logger logger = Logger.getLogger(ConnectDialog.class);
+	
 
     /** Creates new form ConnectDialog */
     public ConnectDialog() {
@@ -114,6 +127,7 @@ public class ConnectDialog extends MageDialog {
         txtProxyServer = new javax.swing.JTextField();
         lblProxyPort = new javax.swing.JLabel();
         txtProxyPort = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setTitle("Connect");
         setNormalBounds(new java.awt.Rectangle(100, 100, 410, 307));
@@ -200,6 +214,15 @@ public class ConnectDialog extends MageDialog {
                     .addComponent(txtProxyPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        jButton1.setText("Find...");
+        jButton1.setToolTipText("Find public server");
+        jButton1.setName("findServerBtn"); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	findPublicServerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -223,10 +246,13 @@ public class ConnectDialog extends MageDialog {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(131, 131, 131))
-                                    .addComponent(txtServer, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                                    .addComponent(txtUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                                    .addComponent(chkAutoConnect, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                                    .addComponent(chkUseProxy, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))))
+                                    .addComponent(txtUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                                    .addComponent(chkAutoConnect, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                                    .addComponent(chkUseProxy, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(txtServer, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton1)))))
                         .addContainerGap())
                     .addComponent(pnlProxy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -236,7 +262,8 @@ public class ConnectDialog extends MageDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblServer)
-                    .addComponent(txtServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -250,7 +277,7 @@ public class ConnectDialog extends MageDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkUseProxy)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlProxy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlProxy, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
@@ -285,6 +312,7 @@ public class ConnectDialog extends MageDialog {
 			txtPort.setText(MageFrame.getPreferences().get("serverPort", Integer.toString(Config.port)));
 			return;
 		}
+
 		try {
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
 			if (chkUseProxy.isSelected()) {
@@ -325,12 +353,53 @@ public class ConnectDialog extends MageDialog {
 		this.showProxySettings();
 	}//GEN-LAST:event_chkUseProxyActionPerformed
 
+    private void findPublicServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    	BufferedReader in = null;
+    	try {
+			URL serverListURL = new URL("http://mage.googlecode.com/files/server-list.txt");
+			in = new BufferedReader(new InputStreamReader(serverListURL.openStream()));
+			
+			List<String> servers = new ArrayList<String>();
+			String inputLine;
+			while ((inputLine = in.readLine()) != null) {
+				System.out.println("Found server: "+inputLine);
+				servers.add(inputLine);
+			}
+			
+			if (servers.size() == 0) {
+				JOptionPane.showMessageDialog(null, "Couldn't find any server.");
+				return;
+			}
+
+			String selectedServer = (String) JOptionPane.showInputDialog(null,
+					"Choose MAGE Public Server:", "Input",
+					JOptionPane.INFORMATION_MESSAGE, null, servers.toArray(),
+					servers.get(0));
+			if (selectedServer != null) {
+				String[] params = selectedServer.split(":");
+				if (params.length == 3) {
+					this.txtServer.setText(params[1]);
+					this.txtPort.setText(params[2]);
+				} else {
+					JOptionPane.showMessageDialog(null, "Wrong server data format.");
+				}
+			}
+
+			in.close();
+		} catch(Exception ex) {
+			logger.error(ex,ex);
+		} finally {
+			if (in != null) try { in.close(); } catch (Exception e) {}
+		}
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnConnect;
     private javax.swing.JCheckBox chkAutoConnect;
     private javax.swing.JCheckBox chkUseProxy;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblPort;
     private javax.swing.JLabel lblProxyPort;
     private javax.swing.JLabel lblProxyServer;

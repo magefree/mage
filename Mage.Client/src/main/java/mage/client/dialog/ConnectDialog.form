@@ -47,10 +47,14 @@
                                       <Component id="txtPort" min="-2" pref="71" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="txtServer" pref="260" max="32767" attributes="0"/>
-                                  <Component id="txtUserName" alignment="0" pref="260" max="32767" attributes="0"/>
-                                  <Component id="chkAutoConnect" alignment="0" pref="260" max="32767" attributes="0"/>
-                                  <Component id="chkUseProxy" alignment="0" pref="260" max="32767" attributes="0"/>
+                                  <Component id="txtUserName" alignment="0" pref="270" max="32767" attributes="0"/>
+                                  <Component id="chkAutoConnect" alignment="0" pref="270" max="32767" attributes="0"/>
+                                  <Component id="chkUseProxy" alignment="0" pref="270" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="txtServer" pref="199" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -68,6 +72,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblServer" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtServer" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -84,7 +89,7 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="chkUseProxy" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="pnlProxy" max="32767" attributes="0"/>
+              <Component id="pnlProxy" pref="51" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -223,5 +228,15 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Find..."/>
+        <Property name="toolTipText" type="java.lang.String" value="Find public server"/>
+        <Property name="name" type="java.lang.String" value="findServerBtn" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>
