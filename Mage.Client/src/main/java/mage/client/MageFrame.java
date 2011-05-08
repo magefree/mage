@@ -578,7 +578,7 @@ public class MageFrame extends javax.swing.JFrame {
         mageToolbar.add(btnCollectionViewer);
         mageToolbar.add(jSeparator6);
 
-		btnChallenges.setText("Challenges");
+		/*btnChallenges.setText("Challenges");
         btnChallenges.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnChallenges.setFocusable(false);
         btnChallenges.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -589,7 +589,7 @@ public class MageFrame extends javax.swing.JFrame {
 	        }
         });
         mageToolbar.add(btnChallenges);
-        mageToolbar.add(jSeparator7);
+        mageToolbar.add(jSeparator7);*/
 
         btnPreferences.setText("Preferences");
         btnPreferences.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
