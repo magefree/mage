@@ -91,12 +91,12 @@ public class TableManager {
 		return tables.values();
 	}
 
-	public boolean joinTable(UUID sessionId, UUID tableId, String name, String playerType, DeckCardLists deckList) throws GameException {
-		return controllers.get(tableId).joinTable(sessionId, name, playerType, deckList);
+	public boolean joinTable(UUID sessionId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws GameException {
+		return controllers.get(tableId).joinTable(sessionId, name, playerType, skill, deckList);
 	}
 
-	public boolean joinTournament(UUID sessionId, UUID tableId, String name, String playerType) throws GameException {
-		return controllers.get(tableId).joinTournament(sessionId, name, playerType);
+	public boolean joinTournament(UUID sessionId, UUID tableId, String name, String playerType, int skill) throws GameException {
+		return controllers.get(tableId).joinTournament(sessionId, name, playerType, skill);
 	}
 
 	public boolean submitDeck(UUID sessionId, UUID tableId, DeckCardLists deckList) throws GameException {

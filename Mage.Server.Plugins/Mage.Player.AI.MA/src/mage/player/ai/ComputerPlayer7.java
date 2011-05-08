@@ -66,10 +66,8 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 
 	}
 
-	public ComputerPlayer7(String name, RangeOfInfluence range) {
-		super(name, range);
-		maxDepth = Config2.maxDepth;
-		maxNodes = Config2.maxNodes;
+	public ComputerPlayer7(String name, RangeOfInfluence range, int skill) {
+		super(name, range, skill);
 	}
 
 	public ComputerPlayer7(final ComputerPlayer7 player) {

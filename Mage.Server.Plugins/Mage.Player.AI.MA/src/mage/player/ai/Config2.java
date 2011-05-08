@@ -45,13 +45,13 @@ public class Config2 {
 
 	private final static Logger logger = Logging.getLogger(Config2.class.getName());
 
-	public static final int maxDepth;
+//	public static final int maxDepth;
 	public static final int maxNodes;
 	public static final int evaluatorLifeFactor;
 	public static final int evaluatorPermanentFactor;
 	public static final int evaluatorCreatureFactor;
 	public static final int evaluatorHandFactor;
-	public static final int maxThinkSeconds;
+//	public static final int maxThinkSeconds;
 
 	static {
 		Properties p = new Properties();
@@ -63,13 +63,13 @@ public class Config2 {
 		} catch (URISyntaxException ex) {
 			Logger.getLogger(Config2.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		maxDepth = Integer.parseInt(p.getProperty("maxDepth"));
+//		maxDepth = Integer.parseInt(p.getProperty("maxDepth"));
 		maxNodes = Integer.parseInt(p.getProperty("maxNodes"));
 		evaluatorLifeFactor = Integer.parseInt(p.getProperty("evaluatorLifeFactor"));
 		evaluatorPermanentFactor = Integer.parseInt(p.getProperty("evaluatorPermanentFactor"));
 		evaluatorCreatureFactor = Integer.parseInt(p.getProperty("evaluatorCreatureFactor"));
 		evaluatorHandFactor = Integer.parseInt(p.getProperty("evaluatorHandFactor"));
-		maxThinkSeconds = Integer.parseInt(p.getProperty("maxThinkSeconds"));
+//		maxThinkSeconds = Integer.parseInt(p.getProperty("maxThinkSeconds"));
 	}
 
 }

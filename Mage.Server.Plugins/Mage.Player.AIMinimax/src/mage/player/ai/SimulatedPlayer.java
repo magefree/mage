@@ -68,9 +68,9 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
 	private static PassAbility pass = new PassAbility();
 	protected int maxDepth;
 
-	public SimulatedPlayer(UUID id, boolean isSimulatedPlayer) {
+	public SimulatedPlayer(UUID id, boolean isSimulatedPlayer, int maxDepth) {
 		super(id);
-		maxDepth = Config.maxDepth;
+		this.maxDepth = maxDepth;
 		pass.setControllerId(playerId);
 		this.isSimulatedPlayer = isSimulatedPlayer;
 	}

@@ -95,6 +95,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 
 	protected int maxDepth;
 	protected int maxNodes;
+	protected int maxThink;
 	protected int nodeCount = 0;
 	protected long thinkTime = 0;
 	protected LinkedList<Ability> actions = new LinkedList<Ability>();
@@ -104,9 +105,10 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 	protected int currentScore;
 	protected SimulationNode root;
 
-	public ComputerPlayer2(String name, RangeOfInfluence range) {
+	public ComputerPlayer2(String name, RangeOfInfluence range, int skill) {
 		super(name, range);
-		maxDepth = Config.maxDepth;
+		maxDepth = skill * 2;
+		maxThink = skill * 3;
 		maxNodes = Config.maxNodes;
 	}
 
@@ -323,7 +325,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 		long startTime = System.nanoTime();
 		pool.execute(task);
 		try {
-			task.get(Config.maxThinkSeconds, TimeUnit.SECONDS);
+			task.get(maxThink, TimeUnit.SECONDS);
 			long endTime = System.nanoTime();
 			long duration = endTime - startTime;
 			logger.info("Calculated " + root.nodeCount + " nodes in " + duration/1000000000.0 + "s");
@@ -720,7 +722,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 
 		for (Player copyPlayer: sim.getState().getPlayers().values()) {
 			Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId());
-			SimulatedPlayer newPlayer = new SimulatedPlayer(copyPlayer.getId(), copyPlayer.getId().equals(playerId));
+			SimulatedPlayer newPlayer = new SimulatedPlayer(copyPlayer.getId(), copyPlayer.getId().equals(playerId), maxDepth);
 			newPlayer.restore(origPlayer);
 			sim.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
 		}

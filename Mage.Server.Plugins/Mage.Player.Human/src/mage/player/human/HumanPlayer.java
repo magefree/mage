@@ -87,7 +87,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	}
 	protected transient TargetCreaturePermanent targetCombat = new TargetCreaturePermanent(filter);
 
-	public HumanPlayer(String name, RangeOfInfluence range) {
+	public HumanPlayer(String name, RangeOfInfluence range, int skill) {
 		super(name, range);
 		human = true;
 	}

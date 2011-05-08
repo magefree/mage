@@ -303,14 +303,14 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 		try {
 			MatchOptions options = new MatchOptions("1", "Two Player Duel");
 			options.getPlayerTypes().add("Human");
-			options.getPlayerTypes().add("Computer - default");
+			options.getPlayerTypes().add("Computer - minimax");
 			options.setDeckType("Limited");
 			options.setAttackOption(MultiplayerAttackOption.LEFT);
 			options.setRange(RangeOfInfluence.ALL);
 			options.setWinsNeeded(1);
 			table = session.createTable(roomId,	options);
 			session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, Sets.loadDeck("test.dck"));
-			session.joinTable(roomId, table.getTableId(), "Computer", "Computer - default", 1, Sets.loadDeck("test.dck"));
+			session.joinTable(roomId, table.getTableId(), "Computer", "Computer - minimax", 1, Sets.loadDeck("test.dck"));
 			session.startGame(roomId, table.getTableId());
 		} catch (Exception ex) {
 			handleError(ex);

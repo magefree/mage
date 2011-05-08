@@ -53,12 +53,12 @@ public class PlayerFactory {
 
 	private PlayerFactory() {}
 
-	public Player createPlayer(String playerType, String name, RangeOfInfluence range) {
+	public Player createPlayer(String playerType, String name, RangeOfInfluence range, int skill) {
 		Player player;
 		Constructor<?> con;
 		try {
-			con = playerTypes.get(playerType).getConstructor(new Class[]{String.class, RangeOfInfluence.class});
-			player = (Player)con.newInstance(new Object[] {name, range});
+			con = playerTypes.get(playerType).getConstructor(new Class[]{String.class, RangeOfInfluence.class, int.class});
+			player = (Player)con.newInstance(new Object[] {name, range, skill});
 		} catch (Exception ex) {
 			logger.fatal("PlayerFactory error ", ex);
 			return null;

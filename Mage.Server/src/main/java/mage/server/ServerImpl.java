@@ -167,7 +167,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	@Override
 	public boolean joinTable(UUID sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException, GameException {
 		try {
-			boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTable(sessionId, tableId, name, playerType, deckList);
+			boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTable(sessionId, tableId, name, playerType, skill, deckList);
 			logger.info("Session " + sessionId + " joined table " + tableId);
 			return ret;
 		}
@@ -182,7 +182,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	@Override
 	public boolean joinTournamentTable(UUID sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill) throws MageException, GameException {
 		try {
-			boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTournamentTable(sessionId, tableId, name, playerType);
+			boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTournamentTable(sessionId, tableId, name, playerType, skill);
 			logger.info("Session " + sessionId + " joined table " + tableId);
 			return ret;
 		}

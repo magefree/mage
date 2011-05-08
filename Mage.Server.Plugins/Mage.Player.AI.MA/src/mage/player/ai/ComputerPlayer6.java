@@ -75,6 +75,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
 	protected int maxDepth;
 	protected int maxNodes;
+	protected int maxThink;
 	protected LinkedList<Ability> actions = new LinkedList<Ability>();
 	protected List<UUID> targets = new ArrayList<UUID>();
 	protected List<String> choices = new ArrayList<String>();
@@ -82,9 +83,10 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 	protected int currentScore;
 	protected SimulationNode2 root;
 
-	public ComputerPlayer6(String name, RangeOfInfluence range) {
+	public ComputerPlayer6(String name, RangeOfInfluence range, int skill) {
 		super(name, range);
-		maxDepth = Config2.maxDepth;
+		maxDepth = skill * 2;
+		maxThink = skill * 3;
 		maxNodes = Config2.maxNodes;
 	}
 
@@ -370,7 +372,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 		});
 		pool.execute(task);
 		try {
-			return task.get(Config2.maxThinkSeconds, TimeUnit.SECONDS);
+			return task.get(maxThink, TimeUnit.SECONDS);
 		} catch (TimeoutException e) {
 			logger.info("simulating - timed out");
 			task.cancel(true);
@@ -501,7 +503,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 							targets = node.getTargets();
 						if (node.getChoices().size() > 0)
 							choices = node.getChoices();
-						if (depth == Config2.maxDepth) {
+						if (depth == maxDepth) {
 							logger.info("saved");
 							node.children.clear();
 							node.children.add(bestNode);

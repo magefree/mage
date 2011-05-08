@@ -106,7 +106,7 @@ public class TableController {
 		);
 	}
 
-	public synchronized boolean joinTournament(UUID sessionId, String name, String playerType) throws GameException {
+	public synchronized boolean joinTournament(UUID sessionId, String name, String playerType, int skill) throws GameException {
 		if (table.getState() != TableState.WAITING) {
 			return false;
 		}
@@ -114,7 +114,7 @@ public class TableController {
 		if (seat == null) {
 			throw new GameException("No available seats.");
 		}
-		Player player = createPlayer(name, seat.getPlayerType());
+		Player player = createPlayer(name, seat.getPlayerType(), skill);
 		tournament.addPlayer(player, seat.getPlayerType());
 		table.joinTable(player, seat);
 		logger.info("player joined " + player.getId());
@@ -126,7 +126,7 @@ public class TableController {
 		return true;
 	}
 
-	public synchronized boolean joinTable(UUID sessionId, String name, String playerType, DeckCardLists deckList) throws GameException {
+	public synchronized boolean joinTable(UUID sessionId, String name, String playerType, int skill, DeckCardLists deckList) throws GameException {
 		if (table.getState() != TableState.WAITING) {
 			return false;
 		}
@@ -139,7 +139,7 @@ public class TableController {
 			throw new GameException(name + " has an invalid deck for this format");
 		}
 		
-		Player player = createPlayer(name, seat.getPlayerType());
+		Player player = createPlayer(name, seat.getPlayerType(), skill);
 		match.addPlayer(player, deck);
 		table.joinTable(player, seat);
 		logger.info("player joined " + player.getId());
@@ -207,13 +207,13 @@ public class TableController {
 		return table.getValidator().validate(deck);
 	}
 
-	private Player createPlayer(String name, String playerType) {
+	private Player createPlayer(String name, String playerType, int skill) {
 		Player player;
 		if (options == null) {
-			player = PlayerFactory.getInstance().createPlayer(playerType, name, RangeOfInfluence.ALL);
+			player = PlayerFactory.getInstance().createPlayer(playerType, name, RangeOfInfluence.ALL, skill);
 		}
 		else {
-			player = PlayerFactory.getInstance().createPlayer(playerType, name, options.getRange());
+			player = PlayerFactory.getInstance().createPlayer(playerType, name, options.getRange(), skill);
 		}
 		logger.info("Player created " + player.getId());
 		return player;
@@ -238,7 +238,7 @@ public class TableController {
 				table.initGame();
 				GameOptions options = new GameOptions();
 				options.testMode = true;
-				match.getGame().setGameOptions(options);
+//				match.getGame().setGameOptions(options);
 				GameManager.getInstance().createGameSession(match.getGame(), sessionPlayerMap, table.getId(), null);
 				ChallengeManager.getInstance().prepareChallenge(getPlayerId(), match);
 				SessionManager sessionManager = SessionManager.getInstance();
