@@ -90,6 +90,7 @@ public class MageBook extends JComponent {
 		pageLeft.setBounds(0, 0, 64, 64);
 		pageLeft.setVisible(false);
 		pageLeft.setObserver(new Command() {
+            @Override
 			public void execute() {
 				currentPage--;
 				if (currentPage == 0) {
@@ -106,6 +107,7 @@ public class MageBook extends JComponent {
 		pageRight.setBounds(WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH - 64, 0, 64, 64);
 		pageRight.setVisible(false);
 		pageRight.setObserver(new Command() {
+            @Override
 			public void execute() {
 				currentPage++;
 				pageLeft.setVisible(true);
@@ -162,8 +164,9 @@ public class MageBook extends JComponent {
 			tab.setBounds(0, y, 39, 120);
 			final String _set = set;
 			tab.setObserver(new Command() {
+                @Override
 				public void execute() {
-					if (currentSet != _set || currentPage != 0) {
+					if (!currentSet.equals(_set) || currentPage != 0) {
 						AudioManager.playAnotherTab();
 						currentPage = 0;
 						currentSet = _set;
