@@ -436,7 +436,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 				Permanent source = game.getPermanent(sourceId);
 				if (source != null && source.getAbilities().containsKey(LifelinkAbility.getInstance().getId())) {
 					Player player = game.getPlayer(source.getControllerId());
-					player.gainLife(damageDone, game);
+					player.gainLife(damageAmount, game);
 				}
 				if (source != null && source.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
 					deathtouched = true;

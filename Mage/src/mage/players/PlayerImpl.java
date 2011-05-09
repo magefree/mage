@@ -642,14 +642,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 					}
 					if (source != null && source.getAbilities().containsKey(LifelinkAbility.getInstance().getId())) {
 						Player player = game.getPlayer(source.getControllerId());
-						player.gainLife(actualDamage, game);
+						player.gainLife(damage, game);
 					}
 					game.fireEvent(new DamagedPlayerEvent(playerId, sourceId, playerId, actualDamage, combatDamage));
-//					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DAMAGED_PLAYER, playerId, sourceId, playerId, actualDamage));
-//					if (combatDamage)
-//						game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COMBAT_DAMAGED_PLAYER, playerId, sourceId, playerId, actualDamage));
-//					else
-//						game.fireEvent(GameEvent.getEvent(GameEvent.EventType.NONCOMBAT_DAMAGED_PLAYER, playerId, sourceId, playerId, actualDamage));
 					return actualDamage;
 				}
 			}
