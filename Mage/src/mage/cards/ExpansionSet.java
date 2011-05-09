@@ -208,8 +208,10 @@ public abstract class ExpansionSet implements Serializable {
 			}
 		}
 		List<Card> newCards = new ArrayList<Card>();
-		for (Class clazz: classes) {
-			newCards.add(createCard(clazz));
+		for (Class clazz : classes) {
+			if (clazz.getPackage().getName().equals(packageName)) {
+				newCards.add(createCard(clazz));
+			}
 		}
 		return newCards;
 	}
