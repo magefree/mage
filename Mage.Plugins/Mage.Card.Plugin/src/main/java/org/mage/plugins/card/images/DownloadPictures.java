@@ -90,9 +90,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
 	public JDialog getDlg(JFrame frame) {
 		String title = "Downloading";
-		if (offlineMode) {
-			title += " (using local card db)";
-		}
+
 		final JDialog dlg = this.dlg.createDialog(frame, title);
 		close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

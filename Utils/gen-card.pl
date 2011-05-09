@@ -215,6 +215,7 @@ $wizardstous{'MBS'} = 'MBS';
 my %knownSets;
 $knownSets{'ARB'} = 'alarareborn';
 $knownSets{'CON'} = 'conflux';
+$knownSets{'DST'} = 'darksteel';
 $knownSets{'M10'} = 'magic2010';
 $knownSets{'M11'} = 'magic2011';
 $knownSets{'HOP'} = 'planechase';
@@ -265,6 +266,7 @@ $cardtypes{'Artifact'} = "CardType.ARTIFACT";
 $cardtypes{'Creature'} = "CardType.CREATURE";
 $cardtypes{'Enchantment'} = "CardType.ENCHANTMENT";
 $cardtypes{'Instant'} = "CardType.INSTANT";
+$cardtypes{'Land'} = "CardType.LAND";
 $cardtypes{'Sorcery'} = "CardType.SORCERY";
 
 my %normalid;
