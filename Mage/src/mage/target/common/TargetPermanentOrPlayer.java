@@ -32,6 +32,7 @@ import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.filter.Filter;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterPermanentOrPlayer;
@@ -52,6 +53,7 @@ import java.util.UUID;
 public class TargetPermanentOrPlayer extends TargetImpl<TargetPermanentOrPlayer> {
 
 	protected FilterPermanentOrPlayer filter;
+	protected FilterPermanent filterPermanent;
 
 	public TargetPermanentOrPlayer() {
 		this(1, 1);
@@ -67,6 +69,7 @@ public class TargetPermanentOrPlayer extends TargetImpl<TargetPermanentOrPlayer>
 		this.zone = Zone.ALL;
 		this.filter = new FilterPermanentOrPlayer();
 		this.targetName = filter.getMessage();
+		this.filterPermanent = new FilterPermanent();
 	}
 
 	public TargetPermanentOrPlayer(int minNumTargets, int maxNumTargets, boolean notTarget) {
@@ -169,7 +172,7 @@ public class TargetPermanentOrPlayer extends TargetImpl<TargetPermanentOrPlayer>
 					return true;
 			}
 		}
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
+		for (Permanent permanent: game.getBattlefield().getActivePermanents(filterPermanent, sourceControllerId, game)) {
 			if (filter.match(permanent, sourceControllerId, game)) {
 				count++;
 				if (count >= this.minNumberOfTargets)
