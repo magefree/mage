@@ -729,6 +729,7 @@ public class GamePanel extends javax.swing.JPanel {
 	private void btnStopWatchingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopWatchingActionPerformed
 		if (modalQuestion("Are you sure you want to stop watching?", "Stop watching") == JOptionPane.YES_OPTION) {
 			session.stopWatching(gameId);
+			this.hideGame();
 		}
 	}//GEN-LAST:event_btnStopWatchingActionPerformed
 

@@ -96,7 +96,7 @@ public class Client implements CallbackClient {
 						replayGame(callback.getObjectId());
 					}
 					else if (callback.getMethod().equals("watchGame")) {
-						watchGame((UUID) callback.getData());
+						watchGame((UUID) callback.getObjectId());
 					}
 					else if (callback.getMethod().equals("chatMessage")) {
 						ChatMessage message = (ChatMessage) callback.getData();

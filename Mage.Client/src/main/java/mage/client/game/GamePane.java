@@ -84,11 +84,13 @@ public class GamePane extends MagePane {
 	}
 
 	public void watchGame(UUID gameId) {
+		this.setTitle("Watching " + gameId);
 		gamePanel.watchGame(gameId);
 		this.toFront();
 	}
 
 	public void replayGame(UUID gameId) {
+		this.setTitle("Replaying " + gameId);
 		gamePanel.replayGame(gameId);
 		this.toFront();
 	}
