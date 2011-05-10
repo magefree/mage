@@ -371,6 +371,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	protected void playManaAbilities(Game game) {
 		MageObject object = game.getObject(response.getUUID());
+		if (object == null) return;
 		Map<UUID, ActivatedAbility> useableAbilities;
 		switch (game.getZone(object.getId())) {
 			case HAND:
