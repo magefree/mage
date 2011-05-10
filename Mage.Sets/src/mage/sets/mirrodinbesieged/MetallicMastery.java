@@ -34,16 +34,14 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.counters.common.PlusOneCounter;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
 public class MetallicMastery extends CardImpl<MetallicMastery> {
 
