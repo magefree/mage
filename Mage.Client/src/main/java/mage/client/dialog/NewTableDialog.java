@@ -77,6 +77,7 @@ public class NewTableDialog extends MageDialog {
     /** Creates new form NewTableDialog */
     public NewTableDialog() {
         initComponents();
+	    txtName.setText("Game");
 		player1Panel.showLevel(false);
 		this.spnNumWins.setModel(new SpinnerNumberModel(1, 1, 5, 1));
     }
