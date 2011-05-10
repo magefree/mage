@@ -31,9 +31,7 @@ package mage.interfaces.callback;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -41,7 +39,7 @@ import mage.util.Logging;
  */
 public class CallbackClientDaemon extends Thread {
 
-	private final static Logger logger = Logging.getLogger(CallbackClientDaemon.class.getName());
+	private final static Logger logger = Logger.getLogger(CallbackClientDaemon.class);
 
 	private static ExecutorService callbackExecutor = Executors.newCachedThreadPool();
 	private final CallbackClient client;
@@ -69,14 +67,14 @@ public class CallbackClientDaemon extends Thread {
 							client.processCallback(callback);
 						}
 						catch (Exception ex) {
-							logger.log(Level.SEVERE, null, ex);
+							logger.fatal("CallbackClientDaemon error ", ex);
 						}
 					}
 				}
 			);
          }
       } catch(Exception ex) {
-			logger.log(Level.SEVERE, null, ex);
+			logger.fatal("CallbackClientDaemon error ", ex);
       }
    }
 }

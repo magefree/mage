@@ -30,8 +30,7 @@ package mage.interfaces.callback;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.logging.Logger;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -39,7 +38,7 @@ import mage.util.Logging;
  */
 public class CallbackServerSession {
 
-	private final static Logger logger = Logging.getLogger(CallbackServerSession.class.getName());
+	private final static Logger logger = Logger.getLogger(CallbackServerSession.class);
 
 	private final ClientCallback callback = new ClientCallback();
 	private final ReentrantLock lock = new ReentrantLock();
@@ -60,11 +59,11 @@ public class CallbackServerSession {
 			waitingForCallback = true;
 			waiting.signal();
 			while (callback.getMethod() == null) {
-				logger.finer("waiting for callback");
+				logger.trace("waiting for callback");
 				callbackCalled.await();
 			}
 			waitingForCallback = false;
-			logger.finer("callback called:" + callback.getMethod());
+			logger.trace("callback called:" + callback.getMethod());
 			return callback;
 		}
 		finally {
@@ -82,7 +81,7 @@ public class CallbackServerSession {
 		lock.lock();
 		try {
 			while (!waitingForCallback) {
-				logger.finer("waiting for callback state to call:" + call.getMethod());
+				logger.trace("waiting for callback state to call:" + call.getMethod());
 				waiting.await();
 			}
 			callback.setMethod(call.getMethod());
