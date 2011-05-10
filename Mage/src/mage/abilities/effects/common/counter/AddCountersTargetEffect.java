@@ -34,6 +34,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 import java.util.UUID;
 
@@ -63,14 +64,19 @@ public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffe
 	@Override
 	public boolean apply(Game game, Ability source) {
 		int affectedTargets = 0;
-		for (UUID permanentId : source.getTargets().get(0).getTargets()) {
-			Permanent permanent = game.getPermanent(permanentId);
+		for (UUID uuid : source.getTargets().get(0).getTargets()) {
+			Permanent permanent = game.getPermanent(uuid);
 			if (permanent != null) {
 				if (counter != null) {
-				permanent.addCounters(counter);
+					permanent.addCounters(counter);
+				} else {
+					permanent.addCounters(name, amount);
+				}
 			} else {
-				permanent.addCounters(name, amount);
-			}
+				Player player = game.getPlayer(uuid);
+				if (player != null) {
+					player.getCounters().addCounter(counter);
+				}
 			}
 		}
 		return affectedTargets > 0;

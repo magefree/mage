@@ -36,6 +36,7 @@ import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -43,20 +44,22 @@ import mage.cards.CardImpl;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author Loki
+ * @author Loki, nantuko
  */
 public class DecimatorWeb extends CardImpl<DecimatorWeb> {
 
     public DecimatorWeb (UUID ownerId) {
         super(ownerId, 105, "Decimator Web", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "MBS";
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new ManaCostsImpl("{4}"));
+        ability.addCost(new TapSourceCost());
         ability.addEffect(new AddCountersTargetEffect(CounterType.POISON.createInstance()));
         ability.addEffect(new PutLibraryIntoGraveTargetEffect(6));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 
