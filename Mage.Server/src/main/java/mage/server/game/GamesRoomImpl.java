@@ -73,7 +73,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
 	@Override
 	public TableView createTable(UUID sessionId, MatchOptions options) {
-		Table table = TableManager.getInstance().createTable(sessionId, options);
+		Table table = TableManager.getInstance().createTable(this.getRoomId(), sessionId, options);
 		tables.put(table.getId(), table);
 		return new TableView(table);
 	}
@@ -89,7 +89,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
 	@Override
 	public TableView createTournamentTable(UUID sessionId, TournamentOptions options) {
-		Table table = TableManager.getInstance().createTournamentTable(sessionId, options);
+		Table table = TableManager.getInstance().createTournamentTable(this.getRoomId(), sessionId, options);
 		tables.put(table.getId(), table);
 		return new TableView(table);
 	}

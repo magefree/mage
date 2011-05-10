@@ -58,22 +58,22 @@ public class TableManager {
 		return INSTANCE;
 	}
 
-	public Table createTable(UUID sessionId, MatchOptions options) {
-		TableController tableController = new TableController(sessionId, options);
+	public Table createTable(UUID roomId, UUID sessionId, MatchOptions options) {
+		TableController tableController = new TableController(roomId, sessionId, options);
 		controllers.put(tableController.getTable().getId(), tableController);
 		tables.put(tableController.getTable().getId(), tableController.getTable());
 		return tableController.getTable();
 	}
 
-	public Table createTable(MatchOptions options) {
-		TableController tableController = new TableController(UUID.randomUUID(), options);
+	public Table createTable(UUID roomId, MatchOptions options) {
+		TableController tableController = new TableController(roomId, UUID.randomUUID(), options);
 		controllers.put(tableController.getTable().getId(), tableController);
 		tables.put(tableController.getTable().getId(), tableController.getTable());
 		return tableController.getTable();
 	}
 
-	public Table createTournamentTable(UUID sessionId, TournamentOptions options) {
-		TableController tableController = new TableController(sessionId, options);
+	public Table createTournamentTable(UUID roomId, UUID sessionId, TournamentOptions options) {
+		TableController tableController = new TableController(roomId, sessionId, options);
 		controllers.put(tableController.getTable().getId(), tableController);
 		tables.put(tableController.getTable().getId(), tableController.getTable());
 		return tableController.getTable();

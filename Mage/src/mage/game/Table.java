@@ -47,7 +47,9 @@ import mage.players.Player;
 public class Table implements Serializable {
 
 	private UUID tableId;
+	private UUID roomId;
 	private String name;
+	private String controllerName;
 	private String gameType;
 	private Seat[] seats;
 	private int numSeats;
@@ -59,23 +61,25 @@ public class Table implements Serializable {
 
 	protected TableEventSource tableEventSource = new TableEventSource();
 
-	public Table(String gameType, String name, DeckValidator validator, List<String> playerTypes, Tournament tournament) {
-		this(gameType, name, validator, playerTypes);
+	public Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<String> playerTypes, Tournament tournament) {
+		this(roomId, gameType, name, controllerName, validator, playerTypes);
 		this.tournament = tournament;
 		this.isTournament = true;
 	}
 
-	public Table(String gameType, String name, DeckValidator validator, List<String> playerTypes, Match match) {
-		this(gameType, name, validator, playerTypes);
+	public Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<String> playerTypes, Match match) {
+		this(roomId, gameType, name, controllerName, validator, playerTypes);
 		this.match = match;
 		this.isTournament = false;
 	}
 
-	protected Table(String gameType, String name, DeckValidator validator, List<String> playerTypes) {
+	protected Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<String> playerTypes) {
 		tableId = UUID.randomUUID();
+		this.roomId = roomId;
 		this.numSeats = playerTypes.size();
 		this.gameType = gameType;
 		this.name = name;
+		this.controllerName = controllerName;
 		createSeats(playerTypes);
 		this.validator = validator;
 	}
@@ -91,6 +95,10 @@ public class Table implements Serializable {
 
 	public UUID getId() {
 		return tableId;
+	}
+
+	public UUID getRoomId() {
+		return roomId;
 	}
 
 	public void initGame() {
@@ -192,6 +200,10 @@ public class Table implements Serializable {
 
 	public Tournament getTournament() {
 		return tournament;
+	}
+
+	public String getControllerName() {
+		return controllerName;
 	}
 
 }

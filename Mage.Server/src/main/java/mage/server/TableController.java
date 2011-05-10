@@ -66,26 +66,29 @@ public class TableController {
 
 	private UUID sessionId;
 	private UUID chatId;
+	private String controllerName;
 	private Table table;
 	private Match match;
 	private MatchOptions options;
 	private Tournament tournament;
 	private ConcurrentHashMap<UUID, UUID> sessionPlayerMap = new ConcurrentHashMap<UUID, UUID>();
 
-	public TableController(UUID sessionId, MatchOptions options) {
+	public TableController(UUID roomId, UUID sessionId, MatchOptions options) {
 		this.sessionId = sessionId;
 		chatId = ChatManager.getInstance().createChatSession();
 		this.options = options;
 		match = GameFactory.getInstance().createMatch(options.getGameType(), options);
-		table = new Table(options.getGameType(), options.getName(), DeckValidatorFactory.getInstance().createDeckValidator(options.getDeckType()), options.getPlayerTypes(), match);
+		controllerName = SessionManager.getInstance().getSession(sessionId).getUsername();
+		table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.getInstance().createDeckValidator(options.getDeckType()), options.getPlayerTypes(), match);
 		init();
 	}
 
-	public TableController(UUID sessionId, TournamentOptions options) {
+	public TableController(UUID roomId, UUID sessionId, TournamentOptions options) {
 		this.sessionId = sessionId;
 		chatId = ChatManager.getInstance().createChatSession();
 		tournament = TournamentFactory.getInstance().createTournament(options.getTournamentType(), options);
-		table = new Table(options.getTournamentType(), options.getName(), DeckValidatorFactory.getInstance().createDeckValidator(options.getMatchOptions().getDeckType()), options.getPlayerTypes(), tournament);
+		controllerName = SessionManager.getInstance().getSession(sessionId).getUsername();
+		table = new Table(roomId, options.getTournamentType(), options.getName(), controllerName, DeckValidatorFactory.getInstance().createDeckValidator(options.getMatchOptions().getDeckType()), options.getPlayerTypes(), tournament);
 	}
 
 	private void init() {
@@ -320,13 +323,16 @@ public class TableController {
 		UUID choosingPlayerId = match.getChooser();
 		match.endGame();
 		table.endGame();
-		GameManager.getInstance().saveGame(match.getGame().getId());
+//		GameManager.getInstance().saveGame(match.getGame().getId());
 		GameManager.getInstance().removeGame(match.getGame().getId());
 		try {
 			if (!match.isMatchOver()) {
 				table.sideboard();
 				match.sideboard();
 				startGame(choosingPlayerId);
+			}
+			else {
+				GamesRoomManager.getInstance().getRoom(table.getRoomId()).removeTable(sessionId, table.getId());
 			}
 		} catch (GameException ex) {
 			logger.fatal(null, ex);

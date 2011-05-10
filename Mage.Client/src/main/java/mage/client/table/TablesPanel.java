@@ -93,10 +93,10 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 			public void actionPerformed(ActionEvent e)
 			{
 				int modelRow = Integer.valueOf( e.getActionCommand() );
-				UUID tableId = UUID.fromString((String)tableModel.getValueAt(modelRow, 0));
-				UUID gameId = (UUID)tableModel.getValueAt(modelRow, 6);
-				String state = (String)tableModel.getValueAt(modelRow, 4);
-				boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, 5);
+				UUID tableId = (UUID)tableModel.getValueAt(modelRow, 8);
+				UUID gameId = (UUID)tableModel.getValueAt(modelRow, 7);
+				String state = (String)tableModel.getValueAt(modelRow, 5);
+				boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, 6);
 
 				if (state.equals("Join")) {
 					if (isTournament) {
@@ -120,7 +120,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 			}
 		};
 
-		ButtonColumn buttonColumn = new ButtonColumn(tableTables, join, 4);
+		ButtonColumn buttonColumn = new ButtonColumn(tableTables, join, 5);
 		
 		jSplitPane1.setOpaque(false);
 		jScrollPane1.setOpaque(false);
@@ -344,7 +344,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 }
 
 class TableTableModel extends AbstractTableModel {
-    private String[] columnNames = new String[]{"Table Id", "Game Type", "Deck Type", "Status", "Action"};
+    private String[] columnNames = new String[]{"Table Name", "Owner", "Game Type", "Deck Type", "Status", "Action"};
 	private TableView[] tables = new TableView[0];
 
 
@@ -367,14 +367,16 @@ class TableTableModel extends AbstractTableModel {
 	public Object getValueAt(int arg0, int arg1) {
 		switch (arg1) {
 			case 0:
-				return tables[arg0].getTableId().toString();
+				return tables[arg0].getTableName();
 			case 1:
-				return tables[arg0].getGameType().toString();
+				return tables[arg0].getControllerName();
 			case 2:
-				return tables[arg0].getDeckType().toString();
+				return tables[arg0].getGameType().toString();
 			case 3:
-				return tables[arg0].getTableState().toString();
+				return tables[arg0].getDeckType().toString();
 			case 4:
+				return tables[arg0].getTableState().toString();
+			case 5:
 				switch (tables[arg0].getTableState()) {
 					case WAITING:
 						return "Join";
@@ -385,12 +387,14 @@ class TableTableModel extends AbstractTableModel {
 					default:
 						return "";
 				}
-			case 5:
-				return tables[arg0].isTournament();
 			case 6:
+				return tables[arg0].isTournament();
+			case 7:
 				if (!tables[arg0].getGames().isEmpty())
 					return tables[arg0].getGames().get(0);
 				return null;
+			case 8:
+				return tables[arg0].getTableId();
 		}
 		return "";
 	}
@@ -412,7 +416,7 @@ class TableTableModel extends AbstractTableModel {
 
 	@Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-		if (columnIndex != 4)
+		if (columnIndex != 5)
 			return false;
 		return true;
     }

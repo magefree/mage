@@ -44,6 +44,7 @@ import mage.game.tournament.TournamentPairing;
 import mage.game.tournament.TournamentPlayer;
 import mage.server.ChatManager;
 import mage.server.TableManager;
+import mage.server.game.GamesRoomManager;
 import mage.server.util.ThreadExecutor;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.TournamentView;
@@ -169,7 +170,7 @@ public class TournamentController {
 	private void startMatch(TournamentPairing pair, MatchOptions matchOptions) {
 		try {
 			TableManager tableManager = TableManager.getInstance();
-			Table table = tableManager.createTable(matchOptions);
+			Table table = tableManager.createTable(GamesRoomManager.getInstance().getMainRoomId(), matchOptions);
 			TournamentPlayer player1 = pair.getPlayer1();
 			TournamentPlayer player2 = pair.getPlayer2();
 			tableManager.addPlayer(getPlayerSessionId(player1.getPlayer().getId()), table.getId(), player1.getPlayer(), player1.getPlayerType(), player1.getDeck());

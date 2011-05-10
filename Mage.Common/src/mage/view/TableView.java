@@ -47,6 +47,8 @@ public class TableView implements Serializable {
 	private UUID tableId;
 	private String gameType;
 	private String deckType;
+	private String tableName;
+	private String controllerName;
 	private TableState tableState;
 	private boolean isTournament;
 	private List<SeatView> seats = new ArrayList<SeatView>();
@@ -55,6 +57,8 @@ public class TableView implements Serializable {
 	public TableView(Table table) {
 		this.tableId = table.getId();
 		this.gameType = table.getGameType();
+		this.tableName = table.getName();
+		this.controllerName = table.getControllerName();
 		this.deckType = table.getDeckType();
 		this.tableState = table.getState();
 		this.isTournament = table.isTournament();
@@ -70,6 +74,14 @@ public class TableView implements Serializable {
 
 	public UUID getTableId() {
 		return tableId;
+	}
+
+	public String getTableName() {
+		return tableName;
+	}
+
+	public String getControllerName() {
+		return controllerName;
 	}
 
 	public String getGameType() {
