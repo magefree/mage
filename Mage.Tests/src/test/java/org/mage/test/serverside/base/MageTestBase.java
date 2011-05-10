@@ -293,6 +293,6 @@ public abstract class MageTestBase {
 	}
 
 	protected Player createPlayer(String name, String playerType) {
-		return PlayerFactory.getInstance().createPlayer(playerType, name, Constants.RangeOfInfluence.ALL);
+		return PlayerFactory.getInstance().createPlayer(playerType, name, Constants.RangeOfInfluence.ALL, 1);
 	}
 }
