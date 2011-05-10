@@ -56,7 +56,11 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 		fcSelectDeck = new JFileChooser();
 		fcSelectDeck.setAcceptAllFileFilterUsed(false);
 		fcSelectDeck.addChoosableFileFilter(new DeckFilter());
-		if (Config.defaultDeckPath != null) this.txtPlayerDeck.setText(Config.defaultDeckPath);
+	    String deckPath = MageFrame.getPreferences().get("defaultDeckPath", "");
+	    if (deckPath.isEmpty()) {
+			if (Config.defaultDeckPath != null) deckPath = Config.defaultDeckPath;
+	    }
+	    this.txtPlayerDeck.setText(deckPath);
 		if (Config.defaultComputerName != null) this.txtPlayerName.setText(Config.defaultComputerName);
     }
 
@@ -85,6 +89,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 		String path = DeckGenerator.generateDeck();
 		if (path != null) {
 			this.txtPlayerDeck.setText(path);
+			MageFrame.getPreferences().put("defaultDeckPath", path);
 		}
 	}
 
