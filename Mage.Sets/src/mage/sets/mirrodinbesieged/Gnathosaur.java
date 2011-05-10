@@ -34,7 +34,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
@@ -65,7 +65,7 @@ public class Gnathosaur extends CardImpl<Gnathosaur> {
 
         this.addAbility(new SimpleActivatedAbility(
                 Constants.Zone.BATTLEFIELD,
-                new GainAbilityTargetEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn),
+                new GainAbilitySourceEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn),
                 new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
