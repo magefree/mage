@@ -42,7 +42,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class GalvanicBlast extends CardImpl<GalvanicBlast> {
     
-    private final String effectText = "Metalcraft — Galvanic Blast deals 4 damage to that creature or player instead if you control three or more artifacts.";
+    private final String effectText = "Metalcraft - Galvanic Blast deals 4 damage to that creature or player instead if you control three or more artifacts.";
 
     public GalvanicBlast(UUID ownerId) {
         super(ownerId, 91, "Galvanic Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
