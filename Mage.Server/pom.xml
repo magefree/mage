@@ -186,6 +186,7 @@
                             <outfile>target/mage-server-${project.version}.exe</outfile>
                             <jar>target/mage-server.jar</jar>
                             <errTitle>Mage Server</errTitle>
+                            <icon>../Mage.Client/src/main/resources/icon-mage.ico</icon>
                             <classPath>
                                 <mainClass>mage.server.Main</mainClass>
                                 <addDependencies>true</addDependencies>
@@ -193,6 +194,11 @@
                             </classPath>
                             <jre>
                                 <minVersion>1.5.0</minVersion>
+                                <opts>
+                                    <opt>-Djava.security.policy=./config/security.policy</opt>
+                                    <opt>-Djava.util.logging.config.file=./config/logging.config</opt>
+                                    <opt>-Dlog4j.configuration=file:./config/log4j.properties</opt>
+                                </opts>
                             </jre>
                             <versionInfo>
                                 <fileVersion>0.7.2.0</fileVersion>

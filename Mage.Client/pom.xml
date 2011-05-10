@@ -152,10 +152,11 @@
                             <goal>launch4j</goal>
                         </goals>
                         <configuration>
-                            <headerType>console</headerType>
+                            <headerType>gui</headerType>
                             <outfile>target/mage-client-${project.version}.exe</outfile>
                             <jar>target/mage-client.jar</jar>
                             <errTitle>Mage Client</errTitle>
+                            <icon>./src/main/resources/icon-mage.ico</icon>
                             <classPath>
                                 <mainClass>mage.client.MageFrame</mainClass>
                                 <addDependencies>true</addDependencies>
@@ -163,6 +164,10 @@
                             </classPath>
                             <jre>
                                 <minVersion>1.5.0</minVersion>
+                                <opts>
+                                    <opt>-Djava.security.policy=./config/security.policy</opt>
+                                    <opt>-Djava.util.logging.config.file=./config/logging.config</opt>
+                                </opts>
                             </jre>
                             <versionInfo>
                                 <fileVersion>0.7.2.0</fileVersion>
@@ -173,7 +178,7 @@
                                 <txtProductVersion>MAGE Client</txtProductVersion>
                                 <productName>MAGE</productName>
                                 <internalName>Mage-Client</internalName>
-                                <originalFilename>original.exe</originalFilename>
+                                <originalFilename>mage-client.exe</originalFilename>
                             </versionInfo>
                         </configuration>
                     </execution>
