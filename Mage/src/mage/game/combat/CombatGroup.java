@@ -29,9 +29,8 @@
 package mage.game.combat;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -166,6 +165,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 		Permanent blocker = game.getPermanent(blockers.get(0));
 		Permanent attacker = game.getPermanent(attackers.get(0));
 		if (blocker != null && attacker != null) {
+			int blockerDamage = blocker.getPower().getValue();
 			if (canDamage(attacker, first)) {
 				int damage = attacker.getPower().getValue();
 				if (hasTrample(attacker)) {
@@ -187,7 +187,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 				}
 			}
 			if (canDamage(blocker, first)) {
-				attacker.damage(blocker.getPower().getValue(), blocker.getId(), game, true, true);
+				attacker.damage(blockerDamage, blocker.getId(), game, true, true);
 			}
 		}
 	}
@@ -198,16 +198,21 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 		Player player = game.getPlayer(attacker.getControllerId());
 		int damage = attacker.getPower().getValue();
 		if (attacker != null && canDamage(attacker, first)) {
+			Map<UUID, Integer> assigned = new HashMap<UUID, Integer>();
 			for (UUID blockerId: blockerOrder) {
 				Permanent blocker = game.getPermanent(blockerId);
 				int lethalDamage = blocker.getToughness().getValue() - blocker.getDamage();
 				if (lethalDamage >= damage) {
-					blocker.damage(damage, attacker.getId(), game, true, true);
+					// Issue#73
+					//blocker.damage(damage, attacker.getId(), game, true, true);
+					assigned.put(blockerId, damage);
 					damage = 0;
 					break;
 				}
 				int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
-				blocker.damage(damageAssigned, attacker.getId(), game, true, true);
+				// Issue#73
+				//blocker.damage(damageAssigned, attacker.getId(), game, true, true);
+				assigned.put(blockerId, damageAssigned);
 				damage -= damageAssigned;
 			}
 			if (damage > 0 && hasTrample(attacker)) {
@@ -218,6 +223,11 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 				if (canDamage(blocker, first)) {
 					attacker.damage(blocker.getPower().getValue(), blocker.getId(), game, true, true);
 				}
+			}
+			// Issue#73
+			for (Map.Entry<UUID, Integer> entry : assigned.entrySet()) {
+				Permanent blocker = game.getPermanent(entry.getKey());
+				blocker.damage(entry.getValue(), attacker.getId(), game, true, true);
 			}
 		}
 	}
