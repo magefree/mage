@@ -52,6 +52,11 @@ public class ImageCache {
 		imageCache = new MapMaker().softValues().makeComputingMap(new Function<String, BufferedImage>() {
 			public BufferedImage apply(String key) {
 				try {
+					boolean thumbnail = false;
+					if (key.endsWith("#thumb")) {
+						thumbnail = true;
+						key = key.replace("#thumb", "");
+					}
 					Matcher m = KEY_PATTERN.matcher(key);
 
 					if (m.matches()) {
@@ -66,8 +71,21 @@ public class ImageCache {
 						if (path == null) return null;
 						File file = new File(path);
 
-						BufferedImage image = loadImage(file);
-						return image;
+						if (thumbnail && path.endsWith(".jpg")) {
+							String thumbnailPath = path.replace(".jpg", ".thumb.jpg");
+							File thumbnailFile = new File(thumbnailPath);
+							if (thumbnailFile.exists()) {
+								log.info("loading thumbnail for " + key + ", path="+thumbnailPath);
+								return loadImage(thumbnailFile);
+							} else {
+								BufferedImage image = loadImage(file);
+								if (image == null) return null;
+								log.info("creating thumbnail for " + key);
+								return makeThumbnail(image, thumbnailPath);
+							}
+						} else {
+							return loadImage(file);
+						}
 					} else {
 						throw new RuntimeException(
 								"Requested image doesn't fit the requirement for key (<cardname>#<setname>#<collectorID>): " + key);
@@ -80,6 +98,12 @@ public class ImageCache {
 				}
 			}
 		});
+	}
+
+	public static BufferedImage getThumbnail(CardView card) {
+		String key = getKey(card) + "#thumb";
+		//log.debug("#key: " + key);
+		return getImage(key);
 	}
 
 	public static BufferedImage getImageOriginal(CardView card) {
@@ -137,6 +161,18 @@ public class ImageCache {
 			log.error(e, e);
 		}
 
+		return image;
+	}
+
+	public static BufferedImage makeThumbnail(BufferedImage original, String path) {
+		BufferedImage image = getResizedImage(original, Constants.THUMBNAIL_SIZE_FULL);
+		File imagePath = new File(path);
+		try {
+			log.info("thumbnail path:"+path);
+			ImageIO.write(image, "jpg", imagePath);
+		} catch (Exception e) {
+			log.error(e,e);
+		}
 		return image;
 	}
 	

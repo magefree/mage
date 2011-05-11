@@ -11,6 +11,7 @@ public class Constants {
 	public static final String RESOURCE_PATH_SET_SMALL = RESOURCE_PATH_SET + File.separator + "small" + File.separator;
 
 	public static final Rectangle CARD_SIZE_FULL = new Rectangle(101, 149);
+	public static final Rectangle THUMBNAIL_SIZE_FULL = new Rectangle(102, 146);
 	
 	public interface IO { 
 		public static final String imageBaseDir = "plugins" + File.separator + "images" + File.separator; 

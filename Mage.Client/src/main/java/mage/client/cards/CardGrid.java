@@ -90,6 +90,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
 				i.remove();
 			}
 		}
+		System.gc();
 		drawCards(sortBy, piles);
 		this.setVisible(true);
 	}
@@ -189,10 +190,12 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         	if (comp instanceof Card) {
         		if (((Card)comp).getCardId().equals(cardId)) {
 					remove(comp);
+			        comp = null;
         		}
         	} else if (comp instanceof MageCard) {
         		if (((MageCard)comp).getOriginal().getId().equals(cardId)) {
 					remove(comp);
+			        comp = null;
         		}
         	}
         }

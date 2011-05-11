@@ -126,7 +126,7 @@ public class BigCard extends JComponent {
     @Override
     public void paintComponent(Graphics graphics) {
 
-        if (foilState) {
+        /*if (foilState) {
             if (source != null) {
                 synchronized (BigCard.class) {
                     if (source != null) {
@@ -138,6 +138,9 @@ public class BigCard extends JComponent {
             if (bigImage != null) {
                 graphics.drawImage(bigImage, 0, 0, this);
             }
+        }*/
+	    if (bigImage != null) {
+            graphics.drawImage(bigImage, 0, 0, this);
         }
         super.paintComponent(graphics);
     }
@@ -154,7 +157,7 @@ public class BigCard extends JComponent {
     }
 
     public void setFoil(boolean foil) {
-        if (foilThread == null) {
+        /*if (foilThread == null) {
             synchronized (this) {
                 if (foilThread == null) {
                     foilThread = getFoilThread();
@@ -171,7 +174,8 @@ public class BigCard extends JComponent {
                 }
             }
         }
-        repaint();
+        */
+	    repaint();
     }
 
     private Thread getFoilThread() {

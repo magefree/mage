@@ -149,8 +149,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             public void run() {
                 try {
                     tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
-                    BufferedImage srcImage = ImageCache.getImageOriginal(gameCard);
-                    srcImage = ImageCache.getNormalSizeImage(srcImage);
+                    BufferedImage srcImage = ImageCache.getThumbnail(gameCard);
                     if (srcImage != null) {
                         hasImage = true;
                         setText(gameCard);
@@ -199,12 +198,12 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     public void setFoil(boolean foil) {
         this.isFoil = foil;
         if (foil) {
-            BufferedImage source = BufferedImageBuilder.bufferImage(imagePanel.getSrcImage());
+            /*BufferedImage source = BufferedImageBuilder.bufferImage(imagePanel.getSrcImage());
             HueFilter filter = FilterFactory.getHueFilter();
             filter.setHue(0.1f);
             BufferedImage dest = filter.filter(source, null);
             imagePanel.setImage(dest);
-            imagePanel.repaint();
+            imagePanel.repaint();*/
 
             /*
             Thread thread = new Thread(new Runnable() {
