@@ -39,6 +39,7 @@ import mage.client.constants.Constants.SortBy;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.sets.Sets;
+import mage.sets.worldwake.Explore;
 import mage.view.CardsView;
 
 import javax.swing.*;
@@ -68,6 +69,8 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
 	    jScrollPane1.setOpaque(false);
 	    jScrollPane1.getViewport().setOpaque(false);
 		cbSortBy.setModel(new DefaultComboBoxModel(SortBy.values()));
+	    cbSortBy.setVisible(false);
+	    chkPiles.setVisible(false);
     }
 
 	public void loadCards(List<Card> sideboard, BigCard bigCard, boolean construct) {
@@ -622,11 +625,13 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
 	}//GEN-LAST:event_btnClearActionPerformed
 
 	private void btnBoosterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoosterActionPerformed
-		List<Card> booster = ((ExpansionSet)this.cbExpansionSet.getSelectedItem()).createBooster();
-		for (Card card: booster) {
-			cards.add(card);
+		if (this.cbExpansionSet.getSelectedItem() instanceof ExpansionSet) {
+			List<Card> booster = ((ExpansionSet)this.cbExpansionSet.getSelectedItem()).createBooster();
+			for (Card card: booster) {
+				cards.add(card);
+			}
+			filterCards();
 		}
-		filterCards();
 	}//GEN-LAST:event_btnBoosterActionPerformed
 
 	private void cbSortByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSortByActionPerformed
@@ -642,20 +647,32 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
 	private void jButtonAddToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 		if (mainTable.getSelectedRowCount() > 0) {
 			int[] n = mainTable.getSelectedRows();
-			for (int i : n) {
-				mainModel.doubleClick(i);
+			List<Integer> indexes = asList(n);
+			Collections.reverse(indexes);
+			for (Integer index : indexes) {
+				mainModel.doubleClick(index);
 			}
+			mainModel.fireTableDataChanged();
 		}
 	}//GEN-LAST:event_jButton3ActionPerformed
 
 	private void jButtonAddToSideboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 		if (mainTable.getSelectedRowCount() > 0) {
 			int[] n = mainTable.getSelectedRows();
-			for (int i : n) {
-				mainModel.shiftDoubleClick(i);
+			List<Integer> indexes = asList(n);
+			Collections.reverse(indexes);
+			for (Integer index : indexes) {
+				mainModel.shiftDoubleClick(index);
 			}
+			mainModel.fireTableDataChanged();
 		}
 	}//GEN-LAST:event_jButton4ActionPerformed
+
+	public List<Integer> asList(final int[] is) {
+        List<Integer> list = new ArrayList<Integer>();
+		for (int i : is) list.add(i);
+		return list;
+    }
 
 	private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 		String name = jTextFieldSearch.getText().trim();

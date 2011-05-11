@@ -75,6 +75,7 @@ public class NewTournamentDialog extends MageDialog {
 	/** Creates new form NewTournamentDialog */
     public NewTournamentDialog() {
         initComponents();
+	    txtName.setText("Tournament");
     }
 
 	public void showDialog(UUID roomId) {

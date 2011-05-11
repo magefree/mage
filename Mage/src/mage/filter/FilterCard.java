@@ -41,6 +41,8 @@ import mage.cards.Card;
  */
 public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, FilterCard<T>> {
 
+	private static final long serialVersionUID = 1L;
+
 	protected List<UUID> ownerId = new ArrayList<UUID>();
 	protected boolean notOwner;
 	protected List<String> expansionSetCode = new ArrayList<String>();
