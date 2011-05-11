@@ -705,11 +705,15 @@ public class Session {
 	}
 
 	private void handleRemoteException(RemoteException ex) {
-		server = null;
-		logger.log(Level.SEVERE, "Connection to server lost", ex);
-		frame.setStatusText("Not connected");
-		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Connection to server lost.", "Error", JOptionPane.ERROR_MESSAGE);
-		frame.disableButtons();
+		logger.log(Level.SEVERE, "Communication error", ex);
+		if (ex instanceof java.rmi.ConnectException) {
+			server = null;
+			frame.setStatusText("Not connected");
+			frame.disableButtons();
+			JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Communication error - disconnecting.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		else
+			JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Communication error.", "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	private void handleMageException(MageException ex) {

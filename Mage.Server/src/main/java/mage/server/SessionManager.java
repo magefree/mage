@@ -56,7 +56,7 @@ public class SessionManager {
 		for (Session session: sessions.values()) {
 			if (session.getUsername().equals(userName)) {
 				if (session.getClientId().equals(clientId)) {
-					logger.info("reconnecting session for " + userName);
+					logger.info("Reconnecting session " + session.getId() + " for " + userName);
 					return session.getId();
 				}
 				else {
@@ -66,6 +66,7 @@ public class SessionManager {
 		}
 		Session session = new Session(userName, clientId);
 		sessions.put(session.getId(), session);
+		logger.info("Session " + session.getId() + " created for user " + userName);
 		return session.getId();
 	}
 

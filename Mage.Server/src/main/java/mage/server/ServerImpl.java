@@ -113,7 +113,7 @@ public class ServerImpl extends RemoteServer implements Server {
 			if (version.compareTo(Main.getVersion()) != 0)
 				throw new MageException("Wrong client version " + version + ", expecting version " + Main.getVersion());
 			sessionId = SessionManager.getInstance().createSession(userName, clientId);
-			logger.info("Session " + sessionId + " created for user " + userName + " at " + getClientHost());
+			logger.info("User " + userName + " connected from " + getClientHost());
 		} catch (Exception ex) {
 			handleException(ex);
 		}

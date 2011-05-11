@@ -74,6 +74,7 @@ public class ChatSession {
 	public void broadcast(String userName, String message, MessageColor color) {
 		Calendar cal = new GregorianCalendar();
 		final String msg = timeFormatter.format(cal.getTime()) + " " + userName + ":" + message;
+		logger.debug("Broadcasting '" + msg + "' for " + chatId);
 		for (UUID sessionId: clients.keySet()) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
