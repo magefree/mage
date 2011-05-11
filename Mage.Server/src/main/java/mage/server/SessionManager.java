@@ -49,6 +49,7 @@ public class SessionManager {
 	private ConcurrentHashMap<UUID, Session> sessions = new ConcurrentHashMap<UUID, Session>();
 
 	public Session getSession(UUID sessionId) {
+		if (sessions == null || sessionId == null) return null;
 		return sessions.get(sessionId);
 	}
 
