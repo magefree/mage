@@ -24,7 +24,8 @@ public class ManaSymbols {
 	static private Pattern replaceSymbolsPattern = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
 
 	private static final String[] sets = {"DIS", "GPT", "RAV", "MRD",
-			"10E", "HOP", "ALA", "CFX", "ARB", "ZEN", "WWK", "ROE", "SOM", "M10", "M11"};
+			"10E", "HOP", "ALA", "CFX", "ARB", "ZEN", "WWK", "ROE", "SOM", "M10", "M11",
+			"MBS", "DDF", "DST"};
 
 
 	static public void loadImages() {
