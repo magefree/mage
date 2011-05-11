@@ -238,7 +238,10 @@ public class ServerImpl extends RemoteServer implements Server {
 				new Runnable() {
 					@Override
 					public void run() {
-						SessionManager.getInstance().getSession(sessionId).kill();
+						Session session = SessionManager.getInstance().getSession(sessionId);
+						if (session != null) {
+							session.kill();
+						}
 						logger.info("Client deregistered ...");
 					}
 				}
