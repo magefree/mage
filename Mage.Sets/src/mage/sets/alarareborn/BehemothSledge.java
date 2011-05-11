@@ -55,6 +55,8 @@ public class BehemothSledge extends CardImpl<BehemothSledge> {
 		super(ownerId, 65, "Behemoth Sledge", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}{G}{W}");
 		this.expansionSetCode = "ARB";
 		this.subtype.add("Equipment");
+		this.color.setGreen(true);
+		this.color.setWhite(true);
 		this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
