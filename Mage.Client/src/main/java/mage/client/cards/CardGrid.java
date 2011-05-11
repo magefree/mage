@@ -62,7 +62,7 @@ import mage.view.CardsView;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CardGrid extends javax.swing.JLayeredPane implements MouseListener {
+public class CardGrid extends javax.swing.JLayeredPane implements MouseListener, ICardGrid {
 
 	protected CardEventSource cardEventSource = new CardEventSource();
 	protected BigCard bigCard;

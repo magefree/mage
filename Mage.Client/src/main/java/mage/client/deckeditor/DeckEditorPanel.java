@@ -34,19 +34,9 @@
 
 package mage.client.deckeditor;
 
-import mage.cards.Card;
-import mage.cards.decks.Deck;
-import mage.client.MageFrame;
-import mage.client.plugins.impl.Plugins;
-import mage.client.util.Event;
-import mage.client.util.Listener;
-import mage.components.CardInfoPane;
-import mage.game.GameException;
-import mage.view.CardView;
-
-import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -55,10 +45,27 @@ import java.util.ArrayList;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JComponent;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
+import javax.swing.filechooser.FileFilter;
+
+import mage.cards.Card;
+import mage.cards.decks.Deck;
+import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.dialog.AddLandDialog;
+import mage.client.plugins.impl.Plugins;
+import mage.client.util.Event;
+import mage.client.util.Listener;
+import mage.components.CardInfoPane;
+import mage.game.GameException;
 import mage.sets.Sets;
+import mage.view.CardView;
 
 /**
  *
@@ -253,6 +260,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 	private void initComponents() {
 
         jSplitPane1 = new javax.swing.JSplitPane();
+        //cardSelector = new mage.client.deckeditor.table.CardTableSelector();
         cardSelector = new mage.client.deckeditor.CardSelector();
         deckArea = new mage.client.deckeditor.DeckArea();
         jPanel1 = new javax.swing.JPanel();
@@ -551,6 +559,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnLoad;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnSave;
+    //private mage.client.deckeditor.table.CardTableSelector cardSelector;
     private mage.client.deckeditor.CardSelector cardSelector;
     private mage.client.deckeditor.DeckArea deckArea;
     private javax.swing.JPanel jPanel1;
