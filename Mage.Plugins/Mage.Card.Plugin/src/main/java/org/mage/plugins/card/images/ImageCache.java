@@ -168,7 +168,7 @@ public class ImageCache {
 		BufferedImage image = getResizedImage(original, Constants.THUMBNAIL_SIZE_FULL);
 		File imagePath = new File(path);
 		try {
-			log.info("thumbnail path:"+path);
+			//log.debug("thumbnail path:"+path);
 			ImageIO.write(image, "jpg", imagePath);
 		} catch (Exception e) {
 			log.error(e,e);
