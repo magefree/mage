@@ -130,7 +130,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public void abort();
 	
 	public void revealCards(String name, Cards cards, Game game);
-	public void lookAtCards(Cards cards, Game game);
+	public void lookAtCards(String name, Cards cards, Game game);
 	
 	@Override
 	public Player copy();

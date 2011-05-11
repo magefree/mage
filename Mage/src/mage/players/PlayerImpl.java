@@ -539,7 +539,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	}
 
 	@Override
-	public void lookAtCards(Cards cards, Game game) {
+	public void lookAtCards(String name, Cards cards, Game game) {
+		game.getState().getLookedAt(this.playerId).add(name, cards);
 		game.fireLookAtCardsEvent(playerId, this.name + " looking at", cards);
 	}
 

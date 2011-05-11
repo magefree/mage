@@ -29,6 +29,8 @@
 package mage.server.game;
 
 import java.io.BufferedOutputStream;
+
+import mage.game.LookedAt;
 import mage.server.TableManager;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -61,9 +63,7 @@ import mage.players.Player;
 import mage.server.ChatManager;
 import mage.server.util.ThreadExecutor;
 import mage.sets.Sets;
-import mage.view.AbilityPickerView;
-import mage.view.CardsView;
-import mage.view.GameView;
+import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
 import org.apache.log4j.Logger;
 
@@ -414,6 +414,13 @@ public class GameController implements GameCallback {
 	public GameView getGameView(UUID playerId) {
 		GameView gameView = new GameView(game.getState(), game);
 		gameView.setHand(new CardsView(game.getPlayer(playerId).getHand().getCards(game)));
+
+		List<LookedAtView> list = new ArrayList<LookedAtView>();
+		for (Entry<String, Cards> entry : game.getState().getLookedAt(playerId).entrySet()) {
+			list.add(new LookedAtView(entry.getKey(), entry.getValue(), game));
+		}
+		gameView.setLookedAt(list);
+
 		return gameView;
 	}
 

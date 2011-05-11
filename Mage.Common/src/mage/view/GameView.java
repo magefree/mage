@@ -59,6 +59,7 @@ public class GameView implements Serializable {
 	private CardsView stack = new CardsView();
 	private List<ExileView> exiles = new ArrayList<ExileView>();
 	private List<RevealedView> revealed = new ArrayList<RevealedView>();
+	private List<LookedAtView> lookedAt = new ArrayList<LookedAtView>();
 	private List<CombatGroupView> combat = new ArrayList<CombatGroupView>();
 	private TurnPhase phase;
 	private PhaseStep step;
@@ -137,6 +138,14 @@ public class GameView implements Serializable {
 
 	public List<RevealedView> getRevealed() {
 		return revealed;
+	}
+
+	public List<LookedAtView> getLookedAt() {
+		return lookedAt;
+	}
+
+	public void setLookedAt(List<LookedAtView> list) {
+		this.lookedAt = list;
 	}
 
 	public List<CombatGroupView> getCombat() {

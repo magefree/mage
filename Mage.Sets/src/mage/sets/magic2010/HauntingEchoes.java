@@ -106,7 +106,7 @@ class HauntingEchoesEffect extends OneShotEffect<HauntingEchoesEffect> {
 		for (UUID cardId: remove) {
 			game.getExile().add(player.getLibrary().remove(cardId, game));
 		}
-		game.getPlayer(source.getControllerId()).lookAtCards(new CardsImpl(Zone.PICK, player.getLibrary().getCards(game)), game);
+		game.getPlayer(source.getControllerId()).lookAtCards("Haunting Echoes", new CardsImpl(Zone.PICK, player.getLibrary().getCards(game)), game);
 		player.shuffleLibrary(game);
 		return true;
 	}

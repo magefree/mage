@@ -78,6 +78,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 	private SpellStack stack;
 	private Exile exile;
 	private Revealed revealed;
+	private Map<UUID, LookedAt> lookedAt = new HashMap<UUID, LookedAt>();
 	private Battlefield battlefield;
 	private int turnNum;
 	private boolean gameOver;
@@ -99,6 +100,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 		stack = new SpellStack();
 		exile = new Exile();
 		revealed = new Revealed();
+		lookedAt = new HashMap<UUID, LookedAt>();
 		battlefield = new Battlefield();
 		effects = new ContinuousEffects();
 		triggers = new TriggeredAbilities();
@@ -118,6 +120,9 @@ public class GameState implements Serializable, Copyable<GameState> {
 		this.stack = state.stack.copy();
 		this.exile = state.exile.copy();
 		this.revealed = state.revealed.copy();
+		for (UUID key: state.lookedAt.keySet()) {
+			lookedAt.put(key, state.lookedAt.get(key));
+		}
 		this.battlefield = state.battlefield.copy();
 		this.turnNum = state.turnNum;
 		this.gameOver = state.gameOver;
@@ -205,6 +210,15 @@ public class GameState implements Serializable, Copyable<GameState> {
 
 	public Revealed getRevealed() {
 		return revealed;
+	}
+
+	public LookedAt getLookedAt(UUID playerId) {
+		if (lookedAt.get(playerId) == null) {
+			LookedAt l = new LookedAt();
+			lookedAt.put(playerId, l);
+			return l;
+		}
+		return lookedAt.get(playerId);
 	}
 
 	public Turn getTurn() {

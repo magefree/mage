@@ -64,12 +64,7 @@ import mage.client.util.Config;
 import mage.client.util.GameManager;
 import mage.client.util.PhaseManager;
 import mage.util.Logging;
-import mage.view.AbilityPickerView;
-import mage.view.CardsView;
-import mage.view.ExileView;
-import mage.view.GameView;
-import mage.view.PlayerView;
-import mage.view.RevealedView;
+import mage.view.*;
 
 /**
  *
@@ -82,6 +77,7 @@ public class GamePanel extends javax.swing.JPanel {
 	private Map<UUID, PlayAreaPanel> players = new HashMap<UUID, PlayAreaPanel>();
 	private Map<UUID, ExileZoneDialog> exiles = new HashMap<UUID, ExileZoneDialog>();
 	private Map<String, ShowCardsDialog> revealed = new HashMap<String, ShowCardsDialog>();
+	private Map<String, ShowCardsDialog> lookedAt = new HashMap<String, ShowCardsDialog>();
 	private UUID gameId;
 	private UUID playerId;
 	private Session session;
@@ -340,6 +336,7 @@ public class GamePanel extends javax.swing.JPanel {
 			exiles.get(exile.getId()).loadCards(exile, bigCard, gameId);
 		}
 		showRevealed(game);
+		showLookedAt(game);
 		if (game.getCombat().size() > 0) {
 			combat.showDialog(game.getCombat());
 		}
@@ -360,6 +357,19 @@ public class GamePanel extends javax.swing.JPanel {
 				revealed.put(reveal.getName(), newReveal);
 			}
 			revealed.get(reveal.getName()).loadCards("Revealed " + reveal.getName(), reveal.getCards(), bigCard, Config.dimensions, gameId, false);
+		}
+	}
+
+	private void showLookedAt(GameView game) {
+		for (ShowCardsDialog looked: lookedAt.values()) {
+			looked.clearReloaded();
+		}
+		for (LookedAtView looked: game.getLookedAt()) {
+			if (!lookedAt.containsKey(looked.getName())) {
+				ShowCardsDialog newReveal = new ShowCardsDialog();
+				lookedAt.put(looked.getName(), newReveal);
+			}
+			lookedAt.get(looked.getName()).loadCards("LookedAt by " + looked.getName(), looked.getCards(), bigCard, Config.dimensions, gameId, false);
 		}
 	}
 
