@@ -35,18 +35,12 @@
 package mage.client.dialog;
 
 import mage.client.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.List;
 import java.util.UUID;
-import java.util.logging.Logger;
-import javax.swing.Timer;
+import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
-import mage.Constants.TableState;
 import mage.client.components.MageComponents;
 import mage.client.remote.Session;
-import mage.util.Logging;
 import mage.view.SeatView;
 import mage.view.TableView;
 
@@ -54,16 +48,16 @@ import mage.view.TableView;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TableWaitingDialog extends MageDialog implements Observer {
+public class TableWaitingDialog extends MageDialog {
 
-	private final static Logger logger = Logging.getLogger(TableWaitingDialog.class.getName());
+//	private final static Logger logger = Logging.getLogger(TableWaitingDialog.class.getName());
 
 	private UUID tableId;
 	private UUID roomId;
 	private boolean isTournament;
 	private Session session;
 	private TableWaitModel tableWaitModel;
-	private SeatsWatchdog seatsWatchdog = new SeatsWatchdog();
+	private UpdateSeatsTask updateTask;
 
     /** Creates new form TableWaitingDialog */
     public TableWaitingDialog() {
@@ -77,10 +71,9 @@ public class TableWaitingDialog extends MageDialog implements Observer {
 		session.getUI().addButton(MageComponents.TABLE_WAITING_START_BUTTON, btnStart);
     }
 
-	@Override
-	public void update(Observable arg0, Object arg1) {
+//	@Override
+	public void update(TableView table) {
 		try {
-			TableView table = session.getTable(roomId, tableId);
 			if (table != null) {
 				switch (table.getTableState()) {
 					case STARTING:
@@ -115,6 +108,7 @@ public class TableWaitingDialog extends MageDialog implements Observer {
 		this.tableId = tableId;
 		this.isTournament = isTournament;
 		session = MageFrame.getSession();
+		updateTask = new UpdateSeatsTask(session, roomId, tableId, this);
 		if (session.isTableOwner(roomId, tableId)) {
 			this.btnStart.setVisible(true);
 			this.btnMoveDown.setVisible(true);
@@ -127,7 +121,7 @@ public class TableWaitingDialog extends MageDialog implements Observer {
 		UUID chatId = session.getTableChatId(tableId);
 		if (chatId != null) {
 			this.chatPanel.connect(chatId);
-			seatsWatchdog.addObserver(this);
+			updateTask.execute();
 			this.setModal(true);
 			this.setLocation(100, 100);
 			this.setVisible(true);
@@ -138,7 +132,7 @@ public class TableWaitingDialog extends MageDialog implements Observer {
 	}
 
 	public void closeDialog() {
-		seatsWatchdog.deleteObservers();
+		updateTask.cancel(true);
 		this.chatPanel.disconnect();
 		setVisible(false);
 	}
@@ -163,6 +157,7 @@ public class TableWaitingDialog extends MageDialog implements Observer {
         tableSeats = new javax.swing.JTable();
         chatPanel = new mage.client.chat.ChatPanel();
 
+        setResizable(true);
         setTitle("Waiting for players");
 
         btnMoveUp.setText("Move Up");
@@ -226,7 +221,7 @@ public class TableWaitingDialog extends MageDialog implements Observer {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMoveDown)
@@ -288,7 +283,7 @@ public class TableWaitingDialog extends MageDialog implements Observer {
 }
 
 class TableWaitModel extends AbstractTableModel {
-    private String[] columnNames = new String[]{"Seat Num", "Player Id", "Name", "Player Type"};
+    private String[] columnNames = new String[]{"Seat Num", "Player Name", "Player Type"};
 	private SeatView[] seats = new SeatView[0];
 
 	public void loadData(TableView table) {
@@ -318,10 +313,8 @@ class TableWaitModel extends AbstractTableModel {
 				case 0:
 					return Integer.toString(arg0 + 1);
 				case 1:
-					return seats[arg0].getPlayerId().toString();
-				case 2:
 					return seats[arg0].getPlayerName();
-				case 3:
+				case 2:
 					return seats[arg0].getPlayerType();
 			}
 		}
@@ -345,25 +338,37 @@ class TableWaitModel extends AbstractTableModel {
 
 	@Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-		if (columnIndex != 4)
-			return false;
-		return true;
+		return false;
     }
 
 }
 
-class SeatsWatchdog extends Observable implements ActionListener {
+class UpdateSeatsTask extends SwingWorker<Void, TableView> {
 
-	Timer t = new Timer(1000, this); // check every second
+	private Session session;
+	private UUID roomId;
+	private UUID tableId;
+	private TableWaitingDialog dialog;
 
-	public SeatsWatchdog() {
-		t.start();
+	UpdateSeatsTask(Session session, UUID roomId, UUID tableId, TableWaitingDialog dialog) {
+		this.session = session;
+		this.roomId = roomId;
+		this.tableId = tableId;
+		this.dialog = dialog;
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		setChanged();
-		notifyObservers();
+	protected Void doInBackground() throws Exception {
+		while (!isCancelled()) {
+			this.publish(session.getTable(roomId, tableId));
+			Thread.sleep(1000);
+		}
+		return null;
+	}
+
+	@Override
+	protected void process(List<TableView> view) {
+		dialog.update(view.get(0));
 	}
 
 }

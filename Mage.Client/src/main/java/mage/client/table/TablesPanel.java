@@ -34,6 +34,8 @@
 
 package mage.client.table;
 
+import java.awt.Color;
+import java.awt.Component;
 import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
 import mage.client.MageFrame;
@@ -50,12 +52,13 @@ import mage.util.Logging;
 import mage.view.TableView;
 
 import javax.swing.*;
-import javax.swing.Timer;
 import javax.swing.table.AbstractTableModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mage.client.dialog.NewTournamentDialog;
@@ -65,13 +68,13 @@ import mage.client.dialog.NewTournamentDialog;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TablesPanel extends javax.swing.JPanel implements Observer {
+public class TablesPanel extends javax.swing.JPanel {
 
 	private final static Logger logger = Logging.getLogger(TablesPanel.class.getName());
 
 	private TableTableModel tableModel;
 	private UUID roomId;
-	private TablesWatchdog tablesWatchdog = new TablesWatchdog();
+	private UpdateTablesTask updateTask;
 	private JoinTableDialog joinTableDialog;
 	private NewTableDialog newTableDialog;
 	private NewTournamentDialog newTournamentDialog;
@@ -139,10 +142,9 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 		return components;
     }
     
-	@Override
-	public void update(Observable arg0, Object arg1) {
+	public void update(Collection<TableView> tables) {
 		try {
-			tableModel.loadData(MageFrame.getSession().getTables(roomId));
+			tableModel.loadData(tables);
 			this.tableTables.repaint();
 		} catch (Exception ex) {
 			hideTables();
@@ -153,6 +155,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 
 		this.roomId = roomId;
 		session = MageFrame.getSession();
+		updateTask = new UpdateTablesTask(session, roomId, this);
 		if (session != null) {
 			btnQuickStart.setVisible(session.isTestMode());
 		}
@@ -175,7 +178,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 		UUID chatRoomId = session.getRoomChatId(roomId);
 		if (chatRoomId != null) {
 			this.chatPanel.connect(chatRoomId);
-			tablesWatchdog.addObserver(this);
+			updateTask.execute();
 			this.setVisible(true);
 			this.repaint();
 		}
@@ -190,7 +193,7 @@ public class TablesPanel extends javax.swing.JPanel implements Observer {
 		if (tableWaitingDialog.isVisible()) {
 			tableWaitingDialog.closeDialog();
 		}
-		tablesWatchdog.deleteObservers();
+		updateTask.cancel(true);
 		this.chatPanel.disconnect();
 
 		Component c = this.getParent();
@@ -423,18 +426,30 @@ class TableTableModel extends AbstractTableModel {
 
 }
 
-class TablesWatchdog extends Observable implements ActionListener {
+class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 
-	Timer t = new Timer(1000, this); // check every second
+	private Session session;
+	private UUID roomId;
+	private TablesPanel panel;
 
-	public TablesWatchdog() {
-		t.start();
+	UpdateTablesTask(Session session, UUID roomId, TablesPanel panel) {
+		this.session = session;
+		this.roomId = roomId;
+		this.panel = panel;
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		setChanged();
-		notifyObservers();
+	protected Void doInBackground() throws Exception {
+		while (!isCancelled()) {
+			this.publish(session.getTables(roomId));
+			Thread.sleep(1000);
+		}
+		return null;
+	}
+
+	@Override
+	protected void process(List<Collection<TableView>> view) {
+		panel.update(view.get(0));
 	}
 
 }

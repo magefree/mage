@@ -2,6 +2,7 @@
 
 <Form version="1.6" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
+    <Property name="resizable" type="boolean" value="true"/>
     <Property name="title" type="java.lang.String" value="Waiting for players"/>
   </Properties>
   <SyntheticProperties>
@@ -39,7 +40,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Component id="jSplitPane1" pref="255" max="32767" attributes="0"/>
+              <Component id="jSplitPane1" pref="259" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnMoveDown" alignment="3" min="-2" max="-2" attributes="0"/>
