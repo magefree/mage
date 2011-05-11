@@ -57,6 +57,7 @@ public class GideonJura extends CardImpl<GideonJura> {
 	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
 	static {
+		filter.setUseTapped(true);
 		filter.setTapped(true);
 	}
 
