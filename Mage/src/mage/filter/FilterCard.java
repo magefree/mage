@@ -46,6 +46,12 @@ public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, Filt
 	protected List<String> expansionSetCode = new ArrayList<String>();
 	protected boolean notExpansionSetCode;
 
+	/**
+	 * Text that appears on card.
+	 * At the moment only card name and rules are checked.
+	 */
+	protected String text = "";
+
 	public FilterCard() {
 		super("card");
 	}
@@ -76,6 +82,24 @@ public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, Filt
 
 		if (expansionSetCode.size() > 0 && expansionSetCode.contains(card.getExpansionSetCode()) == notExpansionSetCode)
 			return notFilter;
+
+		if (text.length() > 0) {
+			// first check in card name
+			boolean filterOut = !card.getName().toLowerCase().contains(text.toLowerCase());
+			// if couldn't find
+			if (filterOut) {
+				// then try to find in rules
+				for (String rule : card.getRules()) {
+					if (rule.toLowerCase().contains(text.toLowerCase())) {
+						filterOut = false;
+						break;
+					}
+				}
+				if (filterOut)
+					return notFilter;
+			}
+
+		}
 		
 		return !notFilter;
 	}
@@ -94,6 +118,10 @@ public class FilterCard<T extends FilterCard<T>> extends FilterObject<Card, Filt
 
 	public void setNotExpansionSetCode(boolean notExpansionSetCode) {
 		this.notExpansionSetCode = notExpansionSetCode;
+	}
+
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	public boolean matchOwner(UUID testOwnerId) {

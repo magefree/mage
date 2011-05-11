@@ -166,6 +166,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 							if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
 								deck.getSideboard().remove(card);
 								cardSelector.removeCard(card.getId());
+								cardTableSelector.removeCard(card.getId());
 							}
 							if (cardInfoPane instanceof  CardInfoPane)  {
 								((CardInfoPane)cardInfoPane).setCard(new CardView(card));
@@ -173,6 +174,35 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 						}
 						refreshDeck();
 					}
+				}
+			}
+		);
+		this.cardTableSelector.getCardsList().clearCardEventListeners();
+		this.cardTableSelector.getCardsList().addCardEventListener(
+			new Listener<Event> () {
+				@Override
+				public void event(Event event) {
+					if (event.getEventName().equals("double-click")) {
+						Card card = cardTableSelector.getCard((UUID) event.getSource());
+						if (card != null) {
+							deck.getCards().add(Sets.createCard(card.getClass()));
+							if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
+								deck.getSideboard().remove(card);
+								cardSelector.removeCard(card.getId());
+								cardTableSelector.removeCard(card.getId());
+							}
+							if (cardInfoPane instanceof  CardInfoPane)  {
+								((CardInfoPane)cardInfoPane).setCard(new CardView(card));
+							}
+						}
+					} else if (event.getEventName().equals("shift-double-click") && mode == DeckEditorMode.Constructed) {
+						Card card = cardTableSelector.getCard((UUID) event.getSource());
+						deck.getSideboard().add(Sets.createCard(card.getClass()));
+						if (cardInfoPane instanceof  CardInfoPane)  {
+							((CardInfoPane)cardInfoPane).setCard(new CardView(card));
+						}
+					}
+					refreshDeck();
 				}
 			}
 		);

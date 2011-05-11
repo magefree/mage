@@ -28,23 +28,11 @@
 
 package mage.client.deckeditor.table;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
-
-import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-
 import mage.Constants.CardType;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.client.cards.BigCard;
+import mage.client.cards.CardEventSource;
 import mage.client.cards.CardsStorage;
 import mage.client.cards.ICardGrid;
 import mage.client.constants.Constants.SortBy;
@@ -52,6 +40,14 @@ import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.sets.Sets;
 import mage.view.CardsView;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.util.*;
+import java.util.List;
 
 /**
  *
@@ -62,6 +58,7 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
 	private final List<Card> cards = new ArrayList<Card>();
 	private final FilterCard filter = new FilterCard();
 	private BigCard bigCard;
+	protected CardEventSource cardEventSource = new CardEventSource();
 	
     public CardTableSelector() {
         initComponents();
@@ -206,6 +203,13 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
         rdoPlaneswalkers = new javax.swing.JRadioButton();
         chkPiles = new javax.swing.JCheckBox();
         cbSortBy = new javax.swing.JComboBox();
+		jTextFieldSearch = new javax.swing.JTextField();
+		jLabel1 = new javax.swing.JLabel();
+		jButtonSearch = new javax.swing.JButton();
+		jButtonClean = new javax.swing.JButton();
+		jSeparator1 = new javax.swing.JSeparator();
+		jButtonAddToMain = new javax.swing.JButton();
+		jButtonAddToSideboard = new javax.swing.JButton();
 
         tbColor.setFloatable(false);
         tbColor.setRollover(true);
@@ -437,22 +441,84 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
         });
         tbTypes.add(cbSortBy);
 
+	    jLabel1.setText("Search (by name,in rules):");
+
+		jButtonSearch.setLabel("Search");
+		jButtonSearch.setMaximumSize(new java.awt.Dimension(85, 23));
+		jButtonSearch.setMinimumSize(new java.awt.Dimension(85, 23));
+		jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jButtonSearchActionPerformed(evt);
+			}
+		});
+
+		jButtonClean.setText("Clear");
+		jButtonClean.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jButtonCleanActionPerformed(evt);
+			}
+		});
+
+		jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+		jButtonAddToMain.setLabel("Add to Main");
+		jButtonAddToMain.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jButtonAddToMainActionPerformed(evt);
+			}
+		});
+
+		jButtonAddToSideboard.setLabel("Add to Sideboard");
+		jButtonAddToSideboard.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jButtonAddToSideboardActionPerformed(evt);
+			}
+		});
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tbColor, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)
-            .addComponent(tbTypes, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)
-        );
+				.addComponent(tbColor, javax.swing.GroupLayout.DEFAULT_SIZE, 938, Short.MAX_VALUE)
+				.addComponent(tbTypes, javax.swing.GroupLayout.DEFAULT_SIZE, 938, Short.MAX_VALUE)
+		        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 938, Short.MAX_VALUE)
+				.addGroup(layout.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(jButtonAddToMain, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+						.addComponent(jButtonAddToSideboard)
+						.addGap(18, 18, 18)
+						.addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jLabel1)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jButtonClean)
+						.addContainerGap(322, Short.MAX_VALUE))
+		);
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(tbColor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(tbTypes, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE))
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+				.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+				.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+					.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+						.addComponent(jButtonAddToMain)
+						.addComponent(jButtonAddToSideboard))
+					.addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+					.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+						.addComponent(jLabel1)
+						.addComponent(jButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addComponent(jButtonClean)
+						.addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+				.addContainerGap())
         );
     }
 
@@ -573,6 +639,36 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
 			this.mainModel.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
 	}//GEN-LAST:event_chkPilesActionPerformed
 
+	private void jButtonAddToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+		if (mainTable.getSelectedRowCount() > 0) {
+			int[] n = mainTable.getSelectedRows();
+			for (int i : n) {
+				mainModel.doubleClick(i);
+			}
+		}
+	}//GEN-LAST:event_jButton3ActionPerformed
+
+	private void jButtonAddToSideboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+		if (mainTable.getSelectedRowCount() > 0) {
+			int[] n = mainTable.getSelectedRows();
+			for (int i : n) {
+				mainModel.shiftDoubleClick(i);
+			}
+		}
+	}//GEN-LAST:event_jButton4ActionPerformed
+
+	private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+		String name = jTextFieldSearch.getText().trim();
+		filter.setText(name);
+		filterCards();
+	}//GEN-LAST:event_jButton1ActionPerformed
+
+	private void jButtonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+		jTextFieldSearch.setText("");
+		filter.setText("");
+		filterCards();
+	}//GEN-LAST:event_jButton2ActionPerformed
+
     private TableModel mainModel;
 	
     private javax.swing.JButton btnBooster;
@@ -581,7 +677,14 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
 	private javax.swing.JComboBox cbExpansionSet;
     private javax.swing.JComboBox cbSortBy;
     private javax.swing.JCheckBox chkPiles;
-    private javax.swing.JScrollPane jScrollPane1;
+	private javax.swing.JButton jButtonSearch;
+	private javax.swing.JButton jButtonClean;
+	private javax.swing.JButton jButtonAddToMain;
+	private javax.swing.JButton jButtonAddToSideboard;
+	private javax.swing.JLabel jLabel1;
+	private javax.swing.JScrollPane jScrollPane1;
+	private javax.swing.JSeparator jSeparator1;
+	private javax.swing.JTextField jTextFieldSearch;
     private javax.swing.JRadioButton rdoArtifacts;
     private javax.swing.JRadioButton rdoBlack;
     private javax.swing.JRadioButton rdoBlue;

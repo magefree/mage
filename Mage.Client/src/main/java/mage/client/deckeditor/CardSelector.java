@@ -34,18 +34,6 @@
 
 package mage.client.deckeditor;
 
-import java.awt.Cursor;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
-
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTable;
-
 import mage.Constants.CardType;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
@@ -57,6 +45,13 @@ import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.sets.Sets;
 import mage.view.CardsView;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.util.*;
+import java.util.List;
 
 /**
  *

@@ -187,6 +187,16 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 		cardEventSource.clearListeners();
 	}
 
+	public void doubleClick(int index) {
+		CardView card = view.get(index);
+		cardEventSource.doubleClick(card.getId(), "double-click");
+	}
+
+	public void shiftDoubleClick(int index) {
+		CardView card = view.get(index);
+		cardEventSource.shiftDoubleClick(card.getId(), "shift-double-click");
+	}
+
 	public void addListeners(final JTable table) {
 		// updates card detail, listens to any key strokes
 
@@ -243,6 +253,10 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 				bigCard.setCard(card.getId(), image, new ArrayList<String>(), false);
 			}
 		}
+	}
+
+	public List<CardView> getCardsView() {
+		return view;
 	}
 
 	public boolean sort(int column, boolean ascending) {
