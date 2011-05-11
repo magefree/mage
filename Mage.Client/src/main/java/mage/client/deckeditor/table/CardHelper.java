@@ -30,6 +30,7 @@ package mage.client.deckeditor.table;
 
 import mage.Constants.CardType;
 import mage.cards.MageCard;
+import mage.view.CardView;
 
 /**
  * Helper methods for {@link MageCard}.
@@ -40,30 +41,30 @@ public class CardHelper {
 	private CardHelper() {
 	}
 	
-	public static String getColor(MageCard c) {
-		if (c.getOriginal().getColor().getColorCount() == 0) return "Colorless";
-		else if (c.getOriginal().getColor().getColorCount() > 1) return "Gold";
-		else if (c.getOriginal().getColor().isBlack()) return "Black";
-		else if (c.getOriginal().getColor().isBlue()) return "Blue";
-		else if (c.getOriginal().getColor().isWhite()) return "White";
-		else if (c.getOriginal().getColor().isGreen()) return "Green";
-		else if (c.getOriginal().getColor().isRed()) return "Red";
+	public static String getColor(CardView c) {
+		if (c.getColor().getColorCount() == 0) return "Colorless";
+		else if (c.getColor().getColorCount() > 1) return "Gold";
+		else if (c.getColor().isBlack()) return "Black";
+		else if (c.getColor().isBlue()) return "Blue";
+		else if (c.getColor().isWhite()) return "White";
+		else if (c.getColor().isGreen()) return "Green";
+		else if (c.getColor().isRed()) return "Red";
 		return "";
 	}
 	
-	public static String getType(MageCard c) {
+	public static String getType(CardView c) {
 		StringBuilder type = new StringBuilder();
-		for (String superType : c.getOriginal().getSuperTypes()) {
+		for (String superType : c.getSuperTypes()) {
 			type.append(superType);
 			type.append(" ");
 		}
-		for (CardType cardType : c.getOriginal().getCardTypes()) {
+		for (CardType cardType : c.getCardTypes()) {
 			type.append(cardType.toString());
 			type.append(" ");
 		}
-		if (c.getOriginal().getSubTypes().size() > 0) {
+		if (c.getSubTypes().size() > 0) {
 			type.append("- ");
-			for (String subType : c.getOriginal().getSubTypes()) {
+			for (String subType : c.getSubTypes()) {
 				type.append(subType);
 				type.append(" ");
 			}
@@ -71,7 +72,7 @@ public class CardHelper {
 		return type.toString();
 	}
 	
-	public static boolean isCreature(MageCard c) {
-		return c.getOriginal().getCardTypes().contains(CardType.CREATURE);
+	public static boolean isCreature(CardView c) {
+		return c.getCardTypes().contains(CardType.CREATURE);
 	}
 }

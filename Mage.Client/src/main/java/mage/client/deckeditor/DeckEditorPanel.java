@@ -34,9 +34,7 @@
 
 package mage.client.deckeditor;
 
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -125,6 +123,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			case Sideboard:
 				this.btnSubmit.setVisible(true);
 				this.cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
+				this.cardTableSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
 				this.btnExit.setVisible(false);
 				this.btnImport.setVisible(false);
 				if (!MageFrame.getSession().isTestMode())
@@ -140,6 +139,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			case Constructed:
 				this.btnSubmit.setVisible(false);
 				this.cardSelector.loadCards(this.bigCard);
+				this.cardTableSelector.loadCards(this.bigCard);
 				this.btnExit.setVisible(true);
 				this.btnImport.setVisible(true);
 				if (!MageFrame.getSession().isTestMode())
@@ -153,6 +153,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
 	private void init() {
 		this.cardSelector.setVisible(true);
+		this.cardTableSelector.setVisible(false);
+		this.jRadioButtonFullCards.setSelected(true);
+		this.jRadioButtonListTable.setSelected(false);
 		this.jPanel1.setVisible(true);
 		this.cardSelector.getCardsList().clearCardEventListeners();
 		this.cardSelector.getCardsList().addCardEventListener(
@@ -188,6 +191,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 								if (mode == DeckEditorMode.Limited || mode == DeckEditorMode.Sideboard) {
 									deck.getSideboard().add(card);
 									cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), getBigCard(), mode == DeckEditorMode.Limited);
+									cardTableSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), getBigCard(), mode == DeckEditorMode.Limited);
 								}
 								break;
 							}
@@ -260,9 +264,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 	private void initComponents() {
 
         jSplitPane1 = new javax.swing.JSplitPane();
-        //cardSelector = new mage.client.deckeditor.table.CardTableSelector();
         cardSelector = new mage.client.deckeditor.CardSelector();
-        deckArea = new mage.client.deckeditor.DeckArea();
+		cardTableSelector = new mage.client.deckeditor.table.CardTableSelector();
+		deckArea = new mage.client.deckeditor.DeckArea();
         jPanel1 = new javax.swing.JPanel();
         bigCard = new mage.client.cards.BigCard();
         txtDeckName = new javax.swing.JTextField();
@@ -275,6 +279,48 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         btnSubmit = new javax.swing.JButton();
 		btnAddLand = new javax.swing.JButton();
 		txtTimeRemaining = new javax.swing.JTextField();
+
+		jLayeredPane1 = new javax.swing.JLayeredPane();
+        jRadioButtonFullCards = new javax.swing.JRadioButton();
+        jRadioButtonListTable = new javax.swing.JRadioButton();
+
+		jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "View", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", Font.BOLD, 13), new java.awt.Color(0, 0, 0))); // NOI18N
+
+        jRadioButtonFullCards.setLabel("Full cards");
+        jRadioButtonFullCards.setBounds(50, 27, 80, 23);
+        jLayeredPane1.add(jRadioButtonFullCards, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jRadioButtonFullCards.getAccessibleContext().setAccessibleName("Full cards");
+		jRadioButtonFullCards.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (jRadioButtonListTable.isSelected()) {
+					jRadioButtonListTable.setSelected(false);
+					cardTableSelector.setVisible(false);
+					cardSelector.setVisible(true);
+					jSplitPane1.setTopComponent(cardSelector);
+					jSplitPane1.revalidate();
+					jSplitPane1.repaint();
+				}
+			}
+		});
+
+		jRadioButtonListTable.setActionCommand("List");
+        jRadioButtonListTable.setText("List");
+        jRadioButtonListTable.setBounds(140, 27, 70, 23);
+        jLayeredPane1.add(jRadioButtonListTable, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		jRadioButtonListTable.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (jRadioButtonFullCards.isSelected()) {
+					jRadioButtonFullCards.setSelected(false);
+					cardTableSelector.setVisible(true);
+					cardSelector.setVisible(false);
+					jSplitPane1.setTopComponent(cardTableSelector);
+					jSplitPane1.revalidate();
+					jSplitPane1.repaint();
+				}
+			}
+		});
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setResizeWeight(0.5);
@@ -343,9 +389,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         btnAddLand.setText("Add Land");
         btnAddLand.setName("btnAddLand"); // NOI18N
         btnAddLand.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddLandActionPerformed(evt);
-            }
+	        public void actionPerformed(java.awt.event.ActionEvent evt) {
+		        btnAddLandActionPerformed(evt);
+	        }
         });
 
         txtTimeRemaining.setEditable(false);
@@ -356,61 +402,66 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(6, 6, 6)
-                            .addComponent(lblDeckName)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtDeckName, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
-                    .addComponent(cardInfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnSave)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLoad)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNew)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExit))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnImport)
-						.addContainerGap()
-                        .addComponent(btnAddLand)
-						.addContainerGap()
-						.addComponent(btnSubmit))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtTimeRemaining))
-					)
-                .addContainerGap())
+		        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				        .addGroup(jPanel1Layout.createSequentialGroup()
+						        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+										        .addContainerGap()
+										        .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))
+								        .addGroup(jPanel1Layout.createSequentialGroup()
+										        .addGap(6, 6, 6)
+										        .addComponent(lblDeckName)
+										        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										        .addComponent(txtDeckName, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
+								        .addComponent(cardInfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+								        .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+								        .addGroup(jPanel1Layout.createSequentialGroup()
+										        .addContainerGap()
+										        .addComponent(btnSave)
+										        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										        .addComponent(btnLoad)
+										        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										        .addComponent(btnNew)
+										        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										        .addComponent(btnExit))
+								        .addGroup(jPanel1Layout.createSequentialGroup()
+										        .addContainerGap()
+										        .addComponent(btnImport)
+										        .addContainerGap()
+										        .addComponent(btnAddLand)
+										        .addContainerGap()
+										        .addComponent(btnSubmit))
+								        .addGroup(jPanel1Layout.createSequentialGroup()
+										        .addContainerGap()
+										        .addComponent(txtTimeRemaining))
+						        )
+						        .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtDeckName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblDeckName))
+		                .addComponent(txtDeckName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+		                .addComponent(lblDeckName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnSave)
-                        .addComponent(btnLoad)
-                        .addComponent(btnNew)
-                        .addComponent(btnExit))
+		                .addComponent(btnSave)
+		                .addComponent(btnLoad)
+		                .addComponent(btnNew)
+		                .addComponent(btnExit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnImport)
-						.addComponent(btnAddLand)
-                        .addComponent(btnSubmit))
+		                .addComponent(btnImport)
+		                .addComponent(btnAddLand)
+		                .addComponent(btnSubmit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtTimeRemaining))
+		                .addComponent(txtTimeRemaining))
+		        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, isShowCardInfo ? 30 : 159, Short.MAX_VALUE)
                 .addComponent(cardInfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+		        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                 .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -489,6 +540,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			}
 			deck.getCards().clear();
 			cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
+			cardTableSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
 		}
 		else {
 			deck = new Deck();
@@ -559,13 +611,16 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnLoad;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnSave;
-    //private mage.client.deckeditor.table.CardTableSelector cardSelector;
+    private mage.client.deckeditor.table.CardTableSelector cardTableSelector;
     private mage.client.deckeditor.CardSelector cardSelector;
     private mage.client.deckeditor.DeckArea deckArea;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lblDeckName;
     private javax.swing.JTextField txtDeckName;
+	private javax.swing.JRadioButton jRadioButtonFullCards;
+	private javax.swing.JRadioButton jRadioButtonListTable;
+	private javax.swing.JLayeredPane jLayeredPane1;
     // End of variables declaration//GEN-END:variables
 
     private JComponent cardInfoPane;

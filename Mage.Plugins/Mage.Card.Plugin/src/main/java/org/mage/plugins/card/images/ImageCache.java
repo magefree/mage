@@ -75,12 +75,12 @@ public class ImageCache {
 							String thumbnailPath = path.replace(".jpg", ".thumb.jpg");
 							File thumbnailFile = new File(thumbnailPath);
 							if (thumbnailFile.exists()) {
-								log.info("loading thumbnail for " + key + ", path="+thumbnailPath);
+								//log.debug("loading thumbnail for " + key + ", path="+thumbnailPath);
 								return loadImage(thumbnailFile);
 							} else {
 								BufferedImage image = loadImage(file);
 								if (image == null) return null;
-								log.info("creating thumbnail for " + key);
+								//log.debug("creating thumbnail for " + key);
 								return makeThumbnail(image, thumbnailPath);
 							}
 						} else {

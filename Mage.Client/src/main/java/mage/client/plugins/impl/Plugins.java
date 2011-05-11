@@ -1,6 +1,7 @@
 package mage.client.plugins.impl;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Collection;
 import java.util.Map;
@@ -190,5 +191,12 @@ public class Plugins implements MagePlugins {
         return null;
     }
 
+	@Override
+	public BufferedImage getOriginalImage(CardView card) {
+		if (this.cardPlugin != null) {
+			return this.cardPlugin.getOriginalImage(card);
+		}
+        return null;
+	}
 
 }

@@ -31,13 +31,14 @@ import java.util.Comparator;
 import java.util.List;
 
 import mage.cards.MageCard;
+import mage.view.CardView;
 
 /**
  * {@link MageCard} comparator. Used to sort cards in Deck Editor Table View pane.
  * 
  * @author nantuko
  */
-public class MageCardComparator implements Comparator<MageCard> {
+public class MageCardComparator implements Comparator<CardView> {
 	private final int column;
 	private boolean ascending;
 
@@ -46,7 +47,7 @@ public class MageCardComparator implements Comparator<MageCard> {
 		this.ascending = ascending;
 	}
 
-	public int compare(MageCard a, MageCard b) {
+	public int compare(CardView a, CardView b) {
 		Comparable aCom = null;
 		Comparable bCom = null;
 
@@ -56,16 +57,16 @@ public class MageCardComparator implements Comparator<MageCard> {
 			bCom = Integer.valueOf(1);
 		} else if (column == 1)// Name
 		{
-			aCom = a.getOriginal().getName();
-			bCom = b.getOriginal().getName();
-			if (aCom.equals(bCom) && a.getOriginal().getExpansionSetCode().equals(b.getOriginal().getExpansionSetCode())) {
-				aCom = a.getOriginal().getCardNumber();
-				bCom = b.getOriginal().getCardNumber();
+			aCom = a.getName();
+			bCom = b.getName();
+			if (aCom.equals(bCom) && a.getExpansionSetCode().equals(b.getExpansionSetCode())) {
+				aCom = a.getCardNumber();
+				bCom = b.getCardNumber();
 			}
 		} else if (column == 2)// Cost
 		{
-			aCom = a.getOriginal().getConvertedManaCost();
-			bCom = b.getOriginal().getConvertedManaCost();
+			aCom = a.getConvertedManaCost();
+			bCom = b.getConvertedManaCost();
 		} else if (column == 3)// Color
 		{
 			aCom = CardHelper.getColor(a);
@@ -80,17 +81,17 @@ public class MageCardComparator implements Comparator<MageCard> {
 			bCom = new Float(-1);
 
 			if (CardHelper.isCreature(a))
-				aCom = new Float(a.getOriginal().getPower() + "." + a.getOriginal().getToughness());
+				aCom = new Float(a.getPower() + "." + a.getToughness());
 			if (CardHelper.isCreature(b))
-				bCom = new Float(b.getOriginal().getPower() + "." + b.getOriginal().getToughness());
+				bCom = new Float(b.getPower() + "." + b.getToughness());
 		} else if (column == 6)// Rarity
 		{
-			aCom = a.getOriginal().getRarity().toString();
-			bCom = b.getOriginal().getRarity().toString();
+			aCom = a.getRarity().toString();
+			bCom = b.getRarity().toString();
 		} else if (column == 7)// Set name
 		{
-			aCom = a.getOriginal().getExpansionSetCode();
-			bCom = b.getOriginal().getExpansionSetCode();
+			aCom = a.getExpansionSetCode();
+			bCom = b.getExpansionSetCode();
 		}
 
 		if (ascending)

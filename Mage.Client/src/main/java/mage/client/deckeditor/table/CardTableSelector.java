@@ -100,10 +100,12 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
 		    }
 		});
 		cbExpansionSet.setModel(new DefaultComboBoxModel(l));
-//		cbExpansionSet.insertItemAt("All sets", 0);
+		cbExpansionSet.insertItemAt("-- All sets -- ", 0);
 		cbExpansionSet.setSelectedIndex(0);
 		initFilter();
-		filter.getExpansionSetCode().add(((ExpansionSet)this.cbExpansionSet.getSelectedItem()).getCode());
+		if (this.cbExpansionSet.getSelectedItem() instanceof  ExpansionSet) {
+			filter.getExpansionSetCode().add(((ExpansionSet)this.cbExpansionSet.getSelectedItem()).getCode());
+		}
 		filterCards();
 	}
 

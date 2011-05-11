@@ -23,12 +23,14 @@ import org.mage.plugins.card.dl.Downloader;
 import org.mage.plugins.card.dl.sources.GathererSets;
 import org.mage.plugins.card.dl.sources.GathererSymbols;
 import org.mage.plugins.card.images.DownloadPictures;
+import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.info.CardInfoPaneImpl;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.util.*;
 import java.util.List;
 
@@ -463,4 +465,8 @@ public class CardPluginImpl implements CardPlugin {
     public JComponent getCardInfoPane() {
         return new CardInfoPaneImpl();
     }
+
+	public BufferedImage getOriginalImage(CardView card) {
+		return ImageCache.getImageOriginal(card);
+	}
 }

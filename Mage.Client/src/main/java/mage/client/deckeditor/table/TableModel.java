@@ -28,25 +28,6 @@
 
 package mage.client.deckeditor.table;
 
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
-
-import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableColumnModel;
-
 import mage.cards.MageCard;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardEventSource;
@@ -59,6 +40,17 @@ import mage.client.util.ImageHelper;
 import mage.client.util.Listener;
 import mage.view.CardView;
 import mage.view.CardsView;
+import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumnModel;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.util.*;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * Table Model for card list.
@@ -69,11 +61,13 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
 	private static final long serialVersionUID = -528008802935423088L;
 
+	private static final Logger log = Logger.getLogger(TableModel.class);
+
 	protected CardEventSource cardEventSource = new CardEventSource();
 	protected BigCard bigCard;
 	protected UUID gameId;
-	private Map<UUID, MageCard> cards = new LinkedHashMap<UUID, MageCard>();
-	private List<MageCard> view = new ArrayList<MageCard>();
+	private Map<UUID, CardView> cards = new LinkedHashMap<UUID, CardView>();
+	private List<CardView> view = new ArrayList<CardView>();
 	private Dimension cardDimension;
 
 	private String column[] = { "", "Name", "Cost", "Color", "Type", "Stats",
@@ -91,19 +85,20 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 				addCard(card, bigCard, gameId);
 			}
 		}
-		for (Iterator<Entry<UUID, MageCard>> i = cards.entrySet().iterator(); i
+		for (Iterator<Entry<UUID, CardView>> i = cards.entrySet().iterator(); i
 				.hasNext();) {
-			Entry<UUID, MageCard> entry = i.next();
+			Entry<UUID, CardView> entry = i.next();
 			if (!showCards.containsKey(entry.getKey())) {
 				i.remove();
-				for (MageCard v : view) {
-					if (v.getOriginal().getId().equals(entry.getKey())) {
-						view.remove(v);
+				for (CardView cv : view) {
+					if (cv.getId().equals(entry.getKey())) {
+						view.remove(cv);
 						break;
 					}
 				}
 			}
 		}
+		sort(1, true);
 		drawCards(sortBy, piles);
 	}
 
@@ -129,15 +124,15 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 	}
 
 	private Object getColumn(Object obj, int column) {
-		MageCard c = (MageCard) obj;
+		CardView c = (CardView) obj;
 		switch (column) {
 		case 0:
 			return "";
 		case 1:
-			return c.getOriginal().getName();
+			return c.getName();
 		case 2:
 			StringBuilder s = new StringBuilder();
-			for (String cost : c.getOriginal().getManaCost()) {
+			for (String cost : c.getManaCost()) {
 				s.append(cost);
 			}
 			String cost = s.toString();
@@ -150,12 +145,12 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 		case 4:
 			return CardHelper.getType(c);
 		case 5:
-			return CardHelper.isCreature(c) ? c.getOriginal().getPower() + "/"
-					+ c.getOriginal().getToughness() : "-";
+			return CardHelper.isCreature(c) ? c.getPower() + "/"
+					+ c.getToughness() : "-";
 		case 6:
-			return c.getOriginal().getRarity().toString();
+			return c.getRarity().toString();
 		case 7:
-			return c.getOriginal().getExpansionSetCode();
+			return c.getExpansionSetCode();
 		default:
 			return "error";
 		}
@@ -166,11 +161,8 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 			cardDimension = new Dimension(Config.dimensions.frameWidth,
 					Config.dimensions.frameHeight);
 		}
-		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard,
-				cardDimension, gameId, true);
-		cards.put(card.getId(), cardImg);
-		cardImg.update(card);
-		view.add(cardImg);
+		cards.put(card.getId(), card);
+		view.add(card);
 	}
 
 	public void drawCards(SortBy sortBy, boolean piles) {
@@ -179,9 +171,9 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
 	public void removeCard(UUID cardId) {
 		cards.remove(cardId);
-		for (MageCard v : view) {
-			if (v.getOriginal().getId().equals(cardId)) {
-				view.remove(v);
+		for (CardView cv : view) {
+			if (cv.getId().equals(cardId)) {
+				view.remove(cv);
 				break;
 			}
 		}
@@ -197,34 +189,25 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
 	public void addListeners(final JTable table) {
 		// updates card detail, listens to any key strokes
-		/*
-		 * table.addKeyListener(new KeyListener() { public void
-		 * keyPressed(KeyEvent ev) { }
-		 * 
-		 * public void keyTyped(KeyEvent ev) { }
-		 * 
-		 * public void keyReleased(KeyEvent ev) { int row =
-		 * table.getSelectedRow(); if (row != -1) { MageCard card =
-		 * (MageCard)cards.values().toArray()[row];
-		 * bigCard.setCard(card.getOriginal().getId(), card.getImage(), new
-		 * ArrayList<String>(), false); } } });
-		 */
+
+		table.addKeyListener(new KeyListener() {
+			public void keyPressed(KeyEvent ev) {}
+			public void keyTyped(KeyEvent ev) {}
+
+			public void keyReleased(KeyEvent ev) {
+				int row = table.getSelectedRow();
+				if (row != -1) {
+					showImage(row);
+				}
+			}
+		});
+
 		// updates card detail, listens to any mouse clicks
 		table.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				int row = table.getSelectedRow();
 				if (row != -1) {
-					MageCard card = view.get(row);
-					if (card.getOriginal().getId().equals(bigCard.getCardId())) {
-						Image image = card.getImage();
-						if (image != null && image instanceof BufferedImage) {
-							image = ImageHelper.getResizedImage(
-									(BufferedImage) image, bigCard.getWidth(),
-									bigCard.getHeight());
-						}
-						bigCard.setCard(card.getOriginal().getId(), image,
-								new ArrayList<String>(), false);
-					}
+					showImage(row);
 				}
 			}
 		});
@@ -242,13 +225,24 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 					if (recentSortedColumn == column) {
 						asc = !recentAscending;
 					}
-					boolean change = sort(column, asc);
-
+					sort(column, asc);
 					fireTableDataChanged();
 				}
 			}
 		};
 		table.getTableHeader().addMouseListener(mouse);
+	}
+
+	private void showImage(int row) {
+		CardView card = view.get(row);
+		if (!card.getId().equals(bigCard.getCardId())) {
+			Image image = Plugins.getInstance().getOriginalImage(card);
+			if (image != null && image instanceof BufferedImage) {
+				image = ImageHelper.getResizedImage((BufferedImage) image, bigCard.getWidth(),
+						bigCard.getHeight());
+				bigCard.setCard(card.getId(), image, new ArrayList<String>(), false);
+			}
+		}
 	}
 
 	public boolean sort(int column, boolean ascending) {

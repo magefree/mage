@@ -1,6 +1,7 @@
 package mage.interfaces.plugin;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -34,4 +35,5 @@ public interface CardPlugin extends Plugin {
 	void onAddCard(MagePermanent card, int count);
 	void onRemoveCard(MagePermanent card, int count);
     JComponent getCardInfoPane();
+	BufferedImage getOriginalImage(CardView card);
 }
