@@ -38,8 +38,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import mage.Constants.CardType;
@@ -56,7 +55,7 @@ import mage.view.CardsView;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, nantuko
  */
 public class CardTableSelector extends javax.swing.JPanel implements ComponentListener {
 
@@ -319,7 +318,7 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
         mainTable.setModel(mainModel);
 		mainTable.setForeground(Color.white);
 		DefaultTableCellRenderer myRenderer = (DefaultTableCellRenderer) mainTable.getDefaultRenderer(String.class);
-		myRenderer.setBackground(new Color(0, 0, 0, 100)); 
+		myRenderer.setBackground(new Color(0, 0, 0, 100));
 		mainTable.getColumnModel().getColumn(0).setMaxWidth(0);
 		mainTable.getColumnModel().getColumn(0).setPreferredWidth(10);
 		mainTable.getColumnModel().getColumn(1).setPreferredWidth(110);
@@ -598,7 +597,7 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
     private javax.swing.JRadioButton rdoWhite;
     private javax.swing.JToolBar tbColor;
     private javax.swing.JToolBar tbTypes;
-   
+
 	@Override
 	public void componentResized(ComponentEvent e) {
 		if (cbSortBy.getSelectedItem() instanceof SortBy)

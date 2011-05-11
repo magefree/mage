@@ -44,11 +44,7 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.Timer;
+import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 
 import mage.cards.Card;
@@ -64,6 +60,7 @@ import mage.components.CardInfoPane;
 import mage.game.GameException;
 import mage.sets.Sets;
 import mage.view.CardView;
+import sun.swing.SwingUtilities2;
 
 /**
  *
@@ -298,6 +295,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 					cardTableSelector.setVisible(false);
 					cardSelector.setVisible(true);
 					jSplitPane1.setTopComponent(cardSelector);
+					jSplitPane1.setDividerLocation(0.6);
 					jSplitPane1.revalidate();
 					jSplitPane1.repaint();
 				}
@@ -316,6 +314,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 					cardTableSelector.setVisible(true);
 					cardSelector.setVisible(false);
 					jSplitPane1.setTopComponent(cardTableSelector);
+					jSplitPane1.setDividerLocation(0.6);
 					jSplitPane1.revalidate();
 					jSplitPane1.repaint();
 				}
@@ -325,7 +324,14 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setResizeWeight(0.5);
         jSplitPane1.setTopComponent(cardSelector);
-        jSplitPane1.setRightComponent(deckArea);
+        jSplitPane1.setBottomComponent(deckArea);
+
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				jSplitPane1.setDividerLocation(0.6);
+			}
+		});
 
         bigCard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
