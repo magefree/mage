@@ -30,6 +30,7 @@ package mage.game.stack;
 
 import mage.Mana;
 import mage.abilities.SpellAbility;
+import mage.abilities.effects.common.ShuffleSpellEffect;
 import mage.game.*;
 import java.util.List;
 import java.util.UUID;
@@ -86,7 +87,11 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
 				if (ability.getEffects().contains(ExileSpellEffect.getInstance()))
 					game.getExile().getPermanentExile().add(card);
-				else
+				else if (ability.getEffects().contains(ShuffleSpellEffect.getInstance())) {
+				    card.moveToZone(Zone.LIBRARY, ability.getId(), game, false);
+					Player player = game.getPlayer(controllerId);
+					if (player != null) player.shuffleLibrary(game);
+				} else
 					card.moveToZone(Zone.GRAVEYARD, ability.getId(), game, false);
 				return result;
 			}
