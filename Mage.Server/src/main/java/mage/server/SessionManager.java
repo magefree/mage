@@ -30,9 +30,6 @@ package mage.server;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import mage.interfaces.MageException;
 import org.apache.log4j.Logger;
 
@@ -44,20 +41,15 @@ public class SessionManager {
 
 	private final static Logger logger = Logger.getLogger(SessionManager.class);
 	private final static SessionManager INSTANCE = new SessionManager();
-	private static ScheduledExecutorService sessionExecutor;
 
 	public static SessionManager getInstance() {
 		return INSTANCE;
 	}
 
-	protected SessionManager() {
-		sessionExecutor = Executors.newScheduledThreadPool(1);
-		sessionExecutor.scheduleWithFixedDelay(new SessionChecker(), 30, 10, TimeUnit.SECONDS);
-	}
-
 	private ConcurrentHashMap<UUID, Session> sessions = new ConcurrentHashMap<UUID, Session>();
 
 	public Session getSession(UUID sessionId) {
+		if (sessions == null || sessionId == null) return null;
 		return sessions.get(sessionId);
 	}
 
@@ -82,24 +74,5 @@ public class SessionManager {
 	public void removeSession(UUID sessionId) {
 		sessions.remove(sessionId);
 	}
-
-	public void checkSessions() {
-		for (Session session: sessions.values()) {
-			if (!session.stillAlive()) {
-				logger.info("Client for user " + session.getUsername() + " timed out - releasing resources");
-				session.kill();
-				sessions.remove(session.getId());
-			}
-		}
-	}
-
-	class SessionChecker implements Runnable {
-
-		@Override
-		public void run() {
-			checkSessions();
-		}
-
-	}
+	
 }
-

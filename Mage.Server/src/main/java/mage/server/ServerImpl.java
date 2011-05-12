@@ -45,7 +45,6 @@ import mage.game.tournament.TournamentOptions;
 import mage.interfaces.Server;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
-import mage.server.Session;
 import mage.server.game.DeckValidatorFactory;
 import mage.server.draft.DraftManager;
 import mage.server.game.GameFactory;
@@ -104,16 +103,6 @@ public class ServerImpl extends RemoteServer implements Server {
 	@Override
 	public void ack(String message, UUID sessionId) throws RemoteException, MageException {
 		SessionManager.getInstance().getSession(sessionId).ack(message);
-	}
-
-	@Override
-	public boolean ping(UUID sessionId) {
-		Session session = SessionManager.getInstance().getSession(sessionId);
-		if (session != null) {
-			session.ping();
-			return true;
-		}
-		return false;
 	}
 
 	@Override
@@ -252,8 +241,8 @@ public class ServerImpl extends RemoteServer implements Server {
 						Session session = SessionManager.getInstance().getSession(sessionId);
 						if (session != null) {
 							session.kill();
-							logger.info("Client deregistered ...");
 						}
+						logger.info("Client deregistered ...");
 					}
 				}
 			);

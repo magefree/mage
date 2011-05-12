@@ -37,9 +37,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -72,7 +69,6 @@ import mage.view.TournamentView;
 public class Session {
 
 	private final static Logger logger = Logging.getLogger(Session.class.getName());
-	private static ScheduledExecutorService sessionExecutor = Executors.newScheduledThreadPool(1);
 
 	private UUID sessionId;
 	private Server server;
@@ -116,7 +112,6 @@ public class Session {
 			sessionId = server.registerClient(userName, client.getId(), frame.getVersion());
 			callbackDaemon = new CallbackClientDaemon(sessionId, client, server);
 			serverState = server.getServerState();
-			sessionExecutor.scheduleWithFixedDelay(new ServerPinger(), 15, 5, TimeUnit.SECONDS);
 			logger.info("Connected to RMI server at " + serverName + ":" + port);
 			frame.setStatusText("Connected to " + serverName + ":" + port + " ");
 			frame.enableButtons();
@@ -139,6 +134,7 @@ public class Session {
 
 		if (isConnected()) {
 			try {
+				frame.hideTables();
 				for (UUID chatId: chats.keySet()) {
 					server.leaveChat(chatId, sessionId);
 				}
@@ -149,23 +145,16 @@ public class Session {
 			try {
 				//TODO: stop daemon
 				server.deregisterClient(sessionId);
+				server = null;
+				logger.info("Disconnected ... ");
 			} catch (RemoteException ex) {
 				logger.log(Level.SEVERE, "Error disconnecting ...", ex);
 			} catch (MageException ex) {
 				logger.log(Level.SEVERE, "Error disconnecting ...", ex);
 			}
-			removeServer();
+			frame.setStatusText("Not connected ");
+			frame.disableButtons();
 		}
-	}
-
-	private void removeServer() {
-		sessionExecutor.shutdownNow();
-		server = null;
-		frame.hideTables();
-		frame.setStatusText("Not connected");
-		frame.disableButtons();
-		logger.info("Disconnected ... ");
-		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Disconnected.", "Disconnected", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public void ack(String message) {
@@ -176,17 +165,6 @@ public class Session {
 		} catch (MageException ex) {
 			handleMageException(ex);
 		}
-	}
-
-	public boolean ping() {
-		try {
-			return server.ping(sessionId);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
-		} catch (MageException ex) {
-			handleMageException(ex);
-		}
-		return false;
 	}
 
 	public boolean isConnected() {
@@ -728,7 +706,14 @@ public class Session {
 
 	private void handleRemoteException(RemoteException ex) {
 		logger.log(Level.SEVERE, "Communication error", ex);
-		removeServer();
+		if (ex instanceof java.rmi.ConnectException) {
+			server = null;
+			frame.setStatusText("Not connected");
+			frame.disableButtons();
+			JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Communication error - disconnecting.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		else
+			JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Communication error.", "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	private void handleMageException(MageException ex) {
@@ -754,26 +739,6 @@ public class Session {
 
 	public Server getServerRef() {
 		return server;
-	}
-
-	class ServerPinger implements Runnable {
-
-		private int missed = 0;
-		
-		@Override
-		public void run() {
-			if (!ping()) {
-				missed++;
-				if (missed > 10) {
-					logger.info("Connection to server timed out");
-					removeServer();
-				}
-			}
-			else {
-				missed = 0;
-			}
-		}
-
 	}
 
 }

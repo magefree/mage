@@ -28,7 +28,6 @@
 
 package mage.server;
 
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.UUID;
 import mage.cards.decks.Deck;
@@ -51,7 +50,6 @@ public class Session {
 	private String username;
 	private int messageId = 0;
 	private String ackMessage;
-	private long lastPing;
 	private final CallbackServerSession callback = new CallbackServerSession();
 
 	public Session(String userName, UUID clientId) {
@@ -137,14 +135,6 @@ public class Session {
 
 	public String getUsername() {
 		return username;
-	}
-
-	public void ping() {
-		this.lastPing = System.currentTimeMillis();
-	}
-
-	public boolean stillAlive() {
-		return (System.currentTimeMillis() - lastPing) < 60000;
 	}
 
 }

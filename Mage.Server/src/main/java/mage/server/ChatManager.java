@@ -70,7 +70,7 @@ public class ChatManager {
 		chatSessions.get(chatId).broadcast(userName, message, color);
 	}
 
-	public void removeSession(UUID sessionId) {
+	void removeSession(UUID sessionId) {
 		for (ChatSession chat: chatSessions.values()) {
 			chat.kill(sessionId);
 		}
