@@ -54,6 +54,7 @@ public interface Server extends Remote, CallbackServer {
 	public void ack(String message, UUID sessionId) throws RemoteException, MageException;
 
 	public ServerState getServerState() throws RemoteException, MageException;
+	public boolean ping(UUID sessionId) throws RemoteException, MageException;
 
 	//table methods
 	public TableView createTable(UUID sessionId, UUID roomId, MatchOptions matchOptions) throws RemoteException, MageException;
