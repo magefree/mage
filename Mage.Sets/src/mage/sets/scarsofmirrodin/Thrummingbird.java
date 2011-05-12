@@ -36,6 +36,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.ProliferateEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -43,7 +44,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- * @author Loki
+ * @author Loki, nantuko
  */
 public class Thrummingbird extends CardImpl<Thrummingbird> {
 
@@ -55,6 +56,7 @@ public class Thrummingbird extends CardImpl<Thrummingbird> {
 		this.color.setBlue(true);
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
+		this.addAbility(FlyingAbility.getInstance());
 		this.addAbility(new ThrummingbirdTriggeredAbility());
 	}
 
