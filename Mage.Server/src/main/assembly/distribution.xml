@@ -21,7 +21,6 @@
                 <include>org.mage:Mage-Deck-Limited</include>
                 <include>org.mage:Mage-Game-FreeForAll</include>
                 <include>org.mage:Mage-Game-TwoPlayerDuel</include>
-                <include>org.mage:Mage-Player-AI</include>
                 <include>org.mage:Mage-Player-AIMinimax</include>
                 <include>org.mage:Mage-Player-AI-MA</include>
                 <include>org.mage:Mage-Player-Human</include>
@@ -37,7 +36,6 @@
                 <exclude>org.mage:Mage-Deck-Limited</exclude>
                 <exclude>org.mage:Mage-Game-FreeForAll</exclude>
                 <exclude>org.mage:Mage-Game-TwoPlayerDuel</exclude>
-                <exclude>org.mage:Mage-Player-AI</exclude>
                 <exclude>org.mage:Mage-Player-AIMinimax</exclude>
                 <exclude>org.mage:Mage-Player-AI-MA</exclude>
                 <exclude>org.mage:Mage-Player-Human</exclude>
