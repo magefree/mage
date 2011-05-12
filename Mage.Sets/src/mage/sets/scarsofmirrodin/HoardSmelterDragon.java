@@ -99,7 +99,6 @@ class HoardSmelterEffect extends ContinuousEffectImpl<HoardSmelterEffect> {
 		Permanent target = game.getPermanent(source.getSourceId());
 		if (target != null) {
 			target.addPower(costValue);
-			target.addToughness(costValue);
 			return true;
 		}
 		return false;
