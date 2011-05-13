@@ -432,6 +432,8 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 	private UUID roomId;
 	private TablesPanel panel;
 
+	private final static Logger logger = Logging.getLogger(TablesPanel.class.getName());
+
 	UpdateTablesTask(Session session, UUID roomId, TablesPanel panel) {
 		this.session = session;
 		this.roomId = roomId;
@@ -442,6 +444,10 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 	protected Void doInBackground() throws Exception {
 		while (!isCancelled()) {
 			this.publish(session.getTables(roomId));
+			logger.info("connected players:");
+			for (String player : session.getConnectedPlayers(roomId)) {
+				logger.info("    " + player);
+			}
 			Thread.sleep(1000);
 		}
 		return null;

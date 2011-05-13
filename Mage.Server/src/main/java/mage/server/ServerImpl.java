@@ -34,6 +34,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.ExportException;
 import java.rmi.server.RemoteServer;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
@@ -219,6 +220,22 @@ public class ServerImpl extends RemoteServer implements Server {
 		}
 		return null;
 	}
+
+	@Override
+	public List<String> getConnectedPlayers(UUID roomId) throws MageException {
+		try {
+			List<String> players = new ArrayList<String>();
+			for (Session session : SessionManager.getInstance().getSessions().values()) {
+				players.add(session.getUsername());
+			}
+			return players;
+		}
+		catch (Exception ex) {
+			handleException(ex);
+		}
+		return null;
+	}
+
 
 	@Override
 	public TableView getTable(UUID roomId, UUID tableId) throws MageException {

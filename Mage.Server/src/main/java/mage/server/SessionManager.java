@@ -28,6 +28,9 @@
 
 package mage.server;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.interfaces.MageException;
@@ -74,5 +77,12 @@ public class SessionManager {
 	public void removeSession(UUID sessionId) {
 		sessions.remove(sessionId);
 	}
-	
+
+	public Map<UUID, Session> getSessions() {
+		Map<UUID, Session> map = new HashMap<UUID, Session>();
+		for (Map.Entry<UUID, Session> entry : sessions.entrySet()) {
+			 map.put(entry.getKey(), entry.getValue());
+		}
+		return map;
+	}
 }

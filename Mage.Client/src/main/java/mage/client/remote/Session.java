@@ -322,6 +322,18 @@ public class Session {
 		}
 	}
 
+	public Collection<String> getConnectedPlayers(UUID roomId) throws MageRemoteException {
+		try {
+			return server.getConnectedPlayers(roomId);
+		} catch (RemoteException ex) {
+			handleRemoteException(ex);
+			throw new MageRemoteException();
+		} catch (MageException ex) {
+			handleMageException(ex);
+			throw new MageRemoteException();
+		}
+	}
+
 	public TournamentView getTournament(UUID tournamentId) throws MageRemoteException {
 		try {
 			return server.getTournament(tournamentId);

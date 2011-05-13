@@ -68,6 +68,7 @@ public interface Server extends Remote, CallbackServer {
 	public boolean isTableOwner(UUID sessionId, UUID roomId, UUID tableId) throws RemoteException, MageException;
 	public TableView getTable(UUID roomId, UUID tableId) throws RemoteException, MageException;
 	public List<TableView> getTables(UUID roomId) throws RemoteException, MageException;
+	public List<String> getConnectedPlayers(UUID roomId) throws RemoteException, MageException;
 
 	//chat methods
 	public void sendChatMessage(UUID chatId, String userName, String message) throws RemoteException, MageException;
