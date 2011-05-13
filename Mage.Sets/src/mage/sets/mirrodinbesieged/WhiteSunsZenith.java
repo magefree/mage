@@ -46,7 +46,6 @@ import mage.game.permanent.token.Token;
  * @author Loki
  */
 public class WhiteSunsZenith extends CardImpl<WhiteSunsZenith> {
-
     public WhiteSunsZenith (UUID ownerId) {
         super(ownerId, 19, "White Sun's Zenith", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{W}{W}{W}");
         this.expansionSetCode = "MBS";

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <output-test url="file://$MODULE_DIR$/target/test-classes" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="Mage" />
+    <orderEntry type="library" name="Maven: log4j:log4j:1.2.14" level="project" />
+    <orderEntry type="module" module-name="Mage-Common" />
+    <orderEntry type="library" name="Maven: com.googlecode.jspf:jspf-core:0.9.1" level="project" />
+    <orderEntry type="module" module-name="Mage-Sets" />
+    <orderEntry type="module" module-name="Mage-Server" />
+    <orderEntry type="library" name="Maven: junit:junit:4.8.2" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-impl:2.1.12" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.1" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.stream:stax-api:1.0-2" level="project" />
+    <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
+    <orderEntry type="module" module-name="Mage-Player-AI" />
+    <orderEntry type="module" module-name="Mage-Deck-Constructed" scope="RUNTIME" />
+    <orderEntry type="module" module-name="Mage-Deck-Limited" scope="RUNTIME" />
+    <orderEntry type="module" module-name="Mage-Game-FreeForAll" scope="RUNTIME" />
+    <orderEntry type="module" module-name="Mage-Game-TwoPlayerDuel" />
+    <orderEntry type="module" module-name="Mage-Player-Human" scope="RUNTIME" />
+    <orderEntry type="module" module-name="Mage-Player-AIMinimax" scope="RUNTIME" />
+    <orderEntry type="module" module-name="Mage-Player-AI-MA" scope="RUNTIME" />
+    <orderEntry type="module" module-name="Mage-Tournament-BoosterDraft" scope="RUNTIME" />
+    <orderEntry type="module" module-name="Mage-Tournament-Sealed" scope="RUNTIME" />
+  </component>
+</module>
+
