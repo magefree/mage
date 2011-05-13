@@ -218,7 +218,7 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 
 		@Override
 		public boolean checkTrigger(GameEvent event, Game game) {
-			if (event.getType() == EventType.END_TURN_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
+			if (event.getType() == EventType.END_TURN_STEP_PRE) {
 				return true;
 			}
 			return false;

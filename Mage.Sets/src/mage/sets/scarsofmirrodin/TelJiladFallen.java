@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.keyword.InfectAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactCard;
@@ -52,6 +53,7 @@ public class TelJiladFallen extends CardImpl<TelJiladFallen> {
 		this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
+	    this.addAbility(InfectAbility.getInstance());
 	    this.addAbility(new ProtectionAbility(new FilterArtifactCard("artifacts")));
     }
 
