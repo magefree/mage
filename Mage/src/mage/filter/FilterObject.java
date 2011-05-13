@@ -47,6 +47,8 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 	protected boolean notAbilities;
 	protected List<CardType> cardType = new ArrayList<CardType>();
 	protected ComparisonScope scopeCardType = ComparisonScope.All;
+	protected List<CardType> notCardTypeList = new ArrayList<CardType>();
+	protected ComparisonScope notScopeCardType = ComparisonScope.Any;
 	protected boolean notCardType;
 	protected boolean colorless;
 	protected boolean useColorless;
@@ -89,8 +91,12 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 		for (CardType cType: (List<CardType>)filter.cardType) {
 			this.cardType.add(cType);
 		}
+		for (CardType cType: (List<CardType>)filter.notCardTypeList) {
+			this.notCardTypeList.add(cType);
+		}
 		this.scopeCardType = filter.scopeCardType;
 		this.notCardType = filter.notCardType;
+		this.notScopeCardType = filter.notScopeCardType;
 		this.colorless = filter.colorless;
 		this.useColorless = filter.useColorless;
 		this.useColor = filter.useColor;
@@ -160,6 +166,11 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 				return notFilter;
 		}
 
+		if (notCardTypeList.size() > 0) {
+			if (compCardType.compare(notCardTypeList, object.getCardType(), notScopeCardType, false))
+				return notFilter;
+		}
+		
 		if (subtype.size() > 0) {
 			if (!compString.compare(subtype, object.getSubtype(), scopeSubtype, notSubtype))
 				return notFilter;
@@ -203,13 +214,21 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 	public List<CardType> getCardType() {
 		return this.cardType;
 	}
+	
+	public List<CardType> getNotCardType() {
+		return this.notCardTypeList;
+	}
 
 	public void setScopeCardType(ComparisonScope scopeCardType) {
 		this.scopeCardType = scopeCardType;
 	}
+	
+	public void setNotScopeCardType(ComparisonScope notScopeCardType) {
+		this.notScopeCardType = notScopeCardType;
+	}
 
-	public void setNotCardType(boolean notCardType) {
-		this.notCardType = notCardType;
+	public void setNotCardType(boolean notCardTypeList) {
+		this.notCardType = notCardTypeList;
 	}
 
 	public void setColor(ObjectColor color) {

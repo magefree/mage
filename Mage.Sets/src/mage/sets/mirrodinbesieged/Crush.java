@@ -44,8 +44,7 @@ public class Crush extends CardImpl<Crush> {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("noncreature artifact");
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
-        filter.setNotCardType(true);
+        filter.getNotCardType().add(CardType.CREATURE);
     }
 
     public Crush(UUID ownerId) {

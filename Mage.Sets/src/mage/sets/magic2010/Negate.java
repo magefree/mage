@@ -45,8 +45,7 @@ public class Negate extends CardImpl<Negate> {
 	private static FilterSpell filter = new FilterSpell("noncreature spell");
 
 	static {
-		filter.getCardType().add(CardType.CREATURE);
-		filter.setNotCardType(true);
+		filter.getNotCardType().add(CardType.CREATURE);
 	}
 
 	public Negate(UUID ownerId) {

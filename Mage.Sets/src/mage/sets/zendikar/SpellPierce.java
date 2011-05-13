@@ -46,8 +46,7 @@ public class SpellPierce extends CardImpl<SpellPierce> {
     private static FilterSpell filter = new FilterSpell("noncreature spell");
 
     static {
-            filter.getCardType().add(CardType.CREATURE);
-            filter.setNotCardType(true);
+            filter.getNotCardType().add(CardType.CREATURE);
     }
 
     public SpellPierce(UUID ownerId) {

@@ -78,10 +78,8 @@ class DuressEffect extends OneShotEffect<DuressEffect> {
 	private static FilterCard filter = new FilterCard("noncreature, nonland card");
 
 	static {
-		filter.getCardType().add(CardType.CREATURE);
-		filter.getCardType().add(CardType.LAND);
-		filter.setScopeCardType(ComparisonScope.Any);
-		filter.setNotCardType(true);
+		filter.getNotCardType().add(CardType.CREATURE);
+		filter.getNotCardType().add(CardType.LAND);
 	}
 
 	public DuressEffect() {

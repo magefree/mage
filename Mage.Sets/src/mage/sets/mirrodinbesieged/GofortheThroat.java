@@ -45,8 +45,7 @@ public class GofortheThroat extends CardImpl<GofortheThroat> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setNotCardType(true);
+        filter.getNotCardType().add(CardType.ARTIFACT);
     }
 
     public GofortheThroat(UUID ownerId) {

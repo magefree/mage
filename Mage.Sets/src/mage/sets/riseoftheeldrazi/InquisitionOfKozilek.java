@@ -79,9 +79,7 @@ class InquisitionOfKozilekEffect extends OneShotEffect<InquisitionOfKozilekEffec
 	private static FilterCard filter = new FilterCard("nonland card with converted mana cost 3 or less");
 
 	static {
-		filter.getCardType().add(CardType.LAND);
-		filter.setScopeCardType(ComparisonScope.Any);
-		filter.setNotCardType(true);
+		filter.getNotCardType().add(CardType.LAND);
 		
 		filter.setConvertedManaCost(4);
 		filter.setConvertedManaCostComparison(ComparisonType.LessThan);
