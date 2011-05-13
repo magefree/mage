@@ -28,8 +28,11 @@
 
 package mage.client.deckeditor;
 
+import javax.swing.JOptionPane;
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.DeckCardLists;
+import mage.client.MageFrame;
 import mage.sets.Sets;
 
 /**
@@ -48,23 +51,30 @@ public class MWSDeckImporter extends DeckImporterImpl {
 		}
 		int delim = line.indexOf(' ');
 		String lineNum = line.substring(0, delim).trim();
-		int setStart = line.indexOf('[') + 1;
-		int setEnd = line.indexOf(']');
-		String setCode = line.substring(setStart, setEnd).trim();
-		String lineName = line.substring(setEnd + 1).trim();
+		String setCode = "";
+		if (line.indexOf('[') != -1 ) {
+			int setStart = line.indexOf('[') + 1;
+			int setEnd = line.indexOf(']');
+			setCode = line.substring(setStart, setEnd).trim();
+			delim = setEnd;
+		}
+		String lineName = line.substring(delim + 1).trim();
 		try {
 			int num = Integer.parseInt(lineNum);
-			ExpansionSet set = Sets.findSet(setCode);
-			String cardName;
+			ExpansionSet set = null;
+			if (setCode.length() > 0)
+				set = Sets.findSet(setCode);
+			Card card;
 			if (set != null) {
-				cardName = set.findCard(lineName).getClass().getCanonicalName();
+				card = set.findCard(lineName);
 			}
 			else {
-				cardName = Sets.findCard(lineName).getClass().getCanonicalName();
+				card = Sets.findCard(lineName);
 			}
-			if (cardName == null)
+			if (card == null)
 				sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append("\n");
 			else {
+				String cardName = card.getClass().getCanonicalName();
 				for (int i = 0; i < num; i++) {
 					if (!sideboard)
 						deckList.getCards().add(cardName);

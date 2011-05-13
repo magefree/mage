@@ -612,7 +612,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			}
 			refreshDeck();
 			try {
-				MageFrame.getPreferences().put("lastImportFolder", file.getCanonicalPath());
+				if (file != null)
+					MageFrame.getPreferences().put("lastImportFolder", file.getCanonicalPath());
 			} catch (IOException ex) {	}
 		}
 		fcImportDeck.setSelectedFile(null);

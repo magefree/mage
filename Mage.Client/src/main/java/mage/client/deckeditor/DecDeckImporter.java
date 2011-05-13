@@ -28,6 +28,7 @@
 
 package mage.client.deckeditor;
 
+import mage.cards.Card;
 import mage.cards.decks.DeckCardLists;
 import mage.sets.Sets;
 
@@ -50,10 +51,11 @@ public class DecDeckImporter extends DeckImporterImpl {
 		String lineName = line.substring(delim).trim();
 		try {
 			int num = Integer.parseInt(lineNum);
-			String cardName = Sets.findCard(lineName).getClass().getCanonicalName();
-			if (cardName == null)
+			Card card = Sets.findCard(lineName);
+			if (card == null)
 				sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append("\n");
 			else {
+				String cardName = card.getClass().getCanonicalName();
 				for (int i = 0; i < num; i++) {
 					if (!sideboard)
 						deckList.getCards().add(cardName);

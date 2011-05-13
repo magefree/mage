@@ -65,6 +65,10 @@ public abstract class DeckImporterImpl implements DeckImporter {
 					JOptionPane.showMessageDialog(MageFrame.getDesktop(), sbMessage.toString(), "Error importing deck", JOptionPane.ERROR_MESSAGE);
 				}
 			}
+			catch (Exception ex) {
+				JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error importing deck", JOptionPane.ERROR_MESSAGE);
+				logger.log(Level.SEVERE, null, ex);
+			}
 			finally {
 				scanner.close();
 			}

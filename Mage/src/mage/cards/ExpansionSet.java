@@ -122,7 +122,7 @@ public abstract class ExpansionSet implements Serializable {
 
 	public Card findCard(String name) {
 		for (Card card : cards) {
-			if (name.equals(card.getName())) {
+			if (name.equalsIgnoreCase(card.getName())) {
 				Card newCard = card.copy();
 				newCard.assignNewId();
 				return newCard;
@@ -134,7 +134,7 @@ public abstract class ExpansionSet implements Serializable {
 	public Card findCard(String name, boolean random) {
 		List<Card> foundCards = new ArrayList<Card>();
 		for (Card card : cards) {
-			if (name.equals(card.getName())) {
+			if (name.equalsIgnoreCase(card.getName())) {
 				foundCards.add(card);
 			}
 		}
