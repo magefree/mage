@@ -95,6 +95,7 @@ class OranRiefTheVastwoodEffect extends OneShotEffect<OranRiefTheVastwoodEffect>
 		FilterPermanent filter = new FilterPermanent();
 		filter.getCardType().add(CardType.CREATURE);
 		filter.getColor().setGreen(true);
+		filter.setUseColor(true);
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
 			if (permanent.getTurnsOnBattlefield() == 0) {
 				permanent.addCounters(new PlusOneCounter());

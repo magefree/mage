@@ -62,7 +62,9 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect<PutLibraryInt
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getFirstTarget());
 		if (player != null) {
-			for (int i = 0; i < amount; i++) {
+			// putting cards to grave shouldn't end the game, so getting minimun available
+			int cardsCount = Math.min(amount, player.getLibrary().size());
+			for (int i = 0; i < cardsCount; i++) {
 				Card card = player.getLibrary().removeFromTop(game);
 				if (card != null)
 					player.getGraveyard().add(card);
