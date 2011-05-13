@@ -30,6 +30,8 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
@@ -41,17 +43,21 @@ import mage.game.permanent.token.Token;
 public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
 
 	private Token token;
-	private int amount;
+	private DynamicValue amount;
 
 	public CreateTokenEffect(Token token) {
-		this(token, 1);
+		this(token, new StaticValue(1));
 	}
 
 	public CreateTokenEffect(Token token, int amount) {
-		super(Outcome.PutCreatureInPlay);
-		this.token = token;
-		this.amount = amount;
+		this(token, new StaticValue(amount));
 	}
+
+    public CreateTokenEffect(Token token, DynamicValue amount) {
+        super(Outcome.PutCreatureInPlay);
+        this.token = token;
+        this.amount = amount.clone();
+    }
 
 	public CreateTokenEffect(final CreateTokenEffect effect) {
 		super(effect);
@@ -66,19 +72,23 @@ public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		for (int i = 0; i < amount; i++) {
+		for (int i = 0; i < amount.calculate(game, source); i++) {
 			token.putOntoBattlefield(game, source.getId(), source.getControllerId());
 		}
 		return true;
 	}
 
 	@Override
-	public String getText(Ability source) {
+	public String getDynamicText(Ability source) {
 		StringBuilder sb = new StringBuilder();
-		if (amount == 1)
-			sb.append("put a");
-		else
-			sb.append("put ").append(Integer.toString(amount));
+        if (amount instanceof StaticValue) {
+            int count = amount.calculate(null, null);
+            if (count == 1)
+                sb.append("put a");
+            else sb.append("put ").append(Integer.toString(count));
+        } else {
+            sb.append("put ").append(amount);
+        }
 		sb.append(" ").append(token.getDescription()).append(" onto the battlefield");
 		return sb.toString();
 	}

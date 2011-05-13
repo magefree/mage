@@ -63,7 +63,7 @@ public class ShuffleSpellEffect extends OneShotEffect<ShuffleSpellEffect> {
 
 	@Override
 	public String getText(Ability source) {
-		return "Shuffle {this} into its owner's library.";
+		return "Shuffle {this} into its owner's library";
 	}
 
 	@Override
