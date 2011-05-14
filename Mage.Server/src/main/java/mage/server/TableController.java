@@ -78,7 +78,11 @@ public class TableController {
 		chatId = ChatManager.getInstance().createChatSession();
 		this.options = options;
 		match = GameFactory.getInstance().createMatch(options.getGameType(), options);
-		controllerName = SessionManager.getInstance().getSession(sessionId).getUsername();
+		Session session = SessionManager.getInstance().getSession(sessionId);
+		if (session != null)
+			controllerName = session.getUsername();
+		else
+			controllerName = "System";
 		table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.getInstance().createDeckValidator(options.getDeckType()), options.getPlayerTypes(), match);
 		init();
 	}
@@ -87,7 +91,11 @@ public class TableController {
 		this.sessionId = sessionId;
 		chatId = ChatManager.getInstance().createChatSession();
 		tournament = TournamentFactory.getInstance().createTournament(options.getTournamentType(), options);
-		controllerName = SessionManager.getInstance().getSession(sessionId).getUsername();
+		Session session = SessionManager.getInstance().getSession(sessionId);
+		if (session != null)
+			controllerName = session.getUsername();
+		else
+			controllerName = "System";
 		table = new Table(roomId, options.getTournamentType(), options.getName(), controllerName, DeckValidatorFactory.getInstance().createDeckValidator(options.getMatchOptions().getDeckType()), options.getPlayerTypes(), tournament);
 	}
 
@@ -291,7 +299,8 @@ public class TableController {
 			TournamentManager.getInstance().createTournamentSession(tournament, sessionPlayerMap, table.getId());
 			SessionManager sessionManager = SessionManager.getInstance();
 			for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
-				sessionManager.getSession(entry.getKey()).tournamentStarted(tournament.getId(), entry.getValue());
+				Session session = sessionManager.getSession(entry.getKey());
+				session.tournamentStarted(tournament.getId(), entry.getValue());
 			}
 		}
 	}
