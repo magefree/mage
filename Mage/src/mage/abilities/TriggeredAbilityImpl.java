@@ -34,7 +34,6 @@ import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**

@@ -25,51 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.condition.common.Metalcraft;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.target.Target;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author ayratn
+ * @author North
  */
-public class ScreechingSilcaw extends CardImpl<ScreechingSilcaw> {
+public class AkoumBoulderfoot extends CardImpl<AkoumBoulderfoot> {
 
-    private static final String text = "Metalcraft - Whenever Screeching Silcaw deals combat damage to a player, if you control three or more artifacts, that player puts the top four cards of his or her library into his or her graveyard.";
+    public AkoumBoulderfoot(UUID ownerId) {
+        super(ownerId, 134, "Akoum Boulderfoot", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Giant");
+        this.subtype.add("Warrior");
 
-    public ScreechingSilcaw(UUID ownerId) {
-        super(ownerId, 42, "Screeching Silcaw", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Bird");
+        this.color.setRed(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(5);
 
-        this.color.setBlue(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
-
-        this.addAbility(FlyingAbility.getInstance());
-
-        TriggeredAbility conditional = new ConditionalTriggeredAbility(
-                new DealsCombatDamageToAPlayerTriggeredAbility(new PutLibraryIntoGraveTargetEffect(4), false),
-                Metalcraft.getInstance(), text);
-        this.addAbility(conditional);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1), false);
+        Target target = new TargetCreatureOrPlayer();
+        target.setRequired(true);
+        ability.addTarget(target);
+        this.addAbility(ability);
     }
 
-    public ScreechingSilcaw(final ScreechingSilcaw card) {
+    public AkoumBoulderfoot(final AkoumBoulderfoot card) {
         super(card);
     }
 
     @Override
-    public ScreechingSilcaw copy() {
-        return new ScreechingSilcaw(this);
+    public AkoumBoulderfoot copy() {
+        return new AkoumBoulderfoot(this);
     }
 }

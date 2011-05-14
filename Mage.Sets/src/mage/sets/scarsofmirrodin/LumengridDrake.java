@@ -25,19 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.Metalcraft;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,30 +45,29 @@ import java.util.UUID;
  */
 public class LumengridDrake extends CardImpl<LumengridDrake> {
 
-	private static final String text = "Metalcraft - When Lumengrid Drake enters the battlefield, if you control three or more artifacts, return target creature to its owner's hand.";
+    private static final String text = "Metalcraft - When Lumengrid Drake enters the battlefield, if you control three or more artifacts, return target creature to its owner's hand.";
 
-	public LumengridDrake(UUID ownerId) {
-		super(ownerId, 36, "Lumengrid Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Drake");
-		this.color.setBlue(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public LumengridDrake(UUID ownerId) {
+        super(ownerId, 36, "Lumengrid Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Drake");
+        
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		Effect effect = new ReturnToHandTargetEffect();
-		TriggeredAbility conditional = new ConditionalTriggeredAbility(
-				new EntersBattlefieldTriggeredAbility(effect), effect, Metalcraft.getInstance(), text);
-		conditional.addTarget(new TargetCreaturePermanent());
-		this.addAbility(conditional);
-	}
+        TriggeredAbility conditional = new ConditionalTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()), Metalcraft.getInstance(), text);
+        conditional.addTarget(new TargetCreaturePermanent());
+        this.addAbility(conditional);
+    }
 
-	public LumengridDrake(final LumengridDrake card) {
-		super(card);
-	}
+    public LumengridDrake(final LumengridDrake card) {
+        super(card);
+    }
 
-	@Override
-	public LumengridDrake copy() {
-		return new LumengridDrake(this);
-	}
-
+    @Override
+    public LumengridDrake copy() {
+        return new LumengridDrake(this);
+    }
 }

@@ -30,46 +30,52 @@ package mage.sets.scarsofmirrodin;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.Metalcraft;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.target.Target;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author ayratn
+ * @author North
  */
-public class ScreechingSilcaw extends CardImpl<ScreechingSilcaw> {
+public class BleakCovenVampires extends CardImpl<BleakCovenVampires> {
 
-    private static final String text = "Metalcraft - Whenever Screeching Silcaw deals combat damage to a player, if you control three or more artifacts, that player puts the top four cards of his or her library into his or her graveyard.";
+    private final String effectText = "Metalcraft - When Bleak Coven Vampires enters the battlefield, if you control three or more artifacts, target player loses 4 life and you gain 4 life.";
 
-    public ScreechingSilcaw(UUID ownerId) {
-        super(ownerId, 42, "Screeching Silcaw", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+    public BleakCovenVampires(UUID ownerId) {
+        super(ownerId, 55, "Bleak Coven Vampires", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Bird");
+        this.subtype.add("Vampire");
+        this.subtype.add("Warrior");
 
-        this.color.setBlue(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
+        this.color.setBlack(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-        this.addAbility(FlyingAbility.getInstance());
+        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(4), false);
+        ability.addEffect(new GainLifeEffect(4));
+        Target target = new TargetPlayer();
+        target.setRequired(true);
+        ability.addTarget(target);
 
-        TriggeredAbility conditional = new ConditionalTriggeredAbility(
-                new DealsCombatDamageToAPlayerTriggeredAbility(new PutLibraryIntoGraveTargetEffect(4), false),
-                Metalcraft.getInstance(), text);
-        this.addAbility(conditional);
+        this.addAbility(new ConditionalTriggeredAbility(ability, Metalcraft.getInstance(), effectText));
     }
 
-    public ScreechingSilcaw(final ScreechingSilcaw card) {
+    public BleakCovenVampires(final BleakCovenVampires card) {
         super(card);
     }
 
     @Override
-    public ScreechingSilcaw copy() {
-        return new ScreechingSilcaw(this);
+    public BleakCovenVampires copy() {
+        return new BleakCovenVampires(this);
     }
 }
