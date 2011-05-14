@@ -30,6 +30,8 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.players.Player;
@@ -40,16 +42,20 @@ import mage.players.Player;
  */
 public class DrawCardTargetEffect extends OneShotEffect<DrawCardTargetEffect> {
 
-	protected int amount;
+	protected DynamicValue amount;
 
-	public DrawCardTargetEffect(int amount) {
+    public DrawCardTargetEffect(int amount) {
+        this(new StaticValue(amount));
+    }
+
+	public DrawCardTargetEffect(DynamicValue amount) {
 		super(Outcome.DrawCard);
-		this.amount = amount;
+		this.amount = amount.clone();
 	}
 
 	public DrawCardTargetEffect(final DrawCardTargetEffect effect) {
 		super(effect);
-		this.amount = effect.amount;
+		this.amount = effect.amount.clone();
 	}
 
 	@Override
@@ -61,7 +67,7 @@ public class DrawCardTargetEffect extends OneShotEffect<DrawCardTargetEffect> {
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getFirstTarget());
 		if (player != null) {
-			player.drawCards(amount, game);
+			player.drawCards(amount.calculate(game, source), game);
 			return true;
 		}
 		return false;
@@ -70,7 +76,11 @@ public class DrawCardTargetEffect extends OneShotEffect<DrawCardTargetEffect> {
 	@Override
 	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Target player draws ").append(Integer.toString(amount)).append(" card").append((amount == 1?"":"s"));
+		sb.append("Target player draws ").append(amount).append(" card");
+        if (amount instanceof StaticValue && amount.calculate(null, null) == 1) {
+        } else {
+            sb.append("s");
+        }
 		return sb.toString();
 	}
 
