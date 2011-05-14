@@ -46,14 +46,14 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Harrow extends CardImpl<Harrow> {
 	
-	static FilterControlledPermanent filter = new FilterControlledPermanent("a land.");
+	private static final FilterControlledPermanent filter = new FilterControlledPermanent("a land.");
 	
 	static{
 		filter.getCardType().add(CardType.LAND);
 	}
 
 	public Harrow(UUID ownerId){
-		super(ownerId, 165, "Harrow", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
+		super(ownerId, 165, "Harrow", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
 		this.expansionSetCode = "ZEN";
 		this.color.setGreen(true);		
 		
