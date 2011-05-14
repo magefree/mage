@@ -341,7 +341,7 @@ public final class Constants {
 	}
 
 	public enum Zone {
-		HAND, GRAVEYARD, LIBRARY, BATTLEFIELD, STACK, EXILED, ALL, OUTSIDE, PICK;
+		HAND, GRAVEYARD, LIBRARY, BATTLEFIELD, STACK, EXILED, ALL, OUTSIDE, PICK, COMMAND;
 		
 		public boolean match(Zone zone) {
 			if (this == zone || this == ALL || zone == ALL)

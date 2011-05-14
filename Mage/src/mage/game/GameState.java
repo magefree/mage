@@ -44,6 +44,7 @@ import mage.abilities.TriggeredAbilities;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.game.combat.Combat;
+import mage.game.command.Command;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Battlefield;
@@ -76,6 +77,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 	private UUID priorityPlayerId;
 	private Turn turn;
 	private SpellStack stack;
+	private Command command;
 	private Exile exile;
 	private Revealed revealed;
 	private Map<UUID, LookedAt> lookedAt = new HashMap<UUID, LookedAt>();
@@ -98,6 +100,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 		playerList = new PlayerList();
 		turn = new Turn();
 		stack = new SpellStack();
+		command = new Command();
 		exile = new Exile();
 		revealed = new Revealed();
 		lookedAt = new HashMap<UUID, LookedAt>();
@@ -118,6 +121,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 		this.priorityPlayerId = state.priorityPlayerId;
 		this.turn = state.turn.copy();
 		this.stack = state.stack.copy();
+		this.command = state.command.copy();
 		this.exile = state.exile.copy();
 		this.revealed = state.revealed.copy();
 		for (UUID key: state.lookedAt.keySet()) {
@@ -314,6 +318,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
 	public void restore(GameState state) {
 		this.stack = state.stack;
+		this.command = state.command;
 		this.effects = state.effects;
 		this.triggers = state.triggers;
 		this.combat = state.combat;
@@ -347,6 +352,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 			}
 			battlefield.checkTriggers(event, game);
 			stack.checkTriggers(event, game);
+			command.checkTriggers(event, game);
 			delayed.checkTriggers(event, game);
 			exile.checkTriggers(event, game);
 		}
