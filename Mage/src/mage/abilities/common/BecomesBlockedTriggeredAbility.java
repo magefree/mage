@@ -25,10 +25,11 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.triggers.common;
+package mage.abilities.common;
 
-import mage.abilities.TriggeredAbility;
-import mage.abilities.triggers.Trigger;
+import mage.Constants.Zone;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -38,20 +39,22 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class BlocksTrigger implements Trigger {
+public class BecomesBlockedTriggeredAbility  extends TriggeredAbilityImpl<BecomesBlockedTriggeredAbility> {
 
-    private static Trigger instance = new BecomesBlockedTrigger();
+    public BecomesBlockedTriggeredAbility(Effect effect, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
+    }
 
-    public static Trigger getInstance() {
-        return instance;
+    public BecomesBlockedTriggeredAbility(final BecomesBlockedTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public boolean checkTrigger(TriggeredAbility ability, GameEvent event, Game game) {
-        if (event.getType() == EventType.BLOCKER_DECLARED && event.getSourceId().equals(ability.getSourceId())) {
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.BLOCKER_DECLARED && event.getTargetId().equals(this.getSourceId())) {
             TargetCreaturePermanent target = new TargetCreaturePermanent();
-            target.add(event.getTargetId(), game);
-            ability.addTarget(target);
+            target.add(event.getSourceId(), game);
+            this.addTarget(target);
             return true;
         }
         return false;
@@ -59,6 +62,11 @@ public class BlocksTrigger implements Trigger {
 
     @Override
     public String getRule() {
-        return "When {this} blocks, ";
+        return "Whenever {this} becomes blocked, " + super.getRule();
+    }
+
+    @Override
+    public BecomesBlockedTriggeredAbility copy() {
+        return new BecomesBlockedTriggeredAbility(this);
     }
 }
