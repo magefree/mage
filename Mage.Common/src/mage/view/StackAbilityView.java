@@ -51,7 +51,7 @@ public class StackAbilityView extends CardView {
 		rules.add(ability.getRule(sourceName));
 		this.power = ability.getPower().toString();
 		this.toughness = ability.getToughness().toString();
-		this.loyalty = ability.getLoyalty().toString();
+		this.loyalty = "";
 		this.cardTypes = ability.getCardType();
 		this.subTypes = ability.getSubtype();
 		this.superTypes = ability.getSupertype();

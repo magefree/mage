@@ -28,6 +28,7 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
+
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -94,19 +95,15 @@ class VampireHexmageEffect extends OneShotEffect<VampireHexmageEffect> {
 
 		Permanent permanent = game.getPermanent(target.getFirstTarget());
 
-                if ( permanent != null ) {
-                    String[ ] counterNames = permanent.getCounters().keySet().toArray(new String[0]);
+		if (permanent != null) {
+			String[] counterNames = permanent.getCounters().keySet().toArray(new String[0]);
 
-                    if ( permanent.getLoyalty() != null ) {
-                            permanent.getLoyalty().setValue(0);
-                    }
+			for (String counterName : counterNames) {
+				permanent.getCounters().remove(counterName);
+			}
 
-                    for ( String counterName : counterNames ) {
-                            permanent.getCounters().remove(counterName);
-                    }
-                    
-                    return true;
-                }
+			return true;
+		}
 
 		return false;
 	}

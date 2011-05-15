@@ -40,6 +40,7 @@ public enum CounterType {
     M1M1(new MinusOneCounter().name),
     POISON(new PoisonCounter().name),
     CHARGE(new ChargeCounter().name),
+    LOYALTY(new LoyaltyCounter().name),
     LEVEL(new LevelCounter().name),
     TIME(new TimeCounter().name),
     FADE(new FadeCounter().name),
@@ -89,6 +90,8 @@ public enum CounterType {
                 return new PoisonCounter(amount);
             case CHARGE:
                 return new ChargeCounter(amount);
+            case LOYALTY:
+                return new LoyaltyCounter(amount);
             case LEVEL:
                 return new LevelCounter(amount);
             case TIME:

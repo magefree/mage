@@ -34,9 +34,12 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -63,7 +66,7 @@ public class NissaRevane extends CardImpl<NissaRevane> {
 		super(ownerId, 170, "Nissa Revane", Rarity.MYTHIC, new CardType[]{ CardType.PLANESWALKER }, "{2}{G}{G}");
 		this.expansionSetCode = "ZEN";
 		this.subtype.add("Nissa");
-		this.loyalty = new MageInt(2);
+		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(2)), ""));
 
 		this.color.setGreen(true);
 

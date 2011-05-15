@@ -38,14 +38,17 @@ import mage.Constants.SubLayer;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -66,7 +69,7 @@ public class ElspethKnightErrant extends CardImpl<ElspethKnightErrant> {
 		this.expansionSetCode = "ALA";
 		this.subtype.add("Elspeth");
 		this.color.setWhite(true);
-		this.loyalty = new MageInt(4);
+		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), ""));
 
 		this.addAbility(new LoyaltyAbility(new CreateTokenEffect(soldierToken), 1));
 

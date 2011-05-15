@@ -54,13 +54,15 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
 		super(Outcome.Benefit);
 		this.name = counter.getName();
 		this.counter = counter.copy();
+		this.amount = counter.getCount();
 	}
 
 	public AddCountersSourceEffect(final AddCountersSourceEffect effect) {
 		super(effect);
 		this.amount = effect.amount;
 		this.name = effect.name;
-        this.counter = effect.counter;
+		if (effect.counter != null)
+			this.counter = effect.counter.copy();
 	}
 
 	@Override

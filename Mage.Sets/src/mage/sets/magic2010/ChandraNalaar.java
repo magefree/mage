@@ -33,11 +33,14 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.DamageAllControlledTargetEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DamageXTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -53,7 +56,8 @@ public class ChandraNalaar extends CardImpl<ChandraNalaar> {
 		this.expansionSetCode = "M10";
 		this.subtype.add("Chandra ");
 		this.color.setRed(true);
-		this.loyalty = new MageInt(6);
+		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), ""));
+
 
 		LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(1), 1);
 		ability1.addTarget(new TargetPlayer());

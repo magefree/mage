@@ -225,11 +225,6 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	}
 
 	@Override
-	public MageInt getLoyalty() {
-		return card.getLoyalty();
-	}
-
-	@Override
 	public UUID getId() {
 		return ability.getId();
 	}

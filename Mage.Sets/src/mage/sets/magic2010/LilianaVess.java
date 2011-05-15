@@ -36,11 +36,14 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutOnLibraryEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -57,7 +60,7 @@ public class LilianaVess extends CardImpl<LilianaVess> {
 		this.expansionSetCode = "M10";
 		this.subtype.add("Liliana");
 		this.color.setBlack(true);
-		this.loyalty = new MageInt(5);
+		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), ""));
 
 		LoyaltyAbility ability1 = new LoyaltyAbility(new DiscardTargetEffect(1), 1);
 		ability1.addTarget(new TargetPlayer());

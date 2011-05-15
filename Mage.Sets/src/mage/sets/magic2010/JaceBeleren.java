@@ -33,10 +33,13 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.target.TargetPlayer;
 
 /**
@@ -50,7 +53,8 @@ public class JaceBeleren extends CardImpl<JaceBeleren> {
 		this.expansionSetCode = "M10";
 		this.subtype.add("Jace");
 		this.color.setBlue(true);
-		this.loyalty = new MageInt(3);
+		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+
 
 		this.addAbility(new LoyaltyAbility(new DrawCardAllEffect(1), 2));
 

@@ -34,14 +34,17 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.continious.*;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.DragonToken;
 import mage.target.common.TargetCreaturePermanent;
@@ -60,7 +63,7 @@ public class SarkhanVol extends CardImpl<SarkhanVol> {
 		this.subtype.add("Sarkhan");
 		this.color.setRed(true);
 		this.color.setGreen(true);
-		this.loyalty = new MageInt(4);
+		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), ""));
 
 		Effects effects1 = new Effects();
 		effects1.add(new BoostControlledEffect(1, 1, Duration.EndOfTurn));

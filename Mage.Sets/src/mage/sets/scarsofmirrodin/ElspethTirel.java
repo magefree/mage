@@ -36,9 +36,12 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -57,7 +60,9 @@ public class ElspethTirel extends CardImpl<ElspethTirel> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Elspeth");
 		this.color.setWhite(true);
-        this.loyalty = new MageInt(4);
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), ""));
+
+		
         this.addAbility(new LoyaltyAbility(new ElspethTirelFirstEffect(), 2));
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new SoldierToken(), 3), -2));
         this.addAbility(new LoyaltyAbility(new ElspethTirelThirdEffect(), -5));

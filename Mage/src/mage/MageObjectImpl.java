@@ -31,14 +31,16 @@ package mage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.CardType;
 
+import mage.Constants.CardType;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.counters.Counter;
+import mage.counters.common.LoyaltyCounter;
 import mage.game.Game;
 
 public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements MageObject {
@@ -55,7 +57,6 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
 	protected String text;
 	protected MageInt power;
 	protected MageInt toughness;
-	protected MageInt loyalty;
 	
 	@Override
 	public abstract T copy();
@@ -68,7 +69,6 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
 		objectId = id;
 		power = new MageInt(0);
 		toughness = new MageInt(0);
-		loyalty = new MageInt(0);
 		color = new ObjectColor();
 		manaCost = new ManaCostsImpl<ManaCost>("");
 		abilities = new AbilitiesImpl<Ability>();
@@ -82,7 +82,6 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
 		color = object.color.copy();
 		power = object.power.copy();
 		toughness = object.toughness.copy();
-		loyalty = object.loyalty.copy();
 		abilities = object.abilities.copy();
 		for (CardType cType: object.cardType) {
 			cardType.add(cType);
@@ -138,11 +137,6 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
 	@Override
 	public MageInt getToughness() {
 		return toughness;
-	}
-
-	@Override
-	public MageInt getLoyalty() {
-		return loyalty;
 	}
 
 	@Override

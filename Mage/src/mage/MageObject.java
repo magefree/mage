@@ -25,7 +25,6 @@ public interface MageObject extends MageItem, Serializable {
 	
 	public MageInt getPower();
 	public MageInt getToughness();
-	public MageInt getLoyalty();
 
 	public void adjustCosts(Ability ability, Game game);
 

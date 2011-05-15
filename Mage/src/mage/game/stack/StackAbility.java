@@ -148,11 +148,6 @@ public class StackAbility implements StackObject, Ability {
 	}
 
 	@Override
-	public MageInt getLoyalty() {
-		return MageInt.EmptyMageInt;
-	}
-
-	@Override
 	public Zone getZone() {
 		return this.ability.getZone();
 	}

@@ -630,7 +630,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		}
 		//20091005 - 704.5i
 		for (Permanent perm: getBattlefield().getAllActivePermanents(CardType.PLANESWALKER)) {
-			if (perm.getLoyalty().getValue() == 0) {
+			if (perm.getCounters().getCount(CounterType.LOYALTY) == 0) {
 				if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
 					return true;
 			}

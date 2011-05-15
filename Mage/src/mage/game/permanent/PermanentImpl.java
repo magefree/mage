@@ -456,10 +456,11 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		if (!game.replaceEvent(event)) {
 			int actualDamage = event.getAmount();
 			if (actualDamage > 0) {
-				if (event.getAmount() > this.loyalty.getValue()) {
-					actualDamage = this.loyalty.getValue();
+				int countersToRemove = actualDamage;
+				if (countersToRemove > getCounters().getCount(CounterType.LOYALTY)) {
+					countersToRemove = getCounters().getCount(CounterType.LOYALTY);
 				}
-				this.loyalty.boostValue(-actualDamage);
+				getCounters().removeCounter(CounterType.LOYALTY, countersToRemove);
 				game.fireEvent(new DamagedPlaneswalkerEvent(objectId, sourceId, controllerId, actualDamage, combat));
 				return actualDamage;
 			}

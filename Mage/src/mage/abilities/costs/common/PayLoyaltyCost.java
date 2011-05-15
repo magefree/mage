@@ -30,6 +30,7 @@ package mage.abilities.costs.common;
 
 import java.util.UUID;
 import mage.abilities.costs.CostImpl;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -54,7 +55,7 @@ public class PayLoyaltyCost extends CostImpl<PayLoyaltyCost> {
 	@Override
 	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
 		Permanent planeswalker = game.getPermanent(sourceId);
-		if (planeswalker.getLoyalty().getValue() + amount >= 0 && !planeswalker.isLoyaltyUsed())
+		if (planeswalker.getCounters().getCount(CounterType.LOYALTY) + amount >= 0 && !planeswalker.isLoyaltyUsed())
 			return true;
 		return false;
 	}
@@ -62,8 +63,12 @@ public class PayLoyaltyCost extends CostImpl<PayLoyaltyCost> {
 	@Override
 	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
 		Permanent planeswalker = game.getPermanent(sourceId);
-		if (planeswalker.getLoyalty().getValue() + amount >= 0 && !planeswalker.isLoyaltyUsed()) {
-			planeswalker.getLoyalty().boostValue(amount);
+		if (planeswalker.getCounters().getCount(CounterType.LOYALTY) + amount >= 0 && !planeswalker.isLoyaltyUsed()) {
+			if (amount > 0) {
+				planeswalker.getCounters().addCounter(CounterType.LOYALTY.createInstance(amount));
+			} else if (amount < 0) {
+				planeswalker.getCounters().removeCounter(CounterType.LOYALTY, Math.abs(amount));
+			}
 			planeswalker.setLoyaltyUsed(true);
 			this.paid = true;
 		}

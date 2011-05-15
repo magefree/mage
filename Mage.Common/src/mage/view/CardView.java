@@ -37,6 +37,7 @@ import mage.ObjectColor;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.cards.Card;
+import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -81,11 +82,11 @@ public class CardView implements Serializable {
 		if (card instanceof Permanent) {
 			this.power = Integer.toString(card.getPower().getValue());
 			this.toughness = Integer.toString(card.getToughness().getValue());
-			this.loyalty = Integer.toString(card.getLoyalty().getValue());
+			this.loyalty = Integer.toString(((Permanent) card).getCounters().getCount(CounterType.LOYALTY));
 		} else {
 			this.power = card.getPower().toString();
 			this.toughness = card.getToughness().toString();
-			this.loyalty = card.getLoyalty().toString();
+			this.loyalty = "";
 		}
 		this.cardTypes = card.getCardType();
 		this.subTypes = card.getSubtype();
@@ -123,7 +124,7 @@ public class CardView implements Serializable {
 		this.rules = token.getAbilities().getRules(this.name);
 		this.power = token.getPower().toString();
 		this.toughness = token.getToughness().toString();
-		this.loyalty = token.getLoyalty().toString();
+		this.loyalty = "";
 		this.cardTypes = token.getCardType();
 		this.subTypes = token.getSubtype();
 		this.superTypes = token.getSupertype();

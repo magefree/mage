@@ -34,13 +34,16 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.BeastToken;
 import mage.target.common.TargetLandPermanent;
@@ -58,7 +61,8 @@ public class GarrukWildspeaker extends CardImpl<GarrukWildspeaker> {
 		this.expansionSetCode = "M10";
 		this.subtype.add("Garruk");
 		this.color.setGreen(true);
-		this.loyalty = new MageInt(3);
+		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+
 
 		LoyaltyAbility ability1 = new LoyaltyAbility(new UntapTargetEffect(), 1);
 		ability1.addTarget(new TargetLandPermanent(2));

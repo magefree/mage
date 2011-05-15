@@ -36,12 +36,15 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.counters.CounterType;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
@@ -61,7 +64,8 @@ public class JaceTheMindSculptor extends CardImpl<JaceTheMindSculptor> {
 		this.expansionSetCode = "WWK";
 		this.subtype.add("Jace");
 		this.color.setBlue(true);
-		this.loyalty = new MageInt(3);
+		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+
 
 		LoyaltyAbility ability1 = new LoyaltyAbility(new JaceTheMindSculptorEffect1(), 2);
 		ability1.addTarget(new TargetPlayer());

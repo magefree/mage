@@ -31,6 +31,7 @@ package mage.abilities.costs.common;
 import java.util.UUID;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.VariableCost;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -62,8 +63,12 @@ public class PayVariableLoyaltyCost extends CostImpl<PayVariableLoyaltyCost> imp
 	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
 		Permanent planeswalker = game.getPermanent(sourceId);
 		Player player = game.getPlayer(planeswalker.getControllerId());
-		this.amountPaid = player.getAmount(0, planeswalker.getLoyalty().getValue(), "", game);
-		planeswalker.getLoyalty().boostValue(-amountPaid);
+		this.amountPaid = player.getAmount(0, planeswalker.getCounters().getCount(CounterType.LOYALTY), "Choose X", game);
+		if (this.amountPaid> 0) {
+			planeswalker.getCounters().removeCounter(CounterType.LOYALTY, this.amountPaid); 
+		} else if (this.amountPaid < 0) {
+			planeswalker.getCounters().addCounter(CounterType.LOYALTY.createInstance(Math.abs(this.amountPaid)));
+		}
 		planeswalker.setLoyaltyUsed(true);
 		this.paid = true;
 		return paid;

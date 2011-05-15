@@ -38,6 +38,7 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -45,7 +46,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
@@ -70,7 +73,8 @@ public class KothoftheHammer extends CardImpl<KothoftheHammer> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Koth");
 		this.color.setRed(true);
-        this.loyalty = new MageInt(3);
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+        
         Ability ability = new LoyaltyAbility(new UntapTargetEffect(), 1);
         ability.addEffect(new KothoftheHammerFirstEffect());
         ability.addTarget(new TargetLandPermanent(filter));

@@ -36,11 +36,14 @@ import mage.Constants.TurnPhase;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.PreventAllDamageSourceEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -66,7 +69,7 @@ public class GideonJura extends CardImpl<GideonJura> {
 		this.expansionSetCode = "ROE";
 		this.subtype.add("Gideon");
 		this.color.setWhite(true);
-		this.loyalty = new MageInt(6);
+		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), ""));
 
 		LoyaltyAbility ability1 = new LoyaltyAbility(new GideonJuraEffect(), 2);
 		ability1.addTarget(new TargetOpponent());

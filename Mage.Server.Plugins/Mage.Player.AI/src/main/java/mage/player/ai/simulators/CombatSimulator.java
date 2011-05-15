@@ -35,6 +35,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
+
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
@@ -66,7 +68,7 @@ public class CombatSimulator implements Serializable {
 			}
 			else {
 				Permanent permanent = game.getPermanent(defenderId);
-				simCombat.planeswalkerLoyalty.put(defenderId, permanent.getLoyalty().getValue());
+				simCombat.planeswalkerLoyalty.put(defenderId, permanent.getCounters().getCount(CounterType.LOYALTY));
 			}
 		}
 		return simCombat;

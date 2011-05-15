@@ -33,12 +33,15 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DestroyAllControlledTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
@@ -56,7 +59,8 @@ public class AjaniVengeant extends CardImpl<AjaniVengeant> {
 		this.subtype.add("Ajani");
 		this.color.setRed(true);
 		this.color.setWhite(true);
-		this.loyalty = new MageInt(3);
+		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+
 
 		LoyaltyAbility ability1 = new LoyaltyAbility(new SkipNextUntapTargetEffect(), 1);
 		ability1.addTarget(new TargetPermanent());
