@@ -725,6 +725,16 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 				}
 			}
 		}
+		//20110501 - 704.5r
+		for (Permanent perm: getBattlefield().getAllActivePermanents()) {
+			if (perm.getCounters().containsKey(CounterType.P1P1) && perm.getCounters().containsKey(CounterType.M1M1)) {
+				int p1p1 = perm.getCounters().getCount(CounterType.P1P1);
+				int m1m1 = perm.getCounters().getCount(CounterType.M1M1);
+				int min = Math.min(p1p1, m1m1);
+				perm.getCounters().removeCounter(CounterType.P1P1, min);
+				perm.getCounters().removeCounter(CounterType.M1M1, min);
+			}
+		}
 
 		//TODO: implement the rest
 
