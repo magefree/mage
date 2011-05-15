@@ -445,10 +445,10 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 	protected Void doInBackground() throws Exception {
 		while (!isCancelled()) {
 			this.publish(session.getTables(roomId));
-			logger.info("connected players:");
+			/*logger.info("connected players:");
 			for (String player : session.getConnectedPlayers(roomId)) {
 				logger.info("    " + player);
-			}
+			}*/
 			Thread.sleep(1000);
 		}
 		return null;

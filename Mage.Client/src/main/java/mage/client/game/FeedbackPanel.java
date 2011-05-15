@@ -44,12 +44,14 @@ import java.awt.event.MouseEvent;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.UUID;
-import java.util.logging.Logger;
+
 import javax.swing.SwingUtilities;
+
 import mage.client.MageFrame;
 import mage.client.components.MageTextArea;
 import mage.client.remote.Session;
-import mage.util.Logging;
+
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -57,7 +59,7 @@ import mage.util.Logging;
  */
 public class FeedbackPanel extends javax.swing.JPanel {
 
-	private final static Logger logger = Logging.getLogger(FeedbackPanel.class.getName());
+	private final static Logger logger = Logger.getLogger(FeedbackPanel.class);
 
 	public enum FeedbackMode {
 		INFORM, QUESTION, CONFIRM, CANCEL, SELECT
@@ -79,6 +81,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 	}
 
 	public void getFeedback(FeedbackMode mode, String message, boolean modal, boolean special, Map<String, Serializable> options) {
+		logger.info("text: " + message);
 		this.lblMessage.setText(message);
 		this.selected = false;
 		this.mode = mode;
@@ -136,6 +139,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 		this.btnRight.setVisible(false);
 		this.btnSpecial.setVisible(false);
 		this.lblMessage.setText("");
+		logger.info("feedback - clear");
 	}
 
 	private synchronized void startModal() {
@@ -164,7 +168,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
                         } else if (source instanceof MenuComponent) {
                             ((MenuComponent) source).dispatchEvent(event);
                         } else {
-							logger.warning("Unable to dispatch: " + event);
+							logger.warn("Unable to dispatch: " + event);
                         }
                     }
                 }

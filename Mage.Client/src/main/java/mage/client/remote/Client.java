@@ -79,6 +79,7 @@ public class Client implements CallbackClient {
 			@Override
 			public void run() {
 				try {
+					logger.info(callback.getMessageId() + " -- " + callback.getMethod());
 					if (callback.getMethod().equals("startGame")) {
 						TableClientMessage message = (TableClientMessage) callback.getData();
 						GameManager.getInstance().setCurrentPlayerUUID(message.getPlayerId());
@@ -188,6 +189,7 @@ public class Client implements CallbackClient {
 							panel.updateGame((GameView) callback.getData());
 					}
 					else if (callback.getMethod().equals("gameInform")) {
+						
 						if (callback.getMessageId() > messageId) {
 							GameClientMessage message = (GameClientMessage) callback.getData();
 							GamePanel panel = session.getGame(callback.getObjectId());
