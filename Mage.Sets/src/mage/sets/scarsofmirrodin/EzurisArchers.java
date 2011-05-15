@@ -25,81 +25,75 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.GenericTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.triggers.common.BlocksTrigger;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.ReachAbility;
+import mage.abilities.triggers.Trigger;
+import mage.abilities.triggers.common.BecomesBlockedTrigger;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class LoyalSentry extends CardImpl<LoyalSentry> {
+public class EzurisArchers extends CardImpl<EzurisArchers> {
 
-    public LoyalSentry (UUID ownerId) {
-        super(ownerId, 27, "Loyal Sentry", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "10E";
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-        
-		this.color.setWhite(true);
+    public EzurisArchers(UUID ownerId) {
+        super(ownerId, 120, "Ezuri's Archers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Elf");
+        this.subtype.add("Archer");
+
+        this.color.setGreen(true);
         this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        
-        this.addAbility(new GenericTriggeredAbility(BlocksTrigger.getInstance(), new LoyalSentryEffect(), false));
+        this.toughness = new MageInt(2);
+
+        this.addAbility(ReachAbility.getInstance());
+        // Whenever Ezuri's Archers blocks a creature with flying, Ezuri's Archers gets +3/+0 until end of turn.
+        this.addAbility(new GenericTriggeredAbility(BlocksCreatureWithFlyingTrigger.getInstance(), new BoostSourceEffect(3, 0, Duration.EndOfTurn), false));
     }
 
-    public LoyalSentry (final LoyalSentry card) {
+    public EzurisArchers(final EzurisArchers card) {
         super(card);
     }
 
     @Override
-    public LoyalSentry copy() {
-        return new LoyalSentry(this);
+    public EzurisArchers copy() {
+        return new EzurisArchers(this);
     }
 }
 
-class LoyalSentryEffect extends OneShotEffect<LoyalSentryEffect> {
-    LoyalSentryEffect() {
-        super(Constants.Outcome.DestroyPermanent);
-    }
+class BlocksCreatureWithFlyingTrigger implements Trigger {
 
-    LoyalSentryEffect(LoyalSentryEffect effect) {
-        super(effect);
+    private static Trigger instance = new BecomesBlockedTrigger();
+
+    public static Trigger getInstance() {
+        return instance;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(source.getFirstTarget());
-        Permanent s = game.getPermanent(source.getSourceId());
-        if (p != null) {
-            p.destroy(source.getSourceId(), game, false);
+    public boolean checkTrigger(TriggeredAbility ability, GameEvent event, Game game) {
+        if (event.getType() == EventType.BLOCKER_DECLARED && event.getSourceId().equals(ability.getSourceId())
+                && game.getPermanent(event.getTargetId()).getAbilities().containsKey(FlyingAbility.getInstance().getId())) {
+            return true;
         }
-        if (s != null) {
-            s.destroy(source.getSourceId(), game, false);
-        }
-        return true;
+        return false;
     }
 
     @Override
-    public LoyalSentryEffect copy() {
-        return new LoyalSentryEffect(this);
-    }
-
-    @Override
-    public String getText(Ability source) {
-        return "destroy that creature and Loyal Sentry";
+    public String getRule() {
+        return "Whenever {this} blocks a creature with flying, ";
     }
 }
