@@ -25,81 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.GenericTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.triggers.common.BlocksTrigger;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.keyword.InfectAbility;
+import mage.abilities.triggers.common.BecomesBlockedTrigger;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class LoyalSentry extends CardImpl<LoyalSentry> {
+public class IchorclawMyr extends CardImpl<IchorclawMyr> {
 
-    public LoyalSentry (UUID ownerId) {
-        super(ownerId, 27, "Loyal Sentry", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "10E";
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-        
-		this.color.setWhite(true);
+    public IchorclawMyr(UUID ownerId) {
+        super(ownerId, 166, "Ichorclaw Myr", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
+        this.expansionSetCode = "SOM";
+        this.subtype.add("Myr");
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        
-        this.addAbility(new GenericTriggeredAbility(BlocksTrigger.getInstance(), new LoyalSentryEffect(), false));
+
+        this.addAbility(InfectAbility.getInstance());
+        // Whenever Ichorclaw Myr becomes blocked, it gets +2/+2 until end of turn.
+        this.addAbility(new GenericTriggeredAbility(
+                BecomesBlockedTrigger.getInstance(),
+                new BoostSourceEffect(2, 2, Duration.EndOfTurn),
+                false));
     }
 
-    public LoyalSentry (final LoyalSentry card) {
+    public IchorclawMyr(final IchorclawMyr card) {
         super(card);
     }
 
     @Override
-    public LoyalSentry copy() {
-        return new LoyalSentry(this);
-    }
-}
-
-class LoyalSentryEffect extends OneShotEffect<LoyalSentryEffect> {
-    LoyalSentryEffect() {
-        super(Constants.Outcome.DestroyPermanent);
-    }
-
-    LoyalSentryEffect(LoyalSentryEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(source.getFirstTarget());
-        Permanent s = game.getPermanent(source.getSourceId());
-        if (p != null) {
-            p.destroy(source.getSourceId(), game, false);
-        }
-        if (s != null) {
-            s.destroy(source.getSourceId(), game, false);
-        }
-        return true;
-    }
-
-    @Override
-    public LoyalSentryEffect copy() {
-        return new LoyalSentryEffect(this);
-    }
-
-    @Override
-    public String getText(Ability source) {
-        return "destroy that creature and Loyal Sentry";
+    public IchorclawMyr copy() {
+        return new IchorclawMyr(this);
     }
 }

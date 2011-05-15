@@ -32,9 +32,10 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.GenericTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.triggers.common.BlocksTrigger;
 import mage.cards.CardImpl;
 
 /**
@@ -52,7 +53,7 @@ public class GoldenglowMoth extends CardImpl<GoldenglowMoth> {
 		this.toughness = new MageInt(1);
 
 		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new BlocksTriggeredAbility(new GainLifeEffect(4), true));
+		this.addAbility(new GenericTriggeredAbility(BlocksTrigger.getInstance(), new GainLifeEffect(4), true));
 
 	}
 
