@@ -28,7 +28,6 @@
 
 package mage.server;
 
-import java.net.UnknownHostException;
 import mage.server.util.PluginClassLoader;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -60,6 +59,7 @@ public class Main {
 	private static Logger logger = Logger.getLogger(Main.class);
 
 	private final static String testModeArg = "-testMode=";
+	private final static String adminPasswordArg = "-adminPassword=";
 	private final static String pluginFolder = "plugins";
 	private static MageVersion version = new MageVersion(0, 7, 2);
 
@@ -88,14 +88,18 @@ public class Main {
 			DeckValidatorFactory.getInstance().addDeckType(plugin.getName(), loadPlugin(plugin));
 		}
 		boolean testMode = false;
+		String adminPassword = "";
 		for (String arg: args) {
 			if (arg.startsWith(testModeArg)) {
 				testMode = Boolean.valueOf(arg.replace(testModeArg, ""));
 			}
+			else if (arg.startsWith(adminPasswordArg)) {
+				adminPassword = arg.replace(adminPasswordArg, "");
+			}
 		}
 		Copier.setLoader(classLoader);
 		setServerAddress(config.getServerAddress());
-		server = new ServerImpl(config.getPort(), config.getServerName(), testMode);
+		server = new ServerImpl(config.getPort(), config.getServerName(), testMode, adminPassword);
 
     }
 

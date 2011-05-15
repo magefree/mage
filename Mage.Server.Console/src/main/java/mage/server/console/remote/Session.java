@@ -26,16 +26,14 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.client.remote;
+package mage.server.console.remote;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -43,26 +41,19 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 import mage.cards.decks.DeckCardLists;
-import mage.client.MageFrame;
-import mage.client.chat.ChatPanel;
-import mage.client.components.MageUI;
-import mage.client.draft.DraftPanel;
-import mage.client.game.GamePanel;
-import mage.client.tournament.TournamentPanel;
-import mage.client.util.Config;
 import mage.game.GameException;
 import mage.interfaces.MageException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.interfaces.Server;
 import mage.interfaces.ServerState;
-import mage.interfaces.callback.CallbackClientDaemon;
-import mage.util.Logging;
+import mage.server.console.ConsoleFrame;
 import mage.view.DraftPickView;
 import mage.view.GameTypeView;
 import mage.view.TableView;
 import mage.view.TournamentTypeView;
 import mage.view.TournamentView;
+import mage.view.UserView;
 import org.apache.log4j.Logger;
 
 /**
@@ -76,26 +67,18 @@ public class Session {
 
 	private UUID sessionId;
 	private Server server;
-	private Client client;
-	private String userName;
-	private MageFrame frame;
+	private ConsoleFrame frame;
 	private ServerState serverState;
-	private Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
-	private Map<UUID, GamePanel> games = new HashMap<UUID, GamePanel>();
-	private Map<UUID, DraftPanel> drafts = new HashMap<UUID, DraftPanel>();
-	private Map<UUID, TournamentPanel> tournaments = new HashMap<UUID, TournamentPanel>();
-	private CallbackClientDaemon callbackDaemon;
 	private ScheduledFuture<?> future;
-	private MageUI ui = new MageUI();
 
-	public Session(MageFrame frame) {
+	public Session(ConsoleFrame frame) {
 		this.frame = frame;
 	}
-	public boolean connect(String userName, String serverName, int port) {
-		return connect(userName, serverName, port, "", 0);
+	public boolean connect(String password, String serverName, int port) {
+		return connect(password, serverName, port, "", 0);
 	}
 	
-	public boolean connect(String userName, String serverName, int port, String proxyServer, int proxyPort) {
+	public boolean connect(String password, String serverName, int port, String proxyServer, int proxyPort) {
 		if (isConnected()) {
 			disconnect();
 		}
@@ -110,12 +93,8 @@ public class Session {
 				System.clearProperty("socksProxyPort");
 			}
 			Registry reg = LocateRegistry.getRegistry(serverName, port);
-			this.server = (Server) reg.lookup(Config.remoteServer);
-			this.userName = userName;
-			if (client == null)
-				client = new Client(this, frame);
-			sessionId = server.registerClient(userName, client.getId(), frame.getVersion());
-			callbackDaemon = new CallbackClientDaemon(sessionId, client, server);
+			this.server = (Server) reg.lookup("mage-server");
+			sessionId = server.registerAdmin(password, frame.getVersion());
 			serverState = server.getServerState();
 			future = sessionExecutor.scheduleWithFixedDelay(new ServerPinger(), 5, 5, TimeUnit.SECONDS);
 			logger.info("Connected to RMI server at " + serverName + ":" + port);
@@ -132,6 +111,8 @@ public class Session {
 			JOptionPane.showMessageDialog(frame, "Unable to connect to server. "  + ex.getMessage());
 		} catch (NotBoundException ex) {
 			logger.fatal("Unable to connect to server - ", ex);
+		} catch (Exception ex) {
+			logger.fatal("Unable to connect to server - ", ex);
 		}
 		return false;
 	}
@@ -140,15 +121,6 @@ public class Session {
 
 		if (isConnected()) {
 			try {
-				for (UUID chatId: chats.keySet()) {
-					server.leaveChat(chatId, sessionId);
-				}
-			}
-			catch (Exception ex) {
-				//swallow all exceptions at this point
-			}
-			try {
-				//TODO: stop daemon
 				server.deregisterClient(sessionId);
 			} catch (RemoteException ex) {
 				logger.fatal("Error disconnecting ...", ex);
@@ -159,15 +131,14 @@ public class Session {
 		}
 	}
 
-	private void removeServer() {
+	public void removeServer() {
 		if (future != null && !future.isDone())
 			future.cancel(true);
 		server = null;
-		frame.hideTables();
 		frame.setStatusText("Not connected");
 		frame.disableButtons();
 		logger.info("Disconnected ... ");
-		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Disconnected.", "Disconnected", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(frame, "Disconnected.", "Disconnected", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public void ack(String message) {
@@ -190,7 +161,7 @@ public class Session {
 		}
 		return false;
 	}
-		
+	
 	public boolean isConnected() {
 		return server != null;
 	}
@@ -215,30 +186,6 @@ public class Session {
 		if (serverState != null)
 			return serverState.isTestMode();
 		return false;
-	}
-
-	public ChatPanel getChat(UUID chatId) {
-		return chats.get(chatId);
-	}
-
-	public GamePanel getGame(UUID gameId) {
-		return games.get(gameId);
-	}
-
-	public void addGame(UUID gameId, GamePanel gamePanel) {
-		games.put(gameId, gamePanel);
-	}
-
-	public DraftPanel getDraft(UUID draftId) {
-		return drafts.get(draftId);
-	}
-
-	public void addDraft(UUID draftId, DraftPanel draftPanel) {
-		drafts.put(draftId, draftPanel);
-	}
-
-	public void addTournament(UUID tournamentId, TournamentPanel tournament) {
-		tournaments.put(tournamentId, tournament);
 	}
 
 	public UUID getMainRoomId() {
@@ -334,39 +281,27 @@ public class Session {
 		return false;
 	}
 
-	public Collection<TableView> getTables(UUID roomId) throws MageRemoteException {
+	public Collection<TableView> getTables(UUID roomId) throws Exception {
 		try {
 			return server.getTables(roomId);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
-			throw new MageRemoteException();
+			throw new Exception();
 		} catch (MageException ex) {
 			handleMageException(ex);
-			throw new MageRemoteException();
+			throw new Exception();
 		}
 	}
 
-	public Collection<String> getConnectedPlayers(UUID roomId) throws MageRemoteException {
-		try {
-			return server.getConnectedPlayers(roomId);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
-			throw new MageRemoteException();
-		} catch (MageException ex) {
-			handleMageException(ex);
-			throw new MageRemoteException();
-		}
-	}
-
-	public TournamentView getTournament(UUID tournamentId) throws MageRemoteException {
+	public TournamentView getTournament(UUID tournamentId) throws Exception {
 		try {
 			return server.getTournament(tournamentId);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
-			throw new MageRemoteException();
+			throw new Exception();
 		} catch (MageException ex) {
 			handleMageException(ex);
-			throw new MageRemoteException();
+			throw new Exception();
 		}
 	}
 
@@ -440,23 +375,9 @@ public class Session {
 		return null;
 	}
 
-	public boolean joinChat(UUID chatId, ChatPanel chat) {
-		try {
-			server.joinChat(chatId, sessionId, userName);
-			chats.put(chatId, chat);
-			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
-		} catch (MageException ex) {
-			handleMageException(ex);
-		}
-		return false;
-	}
-
 	public boolean leaveChat(UUID chatId) {
 		try {
 			server.leaveChat(chatId, sessionId);
-			chats.remove(chatId);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
@@ -468,7 +389,7 @@ public class Session {
 
 	public boolean sendChatMessage(UUID chatId, String message) {
 		try {
-			server.sendChatMessage(chatId, userName, message);
+			server.sendChatMessage(chatId, "", message);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
@@ -738,38 +659,48 @@ public class Session {
 			handleMageException(ex);
 		}
 		return false;
-	}
+	} 
 
+	public List<UserView> getUsers() {
+		try {
+			return server.getUsers(sessionId);
+		} catch (RemoteException ex) {
+			handleRemoteException(ex);
+		} catch (MageException ex) {
+			handleMageException(ex);
+		}
+		return null;
+	}
+	
 	private void handleRemoteException(RemoteException ex) {
 		logger.fatal("Communication error", ex);
-		removeServer();
+		if (ex instanceof java.rmi.ConnectException) {
+			server = null;
+			frame.setStatusText("Not connected");
+			frame.disableButtons();
+			JOptionPane.showMessageDialog(frame, "Communication error - disconnecting.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		else
+			JOptionPane.showMessageDialog(frame, "Communication error.", "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	private void handleMageException(MageException ex) {
 		logger.fatal("Server error", ex);
-		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Critical server error.  Disconnecting", "Error", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(frame, "Critical server error.  Disconnecting", "Error", JOptionPane.ERROR_MESSAGE);
 		disconnect();
 		frame.disableButtons();
 	}
 
 	private void handleGameException(GameException ex) {
-		logger.warn(ex.getMessage());
-		JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		logger.fatal("Game error", ex);
+		JOptionPane.showMessageDialog(frame, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public MageUI getUI() {
-		return ui;
-	}
 
 	public Server getServerRef() {
 		return server;
 	}
-	
+
 	class ServerPinger implements Runnable {
 
 		private int missed = 0;
@@ -789,4 +720,5 @@ public class Session {
 		}
 
 	}
+
 }

@@ -72,13 +72,11 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="pnlPacks" pref="57" max="32767" attributes="0"/>
+              <Component id="pnlPacks" pref="59" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="spnNumPlayers" alignment="0" max="32767" attributes="1"/>
-                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="spnNumPlayers" alignment="0" pref="22" max="32767" attributes="1"/>
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="pnlDraftOptions" max="32767" attributes="1"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
