@@ -28,7 +28,7 @@
 
 package mage.server;
 
-import java.util.logging.Level;
+import java.util.Date;
 import java.util.UUID;
 import mage.cards.decks.Deck;
 import mage.interfaces.callback.CallbackServerSession;
@@ -48,14 +48,31 @@ public class Session {
 	private UUID sessionId;
 	private UUID clientId;
 	private String username;
+	private String host;
 	private int messageId = 0;
 	private String ackMessage;
+	private Date timeConnected;
+	private long lastPing;
+	private boolean isAdmin = false;
 	private final CallbackServerSession callback = new CallbackServerSession();
 
-	public Session(String userName, UUID clientId) {
+	public Session(String userName, String host, UUID clientId) {
 		sessionId = UUID.randomUUID();
 		this.username = userName;
+		this.host = host;
 		this.clientId = clientId;
+		this.isAdmin = false;
+		this.timeConnected = new Date();
+		ping();
+	}
+
+	public Session(String host) {
+		sessionId = UUID.randomUUID();
+		this.username = "Admin";
+		this.host = host;
+		this.isAdmin = true;
+		this.timeConnected = new Date();
+		ping();
 	}
 
 	public UUID getId() {
@@ -137,4 +154,25 @@ public class Session {
 		return username;
 	}
 
+	public void ping() {
+		this.lastPing = System.currentTimeMillis();
+		if (logger.isTraceEnabled())
+			logger.trace("Ping received from" + username + ":" + sessionId);
+	}
+
+	public boolean stillAlive() {
+		return (System.currentTimeMillis() - lastPing) < 60000;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public String getHost() {
+		return host;
+	}
+	
+	public Date getConnectionTime() {
+		return timeConnected;
+	}
 }

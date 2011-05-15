@@ -28,12 +28,17 @@
 
 package mage.server;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import mage.interfaces.MageException;
+import mage.view.UserView;
 import org.apache.log4j.Logger;
 
 /**
@@ -44,9 +49,15 @@ public class SessionManager {
 
 	private final static Logger logger = Logger.getLogger(SessionManager.class);
 	private final static SessionManager INSTANCE = new SessionManager();
+	private static ScheduledExecutorService sessionExecutor;
 
 	public static SessionManager getInstance() {
 		return INSTANCE;
+	}
+
+	protected SessionManager() {
+		sessionExecutor = Executors.newScheduledThreadPool(1);
+		sessionExecutor.scheduleWithFixedDelay(new SessionChecker(), 30, 10, TimeUnit.SECONDS);
 	}
 
 	private ConcurrentHashMap<UUID, Session> sessions = new ConcurrentHashMap<UUID, Session>();
@@ -56,7 +67,7 @@ public class SessionManager {
 		return sessions.get(sessionId);
 	}
 
-	public UUID createSession(String userName, UUID clientId) throws MageException {
+	public UUID createSession(String userName, String host, UUID clientId) throws MageException {
 		for (Session session: sessions.values()) {
 			if (session.getUsername().equals(userName)) {
 				if (session.getClientId().equals(clientId)) {
@@ -68,9 +79,16 @@ public class SessionManager {
 				}
 			}
 		}
-		Session session = new Session(userName, clientId);
+		Session session = new Session(userName, host, clientId);
 		sessions.put(session.getId(), session);
 		logger.info("Session " + session.getId() + " created for user " + userName);
+		return session.getId();
+	}
+
+	public UUID createSession(String host) throws MageException {
+		Session session = new Session(host);
+		sessions.put(session.getId(), session);
+		logger.info("Admin session created");
 		return session.getId();
 	}
 
@@ -78,6 +96,15 @@ public class SessionManager {
 		sessions.remove(sessionId);
 	}
 
+	public void checkSessions() {
+		for (Session session: sessions.values()) {
+			if (!session.stillAlive()) {
+				logger.info("Client for user " + session.getUsername() + ":" + session.getId() + " timed out - releasing resources");
+				session.kill();
+			}
+		}
+	}
+	
 	public Map<UUID, Session> getSessions() {
 		Map<UUID, Session> map = new HashMap<UUID, Session>();
 		for (Map.Entry<UUID, Session> entry : sessions.entrySet()) {
@@ -85,4 +112,25 @@ public class SessionManager {
 		}
 		return map;
 	}
+
+	List<UserView> getUsers(UUID sessionId) {
+		List<UserView> users = new ArrayList<UserView>();
+		Session admin = sessions.get(sessionId);
+		if (admin != null && admin.isAdmin()) {
+			for (Session session: sessions.values()) {
+				users.add(new UserView(session.getUsername(), session.getHost(), session.getId(), session.getConnectionTime()));
+			}
+		}
+		return users;
+	}
+
+	class SessionChecker implements Runnable {
+
+		@Override
+		public void run() {
+			checkSessions();
+		}
+
+	}
+
 }
