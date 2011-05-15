@@ -53,7 +53,7 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
 	public AddCountersSourceEffect(Counter counter) {
 		super(Outcome.Benefit);
 		this.name = counter.getName();
-		this.counter = counter;
+		this.counter = counter.copy();
 	}
 
 	public AddCountersSourceEffect(final AddCountersSourceEffect effect) {

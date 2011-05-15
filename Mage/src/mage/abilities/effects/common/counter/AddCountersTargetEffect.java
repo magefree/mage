@@ -58,7 +58,7 @@ public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffe
 		super(effect);
 		this.amount = effect.amount;
 		this.name = effect.name;
-		this.counter = effect.counter;
+		this.counter = effect.counter.copy();
 	}
 
 	@Override
