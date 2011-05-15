@@ -31,14 +31,13 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.GenericTriggeredAbility;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
-import mage.abilities.triggers.Trigger;
-import mage.abilities.triggers.common.BecomesBlockedTrigger;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -62,7 +61,7 @@ public class EzurisArchers extends CardImpl<EzurisArchers> {
 
         this.addAbility(ReachAbility.getInstance());
         // Whenever Ezuri's Archers blocks a creature with flying, Ezuri's Archers gets +3/+0 until end of turn.
-        this.addAbility(new GenericTriggeredAbility(BlocksCreatureWithFlyingTrigger.getInstance(), new BoostSourceEffect(3, 0, Duration.EndOfTurn), false));
+        this.addAbility(new BlocksCreatureWithFlyingTriggeredAbility(new BoostSourceEffect(3, 0, Duration.EndOfTurn), false));
     }
 
     public EzurisArchers(final EzurisArchers card) {
@@ -75,17 +74,19 @@ public class EzurisArchers extends CardImpl<EzurisArchers> {
     }
 }
 
-class BlocksCreatureWithFlyingTrigger implements Trigger {
+class BlocksCreatureWithFlyingTriggeredAbility extends TriggeredAbilityImpl<BlocksCreatureWithFlyingTriggeredAbility> {
 
-    private static Trigger instance = new BecomesBlockedTrigger();
+    public BlocksCreatureWithFlyingTriggeredAbility(Effect effect, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
+    }
 
-    public static Trigger getInstance() {
-        return instance;
+    public BlocksCreatureWithFlyingTriggeredAbility(final BlocksCreatureWithFlyingTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public boolean checkTrigger(TriggeredAbility ability, GameEvent event, Game game) {
-        if (event.getType() == EventType.BLOCKER_DECLARED && event.getSourceId().equals(ability.getSourceId())
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.BLOCKER_DECLARED && event.getSourceId().equals(this.getSourceId())
                 && game.getPermanent(event.getTargetId()).getAbilities().containsKey(FlyingAbility.getInstance().getId())) {
             return true;
         }
@@ -94,6 +95,11 @@ class BlocksCreatureWithFlyingTrigger implements Trigger {
 
     @Override
     public String getRule() {
-        return "Whenever {this} blocks a creature with flying, ";
+        return "Whenever {this} blocks a creature with flying, " + super.getRule();
+    }
+
+    @Override
+    public BlocksCreatureWithFlyingTriggeredAbility copy() {
+        return new BlocksCreatureWithFlyingTriggeredAbility(this);
     }
 }

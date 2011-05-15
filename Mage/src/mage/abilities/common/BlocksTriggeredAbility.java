@@ -25,34 +25,48 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.triggers;
+package mage.abilities.common;
 
-import mage.abilities.TriggeredAbility;
+import mage.Constants.Zone;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-
-import java.io.Serializable;
+import mage.game.events.GameEvent.EventType;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
- * Interface describing an Event Trigger
  *
  * @author North
  */
-public interface Trigger extends Serializable {
+public class BlocksTriggeredAbility extends TriggeredAbilityImpl<BlocksTriggeredAbility> {
 
-    /**
-     * Checks if the event triggered the ability
-     * 
-     * @param ability
-     * @param event
-     * @param game
-     * @return
-     */
-    boolean checkTrigger(TriggeredAbility ability, GameEvent event, Game game);
+    public BlocksTriggeredAbility(Effect effect, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
+    }
 
-    /**
-     * 
-     * @return rule text for trigger
-     */
-    String getRule();
+    public BlocksTriggeredAbility(final BlocksTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.BLOCKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
+            TargetCreaturePermanent target = new TargetCreaturePermanent();
+            target.add(event.getTargetId(), game);
+            this.addTarget(target);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever {this} blocks, " + super.getRule();
+    }
+
+    @Override
+    public BlocksTriggeredAbility copy() {
+        return new BlocksTriggeredAbility(this);
+    }
 }
