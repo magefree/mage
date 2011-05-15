@@ -472,9 +472,13 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		if (!game.replaceEvent(event)) {
 			int actualDamage = event.getAmount();
 			if (actualDamage > 0) {
-				if (this.damage + event.getAmount() > this.toughness.getValue()) {
+				// this is not correct
+				// from rules: The amount of damage dealt to a creature is not bounded by its toughness, 
+				// and the amount of damage dealt to a player is not bounded by that player's life total.
+				// For example, if Corrupt deals 6 damage to a 2/2 creature, you'll gain 6 life.
+				/*if (this.damage + event.getAmount() > this.toughness.getValue()) {
 					actualDamage = this.toughness.getValue() - this.damage;
-				}
+				}*/
 				Permanent source = game.getPermanent(sourceId);
 				if (source != null && (source.getAbilities().containsKey(InfectAbility.getInstance().getId())
 						|| source.getAbilities().containsKey(WitherAbility.getInstance().getId()))) {
