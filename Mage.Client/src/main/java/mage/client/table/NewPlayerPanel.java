@@ -62,6 +62,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 	    }
 	    this.txtPlayerDeck.setText(deckPath);
 		if (Config.defaultComputerName != null) this.txtPlayerName.setText(Config.defaultComputerName);
+		if (cbLevel.getModel().getSize() > 0) cbLevel.setSelectedIndex(cbLevel.getModel().getSize()-1);
     }
 
 	public void setPlayerName(String playerName) {
@@ -173,7 +174,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblLevel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
