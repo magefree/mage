@@ -58,7 +58,7 @@ public class MultikickerAbility extends KickerAbility {
 		activateCount = 0;
 		while (true) {
 			this.costs.clearPaid();
-			this.manaCosts.clearPaid();
+			this.manaCostsToPay.clearPaid();
 			if (!super.activate(game, noMana))
 				break;
 			activateCount++;
