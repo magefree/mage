@@ -190,11 +190,10 @@ public class TablesPanel extends javax.swing.JPanel {
 	}
 
 	public void hideTables() {
-		if (tableWaitingDialog != null && tableWaitingDialog.isVisible()) {
+		if (tableWaitingDialog.isVisible()) {
 			tableWaitingDialog.closeDialog();
 		}
-		if (updateTask != null)
-			updateTask.cancel(true);
+		updateTask.cancel(true);
 		this.chatPanel.disconnect();
 
 		Component c = this.getParent();

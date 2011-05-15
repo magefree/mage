@@ -62,7 +62,6 @@ import mage.view.DraftPickView;
 import mage.view.GameView;
 import mage.view.TableView;
 import mage.view.TournamentView;
-import mage.view.UserView;
 import org.apache.log4j.Logger;
 
 /**
@@ -75,16 +74,14 @@ public class ServerImpl extends RemoteServer implements Server {
 	private static ExecutorService rmiExecutor = ThreadExecutor.getInstance().getRMIExecutor();
 
 	private boolean testMode;
-	private String password;
 
-	public ServerImpl(int port, String name, boolean testMode, String password) {
+	public ServerImpl(int port, String name, boolean testMode) {
 		try {
 			System.setSecurityManager(null);
 			Registry reg = LocateRegistry.createRegistry(port);
 			Server stub = (Server) UnicastRemoteObject.exportObject(this, port);
 			reg.rebind(name, stub);
 			this.testMode = testMode;
-			this.password = password;
 			logger.info("Started MAGE server - listening on port " + port);
 			if (testMode)
 				logger.info("MAGE server running in test mode");
@@ -109,16 +106,6 @@ public class ServerImpl extends RemoteServer implements Server {
 		SessionManager.getInstance().getSession(sessionId).ack(message);
 	}
 
- 	@Override
-	public boolean ping(UUID sessionId) {
-		Session session = SessionManager.getInstance().getSession(sessionId);
-		if (session != null) {
-			session.ping();
-			return true;
-		}
-		return false;
-	}
-	
 	@Override
 	public UUID registerClient(String userName, UUID clientId, MageVersion version) throws MageException, RemoteException {
 
@@ -126,29 +113,13 @@ public class ServerImpl extends RemoteServer implements Server {
 		try {
 			if (version.compareTo(Main.getVersion()) != 0)
 				throw new MageException("Wrong client version " + version + ", expecting version " + Main.getVersion());
-			sessionId = SessionManager.getInstance().createSession(userName, getClientHost(), clientId);
+			sessionId = SessionManager.getInstance().createSession(userName, clientId);
 			logger.info("User " + userName + " connected from " + getClientHost());
 		} catch (Exception ex) {
 			handleException(ex);
 		}
 		return sessionId;
 		
-	}
-	
-	@Override
-	public UUID registerAdmin(String password, MageVersion version) throws RemoteException, MageException {
-		UUID sessionId = null;
-		try {
-			if (version.compareTo(Main.getVersion()) != 0)
-				throw new MageException("Wrong client version " + version + ", expecting version " + Main.getVersion());
-			if (!password.equals(this.password))
-				throw new MageException("Wrong password");
-			sessionId = SessionManager.getInstance().createSession(getClientHost());
-			logger.info("Admin connected from " + getClientHost());
-		} catch (Exception ex) {
-			handleException(ex);
-		}
-		return sessionId;
 	}
 
 	@Override
@@ -265,6 +236,7 @@ public class ServerImpl extends RemoteServer implements Server {
 		return null;
 	}
 
+
 	@Override
 	public TableView getTable(UUID roomId, UUID tableId) throws MageException {
 		try {
@@ -286,8 +258,8 @@ public class ServerImpl extends RemoteServer implements Server {
 						Session session = SessionManager.getInstance().getSession(sessionId);
 						if (session != null) {
 							session.kill();
-							logger.info("Client deregistered ...");
 						}
+						logger.info("Client deregistered ...");
 					}
 				}
 			);
@@ -839,10 +811,5 @@ public class ServerImpl extends RemoteServer implements Server {
     public GameView getGameView(final UUID gameId, final UUID sessionId, final UUID playerId) {
         return GameManager.getInstance().getGameView(gameId, sessionId, playerId);
     }
-
-	@Override
-	public List<UserView> getUsers(UUID sessionId) throws RemoteException, MageException {
-		return SessionManager.getInstance().getUsers(sessionId);
-	}
 
 }

@@ -96,7 +96,7 @@ public abstract class MageTestBase {
 
 	@BeforeClass
 	public static void init() {
-//		Logger.getRootLogger().setLevel(Level.DEBUG);
+		Logger.getRootLogger().setLevel(Level.DEBUG);
 		logger.info("Starting MAGE tests");
 		logger.info("Logging level: " + logger.getLevel());
 		deleteSavedGames();

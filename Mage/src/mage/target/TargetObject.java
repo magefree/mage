@@ -58,7 +58,7 @@ public abstract class TargetObject<T extends TargetObject<T>> extends TargetImpl
 		this.minNumberOfTargets = minNumTargets;
 		this.maxNumberOfTargets = maxNumTargets;
 		this.zone = zone;
-		this.targetName = "object";
+		this.targetName = "card";
 		this.notTarget = notTarget;
 	}
 	

@@ -42,7 +42,6 @@ import mage.view.DraftPickView;
 import mage.view.TableView;
 import mage.view.GameView;
 import mage.view.TournamentView;
-import mage.view.UserView;
 
 /**
  *
@@ -51,10 +50,8 @@ import mage.view.UserView;
 public interface Server extends Remote, CallbackServer {
 
 	public UUID registerClient(String userName, UUID clientId, MageVersion version) throws RemoteException, MageException;
-	public UUID registerAdmin(String password, MageVersion version) throws RemoteException, MageException;
 	public void deregisterClient(UUID sessionId) throws RemoteException, MageException;
 	public void ack(String message, UUID sessionId) throws RemoteException, MageException;
-	public boolean ping(UUID sessionId) throws RemoteException, MageException;
 
 	public ServerState getServerState() throws RemoteException, MageException;
 
@@ -119,8 +116,4 @@ public interface Server extends Remote, CallbackServer {
 	public void cheat(UUID gameId, UUID sessionId, UUID playerId, DeckCardLists deckList) throws RemoteException, MageException;
     public boolean cheat(UUID gameId, UUID sessionId, UUID playerId, String cardName) throws RemoteException, MageException;
     public GameView getGameView(UUID gameId, UUID sessionId, UUID playerId) throws RemoteException, MageException;
-
-	//admin methods
-	public List<UserView> getUsers(UUID sessionId) throws RemoteException, MageException;
-	
 }
