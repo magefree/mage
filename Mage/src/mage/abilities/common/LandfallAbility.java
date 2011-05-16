@@ -69,7 +69,7 @@ public class LandfallAbility extends TriggeredAbilityImpl<LandfallAbility> {
 
 	@Override
 	public String getRule() {
-		return "Landfall - Whenever a land enters the battlefield under your control, " + (optional?" you may ":"") + super.getRule();
+		return "Landfall - Whenever a land enters the battlefield under your control, " + super.getRule();
 	}
 
 	@Override

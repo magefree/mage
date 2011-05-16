@@ -100,6 +100,6 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
 
     @Override
     public String getRule() {
-        return (optional ? "you may " : "") + super.getRule();
+        return (optional ? "you may " : "") + super.getRule(true);
     }
 }
