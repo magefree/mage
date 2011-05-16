@@ -31,14 +31,9 @@ package mage.sets.magic2011;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DrawCardTriggeredAbility;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.TargetPlayer;
 
 /**
@@ -51,7 +46,10 @@ public class JacesErasure extends CardImpl<JacesErasure> {
 		super(ownerId, 59, "Jace's Erasure", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 		this.expansionSetCode = "M11";
 		this.color.setBlue(true);
-		this.addAbility(new JacesErasureAbility());
+        
+        DrawCardTriggeredAbility ability = new DrawCardTriggeredAbility(new PutLibraryIntoGraveTargetEffect(1), true);
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
 	}
 
 	public JacesErasure(final JacesErasure card) {
@@ -67,36 +65,4 @@ public class JacesErasure extends CardImpl<JacesErasure> {
 	public String getArt() {
 		return "125788_typ_reg_sty_010.jpg";
 	}
-
-}
-
-class JacesErasureAbility extends TriggeredAbilityImpl<JacesErasureAbility> {
-
-	public JacesErasureAbility() {
-		super(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(1), true);
-		this.addTarget(new TargetPlayer());
-	}
-
-	public JacesErasureAbility(final JacesErasureAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public JacesErasureAbility copy() {
-		return new JacesErasureAbility(this);
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DREW_CARD && event.getPlayerId().equals(controllerId)) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public String getRule() {
-		return "Whenever you draw a card, you may have target player put the top card of his or her library into his or her graveyard.";
-	}
-
 }
