@@ -156,7 +156,6 @@ public class CardsStorage {
 	public static List<Card> getNotImplementedCards() {
 		List<Card> cards = new ArrayList<Card>();
 		if (notImplementedCards == null) {
-			String filename = "/som.txt";
 			if (allCards.size() == 0) {
 				return cards;
 			}
@@ -166,6 +165,9 @@ public class CardsStorage {
 				names.add(card.getExpansionSetCode() + card.getName());
 			}
 
+			readUnimplemented("ZEN", "/zen.txt", names, cards);
+			readUnimplemented("WWK", "/wwk.txt", names, cards);
+			readUnimplemented("ROE", "/roe.txt", names, cards);
 			readUnimplemented("SOM", "/som.txt", names, cards);
 			readUnimplemented("MBS", "/mbs.txt", names, cards);
 

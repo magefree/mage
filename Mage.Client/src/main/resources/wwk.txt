@@ -1,0 +1,145 @@
+|Abyssal Persecutor|Worldwake|M|197869|47|
+|Admonition Angel|Worldwake|M|197160|1|
+|Æther Tradewinds|Worldwake|C|201568|24|
+|Agadeem Occultist|Worldwake|R|198402|48|
+|Akoum Battlesinger|Worldwake|C|198360|71|
+|Amulet of Vigor|Worldwake|R|191577|121|
+|Anowon, the Ruin Sage|Worldwake|R|177508|49|
+|Apex Hawks|Worldwake|C|197769|2|
+|Arbor Elf|Worldwake|C|197959|95|
+|Archon of Redemption|Worldwake|R|201575|3|
+|Avenger of Zendikar|Worldwake|M|201570|96|
+|Basilisk Collar|Worldwake|R|198356|122|
+|Battle Hurda|Worldwake|C|198394|4|
+|Bazaar Trader|Worldwake|R|198364|72|
+|Bestial Menace|Worldwake|U|197843|97|
+|Bloodhusk Ritualist|Worldwake|U|191570|50|
+|Bojuka Bog|Worldwake|C|197786|132|
+|Bojuka Brigand|Worldwake|C|197159|51|
+|Brink of Disaster|Worldwake|C|201571|52|
+|Bull Rush|Worldwake|C|201560|73|
+|Butcher of Malakir|Worldwake|R|197125|53|
+|Calcite Snapper|Worldwake|C|191569|25|
+|Canopy Cover|Worldwake|U|193970|98|
+|Caustic Crawler|Worldwake|U|198376|54|
+|Celestial Colonnade|Worldwake|R|177545|133|
+|Chain Reaction|Worldwake|R|201573|74|
+|Claws of Valakut|Worldwake|C|193975|75|
+|Comet Storm|Worldwake|M|197766|76|
+|Corrupted Zendikon|Worldwake|C|197874|55|
+|Cosi's Ravager|Worldwake|C|201565|77|
+|Creeping Tar Pit|Worldwake|R|177520|134|
+|Crusher Zendikon|Worldwake|C|180416|78|
+|Cunning Sparkmage|Worldwake|U|201563|79|
+|Dead Reckoning|Worldwake|C|194679|56|
+|Deathforge Shaman|Worldwake|U|191540|80|
+|Death's Shadow|Worldwake|R|198372|57|
+|Dispel|Worldwake|C|201562|26|
+|Dragonmaster Outcast|Worldwake|M|197854|81|
+|Dread Statuary|Worldwake|U|205425|135|
+|Enclave Elite|Worldwake|C|197767|27|
+|Everflowing Chalice|Worldwake|U|220534|123|
+|Explore|Worldwake|C|201578|99|
+|Eye of Ugin|Worldwake|M|197881|136|
+|Feral Contest|Worldwake|C|198362|100|
+|Fledgling Griffin|Worldwake|C|191580|5|
+|Gnarlid Pack|Worldwake|C|197771|101|
+|Goblin Roughrider|Worldwake|C|194681|82|
+|Goliath Sphinx|Worldwake|R|197153|28|
+|Grappler Spider|Worldwake|C|198371|102|
+|Graypelt Hunter|Worldwake|C|193994|103|
+|Grotag Thrasher|Worldwake|C|191548|83|
+|Groundswell|Worldwake|C|193998|104|
+|Guardian Zendikon|Worldwake|C|197872|6|
+|Hada Freeblade|Worldwake|U|198400|7|
+|Halimar Depths|Worldwake|C|197787|137|
+|Halimar Excavator|Worldwake|C|197129|29|
+|Hammer of Ruin|Worldwake|U|197871|124|
+|Harabaz Druid|Worldwake|R|194675|105|
+|Hedron Rover|Worldwake|C|194686|125|
+|Horizon Drake|Worldwake|U|180412|30|
+|Iona's Judgment|Worldwake|C|197880|8|
+|Jace, the Mind Sculptor|Worldwake|M|195297|31|
+|Jagwasp Swarm|Worldwake|C|191581|58|
+|Join the Ranks|Worldwake|C|194706|9|
+|Joraga Warcaller|Worldwake|R|197765|106|
+|Jwari Shapeshifter|Worldwake|R|198390|32|
+|Kalastria Highborn|Worldwake|R|197118|59|
+|Kazuul, Tyrant of the Cliffs|Worldwake|R|197145|84|
+|Khalni Garden|Worldwake|C|220535|138|
+|Kitesail|Worldwake|C|197152|126|
+|Kitesail Apprentice|Worldwake|C|194018|10|
+|Kor Firewalker|Worldwake|U|194708|11|
+|Lavaclaw Reaches|Worldwake|R|171007|139|
+|Leatherback Baloth|Worldwake|U|197856|107|
+|Lightkeeper of Emeria|Worldwake|U|189159|12|
+|Loam Lion|Worldwake|U|197873|13|
+|Lodestone Golem|Worldwake|R|220536|127|
+|Marsh Threader|Worldwake|C|194718|14|
+|Marshal's Anthem|Worldwake|R|198393|15|
+|Mire's Toll|Worldwake|C|194002|60|
+|Mordant Dragon|Worldwake|R|197162|85|
+|Mysteries of the Deep|Worldwake|C|194699|33|
+|Nature's Claim|Worldwake|C|198357|108|
+|Nemesis Trap|Worldwake|U|197836|61|
+|Novablast Wurm|Worldwake|M|197857|119|
+|Omnath, Locus of Mana|Worldwake|M|197759|109|
+|Perimeter Captain|Worldwake|U|198361|16|
+|Permafrost Trap|Worldwake|U|194703|34|
+|Pilgrim's Eye|Worldwake|C|198367|128|
+|Pulse Tracker|Worldwake|C|197154|62|
+|Quag Vampires|Worldwake|C|197763|63|
+|Quest for Renewal|Worldwake|U|194007|110|
+|Quest for the Goblin Lord|Worldwake|U|198392|86|
+|Quest for the Nihil Stone|Worldwake|R|198386|64|
+|Quest for Ula's Temple|Worldwake|R|198401|35|
+|Quicksand|Worldwake|C|197853|140|
+|Raging Ravine|Worldwake|R|177583|141|
+|Razor Boomerang|Worldwake|U|198395|129|
+|Refraction Trap|Worldwake|U|189163|17|
+|Rest for the Weary|Worldwake|C|189180|18|
+|Ricochet Trap|Worldwake|U|191549|87|
+|Roiling Terrain|Worldwake|C|194671|88|
+|Ruin Ghost|Worldwake|U|198378|19|
+|Rumbling Aftershocks|Worldwake|U|197770|89|
+|Ruthless Cullblade|Worldwake|C|194678|65|
+|Scrib Nibblers|Worldwake|U|198382|66|
+|Searing Blaze|Worldwake|C|193982|90|
+|Seer's Sundial|Worldwake|R|201561|130|
+|Sejiri Merfolk|Worldwake|U|197844|36|
+|Sejiri Steppe|Worldwake|C|197788|142|
+|Selective Memory|Worldwake|R|194700|37|
+|Shoreline Salvager|Worldwake|U|197877|67|
+|Skitter of Lizards|Worldwake|C|197758|91|
+|Slavering Nulls|Worldwake|U|197859|92|
+|Slingbow Trap|Worldwake|U|194017|111|
+|Smoldering Spires|Worldwake|C|197785|143|
+|Smother|Worldwake|U|191578|68|
+|Snapping Creeper|Worldwake|C|191547|112|
+|Spell Contortion|Worldwake|U|194714|38|
+|Stirring Wildwood|Worldwake|R|177560|144|
+|Stone Idol Trap|Worldwake|R|191552|93|
+|Stoneforge Mystic|Worldwake|R|198383|20|
+|Strength of the Tajuru|Worldwake|R|197875|113|
+|Summit Apes|Worldwake|U|197864|114|
+|Surrakar Banisher|Worldwake|C|198370|39|
+|Talus Paladin|Worldwake|R|194672|21|
+|Tectonic Edge|Worldwake|U|197855|145|
+|Terastodon|Worldwake|R|197137|115|
+|Terra Eternal|Worldwake|R|197866|22|
+|Thada Adel, Acquisitor|Worldwake|R|197973|40|
+|Tideforce Elemental|Worldwake|U|194012|41|
+|Tomb Hex|Worldwake|C|195307|69|
+|Treasure Hunt|Worldwake|C|197968|42|
+|Tuktuk Scrapper|Worldwake|U|201579|94|
+|Twitch|Worldwake|C|198396|43|
+|Urge to Feed|Worldwake|U|198368|70|
+|Vapor Snare|Worldwake|U|194003|44|
+|Vastwood Animist|Worldwake|U|201566|116|
+|Vastwood Zendikon|Worldwake|C|197870|117|
+|Veteran's Reflexes|Worldwake|C|198384|23|
+|Voyager Drake|Worldwake|U|189181|45|
+|Walking Atlas|Worldwake|C|198375|131|
+|Wind Zendikon|Worldwake|C|197865|46|
+|Wolfbriar Elemental|Worldwake|R|189162|118|
+|Wrexial, the Risen Deep|Worldwake|M|197840|120|
