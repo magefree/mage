@@ -34,6 +34,8 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.Mana;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
@@ -47,6 +49,7 @@ public class BorosSignet extends CardImpl<BorosSignet> {
     public BorosSignet (UUID ownerId) {
         super(ownerId, 255, "Boros Signet", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "RAV";
+        this.addAbility(new BorosSignetAbility());
     }
 
     public BorosSignet (final BorosSignet card) {
@@ -62,6 +65,7 @@ public class BorosSignet extends CardImpl<BorosSignet> {
 class BorosSignetAbility extends BasicManaAbility<BorosSignetAbility> {
     public BorosSignetAbility() {
         super(new ManaEffect(new Mana(1, 0, 0, 1, 0, 0, 0)));
+        this.addCost(new GenericManaCost(1));
         this.netMana.setRed(1);
         this.netMana.setWhite(1);
     }
