@@ -20,6 +20,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
 
 import javax.swing.AbstractButton;
 import javax.swing.Box;
@@ -65,6 +69,11 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 	private JLabel jLabel1;
 	private static boolean offlineMode = false;
 	private JCheckBox checkBox;
+	private Object sync = new Object();
+	
+	private Proxy p;
+	
+	private ExecutorService executor = Executors.newFixedThreadPool(10);
 
 	public static final Proxy.Type[] types = Proxy.Type.values();
 
@@ -401,7 +410,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 			base.mkdir();
 		}
 
-		Proxy p = null;
 		if (type == 0)
 			p = Proxy.NO_PROXY;
 		else
@@ -412,73 +420,90 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 			}
 
 		if (p != null) {
-			byte[] buf = new byte[1024];
-			int len;
 			HashSet<String> ignoreUrls = SettingsManager.getIntance().getIgnoreUrls();
 
-			for (update(0); (checkBox.isSelected() ? cardIndex < cardsInGame.size() : cardIndex < cards.size()) && !cancel; update(cardIndex + 1)) {
+			update(0);
+			for (int i = 0; (checkBox.isSelected() ? i < cardsInGame.size() : i < cards.size()) && !cancel; i++) {
 				try {
 
-					CardUrl card = checkBox.isSelected() ? cardsInGame.get(cardIndex) : cards.get(cardIndex);
+					CardUrl card = checkBox.isSelected() ? cardsInGame.get(i) : cards.get(i);
 
 					log.info("Downloading card: " + card.name + " (" + card.set + ")");
 
 					URL url = new URL(CardImageUtils.generateURL(card.collector, card.set));
 					if (ignoreUrls.contains(card.set) || card.token) {
-						// we have card in scripts, but we should ignore
-						// downloading image for it
-						// (e.g. for cards from custom or not released yet sets
-						// such urls should come from card-pictures files
-						// instead
 						if (card.collector != 0) {
 							continue;
 						}
 						url = new URL(card.url);
 					}
-					in = new BufferedInputStream(url.openConnection(p).getInputStream());
-
-					createDirForCard(card);
-
-					boolean withCollectorId = false;
-					if (card.name.equals("Forest") || card.name.equals("Mountain") || card.name.equals("Swamp")
-							|| card.name.equals("Island") || card.name.equals("Plains")) {
-						withCollectorId = true;
-					}
-					File fileOut = new File(CardImageUtils.getImagePath(card, withCollectorId));
-
-					out = new BufferedOutputStream(new FileOutputStream(fileOut));
-
-					while ((len = in.read(buf)) != -1) {
-						// user cancelled
-						if (cancel) {
-							in.close();
-							out.flush();
-							out.close();
-
-							// delete what was written so far
-							fileOut.delete();
-
-							return;
-						}
-
-						out.write(buf, 0, len);
-					}
-
-					in.close();
-					out.flush();
-					out.close();
+					
+					Runnable task = new DownloadTask(card, url);
+					executor.execute(task);
 				} catch (Exception ex) {
 					log.error(ex, ex);
-					/*
-					 * int more = JOptionPane.showConfirmDialog(null,
-					 * "Some error occured. Continue downloading pictures?",
-					 * "Error", JOptionPane.YES_NO_OPTION); if (more ==
-					 * JOptionPane.NO_OPTION) { break; }
-					 */
 				}
+			}
+			executor.shutdown();
+			while (!executor.isTerminated()) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException ie) {}
 			}
 		}
 		close.setText("Close");
+	}
+	
+	private final class DownloadTask implements Runnable {
+		private CardUrl card;
+		private URL url;
+		
+		public DownloadTask(CardUrl card, URL url) {
+			this.card = card;
+			this.url = url;
+		}
+		
+		public void run() {
+			try {
+				BufferedInputStream in = new BufferedInputStream(url.openConnection(p).getInputStream());
+	
+				createDirForCard(card);
+	
+				boolean withCollectorId = false;
+				if (card.name.equals("Forest") || card.name.equals("Mountain") || card.name.equals("Swamp")
+						|| card.name.equals("Island") || card.name.equals("Plains")) {
+					withCollectorId = true;
+				}
+				File fileOut = new File(CardImageUtils.getImagePath(card, withCollectorId));
+	
+				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(fileOut));
+	
+				byte[] buf = new byte[1024];
+				int len = 0;
+				while ((len = in.read(buf)) != -1) {
+					// user cancelled
+					if (cancel) {
+						in.close();
+						out.flush();
+						out.close();
+						// delete what was written so far
+						fileOut.delete();
+					}
+					out.write(buf, 0, len);
+				}
+	
+				in.close();
+				out.flush();
+				out.close();
+				
+				synchronized (sync) {
+					update(cardIndex + 1);
+				}
+			} catch (Exception e) {
+				log.error(e, e);
+			}
+		
+		}
 	}
 
 	private static File createDirForCard(CardUrl card) throws Exception {
@@ -491,32 +516,21 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
 	private void update(int card) {
 		this.cardIndex = card;
-		final class Worker implements Runnable {
-			private int card;
-
-			Worker(int card) {
-				this.card = card;
-			}
-
-			public void run() {
-				fireStateChanged();
-				if (checkBox.isSelected()) {
-					int count = DownloadPictures.this.cardsInGame.size();
-					int countLeft = count - card;
-					float mb = (countLeft * 70.0f) / 1024;
-					bar.setString(String.format(this.card == count ? "%d of %d cards finished! Please close!"
-							: "%d of %d cards finished! Please wait!  [%.1f Mb]", this.card, count, mb));
-				} else {
-					int count = DownloadPictures.this.cards.size();
-					int countLeft = count - card;
-					float mb = (countLeft * 70.0f) / 1024;
-					bar.setString(String.format(cardIndex == count ? "%d of %d cards finished! Please close!"
-							: "%d of %d cards finished! Please wait! [%.1f Mb]", this.card, count, mb));
-				}
-			}
+		if (checkBox.isSelected()) {
+			int count = DownloadPictures.this.cardsInGame.size();
+			int countLeft = count - card;
+			float mb = (countLeft * 70.0f) / 1024;
+			bar.setString(String.format(card == count ? "%d of %d cards finished! Please close!"
+							: "%d of %d cards finished! Please wait!  [%.1f Mb]",
+							card, count, mb));
+		} else {
+			int count = DownloadPictures.this.cards.size();
+			int countLeft = count - card;
+			float mb = (countLeft * 70.0f) / 1024;
+			bar.setString(String.format(cardIndex == count ? "%d of %d cards finished! Please close!"
+							: "%d of %d cards finished! Please wait! [%.1f Mb]",
+							card, count, mb));
 		}
-
-		EventQueue.invokeLater(new Worker(card));
 	}
 
 	private static final Logger log = Logger.getLogger(DownloadPictures.class);
