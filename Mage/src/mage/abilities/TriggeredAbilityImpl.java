@@ -98,4 +98,8 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
 		return false;
 	}
 
+    @Override
+    public String getRule() {
+        return (optional ? "you may " : "") + super.getRule();
+    }
 }

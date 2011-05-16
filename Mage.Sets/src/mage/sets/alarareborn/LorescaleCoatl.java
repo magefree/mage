@@ -31,14 +31,11 @@ package mage.sets.alarareborn;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DrawCardTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
@@ -50,11 +47,13 @@ public class LorescaleCoatl extends CardImpl<LorescaleCoatl> {
         super(ownerId, 101, "Lorescale Coatl", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Snake");
+        
 		this.color.setGreen(true);
 		this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new LorescaleCoatlAbility());
+        
+        this.addAbility(new DrawCardTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
     }
 
     public LorescaleCoatl (final LorescaleCoatl card) {
@@ -64,33 +63,5 @@ public class LorescaleCoatl extends CardImpl<LorescaleCoatl> {
     @Override
     public LorescaleCoatl copy() {
         return new LorescaleCoatl(this);
-    }
-}
-
-class LorescaleCoatlAbility extends TriggeredAbilityImpl<LorescaleCoatlAbility> {
-    public LorescaleCoatlAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true);
-    }
-
-    public LorescaleCoatlAbility(final LorescaleCoatlAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public LorescaleCoatlAbility copy() {
-        return new LorescaleCoatlAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DREW_CARD && event.getPlayerId().equals(controllerId)) {
-			return true;
-		}
-		return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you draw a card, you may put a +1/+1 counter on Lorescale Coatl.";
     }
 }
