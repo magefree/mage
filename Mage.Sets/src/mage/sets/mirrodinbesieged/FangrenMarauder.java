@@ -25,44 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.ArtifactIntoGraveFromBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class MolderBeast extends CardImpl<MolderBeast> {
+public class FangrenMarauder extends CardImpl<FangrenMarauder> {
 
-    public MolderBeast (UUID ownerId) {
-        super(ownerId, 125, "Molder Beast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "SOM";
+    public FangrenMarauder(UUID ownerId) {
+        super(ownerId, 79, "Fangren Marauder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
+        this.expansionSetCode = "MBS";
         this.subtype.add("Beast");
-        
-		this.color.setGreen(true);
+
+        this.color.setGreen(true);
         this.power = new MageInt(5);
-        this.toughness = new MageInt(3);
-        
-        this.addAbility(new ArtifactIntoGraveFromBattlefieldTriggeredAbility(new BoostSourceEffect(2, 0, Constants.Duration.EndOfTurn), false));
+        this.toughness = new MageInt(5);
+
+        this.addAbility(new ArtifactIntoGraveFromBattlefieldTriggeredAbility(new GainLifeEffect(5), true));
     }
 
-    public MolderBeast (final MolderBeast card) {
+    public FangrenMarauder(final FangrenMarauder card) {
         super(card);
     }
 
     @Override
-    public MolderBeast copy() {
-        return new MolderBeast(this);
+    public FangrenMarauder copy() {
+        return new FangrenMarauder(this);
     }
-
 }
