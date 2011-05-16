@@ -34,14 +34,20 @@
 
 package mage.client.chat;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.UUID;
+import java.util.*;
+import java.util.List;
 import java.util.logging.Logger;
 import mage.client.MageFrame;
 import mage.client.remote.Session;
 import mage.util.Logging;
 import mage.view.ChatMessage.MessageColor;
+import mage.view.SeatView;
+import mage.view.TableView;
+
+import javax.swing.table.AbstractTableModel;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -54,12 +60,22 @@ public class ChatPanel extends javax.swing.JPanel {
 	private UUID clientId;
 	private Session session;
 
+	private List<String> players = new ArrayList<String>();
+	private TableModel tableModel;
 
-    /** Creates new form ChatPanel */
+	/** Creates new form ChatPanel */
     public ChatPanel() {
+	    this(false);
+    }
+
+	/**
+	 * @param extendedView if true, adds chat/players tabs
+	 */
+    /** Creates new form ChatPanel */
+    public ChatPanel(boolean extendedView) {
+	    tableModel = new TableModel();
         initComponents();
-        jScrollPane1.setOpaque(false);
-        jScrollPane1.getViewport().setOpaque(false);
+	    if (!extendedView) simplifyComponents();
     }
 
 	public void connect(UUID chatId) {
@@ -95,6 +111,52 @@ public class ChatPanel extends javax.swing.JPanel {
 		txtConversation.setCaretPosition(txtConversation.getText().length() - 1);
 	}
 
+class TableModel extends AbstractTableModel {
+    private String[] columnNames = new String[]{"Players"};
+	private List<String> players = new ArrayList<String>(0);
+
+	public void loadData(List<String> players) {
+		this.players = players;
+		this.fireTableDataChanged();
+	}
+
+	@Override
+	public int getRowCount() {
+		return players.size();
+	}
+
+	@Override
+	public int getColumnCount() {
+		return columnNames.length;
+	}
+
+	@Override
+	public Object getValueAt(int arg0, int arg1) {
+		return players.get(arg0);
+	}
+
+	@Override
+	public String getColumnName(int columnIndex) {
+        String colName = "";
+
+        if (columnIndex <= getColumnCount())
+            colName = columnNames[columnIndex];
+
+        return colName;
+    }
+
+	@Override
+    public Class getColumnClass(int columnIndex){
+		return String.class;
+    }
+
+	@Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+		return false;
+    }
+
+}
+
 	public void clear() {
 		this.txtConversation.selectAll();
 		this.txtConversation.replaceSelection("");
@@ -109,17 +171,12 @@ public class ChatPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtMessage = new javax.swing.JTextField();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtConversation = new javax.swing.JTextArea();
-        txtMessage = new javax.swing.JTextField();
-
-        txtConversation.setColumns(20);
-        txtConversation.setEditable(false);
-        txtConversation.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        txtConversation.setLineWrap(true);
-        txtConversation.setRows(5);
-        txtConversation.setWrapStyleWord(true);
-        jScrollPane1.setViewportView(txtConversation);
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         txtMessage.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -127,21 +184,62 @@ public class ChatPanel extends javax.swing.JPanel {
             }
         });
 
+        jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
+
+        txtConversation.setColumns(20);
+        txtConversation.setEditable(false);
+        txtConversation.setFont(new java.awt.Font("Arial", 0, 10));
+        txtConversation.setLineWrap(true);
+        txtConversation.setRows(5);
+        txtConversation.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(txtConversation);
+
+        jTabbedPane1.addTab("chat", jScrollPane1);
+
+        jTable1.setModel(this.tableModel);
+        jTable1.setToolTipText("Connected players");
+        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setViewportView(jTable1);
+
+        jTabbedPane1.addTab("players", jScrollPane2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+            .addComponent(txtMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        jTabbedPane1.getAccessibleContext().setAccessibleName("chat");
     }// </editor-fold>//GEN-END:initComponents
+
+	private void simplifyComponents() {
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+		jTabbedPane1 = null;
+		jTable1 = null;
+		jScrollPane2 = null;
+	}
 
 	private void txtMessageKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMessageKeyTyped
 		if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
@@ -151,9 +249,40 @@ public class ChatPanel extends javax.swing.JPanel {
 		}
 }//GEN-LAST:event_txtMessageKeyTyped
 
+	public void setPlayers(Collection<String> players) {
+		if (players != null) {
+			boolean update = false;
+			int size = players.size();
+			List<String> list = new ArrayList<String>(players);
+			Collections.sort(list);
+			if (size != this.players.size()) {
+				update = true;
+			} else {
+				update = true;
+				for (int i = 0; i < size; i++) {
+					if (!list.get(i).equals(this.players.get(i))) {
+						update = false;
+						break;
+					}
+				}
+			}
+			if (update && list != null) {
+				synchronized (tableModel) {
+					this.players = list;
+					tableModel.loadData(this.players);
+				}
+			}
+
+		} else {
+			this.players.clear();
+		}
+	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea txtConversation;
     private javax.swing.JTextField txtMessage;
     // End of variables declaration//GEN-END:variables

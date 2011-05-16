@@ -39,6 +39,7 @@ import java.awt.Component;
 import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
 import mage.client.MageFrame;
+import mage.client.chat.ChatPanel;
 import mage.client.components.MageComponents;
 import mage.client.dialog.JoinTableDialog;
 import mage.client.dialog.NewTableDialog;
@@ -75,6 +76,7 @@ public class TablesPanel extends javax.swing.JPanel {
 	private TableTableModel tableModel;
 	private UUID roomId;
 	private UpdateTablesTask updateTask;
+	private UpdatePlayersTask updatePlayersTask;
 	private JoinTableDialog joinTableDialog;
 	private NewTableDialog newTableDialog;
 	private NewTournamentDialog newTournamentDialog;
@@ -156,6 +158,7 @@ public class TablesPanel extends javax.swing.JPanel {
 		this.roomId = roomId;
 		session = MageFrame.getSession();
 		updateTask = new UpdateTablesTask(session, roomId, this);
+		updatePlayersTask = new UpdatePlayersTask(session, roomId, this.chatPanel);
 		if (session != null) {
 			btnQuickStart.setVisible(session.isTestMode());
 		}
@@ -179,6 +182,7 @@ public class TablesPanel extends javax.swing.JPanel {
 		if (chatRoomId != null) {
 			this.chatPanel.connect(chatRoomId);
 			updateTask.execute();
+			updatePlayersTask.execute();
 			this.setVisible(true);
 			this.repaint();
 		}
@@ -195,6 +199,8 @@ public class TablesPanel extends javax.swing.JPanel {
 		}
 		if (updateTask != null)
 			updateTask.cancel(true);
+		if (updatePlayersTask != null)
+			updatePlayersTask.cancel(true);
 		this.chatPanel.disconnect();
 
 		Component c = this.getParent();
@@ -219,7 +225,7 @@ public class TablesPanel extends javax.swing.JPanel {
         btnQuickStart = new javax.swing.JButton();
         btnNewTournament = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
-        chatPanel = new mage.client.chat.ChatPanel();
+	    chatPanel = new mage.client.chat.ChatPanel(true);
         jScrollPane1 = new javax.swing.JScrollPane();
         tableTables = new javax.swing.JTable();
 
@@ -271,7 +277,7 @@ public class TablesPanel extends javax.swing.JPanel {
         jSplitPane1.setDividerSize(3);
         jSplitPane1.setResizeWeight(1.0);
 
-        chatPanel.setMinimumSize(new java.awt.Dimension(100, 43));
+	    chatPanel.setMinimumSize(new java.awt.Dimension(100, 43));
         jSplitPane1.setRightComponent(chatPanel);
 
         tableTables.setModel(this.tableModel);
@@ -338,8 +344,8 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnNewTable;
     private javax.swing.JButton btnNewTournament;
     private javax.swing.JButton btnQuickStart;
-    private mage.client.chat.ChatPanel chatPanel;
     private javax.swing.JPanel jPanel1;
+	private ChatPanel chatPanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTable tableTables;
@@ -433,7 +439,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 	private UUID roomId;
 	private TablesPanel panel;
 
-	private final static Logger logger = Logging.getLogger(TablesPanel.class.getName());
+	private final static Logger logger = Logging.getLogger(UpdateTablesTask.class.getName());
 
 	UpdateTablesTask(Session session, UUID roomId, TablesPanel panel) {
 		this.session = session;
@@ -445,10 +451,6 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 	protected Void doInBackground() throws Exception {
 		while (!isCancelled()) {
 			this.publish(session.getTables(roomId));
-			/*logger.info("connected players:");
-			for (String player : session.getConnectedPlayers(roomId)) {
-				logger.info("    " + player);
-			}*/
 			Thread.sleep(1000);
 		}
 		return null;
@@ -458,5 +460,33 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 	protected void process(List<Collection<TableView>> view) {
 		panel.update(view.get(0));
 	}
+}
 
+class UpdatePlayersTask extends SwingWorker<Void, Collection<String>> {
+
+	private Session session;
+	private UUID roomId;
+	private ChatPanel chat;
+
+	private final static Logger logger = Logging.getLogger(UpdatePlayersTask.class.getName());
+
+	UpdatePlayersTask(Session session, UUID roomId, ChatPanel chat) {
+		this.session = session;
+		this.roomId = roomId;
+		this.chat = chat;
+	}
+
+	@Override
+	protected Void doInBackground() throws Exception {
+		while (!isCancelled()) {
+			this.publish(session.getConnectedPlayers(roomId));
+			Thread.sleep(1000);
+		}
+		return null;
+	}
+
+	@Override
+	protected void process(List<Collection<String>> players) {
+		chat.setPlayers(players.get(0));
+	}
 }

@@ -37,10 +37,12 @@ package mage.client.dialog;
 import mage.client.*;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Logger;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import mage.client.components.MageComponents;
 import mage.client.remote.Session;
+import mage.util.Logging;
 import mage.view.SeatView;
 import mage.view.TableView;
 
@@ -155,7 +157,7 @@ public class TableWaitingDialog extends MageDialog {
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableSeats = new javax.swing.JTable();
-        chatPanel = new mage.client.chat.ChatPanel();
+        chatPanel = new mage.client.chat.ChatPanel(false);
 
         setResizable(true);
         setTitle("Waiting for players");
@@ -221,7 +223,7 @@ public class TableWaitingDialog extends MageDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMoveDown)
@@ -349,6 +351,8 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
 	private UUID roomId;
 	private UUID tableId;
 	private TableWaitingDialog dialog;
+
+	private final static Logger logger = Logging.getLogger(TableWaitingDialog.class.getName());
 
 	UpdateSeatsTask(Session session, UUID roomId, UUID tableId, TableWaitingDialog dialog) {
 		this.session = session;
