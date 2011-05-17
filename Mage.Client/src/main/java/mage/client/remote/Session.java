@@ -28,6 +28,8 @@
 
 package mage.client.remote;
 
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -57,7 +59,7 @@ import mage.game.tournament.TournamentOptions;
 import mage.interfaces.Server;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.CallbackClientDaemon;
-import mage.util.Logging;
+import mage.utils.Connection;
 import mage.view.DraftPickView;
 import mage.view.GameTypeView;
 import mage.view.TableView;
@@ -91,35 +93,41 @@ public class Session {
 	public Session(MageFrame frame) {
 		this.frame = frame;
 	}
-	public boolean connect(String userName, String serverName, int port) {
-		return connect(userName, serverName, port, "", 0);
-	}
 	
-	public boolean connect(String userName, String serverName, int port, String proxyServer, int proxyPort) {
+	public boolean connect(Connection connection) {
 		if (isConnected()) {
 			disconnect();
 		}
 		try {
 			System.setSecurityManager(null);
-			if (proxyServer.length() > 0) {
-				System.setProperty("socksProxyHost", proxyServer);
-				System.setProperty("socksProxyPort", Integer.toString(proxyPort));
+			switch (connection.getProxyType()) {
+				case SOCKS:
+					System.setProperty("socksProxyHost", connection.getProxyHost());
+					System.setProperty("socksProxyPort", Integer.toString(connection.getProxyPort()));
+					break;
+				case HTTP:
+					System.setProperty("http.proxyHost", connection.getProxyHost());
+					System.setProperty("http.proxyPort", Integer.toString(connection.getProxyPort()));
+					Authenticator.setDefault(new MageAuthenticator(connection.getProxyUsername(), connection.getProxyPassword()));
+					break;
+				default:
+					System.clearProperty("socksProxyHost");
+					System.clearProperty("socksProxyPort");
+					System.clearProperty("http.proxyHost");
+					System.clearProperty("http.proxyPort");
+					break;
 			}
-			else {
-				System.clearProperty("socksProxyHost");
-				System.clearProperty("socksProxyPort");
-			}
-			Registry reg = LocateRegistry.getRegistry(serverName, port);
+			Registry reg = LocateRegistry.getRegistry(connection.getHost(), connection.getPort());
 			this.server = (Server) reg.lookup(Config.remoteServer);
-			this.userName = userName;
+			this.userName = connection.getUsername();
 			if (client == null)
 				client = new Client(this, frame);
 			sessionId = server.registerClient(userName, client.getId(), frame.getVersion());
 			callbackDaemon = new CallbackClientDaemon(sessionId, client, server);
 			serverState = server.getServerState();
 			future = sessionExecutor.scheduleWithFixedDelay(new ServerPinger(), 5, 5, TimeUnit.SECONDS);
-			logger.info("Connected to RMI server at " + serverName + ":" + port);
-			frame.setStatusText("Connected to " + serverName + ":" + port + " ");
+			logger.info("Connected to RMI server at " + connection.getHost() + ":" + connection.getPort());
+			frame.setStatusText("Connected to " + connection.getHost() + ":" + connection.getPort() + " ");
 			frame.enableButtons();
 			return true;
 		} catch (MageException ex) {
@@ -742,14 +750,14 @@ public class Session {
 
 	private void handleRemoteException(RemoteException ex) {
 		logger.fatal("Communication error", ex);
-		removeServer();
+		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Critical server error.  Disconnecting", "Error", JOptionPane.ERROR_MESSAGE);
+		disconnect();
 	}
 
 	private void handleMageException(MageException ex) {
 		logger.fatal("Server error", ex);
 		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Critical server error.  Disconnecting", "Error", JOptionPane.ERROR_MESSAGE);
 		disconnect();
-		frame.disableButtons();
 	}
 
 	private void handleGameException(GameException ex) {
@@ -788,5 +796,21 @@ public class Session {
 			}
 		}
 
+	}
+}
+
+class MageAuthenticator extends Authenticator {
+
+	private String username;
+	private String password;
+
+	public MageAuthenticator(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
+
+	@Override
+	public PasswordAuthentication getPasswordAuthentication () {
+		return new PasswordAuthentication (username, password.toCharArray());
 	}
 }

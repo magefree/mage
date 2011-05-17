@@ -80,6 +80,8 @@ import mage.client.tournament.TournamentPane;
 import mage.game.match.MatchOptions;
 import mage.utils.MageVersion;
 import mage.sets.Sets;
+import mage.utils.Connection;
+import mage.utils.Connection.ProxyType;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
 
@@ -460,12 +462,8 @@ public class MageFrame extends javax.swing.JFrame {
 		}
 	}
 
-   public static boolean connect(String userName, String serverName, int port) {
-        return session.connect(userName, serverName, port);
-    }
-
-	public static boolean connect(String userName, String serverName, int port, String proxyServer, int proxyPort) {
-        return session.connect(userName, serverName, port, proxyServer, proxyPort);
+	public static boolean connect(Connection connection) {
+        return session.connect(connection);
     }
 
     public boolean autoConnect() {
@@ -476,10 +474,19 @@ public class MageFrame extends javax.swing.JFrame {
             int port = Integer.parseInt(prefs.get("serverPort", ""));
             String proxyServer = prefs.get("proxyAddress", "");
             int proxyPort = Integer.parseInt(prefs.get("proxyPort", ""));
-			boolean useProxy = Boolean.parseBoolean(prefs.get("useProxy", "false"));
+			ProxyType proxyType = Connection.ProxyType.valueOf(prefs.get("proxyType", "None"));
+	        String proxyUsername = prefs.get("proxyUsername", "");
             try {
                 setCursor(new Cursor(Cursor.WAIT_CURSOR));
-                if (MageFrame.connect(userName, server, port, useProxy?proxyServer:"", useProxy?proxyPort:0)) {
+				Connection connection = new Connection();
+				connection.setUsername(userName);
+				connection.setHost(server);
+				connection.setPort(port);
+				connection.setProxyType(proxyType);
+				connection.setProxyHost(proxyServer);
+				connection.setProxyPort(proxyPort);
+				connection.setProxyUsername(proxyUsername);
+                if (MageFrame.connect(connection)) {
                     return true;
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Unable to connect to server");
