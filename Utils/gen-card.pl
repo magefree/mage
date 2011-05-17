@@ -216,6 +216,7 @@ my %knownSets;
 $knownSets{'ARB'} = 'alarareborn';
 $knownSets{'CON'} = 'conflux';
 $knownSets{'DST'} = 'darksteel';
+$knownSets{'EVE'} = 'eventide';
 $knownSets{'M10'} = 'magic2010';
 $knownSets{'M11'} = 'magic2011';
 $knownSets{'HOP'} = 'planechase';
