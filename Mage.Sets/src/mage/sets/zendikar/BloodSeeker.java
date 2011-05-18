@@ -25,44 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.zendikar;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.common.counter.ProliferateEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 
 /**
- * @author Loki, nantuko, North
+ *
+ * @author North
  */
-public class Thrummingbird extends CardImpl<Thrummingbird> {
+public class BloodSeeker extends CardImpl<BloodSeeker> {
 
-	public Thrummingbird(UUID ownerId) {
-		super(ownerId, 47, "Thrummingbird", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Bird");
-		this.subtype.add("Horror");
-        
-		this.color.setBlue(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-        
-		this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ProliferateEffect(), false));
-	}
+    public BloodSeeker(UUID ownerId) {
+        super(ownerId, 80, "Blood Seeker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Vampire");
+        this.subtype.add("Shaman");
 
-	public Thrummingbird(final Thrummingbird card) {
-		super(card);
-	}
+        this.color.setBlack(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-	@Override
-	public Thrummingbird copy() {
-		return new Thrummingbird(this);
-	}
+        this.addAbility(new CreatureEntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(1), true, true));
+    }
+
+    public BloodSeeker(final BloodSeeker card) {
+        super(card);
+    }
+
+    @Override
+    public BloodSeeker copy() {
+        return new BloodSeeker(this);
+    }
 }

@@ -25,44 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.common.counter.ProliferateEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.InstantOrSorceryCastTriggeredAbility;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 
 /**
- * @author Loki, nantuko, North
+ *
+ * @author North
  */
-public class Thrummingbird extends CardImpl<Thrummingbird> {
+public class KilnFiend extends CardImpl<KilnFiend> {
 
-	public Thrummingbird(UUID ownerId) {
-		super(ownerId, 47, "Thrummingbird", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Bird");
-		this.subtype.add("Horror");
-        
-		this.color.setBlue(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-        
-		this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ProliferateEffect(), false));
-	}
+    public KilnFiend(UUID ownerId) {
+        super(ownerId, 153, "Kiln Fiend", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Elemental");
+        this.subtype.add("Beast");
 
-	public Thrummingbird(final Thrummingbird card) {
-		super(card);
-	}
+        this.color.setRed(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
 
-	@Override
-	public Thrummingbird copy() {
-		return new Thrummingbird(this);
-	}
+        this.addAbility(new InstantOrSorceryCastTriggeredAbility(new BoostSourceEffect(3, 0, Duration.EndOfTurn), false));
+    }
+
+    public KilnFiend(final KilnFiend card) {
+        super(card);
+    }
+
+    @Override
+    public KilnFiend copy() {
+        return new KilnFiend(this);
+    }
 }

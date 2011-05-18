@@ -25,44 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.common.counter.ProliferateEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 
 /**
- * @author Loki, nantuko, North
+ *
+ * @author North
  */
-public class Thrummingbird extends CardImpl<Thrummingbird> {
+public class NeurokCommando extends CardImpl<NeurokCommando> {
 
-	public Thrummingbird(UUID ownerId) {
-		super(ownerId, 47, "Thrummingbird", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-		this.expansionSetCode = "SOM";
-		this.subtype.add("Bird");
-		this.subtype.add("Horror");
-        
-		this.color.setBlue(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
-        
-		this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ProliferateEffect(), false));
-	}
+    public NeurokCommando(UUID ownerId) {
+        super(ownerId, 28, "Neurok Commando", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
+        this.expansionSetCode = "MBS";
+        this.subtype.add("Human");
+        this.subtype.add("Rogue");
 
-	public Thrummingbird(final Thrummingbird card) {
-		super(card);
-	}
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-	@Override
-	public Thrummingbird copy() {
-		return new Thrummingbird(this);
-	}
+        this.addAbility(ShroudAbility.getInstance());
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardControllerEffect(1), true));
+    }
+
+    public NeurokCommando(final NeurokCommando card) {
+        super(card);
+    }
+
+    @Override
+    public NeurokCommando copy() {
+        return new NeurokCommando(this);
+    }
 }
