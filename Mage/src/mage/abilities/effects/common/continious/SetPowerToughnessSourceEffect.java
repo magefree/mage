@@ -43,35 +43,35 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SetPowerToughnessTargetEffect extends ContinuousEffectImpl<SetPowerToughnessTargetEffect> {
+public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl<SetPowerToughnessSourceEffect> {
 
 	private DynamicValue power;
 	private DynamicValue toughness;
 
-    public SetPowerToughnessTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
+    public SetPowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         this.power = power;
 		this.toughness = toughness;
     }
 
-	public SetPowerToughnessTargetEffect(int power, int toughness, Duration duration) {
+	public SetPowerToughnessSourceEffect(int power, int toughness, Duration duration) {
 		this(new StaticValue(power), new StaticValue(toughness), duration);
 	}
 
-	public SetPowerToughnessTargetEffect(final SetPowerToughnessTargetEffect effect) {
+	public SetPowerToughnessSourceEffect(final SetPowerToughnessSourceEffect effect) {
 		super(effect);
 		this.power = effect.power;
 		this.toughness = effect.toughness;
 	}
 
 	@Override
-	public SetPowerToughnessTargetEffect copy() {
-		return new SetPowerToughnessTargetEffect(this);
+	public SetPowerToughnessSourceEffect copy() {
+		return new SetPowerToughnessSourceEffect(this);
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Permanent target = game.getPermanent(source.getFirstTarget());
+		Permanent target = game.getPermanent(source.getSourceId());
 		if (target != null) {
 			target.getPower().setValue(power.calculate(game, source));
 			target.getToughness().setValue(toughness.calculate(game, source));
@@ -83,7 +83,7 @@ public class SetPowerToughnessTargetEffect extends ContinuousEffectImpl<SetPower
 	@Override
 	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("target ").append(source.getTargets().get(0).getTargetName()).append(" becomes ");
+		sb.append("{this} ").append(" becomes ");
 		sb.append(power).append("/").append(toughness).append(" ").append(duration.toString());
 		return sb.toString();
 	}
