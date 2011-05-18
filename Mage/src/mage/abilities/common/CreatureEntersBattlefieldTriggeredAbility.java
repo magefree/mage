@@ -36,7 +36,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -76,7 +78,19 @@ public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
     public CreatureEntersBattlefieldTriggeredAbility(Effect effect, boolean optional, boolean opponentController) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.opponentController = opponentController;
-        this.addTarget(new TargetPlayer());
+    }
+
+    /**
+     * 
+     * @param effect
+     * @param optional
+     * @param opponentController
+     * @param target - needed if the ability targets a player or a creature
+     */
+    public CreatureEntersBattlefieldTriggeredAbility(Effect effect, boolean optional, boolean opponentController, Target target) {
+        super(Zone.BATTLEFIELD, effect, optional);
+        this.opponentController = opponentController;
+        this.addTarget(target);
     }
 
     public CreatureEntersBattlefieldTriggeredAbility(CreatureEntersBattlefieldTriggeredAbility ability) {
@@ -90,10 +104,14 @@ public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
             if (((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD
                     && permanent.getCardType().contains(CardType.CREATURE)
                     && (permanent.getControllerId().equals(this.controllerId) ^ opponentController)) {
-                if (opponentController) {
-                    this.getTargets().get(0).add(permanent.getControllerId(), game);
-                } else {
-                    this.getTargets().remove(0);
+                if (!this.getTargets().isEmpty()) {
+                    Target target = this.getTargets().get(0);
+                    if (target instanceof TargetPlayer) {
+                        target.add(permanent.getControllerId(), game);
+                    }
+                    if (target instanceof TargetCreaturePermanent) {
+                        target.add(event.getTargetId(), game);
+                    }
                 }
                 return true;
             }

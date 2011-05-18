@@ -34,6 +34,7 @@ import mage.MageInt;
 import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.target.TargetPlayer;
 
 /**
  *
@@ -51,7 +52,7 @@ public class BloodSeeker extends CardImpl<BloodSeeker> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new CreatureEntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(1), true, true));
+        this.addAbility(new CreatureEntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(1), true, true, new TargetPlayer()));
     }
 
     public BloodSeeker(final BloodSeeker card) {
