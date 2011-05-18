@@ -746,6 +746,16 @@ public class MageFrame extends javax.swing.JFrame {
 		this.tablesPane.hideTables();
 	}
 
+	public void hideGames() {
+		JInternalFrame[] windows = desktopPane.getAllFramesInLayer(javax.swing.JLayeredPane.DEFAULT_LAYER);
+		for (JInternalFrame window: windows) {
+			if (window instanceof GamePane) {
+				GamePane gamePane = (GamePane) window;
+				gamePane.hideGame();
+			}
+		}
+	}
+
     public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
 		try {
 			DeckEditorPane deckEditorPane = new DeckEditorPane();
@@ -826,6 +836,7 @@ public class MageFrame extends javax.swing.JFrame {
     public void setStatusText(String status) {
         this.lblStatus.setText(status);
     }
+
 }
 
 class MagePaneMenuItem extends JCheckBoxMenuItem {

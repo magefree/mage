@@ -34,12 +34,10 @@
 
 package mage.server.console;
 
-import java.util.logging.Level;
 import java.util.prefs.Preferences;
 import javax.swing.Box;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import mage.server.console.remote.Session;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;

@@ -78,7 +78,7 @@ public class ConnectDialog extends MageDialog {
 		this.chkAutoConnect.setSelected(Boolean.parseBoolean(MageFrame.getPreferences().get("autoConnect", "false")));
 		this.txtProxyServer.setText(MageFrame.getPreferences().get("proxyAddress", Config.serverName));
 		this.txtProxyPort.setText(MageFrame.getPreferences().get("proxyPort", Integer.toString(Config.port)));
-		this.cbProxyType.setSelectedItem(MageFrame.getPreferences().get("proxyType", Connection.ProxyType.NONE.toString()));
+		this.cbProxyType.setSelectedItem(Connection.ProxyType.valueOf(MageFrame.getPreferences().get("proxyType", "NONE").toUpperCase()));
 		this.showProxySettings();
 		this.setModal(true);
 		this.setLocation(50, 50);

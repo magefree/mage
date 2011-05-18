@@ -279,18 +279,35 @@ public class TableController {
 				match.startMatch();
 				startGame(null);
 			} catch (GameException ex) {
-				logger.fatal(null, ex);
+				logger.fatal("Error starting match ", ex);
+				match.endGame();
 			}
 		}
 	}
 
 	private void startGame(UUID choosingPlayerId) throws GameException {
-		match.startGame();
-		table.initGame();
-		GameManager.getInstance().createGameSession(match.getGame(), sessionPlayerMap, table.getId(), choosingPlayerId);
-		SessionManager sessionManager = SessionManager.getInstance();
-		for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
-			sessionManager.getSession(entry.getKey()).gameStarted(match.getGame().getId(), entry.getValue());
+		try {
+			match.startGame();
+			table.initGame();
+			GameManager.getInstance().createGameSession(match.getGame(), sessionPlayerMap, table.getId(), choosingPlayerId);
+			SessionManager sessionManager = SessionManager.getInstance();
+			for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
+				Session session = sessionManager.getSession(entry.getKey());
+				if (session != null) {
+					session.gameStarted(match.getGame().getId(), entry.getValue());
+				}
+				else {
+					TableManager.getInstance().removeTable(table.getId());
+					GameManager.getInstance().removeGame(match.getGame().getId());
+					logger.warn("Unable to find player " + entry.getKey());
+					break;
+				}
+			}
+		}
+		catch (Exception ex) {
+			logger.fatal("Error starting game", ex);
+			TableManager.getInstance().removeTable(table.getId());
+			GameManager.getInstance().removeGame(match.getGame().getId());
 		}
 	}
 
@@ -341,7 +358,7 @@ public class TableController {
 				startGame(choosingPlayerId);
 			}
 			else {
-				GamesRoomManager.getInstance().getRoom(table.getRoomId()).removeTable(sessionId, table.getId());
+				GamesRoomManager.getInstance().removeTable(table.getId());
 			}
 		} catch (GameException ex) {
 			logger.fatal(null, ex);

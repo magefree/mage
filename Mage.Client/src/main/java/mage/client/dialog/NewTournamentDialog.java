@@ -308,6 +308,10 @@ public class NewTournamentDialog extends MageDialog {
 		tOptions.getMatchOptions().setAttackOption(MultiplayerAttackOption.LEFT);
 		tOptions.getMatchOptions().setRange(RangeOfInfluence.ALL);
 		table = session.createTournamentTable(roomId, tOptions);
+		if (table == null) {
+			JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error creating table.", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 		if (session.joinTournamentTable(roomId, table.getTableId(), this.txtPlayer1Name.getText(), "Human", 1)) {
 			for (TournamentPlayerPanel player: players) {
 				if (!player.getPlayerType().equals("Human")) {

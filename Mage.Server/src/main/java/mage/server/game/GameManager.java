@@ -56,7 +56,8 @@ public class GameManager {
 	}
 
 	public void joinGame(UUID gameId, UUID sessionId) {
-		gameControllers.get(gameId).join(sessionId);
+		if (gameControllers.containsKey(gameId))
+			gameControllers.get(gameId).join(sessionId);
 	}
 
 	public void destroyChatSession(UUID gameId) {
@@ -70,31 +71,38 @@ public class GameManager {
 	}
 
 	public void sendPlayerUUID(UUID gameId, UUID sessionId, UUID data) {
-		gameControllers.get(gameId).sendPlayerUUID(sessionId, data);
+		if (gameControllers.containsKey(gameId))
+			gameControllers.get(gameId).sendPlayerUUID(sessionId, data);
 	}
 
 	public void sendPlayerString(UUID gameId, UUID sessionId, String data) {
-		gameControllers.get(gameId).sendPlayerString(sessionId, data);
+		if (gameControllers.containsKey(gameId))
+			gameControllers.get(gameId).sendPlayerString(sessionId, data);
 	}
 
 	public void sendPlayerBoolean(UUID gameId, UUID sessionId, Boolean data) {
-		gameControllers.get(gameId).sendPlayerBoolean(sessionId, data);
+		if (gameControllers.containsKey(gameId))
+			gameControllers.get(gameId).sendPlayerBoolean(sessionId, data);
 	}
 
 	public void sendPlayerInteger(UUID gameId, UUID sessionId, Integer data) {
-		gameControllers.get(gameId).sendPlayerInteger(sessionId, data);
+		if (gameControllers.containsKey(gameId))
+			gameControllers.get(gameId).sendPlayerInteger(sessionId, data);
 	}
 
 	public void concedeGame(UUID gameId, UUID sessionId) {
-		gameControllers.get(gameId).concede(sessionId);
+		if (gameControllers.containsKey(gameId))
+			gameControllers.get(gameId).concede(sessionId);
 	}
 
 	public void watchGame(UUID gameId, UUID sessionId) {
-		gameControllers.get(gameId).watch(sessionId);
+		if (gameControllers.containsKey(gameId))
+			gameControllers.get(gameId).watch(sessionId);
 	}
 
 	public void stopWatching(UUID gameId, UUID sessionId) {
-		gameControllers.get(gameId).stopWatching(sessionId);
+		if (gameControllers.containsKey(gameId))
+			gameControllers.get(gameId).stopWatching(sessionId);
 	}
 
 	public void removeSession(UUID sessionId) {
@@ -104,19 +112,24 @@ public class GameManager {
 	}
 
 	public void kill(UUID gameId, UUID sessionId) {
-		gameControllers.get(gameId).kill(sessionId);
+		if (gameControllers.containsKey(gameId))
+			gameControllers.get(gameId).kill(sessionId);
 	}
 
 	public void cheat(UUID gameId, UUID sessionId, UUID playerId, DeckCardLists deckList) {
-		gameControllers.get(gameId).cheat(sessionId, playerId, deckList);
+		if (gameControllers.containsKey(gameId))
+			gameControllers.get(gameId).cheat(sessionId, playerId, deckList);
 	}
 
     public boolean cheat(UUID gameId, UUID sessionId, UUID playerId, String cardName) {
-		return gameControllers.get(gameId).cheat(sessionId, playerId, cardName);
+		if (gameControllers.containsKey(gameId))
+			return gameControllers.get(gameId).cheat(sessionId, playerId, cardName);
+		return false;
 	}
 
 	public void timeout(UUID gameId, UUID sessionId) {
-		gameControllers.get(gameId).timeout(sessionId);
+		if (gameControllers.containsKey(gameId))
+			gameControllers.get(gameId).timeout(sessionId);
 	}
 
 	public void removeGame(UUID gameId) {
@@ -124,11 +137,14 @@ public class GameManager {
 	}
 
 	public void saveGame(UUID gameId) {
-		gameControllers.get(gameId).saveGame();
+		if (gameControllers.containsKey(gameId))
+			gameControllers.get(gameId).saveGame();
 	}
 
     public GameView getGameView(UUID gameId, UUID sessionId, UUID playerId) {
-        return gameControllers.get(gameId).getGameView(playerId);
+ 		if (gameControllers.containsKey(gameId))
+	       return gameControllers.get(gameId).getGameView(playerId);
+		return null;
     }
 
 }

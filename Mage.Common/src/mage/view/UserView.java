@@ -46,6 +46,7 @@ public class UserView implements Serializable {
 		this.userName = userName;
 		this.host = host;
 		this.sessionId = sessionId;
+		this.timeConnected = timeConnected;
 	}
 
 	public String getUserName() {

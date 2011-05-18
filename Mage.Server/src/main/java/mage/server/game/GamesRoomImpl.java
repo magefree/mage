@@ -49,7 +49,7 @@ import org.apache.log4j.Logger;
  */
 public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
-//	private final static Logger logger = Logger.getLogger(GamesRoomImpl.class);
+	private final static Logger logger = Logger.getLogger(GamesRoomImpl.class);
 
 	private ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<UUID, Table>();
 
@@ -103,9 +103,14 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
 	@Override
 	public void removeTable(UUID sessionId, UUID tableId) {
-		if (TableManager.getInstance().removeTable(sessionId, tableId)) {
-			tables.remove(tableId);
-		}
+		tables.remove(tableId);
+	}
+
+	@Override
+	public void removeTable(UUID tableId) {
+		tables.remove(tableId);
+		if (logger.isDebugEnabled())
+			logger.debug("Table removed: " + tableId);
 	}
 
 	@Override

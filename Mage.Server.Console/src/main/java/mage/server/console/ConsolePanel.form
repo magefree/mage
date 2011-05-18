@@ -120,6 +120,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Disconnect"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDisconnectActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -208,6 +211,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Remove"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

@@ -67,5 +67,11 @@ public class GamesRoomManager {
 	public GamesRoom getRoom(UUID roomId) {
 		return rooms.get(roomId);
 	}
+	
+	public void removeTable(UUID tableId) {
+		for (GamesRoom room: rooms.values()) {
+			room.removeTable(tableId);
+		}
+	}
 
 }

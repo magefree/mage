@@ -318,6 +318,10 @@ public class NewTableDialog extends MageDialog {
 		options.setRange((RangeOfInfluence) this.cbRange.getSelectedItem());
 		options.setWinsNeeded((Integer)this.spnNumWins.getValue());
 		table = session.createTable(roomId, options);
+		if (table == null) {
+			JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error creating table.", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 		try {
 			if (session.joinTable(roomId, table.getTableId(), this.player1Panel.getPlayerName(), "Human", 1, Sets.loadDeck(this.player1Panel.getDeckFile()))) {
 				for (TablePlayerPanel player: players) {

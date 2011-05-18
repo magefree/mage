@@ -100,6 +100,8 @@ public class Session {
 		}
 		try {
 			System.setSecurityManager(null);
+			System.setProperty("http.nonProxyHosts", "code.google.com");
+			System.setProperty("socksNonProxyHosts", "code.google.com");
 			switch (connection.getProxyType()) {
 				case SOCKS:
 					System.setProperty("socksProxyHost", connection.getProxyHost());
@@ -157,7 +159,8 @@ public class Session {
 			}
 			try {
 				//TODO: stop daemon
-				server.deregisterClient(sessionId);
+				if (server != null)
+					server.deregisterClient(sessionId);
 			} catch (RemoteException ex) {
 				logger.fatal("Error disconnecting ...", ex);
 			} catch (MageException ex) {
@@ -171,6 +174,7 @@ public class Session {
 		if (future != null && !future.isDone())
 			future.cancel(true);
 		server = null;
+		frame.hideGames();
 		frame.hideTables();
 		frame.setStatusText("Not connected");
 		frame.disableButtons();

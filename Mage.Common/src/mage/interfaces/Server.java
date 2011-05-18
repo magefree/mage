@@ -122,5 +122,7 @@ public interface Server extends Remote, CallbackServer {
 
 	//admin methods
 	public List<UserView> getUsers(UUID sessionId) throws RemoteException, MageException;
+	public void disconnectUser(UUID sessionId, UUID userSessionId) throws RemoteException, MageException;
+	public void removeTable(UUID sessionId, UUID tableId) throws RemoteException, MageException;
 	
 }

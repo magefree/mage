@@ -134,6 +134,11 @@ public class ConsolePanel extends javax.swing.JPanel {
         jPanel4.setVerifyInputWhenFocusTarget(false);
 
         btnDisconnect.setText("Disconnect");
+        btnDisconnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDisconnectActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -182,6 +187,11 @@ public class ConsolePanel extends javax.swing.JPanel {
         );
 
         btnDelete.setText("Remove");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -226,6 +236,17 @@ public class ConsolePanel extends javax.swing.JPanel {
             .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+	private void btnDisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisconnectActionPerformed
+		int row = this.tblUsers.getSelectedRow();
+		ConsoleFrame.getSession().disconnectUser((UUID)tableUserModel.getValueAt(row, 3));
+	}//GEN-LAST:event_btnDisconnectActionPerformed
+
+	private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+		int row = this.tblTables.getSelectedRow();
+		ConsoleFrame.getSession().removeTable((UUID)tableTableModel.getValueAt(row, 7));
+	}//GEN-LAST:event_btnDeleteActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDisconnect;

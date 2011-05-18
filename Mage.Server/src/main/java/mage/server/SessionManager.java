@@ -124,6 +124,29 @@ public class SessionManager {
 		return users;
 	}
 
+	public void disconnectUser(UUID sessionId, UUID userSessionId) {
+		if (isAdmin(sessionId)) {
+			Session session = sessions.get(userSessionId);
+			if (session != null) {
+				session.kill();
+			}
+		}
+	}
+
+	public boolean isAdmin(UUID sessionId) {
+		Session admin = sessions.get(sessionId);
+		if (admin != null) {
+			return admin.isAdmin();
+		}
+		return false;
+	}
+
+	public boolean isValidSession(UUID sessionId) {
+		if (sessions.containsKey(sessionId))
+			return true;
+		return false;
+	}
+
 	class SessionChecker implements Runnable {
 
 		@Override

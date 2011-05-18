@@ -49,9 +49,9 @@ public interface GamesRoom extends Room {
 	public TableView createTable(UUID sessionId, MatchOptions options);
 	public TableView createTournamentTable(UUID sessionId, TournamentOptions options);
 	public void removeTable(UUID sessionId, UUID tableId);
+	public void removeTable(UUID tableId);
 	public TableView getTable(UUID tableId);
 	public void leaveTable(UUID sessionId, UUID tableId);
-
 	public boolean watchTable(UUID sessionId, UUID tableId);
 
 }

@@ -83,6 +83,10 @@ public class GamePane extends MagePane {
 		this.toFront();
 	}
 
+	public void hideGame() {
+		gamePanel.hideGame();
+	}
+	
 	public void watchGame(UUID gameId) {
 		this.setTitle("Watching " + gameId);
 		gamePanel.watchGame(gameId);

@@ -492,9 +492,9 @@ public class Session {
 		return false;
 	}
 
-	public boolean removeTable(UUID roomId, UUID tableId) {
+	public boolean removeTable(UUID tableId) {
 		try {
-			server.removeTable(sessionId, roomId, tableId);
+			server.removeTable(sessionId, tableId);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
@@ -670,6 +670,18 @@ public class Session {
 			handleMageException(ex);
 		}
 		return null;
+	}
+	
+	public boolean disconnectUser(UUID userSessionId) {
+		try {
+			server.disconnectUser(sessionId, userSessionId);
+			return true;
+		} catch (RemoteException ex) {
+			handleRemoteException(ex);
+		} catch (MageException ex) {
+			handleMageException(ex);
+		}
+		return false;
 	}
 	
 	private void handleRemoteException(RemoteException ex) {
