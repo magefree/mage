@@ -43,6 +43,7 @@ public class BlocksTriggeredAbility extends TriggeredAbilityImpl<BlocksTriggered
 
     public BlocksTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        this.addTarget(new TargetCreaturePermanent());
     }
 
     public BlocksTriggeredAbility(final BlocksTriggeredAbility ability) {
@@ -52,9 +53,7 @@ public class BlocksTriggeredAbility extends TriggeredAbilityImpl<BlocksTriggered
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.BLOCKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-            TargetCreaturePermanent target = new TargetCreaturePermanent();
-            target.add(event.getTargetId(), game);
-            this.addTarget(target);
+            this.getTargets().get(0).add(event.getTargetId(), game);
             return true;
         }
         return false;

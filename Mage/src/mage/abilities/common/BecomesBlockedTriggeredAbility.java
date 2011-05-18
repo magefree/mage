@@ -39,10 +39,11 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class BecomesBlockedTriggeredAbility  extends TriggeredAbilityImpl<BecomesBlockedTriggeredAbility> {
+public class BecomesBlockedTriggeredAbility extends TriggeredAbilityImpl<BecomesBlockedTriggeredAbility> {
 
     public BecomesBlockedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        this.addTarget(new TargetCreaturePermanent());
     }
 
     public BecomesBlockedTriggeredAbility(final BecomesBlockedTriggeredAbility ability) {
@@ -52,9 +53,7 @@ public class BecomesBlockedTriggeredAbility  extends TriggeredAbilityImpl<Become
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.BLOCKER_DECLARED && event.getTargetId().equals(this.getSourceId())) {
-            TargetCreaturePermanent target = new TargetCreaturePermanent();
-            target.add(event.getSourceId(), game);
-            this.addTarget(target);
+            this.getTargets().get(0).add(event.getSourceId(), game);
             return true;
         }
         return false;
