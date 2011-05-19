@@ -33,6 +33,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 
 import java.util.UUID;
@@ -50,6 +51,7 @@ public class DarkslickDrake extends CardImpl<DarkslickDrake> {
 		this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
+        this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DrawCardControllerEffect(1), false));
     }
 
