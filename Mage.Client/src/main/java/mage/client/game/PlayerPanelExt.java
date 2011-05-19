@@ -102,6 +102,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 		this.playerId = playerId;
 		this.bigCard = bigCard;
 		session = MageFrame.getSession();
+		cheat.setVisible(session.isTestMode());
 	}
 
 	public void update(PlayerView player) {
