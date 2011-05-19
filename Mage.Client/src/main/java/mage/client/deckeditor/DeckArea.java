@@ -96,6 +96,7 @@ public class DeckArea extends javax.swing.JPanel {
         deckList = new mage.client.cards.CardsList();
         sideboardList = new mage.client.cards.CardsList();
 
+        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setResizeWeight(0.8);
         jSplitPane1.setLeftComponent(deckList);
         jSplitPane1.setRightComponent(sideboardList);
