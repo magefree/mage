@@ -243,10 +243,10 @@ public class MageFrame extends javax.swing.JFrame {
 
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+	            disableButtons();
                 if (autoConnect())
                     enableButtons();
                 else {
-                    disableButtons();
 					connectDialog.showDialog();
 				}
             }
@@ -474,7 +474,7 @@ public class MageFrame extends javax.swing.JFrame {
             int port = Integer.parseInt(prefs.get("serverPort", ""));
             String proxyServer = prefs.get("proxyAddress", "");
             int proxyPort = Integer.parseInt(prefs.get("proxyPort", ""));
-			ProxyType proxyType = Connection.ProxyType.valueOf(prefs.get("proxyType", "None"));
+			ProxyType proxyType = Connection.ProxyType.valueByText(prefs.get("proxyType", "None"));
 	        String proxyUsername = prefs.get("proxyUsername", "");
             try {
                 setCursor(new Cursor(Cursor.WAIT_CURSOR));

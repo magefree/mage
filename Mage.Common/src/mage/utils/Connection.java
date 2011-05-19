@@ -65,6 +65,13 @@ public class Connection {
 		public String toString() {
 			return text;
 		}
+
+		public static ProxyType valueByText(String value) {
+			for (ProxyType type : values()) {
+				if (type.text.equals(value)) return type;
+			}
+			return NONE;
+		}
 	}
 
 	public String getHost() {
