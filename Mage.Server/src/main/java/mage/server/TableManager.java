@@ -207,11 +207,11 @@ public class TableManager {
 	public void removeTable(UUID tableId) {
 		if (tables.containsKey(tableId)) {
 			Table table = tables.get(tableId);
+			controllers.remove(tableId);
+			tables.remove(tableId);
+			GamesRoomManager.getInstance().removeTable(tableId);
 			table.getMatch().getGame().end();
 		}
-		controllers.remove(tableId);
-		tables.remove(tableId);
-		GamesRoomManager.getInstance().removeTable(tableId);
 	}
 
 }

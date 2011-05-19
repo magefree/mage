@@ -37,14 +37,13 @@ package mage.client.dialog;
 import mage.client.*;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Logger;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import mage.client.components.MageComponents;
 import mage.client.remote.Session;
-import mage.util.Logging;
 import mage.view.SeatView;
 import mage.view.TableView;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -52,7 +51,7 @@ import mage.view.TableView;
  */
 public class TableWaitingDialog extends MageDialog {
 
-//	private final static Logger logger = Logging.getLogger(TableWaitingDialog.class.getName());
+	private final static Logger logger = Logger.getLogger(TableWaitingDialog.class);
 
 	private UUID tableId;
 	private UUID roomId;
@@ -124,7 +123,7 @@ public class TableWaitingDialog extends MageDialog {
 		if (chatId != null) {
 			this.chatPanel.connect(chatId);
 			updateTask.execute();
-			this.setModal(true);
+			this.setModal(false);
 			this.setLocation(100, 100);
 			this.setVisible(true);
 		}
@@ -134,7 +133,7 @@ public class TableWaitingDialog extends MageDialog {
 	}
 
 	public void closeDialog() {
-		updateTask.cancel(true);
+		if (updateTask != null)	updateTask.cancel(true);
 		this.chatPanel.disconnect();
 		setVisible(false);
 	}
@@ -245,10 +244,15 @@ public class TableWaitingDialog extends MageDialog {
 	}//GEN-LAST:event_btnStartActionPerformed
 
 	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-		if (session.isTableOwner(roomId, tableId)) {
-			session.removeTable(roomId, tableId);
-		} else {
-			session.leaveTable(roomId, tableId);
+		try {
+			if (session.isTableOwner(roomId, tableId)) {
+				session.removeTable(roomId, tableId);
+			} else {
+				session.leaveTable(roomId, tableId);
+			}
+		} catch (Exception e) {
+			//swallow exception
+			logger.error(e);
 		}
 		closeDialog();
 	}//GEN-LAST:event_btnCancelActionPerformed
@@ -352,7 +356,7 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
 	private UUID tableId;
 	private TableWaitingDialog dialog;
 
-	private final static Logger logger = Logging.getLogger(TableWaitingDialog.class.getName());
+	private final static Logger logger = Logger.getLogger(TableWaitingDialog.class);
 
 	UpdateSeatsTask(Session session, UUID roomId, UUID tableId, TableWaitingDialog dialog) {
 		this.session = session;

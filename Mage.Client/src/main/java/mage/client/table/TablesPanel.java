@@ -34,8 +34,6 @@
 
 package mage.client.table;
 
-import java.awt.Color;
-import java.awt.Component;
 import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
 import mage.client.MageFrame;
@@ -43,6 +41,7 @@ import mage.client.chat.ChatPanel;
 import mage.client.components.MageComponents;
 import mage.client.dialog.JoinTableDialog;
 import mage.client.dialog.NewTableDialog;
+import mage.client.dialog.NewTournamentDialog;
 import mage.client.dialog.TableWaitingDialog;
 import mage.client.remote.MageRemoteException;
 import mage.client.remote.Session;
@@ -51,18 +50,16 @@ import mage.game.match.MatchOptions;
 import mage.sets.Sets;
 import mage.util.Logging;
 import mage.view.TableView;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.util.Collection;
-import java.util.HashMap;
+import java.beans.PropertyVetoException;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import java.util.logging.Level;
-import java.util.logging.Logger;
-import mage.client.dialog.NewTournamentDialog;
 
 
 /**
@@ -71,7 +68,7 @@ import mage.client.dialog.NewTournamentDialog;
  */
 public class TablesPanel extends javax.swing.JPanel {
 
-	private final static Logger logger = Logging.getLogger(TablesPanel.class.getName());
+	private final static Logger logger = Logger.getLogger(TablesPanel.class);
 
 	private TableTableModel tableModel;
 	private UUID roomId;
@@ -102,8 +99,31 @@ public class TablesPanel extends javax.swing.JPanel {
 				UUID gameId = (UUID)tableModel.getValueAt(modelRow, 7);
 				String state = (String)tableModel.getValueAt(modelRow, 5);
 				boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, 6);
+				String owner = (String)tableModel.getValueAt(modelRow, 1);
 
 				if (state.equals("Join")) {
+					if (owner.equals(session.getUserName())) {
+						try {
+							JDesktopPane desktopPane = (JDesktopPane)session.getUI().getComponent(MageComponents.DESKTOP_PANE);
+							JInternalFrame[] windows = desktopPane.getAllFramesInLayer(javax.swing.JLayeredPane.DEFAULT_LAYER);
+							for (JInternalFrame frame : windows) {
+								if (frame.getTitle().equals("Waiting for players")) {
+									frame.toFront();
+									frame.setVisible(true);
+									try {
+										frame.setSelected(true);
+									} catch (PropertyVetoException ve) {
+										ve.printStackTrace();
+										logger.error(ve);
+									}
+								}
+
+							}
+						} catch (Exception ex) {
+							logger.error(ex);
+						}
+						return;
+					}
 					if (isTournament) {
 						logger.info("Joining tournament " + tableId);
 						if (session.joinTournamentTable(roomId, tableId, session.getUserName(), "Human", 1))
@@ -174,10 +194,10 @@ public class TablesPanel extends javax.swing.JPanel {
 			joinTableDialog = new JoinTableDialog();
 			MageFrame.getDesktop().add(joinTableDialog);
 		}
-		if (tableWaitingDialog == null) {
+		/*if (tableWaitingDialog == null) {
 			tableWaitingDialog = new TableWaitingDialog();
 			MageFrame.getDesktop().add(tableWaitingDialog);
-		}
+		}*/
 		UUID chatRoomId = session.getRoomChatId(roomId);
 		if (chatRoomId != null) {
 			this.chatPanel.connect(chatRoomId);
@@ -194,8 +214,13 @@ public class TablesPanel extends javax.swing.JPanel {
 	}
 
 	public void hideTables() {
-		if (tableWaitingDialog != null && tableWaitingDialog.isVisible()) {
+		/*if (tableWaitingDialog != null && tableWaitingDialog.isVisible()) {
 			tableWaitingDialog.closeDialog();
+		}*/
+		for (Component component : MageFrame.getDesktop().getComponents()) {
+			if (component instanceof TableWaitingDialog) {
+				((TableWaitingDialog)component).closeDialog();
+			}
 		}
 		if (updateTask != null)
 			updateTask.cancel(true);
@@ -304,6 +329,8 @@ public class TablesPanel extends javax.swing.JPanel {
 	private void btnNewTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTableActionPerformed
 		newTableDialog.showDialog(roomId);
 		if (newTableDialog.getTable() != null) {
+			tableWaitingDialog = new TableWaitingDialog();
+			MageFrame.getDesktop().add(tableWaitingDialog);
 			tableWaitingDialog.showDialog(roomId, newTableDialog.getTable().getTableId(), false);
 		}
 }//GEN-LAST:event_btnNewTableActionPerformed
@@ -328,6 +355,8 @@ public class TablesPanel extends javax.swing.JPanel {
 	}//GEN-LAST:event_btnQuickStartActionPerformed
 
 	private void btnNewTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTournamentActionPerformed
+		newTournamentDialog = new NewTournamentDialog();
+		MageFrame.getDesktop().add(newTournamentDialog);
 		newTournamentDialog.showDialog(roomId);
 		if (newTournamentDialog.getTable() != null) {
 			tableWaitingDialog.showDialog(roomId, newTournamentDialog.getTable().getTableId(), true);
@@ -335,7 +364,7 @@ public class TablesPanel extends javax.swing.JPanel {
 	}//GEN-LAST:event_btnNewTournamentActionPerformed
 
 	private void handleError(Exception ex) {
-		logger.log(Level.SEVERE, "Error loading deck", ex);
+		logger.fatal("Error loading deck: ", ex);
 		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error loading deck.", "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
@@ -439,7 +468,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 	private UUID roomId;
 	private TablesPanel panel;
 
-	private final static Logger logger = Logging.getLogger(UpdateTablesTask.class.getName());
+	private final static Logger logger = Logger.getLogger(UpdateTablesTask.class);
 
 	UpdateTablesTask(Session session, UUID roomId, TablesPanel panel) {
 		this.session = session;
@@ -468,7 +497,7 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<String>> {
 	private UUID roomId;
 	private ChatPanel chat;
 
-	private final static Logger logger = Logging.getLogger(UpdatePlayersTask.class.getName());
+	private final static Logger logger = Logger.getLogger(UpdatePlayersTask.class);
 
 	UpdatePlayersTask(Session session, UUID roomId, ChatPanel chat) {
 		this.session = session;
