@@ -113,6 +113,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		this.tableId = tableId;
 		this.mode = mode;
 		this.btnAddLand.setVisible(false);
+		this.cardTableSelector.setMode(mode);
 		switch (mode) {
 			case Limited:
 				this.btnAddLand.setVisible(true);

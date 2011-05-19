@@ -28,27 +28,37 @@
 
 package mage.client.deckeditor.table;
 
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.UUID;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+
 import mage.Constants.CardType;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.MageCard;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardEventSource;
 import mage.client.cards.CardsStorage;
 import mage.client.cards.ICardGrid;
+import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.constants.Constants.SortBy;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.sets.Sets;
-import mage.sets.worldwake.Explore;
 import mage.view.CardsView;
-
-import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.util.*;
-import java.util.List;
 
 /**
  *
@@ -60,6 +70,7 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
 	private final FilterCard filter = new FilterCard();
 	private BigCard bigCard;
 	protected CardEventSource cardEventSource = new CardEventSource();
+	private DeckEditorMode mode = DeckEditorMode.Constructed;
 	
     public CardTableSelector() {
         initComponents();
@@ -71,6 +82,16 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
 		cbSortBy.setModel(new DefaultComboBoxModel(SortBy.values()));
 	    cbSortBy.setVisible(false);
 	    chkPiles.setVisible(false);
+	    
+		mainTable.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.getClickCount() == 2 && !e.isConsumed()) {
+					e.consume();
+					jButtonAddToMainActionPerformed(null);
+				}
+			}
+		});
+
     }
 
 	public void loadCards(List<Card> sideboard, BigCard bigCard, boolean construct) {
@@ -652,7 +673,8 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
 			for (Integer index : indexes) {
 				mainModel.doubleClick(index);
 			}
-			mainModel.fireTableDataChanged();
+			if (!mode.equals(DeckEditorMode.Constructed))
+				mainModel.fireTableDataChanged();
 		}
 	}//GEN-LAST:event_jButton3ActionPerformed
 
@@ -664,7 +686,8 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
 			for (Integer index : indexes) {
 				mainModel.shiftDoubleClick(index);
 			}
-			mainModel.fireTableDataChanged();
+			if (!mode.equals(DeckEditorMode.Constructed))
+				mainModel.fireTableDataChanged();
 		}
 	}//GEN-LAST:event_jButton4ActionPerformed
 
@@ -742,4 +765,7 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
 			this.mainModel.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
 	}
 
+	public void setMode(DeckEditorMode mode) {
+		this.mode = mode;
+	}
 }
