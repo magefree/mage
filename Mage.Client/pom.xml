@@ -97,6 +97,11 @@
             <version>0.1</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jdesktop</groupId>
+            <artifactId>beansbinding</artifactId>
+            <version>1.2.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -188,4 +193,12 @@
 
         <finalName>mage-client</finalName>
     </build>
+    <repositories>
+        <repository>
+            <url>http://download.java.net/maven/2/</url>
+            <id>beans-binding</id>
+            <layout>default</layout>
+            <name>Repository for library Library[beans-binding]</name>
+        </repository>
+    </repositories>
 </project>
