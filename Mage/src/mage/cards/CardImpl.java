@@ -205,16 +205,22 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 		Zone fromZone = game.getZone(objectId);
 		ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, toZone);
 		if (!game.replaceEvent(event)) {
-            if (event.getFromZone() != null) {
-                switch (event.getFromZone()) {
-                    case GRAVEYARD:
-                        game.getPlayer(ownerId).removeFromGraveyard(this, game);
-                        break;
-                    default:
-                        //logger.warning("moveToZone, not fully implemented: from="+event.getFromZone() + ", to="+event.getToZone());
-                }
-	            game.rememberLKI(objectId, event.getFromZone(), this);
-            }
+			if (event.getFromZone() != null) {
+				switch (event.getFromZone()) {
+					case GRAVEYARD:
+						game.getPlayer(ownerId).removeFromGraveyard(this, game);
+						break;
+					case HAND:
+						game.getPlayer(ownerId).removeFromHand(this, game);
+						break;
+					case LIBRARY:
+						game.getPlayer(ownerId).removeFromLibrary(this, game);
+						break;
+					default:
+						//logger.warning("moveToZone, not fully implemented: from="+event.getFromZone() + ", to="+event.getToZone());
+				}
+				game.rememberLKI(objectId, event.getFromZone(), this);
+			}
 			switch (event.getToZone()) {
 				case GRAVEYARD:
 					game.getPlayer(ownerId).putInGraveyard(this, game, !flag);
@@ -277,6 +283,23 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 		Zone fromZone = game.getZone(objectId);
 		ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, Zone.EXILED);
 		if (!game.replaceEvent(event)) {
+			if (fromZone != null) {
+				switch (fromZone) {
+					case GRAVEYARD:
+						game.getPlayer(ownerId).removeFromGraveyard(this, game);
+						break;
+					case HAND:
+						game.getPlayer(ownerId).removeFromHand(this, game);
+						break;
+					case LIBRARY:
+						game.getPlayer(ownerId).removeFromLibrary(this, game);
+						break;
+					default:
+						//logger.warning("moveToExile, not fully implemented: from="+fromZone);
+				}
+				game.rememberLKI(objectId, event.getFromZone(), this);
+			}
+			
 			if (exileId == null) {
 				game.getExile().getPermanentExile().add(this);
 			}
@@ -301,13 +324,13 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 		return true;
 	}
 
-    @Override
-    public String getArt() {
-        return "";
-    }
+	@Override
+	public String getArt() {
+		return "";
+	}
 
-    @Override
-    public void setCardNumber(int cid) {
-        this.cardNumber = cid;
-    }
+	@Override
+	public void setCardNumber(int cid) {
+		this.cardNumber = cid;
+	}
 }

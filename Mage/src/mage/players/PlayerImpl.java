@@ -311,6 +311,13 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		hand.remove(card);
 		return true;
 	}
+	
+	@Override
+	public boolean removeFromLibrary(Card card, Game game) {
+		if (card == null) return false;
+		library.remove(card.getId(), game);
+		return true;
+	}
 
 	@Override
 	public void discard(int amount, Ability source, Game game) {

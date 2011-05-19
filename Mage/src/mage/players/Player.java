@@ -111,6 +111,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public boolean removeFromBattlefield(Permanent permanent, Game game);
 	public boolean putInGraveyard(Card card, Game game, boolean fromBattlefield);
 	public boolean removeFromGraveyard(Card card, Game game);
+	public boolean removeFromLibrary(Card card, Game game);
 	public boolean searchLibrary(TargetCardInLibrary target, Game game);
 	public boolean canPlayLand();
 	public boolean playLand(Card card, Game game);
