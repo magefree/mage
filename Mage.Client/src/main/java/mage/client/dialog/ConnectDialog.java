@@ -39,6 +39,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
@@ -79,6 +80,8 @@ public class ConnectDialog extends MageDialog {
 		this.txtProxyServer.setText(MageFrame.getPreferences().get("proxyAddress", Config.serverName));
 		this.txtProxyPort.setText(MageFrame.getPreferences().get("proxyPort", Integer.toString(Config.port)));
 		this.cbProxyType.setSelectedItem(Connection.ProxyType.valueOf(MageFrame.getPreferences().get("proxyType", "NONE").toUpperCase()));
+		this.txtProxyUserName.setText(MageFrame.getPreferences().get("proxyUsername", ""));
+		this.txtPasswordField.setText(MageFrame.getPreferences().get("proxyPassword", ""));
 		this.showProxySettings();
 		this.setModal(true);
 		this.setLocation(50, 50);
@@ -114,6 +117,10 @@ public class ConnectDialog extends MageDialog {
 		MageFrame.getPreferences().put("proxyAddress", txtProxyServer.getText());
 		MageFrame.getPreferences().put("proxyPort", txtProxyPort.getText());
 		MageFrame.getPreferences().put("proxyType", cbProxyType.getSelectedItem().toString());
+		MageFrame.getPreferences().put("proxyUsername", txtProxyUserName.getText());
+		char[] input = txtPasswordField.getPassword();
+		MageFrame.getPreferences().put("proxyPassword", new String(input));
+		Arrays.fill(input, '0');
 	}
 
     /** This method is called from within the constructor to
@@ -146,8 +153,8 @@ public class ConnectDialog extends MageDialog {
         pnlProxyAuth = new javax.swing.JPanel();
         lblProxyUserName = new javax.swing.JLabel();
         txtProxyUserName = new javax.swing.JTextField();
-        txtProxyPassword = new javax.swing.JTextField();
         lblProxyPassword = new javax.swing.JLabel();
+        txtPasswordField = new javax.swing.JPasswordField();
 
         setTitle("Connect");
         setNormalBounds(new java.awt.Rectangle(100, 100, 410, 307));
@@ -226,17 +233,14 @@ public class ConnectDialog extends MageDialog {
         pnlProxyLayout.setHorizontalGroup(
             pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlProxyLayout.createSequentialGroup()
-                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(pnlProxyLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblProxyPort))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlProxyLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(lblProxyServer)))
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblProxyPort)
+                    .addComponent(lblProxyServer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtProxyServer, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
-                    .addComponent(txtProxyPort, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtProxyPort, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtProxyServer, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlProxyLayout.setVerticalGroup(
@@ -255,40 +259,40 @@ public class ConnectDialog extends MageDialog {
         lblProxyUserName.setLabelFor(txtProxyUserName);
         lblProxyUserName.setText("User Name:");
 
-        lblProxyPassword.setLabelFor(txtProxyPassword);
         lblProxyPassword.setText("Password:");
+
+        txtPasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlProxyAuthLayout = new javax.swing.GroupLayout(pnlProxyAuth);
         pnlProxyAuth.setLayout(pnlProxyAuthLayout);
         pnlProxyAuthLayout.setHorizontalGroup(
             pnlProxyAuthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 438, Short.MAX_VALUE)
-            .addGroup(pnlProxyAuthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlProxyAuthLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(pnlProxyAuthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(lblProxyUserName)
-                        .addComponent(lblProxyPassword))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(pnlProxyAuthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtProxyPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
-                        .addComponent(txtProxyUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE))
-                    .addContainerGap()))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlProxyAuthLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlProxyAuthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblProxyPassword)
+                    .addComponent(lblProxyUserName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlProxyAuthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtPasswordField)
+                    .addComponent(txtProxyUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pnlProxyAuthLayout.setVerticalGroup(
             pnlProxyAuthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 59, Short.MAX_VALUE)
-            .addGroup(pnlProxyAuthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlProxyAuthLayout.createSequentialGroup()
-                    .addGap(2, 2, 2)
-                    .addGroup(pnlProxyAuthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblProxyUserName)
-                        .addComponent(txtProxyUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(pnlProxyAuthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtProxyPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblProxyPassword))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlProxyAuthLayout.createSequentialGroup()
+                .addGroup(pnlProxyAuthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtProxyUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProxyUserName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGroup(pnlProxyAuthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProxyPassword))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout pnlProxySettingsLayout = new javax.swing.GroupLayout(pnlProxySettings);
@@ -302,7 +306,7 @@ public class ConnectDialog extends MageDialog {
             pnlProxySettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlProxySettingsLayout.createSequentialGroup()
                 .addComponent(pnlProxy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(pnlProxyAuth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -398,6 +402,7 @@ public class ConnectDialog extends MageDialog {
 			return;
 		}
 
+		char[] input = new char[0];
 		try {
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
 			Connection connection = new Connection();
@@ -408,7 +413,9 @@ public class ConnectDialog extends MageDialog {
 			connection.setProxyHost(this.txtProxyServer.getText());
 			connection.setProxyPort(Integer.valueOf(this.txtProxyPort.getText()));
 			connection.setProxyUsername(this.txtProxyUserName.getText());
-			connection.setProxyPassword(this.txtProxyPassword.getText());
+			input = txtPasswordField.getPassword();
+			connection.setProxyPassword(new String(input));
+			logger.debug("connecting: " + connection.getProxyType() + " " + connection.getProxyHost() + " " + connection.getProxyPort());
 			if (MageFrame.connect(connection)) {
 				this.saveSettings();
 				this.setVisible(false);
@@ -416,6 +423,7 @@ public class ConnectDialog extends MageDialog {
 		}
 		finally {
 			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			Arrays.fill(input, '0');
 		}
 
 	}//GEN-LAST:event_btnConnectActionPerformed
@@ -479,6 +487,10 @@ public class ConnectDialog extends MageDialog {
 		this.showProxySettings();
 	}//GEN-LAST:event_cbProxyTypeActionPerformed
 
+        private void txtPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordFieldActionPerformed
+            // TODO add your handling code here:
+        }//GEN-LAST:event_txtPasswordFieldActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
@@ -497,8 +509,8 @@ public class ConnectDialog extends MageDialog {
     private javax.swing.JPanel pnlProxy;
     private javax.swing.JPanel pnlProxyAuth;
     private javax.swing.JPanel pnlProxySettings;
+    private javax.swing.JPasswordField txtPasswordField;
     private javax.swing.JTextField txtPort;
-    private javax.swing.JTextField txtProxyPassword;
     private javax.swing.JTextField txtProxyPort;
     private javax.swing.JTextField txtProxyServer;
     private javax.swing.JTextField txtProxyUserName;
