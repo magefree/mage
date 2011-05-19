@@ -476,6 +476,8 @@ public class MageFrame extends javax.swing.JFrame {
             int proxyPort = Integer.parseInt(prefs.get("proxyPort", ""));
 			ProxyType proxyType = Connection.ProxyType.valueByText(prefs.get("proxyType", "None"));
 	        String proxyUsername = prefs.get("proxyUsername", "");
+	        String proxyPassword = prefs.get("proxyPassword", "");
+
             try {
                 setCursor(new Cursor(Cursor.WAIT_CURSOR));
 				Connection connection = new Connection();
@@ -486,6 +488,8 @@ public class MageFrame extends javax.swing.JFrame {
 				connection.setProxyHost(proxyServer);
 				connection.setProxyPort(proxyPort);
 				connection.setProxyUsername(proxyUsername);
+	            connection.setProxyPassword(proxyPassword);
+				logger.debug("connecting (auto): " + proxyType + " " + proxyServer + " " + proxyPort + " " + proxyUsername);
                 if (MageFrame.connect(connection)) {
                     return true;
                 } else {
