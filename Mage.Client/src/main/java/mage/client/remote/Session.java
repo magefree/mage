@@ -102,6 +102,13 @@ public class Session {
 			System.setSecurityManager(null);
 			System.setProperty("http.nonProxyHosts", "code.google.com");
 			System.setProperty("socksNonProxyHosts", "code.google.com");
+
+			// clear previous values
+			System.clearProperty("socksProxyHost");
+			System.clearProperty("socksProxyPort");
+			System.clearProperty("http.proxyHost");
+			System.clearProperty("http.proxyPort");
+
 			switch (connection.getProxyType()) {
 				case SOCKS:
 					System.setProperty("socksProxyHost", connection.getProxyHost());
@@ -111,12 +118,6 @@ public class Session {
 					System.setProperty("http.proxyHost", connection.getProxyHost());
 					System.setProperty("http.proxyPort", Integer.toString(connection.getProxyPort()));
 					Authenticator.setDefault(new MageAuthenticator(connection.getProxyUsername(), connection.getProxyPassword()));
-					break;
-				default:
-					System.clearProperty("socksProxyHost");
-					System.clearProperty("socksProxyPort");
-					System.clearProperty("http.proxyHost");
-					System.clearProperty("http.proxyPort");
 					break;
 			}
 			Registry reg = LocateRegistry.getRegistry(connection.getHost(), connection.getPort());
