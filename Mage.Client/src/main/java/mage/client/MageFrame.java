@@ -97,7 +97,7 @@ public class MageFrame extends javax.swing.JFrame {
     private static Preferences prefs = Preferences.userNodeForPackage(MageFrame.class);
     private JLabel title;
     private Rectangle titleRectangle;
-	private final static MageVersion version = new MageVersion(0, 7, 2);
+	private final static MageVersion version = new MageVersion(0, 7, 3);
 
     /**
      * @return the session
