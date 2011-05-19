@@ -210,7 +210,8 @@ public class TableManager {
 			controllers.remove(tableId);
 			tables.remove(tableId);
 			GamesRoomManager.getInstance().removeTable(tableId);
-			table.getMatch().getGame().end();
+			if (table.getMatch().getGame() != null)
+				table.getMatch().getGame().end();
 		}
 	}
 

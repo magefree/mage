@@ -103,6 +103,7 @@ public abstract class MatchImpl implements Match {
 
 	@Override
 	public Game getGame() {
+		if (games.size() == 0) return null;
 		return games.get(games.size() -1);
 	}
 
