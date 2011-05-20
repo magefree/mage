@@ -47,6 +47,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import org.apache.log4j.Logger;
 
 /**
  * This ability has no effect by default and will always return false on the call
@@ -103,7 +104,7 @@ public class ReboundAbility extends TriggeredAbilityImpl<ReboundAbility> {
 		if ( event.getType() == EventType.SPELL_CAST && this.installReboundEffect ) {
 			Spell spell = game.getStack().getSpell(event.getTargetId());
 			if (spell != null && spell.getSourceId().equals(this.getSourceId())) {
-				spell.getSpellAbility().addEffect(new ReboundEffect());
+				spell.getSpellAbility().addEffect(new ReboundEffect(spell.getId()));
 				this.installReboundEffect = false;
 			}
 		}
@@ -131,16 +132,27 @@ public class ReboundAbility extends TriggeredAbilityImpl<ReboundAbility> {
  */
 class ReboundEffect extends OneShotEffect<ReboundEffect> {
 
-	public ReboundEffect ( ) {
+	private Logger log = Logger.getLogger(ReboundEffect.class);
+
+	private UUID originalId;
+
+	public ReboundEffect(UUID originalId) {
 		super(Outcome.Benefit);
+		this.originalId = originalId;
 	}
 
 	public ReboundEffect ( ReboundEffect effect ) {
 		super(effect);
+		this.originalId = effect.originalId;
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
+		if (!originalId.equals(source.getId())) {
+			log.warn("rebound was ignored. was it copied spell?");
+			return false;
+		}
+
 		Card sourceCard = (Card)game.getObject(source.getSourceId());
 		ReboundEffectCastFromExileDelayedTrigger trigger = new ReboundEffectCastFromExileDelayedTrigger(sourceCard.getId(), sourceCard.getId());
 		trigger.setControllerId(source.getControllerId());
@@ -276,6 +288,7 @@ class ReboundCastSpellFromExileEffect extends OneShotEffect<ReboundCastSpellFrom
 	@Override
 	public boolean apply(Game game, Ability source) {
 		ExileZone zone = game.getExile().getExileZone(this.cardId);
+		if (zone == null || zone.isEmpty()) return false;
 		Card reboundCard = zone.get(this.cardId, game);
 		Player player = game.getPlayer(source.getControllerId());
 		SpellAbility ability = reboundCard.getSpellAbility();

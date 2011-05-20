@@ -61,6 +61,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	private Card card;
 	private SpellAbility ability;
 	private UUID controllerId;
+	private boolean copiedSpell;
 
 	public Spell(Card card, SpellAbility ability, UUID controllerId) {
 		this.card = card;
@@ -85,14 +86,18 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 				else
 					result = true;
 
-				if (ability.getEffects().contains(ExileSpellEffect.getInstance()))
-					game.getExile().getPermanentExile().add(card);
-				else if (ability.getEffects().contains(ShuffleSpellEffect.getInstance())) {
-				    card.moveToZone(Zone.LIBRARY, ability.getId(), game, false);
-					Player player = game.getPlayer(controllerId);
-					if (player != null) player.shuffleLibrary(game);
-				} else
-					card.moveToZone(Zone.GRAVEYARD, ability.getId(), game, false);
+				if (!copiedSpell) {
+					if (ability.getEffects().contains(ExileSpellEffect.getInstance()))
+						game.getExile().getPermanentExile().add(card);
+					else if (ability.getEffects().contains(ShuffleSpellEffect.getInstance())) {
+						card.moveToZone(Zone.LIBRARY, ability.getId(), game, false);
+						Player player = game.getPlayer(controllerId);
+						if (player != null) player.shuffleLibrary(game);
+					} else {
+						card.moveToZone(Zone.GRAVEYARD, ability.getId(), game, false);
+					}
+				}
+
 				return result;
 			}
 			//20091005 - 608.2b
@@ -343,6 +348,10 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	@Override
 	public void assignNewId() {
 		throw new UnsupportedOperationException("Unsupported operation");
+	}
+
+	public void setCopiedSpell(boolean isCopied) {
+		this.copiedSpell = isCopied;
 	}
 }
 
