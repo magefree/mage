@@ -31,6 +31,6 @@ public class BeginningOfControllerUpkeepTriggeredAbility extends TriggeredAbilit
 
     @Override
     public String getRule() {
-        return "At the beginning of your upkeep, " + effects.getText(this) + ".";
+        return "At the beginning of your upkeep, " + effects.getText(this);
     }
 }

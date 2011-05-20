@@ -65,8 +65,7 @@ public class VampireLacerator extends CardImpl<VampireLacerator> {
             new ConditionalOneShotEffect(
 					new LoseLifeSourceEffect(1),
 					new Unless( new TenOrLessLife(AN_OPPONENT) ),
-					"At the beginning of your upkeep, you lose 1 "
-					+ "life unless an opponent has 10 or less life."), false));
+					"you lose 1 life unless an opponent has 10 or less life"), false));
 	}
 
 	public VampireLacerator(final VampireLacerator card) {
