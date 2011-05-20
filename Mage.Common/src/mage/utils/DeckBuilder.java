@@ -39,8 +39,13 @@ public class DeckBuilder {
 		deck = new Deck();
 
 		final Collection<MageScoredCard> remainingCards = new ArrayList<MageScoredCard>();
+		Set<String> names = new HashSet<String>();
 		for (final Card card : spellCardPool) {
+			if (names.contains(card.getName())) {
+				continue;
+			}
 			remainingCards.add(new MageScoredCard(card, allowedColors, callback));
+			names.add(card.getName());
 		}
 		int min = 0;
 		for (int index = 0; index < DECK_COUNT.length; index++) {
@@ -228,6 +233,8 @@ public class DeckBuilder {
 			int converted = card.getManaCost().convertedManaCost();
 			final Map<String, Integer> singleCount = new HashMap<String, Integer>();
 			int maxSingleCount = 0;
+			int multicolor = 0;
+			Set<String> colors = new HashSet<String>();
 			for (String symbol : card.getManaCost().getSymbols()) {
 				int count = 0;
 				symbol = symbol.replace("{", "").replace("}", "");
@@ -240,6 +247,9 @@ public class DeckBuilder {
 					if (count == 0) {
 						return -30;
 					}
+					if (!colors.contains(symbol)) {
+						multicolor += 1;
+					}
 					Integer typeCount = singleCount.get(symbol);
 					if (typeCount == null) {
 						typeCount = new Integer(0);
@@ -249,8 +259,9 @@ public class DeckBuilder {
 					maxSingleCount = Math.max(maxSingleCount, typeCount);
 				}
 			}
+			int multicolorBonus = multicolor > 1 ? 30 : 0;
 			maxSingleCount = Math.min(maxSingleCount, SINGLE_PENALTY.length - 1);
-			return 2 * converted + 3 * (10 - SINGLE_PENALTY[maxSingleCount]/*-DOUBLE_PENALTY[doubleCount]*/);
+			return 2 * converted + 3 * (10 - SINGLE_PENALTY[maxSingleCount]/*-DOUBLE_PENALTY[doubleCount]*/) + multicolorBonus;
 		}
 
 		public int getScore() {

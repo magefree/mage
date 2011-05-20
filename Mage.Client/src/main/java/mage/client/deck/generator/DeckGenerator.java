@@ -1,32 +1,26 @@
 package mage.client.deck.generator;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.*;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.ColoredManaSymbol;
 import mage.Mana;
 import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
+import mage.client.MageFrame;
 import mage.client.cards.CardsStorage;
 import mage.client.util.gui.ColorsChooser;
 import mage.interfaces.rate.RateCallback;
 import mage.sets.Sets;
 import mage.utils.CardUtil;
 import mage.utils.DeckBuilder;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 /**
  * Generates random card pool and builds a deck.
@@ -38,7 +32,7 @@ public class DeckGenerator {
     private static JDialog dlg;
     private static String selectedColors;
 
-    private static final int SPELL_CARD_POOL_SIZE = 60;
+    private static final int SPELL_CARD_POOL_SIZE = 180;
 
     private static final int DECK_LANDS = 16;
     private static final int MAX_NON_BASIC_SOURCE = DECK_LANDS / 2;
@@ -61,7 +55,8 @@ public class DeckGenerator {
         JLabel text = new JLabel("Choose color for your deck: ");
         p0.add(text);
         p0.add(Box.createVerticalStrut(5));
-        final ColorsChooser colorsChooser = new ColorsChooser("bu");
+	    String chosen = MageFrame.getPreferences().get("genDeckColor", "u");
+        final ColorsChooser colorsChooser = new ColorsChooser(chosen);
         p0.add(colorsChooser);
 
         final JButton btnGenerate = new JButton("Ok");
@@ -71,6 +66,7 @@ public class DeckGenerator {
                 colorsChooser.setEnabled(false);
                 selectedColors = (String) colorsChooser.getSelectedItem();
                 dlg.setVisible(false);
+	            MageFrame.getPreferences().put("genDeckColor", selectedColors);
             }
         });
         final JButton btnCancel = new JButton("Cancel");

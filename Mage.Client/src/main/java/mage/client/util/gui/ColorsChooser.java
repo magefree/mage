@@ -27,6 +27,13 @@ public class ColorsChooser extends JComboBox implements ListCellRenderer {
 		this.setRenderer(this);
 
 		final DefaultComboBoxModel model = new DefaultComboBoxModel();
+
+		model.addElement("u");
+		model.addElement("r");
+		model.addElement("b");
+		model.addElement("g");
+		model.addElement("w");
+
 		model.addElement("bu");
 		model.addElement("bg");
 		model.addElement("br");
