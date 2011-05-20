@@ -72,7 +72,6 @@ public class TableWaitingDialog extends MageDialog {
 		session.getUI().addButton(MageComponents.TABLE_WAITING_START_BUTTON, btnStart);
     }
 
-//	@Override
 	public void update(TableView table) {
 		try {
 			if (table != null) {
@@ -158,6 +157,7 @@ public class TableWaitingDialog extends MageDialog {
         tableSeats = new javax.swing.JTable();
         chatPanel = new mage.client.chat.ChatPanel(false);
 
+        setClosable(false);
         setResizable(true);
         setTitle("Waiting for players");
 
@@ -222,7 +222,7 @@ public class TableWaitingDialog extends MageDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMoveDown)

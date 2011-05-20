@@ -65,7 +65,8 @@ public class MageDialog extends javax.swing.JInternalFrame {
     public void show() {
         super.show();
 		this.toFront();
-        this.setClosable(!modal);
+		if (modal)
+			this.setClosable(false);
         if (this.modal) {
             startModal();
         }
@@ -75,8 +76,8 @@ public class MageDialog extends javax.swing.JInternalFrame {
     public void setVisible(boolean value) {
         super.setVisible(value);
 		this.toFront();
-        this.setClosable(!modal);
         if (modal) {
+	        this.setClosable(false);
             if (value) {
                 startModal();
             } else {

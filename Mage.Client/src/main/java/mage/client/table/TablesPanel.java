@@ -330,7 +330,7 @@ public class TablesPanel extends javax.swing.JPanel {
 		newTableDialog.showDialog(roomId);
 		if (newTableDialog.getTable() != null) {
 			tableWaitingDialog = new TableWaitingDialog();
-			MageFrame.getDesktop().add(tableWaitingDialog);
+			MageFrame.getDesktop().add(tableWaitingDialog, JLayeredPane.MODAL_LAYER);
 			tableWaitingDialog.showDialog(roomId, newTableDialog.getTable().getTableId(), false);
 		}
 }//GEN-LAST:event_btnNewTableActionPerformed
