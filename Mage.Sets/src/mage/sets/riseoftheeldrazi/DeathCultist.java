@@ -56,9 +56,9 @@ public class DeathCultist extends CardImpl<DeathCultist> {
         this.toughness = new MageInt(1);
 
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD,
-                new LoseLifeTargetEffect(3),
+                new LoseLifeTargetEffect(1),
                 new SacrificeSourceCost());
-        ability.addEffect(new GainLifeEffect(3));
+        ability.addEffect(new GainLifeEffect(1));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
