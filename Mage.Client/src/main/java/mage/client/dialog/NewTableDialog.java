@@ -40,8 +40,6 @@ import mage.client.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
@@ -54,9 +52,9 @@ import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.game.match.MatchOptions;
 import mage.sets.Sets;
-import mage.util.Logging;
 import mage.view.GameTypeView;
 import mage.view.TableView;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -64,7 +62,7 @@ import mage.view.TableView;
  */
 public class NewTableDialog extends MageDialog {
 
-	private final static Logger logger = Logging.getLogger(NewTableDialog.class.getName());
+	private final static Logger logger = Logger.getLogger(NewTableDialog.class);
 
 	private TableView table;
 	private UUID playerId;
@@ -406,7 +404,7 @@ public class NewTableDialog extends MageDialog {
 	}
 
 	private void handleError(Exception ex) {
-		logger.log(Level.SEVERE, "Error loading deck", ex);
+		logger.fatal("Error loading deck", ex);
 		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error loading deck.", "Error", JOptionPane.ERROR_MESSAGE);
 	}
 

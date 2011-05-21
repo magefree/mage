@@ -42,8 +42,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -63,8 +61,8 @@ import mage.client.remote.Session;
 import mage.client.util.Config;
 import mage.client.util.GameManager;
 import mage.client.util.PhaseManager;
-import mage.util.Logging;
 import mage.view.*;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -72,7 +70,7 @@ import mage.view.*;
  */
 public class GamePanel extends javax.swing.JPanel {
 
-	private final static Logger logger = Logging.getLogger(GamePanel.class.getName());
+	private final static Logger logger = Logger.getLogger(GamePanel.class);
 
 	private Map<UUID, PlayAreaPanel> players = new HashMap<UUID, PlayAreaPanel>();
 	private Map<UUID, ExileZoneDialog> exiles = new HashMap<UUID, ExileZoneDialog>();
@@ -204,7 +202,7 @@ public class GamePanel extends javax.swing.JPanel {
 	public void hideGame() {
 		this.chatPanel.disconnect();
 		this.players.clear();
-		logger.log(Level.FINE, "players clear.");
+		logger.debug("players clear.");
 		this.pnlBattlefield.removeAll();
 		combat.hideDialog();
 		Component c = this.getParent();
@@ -216,11 +214,11 @@ public class GamePanel extends javax.swing.JPanel {
 	}
 
 	public synchronized void init(GameView game) {
-		logger.warning("init.");
+		logger.warn("init.");
 		combat.init(gameId, bigCard);
 		combat.setLocation(500, 300);
 		addPlayers(game);
-		logger.warning("added players.");
+		logger.warn("added players.");
 		updateGame(game);
 	}
 
@@ -311,11 +309,11 @@ public class GamePanel extends javax.swing.JPanel {
 				if (players.containsKey(player.getPlayerId())) {
 					players.get(player.getPlayerId()).update(player);
 				} else {
-					logger.warning("Couldn't find player.");
-					logger.warning("   uuid:" + player.getPlayerId());
-					logger.warning("   players:");
+					logger.warn("Couldn't find player.");
+					logger.warn("   uuid:" + player.getPlayerId());
+					logger.warn("   players:");
 					for (PlayAreaPanel p : players.values()) {
-						logger.warning(""+p);
+						logger.warn(""+p);
 					}
 				}
 			//} else {

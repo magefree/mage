@@ -37,26 +37,21 @@ package mage.client.table;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 import javax.swing.DefaultComboBoxModel;
 
-import mage.cards.decks.DeckCardLists;
 import mage.client.MageFrame;
 import mage.client.remote.Session;
 import mage.client.util.Config;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.sets.Sets;
-import mage.util.Logging;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class TablePlayerPanel extends javax.swing.JPanel {
-
-	private final static Logger logger = Logging.getLogger(TablePlayerPanel.class.getName());
 
 	protected PlayerTypeEventSource playerTypeEventSource = new PlayerTypeEventSource();
 

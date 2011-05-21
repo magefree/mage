@@ -37,12 +37,10 @@ package mage.client.dialog;
 
 import mage.client.*;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import mage.client.remote.Session;
 import mage.sets.Sets;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -50,7 +48,7 @@ import mage.util.Logging;
  */
 public class JoinTableDialog extends MageDialog {
 
-	private final static Logger logger = Logging.getLogger(JoinTableDialog.class.getName());
+	private final static Logger logger = Logger.getLogger(JoinTableDialog.class);
 
 	private UUID tableId;
 	private UUID roomId;
@@ -153,7 +151,7 @@ public class JoinTableDialog extends MageDialog {
 	}
 
 	private void handleError(Exception ex) {
-		logger.log(Level.SEVERE, "Error loading deck", ex);
+		logger.fatal("Error loading deck", ex);
 		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error loading deck.", "Error", JOptionPane.ERROR_MESSAGE);
 	}
 

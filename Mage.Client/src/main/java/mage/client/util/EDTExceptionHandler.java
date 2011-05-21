@@ -28,11 +28,9 @@
 
 package mage.client.util;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import mage.client.MageFrame;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -40,7 +38,7 @@ import mage.util.Logging;
  */
 public class EDTExceptionHandler implements Thread.UncaughtExceptionHandler {
 
-	private final static Logger logger = Logging.getLogger(EDTExceptionHandler.class.getName());
+	private final static Logger logger = Logger.getLogger(EDTExceptionHandler.class);
 
 	@Override
 	public void uncaughtException(Thread t, Throwable e) {
@@ -49,7 +47,7 @@ public class EDTExceptionHandler implements Thread.UncaughtExceptionHandler {
 
 	public void handle(Throwable throwable) {
 		try {
-			logger.log(Level.SEVERE, null, throwable);
+			logger.fatal(null, throwable);
 			JOptionPane.showMessageDialog(MageFrame.getDesktop(), throwable, "MAGE Client UI error", JOptionPane.ERROR_MESSAGE);
 		} catch (Throwable t) {}
 	}

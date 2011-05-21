@@ -1,18 +1,15 @@
 package mage.client.game;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.swing.SwingUtilities;
 
 import mage.client.MageFrame;
 import mage.client.components.MageComponents;
 import mage.client.components.MageUI;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 public class StartMultiGamesTest {
 
-	private final static Logger logger = Logging.getLogger(StartMultiGamesTest.class.getName());
+	private final static Logger logger = Logger.getLogger(StartMultiGamesTest.class);
 
 	/**
 	 * Amount of games to be started from this test.
@@ -34,7 +31,7 @@ public class StartMultiGamesTest {
 	
 	public void startMultiGames() throws Exception {
 		for (int i = 0; i < GAME_START_COUNT; i++) {
-			logger.log(Level.INFO, "Starting game");
+			logger.info("Starting game");
 			startGame();
 		}
 	}
@@ -43,7 +40,7 @@ public class StartMultiGamesTest {
 		frame = null;
 		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
 			public void uncaughtException(Thread t, Throwable e) {
-				logger.log(Level.SEVERE, null, e);
+				logger.fatal(null, e);
 			}
 		});
 		SwingUtilities.invokeLater(new Runnable() {

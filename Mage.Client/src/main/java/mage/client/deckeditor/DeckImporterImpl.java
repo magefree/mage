@@ -30,12 +30,10 @@ package mage.client.deckeditor;
 
 import java.io.File;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import mage.cards.decks.DeckCardLists;
 import mage.client.MageFrame;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -43,7 +41,7 @@ import mage.util.Logging;
  */
 public abstract class DeckImporterImpl implements DeckImporter {
 
-	private final static Logger logger = Logging.getLogger(DeckImporterImpl.class.getName());
+	private final static Logger logger = Logger.getLogger(DeckImporterImpl.class);
 	protected StringBuilder sbMessage = new StringBuilder();
 	protected int lineCount;
 
@@ -67,13 +65,13 @@ public abstract class DeckImporterImpl implements DeckImporter {
 			}
 			catch (Exception ex) {
 				JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error importing deck", JOptionPane.ERROR_MESSAGE);
-				logger.log(Level.SEVERE, null, ex);
+				logger.fatal(null, ex);
 			}
 			finally {
 				scanner.close();
 			}
 		} catch (Exception ex) {
-			logger.log(Level.SEVERE, null, ex);
+			logger.fatal(null, ex);
 		}
 		return deckList;
 	}

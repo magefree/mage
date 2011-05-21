@@ -7,12 +7,9 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JComponent;
 
-import mage.cards.CardDimensions;
 import mage.cards.MageCard;
 import mage.cards.MagePermanent;
 import mage.cards.action.impl.EmptyCallback;
@@ -28,17 +25,17 @@ import mage.interfaces.PluginException;
 import mage.interfaces.plugin.CardPlugin;
 import mage.interfaces.plugin.CounterPlugin;
 import mage.interfaces.plugin.ThemePlugin;
-import mage.util.Logging;
 import mage.view.CardView;
 import mage.view.PermanentView;
 import net.xeoh.plugins.base.PluginManager;
 import net.xeoh.plugins.base.impl.PluginManagerFactory;
+import org.apache.log4j.Logger;
 
 
 public class Plugins implements MagePlugins {
 
 	private final static MagePlugins fINSTANCE =  new Plugins();
-	private final static Logger logger = Logging.getLogger(Plugins.class.getName());
+	private final static Logger logger = Logger.getLogger(Plugins.class);
 	private static PluginManager pm;
 	
 	private ThemePlugin themePlugin = null;
@@ -54,13 +51,13 @@ public class Plugins implements MagePlugins {
 	
 	@Override
 	public void loadPlugins() {
-		logger.log(Level.INFO, "Loading plugins...");
+		logger.info("Loading plugins...");
 		pm = PluginManagerFactory.createPluginManager();
 		pm.addPluginsFrom(new File(Constants.PLUGINS_DIRECTORY).toURI());
 		this.cardPlugin = pm.getPlugin(CardPlugin.class);
 		this.counterPlugin = pm.getPlugin(CounterPlugin.class);
 		this.themePlugin = pm.getPlugin(ThemePlugin.class);
-		logger.log(Level.INFO, "Done.");
+		logger.info("Done.");
 	}
 	
 	@Override
@@ -129,7 +126,7 @@ public class Plugins implements MagePlugins {
 				try {
 					return this.counterPlugin.getGamePlayed();
 				} catch (PluginException e) {
-					logger.log(Level.SEVERE, e.getMessage());
+					logger.fatal(e.getMessage());
 					throw new RuntimeException(e);
 				}
 			}
@@ -144,7 +141,7 @@ public class Plugins implements MagePlugins {
 				try {
 					this.counterPlugin.addGamePlayed();
 				} catch (PluginException e) {
-					logger.log(Level.SEVERE, e.getMessage());
+					logger.fatal(e.getMessage());
 					throw new RuntimeException(e);
 				}
 			}

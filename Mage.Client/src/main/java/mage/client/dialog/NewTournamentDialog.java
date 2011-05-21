@@ -37,7 +37,6 @@ package mage.client.dialog;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -53,9 +52,9 @@ import mage.game.draft.DraftOptions.TimingOption;
 import mage.game.tournament.LimitedOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.sets.Sets;
-import mage.util.Logging;
 import mage.view.TableView;
 import mage.view.TournamentTypeView;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -63,7 +62,7 @@ import mage.view.TournamentTypeView;
  */
 public class NewTournamentDialog extends MageDialog {
 
-	private final static Logger logger = Logging.getLogger(NewTournamentDialog.class.getName());
+	private final static Logger logger = Logger.getLogger(NewTournamentDialog.class);
 
 	private TableView table;
 	private UUID playerId;

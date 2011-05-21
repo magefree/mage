@@ -41,10 +41,8 @@ import java.awt.EventQueue;
 import java.awt.MenuComponent;
 import java.awt.event.MouseEvent;
 import java.lang.reflect.InvocationTargetException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -52,7 +50,7 @@ import mage.util.Logging;
  */
 public class MageDialog extends javax.swing.JInternalFrame {
 
-	private final static Logger logger = Logging.getLogger(MageDialog.class.getName());
+	private final static Logger logger = Logger.getLogger(MageDialog.class);
 
 	protected boolean modal = false;
 
@@ -92,9 +90,9 @@ public class MageDialog extends javax.swing.JInternalFrame {
 							}
 						});
 					} catch (InterruptedException ex) {
-						logger.log(Level.SEVERE, null, ex);
+						logger.fatal("MageDialog error", ex);
 					} catch (InvocationTargetException ex) {
-						logger.log(Level.SEVERE, null, ex);
+						logger.fatal("MageDialog error", ex);
 					}
 				}
             }
@@ -127,7 +125,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
                         } else if (source instanceof MenuComponent) {
                             ((MenuComponent) source).dispatchEvent(event);
                         } else {
-							logger.warning("Unable to dispatch: " + event);
+							logger.warn("Unable to dispatch: " + event);
                         }
                     }
                 }

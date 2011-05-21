@@ -38,13 +38,9 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.*;
 import java.util.List;
-import java.util.logging.Logger;
 import mage.client.MageFrame;
 import mage.client.remote.Session;
-import mage.util.Logging;
 import mage.view.ChatMessage.MessageColor;
-import mage.view.SeatView;
-import mage.view.TableView;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -53,8 +49,6 @@ import javax.swing.table.AbstractTableModel;
  * @author BetaSteward_at_googlemail.com
  */
 public class ChatPanel extends javax.swing.JPanel {
-
-	private final static Logger logger = Logging.getLogger(ChatPanel.class.getName());
 
 	private UUID chatId;
 	private UUID clientId;

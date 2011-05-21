@@ -32,11 +32,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import mage.cards.CardDimensions;
-import mage.util.Logging;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -44,7 +42,7 @@ import mage.util.Logging;
  */
 public class Config {
 
-	private final static Logger logger = Logging.getLogger(Config.class.getName());
+	private final static Logger logger = Logger.getLogger(Config.class);
 
 	public static final String remoteServer;
 	public static final String serverName;
@@ -62,7 +60,7 @@ public class Config {
 		try {
 			p.load(new FileInputStream(new File("config/config.properties")));
 		} catch (IOException ex) {
-			logger.log(Level.SEVERE, null, ex);
+			logger.fatal("Config error ", ex);
 		}
 		serverName = p.getProperty("server-name");
 		port = Integer.parseInt(p.getProperty("port"));
