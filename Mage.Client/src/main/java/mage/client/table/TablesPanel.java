@@ -48,7 +48,6 @@ import mage.client.remote.Session;
 import mage.client.util.ButtonColumn;
 import mage.game.match.MatchOptions;
 import mage.sets.Sets;
-import mage.util.Logging;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
 
@@ -59,7 +58,6 @@ import java.awt.event.ActionEvent;
 import java.beans.PropertyVetoException;
 import java.util.*;
 import java.util.List;
-import java.util.logging.Level;
 
 
 /**
@@ -77,7 +75,6 @@ public class TablesPanel extends javax.swing.JPanel {
 	private JoinTableDialog joinTableDialog;
 	private NewTableDialog newTableDialog;
 	private NewTournamentDialog newTournamentDialog;
-	private TableWaitingDialog tableWaitingDialog;
 	private Session session;
 
     /** Creates new form TablesPanel */
@@ -126,14 +123,15 @@ public class TablesPanel extends javax.swing.JPanel {
 					}
 					if (isTournament) {
 						logger.info("Joining tournament " + tableId);
-						if (session.joinTournamentTable(roomId, tableId, session.getUserName(), "Human", 1))
-							tableWaitingDialog.showDialog(roomId, tableId, true);
+						if (session.joinTournamentTable(roomId, tableId, session.getUserName(), "Human", 1)) {
+							showTableWaitingDialog(roomId, tableId, true);
+						}
 					}
 					else {
 						logger.info("Joining table " + tableId);
 						joinTableDialog.showDialog(roomId, tableId);
 						if (joinTableDialog.isJoined())
-							tableWaitingDialog.showDialog(roomId, tableId, false);
+							showTableWaitingDialog(roomId, tableId, false);
 					}
 				} else if (state.equals("Watch")) {
 					logger.info("Watching table " + tableId);
@@ -194,10 +192,6 @@ public class TablesPanel extends javax.swing.JPanel {
 			joinTableDialog = new JoinTableDialog();
 			MageFrame.getDesktop().add(joinTableDialog);
 		}
-		/*if (tableWaitingDialog == null) {
-			tableWaitingDialog = new TableWaitingDialog();
-			MageFrame.getDesktop().add(tableWaitingDialog);
-		}*/
 		UUID chatRoomId = session.getRoomChatId(roomId);
 		if (chatRoomId != null) {
 			this.chatPanel.connect(chatRoomId);
@@ -214,9 +208,6 @@ public class TablesPanel extends javax.swing.JPanel {
 	}
 
 	public void hideTables() {
-		/*if (tableWaitingDialog != null && tableWaitingDialog.isVisible()) {
-			tableWaitingDialog.closeDialog();
-		}*/
 		for (Component component : MageFrame.getDesktop().getComponents()) {
 			if (component instanceof TableWaitingDialog) {
 				((TableWaitingDialog)component).closeDialog();
@@ -236,6 +227,12 @@ public class TablesPanel extends javax.swing.JPanel {
 			c.setVisible(false);
 	}
 
+	private void showTableWaitingDialog(UUID roomId, UUID tableId, boolean isTournament) {
+		TableWaitingDialog tableWaitingDialog = new TableWaitingDialog();
+		MageFrame.getDesktop().add(tableWaitingDialog, JLayeredPane.MODAL_LAYER);
+		tableWaitingDialog.showDialog(roomId, tableId, isTournament);
+	}
+	
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -328,11 +325,8 @@ public class TablesPanel extends javax.swing.JPanel {
 
 	private void btnNewTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTableActionPerformed
 		newTableDialog.showDialog(roomId);
-		if (newTableDialog.getTable() != null) {
-			tableWaitingDialog = new TableWaitingDialog();
-			MageFrame.getDesktop().add(tableWaitingDialog, JLayeredPane.MODAL_LAYER);
-			tableWaitingDialog.showDialog(roomId, newTableDialog.getTable().getTableId(), false);
-		}
+		if (newTableDialog.getTable() != null)
+			showTableWaitingDialog(roomId, newTableDialog.getTable().getTableId(), false);
 }//GEN-LAST:event_btnNewTableActionPerformed
 
 	private void btnQuickStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartActionPerformed
@@ -359,7 +353,7 @@ public class TablesPanel extends javax.swing.JPanel {
 		MageFrame.getDesktop().add(newTournamentDialog);
 		newTournamentDialog.showDialog(roomId);
 		if (newTournamentDialog.getTable() != null) {
-			tableWaitingDialog.showDialog(roomId, newTournamentDialog.getTable().getTableId(), true);
+			showTableWaitingDialog(roomId, newTournamentDialog.getTable().getTableId(), true);
 		}
 	}//GEN-LAST:event_btnNewTournamentActionPerformed
 
