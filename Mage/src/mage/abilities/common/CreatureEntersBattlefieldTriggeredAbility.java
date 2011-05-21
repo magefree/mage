@@ -80,19 +80,6 @@ public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
         this.opponentController = opponentController;
     }
 
-    /**
-     * 
-     * @param effect
-     * @param optional
-     * @param opponentController
-     * @param target - needed if the ability targets a player or a creature
-     */
-    public CreatureEntersBattlefieldTriggeredAbility(Effect effect, boolean optional, boolean opponentController, Target target) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        this.opponentController = opponentController;
-        this.addTarget(target);
-    }
-
     public CreatureEntersBattlefieldTriggeredAbility(CreatureEntersBattlefieldTriggeredAbility ability) {
         super(ability);
     }

@@ -25,43 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
-import mage.target.TargetPlayer;
+import mage.filter.Filter.ComparisonType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author North
  */
-public class BloodSeeker extends CardImpl<BloodSeeker> {
+public class KorLineSlinger extends CardImpl<KorLineSlinger> {
 
-    public BloodSeeker(UUID ownerId) {
-        super(ownerId, 80, "Blood Seeker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "ZEN";
-        this.subtype.add("Vampire");
-        this.subtype.add("Shaman");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 3 or less");
 
-        this.color.setBlack(true);
-        this.power = new MageInt(1);
+    static {
+        filter.setPower(4);
+        filter.setPowerComparison(ComparisonType.LessThan);
+    }
+
+    public KorLineSlinger(UUID ownerId) {
+        super(ownerId, 30, "Kor Line-Slinger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Kor");
+        this.subtype.add("Scout");
+
+        this.color.setWhite(true);
+        this.power = new MageInt(0);
         this.toughness = new MageInt(1);
-        CreatureEntersBattlefieldTriggeredAbility ability = new CreatureEntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(1), true, true);
-        ability.addTarget(new TargetPlayer());
+
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
-    public BloodSeeker(final BloodSeeker card) {
+    public KorLineSlinger(final KorLineSlinger card) {
         super(card);
     }
 
     @Override
-    public BloodSeeker copy() {
-        return new BloodSeeker(this);
+    public KorLineSlinger copy() {
+        return new KorLineSlinger(this);
     }
 }

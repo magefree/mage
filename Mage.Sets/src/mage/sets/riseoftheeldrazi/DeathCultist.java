@@ -25,13 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.TargetPlayer;
@@ -40,28 +43,32 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class BloodSeeker extends CardImpl<BloodSeeker> {
+public class DeathCultist extends CardImpl<DeathCultist> {
 
-    public BloodSeeker(UUID ownerId) {
-        super(ownerId, 80, "Blood Seeker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "ZEN";
-        this.subtype.add("Vampire");
-        this.subtype.add("Shaman");
+    public DeathCultist(UUID ownerId) {
+        super(ownerId, 105, "Death Cultist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
 
         this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        CreatureEntersBattlefieldTriggeredAbility ability = new CreatureEntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(1), true, true);
+
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD,
+                new LoseLifeTargetEffect(3),
+                new SacrificeSourceCost());
+        ability.addEffect(new GainLifeEffect(3));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 
-    public BloodSeeker(final BloodSeeker card) {
+    public DeathCultist(final DeathCultist card) {
         super(card);
     }
 
     @Override
-    public BloodSeeker copy() {
-        return new BloodSeeker(this);
+    public DeathCultist copy() {
+        return new DeathCultist(this);
     }
 }

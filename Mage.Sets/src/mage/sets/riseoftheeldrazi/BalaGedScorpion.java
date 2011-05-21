@@ -25,43 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.target.TargetPlayer;
+import mage.filter.Filter.ComparisonType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author North
  */
-public class BloodSeeker extends CardImpl<BloodSeeker> {
+public class BalaGedScorpion extends CardImpl<BalaGedScorpion> {
 
-    public BloodSeeker(UUID ownerId) {
-        super(ownerId, 80, "Blood Seeker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "ZEN";
-        this.subtype.add("Vampire");
-        this.subtype.add("Shaman");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 1 or less");
+
+    static {
+        filter.setPower(2);
+        filter.setPowerComparison(ComparisonType.LessThan);
+    }
+
+    public BalaGedScorpion(UUID ownerId) {
+        super(ownerId, 95, "Bala Ged Scorpion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Scorpion");
 
         this.color.setBlack(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        CreatureEntersBattlefieldTriggeredAbility ability = new CreatureEntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(1), true, true);
-        ability.addTarget(new TargetPlayer());
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
+
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true);
+        ability.addTarget(new TargetCreaturePermanent(filter));
+
         this.addAbility(ability);
     }
 
-    public BloodSeeker(final BloodSeeker card) {
+    public BalaGedScorpion(final BalaGedScorpion card) {
         super(card);
     }
 
     @Override
-    public BloodSeeker copy() {
-        return new BloodSeeker(this);
+    public BalaGedScorpion copy() {
+        return new BalaGedScorpion(this);
     }
 }

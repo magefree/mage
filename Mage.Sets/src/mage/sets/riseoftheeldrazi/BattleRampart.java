@@ -25,43 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author North
  */
-public class BloodSeeker extends CardImpl<BloodSeeker> {
+public class BattleRampart extends CardImpl<BattleRampart> {
 
-    public BloodSeeker(UUID ownerId) {
-        super(ownerId, 80, "Blood Seeker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "ZEN";
-        this.subtype.add("Vampire");
-        this.subtype.add("Shaman");
+    public BattleRampart(UUID ownerId) {
+        super(ownerId, 135, "Battle Rampart", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Wall");
 
-        this.color.setBlack(true);
+        this.color.setRed(true);
         this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        CreatureEntersBattlefieldTriggeredAbility ability = new CreatureEntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(1), true, true);
-        ability.addTarget(new TargetPlayer());
+        this.toughness = new MageInt(3);
+
+        this.addAbility(DefenderAbility.getInstance());
+
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn),
+                new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public BloodSeeker(final BloodSeeker card) {
+    public BattleRampart(final BattleRampart card) {
         super(card);
     }
 
     @Override
-    public BloodSeeker copy() {
-        return new BloodSeeker(this);
+    public BattleRampart copy() {
+        return new BattleRampart(this);
     }
 }

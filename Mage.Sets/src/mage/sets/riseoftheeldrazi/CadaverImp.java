@@ -25,43 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.target.TargetPlayer;
+import mage.filter.common.FilterCreatureCard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
  * @author North
  */
-public class BloodSeeker extends CardImpl<BloodSeeker> {
+public class CadaverImp extends CardImpl<CadaverImp> {
 
-    public BloodSeeker(UUID ownerId) {
-        super(ownerId, 80, "Blood Seeker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "ZEN";
-        this.subtype.add("Vampire");
-        this.subtype.add("Shaman");
+    public CadaverImp(UUID ownerId) {
+        super(ownerId, 99, "Cadaver Imp", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Imp");
 
         this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        CreatureEntersBattlefieldTriggeredAbility ability = new CreatureEntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(1), true, true);
-        ability.addTarget(new TargetPlayer());
+
+        this.addAbility(FlyingAbility.getInstance());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
         this.addAbility(ability);
+
     }
 
-    public BloodSeeker(final BloodSeeker card) {
+    public CadaverImp(final CadaverImp card) {
         super(card);
     }
 
     @Override
-    public BloodSeeker copy() {
-        return new BloodSeeker(this);
+    public CadaverImp copy() {
+        return new CadaverImp(this);
     }
 }
