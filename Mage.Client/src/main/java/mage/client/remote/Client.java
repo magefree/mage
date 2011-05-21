@@ -316,7 +316,7 @@ public class Client implements CallbackClient {
 	private void handleException(Exception ex) {
 		logger.fatal("Client error\n", ex);
 		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Unrecoverable client error.  Disconnecting", "Error", JOptionPane.ERROR_MESSAGE);
-		session.disconnect();
+		session.disconnect(false);
 		frame.disableButtons();
 	}
 

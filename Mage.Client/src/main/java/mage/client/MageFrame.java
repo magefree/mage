@@ -712,7 +712,7 @@ public class MageFrame extends javax.swing.JFrame {
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
         if (session.isConnected()) {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                session.disconnect();
+                session.disconnect(true);
             }
         } else {
             connectDialog.showDialog();
@@ -726,7 +726,7 @@ public class MageFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAboutActionPerformed
 
     public void exitApp() {
-        session.disconnect();
+        session.disconnect(true);
         Plugins.getInstance().shutdown();
         dispose();
         System.exit(0);
