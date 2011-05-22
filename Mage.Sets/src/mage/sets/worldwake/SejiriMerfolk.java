@@ -48,7 +48,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class SejiriMerfolk extends CardImpl<SejiriMerfolk> {
 
-    private static final String rule = "As long as you control a Plains, Sejiri Merfolk has first strike and lifelink.";
+    private static final String rule = "As long as you control a Plains, Sejiri Merfolk has first strike and lifelink";
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Plains");
 
     static {

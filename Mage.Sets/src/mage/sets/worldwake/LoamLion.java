@@ -46,7 +46,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class LoamLion extends CardImpl<LoamLion> {
 
-    private static final String rule = "Loam Lion gets +1/+2 as long as you control a Forest.";
+    private static final String rule = "Loam Lion gets +1/+2 as long as you control a Forest";
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Forest");
 
     static {
