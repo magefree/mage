@@ -27,47 +27,48 @@
  */
 package mage.sets.zendikar;
 
-import mage.abilities.common.BeginningOfControllerUpkeepTriggeredAbility;
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.condition.common.Unless;
-import mage.abilities.condition.common.TenOrLessLife;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-
-import static mage.abilities.condition.common.TenOrLessLife.CheckType.*;
+import mage.filter.common.FilterLandPermanent;
 
 /**
  *
- * @author maurer.it_at_gmail.com
+ * @author North
  */
-public class VampireLacerator extends CardImpl<VampireLacerator> {
+public class TimbermawLarva extends CardImpl<TimbermawLarva> {
 
-	public VampireLacerator(UUID ownerId) {
-		super(ownerId, 115, "Vampire Lacerator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-		this.expansionSetCode = "ZEN";
-		this.subtype.add("Vampire");
-		this.subtype.add("Warrior");
-		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
 
-        this.addAbility(new BeginningOfControllerUpkeepTriggeredAbility(
-            new ConditionalOneShotEffect(
-					new LoseLifeSourceEffect(1),
-					new Unless( new TenOrLessLife(AN_OPPONENT) ),
-					"you lose 1 life unless an opponent has 10 or less life"), false));
-	}
+    static {
+        filter.getName().add("Forest");
+    }
 
-	public VampireLacerator(final VampireLacerator card) {
-		super(card);
-	}
+    public TimbermawLarva(UUID ownerId) {
+        super(ownerId, 189, "Timbermaw Larva", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Beast");
 
-	@Override
-	public VampireLacerator copy() {
-		return new VampireLacerator(this);
-	}
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter, true);
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, value, Duration.EndOfTurn), false));
+    }
+
+    public TimbermawLarva(final TimbermawLarva card) {
+        super(card);
+    }
+
+    @Override
+    public TimbermawLarva copy() {
+        return new TimbermawLarva(this);
+    }
 }

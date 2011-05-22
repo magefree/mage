@@ -50,7 +50,7 @@ public class LoamLion extends CardImpl<LoamLion> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Forest");
 
     static {
-        filter.getName().add("a Forest");
+        filter.getName().add("Forest");
     }
 
     public LoamLion(UUID ownerId) {

@@ -27,47 +27,44 @@
  */
 package mage.sets.zendikar;
 
-import mage.abilities.common.BeginningOfControllerUpkeepTriggeredAbility;
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.condition.common.Unless;
-import mage.abilities.condition.common.TenOrLessLife;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
-
-import static mage.abilities.condition.common.TenOrLessLife.CheckType.*;
+import mage.filter.common.FilterLandPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author maurer.it_at_gmail.com
+ * @author North
  */
-public class VampireLacerator extends CardImpl<VampireLacerator> {
+public class PrimalBellow extends CardImpl<PrimalBellow> {
 
-	public VampireLacerator(UUID ownerId) {
-		super(ownerId, 115, "Vampire Lacerator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-		this.expansionSetCode = "ZEN";
-		this.subtype.add("Vampire");
-		this.subtype.add("Warrior");
-		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
 
-        this.addAbility(new BeginningOfControllerUpkeepTriggeredAbility(
-            new ConditionalOneShotEffect(
-					new LoseLifeSourceEffect(1),
-					new Unless( new TenOrLessLife(AN_OPPONENT) ),
-					"you lose 1 life unless an opponent has 10 or less life"), false));
-	}
+    static {
+        filter.getName().add("Forest");
+    }
 
-	public VampireLacerator(final VampireLacerator card) {
-		super(card);
-	}
+    public PrimalBellow(UUID ownerId) {
+        super(ownerId, 176, "Primal Bellow", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
+        this.expansionSetCode = "ZEN";
 
-	@Override
-	public VampireLacerator copy() {
-		return new VampireLacerator(this);
-	}
+        this.color.setGreen(true);
+        PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter, true);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new BoostTargetEffect(value, value, Duration.EndOfTurn));
+    }
+
+    public PrimalBellow(final PrimalBellow card) {
+        super(card);
+    }
+
+    @Override
+    public PrimalBellow copy() {
+        return new PrimalBellow(this);
+    }
 }

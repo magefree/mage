@@ -27,47 +27,49 @@
  */
 package mage.sets.zendikar;
 
-import mage.abilities.common.BeginningOfControllerUpkeepTriggeredAbility;
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.condition.common.Unless;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.TenOrLessLife;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
-
-import static mage.abilities.condition.common.TenOrLessLife.CheckType.*;
 
 /**
  *
- * @author maurer.it_at_gmail.com
+ * @author North
  */
-public class VampireLacerator extends CardImpl<VampireLacerator> {
+public class GuulDrazVampire extends CardImpl<GuulDrazVampire> {
 
-	public VampireLacerator(UUID ownerId) {
-		super(ownerId, 115, "Vampire Lacerator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-		this.expansionSetCode = "ZEN";
-		this.subtype.add("Vampire");
-		this.subtype.add("Warrior");
-		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public GuulDrazVampire(UUID ownerId) {
+        super(ownerId, 93, "Guul Draz Vampire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Vampire");
+        this.subtype.add("Rogue");
 
-        this.addAbility(new BeginningOfControllerUpkeepTriggeredAbility(
-            new ConditionalOneShotEffect(
-					new LoseLifeSourceEffect(1),
-					new Unless( new TenOrLessLife(AN_OPPONENT) ),
-					"you lose 1 life unless an opponent has 10 or less life"), false));
-	}
+        this.color.setBlack(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-	public VampireLacerator(final VampireLacerator card) {
-		super(card);
-	}
+        ContinuousEffect effect = new GainAbilitySourceEffect(IntimidateAbility.getInstance(), Duration.WhileOnBattlefield);
+        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect, new TenOrLessLife(TenOrLessLife.CheckType.AN_OPPONENT), "As long as an opponent has 10 or less life, Guul Draz Vampire gets +2/+1 and has intimidate."));
+        ability.addEffect(new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield));
+        this.addAbility(ability);
+    }
 
-	@Override
-	public VampireLacerator copy() {
-		return new VampireLacerator(this);
-	}
+    public GuulDrazVampire(final GuulDrazVampire card) {
+        super(card);
+    }
+
+    @Override
+    public GuulDrazVampire copy() {
+        return new GuulDrazVampire(this);
+    }
 }

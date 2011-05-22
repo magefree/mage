@@ -27,47 +27,40 @@
  */
 package mage.sets.zendikar;
 
-import mage.abilities.common.BeginningOfControllerUpkeepTriggeredAbility;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.condition.common.Unless;
-import mage.abilities.condition.common.TenOrLessLife;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.common.LandfallAbility;
+import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
-
-import static mage.abilities.condition.common.TenOrLessLife.CheckType.*;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author maurer.it_at_gmail.com
+ * @author North
  */
-public class VampireLacerator extends CardImpl<VampireLacerator> {
+public class HedronCrab extends CardImpl<HedronCrab> {
 
-	public VampireLacerator(UUID ownerId) {
-		super(ownerId, 115, "Vampire Lacerator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
-		this.expansionSetCode = "ZEN";
-		this.subtype.add("Vampire");
-		this.subtype.add("Warrior");
-		this.color.setBlack(true);
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
+    public HedronCrab(UUID ownerId) {
+        super(ownerId, 47, "Hedron Crab", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Crab");
 
-        this.addAbility(new BeginningOfControllerUpkeepTriggeredAbility(
-            new ConditionalOneShotEffect(
-					new LoseLifeSourceEffect(1),
-					new Unless( new TenOrLessLife(AN_OPPONENT) ),
-					"you lose 1 life unless an opponent has 10 or less life"), false));
-	}
+        this.color.setBlue(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(2);
+        LandfallAbility ability = new LandfallAbility(new PutLibraryIntoGraveTargetEffect(3), false);
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
+    }
 
-	public VampireLacerator(final VampireLacerator card) {
-		super(card);
-	}
+    public HedronCrab(final HedronCrab card) {
+        super(card);
+    }
 
-	@Override
-	public VampireLacerator copy() {
-		return new VampireLacerator(this);
-	}
+    @Override
+    public HedronCrab copy() {
+        return new HedronCrab(this);
+    }
 }

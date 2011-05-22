@@ -52,7 +52,7 @@ public class SejiriMerfolk extends CardImpl<SejiriMerfolk> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Plains");
 
     static {
-        filter.getName().add("a Plains");
+        filter.getName().add("Plains");
     }
 
     public SejiriMerfolk(UUID ownerId) {
