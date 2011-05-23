@@ -25,14 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.zendikar;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -40,7 +39,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,68 +48,69 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class NimbusWings extends CardImpl<NimbusWings> {
+public class GoblinWarPaint extends CardImpl<GoblinWarPaint> {
 
-    public NimbusWings (UUID ownerId) {
-        super(ownerId, 28, "Nimbus Wings", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+    public GoblinWarPaint(UUID ownerId) {
+        super(ownerId, 129, "Goblin War Paint", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Aura");
-        this.color.setWhite(true);
+
+        this.color.setRed(true);
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NimbusWingsEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GoblinWarPaintEffect()));
     }
 
-    public NimbusWings (final NimbusWings card) {
+    public GoblinWarPaint(final GoblinWarPaint card) {
         super(card);
     }
 
     @Override
-    public NimbusWings copy() {
-        return new NimbusWings(this);
+    public GoblinWarPaint copy() {
+        return new GoblinWarPaint(this);
     }
 }
 
-class NimbusWingsEffect extends ContinuousEffectImpl<NimbusWingsEffect> {
+class GoblinWarPaintEffect extends ContinuousEffectImpl<GoblinWarPaintEffect> {
 
-    public NimbusWingsEffect() {
+    public GoblinWarPaintEffect() {
         super(Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
     }
 
-    public NimbusWingsEffect(final NimbusWingsEffect effect) {
+    public GoblinWarPaintEffect(final GoblinWarPaintEffect effect) {
         super(effect);
     }
 
     @Override
-	public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-			if (creature != null) {
-				switch (layer) {
-					case PTChangingEffects_7:
-						if (sublayer == Constants.SubLayer.ModifyPT_7c) {
-							creature.addPower(1);
-							creature.addToughness(2);
-						}
-						break;
-					case AbilityAddingRemovingEffects_6:
-						if (sublayer == Constants.SubLayer.NA) {
-							creature.addAbility(FlyingAbility.getInstance());
-						}
-						break;
-				}
-				return true;
-			}
-		}
-		return false;
-	}
+    public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
+            if (creature != null) {
+                switch (layer) {
+                    case PTChangingEffects_7:
+                        if (sublayer == Constants.SubLayer.ModifyPT_7c) {
+                            creature.addPower(2);
+                            creature.addToughness(2);
+                        }
+                        break;
+                    case AbilityAddingRemovingEffects_6:
+                        if (sublayer == Constants.SubLayer.NA) {
+                            creature.addAbility(HasteAbility.getInstance());
+                        }
+                        break;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -118,17 +118,17 @@ class NimbusWingsEffect extends ContinuousEffectImpl<NimbusWingsEffect> {
     }
 
     @Override
-	public boolean hasLayer(Constants.Layer layer) {
-		return layer == Constants.Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
-	}
-
-    @Override
-    public NimbusWingsEffect copy() {
-        return new NimbusWingsEffect(this);
+    public boolean hasLayer(Constants.Layer layer) {
+        return layer == Constants.Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
     }
 
     @Override
-	public String getText(Ability source) {
-		return "Enchanted creature gets +1/+2 and has flying";
-	}
+    public GoblinWarPaintEffect copy() {
+        return new GoblinWarPaintEffect(this);
+    }
+
+    @Override
+    public String getText(Ability source) {
+        return "Enchanted creature gets +2/+2 and has haste";
+    }
 }
