@@ -65,6 +65,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
 		names = new TreeSet<String>();
 		cards = new ArrayList<Card>();
 		this.addSet(AlaraReborn.getInstance());
+        this.addSet(Apocalypse.getInstance());
 		this.addSet(Conflux.getInstance());
         this.addSet(Darksteel.getInstance());
         this.addSet(Dissension.getInstance());

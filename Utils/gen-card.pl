@@ -214,6 +214,7 @@ $wizardstous{'MBS'} = 'MBS';
 
 my %knownSets;
 $knownSets{'ARB'} = 'alarareborn';
+$knownSets{'APC'} = 'apocalypse';
 $knownSets{'CON'} = 'conflux';
 $knownSets{'DST'} = 'darksteel';
 $knownSets{'EVE'} = 'eventide';
