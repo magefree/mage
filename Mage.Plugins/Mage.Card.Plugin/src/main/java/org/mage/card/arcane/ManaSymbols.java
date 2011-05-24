@@ -25,7 +25,7 @@ public class ManaSymbols {
 
 	private static final String[] sets = {"DIS", "GPT", "RAV", "MRD",
 			"10E", "HOP", "ALA", "CFX", "ARB", "ZEN", "WWK", "ROE", "SOM", "M10", "M11",
-			"MBS", "DDF", "DST", "EVE", "APC"};
+			"MBS", "DDF", "DST", "EVE", "APC", "NPH"};
 
 
 	static public void loadImages() {
