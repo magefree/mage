@@ -25,25 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.tenth;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -53,83 +48,32 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class UnholyStrength extends CardImpl<UnholyStrength> {
 
-	public UnholyStrength(UUID ownerId) {
-		super(ownerId, 185, "Unholy Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
-		this.expansionSetCode = "10E";
-		this.color.setBlack(true);
-		this.subtype.add("Aura");
+    public UnholyStrength(UUID ownerId) {
+        super(ownerId, 185, "Unholy Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
+        this.expansionSetCode = "10E";
+        this.color.setBlack(true);
+        this.subtype.add("Aura");
 
-		TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnholyStrengthEffect()));
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 1, Duration.WhileOnBattlefield)));
 
-	}
+    }
 
-	public UnholyStrength(final UnholyStrength card) {
-		super(card);
-	}
+    public UnholyStrength(final UnholyStrength card) {
+        super(card);
+    }
 
-	@Override
-	public UnholyStrength copy() {
-		return new UnholyStrength(this);
-	}
+    @Override
+    public UnholyStrength copy() {
+        return new UnholyStrength(this);
+    }
 
-	@Override
-	public String getArt() {
-		return "104535_typ_reg_sty_010.jpg";
-	}
-}
-
-class UnholyStrengthEffect extends ContinuousEffectImpl<UnholyStrengthEffect> {
-
-	public UnholyStrengthEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-	}
-
-	public UnholyStrengthEffect(final UnholyStrengthEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public UnholyStrengthEffect copy() {
-		return new UnholyStrengthEffect(this);
-	}
-
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-			if (creature != null) {
-				switch (layer) {
-					case PTChangingEffects_7:
-						if (sublayer == SubLayer.ModifyPT_7c) {
-							creature.addPower(2);
-							creature.addToughness(1);
-						}
-						break;
-				}
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
-
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.PTChangingEffects_7;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Enchanted creature gets +2/+1";
-	}
+    @Override
+    public String getArt() {
+        return "104535_typ_reg_sty_010.jpg";
+    }
 }
