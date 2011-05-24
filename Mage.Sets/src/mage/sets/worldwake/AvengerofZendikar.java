@@ -42,6 +42,7 @@ import mage.abilities.effects.common.counter.AddPlusOneCountersControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.PlantToken;
 import mage.game.permanent.token.Token;
@@ -82,7 +83,7 @@ public class AvengerofZendikar extends CardImpl<AvengerofZendikar> {
 }
 
 class AvengerofZendikarTokensCreateEffect extends OneShotEffect<AvengerofZendikarTokensCreateEffect> {
-    private static FilterPermanent filter = new FilterPermanent();
+    private static FilterControlledPermanent filter = new FilterControlledPermanent();
     private Token token = new PlantToken();
 
     static {
