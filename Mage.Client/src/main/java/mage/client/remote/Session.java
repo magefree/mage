@@ -143,14 +143,8 @@ public class Session {
 			reconnecting = false;
 			connecting = false;
 			return true;
-		} catch (MageException ex) {
+		} catch (Exception ex) {
 			logger.fatal("", ex);
-			if (!reconnecting) {
-				disconnect(false);
-				JOptionPane.showMessageDialog(frame, "Unable to connect to server. "  + ex.getMessage());
-			}
-		} catch (RemoteException ex) {
-			logger.fatal("Unable to connect to server - ", ex);
 			if (!reconnecting) {
 				disconnect(false);
 				JOptionPane.showMessageDialog(frame, "Unable to connect to server. "  + ex.getMessage());
@@ -160,6 +154,8 @@ public class Session {
 	}
 	
 	public synchronized void disconnect(boolean voluntary) {
+		if (connection == null)
+			return;
 		if (reconnecting)
 			return;
 		if (future != null && !future.isDone())
@@ -215,14 +211,9 @@ public class Session {
 	}
 
 
-	private UUID registerClient(String userName, UUID clientId, MageVersion version) throws MageException {
+	private UUID registerClient(String userName, UUID clientId, MageVersion version) throws MageException, ServerUnavailable {
 		RegisterClient method = new RegisterClient(connection, userName, clientId, version);
-		try {
-			return method.makeCall();
-		} catch (ServerUnavailable ex) {
-			logger.fatal("server unavailable - ", ex);
-		}
-		return null;
+		return method.makeCall();
 	}
 
 	private void deregisterClient() throws MageException {
