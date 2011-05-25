@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -67,7 +68,7 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect<PutLibraryInt
 			for (int i = 0; i < cardsCount; i++) {
 				Card card = player.getLibrary().removeFromTop(game);
 				if (card != null)
-					player.getGraveyard().add(card);
+					card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
 				else
 					break;
 			}

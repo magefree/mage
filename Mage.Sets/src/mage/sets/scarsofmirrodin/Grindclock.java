@@ -88,10 +88,11 @@ class GrindclockEffect extends OneShotEffect<GrindclockEffect> {
 		Card card;
 		for (int i = 0; i < amount; i++) {
 			card = player.getLibrary().removeFromTop(game);
-			if (card != null)
-				player.getGraveyard().add(card);
-			else
+			if (card != null) {
+				card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+			} else {
 				break;
+			}
 		}
 		return true;
     }

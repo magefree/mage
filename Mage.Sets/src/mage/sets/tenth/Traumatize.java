@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -86,10 +87,11 @@ class TraumatizeEffect extends OneShotEffect<TraumatizeEffect> {
 		int amount = player.getLibrary().size() / 2;
 		for (int i = 0; i < amount; i++) {
 			card = player.getLibrary().removeFromTop(game);
-			if (card != null)
-				player.getGraveyard().add(card);
-			else
+			if (card != null) {
+				card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+			} else {
 				break;
+			}
 		}
 		return true;
 	}

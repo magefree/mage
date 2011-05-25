@@ -212,10 +212,11 @@ class JaceTheMindSculptorEffect3 extends OneShotEffect<JaceTheMindSculptorEffect
 					break;
 				Card card = player.getLibrary().removeFromTop(game);
 				exile.add(card);
+				game.setZone(card.getId(), Zone.EXILED);
 			}
-			player.getLibrary().addAll(player.getHand().getCards(game), game);
-			player.getLibrary().shuffle();
-			player.getHand().clear();
+			for (Card card : player.getHand().getCards(game)) {
+				card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+			}
 			return true;
 		}
 		return false;
