@@ -59,6 +59,7 @@ import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.game.turn.BeginCombatStep;
@@ -703,8 +704,11 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 				if (i < combat.getGroups().size()) {
 					for (UUID blockerId: combat.getGroups().get(i).getBlockers()) {
 						this.declareBlocker(blockerId, groups.get(i).getAttackers().get(0), game);
-						if (logger.isDebugEnabled())
-							logger.debug("blocking with:" + game.getPermanent(blockerId).getName());
+						if (logger.isDebugEnabled()) {
+							Permanent blocker = game.getPermanent(blockerId);
+							if (blocker != null)
+								logger.debug("blocking with:" + blocker.getName());
+						}
 					}
 				}
 			}

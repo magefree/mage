@@ -737,8 +737,11 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 			UUID opponentId = game.getCombat().getDefenders().iterator().next();
 			String attackers = "";
 			for (UUID attackerId: combat.getAttackers()) {
-				attackers = "[" + game.getCard(attackerId).getName() + "]";
-				this.declareAttacker(attackerId, opponentId, game);
+				Permanent attacker = game.getPermanent(attackerId);
+				if (attacker != null) {
+					attackers = "[" + attacker.getName() + "]";
+					this.declareAttacker(attackerId, opponentId, game);
+				}
 			}
 			logger.info("declare attackers: " + (attackers.isEmpty() ? "none" : attackers));
 		}
