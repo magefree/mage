@@ -1,5 +1,5 @@
 |Adventuring Gear|Zendikar|C|178135|195|
-|Æther Figment|Zendikar|U|170993|40|
+|AEther Figment|Zendikar|U|170993|40|
 |Akoum Refuge|Zendikar|U|189638|210|
 |Archive Trap|Zendikar|R|197538|41|
 |Archmage Ascension|Zendikar|R|197893|42|
