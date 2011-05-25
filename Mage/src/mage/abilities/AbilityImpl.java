@@ -31,10 +31,12 @@ package mage.abilities;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import mage.Constants.AbilityType;
 import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -51,6 +53,7 @@ import mage.choices.Choices;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.Targets;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -161,8 +164,11 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 			return false;
 		}
 		//20100716 - 601.2e
-		if (game.getObject(sourceId) != null)
-			game.getObject(sourceId).adjustCosts(this, game);
+		if (game.getObject(sourceId) != null) {
+			//game.getObject(sourceId).adjustCosts(this, game);
+			game.getCard(sourceId).adjustCosts(this, game);
+		}
+		
 		if (!useAlternativeCost(game)) {
 			//20101001 - 601.2e
 			game.getContinuousEffects().costModification(this, game);
