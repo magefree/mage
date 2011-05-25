@@ -236,6 +236,8 @@ $knownSets{'MRD'} = 'mirrodin';
 $knownSets{'DDF'} = 'elspethvstezzeret';
 $knownSets{'MBS'} = 'mirrodinbesieged';
 $knownSets{'NPH'} = 'newphyrexia';
+$knownSets{'TMP'} = 'tempest';
+$knownSets{'CHK'} = 'championsofkamigawa';
 
 my %raritiesConversion;
 $raritiesConversion{'C'} = 'COMMON';

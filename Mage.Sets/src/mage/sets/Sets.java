@@ -66,6 +66,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
 		cards = new ArrayList<Card>();
 		this.addSet(AlaraReborn.getInstance());
         this.addSet(Apocalypse.getInstance());
+        this.addSet(ChampionsOfKamigawa.getInstance());
 		this.addSet(Conflux.getInstance());
         this.addSet(Darksteel.getInstance());
         this.addSet(Dissension.getInstance());
@@ -84,6 +85,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
 		this.addSet(ShardsOfAlara.getInstance());
         this.addSet(ScarsOfMirrodin.getInstance());
 		this.addSet(Tenth.getInstance());
+        this.addSet(Tempest.getInstance());
 		this.addSet(Worldwake.getInstance());
 		this.addSet(Zendikar.getInstance());
 	}
