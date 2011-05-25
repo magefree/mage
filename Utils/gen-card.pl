@@ -125,6 +125,7 @@ $fulltoshort{'Scars of Mirrodin'} = 'SOM';
 $fulltoshort{'From the Vault: Relics'} = 'FVR';
 $fulltoshort{'Duel Decks: Elspeth vs. Tezzeret'} = 'DDF';
 $fulltoshort{'Mirrodin Besieged'} = 'MBS';
+$fulltoshort{'New Phyrexia'} = 'NPH';
 
 my %wizardstous;
 $wizardstous{'6E'} = '6ED';
@@ -211,9 +212,11 @@ $wizardstous{'SOM'} = 'SOM';
 $wizardstous{'V10'} = 'FVR';
 $wizardstous{'DDF'} = 'DDF';
 $wizardstous{'MBS'} = 'MBS';
+$wizardstous{'NPH'} = 'NPH';
 
 my %knownSets;
 $knownSets{'ARB'} = 'alarareborn';
+$knownSets{'APC'} = 'apocalypse';
 $knownSets{'CON'} = 'conflux';
 $knownSets{'DST'} = 'darksteel';
 $knownSets{'EVE'} = 'eventide';
@@ -232,6 +235,7 @@ $knownSets{'DIS'} = 'dissension';
 $knownSets{'MRD'} = 'mirrodin';
 $knownSets{'DDF'} = 'elspethvstezzeret';
 $knownSets{'MBS'} = 'mirrodinbesieged';
+$knownSets{'NPH'} = 'newphyrexia';
 
 my %raritiesConversion;
 $raritiesConversion{'C'} = 'COMMON';

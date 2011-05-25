@@ -93,7 +93,12 @@ public class PhyrexianRebirth extends CardImpl<PhyrexianRebirth> {
 		public PhyrexianRebirthEffect copy() {
 			return new PhyrexianRebirthEffect(this);
 		}
-	}
+
+        @Override
+        public String getText(Ability source) {
+            return "Destroy all creatures, then put an X/X colorless Horror artifact creature token onto the battlefield, where X is the number of creatures destroyed this way";
+        }
+    }
 
 class HorrorToken extends Token {
     public HorrorToken() {

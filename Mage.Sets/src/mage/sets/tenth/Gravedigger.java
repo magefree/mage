@@ -36,6 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -53,7 +54,7 @@ public class Gravedigger extends CardImpl<Gravedigger> {
 		this.toughness = new MageInt(2);
 
 		Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
-		ability.addTarget(new TargetCardInYourGraveyard());
+		ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
 		this.addAbility(ability);
 	}
 

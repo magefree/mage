@@ -27,22 +27,16 @@
  */
 package mage.sets.zendikar;
 
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfControllerUpkeepTriggeredAbility;
-import mage.abilities.condition.common.MyTurn;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.condition.common.Unless;
 import mage.abilities.condition.common.TenOrLessLife;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.LoseLifeSourceEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 import static mage.abilities.condition.common.TenOrLessLife.CheckType.*;
 

@@ -80,7 +80,7 @@ public class NimbusWings extends CardImpl<NimbusWings> {
 class NimbusWingsEffect extends ContinuousEffectImpl<NimbusWingsEffect> {
 
     public NimbusWingsEffect() {
-        super(Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
     }
 
     public NimbusWingsEffect(final NimbusWingsEffect effect) {

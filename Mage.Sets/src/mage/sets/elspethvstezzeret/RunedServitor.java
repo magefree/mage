@@ -28,28 +28,17 @@
 package mage.sets.elspethvstezzeret;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.DrawCardAllEffect;
-import mage.cards.CardImpl;
 
 /**
  *
  * @author North
  */
-public class RunedServitor extends CardImpl<RunedServitor> {
+public class RunedServitor extends mage.sets.riseoftheeldrazi.RunedServitor {
 
     public RunedServitor(UUID ownerId) {
-        super(ownerId, 42, "Runed Servitor", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
-        this.expansionSetCode = "DDF";
-        this.subtype.add("Construct");
-
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DrawCardAllEffect(1), false));
+        super(ownerId);
+        this.cardNumber = 42;
+        this.expansionSetCode = "ROE";
     }
 
     public RunedServitor(final RunedServitor card) {

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.continious;
 
 import mage.Constants.Duration;
@@ -33,6 +32,8 @@ import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -43,44 +44,47 @@ import mage.game.permanent.Permanent;
  */
 public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
 
-	private int power;
-	private int toughness;
+    private DynamicValue power;
+    private DynamicValue toughness;
 
-	public BoostTargetEffect(int power, int toughness, Duration duration) {
-		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-		this.power = power;
-		this.toughness = toughness;
-	}
+    public BoostTargetEffect(int power, int toughness, Duration duration) {
+        this(new StaticValue(power), new StaticValue(toughness), duration);
+    }
 
-	public BoostTargetEffect(final BoostTargetEffect effect) {
-		super(effect);
-		this.power = effect.power;
-		this.toughness = effect.toughness;
-	}
+    public BoostTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
+        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+        this.power = power;
+        this.toughness = toughness;
+    }
 
-	@Override
-	public BoostTargetEffect copy() {
-		return new BoostTargetEffect(this);
-	}
+    public BoostTargetEffect(final BoostTargetEffect effect) {
+        super(effect);
+        this.power = effect.power.clone();
+        this.toughness = effect.toughness.clone();
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Permanent target = (Permanent) game.getPermanent(source.getFirstTarget());
-		if (target != null) {
-			target.addPower(power);
-			target.addToughness(toughness);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public BoostTargetEffect copy() {
+        return new BoostTargetEffect(this);
+    }
 
-	@Override
-	public String getText(Ability source) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("target ").append(source.getTargets().get(0).getTargetName()).append(" gets ");
-		sb.append(String.format("%1$+d/%2$+d", power, toughness)).append(" ").append(duration.toString());
-		return sb.toString();
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent target = (Permanent) game.getPermanent(source.getFirstTarget());
+        if (target != null) {
+            target.addPower(power.calculate(game, source));
+            target.addToughness(toughness.calculate(game, source));
+            return true;
+        }
+        return false;
+    }
 
-
+    @Override
+    public String getText(Ability source) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("target ").append(source.getTargets().get(0).getTargetName()).append(" gets ");
+        sb.append(power.toString()).append("/").append(toughness.toString());
+        sb.append(" ").append(duration.toString());
+        return sb.toString();
+    }
 }

@@ -113,6 +113,7 @@
 |Acorn Harvest|Torment|C|29873|118|
 |Acquire|Fifth Dawn|R|51088|21|
 |Acridian|Urza's Saga|C|5865|230|
+|Act of Aggression|New Phyrexia|U|230076|78|
 |Act of Treason|Magic 2011|C|205072|121|
 |Act of Treason|Magic 2010|U|205072|124|
 |Active Volcano|Chronicles|C|201098||
@@ -282,7 +283,8 @@
 |Alabaster Potion|Legends|C|201118||
 |Alabaster Potion|Masters Edition III|U|201118|2|
 |Alabaster Wall|Mercadian Masques|C|19541|2|
-|Alaborn Cavalier|Portal Second Age|U|6506||
+|Alaborn Cavalier|Portal Second Age|U|243435||
+|Alaborn Cavalier|Duel Decks: Knights vs. Dragons|U|243435|18|
 |Alaborn Grenadier|Portal Second Age|C|6508||
 |Alaborn Musketeer|Portal Second Age|C|221493||
 |Alaborn Musketeer|Masters Edition IV|C|221493|1|
@@ -333,6 +335,7 @@
 |Allosaurus Rider|Duel Decks: Elves vs. Goblins|R|158100|2|
 |Allosaurus Rider|Coldsnap|R|158100|101|
 |Alloy Golem|Invasion|U|23224|297|
+|Alloy Myr|New Phyrexia|U|214344|129|
 |Alluring Scent|Portal Second Age|R|221494||
 |Alluring Scent|Portal|R|221494||
 |Alluring Scent|Starter 1999|R|221494|124|
@@ -587,6 +590,7 @@
 |Apocalypse|Tempest|R|4802||
 |Apocalypse Chime|Homelands|R|2900||
 |Apocalypse Hydra|Conflux|M|183068|98|
+|Apostle's Blessing|New Phyrexia|C|194208|2|
 |Apothecary Initiate|Shadowmoor|C|141929|1|
 |Apprentice Necromancer|Urza's Destiny|R|14442|51|
 |Apprentice Sorcerer|Portal Second Age|U|6535||
@@ -688,6 +692,7 @@
 |Arena of the Ancients|Masters Edition III|R|201209|188|
 |Arenson's Aura|Fifth Edition|U|4103||
 |Arenson's Aura|Ice Age|C|4103||
+|Argent Mutation|New Phyrexia|U|218001|27|
 |Argent Sphinx|Scars of Mirrodin|R|215085|28|
 |Argentum Armor|Scars of Mirrodin|R|217967|137|
 |Argivian Archaeologist|Antiquities|R|159743||
@@ -709,6 +714,7 @@
 |Argothian Wurm|Urza's Saga|R|5769|236|
 |Arid Mesa|Zendikar|R|177584|211|
 |Ark of Blight|Scourge|U|47281|140|
+|Arm with Æther|New Phyrexia|U|202641|28|
 |Armadillo Cloak|Duel Decks: Phyrexia vs. the Coalition|C|220498|58|
 |Armadillo Cloak|Archenemy|C|220498|78|
 |Armadillo Cloak|Invasion|C|220498|229|
@@ -730,7 +736,8 @@
 |Armageddon Clock|Masters Edition IV|R|202414|180|
 |Armament Master|Zendikar|R|190420|1|
 |Armed Response|Fifth Dawn|C|73566|2|
-|Armillary Sphere|Conflux|C|137936|134|
+|Armillary Sphere|Duel Decks: Knights vs. Dragons|C|243480|62|
+|Armillary Sphere|Conflux|C|243480|134|
 |Armistice|Mercadian Masques|R|19661|3|
 |Armor of Faith|Fifth Edition|C|184726||
 |Armor of Faith|Ice Age|C|184726||
@@ -780,6 +787,7 @@
 |Artifact Ward|Antiquities|C|1066||
 |Artificer's Intuition|Fifth Dawn|R|50172|23|
 |Artificial Evolution|Onslaught|R|39923|67|
+|Artillerize|New Phyrexia|C|218081|79|
 |Artisan of Kozilek|Rise of the Eldrazi|U|220553|2|
 |Artisan of Kozilek|Archenemy|U|220553|123|
 |Ascendant Evincar|Planechase|R|205263|17|
@@ -901,6 +909,7 @@
 |Auriok Siege Sled|Darksteel|U|43556|105|
 |Auriok Steelshaper|Mirrodin|R|46081|4|
 |Auriok Sunchaser|Scars of Mirrodin|C|208249|4|
+|Auriok Survivors|New Phyrexia|U|214353|3|
 |Auriok Transfixer|Mirrodin|C|45963|5|
 |Auriok Windwalker|Fifth Dawn|R|46175|5|
 |Aurochs|Fifth Edition|C|184712||
@@ -1215,6 +1224,7 @@
 |Battering Ram|Antiquities|C|3765||
 |Battering Sliver|Planar Chaos|C|126015|95|
 |Battering Wurm|Guildpact|U|96964|79|
+|Batterskull|New Phyrexia|M|233055|130|
 |Battery|Planechase|U|205409|103|
 |Battery|Time Spiral "Timeshifted"|S|205409|106|
 |Battery|Invasion|U|205409|295|
@@ -1287,6 +1297,7 @@
 |Beast of Burden|Ninth Edition|R|83002|288|
 |Beast of Burden|Eighth Edition|R|83002|292|
 |Beast Walkers|Homelands|R|3017||
+|Beast Within|New Phyrexia|U|221533|103|
 |Beastbreaker of Bala Ged|Rise of the Eldrazi|U|193638|178|
 |Beastmaster Ascension|Zendikar|R|197890|159|
 |Beastmaster's Magemark|Guildpact|C|107689|80|
@@ -1328,7 +1339,8 @@
 |Benalish Infantry|Weatherlight|C|4570||
 |Benalish Knight|Weatherlight|C|136279||
 |Benalish Knight|Tenth Edition|C|136279|11|
-|Benalish Lancer|Invasion|C|22932|7|
+|Benalish Lancer|Invasion|C|243429|7|
+|Benalish Lancer|Duel Decks: Knights vs. Dragons|C|243429|12|
 |Benalish Missionary|Weatherlight|C|4572||
 |Benalish Trapper|Invasion|C|22937|8|
 |Ben-Ben, Akki Hermit|Champions of Kamigawa|R|79248|157|
@@ -1399,6 +1411,7 @@
 |Birds of Paradise|Tenth Edition|R|207334|252|
 |Birds of Paradise Avatar|Vanguard|S|182291|8|
 |Birds of Paradise Avatar|Vanguard|S|182291|107|
+|Birthing Pod|New Phyrexia|R|218006|104|
 |Biting Tether|Shadowmoor|U|135485|29|
 |Bitter Ordeal|Future Sight|R|136049|80|
 |Bitterblossom|Morningtide|R|152648|58|
@@ -1444,6 +1457,7 @@
 |Blade of the Bloodchief|Zendikar|R|193397|196|
 |Blade of the Sixth Pride|Future Sight|C|130676|19|
 |Blade Sliver|Legions|U|42016|88|
+|Blade Splicer|New Phyrexia|R|233068|4|
 |Bladed Pinions|Scars of Mirrodin|C|206354|140|
 |Bladed Sentinel|Mirrodin Besieged|C|214049|98|
 |Blademane Baku|Betrayers of Kamigawa|C|74535|95|
@@ -1514,6 +1528,7 @@
 |Blight|Classic Sixth Edition|U|159769|113|
 |Blight Mamba|Scars of Mirrodin|C|194158|112|
 |Blight Sickle|Shadowmoor|C|129135|247|
+|Blighted Agent|New Phyrexia|C|214383|29|
 |Blighted Shaman|Mirage|U|15385||
 |Blighted Shaman|Classic Sixth Edition|U|15385|114|
 |Blightning|Shards of Alara|C|174917|156|
@@ -1527,6 +1542,7 @@
 |Blind Phantasm|Future Sight|C|126143|49|
 |Blind Seer|Invasion|R|23006|47|
 |Blind with Anger|Champions of Kamigawa|U|77925|158|
+|Blind Zealot|New Phyrexia|C|217999|52|
 |Blinding Angel|Nemesis|R|83007|3|
 |Blinding Angel|Ninth Edition|R|83007|7|
 |Blinding Angel|Eighth Edition|R|83007|8|
@@ -1539,6 +1555,7 @@
 |Blinding Mage|Magic 2010|C|205219|5|
 |Blinding Mage|Magic 2011|C|205219|8|
 |Blinding Powder|Betrayers of Kamigawa|U|81989|153|
+|Blinding Souleater|New Phyrexia|C|233045|131|
 |Blind-Spot Giant|Lorwyn|C|146597|153|
 |Blinking Spirit|Battle Royale Box Set|R|83962||
 |Blinking Spirit|Fifth Edition|R|83962||
@@ -1610,7 +1627,8 @@
 |Bloodletter|Unhinged|C|73979|50|
 |Bloodletter Quill|Ravnica: City of Guilds|R|83928|254|
 |Bloodline Shaman|Onslaught|U|39903|249|
-|Bloodmark Mentor|Shadowmoor|U|142062|83|
+|Bloodmark Mentor|Duel Decks: Knights vs. Dragons|U|243467|50|
+|Bloodmark Mentor|Shadowmoor|U|243467|83|
 |Bloodpyre Elemental|Shards of Alara|C|175117|93|
 |Bloodrite Invoker|Rise of the Eldrazi|C|193538|97|
 |Bloodrock Cyclops|Beatdown Box Set|C|130384||
@@ -1634,6 +1652,7 @@
 |Bloom Tender|Eventide|R|158901|66|
 |Blossoming Wreath|Weatherlight|C|4508||
 |Blowfly Infestation|Shadowmoor|U|135429|58|
+|Bludgeon Brawl|New Phyrexia|R|218055|80|
 |Blue Elemental Blast|Fourth Edition|C|202520||
 |Blue Elemental Blast|Revised Edition|C|202520||
 |Blue Elemental Blast|Unlimited Edition|C|202520||
@@ -1704,13 +1723,15 @@
 |Bogardan Firefiend|Weatherlight|C|205265||
 |Bogardan Firefiend|Planechase|C|205265|48|
 |Bogardan Firefiend|Tenth Edition|C|205265|193|
-|Bogardan Hellkite|From the Vault: Dragons|R|191340|2|
-|Bogardan Hellkite|Magic 2010|M|191340|127|
-|Bogardan Hellkite|Time Spiral|R|191340|147|
+|Bogardan Hellkite|From the Vault: Dragons|R|243464|2|
+|Bogardan Hellkite|Duel Decks: Knights vs. Dragons|M|243464|47|
+|Bogardan Hellkite|Magic 2010|M|243464|127|
+|Bogardan Hellkite|Time Spiral|R|243464|147|
 |Bogardan Lancer|Future Sight|C|126161|95|
 |Bogardan Phoenix|Visions|R|3683||
-|Bogardan Rager|Planechase|C|205407|49|
-|Bogardan Rager|Time Spiral|C|205407|148|
+|Bogardan Rager|Planechase|C|243475|49|
+|Bogardan Rager|Duel Decks: Knights vs. Dragons|C|243475|57|
+|Bogardan Rager|Time Spiral|C|243475|148|
 |Boggart Arsonists|Shadowmoor|C|158684|85|
 |Boggart Birth Rite|Lorwyn|C|142359|101|
 |Boggart Forager|Lorwyn|C|146168|154|
@@ -1895,8 +1916,9 @@
 |Breaking Point|Judgment|R|29856|81|
 |Breaking Wave|Invasion|R|23012|48|
 |Breakthrough|Torment|U|29927|26|
-|Breath of Darigaaz|Archenemy|U|220499|31|
-|Breath of Darigaaz|Invasion|U|220499|138|
+|Breath of Darigaaz|Archenemy|U|243482|31|
+|Breath of Darigaaz|Duel Decks: Knights vs. Dragons|U|243482|64|
+|Breath of Darigaaz|Invasion|U|243482|138|
 |Breath of Dreams|Ice Age|U|2498||
 |Breath of Fury|Ravnica: City of Guilds|R|89099|116|
 |Breath of Life|Starter 2000|U|13112||
@@ -2001,6 +2023,7 @@
 |Brutal Deceiver|Champions of Kamigawa|C|76638|161|
 |Brutal Nightstalker|Portal Second Age|U|6566||
 |Brutal Suppression|Prophecy|U|24635|85|
+|Brutalizer Exarch|New Phyrexia|U|217998|105|
 |Brute Force|Planar Chaos|C|122373|116|
 |Bubble Matrix|Weatherlight|R|4430||
 |Bubbling Beebles|Urza's Destiny|C|15783|29|
@@ -2090,6 +2113,7 @@
 |Cadaverous Knight|Mirage|C|205423||
 |Cadaverous Knight|Planechase|C|205423|20|
 |Cage of Hands|Champions of Kamigawa|C|50233|3|
+|Caged Sun|New Phyrexia|R|214345|132|
 |Cagemail|Judgment|C|36429|7|
 |Cairn Wanderer|Lorwyn|R|140171|105|
 |Calciderm|Planar Chaos|U|122360|23|
@@ -2171,7 +2195,8 @@
 |Captain's Maneuver|Apocalypse|U|205382|92|
 |Captivating Glance|Lorwyn|U|146172|55|
 |Captivating Vampire|Magic 2011|R|205041|87|
-|Captive Flame|Saviors of Kamigawa|U|88810|96|
+|Captive Flame|Duel Decks: Knights vs. Dragons|U|243485|68|
+|Captive Flame|Saviors of Kamigawa|U|243485|96|
 |Capture of Jingzhou|Masters Edition III|R|201135|33|
 |Capture of Jingzhou|Portal Three Kingdoms|R|201135|38|
 |Captured Sunlight|Alara Reborn|C|185064|66|
@@ -2180,7 +2205,8 @@
 |Carapace|Homelands|C|184777||
 |Carapace|Masters Edition II|C|184777|155|
 |Carapace Forger|Scars of Mirrodin|C|208250|114|
-|Caravan Escort|Rise of the Eldrazi|C|194918|15|
+|Caravan Escort|Duel Decks: Knights vs. Dragons|C|243418|2|
+|Caravan Escort|Rise of the Eldrazi|C|243418|15|
 |Caravan Hurda|Zendikar|C|185697|5|
 |Carbonize|Scourge|U|47226|83|
 |Cardboard Carapace|Unglued|R|9762|54|
@@ -2188,6 +2214,7 @@
 |Careful Consideration|Time Spiral|U|109691|52|
 |Careful Study|Odyssey|C|29727|70|
 |Caregiver|Ravnica: City of Guilds|C|83612|6|
+|Caress of Phyrexia|New Phyrexia|U|218061|53|
 |Caribou Range|Fifth Edition|R|184607||
 |Caribou Range|Ice Age|R|184607||
 |Caribou Range|Masters Edition II|R|184607|8|
@@ -2263,6 +2290,7 @@
 |Cateran Summons|Mercadian Masques|U|19832|126|
 |Caterwauling Boggart|Lorwyn|C|139471|157|
 |Cathartic Adept|Shards of Alara|C|176433|34|
+|Cathedral Membrane|New Phyrexia|U|218024|5|
 |Cathedral of Serra|Legends|U|1699||
 |Cathodion|Mirrodin|U|48195|149|
 |Cathodion|Urza's Saga|U|48195|287|
@@ -2369,6 +2397,7 @@
 |Chain Reaction|Worldwake|R|201573|74|
 |Chain Stasis|Homelands|R|2937||
 |Chainbreaker|Shadowmoor|C|147419|249|
+|Chained Throatseeker|New Phyrexia|C|218075|30|
 |Chainer, Dementia Master|Torment|R|32916|56|
 |Chainer's Edict|Torment|U|29603|57|
 |Chainflinger|Odyssey|C|29755|181|
@@ -2386,6 +2415,11 @@
 |Champion's Drake|Rise of the Eldrazi|C|193440|56|
 |Champion's Victory|Portal Three Kingdoms|U|10593|39|
 |Chance Encounter|Odyssey|R|29978|182|
+|Chancellor of the Annex|New Phyrexia|R|218083|6|
+|Chancellor of the Dross|New Phyrexia|R|218020|54|
+|Chancellor of the Forge|New Phyrexia|R|218021|81|
+|Chancellor of the Spires|New Phyrexia|R|214360|31|
+|Chancellor of the Tangle|New Phyrexia|R|218062|106|
 |Chandler|Homelands|C|2997||
 |Chandra Ablaze|Zendikar|M|195402|120|
 |Chandra Nalaar|Duel Decks: Jace vs. Chandra|M|205958|34|
@@ -2542,8 +2576,9 @@
 |Cinder Shade|Invasion|U|23172|240|
 |Cinder Storm|Masters Edition III|U|201323|91|
 |Cinder Storm|Starter 1999|U|201323|93|
-|Cinder Wall|Weatherlight|C|45341||
-|Cinder Wall|Eighth Edition|C|45341|182|
+|Cinder Wall|Weatherlight|C|243466||
+|Cinder Wall|Duel Decks: Knights vs. Dragons|C|243466|48|
+|Cinder Wall|Eighth Edition|C|243466|182|
 |Cinderbones|Shadowmoor|C|142051|59|
 |Cinderhaze Wretch|Shadowmoor|C|135439|60|
 |Circle of Affliction|Planar Chaos|U|126803|66|
@@ -2646,7 +2681,8 @@
 |Clash of Realities|Betrayers of Kamigawa|R|74598|97|
 |Claws of Gix|Time Spiral "Timeshifted"|S|109690|107|
 |Claws of Gix|Urza's Saga|U|109690|290|
-|Claws of Valakut|Worldwake|C|193975|75|
+|Claws of Valakut|Duel Decks: Knights vs. Dragons|C|243489|72|
+|Claws of Valakut|Worldwake|C|243489|75|
 |Claws of Wirewood|Scourge|U|43541|114|
 |Clay Pigeon|Unglued|U|9766|73|
 |Clay Statue|Fifth Edition|C|202513||
@@ -2870,10 +2906,11 @@
 |Condemn|Tenth Edition|U|205098|13|
 |Condescend|Fifth Dawn|C|189237|27|
 |Condescend|Duel Decks: Jace vs. Chandra|C|189237|28|
-|Cone of Flame|Weatherlight|U|205266||
-|Cone of Flame|Planechase|U|205266|52|
-|Cone of Flame|Duel Decks: Jace vs. Chandra|U|205266|54|
-|Cone of Flame|Tenth Edition|U|205266|194|
+|Cone of Flame|Weatherlight|U|243492||
+|Cone of Flame|Planechase|U|243492|52|
+|Cone of Flame|Duel Decks: Jace vs. Chandra|U|243492|54|
+|Cone of Flame|Duel Decks: Knights vs. Dragons|U|243492|75|
+|Cone of Flame|Tenth Edition|U|243492|194|
 |Confessor|Odyssey|C|31769|15|
 |Confiscate|Seventh Edition|U|83037|65|
 |Confiscate|Urza's Saga|U|83037|66|
@@ -2961,6 +2998,7 @@
 |Conversion|Limited Edition Beta|U|202543||
 |Conversion|Limited Edition Alpha|U|202543||
 |Conversion|Masters Edition IV|R|202543|9|
+|Conversion Chamber|New Phyrexia|U|230070|133|
 |Conviction|Stronghold|C|5127||
 |Convincing Mirage|Magic 2010|C|190161|46|
 |Convolute|Ravnica: City of Guilds|C|88998|41|
@@ -3015,6 +3053,7 @@
 |Corpsehatch|Rise of the Eldrazi|U|193625|103|
 |Corpulent Corpse|Time Spiral|C|108910|98|
 |Corrosion|Visions|R|3735||
+|Corrosive Gale|New Phyrexia|U|230075|107|
 |Corrosive Mentor|Shadowmoor|U|142034|61|
 |Corrupt|Duel Decks: Divine vs. Demonic|U|207106|55|
 |Corrupt|Duel Decks: Garruk vs. Liliana|U|207106|57|
@@ -3028,6 +3067,7 @@
 |Corrupt Official|Mercadian Masques|R|19715|128|
 |Corrupted Conscience|Mirrodin Besieged|U|214043|22|
 |Corrupted Harvester|Scars of Mirrodin|U|202640|59|
+|Corrupted Resolve|New Phyrexia|U|233080|32|
 |Corrupted Roots|Conflux|U|183054|41|
 |Corrupted Zendikon|Worldwake|C|197874|55|
 |Corrupting Licid|Stronghold|U|5128||
@@ -3482,6 +3522,7 @@
 |Darksteel Pendant|Darksteel|C|39485|113|
 |Darksteel Plate|Mirrodin Besieged|R|213749|104|
 |Darksteel Reactor|Darksteel|R|43548|114|
+|Darksteel Relic|New Phyrexia|U|218067|134|
 |Darksteel Sentinel|Scars of Mirrodin|U|207865|152|
 |Darkwatch Elves|Urza's Legacy|U|12435|99|
 |Darkwater Catacombs|Odyssey|R|29793|319|
@@ -3614,6 +3655,7 @@
 |Deathgrip|Limited Edition Beta|U|202478||
 |Deathgrip|Limited Edition Alpha|U|202478||
 |Deathgrip|Masters Edition IV|R|202478|75|
+|Death-Hood Cobra|New Phyrexia|C|233065|108|
 |Deathknell Kami|Saviors of Kamigawa|C|74003|65|
 |Deathlace|Fourth Edition|R|2098||
 |Deathlace|Revised Edition|R|2098||
@@ -3636,6 +3678,7 @@
 |Debt of Loyalty|Weatherlight|R|4573||
 |Debtors' Knell|Guildpact|R|97193|141|
 |Decaying Soil|Odyssey|R|29955|127|
+|Deceiver Exarch|New Phyrexia|U|214365|33|
 |Deception|Portal Three Kingdoms|C|10560|73|
 |Decimate|Odyssey|R|31798|287|
 |Decimator Web|Mirrodin Besieged|R|214055|105|
@@ -3680,6 +3723,7 @@
 |Defense of the Heart|Urza's Legacy|R|12442|100|
 |Defensive Formation|Urza's Saga|U|5588|9|
 |Defensive Maneuvers|Onslaught|C|39822|23|
+|Defensive Stance|New Phyrexia|C|217987|34|
 |Defiant Elf|Legions|C|39707|123|
 |Defiant Falcon|Nemesis|C|21251|6|
 |Defiant Stand|Portal|U|4380||
@@ -3721,6 +3765,7 @@
 |Delusions of Mediocrity|Seventh Edition|R|13152|70|
 |Demand|Dissension|U|107464|157|
 |Dematerialize|Odyssey|C|29826|81|
+|Dementia Bat|New Phyrexia|C|233084|55|
 |Dementia Sliver|Time Spiral|U|109668|236|
 |Demigod of Revenge|Shadowmoor|R|153972|183|
 |Demolish|Zendikar|C|208005|121|
@@ -3816,6 +3861,7 @@
 |Desperate Gambit|Weatherlight|U|4542||
 |Desperate Research|Invasion|R|23055|100|
 |Desperate Ritual|Champions of Kamigawa|C|80275|163|
+|Despise|New Phyrexia|U|233043|56|
 |Despoil|Prophecy|C|24615|62|
 |Despondency|Urza's Saga|C|10656|129|
 |Despotic Scepter|Ice Age|R|184615||
@@ -3968,10 +4014,12 @@
 |Dismal Failure|Planar Chaos|U|129022|39|
 |Dismantle|Darksteel|U|43540|57|
 |Dismantling Blow|Invasion|C|22946|14|
+|Dismember|New Phyrexia|U|230082|57|
 |Dismiss|Tempest|U|4695||
 |Disorder|Seventh Edition|U|13136|179|
 |Disorder|Urza's Saga|U|13136|181|
 |Disorient|Magic 2010|C|190171|48|
+|Dispatch|New Phyrexia|U|218072|7|
 |Dispel|Worldwake|C|201562|26|
 |Dispeller's Capsule|Shards of Alara|C|174830|8|
 |Dispense Justice|Scars of Mirrodin|U|209015|5|
@@ -4118,8 +4166,9 @@
 |Dragon Engine|Masters Edition IV|C|221103|197|
 |Dragon Engine|Classic Sixth Edition|R|221103|282|
 |Dragon Fangs|Scourge|C|47165|117|
-|Dragon Fodder|Archenemy|C|220456|34|
-|Dragon Fodder|Shards of Alara|C|220456|97|
+|Dragon Fodder|Archenemy|C|243468|34|
+|Dragon Fodder|Duel Decks: Knights vs. Dragons|C|243468|65|
+|Dragon Fodder|Shards of Alara|C|243468|97|
 |Dragon Mage|Scourge|R|43569|87|
 |Dragon Mask|Visions|U|15437||
 |Dragon Mask|Classic Sixth Edition|U|15437|283|
@@ -4128,28 +4177,31 @@
 |Dragon Scales|Scourge|C|44400|10|
 |Dragon Shadow|Scourge|C|45155|65|
 |Dragon Tyrant|Scourge|R|43711|88|
-|Dragon Whelp|Fourth Edition|U|220477||
-|Dragon Whelp|Revised Edition|U|220477||
-|Dragon Whelp|Unlimited Edition|U|220477||
-|Dragon Whelp|Limited Edition Beta|U|220477||
-|Dragon Whelp|Limited Edition Alpha|U|220477||
-|Dragon Whelp|From the Vault: Dragons|R|220477|4|
-|Dragon Whelp|Archenemy|U|220477|35|
-|Dragon Whelp|Time Spiral "Timeshifted"|S|220477|59|
-|Dragon Whelp|Magic 2010|U|220477|133|
+|Dragon Whelp|Fourth Edition|U|243472||
+|Dragon Whelp|Revised Edition|U|243472||
+|Dragon Whelp|Unlimited Edition|U|243472||
+|Dragon Whelp|Limited Edition Beta|U|243472||
+|Dragon Whelp|Limited Edition Alpha|U|243472||
+|Dragon Whelp|From the Vault: Dragons|R|243472|4|
+|Dragon Whelp|Archenemy|U|243472|35|
+|Dragon Whelp|Duel Decks: Knights vs. Dragons|U|243472|54|
+|Dragon Whelp|Time Spiral "Timeshifted"|S|243472|59|
+|Dragon Whelp|Magic 2010|U|243472|133|
 |Dragon Wings|Scourge|C|46427|34|
 |Dragonmaster Outcast|Worldwake|M|197854|81|
-|Dragon's Claw|Darksteel|U|206327|117|
-|Dragon's Claw|Magic 2011|U|206327|205|
-|Dragon's Claw|Magic 2010|U|206327|210|
-|Dragon's Claw|Ninth Edition|U|206327|296|
-|Dragon's Claw|Tenth Edition|U|206327|322|
+|Dragon's Claw|Duel Decks: Knights vs. Dragons|U|243481|63|
+|Dragon's Claw|Darksteel|U|243481|117|
+|Dragon's Claw|Magic 2011|U|243481|205|
+|Dragon's Claw|Magic 2010|U|243481|210|
+|Dragon's Claw|Ninth Edition|U|243481|296|
+|Dragon's Claw|Tenth Edition|U|243481|322|
 |Dragon's Herald|Shards of Alara|U|175239|98|
 |Dragonskull Summit|Magic 2011|R|205089|223|
 |Dragonskull Summit|Magic 2010|R|205089|223|
 |Dragonsoul Knight|Conflux|U|186392|62|
-|Dragonspeaker Shaman|Archenemy|U|220474|36|
-|Dragonspeaker Shaman|Scourge|U|220474|89|
+|Dragonspeaker Shaman|Archenemy|U|243471|36|
+|Dragonspeaker Shaman|Duel Decks: Knights vs. Dragons|U|243471|53|
+|Dragonspeaker Shaman|Scourge|U|243471|89|
 |Dragonstalker|Scourge|U|39714|11|
 |Dragonstorm|From the Vault: Dragons|R|178015|5|
 |Dragonstorm|Time Spiral "Timeshifted"|S|178015|60|
@@ -4306,6 +4358,7 @@
 |Dual Nature|Prophecy|R|24678|112|
 |Duct Crawler|Stronghold|C|129579||
 |Duct Crawler|Tenth Edition|C|129579|198|
+|Due Respect|New Phyrexia|U|233077|8|
 |Dueling Grounds|Invasion|R|25438|245|
 |Duergar Assailant|Eventide|C|150975|136|
 |Duergar Cave-Guard|Eventide|U|153437|51|
@@ -4489,7 +4542,8 @@
 |Echoing Ruin|Darksteel|C|46155|59|
 |Echoing Truth|Darksteel|C|222735|21|
 |Echoing Truth|Duel Decks: Elspeth vs. Tezzeret|C|222735|66|
-|Edge of Autumn|Future Sight|C|126132|144|
+|Edge of Autumn|Duel Decks: Knights vs. Dragons|C|243442|25|
+|Edge of Autumn|Future Sight|C|243442|144|
 |Edge of the Divinity|Eventide|C|151155|87|
 |Edgewalker|Scourge|U|43513|137|
 |Eel Umbra|Rise of the Eldrazi|C|193495|65|
@@ -4543,6 +4597,7 @@
 |Elephant Guide|Duel Decks: Garruk vs. Liliana|U|201832|18|
 |Elephant Guide|Judgment|U|201832|111|
 |Elephant Resurgence|Prophecy|R|21382|113|
+|Elesh Norn, Grand Cenobite|New Phyrexia|M|214352|9|
 |Elf Replica|Mirrodin|C|46057|167|
 |Elf Warrior|Duel Decks: Elves vs. Goblins|C|159047|2|
 |Elfhame Palace|Duel Decks: Phyrexia vs. the Coalition|U|209112|64|
@@ -4790,8 +4845,9 @@
 |Enrage|Eighth Edition|U|83076|185|
 |Enraging Licid|Tempest|U|4811||
 |Enshrined Memories|Betrayers of Kamigawa|R|81998|124|
-|Enslave|Duel Decks: Garruk vs. Liliana|U|201816|58|
-|Enslave|Planar Chaos|U|201816|70|
+|Enslave|New Phyrexia|U|233060|58|
+|Enslave|Duel Decks: Garruk vs. Liliana|U|233060|58|
+|Enslave|Planar Chaos|U|233060|70|
 |Enslaved Dwarf|Torment|C|32917|96|
 |Enslaved Horror|Mercadian Masques|U|19817|134|
 |Enslaved Scout|Alliances|C|3170||
@@ -4806,6 +4862,7 @@
 |Entangling Vines|Magic 2010|C|189901|181|
 |Enter the Dungeon|Unhinged|R|74312|53|
 |Entomb|Odyssey|R|30552|132|
+|Entomber Exarch|New Phyrexia|U|218023|59|
 |Entrails Feaster|Onslaught|R|10699|143|
 |Entropic Eidolon|Dissension|C|110641|45|
 |Entropic Specter|Exodus|R|6099|61|
@@ -4894,6 +4951,7 @@
 |Essence Vortex|Ice Age|U|2723||
 |Essence Warden|Planar Chaos|C|122428|145|
 |Etched Champion|Scars of Mirrodin|R|215099|154|
+|Etched Monstrosity|New Phyrexia|M|217996|135|
 |Etched Oracle|Planechase|U|205330|113|
 |Etched Oracle|Fifth Dawn|U|205330|121|
 |Etched Oracle Avatar|Vanguard|S|182298|44|
@@ -4951,13 +5009,14 @@
 |Evil Eye of Orms-by-Gore|Time Spiral "Timeshifted"|S|107278|42|
 |Evil Eye of Orms-by-Gore|Classic Sixth Edition|U|107278|126|
 |Evil Eye of Urborg|Time Spiral|U|83811|107|
-|Evil Presence|Fifth Edition|U|201261||
-|Evil Presence|Fourth Edition|U|201261||
-|Evil Presence|Revised Edition|U|201261||
-|Evil Presence|Unlimited Edition|U|201261||
-|Evil Presence|Limited Edition Beta|U|201261||
-|Evil Presence|Limited Edition Alpha|U|201261||
-|Evil Presence|Masters Edition III|C|201261|64|
+|Evil Presence|Fifth Edition|U|218073||
+|Evil Presence|Fourth Edition|U|218073||
+|Evil Presence|Revised Edition|U|218073||
+|Evil Presence|Unlimited Edition|U|218073||
+|Evil Presence|Limited Edition Beta|U|218073||
+|Evil Presence|Limited Edition Alpha|U|218073||
+|Evil Presence|New Phyrexia|C|218073|60|
+|Evil Presence|Masters Edition III|C|218073|64|
 |Evincar's Justice|Tempest|C|4662||
 |Eviscerator|Urza's Legacy|R|12404|52|
 |Evolution Charm|Planar Chaos|C|124047|127|
@@ -4969,6 +5028,7 @@
 |Excavator|Tempest|U|4607||
 |Excise|Prophecy|C|24553|8|
 |Exclude|Invasion|C|22986|56|
+|Exclusion Ritual|New Phyrexia|U|214364|10|
 |Excommunicate|Magic 2010|C|208273|10|
 |Excommunicate|Shards of Alara|C|208273|11|
 |Excommunicate|Magic 2011|C|208273|14|
@@ -5091,6 +5151,7 @@
 |Fallen Angel Avatar|Vanguard|S|182303|9|
 |Fallen Askari|Visions|C|3616||
 |Fallen Cleric|Onslaught|C|39849|145|
+|Fallen Ferromancer|New Phyrexia|U|227537|82|
 |Fallen Ideal|Time Spiral|U|114908|109|
 |Falling Star|Legends|R|1571||
 |Falling Timber|Planeshift|C|25945|79|
@@ -5307,7 +5368,8 @@
 |Fierce Empath|Scourge|C|220475|119|
 |Fiery Bombardment|Eventide|R|157200|52|
 |Fiery Conclusion|Ravnica: City of Guilds|C|83620|122|
-|Fiery Fall|Conflux|C|179519|63|
+|Fiery Fall|Conflux|C|243493|63|
+|Fiery Fall|Duel Decks: Knights vs. Dragons|C|243493|76|
 |Fiery Gambit|Mirrodin|R|48073|90|
 |Fiery Hellhound|Magic 2010|C|205093|135|
 |Fiery Hellhound|Magic 2011|C|205093|136|
@@ -5396,7 +5458,8 @@
 |Fireball|Masters Edition IV|U|221511|115|
 |Fireball|Magic 2010|U|221511|136|
 |Fireball|Magic 2011|U|221511|138|
-|Fire-Belly Changeling|Lorwyn|C|140338|164|
+|Fire-Belly Changeling|Duel Decks: Knights vs. Dragons|C|243469|51|
+|Fire-Belly Changeling|Lorwyn|C|243469|164|
 |Fireblast|Visions|C|234736||
 |Fireblast|Premium Deck Series: Fire and Lightning|C|234736|26|
 |Fireblast|Duel Decks: Jace vs. Chandra|C|234736|55|
@@ -5478,6 +5541,7 @@
 |Flameblast Dragon|Archenemy|R|220458|38|
 |Flameblast Dragon|Shards of Alara|R|220458|100|
 |Flameborn Hellion|Scars of Mirrodin|C|208256|89|
+|Flameborn Viron|New Phyrexia|C|233086|83|
 |Flamebreak|Darksteel|R|50539|61|
 |Flamecore Elemental|Time Spiral|C|108870|154|
 |Flamekin Bladewhirl|Lorwyn|U|140343|165|
@@ -5719,6 +5783,7 @@
 |Forced March|Mercadian Masques|R|19826|136|
 |Forced Retreat|Masters Edition III|C|201278|37|
 |Forced Retreat|Portal Three Kingdoms|C|201278|44|
+|Forced Worship|New Phyrexia|C|230083|11|
 |Forcefield|Unlimited Edition|R|159755||
 |Forcefield|Limited Edition Beta|R|159755||
 |Forcefield|Limited Edition Alpha|R|159755||
@@ -5729,184 +5794,190 @@
 |Foreshadow|Visions|U|3640||
 |Foresight|Alliances|C|3109||
 |Foresight|Alliances|C|3109||
-|Forest|Beatdown Box Set|L|214680||
-|Forest|Beatdown Box Set|L|214680||
-|Forest|Beatdown Box Set|L|214680||
-|Forest|Starter 2000|L|214680||
-|Forest|Starter 2000|L|214680||
-|Forest|Battle Royale Box Set|L|214680||
-|Forest|Battle Royale Box Set|L|214680||
-|Forest|Battle Royale Box Set|L|214680||
-|Forest|Battle Royale Box Set|L|214680||
-|Forest|Battle Royale Box Set|L|214680||
-|Forest|Battle Royale Box Set|L|214680||
-|Forest|Battle Royale Box Set|L|214680||
-|Forest|Battle Royale Box Set|L|214680||
-|Forest|Battle Royale Box Set|L|214680||
-|Forest|Portal Second Age|L|214680||
-|Forest|Portal Second Age|L|214680||
-|Forest|Portal Second Age|L|214680||
-|Forest|Tempest|L|214680||
-|Forest|Tempest|L|214680||
-|Forest|Tempest|L|214680||
-|Forest|Tempest|L|214680||
-|Forest|Portal|L|214680||
-|Forest|Portal|L|214680||
-|Forest|Portal|L|214680||
-|Forest|Portal|L|214680||
-|Forest|Fifth Edition|L|214680||
-|Forest|Fifth Edition|L|214680||
-|Forest|Fifth Edition|L|214680||
-|Forest|Fifth Edition|L|214680||
-|Forest|Mirage|L|214680||
-|Forest|Mirage|L|214680||
-|Forest|Mirage|L|214680||
-|Forest|Mirage|L|214680||
-|Forest|Ice Age|L|214680||
-|Forest|Ice Age|L|214680||
-|Forest|Ice Age|L|214680||
-|Forest|Fourth Edition|L|214680||
-|Forest|Fourth Edition|L|214680||
-|Forest|Fourth Edition|L|214680||
-|Forest|Revised Edition|L|214680||
-|Forest|Revised Edition|L|214680||
-|Forest|Revised Edition|L|214680||
-|Forest|Unlimited Edition|L|214680||
-|Forest|Unlimited Edition|L|214680||
-|Forest|Unlimited Edition|L|214680||
-|Forest|Limited Edition Beta|L|214680||
-|Forest|Limited Edition Beta|L|214680||
-|Forest|Limited Edition Beta|L|214680||
-|Forest|Limited Edition Alpha|L|214680||
-|Forest|Limited Edition Alpha|L|214680||
-|Forest|Duel Decks: Garruk vs. Liliana|L|214680|28|
-|Forest|Duel Decks: Elves vs. Goblins|L|214680|28|
-|Forest|Duel Decks: Garruk vs. Liliana|L|214680|29|
-|Forest|Duel Decks: Elves vs. Goblins|L|214680|29|
-|Forest|Duel Decks: Garruk vs. Liliana|L|214680|30|
-|Forest|Duel Decks: Elves vs. Goblins|L|214680|30|
-|Forest|Duel Decks: Garruk vs. Liliana|L|214680|31|
-|Forest|Duel Decks: Elves vs. Goblins|L|214680|31|
-|Forest|Premium Deck Series: Slivers|L|214680|41|
-|Forest|Duel Decks: Phyrexia vs. the Coalition|L|214680|70|
-|Forest|Duel Decks: Phyrexia vs. the Coalition|L|214680|71|
-|Forest|Unglued|C|214680|88|
-|Forest|Unhinged|L|214680|140|
-|Forest|Archenemy|L|214680|148|
-|Forest|Archenemy|L|214680|149|
-|Forest|Archenemy|L|214680|150|
-|Forest|Mirrodin Besieged|L|214680|154|
-|Forest|Starter 1999|L|214680|154|
-|Forest|Mirrodin Besieged|L|214680|155|
-|Forest|Starter 1999|L|214680|155|
-|Forest|Starter 1999|L|214680|156|
-|Forest|Starter 1999|L|214680|157|
-|Forest|Planechase|L|214680|165|
-|Forest|Planechase|L|214680|166|
-|Forest|Planechase|L|214680|167|
-|Forest|Planechase|L|214680|168|
-|Forest|Planechase|L|214680|169|
-|Forest|Portal Three Kingdoms|L|214680|178|
-|Forest|Portal Three Kingdoms|L|214680|179|
-|Forest|Portal Three Kingdoms|L|214680|180|
-|Forest|Masters Edition|L|214680|193|
-|Forest|Masters Edition|L|214680|194|
-|Forest|Masters Edition|L|214680|195|
-|Forest|Masters Edition III|L|214680|228|
-|Forest|Masters Edition III|L|214680|229|
-|Forest|Masters Edition III|L|214680|230|
-|Forest|Rise of the Eldrazi|L|214680|245|
-|Forest|Scars of Mirrodin|L|214680|246|
-|Forest|Magic 2011|L|214680|246|
-|Forest|Rise of the Eldrazi|L|214680|246|
-|Forest|Zendikar|L|214680|246|
-|Forest|Zendikar|L|214680|246|
-|Forest|Magic 2010|L|214680|246|
-|Forest|Shards of Alara|L|214680|246|
-|Forest|Scars of Mirrodin|L|214680|247|
-|Forest|Magic 2011|L|214680|247|
-|Forest|Rise of the Eldrazi|L|214680|247|
-|Forest|Zendikar|L|214680|247|
-|Forest|Zendikar|L|214680|247|
-|Forest|Magic 2010|L|214680|247|
-|Forest|Shards of Alara|L|214680|247|
-|Forest|Scars of Mirrodin|L|214680|248|
-|Forest|Magic 2011|L|214680|248|
-|Forest|Rise of the Eldrazi|L|214680|248|
-|Forest|Zendikar|L|214680|248|
-|Forest|Zendikar|L|214680|248|
-|Forest|Magic 2010|L|214680|248|
-|Forest|Shards of Alara|L|214680|248|
-|Forest|Scars of Mirrodin|L|214680|249|
-|Forest|Magic 2011|L|214680|249|
-|Forest|Zendikar|L|214680|249|
-|Forest|Zendikar|L|214680|249|
-|Forest|Magic 2010|L|214680|249|
-|Forest|Shards of Alara|L|214680|249|
-|Forest|Shadowmoor|L|214680|298|
-|Forest|Lorwyn|L|214680|298|
-|Forest|Time Spiral|L|214680|298|
-|Forest|Shadowmoor|L|214680|299|
-|Forest|Lorwyn|L|214680|299|
-|Forest|Time Spiral|L|214680|299|
-|Forest|Shadowmoor|L|214680|300|
-|Forest|Lorwyn|L|214680|300|
-|Forest|Time Spiral|L|214680|300|
-|Forest|Shadowmoor|L|214680|301|
-|Forest|Lorwyn|L|214680|301|
-|Forest|Time Spiral|L|214680|301|
-|Forest|Ravnica: City of Guilds|L|214680|303|
-|Forest|Champions of Kamigawa|L|214680|303|
-|Forest|Mirrodin|L|214680|303|
-|Forest|Ravnica: City of Guilds|L|214680|304|
-|Forest|Champions of Kamigawa|L|214680|304|
-|Forest|Mirrodin|L|214680|304|
-|Forest|Ravnica: City of Guilds|L|214680|305|
-|Forest|Champions of Kamigawa|L|214680|305|
-|Forest|Mirrodin|L|214680|305|
-|Forest|Ravnica: City of Guilds|L|214680|306|
-|Forest|Champions of Kamigawa|L|214680|306|
-|Forest|Mirrodin|L|214680|306|
-|Forest|Seventh Edition|L|214680|328|
-|Forest|Seventh Edition|L|214680|329|
-|Forest|Seventh Edition|L|214680|330|
-|Forest|Seventh Edition|L|214680|331|
-|Forest|Ninth Edition|L|214680|347|
-|Forest|Eighth Edition|L|214680|347|
-|Forest|Onslaught|L|214680|347|
-|Forest|Odyssey|L|214680|347|
-|Forest|Invasion|L|214680|347|
-|Forest|Mercadian Masques|L|214680|347|
-|Forest|Classic Sixth Edition|L|214680|347|
-|Forest|Urza's Saga|L|214680|347|
-|Forest|Ninth Edition|L|214680|348|
-|Forest|Eighth Edition|L|214680|348|
-|Forest|Onslaught|L|214680|348|
-|Forest|Odyssey|L|214680|348|
-|Forest|Invasion|L|214680|348|
-|Forest|Mercadian Masques|L|214680|348|
-|Forest|Classic Sixth Edition|L|214680|348|
-|Forest|Urza's Saga|L|214680|348|
-|Forest|Ninth Edition|L|214680|349|
-|Forest|Eighth Edition|L|214680|349|
-|Forest|Onslaught|L|214680|349|
-|Forest|Odyssey|L|214680|349|
-|Forest|Invasion|L|214680|349|
-|Forest|Mercadian Masques|L|214680|349|
-|Forest|Classic Sixth Edition|L|214680|349|
-|Forest|Urza's Saga|L|214680|349|
-|Forest|Ninth Edition|L|214680|350|
-|Forest|Eighth Edition|L|214680|350|
-|Forest|Onslaught|L|214680|350|
-|Forest|Odyssey|L|214680|350|
-|Forest|Invasion|L|214680|350|
-|Forest|Mercadian Masques|L|214680|350|
-|Forest|Classic Sixth Edition|L|214680|350|
-|Forest|Urza's Saga|L|214680|350|
-|Forest|Tenth Edition|L|214680|380|
-|Forest|Tenth Edition|L|214680|381|
-|Forest|Tenth Edition|L|214680|382|
-|Forest|Tenth Edition|L|214680|383|
+|Forest|Beatdown Box Set|L|230071||
+|Forest|Beatdown Box Set|L|230071||
+|Forest|Beatdown Box Set|L|230071||
+|Forest|Starter 2000|L|230071||
+|Forest|Starter 2000|L|230071||
+|Forest|Battle Royale Box Set|L|230071||
+|Forest|Battle Royale Box Set|L|230071||
+|Forest|Battle Royale Box Set|L|230071||
+|Forest|Battle Royale Box Set|L|230071||
+|Forest|Battle Royale Box Set|L|230071||
+|Forest|Battle Royale Box Set|L|230071||
+|Forest|Battle Royale Box Set|L|230071||
+|Forest|Battle Royale Box Set|L|230071||
+|Forest|Battle Royale Box Set|L|230071||
+|Forest|Portal Second Age|L|230071||
+|Forest|Portal Second Age|L|230071||
+|Forest|Portal Second Age|L|230071||
+|Forest|Tempest|L|230071||
+|Forest|Tempest|L|230071||
+|Forest|Tempest|L|230071||
+|Forest|Tempest|L|230071||
+|Forest|Portal|L|230071||
+|Forest|Portal|L|230071||
+|Forest|Portal|L|230071||
+|Forest|Portal|L|230071||
+|Forest|Fifth Edition|L|230071||
+|Forest|Fifth Edition|L|230071||
+|Forest|Fifth Edition|L|230071||
+|Forest|Fifth Edition|L|230071||
+|Forest|Mirage|L|230071||
+|Forest|Mirage|L|230071||
+|Forest|Mirage|L|230071||
+|Forest|Mirage|L|230071||
+|Forest|Ice Age|L|230071||
+|Forest|Ice Age|L|230071||
+|Forest|Ice Age|L|230071||
+|Forest|Fourth Edition|L|230071||
+|Forest|Fourth Edition|L|230071||
+|Forest|Fourth Edition|L|230071||
+|Forest|Revised Edition|L|230071||
+|Forest|Revised Edition|L|230071||
+|Forest|Revised Edition|L|230071||
+|Forest|Unlimited Edition|L|230071||
+|Forest|Unlimited Edition|L|230071||
+|Forest|Unlimited Edition|L|230071||
+|Forest|Limited Edition Beta|L|230071||
+|Forest|Limited Edition Beta|L|230071||
+|Forest|Limited Edition Beta|L|230071||
+|Forest|Limited Edition Alpha|L|230071||
+|Forest|Limited Edition Alpha|L|230071||
+|Forest|Duel Decks: Garruk vs. Liliana|L|230071|28|
+|Forest|Duel Decks: Elves vs. Goblins|L|230071|28|
+|Forest|Duel Decks: Garruk vs. Liliana|L|230071|29|
+|Forest|Duel Decks: Elves vs. Goblins|L|230071|29|
+|Forest|Duel Decks: Garruk vs. Liliana|L|230071|30|
+|Forest|Duel Decks: Elves vs. Goblins|L|230071|30|
+|Forest|Duel Decks: Garruk vs. Liliana|L|230071|31|
+|Forest|Duel Decks: Elves vs. Goblins|L|230071|31|
+|Forest|Premium Deck Series: Slivers|L|230071|41|
+|Forest|Duel Decks: Knights vs. Dragons|L|230071|43|
+|Forest|Duel Decks: Knights vs. Dragons|L|230071|44|
+|Forest|Duel Decks: Knights vs. Dragons|L|230071|45|
+|Forest|Duel Decks: Knights vs. Dragons|L|230071|46|
+|Forest|Duel Decks: Phyrexia vs. the Coalition|L|230071|70|
+|Forest|Duel Decks: Phyrexia vs. the Coalition|L|230071|71|
+|Forest|Unglued|C|230071|88|
+|Forest|Unhinged|L|230071|140|
+|Forest|Archenemy|L|230071|148|
+|Forest|Archenemy|L|230071|149|
+|Forest|Archenemy|L|230071|150|
+|Forest|Mirrodin Besieged|L|230071|154|
+|Forest|Starter 1999|L|230071|154|
+|Forest|Mirrodin Besieged|L|230071|155|
+|Forest|Starter 1999|L|230071|155|
+|Forest|Starter 1999|L|230071|156|
+|Forest|Starter 1999|L|230071|157|
+|Forest|Planechase|L|230071|165|
+|Forest|Planechase|L|230071|166|
+|Forest|Planechase|L|230071|167|
+|Forest|Planechase|L|230071|168|
+|Forest|Planechase|L|230071|169|
+|Forest|New Phyrexia|L|230071|174|
+|Forest|New Phyrexia|L|230071|175|
+|Forest|Portal Three Kingdoms|L|230071|178|
+|Forest|Portal Three Kingdoms|L|230071|179|
+|Forest|Portal Three Kingdoms|L|230071|180|
+|Forest|Masters Edition|L|230071|193|
+|Forest|Masters Edition|L|230071|194|
+|Forest|Masters Edition|L|230071|195|
+|Forest|Masters Edition III|L|230071|228|
+|Forest|Masters Edition III|L|230071|229|
+|Forest|Masters Edition III|L|230071|230|
+|Forest|Rise of the Eldrazi|L|230071|245|
+|Forest|Scars of Mirrodin|L|230071|246|
+|Forest|Magic 2011|L|230071|246|
+|Forest|Rise of the Eldrazi|L|230071|246|
+|Forest|Zendikar|L|230071|246|
+|Forest|Zendikar|L|230071|246|
+|Forest|Magic 2010|L|230071|246|
+|Forest|Shards of Alara|L|230071|246|
+|Forest|Scars of Mirrodin|L|230071|247|
+|Forest|Magic 2011|L|230071|247|
+|Forest|Rise of the Eldrazi|L|230071|247|
+|Forest|Zendikar|L|230071|247|
+|Forest|Zendikar|L|230071|247|
+|Forest|Magic 2010|L|230071|247|
+|Forest|Shards of Alara|L|230071|247|
+|Forest|Scars of Mirrodin|L|230071|248|
+|Forest|Magic 2011|L|230071|248|
+|Forest|Rise of the Eldrazi|L|230071|248|
+|Forest|Zendikar|L|230071|248|
+|Forest|Zendikar|L|230071|248|
+|Forest|Magic 2010|L|230071|248|
+|Forest|Shards of Alara|L|230071|248|
+|Forest|Scars of Mirrodin|L|230071|249|
+|Forest|Magic 2011|L|230071|249|
+|Forest|Zendikar|L|230071|249|
+|Forest|Zendikar|L|230071|249|
+|Forest|Magic 2010|L|230071|249|
+|Forest|Shards of Alara|L|230071|249|
+|Forest|Shadowmoor|L|230071|298|
+|Forest|Lorwyn|L|230071|298|
+|Forest|Time Spiral|L|230071|298|
+|Forest|Shadowmoor|L|230071|299|
+|Forest|Lorwyn|L|230071|299|
+|Forest|Time Spiral|L|230071|299|
+|Forest|Shadowmoor|L|230071|300|
+|Forest|Lorwyn|L|230071|300|
+|Forest|Time Spiral|L|230071|300|
+|Forest|Shadowmoor|L|230071|301|
+|Forest|Lorwyn|L|230071|301|
+|Forest|Time Spiral|L|230071|301|
+|Forest|Ravnica: City of Guilds|L|230071|303|
+|Forest|Champions of Kamigawa|L|230071|303|
+|Forest|Mirrodin|L|230071|303|
+|Forest|Ravnica: City of Guilds|L|230071|304|
+|Forest|Champions of Kamigawa|L|230071|304|
+|Forest|Mirrodin|L|230071|304|
+|Forest|Ravnica: City of Guilds|L|230071|305|
+|Forest|Champions of Kamigawa|L|230071|305|
+|Forest|Mirrodin|L|230071|305|
+|Forest|Ravnica: City of Guilds|L|230071|306|
+|Forest|Champions of Kamigawa|L|230071|306|
+|Forest|Mirrodin|L|230071|306|
+|Forest|Seventh Edition|L|230071|328|
+|Forest|Seventh Edition|L|230071|329|
+|Forest|Seventh Edition|L|230071|330|
+|Forest|Seventh Edition|L|230071|331|
+|Forest|Ninth Edition|L|230071|347|
+|Forest|Eighth Edition|L|230071|347|
+|Forest|Onslaught|L|230071|347|
+|Forest|Odyssey|L|230071|347|
+|Forest|Invasion|L|230071|347|
+|Forest|Mercadian Masques|L|230071|347|
+|Forest|Classic Sixth Edition|L|230071|347|
+|Forest|Urza's Saga|L|230071|347|
+|Forest|Ninth Edition|L|230071|348|
+|Forest|Eighth Edition|L|230071|348|
+|Forest|Onslaught|L|230071|348|
+|Forest|Odyssey|L|230071|348|
+|Forest|Invasion|L|230071|348|
+|Forest|Mercadian Masques|L|230071|348|
+|Forest|Classic Sixth Edition|L|230071|348|
+|Forest|Urza's Saga|L|230071|348|
+|Forest|Ninth Edition|L|230071|349|
+|Forest|Eighth Edition|L|230071|349|
+|Forest|Onslaught|L|230071|349|
+|Forest|Odyssey|L|230071|349|
+|Forest|Invasion|L|230071|349|
+|Forest|Mercadian Masques|L|230071|349|
+|Forest|Classic Sixth Edition|L|230071|349|
+|Forest|Urza's Saga|L|230071|349|
+|Forest|Ninth Edition|L|230071|350|
+|Forest|Eighth Edition|L|230071|350|
+|Forest|Onslaught|L|230071|350|
+|Forest|Odyssey|L|230071|350|
+|Forest|Invasion|L|230071|350|
+|Forest|Mercadian Masques|L|230071|350|
+|Forest|Classic Sixth Edition|L|230071|350|
+|Forest|Urza's Saga|L|230071|350|
+|Forest|Tenth Edition|L|230071|380|
+|Forest|Tenth Edition|L|230071|381|
+|Forest|Tenth Edition|L|230071|382|
+|Forest|Tenth Edition|L|230071|383|
 |Forest Bear|Portal Three Kingdoms|C|10505|135|
 |Forethought Amulet|Legends|R|1404||
 |Forfend|Morningtide|C|157431|10|
@@ -5993,6 +6064,7 @@
 |Frenzied Tilling|Invasion|C|23156|247|
 |Frenzy Sliver|Premium Deck Series: Slivers|C|207902|6|
 |Frenzy Sliver|Future Sight|C|207902|85|
+|Fresh Meat|New Phyrexia|R|218051|109|
 |Fresh Volunteers|Mercadian Masques|C|19542|20|
 |Freyalise Supplicant|Ice Age|U|2563||
 |Freyalise's Charm|Ice Age|U|2564||
@@ -6073,6 +6145,7 @@
 |Furnace of Rath|Eighth Edition|R|205268|187|
 |Furnace of Rath|Ninth Edition|R|205268|188|
 |Furnace of Rath|Tenth Edition|R|205268|204|
+|Furnace Scamp|New Phyrexia|C|217979|84|
 |Furnace Spirit|Stronghold|C|5160||
 |Furnace Whelp|Archenemy|U|220483|39|
 |Furnace Whelp|Duel Decks: Jace vs. Chandra|U|220483|43|
@@ -6222,6 +6295,7 @@
 |Genju of the Fields|Betrayers of Kamigawa|U|74087|5|
 |Genju of the Realm|Betrayers of Kamigawa|R|75364|151|
 |Genju of the Spires|Betrayers of Kamigawa|U|74666|105|
+|Geosurge|New Phyrexia|U|218004|85|
 |Geothermal Crevice|Invasion|C|23238|323|
 |Gerrard|Vanguard|S|4960||
 |Gerrard Capashen|Apocalypse|R|209157|11|
@@ -6238,6 +6312,7 @@
 |Get a Life|Unglued|U|9743|4|
 |Geth, Lord of the Vault|Scars of Mirrodin|M|215076|64|
 |Geth's Grimoire|Darksteel|U|51070|123|
+|Geth's Verdict|New Phyrexia|C|214376|61|
 |Geyser Glider|Zendikar|U|197887|124|
 |Ghalma's Warden|Scars of Mirrodin|C|194124|8|
 |Ghastlord of Fugue|Shadowmoor|R|153297|162|
@@ -6270,7 +6345,8 @@
 |Ghost Town|Tempest|U|4932||
 |Ghost Warden|Guildpact|C|132105|5|
 |Ghost Warden|Tenth Edition|C|132105|16|
-|Ghostfire|Future Sight|C|136044|115|
+|Ghostfire|Duel Decks: Knights vs. Dragons|C|243486|69|
+|Ghostfire|Future Sight|C|243486|115|
 |Ghostflame Sliver|Time Spiral|U|109717|239|
 |Ghosthelm Courier|Onslaught|U|39595|85|
 |Ghost-Lit Nourisher|Saviors of Kamigawa|U|74068|131|
@@ -6398,6 +6474,7 @@
 |Gilt-Leaf Palace|Lorwyn|R|153455|268|
 |Gilt-Leaf Seer|Lorwyn|C|145812|215|
 |Giltspire Avenger|Conflux|R|186614|108|
+|Gitaxian Probe|New Phyrexia|C|233056|35|
 |Gix|Vanguard|S|12330||
 |Glacial Chasm|Ice Age|U|184631||
 |Glacial Chasm|Masters Edition II|R|184631|229|
@@ -6453,6 +6530,9 @@
 |Glissa Sunseeker|Mirrodin|R|48386|120|
 |Glissa, the Traitor|Mirrodin Besieged|M|214072|96|
 |Glissa's Courier|Mirrodin Besieged|C|213783|80|
+|Glissa's Scorn|New Phyrexia|C|194171|110|
+|Glistener Elf|New Phyrexia|C|233052|111|
+|Glistening Oil|New Phyrexia|R|214346|62|
 |Glitterfang|Saviors of Kamigawa|C|89402|100|
 |Glittering Lion|Prophecy|U|24558|10|
 |Glittering Lynx|Prophecy|C|24549|11|
@@ -6833,7 +6913,8 @@
 |Grappling Hook|Zendikar|R|192220|203|
 |Grasp of Darkness|Scars of Mirrodin|C|194105|65|
 |Grassland Crusader|Onslaught|C|39715|32|
-|Grasslands|Mirage|U|3573||
+|Grasslands|Mirage|U|243452||
+|Grasslands|Duel Decks: Knights vs. Dragons|U|243452|35|
 |Gratuitous Violence|Onslaught|R|39666|212|
 |Grave Consequences|Judgment|U|35161|67|
 |Grave Defiler|Apocalypse|U|27662|40|
@@ -6929,15 +7010,19 @@
 |Green Ward|Limited Edition Beta|U|2342||
 |Green Ward|Limited Edition Alpha|U|2342||
 |Greener Pastures|Urza's Saga|R|9704|258|
+|Greenhilt Trainee|New Phyrexia|U|233063|112|
 |Greenseeker|Time Spiral|C|108830|198|
 |Greenweaver Druid|Zendikar|U|185694|164|
+|Gremlin Mine|New Phyrexia|C|218068|136|
 |Greven il-Vec|Vanguard|S|4961||
 |Grid Monitor|Mirrodin|R|48178|183|
 |Grief Tyrant|Shadowmoor|U|146035|189|
 |Griffin Canyon|Visions|R|3751||
-|Griffin Guide|Time Spiral|U|110514|21|
+|Griffin Guide|Time Spiral|U|243450|21|
+|Griffin Guide|Duel Decks: Knights vs. Dragons|U|243450|33|
 |Griffin Sentinel|Magic 2010|C|190170|12|
 |Grifter's Blade|Ravnica: City of Guilds|U|83619|263|
+|Grim Affliction|New Phyrexia|C|214389|63|
 |Grim Discovery|Zendikar|C|180127|91|
 |Grim Feast|Mirage|R|3536||
 |Grim Harvest|Coldsnap|C|122114|58|
@@ -7063,6 +7148,7 @@
 |Gustha's Scepter|Masters Edition II|R|184548|209|
 |Gustrider Exuberant|Shards of Alara|C|174805|13|
 |Gust-Skimmer|Mirrodin Besieged|C|213768|108|
+|Gut Shot|New Phyrexia|U|230074|86|
 |Gutless Ghoul|Coldsnap|C|121194|60|
 |Guttural Response|Shadowmoor|U|158773|208|
 |Gutwrencher Oni|Champions of Kamigawa|U|79088|113|
@@ -7154,7 +7240,8 @@
 |Harmonize|Archenemy|U|220584|59|
 |Harmonize|Planar Chaos|U|220584|149|
 |Harmony of Nature|Portal Second Age|U|6632||
-|Harm's Way|Magic 2010|U|190166|14|
+|Harm's Way|Magic 2010|U|243440|14|
+|Harm's Way|Duel Decks: Knights vs. Dragons|U|243440|23|
 |Harpoon Sniper|Lorwyn|U|139407|19|
 |Harrier Griffin|Guildpact|U|96843|9|
 |Harrow|Tempest|U|209114||
@@ -7337,7 +7424,8 @@
 |Hematite Golem|Mirrodin|C|48055|185|
 |Hematite Talisman|Ice Age|U|2406||
 |Henchfiend of Ukor|Future Sight|C|130695|117|
-|Henge Guardian|Mercadian Masques|U|19770|297|
+|Henge Guardian|Duel Decks: Knights vs. Dragons|U|243473|55|
+|Henge Guardian|Mercadian Masques|U|243473|297|
 |Henge of Ramos|Mercadian Masques|U|19768|318|
 |Herald of Leshrac|Coldsnap|R|121250|62|
 |Herald of Serra|Urza's Saga|R|5578|17|
@@ -7350,8 +7438,9 @@
 |Hero of Bladehold|Mirrodin Besieged|M|214064|8|
 |Hero of Oxid Ridge|Mirrodin Besieged|M|214028|66|
 |Heroes Remembered|Planar Chaos|R|122438|7|
-|Heroes' Reunion|Archenemy|U|220501|87|
-|Heroes' Reunion|Invasion|U|220501|250|
+|Heroes' Reunion|Duel Decks: Knights vs. Dragons|U|243446|29|
+|Heroes' Reunion|Archenemy|U|243446|87|
+|Heroes' Reunion|Invasion|U|243446|250|
 |Heroic Defiance|Planeshift|C|26420|6|
 |Heroism|Fallen Empires|U|1980||
 |Hero's Demise|Betrayers of Kamigawa|R|74465|68|
@@ -7360,6 +7449,7 @@
 |Hero's Resolve|Classic Sixth Edition|C|25536|24|
 |Hesitation|Stronghold|U|5167||
 |Hex|Ravnica: City of Guilds|R|89059|89|
+|Hex Parasite|New Phyrexia|R|218008|137|
 |Hexplate Golem|Mirrodin Besieged|C|213807|109|
 |Hibernation|Seventh Edition|U|47600|79|
 |Hibernation|Urza's Saga|U|47600|79|
@@ -7564,6 +7654,7 @@
 |Hour of Reckoning|Ravnica: City of Guilds|R|88985|21|
 |Hoverguard Observer|Darksteel|U|49020|22|
 |Hoverguard Sweepers|Fifth Dawn|R|51086|32|
+|Hovermyr|New Phyrexia|C|227513|138|
 |Howl from Beyond|Fifth Edition|C|202588||
 |Howl from Beyond|Ice Age|C|202588||
 |Howl from Beyond|Fourth Edition|C|202588||
@@ -7771,6 +7862,7 @@
 |Icequake|Ice Age|U|184634||
 |Icequake|Masters Edition II|C|184634|94|
 |Ichneumon Druid|Legends|U|1531||
+|Ichor Explosion|New Phyrexia|U|218066|64|
 |Ichor Rats|Scars of Mirrodin|U|194177|67|
 |Ichor Slick|Duel Decks: Garruk vs. Liliana|C|202145|51|
 |Ichor Slick|Future Sight|C|202145|68|
@@ -7835,10 +7927,12 @@
 |Imi Statue|Champions of Kamigawa|R|50300|255|
 |Immaculate Magistrate|Lorwyn|R|139721|219|
 |Immobilizing Ink|Odyssey|C|29828|87|
+|Immolating Souleater|New Phyrexia|C|233058|139|
 |Immolation|Fourth Edition|C|201142||
 |Immolation|Legends|C|201142||
 |Immolation|Masters Edition III|C|201142|103|
 |Immortal Coil|Shards of Alara|R|175125|79|
+|Impaler Shrike|New Phyrexia|C|217988|36|
 |Impatience|Urza's Destiny|R|25681|88|
 |Impatience|Seventh Edition|R|25681|197|
 |Impelled Giant|Eventide|U|152049|58|
@@ -7996,7 +8090,9 @@
 |Innocent Blood|Odyssey|C|205364|145|
 |Inquisition|The Dark|C|1736||
 |Inquisition of Kozilek|Rise of the Eldrazi|U|193428|115|
+|Inquisitor Exarch|New Phyrexia|U|218070|12|
 |Inquisitor's Snare|Shadowmoor|C|158765|8|
+|Insatiable Souleater|New Phyrexia|C|233066|140|
 |Inside Out|Eventide|C|154263|103|
 |Insidious Bookworms|Alliances|C|3078||
 |Insidious Bookworms|Alliances|C|3078||
@@ -8048,6 +8144,7 @@
 |Intruder Alarm|Eighth Edition|R|45258|86|
 |Intuition|Tempest|R|4707||
 |Inundate|Eventide|R|142010|25|
+|Invader Parasite|New Phyrexia|R|233067|87|
 |Invasion Plans|Stronghold|R|5175||
 |Invert the Skies|Eventide|U|151108|155|
 |Invigorate|Duel Decks: Garruk vs. Liliana|C|202261|19|
@@ -8114,178 +8211,180 @@
 |Isamaru, Hound of Konda|Champions of Kamigawa|R|79217|19|
 |Isao, Enlightened Bushi|Betrayers of Kamigawa|R|74039|129|
 |Ishi-Ishi, Akki Crackshot|Betrayers of Kamigawa|R|74636|110|
-|Island|Beatdown Box Set|L|214678||
-|Island|Beatdown Box Set|L|214678||
-|Island|Beatdown Box Set|L|214678||
-|Island|Starter 2000|L|214678||
-|Island|Starter 2000|L|214678||
-|Island|Battle Royale Box Set|L|214678||
-|Island|Battle Royale Box Set|L|214678||
-|Island|Battle Royale Box Set|L|214678||
-|Island|Battle Royale Box Set|L|214678||
-|Island|Battle Royale Box Set|L|214678||
-|Island|Portal Second Age|L|214678||
-|Island|Portal Second Age|L|214678||
-|Island|Portal Second Age|L|214678||
-|Island|Tempest|L|214678||
-|Island|Tempest|L|214678||
-|Island|Tempest|L|214678||
-|Island|Tempest|L|214678||
-|Island|Portal|L|214678||
-|Island|Portal|L|214678||
-|Island|Portal|L|214678||
-|Island|Portal|L|214678||
-|Island|Fifth Edition|L|214678||
-|Island|Fifth Edition|L|214678||
-|Island|Fifth Edition|L|214678||
-|Island|Fifth Edition|L|214678||
-|Island|Mirage|L|214678||
-|Island|Mirage|L|214678||
-|Island|Mirage|L|214678||
-|Island|Mirage|L|214678||
-|Island|Ice Age|L|214678||
-|Island|Ice Age|L|214678||
-|Island|Ice Age|L|214678||
-|Island|Fourth Edition|L|214678||
-|Island|Fourth Edition|L|214678||
-|Island|Fourth Edition|L|214678||
-|Island|Revised Edition|L|214678||
-|Island|Revised Edition|L|214678||
-|Island|Revised Edition|L|214678||
-|Island|Unlimited Edition|L|214678||
-|Island|Unlimited Edition|L|214678||
-|Island|Unlimited Edition|L|214678||
-|Island|Limited Edition Beta|L|214678||
-|Island|Limited Edition Beta|L|214678||
-|Island|Limited Edition Beta|L|214678||
-|Island|Limited Edition Alpha|L|214678||
-|Island|Limited Edition Alpha|L|214678||
-|Island|Duel Decks: Jace vs. Chandra|L|214678|30|
-|Island|Duel Decks: Jace vs. Chandra|L|214678|31|
-|Island|Duel Decks: Jace vs. Chandra|L|214678|32|
-|Island|Duel Decks: Jace vs. Chandra|L|214678|33|
-|Island|Premium Deck Series: Slivers|L|214678|38|
-|Island|Duel Decks: Phyrexia vs. the Coalition|L|214678|68|
-|Island|Duel Decks: Elspeth vs. Tezzeret|L|214678|76|
-|Island|Duel Decks: Elspeth vs. Tezzeret|L|214678|77|
-|Island|Duel Decks: Elspeth vs. Tezzeret|L|214678|78|
-|Island|Duel Decks: Elspeth vs. Tezzeret|L|214678|79|
-|Island|Unglued|C|214678|85|
-|Island|Unhinged|L|214678|137|
-|Island|Archenemy|L|214678|139|
-|Island|Archenemy|L|214678|140|
-|Island|Archenemy|L|214678|141|
-|Island|Planechase|L|214678|147|
-|Island|Mirrodin Besieged|L|214678|148|
-|Island|Planechase|L|214678|148|
-|Island|Mirrodin Besieged|L|214678|149|
-|Island|Planechase|L|214678|149|
-|Island|Planechase|L|214678|150|
-|Island|Starter 1999|L|214678|158|
-|Island|Starter 1999|L|214678|159|
-|Island|Starter 1999|L|214678|160|
-|Island|Starter 1999|L|214678|161|
-|Island|Portal Three Kingdoms|L|214678|169|
-|Island|Portal Three Kingdoms|L|214678|170|
-|Island|Portal Three Kingdoms|L|214678|171|
-|Island|Masters Edition|L|214678|184|
-|Island|Masters Edition|L|214678|185|
-|Island|Masters Edition|L|214678|186|
-|Island|Masters Edition III|L|214678|219|
-|Island|Masters Edition III|L|214678|220|
-|Island|Masters Edition III|L|214678|221|
-|Island|Rise of the Eldrazi|L|214678|233|
-|Island|Scars of Mirrodin|L|214678|234|
-|Island|Magic 2011|L|214678|234|
-|Island|Rise of the Eldrazi|L|214678|234|
-|Island|Zendikar|L|214678|234|
-|Island|Zendikar|L|214678|234|
-|Island|Magic 2010|L|214678|234|
-|Island|Shards of Alara|L|214678|234|
-|Island|Scars of Mirrodin|L|214678|235|
-|Island|Magic 2011|L|214678|235|
-|Island|Rise of the Eldrazi|L|214678|235|
-|Island|Zendikar|L|214678|235|
-|Island|Zendikar|L|214678|235|
-|Island|Magic 2010|L|214678|235|
-|Island|Shards of Alara|L|214678|235|
-|Island|Scars of Mirrodin|L|214678|236|
-|Island|Magic 2011|L|214678|236|
-|Island|Rise of the Eldrazi|L|214678|236|
-|Island|Zendikar|L|214678|236|
-|Island|Zendikar|L|214678|236|
-|Island|Magic 2010|L|214678|236|
-|Island|Shards of Alara|L|214678|236|
-|Island|Scars of Mirrodin|L|214678|237|
-|Island|Magic 2011|L|214678|237|
-|Island|Zendikar|L|214678|237|
-|Island|Zendikar|L|214678|237|
-|Island|Magic 2010|L|214678|237|
-|Island|Shards of Alara|L|214678|237|
-|Island|Shadowmoor|L|214678|286|
-|Island|Lorwyn|L|214678|286|
-|Island|Time Spiral|L|214678|286|
-|Island|Shadowmoor|L|214678|287|
-|Island|Lorwyn|L|214678|287|
-|Island|Time Spiral|L|214678|287|
-|Island|Shadowmoor|L|214678|288|
-|Island|Lorwyn|L|214678|288|
-|Island|Time Spiral|L|214678|288|
-|Island|Shadowmoor|L|214678|289|
-|Island|Lorwyn|L|214678|289|
-|Island|Time Spiral|L|214678|289|
-|Island|Ravnica: City of Guilds|L|214678|291|
-|Island|Champions of Kamigawa|L|214678|291|
-|Island|Mirrodin|L|214678|291|
-|Island|Ravnica: City of Guilds|L|214678|292|
-|Island|Champions of Kamigawa|L|214678|292|
-|Island|Mirrodin|L|214678|292|
-|Island|Ravnica: City of Guilds|L|214678|293|
-|Island|Champions of Kamigawa|L|214678|293|
-|Island|Mirrodin|L|214678|293|
-|Island|Ravnica: City of Guilds|L|214678|294|
-|Island|Champions of Kamigawa|L|214678|294|
-|Island|Mirrodin|L|214678|294|
-|Island|Seventh Edition|L|214678|332|
-|Island|Seventh Edition|L|214678|333|
-|Island|Seventh Edition|L|214678|334|
-|Island|Ninth Edition|L|214678|335|
-|Island|Eighth Edition|L|214678|335|
-|Island|Onslaught|L|214678|335|
-|Island|Odyssey|L|214678|335|
-|Island|Seventh Edition|L|214678|335|
-|Island|Invasion|L|214678|335|
-|Island|Mercadian Masques|L|214678|335|
-|Island|Classic Sixth Edition|L|214678|335|
-|Island|Urza's Saga|L|214678|335|
-|Island|Ninth Edition|L|214678|336|
-|Island|Eighth Edition|L|214678|336|
-|Island|Onslaught|L|214678|336|
-|Island|Odyssey|L|214678|336|
-|Island|Invasion|L|214678|336|
-|Island|Mercadian Masques|L|214678|336|
-|Island|Classic Sixth Edition|L|214678|336|
-|Island|Urza's Saga|L|214678|336|
-|Island|Ninth Edition|L|214678|337|
-|Island|Eighth Edition|L|214678|337|
-|Island|Onslaught|L|214678|337|
-|Island|Odyssey|L|214678|337|
-|Island|Invasion|L|214678|337|
-|Island|Mercadian Masques|L|214678|337|
-|Island|Classic Sixth Edition|L|214678|337|
-|Island|Urza's Saga|L|214678|337|
-|Island|Ninth Edition|L|214678|338|
-|Island|Eighth Edition|L|214678|338|
-|Island|Onslaught|L|214678|338|
-|Island|Odyssey|L|214678|338|
-|Island|Invasion|L|214678|338|
-|Island|Mercadian Masques|L|214678|338|
-|Island|Classic Sixth Edition|L|214678|338|
-|Island|Urza's Saga|L|214678|338|
-|Island|Tenth Edition|L|214678|368|
-|Island|Tenth Edition|L|214678|369|
-|Island|Tenth Edition|L|214678|370|
-|Island|Tenth Edition|L|214678|371|
+|Island|Beatdown Box Set|L|227505||
+|Island|Beatdown Box Set|L|227505||
+|Island|Beatdown Box Set|L|227505||
+|Island|Starter 2000|L|227505||
+|Island|Starter 2000|L|227505||
+|Island|Battle Royale Box Set|L|227505||
+|Island|Battle Royale Box Set|L|227505||
+|Island|Battle Royale Box Set|L|227505||
+|Island|Battle Royale Box Set|L|227505||
+|Island|Battle Royale Box Set|L|227505||
+|Island|Portal Second Age|L|227505||
+|Island|Portal Second Age|L|227505||
+|Island|Portal Second Age|L|227505||
+|Island|Tempest|L|227505||
+|Island|Tempest|L|227505||
+|Island|Tempest|L|227505||
+|Island|Tempest|L|227505||
+|Island|Portal|L|227505||
+|Island|Portal|L|227505||
+|Island|Portal|L|227505||
+|Island|Portal|L|227505||
+|Island|Fifth Edition|L|227505||
+|Island|Fifth Edition|L|227505||
+|Island|Fifth Edition|L|227505||
+|Island|Fifth Edition|L|227505||
+|Island|Mirage|L|227505||
+|Island|Mirage|L|227505||
+|Island|Mirage|L|227505||
+|Island|Mirage|L|227505||
+|Island|Ice Age|L|227505||
+|Island|Ice Age|L|227505||
+|Island|Ice Age|L|227505||
+|Island|Fourth Edition|L|227505||
+|Island|Fourth Edition|L|227505||
+|Island|Fourth Edition|L|227505||
+|Island|Revised Edition|L|227505||
+|Island|Revised Edition|L|227505||
+|Island|Revised Edition|L|227505||
+|Island|Unlimited Edition|L|227505||
+|Island|Unlimited Edition|L|227505||
+|Island|Unlimited Edition|L|227505||
+|Island|Limited Edition Beta|L|227505||
+|Island|Limited Edition Beta|L|227505||
+|Island|Limited Edition Beta|L|227505||
+|Island|Limited Edition Alpha|L|227505||
+|Island|Limited Edition Alpha|L|227505||
+|Island|Duel Decks: Jace vs. Chandra|L|227505|30|
+|Island|Duel Decks: Jace vs. Chandra|L|227505|31|
+|Island|Duel Decks: Jace vs. Chandra|L|227505|32|
+|Island|Duel Decks: Jace vs. Chandra|L|227505|33|
+|Island|Premium Deck Series: Slivers|L|227505|38|
+|Island|Duel Decks: Phyrexia vs. the Coalition|L|227505|68|
+|Island|Duel Decks: Elspeth vs. Tezzeret|L|227505|76|
+|Island|Duel Decks: Elspeth vs. Tezzeret|L|227505|77|
+|Island|Duel Decks: Elspeth vs. Tezzeret|L|227505|78|
+|Island|Duel Decks: Elspeth vs. Tezzeret|L|227505|79|
+|Island|Unglued|C|227505|85|
+|Island|Unhinged|L|227505|137|
+|Island|Archenemy|L|227505|139|
+|Island|Archenemy|L|227505|140|
+|Island|Archenemy|L|227505|141|
+|Island|Planechase|L|227505|147|
+|Island|Mirrodin Besieged|L|227505|148|
+|Island|Planechase|L|227505|148|
+|Island|Mirrodin Besieged|L|227505|149|
+|Island|Planechase|L|227505|149|
+|Island|Planechase|L|227505|150|
+|Island|Starter 1999|L|227505|158|
+|Island|Starter 1999|L|227505|159|
+|Island|Starter 1999|L|227505|160|
+|Island|Starter 1999|L|227505|161|
+|Island|New Phyrexia|L|227505|168|
+|Island|New Phyrexia|L|227505|169|
+|Island|Portal Three Kingdoms|L|227505|169|
+|Island|Portal Three Kingdoms|L|227505|170|
+|Island|Portal Three Kingdoms|L|227505|171|
+|Island|Masters Edition|L|227505|184|
+|Island|Masters Edition|L|227505|185|
+|Island|Masters Edition|L|227505|186|
+|Island|Masters Edition III|L|227505|219|
+|Island|Masters Edition III|L|227505|220|
+|Island|Masters Edition III|L|227505|221|
+|Island|Rise of the Eldrazi|L|227505|233|
+|Island|Scars of Mirrodin|L|227505|234|
+|Island|Magic 2011|L|227505|234|
+|Island|Rise of the Eldrazi|L|227505|234|
+|Island|Zendikar|L|227505|234|
+|Island|Zendikar|L|227505|234|
+|Island|Magic 2010|L|227505|234|
+|Island|Shards of Alara|L|227505|234|
+|Island|Scars of Mirrodin|L|227505|235|
+|Island|Magic 2011|L|227505|235|
+|Island|Rise of the Eldrazi|L|227505|235|
+|Island|Zendikar|L|227505|235|
+|Island|Zendikar|L|227505|235|
+|Island|Magic 2010|L|227505|235|
+|Island|Shards of Alara|L|227505|235|
+|Island|Scars of Mirrodin|L|227505|236|
+|Island|Magic 2011|L|227505|236|
+|Island|Rise of the Eldrazi|L|227505|236|
+|Island|Zendikar|L|227505|236|
+|Island|Zendikar|L|227505|236|
+|Island|Magic 2010|L|227505|236|
+|Island|Shards of Alara|L|227505|236|
+|Island|Scars of Mirrodin|L|227505|237|
+|Island|Magic 2011|L|227505|237|
+|Island|Zendikar|L|227505|237|
+|Island|Zendikar|L|227505|237|
+|Island|Magic 2010|L|227505|237|
+|Island|Shards of Alara|L|227505|237|
+|Island|Shadowmoor|L|227505|286|
+|Island|Lorwyn|L|227505|286|
+|Island|Time Spiral|L|227505|286|
+|Island|Shadowmoor|L|227505|287|
+|Island|Lorwyn|L|227505|287|
+|Island|Time Spiral|L|227505|287|
+|Island|Shadowmoor|L|227505|288|
+|Island|Lorwyn|L|227505|288|
+|Island|Time Spiral|L|227505|288|
+|Island|Shadowmoor|L|227505|289|
+|Island|Lorwyn|L|227505|289|
+|Island|Time Spiral|L|227505|289|
+|Island|Ravnica: City of Guilds|L|227505|291|
+|Island|Champions of Kamigawa|L|227505|291|
+|Island|Mirrodin|L|227505|291|
+|Island|Ravnica: City of Guilds|L|227505|292|
+|Island|Champions of Kamigawa|L|227505|292|
+|Island|Mirrodin|L|227505|292|
+|Island|Ravnica: City of Guilds|L|227505|293|
+|Island|Champions of Kamigawa|L|227505|293|
+|Island|Mirrodin|L|227505|293|
+|Island|Ravnica: City of Guilds|L|227505|294|
+|Island|Champions of Kamigawa|L|227505|294|
+|Island|Mirrodin|L|227505|294|
+|Island|Seventh Edition|L|227505|332|
+|Island|Seventh Edition|L|227505|333|
+|Island|Seventh Edition|L|227505|334|
+|Island|Ninth Edition|L|227505|335|
+|Island|Eighth Edition|L|227505|335|
+|Island|Onslaught|L|227505|335|
+|Island|Odyssey|L|227505|335|
+|Island|Seventh Edition|L|227505|335|
+|Island|Invasion|L|227505|335|
+|Island|Mercadian Masques|L|227505|335|
+|Island|Classic Sixth Edition|L|227505|335|
+|Island|Urza's Saga|L|227505|335|
+|Island|Ninth Edition|L|227505|336|
+|Island|Eighth Edition|L|227505|336|
+|Island|Onslaught|L|227505|336|
+|Island|Odyssey|L|227505|336|
+|Island|Invasion|L|227505|336|
+|Island|Mercadian Masques|L|227505|336|
+|Island|Classic Sixth Edition|L|227505|336|
+|Island|Urza's Saga|L|227505|336|
+|Island|Ninth Edition|L|227505|337|
+|Island|Eighth Edition|L|227505|337|
+|Island|Onslaught|L|227505|337|
+|Island|Odyssey|L|227505|337|
+|Island|Invasion|L|227505|337|
+|Island|Mercadian Masques|L|227505|337|
+|Island|Classic Sixth Edition|L|227505|337|
+|Island|Urza's Saga|L|227505|337|
+|Island|Ninth Edition|L|227505|338|
+|Island|Eighth Edition|L|227505|338|
+|Island|Onslaught|L|227505|338|
+|Island|Odyssey|L|227505|338|
+|Island|Invasion|L|227505|338|
+|Island|Mercadian Masques|L|227505|338|
+|Island|Classic Sixth Edition|L|227505|338|
+|Island|Urza's Saga|L|227505|338|
+|Island|Tenth Edition|L|227505|368|
+|Island|Tenth Edition|L|227505|369|
+|Island|Tenth Edition|L|227505|370|
+|Island|Tenth Edition|L|227505|371|
 |Island Fish Jasconius|Fourth Edition|R|2161||
 |Island Fish Jasconius|Revised Edition|R|2161||
 |Island Fish Jasconius|Arabian Nights|R|2161||
@@ -8301,6 +8400,7 @@
 |Isleback Spawn|Shadowmoor|R|147370|40|
 |Isochron Scepter|From the Vault: Relics|M|212626|3|
 |Isochron Scepter|Mirrodin|U|212626|188|
+|Isolation Cell|New Phyrexia|U|218057|141|
 |Isperia the Inscrutable|Dissension|R|107448|114|
 |It That Betrays|Rise of the Eldrazi|R|198171|7|
 |Ith, High Arcanist|Time Spiral|R|114903|241|
@@ -8400,7 +8500,8 @@
 |Jasmine Boreal|Time Spiral "Timeshifted"|S|109764|93|
 |Jasmine Seer|Urza's Destiny|U|15124|10|
 |Jawbone Skulkin|Eventide|C|158295|170|
-|Jaws of Stone|Shadowmoor|U|146070|97|
+|Jaws of Stone|Duel Decks: Knights vs. Dragons|U|243494|77|
+|Jaws of Stone|Shadowmoor|U|243494|97|
 |Jaya Ballard Avatar|Vanguard|S|182255|64|
 |Jaya Ballard, Task Mage|Premium Deck Series: Fire and Lightning|R|234707|10|
 |Jaya Ballard, Task Mage|Time Spiral|R|234707|166|
@@ -8450,6 +8551,7 @@
 |Jhovall Rider|Mercadian Masques|U|20172|26|
 |Jihad|Arabian Nights|R|973||
 |Jilt|Apocalypse|C|26797|27|
+|Jin-Gitaxias, Core Augur|New Phyrexia|M|214349|37|
 |Jinx|Homelands|C|2945||
 |Jinxed Choker|Mirrodin|R|46760|189|
 |Jinxed Idol|Tempest|R|208006||
@@ -8477,6 +8579,7 @@
 |Jolrael's Favor|Prophecy|C|24660|116|
 |Jolt|Mirage|C|3341||
 |Jolting Merfolk|Nemesis|U|21281|34|
+|Jor Kadeen, the Prevailer|New Phyrexia|R|227508|128|
 |Joraga Bard|Zendikar|C|192227|166|
 |Joraga Treespeaker|Rise of the Eldrazi|U|193462|190|
 |Joraga Warcaller|Worldwake|R|197765|106|
@@ -8532,7 +8635,8 @@
 |Juniper Order Advocate|Alliances|U|184552||
 |Juniper Order Advocate|Masters Edition II|U|184552|20|
 |Juniper Order Druid|Ice Age|C|2575||
-|Juniper Order Ranger|Coldsnap|U|121172|130|
+|Juniper Order Ranger|Duel Decks: Knights vs. Dragons|U|243438|21|
+|Juniper Order Ranger|Coldsnap|U|243438|130|
 |Junk Diver|Urza's Destiny|R|15256|132|
 |Junk Golem|Odyssey|R|29997|300|
 |Junktroller|Ravnica: City of Guilds|U|88977|264|
@@ -8560,7 +8664,8 @@
 |Kabira Crossroads|Duel Decks: Elspeth vs. Tezzeret|C|222762|33|
 |Kabira Crossroads|Zendikar|C|222762|216|
 |Kabira Evangel|Zendikar|R|180347|15|
-|Kabira Vindicator|Rise of the Eldrazi|U|193433|28|
+|Kabira Vindicator|Duel Decks: Knights vs. Dragons|U|243433|16|
+|Kabira Vindicator|Rise of the Eldrazi|U|243433|28|
 |Kaboom!|Onslaught|R|39559|214|
 |Kabuto Moth|Champions of Kamigawa|C|79105|20|
 |Kaervek the Merciless|Archenemy|R|220557|88|
@@ -8615,6 +8720,7 @@
 |Karmic Guide|Urza's Legacy|R|12955|11|
 |Karmic Justice|Odyssey|R|31872|26|
 |Karn|Vanguard|S|4963||
+|Karn Liberated|New Phyrexia|M|214350|1|
 |Karn, Silver Golem|From the Vault: Relics|M|212632|6|
 |Karn, Silver Golem|Urza's Saga|R|212632|298|
 |Karn's Touch|Mercadian Masques|R|19573|86|
@@ -8754,8 +8860,10 @@
 |Killer Whale|Exodus|U|26638|37|
 |Kill-Suit Cultist|Dissension|C|107493|65|
 |Kiln Fiend|Rise of the Eldrazi|C|194912|153|
-|Kilnmouth Dragon|Archenemy|R|220465|44|
-|Kilnmouth Dragon|Legions|R|220465|104|
+|Kiln Walker|New Phyrexia|U|214380|142|
+|Kilnmouth Dragon|Archenemy|R|243477|44|
+|Kilnmouth Dragon|Duel Decks: Knights vs. Dragons|R|243477|59|
+|Kilnmouth Dragon|Legions|R|243477|104|
 |Kindle|Tempest|C|4826||
 |Kindle the Carnage|Dissension|U|107446|66|
 |Kindled Fury|Morningtide|C|193741|92|
@@ -8768,7 +8876,8 @@
 |King's Assassin|Portal|R|4227||
 |Kinsbaile Balloonist|Lorwyn|C|139403|23|
 |Kinsbaile Borderguard|Morningtide|R|152977|14|
-|Kinsbaile Cavalier|Morningtide|R|153279|15|
+|Kinsbaile Cavalier|Morningtide|R|243434|15|
+|Kinsbaile Cavalier|Duel Decks: Knights vs. Dragons|R|243434|17|
 |Kinsbaile Skirmisher|Lorwyn|C|143018|24|
 |Kinscaer Harpoonist|Shadowmoor|C|157876|41|
 |Kira, Great Glass-Spinner|Betrayers of Kamigawa|R|74445|40|
@@ -8849,12 +8958,15 @@
 |Knight Errant|Portal|C|13099||
 |Knight Errant|Starter 1999|C|13099|19|
 |Knight Errant|Seventh Edition|C|13099|24|
-|Knight Exemplar|Magic 2011|R|204988|20|
-|Knight of Cliffhaven|Rise of the Eldrazi|C|194951|29|
+|Knight Exemplar|Duel Decks: Knights vs. Dragons|R|243431|14|
+|Knight Exemplar|Magic 2011|R|243431|20|
+|Knight of Cliffhaven|Duel Decks: Knights vs. Dragons|C|243421|4|
+|Knight of Cliffhaven|Rise of the Eldrazi|C|243421|29|
 |Knight of Dawn|Tempest|U|4883||
 |Knight of Dusk|Tempest|U|129574||
 |Knight of Dusk|Tenth Edition|U|129574|152|
-|Knight of Meadowgrain|Lorwyn|U|139715|28|
+|Knight of Meadowgrain|Duel Decks: Knights vs. Dragons|U|243422|5|
+|Knight of Meadowgrain|Lorwyn|U|243422|28|
 |Knight of New Alara|Alara Reborn|R|189642|70|
 |Knight of Stromgald|Fifth Edition|U|184645||
 |Knight of Stromgald|Ice Age|U|184645||
@@ -8863,9 +8975,11 @@
 |Knight of the Hokey Pokey|Unglued|C|9742|6|
 |Knight of the Holy Nimbus|Time Spiral|U|118907|26|
 |Knight of the Mists|Visions|C|3643||
-|Knight of the Reliquary|Conflux|R|189145|113|
+|Knight of the Reliquary|Duel Decks: Knights vs. Dragons|M|243416|1|
+|Knight of the Reliquary|Conflux|R|243416|113|
 |Knight of the Skyward Eye|Shards of Alara|C|175047|15|
-|Knight of the White Orchid|Shards of Alara|R|178094|16|
+|Knight of the White Orchid|Duel Decks: Knights vs. Dragons|R|243423|6|
+|Knight of the White Orchid|Shards of Alara|R|243423|16|
 |Knight of Valor|Visions|C|3718||
 |Knight-Captain of Eos|Shards of Alara|R|179421|17|
 |Knighthood|Urza's Legacy|U|13171|12|
@@ -8875,7 +8989,8 @@
 |Knollspine Dragon|Shadowmoor|R|147398|98|
 |Knollspine Invocation|Shadowmoor|R|153977|99|
 |Knotvine Mystic|Conflux|U|180265|114|
-|Knotvine Paladin|Alara Reborn|R|180624|71|
+|Knotvine Paladin|Duel Decks: Knights vs. Dragons|R|243427|10|
+|Knotvine Paladin|Alara Reborn|R|243427|71|
 |Know Naught but Fire|Archenemy|C|212600|23|
 |Knowledge Exploitation|Morningtide|R|152664|38|
 |Knowledge Pool|Mirrodin Besieged|R|214035|111|
@@ -9082,6 +9197,7 @@
 |Lash Out|Lorwyn|C|145987|183|
 |Lashknife|Nemesis|C|21257|9|
 |Lashknife Barrier|Planeshift|U|26833|9|
+|Lashwrithe|New Phyrexia|R|214359|143|
 |Last Breath|Shadowmoor|C|147424|11|
 |Last Breath|Mercadian Masques|U|147424|27|
 |Last Caress|Apocalypse|C|27591|41|
@@ -9166,6 +9282,7 @@
 |Leech Bonder|Shadowmoor|U|147406|43|
 |Leeches|Homelands|R|233298||
 |Leeches|Masters Edition IV|R|233298|18|
+|Leeching Bite|New Phyrexia|C|218028|113|
 |Leeching Licid|Tempest|U|4670||
 |Leechridden Swamp|Planechase|U|205401|135|
 |Leechridden Swamp|Shadowmoor|U|205401|273|
@@ -9190,9 +9307,10 @@
 |Leonin Scimitar|Mirrodin|C|135277|193|
 |Leonin Scimitar|Tenth Edition|U|135277|331|
 |Leonin Shikari|Darksteel|R|48579|6|
-|Leonin Skyhunter|Mirrodin Besieged|C|213770|11|
-|Leonin Skyhunter|Mirrodin|U|213770|11|
-|Leonin Skyhunter|Ninth Edition|U|213770|25|
+|Leonin Skyhunter|Duel Decks: Knights vs. Dragons|U|243424|7|
+|Leonin Skyhunter|Mirrodin Besieged|C|243424|11|
+|Leonin Skyhunter|Mirrodin|U|243424|11|
+|Leonin Skyhunter|Ninth Edition|U|243424|25|
 |Leonin Squire|Fifth Dawn|C|72722|9|
 |Leonin Sun Standard|Mirrodin|R|49768|194|
 |Leshrac's Rite|Fifth Edition|U|11377||
@@ -9292,6 +9410,7 @@
 |Lifelace|Limited Edition Alpha|R|2225||
 |Lifeline|Urza's Saga|R|8808|299|
 |Lifelink|Magic 2010|C|190180|18|
+|Life's Finale|New Phyrexia|R|214362|65|
 |Lifesmith|Scars of Mirrodin|U|208252|124|
 |Lifespark Spellbomb|Mirrodin|C|48108|197|
 |Lifespinner|Betrayers of Kamigawa|U|74642|133|
@@ -9383,7 +9502,8 @@
 |Lingering Mirage|Urza's Saga|U|10462|84|
 |Lingering Tormentor|Eventide|U|147437|36|
 |Linvala, Keeper of Silence|Rise of the Eldrazi|M|193660|33|
-|Lionheart Maverick|Guildpact|C|96841|11|
+|Lionheart Maverick|Duel Decks: Knights vs. Dragons|C|243420|3|
+|Lionheart Maverick|Guildpact|C|243420|11|
 |Lion's Eye Diamond|Mirage|R|3255||
 |Liquid Fire|Odyssey|U|29866|201|
 |Liquify|Torment|C|34756|41|
@@ -9547,6 +9667,7 @@
 |Lost Auramancers|Future Sight|U|126146|11|
 |Lost Hours|Future Sight|C|130332|69|
 |Lost in Thought|Judgment|C|34775|45|
+|Lost Leonin|New Phyrexia|C|218053|13|
 |Lost Order of Jarkeld|Ice Age|R|184649||
 |Lost Order of Jarkeld|Masters Edition II|R|184649|24|
 |Lost Soul|Fifth Edition|C|20178||
@@ -9567,6 +9688,7 @@
 |Lowland Oaf|Lorwyn|C|140183|184|
 |Lowland Tracker|Legions|C|45131|17|
 |Loxodon Anchorite|Fifth Dawn|C|50137|10|
+|Loxodon Convert|New Phyrexia|C|218013|14|
 |Loxodon Gatekeeper|Ravnica: City of Guilds|R|83651|25|
 |Loxodon Hierarch|Ravnica: City of Guilds|R|83738|214|
 |Loxodon Hierarch Avatar|Vanguard|S|182266|54|
@@ -9577,10 +9699,11 @@
 |Loxodon Peacekeeper|Mirrodin|R|48180|13|
 |Loxodon Punisher|Mirrodin|R|46105|14|
 |Loxodon Stalwart|Fifth Dawn|U|73567|11|
-|Loxodon Warhammer|Planechase|R|205270|118|
-|Loxodon Warhammer|Mirrodin|U|205270|201|
-|Loxodon Warhammer|Ninth Edition|R|205270|303|
-|Loxodon Warhammer|Tenth Edition|R|205270|332|
+|Loxodon Warhammer|Duel Decks: Knights vs. Dragons|R|243448|31|
+|Loxodon Warhammer|Planechase|R|243448|118|
+|Loxodon Warhammer|Mirrodin|U|243448|201|
+|Loxodon Warhammer|Ninth Edition|R|243448|303|
+|Loxodon Warhammer|Tenth Edition|R|243448|332|
 |Loxodon Wayfarer|Scars of Mirrodin|C|207885|15|
 |Loyal Gyrfalcon|Eventide|U|151059|11|
 |Loyal Retainers|Portal Three Kingdoms|U|201136|12|
@@ -9906,6 +10029,7 @@
 |Maro|Eighth Edition|R|83161|264|
 |Maro Avatar|Vanguard|S|182297|52|
 |Marrow Chomper|Alara Reborn|U|183014|93|
+|Marrow Shards|New Phyrexia|U|230072|15|
 |Marrow-Gnawer|Champions of Kamigawa|R|50253|124|
 |Marsh Boa|Prophecy|C|24664|118|
 |Marsh Casualties|Zendikar|U|177543|101|
@@ -9975,6 +10099,7 @@
 |Master of the Veil|Legions|U|42068|43|
 |Master of the Wild Hunt|Magic 2010|M|191064|191|
 |Master of the Wild Hunt Avatar|Vanguard|S|205956|96|
+|Master Splicer|New Phyrexia|U|233062|16|
 |Master Transmuter|Archenemy|R|220510|7|
 |Master Transmuter|Conflux|R|220510|31|
 |Master Warcraft|Ravnica: City of Guilds|R|83572|250|
@@ -9987,6 +10112,7 @@
 |Matsu-Tribe Birdstalker|Saviors of Kamigawa|C|73991|137|
 |Matsu-Tribe Decoy|Champions of Kamigawa|C|75247|227|
 |Matsu-Tribe Sniper|Betrayers of Kamigawa|C|74619|136|
+|Maul Splicer|New Phyrexia|C|233040|114|
 |Mausoleum Turnkey|Ravnica: City of Guilds|U|83893|94|
 |Mawcor|Tempest|R|13035||
 |Mawcor|Seventh Edition|R|13035|87|
@@ -10028,6 +10154,7 @@
 |Melancholy|Planar Chaos|C|130714|88|
 |Melee|Ice Age|U|2636||
 |Melesse Spirit|Mirage|U|3502||
+|Melira, Sylvok Outcast|New Phyrexia|R|194274|115|
 |Melira's Keepers|Mirrodin Besieged|U|213796|83|
 |Meloku the Clouded Mirror|Champions of Kamigawa|R|75268|74|
 |Melt Terrain|Scars of Mirrodin|C|194106|97|
@@ -10058,6 +10185,7 @@
 |Meng Huo's Horde|Masters Edition III|C|201219|129|
 |Meng Huo's Horde|Portal Three Kingdoms|C|201219|143|
 |Mental Discipline|Urza's Destiny|C|15158|37|
+|Mental Misstep|New Phyrexia|U|230066|38|
 |Mental Note|Judgment|C|36114|46|
 |Mephidross Vampire|Fifth Dawn|R|50211|53|
 |Mephitic Ooze|Darksteel|R|46154|47|
@@ -10182,8 +10310,9 @@
 |Mightstone|Antiquities|U|202453||
 |Mightstone|Masters Edition IV|C|202453|215|
 |Mighty Emergence|Shards of Alara|U|178097|137|
-|Mighty Leap|Magic 2011|C|208280|22|
-|Mighty Leap|Duel Decks: Elspeth vs. Tezzeret|C|208280|24|
+|Mighty Leap|Magic 2011|C|243443|22|
+|Mighty Leap|Duel Decks: Elspeth vs. Tezzeret|C|243443|24|
+|Mighty Leap|Duel Decks: Knights vs. Dragons|C|243443|26|
 |Mijae Djinn|Revised Edition|R|202503||
 |Mijae Djinn|Arabian Nights|R|202503||
 |Mijae Djinn|Masters Edition IV|R|202503|127|
@@ -10261,6 +10390,8 @@
 |Mindbender Spores|Mirage|R|3398||
 |Mindblaze|Champions of Kamigawa|R|75248|180|
 |Mindbreak Trap|Zendikar|M|197532|57|
+|Mindcrank|New Phyrexia|U|233078|144|
+|Mindculling|New Phyrexia|U|218085|39|
 |Mindlash Sliver|Time Spiral|C|118867|118|
 |Mindleech Mass|Ravnica: City of Guilds|R|89054|215|
 |Mindless Automaton|Time Spiral "Timeshifted"|S|108933|111|
@@ -10465,6 +10596,7 @@
 |Molten Ravager|Zendikar|C|191359|138|
 |Molten Sentry|Ravnica: City of Guilds|R|89080|136|
 |Molten Slagheap|Time Spiral|U|108860|276|
+|Moltensteel Dragon|New Phyrexia|R|233051|88|
 |Molten-Tail Masticore|Scars of Mirrodin|M|215089|177|
 |Molting Harpy|Mercadian Masques|U|19818|148|
 |Molting Skin|Saviors of Kamigawa|U|87331|138|
@@ -10530,7 +10662,8 @@
 |Morbid Bloom|Alara Reborn|U|179614|94|
 |Morbid Hunger|Odyssey|C|29745|150|
 |Morbid Plunder|Mirrodin Besieged|C|222863|47|
-|Mordant Dragon|Worldwake|R|197162|85|
+|Mordant Dragon|Duel Decks: Knights vs. Dragons|R|243476|58|
+|Mordant Dragon|Worldwake|R|243476|85|
 |Morgue Theft|Odyssey|C|29743|151|
 |Morgue Thrull|Stronghold|C|5191||
 |Morgue Toad|Planeshift|C|27589|46|
@@ -10554,6 +10687,7 @@
 |Mortify|Guildpact|U|96930|122|
 |Mortipede|Ravnica: City of Guilds|C|87955|96|
 |Mortiphobia|Torment|U|36433|72|
+|Mortis Dogs|New Phyrexia|C|233072|66|
 |Mortivore|Ninth Edition|R|129648|147|
 |Mortivore|Odyssey|R|129648|152|
 |Mortivore|Tenth Edition|R|129648|161|
@@ -10577,192 +10711,198 @@
 |Mother of Goons|Unhinged|C|74292|59|
 |Mother of Runes|Urza's Legacy|U|5704|14|
 |Mothrider Samurai|Champions of Kamigawa|C|50385|34|
-|Mountain|Beatdown Box Set|L|234740||
-|Mountain|Beatdown Box Set|L|234740||
-|Mountain|Beatdown Box Set|L|234740||
-|Mountain|Starter 2000|L|234740||
-|Mountain|Starter 2000|L|234740||
-|Mountain|Battle Royale Box Set|L|234740||
-|Mountain|Battle Royale Box Set|L|234740||
-|Mountain|Battle Royale Box Set|L|234740||
-|Mountain|Battle Royale Box Set|L|234740||
-|Mountain|Battle Royale Box Set|L|234740||
-|Mountain|Battle Royale Box Set|L|234740||
-|Mountain|Battle Royale Box Set|L|234740||
-|Mountain|Battle Royale Box Set|L|234740||
-|Mountain|Battle Royale Box Set|L|234740||
-|Mountain|Portal Second Age|L|234740||
-|Mountain|Portal Second Age|L|234740||
-|Mountain|Portal Second Age|L|234740||
-|Mountain|Tempest|L|234740||
-|Mountain|Tempest|L|234740||
-|Mountain|Tempest|L|234740||
-|Mountain|Tempest|L|234740||
-|Mountain|Portal|L|234740||
-|Mountain|Portal|L|234740||
-|Mountain|Portal|L|234740||
-|Mountain|Portal|L|234740||
-|Mountain|Fifth Edition|L|234740||
-|Mountain|Fifth Edition|L|234740||
-|Mountain|Fifth Edition|L|234740||
-|Mountain|Fifth Edition|L|234740||
-|Mountain|Mirage|L|234740||
-|Mountain|Mirage|L|234740||
-|Mountain|Mirage|L|234740||
-|Mountain|Mirage|L|234740||
-|Mountain|Ice Age|L|234740||
-|Mountain|Ice Age|L|234740||
-|Mountain|Ice Age|L|234740||
-|Mountain|Fourth Edition|L|234740||
-|Mountain|Fourth Edition|L|234740||
-|Mountain|Fourth Edition|L|234740||
-|Mountain|Revised Edition|L|234740||
-|Mountain|Revised Edition|L|234740||
-|Mountain|Revised Edition|L|234740||
-|Mountain|Arabian Nights|C|234740||
-|Mountain|Unlimited Edition|L|234740||
-|Mountain|Unlimited Edition|L|234740||
-|Mountain|Unlimited Edition|L|234740||
-|Mountain|Limited Edition Beta|L|234740||
-|Mountain|Limited Edition Beta|L|234740||
-|Mountain|Limited Edition Beta|L|234740||
-|Mountain|Limited Edition Alpha|L|234740||
-|Mountain|Limited Edition Alpha|L|234740||
-|Mountain|Premium Deck Series: Fire and Lightning|L|234740|31|
-|Mountain|Premium Deck Series: Fire and Lightning|L|234740|32|
-|Mountain|Premium Deck Series: Fire and Lightning|L|234740|33|
-|Mountain|Premium Deck Series: Fire and Lightning|L|234740|34|
-|Mountain|Premium Deck Series: Slivers|L|234740|40|
-|Mountain|Duel Decks: Jace vs. Chandra|L|234740|59|
-|Mountain|Duel Decks: Elves vs. Goblins|L|234740|59|
-|Mountain|Duel Decks: Jace vs. Chandra|L|234740|60|
-|Mountain|Duel Decks: Elves vs. Goblins|L|234740|60|
-|Mountain|Duel Decks: Jace vs. Chandra|L|234740|61|
-|Mountain|Duel Decks: Elves vs. Goblins|L|234740|61|
-|Mountain|Duel Decks: Jace vs. Chandra|L|234740|62|
-|Mountain|Duel Decks: Elves vs. Goblins|L|234740|62|
-|Mountain|Duel Decks: Phyrexia vs. the Coalition|L|234740|69|
-|Mountain|Unglued|C|234740|87|
-|Mountain|Unhinged|L|234740|139|
-|Mountain|Archenemy|L|234740|145|
-|Mountain|Archenemy|L|234740|146|
-|Mountain|Archenemy|L|234740|147|
-|Mountain|Mirrodin Besieged|L|234740|152|
-|Mountain|Mirrodin Besieged|L|234740|153|
-|Mountain|Planechase|L|234740|156|
-|Mountain|Planechase|L|234740|157|
-|Mountain|Planechase|L|234740|158|
-|Mountain|Planechase|L|234740|159|
-|Mountain|Planechase|L|234740|160|
-|Mountain|Planechase|L|234740|161|
-|Mountain|Planechase|L|234740|162|
-|Mountain|Starter 1999|L|234740|162|
-|Mountain|Planechase|L|234740|163|
-|Mountain|Starter 1999|L|234740|163|
-|Mountain|Planechase|L|234740|164|
-|Mountain|Starter 1999|L|234740|164|
-|Mountain|Starter 1999|L|234740|165|
-|Mountain|Portal Three Kingdoms|L|234740|175|
-|Mountain|Portal Three Kingdoms|L|234740|176|
-|Mountain|Portal Three Kingdoms|L|234740|177|
-|Mountain|Masters Edition|L|234740|190|
-|Mountain|Masters Edition|L|234740|191|
-|Mountain|Masters Edition|L|234740|192|
-|Mountain|Masters Edition III|L|234740|225|
-|Mountain|Masters Edition III|L|234740|226|
-|Mountain|Masters Edition III|L|234740|227|
-|Mountain|Rise of the Eldrazi|L|234740|241|
-|Mountain|Scars of Mirrodin|L|234740|242|
-|Mountain|Magic 2011|L|234740|242|
-|Mountain|Rise of the Eldrazi|L|234740|242|
-|Mountain|Zendikar|L|234740|242|
-|Mountain|Zendikar|L|234740|242|
-|Mountain|Magic 2010|L|234740|242|
-|Mountain|Shards of Alara|L|234740|242|
-|Mountain|Scars of Mirrodin|L|234740|243|
-|Mountain|Magic 2011|L|234740|243|
-|Mountain|Rise of the Eldrazi|L|234740|243|
-|Mountain|Zendikar|L|234740|243|
-|Mountain|Zendikar|L|234740|243|
-|Mountain|Magic 2010|L|234740|243|
-|Mountain|Shards of Alara|L|234740|243|
-|Mountain|Scars of Mirrodin|L|234740|244|
-|Mountain|Magic 2011|L|234740|244|
-|Mountain|Rise of the Eldrazi|L|234740|244|
-|Mountain|Zendikar|L|234740|244|
-|Mountain|Zendikar|L|234740|244|
-|Mountain|Magic 2010|L|234740|244|
-|Mountain|Shards of Alara|L|234740|244|
-|Mountain|Scars of Mirrodin|L|234740|245|
-|Mountain|Magic 2011|L|234740|245|
-|Mountain|Zendikar|L|234740|245|
-|Mountain|Zendikar|L|234740|245|
-|Mountain|Magic 2010|L|234740|245|
-|Mountain|Shards of Alara|L|234740|245|
-|Mountain|Shadowmoor|L|234740|294|
-|Mountain|Lorwyn|L|234740|294|
-|Mountain|Time Spiral|L|234740|294|
-|Mountain|Shadowmoor|L|234740|295|
-|Mountain|Lorwyn|L|234740|295|
-|Mountain|Time Spiral|L|234740|295|
-|Mountain|Shadowmoor|L|234740|296|
-|Mountain|Lorwyn|L|234740|296|
-|Mountain|Time Spiral|L|234740|296|
-|Mountain|Shadowmoor|L|234740|297|
-|Mountain|Lorwyn|L|234740|297|
-|Mountain|Time Spiral|L|234740|297|
-|Mountain|Ravnica: City of Guilds|L|234740|299|
-|Mountain|Champions of Kamigawa|L|234740|299|
-|Mountain|Mirrodin|L|234740|299|
-|Mountain|Ravnica: City of Guilds|L|234740|300|
-|Mountain|Champions of Kamigawa|L|234740|300|
-|Mountain|Mirrodin|L|234740|300|
-|Mountain|Ravnica: City of Guilds|L|234740|301|
-|Mountain|Champions of Kamigawa|L|234740|301|
-|Mountain|Mirrodin|L|234740|301|
-|Mountain|Ravnica: City of Guilds|L|234740|302|
-|Mountain|Champions of Kamigawa|L|234740|302|
-|Mountain|Mirrodin|L|234740|302|
-|Mountain|Seventh Edition|L|234740|337|
-|Mountain|Seventh Edition|L|234740|338|
-|Mountain|Seventh Edition|L|234740|339|
-|Mountain|Seventh Edition|L|234740|340|
-|Mountain|Ninth Edition|L|234740|343|
-|Mountain|Eighth Edition|L|234740|343|
-|Mountain|Onslaught|L|234740|343|
-|Mountain|Odyssey|L|234740|343|
-|Mountain|Invasion|L|234740|343|
-|Mountain|Mercadian Masques|L|234740|343|
-|Mountain|Classic Sixth Edition|L|234740|343|
-|Mountain|Urza's Saga|L|234740|343|
-|Mountain|Ninth Edition|L|234740|344|
-|Mountain|Eighth Edition|L|234740|344|
-|Mountain|Onslaught|L|234740|344|
-|Mountain|Odyssey|L|234740|344|
-|Mountain|Invasion|L|234740|344|
-|Mountain|Mercadian Masques|L|234740|344|
-|Mountain|Classic Sixth Edition|L|234740|344|
-|Mountain|Urza's Saga|L|234740|344|
-|Mountain|Ninth Edition|L|234740|345|
-|Mountain|Eighth Edition|L|234740|345|
-|Mountain|Onslaught|L|234740|345|
-|Mountain|Odyssey|L|234740|345|
-|Mountain|Invasion|L|234740|345|
-|Mountain|Mercadian Masques|L|234740|345|
-|Mountain|Classic Sixth Edition|L|234740|345|
-|Mountain|Urza's Saga|L|234740|345|
-|Mountain|Ninth Edition|L|234740|346|
-|Mountain|Eighth Edition|L|234740|346|
-|Mountain|Onslaught|L|234740|346|
-|Mountain|Odyssey|L|234740|346|
-|Mountain|Invasion|L|234740|346|
-|Mountain|Mercadian Masques|L|234740|346|
-|Mountain|Classic Sixth Edition|L|234740|346|
-|Mountain|Urza's Saga|L|234740|346|
-|Mountain|Tenth Edition|L|234740|376|
-|Mountain|Tenth Edition|L|234740|377|
-|Mountain|Tenth Edition|L|234740|378|
-|Mountain|Tenth Edition|L|234740|379|
+|Mountain|Beatdown Box Set|L|230064||
+|Mountain|Beatdown Box Set|L|230064||
+|Mountain|Beatdown Box Set|L|230064||
+|Mountain|Starter 2000|L|230064||
+|Mountain|Starter 2000|L|230064||
+|Mountain|Battle Royale Box Set|L|230064||
+|Mountain|Battle Royale Box Set|L|230064||
+|Mountain|Battle Royale Box Set|L|230064||
+|Mountain|Battle Royale Box Set|L|230064||
+|Mountain|Battle Royale Box Set|L|230064||
+|Mountain|Battle Royale Box Set|L|230064||
+|Mountain|Battle Royale Box Set|L|230064||
+|Mountain|Battle Royale Box Set|L|230064||
+|Mountain|Battle Royale Box Set|L|230064||
+|Mountain|Portal Second Age|L|230064||
+|Mountain|Portal Second Age|L|230064||
+|Mountain|Portal Second Age|L|230064||
+|Mountain|Tempest|L|230064||
+|Mountain|Tempest|L|230064||
+|Mountain|Tempest|L|230064||
+|Mountain|Tempest|L|230064||
+|Mountain|Portal|L|230064||
+|Mountain|Portal|L|230064||
+|Mountain|Portal|L|230064||
+|Mountain|Portal|L|230064||
+|Mountain|Fifth Edition|L|230064||
+|Mountain|Fifth Edition|L|230064||
+|Mountain|Fifth Edition|L|230064||
+|Mountain|Fifth Edition|L|230064||
+|Mountain|Mirage|L|230064||
+|Mountain|Mirage|L|230064||
+|Mountain|Mirage|L|230064||
+|Mountain|Mirage|L|230064||
+|Mountain|Ice Age|L|230064||
+|Mountain|Ice Age|L|230064||
+|Mountain|Ice Age|L|230064||
+|Mountain|Fourth Edition|L|230064||
+|Mountain|Fourth Edition|L|230064||
+|Mountain|Fourth Edition|L|230064||
+|Mountain|Revised Edition|L|230064||
+|Mountain|Revised Edition|L|230064||
+|Mountain|Revised Edition|L|230064||
+|Mountain|Arabian Nights|C|230064||
+|Mountain|Unlimited Edition|L|230064||
+|Mountain|Unlimited Edition|L|230064||
+|Mountain|Unlimited Edition|L|230064||
+|Mountain|Limited Edition Beta|L|230064||
+|Mountain|Limited Edition Beta|L|230064||
+|Mountain|Limited Edition Beta|L|230064||
+|Mountain|Limited Edition Alpha|L|230064||
+|Mountain|Limited Edition Alpha|L|230064||
+|Mountain|Premium Deck Series: Fire and Lightning|L|230064|31|
+|Mountain|Premium Deck Series: Fire and Lightning|L|230064|32|
+|Mountain|Premium Deck Series: Fire and Lightning|L|230064|33|
+|Mountain|Premium Deck Series: Fire and Lightning|L|230064|34|
+|Mountain|Premium Deck Series: Slivers|L|230064|40|
+|Mountain|Duel Decks: Jace vs. Chandra|L|230064|59|
+|Mountain|Duel Decks: Elves vs. Goblins|L|230064|59|
+|Mountain|Duel Decks: Jace vs. Chandra|L|230064|60|
+|Mountain|Duel Decks: Elves vs. Goblins|L|230064|60|
+|Mountain|Duel Decks: Jace vs. Chandra|L|230064|61|
+|Mountain|Duel Decks: Elves vs. Goblins|L|230064|61|
+|Mountain|Duel Decks: Jace vs. Chandra|L|230064|62|
+|Mountain|Duel Decks: Elves vs. Goblins|L|230064|62|
+|Mountain|Duel Decks: Phyrexia vs. the Coalition|L|230064|69|
+|Mountain|Duel Decks: Knights vs. Dragons|L|230064|78|
+|Mountain|Duel Decks: Knights vs. Dragons|L|230064|79|
+|Mountain|Duel Decks: Knights vs. Dragons|L|230064|80|
+|Mountain|Duel Decks: Knights vs. Dragons|L|230064|81|
+|Mountain|Unglued|C|230064|87|
+|Mountain|Unhinged|L|230064|139|
+|Mountain|Archenemy|L|230064|145|
+|Mountain|Archenemy|L|230064|146|
+|Mountain|Archenemy|L|230064|147|
+|Mountain|Mirrodin Besieged|L|230064|152|
+|Mountain|Mirrodin Besieged|L|230064|153|
+|Mountain|Planechase|L|230064|156|
+|Mountain|Planechase|L|230064|157|
+|Mountain|Planechase|L|230064|158|
+|Mountain|Planechase|L|230064|159|
+|Mountain|Planechase|L|230064|160|
+|Mountain|Planechase|L|230064|161|
+|Mountain|Planechase|L|230064|162|
+|Mountain|Starter 1999|L|230064|162|
+|Mountain|Planechase|L|230064|163|
+|Mountain|Starter 1999|L|230064|163|
+|Mountain|Planechase|L|230064|164|
+|Mountain|Starter 1999|L|230064|164|
+|Mountain|Starter 1999|L|230064|165|
+|Mountain|New Phyrexia|L|230064|172|
+|Mountain|New Phyrexia|L|230064|173|
+|Mountain|Portal Three Kingdoms|L|230064|175|
+|Mountain|Portal Three Kingdoms|L|230064|176|
+|Mountain|Portal Three Kingdoms|L|230064|177|
+|Mountain|Masters Edition|L|230064|190|
+|Mountain|Masters Edition|L|230064|191|
+|Mountain|Masters Edition|L|230064|192|
+|Mountain|Masters Edition III|L|230064|225|
+|Mountain|Masters Edition III|L|230064|226|
+|Mountain|Masters Edition III|L|230064|227|
+|Mountain|Rise of the Eldrazi|L|230064|241|
+|Mountain|Scars of Mirrodin|L|230064|242|
+|Mountain|Magic 2011|L|230064|242|
+|Mountain|Rise of the Eldrazi|L|230064|242|
+|Mountain|Zendikar|L|230064|242|
+|Mountain|Zendikar|L|230064|242|
+|Mountain|Magic 2010|L|230064|242|
+|Mountain|Shards of Alara|L|230064|242|
+|Mountain|Scars of Mirrodin|L|230064|243|
+|Mountain|Magic 2011|L|230064|243|
+|Mountain|Rise of the Eldrazi|L|230064|243|
+|Mountain|Zendikar|L|230064|243|
+|Mountain|Zendikar|L|230064|243|
+|Mountain|Magic 2010|L|230064|243|
+|Mountain|Shards of Alara|L|230064|243|
+|Mountain|Scars of Mirrodin|L|230064|244|
+|Mountain|Magic 2011|L|230064|244|
+|Mountain|Rise of the Eldrazi|L|230064|244|
+|Mountain|Zendikar|L|230064|244|
+|Mountain|Zendikar|L|230064|244|
+|Mountain|Magic 2010|L|230064|244|
+|Mountain|Shards of Alara|L|230064|244|
+|Mountain|Scars of Mirrodin|L|230064|245|
+|Mountain|Magic 2011|L|230064|245|
+|Mountain|Zendikar|L|230064|245|
+|Mountain|Zendikar|L|230064|245|
+|Mountain|Magic 2010|L|230064|245|
+|Mountain|Shards of Alara|L|230064|245|
+|Mountain|Shadowmoor|L|230064|294|
+|Mountain|Lorwyn|L|230064|294|
+|Mountain|Time Spiral|L|230064|294|
+|Mountain|Shadowmoor|L|230064|295|
+|Mountain|Lorwyn|L|230064|295|
+|Mountain|Time Spiral|L|230064|295|
+|Mountain|Shadowmoor|L|230064|296|
+|Mountain|Lorwyn|L|230064|296|
+|Mountain|Time Spiral|L|230064|296|
+|Mountain|Shadowmoor|L|230064|297|
+|Mountain|Lorwyn|L|230064|297|
+|Mountain|Time Spiral|L|230064|297|
+|Mountain|Ravnica: City of Guilds|L|230064|299|
+|Mountain|Champions of Kamigawa|L|230064|299|
+|Mountain|Mirrodin|L|230064|299|
+|Mountain|Ravnica: City of Guilds|L|230064|300|
+|Mountain|Champions of Kamigawa|L|230064|300|
+|Mountain|Mirrodin|L|230064|300|
+|Mountain|Ravnica: City of Guilds|L|230064|301|
+|Mountain|Champions of Kamigawa|L|230064|301|
+|Mountain|Mirrodin|L|230064|301|
+|Mountain|Ravnica: City of Guilds|L|230064|302|
+|Mountain|Champions of Kamigawa|L|230064|302|
+|Mountain|Mirrodin|L|230064|302|
+|Mountain|Seventh Edition|L|230064|337|
+|Mountain|Seventh Edition|L|230064|338|
+|Mountain|Seventh Edition|L|230064|339|
+|Mountain|Seventh Edition|L|230064|340|
+|Mountain|Ninth Edition|L|230064|343|
+|Mountain|Eighth Edition|L|230064|343|
+|Mountain|Onslaught|L|230064|343|
+|Mountain|Odyssey|L|230064|343|
+|Mountain|Invasion|L|230064|343|
+|Mountain|Mercadian Masques|L|230064|343|
+|Mountain|Classic Sixth Edition|L|230064|343|
+|Mountain|Urza's Saga|L|230064|343|
+|Mountain|Ninth Edition|L|230064|344|
+|Mountain|Eighth Edition|L|230064|344|
+|Mountain|Onslaught|L|230064|344|
+|Mountain|Odyssey|L|230064|344|
+|Mountain|Invasion|L|230064|344|
+|Mountain|Mercadian Masques|L|230064|344|
+|Mountain|Classic Sixth Edition|L|230064|344|
+|Mountain|Urza's Saga|L|230064|344|
+|Mountain|Ninth Edition|L|230064|345|
+|Mountain|Eighth Edition|L|230064|345|
+|Mountain|Onslaught|L|230064|345|
+|Mountain|Odyssey|L|230064|345|
+|Mountain|Invasion|L|230064|345|
+|Mountain|Mercadian Masques|L|230064|345|
+|Mountain|Classic Sixth Edition|L|230064|345|
+|Mountain|Urza's Saga|L|230064|345|
+|Mountain|Ninth Edition|L|230064|346|
+|Mountain|Eighth Edition|L|230064|346|
+|Mountain|Onslaught|L|230064|346|
+|Mountain|Odyssey|L|230064|346|
+|Mountain|Invasion|L|230064|346|
+|Mountain|Mercadian Masques|L|230064|346|
+|Mountain|Classic Sixth Edition|L|230064|346|
+|Mountain|Urza's Saga|L|230064|346|
+|Mountain|Tenth Edition|L|230064|376|
+|Mountain|Tenth Edition|L|230064|377|
+|Mountain|Tenth Edition|L|230064|378|
+|Mountain|Tenth Edition|L|230064|379|
 |Mountain Bandit|Portal Three Kingdoms|C|10585|117|
 |Mountain Goat|Portal|U|16442||
 |Mountain Goat|Fifth Edition|C|16442||
@@ -10811,8 +10951,9 @@
 |Mudbrawler Cohort|Shadowmoor|C|146062|100|
 |Mudbrawler Raiders|Shadowmoor|C|141992|213|
 |Mudbutton Clanger|Morningtide|C|152876|95|
-|Mudbutton Torchrunner|Duel Decks: Elves vs. Goblins|C|157919|46|
-|Mudbutton Torchrunner|Lorwyn|C|157919|185|
+|Mudbutton Torchrunner|Duel Decks: Elves vs. Goblins|C|243470|46|
+|Mudbutton Torchrunner|Duel Decks: Knights vs. Dragons|C|243470|52|
+|Mudbutton Torchrunner|Lorwyn|C|243470|185|
 |Muddle the Mixture|Ravnica: City of Guilds|C|88955|60|
 |Mudhole|Odyssey|R|31740|208|
 |Mudslide|Ice Age|R|184727||
@@ -10848,6 +10989,7 @@
 |Muse Vessel|Dissension|R|107553|163|
 |Musician|Ice Age|R|184755||
 |Musician|Masters Edition II|R|184755|56|
+|Mutagenic Growth|New Phyrexia|C|233070|116|
 |Mutavault|Morningtide|R|152724|148|
 |Mutilate|Duel Decks: Garruk vs. Liliana|R|201819|55|
 |Mutilate|Torment|R|201819|73|
@@ -10862,8 +11004,10 @@
 |Mycoid Shepherd|Alara Reborn|R|179548|73|
 |Mycologist|Planar Chaos|U|124033|27|
 |Mycoloth|Shards of Alara|R|174975|140|
+|Mycosynth Fiend|New Phyrexia|U|217995|117|
 |Mycosynth Golem|Fifth Dawn|R|51136|137|
 |Mycosynth Lattice|Darksteel|R|50527|130|
+|Mycosynth Wellspring|New Phyrexia|C|218039|145|
 |Myojin of Cleansing Fire|Champions of Kamigawa|R|78681|35|
 |Myojin of Infinite Rage|Champions of Kamigawa|R|78986|181|
 |Myojin of Life's Web|Champions of Kamigawa|R|78976|229|
@@ -10886,6 +11030,7 @@
 |Myr Retriever|Mirrodin|U|46126|215|
 |Myr Servitor|Fifth Dawn|C|50179|139|
 |Myr Sire|Mirrodin Besieged|C|213734|116|
+|Myr Superion|New Phyrexia|R|194275|146|
 |Myr Turbine|Mirrodin Besieged|R|213757|117|
 |Myr Welder|Mirrodin Besieged|R|214067|118|
 |Myrsmith|Scars of Mirrodin|U|209712|16|
@@ -11058,6 +11203,7 @@
 |Necropotence|From the Vault: Exiled|M|194977|9|
 |Necropotence|Masters Edition II|R|194977|107|
 |Necropotence Avatar|Vanguard|S|191306|83|
+|Necropouncer|New Phyrexia|U|214367|147|
 |Necrosavant|Visions|R|15390||
 |Necrosavant|Classic Sixth Edition|R|15390|145|
 |Necroskitter|Eventide|R|152080|38|
@@ -11257,6 +11403,7 @@
 |Nomads' Assembly|Rise of the Eldrazi|R|198180|39|
 |Nomads en-Kor|Stronghold|C|5196||
 |Norin the Wary|Time Spiral|R|113512|171|
+|Norn's Annex|New Phyrexia|R|233050|17|
 |Norritt|Ice Age|C|2479||
 |North Star|Legends|R|1415||
 |Northern Paladin|Fourth Edition|R|13166||
@@ -11294,6 +11441,7 @@
 |Noxious Ghoul|Planechase|U|205420|35|
 |Noxious Ghoul|Legions|U|205420|77|
 |Noxious Hatchling|Eventide|U|153448|124|
+|Noxious Revival|New Phyrexia|U|230067|118|
 |Noxious Toad|Portal|U|4233||
 |Noxious Vapors|Planeshift|U|26478|49|
 |Nucklavee|Eventide|U|153058|110|
@@ -11310,6 +11458,7 @@
 |Nulltread Gargantuan|Alara Reborn|U|179580|102|
 |Numai Outcast|Champions of Kamigawa|U|50431|134|
 |Number Crunch|Unhinged|C|74337|42|
+|Numbing Dose|New Phyrexia|C|218040|40|
 |Numot, the Devastator|Planar Chaos|R|124062|160|
 |Nurturer Initiate|Shadowmoor|C|142035|124|
 |Nurturing Licid|Tempest|U|4776||
@@ -11345,10 +11494,11 @@
 |Obliterate|Invasion|R|45396|156|
 |Obliterate|Eighth Edition|R|45396|204|
 |Oblivion Crown|Future Sight|C|132219|73|
-|Oblivion Ring|Archenemy|C|220586|3|
-|Oblivion Ring|Planechase|C|220586|4|
-|Oblivion Ring|Shards of Alara|C|220586|20|
-|Oblivion Ring|Lorwyn|C|220586|34|
+|Oblivion Ring|Archenemy|C|243451|3|
+|Oblivion Ring|Planechase|C|243451|4|
+|Oblivion Ring|Shards of Alara|C|243451|20|
+|Oblivion Ring|Duel Decks: Knights vs. Dragons|C|243451|34|
+|Oblivion Ring|Lorwyn|C|243451|34|
 |Oblivion Stone|Mirrodin|R|34901|222|
 |Oboro Breezecaller|Saviors of Kamigawa|C|88784|48|
 |Oboro Envoy|Saviors of Kamigawa|U|74211|49|
@@ -11383,6 +11533,7 @@
 |Ogre Geargrabber|Scars of Mirrodin|U|215101|99|
 |Ogre Leadfoot|Mirrodin|C|45993|102|
 |Ogre Marauder|Betrayers of Kamigawa|U|74594|75|
+|Ogre Menial|New Phyrexia|C|233082|89|
 |Ogre Recluse|Betrayers of Kamigawa|U|74645|113|
 |Ogre Resister|Mirrodin Besieged|C|213795|72|
 |Ogre Savant|Guildpact|C|97236|70|
@@ -11412,6 +11563,7 @@
 |Old Man of the Sea|Masters Edition III|R|201144|45|
 |Omega Myr|Mirrodin|C|48605|223|
 |Omen|Portal|C|4269||
+|Omen Machine|New Phyrexia|R|233042|148|
 |Omen of Fire|Alliances|R|3177||
 |Omnath, Locus of Mana|Worldwake|M|197759|109|
 |Omnibian|Dissension|R|83737|119|
@@ -11705,7 +11857,8 @@
 |Paladin en-Vec|Exodus|R|129668|12|
 |Paladin en-Vec|Tenth Edition|R|129668|32|
 |Paladin en-Vec|Ninth Edition|R|129668|32|
-|Paladin of Prahv|Dissension|U|107433|14|
+|Paladin of Prahv|Dissension|U|243439|14|
+|Paladin of Prahv|Duel Decks: Knights vs. Dragons|U|243439|22|
 |Pale Bears|Ice Age|R|2580||
 |Pale Moon|Nemesis|R|21302|36|
 |Pale Recluse|Alara Reborn|C|220523|74|
@@ -11764,6 +11917,7 @@
 |Parapet|Visions|C|3721||
 |Parapet Watchers|Shadowmoor|C|152059|45|
 |Parasitic Bond|Urza's Saga|U|8816|145|
+|Parasitic Implant|New Phyrexia|C|194216|67|
 |Parasitic Strix|Conflux|C|175021|32|
 |Parch|Urza's Legacy|C|12415|86|
 |Pardic Arsonist|Torment|U|32213|105|
@@ -11914,6 +12068,7 @@
 |Pestilence Demon|Rise of the Eldrazi|R|193431|124|
 |Pestilence Rats|Ice Age|C|2481||
 |Pestilent Kathari|Conflux|C|179518|50|
+|Pestilent Souleater|New Phyrexia|C|233085|149|
 |Petalmane Baku|Betrayers of Kamigawa|C|74455|139|
 |Petals of Insight|Champions of Kamigawa|U|50254|79|
 |Petra Sphinx|Chronicles|R|159309||
@@ -12031,21 +12186,25 @@
 |Phyrexian Ghoul|Urza's Saga|C|209129|148|
 |Phyrexian Gremlins|Antiquities|C|1042||
 |Phyrexian Grimoire|Tempest|R|4621||
-|Phyrexian Hulk|Tempest|U|209133||
-|Phyrexian Hulk|Duel Decks: Phyrexia vs. the Coalition|U|209133|14|
-|Phyrexian Hulk|Ninth Edition|U|209133|306|
-|Phyrexian Hulk|Eighth Edition|U|209133|310|
-|Phyrexian Hulk|Seventh Edition|U|209133|312|
+|Phyrexian Hulk|Tempest|U|214379||
+|Phyrexian Hulk|Duel Decks: Phyrexia vs. the Coalition|U|214379|14|
+|Phyrexian Hulk|New Phyrexia|C|214379|150|
+|Phyrexian Hulk|Ninth Edition|U|214379|306|
+|Phyrexian Hulk|Eighth Edition|U|214379|310|
+|Phyrexian Hulk|Seventh Edition|U|214379|312|
 |Phyrexian Hydra|Mirrodin Besieged|R|214060|85|
 |Phyrexian Infiltrator|Invasion|R|26372|116|
+|Phyrexian Ingester|New Phyrexia|R|214384|41|
 |Phyrexian Ironfoot|Coldsnap|U|121127|139|
 |Phyrexian Juggernaut|Mirrodin Besieged|U|214038|121|
 |Phyrexian Lens|Invasion|R|23231|307|
 |Phyrexian Librarian|Unhinged|U|73962|62|
 |Phyrexian Marauder|Visions|R|3599||
+|Phyrexian Metamorph|New Phyrexia|R|214375|42|
 |Phyrexian Monitor|Urza's Destiny|C|19113|64|
 |Phyrexian Negator|Duel Decks: Phyrexia vs. the Coalition|M|207891|1|
 |Phyrexian Negator|Urza's Destiny|R|207891|65|
+|Phyrexian Obliterator|New Phyrexia|M|214386|68|
 |Phyrexian Plaguelord|Duel Decks: Phyrexia vs. the Coalition|R|209127|13|
 |Phyrexian Plaguelord|Urza's Legacy|R|209127|62|
 |Phyrexian Plaguelord|Eighth Edition|R|209127|153|
@@ -12068,11 +12227,13 @@
 |Phyrexian Snowcrusher|Coldsnap|U|121142|140|
 |Phyrexian Soulgorger|Coldsnap|R|121160|141|
 |Phyrexian Splicer|Tempest|U|4623||
+|Phyrexian Swarmlord|New Phyrexia|R|218086|119|
 |Phyrexian Totem|Duel Decks: Phyrexia vs. the Coalition|U|209142|20|
 |Phyrexian Totem|Time Spiral|U|209142|261|
 |Phyrexian Tower|Urza's Saga|R|10677|322|
 |Phyrexian Tribute|Mirage|R|3303||
 |Phyrexian Tyranny|Planeshift|R|26281|118|
+|Phyrexian Unlife|New Phyrexia|R|218058|18|
 |Phyrexian Vatmother|Mirrodin Besieged|R|214074|52|
 |Phyrexian Vault|Mirage|U|210136||
 |Phyrexian Vault|Duel Decks: Phyrexia vs. the Coalition|U|210136|21|
@@ -12082,6 +12243,7 @@
 |Phyrexian War Beast|Alliances|C|159098||
 |Phyrexian War Beast|Alliances|C|159098||
 |Phyrexian War Beast|Masters Edition|U|159098|162|
+|Phyrexia's Core|New Phyrexia|U|218015|165|
 |Phytohydra|Ravnica: City of Guilds|R|88969|218|
 |Pianna, Nomad Captain|Odyssey|R|31790|39|
 |Pierce Strider|Mirrodin Besieged|U|221561|123|
@@ -12141,6 +12303,7 @@
 |Pit Trap|Seventh Edition|U|25657|313|
 |Pitchstone Wall|Torment|U|36432|110|
 |Pitfall Trap|Zendikar|U|197533|32|
+|Pith Driller|New Phyrexia|C|230079|69|
 |Pithing Needle|Saviors of Kamigawa|R|191592|158|
 |Pithing Needle|Magic 2010|R|191592|217|
 |Pithing Needle|Tenth Edition|R|191592|338|
@@ -12176,179 +12339,185 @@
 |Plaguebearer|Exodus|R|5200|71|
 |Plagued Rusalka|Guildpact|U|107691|56|
 |Plaguemaw Beast|Mirrodin Besieged|U|213752|87|
-|Plains|Starter 2000|L|214671||
-|Plains|Starter 2000|L|214671||
-|Plains|Battle Royale Box Set|L|214671||
-|Plains|Battle Royale Box Set|L|214671||
-|Plains|Battle Royale Box Set|L|214671||
-|Plains|Battle Royale Box Set|L|214671||
-|Plains|Battle Royale Box Set|L|214671||
-|Plains|Battle Royale Box Set|L|214671||
-|Plains|Battle Royale Box Set|L|214671||
-|Plains|Battle Royale Box Set|L|214671||
-|Plains|Battle Royale Box Set|L|214671||
-|Plains|Portal Second Age|L|214671||
-|Plains|Portal Second Age|L|214671||
-|Plains|Portal Second Age|L|214671||
-|Plains|Tempest|L|214671||
-|Plains|Tempest|L|214671||
-|Plains|Tempest|L|214671||
-|Plains|Tempest|L|214671||
-|Plains|Portal|L|214671||
-|Plains|Portal|L|214671||
-|Plains|Portal|L|214671||
-|Plains|Portal|L|214671||
-|Plains|Fifth Edition|L|214671||
-|Plains|Fifth Edition|L|214671||
-|Plains|Fifth Edition|L|214671||
-|Plains|Fifth Edition|L|214671||
-|Plains|Mirage|L|214671||
-|Plains|Mirage|L|214671||
-|Plains|Mirage|L|214671||
-|Plains|Mirage|L|214671||
-|Plains|Ice Age|L|214671||
-|Plains|Ice Age|L|214671||
-|Plains|Ice Age|L|214671||
-|Plains|Fourth Edition|L|214671||
-|Plains|Fourth Edition|L|214671||
-|Plains|Fourth Edition|L|214671||
-|Plains|Revised Edition|L|214671||
-|Plains|Revised Edition|L|214671||
-|Plains|Revised Edition|L|214671||
-|Plains|Unlimited Edition|L|214671||
-|Plains|Unlimited Edition|L|214671||
-|Plains|Unlimited Edition|L|214671||
-|Plains|Limited Edition Beta|L|214671||
-|Plains|Limited Edition Beta|L|214671||
-|Plains|Limited Edition Beta|L|214671||
-|Plains|Limited Edition Alpha|L|214671||
-|Plains|Limited Edition Alpha|L|214671||
-|Plains|Duel Decks: Divine vs. Demonic|L|214671|26|
-|Plains|Duel Decks: Divine vs. Demonic|L|214671|27|
-|Plains|Duel Decks: Divine vs. Demonic|L|214671|28|
-|Plains|Duel Decks: Divine vs. Demonic|L|214671|29|
-|Plains|Duel Decks: Elspeth vs. Tezzeret|L|214671|35|
-|Plains|Duel Decks: Elspeth vs. Tezzeret|L|214671|36|
-|Plains|Duel Decks: Elspeth vs. Tezzeret|L|214671|37|
-|Plains|Premium Deck Series: Slivers|L|214671|37|
-|Plains|Duel Decks: Elspeth vs. Tezzeret|L|214671|38|
-|Plains|Duel Decks: Phyrexia vs. the Coalition|L|214671|67|
-|Plains|Unglued|C|214671|84|
-|Plains|Unhinged|L|214671|136|
-|Plains|Archenemy|L|214671|137|
-|Plains|Archenemy|L|214671|138|
-|Plains|Planechase|L|214671|142|
-|Plains|Planechase|L|214671|143|
-|Plains|Planechase|L|214671|144|
-|Plains|Planechase|L|214671|145|
-|Plains|Mirrodin Besieged|L|214671|146|
-|Plains|Planechase|L|214671|146|
-|Plains|Mirrodin Besieged|L|214671|147|
-|Plains|Starter 1999|L|214671|166|
-|Plains|Portal Three Kingdoms|L|214671|166|
-|Plains|Starter 1999|L|214671|167|
-|Plains|Portal Three Kingdoms|L|214671|167|
-|Plains|Starter 1999|L|214671|168|
-|Plains|Portal Three Kingdoms|L|214671|168|
-|Plains|Starter 1999|L|214671|169|
-|Plains|Masters Edition|L|214671|181|
-|Plains|Masters Edition|L|214671|182|
-|Plains|Masters Edition|L|214671|183|
-|Plains|Masters Edition III|L|214671|216|
-|Plains|Masters Edition III|L|214671|217|
-|Plains|Masters Edition III|L|214671|218|
-|Plains|Rise of the Eldrazi|L|214671|229|
-|Plains|Scars of Mirrodin|L|214671|230|
-|Plains|Magic 2011|L|214671|230|
-|Plains|Rise of the Eldrazi|L|214671|230|
-|Plains|Zendikar|L|214671|230|
-|Plains|Zendikar|L|214671|230|
-|Plains|Magic 2010|L|214671|230|
-|Plains|Shards of Alara|L|214671|230|
-|Plains|Scars of Mirrodin|L|214671|231|
-|Plains|Magic 2011|L|214671|231|
-|Plains|Rise of the Eldrazi|L|214671|231|
-|Plains|Zendikar|L|214671|231|
-|Plains|Zendikar|L|214671|231|
-|Plains|Magic 2010|L|214671|231|
-|Plains|Shards of Alara|L|214671|231|
-|Plains|Scars of Mirrodin|L|214671|232|
-|Plains|Magic 2011|L|214671|232|
-|Plains|Rise of the Eldrazi|L|214671|232|
-|Plains|Zendikar|L|214671|232|
-|Plains|Zendikar|L|214671|232|
-|Plains|Magic 2010|L|214671|232|
-|Plains|Shards of Alara|L|214671|232|
-|Plains|Scars of Mirrodin|L|214671|233|
-|Plains|Magic 2011|L|214671|233|
-|Plains|Zendikar|L|214671|233|
-|Plains|Zendikar|L|214671|233|
-|Plains|Magic 2010|L|214671|233|
-|Plains|Shards of Alara|L|214671|233|
-|Plains|Shadowmoor|L|214671|282|
-|Plains|Lorwyn|L|214671|282|
-|Plains|Time Spiral|L|214671|282|
-|Plains|Shadowmoor|L|214671|283|
-|Plains|Lorwyn|L|214671|283|
-|Plains|Time Spiral|L|214671|283|
-|Plains|Shadowmoor|L|214671|284|
-|Plains|Lorwyn|L|214671|284|
-|Plains|Time Spiral|L|214671|284|
-|Plains|Shadowmoor|L|214671|285|
-|Plains|Lorwyn|L|214671|285|
-|Plains|Time Spiral|L|214671|285|
-|Plains|Ravnica: City of Guilds|L|214671|287|
-|Plains|Champions of Kamigawa|L|214671|287|
-|Plains|Mirrodin|L|214671|287|
-|Plains|Ravnica: City of Guilds|L|214671|288|
-|Plains|Champions of Kamigawa|L|214671|288|
-|Plains|Mirrodin|L|214671|288|
-|Plains|Ravnica: City of Guilds|L|214671|289|
-|Plains|Champions of Kamigawa|L|214671|289|
-|Plains|Mirrodin|L|214671|289|
-|Plains|Ravnica: City of Guilds|L|214671|290|
-|Plains|Champions of Kamigawa|L|214671|290|
-|Plains|Mirrodin|L|214671|290|
-|Plains|Ninth Edition|L|214671|331|
-|Plains|Eighth Edition|L|214671|331|
-|Plains|Onslaught|L|214671|331|
-|Plains|Odyssey|L|214671|331|
-|Plains|Invasion|L|214671|331|
-|Plains|Mercadian Masques|L|214671|331|
-|Plains|Classic Sixth Edition|L|214671|331|
-|Plains|Urza's Saga|L|214671|331|
-|Plains|Ninth Edition|L|214671|332|
-|Plains|Eighth Edition|L|214671|332|
-|Plains|Onslaught|L|214671|332|
-|Plains|Odyssey|L|214671|332|
-|Plains|Invasion|L|214671|332|
-|Plains|Mercadian Masques|L|214671|332|
-|Plains|Classic Sixth Edition|L|214671|332|
-|Plains|Urza's Saga|L|214671|332|
-|Plains|Ninth Edition|L|214671|333|
-|Plains|Eighth Edition|L|214671|333|
-|Plains|Onslaught|L|214671|333|
-|Plains|Odyssey|L|214671|333|
-|Plains|Invasion|L|214671|333|
-|Plains|Mercadian Masques|L|214671|333|
-|Plains|Classic Sixth Edition|L|214671|333|
-|Plains|Urza's Saga|L|214671|333|
-|Plains|Ninth Edition|L|214671|334|
-|Plains|Eighth Edition|L|214671|334|
-|Plains|Onslaught|L|214671|334|
-|Plains|Odyssey|L|214671|334|
-|Plains|Invasion|L|214671|334|
-|Plains|Mercadian Masques|L|214671|334|
-|Plains|Classic Sixth Edition|L|214671|334|
-|Plains|Urza's Saga|L|214671|334|
-|Plains|Seventh Edition|L|214671|341|
-|Plains|Seventh Edition|L|214671|342|
-|Plains|Seventh Edition|L|214671|343|
-|Plains|Seventh Edition|L|214671|344|
-|Plains|Tenth Edition|L|214671|364|
-|Plains|Tenth Edition|L|214671|365|
-|Plains|Tenth Edition|L|214671|366|
-|Plains|Tenth Edition|L|214671|367|
+|Plains|Starter 2000|L|227518||
+|Plains|Starter 2000|L|227518||
+|Plains|Battle Royale Box Set|L|227518||
+|Plains|Battle Royale Box Set|L|227518||
+|Plains|Battle Royale Box Set|L|227518||
+|Plains|Battle Royale Box Set|L|227518||
+|Plains|Battle Royale Box Set|L|227518||
+|Plains|Battle Royale Box Set|L|227518||
+|Plains|Battle Royale Box Set|L|227518||
+|Plains|Battle Royale Box Set|L|227518||
+|Plains|Battle Royale Box Set|L|227518||
+|Plains|Portal Second Age|L|227518||
+|Plains|Portal Second Age|L|227518||
+|Plains|Portal Second Age|L|227518||
+|Plains|Tempest|L|227518||
+|Plains|Tempest|L|227518||
+|Plains|Tempest|L|227518||
+|Plains|Tempest|L|227518||
+|Plains|Portal|L|227518||
+|Plains|Portal|L|227518||
+|Plains|Portal|L|227518||
+|Plains|Portal|L|227518||
+|Plains|Fifth Edition|L|227518||
+|Plains|Fifth Edition|L|227518||
+|Plains|Fifth Edition|L|227518||
+|Plains|Fifth Edition|L|227518||
+|Plains|Mirage|L|227518||
+|Plains|Mirage|L|227518||
+|Plains|Mirage|L|227518||
+|Plains|Mirage|L|227518||
+|Plains|Ice Age|L|227518||
+|Plains|Ice Age|L|227518||
+|Plains|Ice Age|L|227518||
+|Plains|Fourth Edition|L|227518||
+|Plains|Fourth Edition|L|227518||
+|Plains|Fourth Edition|L|227518||
+|Plains|Revised Edition|L|227518||
+|Plains|Revised Edition|L|227518||
+|Plains|Revised Edition|L|227518||
+|Plains|Unlimited Edition|L|227518||
+|Plains|Unlimited Edition|L|227518||
+|Plains|Unlimited Edition|L|227518||
+|Plains|Limited Edition Beta|L|227518||
+|Plains|Limited Edition Beta|L|227518||
+|Plains|Limited Edition Beta|L|227518||
+|Plains|Limited Edition Alpha|L|227518||
+|Plains|Limited Edition Alpha|L|227518||
+|Plains|Duel Decks: Divine vs. Demonic|L|227518|26|
+|Plains|Duel Decks: Divine vs. Demonic|L|227518|27|
+|Plains|Duel Decks: Divine vs. Demonic|L|227518|28|
+|Plains|Duel Decks: Divine vs. Demonic|L|227518|29|
+|Plains|Duel Decks: Elspeth vs. Tezzeret|L|227518|35|
+|Plains|Duel Decks: Elspeth vs. Tezzeret|L|227518|36|
+|Plains|Duel Decks: Elspeth vs. Tezzeret|L|227518|37|
+|Plains|Premium Deck Series: Slivers|L|227518|37|
+|Plains|Duel Decks: Elspeth vs. Tezzeret|L|227518|38|
+|Plains|Duel Decks: Knights vs. Dragons|L|227518|39|
+|Plains|Duel Decks: Knights vs. Dragons|L|227518|40|
+|Plains|Duel Decks: Knights vs. Dragons|L|227518|41|
+|Plains|Duel Decks: Knights vs. Dragons|L|227518|42|
+|Plains|Duel Decks: Phyrexia vs. the Coalition|L|227518|67|
+|Plains|Unglued|C|227518|84|
+|Plains|Unhinged|L|227518|136|
+|Plains|Archenemy|L|227518|137|
+|Plains|Archenemy|L|227518|138|
+|Plains|Planechase|L|227518|142|
+|Plains|Planechase|L|227518|143|
+|Plains|Planechase|L|227518|144|
+|Plains|Planechase|L|227518|145|
+|Plains|Mirrodin Besieged|L|227518|146|
+|Plains|Planechase|L|227518|146|
+|Plains|Mirrodin Besieged|L|227518|147|
+|Plains|New Phyrexia|L|227518|166|
+|Plains|Starter 1999|L|227518|166|
+|Plains|Portal Three Kingdoms|L|227518|166|
+|Plains|New Phyrexia|L|227518|167|
+|Plains|Starter 1999|L|227518|167|
+|Plains|Portal Three Kingdoms|L|227518|167|
+|Plains|Starter 1999|L|227518|168|
+|Plains|Portal Three Kingdoms|L|227518|168|
+|Plains|Starter 1999|L|227518|169|
+|Plains|Masters Edition|L|227518|181|
+|Plains|Masters Edition|L|227518|182|
+|Plains|Masters Edition|L|227518|183|
+|Plains|Masters Edition III|L|227518|216|
+|Plains|Masters Edition III|L|227518|217|
+|Plains|Masters Edition III|L|227518|218|
+|Plains|Rise of the Eldrazi|L|227518|229|
+|Plains|Scars of Mirrodin|L|227518|230|
+|Plains|Magic 2011|L|227518|230|
+|Plains|Rise of the Eldrazi|L|227518|230|
+|Plains|Zendikar|L|227518|230|
+|Plains|Zendikar|L|227518|230|
+|Plains|Magic 2010|L|227518|230|
+|Plains|Shards of Alara|L|227518|230|
+|Plains|Scars of Mirrodin|L|227518|231|
+|Plains|Magic 2011|L|227518|231|
+|Plains|Rise of the Eldrazi|L|227518|231|
+|Plains|Zendikar|L|227518|231|
+|Plains|Zendikar|L|227518|231|
+|Plains|Magic 2010|L|227518|231|
+|Plains|Shards of Alara|L|227518|231|
+|Plains|Scars of Mirrodin|L|227518|232|
+|Plains|Magic 2011|L|227518|232|
+|Plains|Rise of the Eldrazi|L|227518|232|
+|Plains|Zendikar|L|227518|232|
+|Plains|Zendikar|L|227518|232|
+|Plains|Magic 2010|L|227518|232|
+|Plains|Shards of Alara|L|227518|232|
+|Plains|Scars of Mirrodin|L|227518|233|
+|Plains|Magic 2011|L|227518|233|
+|Plains|Zendikar|L|227518|233|
+|Plains|Zendikar|L|227518|233|
+|Plains|Magic 2010|L|227518|233|
+|Plains|Shards of Alara|L|227518|233|
+|Plains|Shadowmoor|L|227518|282|
+|Plains|Lorwyn|L|227518|282|
+|Plains|Time Spiral|L|227518|282|
+|Plains|Shadowmoor|L|227518|283|
+|Plains|Lorwyn|L|227518|283|
+|Plains|Time Spiral|L|227518|283|
+|Plains|Shadowmoor|L|227518|284|
+|Plains|Lorwyn|L|227518|284|
+|Plains|Time Spiral|L|227518|284|
+|Plains|Shadowmoor|L|227518|285|
+|Plains|Lorwyn|L|227518|285|
+|Plains|Time Spiral|L|227518|285|
+|Plains|Ravnica: City of Guilds|L|227518|287|
+|Plains|Champions of Kamigawa|L|227518|287|
+|Plains|Mirrodin|L|227518|287|
+|Plains|Ravnica: City of Guilds|L|227518|288|
+|Plains|Champions of Kamigawa|L|227518|288|
+|Plains|Mirrodin|L|227518|288|
+|Plains|Ravnica: City of Guilds|L|227518|289|
+|Plains|Champions of Kamigawa|L|227518|289|
+|Plains|Mirrodin|L|227518|289|
+|Plains|Ravnica: City of Guilds|L|227518|290|
+|Plains|Champions of Kamigawa|L|227518|290|
+|Plains|Mirrodin|L|227518|290|
+|Plains|Ninth Edition|L|227518|331|
+|Plains|Eighth Edition|L|227518|331|
+|Plains|Onslaught|L|227518|331|
+|Plains|Odyssey|L|227518|331|
+|Plains|Invasion|L|227518|331|
+|Plains|Mercadian Masques|L|227518|331|
+|Plains|Classic Sixth Edition|L|227518|331|
+|Plains|Urza's Saga|L|227518|331|
+|Plains|Ninth Edition|L|227518|332|
+|Plains|Eighth Edition|L|227518|332|
+|Plains|Onslaught|L|227518|332|
+|Plains|Odyssey|L|227518|332|
+|Plains|Invasion|L|227518|332|
+|Plains|Mercadian Masques|L|227518|332|
+|Plains|Classic Sixth Edition|L|227518|332|
+|Plains|Urza's Saga|L|227518|332|
+|Plains|Ninth Edition|L|227518|333|
+|Plains|Eighth Edition|L|227518|333|
+|Plains|Onslaught|L|227518|333|
+|Plains|Odyssey|L|227518|333|
+|Plains|Invasion|L|227518|333|
+|Plains|Mercadian Masques|L|227518|333|
+|Plains|Classic Sixth Edition|L|227518|333|
+|Plains|Urza's Saga|L|227518|333|
+|Plains|Ninth Edition|L|227518|334|
+|Plains|Eighth Edition|L|227518|334|
+|Plains|Onslaught|L|227518|334|
+|Plains|Odyssey|L|227518|334|
+|Plains|Invasion|L|227518|334|
+|Plains|Mercadian Masques|L|227518|334|
+|Plains|Classic Sixth Edition|L|227518|334|
+|Plains|Urza's Saga|L|227518|334|
+|Plains|Seventh Edition|L|227518|341|
+|Plains|Seventh Edition|L|227518|342|
+|Plains|Seventh Edition|L|227518|343|
+|Plains|Seventh Edition|L|227518|344|
+|Plains|Tenth Edition|L|227518|364|
+|Plains|Tenth Edition|L|227518|365|
+|Plains|Tenth Edition|L|227518|366|
+|Plains|Tenth Edition|L|227518|367|
 |Planar Birth|Urza's Saga|R|5766|31|
 |Planar Chaos|Judgment|U|35088|97|
 |Planar Cleansing|Magic 2010|R|191599|24|
@@ -12395,7 +12564,8 @@
 |Plaxcaster Frogling|Dissension|U|97104|123|
 |Plaxmanta|Dissension|U|107286|29|
 |Pledge of Loyalty|Invasion|U|22958|24|
-|Plover Knights|Lorwyn|C|139396|35|
+|Plover Knights|Duel Decks: Knights vs. Dragons|C|243437|20|
+|Plover Knights|Lorwyn|C|243437|35|
 |Plow Through Reito|Saviors of Kamigawa|C|89397|22|
 |Plow Under|Urza's Destiny|R|45450|117|
 |Plow Under|Eighth Edition|R|45450|272|
@@ -12429,6 +12599,7 @@
 |Ponder|Lorwyn|C|190159|79|
 |Pongify|Planar Chaos|U|129015|44|
 |Pooling Venom|Future Sight|U|136211|74|
+|Porcelain Legionnaire|New Phyrexia|C|218043|19|
 |Porphyry Nodes|Planar Chaos|R|124470|28|
 |Port Inspector|Mercadian Masques|C|19562|90|
 |Portcullis|Stronghold|R|5202||
@@ -12440,6 +12611,7 @@
 |Possessed Centaur|Torment|R|29787|137|
 |Possessed Nomad|Torment|R|29816|13|
 |Possessed Portal|Fifth Dawn|R|50119|144|
+|Postmortem Lunge|New Phyrexia|U|233054|70|
 |Poultice Sliver|Planar Chaos|C|126014|11|
 |Poultrygeist|Unglued|C|5864|37|
 |Pouncing Jaguar|Urza's Saga|C|5664|269|
@@ -12486,6 +12658,7 @@
 |Pradesh Gypsies|Legends|U|11453||
 |Pradesh Gypsies|Classic Sixth Edition|C|11453|244|
 |Praetor's Counsel|Mirrodin Besieged|M|214034|88|
+|Praetor's Grasp|New Phyrexia|R|218050|71|
 |Prahv, Spires of Order|Dissension|U|97117|177|
 |Preacher|The Dark|R|159153||
 |Preacher|Masters Edition|R|159153|24|
@@ -12521,6 +12694,7 @@
 |Priest of Gix|Duel Decks: Phyrexia vs. the Coalition|U|209130|7|
 |Priest of Gix|Urza's Saga|U|209130|150|
 |Priest of Titania|Urza's Saga|C|5823|270|
+|Priest of Urabrask|New Phyrexia|U|218037|90|
 |Priest of Yawgmoth|Antiquities|C|1044||
 |Priests of Norn|Mirrodin Besieged|C|213814|16|
 |Primal Bellow|Zendikar|U|193407|176|
@@ -12577,6 +12751,7 @@
 |Prison Term|Planechase|U|205402|6|
 |Prison Term|Shadowmoor|U|205402|18|
 |Pristine Angel|Darksteel|R|47587|9|
+|Pristine Talisman|New Phyrexia|C|233074|151|
 |Private Research|Urza's Destiny|U|15161|41|
 |Privileged Position|Ravnica: City of Guilds|R|83720|251|
 |Prized Unicorn|Magic 2011|U|205111|193|
@@ -12642,6 +12817,7 @@
 |Psionic Sliver|Time Spiral|R|113559|72|
 |Psychatog|Odyssey|U|31825|292|
 |Psychic Allergy|The Dark|R|1760||
+|Psychic Barrier|New Phyrexia|C|218016|43|
 |Psychic Battle|Invasion|R|26287|68|
 |Psychic Drain|Ravnica: City of Guilds|U|89114|220|
 |Psychic Membrane|Mirrodin|U|48167|46|
@@ -12653,6 +12829,7 @@
 |Psychic Purge|Legends|C|159311||
 |Psychic Purge|Masters Edition|U|159311|45|
 |Psychic Spear|Betrayers of Kamigawa|C|74554|78|
+|Psychic Surgery|New Phyrexia|R|214347|44|
 |Psychic Theft|Prophecy|R|24593|40|
 |Psychic Trance|Onslaught|R|40173|102|
 |Psychic Transfer|Mirage|R|21050||
@@ -12695,7 +12872,8 @@
 |Puncture Bolt|Shadowmoor|C|146071|102|
 |Puncturing Light|Rise of the Eldrazi|C|193566|41|
 |Punish Ignorance|Shards of Alara|R|176450|183|
-|Punishing Fire|Zendikar|U|192217|142|
+|Punishing Fire|Duel Decks: Knights vs. Dragons|U|243483|66|
+|Punishing Fire|Zendikar|U|243483|142|
 |Punishment|Dissension|R|107285|150|
 |Puppet Conjurer|Shards of Alara|U|175012|82|
 |Puppet Master|Chronicles|U|2811||
@@ -12717,6 +12895,7 @@
 |Purelace|Limited Edition Beta|R|2358||
 |Purelace|Limited Edition Alpha|R|2358||
 |Puresight Merrow|Shadowmoor|U|158745|146|
+|Puresteel Paladin|New Phyrexia|R|227504|20|
 |Purgatory|Mirage|R|3546||
 |Purge|Darksteel|U|34479|12|
 |Purging Scythe|Urza's Saga|R|10649|308|
@@ -12881,6 +13060,7 @@
 |Rag Man|Classic Sixth Edition|R|11464|151|
 |Rag Man|Seventh Edition|R|11464|156|
 |Ragamuffyn|Dissension|U|107570|51|
+|Rage Extractor|New Phyrexia|U|214385|91|
 |Rage Forger|Morningtide|U|153104|97|
 |Rage Nimbus|Rise of the Eldrazi|R|193454|160|
 |Rage Reflection|Shadowmoor|R|146727|104|
@@ -13080,6 +13260,7 @@
 |Razor Golem|Darksteel|C|46143|137|
 |Razor Hippogriff|Scars of Mirrodin|U|194323|17|
 |Razor Pendulum|Mirage|R|3265||
+|Razor Swine|New Phyrexia|C|218022|92|
 |Razorclaw Bear|Portal Second Age|R|6638||
 |Razorfield Rhino|Mirrodin Besieged|C|213815|127|
 |Razorfield Thresher|Scars of Mirrodin|C|209725|197|
@@ -13120,6 +13301,7 @@
 |Reap and Sow|Darksteel|C|43503|81|
 |Reaper King|Shadowmoor|R|159408|260|
 |Reaper King Avatar|Vanguard|S|191135|79|
+|Reaper of Sheoldred|New Phyrexia|U|214374|72|
 |Reaping the Graves|Scourge|C|45845|72|
 |Reaping the Rewards|Exodus|C|6037|16|
 |Reassembling Skeleton|Archenemy|U|205066|22|
@@ -13140,7 +13322,8 @@
 |Recall|Masters Edition III|U|201161|46|
 |Recall|Classic Sixth Edition|R|201161|92|
 |Recantation|Urza's Saga|R|8445|91|
-|Reciprocate|Champions of Kamigawa|U|50405|40|
+|Reciprocate|Duel Decks: Knights vs. Dragons|U|243441|24|
+|Reciprocate|Champions of Kamigawa|U|243441|40|
 |Reckless Abandon|Urza's Destiny|C|15204|94|
 |Reckless Assault|Invasion|R|23191|263|
 |Reckless Charge|Planechase|C|205365|61|
@@ -13295,6 +13478,7 @@
 |Remand|Ravnica: City of Guilds|U|87919|63|
 |Remedy|Visions|C|14464||
 |Remedy|Classic Sixth Edition|C|14464|36|
+|Remember the Fallen|New Phyrexia|C|218078|21|
 |Remembrance|Urza's Saga|R|10419|34|
 |Reminisce|Ninth Edition|U|129698|92|
 |Reminisce|Tenth Edition|U|129698|99|
@@ -13343,11 +13527,12 @@
 |Repercussion|Urza's Destiny|R|15216|95|
 |Replenish|Urza's Destiny|R|15143|15|
 |Repopulate|Urza's Legacy|C|12672|111|
-|Reprisal|Alliances|C|184707||
-|Reprisal|Alliances|C|184707||
-|Reprisal|Masters Edition II|C|184707|29|
-|Reprisal|Seventh Edition|U|184707|33|
-|Reprisal|Classic Sixth Edition|U|184707|37|
+|Reprisal|Alliances|C|243444||
+|Reprisal|Alliances|C|243444||
+|Reprisal|Duel Decks: Knights vs. Dragons|U|243444|27|
+|Reprisal|Masters Edition II|C|243444|29|
+|Reprisal|Seventh Edition|U|243444|33|
+|Reprisal|Classic Sixth Edition|U|243444|37|
 |Reprocess|Urza's Saga|R|13101|154|
 |Reprocess|Seventh Edition|R|13101|159|
 |Repulse|Duel Decks: Jace vs. Chandra|C|189257|25|
@@ -13722,6 +13907,7 @@
 |Roterothopter|Homelands|C|184596||
 |Roterothopter|Masters Edition II|C|184596|218|
 |Rotlung Reanimator|Onslaught|R|39640|164|
+|Rotted Hystrix|New Phyrexia|C|233064|120|
 |Rotted Ones, Lay Siege|Archenemy|C|212583|38|
 |Rotting Giant|Odyssey|U|29842|158|
 |Rotting Legion|Magic 2011|C|205047|115|
@@ -13833,6 +14019,7 @@
 |Rustrazor Butcher|Shadowmoor|C|147389|105|
 |Rustspore Ram|Mirrodin|U|46138|235|
 |Ruthless Cullblade|Worldwake|C|194678|65|
+|Ruthless Invasion|New Phyrexia|C|227528|93|
 |Rysorian Badger|Homelands|R|2978||
 |Ryusei, the Falling Star|Archenemy|R|220471|45|
 |Ryusei, the Falling Star|Champions of Kamigawa|R|220471|185|
@@ -14174,6 +14361,7 @@
 |Scrapbasket|Shadowmoor|C|147435|262|
 |Scrapdiver Serpent|Scars of Mirrodin|C|207863|41|
 |Scrapheap|Urza's Legacy|R|8830|132|
+|Scrapyard Salvo|New Phyrexia|C|218019|94|
 |Screaming Fury|Fifth Dawn|C|51148|78|
 |Screaming Seahawk|Onslaught|C|39445|112|
 |Screams from Within|Darksteel|U|43517|52|
@@ -14338,9 +14526,10 @@
 |Seer's Vision|Invasion|U|23178|270|
 |Seething Anger|Stronghold|C|5218||
 |Seething Pathblazer|Morningtide|C|153101|101|
-|Seething Song|Archenemy|C|220561|46|
-|Seething Song|Mirrodin|C|220561|104|
-|Seething Song|Ninth Edition|C|220561|216|
+|Seething Song|Archenemy|C|243487|46|
+|Seething Song|Duel Decks: Knights vs. Dragons|C|243487|70|
+|Seething Song|Mirrodin|C|243487|104|
+|Seething Song|Ninth Edition|C|243487|216|
 |Segmented Wurm|Beatdown Box Set|U|26628||
 |Segmented Wurm|Tempest|U|26628||
 |Segovian Leviathan|Fifth Edition|U|14538||
@@ -14355,7 +14544,8 @@
 |Seismic Mage|Mercadian Masques|R|19835|211|
 |Seismic Shudder|Zendikar|C|180134|147|
 |Seismic Spike|Ravnica: City of Guilds|C|83829|141|
-|Seismic Strike|Magic 2010|C|191095|154|
+|Seismic Strike|Duel Decks: Knights vs. Dragons|C|243488|71|
+|Seismic Strike|Magic 2010|C|243488|154|
 |Seizan, Perverter of Truth|Champions of Kamigawa|R|78965|143|
 |Seize the Day|Odyssey|R|30573|220|
 |Seize the Initiative|Scars of Mirrodin|C|194206|20|
@@ -14363,7 +14553,8 @@
 |Seizures|Ice Age|C|2483||
 |Sejiri Merfolk|Worldwake|U|197844|36|
 |Sejiri Refuge|Zendikar|U|189626|224|
-|Sejiri Steppe|Worldwake|C|197788|142|
+|Sejiri Steppe|Duel Decks: Knights vs. Dragons|C|243453|36|
+|Sejiri Steppe|Worldwake|C|243453|142|
 |Sekki, Seasons' Guide|Saviors of Kamigawa|R|74471|148|
 |Sek'Kuar, Deathkeeper|Coldsnap|R|121261|131|
 |Selective Memory|Worldwake|R|194700|37|
@@ -14373,7 +14564,8 @@
 |Selesnya Guildmage|Archenemy|U|220549|94|
 |Selesnya Guildmage|Ravnica: City of Guilds|U|220549|252|
 |Selesnya Sagittars|Ravnica: City of Guilds|U|83880|229|
-|Selesnya Sanctuary|Ravnica: City of Guilds|C|87963|281|
+|Selesnya Sanctuary|Duel Decks: Knights vs. Dragons|C|243454|37|
+|Selesnya Sanctuary|Ravnica: City of Guilds|C|243454|281|
 |Selesnya Signet|Ravnica: City of Guilds|C|95538|270|
 |Selfless Exorcist|Judgment|R|34891|21|
 |Selkie Hedge-Mage|Eventide|U|159067|158|
@@ -14402,6 +14594,7 @@
 |Sensei Golden-Tail|Champions of Kamigawa|R|78683|44|
 |Sensei's Divining Top|From the Vault: Exiled|M|194972|10|
 |Sensei's Divining Top|Champions of Kamigawa|U|194972|268|
+|Sensor Splicer|New Phyrexia|C|233038|22|
 |Sentinel|Chronicles|R|2791||
 |Sentinel|Legends|R|2791||
 |Sentinels of Glen Elendra|Lorwyn|C|139426|84|
@@ -14584,6 +14777,7 @@
 |Shatter|Seventh Edition|C|194147|217|
 |Shatter|Ninth Edition|C|194147|218|
 |Shatter|Eighth Edition|C|194147|220|
+|Shattered Angel|New Phyrexia|U|233059|23|
 |Shattered Crypt|Weatherlight|C|4468||
 |Shattered Dreams|Fifth Dawn|U|51092|59|
 |Shattering Pulse|Exodus|C|5221|102|
@@ -14605,6 +14799,7 @@
 |Sheltered Valley|Alliances|R|3236||
 |Sheltering Ancient|Coldsnap|U|122069|121|
 |Sheltering Prayers|Prophecy|R|24568|22|
+|Sheoldred, Whispering One|New Phyrexia|M|214382|73|
 |Shepherd of Rot|Planechase|C|205372|40|
 |Shepherd of Rot|Onslaught|C|205372|168|
 |Shepherd of the Lost|Zendikar|U|193399|34|
@@ -14681,8 +14876,9 @@
 |Shivan Emissary|Invasion|U|23084|166|
 |Shivan Gorge|Urza's Saga|R|10482|326|
 |Shivan Harvest|Invasion|U|23091|167|
-|Shivan Hellkite|Urza's Saga|R|130538|215|
-|Shivan Hellkite|Tenth Edition|R|130538|231|
+|Shivan Hellkite|Duel Decks: Knights vs. Dragons|R|243478|60|
+|Shivan Hellkite|Urza's Saga|R|243478|215|
+|Shivan Hellkite|Tenth Edition|R|243478|231|
 |Shivan Meteor|Planar Chaos|U|134740|106|
 |Shivan Oasis|Duel Decks: Phyrexia vs. the Coalition|U|209119|65|
 |Shivan Oasis|Planechase|U|209119|137|
@@ -14697,8 +14893,9 @@
 |Shivan Wumpus|Planar Chaos|R|124445|121|
 |Shivan Wurm|Planeshift|R|25924|124|
 |Shivan Zombie|Invasion|C|23160|271|
-|Shiv's Embrace|Magic 2011|U|208002|156|
-|Shiv's Embrace|Urza's Saga|U|208002|214|
+|Shiv's Embrace|Duel Decks: Knights vs. Dragons|U|243491|74|
+|Shiv's Embrace|Magic 2011|U|243491|156|
+|Shiv's Embrace|Urza's Saga|U|243491|214|
 |Shizo, Death's Storehouse|Champions of Kamigawa|R|79186|283|
 |Shizuko, Caller of Autumn|Betrayers of Kamigawa|R|74436|144|
 |Shoal Serpent|Zendikar|C|177517|65|
@@ -14729,6 +14926,7 @@
 |Shred Memory|Ravnica: City of Guilds|C|87962|105|
 |Shrewd Hatchling|Eventide|U|153486|112|
 |Shriek of Dread|Planeshift|C|27229|53|
+|Shriek Raptor|New Phyrexia|C|217994|24|
 |Shriekhorn|Mirrodin Besieged|C|213786|130|
 |Shrieking Drake|Visions|C|3650||
 |Shrieking Grotesque|Guildpact|C|96954|15|
@@ -14736,6 +14934,11 @@
 |Shrieking Specter|Starter 1999|U|20363|89|
 |Shriekmaw|Archenemy|U|220572|24|
 |Shriekmaw|Lorwyn|U|220572|139|
+|Shrine of Boundless Growth|New Phyrexia|U|217982|152|
+|Shrine of Burning Rage|New Phyrexia|U|218018|153|
+|Shrine of Limitless Power|New Phyrexia|U|217980|154|
+|Shrine of Loyal Legions|New Phyrexia|U|206347|155|
+|Shrine of Piercing Vision|New Phyrexia|U|194318|156|
 |Shrink|Fifth Edition|C|184688||
 |Shrink|Homelands|C|184688||
 |Shrink|Homelands|C|184688||
@@ -14772,6 +14975,7 @@
 |Sickening Dreams|Torment|U|35063|83|
 |Sickening Shoal|Betrayers of Kamigawa|R|74127|82|
 |Sickle Ripper|Shadowmoor|C|154010|77|
+|Sickleslicer|New Phyrexia|U|214357|157|
 |Sidar Jabari|Mirage|R|3514||
 |Sidar Kondo|Vanguard|S|12147||
 |Side to Side|Unhinged|U|73948|110|
@@ -14790,7 +14994,8 @@
 |Sift|Tenth Edition|C|136217|108|
 |Sift Through Sands|Champions of Kamigawa|C|50459|84|
 |Sighted-Caste Sorcerer|Shards of Alara|C|174956|26|
-|Sigil Blessing|Shards of Alara|C|177597|195|
+|Sigil Blessing|Duel Decks: Knights vs. Dragons|C|243447|30|
+|Sigil Blessing|Shards of Alara|C|243447|195|
 |Sigil Captain|Alara Reborn|U|179560|77|
 |Sigil of Distinction|Shards of Alara|R|174867|219|
 |Sigil of Sleep|Urza's Destiny|C|15784|46|
@@ -14826,7 +15031,8 @@
 |Silt Crawler|Prophecy|C|24655|123|
 |Silver Drake|Planeshift|C|25925|125|
 |Silver Erne|Ice Age|U|2534||
-|Silver Knight|Scourge|U|44313|23|
+|Silver Knight|Duel Decks: Knights vs. Dragons|U|243425|8|
+|Silver Knight|Scourge|U|243425|23|
 |Silver Myr|Duel Decks: Elspeth vs. Tezzeret|C|194378|43|
 |Silver Myr|Planechase|C|194378|126|
 |Silver Myr|Scars of Mirrodin|C|194378|202|
@@ -14940,8 +15146,9 @@
 |Skirk Marauder|Archenemy|C|220466|48|
 |Skirk Marauder|Legions|C|220466|113|
 |Skirk Outrider|Legions|C|42082|114|
-|Skirk Prospector|Duel Decks: Elves vs. Goblins|C|159051|51|
-|Skirk Prospector|Onslaught|C|159051|230|
+|Skirk Prospector|Duel Decks: Knights vs. Dragons|C|243465|49|
+|Skirk Prospector|Duel Decks: Elves vs. Goblins|C|243465|51|
+|Skirk Prospector|Onslaught|C|243465|230|
 |Skirk Ridge Exhumer|Future Sight|U|130314|77|
 |Skirk Shaman|Duel Decks: Elves vs. Goblins|C|159055|52|
 |Skirk Shaman|Planar Chaos|C|159055|123|
@@ -14996,8 +15203,9 @@
 |Sky-Eel School|Scars of Mirrodin|C|194103|44|
 |Skyfire Kirin|Saviors of Kamigawa|R|88793|113|
 |Skyhunter Cub|Mirrodin|C|48046|21|
-|Skyhunter Patrol|Mirrodin|C|129735|22|
-|Skyhunter Patrol|Tenth Edition|C|129735|41|
+|Skyhunter Patrol|Duel Decks: Knights vs. Dragons|C|243436|19|
+|Skyhunter Patrol|Mirrodin|C|243436|22|
+|Skyhunter Patrol|Tenth Edition|C|243436|41|
 |Skyhunter Prowler|Fifth Dawn|C|132102|15|
 |Skyhunter Prowler|Tenth Edition|C|132102|42|
 |Skyhunter Prowler|Ninth Edition|C|132102|45|
@@ -15035,8 +15243,10 @@
 |Skyward Eye Prophets|Conflux|U|174953|125|
 |Skywatcher Adept|Rise of the Eldrazi|C|193591|88|
 |Skywing Aven|Torment|C|29713|47|
+|Slag Fiend|New Phyrexia|R|218010|95|
 |Slagstorm|Mirrodin Besieged|R|214054|75|
 |Slagwurm Armor|Mirrodin|C|46028|243|
+|Slash Panther|New Phyrexia|C|230065|96|
 |Slashing Tiger|Masters Edition III|C|201187|133|
 |Slashing Tiger|Portal Three Kingdoms|R|201187|145|
 |Slate of Ancestry|Duel Decks: Elves vs. Goblins|R|159501|25|
@@ -15301,6 +15511,7 @@
 |Soul Collector|Time Spiral "Timeshifted"|S|106644|47|
 |Soul Collector|Scourge|R|106644|74|
 |Soul Collector|Promo set for Gatherer|R|106644|74|
+|Soul Conduit|New Phyrexia|R|233048|158|
 |Soul Echo|Mirage|R|3515||
 |Soul Exchange|Fallen Empires|U|184517||
 |Soul Exchange|Masters Edition II|U|184517|111|
@@ -15446,6 +15657,7 @@
 |Spelljack|Judgment|R|35169|51|
 |Spellshift|Planar Chaos|R|122459|47|
 |Spellshock|Exodus|U|6121|104|
+|Spellskite|New Phyrexia|R|217992|159|
 |Spellstutter Sprite|Lorwyn|C|139429|89|
 |Spelltithe Enforcer|Guildpact|R|96865|18|
 |Spellweaver Helix|Mirrodin|R|48047|247|
@@ -15471,7 +15683,8 @@
 |Spider Climb|Visions|C|3677||
 |Spider Umbra|Archenemy|C|220555|70|
 |Spider Umbra|Rise of the Eldrazi|C|220555|208|
-|Spidersilk Armor|Mercadian Masques|C|19870|273|
+|Spidersilk Armor|Duel Decks: Knights vs. Dragons|C|243449|32|
+|Spidersilk Armor|Mercadian Masques|C|243449|273|
 |Spidersilk Net|Zendikar|C|178134|206|
 |Spiderwig Boggart|Lorwyn|C|146445|141|
 |Spike Breeder|Stronghold|R|5237||
@@ -15508,11 +15721,13 @@
 |Spincrusher|Darksteel|U|50529|144|
 |Spindrift Drake|Stronghold|C|5243||
 |Spine of Ish Sah|Mirrodin Besieged|R|214076|136|
+|Spinebiter|New Phyrexia|U|230068|121|
 |Spined Basher|Onslaught|C|39725|172|
 |Spined Fluke|Urza's Saga|U|5849|160|
 |Spined Sliver|Stronghold|U|208041||
 |Spined Sliver|Premium Deck Series: Slivers|U|208041|14|
 |Spined Sliver|Time Spiral "Timeshifted"|S|208041|101|
+|Spined Thopter|New Phyrexia|C|217990|45|
 |Spined Wurm|Starter 2000|C|205123||
 |Spined Wurm|Stronghold|C|205123||
 |Spined Wurm|Portal|C|205123||
@@ -15536,6 +15751,7 @@
 |Spire Barrage|Zendikar|C|180495|150|
 |Spire Golem|Duel Decks: Jace vs. Chandra|C|189233|16|
 |Spire Golem|Darksteel|C|189233|145|
+|Spire Monitor|New Phyrexia|C|233053|46|
 |Spire Owl|Urza's Saga|C|7167|98|
 |Spire Serpent|Mirrodin Besieged|C|213801|32|
 |Spirit|Duel Decks: Divine vs. Demonic|C|197937|1|
@@ -15579,14 +15795,15 @@
 |Spitfire Handler|Onslaught|U|39655|236|
 |Spitting Drake|Visions|U|15418||
 |Spitting Drake|Classic Sixth Edition|U|15418|207|
-|Spitting Earth|Portal Second Age|C|159054||
-|Spitting Earth|Portal|C|159054||
-|Spitting Earth|Mirage|C|159054||
-|Spitting Earth|Duel Decks: Elves vs. Goblins|C|159054|55|
-|Spitting Earth|Starter 1999|U|159054|117|
-|Spitting Earth|Classic Sixth Edition|C|159054|208|
-|Spitting Earth|Seventh Edition|C|159054|220|
-|Spitting Earth|Tenth Edition|C|159054|238|
+|Spitting Earth|Portal Second Age|C|243484||
+|Spitting Earth|Portal|C|243484||
+|Spitting Earth|Mirage|C|243484||
+|Spitting Earth|Duel Decks: Elves vs. Goblins|C|243484|55|
+|Spitting Earth|Duel Decks: Knights vs. Dragons|C|243484|67|
+|Spitting Earth|Starter 1999|U|243484|117|
+|Spitting Earth|Classic Sixth Edition|C|243484|208|
+|Spitting Earth|Seventh Edition|C|243484|220|
+|Spitting Earth|Tenth Edition|C|243484|238|
 |Spitting Gourna|Onslaught|C|39720|284|
 |Spitting Hydra|Stronghold|R|5246||
 |Spitting Image|Eventide|R|154261|162|
@@ -15804,7 +16021,8 @@
 |Stern Judge|Torment|U|35082|16|
 |Stern Marshal|Portal|R|4400||
 |Stern Proctor|Urza's Saga|U|5661|99|
-|Steward of Valeron|Shards of Alara|C|175134|198|
+|Steward of Valeron|Duel Decks: Knights vs. Dragons|C|243428|11|
+|Steward of Valeron|Shards of Alara|C|243428|198|
 |Stifle|Scourge|R|46558|52|
 |Stigma Lasher|Eventide|R|153049|62|
 |Still Life|Odyssey|U|29879|275|
@@ -16155,10 +16373,12 @@
 |Suq'Ata Lancer|Visions|C|108883||
 |Suq'Ata Lancer|Time Spiral "Timeshifted"|S|108883|69|
 |Surestrike Trident|Darksteel|U|46158|147|
+|Surge Node|New Phyrexia|U|194070|160|
 |Surge of Strength|Alliances|U|3228||
 |Surge of Thoughtweft|Lorwyn|C|145799|43|
 |Surge of Zeal|Ravnica: City of Guilds|C|87956|146|
 |Surgespanner|Lorwyn|R|141828|92|
+|Surgical Extraction|New Phyrexia|R|233041|74|
 |Surging Æther|Coldsnap|C|122052|47|
 |Surging Dementia|Coldsnap|C|122053|72|
 |Surging Flame|Coldsnap|C|121269|99|
@@ -16180,6 +16400,7 @@
 |Sustaining Spirit|Alliances|R|184744||
 |Sustaining Spirit|Masters Edition II|R|184744|36|
 |Sustenance|Mercadian Masques|U|19849|278|
+|Suture Priest|New Phyrexia|C|217981|25|
 |Suture Spirit|Eventide|U|153420|16|
 |Sutured Ghoul|Judgment|R|29944|73|
 |Svogthos, the Restless Tomb|Ravnica: City of Guilds|U|89045|283|
@@ -16190,181 +16411,183 @@
 |Svyelunite Temple|Masters Edition II|U|184522|237|
 |Svyelunite Temple|Classic Sixth Edition|U|184522|329|
 |Swallowing Plague|Champions of Kamigawa|U|79089|146|
-|Swamp|Beatdown Box Set|L|214676||
-|Swamp|Beatdown Box Set|L|214676||
-|Swamp|Beatdown Box Set|L|214676||
-|Swamp|Starter 2000|L|214676||
-|Swamp|Starter 2000|L|214676||
-|Swamp|Battle Royale Box Set|L|214676||
-|Swamp|Battle Royale Box Set|L|214676||
-|Swamp|Battle Royale Box Set|L|214676||
-|Swamp|Battle Royale Box Set|L|214676||
-|Swamp|Portal Second Age|L|214676||
-|Swamp|Portal Second Age|L|214676||
-|Swamp|Portal Second Age|L|214676||
-|Swamp|Tempest|L|214676||
-|Swamp|Tempest|L|214676||
-|Swamp|Tempest|L|214676||
-|Swamp|Tempest|L|214676||
-|Swamp|Portal|L|214676||
-|Swamp|Portal|L|214676||
-|Swamp|Portal|L|214676||
-|Swamp|Portal|L|214676||
-|Swamp|Fifth Edition|L|214676||
-|Swamp|Fifth Edition|L|214676||
-|Swamp|Fifth Edition|L|214676||
-|Swamp|Fifth Edition|L|214676||
-|Swamp|Mirage|L|214676||
-|Swamp|Mirage|L|214676||
-|Swamp|Mirage|L|214676||
-|Swamp|Mirage|L|214676||
-|Swamp|Ice Age|L|214676||
-|Swamp|Ice Age|L|214676||
-|Swamp|Ice Age|L|214676||
-|Swamp|Fourth Edition|L|214676||
-|Swamp|Fourth Edition|L|214676||
-|Swamp|Fourth Edition|L|214676||
-|Swamp|Revised Edition|L|214676||
-|Swamp|Revised Edition|L|214676||
-|Swamp|Revised Edition|L|214676||
-|Swamp|Unlimited Edition|L|214676||
-|Swamp|Unlimited Edition|L|214676||
-|Swamp|Unlimited Edition|L|214676||
-|Swamp|Limited Edition Beta|L|214676||
-|Swamp|Limited Edition Beta|L|214676||
-|Swamp|Limited Edition Beta|L|214676||
-|Swamp|Limited Edition Alpha|L|214676||
-|Swamp|Limited Edition Alpha|L|214676||
-|Swamp|Duel Decks: Phyrexia vs. the Coalition|L|214676|32|
-|Swamp|Duel Decks: Phyrexia vs. the Coalition|L|214676|33|
-|Swamp|Duel Decks: Phyrexia vs. the Coalition|L|214676|34|
-|Swamp|Duel Decks: Phyrexia vs. the Coalition|L|214676|35|
-|Swamp|Premium Deck Series: Slivers|L|214676|39|
-|Swamp|Duel Decks: Divine vs. Demonic|L|214676|59|
-|Swamp|Duel Decks: Garruk vs. Liliana|L|214676|60|
-|Swamp|Duel Decks: Divine vs. Demonic|L|214676|60|
-|Swamp|Duel Decks: Garruk vs. Liliana|L|214676|61|
-|Swamp|Duel Decks: Divine vs. Demonic|L|214676|61|
-|Swamp|Duel Decks: Garruk vs. Liliana|L|214676|62|
-|Swamp|Duel Decks: Divine vs. Demonic|L|214676|62|
-|Swamp|Duel Decks: Garruk vs. Liliana|L|214676|63|
-|Swamp|Unglued|C|214676|86|
-|Swamp|Unhinged|L|214676|138|
-|Swamp|Archenemy|L|214676|142|
-|Swamp|Archenemy|L|214676|143|
-|Swamp|Archenemy|L|214676|144|
-|Swamp|Mirrodin Besieged|L|214676|150|
-|Swamp|Mirrodin Besieged|L|214676|151|
-|Swamp|Planechase|L|214676|151|
-|Swamp|Planechase|L|214676|152|
-|Swamp|Planechase|L|214676|153|
-|Swamp|Planechase|L|214676|154|
-|Swamp|Planechase|L|214676|155|
-|Swamp|Starter 1999|L|214676|170|
-|Swamp|Starter 1999|L|214676|171|
-|Swamp|Starter 1999|L|214676|172|
-|Swamp|Portal Three Kingdoms|L|214676|172|
-|Swamp|Starter 1999|L|214676|173|
-|Swamp|Portal Three Kingdoms|L|214676|173|
-|Swamp|Portal Three Kingdoms|L|214676|174|
-|Swamp|Masters Edition|L|214676|187|
-|Swamp|Masters Edition|L|214676|188|
-|Swamp|Masters Edition|L|214676|189|
-|Swamp|Masters Edition III|L|214676|222|
-|Swamp|Masters Edition III|L|214676|223|
-|Swamp|Masters Edition III|L|214676|224|
-|Swamp|Rise of the Eldrazi|L|214676|237|
-|Swamp|Scars of Mirrodin|L|214676|238|
-|Swamp|Magic 2011|L|214676|238|
-|Swamp|Rise of the Eldrazi|L|214676|238|
-|Swamp|Zendikar|L|214676|238|
-|Swamp|Zendikar|L|214676|238|
-|Swamp|Magic 2010|L|214676|238|
-|Swamp|Shards of Alara|L|214676|238|
-|Swamp|Scars of Mirrodin|L|214676|239|
-|Swamp|Magic 2011|L|214676|239|
-|Swamp|Rise of the Eldrazi|L|214676|239|
-|Swamp|Zendikar|L|214676|239|
-|Swamp|Zendikar|L|214676|239|
-|Swamp|Magic 2010|L|214676|239|
-|Swamp|Shards of Alara|L|214676|239|
-|Swamp|Scars of Mirrodin|L|214676|240|
-|Swamp|Magic 2011|L|214676|240|
-|Swamp|Rise of the Eldrazi|L|214676|240|
-|Swamp|Zendikar|L|214676|240|
-|Swamp|Zendikar|L|214676|240|
-|Swamp|Magic 2010|L|214676|240|
-|Swamp|Shards of Alara|L|214676|240|
-|Swamp|Scars of Mirrodin|L|214676|241|
-|Swamp|Magic 2011|L|214676|241|
-|Swamp|Zendikar|L|214676|241|
-|Swamp|Zendikar|L|214676|241|
-|Swamp|Magic 2010|L|214676|241|
-|Swamp|Shards of Alara|L|214676|241|
-|Swamp|Shadowmoor|L|214676|290|
-|Swamp|Lorwyn|L|214676|290|
-|Swamp|Time Spiral|L|214676|290|
-|Swamp|Shadowmoor|L|214676|291|
-|Swamp|Lorwyn|L|214676|291|
-|Swamp|Time Spiral|L|214676|291|
-|Swamp|Shadowmoor|L|214676|292|
-|Swamp|Lorwyn|L|214676|292|
-|Swamp|Time Spiral|L|214676|292|
-|Swamp|Shadowmoor|L|214676|293|
-|Swamp|Lorwyn|L|214676|293|
-|Swamp|Time Spiral|L|214676|293|
-|Swamp|Ravnica: City of Guilds|L|214676|295|
-|Swamp|Champions of Kamigawa|L|214676|295|
-|Swamp|Mirrodin|L|214676|295|
-|Swamp|Ravnica: City of Guilds|L|214676|296|
-|Swamp|Champions of Kamigawa|L|214676|296|
-|Swamp|Mirrodin|L|214676|296|
-|Swamp|Ravnica: City of Guilds|L|214676|297|
-|Swamp|Champions of Kamigawa|L|214676|297|
-|Swamp|Mirrodin|L|214676|297|
-|Swamp|Ravnica: City of Guilds|L|214676|298|
-|Swamp|Champions of Kamigawa|L|214676|298|
-|Swamp|Mirrodin|L|214676|298|
-|Swamp|Ninth Edition|L|214676|339|
-|Swamp|Eighth Edition|L|214676|339|
-|Swamp|Onslaught|L|214676|339|
-|Swamp|Odyssey|L|214676|339|
-|Swamp|Invasion|L|214676|339|
-|Swamp|Mercadian Masques|L|214676|339|
-|Swamp|Classic Sixth Edition|L|214676|339|
-|Swamp|Urza's Saga|L|214676|339|
-|Swamp|Ninth Edition|L|214676|340|
-|Swamp|Eighth Edition|L|214676|340|
-|Swamp|Onslaught|L|214676|340|
-|Swamp|Odyssey|L|214676|340|
-|Swamp|Invasion|L|214676|340|
-|Swamp|Mercadian Masques|L|214676|340|
-|Swamp|Classic Sixth Edition|L|214676|340|
-|Swamp|Urza's Saga|L|214676|340|
-|Swamp|Ninth Edition|L|214676|341|
-|Swamp|Eighth Edition|L|214676|341|
-|Swamp|Onslaught|L|214676|341|
-|Swamp|Odyssey|L|214676|341|
-|Swamp|Invasion|L|214676|341|
-|Swamp|Mercadian Masques|L|214676|341|
-|Swamp|Classic Sixth Edition|L|214676|341|
-|Swamp|Urza's Saga|L|214676|341|
-|Swamp|Ninth Edition|L|214676|342|
-|Swamp|Eighth Edition|L|214676|342|
-|Swamp|Onslaught|L|214676|342|
-|Swamp|Odyssey|L|214676|342|
-|Swamp|Invasion|L|214676|342|
-|Swamp|Mercadian Masques|L|214676|342|
-|Swamp|Classic Sixth Edition|L|214676|342|
-|Swamp|Urza's Saga|L|214676|342|
-|Swamp|Seventh Edition|L|214676|346|
-|Swamp|Seventh Edition|L|214676|347|
-|Swamp|Seventh Edition|L|214676|348|
-|Swamp|Seventh Edition|L|214676|349|
-|Swamp|Tenth Edition|L|214676|372|
-|Swamp|Tenth Edition|L|214676|373|
-|Swamp|Tenth Edition|L|214676|374|
-|Swamp|Tenth Edition|L|214676|375|
+|Swamp|Beatdown Box Set|L|227521||
+|Swamp|Beatdown Box Set|L|227521||
+|Swamp|Beatdown Box Set|L|227521||
+|Swamp|Starter 2000|L|227521||
+|Swamp|Starter 2000|L|227521||
+|Swamp|Battle Royale Box Set|L|227521||
+|Swamp|Battle Royale Box Set|L|227521||
+|Swamp|Battle Royale Box Set|L|227521||
+|Swamp|Battle Royale Box Set|L|227521||
+|Swamp|Portal Second Age|L|227521||
+|Swamp|Portal Second Age|L|227521||
+|Swamp|Portal Second Age|L|227521||
+|Swamp|Tempest|L|227521||
+|Swamp|Tempest|L|227521||
+|Swamp|Tempest|L|227521||
+|Swamp|Tempest|L|227521||
+|Swamp|Portal|L|227521||
+|Swamp|Portal|L|227521||
+|Swamp|Portal|L|227521||
+|Swamp|Portal|L|227521||
+|Swamp|Fifth Edition|L|227521||
+|Swamp|Fifth Edition|L|227521||
+|Swamp|Fifth Edition|L|227521||
+|Swamp|Fifth Edition|L|227521||
+|Swamp|Mirage|L|227521||
+|Swamp|Mirage|L|227521||
+|Swamp|Mirage|L|227521||
+|Swamp|Mirage|L|227521||
+|Swamp|Ice Age|L|227521||
+|Swamp|Ice Age|L|227521||
+|Swamp|Ice Age|L|227521||
+|Swamp|Fourth Edition|L|227521||
+|Swamp|Fourth Edition|L|227521||
+|Swamp|Fourth Edition|L|227521||
+|Swamp|Revised Edition|L|227521||
+|Swamp|Revised Edition|L|227521||
+|Swamp|Revised Edition|L|227521||
+|Swamp|Unlimited Edition|L|227521||
+|Swamp|Unlimited Edition|L|227521||
+|Swamp|Unlimited Edition|L|227521||
+|Swamp|Limited Edition Beta|L|227521||
+|Swamp|Limited Edition Beta|L|227521||
+|Swamp|Limited Edition Beta|L|227521||
+|Swamp|Limited Edition Alpha|L|227521||
+|Swamp|Limited Edition Alpha|L|227521||
+|Swamp|Duel Decks: Phyrexia vs. the Coalition|L|227521|32|
+|Swamp|Duel Decks: Phyrexia vs. the Coalition|L|227521|33|
+|Swamp|Duel Decks: Phyrexia vs. the Coalition|L|227521|34|
+|Swamp|Duel Decks: Phyrexia vs. the Coalition|L|227521|35|
+|Swamp|Premium Deck Series: Slivers|L|227521|39|
+|Swamp|Duel Decks: Divine vs. Demonic|L|227521|59|
+|Swamp|Duel Decks: Garruk vs. Liliana|L|227521|60|
+|Swamp|Duel Decks: Divine vs. Demonic|L|227521|60|
+|Swamp|Duel Decks: Garruk vs. Liliana|L|227521|61|
+|Swamp|Duel Decks: Divine vs. Demonic|L|227521|61|
+|Swamp|Duel Decks: Garruk vs. Liliana|L|227521|62|
+|Swamp|Duel Decks: Divine vs. Demonic|L|227521|62|
+|Swamp|Duel Decks: Garruk vs. Liliana|L|227521|63|
+|Swamp|Unglued|C|227521|86|
+|Swamp|Unhinged|L|227521|138|
+|Swamp|Archenemy|L|227521|142|
+|Swamp|Archenemy|L|227521|143|
+|Swamp|Archenemy|L|227521|144|
+|Swamp|Mirrodin Besieged|L|227521|150|
+|Swamp|Mirrodin Besieged|L|227521|151|
+|Swamp|Planechase|L|227521|151|
+|Swamp|Planechase|L|227521|152|
+|Swamp|Planechase|L|227521|153|
+|Swamp|Planechase|L|227521|154|
+|Swamp|Planechase|L|227521|155|
+|Swamp|New Phyrexia|L|227521|170|
+|Swamp|Starter 1999|L|227521|170|
+|Swamp|New Phyrexia|L|227521|171|
+|Swamp|Starter 1999|L|227521|171|
+|Swamp|Starter 1999|L|227521|172|
+|Swamp|Portal Three Kingdoms|L|227521|172|
+|Swamp|Starter 1999|L|227521|173|
+|Swamp|Portal Three Kingdoms|L|227521|173|
+|Swamp|Portal Three Kingdoms|L|227521|174|
+|Swamp|Masters Edition|L|227521|187|
+|Swamp|Masters Edition|L|227521|188|
+|Swamp|Masters Edition|L|227521|189|
+|Swamp|Masters Edition III|L|227521|222|
+|Swamp|Masters Edition III|L|227521|223|
+|Swamp|Masters Edition III|L|227521|224|
+|Swamp|Rise of the Eldrazi|L|227521|237|
+|Swamp|Scars of Mirrodin|L|227521|238|
+|Swamp|Magic 2011|L|227521|238|
+|Swamp|Rise of the Eldrazi|L|227521|238|
+|Swamp|Zendikar|L|227521|238|
+|Swamp|Zendikar|L|227521|238|
+|Swamp|Magic 2010|L|227521|238|
+|Swamp|Shards of Alara|L|227521|238|
+|Swamp|Scars of Mirrodin|L|227521|239|
+|Swamp|Magic 2011|L|227521|239|
+|Swamp|Rise of the Eldrazi|L|227521|239|
+|Swamp|Zendikar|L|227521|239|
+|Swamp|Zendikar|L|227521|239|
+|Swamp|Magic 2010|L|227521|239|
+|Swamp|Shards of Alara|L|227521|239|
+|Swamp|Scars of Mirrodin|L|227521|240|
+|Swamp|Magic 2011|L|227521|240|
+|Swamp|Rise of the Eldrazi|L|227521|240|
+|Swamp|Zendikar|L|227521|240|
+|Swamp|Zendikar|L|227521|240|
+|Swamp|Magic 2010|L|227521|240|
+|Swamp|Shards of Alara|L|227521|240|
+|Swamp|Scars of Mirrodin|L|227521|241|
+|Swamp|Magic 2011|L|227521|241|
+|Swamp|Zendikar|L|227521|241|
+|Swamp|Zendikar|L|227521|241|
+|Swamp|Magic 2010|L|227521|241|
+|Swamp|Shards of Alara|L|227521|241|
+|Swamp|Shadowmoor|L|227521|290|
+|Swamp|Lorwyn|L|227521|290|
+|Swamp|Time Spiral|L|227521|290|
+|Swamp|Shadowmoor|L|227521|291|
+|Swamp|Lorwyn|L|227521|291|
+|Swamp|Time Spiral|L|227521|291|
+|Swamp|Shadowmoor|L|227521|292|
+|Swamp|Lorwyn|L|227521|292|
+|Swamp|Time Spiral|L|227521|292|
+|Swamp|Shadowmoor|L|227521|293|
+|Swamp|Lorwyn|L|227521|293|
+|Swamp|Time Spiral|L|227521|293|
+|Swamp|Ravnica: City of Guilds|L|227521|295|
+|Swamp|Champions of Kamigawa|L|227521|295|
+|Swamp|Mirrodin|L|227521|295|
+|Swamp|Ravnica: City of Guilds|L|227521|296|
+|Swamp|Champions of Kamigawa|L|227521|296|
+|Swamp|Mirrodin|L|227521|296|
+|Swamp|Ravnica: City of Guilds|L|227521|297|
+|Swamp|Champions of Kamigawa|L|227521|297|
+|Swamp|Mirrodin|L|227521|297|
+|Swamp|Ravnica: City of Guilds|L|227521|298|
+|Swamp|Champions of Kamigawa|L|227521|298|
+|Swamp|Mirrodin|L|227521|298|
+|Swamp|Ninth Edition|L|227521|339|
+|Swamp|Eighth Edition|L|227521|339|
+|Swamp|Onslaught|L|227521|339|
+|Swamp|Odyssey|L|227521|339|
+|Swamp|Invasion|L|227521|339|
+|Swamp|Mercadian Masques|L|227521|339|
+|Swamp|Classic Sixth Edition|L|227521|339|
+|Swamp|Urza's Saga|L|227521|339|
+|Swamp|Ninth Edition|L|227521|340|
+|Swamp|Eighth Edition|L|227521|340|
+|Swamp|Onslaught|L|227521|340|
+|Swamp|Odyssey|L|227521|340|
+|Swamp|Invasion|L|227521|340|
+|Swamp|Mercadian Masques|L|227521|340|
+|Swamp|Classic Sixth Edition|L|227521|340|
+|Swamp|Urza's Saga|L|227521|340|
+|Swamp|Ninth Edition|L|227521|341|
+|Swamp|Eighth Edition|L|227521|341|
+|Swamp|Onslaught|L|227521|341|
+|Swamp|Odyssey|L|227521|341|
+|Swamp|Invasion|L|227521|341|
+|Swamp|Mercadian Masques|L|227521|341|
+|Swamp|Classic Sixth Edition|L|227521|341|
+|Swamp|Urza's Saga|L|227521|341|
+|Swamp|Ninth Edition|L|227521|342|
+|Swamp|Eighth Edition|L|227521|342|
+|Swamp|Onslaught|L|227521|342|
+|Swamp|Odyssey|L|227521|342|
+|Swamp|Invasion|L|227521|342|
+|Swamp|Mercadian Masques|L|227521|342|
+|Swamp|Classic Sixth Edition|L|227521|342|
+|Swamp|Urza's Saga|L|227521|342|
+|Swamp|Seventh Edition|L|227521|346|
+|Swamp|Seventh Edition|L|227521|347|
+|Swamp|Seventh Edition|L|227521|348|
+|Swamp|Seventh Edition|L|227521|349|
+|Swamp|Tenth Edition|L|227521|372|
+|Swamp|Tenth Edition|L|227521|373|
+|Swamp|Tenth Edition|L|227521|374|
+|Swamp|Tenth Edition|L|227521|375|
 |Swamp Mosquito|Alliances|C|106656||
 |Swamp Mosquito|Alliances|C|106656||
 |Swamp Mosquito|Time Spiral "Timeshifted"|S|106656|49|
@@ -16402,6 +16625,7 @@
 |Sword of the Meek|Future Sight|U|126215|165|
 |Sword of the Paruns|Guildpact|R|107095|156|
 |Sword of Vengeance|Magic 2011|R|205044|216|
+|Sword of War and Peace|New Phyrexia|M|214368|161|
 |Swords to Plowshares|Battle Royale Box Set|U|202462||
 |Swords to Plowshares|Ice Age|U|202462||
 |Swords to Plowshares|Fourth Edition|U|202462||
@@ -16682,7 +16906,8 @@
 |Temporal Manipulation|Portal Second Age|R|184770||
 |Temporal Manipulation|Masters Edition II|R|184770|69|
 |Temporal Spring|Apocalypse|C|25832|125|
-|Temporary Insanity|Torment|U|32236|116|
+|Temporary Insanity|Duel Decks: Knights vs. Dragons|U|243490|73|
+|Temporary Insanity|Torment|U|243490|116|
 |Temporary Truce|Portal|R|4401||
 |Tempting Licid|Stronghold|U|5252||
 |Tempting Wurm|Onslaught|R|39929|291|
@@ -16738,7 +16963,8 @@
 |Terror|Classic Sixth Edition|C|202486|160|
 |Terror|Tenth Edition|C|202486|182|
 |Test of Endurance|Judgment|R|29924|29|
-|Test of Faith|Darksteel|U|43587|17|
+|Test of Faith|Darksteel|U|243445|17|
+|Test of Faith|Duel Decks: Knights vs. Dragons|U|243445|28|
 |Testament of Faith|Odyssey|U|30765|55|
 |Tethered Griffin|Urza's Destiny|R|15769|21|
 |Tethered Skirge|Urza's Legacy|U|9840|70|
@@ -16752,6 +16978,7 @@
 |Tezzeret the Seeker|Duel Decks: Elspeth vs. Tezzeret|M|217826|39|
 |Tezzeret the Seeker|Shards of Alara|M|217826|60|
 |Tezzeret, Agent of Bolas|Mirrodin Besieged|M|214065|97|
+|Tezzeret's Gambit|New Phyrexia|U|227547|47|
 |Thada Adel, Acquisitor|Worldwake|R|197973|40|
 |Thalakos Deceiver|Stronghold|R|5253||
 |Thalakos Dreamsower|Tempest|U|4732||
@@ -16974,9 +17201,10 @@
 |Thrummingbird|Scars of Mirrodin|U|194332|47|
 |Thrun, the Last Troll|Mirrodin Besieged|M|214050|92|
 |Thumbscrews|Tempest|R|4632||
-|Thunder Dragon|From the Vault: Dragons|R|202544|14|
-|Thunder Dragon|Starter 1999|R|202544|119|
-|Thunder Dragon|Masters Edition IV|R|202544|138|
+|Thunder Dragon|From the Vault: Dragons|R|243479|14|
+|Thunder Dragon|Duel Decks: Knights vs. Dragons|R|243479|61|
+|Thunder Dragon|Starter 1999|R|243479|119|
+|Thunder Dragon|Masters Edition IV|R|243479|138|
 |Thunder of Hooves|Onslaught|U|39847|242|
 |Thunder Spirit|Legends|R|159318||
 |Thunder Spirit|Masters Edition|U|159318|27|
@@ -16996,6 +17224,7 @@
 |Thundering Giant|Beatdown Box Set|U|130381||
 |Thundering Giant|Urza's Saga|U|130381|221|
 |Thundering Giant|Tenth Edition|U|130381|243|
+|Thundering Tanadon|New Phyrexia|C|218077|122|
 |Thundering Wurm|Portal|R|4321||
 |Thundermare|Weatherlight|R|84502||
 |Thundermare|Portal|R|84502||
@@ -17176,6 +17405,7 @@
 |Torii Watchward|Saviors of Kamigawa|C|87342|30|
 |Torment|Stronghold|C|5257||
 |Tormented Angel|Urza's Destiny|C|18287|22|
+|Tormentor Exarch|New Phyrexia|U|218082|97|
 |Tormod's Crypt|Chronicles|C|109716||
 |Tormod's Crypt|The Dark|U|109716||
 |Tormod's Crypt|Time Spiral "Timeshifted"|S|109716|115|
@@ -17185,6 +17415,7 @@
 |Tornado Elemental|Fifth Dawn|R|205333|97|
 |Torpid Moloch|Ravnica: City of Guilds|C|89004|147|
 |Torpor Dust|Shadowmoor|C|142053|177|
+|Torpor Orb|New Phyrexia|R|233069|162|
 |Torrent of Fire|Scourge|C|43530|107|
 |Torrent of Lava|Mirage|R|3470||
 |Torrent of Souls|Archenemy|U|220547|96|
@@ -17228,6 +17459,7 @@
 |Towering Baloth|Onslaught|U|39741|292|
 |Town Sentry|Portal Second Age|C|6494||
 |Toxic Iguanar|Conflux|C|170956|72|
+|Toxic Nim|New Phyrexia|C|233081|75|
 |Toxic Stench|Judgment|C|36416|74|
 |Toxin Sliver|Legions|R|42038|84|
 |Toy Boat|Unhinged|U|74234|130|
@@ -17338,9 +17570,10 @@
 |Treetop Rangers|Urza's Saga|C|5681|279|
 |Treetop Scout|Scourge|C|43501|130|
 |Treetop Sentinel|Odyssey|U|31736|111|
-|Treetop Village|Duel Decks: Garruk vs. Liliana|U|202279|27|
-|Treetop Village|Urza's Legacy|U|202279|143|
-|Treetop Village|Tenth Edition|U|202279|361|
+|Treetop Village|Duel Decks: Garruk vs. Liliana|U|243455|27|
+|Treetop Village|Duel Decks: Knights vs. Dragons|U|243455|38|
+|Treetop Village|Urza's Legacy|U|243455|143|
+|Treetop Village|Tenth Edition|U|243455|361|
 |Tremble|Odyssey|C|31795|225|
 |Tremor|Portal Second Age|C|45377||
 |Tremor|Visions|C|45377||
@@ -17352,6 +17585,7 @@
 |Trench Wurm|Invasion|U|23039|127|
 |Trenching Steed|Prophecy|C|24546|26|
 |Trespasser il-Vec|Time Spiral|C|108841|138|
+|Trespassing Souleater|New Phyrexia|C|233073|163|
 |Tresserhorn Sinks|Coldsnap|U|121125|150|
 |Tresserhorn Skyknight|Coldsnap|U|121195|73|
 |Treva, the Renewer|Duel Decks: Phyrexia vs. the Coalition|R|209121|49|
@@ -17396,6 +17630,7 @@
 |Triskelion|Duel Decks: Elspeth vs. Tezzeret|R|206719|57|
 |Triskelion|Magic 2011|R|206719|218|
 |Triskelion|Mirrodin|R|206719|269|
+|Triumph of the Hordes|New Phyrexia|U|218044|123|
 |Trokin High Guard|Portal Second Age|C|6496||
 |Troll Ascetic|Mirrodin|R|130498|135|
 |Troll Ascetic|Tenth Edition|R|130498|305|
@@ -17663,6 +17898,7 @@
 |Untamed Wilds|Classic Sixth Edition|U|11549|263|
 |Untamed Wilds|Seventh Edition|U|11549|279|
 |Unwilling Recruit|Eventide|U|157202|64|
+|Unwinding Clock|New Phyrexia|R|218079|164|
 |Unworthy Dead|Urza's Saga|C|5780|163|
 |Unyaro Bee Sting|Mirage|U|3419||
 |Unyaro Bees|Time Spiral|R|113579|231|
@@ -17675,6 +17911,7 @@
 |Uproot|Betrayers of Kamigawa|C|74568|149|
 |Upwelling|Scourge|R|130494|131|
 |Upwelling|Tenth Edition|R|130494|306|
+|Urabrask the Hidden|New Phyrexia|M|214378|98|
 |Urborg|Legends|U|201202||
 |Urborg|Masters Edition III|U|201202|214|
 |Urborg Drake|Invasion|U|25975|283|
@@ -17828,6 +18065,7 @@
 |Vanish into Memory|Coldsnap|U|121187|133|
 |Vanishing|Visions|C|3655||
 |Vanquish|Fifth Dawn|U|51147|20|
+|Vapor Snag|New Phyrexia|C|218017|48|
 |Vapor Snare|Worldwake|U|194003|44|
 |Vaporous Djinn|Mirage|U|3372||
 |Varchild's Crusader|Alliances|C|184720||
@@ -17841,6 +18079,7 @@
 |Vastwood Zendikon|Worldwake|C|197870|117|
 |Vault of Whispers|Planechase|C|205313|141|
 |Vault of Whispers|Mirrodin|C|205313|286|
+|Vault Skirge|New Phyrexia|C|217984|76|
 |Vault Skyward|Scars of Mirrodin|C|194265|51|
 |Vebulid|Urza's Saga|R|5688|165|
 |Vec Townships|Battle Royale Box Set|U|21178||
@@ -18024,6 +18263,7 @@
 |Vicious Kavu|Invasion|U|23151|284|
 |Vicious Shadows|Shards of Alara|R|175048|119|
 |Victimize|Urza's Saga|U|10655|166|
+|Victorious Destruction|New Phyrexia|C|227549|99|
 |Victory's Herald|Mirrodin Besieged|R|214030|18|
 |Victual Sliver|Stronghold|U|207918||
 |Victual Sliver|Premium Deck Series: Slivers|U|207918|15|
@@ -18063,11 +18303,14 @@
 |Violent Outburst|Alara Reborn|C|185056|63|
 |Violent Ultimatum|Shards of Alara|R|175135|206|
 |Violet Pall|Morningtide|C|157426|81|
+|Viral Drake|New Phyrexia|U|233047|49|
 |Viridescent Wisps|Shadowmoor|C|158758|132|
 |Viridian Acolyte|Darksteel|C|15190|89|
+|Viridian Betrayers|New Phyrexia|C|214390|124|
 |Viridian Claw|Mirrodin Besieged|U|213784|143|
 |Viridian Corrupter|Mirrodin Besieged|U|213772|94|
 |Viridian Emissary|Mirrodin Besieged|C|213728|95|
+|Viridian Harvest|New Phyrexia|C|214388|125|
 |Viridian Joiner|Mirrodin|C|46114|138|
 |Viridian Longbow|Mirrodin|C|46018|270|
 |Viridian Lorebearers|Fifth Dawn|U|50188|99|
@@ -18099,6 +18342,7 @@
 |Vision Skeins|Dissension|C|107397|36|
 |Visions|Fourth Edition|U|2369||
 |Visions|Legends|U|2369||
+|Vital Splicer|New Phyrexia|U|233079|126|
 |Vital Surge|Betrayers of Kamigawa|C|74612|150|
 |Vitality Charm|Onslaught|C|39501|296|
 |Vitalize|Weatherlight|C|14667||
@@ -18204,6 +18448,7 @@
 |Volrath's Motion Sensor|Unglued|U|9753|39|
 |Volrath's Shapeshifter|Stronghold|R|5262||
 |Volrath's Stronghold|Stronghold|R|5263||
+|Volt Charge|New Phyrexia|C|214381|100|
 |Voltaic Construct|Darksteel|U|48141|156|
 |Voltaic Key|Duel Decks: Phyrexia vs. the Coalition|U|206332|17|
 |Voltaic Key|Magic 2011|U|206332|219|
@@ -18215,8 +18460,10 @@
 |Voodoo Doll|Legends|R|206084||
 |Voodoo Doll|Masters Edition III|R|206084|203|
 |Voracious Cobra|Invasion|U|23203|288|
-|Voracious Dragon|Conflux|R|186329|75|
+|Voracious Dragon|Duel Decks: Knights vs. Dragons|R|243474|56|
+|Voracious Dragon|Conflux|R|243474|75|
 |Voracious Hatchling|Eventide|U|153444|97|
+|Vorinclex, Voice of Hunger|New Phyrexia|M|218002|127|
 |Vorosh, the Hunter|Planar Chaos|R|124057|164|
 |Vorrac Battlehorns|Mirrodin|C|46053|271|
 |Votary of the Conclave|Ravnica: City of Guilds|C|87948|35|
@@ -18231,6 +18478,7 @@
 |Vulshok Heartstoker|Scars of Mirrodin|C|194320|107|
 |Vulshok Morningstar|Darksteel|C|83447|157|
 |Vulshok Morningstar|Ninth Edition|U|83447|315|
+|Vulshok Refugee|New Phyrexia|U|218038|101|
 |Vulshok Replica|Scars of Mirrodin|C|209034|221|
 |Vulshok Sorcerer|Premium Deck Series: Fire and Lightning|C|234719|11|
 |Vulshok Sorcerer|Fifth Dawn|C|234719|80|
@@ -18431,6 +18679,7 @@
 |War Mammoth|Limited Edition Alpha|C|202465||
 |War Mammoth|Masters Edition IV|C|202465|172|
 |War Priest of Thune|Magic 2011|U|208274|38|
+|War Report|New Phyrexia|C|230078|26|
 |War Tax|Mercadian Masques|U|19809|113|
 |Warbreak Trumpeter|Legions|U|45130|116|
 |Ward of Bones|Eventide|R|157972|174|
@@ -18610,6 +18859,7 @@
 |Whip Vine|Alliances|C|3155||
 |Whip Vine|Alliances|C|3155||
 |Whipcorder|Onslaught|U|41024|60|
+|Whipflare|New Phyrexia|U|194383|102|
 |Whipgrass Entangler|Legions|C|45122|26|
 |Whipkeeper|Odyssey|U|29961|228|
 |Whiplash Trap|Planechase|C|197526|16|
@@ -18635,6 +18885,7 @@
 |Whirlwind|Starter 1999|R|20219|150|
 |Whirlwind|Urza's Saga|R|20219|283|
 |Whispering Shade|Odyssey|C|29734|167|
+|Whispering Specter|New Phyrexia|U|218045|77|
 |Whispers of the Muse|Tempest|U|106651||
 |Whispers of the Muse|Time Spiral "Timeshifted"|S|106651|35|
 |Whispersilk Cloak|Duel Decks: Phyrexia vs. the Coalition|U|206342|23|
@@ -18642,16 +18893,17 @@
 |Whispersilk Cloak|Magic 2011|U|206342|221|
 |Whispersilk Cloak|Magic 2010|U|206342|221|
 |Whispersilk Cloak|Tenth Edition|U|206342|345|
-|White Knight|Fifth Edition|U|221569||
-|White Knight|Fourth Edition|U|221569||
-|White Knight|Revised Edition|U|221569||
-|White Knight|Unlimited Edition|U|221569||
-|White Knight|Limited Edition Beta|U|221569||
-|White Knight|Limited Edition Alpha|U|221569||
-|White Knight|Legions|U|221569|27|
-|White Knight|Masters Edition IV|U|221569|33|
-|White Knight|Magic 2011|U|221569|39|
-|White Knight|Magic 2010|U|221569|41|
+|White Knight|Fifth Edition|U|243426||
+|White Knight|Fourth Edition|U|243426||
+|White Knight|Revised Edition|U|243426||
+|White Knight|Unlimited Edition|U|243426||
+|White Knight|Limited Edition Beta|U|243426||
+|White Knight|Limited Edition Alpha|U|243426||
+|White Knight|Duel Decks: Knights vs. Dragons|U|243426|9|
+|White Knight|Legions|U|243426|27|
+|White Knight|Masters Edition IV|U|243426|33|
+|White Knight|Magic 2011|U|243426|39|
+|White Knight|Magic 2010|U|243426|41|
 |White Mana Battery|Fourth Edition|R|2080||
 |White Mana Battery|Legends|U|2080||
 |White Scarab|Ice Age|U|2716||
@@ -18750,7 +19002,8 @@
 |Willow Priestess|Masters Edition III|U|201321|138|
 |Willow Satyr|Legends|R|201244||
 |Willow Satyr|Masters Edition III|R|201244|139|
-|Wilt-Leaf Cavaliers|Shadowmoor|U|153962|244|
+|Wilt-Leaf Cavaliers|Duel Decks: Knights vs. Dragons|U|243432|15|
+|Wilt-Leaf Cavaliers|Shadowmoor|U|243432|244|
 |Wilt-Leaf Liege|Shadowmoor|R|147439|245|
 |Wind Dancer|Tempest|U|13038||
 |Wind Dancer|Seventh Edition|U|13038|113|
@@ -18802,6 +19055,7 @@
 |Wing Snare|Urza's Legacy|U|45436|117|
 |Wing Snare|Seventh Edition|U|45436|283|
 |Wing Snare|Eighth Edition|U|45436|288|
+|Wing Splicer|New Phyrexia|U|233037|50|
 |Wing Storm|Prophecy|U|25523|135|
 |Wingbeat Warrior|Legions|C|42058|29|
 |Winged Coatl|Alara Reborn|C|179603|105|
@@ -19044,6 +19298,7 @@
 |Xenic Poltergeist|Fourth Edition|R|202563||
 |Xenic Poltergeist|Antiquities|U|202563||
 |Xenic Poltergeist|Masters Edition IV|U|202563|104|
+|Xenograft|New Phyrexia|R|227544|51|
 |Xiahou Dun, the One-Eyed|Masters Edition III|U|201164|83|
 |Xiahou Dun, the One-Eyed|Portal Three Kingdoms|R|201164|92|
 |Xira Arien|Chronicles|R|201208||
@@ -19137,8 +19392,9 @@
 |Zephyr Spirit|Ravnica: City of Guilds|C|88962|76|
 |Zephyr Sprite|Magic 2010|C|190167|82|
 |Zerapa Minotaur|Prophecy|C|24630|108|
-|Zhalfirin Commander|Mirage|U|108868||
-|Zhalfirin Commander|Time Spiral "Timeshifted"|S|108868|18|
+|Zhalfirin Commander|Mirage|U|243430||
+|Zhalfirin Commander|Duel Decks: Knights vs. Dragons|U|243430|13|
+|Zhalfirin Commander|Time Spiral "Timeshifted"|S|243430|18|
 |Zhalfirin Crusader|Visions|R|3732||
 |Zhalfirin Knight|Mirage|C|3525||
 |Zhang Fei, Fierce Warrior|Masters Edition III|U|201312|28|
