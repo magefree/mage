@@ -89,7 +89,9 @@ class AnotherCreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Zone.BATTLEFIELD && zEvent.getTarget().getCardType().contains(Constants.CardType.CREATURE)) {
+            if (zEvent.getToZone() == Zone.BATTLEFIELD
+                    && zEvent.getTarget().getCardType().contains(Constants.CardType.CREATURE)
+                    && zEvent.getTargetId() != this.getSourceId()) {
                 return true;
             }
         }

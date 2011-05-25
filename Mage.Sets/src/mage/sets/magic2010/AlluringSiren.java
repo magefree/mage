@@ -38,12 +38,9 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.AttacksIfAbleTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -52,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AlluringSiren extends CardImpl<AlluringSiren> {
 
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
 	static {
 		filter.setTargetController(TargetController.OPPONENT);
@@ -65,7 +62,7 @@ public class AlluringSiren extends CardImpl<AlluringSiren> {
 		this.subtype.add("Siren");
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AlluringSirenEffect(), new TapSourceCost());
+		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Duration.EndOfTurn), new TapSourceCost());
 		ability.addTarget(new TargetCreaturePermanent(filter));
 		this.addAbility(ability);
 	}
@@ -84,30 +81,4 @@ public class AlluringSiren extends CardImpl<AlluringSiren> {
 		return "121568_typ_reg_sty_010.jpg";
 	}
 
-}
-
-class AlluringSirenEffect extends AttacksIfAbleTargetEffect {
-
-	public AlluringSirenEffect() {
-		super(Duration.EndOfTurn);
-	}
-
-	public AlluringSirenEffect(final AlluringSirenEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public AlluringSirenEffect copy() {
-		return new AlluringSirenEffect(this);
-	}
-
-	@Override
-	public UUID mustAttackDefender(Ability source, Game game) {
-		return source.getControllerId();
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Target creature an opponent controls attacks you this turn if able";
-	}
 }
