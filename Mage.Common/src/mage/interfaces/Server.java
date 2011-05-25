@@ -28,6 +28,7 @@
 
 package mage.interfaces;
 
+import mage.MageException;
 import mage.game.match.MatchOptions;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -53,7 +54,6 @@ public interface Server extends Remote, CallbackServer {
 	public UUID registerClient(String userName, UUID clientId, MageVersion version) throws RemoteException, MageException;
 	public UUID registerAdmin(String password, MageVersion version) throws RemoteException, MageException;
 	public void deregisterClient(UUID sessionId) throws RemoteException, MageException;
-	public void ack(String message, UUID sessionId) throws RemoteException, MageException;
 	public boolean ping(UUID sessionId) throws RemoteException, MageException;
 
 	public ServerState getServerState() throws RemoteException, MageException;

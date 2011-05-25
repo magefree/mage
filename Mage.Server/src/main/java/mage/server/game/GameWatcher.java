@@ -30,6 +30,9 @@ package mage.server.game;
 
 import java.rmi.RemoteException;
 import java.util.UUID;
+import java.util.logging.Level;
+import mage.MageException;
+import mage.interfaces.callback.CallbackException;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.Session;
 import mage.server.SessionManager;
@@ -58,44 +61,54 @@ public class GameWatcher {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				session.clearAck();
-				session.fireCallback(new ClientCallback("gameInit", gameId, gameView));
-				if (waitForAck("gameInit"))
+				try {
+					session.fireCallback(new ClientCallback("gameInit", gameId, gameView));
 					return true;
+				} catch (CallbackException ex) {
+					logger.fatal("Unable to start watching ", ex);
+					return false;
+				}
 			}
 		}
 		return false;
 	}
 
-	public boolean waitForAck(String message) {
-		Session session = SessionManager.getInstance().getSession(sessionId);
-		do {
-			//TODO: add timeout
-		} while (!session.getAckMessage().equals(message) && !killed);
-		return true;
-	}
-
 	public void update(final GameView gameView) {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null)
-				session.fireCallback(new ClientCallback("gameUpdate", gameId, gameView));
+			if (session != null) {
+				try {
+					session.fireCallback(new ClientCallback("gameUpdate", gameId, gameView));
+				} catch (CallbackException ex) {
+					logger.fatal("game update exception", ex);
+				}
+			}
 		}
 	}
 
 	public void inform(final String message, final GameView gameView) {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null)
-				session.fireCallback(new ClientCallback("gameInform", gameId, new GameClientMessage(gameView, message)));
+			if (session != null) {
+				try {
+					session.fireCallback(new ClientCallback("gameInform", gameId, new GameClientMessage(gameView, message)));
+				} catch (CallbackException ex) {
+					logger.fatal("game inform exception", ex);
+				}
+			}
 		}
 	}
 
 	public void gameOver(final String message) {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null)
-				session.fireCallback(new ClientCallback("gameOver", gameId, message));
+			if (session != null) {
+				try {
+					session.fireCallback(new ClientCallback("gameOver", gameId, message));
+				} catch (CallbackException ex) {
+					logger.fatal("game select exception", ex);
+				}
+			}
 		}
 	}
 

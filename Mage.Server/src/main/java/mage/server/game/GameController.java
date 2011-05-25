@@ -29,8 +29,10 @@
 package mage.server.game;
 
 import java.io.BufferedOutputStream;
+import java.util.logging.Level;
 
 import mage.game.LookedAt;
+import mage.MageException;
 import mage.server.TableManager;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -103,17 +105,21 @@ public class GameController implements GameCallback {
 			new Listener<TableEvent> () {
 				@Override
 				public void event(TableEvent event) {
-					switch (event.getEventType()) {
-						case UPDATE:
-							updateGame();
-							break;
-						case INFO:
-							ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK);
-							logger.debug(game.getId() + " " + event.getMessage());
-							break;
-						case REVEAL:
-							revealCards(event.getMessage(), event.getCards());
-							break;
+					try {
+						switch (event.getEventType()) {
+							case UPDATE:
+								updateGame();
+								break;
+							case INFO:
+								ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK);
+								logger.debug(game.getId() + " " + event.getMessage());
+								break;
+							case REVEAL:
+								revealCards(event.getMessage(), event.getCards());
+								break;
+						}
+					} catch (MageException ex) {
+						logger.fatal("Table event listener error ", ex);
 					}
 				}
 			}
@@ -123,37 +129,41 @@ public class GameController implements GameCallback {
 				@Override
 				public void event(PlayerQueryEvent event) {
 //					logger.info(event.getPlayerId() + "--" + event.getQueryType() + "--" + event.getMessage());
-					switch (event.getQueryType()) {
-						case ASK:
-							ask(event.getPlayerId(), event.getMessage());
-							break;
-						case PICK_TARGET:
-							target(event.getPlayerId(), event.getMessage(), event.getCards(), event.getTargets(), event.isRequired(), event.getOptions());
-							break;
-						case PICK_ABILITY:
-							target(event.getPlayerId(), event.getMessage(), event.getAbilities(), event.isRequired(), event.getOptions());
-							break;
-						case SELECT:
-							select(event.getPlayerId(), event.getMessage());
-							break;
-						case PLAY_MANA:
-							playMana(event.getPlayerId(), event.getMessage());
-							break;
-						case PLAY_X_MANA:
-							playXMana(event.getPlayerId(), event.getMessage());
-							break;
-						case CHOOSE_ABILITY:
-							chooseAbility(event.getPlayerId(), event.getAbilities());
-							break;
-						case CHOOSE:
-							choose(event.getPlayerId(), event.getMessage(), event.getChoices());
-							break;
-						case AMOUNT:
-							amount(event.getPlayerId(), event.getMessage(), event.getMin(), event.getMax());
-							break;
-						case LOOK:
-							lookAtCards(event.getPlayerId(), event.getMessage(), event.getCards());
-							break;
+					try {
+						switch (event.getQueryType()) {
+							case ASK:
+								ask(event.getPlayerId(), event.getMessage());
+								break;
+							case PICK_TARGET:
+								target(event.getPlayerId(), event.getMessage(), event.getCards(), event.getTargets(), event.isRequired(), event.getOptions());
+								break;
+							case PICK_ABILITY:
+								target(event.getPlayerId(), event.getMessage(), event.getAbilities(), event.isRequired(), event.getOptions());
+								break;
+							case SELECT:
+								select(event.getPlayerId(), event.getMessage());
+								break;
+							case PLAY_MANA:
+								playMana(event.getPlayerId(), event.getMessage());
+								break;
+							case PLAY_X_MANA:
+								playXMana(event.getPlayerId(), event.getMessage());
+								break;
+							case CHOOSE_ABILITY:
+								chooseAbility(event.getPlayerId(), event.getAbilities());
+								break;
+							case CHOOSE:
+								choose(event.getPlayerId(), event.getMessage(), event.getChoices());
+								break;
+							case AMOUNT:
+								amount(event.getPlayerId(), event.getMessage(), event.getMin(), event.getMax());
+								break;
+							case LOOK:
+								lookAtCards(event.getPlayerId(), event.getMessage(), event.getCards());
+								break;
+						}
+					} catch (MageException ex) {
+						logger.fatal("Player event listener error ", ex);
 					}
 				}
 			}
@@ -282,7 +292,7 @@ public class GameController implements GameCallback {
 		}
 	}
 
-	public void endGame(final String message) {
+	public void endGame(final String message) throws MageException {
 		for (final GameSession gameSession: gameSessions.values()) {
 			gameSession.gameOver(message);
 		}
@@ -317,7 +327,6 @@ public class GameController implements GameCallback {
 	}
 
 	private synchronized void updateGame() {
-
 		for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
 			entry.getValue().update(getGameView(entry.getKey()));
 		}
@@ -326,25 +335,25 @@ public class GameController implements GameCallback {
 		}
 	}
 
-	private synchronized void ask(UUID playerId, String question) {
+	private synchronized void ask(UUID playerId, String question) throws MageException {
 		if (gameSessions.containsKey(playerId))
 			gameSessions.get(playerId).ask(question, getGameView(playerId));
 		informOthers(playerId);
 	}
 
-	private synchronized void chooseAbility(UUID playerId, Collection<? extends Ability> choices) {
+	private synchronized void chooseAbility(UUID playerId, Collection<? extends Ability> choices) throws MageException {
 		if (gameSessions.containsKey(playerId))
 			gameSessions.get(playerId).chooseAbility(new AbilityPickerView(choices));
 		informOthers(playerId);
 	}
 
-	private synchronized void choose(UUID playerId, String message, Set<String> choices) {
+	private synchronized void choose(UUID playerId, String message, Set<String> choices) throws MageException {
 		if (gameSessions.containsKey(playerId))
 			gameSessions.get(playerId).choose(message, choices);
 		informOthers(playerId);
 	}
 
-	private synchronized void target(UUID playerId, String question, Cards cards, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
+	private synchronized void target(UUID playerId, String question, Cards cards, Set<UUID> targets, boolean required, Map<String, Serializable> options) throws MageException {
 		if (gameSessions.containsKey(playerId)) {
 			if (cards != null)
 				gameSessions.get(playerId).target(question, new CardsView(cards.getCards(game)), targets, required, getGameView(playerId), options);
@@ -354,48 +363,48 @@ public class GameController implements GameCallback {
 		informOthers(playerId);
 	}
 
-	private synchronized void target(UUID playerId, String question, Collection<? extends Ability> abilities, boolean required, Map<String, Serializable> options) {
+	private synchronized void target(UUID playerId, String question, Collection<? extends Ability> abilities, boolean required, Map<String, Serializable> options) throws MageException {
 		if (gameSessions.containsKey(playerId))
 			gameSessions.get(playerId).target(question, new CardsView(abilities, game), null, required, getGameView(playerId), options);
 		informOthers(playerId);
 	}
 
-	private synchronized void select(UUID playerId, String message) {
+	private synchronized void select(UUID playerId, String message) throws MageException {
 		if (gameSessions.containsKey(playerId))
 			gameSessions.get(playerId).select(message, getGameView(playerId));
 		informOthers(playerId);
 	}
 
-	private synchronized void playMana(UUID playerId, String message) {
+	private synchronized void playMana(UUID playerId, String message) throws MageException {
 		if (gameSessions.containsKey(playerId))
 			gameSessions.get(playerId).playMana(message, getGameView(playerId));
 		informOthers(playerId);
 	}
 
-	private synchronized void playXMana(UUID playerId, String message) {
+	private synchronized void playXMana(UUID playerId, String message) throws MageException {
 		if (gameSessions.containsKey(playerId))
 			gameSessions.get(playerId).playXMana(message, getGameView(playerId));
 		informOthers(playerId);
 	}
 
-	private synchronized void amount(UUID playerId, String message, int min, int max) {
+	private synchronized void amount(UUID playerId, String message, int min, int max) throws MageException {
 		if (gameSessions.containsKey(playerId))
 			gameSessions.get(playerId).getAmount(message, min, max);
 		informOthers(playerId);
 	}
 
-	private synchronized void revealCards(String name, Cards cards) {
+	private synchronized void revealCards(String name, Cards cards) throws MageException {
 		for (GameSession session: gameSessions.values()) {
 			session.revealCards(name, new CardsView(cards.getCards(game)));
 		}
 	}
 
-	private synchronized void lookAtCards(UUID playerId, String name, Cards cards) {
+	private synchronized void lookAtCards(UUID playerId, String name, Cards cards) throws MageException {
 		if (gameSessions.containsKey(playerId))
 			gameSessions.get(playerId).revealCards(name, new CardsView(cards.getCards(game)));
 	}
 
-	private void informOthers(UUID playerId) {
+	private void informOthers(UUID playerId) throws MageException {
 		final String message = "Waiting for " + game.getPlayer(playerId).getName();
 		for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
 			if (!entry.getKey().equals(playerId)) {
@@ -426,7 +435,11 @@ public class GameController implements GameCallback {
 
 	@Override
 	public void gameResult(String result) {
-		endGame(result);
+		try {
+			endGame(result);
+		} catch (MageException ex) {
+			logger.fatal("Game Result error", ex);
+		}
 	}
 
 	public void saveGame() {

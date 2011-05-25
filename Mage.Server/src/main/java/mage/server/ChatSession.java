@@ -34,6 +34,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import mage.MageException;
+import mage.interfaces.callback.CallbackException;
 import mage.interfaces.callback.ClientCallback;
 import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
@@ -78,7 +80,11 @@ public class ChatSession {
 		for (UUID sessionId: clients.keySet()) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
-				session.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(msg, color)));
+				try {
+					session.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(msg, color)));
+				} catch (CallbackException ex) {
+					logger.fatal("broadcast error", ex);
+				}
 			else
 				kill(sessionId);
 		}

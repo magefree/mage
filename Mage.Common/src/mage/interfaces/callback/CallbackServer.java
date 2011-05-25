@@ -37,6 +37,7 @@ import java.util.UUID;
  */
 public interface CallbackServer {
 
-	public ClientCallback callback(UUID clientId) throws RemoteException;
+	public ClientCallback callback(UUID clientId) throws RemoteException, CallbackException;
+	public void ack(int messageId, UUID sessionId) throws RemoteException, CallbackException;
 
 }

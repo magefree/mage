@@ -28,6 +28,7 @@
 
 package mage.server;
 
+import java.util.logging.Level;
 import mage.Constants.RangeOfInfluence;
 import mage.Constants.TableState;
 import mage.cards.decks.Deck;
@@ -44,6 +45,7 @@ import mage.game.match.Match;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
+import mage.MageException;
 import mage.players.Player;
 import mage.server.challenge.ChallengeManager;
 import mage.server.draft.DraftManager;
@@ -104,13 +106,17 @@ public class TableController {
 			new Listener<TableEvent> () {
 				@Override
 				public void event(TableEvent event) {
-					switch (event.getEventType()) {
-						case SIDEBOARD:
-							sideboard(event.getPlayerId(), event.getDeck(), event.getTimeout());
-							break;
-						case SUBMIT_DECK:
-							submitDeck(event.getPlayerId(), event.getDeck());
-							break;
+					try {
+						switch (event.getEventType()) {
+							case SIDEBOARD:
+								sideboard(event.getPlayerId(), event.getDeck(), event.getTimeout());
+								break;
+							case SUBMIT_DECK:
+								submitDeck(event.getPlayerId(), event.getDeck());
+								break;
+						}
+					} catch (MageException ex) {
+						logger.fatal("Table event listener error", ex);
 					}
 				}
 			}
@@ -202,8 +208,13 @@ public class TableController {
 		if (table.getState() != TableState.DUELING) {
 			return false;
 		}
-		SessionManager.getInstance().getSession(sessionId).watchGame(match.getGame().getId());
-		return true;
+		try {
+			SessionManager.getInstance().getSession(sessionId).watchGame(match.getGame().getId());
+			return true;
+		} catch (MageException ex) {
+			logger.fatal("watchTable error", ex);
+		}
+		return false;
 	}
 
 	public boolean replayTable(UUID sessionId) {
@@ -312,13 +323,20 @@ public class TableController {
 	}
 
 	public synchronized void startTournament(UUID sessionId) {
-		if (sessionId.equals(this.sessionId) && table.getState() == TableState.STARTING) {
-			TournamentManager.getInstance().createTournamentSession(tournament, sessionPlayerMap, table.getId());
-			SessionManager sessionManager = SessionManager.getInstance();
-			for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
-				Session session = sessionManager.getSession(entry.getKey());
-				session.tournamentStarted(tournament.getId(), entry.getValue());
+		try {
+			if (sessionId.equals(this.sessionId) && table.getState() == TableState.STARTING) {
+				TournamentManager.getInstance().createTournamentSession(tournament, sessionPlayerMap, table.getId());
+				SessionManager sessionManager = SessionManager.getInstance();
+				for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
+					Session session = sessionManager.getSession(entry.getKey());
+					session.tournamentStarted(tournament.getId(), entry.getValue());
+				}
 			}
+		}
+		catch (Exception ex) {
+			logger.fatal("Error starting tournament", ex);
+			TableManager.getInstance().removeTable(table.getId());
+			TournamentManager.getInstance().kill(tournament.getId(), sessionId);
 		}
 	}
 
@@ -326,12 +344,16 @@ public class TableController {
 		table.initDraft();
 		DraftManager.getInstance().createDraftSession(draft, sessionPlayerMap, table.getId());
 		SessionManager sessionManager = SessionManager.getInstance();
-		for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
-			sessionManager.getSession(entry.getKey()).draftStarted(draft.getId(), entry.getValue());
+		try {
+			for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
+				sessionManager.getSession(entry.getKey()).draftStarted(draft.getId(), entry.getValue());
+			}
+		} catch (MageException ex) {
+			logger.fatal("startDraft error", ex);
 		}
 	}
 
-	private void sideboard(UUID playerId, Deck deck, int timeout) {
+	private void sideboard(UUID playerId, Deck deck, int timeout) throws MageException {
 		SessionManager sessionManager = SessionManager.getInstance();
 		for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
 			if (entry.getValue().equals(playerId)) {

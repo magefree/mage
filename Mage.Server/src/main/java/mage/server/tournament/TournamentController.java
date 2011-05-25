@@ -31,6 +31,7 @@ package mage.server.tournament;
 import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
 import mage.cards.decks.Deck;
 import mage.game.GameException;
 import mage.game.Table;
@@ -42,6 +43,7 @@ import mage.game.match.MatchOptions;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentPairing;
 import mage.game.tournament.TournamentPlayer;
+import mage.MageException;
 import mage.server.ChatManager;
 import mage.server.TableManager;
 import mage.server.game.GamesRoomManager;
@@ -104,10 +106,14 @@ public class TournamentController {
 			new Listener<PlayerQueryEvent> () {
 				@Override
 				public void event(PlayerQueryEvent event) {
-					switch (event.getQueryType()) {
-						case CONSTRUCT:
-							construct(event.getPlayerId(), event.getDeck(), event.getMax());
-							break;
+					try {
+						switch (event.getQueryType()) {
+							case CONSTRUCT:
+								construct(event.getPlayerId(), event.getDeck(), event.getMax());
+								break;
+						}
+					} catch (MageException ex) {
+						logger.fatal("Player event listener error", ex);
 					}
 				}
 			}
@@ -190,7 +196,7 @@ public class TournamentController {
 		TableManager.getInstance().construct(tableId);
 	}
 
-	private void construct(UUID sessionId, Deck deck, int timeout) {
+	private void construct(UUID sessionId, Deck deck, int timeout) throws MageException {
 		if (tournamentSessions.containsKey(sessionId))
 			tournamentSessions.get(sessionId).construct(deck, timeout);
 	}

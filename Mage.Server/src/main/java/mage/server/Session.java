@@ -30,7 +30,12 @@ package mage.server;
 
 import java.util.Date;
 import java.util.UUID;
+import java.util.logging.Level;
 import mage.cards.decks.Deck;
+import mage.game.GameException;
+import mage.MageException;
+import mage.interfaces.callback.CallbackAck;
+import mage.interfaces.callback.CallbackException;
 import mage.interfaces.callback.CallbackServerSession;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.game.GameManager;
@@ -50,11 +55,12 @@ public class Session {
 	private String username;
 	private String host;
 	private int messageId = 0;
-	private String ackMessage;
 	private Date timeConnected;
 	private long lastPing;
 	private boolean isAdmin = false;
+	private boolean killed = false;
 	private final CallbackServerSession callback = new CallbackServerSession();
+	private final CallbackAck ackResponse = new CallbackAck();
 
 	public Session(String userName, String host, UUID clientId) {
 		sessionId = UUID.randomUUID();
@@ -84,6 +90,8 @@ public class Session {
 	}
 
 	public void kill() {
+		this.killed = true;
+		ackResponse.notify();
 		SessionManager.getInstance().removeSession(sessionId);
 		TableManager.getInstance().removeSession(sessionId);
 		GameManager.getInstance().removeSession(sessionId);
@@ -99,55 +107,116 @@ public class Session {
 		return null;
 	}
 
-	public synchronized void fireCallback(final ClientCallback call) {
+	public synchronized void fireCallback(final ClientCallback call) throws CallbackException {
 		call.setMessageId(messageId++);
 		if (logger.isDebugEnabled())
 			logger.debug(sessionId + " - " + call.getMessageId() + " - " + call.getMethod());
 		try {
-			callback.setCallback(call);
+			int retryCount = 0;
+			while (retryCount < 3) {
+				callback.setCallback(call);
+				if (waitForAck(call.getMessageId()))
+					return;
+				retryCount++;
+				try {
+					Thread.sleep(2000 * retryCount);
+				} 
+				catch (InterruptedException ignored) {}
+			}
 		} catch (InterruptedException ex) {
 			logger.fatal("Session fireCallback error", ex);
 		}
+		throw new CallbackException("Callback failed for " + call.getMethod());
+	}
+	
+	protected boolean waitForAck(int messageId) {
+		ackResponse.clear();
+		if (logger.isDebugEnabled())
+			logger.debug(sessionId + " - waiting for ack: " + messageId);
+		synchronized(ackResponse) {
+			try {
+				if (!ackResponse.isAck())
+					ackResponse.wait(10000);
+				if (logger.isDebugEnabled()) {
+					if (!ackResponse.isAck())
+						logger.debug(sessionId + " - ack timed out waiting for " + messageId);
+					else
+						logger.debug(sessionId + " - ack received: " + messageId);
+				}
+				return ackResponse.getValue() == messageId;
+			} catch (InterruptedException ex) {	}
+		}
+		return false;
 	}
 
-	public void gameStarted(final UUID gameId, final UUID playerId) {
-		fireCallback(new ClientCallback("startGame", gameId, new TableClientMessage(gameId, playerId)));
+	public void gameStarted(final UUID gameId, final UUID playerId) throws GameException {
+		try {
+			fireCallback(new ClientCallback("startGame", gameId, new TableClientMessage(gameId, playerId)));
+		} catch (CallbackException ex) {
+			logger.fatal("gameStarted exception", ex);
+			throw new GameException("callback failed");
+		}
 	}
 
-	public void draftStarted(final UUID draftId, final UUID playerId) {
-		fireCallback(new ClientCallback("startDraft", draftId, new TableClientMessage(draftId, playerId)));
+	public void draftStarted(final UUID draftId, final UUID playerId) throws MageException {
+		try {
+			fireCallback(new ClientCallback("startDraft", draftId, new TableClientMessage(draftId, playerId)));
+		} catch (CallbackException ex) {
+			logger.fatal("draftStarted exception", ex);
+			throw new MageException("callback failed");
+		}
 	}
 
-	public void tournamentStarted(final UUID tournamentId, final UUID playerId) {
-		fireCallback(new ClientCallback("startTournament", tournamentId, new TableClientMessage(tournamentId, playerId)));
+	public void tournamentStarted(final UUID tournamentId, final UUID playerId) throws MageException {
+		try {
+			fireCallback(new ClientCallback("startTournament", tournamentId, new TableClientMessage(tournamentId, playerId)));
+		} catch (CallbackException ex) {
+			logger.fatal("tournamentStarted exception", ex);
+			throw new MageException("callback failed");
+		}
 	}
 
-	public void sideboard(final Deck deck, final UUID tableId, final int time) {
-		fireCallback(new ClientCallback("sideboard", tableId, new TableClientMessage(deck, tableId, time)));
+	public void sideboard(final Deck deck, final UUID tableId, final int time) throws MageException {
+		try {
+			fireCallback(new ClientCallback("sideboard", tableId, new TableClientMessage(deck, tableId, time)));
+		} catch (CallbackException ex) {
+			logger.fatal("sideboard exception", ex);
+			throw new MageException("callback failed");
+		}
 	}
 
-	public void construct(final Deck deck, final UUID tableId, final int time) {
-		fireCallback(new ClientCallback("construct", tableId, new TableClientMessage(deck, tableId, time)));
+	public void construct(final Deck deck, final UUID tableId, final int time) throws MageException {
+		try {
+			fireCallback(new ClientCallback("construct", tableId, new TableClientMessage(deck, tableId, time)));
+		} catch (CallbackException ex) {
+			logger.fatal("construct exception", ex);
+			throw new MageException("callback failed");
+		}
 	}
 
-	public void watchGame(final UUID gameId) {
-		fireCallback(new ClientCallback("watchGame", gameId));
+	public void watchGame(final UUID gameId) throws MageException {
+		try {
+			fireCallback(new ClientCallback("watchGame", gameId));
+		} catch (CallbackException ex) {
+			logger.fatal("watchGame exception", ex);
+			throw new MageException("callback failed");
+		}
 	}
 
 	public void replayGame(final UUID gameId) {
-		fireCallback(new ClientCallback("replayGame", gameId));
+		try {
+			fireCallback(new ClientCallback("replayGame", gameId));
+		} catch (CallbackException ex) {
+			logger.fatal("replayGame exception", ex);
+		}
 	}
 
-	public void ack(String message) {
-		this.ackMessage = message;
-	}
-
-	public String getAckMessage() {
-		return ackMessage;
-	}
-
-	public void clearAck() {
-		this.ackMessage = "";
+	public void ack(int messageId) {
+		synchronized(ackResponse) {
+			ackResponse.setAck(true);
+			ackResponse.setValue(messageId);
+			ackResponse.notify();
+		}
 	}
 
 	public String getUsername() {

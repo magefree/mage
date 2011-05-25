@@ -35,6 +35,7 @@ import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
+import mage.MageException;
 import mage.view.TableView;
 
 /**
@@ -52,6 +53,6 @@ public interface GamesRoom extends Room {
 	public void removeTable(UUID tableId);
 	public TableView getTable(UUID tableId);
 	public void leaveTable(UUID sessionId, UUID tableId);
-	public boolean watchTable(UUID sessionId, UUID tableId);
+	public boolean watchTable(UUID sessionId, UUID tableId) throws MageException;
 
 }

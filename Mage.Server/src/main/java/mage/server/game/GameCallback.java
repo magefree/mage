@@ -28,12 +28,14 @@
 
 package mage.server.game;
 
+import mage.MageException;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public interface GameCallback {
 
-	public void gameResult(String result);
+	public void gameResult(String result) throws MageException;
 	
 }

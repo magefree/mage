@@ -42,7 +42,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
-import mage.interfaces.MageException;
+import mage.MageException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.interfaces.Server;
@@ -74,11 +74,11 @@ public class Session {
 	public Session(ConsoleFrame frame) {
 		this.frame = frame;
 	}
-	public boolean connect(String password, String serverName, int port) {
+	public synchronized boolean connect(String password, String serverName, int port) {
 		return connect(password, serverName, port, "", 0);
 	}
 	
-	public boolean connect(String password, String serverName, int port, String proxyServer, int proxyPort) {
+	public synchronized boolean connect(String password, String serverName, int port, String proxyServer, int proxyPort) {
 		if (isConnected()) {
 			disconnect();
 		}
@@ -117,7 +117,7 @@ public class Session {
 		return false;
 	}
 
-	public void disconnect() {
+	public synchronized void disconnect() {
 
 		if (isConnected()) {
 			try {
@@ -141,15 +141,15 @@ public class Session {
 		JOptionPane.showMessageDialog(frame, "Disconnected.", "Disconnected", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
-	public void ack(String message) {
-		try {
-			server.ack(message, sessionId);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
-		} catch (MageException ex) {
-			handleMageException(ex);
-		}
-	}
+//	public void ack(int messageId) {
+//		try {
+//			server.ack(messageId, sessionId);
+//		} catch (RemoteException ex) {
+//			handleRemoteException(ex);
+//		} catch (MageException ex) {
+//			handleMageException(ex);
+//		}
+//	}
 
 	public boolean ping() {
 		try {
@@ -260,10 +260,10 @@ public class Session {
 			return server.joinTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
-		} catch (MageException ex) {
-			handleMageException(ex);
 		} catch (GameException ex) {
 			handleGameException(ex);
+		} catch (MageException ex) {
+			handleMageException(ex);
 		}
 		return false;
 	}
@@ -273,10 +273,10 @@ public class Session {
 			return server.joinTournamentTable(sessionId, roomId, tableId, playerName, playerType, skill);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
-		} catch (MageException ex) {
-			handleMageException(ex);
 		} catch (GameException ex) {
 			handleGameException(ex);
+		} catch (MageException ex) {
+			handleMageException(ex);
 		}
 		return false;
 	}
@@ -569,10 +569,10 @@ public class Session {
 			return server.submitDeck(sessionId, tableId, deck);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
-		} catch (MageException ex) {
-			handleMageException(ex);
 		} catch (GameException ex) {
 			handleGameException(ex);
+		} catch (MageException ex) {
+			handleMageException(ex);
 		}
 		return false;
 	}

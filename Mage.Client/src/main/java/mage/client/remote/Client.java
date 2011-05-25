@@ -126,7 +126,7 @@ public class Client implements CallbackClient {
 						GamePanel panel = session.getGame(callback.getObjectId());
 						if (panel != null) {
 							panel.init((GameView) callback.getData());
-							session.ack("gameInit");
+
 						}
 					}
 					else if (callback.getMethod().equals("gameOver")) {
@@ -233,10 +233,10 @@ public class Client implements CallbackClient {
 						}
 					}
 					else if (callback.getMethod().equals("draftInit")) {
-						session.ack("draftInit");
+
 					}
 					else if (callback.getMethod().equals("tournamentInit")) {
-						session.ack("tournamentInit");
+
 					}
 					messageId = callback.getMessageId();
 				}

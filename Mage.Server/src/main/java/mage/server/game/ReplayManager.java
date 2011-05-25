@@ -30,6 +30,7 @@ package mage.server.game;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import mage.MageException;
 import mage.server.SessionManager;
 
 /**

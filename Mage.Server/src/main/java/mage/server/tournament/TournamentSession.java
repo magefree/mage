@@ -33,8 +33,11 @@ import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 import mage.cards.decks.Deck;
 import mage.game.tournament.Tournament;
+import mage.MageException;
+import mage.interfaces.callback.CallbackException;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.Session;
 import mage.server.SessionManager;
@@ -69,40 +72,52 @@ public class TournamentSession {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				session.clearAck();
-				session.fireCallback(new ClientCallback("tournamentInit", tournament.getId(), tournamentView));
-				if (waitForAck("tournamentInit"))
+				try {
+					session.fireCallback(new ClientCallback("tournamentInit", tournament.getId(), tournamentView));
 					return true;
+				} catch (CallbackException ex) {
+					logger.fatal("Unable to start tournament", ex);
+				}
 			}
 		}
 		return false;
 	}
 
-	public boolean waitForAck(String message) {
-		Session session = SessionManager.getInstance().getSession(sessionId);
-		do {
-			//TODO: add timeout
-		} while (!session.getAckMessage().equals(message) && !killed);
-		return true;
-	}
+//	public boolean waitForAck(String message) {
+//		Session session = SessionManager.getInstance().getSession(sessionId);
+//		do {
+//			//TODO: add timeout
+//		} while (!session.getAckMessage().equals(message) && !killed);
+//		return true;
+//	}
 
 	public void update(final TournamentView tournamentView) {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null)
-				session.fireCallback(new ClientCallback("tournamentUpdate", tournament.getId(), tournamentView));
+			if (session != null) {
+				try {
+					session.fireCallback(new ClientCallback("tournamentUpdate", tournament.getId(), tournamentView));
+				} catch (CallbackException ex) {
+					logger.fatal("tournament update error", ex);
+				}
+			}
 		}
 	}
 
 	public void gameOver(final String message) {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null)
-				session.fireCallback(new ClientCallback("tournamentOver", tournament.getId(), message));
+			if (session != null) {
+				try {
+					session.fireCallback(new ClientCallback("tournamentOver", tournament.getId(), message));
+				} catch (CallbackException ex) {
+					logger.fatal("tournament over error", ex);
+				}
+			}
 		}
 	}
 
-	public void construct(Deck deck, int timeout) {
+	public void construct(Deck deck, int timeout) throws MageException {
 		if (!killed) {
 			setupTimeout(timeout);
 			Session session = SessionManager.getInstance().getSession(sessionId);

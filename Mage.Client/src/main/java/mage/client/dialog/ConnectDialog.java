@@ -52,8 +52,8 @@ import javax.swing.event.ListSelectionListener;
 
 import mage.client.MageFrame;
 import mage.client.util.Config;
-import mage.utils.Connection;
-import mage.utils.Connection.ProxyType;
+import mage.remote.Connection;
+import mage.remote.Connection.ProxyType;
 
 import org.apache.log4j.Logger;
 

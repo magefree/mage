@@ -33,7 +33,10 @@ import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 import mage.game.draft.Draft;
+import mage.MageException;
+import mage.interfaces.callback.CallbackException;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.Session;
 import mage.server.SessionManager;
@@ -69,44 +72,62 @@ public class DraftSession {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				session.clearAck();
-				session.fireCallback(new ClientCallback("draftInit", draft.getId(), draftView));
-				if (waitForAck("draftInit"))
+				try {
+					session.fireCallback(new ClientCallback("draftInit", draft.getId(), draftView));
 					return true;
+				} catch (CallbackException ex) {
+					logger.fatal("Unable to start draft ", ex);
+					return false;
+				}
 			}
 		}
 		return false;
 	}
 
-	public boolean waitForAck(String message) {
-		Session session = SessionManager.getInstance().getSession(sessionId);
-		do {
-			//TODO: add timeout
-		} while (!session.getAckMessage().equals(message) && !killed);
-		return true;
-	}
+//	public boolean waitForAck(String message) {
+//		Session session = SessionManager.getInstance().getSession(sessionId);
+//		do {
+//			//TODO: add timeout
+//		} while (!session.getAckMessage().equals(message) && !killed);
+//		return true;
+//	}
 
 	public void update(final DraftView draftView) {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null)
-				session.fireCallback(new ClientCallback("draftUpdate", draft.getId(), draftView));
+			if (session != null) {
+				try {
+					session.fireCallback(new ClientCallback("draftUpdate", draft.getId(), draftView));
+				} catch (CallbackException ex) {
+					logger.fatal("update draft exception", ex);
+				}
+			}
 		}
 	}
 
 	public void inform(final String message, final DraftView draftView) {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null)
-				session.fireCallback(new ClientCallback("draftInform", draft.getId(), new DraftClientMessage(draftView, message)));
+			if (session != null) {
+				try {
+					session.fireCallback(new ClientCallback("draftInform", draft.getId(), new DraftClientMessage(draftView, message)));
+				} catch (CallbackException ex) {
+					logger.fatal("draft inform exception", ex);
+				}
+			}
 		}
 	}
 
 	public void draftOver() {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null)
-				session.fireCallback(new ClientCallback("draftOver", draft.getId()));
+			if (session != null) {
+				try {
+					session.fireCallback(new ClientCallback("draftOver", draft.getId()));
+				} catch (CallbackException ex) {
+					logger.fatal("draft end exception", ex);
+				}
+			}
 		}
 	}
 
@@ -114,8 +135,13 @@ public class DraftSession {
 		if (!killed) {
 			setupTimeout(timeout);
 			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null)
-				session.fireCallback(new ClientCallback("draftPick", draft.getId(), new DraftClientMessage(draftPickView)));
+			if (session != null) {
+				try {
+					session.fireCallback(new ClientCallback("draftPick", draft.getId(), new DraftClientMessage(draftPickView)));
+				} catch (CallbackException ex) {
+					logger.fatal("draft pick exception", ex);
+				}
+			}
 		}
 	}
 

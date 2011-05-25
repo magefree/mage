@@ -40,6 +40,7 @@ import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
+import mage.MageException;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
 
@@ -119,7 +120,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 	}
 
 	@Override
-	public boolean watchTable(UUID sessionId, UUID tableId) {
+	public boolean watchTable(UUID sessionId, UUID tableId) throws MageException {
 		return TableManager.getInstance().watchTable(sessionId, tableId);
 	}
 

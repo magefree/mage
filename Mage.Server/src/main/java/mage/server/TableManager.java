@@ -39,6 +39,7 @@ import mage.game.draft.Draft;
 import mage.game.match.Match;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
+import mage.MageException;
 import mage.players.Player;
 import mage.server.game.GamesRoomManager;
 import org.apache.log4j.Logger;

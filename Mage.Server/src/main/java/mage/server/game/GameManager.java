@@ -32,6 +32,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.cards.decks.DeckCardLists;
 import mage.game.Game;
+import mage.MageException;
 import mage.view.GameView;
 
 /**

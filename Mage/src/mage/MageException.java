@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.interfaces;
+package mage;
 
 /**
  * Root application exception.

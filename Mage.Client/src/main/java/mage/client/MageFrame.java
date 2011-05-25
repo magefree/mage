@@ -80,8 +80,8 @@ import mage.client.tournament.TournamentPane;
 import mage.game.match.MatchOptions;
 import mage.utils.MageVersion;
 import mage.sets.Sets;
-import mage.utils.Connection;
-import mage.utils.Connection.ProxyType;
+import mage.remote.Connection;
+import mage.remote.Connection.ProxyType;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
 

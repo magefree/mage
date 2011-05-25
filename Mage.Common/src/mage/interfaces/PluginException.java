@@ -1,5 +1,7 @@
 package mage.interfaces;
 
+import mage.MageException;
+
 /**
  * Exception thrown by plugin on errors.
  * 

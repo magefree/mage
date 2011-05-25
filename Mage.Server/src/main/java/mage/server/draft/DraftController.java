@@ -38,6 +38,7 @@ import mage.game.draft.DraftPlayer;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
+import mage.MageException;
 import mage.server.game.GameController;
 import mage.server.TableManager;
 import mage.server.util.ThreadExecutor;
@@ -73,13 +74,18 @@ public class DraftController {
 			new Listener<TableEvent> () {
 				@Override
 				public void event(TableEvent event) {
-					switch (event.getEventType()) {
-						case UPDATE:
-							updateDraft();
-							break;
-						case END:
-							endDraft();
-							break;
+					try {
+						switch (event.getEventType()) {
+							case UPDATE:
+								updateDraft();
+								break;
+							case END:
+								endDraft();
+								break;
+						}
+					}
+					catch (MageException ex) {
+						logger.fatal("Table event listener error", ex);
 					}
 				}
 			}
@@ -88,10 +94,15 @@ public class DraftController {
 			new Listener<PlayerQueryEvent> () {
 				@Override
 				public void event(PlayerQueryEvent event) {
-					switch (event.getQueryType()) {
-						case PICK_CARD:
-							pickCard(event.getPlayerId(), event.getMax());
-							break;
+					try {
+						switch (event.getQueryType()) {
+							case PICK_CARD:
+								pickCard(event.getPlayerId(), event.getMax());
+								break;
+						}
+					}
+					catch (MageException ex) {
+						logger.fatal("Table event listener error", ex);
 					}
 				}
 			}
@@ -156,7 +167,7 @@ public class DraftController {
 		draft.leave(getPlayerId(sessionId));
 	}
 
-	private void endDraft() {
+	private void endDraft() throws MageException {
 		for (final DraftSession draftSession: draftSessions.values()) {
 			draftSession.draftOver();
 		}
@@ -189,13 +200,13 @@ public class DraftController {
 		return null;
 	}
 
-	private synchronized void updateDraft() {
+	private synchronized void updateDraft() throws MageException {
 		for (final Entry<UUID, DraftSession> entry: draftSessions.entrySet()) {
 			entry.getValue().update(getDraftView());
 		}
 	}
 
-	private synchronized void pickCard(UUID playerId, int timeout) {
+	private synchronized void pickCard(UUID playerId, int timeout) throws MageException {
 		if (draftSessions.containsKey(playerId))
 			draftSessions.get(playerId).pickCard(getDraftPickView(playerId, timeout), timeout);
 	}

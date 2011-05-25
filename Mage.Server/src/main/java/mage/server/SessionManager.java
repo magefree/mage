@@ -37,7 +37,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import mage.interfaces.MageException;
+import mage.MageException;
 import mage.view.UserView;
 import org.apache.log4j.Logger;
 
@@ -97,6 +97,7 @@ public class SessionManager {
 	}
 
 	public void checkSessions() {
+		logger.info("Checking sessions");
 		for (Session session: sessions.values()) {
 			if (!session.stillAlive()) {
 				logger.info("Client for user " + session.getUsername() + ":" + session.getId() + " timed out - releasing resources");

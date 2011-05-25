@@ -30,7 +30,6 @@ package mage.client.remote;
 
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -43,25 +42,25 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import mage.cards.decks.DeckCardLists;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
 import mage.client.components.MageUI;
-import mage.client.dialog.ReconnectDialog;
 import mage.client.draft.DraftPanel;
 import mage.client.game.GamePanel;
+import mage.remote.method.*;
 import mage.client.tournament.TournamentPanel;
-import mage.client.util.Config;
 import mage.game.GameException;
-import mage.interfaces.MageException;
+import mage.MageException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
-import mage.interfaces.Server;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.CallbackClientDaemon;
-import mage.utils.Connection;
+import mage.remote.Connection;
+import mage.remote.ServerCache;
+import mage.remote.ServerUnavailable;
+import mage.utils.MageVersion;
 import mage.view.DraftPickView;
 import mage.view.GameTypeView;
 import mage.view.TableView;
@@ -79,7 +78,6 @@ public class Session {
 	private static ScheduledExecutorService sessionExecutor = Executors.newScheduledThreadPool(1);
 
 	private UUID sessionId;
-	private Server server;
 	private Client client;
 	private String userName;
 	private MageFrame frame;
@@ -101,7 +99,7 @@ public class Session {
 	
 	public synchronized boolean connect(Connection connection) {
 		this.connecting = true;
-		if (isConnected()) {
+		if (this.connection != null && isConnected()) {
 			disconnect(true);
 		}
 		this.connection = connection;
@@ -132,13 +130,12 @@ public class Session {
 					break;
 			}
 			Registry reg = LocateRegistry.getRegistry(connection.getHost(), connection.getPort());
-			this.server = (Server) reg.lookup(Config.remoteServer);
 			this.userName = connection.getUsername();
 			if (client == null)
 				client = new Client(this, frame);
-			sessionId = server.registerClient(userName, client.getId(), frame.getVersion());
-			callbackDaemon = new CallbackClientDaemon(sessionId, client, server);
-			serverState = server.getServerState();
+			sessionId = registerClient(userName, client.getId(), frame.getVersion());
+			callbackDaemon = new CallbackClientDaemon(sessionId, client, connection);
+			serverState = getServerState();
 			future = sessionExecutor.scheduleWithFixedDelay(new ServerPinger(), 5, 5, TimeUnit.SECONDS);
 			logger.info("Connected to RMI server at " + connection.getHost() + ":" + connection.getPort());
 			frame.setStatusText("Connected to " + connection.getHost() + ":" + connection.getPort() + " ");
@@ -158,8 +155,6 @@ public class Session {
 				disconnect(false);
 				JOptionPane.showMessageDialog(frame, "Unable to connect to server. "  + ex.getMessage());
 			}
-		} catch (NotBoundException ex) {
-			logger.fatal("Unable to connect to server - ", ex);
 		}
 		return false;
 	}
@@ -171,28 +166,26 @@ public class Session {
 			future.cancel(true);
 		frame.setStatusText("Not connected");
 		frame.disableButtons();
-		server = null;
-		if (!voluntary && !connecting) { 
-			if (attemptReconnect())
-				return;
-		}
+//		if (!voluntary && !connecting) {
+//			if (attemptReconnect())
+//				return;
+//		}
 		try {
 			for (UUID chatId: chats.keySet()) {
-				server.leaveChat(chatId, sessionId);
+				leaveChat(chatId);
 			}
 		}
-		catch (Exception ex) {
+		catch (Exception ignore) {
 			//swallow all exceptions at this point
 		}
 		try {
-			//TODO: stop daemon
-			if (server != null)
-				server.deregisterClient(sessionId);
-		} catch (RemoteException ex) {
-			logger.fatal("Error disconnecting ...", ex);
+			if (callbackDaemon != null)
+				callbackDaemon.stopDaemon();
+			deregisterClient();
 		} catch (MageException ex) {
 			logger.fatal("Error disconnecting ...", ex);
 		}
+		ServerCache.removeServerFromCache(connection);
 		frame.hideGames();
 		frame.hideTables();
 		logger.info("Disconnected ... ");
@@ -200,38 +193,61 @@ public class Session {
 			JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Server error.  You have been disconnected", "Error", JOptionPane.ERROR_MESSAGE);
 	}
 	
-	private boolean attemptReconnect() {
-		reconnecting = true;
-		ReconnectDialog rcd = new ReconnectDialog();
-		MageFrame.getDesktop().add(rcd, JLayeredPane.MODAL_LAYER);
-		rcd.showDialog(this);
-		reconnecting = false;
-		return rcd.getResult();
-	}
+//	private boolean attemptReconnect() {
+//		reconnecting = true;
+//		ReconnectDialog rcd = new ReconnectDialog();
+//		MageFrame.getDesktop().add(rcd, JLayeredPane.MODAL_LAYER);
+//		rcd.showDialog(this);
+//		reconnecting = false;
+//		return rcd.getResult();
+//	}
 	
-	public void ack(String message) {
-		try {
-			server.ack(message, sessionId);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
-		} catch (MageException ex) {
-			handleMageException(ex);
-		}
-	}
-
 	public boolean ping() {
+		Ping method = new Ping(connection, sessionId);
 		try {
-			return server.ping(sessionId);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+			return method.makeCall();
+		} catch (ServerUnavailable ex) {
+			logger.fatal("server unavailable - ", ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("ping error", ex);
 		}
 		return false;
 	}
-		
+
+
+	private UUID registerClient(String userName, UUID clientId, MageVersion version) throws MageException {
+		RegisterClient method = new RegisterClient(connection, userName, clientId, version);
+		try {
+			return method.makeCall();
+		} catch (ServerUnavailable ex) {
+			logger.fatal("server unavailable - ", ex);
+		}
+		return null;
+	}
+
+	private void deregisterClient() throws MageException {
+		DeregisterClient method = new DeregisterClient(connection, sessionId);
+		try {
+			method.makeCall();
+		} catch (ServerUnavailable ex) {
+			logger.fatal("server unavailable - ", ex);
+		}
+	}
+
+	private ServerState getServerState() {
+		GetServerState method = new GetServerState(connection);
+		try {
+			return method.makeCall();
+		} catch (ServerUnavailable ex) {
+			logger.fatal("server unavailable - ", ex);
+		} catch (MageException ex) {
+			logger.fatal("GetServerState error", ex);
+		}
+		return null;
+	}
+
 	public boolean isConnected() {
-		return server != null;
+		return ping();
 	}
 
 	public String[] getPlayerTypes() {
@@ -281,514 +297,557 @@ public class Session {
 	}
 
 	public UUID getMainRoomId() {
+		GetMainRoomId method = new GetMainRoomId(connection);
 		try {
-			return server.getMainRoomId();
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+			return method.makeCall();
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("GetMainRoomId error", ex);
 		}
 		return null;
 	}
 
 	public UUID getRoomChatId(UUID roomId) {
+		GetRoomChatId method = new GetRoomChatId(connection, roomId);
 		try {
-			return server.getRoomChatId(roomId);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+			return method.makeCall();
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("GetRoomChatId error", ex);
 		}
 		return null;
 	}
 
 	public UUID getTableChatId(UUID tableId) {
+		GetTableChatId method = new GetTableChatId(connection, tableId);
 		try {
-			return server.getTableChatId(tableId);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+			return method.makeCall();
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("GetTableChatId error", ex);
 		}
 		return null;
 	}
 
 	public UUID getGameChatId(UUID gameId) {
+		GetGameChatId method = new GetGameChatId(connection, gameId);
 		try {
-			return server.getGameChatId(gameId);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+			return method.makeCall();
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("GetGameChatId error", ex);
 		}
 		return null;
 	}
 
 	public TableView getTable(UUID roomId, UUID tableId) {
+		GetTable method = new GetTable(connection, roomId, tableId);
 		try {
-			return server.getTable(roomId, tableId);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+			return method.makeCall();
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("GetTable error", ex);
 		}
 		return null;
 	}
 
 	public boolean watchTable(UUID roomId, UUID tableId) {
+		WatchTable method = new WatchTable(connection, sessionId, roomId, tableId);
 		try {
-			server.watchTable(sessionId, roomId, tableId);
-			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+			return method.makeCall();
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("WatchTable error", ex);
 		}
 		return false;
 	}
 
 	public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList) {
+		JoinTable method = new JoinTable(connection, sessionId, roomId, tableId, playerName, playerType, skill, deckList);
 		try {
-			return server.joinTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
-		} catch (MageException ex) {
-			handleMageException(ex);
+			return method.makeCall();
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (GameException ex) {
 			handleGameException(ex);
+		} catch (MageException ex) {
+			logger.fatal("JoinTable error", ex);
 		}
 		return false;
 	}
 
 	public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill) {
+		JoinTournamentTable method = new JoinTournamentTable(connection, sessionId, roomId, tableId, playerName, playerType, skill);
 		try {
-			return server.joinTournamentTable(sessionId, roomId, tableId, playerName, playerType, skill);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
-		} catch (MageException ex) {
-			handleMageException(ex);
+			return method.makeCall();
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (GameException ex) {
 			handleGameException(ex);
+		} catch (MageException ex) {
+			logger.fatal("JoinTournamentTable error", ex);
 		}
 		return false;
 	}
 
 	public Collection<TableView> getTables(UUID roomId) throws MageRemoteException {
+		GetTables method = new GetTables(connection, roomId);
 		try {
-			return server.getTables(roomId);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
-			throw new MageRemoteException();
+			return method.makeCall();
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
-			throw new MageRemoteException();
+			logger.fatal("GetTables error", ex);
 		}
+		return null;
 	}
 
 	public Collection<String> getConnectedPlayers(UUID roomId) throws MageRemoteException {
+		GetConnectedPlayers method = new GetConnectedPlayers(connection, roomId);
 		try {
-			return server.getConnectedPlayers(roomId);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
-			throw new MageRemoteException();
+			return method.makeCall();
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
-			throw new MageRemoteException();
+			logger.fatal("GetConnectedPlayers error", ex);
 		}
+		return null;
 	}
 
 	public TournamentView getTournament(UUID tournamentId) throws MageRemoteException {
+		GetTournament method = new GetTournament(connection, tournamentId);
 		try {
-			return server.getTournament(tournamentId);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
-			throw new MageRemoteException();
+			return method.makeCall();
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
-			throw new MageRemoteException();
+			logger.fatal("GetTable error", ex);
 		}
+		return null;
 	}
 
 	public UUID getTournamentChatId(UUID tournamentId) {
+		GetTournamentChatId method = new GetTournamentChatId(connection, tournamentId);
 		try {
-			return server.getTournamentChatId(tournamentId);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+			return method.makeCall();
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("GetTournamentChatId error", ex);
 		}
 		return null;
 	}
 
 	public boolean sendPlayerUUID(UUID gameId, UUID data) {
+		SendPlayerUUID method = new SendPlayerUUID(connection, sessionId, gameId, data);
 		try {
-			server.sendPlayerUUID(gameId, sessionId, data);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("SendPlayerUUID error", ex);
 		}
 		return false;
 	}
 
 	public boolean sendPlayerBoolean(UUID gameId, boolean data) {
+		SendPlayerBoolean method = new SendPlayerBoolean(connection, sessionId, gameId, data);
 		try {
-			server.sendPlayerBoolean(gameId, sessionId, data);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("SendPlayerBoolean error", ex);
 		}
 		return false;
 	}
 
 	public boolean sendPlayerInteger(UUID gameId, int data) {
+		SendPlayerInteger method = new SendPlayerInteger(connection, sessionId, gameId, data);
 		try {
-			server.sendPlayerInteger(gameId, sessionId, data);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("SendPlayerInteger error", ex);
 		}
 		return false;
 	}
 
 	public boolean sendPlayerString(UUID gameId, String data) {
+		SendPlayerString method = new SendPlayerString(connection, sessionId, gameId, data);
 		try {
-			server.sendPlayerString(gameId, sessionId, data);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("SendPlayerString error", ex);
 		}
 		return false;
 	}
 
 	public DraftPickView sendCardPick(UUID draftId, UUID cardId) {
+		SendCardPick method = new SendCardPick(connection, sessionId, draftId, cardId);
 		try {
-			return server.sendCardPick(draftId, sessionId, cardId);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+			return method.makeCall();
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("SendCardPick error", ex);
 		}
 		return null;
 	}
 
 	public boolean joinChat(UUID chatId, ChatPanel chat) {
+		JoinChat method = new JoinChat(connection, sessionId, chatId, userName);
 		try {
-			server.joinChat(chatId, sessionId, userName);
+			method.makeCall();
 			chats.put(chatId, chat);
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("JoinChat error", ex);
 		}
 		return false;
 	}
 
 	public boolean leaveChat(UUID chatId) {
+		LeaveChat method = new LeaveChat(connection, sessionId, chatId);
 		try {
-			server.leaveChat(chatId, sessionId);
+			method.makeCall();
 			chats.remove(chatId);
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("LeaveChat error", ex);
 		}
 		return false;
 	}
 
 	public boolean sendChatMessage(UUID chatId, String message) {
+		SendChatMessage method = new SendChatMessage(connection, chatId, message, userName);
 		try {
-			server.sendChatMessage(chatId, userName, message);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("SendChatMessage error", ex);
 		}
 		return false;
 	}
 
 	public boolean joinGame(UUID gameId) {
+		JoinGame method = new JoinGame(connection, sessionId, gameId);
 		try {
-			server.joinGame(gameId, sessionId);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("JoinGame error", ex);
 		}
 		return false;
 	}
 
 	public boolean joinDraft(UUID draftId) {
+		JoinDraft method = new JoinDraft(connection, sessionId, draftId);
 		try {
-			server.joinDraft(draftId, sessionId);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("JoinDraft error", ex);
 		}
 		return false;
 	}
 
 	public boolean joinTournament(UUID tournamentId) {
+		JoinTournament method = new JoinTournament(connection, sessionId, tournamentId);
 		try {
-			server.joinTournament(tournamentId, sessionId);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("JoinTournament error", ex);
 		}
 		return false;
 	}
 
 	public boolean watchGame(UUID gameId) {
+		WatchGame method = new WatchGame(connection, sessionId, gameId);
 		try {
-			server.watchGame(gameId, sessionId);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("WatchGame error", ex);
 		}
 		return false;
 	}
 
 	public boolean replayGame(UUID gameId) {
+		ReplayGame method = new ReplayGame(connection, sessionId, gameId);
 		try {
-			server.replayGame(gameId, sessionId);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("ReplayGame error", ex);
 		}
 		return false;
 	}
 
 	public TableView createTable(UUID roomId, MatchOptions matchOptions) {
+		CreateTable method = new CreateTable(connection, sessionId, roomId, matchOptions);
 		try {
-			return server.createTable(sessionId, roomId, matchOptions);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+			return method.makeCall();
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("CreateTable error", ex);
 		}
 		return null;
 	}
 
 	public TableView createTournamentTable(UUID roomId, TournamentOptions tournamentOptions) {
+		CreateTournamentTable method = new CreateTournamentTable(connection, sessionId, roomId, tournamentOptions);
 		try {
-			return server.createTournamentTable(sessionId, roomId, tournamentOptions);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+			return method.makeCall();
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("CreateTournamentTable error", ex);
 		}
 		return null;
 	}
 
 	public boolean isTableOwner(UUID roomId, UUID tableId) {
+		IsTableOwner method = new IsTableOwner(connection, sessionId, roomId, tableId);
 		try {
-			return server.isTableOwner(sessionId, roomId, tableId);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+			return method.makeCall();
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("IsTableOwner error", ex);
 		}
 		return false;
 	}
 
 	public boolean removeTable(UUID roomId, UUID tableId) {
+		RemoveTable method = new RemoveTable(connection, sessionId, roomId, tableId);
 		try {
-			server.removeTable(sessionId, roomId, tableId);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("RemoveTable error", ex);
 		}
 		return false;
 	}
 
 	public boolean swapSeats(UUID roomId, UUID tableId, int seatNum1, int seatNum2) {
+		SwapSeats method = new SwapSeats(connection, sessionId, roomId, tableId, seatNum1, seatNum2);
 		try {
-			server.swapSeats(sessionId, roomId, tableId, seatNum1, seatNum2);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("RemoveTable error", ex);
 		}
 		return false;
 	}
 
 	public boolean leaveTable(UUID roomId, UUID tableId) {
+		LeaveTable method = new LeaveTable(connection, sessionId, roomId, tableId);
 		try {
-			server.leaveTable(sessionId, roomId, tableId);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("LeaveTable error", ex);
 		}
 		return false;
 	}
 
 	public boolean startGame(UUID roomId, UUID tableId) {
+		StartGame method = new StartGame(connection, sessionId, roomId, tableId);
 		try {
-			server.startMatch(sessionId, roomId, tableId);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("StartGame error", ex);
 		}
 		return false;
 	}
 
 	public boolean startTournament(UUID roomId, UUID tableId) {
+		StartTournament method = new StartTournament(connection, sessionId, roomId, tableId);
 		try {
-			server.startTournament(sessionId, roomId, tableId);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("StartTournament error", ex);
 		}
 		return false;
 	}
 
 	public boolean startChallenge(UUID roomId, UUID tableId, UUID challengeId) {
+		StartChallenge method = new StartChallenge(connection, sessionId, roomId, tableId, challengeId);
 		try {
-			server.startChallenge(sessionId, roomId, tableId, challengeId);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("StartChallenge error", ex);
 		}
 		return false;
 	}
 
 	public boolean submitDeck(UUID tableId, DeckCardLists deck) {
+		SubmitDeck method = new SubmitDeck(connection, sessionId, tableId, deck);
 		try {
-			return server.submitDeck(sessionId, tableId, deck);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
-		} catch (MageException ex) {
-			handleMageException(ex);
+			return method.makeCall();
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (GameException ex) {
 			handleGameException(ex);
+		} catch (MageException ex) {
+			logger.fatal("SubmitDeck error", ex);
 		}
 		return false;
 	}
 
 	public boolean concedeGame(UUID gameId) {
+		ConcedeGame method = new ConcedeGame(connection, sessionId, gameId);
 		try {
-			server.concedeGame(gameId, sessionId);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("ConcedeGame error", ex);
 		}
 		return false;
 	}
 
 	public boolean stopWatching(UUID gameId) {
+		StopWatching method = new StopWatching(connection, sessionId, gameId);
 		try {
-			server.stopWatching(gameId, sessionId);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("StopWatching error", ex);
 		}
 		return false;
 	}
 
 	public boolean startReplay(UUID gameId) {
+		StartReplay method = new StartReplay(connection, sessionId, gameId);
 		try {
-			server.startReplay(gameId, sessionId);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("StartReplay error", ex);
 		}
 		return false;
 	}
 
 	public boolean stopReplay(UUID gameId) {
+		StopReplay method = new StopReplay(connection, sessionId, gameId);
 		try {
-			server.stopReplay(gameId, sessionId);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("StopReplay error", ex);
 		}
 		return false;
 	}
 
 	public boolean nextPlay(UUID gameId) {
+		NextPlay method = new NextPlay(connection, sessionId, gameId);
 		try {
-			server.nextPlay(gameId, sessionId);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("NextPlay error", ex);
 		}
 		return false;
 	}
 
 	public boolean previousPlay(UUID gameId) {
+		PreviousPlay method = new PreviousPlay(connection, sessionId, gameId);
 		try {
-			server.previousPlay(gameId, sessionId);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("PreviousPlay error", ex);
 		}
 		return false;
 	}
 
 	public boolean cheat(UUID gameId, UUID playerId, DeckCardLists deckList) {
+		Cheat method = new Cheat(connection, sessionId, gameId, playerId, deckList);
 		try {
-			server.cheat(gameId, sessionId, playerId, deckList);
+			method.makeCall();
 			return true;
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
+		} catch (ServerUnavailable ex) {
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
-			handleMageException(ex);
+			logger.fatal("Cheat error", ex);
 		}
 		return false;
 	}
 
-	private void handleRemoteException(RemoteException ex) {
-		logger.fatal("Communication error", ex);
+//	private void handleRemoteException(RemoteException ex) {
+//		logger.fatal("Communication error", ex);
+//		disconnect(false);
+//	}
+
+//	private void handleMageException(MageException ex) {
+//		logger.fatal("Server error", ex);
+//		disconnect(false);
+//	}
+
+	private void handleServerUnavailable(ServerUnavailable ex) {
+		logger.fatal("server unavailable - ", ex);
 		disconnect(false);
 	}
-
-	private void handleMageException(MageException ex) {
-		logger.fatal("Server error", ex);
-		disconnect(false);
-	}
-
+	
 	private void handleGameException(GameException ex) {
 		logger.warn(ex.getMessage());
 		JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -803,9 +862,9 @@ public class Session {
 		return ui;
 	}
 
-	public Server getServerRef() {
-		return server;
-	}
+//	public Server getServerRef() {
+//		return server;
+//	}
 	
 	class ServerPinger implements Runnable {
 
