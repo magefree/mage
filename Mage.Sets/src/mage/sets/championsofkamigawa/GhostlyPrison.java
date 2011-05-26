@@ -107,7 +107,7 @@ class GhostlyPrisonReplacementEffect extends ReplacementEffectImpl<GhostlyPrison
 
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
-		if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER ) {
+		if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER && event.getTargetId().equals(source.getControllerId()) ) {
 			return true;
 		}
 		return false;
