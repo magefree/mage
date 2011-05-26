@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -43,10 +44,12 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PrimalBellow extends CardImpl<PrimalBellow> {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Forest you control");
 
     static {
         filter.getName().add("Forest");
+        filter.setTargetController(TargetController.YOU);
+        
     }
 
     public PrimalBellow(UUID ownerId) {
@@ -54,7 +57,7 @@ public class PrimalBellow extends CardImpl<PrimalBellow> {
         this.expansionSetCode = "ZEN";
 
         this.color.setGreen(true);
-        PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter, true);
+        PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(value, value, Duration.EndOfTurn));
     }

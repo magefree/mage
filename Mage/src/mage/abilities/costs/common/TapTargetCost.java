@@ -46,7 +46,7 @@ public class TapTargetCost extends CostImpl<TapTargetCost> {
 
 	public TapTargetCost(TargetControlledPermanent target) {
 		this.target = target;
-		this.text = "tap " + target.getMaxNumberOfTargets() + " " + target.getTargetName() + " you control";
+		this.text = "tap " + target.getMaxNumberOfTargets() + " " + target.getTargetName();
 	}
 
 	public TapTargetCost(final TapTargetCost cost) {

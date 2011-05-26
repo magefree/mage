@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -44,10 +45,12 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class TimbermawLarva extends CardImpl<TimbermawLarva> {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Forest you control");
 
     static {
         filter.getName().add("Forest");
+        filter.setTargetController(TargetController.YOU);
+        
     }
 
     public TimbermawLarva(UUID ownerId) {
@@ -59,7 +62,7 @@ public class TimbermawLarva extends CardImpl<TimbermawLarva> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter, true);
+        PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter);
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, value, Duration.EndOfTurn), false));
     }
 
