@@ -41,6 +41,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.counters.common.PlusOneCounter;
+import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -95,6 +96,7 @@ class OranRiefTheVastwoodEffect extends OneShotEffect<OranRiefTheVastwoodEffect>
 		FilterPermanent filter = new FilterPermanent();
 		filter.getCardType().add(CardType.CREATURE);
 		filter.getColor().setGreen(true);
+        filter.setScopeColor(Filter.ComparisonScope.Any);
 		filter.setUseColor(true);
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
 			if (permanent.getTurnsOnBattlefield() == 0) {
