@@ -20,6 +20,11 @@
             <artifactId>Mage</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Mage-Sets</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 	
     <build>

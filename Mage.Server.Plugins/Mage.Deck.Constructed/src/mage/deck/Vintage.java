@@ -1,5 +1,5 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+* Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -28,47 +28,15 @@
 
 package mage.deck;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import mage.cards.decks.Deck;
-import mage.cards.decks.DeckValidatorImpl;
+import mage.cards.decks.Constructed;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Constructed extends DeckValidatorImpl {
+public class Vintage extends Constructed {
 
-	public Constructed() {
-		super("Constructed");
+	public Vintage() {
+		super("Constructed - Vintage");
 	}
-
-	@Override
-	public boolean validate(Deck deck) {
-		//20091005 - 100.2a
-		if (deck.getCards().size() < 60)
-			return false;
-		//20091005 - 100.4a
-		if (deck.getSideboard().size() != 0 && deck.getSideboard().size() != 15)
-			return false;
-
-		List<String> basicLandNames = new ArrayList<String>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains"));
-		Map<String, Integer> counts = new HashMap<String, Integer>();
-		countCards(counts, deck.getCards());
-		countCards(counts, deck.getSideboard());
-		for (Entry<String, Integer> entry: counts.entrySet()) {
-			if (entry.getValue() > 4) {
-				if (!basicLandNames.contains(entry.getKey()) && !entry.getKey().equals("Relentless Rats")) {
-					return false;
-				}
-			}
-		}
-
-		return true;
-	}
-
 }

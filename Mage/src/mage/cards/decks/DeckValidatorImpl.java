@@ -29,6 +29,7 @@
 package mage.cards.decks;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import mage.cards.Card;
 
@@ -39,6 +40,8 @@ import mage.cards.Card;
 public abstract class DeckValidatorImpl implements DeckValidator {
 
 	protected String name;
+
+	protected Map<String, String> invalid = new HashMap<String, String>();
 
 	public DeckValidatorImpl(String name) {
 		this.name = name;
@@ -58,5 +61,10 @@ public abstract class DeckValidatorImpl implements DeckValidator {
 				counts.put(card.getName(), 1);
 			}
 		}
+	}
+
+	@Override
+	public Map<String, String> getInvalid() {
+		return invalid;
 	}
 }

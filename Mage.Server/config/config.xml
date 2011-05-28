@@ -16,7 +16,12 @@
 		<tournamentType name="Sealed Elimination" jar="mage-tournament-sealed.jar" className="mage.tournament.SealedEliminationTournament" typeName="mage.tournament.SealedEliminationTournamentType"/>
 	</tournamentTypes>
 	<deckTypes>
-		<deckType name="Constructed" jar="mage-deck-constructed.jar" className="mage.deck.Constructed"/>
+		<deckType name="Constructed - Vintage" jar="mage-deck-constructed.jar" className="mage.deck.Vintage"/>
+		<deckType name="Constructed - Extended" jar="mage-deck-constructed.jar" className="mage.deck.Extended"/>
+		<deckType name="Constructed - Standard" jar="mage-deck-constructed.jar" className="mage.deck.Standard"/>
+		<deckType name="Constructed - Shards of Alara Block" jar="mage-deck-constructed.jar" className="mage.deck.ShardsOfAlaraBlock"/>
+		<deckType name="Constructed - Zendikar Block" jar="mage-deck-constructed.jar" className="mage.deck.ZendikarBlock"/>
+		<deckType name="Constructed - Scars of Mirrodin Block" jar="mage-deck-constructed.jar" className="mage.deck.ScarsOfMirrodinBlock"/>
 		<deckType name="Limited" jar="mage-deck-limited.jar" className="mage.deck.Limited"/>
 	</deckTypes>
 </config>

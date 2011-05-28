@@ -1,5 +1,5 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+* Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -26,19 +26,35 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.cards.decks;
+package mage.deck;
 
-import java.io.Serializable;
-import java.util.Map;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import mage.Constants.SetType;
+import mage.cards.ExpansionSet;
+import mage.cards.decks.Constructed;
+import mage.sets.Sets;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface DeckValidator extends Serializable {
+public class Extended extends Constructed {
 
-	public String getName();
-	public boolean validate(Deck deck);
-	public Map<String, String> getInvalid();
-	
+	public Extended() {
+		super("Constructed - Extended");
+		GregorianCalendar current = new GregorianCalendar();
+		GregorianCalendar cutoff;
+		if (current.get(Calendar.MONTH) > 9) {
+			cutoff = new GregorianCalendar(current.get(Calendar.YEAR) - 3, Calendar.SEPTEMBER, 1);
+		}
+		else {
+			cutoff = new GregorianCalendar(current.get(Calendar.YEAR) - 4, Calendar.SEPTEMBER, 1);
+		}
+		for (ExpansionSet set: Sets.getInstance().values()) {
+			if (set.getReleaseDate().after(cutoff.getTime()) && set.getSetType() != SetType.REPRINT) {
+				setCodes.add(set.getCode());
+			}
+		}
+	}
 }

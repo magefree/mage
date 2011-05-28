@@ -1,5 +1,5 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+* Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -26,19 +26,21 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.cards.decks;
+package mage.deck;
 
-import java.io.Serializable;
-import java.util.Map;
+import mage.cards.decks.Constructed;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface DeckValidator extends Serializable {
+public class ScarsOfMirrodinBlock extends Constructed {
 
-	public String getName();
-	public boolean validate(Deck deck);
-	public Map<String, String> getInvalid();
-	
+	public ScarsOfMirrodinBlock() {
+		super("Constructed - Scars of Mirrodin Block");
+		setCodes.add("SOM");
+		setCodes.add("MBS");
+		setCodes.add("NPH");
+	}
+
 }

@@ -232,10 +232,8 @@ public class Sets extends HashMap<String, ExpansionSet> {
 
 
 	public static ExpansionSet findSet(String code) {
-		for (ExpansionSet set: fINSTANCE.values()) {
-			if (set.getCode().equals(code))
-				return set;
-		}
+		if (fINSTANCE.containsKey(code))
+			return fINSTANCE.get(code);
 		return null;
 	}
 
