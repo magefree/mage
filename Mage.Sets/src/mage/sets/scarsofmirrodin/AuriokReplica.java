@@ -56,7 +56,7 @@ public class AuriokReplica extends CardImpl<AuriokReplica> {
 		this.expansionSetCode = "SOM";
 		this.subtype.add("Cleric");
 		this.power = new MageInt(2);
-		this.toughness = new MageInt(3);
+		this.toughness = new MageInt(2);
 
 		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AuriokReplicaEffect(), new ManaCostsImpl("{W}"));
 		ability.addCost(new SacrificeSourceCost());
