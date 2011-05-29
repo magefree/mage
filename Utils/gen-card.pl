@@ -259,6 +259,11 @@ $mana{'Black or Red'} = '{B/R}';
 $mana{'Blue or Red'} = '{U/R}';
 $mana{'Red or Green'} = '{R/G}';
 $mana{'Red or White'} = '{R/W}';
+$mana{'Phyrexian Green'} = '{GP}';
+$mana{'Phyrexian Red'} = '{RP}';
+$mana{'Phyrexian Black'} = '{BP}';
+$mana{'Phyrexian Blue'} = '{UP}';
+$mana{'Phyrexian White'} = '{WP}';
 
 my %manatocolor;
 $manatocolor{'Black'} = "		this.color.setBlack(true);";
@@ -267,6 +272,11 @@ $manatocolor{'Green'} = "		this.color.setGreen(true);";
 $manatocolor{'Red'} = "		this.color.setRed(true);";
 $manatocolor{'White'} = "		this.color.setWhite(true);";
 $manatocolor{'Red or White'} = "		this.color.setWhite(true);\n		this.color.setRed(true);";
+$manatocolor{'Phyrexian Green'} = "		this.color.setGreen(true);";
+$manatocolor{'Phyrexian Red'} = "		this.color.setRed(true);";
+$manatocolor{'Phyrexian Black'} = "		this.color.setBlack(true);";
+$manatocolor{'Phyrexian Blue'} = "		this.color.setBlue(true);";
+$manatocolor{'Phyrexian White'} = "		this.color.setWhite(true);";
 
 my %cardtypes;
 $cardtypes{'Artifact'} = "CardType.ARTIFACT";
@@ -357,7 +367,10 @@ foreach my $div (@divs) {
 				$manacost .= "{" . $m . "}";
 			} else { 				
 		    	die "unknown manacost: " . $m unless defined $mana{$m};
+				
 		    	$manacost .= $mana{$m};
+				print "$m";
+				print "$manatocolor{$m}";
 		    	$findedcolors .= "\n" . $manatocolor{$m};  		    	
 			}
 		}

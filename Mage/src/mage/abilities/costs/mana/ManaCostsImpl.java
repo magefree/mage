@@ -108,6 +108,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 			setPaid();
 			return true;
 		}
+		
 		Player player = game.getPlayer(controllerId);
 		assignPayment(player.getManaPool());
 		while (!isPaid()) {
@@ -226,8 +227,9 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 					else {
 						if (Character.isDigit(symbol.charAt(0))) {
 							this.add((T)new MonoHybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(2))));
-						}
-						else {
+						} else if (symbol.contains("P")) {
+							this.add((T)new PhyrexianManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
+						} else {
 							this.add((T)new HybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(0)), ColoredManaSymbol.lookup(symbol.charAt(2))));
 						}
 					}

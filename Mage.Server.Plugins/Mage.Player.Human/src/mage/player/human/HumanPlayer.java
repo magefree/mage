@@ -30,17 +30,10 @@ package mage.player.human;
 
 import java.io.Serializable;
 import java.util.List;
-import mage.abilities.TriggeredAbilities;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.effects.ReplacementEffect;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.choices.Choice;
-import mage.game.draft.Draft;
-import mage.players.*;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
 import mage.Constants.TargetController;
@@ -49,18 +42,28 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.SpecialAction;
+import mage.abilities.TriggeredAbilities;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
+import mage.abilities.effects.ReplacementEffect;
+import mage.cards.Card;
+import mage.cards.Cards;
 import mage.cards.decks.Deck;
+import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.game.Game;
-import mage.game.Table;
+import mage.game.draft.Draft;
 import mage.game.match.Match;
 import mage.game.permanent.Permanent;
 import mage.game.tournament.Tournament;
+import mage.players.Player;
+import mage.players.PlayerImpl;
 import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
@@ -351,7 +354,20 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 			return false;
 		} else if (response.getUUID() != null) {
 			playManaAbilities(game);
-		}
+		} else if (response.getString() != null && response.getString().equals("special")) {
+			if (unpaid instanceof ManaCostsImpl) {
+				ManaCostsImpl<ManaCost> costs = (ManaCostsImpl<ManaCost>) unpaid;
+				for (ManaCost cost : costs.getUnpaid()) {
+					if (cost instanceof PhyrexianManaCost) {
+						PhyrexianManaCost ph = (PhyrexianManaCost)cost;
+						if (ph.canPay(null, playerId, game)) {
+							((PhyrexianManaCost)cost).pay(game, null, playerId, false);
+						}
+						break;
+					}
+				}
+			}
+		} 
 		return true;
 	}
 

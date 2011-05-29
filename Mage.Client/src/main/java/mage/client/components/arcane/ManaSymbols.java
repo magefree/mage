@@ -28,7 +28,8 @@ public class ManaSymbols {
 
 	static public void loadImages() {
 		String[] symbols = new String[]{"0", "1", "10", "11", "12", "15", "16", "2", "3", "4", "5", "6", "7", "8", "9", "B", "BG",
-				"BR", "G", "GU", "GW", "R", "RG", "RW", "S", "T", "U", "UB", "UR", "W", "WB", "WU", "X" /*, "Y", "Z", "slash"*/};
+				"BR", "G", "GU", "GW", "R", "RG", "RW", "S", "T", "U", "UB", "UR", "W", "WB", "WU", 
+				"WP", "UP", "BP", "RP", "GP", "X" /*, "Y", "Z", "slash"*/};
 		for (String symbol : symbols) {
 			File file = new File(Constants.RESOURCE_PATH_MANA_LARGE + "/" + symbol + ".jpg");
 			Rectangle r = new Rectangle(11, 11);

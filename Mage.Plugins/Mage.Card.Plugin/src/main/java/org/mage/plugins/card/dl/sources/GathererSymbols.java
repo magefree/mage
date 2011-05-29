@@ -39,6 +39,8 @@ public class GathererSymbols implements Iterable<DownloadJob> {
                                           "W/U", "U/B", "B/R", "R/G", "G/W", "W/B", "U/R", "B/G", "R/W", "G/U",
 
                                           "2/W", "2/U", "2/B", "2/R", "2/G",
+                                          
+                                          "WP", "UP", "BP", "RP", "GP",
 
                                           "X", "S", "T", "Q"};
     private static final int      minNumeric = 0, maxNumeric = 16;

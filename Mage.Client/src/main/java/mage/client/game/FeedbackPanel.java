@@ -114,6 +114,11 @@ public class FeedbackPanel extends javax.swing.JPanel {
 				break;
 		}
 		this.btnSpecial.setVisible(special);
+		this.btnSpecial.setText("Special");
+		if (message.contains("P}")) {
+			this.btnSpecial.setVisible(true);
+			this.btnSpecial.setText("Pay 2 life");
+		}
 		handleOptions(options);
 		this.revalidate();
 		this.repaint();
