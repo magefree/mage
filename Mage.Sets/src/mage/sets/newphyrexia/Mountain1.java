@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Mountain1 extends mage.cards.basiclands.Forest {
+public class Mountain1 extends mage.cards.basiclands.Mountain {
 
     public Mountain1(UUID ownerId) {
         super(ownerId, 172);

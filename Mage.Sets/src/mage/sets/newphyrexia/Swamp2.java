@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Swamp2 extends mage.cards.basiclands.Forest {
+public class Swamp2 extends mage.cards.basiclands.Swamp {
 
     public Swamp2(UUID ownerId) {
         super(ownerId, 171);
