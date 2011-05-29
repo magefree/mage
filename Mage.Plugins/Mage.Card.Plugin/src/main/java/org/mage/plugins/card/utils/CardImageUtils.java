@@ -117,7 +117,7 @@ public class CardImageUtils {
 
 	public static String cleanString(String in) {
 		in = in.trim();
-		StringBuffer out = new StringBuffer();
+		StringBuilder out = new StringBuilder();
 		char c;
 		for (int i = 0; i < in.length(); i++) {
 			c = in.charAt(i);
@@ -131,18 +131,7 @@ public class CardImageUtils {
 		return out.toString().toLowerCase();
 	}
 	
-	public static String generateURL(Integer collectorId, String cardSet) throws Exception {
-		if (collectorId == null || cardSet == null) {
-			throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
-		}
-		String set = updateSet(cardSet,true);
-		String url = "http://magiccards.info/scans/en/";
-		url += set.toLowerCase() + "/" + collectorId + ".jpg";
-		
-		return url;
-	}
-	
-	private static String updateSet(String cardSet, boolean forUrl) {
+	public static String updateSet(String cardSet, boolean forUrl) {
 		String set = cardSet.toLowerCase();
 		if (set.equals("con")) {
 			set = "cfx";

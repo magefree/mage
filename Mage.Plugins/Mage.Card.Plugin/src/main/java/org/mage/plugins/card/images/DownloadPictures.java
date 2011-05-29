@@ -2,7 +2,6 @@ package org.mage.plugins.card.images;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
@@ -20,10 +19,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.FutureTask;
 
 import javax.swing.AbstractButton;
 import javax.swing.Box;
@@ -51,6 +48,9 @@ import mage.cards.Card;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.CardUrl;
 import org.mage.plugins.card.constants.Constants;
+import org.mage.plugins.card.dl.sources.CardImageSource;
+import org.mage.plugins.card.dl.sources.MagicCardsImageSource;
+import org.mage.plugins.card.dl.sources.WizardCardsImageSource;
 import org.mage.plugins.card.properties.SettingsManager;
 import org.mage.plugins.card.utils.CardImageUtils;
 
@@ -69,8 +69,10 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 	private JLabel jLabel1;
 	private static boolean offlineMode = false;
 	private JCheckBox checkBox;
-	private Object sync = new Object();
+	private final Object sync = new Object();
 	
+    private static CardImageSource cardImageSource;
+    
 	private Proxy p;
 	
 	private ExecutorService executor = Executors.newFixedThreadPool(10);
@@ -100,13 +102,14 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 	public JDialog getDlg(JFrame frame) {
 		String title = "Downloading";
 
-		final JDialog dlg = this.dlg.createDialog(frame, title);
+		final JDialog dialog = this.dlg.createDialog(frame, title);
 		close.addActionListener(new ActionListener() {
+            @Override
 			public void actionPerformed(ActionEvent e) {
-				dlg.setVisible(false);
+				dialog.setVisible(false);
 			}
 		});
-		return dlg;
+		return dialog;
 	}
 
 	public void setCancel(boolean cancel) {
@@ -153,17 +156,34 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
 		p0.add(jLabel1);
 		p0.add(Box.createVerticalStrut(5));
-		ComboBoxModel jComboBox1Model = new DefaultComboBoxModel(new String[] { "magiccards.info" });
+		ComboBoxModel jComboBox1Model = new DefaultComboBoxModel(new String[] { "magiccards.info", "wizards.com" });
 		jComboBox1 = new JComboBox();
+        
+        cardImageSource = MagicCardsImageSource.getInstance();
 
 		jComboBox1.setModel(jComboBox1Model);
 		jComboBox1.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jComboBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JComboBox cb = (JComboBox) e.getSource();
+                switch (cb.getSelectedIndex()) {
+                    case 0:
+                        cardImageSource = MagicCardsImageSource.getInstance();
+                        break;
+                    case 1:
+                        cardImageSource = WizardCardsImageSource.getInstance();
+                        break;
+                }
+            }
+        });
 		p0.add(jComboBox1);
 		p0.add(Box.createVerticalStrut(5));
 
 		// Start
 		final JButton b = new JButton("Start download");
 		b.addActionListener(new ActionListener() {
+            @Override
 			public void actionPerformed(ActionEvent e) {
 				new Thread(DownloadPictures.this).start();
 				b.setEnabled(false);
@@ -190,6 +210,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		checkBox.setEnabled(!offlineMode);
 
 		checkBox.addActionListener(new ActionListener() {
+            @Override
 			public void actionPerformed(ActionEvent e) {
 				if (checkBox.isSelected()) {
 					int count = DownloadPictures.this.cardsInGame.size();
@@ -265,7 +286,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 			} else {
 				try {
 					log.info("Card to download: " + card.name + " (" + card.set + ") "
-							+ CardImageUtils.generateURL(card.collector, card.set));
+							+ cardImageSource.generateURL(card.collector, card.set));
 				} catch (Exception e) {
 					log.error(e);
 				}
@@ -392,6 +413,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 			this.type = type;
 		}
 
+        @Override
 		public void stateChanged(ChangeEvent e) {
 			if (((AbstractButton) e.getSource()).isSelected()) {
 				DownloadPictures.this.type = type;
@@ -401,6 +423,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		}
 	}
 
+    @Override
 	public void run() {
 		BufferedInputStream in;
 		BufferedOutputStream out;
@@ -430,7 +453,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
 					log.info("Downloading card: " + card.name + " (" + card.set + ")");
 
-					URL url = new URL(CardImageUtils.generateURL(card.collector, card.set));
+					URL url = new URL(cardImageSource.generateURL(card.collector, card.set));
 					if (ignoreUrls.contains(card.set) || card.token) {
 						if (card.collector != 0) {
 							continue;
@@ -463,6 +486,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 			this.url = url;
 		}
 		
+        @Override
 		public void run() {
 			try {
 				BufferedInputStream in = new BufferedInputStream(url.openConnection(p).getInputStream());
