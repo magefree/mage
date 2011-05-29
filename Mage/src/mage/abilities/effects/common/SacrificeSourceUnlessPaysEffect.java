@@ -32,7 +32,7 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect<SacrificeSour
         Player player = game.getPlayer(source.getControllerId());
 		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (player != null && permanent != null) { 
-			if (player.chooseUse(Outcome.Benefit, cost.getText() + " or sacrifice " + permanent.getName() + "?", game)) {
+			if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() /* + " or sacrifice " + permanent.getName() */ + "?", game)) {
 				cost.clearPaid();
 				if (cost.pay(game, source.getId(), source.getControllerId(), false))
 					return true;
