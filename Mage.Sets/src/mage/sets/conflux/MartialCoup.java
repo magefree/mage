@@ -39,7 +39,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SoldierToken;
-import mage.players.Player;
 
 
 /**
@@ -62,11 +61,6 @@ public class MartialCoup extends CardImpl<MartialCoup> {
 	@Override
 	public MartialCoup copy() {
 		return new MartialCoup(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "118685_typ_reg_sty_010.jpg";
 	}
 }
 

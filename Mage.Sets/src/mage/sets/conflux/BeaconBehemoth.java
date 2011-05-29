@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BeaconBehemoth extends CardImpl<BeaconBehemoth> {
     
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 5 or greater");
 
 	static {		
 		filter.setPower(4);
@@ -78,9 +78,5 @@ public class BeaconBehemoth extends CardImpl<BeaconBehemoth> {
     public BeaconBehemoth copy() {
         return new BeaconBehemoth(this);
     }
-
-    @Override
-    public String getArt() {
-        return "118735_typ_reg_sty_010.jpg";
-    }
+    
 }

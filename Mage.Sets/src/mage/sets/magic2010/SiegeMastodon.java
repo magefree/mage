@@ -59,9 +59,4 @@ public class SiegeMastodon extends CardImpl<SiegeMastodon> {
 		return new SiegeMastodon(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123434_typ_reg_sty_010.jpg";
-	}
-
 }

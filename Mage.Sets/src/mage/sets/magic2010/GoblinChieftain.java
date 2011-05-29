@@ -47,7 +47,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class GoblinChieftain extends CardImpl<GoblinChieftain> {
 
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creatures");
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creatures");
 
 	static {
 		filter.getSubtype().add("Goblin");
@@ -73,11 +73,6 @@ public class GoblinChieftain extends CardImpl<GoblinChieftain> {
 	@Override
 	public GoblinChieftain copy() {
 		return new GoblinChieftain(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "121632_typ_reg_sty_010.jpg";
 	}
 
 }

@@ -52,7 +52,7 @@ public class RhoxBodyguard extends CardImpl<RhoxBodyguard> {
         this.subtype.add("Monk");
         this.subtype.add("Soldier");
         this.power = new MageInt(2);
-	this.toughness = new MageInt(3);
+        this.toughness = new MageInt(3);
         this.addAbility(new ExaltedAbility());
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3)));
     }
@@ -64,11 +64,6 @@ public class RhoxBodyguard extends CardImpl<RhoxBodyguard> {
     @Override
     public RhoxBodyguard copy() {
         return new RhoxBodyguard(this);
-    }
-
-    @Override
-    public String getArt() {
-        return "118758_typ_reg_sty_010.jpg";
     }
 
 }

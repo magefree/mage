@@ -41,11 +41,6 @@ public class Island4 extends mage.cards.basiclands.Island {
 		this.expansionSetCode = "M10";
 	}
 
-	@Override
-	public String getArt() {
-		return "19006_typ_reg_sty_010.jpg";
-	}
-
 	public Island4(final Island4 card) {
 		super(card);
 	}

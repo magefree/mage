@@ -62,7 +62,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class KnightOfTheReliquary extends CardImpl<KnightOfTheReliquary> {
 
-	private static FilterControlledPermanent filter = new FilterControlledPermanent("Forest or Plains");
+	private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest or Plains");
 
 	static {
 		filter.getCardType().add(CardType.LAND);
@@ -96,11 +96,6 @@ public class KnightOfTheReliquary extends CardImpl<KnightOfTheReliquary> {
 	@Override
 	public KnightOfTheReliquary copy() {
 		return new KnightOfTheReliquary(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "119798_typ_reg_sty_010.jpg";
 	}
 
 }

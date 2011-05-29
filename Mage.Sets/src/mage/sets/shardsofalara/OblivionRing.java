@@ -73,9 +73,4 @@ public class OblivionRing extends CardImpl<OblivionRing> {
 		return new OblivionRing(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "115005_typ_reg_sty_010.jpg";
-	}
-
 }

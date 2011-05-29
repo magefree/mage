@@ -28,8 +28,6 @@
 
 package mage.sets.magic2010;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
@@ -69,11 +67,6 @@ public class Sleep extends CardImpl<Sleep> {
 	@Override
 	public Sleep copy() {
 		return new Sleep(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "121609_typ_reg_sty_010.jpg";
 	}
 }
 

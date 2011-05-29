@@ -78,11 +78,6 @@ public class PhylacteryLich extends CardImpl<PhylacteryLich> {
 		return new PhylacteryLich(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129123_typ_reg_sty_010.jpg";
-	}
-
 	class PhylacteryLichAbility extends StateTriggeredAbility<PhylacteryLichAbility> {
 
 		public PhylacteryLichAbility() {
@@ -118,7 +113,7 @@ public class PhylacteryLich extends CardImpl<PhylacteryLich> {
 
 class PhylacteryLichEffect extends OneShotEffect<PhylacteryLichEffect> {
 
-	private static FilterControlledPermanent filter = new FilterControlledPermanent("artifact");
+	private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact");
 
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);

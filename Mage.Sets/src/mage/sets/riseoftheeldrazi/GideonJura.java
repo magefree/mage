@@ -57,7 +57,7 @@ import mage.target.common.TargetOpponent;
  */
 public class GideonJura extends CardImpl<GideonJura> {
 
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
 	static {
 		filter.setUseTapped(true);
@@ -91,11 +91,6 @@ public class GideonJura extends CardImpl<GideonJura> {
 	@Override
 	public GideonJura copy() {
 		return new GideonJura(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "127248_typ_reg_sty_010.jpg";
 	}
 
 }

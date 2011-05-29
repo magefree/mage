@@ -58,9 +58,4 @@ public class BaronyVampire extends CardImpl<BaronyVampire> {
 		return new BaronyVampire(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129093_typ_reg_sty_010.jpg";
-	}
-
 }

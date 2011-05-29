@@ -84,9 +84,4 @@ public class GarrukWildspeaker extends CardImpl<GarrukWildspeaker> {
 	public GarrukWildspeaker copy() {
 		return new GarrukWildspeaker(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "105523_typ_reg_sty_010.jpg";
-	}
 }

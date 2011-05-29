@@ -61,11 +61,6 @@ public class KrakensEye extends CardImpl<KrakensEye> {
 		return new KrakensEye(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "75197_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class KrakensEyeAbility extends TriggeredAbilityImpl<KrakensEyeAbility> {

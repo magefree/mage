@@ -57,9 +57,4 @@ public class DiabolicTutor extends CardImpl<DiabolicTutor> {
 	public DiabolicTutor copy() {
 		return new DiabolicTutor(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "101052_typ_reg_sty_010.jpg";
-	}
 }

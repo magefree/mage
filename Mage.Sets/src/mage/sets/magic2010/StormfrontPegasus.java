@@ -61,9 +61,4 @@ public class StormfrontPegasus extends CardImpl<StormfrontPegasus> {
 		return new StormfrontPegasus(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121624_typ_reg_sty_010.jpg";
-	}
-
 }

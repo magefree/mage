@@ -62,11 +62,6 @@ public class UnifiedWill extends CardImpl<UnifiedWill> {
 		return new UnifiedWill(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "127278_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class UnifiedWillEffect extends CounterTargetEffect {

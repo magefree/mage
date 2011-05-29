@@ -81,11 +81,6 @@ public class ShivsEmbrace extends CardImpl<ShivsEmbrace> {
 	public ShivsEmbrace copy() {
 		return new ShivsEmbrace(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129169_typ_reg_sty_010.jpg";
-	}
 }
 
 class ShivsEmbraceEffect extends ContinuousEffectImpl<ShivsEmbraceEffect> {

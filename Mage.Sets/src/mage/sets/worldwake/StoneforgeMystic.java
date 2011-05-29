@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class StoneforgeMystic extends CardImpl<StoneforgeMystic> {
 
-	private static FilterCard filter = new FilterCard("an Equipment card");
+	private static final FilterCard filter = new FilterCard("an Equipment card");
 
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);
@@ -82,11 +82,6 @@ public class StoneforgeMystic extends CardImpl<StoneforgeMystic> {
 	@Override
 	public StoneforgeMystic copy() {
 		return new StoneforgeMystic(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "126571_typ_reg_sty_010.jpg";
 	}
 
 }

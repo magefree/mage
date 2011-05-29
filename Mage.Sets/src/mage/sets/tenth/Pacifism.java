@@ -74,11 +74,6 @@ public class Pacifism extends CardImpl<Pacifism> {
 	public Pacifism copy() {
 		return new Pacifism(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "01988_typ_reg_sty_010.jpg";
-	}
 }
 
 class PacifismEffect extends RestrictionEffect<PacifismEffect> {

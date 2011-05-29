@@ -62,9 +62,4 @@ public class FusionElemental extends CardImpl<FusionElemental> {
         return new FusionElemental(this);
     }
 
-    @Override
-    public String getArt() {
-        return "118699_typ_reg_sty_010.jpg";
-    }
-
 }

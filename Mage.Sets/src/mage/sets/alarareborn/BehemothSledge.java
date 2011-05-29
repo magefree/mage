@@ -72,9 +72,4 @@ public class BehemothSledge extends CardImpl<BehemothSledge> {
 		return new BehemothSledge(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "120963_typ_reg_sty_010.jpg";
-	}
-
 }

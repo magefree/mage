@@ -68,16 +68,11 @@ public class HauntingEchoes extends CardImpl<HauntingEchoes> {
 	public HauntingEchoes copy() {
 		return new HauntingEchoes(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "122152_typ_reg_sty_010.jpg";
-	}
 }
 
 class HauntingEchoesEffect extends OneShotEffect<HauntingEchoesEffect> {
 
-	private static FilterBasicLandCard filter = new FilterBasicLandCard();
+	private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 
 	public HauntingEchoesEffect() {
 		super(Outcome.Detriment);

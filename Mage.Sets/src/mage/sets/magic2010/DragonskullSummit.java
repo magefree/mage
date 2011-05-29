@@ -49,7 +49,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class DragonskullSummit extends CardImpl<DragonskullSummit> {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent();
+	private static final FilterLandPermanent filter = new FilterLandPermanent();
 
 	static {
 		filter.getSubtype().add("Swamp");
@@ -76,10 +76,5 @@ public class DragonskullSummit extends CardImpl<DragonskullSummit> {
 	@Override
 	public DragonskullSummit copy() {
 		return new DragonskullSummit(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "121671_typ_reg_sty_010.jpg";
 	}
 }

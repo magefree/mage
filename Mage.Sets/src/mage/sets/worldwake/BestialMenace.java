@@ -61,9 +61,4 @@ public class BestialMenace extends CardImpl<BestialMenace> {
 		return new BestialMenace(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "126463_typ_reg_sty_010.jpg";
-	}
-
 }

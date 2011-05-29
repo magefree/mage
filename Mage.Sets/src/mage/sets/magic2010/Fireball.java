@@ -71,11 +71,6 @@ public class Fireball extends CardImpl<Fireball> {
 	public Fireball copy() {
 		return new Fireball(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "52012_typ_reg_sty_010.jpg";
-	}
 }
 
 class FireballEffect extends OneShotEffect<FireballEffect> {

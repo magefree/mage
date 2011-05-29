@@ -76,10 +76,5 @@ public class GoblinRuinblaster extends CardImpl<GoblinRuinblaster> {
 	public GoblinRuinblaster copy() {
 		return new GoblinRuinblaster(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "123599_typ_reg_sty_010.jpg";
-	}
 }
 

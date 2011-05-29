@@ -66,9 +66,4 @@ public class ArcRunner extends CardImpl<ArcRunner> {
 		return new ArcRunner(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129084_typ_reg_sty_010.jpg";
-	}
-
 }

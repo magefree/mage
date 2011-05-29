@@ -74,9 +74,4 @@ public class SwordOfVengeance extends CardImpl<SwordOfVengeance> {
 		return new SwordOfVengeance(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129133_typ_reg_sty_010.jpg";
-	}
-
 }

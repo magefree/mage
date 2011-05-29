@@ -47,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public class ArborElf extends CardImpl<ArborElf> {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent();
+	private static final FilterLandPermanent filter = new FilterLandPermanent();
 
 	static {
 		filter.getName().add("Forest");
@@ -74,11 +74,6 @@ public class ArborElf extends CardImpl<ArborElf> {
 	@Override
 	public ArborElf copy() {
 		return new ArborElf(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "126593_typ_reg_sty_010.jpg";
 	}
 
 }

@@ -61,9 +61,4 @@ public class ThunderStrike extends CardImpl<ThunderStrike> {
 	public ThunderStrike copy() {
 		return new ThunderStrike(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129068_typ_reg_sty_010.jpg";
-	}
 }

@@ -39,7 +39,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -70,11 +69,6 @@ public class CyclopsGladiator extends CardImpl<CyclopsGladiator> {
 	@Override
 	public CyclopsGladiator copy() {
 		return new CyclopsGladiator(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "129160_typ_reg_sty_010.jpg";
 	}
 
 }

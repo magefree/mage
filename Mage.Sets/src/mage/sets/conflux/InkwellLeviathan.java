@@ -65,9 +65,4 @@ public class InkwellLeviathan extends CardImpl<InkwellLeviathan> {
         return new InkwellLeviathan(this);
     }
 
-    @Override
-    public String getArt() {
-        return "118655_typ_reg_sty_010.jpg";
-    }
-
 }

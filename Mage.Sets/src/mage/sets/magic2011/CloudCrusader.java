@@ -64,9 +64,4 @@ public class CloudCrusader extends CardImpl<CloudCrusader> {
 		return new CloudCrusader(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129191_typ_reg_sty_010.jpg";
-	}
-
 }

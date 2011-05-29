@@ -68,11 +68,6 @@ public class ArchiveTrap extends CardImpl<ArchiveTrap> {
 		return new ArchiveTrap(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "125080_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class ArchiveTrapWatcher extends WatcherImpl<ArchiveTrapWatcher> {

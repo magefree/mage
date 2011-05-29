@@ -62,9 +62,4 @@ public class VulshokBerserker extends CardImpl<VulshokBerserker> {
 		return new VulshokBerserker(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "50184_typ_reg_sty_010.jpg";
-	}
-
 }

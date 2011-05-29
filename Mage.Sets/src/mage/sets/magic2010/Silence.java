@@ -61,11 +61,6 @@ public class Silence extends CardImpl<Silence> {
 	public Silence copy() {
 		return new Silence(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "121665_typ_reg_sty_010.jpg";
-	}
 }
 
 class SilenceEffect extends ReplacementEffectImpl<SilenceEffect> {

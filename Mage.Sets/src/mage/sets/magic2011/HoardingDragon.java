@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class HoardingDragon extends CardImpl<HoardingDragon> {
 
-	private static FilterCard filter = new FilterCard();
+	private static final FilterCard filter = new FilterCard();
 
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);
@@ -79,11 +79,6 @@ public class HoardingDragon extends CardImpl<HoardingDragon> {
 	@Override
 	public HoardingDragon copy() {
 		return new HoardingDragon(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "129166_typ_reg_sty_010.jpg";
 	}
 
 }

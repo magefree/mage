@@ -64,11 +64,6 @@ public class BraveTheElements extends CardImpl<BraveTheElements> {
 		return new BraveTheElements(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123638_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class BraveTheElementsEffect extends GainAbilityControlledEffect {

@@ -51,9 +51,4 @@ public class Unsummon extends mage.sets.tenth.Unsummon {
 		return new Unsummon(this);
 	}
 
-	@Override
-    public String getArt() {
-        return "118680_typ_reg_sty_010.jpg";
-    }
-
 }

@@ -68,11 +68,6 @@ public class WildEvocation extends CardImpl<WildEvocation> {
 		return new WildEvocation(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123721_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class WildEvocationAbility extends TriggeredAbilityImpl<WildEvocationAbility> {

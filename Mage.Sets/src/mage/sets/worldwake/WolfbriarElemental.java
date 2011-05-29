@@ -67,9 +67,4 @@ public class WolfbriarElemental extends CardImpl<WolfbriarElemental> {
 		return new WolfbriarElemental(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "126583_typ_reg_sty_010.jpg";
-	}
-
 }

@@ -57,9 +57,4 @@ public class HornetSting extends CardImpl<HornetSting> {
 	public HornetSting copy() {
 		return new HornetSting(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129139_typ_reg_sty_010.jpg";
-	}
 }

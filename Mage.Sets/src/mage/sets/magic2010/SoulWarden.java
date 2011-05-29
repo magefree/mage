@@ -68,11 +68,6 @@ public class SoulWarden extends CardImpl<SoulWarden> {
 		return new SoulWarden(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "05621_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class SoulWardenAbility extends TriggeredAbilityImpl<SoulWardenAbility> {

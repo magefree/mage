@@ -58,9 +58,4 @@ public class Cancel extends CardImpl<Cancel> {
 		return new Cancel(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "97414_typ_reg_sty_010.jpg";
-	}
-
 }

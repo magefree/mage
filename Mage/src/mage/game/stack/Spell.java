@@ -245,11 +245,6 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	}
 
 	@Override
-	public String getArt() {
-		return card.getArt();
-	}
-
-	@Override
 	public void addAbility(Ability ability) {}
 
 	@Override

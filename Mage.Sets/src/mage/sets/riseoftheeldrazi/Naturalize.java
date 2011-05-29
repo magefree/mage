@@ -42,11 +42,6 @@ public class Naturalize extends mage.sets.tenth.Naturalize {
 		this.expansionSetCode = "ROE";
 	}
 
-	@Override
-	public String getArt() {
-		return "127264_typ_reg_sty_010.jpg";
-	}
-
 	public Naturalize(final Naturalize card) {
 		super(card);
 	}

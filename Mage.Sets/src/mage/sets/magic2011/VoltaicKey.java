@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  */
 public class VoltaicKey extends CardImpl<VoltaicKey> {
 
-	private static FilterPermanent filter = new FilterPermanent("artifact");
+	private static final FilterPermanent filter = new FilterPermanent("artifact");
 
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);
@@ -75,11 +75,6 @@ public class VoltaicKey extends CardImpl<VoltaicKey> {
 	@Override
 	public VoltaicKey copy() {
 		return new VoltaicKey(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "127997_typ_reg_sty_010.jpg";
 	}
 
 }

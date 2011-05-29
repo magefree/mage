@@ -77,16 +77,11 @@ public class QuagSickness extends CardImpl<QuagSickness> {
 	public QuagSickness copy() {
 		return new QuagSickness(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129117_typ_reg_sty_010.jpg";
-	}
 }
 
 class QuagSicknessEffect extends ContinuousEffectImpl<QuagSicknessEffect> {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent("Swamp");
+	private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp");
 
 	static {
 		filter.getSubtype().add("Swamp");

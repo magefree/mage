@@ -66,16 +66,11 @@ public class Duress extends CardImpl<Duress> {
 	public Duress copy() {
 		return new Duress(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "122154_typ_reg_sty_010.jpg";
-	}
 }
 
 class DuressEffect extends OneShotEffect<DuressEffect> {
 
-	private static FilterCard filter = new FilterCard("noncreature, nonland card");
+	private static final FilterCard filter = new FilterCard("noncreature, nonland card");
 
 	static {
 		filter.getNotCardType().add(CardType.CREATURE);

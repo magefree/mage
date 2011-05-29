@@ -66,9 +66,4 @@ public class GoldenglowMoth extends CardImpl<GoldenglowMoth> {
 		return new GoldenglowMoth(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "111904_typ_reg_sty_010.jpg";
-	}
-
 }

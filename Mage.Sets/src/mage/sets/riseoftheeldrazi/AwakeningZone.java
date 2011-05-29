@@ -59,9 +59,4 @@ public class AwakeningZone extends CardImpl<AwakeningZone> {
 		return new AwakeningZone(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "127314_typ_reg_sty_010.jpg";
-	}
-
 }

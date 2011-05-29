@@ -48,7 +48,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class KnightExemplar extends CardImpl<KnightExemplar> {
 
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("Knight creatures");
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Knight creatures");
 
 	static {
 		filter.getSubtype().add("Knight");
@@ -75,11 +75,6 @@ public class KnightExemplar extends CardImpl<KnightExemplar> {
 	@Override
 	public KnightExemplar copy() {
 		return new KnightExemplar(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "129082_typ_reg_sty_010.jpg";
 	}
 
 }

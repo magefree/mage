@@ -55,10 +55,5 @@ public class JacesIngenuity extends CardImpl<JacesIngenuity> {
 	public JacesIngenuity copy() {
 		return new JacesIngenuity(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129105_typ_reg_sty_010.jpg";
-	}
 }
 

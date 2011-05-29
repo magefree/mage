@@ -58,9 +58,4 @@ public class LightningBolt extends CardImpl<LightningBolt> {
 		return new LightningBolt(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121669_typ_reg_sty_010.jpg";
-	}
-
 }

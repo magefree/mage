@@ -81,11 +81,6 @@ public class LilianaVess extends CardImpl<LilianaVess> {
 		return new LilianaVess(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "105529_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class LilianaVessEffect extends OneShotEffect<LilianaVessEffect> {

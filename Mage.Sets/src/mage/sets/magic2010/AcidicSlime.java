@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  */
 public class AcidicSlime extends CardImpl<AcidicSlime> {
 
-	private static FilterPermanent filter = new FilterPermanent("artifact, enchantment, or land");
+	private static final FilterPermanent filter = new FilterPermanent("artifact, enchantment, or land");
 
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);
@@ -80,11 +80,6 @@ public class AcidicSlime extends CardImpl<AcidicSlime> {
 	@Override
 	public AcidicSlime copy() {
 		return new AcidicSlime(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "121561_typ_reg_sty_010.jpg";
 	}
 
 }

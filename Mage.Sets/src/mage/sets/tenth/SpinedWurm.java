@@ -59,9 +59,4 @@ public class SpinedWurm extends CardImpl<SpinedWurm> {
 		return new SpinedWurm(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "27799_typ_reg_sty_010.jpg";
-	}
-
 }

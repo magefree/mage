@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DoomBlade extends CardImpl<DoomBlade> {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 
 	static {
 		filter.setUseColor(true);
@@ -65,10 +65,5 @@ public class DoomBlade extends CardImpl<DoomBlade> {
 	@Override
 	public DoomBlade copy() {
 		return new DoomBlade(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "121618_typ_reg_sty_010.jpg";
 	}
 }

@@ -67,11 +67,6 @@ public class ScuteMob extends CardImpl<ScuteMob> {
 		return new ScuteMob(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123606_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class ScuteMobAbility extends TriggeredAbilityImpl<ScuteMobAbility> {

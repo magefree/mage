@@ -41,11 +41,6 @@ public class Mountain1 extends mage.cards.basiclands.Mountain {
 		this.expansionSetCode = "ZEN";
 	}
 
-	@Override
-	public String getArt() {
-		return "123762_typ_reg_sty_010.jp";
-	}
-
 	public Mountain1(final Mountain1 card) {
 		super(card);
 	}
@@ -56,4 +51,3 @@ public class Mountain1 extends mage.cards.basiclands.Mountain {
 	}
 
 }
-

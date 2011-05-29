@@ -69,9 +69,4 @@ public class MagmaPhoenix extends CardImpl<MagmaPhoenix> {
 		return new MagmaPhoenix(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121697_typ_reg_sty_010.jpg";
-	}
-
 }

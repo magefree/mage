@@ -46,10 +46,10 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class RhoxPikemaster extends CardImpl<RhoxPikemaster> {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
 
     static {
-	filter.getSubtype().add("Soldier");
+        filter.getSubtype().add("Soldier");
     }
 
     public RhoxPikemaster(UUID ownerId) {
@@ -71,10 +71,5 @@ public class RhoxPikemaster extends CardImpl<RhoxPikemaster> {
     @Override
     public RhoxPikemaster copy() {
         return new RhoxPikemaster(this);
-    }
-
-    @Override
-    public String getArt() {
-        return "121642_typ_reg_sty_010.jpg";
     }
 }

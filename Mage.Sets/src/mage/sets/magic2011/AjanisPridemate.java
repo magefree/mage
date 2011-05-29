@@ -68,11 +68,6 @@ public class AjanisPridemate extends CardImpl<AjanisPridemate> {
 		return new AjanisPridemate(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129151_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class AjanisPridemateAbility extends TriggeredAbilityImpl<AjanisPridemateAbility> {

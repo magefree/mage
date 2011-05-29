@@ -66,11 +66,6 @@ public class Fling extends CardImpl<Fling> {
 	public Fling copy() {
 		return new Fling(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "03685_typ_reg_sty_010.jpg";
-	}
 }
 
 class FlingEffect extends OneShotEffect<FlingEffect> {

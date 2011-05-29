@@ -65,9 +65,4 @@ public class TeeteringPeaks extends CardImpl<TeeteringPeaks> {
 		return new TeeteringPeaks(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123557_typ_reg_sty_010.jpg";
-	}
-
 }

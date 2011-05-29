@@ -42,11 +42,6 @@ public class Demolish extends mage.sets.tenth.Demolish {
 		this.expansionSetCode = "ZEN";
 	}
 
-	@Override
-	public String getArt() {
-		return "123684_typ_reg_sty_010.jpg";
-	}
-
 	public Demolish(final Demolish card) {
 		super(card);
 	}

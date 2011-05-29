@@ -60,9 +60,4 @@ public class Blightning extends CardImpl<Blightning> {
 	public Blightning copy() {
 		return new Blightning(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "115010_typ_reg_sty_010.jpg";
-	}
 }

@@ -63,11 +63,6 @@ public class SoulsMajesty extends CardImpl<SoulsMajesty> {
         return new SoulsMajesty(this);
     }
 
-    @Override
-    public String getArt() {
-        return "118768_typ_reg_sty_010.jpg";
-    }
-
     private class SoulsMajestyEffect extends OneShotEffect<SoulsMajestyEffect> {
 
         public SoulsMajestyEffect() {

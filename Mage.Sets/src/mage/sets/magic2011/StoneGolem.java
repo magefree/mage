@@ -58,9 +58,4 @@ public class StoneGolem extends CardImpl<StoneGolem> {
 		return new StoneGolem(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129143_typ_reg_sty_010.jpg";
-	}
-
 }

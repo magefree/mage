@@ -68,9 +68,4 @@ public class WhiteKnight extends CardImpl<WhiteKnight> {
 		return new WhiteKnight(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121715_typ_reg_sty_010.jpg";
-	}
-
 }

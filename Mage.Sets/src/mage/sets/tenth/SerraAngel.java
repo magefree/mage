@@ -63,9 +63,4 @@ public class SerraAngel extends CardImpl<SerraAngel> {
 		return new SerraAngel(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "86905_typ_reg_sty_010.jpg";
-	}
-
 }

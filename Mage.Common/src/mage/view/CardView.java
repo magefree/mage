@@ -38,7 +38,6 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.cards.Card;
 import mage.counters.CounterType;
-import mage.counters.Counters;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
@@ -66,7 +65,6 @@ public class CardView implements Serializable {
 	protected ObjectColor color;
 	protected List<String> manaCost;
 	protected int convertedManaCost;
-	protected String art;
 	protected Rarity rarity;
 	protected String expansionSetCode;
 	protected int cardNumber;
@@ -95,12 +93,10 @@ public class CardView implements Serializable {
 		this.manaCost = card.getManaCost().getSymbols();
 		this.convertedManaCost = card.getManaCost().convertedManaCost();
 		if (card instanceof PermanentToken) {
-			this.art = "";
 			this.rarity = Rarity.NA;
 			this.expansionSetCode = "";
 		}
 		else {
-			this.art = card.getArt();
 			this.rarity = card.getRarity();
 			this.expansionSetCode = card.getExpansionSetCode();
 		}
@@ -130,7 +126,6 @@ public class CardView implements Serializable {
 		this.superTypes = token.getSupertype();
 		this.color = token.getColor();
 		this.manaCost = token.getManaCost().getSymbols();
-		this.art = "";
 		this.rarity = Rarity.NA;
 		this.expansionSetCode = "";
 	}
@@ -214,10 +209,6 @@ public class CardView implements Serializable {
 
 	public int getConvertedManaCost() {
 		return convertedManaCost;
-	}
-
-	public String getArt() {
-		return art;
 	}
 
 	public Rarity getRarity() {

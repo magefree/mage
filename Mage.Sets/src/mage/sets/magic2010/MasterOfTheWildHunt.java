@@ -82,16 +82,11 @@ public class MasterOfTheWildHunt extends CardImpl<MasterOfTheWildHunt> {
 	public MasterOfTheWildHunt copy() {
 		return new MasterOfTheWildHunt(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "121652_typ_reg_sty_010.jpg";
-	}
 }
 
 class MasterOfTheWildHuntEffect extends OneShotEffect<MasterOfTheWildHuntEffect> {
 
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
 	static {
 		filter.getName().add("Wolf");

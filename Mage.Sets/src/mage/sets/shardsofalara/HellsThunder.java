@@ -71,9 +71,4 @@ public class HellsThunder extends CardImpl<HellsThunder> {
 		return new HellsThunder(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "115234_typ_reg_sty_010.jpg";
-	}
-
 }

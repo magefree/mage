@@ -64,9 +64,4 @@ public class LoomingShade extends CardImpl<LoomingShade> {
         return new LoomingShade(this);
     }
 
-    @Override
-    public String getArt() {
-        return "27692_typ_reg_sty_010.jpg";
-    }
-
 }

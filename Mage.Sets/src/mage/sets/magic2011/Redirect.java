@@ -57,9 +57,4 @@ public class Redirect extends CardImpl<Redirect> {
 	public Redirect copy() {
 		return new Redirect(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129178_typ_reg_sty_010.jpg";
-	}
 }

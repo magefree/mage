@@ -73,11 +73,6 @@ public class JinxedIdol extends CardImpl<JinxedIdol> {
 		return new JinxedIdol(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129171_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class JinxedIdolEffect extends ContinuousEffectImpl<JinxedIdolEffect> {

@@ -61,9 +61,4 @@ public class SavageLands extends CardImpl<SavageLands> {
 		return new SavageLands(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "114986_typ_reg_sty_010.jpg";
-	}
-
 }

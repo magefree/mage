@@ -71,17 +71,12 @@ public class KnightOfTheWhiteOrchid extends CardImpl<KnightOfTheWhiteOrchid> {
 		return new KnightOfTheWhiteOrchid(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "116188_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class KnightOfTheWhiteOrchidAbility extends ZoneChangeTriggeredAbility<KnightOfTheWhiteOrchidAbility> {
 
-	private static FilterCard filter1 = new FilterCard("Plains");
-	private static FilterLandPermanent filter2 = new FilterLandPermanent();
+	private static final FilterCard filter1 = new FilterCard("Plains");
+	private static final FilterLandPermanent filter2 = new FilterLandPermanent();
 
 	static {
 		filter1.getName().add("Plains");

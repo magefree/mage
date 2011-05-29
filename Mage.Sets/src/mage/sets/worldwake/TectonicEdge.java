@@ -76,11 +76,6 @@ public class TectonicEdge extends CardImpl<TectonicEdge> {
 		return new TectonicEdge(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "126492_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class TectonicEdgeCost extends CostImpl<TectonicEdgeCost> {

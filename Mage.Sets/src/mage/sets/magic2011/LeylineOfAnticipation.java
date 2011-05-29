@@ -66,11 +66,6 @@ public class LeylineOfAnticipation extends CardImpl<LeylineOfAnticipation> {
 		return new LeylineOfAnticipation(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129099_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class LeylineOfAnticipationEffect extends AsThoughEffectImpl<LeylineOfAnticipationEffect> {

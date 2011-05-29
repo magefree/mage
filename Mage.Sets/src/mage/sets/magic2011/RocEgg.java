@@ -68,11 +68,6 @@ public class RocEgg extends CardImpl<RocEgg> {
 		return new RocEgg(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129142_typ_reg_sty_010.jpg";
-	}
-
 }
 class RocEggToken extends Token {
 

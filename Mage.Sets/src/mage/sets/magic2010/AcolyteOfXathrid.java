@@ -70,9 +70,4 @@ public class AcolyteOfXathrid extends CardImpl {
 		return new AcolyteOfXathrid(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121644_typ_reg_sty_010.jpg";
-	}
-
 }

@@ -61,9 +61,4 @@ public class CrumblingNecropolis extends CardImpl<CrumblingNecropolis> {
 		return new CrumblingNecropolis(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "115145_typ_reg_sty_010.jpg";
-	}
-
 }

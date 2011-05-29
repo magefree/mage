@@ -66,9 +66,4 @@ public class VisceraSeer extends CardImpl<VisceraSeer> {
 		return new VisceraSeer(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129165_typ_reg_sty_010.jpg";
-	}
-
 }

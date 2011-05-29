@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class SquadronHawk extends CardImpl<SquadronHawk> {
 
-	private static FilterCard filter = new FilterCard("cards named Squadron Hawk");
+	private static final FilterCard filter = new FilterCard("cards named Squadron Hawk");
 
 	static {
 		filter.getName().add("Squadron Hawk");
@@ -71,11 +71,6 @@ public class SquadronHawk extends CardImpl<SquadronHawk> {
 	@Override
 	public SquadronHawk copy() {
 		return new SquadronHawk(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "129185_typ_reg_sty_010.jpg";
 	}
 
 }

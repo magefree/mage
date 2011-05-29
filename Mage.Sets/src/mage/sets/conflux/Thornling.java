@@ -74,9 +74,4 @@ public class Thornling extends CardImpl<Thornling> {
 		return new Thornling(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "118734_typ_reg_sty_010.jpg";
-	}
-
 }

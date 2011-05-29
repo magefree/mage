@@ -68,9 +68,4 @@ public class Dreadwing extends CardImpl<Dreadwing> {
         return new Dreadwing(this);
     }
 
-    @Override
-    public String getArt() {
-        return "118661_typ_reg_sty_010.jpg";
-    }
-
 }

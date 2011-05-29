@@ -71,16 +71,11 @@ public class EarthServant extends CardImpl<EarthServant> {
 		return new EarthServant(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129080_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class EarthServantEffect extends ContinuousEffectImpl<EarthServantEffect> {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent("Mountain");
+	private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
 
 	static {
 		filter.getSubtype().add("Mountain");

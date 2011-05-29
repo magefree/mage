@@ -62,9 +62,4 @@ public class JungleShrine extends CardImpl<JungleShrine> {
     public JungleShrine copy() {
         return new JungleShrine(this);
     }
-
-    @Override
-    public String getArt() {
-        return "";
-    }
 }

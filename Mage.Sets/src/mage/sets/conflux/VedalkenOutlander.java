@@ -41,11 +41,11 @@ import mage.filter.FilterCard;
  * @author Loki
  */
 public class VedalkenOutlander extends CardImpl<VedalkenOutlander> {
-    private static FilterCard filter = new FilterCard("red");
+    private static final FilterCard filter = new FilterCard("red");
 
     static {
     	filter.setUseColor(true);
-	filter.getColor().setRed(true);
+    	filter.getColor().setRed(true);
     }
 
     public VedalkenOutlander(UUID ownerId) {
@@ -67,10 +67,5 @@ public class VedalkenOutlander extends CardImpl<VedalkenOutlander> {
     @Override
     public VedalkenOutlander copy() {
         return new VedalkenOutlander(this);
-    }
-
-    @Override
-    public String getArt() {
-        return "118771_typ_reg_sty_010.jpg";
     }
 }

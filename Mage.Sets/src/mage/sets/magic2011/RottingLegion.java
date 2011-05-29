@@ -61,9 +61,4 @@ public class RottingLegion extends CardImpl<RottingLegion> {
 		return new RottingLegion(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129136_typ_reg_sty_010.jpg";
-	}
-
 }

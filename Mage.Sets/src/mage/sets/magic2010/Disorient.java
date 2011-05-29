@@ -60,10 +60,5 @@ public class Disorient extends CardImpl<Disorient> {
         return new Disorient(this);
     }
 
-    @Override
-    public String getArt() {
-        return "121598_typ_reg_sty_010.jpg";
-    }
-
 }
 

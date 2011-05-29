@@ -61,11 +61,6 @@ public class DragonsClaw extends CardImpl<DragonsClaw> {
 		return new DragonsClaw(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "75221_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class DragonsClawAbility extends TriggeredAbilityImpl<DragonsClawAbility> {

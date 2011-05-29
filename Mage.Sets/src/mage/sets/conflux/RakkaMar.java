@@ -58,7 +58,7 @@ public class RakkaMar extends CardImpl<RakkaMar> {
         this.subtype.add("Shaman");
         this.color.setRed(true);
         this.power = new MageInt(2);
-	this.toughness = new MageInt(2);
+        this.toughness = new MageInt(2);
         this.addAbility(HasteAbility.getInstance());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(token), new ManaCostsImpl("{R}"));
         ability.addCost(new TapSourceCost());
@@ -73,22 +73,17 @@ public class RakkaMar extends CardImpl<RakkaMar> {
     public RakkaMar copy() {
         return new RakkaMar(this);
     }
+}
 
-    @Override
-    public String getArt() {
-        return "118775_typ_reg_sty_010.jpg";
+class ElementalToken extends Token {
+
+    public ElementalToken() {
+        super("Elemental", "3/1 red Elemental creature with Haste");
+        cardType.add(CardType.CREATURE);
+        color = ObjectColor.RED;
+        subtype.add("Elemental");
+        power = new MageInt(3);
+        toughness = new MageInt(1);
+        addAbility(HasteAbility.getInstance());
     }
-
-    private static class ElementalToken extends Token {
-        public ElementalToken() {
-            super("Elemental", "3/1 red Elemental creature with Haste");
-            cardType.add(CardType.CREATURE);
-            color = ObjectColor.RED;
-            subtype.add("Elemental");
-            power = new MageInt(3);
-            toughness = new MageInt(1);
-            addAbility(HasteAbility.getInstance());
-        }
-    }
-
 }

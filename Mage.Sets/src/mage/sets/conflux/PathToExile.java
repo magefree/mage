@@ -67,11 +67,6 @@ public class PathToExile extends CardImpl<PathToExile> {
 	public PathToExile copy() {
 		return new PathToExile(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "118686_typ_reg_sty_010.jpg";
-	}
 }
 
 class PathToExileEffect extends OneShotEffect {

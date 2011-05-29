@@ -28,11 +28,6 @@
 
 package mage.sets.magic2011;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.cards.CardImpl;
 
 import java.util.UUID;
 import mage.Constants.CardType;
@@ -49,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Plummet extends CardImpl<Plummet> {
 
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 
 	static {
 		filter.getAbilities().add(FlyingAbility.getInstance());
@@ -70,10 +65,5 @@ public class Plummet extends CardImpl<Plummet> {
 	@Override
 	public Plummet copy() {
 		return new Plummet(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "129149_typ_reg_sty_010.jpg";
 	}
 }

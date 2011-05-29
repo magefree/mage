@@ -61,11 +61,6 @@ public class HowlingMine extends CardImpl<HowlingMine> {
 		return new HowlingMine(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "102959_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class HowlingMineAbility extends TriggeredAbilityImpl<HowlingMineAbility> {

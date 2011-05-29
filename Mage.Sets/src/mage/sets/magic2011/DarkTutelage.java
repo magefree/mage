@@ -66,11 +66,6 @@ public class DarkTutelage extends CardImpl<DarkTutelage> {
 		return new DarkTutelage(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129074_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class DarkTutelageEffect extends OneShotEffect<DarkTutelageEffect> {

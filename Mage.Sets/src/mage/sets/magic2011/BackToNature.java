@@ -41,7 +41,7 @@ import mage.filter.FilterPermanent;
  */
 public class BackToNature extends CardImpl<BackToNature> {
 
-	private static FilterPermanent filter = new FilterPermanent("enchantments");
+	private static final FilterPermanent filter = new FilterPermanent("enchantments");
 
 	static {
 		filter.getCardType().add(CardType.ENCHANTMENT);
@@ -61,11 +61,6 @@ public class BackToNature extends CardImpl<BackToNature> {
 	@Override
 	public BackToNature copy() {
 		return new BackToNature(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "129188_typ_reg_sty_010.jpg";
 	}
 
 }

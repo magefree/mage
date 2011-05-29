@@ -51,9 +51,4 @@ public class WhispersilkCloak extends mage.sets.tenth.WhispersilkCloak {
 		return new WhispersilkCloak(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121663_typ_reg_sty_010.jpg";
-	}
-
 }

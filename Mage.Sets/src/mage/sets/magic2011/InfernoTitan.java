@@ -73,11 +73,6 @@ public class InfernoTitan extends CardImpl<InfernoTitan> {
 		return new InfernoTitan(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129131_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class InfernoTitanAbility extends TriggeredAbilityImpl<InfernoTitanAbility> {

@@ -76,11 +76,6 @@ public class Oakenform extends CardImpl<Oakenform> {
         return new Oakenform(this);
     }
 
-    @Override
-    public String getArt() {
-        return "121588_typ_reg_sty_010.jpg";
-    }
-
 }
 
 class OakenformEffect extends ContinuousEffectImpl<OakenformEffect> {

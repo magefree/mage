@@ -60,9 +60,4 @@ public class BogWraith extends CardImpl<BogWraith> {
 		return new BogWraith(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "106215_typ_reg_sty_010.jpg";
-	}
-
 }

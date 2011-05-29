@@ -61,9 +61,4 @@ public class WildGriffin extends CardImpl<WildGriffin> {
 		return new WildGriffin(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "104359_typ_reg_sty_010.jpg";
-	}
-
 }

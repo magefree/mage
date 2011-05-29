@@ -43,7 +43,7 @@ import mage.target.TargetSpell;
  */
 public class Reverberate extends CardImpl<Reverberate> {
 	
-	private static FilterSpell filter = new FilterSpell();
+	private static final FilterSpell filter = new FilterSpell();
 	
 	static {
 		filter.getCardType().add(CardType.INSTANT);
@@ -66,10 +66,5 @@ public class Reverberate extends CardImpl<Reverberate> {
 	@Override
 	public Reverberate copy() {
 		return new Reverberate(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "129127_typ_reg_sty_010.jpg";
 	}
 }

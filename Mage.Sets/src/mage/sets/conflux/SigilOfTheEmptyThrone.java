@@ -66,11 +66,6 @@ public class SigilOfTheEmptyThrone extends CardImpl<SigilOfTheEmptyThrone> {
         return new SigilOfTheEmptyThrone(this);
     }
 
-    @Override
-    public String getArt() {
-        return "118726_typ_reg_sty_010.jpg";
-    }
-
 }
 
 class SigilOfTheEmptyThroneAbility extends TriggeredAbilityImpl<SigilOfTheEmptyThroneAbility> {

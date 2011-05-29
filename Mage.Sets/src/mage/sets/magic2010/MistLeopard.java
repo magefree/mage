@@ -60,9 +60,4 @@ public class MistLeopard extends CardImpl<MistLeopard> {
         return new MistLeopard(this);
     }
 
-    @Override
-    public String getArt() {
-        return "122142_typ_reg_sty_010.jpg";
-    }
-
 }

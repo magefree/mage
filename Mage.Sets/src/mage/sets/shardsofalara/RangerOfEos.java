@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class RangerOfEos extends CardImpl<RangerOfEos> {
 
-	private static FilterCard filter = new FilterCard("creature cards with converted mana cost 1 or less");
+	private static final FilterCard filter = new FilterCard("creature cards with converted mana cost 1 or less");
 
 	static {
 		filter.getCardType().add(CardType.CREATURE);
@@ -73,11 +73,6 @@ public class RangerOfEos extends CardImpl<RangerOfEos> {
 	@Override
 	public RangerOfEos copy() {
 		return new RangerOfEos(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "114946_typ_reg_sty_010.jpg";
 	}
 
 }

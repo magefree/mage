@@ -73,11 +73,6 @@ public class BloodcrazedGoblin extends CardImpl<BloodcrazedGoblin> {
 		return new BloodcrazedGoblin(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129098_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class BloodcrazedGoblinWatcher extends WatcherImpl<BloodcrazedGoblinWatcher> {

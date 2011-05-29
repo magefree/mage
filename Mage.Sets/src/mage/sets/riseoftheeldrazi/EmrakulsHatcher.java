@@ -64,9 +64,4 @@ public class EmrakulsHatcher extends CardImpl<EmrakulsHatcher> {
 		return new EmrakulsHatcher(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "127298_typ_reg_sty_010.jpg";
-	}
-
 }

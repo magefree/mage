@@ -65,9 +65,4 @@ public class RiverBoa extends CardImpl<RiverBoa> {
 		return new RiverBoa(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "125067_typ_reg_sty_010.jpg";
-	}
-
 }

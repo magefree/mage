@@ -57,7 +57,6 @@ public class StackAbilityView extends CardView {
 		this.superTypes = ability.getSupertype();
 		this.color = ability.getColor();
 		this.manaCost = ability.getManaCost().getSymbols();
-		this.art = "";
 		setTargets(ability.getTargets());
 	}
 

@@ -70,9 +70,4 @@ public class InfantryVeteran extends CardImpl<InfantryVeteran> {
 		return new InfantryVeteran(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "2191_typ_reg_sty_010.jpg";
-	}
-
 }

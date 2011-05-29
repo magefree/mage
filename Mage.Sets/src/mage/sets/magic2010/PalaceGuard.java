@@ -71,11 +71,6 @@ public class PalaceGuard extends CardImpl<PalaceGuard> {
 		return new PalaceGuard(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121617_typ_reg_sty_010.jpg";
-	}
-
 	class PalaceGuardEffect extends ContinuousEffectImpl<PalaceGuardEffect> {
 
 		public PalaceGuardEffect() {

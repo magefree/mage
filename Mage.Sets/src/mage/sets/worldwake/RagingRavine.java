@@ -69,11 +69,6 @@ public class RagingRavine extends CardImpl<RagingRavine> {
 		return new RagingRavine(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "126537_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class RagingRavineToken extends Token {

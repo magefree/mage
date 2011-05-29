@@ -69,11 +69,6 @@ public class FireServant extends CardImpl<FireServant> {
 		return new FireServant(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129085_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class FireServantEffect extends ReplacementEffectImpl<FireServantEffect> {

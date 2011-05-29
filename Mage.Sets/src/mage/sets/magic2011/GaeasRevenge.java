@@ -47,7 +47,7 @@ import mage.filter.FilterStackObject;
  */
 public class GaeasRevenge extends CardImpl<GaeasRevenge> {
 
-	private static FilterStackObject filter = new FilterStackObject("nongreen spells or abilities from nongreen sources");
+	private static final FilterStackObject filter = new FilterStackObject("nongreen spells or abilities from nongreen sources");
 
 	static {
 		filter.getColor().setGreen(true);
@@ -76,11 +76,6 @@ public class GaeasRevenge extends CardImpl<GaeasRevenge> {
 	@Override
 	public GaeasRevenge copy() {
 		return new GaeasRevenge(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "129122_typ_reg_sty_010.jpg";
 	}
 
 }

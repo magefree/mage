@@ -78,16 +78,11 @@ public class ArmoredAscension extends CardImpl<ArmoredAscension> {
 	public ArmoredAscension copy() {
 		return new ArmoredAscension(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "122162_typ_reg_sty_010.jpg";
-	}
 }
 
 class ArmoredAscensionEffect extends ContinuousEffectImpl<ArmoredAscensionEffect> {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent("Plains");
+	private static final FilterLandPermanent filter = new FilterLandPermanent("Plains");
 
 	static {
 		filter.getSubtype().add("Plains");

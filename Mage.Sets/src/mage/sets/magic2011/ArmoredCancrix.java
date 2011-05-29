@@ -58,9 +58,4 @@ public class ArmoredCancrix extends CardImpl<ArmoredCancrix> {
 		return new ArmoredCancrix(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129159_typ_reg_sty_010.jpg";
-	}
-
 }

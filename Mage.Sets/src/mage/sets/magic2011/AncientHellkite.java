@@ -34,7 +34,6 @@ import mage.Constants.ColoredManaSymbol;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.mana.ColoredManaCost;
@@ -43,7 +42,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -72,11 +70,6 @@ public class AncientHellkite extends CardImpl<AncientHellkite> {
 	@Override
 	public AncientHellkite copy() {
 		return new AncientHellkite(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "129075_typ_reg_sty_010.jpg";
 	}
 
 }

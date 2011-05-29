@@ -58,9 +58,4 @@ public class AjanisMantra extends CardImpl<AjanisMantra> {
 		return new AjanisMantra(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129081_typ_reg_sty_010.jpg";
-	}
-
 }

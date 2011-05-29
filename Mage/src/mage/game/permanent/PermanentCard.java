@@ -109,7 +109,6 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 		}
 		this.subtype = card.getSubtype();
 		this.supertype = card.getSupertype();
-		this.art = card.getArt();
 		this.expansionSetCode = card.getExpansionSetCode();
 		this.rarity = card.getRarity();
 		this.cardNumber = card.getCardNumber();
@@ -205,16 +204,6 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public String getArt() {
-		return art;
-	}
-
-	@Override
-	public void setArt(String art) {
-		this.art = art;
 	}
 
 	@Override

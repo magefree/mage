@@ -31,12 +31,10 @@ package mage.sets.magic2011;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -45,7 +43,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class CallToMind extends CardImpl<CallToMind> {
 
-	private static FilterCard filter = new FilterCard("instant or sorcery card");
+	private static final FilterCard filter = new FilterCard("instant or sorcery card");
 
 	static {
 		filter.getCardType().add(CardType.INSTANT);
@@ -69,11 +67,6 @@ public class CallToMind extends CardImpl<CallToMind> {
 	@Override
 	public CallToMind copy() {
 		return new CallToMind(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "129174_typ_reg_sty_010.jpg";
 	}
 
 }

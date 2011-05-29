@@ -74,11 +74,6 @@ public class GargoyleSentinel extends CardImpl<GargoyleSentinel> {
 		return new GargoyleSentinel(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129079_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class GargoyleSentinelEffect extends ContinuousEffectImpl<GargoyleSentinelEffect> {

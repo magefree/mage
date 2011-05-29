@@ -50,9 +50,4 @@ public class MindControl extends mage.sets.magic2010.MindControl {
 	public MindControl copy() {
 		return new MindControl(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129175_typ_reg_sty_010.jpg";
-	}
 }

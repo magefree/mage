@@ -65,9 +65,4 @@ public class ActOfTreason extends CardImpl<ActOfTreason> {
 		return new ActOfTreason(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121664_typ_reg_sty_010.jpg";
-	}
-
 }

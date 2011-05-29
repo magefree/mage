@@ -66,11 +66,6 @@ public class MassPolymorph extends CardImpl<MassPolymorph> {
 	public MassPolymorph copy() {
 		return new MassPolymorph(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129072_typ_reg_sty_010.jpg";
-	}
 }
 
 class MassPolymorphEffect extends OneShotEffect<MassPolymorphEffect> {

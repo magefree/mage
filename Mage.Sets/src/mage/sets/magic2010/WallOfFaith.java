@@ -67,9 +67,4 @@ public class WallOfFaith extends CardImpl<WallOfFaith> {
         return new WallOfFaith(this);
     }
 
-    @Override
-    public String getArt() {
-        return "121606_typ_reg_sty_010.jpg";
-    }
-
 }

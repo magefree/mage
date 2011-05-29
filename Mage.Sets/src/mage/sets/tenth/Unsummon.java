@@ -57,9 +57,4 @@ public class Unsummon extends CardImpl<Unsummon> {
 	public Unsummon copy() {
 		return new Unsummon(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "27848_typ_reg_sty_010.jpg";
-	}
 }

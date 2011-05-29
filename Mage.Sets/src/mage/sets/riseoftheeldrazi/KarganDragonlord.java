@@ -81,9 +81,4 @@ public class KarganDragonlord extends LevelerCard<KarganDragonlord> {
 		return new KarganDragonlord(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "127295_typ_reg_sty_010.jpg";
-	}
-
 }

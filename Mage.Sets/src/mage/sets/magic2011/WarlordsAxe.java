@@ -63,10 +63,5 @@ public class WarlordsAxe extends CardImpl<WarlordsAxe> {
 		return new WarlordsAxe(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129144_typ_reg_sty_010.jpg";
-	}
-
 }
 

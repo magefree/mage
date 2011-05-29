@@ -57,9 +57,4 @@ public class LavaAxe extends CardImpl<LavaAxe> {
 	public LavaAxe copy() {
 		return new LavaAxe(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "10394_typ_reg_sty_010.jpg";
-	}
 }

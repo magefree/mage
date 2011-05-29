@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Deathmark extends CardImpl<Deathmark> {
 
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("green or white creature");
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green or white creature");
 
 	static {
 		filter.getColor().setGreen(true);
@@ -67,11 +67,6 @@ public class Deathmark extends CardImpl<Deathmark> {
 	@Override
 	public Deathmark copy() {
 		return new Deathmark(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "96855_typ_reg_sty_010.jpg";
 	}
 
 }

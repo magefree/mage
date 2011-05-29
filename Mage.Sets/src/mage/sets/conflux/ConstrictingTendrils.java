@@ -62,9 +62,4 @@ public class ConstrictingTendrils extends CardImpl<ConstrictingTendrils> {
         return new ConstrictingTendrils(this);
     }
 
-    @Override
-    public String getArt() {
-        return "118727_typ_reg_sty_010.jpg";
-    }
-
 }

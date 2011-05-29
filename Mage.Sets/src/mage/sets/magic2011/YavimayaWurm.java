@@ -61,9 +61,4 @@ public class YavimayaWurm extends CardImpl<YavimayaWurm> {
 		return new YavimayaWurm(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129163_typ_reg_sty_010.jpg";
-	}
-
 }

@@ -57,8 +57,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CaptivatingVampire extends CardImpl<CaptivatingVampire> {
 
-	private static FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Vampire creatures");
-	private static FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("untapped Vampire");
+	private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Vampire creatures");
+	private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("untapped Vampire");
 
 	static {
 		filter1.getSubtype().add("Vampire");
@@ -88,11 +88,6 @@ public class CaptivatingVampire extends CardImpl<CaptivatingVampire> {
 	@Override
 	public CaptivatingVampire copy() {
 		return new CaptivatingVampire(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "131382_typ_reg_sty_010.jpg";
 	}
 
 }

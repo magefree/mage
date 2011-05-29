@@ -64,11 +64,6 @@ public class SeeBeyond extends CardImpl<SeeBeyond> {
 		return new SeeBeyond(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "127361_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class SeeBeyondEffect extends OneShotEffect<SeeBeyondEffect> {

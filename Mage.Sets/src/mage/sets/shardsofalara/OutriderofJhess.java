@@ -60,9 +60,4 @@ public class OutriderofJhess extends CardImpl<OutriderofJhess> {
     public OutriderofJhess copy() {
         return new OutriderofJhess(this);
     }
-
-    @Override
-    public String getArt() {
-        return "";
-    }
 }

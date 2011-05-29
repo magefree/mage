@@ -71,11 +71,6 @@ public class MerfolkSpy extends CardImpl<MerfolkSpy> {
 		return new MerfolkSpy(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129100_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class MerfolkSpyEffect extends OneShotEffect<MerfolkSpyEffect> {

@@ -80,9 +80,4 @@ public class FaunaShaman extends CardImpl<FaunaShaman> {
 		return new FaunaShaman(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129146_typ_reg_sty_010.jpg";
-	}
-
 }

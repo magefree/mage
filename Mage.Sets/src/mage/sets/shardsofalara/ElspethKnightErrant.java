@@ -35,7 +35,6 @@ import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.SubLayer;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -93,16 +92,11 @@ public class ElspethKnightErrant extends CardImpl<ElspethKnightErrant> {
 		return new ElspethKnightErrant(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "114973_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class ElspethKnightErrantEffect extends ContinuousEffectImpl<ElspethKnightErrantEffect> {
 
-	private static FilterPermanent filter = new FilterPermanent("artifacts, creatures, enchantments and lands");
+	private static final FilterPermanent filter = new FilterPermanent("artifacts, creatures, enchantments and lands");
 
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);

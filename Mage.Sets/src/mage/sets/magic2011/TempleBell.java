@@ -58,9 +58,4 @@ public class TempleBell extends CardImpl<TempleBell> {
 		return new TempleBell(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129145_typ_reg_sty_010.jpg";
-	}
-
 }

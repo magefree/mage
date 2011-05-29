@@ -51,8 +51,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MerfolkSovereign extends CardImpl<MerfolkSovereign> {
 
-	private static FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Merfolk creatures");
-	private static FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Merfolk creature");
+	private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Merfolk creatures");
+	private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Merfolk creature");
 
 	static {
 		filter1.getSubtype().add("Merfolk");
@@ -80,11 +80,6 @@ public class MerfolkSovereign extends CardImpl<MerfolkSovereign> {
 	@Override
 	public MerfolkSovereign copy() {
 		return new MerfolkSovereign(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "121667_typ_reg_sty_010.jpg";
 	}
 
 }

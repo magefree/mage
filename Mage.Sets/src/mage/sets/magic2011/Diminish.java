@@ -59,9 +59,4 @@ public class Diminish extends CardImpl<Diminish> {
 		return new Diminish(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129177_typ_reg_sty_010.jpg";
-	}
-
 }

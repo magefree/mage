@@ -64,9 +64,4 @@ public class KozileksPredator extends CardImpl<KozileksPredator> {
 		return new KozileksPredator(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "127475_typ_reg_sty_010.jpg";
-	}
-
 }

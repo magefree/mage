@@ -47,12 +47,6 @@ public class Naturalize extends mage.sets.magic2010.Naturalize {
 	}
 
 	@Override
-	public String getArt() {
-		return "114994_typ_reg_sty_010.jpg";
-	}
-
-
-	@Override
 	public Naturalize copy() {
 		return new Naturalize(this);
 	}

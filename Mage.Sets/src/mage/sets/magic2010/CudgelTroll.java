@@ -64,9 +64,4 @@ public class CudgelTroll extends CardImpl<CudgelTroll> {
 		return new CudgelTroll(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121570_typ_reg_sty_010.jpg";
-	}
-
 }

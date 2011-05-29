@@ -62,11 +62,6 @@ public class TerramorphicExpanse extends CardImpl<TerramorphicExpanse> {
 		return new TerramorphicExpanse(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "97502_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class TerramorphicExpanseAbility extends ActivatedAbilityImpl<TerramorphicExpanseAbility> {

@@ -64,10 +64,5 @@ public class CrystalBall extends CardImpl<CrystalBall> {
 		return new CrystalBall(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129138_typ_reg_sty_010.jpg";
-	}
-
 }
 

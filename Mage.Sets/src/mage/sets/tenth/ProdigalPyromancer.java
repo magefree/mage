@@ -69,9 +69,4 @@ public class ProdigalPyromancer extends CardImpl<ProdigalPyromancer> {
 		return new ProdigalPyromancer(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "100670_typ_reg_sty_010.jpg";
-	}
-
 }

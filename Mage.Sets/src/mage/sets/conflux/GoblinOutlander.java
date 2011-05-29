@@ -41,11 +41,11 @@ import mage.filter.FilterCard;
  * @author Loki
  */
 public class GoblinOutlander extends CardImpl<GoblinOutlander> {
-    private static FilterCard filter = new FilterCard("white");
+    private static final FilterCard filter = new FilterCard("white");
 
     static {
     	filter.setUseColor(true);
-	filter.getColor().setWhite(true);
+    	filter.getColor().setWhite(true);
     }
 
     public GoblinOutlander(UUID ownerId) {
@@ -67,11 +67,6 @@ public class GoblinOutlander extends CardImpl<GoblinOutlander> {
     @Override
     public GoblinOutlander copy() {
         return new GoblinOutlander(this);
-    }
-
-    @Override
-    public String getArt() {
-        return "118772_typ_reg_sty_010.jpg";
     }
 
 }

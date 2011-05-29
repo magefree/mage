@@ -66,9 +66,4 @@ public class BasiliskCollar extends CardImpl<BasiliskCollar> {
 	public BasiliskCollar copy() {
 		return new BasiliskCollar(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "126549_typ_reg_sty_010.jpg";
-	}
 }

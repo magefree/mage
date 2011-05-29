@@ -73,11 +73,6 @@ public class SearingBlaze extends CardImpl<SearingBlaze> {
 		return new SearingBlaze(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "126476_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class SearingBlazeWatcher extends WatcherImpl<SearingBlazeWatcher> {

@@ -91,11 +91,6 @@ public class AjaniGoldmane extends CardImpl<AjaniGoldmane> {
 		return new AjaniGoldmane(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "105545_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class AvatarToken extends Token {

@@ -62,16 +62,11 @@ public class Earthquake extends CardImpl<Earthquake> {
 	public Earthquake copy() {
 		return new Earthquake(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "118685_typ_reg_sty_010.jpg";
-	}
 }
 
 class EarthquakeEffect extends OneShotEffect<EarthquakeEffect> {
 
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
 	static {
 		filter.getAbilities().add(FlyingAbility.getInstance());

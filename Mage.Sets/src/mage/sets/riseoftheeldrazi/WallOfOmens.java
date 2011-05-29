@@ -64,9 +64,4 @@ public class WallOfOmens extends CardImpl<WallOfOmens> {
 		return new WallOfOmens(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "127342_typ_reg_sty_010.jpg";
-	}
-
 }

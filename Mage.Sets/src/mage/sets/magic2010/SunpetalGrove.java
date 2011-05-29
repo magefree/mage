@@ -49,7 +49,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class SunpetalGrove extends CardImpl<SunpetalGrove> {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent();
+	private static final FilterLandPermanent filter = new FilterLandPermanent();
 
 	static {
 		filter.getSubtype().add("Forest");
@@ -76,10 +76,5 @@ public class SunpetalGrove extends CardImpl<SunpetalGrove> {
 	@Override
 	public SunpetalGrove copy() {
 		return new SunpetalGrove(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "121679_typ_reg_sty_010.jpg";
 	}
 }

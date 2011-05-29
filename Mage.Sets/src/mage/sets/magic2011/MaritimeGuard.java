@@ -59,9 +59,4 @@ public class MaritimeGuard extends CardImpl<MaritimeGuard> {
 		return new MaritimeGuard(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129129_typ_reg_sty_010.jpg";
-	}
-
 }

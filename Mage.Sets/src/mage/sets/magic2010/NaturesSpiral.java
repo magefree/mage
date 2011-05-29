@@ -35,7 +35,6 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
-import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -44,7 +43,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class NaturesSpiral extends CardImpl<NaturesSpiral> {
 
-	private static FilterCard filter = new FilterCard("permanent card");
+	private static final FilterCard filter = new FilterCard("permanent card");
 
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);
@@ -70,10 +69,5 @@ public class NaturesSpiral extends CardImpl<NaturesSpiral> {
 	@Override
 	public NaturesSpiral copy() {
 		return new NaturesSpiral(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "121584_typ_reg_sty_010.jpg";
 	}
 }

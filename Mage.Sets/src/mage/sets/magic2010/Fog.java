@@ -57,9 +57,4 @@ public class Fog extends CardImpl<Fog> {
 		return new Fog(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "02368_typ_reg_sty_001.jpg";
-	}
-
 }

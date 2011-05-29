@@ -75,9 +75,4 @@ public class EmberHauler extends CardImpl<EmberHauler> {
 		return new EmberHauler(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129173_typ_reg_sty_010.jpg";
-	}
-
 }

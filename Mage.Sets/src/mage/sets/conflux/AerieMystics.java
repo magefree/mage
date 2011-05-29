@@ -70,9 +70,4 @@ public class AerieMystics extends CardImpl<AerieMystics> {
         return new AerieMystics(this);
     }
 
-    @Override
-    public String getArt() {
-        return "118654_typ_reg_sty_010.jpg";
-    }
-
 }

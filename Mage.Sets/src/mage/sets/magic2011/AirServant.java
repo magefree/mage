@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AirServant extends CardImpl<AirServant> {
 
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 
 	static {
 		filter.getAbilities().add(FlyingAbility.getInstance());
@@ -74,11 +74,6 @@ public class AirServant extends CardImpl<AirServant> {
 	@Override
 	public AirServant copy() {
 		return new AirServant(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "129155_typ_reg_sty_010.jpg";
 	}
 
 }

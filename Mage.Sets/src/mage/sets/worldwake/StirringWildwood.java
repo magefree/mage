@@ -67,11 +67,6 @@ public class StirringWildwood extends CardImpl<StirringWildwood> {
 		return new StirringWildwood(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "126541_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class StirringWildwoodToken extends Token {

@@ -56,9 +56,4 @@ public class Pyroclasm extends CardImpl<Pyroclasm> {
 	public Pyroclasm copy() {
 		return new Pyroclasm(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "49671_typ_reg_sty_010.jpg";
-	}
 }

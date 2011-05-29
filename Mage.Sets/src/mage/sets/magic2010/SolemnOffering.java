@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  */
 public class SolemnOffering extends CardImpl<SolemnOffering> {
 
-	private static FilterPermanent filter = new FilterPermanent("artifact or enchantment");
+	private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);
@@ -68,10 +68,5 @@ public class SolemnOffering extends CardImpl<SolemnOffering> {
 	@Override
 	public SolemnOffering copy() {
 		return new SolemnOffering(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "122138_typ_reg_sty_010.jpg";
 	}
 }

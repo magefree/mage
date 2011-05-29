@@ -58,9 +58,4 @@ public class CoralMerfolk extends CardImpl<CoralMerfolk> {
         return new CoralMerfolk(this);
     }
 
-    @Override
-    public String getArt() {
-        return "122166_typ_reg_sty_010.jpg";
-    }
-
 }

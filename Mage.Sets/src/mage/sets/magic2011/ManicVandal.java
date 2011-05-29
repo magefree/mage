@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  */
 public class ManicVandal extends CardImpl<ManicVandal> {
 
-	private static FilterPermanent filter = new FilterPermanent("artifact");
+	private static final FilterPermanent filter = new FilterPermanent("artifact");
 
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);
@@ -77,11 +77,6 @@ public class ManicVandal extends CardImpl<ManicVandal> {
 	@Override
 	public ManicVandal copy() {
 		return new ManicVandal(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "129172_typ_reg_sty_010.jpg";
 	}
 
 }

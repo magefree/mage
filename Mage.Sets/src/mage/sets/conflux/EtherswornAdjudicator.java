@@ -43,16 +43,14 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
 public class EtherswornAdjudicator extends CardImpl<EtherswornAdjudicator> {
-    private static FilterControlledPermanent filter = new FilterControlledPermanent("creature or enchantment");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature or enchantment");
 
     static {
         filter.getCardType().add(CardType.CREATURE);
@@ -84,11 +82,6 @@ public class EtherswornAdjudicator extends CardImpl<EtherswornAdjudicator> {
     @Override
     public EtherswornAdjudicator copy() {
         return new EtherswornAdjudicator(this);
-    }
-
-    @Override
-    public String getArt() {
-        return "118676_typ_reg_sty_010.jpg";
     }
 
 }

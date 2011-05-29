@@ -70,9 +70,4 @@ public class BogardanHellkite extends CardImpl<BogardanHellkite> {
 		return new BogardanHellkite(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "97381_typ_reg_sty_010.jpg";
-	}
-
 }

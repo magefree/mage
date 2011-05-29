@@ -60,9 +60,4 @@ public class CanyonMinotaur extends CardImpl<CanyonMinotaur> {
 		return new CanyonMinotaur(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "118765_typ_reg_sty_010.jpg";
-	}
-
 }

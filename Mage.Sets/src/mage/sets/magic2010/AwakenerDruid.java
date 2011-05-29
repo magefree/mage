@@ -52,7 +52,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public class AwakenerDruid extends CardImpl<AwakenerDruid> {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent("Forest");
+	private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
 
 	static {
 		filter.getSubtype().add("Forest");
@@ -79,11 +79,6 @@ public class AwakenerDruid extends CardImpl<AwakenerDruid> {
 	@Override
 	public AwakenerDruid copy() {
 		return new AwakenerDruid(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "121576_typ_reg_sty_010.jpg";
 	}
 }
 

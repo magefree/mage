@@ -64,9 +64,4 @@ public class NestInvader extends CardImpl<NestInvader> {
 		return new NestInvader(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "127252_typ_reg_sty_010.jpg";
-	}
-
 }

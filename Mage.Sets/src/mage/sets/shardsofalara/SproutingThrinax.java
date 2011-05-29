@@ -67,11 +67,6 @@ public class SproutingThrinax extends CardImpl<SproutingThrinax> {
 		return new SproutingThrinax(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "114974_typ_reg_sty_010.jpg";
-	}
-
 }
 
 

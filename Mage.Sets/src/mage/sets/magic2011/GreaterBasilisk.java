@@ -61,9 +61,4 @@ public class GreaterBasilisk extends CardImpl<GreaterBasilisk> {
 		return new GreaterBasilisk(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129106_typ_reg_sty_010.jpg";
-	}
-
 }

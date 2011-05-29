@@ -56,9 +56,4 @@ public class PyreticRitual extends CardImpl<PyreticRitual> {
 	public PyreticRitual copy() {
 		return new PyreticRitual(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129153_typ_reg_sty_010.jpg";
-	}
 }

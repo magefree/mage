@@ -78,11 +78,6 @@ public class IceCage extends CardImpl<IceCage> {
 	public IceCage copy() {
 		return new IceCage(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "121586_typ_reg_sty_010.jpg";
-	}
 }
 
 class IceCageEffect extends ReplacementEffectImpl<IceCageEffect> {

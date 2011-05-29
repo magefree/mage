@@ -63,9 +63,4 @@ public class AvenSquire extends CardImpl<AvenSquire> {
         return new AvenSquire(this);
     }
 
-    @Override
-    public String getArt() {
-        return "118763_typ_reg_sty_010.jpg";
-    }
-
 }

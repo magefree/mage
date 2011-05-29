@@ -68,11 +68,6 @@ public class CelestialColonnade extends CardImpl<CelestialColonnade> {
 		return new CelestialColonnade(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "126518_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class CelestialColonnadeToken extends Token {

@@ -63,9 +63,4 @@ public class SteppeLynx extends CardImpl<SteppeLynx> {
 		return new SteppeLynx(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123546_typ_reg_sty_010.jpg";
-	}
-
 }

@@ -73,16 +73,11 @@ public class HarborSerpent extends CardImpl<HarborSerpent> {
 		return new HarborSerpent(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129069_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class HarborSerpentEffect extends ReplacementEffectImpl<HarborSerpentEffect> {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent("Island");
+	private static final FilterLandPermanent filter = new FilterLandPermanent("Island");
 
 	static {
 		filter.getSubtype().add("Island");

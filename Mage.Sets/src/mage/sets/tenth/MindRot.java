@@ -57,9 +57,4 @@ public class MindRot extends CardImpl<MindRot> {
 	public MindRot copy() {
 		return new MindRot(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "04716_typ_reg_sty_001.jpg";
-	}
 }

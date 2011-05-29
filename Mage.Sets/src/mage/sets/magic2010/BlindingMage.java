@@ -70,9 +70,4 @@ public class BlindingMage extends CardImpl<BlindingMage> {
 		return new BlindingMage(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121614_typ_reg_sty_010.jpg";
-	}
-
 }

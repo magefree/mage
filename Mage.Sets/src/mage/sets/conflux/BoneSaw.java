@@ -62,9 +62,4 @@ public class BoneSaw extends CardImpl<BoneSaw> {
         return new BoneSaw(this);
     }
 
-    @Override
-    public String getArt() {
-        return "119803_typ_reg_sty_010.jpg";
-    }
-
 }

@@ -60,9 +60,4 @@ public class WindDrake extends CardImpl<WindDrake> {
         return new WindDrake(this);
     }
 
-    @Override
-    public String getArt() {
-        return "122178_typ_reg_sty_010.jpg";
-    }
-
 }

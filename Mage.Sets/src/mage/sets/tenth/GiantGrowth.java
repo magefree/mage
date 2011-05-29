@@ -58,9 +58,4 @@ public class GiantGrowth extends CardImpl<GiantGrowth> {
 	public GiantGrowth copy() {
 		return new GiantGrowth(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "101059_typ_reg_sty_010.jpg";
-	}
 }

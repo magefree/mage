@@ -64,9 +64,4 @@ public class BloodthroneVampire extends CardImpl<BloodthroneVampire> {
 	public BloodthroneVampire copy() {
 		return new BloodthroneVampire(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "127479_typ_reg_sty_010.jpg";
-	}
 }

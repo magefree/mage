@@ -49,7 +49,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class DrownedCatacomb extends CardImpl<DrownedCatacomb> {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent();
+	private static final FilterLandPermanent filter = new FilterLandPermanent();
 
 	static {
 		filter.getSubtype().add("Swamp");
@@ -76,10 +76,5 @@ public class DrownedCatacomb extends CardImpl<DrownedCatacomb> {
 	@Override
 	public DrownedCatacomb copy() {
 		return new DrownedCatacomb(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "121655_typ_reg_sty_010.jpg";
 	}
 }

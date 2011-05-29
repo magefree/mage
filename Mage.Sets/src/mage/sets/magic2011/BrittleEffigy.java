@@ -70,9 +70,4 @@ public class BrittleEffigy extends CardImpl<BrittleEffigy> {
 		return new BrittleEffigy(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129094_typ_reg_sty_010.jpg";
-	}
-
 }

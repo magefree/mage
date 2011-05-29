@@ -64,11 +64,6 @@ public class OverwhelmingStampede extends CardImpl<OverwhelmingStampede> {
 	public OverwhelmingStampede copy() {
 		return new OverwhelmingStampede(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129095_typ_reg_sty_010.jpg";
-	}
 }
 
 class OverwhelmingStampedeEffect extends ContinuousEffectImpl<OverwhelmingStampedeEffect> {

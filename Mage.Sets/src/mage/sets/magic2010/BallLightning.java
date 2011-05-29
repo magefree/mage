@@ -67,9 +67,4 @@ public class BallLightning extends CardImpl<BallLightning> {
 		return new BallLightning(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "122161_typ_reg_sty_010.jpg";
-	}
-
 }

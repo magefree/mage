@@ -61,10 +61,5 @@ public class DuskdaleWurm extends CardImpl<DuskdaleWurm> {
 		return new DuskdaleWurm(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "113643_typ_reg_sty_010.jpg";
-	}
-
 }
 

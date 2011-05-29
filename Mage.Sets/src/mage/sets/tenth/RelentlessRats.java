@@ -76,11 +76,6 @@ public class RelentlessRats extends CardImpl<RelentlessRats> {
 	public RelentlessRats copy() {
 		return new RelentlessRats(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "77220_typ_reg_sty_010.jpg";
-	}
 	
 	class RelentlessRatsEffect extends ContinuousEffectImpl<RelentlessRatsEffect> {
 

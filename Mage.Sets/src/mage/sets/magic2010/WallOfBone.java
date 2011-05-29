@@ -66,9 +66,4 @@ public class WallOfBone extends CardImpl<WallOfBone> {
         return new WallOfBone(this);
     }
 
-    @Override
-    public String getArt() {
-        return "122153_typ_reg_sty_010.jpg";
-    }
-
 }

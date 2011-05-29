@@ -74,11 +74,6 @@ public class RafiqOfTheMany extends CardImpl<RafiqOfTheMany> {
 		return new RafiqOfTheMany(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "115029_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class RafiqOfTheManyAbility extends TriggeredAbilityImpl<RafiqOfTheManyAbility> {

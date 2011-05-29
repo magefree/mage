@@ -72,11 +72,6 @@ public class PrimevalTitan extends CardImpl<PrimevalTitan> {
 		return new PrimevalTitan(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129116_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class PrimevalTitanAbility extends TriggeredAbilityImpl<PrimevalTitanAbility> {

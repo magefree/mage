@@ -66,16 +66,11 @@ public class Corrupt extends CardImpl<Corrupt> {
 		return new Corrupt(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "111602_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class CorruptEffect extends OneShotEffect<CorruptEffect> {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent("Swamps");
+	private static final FilterLandPermanent filter = new FilterLandPermanent("Swamps");
 
 	static {
 		filter.getSubtype().add("Swamp");

@@ -59,9 +59,4 @@ public class EliteVanguard extends CardImpl<EliteVanguard> {
 		return new EliteVanguard(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "103534_typ_reg_sty_010.jpg";
-	}
-
 }

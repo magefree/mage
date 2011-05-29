@@ -62,9 +62,4 @@ public class ManaLeak extends CardImpl<ManaLeak> {
 	public ManaLeak copy() {
 		return new ManaLeak(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129076_typ_reg_sty_010.jpg";
-	}
 }

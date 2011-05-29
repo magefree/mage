@@ -87,11 +87,6 @@ public class JoragaTreespeaker extends LevelerCard<JoragaTreespeaker> {
 		return new JoragaTreespeaker(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "127280_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class JoragaManaAbility extends BasicManaAbility<JoragaManaAbility> {

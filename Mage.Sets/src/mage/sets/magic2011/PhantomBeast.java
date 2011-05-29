@@ -67,11 +67,6 @@ public class PhantomBeast extends CardImpl<PhantomBeast> {
 		return new PhantomBeast(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129107_typ_reg_sty_010.jpg";
-	}
-
 	class PhantomBeastAbility extends TriggeredAbilityImpl<PhantomBeastAbility> {
 
 		public PhantomBeastAbility() {

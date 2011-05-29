@@ -62,11 +62,6 @@ public class DreadStatuary extends CardImpl<DreadStatuary> {
 		return new DreadStatuary(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "126755_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class DreadStatuaryToken extends Token {

@@ -61,9 +61,4 @@ public class BerserkersOfBloodRidge  extends CardImpl<BerserkersOfBloodRidge> {
 		return new BerserkersOfBloodRidge(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121659_typ_reg_sty_010.jpg";
-	}
-
 }

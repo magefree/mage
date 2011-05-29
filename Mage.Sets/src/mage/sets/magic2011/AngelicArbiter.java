@@ -76,11 +76,6 @@ public class AngelicArbiter extends CardImpl<AngelicArbiter> {
 		return new AngelicArbiter(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129070_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class AngelicArbiterWatcher1 extends WatcherImpl<AngelicArbiterWatcher1> {

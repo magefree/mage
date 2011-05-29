@@ -60,9 +60,4 @@ public class BogRaiders extends CardImpl<BogRaiders> {
 		return new BogRaiders(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "08678_typ_reg_sty_010.jpg";
-	}
-
 }

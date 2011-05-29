@@ -57,9 +57,4 @@ public class TomeScour extends CardImpl<TomeScour> {
 	public TomeScour copy() {
 		return new TomeScour(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "102623_typ_reg_sty_010.jpg";
-	}
 }

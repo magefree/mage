@@ -61,11 +61,6 @@ public class DemonsHorn extends CardImpl<DemonsHorn> {
 		return new DemonsHorn(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "75220_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class DemonsHornAbility extends TriggeredAbilityImpl<DemonsHornAbility> {

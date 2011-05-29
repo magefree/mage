@@ -59,9 +59,4 @@ public class RuneclawBear extends CardImpl<RuneclawBear> {
 		return new RuneclawBear(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121566_typ_reg_sty_010.jpg";
-	}
-
 }

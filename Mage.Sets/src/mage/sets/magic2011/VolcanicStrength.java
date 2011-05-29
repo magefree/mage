@@ -77,11 +77,6 @@ public class VolcanicStrength extends CardImpl<VolcanicStrength> {
 	public VolcanicStrength copy() {
 		return new VolcanicStrength(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129170_typ_reg_sty_010.jpg";
-	}
 }
 
 class VolcanicStrengthEffect extends ContinuousEffectImpl<VolcanicStrengthEffect> {

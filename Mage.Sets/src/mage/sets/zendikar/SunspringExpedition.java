@@ -71,9 +71,4 @@ public class SunspringExpedition extends CardImpl<SunspringExpedition> {
 		return new SunspringExpedition(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123558_typ_reg_sty_010.jpg";
-	}
-
 }

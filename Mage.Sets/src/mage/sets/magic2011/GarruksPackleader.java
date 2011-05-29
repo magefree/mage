@@ -68,11 +68,6 @@ public class GarruksPackleader extends CardImpl<GarruksPackleader> {
 		return new GarruksPackleader(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129147_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class GarruksPackleaderAbility extends TriggeredAbilityImpl<GarruksPackleaderAbility> {

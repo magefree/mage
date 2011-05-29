@@ -52,6 +52,11 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author BetaSteward_at_googlemail.com
  */
 public class AjaniVengeant extends CardImpl<AjaniVengeant> {
+    private static final FilterPermanent filter = new FilterPermanent("lands");
+
+    static {
+        filter.getCardType().add(CardType.LAND);
+    }
 
 	public AjaniVengeant(UUID ownerId) {
 		super(ownerId, 154, "Ajani Vengeant", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{W}");
@@ -73,8 +78,6 @@ public class AjaniVengeant extends CardImpl<AjaniVengeant> {
 		ability2.addTarget(new TargetCreatureOrPlayer());
 		this.addAbility(ability2);
 
-		FilterPermanent filter = new FilterPermanent("lands");
-		filter.getCardType().add(CardType.LAND);
 		LoyaltyAbility ability3 = new LoyaltyAbility(new DestroyAllControlledTargetEffect(filter), -7);
 		ability3.addTarget(new TargetPlayer());
 		this.addAbility(ability3);
@@ -89,10 +92,5 @@ public class AjaniVengeant extends CardImpl<AjaniVengeant> {
 	@Override
 	public AjaniVengeant copy() {
 		return new AjaniVengeant(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "114969_typ_reg_sty_010.jpg";
 	}
 }

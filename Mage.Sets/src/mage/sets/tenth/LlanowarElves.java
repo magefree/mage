@@ -61,9 +61,4 @@ public class LlanowarElves extends CardImpl<LlanowarElves> {
 		return new LlanowarElves(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "86938_typ_reg_sty_010.jpg";
-	}
-
 }

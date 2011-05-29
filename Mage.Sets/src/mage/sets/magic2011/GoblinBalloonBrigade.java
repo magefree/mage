@@ -67,9 +67,4 @@ public class GoblinBalloonBrigade extends CardImpl<GoblinBalloonBrigade> {
 		return new GoblinBalloonBrigade(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "86949_typ_reg_sty_010.jpg";
-	}
-
 }

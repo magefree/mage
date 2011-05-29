@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Assassinate extends CardImpl<Assassinate> {
 
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
 	static {
 		filter.setTapped(true);
@@ -65,11 +65,6 @@ public class Assassinate extends CardImpl<Assassinate> {
 	@Override
 	public Assassinate copy() {
 		return new Assassinate(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "97461_typ_reg_sty_010.jpg";
 	}
 
 }

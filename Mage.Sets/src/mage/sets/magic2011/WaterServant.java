@@ -66,9 +66,4 @@ public class WaterServant extends CardImpl<WaterServant> {
 		return new WaterServant(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129097_typ_reg_sty_010.jpg";
-	}
-
 }

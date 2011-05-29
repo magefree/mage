@@ -61,9 +61,4 @@ public class SejiriRefuge extends CardImpl<SejiriRefuge> {
 	public SejiriRefuge copy() {
 		return new SejiriRefuge(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "126610_typ_reg_sty_010.jpg";
-	}
 }

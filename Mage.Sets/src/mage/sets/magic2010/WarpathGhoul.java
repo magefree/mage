@@ -58,9 +58,4 @@ public class WarpathGhoul extends CardImpl<WarpathGhoul> {
         return new WarpathGhoul(this);
     }
 
-    @Override
-    public String getArt() {
-        return "101036_typ_reg_sty_010.jpg";
-    }
-
 }

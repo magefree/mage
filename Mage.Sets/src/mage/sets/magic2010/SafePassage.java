@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreatureOrPlayer;
  */
 public class SafePassage  extends CardImpl<SafePassage> {
 
-	private static FilterCreatureOrPlayer filter = new FilterCreatureOrPlayer("you and creatures you control");
+	private static final FilterCreatureOrPlayer filter = new FilterCreatureOrPlayer("you and creatures you control");
 
 	static {
 		filter.getCreatureFilter().setTargetController(TargetController.YOU);
@@ -64,11 +64,6 @@ public class SafePassage  extends CardImpl<SafePassage> {
 	@Override
 	public SafePassage copy() {
 		return new SafePassage(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "121601_typ_reg_sty_010.jpg";
 	}
 
 }

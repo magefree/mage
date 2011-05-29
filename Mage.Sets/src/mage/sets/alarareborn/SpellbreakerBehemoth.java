@@ -75,10 +75,5 @@ public class SpellbreakerBehemoth extends CardImpl<SpellbreakerBehemoth> {
 	public SpellbreakerBehemoth copy() {
 		return new SpellbreakerBehemoth(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "120966_typ_reg_sty_010.jpg";
-	}
 	
 }

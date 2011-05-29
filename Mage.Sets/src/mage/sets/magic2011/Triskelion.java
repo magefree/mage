@@ -71,9 +71,4 @@ public class Triskelion extends CardImpl<Triskelion> {
 		return new Triskelion(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "51030_typ_reg_sty_010.jpg";
-	}
-
 }

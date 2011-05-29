@@ -77,11 +77,6 @@ public class PrimalCocoon extends CardImpl<PrimalCocoon> {
 	public PrimalCocoon copy() {
 		return new PrimalCocoon(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129088_typ_reg_sty_010.jpg";
-	}
 }
 
 class PrimalCocoonAbility1 extends TriggeredAbilityImpl<PrimalCocoonAbility1> {

@@ -64,11 +64,6 @@ public class RampagingBaloths extends CardImpl<RampagingBaloths> {
 		return new RampagingBaloths(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123726_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class RampagingBalothsToken extends Token {

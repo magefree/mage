@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class RiseFromTheGrave extends CardImpl<RiseFromTheGrave> {
 
-	private static FilterCreatureCard filter = new FilterCreatureCard();
+	private static final FilterCreatureCard filter = new FilterCreatureCard();
 
 	public RiseFromTheGrave(UUID ownerId) {
 		super(ownerId, 109, "Rise from the Grave", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
@@ -68,11 +68,6 @@ public class RiseFromTheGrave extends CardImpl<RiseFromTheGrave> {
 	@Override
 	public RiseFromTheGrave copy() {
 		return new RiseFromTheGrave(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "121611_typ_reg_sty_010.jpg";
 	}
 }
 

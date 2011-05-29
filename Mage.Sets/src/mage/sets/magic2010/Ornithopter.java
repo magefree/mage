@@ -42,11 +42,6 @@ public class Ornithopter extends mage.sets.tenth.Ornithopter {
 		this.expansionSetCode = "M10";
 	}
 
-	@Override
-	public String getArt() {
-		return "122159_typ_reg_sty_010.jpg";
-	}
-
 	public Ornithopter(final Ornithopter card) {
 		super(card);
 	}

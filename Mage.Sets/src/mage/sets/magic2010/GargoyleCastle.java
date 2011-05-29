@@ -65,11 +65,6 @@ public class GargoyleCastle extends CardImpl<GargoyleCastle> {
 		return new GargoyleCastle(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "122169_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class GargoyleCastleAbility extends ActivatedAbilityImpl<GargoyleCastleAbility> {

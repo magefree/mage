@@ -66,9 +66,4 @@ public class NantukoShade extends CardImpl<NantukoShade> {
 		return new NantukoShade(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "36461_typ_reg_sty_010.jpg";
-	}
-
 }

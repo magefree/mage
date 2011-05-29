@@ -251,7 +251,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 		else if (card.getCardTypes() != null && (card.getCardTypes().contains(CardType.CREATURE) || card.getCardTypes().contains(CardType.PLANESWALKER))) {
 			sb.append("creature");
 		}
-		sb.append(card.getColor()).append(card.getArt()).append(card.getRarity()).append(card.getExpansionSetCode());
+		sb.append(card.getColor()).append(card.getRarity()).append(card.getExpansionSetCode());
 		return sb.toString();
 	}
 

@@ -72,11 +72,6 @@ public class FinestHour extends CardImpl<FinestHour> {
 		return new FinestHour(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121018_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class FinestHourAbility extends TriggeredAbilityImpl<FinestHourAbility> {

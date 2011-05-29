@@ -73,16 +73,11 @@ public class SunTitan extends CardImpl<SunTitan> {
 		return new SunTitan(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129119_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class SunTitanAbility extends TriggeredAbilityImpl<SunTitanAbility> {
 
-	private static FilterCard filter = new FilterCard("permanent card with converted mana cost 3 or less");
+	private static final FilterCard filter = new FilterCard("permanent card with converted mana cost 3 or less");
 
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);

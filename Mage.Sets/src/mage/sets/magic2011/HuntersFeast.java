@@ -57,9 +57,4 @@ public class HuntersFeast extends CardImpl<HuntersFeast> {
 	public HuntersFeast copy() {
 		return new HuntersFeast(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129126_typ_reg_sty_010.jpg";
-	}
 }

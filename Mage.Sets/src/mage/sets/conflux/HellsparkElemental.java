@@ -70,9 +70,4 @@ public class HellsparkElemental extends CardImpl<HellsparkElemental> {
 		return new HellsparkElemental(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "118669_typ_reg_sty_010.jpg";
-	}
-
 }

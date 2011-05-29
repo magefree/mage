@@ -80,11 +80,6 @@ public class StormtideLeviathan extends CardImpl<StormtideLeviathan> {
 		return new StormtideLeviathan(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129118_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class StormtideLeviathanEffect extends ContinuousEffectImpl<StormtideLeviathanEffect> {

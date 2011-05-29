@@ -65,9 +65,4 @@ public class ScepterOfDominance extends CardImpl<ScepterOfDominance> {
         return new ScepterOfDominance(this);
     }
 
-    @Override
-    public String getArt() {
-        return "118668_typ_reg_sty_010.jpg";
-    }
-
 }

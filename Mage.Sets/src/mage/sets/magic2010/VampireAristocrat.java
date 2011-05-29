@@ -70,9 +70,4 @@ public class VampireAristocrat extends CardImpl<VampireAristocrat> {
         return new VampireAristocrat(this);
     }
 
-    @Override
-    public String getArt() {
-        return "121635_typ_reg_sty_010.jpg";
-    }
-
 }

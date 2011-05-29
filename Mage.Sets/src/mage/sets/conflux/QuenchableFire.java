@@ -70,11 +70,6 @@ public class QuenchableFire extends CardImpl<QuenchableFire> {
 	public QuenchableFire copy() {
 		return new QuenchableFire(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "118698_typ_reg_sty_010.jpg";
-	}
 }
 
 class QuenchableFireEffect extends OneShotEffect<QuenchableFireEffect> {

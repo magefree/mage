@@ -62,9 +62,4 @@ public class GriffinSentinel extends CardImpl<GriffinSentinel> {
         return new GriffinSentinel(this);
     }
 
-    @Override
-    public String getArt() {
-        return "121597_typ_reg_sty_010.jpg";
-    }
-
 }

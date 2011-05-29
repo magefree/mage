@@ -63,9 +63,4 @@ public class KathariScreecher extends CardImpl<KathariScreecher> {
     public KathariScreecher copy() {
         return new KathariScreecher(this);
     }
-
-    @Override
-    public String getArt() {
-        return "";
-    }
 }

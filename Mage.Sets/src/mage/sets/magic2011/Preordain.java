@@ -57,9 +57,4 @@ public class Preordain extends CardImpl<Preordain> {
 	public Preordain copy() {
 		return new Preordain(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129109_typ_reg_sty_010.jpg";
-	}
 }

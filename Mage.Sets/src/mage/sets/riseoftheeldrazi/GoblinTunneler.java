@@ -80,9 +80,4 @@ public class GoblinTunneler extends CardImpl<GoblinTunneler> {
 		return new GoblinTunneler(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "127259_typ_reg_sty_010.jpg";
-	}
-
 }

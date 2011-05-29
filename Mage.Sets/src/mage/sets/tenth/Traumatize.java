@@ -63,11 +63,6 @@ public class Traumatize extends CardImpl<Traumatize> {
 	public Traumatize copy() {
 		return new Traumatize(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "33487_typ_reg_sty_010.jpg";
-	}
 }
 
 class TraumatizeEffect extends OneShotEffect<TraumatizeEffect> {

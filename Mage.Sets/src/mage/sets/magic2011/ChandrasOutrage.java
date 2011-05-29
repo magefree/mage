@@ -63,11 +63,6 @@ public class ChandrasOutrage extends CardImpl<ChandrasOutrage> {
 		return new ChandrasOutrage(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129156_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class ChandrasOutrageEffect extends OneShotEffect<ChandrasOutrageEffect> {

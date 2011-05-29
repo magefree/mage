@@ -64,9 +64,4 @@ public class AuguryOwl extends CardImpl<AuguryOwl> {
 		return new AuguryOwl(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129176_typ_reg_sty_010.jpg";
-	}
-
 }

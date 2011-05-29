@@ -80,11 +80,6 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 		return new ProteanHydra(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "122168_typ_reg_sty_010.jpg";
-	}
-
 	class ProteanHydraEffect1 extends OneShotEffect<ProteanHydraEffect1> {
 
 		public ProteanHydraEffect1() {

@@ -77,11 +77,6 @@ public class DryadsFavor extends CardImpl<DryadsFavor> {
 	public DryadsFavor copy() {
 		return new DryadsFavor(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129161_typ_reg_sty_010.jpg";
-	}
 }
 
 class DryadsFavorEffect extends ContinuousEffectImpl<DryadsFavorEffect> {

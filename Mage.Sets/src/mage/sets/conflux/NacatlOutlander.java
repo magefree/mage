@@ -41,11 +41,11 @@ import mage.filter.FilterCard;
  * @author Loki
  */
 public class NacatlOutlander extends CardImpl<NacatlOutlander> {
-    private static FilterCard filter = new FilterCard("blue");
+    private static final FilterCard filter = new FilterCard("blue");
 
     static {
     	filter.setUseColor(true);
-	filter.getColor().setBlue(true);
+    	filter.getColor().setBlue(true);
     }
 
     public NacatlOutlander(UUID ownerId) {
@@ -56,7 +56,7 @@ public class NacatlOutlander extends CardImpl<NacatlOutlander> {
         this.subtype.add("Cat");
         this.subtype.add("Scout");
         this.power = new MageInt(2);
-	this.toughness = new MageInt(2);
+    	this.toughness = new MageInt(2);
         this.addAbility(new ProtectionAbility(filter));
     }
 
@@ -67,11 +67,6 @@ public class NacatlOutlander extends CardImpl<NacatlOutlander> {
     @Override
     public NacatlOutlander copy() {
         return new NacatlOutlander(this);
-    }
-
-    @Override
-    public String getArt() {
-        return "118770_typ_reg_sty_010.jpg";
     }
 
 }

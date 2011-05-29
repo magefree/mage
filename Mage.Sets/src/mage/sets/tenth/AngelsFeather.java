@@ -61,11 +61,6 @@ public class AngelsFeather extends CardImpl<AngelsFeather> {
 		return new AngelsFeather(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "75223_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class AngelsFeatherAbility extends TriggeredAbilityImpl<AngelsFeatherAbility> {

@@ -66,9 +66,4 @@ public class LeylineOfVitality extends CardImpl<LeylineOfVitality> {
 		return new LeylineOfVitality(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129120_typ_reg_sty_010.jpg";
-	}
-
 }

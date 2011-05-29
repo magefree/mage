@@ -61,9 +61,4 @@ public class Disentomb extends CardImpl<Disentomb> {
 		return new Disentomb(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121633_typ_reg_sty_010.jpg";
-	}
-
 }

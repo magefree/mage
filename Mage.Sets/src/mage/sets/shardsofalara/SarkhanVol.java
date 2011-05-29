@@ -90,9 +90,4 @@ public class SarkhanVol extends CardImpl<SarkhanVol> {
 	public SarkhanVol copy() {
 		return new SarkhanVol(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "115056_typ_reg_sty_010.jpg";
-	}
 }

@@ -74,11 +74,6 @@ public class VengefulArchon extends CardImpl<VengefulArchon> {
 		return new VengefulArchon(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129192_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class VengefulArchonEffect extends PreventionEffectImpl<VengefulArchonEffect> {

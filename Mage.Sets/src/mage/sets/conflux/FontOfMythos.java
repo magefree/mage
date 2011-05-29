@@ -62,11 +62,6 @@ public class FontOfMythos extends CardImpl<FontOfMythos> {
 		return new FontOfMythos(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "119800_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class FontOfMythosAbility extends TriggeredAbilityImpl<FontOfMythosAbility> {

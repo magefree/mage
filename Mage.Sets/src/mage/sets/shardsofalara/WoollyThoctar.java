@@ -60,9 +60,4 @@ public class WoollyThoctar extends CardImpl<WoollyThoctar> {
 		return new WoollyThoctar(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "117002_typ_reg_sty_010.jpg";
-	}
-
 }

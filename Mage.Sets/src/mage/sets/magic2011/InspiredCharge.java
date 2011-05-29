@@ -56,9 +56,4 @@ public class InspiredCharge extends CardImpl<InspiredCharge> {
 	public InspiredCharge copy() {
 		return new InspiredCharge(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129157_typ_reg_sty_010.jpg";
-	}
 }

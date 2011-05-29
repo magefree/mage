@@ -63,9 +63,4 @@ public class TirelessMissionaries extends CardImpl<TirelessMissionaries> {
 		return new TirelessMissionaries(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129104_typ_reg_sty_010.jpg";
-	}
-
 }

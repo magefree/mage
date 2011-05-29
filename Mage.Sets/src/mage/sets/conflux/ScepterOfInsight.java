@@ -63,9 +63,4 @@ public class ScepterOfInsight extends CardImpl<ScepterOfInsight> {
         return new ScepterOfInsight(this);
     }
 
-    @Override
-    public String getArt() {
-        return "118760_typ_reg_sty_010.jpg";
-    }
-
 }

@@ -41,11 +41,6 @@ public class Forest3 extends mage.cards.basiclands.Forest {
 		this.expansionSetCode = "ROE";
 	}
 
-	@Override
-	public String getArt() {
-		return "127497_typ_reg_sty_010.jpg";
-	}
-
 	public Forest3(final Forest3 card) {
 		super(card);
 	}

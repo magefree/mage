@@ -65,9 +65,4 @@ public class LotusCobra extends CardImpl<LotusCobra> {
 		return new LotusCobra(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123641_typ_reg_sty_010.jpg";
-	}
-
 }

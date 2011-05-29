@@ -41,11 +41,6 @@ public class Plains2 extends mage.cards.basiclands.Plains {
 		this.expansionSetCode = "ZEN";
 	}
 
-	@Override
-	public String getArt() {
-		return "123760_typ_reg_sty_010.jpg";
-	}
-
 	public Plains2(final Plains2 card) {
 		super(card);
 	}

@@ -71,16 +71,11 @@ public class Cultivate extends CardImpl<Cultivate> {
 		return new Cultivate(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129089_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class CultivateEffect extends OneShotEffect<CultivateEffect> {
 
-	protected static FilterCard filter = new FilterCard("card to put on the battlefield tapped");
+	protected static final FilterCard filter = new FilterCard("card to put on the battlefield tapped");
 
 	public CultivateEffect() {
 		super(Outcome.PutLandInPlay);

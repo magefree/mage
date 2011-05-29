@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  */
 public class Naturalize extends CardImpl<Naturalize> {
 
-	private static FilterPermanent filter = new FilterPermanent("artifact or enchantment");
+	private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);
@@ -66,10 +66,5 @@ public class Naturalize extends CardImpl<Naturalize> {
 	@Override
 	public Naturalize copy() {
 		return new Naturalize(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "49669_typ_reg_sty_010.jpg";
 	}
 }

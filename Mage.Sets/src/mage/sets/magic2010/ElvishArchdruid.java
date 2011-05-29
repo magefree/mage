@@ -51,7 +51,7 @@ import mage.game.Game;
  */
 public class ElvishArchdruid extends CardImpl<ElvishArchdruid> {
 
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
 
 	static {
 		filter.getSubtype().add("Elf");
@@ -77,11 +77,6 @@ public class ElvishArchdruid extends CardImpl<ElvishArchdruid> {
 	@Override
 	public ElvishArchdruid copy() {
 		return new ElvishArchdruid(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "121692_typ_reg_sty_010.jpg";
 	}
 
 	class ElvishArchdruidAbility extends ManaAbility<ElvishArchdruidAbility> {

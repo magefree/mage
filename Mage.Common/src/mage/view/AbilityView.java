@@ -58,7 +58,6 @@ public class AbilityView extends CardView {
 		this.superTypes = new ArrayList<String>();
 		this.color = new ObjectColor();
 		this.manaCost = ability.getManaCosts().getSymbols();
-		this.art = "";
 	}
 
 	public CardView getSourceCard() {

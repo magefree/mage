@@ -45,6 +45,13 @@ import mage.filter.common.FilterCreaturePermanent;
  * @author BetaSteward_at_googlemail.com
  */
 public class BaneslayerAngel extends CardImpl<BaneslayerAngel> {
+    private static final FilterPermanent filter1 = new FilterCreaturePermanent("Demon");
+    private static final FilterPermanent filter2 = new FilterCreaturePermanent("Dragon");
+
+    static {
+        filter1.getSubtype().add("Demon");
+        filter2.getSubtype().add("Dragon");
+    }
 
 	public BaneslayerAngel(UUID ownerId) {
 		super(ownerId, 4, "Baneslayer Angel", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
@@ -57,11 +64,7 @@ public class BaneslayerAngel extends CardImpl<BaneslayerAngel> {
 		this.addAbility(FlyingAbility.getInstance());
 		this.addAbility(FirstStrikeAbility.getInstance());
 		this.addAbility(LifelinkAbility.getInstance());
-		FilterPermanent filter1 = new FilterCreaturePermanent("Demon");
-		filter1.getSubtype().add("Demon");
 		this.addAbility(new ProtectionAbility(filter1));
-		FilterPermanent filter2 = new FilterCreaturePermanent("Dragon");
-		filter2.getSubtype().add("Dragon");
 		this.addAbility(new ProtectionAbility(filter2));
 	}
 
@@ -72,11 +75,6 @@ public class BaneslayerAngel extends CardImpl<BaneslayerAngel> {
 	@Override
 	public BaneslayerAngel copy() {
 		return new BaneslayerAngel(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "87090_typ_reg_sty_010.jpg";
 	}
 
 }

@@ -69,11 +69,6 @@ public class LeylineOfTheVoid extends CardImpl<LeylineOfTheVoid> {
 		return new LeylineOfTheVoid(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129103_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class LeylineOfTheVoidEffect extends ReplacementEffectImpl<LeylineOfTheVoidEffect> {

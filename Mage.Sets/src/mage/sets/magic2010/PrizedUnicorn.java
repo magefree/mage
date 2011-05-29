@@ -64,9 +64,4 @@ public class PrizedUnicorn extends CardImpl<PrizedUnicorn> {
 		return new PrizedUnicorn(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121572_typ_reg_sty_010.jpg";
-	}
-
 }

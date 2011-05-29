@@ -61,9 +61,4 @@ public class MightyLeap extends CardImpl<MightyLeap> {
 	public MightyLeap copy() {
 		return new MightyLeap(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129186_typ_reg_sty_010.jpg";
-	}
 }

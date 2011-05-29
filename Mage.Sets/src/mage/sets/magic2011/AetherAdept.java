@@ -67,9 +67,4 @@ public class AetherAdept extends CardImpl<AetherAdept> {
 		return new AetherAdept(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129110_typ_reg_sty_010.jpg";
-	}
-
 }

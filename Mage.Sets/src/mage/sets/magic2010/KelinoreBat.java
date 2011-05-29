@@ -60,9 +60,4 @@ public class KelinoreBat extends CardImpl<KelinoreBat> {
         return new KelinoreBat(this);
     }
 
-    @Override
-    public String getArt() {
-        return "121619_typ_reg_sty_010.jpg";
-    }
-
 }

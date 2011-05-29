@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Combust extends CardImpl<Combust> {
 
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("white or blue creature");
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white or blue creature");
 
 	static {
 		filter.getColor().setWhite(true);
@@ -71,11 +71,6 @@ public class Combust extends CardImpl<Combust> {
 	@Override
 	public Combust copy() {
 		return new Combust(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "129101_typ_reg_sty_010.jpg";
 	}
 
 }

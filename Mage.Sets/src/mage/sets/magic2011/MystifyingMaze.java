@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MystifyingMaze extends CardImpl<MystifyingMaze> {
 
-	private static FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature an opponent controls");
+	private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature an opponent controls");
 
 	static {
 		filter.setTargetController(TargetController.OPPONENT);
@@ -79,11 +79,6 @@ public class MystifyingMaze extends CardImpl<MystifyingMaze> {
 	@Override
 	public MystifyingMaze copy() {
 		return new MystifyingMaze(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "129073_typ_reg_sty_010.jpg";
 	}
 }
 

@@ -75,11 +75,6 @@ public class SerraAscendant extends CardImpl<SerraAscendant> {
 		return new SerraAscendant(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129083_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class SerraAscendantEffect extends ContinuousEffectImpl<SerraAscendantEffect> {

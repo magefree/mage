@@ -63,11 +63,6 @@ public class TukatongueThallid extends CardImpl<TukatongueThallid> {
         return new TukatongueThallid(this);
     }
 
-    @Override
-    public String getArt() {
-        return "118766_typ_reg_sty_010.jpg";
-    }
-
     private class SaprolingToken extends Token {
         public SaprolingToken() {
             super("Saproling", "1/1 green Saproling creature tokens");

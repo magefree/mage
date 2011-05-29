@@ -46,7 +46,7 @@ import mage.filter.FilterStackObject;
  */
 public class SacredWolf extends CardImpl<SacredWolf> {
 
-	private static FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
+	private static final FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
 
 	static {
 		filter.setTargetController(TargetController.OPPONENT);
@@ -69,11 +69,6 @@ public class SacredWolf extends CardImpl<SacredWolf> {
 	@Override
 	public SacredWolf copy() {
 		return new SacredWolf(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "129113_typ_reg_sty_010.jpg";
 	}
 
 }

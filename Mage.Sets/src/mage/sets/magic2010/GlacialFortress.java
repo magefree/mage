@@ -49,7 +49,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class GlacialFortress extends CardImpl<GlacialFortress> {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent();
+	private static final FilterLandPermanent filter = new FilterLandPermanent();
 
 	static {
 		filter.getSubtype().add("Plains");
@@ -76,10 +76,5 @@ public class GlacialFortress extends CardImpl<GlacialFortress> {
 	@Override
 	public GlacialFortress copy() {
 		return new GlacialFortress(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "121634_typ_reg_sty_010.jpg";
 	}
 }

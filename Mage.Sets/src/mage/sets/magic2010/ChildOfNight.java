@@ -61,9 +61,4 @@ public class ChildOfNight extends CardImpl<ChildOfNight> {
 		return new ChildOfNight(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "98590_typ_reg_sty_010.jpg";
-	}
-
 }

@@ -81,7 +81,6 @@ public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
 		permanent.getPower().setValue(card.getPower().getValue());
 		permanent.getToughness().setValue(card.getToughness().getValue());
 		//permanent.getLoyalty().setValue(card.getLoyalty().getValue());
-		permanent.setArt(card.getArt());
 		
 		return true;
 

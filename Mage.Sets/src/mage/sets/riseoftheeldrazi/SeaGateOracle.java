@@ -72,11 +72,6 @@ public class SeaGateOracle extends CardImpl<SeaGateOracle> {
 	public SeaGateOracle copy() {
 		return new SeaGateOracle(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "127435_typ_reg_sty_010.jpg";
-	}
 }
 
 class SeaGateOracleEffect extends OneShotEffect<SeaGateOracleEffect> {

@@ -69,10 +69,4 @@ public class BroodmateDragon extends CardImpl<BroodmateDragon> {
 		return new BroodmateDragon(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "116186_typ_reg_sty_010.jpg";
-	}
-
 }
-

@@ -68,11 +68,6 @@ public class BeastmasterAscension extends CardImpl<BeastmasterAscension> {
 		return new BeastmasterAscension(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "125085_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class BeastmasterAscensionAbility extends TriggeredAbilityImpl<BeastmasterAscensionAbility> {

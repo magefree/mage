@@ -55,10 +55,4 @@ public class VerdantCatacombs extends CardImpl<VerdantCatacombs> {
 		return new VerdantCatacombs(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123743_typ_reg_sty_010.jpg";
-	}
-
 }
-

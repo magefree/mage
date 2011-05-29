@@ -71,11 +71,6 @@ public class VengefulRebirth extends CardImpl<VengefulRebirth> {
 		return new VengefulRebirth(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "115104_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class VengefulRebirthEffect extends OneShotEffect<VengefulRebirthEffect> {

@@ -68,9 +68,4 @@ public class AntQueen extends CardImpl<AntQueen> {
 		return new AntQueen(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "122179_typ_reg_sty_010.jpg";
-	}
-
 }

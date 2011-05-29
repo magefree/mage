@@ -81,7 +81,6 @@ public interface Permanent extends Card {
 	public boolean sacrifice(UUID sourceId, Game game);
 	public void entersBattlefield(UUID sourceId, Game game);
 	public String getValue();
-	public void setArt(String art);
 
 	@Override
 	public void addAbility(Ability ability);

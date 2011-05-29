@@ -59,9 +59,4 @@ public class NetherHorror extends CardImpl<NetherHorror> {
 		return new NetherHorror(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129087_typ_reg_sty_010.jpg";
-	}
-
 }

@@ -55,10 +55,5 @@ public class ScaldingTarn extends CardImpl<ScaldingTarn> {
 		return new ScaldingTarn(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123672_typ_reg_sty_010.jpg";
-	}
-
 }
 

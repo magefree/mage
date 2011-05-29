@@ -37,7 +37,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -67,16 +66,11 @@ public class InquisitionOfKozilek extends CardImpl<InquisitionOfKozilek> {
 	public InquisitionOfKozilek copy() {
 		return new InquisitionOfKozilek(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "122154_typ_reg_sty_010.jpg";
-	}
 }
 
 class InquisitionOfKozilekEffect extends OneShotEffect<InquisitionOfKozilekEffect> {
 
-	private static FilterCard filter = new FilterCard("nonland card with converted mana cost 3 or less");
+	private static final FilterCard filter = new FilterCard("nonland card with converted mana cost 3 or less");
 
 	static {
 		filter.getNotCardType().add(CardType.LAND);

@@ -66,9 +66,4 @@ public class DarklitGargoyle extends CardImpl<DarklitGargoyle> {
         return new DarklitGargoyle(this);
     }
 
-    @Override
-    public String getArt() {
-        return "118733_typ_reg_sty_010.jpg";
-    }
-
 }

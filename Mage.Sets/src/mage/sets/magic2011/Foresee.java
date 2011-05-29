@@ -57,9 +57,4 @@ public class Foresee extends CardImpl<Foresee> {
 	public Foresee copy() {
 		return new Foresee(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "102404_typ_reg_sty_010.jpg";
-	}
 }

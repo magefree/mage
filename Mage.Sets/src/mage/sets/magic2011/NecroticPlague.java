@@ -85,11 +85,6 @@ public class NecroticPlague extends CardImpl<NecroticPlague> {
 	public NecroticPlague copy() {
 		return new NecroticPlague(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129168_typ_reg_sty_010.jpg";
-	}
 }
 
 class NecroticPlagueEffect extends ContinuousEffectImpl<NecroticPlagueEffect> {
@@ -145,7 +140,7 @@ class NecroticPlagueEffect extends ContinuousEffectImpl<NecroticPlagueEffect> {
 
 class NecroticPlagueEffect2 extends OneShotEffect<NecroticPlagueEffect2> {
 
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
 	static {
 		filter.setTargetController(TargetController.OPPONENT);

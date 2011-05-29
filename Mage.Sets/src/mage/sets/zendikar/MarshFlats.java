@@ -55,10 +55,4 @@ public class MarshFlats extends CardImpl<MarshFlats> {
 		return new MarshFlats(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123707_typ_reg_sty_010.jpg";
-	}
-
 }
-

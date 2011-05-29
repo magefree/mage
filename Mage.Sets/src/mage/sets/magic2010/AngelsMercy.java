@@ -55,9 +55,4 @@ public class AngelsMercy extends CardImpl<AngelsMercy> {
 	public AngelsMercy copy() {
 		return new AngelsMercy(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "121628_typ_reg_sty_010.jpg";
-	}
 }

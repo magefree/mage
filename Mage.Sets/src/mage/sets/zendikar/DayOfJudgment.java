@@ -57,9 +57,4 @@ public class DayOfJudgment extends CardImpl<DayOfJudgment> {
 		return new DayOfJudgment(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123645_typ_reg_sty_010.jpg";
-	}
-
 }

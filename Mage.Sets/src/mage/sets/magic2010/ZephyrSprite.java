@@ -60,9 +60,4 @@ public class ZephyrSprite extends CardImpl<ZephyrSprite> {
         return new ZephyrSprite(this);
     }
 
-    @Override
-    public String getArt() {
-        return "121594_typ_reg_sty_010.jpg";
-    }
-
 }

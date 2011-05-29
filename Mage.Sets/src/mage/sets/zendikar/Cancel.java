@@ -42,11 +42,6 @@ public class Cancel extends mage.sets.shardsofalara.Cancel {
 		this.expansionSetCode = "ZEN";
 	}
 
-	@Override
-	public String getArt() {
-		return "123652_typ_reg_sty_010.jpg";
-	}
-
 	public Cancel(final Cancel card) {
 		super(card);
 	}

@@ -66,11 +66,6 @@ public class Juggernaut extends CardImpl<Juggernaut> {
 		return new Juggernaut(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "50815_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class JuggernautAbility extends EvasionAbility<JuggernautAbility> {

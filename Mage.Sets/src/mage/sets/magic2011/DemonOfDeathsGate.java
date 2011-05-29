@@ -69,15 +69,10 @@ public class DemonOfDeathsGate extends CardImpl<DemonOfDeathsGate> {
 		return new DemonOfDeathsGate(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129162_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class DemonOfDeathsGateAlternativeCost extends AlternativeCost<DemonOfDeathsGateAlternativeCost> {
-	private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("black creature");
+	private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("black creature");
 
 	static {
 		filter.getColor().setBlack(true);

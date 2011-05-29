@@ -83,10 +83,5 @@ public class ChandraNalaar extends CardImpl<ChandraNalaar> {
 	public ChandraNalaar copy() {
 		return new ChandraNalaar(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "105500_typ_reg_sty_010.jpg";
-	}
 }
 

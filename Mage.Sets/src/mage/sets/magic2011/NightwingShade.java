@@ -67,9 +67,4 @@ public class NightwingShade extends CardImpl<NightwingShade> {
 		return new NightwingShade(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129167_typ_reg_sty_010.jpg";
-	}
-
 }

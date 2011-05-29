@@ -61,9 +61,4 @@ public class Overrun extends CardImpl<Overrun> {
 	public Overrun copy() {
 		return new Overrun(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "33280_typ_reg_sty_001.jpg";
-	}
 }

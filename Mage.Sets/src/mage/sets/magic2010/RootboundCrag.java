@@ -49,7 +49,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class RootboundCrag extends CardImpl<RootboundCrag> {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent();
+	private static final FilterLandPermanent filter = new FilterLandPermanent();
 
 	static {
 		filter.getSubtype().add("Mountain");
@@ -76,10 +76,5 @@ public class RootboundCrag extends CardImpl<RootboundCrag> {
 	@Override
 	public RootboundCrag copy() {
 		return new RootboundCrag(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "121648_typ_reg_sty_010.jpg";
 	}
 }

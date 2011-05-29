@@ -67,9 +67,4 @@ public class NobleHierarch extends CardImpl<NobleHierarch> {
 	public NobleHierarch copy() {
 		return new NobleHierarch(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "118694_typ_reg_sty_010.jpg";
-	}
 }

@@ -58,9 +58,4 @@ public class FlameSlash extends CardImpl<FlameSlash> {
 		return new FlameSlash(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "127404_typ_reg_sty_010.jpg";
-	}
-
 }

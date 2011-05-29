@@ -68,11 +68,6 @@ public class LilianasSpecter extends CardImpl<LilianasSpecter> {
 		return new LilianasSpecter(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129091_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class LilianasSpecterEffect extends OneShotEffect<LilianasSpecterEffect> {

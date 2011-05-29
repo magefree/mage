@@ -65,11 +65,6 @@ public class EmeriaAngel extends CardImpl<EmeriaAngel> {
 		return new EmeriaAngel(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123678_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class BirdToken extends Token {

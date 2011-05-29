@@ -41,11 +41,6 @@ public class Mountain2 extends mage.cards.basiclands.Mountain {
 		this.expansionSetCode = "10E";
 	}
 
-	@Override
-	public String getArt() {
-		return "08637_typ_reg_sty_010.jpg";
-	}
-
 	public Mountain2(final Mountain2 card) {
 		super(card);
 	}

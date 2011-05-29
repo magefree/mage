@@ -42,11 +42,6 @@ public class Juggernaut extends mage.sets.tenth.Juggernaut {
 		this.expansionSetCode = "M11";
 	}
 
-	@Override
-	public String getArt() {
-		return "129164_typ_reg_sty_010.jpg";
-	}
-
 	public Juggernaut(final Juggernaut card) {
 		super(card);
 	}

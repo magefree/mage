@@ -70,9 +70,4 @@ public class PestilentKathari extends CardImpl<PestilentKathari> {
         return new PestilentKathari(this);
     }
 
-    @Override
-    public String getArt() {
-        return "118710_typ_reg_sty_010.jpg";
-    }
-
 }

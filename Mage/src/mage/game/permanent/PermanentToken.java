@@ -96,14 +96,6 @@ public class PermanentToken extends PermanentImpl<PermanentToken> {
 		return false;
 	}
 
-	@Override
-	public String getArt() {
-		return "";
-	}
-
-	@Override
-	public void setArt(String art) { }
-
 	public Token getToken() {
 		return token;
 	}

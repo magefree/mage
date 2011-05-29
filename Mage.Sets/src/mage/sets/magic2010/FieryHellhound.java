@@ -66,9 +66,4 @@ public class FieryHellhound extends CardImpl<FieryHellhound> {
 		return new FieryHellhound(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121662_typ_reg_sty_010.jpg";
-	}
-
 }

@@ -64,9 +64,4 @@ public class RhoxWarMonk extends CardImpl<RhoxWarMonk> {
 		return new RhoxWarMonk(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "115055_typ_reg_sty_010.jpg";
-	}
-
 }

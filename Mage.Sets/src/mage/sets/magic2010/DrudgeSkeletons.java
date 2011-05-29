@@ -63,9 +63,4 @@ public class DrudgeSkeletons extends CardImpl<DrudgeSkeletons>{
         return new DrudgeSkeletons(this);
     }
 
-    @Override
-    public String getArt() {
-        return "122151_typ_reg_sty_010.jpg";
-    }
-
 }

@@ -93,11 +93,6 @@ public class JaceTheMindSculptor extends CardImpl<JaceTheMindSculptor> {
 		return new JaceTheMindSculptor(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "126493_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class JaceTheMindSculptorEffect1 extends OneShotEffect<JaceTheMindSculptorEffect1> {

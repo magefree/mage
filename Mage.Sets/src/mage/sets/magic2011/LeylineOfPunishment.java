@@ -67,11 +67,6 @@ public class LeylineOfPunishment extends CardImpl<LeylineOfPunishment> {
 		return new LeylineOfPunishment(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129108_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class LeylineOfPunishmentEffect1 extends ReplacementEffectImpl<LeylineOfPunishmentEffect1> {

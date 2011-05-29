@@ -32,7 +32,6 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.ObjectColor;
 import mage.abilities.effects.common.CantCounterControlledEffect;
 import mage.abilities.effects.common.CantTargetControlledEffect;
 import mage.cards.CardImpl;
@@ -47,9 +46,9 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class AutumnsVeil extends CardImpl<AutumnsVeil> {
 
-	private static FilterSpell filterTarget1 = new FilterSpell("spells you control");
-	private static FilterCreaturePermanent filterTarget2 = FilterCreaturePermanent.getDefault();
-	private static FilterStackObject filterSource = new FilterStackObject("blue or black spells");
+	private static final FilterSpell filterTarget1 = new FilterSpell("spells you control");
+	private static final FilterCreaturePermanent filterTarget2 = FilterCreaturePermanent.getDefault();
+	private static final FilterStackObject filterSource = new FilterStackObject("blue or black spells");
 
 	static {
 		filterSource.getColor().setBlue(true);
@@ -72,11 +71,6 @@ public class AutumnsVeil extends CardImpl<AutumnsVeil> {
 	@Override
 	public AutumnsVeil copy() {
 		return new AutumnsVeil(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "129140_typ_reg_sty_010.jpg";
 	}
 
 }

@@ -71,9 +71,4 @@ public class VectisAgents extends CardImpl<VectisAgents> {
         return new VectisAgents(this);
     }
 
-    @Override
-    public String getArt() {
-        return "118754_typ_reg_sty_010.jpg";
-    }
-
 }

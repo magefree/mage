@@ -36,7 +36,6 @@ import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterLandPermanent;
 
 /**
  *
@@ -44,7 +43,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class DestructiveForce extends CardImpl<DestructiveForce> {
 
-	private static FilterControlledPermanent filter = new FilterControlledPermanent("land");
+	private static final FilterControlledPermanent filter = new FilterControlledPermanent("land");
 
 	static {
 		filter.getCardType().add(CardType.LAND);
@@ -67,10 +66,4 @@ public class DestructiveForce extends CardImpl<DestructiveForce> {
 		return new DestructiveForce(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129135_typ_reg_sty_010.jpg";
-	}
-
 }
-

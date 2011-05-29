@@ -41,11 +41,6 @@ public class Plains1 extends mage.cards.basiclands.Plains {
 		this.expansionSetCode = "ROE";
 	}
 
-	@Override
-	public String getArt() {
-		return "127487_typ_reg_sty_010.jpg";
-	}
-
 	public Plains1(final Plains1 card) {
 		super(card);
 	}

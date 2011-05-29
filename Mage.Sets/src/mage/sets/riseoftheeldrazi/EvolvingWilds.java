@@ -62,11 +62,6 @@ public class EvolvingWilds extends CardImpl<EvolvingWilds> {
 		return new EvolvingWilds(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "127296_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class EvolvingWildsAbility extends ActivatedAbilityImpl<EvolvingWildsAbility> {

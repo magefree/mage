@@ -67,8 +67,4 @@ public class PutridLeech extends CardImpl<PutridLeech> {
 		return new PutridLeech(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "120997_typ_reg_sty_010.jpg";
-	}
 }

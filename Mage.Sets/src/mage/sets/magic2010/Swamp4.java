@@ -41,11 +41,6 @@ public class Swamp4 extends mage.cards.basiclands.Swamp {
 		this.expansionSetCode = "M10";
 	}
 
-	@Override
-	public String getArt() {
-		return "33214_typ_reg_sty_010.jpg";
-	}
-
 	public Swamp4(final Swamp4 card) {
 		super(card);
 	}

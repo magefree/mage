@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class SylvanRanger extends CardImpl<SylvanRanger> {
 
-	private static FilterBasicLandCard filter = new FilterBasicLandCard();
+	private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 
 	public SylvanRanger(UUID ownerId) {
 		super(ownerId, 198, "Sylvan Ranger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -68,10 +68,4 @@ public class SylvanRanger extends CardImpl<SylvanRanger> {
 		return new SylvanRanger(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "102617_typ_reg_sty_010.jpg";
-	}
-
 }
-

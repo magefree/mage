@@ -62,11 +62,6 @@ public class LilianasCaress extends CardImpl<LilianasCaress> {
 		return new LilianasCaress(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129124_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class LilianasCaressAbility extends TriggeredAbilityImpl<LilianasCaressAbility> {

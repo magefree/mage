@@ -58,9 +58,4 @@ public class MarbleChalice extends CardImpl<MarbleChalice> {
     public MarbleChalice copy() {
         return new MarbleChalice(this);
     }
-
-    @Override
-    public String getArt() {
-        return "";
-    }
 }

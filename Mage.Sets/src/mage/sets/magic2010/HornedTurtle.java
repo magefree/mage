@@ -58,9 +58,4 @@ public class HornedTurtle extends CardImpl<HornedTurtle>{
         return new HornedTurtle(this);
     }
 
-    @Override
-    public String getArt() {
-        return "03032_typ_reg_sty_010.jpg";
-    }
-
 }

@@ -73,11 +73,6 @@ public class ElixirOfImmortality extends CardImpl<ElixirOfImmortality> {
 		return new ElixirOfImmortality(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129148_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class ElixerOfImmortalityEffect extends OneShotEffect<ElixerOfImmortalityEffect> {

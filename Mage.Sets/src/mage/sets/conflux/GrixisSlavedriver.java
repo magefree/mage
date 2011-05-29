@@ -66,9 +66,4 @@ public class GrixisSlavedriver extends CardImpl<GrixisSlavedriver> {
         return new GrixisSlavedriver(this);
     }
 
-    @Override
-    public String getArt() {
-        return "118660_typ_reg_sty_010.jpg";
-    }
-
 }

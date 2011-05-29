@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  */
 public class WarPriestOfThune extends CardImpl<WarPriestOfThune> {
 
-	private static FilterPermanent filter = new FilterPermanent("enchantment");
+	private static final FilterPermanent filter = new FilterPermanent("enchantment");
 
 	static {
 		filter.getCardType().add(CardType.ENCHANTMENT);
@@ -77,11 +77,6 @@ public class WarPriestOfThune extends CardImpl<WarPriestOfThune> {
 	@Override
 	public WarPriestOfThune copy() {
 		return new WarPriestOfThune(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "129182_typ_reg_sty_010.jpg";
 	}
 
 }

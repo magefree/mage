@@ -69,11 +69,6 @@ public class ChandrasSpitfire extends CardImpl<ChandrasSpitfire> {
 		return new ChandrasSpitfire(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129115_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class ChandrasSpitfireAbility extends TriggeredAbilityImpl<ChandrasSpitfireAbility> {

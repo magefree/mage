@@ -70,11 +70,6 @@ public class SorcerersStrongbox extends CardImpl<SorcerersStrongbox> {
 		return new SorcerersStrongbox(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129154_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class SorcerersStrongboxEffect extends OneShotEffect<SorcerersStrongboxEffect> {

@@ -61,11 +61,6 @@ public class WurmsTooth extends CardImpl<WurmsTooth> {
 		return new WurmsTooth(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "75222_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class WurmsToothAbility extends TriggeredAbilityImpl<WurmsToothAbility> {

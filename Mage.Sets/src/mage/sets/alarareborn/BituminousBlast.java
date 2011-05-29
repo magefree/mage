@@ -62,9 +62,4 @@ public class BituminousBlast extends CardImpl<BituminousBlast> {
 		return new BituminousBlast(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121045_typ_reg_sty_010.jpg";
-	}
-
 }

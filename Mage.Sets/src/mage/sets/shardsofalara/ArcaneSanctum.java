@@ -60,9 +60,4 @@ public class ArcaneSanctum extends CardImpl<ArcaneSanctum> {
     public ArcaneSanctum copy() {
         return new ArcaneSanctum(this);
     }
-
-    @Override
-    public String getArt() {
-        return "";
-    }
 }

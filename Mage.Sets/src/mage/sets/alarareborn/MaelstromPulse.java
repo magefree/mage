@@ -60,9 +60,4 @@ public class MaelstromPulse extends CardImpl<MaelstromPulse> {
 		return new MaelstromPulse(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121021_typ_reg_sty_010.jpg";
-	}
-
 }

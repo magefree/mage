@@ -61,9 +61,4 @@ public class GiantSpider extends CardImpl<GiantSpider> {
 		return new GiantSpider(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "6654_typ_reg_sty_010.jpg";
-	}
-
 }

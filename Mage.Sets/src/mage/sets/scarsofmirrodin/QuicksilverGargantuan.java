@@ -107,8 +107,6 @@ public class QuicksilverGargantuan extends CardImpl<QuicksilverGargantuan> {
 			for (Ability ability : card.getAbilities()) {
 				permanent.addAbility(ability);
 			}
-			//permanent.getLoyalty().setValue(card.getLoyalty().getValue());
-			permanent.setArt(card.getArt());
 
 			return true;
 		}

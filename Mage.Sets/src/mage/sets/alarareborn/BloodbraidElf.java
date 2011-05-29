@@ -65,8 +65,4 @@ public class BloodbraidElf extends CardImpl<BloodbraidElf> {
 		return new BloodbraidElf(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121042_typ_reg_sty_010.jpg";
-	}
 }

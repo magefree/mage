@@ -64,9 +64,4 @@ public class Kranioceros extends CardImpl<Kranioceros> {
     public Kranioceros copy() {
         return new Kranioceros(this);
     }
-
-    @Override
-    public String getArt() {
-        return "118681_typ_reg_sty_010.jpg";
-    }
 }

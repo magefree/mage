@@ -44,6 +44,15 @@ import mage.filter.FilterCard;
  * @author BetaSteward_at_googlemail.com
  */
 public class GreatSableStag extends CardImpl<GreatSableStag> {
+    private static final FilterCard filter1 = new FilterCard("Blue");
+    private static final FilterCard filter2 = new FilterCard("Black");
+
+    static {
+        filter1.setUseColor(true);
+        filter1.getColor().setBlue(true);
+        filter2.setUseColor(true);
+        filter2.getColor().setBlack(true);
+    }
 
 	public GreatSableStag(UUID ownerId) {
 		super(ownerId, 186, "Great Sable Stag", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
@@ -53,13 +62,7 @@ public class GreatSableStag extends CardImpl<GreatSableStag> {
 		this.power = new MageInt(3);
 		this.toughness = new MageInt(3);
 
-		FilterCard filter1 = new FilterCard("Blue");
-		filter1.setUseColor(true);
-		filter1.getColor().setBlue(true);
 		this.addAbility(new ProtectionAbility(filter1));
-		FilterCard filter2 = new FilterCard("Black");
-		filter2.setUseColor(true);
-		filter2.getColor().setBlack(true);
 		this.addAbility(new ProtectionAbility(filter2));
 		this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterSourceEffect()));
 	}
@@ -71,11 +74,6 @@ public class GreatSableStag extends CardImpl<GreatSableStag> {
 	@Override
 	public GreatSableStag copy() {
 		return new GreatSableStag(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "122172_typ_reg_sty_010.jpg";
 	}
 
 }

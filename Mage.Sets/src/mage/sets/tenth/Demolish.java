@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  */
 public class Demolish extends CardImpl<Demolish> {
 
-	private static FilterPermanent filter = new FilterPermanent("artifact or land");
+	private static final FilterPermanent filter = new FilterPermanent("artifact or land");
 
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);
@@ -66,11 +66,6 @@ public class Demolish extends CardImpl<Demolish> {
 	@Override
 	public Demolish copy() {
 		return new Demolish(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "33696_typ_reg_sty_010.jpg";
 	}
 
 }

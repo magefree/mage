@@ -80,11 +80,6 @@ public class SpreadingSeas extends CardImpl<SpreadingSeas> {
 	public SpreadingSeas copy() {
 		return new SpreadingSeas(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "123683_typ_reg_sty_010.jpg";
-	}
 }
 
 class SpreadingSeasEffect extends ContinuousEffectImpl<SpreadingSeasEffect> {

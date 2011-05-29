@@ -63,11 +63,6 @@ public class ConquerorsPledge extends CardImpl<ConquerorsPledge> {
 		return new ConquerorsPledge(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123781_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class KorSoldierToken extends Token {

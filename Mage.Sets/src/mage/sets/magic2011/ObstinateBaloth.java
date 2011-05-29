@@ -76,11 +76,6 @@ public class ObstinateBaloth extends CardImpl<ObstinateBaloth> {
 		return new ObstinateBaloth(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129158_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class ObstinateBalothEffect extends ReplacementEffectImpl<ObstinateBalothEffect> {

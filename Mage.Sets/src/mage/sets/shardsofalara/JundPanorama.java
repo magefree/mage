@@ -65,24 +65,21 @@ public class JundPanorama extends CardImpl<JundPanorama> {
 		return new JundPanorama(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "116191_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class JundPanoramaAbility extends ActivatedAbilityImpl<JundPanoramaAbility> {
 
+    private static final FilterCard filter = new FilterCard("Swamp, Mountain, or Forest");
+    static {
+        filter.getName().add("Swamp");
+        filter.getName().add("Mountain");
+        filter.getName().add("Forest");
+    }
 	public JundPanoramaAbility() {
 		super(Zone.BATTLEFIELD, null);
 		addCost(new TapSourceCost());
 		addCost(new GenericManaCost(1));
 		addCost(new SacrificeSourceCost());
-		FilterCard filter = new FilterCard("Swamp, Mountain, or Forest");
-		filter.getName().add("Swamp");
-		filter.getName().add("Mountain");
-		filter.getName().add("Forest");
 		TargetCardInLibrary target = new TargetCardInLibrary(filter);
 		addEffect(new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay));
 	}

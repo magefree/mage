@@ -74,11 +74,6 @@ public class Weakness extends CardImpl<Weakness> {
     public Weakness copy() {
         return new Weakness(this);
     }
-
-    @Override
-    public String getArt() {
-        return "02510_typ_reg_sty_010.jpg";
-    }
 }
 
 class WeaknessEffect extends ContinuousEffectImpl<WeaknessEffect> {

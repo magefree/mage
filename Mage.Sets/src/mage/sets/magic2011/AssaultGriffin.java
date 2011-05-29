@@ -61,10 +61,5 @@ public class AssaultGriffin extends CardImpl<AssaultGriffin> {
 		return new AssaultGriffin(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129194_typ_reg_sty_010.jpg";
-	}
-
 }
 

@@ -43,7 +43,7 @@ import mage.filter.FilterCard;
  */
 public class BlackKnight extends CardImpl<BlackKnight> {
 
-	private static FilterCard filter = new FilterCard("White");
+	private static final FilterCard filter = new FilterCard("White");
 
 	static {
 		filter.setUseColor(true);
@@ -70,11 +70,6 @@ public class BlackKnight extends CardImpl<BlackKnight> {
 	@Override
 	public BlackKnight copy() {
 		return new BlackKnight(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "121622_typ_reg_sty_010.jpg";
 	}
 
 }

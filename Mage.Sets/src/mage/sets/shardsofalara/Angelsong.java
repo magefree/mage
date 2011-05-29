@@ -60,9 +60,4 @@ public class Angelsong extends CardImpl<Angelsong> {
 		return new Angelsong(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "115068_typ_reg_sty_010.jpg";
-	}
-
 }

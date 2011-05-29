@@ -41,11 +41,11 @@ import mage.filter.FilterCard;
  * @author Loki
  */
 public class ZombieOutlander extends CardImpl<ZombieOutlander> {
-    private static FilterCard filter = new FilterCard("green");
+    private static final FilterCard filter = new FilterCard("green");
 
     static {
     	filter.setUseColor(true);
-	filter.getColor().setGreen(true);
+    	filter.getColor().setGreen(true);
     }
 
     public ZombieOutlander(UUID ownerId) {
@@ -56,7 +56,7 @@ public class ZombieOutlander extends CardImpl<ZombieOutlander> {
         this.subtype.add("Zombie");
         this.subtype.add("Scout");
         this.power = new MageInt(2);
-	this.toughness = new MageInt(2);
+    	this.toughness = new MageInt(2);
         this.addAbility(new ProtectionAbility(filter));
     }
 
@@ -67,11 +67,6 @@ public class ZombieOutlander extends CardImpl<ZombieOutlander> {
     @Override
     public ZombieOutlander copy() {
         return new ZombieOutlander(this);
-    }
-
-    @Override
-    public String getArt() {
-        return "118769_typ_reg_sty_010.jpg";
     }
 
 }

@@ -63,11 +63,6 @@ public class MitoticSlime extends CardImpl<MitoticSlime> {
 		return new MitoticSlime(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129121_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class Ooze2Token extends Token {

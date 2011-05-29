@@ -61,9 +61,4 @@ public class EsperCormorants extends CardImpl<EsperCormorants> {
         return new EsperCormorants(this);
     }
 
-    @Override
-    public String getArt() {
-        return "118756_typ_reg_sty_010.jpg";
-    }
-
 }

@@ -68,9 +68,4 @@ public class WhispersilkCloak extends CardImpl<WhispersilkCloak> {
 		return new WhispersilkCloak(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "50223_typ_reg_sty_010.jpg";
-	}
-
 }

@@ -60,9 +60,4 @@ public class JacesErasure extends CardImpl<JacesErasure> {
 	public JacesErasure copy() {
 		return new JacesErasure(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "125788_typ_reg_sty_010.jpg";
-	}
 }

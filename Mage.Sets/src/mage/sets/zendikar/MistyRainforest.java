@@ -55,10 +55,4 @@ public class MistyRainforest extends CardImpl<MistyRainforest> {
 		return new MistyRainforest(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123689_typ_reg_sty_010.jpg";
-	}
-
 }
-

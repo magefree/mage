@@ -68,11 +68,6 @@ public class HowlingBanshee extends CardImpl<HowlingBanshee> {
 		return new HowlingBanshee(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121627_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class HowlingBansheeEffect extends OneShotEffect<HowlingBansheeEffect> {

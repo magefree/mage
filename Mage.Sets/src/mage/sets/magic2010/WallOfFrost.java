@@ -70,11 +70,6 @@ public class WallOfFrost extends CardImpl<WallOfFrost> {
 		return new WallOfFrost(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "121591_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class WallOfFrostAbility extends TriggeredAbilityImpl<WallOfFrostAbility> {

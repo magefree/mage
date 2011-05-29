@@ -70,11 +70,6 @@ public class GraveTitan extends CardImpl<GraveTitan> {
 		return new GraveTitan(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129102_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class GraveTitanAbility extends TriggeredAbilityImpl<GraveTitanAbility> {

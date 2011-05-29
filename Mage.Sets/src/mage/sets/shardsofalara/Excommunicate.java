@@ -57,9 +57,4 @@ public class Excommunicate extends CardImpl<Excommunicate> {
 	public Excommunicate copy() {
 		return new Excommunicate(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "117023_typ_reg_sty_010.jpg";
-	}
 }

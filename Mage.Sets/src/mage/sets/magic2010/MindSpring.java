@@ -60,11 +60,6 @@ public class MindSpring extends CardImpl<MindSpring> {
 		return new MindSpring(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "109919_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class MindSpringEffect extends OneShotEffect<MindSpringEffect> {

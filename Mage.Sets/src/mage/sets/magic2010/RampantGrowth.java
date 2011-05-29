@@ -59,9 +59,4 @@ public class RampantGrowth extends CardImpl<RampantGrowth> {
 	public RampantGrowth copy() {
 		return new RampantGrowth(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "101061_typ_reg_sty_010.jpg";
-	}
 }

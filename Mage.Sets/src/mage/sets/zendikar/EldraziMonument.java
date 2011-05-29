@@ -75,11 +75,6 @@ public class EldraziMonument extends CardImpl<EldraziMonument> {
 		return new EldraziMonument(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123741_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class EldraziMonumentEffect extends OneShotEffect<EldraziMonumentEffect> {

@@ -68,9 +68,4 @@ public class Clone extends CardImpl<Clone> {
 		return new Clone(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "86939_typ_reg_sty_010.jpg";
-	}
-
 }

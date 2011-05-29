@@ -60,9 +60,4 @@ public class Ornithopter extends CardImpl<Ornithopter> {
 		return new Ornithopter(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "50214_typ_reg_sty_010.jpg";
-	}
-
 }

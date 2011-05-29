@@ -72,11 +72,6 @@ public class Vengevine extends CardImpl<Vengevine> {
 		return new Vengevine(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "127350_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class VengevineAbility extends TriggeredAbilityImpl<VengevineAbility> {

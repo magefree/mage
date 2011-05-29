@@ -55,9 +55,4 @@ public class AridMesa extends CardImpl<AridMesa> {
 		return new AridMesa(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123565_typ_reg_sty_010.jpg";
-	}
-
 }

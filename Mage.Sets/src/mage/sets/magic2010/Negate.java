@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  */
 public class Negate extends CardImpl<Negate> {
 
-	private static FilterSpell filter = new FilterSpell("noncreature spell");
+	private static final FilterSpell filter = new FilterSpell("noncreature spell");
 
 	static {
 		filter.getNotCardType().add(CardType.CREATURE);
@@ -63,11 +63,6 @@ public class Negate extends CardImpl<Negate> {
 	@Override
 	public Negate copy() {
 		return new Negate(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "109907_typ_reg_sty_010.jpg";
 	}
 
 }

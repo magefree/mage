@@ -66,11 +66,6 @@ public class Incite extends CardImpl<Incite> {
 	public Incite copy() {
 		return new Incite(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129134_typ_reg_sty_010.jpg";
-	}
 }
 
 class InciteEffect extends ContinuousEffectImpl<InciteEffect> {

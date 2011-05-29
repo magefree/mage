@@ -71,9 +71,4 @@ public class UnholyStrength extends CardImpl<UnholyStrength> {
     public UnholyStrength copy() {
         return new UnholyStrength(this);
     }
-
-    @Override
-    public String getArt() {
-        return "104535_typ_reg_sty_010.jpg";
-    }
 }

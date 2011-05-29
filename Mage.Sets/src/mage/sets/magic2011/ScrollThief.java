@@ -63,9 +63,4 @@ public class ScrollThief extends CardImpl<ScrollThief> {
 		return new ScrollThief(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129096_typ_reg_sty_010.jpg";
-	}
-
 }

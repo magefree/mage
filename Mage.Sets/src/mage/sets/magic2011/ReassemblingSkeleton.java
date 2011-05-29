@@ -65,9 +65,4 @@ public class ReassemblingSkeleton extends CardImpl<ReassemblingSkeleton> {
 		return new ReassemblingSkeleton(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129152_typ_reg_sty_010.jpg";
-	}
-
 }

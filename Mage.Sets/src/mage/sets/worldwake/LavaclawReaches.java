@@ -68,11 +68,6 @@ public class LavaclawReaches extends CardImpl<LavaclawReaches> {
 		return new LavaclawReaches(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "126532_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class LavaclawReachesToken extends Token {

@@ -70,9 +70,4 @@ public class BirdsOfParadise extends CardImpl<BirdsOfParadise> {
 		return new BirdsOfParadise(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "88690_typ_reg_sty_010.jpg";
-	}
-
 }

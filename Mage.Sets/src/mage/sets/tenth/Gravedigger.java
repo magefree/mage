@@ -67,9 +67,4 @@ public class Gravedigger extends CardImpl<Gravedigger> {
 		return new Gravedigger(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "2972_typ_reg_sty_010.jpg";
-	}
-
 }

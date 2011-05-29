@@ -61,10 +61,4 @@ public class AzureDrake extends CardImpl<AzureDrake> {
 		return new AzureDrake(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "02311_typ_reg_sty_010.jpg";
-	}
-
 }
-

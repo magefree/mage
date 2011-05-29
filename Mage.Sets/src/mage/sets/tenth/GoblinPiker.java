@@ -60,9 +60,4 @@ public class GoblinPiker extends CardImpl<GoblinPiker> {
 		return new GoblinPiker(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "4588_typ_reg_sty_010.jpg";
-	}
-
 }

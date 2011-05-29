@@ -59,9 +59,4 @@ public class SignInBlood extends CardImpl<SignInBlood> {
 	public SignInBlood copy() {
 		return new SignInBlood(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "121620_typ_reg_sty_010.jpg";
-	}
 }

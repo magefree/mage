@@ -43,7 +43,6 @@ import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
 import mage.players.Player;
 
 /**
@@ -71,11 +70,6 @@ public class GoblinGuide extends CardImpl<GoblinGuide> {
 	@Override
 	public GoblinGuide copy() {
 		return new GoblinGuide(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "123540_typ_reg_sty_010.jpg";
 	}
 
 }

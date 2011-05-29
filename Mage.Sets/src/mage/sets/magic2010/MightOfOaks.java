@@ -58,9 +58,4 @@ public class MightOfOaks extends CardImpl<MightOfOaks> {
 	public MightOfOaks copy() {
 		return new MightOfOaks(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "102958_typ_reg_sty_010.jpg";
-	}
 }

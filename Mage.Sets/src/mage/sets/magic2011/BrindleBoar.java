@@ -64,9 +64,4 @@ public class BrindleBoar extends CardImpl<BrindleBoar> {
 		return new BrindleBoar(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129128_typ_reg_sty_010.jpg";
-	}
-
 }

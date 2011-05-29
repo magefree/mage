@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Deprive extends CardImpl<Deprive> {
 
-	private static FilterControlledPermanent filter = new FilterControlledPermanent("land");
+	private static final FilterControlledPermanent filter = new FilterControlledPermanent("land");
 
 	static {
 		filter.getCardType().add(CardType.LAND);
@@ -68,11 +68,6 @@ public class Deprive extends CardImpl<Deprive> {
 	@Override
 	public Deprive copy() {
 		return new Deprive(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "127324_typ_reg_sty_010.jpg";
 	}
 
 }

@@ -64,9 +64,4 @@ public class CloudElemental extends CardImpl<CloudElemental> {
     public CloudElemental copy() {
         return new CloudElemental(this);
     }
-
-    @Override
-    public String getArt() {
-        return "104536_typ_reg_sty_010.jpg";
-    }
 }

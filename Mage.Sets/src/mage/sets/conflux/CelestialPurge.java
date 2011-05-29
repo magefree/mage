@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  */
 public class CelestialPurge extends CardImpl<CelestialPurge> {
 
-	private static FilterPermanent filter = new FilterPermanent("black or red permanent");
+	private static final FilterPermanent filter = new FilterPermanent("black or red permanent");
 
 	static {
 		filter.setUseColor(true);
@@ -69,11 +69,6 @@ public class CelestialPurge extends CardImpl<CelestialPurge> {
 	@Override
 	public CelestialPurge copy() {
 		return new CelestialPurge(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "118751_typ_reg_sty_010.jpg";
 	}
 
 }

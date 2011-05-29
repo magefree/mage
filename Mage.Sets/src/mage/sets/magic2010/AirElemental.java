@@ -60,9 +60,4 @@ public class AirElemental extends CardImpl<AirElemental> {
 		return new AirElemental(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "101044_typ_reg_sty_010.jpg";
-	}
-
 }

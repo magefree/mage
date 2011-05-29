@@ -41,11 +41,6 @@ public class Plains3 extends mage.cards.basiclands.Plains {
 		this.expansionSetCode = "M11";
 	}
 
-	@Override
-	public String getArt() {
-		return "106213_typ_reg_sty_010.jpg";
-	}
-
 	public Plains3(final Plains3 card) {
 		super(card);
 	}

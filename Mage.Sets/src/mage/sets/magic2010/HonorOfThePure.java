@@ -44,7 +44,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class HonorOfThePure extends CardImpl<HonorOfThePure> {
 
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("White creatures");
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("White creatures");
 
 	static {
 		filter.setUseColor(true);
@@ -65,11 +65,6 @@ public class HonorOfThePure extends CardImpl<HonorOfThePure> {
 	@Override
 	public HonorOfThePure copy() {
 		return new HonorOfThePure(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "102628_typ_reg_sty_010.jpg";
 	}
 
 }

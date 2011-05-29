@@ -45,8 +45,8 @@ import mage.filter.FilterPermanent;
  */
 public class WildNacatl extends CardImpl<WildNacatl> {
 
-	private static FilterPermanent filter1 = new FilterPermanent("Mountain");
-	private static FilterPermanent filter2 = new FilterPermanent("Plains");
+	private static final FilterPermanent filter1 = new FilterPermanent("Mountain");
+	private static final FilterPermanent filter2 = new FilterPermanent("Plains");
 
 	static {
 		filter1.getSubtype().add("Mountain");
@@ -74,10 +74,5 @@ public class WildNacatl extends CardImpl<WildNacatl> {
 	@Override
 	public WildNacatl copy() {
 		return new WildNacatl(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "115062_typ_reg_sty_010.jpg";
 	}
 }

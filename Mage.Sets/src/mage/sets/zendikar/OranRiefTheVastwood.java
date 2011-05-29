@@ -69,11 +69,6 @@ public class OranRiefTheVastwood extends CardImpl<OranRiefTheVastwood> {
 		return new OranRiefTheVastwood(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123692_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class OranRiefTheVastwoodEffect extends OneShotEffect<OranRiefTheVastwoodEffect> {

@@ -61,11 +61,6 @@ public class TimeReversal extends CardImpl<TimeReversal> {
 	public TimeReversal copy() {
 		return new TimeReversal(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129112_typ_reg_sty_010.jpg";
-	}
 }
 
 class TimeReversalEffect extends OneShotEffect<TimeReversalEffect> {

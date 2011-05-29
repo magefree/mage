@@ -60,9 +60,4 @@ public class Terminate extends CardImpl<Terminate> {
 		return new Terminate(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "115230_typ_reg_sty_010.jpg";
-	}
-
 }

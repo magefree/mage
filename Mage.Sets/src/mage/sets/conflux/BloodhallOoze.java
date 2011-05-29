@@ -69,11 +69,6 @@ public class BloodhallOoze extends CardImpl<BloodhallOoze> {
         return new BloodhallOoze(this);
     }
 
-    @Override
-    public String getArt() {
-        return "118658_typ_reg_sty_010.jpg";
-    }
-
 }
 
 class BloodhallOozeTriggeredAbility1 extends TriggeredAbilityImpl<BloodhallOozeTriggeredAbility1> {
@@ -119,7 +114,7 @@ class BloodhallOozeTriggeredAbility1 extends TriggeredAbilityImpl<BloodhallOozeT
 
 class BloodhallOozeTriggeredAbility2 extends TriggeredAbilityImpl<BloodhallOozeTriggeredAbility2> {
 
-    private static FilterControlledPermanent filter = new FilterControlledPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     static {
         filter.getColor().setGreen(true);

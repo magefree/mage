@@ -62,11 +62,6 @@ public class TimeWarp extends CardImpl<TimeWarp> {
 		return new TimeWarp(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "122160_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class TimeWarpEffect extends OneShotEffect<TimeWarpEffect> {

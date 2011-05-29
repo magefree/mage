@@ -64,9 +64,4 @@ public class IntoTheRoil extends CardImpl<IntoTheRoil> {
 		return new IntoTheRoil(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123560_typ_reg_sty_010.jpg";
-	}
-
 }

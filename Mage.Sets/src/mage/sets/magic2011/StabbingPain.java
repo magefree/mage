@@ -60,9 +60,4 @@ public class StabbingPain extends CardImpl<StabbingPain> {
 	public StabbingPain copy() {
 		return new StabbingPain(this);
 	}
-
-	@Override
-	public String getArt() {
-		return "129137_typ_reg_sty_010.jpg";
-	}
 }

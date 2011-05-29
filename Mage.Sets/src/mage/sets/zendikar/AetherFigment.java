@@ -73,9 +73,4 @@ public class AetherFigment extends CardImpl<AetherFigment> {
 		return new AetherFigment(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "102621_typ_reg_sty_010.jpg";
-	}
-
 }

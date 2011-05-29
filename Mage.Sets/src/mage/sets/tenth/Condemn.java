@@ -66,11 +66,6 @@ public class Condemn extends CardImpl<Condemn> {
 		return new Condemn(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "94551_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class CondemnEffect extends OneShotEffect<CondemnEffect> {

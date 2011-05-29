@@ -46,7 +46,7 @@ import mage.filter.FilterStackObject;
  */
 public class LeylineOfSanctity extends CardImpl<LeylineOfSanctity> {
 
-	private static FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
+	private static final FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
 
 	static {
 		filter.setTargetController(TargetController.OPPONENT);
@@ -67,11 +67,6 @@ public class LeylineOfSanctity extends CardImpl<LeylineOfSanctity> {
 	@Override
 	public LeylineOfSanctity copy() {
 		return new LeylineOfSanctity(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "129086_typ_reg_sty_010.jpg";
 	}
 
 }

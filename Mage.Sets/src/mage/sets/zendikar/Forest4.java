@@ -41,11 +41,6 @@ public class Forest4 extends mage.cards.basiclands.Forest {
 		this.expansionSetCode = "ZEN";
 	}
 
-	@Override
-	public String getArt() {
-		return "123768_typ_reg_sty_010.jpg";
-	}
-
 	public Forest4(final Forest4 card) {
 		super(card);
 	}

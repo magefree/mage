@@ -62,9 +62,4 @@ public class DeadlyRecluse extends CardImpl<DeadlyRecluse> {
         return new DeadlyRecluse(this);
     }
 
-    @Override
-    public String getArt() {
-        return "121590_typ_reg_sty_010.jpg";
-    }
-
 }

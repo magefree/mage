@@ -54,7 +54,7 @@ public class KnotvineMystic extends CardImpl<KnotvineMystic>{
         this.subtype.add("Elf");
         this.subtype.add("Druid");
         this.power = new MageInt(2);
-	this.toughness = new MageInt(2);
+        this.toughness = new MageInt(2);
         Ability ability = new KnotvineMysticManaAbility();
         ability.addCost(new ManaCostsImpl("{1}"));
         this.addAbility(ability);
@@ -69,28 +69,23 @@ public class KnotvineMystic extends CardImpl<KnotvineMystic>{
         return new KnotvineMystic(this);
     }
 
-    @Override
-    public String getArt() {
-        return "118723_typ_reg_sty_010.jpg";
+}
+
+class KnotvineMysticManaAbility extends BasicManaAbility<KnotvineMysticManaAbility> {
+
+    public KnotvineMysticManaAbility() {
+        super(new ManaEffect(new Mana(1, 1, 0, 1, 0, 0, 0)));
+        this.netMana.setGreen(1);
+        this.netMana.setRed(1);
+        this.netMana.setWhite(1);
     }
 
-    class KnotvineMysticManaAbility extends BasicManaAbility<KnotvineMysticManaAbility> {
+    public KnotvineMysticManaAbility(final KnotvineMysticManaAbility ability) {
+        super(ability);
+    }
 
-        public KnotvineMysticManaAbility() {
-            super(new ManaEffect(new Mana(1, 1, 0, 1, 0, 0, 0)));
-            this.netMana.setGreen(1);
-            this.netMana.setRed(1);
-            this.netMana.setWhite(1);
-        }
-
-        public KnotvineMysticManaAbility(final KnotvineMysticManaAbility ability) {
-            super(ability);
-        }
-
-        @Override
-        public KnotvineMysticManaAbility copy() {
-            return new KnotvineMysticManaAbility(this);
-        }
-        
+    @Override
+    public KnotvineMysticManaAbility copy() {
+        return new KnotvineMysticManaAbility(this);
     }
 }

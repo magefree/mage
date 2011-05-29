@@ -66,11 +66,6 @@ public class AdventuringGear extends CardImpl<AdventuringGear> {
 		return new AdventuringGear(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "123577_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class AdventuringGearAbility extends LandfallAbility {

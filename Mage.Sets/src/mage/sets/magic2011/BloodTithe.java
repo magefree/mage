@@ -60,11 +60,6 @@ public class BloodTithe extends CardImpl<BloodTithe> {
 		return new BloodTithe(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129141_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class BloodTitheEffect extends OneShotEffect<BloodTitheEffect> {

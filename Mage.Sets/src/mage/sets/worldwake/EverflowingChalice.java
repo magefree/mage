@@ -72,11 +72,6 @@ public class EverflowingChalice extends CardImpl<EverflowingChalice> {
 		return new EverflowingChalice(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "126542_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class EverflowingChaliceAbility extends ManaAbility<EverflowingChaliceAbility> {

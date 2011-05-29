@@ -45,11 +45,11 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MoltenFrame extends CardImpl<MoltenFrame> {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
 
     static {
-	filter.getCardType().add(CardType.ARTIFACT);
-	filter.setScopeCardType(ComparisonScope.Any);
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(ComparisonScope.Any);
     }
 
     public MoltenFrame(UUID ownerId) {
@@ -68,11 +68,6 @@ public class MoltenFrame extends CardImpl<MoltenFrame> {
     @Override
     public MoltenFrame copy() {
         return new MoltenFrame(this);
-    }
-
-    @Override
-    public String getArt() {
-        return "118759_typ_reg_sty_010.jpg";
     }
 
 }

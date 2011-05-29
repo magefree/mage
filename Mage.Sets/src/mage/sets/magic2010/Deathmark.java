@@ -42,11 +42,6 @@ public class Deathmark extends mage.sets.tenth.Deathmark {
 		this.expansionSetCode = "M10";
 	}
 
-	@Override
-	public String getArt() {
-		return "122155_typ_reg_sty_010.jpg";
-	}
-
 	public Deathmark(final Deathmark card) {
 		super(card);
 	}

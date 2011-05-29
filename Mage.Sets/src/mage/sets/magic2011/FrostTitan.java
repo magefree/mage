@@ -73,11 +73,6 @@ public class FrostTitan extends CardImpl<FrostTitan> {
 		return new FrostTitan(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "129092_typ_reg_sty_010.jpg";
-	}
-
 }
 
 class FrostTitanAbility1 extends TriggeredAbilityImpl<FrostTitanAbility1> {

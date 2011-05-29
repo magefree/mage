@@ -46,7 +46,7 @@ import mage.filter.FilterPermanent;
  */
 public class SteelOverseer extends CardImpl<SteelOverseer> {
 
-	private static FilterPermanent filter = new FilterPermanent("artifact creature");
+	private static final FilterPermanent filter = new FilterPermanent("artifact creature");
 
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);
@@ -71,11 +71,6 @@ public class SteelOverseer extends CardImpl<SteelOverseer> {
 	@Override
 	public SteelOverseer copy() {
 		return new SteelOverseer(this);
-	}
-
-	@Override
-	public String getArt() {
-		return "129125_typ_reg_sty_010.jpg";
 	}
 
 }

@@ -77,9 +77,4 @@ public class JaceBeleren extends CardImpl<JaceBeleren> {
 		return new JaceBeleren(this);
 	}
 
-	@Override
-	public String getArt() {
-		return "105537_typ_reg_sty_010.jpg";
-	}
-
 }

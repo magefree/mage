@@ -41,11 +41,11 @@ import mage.filter.FilterCard;
  * @author Loki
  */
 public class ValeronOutlander extends CardImpl<ValeronOutlander> {
-    private static FilterCard filter = new FilterCard("black");
+    private static final FilterCard filter = new FilterCard("black");
 
     static {
     	filter.setUseColor(true);
-	filter.getColor().setBlack(true);
+    	filter.getColor().setBlack(true);
     }
 
     public ValeronOutlander(UUID ownerId) {
@@ -56,7 +56,7 @@ public class ValeronOutlander extends CardImpl<ValeronOutlander> {
         this.subtype.add("Human");
         this.subtype.add("Scout");
         this.power = new MageInt(2);
-	this.toughness = new MageInt(2);
+    	this.toughness = new MageInt(2);
         this.addAbility(new ProtectionAbility(filter));
     }
 
@@ -67,10 +67,5 @@ public class ValeronOutlander extends CardImpl<ValeronOutlander> {
     @Override
     public ValeronOutlander copy() {
         return new ValeronOutlander(this);
-    }
-
-    @Override
-    public String getArt() {
-        return "118774_typ_reg_sty_010.jpg";
     }
 }
