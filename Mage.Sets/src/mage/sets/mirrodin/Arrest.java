@@ -107,9 +107,11 @@ class ArrestEffect extends ReplacementEffectImpl<ArrestEffect> {
 		if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER || event.getType() == GameEvent.EventType.DECLARE_BLOCKER || event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
 			Permanent enchantment = game.getPermanent(source.getSourceId());
 			if (enchantment != null && enchantment.getAttachedTo() != null) {
-				if (event.getSourceId().equals(enchantment.getAttachedTo())) {
+				if ((event.getType() == GameEvent.EventType.DECLARE_ATTACKER || event.getType() == GameEvent.EventType.DECLARE_BLOCKER) && event.getSourceId().equals(enchantment.getAttachedTo())) {
 					return true;
-				}
+				} else if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY && event.getTargetId().equals(enchantment.getAttachedTo())) {
+                    return true;
+                }
 			}
 		}
 		return false;
