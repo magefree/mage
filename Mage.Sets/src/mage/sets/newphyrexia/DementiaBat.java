@@ -33,6 +33,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -56,6 +57,7 @@ public class DementiaBat extends CardImpl<DementiaBat> {
 
         this.addAbility(FlyingAbility.getInstance());
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(2), new ManaCostsImpl("{4}{B}"));
+        ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
