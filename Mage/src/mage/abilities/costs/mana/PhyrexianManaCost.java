@@ -31,12 +31,8 @@ package mage.abilities.costs.mana;
 import java.util.UUID;
 
 import mage.Constants.ColoredManaSymbol;
-import mage.abilities.SpecialAction;
-import mage.abilities.effects.common.DrawCardAllEffect;
-import mage.abilities.effects.common.RemoveSpecialActionEffect;
 import mage.game.Game;
 import mage.players.ManaPool;
-import mage.players.Player;
 
 /**
  * 

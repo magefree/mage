@@ -25,38 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.newphyrexia;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.ColoredManaSymbol;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.Constants.Zone;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.PhyrexianManaCost;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
-import mage.target.common.TargetNonlandPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author nantuko
+ * @author North
  */
-public class Disperse extends CardImpl<Disperse> {
+public class BlindingSouleater extends CardImpl<BlindingSouleater> {
 
-    public Disperse (UUID ownerId) {
-        super(ownerId, 31, "Disperse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "SOM";
-        this.color.setBlue(true);
+    public BlindingSouleater(UUID ownerId) {
+        super(ownerId, 131, "Blinding Souleater", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+        this.expansionSetCode = "NPH";
+        this.subtype.add("Cleric");
 
-		this.getSpellAbility().addTarget(new TargetNonlandPermanent());
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
+
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new TapTargetEffect(),
+                new PhyrexianManaCost(ColoredManaSymbol.W));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public Disperse (final Disperse card) {
+    public BlindingSouleater(final BlindingSouleater card) {
         super(card);
     }
 
     @Override
-    public Disperse copy() {
-        return new Disperse(this);
+    public BlindingSouleater copy() {
+        return new BlindingSouleater(this);
     }
-
 }

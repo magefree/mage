@@ -25,38 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.Constants.Zone;
+import mage.Mana;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
-import mage.target.common.TargetNonlandPermanent;
 
 /**
  *
- * @author nantuko
+ * @author North
  */
-public class Disperse extends CardImpl<Disperse> {
+public class DreamstoneHedron extends CardImpl<DreamstoneHedron> {
 
-    public Disperse (UUID ownerId) {
-        super(ownerId, 31, "Disperse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "SOM";
-        this.color.setBlue(true);
+    public DreamstoneHedron(UUID ownerId) {
+        super(ownerId, 216, "Dreamstone Hedron", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{6}");
+        this.expansionSetCode = "ROE";
 
-		this.getSpellAbility().addTarget(new TargetNonlandPermanent());
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ManaEffect(Mana.ColorlessMana(3)), new TapSourceCost()));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new DrawCardControllerEffect(3),
+                new GenericManaCost(3));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
+        this.addAbility(ability);
     }
 
-    public Disperse (final Disperse card) {
+    public DreamstoneHedron(final DreamstoneHedron card) {
         super(card);
     }
 
     @Override
-    public Disperse copy() {
-        return new Disperse(this);
+    public DreamstoneHedron copy() {
+        return new DreamstoneHedron(this);
     }
-
 }

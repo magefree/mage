@@ -25,38 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.Constants.Zone;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetNonlandPermanent;
 
 /**
  *
- * @author nantuko
+ * @author North
  */
-public class Disperse extends CardImpl<Disperse> {
+public class Magmaw extends CardImpl<Magmaw> {
 
-    public Disperse (UUID ownerId) {
-        super(ownerId, 31, "Disperse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "SOM";
-        this.color.setBlue(true);
+    public Magmaw(UUID ownerId) {
+        super(ownerId, 158, "Magmaw", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Elemental");
 
-		this.getSpellAbility().addTarget(new TargetNonlandPermanent());
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.color.setRed(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new GenericManaCost(1));
+        ability.addTarget(new TargetNonlandPermanent());
+        this.addAbility(ability);
     }
 
-    public Disperse (final Disperse card) {
+    public Magmaw(final Magmaw card) {
         super(card);
     }
 
     @Override
-    public Disperse copy() {
-        return new Disperse(this);
+    public Magmaw copy() {
+        return new Magmaw(this);
     }
-
 }

@@ -25,38 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.newphyrexia;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.Constants.Zone;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetNonlandPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author nantuko
+ * @author North
  */
-public class Disperse extends CardImpl<Disperse> {
+public class JorKadeenThePrevailer extends CardImpl<JorKadeenThePrevailer> {
 
-    public Disperse (UUID ownerId) {
-        super(ownerId, 31, "Disperse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "SOM";
-        this.color.setBlue(true);
+    private final String effectText = "Metalcraft - Creatures you control get +3/+0 as long as you control three or more artifacts.";
 
-		this.getSpellAbility().addTarget(new TargetNonlandPermanent());
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+    public JorKadeenThePrevailer(UUID ownerId) {
+        super(ownerId, 128, "Jor Kadeen, the Prevailer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");
+        this.expansionSetCode = "NPH";
+        this.subtype.add("Legendary");
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
+
+        this.color.setRed(true);
+        this.color.setWhite(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(4);
+
+        this.addAbility(FirstStrikeAbility.getInstance());
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(new BoostControlledEffect(3, 0, Duration.WhileOnBattlefield, FilterCreaturePermanent.getDefault(), true),
+                Metalcraft.getInstance(), effectText);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public Disperse (final Disperse card) {
+    public JorKadeenThePrevailer(final JorKadeenThePrevailer card) {
         super(card);
     }
 
     @Override
-    public Disperse copy() {
-        return new Disperse(this);
+    public JorKadeenThePrevailer copy() {
+        return new JorKadeenThePrevailer(this);
     }
-
 }

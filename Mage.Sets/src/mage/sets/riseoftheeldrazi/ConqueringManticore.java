@@ -25,38 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continious.GainControlTargetEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetNonlandPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author nantuko
+ * @author North
  */
-public class Disperse extends CardImpl<Disperse> {
+public class ConqueringManticore extends CardImpl<ConqueringManticore> {
 
-    public Disperse (UUID ownerId) {
-        super(ownerId, 31, "Disperse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "SOM";
-        this.color.setBlue(true);
+    public ConqueringManticore(UUID ownerId) {
+        super(ownerId, 139, "Conquering Manticore", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Manticore");
 
-		this.getSpellAbility().addTarget(new TargetNonlandPermanent());
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.color.setRed(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
+        
+        Ability ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn), false);
+        ability.addEffect(new UntapTargetEffect());
+        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public Disperse (final Disperse card) {
+    public ConqueringManticore(final ConqueringManticore card) {
         super(card);
     }
 
     @Override
-    public Disperse copy() {
-        return new Disperse(this);
+    public ConqueringManticore copy() {
+        return new ConqueringManticore(this);
     }
-
 }

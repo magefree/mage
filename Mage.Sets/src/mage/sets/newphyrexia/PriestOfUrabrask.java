@@ -25,38 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.newphyrexia;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.MageInt;
+import mage.Mana;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
-import mage.target.common.TargetNonlandPermanent;
 
 /**
  *
- * @author nantuko
+ * @author North
  */
-public class Disperse extends CardImpl<Disperse> {
+public class PriestOfUrabrask extends CardImpl<PriestOfUrabrask> {
 
-    public Disperse (UUID ownerId) {
-        super(ownerId, 31, "Disperse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "SOM";
-        this.color.setBlue(true);
+    public PriestOfUrabrask(UUID ownerId) {
+        super(ownerId, 90, "Priest of Urabrask", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "NPH";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
 
-		this.getSpellAbility().addTarget(new TargetNonlandPermanent());
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(Mana.RedMana(3))));
     }
 
-    public Disperse (final Disperse card) {
+    public PriestOfUrabrask(final PriestOfUrabrask card) {
         super(card);
     }
 
     @Override
-    public Disperse copy() {
-        return new Disperse(this);
+    public PriestOfUrabrask copy() {
+        return new PriestOfUrabrask(this);
     }
-
 }

@@ -38,13 +38,14 @@ import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.keyword.LevelAbility;
 import mage.abilities.keyword.LevelUpAbility;
-import mage.abilities.mana.BasicManaAbility;
 import mage.cards.LevelerCard;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -54,7 +55,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public class JoragaTreespeaker extends LevelerCard<JoragaTreespeaker> {
 
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("Elves");
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elves");
 
 	static {
 		filter.getSubtype().add("Elf");
@@ -65,16 +66,23 @@ public class JoragaTreespeaker extends LevelerCard<JoragaTreespeaker> {
 		this.expansionSetCode = "ROE";
 		this.subtype.add("Elf");
 		this.subtype.add("Druid");
+        
 		this.color.setGreen(true);
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
 
 		this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{G}")));
+        
 		Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
-		abilities1.add(new JoragaManaAbility());
+		abilities1.add(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ManaEffect(Mana.GreenMana(2)), new TapSourceCost()));
 		this.getLevels().add(new LevelAbility(1, 4, abilities1, 1, 2));
+        
 		Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
-		abilities2.add(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new JoragaManaAbility(), Duration.WhileOnBattlefield, filter)));
+        abilities2.add(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new GainAbilityControlledEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                    new ManaEffect(Mana.GreenMana(2)),
+                    new TapSourceCost()),
+                Duration.WhileOnBattlefield, filter)));
 		this.getLevels().add(new LevelAbility(5, -1, abilities2, 1, 4));
 	}
 
@@ -85,24 +93,6 @@ public class JoragaTreespeaker extends LevelerCard<JoragaTreespeaker> {
 	@Override
 	public JoragaTreespeaker copy() {
 		return new JoragaTreespeaker(this);
-	}
-
-}
-
-class JoragaManaAbility extends BasicManaAbility<JoragaManaAbility> {
-
-	public JoragaManaAbility() {
-		super(new ManaEffect(Mana.GreenMana(2)));
-		this.netMana.setGreen(2);
-	}
-
-	public JoragaManaAbility(JoragaManaAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public JoragaManaAbility copy() {
-		return new JoragaManaAbility(this);
 	}
 
 }

@@ -25,38 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.newphyrexia;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.MageInt;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetNonlandPermanent;
 
 /**
  *
- * @author nantuko
+ * @author North
  */
-public class Disperse extends CardImpl<Disperse> {
+public class SlashPanther extends CardImpl<SlashPanther> {
 
-    public Disperse (UUID ownerId) {
-        super(ownerId, 31, "Disperse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "SOM";
-        this.color.setBlue(true);
+    public SlashPanther(UUID ownerId) {
+        super(ownerId, 96, "Slash Panther", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{RP}");
+        this.expansionSetCode = "NPH";
+        this.subtype.add("Cat");
 
-		this.getSpellAbility().addTarget(new TargetNonlandPermanent());
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.color.setRed(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(2);
+
+        this.addAbility(HasteAbility.getInstance());
     }
 
-    public Disperse (final Disperse card) {
+    public SlashPanther(final SlashPanther card) {
         super(card);
     }
 
     @Override
-    public Disperse copy() {
-        return new Disperse(this);
+    public SlashPanther copy() {
+        return new SlashPanther(this);
     }
-
 }
