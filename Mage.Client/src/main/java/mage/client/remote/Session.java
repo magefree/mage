@@ -77,11 +77,16 @@ public class Session {
 	private final static Logger logger = Logger.getLogger(Session.class);
 	private static ScheduledExecutorService sessionExecutor = Executors.newScheduledThreadPool(1);
 
+	public enum SessionState {
+		DISCONNECTED, CONNECTED, CONNECTING, DISCONNECTING, SERVER_UNAVAILABLE;
+	}
+
 	private UUID sessionId;
 	private Client client;
 	private String userName;
 	private MageFrame frame;
 	private ServerState serverState;
+	private SessionState sessionState = SessionState.DISCONNECTED;
 	private Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
 	private Map<UUID, GamePanel> games = new HashMap<UUID, GamePanel>();
 	private Map<UUID, DraftPanel> drafts = new HashMap<UUID, DraftPanel>();
@@ -90,16 +95,13 @@ public class Session {
 	private ScheduledFuture<?> future;
 	private MageUI ui = new MageUI();
 	private Connection connection;
-	private boolean reconnecting = false;
-	private boolean connecting = false;
 
 	public Session(MageFrame frame) {
 		this.frame = frame;
 	}
 	
 	public synchronized boolean connect(Connection connection) {
-		this.connecting = true;
-		if (this.connection != null && isConnected()) {
+		if (this.connection != null && sessionState == SessionState.DISCONNECTED) {
 			disconnect(true);
 		}
 		this.connection = connection;
@@ -107,6 +109,7 @@ public class Session {
 	}
 
 	public boolean connect() {
+		sessionState = SessionState.CONNECTING;
 		try {
 			System.setSecurityManager(null);
 			System.setProperty("http.nonProxyHosts", "code.google.com");
@@ -140,32 +143,27 @@ public class Session {
 			logger.info("Connected to RMI server at " + connection.getHost() + ":" + connection.getPort());
 			frame.setStatusText("Connected to " + connection.getHost() + ":" + connection.getPort() + " ");
 			frame.enableButtons();
-			reconnecting = false;
-			connecting = false;
+			sessionState = SessionState.CONNECTED;
 			return true;
 		} catch (Exception ex) {
 			logger.fatal("", ex);
-			if (!reconnecting) {
+			if (sessionState == SessionState.CONNECTING) {
 				disconnect(false);
 				JOptionPane.showMessageDialog(frame, "Unable to connect to server. "  + ex.getMessage());
 			}
+			sessionState = SessionState.SERVER_UNAVAILABLE;
 		}
 		return false;
 	}
 	
 	public synchronized void disconnect(boolean voluntary) {
+		sessionState = SessionState.DISCONNECTING;
 		if (connection == null)
-			return;
-		if (reconnecting)
 			return;
 		if (future != null && !future.isDone())
 			future.cancel(true);
 		frame.setStatusText("Not connected");
 		frame.disableButtons();
-//		if (!voluntary && !connecting) {
-//			if (attemptReconnect())
-//				return;
-//		}
 		try {
 			for (UUID chatId: chats.keySet()) {
 				leaveChat(chatId);
@@ -185,31 +183,21 @@ public class Session {
 		frame.hideGames();
 		frame.hideTables();
 		logger.info("Disconnected ... ");
-		if (!voluntary && !connecting)
+		if (!voluntary)
 			JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Server error.  You have been disconnected", "Error", JOptionPane.ERROR_MESSAGE);
 	}
-	
-//	private boolean attemptReconnect() {
-//		reconnecting = true;
-//		ReconnectDialog rcd = new ReconnectDialog();
-//		MageFrame.getDesktop().add(rcd, JLayeredPane.MODAL_LAYER);
-//		rcd.showDialog(this);
-//		reconnecting = false;
-//		return rcd.getResult();
-//	}
-	
+		
 	public boolean ping() {
 		Ping method = new Ping(connection, sessionId);
 		try {
 			return method.makeCall();
 		} catch (ServerUnavailable ex) {
-			logger.fatal("server unavailable - ", ex);
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
 			logger.fatal("ping error", ex);
 		}
 		return false;
 	}
-
 
 	private UUID registerClient(String userName, UUID clientId, MageVersion version) throws MageException, ServerUnavailable {
 		RegisterClient method = new RegisterClient(connection, userName, clientId, version);
@@ -230,15 +218,18 @@ public class Session {
 		try {
 			return method.makeCall();
 		} catch (ServerUnavailable ex) {
-			logger.fatal("server unavailable - ", ex);
+			handleServerUnavailable(ex);
 		} catch (MageException ex) {
 			logger.fatal("GetServerState error", ex);
 		}
 		return null;
 	}
 
+	public SessionState getState() {
+		return sessionState;
+	}
 	public boolean isConnected() {
-		return ping();
+		return sessionState == SessionState.CONNECTED;
 	}
 
 	public String[] getPlayerTypes() {
@@ -853,28 +844,12 @@ public class Session {
 		return ui;
 	}
 
-//	public Server getServerRef() {
-//		return server;
-//	}
-	
 	class ServerPinger implements Runnable {
 
-		private int missed = 0;
-		
 		@Override
 		public void run() {
-			if (!ping()) {
-				missed++;
-				if (missed > 10) {
-					logger.info("Connection to server timed out");
-					disconnect(false);
-				}
-			}
-			else {
-				missed = 0;
-			}
+			ping();
 		}
-
 	}
 }
 

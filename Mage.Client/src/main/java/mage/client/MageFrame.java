@@ -75,6 +75,7 @@ import javax.swing.event.PopupMenuListener;
 import mage.client.deckeditor.DeckEditorPane;
 import mage.client.draft.DraftPane;
 import mage.client.game.GamePane;
+import mage.client.remote.Session.SessionState;
 import mage.client.table.TablesPane;
 import mage.client.tournament.TournamentPane;
 import mage.game.match.MatchOptions;
@@ -710,7 +711,7 @@ public class MageFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
-        if (session.isConnected()) {
+        if (session.getState() == SessionState.CONNECTED) {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 session.disconnect(true);
             }

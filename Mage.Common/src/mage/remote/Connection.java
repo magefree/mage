@@ -71,7 +71,12 @@ public class Connection {
 		Connection otherConnection = (Connection) object;
 		return hashCode() == otherConnection.hashCode();
 	}
-	
+
+	@Override
+	public String toString() {
+		return host + ":" + Integer.toString(port);
+	}
+
 	public ProxyType getProxyType() {
 		return proxyType;
 	}

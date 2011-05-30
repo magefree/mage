@@ -91,7 +91,9 @@ public class Session {
 
 	public void kill() {
 		this.killed = true;
-		ackResponse.notify();
+		synchronized(ackResponse) {
+			ackResponse.notify();
+		}
 		SessionManager.getInstance().removeSession(sessionId);
 		TableManager.getInstance().removeSession(sessionId);
 		GameManager.getInstance().removeSession(sessionId);

@@ -43,6 +43,7 @@ import mage.client.remote.Session;
 import mage.view.ChatMessage.MessageColor;
 
 import javax.swing.table.AbstractTableModel;
+import mage.client.remote.Session.SessionState;
 
 /**
  *
@@ -79,7 +80,7 @@ public class ChatPanel extends javax.swing.JPanel {
 	}
 
 	public void disconnect() {
-		if (session != null && session.isConnected())
+		if (session != null && session.getState() == SessionState.CONNECTED)
 			session.leaveChat(chatId);
 	}
 
