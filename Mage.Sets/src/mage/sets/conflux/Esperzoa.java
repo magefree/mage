@@ -29,19 +29,18 @@
 package mage.sets.conflux;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfControllerUpkeepTriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -64,7 +63,7 @@ public class Esperzoa extends CardImpl<Esperzoa> {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new BeginningOfControllerUpkeepTriggeredAbility(new ReturnToHandTargetEffect(), false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandTargetEffect(), Constants.TargetController.YOU, false);
         TargetControlledPermanent t = new TargetControlledPermanent(filter);
         t.setRequired(true);
         ability.addTarget(t);

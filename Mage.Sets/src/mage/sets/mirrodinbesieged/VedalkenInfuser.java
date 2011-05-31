@@ -29,11 +29,13 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfControllerUpkeepTriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -53,7 +55,7 @@ public class VedalkenInfuser extends CardImpl<VedalkenInfuser> {
 		this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
-        Ability ability = new BeginningOfControllerUpkeepTriggeredAbility(new AddCountersTargetEffect(CounterType.CHARGE.createInstance()), true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersTargetEffect(CounterType.CHARGE.createInstance()), Constants.TargetController.YOU, true);
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
     }

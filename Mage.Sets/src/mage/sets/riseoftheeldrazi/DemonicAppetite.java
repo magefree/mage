@@ -34,7 +34,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfControllerUpkeepTriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
@@ -63,7 +63,7 @@ public class DemonicAppetite extends CardImpl<DemonicAppetite> {
 		Ability ability = new EnchantAbility(auraTarget.getTargetName());
 		this.addAbility(ability);
 		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Constants.Duration.WhileOnBattlefield)));
-        ability = new BeginningOfControllerUpkeepTriggeredAbility(new SacrificeTargetEffect(), false);
+        ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeTargetEffect(), Constants.TargetController.YOU, false);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

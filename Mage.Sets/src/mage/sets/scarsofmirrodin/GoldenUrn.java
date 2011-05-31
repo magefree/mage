@@ -35,7 +35,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfControllerUpkeepTriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -56,7 +56,7 @@ public class GoldenUrn extends CardImpl<GoldenUrn> {
     public GoldenUrn (UUID ownerId) {
         super(ownerId, 158, "Golden Urn", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "SOM";
-        this.addAbility(new BeginningOfControllerUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), Constants.TargetController.YOU, true));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoldenUrnEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

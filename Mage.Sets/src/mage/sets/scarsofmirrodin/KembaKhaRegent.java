@@ -33,16 +33,13 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfControllerUpkeepTriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 
@@ -61,7 +58,7 @@ public class KembaKhaRegent extends CardImpl<KembaKhaRegent> {
 		this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
-        this.addAbility(new BeginningOfControllerUpkeepTriggeredAbility(new KembaKhaRegentEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new KembaKhaRegentEffect(), Constants.TargetController.YOU, false));
     }
 
     public KembaKhaRegent (final KembaKhaRegent card) {
