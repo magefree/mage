@@ -39,7 +39,7 @@ import mage.remote.RemoteMethodCall;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class JoinTournament extends RemoteMethodCall<Void, MageException> {
+public class JoinTournament extends RemoteMethodCall<Void> {
 
 	private UUID tournamentId;
 	private UUID sessionId;

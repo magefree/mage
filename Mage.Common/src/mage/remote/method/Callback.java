@@ -39,7 +39,7 @@ import mage.remote.RemoteMethodCall;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Callback extends RemoteMethodCall<ClientCallback, CallbackException> {
+public class Callback extends RemoteMethodCall<ClientCallback> {
 
 	private UUID sessionId;
 

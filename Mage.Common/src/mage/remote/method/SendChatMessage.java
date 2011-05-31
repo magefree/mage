@@ -38,7 +38,7 @@ import mage.remote.RemoteMethodCall;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SendChatMessage extends RemoteMethodCall<Void, MageException> {
+public class SendChatMessage extends RemoteMethodCall<Void> {
 
 	private UUID chatId;
 	private String message;

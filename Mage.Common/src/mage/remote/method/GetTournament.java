@@ -39,7 +39,7 @@ import mage.view.TournamentView;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GetTournament extends RemoteMethodCall<TournamentView, MageException> {
+public class GetTournament extends RemoteMethodCall<TournamentView> {
 
 	private UUID tournamentId;
 

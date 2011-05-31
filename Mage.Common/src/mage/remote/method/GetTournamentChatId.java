@@ -39,7 +39,7 @@ import mage.remote.RemoteMethodCall;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GetTournamentChatId extends RemoteMethodCall<UUID, MageException> {
+public class GetTournamentChatId extends RemoteMethodCall<UUID> {
 
 	private UUID tournamentId;
 

@@ -28,6 +28,7 @@
 package mage.remote;
 
 import java.rmi.*;
+import mage.MageException;
 import mage.interfaces.Server;
 import org.apache.log4j.Logger;
 
@@ -41,19 +42,40 @@ import org.apache.log4j.Logger;
  * @author BetaSteward_at_googlemail.com
  */
 
-public abstract class RemoteMethodCall<T, E extends Exception> extends AbstractRemoteMethodCall<T, E> {
+public abstract class RemoteMethodCall<T> extends AbstractRemoteMethodCall<T> {
 
 	protected final static Logger logger = Logger.getLogger(RemoteMethodCall.class);
 
 	protected Connection connection;
+	protected T returnVal;
+	protected boolean exception = false;
+	protected MageException ex;
 
 	public RemoteMethodCall(Connection connection){
 		this.connection = connection;
 	}
 
 	@Override
-	public T makeCall() throws ServerUnavailable, E {
-		T returnValue = null; 
+	public T makeCall() {
+		returnVal = null; 
+		try {
+			returnVal = super.makeCall();
+		}
+		catch (ServerUnavailable e) {
+			this.exception = true;
+		}
+		catch (MageException e) {
+			this.exception = true;
+			this.ex = e;
+		}
+		finally {
+			ServerCache.noLongerUsingServer(connection);
+		}
+		return returnVal;
+	}
+
+	public T makeDirectCall() throws ServerUnavailable, MageException {
+		T returnValue = null;
 		try {
 			returnValue = super.makeCall();
 		}
@@ -77,5 +99,17 @@ public abstract class RemoteMethodCall<T, E extends Exception> extends AbstractR
 
 	protected void remoteExceptionOccured(RemoteException remoteException) {
 		ServerCache.removeServerFromCache(connection);
+	}
+
+	public T getReturnVal() {
+		return returnVal;
+	}
+
+	public MageException getException() {
+		return ex;
+	}
+	
+	public boolean isException() {
+		return exception;
 	}
 }

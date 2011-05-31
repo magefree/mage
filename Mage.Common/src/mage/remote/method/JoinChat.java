@@ -38,7 +38,7 @@ import mage.remote.RemoteMethodCall;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class JoinChat extends RemoteMethodCall<Void, MageException> {
+public class JoinChat extends RemoteMethodCall<Void> {
 
 	private UUID chatId;
 	private UUID sessionId;

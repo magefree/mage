@@ -40,7 +40,7 @@ import mage.remote.RemoteMethodCall;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SubmitDeck extends RemoteMethodCall<Boolean, MageException> {
+public class SubmitDeck extends RemoteMethodCall<Boolean> {
 
 	private UUID tableId;
 	private UUID sessionId;

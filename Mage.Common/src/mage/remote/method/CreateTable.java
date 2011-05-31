@@ -40,7 +40,7 @@ import mage.view.TableView;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CreateTable extends RemoteMethodCall<TableView, MageException> {
+public class CreateTable extends RemoteMethodCall<TableView> {
 
 	private UUID roomId;
 	private UUID sessionId;

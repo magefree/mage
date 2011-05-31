@@ -38,7 +38,7 @@ import mage.remote.RemoteMethodCall;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SwapSeats extends RemoteMethodCall<Void, MageException> {
+public class SwapSeats extends RemoteMethodCall<Void> {
 
 	private UUID roomId;
 	private UUID tableId;

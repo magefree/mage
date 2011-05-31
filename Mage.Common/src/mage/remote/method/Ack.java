@@ -38,7 +38,7 @@ import mage.remote.RemoteMethodCall;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Ack extends RemoteMethodCall<Void, CallbackException> {
+public class Ack extends RemoteMethodCall<Void> {
 
 	private UUID sessionId;
 	private int messageId;

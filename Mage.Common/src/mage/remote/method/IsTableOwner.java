@@ -38,7 +38,7 @@ import mage.remote.RemoteMethodCall;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class IsTableOwner extends RemoteMethodCall<Boolean, MageException> {
+public class IsTableOwner extends RemoteMethodCall<Boolean> {
 
 	private UUID roomId;
 	private UUID tableId;

@@ -64,7 +64,7 @@ public class CallbackClientDaemon extends Thread {
 	        while(!end) {
 				try {
 					Callback callbackMethod = new Callback(connection, id);
-					final ClientCallback callback = callbackMethod.makeCall();
+					final ClientCallback callback = callbackMethod.makeDirectCall();
 					Ack ackMethod = new Ack(connection, id, callback.getMessageId());
 					ackMethod.makeCall();
 					callbackExecutor.submit(

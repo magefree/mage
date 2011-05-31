@@ -27,11 +27,13 @@
  */
 package mage.interfaces.callback;
 
+import mage.MageException;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CallbackException extends Exception {
+public class CallbackException extends MageException {
 
 	public CallbackException(String message) {
 		super(message);

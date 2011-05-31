@@ -26,39 +26,37 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.remote.method;
+package mage.remote;
 
-import java.rmi.RemoteException;
-import java.util.UUID;
-import mage.MageException;
-import mage.cards.decks.DeckCardLists;
-import mage.interfaces.Server;
-import mage.remote.Connection;
-import mage.remote.RemoteMethodCall;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Cheat extends RemoteMethodCall<Void> {
+public class RMIClientDaemon extends Thread {
 
-	private UUID gameId;
-	private UUID sessionId;
-	private UUID playerId;
-	private DeckCardLists deckList;
+	private final RemoteMethodCallQueue q;
 
-	public Cheat(Connection connection, UUID sessionId, UUID gameId, UUID playerId, DeckCardLists deckList) {
-		super(connection);
-		this.gameId = gameId;
-		this.sessionId = sessionId;
-		this.playerId = playerId;
-		this.deckList = deckList;
+	public RMIClientDaemon(RemoteMethodCallQueue q) {
+		this.q = q;
+		setDaemon(true);
+		start();
 	}
 
 	@Override
-	protected Void performRemoteCall(Server server) throws RemoteException, MageException {
-		server.cheat(gameId, sessionId, playerId, deckList);
-		return null;
-	}
+	public void run() {
+		try {
+			while (true) {
+				RemoteMethodCall call = q.take();
+				call.makeCall();
+				synchronized (call) {
+					call.notify();
+				}
+			}
+		}
+		catch (InterruptedException ex) {
 
+		}
+	}
 }

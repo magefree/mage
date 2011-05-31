@@ -39,7 +39,7 @@ import mage.view.DraftPickView;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SendCardPick extends RemoteMethodCall<DraftPickView, MageException> {
+public class SendCardPick extends RemoteMethodCall<DraftPickView> {
 
 	private UUID sessionId;
 	private UUID draftId;

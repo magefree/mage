@@ -40,7 +40,7 @@ import mage.utils.MageVersion;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RegisterClient extends RemoteMethodCall<UUID, MageException> {
+public class RegisterClient extends RemoteMethodCall<UUID> {
 
 	private String userName;
 	private UUID clientId;

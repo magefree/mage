@@ -40,7 +40,7 @@ import mage.remote.RemoteMethodCall;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GetConnectedPlayers extends RemoteMethodCall<List<String>, MageException> {
+public class GetConnectedPlayers extends RemoteMethodCall<List<String>> {
 
 	private UUID roomId;
 

@@ -41,7 +41,7 @@ import mage.view.TableView;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GetTables extends RemoteMethodCall<List<TableView>, MageException> {
+public class GetTables extends RemoteMethodCall<List<TableView>> {
 
 	private UUID roomId;
 

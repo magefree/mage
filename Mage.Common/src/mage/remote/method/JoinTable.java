@@ -40,7 +40,7 @@ import mage.remote.RemoteMethodCall;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class JoinTable extends RemoteMethodCall<Boolean, MageException> {
+public class JoinTable extends RemoteMethodCall<Boolean> {
 
 	private UUID roomId;
 	private UUID tableId;

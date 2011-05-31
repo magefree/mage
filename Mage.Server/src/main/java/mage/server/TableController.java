@@ -57,6 +57,7 @@ import org.apache.log4j.Logger;
 import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import mage.cards.decks.InvalidDeckException;
 
 /**
  *
@@ -143,7 +144,7 @@ public class TableController {
 		return true;
 	}
 
-	public synchronized boolean joinTable(UUID sessionId, String name, String playerType, int skill, DeckCardLists deckList) throws GameException {
+	public synchronized boolean joinTable(UUID sessionId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException {
 		if (table.getState() != TableState.WAITING) {
 			return false;
 		}
@@ -152,8 +153,8 @@ public class TableController {
 			throw new GameException("No available seats.");
 		}
 		Deck deck = Deck.load(deckList);
-		if (!Main.server.isTestMode() && !validDeck(deck)) {
-			throw new GameException(name + " has an invalid deck for this format");
+		if (!Main.server.isTestMode() && !table.getValidator().validate(deck)) {
+			throw new InvalidDeckException(name + " has an invalid deck for this format", table.getValidator().getInvalid());
 		}
 		
 		Player player = createPlayer(name, seat.getPlayerType(), skill);
@@ -183,13 +184,13 @@ public class TableController {
 		}
 	}
 
-	public synchronized boolean submitDeck(UUID sessionId, DeckCardLists deckList) throws GameException {
+	public synchronized boolean submitDeck(UUID sessionId, DeckCardLists deckList) throws MageException {
 		if (table.getState() != TableState.SIDEBOARDING && table.getState() != TableState.CONSTRUCTING) {
 			return false;
 		}
 		Deck deck = Deck.load(deckList);
-		if (!Main.server.isTestMode() && !validDeck(deck)) {
-			throw new GameException("Invalid deck for this format");
+		if (!Main.server.isTestMode() && !table.getValidator().validate(deck)) {
+			throw new InvalidDeckException("Invalid deck for this format", table.getValidator().getInvalid());
 		}
 		submitDeck(sessionId, deck);
 		return true;
@@ -223,10 +224,6 @@ public class TableController {
 		}
 		ReplayManager.getInstance().replayGame(sessionId, table.getId());
 		return true;
-	}
-
-	private boolean validDeck(Deck deck) {
-		return table.getValidator().validate(deck);
 	}
 
 	private Player createPlayer(String name, String playerType, int skill) {

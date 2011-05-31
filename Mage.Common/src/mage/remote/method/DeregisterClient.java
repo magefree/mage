@@ -39,7 +39,7 @@ import mage.remote.RemoteMethodCall;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DeregisterClient extends RemoteMethodCall<Void, MageException> {
+public class DeregisterClient extends RemoteMethodCall<Void> {
 
 	private UUID sessionId;
 

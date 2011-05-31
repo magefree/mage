@@ -1,5 +1,5 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+* Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -26,33 +26,25 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.server.game;
+package mage.cards.decks;
 
-import mage.server.Room;
-import java.util.List;
-import java.util.UUID;
-import mage.cards.decks.DeckCardLists;
-import mage.game.GameException;
-import mage.game.match.MatchOptions;
-import mage.game.tournament.TournamentOptions;
+import java.util.Map;
 import mage.MageException;
-import mage.view.TableView;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface GamesRoom extends Room {
+public class InvalidDeckException extends MageException {
 
-	public List<TableView> getTables();
-	public boolean joinTable(UUID sessionId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException;
-	public boolean joinTournamentTable(UUID sessionId, UUID tableId, String name, String playerType, int skill) throws GameException;
-	public TableView createTable(UUID sessionId, MatchOptions options);
-	public TableView createTournamentTable(UUID sessionId, TournamentOptions options);
-	public void removeTable(UUID sessionId, UUID tableId);
-	public void removeTable(UUID tableId);
-	public TableView getTable(UUID tableId);
-	public void leaveTable(UUID sessionId, UUID tableId);
-	public boolean watchTable(UUID sessionId, UUID tableId) throws MageException;
+	Map<String, String> invalid;
 
+	public InvalidDeckException (String message, Map<String, String> invalid) {
+		super(message);
+		this.invalid = invalid;
+	}
+
+	public Map<String, String> getInvalid() {
+		return invalid;
+	}
 }

@@ -37,14 +37,15 @@ package mage.remote;
  * @author BetaSteward_at_googlemail.com
  */
 import java.rmi.*;
+import mage.MageException;
 import mage.interfaces.Server;
 import org.apache.log4j.Logger;
 
-public abstract class AbstractRemoteMethodCall<T, E extends Exception> {
+public abstract class AbstractRemoteMethodCall<T> {
 	
 	private final static Logger logger = Logger.getLogger(AbstractRemoteMethodCall.class);
 
-	public T makeCall() throws ServerUnavailable, E {
+	public T makeCall() throws ServerUnavailable, MageException {
 		RetryStrategy strategy = getRetryStrategy();
 		while (strategy.shouldRetry()) {
 			Server server = getServer();
@@ -84,7 +85,7 @@ public abstract class AbstractRemoteMethodCall<T, E extends Exception> {
 	performRemoteCall is a template method which actually makes the remote
 	method invocation.
 */
-	protected abstract T performRemoteCall(Server server) throws RemoteException, E;
+	protected abstract T performRemoteCall(Server server) throws RemoteException, MageException;
 
 
 	protected RetryStrategy getRetryStrategy() {

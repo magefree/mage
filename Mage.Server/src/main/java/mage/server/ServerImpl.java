@@ -42,6 +42,7 @@ import java.util.logging.Level;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
 import mage.MageException;
+import mage.cards.decks.InvalidDeckException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.interfaces.Server;
@@ -210,6 +211,9 @@ public class ServerImpl extends RemoteServer implements Server {
 				logger.info("Session " + sessionId + " joined table " + tableId);
 				return ret;
 			}
+		}
+		catch (InvalidDeckException ex) {
+			throw ex;
 		}
 		catch (GameException ex) {
 			throw ex;

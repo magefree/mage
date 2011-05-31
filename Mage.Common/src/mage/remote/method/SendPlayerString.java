@@ -38,7 +38,7 @@ import mage.remote.RemoteMethodCall;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SendPlayerString extends RemoteMethodCall<Void, MageException> {
+public class SendPlayerString extends RemoteMethodCall<Void> {
 
 	private UUID sessionId;
 	private UUID gameId;

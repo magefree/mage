@@ -95,7 +95,7 @@ public class TableManager {
 		return tables.values();
 	}
 
-	public boolean joinTable(UUID sessionId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws GameException {
+	public boolean joinTable(UUID sessionId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException {
 		if (controllers.containsKey(tableId))
 			return controllers.get(tableId).joinTable(sessionId, name, playerType, skill, deckList);
 		return false;
@@ -107,7 +107,7 @@ public class TableManager {
 		return false;
 	}
 
-	public boolean submitDeck(UUID sessionId, UUID tableId, DeckCardLists deckList) throws GameException {
+	public boolean submitDeck(UUID sessionId, UUID tableId, DeckCardLists deckList) throws MageException {
 		if (controllers.containsKey(tableId))
 			return controllers.get(tableId).submitDeck(sessionId, deckList);
 		return false;

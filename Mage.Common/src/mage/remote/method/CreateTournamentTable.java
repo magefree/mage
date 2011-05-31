@@ -40,7 +40,7 @@ import mage.view.TableView;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CreateTournamentTable extends RemoteMethodCall<TableView, MageException> {
+public class CreateTournamentTable extends RemoteMethodCall<TableView> {
 
 	private UUID roomId;
 	private UUID sessionId;

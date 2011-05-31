@@ -38,7 +38,7 @@ import mage.remote.RemoteMethodCall;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GetServerState extends RemoteMethodCall<ServerState, MageException> {
+public class GetServerState extends RemoteMethodCall<ServerState> {
 
 	public GetServerState(Connection connection) {
 		super(connection);

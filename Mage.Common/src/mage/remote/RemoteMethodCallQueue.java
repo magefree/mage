@@ -26,39 +26,32 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.remote.method;
+package mage.remote;
 
-import java.rmi.RemoteException;
-import java.util.UUID;
+import java.util.concurrent.LinkedBlockingQueue;
 import mage.MageException;
-import mage.cards.decks.DeckCardLists;
-import mage.interfaces.Server;
-import mage.remote.Connection;
-import mage.remote.RemoteMethodCall;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Cheat extends RemoteMethodCall<Void> {
+public class RemoteMethodCallQueue extends LinkedBlockingQueue<RemoteMethodCall> {
 
-	private UUID gameId;
-	private UUID sessionId;
-	private UUID playerId;
-	private DeckCardLists deckList;
-
-	public Cheat(Connection connection, UUID sessionId, UUID gameId, UUID playerId, DeckCardLists deckList) {
-		super(connection);
-		this.gameId = gameId;
-		this.sessionId = sessionId;
-		this.playerId = playerId;
-		this.deckList = deckList;
-	}
-
-	@Override
-	protected Void performRemoteCall(Server server) throws RemoteException, MageException {
-		server.cheat(gameId, sessionId, playerId, deckList);
-		return null;
+	public void callMethod(RemoteMethodCall call) throws ServerUnavailable, MageException {
+		synchronized (call) {
+			try {
+				this.put(call);
+				call.wait();
+				if (call.isException()) {
+					if (call.getException() != null)
+						throw call.getException();
+					else
+						throw new ServerUnavailable();
+				}
+			} catch (InterruptedException ex) {
+				
+			}
+		}
 	}
 
 }

@@ -38,7 +38,7 @@ import mage.remote.RemoteMethodCall;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LeaveTable extends RemoteMethodCall<Void, MageException> {
+public class LeaveTable extends RemoteMethodCall<Void> {
 
 	private UUID roomId;
 	private UUID tableId;

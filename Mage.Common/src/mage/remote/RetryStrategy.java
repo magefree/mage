@@ -27,6 +27,8 @@
  */
 package mage.remote;
 
+import org.apache.log4j.Logger;
+
 /**
  * Adopted from the code by William Grosso, author of Java RMI
  * 10/17/2001
@@ -39,6 +41,7 @@ package mage.remote;
 public abstract class RetryStrategy {
 	public static final int DEFAULT_NUMBER_OF_RETRIES = 3;
 	private int _numberOfTriesLeft;
+	private final static Logger logger = Logger.getLogger(RetryStrategy.class);
 
 	public RetryStrategy() {
 		this(DEFAULT_NUMBER_OF_RETRIES);
@@ -64,6 +67,7 @@ public abstract class RetryStrategy {
 
 	private void waitUntilNextTry() {
 		long timeToWait = getTimeToWait();
+		logger.warn("Error calling server, waiting " + timeToWait + "ms before retrying");
 		try {
 			Thread.sleep(timeToWait );
 		} 
