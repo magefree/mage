@@ -33,10 +33,12 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledPermanent;
+import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetNonlandPermanent;
 
 /**
@@ -44,6 +46,13 @@ import mage.target.common.TargetNonlandPermanent;
  * @author North
  */
 public class Magmaw extends CardImpl<Magmaw> {
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("nonland permanent");
+
+    static {
+        filter.getCardType().add(CardType.LAND);
+        filter.setNotCardType(true);
+    }
 
     public Magmaw(UUID ownerId) {
         super(ownerId, 158, "Magmaw", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
@@ -55,7 +64,7 @@ public class Magmaw extends CardImpl<Magmaw> {
         this.toughness = new MageInt(4);
 
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new GenericManaCost(1));
-        ability.addCost(new SacrificeSourceCost());
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetNonlandPermanent());
         this.addAbility(ability);
     }
