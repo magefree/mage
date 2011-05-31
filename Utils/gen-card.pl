@@ -318,7 +318,7 @@ print "card fetched\n";
 my $template = Text::Template->new(SOURCE => 'cardclass.tmpl', DELIMITERS => [ '[=', '=]' ]);
 my %vars;
 $vars{'name'} = $cardname;
-$cardname =~ s/[-\s\']//g;
+$cardname =~ s/[-,\s\']//g;
 $vars{'classname'} = $cardname;
 
 
