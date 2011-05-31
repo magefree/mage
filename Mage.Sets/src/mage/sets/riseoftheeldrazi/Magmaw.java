@@ -33,6 +33,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -54,6 +55,7 @@ public class Magmaw extends CardImpl<Magmaw> {
         this.toughness = new MageInt(4);
 
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new GenericManaCost(1));
+        ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetNonlandPermanent());
         this.addAbility(ability);
     }
