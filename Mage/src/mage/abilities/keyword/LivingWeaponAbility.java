@@ -15,9 +15,18 @@ public class LivingWeaponAbility extends EntersBattlefieldTriggeredAbility {
         super(new LivingWeaponEffect());
     }
 
+     public LivingWeaponAbility(final LivingWeaponAbility ability) {
+        super(ability);
+    }
+
     @Override
     public String getRule() {
         return "Living weapon";
+    }
+
+    @Override
+    public EntersBattlefieldTriggeredAbility copy() {
+        return new LivingWeaponAbility(this);
     }
 }
 
