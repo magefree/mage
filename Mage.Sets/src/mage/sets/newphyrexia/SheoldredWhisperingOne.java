@@ -63,7 +63,7 @@ public class SheoldredWhisperingOne extends CardImpl<SheoldredWhisperingOne> {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(false), Constants.TargetController.YOU, false);
         ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
         this.addAbility(ability);
-        ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(new FilterCreaturePermanent(), 1, ""), Constants.TargetController.OPPONENT, false);
+        ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(new FilterCreaturePermanent(), 1, "that player "), Constants.TargetController.OPPONENT, false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
