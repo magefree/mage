@@ -50,6 +50,7 @@ import org.mage.plugins.card.CardUrl;
 import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.dl.sources.CardImageSource;
 import org.mage.plugins.card.dl.sources.MagicCardsImageSource;
+import org.mage.plugins.card.dl.sources.MtgatheringRuImageSource;
 import org.mage.plugins.card.dl.sources.WizardCardsImageSource;
 import org.mage.plugins.card.properties.SettingsManager;
 import org.mage.plugins.card.utils.CardImageUtils;
@@ -156,7 +157,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
 		p0.add(jLabel1);
 		p0.add(Box.createVerticalStrut(5));
-		ComboBoxModel jComboBox1Model = new DefaultComboBoxModel(new String[] { "magiccards.info", "wizards.com" });
+		ComboBoxModel jComboBox1Model = new DefaultComboBoxModel(new String[] { "magiccards.info", "wizards.com", "mtgathering.ru HQ", "mtgathering.ru MQ", "mtgathering.ru LQ"});
 		jComboBox1 = new JComboBox();
         
         cardImageSource = MagicCardsImageSource.getInstance();
@@ -173,6 +174,15 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         break;
                     case 1:
                         cardImageSource = WizardCardsImageSource.getInstance();
+                        break;
+                    case 2:
+                        cardImageSource = MtgatheringRuImageSource.getHqInstance();
+                        break;
+                    case 3:
+                        cardImageSource = MtgatheringRuImageSource.getMqInstance();
+                        break;
+                    case 4:
+                        cardImageSource = MtgatheringRuImageSource.getLqInstance();
                         break;
                 }
             }
