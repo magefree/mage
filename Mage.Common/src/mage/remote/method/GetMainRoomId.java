@@ -31,6 +31,7 @@ package mage.remote.method;
 import java.rmi.RemoteException;
 import java.util.UUID;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.interfaces.Server;
 import mage.remote.Connection;
 import mage.remote.RemoteMethodCall;
@@ -43,7 +44,7 @@ public class GetMainRoomId extends RemoteMethodCall<UUID> {
 
 
 	public GetMainRoomId(Connection connection) {
-		super(connection);
+		super(connection, "GetMainRoomId", SessionState.CONNECTED);
 	}
 
 	@Override

@@ -30,6 +30,7 @@ package mage.remote.method;
 import java.rmi.RemoteException;
 import java.util.UUID;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.interfaces.Server;
 import mage.remote.Connection;
 import mage.remote.RemoteMethodCall;
@@ -43,7 +44,7 @@ public class Ping extends RemoteMethodCall<Boolean> {
 	private UUID sessionId;
 	
 	public Ping(Connection connection, UUID sessionId) {
-		super(connection);
+		super(connection, "Ping", SessionState.CONNECTED);
 		this.sessionId = sessionId;
 	}
 	

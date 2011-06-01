@@ -29,6 +29,7 @@ package mage.remote.method;
 
 import java.rmi.RemoteException;
 import java.util.UUID;
+import mage.constants.Constants.SessionState;
 import mage.interfaces.Server;
 import mage.interfaces.callback.CallbackException;
 import mage.interfaces.callback.ClientCallback;
@@ -44,7 +45,7 @@ public class Callback extends RemoteMethodCall<ClientCallback> {
 	private UUID sessionId;
 
 	public Callback(Connection connection, UUID sessionId) {
-		super(connection);
+		super(connection, "Callback", SessionState.CONNECTED);
 		this.sessionId = sessionId;
 	}
 

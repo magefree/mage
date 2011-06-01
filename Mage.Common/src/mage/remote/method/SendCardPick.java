@@ -30,6 +30,7 @@ package mage.remote.method;
 import java.rmi.RemoteException;
 import java.util.UUID;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.interfaces.Server;
 import mage.remote.Connection;
 import mage.remote.RemoteMethodCall;
@@ -46,7 +47,7 @@ public class SendCardPick extends RemoteMethodCall<DraftPickView> {
 	private UUID cardId;
 
 	public SendCardPick(Connection connection, UUID sessionId, UUID draftId, UUID cardId) {
-		super(connection);
+		super(connection, "SendCardPick", SessionState.CONNECTED);
 		this.sessionId = sessionId;
 		this.draftId = draftId;
 		this.cardId = cardId;

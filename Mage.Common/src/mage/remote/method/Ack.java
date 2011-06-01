@@ -29,6 +29,7 @@ package mage.remote.method;
 
 import java.rmi.RemoteException;
 import java.util.UUID;
+import mage.constants.Constants.SessionState;
 import mage.interfaces.Server;
 import mage.interfaces.callback.CallbackException;
 import mage.remote.Connection;
@@ -44,7 +45,7 @@ public class Ack extends RemoteMethodCall<Void> {
 	private int messageId;
 
 	public Ack(Connection connection, UUID sessionId, int messageId) {
-		super(connection);
+		super(connection, "Ack", SessionState.CONNECTED);
 		this.sessionId = sessionId;
 		this.messageId = messageId;
 	}

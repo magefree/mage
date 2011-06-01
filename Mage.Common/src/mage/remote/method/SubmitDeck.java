@@ -31,6 +31,7 @@ import java.rmi.RemoteException;
 import java.util.UUID;
 import mage.cards.decks.DeckCardLists;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.game.GameException;
 import mage.interfaces.Server;
 import mage.remote.Connection;
@@ -47,7 +48,7 @@ public class SubmitDeck extends RemoteMethodCall<Boolean> {
 	private DeckCardLists deckList;
 
 	public SubmitDeck(Connection connection, UUID sessionId, UUID tableId, DeckCardLists deckList) {
-		super(connection);
+		super(connection, "SubmitDeck", SessionState.CONNECTED);
 		this.tableId = tableId;
 		this.sessionId = sessionId;
 		this.deckList = deckList;

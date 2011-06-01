@@ -46,7 +46,7 @@ import javax.swing.SpinnerNumberModel;
 import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
 import mage.client.components.MageComponents;
-import mage.client.remote.Session;
+import mage.remote.Session;
 import mage.client.table.TablePlayerPanel;
 import mage.client.util.Event;
 import mage.client.util.Listener;
@@ -410,7 +410,7 @@ public class NewTableDialog extends MageDialog {
 
 	public void showDialog(UUID roomId) {
 		session = MageFrame.getSession();
-		session.getUI().addButton(MageComponents.NEW_TABLE_OK_BUTTON, btnOK);
+		MageFrame.getUI().addButton(MageComponents.NEW_TABLE_OK_BUTTON, btnOK);
 		this.player1Panel.setPlayerName(session.getUserName());
 		cbGameType.setModel(new DefaultComboBoxModel(session.getGameTypes().toArray()));
 		cbDeckType.setModel(new DefaultComboBoxModel(session.getDeckTypes()));

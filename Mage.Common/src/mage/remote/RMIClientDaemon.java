@@ -28,8 +28,6 @@
 
 package mage.remote;
 
-import java.util.concurrent.LinkedBlockingQueue;
-
 /**
  *
  * @author BetaSteward_at_googlemail.com

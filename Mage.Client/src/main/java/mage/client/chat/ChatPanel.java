@@ -39,11 +39,10 @@ import java.awt.event.KeyEvent;
 import java.util.*;
 import java.util.List;
 import mage.client.MageFrame;
-import mage.client.remote.Session;
+import mage.remote.Session;
 import mage.view.ChatMessage.MessageColor;
 
 import javax.swing.table.AbstractTableModel;
-import mage.client.remote.Session.SessionState;
 
 /**
  *
@@ -52,7 +51,6 @@ import mage.client.remote.Session.SessionState;
 public class ChatPanel extends javax.swing.JPanel {
 
 	private UUID chatId;
-	private UUID clientId;
 	private Session session;
 
 	private List<String> players = new ArrayList<String>();
@@ -76,12 +74,13 @@ public class ChatPanel extends javax.swing.JPanel {
 	public void connect(UUID chatId) {
 		session = MageFrame.getSession();
 		this.chatId = chatId;
-		session.joinChat(chatId, this);
+		if (session.joinChat(chatId)) {
+			MageFrame.addChat(chatId, this);
+		}
 	}
 
 	public void disconnect() {
-		if (session != null && session.getState() == SessionState.CONNECTED)
-			session.leaveChat(chatId);
+		session.leaveChat(chatId);
 	}
 
 	public void receiveMessage(String message, MessageColor color) {

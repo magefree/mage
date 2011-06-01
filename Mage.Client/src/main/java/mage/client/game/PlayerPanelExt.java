@@ -42,7 +42,7 @@ import mage.client.components.arcane.GlowText;
 import mage.client.components.arcane.ManaSymbols;
 import mage.client.components.arcane.UI;
 import mage.client.dialog.ShowCardsDialog;
-import mage.client.remote.Session;
+import mage.remote.Session;
 import mage.client.util.Command;
 import mage.client.util.Config;
 import mage.client.util.ImageHelper;

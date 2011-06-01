@@ -31,6 +31,7 @@ package mage.remote.method;
 import java.rmi.RemoteException;
 import java.util.UUID;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.interfaces.Server;
 import mage.remote.Connection;
 import mage.remote.RemoteMethodCall;
@@ -47,7 +48,7 @@ public class RegisterClient extends RemoteMethodCall<UUID> {
 	private MageVersion version;
 
 	public RegisterClient(Connection connection, String userName, UUID clientId, MageVersion version) {
-		super(connection);
+		super(connection, "RegisterClient", SessionState.CONNECTING);
 		this.userName = userName;
 		this.clientId = clientId;
 		this.version = version;

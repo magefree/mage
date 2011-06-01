@@ -30,6 +30,7 @@ package mage.remote.method;
 import java.rmi.RemoteException;
 import java.util.UUID;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.interfaces.Server;
 import mage.remote.Connection;
 import mage.remote.RemoteMethodCall;
@@ -45,7 +46,7 @@ public class JoinChat extends RemoteMethodCall<Void> {
 	private String userName;
 
 	public JoinChat(Connection connection, UUID sessionId, UUID chatId, String userName) {
-		super(connection);
+		super(connection, "JoinChat", SessionState.CONNECTED);
 		this.chatId = chatId;
 		this.sessionId = sessionId;
 		this.userName = userName;

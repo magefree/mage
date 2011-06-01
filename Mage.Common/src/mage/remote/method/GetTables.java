@@ -32,6 +32,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 import java.util.UUID;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.interfaces.Server;
 import mage.remote.Connection;
 import mage.remote.RemoteMethodCall;
@@ -46,7 +47,7 @@ public class GetTables extends RemoteMethodCall<List<TableView>> {
 	private UUID roomId;
 
 	public GetTables(Connection connection, UUID roomId) {
-		super(connection);
+		super(connection, "GetTables", SessionState.CONNECTED);
 		this.roomId = roomId;
 	}
 

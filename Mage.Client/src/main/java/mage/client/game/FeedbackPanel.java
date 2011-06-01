@@ -49,7 +49,7 @@ import javax.swing.SwingUtilities;
 
 import mage.client.MageFrame;
 import mage.client.components.MageTextArea;
-import mage.client.remote.Session;
+import mage.remote.Session;
 
 import org.apache.log4j.Logger;
 

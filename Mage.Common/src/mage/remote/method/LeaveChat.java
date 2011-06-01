@@ -30,6 +30,7 @@ package mage.remote.method;
 import java.rmi.RemoteException;
 import java.util.UUID;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.interfaces.Server;
 import mage.remote.Connection;
 import mage.remote.RemoteMethodCall;
@@ -44,7 +45,7 @@ public class LeaveChat extends RemoteMethodCall<Void> {
 	private UUID sessionId;
 
 	public LeaveChat(Connection connection, UUID sessionId, UUID chatId) {
-		super(connection);
+		super(connection, "LeaveChat", SessionState.CONNECTED);
 		this.chatId = chatId;
 		this.sessionId = sessionId;
 	}

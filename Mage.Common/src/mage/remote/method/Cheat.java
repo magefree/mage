@@ -32,6 +32,7 @@ import java.rmi.RemoteException;
 import java.util.UUID;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
+import mage.constants.Constants.SessionState;
 import mage.interfaces.Server;
 import mage.remote.Connection;
 import mage.remote.RemoteMethodCall;
@@ -48,7 +49,7 @@ public class Cheat extends RemoteMethodCall<Void> {
 	private DeckCardLists deckList;
 
 	public Cheat(Connection connection, UUID sessionId, UUID gameId, UUID playerId, DeckCardLists deckList) {
-		super(connection);
+		super(connection, "Cheat", SessionState.CONNECTED);
 		this.gameId = gameId;
 		this.sessionId = sessionId;
 		this.playerId = playerId;

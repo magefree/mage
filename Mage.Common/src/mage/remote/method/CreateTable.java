@@ -30,6 +30,7 @@ package mage.remote.method;
 import java.rmi.RemoteException;
 import java.util.UUID;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.game.match.MatchOptions;
 import mage.interfaces.Server;
 import mage.remote.Connection;
@@ -47,7 +48,7 @@ public class CreateTable extends RemoteMethodCall<TableView> {
 	private MatchOptions matchOptions;
 
 	public CreateTable(Connection connection, UUID sessionId, UUID roomId, MatchOptions matchOptions) {
-		super(connection);
+		super(connection, "CreateTable", SessionState.CONNECTED);
 		this.roomId = roomId;
 		this.sessionId = sessionId;
 		this.matchOptions = matchOptions;

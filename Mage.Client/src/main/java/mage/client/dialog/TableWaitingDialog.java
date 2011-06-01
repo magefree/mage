@@ -40,7 +40,7 @@ import java.util.UUID;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import mage.client.components.MageComponents;
-import mage.client.remote.Session;
+import mage.remote.Session;
 import mage.view.SeatView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
@@ -69,7 +69,7 @@ public class TableWaitingDialog extends MageDialog {
 		initComponents();
 
 		tableSeats.createDefaultColumnsFromModel();
-		session.getUI().addButton(MageComponents.TABLE_WAITING_START_BUTTON, btnStart);
+		MageFrame.getUI().addButton(MageComponents.TABLE_WAITING_START_BUTTON, btnStart);
     }
 
 	public void update(TableView table) {

@@ -30,6 +30,7 @@ package mage.remote.method;
 import java.rmi.RemoteException;
 import java.util.UUID;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.interfaces.Server;
 import mage.remote.Connection;
 import mage.remote.RemoteMethodCall;
@@ -44,7 +45,7 @@ public class GetTournament extends RemoteMethodCall<TournamentView> {
 	private UUID tournamentId;
 
 	public GetTournament(Connection connection, UUID tournamentId) {
-		super(connection);
+		super(connection, "GetTournament", SessionState.CONNECTED);
 		this.tournamentId = tournamentId;
 	}
 

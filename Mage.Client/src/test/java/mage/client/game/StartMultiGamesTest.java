@@ -56,7 +56,7 @@ public class StartMultiGamesTest {
 			if (frame == null) {
 				sync.wait();
 			}
-			ui = MageFrame.getSession().getUI();
+			ui = MageFrame.getUI();
 			ui.doClick(MageComponents.TABLES_MENU_BUTTON);
 			ui.doClick(MageComponents.NEW_GAME_BUTTON);
 			ui.doClick(MageComponents.NEW_TABLE_OK_BUTTON, 500);

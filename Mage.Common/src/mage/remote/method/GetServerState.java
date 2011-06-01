@@ -29,6 +29,7 @@ package mage.remote.method;
 
 import java.rmi.RemoteException;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.interfaces.Server;
 import mage.interfaces.ServerState;
 import mage.remote.Connection;
@@ -41,7 +42,7 @@ import mage.remote.RemoteMethodCall;
 public class GetServerState extends RemoteMethodCall<ServerState> {
 
 	public GetServerState(Connection connection) {
-		super(connection);
+		super(connection, "GetServerState", SessionState.CONNECTING);
 	}
 
 	@Override

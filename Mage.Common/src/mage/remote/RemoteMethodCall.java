@@ -29,6 +29,7 @@ package mage.remote;
 
 import java.rmi.*;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.interfaces.Server;
 import org.apache.log4j.Logger;
 
@@ -47,12 +48,16 @@ public abstract class RemoteMethodCall<T> extends AbstractRemoteMethodCall<T> {
 	protected final static Logger logger = Logger.getLogger(RemoteMethodCall.class);
 
 	protected Connection connection;
+	protected String name;
 	protected T returnVal;
 	protected boolean exception = false;
 	protected MageException ex;
+	protected SessionState allowedState;
 
-	public RemoteMethodCall(Connection connection){
+	public RemoteMethodCall(Connection connection, String name, SessionState allowedState){
 		this.connection = connection;
+		this.name = name;
+		this.allowedState = allowedState;
 	}
 
 	@Override
@@ -97,6 +102,10 @@ public abstract class RemoteMethodCall<T> extends AbstractRemoteMethodCall<T> {
 		}
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	protected void remoteExceptionOccured(RemoteException remoteException) {
 		ServerCache.removeServerFromCache(connection);
 	}
@@ -111,5 +120,9 @@ public abstract class RemoteMethodCall<T> extends AbstractRemoteMethodCall<T> {
 	
 	public boolean isException() {
 		return exception;
+	}
+
+	public SessionState getAllowedState() {
+		return allowedState;
 	}
 }

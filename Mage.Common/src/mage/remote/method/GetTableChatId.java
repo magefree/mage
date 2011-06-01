@@ -31,6 +31,7 @@ package mage.remote.method;
 import java.rmi.RemoteException;
 import java.util.UUID;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.interfaces.Server;
 import mage.remote.Connection;
 import mage.remote.RemoteMethodCall;
@@ -44,7 +45,7 @@ public class GetTableChatId extends RemoteMethodCall<UUID> {
 	private UUID tableId;
 
 	public GetTableChatId(Connection connection, UUID tableId) {
-		super(connection);
+		super(connection, "GetTableChatId", SessionState.CONNECTED);
 		this.tableId = tableId;
 	}
 

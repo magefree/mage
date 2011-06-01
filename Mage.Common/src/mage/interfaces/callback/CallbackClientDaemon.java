@@ -86,6 +86,7 @@ public class CallbackClientDaemon extends Thread {
 			}
 		} catch(Exception ex) {
 			logger.fatal("CallbackClientDaemon error ", ex);
+			stopDaemon();
 		}
 	}
 	

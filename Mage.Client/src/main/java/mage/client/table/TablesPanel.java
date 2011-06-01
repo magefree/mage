@@ -43,8 +43,8 @@ import mage.client.dialog.JoinTableDialog;
 import mage.client.dialog.NewTableDialog;
 import mage.client.dialog.NewTournamentDialog;
 import mage.client.dialog.TableWaitingDialog;
-import mage.client.remote.MageRemoteException;
-import mage.client.remote.Session;
+import mage.remote.MageRemoteException;
+import mage.remote.Session;
 import mage.client.util.ButtonColumn;
 import mage.game.match.MatchOptions;
 import mage.sets.Sets;
@@ -101,7 +101,7 @@ public class TablesPanel extends javax.swing.JPanel {
 				if (state.equals("Join")) {
 					if (owner.equals(session.getUserName())) {
 						try {
-							JDesktopPane desktopPane = (JDesktopPane)session.getUI().getComponent(MageComponents.DESKTOP_PANE);
+							JDesktopPane desktopPane = (JDesktopPane)MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
 							JInternalFrame[] windows = desktopPane.getAllFramesInLayer(javax.swing.JLayeredPane.DEFAULT_LAYER);
 							for (JInternalFrame frame : windows) {
 								if (frame.getTitle().equals("Waiting for players")) {
@@ -204,7 +204,7 @@ public class TablesPanel extends javax.swing.JPanel {
 			hideTables();
 		}
 		
-		session.getUI().addButton(MageComponents.NEW_GAME_BUTTON, btnNewTable);
+		MageFrame.getUI().addButton(MageComponents.NEW_GAME_BUTTON, btnNewTable);
 	}
 
 	public void hideTables() {

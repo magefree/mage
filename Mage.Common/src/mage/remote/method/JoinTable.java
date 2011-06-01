@@ -31,6 +31,7 @@ import java.rmi.RemoteException;
 import java.util.UUID;
 import mage.cards.decks.DeckCardLists;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.game.GameException;
 import mage.interfaces.Server;
 import mage.remote.Connection;
@@ -51,7 +52,7 @@ public class JoinTable extends RemoteMethodCall<Boolean> {
 	private DeckCardLists deckList;
 
 	public JoinTable(Connection connection, UUID sessionId, UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList) {
-		super(connection);
+		super(connection, "JoinTable", SessionState.CONNECTED);
 		this.roomId = roomId;
 		this.tableId = tableId;
 		this.sessionId = sessionId;

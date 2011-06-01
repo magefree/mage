@@ -31,6 +31,7 @@ package mage.remote.method;
 import java.rmi.RemoteException;
 import java.util.UUID;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.interfaces.Server;
 import mage.remote.Connection;
 import mage.remote.RemoteMethodCall;
@@ -44,7 +45,7 @@ public class DeregisterClient extends RemoteMethodCall<Void> {
 	private UUID sessionId;
 
 	public DeregisterClient(Connection connection, UUID sessionId) {
-		super(connection);
+		super(connection, "DeregisterClient", SessionState.DISCONNECTING);
 		this.sessionId = sessionId;
 	}
 

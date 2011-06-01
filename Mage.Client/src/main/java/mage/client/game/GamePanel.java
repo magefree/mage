@@ -57,7 +57,7 @@ import mage.client.dialog.PickNumberDialog;
 import mage.client.dialog.ShowCardsDialog;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.impl.Plugins;
-import mage.client.remote.Session;
+import mage.remote.Session;
 import mage.client.util.Config;
 import mage.client.util.GameManager;
 import mage.client.util.PhaseManager;
@@ -153,7 +153,7 @@ public class GamePanel extends javax.swing.JPanel {
 		this.gameId = gameId;
 		this.playerId = playerId;
 		session = MageFrame.getSession();
-		session.addGame(gameId, this);
+		MageFrame.addGame(gameId, this);
 		this.feedbackPanel.init(gameId);
 		this.feedbackPanel.clear();
 		this.abilityPicker.init(session, gameId);
@@ -171,7 +171,7 @@ public class GamePanel extends javax.swing.JPanel {
 		this.gameId = gameId;
 		this.playerId = null;
 		session = MageFrame.getSession();
-		session.addGame(gameId, this);
+		MageFrame.addGame(gameId, this);
 		this.feedbackPanel.init(gameId);
 		this.feedbackPanel.clear();
 		this.btnConcede.setVisible(false);
@@ -188,7 +188,7 @@ public class GamePanel extends javax.swing.JPanel {
 		this.gameId = gameId;
 		this.playerId = null;
 		session = MageFrame.getSession();
-		session.addGame(gameId, this);
+		MageFrame.addGame(gameId, this);
 		this.feedbackPanel.clear();
 		this.btnConcede.setVisible(false);
 		this.btnStopWatching.setVisible(false);

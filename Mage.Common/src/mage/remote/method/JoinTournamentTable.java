@@ -31,6 +31,7 @@ import java.rmi.RemoteException;
 import java.util.UUID;
 import mage.cards.decks.DeckCardLists;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.game.GameException;
 import mage.interfaces.Server;
 import mage.remote.Connection;
@@ -50,7 +51,7 @@ public class JoinTournamentTable extends RemoteMethodCall<Boolean> {
 	private int skill;
 
 	public JoinTournamentTable(Connection connection, UUID sessionId, UUID roomId, UUID tableId, String playerName, String playerType, int skill) {
-		super(connection);
+		super(connection, "JoinTournamentTable", SessionState.CONNECTED);
 		this.roomId = roomId;
 		this.tableId = tableId;
 		this.sessionId = sessionId;

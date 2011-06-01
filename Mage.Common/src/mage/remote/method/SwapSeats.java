@@ -30,6 +30,7 @@ package mage.remote.method;
 import java.rmi.RemoteException;
 import java.util.UUID;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.interfaces.Server;
 import mage.remote.Connection;
 import mage.remote.RemoteMethodCall;
@@ -47,7 +48,7 @@ public class SwapSeats extends RemoteMethodCall<Void> {
 	private int seat2;
 	
 	public SwapSeats(Connection connection, UUID sessionId, UUID roomId, UUID tableId, int seat1, int seat2) {
-		super(connection);
+		super(connection, "SwapSeats", SessionState.CONNECTED);
 		this.roomId = roomId;
 		this.tableId = tableId;
 		this.sessionId = sessionId;

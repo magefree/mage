@@ -30,6 +30,7 @@ package mage.remote.method;
 import java.rmi.RemoteException;
 import java.util.UUID;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.interfaces.Server;
 import mage.remote.Connection;
 import mage.remote.RemoteMethodCall;
@@ -45,7 +46,7 @@ public class IsTableOwner extends RemoteMethodCall<Boolean> {
 	private UUID sessionId;
 	
 	public IsTableOwner(Connection connection, UUID sessionId, UUID roomId, UUID tableId) {
-		super(connection);
+		super(connection, "IsTableOwner", SessionState.CONNECTED);
 		this.roomId = roomId;
 		this.tableId = tableId;
 		this.sessionId = sessionId;

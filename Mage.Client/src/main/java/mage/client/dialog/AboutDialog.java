@@ -35,6 +35,7 @@
 package mage.client.dialog;
 
 import mage.client.MageFrame;
+import mage.utils.MageVersion;
 
 /**
  *
@@ -48,8 +49,8 @@ public class AboutDialog extends MageDialog {
 		this.modal = false;
     }
 
-	public void showDialog() {
-		this.lblVersion.setText(MageFrame.getVersion().toString());
+	public void showDialog(MageVersion version) {
+		this.lblVersion.setText(version.toString());
 		this.setLocation(100, 100);
 		this.setVisible(true);
 	}

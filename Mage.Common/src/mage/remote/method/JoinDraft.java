@@ -31,6 +31,7 @@ package mage.remote.method;
 import java.rmi.RemoteException;
 import java.util.UUID;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.interfaces.Server;
 import mage.remote.Connection;
 import mage.remote.RemoteMethodCall;
@@ -45,7 +46,7 @@ public class JoinDraft extends RemoteMethodCall<Void> {
 	private UUID sessionId;
 
 	public JoinDraft(Connection connection, UUID sessionId, UUID draftId) {
-		super(connection);
+		super(connection, "JoinDraft", SessionState.CONNECTED);
 		this.draftId = draftId;
 		this.sessionId = sessionId;
 	}

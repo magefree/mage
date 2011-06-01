@@ -21,7 +21,7 @@ import mage.client.components.MageComponents;
 import mage.client.components.MageRoundPane;
 import mage.client.game.PlayAreaPanel;
 import mage.client.plugins.impl.Plugins;
-import mage.client.remote.Session;
+import mage.remote.Session;
 import mage.client.util.DefaultActionCallback;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.ArrowBuilder;
@@ -85,13 +85,13 @@ public class MageActionCallback implements ActionCallback {
             for (UUID uuid : targets) {
                 //System.out.println("Getting play area panel for uuid: " + uuid);
 
-                PlayAreaPanel p = session.getGame(data.gameId).getPlayers().get(uuid);
+                PlayAreaPanel p = MageFrame.getGame(data.gameId).getPlayers().get(uuid);
                 if (p != null) {
                     Point target = p.getLocationOnScreen();
                     target.translate(-parentPoint.x, -parentPoint.y);
                     ArrowBuilder.addArrow((int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() - 40, Color.red);
                 } else {
-                    for (PlayAreaPanel pa : session.getGame(data.gameId).getPlayers().values()) {
+                    for (PlayAreaPanel pa : MageFrame.getGame(data.gameId).getPlayers().values()) {
                         MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
                         if (permanent != null) {
                             Point target = permanent.getLocationOnScreen();
@@ -108,7 +108,7 @@ public class MageActionCallback implements ActionCallback {
             Point me = new Point(data.locationOnScreen);
             me.translate(-parentPoint.x, -parentPoint.y);
             UUID uuid = data.card.getParentId();
-            for (PlayAreaPanel pa : session.getGame(data.gameId).getPlayers().values()) {
+            for (PlayAreaPanel pa : MageFrame.getGame(data.gameId).getPlayers().values()) {
                 MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
                 if (permanent != null) {
                     Point source = permanent.getLocationOnScreen();
@@ -149,15 +149,15 @@ public class MageActionCallback implements ActionCallback {
                         if (session == null || !state) {
                             return;
                         }
-                        final Component popupContainer = session.getUI().getComponent(MageComponents.POPUP_CONTAINER);
-                        Component popup2 = session.getUI().getComponent(MageComponents.CARD_INFO_PANE);
+                        final Component popupContainer = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
+                        Component popup2 = MageFrame.getUI().getComponent(MageComponents.CARD_INFO_PANE);
                         ((CardInfoPane) popup2).setCard(data.card);
                         Point location = new Point((int) data.locationOnScreen.getX() + data.popupOffsetX - 40, (int) data.locationOnScreen.getY() + data.popupOffsetY - 40);
                         location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, popup2, parentComponent);
                         location.translate(-parentPoint.x, -parentPoint.y);
                         popupContainer.setLocation(location);
                         ThreadUtils.sleep(200);
-                        final Component c = session.getUI().getComponent(MageComponents.DESKTOP_PANE);
+                        final Component c = MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
                         SwingUtilities.invokeLater(new Runnable() {
                             @Override
                             public void run() {
@@ -227,7 +227,7 @@ public class MageActionCallback implements ActionCallback {
             if (session == null) {
                 return;
             }
-            Component popupContainer = session.getUI().getComponent(MageComponents.POPUP_CONTAINER);
+            Component popupContainer = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
             popupContainer.setVisible(false);
         } catch (Exception e2) {
             e2.printStackTrace();

@@ -45,7 +45,7 @@ import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
 import mage.cards.ExpansionSet;
 import mage.client.MageFrame;
-import mage.client.remote.Session;
+import mage.remote.Session;
 import mage.client.table.TournamentPlayerPanel;
 import mage.game.draft.DraftOptions;
 import mage.game.draft.DraftOptions.TimingOption;

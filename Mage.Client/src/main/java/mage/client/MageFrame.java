@@ -46,7 +46,8 @@ import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.deckeditor.collection.viewer.CollectionViewerPane;
 import mage.client.dialog.*;
 import mage.client.plugins.impl.Plugins;
-import mage.client.remote.Session;
+import mage.interfaces.callback.ClientCallback;
+import mage.remote.Session;
 import mage.client.util.EDTExceptionHandler;
 import mage.client.util.gui.ArrowBuilder;
 import mage.components.ImagePanel;
@@ -72,13 +73,21 @@ import java.util.List;
 import java.util.prefs.Preferences;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
+import mage.client.chat.ChatPanel;
+import mage.client.components.MageUI;
 import mage.client.deckeditor.DeckEditorPane;
 import mage.client.draft.DraftPane;
+import mage.client.draft.DraftPanel;
 import mage.client.game.GamePane;
-import mage.client.remote.Session.SessionState;
+import mage.client.game.GamePanel;
+import mage.client.remote.CallbackClientImpl;
 import mage.client.table.TablesPane;
 import mage.client.tournament.TournamentPane;
+import mage.client.tournament.TournamentPanel;
+import mage.constants.Constants.SessionState;
 import mage.game.match.MatchOptions;
+import mage.interfaces.Client;
+import mage.interfaces.callback.CallbackClient;
 import mage.utils.MageVersion;
 import mage.sets.Sets;
 import mage.remote.Connection;
@@ -89,16 +98,24 @@ import org.apache.log4j.Logger;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class MageFrame extends javax.swing.JFrame {
+public class MageFrame extends javax.swing.JFrame implements Client {
 
     private final static Logger logger = Logger.getLogger(MageFrame.class);
 
     private static Session session;
+	private static CallbackClient callbackClient;
     private ConnectDialog connectDialog;
     private static Preferences prefs = Preferences.userNodeForPackage(MageFrame.class);
     private JLabel title;
     private Rectangle titleRectangle;
 	private final static MageVersion version = new MageVersion(0, 7, 3);
+	private UUID clientId;
+	
+	private static Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
+	private static Map<UUID, GamePanel> games = new HashMap<UUID, GamePanel>();
+	private static Map<UUID, DraftPanel> drafts = new HashMap<UUID, DraftPanel>();
+	private static Map<UUID, TournamentPanel> tournaments = new HashMap<UUID, TournamentPanel>();
+	private static MageUI ui = new MageUI();
 
     /**
      * @return the session
@@ -115,7 +132,8 @@ public class MageFrame extends javax.swing.JFrame {
         return prefs;
     }
 
-	public static MageVersion getVersion() {
+	@Override
+	public MageVersion getVersion() {
 		return version;
 	}
 
@@ -125,7 +143,8 @@ public class MageFrame extends javax.swing.JFrame {
     public MageFrame() {
 
         setTitle("Mage, version " + version);
-
+		clientId = UUID.randomUUID();
+		
         EDTExceptionHandler.registerExceptionHandler();
         addWindowListener(new WindowAdapter() {
             @Override
@@ -151,9 +170,10 @@ public class MageFrame extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         session = new Session(this);
+		callbackClient = new CallbackClientImpl(this);
         connectDialog = new ConnectDialog();
         desktopPane.add(connectDialog, JLayeredPane.POPUP_LAYER);
-        session.getUI().addComponent(MageComponents.DESKTOP_PANE, desktopPane);
+        ui.addComponent(MageComponents.DESKTOP_PANE, desktopPane);
 
 		try {
 			tablesPane = new TablesPane();
@@ -240,7 +260,7 @@ public class MageFrame extends javax.swing.JFrame {
             label.setBounds(0, 0, 180, 30);
         }
 
-        session.getUI().addButton(MageComponents.TABLES_MENU_BUTTON, btnGames);
+        ui.addButton(MageComponents.TABLES_MENU_BUTTON, btnGames);
 
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -272,8 +292,8 @@ public class MageFrame extends javax.swing.JFrame {
 
         desktopPane.add(popupContainer, JLayeredPane.POPUP_LAYER);
 
-        session.getUI().addComponent(MageComponents.CARD_INFO_PANE, cardInfoPane);
-        session.getUI().addComponent(MageComponents.POPUP_CONTAINER, popupContainer);
+        ui.addComponent(MageComponents.CARD_INFO_PANE, cardInfoPane);
+        ui.addComponent(MageComponents.POPUP_CONTAINER, popupContainer);
     }
 
     private void setBackground() {
@@ -723,7 +743,7 @@ public class MageFrame extends javax.swing.JFrame {
     private void btnAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutActionPerformed
         AboutDialog aboutDialog = new AboutDialog();
         desktopPane.add(aboutDialog);
-        aboutDialog.showDialog();
+        aboutDialog.showDialog(version);
     }//GEN-LAST:event_btnAboutActionPerformed
 
     public void exitApp() {
@@ -841,6 +861,72 @@ public class MageFrame extends javax.swing.JFrame {
     public void setStatusText(String status) {
         this.lblStatus.setText(status);
     }
+
+	public static MageUI getUI() {
+		return ui;
+	}
+	
+	public static ChatPanel getChat(UUID chatId) {
+		return chats.get(chatId);
+	}
+
+	public static void addChat(UUID chatId, ChatPanel chatPanel) {
+		chats.put(chatId, chatPanel);
+	}
+
+	public static GamePanel getGame(UUID gameId) {
+		return games.get(gameId);
+	}
+
+	public static void addGame(UUID gameId, GamePanel gamePanel) {
+		games.put(gameId, gamePanel);
+	}
+
+	public static DraftPanel getDraft(UUID draftId) {
+		return drafts.get(draftId);
+	}
+
+	public static void addDraft(UUID draftId, DraftPanel draftPanel) {
+		drafts.put(draftId, draftPanel);
+	}
+
+	public static void addTournament(UUID tournamentId, TournamentPanel tournament) {
+		tournaments.put(tournamentId, tournament);
+	}
+
+	@Override
+	public UUID getId() {
+		return clientId;
+	}
+
+	@Override
+	public void connected(String message) {
+		setStatusText(message);
+		enableButtons();
+	}
+
+	@Override
+	public void disconnected() {
+		setStatusText("Not connected");
+		disableButtons();
+		hideGames();
+		hideTables();
+	}
+
+	@Override
+	public void showMessage(String message) {
+		JOptionPane.showMessageDialog(desktopPane, message);
+	}
+
+	@Override
+	public void showError(String message) {
+		JOptionPane.showMessageDialog(desktopPane, message, "Error", JOptionPane.ERROR_MESSAGE);
+	}
+
+	@Override
+	public void processCallback(ClientCallback callback) {
+		callbackClient.processCallback(callback);
+	}
 
 }
 

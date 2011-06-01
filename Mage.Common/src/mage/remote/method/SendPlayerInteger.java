@@ -30,6 +30,7 @@ package mage.remote.method;
 import java.rmi.RemoteException;
 import java.util.UUID;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.interfaces.Server;
 import mage.remote.Connection;
 import mage.remote.RemoteMethodCall;
@@ -45,7 +46,7 @@ public class SendPlayerInteger extends RemoteMethodCall<Void> {
 	private Integer data;
 
 	public SendPlayerInteger(Connection connection, UUID sessionId, UUID gameId, Integer data) {
-		super(connection);
+		super(connection, "SendPlayerInteger", SessionState.CONNECTED);
 		this.sessionId = sessionId;
 		this.gameId = gameId;
 		this.data = data;
