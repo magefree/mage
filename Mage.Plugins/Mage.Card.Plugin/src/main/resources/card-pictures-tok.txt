@@ -1,4 +1,15 @@
+|Generate|TOK:NPH|Beast|
+|Generate|TOK:NPH|Goblin|
+|Generate|TOK:NPH|Golem|
+|Generate|TOK:NPH|Myr|
+
 |Generate|TOK:MBS|Germ|
+|Generate|TOK:MBS|Zombie|
+|Generate|TOK:MBS|Golem|
+|Generate|TOK:MBS|Horror|
+|Generate|TOK:MBS|Thopter|
+|Generate|TOK:MBS|Zombie|
+|Generate|TOK:MBS|Zombie|
 
 |Generate|TOK:SOM|Cat|
 |Generate|TOK:SOM|Soldier|

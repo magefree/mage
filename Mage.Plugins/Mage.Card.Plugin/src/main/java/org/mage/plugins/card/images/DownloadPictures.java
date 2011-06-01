@@ -379,6 +379,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
 	final static Map<String, String> setNameReplacement = new HashMap<String, String>() {
 		{
+			put("NPH", "new-phyrexia");
             put("MBS", "mirrodin-besieged");
 			put("SOM", "scars-of-mirrodin");
 			put("M11", "magic-2011");
