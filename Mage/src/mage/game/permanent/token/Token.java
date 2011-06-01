@@ -43,6 +43,7 @@ import mage.game.permanent.PermanentToken;
 public class Token extends MageObjectImpl<Token> {
 
 	protected String description;
+    private UUID lastAddedTokenId;
 
 	public Token(String name, String description) {
 		this.name = name;
@@ -70,7 +71,11 @@ public class Token extends MageObjectImpl<Token> {
 		return description;
 	}
 
-	public void addAbility(Ability ability) {
+    public UUID getLastAddedToken() {
+        return lastAddedTokenId;
+    }
+
+    public void addAbility(Ability ability) {
 		ability.setSourceId(this.getId());
 		abilities.add(ability);
 	}
@@ -83,6 +88,7 @@ public class Token extends MageObjectImpl<Token> {
 	public boolean putOntoBattlefield(Game game, UUID sourceId, UUID controllerId) {
 		PermanentToken permanent = new PermanentToken(this, controllerId);
 		game.getBattlefield().addPermanent(permanent);
+        this.lastAddedTokenId = permanent.getId();
 		permanent.entersBattlefield(sourceId, game);
 		game.applyEffects();
 		game.fireEvent(new ZoneChangeEvent(permanent, controllerId, Zone.OUTSIDE, Zone.BATTLEFIELD));

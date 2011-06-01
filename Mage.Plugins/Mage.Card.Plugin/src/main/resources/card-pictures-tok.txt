@@ -1,3 +1,5 @@
+|Generate|TOK:MBS|Germ|
+
 |Generate|TOK:SOM|Cat|
 |Generate|TOK:SOM|Soldier|
 |Generate|TOK:SOM|Goblin|
