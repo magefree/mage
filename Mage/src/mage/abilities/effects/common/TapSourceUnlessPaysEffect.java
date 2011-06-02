@@ -64,7 +64,7 @@ public class TapSourceUnlessPaysEffect extends OneShotEffect<TapSourceUnlessPays
 				if (cost.pay(game, source.getId(), source.getControllerId(), false))
 					return true;
 			}
-			permanent.setTapped(true);
+			permanent.tap(game);
 			return true;
 		}
 		return false;

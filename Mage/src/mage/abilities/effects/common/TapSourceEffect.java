@@ -57,7 +57,7 @@ public class TapSourceEffect extends OneShotEffect<TapSourceEffect> {
 	public boolean apply(Game game, Ability source) {
 		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
-			permanent.setTapped(true);
+			permanent.tap(game);
 			return true;
 		}
 		return false;

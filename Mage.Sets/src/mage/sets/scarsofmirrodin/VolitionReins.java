@@ -96,7 +96,7 @@ public class VolitionReins extends CardImpl<VolitionReins> {
 			if (enchantment != null && enchantment.getAttachedTo() != null) {
 				Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
 				if (permanent != null && permanent.isTapped()) {
-					permanent.setTapped(false);
+					permanent.untap(game);
 					return true;
 				}
 			}

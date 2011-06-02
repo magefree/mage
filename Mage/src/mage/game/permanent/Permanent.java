@@ -44,7 +44,8 @@ public interface Permanent extends Card {
 	public boolean untap(Game game);
 	public boolean tap(Game game);
 	// use tap(game)
-	// setTapped doesn't trigger TAPPED event
+	// setTapped doesn't trigger TAPPED event and should be used
+	// only if you want permanent to enter battlefield tapped
 	@Deprecated
 	public void setTapped(boolean tapped);
 	public boolean canTap();

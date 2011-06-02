@@ -60,7 +60,7 @@ public class UntapTargetEffect extends OneShotEffect<UntapTargetEffect> {
 		for (UUID target: source.getTargets().get(0).getTargets()) {
 			Permanent permanent = game.getPermanent(target);
 			if (permanent != null) {
-				permanent.setTapped(false);
+				permanent.untap(game);
 			}
 			else {
 				return false;

@@ -134,7 +134,7 @@ class FinestHourEffect extends OneShotEffect<FinestHourEffect> {
 	public boolean apply(Game game, Ability source) {
 		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
-			permanent.setTapped(false);
+			permanent.untap(game);
 			game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.COMBAT, null, false));
 		}
 		else {

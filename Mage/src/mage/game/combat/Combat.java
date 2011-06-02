@@ -231,8 +231,9 @@ public class Combat implements Serializable, Copyable<Combat> {
 		CombatGroup newGroup = new CombatGroup(defenderId, defender != null);
 		newGroup.attackers.add(attackerId);
 		Permanent attacker = game.getPermanent(attackerId);
-		if (!attacker.getAbilities().containsKey(VigilanceAbility.getInstance().getId()))
-			attacker.setTapped(true);
+		if (!attacker.getAbilities().containsKey(VigilanceAbility.getInstance().getId())) {
+			attacker.tap(game);
+		}
 		attacker.setAttacking(true);
 		groups.add(newGroup);
 	}
