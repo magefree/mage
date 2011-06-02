@@ -93,7 +93,7 @@ public class BoostEquippedEffect extends ContinuousEffectImpl<BoostEquippedEffec
 	@Override
 	public String getDynamicText(Ability source) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Equipped creatures gets ").append(String.format("%1$+d/%2$+d", Integer.parseInt(power.toString()), Integer.parseInt(toughness.toString())));
+		sb.append("Equipped creatures gets ").append(power.toString()).append("/").append(toughness.toString());
 		if (duration != Duration.WhileOnBattlefield)
 			sb.append(" ").append(duration.toString());
 		return sb.toString();

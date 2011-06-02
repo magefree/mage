@@ -32,7 +32,6 @@ import java.util.UUID;
 
 import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
@@ -40,17 +39,14 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.stack.Spell;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.common.AddPoisonCounterTargetEffect;
 
 /**
  *
@@ -58,12 +54,11 @@ import mage.abilities.TriggeredAbilityImpl;
  */
 public class HandOfThePraetors extends CardImpl<HandOfThePraetors> {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with infect");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with infect");
 
 	static {
 		filter.getAbilities().add(InfectAbility.getInstance());
 		filter.setNotAbilities(false);
-		
 	}
 
     public HandOfThePraetors (UUID ownerId) {
@@ -121,46 +116,4 @@ class HandOfThePraetorsAbility extends TriggeredAbilityImpl<HandOfThePraetorsAbi
 	public String getRule() {
 		return "Whenever you cast a creature spell with infect, target player gets a poison counter.";
 	}
-
-}
-
-class AddPoisonCounterTargetEffect extends OneShotEffect<AddPoisonCounterTargetEffect> {
-
-	protected int amount;
-
-	public AddPoisonCounterTargetEffect(int amount) {
-		super(Outcome.Damage);
-		this.amount = amount;
-	}
-
-	public int getAmount() {
-		return amount;
-	}
-
-	public AddPoisonCounterTargetEffect(final AddPoisonCounterTargetEffect effect) {
-		super(effect);
-		this.amount = effect.amount;
-	}
-
-	@Override
-	public AddPoisonCounterTargetEffect copy() {
-		return new AddPoisonCounterTargetEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null) {
-			player.getCounters().addCounter(CounterType.POISON.createInstance(amount));
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Target " + source.getTargets().get(0).getTargetName() + " gets " + Integer.toString(amount) + " poison counter(s).";
-	}
-
-
 }
