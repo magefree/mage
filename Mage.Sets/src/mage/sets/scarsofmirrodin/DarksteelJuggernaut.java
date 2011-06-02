@@ -54,7 +54,7 @@ public class DarksteelJuggernaut extends CardImpl<DarksteelJuggernaut> {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
         SetPowerToughnessSourceEffect effect = new SetPowerToughnessSourceEffect(new ControlledArtifactsOnBattlefieldCount(), new ControlledArtifactsOnBattlefieldCount(), Constants.Duration.EndOfGame);
-        effect.setStaticText("Darksteel Juggernaut's power and toughness are each equal to the number of artifacts you control.");
+        effect.setStaticText("Darksteel Juggernaut's power and toughness are each equal to the number of artifacts you control");
         this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, effect));
         this.addAbility(IndestructibleAbility.getInstance());
         this.addAbility(new AttacksEachTurnStaticAbility());

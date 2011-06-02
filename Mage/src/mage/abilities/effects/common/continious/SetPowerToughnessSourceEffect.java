@@ -81,7 +81,7 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl<SetPower
 	}
 
 	@Override
-	public String getText(Ability source) {
+	public String getDynamicText(Ability source) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("{this} ").append(" becomes ");
 		sb.append(power).append("/").append(toughness).append(" ").append(duration.toString());
