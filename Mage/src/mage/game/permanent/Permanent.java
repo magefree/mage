@@ -43,6 +43,9 @@ public interface Permanent extends Card {
 	public boolean isTapped();
 	public boolean untap(Game game);
 	public boolean tap(Game game);
+	// use tap(game)
+	// setTapped doesn't trigger TAPPED event
+	@Deprecated
 	public void setTapped(boolean tapped);
 	public boolean canTap();
 	

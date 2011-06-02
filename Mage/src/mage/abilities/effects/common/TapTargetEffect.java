@@ -60,9 +60,8 @@ public class TapTargetEffect extends OneShotEffect<TapTargetEffect> {
 		for (UUID target: source.getTargets().get(0).getTargets()) {
 			Permanent permanent = game.getPermanent(target);
 			if (permanent != null) {
-				permanent.setTapped(true);
-			}
-			else {
+				permanent.tap(game);
+			} else {
 				return false;
 			}
 		}
