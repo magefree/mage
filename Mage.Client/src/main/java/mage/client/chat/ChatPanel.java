@@ -80,7 +80,8 @@ public class ChatPanel extends javax.swing.JPanel {
 	}
 
 	public void disconnect() {
-		session.leaveChat(chatId);
+		if (session != null)
+			session.leaveChat(chatId);
 	}
 
 	public void receiveMessage(String message, MessageColor color) {

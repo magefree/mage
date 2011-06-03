@@ -85,9 +85,7 @@ public class Session {
 	}
 	
 	public synchronized boolean connect(Connection connection) {
-		if (this.connection != null && sessionState == SessionState.DISCONNECTED) {
-			disconnect(true);
-		}
+		cleanupSession();
 		this.connection = connection;
 		return connect();
 	}
@@ -128,38 +126,43 @@ public class Session {
 			return true;
 		} catch (Exception ex) {
 			logger.fatal("", ex);
-			if (sessionState == SessionState.CONNECTING) {
-				disconnect(false);
-				client.showMessage("Unable to connect to server. "  + ex.getMessage());
-			}
 			sessionState = SessionState.SERVER_UNAVAILABLE;
+			disconnect(false);
+			client.showMessage("Unable to connect to server. "  + ex.getMessage());
 		}
 		return false;
 	}
 	
-	public synchronized void disconnect(boolean voluntary) {
-		sessionState = SessionState.DISCONNECTING;
+	public synchronized void disconnect(boolean showMessage) {
+		if (sessionState == SessionState.CONNECTED)
+			sessionState = SessionState.DISCONNECTING;
+		cleanupSession();
 		if (connection == null)
 			return;
-		if (future != null && !future.isDone())
-			future.cancel(true);
-		try {
-			if (callbackDaemon != null)
-				callbackDaemon.stopDaemon();
-			deregisterClient();
-		} catch (MageException ex) {
-			logger.fatal("Error disconnecting ...", ex);
+		if (sessionState == SessionState.CONNECTED) {
+			try {
+				deregisterClient();
+			} catch (Exception ex) {
+				logger.fatal("Error disconnecting ...", ex);
+			}
 		}
 		ServerCache.removeServerFromCache(connection);
 		client.disconnected();
 		logger.info("Disconnected ... ");
-		if (!voluntary) {
-			sessionState = SessionState.SERVER_UNAVAILABLE;
+		if (sessionState == SessionState.SERVER_UNAVAILABLE && showMessage) {
 			client.showError("Server error.  You have been disconnected");
 		}
 		else {
 			sessionState = SessionState.DISCONNECTED;
 		}
+	}
+
+	private void cleanupSession() {
+		q.clear();
+		if (future != null && !future.isDone())
+			future.cancel(true);
+		if (callbackDaemon != null)
+			callbackDaemon.stopDaemon();
 	}
 
 	private boolean handleCall(RemoteMethodCall method) {
@@ -188,15 +191,16 @@ public class Session {
 	}
 
 	private UUID registerClient(String userName, UUID clientId, MageVersion version) throws MageException, ServerUnavailable {
-		RegisterClient method = new RegisterClient(connection, userName, clientId, version);
-		if (handleCall(method))
-			return method.getReturnVal();
+		if (sessionState == SessionState.CONNECTING) {
+			RegisterClient method = new RegisterClient(connection, userName, clientId, version);
+			return method.makeDirectCall();
+		}
 		return null;
 	}
 
-	private void deregisterClient() throws MageException {
+	private void deregisterClient() throws MageException, ServerUnavailable {
 		DeregisterClient method = new DeregisterClient(connection, sessionId);
-		handleCall(method);
+		method.makeDirectCall();
 	}
 
 	private ServerState getServerState() {
@@ -480,8 +484,9 @@ public class Session {
 	}
 
 	private void handleServerUnavailable(ServerUnavailable ex) {
+		sessionState = SessionState.SERVER_UNAVAILABLE;
 		logger.fatal("server unavailable - ", ex);
-		disconnect(false);
+		disconnect(true);
 	}
 	
 	private void handleGameException(GameException ex) {

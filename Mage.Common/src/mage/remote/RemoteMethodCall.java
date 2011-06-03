@@ -63,6 +63,7 @@ public abstract class RemoteMethodCall<T> extends AbstractRemoteMethodCall<T> {
 	@Override
 	public T makeCall() {
 		returnVal = null; 
+		logger.debug("Calling: " + name);
 		try {
 			returnVal = super.makeCall();
 		}
@@ -81,6 +82,7 @@ public abstract class RemoteMethodCall<T> extends AbstractRemoteMethodCall<T> {
 
 	public T makeDirectCall() throws ServerUnavailable, MageException {
 		T returnValue = null;
+		logger.debug("Calling direct: " + name);
 		try {
 			returnValue = super.makeCall();
 		}

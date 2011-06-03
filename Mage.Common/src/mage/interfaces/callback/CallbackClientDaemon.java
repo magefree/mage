@@ -44,7 +44,7 @@ public class CallbackClientDaemon extends Thread {
 
 	private final static Logger logger = Logger.getLogger(CallbackClientDaemon.class);
 
-	private static ExecutorService callbackExecutor = Executors.newCachedThreadPool();
+	private ExecutorService callbackExecutor = Executors.newFixedThreadPool(1);
 	private final CallbackClient client;
 	private final Connection connection;
 	private final UUID id;
@@ -67,19 +67,22 @@ public class CallbackClientDaemon extends Thread {
 					final ClientCallback callback = callbackMethod.makeDirectCall();
 					Ack ackMethod = new Ack(connection, id, callback.getMessageId());
 					ackMethod.makeCall();
-					callbackExecutor.submit(
-						new Runnable() {
-							@Override
-							public void run() {
-								try {
-									client.processCallback(callback);
-								}
-								catch (Exception ex) {
-									logger.fatal("CallbackClientDaemon error ", ex);
+					if (callbackExecutor.isShutdown())
+						logger.fatal("Attempt to submit callback to shutdown executor");
+					else
+						callbackExecutor.submit(
+							new Runnable() {
+								@Override
+								public void run() {
+									try {
+										client.processCallback(callback);
+									}
+									catch (Exception ex) {
+										logger.fatal("CallbackClientDaemon error ", ex);
+									}
 								}
 							}
-						}
-					);
+						);
 				} catch (CallbackException ex) {
 					logger.fatal("Callback failed ", ex);
 				}

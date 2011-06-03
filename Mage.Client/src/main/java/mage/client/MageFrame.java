@@ -733,7 +733,8 @@ public class MageFrame extends javax.swing.JFrame implements Client {
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
         if (session.getState() == SessionState.CONNECTED) {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                session.disconnect(true);
+                session.disconnect(false);
+				showMessage("You have disconnected");
             }
         } else {
             connectDialog.showDialog();
@@ -747,7 +748,7 @@ public class MageFrame extends javax.swing.JFrame implements Client {
     }//GEN-LAST:event_btnAboutActionPerformed
 
     public void exitApp() {
-        session.disconnect(true);
+        session.disconnect(false);
         Plugins.getInstance().shutdown();
         dispose();
         System.exit(0);
@@ -915,12 +916,12 @@ public class MageFrame extends javax.swing.JFrame implements Client {
 
 	@Override
 	public void showMessage(String message) {
-		JOptionPane.showMessageDialog(desktopPane, message);
+		JOptionPane.showMessageDialog(this, message);
 	}
 
 	@Override
 	public void showError(String message) {
-		JOptionPane.showMessageDialog(desktopPane, message, "Error", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	@Override
