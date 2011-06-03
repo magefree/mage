@@ -28,10 +28,7 @@
 
 package mage.client.remote;
 
-import mage.remote.Session;
-import java.rmi.RemoteException;
 import java.util.UUID;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;

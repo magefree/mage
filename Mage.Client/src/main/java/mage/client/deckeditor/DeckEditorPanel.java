@@ -60,7 +60,6 @@ import mage.components.CardInfoPane;
 import mage.game.GameException;
 import mage.sets.Sets;
 import mage.view.CardView;
-import sun.swing.SwingUtilities2;
 
 /**
  *

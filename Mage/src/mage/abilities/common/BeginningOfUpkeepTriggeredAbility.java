@@ -1,6 +1,5 @@
 package mage.abilities.common;
 
-import com.sun.org.apache.bcel.internal.generic.CASTORE;
 import mage.Constants;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;

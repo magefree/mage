@@ -50,14 +50,12 @@ import java.util.UUID;
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 
-import com.sun.swing.internal.plaf.synth.resources.synth;
 
 import mage.cards.MagePermanent;
 import mage.client.cards.BigCard;
 import mage.client.cards.Permanent;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
-import mage.client.util.DefaultActionCallback;
 import mage.view.PermanentView;
 
 /**
