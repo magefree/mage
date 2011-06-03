@@ -35,6 +35,7 @@ import mage.Constants.Zone;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.cards.Card;
@@ -94,8 +95,13 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
 		if (effect != null) {
 			this.addEffect(effect);
 		}
-		if (cost != null)
-			this.addCost(cost);
+		if (cost != null) {
+			if (cost instanceof PhyrexianManaCost) {
+				this.addManaCost((PhyrexianManaCost)cost);
+			} else {
+				this.addCost(cost);
+			}
+		}
 	}
 
 	public ActivatedAbilityImpl(Zone zone, Effect effect, Costs<Cost> costs) {
