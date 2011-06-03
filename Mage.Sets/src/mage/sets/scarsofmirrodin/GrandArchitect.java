@@ -29,6 +29,7 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
+
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
@@ -45,31 +46,34 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.mana.ManaAbility;
-import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.SpellStack;
 import mage.game.stack.StackObject;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, nantuko
  */
 public class GrandArchitect extends CardImpl<GrandArchitect> {
 
-	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blue creatures");
+	private static final FilterCreaturePermanent boostFilter = new FilterCreaturePermanent("blue creatures");
+	private static final FilterCreaturePermanent targetFilter = new FilterCreaturePermanent("artifact creature");
 
 	static {
-		filter.getColor().setBlue(true);
-		filter.setUseColor(true);
+		boostFilter.getColor().setBlue(true);
+		boostFilter.setUseColor(true);
+		targetFilter.getCardType().add(CardType.ARTIFACT);
+		targetFilter.setScopeCardType(ComparisonScope.All);
 	}
 
 	public GrandArchitect(UUID ownerId) {
@@ -81,8 +85,10 @@ public class GrandArchitect extends CardImpl<GrandArchitect> {
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(3);
 
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrandArchitectEffect(), new ManaCostsImpl("{U}")));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, boostFilter, true)));
+		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrandArchitectEffect(), new ManaCostsImpl("{U}"));
+		ability.addTarget(new TargetPermanent(targetFilter));
+		this.addAbility(ability);
 		this.addAbility(new GrandArchitectManaAbility());
 	}
 
@@ -116,10 +122,10 @@ class GrandArchitectEffect extends ContinuousEffectImpl<GrandArchitectEffect> {
 	public boolean apply(Game game, Ability source) {
 		Permanent permanent = game.getPermanent(source.getFirstTarget());
 		if (permanent != null) {
-			permanent.getColor().setRed(true);
+			permanent.getColor().setRed(false);
 			permanent.getColor().setWhite(false);
 			permanent.getColor().setGreen(false);
-			permanent.getColor().setBlue(false);
+			permanent.getColor().setBlue(true);
 			permanent.getColor().setBlack(false);
 			return true;
 		}
