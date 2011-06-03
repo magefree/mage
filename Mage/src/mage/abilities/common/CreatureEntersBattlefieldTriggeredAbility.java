@@ -82,6 +82,7 @@ public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
 
     public CreatureEntersBattlefieldTriggeredAbility(CreatureEntersBattlefieldTriggeredAbility ability) {
         super(ability);
+        this.opponentController = ability.opponentController;
     }
 
     @Override
