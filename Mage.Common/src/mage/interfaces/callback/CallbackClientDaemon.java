@@ -32,6 +32,8 @@ import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import mage.remote.Connection;
+import mage.remote.ServerUnavailable;
+import mage.remote.Session;
 import mage.remote.method.Ack;
 import mage.remote.method.Callback;
 import org.apache.log4j.Logger;
@@ -46,13 +48,13 @@ public class CallbackClientDaemon extends Thread {
 
 	private ExecutorService callbackExecutor = Executors.newFixedThreadPool(1);
 	private final CallbackClient client;
-	private final Connection connection;
+	private final Session session;
 	private final UUID id;
 	private boolean end = false;
 
-	public CallbackClientDaemon(UUID id, CallbackClient client, Connection connection) {
+	public CallbackClientDaemon(UUID id, CallbackClient client, Session session) {
 		this.client = client;
-		this.connection = connection;
+		this.session = session;
 		this.id = id;
 		setDaemon(true);
 		start();
@@ -63,10 +65,8 @@ public class CallbackClientDaemon extends Thread {
 		try {
 	        while(!end) {
 				try {
-					Callback callbackMethod = new Callback(connection, id);
-					final ClientCallback callback = callbackMethod.makeDirectCall();
-					Ack ackMethod = new Ack(connection, id, callback.getMessageId());
-					ackMethod.makeCall();
+					final ClientCallback callback = session.callback(id);
+					session.ack(id, callback.getMessageId());
 					if (callbackExecutor.isShutdown())
 						logger.fatal("Attempt to submit callback to shutdown executor");
 					else
@@ -87,9 +87,11 @@ public class CallbackClientDaemon extends Thread {
 					logger.fatal("Callback failed ", ex);
 				}
 			}
+		} catch (ServerUnavailable ex) {
+			session.disconnect(true);
 		} catch(Exception ex) {
 			logger.fatal("CallbackClientDaemon error ", ex);
-			stopDaemon();
+			session.disconnect(true);
 		}
 	}
 	

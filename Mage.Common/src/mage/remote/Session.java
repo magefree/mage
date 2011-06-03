@@ -51,6 +51,7 @@ import mage.game.tournament.TournamentOptions;
 import mage.interfaces.Client;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.CallbackClientDaemon;
+import mage.interfaces.callback.ClientCallback;
 import mage.utils.MageVersion;
 import mage.view.DraftPickView;
 import mage.view.GameTypeView;
@@ -117,12 +118,12 @@ public class Session {
 			Registry reg = LocateRegistry.getRegistry(connection.getHost(), connection.getPort());
 			this.userName = connection.getUsername();
 			sessionId = registerClient(userName, client.getId(), client.getVersion());
-			callbackDaemon = new CallbackClientDaemon(sessionId, client, connection);
 			serverState = getServerState();
+			sessionState = SessionState.CONNECTED;
+			callbackDaemon = new CallbackClientDaemon(sessionId, client, this);
 			future = sessionExecutor.scheduleWithFixedDelay(new ServerPinger(), 5, 5, TimeUnit.SECONDS);
 			logger.info("Connected to RMI server at " + connection.getHost() + ":" + connection.getPort());
 			client.connected("Connected to " + connection.getHost() + ":" + connection.getPort() + " ");
-			sessionState = SessionState.CONNECTED;
 			return true;
 		} catch (Exception ex) {
 			logger.fatal("", ex);
@@ -143,7 +144,7 @@ public class Session {
 			try {
 				deregisterClient();
 			} catch (Exception ex) {
-				logger.fatal("Error disconnecting ...", ex);
+					logger.fatal("Error disconnecting ...", ex);
 			}
 		}
 		ServerCache.removeServerFromCache(connection);
@@ -239,6 +240,19 @@ public class Session {
 		return false;
 	}
 
+	public ClientCallback callback(UUID clientId) throws ServerUnavailable, MageException {
+		if (sessionState == SessionState.CONNECTED) {
+			Callback method = new Callback(connection, clientId);
+			return method.makeDirectCall();
+		}
+		return null;
+	}
+
+	public boolean ack(UUID clientId, int messageId) {
+		Ack method = new Ack(connection, clientId, messageId);
+		return handleCall(method);
+	}
+	
 	public UUID getMainRoomId() {
 		GetMainRoomId method = new GetMainRoomId(connection);
 		if (handleCall(method))
