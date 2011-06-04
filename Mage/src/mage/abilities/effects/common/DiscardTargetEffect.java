@@ -30,6 +30,8 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.players.Player;
@@ -40,16 +42,20 @@ import mage.players.Player;
  */
 public class DiscardTargetEffect extends OneShotEffect<DiscardTargetEffect> {
 
-	protected int amount;
+	protected DynamicValue amount;
 
-	public DiscardTargetEffect(int amount) {
+	public DiscardTargetEffect(DynamicValue amount) {
 		super(Outcome.Discard);
 		this.amount = amount;
 	}
 
+    public DiscardTargetEffect(int amount) {
+        this(new StaticValue(amount));
+    }
+    
 	public DiscardTargetEffect(final DiscardTargetEffect effect) {
 		super(effect);
-		this.amount = effect.amount;
+		this.amount = effect.amount.clone();
 	}
 
 	@Override
@@ -61,7 +67,7 @@ public class DiscardTargetEffect extends OneShotEffect<DiscardTargetEffect> {
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getFirstTarget());
 		if (player != null) {
-			player.discard(amount, source, game);
+			player.discard(amount.calculate(game, source), source, game);
 			return true;
 		}
 		return false;
@@ -69,7 +75,12 @@ public class DiscardTargetEffect extends OneShotEffect<DiscardTargetEffect> {
 
 	@Override
 	public String getText(Ability source) {
-		return "Target player discards " + Integer.toString(amount) + " card" + (amount == 1?"":"s");
+        int staticAmount = 0;
+        try{
+            staticAmount = Integer.parseInt(amount.toString());
+        } catch (Exception e) {
+        }
+        return "Target player discards " + amount.toString() + " card" + (staticAmount == 1 ? "" : "s");
 	}
 
 }
