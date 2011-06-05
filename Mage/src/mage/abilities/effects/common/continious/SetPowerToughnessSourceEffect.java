@@ -84,7 +84,10 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl<SetPower
 	public String getDynamicText(Ability source) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("{this} ").append(" becomes ");
-		sb.append(power).append("/").append(toughness).append(" ").append(duration.toString());
+		sb.append(power).append("/").append(toughness);
+		if (duration != Duration.WhileOnBattlefield)
+			sb.append(" ").append(duration.toString());
+        sb.append(power.getMessage());
 		return sb.toString();
 	}
 

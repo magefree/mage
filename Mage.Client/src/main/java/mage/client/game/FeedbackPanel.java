@@ -144,7 +144,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 		this.btnRight.setVisible(false);
 		this.btnSpecial.setVisible(false);
 		this.lblMessage.setText("");
-		logger.info("feedback - clear");
+		logger.debug("feedback - clear");
 	}
 
 	private synchronized void startModal() {

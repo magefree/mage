@@ -25,6 +25,7 @@ Mage.Sets/target
 Mage.Tests/target
 Mage/target
 
+releases
 syntax: regexp
 .class
 .jar

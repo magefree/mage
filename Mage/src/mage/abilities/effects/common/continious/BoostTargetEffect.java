@@ -82,9 +82,11 @@ public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
     @Override
     public String getText(Ability source) {
         StringBuilder sb = new StringBuilder();
-        sb.append("target ").append(source.getTargets().get(0).getTargetName()).append(" gets ");
-        sb.append(power.toString()).append("/").append(toughness.toString());
-        sb.append(" ").append(duration.toString());
+        sb.append("Target ").append(source.getTargets().get(0).getTargetName()).append(" gets ");
+        sb.append(power).append("/").append(toughness);
+        if (duration != Duration.WhileOnBattlefield)
+			sb.append(" ").append(duration.toString());
+        sb.append(power.getMessage());
         return sb.toString();
     }
 }

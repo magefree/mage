@@ -97,7 +97,7 @@ public class SessionManager {
 	}
 
 	public void checkSessions() {
-		logger.info("Checking sessions");
+		logger.trace("Checking sessions");
 		for (Session session: sessions.values()) {
 			if (!session.stillAlive()) {
 				logger.info("Client for user " + session.getUsername() + ":" + session.getId() + " timed out - releasing resources");

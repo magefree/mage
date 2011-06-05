@@ -38,6 +38,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.swing.JComponent;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
 
 import mage.client.MageFrame;
 import mage.client.MagePane;

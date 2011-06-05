@@ -35,4 +35,9 @@ public class CountersCount implements DynamicValue {
     public String toString() {
         return "X";
     }
+
+    @Override
+    public String getMessage() {
+        return "";
+    }
 }

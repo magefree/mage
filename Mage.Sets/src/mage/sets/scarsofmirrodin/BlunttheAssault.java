@@ -33,11 +33,11 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.dynamicvalue.common.CreaturesOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.PreventAllCombatDamageEffect;
 import mage.cards.CardImpl;
+import mage.filter.FilterPermanent;
 
 /**
  *
@@ -45,13 +45,17 @@ import mage.cards.CardImpl;
  */
 public class BlunttheAssault extends CardImpl<BlunttheAssault> {
 
+    private static final FilterPermanent filter = new FilterPermanent("creature on the battlefield");
+
+    static {
+        filter.getCardType().add(Constants.CardType.CREATURE);
+    }
+
     public BlunttheAssault (UUID ownerId) {
         super(ownerId, 113, "Blunt the Assault", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
         this.expansionSetCode = "SOM";
 		this.color.setGreen(true);
-        GainLifeEffect effect = new GainLifeEffect(new CreaturesOnBattlefieldCount());
-        effect.setStaticText("You gain 1 life for each creature on the battlefield");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));
         this.getSpellAbility().addEffect(new PreventAllCombatDamageEffect(Constants.Duration.EndOfTurn));
     }
 

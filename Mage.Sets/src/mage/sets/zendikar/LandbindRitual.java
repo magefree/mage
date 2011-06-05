@@ -42,7 +42,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class LandbindRitual extends CardImpl<LandbindRitual> {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Plains");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Plains you control");
 
     static {
         filter.getSubtype().add("Plains");
@@ -55,7 +55,7 @@ public class LandbindRitual extends CardImpl<LandbindRitual> {
 
         this.color.setWhite(true);
 
-        this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));
+        this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter, 2)));
     }
 
     public LandbindRitual(final LandbindRitual card) {
