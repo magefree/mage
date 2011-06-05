@@ -40,7 +40,7 @@ public class RemoteMethodCallQueue extends LinkedBlockingQueue<RemoteMethodCall>
 	public void callMethod(RemoteMethodCall call) throws ServerUnavailable, MageException {
 		synchronized (call) {
 			try {
-				this.put(call);
+				this.offer(call);
 				call.wait();
 				if (call.isException()) {
 					if (call.getException() != null)
@@ -54,4 +54,16 @@ public class RemoteMethodCallQueue extends LinkedBlockingQueue<RemoteMethodCall>
 		}
 	}
 
+	public void clearCalls() {
+		RemoteMethodCall call = null;
+		while (true) {
+			call = poll();
+			if (call == null)
+				return;
+			synchronized (call) {
+				call.notify();
+			}
+		}
+	}	
+	
 }

@@ -159,7 +159,7 @@ public class Session {
 	}
 
 	private void cleanupSession() {
-		q.clear();
+		q.clearCalls();
 		if (future != null && !future.isDone())
 			future.cancel(true);
 		if (callbackDaemon != null)
@@ -497,7 +497,7 @@ public class Session {
 		return handleCall(method);
 	}
 
-	private void handleServerUnavailable(ServerUnavailable ex) {
+	public void handleServerUnavailable(ServerUnavailable ex) {
 		sessionState = SessionState.SERVER_UNAVAILABLE;
 		logger.fatal("server unavailable - ", ex);
 		disconnect(true);

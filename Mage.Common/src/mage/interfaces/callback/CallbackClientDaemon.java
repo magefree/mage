@@ -31,11 +31,9 @@ package mage.interfaces.callback;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import mage.remote.Connection;
+import mage.MageException;
 import mage.remote.ServerUnavailable;
 import mage.remote.Session;
-import mage.remote.method.Ack;
-import mage.remote.method.Callback;
 import org.apache.log4j.Logger;
 
 /**
@@ -88,8 +86,8 @@ public class CallbackClientDaemon extends Thread {
 				}
 			}
 		} catch (ServerUnavailable ex) {
-			session.disconnect(true);
-		} catch(Exception ex) {
+			session.handleServerUnavailable(ex);
+		} catch(MageException ex) {
 			logger.fatal("CallbackClientDaemon error ", ex);
 			session.disconnect(true);
 		}
