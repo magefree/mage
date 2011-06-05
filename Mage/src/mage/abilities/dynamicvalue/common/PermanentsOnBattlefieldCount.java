@@ -12,13 +12,19 @@ import mage.game.Game;
 public class PermanentsOnBattlefieldCount implements DynamicValue {
 
     private FilterPermanent filter;
+    private Integer amount;
 
     public PermanentsOnBattlefieldCount() {
         filter = new FilterPermanent();
     }
 
     public PermanentsOnBattlefieldCount(FilterPermanent filter) {
+        this(filter, 1);
+    }
+
+    public PermanentsOnBattlefieldCount(FilterPermanent filter, Integer amount) {
         this.filter = filter;
+        this.amount = amount;
     }
 
     public PermanentsOnBattlefieldCount(final PermanentsOnBattlefieldCount dynamicValue) {
@@ -37,6 +43,11 @@ public class PermanentsOnBattlefieldCount implements DynamicValue {
 
     @Override
     public String toString() {
-        return "X";
+        return amount.toString();
+    }
+
+    @Override
+    public String getMessage() {
+        return " for each " + filter.getMessage();
     }
 }

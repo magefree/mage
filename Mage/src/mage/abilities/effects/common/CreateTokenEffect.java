@@ -90,6 +90,7 @@ public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
             sb.append("put ").append(amount);
         }
 		sb.append(" ").append(token.getDescription()).append(" onto the battlefield");
+        sb.append(amount.getMessage());
 		return sb.toString();
 	}
 

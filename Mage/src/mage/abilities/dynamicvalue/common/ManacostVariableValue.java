@@ -19,4 +19,9 @@ public class ManacostVariableValue implements DynamicValue {
     public String toString() {
         return "X";
     }
+
+    @Override
+    public String getMessage() {
+        return "";
+    }
 }

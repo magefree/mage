@@ -19,4 +19,9 @@ public class CardsInControlledPlayerHandCount implements DynamicValue {
     public DynamicValue clone() {
         return new CardsInControlledPlayerHandCount();
     }
+
+    @Override
+    public String getMessage() {
+        return "";
+    }
 }

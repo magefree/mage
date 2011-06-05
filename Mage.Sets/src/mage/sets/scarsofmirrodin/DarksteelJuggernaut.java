@@ -37,15 +37,22 @@ import mage.MageInt;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
-import mage.abilities.dynamicvalue.common.ControlledArtifactsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.filter.FilterPermanent;
 
 /**
  *
  * @author Loki
  */
 public class DarksteelJuggernaut extends CardImpl<DarksteelJuggernaut> {
+    private static final FilterPermanent filter = new FilterPermanent("artifacts you control");
+
+    static {
+        filter.getCardType().add(Constants.CardType.ARTIFACT);
+        filter.setTargetController(Constants.TargetController.YOU);
+    }
 
     public DarksteelJuggernaut (UUID ownerId) {
         super(ownerId, 150, "Darksteel Juggernaut", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
@@ -53,7 +60,9 @@ public class DarksteelJuggernaut extends CardImpl<DarksteelJuggernaut> {
         this.subtype.add("Juggernaut");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
-        SetPowerToughnessSourceEffect effect = new SetPowerToughnessSourceEffect(new ControlledArtifactsOnBattlefieldCount(), new ControlledArtifactsOnBattlefieldCount(), Constants.Duration.EndOfGame);
+        
+        PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter);
+        SetPowerToughnessSourceEffect effect = new SetPowerToughnessSourceEffect(value, value, Constants.Duration.EndOfGame);
         effect.setStaticText("Darksteel Juggernaut's power and toughness are each equal to the number of artifacts you control");
         this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, effect));
         this.addAbility(IndestructibleAbility.getInstance());

@@ -30,4 +30,9 @@ public class StaticValue implements DynamicValue {
     public String toString() {
         return Integer.toString(value);
     }
+
+    @Override
+    public String getMessage() {
+        return "";
+    }
 }

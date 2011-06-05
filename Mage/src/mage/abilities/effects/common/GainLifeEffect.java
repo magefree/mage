@@ -74,7 +74,7 @@ public class GainLifeEffect extends OneShotEffect<GainLifeEffect> {
 
 	@Override
 	public String getDynamicText(Ability source) {
-		return "you gain " + life.toString() + " life";
+		return "you gain " + life.toString() + " life" + life.getMessage();
 	}
 
 }

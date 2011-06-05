@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  */
 public class MindSludge extends CardImpl<MindSludge> {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp you control");
 
     static {
         filter.getSubtype().add("Swamp");
