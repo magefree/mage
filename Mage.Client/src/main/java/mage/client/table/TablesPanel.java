@@ -473,8 +473,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 	@Override
 	protected Void doInBackground() throws Exception {
 		while (!isCancelled()) {
-			if (MageFrame.getDesktop().getSelectedFrame() instanceof TablesPane)
-				this.publish(session.getTables(roomId));	
+			this.publish(session.getTables(roomId));	
 			Thread.sleep(1000);
 		}
 		return null;
