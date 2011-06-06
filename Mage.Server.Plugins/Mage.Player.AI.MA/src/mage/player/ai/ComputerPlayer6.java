@@ -273,11 +273,11 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 		for (SimulationNode2 child: node.getChildren()) {
 			Combat _combat = child.getCombat();
 			if (alpha >= beta) {
-				logger.info("alpha beta pruning");
+				//logger.info("alpha beta pruning");
 				break;
 			}
 			if (SimulationNode2.nodeCount > maxNodes) {
-				logger.info("simulating -- reached end-state, count=" + SimulationNode2.nodeCount);
+				//logger.info("simulating -- reached end-state, count=" + SimulationNode2.nodeCount);
 				break;
 			}
 			int val = addActions(child, filter, depth-1, alpha, beta);

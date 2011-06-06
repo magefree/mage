@@ -107,7 +107,7 @@ public class ArtificialScoringSystem {
 	}
 
 	public static int getTappedScore(final Permanent permanent) {
-		return permanent.getCardType().contains(Constants.CardType.CREATURE) ? -10 : -5;
+		return permanent.getCardType().contains(Constants.CardType.CREATURE) ? -100 : -50;
 	}
 
 	public static int getLifeScore(final int life) {
