@@ -38,6 +38,7 @@ import mage.client.draft.DraftPanel;
 import mage.client.game.GamePanel;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.GameManager;
+import mage.client.util.object.SaveObjectUtil;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.view.AbilityPickerView;
@@ -74,6 +75,7 @@ public class CallbackClientImpl implements CallbackClient {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
+				SaveObjectUtil.saveObject(callback.getData(), callback.getMethod());
 				try {
 					logger.info(callback.getMessageId() + " -- " + callback.getMethod());
 					if (callback.getMethod().equals("startGame")) {
