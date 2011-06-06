@@ -1,5 +1,8 @@
 package org.mage.test.serverside.base.impl;
 
+import java.util.List;
+import java.util.UUID;
+
 import mage.Constants;
 import mage.cards.Card;
 import mage.filter.Filter;
@@ -7,11 +10,10 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.sets.Sets;
+
 import org.junit.Assert;
 import org.mage.test.serverside.base.CardTestAPI;
 import org.mage.test.serverside.base.MageTestBase;
-
-import java.util.List;
 
 /**
  * API for test initialization and asserting the test results.
@@ -42,6 +44,23 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 		// library:ComputerB:clear:0
 		removeAllCardsFromLibrary(computerB);
 		// library:ComputerB:Plains:10
+		addCard(Constants.Zone.LIBRARY, computerB, "Plains", 10);
+	}
+	
+	/**
+	 * Default game initialization params for white player (that plays with Plains)
+	 */
+	public void useWhiteDefault() {
+		// *** ComputerA ***
+		addCard(Constants.Zone.BATTLEFIELD, computerA, "Plains", 5);
+		addCard(Constants.Zone.HAND, computerA, "Plains", 5);
+		removeAllCardsFromLibrary(computerA);
+		addCard(Constants.Zone.LIBRARY, computerA, "Plains", 10);
+
+		// *** ComputerB ***
+		addCard(Constants.Zone.BATTLEFIELD, computerB, "Plains", 2);
+		addCard(Constants.Zone.HAND, computerB, "Plains", 2);
+		removeAllCardsFromLibrary(computerB);
 		addCard(Constants.Zone.LIBRARY, computerB, "Plains", 10);
 	}
 
@@ -292,5 +311,21 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 			}
 		}
 		Assert.assertEquals("(Battlefield) Card counts are not equal (" + cardName + ")", count, actualCount);
+	}
+	
+	public Permanent getPermanent(String cardName, UUID controller) {
+		Permanent permanent0 = null;
+		int count = 0;
+		for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
+			if (permanent.getControllerId().equals(controller)) {
+				if (permanent.getName().equals(cardName)) {
+					permanent0 = permanent;
+					count++;
+				}
+			}
+		}
+		Assert.assertNotNull("Couldn't find a card with specified name: " + cardName, permanent0);
+		Assert.assertEquals("More than one permanent was found: " + cardName + "(" + count + ")", 1, count);
+		return permanent0;
 	}
 }
