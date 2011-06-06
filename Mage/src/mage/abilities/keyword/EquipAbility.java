@@ -59,7 +59,7 @@ public class EquipAbility extends ActivatedAbilityImpl<EquipAbility> {
 
 	@Override
 	public String getRule() {
-		return "Equip" + super.getRule();
+		return "Equip " + costs.getText();
 	}
 
 }
