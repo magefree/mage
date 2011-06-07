@@ -32,6 +32,8 @@ import java.util.UUID;
 import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.target.targetpointer.FirstTargetPointer;
+import mage.target.targetpointer.TargetPointer;
 
 /**
  *
@@ -42,6 +44,7 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 	protected UUID id;
 	protected final Outcome outcome;
 	protected EffectType effectType;
+    protected TargetPointer targetPointer = FirstTargetPointer.getInstance();
     protected String staticText = "";
 
 	public EffectImpl(Outcome outcome) {
@@ -54,6 +57,7 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 		this.outcome = effect.outcome;
 		this.effectType = effect.effectType;
         this.staticText = effect.staticText;
+        this.targetPointer = effect.targetPointer.copy();
 	}
 
 	@Override
@@ -87,4 +91,8 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 	public EffectType getEffectType() {
 		return effectType;
 	}
+
+    public void setTargetPointer(TargetPointer targetPointer) {
+        this.targetPointer = targetPointer;
+    }
 }

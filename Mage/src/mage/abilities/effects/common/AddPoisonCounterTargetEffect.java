@@ -63,7 +63,7 @@ public class AddPoisonCounterTargetEffect extends OneShotEffect<AddPoisonCounter
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
+        Player player = game.getPlayer(targetPointer.getFirst(source));
         if (player != null) {
             player.getCounters().addCounter(CounterType.POISON.createInstance(amount));
             return true;
