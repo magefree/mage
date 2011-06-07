@@ -30,14 +30,12 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
-import com.sun.xml.internal.ws.encoding.fastinfoset.FastInfosetCodec;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
-import mage.abilities.effects.common.counter.AddCountersControllerEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
