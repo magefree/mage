@@ -63,7 +63,7 @@ public class LoseLifeTargetEffect extends OneShotEffect<LoseLifeTargetEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
+		Player player = game.getPlayer(targetPointer.getFirst(source));
 		if (player != null) {
 			player.loseLife(amount, game);
 			return true;
@@ -73,7 +73,14 @@ public class LoseLifeTargetEffect extends OneShotEffect<LoseLifeTargetEffect> {
 
 	@Override
 	public String getText(Ability source) {
-		return "Target " + source.getTargets().get(0).getTargetName() + " loses " + Integer.toString(amount) + " life";
+        StringBuffer result = new StringBuffer();
+        if (source.getTargets().size() > 0) {
+		    result.append("Target " + source.getTargets().get(0).getTargetName());
+        } else {
+            result.append("that player");
+        }
+        result.append(" loses ").append(amount).append(" life");
+        return result.toString();
 	}
 
 

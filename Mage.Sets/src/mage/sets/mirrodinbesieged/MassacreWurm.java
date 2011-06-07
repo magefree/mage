@@ -36,6 +36,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.continious.BoostOpponentsEffect;
@@ -45,6 +46,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -77,7 +79,6 @@ public class MassacreWurm extends CardImpl<MassacreWurm> {
 class MassacreWurmTriggeredAbility extends TriggeredAbilityImpl<MassacreWurmTriggeredAbility> {
     MassacreWurmTriggeredAbility() {
         super(Constants.Zone.BATTLEFIELD, new LoseLifeTargetEffect(2));
-        this.addTarget(new TargetPlayer());
     }
 
     MassacreWurmTriggeredAbility(final MassacreWurmTriggeredAbility ability) {
@@ -96,7 +97,9 @@ class MassacreWurmTriggeredAbility extends TriggeredAbilityImpl<MassacreWurmTrig
             if (zEvent.getFromZone() == Constants.Zone.BATTLEFIELD && zEvent.getToZone() == Constants.Zone.GRAVEYARD) {
                 Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
                 if (p != null && p.getCardType().contains(CardType.CREATURE) && game.getOpponents(this.getControllerId()).contains(p.getControllerId())) {
-                    targets.get(0).add(p.getControllerId(), game);
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(p.getControllerId()));
+                    }
                     return true;
                 }
             }
