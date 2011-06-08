@@ -37,7 +37,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.CardsInControlledPlayerHandCount;
+import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -95,7 +95,7 @@ class SwordofWarandPeaceAbility extends TriggeredAbilityImpl<SwordofWarandPeaceA
 
     public SwordofWarandPeaceAbility() {
         super(Constants.Zone.BATTLEFIELD, new SwordofWarandPeaceDamageEffect());
-        this.addEffect(new GainLifeEffect(new CardsInControlledPlayerHandCount()));
+        this.addEffect(new GainLifeEffect(new CardsInControllerHandCount()));
         this.addTarget(new TargetPlayer());
     }
 

@@ -25,33 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.conflux;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
@@ -62,78 +57,43 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class KnightOfTheReliquary extends CardImpl<KnightOfTheReliquary> {
 
-	private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest or Plains");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest or Plains");
 
-	static {
-		filter.getCardType().add(CardType.LAND);
-		filter.setScopeCardType(ComparisonScope.Any);
-		filter.getSubtype().add("Forest");
-		filter.getSubtype().add("Plains");
-		filter.setScopeSubtype(ComparisonScope.Any);
-	}
+    static {
+        filter.getCardType().add(CardType.LAND);
+        filter.setScopeCardType(ComparisonScope.Any);
+        filter.getSubtype().add("Forest");
+        filter.getSubtype().add("Plains");
+        filter.setScopeSubtype(ComparisonScope.Any);
+    }
 
-	public KnightOfTheReliquary(UUID ownerId) {
-		super(ownerId, 113, "Knight of the Reliquary", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
-		this.expansionSetCode = "CON";
-		this.color.setWhite(true);
-		this.color.setGreen(true);
-		this.subtype.add("Human");
-		this.subtype.add("Knight");
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
-		TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
-		Costs costs = new CostsImpl();
-		costs.add(new TapSourceCost());
-		costs.add(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, false)));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KnightOfTheReliquaryEffect()));
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay), costs));
-	}
+    public KnightOfTheReliquary(UUID ownerId) {
+        super(ownerId, 113, "Knight of the Reliquary", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
+        this.expansionSetCode = "CON";
+        this.subtype.add("Human");
+        this.subtype.add("Knight");
 
-	public KnightOfTheReliquary(final KnightOfTheReliquary card) {
-		super(card);
-	}
+        this.color.setWhite(true);
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-	@Override
-	public KnightOfTheReliquary copy() {
-		return new KnightOfTheReliquary(this);
-	}
+        CardsInControllerGraveyardCount value = new CardsInControllerGraveyardCount(new FilterLandCard());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)));
 
-}
+        TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
+        Costs costs = new CostsImpl();
+        costs.add(new TapSourceCost());
+        costs.add(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, false)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay), costs));
+    }
 
-class KnightOfTheReliquaryEffect extends ContinuousEffectImpl<KnightOfTheReliquaryEffect> {
+    public KnightOfTheReliquary(final KnightOfTheReliquary card) {
+        super(card);
+    }
 
-	private static FilterLandCard filter = new FilterLandCard();
-
-	public KnightOfTheReliquaryEffect() {
-		super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-	}
-
-	public KnightOfTheReliquaryEffect(final KnightOfTheReliquaryEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public KnightOfTheReliquaryEffect copy() {
-		return new KnightOfTheReliquaryEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		int count = game.getPlayer(source.getControllerId()).getGraveyard().count(filter, game);
-		if (count > 0) {
-			Permanent target = (Permanent) game.getPermanent(source.getSourceId());
-			if (target != null) {
-				target.addPower(count);
-				target.addToughness(count);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "{this} gets +1/+1 for each land card in your graveyard";
-	}
-
+    @Override
+    public KnightOfTheReliquary copy() {
+        return new KnightOfTheReliquary(this);
+    }
 }
