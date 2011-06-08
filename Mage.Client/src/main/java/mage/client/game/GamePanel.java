@@ -89,6 +89,7 @@ public class GamePanel extends javax.swing.JPanel {
         initComponents();
         
         hand.setHScrollSpeed(8);
+        hand.setBackgroundColor(new Color(0,0,0,100));
         combat = new CombatDialog();
         pickNumber = new PickNumberDialog();
         MageFrame.getDesktop().add(combat, JLayeredPane.POPUP_LAYER);

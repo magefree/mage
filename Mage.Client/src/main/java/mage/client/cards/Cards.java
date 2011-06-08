@@ -34,8 +34,7 @@
 
 package mage.client.cards;
 
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.*;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -84,6 +83,15 @@ public class Cards extends javax.swing.JPanel {
         	cardArea.setLayout(null);
         }
 	}
+
+    /**
+     * Sets components background color
+     * @param color
+     */
+    public void setBackgroundColor(Color color) {
+        cardArea.setOpaque(true);
+        cardArea.setBackground(new Color(0,0,0,100));
+    }
 
 	public void setBorder(Border border) {
 		super.setBorder(border);
@@ -168,7 +176,7 @@ public class Cards extends javax.swing.JPanel {
 	
 	private void layoutCards(Dimension dimension) {
 		if (Plugins.getInstance().isCardPluginLoaded()) {
-			int dx = 0;
+			int dx = GAP_X;
 			for (MageCard card: cards.values()) {
 				card.setLocation(dx, 0);
 				card.setCardBounds(dx, 0, dimension.width, dimension.height);
