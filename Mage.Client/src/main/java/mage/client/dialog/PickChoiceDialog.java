@@ -132,11 +132,11 @@ public class PickChoiceDialog extends MageDialog {
     }// </editor-fold>//GEN-END:initComponents
 
 	private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-		this.setVisible(false);
+		this.hideDialog();
 	}//GEN-LAST:event_btnOkActionPerformed
 
 	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-		this.setVisible(false);
+		this.hideDialog();
 	}//GEN-LAST:event_btnCancelActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

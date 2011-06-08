@@ -69,7 +69,7 @@ public class ExileZoneDialog extends MageDialog {
 			}
 		}
 		else {
-			hide();
+			this.hideDialog();
 		}
 	}
 	

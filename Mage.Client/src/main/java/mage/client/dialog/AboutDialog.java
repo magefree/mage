@@ -34,7 +34,6 @@
 
 package mage.client.dialog;
 
-import mage.client.MageFrame;
 import mage.utils.MageVersion;
 
 /**
@@ -123,7 +122,7 @@ public class AboutDialog extends MageDialog {
     }// </editor-fold>//GEN-END:initComponents
 
 	private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-		this.setVisible(false);
+		this.hideDialog();
 	}//GEN-LAST:event_btnOkActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

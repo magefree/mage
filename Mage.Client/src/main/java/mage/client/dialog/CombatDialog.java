@@ -111,10 +111,11 @@ public class CombatDialog extends MageDialog {
 		}
 	}
 
+	@Override
 	public void hideDialog() {
 		this.lastX = this.getX();
 		this.lastY = this.getY();
-		this.setVisible(false);
+		super.hideDialog();
 	}
 
     /** This method is called from within the constructor to

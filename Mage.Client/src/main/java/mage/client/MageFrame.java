@@ -110,6 +110,7 @@ public class MageFrame extends javax.swing.JFrame implements Client {
     private Rectangle titleRectangle;
 	private final static MageVersion version = new MageVersion(0, 7, 3);
 	private UUID clientId;
+	private static MagePane activeFrame;
 	
 	private static Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
 	private static Map<UUID, GamePanel> games = new HashMap<UUID, GamePanel>();
@@ -368,21 +369,15 @@ public class MageFrame extends javax.swing.JFrame implements Client {
 		MagePaneMenuItem menuItem;
 
 		for (int i = 0; i < windows.length; i++) {
-			JInternalFrame window = windows[i];
+			MagePane window = (MagePane) windows[i];
 			if (window.isVisible()) {
 				menuItem = new MagePaneMenuItem(window);
 				menuItem.setState(i == 0);
 				menuItem.addActionListener(new ActionListener() {
+					@Override
 					public void actionPerformed(ActionEvent ae) {
-						JInternalFrame frame = ((MagePaneMenuItem) ae.getSource()).getFrame();
-						frame.toFront();
-						frame.setVisible(true);
-						//frame.moveToFront();
-						try {
-							frame.setSelected(true);
-						} catch (PropertyVetoException e) {
-							e.printStackTrace();
-						}
+						MagePane frame = ((MagePaneMenuItem) ae.getSource()).getFrame();
+						setActive(frame);
 					}
 				});
 				menuItem.setIcon(window.getFrameIcon());
@@ -418,69 +413,96 @@ public class MageFrame extends javax.swing.JFrame implements Client {
         }
     }
 
+	public static void setActive(MagePane frame) {
+		if (frame == null)
+			return;
+		logger.debug("Setting " + frame.getTitle() + " active");
+		if (activeFrame != null)
+			activeFrame.deactivated();
+		activeFrame = frame;
+		activeFrame.toFront();
+		try {
+			activeFrame.setSelected(true);
+		} catch (PropertyVetoException ex) {}
+		activeFrame.activated();
+	}
+	
+	public static void deactivate(MagePane frame) {
+		frame.setVisible(false);
+		MagePane topmost = getTopMost(frame);
+		if (activeFrame != frame)
+			frame.deactivated();
+		setActive(topmost);
+	}
+	
+	private static MagePane getTopMost(MagePane exclude) {
+		MagePane topmost = null;
+		int best = Integer.MAX_VALUE;
+		for (JInternalFrame frame: desktopPane.getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER)) {
+			if (frame.isVisible()) {
+				int z = desktopPane.getComponentZOrder(frame);
+				if (z < best) {
+					best = z;
+					topmost = (MagePane) frame;
+				}
+			}
+		}
+		return topmost;
+	}
+	
     public void showGame(UUID gameId, UUID playerId) {
 		try {
 			GamePane gamePane = new GamePane();
-			desktopPane.add(gamePane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+			desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
 			gamePane.setMaximum(true);
 			gamePane.setVisible(true);
-			gamePane.toFront();
 			gamePane.showGame(gameId, playerId);
-		} catch (PropertyVetoException ex) {
-			logger.fatal(null, ex);
-		}
+			setActive(gamePane);
+		} catch (PropertyVetoException ex) {}
     }
 
     public void watchGame(UUID gameId) {
 		try {
 			GamePane gamePane = new GamePane();
-			desktopPane.add(gamePane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+			desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
 			gamePane.setMaximum(true);
 			gamePane.setVisible(true);
-			gamePane.toFront();
 			gamePane.watchGame(gameId);
-		} catch (PropertyVetoException ex) {
-			logger.fatal(null, ex);
-		}
+			setActive(gamePane);
+		} catch (PropertyVetoException ex) {}
     }
 
     public void replayGame(UUID gameId) {
 		try {
 			GamePane gamePane = new GamePane();
-			desktopPane.add(gamePane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+			desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
 			gamePane.setMaximum(true);
 			gamePane.setVisible(true);
-			gamePane.toFront();
 			gamePane.replayGame(gameId);
-		} catch (PropertyVetoException ex) {
-			logger.fatal(null, ex);
-		}
+			setActive(gamePane);
+		} catch (PropertyVetoException ex) {}
     }
 
 	public void showDraft(UUID draftId) {
 		try {
 			DraftPane draftPane = new DraftPane();
-			desktopPane.add(draftPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+			desktopPane.add(draftPane, JLayeredPane.DEFAULT_LAYER);
 			draftPane.setMaximum(true);
 			draftPane.setVisible(true);
-			draftPane.toFront();
 			draftPane.showDraft(draftId);
-		} catch (PropertyVetoException ex) {
-			logger.fatal(null, ex);
-		}
+			setActive(draftPane);
+		} catch (PropertyVetoException ex) {}
 	}
 
  	public void showTournament(UUID tournamentId) {
 		try {
 			TournamentPane tournamentPane = new TournamentPane();
-			desktopPane.add(tournamentPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+			desktopPane.add(tournamentPane, JLayeredPane.DEFAULT_LAYER);
 			tournamentPane.setMaximum(true);
 			tournamentPane.setVisible(true);
-			tournamentPane.toFront();
 			tournamentPane.showTournament(tournamentId);
-		} catch (PropertyVetoException ex) {
-			logger.fatal(null, ex);
-		}
+			setActive(tournamentPane);
+		} catch (PropertyVetoException ex) {}
 	}
 
 	public static boolean connect(Connection connection) {
@@ -722,8 +744,8 @@ public class MageFrame extends javax.swing.JFrame implements Client {
 
     private void btnGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGamesActionPerformed
         this.tablesPane.setVisible(true);
-	    this.tablesPane.toFront();
         this.tablesPane.showTables();
+		setActive(tablesPane);
     }//GEN-LAST:event_btnGamesActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -743,7 +765,7 @@ public class MageFrame extends javax.swing.JFrame implements Client {
 
     private void btnAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutActionPerformed
         AboutDialog aboutDialog = new AboutDialog();
-        desktopPane.add(aboutDialog);
+        desktopPane.add(aboutDialog, JLayeredPane.POPUP_LAYER);
         aboutDialog.showDialog(version);
     }//GEN-LAST:event_btnAboutActionPerformed
 
@@ -773,7 +795,7 @@ public class MageFrame extends javax.swing.JFrame implements Client {
 	}
 
 	public void hideGames() {
-		JInternalFrame[] windows = desktopPane.getAllFramesInLayer(javax.swing.JLayeredPane.DEFAULT_LAYER);
+		JInternalFrame[] windows = desktopPane.getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER);
 		for (JInternalFrame window: windows) {
 			if (window instanceof GamePane) {
 				GamePane gamePane = (GamePane) window;
@@ -785,11 +807,11 @@ public class MageFrame extends javax.swing.JFrame implements Client {
     public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
 		try {
 			DeckEditorPane deckEditorPane = new DeckEditorPane();
-			desktopPane.add(deckEditorPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+			desktopPane.add(deckEditorPane, JLayeredPane.DEFAULT_LAYER);
 			deckEditorPane.setMaximum(true);
 			deckEditorPane.setVisible(true);
-			deckEditorPane.toFront();
 			deckEditorPane.show(mode, deck, tableId, time);
+			setActive(deckEditorPane);
 		} catch (PropertyVetoException ex) {
 			logger.fatal(null, ex);
 		}
@@ -797,7 +819,7 @@ public class MageFrame extends javax.swing.JFrame implements Client {
 
     public void showCollectionViewer() {
         this.collectionViewerPane.setVisible(true);
-		this.collectionViewerPane.toFront();
+		setActive(collectionViewerPane);
     }
 
     static void renderSplashFrame(Graphics2D g) {
@@ -932,14 +954,14 @@ public class MageFrame extends javax.swing.JFrame implements Client {
 }
 
 class MagePaneMenuItem extends JCheckBoxMenuItem {
-	private JInternalFrame frame;
+	private MagePane frame;
 
-	public MagePaneMenuItem(JInternalFrame frame) {
+	public MagePaneMenuItem(MagePane frame) {
 		super(frame.getTitle());
 		this.frame = frame;
 	}
 
-	public JInternalFrame getFrame() {
+	public MagePane getFrame() {
 		return frame;
 	}
 }

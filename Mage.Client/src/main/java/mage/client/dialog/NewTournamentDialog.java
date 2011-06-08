@@ -322,7 +322,7 @@ public class NewTournamentDialog extends MageDialog {
 					}
 				}
 			}
-			this.setVisible(false);
+			this.hideDialog();
 			return;
 		}
 		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining tournament.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -333,7 +333,7 @@ public class NewTournamentDialog extends MageDialog {
 	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
 		this.table = null;
 		this.playerId = null;
-		this.setVisible(false);
+		this.hideDialog();
 	}//GEN-LAST:event_btnCancelActionPerformed
 
 	private void spnNumPlayersStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnNumPlayersStateChanged

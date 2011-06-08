@@ -133,8 +133,9 @@ public class DraftPanel extends javax.swing.JPanel {
 		while (c != null && !(c instanceof DraftPane)) {
 			c = c.getParent();
 		}
-		if (c != null)
-			c.setVisible(false);
+		if (c != null) {
+			((DraftPane)c).hideFrame();
+		}
 	}
 
 	protected void setMessage(String message) {

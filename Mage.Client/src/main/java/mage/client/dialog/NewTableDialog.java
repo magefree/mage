@@ -301,7 +301,7 @@ public class NewTableDialog extends MageDialog {
 	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
 		this.table = null;
 		this.playerId = null;
-		this.setVisible(false);
+		this.hideDialog();
 	}//GEN-LAST:event_btnCancelActionPerformed
 
 	private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
@@ -332,7 +332,7 @@ public class NewTableDialog extends MageDialog {
 						}
 					}
 				}
-				this.setVisible(false);
+				this.hideDialog();
 				return;
 			}
 		} catch (FileNotFoundException ex) {
@@ -421,7 +421,7 @@ public class NewTableDialog extends MageDialog {
 		this.setModal(true);
 		setGameOptions();
 		this.setLocation(150, 100);
-		this.setVisible(true);		
+		this.setVisible(true);
 	}
 
 	public TableView getTable() {

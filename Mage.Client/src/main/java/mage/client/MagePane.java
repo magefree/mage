@@ -34,19 +34,16 @@
 
 package mage.client;
 
-import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JLayeredPane;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MagePane extends javax.swing.JInternalFrame implements InternalFrameListener {
+public abstract class MagePane extends javax.swing.JInternalFrame {
+
+	private final static Logger logger = Logger.getLogger(MagePane.class);
 
     /** Creates new form MagePane */
     public MagePane() {
@@ -65,6 +62,17 @@ public class MagePane extends javax.swing.JInternalFrame implements InternalFram
 		hideTitle();
 	}
 
+	public void hideFrame() {
+		MageFrame.deactivate(this);
+	}
+	
+	public void activated() {
+		
+	}
+	
+	public void deactivated() {
+		
+	}
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -94,37 +102,5 @@ public class MagePane extends javax.swing.JInternalFrame implements InternalFram
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
-	@Override
-	public void internalFrameOpened(InternalFrameEvent e) {
-	}
-
-	@Override
-	public void internalFrameClosing(InternalFrameEvent e) {
-	}
-
-	@Override
-	public void internalFrameClosed(InternalFrameEvent e) {
-		try {
-			MageFrame.getDesktop().getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER)[0].setSelected(true);
-		} catch (PropertyVetoException ex) {
-		}
-	}
-
-	@Override
-	public void internalFrameIconified(InternalFrameEvent e) {
-	}
-
-	@Override
-	public void internalFrameDeiconified(InternalFrameEvent e) {
-	}
-
-	@Override
-	public void internalFrameActivated(InternalFrameEvent e) {
-	}
-
-	@Override
-	public void internalFrameDeactivated(InternalFrameEvent e) {
-	}
 
 }

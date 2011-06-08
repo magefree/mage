@@ -36,8 +36,6 @@ package mage.client.game;
 
 import mage.client.*;
 import java.util.UUID;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
 
 /**
  *
@@ -48,39 +46,11 @@ public class GamePane extends MagePane {
     /** Creates new form GamePane */
     public GamePane() {
         initComponents();
-		addInternalFrameListener(new InternalFrameListener()
-		{
-
-			@Override
-			public void internalFrameOpened(InternalFrameEvent e) {	}
-
-			@Override
-			public void internalFrameClosing(InternalFrameEvent e) {
-				gamePanel.cleanUp();
-			}
-
-			@Override
-			public void internalFrameClosed(InternalFrameEvent e) { }
-
-			@Override
-			public void internalFrameIconified(InternalFrameEvent e) { }
-
-			@Override
-			public void internalFrameDeiconified(InternalFrameEvent e) { }
-
-			@Override
-			public void internalFrameActivated(InternalFrameEvent e) { }
-
-			@Override
-			public void internalFrameDeactivated(InternalFrameEvent e) { }
-
-		});
     }
 
 	public void showGame(UUID gameId, UUID playerId) {
 		this.setTitle("Game " + gameId);
 		gamePanel.showGame(gameId, playerId);
-		this.toFront();
 	}
 
 	public void hideGame() {
@@ -90,13 +60,11 @@ public class GamePane extends MagePane {
 	public void watchGame(UUID gameId) {
 		this.setTitle("Watching " + gameId);
 		gamePanel.watchGame(gameId);
-		this.toFront();
 	}
 
 	public void replayGame(UUID gameId) {
 		this.setTitle("Replaying " + gameId);
 		gamePanel.replayGame(gameId);
-		this.toFront();
 	}
 
     /** This method is called from within the constructor to
@@ -132,5 +100,10 @@ public class GamePane extends MagePane {
     private mage.client.game.GamePanel gamePanel;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+	@Override
+	public void deactivated() {
+		gamePanel.cleanUp();
+	}
 
 }

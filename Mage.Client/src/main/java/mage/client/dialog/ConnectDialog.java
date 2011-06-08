@@ -41,6 +41,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
 import javax.swing.DefaultComboBoxModel;
 
 import javax.swing.JOptionPane;
@@ -383,7 +385,7 @@ public class ConnectDialog extends MageDialog {
 		if (task != null && !task.isDone())
 			task.cancel(true);
 		else
-			this.setVisible(false);
+			this.hideDialog();
 	}//GEN-LAST:event_btnCancelActionPerformed
 
 	private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
@@ -443,22 +445,28 @@ public class ConnectDialog extends MageDialog {
 
 		@Override
 		protected void done() {
-			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-			btnConnect.setEnabled(true);
-			if (result) {
-				lblStatus.setText("");
-				connected();
-			}
-			else {
-				lblStatus.setText("Could not connect");
-			}
+			try {
+				get();
+				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				btnConnect.setEnabled(true);
+				if (result) {
+					lblStatus.setText("");
+					connected();
+				}
+				else {
+					lblStatus.setText("Could not connect");
+				}
+			} catch (InterruptedException ex) {
+				logger.fatal("Update Players Task error", ex);
+			} catch (ExecutionException ex) {
+				logger.fatal("Update Players Task error", ex);
+			} catch (CancellationException ex) {}
 		}
-
 	}
 
 	private void connected() {
 		this.saveSettings();
-		this.setVisible(false);
+		this.hideDialog();
 	}
 
 

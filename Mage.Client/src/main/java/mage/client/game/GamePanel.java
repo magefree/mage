@@ -139,13 +139,17 @@ public class GamePanel extends javax.swing.JPanel {
     }
     
 	public void cleanUp() {
+		this.chatPanel.disconnect();
+		this.players.clear();
+		logger.debug("players clear.");
+		this.pnlBattlefield.removeAll();
 		combat.hideDialog();
-		pickNumber.hide();
+		pickNumber.hideDialog();
 		for (ExileZoneDialog exile: exiles.values()) {
-			exile.hide();
+			exile.hideDialog();
 		}
 		for (ShowCardsDialog reveal: revealed.values()) {
-			reveal.hide();
+			reveal.hideDialog();
 		}
 	}
 
@@ -160,7 +164,6 @@ public class GamePanel extends javax.swing.JPanel {
 		this.btnConcede.setVisible(true);
 		this.pnlReplay.setVisible(false);
 		this.btnStopWatching.setVisible(false);
-		this.setVisible(true);
 		this.chatPanel.clear();
 		this.chatPanel.connect(session.getGameChatId(gameId));
 		if (!session.joinGame(gameId))
@@ -177,7 +180,6 @@ public class GamePanel extends javax.swing.JPanel {
 		this.btnConcede.setVisible(false);
 		this.btnStopWatching.setVisible(true);
 		this.pnlReplay.setVisible(false);
-		this.setVisible(true);
 		this.chatPanel.clear();
 		this.chatPanel.connect(session.getGameChatId(gameId));
 		if (!session.watchGame(gameId))
@@ -193,24 +195,19 @@ public class GamePanel extends javax.swing.JPanel {
 		this.btnConcede.setVisible(false);
 		this.btnStopWatching.setVisible(false);
 		this.pnlReplay.setVisible(true);
-		this.setVisible(true);
 		this.chatPanel.clear();
 		if (!session.startReplay(gameId))
 			hideGame();
 	}
 
 	public void hideGame() {
-		this.chatPanel.disconnect();
-		this.players.clear();
-		logger.debug("players clear.");
-		this.pnlBattlefield.removeAll();
-		combat.hideDialog();
+		cleanUp();
 		Component c = this.getParent();
 		while (c != null && !(c instanceof GamePane)) {
 			c = c.getParent();
 		}
 		if (c != null)
-			c.setVisible(false);
+			((GamePane)c).hideFrame();
 	}
 
 	public synchronized void init(GameView game) {

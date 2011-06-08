@@ -145,12 +145,12 @@ public class PickNumberDialog extends MageDialog {
 
 	private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
 		this.cancel = false;
-		this.setVisible(false);
+		this.hideDialog();
 	}//GEN-LAST:event_btnOkActionPerformed
 
 	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
 		this.cancel = true;
-		this.setVisible(false);
+		this.hideDialog();
 	}//GEN-LAST:event_btnCancelActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

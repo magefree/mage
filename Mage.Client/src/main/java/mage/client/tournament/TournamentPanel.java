@@ -115,7 +115,13 @@ public class TournamentPanel extends javax.swing.JPanel implements Observer {
 	}
 
 	public void hideTournament() {
-		this.setVisible(false);
+		Component c = this.getParent();
+		while (c != null && !(c instanceof TournamentPane)) {
+			c = c.getParent();
+		}
+		if (c != null) {
+			((TournamentPane)c).hideFrame();
+		}
 	}
 
 	@Override

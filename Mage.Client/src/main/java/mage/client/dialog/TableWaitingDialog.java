@@ -37,6 +37,8 @@ package mage.client.dialog;
 import mage.client.*;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import mage.client.components.MageComponents;
@@ -134,7 +136,7 @@ public class TableWaitingDialog extends MageDialog {
 	public void closeDialog() {
 		if (updateTask != null)	updateTask.cancel(true);
 		this.chatPanel.disconnect();
-		setVisible(false);
+		this.hideDialog();
 	}
 
 
@@ -377,6 +379,17 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
 	@Override
 	protected void process(List<TableView> view) {
 		dialog.update(view.get(0));
+	}
+
+	@Override
+	protected void done() {
+		try {
+			get();
+		} catch (InterruptedException ex) {
+			logger.fatal("Update Seats Task error", ex);
+		} catch (ExecutionException ex) {
+			logger.fatal("Update Seats Task error", ex);
+		} catch (CancellationException ex) {}
 	}
 
 }

@@ -127,4 +127,13 @@ public class TablesPane extends MagePane {
     private mage.client.table.TablesPanel tablesPanel;
     // End of variables declaration//GEN-END:variables
 
+	@Override
+	public void activated() {
+		tablesPanel.startTasks();
+	}
+
+	@Override
+	public void deactivated() {
+		tablesPanel.stopTasks();
+	}
 }

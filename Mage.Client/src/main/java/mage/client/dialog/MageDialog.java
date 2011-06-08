@@ -73,7 +73,8 @@ public class MageDialog extends javax.swing.JInternalFrame {
     @Override
     public void setVisible(boolean value) {
         super.setVisible(value);
-		this.toFront();
+		if (value)
+			this.toFront();
         if (modal) {
 	        this.setClosable(false);
             if (value) {
@@ -151,6 +152,10 @@ public class MageDialog extends javax.swing.JInternalFrame {
         return this.modal;
     }
 
+	public void hideDialog() {
+		this.setVisible(false);
+	}
+	
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

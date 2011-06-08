@@ -58,6 +58,8 @@ import java.awt.event.ActionEvent;
 import java.beans.PropertyVetoException;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -171,32 +173,49 @@ public class TablesPanel extends javax.swing.JPanel {
 		}
 	}
 
+	public void startTasks() {
+		if (session != null) {
+			if (updateTask == null || updateTask.isDone()) {
+				updateTask = new UpdateTablesTask(session, roomId, this);
+				updateTask.execute();
+			}
+			if (updatePlayersTask == null || updatePlayersTask.isDone()) {
+				updatePlayersTask = new UpdatePlayersTask(session, roomId, this.chatPanel);
+				updatePlayersTask.execute();
+			}
+		}
+	}
+	
+	public void stopTasks() {
+		if (updateTask != null)
+			updateTask.cancel(true);
+		if (updatePlayersTask != null)
+			updatePlayersTask.cancel(true);
+	}
+	
 	public void showTables(UUID roomId) {
 
 		this.roomId = roomId;
 		session = MageFrame.getSession();
-		updateTask = new UpdateTablesTask(session, roomId, this);
-		updatePlayersTask = new UpdatePlayersTask(session, roomId, this.chatPanel);
 		if (session != null) {
 			btnQuickStart.setVisible(session.isTestMode());
 		}
 		if (newTableDialog == null) {
 			newTableDialog = new NewTableDialog();
-			MageFrame.getDesktop().add(newTableDialog);
+			MageFrame.getDesktop().add(newTableDialog, JLayeredPane.MODAL_LAYER);
 		}
 		if (newTournamentDialog == null) {
 			newTournamentDialog = new NewTournamentDialog();
-			MageFrame.getDesktop().add(newTournamentDialog);
+			MageFrame.getDesktop().add(newTournamentDialog, JLayeredPane.MODAL_LAYER);
 		}
 		if (joinTableDialog == null) {
 			joinTableDialog = new JoinTableDialog();
-			MageFrame.getDesktop().add(joinTableDialog);
+			MageFrame.getDesktop().add(joinTableDialog, JLayeredPane.MODAL_LAYER);
 		}
 		UUID chatRoomId = session.getRoomChatId(roomId);
 		if (chatRoomId != null) {
 			this.chatPanel.connect(chatRoomId);
-			updateTask.execute();
-			updatePlayersTask.execute();
+			startTasks();
 			this.setVisible(true);
 			this.repaint();
 		}
@@ -213,10 +232,7 @@ public class TablesPanel extends javax.swing.JPanel {
 				((TableWaitingDialog)component).closeDialog();
 			}
 		}
-		if (updateTask != null)
-			updateTask.cancel(true);
-		if (updatePlayersTask != null)
-			updatePlayersTask.cancel(true);
+		stopTasks();
 		this.chatPanel.disconnect();
 
 		Component c = this.getParent();
@@ -224,7 +240,7 @@ public class TablesPanel extends javax.swing.JPanel {
 			c = c.getParent();
 		}
 		if (c != null)
-			c.setVisible(false);
+			((TablesPane)c).hideFrame();
 	}
 
 	private void showTableWaitingDialog(UUID roomId, UUID tableId, boolean isTournament) {
@@ -349,8 +365,6 @@ public class TablesPanel extends javax.swing.JPanel {
 	}//GEN-LAST:event_btnQuickStartActionPerformed
 
 	private void btnNewTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTournamentActionPerformed
-		newTournamentDialog = new NewTournamentDialog();
-		MageFrame.getDesktop().add(newTournamentDialog);
 		newTournamentDialog.showDialog(roomId);
 		if (newTournamentDialog.getTable() != null) {
 			showTableWaitingDialog(roomId, newTournamentDialog.getTable().getTableId(), true);
@@ -483,6 +497,18 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 	protected void process(List<Collection<TableView>> view) {
 		panel.update(view.get(0));
 	}
+	
+	@Override
+	protected void done() {
+		try {
+			get();
+		} catch (InterruptedException ex) {
+			logger.fatal("Update Tables Task error", ex);
+		} catch (ExecutionException ex) {
+			logger.fatal("Update Tables Task error", ex);
+		} catch (CancellationException ex) {}
+	}
+
 }
 
 class UpdatePlayersTask extends SwingWorker<Void, Collection<String>> {
@@ -512,4 +538,16 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<String>> {
 	protected void process(List<Collection<String>> players) {
 		chat.setPlayers(players.get(0));
 	}
+
+	@Override
+	protected void done() {
+		try {
+			get();
+		} catch (InterruptedException ex) {
+			logger.fatal("Update Players Task error", ex);
+		} catch (ExecutionException ex) {
+			logger.fatal("Update Players Task error", ex);
+		} catch (CancellationException ex) {}
+	}
+
 }

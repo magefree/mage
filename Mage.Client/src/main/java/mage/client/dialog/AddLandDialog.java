@@ -189,7 +189,7 @@ public class AddLandDialog extends MageDialog {
     }// </editor-fold>//GEN-END:initComponents
 
 	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-		this.setVisible(false);
+		this.hideDialog();
 	}//GEN-LAST:event_btnCancelActionPerformed
 
 	private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -213,7 +213,7 @@ public class AddLandDialog extends MageDialog {
 		for (int i = 0; i < nSwamp; i++) {
 			deck.getCards().add(Sets.findCard("Swamp", true));
 		}
-		this.setVisible(false);
+		this.hideDialog();
 	}//GEN-LAST:event_btnAddActionPerformed
 
 

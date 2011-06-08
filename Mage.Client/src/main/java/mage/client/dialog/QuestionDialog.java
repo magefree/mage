@@ -119,12 +119,12 @@ public class QuestionDialog extends MageDialog {
 
 	private void btnYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYesActionPerformed
 		this.answer = true;
-		this.setVisible(false);
+		this.hideDialog();
 	}//GEN-LAST:event_btnYesActionPerformed
 
 	private void btnNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoActionPerformed
 		this.answer = false;
-		this.setVisible(false);
+		this.hideDialog();
 	}//GEN-LAST:event_btnNoActionPerformed
 
 

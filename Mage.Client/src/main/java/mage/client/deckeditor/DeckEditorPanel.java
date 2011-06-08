@@ -266,7 +266,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			c = c.getParent();
 		}
 		if (c != null)
-			c.setVisible(false);
+			((DeckEditorPane)c).hideFrame();
 	}
 
 	private BigCard getBigCard() {

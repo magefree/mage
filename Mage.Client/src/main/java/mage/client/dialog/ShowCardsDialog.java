@@ -172,24 +172,19 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		this.setVisible(false);
+		this.hideDialog();
 	}
 
-	public void mousePressed(MouseEvent e) {
-		
-	}
+	@Override
+	public void mousePressed(MouseEvent e) {}
 
-	public void mouseReleased(MouseEvent e) {
-		
-	}
+	@Override
+	public void mouseReleased(MouseEvent e) {}
 
-	public void mouseEntered(MouseEvent e) {
-		
-	}
+	@Override
+	public void mouseEntered(MouseEvent e) {}
 
-	public void mouseExited(MouseEvent e) {
-		
-	}
-
+	@Override
+	public void mouseExited(MouseEvent e) {}
 
 }

@@ -130,7 +130,7 @@ public class JoinTableDialog extends MageDialog {
 
 	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
 		this.joined = false;
-		this.setVisible(false);
+		this.hideDialog();
 	}//GEN-LAST:event_btnCancelActionPerformed
 
 	private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
@@ -140,7 +140,7 @@ public class JoinTableDialog extends MageDialog {
 		} catch (Exception ex) {
 			handleError(ex);
 		}
-		this.setVisible(false);
+		this.hideDialog();
 	}//GEN-LAST:event_btnOKActionPerformed
 
 	/**
