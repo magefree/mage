@@ -54,6 +54,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
 	private final static Logger logger = Logger.getLogger(Sets.class);
 	private static final Sets fINSTANCE =  new Sets();
 	private static Set<String> names;
+	private static Set<String> nonLandNames;
 	private static List<Card> cards;
     protected static Random rnd = new Random();
 
@@ -63,6 +64,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
 
 	private Sets() {
 		names = new TreeSet<String>();
+		nonLandNames = new TreeSet<String>();
 		cards = new ArrayList<Card>();
 		this.addSet(AlaraReborn.getInstance());
         this.addSet(Apocalypse.getInstance());
@@ -95,11 +97,16 @@ public class Sets extends HashMap<String, ExpansionSet> {
 		for (Card card: set.getCards()) {
 			cards.add(card);
 			names.add(card.getName());
+			if (!card.getCardType().contains(CardType.LAND)) nonLandNames.add(card.getName());
 		}
 	}
 
 	public static Set<String> getCardNames() {
 		return names;
+	}
+
+	public static Set<String> getNonLandCardNames() {
+		return nonLandNames;
 	}
 
 	public static Card getRandomCard() {

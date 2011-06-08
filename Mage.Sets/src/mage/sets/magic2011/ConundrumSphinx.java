@@ -90,7 +90,6 @@ class ConundrumSphinxEffect extends OneShotEffect<ConundrumSphinxEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Set<String> cardNames = Sets.getCardNames();
 		Choice cardChoice = new ChoiceImpl();
 		cardChoice.setChoices(Sets.getCardNames());
 		for (Player player: game.getPlayers().values()) {
