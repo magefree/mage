@@ -30,6 +30,8 @@ package mage.interfaces.callback;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
+
+import mage.utils.CompressUtil;
 import org.apache.log4j.Logger;
 
 /**
@@ -85,7 +87,7 @@ public class CallbackServerSession {
 				waiting.await();
 			}
 			callback.setMethod(call.getMethod());
-			callback.setData(call.getData());
+			callback.setData(CompressUtil.compress(call.getData()));
 			callback.setObjectId(call.getObjectId());
 			callback.setMessageId(call.getMessageId());
 			callbackCalled.signal();

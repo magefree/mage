@@ -41,6 +41,7 @@ import mage.client.util.GameManager;
 import mage.client.util.object.SaveObjectUtil;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
+import mage.utils.CompressUtil;
 import mage.view.AbilityPickerView;
 import mage.view.ChatMessage;
 import mage.view.DraftClientMessage;
@@ -76,6 +77,7 @@ public class CallbackClientImpl implements CallbackClient {
 			@Override
 			public void run() {
 				SaveObjectUtil.saveObject(callback.getData(), callback.getMethod());
+				callback.setData(CompressUtil.decompress(callback.getData()));
 				try {
 					logger.info(callback.getMessageId() + " -- " + callback.getMethod());
 					if (callback.getMethod().equals("startGame")) {
