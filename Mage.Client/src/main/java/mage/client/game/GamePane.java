@@ -101,9 +101,4 @@ public class GamePane extends MagePane {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-	@Override
-	public void deactivated() {
-		gamePanel.cleanUp();
-	}
-
 }
