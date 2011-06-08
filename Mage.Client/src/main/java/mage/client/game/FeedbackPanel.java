@@ -34,21 +34,18 @@
 
 package mage.client.game;
 
-import java.awt.AWTEvent;
-import java.awt.ActiveEvent;
-import java.awt.Component;
-import java.awt.EventQueue;
-import java.awt.MenuComponent;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 import mage.client.MageFrame;
 import mage.client.components.MageTextArea;
+import mage.client.components.arcane.GlowText;
 import mage.remote.Session;
 
 import org.apache.log4j.Logger;
@@ -72,8 +69,9 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
     /** Creates new form FeedbackPanel */
     public FeedbackPanel() {
-        initComponents();
-   }
+        //initComponents();
+        customInitComponents();
+    }
 
 	public void init(UUID gameId) {
 		this.gameId = gameId;
@@ -281,6 +279,60 @@ public class FeedbackPanel extends javax.swing.JPanel {
                     .addComponent(btnSpecial)))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    public void customInitComponents() {
+        btnRight = new javax.swing.JButton();
+        btnLeft = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lblMessage = new MageTextArea();
+        btnSpecial = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(0,0,0,80));
+
+        btnRight.setText("Cancel");
+        btnRight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRightActionPerformed(evt);
+            }
+        });
+
+        btnLeft.setText("OK");
+        btnLeft.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLeftActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        lblMessage.setBorder(null);
+        jScrollPane1.setViewportView(lblMessage);
+        jScrollPane1.setBorder(null);
+
+        btnSpecial.setText("Special");
+        btnSpecial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSpecialActionPerformed(evt);
+            }
+        });
+
+        JLabel jlabel = new JLabel();
+        jlabel.setLayout(new BorderLayout());
+        jlabel.add(jScrollPane1, BorderLayout.CENTER);
+
+        setLayout(new BorderLayout());
+
+        JLabel jlabel2 = new JLabel();
+        jlabel2.setLayout(new FlowLayout());
+        jlabel2.add(btnSpecial);
+        jlabel2.add(btnLeft);
+        jlabel2.add(btnRight);
+        jlabel2.setPreferredSize(new Dimension(0, 35));
+
+        add(jlabel, BorderLayout.CENTER);
+        add(jlabel2, BorderLayout.PAGE_END);
+    }
 
 	private void btnRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRightActionPerformed
 		this.selected = true;

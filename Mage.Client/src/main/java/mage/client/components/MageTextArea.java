@@ -32,7 +32,7 @@ public class MageTextArea extends JEditorPane {
         if (text == null) return;
 
         boolean smallImages = false;
-        int fontSize = 12;
+        int fontSize = 18;
 
         String fontFamily = "arial";
 
@@ -41,7 +41,7 @@ public class MageTextArea extends JEditorPane {
         buffer.append(fontFamily);
         buffer.append(";font-size:");
         buffer.append(fontSize);
-        buffer.append("pt;margin:3px 3px 3px 3px'>");
+        buffer.append("pt;margin:3px 3px 3px 3px;color: #FFFFFF'><b><center>");
 
         text = text.replaceAll("#([^#]+)#", "<i>$1</i>");
         text = text.replaceAll("\\s*//\\s*", "<hr width='50%'>");
@@ -55,7 +55,7 @@ public class MageTextArea extends JEditorPane {
             buffer.append(ManaSymbols.replaceSymbolsWithHTML(text, smallImages));
         }
 
-        buffer.append("</body></html>");
+        buffer.append("</b></center></body></html>");
 
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
