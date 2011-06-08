@@ -89,47 +89,60 @@ public class FeedbackPanel extends javax.swing.JPanel {
 			case INFORM:
 				this.btnLeft.setVisible(false);
 				this.btnRight.setVisible(false);
+                this.helper.setState("", false, "", false);
 				break;
 			case QUESTION:
 				this.btnLeft.setVisible(true);
 				this.btnLeft.setText("Yes");
 				this.btnRight.setVisible(true);
 				this.btnRight.setText("No");
+                this.helper.setState("Yes", true, "Yes", true);
 				break;
 			case CONFIRM:
 				this.btnLeft.setVisible(true);
 				this.btnLeft.setText("OK");
 				this.btnRight.setVisible(true);
 				this.btnRight.setText("Cancel");
+                this.helper.setState("Ok", true, "Cancel", true);
 				break;
 			case CANCEL:
 				this.btnLeft.setVisible(false);
 				this.btnRight.setVisible(true);
 				this.btnRight.setText("Cancel");
+                this.helper.setState("", false, "Cancel", true);
 				break;
 			case SELECT:
 				this.btnLeft.setVisible(false);
 				this.btnRight.setVisible(true);
 				this.btnRight.setText("Done");
+                this.helper.setState("", false, "Done", true);
 				break;
 		}
 		this.btnSpecial.setVisible(special);
 		this.btnSpecial.setText("Special");
+        this.helper.setSpecial("Special", special);
 		if (message.contains("P}")) {
 			this.btnSpecial.setVisible(true);
 			this.btnSpecial.setText("Pay 2 life");
+            this.helper.setSpecial("Pay 2 life", true);
 		}
 		handleOptions(options);
 		this.revalidate();
 		this.repaint();
-		if (modal)
+        this.helper.setLinks(btnLeft, btnRight, btnSpecial);
+		if (modal) {
+            this.helper.setVisible(false);
 			startModal();
+        } else {
+            this.helper.setVisible(true);
+        }
 	}
 
 	private void handleOptions(Map<String, Serializable> options) {
 		if (options != null) {
 			if (options.containsKey("UI.right.btn.text")) {
 				this.btnRight.setText((String)options.get("UI.right.btn.text"));
+                this.helper.setRight((String)options.get("UI.right.btn.text"), true);
 			}
 		}
 	}
@@ -288,6 +301,9 @@ public class FeedbackPanel extends javax.swing.JPanel {
 		session.sendPlayerString(gameId, "special");
 	}//GEN-LAST:event_btnSpecialActionPerformed
 
+    public void setHelperPanel(HelperPanel helper) {
+        this.helper = helper;
+    }
 
     private javax.swing.JButton btnLeft;
     private javax.swing.JButton btnRight;
@@ -295,4 +311,5 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     //private javax.swing.JTextArea lblMessage;
     private MageTextArea lblMessage;
+    private HelperPanel helper;
 }

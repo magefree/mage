@@ -89,7 +89,7 @@ public class GamePanel extends javax.swing.JPanel {
         initComponents();
         
         hand.setHScrollSpeed(8);
-        hand.setBackgroundColor(new Color(0,0,0,100));
+        hand.setBackgroundColor(new Color(0, 0, 0, 100));
         combat = new CombatDialog();
         pickNumber = new PickNumberDialog();
         MageFrame.getDesktop().add(combat, JLayeredPane.POPUP_LAYER);
@@ -769,6 +769,10 @@ public class GamePanel extends javax.swing.JPanel {
             jPanel.setBackground(new Color(0,0,0,0));
             jPanel.add(hand);
 
+            HelperPanel helper = new HelperPanel();
+            helper.setBackground(new Color(0, 0, 0, 80));
+            helper.setPreferredSize(new Dimension(0, 35));
+
 			setOpaque(false);
 			jPanel.setOpaque(false);
 			jScrollPane1.setOpaque(false);
@@ -778,8 +782,11 @@ public class GamePanel extends javax.swing.JPanel {
 			jScrollPane1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 			jScrollPane1.getHorizontalScrollBar().setUnitIncrement(8);
 
-            setLayout(new java.awt.BorderLayout());
-            add(jScrollPane1, java.awt.BorderLayout.CENTER);
+            setLayout(new BorderLayout());
+            add(jScrollPane1, BorderLayout.CENTER);
+            add(helper, BorderLayout.PAGE_END);
+
+            feedbackPanel.setHelperPanel(helper);
         }
 
         private JPanel jPanel;

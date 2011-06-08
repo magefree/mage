@@ -74,7 +74,8 @@ public class Cards extends javax.swing.JPanel {
 	public Cards(boolean skipAddingScrollPane) {
 		initComponents(skipAddingScrollPane);
         setOpaque(false);
-		cardArea.setOpaque(false);
+		//cardArea.setOpaque(false);
+        setBackgroundColor(new Color(0,0,0,100));
         if (!skipAddingScrollPane) {
 			jScrollPane1.setOpaque(false);
 			jScrollPane1.getViewport().setOpaque(false);
@@ -90,7 +91,7 @@ public class Cards extends javax.swing.JPanel {
      */
     public void setBackgroundColor(Color color) {
         cardArea.setOpaque(true);
-        cardArea.setBackground(new Color(0,0,0,100));
+        cardArea.setBackground(color);
     }
 
 	public void setBorder(Border border) {
@@ -137,7 +138,8 @@ public class Cards extends javax.swing.JPanel {
 		if (changed) {
 			layoutCards(getCardDimension());
 		}
-		
+
+        cardArea.setVisible(cards.size() > 0);
 		cardArea.setPreferredSize(new Dimension(cards.size() * (Config.dimensions.frameWidth + GAP_X), Config.dimensions.frameHeight));
 		cardArea.revalidate();
 		cardArea.repaint();
