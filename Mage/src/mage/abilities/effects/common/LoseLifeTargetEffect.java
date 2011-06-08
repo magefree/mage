@@ -30,6 +30,8 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.players.Player;
@@ -40,20 +42,20 @@ import mage.players.Player;
  */
 public class LoseLifeTargetEffect extends OneShotEffect<LoseLifeTargetEffect> {
 
-	protected int amount;
+	protected DynamicValue amount;
 
-	public LoseLifeTargetEffect(int amount) {
+    public LoseLifeTargetEffect(int amount) {
+        this(new StaticValue(amount));
+    }
+
+	public LoseLifeTargetEffect(DynamicValue amount) {
 		super(Outcome.Damage);
 		this.amount = amount;
 	}
 
-	public int getAmount() {
-		return amount;
-	}
-
 	public LoseLifeTargetEffect(final LoseLifeTargetEffect effect) {
 		super(effect);
-		this.amount = effect.amount;
+		this.amount = effect.amount.clone();
 	}
 
 	@Override
@@ -65,7 +67,7 @@ public class LoseLifeTargetEffect extends OneShotEffect<LoseLifeTargetEffect> {
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(targetPointer.getFirst(source));
 		if (player != null) {
-			player.loseLife(amount, game);
+			player.loseLife(amount.calculate(game, source), game);
 			return true;
 		}
 		return false;
@@ -79,7 +81,7 @@ public class LoseLifeTargetEffect extends OneShotEffect<LoseLifeTargetEffect> {
         } else {
             result.append("that player");
         }
-        result.append(" loses ").append(amount).append(" life");
+        result.append(" loses ").append(amount).append(" life").append(amount.getMessage());
         return result.toString();
 	}
 

@@ -64,7 +64,7 @@ public class DiscardTargetEffect extends OneShotEffect<DiscardTargetEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
+        Player player = game.getPlayer(targetPointer.getFirst(source));
         if (player != null) {
             player.discard(amount.calculate(game, source), source, game);
             return true;

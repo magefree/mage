@@ -37,6 +37,7 @@ import mage.Constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.abilities.effects.common.UntapAllLandsControllerEffect;
@@ -51,6 +52,7 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -92,7 +94,6 @@ class SwordOfFeastAndFamineAbility extends TriggeredAbilityImpl<SwordOfFeastAndF
     public SwordOfFeastAndFamineAbility() {
         super(Zone.BATTLEFIELD, new DiscardTargetEffect(1));
         this.addEffect(new UntapAllLandsControllerEffect());
-        this.addTarget(new TargetPlayer());
     }
 
     public SwordOfFeastAndFamineAbility(final SwordOfFeastAndFamineAbility ability) {
@@ -110,7 +111,9 @@ class SwordOfFeastAndFamineAbility extends TriggeredAbilityImpl<SwordOfFeastAndF
             DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
             Permanent p = game.getPermanent(event.getSourceId());
             if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
-                this.targets.get(0).add(event.getPlayerId(), game);
+                for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                }
 			    return true;
             }
         }

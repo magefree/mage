@@ -15,7 +15,7 @@ public class PermanentsOnBattlefieldCount implements DynamicValue {
     private Integer amount;
 
     public PermanentsOnBattlefieldCount() {
-        filter = new FilterPermanent();
+        this(new FilterPermanent(), 1);
     }
 
     public PermanentsOnBattlefieldCount(FilterPermanent filter) {
@@ -29,6 +29,7 @@ public class PermanentsOnBattlefieldCount implements DynamicValue {
 
     public PermanentsOnBattlefieldCount(final PermanentsOnBattlefieldCount dynamicValue) {
         this.filter = dynamicValue.filter;
+        this.amount = dynamicValue.amount;
     }
 
     @Override

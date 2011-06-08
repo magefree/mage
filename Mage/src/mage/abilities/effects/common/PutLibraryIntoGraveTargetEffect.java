@@ -31,6 +31,8 @@ package mage.abilities.effects.common;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
@@ -42,16 +44,20 @@ import mage.players.Player;
  */
 public class PutLibraryIntoGraveTargetEffect extends OneShotEffect<PutLibraryIntoGraveTargetEffect> {
 
-	private int amount;
+	private DynamicValue amount;
 
-	public PutLibraryIntoGraveTargetEffect(int amount) {
+    public PutLibraryIntoGraveTargetEffect(int amount) {
+        this(new StaticValue(amount));
+    }
+
+	public PutLibraryIntoGraveTargetEffect(DynamicValue amount) {
 		super(Outcome.Detriment);
 		this.amount = amount;
 	}
 
 	public PutLibraryIntoGraveTargetEffect(final PutLibraryIntoGraveTargetEffect effect) {
 		super(effect);
-		this.amount = effect.amount;
+		this.amount = effect.amount.clone();
 	}
 
 	@Override
@@ -64,7 +70,7 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect<PutLibraryInt
 		Player player = game.getPlayer(source.getFirstTarget());
 		if (player != null) {
 			// putting cards to grave shouldn't end the game, so getting minimun available
-			int cardsCount = Math.min(amount, player.getLibrary().size());
+			int cardsCount = Math.min(amount.calculate(game, source), player.getLibrary().size());
 			for (int i = 0; i < cardsCount; i++) {
 				Card card = player.getLibrary().removeFromTop(game);
 				if (card != null)
@@ -81,11 +87,11 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect<PutLibraryInt
 		StringBuilder sb = new StringBuilder();
 		sb.append("Target ").append(source.getTargets().get(0).getTargetName());
 		sb.append(" puts the top ");
-		if (amount == 1)
+		if (amount instanceof StaticValue && amount.calculate(null, null) == 1)
 			sb.append(amount).append(" card ");
 		else
 			sb.append(amount).append(" cards ");
-		sb.append("of his or her library into his or her graveyard");
+		sb.append("of his or her library into his or her graveyard").append(amount.getMessage());
 		return sb.toString();
 	}
 
