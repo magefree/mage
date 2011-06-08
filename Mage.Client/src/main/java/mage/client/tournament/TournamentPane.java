@@ -50,7 +50,7 @@ public class TournamentPane extends MagePane {
 
 	public void showTournament(UUID tournamentId) {
 		this.setTitle("Tournament " + tournamentId);
-		this.tournamentPanel1.showTournament(tournamentId);
+		this.tournamentPanel.showTournament(tournamentId);
 		this.repaint();
 	}
 
@@ -63,17 +63,17 @@ public class TournamentPane extends MagePane {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tournamentPanel1 = new mage.client.tournament.TournamentPanel();
+        tournamentPanel = new mage.client.tournament.TournamentPanel();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tournamentPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
+            .addComponent(tournamentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tournamentPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+            .addComponent(tournamentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
         );
 
         pack();
@@ -81,7 +81,17 @@ public class TournamentPane extends MagePane {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private mage.client.tournament.TournamentPanel tournamentPanel1;
+    private mage.client.tournament.TournamentPanel tournamentPanel;
     // End of variables declaration//GEN-END:variables
+
+	@Override
+	public void activated() {
+		tournamentPanel.startTasks();
+	}
+
+	@Override
+	public void deactivated() {
+		tournamentPanel.stopTasks();
+	}
 
 }

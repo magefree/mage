@@ -38,10 +38,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.UUID;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import mage.client.MageFrame;
@@ -58,7 +61,7 @@ import org.apache.log4j.Logger;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TournamentPanel extends javax.swing.JPanel implements Observer {
+public class TournamentPanel extends javax.swing.JPanel {
 
 	private final static Logger logger = Logger.getLogger(TournamentPanel.class);
 
@@ -66,7 +69,7 @@ public class TournamentPanel extends javax.swing.JPanel implements Observer {
 	private Session session;
 	private TournamentPlayersTableModel playersModel;
 	private TournamentMatchesTableModel matchesModel;
-	private TournamentWatchdog tournamentWatchdog = new TournamentWatchdog();
+	private UpdateTournamentTask updateTask;
 
 	/** Creates new form TournamentPanel */
     public TournamentPanel() {
@@ -105,7 +108,7 @@ public class TournamentPanel extends javax.swing.JPanel implements Observer {
 		UUID chatRoomId = session.getTournamentChatId(tournamentId);
 		if (session.joinTournament(tournamentId) && chatRoomId != null) {
 			this.chatPanel1.connect(chatRoomId);
-			tournamentWatchdog.addObserver(this);
+			startTasks();
 			this.setVisible(true);
 			this.repaint();
 		}
@@ -124,20 +127,26 @@ public class TournamentPanel extends javax.swing.JPanel implements Observer {
 		}
 	}
 
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		TournamentView tournament;
-		try {
-			tournament = MageFrame.getSession().getTournament(tournamentId);
-			playersModel.loadData(tournament);
-			matchesModel.loadData(tournament);
-			this.tablePlayers.repaint();
-			this.tableMatches.repaint();
-		} catch (MageRemoteException ex) {
-			hideTournament();
+	public void update(TournamentView tournament) {
+		playersModel.loadData(tournament);
+		matchesModel.loadData(tournament);
+		this.tablePlayers.repaint();
+		this.tableMatches.repaint();
+	}
+	
+	public void startTasks() {
+		if (session != null) {
+			if (updateTask == null || updateTask.isDone()) {
+				updateTask = new UpdateTournamentTask(session, tournamentId, this);
+				updateTask.execute();
+			}
 		}
 	}
-
+	
+	public void stopTasks() {
+		if (updateTask != null)
+			updateTask.cancel(true);
+	}
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -319,18 +328,43 @@ class TournamentMatchesTableModel extends AbstractTableModel {
 
 }
 
-class TournamentWatchdog extends Observable implements ActionListener {
+class UpdateTournamentTask extends SwingWorker<Void, TournamentView> {
 
-	Timer t = new Timer(1000, this); // check every second
+	private Session session;
+	private UUID tournamentId;
+	private TournamentPanel panel;
 
-	public TournamentWatchdog() {
-		t.start();
+	private final static Logger logger = Logger.getLogger(UpdateTournamentTask.class);
+
+	UpdateTournamentTask(Session session, UUID tournamentId, TournamentPanel panel) {
+		this.session = session;
+		this.tournamentId = tournamentId;
+		this.panel = panel;
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		setChanged();
-		notifyObservers();
+	protected Void doInBackground() throws Exception {
+		while (!isCancelled()) {
+			this.publish(session.getTournament(tournamentId));	
+			Thread.sleep(1000);
+		}
+		return null;
+	}
+
+	@Override
+	protected void process(List<TournamentView> view) {
+		panel.update(view.get(0));
+	}
+	
+	@Override
+	protected void done() {
+		try {
+			get();
+		} catch (InterruptedException ex) {
+			logger.fatal("Update Tournament Task error", ex);
+		} catch (ExecutionException ex) {
+			logger.fatal("Update Tournament Task error", ex);
+		} catch (CancellationException ex) {}
 	}
 
 }
