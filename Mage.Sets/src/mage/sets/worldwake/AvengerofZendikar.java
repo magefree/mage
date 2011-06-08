@@ -33,6 +33,7 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController; 
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -89,6 +90,7 @@ class AvengerofZendikarTokensCreateEffect extends OneShotEffect<AvengerofZendika
     static {
         filter.getCardType().add(CardType.LAND);
         filter.setScopeCardType(ComparisonScope.Any);
+	filter.setTargetController(TargetController.YOU); 
     }
 
     public AvengerofZendikarTokensCreateEffect() {
