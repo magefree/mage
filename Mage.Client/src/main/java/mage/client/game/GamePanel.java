@@ -90,6 +90,7 @@ public class GamePanel extends javax.swing.JPanel {
         
         hand.setHScrollSpeed(8);
         hand.setBackgroundColor(new Color(0, 0, 0, 100));
+        hand.setVisibleIfEmpty(false);
         combat = new CombatDialog();
         pickNumber = new PickNumberDialog();
         MageFrame.getDesktop().add(combat, JLayeredPane.POPUP_LAYER);
@@ -629,7 +630,7 @@ public class GamePanel extends javax.swing.JPanel {
 								.addComponent(btnStopWatching)
 								.addContainerGap(62, Short.MAX_VALUE))
 						.addComponent(bigCard, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-						//.addComponent(feedbackPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+						.addComponent(feedbackPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
 						.addComponent(stack, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
 						.addGroup(pnlGameInfoLayout.createSequentialGroup()
 								.addContainerGap()
@@ -640,8 +641,8 @@ public class GamePanel extends javax.swing.JPanel {
             pnlGameInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlGameInfoLayout.createSequentialGroup()
                 .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                //.addGap(1, 1, 1)
-                //.addComponent(feedbackPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(feedbackPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 /*.addGap(7, 7, 7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlGameInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -773,7 +774,7 @@ public class GamePanel extends javax.swing.JPanel {
             //helper.setBackground(new Color(0, 0, 0, 80));
             //helper.setPreferredSize(new Dimension(0, 35));
 
-            feedbackPanel.setPreferredSize(new Dimension(0, 70));
+            //feedbackPanel.setPreferredSize(new Dimension(0, 70));
 
 			setOpaque(false);
 			jPanel.setOpaque(false);
@@ -787,7 +788,7 @@ public class GamePanel extends javax.swing.JPanel {
             setLayout(new BorderLayout());
             add(jScrollPane1, BorderLayout.CENTER);
             //add(helper, BorderLayout.PAGE_END);
-            add(feedbackPanel, BorderLayout.PAGE_END);
+            //add(feedbackPanel, BorderLayout.PAGE_END);
             feedbackPanel.setHelperPanel(helper);
         }
 

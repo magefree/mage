@@ -63,6 +63,12 @@ public class Cards extends javax.swing.JPanel {
 	private Map<UUID, MageCard> cards = new LinkedHashMap<UUID, MageCard>();
 	private boolean dontDisplayTapped = false;
 	private static final int GAP_X = 5;
+	
+	/**
+	 * Defines whether component should be visible whenever there is no objects within.
+	 * True by default.
+	 */
+	private boolean isVisibleIfEmpty = true;
 
 	private Dimension cardDimension;
 
@@ -93,6 +99,10 @@ public class Cards extends javax.swing.JPanel {
         cardArea.setOpaque(true);
         cardArea.setBackground(color);
     }
+    
+	public void setVisibleIfEmpty(boolean isVisibleIfEmpty) {
+		this.isVisibleIfEmpty = isVisibleIfEmpty;
+	}
 
 	public void setBorder(Border border) {
 		super.setBorder(border);
@@ -139,7 +149,9 @@ public class Cards extends javax.swing.JPanel {
 			layoutCards(getCardDimension());
 		}
 
-        cardArea.setVisible(cards.size() > 0);
+        if (!isVisibleIfEmpty) {
+        	cardArea.setVisible(cards.size() > 0);
+        }
 		cardArea.setPreferredSize(new Dimension(cards.size() * (Config.dimensions.frameWidth + GAP_X), Config.dimensions.frameHeight));
 		cardArea.revalidate();
 		cardArea.repaint();
