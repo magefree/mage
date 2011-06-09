@@ -31,13 +31,15 @@ public class ManaSymbols {
 				"BR", "G", "GU", "GW", "R", "RG", "RW", "S", "T", "U", "UB", "UR", "W", "WB", "WU", 
 				"WP", "UP", "BP", "RP", "GP", "X" /*, "Y", "Z", "slash"*/};
 		for (String symbol : symbols) {
-			File file = new File(Constants.RESOURCE_PATH_MANA_LARGE + "/" + symbol + ".jpg");
+			File file = new File(Constants.RESOURCE_PATH_MANA_MEDIUM + "/" + symbol + ".jpg");
 			Rectangle r = new Rectangle(11, 11);
 			try {
 				Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
 				BufferedImage resized = ImageResizeUtil.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
 				manaImages.put(symbol, resized);
 			} catch (Exception e) {
+				log.error("Error for symbol:" + symbol);
+				e.printStackTrace();
 				noManaSymbols = true;
 			}
 			file = new File(Constants.RESOURCE_PATH_MANA_MEDIUM + "/" + symbol + ".jpg");
@@ -160,7 +162,7 @@ public class ManaSymbols {
 				return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:plugins/images/symbols/small/$1$2.jpg' alt='$1$2' width=11 height=11>");
 			else {
 				value = value.replace("{slash}", "<img src='file:plugins/images/symbols/medium/slash.jpg' alt='slash' width=10 height=13>");
-				return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:plugins/images/symbols/medium/$1$2.jpg' alt='$1$2' width=13 height=13>");
+				return replaceSymbolsPattern.matcher(value).replaceAll("<img src='file:plugins/images/symbols/medium/$1$2.jpg' alt='$1$2' width=18 height=18>");
 			}
 		}
 	}
