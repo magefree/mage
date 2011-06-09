@@ -39,7 +39,7 @@ public class ManaSymbols {
 				manaImages.put(symbol, resized);
 			} catch (Exception e) {
 				log.error("Error for symbol:" + symbol);
-				e.printStackTrace();
+				//e.printStackTrace();
 				noManaSymbols = true;
 			}
 			file = new File(Constants.RESOURCE_PATH_MANA_MEDIUM + "/" + symbol + ".jpg");
