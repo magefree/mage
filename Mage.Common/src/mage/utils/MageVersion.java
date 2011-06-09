@@ -40,10 +40,13 @@ public class MageVersion implements Serializable, Comparable<MageVersion> {
 	private int minor;
 	private int patch;
 
-	public MageVersion(int major, int minor, int patch) {
+    private String info = "";
+
+	public MageVersion(int major, int minor, int patch, String info) {
 		this.major = major;
 		this.minor = minor;
 		this.patch = patch;
+        this.info = info;
 	}
 	
 	public int getMajor() {
@@ -60,7 +63,7 @@ public class MageVersion implements Serializable, Comparable<MageVersion> {
 
 	@Override
 	public String toString() {
-		return major + "." + minor + "." + patch;
+		return major + "." + minor + "." + patch + info;
 	}
 
 	@Override
@@ -71,7 +74,7 @@ public class MageVersion implements Serializable, Comparable<MageVersion> {
 			return minor - o.minor;
 		if (patch != o.patch)
 			return patch - o.patch;
-		return 0;
+        return info.compareTo(o.info);
 	}
 
 }
