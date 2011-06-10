@@ -43,7 +43,7 @@ public class RunedServitor extends CardImpl<RunedServitor> {
 
     public RunedServitor(UUID ownerId) {
         super(ownerId, 224, "Runed Servitor", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
-        this.expansionSetCode = "DDF";
+        this.expansionSetCode = "ROE";
         this.subtype.add("Construct");
 
         this.power = new MageInt(2);
