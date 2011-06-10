@@ -25,55 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.worldwake;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.effects.common.DestroyNoRegenTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
+import mage.filter.Filter.ComparisonType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class DarksteelJuggernaut extends CardImpl<DarksteelJuggernaut> {
-    private static final FilterPermanent filter = new FilterPermanent("artifacts you control");
+public class Smother extends CardImpl<Smother> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost 3 or less");
 
     static {
-        filter.getCardType().add(Constants.CardType.ARTIFACT);
-        filter.setTargetController(Constants.TargetController.YOU);
+        filter.setConvertedManaCost(4);
+        filter.setConvertedManaCostComparison(ComparisonType.LessThan);
     }
 
-    public DarksteelJuggernaut (UUID ownerId) {
-        super(ownerId, 150, "Darksteel Juggernaut", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Juggernaut");
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
-        
-        SetPowerToughnessSourceEffect effect = new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Constants.Duration.EndOfGame);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, effect));
-        this.addAbility(IndestructibleAbility.getInstance());
-        this.addAbility(new AttacksEachTurnStaticAbility());
+    public Smother(UUID ownerId) {
+        super(ownerId, 68, "Smother", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
+        this.expansionSetCode = "WWK";
+
+        this.color.setBlack(true);
+
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addEffect(new DestroyNoRegenTargetEffect());
     }
 
-    public DarksteelJuggernaut (final DarksteelJuggernaut card) {
+    public Smother(final Smother card) {
         super(card);
     }
 
     @Override
-    public DarksteelJuggernaut copy() {
-        return new DarksteelJuggernaut(this);
+    public Smother copy() {
+        return new Smother(this);
     }
-
 }

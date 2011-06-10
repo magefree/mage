@@ -49,6 +49,6 @@ public class PermanentsOnBattlefieldCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return " for each " + filter.getMessage();
+        return filter.getMessage();
     }
 }

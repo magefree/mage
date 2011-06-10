@@ -82,10 +82,26 @@ public class BoostSourceEffect extends ContinuousEffectImpl<BoostSourceEffect> {
 	@Override
 	public String getDynamicText(Ability source) {
         StringBuilder sb = new StringBuilder();
-		sb.append("{this} gets ").append(power).append("/").append(toughness);
+		sb.append("{this} gets ");
+        String p = power.toString();
+        if(!p.startsWith("-"))
+            sb.append("+");
+        sb.append(p).append("/");
+        String t = toughness.toString();
+        if(!t.startsWith("-")){
+            if(p.startsWith("-"))
+                sb.append("-");
+            else
+                sb.append("+");
+        }
+        sb.append(t);
 		if (duration != Duration.WhileOnBattlefield)
 			sb.append(" ").append(duration.toString());
-        sb.append(power.getMessage());
+        String message = power.getMessage();
+        if (message.length() > 0) {
+            sb.append(" for each ");
+        }
+        sb.append(message);
 		return sb.toString();
 	}
 

@@ -54,6 +54,6 @@ public class CardsInControllerGraveyardCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return " for each " + filter.getMessage() + " in your graveyard";
+        return filter.getMessage() + " in your graveyard";
     }
 }

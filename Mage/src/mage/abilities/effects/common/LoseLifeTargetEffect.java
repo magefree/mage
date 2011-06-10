@@ -75,14 +75,19 @@ public class LoseLifeTargetEffect extends OneShotEffect<LoseLifeTargetEffect> {
 
 	@Override
 	public String getText(Ability source) {
-        StringBuffer result = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         if (source.getTargets().size() > 0) {
-		    result.append("Target " + source.getTargets().get(0).getTargetName());
+		    sb.append("Target ").append(source.getTargets().get(0).getTargetName());
         } else {
-            result.append("that player");
+            sb.append("that player");
         }
-        result.append(" loses ").append(amount).append(" life").append(amount.getMessage());
-        return result.toString();
+        sb.append(" loses ").append(amount).append(" life");
+        String message = amount.getMessage();
+        if (message.length() > 0) {
+            sb.append(" for each ");
+        }
+        sb.append(message);
+        return sb.toString();
 	}
 
 

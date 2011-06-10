@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class VinesOfVastwood extends CardImpl<VinesOfVastwood> {
 	
-	private static FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
+	private static final FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
 
 	static {
 		filter.setTargetController(TargetController.OPPONENT);

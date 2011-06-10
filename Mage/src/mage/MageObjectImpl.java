@@ -39,8 +39,6 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.counters.Counter;
-import mage.counters.common.LoyaltyCounter;
 import mage.game.Game;
 
 public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements MageObject {

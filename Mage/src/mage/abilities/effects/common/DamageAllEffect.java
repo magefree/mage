@@ -76,7 +76,14 @@ public class DamageAllEffect extends OneShotEffect<DamageAllEffect> {
 
 	@Override
 	public String getText(Ability source) {
-        return "{source} deals " + amount.toString() + " damage to each " + filter.getMessage() + amount.getMessage();
+        StringBuilder sb = new StringBuilder();
+        sb.append("{source} deals ").append(amount.toString()).append(" damage to each ").append(filter.getMessage());
+        String message = amount.getMessage();
+        if (message.length() > 0) {
+            sb.append(" for each ");
+        }
+        sb.append(message);
+        return sb.toString();
 	}
 
 }

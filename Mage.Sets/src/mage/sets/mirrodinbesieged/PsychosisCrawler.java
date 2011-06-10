@@ -25,55 +25,85 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.mirrodinbesieged;
 
-package mage.sets.scarsofmirrodin;
-
+import java.util.Set;
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.DrawCardTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class DarksteelJuggernaut extends CardImpl<DarksteelJuggernaut> {
-    private static final FilterPermanent filter = new FilterPermanent("artifacts you control");
+public class PsychosisCrawler extends CardImpl<PsychosisCrawler> {
 
-    static {
-        filter.getCardType().add(Constants.CardType.ARTIFACT);
-        filter.setTargetController(Constants.TargetController.YOU);
-    }
+    public PsychosisCrawler(UUID ownerId) {
+        super(ownerId, 126, "Psychosis Crawler", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
+        this.expansionSetCode = "MBS";
+        this.subtype.add("Horror");
 
-    public DarksteelJuggernaut (UUID ownerId) {
-        super(ownerId, 150, "Darksteel Juggernaut", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Juggernaut");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
-        
-        SetPowerToughnessSourceEffect effect = new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Constants.Duration.EndOfGame);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, effect));
-        this.addAbility(IndestructibleAbility.getInstance());
-        this.addAbility(new AttacksEachTurnStaticAbility());
+
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInControllerHandCount(), Constants.Duration.EndOfGame)));
+        this.addAbility(new DrawCardTriggeredAbility(new LoseLifeOpponentsEffect(), false));
     }
 
-    public DarksteelJuggernaut (final DarksteelJuggernaut card) {
+    public PsychosisCrawler(final PsychosisCrawler card) {
         super(card);
     }
 
     @Override
-    public DarksteelJuggernaut copy() {
-        return new DarksteelJuggernaut(this);
+    public PsychosisCrawler copy() {
+        return new PsychosisCrawler(this);
+    }
+}
+
+class LoseLifeOpponentsEffect extends OneShotEffect<LoseLifeOpponentsEffect> {
+
+    public LoseLifeOpponentsEffect() {
+        super(Outcome.Damage);
     }
 
+    public LoseLifeOpponentsEffect(final LoseLifeOpponentsEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public LoseLifeOpponentsEffect copy() {
+        return new LoseLifeOpponentsEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        boolean applied = false;
+        Set<UUID> opponents = game.getOpponents(source.getControllerId());
+        for (UUID opponentUUID : opponents) {
+            Player player = game.getPlayer(opponentUUID);
+            if (player != null) {
+                player.loseLife(1, game);
+                applied = true;
+            }
+        }
+        return applied;
+    }
+
+    @Override
+    public String getText(Ability source) {
+        return "each opponent loses 1 life";
+    }
 }

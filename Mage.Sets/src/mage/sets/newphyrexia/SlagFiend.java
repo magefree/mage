@@ -25,55 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterArtifactCard;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class DarksteelJuggernaut extends CardImpl<DarksteelJuggernaut> {
-    private static final FilterPermanent filter = new FilterPermanent("artifacts you control");
+public class SlagFiend extends CardImpl<SlagFiend> {
 
-    static {
-        filter.getCardType().add(Constants.CardType.ARTIFACT);
-        filter.setTargetController(Constants.TargetController.YOU);
-    }
+    public SlagFiend(UUID ownerId) {
+        super(ownerId, 95, "Slag Fiend", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");
+        this.expansionSetCode = "NPH";
+        this.subtype.add("Construct");
 
-    public DarksteelJuggernaut (UUID ownerId) {
-        super(ownerId, 150, "Darksteel Juggernaut", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Juggernaut");
+        this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
-        
-        SetPowerToughnessSourceEffect effect = new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Constants.Duration.EndOfGame);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, effect));
-        this.addAbility(IndestructibleAbility.getInstance());
-        this.addAbility(new AttacksEachTurnStaticAbility());
+
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInAllGraveyardsCount(new FilterArtifactCard("artifacts")), Constants.Duration.EndOfGame)));
     }
 
-    public DarksteelJuggernaut (final DarksteelJuggernaut card) {
+    public SlagFiend(final SlagFiend card) {
         super(card);
     }
 
     @Override
-    public DarksteelJuggernaut copy() {
-        return new DarksteelJuggernaut(this);
+    public SlagFiend copy() {
+        return new SlagFiend(this);
     }
-
 }

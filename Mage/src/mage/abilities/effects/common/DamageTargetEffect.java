@@ -103,7 +103,11 @@ public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
 		StringBuilder sb = new StringBuilder();
 		sb.append("{source} deals ").append(amount).append(" damage to target ");
 		sb.append(source.getTargets().get(0).getTargetName());
-        sb.append(amount.getMessage());
+        String message = amount.getMessage();
+        if (message.length() > 0) {
+            sb.append(" for each ");
+        }
+        sb.append(message);
 		if (!preventable)
 			sb.append(". The damage can't be prevented");
 		return sb.toString();

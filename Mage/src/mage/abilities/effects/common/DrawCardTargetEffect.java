@@ -84,7 +84,11 @@ public class DrawCardTargetEffect extends OneShotEffect<DrawCardTargetEffect> {
         } catch (Exception e) {
             sb.append("s");
         }
-        sb.append(amount.getMessage());
+        String message = amount.getMessage();
+        if (message.length() > 0) {
+            sb.append(" for each ");
+        }
+        sb.append(message);
 		return sb.toString();
 	}
 

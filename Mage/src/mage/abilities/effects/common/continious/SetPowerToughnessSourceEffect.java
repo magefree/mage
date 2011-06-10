@@ -34,34 +34,26 @@ import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, North
  */
 public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl<SetPowerToughnessSourceEffect> {
 
-	private DynamicValue power;
-	private DynamicValue toughness;
+	private DynamicValue amount;
 
-    public SetPowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
+    public SetPowerToughnessSourceEffect(DynamicValue amount, Duration duration) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
-        this.power = power;
-		this.toughness = toughness;
+        this.amount = amount;
     }
-
-	public SetPowerToughnessSourceEffect(int power, int toughness, Duration duration) {
-		this(new StaticValue(power), new StaticValue(toughness), duration);
-	}
 
 	public SetPowerToughnessSourceEffect(final SetPowerToughnessSourceEffect effect) {
 		super(effect);
-		this.power = effect.power;
-		this.toughness = effect.toughness;
+		this.amount = effect.amount;
 	}
 
 	@Override
@@ -73,8 +65,9 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl<SetPower
 	public boolean apply(Game game, Ability source) {
 		Permanent target = game.getPermanent(source.getSourceId());
 		if (target != null) {
-			target.getPower().setValue(power.calculate(game, source));
-			target.getToughness().setValue(toughness.calculate(game, source));
+            int value = amount.calculate(game, source);
+			target.getPower().setValue(value);
+			target.getToughness().setValue(value);
 			return true;
 		}
 		return false;
@@ -83,13 +76,8 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl<SetPower
 	@Override
 	public String getDynamicText(Ability source) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("{this} ").append(" becomes ");
-		sb.append(power).append("/").append(toughness);
-		if (duration != Duration.WhileOnBattlefield)
-			sb.append(" ").append(duration.toString());
-        sb.append(power.getMessage());
+		sb.append("{this}'s power and toughness are each equal to the number of ");
+        sb.append(amount.getMessage());
 		return sb.toString();
 	}
-
-
 }
