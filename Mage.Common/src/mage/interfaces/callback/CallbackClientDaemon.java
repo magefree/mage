@@ -61,36 +61,24 @@ public class CallbackClientDaemon extends Thread {
 	@Override
 	public void run() {
 		try {
-	        while(!end) {
+	        while(!end && session.isConnected()) {
 				try {
 					final ClientCallback callback = session.callback(id);
 					session.ack(id, callback.getMessageId());
 					if (callbackExecutor.isShutdown())
 						logger.fatal("Attempt to submit callback to shutdown executor");
 					else
-						callbackExecutor.submit(
-							new Runnable() {
-								@Override
-								public void run() {
-									try {
-										client.processCallback(callback);
-									}
-									catch (Exception ex) {
-										logger.fatal("CallbackClientDaemon error ", ex);
-									}
-								}
-							}
-						);
-				} catch (CallbackException ex) {
-					logger.fatal("Callback failed ", ex);
+						client.processCallback(callback);
+				} catch (ServerUnavailable ex) {
+					session.handleServerUnavailable(ex);
+				} catch (Exception ex) {
+					logger.fatal("CallbackClientDaemon failed ", ex);
 				}
 			}
-		} catch (ServerUnavailable ex) {
-			session.handleServerUnavailable(ex);
-		} catch(MageException ex) {
+		} catch (Exception ex) {
 			logger.fatal("CallbackClientDaemon error ", ex);
-			session.disconnect(true);
 		}
+		logger.info("CallbackClientDaemon stopped");
 	}
 	
 	public void stopDaemon() {
