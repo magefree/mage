@@ -46,6 +46,7 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.keyword.LevelAbility;
 import mage.abilities.keyword.LevelUpAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.LevelerCard;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -74,7 +75,7 @@ public class JoragaTreespeaker extends LevelerCard<JoragaTreespeaker> {
 		this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{G}")));
         
 		Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
-		abilities1.add(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ManaEffect(Mana.GreenMana(2)), new TapSourceCost()));
+		abilities1.add(new SimpleManaAbility(Zone.BATTLEFIELD, new ManaEffect(Mana.GreenMana(2)), new TapSourceCost()));
 		this.getLevels().add(new LevelAbility(1, 4, abilities1, 1, 2));
         
 		Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
