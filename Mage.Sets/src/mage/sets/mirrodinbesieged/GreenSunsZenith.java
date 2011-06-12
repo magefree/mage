@@ -43,6 +43,7 @@ import mage.target.common.TargetCardInLibrary;
 
 import java.util.List;
 import java.util.UUID;
+import mage.filter.Filter.ComparisonType;
 
 /**
  * @author Loki
@@ -84,7 +85,9 @@ class GreenSunsZenithSearchEffect extends OneShotEffect<GreenSunsZenithSearchEff
 		filter.getColor().setGreen(true);
 		filter.setUseColor(true);
 		filter.getCardType().add(CardType.CREATURE);
-		filter.setConvertedManaCost(source.getManaCostsToPay().getVariableCosts().get(0).getAmount());
+		//Set the mana cost one higher to 'emulate' a less than or equal to comparison.
+		filter.setConvertedManaCost(source.getManaCostsToPay().getVariableCosts().get(0).getAmount() + 1);
+		filter.setConvertedManaCostComparison(ComparisonType.LessThan);
 		TargetCardInLibrary target = new TargetCardInLibrary(filter);
 		if (player.searchLibrary(target, game)) {
 			if (target.getTargets().size() > 0) {
