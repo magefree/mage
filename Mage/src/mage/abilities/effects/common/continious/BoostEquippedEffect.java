@@ -93,7 +93,7 @@ public class BoostEquippedEffect extends ContinuousEffectImpl<BoostEquippedEffec
 	@Override
 	public String getDynamicText(Ability source) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Equipped creatures gets ");
+		sb.append("Equipped creature gets ");
         String p = power.toString();
         if(!p.startsWith("-"))
             sb.append("+");

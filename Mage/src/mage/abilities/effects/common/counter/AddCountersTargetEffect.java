@@ -90,7 +90,7 @@ public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffe
 			sb.append(Integer.toString(amount)).append(" ").append(name).append(" counters on ");
 		}
 		else {
-			sb.append("a ").append(name).append(" counter on ");
+			sb.append("a ").append(name).append(" counter on target ");
 		}
 		sb.append(source.getTargets().get(0).getTargetName());
 		return sb.toString();

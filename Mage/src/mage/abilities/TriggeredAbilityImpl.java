@@ -104,9 +104,9 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
         StringBuilder sb = new StringBuilder();
         if (optional) {
             sb.append("you may ");
-        }
-        if (!this.getTargets().isEmpty()) {
-            sb.append("have ");
+            if (!this.getTargets().isEmpty()) {
+                sb.append("have ");
+            }
         }
         sb.append(superRule.substring(0, 1).toLowerCase());
         sb.append(superRule.substring(1));
