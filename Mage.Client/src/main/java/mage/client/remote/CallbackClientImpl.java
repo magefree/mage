@@ -73,11 +73,11 @@ public class CallbackClientImpl implements CallbackClient {
 	@Override
 	public synchronized void processCallback(final ClientCallback callback) {
 		logger.info(callback.getMessageId() + " - " + callback.getMethod());
+		SaveObjectUtil.saveObject(callback.getData(), callback.getMethod());
+		callback.setData(CompressUtil.decompress(callback.getData()));
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				SaveObjectUtil.saveObject(callback.getData(), callback.getMethod());
-				callback.setData(CompressUtil.decompress(callback.getData()));
 				try {
 					logger.info(callback.getMessageId() + " -- " + callback.getMethod());
 					if (callback.getMethod().equals("startGame")) {
