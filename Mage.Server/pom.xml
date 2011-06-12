@@ -201,15 +201,15 @@
                                 </opts>
                             </jre>
                             <versionInfo>
-                                <fileVersion>0.7.2.0</fileVersion>
+                                <fileVersion>${project.version}.0</fileVersion>
                                 <txtFileVersion>MAGE Server</txtFileVersion>
                                 <fileDescription>Mage Server</fileDescription>
                                 <copyright>(C) Mage Development Team</copyright>
-                                <productVersion>0.7.2.0</productVersion>
+                                <productVersion>${project.version}.0</productVersion>
                                 <txtProductVersion>MAGE Server</txtProductVersion>
                                 <productName>MAGE</productName>
                                 <internalName>Mage-Server</internalName>
-                                <originalFilename>original.exe</originalFilename>
+                                <originalFilename>mage-server.exe</originalFilename>
                             </versionInfo>
                         </configuration>
                     </execution>
