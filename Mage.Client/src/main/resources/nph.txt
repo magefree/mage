@@ -1,0 +1,175 @@
+|Act of Aggression|New Phyrexia|U|230076|78|
+|Alloy Myr|New Phyrexia|U|214344|129|
+|Apostle's Blessing|New Phyrexia|C|194208|2|
+|Argent Mutation|New Phyrexia|U|218001|27|
+|Arm with AEther|New Phyrexia|U|202641|28|
+|Artillerize|New Phyrexia|C|218081|79|
+|Auriok Survivors|New Phyrexia|U|214353|3|
+|Batterskull|New Phyrexia|M|233055|130|
+|Beast Within|New Phyrexia|U|221533|103|
+|Birthing Pod|New Phyrexia|R|218006|104|
+|Blade Splicer|New Phyrexia|R|233068|4|
+|Blighted Agent|New Phyrexia|C|214383|29|
+|Blind Zealot|New Phyrexia|C|217999|52|
+|Blinding Souleater|New Phyrexia|C|233045|131|
+|Bludgeon Brawl|New Phyrexia|R|218055|80|
+|Brutalizer Exarch|New Phyrexia|U|217998|105|
+|Caged Sun|New Phyrexia|R|214345|132|
+|Caress of Phyrexia|New Phyrexia|U|218061|53|
+|Cathedral Membrane|New Phyrexia|U|218024|5|
+|Chained Throatseeker|New Phyrexia|C|218075|30|
+|Chancellor of the Annex|New Phyrexia|R|218083|6|
+|Chancellor of the Dross|New Phyrexia|R|218020|54|
+|Chancellor of the Forge|New Phyrexia|R|218021|81|
+|Chancellor of the Spires|New Phyrexia|R|214360|31|
+|Chancellor of the Tangle|New Phyrexia|R|218062|106|
+|Conversion Chamber|New Phyrexia|U|230070|133|
+|Corrosive Gale|New Phyrexia|U|230075|107|
+|Corrupted Resolve|New Phyrexia|U|233080|32|
+|Darksteel Relic|New Phyrexia|U|218067|134|
+|Death-Hood Cobra|New Phyrexia|C|233065|108|
+|Deceiver Exarch|New Phyrexia|U|214365|33|
+|Defensive Stance|New Phyrexia|C|217987|34|
+|Dementia Bat|New Phyrexia|C|233084|55|
+|Despise|New Phyrexia|U|233043|56|
+|Dismember|New Phyrexia|U|230082|57|
+|Dispatch|New Phyrexia|U|218072|7|
+|Due Respect|New Phyrexia|U|233077|8|
+|Elesh Norn, Grand Cenobite|New Phyrexia|M|214352|9|
+|Enslave|New Phyrexia|U|233060|58|
+|Entomber Exarch|New Phyrexia|U|218023|59|
+|Etched Monstrosity|New Phyrexia|M|217996|135|
+|Evil Presence|New Phyrexia|C|218073|60|
+|Exclusion Ritual|New Phyrexia|U|214364|10|
+|Fallen Ferromancer|New Phyrexia|U|227537|82|
+|Flameborn Viron|New Phyrexia|C|233086|83|
+|Forced Worship|New Phyrexia|C|230083|11|
+|Forest|New Phyrexia|L|230071|174|
+|Forest|New Phyrexia|L|230071|175|
+|Fresh Meat|New Phyrexia|R|218051|109|
+|Furnace Scamp|New Phyrexia|C|217979|84|
+|Geosurge|New Phyrexia|U|218004|85|
+|Geth's Verdict|New Phyrexia|C|214376|61|
+|Gitaxian Probe|New Phyrexia|C|233056|35|
+|Glissa's Scorn|New Phyrexia|C|194171|110|
+|Glistener Elf|New Phyrexia|C|233052|111|
+|Glistening Oil|New Phyrexia|R|214346|62|
+|Greenhilt Trainee|New Phyrexia|U|233063|112|
+|Gremlin Mine|New Phyrexia|C|218068|136|
+|Grim Affliction|New Phyrexia|C|214389|63|
+|Gut Shot|New Phyrexia|U|230074|86|
+|Hex Parasite|New Phyrexia|R|218008|137|
+|Hovermyr|New Phyrexia|C|227513|138|
+|Ichor Explosion|New Phyrexia|U|218066|64|
+|Immolating Souleater|New Phyrexia|C|233058|139|
+|Impaler Shrike|New Phyrexia|C|217988|36|
+|Inquisitor Exarch|New Phyrexia|U|218070|12|
+|Insatiable Souleater|New Phyrexia|C|233066|140|
+|Invader Parasite|New Phyrexia|R|233067|87|
+|Island|New Phyrexia|L|227505|168|
+|Island|New Phyrexia|L|227505|169|
+|Isolation Cell|New Phyrexia|U|218057|141|
+|Jin-Gitaxias, Core Augur|New Phyrexia|M|214349|37|
+|Jor Kadeen, the Prevailer|New Phyrexia|R|227508|128|
+|Karn Liberated|New Phyrexia|M|214350|1|
+|Kiln Walker|New Phyrexia|U|214380|142|
+|Lashwrithe|New Phyrexia|R|214359|143|
+|Leeching Bite|New Phyrexia|C|218028|113|
+|Life's Finale|New Phyrexia|R|214362|65|
+|Lost Leonin|New Phyrexia|C|218053|13|
+|Loxodon Convert|New Phyrexia|C|218013|14|
+|Marrow Shards|New Phyrexia|U|230072|15|
+|Master Splicer|New Phyrexia|U|233062|16|
+|Maul Splicer|New Phyrexia|C|233040|114|
+|Melira, Sylvok Outcast|New Phyrexia|R|194274|115|
+|Mental Misstep|New Phyrexia|U|230066|38|
+|Mindcrank|New Phyrexia|U|233078|144|
+|Mindculling|New Phyrexia|U|218085|39|
+|Moltensteel Dragon|New Phyrexia|R|233051|88|
+|Mortis Dogs|New Phyrexia|C|233072|66|
+|Mountain|New Phyrexia|L|230064|172|
+|Mountain|New Phyrexia|L|230064|173|
+|Mutagenic Growth|New Phyrexia|C|233070|116|
+|Mycosynth Fiend|New Phyrexia|U|217995|117|
+|Mycosynth Wellspring|New Phyrexia|C|218039|145|
+|Myr Superion|New Phyrexia|R|194275|146|
+|Necropouncer|New Phyrexia|U|214367|147|
+|Norn's Annex|New Phyrexia|R|233050|17|
+|Noxious Revival|New Phyrexia|U|230067|118|
+|Numbing Dose|New Phyrexia|C|218040|40|
+|Ogre Menial|New Phyrexia|C|233082|89|
+|Omen Machine|New Phyrexia|R|233042|148|
+|Parasitic Implant|New Phyrexia|C|194216|67|
+|Pestilent Souleater|New Phyrexia|C|233085|149|
+|Phyrexian Hulk|New Phyrexia|C|214379|150|
+|Phyrexian Ingester|New Phyrexia|R|214384|41|
+|Phyrexian Metamorph|New Phyrexia|R|214375|42|
+|Phyrexian Obliterator|New Phyrexia|M|214386|68|
+|Phyrexian Swarmlord|New Phyrexia|R|218086|119|
+|Phyrexian Unlife|New Phyrexia|R|218058|18|
+|Phyrexia's Core|New Phyrexia|U|218015|165|
+|Pith Driller|New Phyrexia|C|230079|69|
+|Plains|New Phyrexia|L|227518|166|
+|Plains|New Phyrexia|L|227518|167|
+|Porcelain Legionnaire|New Phyrexia|C|218043|19|
+|Postmortem Lunge|New Phyrexia|U|233054|70|
+|Praetor's Grasp|New Phyrexia|R|218050|71|
+|Priest of Urabrask|New Phyrexia|U|218037|90|
+|Pristine Talisman|New Phyrexia|C|233074|151|
+|Psychic Barrier|New Phyrexia|C|218016|43|
+|Psychic Surgery|New Phyrexia|R|214347|44|
+|Puresteel Paladin|New Phyrexia|R|227504|20|
+|Rage Extractor|New Phyrexia|U|214385|91|
+|Razor Swine|New Phyrexia|C|218022|92|
+|Reaper of Sheoldred|New Phyrexia|U|214374|72|
+|Remember the Fallen|New Phyrexia|C|218078|21|
+|Rotted Hystrix|New Phyrexia|C|233064|120|
+|Ruthless Invasion|New Phyrexia|C|227528|93|
+|Scrapyard Salvo|New Phyrexia|C|218019|94|
+|Sensor Splicer|New Phyrexia|C|233038|22|
+|Shattered Angel|New Phyrexia|U|233059|23|
+|Sheoldred, Whispering One|New Phyrexia|M|214382|73|
+|Shriek Raptor|New Phyrexia|C|217994|24|
+|Shrine of Boundless Growth|New Phyrexia|U|217982|152|
+|Shrine of Burning Rage|New Phyrexia|U|218018|153|
+|Shrine of Limitless Power|New Phyrexia|U|217980|154|
+|Shrine of Loyal Legions|New Phyrexia|U|206347|155|
+|Shrine of Piercing Vision|New Phyrexia|U|194318|156|
+|Sickleslicer|New Phyrexia|U|214357|157|
+|Slag Fiend|New Phyrexia|R|218010|95|
+|Slash Panther|New Phyrexia|C|230065|96|
+|Soul Conduit|New Phyrexia|R|233048|158|
+|Spellskite|New Phyrexia|R|217992|159|
+|Spinebiter|New Phyrexia|U|230068|121|
+|Spined Thopter|New Phyrexia|C|217990|45|
+|Spire Monitor|New Phyrexia|C|233053|46|
+|Surge Node|New Phyrexia|U|194070|160|
+|Surgical Extraction|New Phyrexia|R|233041|74|
+|Suture Priest|New Phyrexia|C|217981|25|
+|Swamp|New Phyrexia|L|227521|170|
+|Swamp|New Phyrexia|L|227521|171|
+|Sword of War and Peace|New Phyrexia|M|214368|161|
+|Tezzeret's Gambit|New Phyrexia|U|227547|47|
+|Thundering Tanadon|New Phyrexia|C|218077|122|
+|Tormentor Exarch|New Phyrexia|U|218082|97|
+|Torpor Orb|New Phyrexia|R|233069|162|
+|Toxic Nim|New Phyrexia|C|233081|75|
+|Trespassing Souleater|New Phyrexia|C|233073|163|
+|Triumph of the Hordes|New Phyrexia|U|218044|123|
+|Unwinding Clock|New Phyrexia|R|218079|164|
+|Urabrask the Hidden|New Phyrexia|M|214378|98|
+|Vapor Snag|New Phyrexia|C|218017|48|
+|Vault Skirge|New Phyrexia|C|217984|76|
+|Victorious Destruction|New Phyrexia|C|227549|99|
+|Viral Drake|New Phyrexia|U|233047|49|
+|Viridian Betrayers|New Phyrexia|C|214390|124|
+|Viridian Harvest|New Phyrexia|C|214388|125|
+|Vital Splicer|New Phyrexia|U|233079|126|
+|Volt Charge|New Phyrexia|C|214381|100|
+|Vorinclex, Voice of Hunger|New Phyrexia|M|218002|127|
+|Vulshok Refugee|New Phyrexia|U|218038|101|
+|War Report|New Phyrexia|C|230078|26|
+|Whipflare|New Phyrexia|U|194383|102|
+|Whispering Specter|New Phyrexia|U|218045|77|
+|Wing Splicer|New Phyrexia|U|233037|50|
+|Xenograft|New Phyrexia|R|227544|51|

@@ -9,6 +9,8 @@ import mage.utils.CardUtil;
 import java.io.InputStream;
 import java.util.*;
 
+import org.apache.log4j.Logger;
+
 /**
  * Stores all implemented cards on client side.
  * Used by deck editor, deck generator, collection viewer, etc.
@@ -16,6 +18,8 @@ import java.util.*;
  * @author nantuko
  */
 public class CardsStorage {
+	private static final Logger log = Logger.getLogger(CardsStorage.class);
+	
 	private static List<Card> allCards = new ArrayList<Card>();
 	private static Set<Card> nonBasicLandCards = new LinkedHashSet<Card>();
 	private static Map<String, Integer> ratings;
@@ -170,6 +174,7 @@ public class CardsStorage {
 			readUnimplemented("ROE", "/roe.txt", names, cards);
 			readUnimplemented("SOM", "/som.txt", names, cards);
 			readUnimplemented("MBS", "/mbs.txt", names, cards);
+			readUnimplemented("NPH", "/nph.txt", names, cards);
 
 			names.clear();
 			names = null;
@@ -181,6 +186,10 @@ public class CardsStorage {
 		try {
 			Card tmp = allCards.get(0);
 			InputStream is = CardsStorage.class.getResourceAsStream(filename);
+			if (is == null) {
+				log.error("Couldn't find: " + filename);
+				return;
+			}
 			Scanner scanner = new Scanner(is);
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
@@ -223,7 +232,7 @@ public class CardsStorage {
 	 * @author nantuko
 	 */
 	private static class CardComparator implements Comparator<Card> {
-		private static final String LATEST_SET_CODE = "SOM";
+		private static final String LATEST_SET_CODE = "NPH";
 
 		@Override
 		public int compare(Card o1, Card o2) {
@@ -254,24 +263,28 @@ public class CardsStorage {
 	 * Set comparator. Puts latest set on top.
 	 */
 	private static class SetComparator implements Comparator<String> {
-		private static final String LATEST_SET_CODE = "SOM";
-		private static final String LATEST_SET_CODE_2 = "MBS";
 
+		/**
+		 * Sets that will be put on top.
+		 */
+		private static final List<String> latestSetCodes = new ArrayList<String>();
+		
+		static {
+			latestSetCodes.add("SOM");
+			latestSetCodes.add("MBS");
+			latestSetCodes.add("NPH");
+		}
+		
 		@Override
 		public int compare(String set1, String set2) {
 			// put latest set on top
-			if (set1.equals(LATEST_SET_CODE)) {
-				return -1;
-			}
-			if (set2.equals(LATEST_SET_CODE)) {
-				return 1;
-			}
-
-			if (set1.equals(LATEST_SET_CODE_2)) {
-				return -1;
-			}
-			if (set2.equals(LATEST_SET_CODE_2)) {
-				return 1;
+			for (String set : latestSetCodes) {
+				if (set1.equals(set)) {
+					return -1;
+				}
+				if (set2.equals(set)) {
+					return 1;
+				}
 			}
 			return set1.compareTo(set2);
 		}
