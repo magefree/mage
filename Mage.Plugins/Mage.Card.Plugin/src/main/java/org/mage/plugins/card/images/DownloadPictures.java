@@ -15,9 +15,8 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -46,7 +45,6 @@ import javax.swing.event.ChangeListener;
 import mage.cards.Card;
 
 import org.apache.log4j.Logger;
-import org.mage.plugins.card.CardUrl;
 import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.dl.sources.CardImageSource;
 import org.mage.plugins.card.dl.sources.MagicCardsImageSource;
@@ -62,10 +60,10 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 	private JProgressBar bar;
 	private JOptionPane dlg;
 	private boolean cancel;
-	private JButton close;
+	private JButton closeButton;
+    private JButton startDownloadButton;
 	private int cardIndex;
-	private ArrayList<CardUrl> cards;
-	private ArrayList<CardUrl> cardsInGame;
+	private ArrayList<CardInfo> cards;
 	private JComboBox jComboBox1;
 	private JLabel jLabel1;
 	private static boolean offlineMode = false;
@@ -85,7 +83,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 	}
 
 	public static void startDownload(JFrame frame, Set<Card> allCards) {
-		ArrayList<CardUrl> cards = getNeededCards(allCards);
+		ArrayList<CardInfo> cards = getNeededCards(allCards);
 
 		/*
 		 * if (cards == null || cards.size() == 0) {
@@ -104,7 +102,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		String title = "Downloading";
 
 		final JDialog dialog = this.dlg.createDialog(frame, title);
-		close.addActionListener(new ActionListener() {
+		closeButton.addActionListener(new ActionListener() {
             @Override
 			public void actionPerformed(ActionEvent e) {
 				dialog.setVisible(false);
@@ -117,14 +115,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		this.cancel = cancel;
 	}
 
-	public DownloadPictures(ArrayList<CardUrl> cards) {
+	public DownloadPictures(ArrayList<CardInfo> cards) {
 		this.cards = cards;
-
-		this.cardsInGame = new ArrayList<CardUrl>();
-		for (CardUrl url : cards) {
-			if (url.isExistsInTheGame())
-				cardsInGame.add(url);
-		}
 
 		addr = new JTextField("Proxy Address");
 		port = new JTextField("Proxy Port");
@@ -185,18 +177,22 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         cardImageSource = MtgatheringRuImageSource.getLqInstance();
                         break;
                 }
+                int count = DownloadPictures.this.cards.size();
+                float mb = (count * cardImageSource.getAverageSize()) / 1024;
+                bar.setString(String.format(cardIndex == count ? "%d of %d cards finished! Please close!"
+                        : "%d of %d cards finished! Please wait! [%.1f Mb]", 0, count, mb));
             }
         });
 		p0.add(jComboBox1);
 		p0.add(Box.createVerticalStrut(5));
 
 		// Start
-		final JButton b = new JButton("Start download");
-		b.addActionListener(new ActionListener() {
+		startDownloadButton = new JButton("Start download");
+		startDownloadButton.addActionListener(new ActionListener() {
             @Override
 			public void actionPerformed(ActionEvent e) {
 				new Thread(DownloadPictures.this).start();
-				b.setEnabled(false);
+				startDownloadButton.setEnabled(false);
 				checkBox.setEnabled(false);
 			}
 		});
@@ -206,7 +202,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		p0.add(bar);
 		bar.setStringPainted(true);
 		int count = cards.size();
-		float mb = (count * 70.0f) / 1024;
+		float mb = (count * cardImageSource.getAverageSize()) / 1024;
 		bar.setString(String.format(cardIndex == cards.size() ? "%d of %d cards finished! Please close!"
 				: "%d of %d cards finished! Please wait! [%.1f Mb]", 0, cards.size(), mb));
 		Dimension d = bar.getPreferredSize();
@@ -222,40 +218,33 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		checkBox.addActionListener(new ActionListener() {
             @Override
 			public void actionPerformed(ActionEvent e) {
-				if (checkBox.isSelected()) {
-					int count = DownloadPictures.this.cardsInGame.size();
-					float mb = (count * 70.0f) / 1024;
-					bar.setString(String.format(count == 0 ? "No images to download!" : "%d of %d cards finished! Please wait! [%.1f Mb]",
-							0, DownloadPictures.this.cardsInGame.size(), mb));
-				} else {
-					int count = DownloadPictures.this.cards.size();
-					float mb = (count * 70.0f) / 1024;
-					bar.setString(String.format(cardIndex == count ? "%d of %d cards finished! Please close!"
-							: "%d of %d cards finished! Please wait! [%.1f Mb]", 0, count, mb));
-				}
+                int count = DownloadPictures.this.cards.size();
+                float mb = (count * cardImageSource.getAverageSize()) / 1024;
+                bar.setString(String.format(cardIndex == count ? "%d of %d cards finished! Please close!"
+                        : "%d of %d cards finished! Please wait! [%.1f Mb]", 0, count, mb));
 			}
 		});
 
 		// JOptionPane
-		Object[] options = { b, close = new JButton("Cancel") };
+		Object[] options = { startDownloadButton, closeButton = new JButton("Cancel") };
 		dlg = new JOptionPane(p0, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
 	}
 
-	private static ArrayList<CardUrl> getNeededCards(Set<Card> allCards) {
+	private static ArrayList<CardInfo> getNeededCards(Set<Card> allCards) {
 
-		ArrayList<CardUrl> cardsToDownload = new ArrayList<CardUrl>();
+		ArrayList<CardInfo> cardsToDownload = new ArrayList<CardInfo>();
 
 		/**
 		 * read all card names and urls
 		 */
-		ArrayList<CardUrl> allCardsUrls = new ArrayList<CardUrl>();
+		ArrayList<CardInfo> allCardsUrls = new ArrayList<CardInfo>();
 
 		try {
 			offlineMode = true;
 
 			for (Card card : allCards) {
 				if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()) {
-					CardUrl url = new CardUrl(card.getName(), card.getExpansionSetCode(), card.getCardNumber(), false);
+					CardInfo url = new CardInfo(card.getName(), card.getExpansionSetCode(), card.getCardNumber(), false);
 					allCardsUrls.add(url);
 				} else {
 					if (card.getCardNumber() < 1) {
@@ -278,10 +267,10 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		/**
 		 * check to see which cards we already have
 		 */
-		for (CardUrl card : allCardsUrls) {
+		for (CardInfo card : allCardsUrls) {
 			boolean withCollectorId = false;
-			if (card.name.equals("Forest") || card.name.equals("Mountain") || card.name.equals("Swamp") || card.name.equals("Island")
-					|| card.name.equals("Plains")) {
+			if (card.getName().equals("Forest") || card.getName().equals("Mountain") || card.getName().equals("Swamp") || card.getName().equals("Island")
+					|| card.getName().equals("Plains")) {
 				withCollectorId = true;
 			}
 			file = new File(CardImageUtils.getImagePath(card, withCollectorId));
@@ -290,13 +279,12 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 			}
 		}
 
-		for (CardUrl card : cardsToDownload) {
-			if (card.token) {
-				log.info("Card to download: " + card.name + " (Token) " + card.url);
+		for (CardInfo card : cardsToDownload) {
+			if (card.isToken()) {
+				log.info("Card to download: " + card.getName() + " (Token) ");
 			} else {
 				try {
-					log.info("Card to download: " + card.name + " (" + card.set + ") "
-							+ cardImageSource.generateURL(card.collector, card.set));
+					log.info("Card to download: " + card.getName() + " (" + card.getSet() + ")");
 				} catch (Exception e) {
 					log.error(e);
 				}
@@ -306,15 +294,15 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		return cardsToDownload;
 	}
 
-	private static ArrayList<CardUrl> getTokenCardUrls() throws RuntimeException {
-		ArrayList<CardUrl> list = new ArrayList<CardUrl>();
+	private static ArrayList<CardInfo> getTokenCardUrls() throws RuntimeException {
+		ArrayList<CardInfo> list = new ArrayList<CardInfo>();
 		HashSet<String> filter = new HashSet<String>();
 		InputStream in = DownloadPictures.class.getClassLoader().getResourceAsStream("card-pictures-tok.txt");
 		readImageURLsFromFile(in, list, filter);
 		return list;
 	}
 
-	private static void readImageURLsFromFile(InputStream in, ArrayList<CardUrl> list, Set<String> filter) throws RuntimeException {
+	private static void readImageURLsFromFile(InputStream in, ArrayList<CardInfo> list, Set<String> filter) throws RuntimeException {
 		if (in == null) {
 			log.error("resources input stream is null");
 			return;
@@ -335,18 +323,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 					if (params.length >= 4) {
 						if (params[1].toLowerCase().equals("generate") && params[2].startsWith("TOK:")) {
 							String set = params[2].substring(4);
-							CardUrl cardUrl = new CardUrl(params[3], set, 0, true);
-							cardUrl.token = true;
-							cardUrl.url = generateTokenUrl(params[3], set);
-							list.add(cardUrl);
-						} else {
-							CardUrl cardUrl = new CardUrl(params[2], params[1].toUpperCase(), 0, false);
-							cardUrl.url = params[3];
-							if (cardUrl.set.startsWith("TOK:")) {
-								cardUrl.token = true;
-								cardUrl.set = cardUrl.set.substring(4);
-							}
-							list.add(cardUrl);
+							CardInfo card = new CardInfo(params[3], set, 0, true);
+							list.add(card);
 						}
 					} else {
 						log.error("wrong format for image urls: " + line);
@@ -377,47 +355,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		}
 	}
 
-	final static Map<String, String> setNameReplacement = new HashMap<String, String>() {
-		{
-			put("NPH", "new-phyrexia");
-            put("MBS", "mirrodin-besieged");
-			put("SOM", "scars-of-mirrodin");
-			put("M11", "magic-2011");
-			put("ROE", "rise-of-the-eldrazi");
-			put("PVC", "duel-decks-phyrexia-vs-the-coalition");
-			put("WWK", "worldwake");
-			put("ZEN", "zendikar");
-			put("HOP", "planechase");
-			put("M10", "magic-2010");
-			put("GVL", "duel-decks-garruk-vs-liliana");
-			put("ARB", "alara-reborn");
-			put("DVD", "duel-decks-divine-vs-demonic");
-			put("CON", "conflux");
-			put("JVC", "duel-decks-jace-vs-chandra");
-			put("ALA", "shards-of-alara");
-			put("EVE", "eventide");
-			put("SHM", "shadowmoor");
-			put("EVG", "duel-decks-elves-vs-goblins");
-			put("MOR", "morningtide");
-			put("LRW", "lorwyn");
-			put("10E", "tenth-edition");
-			put("CSP", "coldsnap");
-		}
-		private static final long serialVersionUID = 1L;
-	};
-
-	private static String generateTokenUrl(String name, String set) {
-		String _name = name.replaceAll(" ", "-").toLowerCase();
-		String _set = "not-supported-set";
-		if (setNameReplacement.containsKey(set)) {
-			_set = setNameReplacement.get(set);
-		} else {
-			_set += "-" + set;
-		}
-		String url = "http://magiccards.info/extras/token/" + _set + "/" + _name + ".jpg";
-		return url;
-	}
-
 	private class ProxyHandler implements ChangeListener {
 		private int type;
 
@@ -437,8 +374,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
     @Override
 	public void run() {
-		BufferedInputStream in;
-		BufferedOutputStream out;
 
 		File base = new File(Constants.IO.imageBaseDir);
 		if (!base.exists()) {
@@ -458,23 +393,31 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 			HashSet<String> ignoreUrls = SettingsManager.getIntance().getIgnoreUrls();
 
 			update(0);
-			for (int i = 0; (checkBox.isSelected() ? i < cardsInGame.size() : i < cards.size()) && !cancel; i++) {
+			for (int i = 0; i < cards.size() && !cancel; i++) {
 				try {
 
-					CardUrl card = checkBox.isSelected() ? cardsInGame.get(i) : cards.get(i);
+					CardInfo card = cards.get(i);
 
-					log.info("Downloading card: " + card.name + " (" + card.set + ")");
+					log.info("Downloading card: " + card.getName() + " (" + card.getSet() + ")");
 
-					URL url = new URL(cardImageSource.generateURL(card.collector, card.set));
-					if (ignoreUrls.contains(card.set) || card.token) {
-						if (card.collector != 0) {
+					String url;
+					if (ignoreUrls.contains(card.getSet()) || card.isToken()) {
+						if (card.getCollectorId() != 0) {
 							continue;
 						}
-						url = new URL(card.url);
-					}
-					
-					Runnable task = new DownloadTask(card, url);
-					executor.execute(task);
+						url = cardImageSource.generateTokenUrl(card.getName(), card.getSet());
+					} else {
+                        url = cardImageSource.generateURL(card.getCollectorId(), card.getSet());
+                    }
+
+                    if (url != null) {
+                        Runnable task = new DownloadTask(card, new URL(url));
+                        executor.execute(task);
+                    } else {
+                        synchronized (sync) {
+                            update(cardIndex + 1);
+                        }
+                    }
 				} catch (Exception ex) {
 					log.error(ex, ex);
 				}
@@ -486,14 +429,14 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 				} catch (InterruptedException ie) {}
 			}
 		}
-		close.setText("Close");
+		closeButton.setText("Close");
 	}
 	
 	private final class DownloadTask implements Runnable {
-		private CardUrl card;
+		private CardInfo card;
 		private URL url;
 		
-		public DownloadTask(CardUrl card, URL url) {
+		public DownloadTask(CardInfo card, URL url) {
 			this.card = card;
 			this.url = url;
 		}
@@ -506,8 +449,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 				createDirForCard(card);
 	
 				boolean withCollectorId = false;
-				if (card.name.equals("Forest") || card.name.equals("Mountain") || card.name.equals("Swamp")
-						|| card.name.equals("Island") || card.name.equals("Plains")) {
+				if (card.getName().equals("Forest") || card.getName().equals("Mountain") || card.getName().equals("Swamp")
+						|| card.getName().equals("Island") || card.getName().equals("Plains")) {
 					withCollectorId = true;
 				}
 				File fileOut = new File(CardImageUtils.getImagePath(card, withCollectorId));
@@ -542,7 +485,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		}
 	}
 
-	private static File createDirForCard(CardUrl card) throws Exception {
+	private static File createDirForCard(CardInfo card) throws Exception {
 		File setDir = new File(CardImageUtils.getImageDir(card));
 		if (!setDir.exists()) {
 			setDir.mkdirs();
@@ -552,21 +495,36 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
 	private void update(int card) {
 		this.cardIndex = card;
-		if (checkBox.isSelected()) {
-			int count = DownloadPictures.this.cardsInGame.size();
-			int countLeft = count - card;
-			float mb = (countLeft * 70.0f) / 1024;
-			bar.setString(String.format(card == count ? "%d of %d cards finished! Please close!"
-							: "%d of %d cards finished! Please wait!  [%.1f Mb]",
-							card, count, mb));
-		} else {
-			int count = DownloadPictures.this.cards.size();
-			int countLeft = count - card;
-			float mb = (countLeft * 70.0f) / 1024;
-			bar.setString(String.format(cardIndex == count ? "%d of %d cards finished! Please close!"
-							: "%d of %d cards finished! Please wait! [%.1f Mb]",
-							card, count, mb));
-		}
+        int count = DownloadPictures.this.cards.size();
+
+        if (cardIndex < count) {
+        float mb = ((count - card) * cardImageSource.getAverageSize()) / 1024;
+            bar.setString(String.format("%d of %d cards finished! Please wait! [%.1f Mb]",
+                    card, count, mb));
+        } else {
+            Iterator<CardInfo> cardsIterator = DownloadPictures.this.cards.iterator();
+            while (cardsIterator.hasNext()) {
+                CardInfo cardInfo = cardsIterator.next();
+                boolean withCollectorId = false;
+                if (cardInfo.getName().equals("Forest") || cardInfo.getName().equals("Mountain") || cardInfo.getName().equals("Swamp") || cardInfo.getName().equals("Island")
+                        || cardInfo.getName().equals("Plains")) {
+                    withCollectorId = true;
+                }
+                File file = new File(CardImageUtils.getImagePath(cardInfo, withCollectorId));
+                if (file.exists()) {
+                    cardsIterator.remove();
+                }
+            }
+            count = DownloadPictures.this.cards.size();
+
+            if (count == 0) {
+                bar.setString(String.format("0 cards remaining! Please close!", count));
+            } else {
+                bar.setString(String.format("%d cards remaining! Please choose another source!", count));
+                executor = Executors.newFixedThreadPool(10);
+                startDownloadButton.setEnabled(true);
+            }
+        }
 	}
 
 	private static final Logger log = Logger.getLogger(DownloadPictures.class);

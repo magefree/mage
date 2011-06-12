@@ -50,6 +50,7 @@ public class ImageCache {
 	
 	static {
 		imageCache = new MapMaker().softValues().makeComputingMap(new Function<String, BufferedImage>() {
+            @Override
 			public BufferedImage apply(String key) {
 				try {
 					boolean thumbnail = false;
@@ -66,7 +67,7 @@ public class ImageCache {
 
 						CardInfo info = new CardInfo(name, set, collectorId);
 						
-						if (collectorId == 0) info.isToken = true;
+						if (collectorId == 0) info.setToken(true);
 						String path = CardImageUtils.getImagePath(info);
 						if (path == null) return null;
 						File file = new File(path);
