@@ -8,7 +8,6 @@ import java.util.Map;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.mage.plugins.card.utils.CardImageUtils;
 
 /**
  *
@@ -52,7 +51,7 @@ public class WizardCardsImageSource implements CardImageSource {
                 setLinks.add(cardsImages.get(i).attr("src"));
             }
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("Exception when parsing the wizards page: " + ex.getMessage());
         }
         return setLinks;
     }
@@ -62,13 +61,7 @@ public class WizardCardsImageSource implements CardImageSource {
         if (collectorId == null || cardSet == null) {
             throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
         }
-        if (setsAliases.get(cardSet) == null) {
-            String set = CardImageUtils.updateSet(cardSet, true);
-            String url = "http://magiccards.info/scans/en/";
-            url += set.toLowerCase() + "/" + collectorId + ".jpg";
-
-            return url;
-        } else {
+        if (setsAliases.get(cardSet) != null) {
             List<String> setLinks = (List<String>) sets.get(cardSet);
             if (setLinks == null) {
                 setLinks = getSetLinks((String) setsAliases.get(cardSet));
@@ -86,5 +79,16 @@ public class WizardCardsImageSource implements CardImageSource {
             }
             return link;
         }
+        return null;
+    }
+
+    @Override
+    public String generateTokenUrl(String name, String set) {
+        return null;
+    }
+
+    @Override
+    public Float getAverageSize() {
+        return 60.0f;
     }
 }

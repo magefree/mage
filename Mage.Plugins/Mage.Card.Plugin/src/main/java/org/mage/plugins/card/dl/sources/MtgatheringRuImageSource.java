@@ -21,7 +21,6 @@ public class MtgatheringRuImageSource implements CardImageSource {
 
     static {
         setsAliases = new HashMap();
-        setsAliases.put("MBS", "mirrodinbesieged");
         setsAliases.put("M11", "magic2011");
     }
     private String quality;
@@ -56,17 +55,28 @@ public class MtgatheringRuImageSource implements CardImageSource {
         if (collectorId == null || cardSet == null) {
             throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
         }
-        if (setsAliases.get(cardSet) == null) {
-            String set = CardImageUtils.updateSet(cardSet, true);
-            String url = "http://magiccards.info/scans/en/";
-            url += set.toLowerCase() + "/" + collectorId + ".jpg";
-
-            return url;
-        } else {
+        if (setsAliases.get(cardSet) != null) {
             String set = CardImageUtils.updateSet(cardSet, true);
             String url = "http://mtgathering.ru/scans/en/";
             url += set.toLowerCase() + "/" + quality + "/" + collectorId + ".jpg";
             return url;
         }
+        return null;
+    }
+
+    @Override
+    public String generateTokenUrl(String name, String set) {
+        return null;
+    }
+
+    @Override
+    public Float getAverageSize() {
+        if(quality.equalsIgnoreCase("hq"))
+            return 80.0f;
+        if(quality.equalsIgnoreCase("md"))
+            return 30.0f;
+        if(quality.equalsIgnoreCase("lq"))
+            return 9.0f;
+        return 0f;
     }
 }

@@ -3,6 +3,7 @@ package org.mage.plugins.card.properties;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Properties;
 
@@ -55,9 +56,7 @@ public class SettingsManager {
 			String result = imageUrlProperties.getProperty("ignore.urls");
 			if (result != null) {
 				String[] ignore = result.split(",");
-				for (String i : ignore) {
-					ignoreUrls.add(i);
-				}
+                ignoreUrls.addAll(Arrays.asList(ignore));
 			}
 		}
 		return ignoreUrls;
@@ -69,9 +68,7 @@ public class SettingsManager {
 			String result = imageUrlProperties.getProperty("token.lookup.order");
 			if (result != null) {
 				String[] sets = result.split(",");
-				for (String s : sets) {
-					order.add(s);
-				}
+                order.addAll(Arrays.asList(sets));
 			}
 		}
 		return order;

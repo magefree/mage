@@ -3,35 +3,27 @@ package org.mage.plugins.card.utils;
 import java.io.File;
 import java.util.HashMap;
 
-import mage.cards.Card;
-import mage.game.permanent.PermanentToken;
-
-import org.mage.plugins.card.CardUrl;
 import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.images.CardInfo;
 import org.mage.plugins.card.properties.SettingsManager;
 
 public class CardImageUtils {
 
-	private static HashMap<CardUrl, String> pathCache = new HashMap<CardUrl, String>();
+	private static HashMap<CardInfo, String> pathCache = new HashMap<CardInfo, String>();
 	
 	/**
 	 * Get path to image for specific card.
 	 * 
-	 * @param c
+	 * @param card
 	 *            card to get path for
 	 * @return String if image exists, else null
 	 */
-	public static String getImagePath(CardInfo c) {
+	public static String getImagePath(CardInfo card) {
 		String filePath;
         String suffix = ".jpg";
-	    String cardname = c.name;
-	    String set = c.set;
-		
-		CardUrl card = new CardUrl(cardname, set, c.collectorId, c.isToken);
 		
 		File file = null;
-		if (c.isToken) {
+		if (card.isToken()) {
 			if (pathCache.containsKey(card)) {
 				return pathCache.get(card);
 			}
@@ -60,7 +52,7 @@ public class CardImageUtils {
 		 * try current directory
 		 */
 		if (file == null || !file.exists()) {
-			filePath = cleanString(c.name) + suffix;
+			filePath = cleanString(card.getName()) + suffix;
 			file = new File(filePath);
 		}
 
@@ -71,22 +63,17 @@ public class CardImageUtils {
 		}
 	}
 	
-	private static boolean isToken(Card c) {
-		return c != null && c instanceof PermanentToken;
-	}
-	
-	private static String getTokenImagePath(CardUrl card) {
+	private static String getTokenImagePath(CardInfo card) {
 		String filename = getImagePath(card, false);
-		CardUrl c = new CardUrl(card.name, card.set, 0, card.token);
 		
 		File file = new File(filename);
 		if (!file.exists()) {
-			c.name = card.name + " 1";
-			filename = getImagePath(c, false);
+			card.setName(card.getName() + " 1");
+			filename = getImagePath(card, false);
 			file = new File(filename);
 			if (!file.exists()) {
-				c.name = card.name + " 2";
-				filename = getImagePath(c, false);
+				card.setName(card.getName() + " 2");
+				filename = getImagePath(card, false);
 				file = new File(filename);
 			}
 		}
@@ -94,26 +81,22 @@ public class CardImageUtils {
 		return filename;
 	}
 	
-	private static String searchForCardImage(CardUrl card) {
-		File file = null;
-		String path = "";
-		CardUrl c = new CardUrl(card.name, card.set, 0, card.token);
-		boolean found = false; // search only in older sets
-		
-		for (String set : SettingsManager.getIntance().getTokenLookupOrder()) {
-			if (found || card.set.isEmpty()) { // start looking for image only if we have found card.set in the list (as this list is ordered)
-				c.set = set;
-				path = getTokenImagePath(c);
-				file = new File(path);
-				if (file.exists()) {
-					pathCache.put(card, path);
-					return path;
-				}
-			}
-			//if (set.equals(card.set)) found = true;
-		}
-		return "";
-	}
+    private static String searchForCardImage(CardInfo card) {
+        File file = null;
+        String path = "";
+        CardInfo c = new CardInfo(card);
+
+        for (String set : SettingsManager.getIntance().getTokenLookupOrder()) {
+            c.setSet(set);
+            path = getTokenImagePath(c);
+            file = new File(path);
+            if (file.exists()) {
+                pathCache.put(card, path);
+                return path;
+            }
+        }
+        return "";
+    }
 
 	public static String cleanString(String in) {
 		in = in.trim();
@@ -142,23 +125,23 @@ public class CardImageUtils {
 		return set;
 	}
 	
-	public static String getImageDir(CardUrl card) {
-		if (card.set == null) {
+	public static String getImageDir(CardInfo card) {
+		if (card.getSet() == null) {
 			return "";
 		}
-		String set = updateSet(card.set,false).toUpperCase();
-		if (card.token) {
+		String set = updateSet(card.getSet(), false).toUpperCase();
+		if (card.isToken()) {
 			return Constants.IO.imageBaseDir + File.separator + "TOK" + File.separator + set;
 		} else {
 			return Constants.IO.imageBaseDir + set;
 		}
 	}
 	
-	public static String getImagePath(CardUrl card, boolean withCollector) {
+	public static String getImagePath(CardInfo card, boolean withCollector) {
 		if (withCollector) {
-			return getImageDir(card) + File.separator + card.name + "." + card.collector + ".full.jpg";
+			return getImageDir(card) + File.separator + card.getName() + "." + card.getCollectorId() + ".full.jpg";
 		} else {
-			return getImageDir(card) + File.separator + card.name + ".full.jpg";
+			return getImageDir(card) + File.separator + card.getName() + ".full.jpg";
 		}
 	}
 }
