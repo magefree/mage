@@ -536,7 +536,7 @@ public class MageFrame extends javax.swing.JFrame implements Client {
                 if (MageFrame.connect(connection)) {
                     return true;
                 } else {
-                    JOptionPane.showMessageDialog(rootPane, "Unable to connect to server");
+                    showMessage("Unable to connect to server");
                 }
             } finally {
                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -834,14 +834,6 @@ public class MageFrame extends javax.swing.JFrame implements Client {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        final SplashScreen splash = SplashScreen.getSplashScreen();
-        if (splash != null) {
-            Graphics2D g = splash.createGraphics();
-            if (g != null) {
-                renderSplashFrame(g);
-            }
-            splash.update();
-        }
 
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
             public void uncaughtException(Thread t, Throwable e) {
@@ -850,6 +842,14 @@ public class MageFrame extends javax.swing.JFrame implements Client {
         });
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+				final SplashScreen splash = SplashScreen.getSplashScreen();
+				if (splash != null) {
+					Graphics2D g = splash.createGraphics();
+					if (g != null) {
+						renderSplashFrame(g);
+					}
+					splash.update();
+				}
                 new MageFrame().setVisible(true);
             }
         });
@@ -923,27 +923,71 @@ public class MageFrame extends javax.swing.JFrame implements Client {
 	}
 
 	@Override
-	public void connected(String message) {
-		setStatusText(message);
-		enableButtons();
+	public void connected(final String message) {
+		if (SwingUtilities.isEventDispatchThread()) {
+			setStatusText(message);
+			enableButtons();			
+		}
+		else {
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					setStatusText(message);
+					enableButtons();
+				}
+			});
+		}
 	}
 
 	@Override
 	public void disconnected() {
-		setStatusText("Not connected");
-		disableButtons();
-		hideGames();
-		hideTables();
+		if (SwingUtilities.isEventDispatchThread()) {
+			setStatusText("Not connected");
+			disableButtons();
+			hideGames();
+			hideTables();
+		}
+		else {
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					setStatusText("Not connected");
+					disableButtons();
+					hideGames();
+					hideTables();
+				}
+			});
+		}
 	}
 
 	@Override
-	public void showMessage(String message) {
-		JOptionPane.showMessageDialog(this, message);
+	public void showMessage(final String message) {
+		if (SwingUtilities.isEventDispatchThread()) {
+			JOptionPane.showMessageDialog(desktopPane, message);
+		}
+		else {
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					JOptionPane.showMessageDialog(desktopPane, message);
+				}
+			});
+		}
 	}
 
 	@Override
-	public void showError(String message) {
-		JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+	public void showError(final String message) {
+		if (SwingUtilities.isEventDispatchThread()) {
+			JOptionPane.showMessageDialog(desktopPane, message, "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		else {
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					JOptionPane.showMessageDialog(desktopPane, message, "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			});
+		}
 	}
 
 	@Override
