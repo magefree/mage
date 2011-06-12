@@ -181,7 +181,7 @@
                                 <txtFileVersion>MAGE Client</txtFileVersion>
                                 <fileDescription>Mage Client</fileDescription>
                                 <copyright>(C) Mage Development Team</copyright>
-                                <productVersion>0.7.3.0</productVersion>
+                                <productVersion>${project.version}.0</productVersion>
                                 <txtProductVersion>MAGE Client</txtProductVersion>
                                 <productName>MAGE</productName>
                                 <internalName>Mage-Client</internalName>
