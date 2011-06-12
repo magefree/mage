@@ -25,11 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -39,16 +37,17 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.game.permanent.token.GolemToken;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class BladeSplicer extends CardImpl<BladeSplicer> {
+public class MaulSplicer extends CardImpl<MaulSplicer> {
+
     private static final FilterPermanent filter = new FilterPermanent("Golem creatures");
 
     static {
@@ -56,24 +55,26 @@ public class BladeSplicer extends CardImpl<BladeSplicer> {
         filter.getSubtype().add("Golem");
     }
 
-    public BladeSplicer (UUID ownerId) {
-        super(ownerId, 4, "Blade Splicer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
+    public MaulSplicer(UUID ownerId) {
+        super(ownerId, 114, "Maul Splicer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{G}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Human");
         this.subtype.add("Artificer");
-		this.color.setWhite(true);
+
+        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GolemToken())));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GolemToken(), 2)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
-    public BladeSplicer (final BladeSplicer card) {
+    public MaulSplicer(final MaulSplicer card) {
         super(card);
     }
 
     @Override
-    public BladeSplicer copy() {
-        return new BladeSplicer(this);
+    public MaulSplicer copy() {
+        return new MaulSplicer(this);
     }
 }

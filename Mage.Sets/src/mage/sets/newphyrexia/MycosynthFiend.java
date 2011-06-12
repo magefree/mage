@@ -25,55 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.game.permanent.token.GolemToken;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class BladeSplicer extends CardImpl<BladeSplicer> {
-    private static final FilterPermanent filter = new FilterPermanent("Golem creatures");
+public class MycosynthFiend extends CardImpl<MycosynthFiend> {
 
-    static {
-        filter.getCardType().add(CardType.CREATURE);
-        filter.getSubtype().add("Golem");
-    }
-
-    public BladeSplicer (UUID ownerId) {
-        super(ownerId, 4, "Blade Splicer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
+    public MycosynthFiend(UUID ownerId) {
+        super(ownerId, 117, "Mycosynth Fiend", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "NPH";
-        this.subtype.add("Human");
-        this.subtype.add("Artificer");
-		this.color.setWhite(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GolemToken())));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.subtype.add("Horror");
+
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        DynamicValue value = OpponentsPoisonCountersCount.getInstance();
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)));
     }
 
-    public BladeSplicer (final BladeSplicer card) {
+    public MycosynthFiend(final MycosynthFiend card) {
         super(card);
     }
 
     @Override
-    public BladeSplicer copy() {
-        return new BladeSplicer(this);
+    public MycosynthFiend copy() {
+        return new MycosynthFiend(this);
     }
 }

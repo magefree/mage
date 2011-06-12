@@ -54,7 +54,7 @@ import java.util.UUID;
  */
 public class Asceticism extends CardImpl<Asceticism> {
 
-	private static FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
+	private static final FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
 
 	static {
 		filter.setTargetController(Constants.TargetController.OPPONENT);

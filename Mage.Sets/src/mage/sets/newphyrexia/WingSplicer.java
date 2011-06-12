@@ -25,11 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -39,16 +37,17 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.game.permanent.token.GolemToken;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class BladeSplicer extends CardImpl<BladeSplicer> {
+public class WingSplicer extends CardImpl<WingSplicer> {
+
     private static final FilterPermanent filter = new FilterPermanent("Golem creatures");
 
     static {
@@ -56,24 +55,26 @@ public class BladeSplicer extends CardImpl<BladeSplicer> {
         filter.getSubtype().add("Golem");
     }
 
-    public BladeSplicer (UUID ownerId) {
-        super(ownerId, 4, "Blade Splicer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
+    public WingSplicer(UUID ownerId) {
+        super(ownerId, 50, "Wing Splicer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Human");
         this.subtype.add("Artificer");
-		this.color.setWhite(true);
+
+        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GolemToken())));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
-    public BladeSplicer (final BladeSplicer card) {
+    public WingSplicer(final WingSplicer card) {
         super(card);
     }
 
     @Override
-    public BladeSplicer copy() {
-        return new BladeSplicer(this);
+    public WingSplicer copy() {
+        return new WingSplicer(this);
     }
 }

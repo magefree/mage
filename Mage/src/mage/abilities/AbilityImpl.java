@@ -36,7 +36,6 @@ import mage.Constants.AbilityType;
 import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
-import mage.MageObject;
 import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -242,6 +241,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 	 * 
 	 * @return
 	 */
+    @Override
 	public ManaCosts<ManaCost> getManaCostsToPay ( ) {
 		return manaCostsToPay;
 	}

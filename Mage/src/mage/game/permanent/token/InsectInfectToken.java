@@ -31,7 +31,6 @@ package mage.game.permanent.token;
 import mage.Constants.CardType;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.InfectAbility;
 
 /**

@@ -25,55 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.game.permanent.token.GolemToken;
+import mage.counters.CounterType;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class BladeSplicer extends CardImpl<BladeSplicer> {
-    private static final FilterPermanent filter = new FilterPermanent("Golem creatures");
+public class PithDriller extends CardImpl<PithDriller> {
 
-    static {
-        filter.getCardType().add(CardType.CREATURE);
-        filter.getSubtype().add("Golem");
-    }
-
-    public BladeSplicer (UUID ownerId) {
-        super(ownerId, 4, "Blade Splicer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
+    public PithDriller(UUID ownerId) {
+        super(ownerId, 69, "Pith Driller", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{BP}");
         this.expansionSetCode = "NPH";
-        this.subtype.add("Human");
-        this.subtype.add("Artificer");
-		this.color.setWhite(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GolemToken())));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.subtype.add("Horror");
+
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(4);
+
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance()));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public BladeSplicer (final BladeSplicer card) {
+    public PithDriller(final PithDriller card) {
         super(card);
     }
 
     @Override
-    public BladeSplicer copy() {
-        return new BladeSplicer(this);
+    public PithDriller copy() {
+        return new PithDriller(this);
     }
 }

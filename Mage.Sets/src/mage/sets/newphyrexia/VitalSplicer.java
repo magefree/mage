@@ -25,55 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.GolemToken;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class BladeSplicer extends CardImpl<BladeSplicer> {
-    private static final FilterPermanent filter = new FilterPermanent("Golem creatures");
+public class VitalSplicer extends CardImpl<VitalSplicer> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Golem you control");
 
     static {
         filter.getCardType().add(CardType.CREATURE);
         filter.getSubtype().add("Golem");
+        filter.setTargetController(TargetController.YOU);
     }
 
-    public BladeSplicer (UUID ownerId) {
-        super(ownerId, 4, "Blade Splicer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
+    public VitalSplicer(UUID ownerId) {
+        super(ownerId, 126, "Vital Splicer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Human");
         this.subtype.add("Artificer");
-		this.color.setWhite(true);
+
+        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GolemToken())));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{1}{G}"));
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
     }
 
-    public BladeSplicer (final BladeSplicer card) {
+    public VitalSplicer(final VitalSplicer card) {
         super(card);
     }
 
     @Override
-    public BladeSplicer copy() {
-        return new BladeSplicer(this);
+    public VitalSplicer copy() {
+        return new VitalSplicer(this);
     }
 }

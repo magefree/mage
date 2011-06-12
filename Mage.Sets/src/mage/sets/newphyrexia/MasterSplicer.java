@@ -25,11 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -38,42 +36,43 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.GolemToken;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class BladeSplicer extends CardImpl<BladeSplicer> {
-    private static final FilterPermanent filter = new FilterPermanent("Golem creatures");
+public class MasterSplicer extends CardImpl<MasterSplicer> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Golem creatures");
 
     static {
-        filter.getCardType().add(CardType.CREATURE);
         filter.getSubtype().add("Golem");
     }
 
-    public BladeSplicer (UUID ownerId) {
-        super(ownerId, 4, "Blade Splicer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
+    public MasterSplicer(UUID ownerId) {
+        super(ownerId, 16, "Master Splicer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Human");
         this.subtype.add("Artificer");
-		this.color.setWhite(true);
+
+        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GolemToken())));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public BladeSplicer (final BladeSplicer card) {
+    public MasterSplicer(final MasterSplicer card) {
         super(card);
     }
 
     @Override
-    public BladeSplicer copy() {
-        return new BladeSplicer(this);
+    public MasterSplicer copy() {
+        return new MasterSplicer(this);
     }
 }

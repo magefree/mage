@@ -25,55 +25,80 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.game.permanent.token.GolemToken;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class BladeSplicer extends CardImpl<BladeSplicer> {
-    private static final FilterPermanent filter = new FilterPermanent("Golem creatures");
+public class MortisDogs extends CardImpl<MortisDogs> {
 
-    static {
-        filter.getCardType().add(CardType.CREATURE);
-        filter.getSubtype().add("Golem");
-    }
-
-    public BladeSplicer (UUID ownerId) {
-        super(ownerId, 4, "Blade Splicer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
+    public MortisDogs(UUID ownerId) {
+        super(ownerId, 66, "Mortis Dogs", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "NPH";
-        this.subtype.add("Human");
-        this.subtype.add("Artificer");
-		this.color.setWhite(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GolemToken())));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.subtype.add("Hound");
+
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
+        Ability ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new MortisDogsEffect());
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
-    public BladeSplicer (final BladeSplicer card) {
+    public MortisDogs(final MortisDogs card) {
         super(card);
     }
 
     @Override
-    public BladeSplicer copy() {
-        return new BladeSplicer(this);
+    public MortisDogs copy() {
+        return new MortisDogs(this);
+    }
+}
+
+class MortisDogsEffect extends OneShotEffect<MortisDogsEffect> {
+
+    public MortisDogsEffect() {
+        super(Outcome.Damage);
+    }
+
+    @Override
+    public MortisDogsEffect copy() {
+        return new MortisDogsEffect();
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(targetPointer.getFirst(source));
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (player != null) {
+            player.loseLife(sourcePermanent.getPower().getValue(), game);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getText(Ability source) {
+        return "target player loses life equal to its power";
     }
 }
