@@ -68,12 +68,14 @@ public class CardImageUtils {
 		
 		File file = new File(filename);
 		if (!file.exists()) {
-			card.setName(card.getName() + " 1");
-			filename = getImagePath(card, false);
+            CardInfo updated = new CardInfo(card);
+			updated.setName(card.getName() + " 1");
+			filename = getImagePath(updated, false);
 			file = new File(filename);
 			if (!file.exists()) {
-				card.setName(card.getName() + " 2");
-				filename = getImagePath(card, false);
+                updated = new CardInfo(card);
+			    updated.setName(card.getName() + " 2");
+				filename = getImagePath(updated, false);
 				file = new File(filename);
 			}
 		}
