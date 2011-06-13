@@ -38,6 +38,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -45,7 +46,7 @@ import mage.target.TargetPermanent;
 
 /**
  *
- * @author Loki
+ * @author Loki, nantuko
  */
 public class VampireHexmage extends CardImpl<VampireHexmage> {
 
@@ -58,6 +59,8 @@ public class VampireHexmage extends CardImpl<VampireHexmage> {
 		this.color.setBlack(true);
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(1);
+
+		this.addAbility(FirstStrikeAbility.getInstance());
 		
 		SimpleActivatedAbility vampireHexmageAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VampireHexmageEffect(), new SacrificeSourceCost());
 		vampireHexmageAbility.addTarget(new TargetPermanent());
@@ -106,6 +109,11 @@ class VampireHexmageEffect extends OneShotEffect<VampireHexmageEffect> {
 		}
 
 		return false;
+	}
+
+	@Override
+	public String getText(Ability source) {
+		return "Remove all counters from target permanent";
 	}
 
 }
