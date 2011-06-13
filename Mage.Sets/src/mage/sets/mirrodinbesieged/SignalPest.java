@@ -92,7 +92,7 @@ class SignalPestAbility extends EvasionAbility<SignalPestAbility> {
 
     @Override
     public SignalPestAbility copy() {
-        return instance;
+        return getInstance();
     }
 }
 
