@@ -91,7 +91,7 @@
     </Component>
 	<Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Thanks: i_no_k, soulless."/>
+        <Property name="text" type="java.lang.String" value="Thanks: i_no_k, soulless, arching."/>
       </Properties>
     </Component>
   </SubComponents>
