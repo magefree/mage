@@ -43,15 +43,17 @@ public class PermanentToken extends PermanentImpl<PermanentToken> {
 
 	protected Token token;
 	
-	public PermanentToken(Token token, UUID controllerId) {
+	public PermanentToken(Token token, UUID controllerId, String expansionSetCode) {
 		super(controllerId, controllerId, token.getName());
 		this.token = token;
+		this.expansionSetCode = expansionSetCode;
 		copyFromToken(token);
 	}
 
 	public PermanentToken(final PermanentToken permanent) {
 		super(permanent);
 		this.token = permanent.token.copy();
+		this.expansionSetCode = permanent.expansionSetCode;
 	}
 
 	@Override

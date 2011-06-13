@@ -36,8 +36,10 @@ import mage.MageObjectImpl;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.cards.Card;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 
 public class Token extends MageObjectImpl<Token> {
@@ -86,9 +88,11 @@ public class Token extends MageObjectImpl<Token> {
 	}
 
 	public boolean putOntoBattlefield(Game game, UUID sourceId, UUID controllerId) {
-		PermanentToken permanent = new PermanentToken(this, controllerId);
+		Card source = game.getCard(sourceId);
+		String setCode = source != null ? source.getExpansionSetCode() : null;
+		PermanentToken permanent = new PermanentToken(this, controllerId, setCode);
 		game.getBattlefield().addPermanent(permanent);
-        this.lastAddedTokenId = permanent.getId();
+		this.lastAddedTokenId = permanent.getId();
 		permanent.entersBattlefield(sourceId, game);
 		game.applyEffects();
 		game.fireEvent(new ZoneChangeEvent(permanent, controllerId, Zone.OUTSIDE, Zone.BATTLEFIELD));

@@ -94,12 +94,10 @@ public class CardView implements Serializable {
 		this.convertedManaCost = card.getManaCost().convertedManaCost();
 		if (card instanceof PermanentToken) {
 			this.rarity = Rarity.NA;
-			this.expansionSetCode = "";
-		}
-		else {
+		} else {
 			this.rarity = card.getRarity();
-			this.expansionSetCode = card.getExpansionSetCode();
 		}
+		this.expansionSetCode = card.getExpansionSetCode();
 		this.cardNumber = card.getCardNumber();
 		
 		if (card instanceof Spell) {
@@ -127,7 +125,7 @@ public class CardView implements Serializable {
 		this.color = token.getColor();
 		this.manaCost = token.getManaCost().getSymbols();
 		this.rarity = Rarity.NA;
-		this.expansionSetCode = "";
+		//this.expansionSetCode = "";
 	}
 
 	protected void setTargets(Targets targets) {
