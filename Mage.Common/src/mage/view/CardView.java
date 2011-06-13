@@ -93,7 +93,7 @@ public class CardView implements Serializable {
 		this.manaCost = card.getManaCost().getSymbols();
 		this.convertedManaCost = card.getManaCost().convertedManaCost();
 		if (card instanceof PermanentToken) {
-			this.rarity = Rarity.NA;
+			this.rarity = Rarity.COMMON;
 		} else {
 			this.rarity = card.getRarity();
 		}
