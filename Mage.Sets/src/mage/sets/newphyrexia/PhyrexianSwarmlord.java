@@ -101,7 +101,7 @@ class OpponentsPoisonCountersCount implements DynamicValue {
 
     @Override
     public DynamicValue clone() {
-        return instance;
+        return getInstance();
     }
 
     @Override

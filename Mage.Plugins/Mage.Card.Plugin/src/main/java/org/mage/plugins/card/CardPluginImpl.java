@@ -1,7 +1,6 @@
 package org.mage.plugins.card;
 
 import mage.cards.Card;
-import mage.cards.CardDimensions;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
 import mage.interfaces.plugin.CardPlugin;
@@ -74,6 +73,7 @@ public class CardPluginImpl implements CardPlugin {
         log.info(plugin.toString() + " has been loaded.");
     }
 
+    @Override
     public String toString() {
         return "[Card plugin, version 0.5]";
     }
@@ -250,7 +250,7 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     private boolean empty(List<?> list) {
-        return list == null || list.size() == 0;
+        return list == null || list.isEmpty();
     }
 
     private int wrap(Row sourceRow, List<Row> rows, int insertIndex) {
@@ -348,6 +348,7 @@ public class CardPluginImpl implements CardPlugin {
             }
         }
 
+        @Override
         public boolean addAll(Collection<? extends Stack> c) {
             boolean changed = super.addAll(c);
             c.clear();
@@ -378,6 +379,7 @@ public class CardPluginImpl implements CardPlugin {
             super(8);
         }
 
+        @Override
         public boolean add(MagePermanent panel) {
             boolean appended = super.add(panel);
             //for (CardPanel attachedPanel : panel.attachedPanels)
@@ -466,6 +468,7 @@ public class CardPluginImpl implements CardPlugin {
         return new CardInfoPaneImpl();
     }
 
+    @Override
 	public BufferedImage getOriginalImage(CardView card) {
 		return ImageCache.getImageOriginal(card);
 	}
