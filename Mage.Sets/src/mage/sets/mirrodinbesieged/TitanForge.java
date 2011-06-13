@@ -36,6 +36,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -59,7 +60,7 @@ public class TitanForge extends CardImpl<TitanForge> {
         this.addAbility(ability);
 
         ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new GolemToken()), new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
+        ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(3)));
         this.addAbility(ability);
 
     }
