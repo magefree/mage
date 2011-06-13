@@ -50,7 +50,7 @@ import mage.game.permanent.token.Token;
 
 /**
  *
- * @author Loki
+ * @author Loki, nantuko
  */
 public class AvengerofZendikar extends CardImpl<AvengerofZendikar> {
     private static FilterPermanent filter = new FilterPermanent("Plant creature");
@@ -84,13 +84,12 @@ public class AvengerofZendikar extends CardImpl<AvengerofZendikar> {
 }
 
 class AvengerofZendikarTokensCreateEffect extends OneShotEffect<AvengerofZendikarTokensCreateEffect> {
-    private static FilterControlledPermanent filter = new FilterControlledPermanent();
+    private static FilterPermanent filter = new FilterPermanent();
     private Token token = new PlantToken();
 
     static {
         filter.getCardType().add(CardType.LAND);
         filter.setScopeCardType(ComparisonScope.Any);
-	filter.setTargetController(TargetController.YOU); 
     }
 
     public AvengerofZendikarTokensCreateEffect() {
@@ -103,7 +102,7 @@ class AvengerofZendikarTokensCreateEffect extends OneShotEffect<AvengerofZendika
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (int i = 0; i < game.getBattlefield().countAll(filter); i++) {
+        for (int i = 0; i < game.getBattlefield().countAll(filter, source.getControllerId()); i++) {
 			token.putOntoBattlefield(game, source.getId(), source.getControllerId());
 		}
 		return true;
