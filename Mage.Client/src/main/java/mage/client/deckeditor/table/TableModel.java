@@ -28,7 +28,6 @@
 
 package mage.client.deckeditor.table;
 
-import mage.cards.MageCard;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardEventSource;
 import mage.client.cards.ICardGrid;
@@ -248,8 +247,8 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 		if (!card.getId().equals(bigCard.getCardId())) {
 			Image image = Plugins.getInstance().getOriginalImage(card);
 			if (image != null && image instanceof BufferedImage) {
-				image = ImageHelper.getResizedImage((BufferedImage) image, bigCard.getWidth(),
-						bigCard.getHeight());
+                // XXX: scaled to fit width
+				image = ImageHelper.getResizedImage((BufferedImage) image, bigCard.getWidth());
 				bigCard.setCard(card.getId(), image, new ArrayList<String>(), false);
 			}
 		}

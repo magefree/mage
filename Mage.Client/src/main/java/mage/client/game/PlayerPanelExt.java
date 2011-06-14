@@ -38,22 +38,18 @@ import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.components.HoverButton;
 import mage.client.components.MageRoundPane;
-import mage.client.components.arcane.GlowText;
 import mage.client.components.arcane.ManaSymbols;
-import mage.client.components.arcane.UI;
 import mage.client.dialog.ShowCardsDialog;
 import mage.remote.Session;
 import mage.client.util.Command;
 import mage.client.util.Config;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
-import mage.client.util.gui.ImageResizeUtil;
 import mage.components.ImagePanel;
 import mage.sets.Sets;
 import mage.view.ManaPoolView;
 import mage.view.PlayerView;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -63,7 +59,6 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -162,7 +157,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 		Image image = ImageHelper.getImageFromResources("/avatars/face" + index + ".jpg");
 
 		// Avatar
-		BufferedImage resized = ImageResizeUtil.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
+		BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
 		avatar = new HoverButton("player", resized, resized, resized, r);
 		avatar.setBounds(6, 6, r.width, r.height);
 		panelBackground.add(avatar);
@@ -219,7 +214,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 		// Cheat button
 		r = new Rectangle(25, 21);
 		image = ImageHelper.getImageFromResources("/info/cheat.png");
-		resized = ImageResizeUtil.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
+		resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
 		cheat = new JButton();
 		cheat.setIcon(new ImageIcon(resized));
 		panelBackground.add(cheat);
@@ -273,7 +268,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 		}
 
 		Image image = ImageHelper.getImageFromResources(imagePath);
-		BufferedImage resized = ImageResizeUtil.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
+		BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
 		JComponent component = null;
 		if (isButton) {
 		 	component = new HoverButton(null, resized, resized, resized, r);

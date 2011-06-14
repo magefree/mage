@@ -42,10 +42,7 @@ import mage.client.MageFrame;
 import mage.client.components.ColorPane;
 import mage.remote.Session;
 import mage.view.ChatMessage.MessageColor;
-import org.jdesktop.swingx.graphics.ColorUtilities;
-import sun.plugin2.gluegen.runtime.CPU;
 
-import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.AbstractTableModel;
 
@@ -105,7 +102,7 @@ public class ChatPanel extends javax.swing.JPanel {
 	/**
 	 * Maps message colors to {@link Color}.
 	 */
-	private static final Map<MessageColor, Color> colorMap = new HashMap<MessageColor, Color>();
+	private static final Map<MessageColor, Color> colorMap = new EnumMap<MessageColor, Color>(MessageColor.class);
 
 	static {
 		colorMap.put(MessageColor.BLACK, Color.black);

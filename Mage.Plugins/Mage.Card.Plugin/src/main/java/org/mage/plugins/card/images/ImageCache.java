@@ -19,6 +19,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.ComputationException;
 import com.google.common.collect.MapMaker;
 import com.mortennobel.imagescaling.ResampleOp;
+import java.awt.Graphics2D;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -80,12 +81,13 @@ public class ImageCache {
 								return loadImage(thumbnailFile);
 							} else {
 								BufferedImage image = loadImage(file);
+								image = getWizardsCard(image);
 								if (image == null) return null;
 								//log.debug("creating thumbnail for " + key);
 								return makeThumbnail(image, thumbnailPath);
 							}
 						} else {
-							return loadImage(file);
+							return getWizardsCard(loadImage(file));
 						}
 					} else {
 						throw new RuntimeException(
@@ -100,6 +102,18 @@ public class ImageCache {
 			}
 		});
 	}
+
+    public static BufferedImage getWizardsCard(BufferedImage image) {
+        if (image.getWidth() == 265 && image.getHeight() == 370) {
+            BufferedImage crop = new BufferedImage(256, 360, BufferedImage.TYPE_INT_RGB);
+            Graphics2D graphics2D = crop.createGraphics();
+            graphics2D.drawImage(image, 0, 0, 255, 360, 5, 5, 261, 365, null);
+            graphics2D.dispose();
+            return crop;
+        } else {
+            return image;
+        }
+    }
 
 	public static BufferedImage getThumbnail(CardView card) {
 		String key = getKey(card) + "#thumb";

@@ -277,6 +277,7 @@ public class BigCard extends JComponent {
 
 	public void setDefaultImage() {
 	   	bigImage = ImageHelper.getImageFromResources("/empty.png");
+        // XXX: scaled to fit width
 		bigImage = ImageHelper.getResizedImage((BufferedImage) bigImage, getWidth(), getHeight());
 	}
 

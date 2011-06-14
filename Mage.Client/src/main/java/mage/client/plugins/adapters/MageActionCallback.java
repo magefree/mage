@@ -1,10 +1,8 @@
 package mage.client.plugins.adapters;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.InterruptedIOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,7 +16,6 @@ import mage.cards.action.TransferData;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.components.MageComponents;
-import mage.client.components.MageRoundPane;
 import mage.client.game.PlayAreaPanel;
 import mage.client.plugins.impl.Plugins;
 import mage.remote.Session;
@@ -197,7 +194,8 @@ public class MageActionCallback implements ActionCallback {
                     state = true;
                     Image image = card.getImage();
                     if (image != null && image instanceof BufferedImage) {
-                        image = ImageHelper.getResizedImage((BufferedImage) image, bigCard.getWidth(), bigCard.getHeight());
+                        // XXX: scaled to fit width
+                        image = ImageHelper.getResizedImage((BufferedImage) image, bigCard.getWidth());
                         bigCard.setCard(card.getOriginal().getId(), image, card.getOriginal().getRules(), card.isFoil());
                         if (card.getOriginal().isAbility()) {
                             bigCard.showTextComponent();

@@ -3,20 +3,18 @@ package mage.client.components.arcane;
 import mage.client.cards.CardsStorage;
 import mage.client.constants.Constants;
 import mage.client.util.gui.BufferedImageBuilder;
-import mage.client.util.gui.ImageResizeUtil;
 import org.apache.log4j.Logger;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
+import mage.client.util.ImageHelper;
 
 public class ManaSymbols {
 	private static final Logger log = Logger.getLogger(ManaSymbols.class);
@@ -35,7 +33,7 @@ public class ManaSymbols {
 			Rectangle r = new Rectangle(11, 11);
 			try {
 				Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
-				BufferedImage resized = ImageResizeUtil.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
+				BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
 				manaImages.put(symbol, resized);
 			} catch (Exception e) {
 				log.error("Error for symbol:" + symbol);
@@ -59,7 +57,7 @@ public class ManaSymbols {
 					int h = image.getHeight(null);
 					if (h > 0) {
 						Rectangle r = new Rectangle(21, (int) (h * 21.0f / width));
-						BufferedImage resized = ImageResizeUtil.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
+						BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
 						setImages.put(set, resized);
 					}
 				} else {
@@ -90,7 +88,7 @@ public class ManaSymbols {
 								dx = 6;
 							}
 							Rectangle r = new Rectangle(15 + dx, (int) (height * (15.0f + dx) / width));
-							BufferedImage resized = ImageResizeUtil.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
+							BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
 							File newFile = new File(Constants.RESOURCE_PATH_SET_SMALL + File.separator + _set + "-" + code + ".png");
 							ImageIO.write(resized, "png", newFile);
 						}

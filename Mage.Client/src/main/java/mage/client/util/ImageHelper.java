@@ -49,6 +49,7 @@ import mage.client.components.arcane.UI;
 import mage.view.CardView;
 
 import com.mortennobel.imagescaling.ResampleOp;
+import java.awt.Rectangle;
 
 /**
  *
@@ -164,6 +165,29 @@ public class ImageHelper {
 	 */
 	public static BufferedImage getResizedImage(BufferedImage original, int width, int height) {
 		ResampleOp resampleOp = new ResampleOp(width, height);
+		BufferedImage image = resampleOp.filter(original, null);
+		return image;
+	}
+
+	/**
+	 * Returns an image scaled to fit width
+	 * panel
+	 */
+    public static BufferedImage getResizedImage(BufferedImage original, int width) {
+        if (width != original.getWidth()) {
+            double ratio = width / (double) original.getWidth();
+            int height = (int) (original.getHeight() * ratio);
+            return getResizedImage(original, width, height);
+        } else {
+            return original;
+        }
+    }
+
+	/**
+	 * Returns an image scaled to the needed size
+	 */
+    public static BufferedImage getResizedImage(BufferedImage original, Rectangle sizeNeed) {
+		ResampleOp resampleOp = new ResampleOp(sizeNeed.width, sizeNeed.height);
 		BufferedImage image = resampleOp.filter(original, null);
 		return image;
 	}
