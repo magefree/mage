@@ -29,10 +29,6 @@
 package mage.sets.planechase;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.abilities.mana.GreenManaAbility;
-import mage.cards.CardImpl;
 
 /**
  *

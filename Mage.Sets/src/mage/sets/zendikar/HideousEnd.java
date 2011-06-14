@@ -25,30 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.planechase;
+package mage.sets.zendikar;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.LoseLifeControllerEffect;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class LightningHelix extends mage.sets.ravnika.LightningHelix {
+public class HideousEnd extends CardImpl<HideousEnd> {
 
-    public LightningHelix (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 90;
-        this.expansionSetCode = "HOP";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
+
+    static {
+        filter.getColor().setBlack(true);
+        filter.setUseColor(true);
+        filter.setNotColor(true);
     }
 
-    public LightningHelix (final LightningHelix card) {
+    public HideousEnd(UUID ownerId) {
+        super(ownerId, 98, "Hideous End", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{B}");
+        this.expansionSetCode = "ZEN";
+
+        this.color.setBlack(true);
+
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addEffect(new LoseLifeControllerEffect(2));
+    }
+
+    public HideousEnd(final HideousEnd card) {
         super(card);
     }
 
     @Override
-    public LightningHelix copy() {
-        return new LightningHelix(this);
+    public HideousEnd copy() {
+        return new HideousEnd(this);
     }
-
 }

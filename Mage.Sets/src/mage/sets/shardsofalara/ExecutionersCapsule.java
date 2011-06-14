@@ -25,30 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.planechase;
+package mage.sets.shardsofalara;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.Constants.Zone;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class LightningHelix extends mage.sets.ravnika.LightningHelix {
+public class ExecutionersCapsule extends CardImpl<ExecutionersCapsule> {
 
-    public LightningHelix (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 90;
-        this.expansionSetCode = "HOP";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
+
+    static {
+        filter.getColor().setBlack(true);
+        filter.setUseColor(true);
+        filter.setNotColor(true);
     }
 
-    public LightningHelix (final LightningHelix card) {
+    public ExecutionersCapsule(UUID ownerId) {
+        super(ownerId, 75, "Executioner's Capsule", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{B}");
+        this.expansionSetCode = "ALA";
+
+        this.color.setBlack(true);
+
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{B}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public ExecutionersCapsule(final ExecutionersCapsule card) {
         super(card);
     }
 
     @Override
-    public LightningHelix copy() {
-        return new LightningHelix(this);
+    public ExecutionersCapsule copy() {
+        return new ExecutionersCapsule(this);
     }
-
 }

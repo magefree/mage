@@ -25,30 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.planechase;
+package mage.sets.conflux;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.effects.common.LoseLifeControllerEffect;
+import mage.cards.CardImpl;
+import mage.filter.FilterSpell;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class LightningHelix extends mage.sets.ravnika.LightningHelix {
+public class Countersquall extends CardImpl<Countersquall> {
 
-    public LightningHelix (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 90;
-        this.expansionSetCode = "HOP";
+    private static final FilterSpell filter = new FilterSpell("noncreature spell");
+
+    static {
+        filter.getNotCardType().add(CardType.CREATURE);
+        filter.setNotCardType(true);
     }
 
-    public LightningHelix (final LightningHelix card) {
+    public Countersquall(UUID ownerId) {
+        super(ownerId, 103, "Countersquall", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{B}");
+        this.expansionSetCode = "CON";
+
+        this.color.setBlue(true);
+        this.color.setBlack(true);
+
+        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addEffect(new LoseLifeControllerEffect(2));
+    }
+
+    public Countersquall(final Countersquall card) {
         super(card);
     }
 
     @Override
-    public LightningHelix copy() {
-        return new LightningHelix(this);
+    public Countersquall copy() {
+        return new Countersquall(this);
     }
-
 }

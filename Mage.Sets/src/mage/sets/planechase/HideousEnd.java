@@ -25,30 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.planechase;
 
 import java.util.UUID;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class LightningHelix extends mage.sets.ravnika.LightningHelix {
+public class HideousEnd extends mage.sets.zendikar.HideousEnd {
 
-    public LightningHelix (UUID ownerId) {
+    public HideousEnd(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 90;
+        this.cardNumber = 31;
         this.expansionSetCode = "HOP";
     }
 
-    public LightningHelix (final LightningHelix card) {
+    public HideousEnd(final HideousEnd card) {
         super(card);
     }
 
     @Override
-    public LightningHelix copy() {
-        return new LightningHelix(this);
+    public HideousEnd copy() {
+        return new HideousEnd(this);
     }
-
 }

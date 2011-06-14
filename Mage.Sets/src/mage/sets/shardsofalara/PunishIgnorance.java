@@ -25,30 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.planechase;
+package mage.sets.shardsofalara;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.LoseLifeControllerEffect;
+import mage.cards.CardImpl;
+import mage.filter.FilterSpell;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class LightningHelix extends mage.sets.ravnika.LightningHelix {
+public class PunishIgnorance extends CardImpl<PunishIgnorance> {
 
-    public LightningHelix (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 90;
-        this.expansionSetCode = "HOP";
+    public PunishIgnorance(UUID ownerId) {
+        super(ownerId, 183, "Punish Ignorance", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}{U}{U}{B}");
+        this.expansionSetCode = "ALA";
+
+        this.color.setWhite(true);
+        this.color.setBlue(true);
+        this.color.setBlack(true);
+
+        this.getSpellAbility().addTarget(new TargetSpell(new FilterSpell()));
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addEffect(new LoseLifeControllerEffect(3));
+        this.getSpellAbility().addEffect(new GainLifeEffect(3));
     }
 
-    public LightningHelix (final LightningHelix card) {
+    public PunishIgnorance(final PunishIgnorance card) {
         super(card);
     }
 
     @Override
-    public LightningHelix copy() {
-        return new LightningHelix(this);
+    public PunishIgnorance copy() {
+        return new PunishIgnorance(this);
     }
-
 }

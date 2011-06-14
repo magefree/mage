@@ -29,7 +29,6 @@
 package mage.sets.planechase;
 
 import java.util.UUID;
-import mage.MageInt;
 
 /**
  *
