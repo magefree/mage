@@ -30,16 +30,11 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LoseLifeControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -53,7 +48,7 @@ public class VaporSnag extends CardImpl<VaporSnag> {
         this.expansionSetCode = "NPH";
 		this.color.setBlue(true);
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addEffect(new VaporSnagEffect());
+        this.getSpellAbility().addEffect(new LoseLifeControllerEffect(1));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
@@ -64,38 +59,5 @@ public class VaporSnag extends CardImpl<VaporSnag> {
     @Override
     public VaporSnag copy() {
         return new VaporSnag(this);
-    }
-}
-
-class VaporSnagEffect extends OneShotEffect<VaporSnagEffect> {
-    VaporSnagEffect() {
-        super(Constants.Outcome.Damage);
-    }
-
-    VaporSnagEffect(final VaporSnagEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent p = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(source), Constants.Zone.BATTLEFIELD);
-        if (p != null) {
-            Player controller = game.getPlayer(p.getControllerId());
-            if (controller != null) {
-                controller.loseLife(1, game);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public VaporSnagEffect copy() {
-        return new VaporSnagEffect(this);
-    }
-
-    @Override
-    public String getText(Ability source) {
-        return "Its controller loses 1 life";
     }
 }
