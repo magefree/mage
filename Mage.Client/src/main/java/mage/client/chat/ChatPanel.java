@@ -39,14 +39,19 @@ import java.awt.event.KeyEvent;
 import java.util.*;
 import java.util.List;
 import mage.client.MageFrame;
+import mage.client.components.ColorPane;
 import mage.remote.Session;
 import mage.view.ChatMessage.MessageColor;
+import org.jdesktop.swingx.graphics.ColorUtilities;
+import sun.plugin2.gluegen.runtime.CPU;
 
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, nantuko
  */
 public class ChatPanel extends javax.swing.JPanel {
 
@@ -56,19 +61,73 @@ public class ChatPanel extends javax.swing.JPanel {
 	private List<String> players = new ArrayList<String>();
 	private TableModel tableModel;
 
+	/**
+	 * Chat message color for opponents.
+	 */
+	private static final Color OPPONENT_COLOR = Color.RED;
+
+	/**
+	 * Chat message color for client player.
+	 */
+	private static final Color MY_COLOR = Color.GREEN;
+
+	/**
+	 * Chat message color for timestamps.
+	 */
+	private static final Color TIMESTAMP_COLOR = new Color(255, 255, 0, 120);
+
+	/**
+	 * Chat message color for messages.
+	 */
+	private static final Color MESSAGE_COLOR = Color.white;
+
+	/**
+	 * This will be a chat that will be connected to {this} and will handle redirected messages;
+	 * Mostly used to redirect user messages to another window.
+	 */
+	private ChatPanel connectedChat;
+
+	/**
+	 * Parent chat this chat connected to.
+	 * Used to send messages using parent chat as it is the only one connected to server.
+	 */
+	private ChatPanel parentChatRef;
+
+	/**
+	 * Selected extended view mode.
+	 */
+	private VIEW_MODE extendedViewMode = VIEW_MODE.NONE;
+
+	public enum VIEW_MODE {
+		NONE, GAME, CHAT
+	}
+
+	/**
+	 * Maps message colors to {@link Color}.
+	 */
+	private static final Map<MessageColor, Color> colorMap = new HashMap<MessageColor, Color>();
+
+	static {
+		colorMap.put(MessageColor.BLACK, Color.black);
+		colorMap.put(MessageColor.GREEN, Color.green);
+		colorMap.put(MessageColor.ORANGE, Color.orange);
+		colorMap.put(MessageColor.BLUE, Color.blue);
+		colorMap.put(MessageColor.RED, Color.red);
+	}
+
 	/** Creates new form ChatPanel */
     public ChatPanel() {
 	    this(false);
     }
 
 	/**
-	 * @param extendedView if true, adds chat/players tabs
+	 * @param addPlayersTab if true, adds chat/players tabs
 	 */
     /** Creates new form ChatPanel */
-    public ChatPanel(boolean extendedView) {
+    public ChatPanel(boolean addPlayersTab) {
 	    tableModel = new TableModel();
         initComponents();
-	    if (!extendedView) simplifyComponents();
+	    if (!addPlayersTab) simplifyComponents();
     }
 
 	public void connect(UUID chatId) {
@@ -84,26 +143,55 @@ public class ChatPanel extends javax.swing.JPanel {
 			session.leaveChat(chatId);
 	}
 
-	public void receiveMessage(String message, MessageColor color) {
-		switch (color) {
-			case BLACK:
-				this.txtConversation.setForeground(Color.BLACK);
-				break;
-			case RED:
-				this.txtConversation.setForeground(Color.RED);
-				break;
-			case GREEN:
-				this.txtConversation.setForeground(Color.GREEN);
-				break;
-			case BLUE:
-				this.txtConversation.setForeground(Color.BLUE);
-				break;
-			case ORANGE:
-				this.txtConversation.setForeground(Color.ORANGE);
-				break;
+	/**
+	 * Display message in the chat.
+	 * Use different colors for timestamp, username and message.
+	 *
+	 * @param username message sender
+	 * @param message message itself
+	 * @param time timestamp
+	 * @param color Preferred color. Not used.
+	 */
+	public void receiveMessage(String username, String message, String time, MessageColor color) {
+		if (extendedViewMode.equals(VIEW_MODE.GAME)) {
+			this.txtConversation.append(TIMESTAMP_COLOR, time + " ");
+			this.txtConversation.append(MESSAGE_COLOR, (username.isEmpty() ? "" : username + ":") + message + "\n");
+		} else {
+			this.txtConversation.append(TIMESTAMP_COLOR, time + " ");
+			Color userColor;
+			if (parentChatRef != null) {
+				userColor = parentChatRef.session.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
+			} else {
+				userColor = session.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
+			}
+			this.txtConversation.append(userColor, username + ": ");
+			this.txtConversation.append(MESSAGE_COLOR, message + "\n");
 		}
-		this.txtConversation.append(message + "\n");
-		txtConversation.setCaretPosition(txtConversation.getText().length() - 1);
+	}
+
+	public ChatPanel getConnectedChat() {
+		return connectedChat;
+	}
+
+	public void setConnectedChat(ChatPanel connectedChat) {
+		this.connectedChat = connectedChat;
+	}
+
+	public void setParentChat(ChatPanel parentChatRef) {
+		this.parentChatRef = parentChatRef;
+	}
+
+	public void disableInput() {
+		this.txtMessage.setVisible(false);
+	}
+
+	public void useExtendedView(VIEW_MODE extendedViewMode) {
+		this.extendedViewMode = extendedViewMode;
+		this.txtConversation.setExtBackgroundColor(new Color(0,0,0,100));
+		this.txtConversation.setBackground(new Color(0,0,0,0));
+		this.txtConversation.setForeground(new Color(255,255,255));
+		this.jScrollPane1.setOpaque(false);
+		this.jScrollPane1.getViewport().setOpaque(false);
 	}
 
 class TableModel extends AbstractTableModel {
@@ -169,7 +257,9 @@ class TableModel extends AbstractTableModel {
         txtMessage = new javax.swing.JTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtConversation = new javax.swing.JTextArea();
+		//txtConversation = new JTextArea();
+        txtConversation = new ColorPane();
+		//txtConversation = new JTextPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -181,13 +271,17 @@ class TableModel extends AbstractTableModel {
 
         jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
 
-        txtConversation.setColumns(20);
-        txtConversation.setEditable(false);
-        txtConversation.setFont(new java.awt.Font("Arial", 0, 10));
-        txtConversation.setLineWrap(true);
-        txtConversation.setRows(5);
-        txtConversation.setWrapStyleWord(true);
+        //txtConversation.setColumns(20);
+		txtConversation.setOpaque(false);
+        //txtConversation.setEditable(false);
+        txtConversation.setFont(new java.awt.Font("Arial", 0, 14));
+		//txtConversation.enableInputMethods(false);
+        //txtConversation.setLineWrap(true);
+        //txtConversation.setRows(5);
+        //txtConversation.setWrapStyleWord(true);
+
         jScrollPane1.setViewportView(txtConversation);
+		jScrollPane1.setBorder(new EmptyBorder(0,0,0,0));
 
         jTabbedPane1.addTab("chat", jScrollPane1);
 
@@ -238,7 +332,11 @@ class TableModel extends AbstractTableModel {
 
 	private void txtMessageKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMessageKeyTyped
 		if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
-			session.sendChatMessage(chatId, this.txtMessage.getText());
+			if (parentChatRef != null) {
+				parentChatRef.session.sendChatMessage(parentChatRef.chatId, this.txtMessage.getText());
+			} else {
+				session.sendChatMessage(chatId, this.txtMessage.getText());
+			}
 			this.txtMessage.setText("");
 			this.txtMessage.repaint();
 		}
@@ -278,7 +376,8 @@ class TableModel extends AbstractTableModel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea txtConversation;
+    //private javax.swing.JTextArea txtConversation;
+	private ColorPane txtConversation;
     private javax.swing.JTextField txtMessage;
     // End of variables declaration//GEN-END:variables
 

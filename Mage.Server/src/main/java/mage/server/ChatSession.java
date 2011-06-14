@@ -75,13 +75,15 @@ public class ChatSession {
 
 	public void broadcast(String userName, String message, MessageColor color) {
 		Calendar cal = new GregorianCalendar();
-		final String msg = timeFormatter.format(cal.getTime()) + " " + userName + ":" + message;
+		final String msg = message;
+		final String time = timeFormatter.format(cal.getTime());
+		final String username = userName;
 		logger.debug("Broadcasting '" + msg + "' for " + chatId);
 		for (UUID sessionId: clients.keySet()) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
 				try {
-					session.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(msg, color)));
+					session.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color)));
 				} catch (CallbackException ex) {
 					logger.fatal("broadcast error", ex);
 				}

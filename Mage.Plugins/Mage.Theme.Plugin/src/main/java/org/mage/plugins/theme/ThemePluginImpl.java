@@ -60,7 +60,8 @@ public class ThemePluginImpl implements ThemePlugin {
 				unsetOpaque(ui.get("pnlBattlefield"));
 				unsetOpaque(ui.get("jPanel3"));
 				unsetOpaque(ui.get("hand"));
-				unsetOpaque(ui.get("chatPanel"));
+				unsetOpaque(ui.get("gameChatPanel"));
+				unsetOpaque(ui.get("userChatPanel"));
 
 				ui.get("gamePanel").remove(ui.get("jLayeredPane"));
 				bgPanel.add(ui.get("jLayeredPane"));

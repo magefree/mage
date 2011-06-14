@@ -102,8 +102,13 @@ public class CallbackClientImpl implements CallbackClient {
 					else if (callback.getMethod().equals("chatMessage")) {
 						ChatMessage message = (ChatMessage) callback.getData();
 						ChatPanel panel = frame.getChat(callback.getObjectId());
-						if (panel != null)
-							panel.receiveMessage(message.getMessage(), message.getColor());
+						if (panel != null) {
+							if (message.isUserMessage() && panel.getConnectedChat() != null) {
+								panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), ChatMessage.MessageColor.BLACK);
+							} else {
+								panel.receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getColor());
+							}
+						}
 					}
 					else if (callback.getMethod().equals("replayInit")) {
 						GamePanel panel = frame.getGame(callback.getObjectId());

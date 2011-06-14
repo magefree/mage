@@ -50,6 +50,7 @@ import javax.swing.border.LineBorder;
 
 import mage.client.MageFrame;
 import mage.client.cards.Cards;
+import mage.client.chat.ChatPanel;
 import mage.client.dialog.CombatDialog;
 import mage.client.dialog.ExileZoneDialog;
 import mage.client.dialog.PickChoiceDialog;
@@ -133,7 +134,8 @@ public class GamePanel extends javax.swing.JPanel {
 		components.put("pnlBattlefield", pnlBattlefield);
 		components.put("jPanel3", jPanel3);
 		components.put("hand", hand);
-		components.put("chatPanel", chatPanel);
+		components.put("gameChatPanel", gameChatPanel);
+		components.put("userChatPanel", userChatPanel);
 		components.put("jLayeredPane", jLayeredPane);
 		components.put("gamePanel", this);
 		
@@ -141,7 +143,7 @@ public class GamePanel extends javax.swing.JPanel {
     }
     
 	public void cleanUp() {
-		this.chatPanel.disconnect();
+		this.gameChatPanel.disconnect();
 		this.players.clear();
 		logger.debug("players clear.");
 		this.pnlBattlefield.removeAll();
@@ -166,8 +168,8 @@ public class GamePanel extends javax.swing.JPanel {
 		this.btnConcede.setVisible(true);
 		this.pnlReplay.setVisible(false);
 		this.btnStopWatching.setVisible(false);
-		this.chatPanel.clear();
-		this.chatPanel.connect(session.getGameChatId(gameId));
+		this.gameChatPanel.clear();
+		this.gameChatPanel.connect(session.getGameChatId(gameId));
 		if (!session.joinGame(gameId))
 			hideGame();
 	}
@@ -182,8 +184,8 @@ public class GamePanel extends javax.swing.JPanel {
 		this.btnConcede.setVisible(false);
 		this.btnStopWatching.setVisible(true);
 		this.pnlReplay.setVisible(false);
-		this.chatPanel.clear();
-		this.chatPanel.connect(session.getGameChatId(gameId));
+		this.gameChatPanel.clear();
+		this.gameChatPanel.connect(session.getGameChatId(gameId));
 		if (!session.watchGame(gameId))
 			hideGame();
 	}
@@ -197,7 +199,7 @@ public class GamePanel extends javax.swing.JPanel {
 		this.btnConcede.setVisible(false);
 		this.btnStopWatching.setVisible(false);
 		this.pnlReplay.setVisible(true);
-		this.chatPanel.clear();
+		this.gameChatPanel.clear();
 		if (!session.startReplay(gameId))
 			hideGame();
 	}
@@ -493,7 +495,14 @@ public class GamePanel extends javax.swing.JPanel {
         btnNextPlay = new javax.swing.JButton();
         pnlBattlefield = new javax.swing.JPanel();
         hand = new mage.client.cards.Cards(true);
-        chatPanel = new mage.client.chat.ChatPanel();
+        gameChatPanel = new mage.client.chat.ChatPanel();
+		gameChatPanel.useExtendedView(ChatPanel.VIEW_MODE.GAME);
+		userChatPanel = new mage.client.chat.ChatPanel();
+		userChatPanel.setParentChat(gameChatPanel);
+		userChatPanel.useExtendedView(ChatPanel.VIEW_MODE.CHAT);
+		gameChatPanel.setConnectedChat(userChatPanel);
+		gameChatPanel.disableInput();
+		jTabbedPane1 = new JTabbedPane();
 
 	    hand.setCardDimension(handCardDimension);
 
@@ -502,7 +511,7 @@ public class GamePanel extends javax.swing.JPanel {
         jSplitPane1.setResizeWeight(1.0);
         jSplitPane1.setOneTouchExpandable(true);
         jSplitPane1.setMinimumSize(new java.awt.Dimension(26, 48));
-		jSplitPane1.setDividerLocation(Integer.MAX_VALUE);
+		//jSplitPane1.setDividerLocation(Integer.MAX_VALUE);
         //pnlGameInfo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 		pnlGameInfo.setOpaque(false);
 
@@ -681,6 +690,11 @@ public class GamePanel extends javax.swing.JPanel {
 		hand.setBorder(emptyBorder);
 		HandContainer handContainer = new HandContainer(hand);
 
+		jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
+		jTabbedPane1.addTab("Game", gameChatPanel);
+		jTabbedPane1.addTab("Chat", userChatPanel);
+		jTabbedPane1.setSelectedIndex(1);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -705,8 +719,8 @@ public class GamePanel extends javax.swing.JPanel {
         jPanel3.setMinimumSize(new Dimension(1024, 768));
         jSplitPane1.setLeftComponent(jPanel3);
 
-        chatPanel.setMinimumSize(new java.awt.Dimension(100, 48));
-        jSplitPane1.setRightComponent(chatPanel);
+        gameChatPanel.setMinimumSize(new java.awt.Dimension(100, 48));
+        jSplitPane1.setRightComponent(jTabbedPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -804,8 +818,9 @@ public class GamePanel extends javax.swing.JPanel {
     private javax.swing.JButton btnPreviousPlay;
     private javax.swing.JButton btnStopReplay;
     private javax.swing.JButton btnStopWatching;
-    private mage.client.chat.ChatPanel chatPanel;
+    private mage.client.chat.ChatPanel gameChatPanel;
     private mage.client.game.FeedbackPanel feedbackPanel;
+	private mage.client.chat.ChatPanel userChatPanel;
     private mage.client.cards.Cards hand;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSplitPane jSplitPane1;
@@ -825,5 +840,6 @@ public class GamePanel extends javax.swing.JPanel {
     private javax.swing.JLabel txtTurn;
     // End of variables declaration//GEN-END:variables
 
+	private JTabbedPane jTabbedPane1;
 	private Border emptyBorder = new EmptyBorder(0,0,0,0);
 }

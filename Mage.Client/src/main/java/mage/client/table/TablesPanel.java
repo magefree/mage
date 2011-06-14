@@ -87,6 +87,9 @@ public class TablesPanel extends javax.swing.JPanel {
         initComponents();
 
 		tableTables.createDefaultColumnsFromModel();
+		chatPanel.useExtendedView(ChatPanel.VIEW_MODE.NONE);
+		chatPanel.setOpaque(false);
+		chatPanel.setBorder(null);
 
 		Action join = new AbstractAction()
 		{
