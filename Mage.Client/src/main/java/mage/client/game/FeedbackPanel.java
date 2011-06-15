@@ -87,60 +87,60 @@ public class FeedbackPanel extends javax.swing.JPanel {
 			case INFORM:
 				this.btnLeft.setVisible(false);
 				this.btnRight.setVisible(false);
-                                this.helper.setState("", false, "", false);
+				this.helper.setState("", false, "", false);
 				break;
 			case QUESTION:
 				this.btnLeft.setVisible(true);
 				this.btnLeft.setText("Yes");
 				this.btnRight.setVisible(true);
 				this.btnRight.setText("No");
-                                this.helper.setState("Yes", true, "Yes", true);
+				this.helper.setState("Yes", true, "Yes", true);
 				break;
 			case CONFIRM:
 				this.btnLeft.setVisible(true);
 				this.btnLeft.setText("OK");
 				this.btnRight.setVisible(true);
 				this.btnRight.setText("Cancel");
-                                this.helper.setState("Ok", true, "Cancel", true);
+				this.helper.setState("Ok", true, "Cancel", true);
 				break;
 			case CANCEL:
 				this.btnLeft.setVisible(false);
 				this.btnRight.setVisible(true);
 				this.btnRight.setText("Cancel");
-                                this.helper.setState("", false, "Cancel", true);
+				this.helper.setState("", false, "Cancel", true);
 				break;
 			case SELECT:
 				this.btnLeft.setVisible(false);
 				this.btnRight.setVisible(true);
 				this.btnRight.setText("Done");
-                                this.helper.setState("", false, "Done", true);
+				this.helper.setState("", false, "Done", true);
 				break;
 		}
 		this.btnSpecial.setVisible(special);
 		this.btnSpecial.setText("Special");
-                this.helper.setSpecial("Special", special);
+		this.helper.setSpecial("Special", special);
 		if (message.contains("P}")) {
 			this.btnSpecial.setVisible(true);
 			this.btnSpecial.setText("Pay 2 life");
-                        this.helper.setSpecial("Pay 2 life", true);
+			this.helper.setSpecial("Pay 2 life", true);
 		}
 		handleOptions(options);
 		this.revalidate();
 		this.repaint();
-                this.helper.setLinks(btnLeft, btnRight, btnSpecial);
+		this.helper.setLinks(btnLeft, btnRight, btnSpecial);
 		if (modal) {
-                    this.helper.setVisible(false);
-                    startModal();
-                } else {
-                    this.helper.setVisible(true);
-                }
+			this.helper.setVisible(false);
+			startModal();
+		} else {
+			this.helper.setVisible(true);
+		}
 	}
 
 	private void handleOptions(Map<String, Serializable> options) {
 		if (options != null) {
 			if (options.containsKey("UI.right.btn.text")) {
 				this.btnRight.setText((String)options.get("UI.right.btn.text"));
-                                this.helper.setRight((String)options.get("UI.right.btn.text"), true);
+				this.helper.setRight((String)options.get("UI.right.btn.text"), true);
 			}
 		}
 	}

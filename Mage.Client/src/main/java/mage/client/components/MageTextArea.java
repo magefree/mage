@@ -32,7 +32,7 @@ public class MageTextArea extends JEditorPane {
         if (text == null) return;
 
         boolean smallImages = false;
-        int fontSize = 18;
+        int fontSize = 16;
 
         String fontFamily = "arial";
 
