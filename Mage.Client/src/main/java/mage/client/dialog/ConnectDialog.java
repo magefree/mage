@@ -50,8 +50,8 @@ import javax.swing.SwingWorker;
 
 import mage.client.MageFrame;
 import mage.client.util.Config;
-import mage.remote.Connection;
-import mage.remote.Connection.ProxyType;
+import mage.utils.Connection;
+import mage.utils.Connection.ProxyType;
 
 import org.apache.log4j.Logger;
 

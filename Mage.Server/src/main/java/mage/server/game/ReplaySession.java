@@ -58,11 +58,7 @@ public class ReplaySession implements GameCallback {
 		replay.start();
 		Session session = SessionManager.getInstance().getSession(sessionId);
 		if (session != null) {
-			try {
-				session.fireCallback(new ClientCallback("replayInit", replay.getGame().getId(), new GameView(replay.next(), replay.getGame())));
-			} catch (CallbackException ex) {
-				logger.fatal("replay init exception", ex);
-			}
+			session.fireCallback(new ClientCallback("replayInit", replay.getGame().getId(), new GameView(replay.next(), replay.getGame())));
 		}
 	}
 
@@ -82,11 +78,7 @@ public class ReplaySession implements GameCallback {
 	public void gameResult(final String result) {
 		Session session = SessionManager.getInstance().getSession(sessionId);
 		if (session != null) {
-			try {
-				session.fireCallback(new ClientCallback("replayDone", replay.getGame().getId(), result));
-			} catch (CallbackException ex) {
-				logger.fatal("replay done exception", ex);
-			}
+			session.fireCallback(new ClientCallback("replayDone", replay.getGame().getId(), result));
 		}
 	}
 
@@ -97,11 +89,7 @@ public class ReplaySession implements GameCallback {
 		else {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("replayUpdate", replay.getGame().getId(), new GameView(state, game)));
-				} catch (CallbackException ex) {
-					logger.fatal("replay update exception", ex);
-				}
+				session.fireCallback(new ClientCallback("replayUpdate", replay.getGame().getId(), new GameView(state, game)));
 			}
 		}
 	}

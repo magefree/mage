@@ -41,7 +41,7 @@ import java.util.UUID;
 import javax.swing.Timer;
 import mage.client.MageFrame;
 import mage.client.constants.Constants.SortBy;
-import mage.remote.Session;
+import mage.client.remote.Session;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.view.DraftPickView;
@@ -81,7 +81,7 @@ public class DraftPanel extends javax.swing.JPanel {
 	public synchronized void showDraft(UUID draftId) {
 		this.draftId = draftId;
 		session = MageFrame.getSession();
-		MageFrame.addDraft(draftId, this);
+		session.addDraft(draftId, this);
 		if (!session.joinDraft(draftId))
 			hideDraft();
 	}

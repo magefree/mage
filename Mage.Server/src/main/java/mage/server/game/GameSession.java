@@ -71,11 +71,7 @@ public class GameSession extends GameWatcher {
 			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("gameAsk", game.getId(), new GameClientMessage(gameView, question)));
-				} catch (CallbackException ex) {
-					logger.fatal("game ask exception", ex);
-				}
+				session.fireCallback(new ClientCallback("gameAsk", game.getId(), new GameClientMessage(gameView, question)));
 			}
 		}
 	}
@@ -85,11 +81,7 @@ public class GameSession extends GameWatcher {
 			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("gameTarget", game.getId(), new GameClientMessage(gameView, question, cardView, targets, required, options)));
-				} catch (CallbackException ex) {
-					logger.fatal("game target exception", ex);
-				}
+				session.fireCallback(new ClientCallback("gameTarget", game.getId(), new GameClientMessage(gameView, question, cardView, targets, required, options)));
 			}
 		}
 	}
@@ -99,11 +91,7 @@ public class GameSession extends GameWatcher {
 			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("gameSelect", game.getId(), new GameClientMessage(gameView, message)));
-				} catch (CallbackException ex) {
-					logger.fatal("game select exception", ex);
-				}
+				session.fireCallback(new ClientCallback("gameSelect", game.getId(), new GameClientMessage(gameView, message)));
 			}
 		}
 	}
@@ -113,11 +101,7 @@ public class GameSession extends GameWatcher {
 			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("gameChooseAbility", game.getId(), abilities));
-				} catch (CallbackException ex) {
-					logger.fatal("game choose ability exception", ex);
-				}
+				session.fireCallback(new ClientCallback("gameChooseAbility", game.getId(), abilities));
 			}
 		}
 	}
@@ -127,11 +111,7 @@ public class GameSession extends GameWatcher {
 			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("gameChoose", game.getId(), new GameClientMessage(choices.toArray(new String[0]), message)));
-				} catch (CallbackException ex) {
-					logger.fatal("game choose exception", ex);
-				}
+				session.fireCallback(new ClientCallback("gameChoose", game.getId(), new GameClientMessage(choices.toArray(new String[0]), message)));
 			}
 		}
 	}
@@ -141,11 +121,7 @@ public class GameSession extends GameWatcher {
 			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("gamePlayMana", game.getId(), new GameClientMessage(gameView, message)));
-				} catch (CallbackException ex) {
-					logger.fatal("game play mana exception", ex);
-				}
+				session.fireCallback(new ClientCallback("gamePlayMana", game.getId(), new GameClientMessage(gameView, message)));
 			}
 		}
 	}
@@ -155,11 +131,7 @@ public class GameSession extends GameWatcher {
 			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("gamePlayXMana", game.getId(), new GameClientMessage(gameView, message)));
-				} catch (CallbackException ex) {
-					logger.fatal("game play x mana exception", ex);
-				}
+				session.fireCallback(new ClientCallback("gamePlayXMana", game.getId(), new GameClientMessage(gameView, message)));
 			}
 		}
 	}
@@ -169,11 +141,7 @@ public class GameSession extends GameWatcher {
 			setupTimeout();
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("gameSelectAmount", game.getId(), new GameClientMessage(message, min, max)));
-				} catch (CallbackException ex) {
-					logger.fatal("game select amount exception", ex);
-				}
+				session.fireCallback(new ClientCallback("gameSelectAmount", game.getId(), new GameClientMessage(message, min, max)));
 			}
 		}
 	}
@@ -182,11 +150,7 @@ public class GameSession extends GameWatcher {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("gameReveal", game.getId(), new GameClientMessage(cardView, name)));
-				} catch (CallbackException ex) {
-					logger.fatal("game reveal exception", ex);
-				}
+				session.fireCallback(new ClientCallback("gameReveal", game.getId(), new GameClientMessage(cardView, name)));
 			}
 		}
 	}

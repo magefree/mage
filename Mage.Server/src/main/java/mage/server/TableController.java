@@ -209,13 +209,8 @@ public class TableController {
 		if (table.getState() != TableState.DUELING) {
 			return false;
 		}
-		try {
-			SessionManager.getInstance().getSession(sessionId).watchGame(match.getGame().getId());
-			return true;
-		} catch (MageException ex) {
-			logger.fatal("watchTable error", ex);
-		}
-		return false;
+		SessionManager.getInstance().getSession(sessionId).watchGame(match.getGame().getId());
+		return true;
 	}
 
 	public boolean replayTable(UUID sessionId) {
@@ -341,12 +336,8 @@ public class TableController {
 		table.initDraft();
 		DraftManager.getInstance().createDraftSession(draft, sessionPlayerMap, table.getId());
 		SessionManager sessionManager = SessionManager.getInstance();
-		try {
-			for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
-				sessionManager.getSession(entry.getKey()).draftStarted(draft.getId(), entry.getValue());
-			}
-		} catch (MageException ex) {
-			logger.fatal("startDraft error", ex);
+		for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
+			sessionManager.getSession(entry.getKey()).draftStarted(draft.getId(), entry.getValue());
 		}
 	}
 

@@ -80,7 +80,7 @@ import mage.cards.MagePermanent;
 import mage.cards.TextPopup;
 import mage.client.MageFrame;
 import mage.client.game.PlayAreaPanel;
-import mage.remote.Session;
+import mage.client.remote.Session;
 import mage.client.util.Config;
 import mage.client.util.DefaultActionCallback;
 import mage.client.util.ImageHelper;
@@ -382,13 +382,13 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 			List<UUID> targets = card.getTargets();
 			if (targets != null) {
 				for (UUID uuid : targets) {
-					PlayAreaPanel p = MageFrame.getGame(gameId).getPlayers().get(uuid);
+					PlayAreaPanel p = MageFrame.getSession().getGame(gameId).getPlayers().get(uuid);
 					if (p != null) {
 						Point target = p.getLocationOnScreen();
 						Point me = this.getLocationOnScreen();
 						ArrowBuilder.addArrow((int)me.getX() + 35, (int)me.getY(), (int)target.getX() + 40, (int)target.getY() - 40, Color.red);
 					} else {
-						for (PlayAreaPanel pa : MageFrame.getGame(gameId).getPlayers().values()) {
+						for (PlayAreaPanel pa : MageFrame.getSession().getGame(gameId).getPlayers().values()) {
 							MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
 							if (permanent != null) {
 								Point target = permanent.getLocationOnScreen();

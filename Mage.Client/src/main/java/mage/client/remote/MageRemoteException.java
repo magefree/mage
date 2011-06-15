@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.remote;
+package mage.client.remote;
 
 /**
  *

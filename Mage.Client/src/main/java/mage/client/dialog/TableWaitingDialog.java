@@ -42,7 +42,7 @@ import java.util.concurrent.ExecutionException;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import mage.client.components.MageComponents;
-import mage.remote.Session;
+import mage.client.remote.Session;
 import mage.view.SeatView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;

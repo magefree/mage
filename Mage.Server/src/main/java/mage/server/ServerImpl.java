@@ -38,16 +38,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
-import java.util.logging.Level;
+import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
-import mage.MageException;
-import mage.cards.decks.InvalidDeckException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.interfaces.Server;
 import mage.interfaces.ServerState;
-import mage.interfaces.callback.CallbackException;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.game.DeckValidatorFactory;
 import mage.server.draft.DraftManager;
@@ -108,8 +105,8 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void ack(int messageId, UUID sessionId) throws RemoteException, CallbackException {
-		SessionManager.getInstance().getSession(sessionId).ack(messageId);
+	public void ack(String message, UUID sessionId) throws RemoteException, MageException {
+		SessionManager.getInstance().getSession(sessionId).ack(message);
 	}
 
  	@Override
@@ -212,13 +209,9 @@ public class ServerImpl extends RemoteServer implements Server {
 				return ret;
 			}
 		}
-		catch (InvalidDeckException ex) {
-			throw ex;
-		}
-		catch (GameException ex) {
-			throw ex;
-		}
 		catch (Exception ex) {
+			if (ex instanceof GameException)
+				throw (GameException)ex;
 			handleException(ex);
 		}
 		return false;
@@ -233,10 +226,9 @@ public class ServerImpl extends RemoteServer implements Server {
 				return ret;
 			}
 		}
-		catch (GameException ex) {
-			throw ex;
-		} 
 		catch (Exception ex) {
+			if (ex instanceof GameException)
+				throw (GameException)ex;
 			handleException(ex);
 		}
 		return false;

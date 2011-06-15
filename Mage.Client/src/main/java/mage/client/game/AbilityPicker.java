@@ -38,7 +38,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import mage.client.MageFrame;
-import mage.remote.Session;
+import mage.client.remote.Session;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.view.AbilityPickerView;
 

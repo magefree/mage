@@ -41,7 +41,7 @@ import java.util.UUID;
 import javax.swing.DefaultComboBoxModel;
 
 import mage.client.MageFrame;
-import mage.remote.Session;
+import mage.client.remote.Session;
 import mage.client.util.Config;
 import mage.client.util.Event;
 import mage.client.util.Listener;

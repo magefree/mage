@@ -61,13 +61,8 @@ public class GameWatcher {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("gameInit", gameId, gameView));
-					return true;
-				} catch (CallbackException ex) {
-					logger.fatal("Unable to start watching ", ex);
-					return false;
-				}
+				session.fireCallback(new ClientCallback("gameInit", gameId, gameView));
+				return true;
 			}
 		}
 		return false;
@@ -77,11 +72,7 @@ public class GameWatcher {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("gameUpdate", gameId, gameView));
-				} catch (CallbackException ex) {
-					logger.fatal("game update exception", ex);
-				}
+				session.fireCallback(new ClientCallback("gameUpdate", gameId, gameView));
 			}
 		}
 	}
@@ -90,11 +81,7 @@ public class GameWatcher {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("gameInform", gameId, new GameClientMessage(gameView, message)));
-				} catch (CallbackException ex) {
-					logger.fatal("game inform exception", ex);
-				}
+				session.fireCallback(new ClientCallback("gameInform", gameId, new GameClientMessage(gameView, message)));
 			}
 		}
 	}
@@ -103,11 +90,7 @@ public class GameWatcher {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("gameOver", gameId, message));
-				} catch (CallbackException ex) {
-					logger.fatal("game select exception", ex);
-				}
+				session.fireCallback(new ClientCallback("gameOver", gameId, message));
 			}
 		}
 	}

@@ -31,9 +31,6 @@ package mage.interfaces.callback;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import mage.MageException;
-import mage.remote.ServerUnavailable;
-import mage.remote.Session;
 import org.apache.log4j.Logger;
 
 /**
@@ -44,15 +41,14 @@ public class CallbackClientDaemon extends Thread {
 
 	private final static Logger logger = Logger.getLogger(CallbackClientDaemon.class);
 
-	private ExecutorService callbackExecutor = Executors.newFixedThreadPool(1);
+	private static ExecutorService callbackExecutor = Executors.newCachedThreadPool();
 	private final CallbackClient client;
-	private final Session session;
+	private final CallbackServer server;
 	private final UUID id;
-	private boolean end = false;
 
-	public CallbackClientDaemon(UUID id, CallbackClient client, Session session) {
+	public CallbackClientDaemon(UUID id, CallbackClient client, CallbackServer server) {
 		this.client = client;
-		this.session = session;
+		this.server = server;
 		this.id = id;
 		setDaemon(true);
 		start();
@@ -60,30 +56,25 @@ public class CallbackClientDaemon extends Thread {
 
 	@Override
 	public void run() {
-		try {
-	        while(!end && session.isConnected()) {
-				try {
-					final ClientCallback callback = session.callback(id);
-					session.ack(id, callback.getMessageId());
-					if (callbackExecutor.isShutdown())
-						logger.fatal("Attempt to submit callback to shutdown executor");
-					else
-						client.processCallback(callback);
-				} catch (ServerUnavailable ex) {
-					session.handleServerUnavailable(ex);
-				} catch (Exception ex) {
-					logger.fatal("CallbackClientDaemon failed ", ex);
+      try {
+         while(true) {
+            final ClientCallback callback = server.callback(id);
+			callbackExecutor.submit(
+				new Runnable() {
+					@Override
+					public void run() {
+						try {
+							client.processCallback(callback);
+						}
+						catch (Exception ex) {
+							logger.fatal("CallbackClientDaemon error ", ex);
+						}
+					}
 				}
-			}
-		} catch (Exception ex) {
+			);
+         }
+      } catch(Exception ex) {
 			logger.fatal("CallbackClientDaemon error ", ex);
-		}
-		logger.info("CallbackClientDaemon stopped");
-	}
-	
-	public void stopDaemon() {
-		end = true;
-		callbackExecutor.shutdown();
-	}
-
+      }
+   }
 }

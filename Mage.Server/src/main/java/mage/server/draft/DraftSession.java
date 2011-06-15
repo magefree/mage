@@ -72,13 +72,8 @@ public class DraftSession {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("draftInit", draft.getId(), draftView));
-					return true;
-				} catch (CallbackException ex) {
-					logger.fatal("Unable to start draft ", ex);
-					return false;
-				}
+				session.fireCallback(new ClientCallback("draftInit", draft.getId(), draftView));
+				return true;
 			}
 		}
 		return false;
@@ -96,11 +91,7 @@ public class DraftSession {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("draftUpdate", draft.getId(), draftView));
-				} catch (CallbackException ex) {
-					logger.fatal("update draft exception", ex);
-				}
+				session.fireCallback(new ClientCallback("draftUpdate", draft.getId(), draftView));
 			}
 		}
 	}
@@ -109,11 +100,7 @@ public class DraftSession {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("draftInform", draft.getId(), new DraftClientMessage(draftView, message)));
-				} catch (CallbackException ex) {
-					logger.fatal("draft inform exception", ex);
-				}
+				session.fireCallback(new ClientCallback("draftInform", draft.getId(), new DraftClientMessage(draftView, message)));
 			}
 		}
 	}
@@ -122,11 +109,7 @@ public class DraftSession {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("draftOver", draft.getId()));
-				} catch (CallbackException ex) {
-					logger.fatal("draft end exception", ex);
-				}
+				session.fireCallback(new ClientCallback("draftOver", draft.getId()));
 			}
 		}
 	}
@@ -136,11 +119,7 @@ public class DraftSession {
 			setupTimeout(timeout);
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("draftPick", draft.getId(), new DraftClientMessage(draftPickView)));
-				} catch (CallbackException ex) {
-					logger.fatal("draft pick exception", ex);
-				}
+				session.fireCallback(new ClientCallback("draftPick", draft.getId(), new DraftClientMessage(draftPickView)));
 			}
 		}
 	}

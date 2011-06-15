@@ -72,12 +72,8 @@ public class TournamentSession {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("tournamentInit", tournament.getId(), tournamentView));
-					return true;
-				} catch (CallbackException ex) {
-					logger.fatal("Unable to start tournament", ex);
-				}
+				session.fireCallback(new ClientCallback("tournamentInit", tournament.getId(), tournamentView));
+				return true;
 			}
 		}
 		return false;
@@ -95,11 +91,7 @@ public class TournamentSession {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("tournamentUpdate", tournament.getId(), tournamentView));
-				} catch (CallbackException ex) {
-					logger.fatal("tournament update error", ex);
-				}
+				session.fireCallback(new ClientCallback("tournamentUpdate", tournament.getId(), tournamentView));
 			}
 		}
 	}
@@ -108,11 +100,7 @@ public class TournamentSession {
 		if (!killed) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null) {
-				try {
-					session.fireCallback(new ClientCallback("tournamentOver", tournament.getId(), message));
-				} catch (CallbackException ex) {
-					logger.fatal("tournament over error", ex);
-				}
+				session.fireCallback(new ClientCallback("tournamentOver", tournament.getId(), message));
 			}
 		}
 	}

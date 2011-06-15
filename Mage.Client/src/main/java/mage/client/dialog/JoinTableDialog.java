@@ -38,7 +38,7 @@ package mage.client.dialog;
 import mage.client.*;
 import java.util.UUID;
 import javax.swing.JOptionPane;
-import mage.remote.Session;
+import mage.client.remote.Session;
 import mage.sets.Sets;
 import org.apache.log4j.Logger;
 
