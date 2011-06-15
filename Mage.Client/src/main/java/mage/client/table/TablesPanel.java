@@ -490,7 +490,8 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 	@Override
 	protected Void doInBackground() throws Exception {
 		while (!isCancelled()) {
-			this.publish(session.getTables(roomId));	
+			Collection<TableView> tables = session.getTables(roomId);
+			if (tables != null) this.publish(tables);
 			Thread.sleep(1000);
 		}
 		return null;

@@ -43,6 +43,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import javax.swing.JOptionPane;
 import mage.cards.decks.DeckCardLists;
 import mage.client.MageFrame;
@@ -89,6 +90,15 @@ public class Session {
 	private CallbackClientDaemon callbackDaemon;
 	private ScheduledFuture<?> future;
 	private MageUI ui = new MageUI();
+
+	/**
+	 * For locking session object.
+	 * Read-write locking is used for better performance, as in most cases session object won't be changed so
+	 * there shouldn't be any penalty for synchronization.
+	 *
+	 * @author nantuko
+	 */
+	private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
 	public Session(MageFrame frame) {
 		this.frame = frame;
@@ -174,7 +184,12 @@ public class Session {
 	private void removeServer() {
 		if (future != null && !future.isDone())
 			future.cancel(true);
-		server = null;
+		lock.writeLock().lock();
+		try {
+			server = null;
+		} finally {
+			lock.writeLock().unlock();
+		}
 		frame.hideGames();
 		frame.hideTables();
 		frame.setStatusText("Not connected");
@@ -348,7 +363,9 @@ public class Session {
 	}
 
 	public Collection<TableView> getTables(UUID roomId) throws MageRemoteException {
+		lock.readLock().lock();
 		try {
+			if (server == null) return null;
 			return server.getTables(roomId);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
@@ -356,10 +373,13 @@ public class Session {
 		} catch (MageException ex) {
 			handleMageException(ex);
 			throw new MageRemoteException();
+		} finally {
+			lock.readLock().unlock();
 		}
 	}
 
 	public Collection<String> getConnectedPlayers(UUID roomId) throws MageRemoteException {
+		lock.readLock().lock();
 		try {
 			return server.getConnectedPlayers(roomId);
 		} catch (RemoteException ex) {
@@ -368,6 +388,8 @@ public class Session {
 		} catch (MageException ex) {
 			handleMageException(ex);
 			throw new MageRemoteException();
+		} finally {
+			lock.readLock().unlock();
 		}
 	}
 
@@ -467,7 +489,9 @@ public class Session {
 	}
 
 	public boolean leaveChat(UUID chatId) {
+		lock.readLock().lock();
 		try {
+			if (server == null) return false;
 			server.leaveChat(chatId, sessionId);
 			chats.remove(chatId);
 			return true;
@@ -475,18 +499,24 @@ public class Session {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
 			handleMageException(ex);
+		} finally {
+			lock.readLock().unlock();
 		}
 		return false;
 	}
 
 	public boolean sendChatMessage(UUID chatId, String message) {
+		lock.readLock().lock();
 		try {
+			if (server == null) return false;
 			server.sendChatMessage(chatId, userName, message);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
 			handleMageException(ex);
+		} finally {
+			lock.readLock().unlock();
 		}
 		return false;
 	}
