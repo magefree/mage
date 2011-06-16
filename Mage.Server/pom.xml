@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-root</artifactId>
-        <version>0.7.3</version>
+        <version>0.7.4</version>
     </parent>
 
     <artifactId>Mage-Server</artifactId>
@@ -121,7 +121,7 @@
             <plugin>
                 <groupId>org.jvnet.jaxb2.maven2</groupId>
                 <artifactId>maven-jaxb2-plugin</artifactId>
-                <version>0.7.3</version>
+                <version>0.7.4</version>
                 <configuration>
                     <generatePackage>mage.server.util.config</generatePackage>
                     <schemaDirectory>./src/main/xml-resources/jaxb/Config/</schemaDirectory>
