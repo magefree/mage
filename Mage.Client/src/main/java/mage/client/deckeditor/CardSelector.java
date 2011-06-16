@@ -34,6 +34,7 @@
 
 package mage.client.deckeditor;
 
+import com.sun.deploy.util.ArrayUtil;
 import mage.Constants.CardType;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
@@ -200,8 +201,15 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		}
 	}
 
-	public CardGrid getCardsList() {
-		return this.cardGrid;
+	public ICardGrid getCardsList() {
+		return this.currentView;
+	}
+
+	public List<ICardGrid> getCardGridComponents() {
+		List<ICardGrid> components = new ArrayList<ICardGrid>();
+		components.add(mainModel);
+		components.add(cardGrid);
+		return components;
 	}
 
 	public void removeCard(UUID cardId) {
@@ -545,28 +553,28 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButtonAddToMain)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonAddToSideboard)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonSearch)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonClean)
-                .addContainerGap(294, Short.MAX_VALUE))
+					.addComponent(jButtonAddToMain)
+					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+					.addComponent(jButtonAddToSideboard)
+					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+					.addComponent(jLabel1)
+					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+					.addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+					.addComponent(jButtonSearch)
+					.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+					.addComponent(jButtonClean)
+					.addContainerGap(294, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jButtonAddToMain)
-                .addComponent(jButtonAddToSideboard)
-                .addComponent(jLabel1)
-                .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jButtonSearch)
-                .addComponent(jButtonClean))
+					.addComponent(jButtonAddToMain)
+					.addComponent(jButtonAddToSideboard)
+					.addComponent(jLabel1)
+					.addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+					.addComponent(jButtonSearch)
+					.addComponent(jButtonClean))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

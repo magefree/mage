@@ -46,11 +46,13 @@ import java.util.logging.Logger;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.table.TableModel;
 
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
+import mage.client.cards.ICardGrid;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.dialog.AddLandDialog;
 import mage.client.plugins.impl.Plugins;
@@ -154,20 +156,29 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		//this.jRadioButtonFullCards.setSelected(true);
 		//this.jRadioButtonListTable.setSelected(false);
 		this.jPanel1.setVisible(true);
-		this.cardSelector.getCardsList().clearCardEventListeners();
-		this.cardSelector.getCardsList().addCardEventListener(
-			new Listener<Event> () {
-				@Override
-				public void event(Event event) {
-					if (event.getEventName().equals("double-click")) {
-						Card card = cardSelector.getCard((UUID) event.getSource());
-						if (card != null) {
-							deck.getCards().add(Sets.createCard(card.getClass()));
-							if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
-								deck.getSideboard().remove(card);
-								cardSelector.removeCard(card.getId());
-								//cardTableSelector.removeCard(card.getId());
+		for (ICardGrid component : this.cardSelector.getCardGridComponents()) {
+			component.clearCardEventListeners();
+			component.addCardEventListener(
+				new Listener<Event> () {
+					@Override
+					public void event(Event event) {
+						if (event.getEventName().equals("double-click")) {
+							Card card = cardSelector.getCard((UUID) event.getSource());
+							if (card != null) {
+								deck.getCards().add(Sets.createCard(card.getClass()));
+								if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
+									deck.getSideboard().remove(card);
+									cardSelector.removeCard(card.getId());
+									//cardTableSelector.removeCard(card.getId());
+								}
+								if (cardInfoPane instanceof  CardInfoPane)  {
+									((CardInfoPane)cardInfoPane).setCard(new CardView(card));
+								}
 							}
+
+						} else if (event.getEventName().equals("shift-double-click") && mode == DeckEditorMode.Constructed) {
+							Card card = cardSelector.getCard((UUID) event.getSource());
+							deck.getSideboard().add(Sets.createCard(card.getClass()));
 							if (cardInfoPane instanceof  CardInfoPane)  {
 								((CardInfoPane)cardInfoPane).setCard(new CardView(card));
 							}
@@ -175,8 +186,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 						refreshDeck();
 					}
 				}
-			}
-		);
+			);
+		}
 		/*this.cardTableSelector.getCardsList().clearCardEventListeners();
 		this.cardTableSelector.getCardsList().addCardEventListener(
 			new Listener<Event> () {
@@ -218,7 +229,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 								if (mode == DeckEditorMode.Limited || mode == DeckEditorMode.Sideboard) {
 									deck.getSideboard().add(card);
 									cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), getBigCard(), mode == DeckEditorMode.Limited);
-									//cardTableSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), getBigCard(), mode == DeckEditorMode.Limited);
 								}
 								break;
 							}
@@ -243,10 +253,13 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				@Override
 				public void event(Event event) {
 					if (event.getEventName().equals("double-click")) {
+						//boolean isListView = cardSelector.getCardsList() instanceof TableModel;
 						for (Card card: deck.getSideboard()) {
 							if (card.getId().equals((UUID)event.getSource())) {
 								deck.getSideboard().remove(card);
+								//if (!isListView) {
 								deck.getCards().add(card);
+								//}
 								break;
 							}
 						}
@@ -479,22 +492,22 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-		                .addComponent(txtDeckName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-		                .addComponent(lblDeckName))
+						.addComponent(txtDeckName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblDeckName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-		                .addComponent(btnSave)
-		                .addComponent(btnLoad)
-		                .addComponent(btnNew)
-		                .addComponent(btnExit))
+						.addComponent(btnSave)
+						.addComponent(btnLoad)
+						.addComponent(btnNew)
+						.addComponent(btnExit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-		                .addComponent(btnImport)
-		                .addComponent(btnAddLand)
-		                .addComponent(btnSubmit))
+						.addComponent(btnImport)
+						.addComponent(btnAddLand)
+						.addComponent(btnSubmit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-		                .addComponent(txtTimeRemaining))
+						.addComponent(txtTimeRemaining))
 		        //.addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, isShowCardInfo ? 30 : 159, Short.MAX_VALUE)
                 .addComponent(cardInfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
