@@ -55,6 +55,7 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
 	protected Map<UUID, DraftPlayer> players = new HashMap<UUID, DraftPlayer>();
 	protected PlayerList table = new PlayerList();
 	protected List<ExpansionSet> sets;
+	protected List<String> setCodes;
 	protected int boosterNum = 0;
 	protected int cardNum = 0;
 	protected TimingOption timing;
@@ -65,7 +66,7 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
 
 	public DraftImpl(DraftOptions options) {
 		id = UUID.randomUUID();
-		this.sets = options.getSets();
+		this.setCodes = options.getSetCodes();
 		this.timing = options.getTiming();
 	}
 

@@ -45,7 +45,7 @@ import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
 import mage.cards.ExpansionSet;
 import mage.client.MageFrame;
-import mage.client.remote.Session;
+import mage.remote.Session;
 import mage.client.table.TournamentPlayerPanel;
 import mage.game.draft.DraftOptions;
 import mage.game.draft.DraftOptions.TimingOption;
@@ -299,7 +299,7 @@ public class NewTournamentDialog extends MageDialog {
 			if (tOptions.getLimitedOptions() == null)
 				tOptions.setLimitedOptions(new LimitedOptions());
 			for (JComboBox pack: packs) {
-				tOptions.getLimitedOptions().getSets().add((ExpansionSet) pack.getSelectedItem());
+				tOptions.getLimitedOptions().getSetCodes().add(((ExpansionSet) pack.getSelectedItem()).getCode());
 			}
 		}
 		tOptions.getMatchOptions().setDeckType("Limited");

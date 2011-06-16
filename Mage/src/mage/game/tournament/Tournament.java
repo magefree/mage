@@ -29,7 +29,9 @@
 package mage.game.tournament;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
+import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
@@ -47,6 +49,7 @@ public interface Tournament {
 	public TournamentPlayer getPlayer(UUID playerId);
 	public Collection<TournamentPlayer> getPlayers();
 	public Collection<Round> getRounds();
+	public List<ExpansionSet> getSets();
 	public void submitDeck(UUID playerId, Deck deck);
 	public void autoSubmit(UUID playerId, Deck deck);
 	public boolean allJoined();

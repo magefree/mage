@@ -61,6 +61,7 @@ public abstract class TournamentImpl implements Tournament {
     protected static Random rnd = new Random();
 	protected String matchName;
 	protected TournamentOptions options;
+	protected List<ExpansionSet> sets = new ArrayList<ExpansionSet>();
 
 	protected TableEventSource tableEventSource = new TableEventSource();
 	protected PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
@@ -103,6 +104,11 @@ public abstract class TournamentImpl implements Tournament {
 		return rounds;
 	}
 
+	@Override
+	public List<ExpansionSet> getSets() {
+		return sets;
+	}
+	
 	@Override
 	public void leave(UUID playerId) {
 		//TODO: implement this
@@ -249,7 +255,7 @@ public abstract class TournamentImpl implements Tournament {
 	protected void openBoosters() {
 		for (TournamentPlayer player: this.players.values()) {
 			player.setDeck(new Deck());
-			for (ExpansionSet set: options.limitedOptions.getSets()) {
+			for (ExpansionSet set: sets) {
 				List<Card> booster = set.createBooster();
 				for (Card card: booster) {
 					player.getDeck().getSideboard().add(card);

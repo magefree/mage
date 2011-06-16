@@ -31,7 +31,6 @@ package mage.game.tournament;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import mage.cards.ExpansionSet;
 
 /**
  *
@@ -39,9 +38,9 @@ import mage.cards.ExpansionSet;
  */
 public class LimitedOptions implements Serializable {
 
-	protected List<ExpansionSet> sets = new ArrayList<ExpansionSet>();
+	protected List<String> sets = new ArrayList<String>();
 
-	public List<ExpansionSet> getSets() {
+	public List<String> getSetCodes() {
 		return sets;
 	}
 

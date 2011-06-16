@@ -36,6 +36,7 @@ import java.util.Map;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
 import mage.game.tournament.TournamentType;
+import mage.sets.Sets;
 import mage.view.TournamentTypeView;
 import org.apache.log4j.Logger;
 
@@ -64,6 +65,9 @@ public class TournamentFactory {
 		try {
 			con = tournaments.get(tournamentType).getConstructor(new Class[]{TournamentOptions.class});
 			tournament = con.newInstance(new Object[] {options});
+			for (String setCode: options.getLimitedOptions().getSetCodes()) {
+				tournament.getSets().add(Sets.findSet(setCode));
+			}
 		} catch (Exception ex) {
 			logger.fatal("TournamentFactory error ", ex);
 			return null;
