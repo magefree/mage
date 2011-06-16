@@ -34,15 +34,12 @@
 
 package mage.client.deckeditor;
 
-import com.sun.deploy.util.ArrayUtil;
 import mage.Constants.CardType;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.client.cards.BigCard;
-import mage.client.cards.CardGrid;
 import mage.client.cards.CardsStorage;
 import mage.client.cards.ICardGrid;
-import mage.client.constants.Constants;
 import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.table.TableModel;
 import mage.filter.Filter.ComparisonScope;
