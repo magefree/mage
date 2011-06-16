@@ -40,22 +40,28 @@ import mage.cards.ExpansionSet;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardGrid;
 import mage.client.cards.CardsStorage;
+import mage.client.cards.ICardGrid;
+import mage.client.constants.Constants;
 import mage.client.constants.Constants.SortBy;
+import mage.client.deckeditor.table.TableModel;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.sets.Sets;
 import mage.view.CardsView;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.List;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, nantuko
  */
 public class CardSelector extends javax.swing.JPanel implements ComponentListener {
 
@@ -66,15 +72,56 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     /** Creates new form CardSelector */
     public CardSelector() {
         initComponents();
+		makeTransparent();
+		initListViewComponents();
+		currentView = mainModel; // by default we have List (table) view
+    }
+
+	public void makeTransparent() {
 		this.addComponentListener(this);
 		setOpaque(false);
 	    cardGrid.setOpaque(false);
 	    jScrollPane1.setOpaque(false);
 	    jScrollPane1.getViewport().setOpaque(false);
 		cbSortBy.setModel(new DefaultComboBoxModel(SortBy.values()));
-		
+	}
+
+	public void initListViewComponents() {
+		mainTable = new JTable();
+
+		mainModel = new TableModel();
+		mainModel.addListeners(mainTable);
+
+        mainTable.setModel(mainModel);
+		mainTable.setForeground(Color.white);
+		DefaultTableCellRenderer myRenderer = (DefaultTableCellRenderer) mainTable.getDefaultRenderer(String.class);
+		myRenderer.setBackground(new Color(0, 0, 0, 100));
+		mainTable.getColumnModel().getColumn(0).setMaxWidth(0);
+		mainTable.getColumnModel().getColumn(0).setPreferredWidth(10);
+		mainTable.getColumnModel().getColumn(1).setPreferredWidth(110);
+		mainTable.getColumnModel().getColumn(2).setPreferredWidth(90);
+		mainTable.getColumnModel().getColumn(3).setPreferredWidth(50);
+		mainTable.getColumnModel().getColumn(4).setPreferredWidth(170);
+		mainTable.getColumnModel().getColumn(5).setPreferredWidth(30);
+		mainTable.getColumnModel().getColumn(6).setPreferredWidth(15);
+		mainTable.getColumnModel().getColumn(7).setPreferredWidth(15);
+
+		jScrollPane1.setViewportView(mainTable);
+
 		mainTable.setOpaque(false);
-    }
+
+		cbSortBy.setEnabled(false);
+	    chkPiles.setEnabled(false);
+
+		mainTable.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.getClickCount() == 2 && !e.isConsumed()) {
+					e.consume();
+					//TODO: jButtonAddToMainActionPerformed(null);
+				}
+			}
+		});
+	}
 
 	public void loadCards(List<Card> sideboard, BigCard bigCard, boolean construct) {
 		this.bigCard = bigCard;
@@ -146,7 +193,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 						filteredCards.add(card);
 				}
 			}
-			this.cardGrid.loadCards(new CardsView(filteredCards), (SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected(), bigCard, null);
+			this.currentView.loadCards(new CardsView(filteredCards), (SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected(), bigCard, null);
 		}
 		finally {
 			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -214,6 +261,15 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         rdoPlaneswalkers = new javax.swing.JRadioButton();
         chkPiles = new javax.swing.JCheckBox();
         cbSortBy = new javax.swing.JComboBox();
+        jToggleListView = new javax.swing.JToggleButton();
+        jToggleCardView = new javax.swing.JToggleButton();
+        jPanel1 = new javax.swing.JPanel();
+        jButtonAddToMain = new javax.swing.JButton();
+        jButtonAddToSideboard = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldSearch = new javax.swing.JTextField();
+        jButtonSearch = new javax.swing.JButton();
+        jButtonClean = new javax.swing.JButton();
 
         tbColor.setFloatable(false);
         tbColor.setRollover(true);
@@ -428,12 +484,101 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbTypes.add(cbSortBy);
 
+        jToggleListView.setSelected(true);
+        jToggleListView.setText("ListView");
+        jToggleListView.setFocusable(false);
+        jToggleListView.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jToggleListView.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToggleListView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleListViewActionPerformed(evt);
+            }
+        });
+        tbTypes.add(jToggleListView);
+
+        jToggleCardView.setText("CardView");
+        jToggleCardView.setFocusable(false);
+        jToggleCardView.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jToggleCardView.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToggleCardView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleCardViewActionPerformed(evt);
+            }
+        });
+        tbTypes.add(jToggleCardView);
+
+        jPanel1.setOpaque(false);
+        jPanel1.setPreferredSize(new java.awt.Dimension(897, 35));
+
+        jButtonAddToMain.setText("Add to Main");
+        jButtonAddToMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddToMainActionPerformed(evt);
+            }
+        });
+
+        jButtonAddToSideboard.setText("Add to Sideboard");
+        jButtonAddToSideboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddToSideboardActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Search (by name,in rules):");
+
+        jButtonSearch.setText("Search");
+        jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSearchActionPerformed(evt);
+            }
+        });
+
+        jButtonClean.setText("Clear");
+        jButtonClean.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCleanActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jButtonAddToMain)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonAddToSideboard)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonSearch)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonClean)
+                .addContainerGap(294, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jButtonAddToMain)
+                .addComponent(jButtonAddToSideboard)
+                .addComponent(jLabel1)
+                .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonSearch)
+                .addComponent(jButtonClean))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(tbColor, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)
             .addComponent(tbTypes, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -442,8 +587,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 .addComponent(tbColor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(tbTypes, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -556,16 +703,84 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
 	private void cbSortByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSortByActionPerformed
 		if (cbSortBy.getSelectedItem() instanceof SortBy)
-			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+			this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
 	}//GEN-LAST:event_cbSortByActionPerformed
 
 	private void chkPilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPilesActionPerformed
 		if (cbSortBy.getSelectedItem() instanceof SortBy)
-			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+			this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
 	}//GEN-LAST:event_chkPilesActionPerformed
 
-	private JTable mainTable = new JTable(); 
-	
+	private void jToggleListViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleListViewActionPerformed
+		jToggleCardView.setSelected(false);
+		currentView = mainModel;
+		jScrollPane1.setViewportView(mainTable);
+		cbSortBy.setEnabled(false);
+	    chkPiles.setEnabled(false);
+		jButtonAddToMain.setEnabled(true);
+		jButtonAddToSideboard.setEnabled(true);
+		filterCards();
+	}//GEN-LAST:event_jToggleListViewActionPerformed
+
+	private void jToggleCardViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleCardViewActionPerformed
+		jToggleListView.setSelected(false);
+		currentView = cardGrid;
+		jScrollPane1.setViewportView(cardGrid);
+		cbSortBy.setEnabled(true);
+	    chkPiles.setEnabled(true);
+		jButtonAddToMain.setEnabled(false);
+		jButtonAddToSideboard.setEnabled(false);
+		filterCards();
+	}//GEN-LAST:event_jToggleCardViewActionPerformed
+
+	private void jButtonAddToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddToMainActionPerformed
+    	if (mainTable.getSelectedRowCount() > 0) {
+			int[] n = mainTable.getSelectedRows();
+			List<Integer> indexes = asList(n);
+			Collections.reverse(indexes);
+			for (Integer index : indexes) {
+				mainModel.doubleClick(index);
+			}
+			//if (!mode.equals(Constants.DeckEditorMode.Constructed))
+				//mainModel.fireTableDataChanged();
+		}
+	}//GEN-LAST:event_jButtonAddToMainActionPerformed
+
+	private void jButtonAddToSideboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddToSideboardActionPerformed
+		if (mainTable.getSelectedRowCount() > 0) {
+			int[] n = mainTable.getSelectedRows();
+			List<Integer> indexes = asList(n);
+			Collections.reverse(indexes);
+			for (Integer index : indexes) {
+				mainModel.shiftDoubleClick(index);
+			}
+			//if (!mode.equals(Constants.DeckEditorMode.Constructed))
+				//mainModel.fireTableDataChanged();
+		}
+	}//GEN-LAST:event_jButtonAddToSideboardActionPerformed
+
+	private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
+		String name = jTextFieldSearch.getText().trim();
+		filter.setText(name);
+		filterCards();
+	}//GEN-LAST:event_jButtonSearchActionPerformed
+
+	private void jButtonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCleanActionPerformed
+		jTextFieldSearch.setText("");
+		filter.setText("");
+		filterCards();
+	}//GEN-LAST:event_jButtonCleanActionPerformed
+
+	public List<Integer> asList(final int[] is) {
+        List<Integer> list = new ArrayList<Integer>();
+		for (int i : is) list.add(i);
+		return list;
+    }
+
+	private TableModel mainModel;
+	private JTable mainTable;
+	private ICardGrid currentView;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBooster;
     private javax.swing.JButton btnClear;
@@ -573,7 +788,16 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private javax.swing.JComboBox cbExpansionSet;
     private javax.swing.JComboBox cbSortBy;
     private javax.swing.JCheckBox chkPiles;
+    private javax.swing.JButton jButtonAddToMain;
+    private javax.swing.JButton jButtonAddToSideboard;
+    private javax.swing.JButton jButtonClean;
+    private javax.swing.JButton jButtonSearch;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextFieldSearch;
+    private javax.swing.JToggleButton jToggleCardView;
+    private javax.swing.JToggleButton jToggleListView;
     private javax.swing.JRadioButton rdoArtifacts;
     private javax.swing.JRadioButton rdoBlack;
     private javax.swing.JRadioButton rdoBlue;
@@ -594,25 +818,25 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 	@Override
 	public void componentResized(ComponentEvent e) {
 		if (cbSortBy.getSelectedItem() instanceof SortBy)
-			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+			this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
 	}
 
 	@Override
 	public void componentMoved(ComponentEvent e) {
 		if (cbSortBy.getSelectedItem() instanceof SortBy)
-			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+			this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
 	}
 
 	@Override
 	public void componentShown(ComponentEvent e) {
 		if (cbSortBy.getSelectedItem() instanceof SortBy)
-			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+			this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
 	}
 
 	@Override
 	public void componentHidden(ComponentEvent e) {
 		if (cbSortBy.getSelectedItem() instanceof SortBy)
-			this.cardGrid.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+			this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
 	}
 
 }

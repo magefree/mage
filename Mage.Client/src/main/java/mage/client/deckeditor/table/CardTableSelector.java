@@ -710,7 +710,7 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
 	}//GEN-LAST:event_jButton2ActionPerformed
 
     private TableModel mainModel;
-	
+
     private javax.swing.JButton btnBooster;
     private javax.swing.JButton btnClear;
     private JTable mainTable = new JTable();

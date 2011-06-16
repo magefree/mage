@@ -28,8 +28,12 @@
 
 package mage.client.cards;
 
+import mage.client.constants.Constants;
 import mage.client.util.Event;
 import mage.client.util.Listener;
+import mage.view.CardsView;
+
+import java.util.UUID;
 
 /**
  * Interface for card container.
@@ -38,6 +42,8 @@ import mage.client.util.Listener;
  *
  */
 public interface ICardGrid {
-	 void clearCardEventListeners();
-	 void addCardEventListener(Listener<Event> listener);
+	void clearCardEventListeners();
+	void addCardEventListener(Listener<Event> listener);
+	void drawCards(Constants.SortBy sortBy, boolean piles);
+	void loadCards(CardsView showCards, Constants.SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId);
 }

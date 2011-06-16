@@ -112,7 +112,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		this.tableId = tableId;
 		this.mode = mode;
 		this.btnAddLand.setVisible(false);
-		this.cardTableSelector.setMode(mode);
+		//this.cardTableSelector.setMode(mode);
 		switch (mode) {
 			case Limited:
 				this.btnAddLand.setVisible(true);
@@ -120,7 +120,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			case Sideboard:
 				this.btnSubmit.setVisible(true);
 				this.cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
-				this.cardTableSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
+				//this.cardTableSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
 				this.btnExit.setVisible(false);
 				this.btnImport.setVisible(false);
 				if (!MageFrame.getSession().isTestMode())
@@ -136,7 +136,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			case Constructed:
 				this.btnSubmit.setVisible(false);
 				this.cardSelector.loadCards(this.bigCard);
-				this.cardTableSelector.loadCards(this.bigCard);
+				//this.cardTableSelector.loadCards(this.bigCard);
 				this.btnExit.setVisible(true);
 				this.btnImport.setVisible(true);
 				if (!MageFrame.getSession().isTestMode())
@@ -150,9 +150,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
 	private void init() {
 		this.cardSelector.setVisible(true);
-		this.cardTableSelector.setVisible(false);
-		this.jRadioButtonFullCards.setSelected(true);
-		this.jRadioButtonListTable.setSelected(false);
+		//this.cardTableSelector.setVisible(false);
+		//this.jRadioButtonFullCards.setSelected(true);
+		//this.jRadioButtonListTable.setSelected(false);
 		this.jPanel1.setVisible(true);
 		this.cardSelector.getCardsList().clearCardEventListeners();
 		this.cardSelector.getCardsList().addCardEventListener(
@@ -166,7 +166,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 							if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
 								deck.getSideboard().remove(card);
 								cardSelector.removeCard(card.getId());
-								cardTableSelector.removeCard(card.getId());
+								//cardTableSelector.removeCard(card.getId());
 							}
 							if (cardInfoPane instanceof  CardInfoPane)  {
 								((CardInfoPane)cardInfoPane).setCard(new CardView(card));
@@ -177,7 +177,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				}
 			}
 		);
-		this.cardTableSelector.getCardsList().clearCardEventListeners();
+		/*this.cardTableSelector.getCardsList().clearCardEventListeners();
 		this.cardTableSelector.getCardsList().addCardEventListener(
 			new Listener<Event> () {
 				@Override
@@ -205,7 +205,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 					refreshDeck();
 				}
 			}
-		);
+		);*/
 		this.deckArea.clearDeckEventListeners();
 		this.deckArea.addDeckEventListener(
 			new Listener<Event> () {
@@ -218,7 +218,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 								if (mode == DeckEditorMode.Limited || mode == DeckEditorMode.Sideboard) {
 									deck.getSideboard().add(card);
 									cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), getBigCard(), mode == DeckEditorMode.Limited);
-									cardTableSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), getBigCard(), mode == DeckEditorMode.Limited);
+									//cardTableSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), getBigCard(), mode == DeckEditorMode.Limited);
 								}
 								break;
 							}
@@ -292,7 +292,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         cardSelector = new mage.client.deckeditor.CardSelector();
-		cardTableSelector = new mage.client.deckeditor.table.CardTableSelector();
+		//cardTableSelector = new mage.client.deckeditor.table.CardTableSelector();
 		deckArea = new mage.client.deckeditor.DeckArea();
         jPanel1 = new javax.swing.JPanel();
         bigCard = new mage.client.cards.BigCard();
@@ -307,6 +307,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		btnAddLand = new javax.swing.JButton();
 		txtTimeRemaining = new javax.swing.JTextField();
 
+		/*
 		jLayeredPane1 = new javax.swing.JLayeredPane();
         jRadioButtonFullCards = new javax.swing.JRadioButton();
         jRadioButtonListTable = new javax.swing.JRadioButton();
@@ -322,7 +323,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (jRadioButtonListTable.isSelected()) {
 					jRadioButtonListTable.setSelected(false);
-					cardTableSelector.setVisible(false);
+					//cardTableSelector.setVisible(false);
 					cardSelector.setVisible(true);
 					jSplitPane1.setTopComponent(cardSelector);
 					jSplitPane1.setDividerLocation(0.6);
@@ -349,7 +350,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 					jSplitPane1.repaint();
 				}
 			}
-		});
+		});*/
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setResizeWeight(0.5);
@@ -441,9 +442,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				        .addGroup(jPanel1Layout.createSequentialGroup()
 						        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+								        /*.addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
 										        .addContainerGap()
-										        .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))
+										        .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))*/
 								        .addGroup(jPanel1Layout.createSequentialGroup()
 										        .addGap(6, 6, 6)
 										        .addComponent(lblDeckName)
@@ -494,7 +495,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 		                .addComponent(txtTimeRemaining))
-		        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+		        //.addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, isShowCardInfo ? 30 : 159, Short.MAX_VALUE)
                 .addComponent(cardInfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 		        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
@@ -576,7 +577,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			}
 			deck.getCards().clear();
 			cardSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
-			cardTableSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
+			//cardTableSelector.loadCards(new ArrayList<Card>(deck.getSideboard()), this.bigCard, mode == DeckEditorMode.Limited);
 		}
 		else {
 			deck = new Deck();
@@ -648,16 +649,16 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnLoad;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnSave;
-    private mage.client.deckeditor.table.CardTableSelector cardTableSelector;
+    //private mage.client.deckeditor.table.CardTableSelector cardTableSelector;
     private mage.client.deckeditor.CardSelector cardSelector;
     private mage.client.deckeditor.DeckArea deckArea;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lblDeckName;
     private javax.swing.JTextField txtDeckName;
-	private javax.swing.JRadioButton jRadioButtonFullCards;
-	private javax.swing.JRadioButton jRadioButtonListTable;
-	private javax.swing.JLayeredPane jLayeredPane1;
+	//private javax.swing.JRadioButton jRadioButtonFullCards;
+	//private javax.swing.JRadioButton jRadioButtonListTable;
+	//private javax.swing.JLayeredPane jLayeredPane1;
     // End of variables declaration//GEN-END:variables
 
     private JComponent cardInfoPane;

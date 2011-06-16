@@ -75,8 +75,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 	private int recentSortedColumn;
 	private boolean recentAscending;
 
-	public void loadCards(CardsView showCards, SortBy sortBy, boolean piles,
-			BigCard bigCard, UUID gameId) {
+	public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId) {
 		this.bigCard = bigCard;
 		this.gameId = gameId;
 		for (CardView card : showCards.values()) {
