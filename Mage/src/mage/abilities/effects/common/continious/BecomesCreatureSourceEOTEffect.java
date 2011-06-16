@@ -113,7 +113,10 @@ public class BecomesCreatureSourceEOTEffect extends ContinuousEffectImpl<Becomes
 
 	@Override
 	public String getText(Ability source) {
-		return "Until end of turn {this} becomes a " + token.getDescription() + " that's still a " + this.type;
+        if (type.length() > 0)
+		    return "Until end of turn {this} becomes a " + token.getDescription() + " that's still a " + this.type;
+        else
+            return "Until end of turn {this} becomes a " + token.getDescription();
 	}
 
 	@Override
