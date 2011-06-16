@@ -40,7 +40,7 @@ import java.util.*;
 import java.util.List;
 import mage.client.MageFrame;
 import mage.client.components.ColorPane;
-import mage.client.remote.Session;
+import mage.remote.Session;
 import mage.view.ChatMessage.MessageColor;
 
 import javax.swing.border.EmptyBorder;
@@ -130,7 +130,9 @@ public class ChatPanel extends javax.swing.JPanel {
 	public void connect(UUID chatId) {
 		session = MageFrame.getSession();
 		this.chatId = chatId;
-		session.joinChat(chatId, this);
+		if (session.joinChat(chatId)) {
+			MageFrame.addChat(chatId, this);
+		}
 	}
 
 	public void disconnect() {

@@ -3,7 +3,7 @@ package mage.client.util;
 import java.awt.event.MouseEvent;
 import java.util.UUID;
 
-import mage.client.remote.Session;
+import mage.remote.Session;
 import mage.view.CardView;
 
 

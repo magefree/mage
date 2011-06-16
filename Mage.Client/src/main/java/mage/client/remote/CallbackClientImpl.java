@@ -28,9 +28,7 @@
 
 package mage.client.remote;
 
-import java.rmi.RemoteException;
 import java.util.UUID;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
@@ -40,8 +38,10 @@ import mage.client.draft.DraftPanel;
 import mage.client.game.GamePanel;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.GameManager;
+import mage.client.util.object.SaveObjectUtil;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
+import mage.utils.CompressUtil;
 import mage.view.AbilityPickerView;
 import mage.view.ChatMessage;
 import mage.view.DraftClientMessage;
@@ -55,26 +55,26 @@ import org.apache.log4j.Logger;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Client implements CallbackClient {
+public class CallbackClientImpl implements CallbackClient {
 
-	private final static Logger logger = Logger.getLogger(Client.class);
+	private final static Logger logger = Logger.getLogger(CallbackClientImpl.class);
 
 	private UUID clientId;
 	private MageFrame frame;
-	private Session session;
 	private int messageId = 0;
 
-	public Client(Session session, MageFrame frame) {
+	public CallbackClientImpl(MageFrame frame) {
 
 		this.clientId = UUID.randomUUID();
 		this.frame = frame;
-		this.session = session;
 
 	}
 
 	@Override
 	public synchronized void processCallback(final ClientCallback callback) {
 		logger.info(callback.getMessageId() + " - " + callback.getMethod());
+		SaveObjectUtil.saveObject(callback.getData(), callback.getMethod());
+		callback.setData(CompressUtil.decompress(callback.getData()));
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -101,7 +101,7 @@ public class Client implements CallbackClient {
 					}
 					else if (callback.getMethod().equals("chatMessage")) {
 						ChatMessage message = (ChatMessage) callback.getData();
-						ChatPanel panel = session.getChat(callback.getObjectId());
+						ChatPanel panel = frame.getChat(callback.getObjectId());
 						if (panel != null) {
 							if (message.isUserMessage() && panel.getConnectedChat() != null) {
 								panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), ChatMessage.MessageColor.BLACK);
@@ -111,31 +111,31 @@ public class Client implements CallbackClient {
 						}
 					}
 					else if (callback.getMethod().equals("replayInit")) {
-						GamePanel panel = session.getGame(callback.getObjectId());
+						GamePanel panel = frame.getGame(callback.getObjectId());
 						if (panel != null)
 							panel.init((GameView) callback.getData());
 					}
 					else if (callback.getMethod().equals("replayDone")) {
-						GamePanel panel = session.getGame(callback.getObjectId());
+						GamePanel panel = frame.getGame(callback.getObjectId());
 						if (panel != null) {
 							panel.modalMessage((String) callback.getData());
 							panel.hideGame();
 						}
 					}
 					else if (callback.getMethod().equals("replayUpdate")) {
-						GamePanel panel = session.getGame(callback.getObjectId());
+						GamePanel panel = frame.getGame(callback.getObjectId());
 						if (panel != null)
 							panel.updateGame((GameView) callback.getData());
 					}
 					else if (callback.getMethod().equals("gameInit")) {
-						GamePanel panel = session.getGame(callback.getObjectId());
+						GamePanel panel = frame.getGame(callback.getObjectId());
 						if (panel != null) {
 							panel.init((GameView) callback.getData());
-							session.ack("gameInit");
+
 						}
 					}
 					else if (callback.getMethod().equals("gameOver")) {
-						GamePanel panel = session.getGame(callback.getObjectId());
+						GamePanel panel = frame.getGame(callback.getObjectId());
 						if (panel != null) {
 							panel.modalMessage((String) callback.getData());
 							panel.hideGame();
@@ -143,53 +143,53 @@ public class Client implements CallbackClient {
 					}
 					else if (callback.getMethod().equals("gameAsk")) {
 						GameClientMessage message = (GameClientMessage) callback.getData();
-						GamePanel panel = session.getGame(callback.getObjectId());
+						GamePanel panel = frame.getGame(callback.getObjectId());
 						if (panel != null)
 							panel.ask(message.getMessage(), message.getGameView());
 					}
 					else if (callback.getMethod().equals("gameTarget")) {
 						GameClientMessage message = (GameClientMessage) callback.getData();
-						GamePanel panel = session.getGame(callback.getObjectId());
+						GamePanel panel = frame.getGame(callback.getObjectId());
 						if (panel != null)
 							panel.pickTarget(message.getMessage(), message.getCardsView(), message.getGameView(), message.getTargets(), message.isFlag(), message.getOptions());
 					}
 					else if (callback.getMethod().equals("gameSelect")) {
 						GameClientMessage message = (GameClientMessage) callback.getData();
-						GamePanel panel = session.getGame(callback.getObjectId());
+						GamePanel panel = frame.getGame(callback.getObjectId());
 						if (panel != null)
 							panel.select(message.getMessage(), message.getGameView());
 					}
 					else if (callback.getMethod().equals("gameChooseAbility")) {
-						GamePanel panel = session.getGame(callback.getObjectId());
+						GamePanel panel = frame.getGame(callback.getObjectId());
 						if (panel != null)
 							panel.pickAbility((AbilityPickerView) callback.getData());
 					}
 					else if (callback.getMethod().equals("gameChoose")) {
 						GameClientMessage message = (GameClientMessage) callback.getData();
-						GamePanel panel = session.getGame(callback.getObjectId());
+						GamePanel panel = frame.getGame(callback.getObjectId());
 						if (panel != null)
 							panel.getChoice(message.getMessage(), message.getStrings());
 					}
 					else if (callback.getMethod().equals("gamePlayMana")) {
 						GameClientMessage message = (GameClientMessage) callback.getData();
-						GamePanel panel = session.getGame(callback.getObjectId());
+						GamePanel panel = frame.getGame(callback.getObjectId());
 						if (panel != null)
 							panel.playMana(message.getMessage(), message.getGameView());
 					}
 					else if (callback.getMethod().equals("gamePlayXMana")) {
 						GameClientMessage message = (GameClientMessage) callback.getData();
-						GamePanel panel = session.getGame(callback.getObjectId());
+						GamePanel panel = frame.getGame(callback.getObjectId());
 						if (panel != null)
 							panel.playXMana(message.getMessage(), message.getGameView());
 					}
 					else if (callback.getMethod().equals("gameSelectAmount")) {
 						GameClientMessage message = (GameClientMessage) callback.getData();
-						GamePanel panel = session.getGame(callback.getObjectId());
+						GamePanel panel = frame.getGame(callback.getObjectId());
 						if (panel != null)
 							panel.getAmount(message.getMin(), message.getMax(), message.getMessage());
 					}
 					else if (callback.getMethod().equals("gameUpdate")) {
-						GamePanel panel = session.getGame(callback.getObjectId());
+						GamePanel panel = frame.getGame(callback.getObjectId());
 						if (panel != null)
 							panel.updateGame((GameView) callback.getData());
 					}
@@ -197,7 +197,7 @@ public class Client implements CallbackClient {
 						
 						if (callback.getMessageId() > messageId) {
 							GameClientMessage message = (GameClientMessage) callback.getData();
-							GamePanel panel = session.getGame(callback.getObjectId());
+							GamePanel panel = frame.getGame(callback.getObjectId());
 							if (panel != null)
 								panel.inform(message.getMessage(), message.getGameView());
 						}
@@ -214,18 +214,18 @@ public class Client implements CallbackClient {
 						construct(message.getDeck(), message.getTableId(), message.getTime());
 					}
 					else if (callback.getMethod().equals("draftOver")) {
-						DraftPanel panel = session.getDraft(callback.getObjectId());
+						DraftPanel panel = frame.getDraft(callback.getObjectId());
 						if (panel != null)
 							panel.hideDraft();
 					}
 					else if (callback.getMethod().equals("draftPick")) {
 						DraftClientMessage message = (DraftClientMessage) callback.getData();
-						DraftPanel panel = session.getDraft(callback.getObjectId());
+						DraftPanel panel = frame.getDraft(callback.getObjectId());
 						if (panel != null)
 							panel.loadBooster(message.getDraftPickView());
 					}
 					else if (callback.getMethod().equals("draftUpdate")) {
-						DraftPanel panel = session.getDraft(callback.getObjectId());
+						DraftPanel panel = frame.getDraft(callback.getObjectId());
 						if (panel != null)
 							panel.updateDraft((DraftView) callback.getData());
 					}
@@ -238,10 +238,10 @@ public class Client implements CallbackClient {
 						}
 					}
 					else if (callback.getMethod().equals("draftInit")) {
-						session.ack("draftInit");
+
 					}
 					else if (callback.getMethod().equals("tournamentInit")) {
-						session.ack("tournamentInit");
+
 					}
 					messageId = callback.getMessageId();
 				}
@@ -252,7 +252,7 @@ public class Client implements CallbackClient {
 		});
 	}
 
-	public UUID getId() throws RemoteException {
+	public UUID getId() {
 		return clientId;
 	}
 
@@ -320,9 +320,7 @@ public class Client implements CallbackClient {
 
 	private void handleException(Exception ex) {
 		logger.fatal("Client error\n", ex);
-		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Unrecoverable client error.  Disconnecting", "Error", JOptionPane.ERROR_MESSAGE);
-		session.disconnect();
-		frame.disableButtons();
+		frame.showError("Error: " + ex.getMessage());
 	}
 
 }

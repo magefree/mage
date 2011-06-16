@@ -71,37 +71,50 @@ import java.util.List;
 import java.util.prefs.Preferences;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
+import mage.client.chat.ChatPanel;
 import mage.client.components.MageUI;
 import mage.client.deckeditor.DeckEditorPane;
 import mage.client.draft.DraftPane;
+import mage.client.draft.DraftPanel;
 import mage.client.game.GamePane;
-import mage.client.remote.Session;
+import mage.client.game.GamePanel;
+import mage.client.remote.CallbackClientImpl;
 import mage.client.table.TablesPane;
 import mage.client.tournament.TournamentPane;
+import mage.client.tournament.TournamentPanel;
 import mage.game.match.MatchOptions;
+import mage.interfaces.MageClient;
+import mage.interfaces.callback.CallbackClient;
+import mage.interfaces.callback.ClientCallback;
+import mage.remote.Connection;
+import mage.remote.Connection.ProxyType;
+import mage.remote.Session;
 import mage.utils.MageVersion;
 import mage.sets.Sets;
-import mage.utils.Connection;
-import mage.utils.Connection.ProxyType;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class MageFrame extends javax.swing.JFrame {
+public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private final static Logger logger = Logger.getLogger(MageFrame.class);
 
     private static Session session;
     private ConnectDialog connectDialog;
+	private static CallbackClient callbackClient;
     private static Preferences prefs = Preferences.userNodeForPackage(MageFrame.class);
     private JLabel title;
     private Rectangle titleRectangle;
 	private final static MageVersion version = new MageVersion(0, 7, 4, "beta");
 	private UUID clientId;
 	private static MagePane activeFrame;
-	
+
+	private static Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
+	private static Map<UUID, GamePanel> games = new HashMap<UUID, GamePanel>();
+	private static Map<UUID, DraftPanel> drafts = new HashMap<UUID, DraftPanel>();
+	private static Map<UUID, TournamentPanel> tournaments = new HashMap<UUID, TournamentPanel>();
 	private static MageUI ui = new MageUI();
 
     /**
@@ -119,6 +132,7 @@ public class MageFrame extends javax.swing.JFrame {
         return prefs;
     }
 
+	@Override
 	public MageVersion getVersion() {
 		return version;
 	}
@@ -156,6 +170,7 @@ public class MageFrame extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         session = new Session(this);
+		callbackClient = new CallbackClientImpl(this);
         connectDialog = new ConnectDialog();
         desktopPane.add(connectDialog, JLayeredPane.POPUP_LAYER);
         ui.addComponent(MageComponents.DESKTOP_PANE, desktopPane);
@@ -739,7 +754,7 @@ public class MageFrame extends javax.swing.JFrame {
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
         if (session.isConnected()) {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                session.disconnect();
+                session.disconnect(false);
 				showMessage("You have disconnected");
             }
         } else {
@@ -754,7 +769,7 @@ public class MageFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAboutActionPerformed
 
     public void exitApp() {
-        session.disconnect();
+        session.disconnect(false);
         Plugins.getInstance().shutdown();
         dispose();
         System.exit(0);
@@ -873,10 +888,40 @@ public class MageFrame extends javax.swing.JFrame {
 		return ui;
 	}
 	
+	public static ChatPanel getChat(UUID chatId) {
+		return chats.get(chatId);
+	}
+
+	public static void addChat(UUID chatId, ChatPanel chatPanel) {
+		chats.put(chatId, chatPanel);
+	}
+
+	public static GamePanel getGame(UUID gameId) {
+		return games.get(gameId);
+	}
+
+	public static void addGame(UUID gameId, GamePanel gamePanel) {
+		games.put(gameId, gamePanel);
+	}
+
+	public static DraftPanel getDraft(UUID draftId) {
+		return drafts.get(draftId);
+	}
+
+	public static void addDraft(UUID draftId, DraftPanel draftPanel) {
+		drafts.put(draftId, draftPanel);
+	}
+
+	public static void addTournament(UUID tournamentId, TournamentPanel tournament) {
+		tournaments.put(tournamentId, tournament);
+	}
+	
+	@Override
 	public UUID getId() {
 		return clientId;
 	}
 
+	@Override
 	public void connected(final String message) {
 		if (SwingUtilities.isEventDispatchThread()) {
 			setStatusText(message);
@@ -893,6 +938,7 @@ public class MageFrame extends javax.swing.JFrame {
 		}
 	}
 
+	@Override
 	public void disconnected() {
 		if (SwingUtilities.isEventDispatchThread()) {
 			setStatusText("Not connected");
@@ -913,6 +959,7 @@ public class MageFrame extends javax.swing.JFrame {
 		}
 	}
 
+	@Override
 	public void showMessage(final String message) {
 		if (SwingUtilities.isEventDispatchThread()) {
 			JOptionPane.showMessageDialog(desktopPane, message);
@@ -927,6 +974,7 @@ public class MageFrame extends javax.swing.JFrame {
 		}
 	}
 
+	@Override
 	public void showError(final String message) {
 		if (SwingUtilities.isEventDispatchThread()) {
 			JOptionPane.showMessageDialog(desktopPane, message, "Error", JOptionPane.ERROR_MESSAGE);
@@ -939,6 +987,11 @@ public class MageFrame extends javax.swing.JFrame {
 				}
 			});
 		}
+	}
+	
+	@Override
+	public void processCallback(ClientCallback callback) {
+		callbackClient.processCallback(callback);
 	}
 
 }

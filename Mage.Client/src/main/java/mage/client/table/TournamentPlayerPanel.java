@@ -38,7 +38,7 @@ import java.util.UUID;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import mage.client.MageFrame;
-import mage.client.remote.Session;
+import mage.remote.Session;
 
 /**
  *

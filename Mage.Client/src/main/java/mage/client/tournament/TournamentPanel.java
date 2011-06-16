@@ -36,20 +36,15 @@ package mage.client.tournament;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import mage.client.MageFrame;
-import mage.client.remote.MageRemoteException;
-import mage.client.remote.Session;
+import mage.remote.Session;
 import mage.client.util.ButtonColumn;
 import mage.view.RoundView;
 import mage.view.TournamentGameView;
@@ -104,7 +99,7 @@ public class TournamentPanel extends javax.swing.JPanel {
 	public synchronized void showTournament(UUID tournamentId) {
 		this.tournamentId = tournamentId;
 		session = MageFrame.getSession();
-		session.addTournament(tournamentId, this);
+		MageFrame.addTournament(tournamentId, this);
 		UUID chatRoomId = session.getTournamentChatId(tournamentId);
 		if (session.joinTournament(tournamentId) && chatRoomId != null) {
 			this.chatPanel1.connect(chatRoomId);

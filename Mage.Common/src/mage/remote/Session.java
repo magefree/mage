@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.client.remote;
+package mage.remote;
 
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
@@ -35,32 +35,23 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import javax.swing.JOptionPane;
 import mage.cards.decks.DeckCardLists;
-import mage.client.MageFrame;
-import mage.client.chat.ChatPanel;
-import mage.client.components.MageUI;
-import mage.client.draft.DraftPanel;
-import mage.client.game.GamePanel;
-import mage.client.tournament.TournamentPanel;
-import mage.client.util.Config;
 import mage.game.GameException;
 import mage.MageException;
+import mage.constants.Constants.SessionState;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
+import mage.interfaces.MageClient;
 import mage.interfaces.Server;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.CallbackClientDaemon;
-import mage.utils.Connection;
 import mage.view.DraftPickView;
 import mage.view.GameTypeView;
 import mage.view.TableView;
@@ -79,17 +70,15 @@ public class Session {
 
 	private UUID sessionId;
 	private Server server;
-	private Client client;
+	private MageClient client;
 	private String userName;
-	private MageFrame frame;
 	private ServerState serverState;
-	private Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
-	private Map<UUID, GamePanel> games = new HashMap<UUID, GamePanel>();
-	private Map<UUID, DraftPanel> drafts = new HashMap<UUID, DraftPanel>();
-	private Map<UUID, TournamentPanel> tournaments = new HashMap<UUID, TournamentPanel>();
+	private SessionState sessionState = SessionState.DISCONNECTED;
 	private CallbackClientDaemon callbackDaemon;
 	private ScheduledFuture<?> future;
-	private MageUI ui = new MageUI();
+	private Connection connection;
+	private boolean reconnecting = false;
+	private boolean connecting = false;
 
 	/**
 	 * For locking session object.
@@ -97,17 +86,23 @@ public class Session {
 	 * there shouldn't be any penalty for synchronization.
 	 *
 	 * @author nantuko
-	 */
+	*/
 	private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
-	public Session(MageFrame frame) {
-		this.frame = frame;
+	public Session(MageClient client) {
+		this.client = client;
 	}
 	
-	public boolean connect(Connection connection) {
+	public synchronized boolean connect(Connection connection) {
+		this.connecting = true;
 		if (isConnected()) {
-			disconnect();
+			disconnect(true);
 		}
+		this.connection = connection;
+		return connect();
+	}
+
+	public boolean connect() {
 		try {
 			System.setSecurityManager(null);
 			System.setProperty("http.nonProxyHosts", "code.google.com");
@@ -131,80 +126,54 @@ public class Session {
 					break;
 			}
 			Registry reg = LocateRegistry.getRegistry(connection.getHost(), connection.getPort());
-			this.server = (Server) reg.lookup(Config.remoteServer);
+			this.server = (Server) reg.lookup("mage-server");
 			this.userName = connection.getUsername();
-			if (client == null)
-				client = new Client(this, frame);
-			sessionId = server.registerClient(userName, client.getId(), frame.getVersion());
+			sessionId = server.registerClient(userName, client.getId(), client.getVersion());
 			callbackDaemon = new CallbackClientDaemon(sessionId, client, server);
 			serverState = server.getServerState();
 			future = sessionExecutor.scheduleWithFixedDelay(new ServerPinger(), 5, 5, TimeUnit.SECONDS);
 			logger.info("Connected to RMI server at " + connection.getHost() + ":" + connection.getPort());
-			frame.setStatusText("Connected to " + connection.getHost() + ":" + connection.getPort() + " ");
-			frame.enableButtons();
+			client.connected("Connected to " + connection.getHost() + ":" + connection.getPort() + " ");
+			reconnecting = false;
+			connecting = false;
 			return true;
 		} catch (MageException ex) {
 			logger.fatal("", ex);
-			disconnect();
-			JOptionPane.showMessageDialog(frame, "Unable to connect to server. "  + ex.getMessage());
+			if (!reconnecting) {
+				disconnect(false);
+				client.showMessage("Unable to connect to server. "  + ex.getMessage());
+			}
 		} catch (RemoteException ex) {
 			logger.fatal("Unable to connect to server - ", ex);
-			disconnect();
-			JOptionPane.showMessageDialog(frame, "Unable to connect to server. "  + ex.getMessage());
+			if (!reconnecting) {
+				disconnect(false);
+				client.showMessage("Unable to connect to server. "  + ex.getMessage());
+			}
 		} catch (NotBoundException ex) {
 			logger.fatal("Unable to connect to server - ", ex);
 		}
 		return false;
 	}
-
-	public void disconnect() {
-
-		if (isConnected()) {
-			try {
-				for (UUID chatId: chats.keySet()) {
-					server.leaveChat(chatId, sessionId);
-				}
-			}
-			catch (Exception ex) {
-				//swallow all exceptions at this point
-			}
-			try {
-				//TODO: stop daemon
-				if (server != null)
-					server.deregisterClient(sessionId);
-			} catch (RemoteException ex) {
-				logger.fatal("Error disconnecting ...", ex);
-			} catch (MageException ex) {
-				logger.fatal("Error disconnecting ...", ex);
-			}
-			removeServer();
-		}
-	}
-
-	private void removeServer() {
-		if (future != null && !future.isDone())
-			future.cancel(true);
-		lock.writeLock().lock();
-		try {
-			server = null;
-		} finally {
-			lock.writeLock().unlock();
-		}
-		frame.hideGames();
-		frame.hideTables();
-		frame.setStatusText("Not connected");
-		frame.disableButtons();
-		logger.info("Disconnected ... ");
-		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Disconnected.", "Disconnected", JOptionPane.INFORMATION_MESSAGE);
-	}
 	
-	public void ack(String message) {
-		try {
-			server.ack(message, sessionId);
-		} catch (RemoteException ex) {
-			handleRemoteException(ex);
-		} catch (MageException ex) {
-			handleMageException(ex);
+	public synchronized void disconnect(boolean showMessage) {
+		if (sessionState == SessionState.CONNECTED)
+			sessionState = SessionState.DISCONNECTING;
+		if (connection == null)
+			return;
+		if (sessionState == SessionState.CONNECTED) {
+			try {
+				server.deregisterClient(sessionId);
+			} catch (Exception ex) {
+					logger.fatal("Error disconnecting ...", ex);
+			}
+		}
+		client.disconnected();
+		logger.info("Disconnected ... ");
+		if (sessionState == SessionState.SERVER_UNAVAILABLE && showMessage) {
+			client.showError("Server error.  You have been disconnected");
+		}
+		else {
+			sessionState = SessionState.DISCONNECTED;
 		}
 	}
 
@@ -220,7 +189,7 @@ public class Session {
 	}
 		
 	public boolean isConnected() {
-		return server != null;
+		return sessionState == SessionState.CONNECTED;
 	}
 
 	public String[] getPlayerTypes() {
@@ -243,30 +212,6 @@ public class Session {
 		if (serverState != null)
 			return serverState.isTestMode();
 		return false;
-	}
-
-	public ChatPanel getChat(UUID chatId) {
-		return chats.get(chatId);
-	}
-
-	public GamePanel getGame(UUID gameId) {
-		return games.get(gameId);
-	}
-
-	public void addGame(UUID gameId, GamePanel gamePanel) {
-		games.put(gameId, gamePanel);
-	}
-
-	public DraftPanel getDraft(UUID draftId) {
-		return drafts.get(draftId);
-	}
-
-	public void addDraft(UUID draftId, DraftPanel draftPanel) {
-		drafts.put(draftId, draftPanel);
-	}
-
-	public void addTournament(UUID tournamentId, TournamentPanel tournament) {
-		tournaments.put(tournamentId, tournament);
 	}
 
 	public UUID getMainRoomId() {
@@ -475,10 +420,9 @@ public class Session {
 		return null;
 	}
 
-	public boolean joinChat(UUID chatId, ChatPanel chat) {
+	public boolean joinChat(UUID chatId) {
 		try {
 			server.joinChat(chatId, sessionId, userName);
-			chats.put(chatId, chat);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
@@ -493,7 +437,6 @@ public class Session {
 		try {
 			if (server == null) return false;
 			server.leaveChat(chatId, sessionId);
-			chats.remove(chatId);
 			return true;
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
@@ -785,19 +728,17 @@ public class Session {
 
 	private void handleRemoteException(RemoteException ex) {
 		logger.fatal("Communication error", ex);
-		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Critical server error.  Disconnecting", "Error", JOptionPane.ERROR_MESSAGE);
-		disconnect();
+		disconnect(false);
 	}
 
 	private void handleMageException(MageException ex) {
 		logger.fatal("Server error", ex);
-		JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Critical server error.  Disconnecting", "Error", JOptionPane.ERROR_MESSAGE);
-		disconnect();
+		disconnect(false);
 	}
 
 	private void handleGameException(GameException ex) {
 		logger.warn(ex.getMessage());
-		JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		client.showError(ex.getMessage());
 	}
 
 
@@ -805,14 +746,6 @@ public class Session {
 		return userName;
 	}
 
-	public MageUI getUI() {
-		return ui;
-	}
-
-	public Server getServerRef() {
-		return server;
-	}
-	
 	class ServerPinger implements Runnable {
 
 		private int missed = 0;
@@ -823,7 +756,7 @@ public class Session {
 				missed++;
 				if (missed > 10) {
 					logger.info("Connection to server timed out");
-					removeServer();
+					disconnect(true);
 				}
 			}
 			else {

@@ -46,7 +46,7 @@ import javax.swing.SpinnerNumberModel;
 import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
 import mage.client.components.MageComponents;
-import mage.client.remote.Session;
+import mage.remote.Session;
 import mage.client.table.TablePlayerPanel;
 import mage.client.util.Event;
 import mage.client.util.Listener;
