@@ -50,6 +50,9 @@ import java.awt.image.BufferedImage;
 import java.util.*;
 import java.util.List;
 import java.util.Map.Entry;
+import mage.client.MageFrame;
+import mage.client.util.gui.GuiDisplayUtil;
+import org.jdesktop.swingx.JXPanel;
 
 /**
  * Table Model for card list.
@@ -244,15 +247,28 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 	private void showImage(int row) {
 		CardView card = view.get(row);
 		if (!card.getId().equals(bigCard.getCardId())) {
-			Image image = Plugins.getInstance().getOriginalImage(card);
-			if (image != null && image instanceof BufferedImage) {
-                // XXX: scaled to fit width
-				image = ImageHelper.getResizedImage((BufferedImage) image, bigCard.getWidth());
-				bigCard.setCard(card.getId(), image, new ArrayList<String>(), false);
+			if (!MageFrame.isLite()) {
+				Image image = Plugins.getInstance().getOriginalImage(card);
+				if (image != null && image instanceof BufferedImage) {
+					// XXX: scaled to fit width
+					image = ImageHelper.getResizedImage((BufferedImage) image, bigCard.getWidth());
+					bigCard.setCard(card.getId(), image, new ArrayList<String>(), false);
+				} else {
+					drawCardText(card);
+				}
+			} else {
+				drawCardText(card);
 			}
 		}
 	}
 
+	private void drawCardText(CardView card) {
+		JXPanel panel = GuiDisplayUtil.getDescription(card, bigCard.getWidth(), bigCard.getHeight());
+		panel.setVisible(true);
+		bigCard.hideTextComponent();
+		bigCard.addJXPanel(card.getId(), panel);
+	}
+		
 	public List<CardView> getCardsView() {
 		return view;
 	}

@@ -30,6 +30,7 @@ package mage.view;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.TableState;
@@ -49,6 +50,7 @@ public class TableView implements Serializable {
 	private String deckType;
 	private String tableName;
 	private String controllerName;
+	private Date createTime;
 	private TableState tableState;
 	private boolean isTournament;
 	private List<SeatView> seats = new ArrayList<SeatView>();
@@ -59,6 +61,7 @@ public class TableView implements Serializable {
 		this.gameType = table.getGameType();
 		this.tableName = table.getName();
 		this.controllerName = table.getControllerName();
+		this.createTime = table.getCreateTime();
 		this.deckType = table.getDeckType();
 		this.tableState = table.getState();
 		this.isTournament = table.isTournament();
@@ -90,6 +93,10 @@ public class TableView implements Serializable {
 
 	public String getDeckType() {
 		return deckType;
+	}
+	
+	public Date getCreateTime() {
+		return createTime;
 	}
 
 	public TableState getTableState() {

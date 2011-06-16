@@ -52,11 +52,11 @@ public class RateThread extends Thread {
 				Card card1 = getRandomUniqueNonLandCard(null);
 				Card card2 = getRandomUniqueNonLandCard(card1);
 				
-				mageCard1 = impl.getMageCard(new CardView(card1), cardDimension, UUID.randomUUID(), new RateCallback(card1, card2, this, bigCard), false);
+				mageCard1 = impl.getMageCard(new CardView(card1), cardDimension, UUID.randomUUID(), new RateCallback(card1, card2, this, bigCard), false, true);
 				mageCard1.setCardBounds(bigCardDimension.frameWidth + 80, 10, dimensions.frameWidth, dimensions.frameHeight);
 				frame.add(mageCard1);
 				
-				mageCard2 = impl.getMageCard(new CardView(card2), cardDimension, UUID.randomUUID(), new RateCallback(card2, card1, this, bigCard), false);
+				mageCard2 = impl.getMageCard(new CardView(card2), cardDimension, UUID.randomUUID(), new RateCallback(card2, card1, this, bigCard), false, true);
 				mageCard2.setCardBounds(bigCardDimension.frameWidth + 80 + dimensions.frameWidth + 30, 10, dimensions.frameWidth, dimensions.frameHeight);
 				frame.add(mageCard2);
 				

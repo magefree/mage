@@ -56,6 +56,8 @@ import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyVetoException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.CancellationException;
@@ -97,10 +99,10 @@ public class TablesPanel extends javax.swing.JPanel {
 			public void actionPerformed(ActionEvent e)
 			{
 				int modelRow = Integer.valueOf( e.getActionCommand() );
-				UUID tableId = (UUID)tableModel.getValueAt(modelRow, 8);
-				UUID gameId = (UUID)tableModel.getValueAt(modelRow, 7);
+				UUID tableId = (UUID)tableModel.getValueAt(modelRow, 9);
+				UUID gameId = (UUID)tableModel.getValueAt(modelRow, 8);
 				String state = (String)tableModel.getValueAt(modelRow, 5);
-				boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, 6);
+				boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, 7);
 				String owner = (String)tableModel.getValueAt(modelRow, 1);
 
 				if (state.equals("Join")) {
@@ -148,7 +150,7 @@ public class TablesPanel extends javax.swing.JPanel {
 			}
 		};
 
-		ButtonColumn buttonColumn = new ButtonColumn(tableTables, join, 5);
+		ButtonColumn buttonColumn = new ButtonColumn(tableTables, join, 6);
 		
 		jSplitPane1.setOpaque(false);
 		jScrollPane1.setOpaque(false);
@@ -394,9 +396,9 @@ public class TablesPanel extends javax.swing.JPanel {
 }
 
 class TableTableModel extends AbstractTableModel {
-    private String[] columnNames = new String[]{"Table Name", "Owner", "Game Type", "Deck Type", "Status", "Action"};
+    private String[] columnNames = new String[]{"Match Name", "Owner", "Game Type", "Deck Type", "Status", "Created", "Action"};
 	private TableView[] tables = new TableView[0];
-
+	private static final DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
 
 	public void loadData(Collection<TableView> tables) throws MageRemoteException {
 		this.tables = tables.toArray(new TableView[0]);
@@ -427,6 +429,8 @@ class TableTableModel extends AbstractTableModel {
 			case 4:
 				return tables[arg0].getTableState().toString();
 			case 5:
+				return timeFormatter.format(tables[arg0].getCreateTime());
+			case 6:
 				switch (tables[arg0].getTableState()) {
 					case WAITING:
 						return "Join";
@@ -437,13 +441,13 @@ class TableTableModel extends AbstractTableModel {
 					default:
 						return "";
 				}
-			case 6:
-				return tables[arg0].isTournament();
 			case 7:
+				return tables[arg0].isTournament();
+			case 8:
 				if (!tables[arg0].getGames().isEmpty())
 					return tables[arg0].getGames().get(0);
 				return null;
-			case 8:
+			case 9:
 				return tables[arg0].getTableId();
 		}
 		return "";
@@ -466,7 +470,7 @@ class TableTableModel extends AbstractTableModel {
 
 	@Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-		if (columnIndex != 5)
+		if (columnIndex != 6)
 			return false;
 		return true;
     }

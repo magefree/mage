@@ -79,9 +79,9 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     @Override
-    public MagePermanent getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil) {
+    public MagePermanent getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage) {
         boolean foil = canBeFoil && (new Random()).nextInt(5) == 0;
-        CardPanel cardPanel = new CardPanel(permanent, gameId, true, callback, foil);
+        CardPanel cardPanel = new CardPanel(permanent, gameId, loadImage, callback, foil);
         cardPanel.setCardBounds(0, 0, dimension.width, dimension.height);
         boolean implemented = !permanent.getRarity().equals(mage.Constants.Rarity.NA);
         cardPanel.setShowCastingCost(implemented);
@@ -89,9 +89,9 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     @Override
-    public MagePermanent getMageCard(CardView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil) {
+    public MagePermanent getMageCard(CardView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage) {
         boolean foil = canBeFoil && (new Random()).nextInt(5) == 0;
-        CardPanel cardPanel = new CardPanel(permanent, gameId, true, callback, foil);
+        CardPanel cardPanel = new CardPanel(permanent, gameId, loadImage, callback, foil);
         cardPanel.setCardBounds(0, 0, dimension.width, dimension.height);
         boolean implemented = !permanent.getRarity().equals(mage.Constants.Rarity.NA);
         cardPanel.setShowCastingCost(implemented);

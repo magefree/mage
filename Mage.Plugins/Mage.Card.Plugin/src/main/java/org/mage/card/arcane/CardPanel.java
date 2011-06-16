@@ -592,7 +592,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public Image getImage() {
-        return ImageCache.getImageOriginal(gameCard);
+		if (this.hasImage)
+			return ImageCache.getImageOriginal(gameCard);
+		return null;
     }
 
     @Override

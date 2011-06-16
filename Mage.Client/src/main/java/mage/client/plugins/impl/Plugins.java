@@ -13,6 +13,7 @@ import javax.swing.JComponent;
 import mage.cards.MageCard;
 import mage.cards.MagePermanent;
 import mage.cards.action.impl.EmptyCallback;
+import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.Card;
 import mage.client.cards.Permanent;
@@ -67,13 +68,13 @@ public class Plugins implements MagePlugins {
 
 	@Override
 	public void updateGamePanel(Map<String, JComponent> ui) {
-		if (themePlugin == null) return;
+		if (MageFrame.isLite() || themePlugin == null) return;
 		themePlugin.applyInGame(ui);
 	}
 
 	@Override
 	public JComponent updateTablePanel(Map<String, JComponent> ui) {
-		if (themePlugin == null) return null;
+		if (MageFrame.isLite() || themePlugin == null) return null;
 		return themePlugin.updateTable(ui);
 	}
 	
@@ -82,7 +83,7 @@ public class Plugins implements MagePlugins {
 		if (cardPlugin != null) {
 			mageActionCallback.refreshSession();
 			mageActionCallback.setCardPreviewComponent(bigCard);
-			return cardPlugin.getMagePermanent(card, dimension, gameId, mageActionCallback, canBeFoil);
+			return cardPlugin.getMagePermanent(card, dimension, gameId, mageActionCallback, canBeFoil, !MageFrame.isLite());
 		} else {
 			return new Permanent(card, bigCard, Config.dimensions, gameId);
 		}
@@ -93,7 +94,7 @@ public class Plugins implements MagePlugins {
 		if (cardPlugin != null) {
 			mageActionCallback.refreshSession();
 			mageActionCallback.setCardPreviewComponent(bigCard);
-			return cardPlugin.getMageCard(card, dimension, gameId, mageActionCallback, canBeFoil);
+			return cardPlugin.getMageCard(card, dimension, gameId, mageActionCallback, canBeFoil, !MageFrame.isLite());
 		} else {
 			return new Card(card, bigCard, Config.dimensions, gameId);
 		}

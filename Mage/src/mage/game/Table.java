@@ -29,6 +29,7 @@
 package mage.game;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.TableState;
@@ -51,6 +52,7 @@ public class Table implements Serializable {
 	private String name;
 	private String controllerName;
 	private String gameType;
+	private Date createTime;
 	private Seat[] seats;
 	private int numSeats;
 	private boolean isTournament;
@@ -80,6 +82,7 @@ public class Table implements Serializable {
 		this.gameType = gameType;
 		this.name = name;
 		this.controllerName = controllerName;
+		this.createTime = new Date();
 		createSeats(playerTypes);
 		this.validator = validator;
 	}
@@ -129,6 +132,10 @@ public class Table implements Serializable {
 		return validator.getName();
 	}
 
+	public Date getCreateTime() {
+		return createTime;
+	}
+	
 	public boolean isTournament() {
 		return this.isTournament;
 	}

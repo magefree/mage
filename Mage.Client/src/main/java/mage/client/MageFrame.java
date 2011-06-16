@@ -100,6 +100,7 @@ import org.apache.log4j.Logger;
 public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private final static Logger logger = Logger.getLogger(MageFrame.class);
+	private final static String liteModeArg = "-lite";
 
     private static Session session;
     private ConnectDialog connectDialog;
@@ -110,6 +111,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 	private final static MageVersion version = new MageVersion(0, 7, 4, "beta-2");
 	private UUID clientId;
 	private static MagePane activeFrame;
+	private static boolean liteMode = false;
 
 	private static Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
 	private static Map<UUID, GamePanel> games = new HashMap<UUID, GamePanel>();
@@ -131,6 +133,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public static Preferences getPreferences() {
         return prefs;
     }
+	
+	public static boolean isLite() {
+		return liteMode;
+	}
 
 	@Override
 	public MageVersion getVersion() {
@@ -205,7 +211,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             public void componentResized(ComponentEvent e) {
                 int width = ((JComponent) e.getSource()).getWidth();
                 int height = ((JComponent) e.getSource()).getHeight();
-                backgroundPane.setSize(width, height);
+				if (!liteMode)
+					backgroundPane.setSize(width, height);
                 JPanel arrowsPanel = ArrowBuilder.getArrowsPanelRef();
                 if (arrowsPanel != null) arrowsPanel.setSize(width, height);
                 if (title != null) {
@@ -297,6 +304,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     private void setBackground() {
+		if (liteMode)
+			return;
         String filename = "/background.jpg";
         try {
             if (Plugins.getInstance().isThemePluginLoaded()) {
@@ -315,6 +324,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     private void addMageLabel() {
+		if (liteMode)
+			return;
         String filename = "/label-mage.png";
         try {
             InputStream is = this.getClass().getResourceAsStream(filename);
@@ -557,24 +568,24 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         desktopPane = new MageJDesktop();
         mageToolbar = new javax.swing.JToolBar();
         btnConnect = new javax.swing.JButton();
-        jSeparator5 = new javax.swing.JToolBar.Separator();
-        btnGames = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JToolBar.Separator();
-        btnDeckEditor = new javax.swing.JButton();
+        btnGames = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
-        btnPreferences = new javax.swing.JButton();
+        btnDeckEditor = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
+        btnCollectionViewer = new javax.swing.JButton();
+        jSeparator5 = new javax.swing.JToolBar.Separator();
+        btnPreferences = new javax.swing.JButton();
+        jSeparator6 = new javax.swing.JToolBar.Separator();
         btnAbout = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnExit = new javax.swing.JButton();
         lblStatus = new javax.swing.JLabel();
-        jSeparator6 = new javax.swing.JToolBar.Separator();
-        btnCollectionViewer = new JButton();
-	    jSeparator7 = new javax.swing.JToolBar.Separator();
-        btnChallenges = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        //setMinimumSize(new java.awt.Dimension(1024, 768));
+        setMinimumSize(new java.awt.Dimension(1024, 768));
+
+        desktopPane.setBackground(new java.awt.Color(204, 204, 204));
 
         mageToolbar.setFloatable(false);
         mageToolbar.setRollover(true);
@@ -592,7 +603,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(btnConnect);
         mageToolbar.add(jSeparator4);
 
-        btnGames.setText("Tables");
+        btnGames.setText("Games");
         btnGames.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnGames.setFocusable(false);
         btnGames.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -619,7 +630,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(jSeparator2);
 
         btnCollectionViewer.setText("Collection Viewer");
-        btnCollectionViewer.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnCollectionViewer.setFocusable(false);
         btnCollectionViewer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCollectionViewer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -629,23 +639,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             }
         });
         mageToolbar.add(btnCollectionViewer);
-        mageToolbar.add(jSeparator6);
-
-		/*btnChallenges.setText("Challenges");
-        btnChallenges.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnChallenges.setFocusable(false);
-        btnChallenges.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnChallenges.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnChallenges.addActionListener(new java.awt.event.ActionListener() {
-	        public void actionPerformed(java.awt.event.ActionEvent evt) {
-		        btnChallengesActionPerformed(evt);
-	        }
-        });
-        mageToolbar.add(btnChallenges);
-        mageToolbar.add(jSeparator7);*/
+        mageToolbar.add(jSeparator5);
 
         btnPreferences.setText("Preferences");
-        btnPreferences.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnPreferences.setFocusable(false);
         btnPreferences.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPreferences.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -655,7 +651,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             }
         });
         mageToolbar.add(btnPreferences);
-        mageToolbar.add(jSeparator5);
+        mageToolbar.add(jSeparator6);
 
         btnAbout.setText("About");
         btnAbout.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -689,16 +685,16 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1144, Short.MAX_VALUE)
-                        .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, 1144, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1144, Short.MAX_VALUE)
+            .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, 1144, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(mageToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mageToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE))
         );
 
         pack();
@@ -707,10 +703,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private void btnDeckEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeckEditorActionPerformed
 		showDeckEditor(DeckEditorMode.Constructed, null, null, 0);
     }//GEN-LAST:event_btnDeckEditorActionPerformed
-
-    private void btnCollectionViewerActionPerformed(java.awt.event.ActionEvent evt) {
-        showCollectionViewer();
-    }
 
 	private void btnChallengesActionPerformed(java.awt.event.ActionEvent evt) {
 				TableView table;
@@ -736,10 +728,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 			//handleError(ex);
 		}
 	}
-
-    private void btnPreferencesActionPerformed(java.awt.event.ActionEvent evt) {
-        PhasesDialog.main(new String[]{});
-    }
 
     private void btnGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGamesActionPerformed
         this.tablesPane.setVisible(true);
@@ -767,6 +755,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         desktopPane.add(aboutDialog, JLayeredPane.POPUP_LAYER);
         aboutDialog.showDialog(version);
     }//GEN-LAST:event_btnAboutActionPerformed
+
+	private void btnCollectionViewerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCollectionViewerActionPerformed
+		showCollectionViewer();
+	}//GEN-LAST:event_btnCollectionViewerActionPerformed
+
+	private void btnPreferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreferencesActionPerformed
+		PhasesDialog.main(new String[]{});
+	}//GEN-LAST:event_btnPreferencesActionPerformed
 
     public void exitApp() {
         session.disconnect(false);
@@ -832,7 +828,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(final String args[]) {
 
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
             public void uncaughtException(Thread t, Throwable e) {
@@ -841,13 +837,20 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         });
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-				final SplashScreen splash = SplashScreen.getSplashScreen();
-				if (splash != null) {
-					Graphics2D g = splash.createGraphics();
-					if (g != null) {
-						renderSplashFrame(g);
+				for (String arg: args) {
+					if (arg.startsWith(liteModeArg)) {
+						liteMode = true;
 					}
-					splash.update();
+				}
+				if (!liteMode) {
+					final SplashScreen splash = SplashScreen.getSplashScreen();
+					if (splash != null) {
+						Graphics2D g = splash.createGraphics();
+						if (g != null) {
+							renderSplashFrame(g);
+						}
+						splash.update();
+					}
 				}
                 new MageFrame().setVisible(true);
             }
@@ -856,21 +859,19 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAbout;
+    private javax.swing.JButton btnCollectionViewer;
     private javax.swing.JButton btnConnect;
     private javax.swing.JButton btnDeckEditor;
-    private javax.swing.JButton btnCollectionViewer;
-	private javax.swing.JButton btnChallenges;
-    private javax.swing.JButton btnPreferences;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnGames;
-    private static MageJDesktop desktopPane;
+    private javax.swing.JButton btnPreferences;
+    private static javax.swing.JDesktopPane desktopPane;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator6;
-	private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JToolBar mageToolbar;
     // End of variables declaration//GEN-END:variables
