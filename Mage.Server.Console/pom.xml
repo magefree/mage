@@ -22,7 +22,7 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>Mage-Common</artifactId>
-      <version>${project.version}</version>
+      <version>0.7.4</version>
     </dependency>
     <dependency>
       <groupId>org.swinglabs</groupId>
