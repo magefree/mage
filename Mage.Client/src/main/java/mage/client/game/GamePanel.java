@@ -48,6 +48,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import mage.Constants;
 import mage.client.MageFrame;
 import mage.client.cards.Cards;
 import mage.client.chat.ChatPanel;
@@ -67,7 +68,7 @@ import org.apache.log4j.Logger;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, nantuko8
  */
 public class GamePanel extends javax.swing.JPanel {
 
@@ -306,20 +307,16 @@ public class GamePanel extends javax.swing.JPanel {
 		this.txtPriority.setText(game.getPriorityPlayerName());
 		this.txtTurn.setText(Integer.toString(game.getTurn()));
 		for (PlayerView player: game.getPlayers()) {
-			//if (player != null) {
-				if (players.containsKey(player.getPlayerId())) {
-					players.get(player.getPlayerId()).update(player);
-				} else {
-					logger.warn("Couldn't find player.");
-					logger.warn("   uuid:" + player.getPlayerId());
-					logger.warn("   players:");
-					for (PlayAreaPanel p : players.values()) {
-						logger.warn(""+p);
-					}
+			if (players.containsKey(player.getPlayerId())) {
+				players.get(player.getPlayerId()).update(player);
+			} else {
+				logger.warn("Couldn't find player.");
+				logger.warn("   uuid:" + player.getPlayerId());
+				logger.warn("   players:");
+				for (PlayAreaPanel p : players.values()) {
+					logger.warn(""+p);
 				}
-			//} else {
-				//logger.warning("Player object is null.");
-			//}
+			}
 		}
 		
 		this.stack.loadCards(game.getStack(), bigCard, gameId);
@@ -338,12 +335,46 @@ public class GamePanel extends javax.swing.JPanel {
 		showLookedAt(game);
 		if (game.getCombat().size() > 0) {
 			combat.showDialog(game.getCombat());
-		}
-		else {
+		} else {
 			combat.hideDialog();
 		}
+		updatePhases(game.getStep());
 		this.revalidate();
 		this.repaint();
+	}
+
+	/**
+	 * Update phase buttons\labels.
+	 */
+	private void updatePhases(Constants.PhaseStep step) {
+		if (step == null) {
+			logger.warn("step is null");
+			return;
+		}
+		if (prevStep != null && prevBGColor != null) {
+			prevStep.setBackground(prevBGColor);
+			prevStep.setForeground(DEFAULT_FOREGROUND_COLOR);
+		}
+		switch (step) {
+			case UNTAP: updateButton(untap); break;
+			case UPKEEP: updateButton(upkeep); break;
+			case DRAW: updateButton(draw); break;
+			case PRECOMBAT_MAIN: updateButton(main1); break;
+			case BEGIN_COMBAT:
+			case DECLARE_ATTACKERS: updateButton(attack); break;
+			case DECLARE_BLOCKERS: updateButton(block); break;
+			case FIRST_COMBAT_DAMAGE:
+			case COMBAT_DAMAGE: updateButton(combatButton); break;
+			case POSTCOMBAT_MAIN: updateButton(main2); break;
+			case END_TURN: updateButton(endOfTurn); break;
+		}
+	}
+
+	private void updateButton(JButton button) {
+		if (prevBGColor == null) prevBGColor = button.getBackground();
+		button.setBackground(new Color(0,0,0,100));
+		button.setForeground(Color.white);
+		prevStep = button;
 	}
 
 	private void showRevealed(GameView game) {
@@ -686,6 +717,39 @@ public class GamePanel extends javax.swing.JPanel {
 
         pnlBattlefield.setLayout(new java.awt.GridBagLayout());
 
+		jPhases = new JPanel();
+		jPhases.setBackground(new Color(0,0,0,100));
+		jPhases.setLayout(new GridBagLayout());
+
+		untap = new JButton("Un");
+		untap.setToolTipText("Untap");
+		upkeep = new JButton("Up");
+		upkeep.setToolTipText("Upkeep");
+		draw = new JButton("D");
+		draw.setToolTipText("Draw");
+		main1 = new JButton("M1");
+		main1.setToolTipText("Main#1");
+		attack = new JButton("A");
+		attack.setToolTipText("Attack");
+		block = new JButton("B");
+		block.setToolTipText("Block");
+		combatButton = new JButton("C");
+		combatButton.setToolTipText("Combat damage");
+		main2 = new JButton("M2");
+		main2.setToolTipText("Main#2");
+		endOfTurn = new JButton("End");
+		endOfTurn.setToolTipText("End Of Turn");
+
+		jPhases.add(untap);
+		jPhases.add(upkeep);
+		jPhases.add(draw);
+		jPhases.add(main1);
+		jPhases.add(attack);
+		jPhases.add(block);
+		jPhases.add(combatButton);
+		jPhases.add(main2);
+		jPhases.add(endOfTurn);
+
         //hand.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 20)); // for scroll
 		hand.setBorder(emptyBorder);
 		HandContainer handContainer = new HandContainer(hand);
@@ -705,6 +769,7 @@ public class GamePanel extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(handContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
                     .addComponent(pnlBattlefield, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
+					.addComponent(jPhases, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
 				))
         );
         jPanel3Layout.setVerticalGroup(
@@ -712,7 +777,8 @@ public class GamePanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addComponent(pnlBattlefield, javax.swing.GroupLayout.DEFAULT_SIZE, 794, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(handContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(handContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+				.addComponent(jPhases, GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(pnlGameInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -842,4 +908,18 @@ public class GamePanel extends javax.swing.JPanel {
 
 	private JTabbedPane jTabbedPane1;
 	private Border emptyBorder = new EmptyBorder(0,0,0,0);
+	private Color prevBGColor;
+	private final static Color DEFAULT_FOREGROUND_COLOR = Color.BLACK;
+	private JPanel jPhases;
+
+	private JButton untap;
+	private JButton upkeep;
+	private JButton draw;
+	private JButton main1;
+	private JButton attack;
+	private JButton block;
+	private JButton combatButton;
+	private JButton main2;
+	private JButton endOfTurn;
+	private JButton prevStep;
 }
