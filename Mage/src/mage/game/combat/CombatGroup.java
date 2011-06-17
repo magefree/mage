@@ -30,6 +30,7 @@ package mage.game.combat;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.abilities.keyword.DeathtouchAbility;
 
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -203,7 +204,11 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 			Map<UUID, Integer> assigned = new HashMap<UUID, Integer>();
 			for (UUID blockerId: blockerOrder) {
 				Permanent blocker = game.getPermanent(blockerId);
-				int lethalDamage = blocker.getToughness().getValue() - blocker.getDamage();
+				int lethalDamage;
+				if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId()))
+					lethalDamage = 1;
+				else
+					lethalDamage = blocker.getToughness().getValue() - blocker.getDamage();
 				if (lethalDamage >= damage) {
 					// Issue#73
 					//blocker.damage(damage, attacker.getId(), game, true, true);
