@@ -115,7 +115,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 			public void mousePressed(MouseEvent e) {
 				if (e.getClickCount() == 2 && !e.isConsumed()) {
 					e.consume();
-					//TODO: jButtonAddToMainActionPerformed(null);
+					jButtonAddToMainActionPerformed(null);
 				}
 			}
 		});
@@ -210,6 +210,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 	}
 
 	public void removeCard(UUID cardId) {
+		this.mainModel.removeCard(cardId);
 		this.cardGrid.removeCard(cardId);
 		for (Card card: cards) {
 			if (card.getId().equals(cardId)) {

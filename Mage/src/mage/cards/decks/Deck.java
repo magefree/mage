@@ -105,30 +105,11 @@ public class Deck implements Serializable {
 		return cards;
 	}
 
-//	/**
-//	 * @param cards the cards to set
-//	 */
-//	public void setCards(List<Card> cards) {
-//		this.cards = cards;
-//	}
-
 	/**
 	 * @return the sideboard
 	 */
 	public Set<Card> getSideboard() {
 		return sideboard;
 	}
-
-//	/**
-//	 * @param sideboard the sideboard to set
-//	 */
-//	public void setSideboard(Cards sideboard) {
-//		this.sideboard = sideboard;
-//	}
-
-//	public void setOwnerId(UUID playerId) {
-//		cards.setOwner(playerId);
-//		sideboard.setOwner(playerId);
-//	}
 	
 }
