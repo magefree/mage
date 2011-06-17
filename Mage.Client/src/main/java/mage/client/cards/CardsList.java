@@ -151,6 +151,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 	}
 
 	private void redrawCards() {
+		if (cards == null) cards = new CardsView();
 	   	currentView.loadCards(cards, null, false, bigCard, gameId);
 	}
 
@@ -235,7 +236,8 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 				}
 			}
 		}
-		this.lblCount.setText("Count: " + Integer.toString(cards.size()));
+		int count = cards != null ? cards.size() : 0;
+		this.lblCount.setText("Count: " + Integer.toString(count));
 		this.lblCreatureCount.setText("Creatures: " + Integer.toString(creatureCount));
 		this.lblLandCount.setText("Lands: " + Integer.toString(landCount));
 		cardArea.setPreferredSize(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 200));
@@ -302,16 +304,16 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         chkPiles = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        setPreferredSize((!Beans.isDesignTime())?(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight)):(new Dimension(100, 100)));
+        setPreferredSize((!Beans.isDesignTime()) ? (new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight)) : (new Dimension(100, 100)));
 
         jScrollPane1.setViewportView(cardArea);
 
-        cbSortBy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbSortBy.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
         cbSortBy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbSortByActionPerformed(evt);
-            }
-        });
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				cbSortByActionPerformed(evt);
+			}
+		});
 
         lblCount.setText("Card Count");
 
@@ -337,17 +339,17 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         jToggleCardView.setOpaque(true);
         jToggleCardView.setPreferredSize(new java.awt.Dimension(77, 21));
         jToggleCardView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleCardViewActionPerformed(evt);
-            }
-        });
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jToggleCardViewActionPerformed(evt);
+			}
+		});
 
         chkPiles.setText("Piles");
         chkPiles.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkPilesActionPerformed(evt);
-            }
-        });
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				chkPilesActionPerformed(evt);
+			}
+		});
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
