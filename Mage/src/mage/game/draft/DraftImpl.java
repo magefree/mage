@@ -64,10 +64,11 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
 	protected transient TableEventSource tableEventSource = new TableEventSource();
 	protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
 
-	public DraftImpl(DraftOptions options) {
+	public DraftImpl(DraftOptions options, List<ExpansionSet> sets) {
 		id = UUID.randomUUID();
 		this.setCodes = options.getSetCodes();
 		this.timing = options.getTiming();
+		this.sets = sets;
 	}
 
 	@Override

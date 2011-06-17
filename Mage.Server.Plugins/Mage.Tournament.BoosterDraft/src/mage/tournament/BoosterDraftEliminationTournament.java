@@ -54,7 +54,7 @@ public class BoosterDraftEliminationTournament extends TournamentSingleEliminati
 	}
 
 	protected void draft() {
-		Draft draft = new BoosterDraft((DraftOptions) options.getLimitedOptions());
+		Draft draft = new BoosterDraft((DraftOptions) options.getLimitedOptions(), getSets());
 		for (TournamentPlayer player: players.values()) {
 			draft.addPlayer(player.getPlayer());
 		}
