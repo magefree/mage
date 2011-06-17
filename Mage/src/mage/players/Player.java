@@ -158,6 +158,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public abstract TriggeredAbility chooseTriggeredAbility(TriggeredAbilities abilities, Game game);
 	public abstract void selectAttackers(Game game);
 	public abstract void selectBlockers(Game game);
+	public abstract UUID chooseBlockerOrder(Cards blockers, Game game);
 	public abstract void assignDamage(int damage, List<UUID> targets, UUID sourceId, Game game);
 	public abstract int getAmount(int min, int max, String message, Game game);
 	public abstract void sideboard(Match match, Deck deck);

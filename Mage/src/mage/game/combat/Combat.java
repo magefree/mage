@@ -61,7 +61,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 
 	protected List<CombatGroup> groups = new ArrayList<CombatGroup>();
 	protected Set<UUID> defenders = new HashSet<UUID>();
-	protected UUID attackerId;
+	protected UUID attackerId; //the player that is attacking
 
 	public Combat() {}
 
@@ -346,7 +346,9 @@ public class Combat implements Serializable, Copyable<Combat> {
 	}
 
 	public void damageAssignmentOrder(Game game) {
-		//TODO:  set damage assignment order
+		for (CombatGroup group: groups) {
+			group.pickBlockerOrder(attackerId, game);
+		}
 	}
 
 	@Override

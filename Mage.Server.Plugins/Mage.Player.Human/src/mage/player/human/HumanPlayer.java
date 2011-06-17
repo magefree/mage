@@ -458,6 +458,21 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 		}
 	}
 
+	@Override
+	public UUID chooseBlockerOrder(Cards blockers, Game game) {
+		while (!abort) {
+			game.fireSelectTargetEvent(playerId, "Pick blocker", blockers, true);
+			waitForResponse();
+			if (response.getUUID() != null) {
+				for (Card card: blockers.getCards(game)) {
+					if (card.getId().equals(response.getUUID()))
+						return card.getId();
+				}
+			}
+		}
+		return null;
+	}
+
 	protected void selectCombatGroup(UUID blockerId, Game game) {
 		TargetAttackingCreature target = new TargetAttackingCreature();
 		game.fireSelectTargetEvent(playerId, "Select attacker to block", target.possibleTargets(null, playerId, game), target.isRequired(), null);

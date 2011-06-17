@@ -881,6 +881,12 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	@Override
+	public UUID chooseBlockerOrder(Cards blockers, Game game) {
+		//TODO: improve this
+		return blockers.iterator().next();
+	}
+		
+	@Override
 	protected List<Permanent> getAvailableManaProducers(Game game) {
 //		logger.debug("getAvailableManaProducers");
 		return super.getAvailableManaProducers(game);

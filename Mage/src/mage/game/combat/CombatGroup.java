@@ -34,6 +34,8 @@ import java.util.*;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -271,6 +273,29 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 		}
 	}
 
+	public void pickBlockerOrder(UUID playerId, Game game) {
+		if (blockers.isEmpty())
+			return;
+		Player player = game.getPlayer(playerId);
+		List<UUID> blockerList = new ArrayList<UUID>(blockers);
+		blockerOrder.clear();
+		while (true) {
+			if (blockerList.size() == 1) {
+				blockerOrder.add(blockerList.get(0));
+				break;
+			}
+			else {
+				Cards blockerCards = new CardsImpl();
+				for (UUID blockerId: blockerList) {
+					blockerCards.add(game.getCard(blockerId));
+				}
+				UUID blockerId = player.chooseBlockerOrder(blockerCards, game);
+				blockerOrder.add(blockerId);
+				blockerList.remove(blockerId);
+			}
+		}
+	}
+	
 	public int totalAttackerDamage(Game game) {
 		int total = 0;
 		for (UUID attackerId: attackers) {
