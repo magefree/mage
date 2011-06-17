@@ -101,7 +101,7 @@ public class TablesPanel extends javax.swing.JPanel {
 				int modelRow = Integer.valueOf( e.getActionCommand() );
 				UUID tableId = (UUID)tableModel.getValueAt(modelRow, 9);
 				UUID gameId = (UUID)tableModel.getValueAt(modelRow, 8);
-				String state = (String)tableModel.getValueAt(modelRow, 5);
+				String state = (String)tableModel.getValueAt(modelRow, 6);
 				boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, 7);
 				String owner = (String)tableModel.getValueAt(modelRow, 1);
 
