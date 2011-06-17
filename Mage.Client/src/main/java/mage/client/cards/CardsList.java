@@ -34,8 +34,21 @@
 
 package mage.client.cards;
 
-import java.awt.Dimension;
-import java.awt.Rectangle;
+import mage.Constants.CardType;
+import mage.cards.MageCard;
+import mage.client.constants.Constants;
+import mage.client.constants.Constants.SortBy;
+import mage.client.deckeditor.table.TableModel;
+import mage.client.plugins.impl.Plugins;
+import mage.client.util.*;
+import mage.client.util.Event;
+import mage.view.CardView;
+import mage.view.CardsView;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.beans.Beans;
@@ -43,27 +56,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
-import javax.swing.DefaultComboBoxModel;
-import mage.Constants.CardType;
-
-import mage.cards.MageCard;
-import mage.client.constants.Constants.SortBy;
-import mage.client.plugins.impl.Plugins;
-import mage.client.util.CardViewColorComparator;
-import mage.client.util.CardViewCostComparator;
-import mage.client.util.CardViewNameComparator;
-import mage.client.util.CardViewRarityComparator;
-import mage.client.util.Config;
-import mage.client.util.Event;
-import mage.client.util.Listener;
-import mage.view.CardView;
-import mage.view.CardsView;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CardsList extends javax.swing.JPanel implements MouseListener {
+public class CardsList extends javax.swing.JPanel implements MouseListener, ICardGrid {
 
 	protected CardEventSource cardEventSource = new CardEventSource();
     private Dimension cardDimension;
@@ -71,24 +69,82 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
 	protected BigCard bigCard;
 	protected UUID gameId;
 
+	private TableModel mainModel;
+	private JTable mainTable;
+	private ICardGrid currentView;
+
     /** Creates new form Cards */
     public CardsList() {
         initComponents();
-        jScrollPane1.setOpaque(false);
+        makeTransparent();
+		//initListViewComponents();
+		//currentView = mainModel; // by default we have List (table) view
+		currentView = this;
+    }
+
+	public void makeTransparent() {
+		jScrollPane1.setOpaque(false);
         cardArea.setOpaque(false);
         jScrollPane1.getViewport().setOpaque(false);
 		cbSortBy.setModel(new DefaultComboBoxModel(SortBy.values()));
+	}
+
+	public void initListViewComponents() {
+		mainTable = new JTable();
+
+		mainModel = new TableModel();
+		mainModel.addListeners(mainTable);
+
+        mainTable.setModel(mainModel);
+		mainTable.setForeground(Color.white);
+		DefaultTableCellRenderer myRenderer = (DefaultTableCellRenderer) mainTable.getDefaultRenderer(String.class);
+		myRenderer.setBackground(new Color(0, 0, 0, 100));
+		mainTable.getColumnModel().getColumn(0).setMaxWidth(0);
+		mainTable.getColumnModel().getColumn(0).setPreferredWidth(10);
+		mainTable.getColumnModel().getColumn(1).setPreferredWidth(110);
+		mainTable.getColumnModel().getColumn(2).setPreferredWidth(90);
+		mainTable.getColumnModel().getColumn(3).setPreferredWidth(50);
+		mainTable.getColumnModel().getColumn(4).setPreferredWidth(170);
+		mainTable.getColumnModel().getColumn(5).setPreferredWidth(30);
+		mainTable.getColumnModel().getColumn(6).setPreferredWidth(15);
+		mainTable.getColumnModel().getColumn(7).setPreferredWidth(15);
+
+		//jScrollPane1.setViewportView(mainTable);
+
+		mainTable.setOpaque(false);
+
+		//cbSortBy.setEnabled(false);
+	    //chkPiles.setEnabled(false);
+
+		mainTable.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.getClickCount() == 2 && !e.isConsumed()) {
+					e.consume();
+					if (mainTable.getSelectedRowCount() > 0) {
+						int[] n = mainTable.getSelectedRows();
+						List<Integer> indexes = asList(n);
+						Collections.reverse(indexes);
+						for (Integer index : indexes) {
+							mainModel.doubleClick(index);
+						}
+					}
+				}
+			}
+		});
+	}
+
+	public List<Integer> asList(final int[] is) {
+        List<Integer> list = new ArrayList<Integer>();
+		for (int i : is) list.add(i);
+		return list;
     }
 
 	public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
-		//FIXME: why we remove all cards? for performance it's better to merge changes
-		cards = showCards;
-		this.bigCard = bigCard;
-		this.gameId = gameId;
-		drawCards((SortBy) cbSortBy.getSelectedItem());
+		currentView.loadCards(showCards, null, false, bigCard, gameId);
+		//loadCards(showCards, null, false, bigCard, gameId);
 	}
 
-	private void drawCards(SortBy sortBy) {
+	public void drawCards(SortBy sortBy, boolean piles) {
 		int maxWidth = this.getParent().getWidth();
 		int numColumns = maxWidth / Config.dimensions.frameWidth;
 		int curColumn = 0;
@@ -194,6 +250,20 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
 	
 	public void addCardEventListener(Listener<Event> listener) {
 		cardEventSource.addListener(listener);
+		//mainModel.addCardEventListener(listener);
+	}
+
+	public void drawCards(SortBy sortBy) {
+		drawCards(sortBy, false);
+	}
+
+	@Override
+	public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId) {
+		//FIXME: why we remove all cards? for performance it's better to merge changes
+		cards = showCards;
+		this.bigCard = bigCard;
+		this.gameId = gameId;
+		drawCards((SortBy) cbSortBy.getSelectedItem());
 	}
 
 	public void clearCardEventListeners() {
@@ -292,8 +362,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener {
 		drawCards((SortBy) cbSortBy.getSelectedItem());
 	}//GEN-LAST:event_chkPilesActionPerformed
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+	// Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane cardArea;
     private javax.swing.JComboBox cbSortBy;
     private javax.swing.JCheckBox chkPiles;
