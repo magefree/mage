@@ -72,7 +72,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         initComponents();
 		makeTransparent();
 		initListViewComponents();
-		currentView = mainModel; // by default we have List (table) view
+		currentView = mainModel; // by default we use List View
     }
 
 	public void makeTransparent() {
