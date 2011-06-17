@@ -77,8 +77,6 @@ public class Session {
 	private CallbackClientDaemon callbackDaemon;
 	private ScheduledFuture<?> future;
 	private Connection connection;
-	private boolean reconnecting = false;
-	private boolean connecting = false;
 
 	/**
 	 * For locking session object.
@@ -94,7 +92,6 @@ public class Session {
 	}
 	
 	public synchronized boolean connect(Connection connection) {
-		this.connecting = true;
 		if (isConnected()) {
 			disconnect(true);
 		}
@@ -103,6 +100,7 @@ public class Session {
 	}
 
 	public boolean connect() {
+		sessionState = SessionState.CONNECTING;
 		try {
 			System.setSecurityManager(null);
 			System.setProperty("http.nonProxyHosts", "code.google.com");
@@ -130,25 +128,20 @@ public class Session {
 			this.userName = connection.getUsername();
 			sessionId = server.registerClient(userName, client.getId(), client.getVersion());
 			callbackDaemon = new CallbackClientDaemon(sessionId, client, server);
+			sessionState = SessionState.CONNECTED;
 			serverState = server.getServerState();
 			future = sessionExecutor.scheduleWithFixedDelay(new ServerPinger(), 5, 5, TimeUnit.SECONDS);
 			logger.info("Connected to RMI server at " + connection.getHost() + ":" + connection.getPort());
 			client.connected("Connected to " + connection.getHost() + ":" + connection.getPort() + " ");
-			reconnecting = false;
-			connecting = false;
 			return true;
 		} catch (MageException ex) {
 			logger.fatal("", ex);
-			if (!reconnecting) {
-				disconnect(false);
-				client.showMessage("Unable to connect to server. "  + ex.getMessage());
-			}
+			disconnect(false);
+			client.showMessage("Unable to connect to server. "  + ex.getMessage());
 		} catch (RemoteException ex) {
 			logger.fatal("Unable to connect to server - ", ex);
-			if (!reconnecting) {
-				disconnect(false);
-				client.showMessage("Unable to connect to server. "  + ex.getMessage());
-			}
+			disconnect(false);
+			client.showMessage("Unable to connect to server. "  + ex.getMessage());
 		} catch (NotBoundException ex) {
 			logger.fatal("Unable to connect to server - ", ex);
 		}
@@ -158,9 +151,11 @@ public class Session {
 	public synchronized void disconnect(boolean showMessage) {
 		if (sessionState == SessionState.CONNECTED)
 			sessionState = SessionState.DISCONNECTING;
-		if (connection == null)
+		if (future != null && !future.isDone())
+			future.cancel(true);
+		if (connection == null || server == null)
 			return;
-		if (sessionState == SessionState.CONNECTED) {
+		if (sessionState == SessionState.DISCONNECTING) {
 			try {
 				server.deregisterClient(sessionId);
 			} catch (Exception ex) {
@@ -728,6 +723,7 @@ public class Session {
 
 	private void handleRemoteException(RemoteException ex) {
 		logger.fatal("Communication error", ex);
+		sessionState = SessionState.SERVER_UNAVAILABLE;
 		disconnect(false);
 	}
 

@@ -200,7 +200,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 		Permanent attacker = game.getPermanent(attackers.get(0));
 		Player player = game.getPlayer(attacker.getControllerId());
 		int damage = attacker.getPower().getValue();
-		if (attacker != null && canDamage(attacker, first)) {
+		if (attacker == null)
+			return;
+		if (canDamage(attacker, first)) {
 			Map<UUID, Integer> assigned = new HashMap<UUID, Integer>();
 			for (UUID blockerId: blockerOrder) {
 				Permanent blocker = game.getPermanent(blockerId);
@@ -235,6 +237,14 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 			for (Map.Entry<UUID, Integer> entry : assigned.entrySet()) {
 				Permanent blocker = game.getPermanent(entry.getKey());
 				blocker.damage(entry.getValue(), attacker.getId(), game, true, true);
+			}
+		}
+		else {
+			for (UUID blockerId: blockerOrder) {
+				Permanent blocker = game.getPermanent(blockerId);
+				if (canDamage(blocker, first)) {
+					attacker.damage(blocker.getPower().getValue(), blocker.getId(), game, true, true);
+				}
 			}
 		}
 	}
