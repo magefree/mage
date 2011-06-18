@@ -519,6 +519,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 					state.getPlayerList().getNext();
 				}
 			}
+		} catch (Exception ex) {
+			logger.fatal("Game exception ", ex);
+			this.fireErrorEvent("Game exception occurred: " + ex.getMessage() + " - " + ex.getStackTrace()[0]);
 		} finally {
 			resetLKI();
 		}
@@ -833,6 +836,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		tableEventSource.fireTableEvent(EventType.UPDATE, null, this);
 	}
 	
+	@Override
+	public void fireErrorEvent(String message) {
+		tableEventSource.fireTableEvent(EventType.ERROR, message, this);
+	}
+
 	@Override
 	public Players getPlayers() {
 		return state.getPlayers();

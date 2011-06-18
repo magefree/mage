@@ -95,6 +95,15 @@ public class GameWatcher {
 		}
 	}
 
+	public void gameError(final String message) {
+		if (!killed) {
+			Session session = SessionManager.getInstance().getSession(sessionId);
+			if (session != null) {
+				session.fireCallback(new ClientCallback("gameError", gameId, message));
+			}
+		}
+	}
+	
 	protected void handleRemoteException(RemoteException ex) {
 		logger.fatal("GameWatcher error", ex);
 		GameManager.getInstance().kill(gameId, sessionId);

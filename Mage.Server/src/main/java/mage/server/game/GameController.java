@@ -117,6 +117,9 @@ public class GameController implements GameCallback {
 							case REVEAL:
 								revealCards(event.getMessage(), event.getCards());
 								break;
+							case ERROR:
+								error(event.getMessage());
+								break;
 						}
 					} catch (MageException ex) {
 						logger.fatal("Table event listener error ", ex);
@@ -413,6 +416,12 @@ public class GameController implements GameCallback {
 		}
 		for (final GameWatcher watcher: watchers.values()) {
 			watcher.inform(message, getGameView());
+		}
+	}
+
+	private void error(String message) {
+		for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
+			entry.getValue().gameError(message);
 		}
 	}
 

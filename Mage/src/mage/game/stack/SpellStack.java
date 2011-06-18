@@ -58,9 +58,14 @@ public class SpellStack extends Stack<StackObject> {
 
 	//resolve top StackObject
 	public void resolve(Game game) {
-		StackObject top = this.peek();
-		top.resolve(game);
-		this.remove(top);
+		StackObject top = null;
+		try {
+			top = this.peek();
+			top.resolve(game);
+		} finally {
+			if (top != null)
+				this.remove(top);
+		}
 	}
 
 	public void checkTriggers(GameEvent event, Game game) {

@@ -141,6 +141,12 @@ public class CallbackClientImpl implements CallbackClient {
 							panel.hideGame();
 						}
 					}
+					else if (callback.getMethod().equals("gameError")) {
+						GamePanel panel = frame.getGame(callback.getObjectId());
+						if (panel != null) {
+							panel.modalMessage((String) callback.getData());
+						}
+					}
 					else if (callback.getMethod().equals("gameAsk")) {
 						GameClientMessage message = (GameClientMessage) callback.getData();
 						GamePanel panel = frame.getGame(callback.getObjectId());
