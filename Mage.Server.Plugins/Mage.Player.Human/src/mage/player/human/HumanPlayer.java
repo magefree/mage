@@ -459,14 +459,14 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	}
 
 	@Override
-	public UUID chooseBlockerOrder(Cards blockers, Game game) {
+	public UUID chooseBlockerOrder(List<Permanent> blockers, Game game) {
 		while (!abort) {
 			game.fireSelectTargetEvent(playerId, "Pick blocker", blockers, true);
 			waitForResponse();
 			if (response.getUUID() != null) {
-				for (Card card: blockers.getCards(game)) {
-					if (card.getId().equals(response.getUUID()))
-						return card.getId();
+				for (Permanent perm: blockers) {
+					if (perm.getId().equals(response.getUUID()))
+						return perm.getId();
 				}
 			}
 		}

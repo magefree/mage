@@ -800,10 +800,10 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		playerQueryEventSource.target(playerId, message, abilities, required);
 	}
 
-//	@Override
-//	public void fireRevealCardsEvent(String message, Cards cards) {
-//		tableEventSource.fireTableEvent(EventType.REVEAL, message, cards, this);
-//	}
+	@Override
+	public void fireSelectTargetEvent(UUID playerId, String message, List<Permanent> perms, boolean required) {
+		playerQueryEventSource.target(playerId, message, perms, required);
+	}
 
 	@Override
 	public void fireLookAtCardsEvent(UUID playerId, String message, Cards cards) {

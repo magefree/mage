@@ -300,11 +300,11 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 				break;
 			}
 			else {
-				Cards blockerCards = new CardsImpl();
+				List<Permanent> blockerPerms = new ArrayList<Permanent>();
 				for (UUID blockerId: blockerList) {
-					blockerCards.add(game.getCard(blockerId));
+					blockerPerms.add(game.getPermanent(blockerId));
 				}
-				UUID blockerId = player.chooseBlockerOrder(blockerCards, game);
+				UUID blockerId = player.chooseBlockerOrder(blockerPerms, game);
 				blockerOrder.add(blockerId);
 				blockerList.remove(blockerId);
 			}

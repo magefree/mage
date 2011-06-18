@@ -61,6 +61,7 @@ import mage.game.GameException;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.server.ChatManager;
 import mage.server.util.ThreadExecutor;
@@ -138,7 +139,7 @@ public class GameController implements GameCallback {
 								ask(event.getPlayerId(), event.getMessage());
 								break;
 							case PICK_TARGET:
-								target(event.getPlayerId(), event.getMessage(), event.getCards(), event.getTargets(), event.isRequired(), event.getOptions());
+								target(event.getPlayerId(), event.getMessage(), event.getCards(), event.getPerms(), event.getTargets(), event.isRequired(), event.getOptions());
 								break;
 							case PICK_ABILITY:
 								target(event.getPlayerId(), event.getMessage(), event.getAbilities(), event.isRequired(), event.getOptions());
@@ -356,10 +357,17 @@ public class GameController implements GameCallback {
 		informOthers(playerId);
 	}
 
-	private synchronized void target(UUID playerId, String question, Cards cards, Set<UUID> targets, boolean required, Map<String, Serializable> options) throws MageException {
+	private synchronized void target(UUID playerId, String question, Cards cards, List<Permanent> perms, Set<UUID> targets, boolean required, Map<String, Serializable> options) throws MageException {
 		if (gameSessions.containsKey(playerId)) {
 			if (cards != null)
 				gameSessions.get(playerId).target(question, new CardsView(cards.getCards(game)), targets, required, getGameView(playerId), options);
+			else if (perms != null) {
+				CardsView permsView = new CardsView();
+				for (Permanent perm: perms) {
+					permsView.put(perm.getId(), new PermanentView(perm, game.getCard(perm.getId())));
+				}
+				gameSessions.get(playerId).target(question, permsView, targets, required, getGameView(playerId), options);
+			}
 			else
 				gameSessions.get(playerId).target(question, new CardsView(), targets, required, getGameView(playerId), options);
 		}

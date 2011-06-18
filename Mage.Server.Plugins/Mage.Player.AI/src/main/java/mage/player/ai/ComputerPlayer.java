@@ -881,9 +881,9 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	@Override
-	public UUID chooseBlockerOrder(Cards blockers, Game game) {
+	public UUID chooseBlockerOrder(List<Permanent> blockers, Game game) {
 		//TODO: improve this
-		return blockers.iterator().next();
+		return blockers.iterator().next().getId();
 	}
 		
 	@Override

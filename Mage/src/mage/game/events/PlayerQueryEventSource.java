@@ -36,6 +36,7 @@ import mage.abilities.TriggeredAbilities;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -80,6 +81,10 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
 
 	public void target(UUID playerId, String message, TriggeredAbilities abilities, boolean required) {
 		dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, abilities, required));
+	}
+
+	public void target(UUID playerId, String message, List<Permanent> perms, boolean required) {
+		dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, perms, required));
 	}
 
 	public void playMana(UUID playerId, String message) {

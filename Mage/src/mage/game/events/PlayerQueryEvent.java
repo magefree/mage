@@ -37,6 +37,7 @@ import mage.abilities.TriggeredAbilities;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -50,6 +51,7 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 
 	private String message;
 	private Collection<? extends Ability> abilities;
+	private List<Permanent> perms;
 	private Set<String> choices;
 	private Set<UUID> targets;
 	private Cards cards;
@@ -99,6 +101,15 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 		this.max = time;
 	}
 
+	private PlayerQueryEvent(UUID playerId, String message, QueryType queryType, List<Permanent> perms, boolean required) {
+		super(playerId);
+		this.queryType = queryType;
+		this.message = message;
+		this.playerId = playerId;
+		this.perms = perms;
+		this.required = required;
+	}
+
 	public static PlayerQueryEvent askEvent(UUID playerId, String message) {
 		return new PlayerQueryEvent(playerId, message, null, null, null, null, QueryType.ASK, 0, 0, false);
 	}
@@ -124,6 +135,10 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 
 	public static PlayerQueryEvent targetEvent(UUID playerId, String message, TriggeredAbilities abilities, boolean required) {
 		return new PlayerQueryEvent(playerId, message, abilities, null, null, null, QueryType.PICK_ABILITY, 0, 0, required);
+	}
+
+	public static PlayerQueryEvent targetEvent(UUID playerId, String message, List<Permanent> perms, boolean required) {
+		return new PlayerQueryEvent(playerId, message, QueryType.PICK_TARGET, perms, required);
 	}
 
 	public static PlayerQueryEvent selectEvent(UUID playerId, String message) {
@@ -187,6 +202,10 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 		return cards;
 	}
 
+	public List<Permanent> getPerms() {
+		return perms;
+	}
+	
 	public List<Card> getBooster() {
 		return booster;
 	}
