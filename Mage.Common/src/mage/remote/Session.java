@@ -162,14 +162,14 @@ public class Session {
 					logger.fatal("Error disconnecting ...", ex);
 			}
 		}
-		client.disconnected();
-		logger.info("Disconnected ... ");
-		if (sessionState == SessionState.SERVER_UNAVAILABLE && showMessage) {
-			client.showError("Server error.  You have been disconnected");
-		}
-		else {
+		server = null;
+		if (sessionState == SessionState.DISCONNECTING) {
 			sessionState = SessionState.DISCONNECTED;
+			logger.info("Disconnected ... ");
 		}
+		client.disconnected();
+		if (showMessage)
+			client.showError("Server error.  You have been disconnected");
 	}
 
 	public boolean ping() {
@@ -211,7 +211,8 @@ public class Session {
 
 	public UUID getMainRoomId() {
 		try {
-			return server.getMainRoomId();
+			if (sessionState == SessionState.CONNECTED)
+				return server.getMainRoomId();
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -222,7 +223,8 @@ public class Session {
 
 	public UUID getRoomChatId(UUID roomId) {
 		try {
-			return server.getRoomChatId(roomId);
+			if (sessionState == SessionState.CONNECTED)
+				return server.getRoomChatId(roomId);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -233,7 +235,8 @@ public class Session {
 
 	public UUID getTableChatId(UUID tableId) {
 		try {
-			return server.getTableChatId(tableId);
+			if (sessionState == SessionState.CONNECTED)
+				return server.getTableChatId(tableId);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -244,7 +247,8 @@ public class Session {
 
 	public UUID getGameChatId(UUID gameId) {
 		try {
-			return server.getGameChatId(gameId);
+			if (sessionState == SessionState.CONNECTED)
+				return server.getGameChatId(gameId);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -255,7 +259,8 @@ public class Session {
 
 	public TableView getTable(UUID roomId, UUID tableId) {
 		try {
-			return server.getTable(roomId, tableId);
+			if (sessionState == SessionState.CONNECTED)
+				return server.getTable(roomId, tableId);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -266,8 +271,10 @@ public class Session {
 
 	public boolean watchTable(UUID roomId, UUID tableId) {
 		try {
-			server.watchTable(sessionId, roomId, tableId);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.watchTable(sessionId, roomId, tableId);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -278,7 +285,8 @@ public class Session {
 
 	public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList) {
 		try {
-			return server.joinTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList);
+			if (sessionState == SessionState.CONNECTED)
+				return server.joinTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (GameException ex) {
@@ -291,7 +299,8 @@ public class Session {
 
 	public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill) {
 		try {
-			return server.joinTournamentTable(sessionId, roomId, tableId, playerName, playerType, skill);
+			if (sessionState == SessionState.CONNECTED)
+				return server.joinTournamentTable(sessionId, roomId, tableId, playerName, playerType, skill);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (GameException ex) {
@@ -305,8 +314,8 @@ public class Session {
 	public Collection<TableView> getTables(UUID roomId) throws MageRemoteException {
 		lock.readLock().lock();
 		try {
-			if (server == null) return null;
-			return server.getTables(roomId);
+			if (sessionState == SessionState.CONNECTED)
+				return server.getTables(roomId);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 			throw new MageRemoteException();
@@ -316,12 +325,14 @@ public class Session {
 		} finally {
 			lock.readLock().unlock();
 		}
+		return null;
 	}
 
 	public Collection<String> getConnectedPlayers(UUID roomId) throws MageRemoteException {
 		lock.readLock().lock();
 		try {
-			return server.getConnectedPlayers(roomId);
+			if (sessionState == SessionState.CONNECTED)
+				return server.getConnectedPlayers(roomId);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 			throw new MageRemoteException();
@@ -331,11 +342,13 @@ public class Session {
 		} finally {
 			lock.readLock().unlock();
 		}
+		return null;
 	}
 
 	public TournamentView getTournament(UUID tournamentId) throws MageRemoteException {
 		try {
-			return server.getTournament(tournamentId);
+			if (sessionState == SessionState.CONNECTED)
+				return server.getTournament(tournamentId);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 			throw new MageRemoteException();
@@ -343,11 +356,13 @@ public class Session {
 			handleMageException(ex);
 			throw new MageRemoteException();
 		}
+		return null;
 	}
 
 	public UUID getTournamentChatId(UUID tournamentId) {
 		try {
-			return server.getTournamentChatId(tournamentId);
+			if (sessionState == SessionState.CONNECTED)
+				return server.getTournamentChatId(tournamentId);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -358,8 +373,10 @@ public class Session {
 
 	public boolean sendPlayerUUID(UUID gameId, UUID data) {
 		try {
-			server.sendPlayerUUID(gameId, sessionId, data);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.sendPlayerUUID(gameId, sessionId, data);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -370,8 +387,10 @@ public class Session {
 
 	public boolean sendPlayerBoolean(UUID gameId, boolean data) {
 		try {
-			server.sendPlayerBoolean(gameId, sessionId, data);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.sendPlayerBoolean(gameId, sessionId, data);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -382,8 +401,10 @@ public class Session {
 
 	public boolean sendPlayerInteger(UUID gameId, int data) {
 		try {
-			server.sendPlayerInteger(gameId, sessionId, data);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.sendPlayerInteger(gameId, sessionId, data);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -394,8 +415,10 @@ public class Session {
 
 	public boolean sendPlayerString(UUID gameId, String data) {
 		try {
-			server.sendPlayerString(gameId, sessionId, data);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.sendPlayerString(gameId, sessionId, data);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -406,7 +429,8 @@ public class Session {
 
 	public DraftPickView sendCardPick(UUID draftId, UUID cardId) {
 		try {
-			return server.sendCardPick(draftId, sessionId, cardId);
+			if (sessionState == SessionState.CONNECTED)
+				return server.sendCardPick(draftId, sessionId, cardId);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -417,8 +441,10 @@ public class Session {
 
 	public boolean joinChat(UUID chatId) {
 		try {
-			server.joinChat(chatId, sessionId, userName);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.joinChat(chatId, sessionId, userName);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -430,9 +456,10 @@ public class Session {
 	public boolean leaveChat(UUID chatId) {
 		lock.readLock().lock();
 		try {
-			if (server == null) return false;
-			server.leaveChat(chatId, sessionId);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.leaveChat(chatId, sessionId);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -446,9 +473,10 @@ public class Session {
 	public boolean sendChatMessage(UUID chatId, String message) {
 		lock.readLock().lock();
 		try {
-			if (server == null) return false;
-			server.sendChatMessage(chatId, userName, message);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.sendChatMessage(chatId, userName, message);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -461,8 +489,10 @@ public class Session {
 
 	public boolean joinGame(UUID gameId) {
 		try {
-			server.joinGame(gameId, sessionId);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.joinGame(gameId, sessionId);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -473,8 +503,10 @@ public class Session {
 
 	public boolean joinDraft(UUID draftId) {
 		try {
-			server.joinDraft(draftId, sessionId);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.joinDraft(draftId, sessionId);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -485,8 +517,10 @@ public class Session {
 
 	public boolean joinTournament(UUID tournamentId) {
 		try {
-			server.joinTournament(tournamentId, sessionId);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.joinTournament(tournamentId, sessionId);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -497,8 +531,10 @@ public class Session {
 
 	public boolean watchGame(UUID gameId) {
 		try {
-			server.watchGame(gameId, sessionId);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.watchGame(gameId, sessionId);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -509,8 +545,10 @@ public class Session {
 
 	public boolean replayGame(UUID gameId) {
 		try {
-			server.replayGame(gameId, sessionId);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.replayGame(gameId, sessionId);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -521,7 +559,8 @@ public class Session {
 
 	public TableView createTable(UUID roomId, MatchOptions matchOptions) {
 		try {
-			return server.createTable(sessionId, roomId, matchOptions);
+			if (sessionState == SessionState.CONNECTED)
+				return server.createTable(sessionId, roomId, matchOptions);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -532,7 +571,8 @@ public class Session {
 
 	public TableView createTournamentTable(UUID roomId, TournamentOptions tournamentOptions) {
 		try {
-			return server.createTournamentTable(sessionId, roomId, tournamentOptions);
+			if (sessionState == SessionState.CONNECTED)
+				return server.createTournamentTable(sessionId, roomId, tournamentOptions);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -543,7 +583,8 @@ public class Session {
 
 	public boolean isTableOwner(UUID roomId, UUID tableId) {
 		try {
-			return server.isTableOwner(sessionId, roomId, tableId);
+			if (sessionState == SessionState.CONNECTED)
+				return server.isTableOwner(sessionId, roomId, tableId);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -554,8 +595,10 @@ public class Session {
 
 	public boolean removeTable(UUID roomId, UUID tableId) {
 		try {
-			server.removeTable(sessionId, roomId, tableId);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.removeTable(sessionId, roomId, tableId);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -566,8 +609,10 @@ public class Session {
 
 	public boolean swapSeats(UUID roomId, UUID tableId, int seatNum1, int seatNum2) {
 		try {
-			server.swapSeats(sessionId, roomId, tableId, seatNum1, seatNum2);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.swapSeats(sessionId, roomId, tableId, seatNum1, seatNum2);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -578,8 +623,10 @@ public class Session {
 
 	public boolean leaveTable(UUID roomId, UUID tableId) {
 		try {
-			server.leaveTable(sessionId, roomId, tableId);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.leaveTable(sessionId, roomId, tableId);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -590,8 +637,10 @@ public class Session {
 
 	public boolean startGame(UUID roomId, UUID tableId) {
 		try {
-			server.startMatch(sessionId, roomId, tableId);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.startMatch(sessionId, roomId, tableId);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -602,8 +651,10 @@ public class Session {
 
 	public boolean startTournament(UUID roomId, UUID tableId) {
 		try {
-			server.startTournament(sessionId, roomId, tableId);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.startTournament(sessionId, roomId, tableId);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -614,8 +665,10 @@ public class Session {
 
 	public boolean startChallenge(UUID roomId, UUID tableId, UUID challengeId) {
 		try {
-			server.startChallenge(sessionId, roomId, tableId, challengeId);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.startChallenge(sessionId, roomId, tableId, challengeId);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -626,7 +679,8 @@ public class Session {
 
 	public boolean submitDeck(UUID tableId, DeckCardLists deck) {
 		try {
-			return server.submitDeck(sessionId, tableId, deck);
+			if (sessionState == SessionState.CONNECTED)
+				return server.submitDeck(sessionId, tableId, deck);
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (GameException ex) {
@@ -639,8 +693,10 @@ public class Session {
 
 	public boolean concedeGame(UUID gameId) {
 		try {
-			server.concedeGame(gameId, sessionId);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.concedeGame(gameId, sessionId);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -651,8 +707,10 @@ public class Session {
 
 	public boolean stopWatching(UUID gameId) {
 		try {
-			server.stopWatching(gameId, sessionId);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.stopWatching(gameId, sessionId);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -663,8 +721,10 @@ public class Session {
 
 	public boolean startReplay(UUID gameId) {
 		try {
-			server.startReplay(gameId, sessionId);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.startReplay(gameId, sessionId);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -675,8 +735,10 @@ public class Session {
 
 	public boolean stopReplay(UUID gameId) {
 		try {
-			server.stopReplay(gameId, sessionId);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.stopReplay(gameId, sessionId);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -687,8 +749,10 @@ public class Session {
 
 	public boolean nextPlay(UUID gameId) {
 		try {
-			server.nextPlay(gameId, sessionId);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.nextPlay(gameId, sessionId);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -699,8 +763,10 @@ public class Session {
 
 	public boolean previousPlay(UUID gameId) {
 		try {
-			server.previousPlay(gameId, sessionId);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.previousPlay(gameId, sessionId);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -711,8 +777,10 @@ public class Session {
 
 	public boolean cheat(UUID gameId, UUID playerId, DeckCardLists deckList) {
 		try {
-			server.cheat(gameId, sessionId, playerId, deckList);
-			return true;
+			if (sessionState == SessionState.CONNECTED) {
+				server.cheat(gameId, sessionId, playerId, deckList);
+				return true;
+			}
 		} catch (RemoteException ex) {
 			handleRemoteException(ex);
 		} catch (MageException ex) {
@@ -724,12 +792,11 @@ public class Session {
 	private void handleRemoteException(RemoteException ex) {
 		logger.fatal("Communication error", ex);
 		sessionState = SessionState.SERVER_UNAVAILABLE;
-		disconnect(false);
+		disconnect(true);
 	}
 
 	private void handleMageException(MageException ex) {
 		logger.fatal("Server error", ex);
-		disconnect(false);
 	}
 
 	private void handleGameException(GameException ex) {
