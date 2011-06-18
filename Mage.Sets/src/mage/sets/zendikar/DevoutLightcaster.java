@@ -35,6 +35,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
@@ -51,6 +52,7 @@ public class DevoutLightcaster extends CardImpl<DevoutLightcaster> {
     static {
         filterProtection.setUseColor(true);
         filterProtection.getColor().setBlack(true);
+		filterProtection.setScopeColor(ComparisonScope.Any);
         filterTarget.setUseColor(true);
         filterTarget.getColor().setBlack(true);
     }

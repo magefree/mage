@@ -32,6 +32,7 @@ import mage.Constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.choices.ChoiceColor;
+import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -48,6 +49,7 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
 		super(new ProtectionAbility(new FilterCard()), duration);
 		protectionFilter = (FilterCard)((ProtectionAbility)ability).getFilter();
 		protectionFilter.setUseColor(true);
+		protectionFilter.setScopeColor(ComparisonScope.Any);
 	}
 
 	public GainProtectionFromColorTargetEffect(final GainProtectionFromColorTargetEffect effect) {

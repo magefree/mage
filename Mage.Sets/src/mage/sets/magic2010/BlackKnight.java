@@ -35,6 +35,7 @@ import mage.MageInt;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 
 /**
@@ -48,6 +49,7 @@ public class BlackKnight extends CardImpl<BlackKnight> {
 	static {
 		filter.setUseColor(true);
 		filter.getColor().setWhite(true);
+		filter.setScopeColor(ComparisonScope.Any);
 	}
 
 	public BlackKnight(UUID ownerId) {

@@ -34,6 +34,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 
 /**
@@ -46,6 +47,7 @@ public class ZombieOutlander extends CardImpl<ZombieOutlander> {
     static {
     	filter.setUseColor(true);
     	filter.getColor().setGreen(true);
+		filter.setScopeColor(ComparisonScope.Any);
     }
 
     public ZombieOutlander(UUID ownerId) {

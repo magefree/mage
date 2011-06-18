@@ -37,6 +37,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CantCounterSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 
 /**
@@ -50,8 +51,10 @@ public class GreatSableStag extends CardImpl<GreatSableStag> {
     static {
         filter1.setUseColor(true);
         filter1.getColor().setBlue(true);
+		filter1.setScopeColor(ComparisonScope.Any);
         filter2.setUseColor(true);
         filter2.getColor().setBlack(true);
+		filter2.setScopeColor(ComparisonScope.Any);
     }
 
 	public GreatSableStag(UUID ownerId) {

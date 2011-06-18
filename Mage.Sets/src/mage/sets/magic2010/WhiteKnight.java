@@ -35,6 +35,7 @@ import mage.MageInt;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 
 /**
@@ -42,6 +43,14 @@ import mage.filter.FilterCard;
  * @author BetaSteward_at_googlemail.com
  */
 public class WhiteKnight extends CardImpl<WhiteKnight> {
+
+	private static final FilterCard filter = new FilterCard("Black");
+
+	static {
+		filter.setUseColor(true);
+		filter.getColor().setBlack(true);
+		filter.setScopeColor(ComparisonScope.Any);
+	}
 
 	public WhiteKnight(UUID ownerId) {
 		super(ownerId, 41, "White Knight", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
@@ -53,9 +62,6 @@ public class WhiteKnight extends CardImpl<WhiteKnight> {
 		this.toughness = new MageInt(2);
 
 		this.addAbility(FirstStrikeAbility.getInstance());
-		FilterCard filter = new FilterCard("Black");
-		filter.setUseColor(true);
-		filter.getColor().setBlack(true);
 		this.addAbility(new ProtectionAbility(filter));
 	}
 

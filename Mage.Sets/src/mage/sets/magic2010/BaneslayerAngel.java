@@ -37,6 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -51,6 +52,8 @@ public class BaneslayerAngel extends CardImpl<BaneslayerAngel> {
     static {
         filter1.getSubtype().add("Demon");
         filter2.getSubtype().add("Dragon");
+		filter1.setScopeSubtype(ComparisonScope.Any);
+		filter2.setScopeSubtype(ComparisonScope.Any);
     }
 
 	public BaneslayerAngel(UUID ownerId) {

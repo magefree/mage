@@ -38,6 +38,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -53,6 +54,7 @@ public class KorFirewalker extends CardImpl<KorFirewalker> {
     static {
         filter.setUseColor(true);
 		filter.getColor().setRed(true);
+		filter.setScopeColor(ComparisonScope.Any);
     }
 
     public KorFirewalker (UUID ownerId) {

@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -68,11 +69,12 @@ public class BraveTheElements extends CardImpl<BraveTheElements> {
 
 class BraveTheElementsEffect extends GainAbilityControlledEffect {
 
-	private static FilterCreaturePermanent filter1 = new FilterCreaturePermanent();
+	private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent();
 
 	static {
 		filter1.setUseColor(true);
 		filter1.getColor().setWhite(true);
+		filter1.setScopeColor(ComparisonScope.Any);
 	}
 
 	FilterCard filter2;
@@ -81,6 +83,7 @@ class BraveTheElementsEffect extends GainAbilityControlledEffect {
 		super(new ProtectionAbility(new FilterCard()), Duration.EndOfTurn, filter1);
 		filter2 = (FilterCard)((ProtectionAbility)ability).getFilter();
 		filter2.setUseColor(true);
+		filter2.setScopeColor(ComparisonScope.Any);
 	}
 
 	public BraveTheElementsEffect(final BraveTheElementsEffect effect) {

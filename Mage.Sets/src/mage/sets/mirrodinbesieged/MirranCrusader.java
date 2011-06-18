@@ -35,6 +35,7 @@ import mage.MageInt;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 
 /**
@@ -48,9 +49,11 @@ public class MirranCrusader extends CardImpl<MirranCrusader> {
 	static {
 		filter.setUseColor(true);
 		filter.getColor().setBlack(true);
+		filter.setScopeColor(ComparisonScope.Any);
 
 		filter2.setUseColor(true);
 		filter2.getColor().setGreen(true);
+		filter2.setScopeColor(ComparisonScope.Any);
 	}
 
     public MirranCrusader (UUID ownerId) {

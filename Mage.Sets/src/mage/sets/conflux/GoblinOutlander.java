@@ -34,6 +34,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 
 /**
@@ -46,6 +47,7 @@ public class GoblinOutlander extends CardImpl<GoblinOutlander> {
     static {
     	filter.setUseColor(true);
     	filter.getColor().setWhite(true);
+		filter.setScopeColor(ComparisonScope.Any);
     }
 
     public GoblinOutlander(UUID ownerId) {

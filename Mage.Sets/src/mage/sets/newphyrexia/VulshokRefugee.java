@@ -33,6 +33,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 
 /**
@@ -46,6 +47,7 @@ public class VulshokRefugee extends CardImpl<VulshokRefugee> {
     static {
         filter.setUseColor(true);
         filter.getColor().setRed(true);
+		filter.setScopeColor(ComparisonScope.Any);
     }
 
     public VulshokRefugee(UUID ownerId) {
