@@ -28,6 +28,7 @@
 
 package mage.filter.common;
 
+import mage.Constants.CardType;
 import mage.filter.FilterCard;
 
 /**
@@ -38,12 +39,10 @@ public class FilterBasicLandCard extends FilterCard<FilterBasicLandCard> {
 
 	public FilterBasicLandCard() {
 		super("basic land card");
-		name.add("Island");
-		name.add("Forest");
-		name.add("Mountain");
-		name.add("Swamp");
-		name.add("Plains");
-
+		this.cardType.add(CardType.LAND);
+		this.setScopeCardType(ComparisonScope.Any);
+		this.supertype.add("Basic");
+		this.setScopeSupertype(ComparisonScope.Any);
 	}
 
 	public FilterBasicLandCard(final FilterBasicLandCard filter) {
