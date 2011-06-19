@@ -58,8 +58,8 @@ public class RhoxPikemaster extends CardImpl<RhoxPikemaster> {
         this.color.setWhite(true);
         this.subtype.add("Rhino");
         this.subtype.add("Soldier");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
         this.addAbility(FirstStrikeAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
     }
