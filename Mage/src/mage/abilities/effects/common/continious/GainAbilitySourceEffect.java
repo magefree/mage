@@ -73,7 +73,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySou
 	@Override
 	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("{this} gains ").append(ability.getRule()).append(" ").append(duration.toString());
+		sb.append("{this} gains \"").append(ability.getRule()).append("\" ").append(duration.toString());
 		return sb.toString();
 	}
 
