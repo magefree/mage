@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
 
 /**
  *
- * @author North
+ * @author North, nantuko
  */
 public class GuulDrazVampire extends CardImpl<GuulDrazVampire> {
 
@@ -59,9 +59,10 @@ public class GuulDrazVampire extends CardImpl<GuulDrazVampire> {
         this.toughness = new MageInt(1);
 
         ContinuousEffect effect = new GainAbilitySourceEffect(IntimidateAbility.getInstance(), Duration.WhileOnBattlefield);
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect, new TenOrLessLife(TenOrLessLife.CheckType.AN_OPPONENT), "As long as an opponent has 10 or less life, Guul Draz Vampire gets +2/+1 and has intimidate."));
-        ability.addEffect(new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield));
-        this.addAbility(ability);
+        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect, new TenOrLessLife(TenOrLessLife.CheckType.AN_OPPONENT), "As long as an opponent has 10 or less life, Guul Draz Vampire has intimidate"));
+		ContinuousEffect effect2 = new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield);
+		ability.addEffect(new ConditionalContinousEffect(effect2, new TenOrLessLife(TenOrLessLife.CheckType.AN_OPPONENT), "As long as an opponent has 10 or less life, Guul Draz Vampire gets +2/+1"));
+		this.addAbility(ability);
     }
 
     public GuulDrazVampire(final GuulDrazVampire card) {
