@@ -53,7 +53,7 @@ public class BloodiedGhost extends CardImpl<BloodiedGhost> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), "Bloodied Ghost gets a -1/-1 counter"));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance()), "Bloodied Ghost gets a -1/-1 counter"));
     }
 
     public BloodiedGhost (final BloodiedGhost card) {
