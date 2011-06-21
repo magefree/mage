@@ -28,6 +28,7 @@
 
 package mage.abilities.common;
 
+import java.util.Arrays;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
@@ -53,9 +54,7 @@ public class FetchLandActivatedAbility extends ActivatedAbilityImpl<FetchLandAct
 		addCost(new SacrificeSourceCost());
 		FilterCard filter = new FilterCard(subTypeNames(subTypes));
 		filter.getCardType().add(CardType.LAND);
-		for (String subType: subTypes) {
-			filter.getSubtype().add(subType);
-		}
+        filter.getSubtype().addAll(Arrays.asList(subTypes));
 		filter.setScopeSubtype(ComparisonScope.Any);
 		TargetCardInLibrary target = new TargetCardInLibrary(filter);
 		addEffect(new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay));
