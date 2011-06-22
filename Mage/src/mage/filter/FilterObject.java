@@ -54,7 +54,7 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 	protected boolean useColorless;
 	protected boolean useColor;
 	protected ObjectColor color;
-	protected ComparisonScope scopeColor = ComparisonScope.All;
+	protected ComparisonScope scopeColor = ComparisonScope.Any;
 	protected boolean notColor;
 	protected List<String> name = new ArrayList<String>();
 	protected boolean notName;
