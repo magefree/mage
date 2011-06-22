@@ -28,9 +28,7 @@
 
 package mage.server.util;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.*;
 
 /**
  *
@@ -41,6 +39,15 @@ public class ThreadExecutor {
 	private static ExecutorService rmiExecutor = Executors.newCachedThreadPool();
 	private static ExecutorService gameExecutor = Executors.newFixedThreadPool(ConfigSettings.getInstance().getMaxGameThreads());
 	private static ScheduledExecutorService timeoutExecutor = Executors.newScheduledThreadPool(5);
+
+	static {
+		((ThreadPoolExecutor)rmiExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
+		((ThreadPoolExecutor)rmiExecutor).allowCoreThreadTimeOut(true);
+		((ThreadPoolExecutor)gameExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
+		((ThreadPoolExecutor)gameExecutor).allowCoreThreadTimeOut(true);
+		((ThreadPoolExecutor)timeoutExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
+		((ThreadPoolExecutor)timeoutExecutor).allowCoreThreadTimeOut(true);
+	}
 
 	private final static ThreadExecutor INSTANCE = new ThreadExecutor();
 

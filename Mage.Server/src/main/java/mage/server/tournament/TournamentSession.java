@@ -32,6 +32,7 @@ import java.rmi.RemoteException;
 import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import mage.cards.decks.Deck;
@@ -146,6 +147,7 @@ public class TournamentSession {
 	private synchronized void cancelTimeout() {
 		if (futureTimeout != null) {
 			futureTimeout.cancel(false);
+			((ThreadPoolExecutor)timeoutExecutor).getQueue().remove(futureTimeout);
 		}
 	}
 

@@ -278,7 +278,8 @@ public class GameController implements GameCallback {
 
 	public void kill(UUID sessionId) {
 		if (sessionPlayerMap.containsKey(sessionId)) {
-			gameSessions.get(sessionPlayerMap.get(sessionId)).setKilled();
+			GameSession session = gameSessions.get(sessionPlayerMap.get(sessionId));
+			session.destroy();
 			gameSessions.remove(sessionPlayerMap.get(sessionId));
 			leave(sessionId);
 			sessionPlayerMap.remove(sessionId);
