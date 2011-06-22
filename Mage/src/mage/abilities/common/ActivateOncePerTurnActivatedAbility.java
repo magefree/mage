@@ -32,7 +32,6 @@ import java.util.UUID;
 import mage.Constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 
