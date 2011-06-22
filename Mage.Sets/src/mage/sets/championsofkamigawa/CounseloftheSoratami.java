@@ -31,33 +31,29 @@ package mage.sets.championsofkamigawa;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class LanternKami extends CardImpl<LanternKami> {
+public class CounseloftheSoratami extends CardImpl<CounseloftheSoratami> {
 
-    public LanternKami (UUID ownerId) {
-        super(ownerId, 32, "Lantern Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+    public CounseloftheSoratami (UUID ownerId) {
+        super(ownerId, 55, "Counsel of the Soratami", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "CHK";
-        this.subtype.add("Spirit");
-		this.color.setWhite(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
+		this.color.setBlue(true);
+        this.getSpellAbility().addEffect(new DrawCardControllerEffect(2));
     }
 
-    public LanternKami (final LanternKami card) {
+    public CounseloftheSoratami (final CounseloftheSoratami card) {
         super(card);
     }
 
     @Override
-    public LanternKami copy() {
-        return new LanternKami(this);
+    public CounseloftheSoratami copy() {
+        return new CounseloftheSoratami(this);
     }
 
 }

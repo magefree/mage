@@ -29,35 +29,43 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
+
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
+import mage.target.Target;
+import mage.target.TargetPermanent;
 
 /**
- *
  * @author Loki
  */
-public class LanternKami extends CardImpl<LanternKami> {
+public class RendSpirit extends CardImpl<RendSpirit> {
 
-    public LanternKami (UUID ownerId) {
-        super(ownerId, 32, "Lantern Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Spirit");
-		this.color.setWhite(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
+    private static final FilterPermanent filter = new FilterPermanent("Spirit");
+
+    static {
+        filter.getSubtype().add("Spirit");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public LanternKami (final LanternKami card) {
+    public RendSpirit(UUID ownerId) {
+        super(ownerId, 141, "Rend Spirit", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
+        this.expansionSetCode = "CHK";
+        this.color.setBlack(true);
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+    }
+
+    public RendSpirit(final RendSpirit card) {
         super(card);
     }
 
     @Override
-    public LanternKami copy() {
-        return new LanternKami(this);
+    public RendSpirit copy() {
+        return new RendSpirit(this);
     }
 
 }

@@ -29,35 +29,25 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
 
 /**
- *
  * @author Loki
  */
-public class LanternKami extends CardImpl<LanternKami> {
+public class StoneRain extends mage.sets.tempest.StoneRain {
 
-    public LanternKami (UUID ownerId) {
-        super(ownerId, 32, "Lantern Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+    public StoneRain(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 191;
         this.expansionSetCode = "CHK";
-        this.subtype.add("Spirit");
-		this.color.setWhite(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
     }
 
-    public LanternKami (final LanternKami card) {
+    public StoneRain(final StoneRain card) {
         super(card);
     }
 
     @Override
-    public LanternKami copy() {
-        return new LanternKami(this);
+    public StoneRain copy() {
+        return new StoneRain(this);
     }
 
 }

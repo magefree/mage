@@ -31,33 +31,33 @@ package mage.sets.championsofkamigawa;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.target.TargetPlayer;
 
 /**
  *
  * @author Loki
  */
-public class LanternKami extends CardImpl<LanternKami> {
+public class LavaSpike extends CardImpl<LavaSpike> {
 
-    public LanternKami (UUID ownerId) {
-        super(ownerId, 32, "Lantern Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+    public LavaSpike (UUID ownerId) {
+        super(ownerId, 178, "Lava Spike", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "CHK";
-        this.subtype.add("Spirit");
-		this.color.setWhite(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
+        this.subtype.add("Arcane");
+		this.color.setRed(true);
+        this.getSpellAbility().addTarget(new TargetPlayer());
+		this.getSpellAbility().addEffect(new DamageTargetEffect(3));
+        
     }
 
-    public LanternKami (final LanternKami card) {
+    public LavaSpike (final LavaSpike card) {
         super(card);
     }
 
     @Override
-    public LanternKami copy() {
-        return new LanternKami(this);
+    public LavaSpike copy() {
+        return new LavaSpike(this);
     }
 
 }

@@ -5,6 +5,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.target.targetpointer.FixedTarget;
 
 public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<BeginningOfUpkeepTriggeredAbility> {
     private Constants.TargetController targetController;
@@ -32,12 +33,19 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<Begi
                     return event.getPlayerId().equals(this.controllerId);
                 case OPPONENT:
                     if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
-                        this.getTargets().get(0).add(event.getPlayerId(), game); //TODO add target pushing checking to constructor
+                        for (Effect effect : this.getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                        }
                         return true;
                     }
+                case ANY:
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                    }
+                    return true;
             }
-		}
-		return false;
+        }
+        return false;
     }
 
     @Override
@@ -47,6 +55,8 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<Begi
                 return "At the beginning of your upkeep, " + effects.getText(this);
             case OPPONENT:
                 return "At the beginning of each opponent's upkeep, " + effects.getText(this);
+            case ANY:
+                return "At the beginning of each player's upkeep, " + effects.getText(this);
         }
         return "";
     }

@@ -32,32 +32,33 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.MountainwalkAbility;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class LanternKami extends CardImpl<LanternKami> {
+public class SokenzanBruiser extends CardImpl<SokenzanBruiser> {
 
-    public LanternKami (UUID ownerId) {
-        super(ownerId, 32, "Lantern Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+    public SokenzanBruiser (UUID ownerId) {
+        super(ownerId, 188, "Sokenzan Bruiser", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.expansionSetCode = "CHK";
-        this.subtype.add("Spirit");
-		this.color.setWhite(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
+        this.subtype.add("Ogre");
+        this.subtype.add("Warrior");
+		this.color.setRed(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+        this.addAbility(new MountainwalkAbility());
     }
 
-    public LanternKami (final LanternKami card) {
+    public SokenzanBruiser (final SokenzanBruiser card) {
         super(card);
     }
 
     @Override
-    public LanternKami copy() {
-        return new LanternKami(this);
+    public SokenzanBruiser copy() {
+        return new SokenzanBruiser(this);
     }
 
 }

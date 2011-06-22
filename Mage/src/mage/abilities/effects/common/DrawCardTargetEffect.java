@@ -65,7 +65,7 @@ public class DrawCardTargetEffect extends OneShotEffect<DrawCardTargetEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
+		Player player = game.getPlayer(targetPointer.getFirst(source));
 		if (player != null) {
 			player.drawCards(amount.calculate(game, source), game);
 			return true;
@@ -76,7 +76,12 @@ public class DrawCardTargetEffect extends OneShotEffect<DrawCardTargetEffect> {
 	@Override
 	public String getText(Ability source) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Target player draws ").append(amount).append(" card");
+        if (source.getTargets().size() > 0) {
+		    sb.append("Target ").append(source.getTargets().get(0).getTargetName());
+        } else {
+            sb.append("that player");
+        }
+		sb.append(" draws ").append(amount).append(" card");
         try {
             if (Integer.parseInt(amount.toString()) > 1) {
                 sb.append("s");

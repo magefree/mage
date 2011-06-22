@@ -29,35 +29,45 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
+
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
+import mage.target.Target;
+import mage.target.TargetPermanent;
 
 /**
- *
  * @author Loki
  */
-public class LanternKami extends CardImpl<LanternKami> {
+public class QuietPurity extends CardImpl<QuietPurity> {
 
-    public LanternKami (UUID ownerId) {
-        super(ownerId, 32, "Lantern Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Spirit");
-		this.color.setWhite(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
+    private static final FilterPermanent filter = new FilterPermanent("Enchantment");
+
+    static {
+        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public LanternKami (final LanternKami card) {
+    public QuietPurity(UUID ownerId) {
+        super(ownerId, 39, "Quiet Purity", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
+        this.expansionSetCode = "CHK";
+        this.subtype.add("Arcane");
+        this.color.setWhite(true);
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+    }
+
+
+    public QuietPurity(final QuietPurity card) {
         super(card);
     }
 
     @Override
-    public LanternKami copy() {
-        return new LanternKami(this);
+    public QuietPurity copy() {
+        return new QuietPurity(this);
     }
 
 }

@@ -31,33 +31,36 @@ package mage.sets.championsofkamigawa;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class LanternKami extends CardImpl<LanternKami> {
+public class SwallowingPlague extends CardImpl<SwallowingPlague> {
 
-    public LanternKami (UUID ownerId) {
-        super(ownerId, 32, "Lantern Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+    public SwallowingPlague (UUID ownerId) {
+        super(ownerId, 146, "Swallowing Plague", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
         this.expansionSetCode = "CHK";
-        this.subtype.add("Spirit");
-		this.color.setWhite(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
+        this.subtype.add("Arcane");
+		this.color.setBlack(true);
+		this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new GainLifeEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public LanternKami (final LanternKami card) {
+    public SwallowingPlague (final SwallowingPlague card) {
         super(card);
     }
 
     @Override
-    public LanternKami copy() {
-        return new LanternKami(this);
+    public SwallowingPlague copy() {
+        return new SwallowingPlague(this);
     }
 
 }

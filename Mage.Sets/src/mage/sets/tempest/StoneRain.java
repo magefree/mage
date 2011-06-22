@@ -26,38 +26,37 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterLandPermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author Loki
  */
-public class LanternKami extends CardImpl<LanternKami> {
+public class StoneRain extends CardImpl<StoneRain> {
 
-    public LanternKami (UUID ownerId) {
-        super(ownerId, 32, "Lantern Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Spirit");
-		this.color.setWhite(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
+    public StoneRain (UUID ownerId) {
+        super(ownerId, 206, "Stone Rain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
+        this.expansionSetCode = "TMP";
+        this.color.setRed(true);
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterLandPermanent()));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public LanternKami (final LanternKami card) {
+    public StoneRain (final StoneRain card) {
         super(card);
     }
 
     @Override
-    public LanternKami copy() {
-        return new LanternKami(this);
+    public StoneRain copy() {
+        return new StoneRain(this);
     }
 
 }

@@ -29,35 +29,36 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class LanternKami extends CardImpl<LanternKami> {
+public class ReachThroughMists extends CardImpl<ReachThroughMists> {
 
-    public LanternKami (UUID ownerId) {
-        super(ownerId, 32, "Lantern Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+    public ReachThroughMists (UUID ownerId) {
+        super(ownerId, 81, "Reach Through Mists", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "CHK";
-        this.subtype.add("Spirit");
-		this.color.setWhite(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
+        this.subtype.add("Arcane");
+		this.color.setBlue(true);
+        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
     }
 
-    public LanternKami (final LanternKami card) {
+    public ReachThroughMists (final ReachThroughMists card) {
         super(card);
     }
 
     @Override
-    public LanternKami copy() {
-        return new LanternKami(this);
+    public ReachThroughMists copy() {
+        return new ReachThroughMists(this);
     }
 
 }

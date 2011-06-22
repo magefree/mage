@@ -29,35 +29,45 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class LanternKami extends CardImpl<LanternKami> {
+public class SeizanPerverterofTruth extends CardImpl<SeizanPerverterofTruth> {
 
-    public LanternKami (UUID ownerId) {
-        super(ownerId, 32, "Lantern Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+    public SeizanPerverterofTruth (UUID ownerId) {
+        super(ownerId, 143, "Seizan, Perverter of Truth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.expansionSetCode = "CHK";
+        this.supertype.add("Legendary");
+        this.subtype.add("Demon");
         this.subtype.add("Spirit");
-		this.color.setWhite(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
+		this.color.setBlack(true);
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(5);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardTargetEffect(2), Constants.TargetController.ANY, false);
+        ability.addEffect(new LoseLifeTargetEffect(2));
+        this.addAbility(ability);
+
     }
 
-    public LanternKami (final LanternKami card) {
+    public SeizanPerverterofTruth (final SeizanPerverterofTruth card) {
         super(card);
     }
 
     @Override
-    public LanternKami copy() {
-        return new LanternKami(this);
+    public SeizanPerverterofTruth copy() {
+        return new SeizanPerverterofTruth(this);
     }
 
 }

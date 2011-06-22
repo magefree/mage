@@ -32,32 +32,30 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class LanternKami extends CardImpl<LanternKami> {
+public class WanderingOnes extends CardImpl<WanderingOnes> {
 
-    public LanternKami (UUID ownerId) {
-        super(ownerId, 32, "Lantern Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+    public WanderingOnes (UUID ownerId) {
+        super(ownerId, 100, "Wandering Ones", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-		this.color.setWhite(true);
+		this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
     }
 
-    public LanternKami (final LanternKami card) {
+    public WanderingOnes (final WanderingOnes card) {
         super(card);
     }
 
     @Override
-    public LanternKami copy() {
-        return new LanternKami(this);
+    public WanderingOnes copy() {
+        return new WanderingOnes(this);
     }
 
 }
