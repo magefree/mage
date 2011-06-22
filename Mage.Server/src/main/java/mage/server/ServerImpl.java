@@ -101,7 +101,11 @@ public class ServerImpl extends RemoteServer implements Server {
 
 	@Override
 	public ClientCallback callback(UUID sessionId) {
-		return SessionManager.getInstance().getSession(sessionId).callback();
+		Session session = SessionManager.getInstance().getSession(sessionId);
+		if (session == null) {
+			return null;
+		}
+		return session.callback();
 	}
 
 	@Override

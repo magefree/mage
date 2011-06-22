@@ -64,7 +64,9 @@ public class CallbackClientDaemon extends Thread {
 					@Override
 					public void run() {
 						try {
-							client.processCallback(callback);
+							if (callback != null) {
+								client.processCallback(callback);
+							}
 						}
 						catch (Exception ex) {
 							logger.fatal("CallbackClientDaemon error ", ex);
