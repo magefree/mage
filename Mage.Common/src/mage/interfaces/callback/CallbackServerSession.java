@@ -45,6 +45,7 @@ public class CallbackServerSession {
 	private final Condition waiting  = lock.newCondition();
 	private final Condition callbackCalled  = lock.newCondition();
 	private boolean waitingForCallback;
+	private boolean threadAlive = true;
 
 	/**
 	 *
@@ -58,7 +59,7 @@ public class CallbackServerSession {
 		try {
 			waitingForCallback = true;
 			waiting.signal();
-			while (callback.getMethod() == null) {
+			while (callback.getMethod() == null && threadAlive) {
 				logger.trace("waiting for callback");
 				callbackCalled.await();
 			}
@@ -88,6 +89,17 @@ public class CallbackServerSession {
 			callback.setData(call.getData());
 			callback.setObjectId(call.getObjectId());
 			callback.setMessageId(call.getMessageId());
+			callbackCalled.signal();
+		}
+		finally {
+			lock.unlock();
+		}
+	}
+
+	public void destroy() {
+		lock.lock();
+		try {
+			threadAlive = false;
 			callbackCalled.signal();
 		}
 		finally {

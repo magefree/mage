@@ -84,6 +84,7 @@ public class Session {
 	}
 
 	public void kill() {
+		callback.destroy();
 		SessionManager.getInstance().removeSession(sessionId);
 		TableManager.getInstance().removeSession(sessionId);
 		GameManager.getInstance().removeSession(sessionId);
