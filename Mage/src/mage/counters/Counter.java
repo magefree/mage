@@ -41,7 +41,13 @@ public class Counter<T extends Counter<T>> implements Serializable {
 
 	public Counter(String name) {
 		this.name = name;
+        this.count = 1;
 	}
+
+    public Counter(String name, int count) {
+        this.name = name;
+        this.count = count;
+    }
 
 	public Counter(Counter counter) {
 		this.name = counter.name;

@@ -33,6 +33,7 @@ import mage.Constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.counters.common.LevelCounter;
 
 /**
  *
@@ -41,7 +42,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 public class LevelUpAbility extends ActivatedAbilityImpl<LevelUpAbility> {
 
 	public LevelUpAbility(ManaCosts costs) {
-		super(Zone.BATTLEFIELD, new AddCountersSourceEffect("Level", 1), costs);
+		super(Zone.BATTLEFIELD, new AddCountersSourceEffect(new LevelCounter()), costs);
 		this.timing = TimingRule.SORCERY;
 	}
 

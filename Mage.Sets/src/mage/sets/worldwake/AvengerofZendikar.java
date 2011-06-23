@@ -33,33 +33,34 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.TargetController; 
+import mage.Constants.TargetController;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddPlusOneCountersControlledEffect;
+import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.PlantToken;
 import mage.game.permanent.token.Token;
 
 /**
  *
- * @author Loki, nantuko
+ * @author Loki, nantuko, North
  */
 public class AvengerofZendikar extends CardImpl<AvengerofZendikar> {
-    private static FilterPermanent filter = new FilterPermanent("Plant creature");
+    private static final FilterPermanent filter = new FilterPermanent("Plant creature you control");
 
     static {
         filter.getCardType().add(CardType.CREATURE);
         filter.setScopeCardType(ComparisonScope.Any);
         filter.getSubtype().add("Plant");
         filter.setScopeSubtype(ComparisonScope.Any);
+        filter.setTargetController(TargetController.YOU);
     }
 
     public AvengerofZendikar (UUID ownerId) {
@@ -70,7 +71,7 @@ public class AvengerofZendikar extends CardImpl<AvengerofZendikar> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(new EntersBattlefieldAbility(new AvengerofZendikarTokensCreateEffect(), "put a 0/1 green Plant creature token onto the battlefield for each land you control"));
-        this.addAbility(new LandfallAbility(new AddPlusOneCountersControlledEffect(1, filter), false));
+        this.addAbility(new LandfallAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false));
     }
 
     public AvengerofZendikar (final AvengerofZendikar card) {
@@ -84,7 +85,7 @@ public class AvengerofZendikar extends CardImpl<AvengerofZendikar> {
 }
 
 class AvengerofZendikarTokensCreateEffect extends OneShotEffect<AvengerofZendikarTokensCreateEffect> {
-    private static FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterPermanent();
     private Token token = new PlantToken();
 
     static {

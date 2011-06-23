@@ -41,6 +41,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.counters.Counter;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -138,7 +139,7 @@ class PhylacteryLichEffect extends OneShotEffect<PhylacteryLichEffect> {
 				if (player.choose(Outcome.Neutral, target, game)) {
 					Permanent permanent = game.getPermanent(target.getFirstTarget());
 					if (permanent != null) {
-						permanent.addCounters("phylactery", 1);
+						permanent.addCounters(new Counter("phylactery"));
 					}
 				}
 			}

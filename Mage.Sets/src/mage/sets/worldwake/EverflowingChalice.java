@@ -45,6 +45,7 @@ import mage.abilities.keyword.MultikickerAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
+import mage.counters.common.ChargeCounter;
 import mage.game.Game;
 
 /**
@@ -56,7 +57,7 @@ public class EverflowingChalice extends CardImpl<EverflowingChalice> {
 	public EverflowingChalice(UUID ownerId) {
 		super(ownerId, 123, "Everflowing Chalice", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
 		this.expansionSetCode = "WWK";
-		Ability ability1 = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.getName(), 1));
+		Ability ability1 = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(new ChargeCounter()));
 		MultikickerAbility ability = new MultikickerAbility(new GainAbilitySourceEffect(ability1, Duration.WhileOnBattlefield), false);
 		ability.addManaCost(new GenericManaCost(2));
 		this.addAbility(ability);

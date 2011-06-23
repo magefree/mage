@@ -44,6 +44,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
+import mage.counters.common.ChargeCounter;
 
 /**
  * @author nantuko
@@ -54,7 +55,7 @@ public class TrigonofMending extends CardImpl<TrigonofMending> {
 		super(ownerId, 215, "Trigon of Mending", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
 		this.expansionSetCode = "SOM";
 
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.getName(), 3)));
+		this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(new ChargeCounter(3))));
 
 		Costs costs = new CostsImpl();
 		costs.add(new ManaCostsImpl("{2}"));

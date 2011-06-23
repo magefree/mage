@@ -31,12 +31,14 @@ package mage.sets.magic2011;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.counter.AddPlusOneCountersControlledEffect;
+import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
 
@@ -46,12 +48,13 @@ import mage.filter.FilterPermanent;
  */
 public class SteelOverseer extends CardImpl<SteelOverseer> {
 
-	private static final FilterPermanent filter = new FilterPermanent("artifact creature");
+	private static final FilterPermanent filter = new FilterPermanent("artifact creature you control");
 
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);
 		filter.getCardType().add(CardType.CREATURE);
 		filter.setScopeCardType(ComparisonScope.All);
+        filter.setTargetController(TargetController.YOU);
 	}
 
 	public SteelOverseer(UUID ownerId) {
@@ -61,7 +64,7 @@ public class SteelOverseer extends CardImpl<SteelOverseer> {
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
 
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddPlusOneCountersControlledEffect(1, filter), new TapSourceCost()));
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), new TapSourceCost()));
 	}
 
 	public SteelOverseer(final SteelOverseer card) {

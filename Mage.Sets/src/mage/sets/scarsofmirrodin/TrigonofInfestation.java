@@ -45,6 +45,7 @@ import mage.counters.CounterType;
 import mage.game.permanent.token.InsectInfectToken;
 
 import java.util.UUID;
+import mage.counters.common.ChargeCounter;
 
 /**
  * @author nantuko
@@ -57,7 +58,7 @@ public class TrigonofInfestation extends CardImpl<TrigonofInfestation> {
 		super(ownerId, 214, "Trigon of Infestation", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
 		this.expansionSetCode = "SOM";
 
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.getName(), 3)));
+		this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(new ChargeCounter(3))));
 
 		Costs costs = new CostsImpl();
 		costs.add(new ManaCostsImpl("{2}"));

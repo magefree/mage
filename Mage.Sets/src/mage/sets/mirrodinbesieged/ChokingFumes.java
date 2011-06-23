@@ -25,42 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.guildpact;
+package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
+import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
+import mage.filter.common.FilterAttackingCreature;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class GodlessShrine extends CardImpl<GodlessShrine> {
+public class ChokingFumes extends CardImpl<ChokingFumes> {
 
-    public GodlessShrine (UUID ownerId) {
-        super(ownerId, 157, "Godless Shrine", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "GPT";
-        this.subtype.add("Plains");
-        this.subtype.add("Swamp");
-        this.addAbility(new WhiteManaAbility());
-        this.addAbility(new BlackManaAbility());
-        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Godless Shrine enters the battlefield, you may pay 2 life. If you don't, Godless Shrine enters the battlefield tapped"));
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature();
+
+    public ChokingFumes(UUID ownerId) {
+        super(ownerId, 4, "Choking Fumes", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
+        this.expansionSetCode = "MBS";
+
+        this.color.setWhite(true);
+
+        this.getSpellAbility().addEffect(new AddCountersAllEffect(CounterType.M1M1.createInstance(), filter));
     }
 
-    public GodlessShrine (final GodlessShrine card) {
+    public ChokingFumes(final ChokingFumes card) {
         super(card);
     }
 
     @Override
-    public GodlessShrine copy() {
-        return new GodlessShrine(this);
+    public ChokingFumes copy() {
+        return new ChokingFumes(this);
     }
-
 }

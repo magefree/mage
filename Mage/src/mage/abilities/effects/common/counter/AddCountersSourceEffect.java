@@ -40,27 +40,15 @@ import mage.game.permanent.Permanent;
  */
 public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffect> {
 
-	private int amount;
-	private String name;
     private Counter counter;
-
-	public AddCountersSourceEffect(String name, int amount) {
-		super(Outcome.Benefit);
-		this.name = name;
-		this.amount = amount;
-	}
 
 	public AddCountersSourceEffect(Counter counter) {
 		super(Outcome.Benefit);
-		this.name = counter.getName();
 		this.counter = counter.copy();
-		this.amount = counter.getCount();
 	}
 
 	public AddCountersSourceEffect(final AddCountersSourceEffect effect) {
 		super(effect);
-		this.amount = effect.amount;
-		this.name = effect.name;
 		if (effect.counter != null)
 			this.counter = effect.counter.copy();
 	}
@@ -71,8 +59,6 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
 		if (permanent != null) {
 			if (counter != null) {
 				permanent.addCounters(counter);
-			} else {
-				permanent.addCounters(name, amount);
 			}
 		}
 		return true;
@@ -80,12 +66,12 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
 
 	@Override
 	public String getText(Ability source) {
-		if (amount > 1) {
+		if (counter.getCount() > 1) {
 			StringBuilder sb = new StringBuilder();
-			sb.append("put ").append(Integer.toString(amount)).append(" ").append(name).append(" counters on {this}");
+			sb.append("put ").append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters on {this}");
 			return sb.toString();
 		} else
-			return "put a " + name + " counter on {this}";
+			return "put a " + counter.getName() + " counter on {this}";
 	}
 
 	@Override

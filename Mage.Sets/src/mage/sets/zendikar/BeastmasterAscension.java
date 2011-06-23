@@ -39,6 +39,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.counters.common.QuestCounter;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -73,7 +74,7 @@ public class BeastmasterAscension extends CardImpl<BeastmasterAscension> {
 class BeastmasterAscensionAbility extends TriggeredAbilityImpl<BeastmasterAscensionAbility> {
 
 	public BeastmasterAscensionAbility() {
-		super(Zone.BATTLEFIELD, new AddCountersSourceEffect("quest", 1), true);
+		super(Zone.BATTLEFIELD, new AddCountersSourceEffect(new QuestCounter()), true);
 	}
 
 	public BeastmasterAscensionAbility(final BeastmasterAscensionAbility ability) {
