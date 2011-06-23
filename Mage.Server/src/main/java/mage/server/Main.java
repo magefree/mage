@@ -31,17 +31,13 @@ package mage.server;
 import mage.server.util.PluginClassLoader;
 import java.io.File;
 import java.io.FilenameFilter;
-import java.net.Inet4Address;
 import java.net.InetAddress;
-import java.net.InterfaceAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.util.Enumeration;
 import java.util.Map;
 import javax.management.MBeanServer;
 import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
 import mage.interfaces.MageServer;
+import mage.remote.Connection;
 import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.PlayerFactory;
@@ -107,10 +103,12 @@ public class Main {
 				adminPassword = arg.replace(adminPasswordArg, "");
 			}
 		}
-		String host = getServerAddress();
+		String host = config.getServerAddress();
 		int port = config.getPort();
-		String locatorURI = "bisocket://" + host + ":" + port;
 		try {
+			if (host.equals("localhost"))
+				host = Connection.getLocalAddress().getHostAddress();
+			String locatorURI = "bisocket://" + host + ":" + port;
 			InvokerLocator serverLocator = new InvokerLocator(locatorURI);
 			server = new MageTransporterServer(serverLocator, new MageServerImpl(adminPassword, testMode), MageServer.class.getName(), new MageServerInvocationHandler());
 			server.start();
@@ -177,32 +175,6 @@ public class Main {
 			SessionManager.getInstance().removeSession(sessionId);
 		}
 		
-	}
-
-	private static String getServerAddress() {
-		try {
-			String foundIP = "";
-			for (Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces(); interfaces.hasMoreElements(); ) {
-				NetworkInterface iface = interfaces.nextElement( );
-				if (iface.isLoopback())
-					continue;
-				for (InterfaceAddress addr: iface.getInterfaceAddresses())
-				{
-					InetAddress iaddr = addr.getAddress();
-					if (iaddr instanceof Inet4Address) {
-						foundIP = iaddr.getHostAddress();
-						break;
-					}
-				}
-				if (foundIP.length() > 0)
-					break;
-			}
-			if (foundIP.length() > 0)
-				return foundIP;
-		} catch (SocketException ex) {
-			logger.warn("Could not get server address: ", ex);
-		}
-		return null;
 	}
 	
 	private static Class<?> loadPlugin(Plugin plugin) {

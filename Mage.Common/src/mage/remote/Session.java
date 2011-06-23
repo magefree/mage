@@ -101,7 +101,6 @@ public class Session {
 	public boolean connect() {
 		sessionState = SessionState.CONNECTING;
 		try {
-//			System.setSecurityManager(null);
 //			System.setProperty("http.nonProxyHosts", "code.google.com");
 //			System.setProperty("socksNonProxyHosts", "code.google.com");
 //
@@ -135,7 +134,7 @@ public class Session {
 									
 			this.sessionId = callbackClient.getSessionId();
 			boolean registerResult = false;
-			if (connection.getPassword().isEmpty())
+			if (connection.getPassword() == null)
 				registerResult = server.registerClient(connection.getUsername(), sessionId, client.getVersion());
 			else
 				registerResult = server.registerAdmin(connection.getPassword(), sessionId, client.getVersion());

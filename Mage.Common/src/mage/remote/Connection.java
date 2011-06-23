@@ -28,6 +28,15 @@
 
 package mage.remote;
 
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.InterfaceAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -64,6 +73,13 @@ public class Connection {
 	}
 
 	public String getURI() {
+		if (host.equals("localhost")) {
+			try {
+				return "bisocket://" + getLocalAddress().getHostAddress() + ":" + port;
+			} catch (SocketException ex) {
+				// just use localhost if can't find local ip
+			}
+		}
 		return "bisocket://" + host + ":" + port;
 	}
 	
@@ -159,6 +175,22 @@ public class Connection {
 
 	public void setProxyPassword(String proxyPassword) {
 		this.proxyPassword = proxyPassword;
+	}
+	
+	public static InetAddress getLocalAddress() throws SocketException {
+		for (Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces(); interfaces.hasMoreElements(); ) {
+			NetworkInterface iface = interfaces.nextElement( );
+			if (iface.isLoopback())
+				continue;
+			for (InterfaceAddress addr: iface.getInterfaceAddresses())
+			{
+				InetAddress iaddr = addr.getAddress();
+				if (iaddr instanceof Inet4Address) {
+					return iaddr;
+				}
+			}
+		}
+		return null;
 	}
 
 }
