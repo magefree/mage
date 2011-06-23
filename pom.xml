@@ -36,6 +36,36 @@
 
     <repositories>
         <repository>
+            <id>sonatype-org</id>
+            <url>https://maven.nuxeo.org/nexus/content/repositories/public/org/</url>
+        </repository>
+       <repository>
+            <id>jboss-public-repository</id>
+            <name>JBoss Repository</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public</url>
+            <!-- These optional flags are designed to speed up your builds by reducing remote server calls -->
+            <releases>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <updatePolicy>daily</updatePolicy>
+            </snapshots>
+        </repository>
+        
+         <repository>
+              <id>jboss-deprecated-repository-group</id>
+              <name>JBoss Deprecated Maven Repository Group</name>
+              <url>https://repository.jboss.org/nexus/content/repositories/deprecated/</url>
+              <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+              </releases>
+              <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+              </snapshots>
+            </repository>  
+        <repository>
             <id>mage.googlecode.com</id>
             <url>https://mage.googlecode.com/hg/repository/</url>
         </repository>
@@ -48,7 +78,7 @@
           <id>akathist-repository</id>
           <name>Akathist Repository</name>
           <url>http://www.9stmaryrd.com/maven</url>
-      </repository>
+        </repository>
     </repositories>
 
     <pluginRepositories>
