@@ -31,30 +31,33 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+import mage.filter.FilterCard;
 import mage.game.permanent.token.Token;
-import mage.game.stack.Spell;
 
 /**
  *
- * @author Loki
+ * @author Loki, North
  */
 public class SigilOfTheEmptyThrone extends CardImpl<SigilOfTheEmptyThrone> {
+
+    private static final FilterCard filter = new FilterCard("an enchantment spell");
+
+    static {
+        filter.getCardType().add(CardType.ENCHANTMENT);
+    }
 
     public SigilOfTheEmptyThrone(UUID ownerId) {
         super(ownerId, 18, "Sigil of the Empty Throne", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
         this.expansionSetCode = "CON";
         this.color.setWhite(true);
-        this.addAbility(new SigilOfTheEmptyThroneAbility());
+
+        this.addAbility(new SpellCastTriggeredAbility(new CreateTokenEffect(new AngelToken()), filter, false));
     }
 
     public SigilOfTheEmptyThrone(final SigilOfTheEmptyThrone card) {
@@ -66,37 +69,6 @@ public class SigilOfTheEmptyThrone extends CardImpl<SigilOfTheEmptyThrone> {
         return new SigilOfTheEmptyThrone(this);
     }
 
-}
-
-class SigilOfTheEmptyThroneAbility extends TriggeredAbilityImpl<SigilOfTheEmptyThroneAbility> {
-    public SigilOfTheEmptyThroneAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new AngelToken()), false);
-    }
-
-    public SigilOfTheEmptyThroneAbility(final SigilOfTheEmptyThroneAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SigilOfTheEmptyThroneAbility copy() {
-        return new SigilOfTheEmptyThroneAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.SPELL_CAST) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (spell != null && spell.getCardType().contains(CardType.ENCHANTMENT) && event.getPlayerId().equals(getControllerId())) {
-				return true;
-            }
-		}
-		return false;
-    }
-
-    @Override
-    public String getRule() {
-	return "Whenever you cast an enchantment spell, put a 4/4 white Angel creature token with flying onto the battlefield.";
-    }
 }
 
 class AngelToken extends Token {

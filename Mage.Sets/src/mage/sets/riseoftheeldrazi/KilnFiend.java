@@ -32,15 +32,24 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.InstantOrSorceryCastTriggeredAbility;
+import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.FilterCard;
 
 /**
  *
  * @author North
  */
 public class KilnFiend extends CardImpl<KilnFiend> {
+
+    private static final FilterCard filter = new FilterCard("an instant or sorcery spell");
+    static {
+        filter.getCardType().add(CardType.INSTANT);
+        filter.getCardType().add(CardType.SORCERY);
+        filter.setScopeCardType(ComparisonScope.Any);
+    }
 
     public KilnFiend(UUID ownerId) {
         super(ownerId, 153, "Kiln Fiend", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -52,7 +61,7 @@ public class KilnFiend extends CardImpl<KilnFiend> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new InstantOrSorceryCastTriggeredAbility(new BoostSourceEffect(3, 0, Duration.EndOfTurn), false));
+        this.addAbility(new SpellCastTriggeredAbility(new BoostSourceEffect(3, 0, Duration.EndOfTurn), filter, false));
     }
 
     public KilnFiend(final KilnFiend card) {

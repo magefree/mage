@@ -33,28 +33,29 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.filter.common.FilterArtifactCard;
 import mage.game.permanent.token.Token;
-import mage.game.stack.Spell;
 
 /**
  *
- * @author Loki
+ * @author Loki, North
  */
 public class GolemFoundry extends CardImpl<GolemFoundry> {
+
+    private static final FilterArtifactCard filter = new FilterArtifactCard("an artifact spell");
 
     public GolemFoundry (UUID ownerId) {
         super(ownerId, 160, "Golem Foundry", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "SOM";
-        this.addAbility(new GolemFoundryAbility());
+
+        this.addAbility(new SpellCastTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), filter, true));
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GolemToken()), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(3))));
     }
 
@@ -67,38 +68,6 @@ public class GolemFoundry extends CardImpl<GolemFoundry> {
         return new GolemFoundry(this);
     }
 
-}
-
-class GolemFoundryAbility extends TriggeredAbilityImpl<GolemFoundryAbility> {
-
-	public GolemFoundryAbility() {
-		super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), true);
-	}
-
-	public GolemFoundryAbility(final GolemFoundryAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public GolemFoundryAbility copy() {
-		return new GolemFoundryAbility(this);
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (spell != null && spell.getCardType().contains(CardType.ARTIFACT)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public String getRule() {
-		return "Whenever you cast an artifact spell, you may put a charge counter on Golem Foundry.";
-	}
 }
 
 class GolemToken extends Token {

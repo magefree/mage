@@ -32,37 +32,40 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
- * @author Loki
+ * @author Loki, North
  */
 public class Embersmith extends CardImpl<Embersmith> {
+
+    private static final FilterArtifactCard filter = new FilterArtifactCard("an artifact spell");
 
     public Embersmith(UUID ownerId) {
         super(ownerId, 87, "Embersmith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Human");
         this.subtype.add("Artificer");
+
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.addAbility(new EmbersmithTriggeredAbility());
+
+        SpellCastTriggeredAbility ability = new SpellCastTriggeredAbility(new EmbersmithEffect(), filter, false);
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
     }
 
     public Embersmith(final Embersmith card) {
@@ -74,38 +77,6 @@ public class Embersmith extends CardImpl<Embersmith> {
         return new Embersmith(this);
     }
 
-}
-
-class EmbersmithTriggeredAbility extends TriggeredAbilityImpl<EmbersmithTriggeredAbility> {
-    EmbersmithTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new EmbersmithEffect());
-        this.addTarget(new TargetCreatureOrPlayer());
-    }
-
-    EmbersmithTriggeredAbility(final EmbersmithTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public EmbersmithTriggeredAbility copy() {
-        return new EmbersmithTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.getControllerId())) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getCardType().contains(CardType.ARTIFACT)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cast an artifact spell, you may pay {1}. If you do, Embersmith deals 1 damage to target creature or player.";
-    }
 }
 
 class EmbersmithEffect extends OneShotEffect<EmbersmithEffect> {

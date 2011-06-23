@@ -35,42 +35,45 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.target.TargetPlayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.AddPoisonCounterTargetEffect;
+import mage.filter.common.FilterCreatureCard;
 
 /**
  *
- * @author Viserion
+ * @author Viserion, North
  */
 public class HandOfThePraetors extends CardImpl<HandOfThePraetors> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with infect");
+    private static final FilterCreatureCard filterSpell = new FilterCreatureCard("a creature spell with infect");
 
 	static {
 		filter.getAbilities().add(InfectAbility.getInstance());
 		filter.setNotAbilities(false);
+        filterSpell.getAbilities().add(InfectAbility.getInstance());
 	}
 
     public HandOfThePraetors (UUID ownerId) {
         super(ownerId, 66, "Hand of the Praetors", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Zombie");
+
 		this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
+
         this.addAbility(InfectAbility.getInstance());
-        this.addAbility(new HandOfThePraetorsAbility());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        SpellCastTriggeredAbility ability = new SpellCastTriggeredAbility(new AddPoisonCounterTargetEffect(1), filterSpell, true);
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
     public HandOfThePraetors (final HandOfThePraetors card) {
@@ -82,38 +85,4 @@ public class HandOfThePraetors extends CardImpl<HandOfThePraetors> {
         return new HandOfThePraetors(this);
     }
 
-}
-
-class HandOfThePraetorsAbility extends TriggeredAbilityImpl<HandOfThePraetorsAbility> {
-
-	public HandOfThePraetorsAbility() {
-		super(Zone.BATTLEFIELD, new AddPoisonCounterTargetEffect(1), true);
-		
-		this.addTarget(new TargetPlayer());
-	}
-
-	public HandOfThePraetorsAbility(final HandOfThePraetorsAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public HandOfThePraetorsAbility copy() {
-		return new HandOfThePraetorsAbility(this);
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.SPELL_CAST) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (spell != null && spell.getAbilities().containsKey(InfectAbility.getInstance().getId()) && spell.getControllerId() == this.controllerId) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public String getRule() {
-		return "Whenever you cast a creature spell with infect, target player gets a poison counter.";
-	}
 }

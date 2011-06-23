@@ -25,53 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastTriggeredAbility;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactCard;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki, North
+ * @author North
  */
-public class Painsmith extends CardImpl<Painsmith> {
+public class MirranSpy extends CardImpl<MirranSpy> {
 
     private static final FilterArtifactCard filter = new FilterArtifactCard("an artifact spell");
 
-    public Painsmith (UUID ownerId) {
-        super(ownerId, 74, "Painsmith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Human");
-        this.subtype.add("Artificer");
+    public MirranSpy(UUID ownerId) {
+        super(ownerId, 26, "Mirran Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "MBS";
+        this.subtype.add("Drone");
 
-		this.color.setBlack(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-        
-        SpellCastTriggeredAbility ability = new SpellCastTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), filter, true);
-        ability.addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
+        SpellCastTriggeredAbility ability = new SpellCastTriggeredAbility(new UntapTargetEffect(), filter, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public Painsmith (final Painsmith card) {
+    public MirranSpy(final MirranSpy card) {
         super(card);
     }
 
     @Override
-    public Painsmith copy() {
-        return new Painsmith(this);
+    public MirranSpy copy() {
+        return new MirranSpy(this);
     }
 }

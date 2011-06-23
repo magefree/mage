@@ -35,15 +35,13 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
@@ -52,15 +50,19 @@ import mage.players.Player;
  */
 public class Lifesmith extends CardImpl<Lifesmith> {
 
+    private static final FilterArtifactCard filter = new FilterArtifactCard("an artifact spell");
+
     public Lifesmith (UUID ownerId) {
         super(ownerId, 124, "Lifesmith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Human");
         this.subtype.add("Artificer");
+
 		this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.addAbility(new LifesmithTriggeredAbility());
+
+        this.addAbility(new SpellCastTriggeredAbility(new LifesmithEffect(), filter, false));
     }
 
     public Lifesmith (final Lifesmith card) {
@@ -70,38 +72,6 @@ public class Lifesmith extends CardImpl<Lifesmith> {
     @Override
     public Lifesmith copy() {
         return new Lifesmith(this);
-    }
-}
-
-class LifesmithTriggeredAbility extends TriggeredAbilityImpl<LifesmithTriggeredAbility> {
-    public LifesmithTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new LifesmithEffect());
-
-    }
-
-    public LifesmithTriggeredAbility(final LifesmithTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public LifesmithTriggeredAbility copy() {
-        return new LifesmithTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.getControllerId())) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (spell != null && spell.getCardType().contains(CardType.ARTIFACT)) {
-				return true;
-			}
-		}
-		return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cast an artifact spell, you may pay {1}. If you do, you gain 3 life.";
     }
 }
 

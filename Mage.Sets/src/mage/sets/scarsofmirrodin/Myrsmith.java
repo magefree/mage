@@ -33,34 +33,36 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.token.MyrToken;
-import mage.game.stack.Spell;
 
 /**
  *
- * @author Loki
+ * @author Loki, North
  */
 public class Myrsmith extends CardImpl<Myrsmith> {
+
+    private static final FilterArtifactCard filter = new FilterArtifactCard("an artifact spell");
 
     public Myrsmith (UUID ownerId) {
         super(ownerId, 16, "Myrsmith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Human");
         this.subtype.add("Artificer");
+
 		this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.addAbility(new MyrsmithTriggeredAbility());
+
+        this.addAbility(new SpellCastTriggeredAbility(new MyrsmithEffect(), filter, false));
     }
 
     public Myrsmith (final Myrsmith card) {
@@ -72,38 +74,6 @@ public class Myrsmith extends CardImpl<Myrsmith> {
         return new Myrsmith(this);
     }
 
-}
-
-class MyrsmithTriggeredAbility extends TriggeredAbilityImpl<MyrsmithTriggeredAbility> {
-    public MyrsmithTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new MyrsmithEffect());
-
-    }
-
-    public MyrsmithTriggeredAbility(final MyrsmithTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public MyrsmithTriggeredAbility copy() {
-        return new MyrsmithTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.getControllerId())) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (spell != null && spell.getCardType().contains(CardType.ARTIFACT)) {
-				return true;
-			}
-		}
-		return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cast an artifact spell, you may pay {1}. If you do, put a 1/1 colorless Myr artifact creature token onto the battlefield.";
-    }
 }
 
 class MyrsmithEffect extends OneShotEffect<MyrsmithEffect> {
@@ -132,6 +102,6 @@ class MyrsmithEffect extends OneShotEffect<MyrsmithEffect> {
 
     @Override
     public String getText(Ability source) {
-        return "You may pay {1}. If you do, put a 1/1 colorless Myr artifact creature token onto the battlefield";
+        return "you may pay {1}. If you do, put a 1/1 colorless Myr artifact creature token onto the battlefield";
     }
 }

@@ -30,32 +30,33 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
+import mage.filter.common.FilterArtifactCard;
 
 /**
  *
- * @author Loki
+ * @author Loki, North
  */
 public class Riddlesmith extends CardImpl<Riddlesmith> {
+
+    private static final FilterArtifactCard filter = new FilterArtifactCard("an artifact spell");
 
     public Riddlesmith (UUID ownerId) {
         super(ownerId, 40, "Riddlesmith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Human");
         this.subtype.add("Artificer");
+
 		this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.addAbility(new RiddlesmithTriggeredAbility());
+
+        this.addAbility(new SpellCastTriggeredAbility(new DrawDiscardControllerEffect(), filter, true));
     }
 
     public Riddlesmith (final Riddlesmith card) {
@@ -67,36 +68,4 @@ public class Riddlesmith extends CardImpl<Riddlesmith> {
         return new Riddlesmith(this);
     }
 
-}
-
-class RiddlesmithTriggeredAbility extends TriggeredAbilityImpl<RiddlesmithTriggeredAbility> {
-    public RiddlesmithTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), true);
-
-    }
-
-    public RiddlesmithTriggeredAbility(final RiddlesmithTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public RiddlesmithTriggeredAbility copy() {
-        return new RiddlesmithTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.getControllerId())) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (spell != null && spell.getCardType().contains(CardType.ARTIFACT)) {
-				return true;
-			}
-		}
-		return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you cast an artifact spell, you may draw a card. If you do, discard a card.";
-    }
 }

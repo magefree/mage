@@ -30,20 +30,14 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
 
 /**
  *
- * @author Loki
+ * @author Loki, North
  */
 public class InexorableTide extends CardImpl<InexorableTide> {
 
@@ -51,7 +45,8 @@ public class InexorableTide extends CardImpl<InexorableTide> {
         super(ownerId, 35, "Inexorable Tide", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
         this.expansionSetCode = "SOM";
 		this.color.setBlue(true);
-        this.addAbility(new InexorableTideAbility());
+
+        this.addAbility(new SpellCastTriggeredAbility(new ProliferateEffect(), false));
     }
 
     public InexorableTide (final InexorableTide card) {
@@ -63,35 +58,4 @@ public class InexorableTide extends CardImpl<InexorableTide> {
         return new InexorableTide(this);
     }
 
-}
-
-class InexorableTideAbility extends TriggeredAbilityImpl<InexorableTideAbility> {
-    public InexorableTideAbility() {
-        super(Zone.BATTLEFIELD, new ProliferateEffect(), false);
-    }
-
-    public InexorableTideAbility(final InexorableTideAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public InexorableTideAbility copy() {
-        return new InexorableTideAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-			Spell spell = game.getStack().getSpell(event.getTargetId());
-			if (spell != null && event.getPlayerId().equals(getControllerId())) {
-				return true;
-            }
-		}
-		return false;
-    }
-
-    @Override
-    public String getRule() {
-	    return "Whenever you cast a spell, proliferate.";
-    }
 }
