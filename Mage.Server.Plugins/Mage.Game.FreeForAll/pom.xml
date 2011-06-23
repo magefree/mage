@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>Mage-Server-Plugins</artifactId>
-        <version>0.7.4</version>
+        <version>0.8</version>
     </parent>
 
     <artifactId>Mage-Game-FreeForAll</artifactId>
