@@ -28,10 +28,6 @@
 
 package mage.remote;
 
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import mage.interfaces.Server;
-
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -47,16 +43,6 @@ public class Connection {
 	private int proxyPort;
 	private String proxyUsername;
 	private String proxyPassword;
-
-//	protected Server getServer() {
-//		Server server = null;
-//		try {
-//			Registry reg = LocateRegistry.getRegistry(host, port);
-//			server = (Server) reg.lookup("mage-server");
-//		}
-//		catch (Exception ignored) {}
-//		return server;
-//	}
 
 	@Override
 	public int hashCode() {

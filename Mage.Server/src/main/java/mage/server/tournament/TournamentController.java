@@ -64,10 +64,10 @@ public class TournamentController {
 	private UUID chatId;
 	private UUID tableId;
 	private Tournament tournament;
-	private ConcurrentHashMap<UUID, UUID> sessionPlayerMap = new ConcurrentHashMap<UUID, UUID>();
+	private ConcurrentHashMap<String, UUID> sessionPlayerMap = new ConcurrentHashMap<String, UUID>();
 	private ConcurrentHashMap<UUID, TournamentSession> tournamentSessions = new ConcurrentHashMap<UUID, TournamentSession>();
 
-	public TournamentController(Tournament tournament, ConcurrentHashMap<UUID, UUID> sessionPlayerMap, UUID tableId) {
+	public TournamentController(Tournament tournament, ConcurrentHashMap<String, UUID> sessionPlayerMap, UUID tableId) {
 		sessionId = UUID.randomUUID();
 		this.sessionPlayerMap = sessionPlayerMap;
 		chatId = ChatManager.getInstance().createChatSession();
@@ -128,7 +128,7 @@ public class TournamentController {
 		checkStart();
 	}
 
-	public synchronized void join(UUID sessionId) {
+	public synchronized void join(String sessionId) {
 		UUID playerId = sessionPlayerMap.get(sessionId);
 		TournamentSession tournamentSession = new TournamentSession(tournament, sessionId, tableId, playerId);
 		tournamentSessions.put(playerId, tournamentSession);
@@ -196,16 +196,16 @@ public class TournamentController {
 		TableManager.getInstance().construct(tableId);
 	}
 
-	private void construct(UUID sessionId, Deck deck, int timeout) throws MageException {
-		if (tournamentSessions.containsKey(sessionId))
-			tournamentSessions.get(sessionId).construct(deck, timeout);
+	private void construct(UUID playerId, Deck deck, int timeout) throws MageException {
+		if (tournamentSessions.containsKey(playerId))
+			tournamentSessions.get(playerId).construct(deck, timeout);
 	}
 
-	public void submitDeck(UUID sessionId, Deck deck) {
-		tournamentSessions.get(sessionPlayerMap.get(sessionId)).submitDeck(deck);
+	public void submitDeck(UUID playerId, Deck deck) {
+		tournamentSessions.get(playerId).submitDeck(deck);
 	}
 
-	public void timeout(UUID sessionId) {
+	public void timeout(String sessionId) {
 		if (sessionPlayerMap.containsKey(sessionId)) {
 			TournamentPlayer player = tournament.getPlayer(sessionPlayerMap.get(sessionId));
 			tournament.autoSubmit(sessionPlayerMap.get(sessionId), player.getDeck());
@@ -220,7 +220,7 @@ public class TournamentController {
 		return chatId;
 	}
 
-	public void kill(UUID sessionId) {
+	public void kill(String sessionId) {
 		if (sessionPlayerMap.containsKey(sessionId)) {
 			tournamentSessions.get(sessionPlayerMap.get(sessionId)).setKilled();
 			tournamentSessions.remove(sessionPlayerMap.get(sessionId));
@@ -229,16 +229,16 @@ public class TournamentController {
 		}
 	}
 
-	private void leave(UUID sessionId) {
+	private void leave(String sessionId) {
 		tournament.leave(getPlayerId(sessionId));
 	}
 
-	private UUID getPlayerId(UUID sessionId) {
+	private UUID getPlayerId(String sessionId) {
 		return sessionPlayerMap.get(sessionId);
 	}
 
-	private UUID getPlayerSessionId(UUID playerId) {
-		for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
+	private String getPlayerSessionId(UUID playerId) {
+		for (Entry<String, UUID> entry: sessionPlayerMap.entrySet()) {
 			if (entry.getValue().equals(playerId))
 				return entry.getKey();
 		}

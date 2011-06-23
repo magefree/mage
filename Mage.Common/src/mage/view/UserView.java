@@ -39,10 +39,10 @@ public class UserView implements Serializable {
 	
 	private String userName;
 	private String host;
-	private UUID sessionId;
+	private String sessionId;
 	private Date timeConnected;
 	
-	public UserView(String userName, String host, UUID sessionId, Date timeConnected) {
+	public UserView(String userName, String host, String sessionId, Date timeConnected) {
 		this.userName = userName;
 		this.host = host;
 		this.sessionId = sessionId;
@@ -57,7 +57,7 @@ public class UserView implements Serializable {
 		return host;
 	}
 
-	public UUID getSessionId() {
+	public String getSessionId() {
 		return sessionId;
 	}
 	

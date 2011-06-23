@@ -28,12 +28,6 @@
 
 package mage.server;
 
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.rmi.server.ExportException;
-import java.rmi.server.RemoteServer;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -43,9 +37,9 @@ import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
-import mage.interfaces.Server;
+import mage.interfaces.MageServer;
+//import mage.interfaces.Server;
 import mage.interfaces.ServerState;
-import mage.interfaces.callback.ClientCallback;
 import mage.server.game.DeckValidatorFactory;
 import mage.server.draft.DraftManager;
 import mage.server.game.GameFactory;
@@ -69,94 +63,48 @@ import org.apache.log4j.Logger;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ServerImpl extends RemoteServer implements Server {
+public class MageServerImpl implements MageServer {
 
 	private final static Logger logger = Logger.getLogger("Mage Server");
 	private static ExecutorService rmiExecutor = ThreadExecutor.getInstance().getRMIExecutor();
 
-	private boolean testMode;
 	private String password;
+	private boolean testMode;
 
-	public ServerImpl(int port, String name, boolean testMode, String password) {
+	public MageServerImpl(String password, boolean testMode) {
+		this.password = password;
+		this.testMode = testMode;
+	}
+
+	@Override
+	public boolean registerClient(String userName, String sessionId, MageVersion version) throws MageException {
+
 		try {
-			System.setSecurityManager(null);
-			Registry reg = LocateRegistry.createRegistry(port);
-			Server stub = (Server) UnicastRemoteObject.exportObject(this, port);
-			reg.rebind(name, stub);
-			this.testMode = testMode;
-			this.password = password;
-			logger.info("Started MAGE server - listening on port " + port);
-			if (testMode)
-				logger.info("MAGE server running in test mode");
-		} catch (ExportException ex) {
-			logger.fatal("ERROR:  Unable to start Mage Server - another server is likely running");
-		} catch (RemoteException ex) {
-			logger.fatal("Failed to start RMI server at port " + port, ex);
-		}
-	}
-
-	public boolean isTestMode() {
-		return testMode;
-	}
-
-	@Override
-	public ClientCallback callback(UUID sessionId) {
-		Session session = SessionManager.getInstance().getSession(sessionId);
-		if (session == null) {
-			return null;
-		}
-		return session.callback();
-	}
-
-	@Override
-	public void ack(String message, UUID sessionId) throws RemoteException, MageException {
-		SessionManager.getInstance().getSession(sessionId).ack(message);
-	}
-
- 	@Override
-	public boolean ping(UUID sessionId) {
-		Session session = SessionManager.getInstance().getSession(sessionId);
-		if (session != null) {
-			session.ping();
-			return true;
+			if (version.compareTo(Main.getVersion()) != 0)
+				throw new MageException("Wrong client version " + version + ", expecting version " + Main.getVersion());
+			return SessionManager.getInstance().registerUser(sessionId, userName);
+		} catch (Exception ex) {
+			handleException(ex);
 		}
 		return false;
 	}
 	
 	@Override
-	public UUID registerClient(String userName, UUID clientId, MageVersion version) throws MageException, RemoteException {
-
-		UUID sessionId = null;
-		try {
-			if (version.compareTo(Main.getVersion()) != 0)
-				throw new MageException("Wrong client version " + version + ", expecting version " + Main.getVersion());
-			sessionId = SessionManager.getInstance().createSession(userName, getClientHost(), clientId);
-			logger.info("User " + userName + " connected from " + getClientHost());
-		} catch (Exception ex) {
-			handleException(ex);
-		}
-		return sessionId;
-		
-	}
-	
-	@Override
-	public UUID registerAdmin(String password, MageVersion version) throws RemoteException, MageException {
-		UUID sessionId = null;
+	public boolean registerAdmin(String password, String sessionId, MageVersion version) throws MageException {
 		try {
 			if (version.compareTo(Main.getVersion()) != 0)
 				throw new MageException("Wrong client version " + version + ", expecting version " + Main.getVersion());
 			if (!password.equals(this.password))
 				throw new MageException("Wrong password");
-			sessionId = SessionManager.getInstance().createSession(getClientHost());
-			logger.info("Admin connected from " + getClientHost());
+			return SessionManager.getInstance().registerAdmin(sessionId);
 		} catch (Exception ex) {
 			handleException(ex);
 		}
-		return sessionId;
+		return false;
 	}
 
 	@Override
-	public TableView createTable(UUID sessionId, UUID roomId, MatchOptions options) throws MageException {
+	public TableView createTable(String sessionId, UUID roomId, MatchOptions options) throws MageException {
 		try {
 			if (SessionManager.getInstance().isValidSession(sessionId)) {
 				TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(sessionId, options);
@@ -171,7 +119,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public TableView createTournamentTable(UUID sessionId, UUID roomId, TournamentOptions options) throws MageException {
+	public TableView createTournamentTable(String sessionId, UUID roomId, TournamentOptions options) throws MageException {
 		try {
 			if (SessionManager.getInstance().isValidSession(sessionId)) {
 				TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTournamentTable(sessionId, options);
@@ -186,7 +134,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void removeTable(final UUID sessionId, final UUID roomId, final UUID tableId) throws MageException {
+	public void removeTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -205,7 +153,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public boolean joinTable(UUID sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException, GameException {
+	public boolean joinTable(String sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException, GameException {
 		try {
 			if (SessionManager.getInstance().isValidSession(sessionId)) {
 				boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTable(sessionId, tableId, name, playerType, skill, deckList);
@@ -222,7 +170,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public boolean joinTournamentTable(UUID sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill) throws MageException, GameException {
+	public boolean joinTournamentTable(String sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill) throws MageException, GameException {
 		try {
 			if (SessionManager.getInstance().isValidSession(sessionId)) {
 				boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTournamentTable(sessionId, tableId, name, playerType, skill);
@@ -239,7 +187,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public boolean submitDeck(UUID sessionId, UUID tableId, DeckCardLists deckList) throws MageException, GameException {
+	public boolean submitDeck(String sessionId, UUID tableId, DeckCardLists deckList) throws MageException, GameException {
 		try {
 			if (SessionManager.getInstance().isValidSession(sessionId)) {
 				boolean ret = TableManager.getInstance().submitDeck(sessionId, tableId, deckList);
@@ -293,7 +241,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void deregisterClient(final UUID sessionId) throws MageException {
+	public void deregisterClient(final String sessionId) throws MageException {
 		try {
 			rmiExecutor.execute(
 				new Runnable() {
@@ -314,7 +262,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void startMatch(final UUID sessionId, final UUID roomId, final UUID tableId) throws MageException {
+	public void startMatch(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -333,7 +281,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void startChallenge(final UUID sessionId, final UUID roomId, final UUID tableId, final UUID challengeId) throws RemoteException, MageException {
+	public void startChallenge(final String sessionId, final UUID roomId, final UUID tableId, final UUID challengeId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -352,7 +300,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void startTournament(final UUID sessionId, final UUID roomId, final UUID tableId) throws MageException {
+	public void startTournament(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -371,7 +319,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public TournamentView getTournament(UUID tournamentId) throws RemoteException, MageException {
+	public TournamentView getTournament(UUID tournamentId) throws MageException {
 		try {
 			return TournamentManager.getInstance().getTournamentView(tournamentId);
 		}
@@ -399,7 +347,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void joinChat(final UUID chatId, final UUID sessionId, final String userName) throws MageException {
+	public void joinChat(final UUID chatId, final String sessionId, final String userName) throws MageException {
 		try {
 			rmiExecutor.execute(
 				new Runnable() {
@@ -416,7 +364,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void leaveChat(final UUID chatId, final UUID sessionId) throws MageException {
+	public void leaveChat(final UUID chatId, final String sessionId) throws MageException {
 		try {
 			rmiExecutor.execute(
 				new Runnable() {
@@ -455,7 +403,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public boolean isTableOwner(UUID sessionId, UUID roomId, UUID tableId) throws MageException {
+	public boolean isTableOwner(String sessionId, UUID roomId, UUID tableId) throws MageException {
 		try {
 			return TableManager.getInstance().isTableOwner(tableId, sessionId);
 		}
@@ -466,7 +414,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void swapSeats(final UUID sessionId, final UUID roomId, final UUID tableId, final int seatNum1, final int seatNum2) throws RemoteException, MageException {
+	public void swapSeats(final String sessionId, final UUID roomId, final UUID tableId, final int seatNum1, final int seatNum2) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -485,7 +433,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void leaveTable(final UUID sessionId, final UUID roomId, final UUID tableId) throws MageException {
+	public void leaveTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -515,7 +463,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void joinGame(final UUID gameId, final UUID sessionId) throws MageException {
+	public void joinGame(final UUID gameId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -534,7 +482,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void joinDraft(final UUID draftId, final UUID sessionId) throws MageException {
+	public void joinDraft(final UUID draftId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -553,7 +501,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void joinTournament(final UUID tournamentId, final UUID sessionId) throws MageException {
+	public void joinTournament(final UUID tournamentId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -594,7 +542,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void sendPlayerUUID(final UUID gameId, final UUID sessionId, final UUID data) throws MageException {
+	public void sendPlayerUUID(final UUID gameId, final String sessionId, final UUID data) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -613,7 +561,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void sendPlayerString(final UUID gameId, final UUID sessionId, final String data) throws MageException {
+	public void sendPlayerString(final UUID gameId, final String sessionId, final String data) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -632,7 +580,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void sendPlayerBoolean(final UUID gameId, final UUID sessionId, final Boolean data) throws MageException {
+	public void sendPlayerBoolean(final UUID gameId, final String sessionId, final Boolean data) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -651,7 +599,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void sendPlayerInteger(final UUID gameId, final UUID sessionId, final Integer data) throws RemoteException, MageException {
+	public void sendPlayerInteger(final UUID gameId, final String sessionId, final Integer data) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -670,7 +618,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public DraftPickView sendCardPick(final UUID draftId, final UUID sessionId, final UUID cardPick) throws MageException {
+	public DraftPickView sendCardPick(final UUID draftId, final String sessionId, final UUID cardPick) throws MageException {
 		try {
 			if (SessionManager.getInstance().isValidSession(sessionId)) {
 				return DraftManager.getInstance().sendCardPick(draftId, sessionId, cardPick);
@@ -683,7 +631,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void concedeGame(final UUID gameId, final UUID sessionId) throws MageException {
+	public void concedeGame(final UUID gameId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -702,7 +650,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public boolean watchTable(UUID sessionId, UUID roomId, UUID tableId) throws MageException {
+	public boolean watchTable(String sessionId, UUID roomId, UUID tableId) throws MageException {
 		try {
 			if (SessionManager.getInstance().isValidSession(sessionId)) {
 				return GamesRoomManager.getInstance().getRoom(roomId).watchTable(sessionId, tableId);
@@ -715,7 +663,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void watchGame(final UUID gameId, final UUID sessionId) throws MageException {
+	public void watchGame(final UUID gameId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -734,7 +682,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void stopWatching(final UUID gameId, final UUID sessionId) throws MageException {
+	public void stopWatching(final UUID gameId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -753,7 +701,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void replayGame(final UUID gameId, final UUID sessionId) throws MageException {
+	public void replayGame(final UUID gameId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -772,7 +720,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void startReplay(final UUID gameId, final UUID sessionId) throws MageException {
+	public void startReplay(final UUID gameId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -791,7 +739,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void stopReplay(final UUID gameId, final UUID sessionId) throws MageException {
+	public void stopReplay(final UUID gameId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -810,7 +758,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void nextPlay(final UUID gameId, final UUID sessionId) throws MageException {
+	public void nextPlay(final UUID gameId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -829,7 +777,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void previousPlay(final UUID gameId, final UUID sessionId) throws MageException {
+	public void previousPlay(final UUID gameId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -848,7 +796,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public ServerState getServerState() throws RemoteException, MageException {
+	public ServerState getServerState() throws MageException {
 		try {
 			return new ServerState(
 					GameFactory.getInstance().getGameTypes(),
@@ -865,7 +813,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void cheat(final UUID gameId, final UUID sessionId, final UUID playerId, final DeckCardLists deckList) throws MageException {
+	public void cheat(final UUID gameId, final String sessionId, final UUID playerId, final DeckCardLists deckList) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -885,7 +833,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
     @Override
-	public boolean cheat(final UUID gameId, final UUID sessionId, final UUID playerId, final String cardName) throws MageException {
+	public boolean cheat(final UUID gameId, final String sessionId, final UUID playerId, final String cardName) throws MageException {
         if (testMode) {
 			if (SessionManager.getInstance().isValidSession(sessionId)) {
 		        return GameManager.getInstance().cheat(gameId, sessionId, playerId, cardName);
@@ -900,7 +848,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-    public GameView getGameView(final UUID gameId, final UUID sessionId, final UUID playerId) {
+    public GameView getGameView(final UUID gameId, final String sessionId, final UUID playerId) {
  		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			return GameManager.getInstance().getGameView(gameId, sessionId, playerId);
 		}
@@ -908,7 +856,7 @@ public class ServerImpl extends RemoteServer implements Server {
     }
 
 	@Override
-	public List<UserView> getUsers(UUID sessionId) throws RemoteException, MageException {
+	public List<UserView> getUsers(String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			return SessionManager.getInstance().getUsers(sessionId);
 		}
@@ -916,7 +864,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 
 	@Override
-	public void disconnectUser(final UUID sessionId, final UUID userSessionId) throws RemoteException, MageException {
+	public void disconnectUser(final String sessionId, final String userSessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(
@@ -935,7 +883,7 @@ public class ServerImpl extends RemoteServer implements Server {
 	}
 	
 	@Override
-	public void removeTable(final UUID sessionId, final UUID tableId) throws RemoteException, MageException {
+	public void removeTable(final String sessionId, final UUID tableId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
 				rmiExecutor.execute(

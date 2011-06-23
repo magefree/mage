@@ -48,13 +48,13 @@ public class DraftManager {
 
 	private ConcurrentHashMap<UUID, DraftController> draftControllers = new ConcurrentHashMap<UUID, DraftController>();
 
-	public UUID createDraftSession(Draft draft, ConcurrentHashMap<UUID, UUID> sessionPlayerMap, UUID tableId) {
+	public UUID createDraftSession(Draft draft, ConcurrentHashMap<String, UUID> sessionPlayerMap, UUID tableId) {
 		DraftController draftController = new DraftController(draft, sessionPlayerMap, tableId);
 		draftControllers.put(draft.getId(), draftController);
 		return draftController.getSessionId();
 	}
 
-	public void joinDraft(UUID draftId, UUID sessionId) {
+	public void joinDraft(UUID draftId, String sessionId) {
 		draftControllers.get(draftId).join(sessionId);
 	}
 
@@ -62,21 +62,21 @@ public class DraftManager {
 		draftControllers.remove(gameId);
 	}
 
-	public DraftPickView sendCardPick(UUID draftId, UUID sessionId, UUID cardId) {
+	public DraftPickView sendCardPick(UUID draftId, String sessionId, UUID cardId) {
 		return draftControllers.get(draftId).sendCardPick(sessionId, cardId);
 	}
 
-	public void removeSession(UUID sessionId) {
+	public void removeSession(String sessionId) {
 		for (DraftController controller: draftControllers.values()) {
 			controller.kill(sessionId);
 		}
 	}
 
-	public void kill(UUID draftId, UUID sessionId) {
+	public void kill(UUID draftId, String sessionId) {
 		draftControllers.get(draftId).kill(sessionId);
 	}
 
-	public void timeout(UUID gameId, UUID sessionId) {
+	public void timeout(UUID gameId, String sessionId) {
 		draftControllers.get(gameId).timeout(sessionId);
 	}
 

@@ -31,8 +31,6 @@ package mage.server.game;
 import java.util.UUID;
 import mage.game.Game;
 import mage.game.GameState;
-import mage.MageException;
-import mage.interfaces.callback.CallbackException;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.Session;
 import mage.server.SessionManager;
@@ -47,9 +45,9 @@ public class ReplaySession implements GameCallback {
 
 	private final static Logger logger = Logger.getLogger(ReplaySession.class);
 	private GameReplay replay;
-	protected UUID sessionId;
+	protected String sessionId;
 
-	ReplaySession(UUID gameId, UUID sessionId) {
+	ReplaySession(UUID gameId, String sessionId) {
 		this.replay = new GameReplay(gameId);
 		this.sessionId = sessionId;
 	}

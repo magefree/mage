@@ -32,13 +32,10 @@ import java.rmi.RemoteException;
 import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 import mage.cards.decks.Deck;
 import mage.game.tournament.Tournament;
 import mage.MageException;
-import mage.interfaces.callback.CallbackException;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.Session;
 import mage.server.SessionManager;
@@ -53,7 +50,7 @@ import org.apache.log4j.Logger;
 public class TournamentSession {
 	protected final static Logger logger = Logger.getLogger(TournamentSession.class);
 
-	protected UUID sessionId;
+	protected String sessionId;
 	protected UUID playerId;
 	protected UUID tableId;
 	protected Tournament tournament;
@@ -62,7 +59,7 @@ public class TournamentSession {
 	private ScheduledFuture<?> futureTimeout;
 	protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
 
-	public TournamentSession(Tournament tournament, UUID sessionId, UUID tableId, UUID playerId) {
+	public TournamentSession(Tournament tournament, String sessionId, UUID tableId, UUID playerId) {
 		this.sessionId = sessionId;
 		this.tournament = tournament;
 		this.playerId = playerId;
@@ -147,7 +144,6 @@ public class TournamentSession {
 	private synchronized void cancelTimeout() {
 		if (futureTimeout != null) {
 			futureTimeout.cancel(false);
-			((ThreadPoolExecutor)timeoutExecutor).getQueue().remove(futureTimeout);
 		}
 	}
 

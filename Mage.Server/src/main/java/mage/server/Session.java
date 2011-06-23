@@ -31,11 +31,14 @@ package mage.server;
 import java.util.Date;
 import java.util.UUID;
 import mage.cards.decks.Deck;
-import mage.interfaces.callback.CallbackServerSession;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.game.GameManager;
 import mage.view.TableClientMessage;
 import org.apache.log4j.Logger;
+import org.jboss.remoting.callback.AsynchInvokerCallbackHandler;
+import org.jboss.remoting.callback.Callback;
+import org.jboss.remoting.callback.HandleCallbackException;
+import org.jboss.remoting.callback.InvokerCallbackHandler;
 
 /**
  *
@@ -45,68 +48,46 @@ public class Session {
 
 	private final static Logger logger = Logger.getLogger(Session.class);
 
-	private UUID sessionId;
-	private UUID clientId;
+	private String sessionId;
 	private String username;
 	private String host;
-	private int messageId = 0;
-	private String ackMessage;
 	private Date timeConnected;
-	private long lastPing;
 	private boolean isAdmin = false;
-	private final CallbackServerSession callback = new CallbackServerSession();
+	private AsynchInvokerCallbackHandler callbackHandler;
 
-	public Session(String userName, String host, UUID clientId) {
-		sessionId = UUID.randomUUID();
-		this.username = userName;
+	public Session(String sessionId, InvokerCallbackHandler callbackHandler, String host) {
+		this.sessionId = sessionId;
+		this.callbackHandler = (AsynchInvokerCallbackHandler) callbackHandler;
 		this.host = host;
-		this.clientId = clientId;
 		this.isAdmin = false;
 		this.timeConnected = new Date();
-		ping();
 	}
-
-	public Session(String host) {
-		sessionId = UUID.randomUUID();
-		this.username = "Admin";
-		this.host = host;
+	
+	public void registerUser(String userName) {
+		this.isAdmin = false;
+		this.username = userName;
+	}
+	
+	public void registerAdmin() {
 		this.isAdmin = true;
-		this.timeConnected = new Date();
-		ping();
+		this.username = "Admin";
 	}
-
-	public UUID getId() {
+	
+	public String getId() {
 		return sessionId;
 	}
 
-	public UUID getClientId() {
-		return clientId;
-	}
-
 	public void kill() {
-		callback.destroy();
 		SessionManager.getInstance().removeSession(sessionId);
 		TableManager.getInstance().removeSession(sessionId);
 		GameManager.getInstance().removeSession(sessionId);
 		ChatManager.getInstance().removeSession(sessionId);
 	}
 
-	public ClientCallback callback() {
-		try {
-			return callback.callback();
-		} catch (InterruptedException ex) {
-			logger.fatal("Session callback error", ex);
-		}
-		return null;
-	}
-
 	public synchronized void fireCallback(final ClientCallback call) {
-		call.setMessageId(messageId++);
-		if (logger.isDebugEnabled())
-			logger.debug(sessionId + " - " + call.getMessageId() + " - " + call.getMethod());
 		try {
-			callback.setCallback(call);
-		} catch (InterruptedException ex) {
+			callbackHandler.handleCallbackOneway(new Callback(call));
+		} catch (HandleCallbackException ex) {
 			logger.fatal("Session fireCallback error", ex);
 		}
 	}
@@ -139,30 +120,8 @@ public class Session {
 		fireCallback(new ClientCallback("replayGame", gameId));
 	}
 
-	public void ack(String message) {
-		this.ackMessage = message;
-	}
-
-	public String getAckMessage() {
-		return ackMessage;
-	}
-
-	public void clearAck() {
-		this.ackMessage = "";
-	}
-
 	public String getUsername() {
 		return username;
-	}
-
-	public void ping() {
-		this.lastPing = System.currentTimeMillis();
-		if (logger.isTraceEnabled())
-			logger.trace("Ping received from" + username + ":" + sessionId);
-	}
-
-	public boolean stillAlive() {
-		return (System.currentTimeMillis() - lastPing) < 60000;
 	}
 
 	public boolean isAdmin() {

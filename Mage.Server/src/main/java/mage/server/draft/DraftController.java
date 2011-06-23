@@ -56,12 +56,12 @@ public class DraftController {
 	public static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
 
 	private ConcurrentHashMap<UUID, DraftSession> draftSessions = new ConcurrentHashMap<UUID, DraftSession>();
-	private ConcurrentHashMap<UUID, UUID> sessionPlayerMap;
+	private ConcurrentHashMap<String, UUID> sessionPlayerMap;
 	private UUID draftSessionId;
 	private Draft draft;
 	private UUID tableId;
 
-	public DraftController(Draft draft, ConcurrentHashMap<UUID, UUID> sessionPlayerMap, UUID tableId) {
+	public DraftController(Draft draft, ConcurrentHashMap<String, UUID> sessionPlayerMap, UUID tableId) {
 		draftSessionId = UUID.randomUUID();
 		this.sessionPlayerMap = sessionPlayerMap;
 		this.draft = draft;
@@ -116,11 +116,11 @@ public class DraftController {
 		checkStart();
 	}
 
-	private UUID getPlayerId(UUID sessionId) {
+	private UUID getPlayerId(String sessionId) {
 		return sessionPlayerMap.get(sessionId);
 	}
 
-	public void join(UUID sessionId) {
+	public void join(String sessionId) {
 		UUID playerId = sessionPlayerMap.get(sessionId);
 		DraftSession draftSession = new DraftSession(draft, sessionId, playerId);
 		draftSessions.put(playerId, draftSession);
@@ -163,7 +163,7 @@ public class DraftController {
 		return true;
 	}
 
-	private void leave(UUID sessionId) {
+	private void leave(String sessionId) {
 		draft.leave(getPlayerId(sessionId));
 	}
 
@@ -174,7 +174,7 @@ public class DraftController {
 		TableManager.getInstance().endDraft(tableId, draft);
 	}
 
-	public void kill(UUID sessionId) {
+	public void kill(String sessionId) {
 		if (sessionPlayerMap.containsKey(sessionId)) {
 			draftSessions.get(sessionPlayerMap.get(sessionId)).setKilled();
 			draftSessions.remove(sessionPlayerMap.get(sessionId));
@@ -183,7 +183,7 @@ public class DraftController {
 		}
 	}
 
-	public void timeout(UUID sessionId) {
+	public void timeout(String sessionId) {
 		if (sessionPlayerMap.containsKey(sessionId)) {
 			draft.autoPick(sessionPlayerMap.get(sessionId));
 		}
@@ -193,7 +193,7 @@ public class DraftController {
 		return this.draftSessionId;
 	}
 
-	public DraftPickView sendCardPick(UUID sessionId, UUID cardId) {
+	public DraftPickView sendCardPick(String sessionId, UUID cardId) {
 		if (draftSessions.get(sessionPlayerMap.get(sessionId)).sendCardPick(cardId)) {
 			return getDraftPickView(sessionPlayerMap.get(sessionId), 0);
 		}

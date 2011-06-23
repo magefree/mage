@@ -34,8 +34,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import mage.MageException;
-import mage.interfaces.callback.CallbackException;
 import mage.interfaces.callback.ClientCallback;
 import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
@@ -48,7 +46,7 @@ import org.apache.log4j.Logger;
 public class ChatSession {
 
 	private final static Logger logger = Logger.getLogger(ChatSession.class);
-	private ConcurrentHashMap<UUID, String> clients = new ConcurrentHashMap<UUID, String>();
+	private ConcurrentHashMap<String, String> clients = new ConcurrentHashMap<String, String>();
 	private UUID chatId;
 	private DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
 
@@ -58,13 +56,13 @@ public class ChatSession {
 		chatId = UUID.randomUUID();
 	}
 
-	public void join(String userName, UUID sessionId) {
+	public void join(String userName, String sessionId) {
 		clients.put(sessionId, userName);
 		broadcast(userName, " has joined", MessageColor.BLACK);
 		logger.info(userName + " joined chat " + chatId);
 	}
 
-	public void kill(UUID sessionId) {
+	public void kill(String sessionId) {
 		if (clients.containsKey(sessionId)) {
 			String userName = clients.get(sessionId);
 			clients.remove(sessionId);
@@ -79,7 +77,7 @@ public class ChatSession {
 		final String time = timeFormatter.format(cal.getTime());
 		final String username = userName;
 		logger.debug("Broadcasting '" + msg + "' for " + chatId);
-		for (UUID sessionId: clients.keySet()) {
+		for (String sessionId: clients.keySet()) {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			if (session != null)
 				session.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color)));

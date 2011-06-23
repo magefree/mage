@@ -50,13 +50,13 @@ public class GameManager {
 
 	private ConcurrentHashMap<UUID, GameController> gameControllers = new ConcurrentHashMap<UUID, GameController>();
 
-	public UUID createGameSession(Game game, ConcurrentHashMap<UUID, UUID> sessionPlayerMap, UUID tableId, UUID choosingPlayerId) {
+	public UUID createGameSession(Game game, ConcurrentHashMap<String, UUID> sessionPlayerMap, UUID tableId, UUID choosingPlayerId) {
 		GameController gameController = new GameController(game, sessionPlayerMap, tableId, choosingPlayerId);
 		gameControllers.put(game.getId(), gameController);
 		return gameController.getSessionId();
 	}
 
-	public void joinGame(UUID gameId, UUID sessionId) {
+	public void joinGame(UUID gameId, String sessionId) {
 		if (gameControllers.containsKey(gameId))
 			gameControllers.get(gameId).join(sessionId);
 	}
@@ -71,64 +71,64 @@ public class GameManager {
 		return null;
 	}
 
-	public void sendPlayerUUID(UUID gameId, UUID sessionId, UUID data) {
+	public void sendPlayerUUID(UUID gameId, String sessionId, UUID data) {
 		if (gameControllers.containsKey(gameId))
 			gameControllers.get(gameId).sendPlayerUUID(sessionId, data);
 	}
 
-	public void sendPlayerString(UUID gameId, UUID sessionId, String data) {
+	public void sendPlayerString(UUID gameId, String sessionId, String data) {
 		if (gameControllers.containsKey(gameId))
 			gameControllers.get(gameId).sendPlayerString(sessionId, data);
 	}
 
-	public void sendPlayerBoolean(UUID gameId, UUID sessionId, Boolean data) {
+	public void sendPlayerBoolean(UUID gameId, String sessionId, Boolean data) {
 		if (gameControllers.containsKey(gameId))
 			gameControllers.get(gameId).sendPlayerBoolean(sessionId, data);
 	}
 
-	public void sendPlayerInteger(UUID gameId, UUID sessionId, Integer data) {
+	public void sendPlayerInteger(UUID gameId, String sessionId, Integer data) {
 		if (gameControllers.containsKey(gameId))
 			gameControllers.get(gameId).sendPlayerInteger(sessionId, data);
 	}
 
-	public void concedeGame(UUID gameId, UUID sessionId) {
+	public void concedeGame(UUID gameId, String sessionId) {
 		if (gameControllers.containsKey(gameId))
 			gameControllers.get(gameId).concede(sessionId);
 	}
 
-	public void watchGame(UUID gameId, UUID sessionId) {
+	public void watchGame(UUID gameId, String sessionId) {
 		if (gameControllers.containsKey(gameId))
 			gameControllers.get(gameId).watch(sessionId);
 	}
 
-	public void stopWatching(UUID gameId, UUID sessionId) {
+	public void stopWatching(UUID gameId, String sessionId) {
 		if (gameControllers.containsKey(gameId))
 			gameControllers.get(gameId).stopWatching(sessionId);
 	}
 
-	public void removeSession(UUID sessionId) {
+	public void removeSession(String sessionId) {
 		for (GameController controller: gameControllers.values()) {
 			controller.kill(sessionId);
 		}
 	}
 
-	public void kill(UUID gameId, UUID sessionId) {
+	public void kill(UUID gameId, String sessionId) {
 		if (gameControllers.containsKey(gameId))
 			gameControllers.get(gameId).kill(sessionId);
 	}
 
-	public void cheat(UUID gameId, UUID sessionId, UUID playerId, DeckCardLists deckList) {
+	public void cheat(UUID gameId, String sessionId, UUID playerId, DeckCardLists deckList) {
 		if (gameControllers.containsKey(gameId))
 			gameControllers.get(gameId).cheat(sessionId, playerId, deckList);
 	}
 
-    public boolean cheat(UUID gameId, UUID sessionId, UUID playerId, String cardName) {
+    public boolean cheat(UUID gameId, String sessionId, UUID playerId, String cardName) {
 		if (gameControllers.containsKey(gameId))
 			return gameControllers.get(gameId).cheat(sessionId, playerId, cardName);
 		return false;
 	}
 
-	public void timeout(UUID gameId, UUID sessionId) {
+	public void timeout(UUID gameId, String sessionId) {
 		if (gameControllers.containsKey(gameId))
 			gameControllers.get(gameId).timeout(sessionId);
 	}
@@ -142,7 +142,7 @@ public class GameManager {
 			gameControllers.get(gameId).saveGame();
 	}
 
-    public GameView getGameView(UUID gameId, UUID sessionId, UUID playerId) {
+    public GameView getGameView(UUID gameId, String sessionId, UUID playerId) {
  		if (gameControllers.containsKey(gameId))
 	       return gameControllers.get(gameId).getGameView(playerId);
 		return null;

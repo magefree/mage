@@ -34,11 +34,8 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import mage.game.Game;
-import mage.MageException;
-import mage.interfaces.callback.CallbackException;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.Session;
 import mage.server.SessionManager;
@@ -61,7 +58,7 @@ public class GameSession extends GameWatcher {
 	private ScheduledFuture<?> futureTimeout;
 	protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
 
-	public GameSession(Game game, UUID sessionId, UUID playerId) {
+	public GameSession(Game game, String sessionId, UUID playerId) {
 		super(sessionId, game.getId());
 		this.game = game;
 		this.playerId = playerId;
@@ -173,8 +170,6 @@ public class GameSession extends GameWatcher {
 	private synchronized void cancelTimeout() {
 		if (futureTimeout != null) {
 			futureTimeout.cancel(false);
-			((ThreadPoolExecutor)timeoutExecutor).getQueue().remove(futureTimeout);
-			//System.out.println("tasks:"+ ((ThreadPoolExecutor)timeoutExecutor).getTaskCount());
 		}
 	}
 
@@ -196,10 +191,5 @@ public class GameSession extends GameWatcher {
 	public void sendPlayerInteger(Integer data) {
 		cancelTimeout();
 		game.getPlayer(playerId).setResponseInteger(data);
-	}
-
-	public void destroy() {
-		cancelTimeout();
-		setKilled();
 	}
 }

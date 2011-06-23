@@ -32,14 +32,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import mage.MageException;
 import mage.view.UserView;
 import org.apache.log4j.Logger;
+import org.jboss.remoting.callback.InvokerCallbackHandler;
 
 /**
  *
@@ -49,83 +45,67 @@ public class SessionManager {
 
 	private final static Logger logger = Logger.getLogger(SessionManager.class);
 	private final static SessionManager INSTANCE = new SessionManager();
-	private static ScheduledExecutorService sessionExecutor;
 
 	public static SessionManager getInstance() {
 		return INSTANCE;
 	}
 
-	protected SessionManager() {
-		sessionExecutor = Executors.newScheduledThreadPool(1);
-		sessionExecutor.scheduleWithFixedDelay(new SessionChecker(), 30, 10, TimeUnit.SECONDS);
-	}
+	private ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<String, Session>();
 
-	private ConcurrentHashMap<UUID, Session> sessions = new ConcurrentHashMap<UUID, Session>();
-
-	public Session getSession(UUID sessionId) {
+	public Session getSession(String sessionId) {
 		if (sessions == null || sessionId == null) return null;
 		return sessions.get(sessionId);
 	}
 
-	public UUID createSession(String userName, String host, UUID clientId) throws MageException {
-		for (Session session: sessions.values()) {
-			if (session.getUsername().equals(userName)) {
-				if (session.getClientId().equals(clientId)) {
-					logger.info("Reconnecting session " + session.getId() + " for " + userName);
-					return session.getId();
-				}
-				else {
-					throw new MageException("User name already in use");
-				}
-			}
-		}
-		Session session = new Session(userName, host, clientId);
-		sessions.put(session.getId(), session);
-		logger.info("Session " + session.getId() + " created for user " + userName);
-		return session.getId();
-	}
-
-	public UUID createSession(String host) throws MageException {
-		Session session = new Session(host);
-		sessions.put(session.getId(), session);
-		logger.info("Admin session created");
-		return session.getId();
-	}
-
-	public void removeSession(UUID sessionId) {
-		sessions.remove(sessionId);
-	}
-
-	public void checkSessions() {
-		logger.trace("Checking sessions");
-		for (Session session: sessions.values()) {
-			if (!session.stillAlive()) {
-				logger.info("Client for user " + session.getUsername() + ":" + session.getId() + " timed out - releasing resources");
-				session.kill();
-			}
-		}
+	public void createSession(String sessionId, InvokerCallbackHandler callbackHandler, String host) {
+		Session session = new Session(sessionId, callbackHandler, host);
+		sessions.put(sessionId, session);
 	}
 	
-	public Map<UUID, Session> getSessions() {
-		Map<UUID, Session> map = new HashMap<UUID, Session>();
-		for (Map.Entry<UUID, Session> entry : sessions.entrySet()) {
+	public boolean registerUser(String sessionId, String userName) {
+		Session session = sessions.get(sessionId);
+		if (session != null) {
+			session.registerUser(userName);
+			logger.info("User " + userName + " connected from " + session.getHost());
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean registerAdmin(String sessionId) {
+		Session session = sessions.get(sessionId);
+		if (session != null) {
+			session.registerAdmin();
+			logger.info("Admin connected from " + session.getHost());
+			return true;
+		}
+		return false;
+	}
+	
+	public void removeSession(String sessionId) {
+		sessions.remove(sessionId);
+	}
+	
+	public Map<String, Session> getSessions() {
+		Map<String, Session> map = new HashMap<String, Session>();
+		for (Map.Entry<String, Session> entry : sessions.entrySet()) {
 			 map.put(entry.getKey(), entry.getValue());
 		}
 		return map;
 	}
 
-	List<UserView> getUsers(UUID sessionId) {
+	List<UserView> getUsers(String sessionId) {
 		List<UserView> users = new ArrayList<UserView>();
 		Session admin = sessions.get(sessionId);
 		if (admin != null && admin.isAdmin()) {
 			for (Session session: sessions.values()) {
-				users.add(new UserView(session.getUsername(), session.getHost(), session.getId(), session.getConnectionTime()));
+				users.add(new UserView(session.getUsername(), "", session.getId(), session.getConnectionTime()));
 			}
 		}
 		return users;
 	}
 
-	public void disconnectUser(UUID sessionId, UUID userSessionId) {
+	public void disconnectUser(String sessionId, String userSessionId) {
 		if (isAdmin(sessionId)) {
 			Session session = sessions.get(userSessionId);
 			if (session != null) {
@@ -134,7 +114,7 @@ public class SessionManager {
 		}
 	}
 
-	public boolean isAdmin(UUID sessionId) {
+	public boolean isAdmin(String sessionId) {
 		Session admin = sessions.get(sessionId);
 		if (admin != null) {
 			return admin.isAdmin();
@@ -142,19 +122,10 @@ public class SessionManager {
 		return false;
 	}
 
-	public boolean isValidSession(UUID sessionId) {
+	public boolean isValidSession(String sessionId) {
 		if (sessions.containsKey(sessionId))
 			return true;
 		return false;
-	}
-
-	class SessionChecker implements Runnable {
-
-		@Override
-		public void run() {
-			checkSessions();
-		}
-
 	}
 
 }

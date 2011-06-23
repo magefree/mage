@@ -54,11 +54,11 @@ public class ChatManager {
 		return chatSession.getChatId();
 	}
 
-	public void joinChat(UUID chatId, UUID sessionId, String userName) {
+	public void joinChat(UUID chatId, String sessionId, String userName) {
 		chatSessions.get(chatId).join(userName, sessionId);
 	}
 
-	public void leaveChat(UUID chatId, UUID sessionId) {
+	public void leaveChat(UUID chatId, String sessionId) {
 		chatSessions.get(chatId).kill(sessionId);
 	}
 
@@ -70,7 +70,7 @@ public class ChatManager {
 		chatSessions.get(chatId).broadcast(userName, message, color);
 	}
 
-	void removeSession(UUID sessionId) {
+	void removeSession(String sessionId) {
 		for (ChatSession chat: chatSessions.values()) {
 			chat.kill(sessionId);
 		}

@@ -32,12 +32,8 @@ import java.rmi.RemoteException;
 import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 import mage.game.draft.Draft;
-import mage.MageException;
-import mage.interfaces.callback.CallbackException;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.Session;
 import mage.server.SessionManager;
@@ -55,7 +51,7 @@ public class DraftSession {
 
 	protected final static Logger logger = Logger.getLogger(DraftSession.class);
 
-	protected UUID sessionId;
+	protected String sessionId;
 	protected UUID playerId;
 	protected Draft draft;
 	protected boolean killed = false;
@@ -63,7 +59,7 @@ public class DraftSession {
 	private ScheduledFuture<?> futureTimeout;
 	protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
 
-	public DraftSession(Draft draft, UUID sessionId, UUID playerId) {
+	public DraftSession(Draft draft, String sessionId, UUID playerId) {
 		this.sessionId = sessionId;
 		this.draft = draft;
 		this.playerId = playerId;
@@ -143,7 +139,6 @@ public class DraftSession {
 	private synchronized void cancelTimeout() {
 		if (futureTimeout != null) {
 			futureTimeout.cancel(false);
-			((ThreadPoolExecutor)timeoutExecutor).getQueue().remove(futureTimeout);
 		}
 	}
 

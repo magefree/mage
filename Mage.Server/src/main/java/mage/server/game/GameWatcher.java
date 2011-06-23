@@ -30,9 +30,6 @@ package mage.server.game;
 
 import java.rmi.RemoteException;
 import java.util.UUID;
-import java.util.logging.Level;
-import mage.MageException;
-import mage.interfaces.callback.CallbackException;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.Session;
 import mage.server.SessionManager;
@@ -48,11 +45,11 @@ public class GameWatcher {
 
 	protected final static Logger logger = Logger.getLogger(GameWatcher.class);
 
-	protected UUID sessionId;
+	protected String sessionId;
 	protected UUID gameId;
 	protected boolean killed = false;
 
-	public GameWatcher(UUID sessionId, UUID gameId) {
+	public GameWatcher(String sessionId, UUID gameId) {
 		this.sessionId = sessionId;
 		this.gameId = gameId;
 	}

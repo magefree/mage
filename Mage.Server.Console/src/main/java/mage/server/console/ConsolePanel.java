@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.UUID;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
-import mage.server.console.remote.Session;
+import mage.remote.Session;
 import mage.view.TableView;
 import mage.view.UserView;
 
@@ -239,7 +239,7 @@ public class ConsolePanel extends javax.swing.JPanel {
 
 	private void btnDisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisconnectActionPerformed
 		int row = this.tblUsers.getSelectedRow();
-		ConsoleFrame.getSession().disconnectUser((UUID)tableUserModel.getValueAt(row, 3));
+		ConsoleFrame.getSession().disconnectUser((String)tableUserModel.getValueAt(row, 3));
 	}//GEN-LAST:event_btnDisconnectActionPerformed
 
 	private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
