@@ -36,10 +36,10 @@ public class PhaseManager {
     private static Map<String, String> mapYou = new HashMap<String, String>() {{
         put("Upkeep - play instants and activated abilities.", UPKEEP_YOU);
         put("Draw - play instants and activated abilities.", DRAW_YOU);
-        put("Precombat Main - play spells and sorceries.", MAIN_YOU);
+        put("Precombat Main - play spells and abilities.", MAIN_YOU);
         put("Begin Combat - play instants and activated abilities.", BEFORE_COMBAT_YOU);
         put("End Combat - play instants and activated abilities.", END_OF_COMBAT_YOU);
-        put("Postcombat Main - play spells and sorceries.", MAIN_2_YOU);
+        put("Postcombat Main - play spells and abilities.", MAIN_2_YOU);
         put("End Turn - play instants and activated abilities.", END_OF_TURN_YOU);
     }};
 

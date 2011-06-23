@@ -753,7 +753,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	public synchronized void firePriorityEvent(UUID playerId) {
 		String message = this.state.getTurn().getStepType().toString();
 		if (this.canPlaySorcery(playerId))
-			message += " - play spells and sorceries.";
+			message += " - play spells and abilities.";
 		else
 			message +=  " - play instants and activated abilities.";
 
