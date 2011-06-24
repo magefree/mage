@@ -92,6 +92,7 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 		return effectType;
 	}
 
+    @Override
     public void setTargetPointer(TargetPointer targetPointer) {
         this.targetPointer = targetPointer;
     }

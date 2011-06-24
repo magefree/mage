@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common;
 
+import java.util.List;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
@@ -62,7 +63,8 @@ public class DamageEverythingEffect extends OneShotEffect<DamageEverythingEffect
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
+		for (Permanent permanent: permanents) {
 			permanent.damage(amount, source.getId(), game, true, false);
 		}
 		for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {

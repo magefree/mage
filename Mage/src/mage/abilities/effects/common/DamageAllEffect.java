@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common;
 
+import java.util.List;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -68,7 +69,8 @@ public class DamageAllEffect extends OneShotEffect<DamageAllEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
+		for (Permanent permanent: permanents) {
 			permanent.damage(amount.calculate(game, source), source.getId(), game, true, false);
 		}
 		return true;

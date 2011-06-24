@@ -32,21 +32,26 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.continious.GainProtectionFromColorOrArtifactsTargetEffect;
+import mage.abilities.Ability;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColorOrArtifact;
-import mage.filter.FilterPermanent;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
-import org.apache.log4j.spi.Filter;
 
 /**
  *
  * @author Loki
  */
 public class ApostlesBlessing extends CardImpl<ApostlesBlessing> {
-    private static FilterControlledPermanent filter = new FilterControlledPermanent("artifact or creature you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact or creature you control");
 
     static {
         filter.getCardType().add(CardType.ARTIFACT);
@@ -58,7 +63,7 @@ public class ApostlesBlessing extends CardImpl<ApostlesBlessing> {
         super(ownerId, 2, "Apostle's Blessing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{WP}");
         this.expansionSetCode = "NPH";
 		this.color.setWhite(true);
-        this.getSpellAbility().addEffect(new GainProtectionFromColorOrArtifactsTargetEffect(Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new ApostlesBlessingEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetControlledPermanent(filter));
         this.getSpellAbility().addChoice(new ChoiceColorOrArtifact());
     }
@@ -71,5 +76,53 @@ public class ApostlesBlessing extends CardImpl<ApostlesBlessing> {
     public ApostlesBlessing copy() {
         return new ApostlesBlessing(this);
     }
+
+}
+
+class ApostlesBlessingEffect extends GainAbilityTargetEffect {
+
+	FilterCard protectionFilter;
+
+	public ApostlesBlessingEffect(Duration duration) {
+		super(new ProtectionAbility(new FilterCard()), duration);
+		protectionFilter = (FilterCard)((ProtectionAbility)ability).getFilter();
+	}
+
+	public ApostlesBlessingEffect(final ApostlesBlessingEffect effect) {
+		super(effect);
+		this.protectionFilter = effect.protectionFilter.copy();
+	}
+
+	@Override
+	public ApostlesBlessingEffect copy() {
+		return new ApostlesBlessingEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		ChoiceColorOrArtifact choice = (ChoiceColorOrArtifact) source.getChoices().get(0);
+        if (choice.isArtifactSelected()) {
+            protectionFilter.getCardType().add(Constants.CardType.ARTIFACT);
+            protectionFilter.setScopeCardType(ComparisonScope.Any);
+        } else {
+            protectionFilter.setColor(choice.getColor());
+            protectionFilter.setUseColor(true);
+		    protectionFilter.setScopeColor(ComparisonScope.Any);
+        }
+
+		protectionFilter.setMessage(choice.getChoice());
+		Permanent creature = game.getPermanent(source.getFirstTarget());
+		if (creature != null) {
+			creature.addAbility(ability);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public String getText(Ability source) {
+		return "target " + source.getTargets().get(0).getTargetName() + " gains protection from artifacts or from the color of your choice " + duration.toString();
+
+	}
 
 }
