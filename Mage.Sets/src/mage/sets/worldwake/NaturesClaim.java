@@ -42,14 +42,13 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import org.apache.log4j.spi.Filter;
 
 /**
  *
- * @author North
+ * @author Loki
  */
 public class NaturesClaim extends CardImpl<NaturesClaim> {
-    private static FilterPermanent filter = new FilterPermanent("artifact or enchantment");
+    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
     static {
         filter.getCardType().add(CardType.ARTIFACT);
