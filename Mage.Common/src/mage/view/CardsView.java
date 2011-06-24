@@ -36,13 +36,13 @@ import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.game.GameState;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class CardsView extends HashMap<UUID, CardView> {
-
 
 	public CardsView() {}
 
@@ -52,38 +52,31 @@ public class CardsView extends HashMap<UUID, CardView> {
 		}
 	}
 
-//	public CardsView(Cards cards) {
-//		if (cards != null)
-//			for (Card card: cards.values()) {
-//				this.add(new CardView(card));
-//			}
-//	}
-
 	public CardsView ( Collection<? extends Ability> abilities, Game game ) {
 		for ( Ability ability : abilities ) {
 			Card sourceCard = null;
-			String sourceName = null;
 			switch ( ability.getZone() ) {
 				case ALL:
 				case EXILED:
 				case GRAVEYARD:
 					sourceCard = game.getCard(ability.getSourceId());
-					sourceName = sourceCard.getName();
 					break;
 				case BATTLEFIELD:
-					sourceCard = game.getState().getPermanent(ability.getSourceId());
-					sourceName = sourceCard.getName();
+					sourceCard = game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD);
 					break;
 			}
-			this.put(ability.getId(), new AbilityView(ability, sourceName, new CardView(sourceCard)));
+			if (sourceCard != null) {
+				this.put(ability.getId(), new AbilityView(ability, sourceCard.getName(), new CardView(sourceCard)));
+			}
 		}
 	}
 
 	public CardsView(Collection<? extends Ability> abilities, GameState state) {
 		for (Ability ability: abilities) {
 			Card sourceCard = state.getPermanent(ability.getSourceId());
-			String sourceName = sourceCard.getName();
-			this.put(ability.getId(), new AbilityView(ability, sourceName, new CardView(sourceCard)));
+			if (sourceCard != null) {
+				this.put(ability.getId(), new AbilityView(ability, sourceCard.getName(), new CardView(sourceCard)));
+			}
 		}
 	}
 

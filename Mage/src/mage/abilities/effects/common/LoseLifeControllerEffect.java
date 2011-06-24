@@ -50,6 +50,7 @@ public class LoseLifeControllerEffect extends OneShotEffect<LoseLifeControllerEf
 
     public LoseLifeControllerEffect(final LoseLifeControllerEffect effect) {
         super(effect);
+		this.amount = effect.amount;
     }
 
     @Override
