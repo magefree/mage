@@ -54,11 +54,14 @@ import mage.view.TournamentView;
 import mage.view.UserView;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.Client;
+import org.jboss.remoting.ConnectionListener;
+import org.jboss.remoting.ConnectionValidator;
 import org.jboss.remoting.InvokerLocator;
 import org.jboss.remoting.callback.Callback;
 import org.jboss.remoting.callback.HandleCallbackException;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 import org.jboss.remoting.transport.bisocket.Bisocket;
+import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
 
 /**
@@ -122,15 +125,25 @@ public class Session {
 //					break;
 //			}
 			InvokerLocator clientLocator = new InvokerLocator(connection.getURI());
-			server = (MageServer) TransporterClient.createTransporterClient(clientLocator, MageServer.class);
+			Map<String, String> metadata = new HashMap<String, String>();
+			metadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
+			metadata.put("generalizeSocketException", "true");
+			server = (MageServer) TransporterClient.createTransporterClient(clientLocator.getLocatorURI(), MageServer.class, metadata);
 			
 			callbackClient = new Client(clientLocator, "callback");
 			callbackClient.connect();
 			
-			Map<String, Object> metadata = new HashMap<String, Object>();
-			metadata.put(Bisocket.IS_CALLBACK_SERVER, "true");
+			Map<String, String> listenerMetadata = new HashMap<String, String>();
+			listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "5000");
+			listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "2000");
+			callbackClient.addConnectionListener(new ClientConnectionListener(), listenerMetadata);
+			
+			Map<String, String> callbackMetadata = new HashMap<String, String>();
+			callbackMetadata.put(Bisocket.IS_CALLBACK_SERVER, "true");
+			callbackMetadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
+			callbackMetadata.put("generalizeSocketException", "true");
 			CallbackHandler callbackHandler = new CallbackHandler();
-			callbackClient.addListener(callbackHandler, metadata);
+			callbackClient.addListener(callbackHandler, callbackMetadata);
 									
 			this.sessionId = callbackClient.getSessionId();
 			boolean registerResult = false;
@@ -184,7 +197,15 @@ public class Session {
 			client.processCallback((ClientCallback)callback.getCallbackObject());
 		}
 	}
-			
+
+	class ClientConnectionListener implements ConnectionListener {
+		@Override
+		public void handleConnectionException(Throwable throwable, Client client) {
+			logger.info("connection to server lost");
+			disconnect(true);
+		}
+	}
+	
 	public boolean isConnected() {
 		if (callbackClient == null)
 			return false;

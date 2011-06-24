@@ -34,8 +34,6 @@ import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -52,10 +50,13 @@ public class Connection {
 	private int proxyPort;
 	private String proxyUsername;
 	private String proxyPassword;
+	
+	private static final String serialization = "?serializationtype=jboss";
+	private static final String transport = "bisocket";
 
 	@Override
 	public int hashCode() {
-		return (host + Integer.toString(port) + proxyType.toString()).hashCode();	
+		return (transport + host + Integer.toString(port) + proxyType.toString()).hashCode();	
 	}
 
 	@Override
@@ -69,18 +70,18 @@ public class Connection {
 
 	@Override
 	public String toString() {
-		return host + ":" + Integer.toString(port);
+		return host + ":" + Integer.toString(port) + "/" + serialization;
 	}
 
 	public String getURI() {
 		if (host.equals("localhost")) {
 			try {
-				return "bisocket://" + getLocalAddress().getHostAddress() + ":" + port;
+				return transport + "://" + getLocalAddress().getHostAddress() + ":" + port + "/" + serialization;
 			} catch (SocketException ex) {
 				// just use localhost if can't find local ip
 			}
 		}
-		return "bisocket://" + host + ":" + port;
+		return transport + "://" + host + ":" + port + "/" + serialization;
 	}
 	
 	public ProxyType getProxyType() {

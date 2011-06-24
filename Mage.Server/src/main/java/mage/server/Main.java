@@ -103,21 +103,19 @@ public class Main {
 				adminPassword = arg.replace(adminPasswordArg, "");
 			}
 		}
-		String host = config.getServerAddress();
-		int port = config.getPort();
+		Connection connection = new Connection();
+		connection.setHost(config.getServerAddress());
+		connection.setPort(config.getPort());
 		try {
-			if (host.equals("localhost"))
-				host = Connection.getLocalAddress().getHostAddress();
-			String locatorURI = "bisocket://" + host + ":" + port;
-			InvokerLocator serverLocator = new InvokerLocator(locatorURI);
+			InvokerLocator serverLocator = new InvokerLocator(connection.getURI());
 			server = new MageTransporterServer(serverLocator, new MageServerImpl(adminPassword, testMode), MageServer.class.getName(), new MageServerInvocationHandler());
 			server.start();
-			logger.info("Started MAGE server - listening on " + host + ":" + port);
+			logger.info("Started MAGE server - listening on " + connection.toString());
 			if (testMode)
 				logger.info("MAGE server running in test mode");
 
 		} catch (Exception ex) {
-			logger.fatal("Failed to start server - " + host + ":" + port, ex);
+			logger.fatal("Failed to start server - " + connection.toString(), ex);
 		}
 
     }
