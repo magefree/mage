@@ -76,9 +76,8 @@ public class Session {
 	public String getId() {
 		return sessionId;
 	}
-
+		
 	public void kill() {
-		SessionManager.getInstance().removeSession(sessionId);
 		TableManager.getInstance().removeSession(sessionId);
 		GameManager.getInstance().removeSession(sessionId);
 		ChatManager.getInstance().removeSession(sessionId);

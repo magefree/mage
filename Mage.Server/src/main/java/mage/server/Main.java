@@ -31,6 +31,7 @@ package mage.server;
 import mage.server.util.PluginClassLoader;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Map;
 import javax.management.MBeanServer;
@@ -47,6 +48,9 @@ import mage.server.util.config.Plugin;
 import mage.server.util.config.GamePlugin;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
+import org.jboss.remoting.Client;
+import org.jboss.remoting.ClientDisconnectedException;
+import org.jboss.remoting.ConnectionListener;
 import org.jboss.remoting.InvocationRequest;
 import org.jboss.remoting.InvokerLocator;
 import org.jboss.remoting.ServerInvocationHandler;
@@ -113,20 +117,40 @@ public class Main {
 			logger.info("Started MAGE server - listening on " + connection.toString());
 			if (testMode)
 				logger.info("MAGE server running in test mode");
-
+		} catch (IOException ex) {
+			logger.fatal("Failed to start server - " + connection.toString(), ex);
 		} catch (Exception ex) {
 			logger.fatal("Failed to start server - " + connection.toString(), ex);
 		}
 
     }
 
+	static class ClientConnectionListener implements ConnectionListener {
+		@Override
+		public void handleConnectionException(Throwable throwable, Client client) {
+			Session session = SessionManager.getInstance().getSession(client.getSessionId());
+			if (session != null) {
+				String sessionName = session.getUsername() + " at " + session.getHost();
+				if (throwable instanceof ClientDisconnectedException) {					
+					logger.info("client disconnected - " + sessionName);
+				}
+				else {
+					logger.info("connection to client lost - " + sessionName);
+				}
+				SessionManager.getInstance().disconnect(client.getSessionId());
+			}
+		}
+	}
+
 	static class MageTransporterServer extends TransporterServer {
 		
-		Connector connector;
+		protected Connector connector;
 		
 		public MageTransporterServer(InvokerLocator locator, Object target, String subsystem, MageServerInvocationHandler callback) throws Exception {
 			super(locator, target, subsystem);
 			connector.addInvocationHandler("callback", callback);
+			connector.setLeasePeriod(5000);
+			connector.addConnectionListener(new ClientConnectionListener());
 		}
 		
 		public Connector getConnector() throws Exception {
@@ -170,7 +194,7 @@ public class Main {
 		public void removeListener(InvokerCallbackHandler callbackHandler) {
 			ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
 			String sessionId = handler.getCallbackClient().getSessionId();
-			SessionManager.getInstance().removeSession(sessionId);
+			SessionManager.getInstance().disconnect(sessionId);
 		}
 		
 	}

@@ -237,6 +237,11 @@ public class TableController {
 		return player;
 	}
 
+	public void kill(String sessionId) {
+		leaveTable(sessionId);
+		sessionPlayerMap.remove(sessionId);
+	}
+	
 	public synchronized void leaveTable(String sessionId) {
 		if (table.getState() == TableState.WAITING || table.getState() == TableState.STARTING)
 			table.leaveTable(sessionPlayerMap.get(sessionId));

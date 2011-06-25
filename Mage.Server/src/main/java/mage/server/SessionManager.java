@@ -82,8 +82,12 @@ public class SessionManager {
 		return false;
 	}
 	
-	public void removeSession(String sessionId) {
-		sessions.remove(sessionId);
+	public synchronized void disconnect(String sessionId) {
+		Session session = sessions.get(sessionId);
+		if (session != null) {
+			session.kill();
+			sessions.remove(sessionId);
+		}
 	}
 	
 	public Map<String, Session> getSessions() {

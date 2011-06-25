@@ -114,7 +114,9 @@ public class TableManager {
 	}
 
 	public void removeSession(String sessionId) {
-		// TODO: search through tables and remove session
+		for (TableController controller: controllers.values()) {
+			controller.kill(sessionId);
+		}
 	}
 
 	public boolean isTableOwner(UUID tableId, String sessionId) {

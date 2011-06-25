@@ -66,7 +66,7 @@ import org.apache.log4j.Logger;
 public class MageServerImpl implements MageServer {
 
 	private final static Logger logger = Logger.getLogger("Mage Server");
-	private static ExecutorService rmiExecutor = ThreadExecutor.getInstance().getRMIExecutor();
+	private static ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
 
 	private String password;
 	private boolean testMode;
@@ -137,7 +137,7 @@ public class MageServerImpl implements MageServer {
 	public void removeTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -243,15 +243,12 @@ public class MageServerImpl implements MageServer {
 	@Override
 	public void deregisterClient(final String sessionId) throws MageException {
 		try {
-			rmiExecutor.execute(
+			callExecutor.execute(
 				new Runnable() {
 					@Override
 					public void run() {
-						Session session = SessionManager.getInstance().getSession(sessionId);
-						if (session != null) {
-							session.kill();
-							logger.info("Client deregistered ...");
-						}
+						SessionManager.getInstance().disconnect(sessionId);
+						logger.info("Client deregistered ...");
 					}
 				}
 			);
@@ -265,7 +262,7 @@ public class MageServerImpl implements MageServer {
 	public void startMatch(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -284,7 +281,7 @@ public class MageServerImpl implements MageServer {
 	public void startChallenge(final String sessionId, final UUID roomId, final UUID tableId, final UUID challengeId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -303,7 +300,7 @@ public class MageServerImpl implements MageServer {
 	public void startTournament(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -332,7 +329,7 @@ public class MageServerImpl implements MageServer {
 	@Override
 	public void sendChatMessage(final UUID chatId, final String userName, final String message) throws MageException {
 		try {
-			rmiExecutor.execute(
+			callExecutor.execute(
 				new Runnable() {
 					@Override
 					public void run() {
@@ -349,7 +346,7 @@ public class MageServerImpl implements MageServer {
 	@Override
 	public void joinChat(final UUID chatId, final String sessionId, final String userName) throws MageException {
 		try {
-			rmiExecutor.execute(
+			callExecutor.execute(
 				new Runnable() {
 					@Override
 					public void run() {
@@ -366,7 +363,7 @@ public class MageServerImpl implements MageServer {
 	@Override
 	public void leaveChat(final UUID chatId, final String sessionId) throws MageException {
 		try {
-			rmiExecutor.execute(
+			callExecutor.execute(
 				new Runnable() {
 					@Override
 					public void run() {
@@ -417,7 +414,7 @@ public class MageServerImpl implements MageServer {
 	public void swapSeats(final String sessionId, final UUID roomId, final UUID tableId, final int seatNum1, final int seatNum2) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -436,7 +433,7 @@ public class MageServerImpl implements MageServer {
 	public void leaveTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -466,7 +463,7 @@ public class MageServerImpl implements MageServer {
 	public void joinGame(final UUID gameId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -485,7 +482,7 @@ public class MageServerImpl implements MageServer {
 	public void joinDraft(final UUID draftId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -504,7 +501,7 @@ public class MageServerImpl implements MageServer {
 	public void joinTournament(final UUID tournamentId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -545,7 +542,7 @@ public class MageServerImpl implements MageServer {
 	public void sendPlayerUUID(final UUID gameId, final String sessionId, final UUID data) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -564,7 +561,7 @@ public class MageServerImpl implements MageServer {
 	public void sendPlayerString(final UUID gameId, final String sessionId, final String data) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -583,7 +580,7 @@ public class MageServerImpl implements MageServer {
 	public void sendPlayerBoolean(final UUID gameId, final String sessionId, final Boolean data) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -602,7 +599,7 @@ public class MageServerImpl implements MageServer {
 	public void sendPlayerInteger(final UUID gameId, final String sessionId, final Integer data) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -634,7 +631,7 @@ public class MageServerImpl implements MageServer {
 	public void concedeGame(final UUID gameId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -666,7 +663,7 @@ public class MageServerImpl implements MageServer {
 	public void watchGame(final UUID gameId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -685,7 +682,7 @@ public class MageServerImpl implements MageServer {
 	public void stopWatching(final UUID gameId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -704,7 +701,7 @@ public class MageServerImpl implements MageServer {
 	public void replayGame(final UUID gameId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -723,7 +720,7 @@ public class MageServerImpl implements MageServer {
 	public void startReplay(final UUID gameId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -742,7 +739,7 @@ public class MageServerImpl implements MageServer {
 	public void stopReplay(final UUID gameId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -761,7 +758,7 @@ public class MageServerImpl implements MageServer {
 	public void nextPlay(final UUID gameId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -780,7 +777,7 @@ public class MageServerImpl implements MageServer {
 	public void previousPlay(final UUID gameId, final String sessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -816,7 +813,7 @@ public class MageServerImpl implements MageServer {
 	public void cheat(final UUID gameId, final String sessionId, final UUID playerId, final DeckCardLists deckList) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -867,7 +864,7 @@ public class MageServerImpl implements MageServer {
 	public void disconnectUser(final String sessionId, final String userSessionId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {
@@ -886,7 +883,7 @@ public class MageServerImpl implements MageServer {
 	public void removeTable(final String sessionId, final UUID tableId) throws MageException {
 		if (SessionManager.getInstance().isValidSession(sessionId)) {
 			try {
-				rmiExecutor.execute(
+				callExecutor.execute(
 					new Runnable() {
 						@Override
 						public void run() {

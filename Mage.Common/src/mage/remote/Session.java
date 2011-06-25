@@ -104,44 +104,45 @@ public class Session {
 	public boolean connect() {
 		sessionState = SessionState.CONNECTING;
 		try {
-//			System.setProperty("http.nonProxyHosts", "code.google.com");
-//			System.setProperty("socksNonProxyHosts", "code.google.com");
-//
-//			// clear previous values
-//			System.clearProperty("socksProxyHost");
-//			System.clearProperty("socksProxyPort");
-//			System.clearProperty("http.proxyHost");
-//			System.clearProperty("http.proxyPort");
-//
-//			switch (connection.getProxyType()) {
-//				case SOCKS:
-//					System.setProperty("socksProxyHost", connection.getProxyHost());
-//					System.setProperty("socksProxyPort", Integer.toString(connection.getProxyPort()));
-//					break;
-//				case HTTP:
-//					System.setProperty("http.proxyHost", connection.getProxyHost());
-//					System.setProperty("http.proxyPort", Integer.toString(connection.getProxyPort()));
-//					Authenticator.setDefault(new MageAuthenticator(connection.getProxyUsername(), connection.getProxyPassword()));
-//					break;
-//			}
+			System.setProperty("http.nonProxyHosts", "code.google.com");
+			System.setProperty("socksNonProxyHosts", "code.google.com");
+
+			// clear previous values
+			System.clearProperty("socksProxyHost");
+			System.clearProperty("socksProxyPort");
+			System.clearProperty("http.proxyHost");
+			System.clearProperty("http.proxyPort");
+
+			switch (connection.getProxyType()) {
+				case SOCKS:
+					System.setProperty("socksProxyHost", connection.getProxyHost());
+					System.setProperty("socksProxyPort", Integer.toString(connection.getProxyPort()));
+					break;
+				case HTTP:
+					System.setProperty("http.proxyHost", connection.getProxyHost());
+					System.setProperty("http.proxyPort", Integer.toString(connection.getProxyPort()));
+					Authenticator.setDefault(new MageAuthenticator(connection.getProxyUsername(), connection.getProxyPassword()));
+					break;
+			}
 			InvokerLocator clientLocator = new InvokerLocator(connection.getURI());
 			Map<String, String> metadata = new HashMap<String, String>();
 			metadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
 			metadata.put("generalizeSocketException", "true");
 			server = (MageServer) TransporterClient.createTransporterClient(clientLocator.getLocatorURI(), MageServer.class, metadata);
 			
-			callbackClient = new Client(clientLocator, "callback");
-			callbackClient.connect();
+			Map<String, String> clientMetadata = new HashMap<String, String>();
+			clientMetadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
+			clientMetadata.put("generalizeSocketException", "true");
+			clientMetadata.put(Client.ENABLE_LEASE, "true");
+			callbackClient = new Client(clientLocator, "callback", clientMetadata);
 			
 			Map<String, String> listenerMetadata = new HashMap<String, String>();
 			listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "5000");
 			listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "2000");
-			callbackClient.addConnectionListener(new ClientConnectionListener(), listenerMetadata);
+			callbackClient.connect(new ClientConnectionListener(), listenerMetadata);
 			
 			Map<String, String> callbackMetadata = new HashMap<String, String>();
 			callbackMetadata.put(Bisocket.IS_CALLBACK_SERVER, "true");
-			callbackMetadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
-			callbackMetadata.put("generalizeSocketException", "true");
 			CallbackHandler callbackHandler = new CallbackHandler();
 			callbackClient.addListener(callbackHandler, callbackMetadata);
 									
@@ -201,7 +202,7 @@ public class Session {
 	class ClientConnectionListener implements ConnectionListener {
 		@Override
 		public void handleConnectionException(Throwable throwable, Client client) {
-			logger.info("connection to server lost");
+			logger.info("connection to server lost - " + throwable.getMessage());
 			disconnect(true);
 		}
 	}

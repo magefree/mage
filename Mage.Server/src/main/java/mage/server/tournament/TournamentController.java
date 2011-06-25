@@ -141,7 +141,7 @@ public class TournamentController {
 
 	private void checkStart() {
 		if (allJoined()) {
-			ThreadExecutor.getInstance().getRMIExecutor().execute(
+			ThreadExecutor.getInstance().getCallExecutor().execute(
 				new Runnable() {
 					@Override
 					public void run() {

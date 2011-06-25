@@ -31,14 +31,9 @@
         <module>Mage.Plugins</module>
         <module>Mage.Server.Plugins</module>
 		<module>Mage.Server.Console</module>
-		<module>Mage.Tests</module>
      </modules>
 
     <repositories>
-        <repository>
-            <id>sonatype-org</id>
-            <url>https://maven.nuxeo.org/nexus/content/repositories/public/org/</url>
-        </repository>
        <repository>
             <id>jboss-public-repository</id>
             <name>JBoss Repository</name>
@@ -65,6 +60,10 @@
                 <updatePolicy>never</updatePolicy>
               </snapshots>
             </repository>  
+        <repository>
+            <id>sonatype-org</id>
+            <url>https://maven.nuxeo.org/nexus/content/repositories/public/org/</url>
+        </repository>
         <repository>
             <id>mage.googlecode.com</id>
             <url>https://mage.googlecode.com/hg/repository/</url>
