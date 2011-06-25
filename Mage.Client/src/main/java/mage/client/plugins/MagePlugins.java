@@ -13,6 +13,7 @@ import mage.cards.Card;
 import mage.cards.CardDimensions;
 import mage.cards.MageCard;
 import mage.cards.MagePermanent;
+import mage.cards.action.ActionCallback;
 import mage.client.cards.BigCard;
 import mage.view.CardView;
 import mage.view.PermanentView;
@@ -22,8 +23,8 @@ public interface MagePlugins {
 	void shutdown();
 	void updateGamePanel(Map<String, JComponent> ui);
 	JComponent updateTablePanel(Map<String, JComponent> ui);
-	MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean canBeFoil);
-	MageCard getMageCard(CardView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean canBeFoil);
+	MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage);
+	MageCard getMageCard(CardView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage);
 	boolean isThemePluginLoaded();
 	boolean isCardPluginLoaded();
 	boolean isCounterPluginLoaded();
@@ -37,4 +38,5 @@ public interface MagePlugins {
 	void onRemoveCard(MagePermanent card, int count);
     JComponent getCardInfoPane();
 	BufferedImage getOriginalImage(CardView card);
+	ActionCallback getActionCallback();
 }

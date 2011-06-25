@@ -149,10 +149,12 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		    }
 		});
 		cbExpansionSet.setModel(new DefaultComboBoxModel(l));
-//		cbExpansionSet.insertItemAt("All sets", 0);
+		cbExpansionSet.insertItemAt("All sets", 0);
 		cbExpansionSet.setSelectedIndex(0);
 		initFilter();
-		filter.getExpansionSetCode().add(((ExpansionSet)this.cbExpansionSet.getSelectedItem()).getCode());
+		if (this.cbExpansionSet.getSelectedItem() instanceof  ExpansionSet) {
+			filter.getExpansionSetCode().add(((ExpansionSet)this.cbExpansionSet.getSelectedItem()).getCode());
+		}
 		filterCards();
 	}
 
@@ -692,8 +694,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		filter.getExpansionSetCode().clear();
 		if (cbExpansionSet.getSelectedItem() instanceof ExpansionSet) {
 			filter.getExpansionSetCode().add(((ExpansionSet)this.cbExpansionSet.getSelectedItem()).getCode());
+			filterCards();
+		} else {
+			// auto switch for ListView for "All sets" (too many cards to load)
+			jToggleListView.doClick();
+			jToggleListView.setSelected(true);
 		}
-		filterCards();
+
 	}//GEN-LAST:event_cbExpansionSetActionPerformed
 
 	private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed

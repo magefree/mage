@@ -70,17 +70,24 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
 	private Map<UUID, MageCard> cards = new HashMap<UUID, MageCard>();
 	private Dimension cardDimension;
 
-    public CardGrid() {
+	/**
+	 * Max amount of cards in card grid for which card images will be drawn.
+	 * Done so to solve issue with memory for big piles of cards.
+	 */
+	private static final int MAX_IMAGES = 250;
+
+	public CardGrid() {
         initComponents();
         setOpaque(false);
     }
 
 	public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId) {
+		boolean drawImage = showCards.size() < MAX_IMAGES;
 		this.bigCard = bigCard;
 		this.gameId = gameId;
 		for (CardView card: showCards.values()) {
 			if (!cards.containsKey(card.getId())) {
-				addCard(card, bigCard, gameId);
+				addCard(card, bigCard, gameId, drawImage);
 			}
 		}
 		for (Iterator<Entry<UUID, MageCard>> i = cards.entrySet().iterator(); i.hasNext();) {
@@ -95,11 +102,11 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
 		this.setVisible(true);
 	}
 	
-	private void addCard(CardView card, BigCard bigCard, UUID gameId) {
+	private void addCard(CardView card, BigCard bigCard, UUID gameId, boolean drawImage) {
 		if (cardDimension == null) {
 			cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 		}
-		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, true);
+		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, drawImage);
 		cards.put(card.getId(), cardImg);
 		cardImg.addMouseListener(this);
 		add(cardImg);

@@ -28,6 +28,7 @@
 
 package mage.client.deckeditor.table;
 
+import mage.Constants;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardEventSource;
 import mage.client.cards.ICardGrid;
@@ -69,11 +70,14 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 	protected BigCard bigCard;
 	protected UUID gameId;
 	private Map<UUID, CardView> cards = new LinkedHashMap<UUID, CardView>();
+	private Map<String, Integer> cardsNoCopies = new LinkedHashMap<String, Integer>();
 	private List<CardView> view = new ArrayList<CardView>();
 	private Dimension cardDimension;
 
-	private String column[] = { "", "Name", "Cost", "Color", "Type", "Stats",
-			"Rarity", "Set" };
+	private boolean displayNoCopies = false;
+	private UpdateCountsCallback updateCountsCallback;
+
+	private String column[] = { "", "Name", "Cost", "Color", "Type", "Stats", "Rarity", "Set" };
 
 	private int recentSortedColumn;
 	private boolean recentAscending;
@@ -81,24 +85,69 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 	public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId) {
 		this.bigCard = bigCard;
 		this.gameId = gameId;
+		int landCount = 0;
+		int creatureCount = 0;
 		for (CardView card : showCards.values()) {
 			if (!cards.containsKey(card.getId())) {
 				addCard(card, bigCard, gameId);
 			}
+			if (updateCountsCallback != null) {
+				if (card.getCardTypes().contains(Constants.CardType.LAND))
+					landCount++;
+				if (card.getCardTypes().contains(Constants.CardType.CREATURE))
+					creatureCount++;
+			}
 		}
-		for (Iterator<Entry<UUID, CardView>> i = cards.entrySet().iterator(); i
-				.hasNext();) {
+		// not easy logic for merge :)
+		for (Iterator<Entry<UUID, CardView>> i = cards.entrySet().iterator(); i.hasNext();) {
 			Entry<UUID, CardView> entry = i.next();
 			if (!showCards.containsKey(entry.getKey())) {
 				i.remove();
-				for (CardView cv : view) {
-					if (cv.getId().equals(entry.getKey())) {
-						view.remove(cv);
-						break;
+				if (displayNoCopies) {
+					String key = entry.getValue().getName() + entry.getValue().getExpansionSetCode();
+					if (cardsNoCopies.containsKey(key)) {
+						Integer count = cardsNoCopies.get(key);
+						count--;
+						if (count > 0) {
+							cardsNoCopies.put(key, count);
+						} else {
+							cardsNoCopies.remove(key);
+						}
+						for (int j = 0; j < view.size(); j++) {
+							CardView cv = view.get(j);
+							if (cv.getId().equals(entry.getKey())) {
+								if (count > 0) {
+									// replace by another card with the same name+setCode
+									String key1 = cv.getName()+cv.getExpansionSetCode();
+									for (CardView cardView : cards.values()) {
+										String key2 = cardView.getName()+cardView.getExpansionSetCode();
+										if ((key1).equals(key2)) {
+											view.set(j, cardView);
+											break;
+										}
+									}
+								} else {
+									view.remove(j);
+								}
+								break;
+							}
+						}
+					}
+				} else {
+					for (CardView cv : view) {
+						if (cv.getId().equals(entry.getKey())) {
+							view.remove(cv);
+							break;
+						}
 					}
 				}
 			}
 		}
+
+		if (updateCountsCallback != null) {
+			updateCountsCallback.update(cards.size(), creatureCount, landCount);
+		}
+
 		sort(1, true);
 		drawCards(sortBy, piles);
 	}
@@ -128,6 +177,11 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 		CardView c = (CardView) obj;
 		switch (column) {
 		case 0:
+			if (displayNoCopies) {
+				String key = c.getName() + c.getExpansionSetCode();
+				Integer count = cardsNoCopies.get(key);
+				return count != null ? count : "";
+			}
 			return "";
 		case 1:
 			return c.getName();
@@ -163,7 +217,19 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 					Config.dimensions.frameHeight);
 		}
 		cards.put(card.getId(), card);
-		view.add(card);
+
+		if (displayNoCopies) {
+			String key = card.getName()+card.getExpansionSetCode();
+			Integer count = 1;
+			if (cardsNoCopies.containsKey(key)) {
+				count = cardsNoCopies.get(key) + 1;
+			} else {
+				view.add(card);
+			}
+			cardsNoCopies.put(key, count);
+		} else {
+		   	view.add(card);
+		}
 	}
 
 	public void drawCards(SortBy sortBy, boolean piles) {
@@ -284,5 +350,13 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 		fireTableDataChanged();
 
 		return true;
+	}
+
+	public void setDisplayNoCopies(boolean value) {
+		this.displayNoCopies = value;
+	}
+
+	public void setUpdateCountsCallback(UpdateCountsCallback callback) {
+		this.updateCountsCallback = callback;
 	}
 }

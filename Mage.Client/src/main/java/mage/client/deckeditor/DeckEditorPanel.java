@@ -173,6 +173,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 								if (cardInfoPane instanceof  CardInfoPane)  {
 									((CardInfoPane)cardInfoPane).setCard(new CardView(card));
 								}
+								hidePopup();
 							}
 
 						} else if (event.getEventName().equals("shift-double-click") && mode == DeckEditorMode.Constructed) {
@@ -181,6 +182,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 							if (cardInfoPane instanceof  CardInfoPane)  {
 								((CardInfoPane)cardInfoPane).setCard(new CardView(card));
 							}
+							hidePopup();
 						}
 						refreshDeck();
 					}
@@ -194,7 +196,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				public void event(Event event) {
 					if (event.getEventName().equals("double-click")) {
 						for (Card card: deck.getCards()) {
-							if (card.getId().equals((UUID)event.getSource())) {
+							if (card.getId().equals(event.getSource())) {
 								deck.getCards().remove(card);
 								if (mode == DeckEditorMode.Limited || mode == DeckEditorMode.Sideboard) {
 									deck.getSideboard().add(card);
@@ -203,16 +205,18 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 								break;
 							}
 						}
+						hidePopup();
 						refreshDeck();
 					}
 					else if (event.getEventName().equals("shift-double-click") && mode == DeckEditorMode.Constructed) {
 						for (Card card: deck.getCards()) {
-							if (card.getId().equals((UUID)event.getSource())) {
+							if (card.getId().equals(event.getSource())) {
 								deck.getCards().remove(card);
 								deck.getSideboard().add(card);
 								break;
 							}
 						}
+						hidePopup();
 						refreshDeck();
 					}
 				}
@@ -223,16 +227,14 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				@Override
 				public void event(Event event) {
 					if (event.getEventName().equals("double-click")) {
-						//boolean isListView = cardSelector.getCardsList() instanceof TableModel;
 						for (Card card: deck.getSideboard()) {
-							if (card.getId().equals((UUID)event.getSource())) {
+							if (card.getId().equals(event.getSource())) {
 								deck.getSideboard().remove(card);
-								//if (!isListView) {
 								deck.getCards().add(card);
-								//}
 								break;
 							}
 						}
+						hidePopup();
 						refreshDeck();
 					}
 				}
@@ -241,6 +243,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		refreshDeck();
 		this.setVisible(true);
 		this.repaint();
+	}
+
+	private void hidePopup() {
+		Plugins.getInstance().getActionCallback().mouseExited(null, null);
 	}
 
 	public void hideDeckEditor() {

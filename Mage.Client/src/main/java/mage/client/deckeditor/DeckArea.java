@@ -55,6 +55,8 @@ public class DeckArea extends javax.swing.JPanel {
         jSplitPane1.setOpaque(false);
         deckList.setOpaque(false);
         sideboardList.setOpaque(false);
+		deckList.setDisplayNoCopies(true);
+		sideboardList.setDisplayNoCopies(true);
     }
 
 	public void showSideboard(boolean show) {

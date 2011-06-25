@@ -36,9 +36,9 @@ package mage.client.cards;
 
 import mage.Constants.CardType;
 import mage.cards.MageCard;
-import mage.client.constants.Constants;
 import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.table.TableModel;
+import mage.client.deckeditor.table.UpdateCountsCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.*;
 import mage.client.util.Event;
@@ -98,8 +98,8 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 		mainTable.setForeground(Color.white);
 		DefaultTableCellRenderer myRenderer = (DefaultTableCellRenderer) mainTable.getDefaultRenderer(String.class);
 		myRenderer.setBackground(new Color(0, 0, 0, 100));
-		mainTable.getColumnModel().getColumn(0).setMaxWidth(0);
-		mainTable.getColumnModel().getColumn(0).setPreferredWidth(10);
+		mainTable.getColumnModel().getColumn(0).setMaxWidth(25);
+		mainTable.getColumnModel().getColumn(0).setPreferredWidth(25);
 		mainTable.getColumnModel().getColumn(1).setPreferredWidth(110);
 		mainTable.getColumnModel().getColumn(2).setPreferredWidth(90);
 		mainTable.getColumnModel().getColumn(3).setPreferredWidth(50);
@@ -130,6 +130,8 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 				}
 			}
 		});
+
+		mainModel.setUpdateCountsCallback(new UpdateCountsCallback(lblCount, lblCreatureCount, lblLandCount));
 	}
 
 	public ICardGrid getMainModel() {
@@ -162,6 +164,8 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 		int curRow = 0;
 		int landCount = 0;
 		int creatureCount = 0;
+		//FIXME: why we remove all cards? for performance it's better to merge changes
+		// as it is already done in ListView
 		cardArea.removeAll();
 		if (cards != null && cards.size() > 0) {
 			Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
@@ -271,7 +275,6 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 
 	@Override
 	public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId) {
-		//FIXME: why we remove all cards? for performance it's better to merge changes
 		cards = showCards;
 		this.bigCard = bigCard;
 		this.gameId = gameId;
@@ -420,8 +423,8 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 		jToggleListView.setSelected(false);
 		currentView = this;
 		jScrollPane1.setViewportView(cardArea);
-		cbSortBy.setEnabled(false);
-		chkPiles.setEnabled(false);
+		cbSortBy.setEnabled(true);
+		chkPiles.setEnabled(true);
 		//drawCards((SortBy) cbSortBy.getSelectedItem());
 		redrawCards();
 	}//GEN-LAST:event_jToggleCardViewActionPerformed
@@ -474,4 +477,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 	public void mouseExited(MouseEvent e) {
 	}
 
+	public void setDisplayNoCopies(boolean value) {
+		mainModel.setDisplayNoCopies(value);
+	}
 }

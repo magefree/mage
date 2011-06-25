@@ -1,18 +1,8 @@
 package mage.client.plugins.impl;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
-import javax.swing.JComponent;
-
 import mage.cards.MageCard;
 import mage.cards.MagePermanent;
-import mage.cards.action.impl.EmptyCallback;
+import mage.cards.action.ActionCallback;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.Card;
@@ -20,7 +10,6 @@ import mage.client.cards.Permanent;
 import mage.client.plugins.MagePlugins;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.util.Config;
-import mage.client.util.DefaultActionCallback;
 import mage.constants.Constants;
 import mage.interfaces.PluginException;
 import mage.interfaces.plugin.CardPlugin;
@@ -32,6 +21,15 @@ import net.xeoh.plugins.base.PluginManager;
 import net.xeoh.plugins.base.impl.PluginManagerFactory;
 import org.apache.log4j.Logger;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
 
 public class Plugins implements MagePlugins {
 
@@ -42,8 +40,6 @@ public class Plugins implements MagePlugins {
 	private ThemePlugin themePlugin = null;
 	private CardPlugin cardPlugin = null;
 	private CounterPlugin counterPlugin = null;
-	protected static DefaultActionCallback defaultCallback = DefaultActionCallback.getInstance();
-	private static final EmptyCallback emptyCallback = new EmptyCallback();
 	private static final MageActionCallback mageActionCallback = new MageActionCallback();
 	
 	public static MagePlugins getInstance() {
@@ -79,22 +75,22 @@ public class Plugins implements MagePlugins {
 	}
 	
 	@Override
-	public MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean canBeFoil) {
+	public MagePermanent getMagePermanent(PermanentView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage) {
 		if (cardPlugin != null) {
 			mageActionCallback.refreshSession();
 			mageActionCallback.setCardPreviewComponent(bigCard);
-			return cardPlugin.getMagePermanent(card, dimension, gameId, mageActionCallback, canBeFoil, !MageFrame.isLite());
+			return cardPlugin.getMagePermanent(card, dimension, gameId, mageActionCallback, false, !MageFrame.isLite() && loadImage);
 		} else {
 			return new Permanent(card, bigCard, Config.dimensions, gameId);
 		}
 	}
 	
 	@Override
-	public MageCard getMageCard(CardView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean canBeFoil) {
+	public MageCard getMageCard(CardView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage) {
 		if (cardPlugin != null) {
 			mageActionCallback.refreshSession();
 			mageActionCallback.setCardPreviewComponent(bigCard);
-			return cardPlugin.getMageCard(card, dimension, gameId, mageActionCallback, canBeFoil, !MageFrame.isLite());
+			return cardPlugin.getMageCard(card, dimension, gameId, mageActionCallback, false, !MageFrame.isLite() && loadImage);
 		} else {
 			return new Card(card, bigCard, Config.dimensions, gameId);
 		}
@@ -197,4 +193,7 @@ public class Plugins implements MagePlugins {
         return null;
 	}
 
+	public ActionCallback getActionCallback() {
+		return mageActionCallback;
+	}
 }
