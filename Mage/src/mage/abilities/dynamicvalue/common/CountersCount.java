@@ -1,5 +1,6 @@
 package mage.abilities.dynamicvalue.common;
 
+import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.counters.CounterType;
@@ -20,6 +21,10 @@ public class CountersCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility) {
         Permanent p = game.getPermanent(sourceAbility.getSourceId());
+        // if permanent already leaves the battlefield, try to find counters count via last known information
+        if (p == null) {
+            p = (Permanent) game.getLastKnownInformation(sourceAbility.getSourceId(), Constants.Zone.BATTLEFIELD);
+        }
         if (p != null) {
             return p.getCounters().getCount(counter.getName());
         }
