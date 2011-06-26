@@ -34,7 +34,7 @@ public class PermanentsOnBattlefieldCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility) {
-        return amount * game.getBattlefield().countAll(filter);
+        return amount * game.getBattlefield().count(filter, sourceAbility.getControllerId(), game);
     }
 
     @Override
