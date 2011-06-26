@@ -75,7 +75,6 @@ public class ConnectDialog extends JDialog {
 		this.console = console;
 		this.txtServer.setText(ConsoleFrame.getPreferences().get("serverAddress", "localhost"));
 		this.txtPort.setText(ConsoleFrame.getPreferences().get("serverPort", Integer.toString(17171)));
-		this.txtUserName.setText(ConsoleFrame.getPreferences().get("userName", ""));
 		this.chkAutoConnect.setSelected(Boolean.parseBoolean(ConsoleFrame.getPreferences().get("autoConnect", "false")));
 		this.txtProxyServer.setText(ConsoleFrame.getPreferences().get("proxyAddress", "localhost"));
 		this.txtProxyPort.setText(ConsoleFrame.getPreferences().get("proxyPort", Integer.toString(17171)));
@@ -111,7 +110,6 @@ public class ConnectDialog extends JDialog {
 	private void saveSettings() {
 		ConsoleFrame.getPreferences().put("serverAddress", txtServer.getText());
 		ConsoleFrame.getPreferences().put("serverPort", txtPort.getText());
-		ConsoleFrame.getPreferences().put("userName", txtUserName.getText());
 		ConsoleFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
 		ConsoleFrame.getPreferences().put("proxyAddress", txtProxyServer.getText());
 		ConsoleFrame.getPreferences().put("proxyPort", txtProxyPort.getText());
@@ -135,8 +133,6 @@ public class ConnectDialog extends JDialog {
         lblServer = new javax.swing.JLabel();
         lblPort = new javax.swing.JLabel();
         txtPort = new javax.swing.JTextField();
-        txtUserName = new javax.swing.JTextField();
-        lblUserName = new javax.swing.JLabel();
         btnConnect = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         chkAutoConnect = new javax.swing.JCheckBox();
@@ -171,9 +167,6 @@ public class ConnectDialog extends JDialog {
                 ConnectDialog.this.keyTyped(evt);
             }
         });
-
-        lblUserName.setLabelFor(txtUserName);
-        lblUserName.setText("User Name:");
 
         btnConnect.setText("Connect");
         btnConnect.addActionListener(new java.awt.event.ActionListener() {
@@ -217,6 +210,7 @@ public class ConnectDialog extends JDialog {
         pnlProxySettings.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlProxySettings.setMinimumSize(new java.awt.Dimension(0, 0));
 
+        lblProxyServer.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblProxyServer.setLabelFor(txtProxyServer);
         lblProxyServer.setText("Server:");
 
@@ -234,26 +228,27 @@ public class ConnectDialog extends JDialog {
         pnlProxyLayout.setHorizontalGroup(
             pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlProxyLayout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblProxyPort)
-                    .addComponent(lblProxyServer))
+                    .addComponent(lblProxyServer, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProxyPort))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtProxyPort, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtProxyServer, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE))
+                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtProxyPort, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtProxyServer, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlProxyLayout.setVerticalGroup(
             pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlProxyLayout.createSequentialGroup()
-                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtProxyServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblProxyServer))
+                .addContainerGap()
+                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblProxyServer)
+                    .addComponent(txtProxyServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblProxyPort)
-                    .addComponent(txtProxyPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtProxyPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProxyPort))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -278,9 +273,9 @@ public class ConnectDialog extends JDialog {
                     .addComponent(lblProxyPassword)
                     .addComponent(lblProxyUserName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlProxyAuthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtPasswordField)
-                    .addComponent(txtProxyUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE))
+                .addGroup(pnlProxyAuthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+                    .addComponent(txtProxyUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlProxyAuthLayout.setVerticalGroup(
@@ -300,12 +295,12 @@ public class ConnectDialog extends JDialog {
         pnlProxySettings.setLayout(pnlProxySettingsLayout);
         pnlProxySettingsLayout.setHorizontalGroup(
             pnlProxySettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlProxy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnlProxyAuth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlProxy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlProxySettingsLayout.setVerticalGroup(
             pnlProxySettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlProxySettingsLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlProxySettingsLayout.createSequentialGroup()
                 .addComponent(pnlProxy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnlProxyAuth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -322,39 +317,35 @@ public class ConnectDialog extends JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblPort)
-                            .addComponent(lblServer)
-                            .addComponent(lblUserName))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(131, 131, 131))
-                            .addComponent(txtUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(txtServer, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblProxyType)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chkAutoConnect, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
-                            .addComponent(cbProxyType, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                        .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnConnect)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancel))
                     .addComponent(pnlProxySettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lblPassword)
+                        .addComponent(lblProxyType)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chkAutoConnect, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+                            .addComponent(cbProxyType, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblPassword)
+                            .addComponent(lblServer)
+                            .addComponent(lblPort))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(131, 131, 131))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtServer, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -370,14 +361,10 @@ public class ConnectDialog extends JDialog {
                     .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPort))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUserName))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPassword))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkAutoConnect)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -406,8 +393,8 @@ public class ConnectDialog extends JDialog {
 
 	private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
 		
-		if (txtUserName.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(rootPane, "Please provide a user name");
+		if (txtPassword.getPassword().length == 0) {
+			JOptionPane.showMessageDialog(rootPane, "Please provide a password");
 			return;
 		}
 		if (txtServer.getText().trim().isEmpty()) {
@@ -424,26 +411,19 @@ public class ConnectDialog extends JDialog {
 			return;
 		}
 
-		char[] input = new char[0];
-		try {
-			setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-			connection = new Connection();
-			connection.setHost(this.txtServer.getText());
-			connection.setPort(Integer.valueOf(this.txtPort.getText()));
-			connection.setUsername(this.txtUserName.getText());
-			connection.setProxyType((ProxyType) this.cbProxyType.getSelectedItem());
-			connection.setProxyHost(this.txtProxyServer.getText());
-			connection.setProxyPort(Integer.valueOf(this.txtProxyPort.getText()));
-			connection.setProxyUsername(this.txtProxyUserName.getText());
-			input = txtPasswordField.getPassword();
-			connection.setProxyPassword(new String(input));
-			logger.debug("connecting: " + connection.getProxyType() + " " + connection.getProxyHost() + " " + connection.getProxyPort());
-			task = new ConnectTask();
-			task.execute();
-		}
-		finally {
-			Arrays.fill(input, '0');
-		}
+		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+		connection = new Connection();
+		connection.setHost(this.txtServer.getText());
+		connection.setPort(Integer.valueOf(this.txtPort.getText()));
+		connection.setPassword(new String(txtPassword.getPassword()));
+		connection.setProxyType((ProxyType) this.cbProxyType.getSelectedItem());
+		connection.setProxyHost(this.txtProxyServer.getText());
+		connection.setProxyPort(Integer.valueOf(this.txtProxyPort.getText()));
+		connection.setProxyUsername(this.txtProxyUserName.getText());
+		connection.setProxyPassword(new String(this.txtPasswordField.getPassword()));
+		logger.debug("connecting: " + connection.getProxyType() + " " + connection.getProxyHost() + " " + connection.getProxyPort());
+		task = new ConnectTask();
+		task.execute();
 
 	}//GEN-LAST:event_btnConnectActionPerformed
 
@@ -565,7 +545,6 @@ public class ConnectDialog extends JDialog {
     private javax.swing.JLabel lblProxyUserName;
     private javax.swing.JLabel lblServer;
     private javax.swing.JLabel lblStatus;
-    private javax.swing.JLabel lblUserName;
     private javax.swing.JPanel pnlProxy;
     private javax.swing.JPanel pnlProxyAuth;
     private javax.swing.JPanel pnlProxySettings;
@@ -576,7 +555,6 @@ public class ConnectDialog extends JDialog {
     private javax.swing.JTextField txtProxyServer;
     private javax.swing.JTextField txtProxyUserName;
     private javax.swing.JTextField txtServer;
-    private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 
 }
