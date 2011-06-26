@@ -867,7 +867,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	@Override
-	public void assignDamage(int damage, List<UUID> targets, UUID sourceId, Game game) {
+	public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID sourceId, Game game) {
 		logger.debug("assignDamage");
 		//TODO: improve this
 		game.getPermanent(targets.get(0)).damage(damage, sourceId, game, true, false);

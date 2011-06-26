@@ -485,10 +485,11 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	}
 
 	@Override
-	public void assignDamage(int damage, List<UUID> targets, UUID sourceId, Game game) {
+	public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID sourceId, Game game) {
 		int remainingDamage = damage;
 		while (remainingDamage > 0) {
 			Target target = new TargetCreatureOrPlayer();
+			if (singleTargetName != null) target.setTargetName(singleTargetName);
 			choose(Outcome.Damage, target, game);
 			if (targets.size() == 0 || targets.contains(target.getFirstTarget())) {
 				int damageAmount = getAmount(0, remainingDamage, "Select amount", game);

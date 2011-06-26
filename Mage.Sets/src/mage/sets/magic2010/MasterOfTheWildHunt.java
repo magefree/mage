@@ -118,7 +118,7 @@ class MasterOfTheWildHuntEffect extends OneShotEffect<MasterOfTheWildHuntEffect>
 				wolves.add(permanent.getId());
 			}
 			Player player = game.getPlayer(target.getControllerId());
-			player.assignDamage(target.getPower().getValue(), wolves, target.getId(), game);
+			player.assignDamage(target.getPower().getValue(), wolves, "Wolf", target.getId(), game);
 			return true;
 		}
 		return false;
