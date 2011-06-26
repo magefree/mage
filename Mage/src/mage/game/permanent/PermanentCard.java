@@ -45,6 +45,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
+import javax.swing.*;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -118,16 +120,19 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 		// we only want to trigger abilities that are not on the underlying card ie. have been added by another effect
 		// or we want to trigger abilities that only trigger on leaving the battlefield
 		// card abilities will get triggered later when the card hits the new zone
-		Card card = game.getCard(objectId).copy();
+        List<UUID> triggered = new ArrayList<UUID>();
+        Card card = game.getCard(objectId).copy();
 		for (TriggeredAbility ability: abilities.getTriggeredAbilities(event.getFromZone())) {
 			if (!card.getAbilities().containsKey(ability.getId())) {
 				if (ability.checkTrigger(event, game)) {
+                    triggered.add(ability.getId());
 					ability.trigger(game, controllerId);
 				}
 			} else if (ability instanceof ZoneChangeTriggeredAbility && event.getFromZone() == Zone.BATTLEFIELD) {
 				ZoneChangeTriggeredAbility zcAbility = (ZoneChangeTriggeredAbility)ability;
 				if (zcAbility.getToZone() == null) {
 					if (ability.checkTrigger(event, game)) {
+                        triggered.add(ability.getId());
 						ability.trigger(game, controllerId);
 					}
 				}
@@ -135,7 +140,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 		}
 		for (TriggeredAbility ability: abilities.getTriggeredAbilities(event.getToZone())) {
 			if (!card.getAbilities().containsKey(ability.getId())) {
-				if (ability.checkTrigger(event, game)) {
+				if (!triggered.contains(ability.getId()) && ability.checkTrigger(event, game)) {
 					ability.trigger(game, controllerId);
 				}
 			}
