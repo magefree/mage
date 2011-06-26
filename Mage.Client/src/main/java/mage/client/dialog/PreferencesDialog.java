@@ -37,7 +37,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.prefs.BackingStoreException;
 
-import com.sun.deploy.cache.Cache;
 import mage.client.MageFrame;
 
 import javax.swing.*;
