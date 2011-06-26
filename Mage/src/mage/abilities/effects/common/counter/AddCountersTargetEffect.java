@@ -63,13 +63,13 @@ public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffe
 			Permanent permanent = game.getPermanent(uuid);
 			if (permanent != null) {
 				if (counter != null) {
-					permanent.addCounters(counter);
+					permanent.addCounters(counter.copy());
                     affectedTargets ++;
 				}
 			} else {
 				Player player = game.getPlayer(uuid);
 				if (player != null) {
-					player.getCounters().addCounter(counter);
+					player.getCounters().addCounter(counter.copy());
                     affectedTargets ++;
 				}
 			}

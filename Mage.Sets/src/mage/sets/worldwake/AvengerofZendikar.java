@@ -30,48 +30,45 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.TargetController;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LandfallAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter.ComparisonScope;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.PlantToken;
-import mage.game.permanent.token.Token;
 
 /**
  *
  * @author Loki, nantuko, North
  */
 public class AvengerofZendikar extends CardImpl<AvengerofZendikar> {
-    private static final FilterPermanent filter = new FilterPermanent("Plant creature you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Plant creature you control");
+    private static final FilterControlledPermanent filterLand = new FilterControlledPermanent("land you control");
 
     static {
         filter.getCardType().add(CardType.CREATURE);
-        filter.setScopeCardType(ComparisonScope.Any);
         filter.getSubtype().add("Plant");
-        filter.setScopeSubtype(ComparisonScope.Any);
-        filter.setTargetController(TargetController.YOU);
+
+        filterLand.getCardType().add(CardType.LAND);
     }
 
     public AvengerofZendikar (UUID ownerId) {
         super(ownerId, 96, "Avenger of Zendikar", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
         this.expansionSetCode = "WWK";
         this.subtype.add("Elemental");
+
 		this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
-        this.addAbility(new EntersBattlefieldAbility(new AvengerofZendikarTokensCreateEffect(), "put a 0/1 green Plant creature token onto the battlefield for each land you control"));
-        this.addAbility(new LandfallAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false));
+
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PlantToken(), new PermanentsOnBattlefieldCount(filterLand)), false));
+        this.addAbility(new LandfallAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), true));
     }
 
     public AvengerofZendikar (final AvengerofZendikar card) {
@@ -81,36 +78,5 @@ public class AvengerofZendikar extends CardImpl<AvengerofZendikar> {
     @Override
     public AvengerofZendikar copy() {
         return new AvengerofZendikar(this);
-    }
-}
-
-class AvengerofZendikarTokensCreateEffect extends OneShotEffect<AvengerofZendikarTokensCreateEffect> {
-    private static final FilterPermanent filter = new FilterPermanent();
-    private Token token = new PlantToken();
-
-    static {
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(ComparisonScope.Any);
-    }
-
-    public AvengerofZendikarTokensCreateEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
-    }
-
-    public AvengerofZendikarTokensCreateEffect(final AvengerofZendikarTokensCreateEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (int i = 0; i < game.getBattlefield().countAll(filter, source.getControllerId()); i++) {
-			token.putOntoBattlefield(game, source.getId(), source.getControllerId());
-		}
-		return true;
-    }
-
-    @Override
-    public AvengerofZendikarTokensCreateEffect copy() {
-        return new AvengerofZendikarTokensCreateEffect(this);
     }
 }

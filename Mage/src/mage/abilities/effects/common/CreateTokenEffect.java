@@ -73,9 +73,6 @@ public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
 	@Override
 	public boolean apply(Game game, Ability source) {
 		for (int i = 0; i < amount.calculate(game, source); i++) {
-			// we need to specify source.getSourceId(), not source.getId()
-			// as we most interested in the game object that created effect,
-			// not in ability uuid
 			token.putOntoBattlefield(game, source.getSourceId(), source.getControllerId());
 		}
 		return true;
@@ -83,14 +80,11 @@ public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
 
 	@Override
 	public String getDynamicText(Ability source) {
-		StringBuilder sb = new StringBuilder();
-        if (amount instanceof StaticValue) {
-            int count = amount.calculate(null, null);
-            if (count == 1)
-                sb.append("put a");
-            else sb.append("put ").append(Integer.toString(count));
+        StringBuilder sb = new StringBuilder("put ");
+        if (amount.toString().equals("1")) {
+            sb.append("a");
         } else {
-            sb.append("put ").append(amount);
+            sb.append(amount.toString());
         }
 		sb.append(" ").append(token.getDescription()).append(" onto the battlefield");
         String message = amount.getMessage();

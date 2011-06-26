@@ -66,7 +66,7 @@ public class AddCountersAllEffect extends OneShotEffect<AddCountersAllEffect> {
             List<Permanent> permanents = game.getBattlefield().getAllActivePermanents();
             for (Permanent permanent : permanents) {
                 if (filter.match(permanent, controllerId, game)) {
-                    permanent.addCounters(counter);
+                    permanent.addCounters(counter.copy());
                     applied = true;
                 }
             }
