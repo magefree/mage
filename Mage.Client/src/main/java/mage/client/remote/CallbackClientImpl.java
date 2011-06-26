@@ -80,6 +80,9 @@ public class CallbackClientImpl implements CallbackClient {
 			public void run() {
 				try {
 					logger.info(callback.getMessageId() + " -- " + callback.getMethod());
+					if (callback.getMethod() == null) { // may happen on disconnect
+						return;
+					}
 					if (callback.getMethod().equals("startGame")) {
 						TableClientMessage message = (TableClientMessage) callback.getData();
 						GameManager.getInstance().setCurrentPlayerUUID(message.getPlayerId());
