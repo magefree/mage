@@ -55,10 +55,9 @@ public class Session {
 	private boolean isAdmin = false;
 	private AsynchInvokerCallbackHandler callbackHandler;
 
-	public Session(String sessionId, InvokerCallbackHandler callbackHandler, String host) {
+	public Session(String sessionId, InvokerCallbackHandler callbackHandler) {
 		this.sessionId = sessionId;
 		this.callbackHandler = (AsynchInvokerCallbackHandler) callbackHandler;
-		this.host = host;
 		this.isAdmin = false;
 		this.timeConnected = new Date();
 	}
@@ -133,5 +132,9 @@ public class Session {
 	
 	public Date getConnectionTime() {
 		return timeConnected;
+	}
+
+	void setHost(String hostAddress) {
+		this.host = hostAddress;
 	}
 }

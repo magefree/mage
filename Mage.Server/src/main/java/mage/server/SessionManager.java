@@ -57,8 +57,8 @@ public class SessionManager {
 		return sessions.get(sessionId);
 	}
 
-	public void createSession(String sessionId, InvokerCallbackHandler callbackHandler, String host) {
-		Session session = new Session(sessionId, callbackHandler, host);
+	public void createSession(String sessionId, InvokerCallbackHandler callbackHandler) {
+		Session session = new Session(sessionId, callbackHandler);
 		sessions.put(sessionId, session);
 	}
 	

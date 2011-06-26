@@ -53,6 +53,7 @@ import org.jboss.remoting.ClientDisconnectedException;
 import org.jboss.remoting.ConnectionListener;
 import org.jboss.remoting.InvocationRequest;
 import org.jboss.remoting.InvokerLocator;
+import org.jboss.remoting.Remoting;
 import org.jboss.remoting.ServerInvocationHandler;
 import org.jboss.remoting.ServerInvoker;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
@@ -175,6 +176,9 @@ public class Main {
 
 		@Override
 		public Object invoke(final InvocationRequest invocation) throws Throwable {
+			String sessionId = invocation.getSessionId();
+			InetAddress clientAddress = (InetAddress) invocation.getRequestPayload().get(Remoting.CLIENT_ADDRESS);
+			SessionManager.getInstance().getSession(sessionId).setHost(clientAddress.getHostAddress());
 			return null;
 		}
 
@@ -183,8 +187,7 @@ public class Main {
 			ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
 			try {
 				String sessionId = handler.getClientSessionId();
-				InetAddress clientAddress = handler.getCallbackClient().getAddressSeenByServer();
-				SessionManager.getInstance().createSession(sessionId, callbackHandler, clientAddress.getHostAddress());
+				SessionManager.getInstance().createSession(sessionId, callbackHandler);
 			} catch (Throwable ex) {
 				logger.fatal("", ex);
 			}

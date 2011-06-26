@@ -145,6 +145,7 @@ public class Session {
 			callbackMetadata.put(Bisocket.IS_CALLBACK_SERVER, "true");
 			CallbackHandler callbackHandler = new CallbackHandler();
 			callbackClient.addListener(callbackHandler, callbackMetadata);
+			callbackClient.invoke("");
 									
 			this.sessionId = callbackClient.getSessionId();
 			boolean registerResult = false;
