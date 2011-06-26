@@ -761,7 +761,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 	}//GEN-LAST:event_btnCollectionViewerActionPerformed
 
 	private void btnPreferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreferencesActionPerformed
-		PhasesDialog.main(new String[]{});
+		//PhasesDialog.main(new String[]{});
+		PreferencesDialog.main(new String[]{});
 	}//GEN-LAST:event_btnPreferencesActionPerformed
 
     public void exitApp() {

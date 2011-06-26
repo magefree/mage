@@ -48,6 +48,7 @@ public class Config {
 	public static final String serverName;
 	public static final int port;
 	public static final double cardScalingFactor;
+    public static final double handScalingFactor;
 	public static final CardDimensions dimensions;
 	
 	public static final String defaultGameType;
@@ -66,6 +67,7 @@ public class Config {
 		port = Integer.parseInt(p.getProperty("port"));
 		remoteServer = p.getProperty("remote-server");
 		cardScalingFactor = Double.valueOf(p.getProperty("card-scaling-factor"));
+        handScalingFactor = Double.valueOf(p.getProperty("hand-scaling-factor"));
 		defaultGameType = p.getProperty("default-game-type", "Human");
 		defaultDeckPath = p.getProperty("default-deck-path");
 		defaultOtherPlayerIndex = p.getProperty("default-other-player-index");

@@ -42,6 +42,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.prefs.Preferences;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -52,11 +53,7 @@ import mage.Constants;
 import mage.client.MageFrame;
 import mage.client.cards.Cards;
 import mage.client.chat.ChatPanel;
-import mage.client.dialog.CombatDialog;
-import mage.client.dialog.ExileZoneDialog;
-import mage.client.dialog.PickChoiceDialog;
-import mage.client.dialog.PickNumberDialog;
-import mage.client.dialog.ShowCardsDialog;
+import mage.client.dialog.*;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.impl.Plugins;
 import mage.remote.Session;
@@ -84,7 +81,17 @@ public class GamePanel extends javax.swing.JPanel {
     private CombatDialog combat;
     private PickNumberDialog pickNumber;
 
-	private static final Dimension handCardDimension = new Dimension(75, (int)(75 * 3.5f / 2.5f));
+    private static final int HAND_CARD_WIDTH = 75;
+	private static final Dimension handCardDimension = new Dimension(HAND_CARD_WIDTH, (int)(HAND_CARD_WIDTH * 3.5f / 2.5f));
+    private static final Dimension handCardDimensionBig;
+
+    static {
+        double factor = Config.handScalingFactor;
+        if (factor < 1) factor = 1;
+        if (factor > 2) factor = 2;
+        int width = (int)(factor * HAND_CARD_WIDTH);
+        handCardDimensionBig = new Dimension(width, (int)(width * 3.5f / 2.5f));
+    }
 
     /** Creates new form GamePanel */
     public GamePanel() {
@@ -293,7 +300,7 @@ public class GamePanel extends javax.swing.JPanel {
 		} else {
 			this.hand.loadCards(game.getHand(), bigCard, gameId);
 			int count = game.getHand().size();
-			hand.setPreferredSize(new java.awt.Dimension((handCardDimension.width + 5) * count + 5, handCardDimension.height + 20)); // for scroll
+			hand.setPreferredSize(new java.awt.Dimension((getHandCardDimension().width + 5) * count + 5, getHandCardDimension().height + 20)); // for scroll
 		}
 		if (game.getPhase() != null)
 			this.txtPhase.setText(game.getPhase().toString());
@@ -535,7 +542,7 @@ public class GamePanel extends javax.swing.JPanel {
 		gameChatPanel.disableInput();
 		jTabbedPane1 = new JTabbedPane();
 
-	    hand.setCardDimension(handCardDimension);
+	    hand.setCardDimension(getHandCardDimension());
 
         jSplitPane1.setBorder(null);
         jSplitPane1.setDividerSize(7);
@@ -833,6 +840,15 @@ public class GamePanel extends javax.swing.JPanel {
 	private void btnPreviousPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousPlayActionPerformed
 		session.previousPlay(gameId);
 	}//GEN-LAST:event_btnPreviousPlayActionPerformed
+
+    private Dimension getHandCardDimension() {
+        Preferences pref = MageFrame.getPreferences();
+        String useBigCards = pref.get(PreferencesDialog.KEY_HAND_USE_BIG_CARDS, "false");
+        if (useBigCards.equals("true")) {
+            return handCardDimensionBig;
+        }
+        return handCardDimension;
+    }
 
 	private class HandContainer extends JPanel {
 

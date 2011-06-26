@@ -152,7 +152,7 @@ public class Cards extends javax.swing.JPanel {
         if (!isVisibleIfEmpty) {
         	cardArea.setVisible(cards.size() > 0);
         }
-		cardArea.setPreferredSize(new Dimension(cards.size() * (Config.dimensions.frameWidth + GAP_X), Config.dimensions.frameHeight));
+		cardArea.setPreferredSize(new Dimension((int)(cards.size() * (getCardDimension().getWidth() + GAP_X)), (int)(getCardDimension().getHeight())));
 		cardArea.revalidate();
 		cardArea.repaint();
 		this.revalidate();
