@@ -41,6 +41,8 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
+
+import mage.client.chat.ChatPanel;
 import mage.client.components.MageComponents;
 import mage.remote.Session;
 import mage.view.SeatView;
@@ -70,6 +72,7 @@ public class TableWaitingDialog extends MageDialog {
 
 		initComponents();
 
+        chatPanel.useExtendedView(ChatPanel.VIEW_MODE.NONE);
 		tableSeats.createDefaultColumnsFromModel();
 		MageFrame.getUI().addButton(MageComponents.TABLE_WAITING_START_BUTTON, btnStart);
     }
