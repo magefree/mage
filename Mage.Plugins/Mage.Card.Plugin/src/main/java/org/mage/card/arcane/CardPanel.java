@@ -85,6 +85,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     private boolean isPermanent;
     private boolean hasSickness;
     private boolean isFoil;
+    private String zone;
 
     public CardPanel(CardView newGameCard, UUID gameId, boolean loadImage, ActionCallback callback, final boolean foil) {
         this.gameCard = newGameCard;
@@ -190,6 +191,16 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     public boolean isFoil() {
         return this.isFoil;
+    }
+
+    @Override
+    public void setZone(String zone) {
+        this.zone = zone;
+    }
+
+    @Override
+    public String getZone() {
+        return zone;
     }
 
     public void setFoil(boolean foil) {

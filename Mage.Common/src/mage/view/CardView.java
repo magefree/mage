@@ -99,7 +99,7 @@ public class CardView implements Serializable {
 		}
 		this.expansionSetCode = card.getExpansionSetCode();
 		this.cardNumber = card.getCardNumber();
-		
+
 		if (card instanceof Spell) {
 			Spell<?> spell = (Spell<?>)card;
 			if (spell.getSpellAbility().getTargets().size() > 0) {

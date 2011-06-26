@@ -20,4 +20,6 @@ public abstract class MageCard extends JPanel {
 	abstract public Image getImage();
     abstract public void setFoil(boolean foil);
     abstract public boolean isFoil();
+    abstract public void setZone(String zone);
+    abstract public String getZone();
 }

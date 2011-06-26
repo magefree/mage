@@ -759,6 +759,7 @@ public class GamePanel extends javax.swing.JPanel {
 
         //hand.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 20)); // for scroll
 		hand.setBorder(emptyBorder);
+        hand.setZone(Constants.Zone.HAND.toString());
 		HandContainer handContainer = new HandContainer(hand);
 
 		jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);

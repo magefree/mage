@@ -33,7 +33,11 @@
  */
 package mage.client.dialog;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.prefs.BackingStoreException;
+
+import com.sun.deploy.cache.Cache;
 import mage.client.MageFrame;
 
 import javax.swing.*;
@@ -50,6 +54,10 @@ import static mage.client.util.PhaseManager.END_OF_TURN_OTHERS;
 public class PreferencesDialog extends javax.swing.JDialog {
 
     public static final String KEY_HAND_USE_BIG_CARDS = "handUseBigCards";
+    public static final String KEY_HAND_SHOW_TOOLTIPS = "handShowTooltips";
+
+    private static Map<String, String> cache = new HashMap<String, String>();
+    private static final Boolean UPDATE_CACHE_POLICY = Boolean.TRUE;
 
     /** Creates new form PreferencesDialog */
     public PreferencesDialog(java.awt.Frame parent, boolean modal) {
@@ -343,7 +351,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS);
         save(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS);
         save(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
-        save(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "false");
+        save(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.showToolTipsInHand, KEY_HAND_SHOW_TOOLTIPS, "true", "false", UPDATE_CACHE_POLICY);
         try {
             prefs.flush();
         } catch (BackingStoreException ex) {
@@ -389,8 +398,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     load(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS);
                     load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
                     load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true");
+                    load(prefs, dialog.showToolTipsInHand, KEY_HAND_SHOW_TOOLTIPS, "true");
                     dialog.setLocation(300, 200);
-					dialog.reset();
+                    dialog.reset();
                     dialog.setVisible(true);
                 } else {
                     dialog.requestFocus();
@@ -409,16 +419,34 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void save(Preferences prefs, JCheckBox checkBox, String propName) {
-        save(prefs, checkBox, propName, PHASE_ON, PHASE_OFF);
+        save(prefs, checkBox, propName, PHASE_ON, PHASE_OFF, false);
     }
 
-    private static void save(Preferences prefs, JCheckBox checkBox, String propName, String yesValue, String onValue) {
+    private static void save(Preferences prefs, JCheckBox checkBox, String propName, String yesValue, String onValue, boolean updateCache) {
         prefs.put(propName, checkBox.isSelected() ? yesValue : onValue);
+        if (updateCache) {
+            updateCache(propName, checkBox.isSelected() ? yesValue : onValue);
+        }
     }
 
 	public void reset() {
 		jTabbedPane1.setSelectedIndex(0);
 	}
+
+    public static String getCachedValue(String key, String def) {
+        if (cache.containsKey(key)) {
+            return cache.get(key);
+        } else {
+            Preferences prefs = MageFrame.getPreferences();
+            String value = prefs.get(key, def);
+            cache.put(key, value);
+            return value;
+        }
+    }
+
+    private static void updateCache(String key, String value) {
+        cache.put(key, value);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox checkBoxBeforeCOthers;

@@ -63,6 +63,7 @@ public class Cards extends javax.swing.JPanel {
 	private Map<UUID, MageCard> cards = new LinkedHashMap<UUID, MageCard>();
 	private boolean dontDisplayTapped = false;
 	private static final int GAP_X = 5;
+    private String zone;
 	
 	/**
 	 * Defines whether component should be visible whenever there is no objects within.
@@ -170,6 +171,7 @@ public class Cards extends javax.swing.JPanel {
 
 	private void addCard(CardView card, BigCard bigCard, UUID gameId) {
 		MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, getCardDimension(), gameId, true);
+        if (zone != null) cardImg.setZone(zone);
 		cards.put(card.getId(), cardImg);
 		cardArea.add(cardImg);
 	}
@@ -248,4 +250,8 @@ public class Cards extends javax.swing.JPanel {
 	public void setCardDimension(Dimension dimension) {
 		this.cardDimension = dimension;
 	}
+
+    public void setZone(String zone) {
+        this.zone = zone;
+    }
 }

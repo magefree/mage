@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.UUID;
+import java.util.prefs.Preferences;
 
 import javax.swing.*;
 
@@ -16,6 +17,7 @@ import mage.cards.action.TransferData;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.components.MageComponents;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.game.PlayAreaPanel;
 import mage.client.plugins.impl.Plugins;
 import mage.remote.Session;
@@ -123,6 +125,18 @@ public class MageActionCallback implements ActionCallback {
         if (data.card.getRarity().equals(Constants.Rarity.NA)) {
             return;
         }
+
+        if (data.component instanceof MageCard) {
+            String zone = ((MageCard)(data.component)).getZone();
+            if (zone != null && zone.equals(Constants.Zone.HAND.toString())) {
+                // for performance getting cached value
+                String showTooltips = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_HAND_SHOW_TOOLTIPS, "false");
+                if (showTooltips.equals("false")) {
+                    return;
+                }
+            }
+        }
+
         if (cardInfoPane == null) {
             PopupFactory factory = PopupFactory.getSharedInstance();
             popup = factory.getPopup(data.component, data.popupText, (int) data.locationOnScreen.getX() + data.popupOffsetX, (int) data.locationOnScreen.getY() + data.popupOffsetY + 40);

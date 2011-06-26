@@ -488,6 +488,16 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     }
 
     @Override
+    public void setZone(String zone) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public String getZone() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
 	public PermanentView getOriginalPermanent() {
 		return null;
 	}
