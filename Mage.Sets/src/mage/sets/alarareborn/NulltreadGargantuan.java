@@ -39,6 +39,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -56,7 +57,10 @@ public class NulltreadGargantuan extends CardImpl<NulltreadGargantuan> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
         Ability ability = new EntersBattlefieldTriggeredAbility(new PutOnLibraryTargetEffect(true), false);
-        ability.addTarget(new TargetControlledCreaturePermanent());
+		Target target = new TargetControlledCreaturePermanent();
+		target.setRequired(true);
+		target.setNotTarget(true);
+        ability.addTarget(target);
         this.addAbility(ability);
     }
 

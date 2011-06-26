@@ -39,6 +39,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -57,7 +58,10 @@ public class KorSkyfisher extends CardImpl<KorSkyfisher> {
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        ability.addTarget(new TargetControlledPermanent());
+		Target target = new TargetControlledPermanent();
+		target.setRequired(true);
+		target.setNotTarget(true);
+        ability.addTarget(target);
         this.addAbility(ability);
     }
 
