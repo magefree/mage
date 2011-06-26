@@ -103,6 +103,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         checkBoxEndOfCOthers = new javax.swing.JCheckBox();
         checkBoxMain2Others = new javax.swing.JCheckBox();
         checkBoxEndTurnOthers = new javax.swing.JCheckBox();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        useDefaultImageFolder = new javax.swing.JCheckBox();
+        imageFolderPath = new javax.swing.JTextField();
+        browseButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
 
@@ -293,6 +298,69 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Phases", jPanel2);
 
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Card images location:"));
+
+        useDefaultImageFolder.setText("use default");
+        useDefaultImageFolder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                useDefaultImageFolderActionPerformed(evt);
+            }
+        });
+
+        browseButton.setText("Browse...");
+        browseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browseButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(useDefaultImageFolder))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(imageFolderPath, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(browseButton)))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(useDefaultImageFolder)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(imageFolderPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(browseButton))
+                .addContainerGap(75, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(91, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Images", jPanel4);
+
         saveButton.setLabel("Save");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -373,6 +441,22 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_displayBigCardsInHandActionPerformed
 
+    private void useDefaultImageFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_useDefaultImageFolderActionPerformed
+        if (useDefaultImageFolder.isSelected()) {
+            imageFolderPath.setText("./plugins/images/");
+            imageFolderPath.setEnabled(false);
+            browseButton.setEnabled(false);
+        } else {
+            imageFolderPath.setText("");
+            imageFolderPath.setEnabled(true);
+            browseButton.setEnabled(true);
+        }
+    }//GEN-LAST:event_useDefaultImageFolderActionPerformed
+
+    private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_browseButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -448,6 +532,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton browseButton;
     private javax.swing.JCheckBox checkBoxBeforeCOthers;
     private javax.swing.JCheckBox checkBoxBeforeCYou;
     private javax.swing.JCheckBox checkBoxDrawOthers;
@@ -464,6 +549,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox checkBoxUpkeepYou;
     private javax.swing.JCheckBox displayBigCardsInHand;
     private javax.swing.JButton exitButton;
+    private javax.swing.JTextField imageFolderPath;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -477,9 +563,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton saveButton;
     private javax.swing.JCheckBox showToolTipsInHand;
+    private javax.swing.JCheckBox useDefaultImageFolder;
     // End of variables declaration//GEN-END:variables
 
     private static final PreferencesDialog dialog = new PreferencesDialog(new javax.swing.JFrame(), true);
