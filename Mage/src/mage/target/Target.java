@@ -48,6 +48,7 @@ public interface Target extends Serializable {
 	public boolean doneChosing();
 	public void clearChosen();
 	public boolean isNotTarget();
+	public void setNotTarget(boolean notTarget);
 	
 	// methods for targets
 	public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game);

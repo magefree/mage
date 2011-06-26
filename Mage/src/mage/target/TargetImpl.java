@@ -53,7 +53,7 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 	protected Zone zone;
 	protected int maxNumberOfTargets;
 	protected int minNumberOfTargets;
-	protected boolean required = false;
+	protected boolean required = true;
 	protected boolean chosen = false;
 	protected boolean notTarget = false;
 
@@ -274,4 +274,8 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 		return null;
 	}
 
+	@Override
+	public void setNotTarget(boolean notTarget) {
+		this.notTarget = notTarget;
+	}
 }
