@@ -90,7 +90,6 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
 
    public boolean connect(Connection connection) {
         if (session.connect(connection)) {
-			
 			this.consolePanel1.start();
 			return true;
 		}
@@ -221,6 +220,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
 	@Override
 	public void disconnected() {
 		if (SwingUtilities.isEventDispatchThread()) {
+			consolePanel1.stop();
 			setStatusText("Not connected");
 			disableButtons();
 		}
@@ -228,6 +228,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
+					consolePanel1.stop();
 					setStatusText("Not connected");
 					disableButtons();
 				}
