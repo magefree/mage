@@ -62,7 +62,9 @@ public class CardsView extends HashMap<UUID, CardView> {
 					sourceCard = game.getCard(ability.getSourceId());
 					break;
 				case BATTLEFIELD:
-					sourceCard = game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD);
+                    sourceCard = game.getPermanent(ability.getSourceId());
+                    if (sourceCard == null)
+					    sourceCard = game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD);
 					break;
 			}
 			if (sourceCard != null) {
