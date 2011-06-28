@@ -48,7 +48,8 @@ public enum CounterType {
     QUEST(new QuestCounter().name),
     ARROWHEAD(new ArrowheadCounter().name),
     EON(new EonCounter().name),
-	AWAKENING(new AwakeningCounter().name);
+	AWAKENING(new AwakeningCounter().name),
+    DEVOTION(new DevotionCounter().name);
 
     private String name;
 
@@ -108,6 +109,8 @@ public enum CounterType {
                 return new EonCounter(amount);
 			case AWAKENING:
 				return new AwakeningCounter(amount);
+            case DEVOTION:
+				return new DevotionCounter(amount);
         }
         return null;
     }

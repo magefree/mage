@@ -43,6 +43,6 @@ public class CountersCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return counter.getName() + " on {this}";
+        return counter.getName() + " counter on {this}";
     }
 }
