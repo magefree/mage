@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import mage.MageException;
 import mage.view.UserView;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
@@ -62,7 +63,7 @@ public class SessionManager {
 		sessions.put(sessionId, session);
 	}
 	
-	public boolean registerUser(String sessionId, String userName) {
+	public boolean registerUser(String sessionId, String userName) throws MageException {
 		Session session = sessions.get(sessionId);
 		if (session != null) {
 			session.registerUser(userName);
@@ -103,7 +104,7 @@ public class SessionManager {
 		Session admin = sessions.get(sessionId);
 		if (admin != null && admin.isAdmin()) {
 			for (Session session: sessions.values()) {
-				users.add(new UserView(session.getUsername(), "", session.getId(), session.getConnectionTime()));
+				users.add(new UserView(session.getUser().getName(), "", session.getId(), session.getConnectionTime()));
 			}
 		}
 		return users;

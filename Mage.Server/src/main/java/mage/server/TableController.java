@@ -83,7 +83,7 @@ public class TableController {
 		match = GameFactory.getInstance().createMatch(options.getGameType(), options);
 		Session session = SessionManager.getInstance().getSession(sessionId);
 		if (session != null)
-			controllerName = session.getUsername();
+			controllerName = session.getUser().getName();
 		else
 			controllerName = "System";
 		table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.getInstance().createDeckValidator(options.getDeckType()), options.getPlayerTypes(), match);
@@ -96,7 +96,7 @@ public class TableController {
 		tournament = TournamentFactory.getInstance().createTournament(options.getTournamentType(), options);
 		Session session = SessionManager.getInstance().getSession(sessionId);
 		if (session != null)
-			controllerName = session.getUsername();
+			controllerName = session.getUser().getName();
 		else
 			controllerName = "System";
 		table = new Table(roomId, options.getTournamentType(), options.getName(), controllerName, DeckValidatorFactory.getInstance().createDeckValidator(options.getMatchOptions().getDeckType()), options.getPlayerTypes(), tournament);

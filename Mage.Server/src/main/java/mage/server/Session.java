@@ -30,6 +30,7 @@ package mage.server;
 
 import java.util.Date;
 import java.util.UUID;
+import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.game.GameManager;
@@ -49,7 +50,7 @@ public class Session {
 	private final static Logger logger = Logger.getLogger(Session.class);
 
 	private String sessionId;
-	private String username;
+	private User user;
 	private String host;
 	private Date timeConnected;
 	private boolean isAdmin = false;
@@ -62,14 +63,27 @@ public class Session {
 		this.timeConnected = new Date();
 	}
 	
-	public void registerUser(String userName) {
+	public void registerUser(String userName) throws MageException {
 		this.isAdmin = false;
-		this.username = userName;
+		User user = UserManager.getInstance().findUser(userName);
+		if (user == null) {
+			user = UserManager.getInstance().createUser(userName, host);
+		}
+		else {
+			if (user.getHost().equals(host)) {
+				logger.info("Reconnecting session for " + userName);
+			}
+			else {
+				throw new MageException("User name already in use");
+			}
+		}
+		UserManager.getInstance().connectToSession(sessionId, userName);
+		this.user = user;
 	}
 	
 	public void registerAdmin() {
 		this.isAdmin = true;
-		this.username = "Admin";
+		this.user = UserManager.getInstance().createUser("Admin", host);
 	}
 	
 	public String getId() {
@@ -80,6 +94,7 @@ public class Session {
 		TableManager.getInstance().removeSession(sessionId);
 		GameManager.getInstance().removeSession(sessionId);
 		ChatManager.getInstance().removeSession(sessionId);
+		UserManager.getInstance().disconnect(user.getName());
 	}
 
 	public synchronized void fireCallback(final ClientCallback call) {
@@ -118,8 +133,8 @@ public class Session {
 		fireCallback(new ClientCallback("replayGame", gameId));
 	}
 
-	public String getUsername() {
-		return username;
+	public User getUser() {
+		return user;
 	}
 
 	public boolean isAdmin() {

@@ -219,7 +219,7 @@ public class MageServerImpl implements MageServer {
 		try {
 			List<String> players = new ArrayList<String>();
 			for (Session session : SessionManager.getInstance().getSessions().values()) {
-				players.add(session.getUsername());
+				players.add(session.getUser().getName());
 			}
 			return players;
 		}
