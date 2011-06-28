@@ -33,6 +33,7 @@
  */
 package mage.client.dialog;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.prefs.BackingStoreException;
@@ -54,14 +55,23 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public static final String KEY_HAND_USE_BIG_CARDS = "handUseBigCards";
     public static final String KEY_HAND_SHOW_TOOLTIPS = "handShowTooltips";
+    public static final String KEY_CARD_IMAGES_USE_DEFAULT = "cardImagesUseDefault";
+    public static final String KEY_CARD_IMAGES_PATH = "cardImagesPath";
 
     private static Map<String, String> cache = new HashMap<String, String>();
     private static final Boolean UPDATE_CACHE_POLICY = Boolean.TRUE;
+
+    private final JFileChooser fc = new JFileChooser();
+
+    {
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+    }
 
     /** Creates new form PreferencesDialog */
     public PreferencesDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        imageFolderPath.setEditable(false);
     }
 
     /** This method is called from within the constructor to
@@ -420,6 +430,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
         save(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.showToolTipsInHand, KEY_HAND_SHOW_TOOLTIPS, "true", "false", UPDATE_CACHE_POLICY);
+        saveImagesPath(prefs);
         try {
             prefs.flush();
         } catch (BackingStoreException ex) {
@@ -443,18 +454,32 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private void useDefaultImageFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_useDefaultImageFolderActionPerformed
         if (useDefaultImageFolder.isSelected()) {
-            imageFolderPath.setText("./plugins/images/");
-            imageFolderPath.setEnabled(false);
-            browseButton.setEnabled(false);
+            useDefaultPath();
         } else {
-            imageFolderPath.setText("");
-            imageFolderPath.setEnabled(true);
-            browseButton.setEnabled(true);
+            useConfigurablePath();
         }
     }//GEN-LAST:event_useDefaultImageFolderActionPerformed
 
+    private void useDefaultPath() {
+        imageFolderPath.setText("./plugins/images/");
+        imageFolderPath.setEnabled(false);
+        browseButton.setEnabled(false);
+    }
+
+    private void useConfigurablePath() {
+        String path = cache.get(KEY_CARD_IMAGES_PATH);
+        dialog.imageFolderPath.setText(path);
+        imageFolderPath.setEnabled(true);
+        browseButton.setEnabled(true);
+    }
+
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
-        // TODO add your handling code here:
+        int returnVal = fc.showOpenDialog(PreferencesDialog.this);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            imageFolderPath.setText(file.getAbsolutePath());
+        }
     }//GEN-LAST:event_browseButtonActionPerformed
 
     /**
@@ -482,6 +507,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
                     load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true");
                     load(prefs, dialog.showToolTipsInHand, KEY_HAND_SHOW_TOOLTIPS, "true");
+                    loadImagesPath(prefs);
                     dialog.setLocation(300, 200);
                     dialog.reset();
                     dialog.setVisible(true);
@@ -490,6 +516,33 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 }
             }
         });
+    }
+
+    private static void loadImagesPath(Preferences prefs) {
+        String prop = prefs.get(KEY_CARD_IMAGES_USE_DEFAULT, "true");
+        if (prop.equals("true")) {
+            dialog.useDefaultImageFolder.setSelected(true);
+            dialog.useDefaultPath();
+        } else {
+            dialog.useDefaultImageFolder.setSelected(false);
+            dialog.useConfigurablePath();
+            String path = prefs.get(KEY_CARD_IMAGES_PATH, "");
+            dialog.imageFolderPath.setText(path);
+            updateCache(KEY_CARD_IMAGES_PATH, path);
+        }
+    }
+
+     private static void saveImagesPath(Preferences prefs) {
+        if (dialog.useDefaultImageFolder.isSelected()) {
+            prefs.put(KEY_CARD_IMAGES_USE_DEFAULT, "true");
+            updateCache(KEY_CARD_IMAGES_USE_DEFAULT, "true");
+        } else {
+            prefs.put(KEY_CARD_IMAGES_USE_DEFAULT, "false");
+            updateCache(KEY_CARD_IMAGES_USE_DEFAULT, "false");
+            String path = dialog.imageFolderPath.getText();
+            prefs.put(KEY_CARD_IMAGES_PATH, path);
+            updateCache(KEY_CARD_IMAGES_PATH, path);
+        }
     }
 
     private static void load(Preferences prefs, JCheckBox checkBox, String propName, String yesValue) {
@@ -522,6 +575,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         } else {
             Preferences prefs = MageFrame.getPreferences();
             String value = prefs.get(key, def);
+            if (value == null) return null;
             cache.put(key, value);
             return value;
         }

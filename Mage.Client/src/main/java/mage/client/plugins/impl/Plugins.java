@@ -7,6 +7,7 @@ import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.Card;
 import mage.client.cards.Permanent;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.MagePlugins;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.util.Config;
@@ -108,12 +109,16 @@ public class Plugins implements MagePlugins {
 
 	@Override
 	public void downloadImage(Set<mage.cards.Card> allCards) {
-		if (this.cardPlugin != null) this.cardPlugin.downloadImages(allCards);
+        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
+        String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
+		if (this.cardPlugin != null) this.cardPlugin.downloadImages(allCards, path);
 	}
 	
 	@Override
 	public void downloadSymbols() {
-		if (this.cardPlugin != null) this.cardPlugin.downloadSymbols();
+        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
+        String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
+		if (this.cardPlugin != null) this.cardPlugin.downloadSymbols(path);
 	}
 
 	@Override

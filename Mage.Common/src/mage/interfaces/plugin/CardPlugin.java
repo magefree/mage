@@ -29,8 +29,22 @@ public interface CardPlugin extends Plugin {
 	MagePermanent getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage);
 	MagePermanent getMageCard(CardView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage);
 	void sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> cards);
-	void downloadImages(Set<Card> allCards);
-	void downloadSymbols();
+
+    /**
+     * Download images.
+     *
+     * @param allCards Set of cards to download images for.
+     * @param imagesPath Path to check in and store images to. Can be null, in such case default path should be used.
+     */
+    void downloadImages(Set<Card> allCards, String imagesPath);
+
+    /**
+     * Download various symbols (mana, tap, set).
+     *
+     * @param imagesPath Path to check in and store symbols to. Can be null, in such case default path should be used.
+     */
+	void downloadSymbols(String imagesPath);
+
 	Image getManaSymbolImage(String symbol);
 	void onAddCard(MagePermanent card, int count);
 	void onRemoveCard(MagePermanent card, int count);

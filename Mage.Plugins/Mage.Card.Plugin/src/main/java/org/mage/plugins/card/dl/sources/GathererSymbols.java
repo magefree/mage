@@ -7,16 +7,15 @@
 package org.mage.plugins.card.dl.sources;
 
 
-import static java.lang.String.format;
-import static org.mage.plugins.card.dl.DownloadJob.fromURL;
-import static org.mage.plugins.card.dl.DownloadJob.toFile;
+import com.google.common.collect.AbstractIterator;
+import org.mage.plugins.card.dl.DownloadJob;
 
 import java.io.File;
 import java.util.Iterator;
 
-import org.mage.plugins.card.dl.DownloadJob;
-
-import com.google.common.collect.AbstractIterator;
+import static java.lang.String.format;
+import static org.mage.plugins.card.dl.DownloadJob.fromURL;
+import static org.mage.plugins.card.dl.DownloadJob.toFile;
 
 
 /**
@@ -29,7 +28,10 @@ public class GathererSymbols implements Iterable<DownloadJob> {
     //TODO chaos and planeswalker symbol
     //chaos: http://gatherer.wizards.com/Images/Symbols/chaos.gif
     
-    private static final File     outDir  = new File("plugins/images/symbols");
+    private final static String SYMBOLS_PATH =  File.separator + "symbols";
+    private final static File DEFAULT_OUT_DIR = new File("plugins" + File.separator + "images" + SYMBOLS_PATH);
+    private static File outDir  = DEFAULT_OUT_DIR;
+
     private static final String   urlFmt  = "http://gatherer.wizards.com/handlers/image.ashx?size=%1$s&name=%2$s&type=symbol";
     
     private static final String[] sizes   = {"small", "medium", "large"};
@@ -44,6 +46,14 @@ public class GathererSymbols implements Iterable<DownloadJob> {
 
                                           "X", "S", "T", "Q"};
     private static final int      minNumeric = 0, maxNumeric = 16;
+
+    public GathererSymbols(String path) {
+        if (path == null) {
+            useDefaultDir();
+        } else {
+            changeOutDir(path);
+        }
+    }
     
     @Override
     public Iterator<DownloadJob> iterator() {
@@ -79,5 +89,21 @@ public class GathererSymbols implements Iterable<DownloadJob> {
                 return new DownloadJob(sym, fromURL(url), toFile(dst));
             }
         };
+    }
+
+    private void changeOutDir(String path) {
+        File file = new File(path + SYMBOLS_PATH);
+        if (file.exists()) {
+            outDir = file;
+        } else {
+            file.mkdirs();
+            if (file.exists()) {
+                outDir = file;
+            }
+        }
+    }
+
+    private void useDefaultDir() {
+        outDir = DEFAULT_OUT_DIR;
     }
 }

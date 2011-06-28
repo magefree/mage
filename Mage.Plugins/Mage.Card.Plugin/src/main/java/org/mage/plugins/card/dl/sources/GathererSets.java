@@ -1,6 +1,5 @@
 package org.mage.plugins.card.dl.sources;
 
-import com.google.common.collect.AbstractIterator;
 import org.mage.plugins.card.dl.DownloadJob;
 
 import java.io.File;
@@ -12,7 +11,11 @@ import static org.mage.plugins.card.dl.DownloadJob.fromURL;
 import static org.mage.plugins.card.dl.DownloadJob.toFile;
 
 public class GathererSets implements Iterable<DownloadJob> {
-    private static final File     outDir  = new File("plugins/images/sets");
+
+    private final static String SETS_PATH = File.separator + "sets";
+    private final static File DEFAULT_OUT_DIR = new File("plugins" + File.separator + "images" + SETS_PATH);
+    private static File outDir  = DEFAULT_OUT_DIR;
+
     private static final String[] symbols = {"DIS", "DST", "GPT", "RAV", "MRD", "10E", "HOP", "EVE", "APC", "TMP", "CHK"};
     private static final String[] withMythics = {"ALA", "CFX", "ARB", "ZEN", "WWK", "ROE", "SOM", "M10", "M11", "DDF", "MBS", "NPH"};
     private static final HashMap<String, String> symbolsReplacements = new HashMap<String, String>();
@@ -21,6 +24,14 @@ public class GathererSets implements Iterable<DownloadJob> {
         symbolsReplacements.put("CFX", "CON");
         symbolsReplacements.put("APC", "AP");
         symbolsReplacements.put("TMP", "TE");
+    }
+
+    public GathererSets(String path) {
+        if (path == null) {
+            useDefaultDir();
+        } else {
+            changeOutDir(path);
+        }
     }
 
     @Override
@@ -47,5 +58,21 @@ public class GathererSets implements Iterable<DownloadJob> {
         }
         String url = "http://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=" + set + "&size=small&rarity=" + rarity;
         return new DownloadJob(set + "-" + rarity, fromURL(url), toFile(dst));
+    }
+
+    private void changeOutDir(String path) {
+        File file = new File(path + SETS_PATH);
+        if (file.exists()) {
+            outDir = file;
+        } else {
+            file.mkdirs();
+            if (file.exists()) {
+                outDir = file;
+            }
+        }
+    }
+
+    private void useDefaultDir() {
+        outDir = DEFAULT_OUT_DIR;
     }
 }

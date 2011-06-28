@@ -396,22 +396,33 @@ public class CardPluginImpl implements CardPlugin {
         }
     }
 
+    /**
+     * Download images.
+     *
+     * @param allCards Set of cards to download images for.
+     * @param imagesPath Path to check in and store images to. Can be null, in such case default path should be used.
+     */
     @Override
-    public void downloadImages(Set<Card> allCards) {
-        DownloadPictures.startDownload(null, allCards);
+    public void downloadImages(Set<Card> allCards, String imagesPath) {
+        DownloadPictures.startDownload(null, allCards, imagesPath);
     }
 
+    /**
+     * Download various symbols (mana, tap, set).
+     *
+     * @param imagesPath Path to check in and store symbols to. Can be null, in such case default path should be used.
+     */
     @Override
-    public void downloadSymbols() {
+    public void downloadSymbols(String imagesPath) {
         final DownloadGui g = new DownloadGui(new Downloader());
 
-        Iterable<DownloadJob> it = new GathererSymbols();
+        Iterable<DownloadJob> it = new GathererSymbols(imagesPath);
 
         for (DownloadJob job : it) {
             g.getDownloader().add(job);
         }
 
-        it = new GathererSets();
+        it = new GathererSets(imagesPath);
 	    for(DownloadJob job:it) {
 	            g.getDownloader().add(job);
 	    }

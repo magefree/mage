@@ -21,6 +21,7 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javax.management.ImmutableDescriptor;
 import javax.swing.AbstractButton;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -69,6 +70,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 	private static boolean offlineMode = false;
 	private JCheckBox checkBox;
 	private final Object sync = new Object();
+    private String imagesPath;
 	
     private static CardImageSource cardImageSource;
     
@@ -79,11 +81,11 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 	public static final Proxy.Type[] types = Proxy.Type.values();
 
 	public static void main(String[] args) {
-		startDownload(null, null);
+		startDownload(null, null, null);
 	}
 
-	public static void startDownload(JFrame frame, Set<Card> allCards) {
-		ArrayList<CardInfo> cards = getNeededCards(allCards);
+	public static void startDownload(JFrame frame, Set<Card> allCards, String imagesPath) {
+		ArrayList<CardInfo> cards = getNeededCards(allCards, imagesPath);
 
 		/*
 		 * if (cards == null || cards.size() == 0) {
@@ -91,7 +93,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		 * "All card pictures have been downloaded."); return; }
 		 */
 
-		DownloadPictures download = new DownloadPictures(cards);
+		DownloadPictures download = new DownloadPictures(cards, imagesPath);
 		JDialog dlg = download.getDlg(frame);
 		dlg.setVisible(true);
 		dlg.dispose();
@@ -115,8 +117,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		this.cancel = cancel;
 	}
 
-	public DownloadPictures(ArrayList<CardInfo> cards) {
+	public DownloadPictures(ArrayList<CardInfo> cards, String imagesPath) {
 		this.cards = cards;
+        this.imagesPath = imagesPath;
 
 		addr = new JTextField("Proxy Address");
 		port = new JTextField("Proxy Port");
@@ -230,7 +233,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		dlg = new JOptionPane(p0, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
 	}
 
-	private static ArrayList<CardInfo> getNeededCards(Set<Card> allCards) {
+	private static ArrayList<CardInfo> getNeededCards(Set<Card> allCards, String imagesPath) {
 
 		ArrayList<CardInfo> cardsToDownload = new ArrayList<CardInfo>();
 
@@ -273,7 +276,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 					|| card.getName().equals("Plains")) {
 				withCollectorId = true;
 			}
-			file = new File(CardImageUtils.getImagePath(card, withCollectorId));
+			file = new File(CardImageUtils.getImagePath(card, withCollectorId, imagesPath));
 			if (!file.exists()) {
 				cardsToDownload.add(card);
 			}
@@ -375,7 +378,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     @Override
 	public void run() {
 
-		File base = new File(Constants.IO.imageBaseDir);
+		File base = new File(this.imagesPath != null ? imagesPath : Constants.IO.imageBaseDir);
 		if (!base.exists()) {
 			base.mkdir();
 		}
@@ -411,7 +414,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     }
 
                     if (url != null) {
-                        Runnable task = new DownloadTask(card, new URL(url));
+                        Runnable task = new DownloadTask(card, new URL(url), imagesPath);
                         executor.execute(task);
                     } else {
                         synchronized (sync) {
@@ -435,10 +438,12 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 	private final class DownloadTask implements Runnable {
 		private CardInfo card;
 		private URL url;
+        private String imagesPath;
 		
-		public DownloadTask(CardInfo card, URL url) {
+		public DownloadTask(CardInfo card, URL url, String imagesPath) {
 			this.card = card;
 			this.url = url;
+            this.imagesPath = imagesPath;
 		}
 		
         @Override
@@ -446,7 +451,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 			try {
 				BufferedInputStream in = new BufferedInputStream(url.openConnection(p).getInputStream());
 	
-				createDirForCard(card);
+				createDirForCard(card, imagesPath);
 	
 				boolean withCollectorId = false;
 				if (card.getName().equals("Forest") || card.getName().equals("Mountain") || card.getName().equals("Swamp")
@@ -485,8 +490,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		}
 	}
 
-	private static File createDirForCard(CardInfo card) throws Exception {
-		File setDir = new File(CardImageUtils.getImageDir(card));
+	private static File createDirForCard(CardInfo card, String imagesPath) throws Exception {
+		File setDir = new File(CardImageUtils.getImageDir(card, imagesPath));
 		if (!setDir.exists()) {
 			setDir.mkdirs();
 		}

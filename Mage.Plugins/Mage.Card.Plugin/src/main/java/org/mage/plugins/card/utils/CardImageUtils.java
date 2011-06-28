@@ -127,23 +127,28 @@ public class CardImageUtils {
 		return set;
 	}
 	
-	public static String getImageDir(CardInfo card) {
+	public static String getImageDir(CardInfo card, String imagesPath) {
 		if (card.getSet() == null) {
 			return "";
 		}
 		String set = updateSet(card.getSet(), false).toUpperCase();
+        String imagesDir = (imagesPath != null ? imagesPath :  Constants.IO.imageBaseDir);
 		if (card.isToken()) {
-			return Constants.IO.imageBaseDir + File.separator + "TOK" + File.separator + set;
+			return imagesDir + File.separator + "TOK" + File.separator + set;
 		} else {
-			return Constants.IO.imageBaseDir + set;
+			return imagesDir + File.separator + set;
 		}
 	}
-	
-	public static String getImagePath(CardInfo card, boolean withCollector) {
+
+    public static String getImagePath(CardInfo card, boolean withCollector) {
+        return getImagePath(card, withCollector, null);
+    }
+
+	public static String getImagePath(CardInfo card, boolean withCollector, String imagesPath) {
 		if (withCollector) {
-			return getImageDir(card) + File.separator + card.getName() + "." + card.getCollectorId() + ".full.jpg";
+			return getImageDir(card, imagesPath) + File.separator + card.getName() + "." + card.getCollectorId() + ".full.jpg";
 		} else {
-			return getImageDir(card) + File.separator + card.getName() + ".full.jpg";
+			return getImageDir(card, imagesPath) + File.separator + card.getName() + ".full.jpg";
 		}
 	}
 }
