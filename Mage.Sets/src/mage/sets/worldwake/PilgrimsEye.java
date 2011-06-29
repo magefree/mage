@@ -32,11 +32,10 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -45,23 +44,23 @@ import mage.target.common.TargetCardInLibrary;
  * @author Loki
  */
 public class PilgrimsEye extends CardImpl<PilgrimsEye> {
-    private static FilterCard filter = new FilterCard("basic land card");
+    private static final FilterCard filter = new FilterCard("basic land card");
 
     static {
         filter.getSupertype().add("Basic");
-		filter.setScopeSupertype(Filter.ComparisonScope.Any);
 		filter.getCardType().add(CardType.LAND);
-		filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
     public PilgrimsEye (UUID ownerId) {
         super(ownerId, 128, "Pilgrim's Eye", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.expansionSetCode = "WWK";
         this.subtype.add("Thopter");
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new EntersBattlefieldAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter)), "you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library"));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(filter))));
     }
 
     public PilgrimsEye (final PilgrimsEye card) {

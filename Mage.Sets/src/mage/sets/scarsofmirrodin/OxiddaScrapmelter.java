@@ -32,35 +32,31 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.filter.common.FilterArtifactPermanent;
 
 /**
  *
- * @author Loki
+ * @author Loki, North
  */
 public class OxiddaScrapmelter extends CardImpl<OxiddaScrapmelter> {
-    private static FilterPermanent filter = new FilterPermanent("artifact");
-
-    static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-    }
+    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact");
 
     public OxiddaScrapmelter (UUID ownerId) {
         super(ownerId, 101, "Oxidda Scrapmelter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Beast");
-		this.color.setRed(true);        
+
+		this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        Ability ability = new EntersBattlefieldAbility(new DestroyTargetEffect(), "destroy target artifact");
+
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

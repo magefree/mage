@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
@@ -35,61 +34,35 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
- * @author Loki
+ * @author Loki, North
  */
 public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
 
-    public AkkiRockspeaker (UUID ownerId) {
+    public AkkiRockspeaker(UUID ownerId) {
         super(ownerId, 154, "Akki Rockspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
-		this.color.setRed(true);
+
+        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new EntersBattlefieldAbility(new AkkiRockspeakerEffect(), "add {R} to your mana pool"));
+
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
     }
 
-    public AkkiRockspeaker (final AkkiRockspeaker card) {
+    public AkkiRockspeaker(final AkkiRockspeaker card) {
         super(card);
     }
 
     @Override
     public AkkiRockspeaker copy() {
         return new AkkiRockspeaker(this);
-    }
-}
-
-class AkkiRockspeakerEffect extends OneShotEffect<AkkiRockspeakerEffect> {
-    AkkiRockspeakerEffect() {
-        super(Constants.Outcome.PutManaInPool);
-    }
-
-    AkkiRockspeakerEffect(final AkkiRockspeakerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.getManaPool().changeMana(Mana.RedMana);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public AkkiRockspeakerEffect copy() {
-        return new AkkiRockspeakerEffect(this);
     }
 }

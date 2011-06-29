@@ -49,7 +49,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class BlackcleaveCliffs extends CardImpl<BlackcleaveCliffs> {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent();
+	private static final FilterLandPermanent filter = new FilterLandPermanent();
 
 	static {
 		filter.setScopeSubtype(ComparisonScope.Any);

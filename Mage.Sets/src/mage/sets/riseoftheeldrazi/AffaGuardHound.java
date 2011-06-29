@@ -34,7 +34,7 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
@@ -50,11 +50,13 @@ public class AffaGuardHound extends CardImpl<AffaGuardHound> {
         super(ownerId, 14, "Affa Guard Hound", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Hound");
+
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+
         this.addAbility(FlashAbility.getInstance());
-        Ability ability = new EntersBattlefieldAbility(new BoostTargetEffect(0, 3, Duration.EndOfTurn), "target creature gets +0/+3 until end of turn");
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(0, 3, Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

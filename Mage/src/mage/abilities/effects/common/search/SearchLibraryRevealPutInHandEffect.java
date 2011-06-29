@@ -90,15 +90,8 @@ public class SearchLibraryRevealPutInHandEffect extends SearchEffect<SearchLibra
 		else {
 			sb.append("a ").append(target.getTargetName()).append(", reveal that card, and put it into your hand");
 		}
-		sb.append(". Then shuffle your library");
+		sb.append(", then shuffle your library");
 
 		return sb.toString();
 	}
-
-//	@Override
-//	public void setSource(Ability ability) {
-//		super.setSource(ability);
-//		target.setAbility(ability);
-//	}
-
 }
