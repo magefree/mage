@@ -30,33 +30,33 @@ package mage.sets.conflux;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
-import mage.abilities.mana.*;
 import mage.cards.CardImpl;
+import mage.choices.ChoiceColor;
 
 /**
  *
- * @author Loki
+ * @author Loki, North
  */
 public class RuptureSpire extends CardImpl<RuptureSpire> {
 
     public RuptureSpire (UUID ownerId) {
         super(ownerId, 144, "Rupture Spire", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "CON";
+
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{1}")), false));
-        this.addAbility(new BlackManaAbility());
-        this.addAbility(new BlueManaAbility());
-        this.addAbility(new GreenManaAbility());
-        this.addAbility(new RedManaAbility());
-        this.addAbility(new WhiteManaAbility());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
+		ability.addChoice(new ChoiceColor());
+        this.addAbility(ability);
     }
 
     public RuptureSpire (final RuptureSpire card) {

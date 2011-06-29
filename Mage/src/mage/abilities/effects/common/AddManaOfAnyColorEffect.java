@@ -42,16 +42,12 @@ import mage.players.Player;
  */
 public class AddManaOfAnyColorEffect extends OneShotEffect<AddManaOfAnyColorEffect> {
 
-	int amount;
-
-	public AddManaOfAnyColorEffect(int amount) {
+	public AddManaOfAnyColorEffect() {
 		super(Outcome.PutManaInPool);
-		this.amount = amount;
 	}
 
 	public AddManaOfAnyColorEffect(final AddManaOfAnyColorEffect effect) {
 		super(effect);
-		this.amount = effect.amount;
 	}
 
 	@Override
@@ -88,10 +84,7 @@ public class AddManaOfAnyColorEffect extends OneShotEffect<AddManaOfAnyColorEffe
 
 	@Override
 	public String getText(Ability source) {
-		if (amount > 1)
-			return "add " + Integer.toString(amount) + " mana of any color to your mana pool";
-		else
-			return "add one mana of any color to your mana pool";
+        return "add one mana of any color to your mana pool";
 	}
 
 

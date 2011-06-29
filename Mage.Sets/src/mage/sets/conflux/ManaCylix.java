@@ -25,18 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.sets.conflux;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
 
@@ -44,25 +42,24 @@ import mage.choices.ChoiceColor;
  *
  * @author North
  */
-public class PropheticPrism extends CardImpl<PropheticPrism> {
+public class ManaCylix extends CardImpl<ManaCylix> {
 
-    public PropheticPrism(UUID ownerId) {
-        super(ownerId, 222, "Prophetic Prism", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "ROE";
+    public ManaCylix(UUID ownerId) {
+        super(ownerId, 138, "Mana Cylix", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
+        this.expansionSetCode = "CON";
 
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new GenericManaCost(1));
         ability.addChoice(new ChoiceColor());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 
-    public PropheticPrism(final PropheticPrism card) {
+    public ManaCylix(final ManaCylix card) {
         super(card);
     }
 
     @Override
-    public PropheticPrism copy() {
-        return new PropheticPrism(this);
+    public ManaCylix copy() {
+        return new ManaCylix(this);
     }
 }

@@ -47,11 +47,12 @@ public class LotusCobra extends CardImpl<LotusCobra> {
 		super(ownerId, 168, "Lotus Cobra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{G}");
 		this.expansionSetCode = "ZEN";
 		this.subtype.add("Snake");
+        
 		this.color.setGreen(true);
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(1);
 
-		LandfallAbility ability = new LandfallAbility(new AddManaOfAnyColorEffect(1), false);
+		LandfallAbility ability = new LandfallAbility(new AddManaOfAnyColorEffect(), false);
 		ability.addChoice(new ChoiceColor());
 		this.addAbility(ability);
 	}

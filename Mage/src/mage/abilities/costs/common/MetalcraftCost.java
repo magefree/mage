@@ -40,7 +40,7 @@ import mage.game.Game;
  */
 public class MetalcraftCost extends CostImpl<MetalcraftCost> {
 
-	private static FilterPermanent filter = new FilterPermanent("artifact");
+	private static final FilterPermanent filter = new FilterPermanent("artifact");
 
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);

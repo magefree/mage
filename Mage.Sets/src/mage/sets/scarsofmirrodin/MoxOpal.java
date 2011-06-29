@@ -30,12 +30,15 @@ package mage.sets.scarsofmirrodin;
 
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
 import mage.abilities.costs.common.MetalcraftCost;
-import mage.abilities.mana.*;
 import mage.cards.CardImpl;
 
 import java.util.UUID;
+import mage.Constants.Zone;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.choices.ChoiceColor;
 
 /**
  *
@@ -47,21 +50,11 @@ public class MoxOpal extends CardImpl<MoxOpal> {
 		super(ownerId, 179, "Mox Opal", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{0}");
 		this.supertype.add("Legendary");
 		this.expansionSetCode = "SOM";
-		Ability ability1 = new WhiteManaAbility();
-		ability1.addCost(new MetalcraftCost());
-		this.addAbility(ability1);
-		Ability ability2 = new RedManaAbility();
-		ability2.addCost(new MetalcraftCost());
-		this.addAbility(ability2);
-		Ability ability3 = new BlueManaAbility();
-		ability3.addCost(new MetalcraftCost());
-		this.addAbility(ability3);
-		Ability ability4 = new BlackManaAbility();
-		ability4.addCost(new MetalcraftCost());
-		this.addAbility(ability4);
-		Ability ability5 = new GreenManaAbility();
-		ability5.addCost(new MetalcraftCost());
-		this.addAbility(ability5);
+
+		SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
+		ability.addChoice(new ChoiceColor());
+		ability.addCost(new MetalcraftCost());
+		this.addAbility(ability);
 	}
 
 	public MoxOpal(final MoxOpal card) {

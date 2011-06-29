@@ -30,17 +30,17 @@ package mage.sets.mirrodinbesieged;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.choices.ChoiceColor;
 import mage.counters.CounterType;
 
 /**
@@ -52,26 +52,15 @@ public class SphereOfTheSuns extends CardImpl<SphereOfTheSuns> {
     public SphereOfTheSuns(UUID ownerId) {
         super(ownerId, 134, "Sphere of the Suns", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "MBS";
-        
+
         Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(3)),
                 "Sphere of the Suns enters the battlefield tapped and with three charge counters on it.");
         ability.addEffect(new TapSourceEffect());
         this.addAbility(ability);
 
         RemoveCountersSourceCost removeCounterCost = new RemoveCountersSourceCost(CounterType.CHARGE.getName(), 1);
-        ability = new BlackManaAbility();
-        ability.addCost(removeCounterCost);
-        this.addAbility(ability);
-        ability = new BlueManaAbility();
-        ability.addCost(removeCounterCost);
-        this.addAbility(ability);
-        ability = new RedManaAbility();
-        ability.addCost(removeCounterCost);
-        this.addAbility(ability);
-        ability = new GreenManaAbility();
-        ability.addCost(removeCounterCost);
-        this.addAbility(ability);
-        ability = new WhiteManaAbility();
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
+        ability.addChoice(new ChoiceColor());
         ability.addCost(removeCounterCost);
         this.addAbility(ability);
     }

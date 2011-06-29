@@ -31,14 +31,14 @@ package mage.sets.tenth;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.choices.ChoiceColor;
 
 /**
  *
@@ -50,15 +50,15 @@ public class BirdsOfParadise extends CardImpl<BirdsOfParadise> {
 		super(ownerId, 252, "Birds of Paradise", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
 		this.expansionSetCode = "10E";
 		this.subtype.add("Bird");
+
 		this.color.setGreen(true);
 		this.power = new MageInt(0);
 		this.toughness = new MageInt(1);
+
 		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new BlackManaAbility());
-		this.addAbility(new BlueManaAbility());
-		this.addAbility(new GreenManaAbility());
-		this.addAbility(new RedManaAbility());
-		this.addAbility(new WhiteManaAbility());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
+		ability.addChoice(new ChoiceColor());
+        this.addAbility(ability);
 	}
 
 	public BirdsOfParadise(final BirdsOfParadise card) {
