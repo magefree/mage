@@ -33,7 +33,6 @@ import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
@@ -58,8 +57,7 @@ public class DefensiveStance extends CardImpl<DefensiveStance> {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, 1, Duration.WhileOnBattlefield)));
     }
 

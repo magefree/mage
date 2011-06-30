@@ -31,35 +31,41 @@ package mage.sets.magic2011;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
+import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, North
  */
 public class EarthServant extends CardImpl<EarthServant> {
+
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain you control");
+
+	static {
+		filter.getSubtype().add("Mountain");
+        filter.setTargetController(TargetController.YOU);
+	}
 
 	public EarthServant(UUID ownerId) {
 		super(ownerId, 134, "Earth Servant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
 		this.expansionSetCode = "M11";
 		this.subtype.add("Elemental");
+
 		this.color.setRed(true);
 		this.power = new MageInt(4);
 		this.toughness = new MageInt(4);
 
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EarthServantEffect()));
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter, 0),
+                new PermanentsOnBattlefieldCount(filter, 1),
+                Duration.WhileOnBattlefield)));
 	}
 
 	public EarthServant(final EarthServant card) {
@@ -69,61 +75,6 @@ public class EarthServant extends CardImpl<EarthServant> {
 	@Override
 	public EarthServant copy() {
 		return new EarthServant(this);
-	}
-
-}
-
-class EarthServantEffect extends ContinuousEffectImpl<EarthServantEffect> {
-
-	private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
-
-	static {
-		filter.getSubtype().add("Mountain");
-	}
-
-	public EarthServantEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-	}
-
-	public EarthServantEffect(final EarthServantEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public EarthServantEffect copy() {
-		return new EarthServantEffect(this);
-	}
-
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent creature = game.getPermanent(source.getSourceId());
-		if (creature  != null) {
-			switch (layer) {
-				case PTChangingEffects_7:
-					if (sublayer == SubLayer.ModifyPT_7c) {
-						int amount = game.getBattlefield().countAll(filter, source.getControllerId());
-						creature.addToughness(amount);
-					}
-					break;
-			}
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
-
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == layer.PTChangingEffects_7;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Earth Servant gets +0/+1 for each Mountain you control";
 	}
 
 }

@@ -33,20 +33,30 @@ import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, North
  */
 public class BoostEnchantedEffect extends ContinuousEffectImpl<BoostEnchantedEffect> {
 
-	private int power;
-	private int toughness;
+	private DynamicValue power;
+	private DynamicValue toughness;
 
-	public BoostEnchantedEffect(int power, int toughness, Duration duration) {
+    public BoostEnchantedEffect(int power, int toughness) {
+		this(power, toughness, Duration.WhileOnBattlefield);
+	}
+
+    public BoostEnchantedEffect(int power, int toughness, Duration duration) {
+        this(new StaticValue(power), new StaticValue(toughness), duration);
+	}
+
+	public BoostEnchantedEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
 		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
 		this.power = power;
 		this.toughness = toughness;
@@ -54,8 +64,8 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl<BoostEnchantedEff
 
 	public BoostEnchantedEffect(final BoostEnchantedEffect effect) {
 		super(effect);
-		this.power = effect.power;
-		this.toughness = effect.toughness;
+		this.power = effect.power.clone();
+		this.toughness = effect.toughness.clone();
 	}
 
 	@Override
@@ -69,8 +79,8 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl<BoostEnchantedEff
 		if (enchantment != null && enchantment.getAttachedTo() != null) {
 			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
 			if (creature != null) {
-				creature.addPower(power);
-				creature.addToughness(toughness);
+				creature.addPower(power.calculate(game, source));
+				creature.addToughness(toughness.calculate(game, source));
 			}
 		}
 		return true;
@@ -78,10 +88,27 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl<BoostEnchantedEff
 
 	@Override
 	public String getText(Ability source) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Enchanted creature gets ").append(String.format("%1$+d/%2$+d", power, toughness));
+        StringBuilder sb = new StringBuilder();
+		sb.append("Enchanted creature gets ");
+        String p = power.toString();
+        if(!p.startsWith("-"))
+            sb.append("+");
+        sb.append(p).append("/");
+        String t = toughness.toString();
+        if(!t.startsWith("-")){
+            if(p.startsWith("-"))
+                sb.append("-");
+            else
+                sb.append("+");
+        }
+        sb.append(t);
 		if (duration != Duration.WhileOnBattlefield)
 			sb.append(" ").append(duration.toString());
+        String message = power.getMessage();
+        if (message.length() > 0) {
+            sb.append(" for each ");
+        }
+        sb.append(message);
 		return sb.toString();
 	}
 

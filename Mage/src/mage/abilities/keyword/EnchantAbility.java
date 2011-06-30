@@ -28,11 +28,8 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.StaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.target.TargetPermanent;
 
 /**
  *
