@@ -57,6 +57,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	protected boolean flipped;
 	protected UUID originalControllerId;
 	protected UUID controllerId;
+	protected UUID beforeResetControllerId;
 	protected int damage;
 	protected boolean controlledFromStartOfTurn;
 	protected int turnsOnBattlefield;
@@ -115,6 +116,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
 	@Override
 	public void reset(Game game) {
+		this.beforeResetControllerId = this.controllerId;
 		this.controllerId = originalControllerId;
 		this.maxBlocks = 1;
 	}
@@ -351,8 +353,14 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		if (!controllerId.equals(this.controllerId)) {
 			Player newController = game.getPlayer(controllerId);
 			if (newController != null && (!newController.hasLeft() || !newController.hasLost())) {
-				this.removeFromCombat(game);
-				this.controlledFromStartOfTurn = false;
+				// changeControllerId can be called by continuous effect
+				// so it will lead to this.controlledFromStartOfTurn set to false over and over
+				// because of reset(game) method called before applying effect as state-based action
+				// that changes this.controllerId to original one (actually owner)
+				if (controllerId != beforeResetControllerId) {
+					this.removeFromCombat(game);
+					this.controlledFromStartOfTurn = false;
+				}
 				this.controllerId = controllerId;
 				this.abilities.setControllerId(controllerId);
 				return true;

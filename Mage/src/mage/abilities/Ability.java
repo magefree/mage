@@ -188,7 +188,7 @@ public interface Ability extends Serializable {
 	public Effects getEffects();
 	
 	/**
-	 * Retrieves the effects of the specified {@link Effecttype type} that are
+	 * Retrieves the effects of the specified {@link EffectType type} that are
 	 * put into place by the resolution of this ability.
 	 * 
 	 * @param effectType The {@link EffectType type} to search for.
