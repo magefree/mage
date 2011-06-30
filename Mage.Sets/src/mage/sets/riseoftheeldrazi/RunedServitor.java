@@ -45,10 +45,8 @@ public class RunedServitor extends CardImpl<RunedServitor> {
         super(ownerId, 224, "Runed Servitor", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Construct");
-
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-
         this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DrawCardAllEffect(1), false));
     }
 
