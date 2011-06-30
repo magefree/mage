@@ -170,6 +170,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		this.damage = 0;
 		this.loyaltyUsed = false;
 		this.turnsOnBattlefield++;
+		this.deathtouched = false;
 		for (Ability ability : this.abilities) {
 			ability.reset(game);
 		}
@@ -449,6 +450,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	@Override
 	public void removeAllDamage(Game game) {
 		damage = 0;
+		deathtouched = false;
 	}
 
 	protected int damagePlaneswalker(int damage, UUID sourceId, Game game, boolean preventable, boolean combat) {
