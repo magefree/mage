@@ -29,25 +29,26 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.Game;
 
 /**
  *
  * @author North
  */
 public class OvergrownBattlement extends CardImpl<OvergrownBattlement> {
+
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature with defender you control");
+
+    static {
+        filter.getAbilities().add(DefenderAbility.getInstance());
+    }
 
     public OvergrownBattlement(UUID ownerId) {
         super(ownerId, 203, "Overgrown Battlement", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -59,7 +60,7 @@ public class OvergrownBattlement extends CardImpl<OvergrownBattlement> {
         this.toughness = new MageInt(4);
 
         this.addAbility(DefenderAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new OvergrownBattlementEffect(), new TapSourceCost()));
+        this.addAbility(new DynamicManaAbility(Mana.GreenMana, new PermanentsOnBattlefieldCount(filter)));
     }
 
     public OvergrownBattlement(final OvergrownBattlement card) {
@@ -69,39 +70,5 @@ public class OvergrownBattlement extends CardImpl<OvergrownBattlement> {
     @Override
     public OvergrownBattlement copy() {
         return new OvergrownBattlement(this);
-    }
-}
-
-class OvergrownBattlementEffect extends OneShotEffect<OvergrownBattlementEffect> {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature with defender you control");
-
-    static {
-        filter.getAbilities().add(DefenderAbility.getInstance());
-    }
-
-    public OvergrownBattlementEffect() {
-        super(Outcome.PutManaInPool);
-    }
-
-    public OvergrownBattlementEffect(final OvergrownBattlementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public OvergrownBattlementEffect copy() {
-        return new OvergrownBattlementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int amount = game.getBattlefield().countAll(filter, source.getControllerId());
-        game.getPlayer(source.getControllerId()).getManaPool().changeMana(Mana.GreenMana(amount));
-        return true;
-    }
-
-    @Override
-    public String getText(Ability source) {
-        return "Add {G} to your mana pool for each creature with defender you control.";
     }
 }

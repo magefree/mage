@@ -35,21 +35,20 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.MageInt;
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.DynamicManaEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -58,14 +57,16 @@ import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author Loki
+ * @author Loki, North
  */
 public class KothoftheHammer extends CardImpl<KothoftheHammer> {
-    static FilterLandPermanent filter = new FilterLandPermanent("Mountain");
+    static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
+    private static final FilterLandPermanent filterCount = new FilterLandPermanent("Mountain you control");
 
     static {
         filter.getSubtype().add("Mountain");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filterCount.getSubtype().add("Mountain");
+        filterCount.setTargetController(Constants.TargetController.YOU);
     }
 
     public KothoftheHammer (UUID ownerId) {
@@ -79,7 +80,7 @@ public class KothoftheHammer extends CardImpl<KothoftheHammer> {
         ability.addEffect(new KothoftheHammerFirstEffect());
         ability.addTarget(new TargetLandPermanent(filter));
         this.addAbility(ability);
-        this.addAbility(new LoyaltyAbility(new KothoftheHammerSecondEffect(), -2));
+        this.addAbility(new LoyaltyAbility(new DynamicManaEffect(Mana.RedMana, new PermanentsOnBattlefieldCount(filterCount)), -2));
         this.addAbility(new LoyaltyAbility(new KothoftheHammerThirdEffect(), -5));
     }
 
@@ -149,34 +150,6 @@ class KothoftheHammerFirstEffect extends ContinuousEffectImpl<KothoftheHammerFir
     public String getText(Ability source) {
         return "It becomes a 4/4 red Elemental creature until end of turn. It's still a land";
     }
-}
-
-class KothoftheHammerSecondEffect extends OneShotEffect<KothoftheHammerSecondEffect> {
-    public KothoftheHammerSecondEffect() {
-        super(Constants.Outcome.PutManaInPool);
-    }
-
-    public KothoftheHammerSecondEffect(final KothoftheHammerSecondEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int count = game.getBattlefield().count(KothoftheHammer.filter, source.getControllerId(), game);
-        int current = game.getPlayer(source.getControllerId()).getManaPool().getRed();
-        game.getPlayer(source.getControllerId()).getManaPool().setRed(count + current);
-        return true;
-    }
-
-    @Override
-    public KothoftheHammerSecondEffect copy() {
-        return new KothoftheHammerSecondEffect(this);
-    }
-
-    @Override
-	public String getText(Ability source) {
-		return "Add {R} to your mana pool for each Mountain you control";
-	}
 }
 
 class KothoftheHammerThirdEffect extends ContinuousEffectImpl<KothoftheHammerThirdEffect> {

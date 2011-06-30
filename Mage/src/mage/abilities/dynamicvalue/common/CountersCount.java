@@ -38,7 +38,7 @@ public class CountersCount implements DynamicValue {
 
     @Override
     public String toString() {
-        return "X";
+        return "1";
     }
 
     @Override

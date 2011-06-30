@@ -35,25 +35,30 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author Loki, North
  */
 public class ClawsofValakut extends CardImpl<ClawsofValakut> {
+
+     private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain you control");
+
+	static {
+		filter.getSubtype().add("Mountain");
+        filter.setTargetController(Constants.TargetController.YOU);
+	}
 
     public ClawsofValakut (UUID ownerId) {
         super(ownerId, 75, "Claws of Valakut", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
@@ -64,10 +69,12 @@ public class ClawsofValakut extends CardImpl<ClawsofValakut> {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
 		this.getSpellAbility().addTarget(auraTarget);
 		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ClawsofValakutEffect()));
-        
+		this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(new PermanentsOnBattlefieldCount(filter, 1),
+                new PermanentsOnBattlefieldCount(filter, 0),
+                Duration.WhileOnBattlefield));
+        ability.addEffect(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), Constants.AttachmentType.AURA));
+        this.addAbility(ability);
     }
 
     public ClawsofValakut (final ClawsofValakut card) {
@@ -78,68 +85,5 @@ public class ClawsofValakut extends CardImpl<ClawsofValakut> {
     public ClawsofValakut copy() {
         return new ClawsofValakut(this);
     }
-
-}
-
-class ClawsofValakutEffect extends ContinuousEffectImpl<ClawsofValakutEffect> {
-
-	private static FilterLandPermanent filter = new FilterLandPermanent("Mountain");
-
-	static {
-		filter.getSubtype().add("Mountain");
-	}
-
-	public ClawsofValakutEffect() {
-		super(Duration.WhileOnBattlefield, Constants.Outcome.BoostCreature);
-	}
-
-	public ClawsofValakutEffect(final ClawsofValakutEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public ClawsofValakutEffect copy() {
-		return new ClawsofValakutEffect(this);
-	}
-
-	@Override
-	public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-			if (creature != null) {
-				switch (layer) {
-					case PTChangingEffects_7:
-						if (sublayer == Constants.SubLayer.ModifyPT_7c) {
-							int amount = game.getBattlefield().countAll(filter, source.getControllerId());
-							creature.addPower(amount);
-						}
-						break;
-					case AbilityAddingRemovingEffects_6:
-						if (sublayer == Constants.SubLayer.NA) {
-							creature.addAbility(FirstStrikeAbility.getInstance());
-						}
-						break;
-				}
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
-
-	@Override
-	public boolean hasLayer(Constants.Layer layer) {
-		return layer == Constants.Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Enchanted creature gets +1/+0 for each Mountain you control and has first strike.";
-	}
 
 }
