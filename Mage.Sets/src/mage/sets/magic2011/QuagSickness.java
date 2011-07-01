@@ -31,28 +31,32 @@ package mage.sets.magic2011;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
+import mage.Constants.TargetController;
 import mage.Constants.Zone;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, North
  */
 public class QuagSickness extends CardImpl<QuagSickness> {
+
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp you control");
+
+    static {
+        filter.getSubtype().add("Swamp");
+        filter.setTargetController(TargetController.YOU);
+    }
 
 	public QuagSickness(UUID ownerId) {
 		super(ownerId, 111, "Quag Sickness", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
@@ -63,9 +67,10 @@ public class QuagSickness extends CardImpl<QuagSickness> {
 		TargetPermanent auraTarget = new TargetCreaturePermanent();
 		this.getSpellAbility().addTarget(auraTarget);
 		this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new QuagSicknessEffect()));
+		this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+
+        PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter, -1);
+		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield)));
 
 	}
 
@@ -76,63 +81,5 @@ public class QuagSickness extends CardImpl<QuagSickness> {
 	@Override
 	public QuagSickness copy() {
 		return new QuagSickness(this);
-	}
-}
-
-class QuagSicknessEffect extends ContinuousEffectImpl<QuagSicknessEffect> {
-
-	private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp");
-
-	static {
-		filter.getSubtype().add("Swamp");
-	}
-
-	public QuagSicknessEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Detriment);
-	}
-
-	public QuagSicknessEffect(final QuagSicknessEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public QuagSicknessEffect copy() {
-		return new QuagSicknessEffect(this);
-	}
-
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-			if (creature != null) {
-				switch (layer) {
-					case PTChangingEffects_7:
-						if (sublayer == SubLayer.ModifyPT_7c) {
-							int amount = game.getBattlefield().countAll(filter, source.getControllerId());
-							creature.addPower(-amount);
-							creature.addToughness(-amount);
-						}
-						break;
-				}
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
-
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.PTChangingEffects_7;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Enchanted creature gets -1/-1 for each Swamp you control";
 	}
 }

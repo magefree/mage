@@ -25,121 +25,64 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.magic2010;
 
 import java.util.UUID;
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
+import mage.Constants.TargetController;
 import mage.Constants.Zone;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, North
  */
 public class ArmoredAscension extends CardImpl<ArmoredAscension> {
 
-	public ArmoredAscension(UUID ownerId) {
-		super(ownerId, 3, "Armored Ascension", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-		this.expansionSetCode = "M10";
-		this.color.setWhite(true);
-		this.subtype.add("Aura");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Plains you control");
 
-		TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArmoredAscensionEffect()));
+    static {
+        filter.getSubtype().add("Plains");
+        filter.setTargetController(TargetController.YOU);
+    }
 
-	}
+    public ArmoredAscension(UUID ownerId) {
+        super(ownerId, 3, "Armored Ascension", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
+        this.expansionSetCode = "M10";
+        this.color.setWhite(true);
+        this.subtype.add("Aura");
 
-	public ArmoredAscension(final ArmoredAscension card) {
-		super(card);
-	}
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        
+        PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter, 1);
+        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield));
+        ability.addEffect(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA));
+        this.addAbility(ability);
+    }
 
-	@Override
-	public ArmoredAscension copy() {
-		return new ArmoredAscension(this);
-	}
-}
+    public ArmoredAscension(final ArmoredAscension card) {
+        super(card);
+    }
 
-class ArmoredAscensionEffect extends ContinuousEffectImpl<ArmoredAscensionEffect> {
-
-	private static final FilterLandPermanent filter = new FilterLandPermanent("Plains");
-
-	static {
-		filter.getSubtype().add("Plains");
-	}
-
-	public ArmoredAscensionEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-	}
-
-	public ArmoredAscensionEffect(final ArmoredAscensionEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public ArmoredAscensionEffect copy() {
-		return new ArmoredAscensionEffect(this);
-	}
-
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent enchantment = game.getPermanent(source.getSourceId());
-		if (enchantment != null && enchantment.getAttachedTo() != null) {
-			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-			if (creature != null) {
-				switch (layer) {
-					case PTChangingEffects_7:
-						if (sublayer == SubLayer.ModifyPT_7c) {
-							int amount = game.getBattlefield().countAll(filter, source.getControllerId());
-							creature.addPower(amount);
-							creature.addToughness(amount);
-						}
-						break;
-					case AbilityAddingRemovingEffects_6:
-						if (sublayer == SubLayer.NA) {
-							creature.addAbility(FlyingAbility.getInstance());
-						}
-						break;
-				}
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
-
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Enchanted creature gets +1/+1 for each Plains you control and has flying.";
-	}
-
+    @Override
+    public ArmoredAscension copy() {
+        return new ArmoredAscension(this);
+    }
 }

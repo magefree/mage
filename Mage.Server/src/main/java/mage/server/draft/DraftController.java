@@ -28,7 +28,6 @@
 
 package mage.server.draft;
 
-import java.io.File;
 import java.util.UUID;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
@@ -53,7 +52,6 @@ import org.apache.log4j.Logger;
 public class DraftController {
 
 	private final static Logger logger = Logger.getLogger(GameController.class);
-	public static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
 
 	private ConcurrentHashMap<UUID, DraftSession> draftSessions = new ConcurrentHashMap<UUID, DraftSession>();
 	private ConcurrentHashMap<UUID, UUID> sessionPlayerMap;

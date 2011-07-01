@@ -25,58 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.shardsofalara;
+package mage.sets.alarareborn;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class SavageHunger extends CardImpl<SavageHunger> {
+public class SigilOfTheNayanGods extends CardImpl<SigilOfTheNayanGods> {
 
-    public SavageHunger (UUID ownerId) {
-        super(ownerId, 147, "Savage Hunger", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.expansionSetCode = "ALA";
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+
+    public SigilOfTheNayanGods(UUID ownerId) {
+        super(ownerId, 78, "Sigil of the Nayan Gods", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{W}");
+        this.expansionSetCode = "ARB";
         this.subtype.add("Aura");
-		this.color.setGreen(true);
+
+        this.color.setGreen(true);
+        this.color.setWhite(true);
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
-		this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.WhileOnBattlefield));
-        ability.addEffect(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), Constants.AttachmentType.AURA));
-        this.addAbility(ability);
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
+        PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter, 1);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield)));
+
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{G/W}")));
     }
 
-    public SavageHunger (final SavageHunger card) {
+    public SigilOfTheNayanGods(final SigilOfTheNayanGods card) {
         super(card);
     }
 
     @Override
-    public SavageHunger copy() {
-        return new SavageHunger(this);
+    public SigilOfTheNayanGods copy() {
+        return new SigilOfTheNayanGods(this);
     }
-
 }
