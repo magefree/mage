@@ -25,54 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.mirrodin;
 
 import java.util.List;
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.ObjectColor;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.continious.BoostEquippedEffect;
+import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
 
 /**
  *
- * @author Loki, North
+ * @author North
  */
-public class KembaKhaRegent extends CardImpl<KembaKhaRegent> {
+public class GolemSkinGauntlets extends CardImpl<GolemSkinGauntlets> {
 
-    public KembaKhaRegent (UUID ownerId) {
-        super(ownerId, 12, "Kemba, Kha Regent", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Legendary");
-        this.subtype.add("Cat");
-        this.subtype.add("Cleric");
+    public GolemSkinGauntlets(UUID ownerId) {
+        super(ownerId, 181, "Golem-Skin Gauntlets", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Equipment");
 
-		this.color.setWhite(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(4);
-
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new CatToken(), new EquipmentAttachedCount()),
-                Constants.TargetController.YOU, false));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new EquipmentAttachedCount(), new StaticValue(0), Duration.WhileOnBattlefield)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public KembaKhaRegent (final KembaKhaRegent card) {
+    public GolemSkinGauntlets(final GolemSkinGauntlets card) {
         super(card);
     }
 
     @Override
-    public KembaKhaRegent copy() {
-        return new KembaKhaRegent(this);
+    public GolemSkinGauntlets copy() {
+        return new GolemSkinGauntlets(this);
     }
 
     private class EquipmentAttachedCount implements DynamicValue {
@@ -106,18 +100,7 @@ public class KembaKhaRegent extends CardImpl<KembaKhaRegent> {
 
         @Override
         public String getMessage() {
-            return "Equipment attached to {this}";
+            return "Equipment attached to it";
         }
-    }
-}
-
-class CatToken extends Token {
-    public CatToken() {
-        super("Cat", "a 2/2 white Cat creature token");
-        cardType.add(CardType.CREATURE);
-		color = ObjectColor.WHITE;
-		subtype.add("Cat");
-		power = new MageInt(2);
-		toughness = new MageInt(2);
     }
 }

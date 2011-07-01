@@ -25,54 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.mirrodin;
 
 import java.util.List;
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
 
 /**
  *
- * @author Loki, North
+ * @author North
  */
-public class KembaKhaRegent extends CardImpl<KembaKhaRegent> {
+public class LoxodonPunisher extends CardImpl<LoxodonPunisher> {
 
-    public KembaKhaRegent (UUID ownerId) {
-        super(ownerId, 12, "Kemba, Kha Regent", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Legendary");
-        this.subtype.add("Cat");
-        this.subtype.add("Cleric");
+    public LoxodonPunisher(UUID ownerId) {
+        super(ownerId, 14, "Loxodon Punisher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Elephant");
+        this.subtype.add("Soldier");
 
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(4);
+        this.toughness = new MageInt(2);
 
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new CatToken(), new EquipmentAttachedCount()),
-                Constants.TargetController.YOU, false));
+        EquipmentAttachedCount amount = new EquipmentAttachedCount();
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield)));
     }
 
-    public KembaKhaRegent (final KembaKhaRegent card) {
+    public LoxodonPunisher(final LoxodonPunisher card) {
         super(card);
     }
 
     @Override
-    public KembaKhaRegent copy() {
-        return new KembaKhaRegent(this);
+    public LoxodonPunisher copy() {
+        return new LoxodonPunisher(this);
     }
 
     private class EquipmentAttachedCount implements DynamicValue {
@@ -91,7 +87,7 @@ public class KembaKhaRegent extends CardImpl<KembaKhaRegent> {
                 }
 
             }
-            return count;
+            return 2 * count;
         }
 
         @Override
@@ -101,23 +97,12 @@ public class KembaKhaRegent extends CardImpl<KembaKhaRegent> {
 
         @Override
         public String toString() {
-            return "1";
+            return "2";
         }
 
         @Override
         public String getMessage() {
-            return "Equipment attached to {this}";
+            return "Equipment attached to it";
         }
-    }
-}
-
-class CatToken extends Token {
-    public CatToken() {
-        super("Cat", "a 2/2 white Cat creature token");
-        cardType.add(CardType.CREATURE);
-		color = ObjectColor.WHITE;
-		subtype.add("Cat");
-		power = new MageInt(2);
-		toughness = new MageInt(2);
     }
 }
