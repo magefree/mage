@@ -25,59 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
-
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+package mage.sets.worldwake;
 
 import java.util.UUID;
+import mage.Constants.Rarity;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class BarrageOgre extends CardImpl<BarrageOgre> {
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
+public class Quicksand extends mage.sets.tenth.Quicksand {
 
-    static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    public Quicksand(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 140;
+        this.rarity = Rarity.COMMON;
+        this.expansionSetCode = "WWK";
     }
 
-    public BarrageOgre (UUID ownerId) {
-        super(ownerId, 83, "Barrage Ogre", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Ogre");
-        this.subtype.add("Warrior");
-		this.color.setRed(true);        
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        this.addAbility(ability);
-    }
-
-    public BarrageOgre (final BarrageOgre card) {
+    public Quicksand(final Quicksand card) {
         super(card);
     }
 
     @Override
-    public BarrageOgre copy() {
-        return new BarrageOgre(this);
+    public Quicksand copy() {
+        return new Quicksand(this);
     }
-
 }

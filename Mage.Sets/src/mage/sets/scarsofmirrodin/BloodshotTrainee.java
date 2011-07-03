@@ -25,59 +25,83 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
-
-import java.util.UUID;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class BarrageOgre extends CardImpl<BarrageOgre> {
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
+public class BloodshotTrainee extends CardImpl<BloodshotTrainee> {
 
-    static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-    }
-
-    public BarrageOgre (UUID ownerId) {
-        super(ownerId, 83, "Barrage Ogre", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
+    public BloodshotTrainee(UUID ownerId) {
+        super(ownerId, 85, "Bloodshot Trainee", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Ogre");
+        this.subtype.add("Goblin");
         this.subtype.add("Warrior");
-		this.color.setRed(true);        
-        this.power = new MageInt(3);
+
+        this.color.setRed(true);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(3);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        ability.addCost(new BloodshotTraineeCost());
         this.addAbility(ability);
     }
 
-    public BarrageOgre (final BarrageOgre card) {
+    public BloodshotTrainee(final BloodshotTrainee card) {
         super(card);
     }
 
     @Override
-    public BarrageOgre copy() {
-        return new BarrageOgre(this);
+    public BloodshotTrainee copy() {
+        return new BloodshotTrainee(this);
+    }
+}
+
+class BloodshotTraineeCost extends CostImpl<BloodshotTraineeCost> {
+
+    public BloodshotTraineeCost() {
+        this.text = "Activate this ability only if Bloodshot Trainee's power is 4 or greater";
     }
 
+    public BloodshotTraineeCost(final BloodshotTraineeCost cost) {
+        super(cost);
+    }
+
+    @Override
+    public BloodshotTraineeCost copy() {
+        return new BloodshotTraineeCost(this);
+    }
+
+    @Override
+    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+        Permanent permanent = game.getPermanent(sourceId);
+        if (permanent != null) {
+            if (permanent.getPower().getValue() >= 4) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        this.paid = true;
+        return paid;
+    }
 }

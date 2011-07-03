@@ -25,59 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
-
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+package mage.sets.newphyrexia;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.continious.AddCardTypeTargetEffect;
+import mage.cards.CardImpl;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class BarrageOgre extends CardImpl<BarrageOgre> {
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
+public class ArgentMutation extends CardImpl<ArgentMutation> {
 
-    static {
-        filter.getCardType().add(CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    public ArgentMutation(UUID ownerId) {
+        super(ownerId, 27, "Argent Mutation", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
+        this.expansionSetCode = "NPH";
+
+        this.color.setBlue(true);
+
+        this.getSpellAbility().addEffect(new AddCardTypeTargetEffect(CardType.ARTIFACT, Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetPermanent());
+        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
     }
 
-    public BarrageOgre (UUID ownerId) {
-        super(ownerId, 83, "Barrage Ogre", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Ogre");
-        this.subtype.add("Warrior");
-		this.color.setRed(true);        
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        this.addAbility(ability);
-    }
-
-    public BarrageOgre (final BarrageOgre card) {
+    public ArgentMutation(final ArgentMutation card) {
         super(card);
     }
 
     @Override
-    public BarrageOgre copy() {
-        return new BarrageOgre(this);
+    public ArgentMutation copy() {
+        return new ArgentMutation(this);
     }
-
 }

@@ -35,7 +35,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
