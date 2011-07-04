@@ -25,81 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.alarareborn;
+package mage.sets.worldwake;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.permanent.token.Token;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class LichLordofUnx extends CardImpl<LichLordofUnx> {
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Zombies you control");
+public class HalimarExcavator extends CardImpl<HalimarExcavator> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Allies you control");
 
     static {
-        filter.getSubtype().add("Zombie");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.getSubtype().add("Ally");
+        filter.setTargetController(TargetController.YOU);
     }
 
-    public LichLordofUnx (UUID ownerId) {
-        super(ownerId, 24, "Lich Lord of Unx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
-        this.expansionSetCode = "ARB";
-        this.subtype.add("Zombie");
+    public HalimarExcavator(UUID ownerId) {
+        super(ownerId, 29, "Halimar Excavator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        this.expansionSetCode = "WWK";
+        this.subtype.add("Human");
         this.subtype.add("Wizard");
+        this.subtype.add("Ally");
 
-		this.color.setBlue(true);
-		this.color.setBlack(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-        
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieWizardToken()), new ManaCostsImpl("{U}{B}"));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
-        ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new LoseLifeTargetEffect(new PermanentsOnBattlefieldCount(filter, 1)), new ManaCostsImpl("{U}{U}{B}{B}"));
-        ability.addEffect(new PutLibraryIntoGraveTargetEffect(new PermanentsOnBattlefieldCount(filter, 1)));
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
+        Ability ability = new AllyEntersBattlefieldTriggeredAbility(new PutLibraryIntoGraveTargetEffect(new PermanentsOnBattlefieldCount(filter)), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 
-    public LichLordofUnx (final LichLordofUnx card) {
+    public HalimarExcavator(final HalimarExcavator card) {
         super(card);
     }
 
     @Override
-    public LichLordofUnx copy() {
-        return new LichLordofUnx(this);
-    }
-
-}
-
-class ZombieWizardToken extends Token {
-    ZombieWizardToken() {
-        super("Zombie Wizard", "a 1/1 blue and black Zombie Wizard creature token");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        color.setBlack(true);
-        subtype.add("Zombie");
-        subtype.add("Wizard");
-        power = new MageInt(1);
-		toughness = new MageInt(1);
+    public HalimarExcavator copy() {
+        return new HalimarExcavator(this);
     }
 }

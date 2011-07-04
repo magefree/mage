@@ -98,19 +98,24 @@ public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("{source} deals ").append(amount).append(" damage to target ");
-		sb.append(source.getTargets().get(0).getTargetName());
+    @Override
+    public String getText(Ability source) {
+        StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
-        if (message.length() > 0) {
-            sb.append(" for each ");
+        sb.append("{source} deals ");
+        if (message.isEmpty()) {
+            sb.append(amount);
         }
-        sb.append(message);
-		if (!preventable)
-			sb.append(". The damage can't be prevented");
-		return sb.toString();
-	}
+        sb.append(" damage to target ");
+        sb.append(source.getTargets().get(0).getTargetName());
+        if (message.length() > 0) {
+            sb.append(" equal to the number of ");
+            sb.append(message);
+        }
+        if (!preventable) {
+            sb.append(". The damage can't be prevented");
+        }
+        return sb.toString();
+    }
 
 }

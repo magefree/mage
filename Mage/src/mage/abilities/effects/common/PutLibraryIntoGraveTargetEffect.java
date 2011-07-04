@@ -90,11 +90,11 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect<PutLibraryInt
 		if (amount instanceof StaticValue && amount.calculate(null, null) == 1)
 			sb.append(amount).append(" card ");
 		else
-			sb.append(amount).append(" cards ");
+			sb.append(amount).append(" X cards ");
 		sb.append("of his or her library into his or her graveyard");
         String message = amount.getMessage();
         if (message.length() > 0) {
-            sb.append(" for each ");
+            sb.append(", where X is the number of  ");
         }
         sb.append(message);
 		return sb.toString();
