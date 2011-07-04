@@ -34,11 +34,13 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  * @author Loki
@@ -53,7 +55,9 @@ public class KabutoMoth extends CardImpl<KabutoMoth> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(1, 2, Constants.Duration.EndOfTurn), new TapSourceCost()));
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(1, 2, Constants.Duration.EndOfTurn), new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
     public KabutoMoth(final KabutoMoth card) {
