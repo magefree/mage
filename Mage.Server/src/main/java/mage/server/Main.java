@@ -131,7 +131,12 @@ public class Main {
 		public void handleConnectionException(Throwable throwable, Client client) {
 			Session session = SessionManager.getInstance().getSession(client.getSessionId());
 			if (session != null) {
-				String sessionName = session.getUser().getName() + " at " + session.getHost();
+				String sessionName;
+				User user = UserManager.getInstance().getUser(session.getUserId());
+				if (user != null)
+					sessionName = user.getName() + " at " + session.getHost();
+				else
+					sessionName = session.getHost();
 				if (throwable instanceof ClientDisconnectedException) {					
 					logger.info("client disconnected - " + sessionName);
 				}

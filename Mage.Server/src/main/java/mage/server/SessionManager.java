@@ -99,17 +99,6 @@ public class SessionManager {
 		return map;
 	}
 
-	List<UserView> getUsers(String sessionId) {
-		List<UserView> users = new ArrayList<UserView>();
-		Session admin = sessions.get(sessionId);
-		if (admin != null && admin.isAdmin()) {
-			for (Session session: sessions.values()) {
-				users.add(new UserView(session.getUser().getName(), "", session.getId(), session.getConnectionTime()));
-			}
-		}
-		return users;
-	}
-
 	public void disconnectUser(String sessionId, String userSessionId) {
 		if (isAdmin(sessionId)) {
 			Session session = sessions.get(userSessionId);

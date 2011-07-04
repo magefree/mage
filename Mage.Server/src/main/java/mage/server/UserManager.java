@@ -27,6 +27,7 @@
  */
 package mage.server;
 
+import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -44,30 +45,51 @@ public class UserManager {
 
 	private UserManager() {}
 
-	private ConcurrentHashMap<String, User> users = new ConcurrentHashMap<String, User>();
+	private ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<UUID, User>();
 
 	public User createUser(String userName, String host) {
-		if (users.containsKey(userName))
-			return null;
+		if (findUser(userName) != null)
+			return null; //user already exists
 		User user = new User(userName, host);
-		users.put(userName, user);
+		users.put(user.getId(), user);
 		return user;
 	}
 	
+	public User getUser(UUID userId) {
+		return users.get(userId);
+	}
+	
 	public User findUser(String userName) {
-		return users.get(userName);
+		for (User user: users.values()) {
+			if (user.getName().equals(userName))
+				return user;
+		}
+		return null;
+	}
+	
+	public Collection<User> getUsers() {
+		return users.values();
 	}
 		
-	public void connectToSession(String sessionId, String userName) {
-		if (users.containsKey(userName)) {
-			users.get(userName).setSessionId(sessionId);
+	public boolean connectToSession(String sessionId, UUID userId) {
+		if (users.containsKey(userId)) {
+			users.get(userId).setSessionId(sessionId);
+			return true;
+		}
+		return false;
+	}
+	
+	public void disconnect(UUID userId) {
+		if (users.containsKey(userId)) {
+			users.get(userId).setSessionId("");
 		}
 	}
 	
-	public void disconnect(String userName) {
-		if (users.containsKey(userName)) {
-			users.get(userName).setSessionId("");
+	public boolean isAdmin(UUID userId) {
+		if (users.containsKey(userId)) {
+			return users.get(userId).getName().equals("Admin");
 		}
+		return false;
 	}
 	
 }

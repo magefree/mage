@@ -41,6 +41,7 @@ import mage.game.events.TableEvent;
 import mage.MageException;
 import mage.server.game.GameController;
 import mage.server.TableManager;
+import mage.server.UserManager;
 import mage.server.util.ThreadExecutor;
 import mage.view.DraftPickView;
 import mage.view.DraftView;
@@ -56,14 +57,14 @@ public class DraftController {
 	public static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
 
 	private ConcurrentHashMap<UUID, DraftSession> draftSessions = new ConcurrentHashMap<UUID, DraftSession>();
-	private ConcurrentHashMap<String, UUID> sessionPlayerMap;
+	private ConcurrentHashMap<UUID, UUID> userPlayerMap;
 	private UUID draftSessionId;
 	private Draft draft;
 	private UUID tableId;
 
-	public DraftController(Draft draft, ConcurrentHashMap<String, UUID> sessionPlayerMap, UUID tableId) {
+	public DraftController(Draft draft, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
 		draftSessionId = UUID.randomUUID();
-		this.sessionPlayerMap = sessionPlayerMap;
+		this.userPlayerMap = userPlayerMap;
 		this.draft = draft;
 		this.tableId = tableId;
 		init();
@@ -116,15 +117,15 @@ public class DraftController {
 		checkStart();
 	}
 
-	private UUID getPlayerId(String sessionId) {
-		return sessionPlayerMap.get(sessionId);
+	private UUID getPlayerId(UUID userId) {
+		return userPlayerMap.get(userId);
 	}
 
-	public void join(String sessionId) {
-		UUID playerId = sessionPlayerMap.get(sessionId);
-		DraftSession draftSession = new DraftSession(draft, sessionId, playerId);
+	public void join(UUID userId) {
+		UUID playerId = userPlayerMap.get(userId);
+		DraftSession draftSession = new DraftSession(draft, userId, playerId);
 		draftSessions.put(playerId, draftSession);
-		logger.info("player " + playerId + " has joined draft " + draft.getId());
+		logger.info("User " + UserManager.getInstance().getUser(userId).getName() + " has joined draft " + draft.getId());
 		draft.getPlayer(playerId).setJoined();
 		checkStart();
 	}
@@ -163,8 +164,8 @@ public class DraftController {
 		return true;
 	}
 
-	private void leave(String sessionId) {
-		draft.leave(getPlayerId(sessionId));
+	private void leave(UUID userId) {
+		draft.leave(getPlayerId(userId));
 	}
 
 	private void endDraft() throws MageException {
@@ -174,18 +175,18 @@ public class DraftController {
 		TableManager.getInstance().endDraft(tableId, draft);
 	}
 
-	public void kill(String sessionId) {
-		if (sessionPlayerMap.containsKey(sessionId)) {
-			draftSessions.get(sessionPlayerMap.get(sessionId)).setKilled();
-			draftSessions.remove(sessionPlayerMap.get(sessionId));
-			leave(sessionId);
-			sessionPlayerMap.remove(sessionId);
+	public void kill(UUID userId) {
+		if (userPlayerMap.containsKey(userId)) {
+			draftSessions.get(userPlayerMap.get(userId)).setKilled();
+			draftSessions.remove(userPlayerMap.get(userId));
+			leave(userId);
+			userPlayerMap.remove(userId);
 		}
 	}
 
-	public void timeout(String sessionId) {
-		if (sessionPlayerMap.containsKey(sessionId)) {
-			draft.autoPick(sessionPlayerMap.get(sessionId));
+	public void timeout(UUID userId) {
+		if (userPlayerMap.containsKey(userId)) {
+			draft.autoPick(userPlayerMap.get(userId));
 		}
 	}
 
@@ -193,9 +194,9 @@ public class DraftController {
 		return this.draftSessionId;
 	}
 
-	public DraftPickView sendCardPick(String sessionId, UUID cardId) {
-		if (draftSessions.get(sessionPlayerMap.get(sessionId)).sendCardPick(cardId)) {
-			return getDraftPickView(sessionPlayerMap.get(sessionId), 0);
+	public DraftPickView sendCardPick(UUID userId, UUID cardId) {
+		if (draftSessions.get(userPlayerMap.get(userId)).sendCardPick(cardId)) {
+			return getDraftPickView(userPlayerMap.get(userId), 0);
 		}
 		return null;
 	}

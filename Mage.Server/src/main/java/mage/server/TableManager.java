@@ -60,22 +60,22 @@ public class TableManager {
 		return INSTANCE;
 	}
 
-	public Table createTable(UUID roomId, String sessionId, MatchOptions options) {
-		TableController tableController = new TableController(roomId, sessionId, options);
+	public Table createTable(UUID roomId, UUID userId, MatchOptions options) {
+		TableController tableController = new TableController(roomId, userId, options);
 		controllers.put(tableController.getTable().getId(), tableController);
 		tables.put(tableController.getTable().getId(), tableController.getTable());
 		return tableController.getTable();
 	}
 
 	public Table createTable(UUID roomId, MatchOptions options) {
-		TableController tableController = new TableController(roomId, UUID.randomUUID().toString(), options);
+		TableController tableController = new TableController(roomId, null, options);
 		controllers.put(tableController.getTable().getId(), tableController);
 		tables.put(tableController.getTable().getId(), tableController.getTable());
 		return tableController.getTable();
 	}
 
-	public Table createTournamentTable(UUID roomId, String sessionId, TournamentOptions options) {
-		TableController tableController = new TableController(roomId, sessionId, options);
+	public Table createTournamentTable(UUID roomId, UUID userId, TournamentOptions options) {
+		TableController tableController = new TableController(roomId, userId, options);
 		controllers.put(tableController.getTable().getId(), tableController);
 		tables.put(tableController.getTable().getId(), tableController.getTable());
 		return tableController.getTable();
@@ -95,47 +95,47 @@ public class TableManager {
 		return tables.values();
 	}
 
-	public boolean joinTable(String sessionId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException {
+	public boolean joinTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException {
 		if (controllers.containsKey(tableId))
-			return controllers.get(tableId).joinTable(sessionId, name, playerType, skill, deckList);
+			return controllers.get(tableId).joinTable(userId, name, playerType, skill, deckList);
 		return false;
 	}
 
-	public boolean joinTournament(String sessionId, UUID tableId, String name, String playerType, int skill) throws GameException {
+	public boolean joinTournament(UUID userId, UUID tableId, String name, String playerType, int skill) throws GameException {
 		if (controllers.containsKey(tableId))
-			return controllers.get(tableId).joinTournament(sessionId, name, playerType, skill);
+			return controllers.get(tableId).joinTournament(userId, name, playerType, skill);
 		return false;
 	}
 
-	public boolean submitDeck(String sessionId, UUID tableId, DeckCardLists deckList) throws MageException {
+	public boolean submitDeck(UUID userId, UUID tableId, DeckCardLists deckList) throws MageException {
 		if (controllers.containsKey(tableId))
-			return controllers.get(tableId).submitDeck(sessionId, deckList);
+			return controllers.get(tableId).submitDeck(userId, deckList);
 		return false;
 	}
 
-	public void removeSession(String sessionId) {
+	public void removeSession(UUID userId) {
 		for (TableController controller: controllers.values()) {
-			controller.kill(sessionId);
+			controller.kill(userId);
 		}
 	}
 
-	public boolean isTableOwner(UUID tableId, String sessionId) {
+	public boolean isTableOwner(UUID tableId, UUID userId) {
 		if (controllers.containsKey(tableId))
-			return controllers.get(tableId).isOwner(sessionId);
+			return controllers.get(tableId).isOwner(userId);
 		return false;
 	}
 
-	public boolean removeTable(String sessionId, UUID tableId) {
-		if (isTableOwner(tableId, sessionId) || SessionManager.getInstance().isAdmin(sessionId)) {
+	public boolean removeTable(UUID userId, UUID tableId) {
+		if (isTableOwner(tableId, userId) || UserManager.getInstance().isAdmin(userId)) {
 			removeTable(tableId);
 			return true;
 		}
 		return false;
 	}
 
-	public void leaveTable(String sessionId, UUID tableId) {
+	public void leaveTable(UUID userId, UUID tableId) {
 		if (controllers.containsKey(tableId))
-			controllers.get(tableId).leaveTable(sessionId);
+			controllers.get(tableId).leaveTable(userId);
 	}
 
 	public UUID getChatId(UUID tableId) {
@@ -144,9 +144,9 @@ public class TableManager {
 		return null;
 	}
 
-	public void startMatch(String sessionId, UUID roomId, UUID tableId) {
+	public void startMatch(UUID userId, UUID roomId, UUID tableId) {
 		if (controllers.containsKey(tableId))
-			controllers.get(tableId).startMatch(sessionId);
+			controllers.get(tableId).startMatch(userId);
 	}
 
 	public void startMatch(UUID roomId, UUID tableId) {
@@ -154,14 +154,14 @@ public class TableManager {
 			controllers.get(tableId).startMatch();
 	}
 
-	public void startChallenge(String sessionId, UUID roomId, UUID tableId, UUID challengeId) {
+	public void startChallenge(UUID userId, UUID roomId, UUID tableId, UUID challengeId) {
 		if (controllers.containsKey(tableId))
-			controllers.get(tableId).startChallenge(sessionId, challengeId);
+			controllers.get(tableId).startChallenge(userId, challengeId);
 	}
 
-	public void startTournament(String sessionId, UUID roomId, UUID tableId) {
+	public void startTournament(UUID userId, UUID roomId, UUID tableId) {
 		if (controllers.containsKey(tableId))
-			controllers.get(tableId).startTournament(sessionId);
+			controllers.get(tableId).startTournament(userId);
 	}
 
 	public void startDraft(UUID tableId, Draft draft) {
@@ -169,15 +169,15 @@ public class TableManager {
 			controllers.get(tableId).startDraft(draft);
 	}
 
-	public boolean watchTable(String sessionId, UUID tableId) {
+	public boolean watchTable(UUID userId, UUID tableId) {
 		if (controllers.containsKey(tableId))
-			return controllers.get(tableId).watchTable(sessionId);
+			return controllers.get(tableId).watchTable(userId);
 		return false;
 	}
 
-	public boolean replayTable(String sessionId, UUID tableId) {
+	public boolean replayTable(UUID userId, UUID tableId) {
 		if (controllers.containsKey(tableId))
-			return controllers.get(tableId).replayTable(sessionId);
+			return controllers.get(tableId).replayTable(userId);
 		return false;
 	}
 
@@ -191,8 +191,8 @@ public class TableManager {
 			controllers.get(tableId).endDraft(draft);
 	}
 
-	public void swapSeats(UUID tableId, String sessionId, int seatNum1, int seatNum2) {
-		if (controllers.containsKey(tableId) && isTableOwner(tableId, sessionId)) {
+	public void swapSeats(UUID tableId, UUID userId, int seatNum1, int seatNum2) {
+		if (controllers.containsKey(tableId) && isTableOwner(tableId, userId)) {
 			controllers.get(tableId).swapSeats(seatNum1, seatNum2);
 		}
 	}
@@ -202,9 +202,9 @@ public class TableManager {
 			controllers.get(tableId).construct();
 	}
 
-	public void addPlayer(String sessionId, UUID tableId, Player player, String playerType, Deck deck) throws GameException {
+	public void addPlayer(UUID userId, UUID tableId, Player player, String playerType, Deck deck) throws GameException {
 		if (controllers.containsKey(tableId))
-			controllers.get(tableId).addPlayer(sessionId, player, playerType, deck);
+			controllers.get(tableId).addPlayer(userId, player, playerType, deck);
 	}
 
 	public void removeTable(UUID tableId) {

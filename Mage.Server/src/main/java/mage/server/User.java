@@ -27,7 +27,12 @@
  */
 package mage.server;
 
+import java.util.Date;
 import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
+import mage.cards.decks.Deck;
+import mage.interfaces.callback.ClientCallback;
+import mage.view.TableClientMessage;
 
 /**
  *
@@ -35,14 +40,23 @@ import java.util.UUID;
  */
 public class User {
 	
+	public enum UserState {
+		Created, Connected, Disconnected, Reconnected;
+	}
+	
 	private UUID userId = UUID.randomUUID();
 	private String userName;
-	private String sessionId;
+	private String sessionId = "";
 	private String host;
+	private Date connectionTime = new Date();
+	private Date lastActivity = new Date();
+	private UserState userState;
+    private CountDownLatch connectionSignal = new CountDownLatch(1);
 	
 	public User(String userName, String host) {
 		this.userName = userName;
 		this.host = host;
+		this.userState = UserState.Created;
 	}
 	
 	public String getName() {
@@ -63,5 +77,60 @@ public class User {
 	
 	public void setSessionId(String sessionId) {
 		this.sessionId = sessionId;
+		if (sessionId.isEmpty())
+			userState = UserState.Disconnected;
+		else if (userState == UserState.Created) 
+			userState = UserState.Connected;
+		else {
+			userState = UserState.Reconnected;
+			reconnect();
+		}
+	}
+	
+	public boolean isConnected() {
+		return userState == UserState.Connected;
+	}
+	
+	public Date getConnectionTime() {
+		return connectionTime;
+	}
+
+	public synchronized void fireCallback(final ClientCallback call) {
+		if (isConnected()) {
+			Session session = SessionManager.getInstance().getSession(sessionId);
+			session.fireCallback(call);		
+		}
+	}
+
+	public void gameStarted(final UUID gameId, final UUID playerId) {
+		fireCallback(new ClientCallback("startGame", gameId, new TableClientMessage(gameId, playerId)));
+	}
+
+	public void draftStarted(final UUID draftId, final UUID playerId) {
+		fireCallback(new ClientCallback("startDraft", draftId, new TableClientMessage(draftId, playerId)));
+	}
+
+	public void tournamentStarted(final UUID tournamentId, final UUID playerId) {
+		fireCallback(new ClientCallback("startTournament", tournamentId, new TableClientMessage(tournamentId, playerId)));
+	}
+
+	public void sideboard(final Deck deck, final UUID tableId, final int time) {
+		fireCallback(new ClientCallback("sideboard", tableId, new TableClientMessage(deck, tableId, time)));
+	}
+
+	public void construct(final Deck deck, final UUID tableId, final int time) {
+		fireCallback(new ClientCallback("construct", tableId, new TableClientMessage(deck, tableId, time)));
+	}
+
+	public void watchGame(final UUID gameId) {
+		fireCallback(new ClientCallback("watchGame", gameId));
+	}
+
+	public void replayGame(final UUID gameId) {
+		fireCallback(new ClientCallback("replayGame", gameId));
+	}
+
+	private void reconnect() {
+		
 	}
 }

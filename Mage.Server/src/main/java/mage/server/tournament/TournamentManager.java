@@ -48,22 +48,21 @@ public class TournamentManager {
 		return INSTANCE;
 	}
 
-	public UUID createTournamentSession(Tournament tournament, ConcurrentHashMap<String, UUID> sessionPlayerMap, UUID tableId) {
-		TournamentController tournamentController = new TournamentController(tournament, sessionPlayerMap, tableId);
+	public void createTournamentSession(Tournament tournament, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
+		TournamentController tournamentController = new TournamentController(tournament, userPlayerMap, tableId);
 		controllers.put(tournament.getId(), tournamentController);
-		return tournamentController.getSessionId();
 	}
 
-	public void joinTournament(UUID tournamentId, String sessionId) {
-		controllers.get(tournamentId).join(sessionId);
+	public void joinTournament(UUID tournamentId, UUID userId) {
+		controllers.get(tournamentId).join(userId);
 	}
 
-	public void kill(UUID tournamentId, String sessionId) {
-		controllers.get(tournamentId).kill(sessionId);
+	public void kill(UUID tournamentId, UUID userId) {
+		controllers.get(tournamentId).kill(userId);
 	}
 
-	public void timeout(UUID tournamentId, String sessionId) {
-		controllers.get(tournamentId).timeout(sessionId);
+	public void timeout(UUID tournamentId, UUID userId) {
+		controllers.get(tournamentId).timeout(userId);
 	}
 
 	public void submitDeck(UUID tournamentId, UUID playerId, Deck deck) {

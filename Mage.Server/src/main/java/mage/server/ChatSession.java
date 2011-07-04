@@ -32,6 +32,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.interfaces.callback.ClientCallback;
@@ -46,7 +47,7 @@ import org.apache.log4j.Logger;
 public class ChatSession {
 
 	private final static Logger logger = Logger.getLogger(ChatSession.class);
-	private ConcurrentHashMap<String, String> clients = new ConcurrentHashMap<String, String>();
+	private ConcurrentHashMap<UUID, String> clients = new ConcurrentHashMap<UUID, String>();
 	private UUID chatId;
 	private DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
 
@@ -56,16 +57,20 @@ public class ChatSession {
 		chatId = UUID.randomUUID();
 	}
 
-	public void join(String userName, String sessionId) {
-		clients.put(sessionId, userName);
-		broadcast(userName, " has joined", MessageColor.BLACK);
-		logger.info(userName + " joined chat " + chatId);
+	public void join(UUID userId) {
+		User user = UserManager.getInstance().getUser(userId);
+		if (user != null) {
+			String userName = user.getName();
+			clients.put(userId, userName);
+			broadcast(userName, " has joined", MessageColor.BLACK);
+			logger.info(userName + " joined chat " + chatId);
+		}
 	}
 
-	public void kill(String sessionId) {
-		if (clients.containsKey(sessionId)) {
-			String userName = clients.get(sessionId);
-			clients.remove(sessionId);
+	public void kill(UUID userId) {
+		if (clients.containsKey(userId)) {
+			String userName = clients.get(userId);
+			clients.remove(userId);
 			broadcast(userName, " has left", MessageColor.BLACK);
 			logger.info(userName + " has left chat " + chatId);
 		}
@@ -77,12 +82,12 @@ public class ChatSession {
 		final String time = timeFormatter.format(cal.getTime());
 		final String username = userName;
 		logger.debug("Broadcasting '" + msg + "' for " + chatId);
-		for (String sessionId: clients.keySet()) {
-			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null)
-				session.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color)));
+		for (UUID userId: clients.keySet()) {
+			User user = UserManager.getInstance().getUser(userId);
+			if (user != null)
+				user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color)));
 			else
-				kill(sessionId);
+				kill(userId);
 		}
 	}
 
