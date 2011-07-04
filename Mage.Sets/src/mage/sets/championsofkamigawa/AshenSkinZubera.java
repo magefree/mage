@@ -36,7 +36,9 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -60,7 +62,7 @@ public class AshenSkinZubera extends CardImpl<AshenSkinZubera> {
         this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        Ability ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new AshenSkinZuberaEffect());
+        Ability ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new DiscardTargetEffect(new AshenSkinZuberaDynamicValue()));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
         this.watchers.add(new AshenSkinZuberaWatcher(ownerId));
@@ -115,39 +117,26 @@ class AshenSkinZuberaWatcher extends WatcherImpl<AshenSkinZuberaWatcher> {
 
 }
 
-class AshenSkinZuberaEffect extends OneShotEffect<AshenSkinZuberaEffect> {
+class AshenSkinZuberaDynamicValue implements DynamicValue {
 
-    public AshenSkinZuberaEffect() {
-        super(Constants.Outcome.Discard);
-    }
-
-    public AshenSkinZuberaEffect(final AshenSkinZuberaEffect effect) {
-        super(effect);
+    @Override
+    public int calculate(Game game, Ability sourceAbility) {
+        Watcher watcher = game.getState().getWatchers().get(sourceAbility.getControllerId(), "ZuberasDiedAshenSkinZubera");
+        return ((AshenSkinZuberaWatcher) watcher).zuberasDiedThisTurn;
     }
 
     @Override
-    public AshenSkinZuberaEffect copy() {
-        return new AshenSkinZuberaEffect(this);
+    public DynamicValue clone() {
+        return new AshenSkinZuberaDynamicValue();
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "ZuberasDiedAshenSkinZubera");
-        Player player = game.getPlayer(targetPointer.getFirst(source));
-        if (player != null && watcher != null) {
-            int amount = ((AshenSkinZuberaWatcher) watcher).zuberasDiedThisTurn;
-            if (amount > 0) {
-                player.discard(amount, source, game);
-                return true;
-            }
-        }
-        return false;
+    public String toString() {
+        return "1";
     }
 
     @Override
-    public String getText(Ability source) {
-        return "target opponent discards a card for each Zubera put into a graveyard from the battlefield this turn";
+    public String getMessage() {
+        return "Zubera put into all graveyards from the battlefield this turn";
     }
 }
-
-

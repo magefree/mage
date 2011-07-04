@@ -37,7 +37,7 @@ import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author LokiX
+ * @author Loki
  */
 public class DiabolicTutor extends CardImpl<DiabolicTutor> {
 

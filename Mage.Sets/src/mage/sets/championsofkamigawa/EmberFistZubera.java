@@ -52,7 +52,7 @@ import mage.watchers.WatcherImpl;
 
 /**
  *
- * @author <author>
+ * @author Loki
  */
 public class EmberFistZubera extends CardImpl<EmberFistZubera> {
 
@@ -64,7 +64,7 @@ public class EmberFistZubera extends CardImpl<EmberFistZubera> {
 		this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        Ability ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new DamageTargetEffect(new ZuberaDynamicValue()));
+        Ability ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new DamageTargetEffect(new EmberFistZuberaDynamicValue()));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
         this.watchers.add(new EmberFistZuberaWatcher(ownerId));
@@ -119,7 +119,7 @@ class EmberFistZuberaWatcher extends WatcherImpl<EmberFistZuberaWatcher> {
 
 }
 
-class ZuberaDynamicValue implements DynamicValue {
+class EmberFistZuberaDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility) {
@@ -129,7 +129,7 @@ class ZuberaDynamicValue implements DynamicValue {
 
     @Override
     public DynamicValue clone() {
-        return new ZuberaDynamicValue();
+        return new EmberFistZuberaDynamicValue();
     }
 
     @Override

@@ -30,6 +30,7 @@ package mage.game.stack;
 
 import mage.Mana;
 import mage.abilities.SpellAbility;
+import mage.abilities.effects.common.ReturnToHandSpellEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
 import mage.game.*;
 import java.util.List;
@@ -93,7 +94,9 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 						card.moveToZone(Zone.LIBRARY, ability.getId(), game, false);
 						Player player = game.getPlayer(controllerId);
 						if (player != null) player.shuffleLibrary(game);
-					} else {
+					} else if (ability.getEffects().contains(ReturnToHandSpellEffect.getInstance())) {
+                        card.moveToZone(Zone.HAND, ability.getId(), game, false);
+                    } else {
 						card.moveToZone(Zone.GRAVEYARD, ability.getId(), game, false);
 					}
 				}
