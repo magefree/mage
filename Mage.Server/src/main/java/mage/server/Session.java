@@ -106,6 +106,7 @@ public class Session {
 			callbackHandler.handleCallbackOneway(new Callback(call));
 		} catch (HandleCallbackException ex) {
 			logger.fatal("Session fireCallback error", ex);
+			kill();
 		}
 	}
 

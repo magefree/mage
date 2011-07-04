@@ -29,12 +29,16 @@
 package mage.server.game;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import mage.cards.Cards;
 import mage.game.Game;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.User;
@@ -45,6 +49,7 @@ import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.GameClientMessage;
 import mage.view.GameView;
+import mage.view.LookedAtView;
 
 /**
  *
@@ -52,44 +57,42 @@ import mage.view.GameView;
  */
 public class GameSession extends GameWatcher {
 
-	private Game game;
 	private UUID playerId;
 
 	private ScheduledFuture<?> futureTimeout;
 	protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
 
 	public GameSession(Game game, UUID userId, UUID playerId) {
-		super(userId, game.getId());
-		this.game = game;
+		super(userId, game);
 		this.playerId = playerId;
 	}
 
-	public void ask(final String question, final GameView gameView)  {
+	public void ask(final String question)  {
 		if (!killed) {
 			setupTimeout();
 			User user = UserManager.getInstance().getUser(userId);
 			if (user != null) {
-				user.fireCallback(new ClientCallback("gameAsk", game.getId(), new GameClientMessage(gameView, question)));
+				user.fireCallback(new ClientCallback("gameAsk", game.getId(), new GameClientMessage(getGameView(), question)));
 			}
 		}
 	}
 
-	public void target(final String question, final CardsView cardView, final Set<UUID> targets, final boolean required, final GameView gameView, final Map<String, Serializable> options) {
+	public void target(final String question, final CardsView cardView, final Set<UUID> targets, final boolean required, final Map<String, Serializable> options) {
 		if (!killed) {
 			setupTimeout();
 			User user = UserManager.getInstance().getUser(userId);
 			if (user != null) {
-				user.fireCallback(new ClientCallback("gameTarget", game.getId(), new GameClientMessage(gameView, question, cardView, targets, required, options)));
+				user.fireCallback(new ClientCallback("gameTarget", game.getId(), new GameClientMessage(getGameView(), question, cardView, targets, required, options)));
 			}
 		}
 	}
 
-	public void select(final String message, final GameView gameView) {
+	public void select(final String message) {
 		if (!killed) {
 			setupTimeout();
 			User user = UserManager.getInstance().getUser(userId);
 			if (user != null) {
-				user.fireCallback(new ClientCallback("gameSelect", game.getId(), new GameClientMessage(gameView, message)));
+				user.fireCallback(new ClientCallback("gameSelect", game.getId(), new GameClientMessage(getGameView(), message)));
 			}
 		}
 	}
@@ -114,22 +117,22 @@ public class GameSession extends GameWatcher {
 		}
 	}
 
-	public void playMana(final String message, final GameView gameView) {
+	public void playMana(final String message) {
 		if (!killed) {
 			setupTimeout();
 			User user = UserManager.getInstance().getUser(userId);
 			if (user != null) {
-				user.fireCallback(new ClientCallback("gamePlayMana", game.getId(), new GameClientMessage(gameView, message)));
+				user.fireCallback(new ClientCallback("gamePlayMana", game.getId(), new GameClientMessage(getGameView(), message)));
 			}
 		}
 	}
 
-	public void playXMana(final String message, final GameView gameView) {
+	public void playXMana(final String message) {
 		if (!killed) {
 			setupTimeout();
 			User user = UserManager.getInstance().getUser(userId);
 			if (user != null) {
-				user.fireCallback(new ClientCallback("gamePlayXMana", game.getId(), new GameClientMessage(gameView, message)));
+				user.fireCallback(new ClientCallback("gamePlayXMana", game.getId(), new GameClientMessage(getGameView(), message)));
 			}
 		}
 	}
@@ -153,14 +156,13 @@ public class GameSession extends GameWatcher {
 		}
 	}
 
-
 	private synchronized void setupTimeout() {
 		cancelTimeout();
 		futureTimeout = timeoutExecutor.schedule(
 			new Runnable() {
 				@Override
 				public void run() {
-					GameManager.getInstance().timeout(gameId, userId);
+					GameManager.getInstance().timeout(game.getId(), userId);
 				}
 			},
 			ConfigSettings.getInstance().getMaxSecondsIdle(), TimeUnit.SECONDS
@@ -192,4 +194,27 @@ public class GameSession extends GameWatcher {
 		cancelTimeout();
 		game.getPlayer(playerId).setResponseInteger(data);
 	}
+	
+	@Override
+	public GameView getGameView() {
+		GameView gameView = new GameView(game.getState(), game);
+		gameView.setHand(new CardsView(game.getPlayer(playerId).getHand().getCards(game)));
+
+		List<LookedAtView> list = new ArrayList<LookedAtView>();
+		for (Entry<String, Cards> entry : game.getState().getLookedAt(playerId).entrySet()) {
+			list.add(new LookedAtView(entry.getKey(), entry.getValue(), game));
+		}
+		gameView.setLookedAt(list);
+
+		return gameView;
+	}
+
+	public void removeGame() {
+		UserManager.getInstance().getUser(userId).removeGame(playerId);
+	}
+
+	public UUID getGameId() {
+		return game.getId();
+	}
+
 }

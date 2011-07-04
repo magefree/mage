@@ -28,10 +28,14 @@
 package mage.server;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
-import java.util.concurrent.CountDownLatch;
 import mage.cards.decks.Deck;
 import mage.interfaces.callback.ClientCallback;
+import mage.server.game.GameManager;
+import mage.server.game.GameSession;
 import mage.view.TableClientMessage;
 
 /**
@@ -39,7 +43,7 @@ import mage.view.TableClientMessage;
  * @author BetaSteward_at_googlemail.com
  */
 public class User {
-	
+
 	public enum UserState {
 		Created, Connected, Disconnected, Reconnected;
 	}
@@ -49,9 +53,8 @@ public class User {
 	private String sessionId = "";
 	private String host;
 	private Date connectionTime = new Date();
-	private Date lastActivity = new Date();
 	private UserState userState;
-    private CountDownLatch connectionSignal = new CountDownLatch(1);
+ 	private Map<UUID, GameSession> gameSessions = new HashMap<UUID, GameSession>();
 	
 	public User(String userName, String host) {
 		this.userName = userName;
@@ -88,7 +91,7 @@ public class User {
 	}
 	
 	public boolean isConnected() {
-		return userState == UserState.Connected;
+		return userState == UserState.Connected || userState == UserState.Reconnected;
 	}
 	
 	public Date getConnectionTime() {
@@ -131,6 +134,19 @@ public class User {
 	}
 
 	private void reconnect() {
-		
+		for (Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
+			gameStarted(entry.getValue().getGameId(), entry.getKey());
+			entry.getValue().init();
+			GameManager.getInstance().sendPlayerString(entry.getValue().getGameId(), userId, "");
+		}
 	}
+
+	public void addGame(UUID playerId, GameSession gameSession) {
+		gameSessions.put(playerId, gameSession);
+	}
+	
+	public void removeGame(UUID playerId) {
+		gameSessions.remove(playerId);
+	}
+
 }
