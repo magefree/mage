@@ -72,7 +72,7 @@ class LandwalkEffect extends RestrictionEffect<LandwalkEffect> {
 	}
 
 	@Override
-	public boolean canBlock(Permanent attacker, Permanent blocker, Game game) {
+	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Game game) {
 		return !game.getBattlefield().contains(filter, blocker.getControllerId(), 1);
 	}
 

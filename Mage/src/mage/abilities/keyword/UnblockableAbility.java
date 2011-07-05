@@ -87,7 +87,7 @@ class UnblockableEffect extends RestrictionEffect<UnblockableEffect> {
 	}
 
 	@Override
-	public boolean canBlock(Permanent attacker, Permanent blocker, Game game) {
+	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Game game) {
 		return false;
 	}
 

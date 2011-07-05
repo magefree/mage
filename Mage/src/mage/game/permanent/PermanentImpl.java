@@ -610,8 +610,10 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		}
 		// check also attacker's restriction effects
 		for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game)) {
-		    if (!effect.canBlock(attacker, this, game))
-				return false;
+		    /*if (!effect.canBlock(attacker, this, game))
+				return false;*/
+            if (!effect.canBeBlocked(attacker, this, game))
+                return false;
 		}
 		if (attacker.hasProtectionFrom(this))
 			return false;

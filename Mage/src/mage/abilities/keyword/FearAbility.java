@@ -29,6 +29,8 @@
 package mage.abilities.keyword;
 
 import java.io.ObjectStreamException;
+
+import mage.Constants;
 import mage.Constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
@@ -87,8 +89,8 @@ class FearEffect extends RestrictionEffect<FearEffect> {
 	}
 
 	@Override
-	public boolean canBlock(Permanent attacker, Permanent blocker, Game game) {
-		if (blocker.getAbilities().containsKey(FearAbility.getInstance().getId()) || blocker.getColor().isBlack()) {
+	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Game game) {
+		if (blocker.getCardType().contains(Constants.CardType.ARTIFACT) || blocker.getColor().isBlack()) {
 			return true;
         }
 		return false;

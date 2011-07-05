@@ -47,7 +47,7 @@ class IntimidateEffect extends RestrictionEffect<IntimidateEffect> {
     }
 
     @Override
-	public boolean canBlock(Permanent attacker, Permanent blocker, Game game) {
+	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Game game) {
         boolean result = false;
 		if (blocker.getCardType().contains(Constants.CardType.ARTIFACT) && (blocker.getCardType().contains(Constants.CardType.CREATURE)))
 			result = true;

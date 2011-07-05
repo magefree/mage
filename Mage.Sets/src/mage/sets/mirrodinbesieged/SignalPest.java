@@ -115,7 +115,7 @@ class SignalPestEffect extends RestrictionEffect<SignalPestEffect> {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Game game) {
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Game game) {
         if (blocker.getAbilities().contains(FlyingAbility.getInstance()) || blocker.getAbilities().contains(ReachAbility.getInstance())) {
             return true;
         }
