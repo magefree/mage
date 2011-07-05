@@ -33,50 +33,33 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class AzamiLadyofScrolls extends CardImpl<AzamiLadyofScrolls> {
+public class NightofSoulsBetrayal extends CardImpl<NightofSoulsBetrayal> {
+    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures");
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
-
-        static {
-            filter.setTapped(false);
-            filter.setUseTapped(true);
-            filter.getSubtype().add("Wizard");
-            filter.setScopeCardType(Filter.ComparisonScope.Any);
-            filter.setScopeSubtype(Filter.ComparisonScope.Any);
-        }
-
-    public AzamiLadyofScrolls (UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
+    public NightofSoulsBetrayal (UUID ownerId) {
+        super(ownerId, 133, "Night of Souls' Betrayal", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-		this.color.setBlue(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+		this.color.setBlack(true);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Constants.Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public AzamiLadyofScrolls (final AzamiLadyofScrolls card) {
+    public NightofSoulsBetrayal (final NightofSoulsBetrayal card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyofScrolls copy() {
-        return new AzamiLadyofScrolls(this);
+    public NightofSoulsBetrayal copy() {
+        return new NightofSoulsBetrayal(this);
     }
 
 }

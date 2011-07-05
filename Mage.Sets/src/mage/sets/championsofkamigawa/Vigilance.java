@@ -33,50 +33,41 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.keyword.FlashAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class AzamiLadyofScrolls extends CardImpl<AzamiLadyofScrolls> {
+public class Vigilance extends CardImpl<Vigilance> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
-
-        static {
-            filter.setTapped(false);
-            filter.setUseTapped(true);
-            filter.getSubtype().add("Wizard");
-            filter.setScopeCardType(Filter.ComparisonScope.Any);
-            filter.setScopeSubtype(Filter.ComparisonScope.Any);
-        }
-
-    public AzamiLadyofScrolls (UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
+    public Vigilance (UUID ownerId) {
+        super(ownerId, 49, "Vigilance", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-		this.color.setBlue(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+        this.subtype.add("Aura");
+		this.color.setWhite(true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), Constants.AttachmentType.AURA)));
     }
 
-    public AzamiLadyofScrolls (final AzamiLadyofScrolls card) {
+    public Vigilance (final Vigilance card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyofScrolls copy() {
-        return new AzamiLadyofScrolls(this);
+    public Vigilance copy() {
+        return new Vigilance(this);
     }
 
 }

@@ -34,49 +34,43 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterAttackingCreature;
+
 
 /**
  *
  * @author Loki
  */
-public class AzamiLadyofScrolls extends CardImpl<AzamiLadyofScrolls> {
+public class AkkiCoalflinger extends CardImpl<AkkiCoalflinger> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
-
-        static {
-            filter.setTapped(false);
-            filter.setUseTapped(true);
-            filter.getSubtype().add("Wizard");
-            filter.setScopeCardType(Filter.ComparisonScope.Any);
-            filter.setScopeSubtype(Filter.ComparisonScope.Any);
-        }
-
-    public AzamiLadyofScrolls (UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
+    public AkkiCoalflinger (UUID ownerId) {
+        super(ownerId, 152, "Akki Coalflinger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-		this.color.setBlue(true);
-        this.power = new MageInt(0);
+        this.subtype.add("Goblin");
+        this.subtype.add("Shaman");
+		this.color.setRed(true);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+        this.addAbility(FirstStrikeAbility.getInstance());
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterAttackingCreature()), new ColoredManaCost(Constants.ColoredManaSymbol.R));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
     }
 
-    public AzamiLadyofScrolls (final AzamiLadyofScrolls card) {
+    public AkkiCoalflinger (final AkkiCoalflinger card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyofScrolls copy() {
-        return new AzamiLadyofScrolls(this);
+    public AkkiCoalflinger copy() {
+        return new AkkiCoalflinger(this);
     }
 
 }

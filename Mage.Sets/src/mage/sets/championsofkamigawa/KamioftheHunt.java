@@ -34,49 +34,42 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.FilterCard;
 
 /**
- *
  * @author Loki
  */
-public class AzamiLadyofScrolls extends CardImpl<AzamiLadyofScrolls> {
+public class KamioftheHunt extends CardImpl<KamioftheHunt> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
+    private final static FilterCard filter = new FilterCard("a Spirit or Arcane spell");
 
-        static {
-            filter.setTapped(false);
-            filter.setUseTapped(true);
-            filter.getSubtype().add("Wizard");
-            filter.setScopeCardType(Filter.ComparisonScope.Any);
-            filter.setScopeSubtype(Filter.ComparisonScope.Any);
-        }
-
-    public AzamiLadyofScrolls (UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-		this.color.setBlue(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+    static {
+        filter.getSubtype().add("Spirit");
+        filter.getSubtype().add("Arcane");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public AzamiLadyofScrolls (final AzamiLadyofScrolls card) {
+    public KamioftheHunt(UUID ownerId) {
+        super(ownerId, 219, "Kami of the Hunt", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.expansionSetCode = "CHK";
+        this.subtype.add("Spirit");
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+        this.addAbility(new SpellCastTriggeredAbility(new BoostSourceEffect(1, 1, Constants.Duration.EndOfTurn), filter, false));
+    }
+
+    public KamioftheHunt(final KamioftheHunt card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyofScrolls copy() {
-        return new AzamiLadyofScrolls(this);
+    public KamioftheHunt copy() {
+        return new KamioftheHunt(this);
     }
 
 }

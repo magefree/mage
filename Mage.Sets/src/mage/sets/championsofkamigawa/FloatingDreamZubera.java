@@ -37,61 +37,59 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.target.common.TargetOpponent;
 import mage.watchers.Watcher;
 import mage.watchers.WatcherImpl;
 
 /**
  * @author Loki
  */
-public class AshenSkinZubera extends CardImpl<AshenSkinZubera> {
+public class FloatingDreamZubera extends CardImpl<FloatingDreamZubera> {
 
-    public AshenSkinZubera(UUID ownerId) {
-        super(ownerId, 101, "Ashen-Skin Zubera", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+    public FloatingDreamZubera(UUID ownerId) {
+        super(ownerId, 61, "Floating-Dream Zubera", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Zubera");
         this.subtype.add("Spirit");
-        this.color.setBlack(true);
+        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        Ability ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new DiscardTargetEffect(new AshenSkinZuberaDynamicValue()));
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
-        this.watchers.add(new AshenSkinZuberaWatcher(ownerId));
+        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DrawCardControllerEffect(new FloatingDreamZuberaDynamicValue())));
+        this.watchers.add(new FloatingDreamZuberaWatcher(ownerId));
     }
 
-    public AshenSkinZubera(final AshenSkinZubera card) {
+    public FloatingDreamZubera(final FloatingDreamZubera card) {
         super(card);
     }
 
     @Override
-    public AshenSkinZubera copy() {
-        return new AshenSkinZubera(this);
+    public FloatingDreamZubera copy() {
+        return new FloatingDreamZubera(this);
     }
 
 }
 
-class AshenSkinZuberaWatcher extends WatcherImpl<AshenSkinZuberaWatcher> {
+
+class FloatingDreamZuberaWatcher extends WatcherImpl<FloatingDreamZuberaWatcher> {
 
     public int zuberasDiedThisTurn = 0;
 
-    public AshenSkinZuberaWatcher(UUID controllerId) {
-        super("ZuberasDiedAshenSkinZubera", controllerId);
+    public FloatingDreamZuberaWatcher(UUID controllerId) {
+        super("ZuberasDiedFloatingDreamZubera", controllerId);
     }
 
-    public AshenSkinZuberaWatcher(final AshenSkinZuberaWatcher watcher) {
+    public FloatingDreamZuberaWatcher(final FloatingDreamZuberaWatcher watcher) {
         super(watcher);
     }
 
     @Override
-    public AshenSkinZuberaWatcher copy() {
-        return new AshenSkinZuberaWatcher(this);
+    public FloatingDreamZuberaWatcher copy() {
+        return new FloatingDreamZuberaWatcher(this);
     }
 
     @Override
@@ -115,26 +113,26 @@ class AshenSkinZuberaWatcher extends WatcherImpl<AshenSkinZuberaWatcher> {
 
 }
 
-class AshenSkinZuberaDynamicValue implements DynamicValue {
+class FloatingDreamZuberaDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility) {
-        Watcher watcher = game.getState().getWatchers().get(sourceAbility.getControllerId(), "ZuberasDiedAshenSkinZubera");
-        return ((AshenSkinZuberaWatcher) watcher).zuberasDiedThisTurn;
+        Watcher watcher = game.getState().getWatchers().get(sourceAbility.getControllerId(), "ZuberasDiedFloatingDreamZubera");
+        return ((FloatingDreamZuberaWatcher) watcher).zuberasDiedThisTurn;
     }
 
     @Override
     public DynamicValue clone() {
-        return new AshenSkinZuberaDynamicValue();
+        return new FloatingDreamZuberaDynamicValue();
     }
 
     @Override
     public String toString() {
-        return "a";
+        return "1";
     }
 
     @Override
     public String getMessage() {
-        return "Zubera put into a graveyard from play this turn";
+        return "for each Zubera put into a graveyard from play this turn";
     }
 }

@@ -34,49 +34,58 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.CounterUnlessPaysEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.ShroudAbility;
+import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.target.TargetSpell;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
  * @author Loki
  */
-public class AzamiLadyofScrolls extends CardImpl<AzamiLadyofScrolls> {
+public class SoratamiRainshaper extends CardImpl<SoratamiRainshaper> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
 
-        static {
-            filter.setTapped(false);
-            filter.setUseTapped(true);
-            filter.getSubtype().add("Wizard");
-            filter.setScopeCardType(Filter.ComparisonScope.Any);
-            filter.setScopeSubtype(Filter.ComparisonScope.Any);
-        }
-
-    public AzamiLadyofScrolls (UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-		this.color.setBlue(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+    static {
+        filter.getCardType().add(CardType.LAND);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public AzamiLadyofScrolls (final AzamiLadyofScrolls card) {
+    public SoratamiRainshaper(UUID ownerId) {
+        super(ownerId, 89, "Soratami Rainshaper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "CHK";
+        this.subtype.add("Moonfolk");
+        this.subtype.add("Wizard");
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+        this.addAbility(FlyingAbility.getInstance());
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityTargetEffect(ShroudAbility.getInstance(), Constants.Duration.EndOfTurn), new GenericManaCost(3));
+        ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
+        ability.addTarget(new TargetControlledCreaturePermanent());
+        this.addAbility(ability);
+    }
+
+    public SoratamiRainshaper(final SoratamiRainshaper card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyofScrolls copy() {
-        return new AzamiLadyofScrolls(this);
+    public SoratamiRainshaper copy() {
+        return new SoratamiRainshaper(this);
     }
 
 }

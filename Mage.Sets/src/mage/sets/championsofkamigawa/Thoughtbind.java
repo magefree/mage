@@ -30,53 +30,41 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.FilterSpell;
+import mage.target.TargetSpell;
 
 /**
- *
  * @author Loki
  */
-public class AzamiLadyofScrolls extends CardImpl<AzamiLadyofScrolls> {
+public class Thoughtbind extends CardImpl<Thoughtbind> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
+    private final static FilterSpell filter = new FilterSpell("spell with converted mana cost 4 or less");
 
-        static {
-            filter.setTapped(false);
-            filter.setUseTapped(true);
-            filter.getSubtype().add("Wizard");
-            filter.setScopeCardType(Filter.ComparisonScope.Any);
-            filter.setScopeSubtype(Filter.ComparisonScope.Any);
-        }
-
-    public AzamiLadyofScrolls (UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-		this.color.setBlue(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+    static {
+        filter.setConvertedManaCost(5);
+        filter.setConvertedManaCostComparison(Filter.ComparisonType.LessThan);
     }
 
-    public AzamiLadyofScrolls (final AzamiLadyofScrolls card) {
+    public Thoughtbind(UUID ownerId) {
+        super(ownerId, 96, "Thoughtbind", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
+        this.expansionSetCode = "CHK";
+        this.color.setBlue(true);
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addTarget(new TargetSpell(filter));
+    }
+
+    public Thoughtbind(final Thoughtbind card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyofScrolls copy() {
-        return new AzamiLadyofScrolls(this);
+    public Thoughtbind copy() {
+        return new Thoughtbind(this);
     }
 
 }

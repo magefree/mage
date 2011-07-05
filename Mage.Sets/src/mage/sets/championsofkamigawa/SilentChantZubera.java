@@ -37,61 +37,60 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.target.common.TargetOpponent;
 import mage.watchers.Watcher;
 import mage.watchers.WatcherImpl;
 
 /**
+ *
  * @author Loki
  */
-public class AshenSkinZubera extends CardImpl<AshenSkinZubera> {
+public class SilentChantZubera extends CardImpl<SilentChantZubera> {
 
-    public AshenSkinZubera(UUID ownerId) {
-        super(ownerId, 101, "Ashen-Skin Zubera", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+    public SilentChantZubera (UUID ownerId) {
+        super(ownerId, 45, "Silent-Chant Zubera", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Zubera");
         this.subtype.add("Spirit");
-        this.color.setBlack(true);
+		this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        Ability ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new DiscardTargetEffect(new AshenSkinZuberaDynamicValue()));
-        ability.addTarget(new TargetOpponent());
+        Ability ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new GainLifeEffect(new SilentChantZuberaDynamicValue()));
         this.addAbility(ability);
         this.watchers.add(new AshenSkinZuberaWatcher(ownerId));
     }
 
-    public AshenSkinZubera(final AshenSkinZubera card) {
+    public SilentChantZubera (final SilentChantZubera card) {
         super(card);
     }
 
     @Override
-    public AshenSkinZubera copy() {
-        return new AshenSkinZubera(this);
+    public SilentChantZubera copy() {
+        return new SilentChantZubera(this);
     }
 
 }
 
-class AshenSkinZuberaWatcher extends WatcherImpl<AshenSkinZuberaWatcher> {
+class SilentChantZuberaWatcher extends WatcherImpl<SilentChantZuberaWatcher> {
 
     public int zuberasDiedThisTurn = 0;
 
-    public AshenSkinZuberaWatcher(UUID controllerId) {
-        super("ZuberasDiedAshenSkinZubera", controllerId);
+    public SilentChantZuberaWatcher(UUID controllerId) {
+        super("ZuberasDiedSilentChantZubera", controllerId);
     }
 
-    public AshenSkinZuberaWatcher(final AshenSkinZuberaWatcher watcher) {
+    public SilentChantZuberaWatcher(final SilentChantZuberaWatcher watcher) {
         super(watcher);
     }
 
     @Override
-    public AshenSkinZuberaWatcher copy() {
-        return new AshenSkinZuberaWatcher(this);
+    public SilentChantZuberaWatcher copy() {
+        return new SilentChantZuberaWatcher(this);
     }
 
     @Override
@@ -115,22 +114,22 @@ class AshenSkinZuberaWatcher extends WatcherImpl<AshenSkinZuberaWatcher> {
 
 }
 
-class AshenSkinZuberaDynamicValue implements DynamicValue {
+class SilentChantZuberaDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility) {
-        Watcher watcher = game.getState().getWatchers().get(sourceAbility.getControllerId(), "ZuberasDiedAshenSkinZubera");
-        return ((AshenSkinZuberaWatcher) watcher).zuberasDiedThisTurn;
+        Watcher watcher = game.getState().getWatchers().get(sourceAbility.getControllerId(), "ZuberasDiedSilentChantZubera");
+        return ((SilentChantZuberaWatcher) watcher).zuberasDiedThisTurn;
     }
 
     @Override
     public DynamicValue clone() {
-        return new AshenSkinZuberaDynamicValue();
+        return new SilentChantZuberaDynamicValue();
     }
 
     @Override
     public String toString() {
-        return "a";
+        return "2";
     }
 
     @Override

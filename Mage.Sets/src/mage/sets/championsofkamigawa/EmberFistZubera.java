@@ -37,15 +37,12 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.Watcher;
 import mage.watchers.WatcherImpl;
@@ -139,7 +136,7 @@ class EmberFistZuberaDynamicValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "Zubera put into all graveyards from the battlefield this turn";
+        return "Zubera put into all graveyards from play this turn";
     }
 }
 

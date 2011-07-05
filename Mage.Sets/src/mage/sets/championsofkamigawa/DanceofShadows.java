@@ -33,50 +33,33 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author Loki
  */
-public class AzamiLadyofScrolls extends CardImpl<AzamiLadyofScrolls> {
+public class DanceofShadows extends CardImpl<DanceofShadows> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
-
-        static {
-            filter.setTapped(false);
-            filter.setUseTapped(true);
-            filter.getSubtype().add("Wizard");
-            filter.setScopeCardType(Filter.ComparisonScope.Any);
-            filter.setScopeSubtype(Filter.ComparisonScope.Any);
-        }
-
-    public AzamiLadyofScrolls (UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
+    public DanceofShadows (UUID ownerId) {
+        super(ownerId, 108, "Dance of Shadows", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-		this.color.setBlue(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+        this.subtype.add("Arcane");
+		this.color.setBlack(true);
+        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 0, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FearAbility.getInstance(), Constants.Duration.EndOfTurn));
     }
 
-    public AzamiLadyofScrolls (final AzamiLadyofScrolls card) {
+    public DanceofShadows (final DanceofShadows card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyofScrolls copy() {
-        return new AzamiLadyofScrolls(this);
+    public DanceofShadows copy() {
+        return new DanceofShadows(this);
     }
 
 }

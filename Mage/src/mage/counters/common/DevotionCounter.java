@@ -2,6 +2,11 @@ package mage.counters.common;
 
 import mage.counters.Counter;
 
+/**
+ * Devotion counter.
+ *
+ * @author Loki
+ */
 public class DevotionCounter extends Counter<DevotionCounter> {
 
     public DevotionCounter() {

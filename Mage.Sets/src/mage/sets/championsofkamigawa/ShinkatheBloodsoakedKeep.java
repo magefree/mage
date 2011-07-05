@@ -33,50 +33,48 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.TargetPermanent;
 
 /**
- *
  * @author Loki
  */
-public class AzamiLadyofScrolls extends CardImpl<AzamiLadyofScrolls> {
+public class ShinkatheBloodsoakedKeep extends CardImpl<ShinkatheBloodsoakedKeep> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
+    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("legendary creature");
 
-        static {
-            filter.setTapped(false);
-            filter.setUseTapped(true);
-            filter.getSubtype().add("Wizard");
-            filter.setScopeCardType(Filter.ComparisonScope.Any);
-            filter.setScopeSubtype(Filter.ComparisonScope.Any);
-        }
-
-    public AzamiLadyofScrolls (UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-		this.color.setBlue(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+    static {
+        filter.getSupertype().add("Legendary");
+        filter.setScopeSupertype(Filter.ComparisonScope.Any);
     }
 
-    public AzamiLadyofScrolls (final AzamiLadyofScrolls card) {
+    public ShinkatheBloodsoakedKeep(UUID ownerId) {
+        super(ownerId, 282, "Shinka, the Bloodsoaked Keep", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "CHK";
+        this.supertype.add("Legendary");
+        this.addAbility(new RedManaAbility());
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Constants.Duration.EndOfTurn), new ColoredManaCost(Constants.ColoredManaSymbol.R));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public ShinkatheBloodsoakedKeep(final ShinkatheBloodsoakedKeep card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyofScrolls copy() {
-        return new AzamiLadyofScrolls(this);
+    public ShinkatheBloodsoakedKeep copy() {
+        return new ShinkatheBloodsoakedKeep(this);
     }
 
 }

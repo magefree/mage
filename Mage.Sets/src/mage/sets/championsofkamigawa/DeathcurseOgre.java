@@ -34,49 +34,68 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
  * @author Loki
  */
-public class AzamiLadyofScrolls extends CardImpl<AzamiLadyofScrolls> {
+public class DeathcurseOgre extends CardImpl<DeathcurseOgre> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
-
-        static {
-            filter.setTapped(false);
-            filter.setUseTapped(true);
-            filter.getSubtype().add("Wizard");
-            filter.setScopeCardType(Filter.ComparisonScope.Any);
-            filter.setScopeSubtype(Filter.ComparisonScope.Any);
-        }
-
-    public AzamiLadyofScrolls (UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
+    public DeathcurseOgre (UUID ownerId) {
+        super(ownerId, 109, "Deathcurse Ogre", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
         this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-		this.color.setBlue(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+        this.subtype.add("Ogre");
+        this.subtype.add("Warrior");
+		this.color.setBlack(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DeathcurseOgreEffect()));
     }
 
-    public AzamiLadyofScrolls (final AzamiLadyofScrolls card) {
+    public DeathcurseOgre (final DeathcurseOgre card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyofScrolls copy() {
-        return new AzamiLadyofScrolls(this);
+    public DeathcurseOgre copy() {
+        return new DeathcurseOgre(this);
     }
+
+}
+
+class DeathcurseOgreEffect extends OneShotEffect<DeathcurseOgreEffect> {
+
+	public DeathcurseOgreEffect() {
+		super(Constants.Outcome.Damage);
+	}
+
+	public DeathcurseOgreEffect(final DeathcurseOgreEffect effect) {
+		super(effect);
+	}
+
+	@Override
+	public DeathcurseOgreEffect copy() {
+		return new DeathcurseOgreEffect(this);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		for (Player player: game.getPlayers().values()) {
+			player.loseLife(3, game);
+		}
+		return true;
+	}
+
+	@Override
+	public String getText(Ability source) {
+		return "each player loses 3 life";
+	}
+
 
 }

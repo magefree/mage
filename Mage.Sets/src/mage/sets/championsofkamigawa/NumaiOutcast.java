@@ -56,7 +56,7 @@ public class NumaiOutcast extends CardImpl<NumaiOutcast> {
 		this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new BushidoAbility(1));
+        this.addAbility(new BushidoAbility(2));
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.B));
         ability.addCost(new PayLifeCost(5));
         this.addAbility(ability);

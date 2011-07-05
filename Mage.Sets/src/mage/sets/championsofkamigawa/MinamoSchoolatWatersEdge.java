@@ -33,50 +33,49 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author Loki
  */
-public class AzamiLadyofScrolls extends CardImpl<AzamiLadyofScrolls> {
+public class MinamoSchoolatWatersEdge extends CardImpl<MinamoSchoolatWatersEdge> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("legendary permanent");
 
-        static {
-            filter.setTapped(false);
-            filter.setUseTapped(true);
-            filter.getSubtype().add("Wizard");
-            filter.setScopeCardType(Filter.ComparisonScope.Any);
-            filter.setScopeSubtype(Filter.ComparisonScope.Any);
-        }
-
-    public AzamiLadyofScrolls (UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-		this.color.setBlue(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+    static {
+        filter.getSupertype().add("Legendary");
+        filter.setScopeSupertype(Filter.ComparisonScope.Any);
     }
 
-    public AzamiLadyofScrolls (final AzamiLadyofScrolls card) {
+
+    public MinamoSchoolatWatersEdge (UUID ownerId) {
+        super(ownerId, 279, "Minamo, School at Water's Edge", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "CHK";
+        this.subtype.add("Legendary");
+        this.addAbility(new BlueManaAbility());
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapTargetEffect(),  new ColoredManaCost(Constants.ColoredManaSymbol.U));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public MinamoSchoolatWatersEdge (final MinamoSchoolatWatersEdge card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyofScrolls copy() {
-        return new AzamiLadyofScrolls(this);
+    public MinamoSchoolatWatersEdge copy() {
+        return new MinamoSchoolatWatersEdge(this);
     }
 
 }

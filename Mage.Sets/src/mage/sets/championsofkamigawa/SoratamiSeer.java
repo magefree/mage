@@ -33,90 +33,89 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.players.Player;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  * @author Loki
  */
-public class AuraofDominion extends CardImpl<AuraofDominion> {
+public class SoratamiSeer extends CardImpl<SoratamiSeer> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("lands");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
+        filter.getCardType().add(CardType.LAND);
         filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-
-    public AuraofDominion(UUID ownerId) {
-        super(ownerId, 51, "Aura of Dominion", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
+    public SoratamiSeer(UUID ownerId) {
+        super(ownerId, 91, "Soratami Seer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.expansionSetCode = "CHK";
-        this.subtype.add("Aura");
+        this.subtype.add("Moonfolk");
+        this.subtype.add("Wizard");
         this.color.setBlue(true);
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Untap));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AuraofDominionEffect(), new GenericManaCost(1));
-        ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
+        this.addAbility(FlyingAbility.getInstance());
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new SoratamiSeerEffect(), new GenericManaCost(4));
+        ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
         this.addAbility(ability);
     }
 
-    public AuraofDominion(final AuraofDominion card) {
+    public SoratamiSeer(final SoratamiSeer card) {
         super(card);
     }
 
     @Override
-    public AuraofDominion copy() {
-        return new AuraofDominion(this);
+    public SoratamiSeer copy() {
+        return new SoratamiSeer(this);
     }
 
 }
 
-class AuraofDominionEffect extends OneShotEffect<AuraofDominionEffect> {
-    AuraofDominionEffect() {
-        super(Constants.Outcome.Untap);
+class SoratamiSeerEffect extends OneShotEffect<SoratamiSeerEffect> {
+
+    public SoratamiSeerEffect() {
+        super(Constants.Outcome.DrawCard);
     }
 
-    AuraofDominionEffect(final AuraofDominionEffect effect) {
+    public SoratamiSeerEffect(final SoratamiSeerEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            Permanent attach = game.getPermanent(permanent.getAttachedTo());
-            if (attach != null) {
-                attach.untap(game);
-                return true;
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            int amount = player.getHand().getCards(game).size();
+            for (Card c : player.getHand().getCards(game)) {
+                player.discard(c, source, game);
             }
+            player.drawCards(amount, game);
+            return true;
         }
         return false;
     }
 
     @Override
-    public AuraofDominionEffect copy() {
-        return new AuraofDominionEffect(this);
+    public SoratamiSeerEffect copy() {
+        return new SoratamiSeerEffect(this);
     }
 
     @Override
     public String getText(Ability source) {
-        return "untap enchanted creature";
+        return "Discard all the cards in your hand, then draw that many cards";
     }
 }

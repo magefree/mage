@@ -43,7 +43,7 @@ import mage.target.TargetSpell;
  */
 public class HisokasDefiance extends CardImpl<HisokasDefiance> {
 
-    private final static FilterSpell filter = new FilterSpell("spirit of arcane spell");
+    private final static FilterSpell filter = new FilterSpell("Spirit or Arcane spell");
 
     static {
         filter.getSubtype().add("Spirit");

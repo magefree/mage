@@ -34,49 +34,49 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
- *
  * @author Loki
  */
-public class AzamiLadyofScrolls extends CardImpl<AzamiLadyofScrolls> {
+public class KodamaoftheSouthTree extends CardImpl<KodamaoftheSouthTree> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
+    private final static FilterCard filter = new FilterCard("a Spirit or Arcane spell");
 
-        static {
-            filter.setTapped(false);
-            filter.setUseTapped(true);
-            filter.getSubtype().add("Wizard");
-            filter.setScopeCardType(Filter.ComparisonScope.Any);
-            filter.setScopeSubtype(Filter.ComparisonScope.Any);
-        }
-
-    public AzamiLadyofScrolls (UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-		this.color.setBlue(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+    static {
+        filter.getSubtype().add("Spirit");
+        filter.getSubtype().add("Arcane");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public AzamiLadyofScrolls (final AzamiLadyofScrolls card) {
+    public KodamaoftheSouthTree(UUID ownerId) {
+        super(ownerId, 223, "Kodama of the South Tree", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        this.expansionSetCode = "CHK";
+        this.supertype.add("Legendary");
+        this.subtype.add("Spirit");
+        this.color.setGreen(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+        Ability ability = new SpellCastTriggeredAbility(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault(), true), filter, false);
+        ability.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault(), true));
+        this.addAbility(ability);
+    }
+
+    public KodamaoftheSouthTree(final KodamaoftheSouthTree card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyofScrolls copy() {
-        return new AzamiLadyofScrolls(this);
+    public KodamaoftheSouthTree copy() {
+        return new KodamaoftheSouthTree(this);
     }
 
 }

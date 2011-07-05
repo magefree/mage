@@ -44,7 +44,11 @@ public class ReturnToHandTargetCost extends CostImpl<ReturnToHandTargetCost> {
 
 	public ReturnToHandTargetCost(TargetControlledPermanent target) {
 		this.addTarget(target);
-		this.text = "return " + target.getTargetName() + " you control to it's owner's hand";
+        if (target.getMaxNumberOfTargets() > 1 && target.getMaxNumberOfTargets() == target.getNumberOfTargets()) {
+            this.text = "return " + target.getMaxNumberOfTargets() + " " + target.getTargetName() + " you control to it's owner's hand";
+        } else {
+		    this.text = "return " + target.getTargetName() + " you control to it's owner's hand";
+        }
 	}
 
 	public ReturnToHandTargetCost(ReturnToHandTargetCost cost) {

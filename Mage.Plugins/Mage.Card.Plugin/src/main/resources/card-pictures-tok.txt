@@ -137,3 +137,5 @@
 |Generate|TOK:10E|Wasp|
 
 |Generate|TOK:CSP|Marit Lage|
+
+|Generate|TOK:CHK|Spirit|

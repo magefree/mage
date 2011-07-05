@@ -37,61 +37,60 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.target.common.TargetOpponent;
+import mage.game.permanent.token.SpiritToken;
 import mage.watchers.Watcher;
 import mage.watchers.WatcherImpl;
 
 /**
+ *
  * @author Loki
  */
-public class AshenSkinZubera extends CardImpl<AshenSkinZubera> {
+public class DrippingTongueZubera extends CardImpl<DrippingTongueZubera> {
 
-    public AshenSkinZubera(UUID ownerId) {
-        super(ownerId, 101, "Ashen-Skin Zubera", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+    public DrippingTongueZubera (UUID ownerId) {
+        super(ownerId, 206, "Dripping-Tongue Zubera", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Zubera");
         this.subtype.add("Spirit");
-        this.color.setBlack(true);
+		this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        Ability ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new DiscardTargetEffect(new AshenSkinZuberaDynamicValue()));
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
-        this.watchers.add(new AshenSkinZuberaWatcher(ownerId));
+        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new CreateTokenEffect(new SpiritToken(), new DrippingTongueZuberaDynamicValue()), false));
+        this.watchers.add(new DrippingTongueZuberaWatcher(ownerId));
     }
 
-    public AshenSkinZubera(final AshenSkinZubera card) {
+    public DrippingTongueZubera (final DrippingTongueZubera card) {
         super(card);
     }
 
     @Override
-    public AshenSkinZubera copy() {
-        return new AshenSkinZubera(this);
+    public DrippingTongueZubera copy() {
+        return new DrippingTongueZubera(this);
     }
 
 }
 
-class AshenSkinZuberaWatcher extends WatcherImpl<AshenSkinZuberaWatcher> {
+class DrippingTongueZuberaWatcher extends WatcherImpl<DrippingTongueZuberaWatcher> {
 
     public int zuberasDiedThisTurn = 0;
 
-    public AshenSkinZuberaWatcher(UUID controllerId) {
-        super("ZuberasDiedAshenSkinZubera", controllerId);
+    public DrippingTongueZuberaWatcher(UUID controllerId) {
+        super("ZuberasDiedDrippingTongueZubera", controllerId);
     }
 
-    public AshenSkinZuberaWatcher(final AshenSkinZuberaWatcher watcher) {
+    public DrippingTongueZuberaWatcher(final DrippingTongueZuberaWatcher watcher) {
         super(watcher);
     }
 
     @Override
-    public AshenSkinZuberaWatcher copy() {
-        return new AshenSkinZuberaWatcher(this);
+    public DrippingTongueZuberaWatcher copy() {
+        return new DrippingTongueZuberaWatcher(this);
     }
 
     @Override
@@ -115,22 +114,22 @@ class AshenSkinZuberaWatcher extends WatcherImpl<AshenSkinZuberaWatcher> {
 
 }
 
-class AshenSkinZuberaDynamicValue implements DynamicValue {
+class DrippingTongueZuberaDynamicValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility) {
-        Watcher watcher = game.getState().getWatchers().get(sourceAbility.getControllerId(), "ZuberasDiedAshenSkinZubera");
-        return ((AshenSkinZuberaWatcher) watcher).zuberasDiedThisTurn;
+        Watcher watcher = game.getState().getWatchers().get(sourceAbility.getControllerId(), "ZuberasDiedDrippingTongueZubera");
+        return ((DrippingTongueZuberaWatcher) watcher).zuberasDiedThisTurn;
     }
 
     @Override
     public DynamicValue clone() {
-        return new AshenSkinZuberaDynamicValue();
+        return new DrippingTongueZuberaDynamicValue();
     }
 
     @Override
     public String toString() {
-        return "a";
+        return "1";
     }
 
     @Override

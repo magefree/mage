@@ -36,17 +36,18 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastTriggeredAbility;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
-import mage.target.common.TargetCreaturePermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.target.common.TargetLandPermanent;
 
 /**
  * @author Loki
  */
-public class GuardianofSolitude extends CardImpl<GuardianofSolitude> {
+public class Soilshaper extends CardImpl<Soilshaper> {
 
     private final static FilterCard filter = new FilterCard("a Spirit or Arcane spell");
 
@@ -56,25 +57,77 @@ public class GuardianofSolitude extends CardImpl<GuardianofSolitude> {
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public GuardianofSolitude(UUID ownerId) {
-        super(ownerId, 64, "Guardian of Solitude", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+    public Soilshaper(UUID ownerId) {
+        super(ownerId, 243, "Soilshaper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setBlue(true);
+        this.color.setGreen(true);
         this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
-        Ability ability = new SpellCastTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn), filter, false);
-        ability.addTarget(new TargetCreaturePermanent());
+        this.toughness = new MageInt(1);
+        Ability ability = new SpellCastTriggeredAbility(new SoilshaperEffect(), filter, false);
+        ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }
 
-    public GuardianofSolitude(final GuardianofSolitude card) {
+    public Soilshaper(final Soilshaper card) {
         super(card);
     }
 
     @Override
-    public GuardianofSolitude copy() {
-        return new GuardianofSolitude(this);
+    public Soilshaper copy() {
+        return new Soilshaper(this);
     }
 
+}
+
+class SoilshaperEffect extends ContinuousEffectImpl<SoilshaperEffect> {
+
+    public SoilshaperEffect() {
+        super(Constants.Duration.EndOfTurn, Constants.Outcome.BecomeCreature);
+    }
+
+    public SoilshaperEffect(final SoilshaperEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent != null) {
+            switch (layer) {
+                case TypeChangingEffects_4:
+                    if (sublayer == Constants.SubLayer.NA) {
+                        permanent.getCardType().add(CardType.CREATURE);
+                    }
+                    break;
+                case PTChangingEffects_7:
+                    if (sublayer == Constants.SubLayer.SetPT_7b) {
+                        permanent.getPower().setValue(3);
+                        permanent.getToughness().setValue(3);
+                    }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public SoilshaperEffect copy() {
+        return new SoilshaperEffect(this);
+    }
+
+    @Override
+    public boolean hasLayer(Constants.Layer layer) {
+        return layer == Constants.Layer.PTChangingEffects_7 || layer == Constants.Layer.ColorChangingEffects_5 || layer == layer.TypeChangingEffects_4;
+    }
+
+    @Override
+    public String getText(Ability source) {
+        return "target land becomes a 3/3 creature until end of turn. It's still a land";
+    }
 }

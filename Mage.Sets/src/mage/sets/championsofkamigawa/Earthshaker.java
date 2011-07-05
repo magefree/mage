@@ -46,7 +46,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class Earthshaker extends CardImpl<Earthshaker> {
 
-    private final static FilterCard filter = new FilterCard("spirit of arcane spell");
+    private final static FilterCard filter = new FilterCard("a Spirit or Arcane spell");
 
     static {
         filter.getSubtype().add("Spirit");

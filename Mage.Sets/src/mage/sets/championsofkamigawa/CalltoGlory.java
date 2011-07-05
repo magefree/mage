@@ -30,42 +30,81 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.FilterCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  * @author Loki
  */
-public class EerieProcession extends CardImpl<EerieProcession> {
+public class CalltoGlory extends CardImpl<CalltoGlory> {
 
-    private final static FilterCard filter = new FilterCard("Arcane card");
+
+private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Samurai");
 
     static {
-        filter.getSubtype().add("Arcane");
+        filter.getSubtype().add("Samurai");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public EerieProcession(UUID ownerId) {
-        super(ownerId, 58, "Eerie Procession", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
+        public CalltoGlory(UUID ownerId) {
+        super(ownerId, 4, "Call to Glory", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "CHK";
-        this.subtype.add("Arcane");
-        this.color.setBlue(true);
-        TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        this.getSpellAbility().addEffect(new SearchLibraryRevealPutInHandEffect(target));
+        this.color.setWhite(true);
+        this.getSpellAbility().addEffect(new CalltoGloryFirstEffect());
+        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn, filter, false));
     }
 
-    public EerieProcession(final EerieProcession card) {
+    public CalltoGlory(final CalltoGlory card) {
         super(card);
     }
 
     @Override
-    public EerieProcession copy() {
-        return new EerieProcession(this);
+    public CalltoGlory copy() {
+        return new CalltoGlory(this);
     }
 
+}
+
+
+class CalltoGloryFirstEffect extends OneShotEffect<CalltoGloryFirstEffect> {
+
+    public CalltoGloryFirstEffect() {
+        super(Constants.Outcome.Untap);
+    }
+
+    public CalltoGloryFirstEffect(final CalltoGloryFirstEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            for (Permanent creature : game.getBattlefield().getAllActivePermanents(FilterCreaturePermanent.getDefault(), player.getId())) {
+                creature.untap(game);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public CalltoGloryFirstEffect copy() {
+        return new CalltoGloryFirstEffect(this);
+    }
+
+    @Override
+    public String getText(Ability source) {
+        return "Untap all creatures you control";
+    }
 }
