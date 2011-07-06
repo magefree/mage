@@ -249,7 +249,6 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 				int count = cards.count(target.getFilter(), game);
 				if (count == 0) required = false;
 			}
-			System.out.println("required: " + required);
 			game.fireSelectTargetEvent(playerId, target.getMessage(), cards, required);
 			waitForResponse();
 			if (response.getUUID() != null) {
