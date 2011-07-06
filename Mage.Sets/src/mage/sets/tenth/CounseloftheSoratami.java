@@ -44,8 +44,7 @@ public class CounseloftheSoratami extends mage.sets.championsofkamigawa.Counselo
         super(ownerId);
         this.expansionSetCode = "10E";
         this.cardNumber = 76;
-		this.color.setBlue(true);
-        
+
     }
 
     public CounseloftheSoratami (final CounseloftheSoratami card) {

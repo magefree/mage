@@ -1,3 +1,5 @@
+package mage.sets.championsofkamigawa;
+
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
@@ -26,56 +28,48 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+import mage.Constants;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterBasicLandCard;
+import mage.game.Game;
+import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.mana.BlueManaAbility;
-import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterPermanent;
-import mage.target.TargetPermanent;
-
 /**
- *
  * @author Loki
  */
-public class MinamoSchoolatWatersEdge extends CardImpl<MinamoSchoolatWatersEdge> {
+public class SakuraTribeElder extends CardImpl<SakuraTribeElder> {
 
-    private final static FilterPermanent filter = new FilterPermanent("legendary permanent");
+    final static FilterBasicLandCard filterLands = new FilterBasicLandCard();
 
-    static {
-        filter.getSupertype().add("Legendary");
-        filter.setScopeSupertype(Filter.ComparisonScope.Any);
-    }
-
-
-    public MinamoSchoolatWatersEdge (UUID ownerId) {
-        super(ownerId, 279, "Minamo, School at Water's Edge", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+    public SakuraTribeElder(UUID ownerId) {
+        super(ownerId, 239, "Sakura-Tribe Elder", Constants.Rarity.COMMON, new Constants.CardType[]{Constants.CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "CHK";
-        this.subtype.add("Legendary");
-        this.addAbility(new BlueManaAbility());
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapTargetEffect(),  new ColoredManaCost(Constants.ColoredManaSymbol.U));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability);
+        this.subtype.add("Snake");
+        this.subtype.add("Shaman");
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        TargetCardInLibrary target = new TargetCardInLibrary(filterLands);
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, true, Constants.Outcome.PutLandInPlay), new SacrificeSourceCost()));
     }
 
-    public MinamoSchoolatWatersEdge (final MinamoSchoolatWatersEdge card) {
+    public SakuraTribeElder(final SakuraTribeElder card) {
         super(card);
     }
 
     @Override
-    public MinamoSchoolatWatersEdge copy() {
-        return new MinamoSchoolatWatersEdge(this);
+    public SakuraTribeElder copy() {
+        return new SakuraTribeElder(this);
     }
 
 }

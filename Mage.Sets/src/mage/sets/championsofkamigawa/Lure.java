@@ -34,48 +34,42 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.mana.BlueManaAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.MustBlockSourceEffect;
+import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class MinamoSchoolatWatersEdge extends CardImpl<MinamoSchoolatWatersEdge> {
+public class Lure extends CardImpl<Lure> {
 
-    private final static FilterPermanent filter = new FilterPermanent("legendary permanent");
-
-    static {
-        filter.getSupertype().add("Legendary");
-        filter.setScopeSupertype(Filter.ComparisonScope.Any);
-    }
-
-
-    public MinamoSchoolatWatersEdge (UUID ownerId) {
-        super(ownerId, 279, "Minamo, School at Water's Edge", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+    public Lure (UUID ownerId) {
+        super(ownerId, 226, "Lure", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
         this.expansionSetCode = "CHK";
-        this.subtype.add("Legendary");
-        this.addAbility(new BlueManaAbility());
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapTargetEffect(),  new ColoredManaCost(Constants.ColoredManaSymbol.U));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability);
+        this.subtype.add("Aura");
+		this.color.setGreen(true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+		this.getSpellAbility().addTarget(auraTarget);
+		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+		Ability ability = new EnchantAbility(auraTarget.getTargetName());
+		this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new MustBlockSourceEffect()), Constants.AttachmentType.AURA)));
     }
 
-    public MinamoSchoolatWatersEdge (final MinamoSchoolatWatersEdge card) {
+    public Lure (final Lure card) {
         super(card);
     }
 
     @Override
-    public MinamoSchoolatWatersEdge copy() {
-        return new MinamoSchoolatWatersEdge(this);
+    public Lure copy() {
+        return new Lure(this);
     }
 
 }

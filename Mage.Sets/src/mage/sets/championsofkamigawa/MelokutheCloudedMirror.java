@@ -88,6 +88,7 @@ class MelokutheCloudedMirrorToken extends Token {
     MelokutheCloudedMirrorToken() {
         super("", "a 1/1 blue Illusion creature token with flying");
         cardType.add(CardType.CREATURE);
+        color.setBlue(true);
         subtype.add("Illusion");
         power = new MageInt(1);
         toughness = new MageInt(1);

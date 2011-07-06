@@ -26,56 +26,33 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.sets.tenth;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterPermanent;
-import mage.target.TargetPermanent;
 
 /**
  *
- * @author Loki
+ * @author Loki>
  */
-public class MinamoSchoolatWatersEdge extends CardImpl<MinamoSchoolatWatersEdge> {
+public class Lure extends mage.sets.championsofkamigawa.Lure {
 
-    private final static FilterPermanent filter = new FilterPermanent("legendary permanent");
+    public Lure (UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 276;
+        this.expansionSetCode = "10E";
 
-    static {
-        filter.getSupertype().add("Legendary");
-        filter.setScopeSupertype(Filter.ComparisonScope.Any);
     }
 
-
-    public MinamoSchoolatWatersEdge (UUID ownerId) {
-        super(ownerId, 279, "Minamo, School at Water's Edge", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Legendary");
-        this.addAbility(new BlueManaAbility());
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapTargetEffect(),  new ColoredManaCost(Constants.ColoredManaSymbol.U));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability);
-    }
-
-    public MinamoSchoolatWatersEdge (final MinamoSchoolatWatersEdge card) {
+    public Lure (final Lure card) {
         super(card);
     }
 
     @Override
-    public MinamoSchoolatWatersEdge copy() {
-        return new MinamoSchoolatWatersEdge(this);
+    public Lure copy() {
+        return new Lure(this);
     }
 
 }

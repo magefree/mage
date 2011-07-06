@@ -37,45 +37,44 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.mana.BlueManaAbility;
+import mage.abilities.effects.common.PreventDamageTargetEffect;
+import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 
 /**
- *
  * @author Loki
  */
-public class MinamoSchoolatWatersEdge extends CardImpl<MinamoSchoolatWatersEdge> {
+public class EiganjoCastle extends CardImpl<EiganjoCastle> {
 
-    private final static FilterPermanent filter = new FilterPermanent("legendary permanent");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
 
     static {
         filter.getSupertype().add("Legendary");
         filter.setScopeSupertype(Filter.ComparisonScope.Any);
     }
 
-
-    public MinamoSchoolatWatersEdge (UUID ownerId) {
-        super(ownerId, 279, "Minamo, School at Water's Edge", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+    public EiganjoCastle(UUID ownerId) {
+        super(ownerId, 275, "Eiganjo Castle", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "CHK";
-        this.subtype.add("Legendary");
-        this.addAbility(new BlueManaAbility());
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapTargetEffect(),  new ColoredManaCost(Constants.ColoredManaSymbol.U));
+        this.supertype.add("Legendary");
+        this.addAbility(new WhiteManaAbility());
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PreventDamageTargetEffect(Constants.Duration.EndOfTurn, 2), new ColoredManaCost(Constants.ColoredManaSymbol.W));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
-    public MinamoSchoolatWatersEdge (final MinamoSchoolatWatersEdge card) {
+
+    public EiganjoCastle(final EiganjoCastle card) {
         super(card);
     }
 
     @Override
-    public MinamoSchoolatWatersEdge copy() {
-        return new MinamoSchoolatWatersEdge(this);
+    public EiganjoCastle copy() {
+        return new EiganjoCastle(this);
     }
 
 }

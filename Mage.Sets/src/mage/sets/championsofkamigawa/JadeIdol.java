@@ -30,6 +30,7 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;

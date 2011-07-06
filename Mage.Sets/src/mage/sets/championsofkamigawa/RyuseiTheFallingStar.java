@@ -1,3 +1,5 @@
+package mage.sets.championsofkamigawa;
+
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
@@ -26,56 +28,48 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+import mage.Constants;
+import mage.MageInt;
+import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.mana.BlueManaAbility;
-import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterPermanent;
-import mage.target.TargetPermanent;
-
 /**
- *
  * @author Loki
  */
-public class MinamoSchoolatWatersEdge extends CardImpl<MinamoSchoolatWatersEdge> {
+public class RyuseiTheFallingStar extends CardImpl<RyuseiTheFallingStar> {
 
-    private final static FilterPermanent filter = new FilterPermanent("legendary permanent");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
 
     static {
-        filter.getSupertype().add("Legendary");
-        filter.setScopeSupertype(Filter.ComparisonScope.Any);
+        filter.getAbilities().add(FlyingAbility.getInstance());
+        filter.setNotAbilities(true);
     }
 
-
-    public MinamoSchoolatWatersEdge (UUID ownerId) {
-        super(ownerId, 279, "Minamo, School at Water's Edge", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+    public RyuseiTheFallingStar(UUID ownerID) {
+        super(ownerID, 185, "Ryusei, The Falling Star", Constants.Rarity.RARE, new Constants.CardType[]{Constants.CardType.CREATURE}, "{5}{R}");
         this.expansionSetCode = "CHK";
-        this.subtype.add("Legendary");
-        this.addAbility(new BlueManaAbility());
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapTargetEffect(),  new ColoredManaCost(Constants.ColoredManaSymbol.U));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability);
+        this.supertype.add("Legendary");
+        this.subtype.add("Dragon");
+        this.subtype.add("Spirit");
+        this.color.setRed(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DamageAllEffect(5, filter)));
     }
 
-    public MinamoSchoolatWatersEdge (final MinamoSchoolatWatersEdge card) {
+    public RyuseiTheFallingStar(final RyuseiTheFallingStar card) {
         super(card);
     }
 
     @Override
-    public MinamoSchoolatWatersEdge copy() {
-        return new MinamoSchoolatWatersEdge(this);
+    public RyuseiTheFallingStar copy() {
+        return new RyuseiTheFallingStar(this);
     }
 
 }

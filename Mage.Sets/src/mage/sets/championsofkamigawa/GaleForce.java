@@ -29,6 +29,7 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
+
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -37,25 +38,24 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
- *
  * @author Loki
  */
 public class GaleForce extends CardImpl<GaleForce> {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 
-        static {
-            filter.getAbilities().add(FlyingAbility.getInstance());
-        }
+    static {
+        filter.getAbilities().add(FlyingAbility.getInstance());
+    }
 
-        public GaleForce (UUID ownerId) {
+    public GaleForce(UUID ownerId) {
         super(ownerId, 209, "Gale Force", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");
         this.expansionSetCode = "CHK";
-		this.color.setGreen(true);
+        this.color.setGreen(true);
         this.getSpellAbility().addEffect(new DamageAllEffect(5, filter));
     }
 
-    public GaleForce (final GaleForce card) {
+    public GaleForce(final GaleForce card) {
         super(card);
     }
 

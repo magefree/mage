@@ -42,7 +42,7 @@ import mage.abilities.keyword.FearAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  */
 public class ShizoDeathsStorehouse extends CardImpl<ShizoDeathsStorehouse> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("legendary creature");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
 
     static {
         filter.getSupertype().add("Legendary");
@@ -58,7 +58,7 @@ public class ShizoDeathsStorehouse extends CardImpl<ShizoDeathsStorehouse> {
     }
 
     public ShizoDeathsStorehouse(UUID ownerId) {
-        super(ownerId, 283, "Shizo, Death's Storehouse", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        super(ownerId, 283, "Shizo, Death's Storehouse", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "CHK";
         this.subtype.add("Legendary");
         this.addAbility(new BlackManaAbility());

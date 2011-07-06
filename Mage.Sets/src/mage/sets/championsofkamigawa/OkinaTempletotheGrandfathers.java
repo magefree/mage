@@ -41,7 +41,7 @@ import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  */
 public class OkinaTempletotheGrandfathers extends CardImpl<OkinaTempletotheGrandfathers> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("legendary creature");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
 
     static {
         filter.getSupertype().add("Legendary");

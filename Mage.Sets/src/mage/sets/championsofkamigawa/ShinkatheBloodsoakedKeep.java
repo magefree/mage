@@ -42,7 +42,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  */
 public class ShinkatheBloodsoakedKeep extends CardImpl<ShinkatheBloodsoakedKeep> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("legendary creature");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
 
     static {
         filter.getSupertype().add("Legendary");
@@ -58,7 +58,7 @@ public class ShinkatheBloodsoakedKeep extends CardImpl<ShinkatheBloodsoakedKeep>
     }
 
     public ShinkatheBloodsoakedKeep(UUID ownerId) {
-        super(ownerId, 282, "Shinka, the Bloodsoaked Keep", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        super(ownerId, 282, "Shinka, the Bloodsoaked Keep", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
         this.addAbility(new RedManaAbility());
