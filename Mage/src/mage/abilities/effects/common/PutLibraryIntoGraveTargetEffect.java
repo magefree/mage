@@ -94,7 +94,7 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect<PutLibraryInt
 		sb.append("of his or her library into his or her graveyard");
         String message = amount.getMessage();
         if (message.length() > 0) {
-            sb.append(", where X is the number of  ");
+            sb.append(", where X is the number of ");
         }
         sb.append(message);
 		return sb.toString();

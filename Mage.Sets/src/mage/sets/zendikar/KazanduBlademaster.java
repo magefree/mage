@@ -25,41 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterArtifactCard;
-import mage.target.TargetPlayer;
+import mage.counters.CounterType;
 
 /**
  *
  * @author North
  */
-public class ScrapyardSalvo extends CardImpl<ScrapyardSalvo> {
+public class KazanduBlademaster extends CardImpl<KazanduBlademaster> {
 
-    private static final FilterArtifactCard filter = new FilterArtifactCard("artifact cards");
+    public KazanduBlademaster(UUID ownerId) {
+        super(ownerId, 16, "Kazandu Blademaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+        this.subtype.add("Ally");
 
-    public ScrapyardSalvo(UUID ownerId) {
-        super(ownerId, 94, "Scrapyard Salvo", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
-        this.expansionSetCode = "NPH";
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        this.color.setRed(true);
-
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new CardsInControllerGraveyardCount(filter)));
+        this.addAbility(FirstStrikeAbility.getInstance());
+        this.addAbility(VigilanceAbility.getInstance());
+        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
     }
 
-    public ScrapyardSalvo(final ScrapyardSalvo card) {
+    public KazanduBlademaster(final KazanduBlademaster card) {
         super(card);
     }
 
     @Override
-    public ScrapyardSalvo copy() {
-        return new ScrapyardSalvo(this);
+    public KazanduBlademaster copy() {
+        return new KazanduBlademaster(this);
     }
 }

@@ -25,41 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterArtifactCard;
-import mage.target.TargetPlayer;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
  * @author North
  */
-public class ScrapyardSalvo extends CardImpl<ScrapyardSalvo> {
+public class OnduCleric extends CardImpl<OnduCleric> {
 
-    private static final FilterArtifactCard filter = new FilterArtifactCard("artifact cards");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Allies you control");
 
-    public ScrapyardSalvo(UUID ownerId) {
-        super(ownerId, 94, "Scrapyard Salvo", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
-        this.expansionSetCode = "NPH";
-
-        this.color.setRed(true);
-
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new CardsInControllerGraveyardCount(filter)));
+    static {
+        filter.getSubtype().add("Ally");
     }
 
-    public ScrapyardSalvo(final ScrapyardSalvo card) {
+    public OnduCleric(UUID ownerId) {
+        super(ownerId, 30, "Ondu Cleric", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Kor");
+        this.subtype.add("Cleric");
+        this.subtype.add("Ally");
+
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)), true));
+    }
+
+    public OnduCleric(final OnduCleric card) {
         super(card);
     }
 
     @Override
-    public ScrapyardSalvo copy() {
-        return new ScrapyardSalvo(this);
+    public OnduCleric copy() {
+        return new OnduCleric(this);
     }
 }

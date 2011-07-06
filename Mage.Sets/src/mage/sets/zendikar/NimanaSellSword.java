@@ -25,41 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterArtifactCard;
-import mage.target.TargetPlayer;
+import mage.counters.CounterType;
 
 /**
  *
  * @author North
  */
-public class ScrapyardSalvo extends CardImpl<ScrapyardSalvo> {
+public class NimanaSellSword extends CardImpl<NimanaSellSword> {
 
-    private static final FilterArtifactCard filter = new FilterArtifactCard("artifact cards");
+    public NimanaSellSword(UUID ownerId) {
+        super(ownerId, 106, "Nimana Sell-Sword", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
+        this.subtype.add("Ally");
 
-    public ScrapyardSalvo(UUID ownerId) {
-        super(ownerId, 94, "Scrapyard Salvo", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
-        this.expansionSetCode = "NPH";
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        this.color.setRed(true);
-
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new CardsInControllerGraveyardCount(filter)));
+        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
     }
 
-    public ScrapyardSalvo(final ScrapyardSalvo card) {
+    public NimanaSellSword(final NimanaSellSword card) {
         super(card);
     }
 
     @Override
-    public ScrapyardSalvo copy() {
-        return new ScrapyardSalvo(this);
+    public NimanaSellSword copy() {
+        return new NimanaSellSword(this);
     }
 }

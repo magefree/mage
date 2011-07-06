@@ -25,41 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.Constants.TargetController;
+import mage.MageInt;
+import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterArtifactCard;
-import mage.target.TargetPlayer;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author North
  */
-public class ScrapyardSalvo extends CardImpl<ScrapyardSalvo> {
+public class JoragaBard extends CardImpl<JoragaBard> {
 
-    private static final FilterArtifactCard filter = new FilterArtifactCard("artifact cards");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Ally creatures you control");
 
-    public ScrapyardSalvo(UUID ownerId) {
-        super(ownerId, 94, "Scrapyard Salvo", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
-        this.expansionSetCode = "NPH";
-
-        this.color.setRed(true);
-
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new CardsInControllerGraveyardCount(filter)));
+    static {
+        filter.getSubtype().add("Ally");
+        filter.setTargetController(TargetController.YOU);
     }
 
-    public ScrapyardSalvo(final ScrapyardSalvo card) {
+    public JoragaBard(UUID ownerId) {
+        super(ownerId, 166, "Joraga Bard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Elf");
+        this.subtype.add("Rogue");
+        this.subtype.add("Ally");
+
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(4);
+
+        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new GainAbilityAllEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, filter), true));
+    }
+
+    public JoragaBard(final JoragaBard card) {
         super(card);
     }
 
     @Override
-    public ScrapyardSalvo copy() {
-        return new ScrapyardSalvo(this);
+    public JoragaBard copy() {
+        return new JoragaBard(this);
     }
 }

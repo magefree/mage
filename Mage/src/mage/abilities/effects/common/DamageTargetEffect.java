@@ -40,6 +40,7 @@ import mage.players.Player;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @author North
  */
 public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
 
@@ -103,13 +104,13 @@ public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
         sb.append("{source} deals ");
-        if (message.isEmpty()) {
+        if (message.isEmpty() || !message.equals("1")) {
             sb.append(amount);
         }
         sb.append(" damage to target ");
         sb.append(source.getTargets().get(0).getTargetName());
         if (message.length() > 0) {
-            sb.append(" equal to the number of ");
+            sb.append(message.equals("1") ? " equal to the number of " : " for each ");
             sb.append(message);
         }
         if (!preventable) {

@@ -25,41 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterArtifactCard;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.TargetPlayer;
 
 /**
  *
  * @author North
  */
-public class ScrapyardSalvo extends CardImpl<ScrapyardSalvo> {
+public class HagraDiabolist extends CardImpl<HagraDiabolist> {
 
-    private static final FilterArtifactCard filter = new FilterArtifactCard("artifact cards");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Allies you control");
 
-    public ScrapyardSalvo(UUID ownerId) {
-        super(ownerId, 94, "Scrapyard Salvo", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
-        this.expansionSetCode = "NPH";
-
-        this.color.setRed(true);
-
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new CardsInControllerGraveyardCount(filter)));
+    static {
+        filter.getSubtype().add("Ally");
     }
 
-    public ScrapyardSalvo(final ScrapyardSalvo card) {
+    public HagraDiabolist(UUID ownerId) {
+        super(ownerId, 95, "Hagra Diabolist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Ogre");
+        this.subtype.add("Shaman");
+        this.subtype.add("Ally");
+
+        this.color.setBlack(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
+
+        Ability ability = new AllyEntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(new PermanentsOnBattlefieldCount(filter)), true);
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
+    }
+
+    public HagraDiabolist(final HagraDiabolist card) {
         super(card);
     }
 
     @Override
-    public ScrapyardSalvo copy() {
-        return new ScrapyardSalvo(this);
+    public HagraDiabolist copy() {
+        return new HagraDiabolist(this);
     }
 }

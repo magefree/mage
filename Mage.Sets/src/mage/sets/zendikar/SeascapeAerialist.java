@@ -25,41 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.Constants.TargetController;
+import mage.MageInt;
+import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterArtifactCard;
-import mage.target.TargetPlayer;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author North
  */
-public class ScrapyardSalvo extends CardImpl<ScrapyardSalvo> {
+public class SeascapeAerialist extends CardImpl<SeascapeAerialist> {
 
-    private static final FilterArtifactCard filter = new FilterArtifactCard("artifact cards");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Ally creatures you control");
 
-    public ScrapyardSalvo(UUID ownerId) {
-        super(ownerId, 94, "Scrapyard Salvo", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
-        this.expansionSetCode = "NPH";
-
-        this.color.setRed(true);
-
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new CardsInControllerGraveyardCount(filter)));
+    static {
+        filter.getSubtype().add("Ally");
+        filter.setTargetController(TargetController.YOU);
     }
 
-    public ScrapyardSalvo(final ScrapyardSalvo card) {
+    public SeascapeAerialist(UUID ownerId) {
+        super(ownerId, 64, "Seascape Aerialist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Merfolk");
+        this.subtype.add("Wizard");
+        this.subtype.add("Ally");
+
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
+
+        this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filter), true));
+    }
+
+    public SeascapeAerialist(final SeascapeAerialist card) {
         super(card);
     }
 
     @Override
-    public ScrapyardSalvo copy() {
-        return new ScrapyardSalvo(this);
+    public SeascapeAerialist copy() {
+        return new SeascapeAerialist(this);
     }
 }
