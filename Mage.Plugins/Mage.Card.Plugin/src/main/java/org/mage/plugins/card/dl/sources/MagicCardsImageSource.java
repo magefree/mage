@@ -37,6 +37,7 @@ public class MagicCardsImageSource implements CardImageSource {
             put("LRW", "lorwyn");
             put("10E", "tenth-edition");
             put("CSP", "coldsnap");
+            put("CHK", "player-rewards-2004");
         }
         private static final long serialVersionUID = 1L;
     };
