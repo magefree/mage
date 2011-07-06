@@ -102,20 +102,28 @@ abstract public class Animation {
 		}
 	}
 
-	static public void tapCardToggle (final CardPanel panel, final MagePermanent parent) {
+	static public void tapCardToggle (final CardPanel panel, final MagePermanent parent, final boolean tapped, final boolean flipped) {
 		new Animation(300) {
 			protected void start () {
 				parent.onBeginAnimation();
 			}
 
 			protected void update (float percentage) {
-				panel.tappedAngle = CardPanel.TAPPED_ANGLE * percentage;
-				if (!panel.isTapped()) panel.tappedAngle = CardPanel.TAPPED_ANGLE - panel.tappedAngle;
+				if (tapped) {
+					panel.tappedAngle = CardPanel.TAPPED_ANGLE * percentage;
+					// reverse movement if untapping
+					if (!panel.isTapped()) panel.tappedAngle = CardPanel.TAPPED_ANGLE - panel.tappedAngle;
+				}
+				if (flipped) {
+			  		panel.flippedAngle = CardPanel.FLIPPED_ANGLE * percentage;
+					if (!panel.isFlipped()) panel.flippedAngle = CardPanel.FLIPPED_ANGLE - panel.flippedAngle;
+				}
 				panel.repaint();
 			}
 
 			protected void end () {
-				panel.tappedAngle = panel.isTapped() ? CardPanel.TAPPED_ANGLE : 0;
+				if (tapped) panel.tappedAngle = panel.isTapped() ? CardPanel.TAPPED_ANGLE : 0;
+				if (flipped) panel.flippedAngle = panel.isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
 				parent.onEndAnimation();
 				parent.repaint();
 			}

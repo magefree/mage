@@ -455,6 +455,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 	public boolean isTapped() {return false;}
 
 	@Override
+	public boolean isFlipped() {return false;}
+
+	@Override
 	public void onBeginAnimation() {}
 
 	@Override

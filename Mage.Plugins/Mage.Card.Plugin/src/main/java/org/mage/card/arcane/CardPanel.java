@@ -39,6 +39,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     private static final Logger log = Logger.getLogger(CardPanel.class);
 
     static public final double TAPPED_ANGLE = Math.PI / 2;
+	static public final double FLIPPED_ANGLE = Math.PI;
     static public final float ASPECT_RATIO = 3.5f / 2.5f;
     static public final int POPUP_X_GAP = 1; // prevent popup window from blinking
     //static public final float ASPECT_RATIO = 1.0f;
@@ -61,6 +62,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     //public List<CardPanel> attachedPanels = new ArrayList();
     private List<MagePermanent> links = new ArrayList<MagePermanent>();
     public double tappedAngle = 0;
+	public double flippedAngle = 0;
     public ScaledImagePanel imagePanel;
     public ImagePanel overlayPanel;
 
@@ -147,6 +149,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             public void run() {
                 try {
                     tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
+					flippedAngle = isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
                     BufferedImage srcImage = ImageCache.getThumbnail(gameCard);
                     if (srcImage != null) {
                         hasImage = true;
@@ -289,10 +292,10 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         if (!displayEnabled) return;
         if (!isValid()) super.validate();
         Graphics2D g2d = (Graphics2D) g;
-        if (tappedAngle > 0) {
+        if (tappedAngle + flippedAngle > 0) {
             g2d = (Graphics2D) g2d.create();
             float edgeOffset = cardWidth / 2f;
-            g2d.rotate(tappedAngle, cardXOffset + edgeOffset, cardYOffset + cardHeight - edgeOffset);
+            g2d.rotate(tappedAngle+flippedAngle, cardXOffset + edgeOffset, cardYOffset + cardHeight - edgeOffset);
         }
         super.paint(g2d);
     }
@@ -516,6 +519,14 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         return false;
     }
 
+	@Override
+    public boolean isFlipped() {
+        if (isPermanent) {
+            return ((PermanentView) gameCard).isFlipped();
+        }
+        return false;
+    }
+
     @Override
     public void onBeginAnimation() {
     }
@@ -527,8 +538,10 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     @Override
     public void update(CardView card) {
         if (isPermanent) {
-            if (isTapped() != ((PermanentView) card).isTapped()) {
-                Animation.tapCardToggle(this, this);
+			boolean needsTapping = isTapped() != ((PermanentView) card).isTapped();
+			boolean needsFlipping = isFlipped() != ((PermanentView) card).isFlipped();
+            if (needsTapping || needsFlipping) {
+                Animation.tapCardToggle(this, this, needsTapping, needsFlipping);
             }
         }
         if (CardUtil.isCreature(card) && CardUtil.isPlaneswalker(card)) {
