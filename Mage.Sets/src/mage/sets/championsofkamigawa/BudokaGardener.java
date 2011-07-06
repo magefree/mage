@@ -48,7 +48,6 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
