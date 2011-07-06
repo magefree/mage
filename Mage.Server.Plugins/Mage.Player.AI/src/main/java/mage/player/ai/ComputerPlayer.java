@@ -793,6 +793,9 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	@Override
 	public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game)  {
 		logger.debug("choose");
+		if (cards != null && cards.isEmpty()) {
+			return false;
+		}
 		while (!target.doneChosing()) {
 			if (cards.isEmpty()) {
 				if (!target.isRequired())

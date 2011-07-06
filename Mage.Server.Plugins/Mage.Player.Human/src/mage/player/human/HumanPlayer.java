@@ -241,14 +241,23 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	@Override
 	public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
 		while (!abort) {
-			game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired());
+			boolean required = target.isRequired();
+			// if there is no cards to select from, then add possibility to cancel choosing action
+			if (cards == null) {
+				required = false;
+			} else {
+				int count = cards.count(target.getFilter(), game);
+				if (count == 0) required = false;
+			}
+			System.out.println("required: " + required);
+			game.fireSelectTargetEvent(playerId, target.getMessage(), cards, required);
 			waitForResponse();
 			if (response.getUUID() != null) {
 				if (target.canTarget(response.getUUID(), cards, game)) {
 					target.add(response.getUUID(), game);
 					return true;
 				}
-			} else if (!target.isRequired()) {
+			} else if (!required) {
 				return false;
 			}
 		}

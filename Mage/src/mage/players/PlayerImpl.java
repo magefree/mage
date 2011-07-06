@@ -823,7 +823,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		//20091005 - 701.14c
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY, playerId, playerId))) {
 			TargetCardInLibrary newTarget;
-			if (library.count(target.getFilter(), game) < target.getNumberOfTargets())
+			int count = library.count(target.getFilter(), game);
+			if (count < target.getNumberOfTargets())
 				newTarget = new TargetCardInLibrary(library.count(target.getFilter(), game), target.getMaxNumberOfTargets(), target.getFilter());
 			else
 				newTarget = target;
