@@ -210,11 +210,17 @@ public class GameSession extends GameWatcher {
 	}
 
 	public void removeGame() {
-		UserManager.getInstance().getUser(userId).removeGame(playerId);
+		User user = UserManager.getInstance().getUser(userId);
+		if (user != null)
+			user.removeGame(playerId);
 	}
 
 	public UUID getGameId() {
 		return game.getId();
+	}
+	
+	public void kill() {
+		game.quit(playerId);
 	}
 
 }

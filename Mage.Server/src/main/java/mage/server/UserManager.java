@@ -27,15 +27,26 @@
  */
 package mage.server;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import mage.view.ChatMessage.MessageColor;
 
 /**
  *
+ * manages users - if a user is disconnected and 10 minutes have passed with no
+ * activity the user is removed
+ * 
  * @author BetaSteward_at_googlemail.com
  */
 public class UserManager {
+
+	protected static ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
 
 	private final static UserManager INSTANCE = new UserManager();
 
@@ -43,7 +54,14 @@ public class UserManager {
 		return INSTANCE;
 	}
 
-	private UserManager() {}
+	private UserManager() {
+		expireExecutor.scheduleAtFixedRate(new Runnable() {
+			@Override
+			public void run() {
+				checkExpired();
+			}
+		}, 60, 60, TimeUnit.SECONDS);
+	}
 
 	private ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<UUID, User>();
 
@@ -82,6 +100,7 @@ public class UserManager {
 	public void disconnect(UUID userId) {
 		if (users.containsKey(userId)) {
 			users.get(userId).setSessionId("");
+			ChatManager.getInstance().broadcast(userId, "has lost connection", MessageColor.BLACK);
 		}
 	}
 	
@@ -90,6 +109,26 @@ public class UserManager {
 			return users.get(userId).getName().equals("Admin");
 		}
 		return false;
+	}
+
+	public void removeUser(UUID userId) {
+		if (users.containsKey(userId)) {
+			users.get(userId).setSessionId("");
+			ChatManager.getInstance().broadcast(userId, "has disconnected", MessageColor.BLACK);
+			users.get(userId).kill();
+			users.remove(userId);
+		}
+	}
+	
+	private void checkExpired() {
+		Calendar expired = Calendar.getInstance();
+		expired.add(Calendar.MINUTE, -10) ;
+		for (User user: users.values()) {
+			if (user.isExpired(expired.getTime())) {
+				user.kill();
+				users.remove(user.getId());
+			}
+		}
 	}
 	
 }

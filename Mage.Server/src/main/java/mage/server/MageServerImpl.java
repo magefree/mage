@@ -253,7 +253,7 @@ public class MageServerImpl implements MageServer {
 				new Runnable() {
 					@Override
 					public void run() {
-						SessionManager.getInstance().disconnect(sessionId);
+						SessionManager.getInstance().disconnect(sessionId, true);
 						logger.info("Client deregistered ...");
 					}
 				}
@@ -563,8 +563,8 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							GameManager.getInstance().sendPlayerUUID(gameId, userId, data);
+							User user = SessionManager.getInstance().getUser(sessionId);
+							user.sendPlayerUUID(gameId, data);
 						}
 					}
 				);
@@ -583,8 +583,8 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							GameManager.getInstance().sendPlayerString(gameId, userId, data);
+							User user = SessionManager.getInstance().getUser(sessionId);
+							user.sendPlayerString(gameId, data);
 						}
 					}
 				);
@@ -603,8 +603,8 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							GameManager.getInstance().sendPlayerBoolean(gameId, userId, data);
+							User user = SessionManager.getInstance().getUser(sessionId);
+							user.sendPlayerBoolean(gameId, data);
 						}
 					}
 				);
@@ -623,8 +623,8 @@ public class MageServerImpl implements MageServer {
 					new Runnable() {
 						@Override
 						public void run() {
-							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-							GameManager.getInstance().sendPlayerInteger(gameId, userId, data);
+							User user = SessionManager.getInstance().getUser(sessionId);
+							user.sendPlayerInteger(gameId, data);
 						}
 					}
 				);

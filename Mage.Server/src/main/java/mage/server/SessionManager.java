@@ -28,13 +28,11 @@
 
 package mage.server;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.MageException;
-import mage.view.UserView;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 
@@ -83,10 +81,13 @@ public class SessionManager {
 		return false;
 	}
 	
-	public synchronized void disconnect(String sessionId) {
+	public synchronized void disconnect(String sessionId, boolean voluntary) {
 		Session session = sessions.get(sessionId);
 		if (session != null) {
-			session.kill();
+			if (voluntary)
+				session.kill();
+			else
+				session.disconnect();
 			sessions.remove(sessionId);
 		}
 	}
@@ -101,10 +102,7 @@ public class SessionManager {
 
 	public void disconnectUser(String sessionId, String userSessionId) {
 		if (isAdmin(sessionId)) {
-			Session session = sessions.get(userSessionId);
-			if (session != null) {
-				session.kill();
-			}
+			disconnect(userSessionId, true);
 		}
 	}
 
@@ -122,4 +120,10 @@ public class SessionManager {
 		return false;
 	}
 
+	public User getUser(String sessionId) {
+		if (sessions.containsKey(sessionId)) {
+			return UserManager.getInstance().getUser(sessions.get(sessionId).getUserId());
+		}
+		return null;
+	}
 }

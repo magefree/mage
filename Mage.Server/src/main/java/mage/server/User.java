@@ -53,6 +53,7 @@ public class User {
 	private String sessionId = "";
 	private String host;
 	private Date connectionTime = new Date();
+	private Date lastActivity = new Date();
 	private UserState userState;
  	private Map<UUID, GameSession> gameSessions = new HashMap<UUID, GameSession>();
 	
@@ -133,6 +134,30 @@ public class User {
 		fireCallback(new ClientCallback("replayGame", gameId));
 	}
 
+	public void sendPlayerUUID(final UUID gameId, final UUID data) {
+		lastActivity = new Date();
+		GameManager.getInstance().sendPlayerUUID(gameId, userId, data);
+	}
+
+	public void sendPlayerString(final UUID gameId, final String data) {
+		lastActivity = new Date();
+		GameManager.getInstance().sendPlayerString(gameId, userId, data);
+	}
+
+	public void sendPlayerBoolean(final UUID gameId, final Boolean data)  {
+		lastActivity = new Date();
+		GameManager.getInstance().sendPlayerBoolean(gameId, userId, data);
+	}
+
+	public void sendPlayerInteger(final UUID gameId, final Integer data) {
+		lastActivity = new Date();
+		GameManager.getInstance().sendPlayerInteger(gameId, userId, data);
+	}
+
+	public boolean isExpired(Date expired) {
+		return userState == UserState.Disconnected && lastActivity.before(expired);
+	}
+	
 	private void reconnect() {
 		for (Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
 			gameStarted(entry.getValue().getGameId(), entry.getKey());
@@ -147,6 +172,12 @@ public class User {
 	
 	public void removeGame(UUID playerId) {
 		gameSessions.remove(playerId);
+	}
+	
+	public void kill() {
+		for (Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
+			entry.getValue().kill();
+		}
 	}
 
 }

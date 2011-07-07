@@ -93,20 +93,21 @@ public class Session {
 		return sessionId;
 	}
 		
-	public void kill() {
-//		TableManager.getInstance().removeSession(sessionId);
-//		GameManager.getInstance().removeSession(sessionId);
-//		ChatManager.getInstance().removeSession(sessionId);
+	public void disconnect() {
 		UserManager.getInstance().disconnect(userId);
 	}
-
+	
+	public void kill() {
+		UserManager.getInstance().removeUser(userId);
+	}
+	
 	synchronized void fireCallback(final ClientCallback call) {
 		try {
 			call.setMessageId(messageId++);
 			callbackHandler.handleCallbackOneway(new Callback(call));
 		} catch (HandleCallbackException ex) {
 			logger.fatal("Session fireCallback error", ex);
-			kill();
+			disconnect();
 		}
 	}
 

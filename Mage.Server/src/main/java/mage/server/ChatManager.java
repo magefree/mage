@@ -70,6 +70,24 @@ public class ChatManager {
 		chatSessions.get(chatId).broadcast(userName, message, color);
 	}
 
+	/**
+	 * 
+	 * use mainly for announcing that a user connection was lost or that a user has reconnected
+	 * 
+	 * @param userId
+	 * @param message
+	 * @param color 
+	 */
+	public void broadcast(UUID userId, String message, MessageColor color) {
+		User user = UserManager.getInstance().getUser(userId);
+		if (user != null) {
+			for (ChatSession chat: chatSessions.values()) {
+				if (chat.hasUser(userId))
+					chat.broadcast(user.getName(), message, color);
+			}
+		}
+	}
+
 	void removeUser(UUID userId) {
 		for (ChatSession chat: chatSessions.values()) {
 			chat.kill(userId);

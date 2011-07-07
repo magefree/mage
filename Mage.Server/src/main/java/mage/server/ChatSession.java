@@ -32,7 +32,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.interfaces.callback.ClientCallback;
@@ -50,8 +49,6 @@ public class ChatSession {
 	private ConcurrentHashMap<UUID, String> clients = new ConcurrentHashMap<UUID, String>();
 	private UUID chatId;
 	private DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
-
-	//TODO: use sessionId for chatting - prevents sending without being part of the chat
 
 	public ChatSession() {
 		chatId = UUID.randomUUID();
@@ -96,6 +93,10 @@ public class ChatSession {
 	 */
 	public UUID getChatId() {
 		return chatId;
+	}
+
+	public boolean hasUser(UUID userId) {
+		return clients.containsKey(userId);
 	}
 
 }
