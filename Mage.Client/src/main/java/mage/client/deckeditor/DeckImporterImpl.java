@@ -60,6 +60,7 @@ public abstract class DeckImporterImpl implements DeckImporter {
 					readLine(line, deckList);
 				}
 				if (sbMessage.length() > 0) {
+                    logger.fatal(sbMessage);
 					JOptionPane.showMessageDialog(MageFrame.getDesktop(), sbMessage.toString(), "Error importing deck", JOptionPane.ERROR_MESSAGE);
 				}
 			}
