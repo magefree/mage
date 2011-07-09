@@ -36,6 +36,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.PutIntoGraveFromAnywhereTriggeredAbility;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -64,7 +65,7 @@ public class BlightsteelColossus extends CardImpl<BlightsteelColossus> {
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(InfectAbility.getInstance());
         this.addAbility(IndestructibleAbility.getInstance());
-        this.addAbility(new BlightsteelColossusTriggeredAbility());
+        this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new BlightsteelColossusEffect(), false));
     }
 
     public BlightsteelColossus(final BlightsteelColossus card) {
@@ -76,21 +77,6 @@ public class BlightsteelColossus extends CardImpl<BlightsteelColossus> {
         return new BlightsteelColossus(this);
     }
 
-}
-
-class BlightsteelColossusTriggeredAbility extends ZoneChangeTriggeredAbility<BlightsteelColossusTriggeredAbility> {
-    BlightsteelColossusTriggeredAbility() {
-        super(Constants.Zone.GRAVEYARD, new BlightsteelColossusEffect(), "If Blightsteel Colossus would be put into a graveyard from anywhere, ", false);
-    }
-
-    BlightsteelColossusTriggeredAbility(final BlightsteelColossusTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public BlightsteelColossusTriggeredAbility copy() {
-        return new BlightsteelColossusTriggeredAbility(this);
-    }
 }
 
 class BlightsteelColossusEffect extends OneShotEffect<BlightsteelColossusEffect> {
