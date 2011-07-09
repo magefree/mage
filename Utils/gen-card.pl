@@ -92,6 +92,7 @@ $fulltoshort{'Planar Chaos'} = 'PLC';
 $fulltoshort{'Planeshift'} = 'PLS';
 $fulltoshort{'Portal'} = 'POR';
 $fulltoshort{'Portal Three Kingdoms'} = 'PTK';
+$fulltoshort{'Premium Deck Series: Fire and Lightning'} = 'PD2';
 $fulltoshort{'Premium Deck Series: Slivers'} = 'PDS';
 $fulltoshort{'Ravnica: City of Guilds'} = 'RAV';
 $fulltoshort{'Rise of the Eldrazi'} = 'ROE';
@@ -214,6 +215,7 @@ $wizardstous{'DDF'} = 'DDF';
 $wizardstous{'MBS'} = 'MBS';
 $wizardstous{'NPH'} = 'NPH';
 $wizardstous{'CMD'} = 'CMD';
+$wizardstous{'PD2'} = 'PD2';
 
 my %knownSets;
 $knownSets{'ARB'} = 'alarareborn';
