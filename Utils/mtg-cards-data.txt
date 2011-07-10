@@ -5680,8 +5680,12 @@
 |Wizard Mentor|Urza's Saga|C|8907|112|
 |Venomous Fangs|Urza's Saga|C|8908|280|
 |Serra's Sanctum|Urza's Saga|R|9674|325|
+|Swamp|Unglued|C|9676|86|
+|Island|Unglued|C|9677|85|
 |Child of Gaea|Urza's Saga|R|9678|242|
+|Plains|Unglued|C|9680|84|
 |Serra's Embrace|Urza's Saga|U|9682|47|
+|Forest|Unglued|C|9683|88|
 |Vampiric Embrace|Urza's Saga|U|9684|164|
 |Molten Hydra|Urza's Legacy|R|9689|85|
 |Destructive Flow|Planeshift|R|9690|102|
@@ -5693,6 +5697,7 @@
 |Greener Pastures|Urza's Saga|R|9704|258|
 |Iron Maiden|Urza's Legacy|R|9705|127|
 |Wheel of Torture|Urza's Legacy|R|9706|138|
+|Mountain|Unglued|C|9707|87|
 |Peace and Quiet|Urza's Legacy|U|9709|17|
 |Hawkeater Moth|Urza's Saga|U|9710|259|
 |Martyr's Cause|Urza's Legacy|U|9712|13|
@@ -10947,6 +10952,11 @@
 |Spinal Parasite|Fifth Dawn|U|73928|155|
 |Synod Centurion|Fifth Dawn|U|73929|161|
 |Battered Golem|Fifth Dawn|C|73932|106|
+|Forest|Unhinged|L|73946|140|
+|Island|Unhinged|L|73951|137|
+|Mountain|Unhinged|L|73958|139|
+|Plains|Unhinged|L|73963|136|
+|Swamp|Unhinged|L|73973|138|
 |Dreamcatcher|Saviors of Kamigawa|C|73988|34|
 |Matsu-Tribe Birdstalker|Saviors of Kamigawa|C|73991|137|
 |Soratami Mindsweeper|Betrayers of Kamigawa|U|73995|52|
@@ -18419,12 +18429,101 @@
 |Thirst for Knowledge|Duel Decks: Elspeth vs. Tezzeret|U|218580|68|
 |Swords to Plowshares|Duel Decks: Elspeth vs. Tezzeret|U|218581|22|
 |Crusade|Duel Decks: Elspeth vs. Tezzeret|R|218582|27|
+|Phantasmal Dragon|Magic 2012|U|220068|71|
+|Crimson Mage|Magic 2012|U|220069|129|
+|Onyx Mage|Magic 2012|U|220072|103|
+|Pride Guardian|Magic 2012|C|220073|31|
+|Timely Reinforcements|Magic 2012|U|220074|40|
+|Stingerfling Spider|Magic 2012|U|220075|197|
+|Garruk's Horde|Magic 2012|R|220077|176|
+|Arbalest Elite|Magic 2012|U|220078|5|
+|Gladecover Scout|Magic 2012|C|220082|178|
+|Aegis Angel|Magic 2012|R|220086|1|
+|Drifting Shade|Magic 2012|C|220088|96|
+|Sphinx of Uthuun|Magic 2012|R|220090|76|
+|Guardians' Pledge|Magic 2012|C|220095|22|
+|Druidic Satchel|Magic 2012|R|220098|207|
+|Phantasmal Image|Magic 2012|R|220099|72|
+|Garruk, Primal Hunter|Magic 2012|M|220100|174|
+|Furyborn Hellkite|Magic 2012|M|220103|135|
+|Merfolk Mesmerist|Magic 2012|C|220106|66|
+|Crumbling Colossus|Magic 2012|U|220113|204|
+|Mesa Enchantress|Magic 2012|R|220116|25|
+|Tormented Soul|Magic 2012|C|220122|114|
+|Bloodrage Vampire|Magic 2012|C|220125|83|
+|Vampire Outcasts|Magic 2012|U|220127|115|
+|Rune-Scarred Demon|Magic 2012|R|220130|106|
+|Lord of the Unreal|Magic 2012|R|220131|62|
+|Day of Judgment|Magic 2012|R|220139|12|
+|Monomania|Magic 2012|R|220143|102|
+|Aven Fleetwing|Magic 2012|C|220145|44|
+|Chandra, the Firebrand|Magic 2012|M|220146|124|
+|Adaptive Automaton|Magic 2012|R|220147|201|
+|Skinshifter|Magic 2012|R|220151|195|
+|Doubling Chant|Magic 2012|R|220152|170|
+|Skywinder Drake|Magic 2012|C|220153|75|
+|Spirit Mantle|Magic 2012|U|220154|35|
+|Sutured Ghoul|Magic 2012|R|220157|112|
+|Stonehorn Dignitary|Magic 2012|C|220160|37|
+|Manalith|Magic 2012|C|220162|212|
+|Vengeful Pharaoh|Magic 2012|R|220170|116|
+|Primordial Hydra|Magic 2012|M|220172|189|
+|Serra Angel|Magic 2012|U|220176|33|
+|Merfolk Looter|Magic 2012|C|220179|65|
+|Lifelink|Magic 2012|C|220182|24|
+|Wall of Torches|Magic 2012|C|220189|159|
+|Trollhide|Magic 2012|C|220190|199|
+|Divination|Magic 2012|C|220194|50|
+|Celestial Purge|Magic 2012|U|220195|11|
+|Lurking Crocodile|Magic 2012|C|220199|184|
+|Scepter of Empires|Magic 2012|U|220209|216|
+|Dungrove Elder|Magic 2012|R|220210|171|
+|Amphin Cutthroat|Magic 2012|C|220218|43|
+|Divine Favor|Magic 2012|C|220219|14|
+|Carnage Wurm|Magic 2012|U|220220|168|
+|Chasm Drake|Magic 2012|C|220225|48|
+|Visions of Beyond|Magic 2012|R|220226|80|
+|Blood Ogre|Magic 2012|C|220227|122|
+|Angelic Destiny|Magic 2012|M|220230|3|
+|Throne of Empires|Magic 2012|R|220232|221|
+|Personal Sanctuary|Magic 2012|R|220235|30|
+|Gideon's Avenger|Magic 2012|R|220239|17|
+|Lightning Elemental|Magic 2012|C|220240|149|
+|Rusted Sentinel|Magic 2012|U|220241|215|
+|Arachnus Spinner|Magic 2012|R|220242|162|
+|Jace's Archivist|Magic 2012|R|220244|59|
+|Flashfreeze|Magic 2012|U|220249|52|
+|Phantasmal Bear|Magic 2012|C|220251|70|
+|Duskhunter Bat|Magic 2012|C|220259|97|
+|Swiftfoot Boots|Magic 2012|U|220261|219|
+|Alabaster Mage|Magic 2012|U|220264|2|
+|Turn to Frog|Magic 2012|U|220265|78|
+|Azure Mage|Magic 2012|U|220268|45|
+|Circle of Flame|Magic 2012|U|220273|127|
+|Stormblood Berserker|Magic 2012|U|220277|156|
+|Jade Mage|Magic 2012|U|220279|181|
+|Griffin Rider|Magic 2012|C|220282|20|
+|Arachnus Web|Magic 2012|C|220283|163|
+|Frost Breath|Magic 2012|C|220284|54|
+|Hunter's Insight|Magic 2012|U|220291|180|
+|Dark Favor|Magic 2012|C|220293|89|
+|Gorehorn Minotaurs|Magic 2012|C|220294|144|
+|Stave Off|Magic 2012|C|220295|36|
+|Greatsword|Magic 2012|U|220296|209|
+|Crown of Empires|Magic 2012|U|220297|203|
+|Chandra's Phoenix|Magic 2012|R|220298|126|
+|Scrambleverse|Magic 2012|R|220300|153|
+|Unsummon|Magic 2012|C|220301|79|
+|Buried Ruin|Magic 2012|U|220302|224|
+|Hideous Visage|Magic 2012|C|220304|100|
+|Bloodlord of Vaasgoth|Magic 2012|M|220306|82|
 |Myr Galvanizer|Scars of Mirrodin|U|220364|181|
 |Island|Mirrodin Besieged|L|220365|149|
 |Plains|Mirrodin Besieged|L|220366|147|
 |Swamp|Mirrodin Besieged|L|220367|150|
 |Swamp|Mirrodin Besieged|L|220368|151|
 |Island|Mirrodin Besieged|L|220369|148|
+|Goblin Grenade|Magic 2012|U|220435|140|
 |Chameleon Colossus|Archenemy|R|220451|52|
 |Fertilid|Archenemy|C|220452|54|
 |Taurean Mauler|Archenemy|R|220453|49|
@@ -18591,6 +18690,9 @@
 |Orcish Mechanics|Masters Edition IV|U|221110|129|
 |Prodigal Sorcerer|Masters Edition IV|U|221111|58|
 |Argivian Blacksmith|Masters Edition IV|U|221112|4|
+|Goblin Piker|Magic 2012|C|221199|141|
+|Goblin Chieftain|Magic 2012|R|221201|138|
+|Titanic Growth|Magic 2012|C|221203|198|
 |Colossus of Sardia|Masters Edition IV|R|221291|193|
 |Forest|Archenemy|L|221295|150|
 |Forest|Archenemy|L|221296|149|
@@ -18606,6 +18708,7 @@
 |Swamp|Archenemy|L|221311|142|
 |Swamp|Archenemy|L|221312|143|
 |Swamp|Archenemy|L|221313|144|
+|Redirect|Magic 2012|R|221484|74|
 |Alaborn Musketeer|Masters Edition IV|C|221493|1|
 |Alluring Scent|Masters Edition IV|C|221494|141|
 |Foul Spirit|Masters Edition IV|C|221495|81|
@@ -18617,11 +18720,21 @@
 |Fireball|Masters Edition IV|U|221511|115|
 |Squall|Masters Edition IV|U|221513|168|
 |Warp Artifact|Masters Edition IV|C|221514|100|
+|Deathmark|Magic 2012|U|221516|90|
 |Thing from the Deep|Masters Edition IV|R|221517|68|
 |Deathcoil Wurm|Masters Edition IV|R|221518|149|
+|Diabolic Tutor|Magic 2012|U|221519|92|
+|Angel's Feather|Magic 2012|U|221520|202|
+|Kraken's Eye|Magic 2012|U|221521|211|
+|Demon's Horn|Magic 2012|U|221522|205|
+|Dragon's Claw|Magic 2012|U|221523|206|
+|Wurm's Tooth|Magic 2012|U|221524|223|
+|Elixir of Immortality|Magic 2012|U|221525|208|
+|Gravedigger|Magic 2012|C|221526|99|
 |Beast Within|New Phyrexia|U|221533|103|
 |Ebon Dragon|Masters Edition IV|R|221547|80|
 |Sylvan Tutor|Masters Edition IV|U|221548|169|
+|Fireball|Magic 2012|U|221550|131|
 |Artifact Blast|Masters Edition IV|C|221551|108|
 |Dakmor Plague|Masters Edition IV|U|221552|73|
 |Phantasmal Terrain|Masters Edition IV|C|221553|56|
@@ -18645,12 +18758,28 @@
 |Tablet of Epityr|Masters Edition IV|C|221576|230|
 |Savannah Lions|Masters Edition IV|U|221577|24|
 |Wild Griffin|Masters Edition IV|C|221639|35|
+|Lava Axe|Magic 2012|C|221891|148|
+|Llanowar Elves|Magic 2012|C|221892|182|
+|Runeclaw Bear|Magic 2012|C|221893|193|
+|Naturalize|Magic 2012|C|221894|185|
+|Cudgel Troll|Magic 2012|U|221895|169|
+|Birds of Paradise|Magic 2012|R|221896|165|
+|Grand Abolisher|Magic 2012|R|221898|19|
 |Prowling Nightstalker|Masters Edition IV|C|221915|93|
 |Elite Cat Warrior|Masters Edition IV|C|221917|151|
 |Wild Ox|Masters Edition IV|U|221918|174|
+|Glacial Fortress|Magic 2012|R|221919|227|
+|Drowned Catacomb|Magic 2012|R|221920|226|
+|Dragonskull Summit|Magic 2012|R|221921|225|
+|Rootbound Crag|Magic 2012|R|221922|228|
+|Sunpetal Grove|Magic 2012|R|221923|229|
 |Air Elemental|Masters Edition IV|U|221985|37|
 |Alaborn Trooper|Masters Edition IV|C|221987|2|
 |Cloud Spirit|Masters Edition IV|C|221988|42|
+|Stormfront Pegasus|Magic 2012|C|222633|38|
+|Armored Warhorse|Magic 2012|C|222634|7|
+|Siege Mastodon|Magic 2012|C|222635|34|
+|Griffin Sentinel|Magic 2012|C|222650|21|
 |Sorcerer's Strongbox|Archenemy|U|222702|116|
 |Loyal Sentry|Duel Decks: Elspeth vs. Tezzeret|R|222706|5|
 |Razormane Masticore|Duel Decks: Elspeth vs. Tezzeret|R|222707|56|
@@ -18720,16 +18849,38 @@
 |Vedalken Anatomist|Mirrodin Besieged|U|222861|36|
 |Tangle Mantis|Mirrodin Besieged|C|222862|91|
 |Morbid Plunder|Mirrodin Besieged|C|222863|47|
+|Zombie Goliath|Magic 2012|C|226558|119|
+|Doom Blade|Magic 2012|C|226560|95|
+|Taste of Blood|Magic 2012|C|226561|113|
+|Devouring Swarm|Magic 2012|C|226563|91|
+|Reassembling Skeleton|Magic 2012|U|226565|104|
+|Bonebreaker Giant|Magic 2012|C|226582|123|
+|Chandra's Outrage|Magic 2012|C|226585|125|
+|Firebreathing|Magic 2012|C|226588|132|
+|Act of Treason|Magic 2012|C|226589|121|
+|Combust|Magic 2012|U|226591|128|
 |Energy Chamber|Duel Decks: Elspeth vs. Tezzeret|U|226711|64|
 |Synod Centurion|Duel Decks: Elspeth vs. Tezzeret|U|226712|53|
 |Mighty Leap|Duel Decks: Elspeth vs. Tezzeret|C|226713|24|
 |Kor Aeronaut|Duel Decks: Elspeth vs. Tezzeret|U|226714|10|
 |Esperzoa|Duel Decks: Elspeth vs. Tezzeret|U|226715|47|
 |Stormfront Riders|Duel Decks: Elspeth vs. Tezzeret|U|226716|17|
+|Garruk's Companion|Magic 2012|C|226896|175|
+|Fog|Magic 2012|C|226900|173|
+|Bountiful Harvest|Magic 2012|C|226901|166|
+|Reclaim|Magic 2012|C|226903|191|
+|Lure|Magic 2012|U|226905|183|
+|Acidic Slime|Magic 2012|U|226906|161|
 |Assembly-Worker|Duel Decks: Elspeth vs. Tezzeret|U|226984|45|
 |Contagion Clasp|Duel Decks: Elspeth vs. Tezzeret|U|227149|63|
 |Kemba's Skyguard|Duel Decks: Elspeth vs. Tezzeret|C|227150|13|
 |Pentavus|Duel Decks: Elspeth vs. Tezzeret|R|227151|58|
+|Æther Adept|Magic 2012|C|227222|41|
+|Coral Merfolk|Magic 2012|C|227223|49|
+|Cancel|Magic 2012|C|227225|47|
+|Jace's Erasure|Magic 2012|C|227227|60|
+|Worldslayer|Magic 2012|R|227302|222|
+|Djinn of Wishes|Magic 2012|R|227305|51|
 |Puresteel Paladin|New Phyrexia|R|227504|20|
 |Island|New Phyrexia|L|227505|169|
 |Mountain|New Phyrexia|L|227507|172|
@@ -18745,6 +18896,21 @@
 |Tezzeret's Gambit|New Phyrexia|U|227547|47|
 |Victorious Destruction|New Phyrexia|C|227549|99|
 |Plains|New Phyrexia|L|227552|166|
+|Benalish Veteran|Magic 2012|C|228117|10|
+|Sundial of the Infinite|Magic 2012|R|228118|218|
+|Master Thief|Magic 2012|U|228119|64|
+|Gideon's Lawkeeper|Magic 2012|C|228122|18|
+|Alliance of Arms|Magic: The Gathering-Commander|R|228218|4|
+|Dread Cacodemon|Magic: The Gathering-Commander|R|228228|79|
+|The Mimeoplasm|Magic: The Gathering-Commander|M|228232|210|
+|Magmatic Force|Magic: The Gathering-Commander|R|228241|128|
+|Trench Gorger|Magic: The Gathering-Commander|R|228242|65|
+|Archangel of Strife|Magic: The Gathering-Commander|R|228246|7|
+|Hydra Omnivore|Magic: The Gathering-Commander|R|228247|161|
+|Crescendo of War|Magic: The Gathering-Commander|R|228253|12|
+|Flusterstorm|Magic: The Gathering-Commander|R|228255|46|
+|Celestial Force|Magic: The Gathering-Commander|R|228257|10|
+|Shared Trauma|Magic: The Gathering-Commander|R|228259|99|
 |Armageddon|Masters Edition IV|R|228262|5|
 |Mahamoti Djinn|Masters Edition IV|R|228263|52|
 |Shivan Dragon|Masters Edition IV|R|228264|136|
@@ -18756,6 +18922,12 @@
 |Alchor's Tomb|Masters Edition IV|R|228270|178|
 |Mana Matrix|Masters Edition IV|R|228271|213|
 |Vibrating Sphere|Masters Edition IV|R|228272|238|
+|Warstorm Surge|Magic 2012|R|228796|160|
+|Pacifism|Magic 2012|C|228956|28|
+|Goblin Fireslinger|Magic 2012|C|228959|139|
+|Goblin Bangchuckers|Magic 2012|U|229952|137|
+|Death by Dragons|Magic: The Gathering-Commander|U|229988|118|
+|Edric, Spymaster of Trest|Magic: The Gathering-Commander|R|230000|196|
 |Mountain|New Phyrexia|L|230064|173|
 |Slash Panther|New Phyrexia|C|230065|96|
 |Mental Misstep|New Phyrexia|U|230066|38|
@@ -18772,6 +18944,11 @@
 |Forest|New Phyrexia|L|230081|174|
 |Dismember|New Phyrexia|U|230082|57|
 |Forced Worship|New Phyrexia|C|230083|11|
+|Harbor Serpent|Magic 2012|C|230756|56|
+|Negate|Magic 2012|C|230757|69|
+|Wring Flesh|Magic 2012|C|230758|118|
+|Slaughter Cry|Magic 2012|C|230762|155|
+|Manic Vandal|Magic 2012|C|230764|151|
 |Wing Splicer|New Phyrexia|U|233037|50|
 |Sensor Splicer|New Phyrexia|C|233038|22|
 |Maul Splicer|New Phyrexia|C|233040|114|
@@ -18812,6 +18989,17 @@
 |Dementia Bat|New Phyrexia|C|233084|55|
 |Pestilent Souleater|New Phyrexia|C|233085|149|
 |Flameborn Viron|New Phyrexia|C|233086|83|
+|Scavenging Ooze|Magic: The Gathering-Commander|R|233181|170|
+|Stranglehold|Magic: The Gathering-Commander|R|233183|136|
+|Acorn Catapult|Magic: The Gathering-Commander|R|233197|241|
+|Champion's Helm|Magic: The Gathering-Commander|R|233200|244|
+|Homeward Path|Magic: The Gathering-Commander|R|233201|277|
+|Syphon Flesh|Magic: The Gathering-Commander|U|233218|103|
+|Rampant Growth|Magic 2012|C|233231|190|
+|Giant Spider|Magic 2012|C|233232|177|
+|Greater Basilisk|Magic 2012|C|233233|179|
+|Plummet|Magic 2012|C|233235|187|
+|Honor of the Pure|Magic 2012|R|233237|23|
 |Martyr's Cry|Masters Edition IV|R|233297|19|
 |Leeches|Masters Edition IV|R|233298|18|
 |Acid Rain|Masters Edition IV|R|233299|36|
@@ -18822,6 +19010,17 @@
 |Force of Nature|Masters Edition IV|R|233304|154|
 |Living Lands|Masters Edition IV|R|233305|161|
 |Smoke|Masters Edition IV|R|233306|137|
+|Reverberate|Magic 2012|R|233722|152|
+|Levitation|Magic 2012|U|233728|61|
+|Cemetery Reaper|Magic 2012|R|234070|86|
+|Thran Golem|Magic 2012|U|234072|220|
+|Incinerate|Magic 2012|C|234075|146|
+|Grim Lavamancer|Magic 2012|R|234428|145|
+|Sorin's Vengeance|Magic 2012|R|234436|111|
+|Child of Night|Magic 2012|C|234560|87|
+|Mind Rot|Magic 2012|C|234561|101|
+|Oblivion Ring|Magic 2012|U|234567|27|
+|Tectonic Rift|Magic 2012|U|234568|157|
 |Ghitu Encampment|Premium Deck Series: Fire and Lightning|U|234698|29|
 |Mogg Fanatic|Premium Deck Series: Fire and Lightning|U|234699|3|
 |Spark Elemental|Premium Deck Series: Fire and Lightning|U|234700|4|
@@ -18853,8 +19052,80 @@
 |Mountain|Premium Deck Series: Fire and Lightning|L|234739|32|
 |Mountain|Premium Deck Series: Fire and Lightning|L|234740|33|
 |Mountain|Premium Deck Series: Fire and Lightning|L|234741|34|
+|Rites of Flourishing|Magic 2012|R|235188|192|
+|Frost Titan|Magic 2012|M|235191|55|
+|Inferno Titan|Magic 2012|M|235192|147|
+|Manabarbs|Magic 2012|R|235193|150|
+|Assault Griffin|Magic 2012|C|236449|8|
 |Figure of Destiny|Premium Deck Series: Fire and Lightning|R|236456|5|
+|Belltower Sphinx|Magic 2012|U|236457|46|
+|Mind Unbound|Magic 2012|R|236459|68|
+|Call to the Grave|Magic 2012|R|236460|85|
+|Goblin War Paint|Magic 2012|C|236461|143|
+|Royal Assassin|Magic 2012|R|236464|105|
+|Mana-Charged Dragon|Magic: The Gathering-Commander|R|236465|129|
+|Chaos Warp|Magic: The Gathering-Commander|R|236466|114|
+|Karador, Ghost Chieftain|Magic: The Gathering-Commander|M|236468|207|
+|Riku of Two Reflections|Magic: The Gathering-Commander|M|236469|220|
+|Nin, the Pain Artist|Magic: The Gathering-Commander|R|236471|213|
+|Kaalia of the Vast|Magic: The Gathering-Commander|M|236473|206|
+|Ruhan of the Fomori|Magic: The Gathering-Commander|M|236477|221|
+|Damia, Sage of Stone|Magic: The Gathering-Commander|M|236479|191|
+|Martyr's Bond|Magic: The Gathering-Commander|R|236481|19|
+|Sewer Nemesis|Magic: The Gathering-Commander|R|236482|98|
+|Skullbriar, the Walking Grave|Magic: The Gathering-Commander|R|236485|227|
+|Vish Kal, Blood Arbiter|Magic: The Gathering-Commander|R|236487|234|
+|Basandra, Battle Seraph|Magic: The Gathering-Commander|R|236490|184|
+|Avatar of Slaughter|Magic: The Gathering-Commander|R|236497|111|
+|Zedruu the Greathearted|Magic: The Gathering-Commander|M|236499|240|
+|Scythe Specter|Magic: The Gathering-Commander|R|236500|97|
+|Ghave, Guru of Spores|Magic: The Gathering-Commander|M|236501|200|
+|Animar, Soul of Elements|Magic: The Gathering-Commander|M|236504|181|
+|Solemn Simulacrum|Magic 2012|R|236907|217|
+|Distress|Magic 2012|C|236908|94|
+|Vow of Duty|Magic: The Gathering-Commander|U|236986|36|
+|Tariel, Reckoner of Souls|Magic: The Gathering-Commander|M|236995|229|
+|Tribute to the Wild|Magic: The Gathering-Commander|U|236998|175|
+|Vow of Lightning|Magic: The Gathering-Commander|U|236999|138|
+|Command Tower|Magic: The Gathering-Commander|C|237004|269|
+|Spell Crumple|Magic: The Gathering-Commander|U|237005|63|
+|Quicksilver Amulet|Magic 2012|R|237006|214|
+|Elvish Archdruid|Magic 2012|R|237007|172|
+|Smallpox|Magic 2012|U|237010|108|
+|Flight|Magic 2012|C|237366|53|
 |Rakalite|Masters Edition IV|R|238128|223|
+|Vow of Wildness|Magic: The Gathering-Commander|U|238135|178|
+|Soul Snare|Magic: The Gathering-Commander|U|238136|32|
+|Riddlekeeper|Magic: The Gathering-Commander|R|238138|59|
+|Hornet Queen|Magic: The Gathering-Commander|R|238141|159|
+|Vow of Flight|Magic: The Gathering-Commander|U|238144|68|
+|Vow of Malice|Magic: The Gathering-Commander|U|238145|107|
+|Jace, Memory Adept|Magic 2012|M|238263|58|
+|Peregrine Griffin|Magic 2012|C|238327|29|
+|Demystify|Magic 2012|C|238328|13|
+|Gideon Jura|Magic 2012|M|238329|16|
+|Sorin Markov|Magic 2012|M|238330|109|
+|Fiery Hellhound|Magic 2012|C|238331|130|
+|Angel's Mercy|Magic 2012|C|238569|4|
+|Roc Egg|Magic 2012|U|238570|32|
+|Mind Control|Magic 2012|U|238572|67|
+|Overrun|Magic 2012|U|238574|186|
+|Auramancer|Magic 2012|C|240308|9|
+|Elite Vanguard|Magic 2012|U|240315|15|
+|Grave Titan|Magic 2012|M|241830|98|
+|Mana Leak|Magic 2012|C|241831|63|
+|Primeval Titan|Magic 2012|M|241832|188|
+|Sun Titan|Magic 2012|M|241833|39|
+|Minds Aglow|Magic: The Gathering-Commander|R|241853|51|
+|Collective Voyage|Magic: The Gathering-Commander|R|241854|147|
+|Fling|Magic 2012|C|241858|134|
+|Sacred Wolf|Magic 2012|C|241859|194|
+|Zombie Infestation|Magic 2012|U|241860|120|
+|Mighty Leap|Magic 2012|C|241989|26|
+|Autumn's Veil|Magic 2012|U|241990|164|
+|Sorin's Thirst|Magic 2012|C|241994|110|
+|Warpath Ghoul|Magic 2012|C|241995|117|
+|Goblin Arsonist|Magic 2012|C|242485|136|
 |Knight of the Reliquary|Duel Decks: Knights vs. Dragons|M|243416|1|
 |Caravan Escort|Duel Decks: Knights vs. Dragons|C|243418|2|
 |Lionheart Maverick|Duel Decks: Knights vs. Dragons|C|243420|3|
@@ -18936,3 +19207,309 @@
 |Mountain|Duel Decks: Knights vs. Dragons|L|243496|79|
 |Mountain|Duel Decks: Knights vs. Dragons|L|243497|80|
 |Mountain|Duel Decks: Knights vs. Dragons|L|243498|81|
+|Disentomb|Magic 2012|C|244245|93|
+|Brink of Disaster|Magic 2012|C|244246|84|
+|Consume Spirit|Magic 2012|U|244249|88|
+|Kite Shield|Magic 2012|U|244250|210|
+|Pentavus|Magic 2012|R|244251|213|
+|Blood Seeker|Magic 2012|C|244252|81|
+|Sengir Vampire|Magic 2012|U|244253|107|
+|Ponder|Magic 2012|C|244313|73|
+|Forest|Magic 2012|L|244319|247|
+|Forest|Magic 2012|L|244320|246|
+|Forest|Magic 2012|L|244321|248|
+|Forest|Magic 2012|L|244322|249|
+|Island|Magic 2012|L|244323|235|
+|Island|Magic 2012|L|244324|236|
+|Island|Magic 2012|L|244325|234|
+|Island|Magic 2012|L|244326|237|
+|Mountain|Magic 2012|L|244327|245|
+|Mountain|Magic 2012|L|244328|242|
+|Mountain|Magic 2012|L|244329|244|
+|Mountain|Magic 2012|L|244330|243|
+|Plains|Magic 2012|L|244331|231|
+|Plains|Magic 2012|L|244332|233|
+|Plains|Magic 2012|L|244333|230|
+|Plains|Magic 2012|L|244334|232|
+|Swamp|Magic 2012|L|244335|240|
+|Swamp|Magic 2012|L|244336|241|
+|Swamp|Magic 2012|L|244337|239|
+|Swamp|Magic 2012|L|244338|238|
+|Volcanic Dragon|Magic 2012|U|244719|158|
+|Flameblast Dragon|Magic 2012|R|244720|133|
+|Brindle Boar|Magic 2012|C|244824|167|
+|Stampeding Rhino|Magic 2012|C|244825|196|
+|Vastwood Gorger|Magic 2012|C|244827|200|
+|Archon of Justice|Magic 2012|R|244828|6|
+|Shock|Magic 2012|C|245184|154|
+|Goblin Tunneler|Magic 2012|C|245185|142|
+|Time Reversal|Magic 2012|M|245187|77|
+|Alluring Siren|Magic 2012|U|245188|42|
+|Ice Cage|Magic 2012|C|245283|57|
+|Dreamborn Muse|Magic: The Gathering-Commander|R|247140|44|
+|Furnace Whelp|Magic: The Gathering-Commander|U|247141|124|
+|Grave Pact|Magic: The Gathering-Commander|R|247142|85|
+|Mortivore|Magic: The Gathering-Commander|R|247143|89|
+|Nantuko Husk|Magic: The Gathering-Commander|U|247144|90|
+|Troll Ascetic|Magic: The Gathering-Commander|R|247145|176|
+|Voice of All|Magic: The Gathering-Commander|R|247146|35|
+|Windborn Muse|Magic: The Gathering-Commander|R|247147|38|
+|Eternal Witness|Magic: The Gathering-Commander|U|247148|152|
+|Fallen Angel|Magic: The Gathering-Commander|R|247150|82|
+|Lhurgoyf|Magic: The Gathering-Commander|R|247151|165|
+|Fellwar Stone|Magic: The Gathering-Commander|U|247152|248|
+|Fleshbag Marauder|Magic: The Gathering-Commander|U|247153|83|
+|Memory Erosion|Magic: The Gathering-Commander|R|247154|50|
+|Necrogenesis|Magic: The Gathering-Commander|U|247155|212|
+|Oblivion Ring|Magic: The Gathering-Commander|C|247156|23|
+|Death Mutation|Magic: The Gathering-Commander|U|247158|192|
+|Ice|Magic: The Gathering-Commander|U|247159|198|
+|Orim's Thunder|Magic: The Gathering-Commander|C|247161|24|
+|Prophetic Bolt|Magic: The Gathering-Commander|R|247162|219|
+|Colossal Might|Magic: The Gathering-Commander|C|247164|190|
+|Sigil Captain|Magic: The Gathering-Commander|U|247165|225|
+|Terminate|Magic: The Gathering-Commander|C|247166|231|
+|Valley Rannet|Magic: The Gathering-Commander|C|247167|232|
+|Vengeful Rebirth|Magic: The Gathering-Commander|U|247168|233|
+|Wall of Denial|Magic: The Gathering-Commander|U|247169|237|
+|Patron of the Nezumi|Magic: The Gathering-Commander|R|247171|93|
+|Ghostly Prison|Magic: The Gathering-Commander|U|247173|14|
+|Kodama's Reach|Magic: The Gathering-Commander|C|247174|163|
+|Nighteyes the Desecrator|Magic: The Gathering-Commander|U|247175|92|
+|Sakura-Tribe Elder|Magic: The Gathering-Commander|C|247176|169|
+|Armillary Sphere|Magic: The Gathering-Commander|C|247177|242|
+|Extractor Demon|Magic: The Gathering-Commander|R|247178|81|
+|Malfegor|Magic: The Gathering-Commander|M|247179|208|
+|Path to Exile|Magic: The Gathering-Commander|U|247180|25|
+|Rupture Spire|Magic: The Gathering-Commander|C|247181|285|
+|Jötun Grunt|Magic: The Gathering-Commander|U|247182|16|
+|Perilous Research|Magic: The Gathering-Commander|U|247183|54|
+|Aura Shards|Magic: The Gathering-Commander|U|247184|182|
+|Breath of Darigaaz|Magic: The Gathering-Commander|U|247185|112|
+|Fact or Fiction|Magic: The Gathering-Commander|U|247186|45|
+|Repulse|Magic: The Gathering-Commander|C|247187|58|
+|Aquastrand Spider|Magic: The Gathering-Commander|C|247188|141|
+|Azorius Chancery|Magic: The Gathering-Commander|C|247189|265|
+|Azorius Guildmage|Magic: The Gathering-Commander|U|247190|183|
+|Court Hussar|Magic: The Gathering-Commander|U|247191|43|
+|Rakdos Carnarium|Magic: The Gathering-Commander|C|247192|284|
+|Rakdos Signet|Magic: The Gathering-Commander|C|247193|257|
+|Simic Growth Chamber|Magic: The Gathering-Commander|C|247194|288|
+|Simic Signet|Magic: The Gathering-Commander|C|247195|259|
+|Simic Sky Swallower|Magic: The Gathering-Commander|R|247196|226|
+|Skyscribing|Magic: The Gathering-Commander|U|247197|61|
+|Vision Skeins|Magic: The Gathering-Commander|C|247198|67|
+|Wrecking Ball|Magic: The Gathering-Commander|C|247199|238|
+|Darksteel Ingot|Magic: The Gathering-Commander|C|247200|245|
+|Skullclamp|Magic: The Gathering-Commander|U|247201|260|
+|Call the Skybreaker|Magic: The Gathering-Commander|R|247202|188|
+|Desecrator Hag|Magic: The Gathering-Commander|C|247203|193|
+|Dominus of Fealty|Magic: The Gathering-Commander|R|247204|194|
+|Duergar Hedge-Mage|Magic: The Gathering-Commander|U|247205|195|
+|Gwyllion Hedge-Mage|Magic: The Gathering-Commander|U|247206|202|
+|Nucklavee|Magic: The Gathering-Commander|U|247207|214|
+|Magus of the Vineyard|Magic: The Gathering-Commander|R|247273|166|
+|Zoetic Cavern|Magic: The Gathering-Commander|U|247274|298|
+|Angel of Despair|Magic: The Gathering-Commander|R|247275|180|
+|Electrolyze|Magic: The Gathering-Commander|U|247276|197|
+|Gruul Signet|Magic: The Gathering-Commander|C|247277|250|
+|Gruul Turf|Magic: The Gathering-Commander|C|247278|276|
+|Izzet Boilerworks|Magic: The Gathering-Commander|C|247279|278|
+|Izzet Chronarch|Magic: The Gathering-Commander|C|247280|205|
+|Izzet Signet|Magic: The Gathering-Commander|C|247281|252|
+|Mortify|Magic: The Gathering-Commander|U|247282|211|
+|Orzhov Basilica|Magic: The Gathering-Commander|C|247283|283|
+|Orzhov Guildmage|Magic: The Gathering-Commander|U|247284|217|
+|Orzhov Signet|Magic: The Gathering-Commander|C|247285|255|
+|Savage Twister|Magic: The Gathering-Commander|U|247286|222|
+|Storm Herd|Magic: The Gathering-Commander|R|247287|34|
+|Vedalken Plotter|Magic: The Gathering-Commander|U|247288|66|
+|Anger|Magic: The Gathering-Commander|U|247289|109|
+|Brawn|Magic: The Gathering-Commander|U|247290|145|
+|Spurnmage Advocate|Magic: The Gathering-Commander|U|247291|33|
+|Stitch Together|Magic: The Gathering-Commander|U|247292|102|
+|Wonder|Magic: The Gathering-Commander|U|247293|71|
+|Chromeshell Crab|Magic: The Gathering-Commander|R|247294|41|
+|Æthersnipe|Magic: The Gathering-Commander|C|247295|39|
+|Arbiter of Knollridge|Magic: The Gathering-Commander|R|247296|6|
+|Austere Command|Magic: The Gathering-Commander|R|247297|8|
+|Brion Stoutarm|Magic: The Gathering-Commander|R|247298|187|
+|Faultgrinder|Magic: The Gathering-Commander|C|247299|122|
+|Footbottom Feast|Magic: The Gathering-Commander|C|247300|84|
+|Lash Out|Magic: The Gathering-Commander|C|247301|127|
+|Mulldrifter|Magic: The Gathering-Commander|C|247302|52|
+|Pollen Lullaby|Magic: The Gathering-Commander|U|247303|26|
+|Scattering Stroke|Magic: The Gathering-Commander|U|247304|60|
+|Shriekmaw|Magic: The Gathering-Commander|U|247305|100|
+|Vivid Crag|Magic: The Gathering-Commander|U|247306|293|
+|Vivid Creek|Magic: The Gathering-Commander|U|247307|294|
+|Vivid Grove|Magic: The Gathering-Commander|U|247308|295|
+|Vivid Marsh|Magic: The Gathering-Commander|U|247309|296|
+|Vivid Meadow|Magic: The Gathering-Commander|U|247310|297|
+|Whirlpool Whelm|Magic: The Gathering-Commander|C|247311|69|
+|Wild Ricochet|Magic: The Gathering-Commander|R|247312|139|
+|Deadly Recluse|Magic: The Gathering-Commander|C|247313|149|
+|Dragon Whelp|Magic: The Gathering-Commander|U|247314|120|
+|Earthquake|Magic: The Gathering-Commander|R|247315|121|
+|Howling Mine|Magic: The Gathering-Commander|R|247316|251|
+|Acidic Slime|Magic: The Gathering-Commander|U|247317|140|
+|Angelic Arbiter|Magic: The Gathering-Commander|R|247318|5|
+|Conundrum Sphinx|Magic: The Gathering-Commander|R|247319|42|
+|Cultivate|Magic: The Gathering-Commander|C|247320|148|
+|Diabolic Tutor|Magic: The Gathering-Commander|U|247321|77|
+|Doom Blade|Magic: The Gathering-Commander|C|247322|78|
+|Garruk Wildspeaker|Magic: The Gathering-Commander|M|247323|157|
+|Gravedigger|Magic: The Gathering-Commander|C|247324|86|
+|Rise from the Grave|Magic: The Gathering-Commander|U|247325|96|
+|Serra Angel|Magic: The Gathering-Commander|U|247326|30|
+|Sign in Blood|Magic: The Gathering-Commander|C|247327|101|
+|Terramorphic Expanse|Magic: The Gathering-Commander|C|247328|291|
+|Ray of Command|Magic: The Gathering-Commander|C|247329|56|
+|Afterlife|Magic: The Gathering-Commander|U|247330|2|
+|Brainstorm|Magic: The Gathering-Commander|C|247331|40|
+|Invigorate|Magic: The Gathering-Commander|C|247332|162|
+|Squallmonger|Magic: The Gathering-Commander|U|247333|173|
+|Fertilid|Magic: The Gathering-Commander|C|247335|154|
+|Spitebellows|Magic: The Gathering-Commander|U|247336|135|
+|Lightning Greaves|Magic: The Gathering-Commander|U|247337|253|
+|Oblivion Stone|Magic: The Gathering-Commander|R|247338|254|
+|Reiver Demon|Magic: The Gathering-Commander|R|247339|95|
+|Solemn Simulacrum|Magic: The Gathering-Commander|R|247340|262|
+|Shattered Angel|Magic: The Gathering-Commander|U|247341|31|
+|Buried Alive|Magic: The Gathering-Commander|U|247342|74|
+|Akroma's Vengeance|Magic: The Gathering-Commander|R|247343|3|
+|Barren Moor|Magic: The Gathering-Commander|C|247344|266|
+|Explosive Vegetation|Magic: The Gathering-Commander|U|247345|153|
+|Forgotten Cave|Magic: The Gathering-Commander|C|247346|273|
+|Insurrection|Magic: The Gathering-Commander|R|247347|126|
+|Krosan Tusker|Magic: The Gathering-Commander|C|247348|164|
+|Lonely Sandbar|Magic: The Gathering-Commander|C|247349|281|
+|Oblation|Magic: The Gathering-Commander|R|247350|22|
+|Righteous Cause|Magic: The Gathering-Commander|U|247351|29|
+|Secluded Steppe|Magic: The Gathering-Commander|C|247352|286|
+|Slipstream Eel|Magic: The Gathering-Commander|C|247353|62|
+|Symbiotic Wurm|Magic: The Gathering-Commander|R|247354|174|
+|Syphon Mind|Magic: The Gathering-Commander|C|247355|104|
+|Trade Secrets|Magic: The Gathering-Commander|R|247356|64|
+|Tranquil Thicket|Magic: The Gathering-Commander|C|247357|292|
+|Akroma, Angel of Fury|Magic: The Gathering-Commander|R|247358|108|
+|Deadwood Treefolk|Magic: The Gathering-Commander|U|247359|150|
+|Harmonize|Magic: The Gathering-Commander|U|247360|158|
+|Intet, the Dreamer|Magic: The Gathering-Commander|R|247361|204|
+|Numot, the Devastator|Magic: The Gathering-Commander|R|247362|215|
+|Oros, the Avenger|Magic: The Gathering-Commander|R|247363|216|
+|Pyrohemia|Magic: The Gathering-Commander|U|247364|132|
+|Teneb, the Harvester|Magic: The Gathering-Commander|R|247365|230|
+|Vorosh, the Hunter|Magic: The Gathering-Commander|R|247366|235|
+|Avatar of Fury|Magic: The Gathering-Commander|R|247367|110|
+|Flametongue Kavu|Magic: The Gathering-Commander|U|247368|123|
+|Hull Breach|Magic: The Gathering-Commander|C|247369|203|
+|Bathe in Light|Magic: The Gathering-Commander|U|247370|9|
+|Boros Garrison|Magic: The Gathering-Commander|C|247371|268|
+|Boros Guildmage|Magic: The Gathering-Commander|U|247372|186|
+|Boros Signet|Magic: The Gathering-Commander|C|247373|243|
+|Chorus of the Conclave|Magic: The Gathering-Commander|R|247374|189|
+|Cleansing Beam|Magic: The Gathering-Commander|U|247375|116|
+|Dimir Aqueduct|Magic: The Gathering-Commander|C|247376|270|
+|Dimir Signet|Magic: The Gathering-Commander|C|247377|246|
+|Fists of Ironwood|Magic: The Gathering-Commander|C|247378|156|
+|Golgari Guildmage|Magic: The Gathering-Commander|U|247379|201|
+|Golgari Rot Farm|Magic: The Gathering-Commander|C|247380|275|
+|Golgari Signet|Magic: The Gathering-Commander|C|247381|249|
+|Hex|Magic: The Gathering-Commander|R|247382|87|
+|Hour of Reckoning|Magic: The Gathering-Commander|R|247383|15|
+|Master Warcraft|Magic: The Gathering-Commander|R|247384|209|
+|Selesnya Evangel|Magic: The Gathering-Commander|C|247385|223|
+|Selesnya Guildmage|Magic: The Gathering-Commander|U|247386|224|
+|Selesnya Sanctuary|Magic: The Gathering-Commander|C|247387|287|
+|Selesnya Signet|Magic: The Gathering-Commander|C|247388|258|
+|Svogthos, the Restless Tomb|Magic: The Gathering-Commander|U|247389|289|
+|Szadek, Lord of Secrets|Magic: The Gathering-Commander|R|247390|228|
+|Vulturous Zombie|Magic: The Gathering-Commander|R|247391|236|
+|Artisan of Kozilek|Magic: The Gathering-Commander|U|247392|1|
+|Awakening Zone|Magic: The Gathering-Commander|R|247393|142|
+|Disaster Radius|Magic: The Gathering-Commander|R|247394|119|
+|Dreamstone Hedron|Magic: The Gathering-Commander|U|247395|247|
+|Evolving Wilds|Magic: The Gathering-Commander|C|247396|272|
+|Guard Gomazoa|Magic: The Gathering-Commander|U|247397|49|
+|Prophetic Prism|Magic: The Gathering-Commander|C|247398|256|
+|Rapacious One|Magic: The Gathering-Commander|U|247399|133|
+|Wall of Omens|Magic: The Gathering-Commander|U|247400|37|
+|Bladewing the Risen|Magic: The Gathering-Commander|R|247401|185|
+|Chartooth Cougar|Magic: The Gathering-Commander|C|247402|115|
+|Elvish Aberration|Magic: The Gathering-Commander|U|247403|151|
+|Fierce Empath|Magic: The Gathering-Commander|C|247404|155|
+|Hunting Pack|Magic: The Gathering-Commander|U|247405|160|
+|Temple of the False God|Magic: The Gathering-Commander|U|247406|290|
+|Firespout|Magic: The Gathering-Commander|U|247407|199|
+|Plumeveil|Magic: The Gathering-Commander|U|247408|218|
+|Prison Term|Magic: The Gathering-Commander|U|247409|27|
+|Murmurs from Beyond|Magic: The Gathering-Commander|C|247410|53|
+|Oni of Wild Places|Magic: The Gathering-Commander|U|247411|130|
+|Razorjaw Oni|Magic: The Gathering-Commander|U|247412|94|
+|Reins of Power|Magic: The Gathering-Commander|R|247413|57|
+|Ruination|Magic: The Gathering-Commander|R|247414|134|
+|Evincar's Justice|Magic: The Gathering-Commander|C|247415|80|
+|Living Death|Magic: The Gathering-Commander|R|247416|88|
+|Propaganda|Magic: The Gathering-Commander|U|247417|55|
+|Dreadship Reef|Magic: The Gathering-Commander|U|247513|271|
+|Fungal Reaches|Magic: The Gathering-Commander|U|247514|274|
+|Molten Slagheap|Magic: The Gathering-Commander|U|247515|282|
+|Penumbra Spider|Magic: The Gathering-Commander|C|247516|167|
+|Return to Dust|Magic: The Gathering-Commander|U|247517|28|
+|Sulfurous Blast|Magic: The Gathering-Commander|U|247518|137|
+|Triskelavus|Magic: The Gathering-Commander|R|247519|263|
+|Avatar of Woe|Magic: The Gathering-Commander|R|247520|73|
+|Spike Feeder|Magic: The Gathering-Commander|U|247521|172|
+|Attrition|Magic: The Gathering-Commander|R|247522|72|
+|False Prophet|Magic: The Gathering-Commander|R|247523|13|
+|Yavimaya Elder|Magic: The Gathering-Commander|C|247524|179|
+|Mother of Runes|Magic: The Gathering-Commander|U|247525|21|
+|Congregate|Magic: The Gathering-Commander|C|247526|11|
+|Dark Hatchling|Magic: The Gathering-Commander|R|247527|76|
+|Fog Bank|Magic: The Gathering-Commander|U|247528|47|
+|Goblin Cadets|Magic: The Gathering-Commander|U|247529|125|
+|Monk Realist|Magic: The Gathering-Commander|C|247530|20|
+|Unnerve|Magic: The Gathering-Commander|C|247531|105|
+|Windfall|Magic: The Gathering-Commander|U|247532|70|
+|Sol Ring|Magic: The Gathering-Commander|U|247533|261|
+|Veteran Explorer|Magic: The Gathering-Commander|U|247534|177|
+|Bestial Menace|Magic: The Gathering-Commander|U|247535|144|
+|Bojuka Bog|Magic: The Gathering-Commander|C|247536|267|
+|Butcher of Malakir|Magic: The Gathering-Commander|R|247537|75|
+|Chain Reaction|Magic: The Gathering-Commander|R|247538|113|
+|Comet Storm|Magic: The Gathering-Commander|M|247539|117|
+|Lightkeeper of Emeria|Magic: The Gathering-Commander|U|247540|18|
+|Nemesis Trap|Magic: The Gathering-Commander|U|247541|91|
+|Wrexial, the Risen Deep|Magic: The Gathering-Commander|M|247542|239|
+|Akoum Refuge|Magic: The Gathering-Commander|U|247543|264|
+|Baloth Woodcrasher|Magic: The Gathering-Commander|U|247544|143|
+|Cobra Trap|Magic: The Gathering-Commander|U|247545|146|
+|Gomazoa|Magic: The Gathering-Commander|U|247546|48|
+|Journey to Nowhere|Magic: The Gathering-Commander|C|247547|17|
+|Jwar Isle Refuge|Magic: The Gathering-Commander|U|247548|279|
+|Kazandu Refuge|Magic: The Gathering-Commander|U|247549|280|
+|Punishing Fire|Magic: The Gathering-Commander|U|247550|131|
+|Relic Crush|Magic: The Gathering-Commander|C|247551|168|
+|Vampire Nighthawk|Magic: The Gathering-Commander|U|247552|106|
+|Forest|Magic: The Gathering-Commander|L|249800|317|
+|Forest|Magic: The Gathering-Commander|L|249801|316|
+|Forest|Magic: The Gathering-Commander|L|249802|318|
+|Forest|Magic: The Gathering-Commander|L|249803|315|
+|Island|Magic: The Gathering-Commander|L|249804|303|
+|Island|Magic: The Gathering-Commander|L|249805|306|
+|Island|Magic: The Gathering-Commander|L|249806|305|
+|Island|Magic: The Gathering-Commander|L|249807|304|
+|Mountain|Magic: The Gathering-Commander|L|249808|313|
+|Mountain|Magic: The Gathering-Commander|L|249809|312|
+|Mountain|Magic: The Gathering-Commander|L|249810|311|
+|Mountain|Magic: The Gathering-Commander|L|249811|314|
+|Plains|Magic: The Gathering-Commander|L|249812|302|
+|Plains|Magic: The Gathering-Commander|L|249813|300|
+|Plains|Magic: The Gathering-Commander|L|249814|299|
+|Plains|Magic: The Gathering-Commander|L|249815|301|
+|Swamp|Magic: The Gathering-Commander|L|249816|307|
+|Swamp|Magic: The Gathering-Commander|L|249817|310|
+|Swamp|Magic: The Gathering-Commander|L|249818|309|
+|Swamp|Magic: The Gathering-Commander|L|249819|308|
+|Spawnwrithe|Magic: The Gathering-Commander|R|259016|171|
