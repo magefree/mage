@@ -39,7 +39,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.PutIntoGraveFromAnywhereTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.TakesAnExtraTurnControlledEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
