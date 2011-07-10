@@ -30,7 +30,6 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 
-import com.sun.org.apache.xalan.internal.xsltc.dom.Filter;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
