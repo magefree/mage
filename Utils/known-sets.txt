@@ -1,0 +1,24 @@
+Alara Reborn|ARB|alarareborn|
+Apocalypse|APC|apocalypse|
+Conflux|CON|conflux|
+Darksteel|DST|darksteel|
+Eventide|EVE|eventide|
+Magic 2010|M10|magic2010|
+Magic 2011|M11|magic2011|
+Magic 2012|M12|magic2012|
+Planechase|HOP|planechase|
+Ravnica: City of Guilds|RAV|ravnika|
+Rise of the Eldrazi|ROE|riseoftheeldrazi|
+Shards of Alara|ALA|shardsofalara|
+Tenth Edition|10E|tenth|
+Worldwake|WWK|worldwake|
+Zendikar|ZEN|zendikar|
+Scars of Mirrodin|SOM|scarsofmirrodin|
+Guildpact|GPT|guildpact|
+Dissension|DIS|dissension|
+Mirrodin|MRD|mirrodin|
+Duel Decks: Elspeth vs. Tezzeret|DDF|elspethvstezzeret|
+Mirrodin Besieged|MBS|mirrodinbesieged|
+New Phyrexia|NPH|newphyrexia|
+Tempest|TMP|tempest|
+Champions of Kamigawa|CHK|championsofkamigawa|
