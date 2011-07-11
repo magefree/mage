@@ -29,23 +29,25 @@ public class WizardCardsImageSource implements CardImageSource {
     public WizardCardsImageSource() {
         sets = new HashMap();
         setsAliases = new HashMap();
-        setsAliases.put("NPH", "newphyrexia");
-        setsAliases.put("MBS", "mirrodinbesieged");
-        setsAliases.put("SOM", "scarsofmirrodin");
-        setsAliases.put("M11", "magic2011");
-        setsAliases.put("ROE", "riseoftheeldrazi");
-        setsAliases.put("WWK", "worldwake");
-        setsAliases.put("ZEN", "zendikar");
-        setsAliases.put("M10", "magic2010");
-        setsAliases.put("ARB", "alarareborn");
-        setsAliases.put("CON", "conflux");
-        setsAliases.put("ALA", "shardsofalara");
+        setsAliases.put("M12", "magic2012/cig");
+        setsAliases.put("CMD", "commander/cig");
+        setsAliases.put("NPH", "newphyrexia/spoiler");
+        setsAliases.put("MBS", "mirrodinbesieged/spoiler");
+        setsAliases.put("SOM", "scarsofmirrodin/spoiler");
+        setsAliases.put("M11", "magic2011/spoiler");
+        setsAliases.put("ROE", "riseoftheeldrazi/spoiler");
+        setsAliases.put("WWK", "worldwake/spoiler");
+        setsAliases.put("ZEN", "zendikar/spoiler");
+        setsAliases.put("M10", "magic2010/spoiler");
+        setsAliases.put("ARB", "alarareborn/spoiler");
+        setsAliases.put("CON", "conflux/spoiler");
+        setsAliases.put("ALA", "shardsofalara/spoiler");
     }
 
     private List<String> getSetLinks(String cardSet) {
         List<String> setLinks = new ArrayList<String>();
         try {
-            Document doc = Jsoup.connect("http://www.wizards.com/magic/tcg/article.aspx?x=mtg/tcg/" + cardSet + "/spoiler").get();
+            Document doc = Jsoup.connect("http://www.wizards.com/magic/tcg/article.aspx?x=mtg/tcg/" + (String) setsAliases.get(cardSet)).get();
             Elements cardsImages = doc.select("img[height$=370]");
             for (int i = 0; i < cardsImages.size(); i++) {
                 setLinks.add(cardsImages.get(i).attr("src"));
@@ -64,7 +66,7 @@ public class WizardCardsImageSource implements CardImageSource {
         if (setsAliases.get(cardSet) != null) {
             List<String> setLinks = (List<String>) sets.get(cardSet);
             if (setLinks == null) {
-                setLinks = getSetLinks((String) setsAliases.get(cardSet));
+                setLinks = getSetLinks(cardSet);
                 sets.put(cardSet, setLinks);
             }
             String link;

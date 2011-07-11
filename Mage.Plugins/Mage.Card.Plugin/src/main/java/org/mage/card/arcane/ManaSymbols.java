@@ -14,7 +14,6 @@ import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.utils.BufferedImageBuilder;
 
-import javax.imageio.ImageIO;
 
 public class ManaSymbols {
 	private static final Logger log = Logger.getLogger(ManaSymbols.class);
@@ -24,7 +23,7 @@ public class ManaSymbols {
 	static private Pattern replaceSymbolsPattern = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
 
 	private static final String[] sets = {"DIS", "GPT", "RAV", "MRD",
-			"10E", "HOP", "ALA", "CFX", "ARB", "ZEN", "WWK", "ROE", "SOM", "M10", "M11",
+			"10E", "HOP", "ALA", "CFX", "ARB", "ZEN", "WWK", "ROE", "SOM", "M10", "M11", "M12",
 			"MBS", "DDF", "DST", "EVE", "APC", "NPH", "TMP", "CHK"};
 
 
