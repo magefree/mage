@@ -28,8 +28,6 @@
 
 package mage.sets.tempest;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import mage.Constants;
