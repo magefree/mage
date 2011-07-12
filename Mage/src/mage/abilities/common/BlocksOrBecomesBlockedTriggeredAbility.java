@@ -11,16 +11,16 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author North
+ * @author North, Loki
  */
 public class BlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl<BlocksOrBecomesBlockedTriggeredAbility> {
 
     public BlocksOrBecomesBlockedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-        this.addTarget(new TargetCreaturePermanent());
     }
 
     public BlocksOrBecomesBlockedTriggeredAbility(final BlocksOrBecomesBlockedTriggeredAbility ability) {
@@ -31,11 +31,15 @@ public class BlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.BLOCKER_DECLARED) {
             if (event.getSourceId().equals(this.getSourceId())) {
-                this.getTargets().get(0).add(event.getTargetId(), game);
+                for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                }
                 return true;
             }
             if (event.getTargetId().equals(this.getSourceId())) {
-                this.getTargets().get(0).add(event.getSourceId(), game);
+                for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                }
                 return true;
             }
         }

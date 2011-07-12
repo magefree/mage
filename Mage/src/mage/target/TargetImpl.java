@@ -53,7 +53,7 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 	protected Zone zone;
 	protected int maxNumberOfTargets;
 	protected int minNumberOfTargets;
-	protected boolean required = true;
+	protected boolean required = false;
 	protected boolean chosen = false;
 	protected boolean notTarget = false;
 
