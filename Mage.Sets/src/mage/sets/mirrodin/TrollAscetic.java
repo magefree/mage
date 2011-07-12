@@ -39,6 +39,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CantTargetSourceEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterStackObject;
 
@@ -47,12 +48,6 @@ import mage.filter.FilterStackObject;
  * @author Loki
  */
 public class TrollAscetic extends CardImpl<TrollAscetic> {
-	private static FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
-
-	static {
-		filter.setTargetController(Constants.TargetController.OPPONENT);
-	}
-
     public TrollAscetic (UUID ownerId) {
         super(ownerId, 135, "Troll Ascetic", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         this.expansionSetCode = "MRD";
@@ -61,7 +56,7 @@ public class TrollAscetic extends CardImpl<TrollAscetic> {
 		this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CantTargetSourceEffect(filter, Constants.Duration.WhileOnBattlefield)));
+		this.addAbility(new HexproofAbility());
 		this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
     }
 

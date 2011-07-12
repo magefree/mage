@@ -37,6 +37,7 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CantTargetSourceEffect;
+import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterStackObject;
 
@@ -45,13 +46,6 @@ import mage.filter.FilterStackObject;
  * @author BetaSteward_at_googlemail.com
  */
 public class SacredWolf extends CardImpl<SacredWolf> {
-
-	private static final FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
-
-	static {
-		filter.setTargetController(TargetController.OPPONENT);
-	}
-
 	public SacredWolf(UUID ownerId) {
 		super(ownerId, 196, "Sacred Wolf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
 		this.expansionSetCode = "M11";
@@ -59,7 +53,7 @@ public class SacredWolf extends CardImpl<SacredWolf> {
 		this.color.setGreen(true);
 		this.power = new MageInt(3);
 		this.toughness = new MageInt(1);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantTargetSourceEffect(filter, Duration.WhileOnBattlefield)));
+		this.addAbility(new HexproofAbility());
 	}
 
 	public SacredWolf(final SacredWolf card) {
