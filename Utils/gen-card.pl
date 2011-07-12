@@ -6,6 +6,13 @@ use Text::Template;
 use Data::Dumper;
 use strict;
 
+sub getClassName {
+    my $string = $_[0];
+    $string =~ s/\b(\w+)\b/ucfirst($1)/ge;
+    $string =~ s/[-,\s\']//g;
+    $string;
+}
+
 my $datafile = "mtg-cards-data.txt";
 
 my @sets;
@@ -326,8 +333,7 @@ print "card fetched\n";
 my $template = Text::Template->new(SOURCE => 'cardclass.tmpl', DELIMITERS => [ '[=', '=]' ]);
 my %vars;
 $vars{'name'} = $cardname;
-$cardname =~ s/[-,\s\']//g;
-$vars{'classname'} = $cardname;
+$vars{'classname'} = getClassName($cardname);
 
 
 $parser->parse($mech->content());

@@ -21,13 +21,7 @@ my $template = Text::Template->new(SOURCE => 'cardExtendedClass.tmpl', DELIMITER
 sub getClassName {
     my $string = $_[0];
     $string =~ s/\b(\w+)\b/ucfirst($1)/ge;
-    $string =~ s/[, ]//g;
-    $string;
-}
-
-sub getOldClassName {
-    my $string = $_[0];
-    $string =~ s/[, ]//g;
+    $string =~ s/[-,\s\']//g;
     $string;
 }
 
@@ -90,10 +84,9 @@ foreach my $cardName (@setCards) {
         }
         
         if($found eq 1) {
-            #print $vars{'set'} . "|" . $vars{'baseSet'} . "|" . $vars{'className'} . "|" . $vars{'baseClassName'} . "|" . $vars{'expansionSetCode'} . "\n";
             my $result = $template->fill_in(HASH => \%vars);
             if (defined($result)) {
-                #print $result;
+                print $vars{'set'} . "." . $vars{'className'} . "\n";
                 open CARD, "> $currentFileName";
                 print CARD $result; 
                 close CARD;
