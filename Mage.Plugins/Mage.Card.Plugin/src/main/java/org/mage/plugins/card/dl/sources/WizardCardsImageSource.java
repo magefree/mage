@@ -30,7 +30,6 @@ public class WizardCardsImageSource implements CardImageSource {
         sets = new HashMap();
         setsAliases = new HashMap();
         setsAliases.put("M12", "magic2012/cig");
-        setsAliases.put("CMD", "commander/cig");
         setsAliases.put("NPH", "newphyrexia/spoiler");
         setsAliases.put("MBS", "mirrodinbesieged/spoiler");
         setsAliases.put("SOM", "scarsofmirrodin/spoiler");
