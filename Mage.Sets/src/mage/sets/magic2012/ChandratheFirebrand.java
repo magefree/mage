@@ -55,9 +55,8 @@ import mage.target.targetpointer.FixedTarget;
 public class ChandratheFirebrand extends CardImpl<ChandratheFirebrand> {
 
     public ChandratheFirebrand (UUID ownerId) {
-        super(ownerId, 124, "Chandra, the Firebrand", Rarity.MYTHIC, new CardType[]{}, "{3}{R}");
+        super(ownerId, 124, "Chandra, the Firebrand", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{R}");
         this.expansionSetCode = "M12";
-        this.subtype.add("Planeswalker");
         this.subtype.add("Chandra");
 		this.color.setRed(true);
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
