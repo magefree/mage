@@ -25,7 +25,8 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+
+package mage.sets.darksteel;
 
 import java.util.UUID;
 
@@ -33,35 +34,39 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.Mana;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.RemoveCountersSourceCost;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.effects.common.counter.AddCountersControllerEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
+import mage.counters.common.PlusOneCounter;
 
 /**
- * @author Loki, North
+ * @author Loki
  */
-public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
+public class Spincrusher extends CardImpl<Spincrusher> {
 
-    public AkkiRockspeaker(UUID ownerId) {
-        super(ownerId, 154, "Akki Rockspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
-
-        this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
+    public Spincrusher(UUID ownerId) {
+        super(ownerId, 144, "Spincrusher", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
+        this.expansionSetCode = "DST";
+        this.subtype.add("Construct");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(2);
+        this.addAbility(new BlocksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilitySourceEffect(UnblockableAbility.getInstance(), Constants.Duration.EndOfTurn), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1))));
     }
 
-    public AkkiRockspeaker(final AkkiRockspeaker card) {
+    public Spincrusher(final Spincrusher card) {
         super(card);
     }
 
     @Override
-    public AkkiRockspeaker copy() {
-        return new AkkiRockspeaker(this);
+    public Spincrusher copy() {
+        return new Spincrusher(this);
     }
+
 }

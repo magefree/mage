@@ -25,43 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+
+package mage.sets.darksteel;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.Mana;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.cards.CardImpl;
 
 /**
- * @author Loki, North
+ * @author Loki
  */
-public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
+public class CrazedGoblin extends CardImpl<CrazedGoblin> {
 
-    public AkkiRockspeaker(UUID ownerId) {
-        super(ownerId, 154, "Akki Rockspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "CHK";
+    public CrazedGoblin(UUID ownerId) {
+        super(ownerId, 56, "Crazed Goblin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
+        this.expansionSetCode = "DST";
         this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
-
+        this.subtype.add("Warrior");
         this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
+        this.addAbility(new AttacksEachTurnStaticAbility());
     }
 
-    public AkkiRockspeaker(final AkkiRockspeaker card) {
+    public CrazedGoblin(final CrazedGoblin card) {
         super(card);
     }
 
     @Override
-    public AkkiRockspeaker copy() {
-        return new AkkiRockspeaker(this);
+    public CrazedGoblin copy() {
+        return new CrazedGoblin(this);
     }
+
 }

@@ -25,43 +25,80 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+
+package mage.sets.darksteel;
 
 import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.Mana;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
- * @author Loki, North
+ *
+ * @author Loki
  */
-public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
+public class Soulscour extends CardImpl<Soulscour> {
 
-    public AkkiRockspeaker(UUID ownerId) {
-        super(ownerId, 154, "Akki Rockspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
-
-        this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
+    public Soulscour (UUID ownerId) {
+        super(ownerId, 14, "Soulscour", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{7}{W}{W}{W}");
+        this.expansionSetCode = "DST";
+		this.color.setWhite(true);
+        this.getSpellAbility().addEffect(new SoulscourEffect());
     }
 
-    public AkkiRockspeaker(final AkkiRockspeaker card) {
+    public Soulscour (final Soulscour card) {
         super(card);
     }
 
     @Override
-    public AkkiRockspeaker copy() {
-        return new AkkiRockspeaker(this);
+    public Soulscour copy() {
+        return new Soulscour(this);
+    }
+
+}
+
+
+class SoulscourEffect extends OneShotEffect<SoulscourEffect> {
+
+    private final static FilterPermanent filter = new FilterPermanent("");
+
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.getNotCardType().add(true);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
+    }
+
+    public SoulscourEffect() {
+        super(Constants.Outcome.DestroyPermanent);
+    }
+
+    public SoulscourEffect(final SoulscourEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter)) {
+            permanent.destroy(source.getId(), game, false);
+        }
+        return true;
+    }
+
+    @Override
+    public SoulscourEffect copy() {
+        return new SoulscourEffect(this);
+    }
+
+    @Override
+    public String getText(Ability source) {
+        return "Destroy all nonartifact permanents";
     }
 }

@@ -25,43 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+
+package mage.sets.darksteel;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
 
 /**
- * @author Loki, North
+ * @author Loki
  */
-public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
+public class MyrMoonvessel extends CardImpl<MyrMoonvessel> {
 
-    public AkkiRockspeaker(UUID ownerId) {
-        super(ownerId, 154, "Akki Rockspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
-
-        this.color.setRed(true);
+    public MyrMoonvessel(UUID ownerId) {
+        super(ownerId, 133, "Myr Moonvessel", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
+        this.expansionSetCode = "DST";
+        this.subtype.add("Myr");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
+        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new ManaEffect(new Mana(0, 0, 0, 0, 0, 1, 0))));
     }
 
-    public AkkiRockspeaker(final AkkiRockspeaker card) {
+    public MyrMoonvessel(final MyrMoonvessel card) {
         super(card);
     }
 
     @Override
-    public AkkiRockspeaker copy() {
-        return new AkkiRockspeaker(this);
+    public MyrMoonvessel copy() {
+        return new MyrMoonvessel(this);
     }
+
 }

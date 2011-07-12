@@ -25,7 +25,8 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+
+package mage.sets.darksteel;
 
 import java.util.UUID;
 
@@ -34,34 +35,65 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.Ability;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.common.FilterControlledPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
- * @author Loki, North
+ * @author Loki
  */
-public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
+public class KrarkClanStoker extends CardImpl<KrarkClanStoker> {
 
-    public AkkiRockspeaker(UUID ownerId) {
-        super(ownerId, 154, "Akki Rockspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
-        this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public AkkiRockspeaker(final AkkiRockspeaker card) {
+    public KrarkClanStoker(UUID ownerId) {
+        super(ownerId, 65, "Krark-Clan Stoker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "DST";
+        this.subtype.add("Goblin");
+        this.subtype.add("Shaman");
+        this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+        Ability ability = new KrarkClanStokerAbility();
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        this.addAbility(ability);
+    }
+
+    public KrarkClanStoker(final KrarkClanStoker card) {
         super(card);
     }
 
     @Override
-    public AkkiRockspeaker copy() {
-        return new AkkiRockspeaker(this);
+    public KrarkClanStoker copy() {
+        return new KrarkClanStoker(this);
+    }
+
+}
+
+class KrarkClanStokerAbility extends BasicManaAbility<KrarkClanStokerAbility> {
+
+    public KrarkClanStokerAbility() {
+        super(new ManaEffect(new Mana(2, 0, 0, 0, 0, 0, 0)));
+        this.netMana.setRed(2);
+    }
+
+    public KrarkClanStokerAbility(final KrarkClanStokerAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public KrarkClanStokerAbility copy() {
+        return new KrarkClanStokerAbility(this);
     }
 }

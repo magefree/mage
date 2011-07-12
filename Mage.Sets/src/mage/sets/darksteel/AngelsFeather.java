@@ -1,3 +1,4 @@
+
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
@@ -25,43 +26,31 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+
+package mage.sets.darksteel;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.Mana;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ManaEffect;
-import mage.cards.CardImpl;
-
 /**
- * @author Loki, North
+ *
+ * @author Loki
  */
-public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
 
-    public AkkiRockspeaker(UUID ownerId) {
-        super(ownerId, 154, "Akki Rockspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
+public class AngelsFeather extends mage.sets.tenth.AngelsFeather {
 
-        this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+	public AngelsFeather(UUID ownerId) {
+		super(ownerId);
+        this.cardNumber = 92;
+		this.expansionSetCode = "DST";
+	}
 
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
-    }
+	public AngelsFeather(final AngelsFeather card) {
+		super(card);
+	}
 
-    public AkkiRockspeaker(final AkkiRockspeaker card) {
-        super(card);
-    }
+	@Override
+	public AngelsFeather copy() {
+		return new AngelsFeather(this);
+	}
 
-    @Override
-    public AkkiRockspeaker copy() {
-        return new AkkiRockspeaker(this);
-    }
 }

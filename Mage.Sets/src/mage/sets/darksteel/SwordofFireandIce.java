@@ -26,23 +26,20 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.sets.darksteel;
 
 import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
@@ -52,70 +49,68 @@ import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
- *
  * @author Loki
  */
-public class SwordofBodyandMind extends CardImpl<SwordofBodyandMind> {
+public class SwordofFireandIce extends CardImpl<SwordofFireandIce> {
 
-    private static FilterCard filter = new FilterCard("green and from blue");
+    private static FilterCard filter = new FilterCard("red and from blue");
 
     static {
         filter.setUseColor(true);
-        filter.getColor().setBlue(true);
+        filter.getColor().setRed(true);
         filter.getColor().setGreen(true);
         filter.setScopeColor(Filter.ComparisonScope.Any);
     }
 
 
-    public SwordofBodyandMind (UUID ownerId) {
-        super(ownerId, 208, "Sword of Body and Mind", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "SOM";
+    public SwordofFireandIce(UUID ownerId) {
+        super(ownerId, 148, "Sword of Fire and Ice", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.expansionSetCode = "DST";
         this.subtype.add("Equipment");
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(filter), Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new SwordofFireandIceAbility());
         this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(filter), Constants.AttachmentType.EQUIPMENT)));
-        this.addAbility(new SwordofBodyandMindAbility());
     }
 
-    public SwordofBodyandMind (final SwordofBodyandMind card) {
+    public SwordofFireandIce(final SwordofFireandIce card) {
         super(card);
     }
 
     @Override
-    public SwordofBodyandMind copy() {
-        return new SwordofBodyandMind(this);
+    public SwordofFireandIce copy() {
+        return new SwordofFireandIce(this);
     }
+
 }
 
-class SwordofBodyandMindAbility extends TriggeredAbilityImpl<SwordofBodyandMindAbility> {
+class SwordofFireandIceAbility extends TriggeredAbilityImpl<SwordofFireandIceAbility> {
 
-    public SwordofBodyandMindAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken()));
-        this.addEffect(new PutLibraryIntoGraveTargetEffect(10));
-        this.addTarget(new TargetPlayer());
+    public SwordofFireandIceAbility() {
+        super(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(2));
+        this.addEffect(new DrawCardControllerEffect(1));
+        this.addTarget(new TargetCreatureOrPlayer());
     }
 
-    public SwordofBodyandMindAbility(final SwordofBodyandMindAbility ability) {
+    public SwordofFireandIceAbility(final SwordofFireandIceAbility ability) {
         super(ability);
     }
 
     @Override
-    public SwordofBodyandMindAbility copy() {
-        return new SwordofBodyandMindAbility(this);
+    public SwordofFireandIceAbility copy() {
+        return new SwordofFireandIceAbility(this);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event instanceof DamagedPlayerEvent) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
+            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
             Permanent p = game.getPermanent(event.getSourceId());
             if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
-                this.targets.get(0).add(event.getPlayerId(), game);
-			    return true;
+                return true;
             }
         }
         return false;
@@ -123,17 +118,6 @@ class SwordofBodyandMindAbility extends TriggeredAbilityImpl<SwordofBodyandMindA
 
     @Override
     public String getRule() {
-        return "Whenever equipped creature deals combat damage to a player, you put a 2/2 green Wolf creature token onto the battlefield and that player puts the top ten cards of his or her library into his or her graveyard.";
-    }
-}
-
-class WolfToken extends Token {
-    public WolfToken() {
-        super("Wolf", "a 2/2 green Wolf creature token");
-        cardType.add(CardType.CREATURE);
-		color = ObjectColor.GREEN;
-		subtype.add("Wolf");
-		power = new MageInt(2);
-		toughness = new MageInt(2);
+        return "Whenever equipped creature deals combat damage to a player, Sword of Fire and Ice deals 2 damage to target creature or player and you draw a card.";
     }
 }

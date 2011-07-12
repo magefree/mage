@@ -25,43 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+
+package mage.sets.darksteel;
 
 import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.Mana;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.RemoveCountersSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
+import mage.counters.common.ChargeCounter;
 
 /**
- * @author Loki, North
+ *
+ * @author Loki
  */
-public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
+public class MirrodinsCore extends CardImpl<MirrodinsCore> {
 
-    public AkkiRockspeaker(UUID ownerId) {
-        super(ownerId, 154, "Akki Rockspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
+    public MirrodinsCore (UUID ownerId) {
+        super(ownerId, 165, "Mirrodin's Core", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "DST";
+        this.addAbility(new ColorlessManaAbility());
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost()));
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
+        ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
+        this.addAbility(ability);
 
-        this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
     }
 
-    public AkkiRockspeaker(final AkkiRockspeaker card) {
+    public MirrodinsCore (final MirrodinsCore card) {
         super(card);
     }
 
     @Override
-    public AkkiRockspeaker copy() {
-        return new AkkiRockspeaker(this);
+    public MirrodinsCore copy() {
+        return new MirrodinsCore(this);
     }
+
 }

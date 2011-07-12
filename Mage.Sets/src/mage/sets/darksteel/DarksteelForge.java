@@ -25,43 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+
+package mage.sets.darksteel;
 
 import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.Mana;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
- * @author Loki, North
+ * @author Loki
  */
-public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
+public class DarksteelForge extends CardImpl<DarksteelForge> {
 
-    public AkkiRockspeaker(UUID ownerId) {
-        super(ownerId, 154, "Akki Rockspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Artifacts");
 
-        this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public AkkiRockspeaker(final AkkiRockspeaker card) {
+    public DarksteelForge(UUID ownerId) {
+        super(ownerId, 110, "Darksteel Forge", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{9}");
+        this.expansionSetCode = "DST";
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filter, false)));
+
+    }
+
+    public DarksteelForge(final DarksteelForge card) {
         super(card);
     }
 
     @Override
-    public AkkiRockspeaker copy() {
-        return new AkkiRockspeaker(this);
+    public DarksteelForge copy() {
+        return new DarksteelForge(this);
     }
+
 }

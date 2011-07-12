@@ -87,11 +87,10 @@ class GhostlyPrisonReplacementEffect extends ReplacementEffectImpl<GhostlyPrison
 	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
 		if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
 			Player player = game.getPlayer(event.getPlayerId());
-
-			if ( player != null ) {
+			if ( player != null && event.getTargetId().equals(source.getControllerId())) {
 				ManaCostsImpl propagandaTax = new ManaCostsImpl("{2}");
 				if ( propagandaTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
-					 player.chooseUse(Constants.Outcome.Neutral, "Pay {2} to declare attacker?", game) )
+					 player.chooseUse(Constants.Outcome.Benefit, "Pay {2} to declare attacker?", game) )
 				{
 					propagandaTax.pay(game, this.getId(), event.getPlayerId(), false);
 

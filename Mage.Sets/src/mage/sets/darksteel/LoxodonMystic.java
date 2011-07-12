@@ -25,7 +25,8 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+
+package mage.sets.darksteel;
 
 import java.util.UUID;
 
@@ -33,35 +34,40 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.Mana;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
- * @author Loki, North
+ * @author Loki
  */
-public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
+public class LoxodonMystic extends CardImpl<LoxodonMystic> {
 
-    public AkkiRockspeaker(UUID ownerId) {
-        super(ownerId, 154, "Akki Rockspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
-
-        this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
+    public LoxodonMystic(UUID ownerId) {
+        super(ownerId, 7, "Loxodon Mystic", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+        this.expansionSetCode = "DST";
+        this.subtype.add("Elephant");
+        this.subtype.add("Cleric");
+        this.color.setWhite(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new TapTargetEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.W));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public AkkiRockspeaker(final AkkiRockspeaker card) {
+    public LoxodonMystic(final LoxodonMystic card) {
         super(card);
     }
 
     @Override
-    public AkkiRockspeaker copy() {
-        return new AkkiRockspeaker(this);
+    public LoxodonMystic copy() {
+        return new LoxodonMystic(this);
     }
+
 }

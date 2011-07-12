@@ -25,43 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+
+package mage.sets.darksteel;
+
+import mage.Constants;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.keyword.IndestructibleAbility;
+import mage.cards.CardImpl;
+import mage.choices.ChoiceColor;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.Mana;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ManaEffect;
-import mage.cards.CardImpl;
-
 /**
- * @author Loki, North
+ * @author Loki
  */
-public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
 
-    public AkkiRockspeaker(UUID ownerId) {
-        super(ownerId, 154, "Akki Rockspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
+public class DarksteelIngot extends CardImpl<DarksteelIngot> {
 
-        this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
+    public DarksteelIngot(UUID ownerId) {
+        super(ownerId, 112, "Darksteel Ingot", Constants.Rarity.COMMON, new Constants.CardType[]{Constants.CardType.ARTIFACT}, "{3}");
+        this.expansionSetCode = "DST";
+        this.addAbility(IndestructibleAbility.getInstance());
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
+        ability.addChoice(new ChoiceColor());
+        this.addAbility(ability);
     }
 
-    public AkkiRockspeaker(final AkkiRockspeaker card) {
+    public DarksteelIngot(final DarksteelIngot card) {
         super(card);
     }
 
     @Override
-    public AkkiRockspeaker copy() {
-        return new AkkiRockspeaker(this);
+    public DarksteelIngot copy() {
+        return new DarksteelIngot(this);
     }
 }

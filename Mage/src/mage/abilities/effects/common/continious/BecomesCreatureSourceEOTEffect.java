@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common.continious;
 
+import mage.Constants;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
@@ -73,7 +74,10 @@ public class BecomesCreatureSourceEOTEffect extends ContinuousEffectImpl<Becomes
 				case TypeChangingEffects_4:
 					if (sublayer == SubLayer.NA) {
 						if (token.getCardType().size() > 0)
-							permanent.getCardType().addAll(token.getCardType());
+                            for (Constants.CardType t : token.getCardType()) {
+                                if (!permanent.getCardType().contains(t))
+                                    permanent.getCardType().add(t);
+                            }
 						if (token.getSubtype().size() > 0)
 							permanent.getSubtype().addAll(token.getSubtype());
 					}

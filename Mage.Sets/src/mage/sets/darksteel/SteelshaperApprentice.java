@@ -25,7 +25,8 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+
+package mage.sets.darksteel;
 
 import java.util.UUID;
 
@@ -33,35 +34,49 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.Mana;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.ReturnToHandSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.filter.FilterCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
- * @author Loki, North
+ * @author Loki
  */
-public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
+public class SteelshaperApprentice extends CardImpl<SteelshaperApprentice> {
 
-    public AkkiRockspeaker(UUID ownerId) {
-        super(ownerId, 154, "Akki Rockspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
+    private static final FilterCard filter = new FilterCard("Equipment card");
 
-        this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.getSubtype().add("Equipment");
     }
 
-    public AkkiRockspeaker(final AkkiRockspeaker card) {
+    public SteelshaperApprentice(UUID ownerId) {
+        super(ownerId, 15, "Steelshaper Apprentice", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+        this.expansionSetCode = "DST";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(1, 1, filter)), new ColoredManaCost(Constants.ColoredManaSymbol.W));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new ReturnToHandSourceCost());
+        this.addAbility(ability);
+    }
+
+    public SteelshaperApprentice(final SteelshaperApprentice card) {
         super(card);
     }
 
     @Override
-    public AkkiRockspeaker copy() {
-        return new AkkiRockspeaker(this);
+    public SteelshaperApprentice copy() {
+        return new SteelshaperApprentice(this);
     }
+
 }

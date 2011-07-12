@@ -25,43 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+
+package mage.sets.darksteel;
 
 import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.Mana;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.continious.BoostEquippedEffect;
+import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 
 /**
- * @author Loki, North
+ * @author Loki
  */
-public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
+public class VulshokMorningstar extends CardImpl<VulshokMorningstar> {
 
-    public AkkiRockspeaker(UUID ownerId) {
-        super(ownerId, 154, "Akki Rockspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
-
-        this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
+    public VulshokMorningstar(UUID ownerId) {
+        super(ownerId, 157, "Vulshok Morningstar", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "DST";
+        this.subtype.add("Equipment");
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
+        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public AkkiRockspeaker(final AkkiRockspeaker card) {
+    public VulshokMorningstar(final VulshokMorningstar card) {
         super(card);
     }
 
     @Override
-    public AkkiRockspeaker copy() {
-        return new AkkiRockspeaker(this);
+    public VulshokMorningstar copy() {
+        return new VulshokMorningstar(this);
     }
+
 }

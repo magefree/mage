@@ -25,43 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+
+package mage.sets.darksteel;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.Mana;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.keyword.FlashAbility;
+import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 
 /**
- * @author Loki, North
+ * @author Loki
  */
-public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
+public class TangleSpider extends CardImpl<TangleSpider> {
 
-    public AkkiRockspeaker(UUID ownerId) {
-        super(ownerId, 154, "Akki Rockspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
-
-        this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
+    public TangleSpider(UUID ownerId) {
+        super(ownerId, 85, "Tangle Spider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
+        this.expansionSetCode = "DST";
+        this.subtype.add("Spider");
+        this.color.setGreen(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
+        this.addAbility(FlashAbility.getInstance());
+        this.addAbility(ReachAbility.getInstance());
     }
 
-    public AkkiRockspeaker(final AkkiRockspeaker card) {
+    public TangleSpider(final TangleSpider card) {
         super(card);
     }
 
     @Override
-    public AkkiRockspeaker copy() {
-        return new AkkiRockspeaker(this);
+    public TangleSpider copy() {
+        return new TangleSpider(this);
     }
+
 }

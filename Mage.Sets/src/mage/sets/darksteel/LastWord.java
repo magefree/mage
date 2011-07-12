@@ -25,43 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+
+package mage.sets.darksteel;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.Mana;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.common.CantCounterAbility;
+import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.target.TargetSpell;
 
 /**
- * @author Loki, North
+ *
+ * @author Loki
  */
-public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
+public class LastWord extends CardImpl<LastWord> {
 
-    public AkkiRockspeaker(UUID ownerId) {
-        super(ownerId, 154, "Akki Rockspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
-
-        this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
+    public LastWord (UUID ownerId) {
+        super(ownerId, 23, "Last Word", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
+        this.expansionSetCode = "DST";
+		this.color.setBlue(true);
+        this.addAbility(new CantCounterAbility());
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public AkkiRockspeaker(final AkkiRockspeaker card) {
+    public LastWord (final LastWord card) {
         super(card);
     }
 
     @Override
-    public AkkiRockspeaker copy() {
-        return new AkkiRockspeaker(this);
+    public LastWord copy() {
+        return new LastWord(this);
     }
+
 }

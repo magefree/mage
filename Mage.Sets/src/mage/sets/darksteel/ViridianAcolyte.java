@@ -25,7 +25,8 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+
+package mage.sets.darksteel;
 
 import java.util.UUID;
 
@@ -34,34 +35,44 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
+import mage.choices.ChoiceColor;
 
 /**
- * @author Loki, North
+ * @author Loki
  */
-public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
+public class ViridianAcolyte extends CardImpl<ViridianAcolyte> {
 
-    public AkkiRockspeaker(UUID ownerId) {
-        super(ownerId, 154, "Akki Rockspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Goblin");
+    public ViridianAcolyte(UUID ownerId) {
+        super(ownerId, 89, "Viridian Acolyte", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "DST";
+        this.subtype.add("Elf");
         this.subtype.add("Shaman");
-
-        this.color.setRed(true);
+        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new GenericManaCost(1));
+        ability.addCost(new TapSourceCost());
+        ability.addChoice(new ChoiceColor());
+        this.addAbility(ability);
 
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
     }
 
-    public AkkiRockspeaker(final AkkiRockspeaker card) {
+    public ViridianAcolyte(final ViridianAcolyte card) {
         super(card);
     }
 
     @Override
-    public AkkiRockspeaker copy() {
-        return new AkkiRockspeaker(this);
+    public ViridianAcolyte copy() {
+        return new ViridianAcolyte(this);
     }
+
 }
+

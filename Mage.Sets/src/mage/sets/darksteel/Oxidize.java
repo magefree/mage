@@ -25,43 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+
+package mage.sets.darksteel;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.Mana;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
+import mage.target.TargetPermanent;
 
 /**
- * @author Loki, North
+ * @author Loki
  */
-public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
+public class Oxidize extends CardImpl<Oxidize> {
 
-    public AkkiRockspeaker(UUID ownerId) {
-        super(ownerId, 154, "Akki Rockspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
+    private final static FilterPermanent filter = new FilterPermanent("artifact");
 
-        this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public AkkiRockspeaker(final AkkiRockspeaker card) {
+    public Oxidize(UUID ownerId) {
+        super(ownerId, 79, "Oxidize", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
+        this.expansionSetCode = "DST";
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+    }
+
+    public Oxidize(final Oxidize card) {
         super(card);
     }
 
     @Override
-    public AkkiRockspeaker copy() {
-        return new AkkiRockspeaker(this);
+    public Oxidize copy() {
+        return new Oxidize(this);
     }
+
 }

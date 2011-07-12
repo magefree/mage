@@ -25,43 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+
+package mage.sets.darksteel;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
 import mage.Mana;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.Ability;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
 
 /**
- * @author Loki, North
+ *
+ * @author Loki
  */
-public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
+public class UrGolemsEye extends CardImpl<UrGolemsEye> {
 
-    public AkkiRockspeaker(UUID ownerId) {
-        super(ownerId, 154, "Akki Rockspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
-
-        this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
+    public UrGolemsEye (UUID ownerId) {
+        super(ownerId, 155, "Ur-Golem's Eye", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
+        this.expansionSetCode = "DST";
+        this.addAbility(new UrGolemsEyeAbility());
     }
 
-    public AkkiRockspeaker(final AkkiRockspeaker card) {
+    public UrGolemsEye (final UrGolemsEye card) {
         super(card);
     }
 
     @Override
-    public AkkiRockspeaker copy() {
-        return new AkkiRockspeaker(this);
+    public UrGolemsEye copy() {
+        return new UrGolemsEye(this);
+    }
+
+}
+
+class UrGolemsEyeAbility extends BasicManaAbility<UrGolemsEyeAbility> {
+
+    public UrGolemsEyeAbility() {
+        super(new ManaEffect(new Mana(0, 0, 0, 0, 0, 2, 0)));
+        this.netMana.setColorless(2);
+    }
+
+    public UrGolemsEyeAbility(final UrGolemsEyeAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public UrGolemsEyeAbility copy() {
+        return new UrGolemsEyeAbility(this);
     }
 }
+

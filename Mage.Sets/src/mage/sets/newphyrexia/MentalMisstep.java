@@ -25,43 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+
+package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.Mana;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
+import mage.filter.FilterSpell;
+import mage.target.TargetSpell;
 
 /**
- * @author Loki, North
+ *
+ * @author Loki
  */
-public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
+public class MentalMisstep extends CardImpl<MentalMisstep> {
 
-    public AkkiRockspeaker(UUID ownerId) {
-        super(ownerId, 154, "Akki Rockspeaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
+    private final static FilterSpell filter = new FilterSpell("spell with converted mana cost 1");
 
-        this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+       static {
+           filter.setConvertedManaCost(1);
+           filter.setConvertedManaCostComparison(Filter.ComparisonType.Equal);
+       }
 
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
+        public MentalMisstep (UUID ownerId) {
+        super(ownerId, 38, "Mental Misstep", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{UP}");
+        this.expansionSetCode = "NPH";
+		this.color.setBlue(true);
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public AkkiRockspeaker(final AkkiRockspeaker card) {
+    public MentalMisstep (final MentalMisstep card) {
         super(card);
     }
 
     @Override
-    public AkkiRockspeaker copy() {
-        return new AkkiRockspeaker(this);
+    public MentalMisstep copy() {
+        return new MentalMisstep(this);
     }
+
 }

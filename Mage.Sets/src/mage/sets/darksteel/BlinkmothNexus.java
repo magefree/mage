@@ -26,57 +26,71 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.mirrodinbesieged;
+package mage.sets.darksteel;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.InfectAbility;
-import mage.abilities.keyword.UnblockableAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
 import mage.game.permanent.token.Token;
+import mage.target.TargetPermanent;
 
 /**
- *
  * @author Loki
  */
-public class InkmothNexus extends CardImpl<InkmothNexus> {
+public class BlinkmothNexus extends CardImpl<BlinkmothNexus> {
 
-    public InkmothNexus (UUID ownerId) {
-        super(ownerId, 145, "Inkmoth Nexus", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "MBS";
-        this.addAbility(new ColorlessManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new InkmothNexusToken(), "land"), new GenericManaCost(1)));
+    private final static FilterPermanent filter = new FilterPermanent("Blinkmoth");
+
+    static {
+        filter.getSubtype().add("Blinkmoth");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public InkmothNexus (final InkmothNexus card) {
+    public BlinkmothNexus(UUID ownerId) {
+        super(ownerId, 163, "Blinkmoth Nexus", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+        this.expansionSetCode = "DST";
+        this.addAbility(new ColorlessManaAbility());
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new BlinkmothNexusToken(), "land"), new GenericManaCost(1)));
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Constants.Duration.EndOfTurn), new GenericManaCost(1));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
+
+    }
+
+    public BlinkmothNexus(final BlinkmothNexus card) {
         super(card);
     }
 
     @Override
-    public InkmothNexus copy() {
-        return new InkmothNexus(this);
+    public BlinkmothNexus copy() {
+        return new BlinkmothNexus(this);
     }
+
 }
 
-class InkmothNexusToken extends Token {
-    public InkmothNexusToken() {
-        super("Blinkmoth", "a 1/1 Blinkmoth artifact creature with flying and infect");
+class BlinkmothNexusToken extends Token {
+    public BlinkmothNexusToken() {
+        super("Blinkmoth", "1/1 Blinkmoth artifact creature with flying");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         this.subtype.add("Blinkmoth");
         power = new MageInt(1);
-		toughness = new MageInt(1);
+        toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(InfectAbility.getInstance());
     }
 }
