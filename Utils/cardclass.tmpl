@@ -25,8 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.[=$longset=];
+package mage.sets.[=$set=];
 
 import java.util.UUID;
 import mage.Constants.CardType;
@@ -35,28 +34,27 @@ import mage.cards.CardImpl;
 
 /**
  *
- * @author <author>
+ * @author [=$author=]
  */
-public class [=$classname=] extends CardImpl<[=$classname=]> {
+public class [=$className=] extends CardImpl<[=$className=]> {
 
-    public [=$classname=] (UUID ownerId) {
-        super(ownerId, [=$collector=], "[=$name=]", Rarity.[=$rarity=], new CardType[]{[=$type=]}, "[=$manacost=]");
-        this.expansionSetCode = "[=$setcode=]";
-[=$subtype=]        [=$colors=]
+    public [=$className=](UUID ownerId) {
+        super(ownerId, [=$cardNumber=], "[=$name=]", Rarity.[=$rarity=], new CardType[]{[=$type=]}, "[=$manaCost=]");
+        this.expansionSetCode = "[=$expansionSetCode=]";
+[=$subType=]        [=$colors=]
         [=if (defined($power)) {
-         $OUT .= "this.power = new MageInt($power);\n"; 
+        $OUT .= "this.power = new MageInt($power);\n";
         }=][=if (defined($toughness)) {
-         $OUT .= "        this.toughness = new MageInt($toughness);";
+        $OUT .= "        this.toughness = new MageInt($toughness);";
         }=]
     }
 
-    public [=$classname=] (final [=$classname=] card) {
+    public [=$className=](final [=$className=] card) {
         super(card);
     }
 
     @Override
-    public [=$classname=] copy() {
-        return new [=$classname=](this);
+    public [=$className=] copy() {
+        return new [=$className=](this);
     }
-
 }

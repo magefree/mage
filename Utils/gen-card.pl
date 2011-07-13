@@ -1,256 +1,63 @@
 #!/usr/bin/perl -w
 
-use WWW::Mechanize;
-use HTML::TreeBuilder;
 use Text::Template;
-use Data::Dumper;
 use strict;
+
+
+my $authorFile = 'author.txt';
+my $dataFile = 'mtg-cards-data.txt';
+my $setsFile = 'mtg-sets-data.txt';
+my $knownSetsFile = 'known-sets.txt';
+
+
+my %cards;
+my %sets;
+my %knownSets;
 
 sub getClassName {
     my $string = $_[0];
-    $string =~ s/\b(\w+)\b/ucfirst($1)/ge;
+    $string =~ s/\b([\w']+)\b/ucfirst($1)/ge;
     $string =~ s/[-,\s\']//g;
     $string;
 }
 
-my $datafile = "mtg-cards-data.txt";
+my $author;
+if (-e $authorFile) {
+    open (DATA, $authorFile);
+    $author = <DATA>;
+    close(DATA);
+} else {
+    $author = 'anonymous';
+}
 
-my @sets;
-my @collector;
-my %rarities; 
-my %collectors;
-my @multiverses;
+open (DATA, $dataFile) || die "can't open $dataFile";
+while(my $line = <DATA>) {
+    my @data = split('\\|', $line);
+    $cards{$data[0]}{$data[1]} = \@data;
+}
+close(DATA);
 
-my $manacost = "";
-my $loyality = -1;
-my $power = -1;
-my $toughness = -1;
-my @texts;
-my @types;
+open (DATA, $setsFile) || die "can't open $setsFile";
+while(my $line = <DATA>) {
+    my @data = split('\\|', $line);
+    $sets{$data[0]}= $data[1];
+}
+close(DATA);
 
-my %fulltoshort;
+open (DATA, $knownSetsFile) || die "can't open $knownSetsFile";
+while(my $line = <DATA>) {
+    my @data = split('\\|', $line);
+    $knownSets{$data[0]}= $data[1];
+}
+close(DATA);
 
-$fulltoshort{'Tenth Edition'} = '10E';
-$fulltoshort{'Unlimited Edition'} = '2ED';
-$fulltoshort{'Revised Edition'} = '3ED';
-$fulltoshort{'Fourth Edition'} = '4ED';
-$fulltoshort{'Fifth Dawn'} = '5DN';
-$fulltoshort{'Fifth Edition'} = '5ED';
-$fulltoshort{'Classic Sixth Edition'} = '6ED';
-$fulltoshort{'Seventh Edition'} = '7ED';
-$fulltoshort{'Eighth Edition'} = '8ED';
-$fulltoshort{'Alliances'} = 'ALL';
-$fulltoshort{'Apocalypse'} = 'APC';
-$fulltoshort{'Alara Reborn'} = 'ARB';
-$fulltoshort{'Arabian Nights'} = 'ARN';
-$fulltoshort{'Anthologies'} = 'ATH';
-$fulltoshort{'Antiquities'} = 'ATQ';
-$fulltoshort{'Betrayers of Kamigawa'} = 'BOK';
-$fulltoshort{'Battle Royale Box Set'} = 'BRB';
-$fulltoshort{'Beatdown Box Set'} = 'BTD';
-$fulltoshort{'Champions of Kamigawa'} = 'CHK';
-$fulltoshort{'Chronicles'} = 'CHR';
-$fulltoshort{'Conflux'} = 'CON';
-$fulltoshort{'Coldsnap'} = 'CSP';
-$fulltoshort{'Darksteel'} = 'DST';
-$fulltoshort{'Dissension'} = 'DIS';
-$fulltoshort{'Deckmasters'} = 'DKM';
-$fulltoshort{'The Dark'} = 'DRK';
-$fulltoshort{'Darksteel'} = 'DST';
-$fulltoshort{'Duel Decks: Divine vs. Demonic'} = 'DVD';
-$fulltoshort{'Duel Decks: Elves vs. Goblins'} = 'EVG';
-$fulltoshort{'Duel Decks: Garruk vs. Liliana'} = 'GVL';
-$fulltoshort{'Duel Decks: Jace vs. Chandra'} = 'JVC';
-$fulltoshort{'Duel Decks: Phyrexia vs. the Coalition'} = 'PVC';
-$fulltoshort{'Eventide'} = 'EVE';
-$fulltoshort{'Exodus'} = 'EXO';
-$fulltoshort{'Fallen Empires'} = 'FEM';
-$fulltoshort{'Future Sight'} = 'FUT';
-$fulltoshort{'From the Vault: Dragons'} = 'FVD';
-$fulltoshort{'From the Vault: Exiled'} = 'FVE';
-$fulltoshort{'Guildpact'} = 'GPT';
-$fulltoshort{'Homelands'} = 'HML';
-$fulltoshort{'Planechase'} = 'HOP';
-$fulltoshort{'Ice Age'} = 'ICE';
-$fulltoshort{'Invasion'} = 'INV';
-$fulltoshort{'Judgment'} = 'JUD';
-$fulltoshort{'Limited Edition Alpha'} = 'LEA';
-$fulltoshort{'Limited Edition Beta'} = 'LEB';
-$fulltoshort{'Legends'} = 'LEG';
-$fulltoshort{'Legions'} = 'LGN';
-$fulltoshort{'Lorwyn'} = 'LRW';
-$fulltoshort{'Magic 2010'} = 'M10';
-$fulltoshort{'Magic 2011'} = 'M11';
-$fulltoshort{'Magic 2012'} = 'M12';
-$fulltoshort{'Masters Edition II'} = 'ME2';
-$fulltoshort{'Masters Edition III'} = 'ME3';
-$fulltoshort{'Masters Edition IV'} = 'ME4';
-$fulltoshort{'Masters Edition'} = 'MED';
-$fulltoshort{'Mirage'} = 'MIR';
-$fulltoshort{'Mercadian Masques'} = 'MMQ';
-$fulltoshort{'Morningtide'} = 'MOR';
-$fulltoshort{'Mirrodin'} = 'MRD';
-$fulltoshort{'Ninth Edition'} = '9ED';
-$fulltoshort{'Nemesis'} = 'NEM';
-$fulltoshort{'Odyssey'} = 'ODY';
-$fulltoshort{'Onslaught'} = 'ONS';
-$fulltoshort{'Portal Second Age'} = 'PO2';
-$fulltoshort{'Prophecy'} = 'PCY';
-$fulltoshort{'Planar Chaos'} = 'PLC';
-$fulltoshort{'Planeshift'} = 'PLS';
-$fulltoshort{'Portal'} = 'POR';
-$fulltoshort{'Portal Three Kingdoms'} = 'PTK';
-$fulltoshort{'Premium Deck Series: Fire and Lightning'} = 'PD2';
-$fulltoshort{'Premium Deck Series: Slivers'} = 'PDS';
-$fulltoshort{'Ravnica: City of Guilds'} = 'RAV';
-$fulltoshort{'Rise of the Eldrazi'} = 'ROE';
-$fulltoshort{'Starter 2000'} = 'S00';
-$fulltoshort{'Starter 1999'} = 'S99';
-$fulltoshort{'Scourge'} = 'SCG';
-$fulltoshort{'Shadowmoor'} = 'SHM';
-$fulltoshort{'Shards of Alara'} = 'ALA';
-$fulltoshort{'Saviors of Kamigawa'} = 'SOK';
-$fulltoshort{'Stronghold'} = 'STH';
-$fulltoshort{'Tempest'} = 'TMP';
-$fulltoshort{'Torment'} = 'TOR';
-$fulltoshort{'Time Spiral "Timeshifted"'} = 'TSB';
-$fulltoshort{'Time Spiral'} = 'TSP';
-$fulltoshort{'Urza\'s Destiny'} = 'UDS';
-$fulltoshort{'Unglued'} = 'UGL';
-$fulltoshort{'Urza\'s Legacy'} = 'ULG';
-$fulltoshort{'Unhinged'} = 'UNH';
-$fulltoshort{'Urza\'s Saga'} = 'USG';
-$fulltoshort{'Vanguard Set 1'} = 'VG1';
-$fulltoshort{'Vanguard Set 2'} = 'VG2';
-$fulltoshort{'Vanguard Set 3'} = 'VG3';
-$fulltoshort{'Vanguard Set 4'} = 'VG4';
-$fulltoshort{'MTGO Vanguard'} = 'VGO';
-$fulltoshort{'Visions'} = 'VIS';
-$fulltoshort{'Weatherlight'} = 'WTH';
-$fulltoshort{'Worldwake'} = 'WWK';
-$fulltoshort{'Zendikar'} = 'ZEN';
-$fulltoshort{'Archenemy'} = 'ARC';
-$fulltoshort{'Scars of Mirrodin'} = 'SOM';
-$fulltoshort{'From the Vault: Relics'} = 'FVR';
-$fulltoshort{'Duel Decks: Elspeth vs. Tezzeret'} = 'DDF';
-$fulltoshort{'Mirrodin Besieged'} = 'MBS';
-$fulltoshort{'New Phyrexia'} = 'NPH';
-
-my %wizardstous;
-$wizardstous{'6E'} = '6ED';
-$wizardstous{'7E'} = '7ED';
-$wizardstous{'8ED'} = '8ED';
-$wizardstous{'9ED'} = '9ED';
-$wizardstous{'10E'} = '10E';
-$wizardstous{'BD'} = 'BTD';
-$wizardstous{'DDD'} = 'GVL';
-$wizardstous{'CG'} = 'UDS';
-$wizardstous{'ST'} = 'STH';
-$wizardstous{'ONS'} = 'ONS';
-$wizardstous{'P3'} = 'S99';
-$wizardstous{'P4'} = 'S00';
-$wizardstous{'OD'} = 'ODY';
-$wizardstous{'M10'} = 'M10';
-$wizardstous{'M11'} = 'M11';
-$wizardstous{'M12'} = 'M12';
-$wizardstous{'LRW'} = 'LRW';
-$wizardstous{'DD2'} = 'JVC';
-$wizardstous{'TSB'} = 'TSB';
-$wizardstous{'ZEN'} = 'ZEN';
-$wizardstous{'5E'} = '5ED';
-$wizardstous{'IA'} = 'ICE';
-$wizardstous{'4E'} = '4ED';
-$wizardstous{'3E'} = '3ED';
-$wizardstous{'2U'} = '2ED';
-$wizardstous{'2E'} = 'LEB';
-$wizardstous{'1E'} = 'LEA';
-$wizardstous{'EVG'} = 'EVG';
-$wizardstous{'BR'} = 'BRB';
-$wizardstous{'ME2'} = 'ME2';
-$wizardstous{'ME3'} = 'ME3';
-$wizardstous{'ME4'} = 'ME4';
-$wizardstous{'HOP'} = 'HOP';
-$wizardstous{'PO'} = 'POR';
-$wizardstous{'P2'} = 'PO2';
-$wizardstous{'PK'} = 'PTK';
-$wizardstous{'MED'} = 'MED';
-$wizardstous{'EVE'} = 'EVE';
-$wizardstous{'MOR'} = 'MOR';
-$wizardstous{'RAV'} = 'RAV';
-$wizardstous{'SHM'} = 'SHM';
-$wizardstous{'MI'} = 'MIR';
-$wizardstous{'ARB'} = 'ARB';
-$wizardstous{'VI'} = 'VIS';
-$wizardstous{'DST'} = 'DST';
-$wizardstous{'TOR'} = 'TOR';
-$wizardstous{'DDC'} = 'DVD';
-$wizardstous{'AP'} = 'APC';
-$wizardstous{'CON'} = 'CON';
-$wizardstous{'ALA'} = 'ALA';
-$wizardstous{'DDE'} = 'PVC';
-$wizardstous{'JUD'} = 'JUD';
-$wizardstous{'WL'} = 'WTH';
-$wizardstous{'MRD'} = 'MRD';
-$wizardstous{'TE'} = 'TMP';
-$wizardstous{'DRB'} = 'FVD';
-$wizardstous{'PR'} = 'PCY';
-$wizardstous{'UZ'} = 'USG';
-$wizardstous{'IN'} = 'INV';
-$wizardstous{'FUT'} = 'FUT';
-$wizardstous{'TSP'} = 'TSP';
-$wizardstous{'CHK'} = 'CHK';
-$wizardstous{'EX'} = 'EXO';
-$wizardstous{'FE'} = 'FEM';
-$wizardstous{'PLC'} = 'PLC';
-$wizardstous{'CHK'} = 'CHK';
-$wizardstous{'ROE'} = 'ROE';
-$wizardstous{'5DN'} = '5DN';
-$wizardstous{'LE'} = 'LEG';
-$wizardstous{'CH'} = 'CHR';
-$wizardstous{'H09'} = 'PDS';
-$wizardstous{'MM'} = 'MMQ';
-$wizardstous{'GPT'} = 'GPT';
-$wizardstous{'GU'} = 'ULG';
-$wizardstous{'ARC'} = 'ARC';
-$wizardstous{'DIS'} = 'DIS';
-$wizardstous{'NE'} = 'NEM';
-$wizardstous{'PS'} = 'PLS';
-$wizardstous{'LGN'} = 'LGN';
-$wizardstous{'AN'} = 'ARN';
-$wizardstous{'WWK'} = 'WWK';
-$wizardstous{'SOM'} = 'SOM';
-$wizardstous{'V10'} = 'FVR';
-$wizardstous{'DDF'} = 'DDF';
-$wizardstous{'MBS'} = 'MBS';
-$wizardstous{'NPH'} = 'NPH';
-$wizardstous{'CMD'} = 'CMD';
-$wizardstous{'PD2'} = 'PD2';
-
-my %knownSets;
-$knownSets{'ARB'} = 'alarareborn';
-$knownSets{'APC'} = 'apocalypse';
-$knownSets{'CON'} = 'conflux';
-$knownSets{'DST'} = 'darksteel';
-$knownSets{'EVE'} = 'eventide';
-$knownSets{'M10'} = 'magic2010';
-$knownSets{'M11'} = 'magic2011';
-$knownSets{'M12'} = 'magic2012';
-$knownSets{'HOP'} = 'planechase';
-$knownSets{'RAV'} = 'ravnika';
-$knownSets{'ROE'} = 'riseoftheeldrazi';
-$knownSets{'ALA'} = 'shardsofalara';
-$knownSets{'10E'} = 'tenth';
-$knownSets{'WWK'} = 'worldwake';
-$knownSets{'ZEN'} = 'zendikar';
-$knownSets{'SOM'} = 'scarsofmirrodin';
-$knownSets{'GPT'} = 'guildpact';
-$knownSets{'DIS'} = 'dissension';
-$knownSets{'MRD'} = 'mirrodin';
-$knownSets{'DDF'} = 'elspethvstezzeret';
-$knownSets{'MBS'} = 'mirrodinbesieged';
-$knownSets{'NPH'} = 'newphyrexia';
-$knownSets{'TMP'} = 'tempest';
-$knownSets{'CHK'} = 'championsofkamigawa';
+my %cardTypes;
+$cardTypes{'Artifact'} = 'CardType.ARTIFACT';
+$cardTypes{'Creature'} = 'CardType.CREATURE';
+$cardTypes{'Enchantment'} = 'CardType.ENCHANTMENT';
+$cardTypes{'Instant'} = 'CardType.INSTANT';
+$cardTypes{'Land'} = 'CardType.LAND';
+$cardTypes{'Sorcery'} = 'CardType.SORCERY';
 
 my %raritiesConversion;
 $raritiesConversion{'C'} = 'COMMON';
@@ -258,194 +65,93 @@ $raritiesConversion{'U'} = 'UNCOMMON';
 $raritiesConversion{'R'} = 'RARE';
 $raritiesConversion{'M'} = 'MYTHIC';
 
-my %mana;
-$mana{'Black'} = '{B}';
-$mana{'Blue'} = '{U}';
-$mana{'Green'} = '{G}';
-$mana{'Red'} = '{R}';
-$mana{'White'} = '{W}';
-$mana{'Variable Colorless'} = '{X}';
-$mana{'White or Black'} = '{W/B}';
-$mana{'Green or White'} = '{G/W}';
-$mana{'Black or Green'} = '{B/G}';
-$mana{'Black or Red'} = '{B/R}';
-$mana{'Blue or Red'} = '{U/R}';
-$mana{'Red or Green'} = '{R/G}';
-$mana{'Red or White'} = '{R/W}';
-$mana{'Green or Blue'} = '{B/G}';
-$mana{'Phyrexian Green'} = '{GP}';
-$mana{'Phyrexian Red'} = '{RP}';
-$mana{'Phyrexian Black'} = '{BP}';
-$mana{'Phyrexian Blue'} = '{UP}';
-$mana{'Phyrexian White'} = '{WP}';
+my %manaToColor;
+$manaToColor{'B'} = 'Black';
+$manaToColor{'U'} = 'Blue';
+$manaToColor{'G'} = 'Green';
+$manaToColor{'R'} = 'Red';
+$manaToColor{'W'} = 'White';
 
-my %manatocolor;
-$manatocolor{'Black'} = "		this.color.setBlack(true);";
-$manatocolor{'Blue'} = "		this.color.setBlue(true);";
-$manatocolor{'Green'} = "		this.color.setGreen(true);";
-$manatocolor{'Red'} = "		this.color.setRed(true);";
-$manatocolor{'White'} = "		this.color.setWhite(true);";
-$manatocolor{'Red or White'} = "		this.color.setWhite(true);\n		this.color.setRed(true);";
-$manatocolor{'Green or Blue'} = "		this.color.setGreen(true);\n		this.color.setBlue(true);";
-$manatocolor{'Phyrexian Green'} = "		this.color.setGreen(true);";
-$manatocolor{'Phyrexian Red'} = "		this.color.setRed(true);";
-$manatocolor{'Phyrexian Black'} = "		this.color.setBlack(true);";
-$manatocolor{'Phyrexian Blue'} = "		this.color.setBlue(true);";
-$manatocolor{'Phyrexian White'} = "		this.color.setWhite(true);";
 
-my %cardtypes;
-$cardtypes{'Artifact'} = "CardType.ARTIFACT";
-$cardtypes{'Creature'} = "CardType.CREATURE";
-$cardtypes{'Enchantment'} = "CardType.ENCHANTMENT";
-$cardtypes{'Instant'} = "CardType.INSTANT";
-$cardtypes{'Land'} = "CardType.LAND";
-$cardtypes{'Sorcery'} = "CardType.SORCERY";
+# Get card name
+print 'Enter a card name: ';
+my $cardName = <STDIN>;
+chomp $cardName;
 
-my %normalid;
-
-print "Enter a card name: ";
-my $cardname = <STDIN>;
-chomp $cardname;
-my $finded = 0;
-
-open DATA, "< $datafile" or die "Can't open datafile: $!";
-while (<DATA>) {
-	my $str = $_;
-	my (undef, $name, $set, $rarity, $multiverse, $collector) = split("\\|");
-	if ($cardname eq $name) {
-	    die "can't find set: $set" unless defined $fulltoshort{$set};
-	    push(@sets, $fulltoshort{$set});
-	    $rarities{$fulltoshort{$set}} = $rarity;
-	    $collectors{$fulltoshort{$set}} = $collector;
-	    push(@multiverses, $multiverse);
-	    $finded = 1;
-	}
+# Check if card is already implemented
+foreach my $setName (keys %{$cards{$cardName}}) {
+	if (exists $knownSets{$setName}) {
+        my $fileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . getClassName($cardName) . ".java";
+        if(-e $fileName) {
+            die "$cardName is already implemented (set found: $setName).\n";
+        }
+    }
 }
 
-die "card not found" unless $finded;
-
-my $mech = WWW::Mechanize->new( autocheck => 1 );
-my $parser = HTML::TreeBuilder->new();
-
-$mech->get("http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=" . $multiverses[0] );
-print "card fetched\n";
-
-my $template = Text::Template->new(SOURCE => 'cardclass.tmpl', DELIMITERS => [ '[=', '=]' ]);
+# Generate the cards
+my $template = Text::Template->new(SOURCE => 'cardClass.tmpl', DELIMITERS => [ '[=', '=]' ]);
+my $templateExtended = Text::Template->new(SOURCE => 'cardExtendedClass.tmpl', DELIMITERS => [ '[=', '=]' ]);
 my %vars;
-$vars{'name'} = $cardname;
-$vars{'classname'} = getClassName($cardname);
 
+$vars{'author'} = $author;
+$vars{'name'} = $cardName;
+$vars{'className'} = getClassName($cardName);
 
-$parser->parse($mech->content());
-my @divs = $parser->look_down('_tag', 'div');
-foreach my $div (@divs) {
-    if (defined($div->attr('id'))) {
-	my $id = $div->attr('id');
-	if ($id =~m/textRow/) {
-	    foreach my $sub ($div->look_down('_tag', 'div')) {
-		if (defined($sub->attr('class')) && $sub->attr('class') eq 'cardtextbox') {
-		    push(@texts, $sub->as_text());
-		}
-	    }
-	}
-	if ($id =~m/typeRow/) {
-	    my $typestring = "";
-	    my $subtype = "";
-	    foreach my $sub ($div->look_down('_tag', 'div')) {
-			if (defined($sub->attr('class')) && $sub->attr('class') eq 'value') {
-		    	my $type = $sub->as_text();
-		    	chomp $type;
-		    	while ( $type =~ m/([a-zA-z]+)( )*/g ) {
-		        	push @types, $1;
-		        	if (exists($cardtypes{$1})) {
-                        if (length($typestring) > 0) {
-                            $typestring .= ", " . $cardtypes{$1};
-                        } else {
-                            $typestring = $cardtypes{$1};
-                        }
-		        	} else {
-						$subtype .= "        this.subtype.add(\"$1\");\n";
-					}
-		    	}
+print "Files generated:\n";
+my $baseSet = '';
+foreach my $setName (keys %{$cards{$cardName}}) {
+	if (exists $knownSets{$setName}) {
+        my $fileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . getClassName($cardName) . ".java";
+        my $result;
+        
+        $vars{'set'} = $knownSets{$setName};
+        $vars{'expansionSetCode'} = $sets{$setName};
+        $vars{'cardNumber'} = $cards{$cardName}{$setName}[2];
+        $vars{'rarity'} = $raritiesConversion{$cards{$cardName}{$setName}[3]};
+        
+        if (!$baseSet) {
+            $baseSet = $knownSets{$setName};
+            $vars{'manaCost'} = $cards{$cardName}{$setName}[4];
+            $vars{'power'} = $cards{$cardName}{$setName}[6];
+            $vars{'toughness'} = $cards{$cardName}{$setName}[7];
+
+			my @types;
+            $vars{'subType'} = '';
+			my $type = $cards{$cardName}{$setName}[5];
+			while ($type =~ m/([a-zA-Z]+)( )*/g) {
+                if (exists($cardTypes{$1})) {
+                    push(@types, $cardTypes{$1});
+				} else {
+                    if (@types) {
+                        $vars{'subType'} .= "        this.subtype.add(\"$1\");\n";
+                    } else {
+                        $vars{'subType'} .= "        this.supertype.add(\"$1\");\n";
+                    }
+				}
 			}
-	    }
-	    $vars{'type'} = $typestring;
-		$vars{'subtype'} = $subtype;
-	}
-	if ($id =~m/manaRow/) {
-	    my $findedcolors;
-	    foreach my $sub ($div->look_down('_tag', 'img')) {	    	
-		if (defined($sub->attr('alt'))) {
-			my $m = $sub->attr('alt'); 		
-			if ($m =~ /^-?\d/) {
-				$manacost .= "{" . $m . "}";
-			} else { 				
-		    	die "unknown manacost: " . $m unless defined $mana{$m};
-				
-		    	$manacost .= $mana{$m};
-				print "$m";
-				print "$manatocolor{$m}";
-		    	$findedcolors .= "\n" . $manatocolor{$m};  		    	
-			}
-		}
-	    }
-	    $manacost =~ s/^\s*(\S*(?:\s+\S+)*)\s*$/$1/; 
-	    $vars{'manacost'} = $manacost;	    
-	    $vars{'colors'} = $findedcolors;
-		print Dumper(%vars);
-	}
-	if ($id =~/ptRow/) {
-		foreach my $sub ($div->look_down('_tag', 'div')) {
-			if (defined($sub->attr('class')) && $sub->attr('class') eq 'value') {
-				my $str = $sub->as_text();
-				$str =~s/\s//;
-				$str =~m/(.+)\/(.+)/;
-				$vars{'power'} = $1;
-				$vars{'toughness'} = $2;
-			}
-		}
-	}
-	if ($id =~m/currentSetSymbol/) {
-		print "*** " . $div->as_HTML();
-		my ($imgurl) = $div->look_down('_tag', 'img');
-		$imgurl->attr('src') =~m/set=(\w+)\&.*rarity=(\w+)/;
-		my $multiverseid = $multiverses[0];
-		die "can't find set conversion for $1, multiverse: $multiverseid" unless defined $wizardstous{$1};
-		my $set = $wizardstous{$1};
-		$normalid{$set} = $multiverseid;
-	}
-	if ($id =~m/otherSetsValue/) {
-	    foreach my $sub ($div->look_down('_tag', 'a')) {
-		my $link = $sub->attr('href');
-		$link =~m/multiverseid\=(\d+)/;
-		my $multiverseid = $1;
-		my ($imgurl) = $sub->look_down('_tag', 'img');
-		$imgurl->attr('src') =~m/set=(\w+)\&.*rarity=(\w+)/;
-		die "can't find set conversion for $1, multiverse: $multiverseid" unless defined $wizardstous{$1};
-		my $set = $wizardstous{$1};
-		$normalid{$set} = $multiverseid;
-	    }
-	}
-    }
-}
+            $vars{'type'} = join(', ', @types);
 
+            my %colors;
+            while ($vars{'manaCost'} =~ m/([BUGRW])/g) {
+                $colors{$manaToColor{$1}} = 1;
+			}
 
-for my $set (@sets) {
-    if (exists($knownSets{$set})) {
-	$vars{'longset'} = $knownSets{$set};
-	$vars{'rarity'} = $raritiesConversion{$rarities{$set}};
-	$vars{'collector'} = $collectors{$set};
-	$vars{'setcode'} = $set;
-        my $result = $template->fill_in(HASH => \%vars);
-	if (defined($result)) {
-	    my $filename = "../Mage.Sets/src/mage/sets/". $knownSets{$set} . "/" . $vars{'classname'} . ".java";
-	    if (-e $filename ) {
-		print "WARNING $filename already exists!\n";
-	    } else {
-		open CARD, "> $filename";
-		print CARD $result; 
-		close CARD;
-	    }
+            $vars{'colors'} = '';
+            foreach my $color (keys %colors) {
+                $vars{'colors'} .= "\n        this.color.set$color(true);";
+            }
+            
+            $vars{'baseSet'} = $vars{'set'};
+            $vars{'baseClassName'} = $vars{'className'};
+
+            $result = $template->fill_in(HASH => \%vars);
+        } else {
+            $result = $templateExtended->fill_in(HASH => \%vars);
+        }
+        open CARD, "> $fileName";
+        print CARD $result; 
+        close CARD;
+        
+        print "$fileName\n";
 	}
-    }
 }

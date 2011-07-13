@@ -26,6 +26,7 @@ Mage.Tests/target
 Mage/target
 
 releases
+Utils/author.txt
 syntax: regexp
 .class
 .jar
