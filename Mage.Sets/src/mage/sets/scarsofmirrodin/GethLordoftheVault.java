@@ -69,7 +69,7 @@ public class GethLordoftheVault extends CardImpl<GethLordoftheVault> {
     public GethLordoftheVault (UUID ownerId) {
         super(ownerId, 64, "Geth, Lord of the Vault", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Legendary");
+        this.supertype.add("Legendary");
         this.subtype.add("Zombie");
 		this.color.setBlack(true);
         this.power = new MageInt(5);

@@ -55,7 +55,7 @@ public class GlissatheTraitor extends CardImpl<GlissatheTraitor> {
     public GlissatheTraitor (UUID ownerId) {
         super(ownerId, 96, "Glissa, the Traitor", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{B}{G}{G}");
         this.expansionSetCode = "MBS";
-        this.subtype.add("Legendary");
+        this.supertype.add("Legendary");
         this.subtype.add("Zombie");
         this.subtype.add("Elf");
 		this.color.setBlack(true);

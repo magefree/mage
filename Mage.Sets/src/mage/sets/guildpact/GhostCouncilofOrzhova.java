@@ -60,7 +60,7 @@ public class GhostCouncilofOrzhova extends CardImpl<GhostCouncilofOrzhova> {
     public GhostCouncilofOrzhova (UUID ownerId) {
         super(ownerId, 114, "Ghost Council of Orzhova", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}{B}{B}");
         this.expansionSetCode = "GPT";
-        this.subtype.add("Legendary");
+        this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 		this.color.setWhite(true);
 		this.color.setBlack(true);

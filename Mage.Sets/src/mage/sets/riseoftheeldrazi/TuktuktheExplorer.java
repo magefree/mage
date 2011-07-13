@@ -47,7 +47,7 @@ public class TuktuktheExplorer extends CardImpl<TuktuktheExplorer> {
     public TuktuktheExplorer (UUID ownerId) {
         super(ownerId, 169, "Tuktuk the Explorer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "ROE";
-        this.subtype.add("Legendary");
+        this.supertype.add("Legendary");
         this.subtype.add("Goblin");
 		this.color.setRed(true);
         this.power = new MageInt(1);

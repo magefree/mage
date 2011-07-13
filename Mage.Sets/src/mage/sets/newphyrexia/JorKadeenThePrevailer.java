@@ -52,7 +52,7 @@ public class JorKadeenThePrevailer extends CardImpl<JorKadeenThePrevailer> {
     public JorKadeenThePrevailer(UUID ownerId) {
         super(ownerId, 128, "Jor Kadeen, the Prevailer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");
         this.expansionSetCode = "NPH";
-        this.subtype.add("Legendary");
+        this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
 

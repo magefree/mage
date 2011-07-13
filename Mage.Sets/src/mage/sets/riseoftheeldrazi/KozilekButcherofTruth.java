@@ -55,7 +55,7 @@ public class KozilekButcherofTruth extends CardImpl<KozilekButcherofTruth> {
     public KozilekButcherofTruth (UUID ownerId) {
         super(ownerId, 6, "Kozilek, Butcher of Truth", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{10}");
         this.expansionSetCode = "ROE";
-        this.subtype.add("Legendary");
+        this.supertype.add("Legendary");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(12);
         this.toughness = new MageInt(12);

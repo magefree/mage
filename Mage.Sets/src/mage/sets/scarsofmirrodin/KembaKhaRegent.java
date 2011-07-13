@@ -54,7 +54,7 @@ public class KembaKhaRegent extends CardImpl<KembaKhaRegent> {
     public KembaKhaRegent (UUID ownerId) {
         super(ownerId, 12, "Kemba, Kha Regent", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
         this.expansionSetCode = "SOM";
-        this.subtype.add("Legendary");
+        this.supertype.add("Legendary");
         this.subtype.add("Cat");
         this.subtype.add("Cleric");
 

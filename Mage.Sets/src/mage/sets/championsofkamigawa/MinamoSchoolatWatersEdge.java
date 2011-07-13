@@ -61,7 +61,7 @@ public class MinamoSchoolatWatersEdge extends CardImpl<MinamoSchoolatWatersEdge>
     public MinamoSchoolatWatersEdge (UUID ownerId) {
         super(ownerId, 279, "Minamo, School at Water's Edge", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "CHK";
-        this.subtype.add("Legendary");
+        this.supertype.add("Legendary");
         this.addAbility(new BlueManaAbility());
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapTargetEffect(),  new ColoredManaCost(Constants.ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());
