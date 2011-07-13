@@ -45,6 +45,7 @@ import mage.game.tournament.TournamentPlayer;
 import mage.MageException;
 import mage.server.ChatManager;
 import mage.server.TableManager;
+import mage.server.UserManager;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ThreadExecutor;
 import mage.view.ChatMessage.MessageColor;
@@ -61,6 +62,7 @@ public class TournamentController {
 
 	private UUID chatId;
 	private UUID tableId;
+	private boolean started = false;
 	private Tournament tournament;
 	private ConcurrentHashMap<UUID, UUID> userPlayerMap = new ConcurrentHashMap<UUID, UUID>();
 	private ConcurrentHashMap<UUID, TournamentSession> tournamentSessions = new ConcurrentHashMap<UUID, TournamentSession>();
@@ -95,6 +97,9 @@ public class TournamentController {
 						case CONSTRUCT:
 							construct();
 							break;
+						case END:
+							endTournament();
+							break;
 					}
 				}
 			}
@@ -127,8 +132,9 @@ public class TournamentController {
 
 	public synchronized void join(UUID userId) {
 		UUID playerId = userPlayerMap.get(userId);
-		TournamentSession tournamentSession = new TournamentSession(tournament, null, tableId, playerId);
+		TournamentSession tournamentSession = new TournamentSession(tournament, userId, tableId, playerId);
 		tournamentSessions.put(playerId, tournamentSession);
+		UserManager.getInstance().getUser(userId).addTournament(playerId, tournamentSession);
 		TournamentPlayer player = tournament.getPlayer(playerId);
 		player.setJoined();
 		logger.info("player " + playerId + " has joined tournament " + tournament.getId());
@@ -137,7 +143,7 @@ public class TournamentController {
 	}
 
 	private void checkStart() {
-		if (allJoined()) {
+		if (!started && allJoined()) {
 			ThreadExecutor.getInstance().getCallExecutor().execute(
 				new Runnable() {
 					@Override
@@ -161,13 +167,22 @@ public class TournamentController {
 
 	private synchronized void startTournament() {
 		for (final Entry<UUID, TournamentSession> entry: tournamentSessions.entrySet()) {
-			if (!entry.getValue().init(getTournamentView())) {
+			if (!entry.getValue().init()) {
 				logger.fatal("Unable to initialize client");
 				//TODO: generate client error message
 				return;
 			}
 		}
+		started = true;
 		tournament.nextStep();
+	}
+
+	private void endTournament() {
+		for (final TournamentSession tournamentSession: tournamentSessions.values()) {
+			tournamentSession.tournamentOver();
+			tournamentSession.removeTournament();
+		}
+		TableManager.getInstance().endTournament(tableId, tournament);
 	}
 
 	private void startMatch(TournamentPairing pair, MatchOptions matchOptions) {

@@ -347,7 +347,9 @@ public class TableController {
 	private void sideboard(UUID playerId, Deck deck, int timeout) throws MageException {
 		for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
 			if (entry.getValue().equals(playerId)) {
-				UserManager.getInstance().getUser(entry.getKey()).sideboard(deck, table.getId(), timeout);
+				User user = UserManager.getInstance().getUser(entry.getKey());
+				if (user != null)
+					user.sideboard(deck, table.getId(), timeout);
 				break;
 			}
 		}
@@ -382,6 +384,10 @@ public class TableController {
 			tournament.getPlayer(player.getPlayer().getId()).setDeck(player.getDeck());
 		}
 		tournament.nextStep();
+	}
+
+	public void endTournament(Tournament tournament) {
+		//TODO: implement this
 	}
 
 	public void swapSeats(int seatNum1, int seatNum2) {

@@ -34,8 +34,10 @@ import java.util.Map.Entry;
 import java.util.UUID;
 import mage.cards.decks.Deck;
 import mage.interfaces.callback.ClientCallback;
+import mage.server.draft.DraftSession;
 import mage.server.game.GameManager;
 import mage.server.game.GameSession;
+import mage.server.tournament.TournamentSession;
 import mage.view.TableClientMessage;
 
 /**
@@ -56,6 +58,8 @@ public class User {
 	private Date lastActivity = new Date();
 	private UserState userState;
  	private Map<UUID, GameSession> gameSessions = new HashMap<UUID, GameSession>();
+	private Map<UUID, DraftSession> draftSessions = new HashMap<UUID, DraftSession>();
+	private Map<UUID, TournamentSession> tournamentSessions = new HashMap<UUID, TournamentSession>();
 	
 	public User(String userName, String host) {
 		this.userName = userName;
@@ -164,6 +168,16 @@ public class User {
 			entry.getValue().init();
 			GameManager.getInstance().sendPlayerString(entry.getValue().getGameId(), userId, "");
 		}
+		for (Entry<UUID, DraftSession> entry: draftSessions.entrySet()) {
+			draftStarted(entry.getValue().getDraftId(), entry.getKey());
+			entry.getValue().init();
+			entry.getValue().update();
+		}
+		for (Entry<UUID, TournamentSession> entry: tournamentSessions.entrySet()) {
+			tournamentStarted(entry.getValue().getTournamentId(), entry.getKey());
+			entry.getValue().init();
+			entry.getValue().update();
+		}
 	}
 
 	public void addGame(UUID playerId, GameSession gameSession) {
@@ -174,9 +188,31 @@ public class User {
 		gameSessions.remove(playerId);
 	}
 	
+	public void addDraft(UUID playerId, DraftSession draftSession) {
+		draftSessions.put(playerId, draftSession);
+	}
+	
+	public void removeDraft(UUID playerId) {
+		draftSessions.remove(playerId);
+	}
+	
+	public void addTournament(UUID playerId, TournamentSession tournamentSession) {
+		tournamentSessions.put(playerId, tournamentSession);
+	}
+	
+	public void removeTournament(UUID playerId) {
+		tournamentSessions.remove(playerId);
+	}
+	
 	public void kill() {
 		for (Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
 			entry.getValue().kill();
+		}
+		for (Entry<UUID, DraftSession> entry: draftSessions.entrySet()) {
+			entry.getValue().setKilled();
+		}
+		for (Entry<UUID, TournamentSession> entry: tournamentSessions.entrySet()) {
+			entry.getValue().setKilled();
 		}
 	}
 

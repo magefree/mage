@@ -66,22 +66,22 @@ public class TournamentSession {
 		this.tableId = tableId;
 	}
 
-	public boolean init(final TournamentView tournamentView) {
+	public boolean init() {
 		if (!killed) {
 			User user = UserManager.getInstance().getUser(userId);
 			if (user != null) {
-				user.fireCallback(new ClientCallback("tournamentInit", tournament.getId(), tournamentView));
+				user.fireCallback(new ClientCallback("tournamentInit", tournament.getId(), getTournamentView()));
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public void update(final TournamentView tournamentView) {
+	public void update() {
 		if (!killed) {
 			User user = UserManager.getInstance().getUser(userId);
 			if (user != null) {
-				user.fireCallback(new ClientCallback("tournamentUpdate", tournament.getId(), tournamentView));
+				user.fireCallback(new ClientCallback("tournamentUpdate", tournament.getId(), getTournamentView()));
 			}
 		}
 	}
@@ -138,6 +138,24 @@ public class TournamentSession {
 		if (futureTimeout != null) {
 			futureTimeout.cancel(false);
 		}
+	}
+
+	public void removeTournament() {
+		User user = UserManager.getInstance().getUser(userId);
+		if (user != null)
+			user.removeTournament(playerId);
+	}
+	
+	private TournamentView getTournamentView() {
+		return new TournamentView(tournament);
+	}
+
+	public UUID getTournamentId() {
+		return tournament.getId();
+	}
+
+	void tournamentOver() {
+		//TODO: implement this
 	}
 
 }

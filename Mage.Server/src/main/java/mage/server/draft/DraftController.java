@@ -125,6 +125,7 @@ public class DraftController {
 		UUID playerId = userPlayerMap.get(userId);
 		DraftSession draftSession = new DraftSession(draft, userId, playerId);
 		draftSessions.put(playerId, draftSession);
+		UserManager.getInstance().getUser(userId).addDraft(playerId, draftSession);
 		logger.info("User " + UserManager.getInstance().getUser(userId).getName() + " has joined draft " + draft.getId());
 		draft.getPlayer(playerId).setJoined();
 		checkStart();
@@ -132,7 +133,7 @@ public class DraftController {
 
 	private synchronized void startDraft() {
 		for (final Entry<UUID, DraftSession> entry: draftSessions.entrySet()) {
-			if (!entry.getValue().init(getDraftView())) {
+			if (!entry.getValue().init()) {
 				logger.fatal("Unable to initialize client");
 				//TODO: generate client error message
 				return;
@@ -171,6 +172,7 @@ public class DraftController {
 	private void endDraft() throws MageException {
 		for (final DraftSession draftSession: draftSessions.values()) {
 			draftSession.draftOver();
+			draftSession.removeDraft();
 		}
 		TableManager.getInstance().endDraft(tableId, draft);
 	}
@@ -187,6 +189,7 @@ public class DraftController {
 	public void timeout(UUID userId) {
 		if (userPlayerMap.containsKey(userId)) {
 			draft.autoPick(userPlayerMap.get(userId));
+			logger.info("Draft pick timeout - autopick for player: " + userPlayerMap.get(userId));
 		}
 	}
 
@@ -195,29 +198,18 @@ public class DraftController {
 	}
 
 	public DraftPickView sendCardPick(UUID userId, UUID cardId) {
-		if (draftSessions.get(userPlayerMap.get(userId)).sendCardPick(cardId)) {
-			return getDraftPickView(userPlayerMap.get(userId), 0);
-		}
-		return null;
+		return draftSessions.get(userPlayerMap.get(userId)).sendCardPick(cardId);
 	}
 
 	private synchronized void updateDraft() throws MageException {
 		for (final Entry<UUID, DraftSession> entry: draftSessions.entrySet()) {
-			entry.getValue().update(getDraftView());
+			entry.getValue().update();
 		}
 	}
 
 	private synchronized void pickCard(UUID playerId, int timeout) throws MageException {
 		if (draftSessions.containsKey(playerId))
-			draftSessions.get(playerId).pickCard(getDraftPickView(playerId, timeout), timeout);
-	}
-
-	private DraftView getDraftView() {
-		return new DraftView(draft);
-	}
-
-	private DraftPickView getDraftPickView(UUID playerId, int timeout) {
-		return new DraftPickView(draft.getPlayer(playerId), timeout);
+			draftSessions.get(playerId).pickCard(timeout);
 	}
 
 }

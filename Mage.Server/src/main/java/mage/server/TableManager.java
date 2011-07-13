@@ -38,6 +38,7 @@ import mage.game.GameException;
 import mage.game.draft.Draft;
 import mage.game.match.Match;
 import mage.game.match.MatchOptions;
+import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
 import mage.MageException;
 import mage.players.Player;
@@ -189,6 +190,11 @@ public class TableManager {
 	public void endDraft(UUID tableId, Draft draft) {
 		if (controllers.containsKey(tableId))
 			controllers.get(tableId).endDraft(draft);
+	}
+
+	public void endTournament(UUID tableId, Tournament tournament) {
+		if (controllers.containsKey(tableId))
+			controllers.get(tableId).endTournament(tournament);
 	}
 
 	public void swapSeats(UUID tableId, UUID userId, int seatNum1, int seatNum2) {

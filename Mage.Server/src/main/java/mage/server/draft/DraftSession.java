@@ -65,39 +65,34 @@ public class DraftSession {
 		this.playerId = playerId;
 	}
 
-	public boolean init(final DraftView draftView) {
+	public boolean init() {
 		if (!killed) {
 			User user = UserManager.getInstance().getUser(userId);
 			if (user != null) {
-				user.fireCallback(new ClientCallback("draftInit", draft.getId(), draftView));
+				if (futureTimeout != null && !futureTimeout.isDone()) {
+					int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
+					user.fireCallback(new ClientCallback("draftInit", draft.getId(), new DraftClientMessage(getDraftPickView(remaining))));
+				}
 				return true;
 			}
 		}
 		return false;
 	}
 
-//	public boolean waitForAck(String message) {
-//		Session session = SessionManager.getInstance().getSession(sessionId);
-//		do {
-//			//TODO: add timeout
-//		} while (!session.getAckMessage().equals(message) && !killed);
-//		return true;
-//	}
-
-	public void update(final DraftView draftView) {
+	public void update() {
 		if (!killed) {
 			User user = UserManager.getInstance().getUser(userId);
 			if (user != null) {
-				user.fireCallback(new ClientCallback("draftUpdate", draft.getId(), draftView));
+				user.fireCallback(new ClientCallback("draftUpdate", draft.getId(), getDraftView()));
 			}
 		}
 	}
 
-	public void inform(final String message, final DraftView draftView) {
+	public void inform(final String message) {
 		if (!killed) {
 			User user = UserManager.getInstance().getUser(userId);
 			if (user != null) {
-				user.fireCallback(new ClientCallback("draftInform", draft.getId(), new DraftClientMessage(draftView, message)));
+				user.fireCallback(new ClientCallback("draftInform", draft.getId(), new DraftClientMessage(getDraftView(), message)));
 			}
 		}
 	}
@@ -111,12 +106,12 @@ public class DraftSession {
 		}
 	}
 
-	public void pickCard(final DraftPickView draftPickView, int timeout) {
+	public void pickCard(int timeout) {
 		if (!killed) {
 			setupTimeout(timeout);
 			User user = UserManager.getInstance().getUser(userId);
 			if (user != null) {
-				user.fireCallback(new ClientCallback("draftPick", draft.getId(), new DraftClientMessage(draftPickView)));
+				user.fireCallback(new ClientCallback("draftPick", draft.getId(), new DraftClientMessage(getDraftPickView(timeout))));
 			}
 		}
 	}
@@ -151,10 +146,29 @@ public class DraftSession {
 		killed = true;
 	}
 
-	public boolean sendCardPick(UUID cardId) {
+	public DraftPickView sendCardPick(UUID cardId) {
 		cancelTimeout();
-		return draft.addPick(playerId, cardId);
+		if (draft.addPick(playerId, cardId))
+			return getDraftPickView(0);
+		return null;
+	}
 
+	public void removeDraft() {
+		User user = UserManager.getInstance().getUser(userId);
+		if (user != null)
+			user.removeDraft(playerId);
+	}
+
+	private DraftView getDraftView() {
+		return new DraftView(draft);
+	}
+
+	private DraftPickView getDraftPickView(int timeout) {
+		return new DraftPickView(draft.getPlayer(playerId), timeout);
+	}
+
+	public UUID getDraftId() {
+		return draft.getId();
 	}
 
 }
