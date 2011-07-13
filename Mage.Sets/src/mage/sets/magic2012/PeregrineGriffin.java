@@ -25,31 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
 
-import mage.Constants;
+package mage.sets.magic2012;
 
 import java.util.UUID;
 
-/**
- *
- * @author North
- */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
 
-    public SerraAngel(UUID ownerId) {
-        super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
+/**
+ * @author Loki
+ */
+public class PeregrineGriffin extends CardImpl<PeregrineGriffin> {
+
+    public PeregrineGriffin(UUID ownerId) {
+        super(ownerId, 29, "Peregrine Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.expansionSetCode = "M12";
+        this.subtype.add("Griffin");
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(4);
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public PeregrineGriffin(final PeregrineGriffin card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public PeregrineGriffin copy() {
+        return new PeregrineGriffin(this);
     }
+
 }

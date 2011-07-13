@@ -25,31 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
 
-import mage.Constants;
+package mage.sets.magic2012;
 
 import java.util.UUID;
 
-/**
- *
- * @author North
- */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+import mage.Constants;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.keyword.DeathtouchAbility;
+import mage.cards.CardImpl;
+import mage.target.common.TargetControlledCreaturePermanent;
 
-    public SerraAngel(UUID ownerId) {
-        super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
+/**
+ * @author Loki
+ */
+public class OnyxMage extends CardImpl<OnyxMage> {
+
+    public OnyxMage(UUID ownerId) {
+        super(ownerId, 103, "Onyx Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "M12";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Constants.Duration.EndOfTurn), new ManaCostsImpl("{1}{B}"));
+        ability.addTarget(new TargetControlledCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public OnyxMage(final OnyxMage card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public OnyxMage copy() {
+        return new OnyxMage(this);
     }
+
 }

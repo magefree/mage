@@ -25,31 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+
 package mage.sets.magic2012;
 
-import mage.Constants;
-
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.cards.CardImpl;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author North
+ * @author Loki
  */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+public class SorinSVengeance extends CardImpl<SorinSVengeance> {
 
-    public SerraAngel(UUID ownerId) {
-        super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
+    public SorinSVengeance (UUID ownerId) {
+        super(ownerId, 111, "Sorin's Vengeance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}{B}");
         this.expansionSetCode = "M12";
+		this.color.setBlack(true);
+        this.getSpellAbility().addEffect(new DamageTargetEffect(10));
+        this.getSpellAbility().addEffect(new GainLifeEffect(10));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public SorinSVengeance (final SorinSVengeance card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public SorinSVengeance copy() {
+        return new SorinSVengeance(this);
     }
+
 }

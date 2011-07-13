@@ -25,31 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
 
-import mage.Constants;
+package mage.sets.magic2012;
 
 import java.util.UUID;
 
-/**
- *
- * @author North
- */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.keyword.DefenderAbility;
+import mage.cards.CardImpl;
 
-    public SerraAngel(UUID ownerId) {
-        super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
+/**
+ * @author Loki
+ */
+public class WallOfTorches extends CardImpl<WallOfTorches> {
+
+    public WallOfTorches(UUID ownerId) {
+        super(ownerId, 159, "Wall of Torches", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "M12";
+        this.subtype.add("Wall");
+        this.color.setRed(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(1);
+        this.addAbility(DefenderAbility.getInstance());
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public WallOfTorches(final WallOfTorches card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public WallOfTorches copy() {
+        return new WallOfTorches(this);
     }
+
 }

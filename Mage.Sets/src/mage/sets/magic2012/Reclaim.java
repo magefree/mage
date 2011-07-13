@@ -25,31 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
 
-import mage.Constants;
+package mage.sets.magic2012;
 
 import java.util.UUID;
 
-/**
- *
- * @author North
- */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.PutOnLibraryTargetEffect;
+import mage.cards.CardImpl;
+import mage.target.common.TargetCardInYourGraveyard;
 
-    public SerraAngel(UUID ownerId) {
-        super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
+/**
+ * @author Loki
+ */
+public class Reclaim extends CardImpl<Reclaim> {
+
+    public Reclaim(UUID ownerId) {
+        super(ownerId, 191, "Reclaim", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "M12";
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public Reclaim(final Reclaim card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public Reclaim copy() {
+        return new Reclaim(this);
     }
+
 }

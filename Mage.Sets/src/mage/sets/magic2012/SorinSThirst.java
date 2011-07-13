@@ -25,31 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+
 package mage.sets.magic2012;
 
-import mage.Constants;
-
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.cards.CardImpl;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author Loki
  */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+public class SorinSThirst extends CardImpl<SorinSThirst> {
 
-    public SerraAngel(UUID ownerId) {
-        super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
+    public SorinSThirst (UUID ownerId) {
+        super(ownerId, 110, "Sorin's Thirst", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");
         this.expansionSetCode = "M12";
+		this.color.setBlack(true);
+        this.getSpellAbility().addEffect(new DamageTargetEffect(2));
+        this.getSpellAbility().addEffect(new GainLifeEffect(2));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public SorinSThirst (final SorinSThirst card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public SorinSThirst copy() {
+        return new SorinSThirst(this);
     }
+
 }

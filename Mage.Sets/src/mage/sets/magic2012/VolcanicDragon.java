@@ -25,31 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
 
-import mage.Constants;
+package mage.sets.magic2012;
 
 import java.util.UUID;
 
-/**
- *
- * @author North
- */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.HasteAbility;
+import mage.cards.CardImpl;
 
-    public SerraAngel(UUID ownerId) {
-        super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
+/**
+ * @author Loki
+ */
+public class VolcanicDragon extends CardImpl<VolcanicDragon> {
+
+    public VolcanicDragon(UUID ownerId) {
+        super(ownerId, 158, "Volcanic Dragon", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         this.expansionSetCode = "M12";
+        this.subtype.add("Dragon");
+        this.color.setRed(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(HasteAbility.getInstance());
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public VolcanicDragon(final VolcanicDragon card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public VolcanicDragon copy() {
+        return new VolcanicDragon(this);
     }
+
 }

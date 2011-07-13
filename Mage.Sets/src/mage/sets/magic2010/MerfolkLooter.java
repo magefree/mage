@@ -25,31 +25,34 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
 
-import mage.Constants;
+package mage.sets.magic2010;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.cards.CardImpl;
 
 /**
  *
- * @author North
+ * @author Loki
  */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+public class MerfolkLooter extends mage.sets.magic2012.MerfolkLooter {
 
-    public SerraAngel(UUID ownerId) {
+    public MerfolkLooter (UUID ownerId) {
         super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
-        this.expansionSetCode = "M12";
+        this.cardNumber = 61;
+        this.expansionSetCode = "M10";
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public MerfolkLooter (final MerfolkLooter card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public MerfolkLooter copy() {
+        return new MerfolkLooter(this);
     }
+
 }

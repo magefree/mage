@@ -25,31 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
 
-import mage.Constants;
+package mage.sets.magic2012;
 
 import java.util.UUID;
 
-/**
- *
- * @author North
- */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+import mage.Constants;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.cards.CardImpl;
+import mage.target.TargetPlayer;
 
-    public SerraAngel(UUID ownerId) {
-        super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
+/**
+ * @author Loki
+ */
+public class MerfolkMesmerist extends CardImpl<MerfolkMesmerist> {
+
+    public MerfolkMesmerist(UUID ownerId) {
+        super(ownerId, 66, "Merfolk Mesmerist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "M12";
+        this.subtype.add("Merfolk");
+        this.subtype.add("Wizard");
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2), new ColoredManaCost(Constants.ColoredManaSymbol.U));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public MerfolkMesmerist(final MerfolkMesmerist card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public MerfolkMesmerist copy() {
+        return new MerfolkMesmerist(this);
     }
+
 }

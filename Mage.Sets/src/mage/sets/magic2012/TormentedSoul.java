@@ -25,31 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
 
-import mage.Constants;
+package mage.sets.magic2012;
 
 import java.util.UUID;
 
-/**
- *
- * @author North
- */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.CantBlockAbility;
+import mage.abilities.keyword.UnblockableAbility;
+import mage.cards.CardImpl;
 
-    public SerraAngel(UUID ownerId) {
-        super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
+/**
+ * @author Loki
+ */
+public class TormentedSoul extends CardImpl<TormentedSoul> {
+
+    public TormentedSoul(UUID ownerId) {
+        super(ownerId, 114, "Tormented Soul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
         this.expansionSetCode = "M12";
+        this.subtype.add("Spirit");
+        this.color.setBlack(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        this.addAbility(CantBlockAbility.getInstance());
+        this.addAbility(UnblockableAbility.getInstance());
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public TormentedSoul(final TormentedSoul card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public TormentedSoul copy() {
+        return new TormentedSoul(this);
     }
+
 }

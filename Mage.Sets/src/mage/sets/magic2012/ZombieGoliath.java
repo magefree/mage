@@ -25,31 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
 
-import mage.Constants;
+package mage.sets.magic2012;
 
 import java.util.UUID;
 
-/**
- *
- * @author North
- */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.cards.CardImpl;
 
-    public SerraAngel(UUID ownerId) {
-        super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
+/**
+ * @author Loki
+ */
+public class ZombieGoliath extends CardImpl<ZombieGoliath> {
+
+    public ZombieGoliath(UUID ownerId) {
+        super(ownerId, 119, "Zombie Goliath", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.expansionSetCode = "M12";
+        this.subtype.add("Zombie");
+        this.subtype.add("Giant");
+        this.color.setBlack(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public ZombieGoliath(final ZombieGoliath card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public ZombieGoliath copy() {
+        return new ZombieGoliath(this);
     }
+
 }

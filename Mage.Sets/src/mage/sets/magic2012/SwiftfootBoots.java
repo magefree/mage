@@ -25,31 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
 
-import mage.Constants;
+package mage.sets.magic2012;
 
 import java.util.UUID;
 
+import mage.Constants;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EquipAbility;
+import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.HexproofAbility;
+import mage.cards.CardImpl;
+
 /**
  *
- * @author North
+ * @author Loki
  */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+public class SwiftfootBoots extends CardImpl<SwiftfootBoots> {
 
-    public SerraAngel(UUID ownerId) {
-        super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
+    public SwiftfootBoots (UUID ownerId) {
+        super(ownerId, 219, "Swiftfoot Boots", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "M12";
+        this.subtype.add("Equipment");
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new HexproofAbility(), Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1)));
+        
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public SwiftfootBoots (final SwiftfootBoots card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public SwiftfootBoots copy() {
+        return new SwiftfootBoots(this);
     }
+
 }

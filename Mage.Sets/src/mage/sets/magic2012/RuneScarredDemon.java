@@ -25,31 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+
 package mage.sets.magic2012;
 
-import mage.Constants;
-
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author North
+ * @author Loki
  */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+public class RuneScarredDemon extends CardImpl<RuneScarredDemon> {
 
-    public SerraAngel(UUID ownerId) {
-        super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
+    public RuneScarredDemon (UUID ownerId) {
+        super(ownerId, 106, "Rune-Scarred Demon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
         this.expansionSetCode = "M12";
+        this.subtype.add("Demon");
+		this.color.setBlack(true);
+		this.color.setBlack(true);
+        this.power = new MageInt(6 );
+        this.toughness = new MageInt( 6);
+        this.addAbility(FlyingAbility.getInstance());
+        TargetCardInLibrary target = new TargetCardInLibrary();
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target));
+        this.addAbility(ability);
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public RuneScarredDemon (final RuneScarredDemon card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public RuneScarredDemon copy() {
+        return new RuneScarredDemon(this);
     }
+
 }

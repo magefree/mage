@@ -25,31 +25,32 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
 
-import mage.Constants;
+package mage.sets.magic2012;
 
 import java.util.UUID;
 
 /**
  *
- * @author North
+ * @author Loki
  */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+public class WurmsTooth extends mage.sets.tenth.WurmsTooth {
 
-    public SerraAngel(UUID ownerId) {
+    public WurmsTooth(UUID ownerId) {
         super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
+        this.cardNumber = 223;
         this.expansionSetCode = "M12";
+        
+        
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public WurmsTooth(final WurmsTooth card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public WurmsTooth copy() {
+        return new WurmsTooth(this);
     }
+
 }

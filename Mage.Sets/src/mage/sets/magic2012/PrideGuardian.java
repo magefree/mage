@@ -25,31 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
 
-import mage.Constants;
+package mage.sets.magic2012;
 
 import java.util.UUID;
 
-/**
- *
- * @author North
- */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.keyword.DefenderAbility;
+import mage.cards.CardImpl;
 
-    public SerraAngel(UUID ownerId) {
-        super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
+/**
+ * @author Loki
+ */
+public class PrideGuardian extends CardImpl<PrideGuardian> {
+
+    public PrideGuardian(UUID ownerId) {
+        super(ownerId, 31, "Pride Guardian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
         this.expansionSetCode = "M12";
+        this.subtype.add("Cat");
+        this.subtype.add("Monk");
+        this.color.setWhite(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(3);
+        this.addAbility(DefenderAbility.getInstance());
+        this.addAbility(new BlocksTriggeredAbility(new GainLifeEffect(3), false));
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public PrideGuardian(final PrideGuardian card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public PrideGuardian copy() {
+        return new PrideGuardian(this);
     }
+
 }

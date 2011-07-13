@@ -25,31 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
 
-import mage.Constants;
+package mage.sets.magic2012;
 
 import java.util.UUID;
 
-/**
- *
- * @author North
- */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
+import mage.cards.CardImpl;
 
-    public SerraAngel(UUID ownerId) {
-        super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
+/**
+ * @author Loki
+ */
+public class RustedSentinel extends CardImpl<RustedSentinel> {
+
+    public RustedSentinel(UUID ownerId) {
+        super(ownerId, 215, "Rusted Sentinel", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
         this.expansionSetCode = "M12";
+        this.subtype.add("Golem");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
+        this.addAbility(new EntersBattlefieldTappedAbility());
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public RustedSentinel(final RustedSentinel card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public RustedSentinel copy() {
+        return new RustedSentinel(this);
     }
+
 }

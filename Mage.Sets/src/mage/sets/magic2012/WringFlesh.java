@@ -25,31 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
 
-import mage.Constants;
+package mage.sets.magic2012;
 
 import java.util.UUID;
 
-/**
- *
- * @author North
- */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+import mage.Constants;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.cards.CardImpl;
+import mage.target.common.TargetCreaturePermanent;
 
-    public SerraAngel(UUID ownerId) {
-        super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
+/**
+ * @author Loki
+ */
+public class WringFlesh extends CardImpl<WringFlesh> {
+
+    public WringFlesh(UUID ownerId) {
+        super(ownerId, 118, "Wring Flesh", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "M12";
+        this.color.setBlack(true);
+        this.getSpellAbility().addEffect(new BoostTargetEffect(-3, -1, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public WringFlesh(final WringFlesh card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public WringFlesh copy() {
+        return new WringFlesh(this);
     }
+
 }

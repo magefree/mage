@@ -25,31 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
 
-import mage.Constants;
+package mage.sets.magic2012;
 
 import java.util.UUID;
 
-/**
- *
- * @author North
- */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.ReachAbility;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
-    public SerraAngel(UUID ownerId) {
-        super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
-        this.expansionSetCode = "M12";
+/**
+ * @author Loki
+ */
+public class StingerflingSpider extends CardImpl<StingerflingSpider> {
+
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
+
+    static {
+        filter.getAbilities().add(FlyingAbility.getInstance());
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public StingerflingSpider(UUID ownerId) {
+        super(ownerId, 197, "Stingerfling Spider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
+        this.expansionSetCode = "M12";
+        this.subtype.add("Spider");
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(5);
+        this.addAbility(ReachAbility.getInstance());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true);
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public StingerflingSpider(final StingerflingSpider card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public StingerflingSpider copy() {
+        return new StingerflingSpider(this);
     }
+
 }

@@ -25,31 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
 
-import mage.Constants;
+package mage.sets.magic2012;
 
 import java.util.UUID;
 
-/**
- *
- * @author North
- */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+import mage.Constants;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.cards.CardImpl;
+import mage.target.common.TargetCreaturePermanent;
 
-    public SerraAngel(UUID ownerId) {
-        super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
+/**
+ * @author Loki
+ */
+public class TitanicGrowth extends CardImpl<TitanicGrowth> {
+
+    public TitanicGrowth(UUID ownerId) {
+        super(ownerId, 198, "Titanic Growth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "M12";
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new BoostTargetEffect(4, 4, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public TitanicGrowth(final TitanicGrowth card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public TitanicGrowth copy() {
+        return new TitanicGrowth(this);
     }
+
 }

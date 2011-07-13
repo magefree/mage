@@ -25,31 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
 
-import mage.Constants;
+package mage.sets.magic2010;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.cards.CardImpl;
 
 /**
  *
- * @author North
+ * @author Loki
  */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+public class Lifelink extends mage.sets.magic2012.Lifelink {
 
-    public SerraAngel(UUID ownerId) {
+    public Lifelink (UUID ownerId) {
         super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
-        this.expansionSetCode = "M12";
+        this.cardNumber = 18;
+        this.expansionSetCode = "M10";
+        this.subtype.add("Aura");
+        
+		this.color.setWhite(true);
+        
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public Lifelink (final Lifelink card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public Lifelink copy() {
+        return new Lifelink(this);
     }
+
 }

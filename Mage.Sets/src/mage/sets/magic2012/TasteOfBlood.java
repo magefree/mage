@@ -25,31 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+
 package mage.sets.magic2012;
 
-import mage.Constants;
-
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.cards.CardImpl;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author North
+ * @author Loki
  */
-public class SerraAngel extends mage.sets.tenth.SerraAngel {
+public class TasteOfBlood extends CardImpl<TasteOfBlood> {
 
-    public SerraAngel(UUID ownerId) {
-        super(ownerId);
-        this.rarity = Constants.Rarity.UNCOMMON;
-        this.cardNumber = 33;
+    public TasteOfBlood (UUID ownerId) {
+        super(ownerId, 113, "Taste of Blood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "M12";
+		this.color.setBlack(true);
+        this.getSpellAbility().addEffect(new DamageTargetEffect(1));
+        this.getSpellAbility().addEffect(new GainLifeEffect(1));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public SerraAngel(final SerraAngel card) {
+    public TasteOfBlood (final TasteOfBlood card) {
         super(card);
     }
 
     @Override
-    public SerraAngel copy() {
-        return new SerraAngel(this);
+    public TasteOfBlood copy() {
+        return new TasteOfBlood(this);
     }
+
 }
