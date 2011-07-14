@@ -27,7 +27,7 @@
  */
 package mage.sets.[=$set=];
 
-import java.util.UUID;
+import java.util.UUID;[= if ($rarityExtended) {$OUT .= "\nimport mage.Constants.Rarity;"}=]
 
 /**
  *
@@ -38,7 +38,7 @@ public class [=$className=] extends mage.sets.[=$baseSet=].[=$baseClassName=] {
     public [=$className=](UUID ownerId) {
         super(ownerId);
         this.cardNumber = [=$cardNumber=];
-        this.expansionSetCode = "[=$expansionSetCode=]";
+        this.expansionSetCode = "[=$expansionSetCode=]";[=$rarityExtended=]
     }
 
     public [=$className=](final [=$className=] card) {

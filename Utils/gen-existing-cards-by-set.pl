@@ -41,7 +41,7 @@ open (DATA, $dataFile) || die "can't open $dataFile";
 while(my $line = <DATA>) {
     my @data = split('\\|', $line);
     $cards{$data[0]}{$data[1]} = \@data;
-    
+
     if ($data[1] eq $setName) {
         push(@setCards, $data[0]);
     }
@@ -62,6 +62,12 @@ while(my $line = <DATA>) {
 }
 close(DATA);
 
+my %raritiesConversion;
+$raritiesConversion{'C'} = 'COMMON';
+$raritiesConversion{'U'} = 'UNCOMMON';
+$raritiesConversion{'R'} = 'RARE';
+$raritiesConversion{'M'} = 'MYTHIC';
+
 # Generate the cards
 
 my %vars;
@@ -73,21 +79,26 @@ print "Files generated:\n";
 foreach my $cardName (@setCards) {
     my $className = getClassName($cardName);
     my $currentFileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . $className . ".java";
-    
+
     if(! -e $currentFileName) {
         $vars{'className'} = $className;
         $vars{'cardNumber'} = $cards{$cardName}{$setName}[2];
-        
+
         my $found = 0;
-        foreach my $key (keys %{$cards{$cardName}}) {
-            if (exists $knownSets{$key} && $found eq 0) {
-                my $fileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$key} . "/" . $className . ".java";
+        foreach my $keySet (keys %{$cards{$cardName}}) {
+            if (exists $knownSets{$keySet} && $found eq 0) {
+                my $fileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$keySet} . "/" . $className . ".java";
                 if(-e $fileName) {
                     open (DATA, $fileName);
                     while(my $line = <DATA>) {
                         if ($line =~ /extends CardImpl<(\w+?)>/) {
                             $vars{'baseClassName'} = $1;
-                            $vars{'baseSet'} = $knownSets{$key};
+                            $vars{'baseSet'} = $knownSets{$keySet};
+                            
+                            $vars{'rarityExtended'} = '';
+                            if ($cards{$cardName}{$setName}[3] ne $cards{$cardName}{$keySet}[3]) {
+                                $vars{'rarityExtended'} = "\n        this.rarity = Rarity.$raritiesConversion{$cards{$cardName}{$setName}[3]};\n";
+                            }
                             $found = 1;
                         }
                     }
@@ -95,7 +106,7 @@ foreach my $cardName (@setCards) {
                 }
             }
         }
-        
+
         if($found eq 1) {
             my $result = $template->fill_in(HASH => \%vars);
             if (defined($result)) {

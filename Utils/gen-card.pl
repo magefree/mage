@@ -98,19 +98,20 @@ $vars{'name'} = $cardName;
 $vars{'className'} = getClassName($cardName);
 
 print "Files generated:\n";
-my $baseSet = '';
+my $baseRarity = '';
 foreach my $setName (keys %{$cards{$cardName}}) {
 	if (exists $knownSets{$setName}) {
         my $fileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . getClassName($cardName) . ".java";
         my $result;
-        
+
         $vars{'set'} = $knownSets{$setName};
         $vars{'expansionSetCode'} = $sets{$setName};
         $vars{'cardNumber'} = $cards{$cardName}{$setName}[2];
         $vars{'rarity'} = $raritiesConversion{$cards{$cardName}{$setName}[3]};
-        
-        if (!$baseSet) {
-            $baseSet = $knownSets{$setName};
+
+        if (!$baseRarity) {
+            $baseRarity = $cards{$cardName}{$setName}[3];
+            
             $vars{'manaCost'} = $cards{$cardName}{$setName}[4];
             $vars{'power'} = $cards{$cardName}{$setName}[6];
             $vars{'toughness'} = $cards{$cardName}{$setName}[7];
@@ -140,18 +141,23 @@ foreach my $setName (keys %{$cards{$cardName}}) {
             foreach my $color (keys %colors) {
                 $vars{'colors'} .= "\n        this.color.set$color(true);";
             }
-            
+
             $vars{'baseSet'} = $vars{'set'};
             $vars{'baseClassName'} = $vars{'className'};
 
             $result = $template->fill_in(HASH => \%vars);
         } else {
+            $vars{'rarityExtended'} = '';
+            if ($baseRarity ne $cards{$cardName}{$setName}[3]) {
+                $vars{'rarityExtended'} = "\n        this.rarity = Rarity.$raritiesConversion{$cards{$cardName}{$setName}[3]};\n";
+            }
             $result = $templateExtended->fill_in(HASH => \%vars);
         }
+
         open CARD, "> $fileName";
         print CARD $result; 
         close CARD;
-        
+
         print "$fileName\n";
 	}
 }
