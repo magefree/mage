@@ -44,6 +44,7 @@ public class DarksteelColossus extends mage.sets.darksteel.DarksteelColossus {
         super(ownerId);
         this.cardNumber = 208;
         this.expansionSetCode = "M10";
+        this.rarity = Rarity.MYTHIC;
     }
 
     public DarksteelColossus(final DarksteelColossus card) {
