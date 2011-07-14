@@ -36,10 +36,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.UntapAllLandsControllerEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
@@ -47,7 +44,6 @@ import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author Loki
@@ -70,7 +66,7 @@ public class SeshiroTheAnointed extends CardImpl<SeshiroTheAnointed> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Constants.Duration.WhileOnBattlefield, filter, true)));
-        this.addAbility(new SeshirotheAnointedAbility());
+        this.addAbility(new SeshiroTheAnointedAbility());
     }
 
     public SeshiroTheAnointed(final SeshiroTheAnointed card) {
@@ -84,19 +80,19 @@ public class SeshiroTheAnointed extends CardImpl<SeshiroTheAnointed> {
 
 }
 
-class SeshirotheAnointedAbility extends TriggeredAbilityImpl<SeshirotheAnointedAbility> {
+class SeshiroTheAnointedAbility extends TriggeredAbilityImpl<SeshiroTheAnointedAbility> {
 
-    public SeshirotheAnointedAbility() {
+    public SeshiroTheAnointedAbility() {
         super(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
     }
 
-    public SeshirotheAnointedAbility(final SeshirotheAnointedAbility ability) {
+    public SeshiroTheAnointedAbility(final SeshiroTheAnointedAbility ability) {
         super(ability);
     }
 
     @Override
-    public SeshirotheAnointedAbility copy() {
-        return new SeshirotheAnointedAbility(this);
+    public SeshiroTheAnointedAbility copy() {
+        return new SeshiroTheAnointedAbility(this);
     }
 
     @Override

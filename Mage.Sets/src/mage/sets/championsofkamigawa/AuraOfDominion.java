@@ -72,7 +72,7 @@ public class AuraOfDominion extends CardImpl<AuraOfDominion> {
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Untap));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AuraofDominionEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AuraOfDominionEffect(), new GenericManaCost(1));
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
         this.addAbility(ability);
     }
@@ -88,12 +88,12 @@ public class AuraOfDominion extends CardImpl<AuraOfDominion> {
 
 }
 
-class AuraofDominionEffect extends OneShotEffect<AuraofDominionEffect> {
-    AuraofDominionEffect() {
+class AuraOfDominionEffect extends OneShotEffect<AuraOfDominionEffect> {
+    AuraOfDominionEffect() {
         super(Constants.Outcome.Untap);
     }
 
-    AuraofDominionEffect(final AuraofDominionEffect effect) {
+    AuraOfDominionEffect(final AuraOfDominionEffect effect) {
         super(effect);
     }
 
@@ -111,8 +111,8 @@ class AuraofDominionEffect extends OneShotEffect<AuraofDominionEffect> {
     }
 
     @Override
-    public AuraofDominionEffect copy() {
-        return new AuraofDominionEffect(this);
+    public AuraOfDominionEffect copy() {
+        return new AuraOfDominionEffect(this);
     }
 
     @Override

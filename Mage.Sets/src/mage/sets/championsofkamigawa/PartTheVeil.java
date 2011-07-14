@@ -33,65 +33,61 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.Token;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  * @author Loki
  */
-public class MelokuTheCloudedMirror extends CardImpl<MelokuTheCloudedMirror> {
+public class PartTheVeil extends CardImpl<PartTheVeil> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
-
-    static {
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-    }
-
-    public MelokuTheCloudedMirror(UUID ownerId) {
-        super(ownerId, 74, "Meloku the Clouded Mirror", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}");
+    public PartTheVeil(UUID ownerId) {
+        super(ownerId, 77, "Part the Veil", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Moonfolk");
-        this.subtype.add("Wizard");
+        this.subtype.add("Arcane");
         this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(4);
-        this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new MelokutheCloudedMirrorToken(), 1), new GenericManaCost(1));
-        ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
-        this.addAbility(ability);
+        this.getSpellAbility().addEffect(new PartTheVeilEffect());
     }
 
-    public MelokuTheCloudedMirror(final MelokuTheCloudedMirror card) {
+    public PartTheVeil(final PartTheVeil card) {
         super(card);
     }
 
     @Override
-    public MelokuTheCloudedMirror copy() {
-        return new MelokuTheCloudedMirror(this);
+    public PartTheVeil copy() {
+        return new PartTheVeil(this);
     }
 
 }
 
-class MelokutheCloudedMirrorToken extends Token {
-    MelokutheCloudedMirrorToken() {
-        super("", "a 1/1 blue Illusion creature token with flying");
-        cardType.add(CardType.CREATURE);
-        color.setBlue(true);
-        subtype.add("Illusion");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        addAbility(FlyingAbility.getInstance());
+class PartTheVeilEffect extends OneShotEffect<PartTheVeilEffect> {
+    public PartTheVeilEffect() {
+        super(Constants.Outcome.ReturnToHand);
+    }
+
+    public PartTheVeilEffect(final PartTheVeilEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent creature : game.getBattlefield().getAllActivePermanents(FilterCreaturePermanent.getDefault(), source.getControllerId())) {
+            creature.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, true);
+        }
+        return true;
+    }
+
+    @Override
+    public PartTheVeilEffect copy() {
+        return new PartTheVeilEffect(this);
+    }
+
+    @Override
+    public String getText(Ability source) {
+        return "Return all creatures you control to their owner's hand.";
     }
 }

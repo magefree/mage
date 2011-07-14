@@ -30,55 +30,54 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.keyword.SoulshiftAbility;
+import mage.Mana;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
-import mage.target.common.TargetCreatureOrPlayer;
-import mage.target.common.TargetOpponent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  * @author Loki
  */
-public class ThiefOfHope extends CardImpl<ThiefOfHope> {
+public class SachiDaughterOfSeshiro extends CardImpl<SachiDaughterOfSeshiro> {
 
-    private final static FilterCard filter = new FilterCard("a Spirit or Arcane spell");
+
+    private final static FilterCreaturePermanent snakeFilter = new FilterCreaturePermanent("Snakes");
+    private final static FilterCreaturePermanent shamanFilter = new FilterCreaturePermanent("Smahans");
 
     static {
-        filter.getSubtype().add("Spirit");
-        filter.getSubtype().add("Arcane");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        snakeFilter.getSubtype().add("Snake");
+        shamanFilter.getSubtype().add("Shaman");
     }
 
-    public ThiefOfHope(UUID ownerId) {
-        super(ownerId, 147, "Thief of Hope", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+    public SachiDaughterOfSeshiro(UUID ownerId) {
+        super(ownerId, 238, "Sachi, Daughter of Seshiro", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.expansionSetCode = "CHK";
-        this.subtype.add("Spirit");
-        this.color.setBlack(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-        Ability ability = new SpellCastTriggeredAbility(new LoseLifeTargetEffect(1), filter, false);
-        ability.addEffect(new GainLifeEffect(1));
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
-        this.addAbility(new SoulshiftAbility(2));
+        this.supertype.add("Legendary");
+        this.subtype.add("Snake");
+        this.subtype.add("Shaman");
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Constants.Duration.WhileOnBattlefield, snakeFilter, true)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ManaEffect(new Mana(0, 2, 0, 0, 0, 0, 0)), new TapSourceCost()), Constants.Duration.WhileOnBattlefield, shamanFilter, false)));
     }
 
-    public ThiefOfHope(final ThiefOfHope card) {
+    public SachiDaughterOfSeshiro(final SachiDaughterOfSeshiro card) {
         super(card);
     }
 
     @Override
-    public ThiefOfHope copy() {
-        return new ThiefOfHope(this);
+    public SachiDaughterOfSeshiro copy() {
+        return new SachiDaughterOfSeshiro(this);
     }
 
 }

@@ -34,52 +34,64 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.Mana;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.Filter;
+import mage.filter.common.FilterControlledPermanent;
+import mage.game.permanent.token.Token;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  * @author Loki
  */
-public class SachiDaughterOfSeshiro extends CardImpl<SachiDaughterOfSeshiro> {
+public class MelokuTheCloudedMirror extends CardImpl<MelokuTheCloudedMirror> {
 
-
-    private final static FilterCreaturePermanent snakeFilter = new FilterCreaturePermanent("Snakes");
-    private final static FilterCreaturePermanent shamanFilter = new FilterCreaturePermanent("Smahans");
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
 
     static {
-        snakeFilter.getSubtype().add("Snake");
-        shamanFilter.getSubtype().add("Shaman");
+        filter.getCardType().add(CardType.LAND);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public SachiDaughterOfSeshiro(UUID ownerId) {
-        super(ownerId, 238, "Sachi, Daughter of Seshiro", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+    public MelokuTheCloudedMirror(UUID ownerId) {
+        super(ownerId, 74, "Meloku the Clouded Mirror", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
-        this.subtype.add("Snake");
-        this.subtype.add("Shaman");
-        this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Constants.Duration.WhileOnBattlefield, snakeFilter, true)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ManaEffect(new Mana(0, 2, 0, 0, 0, 0, 0)), new TapSourceCost()), Constants.Duration.WhileOnBattlefield, shamanFilter, false)));
+        this.subtype.add("Moonfolk");
+        this.subtype.add("Wizard");
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(4);
+        this.addAbility(FlyingAbility.getInstance());
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new MelokuTheCloudedMirrorToken(), 1), new GenericManaCost(1));
+        ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
+        this.addAbility(ability);
     }
 
-    public SachiDaughterOfSeshiro(final SachiDaughterOfSeshiro card) {
+    public MelokuTheCloudedMirror(final MelokuTheCloudedMirror card) {
         super(card);
     }
 
     @Override
-    public SachiDaughterOfSeshiro copy() {
-        return new SachiDaughterOfSeshiro(this);
+    public MelokuTheCloudedMirror copy() {
+        return new MelokuTheCloudedMirror(this);
     }
 
+}
+
+class MelokuTheCloudedMirrorToken extends Token {
+    MelokuTheCloudedMirrorToken() {
+        super("", "a 1/1 blue Illusion creature token with flying");
+        cardType.add(CardType.CREATURE);
+        color.setBlue(true);
+        subtype.add("Illusion");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+        addAbility(FlyingAbility.getInstance());
+    }
 }
