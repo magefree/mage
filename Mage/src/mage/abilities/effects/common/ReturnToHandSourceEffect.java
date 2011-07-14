@@ -60,15 +60,13 @@ public class ReturnToHandSourceEffect extends OneShotEffect<ReturnToHandSourceEf
         if (card != null) {
             switch (game.getZone(card.getId())) {
                 case BATTLEFIELD:
-                    if (card != null) {
-                        return card.moveToZone(Zone.HAND, source.getId(), game, false);
+                    Permanent p = game.getPermanent(source.getSourceId());
+                    if (p != null) {
+                        return p.moveToZone(Zone.HAND, source.getId(), game, false);
                     }
                     break;
                 case GRAVEYARD:
-                    if (card != null) {
-                        return card.moveToZone(Zone.HAND, source.getId(), game, true);
-                    }
-                    break;
+                    return card.moveToZone(Zone.HAND, source.getId(), game, true);
             }
         }
         return false;
