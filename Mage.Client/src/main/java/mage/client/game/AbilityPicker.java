@@ -28,19 +28,18 @@
 
 package mage.client.game;
 
-import java.awt.Point;
+import mage.client.MageFrame;
+import mage.client.util.gui.GuiDisplayUtil;
+import mage.remote.Session;
+import mage.view.AbilityPickerView;
+
+import javax.swing.*;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Map.Entry;
 import java.util.UUID;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JPopupMenu;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
-import mage.client.MageFrame;
-import mage.remote.Session;
-import mage.client.util.gui.GuiDisplayUtil;
-import mage.view.AbilityPickerView;
 
 /**
  *

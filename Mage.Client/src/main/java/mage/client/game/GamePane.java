@@ -35,6 +35,8 @@
 package mage.client.game;
 
 import mage.client.*;
+
+import javax.swing.*;
 import java.util.UUID;
 
 /**

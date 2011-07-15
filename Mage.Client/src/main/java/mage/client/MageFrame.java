@@ -47,6 +47,7 @@ import mage.client.deckeditor.collection.viewer.CollectionViewerPane;
 import mage.client.dialog.*;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.EDTExceptionHandler;
+import mage.client.util.SettingsManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.components.ImagePanel;
 
@@ -173,6 +174,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         initComponents();
         setSize(1024, 768);
+        SettingsManager.getInstance().setScreenWidthAndHeight(1024, 768);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         session = new Session(this);
@@ -199,11 +201,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         addMageLabel();
         setAppIcon();
 
-		//PlayerPanelNew n = new PlayerPanelNew();
-		//n.setBounds(100,100,100,300);
-		//n.setVisible(true);
-		//backgroundPane.add(n);
-
         desktopPane.add(ArrowBuilder.getArrowsPanel(), JLayeredPane.DRAG_LAYER);
 
         desktopPane.addComponentListener(new ComponentAdapter() {
@@ -211,12 +208,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             public void componentResized(ComponentEvent e) {
                 int width = ((JComponent) e.getSource()).getWidth();
                 int height = ((JComponent) e.getSource()).getHeight();
-				if (!liteMode)
+                SettingsManager.getInstance().setScreenWidthAndHeight(width, height);
+				if (!liteMode) {
 					backgroundPane.setSize(width, height);
+                }
                 JPanel arrowsPanel = ArrowBuilder.getArrowsPanelRef();
                 if (arrowsPanel != null) arrowsPanel.setSize(width, height);
                 if (title != null) {
-                    //title.setBorder(BorderFactory.createLineBorder(Color.red));
                     title.setBounds((int) (width - titleRectangle.getWidth()) / 2, (int) (height - titleRectangle.getHeight()) / 2, titleRectangle.width, titleRectangle.height);
                 }
             }
