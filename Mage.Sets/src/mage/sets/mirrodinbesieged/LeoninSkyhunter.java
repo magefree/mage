@@ -29,6 +29,7 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
+import mage.Constants.Rarity;
 
 /**
  *
@@ -40,6 +41,7 @@ public class LeoninSkyhunter extends mage.sets.mirrodin.LeoninSkyhunter {
         super(ownerId);
         this.cardNumber = 11;
         this.expansionSetCode = "MBS";
+        this.rarity = Rarity.COMMON;
     }
 
     public LeoninSkyhunter (final LeoninSkyhunter card) {

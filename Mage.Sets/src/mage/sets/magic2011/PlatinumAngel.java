@@ -29,6 +29,7 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
+import mage.Constants.Rarity;
 
 /**
  *
@@ -40,6 +41,7 @@ public class PlatinumAngel extends mage.sets.magic2010.PlatinumAngel {
 		super(ownerId);
 		this.cardNumber = 212;
 		this.expansionSetCode = "M11";
+        this.rarity = Rarity.MYTHIC;
 	}
 
 	public PlatinumAngel(final PlatinumAngel card) {

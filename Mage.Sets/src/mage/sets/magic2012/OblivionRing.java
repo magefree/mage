@@ -28,6 +28,7 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
+import mage.Constants.Rarity;
 
 /**
  *
@@ -39,6 +40,7 @@ public class OblivionRing extends mage.sets.shardsofalara.OblivionRing {
         super(ownerId);
         this.cardNumber = 27;
         this.expansionSetCode = "M12";
+        this.rarity = Rarity.UNCOMMON;
     }
 
     public OblivionRing(final OblivionRing card) {

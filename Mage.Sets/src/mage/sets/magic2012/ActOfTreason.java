@@ -28,6 +28,7 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
+import mage.Constants.Rarity;
 
 /**
  *
@@ -39,6 +40,7 @@ public class ActOfTreason extends mage.sets.magic2010.ActOfTreason {
         super(ownerId);
         this.cardNumber = 121;
         this.expansionSetCode = "M12";
+        this.rarity = Rarity.COMMON;
     }
 
     public ActOfTreason(final ActOfTreason card) {

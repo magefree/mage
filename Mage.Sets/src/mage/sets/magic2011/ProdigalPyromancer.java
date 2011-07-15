@@ -29,6 +29,7 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
+import mage.Constants.Rarity;
 
 /**
  *
@@ -40,6 +41,7 @@ public class ProdigalPyromancer extends mage.sets.magic2010.ProdigalPyromancer {
 		super(ownerId);
 		this.cardNumber = 152;
 		this.expansionSetCode = "M11";
+        this.rarity = Rarity.UNCOMMON;
 	}
 
 	public ProdigalPyromancer(final ProdigalPyromancer card) {

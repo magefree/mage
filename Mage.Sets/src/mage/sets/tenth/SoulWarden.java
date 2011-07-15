@@ -28,6 +28,7 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
+import mage.Constants.Rarity;
 
 /**
  *
@@ -39,6 +40,7 @@ public class SoulWarden extends mage.sets.magic2010.SoulWarden {
         super(ownerId);
         this.cardNumber = 44;
         this.expansionSetCode = "10E";
+        this.rarity = Rarity.UNCOMMON;
     }
 
     public SoulWarden(final SoulWarden card) {

@@ -30,9 +30,7 @@ package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -48,7 +46,7 @@ public class LeoninSkyhunter extends CardImpl<LeoninSkyhunter> {
         this.expansionSetCode = "MRD";
         this.subtype.add("Cat");
         this.subtype.add("Knight");
-		this.color.setWhite(true);
+
 		this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

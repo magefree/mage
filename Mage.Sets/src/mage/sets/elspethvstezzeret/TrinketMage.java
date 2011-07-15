@@ -29,10 +29,7 @@
 package mage.sets.elspethvstezzeret;
 
 import java.util.UUID;
-import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.cards.CardImpl;
 
 /**
  *
@@ -44,6 +41,7 @@ public class TrinketMage extends mage.sets.scarsofmirrodin.TrinketMage {
         super(ownerId);
         this.expansionSetCode = "DDF";
 		this.cardNumber = 49;
+        this.rarity = Rarity.COMMON;
 	}
 
     public TrinketMage (final TrinketMage card) {

@@ -28,6 +28,7 @@
 package mage.sets.darksteel;
 
 import java.util.UUID;
+import mage.Constants.Rarity;
 
 /**
  *
@@ -39,6 +40,7 @@ public class WhispersilkCloak extends mage.sets.tenth.WhispersilkCloak {
         super(ownerId);
         this.cardNumber = 160;
         this.expansionSetCode = "DST";
+        this.rarity = Rarity.COMMON;
     }
 
     public WhispersilkCloak(final WhispersilkCloak card) {

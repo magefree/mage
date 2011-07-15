@@ -28,6 +28,7 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
+import mage.Constants.Rarity;
 
 /**
  *
@@ -39,6 +40,7 @@ public class TangleSpider extends mage.sets.darksteel.TangleSpider {
         super(ownerId);
         this.cardNumber = 303;
         this.expansionSetCode = "10E";
+        this.rarity = Rarity.UNCOMMON;
     }
 
     public TangleSpider(final TangleSpider card) {

@@ -28,6 +28,7 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
+import mage.Constants.Rarity;
 
 /**
  *
@@ -39,6 +40,7 @@ public class DrudgeSkeletons extends mage.sets.magic2010.DrudgeSkeletons {
         super(ownerId);
         this.cardNumber = 139;
         this.expansionSetCode = "10E";
+        this.rarity = Rarity.UNCOMMON;
     }
 
     public DrudgeSkeletons(final DrudgeSkeletons card) {
