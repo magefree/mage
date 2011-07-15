@@ -28,6 +28,8 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -42,7 +44,7 @@ import mage.target.TargetPermanent;
 
 /**
  *
- * @author North
+ * @author North, Loki
  */
 public class BeastWithin extends CardImpl<BeastWithin> {
 
@@ -84,7 +86,7 @@ class BeastWithinEffect extends OneShotEffect<BeastWithinEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        Permanent permanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(source), Constants.Zone.BATTLEFIELD);
         if (permanent != null) {
             BeastToken token = new BeastToken();
             token.putOntoBattlefield(game, source.getId(), permanent.getControllerId());
