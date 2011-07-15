@@ -1,7 +1,5 @@
 package mage.client.components.ability;
 
-import com.sun.deploy.util.ArrayUtil;
-import mage.client.MageFrame;
 import mage.client.util.ImageHelper;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
@@ -14,8 +12,6 @@ import org.jdesktop.swingx.JXPanel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
