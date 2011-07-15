@@ -1,9 +1,7 @@
 package mage.client.util;
 
-import com.sun.org.apache.xerces.internal.impl.dv.xs.YearMonthDV;
 
 import java.awt.*;
-import java.util.UUID;
 
 /**
  * Contains dynamic settings for client.
