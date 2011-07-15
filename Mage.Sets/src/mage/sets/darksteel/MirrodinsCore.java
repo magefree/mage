@@ -37,12 +37,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.counters.common.ChargeCounter;
 
 /**
  *
@@ -55,7 +54,7 @@ public class MirrodinsCore extends CardImpl<MirrodinsCore> {
         this.expansionSetCode = "DST";
         this.addAbility(new ColorlessManaAbility());
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost()));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
+        Ability ability = new AnyColorManaAbility();
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         this.addAbility(ability);
 

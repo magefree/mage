@@ -37,7 +37,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -50,7 +50,7 @@ public class DreamstoneHedron extends CardImpl<DreamstoneHedron> {
         super(ownerId, 216, "Dreamstone Hedron", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{6}");
         this.expansionSetCode = "ROE";
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ManaEffect(Mana.ColorlessMana(3)), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.ColorlessMana(3)), new TapSourceCost()));
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DrawCardControllerEffect(3),
                 new GenericManaCost(3));

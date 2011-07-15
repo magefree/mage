@@ -31,16 +31,12 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 
 /**
  *
@@ -54,9 +50,7 @@ public class RuptureSpire extends CardImpl<RuptureSpire> {
 
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{1}")), false));
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
-		ability.addChoice(new ChoiceColor());
-        this.addAbility(ability);
+        this.addAbility(new AnyColorManaAbility());
     }
 
     public RuptureSpire (final RuptureSpire card) {

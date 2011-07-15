@@ -30,19 +30,16 @@ package mage.sets.scarsofmirrodin;
 
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.Ability;
 import mage.abilities.costs.common.MetalcraftCost;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 
 import java.util.UUID;
-import mage.Constants.Zone;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
-import mage.choices.ChoiceColor;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, Loki
  */
 public class MoxOpal extends CardImpl<MoxOpal> {
 
@@ -51,8 +48,7 @@ public class MoxOpal extends CardImpl<MoxOpal> {
 		this.supertype.add("Legendary");
 		this.expansionSetCode = "SOM";
 
-		SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
-		ability.addChoice(new ChoiceColor());
+		Ability ability = new AnyColorManaAbility();
 		ability.addCost(new MetalcraftCost());
 		this.addAbility(ability);
 	}

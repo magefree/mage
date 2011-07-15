@@ -33,7 +33,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -52,7 +52,7 @@ public class PriestOfUrabrask extends CardImpl<PriestOfUrabrask> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(Mana.RedMana(3))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BasicManaEffect(Mana.RedMana(3))));
     }
 
     public PriestOfUrabrask(final PriestOfUrabrask card) {

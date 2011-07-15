@@ -36,7 +36,7 @@ import mage.Constants.Zone;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
@@ -67,7 +67,7 @@ public class DimirSignet extends CardImpl<DimirSignet> {
 
 class DimirSignetAbility extends BasicManaAbility<DimirSignetAbility> {
     public DimirSignetAbility() {
-        super(new ManaEffect(new Mana(0, 0, 1, 0, 1, 0, 0)));
+        super(new BasicManaEffect(new Mana(0, 0, 1, 0, 1, 0, 0)));
         this.netMana.setBlue(1);
         this.netMana.setBlack(1);
     }

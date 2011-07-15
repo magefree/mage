@@ -30,22 +30,18 @@ package mage.sets.mirrodinbesieged;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.counters.CounterType;
 
 /**
  *
- * @author North
+ * @author North, Loki
  */
 public class SphereOfTheSuns extends CardImpl<SphereOfTheSuns> {
 
@@ -59,8 +55,7 @@ public class SphereOfTheSuns extends CardImpl<SphereOfTheSuns> {
         this.addAbility(ability);
 
         RemoveCountersSourceCost removeCounterCost = new RemoveCountersSourceCost(CounterType.CHARGE.getName(), 1);
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
-        ability.addChoice(new ChoiceColor());
+        ability = new AnyColorManaAbility();
         ability.addCost(removeCounterCost);
         this.addAbility(ability);
     }

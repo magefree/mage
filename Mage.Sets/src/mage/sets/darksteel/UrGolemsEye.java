@@ -33,9 +33,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
 
@@ -65,7 +63,7 @@ public class UrGolemsEye extends CardImpl<UrGolemsEye> {
 class UrGolemsEyeAbility extends BasicManaAbility<UrGolemsEyeAbility> {
 
     public UrGolemsEyeAbility() {
-        super(new ManaEffect(new Mana(0, 0, 0, 0, 0, 2, 0)));
+        super(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 2, 0)));
         this.netMana.setColorless(2);
     }
 

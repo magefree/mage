@@ -38,7 +38,7 @@ import mage.Mana;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.cards.CardImpl;
@@ -68,7 +68,7 @@ public class SachiDaughterOfSeshiro extends CardImpl<SachiDaughterOfSeshiro> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Constants.Duration.WhileOnBattlefield, snakeFilter, true)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ManaEffect(new Mana(0, 2, 0, 0, 0, 0, 0)), new TapSourceCost()), Constants.Duration.WhileOnBattlefield, shamanFilter, false)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 2, 0, 0, 0, 0, 0)), new TapSourceCost()), Constants.Duration.WhileOnBattlefield, shamanFilter, false)));
     }
 
     public SachiDaughterOfSeshiro(final SachiDaughterOfSeshiro card) {

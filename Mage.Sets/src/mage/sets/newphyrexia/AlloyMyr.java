@@ -30,17 +30,13 @@ package mage.sets.newphyrexia;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 
 /**
  *
- * @author North
+ * @author North, Loki
  */
 public class AlloyMyr extends CardImpl<AlloyMyr> {
 
@@ -52,9 +48,7 @@ public class AlloyMyr extends CardImpl<AlloyMyr> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
-		ability.addChoice(new ChoiceColor());
-        this.addAbility(ability);
+        this.addAbility(new AnyColorManaAbility());
     }
 
     public AlloyMyr(final AlloyMyr card) {

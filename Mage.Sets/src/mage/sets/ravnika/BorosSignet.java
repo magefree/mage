@@ -36,7 +36,7 @@ import mage.Constants.Zone;
 import mage.Mana;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
 
@@ -64,7 +64,7 @@ public class BorosSignet extends CardImpl<BorosSignet> {
 
 class BorosSignetAbility extends BasicManaAbility<BorosSignetAbility> {
     public BorosSignetAbility() {
-        super(new ManaEffect(new Mana(1, 0, 0, 1, 0, 0, 0)));
+        super(new BasicManaEffect(new Mana(1, 0, 0, 1, 0, 0, 0)));
         this.addCost(new GenericManaCost(1));
         this.netMana.setRed(1);
         this.netMana.setWhite(1);

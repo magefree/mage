@@ -32,7 +32,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
 
@@ -66,7 +66,7 @@ public class PalladiumMyr extends CardImpl<PalladiumMyr> {
 class PalladiumMyrAbility extends BasicManaAbility<PalladiumMyrAbility> {
 
     public PalladiumMyrAbility() {
-        super(new ManaEffect(Mana.ColorlessMana(2)));
+        super(new BasicManaEffect(Mana.ColorlessMana(2)));
         this.netMana.setColorless(2);
     }
 

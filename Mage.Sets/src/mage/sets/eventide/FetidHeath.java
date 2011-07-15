@@ -33,7 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Mana;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -67,7 +67,7 @@ public class FetidHeath extends CardImpl<FetidHeath> {
 class FetidHeathFirstManaAbility extends BasicManaAbility<FetidHeathFirstManaAbility> {
 
     public FetidHeathFirstManaAbility() {
-        super(new ManaEffect(new Mana(0, 0, 0, 2, 0, 0, 0)));
+        super(new BasicManaEffect(new Mana(0, 0, 0, 2, 0, 0, 0)));
         this.addCost(new ManaCostsImpl("{W/B}"));
         this.netMana.setWhite(2);
     }
@@ -85,7 +85,7 @@ class FetidHeathFirstManaAbility extends BasicManaAbility<FetidHeathFirstManaAbi
 class FetidHeathSecondManaAbility extends BasicManaAbility<FetidHeathSecondManaAbility> {
 
     public FetidHeathSecondManaAbility() {
-        super(new ManaEffect(new Mana(0, 0, 0, 1, 1, 0, 0)));
+        super(new BasicManaEffect(new Mana(0, 0, 0, 1, 1, 0, 0)));
         this.addCost(new ManaCostsImpl("{W/B}"));
         this.netMana.setBlack(1);
         this.netMana.setWhite(1);
@@ -104,7 +104,7 @@ class FetidHeathSecondManaAbility extends BasicManaAbility<FetidHeathSecondManaA
 class FetidHeathThirdManaAbility extends BasicManaAbility<FetidHeathThirdManaAbility> {
 
     public FetidHeathThirdManaAbility() {
-        super(new ManaEffect(new Mana(0, 0, 0, 0, 2, 0, 0)));
+        super(new BasicManaEffect(new Mana(0, 0, 0, 0, 2, 0, 0)));
         this.addCost(new ManaCostsImpl("{W/B}"));
         this.netMana.setBlack(2);
     }

@@ -31,18 +31,14 @@ package mage.sets.tenth;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, Loki
  */
 public class BirdsOfParadise extends CardImpl<BirdsOfParadise> {
 
@@ -56,9 +52,7 @@ public class BirdsOfParadise extends CardImpl<BirdsOfParadise> {
 		this.toughness = new MageInt(1);
 
 		this.addAbility(FlyingAbility.getInstance());
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
-		ability.addChoice(new ChoiceColor());
-        this.addAbility(ability);
+        this.addAbility(new AnyColorManaAbility());
 	}
 
 	public BirdsOfParadise(final BirdsOfParadise card) {

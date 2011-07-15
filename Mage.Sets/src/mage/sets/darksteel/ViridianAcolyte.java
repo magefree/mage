@@ -30,20 +30,14 @@ package mage.sets.darksteel;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
-import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 
 /**
  * @author Loki
@@ -58,9 +52,8 @@ public class ViridianAcolyte extends CardImpl<ViridianAcolyte> {
         this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new GenericManaCost(1));
+        Ability ability = new AnyColorManaAbility(new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addChoice(new ChoiceColor());
         this.addAbility(ability);
 
     }

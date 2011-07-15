@@ -30,17 +30,15 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 
 /**
  *
- * @author North
+ * @author North, Loki
  */
 public class ManaCylix extends CardImpl<ManaCylix> {
 
@@ -48,8 +46,7 @@ public class ManaCylix extends CardImpl<ManaCylix> {
         super(ownerId, 138, "Mana Cylix", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "CON";
 
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new GenericManaCost(1));
-        ability.addChoice(new ChoiceColor());
+        Ability ability = new AnyColorManaAbility(new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
