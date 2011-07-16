@@ -30,14 +30,10 @@ package mage.sets.magic2012;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 
 /**
  *
@@ -48,9 +44,7 @@ public class Manalith extends CardImpl<Manalith> {
     public Manalith (UUID ownerId) {
         super(ownerId, 212, "Manalith", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "M12";
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
-		ability.addChoice(new ChoiceColor());
-        this.addAbility(ability);
+        this.addAbility(new AnyColorManaAbility());
     }
 
     public Manalith (final Manalith card) {

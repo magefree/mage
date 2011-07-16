@@ -33,7 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Mana;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -66,7 +66,7 @@ public class RuggedPrairie extends CardImpl<RuggedPrairie> {
 class RuggedPrairieFirstManaAbility extends BasicManaAbility<RuggedPrairieFirstManaAbility> {
 
     public RuggedPrairieFirstManaAbility() {
-        super(new ManaEffect(new Mana(2, 0, 0, 0, 0, 0, 0)));
+        super(new BasicManaEffect(new Mana(2, 0, 0, 0, 0, 0, 0)));
         this.addCost(new ManaCostsImpl("{R/W}"));
         this.netMana.setRed(2);
     }
@@ -84,7 +84,7 @@ class RuggedPrairieFirstManaAbility extends BasicManaAbility<RuggedPrairieFirstM
 class RuggedPrairieSecondManaAbility extends BasicManaAbility<RuggedPrairieSecondManaAbility> {
 
     public RuggedPrairieSecondManaAbility() {
-        super(new ManaEffect(new Mana(1, 0, 0, 1, 0, 0, 0)));
+        super(new BasicManaEffect(new Mana(1, 0, 0, 1, 0, 0, 0)));
         this.addCost(new ManaCostsImpl("{R/W}"));
         this.netMana.setRed(1);
         this.netMana.setWhite(1);
@@ -103,7 +103,7 @@ class RuggedPrairieSecondManaAbility extends BasicManaAbility<RuggedPrairieSecon
 class RuggedPrairieThirdManaAbility extends BasicManaAbility<RuggedPrairieThirdManaAbility> {
 
     public RuggedPrairieThirdManaAbility() {
-        super(new ManaEffect(new Mana(0, 0, 0, 2, 0, 0, 0)));
+        super(new BasicManaEffect(new Mana(0, 0, 0, 2, 0, 0, 0)));
         this.addCost(new ManaCostsImpl("{R/W}"));
         this.netMana.setWhite(2);
     }

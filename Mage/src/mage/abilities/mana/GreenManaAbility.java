@@ -29,7 +29,7 @@
 package mage.abilities.mana;
 
 import mage.Mana;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 
 /**
  *
@@ -38,7 +38,7 @@ import mage.abilities.effects.common.ManaEffect;
 public class GreenManaAbility extends BasicManaAbility<GreenManaAbility> {
 
 	public GreenManaAbility() {
-		super(new ManaEffect(Mana.GreenMana));
+		super(new BasicManaEffect(Mana.GreenMana));
 		this.netMana.setGreen(1);
 	}
 

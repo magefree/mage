@@ -33,7 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Mana;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -67,7 +67,7 @@ public class FloodedGrove extends CardImpl<FloodedGrove> {
 class FloodedGroveFirstManaAbility extends BasicManaAbility<FloodedGroveFirstManaAbility> {
 
     public FloodedGroveFirstManaAbility() {
-        super(new ManaEffect(new Mana(0, 2, 0, 0, 0, 0, 0)));
+        super(new BasicManaEffect(new Mana(0, 2, 0, 0, 0, 0, 0)));
         this.addCost(new ManaCostsImpl("{G/U}"));
         this.netMana.setGreen(2);
     }
@@ -85,7 +85,7 @@ class FloodedGroveFirstManaAbility extends BasicManaAbility<FloodedGroveFirstMan
 class FloodedGroveSecondManaAbility extends BasicManaAbility<FloodedGroveSecondManaAbility> {
 
     public FloodedGroveSecondManaAbility() {
-        super(new ManaEffect(new Mana(0, 1, 1, 0, 0, 0, 0)));
+        super(new BasicManaEffect(new Mana(0, 1, 1, 0, 0, 0, 0)));
         this.addCost(new ManaCostsImpl("{G/U}"));
         this.netMana.setGreen(1);
         this.netMana.setBlue(1);
@@ -104,7 +104,7 @@ class FloodedGroveSecondManaAbility extends BasicManaAbility<FloodedGroveSecondM
 class FloodedGroveThirdManaAbility extends BasicManaAbility<FloodedGroveThirdManaAbility> {
 
     public FloodedGroveThirdManaAbility() {
-        super(new ManaEffect(new Mana(0, 0, 2, 0, 0, 0, 0)));
+        super(new BasicManaEffect(new Mana(0, 0, 2, 0, 0, 0, 0)));
         this.addCost(new ManaCostsImpl("{G/U}"));
         this.netMana.setBlue(2);
     }

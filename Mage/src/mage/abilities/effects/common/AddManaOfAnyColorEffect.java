@@ -40,10 +40,10 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AddManaOfAnyColorEffect extends OneShotEffect<AddManaOfAnyColorEffect> {
+public class AddManaOfAnyColorEffect extends ManaEffect<AddManaOfAnyColorEffect> {
 
 	public AddManaOfAnyColorEffect() {
-		super(Outcome.PutManaInPool);
+		super();
 	}
 
 	public AddManaOfAnyColorEffect(final AddManaOfAnyColorEffect effect) {

@@ -38,7 +38,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
@@ -84,7 +84,7 @@ public class KrarkClanStoker extends CardImpl<KrarkClanStoker> {
 class KrarkClanStokerAbility extends BasicManaAbility<KrarkClanStokerAbility> {
 
     public KrarkClanStokerAbility() {
-        super(new ManaEffect(new Mana(2, 0, 0, 0, 0, 0, 0)));
+        super(new BasicManaEffect(new Mana(2, 0, 0, 0, 0, 0, 0)));
         this.netMana.setRed(2);
     }
 

@@ -34,7 +34,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Mana;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -66,7 +66,7 @@ public class CascadeBluffs extends CardImpl<CascadeBluffs> {
 class CascadeBluffsFirstManaAbility extends BasicManaAbility<CascadeBluffsFirstManaAbility> {
 
     public CascadeBluffsFirstManaAbility() {
-        super(new ManaEffect(new Mana(0, 0, 2, 0, 0, 0, 0)));
+        super(new BasicManaEffect(new Mana(0, 0, 2, 0, 0, 0, 0)));
         this.addCost(new ManaCostsImpl("{U/R}"));
         this.netMana.setBlue(2);
     }
@@ -84,7 +84,7 @@ class CascadeBluffsFirstManaAbility extends BasicManaAbility<CascadeBluffsFirstM
 class CascadeBluffsSecondManaAbility extends BasicManaAbility<CascadeBluffsSecondManaAbility> {
 
     public CascadeBluffsSecondManaAbility() {
-        super(new ManaEffect(new Mana(1, 0, 1, 0, 0, 0, 0)));
+        super(new BasicManaEffect(new Mana(1, 0, 1, 0, 0, 0, 0)));
         this.addCost(new ManaCostsImpl("{U/R}"));
         this.netMana.setBlue(1);
         this.netMana.setRed(1);
@@ -103,7 +103,7 @@ class CascadeBluffsSecondManaAbility extends BasicManaAbility<CascadeBluffsSecon
 class CascadeBluffsThirdManaAbility extends BasicManaAbility<CascadeBluffsThirdManaAbility> {
 
     public CascadeBluffsThirdManaAbility() {
-        super(new ManaEffect(new Mana(2, 0, 0, 0, 0, 0, 0)));
+        super(new BasicManaEffect(new Mana(2, 0, 0, 0, 0, 0, 0)));
         this.addCost(new ManaCostsImpl("{U/R}"));
         this.netMana.setRed(2);
     }

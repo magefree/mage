@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Mana;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -45,7 +45,7 @@ public class PyreticRitual extends CardImpl<PyreticRitual> {
 		super(ownerId, 153, "Pyretic Ritual", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
 		this.expansionSetCode = "M11";
 		this.color.setRed(true);
-		this.getSpellAbility().addEffect(new ManaEffect(Mana.RedMana(3)));
+		this.getSpellAbility().addEffect(new BasicManaEffect(Mana.RedMana(3)));
 	}
 
 	public PyreticRitual(final PyreticRitual card) {

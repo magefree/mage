@@ -29,13 +29,9 @@
 package mage.sets.darksteel;
 
 import mage.Constants;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 
 import java.util.UUID;
 
@@ -49,9 +45,7 @@ public class DarksteelIngot extends CardImpl<DarksteelIngot> {
         super(ownerId, 112, "Darksteel Ingot", Constants.Rarity.COMMON, new Constants.CardType[]{Constants.CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "DST";
         this.addAbility(IndestructibleAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
-        ability.addChoice(new ChoiceColor());
-        this.addAbility(ability);
+        this.addAbility(new AnyColorManaAbility());
     }
 
     public DarksteelIngot(final DarksteelIngot card) {

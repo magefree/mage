@@ -38,7 +38,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
@@ -68,11 +68,11 @@ public class KhalniGem extends CardImpl<KhalniGem> {
 		Target target = new TargetControlledPermanent(2, 2, filter, false);
 		etbAbility.addTarget(target);
 		this.addAbility(etbAbility);
-		this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new ManaEffect(new Mana(2, 0, 0, 0, 0, 0, 0)), new TapSourceCost()));
-		this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new ManaEffect(new Mana(0, 2, 0, 0, 0, 0, 0)), new TapSourceCost()));
-		this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new ManaEffect(new Mana(0, 0, 2, 0, 0, 0, 0)), new TapSourceCost()));
-		this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new ManaEffect(new Mana(0, 0, 0, 2, 0, 0, 0)), new TapSourceCost()));
-		this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new ManaEffect(new Mana(0, 0, 0, 0, 2, 0, 0)), new TapSourceCost()));
+		this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(2, 0, 0, 0, 0, 0, 0)), new TapSourceCost()));
+		this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 2, 0, 0, 0, 0, 0)), new TapSourceCost()));
+		this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 2, 0, 0, 0, 0)), new TapSourceCost()));
+		this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 2, 0, 0, 0)), new TapSourceCost()));
+		this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 0, 2, 0, 0)), new TapSourceCost()));
     }
 
     public KhalniGem (final KhalniGem card) {

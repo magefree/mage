@@ -33,7 +33,7 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 
 /**
@@ -49,7 +49,7 @@ public class EldraziSpawnToken extends Token {
 		subtype.add("Spawn");
 		power = new MageInt(0);
 		toughness = new MageInt(1);
-		addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new ManaEffect(Mana.ColorlessMana), new SacrificeSourceCost()));
+		addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.ColorlessMana), new SacrificeSourceCost()));
 	}
 
 }

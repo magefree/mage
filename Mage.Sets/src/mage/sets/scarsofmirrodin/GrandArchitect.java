@@ -46,7 +46,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
@@ -152,7 +152,7 @@ class GrandArchitectManaAbility extends ManaAbility<GrandArchitectManaAbility> {
 	}
 	
     GrandArchitectManaAbility ( ) {
-        super(Zone.BATTLEFIELD, new ManaEffect(Mana.ColorlessMana(2)), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
+        super(Zone.BATTLEFIELD, new BasicManaEffect(Mana.ColorlessMana(2)), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
         this.netMana.setColorless(2);
     }
 

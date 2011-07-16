@@ -38,37 +38,14 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ManaEffect extends OneShotEffect<ManaEffect> {
+public abstract class ManaEffect<T extends ManaEffect<T>> extends OneShotEffect<T> {
 
-	protected Mana mana;
-
-	public ManaEffect(Mana mana) {
+	public ManaEffect() {
 		super(Outcome.PutManaInPool);
-		this.mana = mana;
 	}
 
 	public ManaEffect(final ManaEffect effect) {
 		super(effect);
-		this.mana = effect.mana.copy();
 	}
 
-	@Override
-	public ManaEffect copy() {
-		return new ManaEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		game.getPlayer(source.getControllerId()).getManaPool().changeMana(mana);
-		return true;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Add " + mana.toString() + " to your mana pool";
-	}
-
-	public Mana getMana() {
-		return mana;
-	}
 }

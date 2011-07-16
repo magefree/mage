@@ -35,7 +35,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -53,7 +53,7 @@ public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BasicManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
     }
 
     public AkkiRockspeaker(final AkkiRockspeaker card) {

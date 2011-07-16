@@ -37,7 +37,7 @@ import mage.game.Game;
  *
  * @author North
  */
-public class DynamicManaEffect extends ManaEffect {
+public class DynamicManaEffect extends BasicManaEffect {
 
     private Mana computedMana;
     private DynamicValue amount;

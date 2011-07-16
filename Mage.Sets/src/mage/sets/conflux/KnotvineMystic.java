@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
 
@@ -74,7 +74,7 @@ public class KnotvineMystic extends CardImpl<KnotvineMystic>{
 class KnotvineMysticManaAbility extends BasicManaAbility<KnotvineMysticManaAbility> {
 
     public KnotvineMysticManaAbility() {
-        super(new ManaEffect(new Mana(1, 1, 0, 1, 0, 0, 0)));
+        super(new BasicManaEffect(new Mana(1, 1, 0, 1, 0, 0, 0)));
         this.netMana.setGreen(1);
         this.netMana.setRed(1);
         this.netMana.setWhite(1);

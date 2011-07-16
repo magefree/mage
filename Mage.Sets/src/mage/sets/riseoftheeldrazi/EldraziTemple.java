@@ -32,7 +32,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageObject;
 import mage.Mana;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -71,7 +71,7 @@ class EldraziTempleManaAbility extends BasicManaAbility<EldraziTempleManaAbility
             + "<b>(Mage Tip: This ability can only be activated when an Eldrazi spell or ability is on the stack.)</b>";
 
     EldraziTempleManaAbility ( ) {
-        super(new ManaEffect(Mana.ColorlessMana(2)));
+        super(new BasicManaEffect(Mana.ColorlessMana(2)));
         this.netMana.setColorless(2);
     }
 

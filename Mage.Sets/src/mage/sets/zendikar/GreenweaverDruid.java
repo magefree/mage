@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -54,7 +54,7 @@ public class GreenweaverDruid extends CardImpl<GreenweaverDruid> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ManaEffect(Mana.GreenMana(2)), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana(2)), new TapSourceCost()));
     }
 
     public GreenweaverDruid(final GreenweaverDruid card) {

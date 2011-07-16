@@ -33,7 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Mana;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -67,7 +67,7 @@ public class TwilightMire extends CardImpl<TwilightMire> {
 class TwilightMireFirstManaAbility extends BasicManaAbility<TwilightMireFirstManaAbility> {
 
     public TwilightMireFirstManaAbility() {
-        super(new ManaEffect(new Mana(0, 0, 0, 0, 2, 0, 0)));
+        super(new BasicManaEffect(new Mana(0, 0, 0, 0, 2, 0, 0)));
         this.addCost(new ManaCostsImpl("{B/G}"));
         this.netMana.setBlack(2);
     }
@@ -85,7 +85,7 @@ class TwilightMireFirstManaAbility extends BasicManaAbility<TwilightMireFirstMan
 class TwilightMireSecondManaAbility extends BasicManaAbility<TwilightMireSecondManaAbility> {
 
     public TwilightMireSecondManaAbility() {
-        super(new ManaEffect(new Mana(0, 1, 0, 0, 1, 0, 0)));
+        super(new BasicManaEffect(new Mana(0, 1, 0, 0, 1, 0, 0)));
         this.addCost(new ManaCostsImpl("{B/G}"));
         this.netMana.setBlack(1);
         this.netMana.setGreen(1);
@@ -104,7 +104,7 @@ class TwilightMireSecondManaAbility extends BasicManaAbility<TwilightMireSecondM
 class TwilightMireThirdManaAbility extends BasicManaAbility<TwilightMireThirdManaAbility> {
 
     public TwilightMireThirdManaAbility() {
-        super(new ManaEffect(new Mana(0, 2, 0, 0, 0, 0, 0)));
+        super(new BasicManaEffect(new Mana(0, 2, 0, 0, 0, 0, 0)));
         this.addCost(new ManaCostsImpl("{B/G}"));
         this.netMana.setGreen(2);
     }
