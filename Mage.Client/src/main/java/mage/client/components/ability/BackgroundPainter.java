@@ -18,7 +18,7 @@ public class BackgroundPainter extends AbstractPainter {
 
     private Color bgColor = Color.black;
 
-    float bgalpha = 0.8f;
+    float bgalpha = 0.6f;
 
     public BackgroundPainter() {
         super();

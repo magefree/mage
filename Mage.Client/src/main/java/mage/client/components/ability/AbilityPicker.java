@@ -1,10 +1,12 @@
 package mage.client.components.ability;
 
+import com.sun.org.apache.bcel.internal.generic.CPInstruction;
 import mage.client.util.ImageHelper;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.remote.Session;
 import mage.view.AbilityPickerView;
+import org.apache.log4j.Logger;
 import org.jdesktop.layout.GroupLayout;
 import org.jdesktop.layout.LayoutStyle;
 import org.jdesktop.swingx.JXPanel;
@@ -24,9 +26,11 @@ import java.util.UUID;
  */
 public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
-    private static final String DEFAULT_MESSAGE = "Choose spell or ability to play (double-click)";;
-    private static final int DIALOG_WIDTH = 320;
-    private static final int DIALOG_HEIGHT = 240;
+    private static final String DEFAULT_MESSAGE = "Choose spell or ability to play (double-click)";
+    private static final int DIALOG_WIDTH = 440;
+    private static final int DIALOG_HEIGHT = 260;
+
+	private transient static final Logger log = Logger.getLogger(AbilityPicker.class);
 
     private JList rows;
     private List<Object> choices;
@@ -48,34 +52,31 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
     private static Color SELECTED_COLOR = new Color(64,147,208);
     private static Color BORDER_COLOR = new Color(0,0,0,50);
 
-    public AbilityPicker() {
-        initComponents();
-        addMouseWheelListener(this);
-        setSize(320, 240);
+	private boolean selected = false;
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                jScrollPane2.setOpaque(false);
-                jScrollPane2.getViewport().setOpaque(false);
-                //jScrollPane2.getHorizontalScrollBar().setUI(new MageScrollbarUI());
-                //jScrollPane2.getVerticalScrollBar().setUI(new MageScrollbarUI());
-            }
-        });
+    public AbilityPicker() {
+        setSize(DIALOG_WIDTH, DIALOG_HEIGHT);
+		initComponents();
+
+		jScrollPane2.setOpaque(false);
+        jScrollPane2.getViewport().setOpaque(false);
+		UIManager.put( "ScrollBar.width", 17);
+		jScrollPane2.getHorizontalScrollBar().setUI(new MageScrollbarUI());
+        jScrollPane2.getVerticalScrollBar().setUI(new MageScrollbarUI());
     }
 
     public AbilityPicker(List<Object> choices, String message) {
 		this.choices = choices;
+		setSize(DIALOG_WIDTH, DIALOG_HEIGHT);
 		if (message!= null) {
 			this.message = message + " (double-click)";
 		}
 		initComponents();
 		jScrollPane2.setOpaque(false);
 		jScrollPane2.getViewport().setOpaque(false);
+		UIManager.put( "ScrollBar.width", 17);
 		jScrollPane2.getHorizontalScrollBar().setUI(new MageScrollbarUI());
 		jScrollPane2.getVerticalScrollBar().setUI(new MageScrollbarUI());
-
-		addMouseWheelListener(this);
 	}
 
     public void init(Session session, UUID gameId) {
@@ -84,17 +85,31 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 	}
 
     public void show(AbilityPickerView choices, Point p) {
-		if (p == null) return;
         this.choices = new ArrayList<Object>();
+		this.selected = true; // to stop previous modal
 
 		for (Map.Entry<UUID, String> choice: choices.getChoices().entrySet()) {
 			this.choices.add(new AbilityPickerAction(choice.getKey(), choice.getValue()));
 		}
         this.choices.add(new AbilityPickerAction(null, "Cancel"));
 
-        Point centered = SettingsManager.getInstance().getComponentPosition(320, 240);
+		show(this.choices);
+	}
+
+	private void show(List<Object> choices) {
+		this.choices = choices;
+		this.selected = true; // to stop previous modal
+
+		rows.setListData(this.choices.toArray());
+		this.rows.setSelectedIndex(0);
+		this.selected = false; // back to false - waiting for selection
+		setVisible(true);
+
+        Point centered = SettingsManager.getInstance().getComponentPosition(DIALOG_WIDTH, DIALOG_HEIGHT);
         this.setLocation(centered.x, centered.y);
 		GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, this);
+
+		//startModal();
 	}
 
     public void initComponents() {
@@ -130,20 +145,9 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 		rightImage = ImageHelper.loadImage(IMAGE_RIGHT_PATH);
 		rightImageHovered = ImageHelper.loadImage(IMAGE_RIGHT_HOVERED_PATH);
 
-		//BufferedImage[] images = new BufferedImage[choices.size()];
-		//rows = new JList(images);
+		setOpaque(false);
+
         rows = new JList();
-        rows.setModel (
-            new AbstractListModel() {
-                public int getSize() {
-                    if (AbilityPicker.this.choices == null) {
-                        return 0;
-                    }
-                    return AbilityPicker.this.choices.size();
-                }
-                public Object getElementAt(int i) { return AbilityPicker.this.choices.get(i); }
-            }
-        );
 
 		rows.setBackground(textColor);
 		rows.setCellRenderer(new ImageRenderer());
@@ -162,10 +166,11 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         });
 		rows.setSelectedIndex(0);
 		rows.setFont(new Font("Times New Roman", 1, 17));
-
+		rows.setBorder(BorderFactory.createEmptyBorder());
 		rows.addMouseWheelListener(this);
 
 		jScrollPane2.setViewportView(rows);
+		jScrollPane2.setViewportBorder(BorderFactory.createEmptyBorder());
 
 		GroupLayout layout = new GroupLayout(this);
 		this.setLayout(layout);
@@ -217,7 +222,8 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
     }
 
     private void objectMouseClicked(MouseEvent event) {
-        AbilityPickerAction action = (AbilityPickerAction)choices.get(rows.getSelectedIndex());
+		int index = rows.getSelectedIndex();
+		AbilityPickerAction action = (AbilityPickerAction)choices.get(index);
         action.actionPerformed(null);
 	}
 
@@ -239,7 +245,8 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 			if (isSelected) {
 				label.setIcon(new ImageIcon(rightImageHovered));
 				label.setForeground(SELECTED_COLOR);
-				label.setBorder(BorderFactory.createLineBorder(BORDER_COLOR));
+				//label.setBorder(BorderFactory.createLineBorder(BORDER_COLOR));
+				label.setBorder(BorderFactory.createEmptyBorder());
 			} else {
 				label.setIcon(new ImageIcon(rightImage));
 			}
@@ -250,16 +257,87 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 		private static final long serialVersionUID = 7689696087189956997L;
 	}
 
+	private synchronized void startModal() {
+	    try {
+            if (SwingUtilities.isEventDispatchThread()) {
+                EventQueue theQueue = getToolkit().getSystemEventQueue();
+                while (!selected) {
+                    AWTEvent event = theQueue.getNextEvent();
+                    Object source = event.getSource();
+                    boolean dispatch = true;
+
+                    /*if (event instanceof MouseEvent) {
+                        MouseEvent e = (MouseEvent) event;
+                        if (e.getID() == MouseEvent.MOUSE_PRESSED || e.getID() == MouseEvent.MOUSE_CLICKED) {
+						  	MouseEvent m = SwingUtilities.convertMouseEvent((Component) e.getSource(), e, this);
+							if (!this.contains(m.getPoint())) {
+								selected = true;
+								cancel();
+								setVisible(false);
+								dispatch = false;
+							}
+						}
+                    }*/
+
+					if (event instanceof MouseEvent) {
+                        MouseEvent e = (MouseEvent) event;
+                        MouseEvent m = SwingUtilities.convertMouseEvent((Component) e.getSource(), e, this);
+                        if (!this.contains(m.getPoint()) && e.getID() != MouseEvent.MOUSE_DRAGGED) {
+                            dispatch = false;
+                        }
+                    }
+
+                    if (dispatch) {
+                        if (event instanceof ActiveEvent) {
+                            ((ActiveEvent) event).dispatch();
+                        } else if (source instanceof Component) {
+                            ((Component) source).dispatchEvent(event);
+                        } else if (source instanceof MenuComponent) {
+                            ((MenuComponent) source).dispatchEvent(event);
+                        }
+                    }
+                }
+            } else {
+                while (!selected) {
+                    wait();
+                }
+            }
+        } catch (InterruptedException ignored) {
+        }
+
+    }
+
     public static void main(String[] argv) {
+		try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception ex) {
+        }
+
 		JFrame jframe = new JFrame("Test");
 
 		List<Object> objectList = new ArrayList<Object>();
-		objectList.add("T: add {R} to your mana pool");
+		objectList.add("T: add {R} to your mana pool. 111111111111111111111111111");
+		objectList.add("T: add {B} to your mana pool");
+		objectList.add("T: add {B} to your mana pool");
+		objectList.add("T: add {B} to your mana pool");
+		objectList.add("T: add {B} to your mana pool");
+		objectList.add("T: add {B} to your mana pool");
+		objectList.add("T: add {B} to your mana pool");
+		objectList.add("T: add {B} to your mana pool");
+		objectList.add("T: add {B} to your mana pool");
+		objectList.add("T: add {B} to your mana pool");
+		objectList.add("T: add {B} to your mana pool");
+		objectList.add("T: add {B} to your mana pool");
+		objectList.add("T: add {B} to your mana pool");
+		objectList.add("T: add {B} to your mana pool");
+		objectList.add("T: add {B} to your mana pool");
+		objectList.add("T: add {B} to your mana pool");
 		objectList.add("T: add {B} to your mana pool");
 		objectList.add("Cancel");
 		AbilityPicker panel = new AbilityPicker(objectList, "Choose ability");
 		jframe.add(panel);
-		jframe.setSize(640, 480);
+		panel.show(objectList);
+		jframe.setSize(DIALOG_WIDTH, DIALOG_HEIGHT);
 		jframe.setVisible(true);
 	}
 
@@ -276,11 +354,12 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 		public void actionPerformed(ActionEvent e) {
             // cancel
             if (id == null) {
-                session.sendPlayerBoolean(gameId, false);
+                cancel();
             } else {
 			    session.sendPlayerUUID(gameId, id);
             }
 			setVisible(false);
+			AbilityPicker.this.selected = true;
 		}
 
         @Override
@@ -288,5 +367,13 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
             return (String)getValue(Action.NAME);
         }
 
+	}
+
+	private void cancel() {
+		try {
+		 	session.sendPlayerBoolean(gameId, false);
+		} catch (Exception e) {
+			log.error("Couldn't cancel choose dialog: " + e, e);
+		}
 	}
 }

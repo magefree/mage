@@ -84,7 +84,7 @@ public class MageScrollbarUI extends MetalScrollBarUI {
 			g2.translate(-trackBounds.x - 2, -trackBounds.y);
 		} else {
 			int width = trackBounds.width;
-			int height = trackBounds.height - 4;
+			int height = trackBounds.height - 4 + ANTI_WIDTH;
 
 			g2.translate(trackBounds.x, trackBounds.y + 2);
 
@@ -144,7 +144,7 @@ public class MageScrollbarUI extends MetalScrollBarUI {
 			g2.translate(thumbBounds.x + 2, thumbBounds.y + 1);
 
 			int width = thumbBounds.width - 4;
-			int height = thumbBounds.height - 3;
+			int height = thumbBounds.height - 3 + ANTI_WIDTH;
 
 			RoundRectangle2D casing = new RoundRectangle2D.Double(0, 0, width, height, height, height);
 			g2.setColor(Color.BLACK);

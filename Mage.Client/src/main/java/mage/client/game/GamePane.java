@@ -48,6 +48,14 @@ public class GamePane extends MagePane {
     /** Creates new form GamePane */
     public GamePane() {
         initComponents();
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				gamePanel.setJLayeredPane(getLayeredPane());
+				gamePanel.installComponents();
+			}
+		});
+
     }
 
 	public void showGame(UUID gameId, UUID playerId) {

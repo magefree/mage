@@ -34,21 +34,6 @@
 
 package mage.client.game;
 
-import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import java.util.prefs.Preferences;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-
 import mage.Constants;
 import mage.client.MageFrame;
 import mage.client.cards.Cards;
@@ -56,12 +41,24 @@ import mage.client.chat.ChatPanel;
 import mage.client.dialog.*;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.impl.Plugins;
-import mage.remote.Session;
 import mage.client.util.Config;
 import mage.client.util.GameManager;
 import mage.client.util.PhaseManager;
+import mage.remote.Session;
 import mage.view.*;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.io.Serializable;
+import java.util.*;
+import java.util.List;
+import java.util.prefs.Preferences;
 
 /**
  *
@@ -80,6 +77,7 @@ public class GamePanel extends javax.swing.JPanel {
 	private Session session;
     private CombatDialog combat;
     private PickNumberDialog pickNumber;
+	private JLayeredPane jLayeredPane;
 
     private static final int HAND_CARD_WIDTH = 75;
 	private static final Dimension handCardDimension = new Dimension(HAND_CARD_WIDTH, (int)(HAND_CARD_WIDTH * 3.5f / 2.5f));
@@ -96,7 +94,7 @@ public class GamePanel extends javax.swing.JPanel {
     /** Creates new form GamePanel */
     public GamePanel() {
         initComponents();
-        
+
         hand.setHScrollSpeed(8);
         hand.setBackgroundColor(new Color(0, 0, 0, 100));
         hand.setVisibleIfEmpty(false);
@@ -137,7 +135,7 @@ public class GamePanel extends javax.swing.JPanel {
 
     private Map<String, JComponent> getUIComponents(JLayeredPane jLayeredPane) {
     	Map<String, JComponent> components = new HashMap<String, JComponent>();
-    	
+
 		components.put("jSplitPane1", jSplitPane1);
 		components.put("pnlBattlefield", pnlBattlefield);
 		components.put("jPanel3", jPanel3);
@@ -146,10 +144,10 @@ public class GamePanel extends javax.swing.JPanel {
 		components.put("userChatPanel", userChatPanel);
 		components.put("jLayeredPane", jLayeredPane);
 		components.put("gamePanel", this);
-		
+
 		return components;
     }
-    
+
 	public void cleanUp() {
 		this.gameChatPanel.disconnect();
 		this.players.clear();
@@ -325,10 +323,10 @@ public class GamePanel extends javax.swing.JPanel {
 				}
 			}
 		}
-		
+
 		this.stack.loadCards(game.getStack(), bigCard, gameId);
         GameManager.getInstance().setStackSize(game.getStack().size());
-		
+
 		for (ExileView exile: game.getExile()) {
 			if (!exiles.containsKey(exile.getId())) {
 				ExileZoneDialog newExile = new ExileZoneDialog();
@@ -489,11 +487,11 @@ public class GamePanel extends javax.swing.JPanel {
 		pickChoice.showDialog(message, choices);
 		session.sendPlayerString(gameId, pickChoice.getChoice());
 	}
-	
+
 	public Map<UUID, PlayAreaPanel> getPlayers() {
 		return players;
 	}
-	
+
     /*public javax.swing.JPanel getBattlefield() {
 		return pnlBattlefield;
 	}*/
@@ -508,7 +506,8 @@ public class GamePanel extends javax.swing.JPanel {
     // </editor-fold>//GEN-END:initComponents
     private void initComponents() {
 
-        abilityPicker = new mage.client.game.AbilityPicker();
+        //abilityPicker = new mage.client.game.AbilityPicker();
+		abilityPicker = new mage.client.components.ability.AbilityPicker();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel3 = new javax.swing.JPanel();
         pnlGameInfo = new javax.swing.JPanel();
@@ -542,7 +541,7 @@ public class GamePanel extends javax.swing.JPanel {
 		gameChatPanel.disableInput();
 		jTabbedPane1 = new JTabbedPane();
 
-	    hand.setCardDimension(getHandCardDimension());
+		hand.setCardDimension(getHandCardDimension());
 
         jSplitPane1.setBorder(null);
         jSplitPane1.setDividerSize(7);
@@ -893,8 +892,19 @@ public class GamePanel extends javax.swing.JPanel {
         private javax.swing.JScrollPane jScrollPane1;
     }
 
+	public void setJLayeredPane(JLayeredPane jLayeredPane) {
+		this.jLayeredPane = jLayeredPane;
+	}
+
+	public void installComponents() {
+		jLayeredPane.setOpaque(false);
+		jLayeredPane.add(abilityPicker);
+		abilityPicker.setVisible(false);
+	}
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private mage.client.game.AbilityPicker abilityPicker;
+    //private mage.client.game.AbilityPicker abilityPicker;
+	private mage.client.components.ability.AbilityPicker abilityPicker;
     private mage.client.cards.BigCard bigCard;
     private javax.swing.JButton btnConcede;
     private javax.swing.JButton btnNextPlay;

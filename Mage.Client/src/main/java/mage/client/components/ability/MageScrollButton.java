@@ -18,8 +18,8 @@ import javax.swing.plaf.metal.MetalScrollButton;
  */
 public class MageScrollButton extends MetalScrollButton {
 
-	private static Icon buttonLeft;
-	private static Icon buttonRight;
+	private static ImageIcon buttonLeft;
+	private static ImageIcon buttonRight;
 	private static ImageIcon buttonUp;
 	private static ImageIcon buttonDown;
 
@@ -38,6 +38,8 @@ public class MageScrollButton extends MetalScrollButton {
 		this.width = width;
 		buttonUp.setImage(buttonUp.getImage().getScaledInstance(width, width, Image.SCALE_SMOOTH));
 		buttonDown.setImage(buttonDown.getImage().getScaledInstance(width, width, Image.SCALE_SMOOTH));
+		buttonLeft.setImage(buttonLeft.getImage().getScaledInstance(width, width, Image.SCALE_SMOOTH));
+		buttonRight.setImage(buttonRight.getImage().getScaledInstance(width, width, Image.SCALE_SMOOTH));
 	}
 
 	@Override
