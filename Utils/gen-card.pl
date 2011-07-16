@@ -8,13 +8,15 @@ my $authorFile = 'author.txt';
 my $dataFile = 'mtg-cards-data.txt';
 my $setsFile = 'mtg-sets-data.txt';
 my $knownSetsFile = 'known-sets.txt';
+my $keywordsFile = 'keywords.txt';
 
 
 my %cards;
 my %sets;
 my %knownSets;
+my %keywords;
 
-sub getClassName {
+sub toCamelCase {
     my $string = $_[0];
     $string =~ s/\b([\w']+)\b/ucfirst($1)/ge;
     $string =~ s/[-,\s\']//g;
@@ -51,6 +53,13 @@ while(my $line = <DATA>) {
 }
 close(DATA);
 
+open (DATA, $keywordsFile) || die "can't open $keywordsFile";
+while(my $line = <DATA>) {
+    my @data = split('\\|', $line);
+    $keywords{toCamelCase($data[0])}= $data[1];
+}
+close(DATA);
+
 my %cardTypes;
 $cardTypes{'Artifact'} = 'CardType.ARTIFACT';
 $cardTypes{'Creature'} = 'CardType.CREATURE';
@@ -81,7 +90,7 @@ chomp $cardName;
 # Check if card is already implemented
 foreach my $setName (keys %{$cards{$cardName}}) {
 	if (exists $knownSets{$setName}) {
-        my $fileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . getClassName($cardName) . ".java";
+        my $fileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . toCamelCase($cardName) . ".java";
         if(-e $fileName) {
             die "$cardName is already implemented (set found: $setName).\n";
         }
@@ -95,13 +104,13 @@ my %vars;
 
 $vars{'author'} = $author;
 $vars{'name'} = $cardName;
-$vars{'className'} = getClassName($cardName);
+$vars{'className'} = toCamelCase($cardName);
 
 print "Files generated:\n";
 my $baseRarity = '';
 foreach my $setName (keys %{$cards{$cardName}}) {
 	if (exists $knownSets{$setName}) {
-        my $fileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . getClassName($cardName) . ".java";
+        my $fileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . toCamelCase($cardName) . ".java";
         my $result;
 
         $vars{'set'} = $knownSets{$setName};
@@ -124,9 +133,9 @@ foreach my $setName (keys %{$cards{$cardName}}) {
                     push(@types, $cardTypes{$1});
 				} else {
                     if (@types) {
-                        $vars{'subType'} .= "        this.subtype.add(\"$1\");\n";
+                        $vars{'subType'} .= "\n        this.subtype.add(\"$1\");";
                     } else {
-                        $vars{'subType'} .= "        this.supertype.add(\"$1\");\n";
+                        $vars{'subType'} .= "\n        this.supertype.add(\"$1\");";
                     }
 				}
 			}
@@ -141,6 +150,55 @@ foreach my $setName (keys %{$cards{$cardName}}) {
             foreach my $color (keys %colors) {
                 $vars{'colors'} .= "\n        this.color.set$color(true);";
             }
+            if ($vars{'colors'} || $vars{'power'}) {
+                $vars{'colors'} = "\n" . $vars{'colors'};
+            }
+            
+            $vars{'abilitiesImports'} = '';
+            $vars{'abilities'} = '';
+
+            my @abilities = split('\$', $cards{$cardName}{$setName}[8]);
+            foreach my $ability (@abilities) {
+                $ability =~ s/ <i>.+?<\/i>//g;
+
+                my $notKeyWord;
+                foreach my $keyword (keys %keywords) {
+                    if (index(toCamelCase($ability), $keyword) eq 0) {
+                        $notKeyWord = 'no';
+                        my @ka = split(', ', $ability);
+                        foreach my $kw (@ka) {
+                            my $kwUnchanged = $kw;
+                            $kw = toCamelCase($kw);
+                            
+                            if ($keywords{$kw}) {
+                                if ($keywords{$kw} eq 'instance') {
+                                    $vars{'abilities'} .= "\n        this.addAbility(" . $kw . "Ability.getInstance());";
+                                } elsif ($keywords{$kw} eq 'new') {
+                                    $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . "Ability());";
+                                } elsif ($keywords{$kw} eq 'number') {
+                                    $ability =~ m/(\b\d+?\b)/g;
+                                    $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(' . $1 . '));';
+                                } elsif ($keywords{$kw} eq 'cost') {
+                                    $ability =~ m/({.*})/g;
+                                    $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(new ManaCostsImpl("' . $1 . '")));';
+                                    $vars{'abilitiesImports'} .= "\nimport mage.abilities.costs.mana.ManaCostsImpl;";
+                                }
+                                
+                                $vars{'abilitiesImports'} .= "\nimport mage.abilities.keyword." . $kw . "Ability;";
+                            } else {
+                                $vars{'abilities'} .= "\n        // $kwUnchanged";
+                            }
+                        }
+                    }
+                }
+                
+                if (!$notKeyWord) {
+                    $vars{'abilities'} .= "\n        // $ability";
+                }
+            }
+            if ($vars{'abilities'}) {
+                $vars{'abilities'} = "\n" . $vars{'abilities'};
+            }
 
             $vars{'baseSet'} = $vars{'set'};
             $vars{'baseClassName'} = $vars{'className'};
@@ -149,7 +207,7 @@ foreach my $setName (keys %{$cards{$cardName}}) {
         } else {
             $vars{'rarityExtended'} = '';
             if ($baseRarity ne $cards{$cardName}{$setName}[3]) {
-                $vars{'rarityExtended'} = "\n        this.rarity = Rarity.$raritiesConversion{$cards{$cardName}{$setName}[3]};\n";
+                $vars{'rarityExtended'} = "\n        this.rarity = Rarity.$raritiesConversion{$cards{$cardName}{$setName}[3]};";
             }
             $result = $templateExtended->fill_in(HASH => \%vars);
         }

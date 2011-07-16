@@ -9,6 +9,7 @@ my $dataFile = "mtg-cards-data.txt";
 my $setsFile = "mtg-sets-data.txt";
 my $knownSetsFile = "known-sets.txt";
 
+
 my %cards;
 my %sets;
 my %knownSets;
@@ -21,7 +22,7 @@ chomp $setName;
 
 my $template = Text::Template->new(SOURCE => 'cardExtendedClass.tmpl', DELIMITERS => [ '[=', '=]' ]);
 
-sub getClassName {
+sub toCamelCase {
     my $string = $_[0];
     $string =~ s/\b([\w']+)\b/ucfirst($1)/ge;
     $string =~ s/[-,\s\']//g;
@@ -77,7 +78,7 @@ $vars{'expansionSetCode'} = $sets{$setName};
 
 print "Files generated:\n";
 foreach my $cardName (@setCards) {
-    my $className = getClassName($cardName);
+    my $className = toCamelCase($cardName);
     my $currentFileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . $className . ".java";
 
     if(! -e $currentFileName) {
@@ -97,7 +98,7 @@ foreach my $cardName (@setCards) {
                             
                             $vars{'rarityExtended'} = '';
                             if ($cards{$cardName}{$setName}[3] ne $cards{$cardName}{$keySet}[3]) {
-                                $vars{'rarityExtended'} = "\n        this.rarity = Rarity.$raritiesConversion{$cards{$cardName}{$setName}[3]};\n";
+                                $vars{'rarityExtended'} = "\n        this.rarity = Rarity.$raritiesConversion{$cards{$cardName}{$setName}[3]};";
                             }
                             $found = 1;
                         }

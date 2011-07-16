@@ -1,0 +1,38 @@
+Annihilator|number|
+Bushido|number|
+Soulshift|number|
+Basic landcycling|cost|
+Cycling|cost|
+Equip|cost|
+Level up|cost|
+Unearth|cost|
+Battle cry|new|
+Cascade|new|
+Exalted|new|
+Forestwalk|new|
+Hexproof|new|
+Islandwalk|new|
+Living weapon|new|
+Mountainwalk|new|
+Plainswalk|new|
+Rebound|new|
+Swampwalk|new|
+Deathtouch|instance|
+Defender|instance|
+Double Strike|instance|
+Fear|instance|
+First strike|instance|
+Flash|instance|
+Flying|instance|
+Haste|instance|
+Indestructible|instance|
+Infect|instance|
+Intimidate|instance|
+Lifelink|instance|
+Phasing|instance|
+Reach|instance|
+Shroud|instance|
+Trample|instance|
+Unblockable|instance|
+Vigilance|instance|
+Wither|instance|
