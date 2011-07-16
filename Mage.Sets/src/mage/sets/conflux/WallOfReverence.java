@@ -30,9 +30,10 @@ package mage.sets.conflux;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -62,7 +63,7 @@ public class WallOfReverence extends CardImpl<WallOfReverence> {
         this.toughness = new MageInt(6);
         this.addAbility(DefenderAbility.getInstance());
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new WallofReverenceTriggeredAbility());
+        this.addAbility(new WallOfReverenceTriggeredAbility());
     }
 
     public WallOfReverence (final WallOfReverence card) {
@@ -75,19 +76,19 @@ public class WallOfReverence extends CardImpl<WallOfReverence> {
     }
 }
 
-class WallofReverenceTriggeredAbility extends TriggeredAbilityImpl<WallofReverenceTriggeredAbility> {
-    WallofReverenceTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new WallofReverenceTriggeredEffect(), true);
+class WallOfReverenceTriggeredAbility extends TriggeredAbilityImpl<WallOfReverenceTriggeredAbility> {
+    WallOfReverenceTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new WallOfReverenceTriggeredEffect(), true);
         this.addTarget(new TargetControlledCreaturePermanent());
     }
 
-    WallofReverenceTriggeredAbility(final WallofReverenceTriggeredAbility ability) {
+    WallOfReverenceTriggeredAbility(final WallOfReverenceTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public WallofReverenceTriggeredAbility copy() {
-        return new WallofReverenceTriggeredAbility(this);
+    public WallOfReverenceTriggeredAbility copy() {
+        return new WallOfReverenceTriggeredAbility(this);
     }
 
     @Override
@@ -104,12 +105,12 @@ class WallofReverenceTriggeredAbility extends TriggeredAbilityImpl<WallofReveren
     }
 }
 
-class WallofReverenceTriggeredEffect extends OneShotEffect<WallofReverenceTriggeredEffect> {
-    WallofReverenceTriggeredEffect() {
-        super(Constants.Outcome.GainLife);
+class WallOfReverenceTriggeredEffect extends OneShotEffect<WallOfReverenceTriggeredEffect> {
+    WallOfReverenceTriggeredEffect() {
+        super(Outcome.GainLife);
     }
 
-    WallofReverenceTriggeredEffect(WallofReverenceTriggeredEffect effect) {
+    WallOfReverenceTriggeredEffect(WallOfReverenceTriggeredEffect effect) {
         super(effect);
     }
 
@@ -125,8 +126,8 @@ class WallofReverenceTriggeredEffect extends OneShotEffect<WallofReverenceTrigge
     }
 
     @Override
-    public WallofReverenceTriggeredEffect copy() {
-        return new WallofReverenceTriggeredEffect(this);
+    public WallOfReverenceTriggeredEffect copy() {
+        return new WallOfReverenceTriggeredEffect(this);
     }
 
     @Override

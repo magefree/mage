@@ -26,61 +26,90 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.eventide;
+package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.players.Player;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+
 
 /**
  *
  * @author Loki
  */
-public class DivinityOfPride extends CardImpl<DivinityOfPride> {
+public class LinvalaKeeperOfSilence extends CardImpl<LinvalaKeeperOfSilence> {
 
-    public DivinityOfPride (UUID ownerId) {
-        super(ownerId, 86, "Divinity of Pride", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W/B}{W/B}{W/B}{W/B}{W/B}");
-        this.expansionSetCode = "EVE";
-        this.subtype.add("Spirit");
-        this.subtype.add("Avatar");
-        this.color.setBlack(true);
-        this.color.setWhite(true);
-        this.power = new MageInt(4);
+    public LinvalaKeeperOfSilence (UUID ownerId) {
+        super(ownerId, 33, "Linvala, Keeper of Silence", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+        this.expansionSetCode = "ROE";
+        this.supertype.add("Legendary");
+        this.subtype.add("Angel");
+		this.color.setWhite(true);
+        this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(LifelinkAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostSourceEffect(4, 4, Constants.Duration.WhileOnBattlefield), new DivinityofPrideCondition(), "Divinity of Pride gets +4/+4 as long as you have 25 or more life")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LinvalaKeeperOfSilenceEffect()));
     }
 
-    public DivinityOfPride (final DivinityOfPride card) {
+    public LinvalaKeeperOfSilence (final LinvalaKeeperOfSilence card) {
         super(card);
     }
 
     @Override
-    public DivinityOfPride copy() {
-        return new DivinityOfPride(this);
+    public LinvalaKeeperOfSilence copy() {
+        return new LinvalaKeeperOfSilence(this);
     }
-
 }
 
-class DivinityofPrideCondition implements Condition {
+class LinvalaKeeperOfSilenceEffect extends ReplacementEffectImpl<LinvalaKeeperOfSilenceEffect> {
+    LinvalaKeeperOfSilenceEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+    }
+
+    LinvalaKeeperOfSilenceEffect(final LinvalaKeeperOfSilenceEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        Permanent p = game.getPermanent(event.getTargetId());
+        if ( event.getType() == GameEvent.EventType.ACTIVATE_ABILITY && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())
+                && p != null && p.getCardType().contains(CardType.CREATURE)) {
+			return true;
+		}
+        return false;
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        return player != null && player.getLife() >= 25;
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public LinvalaKeeperOfSilenceEffect copy() {
+        return new LinvalaKeeperOfSilenceEffect(this);
+    }
+
+    @Override
+    public String getText(Ability source) {
+        return "Activated abilities of creatures your opponents control can't be activated";
     }
 }

@@ -35,7 +35,6 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
@@ -58,7 +57,7 @@ public class NemesisOfReason extends CardImpl<NemesisOfReason> {
 		this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(7);
-        this.addAbility(new NemesisofReasonTriggeredAbility());
+        this.addAbility(new NemesisOfReasonTriggeredAbility());
     }
 
     public NemesisOfReason (final NemesisOfReason card) {
@@ -71,18 +70,18 @@ public class NemesisOfReason extends CardImpl<NemesisOfReason> {
     }
 }
 
-class NemesisofReasonTriggeredAbility extends TriggeredAbilityImpl<NemesisofReasonTriggeredAbility> {
-    NemesisofReasonTriggeredAbility() {
+class NemesisOfReasonTriggeredAbility extends TriggeredAbilityImpl<NemesisOfReasonTriggeredAbility> {
+    NemesisOfReasonTriggeredAbility() {
         super(Constants.Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(10));
     }
 
-    NemesisofReasonTriggeredAbility(final NemesisofReasonTriggeredAbility ability) {
+    NemesisOfReasonTriggeredAbility(final NemesisOfReasonTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public NemesisofReasonTriggeredAbility copy() {
-        return new NemesisofReasonTriggeredAbility(this);
+    public NemesisOfReasonTriggeredAbility copy() {
+        return new NemesisOfReasonTriggeredAbility(this);
     }
 
     @Override

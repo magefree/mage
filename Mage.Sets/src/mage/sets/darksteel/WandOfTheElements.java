@@ -30,9 +30,9 @@ package mage.sets.darksteel;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -61,10 +61,10 @@ public class WandOfTheElements extends CardImpl<WandOfTheElements> {
     public WandOfTheElements(UUID ownerId) {
         super(ownerId, 158, "Wand of the Elements", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "DST";
-        Ability firstAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new WandoftheElementsFirstToken()), new TapSourceCost());
+        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WandOfTheElementsFirstToken()), new TapSourceCost());
         firstAbility.addCost(new SacrificeTargetCost(new TargetControlledPermanent(islandFilter)));
         this.addAbility(firstAbility);
-        Ability secondAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new WandoftheElementsSecondToken()), new TapSourceCost());
+        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WandOfTheElementsSecondToken()), new TapSourceCost());
         secondAbility.addCost(new SacrificeTargetCost(new TargetControlledPermanent(mountainFilter)));
         this.addAbility(secondAbility);
 
@@ -80,8 +80,8 @@ public class WandOfTheElements extends CardImpl<WandOfTheElements> {
     }
 }
 
-class WandoftheElementsFirstToken extends Token {
-    public WandoftheElementsFirstToken() {
+class WandOfTheElementsFirstToken extends Token {
+    public WandOfTheElementsFirstToken() {
         super("", "2/2 blue Elemental creature token with flying");
         cardType.add(CardType.CREATURE);
         this.subtype.add("Elemental");
@@ -93,8 +93,8 @@ class WandoftheElementsFirstToken extends Token {
 }
 
 
-class WandoftheElementsSecondToken extends Token {
-    public WandoftheElementsSecondToken() {
+class WandOfTheElementsSecondToken extends Token {
+    public WandOfTheElementsSecondToken() {
         super("", "3/3 red Elemental creature token");
         cardType.add(CardType.CREATURE);
         this.subtype.add("Elemental");

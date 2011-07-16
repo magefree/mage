@@ -30,8 +30,8 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
@@ -58,7 +58,7 @@ import mage.target.TargetCard;
  */
 public class GethLordOfTheVault extends CardImpl<GethLordOfTheVault> {
 
-	private static FilterCard filter = new FilterCard("artifact or creature card");
+	private static final FilterCard filter = new FilterCard("artifact or creature card");
 
 	static {
 		filter.getCardType().add(CardType.CREATURE);
@@ -76,8 +76,8 @@ public class GethLordOfTheVault extends CardImpl<GethLordOfTheVault> {
         this.toughness = new MageInt(5);
         
         this.addAbility(IntimidateAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GethLordoftheVaultEffect(), new ManaCostsImpl("{X}{B}"));
-        ability.addTarget(new GethLordoftheVaultEffectTarget(filter));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GethLordOfTheVaultEffect(), new ManaCostsImpl("{X}{B}"));
+        ability.addTarget(new GethLordOfTheVaultEffectTarget(filter));
         this.addAbility(ability);
     }
 
@@ -106,13 +106,13 @@ public class GethLordOfTheVault extends CardImpl<GethLordOfTheVault> {
     }
 
 }
-class GethLordoftheVaultEffect extends OneShotEffect<GethLordoftheVaultEffect> {
+class GethLordOfTheVaultEffect extends OneShotEffect<GethLordOfTheVaultEffect> {
     
-	public GethLordoftheVaultEffect() {
-        super(Constants.Outcome.Benefit);
+	public GethLordOfTheVaultEffect() {
+        super(Outcome.Benefit);
     }
 
-    public GethLordoftheVaultEffect(final GethLordoftheVaultEffect effect) {
+    public GethLordOfTheVaultEffect(final GethLordOfTheVaultEffect effect) {
         super(effect);
     }
 
@@ -150,8 +150,8 @@ class GethLordoftheVaultEffect extends OneShotEffect<GethLordoftheVaultEffect> {
     }
 
     @Override
-    public GethLordoftheVaultEffect copy() {
-        return new GethLordoftheVaultEffect(this);
+    public GethLordOfTheVaultEffect copy() {
+        return new GethLordOfTheVaultEffect(this);
     }
 
     @Override
@@ -160,18 +160,18 @@ class GethLordoftheVaultEffect extends OneShotEffect<GethLordoftheVaultEffect> {
     }
 }
 
-class GethLordoftheVaultEffectTarget extends TargetCard<GethLordoftheVaultEffectTarget> {
+class GethLordOfTheVaultEffectTarget extends TargetCard<GethLordOfTheVaultEffectTarget> {
 
-	public GethLordoftheVaultEffectTarget(FilterCard filter) {
+	public GethLordOfTheVaultEffectTarget(FilterCard filter) {
 		this(1, 1, filter);
 	}
 
-	public GethLordoftheVaultEffectTarget(int minNumTargets, int maxNumTargets, FilterCard filter) {
+	public GethLordOfTheVaultEffectTarget(int minNumTargets, int maxNumTargets, FilterCard filter) {
 		super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);
 		this.targetName = filter.getMessage() + " from an opponent's graveyard";
 	}
 
-	public GethLordoftheVaultEffectTarget(final GethLordoftheVaultEffectTarget target) {
+	public GethLordOfTheVaultEffectTarget(final GethLordOfTheVaultEffectTarget target) {
 		super(target);
 	}
 
@@ -192,7 +192,7 @@ class GethLordoftheVaultEffectTarget extends TargetCard<GethLordoftheVaultEffect
 	}
 
 	@Override
-	public GethLordoftheVaultEffectTarget copy() {
-		return new GethLordoftheVaultEffectTarget(this);
+	public GethLordOfTheVaultEffectTarget copy() {
+		return new GethLordOfTheVaultEffectTarget(this);
 	}
 }

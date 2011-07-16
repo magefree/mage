@@ -30,16 +30,16 @@ package mage.sets.darksteel;
 
 import java.util.UUID;
 
-import mage.Constants;
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -47,67 +47,63 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  * @author Loki
  */
-public class SwordOfLightAndShadow extends CardImpl<SwordOfLightAndShadow> {
+public class SwordOfFireAndIce extends CardImpl<SwordOfFireAndIce> {
 
-    private static FilterCard filter = new FilterCard("white and from black");
+    private static final FilterCard filter = new FilterCard("red and from blue");
 
     static {
         filter.setUseColor(true);
-        filter.getColor().setWhite(true);
-        filter.getColor().setBlack(true);
+        filter.getColor().setRed(true);
+        filter.getColor().setGreen(true);
         filter.setScopeColor(Filter.ComparisonScope.Any);
     }
 
-    public SwordOfLightAndShadow(UUID ownerId) {
-        super(ownerId, 149, "Sword of Light and Shadow", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
+
+    public SwordOfFireAndIce(UUID ownerId) {
+        super(ownerId, 148, "Sword of Fire and Ice", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "DST";
         this.subtype.add("Equipment");
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(filter), Constants.AttachmentType.EQUIPMENT)));
-        this.addAbility(new SwordofLightandShadowAbility());
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SwordOfFireAndIceAbility());
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public SwordOfLightAndShadow(final SwordOfLightAndShadow card) {
+    public SwordOfFireAndIce(final SwordOfFireAndIce card) {
         super(card);
     }
 
     @Override
-    public SwordOfLightAndShadow copy() {
-        return new SwordOfLightAndShadow(this);
+    public SwordOfFireAndIce copy() {
+        return new SwordOfFireAndIce(this);
     }
 
 }
 
-class SwordofLightandShadowAbility extends TriggeredAbilityImpl<SwordofLightandShadowAbility> {
+class SwordOfFireAndIceAbility extends TriggeredAbilityImpl<SwordOfFireAndIceAbility> {
 
-    private static FilterCreatureCard filter = new FilterCreatureCard("creature");
-
-    public SwordofLightandShadowAbility() {
-        super(Constants.Zone.BATTLEFIELD, new ReturnToHandTargetEffect());
-        this.addEffect(new GainLifeEffect(3));
-        this.addTarget(new TargetCardInYourGraveyard(filter));
+    public SwordOfFireAndIceAbility() {
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
+        this.addEffect(new DrawCardControllerEffect(1));
+        this.addTarget(new TargetCreatureOrPlayer());
     }
 
-    public SwordofLightandShadowAbility(final SwordofLightandShadowAbility ability) {
+    public SwordOfFireAndIceAbility(final SwordOfFireAndIceAbility ability) {
         super(ability);
     }
 
     @Override
-    public SwordofLightandShadowAbility copy() {
-        return new SwordofLightandShadowAbility(this);
+    public SwordOfFireAndIceAbility copy() {
+        return new SwordOfFireAndIceAbility(this);
     }
 
     @Override
@@ -124,6 +120,6 @@ class SwordofLightandShadowAbility extends TriggeredAbilityImpl<SwordofLightandS
 
     @Override
     public String getRule() {
-        return "Whenever equipped creature deals combat damage to a player, you gain 3 life and you may return up to one target creature card from your graveyard to your hand.";
+        return "Whenever equipped creature deals combat damage to a player, Sword of Fire and Ice deals 2 damage to target creature or player and you draw a card.";
     }
 }

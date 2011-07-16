@@ -26,90 +26,83 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.riseoftheeldrazi;
+package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.BattleCryAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-
-import javax.xml.datatype.Duration;
+import mage.game.permanent.token.SoldierToken;
+import mage.players.Player;
 
 /**
- *
  * @author Loki
  */
-public class LinvalaKeeperOfSilence extends CardImpl<LinvalaKeeperOfSilence> {
+public class HeroOfBladehold extends CardImpl<HeroOfBladehold> {
 
-    public LinvalaKeeperOfSilence (UUID ownerId) {
-        super(ownerId, 33, "Linvala, Keeper of Silence", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "ROE";
-        this.supertype.add("Legendary");
-        this.subtype.add("Angel");
-		this.color.setWhite(true);
+    public HeroOfBladehold(UUID ownerId) {
+        super(ownerId, 8, "Hero of Bladehold", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+        this.expansionSetCode = "MBS";
+        this.subtype.add("Human");
+        this.subtype.add("Knight");
+        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new LinvalaKeeperofSilenceEffect()));
+        this.addAbility(new BattleCryAbility());
+        this.addAbility(new AttacksTriggeredAbility(new HeroOfBladeholdEffect(), false));
     }
 
-    public LinvalaKeeperOfSilence (final LinvalaKeeperOfSilence card) {
+    public HeroOfBladehold(final HeroOfBladehold card) {
         super(card);
     }
 
     @Override
-    public LinvalaKeeperOfSilence copy() {
-        return new LinvalaKeeperOfSilence(this);
+    public HeroOfBladehold copy() {
+        return new HeroOfBladehold(this);
     }
+
 }
 
-class LinvalaKeeperofSilenceEffect extends ReplacementEffectImpl<LinvalaKeeperofSilenceEffect> {
-    LinvalaKeeperofSilenceEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+class HeroOfBladeholdEffect extends OneShotEffect<HeroOfBladeholdEffect> {
+    HeroOfBladeholdEffect() {
+        super(Outcome.PutCreatureInPlay);
     }
 
-    LinvalaKeeperofSilenceEffect(final LinvalaKeeperofSilenceEffect effect) {
+    HeroOfBladeholdEffect(final HeroOfBladeholdEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+    public boolean apply(Game game, Ability source) {
+        SoldierToken token = new SoldierToken();
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            for (int i = 1; i <= 2; i++) {
+                token.putOntoBattlefield(game, source.getId(), source.getControllerId());
+                Permanent p = game.getPermanent(token.getLastAddedToken());
+                game.getCombat().declareAttacker(p.getId(), game.getCombat().getDefendingPlayer(source.getSourceId()), game);
+                p.setTapped(true);
+            }
+        }
         return true;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent p = game.getPermanent(event.getTargetId());
-        if ( event.getType() == GameEvent.EventType.ACTIVATE_ABILITY && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())
-                && p != null && p.getCardType().contains(CardType.CREATURE)) {
-			return true;
-		}
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
-    }
-
-    @Override
-    public LinvalaKeeperofSilenceEffect copy() {
-        return new LinvalaKeeperofSilenceEffect(this);
+    public HeroOfBladeholdEffect copy() {
+        return new HeroOfBladeholdEffect(this);
     }
 
     @Override
     public String getText(Ability source) {
-        return "Activated abilities of creatures your opponents control can't be activated";
+        return "put two 1/1 white Soldier creature tokens onto the battlefield tapped and attacking";
     }
 }

@@ -28,12 +28,12 @@
 
 package mage.sets.guildpact;
 
-import java.awt.font.TextHitInfo;
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -66,10 +66,10 @@ public class GhostCouncilOfOrzhova extends CardImpl<GhostCouncilOfOrzhova> {
 		this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        Ability ability = new EntersBattlefieldTriggeredAbility(new GhostCouncilofOrzhovaEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new GhostCouncilOfOrzhovaEffect());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
-        ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GhostCouncilofOrzhovaRemovingEffect(), new GenericManaCost(1));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GhostCouncilOfOrzhovaRemovingEffect(), new GenericManaCost(1));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         this.addAbility(ability);
     }
@@ -85,12 +85,12 @@ public class GhostCouncilOfOrzhova extends CardImpl<GhostCouncilOfOrzhova> {
 
 }
 
-class GhostCouncilofOrzhovaEffect extends OneShotEffect<GhostCouncilofOrzhovaEffect> {
-    GhostCouncilofOrzhovaEffect() {
-        super(Constants.Outcome.Damage);
+class GhostCouncilOfOrzhovaEffect extends OneShotEffect<GhostCouncilOfOrzhovaEffect> {
+    GhostCouncilOfOrzhovaEffect() {
+        super(Outcome.Damage);
     }
 
-    GhostCouncilofOrzhovaEffect(final GhostCouncilofOrzhovaEffect effect) {
+    GhostCouncilOfOrzhovaEffect(final GhostCouncilOfOrzhovaEffect effect) {
         super(effect);
     }
 
@@ -106,8 +106,8 @@ class GhostCouncilofOrzhovaEffect extends OneShotEffect<GhostCouncilofOrzhovaEff
     }
 
     @Override
-    public GhostCouncilofOrzhovaEffect copy() {
-        return new GhostCouncilofOrzhovaEffect(this);
+    public GhostCouncilOfOrzhovaEffect copy() {
+        return new GhostCouncilOfOrzhovaEffect(this);
     }
 
     @Override
@@ -116,15 +116,15 @@ class GhostCouncilofOrzhovaEffect extends OneShotEffect<GhostCouncilofOrzhovaEff
     }
 }
 
-class GhostCouncilofOrzhovaRemovingEffect extends OneShotEffect<GhostCouncilofOrzhovaRemovingEffect> {
+class GhostCouncilOfOrzhovaRemovingEffect extends OneShotEffect<GhostCouncilOfOrzhovaRemovingEffect> {
 
 	private static final String effectText = "Exile Ghost Council of Orzhova. Return it to the battlefield under its owner's control at the beginning of the next end step";
 
-	GhostCouncilofOrzhovaRemovingEffect () {
-		super(Constants.Outcome.Benefit);
+	GhostCouncilOfOrzhovaRemovingEffect () {
+		super(Outcome.Benefit);
 	}
 
-	GhostCouncilofOrzhovaRemovingEffect(GhostCouncilofOrzhovaRemovingEffect effect) {
+	GhostCouncilOfOrzhovaRemovingEffect(GhostCouncilOfOrzhovaRemovingEffect effect) {
 		super(effect);
 	}
 
@@ -134,7 +134,7 @@ class GhostCouncilofOrzhovaRemovingEffect extends OneShotEffect<GhostCouncilofOr
 		if (permanent != null) {
 			if (permanent.moveToExile(source.getSourceId(), " Ghost Council of Orzhova Exile", source.getId(), game)) {
 				//create delayed triggered ability
-				GhostCouncilofOrzhovaDelayedTriggeredAbility delayedAbility = new GhostCouncilofOrzhovaDelayedTriggeredAbility(source.getSourceId());
+				GhostCouncilOfOrzhovaDelayedTriggeredAbility delayedAbility = new GhostCouncilOfOrzhovaDelayedTriggeredAbility(source.getSourceId());
 				delayedAbility.setSourceId(source.getSourceId());
 				delayedAbility.setControllerId(source.getControllerId());
 				game.addDelayedTriggeredAbility(delayedAbility);
@@ -145,8 +145,8 @@ class GhostCouncilofOrzhovaRemovingEffect extends OneShotEffect<GhostCouncilofOr
 	}
 
 	@Override
-	public GhostCouncilofOrzhovaRemovingEffect copy() {
-		return new GhostCouncilofOrzhovaRemovingEffect(this);
+	public GhostCouncilOfOrzhovaRemovingEffect copy() {
+		return new GhostCouncilOfOrzhovaRemovingEffect(this);
 	}
 
 	@Override
@@ -155,13 +155,13 @@ class GhostCouncilofOrzhovaRemovingEffect extends OneShotEffect<GhostCouncilofOr
 	}
 }
 
-class GhostCouncilofOrzhovaDelayedTriggeredAbility extends DelayedTriggeredAbility<GhostCouncilofOrzhovaDelayedTriggeredAbility> {
+class GhostCouncilOfOrzhovaDelayedTriggeredAbility extends DelayedTriggeredAbility<GhostCouncilOfOrzhovaDelayedTriggeredAbility> {
 
-	GhostCouncilofOrzhovaDelayedTriggeredAbility ( UUID exileId ) {
-		super(new ReturnFromExileEffect(exileId, Constants.Zone.BATTLEFIELD));
+	GhostCouncilOfOrzhovaDelayedTriggeredAbility ( UUID exileId ) {
+		super(new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD));
 	}
 
-	GhostCouncilofOrzhovaDelayedTriggeredAbility(GhostCouncilofOrzhovaDelayedTriggeredAbility ability) {
+	GhostCouncilOfOrzhovaDelayedTriggeredAbility(GhostCouncilOfOrzhovaDelayedTriggeredAbility ability) {
 		super(ability);
 	}
 
@@ -173,7 +173,7 @@ class GhostCouncilofOrzhovaDelayedTriggeredAbility extends DelayedTriggeredAbili
 		return false;
 	}
 	@Override
-	public GhostCouncilofOrzhovaDelayedTriggeredAbility copy() {
-		return new GhostCouncilofOrzhovaDelayedTriggeredAbility(this);
+	public GhostCouncilOfOrzhovaDelayedTriggeredAbility copy() {
+		return new GhostCouncilOfOrzhovaDelayedTriggeredAbility(this);
 	}
 }

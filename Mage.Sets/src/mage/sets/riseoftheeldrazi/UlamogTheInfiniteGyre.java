@@ -40,7 +40,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.abilities.keyword.IndestructibleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -66,10 +65,10 @@ public class UlamogTheInfiniteGyre extends CardImpl<UlamogTheInfiniteGyre> {
 		this.power = new MageInt(10);
 		this.toughness = new MageInt(10);
 
-		this.addAbility(new UlamogtheInfiniteGyreDestroyOnCastAbility());
+		this.addAbility(new UlamogTheInfiniteGyreDestroyOnCastAbility());
 		this.addAbility(new AnnihilatorAbility(4));
 		this.addAbility(IndestructibleAbility.getInstance());
-		this.addAbility(new ZoneChangeTriggeredAbility(Zone.GRAVEYARD, new UlamogtheInfiniteGyreEnterGraveyardEffect(), effectText, false));
+		this.addAbility(new ZoneChangeTriggeredAbility(Zone.GRAVEYARD, new UlamogTheInfiniteGyreEnterGraveyardEffect(), effectText, false));
 	}
 
 	public UlamogTheInfiniteGyre(final UlamogTheInfiniteGyre card) {
@@ -82,16 +81,16 @@ public class UlamogTheInfiniteGyre extends CardImpl<UlamogTheInfiniteGyre> {
 	}
 }
 
-class UlamogtheInfiniteGyreDestroyOnCastAbility extends TriggeredAbilityImpl<UlamogtheInfiniteGyreDestroyOnCastAbility> {
+class UlamogTheInfiniteGyreDestroyOnCastAbility extends TriggeredAbilityImpl<UlamogTheInfiniteGyreDestroyOnCastAbility> {
 
 	private static final String abilityText = "When you cast Ulamog, the Infinite Gyre, destroy target permanent";
 
-	UlamogtheInfiniteGyreDestroyOnCastAbility ( ) {
+	UlamogTheInfiniteGyreDestroyOnCastAbility ( ) {
 		super(Zone.STACK, new DestroyTargetEffect());
 		this.addTarget(new TargetPermanent());
 	}
 
-	UlamogtheInfiniteGyreDestroyOnCastAbility(UlamogtheInfiniteGyreDestroyOnCastAbility ability) {
+	UlamogTheInfiniteGyreDestroyOnCastAbility(UlamogTheInfiniteGyreDestroyOnCastAbility ability) {
 		super(ability);
 	}
 
@@ -107,8 +106,8 @@ class UlamogtheInfiniteGyreDestroyOnCastAbility extends TriggeredAbilityImpl<Ula
 	}
 
 	@Override
-	public UlamogtheInfiniteGyreDestroyOnCastAbility copy() {
-		return new UlamogtheInfiniteGyreDestroyOnCastAbility(this);
+	public UlamogTheInfiniteGyreDestroyOnCastAbility copy() {
+		return new UlamogTheInfiniteGyreDestroyOnCastAbility(this);
 	}
 
 	@Override
@@ -117,22 +116,20 @@ class UlamogtheInfiniteGyreDestroyOnCastAbility extends TriggeredAbilityImpl<Ula
 	}
 }
 
-class UlamogtheInfiniteGyreEnterGraveyardEffect extends OneShotEffect<UlamogtheInfiniteGyreEnterGraveyardEffect> {
+class UlamogTheInfiniteGyreEnterGraveyardEffect extends OneShotEffect<UlamogTheInfiniteGyreEnterGraveyardEffect> {
 
-	UlamogtheInfiniteGyreEnterGraveyardEffect ( ) {
+	UlamogTheInfiniteGyreEnterGraveyardEffect ( ) {
 		super(Outcome.Benefit);
 	}
 
-	UlamogtheInfiniteGyreEnterGraveyardEffect(UlamogtheInfiniteGyreEnterGraveyardEffect effect) {
+	UlamogTheInfiniteGyreEnterGraveyardEffect(UlamogTheInfiniteGyreEnterGraveyardEffect effect) {
 		super(effect);
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getControllerId());
-		/*Card permanent = (Card)game.getObject(source.getSourceId());*/
-		if (player != null /* && permanent != null */) {
-			/*permanent.moveToZone(Zone.LIBRARY, source.getId(), game, true);*/
+		if (player != null) {
 			player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
 			player.getGraveyard().clear();
 			player.getLibrary().shuffle();
@@ -142,7 +139,7 @@ class UlamogtheInfiniteGyreEnterGraveyardEffect extends OneShotEffect<UlamogtheI
 	}
 
 	@Override
-	public UlamogtheInfiniteGyreEnterGraveyardEffect copy() {
-		return new UlamogtheInfiniteGyreEnterGraveyardEffect(this);
+	public UlamogTheInfiniteGyreEnterGraveyardEffect copy() {
+		return new UlamogTheInfiniteGyreEnterGraveyardEffect(this);
 	}
 }

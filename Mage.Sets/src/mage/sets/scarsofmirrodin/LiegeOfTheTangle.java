@@ -30,13 +30,13 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.SubLayer;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -83,7 +83,7 @@ public class LiegeOfTheTangle extends CardImpl<LiegeOfTheTangle> {
 
 class LiegeOfTheTangleTriggeredAbility extends TriggeredAbilityImpl<LiegeOfTheTangleTriggeredAbility> {
 	LiegeOfTheTangleTriggeredAbility() {
-		super(Constants.Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.AWAKENING.createInstance()));
+		super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.AWAKENING.createInstance()));
 		this.addEffect(new LiegeOfTheTangleEffect());
 //		Ability ability  = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD,
 //                        	new ConditionalContinousEffect(
@@ -196,7 +196,7 @@ class AwakeningLandToken extends Token {
 
     public AwakeningLandToken() {
         super("", "an 8/8 green Elemental creature");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
 		color.setGreen(true);
 		subtype.add("Elemental");
 		power = new MageInt(8);

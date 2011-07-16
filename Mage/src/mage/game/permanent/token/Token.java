@@ -39,7 +39,6 @@ import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 
 public class Token extends MageObjectImpl<Token> {

@@ -30,18 +30,18 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.UntapAllLandsControllerEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -61,7 +61,7 @@ import mage.target.TargetPlayer;
  * @author Loki
  */
 public class SwordOfWarAndPeace extends CardImpl<SwordOfWarAndPeace> {
-    private static FilterCard filter = new FilterCard("red and from white");
+    private static final FilterCard filter = new FilterCard("red and from white");
 
     static {
         filter.setUseColor(true);
@@ -74,10 +74,10 @@ public class SwordOfWarAndPeace extends CardImpl<SwordOfWarAndPeace> {
         super(ownerId, 161, "Sword of War and Peace", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Equipment");
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(filter), Constants.AttachmentType.EQUIPMENT)));
-        this.addAbility(new SwordofWarandPeaceAbility());
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SwordOfWarAndPeaceAbility());
     }
 
     public SwordOfWarAndPeace (final SwordOfWarAndPeace card) {
@@ -91,21 +91,21 @@ public class SwordOfWarAndPeace extends CardImpl<SwordOfWarAndPeace> {
 
 }
 
-class SwordofWarandPeaceAbility extends TriggeredAbilityImpl<SwordofWarandPeaceAbility> {
+class SwordOfWarAndPeaceAbility extends TriggeredAbilityImpl<SwordOfWarAndPeaceAbility> {
 
-    public SwordofWarandPeaceAbility() {
-        super(Constants.Zone.BATTLEFIELD, new SwordofWarandPeaceDamageEffect());
+    public SwordOfWarAndPeaceAbility() {
+        super(Zone.BATTLEFIELD, new SwordOfWarAndPeaceDamageEffect());
         this.addEffect(new GainLifeEffect(new CardsInControllerHandCount()));
         this.addTarget(new TargetPlayer());
     }
 
-    public SwordofWarandPeaceAbility(final SwordofWarandPeaceAbility ability) {
+    public SwordOfWarAndPeaceAbility(final SwordOfWarAndPeaceAbility ability) {
         super(ability);
     }
 
     @Override
-    public SwordofWarandPeaceAbility copy() {
-        return new SwordofWarandPeaceAbility(this);
+    public SwordOfWarAndPeaceAbility copy() {
+        return new SwordOfWarAndPeaceAbility(this);
     }
 
     @Override
@@ -127,12 +127,12 @@ class SwordofWarandPeaceAbility extends TriggeredAbilityImpl<SwordofWarandPeaceA
     }
 }
 
-class SwordofWarandPeaceDamageEffect extends OneShotEffect<SwordofWarandPeaceDamageEffect> {
-    SwordofWarandPeaceDamageEffect() {
-        super(Constants.Outcome.Damage);
+class SwordOfWarAndPeaceDamageEffect extends OneShotEffect<SwordOfWarAndPeaceDamageEffect> {
+    SwordOfWarAndPeaceDamageEffect() {
+        super(Outcome.Damage);
     }
 
-    SwordofWarandPeaceDamageEffect(final SwordofWarandPeaceDamageEffect effect) {
+    SwordOfWarAndPeaceDamageEffect(final SwordOfWarAndPeaceDamageEffect effect) {
         super(effect);
     }
 
@@ -146,8 +146,8 @@ class SwordofWarandPeaceDamageEffect extends OneShotEffect<SwordofWarandPeaceDam
     }
 
     @Override
-    public SwordofWarandPeaceDamageEffect copy() {
-        return new SwordofWarandPeaceDamageEffect(this);
+    public SwordOfWarAndPeaceDamageEffect copy() {
+        return new SwordOfWarAndPeaceDamageEffect(this);
     }
 
     @Override

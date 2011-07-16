@@ -30,9 +30,10 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -59,9 +60,9 @@ public class KozilekButcherOfTruth extends CardImpl<KozilekButcherOfTruth> {
         this.subtype.add("Eldrazi");
         this.power = new MageInt(12);
         this.toughness = new MageInt(12);
-        this.addAbility(new KozilekButcherofTruthOnCastAbility());
+        this.addAbility(new KozilekButcherOfTruthOnCastAbility());
         this.addAbility(new AnnihilatorAbility(4));
-        this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new KozilekButcherofTruthEffect(), false));
+        this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new KozilekButcherOfTruthEffect(), false));
     }
 
     public KozilekButcherOfTruth (final KozilekButcherOfTruth card) {
@@ -75,15 +76,15 @@ public class KozilekButcherOfTruth extends CardImpl<KozilekButcherOfTruth> {
 
 }
 
-class KozilekButcherofTruthOnCastAbility extends TriggeredAbilityImpl<KozilekButcherofTruthOnCastAbility> {
+class KozilekButcherOfTruthOnCastAbility extends TriggeredAbilityImpl<KozilekButcherOfTruthOnCastAbility> {
 
     private static final String abilityText = "When you cast Kozilek, Butcher of Truth, draw four cards";
 
-    KozilekButcherofTruthOnCastAbility() {
-        super(Constants.Zone.STACK, new DrawCardControllerEffect(4));
+    KozilekButcherOfTruthOnCastAbility() {
+        super(Zone.STACK, new DrawCardControllerEffect(4));
     }
 
-    KozilekButcherofTruthOnCastAbility(final KozilekButcherofTruthOnCastAbility ability) {
+    KozilekButcherOfTruthOnCastAbility(final KozilekButcherOfTruthOnCastAbility ability) {
         super(ability);
     }
 
@@ -99,8 +100,8 @@ class KozilekButcherofTruthOnCastAbility extends TriggeredAbilityImpl<KozilekBut
     }
 
     @Override
-    public KozilekButcherofTruthOnCastAbility copy() {
-        return new KozilekButcherofTruthOnCastAbility(this);
+    public KozilekButcherOfTruthOnCastAbility copy() {
+        return new KozilekButcherOfTruthOnCastAbility(this);
     }
 
     @Override
@@ -109,12 +110,12 @@ class KozilekButcherofTruthOnCastAbility extends TriggeredAbilityImpl<KozilekBut
     }
 }
 
-class KozilekButcherofTruthEffect extends OneShotEffect<KozilekButcherofTruthEffect> {
-    KozilekButcherofTruthEffect() {
-        super(Constants.Outcome.Benefit);
+class KozilekButcherOfTruthEffect extends OneShotEffect<KozilekButcherOfTruthEffect> {
+    KozilekButcherOfTruthEffect() {
+        super(Outcome.Benefit);
     }
 
-    KozilekButcherofTruthEffect(final KozilekButcherofTruthEffect effect) {
+    KozilekButcherOfTruthEffect(final KozilekButcherOfTruthEffect effect) {
         super(effect);
     }
 
@@ -133,8 +134,8 @@ class KozilekButcherofTruthEffect extends OneShotEffect<KozilekButcherofTruthEff
     }
 
     @Override
-    public KozilekButcherofTruthEffect copy() {
-        return new KozilekButcherofTruthEffect(this);
+    public KozilekButcherOfTruthEffect copy() {
+        return new KozilekButcherOfTruthEffect(this);
     }
 
     @Override

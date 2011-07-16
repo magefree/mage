@@ -26,96 +26,95 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.sets.darksteel;
 
 import java.util.UUID;
 
-import mage.Constants;
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
- *
  * @author Loki
  */
-public class SwordOfBodyAndMind extends CardImpl<SwordOfBodyAndMind> {
+public class SwordOfLightAndShadow extends CardImpl<SwordOfLightAndShadow> {
 
-    private static final FilterCard filter = new FilterCard("green and from blue");
+    private static final FilterCard filter = new FilterCard("white and from black");
 
     static {
         filter.setUseColor(true);
-        filter.getColor().setBlue(true);
-        filter.getColor().setGreen(true);
+        filter.getColor().setWhite(true);
+        filter.getColor().setBlack(true);
         filter.setScopeColor(Filter.ComparisonScope.Any);
     }
 
-
-    public SwordOfBodyAndMind (UUID ownerId) {
-        super(ownerId, 208, "Sword of Body and Mind", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "SOM";
+    public SwordOfLightAndShadow(UUID ownerId) {
+        super(ownerId, 149, "Sword of Light and Shadow", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.expansionSetCode = "DST";
         this.subtype.add("Equipment");
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(filter), Constants.AttachmentType.EQUIPMENT)));
-        this.addAbility(new SwordOfBodyAndMindAbility());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SwordOfLightAndShadowAbility());
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public SwordOfBodyAndMind (final SwordOfBodyAndMind card) {
+    public SwordOfLightAndShadow(final SwordOfLightAndShadow card) {
         super(card);
     }
 
     @Override
-    public SwordOfBodyAndMind copy() {
-        return new SwordOfBodyAndMind(this);
+    public SwordOfLightAndShadow copy() {
+        return new SwordOfLightAndShadow(this);
     }
+
 }
 
-class SwordOfBodyAndMindAbility extends TriggeredAbilityImpl<SwordOfBodyAndMindAbility> {
+class SwordOfLightAndShadowAbility extends TriggeredAbilityImpl<SwordOfLightAndShadowAbility> {
 
-    public SwordOfBodyAndMindAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken()));
-        this.addEffect(new PutLibraryIntoGraveTargetEffect(10));
-        this.addTarget(new TargetPlayer());
+    private static FilterCreatureCard filter = new FilterCreatureCard("creature");
+
+    public SwordOfLightAndShadowAbility() {
+        super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect());
+        this.addEffect(new GainLifeEffect(3));
+        this.addTarget(new TargetCardInYourGraveyard(filter));
     }
 
-    public SwordOfBodyAndMindAbility(final SwordOfBodyAndMindAbility ability) {
+    public SwordOfLightAndShadowAbility(final SwordOfLightAndShadowAbility ability) {
         super(ability);
     }
 
     @Override
-    public SwordOfBodyAndMindAbility copy() {
-        return new SwordOfBodyAndMindAbility(this);
+    public SwordOfLightAndShadowAbility copy() {
+        return new SwordOfLightAndShadowAbility(this);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event instanceof DamagedPlayerEvent) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
+            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
             Permanent p = game.getPermanent(event.getSourceId());
             if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
-                this.targets.get(0).add(event.getPlayerId(), game);
-			    return true;
+                return true;
             }
         }
         return false;
@@ -123,17 +122,6 @@ class SwordOfBodyAndMindAbility extends TriggeredAbilityImpl<SwordOfBodyAndMindA
 
     @Override
     public String getRule() {
-        return "Whenever equipped creature deals combat damage to a player, you put a 2/2 green Wolf creature token onto the battlefield and that player puts the top ten cards of his or her library into his or her graveyard.";
-    }
-}
-
-class WolfToken extends Token {
-    public WolfToken() {
-        super("Wolf", "a 2/2 green Wolf creature token");
-        cardType.add(CardType.CREATURE);
-		color = ObjectColor.GREEN;
-		subtype.add("Wolf");
-		power = new MageInt(2);
-		toughness = new MageInt(2);
+        return "Whenever equipped creature deals combat damage to a player, you gain 3 life and you may return up to one target creature card from your graveyard to your hand.";
     }
 }

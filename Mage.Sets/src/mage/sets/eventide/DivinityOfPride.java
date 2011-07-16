@@ -25,84 +25,64 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.mirrodinbesieged;
+package mage.sets.eventide;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.BattleCryAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.SoldierToken;
 import mage.players.Player;
 
 /**
+ *
  * @author Loki
  */
-public class HeroOfBladehold extends CardImpl<HeroOfBladehold> {
+public class DivinityOfPride extends CardImpl<DivinityOfPride> {
 
-    public HeroOfBladehold(UUID ownerId) {
-        super(ownerId, 8, "Hero of Bladehold", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "MBS";
-        this.subtype.add("Human");
-        this.subtype.add("Knight");
+    public DivinityOfPride(UUID ownerId) {
+        super(ownerId, 86, "Divinity of Pride", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W/B}{W/B}{W/B}{W/B}{W/B}");
+        this.expansionSetCode = "EVE";
+        this.subtype.add("Spirit");
+        this.subtype.add("Avatar");
+        this.color.setBlack(true);
         this.color.setWhite(true);
-        this.power = new MageInt(3);
+        this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        this.addAbility(new BattleCryAbility());
-        this.addAbility(new AttacksTriggeredAbility(new HeroofBladeholdEffect(), false));
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(LifelinkAbility.getInstance());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new ConditionalContinousEffect(new BoostSourceEffect(4, 4, Duration.WhileOnBattlefield),
+                new DivinityOfPrideCondition(),
+                "Divinity of Pride gets +4/+4 as long as you have 25 or more life")));
     }
 
-    public HeroOfBladehold(final HeroOfBladehold card) {
+    public DivinityOfPride(final DivinityOfPride card) {
         super(card);
     }
 
     @Override
-    public HeroOfBladehold copy() {
-        return new HeroOfBladehold(this);
+    public DivinityOfPride copy() {
+        return new DivinityOfPride(this);
     }
-
 }
 
-class HeroofBladeholdEffect extends OneShotEffect<HeroofBladeholdEffect> {
-    HeroofBladeholdEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
-    }
-
-    HeroofBladeholdEffect(final HeroofBladeholdEffect effect) {
-        super(effect);
-    }
+class DivinityOfPrideCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SoldierToken token = new SoldierToken();
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (int i = 1; i <= 2; i++) {
-                token.putOntoBattlefield(game, source.getId(), source.getControllerId());
-                Permanent p = game.getPermanent(token.getLastAddedToken());
-                game.getCombat().declareAttacker(p.getId(), game.getCombat().getDefendingPlayer(source.getSourceId()), game);
-                p.setTapped(true);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public HeroofBladeholdEffect copy() {
-        return new HeroofBladeholdEffect(this);
-    }
-
-    @Override
-    public String getText(Ability source) {
-        return "put two 1/1 white Soldier creature tokens onto the battlefield tapped and attacking";
+        return player != null && player.getLife() >= 25;
     }
 }
