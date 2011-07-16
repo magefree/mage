@@ -1,6 +1,5 @@
 package mage.client.components.ability;
 
-import com.sun.org.apache.bcel.internal.generic.CPInstruction;
 import mage.client.util.ImageHelper;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
@@ -26,7 +25,7 @@ import java.util.UUID;
  */
 public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
-    private static final String DEFAULT_MESSAGE = "Choose spell or ability to play (double-click)";
+    private static final String DEFAULT_MESSAGE = "Choose spell or ability to play (single-click)";
     private static final int DIALOG_WIDTH = 440;
     private static final int DIALOG_HEIGHT = 260;
 
@@ -69,7 +68,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 		this.choices = choices;
 		setSize(DIALOG_WIDTH, DIALOG_HEIGHT);
 		if (message!= null) {
-			this.message = message + " (double-click)";
+			this.message = message + " (single-click)";
 		}
 		initComponents();
 		jScrollPane2.setOpaque(false);
@@ -159,7 +158,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 		rows.setOpaque(false);
 		rows.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent evt) {
-                if (evt.getButton() == MouseEvent.BUTTON1 && evt.getClickCount() > 1) {
+                if (evt.getButton() == MouseEvent.BUTTON1) {
                     objectMouseClicked(evt);
                 }
             }
