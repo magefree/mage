@@ -54,7 +54,7 @@ public class FirstStrikeAbility extends StaticAbility<FirstStrikeAbility> {
 
 	@Override
 	public String getRule() {
-		return "First Strike";
+		return "First strike";
 	}
 
 	@Override

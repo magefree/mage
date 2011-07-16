@@ -33,8 +33,7 @@ import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.DiscardSourceCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.filter.Filter.ComparisonScope;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -42,12 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  * @author Loki
  */
 public class BasicLandcyclingAbility extends ActivatedAbilityImpl<BasicLandcyclingAbility>{
-    private static FilterCard filter = new FilterCard("Basic land");
-
-    static {
-        filter.getSupertype().add("Basic");
-        filter.setScopeSupertype(ComparisonScope.Any);
-    }
+    private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 
     public BasicLandcyclingAbility(ManaCosts costs) {
         super(Zone.HAND, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter)), costs);

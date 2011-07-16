@@ -31,7 +31,6 @@ package mage.abilities.keyword;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;

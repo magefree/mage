@@ -30,14 +30,15 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.MustBlockSourceEffect;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -57,10 +58,10 @@ public class Lure extends CardImpl<Lure> {
 		this.color.setGreen(true);
         TargetPermanent auraTarget = new TargetCreaturePermanent();
 		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+		this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
 		Ability ability = new EnchantAbility(auraTarget.getTargetName());
 		this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new MustBlockSourceEffect()), Constants.AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBlockSourceEffect()), AttachmentType.AURA)));
     }
 
     public Lure (final Lure card) {

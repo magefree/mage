@@ -28,7 +28,6 @@
 
 package mage.abilities.keyword;
 
-import java.io.ObjectStreamException;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterLandPermanent;
 
@@ -38,7 +37,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class IslandwalkAbility extends LandwalkAbility {
 
-	private static final IslandwalkAbility fINSTANCE =  new IslandwalkAbility();	private static FilterLandPermanent filter = new FilterLandPermanent("Island");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Island");
 
 	static {
 		filter.getSubtype().add("Island");

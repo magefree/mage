@@ -37,7 +37,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class PlainswalkAbility extends LandwalkAbility {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent("Plains");
+	private static final FilterLandPermanent filter = new FilterLandPermanent("Plains");
 
 	static {
 		filter.getSubtype().add("Plains");

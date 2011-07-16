@@ -12,7 +12,7 @@ import mage.filter.FilterStackObject;
  * @author loki
  */
 public class HexproofAbility extends SimpleStaticAbility {
-    private static FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
+    private static final FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
 
 	static {
 		filter.setTargetController(Constants.TargetController.OPPONENT);

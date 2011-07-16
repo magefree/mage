@@ -28,7 +28,6 @@
 
 package mage.abilities.keyword;
 
-import java.io.ObjectStreamException;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.common.FilterLandPermanent;
 
@@ -38,7 +37,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class MountainwalkAbility extends LandwalkAbility {
 
-	private static FilterLandPermanent filter = new FilterLandPermanent("Mountain");
+	private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
 
 	static {
 		filter.getSubtype().add("Mountain");
