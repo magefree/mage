@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class SlipperyBogle extends CardImpl<SlipperyBogle> {
 
     public SlipperyBogle(UUID ownerId) {
-        super(ownerId, 160, "Slippery Bogle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{GU}");
+        super(ownerId, 160, "Slippery Bogle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G/U}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Beast");
 

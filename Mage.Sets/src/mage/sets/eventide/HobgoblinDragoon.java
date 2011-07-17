@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class HobgoblinDragoon extends CardImpl<HobgoblinDragoon> {
 
     public HobgoblinDragoon(UUID ownerId) {
-        super(ownerId, 142, "Hobgoblin Dragoon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{RW}");
+        super(ownerId, 142, "Hobgoblin Dragoon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R/W}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Goblin");
         this.subtype.add("Knight");

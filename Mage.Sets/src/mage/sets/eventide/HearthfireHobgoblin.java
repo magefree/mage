@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class HearthfireHobgoblin extends CardImpl<HearthfireHobgoblin> {
 
     public HearthfireHobgoblin(UUID ownerId) {
-        super(ownerId, 141, "Hearthfire Hobgoblin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{RW}{RW}{RW}");
+        super(ownerId, 141, "Hearthfire Hobgoblin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R/W}{R/W}{R/W}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Goblin");
         this.subtype.add("Soldier");

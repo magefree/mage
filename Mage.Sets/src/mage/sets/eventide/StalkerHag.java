@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class StalkerHag extends CardImpl<StalkerHag> {
 
     public StalkerHag(UUID ownerId) {
-        super(ownerId, 129, "Stalker Hag", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{BG}{BG}{BG}");
+        super(ownerId, 129, "Stalker Hag", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B/G}{B/G}{B/G}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Hag");
 
