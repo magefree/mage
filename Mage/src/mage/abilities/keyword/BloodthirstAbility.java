@@ -4,32 +4,61 @@ import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.watchers.WatcherImpl;
-
-import java.util.UUID;
+import mage.game.permanent.Permanent;
+import mage.watchers.Watcher;
 
 /**
+ * This ability depends on BloodthirstWather installed on source card
  * @author Loki
  */
 public class BloodthirstAbility extends EntersBattlefieldAbility {
-    public BloodthirstAbility() {
-        super(new BloodthirstEffect(), "");
+    private int amount;
+
+    public BloodthirstAbility(int amount) {
+        super(new BloodthirstEffect(amount), "");
+        this.amount = amount;
+    }
+
+    public BloodthirstAbility(final BloodthirstAbility ability) {
+        super(ability);
+        this.amount = ability.amount;
+    }
+
+    @Override
+    public EntersBattlefieldAbility copy() {
+        return new BloodthirstAbility(this);
+    }
+
+    @Override
+    public String getRule() {
+        return "Bloodthirst " + amount;
     }
 }
 
 class BloodthirstEffect extends OneShotEffect<BloodthirstEffect> {
-    BloodthirstEffect() {
+    private int amount;
+
+    BloodthirstEffect(int amount) {
         super(Constants.Outcome.BoostCreature);
+        this.amount = amount;
     }
 
     BloodthirstEffect(final BloodthirstEffect effect) {
         super(effect);
+        this.amount = effect.amount;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "DamagedOpponents");
+        if (watcher.conditionMet()) {
+            Permanent p = game.getPermanent(source.getSourceId());
+            if (p != null) {
+                p.addCounters(CounterType.P1P1.createInstance(amount));
+            }
+        }
         return false;
     }
 
@@ -39,22 +68,3 @@ class BloodthirstEffect extends OneShotEffect<BloodthirstEffect> {
     }
 }
 
-class BloodthirstWatcher extends WatcherImpl<BloodthirstWatcher> {
-    BloodthirstWatcher(UUID controllerId) {
-        super("", controllerId);
-    }
-
-    BloodthirstWatcher(final BloodthirstWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public BloodthirstWatcher copy() {
-        return new BloodthirstWatcher(this);
-    }
-}
