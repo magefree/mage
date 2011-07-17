@@ -28,40 +28,24 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.keyword.BloodthirstAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.cards.CardImpl;
-import mage.watchers.common.BloodthirstWatcher;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class BloodOgre extends CardImpl<BloodOgre> {
+public class Island3 extends mage.cards.basiclands.Island {
 
-    public BloodOgre(UUID ownerId) {
-        super(ownerId, 122, "Blood Ogre", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+    public Island3(UUID ownerId) {
+        super(ownerId, 236);
         this.expansionSetCode = "M12";
-        this.subtype.add("Ogre");
-        this.subtype.add("Warrior");
-        this.color.setRed(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        this.addAbility(new BloodthirstAbility(1));
-        this.watchers.add(new BloodthirstWatcher(ownerId));
-        this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public BloodOgre(final BloodOgre card) {
+    public Island3(final Island3 card) {
         super(card);
     }
 
     @Override
-    public BloodOgre copy() {
-        return new BloodOgre(this);
+    public Island3 copy() {
+        return new Island3(this);
     }
 }

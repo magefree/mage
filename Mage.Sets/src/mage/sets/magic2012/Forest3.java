@@ -28,40 +28,24 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.keyword.BloodthirstAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.cards.CardImpl;
-import mage.watchers.common.BloodthirstWatcher;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class BloodOgre extends CardImpl<BloodOgre> {
+public class Forest3 extends mage.cards.basiclands.Forest {
 
-    public BloodOgre(UUID ownerId) {
-        super(ownerId, 122, "Blood Ogre", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+    public Forest3(UUID ownerId) {
+        super(ownerId, 248);
         this.expansionSetCode = "M12";
-        this.subtype.add("Ogre");
-        this.subtype.add("Warrior");
-        this.color.setRed(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        this.addAbility(new BloodthirstAbility(1));
-        this.watchers.add(new BloodthirstWatcher(ownerId));
-        this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public BloodOgre(final BloodOgre card) {
+    public Forest3(final Forest3 card) {
         super(card);
     }
 
     @Override
-    public BloodOgre copy() {
-        return new BloodOgre(this);
+    public Forest3 copy() {
+        return new Forest3(this);
     }
 }
