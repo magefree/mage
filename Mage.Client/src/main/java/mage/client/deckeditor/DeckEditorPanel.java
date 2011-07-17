@@ -173,7 +173,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 								if (cardInfoPane instanceof  CardInfoPane)  {
 									((CardInfoPane)cardInfoPane).setCard(new CardView(card));
 								}
-								hidePopup();
 							}
 
 						} else if (event.getEventName().equals("shift-double-click") && mode == DeckEditorMode.Constructed) {
@@ -182,7 +181,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 							if (cardInfoPane instanceof  CardInfoPane)  {
 								((CardInfoPane)cardInfoPane).setCard(new CardView(card));
 							}
-							hidePopup();
 						}
 						refreshDeck();
 					}
@@ -196,7 +194,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				public void event(Event event) {
 					if (event.getEventName().equals("double-click")) {
 						for (Card card: deck.getCards()) {
-							if (card.getId().equals(event.getSource())) {
+							if (card.getId().equals((UUID)event.getSource())) {
 								deck.getCards().remove(card);
 								if (mode == DeckEditorMode.Limited || mode == DeckEditorMode.Sideboard) {
 									deck.getSideboard().add(card);
@@ -205,18 +203,16 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 								break;
 							}
 						}
-						hidePopup();
 						refreshDeck();
 					}
 					else if (event.getEventName().equals("shift-double-click") && mode == DeckEditorMode.Constructed) {
 						for (Card card: deck.getCards()) {
-							if (card.getId().equals(event.getSource())) {
+							if (card.getId().equals((UUID)event.getSource())) {
 								deck.getCards().remove(card);
 								deck.getSideboard().add(card);
 								break;
 							}
 						}
-						hidePopup();
 						refreshDeck();
 					}
 				}
@@ -227,14 +223,16 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				@Override
 				public void event(Event event) {
 					if (event.getEventName().equals("double-click")) {
+						//boolean isListView = cardSelector.getCardsList() instanceof TableModel;
 						for (Card card: deck.getSideboard()) {
-							if (card.getId().equals(event.getSource())) {
+							if (card.getId().equals((UUID)event.getSource())) {
 								deck.getSideboard().remove(card);
+								//if (!isListView) {
 								deck.getCards().add(card);
+								//}
 								break;
 							}
 						}
-						hidePopup();
 						refreshDeck();
 					}
 				}
@@ -243,10 +241,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		refreshDeck();
 		this.setVisible(true);
 		this.repaint();
-	}
-
-	private void hidePopup() {
-		Plugins.getInstance().getActionCallback().mouseExited(null, null);
 	}
 
 	public void hideDeckEditor() {
@@ -585,26 +579,27 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 		int ret = fcImportDeck.showOpenDialog(this);
 		if (ret == JFileChooser.APPROVE_OPTION) {
 			File file = fcImportDeck.getSelectedFile();
-			try {
-				setCursor(new Cursor(Cursor.WAIT_CURSOR));
-				DeckImporter importer = getDeckImporter(file.getPath());
-				if (importer != null) {
-					deck = Deck.load(importer.importDeck(file.getPath()));
+			if (file != null) {
+				try {
+					setCursor(new Cursor(Cursor.WAIT_CURSOR));
+					DeckImporter importer = getDeckImporter(file.getPath());
+					if (importer != null) {
+						deck = Deck.load(importer.importDeck(file.getPath()));
+					}
+					else {
+						JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Unknown deck format", "Error importing deck", JOptionPane.ERROR_MESSAGE);
+					}
+				} catch (Exception ex) {
+					Logger.getLogger(DeckEditorPanel.class.getName()).log(Level.SEVERE, null, ex);
 				}
-				else {
-					JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Unknown deck format", "Error importing deck", JOptionPane.ERROR_MESSAGE);
+				finally {
+					setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 				}
-			} catch (Exception ex) {
-				Logger.getLogger(DeckEditorPanel.class.getName()).log(Level.SEVERE, null, ex);
-			}
-			finally {
-				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-			}
-			refreshDeck();
-			try {
-				if (file != null)
+				refreshDeck();
+				try {
 					MageFrame.getPreferences().put("lastImportFolder", file.getCanonicalPath());
-			} catch (IOException ex) {	}
+				} catch (IOException ex) {	}
+			}
 		}
 		fcImportDeck.setSelectedFile(null);
 	}//GEN-LAST:event_btnImportActionPerformed

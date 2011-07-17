@@ -29,9 +29,7 @@
 package mage.server.game;
 
 import java.io.BufferedOutputStream;
-import java.util.logging.Level;
 
-import mage.game.LookedAt;
 import mage.MageException;
 import mage.server.TableManager;
 import java.io.File;
@@ -64,6 +62,7 @@ import mage.game.events.TableEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.server.ChatManager;
+import mage.server.UserManager;
 import mage.server.util.ThreadExecutor;
 import mage.sets.Sets;
 import mage.view.*;
@@ -82,7 +81,7 @@ public class GameController implements GameCallback {
 
 	private ConcurrentHashMap<UUID, GameSession> gameSessions = new ConcurrentHashMap<UUID, GameSession>();
 	private ConcurrentHashMap<UUID, GameWatcher> watchers = new ConcurrentHashMap<UUID, GameWatcher>();
-	private ConcurrentHashMap<UUID, UUID> sessionPlayerMap;
+	private ConcurrentHashMap<UUID, UUID> userPlayerMap;
 	private UUID gameSessionId;
 	private Game game;
 	private UUID chatId;
@@ -91,9 +90,9 @@ public class GameController implements GameCallback {
 	private Future<?> gameFuture;
 
 
-	public GameController(Game game, ConcurrentHashMap<UUID, UUID> sessionPlayerMap, UUID tableId, UUID choosingPlayerId) {
+	public GameController(Game game, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId, UUID choosingPlayerId) {
 		gameSessionId = UUID.randomUUID();
-		this.sessionPlayerMap = sessionPlayerMap;
+		this.userPlayerMap = userPlayerMap;
 		chatId = ChatManager.getInstance().createChatSession();
 		this.game = game;
 		this.tableId = tableId;
@@ -180,14 +179,15 @@ public class GameController implements GameCallback {
 		checkStart();
 	}
 
-	private UUID getPlayerId(UUID sessionId) {
-		return sessionPlayerMap.get(sessionId);
+	private UUID getPlayerId(UUID userId) {
+		return userPlayerMap.get(userId);
 	}
 
-	public void join(UUID sessionId) {
-		UUID playerId = sessionPlayerMap.get(sessionId);
-		GameSession gameSession = new GameSession(game, sessionId, playerId);
+	public void join(UUID userId) {
+		UUID playerId = userPlayerMap.get(userId);
+		GameSession gameSession = new GameSession(game, userId, playerId);
 		gameSessions.put(playerId, gameSession);
+		UserManager.getInstance().getUser(userId).addGame(playerId, gameSession);
 		logger.info("player " + playerId + " has joined game " + game.getId());
 		ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(playerId).getName() + " has joined the game", MessageColor.BLACK);
 		checkStart();
@@ -196,7 +196,7 @@ public class GameController implements GameCallback {
 	private synchronized void startGame() {
 		if (gameFuture == null) {
 			for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
-				if (!entry.getValue().init(getGameView(entry.getKey()))) {
+				if (!entry.getValue().init()) {
 					logger.fatal("Unable to initialize client");
 					//TODO: generate client error message
 					return;
@@ -209,7 +209,7 @@ public class GameController implements GameCallback {
 
 	private void checkStart() {
 		if (allJoined()) {
-			ThreadExecutor.getInstance().getRMIExecutor().execute(
+			ThreadExecutor.getInstance().getCallExecutor().execute(
 				new Runnable() {
 					@Override
 					public void run() {
@@ -228,27 +228,27 @@ public class GameController implements GameCallback {
 		return true;
 	}
 
-	public void watch(UUID sessionId) {
-		GameWatcher gameWatcher = new GameWatcher(sessionId, game.getId());
-		watchers.put(sessionId, gameWatcher);
-		gameWatcher.init(getGameView());
+	public void watch(UUID userId) {
+		GameWatcher gameWatcher = new GameWatcher(userId, game);
+		watchers.put(userId, gameWatcher);
+		gameWatcher.init();
 		ChatManager.getInstance().broadcast(chatId, "", " has started watching", MessageColor.BLACK);
 	}
 	
-	public void stopWatching(UUID sessionId) {
-		watchers.remove(sessionId);
+	public void stopWatching(UUID userId) {
+		watchers.remove(userId);
 		ChatManager.getInstance().broadcast(chatId, "", " has stopped watching", MessageColor.BLACK);
 	}
 	
-	public void concede(UUID sessionId) {
-		game.concede(getPlayerId(sessionId));
+	public void concede(UUID userId) {
+		game.concede(getPlayerId(userId));
 	}
 
-	private void leave(UUID sessionId) {
-		game.quit(getPlayerId(sessionId));
+	private void leave(UUID userId) {
+		game.quit(getPlayerId(userId));
 	}
 
-	public void cheat(UUID sessionId, UUID playerId, DeckCardLists deckList) {
+	public void cheat(UUID userId, UUID playerId, DeckCardLists deckList) {
 		Deck deck;
 		try {
 			deck = Deck.load(deckList);
@@ -263,7 +263,7 @@ public class GameController implements GameCallback {
 		updateGame();
 	}
 
-    public boolean cheat(UUID sessionId, UUID playerId, String cardName) {
+    public boolean cheat(UUID userId, UUID playerId, String cardName) {
         Card card = Sets.findCard(cardName, true);
 		if (card != null) {
             Set<Card> cards = new HashSet<Card>();
@@ -276,30 +276,30 @@ public class GameController implements GameCallback {
         }
 	}
 
-	public void kill(UUID sessionId) {
-		if (sessionPlayerMap.containsKey(sessionId)) {
-			GameSession session = gameSessions.get(sessionPlayerMap.get(sessionId));
-			session.destroy();
-			gameSessions.remove(sessionPlayerMap.get(sessionId));
-			leave(sessionId);
-			sessionPlayerMap.remove(sessionId);
+	public void kill(UUID userId) {
+		if (userPlayerMap.containsKey(userId)) {
+			gameSessions.get(userPlayerMap.get(userId)).setKilled();
+			gameSessions.remove(userPlayerMap.get(userId));
+			leave(userId);
+			userPlayerMap.remove(userId);
 		}
-		if (watchers.containsKey(sessionId)) {
-			watchers.get(sessionId).setKilled();
-			watchers.remove(sessionId);
+		if (watchers.containsKey(userId)) {
+			watchers.get(userId).setKilled();
+			watchers.remove(userId);
 		}
 	}
 
-	public void timeout(UUID sessionId) {
-		if (sessionPlayerMap.containsKey(sessionId)) {
-			ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(sessionPlayerMap.get(sessionId)).getName() + " has timed out.  Auto concede.", MessageColor.BLACK);
-			concede(sessionId);
+	public void timeout(UUID userId) {
+		if (userPlayerMap.containsKey(userId)) {
+			ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(userPlayerMap.get(userId)).getName() + " has timed out.  Auto concede.", MessageColor.BLACK);
+			concede(userId);
 		}
 	}
 
 	public void endGame(final String message) throws MageException {
 		for (final GameSession gameSession: gameSessions.values()) {
 			gameSession.gameOver(message);
+			gameSession.removeGame();
 		}
 		for (final GameWatcher gameWatcher: watchers.values()) {
 			gameWatcher.gameOver(message);
@@ -315,34 +315,34 @@ public class GameController implements GameCallback {
 		return chatId;
 	}
 
-	public void sendPlayerUUID(UUID sessionId, UUID data) {
-		gameSessions.get(sessionPlayerMap.get(sessionId)).sendPlayerUUID(data);
+	public void sendPlayerUUID(UUID userId, UUID data) {
+		gameSessions.get(userPlayerMap.get(userId)).sendPlayerUUID(data);
 	}
 
-	public void sendPlayerString(UUID sessionId, String data) {
-		gameSessions.get(sessionPlayerMap.get(sessionId)).sendPlayerString(data);
+	public void sendPlayerString(UUID userId, String data) {
+		gameSessions.get(userPlayerMap.get(userId)).sendPlayerString(data);
 	}
 
-	public void sendPlayerBoolean(UUID sessionId, Boolean data) {
-		gameSessions.get(sessionPlayerMap.get(sessionId)).sendPlayerBoolean(data);
+	public void sendPlayerBoolean(UUID userId, Boolean data) {
+		gameSessions.get(userPlayerMap.get(userId)).sendPlayerBoolean(data);
 	}
 
-	public void sendPlayerInteger(UUID sessionId, Integer data) {
-		gameSessions.get(sessionPlayerMap.get(sessionId)).sendPlayerInteger(data);
+	public void sendPlayerInteger(UUID userId, Integer data) {
+		gameSessions.get(userPlayerMap.get(userId)).sendPlayerInteger(data);
 	}
 
 	private synchronized void updateGame() {
-		for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
-			entry.getValue().update(getGameView(entry.getKey()));
+		for (final GameSession gameSession: gameSessions.values()) {
+			gameSession.update();
 		}
 		for (final GameWatcher gameWatcher: watchers.values()) {
-			gameWatcher.update(getGameView());
+			gameWatcher.update();
 		}
 	}
 
 	private synchronized void ask(UUID playerId, String question) throws MageException {
 		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).ask(question, getGameView(playerId));
+			gameSessions.get(playerId).ask(question);
 		informOthers(playerId);
 	}
 
@@ -361,41 +361,41 @@ public class GameController implements GameCallback {
 	private synchronized void target(UUID playerId, String question, Cards cards, List<Permanent> perms, Set<UUID> targets, boolean required, Map<String, Serializable> options) throws MageException {
 		if (gameSessions.containsKey(playerId)) {
 			if (cards != null)
-				gameSessions.get(playerId).target(question, new CardsView(cards.getCards(game)), targets, required, getGameView(playerId), options);
+				gameSessions.get(playerId).target(question, new CardsView(cards.getCards(game)), targets, required, options);
 			else if (perms != null) {
 				CardsView permsView = new CardsView();
 				for (Permanent perm: perms) {
 					permsView.put(perm.getId(), new PermanentView(perm, game.getCard(perm.getId())));
 				}
-				gameSessions.get(playerId).target(question, permsView, targets, required, getGameView(playerId), options);
+				gameSessions.get(playerId).target(question, permsView, targets, required, options);
 			}
 			else
-				gameSessions.get(playerId).target(question, new CardsView(), targets, required, getGameView(playerId), options);
+				gameSessions.get(playerId).target(question, new CardsView(), targets, required, options);
 		}
 		informOthers(playerId);
 	}
 
 	private synchronized void target(UUID playerId, String question, Collection<? extends Ability> abilities, boolean required, Map<String, Serializable> options) throws MageException {
 		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).target(question, new CardsView(abilities, game), null, required, getGameView(playerId), options);
+			gameSessions.get(playerId).target(question, new CardsView(abilities, game), null, required, options);
 		informOthers(playerId);
 	}
 
 	private synchronized void select(UUID playerId, String message) throws MageException {
 		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).select(message, getGameView(playerId));
+			gameSessions.get(playerId).select(message);
 		informOthers(playerId);
 	}
 
 	private synchronized void playMana(UUID playerId, String message) throws MageException {
 		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).playMana(message, getGameView(playerId));
+			gameSessions.get(playerId).playMana(message);
 		informOthers(playerId);
 	}
 
 	private synchronized void playXMana(UUID playerId, String message) throws MageException {
 		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).playXMana(message, getGameView(playerId));
+			gameSessions.get(playerId).playXMana(message);
 		informOthers(playerId);
 	}
 
@@ -420,11 +420,11 @@ public class GameController implements GameCallback {
 		final String message = "Waiting for " + game.getPlayer(playerId).getName();
 		for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
 			if (!entry.getKey().equals(playerId)) {
-				entry.getValue().inform(message, getGameView(entry.getKey()));
+				entry.getValue().inform(message);
 			}
 		}
 		for (final GameWatcher watcher: watchers.values()) {
-			watcher.inform(message, getGameView());
+			watcher.inform(message);
 		}
 	}
 
@@ -434,21 +434,8 @@ public class GameController implements GameCallback {
 		}
 	}
 
-	private GameView getGameView() {
-		return new GameView(game.getState(), game);
-	}
-
 	public GameView getGameView(UUID playerId) {
-		GameView gameView = new GameView(game.getState(), game);
-		gameView.setHand(new CardsView(game.getPlayer(playerId).getHand().getCards(game)));
-
-		List<LookedAtView> list = new ArrayList<LookedAtView>();
-		for (Entry<String, Cards> entry : game.getState().getLookedAt(playerId).entrySet()) {
-			list.add(new LookedAtView(entry.getKey(), entry.getValue(), game));
-		}
-		gameView.setLookedAt(list);
-
-		return gameView;
+		return gameSessions.get(playerId).getGameView();
 	}
 
 	@Override

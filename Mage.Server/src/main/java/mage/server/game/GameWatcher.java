@@ -30,12 +30,10 @@ package mage.server.game;
 
 import java.rmi.RemoteException;
 import java.util.UUID;
-import java.util.logging.Level;
-import mage.MageException;
-import mage.interfaces.callback.CallbackException;
+import mage.game.Game;
 import mage.interfaces.callback.ClientCallback;
-import mage.server.Session;
-import mage.server.SessionManager;
+import mage.server.User;
+import mage.server.UserManager;
 import mage.view.GameClientMessage;
 import mage.view.GameView;
 import org.apache.log4j.Logger;
@@ -48,69 +46,73 @@ public class GameWatcher {
 
 	protected final static Logger logger = Logger.getLogger(GameWatcher.class);
 
-	protected UUID sessionId;
-	protected UUID gameId;
+	protected UUID userId;
+	protected Game game;
 	protected boolean killed = false;
 
-	public GameWatcher(UUID sessionId, UUID gameId) {
-		this.sessionId = sessionId;
-		this.gameId = gameId;
+	public GameWatcher(UUID userId, Game game) {
+		this.userId = userId;
+		this.game = game;
 	}
 
-	public boolean init(final GameView gameView) {
+	public boolean init() {
 		if (!killed) {
-			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null) {
-				session.fireCallback(new ClientCallback("gameInit", gameId, gameView));
+			User user = UserManager.getInstance().getUser(userId);
+			if (user != null) {
+				user.fireCallback(new ClientCallback("gameInit", game.getId(), getGameView()));
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public void update(final GameView gameView) {
+	public void update() {
 		if (!killed) {
-			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null) {
-				session.fireCallback(new ClientCallback("gameUpdate", gameId, gameView));
+			User user = UserManager.getInstance().getUser(userId);
+			if (user != null) {
+				user.fireCallback(new ClientCallback("gameUpdate", game.getId(), getGameView()));
 			}
 		}
 	}
 
-	public void inform(final String message, final GameView gameView) {
+	public void inform(final String message) {
 		if (!killed) {
-			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null) {
-				session.fireCallback(new ClientCallback("gameInform", gameId, new GameClientMessage(gameView, message)));
+			User user = UserManager.getInstance().getUser(userId);
+			if (user != null) {
+				user.fireCallback(new ClientCallback("gameInform", game.getId(), new GameClientMessage(getGameView(), message)));
 			}
 		}
 	}
 
 	public void gameOver(final String message) {
 		if (!killed) {
-			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null) {
-				session.fireCallback(new ClientCallback("gameOver", gameId, message));
+			User user = UserManager.getInstance().getUser(userId);
+			if (user != null) {
+				user.fireCallback(new ClientCallback("gameOver", game.getId(), message));
 			}
 		}
 	}
 
 	public void gameError(final String message) {
 		if (!killed) {
-			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null) {
-				session.fireCallback(new ClientCallback("gameError", gameId, message));
+			User user = UserManager.getInstance().getUser(userId);
+			if (user != null) {
+				user.fireCallback(new ClientCallback("gameError", game.getId(), message));
 			}
 		}
 	}
 	
 	protected void handleRemoteException(RemoteException ex) {
 		logger.fatal("GameWatcher error", ex);
-		GameManager.getInstance().kill(gameId, sessionId);
+		GameManager.getInstance().kill(game.getId(), userId);
 	}
 	
 	public void setKilled() {
 		killed = true;
+	}
+
+	public GameView getGameView() {
+		return new GameView(game.getState(), game);
 	}
 
 }

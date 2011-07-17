@@ -108,7 +108,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static Preferences prefs = Preferences.userNodeForPackage(MageFrame.class);
     private JLabel title;
     private Rectangle titleRectangle;
-	private final static MageVersion version = new MageVersion(0, 7, 4, "beta-2");
+	private final static MageVersion version = new MageVersion(0, 8, 0, "");
 	private UUID clientId;
 	private static MagePane activeFrame;
 	private static boolean liteMode = false;
@@ -761,8 +761,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 	}//GEN-LAST:event_btnCollectionViewerActionPerformed
 
 	private void btnPreferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreferencesActionPerformed
-		//PhasesDialog.main(new String[]{});
-		PreferencesDialog.main(new String[]{});
+		PhasesDialog.main(new String[]{});
 	}//GEN-LAST:event_btnPreferencesActionPerformed
 
     public void exitApp() {

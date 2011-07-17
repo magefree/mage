@@ -34,8 +34,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import mage.MageException;
-import mage.interfaces.callback.CallbackException;
 import mage.interfaces.callback.ClientCallback;
 import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
@@ -52,22 +50,24 @@ public class ChatSession {
 	private UUID chatId;
 	private DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
 
-	//TODO: use sessionId for chatting - prevents sending without being part of the chat
-
 	public ChatSession() {
 		chatId = UUID.randomUUID();
 	}
 
-	public void join(String userName, UUID sessionId) {
-		clients.put(sessionId, userName);
-		broadcast(userName, " has joined", MessageColor.BLACK);
-		logger.info(userName + " joined chat " + chatId);
+	public void join(UUID userId) {
+		User user = UserManager.getInstance().getUser(userId);
+		if (user != null) {
+			String userName = user.getName();
+			clients.put(userId, userName);
+			broadcast(userName, " has joined", MessageColor.BLACK);
+			logger.info(userName + " joined chat " + chatId);
+		}
 	}
 
-	public void kill(UUID sessionId) {
-		if (clients.containsKey(sessionId)) {
-			String userName = clients.get(sessionId);
-			clients.remove(sessionId);
+	public void kill(UUID userId) {
+		if (clients.containsKey(userId)) {
+			String userName = clients.get(userId);
+			clients.remove(userId);
 			broadcast(userName, " has left", MessageColor.BLACK);
 			logger.info(userName + " has left chat " + chatId);
 		}
@@ -79,12 +79,12 @@ public class ChatSession {
 		final String time = timeFormatter.format(cal.getTime());
 		final String username = userName;
 		logger.debug("Broadcasting '" + msg + "' for " + chatId);
-		for (UUID sessionId: clients.keySet()) {
-			Session session = SessionManager.getInstance().getSession(sessionId);
-			if (session != null)
-				session.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color)));
+		for (UUID userId: clients.keySet()) {
+			User user = UserManager.getInstance().getUser(userId);
+			if (user != null)
+				user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color)));
 			else
-				kill(sessionId);
+				kill(userId);
 		}
 	}
 
@@ -93,6 +93,10 @@ public class ChatSession {
 	 */
 	public UUID getChatId() {
 		return chatId;
+	}
+
+	public boolean hasUser(UUID userId) {
+		return clients.containsKey(userId);
 	}
 
 }

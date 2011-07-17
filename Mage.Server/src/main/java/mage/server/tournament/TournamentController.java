@@ -31,7 +31,6 @@ package mage.server.tournament;
 import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
 import mage.cards.decks.Deck;
 import mage.game.GameException;
 import mage.game.Table;
@@ -46,6 +45,7 @@ import mage.game.tournament.TournamentPlayer;
 import mage.MageException;
 import mage.server.ChatManager;
 import mage.server.TableManager;
+import mage.server.UserManager;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ThreadExecutor;
 import mage.view.ChatMessage.MessageColor;
@@ -60,16 +60,15 @@ public class TournamentController {
 
 	private final static Logger logger = Logger.getLogger(TournamentController.class);
 
-	private UUID sessionId;
 	private UUID chatId;
 	private UUID tableId;
+	private boolean started = false;
 	private Tournament tournament;
-	private ConcurrentHashMap<UUID, UUID> sessionPlayerMap = new ConcurrentHashMap<UUID, UUID>();
+	private ConcurrentHashMap<UUID, UUID> userPlayerMap = new ConcurrentHashMap<UUID, UUID>();
 	private ConcurrentHashMap<UUID, TournamentSession> tournamentSessions = new ConcurrentHashMap<UUID, TournamentSession>();
 
-	public TournamentController(Tournament tournament, ConcurrentHashMap<UUID, UUID> sessionPlayerMap, UUID tableId) {
-		sessionId = UUID.randomUUID();
-		this.sessionPlayerMap = sessionPlayerMap;
+	public TournamentController(Tournament tournament, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
+		this.userPlayerMap = userPlayerMap;
 		chatId = ChatManager.getInstance().createChatSession();
 		this.tournament = tournament;
 		this.tableId = tableId;
@@ -97,6 +96,9 @@ public class TournamentController {
 							break;
 						case CONSTRUCT:
 							construct();
+							break;
+						case END:
+							endTournament();
 							break;
 					}
 				}
@@ -128,10 +130,11 @@ public class TournamentController {
 		checkStart();
 	}
 
-	public synchronized void join(UUID sessionId) {
-		UUID playerId = sessionPlayerMap.get(sessionId);
-		TournamentSession tournamentSession = new TournamentSession(tournament, sessionId, tableId, playerId);
+	public synchronized void join(UUID userId) {
+		UUID playerId = userPlayerMap.get(userId);
+		TournamentSession tournamentSession = new TournamentSession(tournament, userId, tableId, playerId);
 		tournamentSessions.put(playerId, tournamentSession);
+		UserManager.getInstance().getUser(userId).addTournament(playerId, tournamentSession);
 		TournamentPlayer player = tournament.getPlayer(playerId);
 		player.setJoined();
 		logger.info("player " + playerId + " has joined tournament " + tournament.getId());
@@ -140,8 +143,8 @@ public class TournamentController {
 	}
 
 	private void checkStart() {
-		if (allJoined()) {
-			ThreadExecutor.getInstance().getRMIExecutor().execute(
+		if (!started && allJoined()) {
+			ThreadExecutor.getInstance().getCallExecutor().execute(
 				new Runnable() {
 					@Override
 					public void run() {
@@ -164,13 +167,22 @@ public class TournamentController {
 
 	private synchronized void startTournament() {
 		for (final Entry<UUID, TournamentSession> entry: tournamentSessions.entrySet()) {
-			if (!entry.getValue().init(getTournamentView())) {
+			if (!entry.getValue().init()) {
 				logger.fatal("Unable to initialize client");
 				//TODO: generate client error message
 				return;
 			}
 		}
+		started = true;
 		tournament.nextStep();
+	}
+
+	private void endTournament() {
+		for (final TournamentSession tournamentSession: tournamentSessions.values()) {
+			tournamentSession.tournamentOver();
+			tournamentSession.removeTournament();
+		}
+		TableManager.getInstance().endTournament(tableId, tournament);
 	}
 
 	private void startMatch(TournamentPairing pair, MatchOptions matchOptions) {
@@ -196,49 +208,49 @@ public class TournamentController {
 		TableManager.getInstance().construct(tableId);
 	}
 
-	private void construct(UUID sessionId, Deck deck, int timeout) throws MageException {
-		if (tournamentSessions.containsKey(sessionId))
-			tournamentSessions.get(sessionId).construct(deck, timeout);
+	private void construct(UUID playerId, Deck deck, int timeout) throws MageException {
+		if (tournamentSessions.containsKey(playerId))
+			tournamentSessions.get(playerId).construct(deck, timeout);
 	}
 
-	public void submitDeck(UUID sessionId, Deck deck) {
-		tournamentSessions.get(sessionPlayerMap.get(sessionId)).submitDeck(deck);
+	public void submitDeck(UUID playerId, Deck deck) {
+		tournamentSessions.get(playerId).submitDeck(deck);
 	}
 
-	public void timeout(UUID sessionId) {
-		if (sessionPlayerMap.containsKey(sessionId)) {
-			TournamentPlayer player = tournament.getPlayer(sessionPlayerMap.get(sessionId));
-			tournament.autoSubmit(sessionPlayerMap.get(sessionId), player.getDeck());
+	public void timeout(UUID userId) {
+		if (userPlayerMap.containsKey(userId)) {
+			TournamentPlayer player = tournament.getPlayer(userPlayerMap.get(userId));
+			tournament.autoSubmit(userPlayerMap.get(userId), player.getDeck());
 		}
 	}
 
-	public UUID getSessionId() {
-		return this.sessionId;
-	}
+//	public UUID getSessionId() {
+//		return this.sessionId;
+//	}
 
 	public UUID getChatId() {
 		return chatId;
 	}
 
-	public void kill(UUID sessionId) {
-		if (sessionPlayerMap.containsKey(sessionId)) {
-			tournamentSessions.get(sessionPlayerMap.get(sessionId)).setKilled();
-			tournamentSessions.remove(sessionPlayerMap.get(sessionId));
-			leave(sessionId);
-			sessionPlayerMap.remove(sessionId);
+	public void kill(UUID userId) {
+		if (userPlayerMap.containsKey(userId)) {
+			tournamentSessions.get(userPlayerMap.get(userId)).setKilled();
+			tournamentSessions.remove(userPlayerMap.get(userId));
+			leave(userId);
+			userPlayerMap.remove(userId);
 		}
 	}
 
-	private void leave(UUID sessionId) {
-		tournament.leave(getPlayerId(sessionId));
+	private void leave(UUID userId) {
+		tournament.leave(getPlayerId(userId));
 	}
 
-	private UUID getPlayerId(UUID sessionId) {
-		return sessionPlayerMap.get(sessionId);
+	private UUID getPlayerId(UUID userId) {
+		return userPlayerMap.get(userId);
 	}
 
 	private UUID getPlayerSessionId(UUID playerId) {
-		for (Entry<UUID, UUID> entry: sessionPlayerMap.entrySet()) {
+		for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
 			if (entry.getValue().equals(playerId))
 				return entry.getKey();
 		}

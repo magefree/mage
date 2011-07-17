@@ -36,17 +36,22 @@ package mage.server.console;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
-import mage.server.console.remote.Session;
+import mage.remote.Session;
 import mage.view.TableView;
 import mage.view.UserView;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class ConsolePanel extends javax.swing.JPanel {
+
+	private final static Logger logger = Logger.getLogger(ConsolePanel.class);
 
 	private TableUserModel tableUserModel;
 	private TableTableModel tableTableModel;
@@ -239,7 +244,7 @@ public class ConsolePanel extends javax.swing.JPanel {
 
 	private void btnDisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisconnectActionPerformed
 		int row = this.tblUsers.getSelectedRow();
-		ConsoleFrame.getSession().disconnectUser((UUID)tableUserModel.getValueAt(row, 3));
+		ConsoleFrame.getSession().disconnectUser((String)tableUserModel.getValueAt(row, 3));
 	}//GEN-LAST:event_btnDisconnectActionPerformed
 
 	private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -394,6 +399,8 @@ class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
 	private Session session;
 	private ConsolePanel panel;
 
+	private final static Logger logger = Logger.getLogger(UpdateUsersTask.class);
+
 	UpdateUsersTask(Session session, ConsolePanel panel) {
 		this.session = session;
 		this.panel = panel;
@@ -413,6 +420,16 @@ class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
 		panel.update(view.get(0));
 	}
 
+	@Override
+	protected void done() {
+		try {
+			get();
+		} catch (InterruptedException ex) {
+			logger.fatal("Update Users Task error", ex);
+		} catch (ExecutionException ex) {
+			logger.fatal("Update Users Task error", ex);
+		} catch (CancellationException ex) {}
+	}
 }
 
 class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
@@ -420,6 +437,8 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 	private Session session;
 	private UUID roomId;
 	private ConsolePanel panel;
+
+	private final static Logger logger = Logger.getLogger(UpdateTablesTask.class);
 
 	UpdateTablesTask(Session session, UUID roomId, ConsolePanel panel) {
 		this.session = session;
@@ -441,4 +460,14 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 		panel.update(view.get(0));
 	}
 
+	@Override
+	protected void done() {
+		try {
+			get();
+		} catch (InterruptedException ex) {
+			logger.fatal("Update Tables Task error", ex);
+		} catch (ExecutionException ex) {
+			logger.fatal("Update Tables Task error", ex);
+		} catch (CancellationException ex) {}
+	}
 }

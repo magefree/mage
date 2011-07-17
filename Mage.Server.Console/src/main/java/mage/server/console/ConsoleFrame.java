@@ -34,11 +34,16 @@
 
 package mage.server.console;
 
+import java.util.UUID;
 import java.util.prefs.Preferences;
 import javax.swing.Box;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import mage.server.console.remote.Session;
+import mage.interfaces.MageClient;
+import mage.interfaces.callback.ClientCallback;
+import mage.remote.Connection;
+import mage.remote.Session;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 
@@ -46,14 +51,14 @@ import org.apache.log4j.Logger;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ConsoleFrame extends javax.swing.JFrame {
+public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
 
     private final static Logger logger = Logger.getLogger(ConsoleFrame.class);
 
     private static Session session;
     private ConnectDialog connectDialog;
     private static Preferences prefs = Preferences.userNodeForPackage(ConsoleFrame.class);
-	private final static MageVersion version = new MageVersion(0, 7, 4, "beta-2");
+	private final static MageVersion version = new MageVersion(0, 8, 0, "");
 
     /**
      * @return the session
@@ -66,7 +71,8 @@ public class ConsoleFrame extends javax.swing.JFrame {
         return prefs;
     }
 
-	public static MageVersion getVersion() {
+	@Override
+	public MageVersion getVersion() {
 		return version;
 	}
 
@@ -82,16 +88,8 @@ public class ConsoleFrame extends javax.swing.JFrame {
 		}
     }
 
-   public boolean connect(String password, String serverName, int port) {
-        if (session.connect(password, serverName, port)) {
-			this.consolePanel1.start();
-			return true;
-		}
-		return false;
-    }
-
-	public boolean connect(String password, String serverName, int port, String proxyServer, int proxyPort) {
-        if (session.connect(password, serverName, port, proxyServer, proxyPort)) {
+   public boolean connect(Connection connection) {
+        if (session.connect(connection)) {
 			this.consolePanel1.start();
 			return true;
 		}
@@ -168,7 +166,7 @@ public class ConsoleFrame extends javax.swing.JFrame {
         if (session.isConnected()) {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 				this.consolePanel1.stop();
-                session.disconnect();
+                session.disconnect(false);
             }
         } else {
             connectDialog.showDialog(this);
@@ -185,6 +183,10 @@ public class ConsoleFrame extends javax.swing.JFrame {
             }
         });
     }
+	
+	private ConsoleFrame getFrame() {
+		return this;
+	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConnect;
@@ -192,5 +194,80 @@ public class ConsoleFrame extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblStatus;
     // End of variables declaration//GEN-END:variables
+
+	@Override
+	public UUID getId() {
+		return null;
+	}
+
+	@Override
+	public void connected(final String message) {
+		if (SwingUtilities.isEventDispatchThread()) {
+			setStatusText(message);
+			enableButtons();			
+		}
+		else {
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					setStatusText(message);
+					enableButtons();
+				}
+			});
+		}
+	}
+
+	@Override
+	public void disconnected() {
+		if (SwingUtilities.isEventDispatchThread()) {
+			consolePanel1.stop();
+			setStatusText("Not connected");
+			disableButtons();
+		}
+		else {
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					consolePanel1.stop();
+					setStatusText("Not connected");
+					disableButtons();
+				}
+			});
+		}
+	}
+
+	@Override
+	public void showMessage(final String message) {
+		if (SwingUtilities.isEventDispatchThread()) {
+			JOptionPane.showMessageDialog(this, message);
+		}
+		else {
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					JOptionPane.showMessageDialog(getFrame(), message);
+				}
+			});
+		}
+	}
+
+	@Override
+	public void showError(final String message) {
+		if (SwingUtilities.isEventDispatchThread()) {
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		else {
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					JOptionPane.showMessageDialog(getFrame(), message, "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			});
+		}
+	}
+
+	@Override
+	public void processCallback(ClientCallback callback) {
+	}
 
 }

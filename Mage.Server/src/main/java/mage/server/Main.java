@@ -31,14 +31,14 @@ package mage.server;
 import mage.server.util.PluginClassLoader;
 import java.io.File;
 import java.io.FilenameFilter;
-import java.net.Inet4Address;
+import java.io.IOException;
 import java.net.InetAddress;
-import java.net.InterfaceAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.util.Enumeration;
+import java.util.Map;
+import javax.management.MBeanServer;
 import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
+import mage.interfaces.MageServer;
+import mage.remote.Connection;
 import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.PlayerFactory;
@@ -46,9 +46,21 @@ import mage.server.tournament.TournamentFactory;
 import mage.server.util.ConfigSettings;
 import mage.server.util.config.Plugin;
 import mage.server.util.config.GamePlugin;
-import mage.util.Copier;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
+import org.jboss.remoting.Client;
+import org.jboss.remoting.ClientDisconnectedException;
+import org.jboss.remoting.ConnectionListener;
+import org.jboss.remoting.InvocationRequest;
+import org.jboss.remoting.InvokerLocator;
+import org.jboss.remoting.Remoting;
+import org.jboss.remoting.ServerInvocationHandler;
+import org.jboss.remoting.ServerInvoker;
+import org.jboss.remoting.callback.InvokerCallbackHandler;
+import org.jboss.remoting.callback.ServerInvokerCallbackHandler;
+import org.jboss.remoting.transport.Connector;
+import org.jboss.remoting.transporter.TransporterServer;
+import org.w3c.dom.Element;
 
 /**
  *
@@ -61,11 +73,11 @@ public class Main {
 	private final static String testModeArg = "-testMode=";
 	private final static String adminPasswordArg = "-adminPassword=";
 	private final static String pluginFolder = "plugins";
-	private static MageVersion version = new MageVersion(0, 7, 4, "beta-2");
+	private static MageVersion version = new MageVersion(0, 8, 0, "");
 
 	public static PluginClassLoader classLoader = new PluginClassLoader();
-	public static ServerImpl server;
-
+	public static TransporterServer server;
+	protected static boolean testMode;
     /**
      * @param args the command line arguments
      */
@@ -87,7 +99,6 @@ public class Main {
 		for (Plugin plugin: config.getDeckTypes()) {
 			DeckValidatorFactory.getInstance().addDeckType(plugin.getName(), loadPlugin(plugin));
 		}
-		boolean testMode = false;
 		String adminPassword = "";
 		for (String arg: args) {
 			if (arg.startsWith(testModeArg)) {
@@ -97,44 +108,105 @@ public class Main {
 				adminPassword = arg.replace(adminPasswordArg, "");
 			}
 		}
-		Copier.setLoader(classLoader);
-		setServerAddress(config.getServerAddress());
-		server = new ServerImpl(config.getPort(), config.getServerName(), testMode, adminPassword);
+		Connection connection = new Connection();
+		connection.setHost(config.getServerAddress());
+		connection.setPort(config.getPort());
+		try {
+			InvokerLocator serverLocator = new InvokerLocator(connection.getURI());
+			server = new MageTransporterServer(serverLocator, new MageServerImpl(adminPassword, testMode), MageServer.class.getName(), new MageServerInvocationHandler());
+			server.start();
+			logger.info("Started MAGE server - listening on " + connection.toString());
+			if (testMode)
+				logger.info("MAGE server running in test mode");
+		} catch (IOException ex) {
+			logger.fatal("Failed to start server - " + connection.toString(), ex);
+		} catch (Exception ex) {
+			logger.fatal("Failed to start server - " + connection.toString(), ex);
+		}
 
     }
 
-	private static void setServerAddress(String ip) {
-		String ipParam = System.getProperty("server");
-		if (ipParam != null) {
-			ip = ipParam;
-		}
-		if (ip.equals("localhost")) {
-			try {
-				String foundIP = "";
-				for (Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces(); interfaces.hasMoreElements(); ) {
-					NetworkInterface iface = interfaces.nextElement( );
-					if (iface.isLoopback())
-						continue;
-					for (InterfaceAddress addr: iface.getInterfaceAddresses())
-					{
-						InetAddress iaddr = addr.getAddress();
-						if (iaddr instanceof Inet4Address) {
-							foundIP = iaddr.getHostAddress();
-							break;
-						}
-					}
-					if (foundIP.length() > 0)
-						break;
+	static class ClientConnectionListener implements ConnectionListener {
+		@Override
+		public void handleConnectionException(Throwable throwable, Client client) {
+			Session session = SessionManager.getInstance().getSession(client.getSessionId());
+			if (session != null) {
+				String sessionName;
+				User user = UserManager.getInstance().getUser(session.getUserId());
+				if (user != null)
+					sessionName = user.getName() + " at " + session.getHost();
+				else
+					sessionName = session.getHost();
+				if (throwable instanceof ClientDisconnectedException) {					
+					SessionManager.getInstance().disconnect(client.getSessionId(), true);
+					logger.info("client disconnected - " + sessionName);
 				}
-				if (foundIP.length() > 0)
-					ip = foundIP;
-			} catch (SocketException ex) {
-				logger.warn("Could not get server address: ", ex);
+				else {
+					SessionManager.getInstance().disconnect(client.getSessionId(), false);
+					logger.info("connection to client lost - " + sessionName);
+				}
 			}
 		}
-		System.setProperty("java.rmi.server.hostname", ip);
-		System.setProperty("sun.rmi.transport.tcp.readTimeout", "30000");
-		logger.info("MAGE server - using address " + ip);
+	}
+
+	static class MageTransporterServer extends TransporterServer {
+		
+		protected Connector connector;
+		
+		public MageTransporterServer(InvokerLocator locator, Object target, String subsystem, MageServerInvocationHandler callback) throws Exception {
+			super(locator, target, subsystem);
+			connector.addInvocationHandler("callback", callback);
+			connector.setLeasePeriod(5000);
+			connector.addConnectionListener(new ClientConnectionListener());
+		}
+		
+		public Connector getConnector() throws Exception {
+			return connector;
+		}
+		
+		@Override
+		protected Connector getConnector(InvokerLocator locator, Map config, Element xmlConfig) throws Exception {
+			Connector c = super.getConnector(locator, config, xmlConfig);
+			this.connector = c;
+			return c;
+		}
+	}
+	
+	static class MageServerInvocationHandler implements ServerInvocationHandler {
+
+		@Override
+		public void setMBeanServer(MBeanServer server) {}
+
+		@Override
+		public void setInvoker(ServerInvoker invoker) {}
+
+		@Override
+		public Object invoke(final InvocationRequest invocation) throws Throwable {
+			String sessionId = invocation.getSessionId();
+			InetAddress clientAddress = (InetAddress) invocation.getRequestPayload().get(Remoting.CLIENT_ADDRESS);
+			SessionManager.getInstance().getSession(sessionId).setHost(clientAddress.getHostAddress());
+			return null;
+		}
+
+		@Override
+		public void addListener(InvokerCallbackHandler callbackHandler) {
+			ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
+			try {
+				String sessionId = handler.getClientSessionId();
+				SessionManager.getInstance().createSession(sessionId, callbackHandler);
+			} catch (Throwable ex) {
+				logger.fatal("", ex);
+			}
+		}
+
+		@Override
+		public void removeListener(InvokerCallbackHandler callbackHandler) {
+			logger.fatal("removeListener called");
+//			ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
+//			String sessionId = handler.getCallbackClient().getSessionId();
+//			SessionManager.getInstance().disconnect(sessionId);
+		}
+		
 	}
 	
 	private static Class<?> loadPlugin(Plugin plugin) {
@@ -198,4 +270,7 @@ public class Main {
 		return version;
 	}
 
+	public static boolean isTestMode() {
+		return testMode;
+	}
 }
