@@ -53,7 +53,7 @@ public class ConsoleFrame extends javax.swing.JFrame {
     private static Session session;
     private ConnectDialog connectDialog;
     private static Preferences prefs = Preferences.userNodeForPackage(ConsoleFrame.class);
-	private final static MageVersion version = new MageVersion(0, 7, 4, "beta-2");
+	private final static MageVersion version = new MageVersion(0, 7, 4, "");
 
     /**
      * @return the session
