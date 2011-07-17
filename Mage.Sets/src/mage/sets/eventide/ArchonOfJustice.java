@@ -40,7 +40,7 @@ import mage.target.TargetPermanent;
 
 /**
  *
- * @author North
+ * @author North, Loki
  */
 public class ArchonOfJustice extends CardImpl<ArchonOfJustice> {
 
@@ -56,6 +56,7 @@ public class ArchonOfJustice extends CardImpl<ArchonOfJustice> {
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new ExileTargetEffect(), false);
         ability.addTarget(new TargetPermanent());
+        this.addAbility(ability);
     }
 
     public ArchonOfJustice(final ArchonOfJustice card) {
