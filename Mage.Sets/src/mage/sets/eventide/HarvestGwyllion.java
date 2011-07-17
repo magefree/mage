@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class HarvestGwyllion extends CardImpl<HarvestGwyllion> {
 
     public HarvestGwyllion(UUID ownerId) {
-        super(ownerId, 90, "Harvest Gwyllion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{WB}{WB}");
+        super(ownerId, 90, "Harvest Gwyllion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W/B}{W/B}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Hag");
 
