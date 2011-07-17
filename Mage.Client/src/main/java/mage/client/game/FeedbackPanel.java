@@ -118,6 +118,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 		}
 		this.btnSpecial.setVisible(special);
 		this.btnSpecial.setText("Special");
+		this.btnRight.requestFocus();
 		this.helper.setSpecial("Special", special);
 		if (message.contains("P}")) {
 			this.btnSpecial.setVisible(true);
