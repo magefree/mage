@@ -43,7 +43,7 @@ import mage.game.permanent.token.GolemToken;
 
 /**
  *
- * @author North
+ * @author North, Loki
  */
 public class MasterSplicer extends CardImpl<MasterSplicer> {
 
@@ -64,7 +64,7 @@ public class MasterSplicer extends CardImpl<MasterSplicer> {
         this.toughness = new MageInt(1);
 
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GolemToken())));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
     }
 
     public MasterSplicer(final MasterSplicer card) {
