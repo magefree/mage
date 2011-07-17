@@ -1,5 +1,7 @@
 #!/usr/bin/perl -w
 
+#author: North
+
 use Text::Template;
 use strict;
 
@@ -83,30 +85,40 @@ $manaToColor{'W'} = 'White';
 
 
 # Get card name
-print 'Enter a card name: ';
-my $cardName = <STDIN>;
-chomp $cardName;
+my $cardName = $ARGV[0];
+if(!$cardName) {
+    print 'Enter a card name: ';
+    $cardName = <STDIN>;
+    chomp $cardName;
+}
+
+if (!exists $cards{$cardName}) {
+    die "Card name doesn't exist: $cardName\n";
+}
 
 # Check if card is already implemented
 foreach my $setName (keys %{$cards{$cardName}}) {
 	if (exists $knownSets{$setName}) {
         my $fileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . toCamelCase($cardName) . ".java";
         if(-e $fileName) {
-            die "$cardName is already implemented (set found: $setName).\n";
+            die "$cardName is already implemented (set found in: $setName).\n";
         }
     }
 }
 
 # Generate the cards
-my $template = Text::Template->new(SOURCE => 'cardClass.tmpl', DELIMITERS => [ '[=', '=]' ]);
-my $templateExtended = Text::Template->new(SOURCE => 'cardExtendedClass.tmpl', DELIMITERS => [ '[=', '=]' ]);
+my $simpleOnly = $ARGV[1] || 'false';
+my $template = Text::Template->new(TYPE => 'FILE', SOURCE => 'cardClass.tmpl', DELIMITERS => [ '[=', '=]' ]);
+my $templateExtended = Text::Template->new(TYPE => 'FILE', SOURCE => 'cardExtendedClass.tmpl', DELIMITERS => [ '[=', '=]' ]);
 my %vars;
 
 $vars{'author'} = $author;
 $vars{'name'} = $cardName;
 $vars{'className'} = toCamelCase($cardName);
 
-print "Files generated:\n";
+if ($simpleOnly ne 'true') {
+    print "Files generated:\n";
+}
 my $baseRarity = '';
 foreach my $setName (keys %{$cards{$cardName}}) {
 	if (exists $knownSets{$setName}) {
@@ -168,8 +180,11 @@ foreach my $setName (keys %{$cards{$cardName}}) {
                         my @ka = split(', ', $ability);
                         foreach my $kw (@ka) {
                             my $kwUnchanged = $kw;
-                            $kw = toCamelCase($kw);
-                            
+                            foreach my $keyword (keys %keywords) {
+                                if (index(toCamelCase($kw), $keyword) eq 0) {
+                                    $kw = $keyword;
+                                }
+                            }
                             if ($keywords{$kw}) {
                                 if ($keywords{$kw} eq 'instance') {
                                     $vars{'abilities'} .= "\n        this.addAbility(" . $kw . "Ability.getInstance());";
@@ -187,6 +202,9 @@ foreach my $setName (keys %{$cards{$cardName}}) {
                                 $vars{'abilitiesImports'} .= "\nimport mage.abilities.keyword." . $kw . "Ability;";
                             } else {
                                 $vars{'abilities'} .= "\n        // $kwUnchanged";
+                                if ($simpleOnly eq 'true') {
+                                    exit 0;
+                                }
                             }
                         }
                     }
@@ -194,6 +212,9 @@ foreach my $setName (keys %{$cards{$cardName}}) {
                 
                 if (!$notKeyWord) {
                     $vars{'abilities'} .= "\n        // $ability";
+                    if ($simpleOnly eq 'true') {
+                        exit 0;
+                    }
                 }
             }
             if ($vars{'abilities'}) {
@@ -216,6 +237,6 @@ foreach my $setName (keys %{$cards{$cardName}}) {
         print CARD $result; 
         close CARD;
 
-        print "$fileName\n";
+        print "$vars{'set'}.$vars{'className'}\n";
 	}
 }

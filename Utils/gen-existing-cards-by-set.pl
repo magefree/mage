@@ -1,5 +1,7 @@
 #!/usr/bin/perl -w
 
+#author: North
+
 use Text::Template;
 use strict;
 
@@ -16,11 +18,15 @@ my %knownSets;
 
 my @setCards;
 
-print "Enter a set name: ";
-my $setName = <STDIN>;
-chomp $setName;
+# gets the set name
+my $setName = $ARGV[0];
+if(!$setName) {
+    print 'Enter a set name: ';
+    $setName = <STDIN>;
+    chomp $setName;
+}
 
-my $template = Text::Template->new(SOURCE => 'cardExtendedClass.tmpl', DELIMITERS => [ '[=', '=]' ]);
+my $template = Text::Template->new(TYPE => 'FILE', SOURCE => 'cardExtendedClass.tmpl', DELIMITERS => [ '[=', '=]' ]);
 
 sub toCamelCase {
     my $string = $_[0];
@@ -76,7 +82,7 @@ $vars{'author'} = $author;
 $vars{'set'} = $knownSets{$setName};
 $vars{'expansionSetCode'} = $sets{$setName};
 
-print "Files generated:\n";
+print "Extended cards generated:\n";
 foreach my $cardName (@setCards) {
     my $className = toCamelCase($cardName);
     my $currentFileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . "/" . $className . ".java";
