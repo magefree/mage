@@ -100,14 +100,14 @@
 |Generate|TOK:SHM|Spirit|
 |Generate|TOK:SHM|Rat|
 |Generate|TOK:SHM|Elemental 1|
-|Generate|TOK:SHM|Elf Warrior|
+|Generate|TOK:SHM|Elf Warrior 1|
 |Generate|TOK:SHM|Spider|
 |Generate|TOK:SHM|Wolf|
 |Generate|TOK:SHM|Faerie Rogue|
 |Generate|TOK:SHM|Elemental 2|
 |Generate|TOK:SHM|Giant Warrior|
 |Generate|TOK:SHM|Goblin Warrior|
-|Generate|TOK:SHM|Elf Warrior|
+|Generate|TOK:SHM|Elf Warrior 2|
 
 |Generate|TOK:EVG|Elemental|
 |Generate|TOK:EVG|Elf Warrior|
