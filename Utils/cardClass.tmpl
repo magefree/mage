@@ -30,7 +30,7 @@ package mage.sets.[=$set=];
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;[=
-if (defined($power)) {
+if ($power) {
     $OUT .= "\nimport mage.MageInt;"
 }
 =][=$abilitiesImports=]
@@ -44,14 +44,13 @@ public class [=$className=] extends CardImpl<[=$className=]> {
 
     public [=$className=](UUID ownerId) {
         super(ownerId, [=$cardNumber=], "[=$name=]", Rarity.[=$rarity=], new CardType[]{[=$type=]}, "[=$manaCost=]");
-        this.expansionSetCode = "[=$expansionSetCode=]";[=$subType=][=$colors=]
-[=
-if (defined($power)) {
-    $OUT .= "        this.power = new MageInt($power);\n";
+        this.expansionSetCode = "[=$expansionSetCode=]";[=$subType=][=$colors=][=
+if ($power) {
+    $OUT .= "\n        this.power = new MageInt($power);";
 }
 =][=
-if (defined($toughness)) {
-    $OUT .= "        this.toughness = new MageInt($toughness);";
+if ($toughness) {
+    $OUT .= "\n        this.toughness = new MageInt($toughness);";
 }
 =][=$abilities=]
     }
