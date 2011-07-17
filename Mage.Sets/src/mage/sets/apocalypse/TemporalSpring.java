@@ -25,57 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.apocalypse;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.TargetPermanent;
 
 /**
  * @author Loki
  */
-public class AzamiLadyOfScrolls extends CardImpl<AzamiLadyOfScrolls> {
+public class TemporalSpring extends CardImpl<TemporalSpring> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
-
-    static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Wizard");
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
-    public AzamiLadyOfScrolls(UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
+    public TemporalSpring(UUID ownerId) {
+        super(ownerId, 125, "Temporal Spring", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}{U}");
+        this.expansionSetCode = "APC";
         this.color.setBlue(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
+        this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
-    public AzamiLadyOfScrolls(final AzamiLadyOfScrolls card) {
+    public TemporalSpring(final TemporalSpring card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyOfScrolls copy() {
-        return new AzamiLadyOfScrolls(this);
+    public TemporalSpring copy() {
+        return new TemporalSpring(this);
     }
-
 }

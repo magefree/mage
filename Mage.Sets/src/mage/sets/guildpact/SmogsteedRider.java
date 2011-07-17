@@ -25,57 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.guildpact;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterAttackingCreature;
 
 /**
+ *
  * @author Loki
  */
-public class AzamiLadyOfScrolls extends CardImpl<AzamiLadyOfScrolls> {
+public class SmogsteedRider extends CardImpl<SmogsteedRider> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
-
-    static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Wizard");
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
-    public AzamiLadyOfScrolls(UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
+    public SmogsteedRider(UUID ownerId) {
+        super(ownerId, 63, "Smogsteed Rider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        this.expansionSetCode = "GPT";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
-        this.color.setBlue(true);
-        this.power = new MageInt(0);
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+        this.addAbility(new AttacksTriggeredAbility(new GainAbilityControlledEffect(FearAbility.getInstance(), Constants.Duration.EndOfTurn, FilterAttackingCreature.getDefault(), true), false));
     }
 
-    public AzamiLadyOfScrolls(final AzamiLadyOfScrolls card) {
+    public SmogsteedRider(final SmogsteedRider card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyOfScrolls copy() {
-        return new AzamiLadyOfScrolls(this);
+    public SmogsteedRider copy() {
+        return new SmogsteedRider(this);
     }
-
 }

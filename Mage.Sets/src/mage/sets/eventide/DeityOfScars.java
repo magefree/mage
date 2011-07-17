@@ -25,8 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.eventide;
 
 import java.util.UUID;
 
@@ -34,48 +33,44 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.costs.common.RemoveCountersSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.counters.CounterType;
 
 /**
  * @author Loki
  */
-public class AzamiLadyOfScrolls extends CardImpl<AzamiLadyOfScrolls> {
+public class DeityOfScars extends CardImpl<DeityOfScars> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
-
-    static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Wizard");
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+    public DeityOfScars(UUID ownerId) {
+        super(ownerId, 118, "Deity of Scars", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B/G}{B/G}{B/G}{B/G}{B/G}");
+        this.expansionSetCode = "EVE";
+        this.subtype.add("Spirit");
+        this.subtype.add("Avatar");
+        this.color.setGreen(true);
+        this.color.setBlack(true);
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(7);
+        this.addAbility(TrampleAbility.getInstance());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(2))));
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B/G}"));
+        ability.addCost(new RemoveCountersSourceCost(CounterType.M1M1.createInstance()));
+        this.addAbility(ability);
     }
 
-    public AzamiLadyOfScrolls(UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.color.setBlue(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
-    }
-
-    public AzamiLadyOfScrolls(final AzamiLadyOfScrolls card) {
+    public DeityOfScars(final DeityOfScars card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyOfScrolls copy() {
-        return new AzamiLadyOfScrolls(this);
+    public DeityOfScars copy() {
+        return new DeityOfScars(this);
     }
-
 }

@@ -25,8 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.eventide;
 
 import java.util.UUID;
 
@@ -34,48 +33,46 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  * @author Loki
  */
-public class AzamiLadyOfScrolls extends CardImpl<AzamiLadyOfScrolls> {
+public class JawboneSkulkin extends CardImpl<JawboneSkulkin> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
+    private final static FilterCreaturePermanent filterRedCreature = new FilterCreaturePermanent("red creature");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Wizard");
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filterRedCreature.setUseColor(true);
+        filterRedCreature.setColor(ObjectColor.RED);
     }
 
-    public AzamiLadyOfScrolls(UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.color.setBlue(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+    public JawboneSkulkin(UUID ownerId) {
+        super(ownerId, 170, "Jawbone Skulkin", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
+        this.expansionSetCode = "EVE";
+        this.subtype.add("Scarecrow");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityTargetEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn), new GenericManaCost(2));
+        ability.addTarget(new TargetCreaturePermanent(filterRedCreature));
+        this.addAbility(ability);
+
     }
 
-    public AzamiLadyOfScrolls(final AzamiLadyOfScrolls card) {
+    public JawboneSkulkin(final JawboneSkulkin card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyOfScrolls copy() {
-        return new AzamiLadyOfScrolls(this);
+    public JawboneSkulkin copy() {
+        return new JawboneSkulkin(this);
     }
-
 }

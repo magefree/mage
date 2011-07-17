@@ -25,8 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.eventide;
 
 import java.util.UUID;
 
@@ -34,48 +33,45 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continious.GainControlTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.TargetPermanent;
 
 /**
+ *
  * @author Loki
  */
-public class AzamiLadyOfScrolls extends CardImpl<AzamiLadyOfScrolls> {
+public class DominusOfFealty extends CardImpl<DominusOfFealty> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
-
-    static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Wizard");
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
-    public AzamiLadyOfScrolls(UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
+    public DominusOfFealty(UUID ownerId) {
+        super(ownerId, 102, "Dominus of Fealty", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U/R}{U/R}{U/R}{U/R}{U/R}");
+        this.expansionSetCode = "EVE";
+        this.subtype.add("Spirit");
+        this.subtype.add("Avatar");
+        this.color.setRed(true);
         this.color.setBlue(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+        this.addAbility(FlyingAbility.getInstance());
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new GainControlTargetEffect(Constants.Duration.EndOfTurn), Constants.TargetController.YOU, true);
+        ability.addEffect(new UntapTargetEffect());
+        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn));
+        ability.addTarget(new TargetPermanent());
+        this.addAbility(ability);
     }
 
-    public AzamiLadyOfScrolls(final AzamiLadyOfScrolls card) {
+    public DominusOfFealty(final DominusOfFealty card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyOfScrolls copy() {
-        return new AzamiLadyOfScrolls(this);
+    public DominusOfFealty copy() {
+        return new DominusOfFealty(this);
     }
-
 }

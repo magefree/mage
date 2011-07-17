@@ -25,57 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.guildpact;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.game.permanent.token.Token;
 
 /**
  * @author Loki
  */
-public class AzamiLadyOfScrolls extends CardImpl<AzamiLadyOfScrolls> {
+public class DuneBroodNephilim extends CardImpl<DuneBroodNephilim> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
+    final static FilterControlledPermanent filterLands = new FilterControlledPermanent("land you control");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Wizard");
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filterLands.getCardType().add(CardType.LAND);
+        filterLands.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public AzamiLadyOfScrolls(UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.color.setBlue(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+    public DuneBroodNephilim(UUID ownerId) {
+        super(ownerId, 110, "Dune-Brood Nephilim", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{R}{G}{W}");
+        this.expansionSetCode = "GPT";
+        this.subtype.add("Nephilim");
+        this.color.setRed(true);
+        this.color.setGreen(true);
+        this.color.setBlack(true);
+        this.color.setWhite(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenEffect(new DuneBroodNephilimToken(), new PermanentsOnBattlefieldCount(filterLands)), false));
     }
 
-    public AzamiLadyOfScrolls(final AzamiLadyOfScrolls card) {
+    public DuneBroodNephilim(final DuneBroodNephilim card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyOfScrolls copy() {
-        return new AzamiLadyOfScrolls(this);
+    public DuneBroodNephilim copy() {
+        return new DuneBroodNephilim(this);
     }
+}
 
+class DuneBroodNephilimToken extends Token {
+    DuneBroodNephilimToken() {
+        super("Sand", "1/1 colorless Sand creature token");
+        cardType.add(CardType.CREATURE);
+        subtype.add("Sand");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+    }
 }

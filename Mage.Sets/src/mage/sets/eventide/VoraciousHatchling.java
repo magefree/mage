@@ -25,57 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.eventide;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.ObjectColor;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
+import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.counters.CounterType;
+import mage.filter.FilterCard;
 
 /**
  * @author Loki
  */
-public class AzamiLadyOfScrolls extends CardImpl<AzamiLadyOfScrolls> {
+public class VoraciousHatchling extends CardImpl<VoraciousHatchling> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
+    private final static FilterCard filterWhiteSpell = new FilterCard("a white spell");
+    private final static FilterCard filterBlackSpell = new FilterCard("a black spell");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Wizard");
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filterWhiteSpell.setUseColor(true);
+        filterWhiteSpell.setColor(ObjectColor.WHITE);
+        filterBlackSpell.setUseColor(true);
+        filterBlackSpell.setColor(ObjectColor.BLACK);
     }
 
-    public AzamiLadyOfScrolls(UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.color.setBlue(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+    public VoraciousHatchling(UUID ownerId) {
+        super(ownerId, 97, "Voracious Hatchling", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W/B}");
+        this.expansionSetCode = "EVE";
+        this.subtype.add("Elemental");
+        this.color.setBlack(true);
+        this.color.setWhite(true);
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
+        this.addAbility(LifelinkAbility.getInstance());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(4))));
+        this.addAbility(new SpellCastTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance(1)), filterWhiteSpell, false));
+        this.addAbility(new SpellCastTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance(1)), filterBlackSpell, false));
     }
 
-    public AzamiLadyOfScrolls(final AzamiLadyOfScrolls card) {
+    public VoraciousHatchling(final VoraciousHatchling card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyOfScrolls copy() {
-        return new AzamiLadyOfScrolls(this);
+    public VoraciousHatchling copy() {
+        return new VoraciousHatchling(this);
     }
-
 }
