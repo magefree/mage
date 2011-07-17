@@ -11,6 +11,7 @@ import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.MagePlugins;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.util.Config;
+import mage.client.util.SettingsManager;
 import mage.constants.Constants;
 import mage.interfaces.PluginException;
 import mage.interfaces.plugin.CardPlugin;
@@ -26,10 +27,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 
 public class Plugins implements MagePlugins {
@@ -42,6 +40,7 @@ public class Plugins implements MagePlugins {
 	private CardPlugin cardPlugin = null;
 	private CounterPlugin counterPlugin = null;
 	private static final MageActionCallback mageActionCallback = new MageActionCallback();
+	private Map<String, String> sortingOptions = new HashMap<String, String>();
 	
 	public static MagePlugins getInstance() {
 		return fINSTANCE;
@@ -104,7 +103,8 @@ public class Plugins implements MagePlugins {
 
 	@Override
 	public void sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents) {
-		if (this.cardPlugin != null) this.cardPlugin.sortPermanents(ui, permanents);
+		sortingOptions.put("nonLandPermanentsInOnePile", PreferencesDialog.getCachedValue("nonLandPermanentsInOnePile", "false"));
+		if (this.cardPlugin != null) this.cardPlugin.sortPermanents(ui, permanents, sortingOptions);
 	}
 
 	@Override

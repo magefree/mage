@@ -38,6 +38,7 @@ import java.util.List;
  *
  * @author nantuko
  * @version 0.1 01.11.2010 Mage permanents. Sorting card layout.
+ * @version 0.6 17,07.2011 #sortPermanents got option to display non-land permanents in one pile
  */
 @PluginImplementation
 @Author(name = "nantuko")
@@ -75,7 +76,7 @@ public class CardPluginImpl implements CardPlugin {
 
     @Override
     public String toString() {
-        return "[Card plugin, version 0.5]";
+        return "[Card plugin, version 0.6]";
     }
 
     @Override
@@ -99,8 +100,12 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     @Override
-    public void sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents) {
-        if (ui == null)
+    public void sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents, Map<String, String> options) {
+        //TODO: add caching
+		//requires to find out is position have been changed that includes:
+		//adding/removing permanents, type change
+
+		if (ui == null)
             throw new RuntimeException("Error: no components");
         JComponent component = ui.get("jScrollPane");
         JComponent component2 = ui.get("battlefieldPanel");
@@ -157,6 +162,16 @@ public class CardPluginImpl implements CardPlugin {
         Row allCreatures = new Row(permanents, RowType.creature);
         Row allOthers = new Row(permanents, RowType.other);
 
+		boolean othersOnTheRight = true;
+		if (options != null && options.containsKey("nonLandPermanentsInOnePile")) {
+			if (options.get("nonLandPermanentsInOnePile").equals("true")) {
+				System.out.println("in one pile");
+				othersOnTheRight = false;
+			   	allCreatures.addAll(allOthers);
+				allOthers.clear();
+			}
+		}
+
         cardWidth = cardWidthMax;
         Rectangle rect = jScrollPane.getVisibleRect();
         playAreaWidth = rect.width;
@@ -198,6 +213,7 @@ public class CardPluginImpl implements CardPlugin {
             if (creatures.isEmpty() && lands.isEmpty() && others.isEmpty())
                 break;
             //cardWidth = (int)(cardWidth / 1.2);
+			//FIXME: -1 is too slow. why not binary search?
             cardWidth--;
         }
 
@@ -227,7 +243,7 @@ public class CardPluginImpl implements CardPlugin {
             for (int stackIndex = 0, stackCount = row.size(); stackIndex < stackCount; stackIndex++) {
                 Stack stack = row.get(stackIndex);
                 // Align others to the right.
-                if (RowType.other.isType(stack.get(0))) {
+                if (othersOnTheRight && RowType.other.isType(stack.get(0))) {
                     x = playAreaWidth - GUTTER_X + extraCardSpacingX;
                     for (int i = stackIndex, n = row.size(); i < n; i++)
                         x -= row.get(i).getWidth();
@@ -340,8 +356,9 @@ public class CardPluginImpl implements CardPlugin {
 
         private void addAll(Collection<MagePermanent> permanents, RowType type) {
             for (MagePermanent panel : permanents) {
-                if (!type.isType(panel))
+                if (!type.isType(panel)) {
                     continue;
+				}
                 Stack stack = new Stack();
                 stack.add(panel);
                 add(stack);

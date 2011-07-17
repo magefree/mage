@@ -55,6 +55,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public static final String KEY_HAND_USE_BIG_CARDS = "handUseBigCards";
     public static final String KEY_HAND_SHOW_TOOLTIPS = "handShowTooltips";
+	public static final String KEY_PERMANENTS_IN_ONE_PILE = "nonLandPermanentsInOnePile";
     public static final String KEY_CARD_IMAGES_USE_DEFAULT = "cardImagesUseDefault";
     public static final String KEY_CARD_IMAGES_PATH = "cardImagesPath";
 
@@ -86,7 +87,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+		jPanel6 = new javax.swing.JPanel();
         showToolTipsInHand = new javax.swing.JCheckBox();
+		nonLandPermanentsInOnePile = new javax.swing.JCheckBox();
         displayBigCardsInHand = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -141,6 +144,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
+		jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Battlefield"));
+
+		nonLandPermanentsInOnePile.setSelected(false);
+        nonLandPermanentsInOnePile.setText("Put non-land permanents in one pile.");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -165,17 +173,35 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+            	.addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            	.addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+		);
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+				.addContainerGap()
+				.addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(173, Short.MAX_VALUE))
+        );
+
+		javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nonLandPermanentsInOnePile)
+                    )
+                .addContainerGap(170, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(nonLandPermanentsInOnePile)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Main", jPanel1);
@@ -430,6 +456,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
         save(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.showToolTipsInHand, KEY_HAND_SHOW_TOOLTIPS, "true", "false", UPDATE_CACHE_POLICY);
+		save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false", UPDATE_CACHE_POLICY);
         saveImagesPath(prefs);
         try {
             prefs.flush();
@@ -507,6 +534,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
                     load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true");
                     load(prefs, dialog.showToolTipsInHand, KEY_HAND_SHOW_TOOLTIPS, "true");
+					load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
                     loadImagesPath(prefs);
                     dialog.setLocation(300, 200);
                     dialog.reset();
@@ -619,10 +647,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+	private javax.swing.JPanel jPanel6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton saveButton;
     private javax.swing.JCheckBox showToolTipsInHand;
     private javax.swing.JCheckBox useDefaultImageFolder;
+	private javax.swing.JCheckBox nonLandPermanentsInOnePile;
     // End of variables declaration//GEN-END:variables
 
     private static final PreferencesDialog dialog = new PreferencesDialog(new javax.swing.JFrame(), true);
