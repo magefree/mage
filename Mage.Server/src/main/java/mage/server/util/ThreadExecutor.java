@@ -36,13 +36,13 @@ import java.util.concurrent.*;
  */
 public class ThreadExecutor {
 
-	private static ExecutorService rmiExecutor = Executors.newCachedThreadPool();
-	private static ExecutorService gameExecutor = Executors.newFixedThreadPool(ConfigSettings.getInstance().getMaxGameThreads());
-	private static ScheduledExecutorService timeoutExecutor = Executors.newScheduledThreadPool(5);
+	private static final ExecutorService callExecutor = Executors.newCachedThreadPool();
+	private static final ExecutorService gameExecutor = Executors.newFixedThreadPool(ConfigSettings.getInstance().getMaxGameThreads());
+	private static final ScheduledExecutorService timeoutExecutor = Executors.newScheduledThreadPool(5);
 
 	static {
-		((ThreadPoolExecutor)rmiExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
-		((ThreadPoolExecutor)rmiExecutor).allowCoreThreadTimeOut(true);
+		((ThreadPoolExecutor)callExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
+		((ThreadPoolExecutor)callExecutor).allowCoreThreadTimeOut(true);
 		((ThreadPoolExecutor)gameExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
 		((ThreadPoolExecutor)gameExecutor).allowCoreThreadTimeOut(true);
 		((ThreadPoolExecutor)timeoutExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
@@ -57,8 +57,8 @@ public class ThreadExecutor {
 
 	private ThreadExecutor() {}
 
-	public ExecutorService getRMIExecutor() {
-		return rmiExecutor;
+	public ExecutorService getCallExecutor() {
+		return callExecutor;
 	}
 
 	public ExecutorService getGameExecutor() {

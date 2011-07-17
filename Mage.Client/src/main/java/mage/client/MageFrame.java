@@ -47,7 +47,6 @@ import mage.client.deckeditor.collection.viewer.CollectionViewerPane;
 import mage.client.dialog.*;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.EDTExceptionHandler;
-import mage.client.util.SettingsManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.components.ImagePanel;
 
@@ -109,7 +108,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static Preferences prefs = Preferences.userNodeForPackage(MageFrame.class);
     private JLabel title;
     private Rectangle titleRectangle;
-	private final static MageVersion version = new MageVersion(0, 7, 4, "");
+	private final static MageVersion version = new MageVersion(0, 8, 0, "");
 	private UUID clientId;
 	private static MagePane activeFrame;
 	private static boolean liteMode = false;
@@ -174,7 +173,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         initComponents();
         setSize(1024, 768);
-        SettingsManager.getInstance().setScreenWidthAndHeight(1024, 768);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         session = new Session(this);
@@ -201,6 +199,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         addMageLabel();
         setAppIcon();
 
+		//PlayerPanelNew n = new PlayerPanelNew();
+		//n.setBounds(100,100,100,300);
+		//n.setVisible(true);
+		//backgroundPane.add(n);
+
         desktopPane.add(ArrowBuilder.getArrowsPanel(), JLayeredPane.DRAG_LAYER);
 
         desktopPane.addComponentListener(new ComponentAdapter() {
@@ -208,13 +211,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             public void componentResized(ComponentEvent e) {
                 int width = ((JComponent) e.getSource()).getWidth();
                 int height = ((JComponent) e.getSource()).getHeight();
-                SettingsManager.getInstance().setScreenWidthAndHeight(width, height);
-				if (!liteMode) {
+				if (!liteMode)
 					backgroundPane.setSize(width, height);
-                }
                 JPanel arrowsPanel = ArrowBuilder.getArrowsPanelRef();
                 if (arrowsPanel != null) arrowsPanel.setSize(width, height);
                 if (title != null) {
+                    //title.setBorder(BorderFactory.createLineBorder(Color.red));
                     title.setBounds((int) (width - titleRectangle.getWidth()) / 2, (int) (height - titleRectangle.getHeight()) / 2, titleRectangle.width, titleRectangle.height);
                 }
             }
@@ -759,8 +761,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 	}//GEN-LAST:event_btnCollectionViewerActionPerformed
 
 	private void btnPreferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreferencesActionPerformed
-		//PhasesDialog.main(new String[]{});
-		PreferencesDialog.main(new String[]{});
+		PhasesDialog.main(new String[]{});
 	}//GEN-LAST:event_btnPreferencesActionPerformed
 
     public void exitApp() {

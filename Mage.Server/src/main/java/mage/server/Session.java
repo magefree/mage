@@ -30,12 +30,13 @@ package mage.server;
 
 import java.util.Date;
 import java.util.UUID;
-import mage.cards.decks.Deck;
-import mage.interfaces.callback.CallbackServerSession;
+import mage.MageException;
 import mage.interfaces.callback.ClientCallback;
-import mage.server.game.GameManager;
-import mage.view.TableClientMessage;
 import org.apache.log4j.Logger;
+import org.jboss.remoting.callback.AsynchInvokerCallbackHandler;
+import org.jboss.remoting.callback.Callback;
+import org.jboss.remoting.callback.HandleCallbackException;
+import org.jboss.remoting.callback.InvokerCallbackHandler;
 
 /**
  *
@@ -45,124 +46,73 @@ public class Session {
 
 	private final static Logger logger = Logger.getLogger(Session.class);
 
-	private UUID sessionId;
-	private UUID clientId;
-	private String username;
+	private String sessionId;
+	private UUID userId;
 	private String host;
 	private int messageId = 0;
-	private String ackMessage;
 	private Date timeConnected;
-	private long lastPing;
 	private boolean isAdmin = false;
-	private final CallbackServerSession callback = new CallbackServerSession();
+	private AsynchInvokerCallbackHandler callbackHandler;
 
-	public Session(String userName, String host, UUID clientId) {
-		sessionId = UUID.randomUUID();
-		this.username = userName;
-		this.host = host;
-		this.clientId = clientId;
+	public Session(String sessionId, InvokerCallbackHandler callbackHandler) {
+		this.sessionId = sessionId;
+		this.callbackHandler = (AsynchInvokerCallbackHandler) callbackHandler;
 		this.isAdmin = false;
 		this.timeConnected = new Date();
-		ping();
 	}
-
-	public Session(String host) {
-		sessionId = UUID.randomUUID();
-		this.username = "Admin";
-		this.host = host;
+	
+	public void registerUser(String userName) throws MageException {
+		this.isAdmin = false;
+		if (userName.equals("Admin"))
+			throw new MageException("User name already in use");
+		User user = UserManager.getInstance().createUser(userName, host);
+		if (user == null) {  // user already exists
+			user = UserManager.getInstance().findUser(userName);
+			if (user.getHost().equals(host)) {
+				if (user.getSessionId().isEmpty())
+					logger.info("Reconnecting session for " + userName);
+				else
+					throw new MageException("This machine is already connected");
+			}
+			else {
+				throw new MageException("User name already in use");
+			}
+		}
+		if (!UserManager.getInstance().connectToSession(sessionId, user.getId()))
+			throw new MageException("Error connecting");
+		this.userId = user.getId();
+	}
+	
+	public void registerAdmin() {
 		this.isAdmin = true;
-		this.timeConnected = new Date();
-		ping();
+		User user = UserManager.getInstance().createUser("Admin", host);
+		this.userId = user.getId();
 	}
-
-	public UUID getId() {
+	
+	public String getId() {
 		return sessionId;
 	}
-
-	public UUID getClientId() {
-		return clientId;
+		
+	public void disconnect() {
+		UserManager.getInstance().disconnect(userId);
 	}
-
+	
 	public void kill() {
-		callback.destroy();
-		SessionManager.getInstance().removeSession(sessionId);
-		TableManager.getInstance().removeSession(sessionId);
-		GameManager.getInstance().removeSession(sessionId);
-		ChatManager.getInstance().removeSession(sessionId);
+		UserManager.getInstance().removeUser(userId);
 	}
-
-	public ClientCallback callback() {
+	
+	synchronized void fireCallback(final ClientCallback call) {
 		try {
-			return callback.callback();
-		} catch (InterruptedException ex) {
-			logger.fatal("Session callback error", ex);
-		}
-		return null;
-	}
-
-	public synchronized void fireCallback(final ClientCallback call) {
-		call.setMessageId(messageId++);
-		if (logger.isDebugEnabled())
-			logger.debug(sessionId + " - " + call.getMessageId() + " - " + call.getMethod());
-		try {
-			callback.setCallback(call);
-		} catch (InterruptedException ex) {
+			call.setMessageId(messageId++);
+			callbackHandler.handleCallbackOneway(new Callback(call));
+		} catch (HandleCallbackException ex) {
 			logger.fatal("Session fireCallback error", ex);
+			disconnect();
 		}
 	}
 
-	public void gameStarted(final UUID gameId, final UUID playerId) {
-		fireCallback(new ClientCallback("startGame", gameId, new TableClientMessage(gameId, playerId)));
-	}
-
-	public void draftStarted(final UUID draftId, final UUID playerId) {
-		fireCallback(new ClientCallback("startDraft", draftId, new TableClientMessage(draftId, playerId)));
-	}
-
-	public void tournamentStarted(final UUID tournamentId, final UUID playerId) {
-		fireCallback(new ClientCallback("startTournament", tournamentId, new TableClientMessage(tournamentId, playerId)));
-	}
-
-	public void sideboard(final Deck deck, final UUID tableId, final int time) {
-		fireCallback(new ClientCallback("sideboard", tableId, new TableClientMessage(deck, tableId, time)));
-	}
-
-	public void construct(final Deck deck, final UUID tableId, final int time) {
-		fireCallback(new ClientCallback("construct", tableId, new TableClientMessage(deck, tableId, time)));
-	}
-
-	public void watchGame(final UUID gameId) {
-		fireCallback(new ClientCallback("watchGame", gameId));
-	}
-
-	public void replayGame(final UUID gameId) {
-		fireCallback(new ClientCallback("replayGame", gameId));
-	}
-
-	public void ack(String message) {
-		this.ackMessage = message;
-	}
-
-	public String getAckMessage() {
-		return ackMessage;
-	}
-
-	public void clearAck() {
-		this.ackMessage = "";
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void ping() {
-		this.lastPing = System.currentTimeMillis();
-		if (logger.isTraceEnabled())
-			logger.trace("Ping received from" + username + ":" + sessionId);
-	}
-
-	public boolean stillAlive() {
-		return (System.currentTimeMillis() - lastPing) < 60000;
+	public UUID getUserId() {
+		return userId;
 	}
 
 	public boolean isAdmin() {
@@ -175,5 +125,9 @@ public class Session {
 	
 	public Date getConnectionTime() {
 		return timeConnected;
+	}
+
+	void setHost(String hostAddress) {
+		this.host = hostAddress;
 	}
 }

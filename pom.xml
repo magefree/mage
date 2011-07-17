@@ -5,7 +5,7 @@
 	
     <groupId>org.mage</groupId>
     <artifactId>mage-root</artifactId>
-    <version>0.7.4</version>
+    <version>0.8.0</version>
     <packaging>pom</packaging>
     <name>Mage Root</name>
     <description>Mage Root POM</description>
@@ -31,10 +31,39 @@
         <module>Mage.Plugins</module>
         <module>Mage.Server.Plugins</module>
 		<module>Mage.Server.Console</module>
-		<module>Mage.Tests</module>
      </modules>
 
     <repositories>
+       <repository>
+            <id>jboss-public-repository</id>
+            <name>JBoss Repository</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public</url>
+            <!-- These optional flags are designed to speed up your builds by reducing remote server calls -->
+            <releases>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <updatePolicy>daily</updatePolicy>
+            </snapshots>
+        </repository>
+        
+         <repository>
+              <id>jboss-deprecated-repository-group</id>
+              <name>JBoss Deprecated Maven Repository Group</name>
+              <url>https://repository.jboss.org/nexus/content/repositories/deprecated/</url>
+              <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+              </releases>
+              <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+              </snapshots>
+            </repository>  
+        <repository>
+            <id>sonatype-org</id>
+            <url>https://maven.nuxeo.org/nexus/content/repositories/public/org/</url>
+        </repository>
         <repository>
             <id>mage.googlecode.com</id>
             <url>https://mage.googlecode.com/hg/repository/</url>
@@ -48,7 +77,7 @@
           <id>akathist-repository</id>
           <name>Akathist Repository</name>
           <url>http://www.9stmaryrd.com/maven</url>
-      </repository>
+        </repository>
     </repositories>
 
     <pluginRepositories>
@@ -60,6 +89,6 @@
   </pluginRepositories>
 
     <properties>
-        <mage-version>0.7.4</mage-version>
+        <mage-version>0.8.0</mage-version>
     </properties>
 </project>

@@ -30,8 +30,7 @@ package mage.server.game;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import mage.MageException;
-import mage.server.SessionManager;
+import mage.server.UserManager;
 
 /**
  *
@@ -48,26 +47,26 @@ public class ReplayManager {
 
 	private ConcurrentHashMap<String, ReplaySession> replaySessions = new ConcurrentHashMap<String, ReplaySession>();
 
-	public void replayGame(UUID gameId, UUID sessionId) {
-		ReplaySession replaySession = new ReplaySession(gameId, sessionId);
-		replaySessions.put(gameId.toString() + sessionId.toString(), replaySession);
-		SessionManager.getInstance().getSession(sessionId).replayGame(gameId);
+	public void replayGame(UUID gameId, UUID userId) {
+		ReplaySession replaySession = new ReplaySession(gameId, userId);
+		replaySessions.put(gameId.toString() + userId.toString(), replaySession);
+		UserManager.getInstance().getUser(userId).replayGame(gameId);
 	}
 
-	public void startReplay(UUID gameId, UUID sessionId) {
-		replaySessions.get(gameId.toString() + sessionId.toString()).replay();
+	public void startReplay(UUID gameId, UUID userId) {
+		replaySessions.get(gameId.toString() + userId.toString()).replay();
 	}
 
-	public void stopReplay(UUID gameId, UUID sessionId) {
-		replaySessions.get(gameId.toString() + sessionId.toString()).stop();
+	public void stopReplay(UUID gameId, UUID userId) {
+		replaySessions.get(gameId.toString() + userId.toString()).stop();
 	}
 
-	public void nextPlay(UUID gameId, UUID sessionId) {
-		replaySessions.get(gameId.toString() + sessionId.toString()).next();
+	public void nextPlay(UUID gameId, UUID userId) {
+		replaySessions.get(gameId.toString() + userId.toString()).next();
 	}
 
-	public void previousPlay(UUID gameId, UUID sessionId) {
-		replaySessions.get(gameId.toString() + sessionId.toString()).previous();
+	public void previousPlay(UUID gameId, UUID userId) {
+		replaySessions.get(gameId.toString() + userId.toString()).previous();
 	}
 
 }
