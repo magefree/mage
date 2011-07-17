@@ -26,7 +26,7 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.championsofkamigawa;
+package mage.sets.apocalypse;
 
 import java.util.UUID;
 
@@ -34,48 +34,48 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.counters.CounterType;
 
 /**
  * @author Loki
  */
-public class AzamiLadyOfScrolls extends CardImpl<AzamiLadyOfScrolls> {
+public class Anavolver extends CardImpl<Anavolver> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
-
-    static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Wizard");
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+    public Anavolver(UUID ownerId) {
+        super(ownerId, 75, "Anavolver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "APC";
+        this.subtype.add("Volver");
+        this.color.setGreen(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+        Ability firstAbility = new KickerAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), false);
+        firstAbility.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.WhileOnBattlefield));
+        firstAbility.addCost(new ManaCostsImpl("{1}{U}"));
+        this.addAbility(firstAbility);
+        Ability secondAbility = new KickerAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
+        secondAbility.addEffect(new GainAbilitySourceEffect(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new PayLifeCost(3)), Constants.Duration.WhileOnBattlefield));
+        secondAbility.addCost(new ColoredManaCost(Constants.ColoredManaSymbol.B));
+        this.addAbility(secondAbility);
     }
 
-    public AzamiLadyOfScrolls(UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.color.setBlue(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
-    }
-
-    public AzamiLadyOfScrolls(final AzamiLadyOfScrolls card) {
+    public Anavolver(final Anavolver card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyOfScrolls copy() {
-        return new AzamiLadyOfScrolls(this);
+    public Anavolver copy() {
+        return new Anavolver(this);
     }
 
 }

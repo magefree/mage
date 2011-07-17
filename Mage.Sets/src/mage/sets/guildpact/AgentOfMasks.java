@@ -25,57 +25,74 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.guildpact;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.game.Game;
 
 /**
+ *
  * @author Loki
  */
-public class AzamiLadyOfScrolls extends CardImpl<AzamiLadyOfScrolls> {
+public class AgentOfMasks extends CardImpl<AgentOfMasks> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
-
-    static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Wizard");
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
-    public AzamiLadyOfScrolls(UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
+    public AgentOfMasks(UUID ownerId) {
+        super(ownerId, 100, "Agent of Masks", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");
+        this.expansionSetCode = "GPT";
         this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.color.setBlue(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+        this.subtype.add("Advisor");
+        this.color.setBlack(true);
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AgentOfMasksEffect(), Constants.TargetController.YOU, false));
     }
 
-    public AzamiLadyOfScrolls(final AzamiLadyOfScrolls card) {
+    public AgentOfMasks(final AgentOfMasks card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyOfScrolls copy() {
-        return new AzamiLadyOfScrolls(this);
+    public AgentOfMasks copy() {
+        return new AgentOfMasks(this);
+    }
+}
+
+class AgentOfMasksEffect extends OneShotEffect<AgentOfMasksEffect> {
+    public AgentOfMasksEffect() {
+        super(Constants.Outcome.Damage);
     }
 
+    public AgentOfMasksEffect(final AgentOfMasksEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int loseLife = 0;
+        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+            loseLife += game.getPlayer(opponentId).loseLife(1, game);
+        }
+        if (loseLife > 0)
+            game.getPlayer(source.getControllerId()).gainLife(loseLife, game);
+        return true;
+    }
+
+    @Override
+    public AgentOfMasksEffect copy() {
+        return new AgentOfMasksEffect(this);
+    }
+
+    @Override
+    public String getText(Ability source) {
+        return "each opponent loses 1 life. You gain life equal to the life lost this way";
+    }
 }

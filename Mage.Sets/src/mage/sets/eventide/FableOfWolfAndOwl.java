@@ -25,57 +25,64 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.eventide;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.ObjectColor;
+import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.FilterCard;
+import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WolfToken;
 
 /**
  * @author Loki
  */
-public class AzamiLadyOfScrolls extends CardImpl<AzamiLadyOfScrolls> {
+public class FableOfWolfAndOwl extends CardImpl<FableOfWolfAndOwl> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
+    private final static FilterCard filterGreenSpell = new FilterCard("a green spell");
+    private final static FilterCard filterBlueSpell = new FilterCard("a blue spell");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Wizard");
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filterGreenSpell.setUseColor(true);
+        filterGreenSpell.setColor(ObjectColor.GREEN);
+        filterBlueSpell.setUseColor(true);
+        filterBlueSpell.setColor(ObjectColor.BLUE);
     }
 
-    public AzamiLadyOfScrolls(UUID ownerId) {
-        super(ownerId, 52, "Azami, Lady of Scrolls", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{U}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
+    public FableOfWolfAndOwl(UUID ownerId) {
+        super(ownerId, 150, "Fable of Wolf and Owl", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G/U}{G/U}{G/U}");
+        this.expansionSetCode = "EVE";
         this.color.setBlue(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+        this.color.setGreen(true);
+        this.addAbility(new SpellCastTriggeredAbility(new CreateTokenEffect(new WolfToken(), 1), filterGreenSpell, true));
+        this.addAbility(new SpellCastTriggeredAbility(new CreateTokenEffect(new OwlToken(), 1), filterBlueSpell, true));
     }
 
-    public AzamiLadyOfScrolls(final AzamiLadyOfScrolls card) {
+    public FableOfWolfAndOwl(final FableOfWolfAndOwl card) {
         super(card);
     }
 
     @Override
-    public AzamiLadyOfScrolls copy() {
-        return new AzamiLadyOfScrolls(this);
+    public FableOfWolfAndOwl copy() {
+        return new FableOfWolfAndOwl(this);
     }
+}
 
+class OwlToken extends Token {
+    OwlToken() {
+        super("Bird", "1/1 blue Bird creature token with flying");
+        cardType.add(CardType.CREATURE);
+        color.setBlue(true);
+        subtype.add("Bird");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+        this.addAbility(FlyingAbility.getInstance());
+    }
 }
