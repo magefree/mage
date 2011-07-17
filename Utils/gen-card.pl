@@ -175,14 +175,14 @@ foreach my $setName (keys %{$cards{$cardName}}) {
 
                 my $notKeyWord;
                 foreach my $keyword (keys %keywords) {
-                    if (index(toCamelCase($ability), $keyword) eq 0) {
-                        $notKeyWord = 'no';
+                    if (toCamelCase($ability) =~ m/^$keyword(?=[A-Z{\d]|$)/g) {
+                        $notKeyWord = 'false';
                         my @ka = split(', ', $ability);
                         foreach my $kw (@ka) {
                             my $kwUnchanged = $kw;
-                            foreach my $keyword (keys %keywords) {
-                                if (index(toCamelCase($kw), $keyword) eq 0) {
-                                    $kw = $keyword;
+                            foreach my $kk (keys %keywords) {
+                                if (toCamelCase($kw) =~ m/^$kk(?=[A-Z{\d]|$)/g) {
+                                    $kw = $kk;
                                 }
                             }
                             if ($keywords{$kw}) {
