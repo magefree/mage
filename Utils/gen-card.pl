@@ -25,6 +25,12 @@ sub toCamelCase {
     $string;
 }
 
+sub fixCost {
+    my $string = $_[0];
+    $string =~ s/{([BUGRW])([BUGRW])}/{$1\/$2}/g;
+    $string;
+}
+
 my $author;
 if (-e $authorFile) {
     open (DATA, $authorFile);
@@ -133,7 +139,7 @@ foreach my $setName (keys %{$cards{$cardName}}) {
         if (!$baseRarity) {
             $baseRarity = $cards{$cardName}{$setName}[3];
             
-            $vars{'manaCost'} = $cards{$cardName}{$setName}[4];
+            $vars{'manaCost'} = fixCost($cards{$cardName}{$setName}[4]);
             $vars{'power'} = $cards{$cardName}{$setName}[6];
             $vars{'toughness'} = $cards{$cardName}{$setName}[7];
 
@@ -195,7 +201,7 @@ foreach my $setName (keys %{$cards{$cardName}}) {
                                     $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(' . $1 . '));';
                                 } elsif ($keywords{$kw} eq 'cost') {
                                     $ability =~ m/({.*})/g;
-                                    $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(new ManaCostsImpl("' . $1 . '")));';
+                                    $vars{'abilities'} .= "\n        this.addAbility(new " . $kw . 'Ability(new ManaCostsImpl("' . fixCost($1) . '")));';
                                     $vars{'abilitiesImports'} .= "\nimport mage.abilities.costs.mana.ManaCostsImpl;";
                                 }
                                 
@@ -234,7 +240,7 @@ foreach my $setName (keys %{$cards{$cardName}}) {
         }
 
         open CARD, "> $fileName";
-        print CARD $result; 
+        print CARD $result;
         close CARD;
 
         print "$vars{'set'}.$vars{'className'}\n";
