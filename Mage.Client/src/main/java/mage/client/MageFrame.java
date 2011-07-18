@@ -82,6 +82,7 @@ import mage.client.remote.CallbackClientImpl;
 import mage.client.table.TablesPane;
 import mage.client.tournament.TournamentPane;
 import mage.client.tournament.TournamentPanel;
+import mage.client.util.SettingsManager;
 import mage.game.match.MatchOptions;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.CallbackClient;
@@ -173,7 +174,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         initComponents();
         setSize(1024, 768);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		SettingsManager.getInstance().setScreenWidthAndHeight(1024, 768);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         session = new Session(this);
 		callbackClient = new CallbackClientImpl(this);
@@ -211,8 +213,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             public void componentResized(ComponentEvent e) {
                 int width = ((JComponent) e.getSource()).getWidth();
                 int height = ((JComponent) e.getSource()).getHeight();
-				if (!liteMode)
-					backgroundPane.setSize(width, height);
+                SettingsManager.getInstance().setScreenWidthAndHeight(width, height);
+				if (!liteMode) {
+ 					backgroundPane.setSize(width, height);
+                }
                 JPanel arrowsPanel = ArrowBuilder.getArrowsPanelRef();
                 if (arrowsPanel != null) arrowsPanel.setSize(width, height);
                 if (title != null) {
@@ -761,7 +765,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 	}//GEN-LAST:event_btnCollectionViewerActionPerformed
 
 	private void btnPreferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreferencesActionPerformed
-		PhasesDialog.main(new String[]{});
+		PreferencesDialog.main(new String[]{});
 	}//GEN-LAST:event_btnPreferencesActionPerformed
 
     public void exitApp() {
