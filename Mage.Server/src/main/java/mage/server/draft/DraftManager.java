@@ -48,36 +48,36 @@ public class DraftManager {
 
 	private ConcurrentHashMap<UUID, DraftController> draftControllers = new ConcurrentHashMap<UUID, DraftController>();
 
-	public UUID createDraftSession(Draft draft, ConcurrentHashMap<UUID, UUID> sessionPlayerMap, UUID tableId) {
-		DraftController draftController = new DraftController(draft, sessionPlayerMap, tableId);
+	public UUID createDraftSession(Draft draft, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
+		DraftController draftController = new DraftController(draft, userPlayerMap, tableId);
 		draftControllers.put(draft.getId(), draftController);
 		return draftController.getSessionId();
 	}
 
-	public void joinDraft(UUID draftId, UUID sessionId) {
-		draftControllers.get(draftId).join(sessionId);
+	public void joinDraft(UUID draftId, UUID userId) {
+		draftControllers.get(draftId).join(userId);
 	}
 
 	public void destroyChatSession(UUID gameId) {
 		draftControllers.remove(gameId);
 	}
 
-	public DraftPickView sendCardPick(UUID draftId, UUID sessionId, UUID cardId) {
-		return draftControllers.get(draftId).sendCardPick(sessionId, cardId);
+	public DraftPickView sendCardPick(UUID draftId, UUID userId, UUID cardId) {
+		return draftControllers.get(draftId).sendCardPick(userId, cardId);
 	}
 
-	public void removeSession(UUID sessionId) {
+	public void removeSession(UUID userId) {
 		for (DraftController controller: draftControllers.values()) {
-			controller.kill(sessionId);
+			controller.kill(userId);
 		}
 	}
 
-	public void kill(UUID draftId, UUID sessionId) {
-		draftControllers.get(draftId).kill(sessionId);
+	public void kill(UUID draftId, UUID userId) {
+		draftControllers.get(draftId).kill(userId);
 	}
 
-	public void timeout(UUID gameId, UUID sessionId) {
-		draftControllers.get(gameId).timeout(sessionId);
+	public void timeout(UUID gameId, UUID userId) {
+		draftControllers.get(gameId).timeout(userId);
 	}
 
 	public void removeDraft(UUID draftId) {

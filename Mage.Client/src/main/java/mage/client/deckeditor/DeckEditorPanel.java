@@ -227,10 +227,13 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				@Override
 				public void event(Event event) {
 					if (event.getEventName().equals("double-click")) {
+						//boolean isListView = cardSelector.getCardsList() instanceof TableModel;
 						for (Card card: deck.getSideboard()) {
 							if (card.getId().equals(event.getSource())) {
 								deck.getSideboard().remove(card);
+								//if (!isListView) {
 								deck.getCards().add(card);
+								//}
 								break;
 							}
 						}
@@ -248,7 +251,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 	private void hidePopup() {
 		Plugins.getInstance().getActionCallback().mouseExited(null, null);
 	}
-
+	
 	public void hideDeckEditor() {
 		Component c = this.getParent();
 		while (c != null && !(c instanceof DeckEditorPane)) {

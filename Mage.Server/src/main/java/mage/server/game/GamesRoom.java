@@ -45,14 +45,14 @@ import mage.view.TableView;
 public interface GamesRoom extends Room {
 
 	public List<TableView> getTables();
-	public boolean joinTable(UUID sessionId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException;
-	public boolean joinTournamentTable(UUID sessionId, UUID tableId, String name, String playerType, int skill) throws GameException;
-	public TableView createTable(UUID sessionId, MatchOptions options);
-	public TableView createTournamentTable(UUID sessionId, TournamentOptions options);
-	public void removeTable(UUID sessionId, UUID tableId);
+	public boolean joinTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException;
+	public boolean joinTournamentTable(UUID userId, UUID tableId, String name, String playerType, int skill) throws GameException;
+	public TableView createTable(UUID userId, MatchOptions options);
+	public TableView createTournamentTable(UUID userId, TournamentOptions options);
+	public void removeTable(UUID userId, UUID tableId);
 	public void removeTable(UUID tableId);
 	public TableView getTable(UUID tableId);
-	public void leaveTable(UUID sessionId, UUID tableId);
-	public boolean watchTable(UUID sessionId, UUID tableId) throws MageException;
+	public void leaveTable(UUID userId, UUID tableId);
+	public boolean watchTable(UUID userId, UUID tableId) throws MageException;
 
 }

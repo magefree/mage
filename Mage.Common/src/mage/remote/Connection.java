@@ -28,9 +28,12 @@
 
 package mage.remote;
 
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import mage.interfaces.Server;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.InterfaceAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 
 /**
  *
@@ -47,20 +50,13 @@ public class Connection {
 	private int proxyPort;
 	private String proxyUsername;
 	private String proxyPassword;
-
-//	protected Server getServer() {
-//		Server server = null;
-//		try {
-//			Registry reg = LocateRegistry.getRegistry(host, port);
-//			server = (Server) reg.lookup("mage-server");
-//		}
-//		catch (Exception ignored) {}
-//		return server;
-//	}
+	
+	private static final String serialization = "?serializationtype=jboss";
+	private static final String transport = "bisocket";
 
 	@Override
 	public int hashCode() {
-		return (host + Integer.toString(port) + proxyType.toString()).hashCode();	
+		return (transport + host + Integer.toString(port) + proxyType.toString()).hashCode();	
 	}
 
 	@Override
@@ -74,11 +70,18 @@ public class Connection {
 
 	@Override
 	public String toString() {
-		return host + ":" + Integer.toString(port);
+		return host + ":" + Integer.toString(port) + "/" + serialization;
 	}
 
 	public String getURI() {
-		return "bisocket://" + host + ":" + port;
+		if (host.equals("localhost")) {
+			try {
+				return transport + "://" + getLocalAddress().getHostAddress() + ":" + port + "/" + serialization;
+			} catch (SocketException ex) {
+				// just use localhost if can't find local ip
+			}
+		}
+		return transport + "://" + host + ":" + port + "/" + serialization;
 	}
 	
 	public ProxyType getProxyType() {
@@ -173,6 +176,22 @@ public class Connection {
 
 	public void setProxyPassword(String proxyPassword) {
 		this.proxyPassword = proxyPassword;
+	}
+	
+	public static InetAddress getLocalAddress() throws SocketException {
+		for (Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces(); interfaces.hasMoreElements(); ) {
+			NetworkInterface iface = interfaces.nextElement( );
+			if (iface.isLoopback())
+				continue;
+			for (InterfaceAddress addr: iface.getInterfaceAddresses())
+			{
+				InetAddress iaddr = addr.getAddress();
+				if (iaddr instanceof Inet4Address) {
+					return iaddr;
+				}
+			}
+		}
+		return null;
 	}
 
 }

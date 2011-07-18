@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-root</artifactId>
-        <version>0.7.4</version>
+        <version>0.8.0</version>
     </parent>
 
     <groupId>org.mage</groupId>
@@ -88,7 +88,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Mage-Card-Plugin</artifactId>
-            <version>0.6</version>
+            <version>0.5</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>

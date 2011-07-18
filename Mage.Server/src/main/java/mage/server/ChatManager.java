@@ -54,12 +54,12 @@ public class ChatManager {
 		return chatSession.getChatId();
 	}
 
-	public void joinChat(UUID chatId, UUID sessionId, String userName) {
-		chatSessions.get(chatId).join(userName, sessionId);
+	public void joinChat(UUID chatId, UUID userId) {
+		chatSessions.get(chatId).join(userId);
 	}
 
-	public void leaveChat(UUID chatId, UUID sessionId) {
-		chatSessions.get(chatId).kill(sessionId);
+	public void leaveChat(UUID chatId, UUID userId) {
+		chatSessions.get(chatId).kill(userId);
 	}
 
 	public void destroyChatSession(UUID chatId) {
@@ -70,9 +70,27 @@ public class ChatManager {
 		chatSessions.get(chatId).broadcast(userName, message, color);
 	}
 
-	void removeSession(UUID sessionId) {
+	/**
+	 * 
+	 * use mainly for announcing that a user connection was lost or that a user has reconnected
+	 * 
+	 * @param userId
+	 * @param message
+	 * @param color 
+	 */
+	public void broadcast(UUID userId, String message, MessageColor color) {
+		User user = UserManager.getInstance().getUser(userId);
+		if (user != null) {
+			for (ChatSession chat: chatSessions.values()) {
+				if (chat.hasUser(userId))
+					chat.broadcast(user.getName(), message, color);
+			}
+		}
+	}
+
+	void removeUser(UUID userId) {
 		for (ChatSession chat: chatSessions.values()) {
-			chat.kill(sessionId);
+			chat.kill(userId);
 		}
 	}
 }

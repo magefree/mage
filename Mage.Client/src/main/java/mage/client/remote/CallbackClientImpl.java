@@ -80,9 +80,6 @@ public class CallbackClientImpl implements CallbackClient {
 			public void run() {
 				try {
 					logger.info(callback.getMessageId() + " -- " + callback.getMethod());
-					if (callback.getMethod() == null) { // may happen on disconnect
-						return;
-					}
 					if (callback.getMethod().equals("startGame")) {
 						TableClientMessage message = (TableClientMessage) callback.getData();
 						GameManager.getInstance().setCurrentPlayerUUID(message.getPlayerId());
@@ -247,7 +244,10 @@ public class CallbackClientImpl implements CallbackClient {
 						}
 					}
 					else if (callback.getMethod().equals("draftInit")) {
-
+						DraftClientMessage message = (DraftClientMessage) callback.getData();
+						DraftPanel panel = frame.getDraft(callback.getObjectId());
+						if (panel != null)
+							panel.loadBooster(message.getDraftPickView());
 					}
 					else if (callback.getMethod().equals("tournamentInit")) {
 
