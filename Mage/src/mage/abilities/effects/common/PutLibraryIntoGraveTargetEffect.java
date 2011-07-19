@@ -82,22 +82,29 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect<PutLibraryInt
 		return true;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Target ").append(source.getTargets().get(0).getTargetName());
-		sb.append(" puts the top ");
-		if (amount instanceof StaticValue && amount.calculate(null, null) == 1)
-			sb.append(amount).append(" card ");
-		else
-			sb.append(amount).append(" X cards ");
-		sb.append("of his or her library into his or her graveyard");
+    @Override
+    public String getText(Ability source) {
+        StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
+
+        sb.append("Target ").append(source.getTargets().get(0).getTargetName());
+        sb.append(" puts the top ");
+        if (message.isEmpty() || !message.equals("1")) {
+            if (amount.toString().equals("1")) {
+                sb.append("card ");
+            } else {
+                sb.append(amount.toString()).append(" cards ");
+            }
+        } else {
+            sb.append(" X cards ");
+        }
+        sb.append("of his or her library into his or her graveyard");
+
         if (message.length() > 0) {
             sb.append(", where X is the number of ");
+            sb.append(message);
         }
-        sb.append(message);
-		return sb.toString();
-	}
+        return sb.toString();
+    }
 
 }
