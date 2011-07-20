@@ -55,6 +55,8 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.Serializable;
 import java.util.*;
 import java.util.List;
@@ -594,11 +596,12 @@ public class GamePanel extends javax.swing.JPanel {
 		bigCard.setBorder(new LineBorder(Color.black, 1, true));
 
         btnConcede.setText("Concede");
-        btnConcede.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConcedeActionPerformed(evt);
-            }
-        });
+		btnConcede.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+				btnConcedeActionPerformed(null);
+			}
+		});
 
         btnStopWatching.setText("Stop Watching");
         btnStopWatching.addActionListener(new java.awt.event.ActionListener() {
