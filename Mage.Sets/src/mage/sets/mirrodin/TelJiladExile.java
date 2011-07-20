@@ -25,34 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class TelJiladExile extends CardImpl<TelJiladExile> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public TelJiladExile(UUID ownerId) {
+        super(ownerId, 133, "Tel-Jilad Exile", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Troll");
+        this.subtype.add("Warrior");
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
     }
 
-    public Lure (final Lure card) {
+    public TelJiladExile(final TelJiladExile card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public TelJiladExile copy() {
+        return new TelJiladExile(this);
     }
-
 }

@@ -25,34 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.tenth;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class ShivanDragon extends CardImpl<ShivanDragon> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
+    public ShivanDragon(UUID ownerId) {
+        super(ownerId, 230, "Shivan Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         this.expansionSetCode = "10E";
-
+        this.subtype.add("Dragon");
+        this.color.setRed(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Constants.Duration.EndOfTurn), new ColoredManaCost(Constants.ColoredManaSymbol.R)));
     }
 
-    public Lure (final Lure card) {
+    public ShivanDragon(final ShivanDragon card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public ShivanDragon copy() {
+        return new ShivanDragon(this);
     }
-
 }

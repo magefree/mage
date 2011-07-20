@@ -25,34 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class LeoninSunStandard extends CardImpl<LeoninSunStandard> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public LeoninSunStandard(UUID ownerId) {
+        super(ownerId, 194, "Leonin Sun Standard", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "MRD";
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault(), false), new ManaCostsImpl("{1}{W}")));
     }
 
-    public Lure (final Lure card) {
+    public LeoninSunStandard(final LeoninSunStandard card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public LeoninSunStandard copy() {
+        return new LeoninSunStandard(this);
     }
-
 }

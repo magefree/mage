@@ -25,34 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class PredatorsStrike extends CardImpl<PredatorsStrike> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public PredatorsStrike(UUID ownerId) {
+        super(ownerId, 128, "Predator's Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
+        this.expansionSetCode = "MRD";
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Lure (final Lure card) {
+    public PredatorsStrike(final PredatorsStrike card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public PredatorsStrike copy() {
+        return new PredatorsStrike(this);
     }
-
 }

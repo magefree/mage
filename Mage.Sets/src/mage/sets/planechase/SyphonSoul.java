@@ -25,34 +25,68 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.planechase;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.game.Game;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class SyphonSoul extends CardImpl<SyphonSoul> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public SyphonSoul(UUID ownerId) {
+        super(ownerId, 43, "Syphon Soul", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
+        this.expansionSetCode = "HOP";
+        this.color.setBlack(true);
+        this.getSpellAbility().addEffect(new SyphonSoulEffect());
     }
 
-    public Lure (final Lure card) {
+    public SyphonSoul(final SyphonSoul card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public SyphonSoul copy() {
+        return new SyphonSoul(this);
+    }
+}
+
+class SyphonSoulEffect extends OneShotEffect<SyphonSoulEffect> {
+    public SyphonSoulEffect() {
+        super(Constants.Outcome.Damage);
     }
 
+    public SyphonSoulEffect(final SyphonSoulEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int loseLife = 0;
+        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+            loseLife += game.getPlayer(opponentId).loseLife(2, game);
+        }
+        if (loseLife > 0)
+            game.getPlayer(source.getControllerId()).gainLife(loseLife, game);
+        return true;
+    }
+
+    @Override
+    public SyphonSoulEffect copy() {
+        return new SyphonSoulEffect(this);
+    }
+
+    @Override
+    public String getText(Ability source) {
+        return "{this} deals 2 damage to each other player. You gain life equal to the damage dealt this way";
+    }
 }

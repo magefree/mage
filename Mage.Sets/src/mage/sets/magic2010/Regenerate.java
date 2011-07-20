@@ -25,34 +25,35 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class Regenerate extends CardImpl<Regenerate> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public Regenerate(UUID ownerId) {
+        super(ownerId, 202, "Regenerate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
+        this.expansionSetCode = "M10";
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new RegenerateTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Lure (final Lure card) {
+    public Regenerate(final Regenerate card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public Regenerate copy() {
+        return new Regenerate(this);
     }
-
 }

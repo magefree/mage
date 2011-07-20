@@ -25,34 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.ravnika;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class SparkmageApprentice extends mage.sets.magic2010.SparkmageApprentice {
 
-    public Lure (UUID ownerId) {
+    public SparkmageApprentice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+        this.cardNumber = 144;
+        this.expansionSetCode = "RAV";
     }
 
-    public Lure (final Lure card) {
+    public SparkmageApprentice(final SparkmageApprentice card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public SparkmageApprentice copy() {
+        return new SparkmageApprentice(this);
     }
-
 }

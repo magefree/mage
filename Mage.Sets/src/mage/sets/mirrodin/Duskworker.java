@@ -25,34 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class Duskworker extends CardImpl<Duskworker> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public Duskworker(UUID ownerId) {
+        super(ownerId, 166, "Duskworker", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Construct");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+        this.addAbility(new BecomesBlockedTriggeredAbility(new RegenerateSourceEffect(), false));
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Constants.Duration.EndOfTurn), new GenericManaCost(3)));
     }
 
-    public Lure (final Lure card) {
+    public Duskworker(final Duskworker card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public Duskworker copy() {
+        return new Duskworker(this);
     }
-
 }

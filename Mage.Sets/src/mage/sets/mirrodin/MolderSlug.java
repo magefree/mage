@@ -25,34 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
+import mage.target.TargetPermanent;
 
 /**
- *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class MolderSlug extends CardImpl<MolderSlug> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
+    private final static FilterPermanent filter = new FilterPermanent("artifact");
 
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public Lure (final Lure card) {
+    public MolderSlug(UUID ownerId) {
+        super(ownerId, 125, "Molder Slug", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Slug");
+        this.subtype.add("Beast");
+        this.color.setGreen(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(6);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, "that player"), Constants.TargetController.ANY, false);
+        this.addAbility(ability);
+    }
+
+    public MolderSlug(final MolderSlug card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public MolderSlug copy() {
+        return new MolderSlug(this);
     }
-
 }

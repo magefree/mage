@@ -25,34 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
+import mage.target.TargetPermanent;
 
 /**
- *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class AuriokTransfixer extends CardImpl<AuriokTransfixer> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
+    private final static FilterPermanent filter = new FilterPermanent("artifact");
 
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public Lure (final Lure card) {
+    public AuriokTransfixer(UUID ownerId) {
+        super(ownerId, 5, "Auriok Transfixer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Human");
+        this.subtype.add("Scout");
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new TapTargetEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.W));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public AuriokTransfixer(final AuriokTransfixer card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public AuriokTransfixer copy() {
+        return new AuriokTransfixer(this);
     }
-
 }

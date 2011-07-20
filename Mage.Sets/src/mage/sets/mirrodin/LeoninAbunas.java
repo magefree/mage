@@ -25,34 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
- *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class LeoninAbunas extends CardImpl<LeoninAbunas> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Artifacts you control");
 
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
     }
 
-    public Lure (final Lure card) {
+    public LeoninAbunas(UUID ownerId) {
+        super(ownerId, 8, "Leonin Abunas", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Cat");
+        this.subtype.add("Cleric");
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(5);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(new HexproofAbility(), Constants.Duration.WhileOnBattlefield, filter, false)));
+    }
+
+    public LeoninAbunas(final LeoninAbunas card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public LeoninAbunas copy() {
+        return new LeoninAbunas(this);
     }
-
 }

@@ -25,34 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class Tanglebloom extends CardImpl<Tanglebloom> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public Tanglebloom(UUID ownerId) {
+        super(ownerId, 258, "Tanglebloom", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
+        this.expansionSetCode = "MRD";
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainLifeEffect(1), new GenericManaCost(1));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+        // {1}, {tap}: You gain 1 life.
     }
 
-    public Lure (final Lure card) {
+    public Tanglebloom(final Tanglebloom card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public Tanglebloom copy() {
+        return new Tanglebloom(this);
     }
-
 }

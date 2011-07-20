@@ -25,34 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class TrollsOfTelJilad extends CardImpl<TrollsOfTelJilad> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("green creature");
 
+    static {
+        filter.setUseColor(true);
+        filter.getColor().setGreen(true);
     }
 
-    public Lure (final Lure card) {
+    public TrollsOfTelJilad(UUID ownerId) {
+        super(ownerId, 136, "Trolls of Tel-Jilad", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Troll");
+        this.subtype.add("Shaman");
+        this.color.setGreen(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(6);
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{1}{G}"));
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public TrollsOfTelJilad(final TrollsOfTelJilad card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public TrollsOfTelJilad copy() {
+        return new TrollsOfTelJilad(this);
     }
-
 }

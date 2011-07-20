@@ -25,34 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.continious.BoostEquippedEffect;
+import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 
 /**
- *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class Bonesplitter extends CardImpl<Bonesplitter> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public Bonesplitter(UUID ownerId) {
+        super(ownerId, 146, "Bonesplitter", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Equipment");
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
+        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public Lure (final Lure card) {
+    public Bonesplitter(final Bonesplitter card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public Bonesplitter copy() {
+        return new Bonesplitter(this);
     }
-
 }

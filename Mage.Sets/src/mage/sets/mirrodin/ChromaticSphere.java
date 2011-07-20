@@ -25,34 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class ChromaticSphere extends CardImpl<ChromaticSphere> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public ChromaticSphere(UUID ownerId) {
+        super(ownerId, 151, "Chromatic Sphere", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
+        this.expansionSetCode = "MRD";
+        Ability ability = new AnyColorManaAbility(new GenericManaCost(1));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
+        ability.addEffect(new DrawCardControllerEffect(1));
+        this.addAbility(ability);
     }
 
-    public Lure (final Lure card) {
+    public ChromaticSphere(final ChromaticSphere card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public ChromaticSphere copy() {
+        return new ChromaticSphere(this);
     }
-
 }

@@ -25,34 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.Mana;
+import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class Cathodion extends CardImpl<Cathodion> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public Cathodion(UUID ownerId) {
+        super(ownerId, 149, "Cathodion", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Construct");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 3, 0)), false));
     }
 
-    public Lure (final Lure card) {
+    public Cathodion(final Cathodion card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public Cathodion copy() {
+        return new Cathodion(this);
     }
-
 }

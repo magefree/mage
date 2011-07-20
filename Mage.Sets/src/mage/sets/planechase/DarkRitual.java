@@ -25,34 +25,34 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.planechase;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Mana;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class DarkRitual extends CardImpl<DarkRitual> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public DarkRitual(UUID ownerId) {
+        super(ownerId, 24, "Dark Ritual", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
+        this.expansionSetCode = "HOP";
+        this.color.setBlack(true);
+        this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(0, 0, 0, 0, 3, 0, 0)));
     }
 
-    public Lure (final Lure card) {
+    public DarkRitual(final DarkRitual card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public DarkRitual copy() {
+        return new DarkRitual(this);
     }
-
 }

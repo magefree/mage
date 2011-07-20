@@ -25,34 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class SlithFirewalker extends CardImpl<SlithFirewalker> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public SlithFirewalker(UUID ownerId) {
+        super(ownerId, 107, "Slith Firewalker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{R}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Slith");
+        this.color.setRed(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        this.addAbility(HasteAbility.getInstance());
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false));
     }
 
-    public Lure (final Lure card) {
+    public SlithFirewalker(final SlithFirewalker card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public SlithFirewalker copy() {
+        return new SlithFirewalker(this);
     }
-
 }

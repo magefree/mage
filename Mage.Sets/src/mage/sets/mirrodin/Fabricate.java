@@ -25,34 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.cards.CardImpl;
 
 /**
  *
- * @author Loki
+ * @author anonymous
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class Fabricate extends mage.sets.magic2010.Fabricate {
 
-    public Lure (UUID ownerId) {
+    public Fabricate(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+        this.cardNumber = 35;
+        this.expansionSetCode = "MRD";
     }
 
-    public Lure (final Lure card) {
+    public Fabricate(final Fabricate card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public Fabricate copy() {
+        return new Fabricate(this);
     }
-
 }

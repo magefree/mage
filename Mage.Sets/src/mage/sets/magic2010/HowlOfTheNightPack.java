@@ -25,34 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledPermanent;
+import mage.game.permanent.token.WolfToken;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class HowlOfTheNightPack extends CardImpl<HowlOfTheNightPack> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("for each Forest you control");
 
+    static {
+        filter.getName().add("Forest");
     }
 
-    public Lure (final Lure card) {
+    public HowlOfTheNightPack(UUID ownerId) {
+        super(ownerId, 187, "Howl of the Night Pack", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{6}{G}");
+        this.expansionSetCode = "M10";
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new WolfToken(), new PermanentsOnBattlefieldCount(filter)));
+    }
+
+    public HowlOfTheNightPack(final HowlOfTheNightPack card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public HowlOfTheNightPack copy() {
+        return new HowlOfTheNightPack(this);
     }
-
 }

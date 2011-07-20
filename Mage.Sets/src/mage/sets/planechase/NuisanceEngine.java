@@ -25,34 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.planechase;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.game.permanent.token.Token;
 
 /**
- *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class NuisanceEngine extends CardImpl<NuisanceEngine> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public NuisanceEngine(UUID ownerId) {
+        super(ownerId, 121, "Nuisance Engine", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.expansionSetCode = "HOP";
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new PestToken(), 1), new GenericManaCost(2));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
     }
 
-    public Lure (final Lure card) {
+    public NuisanceEngine(final NuisanceEngine card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public NuisanceEngine copy() {
+        return new NuisanceEngine(this);
+    }
+}
+
+class PestToken extends Token {
+    public PestToken() {
+        super("Pest", "0/1 colorless Pest artifact creature token");
+        cardType.add(Constants.CardType.ARTIFACT);
+        cardType.add(Constants.CardType.CREATURE);
+        subtype.add("Pest");
+        power = new MageInt(0);
+        toughness = new MageInt(1);
     }
 
 }

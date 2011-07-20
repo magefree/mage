@@ -25,34 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class RustsporeRam extends CardImpl<RustsporeRam> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
+    private static final FilterPermanent filter = new FilterPermanent("Equipment");
 
+    static {
+        filter.getSubtype().add("Equipment");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public Lure (final Lure card) {
+    public RustsporeRam(UUID ownerId) {
+        super(ownerId, 235, "Rustspore Ram", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Sheep");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public RustsporeRam(final RustsporeRam card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public RustsporeRam copy() {
+        return new RustsporeRam(this);
     }
-
 }

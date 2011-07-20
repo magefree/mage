@@ -25,34 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Mana;
+import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class Deconstruct extends CardImpl<Deconstruct> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
+    private final static FilterPermanent filter = new FilterPermanent("artifact");
 
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public Lure (final Lure card) {
+    public Deconstruct(UUID ownerId) {
+        super(ownerId, 118, "Deconstruct", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
+        this.expansionSetCode = "MRD";
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(0, 3, 0, 0, 0, 0, 0)));
+    }
+
+    public Deconstruct(final Deconstruct card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public Deconstruct copy() {
+        return new Deconstruct(this);
     }
-
 }

@@ -25,34 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.magic2010;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
- *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class VeteranSwordsmith extends CardImpl<VeteranSwordsmith> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier");
 
+    static {
+        filter.getSubtype().add("Soldier");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public Lure (final Lure card) {
+    public VeteranSwordsmith(UUID ownerId) {
+        super(ownerId, 39, "Veteran Swordsmith", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+        this.color.setWhite(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Constants.Duration.WhileOnBattlefield, filter, true)));
+    }
+
+    public VeteranSwordsmith(final VeteranSwordsmith card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public VeteranSwordsmith copy() {
+        return new VeteranSwordsmith(this);
     }
-
 }

@@ -25,34 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
+
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.common.FilterControlledPermanent;
+import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
- *
- * @author Loki
+ * @author anonymous
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class ShrapnelBlast extends CardImpl<ShrapnelBlast> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public Lure (final Lure card) {
+    public ShrapnelBlast(UUID ownerId) {
+        super(ownerId, 106, "Shrapnel Blast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
+        this.expansionSetCode = "MRD";
+
+        this.color.setRed(true);
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, false)));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(5));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+    }
+
+    public ShrapnelBlast(final ShrapnelBlast card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public ShrapnelBlast copy() {
+        return new ShrapnelBlast(this);
     }
-
 }

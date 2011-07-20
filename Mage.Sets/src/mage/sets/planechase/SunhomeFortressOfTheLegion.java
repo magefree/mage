@@ -25,34 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.planechase;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class SunhomeFortressOfTheLegion extends CardImpl<SunhomeFortressOfTheLegion> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public SunhomeFortressOfTheLegion(UUID ownerId) {
+        super(ownerId, 138, "Sunhome, Fortress of the Legion", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "HOP";
+        this.addAbility(new ColorlessManaAbility());
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Constants.Duration.EndOfTurn), new ManaCostsImpl("{2}{R}{W}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public Lure (final Lure card) {
+    public SunhomeFortressOfTheLegion(final SunhomeFortressOfTheLegion card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public SunhomeFortressOfTheLegion copy() {
+        return new SunhomeFortressOfTheLegion(this);
     }
-
 }

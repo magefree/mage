@@ -25,34 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.magic2010;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class BrambleCreeper extends CardImpl<BrambleCreeper> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public BrambleCreeper(UUID ownerId) {
+        super(ownerId, 171, "Bramble Creeper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Elemental");
+        this.color.setGreen(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(3);
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(5, 0, Constants.Duration.EndOfTurn), false));
     }
 
-    public Lure (final Lure card) {
+    public BrambleCreeper(final BrambleCreeper card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public BrambleCreeper copy() {
+        return new BrambleCreeper(this);
     }
-
 }

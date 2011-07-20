@@ -25,34 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class LeoninScimitar extends mage.sets.tenth.LeoninScimitar {
 
-    public Lure (UUID ownerId) {
+    public LeoninScimitar(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+        this.cardNumber = 193;
+        this.expansionSetCode = "MRD";
+        this.rarity = Rarity.COMMON;
     }
 
-    public Lure (final Lure card) {
+    public LeoninScimitar(final LeoninScimitar card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public LeoninScimitar copy() {
+        return new LeoninScimitar(this);
     }
-
 }

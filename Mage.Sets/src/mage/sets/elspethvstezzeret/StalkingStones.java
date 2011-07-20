@@ -25,34 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.elspethvstezzeret;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class StalkingStones extends mage.sets.tempest.StalkingStones {
 
-    public Lure (UUID ownerId) {
+    public StalkingStones(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+        this.cardNumber = 75;
+        this.expansionSetCode = "DDF";
     }
 
-    public Lure (final Lure card) {
+    public StalkingStones(final StalkingStones card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public StalkingStones copy() {
+        return new StalkingStones(this);
     }
-
 }

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.mirrodin;
 
 import java.util.UUID;
@@ -33,59 +32,57 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
  *
  * @author Loki
  */
-public class ClockworkDragon extends CardImpl<ClockworkDragon> {
+public class ClockworkVorrac extends CardImpl<ClockworkVorrac> {
 
-    public ClockworkDragon (UUID ownerId) {
-        super(ownerId, 155, "Clockwork Dragon", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
+    public ClockworkVorrac(UUID ownerId) {
+        super(ownerId, 156, "Clockwork Vorrac", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
         this.expansionSetCode = "MRD";
-        this.subtype.add("Dragon");
+        this.subtype.add("Boar");
+        this.subtype.add("Beast");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(6)), "{this} enters the battlefield with six +1/+1 counters on it"));
-        this.addAbility(new AttacksOrBlocksTriggeredAbility(new ClockworkDragonEffect(), false));
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new GenericManaCost(3)));
+        this.addAbility(TrampleAbility.getInstance());
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)), "{this} enters the battlefield with four +1/+1 counters on it"));
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(new ClockworkCondorEffect(), false));
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new TapSourceCost()));
     }
 
-    public ClockworkDragon (final ClockworkDragon card) {
+    public ClockworkVorrac(final ClockworkVorrac card) {
         super(card);
     }
 
     @Override
-    public ClockworkDragon copy() {
-        return new ClockworkDragon(this);
+    public ClockworkVorrac copy() {
+        return new ClockworkVorrac(this);
     }
 }
 
-class ClockworkDragonEffect extends OneShotEffect<ClockworkDragonEffect> {
-    ClockworkDragonEffect() {
+class ClockworkVorracEffect extends OneShotEffect<ClockworkVorracEffect> {
+    ClockworkVorracEffect() {
         super(Constants.Outcome.UnboostCreature);
     }
 
-    ClockworkDragonEffect(final ClockworkDragonEffect effect) {
+    ClockworkVorracEffect(final ClockworkVorracEffect effect) {
         super(effect);
     }
 
@@ -102,8 +99,8 @@ class ClockworkDragonEffect extends OneShotEffect<ClockworkDragonEffect> {
     }
 
     @Override
-    public ClockworkDragonEffect copy() {
-        return new ClockworkDragonEffect(this);
+    public ClockworkVorracEffect copy() {
+        return new ClockworkVorracEffect(this);
     }
 
     @Override
@@ -111,3 +108,4 @@ class ClockworkDragonEffect extends OneShotEffect<ClockworkDragonEffect> {
         return "remove a +1/+1 counter from {this} at end of combat";
     }
 }
+

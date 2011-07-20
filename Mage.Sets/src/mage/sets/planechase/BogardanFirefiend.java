@@ -25,34 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.planechase;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class BogardanFirefiend extends CardImpl<BogardanFirefiend> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public BogardanFirefiend(UUID ownerId) {
+        super(ownerId, 48, "Bogardan Firefiend", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "HOP";
+        this.subtype.add("Elemental");
+        this.subtype.add("Spirit");
+        this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+        Ability ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new DamageTargetEffect(2), false);
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
     }
 
-    public Lure (final Lure card) {
+    public BogardanFirefiend(final BogardanFirefiend card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public BogardanFirefiend copy() {
+        return new BogardanFirefiend(this);
     }
-
 }

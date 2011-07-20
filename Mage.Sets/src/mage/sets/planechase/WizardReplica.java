@@ -25,34 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.planechase;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.CounterUnlessPaysEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.target.TargetSpell;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class WizardReplica extends CardImpl<WizardReplica> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public WizardReplica(UUID ownerId) {
+        super(ownerId, 129, "Wizard Replica", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+        this.expansionSetCode = "HOP";
+        this.subtype.add("Wizard");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
+        this.addAbility(FlyingAbility.getInstance());
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(2)), new ColoredManaCost(Constants.ColoredManaSymbol.U));
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetSpell());
+        this.addAbility(ability);
     }
 
-    public Lure (final Lure card) {
+    public WizardReplica(final WizardReplica card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public WizardReplica copy() {
+        return new WizardReplica(this);
     }
-
 }

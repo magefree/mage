@@ -25,34 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.planechase;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterLandCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class SilvergladeElemental extends CardImpl<SilvergladeElemental> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
+    private final static FilterLandCard filter = new FilterLandCard("Forest card");
 
+    static {
+        filter.getName().add("Forest");
     }
 
-    public Lure (final Lure card) {
+    public SilvergladeElemental(UUID ownerId) {
+        super(ownerId, 78, "Silverglade Elemental", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
+        this.expansionSetCode = "HOP";
+        this.subtype.add("Elemental");
+        this.color.setGreen(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false), true));
+    }
+
+    public SilvergladeElemental(final SilvergladeElemental card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public SilvergladeElemental copy() {
+        return new SilvergladeElemental(this);
     }
-
 }

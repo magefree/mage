@@ -25,34 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterControlledPermanent;
+import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class TrashForTreasure extends CardImpl<TrashForTreasure> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
+    private static final FilterControlledPermanent filterPermanent = new FilterControlledPermanent("an artifact");
+    private static final FilterCard filterCard = new FilterCard("artifact");
 
+    static {
+        filterPermanent.getCardType().add(CardType.ARTIFACT);
+        filterPermanent.setScopeCardType(Filter.ComparisonScope.Any);
+        filterCard.getCardType().add(CardType.ARTIFACT);
+        filterCard.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public Lure (final Lure card) {
+    public TrashForTreasure(UUID ownerId) {
+        super(ownerId, 109, "Trash for Treasure", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}");
+        this.expansionSetCode = "MRD";
+        this.color.setRed(true);
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filterPermanent)));
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCardInGraveyard(filterCard));
+    }
+
+    public TrashForTreasure(final TrashForTreasure card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public TrashForTreasure copy() {
+        return new TrashForTreasure(this);
     }
-
 }

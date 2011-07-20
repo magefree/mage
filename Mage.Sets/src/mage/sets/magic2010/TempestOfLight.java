@@ -25,34 +25,76 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.magic2010;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class TempestOfLight extends CardImpl<TempestOfLight> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public TempestOfLight(UUID ownerId) {
+        super(ownerId, 36, "Tempest of Light", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
+        this.expansionSetCode = "M10";
+        this.color.setWhite(true);
+        this.getSpellAbility().addEffect(new TempestOfLightEffect());
     }
 
-    public Lure (final Lure card) {
+    public TempestOfLight(final TempestOfLight card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public TempestOfLight copy() {
+        return new TempestOfLight(this);
+    }
+}
+
+class TempestOfLightEffect extends OneShotEffect<TempestOfLightEffect> {
+
+    private final static FilterPermanent filter = new FilterPermanent("");
+
+    static {
+        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
+    public TempestOfLightEffect() {
+        super(Constants.Outcome.DestroyPermanent);
+    }
+
+    public TempestOfLightEffect(final TempestOfLightEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter)) {
+            permanent.destroy(source.getId(), game, false);
+        }
+        return true;
+    }
+
+    @Override
+    public TempestOfLightEffect copy() {
+        return new TempestOfLightEffect(this);
+    }
+
+    @Override
+    public String getText(Ability source) {
+        return "Destroy all enchantments";
+    }
 }

@@ -25,34 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class WallOfFire extends mage.sets.tenth.WallOfFire {
 
-    public Lure (UUID ownerId) {
+    public WallOfFire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+        this.cardNumber = 162;
+        this.expansionSetCode = "M10";
     }
 
-    public Lure (final Lure card) {
+    public WallOfFire(final WallOfFire card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public WallOfFire copy() {
+        return new WallOfFire(this);
     }
-
 }

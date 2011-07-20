@@ -25,34 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
+import mage.target.TargetPlayer;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class NecrogenSpellbomb extends CardImpl<NecrogenSpellbomb> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public NecrogenSpellbomb(UUID ownerId) {
+        super(ownerId, 216, "Necrogen Spellbomb", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
+        this.expansionSetCode = "MRD";
+        Ability firstAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ColoredManaCost(Constants.ColoredManaSymbol.B));
+        firstAbility.addCost(new SacrificeSourceCost());
+        firstAbility.addTarget(new TargetPlayer());
+        this.addAbility(firstAbility);
+        Ability secondAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new GenericManaCost(1));
+        secondAbility.addCost(new SacrificeSourceCost());
+        this.addAbility(secondAbility);
     }
 
-    public Lure (final Lure card) {
+    public NecrogenSpellbomb(final NecrogenSpellbomb card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public NecrogenSpellbomb copy() {
+        return new NecrogenSpellbomb(this);
     }
-
 }

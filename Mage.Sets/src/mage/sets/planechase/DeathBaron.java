@@ -25,34 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.planechase;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class DeathBaron extends mage.sets.shardsofalara.DeathBaron {
 
-    public Lure (UUID ownerId) {
+    public DeathBaron(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+        this.cardNumber = 25;
+        this.expansionSetCode = "HOP";
     }
 
-    public Lure (final Lure card) {
+    public DeathBaron(final DeathBaron card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public DeathBaron copy() {
+        return new DeathBaron(this);
     }
-
 }

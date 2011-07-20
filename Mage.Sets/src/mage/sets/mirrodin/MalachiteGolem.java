@@ -25,34 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class MalachiteGolem extends CardImpl<MalachiteGolem> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public MalachiteGolem(UUID ownerId) {
+        super(ownerId, 202, "Malachite Golem", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Golem");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(3);
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
     }
 
-    public Lure (final Lure card) {
+    public MalachiteGolem(final MalachiteGolem card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public MalachiteGolem copy() {
+        return new MalachiteGolem(this);
     }
-
 }

@@ -25,34 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.tenth;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.BoostEquippedEffect;
+import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 
 /**
- *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class LeoninScimitar extends CardImpl<LeoninScimitar> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
+    public LeoninScimitar(UUID ownerId) {
+        super(ownerId, 331, "Leonin Scimitar", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "10E";
-
+        this.subtype.add("Equipment");
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
+        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public Lure (final Lure card) {
+    public LeoninScimitar(final LeoninScimitar card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public LeoninScimitar copy() {
+        return new LeoninScimitar(this);
     }
-
 }

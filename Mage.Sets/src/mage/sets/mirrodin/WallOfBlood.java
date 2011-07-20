@@ -25,34 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class WallOfBlood extends CardImpl<WallOfBlood> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public WallOfBlood(UUID ownerId) {
+        super(ownerId, 82, "Wall of Blood", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Wall");
+        this.color.setBlack(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(2);
+        this.addAbility(DefenderAbility.getInstance());
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Constants.Duration.EndOfTurn), new PayLifeCost(1)));
+        // Pay 1 life: Wall of Blood gets +1/+1 until end of turn.
     }
 
-    public Lure (final Lure card) {
+    public WallOfBlood(final WallOfBlood card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public WallOfBlood copy() {
+        return new WallOfBlood(this);
     }
-
 }

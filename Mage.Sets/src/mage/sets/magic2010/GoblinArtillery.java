@@ -25,34 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.magic2010;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DamageControllerEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class GoblinArtillery extends CardImpl<GoblinArtillery> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public GoblinArtillery(UUID ownerId) {
+        super(ownerId, 138, "Goblin Artillery", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Goblin");
+        this.subtype.add("Warrior");
+        this.color.setRed(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
+        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addEffect(new DamageControllerEffect(3));
+        this.addAbility(ability);
     }
 
-    public Lure (final Lure card) {
+    public GoblinArtillery(final GoblinArtillery card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public GoblinArtillery copy() {
+        return new GoblinArtillery(this);
     }
-
 }

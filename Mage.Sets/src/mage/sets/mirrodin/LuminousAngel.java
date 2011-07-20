@@ -25,34 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.game.permanent.token.SpiritToken;
+import mage.game.permanent.token.Token;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class LuminousAngel extends CardImpl<LuminousAngel> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public LuminousAngel(UUID ownerId) {
+        super(ownerId, 15, "Luminous Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}{W}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Angel");
+        this.color.setWhite(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SpiritToken2(), 1), Constants.TargetController.YOU, true));
     }
 
-    public Lure (final Lure card) {
+    public LuminousAngel(final LuminousAngel card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public LuminousAngel copy() {
+        return new LuminousAngel(this);
+    }
+}
+
+class SpiritToken2 extends Token {
+    public SpiritToken2() {
+        super("Spirit", "a 1/1 white Spirit creature token with flying");
+        cardType.add(Constants.CardType.CREATURE);
+        color.setWhite(true);
+        subtype.add("Spirit");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+        this.addAbility(FlyingAbility.getInstance());
     }
 
 }

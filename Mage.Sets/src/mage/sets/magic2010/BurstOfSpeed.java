@@ -25,34 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.magic2010;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class BurstOfSpeed extends CardImpl<BurstOfSpeed> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public BurstOfSpeed(UUID ownerId) {
+        super(ownerId, 129, "Burst of Speed", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
+        this.expansionSetCode = "M10";
+        this.color.setRed(true);
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterControlledCreaturePermanent(), false));
     }
 
-    public Lure (final Lure card) {
+    public BurstOfSpeed(final BurstOfSpeed card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public BurstOfSpeed copy() {
+        return new BurstOfSpeed(this);
     }
-
 }

@@ -25,34 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.tempest;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class BottleGnomes extends CardImpl<BottleGnomes> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public BottleGnomes(UUID ownerId) {
+        super(ownerId, 268, "Bottle Gnomes", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Gnome");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainLifeEffect(3), new SacrificeSourceCost()));
     }
 
-    public Lure (final Lure card) {
+    public BottleGnomes(final BottleGnomes card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public BottleGnomes copy() {
+        return new BottleGnomes(this);
     }
-
 }

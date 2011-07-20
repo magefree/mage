@@ -25,85 +25,81 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.mirrodin;
+package mage.sets.planechase;
 
 import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
  *
  * @author Loki
  */
-public class ClockworkCondor extends CardImpl<ClockworkCondor> {
+public class AkromasVengeance extends CardImpl<AkromasVengeance> {
 
-    public ClockworkCondor (UUID ownerId) {
-        super(ownerId, 154, "Clockwork Condor", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
-        this.expansionSetCode = "MRD";
-        this.subtype.add("Bird");
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), "{this} enters the battlefield with three +1/+1 counters on it"));
-        this.addAbility(new AttacksOrBlocksTriggeredAbility(new ClockworkCondorEffect(), false));
+    public AkromasVengeance(UUID ownerId) {
+        super(ownerId, 1, "Akroma's Vengeance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
+        this.expansionSetCode = "HOP";
+        this.color.setWhite(true);
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
+        this.getSpellAbility().addEffect(new AkromasVengeanceEffect());
     }
 
-    public ClockworkCondor (final ClockworkCondor card) {
+    public AkromasVengeance(final AkromasVengeance card) {
         super(card);
     }
 
     @Override
-    public ClockworkCondor copy() {
-        return new ClockworkCondor(this);
+    public AkromasVengeance copy() {
+        return new AkromasVengeance(this);
     }
 }
 
-class ClockworkCondorEffect extends OneShotEffect<ClockworkCondorEffect> {
-    ClockworkCondorEffect() {
-        super(Constants.Outcome.UnboostCreature);
+class AkromasVengeanceEffect extends OneShotEffect<AkromasVengeanceEffect> {
+
+    private final static FilterPermanent filter = new FilterPermanent("");
+
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.getCardType().add(CardType.CREATURE);
+        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    ClockworkCondorEffect(final ClockworkCondorEffect effect) {
+    public AkromasVengeanceEffect() {
+        super(Constants.Outcome.DestroyPermanent);
+    }
+
+    public AkromasVengeanceEffect(final AkromasVengeanceEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(source.getSourceId());
-        if (p != null) {
-            AtTheEndOfCombatDelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(new RemoveCounterSourceEffect(CounterType.P1P1.createInstance()));
-            ability.setSourceId(source.getSourceId());
-			ability.setControllerId(source.getControllerId());
-			game.addDelayedTriggeredAbility(ability);
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter)) {
+            permanent.destroy(source.getId(), game, false);
         }
-        return false;
+        return true;
     }
 
     @Override
-    public ClockworkCondorEffect copy() {
-        return new ClockworkCondorEffect(this);
+    public AkromasVengeanceEffect copy() {
+        return new AkromasVengeanceEffect(this);
     }
 
     @Override
     public String getText(Ability source) {
-        return "remove a +1/+1 counter from {this} at end of combat";
+        return "Destroy all artifacts, creatures, and enchantments";
     }
 }

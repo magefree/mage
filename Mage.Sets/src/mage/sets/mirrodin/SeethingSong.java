@@ -25,34 +25,34 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Mana;
+import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class SeethingSong extends CardImpl<SeethingSong> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public SeethingSong(UUID ownerId) {
+        super(ownerId, 104, "Seething Song", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
+        this.expansionSetCode = "MRD";
+        this.color.setRed(true);
+        this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(5, 0, 0, 0, 0, 0, 0)));
     }
 
-    public Lure (final Lure card) {
+    public SeethingSong(final SeethingSong card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public SeethingSong copy() {
+        return new SeethingSong(this);
     }
-
 }

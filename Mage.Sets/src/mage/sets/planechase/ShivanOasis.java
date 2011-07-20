@@ -25,34 +25,36 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.planechase;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
+import mage.abilities.mana.GreenManaAbility;
+import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class ShivanOasis extends CardImpl<ShivanOasis> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public ShivanOasis(UUID ownerId) {
+        super(ownerId, 137, "Shivan Oasis", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "HOP";
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        this.addAbility(new RedManaAbility());
+        this.addAbility(new GreenManaAbility());
     }
 
-    public Lure (final Lure card) {
+    public ShivanOasis(final ShivanOasis card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public ShivanOasis copy() {
+        return new ShivanOasis(this);
     }
-
 }

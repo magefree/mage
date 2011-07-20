@@ -25,34 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class ViridianShaman extends mage.sets.tenth.ViridianShaman {
 
-    public Lure (UUID ownerId) {
+    public ViridianShaman(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+        this.cardNumber = 139;
+        this.expansionSetCode = "MRD";
     }
 
-    public Lure (final Lure card) {
+    public ViridianShaman(final ViridianShaman card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public ViridianShaman copy() {
+        return new ViridianShaman(this);
     }
-
 }

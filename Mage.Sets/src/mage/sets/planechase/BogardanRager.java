@@ -25,34 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.planechase;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class BogardanRager extends CardImpl<BogardanRager> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public BogardanRager(UUID ownerId) {
+        super(ownerId, 49, "Bogardan Rager", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
+        this.expansionSetCode = "HOP";
+        this.subtype.add("Elemental");
+        this.color.setRed(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
+        this.addAbility(FlashAbility.getInstance());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(4, 0, Constants.Duration.EndOfTurn), false);
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public Lure (final Lure card) {
+    public BogardanRager(final BogardanRager card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public BogardanRager copy() {
+        return new BogardanRager(this);
     }
-
 }

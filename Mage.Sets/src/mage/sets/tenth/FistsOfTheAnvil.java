@@ -25,34 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.tenth;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class FistsOfTheAnvil extends CardImpl<FistsOfTheAnvil> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
+    public FistsOfTheAnvil(UUID ownerId) {
+        super(ownerId, 201, "Fists of the Anvil", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "10E";
-
+        this.color.setRed(true);
+        this.getSpellAbility().addEffect(new BoostTargetEffect(4, 0, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Lure (final Lure card) {
+    public FistsOfTheAnvil(final FistsOfTheAnvil card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public FistsOfTheAnvil copy() {
+        return new FistsOfTheAnvil(this);
     }
-
 }

@@ -25,34 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.magic2012;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterBasicLandCard;
+import mage.target.common.TargetBasicLandCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class SolemnSimulacrum extends CardImpl<SolemnSimulacrum> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
+    private final static FilterBasicLandCard filter = new FilterBasicLandCard();
 
+    public SolemnSimulacrum(UUID ownerId) {
+        super(ownerId, 217, "Solemn Simulacrum", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+        this.expansionSetCode = "M12";
+        this.subtype.add("Golem");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true), true));
+        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DrawCardControllerEffect(1), true));
     }
 
-    public Lure (final Lure card) {
+    public SolemnSimulacrum(final SolemnSimulacrum card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public SolemnSimulacrum copy() {
+        return new SolemnSimulacrum(this);
     }
-
 }

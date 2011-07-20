@@ -25,34 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Mana;
+import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class TurnToDust extends CardImpl<TurnToDust> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
+    private final static FilterPermanent filter = new FilterPermanent("Equipment");
 
+    static {
+        filter.getSubtype().add("Equipment");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public Lure (final Lure card) {
+    public TurnToDust(UUID ownerId) {
+        super(ownerId, 137, "Turn to Dust", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
+        this.expansionSetCode = "MRD";
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(0, 1, 0, 0, 0, 0, 0)));
+    }
+
+    public TurnToDust(final TurnToDust card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public TurnToDust copy() {
+        return new TurnToDust(this);
     }
-
 }

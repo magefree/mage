@@ -25,34 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class MassHysteria extends CardImpl<MassHysteria> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public MassHysteria(UUID ownerId) {
+        super(ownerId, 99, "Mass Hysteria", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{R}");
+        this.expansionSetCode = "MRD";
+        this.color.setRed(true);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Constants.Duration.WhileOnBattlefield, FilterCreaturePermanent.getDefault(), false)));
     }
 
-    public Lure (final Lure card) {
+    public MassHysteria(final MassHysteria card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public MassHysteria copy() {
+        return new MassHysteria(this);
     }
-
 }

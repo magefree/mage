@@ -25,34 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.MustBlockSourceEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class Bloodscent extends CardImpl<Bloodscent> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public Bloodscent(UUID ownerId) {
+        super(ownerId, 114, "Bloodscent", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
+        this.expansionSetCode = "MRD";
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new MustBlockSourceEffect()), Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Lure (final Lure card) {
+    public Bloodscent(final Bloodscent card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public Bloodscent copy() {
+        return new Bloodscent(this);
     }
-
 }

@@ -25,34 +25,78 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.magic2010;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class PlanarCleansing extends CardImpl<PlanarCleansing> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public PlanarCleansing(UUID ownerId) {
+        super(ownerId, 24, "Planar Cleansing", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{W}{W}");
+        this.expansionSetCode = "M10";
+        this.color.setWhite(true);
+        this.getSpellAbility().addEffect(new PlanarCleansingEffect());
+        // Destroy all nonland permanents.
     }
 
-    public Lure (final Lure card) {
+    public PlanarCleansing(final PlanarCleansing card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public PlanarCleansing copy() {
+        return new PlanarCleansing(this);
+    }
+}
+
+class PlanarCleansingEffect extends OneShotEffect<PlanarCleansingEffect> {
+
+    private final static FilterPermanent filter = new FilterPermanent("");
+
+    static {
+        filter.getCardType().add(CardType.LAND);
+        filter.setNotCardType(true);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
+    public PlanarCleansingEffect() {
+        super(Constants.Outcome.DestroyPermanent);
+    }
+
+    public PlanarCleansingEffect(final PlanarCleansingEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter)) {
+            permanent.destroy(source.getId(), game, false);
+        }
+        return true;
+    }
+
+    @Override
+    public PlanarCleansingEffect copy() {
+        return new PlanarCleansingEffect(this);
+    }
+
+    @Override
+    public String getText(Ability source) {
+        return "Destroy all nonland permanents";
+    }
 }

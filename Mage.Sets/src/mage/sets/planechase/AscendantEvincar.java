@@ -25,34 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.planechase;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.BoostAllEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class AscendantEvincar extends CardImpl<AscendantEvincar> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
+    private final static FilterCreaturePermanent filterBlack = new FilterCreaturePermanent("black creatures");
+    private final static FilterCreaturePermanent filterNonBlack = new FilterCreaturePermanent("Nonblack creatures");
 
+    static {
+        filterBlack.setUseColor(true);
+        filterBlack.getColor().setBlack(true);
+        filterNonBlack.setUseColor(true);
+        filterNonBlack.getColor().setBlack(true);
+        filterNonBlack.setNotColor(true);
     }
 
-    public Lure (final Lure card) {
+    public AscendantEvincar(UUID ownerId) {
+        super(ownerId, 17, "Ascendant Evincar", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
+        this.expansionSetCode = "HOP";
+        this.supertype.add("Legendary");
+        this.subtype.add("Vampire");
+        this.color.setBlack(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Constants.Duration.WhileOnBattlefield, filterBlack, true)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Constants.Duration.WhileOnBattlefield, filterNonBlack, false)));
+    }
+
+    public AscendantEvincar(final AscendantEvincar card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public AscendantEvincar copy() {
+        return new AscendantEvincar(this);
     }
-
 }

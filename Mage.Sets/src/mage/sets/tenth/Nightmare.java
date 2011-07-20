@@ -25,34 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.tenth;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class Nightmare extends CardImpl<Nightmare> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Swamps you control");
 
+    static {
+        filter.getName().add("Swamp");
     }
 
-    public Lure (final Lure card) {
+    public Nightmare(UUID ownerId) {
+        super(ownerId, 164, "Nightmare", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}");
+        this.expansionSetCode = "10E";
+        this.subtype.add("Nightmare");
+        this.subtype.add("Horse");
+        this.color.setBlack(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Constants.Duration.WhileOnBattlefield)));
+    }
+
+    public Nightmare(final Nightmare card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public Nightmare copy() {
+        return new Nightmare(this);
     }
-
 }

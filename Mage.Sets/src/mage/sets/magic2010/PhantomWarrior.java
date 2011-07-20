@@ -25,34 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class PhantomWarrior extends CardImpl<PhantomWarrior> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public PhantomWarrior(UUID ownerId) {
+        super(ownerId, 66, "Phantom Warrior", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Illusion");
+        this.subtype.add("Warrior");
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+        this.addAbility(UnblockableAbility.getInstance());
     }
 
-    public Lure (final Lure card) {
+    public PhantomWarrior(final PhantomWarrior card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public PhantomWarrior copy() {
+        return new PhantomWarrior(this);
     }
-
 }

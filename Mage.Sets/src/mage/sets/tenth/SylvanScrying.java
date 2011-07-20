@@ -25,34 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.tenth;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterLandCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class SylvanScrying extends CardImpl<SylvanScrying> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
+    private final static FilterLandCard filter = new FilterLandCard("land card");
+
+    public SylvanScrying(UUID ownerId) {
+        super(ownerId, 302, "Sylvan Scrying", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "10E";
-
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(filter)));
     }
 
-    public Lure (final Lure card) {
+    public SylvanScrying(final SylvanScrying card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public SylvanScrying copy() {
+        return new SylvanScrying(this);
     }
-
 }

@@ -25,34 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class PsychicMembrane extends CardImpl<PsychicMembrane> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
-
+    public PsychicMembrane(UUID ownerId) {
+        super(ownerId, 46, "Psychic Membrane", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Wall");
+        this.color.setBlue(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(3);
+        this.addAbility(DefenderAbility.getInstance());
+        this.addAbility(new BlocksTriggeredAbility(new DrawCardControllerEffect(1), true));
     }
 
-    public Lure (final Lure card) {
+    public PsychicMembrane(final PsychicMembrane card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public PsychicMembrane copy() {
+        return new PsychicMembrane(this);
     }
-
 }

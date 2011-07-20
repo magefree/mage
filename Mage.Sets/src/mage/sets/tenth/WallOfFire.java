@@ -25,34 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.tenth;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class WallOfFire extends CardImpl<WallOfFire> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
+    public WallOfFire(UUID ownerId) {
+        super(ownerId, 247, "Wall of Fire", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.expansionSetCode = "10E";
-
+        this.subtype.add("Wall");
+        this.color.setRed(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(5);
+        this.addAbility(DefenderAbility.getInstance());
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Constants.Duration.EndOfTurn), new ColoredManaCost(Constants.ColoredManaSymbol.R)));
     }
 
-    public Lure (final Lure card) {
+    public WallOfFire(final WallOfFire card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public WallOfFire copy() {
+        return new WallOfFire(this);
     }
-
 }

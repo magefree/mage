@@ -25,34 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.FilterCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class Fabricate extends CardImpl<Fabricate> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
+    private final static FilterCard filter = new FilterCard("artifact");
 
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public Lure (final Lure card) {
+    public Fabricate(UUID ownerId) {
+        super(ownerId, 52, "Fabricate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
+        this.expansionSetCode = "M10";
+        this.color.setBlue(true);
+        this.getSpellAbility().addEffect(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(1, filter)));
+    }
+
+    public Fabricate(final Fabricate card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public Fabricate copy() {
+        return new Fabricate(this);
     }
-
 }

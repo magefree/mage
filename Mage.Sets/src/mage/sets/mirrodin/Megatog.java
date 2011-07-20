@@ -25,34 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.common.FilterControlledPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
- *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class Megatog extends CardImpl<Megatog> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
+    static {
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public Lure (final Lure card) {
+    public Megatog(UUID ownerId) {
+        super(ownerId, 100, "Megatog", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
+        this.expansionSetCode = "MRD";
+        this.subtype.add("Atog");
+        this.color.setRed(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Constants.Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn));
+        this.addAbility(ability);
+    }
+
+    public Megatog(final Megatog card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public Megatog copy() {
+        return new Megatog(this);
     }
-
 }

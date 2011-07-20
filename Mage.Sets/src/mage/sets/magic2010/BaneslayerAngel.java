@@ -46,8 +46,8 @@ import mage.filter.common.FilterCreaturePermanent;
  * @author BetaSteward_at_googlemail.com
  */
 public class BaneslayerAngel extends CardImpl<BaneslayerAngel> {
-    private static final FilterPermanent filter1 = new FilterCreaturePermanent("Demon");
-    private static final FilterPermanent filter2 = new FilterCreaturePermanent("Dragon");
+    private static final FilterPermanent filter1 = new FilterCreaturePermanent("Demons");
+    private static final FilterPermanent filter2 = new FilterCreaturePermanent("Dragons");
 
     static {
         filter1.getSubtype().add("Demon");

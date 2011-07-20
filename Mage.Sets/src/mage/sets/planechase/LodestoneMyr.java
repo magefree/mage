@@ -25,34 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.planechase;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
- *
  * @author Loki
  */
-public class Lure extends mage.sets.championsofkamigawa.Lure {
+public class LodestoneMyr extends CardImpl<LodestoneMyr> {
 
-    public Lure (UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 276;
-        this.expansionSetCode = "10E";
+    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped artifact you control");
 
+    static {
+        filter.setTapped(false);
+        filter.setUseTapped(true);
+        filter.getCardType().add(CardType.ARTIFACT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public Lure (final Lure card) {
+    public LodestoneMyr(UUID ownerId) {
+        super(ownerId, 117, "Lodestone Myr", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+        this.expansionSetCode = "HOP";
+        this.subtype.add("Myr");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+        this.addAbility(TrampleAbility.getInstance());
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Constants.Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(filter))));
+    }
+
+    public LodestoneMyr(final LodestoneMyr card) {
         super(card);
     }
 
     @Override
-    public Lure copy() {
-        return new Lure(this);
+    public LodestoneMyr copy() {
+        return new LodestoneMyr(this);
     }
-
 }
