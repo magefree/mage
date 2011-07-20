@@ -32,6 +32,8 @@ import java.io.Serializable;
 import java.util.*;
 
 import mage.abilities.ActivatedAbility;
+import mage.abilities.Mode;
+import mage.abilities.Modes;
 import mage.abilities.TriggeredAbilities;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -61,6 +63,10 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
 
 	public void chooseAbility(UUID playerId, String message, Collection<? extends ActivatedAbility> choices) {
 		dispatcher.fireEvent(PlayerQueryEvent.chooseAbilityEvent(playerId, message, choices));
+	}
+
+	public void chooseMode(UUID playerId, String message, Map<UUID, String> modes) {
+		dispatcher.fireEvent(PlayerQueryEvent.chooseModeEvent(playerId, message, modes));
 	}
 
 	public void target(UUID playerId, String message, Set<UUID> targets, boolean required) {

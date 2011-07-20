@@ -89,7 +89,7 @@ class WildEvocationAbility extends TriggeredAbilityImpl<WildEvocationAbility> {
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.DRAW_STEP_PRE) {
 			this.addTarget(new TargetPlayer());
-			this.targets.get(0).add(event.getPlayerId(), game);
+			getTargets().get(0).add(event.getPlayerId(), game);
 			return true;
 		}
 		return false;

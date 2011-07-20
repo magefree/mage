@@ -33,6 +33,7 @@ import java.util.*;
 
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.Modes;
 import mage.abilities.TriggeredAbilities;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -46,7 +47,7 @@ import mage.game.permanent.Permanent;
 public class PlayerQueryEvent extends EventObject implements ExternalEvent, Serializable {
 
 	public enum QueryType {
-		ASK, CHOOSE, CHOOSE_ABILITY, PICK_TARGET, PICK_ABILITY, SELECT, PLAY_MANA, PLAY_X_MANA, AMOUNT, LOOK, PICK_CARD, CONSTRUCT
+		ASK, CHOOSE, CHOOSE_ABILITY, CHOOSE_MODE, PICK_TARGET, PICK_ABILITY, SELECT, PLAY_MANA, PLAY_X_MANA, AMOUNT, LOOK, PICK_CARD, CONSTRUCT
 	}
 
 	private String message;
@@ -63,6 +64,7 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 	private int max;
 	private Deck deck;
 	private Map<String, Serializable> options;
+	private Map<UUID, String> modes;
 
 	private PlayerQueryEvent(UUID playerId, String message, Collection<? extends Ability> abilities, Set<String> choices, Set<UUID> targets, Cards cards, QueryType queryType, int min, int max, boolean required, Map<String, Serializable> options) {
 		this(playerId, message, abilities, choices, targets, cards, queryType, min, max, required);
@@ -110,6 +112,14 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 		this.required = required;
 	}
 
+	private PlayerQueryEvent(UUID playerId, String message, Map<UUID, String> modes) {
+		super(playerId);
+		this.queryType = QueryType.CHOOSE_MODE;
+		this.message = message;
+		this.playerId = playerId;
+		this.modes = modes;
+	}
+
 	public static PlayerQueryEvent askEvent(UUID playerId, String message) {
 		return new PlayerQueryEvent(playerId, message, null, null, null, null, QueryType.ASK, 0, 0, false);
 	}
@@ -117,6 +127,11 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 	public static PlayerQueryEvent chooseAbilityEvent(UUID playerId, String message, Collection<? extends ActivatedAbility> choices) {
 		return new PlayerQueryEvent(playerId, message, choices, null, null, null, QueryType.CHOOSE_ABILITY, 0, 0, false);
 	}
+
+	public static PlayerQueryEvent chooseModeEvent(UUID playerId, String message, Map<UUID, String> modes) {
+		return new PlayerQueryEvent(playerId, message, modes);
+	}
+
 	public static PlayerQueryEvent chooseEvent(UUID playerId, String message, Set<String> choices) {
 		return new PlayerQueryEvent(playerId, message, null, choices, null, null, QueryType.CHOOSE, 0, 0, false);
 	}
@@ -224,5 +239,9 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 
 	public Map<String, Serializable> getOptions() {
 		return options;
+	}
+	
+	public Map<UUID, String> getModes() {
+		return modes;
 	}
 }

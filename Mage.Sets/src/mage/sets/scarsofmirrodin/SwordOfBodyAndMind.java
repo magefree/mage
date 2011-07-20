@@ -115,7 +115,7 @@ class SwordOfBodyAndMindAbility extends TriggeredAbilityImpl<SwordOfBodyAndMindA
             DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
             Permanent p = game.getPermanent(event.getSourceId());
             if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
-                this.targets.get(0).add(event.getPlayerId(), game);
+                getTargets().get(0).add(event.getPlayerId(), game);
 			    return true;
             }
         }

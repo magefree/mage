@@ -29,6 +29,6 @@ public class AtTheEndOfCombatDelayedTriggeredAbility extends DelayedTriggeredAbi
 
     @Override
     public String getRule() {
-        return "At end of combat, " + effects.getText(this);
+        return "At end of combat, " + modes.getText(this);
     }
 }

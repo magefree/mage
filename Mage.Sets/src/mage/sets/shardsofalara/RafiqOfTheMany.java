@@ -96,7 +96,7 @@ class RafiqOfTheManyAbility extends TriggeredAbilityImpl<RafiqOfTheManyAbility> 
 		if (event.getType() == EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(this.controllerId) ) {
 			if (game.getCombat().attacksAlone()) {
 				this.addTarget(new TargetCreaturePermanent());
-				this.targets.get(0).add(game.getCombat().getAttackers().get(0), game);
+				getTargets().get(0).add(game.getCombat().getAttackers().get(0), game);
 				return true;
 			}
 		}

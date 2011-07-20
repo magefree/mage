@@ -42,6 +42,7 @@ import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.Modes;
 import mage.abilities.TriggeredAbilities;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -128,6 +129,7 @@ public interface Game extends MageItem, Serializable {
 	public void firePlayManaEvent(UUID playerId, String message);
 	public void firePlayXManaEvent(UUID playerId, String message);
 	public void fireGetChoiceEvent(UUID playerId, String message, Collection<? extends ActivatedAbility> choices);
+	public void fireGetModeEvent(UUID playerId, String message, Map<UUID, String> modes);
 	public void fireGetAmountEvent(UUID playerId, String message, int min, int max);
 	public void fireInformEvent(String message);
 	public void fireUpdatePlayersEvent();

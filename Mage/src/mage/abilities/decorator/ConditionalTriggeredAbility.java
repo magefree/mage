@@ -21,7 +21,7 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl<Conditiona
     public ConditionalTriggeredAbility(TriggeredAbility ability, Condition condition, String text) {
         super(ability.getZone(), null);
         this.ability = ability;
-        this.effects = ability.getEffects();
+		this.modes = ability.getModes();
         this.condition = condition;
         this.text = text;
     }
@@ -43,8 +43,8 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl<Conditiona
         ability.setSourceId(this.getSourceId());
         if (ability.checkTrigger(event, game)) {
             if (condition.apply(game, this)) {
-                this.targets.clear();
-                this.targets.addAll(ability.getTargets());
+                getTargets().clear();
+                getTargets().addAll(ability.getTargets());
                 return true;
             }
         }

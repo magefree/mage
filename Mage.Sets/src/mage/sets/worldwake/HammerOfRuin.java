@@ -99,7 +99,7 @@ class HammerOfRuinTriggeredAbility extends TriggeredAbilityImpl<HammerOfRuinTrig
             DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
             Permanent p = game.getPermanent(event.getSourceId());
             if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
-                FilterPermanent filter = (FilterPermanent) targets.get(0).getFilter();
+                FilterPermanent filter = (FilterPermanent)getTargets().get(0).getFilter();
                 filter.getControllerId().add(event.getPlayerId());
 			    return true;
             }

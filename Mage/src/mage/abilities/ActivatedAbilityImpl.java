@@ -148,7 +148,7 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
 			return false;
 		//20091005 - 602.5d/602.5e
 		if (timing == TimingRule.INSTANT || game.canPlaySorcery(playerId)) {
-			if (costs.canPay(sourceId, controllerId, game) && targets.canChoose(sourceId, playerId, game)) {
+			if (costs.canPay(sourceId, controllerId, game) && getTargets().canChoose(sourceId, playerId, game)) {
 				return true;
 			}
 		}
@@ -174,9 +174,9 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
 	protected String getMessageText(Game game) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(game.getObject(this.sourceId).getName());
-		if (this.targets.size() > 0) {
+		if (getTargets().size() > 0) {
 			sb.append(" targeting ");
-			for (Target target: targets) {
+			for (Target target: getTargets()) {
 				sb.append(target.getTargetedName(game));
 			}
 		}

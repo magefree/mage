@@ -87,7 +87,7 @@ public class MultikickerAbility extends KickerAbility {
 		}
 		if (costs.size() > 0)
 			sb.append(costs.getText());
-		sb.append(":").append(effects.getText(this));
+		sb.append(":").append(modes.getText(this));
 		if (replaces)
 			sb.append(" instead");
 		return sb.toString();

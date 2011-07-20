@@ -29,6 +29,7 @@
 package mage.player.human;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -41,6 +42,8 @@ import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.Mode;
+import mage.abilities.Modes;
 import mage.abilities.SpecialAction;
 import mage.abilities.TriggeredAbilities;
 import mage.abilities.TriggeredAbility;
@@ -563,6 +566,30 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 			if (abilities.containsKey(response.getUUID()))
 				activateAbility(abilities.get(response.getUUID()), game);
 		}
+	}
+	
+	@Override
+	public Mode chooseMode(Modes modes, Ability source, Game game) {
+		if (modes.size() > 1) {
+			MageObject obj = game.getObject(source.getSourceId());
+			Map<UUID, String> modeMap = new HashMap<UUID, String>();
+			for (Mode mode: modes.values()) {
+				String modeText = mode.getEffects().getText(source);
+				if (obj != null)
+					modeText = modeText.replace("{source}", obj.getName());
+				modeMap.put(mode.getId(), modeText);
+			}
+			game.fireGetModeEvent(playerId, "Choose Mode", modeMap);
+			waitForResponse();
+			if (response.getUUID() != null) {
+				for (Mode mode: modes.values()) {
+					if (mode.getId().equals(response.getUUID()))
+						return mode;
+				}
+			}
+			return null;
+		}
+		return modes.getMode();
 	}
 
 	@Override

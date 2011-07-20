@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
  * 
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,50 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.abilities;
 
-package mage.abilities.common;
-
-import mage.Constants.Zone;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.target.TargetPlayer;
+import java.util.UUID;
+import mage.abilities.effects.Effects;
+import mage.choices.Choices;
+import mage.target.Targets;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl<DealsCombatDamageToAPlayerTriggeredAbility> {
+public class Mode {
 
-	public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional) {
-		super(Zone.BATTLEFIELD, effect, optional);
+	protected UUID id;
+	protected Targets targets;
+	protected Choices choices;
+	protected Effects effects;
+	
+	public Mode() {
+		this.id = UUID.randomUUID();
+		this.targets = new Targets();
+		this.choices = new Choices();
+		this.effects = new Effects();
 	}
-
-	public DealsCombatDamageToAPlayerTriggeredAbility(final DealsCombatDamageToAPlayerTriggeredAbility ability) {
-		super(ability);
+	
+	public Mode(Mode mode) {
+		this.id = mode.id;
+		this.targets = mode.targets.copy();
+		this.choices = mode.choices.copy();
+		this.effects = mode.effects.copy();
 	}
-
-	@Override
-	public DealsCombatDamageToAPlayerTriggeredAbility copy() {
-		return new DealsCombatDamageToAPlayerTriggeredAbility(this);
+	
+	public Mode copy() {
+		return new Mode(this);
 	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)) {
-			getTargets().clear();
-			this.addTarget(new TargetPlayer());
-			getTargets().get(0).add(event.getPlayerId(), game);
-			return true;
-		}
-		return false;
+	
+	public UUID getId() {
+		return id;
 	}
-
-	@Override
-	public String getRule() {
-		return "Whenever {this} deals combat damage to a player, " + super.getRule();
+	
+	public Targets getTargets() {
+		return targets;
 	}
-
+	
+	public Choices getChoices() {
+		return choices;
+	}
+	
+	public Effects getEffects() {
+		return effects;
+	}
 }

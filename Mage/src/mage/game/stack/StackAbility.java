@@ -30,6 +30,8 @@ package mage.game.stack;
 
 import java.util.ArrayList;
 import mage.Constants.AbilityType;
+import mage.abilities.Mode;
+import mage.abilities.Modes;
 import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -288,9 +290,7 @@ public class StackAbility implements StackObject, Ability {
 	}
 
 	@Override
-	public void addOptionalCost(Cost cost) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
+	public void addOptionalCost(Cost cost) {}
 
 	@Override
 	public boolean checkIfClause(Game game) {
@@ -298,11 +298,22 @@ public class StackAbility implements StackObject, Ability {
 	}
 
 	@Override
-	public void newId() {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
+	public void newId() {}
 
 	public Ability getStackAbility() {
 		return ability;
+	}
+
+	@Override
+	public boolean isModal() {
+		return ability.isModal();
+	}
+
+	@Override
+	public void addMode(Mode mode) {}
+
+	@Override
+	public Modes getModes() {
+		return ability.getModes();
 	}
 }

@@ -44,6 +44,8 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.Mode;
+import mage.abilities.Modes;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilities;
 import mage.abilities.TriggeredAbility;
@@ -860,6 +862,13 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		return 0;
 	}
 
+	@Override
+	public Mode chooseMode(Modes modes, Ability source, Game game) {
+		logger.debug("chooseMode");
+		//TODO: improve this;
+		return modes.get(0);
+	}
+	
 	@Override
 	public TriggeredAbility chooseTriggeredAbility(TriggeredAbilities abilities, Game game) {
 		logger.debug("chooseTriggeredAbility");

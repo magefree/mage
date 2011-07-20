@@ -34,6 +34,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.Modes;
 
 /**
  *
@@ -48,6 +50,10 @@ public class AbilityPickerView implements Serializable {
 		for (Ability ability: abilities) {
 			choices.put(ability.getId(), ability.getRule(true));
 		}
+	}
+
+	public AbilityPickerView(Map<UUID, String> modes) {
+		this.choices = modes;
 	}
 
 	public Map<UUID, String> getChoices() {

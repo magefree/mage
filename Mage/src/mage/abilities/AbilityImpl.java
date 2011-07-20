@@ -73,9 +73,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 	protected Costs<Cost> costs;
 	protected ArrayList<AlternativeCost> alternativeCosts = new ArrayList<AlternativeCost>();
 	protected Costs<Cost> optionalCosts;
-	protected Targets targets;
-	protected Choices choices;
-	protected Effects effects;
+	protected Modes modes;
 	protected Zone zone;
 	protected String name;
 	protected boolean usesStack = true;
@@ -92,9 +90,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 		this.manaCostsToPay = new ManaCostsImpl<ManaCost>();
 		this.costs = new CostsImpl<Cost>();
 		this.optionalCosts = new CostsImpl<Cost>();
-		this.effects = new Effects();
-		this.targets = new Targets();
-		this.choices = new Choices();
+		this.modes = new Modes();
 	}
 
 	public AbilityImpl(final AbilityImpl<T> ability) {
@@ -113,9 +109,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 		for (AlternativeCost cost: ability.alternativeCosts) {
 			this.alternativeCosts.add((AlternativeCost)cost.copy());
 		}
-		this.targets = ability.targets.copy();
-		this.choices = ability.choices.copy();
-		this.effects = ability.effects.copy();
+		this.modes = ability.modes.copy();
 	}
 
 	@Override
@@ -152,13 +146,16 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
 	@Override
 	public boolean activate(Game game, boolean noMana) {
+		// 20110204 - 700.2
+		if (!modes.choose(game, this))
+			return false;
 		//20100716 - 601.2b
-		if (choices.size() > 0 && choices.choose(game, this) == false) {
+		if (getChoices().size() > 0 && getChoices().choose(game, this) == false) {
 			logger.debug("activate failed - choice");
 			return false;
 		}
 		//20100716 - 601.2b
-		if (targets.size() > 0 && targets.chooseTargets(effects.get(0).getOutcome(), this.controllerId, this, game) == false) {
+		if (getTargets().size() > 0 && getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, game) == false) {
 			logger.debug("activate failed - target");
 			return false;
 		}
@@ -258,13 +255,13 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
 	@Override
 	public Effects getEffects() {
-		return effects;
+		return modes.getMode().getEffects();
 	}
 
 	@Override
 	public Effects getEffects(EffectType effectType) {
 		Effects typedEffects = new Effects();
-		for (Effect effect: effects) {
+		for (Effect effect: getEffects()) {
 			if (effect.getEffectType() == effectType) {
 				typedEffects.add(effect);
 			}
@@ -274,7 +271,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
 	@Override
 	public Choices getChoices() {
-		return choices;
+		return modes.getMode().getChoices();
 	}
 
 	@Override
@@ -323,7 +320,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 			}
 		}
 
-		sbRule.append(effects.getText(this));
+		sbRule.append(modes.getText(this));
 
 		return sbRule.toString();
 	}
@@ -371,34 +368,49 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 	@Override
 	public void addEffect(Effect effect) {
 		if (effect != null) {
-			this.effects.add(effect);
+			getEffects().add(effect);
 		}
 	}
 
 	@Override
 	public void addTarget(Target target) {
 		if (target != null) {
-			this.targets.add(target);
+			getTargets().add(target);
 		}
 	}
 
 	@Override
 	public void addChoice(Choice choice) {
 		if (choice != null) {
-			this.choices.add(choice);
+			getChoices().add(choice);
 		}
 	}
 
 	@Override
 	public Targets getTargets() {
-		return this.targets;
+		return modes.getMode().getTargets();
 	}
 
 	@Override
 	public UUID getFirstTarget() {
-		return targets.getFirstTarget();
+		return getTargets().getFirstTarget();
 	}
 
+	@Override
+	public boolean isModal() {
+		return this.modes.size() > 1;
+	}
+	
+	@Override
+	public void addMode(Mode mode) {
+		this.modes.addMode(mode);
+	}
+	
+	@Override
+	public Modes getModes() {
+		return modes;
+	}
+	
 	@Override
 	public String toString() {
 		return getRule();

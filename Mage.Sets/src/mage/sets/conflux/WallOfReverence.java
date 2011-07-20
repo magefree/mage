@@ -101,7 +101,7 @@ class WallOfReverenceTriggeredAbility extends TriggeredAbilityImpl<WallOfReveren
 
     @Override
     public String getRule() {
-        return "At the beginning of your end step, " + effects.getText(this);
+        return "At the beginning of your end step, " + modes.getText(this);
     }
 }
 

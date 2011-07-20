@@ -46,6 +46,7 @@ import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.Mode;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.SpecialAction;
 import mage.abilities.SpellAbility;
@@ -936,8 +937,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	@Override
 	public List<Ability> getPlayableOptions(Ability ability, Game game) {
 		List<Ability> options = new ArrayList<Ability>();
-
-		if (ability.getTargets().getUnchosen().size() > 0)
+		
+		if (ability.isModal())
+			addModeOptions(options, ability, game);
+		else if (ability.getTargets().getUnchosen().size() > 0)
 			addTargetOptions(options, ability, 0, game);
 		else if (ability.getChoices().getUnchosen().size() > 0)
 			addChoiceOptions(options, ability, 0, game);
@@ -947,6 +950,21 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		return options;
 	}
 
+	private void addModeOptions(List<Ability> options, Ability option, Game game) {
+		for (Mode mode: option.getModes().values()) {
+			Ability newOption = option.copy();
+			newOption.getModes().setMode(mode);
+			if (option.getTargets().getUnchosen().size() > 0)
+				addTargetOptions(options, option, 0, game);
+			else if (option.getChoices().getUnchosen().size() > 0)
+				addChoiceOptions(options, option, 0, game);
+			else if (option.getCosts().getTargets().getUnchosen().size() > 0)
+				addCostTargetOptions(options, option, 0, game);
+			else
+				options.add(newOption);
+		}
+	}
+	
 	private void addTargetOptions(List<Ability> options, Ability option, int targetNum, Game game) {
 		for (UUID targetId: option.getTargets().getUnchosen().get(targetNum).possibleTargets(option.getSourceId(), playerId, game)) {
 			Ability newOption = option.copy();

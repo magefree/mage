@@ -100,7 +100,7 @@ class SuturePriestFirstTriggeredAbility extends TriggeredAbilityImpl<SuturePries
 
     @Override
     public String getRule() {
-        return "Whenever another creature enters the battlefield under your control, " + effects.getText(this);
+        return "Whenever another creature enters the battlefield under your control, " + modes.getText(this);
     }
 }
 

@@ -39,6 +39,8 @@ import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.Mode;
+import mage.abilities.Modes;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilities;
 import mage.abilities.TriggeredAbility;
@@ -156,6 +158,7 @@ public interface Player extends MageItem, Copyable<Player> {
 	public abstract boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game);
 	public abstract int chooseEffect(List<ReplacementEffect> rEffects, Game game);
 	public abstract TriggeredAbility chooseTriggeredAbility(TriggeredAbilities abilities, Game game);
+	public abstract Mode chooseMode(Modes modes, Ability source, Game game);
 	public abstract void selectAttackers(Game game);
 	public abstract void selectBlockers(Game game);
 	public abstract UUID chooseBlockerOrder(List<Permanent> blockers, Game game);

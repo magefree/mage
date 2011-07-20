@@ -52,11 +52,11 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<Begi
     public String getRule() {
         switch (targetController) {
             case YOU:
-                return "At the beginning of your upkeep, " + effects.getText(this);
+                return "At the beginning of your upkeep, " + getEffects().getText(this);
             case OPPONENT:
-                return "At the beginning of each opponent's upkeep, " + effects.getText(this);
+                return "At the beginning of each opponent's upkeep, " + getEffects().getText(this);
             case ANY:
-                return "At the beginning of each player's upkeep, " + effects.getText(this);
+                return "At the beginning of each player's upkeep, " + getEffects().getText(this);
         }
         return "";
     }

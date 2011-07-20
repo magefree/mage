@@ -50,6 +50,7 @@ import java.util.zip.GZIPOutputStream;
 
 import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.Modes;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
@@ -154,6 +155,9 @@ public class GameController implements GameCallback {
 								break;
 							case CHOOSE_ABILITY:
 								chooseAbility(event.getPlayerId(), event.getAbilities());
+								break;
+							case CHOOSE_MODE:
+								chooseMode(event.getPlayerId(), event.getModes());
 								break;
 							case CHOOSE:
 								choose(event.getPlayerId(), event.getMessage(), event.getChoices());
@@ -349,6 +353,12 @@ public class GameController implements GameCallback {
 	private synchronized void chooseAbility(UUID playerId, Collection<? extends Ability> choices) throws MageException {
 		if (gameSessions.containsKey(playerId))
 			gameSessions.get(playerId).chooseAbility(new AbilityPickerView(choices));
+		informOthers(playerId);
+	}
+
+	private synchronized void chooseMode(UUID playerId, Map<UUID, String> modes) throws MageException {
+		if (gameSessions.containsKey(playerId))
+			gameSessions.get(playerId).chooseAbility(new AbilityPickerView(modes));
 		informOthers(playerId);
 	}
 

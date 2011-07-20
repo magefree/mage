@@ -330,4 +330,11 @@ public interface Ability extends Serializable {
 	 * @return A new copy of this ability.
 	 */
 	public Ability copy();
+	
+	public boolean isModal();
+	
+	public void addMode(Mode mode);
+	
+	public Modes getModes();
+	
 }

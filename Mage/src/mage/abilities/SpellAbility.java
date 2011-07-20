@@ -61,7 +61,7 @@ public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
 				object.getAbilities().containsKey(FlashAbility.getInstance().getId()) ||
 				game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST, game) ||
 				game.canPlaySorcery(playerId))) {
-			if (costs.canPay(sourceId, controllerId, game) && targets.canChoose(sourceId, playerId, game)) {
+			if (costs.canPay(sourceId, controllerId, game) && getTargets().canChoose(sourceId, playerId, game)) {
 				return true;
 			}
 		}
@@ -82,8 +82,8 @@ public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
 	}
 
 	public void clear() {
-		this.choices.clearChosen();
-		this.targets.clearChosen();
+		getChoices().clearChosen();
+		getTargets().clearChosen();
 		this.manaCosts.clearPaid();
 		this.costs.clearPaid();
 	}
