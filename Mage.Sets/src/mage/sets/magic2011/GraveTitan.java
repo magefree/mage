@@ -103,7 +103,7 @@ class GraveTitanAbility extends TriggeredAbilityImpl<GraveTitanAbility> {
 
 	@Override
 	public String getRule() {
-		return "Whenever Grave Titan enters the battlefield or attacks, put two 2/2 black Zombie creature tokens onto the battlefield";
+		return "Whenever {this} enters the battlefield or attacks, put two 2/2 black Zombie creature tokens onto the battlefield";
 	}
 
 }

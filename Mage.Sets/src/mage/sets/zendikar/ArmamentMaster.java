@@ -90,7 +90,7 @@ class ArmamentMasterEffect extends ContinuousEffectImpl<ArmamentMasterEffect> {
 
     public ArmamentMasterEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        staticText = "Other Kor creatures you control get +2/+2 for each Equipment attached to Armament Master";
+        staticText = "Other Kor creatures you control get +2/+2 for each Equipment attached to {this}";
     }
 
     public ArmamentMasterEffect(final ArmamentMasterEffect effect) {

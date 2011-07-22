@@ -100,6 +100,6 @@ class BurningTreeShamanTriggeredAbility extends TriggeredAbilityImpl<BurningTree
 
     @Override
     public String getRule() {
-        return "Whenever a player activates an ability that isn't a mana ability, Burning-Tree Shaman deals 1 damage to that player.";
+        return "Whenever a player activates an ability that isn't a mana ability, {this} deals 1 damage to that player.";
     }
 }

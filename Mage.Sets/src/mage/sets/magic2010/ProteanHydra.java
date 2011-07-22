@@ -84,7 +84,7 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 
 		public ProteanHydraEffect1() {
 			super(Outcome.BoostCreature);
-			staticText = "Protean Hydra enters the battlefield with X +1/+1 counters on it";
+			staticText = "{this} enters the battlefield with X +1/+1 counters on it";
 		}
 
 		public ProteanHydraEffect1(final ProteanHydraEffect1 effect) {
@@ -116,7 +116,7 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 
 		public ProteanHydraEffect2(final ProteanHydraEffect2 effect) {
 			super(effect);
-			staticText = "If damage would be dealt to Protean Hydra, prevent that damage and remove that many +1/+1 counters from it";
+			staticText = "If damage would be dealt to {this}, prevent that damage and remove that many +1/+1 counters from it";
 		}
 
 		@Override
@@ -183,7 +183,7 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 
 		@Override
 		public String getRule() {
-			return "Whenever a +1/+1 counter is removed from Protean Hydra, put two +1/+1 counters on it at the beginning of the next end step.";
+			return "Whenever a +1/+1 counter is removed from {this}, put two +1/+1 counters on it at the beginning of the next end step.";
 		}
 
 	}

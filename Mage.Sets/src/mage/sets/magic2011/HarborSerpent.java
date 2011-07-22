@@ -86,7 +86,7 @@ class HarborSerpentEffect extends ReplacementEffectImpl<HarborSerpentEffect> {
 
 	public HarborSerpentEffect() {
 		super(Duration.WhileOnBattlefield, Outcome.Benefit);
-		staticText = "Harbor Serpent can't attack unless there are five or more Islands on the battlefield";
+		staticText = "{this} can't attack unless there are five or more Islands on the battlefield";
 	}
 
 	public HarborSerpentEffect(final HarborSerpentEffect effect) {

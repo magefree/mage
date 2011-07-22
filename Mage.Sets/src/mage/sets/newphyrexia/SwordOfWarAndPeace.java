@@ -123,14 +123,14 @@ class SwordOfWarAndPeaceAbility extends TriggeredAbilityImpl<SwordOfWarAndPeaceA
 
     @Override
     public String getRule() {
-        return "Whenever equipped creature deals combat damage to a player, Sword of War and Peace deals damage to that player equal to the number of cards in his or her hand and you gain 1 life for each card in your hand.";
+        return "Whenever equipped creature deals combat damage to a player, {this} deals damage to that player equal to the number of cards in his or her hand and you gain 1 life for each card in your hand.";
     }
 }
 
 class SwordOfWarAndPeaceDamageEffect extends OneShotEffect<SwordOfWarAndPeaceDamageEffect> {
     SwordOfWarAndPeaceDamageEffect() {
         super(Outcome.Damage);
-        staticText = "Sword of War and Peace deals damage to that player equal to the number of cards in his or her hand";
+        staticText = "{this} deals damage to that player equal to the number of cards in his or her hand";
     }
 
     SwordOfWarAndPeaceDamageEffect(final SwordOfWarAndPeaceDamageEffect effect) {

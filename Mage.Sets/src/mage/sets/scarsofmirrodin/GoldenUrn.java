@@ -76,7 +76,7 @@ public class GoldenUrn extends CardImpl<GoldenUrn> {
 class GoldenUrnEffect extends OneShotEffect<GoldenUrnEffect> {
     public GoldenUrnEffect() {
         super(Constants.Outcome.GainLife);
-        staticText = "You gain life equal to the number of charge counters on Golden Urn";
+        staticText = "You gain life equal to the number of charge counters on {this}";
     }
 
     public GoldenUrnEffect(final GoldenUrnEffect effect) {

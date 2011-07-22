@@ -95,7 +95,7 @@ class KhalniHeartExpeditionAbility extends ActivatedAbilityImpl<KhalniHeartExped
 
 	@Override
 	public String getRule() {
-		return "Remove three quest counters from Khalni Heart Expedition and sacrifice it: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library.";
+		return "Remove three quest counters from {this} and sacrifice it: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library.";
 	}
 
 }

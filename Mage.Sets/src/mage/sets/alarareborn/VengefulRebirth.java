@@ -77,7 +77,7 @@ class VengefulRebirthEffect extends OneShotEffect<VengefulRebirthEffect> {
 
 	public VengefulRebirthEffect() {
 		super(Outcome.DrawCard);
-		staticText = "Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, Vengeful Rebirth deals damage equal to that card's converted mana cost to target creature or player";
+		staticText = "Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, {this} deals damage equal to that card's converted mana cost to target creature or player";
 	}
 
 	public VengefulRebirthEffect(final VengefulRebirthEffect effect) {

@@ -73,7 +73,7 @@ public class RatchetBomb extends CardImpl<RatchetBomb> {
 
         public RatchetBombEffect() {
             super(Constants.Outcome.DestroyPermanent);
-            staticText = "Destroy each nonland permanent with converted mana cost equal to the number of charge counters on Ratchet Bomb";
+            staticText = "Destroy each nonland permanent with converted mana cost equal to the number of charge counters on {this}";
         }
 
         public RatchetBombEffect(final RatchetBombEffect effect) {

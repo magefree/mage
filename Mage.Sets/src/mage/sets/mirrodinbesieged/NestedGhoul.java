@@ -93,6 +93,6 @@ class NestedGhoulTriggeredAbility extends TriggeredAbilityImpl<NestedGhoulTrigge
 
     @Override
     public String getRule() {
-        return "Whenever a source deals damage to Nested Ghoul, put a 2/2 black Zombie creature token onto the battlefield.";
+        return "Whenever a source deals damage to {this}, put a 2/2 black Zombie creature token onto the battlefield.";
     }
 }

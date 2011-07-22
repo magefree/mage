@@ -76,7 +76,7 @@ class SorcerersStrongboxEffect extends OneShotEffect<SorcerersStrongboxEffect> {
 
 	public SorcerersStrongboxEffect() {
 		super(Outcome.DrawCard);
-		staticText = "Flip a coin. If you win the flip, sacrifice Sorcerer's Strongbox and draw three cards";
+		staticText = "Flip a coin. If you win the flip, sacrifice {this} and draw three cards";
 	}
 
 	public SorcerersStrongboxEffect(final SorcerersStrongboxEffect effect) {

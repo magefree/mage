@@ -102,7 +102,7 @@ class BloodcrazedGoblinEffect extends ReplacementEffectImpl<BloodcrazedGoblinEff
 
 	public BloodcrazedGoblinEffect() {
 		super(Duration.WhileOnBattlefield, Outcome.Benefit);
-		staticText = "Bloodcrazed Goblin can't attack unless an opponent has been dealt damage this turn";
+		staticText = "{this} can't attack unless an opponent has been dealt damage this turn";
 	}
 
 	public BloodcrazedGoblinEffect(final BloodcrazedGoblinEffect effect) {

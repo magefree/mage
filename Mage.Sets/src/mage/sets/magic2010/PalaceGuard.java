@@ -75,7 +75,7 @@ public class PalaceGuard extends CardImpl<PalaceGuard> {
 
 		public PalaceGuardEffect() {
 			super(Duration.WhileOnBattlefield, Outcome.Benefit);
-			staticText = "Palace Guard can block any number of creatures";
+			staticText = "{this} can block any number of creatures";
 		}
 
 		public PalaceGuardEffect(final PalaceGuardEffect effect) {

@@ -99,6 +99,6 @@ class AshlingTheExtinguisherTriggeredAbility extends TriggeredAbilityImpl<Ashlin
 
     @Override
     public String getRule() {
-        return "Whenever Ashling, the Extinguisher deals combat damage to a player, choose target creature that player controls. He or she sacrifices that creature.";
+        return "Whenever {this} deals combat damage to a player, choose target creature that player controls. He or she sacrifices that creature.";
     }
 }

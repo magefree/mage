@@ -97,6 +97,6 @@ class NemesisOfReasonTriggeredAbility extends TriggeredAbilityImpl<NemesisOfReas
 
     @Override
     public String getRule() {
-        return "Whenever Nemesis of Reason attacks, defending player puts the top ten cards of his or her library into his or her graveyard.";
+        return "Whenever {this} attacks, defending player puts the top ten cards of his or her library into his or her graveyard.";
     }
 }

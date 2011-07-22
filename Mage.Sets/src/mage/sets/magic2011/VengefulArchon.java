@@ -82,7 +82,7 @@ class VengefulArchonEffect extends PreventionEffectImpl<VengefulArchonEffect> {
 
 	public VengefulArchonEffect() {
 		super(Duration.EndOfTurn);
-		staticText = "Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, Vengeful Archon deals that much damage to target player";
+		staticText = "Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, {this} deals that much damage to target player";
 	}
 
 	public VengefulArchonEffect(final VengefulArchonEffect effect) {

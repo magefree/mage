@@ -121,7 +121,7 @@ class SunTitanAbility extends TriggeredAbilityImpl<SunTitanAbility> {
 
 	@Override
 	public String getRule() {
-		return "Whenever Sun Titan enters the battlefield or attacks, you may return target permanent card with converted mana cost 3 or less from your graveyard to the battlefield.";
+		return "Whenever {this} enters the battlefield or attacks, you may return target permanent card with converted mana cost 3 or less from your graveyard to the battlefield.";
 	}
 
 }

@@ -115,7 +115,7 @@ class GhostCouncilOfOrzhovaEffect extends OneShotEffect<GhostCouncilOfOrzhovaEff
 
 class GhostCouncilOfOrzhovaRemovingEffect extends OneShotEffect<GhostCouncilOfOrzhovaRemovingEffect> {
 
-	private static final String effectText = "Exile Ghost Council of Orzhova. Return it to the battlefield under its owner's control at the beginning of the next end step";
+	private static final String effectText = "Exile {this}. Return it to the battlefield under its owner's control at the beginning of the next end step";
 
 	GhostCouncilOfOrzhovaRemovingEffect () {
 		super(Outcome.Benefit);

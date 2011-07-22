@@ -104,7 +104,7 @@ class AkkiUnderminerAbility extends TriggeredAbilityImpl<AkkiUnderminerAbility> 
 
     @Override
     public String getRule() {
-        return "Whenever Akki Underminer deals combat damage to a player, that player sacrifices a permanent.";
+        return "Whenever {this} deals combat damage to a player, that player sacrifices a permanent.";
     }
 }
 

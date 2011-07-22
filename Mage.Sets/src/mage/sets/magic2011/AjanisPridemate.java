@@ -95,7 +95,7 @@ class AjanisPridemateAbility extends TriggeredAbilityImpl<AjanisPridemateAbility
 
 	@Override
 	public String getRule() {
-		return "Whenever you gain life, you may put a +1/+1 counter on Ajani's Pridemate.";
+		return "Whenever you gain life, you may put a +1/+1 counter on {this}.";
 	}
 
 }

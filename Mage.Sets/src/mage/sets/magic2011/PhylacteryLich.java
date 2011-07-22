@@ -105,7 +105,7 @@ public class PhylacteryLich extends CardImpl<PhylacteryLich> {
 		
 		@Override
 		public String getRule() {
-			return "When you control no permanents with phylactery counters on them, sacrifice Phylactery Lich.";
+			return "When you control no permanents with phylactery counters on them, sacrifice {this}.";
 		}
 
 	}

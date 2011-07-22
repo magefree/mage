@@ -120,7 +120,7 @@ class KalastriaHighbornTriggeredAbility extends TriggeredAbilityImpl<KalastriaHi
 
 	@Override
 	public String getRule() {
-		return "Whenever Kalastria Highborn or another Vampire you control is put"
+		return "Whenever {this} or another Vampire you control is put"
 				+ " into a graveyard from the battlefield, you may pay {B}. If you"
 				+ " do, target player loses 2 life and you gain 2 life.";
 	}

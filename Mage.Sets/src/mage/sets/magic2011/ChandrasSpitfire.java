@@ -94,7 +94,7 @@ class ChandrasSpitfireAbility extends TriggeredAbilityImpl<ChandrasSpitfireAbili
 
 	@Override
 	public String getRule() {
-		return "Whenever an opponent is dealt noncombat damage, Chandra's Spitfire gets +3/+0 until end of turn.";
+		return "Whenever an opponent is dealt noncombat damage, {this} gets +3/+0 until end of turn.";
 	}
 
 	@Override

@@ -118,7 +118,7 @@ class MyrBattlesphereAbility extends TriggeredAbilityImpl<MyrBattlesphereAbility
 
 	@Override
 	public String getRule() {
-		return "When Myr Battlesphere attacks, " + super.getRule();
+		return "When {this} attacks, " + super.getRule();
 	}
 
 	@Override

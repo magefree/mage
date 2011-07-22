@@ -81,7 +81,7 @@ class SerraAscendantEffect extends ContinuousEffectImpl<SerraAscendantEffect> {
 
 	public SerraAscendantEffect() {
 		super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-		staticText = "As long as you have 30 or more life, Serra Ascendant gets +5/+5 and has flying";
+		staticText = "As long as you have 30 or more life, {this} gets +5/+5 and has flying";
 	}
 
 	public SerraAscendantEffect(final SerraAscendantEffect effect) {

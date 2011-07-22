@@ -98,6 +98,6 @@ class GloryscaleViashinoAbility extends TriggeredAbilityImpl<GloryscaleViashinoA
 
     @Override
     public String getRule() {
-        return "Whenever you cast a multicolored spell, Gloryscale Viashino gets +3/+3 until end of turn.";
+        return "Whenever you cast a multicolored spell, {this} gets +3/+3 until end of turn.";
     }
 }

@@ -99,7 +99,7 @@ class BeastmasterAscensionAbility extends TriggeredAbilityImpl<BeastmasterAscens
 
 	@Override
 	public String getRule() {
-		return "Whenever a creature you control attacks, you may put a quest counter on Beastmaster Ascension.";
+		return "Whenever a creature you control attacks, you may put a quest counter on {this}.";
 	}
 
 }
@@ -108,7 +108,7 @@ class BeastmasterAscensionEffect extends BoostControlledEffect {
 
 	public BeastmasterAscensionEffect() {
 		super(5, 5, Duration.WhileOnBattlefield);
-		staticText = "As long as Beastmaster Ascension has seven or more quest counters on it, creatures you control get +5/+5";
+		staticText = "As long as {this} has seven or more quest counters on it, creatures you control get +5/+5";
 	}
 
 	public BeastmasterAscensionEffect(final BeastmasterAscensionEffect effect) {

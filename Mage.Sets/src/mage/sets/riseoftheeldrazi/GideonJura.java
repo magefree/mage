@@ -112,7 +112,7 @@ class GideonJuraEffect extends RequirementEffect<GideonJuraEffect> {
 
 	public GideonJuraEffect() {
 		super(Duration.Custom);
-		staticText = "During target opponent's next turn, creatures that player controls attack Gideon Jura if able";
+		staticText = "During target opponent's next turn, creatures that player controls attack {this} if able";
 	}
 
 	public GideonJuraEffect(final GideonJuraEffect effect) {

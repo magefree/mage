@@ -102,7 +102,7 @@ class GlintHawkIdolTriggeredAbility extends TriggeredAbilityImpl<GlintHawkIdolTr
 
     @Override
     public String getRule() {
-        return "Whenever another artifact enters the battlefield under your control, you may have Glint Hawk Idol become a 2/2 Bird artifact creature with flying until end of turn.";
+        return "Whenever another artifact enters the battlefield under your control, you may have {this} become a 2/2 Bird artifact creature with flying until end of turn.";
     }
 }
 

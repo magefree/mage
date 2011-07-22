@@ -108,7 +108,7 @@ class BloodhallOozeTriggeredAbility1 extends TriggeredAbilityImpl<BloodhallOozeT
 
     @Override
     public String getRule() {
-        return "At the beginning of your upkeep, if you control a black permanent, you may put a +1/+1 counter on Bloodhall Ooze.";
+        return "At the beginning of your upkeep, if you control a black permanent, you may put a +1/+1 counter on {this}.";
     }
 }
 
@@ -149,6 +149,6 @@ class BloodhallOozeTriggeredAbility2 extends TriggeredAbilityImpl<BloodhallOozeT
 
     @Override
     public String getRule() {
-        return "At the beginning of your upkeep, if you control a green permanent, you may put a +1/+1 counter on Bloodhall Ooze.";
+        return "At the beginning of your upkeep, if you control a green permanent, you may put a +1/+1 counter on {this}.";
     }
 }

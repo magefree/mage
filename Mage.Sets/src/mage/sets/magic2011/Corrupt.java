@@ -80,7 +80,7 @@ class CorruptEffect extends OneShotEffect<CorruptEffect> {
 
 	public CorruptEffect() {
 		super(Outcome.Damage);
-		staticText = "Corrupt deals damage equal to the number of Swamps you control to target creature or player. You gain life equal to the damage dealt this way";
+		staticText = "{this} deals damage equal to the number of Swamps you control to target creature or player. You gain life equal to the damage dealt this way";
 	}
 
 	public CorruptEffect(final CorruptEffect effect) {

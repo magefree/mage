@@ -92,7 +92,7 @@ public class PhantomBeast extends CardImpl<PhantomBeast> {
 
 		@Override
 		public String getRule() {
-			return "When Phantom Beast becomes the target of a spell or ability, sacrifice it";
+			return "When {this} becomes the target of a spell or ability, sacrifice it";
 		}
 
 	}

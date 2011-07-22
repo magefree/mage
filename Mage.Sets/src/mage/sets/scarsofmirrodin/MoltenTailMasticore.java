@@ -113,6 +113,6 @@ class MoltenTailMasticoreAbility extends TriggeredAbilityImpl<MoltenTailMasticor
 
 	@Override
 	public String getRule() {
-		return "At the beginning of your upkeep, sacrifice Molten-Tail Masticore unless you discard a card.";
+		return "At the beginning of your upkeep, sacrifice {this} unless you discard a card.";
 	}
 }

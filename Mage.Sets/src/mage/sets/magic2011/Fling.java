@@ -72,7 +72,7 @@ class FlingEffect extends OneShotEffect<FlingEffect> {
 
 	public FlingEffect() {
 		super(Outcome.Damage);
-		staticText = "Fling deals damage equal to the sacrificed creature's power to target creature or player";
+		staticText = "{this} deals damage equal to the sacrificed creature's power to target creature or player";
 	}
 
 	public FlingEffect(final FlingEffect effect) {

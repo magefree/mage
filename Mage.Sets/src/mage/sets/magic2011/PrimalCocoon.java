@@ -136,7 +136,7 @@ class PrimalCocoonAbility2 extends TriggeredAbilityImpl<PrimalCocoonAbility2> {
 
 	@Override
 	public String getRule() {
-		return "When enchanted creature attacks or blocks, sacrifice Primal Cocoon.";
+		return "When enchanted creature attacks or blocks, sacrifice {this}.";
 	}
 
 }

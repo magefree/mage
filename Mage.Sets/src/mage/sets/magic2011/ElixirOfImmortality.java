@@ -78,7 +78,7 @@ class ElixerOfImmortalityEffect extends OneShotEffect<ElixerOfImmortalityEffect>
 
 	public ElixerOfImmortalityEffect() {
 		super(Outcome.GainLife);
-		staticText = "Shuffle Elixir of Immortality and your graveyard into your library";
+		staticText = "Shuffle {this} and your graveyard into your library";
 	}
 
 	public ElixerOfImmortalityEffect(final ElixerOfImmortalityEffect effect) {

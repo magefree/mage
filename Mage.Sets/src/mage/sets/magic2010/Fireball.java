@@ -77,7 +77,7 @@ class FireballEffect extends OneShotEffect<FireballEffect> {
 
 	public FireballEffect() {
 		super(Outcome.Damage);
-		staticText = "Fireball deals X damage divided evenly, rounded down, among any number of target creatures and/or players.\n Fireball costs {1} more to cast for each target beyond the first.";
+		staticText = "{this} deals X damage divided evenly, rounded down, among any number of target creatures and/or players.\n {this} costs {1} more to cast for each target beyond the first.";
 	}
 
 	public FireballEffect(final FireballEffect effect) {

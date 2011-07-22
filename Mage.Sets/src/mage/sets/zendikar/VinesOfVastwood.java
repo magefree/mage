@@ -90,7 +90,7 @@ class VinesOfVastwoodEffect extends ReplacementEffectImpl<VinesOfVastwoodEffect>
 	public VinesOfVastwoodEffect(FilterStackObject filterSource, Duration duration) {
 		super(duration, Outcome.Benefit);
 		this.filterSource = filterSource;
-		staticText = "Target creature can't be the target of spells or abilities your opponents control this turn. If Vines of Vastwood was kicked, that creature gets +4/+4 until end of turn.";
+		staticText = "Target creature can't be the target of spells or abilities your opponents control this turn. If {this} was kicked, that creature gets +4/+4 until end of turn.";
 	}
 
 	public VinesOfVastwoodEffect(final VinesOfVastwoodEffect effect) {

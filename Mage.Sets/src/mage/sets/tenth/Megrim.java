@@ -90,6 +90,6 @@ class MergimTriggeredAbility extends TriggeredAbilityImpl<MergimTriggeredAbility
 
     @Override
     public String getRule() {
-        return "Whenever an opponent discards a card, Megrim deals 2 damage to that player.";
+        return "Whenever an opponent discards a card, {this} deals 2 damage to that player.";
     }
 }

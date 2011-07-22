@@ -113,6 +113,6 @@ class GoblinRazerunnersTriggeredAbility extends TriggeredAbilityImpl<GoblinRazer
 
     @Override
     public String getRule() {
-        return "At the beginning of your end step, you may have Goblin Razerunners deal damage equal to the number of +1/+1 counters on it to target player.";
+        return "At the beginning of your end step, you may have {this} deal damage equal to the number of +1/+1 counters on it to target player.";
     }
 }

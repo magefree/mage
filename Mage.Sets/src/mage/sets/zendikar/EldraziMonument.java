@@ -81,7 +81,7 @@ class EldraziMonumentEffect extends OneShotEffect<EldraziMonumentEffect> {
 
 	public EldraziMonumentEffect() {
 		super(Outcome.Sacrifice);
-		staticText = "sacrifice a creature. If you can't, sacrifice Eldrazi Monument";
+		staticText = "sacrifice a creature. If you can't, sacrifice {this}";
 	}
 
 	public EldraziMonumentEffect(final EldraziMonumentEffect ability) {

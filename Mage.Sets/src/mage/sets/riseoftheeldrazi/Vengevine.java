@@ -102,7 +102,7 @@ class VengevineAbility extends TriggeredAbilityImpl<VengevineAbility> {
 
 	@Override
 	public String getRule() {
-		return "Whenever you cast a spell, if it's the second creature spell you cast this turn, you may return Vengevine from your graveyard to the battlefield.";
+		return "Whenever you cast a spell, if it's the second creature spell you cast this turn, you may return {this} from your graveyard to the battlefield.";
 	}
 
 }

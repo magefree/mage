@@ -120,6 +120,6 @@ class SwordOfFireAndIceAbility extends TriggeredAbilityImpl<SwordOfFireAndIceAbi
 
     @Override
     public String getRule() {
-        return "Whenever equipped creature deals combat damage to a player, Sword of Fire and Ice deals 2 damage to target creature or player and you draw a card.";
+        return "Whenever equipped creature deals combat damage to a player, {this} deals 2 damage to target creature or player and you draw a card.";
     }
 }

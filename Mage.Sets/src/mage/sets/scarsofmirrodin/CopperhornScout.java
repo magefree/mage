@@ -98,7 +98,7 @@ class CopperhornScoutTriggeredAbility extends TriggeredAbilityImpl<CopperhornSco
 
 	@Override
 	public String getRule() {
-		return "Whenever Copperhorn Scout attacks, untap each other creature you control.";
+		return "Whenever {this} attacks, untap each other creature you control.";
 	}
 }
 

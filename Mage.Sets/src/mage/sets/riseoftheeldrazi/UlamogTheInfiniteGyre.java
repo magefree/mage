@@ -83,7 +83,7 @@ public class UlamogTheInfiniteGyre extends CardImpl<UlamogTheInfiniteGyre> {
 
 class UlamogTheInfiniteGyreDestroyOnCastAbility extends TriggeredAbilityImpl<UlamogTheInfiniteGyreDestroyOnCastAbility> {
 
-	private static final String abilityText = "When you cast Ulamog, the Infinite Gyre, destroy target permanent";
+	private static final String abilityText = "When you cast {this}, destroy target permanent";
 
 	UlamogTheInfiniteGyreDestroyOnCastAbility ( ) {
 		super(Zone.STACK, new DestroyTargetEffect());

@@ -81,7 +81,7 @@ public class ArgentSphinx extends CardImpl<ArgentSphinx> {
 
 class ArgentSphinxEffect extends OneShotEffect<ArgentSphinxEffect> {
 
-	private static final String effectText = "Exile Argent Sphinx. Return it to the battlefield under your control at the beginning of the next end step";
+	private static final String effectText = "Exile {this}. Return it to the battlefield under your control at the beginning of the next end step";
 
 	ArgentSphinxEffect ( ) {
 		super(Constants.Outcome.Benefit);

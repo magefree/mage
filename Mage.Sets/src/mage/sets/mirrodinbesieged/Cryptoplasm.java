@@ -75,7 +75,7 @@ class CryptoplasmTransformEffect extends ContinuousEffectImpl<CryptoplasmTransfo
 
     CryptoplasmTransformEffect() {
         super(Constants.Duration.WhileOnBattlefield, Constants.Layer.CopyEffects_1, Constants.SubLayer.NA, Constants.Outcome.BecomeCreature);
-        staticText = "you may have Cryptoplasm become a copy of another target creature. If you do, Cryptoplasm gains this ability";
+        staticText = "you may have {this} become a copy of another target creature. If you do, {this} gains this ability";
     }
 
     CryptoplasmTransformEffect(final CryptoplasmTransformEffect effect) {

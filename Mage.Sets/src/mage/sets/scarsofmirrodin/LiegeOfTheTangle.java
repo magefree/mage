@@ -118,7 +118,7 @@ class LiegeOfTheTangleTriggeredAbility extends TriggeredAbilityImpl<LiegeOfTheTa
 
 	@Override
 	public String getRule() {
-		return "Whenever Liege of the Tangle deals combat damage to a player, you may choose any number of target lands you control and put an awakening counter on each of them. Each of those lands is an 8/8 green Elemental creature for as long as it has an awakening counter on it. They're still lands.";
+		return "Whenever {this} deals combat damage to a player, you may choose any number of target lands you control and put an awakening counter on each of them. Each of those lands is an 8/8 green Elemental creature for as long as it has an awakening counter on it. They're still lands.";
 	}
 }
 

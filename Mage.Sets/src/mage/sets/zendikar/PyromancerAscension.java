@@ -116,7 +116,7 @@ class PyromancerAscensionQuestTriggeredAbility extends TriggeredAbilityImpl<Pyro
 
 	@Override
 	public String getRule() {
-		return "Whenever you cast an instant or sorcery spell that has the same name as a card in your graveyard, you may put a quest counter on Pyromancer Ascension.";
+		return "Whenever you cast an instant or sorcery spell that has the same name as a card in your graveyard, you may put a quest counter on {this}.";
 	}
 }
 
@@ -167,6 +167,6 @@ class PyromancerAscensionCopyTriggeredAbility extends TriggeredAbilityImpl<Pyrom
 
 	@Override
 	public String getRule() {
-		return "Whenever you cast an instant or sorcery spell while Pyromancer Ascension has two or more quest counters on it, you may copy that spell. You may choose new targets for the copy.";
+		return "Whenever you cast an instant or sorcery spell while {this} has two or more quest counters on it, you may copy that spell. You may choose new targets for the copy.";
 	}
 }

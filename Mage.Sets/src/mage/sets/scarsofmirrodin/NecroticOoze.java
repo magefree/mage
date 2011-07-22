@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
  * 
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,10 +25,8 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.scarsofmirrodin;
 
-package mage.sets.magic2011;
-
-import java.util.Iterator;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
@@ -39,88 +37,93 @@ import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.StaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.FlyingAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GargoyleSentinel extends CardImpl<GargoyleSentinel> {
+public class NecroticOoze extends CardImpl<NecroticOoze> {
 
-	public GargoyleSentinel(UUID ownerId) {
-		super(ownerId, 207, "Gargoyle Sentinel", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Gargoyle");
-		this.power = new MageInt(3);
+	public NecroticOoze(UUID ownerId) {
+		super(ownerId, 72, "Necrotic Ooze", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+		this.expansionSetCode = "SOM";
+		this.subtype.add("Ooze");
+		this.color.setBlack(true);
+		this.power = new MageInt(4);
 		this.toughness = new MageInt(3);
 
-		this.addAbility(DefenderAbility.getInstance());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GargoyleSentinelEffect(), new ManaCostsImpl("{3}")));
+		this.addAbility(new NecroticOozeAbility());
 	}
 
-	public GargoyleSentinel(final GargoyleSentinel card) {
+	public NecroticOoze(final NecroticOoze card) {
 		super(card);
 	}
 
 	@Override
-	public GargoyleSentinel copy() {
-		return new GargoyleSentinel(this);
+	public NecroticOoze copy() {
+		return new NecroticOoze(this);
 	}
 
 }
 
-class GargoyleSentinelEffect extends ContinuousEffectImpl<GargoyleSentinelEffect> {
+class NecroticOozeAbility extends StaticAbility<NecroticOozeAbility> {
 
-	public GargoyleSentinelEffect() {
-		super(Duration.EndOfTurn, Outcome.AddAbility);
-		staticText = "Until end of turn, {this} loses defender and gains flying";
+	public NecroticOozeAbility() {
+		super(Zone.BATTLEFIELD, new NecroticOozeEffect());
 	}
+	
+	public NecroticOozeAbility(final NecroticOozeAbility ability) {
+		super(ability);
+	}
+	
+	@Override
+	public NecroticOozeAbility copy() {
+		return new NecroticOozeAbility(this);
+	}
+	
+}
 
-	public GargoyleSentinelEffect(final GargoyleSentinelEffect effect) {
+class NecroticOozeEffect extends ContinuousEffectImpl<NecroticOozeEffect> {
+
+	public NecroticOozeEffect() {
+		super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+		staticText = "As long as {this} is on the battlefield, it has all activated abilities of all creature cards in all graveyards";
+	}
+	
+	public NecroticOozeEffect(final NecroticOozeEffect effect) {
 		super(effect);
 	}
-
-	@Override
-	public GargoyleSentinelEffect copy() {
-		return new GargoyleSentinelEffect(this);
-	}
-
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null) {
-			switch (layer) {
-				case AbilityAddingRemovingEffects_6:
-					if (sublayer == SubLayer.NA) {
-						for (Iterator<Ability> i = permanent.getAbilities().iterator(); i.hasNext();) {
-							Ability entry = i.next();
-							if (entry.getId().equals(DefenderAbility.getInstance().getId()))
-								i.remove();
-						}
-						permanent.getAbilities().add(FlyingAbility.getInstance());
-					}
-					break;
-			}
-			return true;
-		}
-		return false;
-	}
-
+	
 	@Override
 	public boolean apply(Game game, Ability source) {
-		return false;
+		Permanent perm = game.getPermanent(source.getSourceId());
+		if (perm != null) {
+			for (Player player: game.getPlayers().values()) {
+				for (Card card: player.getGraveyard().getCards(game)) {
+					if (card.getCardType().contains(CardType.CREATURE)) {
+						for (Ability ability: card.getAbilities()) {
+							if (ability instanceof ActivatedAbility) {
+								perm.addAbility(ability.copy());
+							}
+						}
+					}
+				}
+			}
+		}
+		return true;
 	}
 
 	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.AbilityAddingRemovingEffects_6;
+	public NecroticOozeEffect copy() {
+		return new NecroticOozeEffect(this);
 	}
-
+	
 }

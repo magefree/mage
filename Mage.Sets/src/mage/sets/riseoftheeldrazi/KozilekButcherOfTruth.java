@@ -78,7 +78,7 @@ public class KozilekButcherOfTruth extends CardImpl<KozilekButcherOfTruth> {
 
 class KozilekButcherOfTruthOnCastAbility extends TriggeredAbilityImpl<KozilekButcherOfTruthOnCastAbility> {
 
-    private static final String abilityText = "When you cast Kozilek, Butcher of Truth, draw four cards";
+    private static final String abilityText = "When you cast {this}, draw four cards";
 
     KozilekButcherOfTruthOnCastAbility() {
         super(Zone.STACK, new DrawCardControllerEffect(4));

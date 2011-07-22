@@ -82,7 +82,7 @@ public class Embersmith extends CardImpl<Embersmith> {
 class EmbersmithEffect extends OneShotEffect<EmbersmithEffect> {
     EmbersmithEffect() {
         super(Constants.Outcome.Damage);
-        staticText =  "you may pay {1}. If you do, Embersmith deals 1 damage to target creature or player";
+        staticText =  "you may pay {1}. If you do, {this} deals 1 damage to target creature or player";
     }
 
     EmbersmithEffect(final EmbersmithEffect effect) {

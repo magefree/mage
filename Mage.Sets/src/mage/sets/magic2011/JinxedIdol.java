@@ -79,7 +79,7 @@ class JinxedIdolEffect extends ContinuousEffectImpl<JinxedIdolEffect> {
 
 	public JinxedIdolEffect() {
 		super(Duration.WhileOnBattlefield, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-		staticText = "Target opponent gains control of Jinxed Idol";
+		staticText = "Target opponent gains control of {this}";
 	}
 
 	public JinxedIdolEffect(final JinxedIdolEffect effect) {

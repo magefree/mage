@@ -99,7 +99,7 @@ class WallOfFrostAbility extends TriggeredAbilityImpl<WallOfFrostAbility> {
 
 	@Override
 	public String getRule() {
-		return "Whenever Wall of Frost blocks a creature, that creature doesn't untap during its controller's next untap step";
+		return "Whenever {this} blocks a creature, that creature doesn't untap during its controller's next untap step";
 	}
 
 }

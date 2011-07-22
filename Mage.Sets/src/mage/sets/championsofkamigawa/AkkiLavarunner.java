@@ -82,7 +82,7 @@ class AkkiLavarunnerAbility extends TriggeredAbilityImpl<AkkiLavarunnerAbility> 
 
     @Override
     public String getRule() {
-        return "Whenever Akki Lavarunner deals damage to an opponent, flip it.";
+        return "Whenever {this} deals damage to an opponent, flip it.";
     }
 }
 

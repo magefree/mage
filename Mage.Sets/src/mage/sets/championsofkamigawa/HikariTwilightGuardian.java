@@ -85,7 +85,7 @@ public class HikariTwilightGuardian extends CardImpl<HikariTwilightGuardian> {
 
 class HikariTwilightGuardianEffect extends OneShotEffect<HikariTwilightGuardianEffect> {
 
-	private static final String effectText = "Exile Hikari, Twilight Guardian. Return it to the battlefield under your control at the beginning of the next end step";
+	private static final String effectText = "Exile {this}. Return it to the battlefield under your control at the beginning of the next end step";
 
 	HikariTwilightGuardianEffect ( ) {
 		super(Constants.Outcome.Benefit);

@@ -79,7 +79,7 @@ class NissasChosenEffect extends ReplacementEffectImpl<NissasChosenEffect> {
 
 	public NissasChosenEffect() {
 		super(Duration.WhileOnBattlefield, Outcome.Benefit);
-		staticText = "If Nissa's Chosen would be put into a graveyard from the battlefield, put it on the bottom of its owner's library instead";
+		staticText = "If {this} would be put into a graveyard from the battlefield, put it on the bottom of its owner's library instead";
 	}
 
 	public NissasChosenEffect(final NissasChosenEffect effect) {

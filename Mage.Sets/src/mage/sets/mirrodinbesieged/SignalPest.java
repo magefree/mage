@@ -87,7 +87,7 @@ class SignalPestAbility extends EvasionAbility<SignalPestAbility> {
 
     @Override
     public String getRule() {
-        return "Signal Pest can't be blocked except by creatures with flying or reach";
+        return "{this} can't be blocked except by creatures with flying or reach";
     }
 
     @Override

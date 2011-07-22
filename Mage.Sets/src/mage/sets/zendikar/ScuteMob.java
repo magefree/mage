@@ -101,6 +101,6 @@ class ScuteMobAbility extends TriggeredAbilityImpl<ScuteMobAbility> {
 
 	@Override
 	public String getRule() {
-		return "At the beginning of your upkeep, if you control five or more lands, put four +1/+1 counters on Scute Mob.";
+		return "At the beginning of your upkeep, if you control five or more lands, put four +1/+1 counters on {this}.";
 	}
 }

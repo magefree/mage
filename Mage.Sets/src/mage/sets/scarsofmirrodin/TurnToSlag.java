@@ -70,7 +70,7 @@ class TurnToSlagEffect extends OneShotEffect<TurnToSlagEffect> {
 
     public TurnToSlagEffect() {
         super(Constants.Outcome.DestroyPermanent);
-        staticText = "Turn to Slag deals 5 damage to target creature. Destroy all Equipment attached to that creature";
+        staticText = "{this} deals 5 damage to target creature. Destroy all Equipment attached to that creature";
     }
 
     public TurnToSlagEffect(final TurnToSlagEffect effect) {

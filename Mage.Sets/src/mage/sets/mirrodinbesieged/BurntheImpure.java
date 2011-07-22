@@ -72,7 +72,7 @@ public class BurntheImpure extends CardImpl<BurntheImpure> {
 	public BurntheImpureEffect(int amount) {
 		super(Constants.Outcome.Damage);
 		this.amount = amount;
-		staticText = "Burn the Impure deals 3 damage to target creature. If that creature has infect, Burn the Impure deals 3 damage to that creature's controller.";
+		staticText = "{this} deals 3 damage to target creature. If that creature has infect, {this} deals 3 damage to that creature's controller.";
 	}
 
 	public int getAmount() {

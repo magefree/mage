@@ -44,7 +44,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
 public class FissureVent extends CardImpl<FissureVent> {
 
 	public FissureVent(UUID ownerId) {
-		super(ownerId, 0, "Fissure Vent", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
+		super(ownerId, 144, "Fissure Vent", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 		this.expansionSetCode = "ROE";
 		this.color.setRed(true);
 		this.getSpellAbility().addTarget(new TargetArtifactPermanent());

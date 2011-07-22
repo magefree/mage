@@ -141,6 +141,6 @@ class TunnelIgnusTriggeredAbility extends TriggeredAbilityImpl<TunnelIgnusTrigge
 
     @Override
     public String getRule() {
-        return "Whenever a land enters the battlefield under an opponent's control, if that player had another land enter the battlefield under his or her control this turn, Tunnel Ignus deals 3 damage to that player.";
+        return "Whenever a land enters the battlefield under an opponent's control, if that player had another land enter the battlefield under his or her control this turn, {this} deals 3 damage to that player.";
     }
 }

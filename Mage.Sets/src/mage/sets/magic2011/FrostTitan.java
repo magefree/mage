@@ -104,7 +104,7 @@ class FrostTitanAbility1 extends TriggeredAbilityImpl<FrostTitanAbility1> {
 
 	@Override
 	public String getRule() {
-		return "Whenever Frost Titan becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}";
+		return "Whenever {this} becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}";
 	}
 
 }
@@ -142,7 +142,7 @@ class FrostTitanAbility2 extends TriggeredAbilityImpl<FrostTitanAbility2> {
 
 	@Override
 	public String getRule() {
-		return "Whenever Frost Titan enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step";
+		return "Whenever {this} enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step";
 	}
 
 }

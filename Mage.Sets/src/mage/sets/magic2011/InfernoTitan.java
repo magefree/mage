@@ -107,7 +107,7 @@ class InfernoTitanAbility extends TriggeredAbilityImpl<InfernoTitanAbility> {
 
 	@Override
 	public String getRule() {
-		return "Whenever Inferno Titan enters the battlefield or attacks, it deals 3 damage divided as you choose among one, two, or three target creatures and/or players.";
+		return "Whenever {this} enters the battlefield or attacks, it deals 3 damage divided as you choose among one, two, or three target creatures and/or players.";
 	}
 
 }

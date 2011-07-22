@@ -93,7 +93,7 @@ class MagneticMineTriggeredAbility extends TriggeredAbilityImpl<MagneticMineTrig
 
     @Override
     public String getRule() {
-        return "Whenever another artifact is put into a graveyard from the battlefield, Magnetic Mine deals 2 damage to that artifact's controller";
+        return "Whenever another artifact is put into a graveyard from the battlefield, {this} deals 2 damage to that artifact's controller";
     }
 
     @Override

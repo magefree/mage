@@ -75,7 +75,7 @@ class ChainedThroatseekerEffect extends ReplacementEffectImpl<ChainedThroatseeke
 
     public ChainedThroatseekerEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Chained Throatseeker can't attack unless defending player is poisoned";
+        staticText = "{this} can't attack unless defending player is poisoned";
     }
 
     public ChainedThroatseekerEffect(final ChainedThroatseekerEffect effect) {

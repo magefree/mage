@@ -80,7 +80,7 @@ class JuggernautAbility extends EvasionAbility<JuggernautAbility> {
 
 	@Override
 	public String getRule() {
-		return "Juggernaut can't be blocked by Walls.";
+		return "{this} can't be blocked by Walls.";
 	}
 
 	@Override

@@ -87,7 +87,7 @@ public class BudokaGardener extends CardImpl<BudokaGardener> {
 class BudokaGardenerEffect extends OneShotEffect<BudokaGardenerEffect> {
     BudokaGardenerEffect() {
         super(Constants.Outcome.PutLandInPlay);
-        staticText = "You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip Budoka Gardener.";
+        staticText = "You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip {this}.";
     }
 
     BudokaGardenerEffect(final BudokaGardenerEffect effect) {

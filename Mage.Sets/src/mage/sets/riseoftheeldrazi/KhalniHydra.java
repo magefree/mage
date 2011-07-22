@@ -94,7 +94,7 @@ public class KhalniHydra extends CardImpl<KhalniHydra> {
 }
 
 class KhalniHydraCostReductionEffect extends OneShotEffect<KhalniHydraCostReductionEffect> {
-	private static final String effectText = "Khalni Hydra costs {G} less to cast for each green creature you control";
+	private static final String effectText = "{this} costs {G} less to cast for each green creature you control";
 
 	KhalniHydraCostReductionEffect ( ) {
 		super(Outcome.Benefit);

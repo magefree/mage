@@ -115,6 +115,6 @@ class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl<Vala
 	
 	@Override
     public String getRule() {
-        return "Whenever a Mountain enters the battlefield under your control, if you control at least five other Mountains, you may have Valakut, the Molten Pinnacle deal 3 damage to target creature or player.";
+        return "Whenever a Mountain enters the battlefield under your control, if you control at least five other Mountains, you may have {this} deal 3 damage to target creature or player.";
     }
 }

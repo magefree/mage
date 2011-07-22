@@ -151,7 +151,7 @@ class IceCageAbility extends TriggeredAbilityImpl<IceCageAbility> {
 
 	@Override
 	public String getRule() {
-		return "When enchanted creature becomes the target of a spell or ability, destroy Ice Cage.";
+		return "When enchanted creature becomes the target of a spell or ability, destroy {this}.";
 	}
 
 }

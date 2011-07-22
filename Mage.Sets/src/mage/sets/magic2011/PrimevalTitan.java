@@ -107,7 +107,7 @@ class PrimevalTitanAbility extends TriggeredAbilityImpl<PrimevalTitanAbility> {
 
 	@Override
 	public String getRule() {
-		return "Whenever Primeval Titan enters the battlefield or attacks, you may search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library.";
+		return "Whenever {this} enters the battlefield or attacks, you may search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library.";
 	}
 
 }

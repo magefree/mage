@@ -90,7 +90,7 @@ public class SarkhanTheMad extends CardImpl<SarkhanTheMad> {
 
 class SarkhanTheMadRevealAndDrawEffect extends OneShotEffect<SarkhanTheMadRevealAndDrawEffect> {
 
-	private static final String effectText = "Reveal the top card of your library and put it into your hand.  Sarkhan the Mad deals damage to himself equal to that card's converted mana cost";
+	private static final String effectText = "Reveal the top card of your library and put it into your hand.  {this} deals damage to himself equal to that card's converted mana cost";
 
 	SarkhanTheMadRevealAndDrawEffect ( ) {
 		super(Outcome.DrawCard);
