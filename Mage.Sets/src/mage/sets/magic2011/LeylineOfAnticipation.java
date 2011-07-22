@@ -72,6 +72,7 @@ class LeylineOfAnticipationEffect extends AsThoughEffectImpl<LeylineOfAnticipati
 
 	public LeylineOfAnticipationEffect() {
 		super(AsThoughEffectType.CAST, Duration.WhileOnBattlefield, Outcome.Benefit);
+		staticText = "You may cast nonland cards as though they had flash";
 	}
 
 	public LeylineOfAnticipationEffect(final LeylineOfAnticipationEffect effect) {
@@ -97,11 +98,6 @@ class LeylineOfAnticipationEffect extends AsThoughEffectImpl<LeylineOfAnticipati
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "You may cast nonland cards as though they had flash";
 	}
 
 }

@@ -50,6 +50,7 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
 		protectionFilter = (FilterCard)((ProtectionAbility)ability).getFilter();
 		protectionFilter.setUseColor(true);
 		protectionFilter.setScopeColor(ComparisonScope.Any);
+		staticText = "target creature you control gains protection from the color of your choice " + duration.toString();
 	}
 
 	public GainProtectionFromColorTargetEffect(final GainProtectionFromColorTargetEffect effect) {
@@ -73,11 +74,6 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "target creature you control gains protection from the color of your choice " + duration.toString();
 	}
 
 }

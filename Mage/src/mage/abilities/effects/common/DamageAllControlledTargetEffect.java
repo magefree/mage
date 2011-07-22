@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common;
 
+import java.text.MessageFormat;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -48,6 +49,8 @@ public class DamageAllControlledTargetEffect extends OneShotEffect<DamageAllCont
 		super(Outcome.Damage);
 		this.amount = amount;
 		this.filter = filter;
+		String message = "'{'source'}' deals {1} damage to each {2} controlled by target player";
+		staticText = MessageFormat.format(message, Integer.toString(amount), filter.getMessage());
 	}
 
 	public DamageAllControlledTargetEffect(final DamageAllControlledTargetEffect effect) {
@@ -67,11 +70,6 @@ public class DamageAllControlledTargetEffect extends OneShotEffect<DamageAllCont
 			permanent.damage(amount, source.getId(), game, true, false);
 		}
 		return true;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "{source} deals " + Integer.toString(amount) + " damage to each " +  filter.getMessage() + " controlled by target player";
 	}
 
 }

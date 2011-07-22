@@ -33,7 +33,6 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -99,6 +98,7 @@ class JaceTheMindSculptorEffect1 extends OneShotEffect<JaceTheMindSculptorEffect
 
 	public JaceTheMindSculptorEffect1() {
 		super(Outcome.Detriment);
+		staticText = "Look at the top card of target player's library. You may put that card on the bottom of that player's library";
 	}
 
 	public JaceTheMindSculptorEffect1(final JaceTheMindSculptorEffect1 effect) {
@@ -129,17 +129,13 @@ class JaceTheMindSculptorEffect1 extends OneShotEffect<JaceTheMindSculptorEffect
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Look at the top card of target player's library. You may put that card on the bottom of that player's library";
-	}
-
 }
 
 class JaceTheMindSculptorEffect2 extends OneShotEffect<JaceTheMindSculptorEffect2> {
 
 	public JaceTheMindSculptorEffect2() {
 		super(Outcome.DrawCard);
+		staticText = "Draw three cards, then put two cards from your hand on top of your library in any order";
 	}
 
 	public JaceTheMindSculptorEffect2(final JaceTheMindSculptorEffect2 effect) {
@@ -175,17 +171,13 @@ class JaceTheMindSculptorEffect2 extends OneShotEffect<JaceTheMindSculptorEffect
 		return true;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Draw three cards, then put two cards from your hand on top of your library in any order";
-	}
-
 }
 
 class JaceTheMindSculptorEffect3 extends OneShotEffect<JaceTheMindSculptorEffect3> {
 
 	public JaceTheMindSculptorEffect3() {
 		super(Outcome.DrawCard);
+		staticText = "Exile all cards from target player's library, then that player shuffles his or her hand into his or her library";
 	}
 
 	public JaceTheMindSculptorEffect3(final JaceTheMindSculptorEffect3 effect) {
@@ -215,11 +207,6 @@ class JaceTheMindSculptorEffect3 extends OneShotEffect<JaceTheMindSculptorEffect
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Exile all cards from target player's library, then that player shuffles his or her hand into his or her library";
 	}
 
 }

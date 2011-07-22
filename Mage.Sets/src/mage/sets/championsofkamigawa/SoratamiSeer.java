@@ -89,6 +89,7 @@ class SoratamiSeerEffect extends OneShotEffect<SoratamiSeerEffect> {
 
     public SoratamiSeerEffect() {
         super(Constants.Outcome.DrawCard);
+        staticText = "Discard all the cards in your hand, then draw that many cards";
     }
 
     public SoratamiSeerEffect(final SoratamiSeerEffect effect) {
@@ -114,8 +115,4 @@ class SoratamiSeerEffect extends OneShotEffect<SoratamiSeerEffect> {
         return new SoratamiSeerEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Discard all the cards in your hand, then draw that many cards";
-    }
 }

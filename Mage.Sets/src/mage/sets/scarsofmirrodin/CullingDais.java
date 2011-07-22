@@ -80,6 +80,7 @@ public class CullingDais extends CardImpl<CullingDais> {
 class CullingDaisEffect extends OneShotEffect<CullingDaisEffect> {
     CullingDaisEffect() {
         super(Constants.Outcome.DrawCard);
+        staticText = "Draw a card for each charge counter on Culling Dais";
     }
 
     CullingDaisEffect(final CullingDaisEffect effect) {
@@ -103,8 +104,4 @@ class CullingDaisEffect extends OneShotEffect<CullingDaisEffect> {
         return new CullingDaisEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Draw a card for each charge counter on Culling Dais";
-    }
 }

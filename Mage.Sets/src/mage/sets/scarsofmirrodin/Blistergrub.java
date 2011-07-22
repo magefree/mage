@@ -32,9 +32,7 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
@@ -73,6 +71,7 @@ class BlistergrubEffect extends OneShotEffect<BlistergrubEffect> {
 
     public BlistergrubEffect() {
         super(Constants.Outcome.Damage);
+        staticText = "each opponent loses 2 life";
     }
 
     public BlistergrubEffect(final BlistergrubEffect effect) {
@@ -87,11 +86,6 @@ class BlistergrubEffect extends OneShotEffect<BlistergrubEffect> {
                 opponent.loseLife(2, game);
         }
         return true;
-    }
-
-    @Override
-    public String getText(Ability source) {
-        return "each opponent loses 2 life";
     }
 
     @Override

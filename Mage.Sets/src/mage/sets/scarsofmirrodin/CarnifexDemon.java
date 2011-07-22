@@ -81,6 +81,7 @@ public class CarnifexDemon extends CardImpl<CarnifexDemon> {
 class CarnifexDemonEffect extends OneShotEffect<CarnifexDemonEffect> {
     public CarnifexDemonEffect() {
         super(Constants.Outcome.UnboostCreature);
+        staticText = "Put a -1/-1 counter on each other creature";
     }
 
     public CarnifexDemonEffect(final CarnifexDemonEffect effect) {
@@ -104,8 +105,4 @@ class CarnifexDemonEffect extends OneShotEffect<CarnifexDemonEffect> {
         return new CarnifexDemonEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Put a -1/-1 counter on each other creature";
-    }
 }

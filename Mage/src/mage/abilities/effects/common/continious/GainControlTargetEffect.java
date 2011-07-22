@@ -33,6 +33,7 @@ import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -66,7 +67,7 @@ public class GainControlTargetEffect extends ContinuousEffectImpl<GainControlTar
 	}
 
 	@Override
-	public String getText(Ability source) {
-		return "Gain control of target " + source.getTargets().get(0).getTargetName() + " " + duration.toString();
+	public String getText(Mode mode) {
+		return "Gain control of target " + mode.getTargets().get(0).getTargetName() + " " + duration.toString();
 	}
 }

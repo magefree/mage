@@ -79,6 +79,7 @@ class CultivateEffect extends OneShotEffect<CultivateEffect> {
 
 	public CultivateEffect() {
 		super(Outcome.PutLandInPlay);
+		staticText = "Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle your library";
 	}
 
 	public CultivateEffect(final CultivateEffect effect) {
@@ -127,11 +128,6 @@ class CultivateEffect extends OneShotEffect<CultivateEffect> {
 		}
 		return true;
 
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle your library";
 	}
 
 }

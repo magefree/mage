@@ -34,9 +34,7 @@ import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
@@ -88,6 +86,7 @@ class AsceticismEffect extends ReplacementEffectImpl<AsceticismEffect> {
 	public AsceticismEffect(FilterStackObject filterSource, Constants.Duration duration) {
 		super(duration, Constants.Outcome.Benefit);
 		this.filterSource = filterSource;
+		staticText = "Creatures you control can't be the targets of spells or abilities your opponents control";
 	}
 
 	public AsceticismEffect(final AsceticismEffect effect) {
@@ -123,11 +122,6 @@ class AsceticismEffect extends ReplacementEffectImpl<AsceticismEffect> {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Creatures you control can't be the targets of spells or abilities your opponents control";
 	}
 
 }

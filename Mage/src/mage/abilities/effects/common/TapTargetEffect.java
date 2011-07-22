@@ -31,6 +31,7 @@ package mage.abilities.effects.common;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -69,12 +70,12 @@ public class TapTargetEffect extends OneShotEffect<TapTargetEffect> {
 	}
 
 	@Override
-	public String getText(Ability source) {
-		Target target = source.getTargets().get(0);
+	public String getText(Mode mode) {
+		Target target = mode.getTargets().get(0);
 		if (target.getNumberOfTargets() > 1)
-			return "tap " + target.getNumberOfTargets() + " target " + source.getTargets().get(0).getTargetName() + "s";
+			return "tap " + target.getNumberOfTargets() + " target " + mode.getTargets().get(0).getTargetName() + "s";
 		else
-			return "tap target " + source.getTargets().get(0).getTargetName();
+			return "tap target " + mode.getTargets().get(0).getTargetName();
 	}
 
 }

@@ -54,6 +54,7 @@ public class DamageAllEffect extends OneShotEffect<DamageAllEffect> {
 		super(Outcome.Damage);
 		this.amount = amount;
 		this.filter = filter;
+		setText();
 	}
 
 	public DamageAllEffect(final DamageAllEffect effect) {
@@ -76,8 +77,7 @@ public class DamageAllEffect extends OneShotEffect<DamageAllEffect> {
 		return true;
 	}
 
-	@Override
-	public String getText(Ability source) {
+	private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append("{source} deals ").append(amount.toString()).append(" damage to each ").append(filter.getMessage());
         String message = amount.getMessage();
@@ -85,7 +85,7 @@ public class DamageAllEffect extends OneShotEffect<DamageAllEffect> {
             sb.append(" for each ");
         }
         sb.append(message);
-        return sb.toString();
+        staticText = sb.toString();
 	}
 
 }

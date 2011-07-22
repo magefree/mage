@@ -75,6 +75,7 @@ public class WalkingAtlas extends CardImpl<WalkingAtlas> {
 class WalkingAtlasEffect extends OneShotEffect<WalkingAtlasEffect> {
     WalkingAtlasEffect() {
         super(Constants.Outcome.PutLandInPlay);
+        staticText = "You may put a land card from your hand onto the battlefield";
     }
 
     WalkingAtlasEffect(final WalkingAtlasEffect effect) {
@@ -96,8 +97,4 @@ class WalkingAtlasEffect extends OneShotEffect<WalkingAtlasEffect> {
         return new WalkingAtlasEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "You may put a land card from your hand onto the battlefield";
-    }
 }

@@ -47,6 +47,7 @@ public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
 
 	public CreateTokenEffect(Token token) {
 		this(token, new StaticValue(1));
+		setText();
 	}
 
 	public CreateTokenEffect(Token token, int amount) {
@@ -78,8 +79,7 @@ public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
 		return true;
 	}
 
-	@Override
-	public String getDynamicText(Ability source) {
+	private void setText() {
         StringBuilder sb = new StringBuilder("put ");
         if (amount.toString().equals("1")) {
             sb.append("a");
@@ -92,7 +92,7 @@ public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
             sb.append(" for each ");
         }
         sb.append(message);
-		return sb.toString();
+		staticText = sb.toString();
 	}
 
 }

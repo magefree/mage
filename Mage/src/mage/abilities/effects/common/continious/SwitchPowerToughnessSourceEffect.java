@@ -44,6 +44,7 @@ public class SwitchPowerToughnessSourceEffect extends ContinuousEffectImpl<Switc
 
     public SwitchPowerToughnessSourceEffect(Duration duration) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SwitchPT_e, Outcome.BoostCreature);
+        staticText = "switch its power and toughness " + duration.toString();
     }
 
     public SwitchPowerToughnessSourceEffect(final SwitchPowerToughnessSourceEffect effect) {
@@ -67,10 +68,4 @@ public class SwitchPowerToughnessSourceEffect extends ContinuousEffectImpl<Switc
         return false;
     }
 
-    @Override
-    public String getText(Ability source) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("switch its power and toughness ").append(duration.toString());
-        return sb.toString();
-    }
-}
+ }

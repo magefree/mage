@@ -75,6 +75,7 @@ class OranRiefTheVastwoodEffect extends OneShotEffect<OranRiefTheVastwoodEffect>
 
 	public OranRiefTheVastwoodEffect() {
 		super(Outcome.BoostCreature);
+		staticText = "Put a +1/+1 counter on each green creature that entered the battlefield this turn";
 	}
 
 	public OranRiefTheVastwoodEffect(final OranRiefTheVastwoodEffect effect) {
@@ -99,11 +100,6 @@ class OranRiefTheVastwoodEffect extends OneShotEffect<OranRiefTheVastwoodEffect>
 			}
 		}
 		return true;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Put a +1/+1 counter on each green creature that entered the battlefield this turn";
 	}
 
 }

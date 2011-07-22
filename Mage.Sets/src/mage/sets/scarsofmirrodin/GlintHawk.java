@@ -86,6 +86,7 @@ class GlintHawkEffect extends OneShotEffect<GlintHawkEffect> {
 	
 	GlintHawkEffect ( ) {
 		super(Outcome.Sacrifice);
+		staticText = effectText;
 	}
 
 	GlintHawkEffect ( GlintHawkEffect effect ) {
@@ -120,8 +121,4 @@ class GlintHawkEffect extends OneShotEffect<GlintHawkEffect> {
 		return new GlintHawkEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return effectText;
-	}
 }

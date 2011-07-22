@@ -108,14 +108,11 @@ class PistonSledgeEquipCost extends AlternativeCost<PistonSledgeEquipCost> {
 class PistonSledgeEffect extends AttachEffect{
 	public PistonSledgeEffect(Outcome outcome) {
 		super(outcome);
+		staticText = "attach it to target creature you control";
 	}
 
 	public PistonSledgeEffect(final AttachEffect effect) {
 		super(effect);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "attach it to target creature you control";
-	}
 }

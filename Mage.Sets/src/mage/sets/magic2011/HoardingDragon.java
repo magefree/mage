@@ -92,6 +92,7 @@ class HoardingDragonEffect extends OneShotEffect<HoardingDragonEffect> {
 		super(Outcome.Exile);
 		this.exileId = exileId;
 		target = new TargetCardInLibrary();
+		staticText = "When Hoarding Dragon enters the battlefield, you may search your library for an artifact card, exile it, then shuffle your library";
 	}
 	
 	public HoardingDragonEffect(final HoardingDragonEffect effect) {
@@ -119,8 +120,4 @@ class HoardingDragonEffect extends OneShotEffect<HoardingDragonEffect> {
 		return new HoardingDragonEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "When Hoarding Dragon enters the battlefield, you may search your library for an artifact card, exile it, then shuffle your library";
-	}
 }

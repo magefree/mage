@@ -31,10 +31,8 @@ package mage.abilities.effects.common.counter;
 import java.util.UUID;
 
 import mage.Constants.Outcome;
-import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -58,6 +56,7 @@ public class AddCountersControllerEffect extends OneShotEffect<AddCountersContro
 		super(Outcome.Benefit);
 		this.counter = counter.copy();
 		this.enchantedEquipped = enchantedEquipped;
+		setText();
 	}
 
 	public AddCountersControllerEffect(final AddCountersControllerEffect effect) {
@@ -88,14 +87,13 @@ public class AddCountersControllerEffect extends OneShotEffect<AddCountersContro
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
+    private void setText() {
 		if (counter.getCount() > 1) {
 			StringBuilder sb = new StringBuilder();
 			sb.append("its controller gets ").append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters");
-			return sb.toString();
+			staticText = sb.toString();
 		} else
-			return "its controller gets a " + counter.getName() + " counter";
+			staticText = "its controller gets a " + counter.getName() + " counter";
 	}
 
 	@Override

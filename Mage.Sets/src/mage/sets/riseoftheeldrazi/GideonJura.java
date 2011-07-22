@@ -112,6 +112,7 @@ class GideonJuraEffect extends RequirementEffect<GideonJuraEffect> {
 
 	public GideonJuraEffect() {
 		super(Duration.Custom);
+		staticText = "During target opponent's next turn, creatures that player controls attack Gideon Jura if able";
 	}
 
 	public GideonJuraEffect(final GideonJuraEffect effect) {
@@ -131,11 +132,6 @@ class GideonJuraEffect extends RequirementEffect<GideonJuraEffect> {
 	@Override
 	public boolean isInactive(Ability source, Game game) {
 		return (game.getPhase().getType() == TurnPhase.END && game.getActivePlayerId().equals(source.getFirstTarget()));
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "During target opponent's next turn, creatures that player controls attack Gideon Jura if able";
 	}
 
 	@Override

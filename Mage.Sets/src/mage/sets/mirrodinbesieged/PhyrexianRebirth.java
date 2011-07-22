@@ -34,10 +34,8 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -70,6 +68,7 @@ public class PhyrexianRebirth extends CardImpl<PhyrexianRebirth> {
 
 		public PhyrexianRebirthEffect() {
 			super(Constants.Outcome.DestroyPermanent);
+            staticText = "Destroy all creatures, then put an X/X colorless Horror artifact creature token onto the battlefield, where X is the number of creatures destroyed this way";
 		}
 
 		public PhyrexianRebirthEffect(PhyrexianRebirthEffect ability) {
@@ -94,10 +93,6 @@ public class PhyrexianRebirth extends CardImpl<PhyrexianRebirth> {
 			return new PhyrexianRebirthEffect(this);
 		}
 
-        @Override
-        public String getText(Ability source) {
-            return "Destroy all creatures, then put an X/X colorless Horror artifact creature token onto the battlefield, where X is the number of creatures destroyed this way";
-        }
     }
 
 class HorrorToken extends Token {

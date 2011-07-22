@@ -82,6 +82,7 @@ class OakenformEffect extends ContinuousEffectImpl<OakenformEffect> {
 
     public OakenformEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
+    	staticText = "Enchanted creature gets +3/+3";
     }
 
     public OakenformEffect(final OakenformEffect effect) {
@@ -116,11 +117,6 @@ class OakenformEffect extends ContinuousEffectImpl<OakenformEffect> {
     @Override
     public boolean hasLayer(Layer layer) {
 	return layer == Layer.PTChangingEffects_7;
-    }
-
-    @Override
-    public String getText(Ability source) {
-    	return "Enchanted creature gets +3/+3";
     }
 
     @Override

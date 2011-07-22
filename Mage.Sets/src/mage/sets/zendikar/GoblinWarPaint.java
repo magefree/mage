@@ -81,6 +81,7 @@ class GoblinWarPaintEffect extends ContinuousEffectImpl<GoblinWarPaintEffect> {
 
     public GoblinWarPaintEffect() {
         super(Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        staticText = "Enchanted creature gets +2/+2 and has haste";
     }
 
     public GoblinWarPaintEffect(final GoblinWarPaintEffect effect) {
@@ -127,8 +128,4 @@ class GoblinWarPaintEffect extends ContinuousEffectImpl<GoblinWarPaintEffect> {
         return new GoblinWarPaintEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Enchanted creature gets +2/+2 and has haste";
-    }
 }

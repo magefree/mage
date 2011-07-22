@@ -30,6 +30,7 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
@@ -100,7 +101,7 @@ public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
 	}
 
     @Override
-    public String getText(Ability source) {
+    public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
         sb.append("{source} deals ");
@@ -108,7 +109,7 @@ public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
             sb.append(amount);
         }
         sb.append(" damage to target ");
-        sb.append(source.getTargets().get(0).getTargetName());
+        sb.append(mode.getTargets().get(0).getTargetName());
         if (message.length() > 0) {
             sb.append(message.equals("1") ? " equal to the number of " : " for each ");
             sb.append(message);

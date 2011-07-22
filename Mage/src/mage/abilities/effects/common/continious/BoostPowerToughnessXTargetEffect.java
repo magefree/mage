@@ -33,6 +33,7 @@ import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -74,9 +75,9 @@ public class BoostPowerToughnessXTargetEffect extends ContinuousEffectImpl<Boost
 	}
 
 	@Override
-	public String getText(Ability source) {
+	public String getText(Mode mode) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Target ").append(source.getTargets().get(0).getTargetName()).append(" gets ");
+		sb.append("Target ").append(mode.getTargets().get(0).getTargetName()).append(" gets ");
 		sb.append(String.format("+X/+X")).append(" ").append(duration.toString());
 		return sb.toString();
 	}

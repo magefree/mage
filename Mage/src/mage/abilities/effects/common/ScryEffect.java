@@ -54,6 +54,7 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
 	public ScryEffect(int scryNumber) {
 		super(Outcome.Benefit);
 		this.scryNumber = scryNumber;
+		staticText = "Scry " + scryNumber;
 	}
 
 	public ScryEffect(final ScryEffect effect) {
@@ -102,11 +103,6 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
 	@Override
 	public ScryEffect copy() {
 		return new ScryEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Scry " + scryNumber;
 	}
 
 }

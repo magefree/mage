@@ -20,6 +20,7 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect<SacrificeSour
     public SacrificeSourceUnlessPaysEffect(Cost cost) {
         super(Outcome.Sacrifice);
         this.cost = cost;
+        staticText = "sacrifice {this} unless you pay " + cost.getText();
     }
 
     public SacrificeSourceUnlessPaysEffect(final SacrificeSourceUnlessPaysEffect effect) {
@@ -48,8 +49,4 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect<SacrificeSour
         return new SacrificeSourceUnlessPaysEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "sacrifice {this} unless you pay " + cost.getText();
-    }
-}
+ }

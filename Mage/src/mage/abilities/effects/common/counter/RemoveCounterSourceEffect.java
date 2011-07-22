@@ -13,6 +13,7 @@ public class RemoveCounterSourceEffect extends OneShotEffect<RemoveCounterSource
     public RemoveCounterSourceEffect(Counter counter) {
         super(Constants.Outcome.UnboostCreature);
         this.counter = counter;
+		setText();
     }
 
     public RemoveCounterSourceEffect(RemoveCounterSourceEffect effect) {
@@ -35,13 +36,12 @@ public class RemoveCounterSourceEffect extends OneShotEffect<RemoveCounterSource
         return new RemoveCounterSourceEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
+     private void setText() {
         if (counter.getCount() > 1) {
 			StringBuilder sb = new StringBuilder();
 			sb.append("remove ").append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters from {this}");
-			return sb.toString();
+			staticText = sb.toString();
 		} else
-			return "remove a " + counter.getName() + " counter from {this}";
+			staticText = "remove a " + counter.getName() + " counter from {this}";
     }
 }

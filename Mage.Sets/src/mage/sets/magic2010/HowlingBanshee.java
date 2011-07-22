@@ -30,16 +30,12 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LoseLifePlayersEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -56,7 +52,7 @@ public class HowlingBanshee extends CardImpl<HowlingBanshee> {
 		this.toughness = new MageInt(3);
 
 		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new HowlingBansheeEffect(), false));
+		this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifePlayersEffect(3), false));
 	}
 
 	public HowlingBanshee(final HowlingBanshee card) {
@@ -70,33 +66,3 @@ public class HowlingBanshee extends CardImpl<HowlingBanshee> {
 
 }
 
-class HowlingBansheeEffect extends OneShotEffect<HowlingBansheeEffect> {
-
-	public HowlingBansheeEffect() {
-		super(Outcome.Damage);
-	}
-
-	public HowlingBansheeEffect(final HowlingBansheeEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public HowlingBansheeEffect copy() {
-		return new HowlingBansheeEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (Player player: game.getPlayers().values()) {
-			player.loseLife(3, game);
-		}
-		return true;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "each player loses 3 life";
-	}
-
-
-}

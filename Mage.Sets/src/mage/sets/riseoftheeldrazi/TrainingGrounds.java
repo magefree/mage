@@ -83,6 +83,7 @@ class TrainingGroundsCostReductionEffect extends ContinuousEffectImpl<TrainingGr
 
 	TrainingGroundsCostReductionEffect ( ) {
 		super(Duration.WhileOnBattlefield, Layer.TextChangingEffects_3, SubLayer.NA, Outcome.Benefit);
+		staticText = effectText;
 	}
 
 	TrainingGroundsCostReductionEffect ( TrainingGroundsCostReductionEffect effect ) {
@@ -128,8 +129,4 @@ class TrainingGroundsCostReductionEffect extends ContinuousEffectImpl<TrainingGr
 		return new TrainingGroundsCostReductionEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return effectText;
-	}
 }

@@ -71,6 +71,7 @@ class PropagandaReplacementEffect extends ReplacementEffectImpl<PropagandaReplac
 
 	PropagandaReplacementEffect ( ) {
 		super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Neutral);
+		staticText = effectText;
 	}
 
 	PropagandaReplacementEffect ( PropagandaReplacementEffect effect ) {
@@ -117,8 +118,4 @@ class PropagandaReplacementEffect extends ReplacementEffectImpl<PropagandaReplac
 		return new PropagandaReplacementEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return effectText;
-	}
 }

@@ -76,6 +76,7 @@ class QuenchableFireEffect extends OneShotEffect<QuenchableFireEffect> {
 
 	public QuenchableFireEffect() {
 		super(Outcome.Damage);
+		staticText = "{this} deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step";
 	}
 	
 	public QuenchableFireEffect(final QuenchableFireEffect effect) {
@@ -105,11 +106,6 @@ class QuenchableFireEffect extends OneShotEffect<QuenchableFireEffect> {
 		return true;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "{this} deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step";
-	}
-	
 }
 
 class QuenchableFireDelayedTriggeredAbility extends DelayedTriggeredAbility<QuenchableFireDelayedTriggeredAbility> {

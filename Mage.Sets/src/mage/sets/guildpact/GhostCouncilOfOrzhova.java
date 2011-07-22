@@ -88,6 +88,7 @@ public class GhostCouncilOfOrzhova extends CardImpl<GhostCouncilOfOrzhova> {
 class GhostCouncilOfOrzhovaEffect extends OneShotEffect<GhostCouncilOfOrzhovaEffect> {
     GhostCouncilOfOrzhovaEffect() {
         super(Outcome.Damage);
+        staticText = "target opponent loses 1 life and you gain 1 life";
     }
 
     GhostCouncilOfOrzhovaEffect(final GhostCouncilOfOrzhovaEffect effect) {
@@ -110,10 +111,6 @@ class GhostCouncilOfOrzhovaEffect extends OneShotEffect<GhostCouncilOfOrzhovaEff
         return new GhostCouncilOfOrzhovaEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "target opponent loses 1 life and you gain 1 life";
-    }
 }
 
 class GhostCouncilOfOrzhovaRemovingEffect extends OneShotEffect<GhostCouncilOfOrzhovaRemovingEffect> {
@@ -122,6 +119,7 @@ class GhostCouncilOfOrzhovaRemovingEffect extends OneShotEffect<GhostCouncilOfOr
 
 	GhostCouncilOfOrzhovaRemovingEffect () {
 		super(Outcome.Benefit);
+		staticText = effectText;
 	}
 
 	GhostCouncilOfOrzhovaRemovingEffect(GhostCouncilOfOrzhovaRemovingEffect effect) {
@@ -149,10 +147,6 @@ class GhostCouncilOfOrzhovaRemovingEffect extends OneShotEffect<GhostCouncilOfOr
 		return new GhostCouncilOfOrzhovaRemovingEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return effectText;
-	}
 }
 
 class GhostCouncilOfOrzhovaDelayedTriggeredAbility extends DelayedTriggeredAbility<GhostCouncilOfOrzhovaDelayedTriggeredAbility> {

@@ -79,6 +79,7 @@ public class Myrsmith extends CardImpl<Myrsmith> {
 class MyrsmithEffect extends OneShotEffect<MyrsmithEffect> {
     public MyrsmithEffect() {
         super(Constants.Outcome.PutCreatureInPlay);
+        staticText = "you may pay {1}. If you do, put a 1/1 colorless Myr artifact creature token onto the battlefield";
     }
 
     public MyrsmithEffect(final MyrsmithEffect effect) {
@@ -100,8 +101,4 @@ class MyrsmithEffect extends OneShotEffect<MyrsmithEffect> {
         return new MyrsmithEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "you may pay {1}. If you do, put a 1/1 colorless Myr artifact creature token onto the battlefield";
-    }
 }

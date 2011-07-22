@@ -49,6 +49,7 @@ public class SearchLibraryRevealPutInHandEffect extends SearchEffect<SearchLibra
 
 	public SearchLibraryRevealPutInHandEffect(TargetCardInLibrary target) {
 		super(target, Outcome.DrawCard);
+		setText();
 	}
 
 	public SearchLibraryRevealPutInHandEffect(final SearchLibraryRevealPutInHandEffect effect) {
@@ -79,8 +80,7 @@ public class SearchLibraryRevealPutInHandEffect extends SearchEffect<SearchLibra
 		return true;
 	}
 
-	@Override
-	public String getText(Ability source) {
+	private void setText() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Search your library for ");
 		if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
@@ -92,6 +92,6 @@ public class SearchLibraryRevealPutInHandEffect extends SearchEffect<SearchLibra
 		}
 		sb.append(", then shuffle your library");
 
-		return sb.toString();
+		staticText = sb.toString();
 	}
 }

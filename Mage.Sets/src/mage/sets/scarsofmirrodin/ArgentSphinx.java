@@ -85,6 +85,7 @@ class ArgentSphinxEffect extends OneShotEffect<ArgentSphinxEffect> {
 
 	ArgentSphinxEffect ( ) {
 		super(Constants.Outcome.Benefit);
+		staticText = effectText;
 	}
 
 	ArgentSphinxEffect(ArgentSphinxEffect effect) {
@@ -112,10 +113,6 @@ class ArgentSphinxEffect extends OneShotEffect<ArgentSphinxEffect> {
 		return new ArgentSphinxEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return effectText;
-	}
 }
 
 class ArgentSphinxDelayedTriggeredAbility extends DelayedTriggeredAbility<ArgentSphinxDelayedTriggeredAbility> {

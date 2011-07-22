@@ -87,6 +87,7 @@ class HoardSmelterEffect extends ContinuousEffectImpl<HoardSmelterEffect> {
 
 	HoardSmelterEffect() {
 		super(Constants.Duration.EndOfTurn, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
+		staticText = "Hoard-Smelter Dragon gets +X/+0 until end of turn, where X is that artifact's converted mana cost";
 	}
 
 	HoardSmelterEffect(final HoardSmelterEffect effect) {
@@ -117,8 +118,4 @@ class HoardSmelterEffect extends ContinuousEffectImpl<HoardSmelterEffect> {
 		return new HoardSmelterEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Hoard-Smelter Dragon gets +X/+0 until end of turn, where X is that artifact's converted mana cost";
-	}
 }

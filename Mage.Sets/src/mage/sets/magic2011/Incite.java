@@ -72,6 +72,7 @@ class InciteEffect extends ContinuousEffectImpl<InciteEffect> {
 
 	public InciteEffect() {
 		super(Duration.EndOfTurn, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Detriment);
+		staticText = "Target creature becomes red until end of turn";
 	}
 
 	public InciteEffect(final InciteEffect effect) {
@@ -97,8 +98,4 @@ class InciteEffect extends ContinuousEffectImpl<InciteEffect> {
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Target creature becomes red until end of turn";
-	}
 }

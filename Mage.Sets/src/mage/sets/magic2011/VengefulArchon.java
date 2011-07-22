@@ -82,6 +82,7 @@ class VengefulArchonEffect extends PreventionEffectImpl<VengefulArchonEffect> {
 
 	public VengefulArchonEffect() {
 		super(Duration.EndOfTurn);
+		staticText = "Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, Vengeful Archon deals that much damage to target player";
 	}
 
 	public VengefulArchonEffect(final VengefulArchonEffect effect) {
@@ -136,11 +137,6 @@ class VengefulArchonEffect extends PreventionEffectImpl<VengefulArchonEffect> {
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, Vengeful Archon deals that much damage to target player";
 	}
 
 }

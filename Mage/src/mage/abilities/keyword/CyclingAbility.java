@@ -70,6 +70,7 @@ class CycleEffect extends OneShotEffect<CycleEffect> {
 
 	public CycleEffect() {
 		super(Outcome.DrawCard);
+		staticText = "Draw a card";
 	}
 
 	public CycleEffect(final CycleEffect effect) {
@@ -86,11 +87,6 @@ class CycleEffect extends OneShotEffect<CycleEffect> {
 		Player player = game.getPlayer(source.getControllerId());
 		player.drawCards(1, game);
 		return true;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Draw a card";
 	}
 
 }

@@ -106,6 +106,7 @@ class GroundswellEffect extends ContinuousEffectImpl<GroundswellEffect> {
 
 	public GroundswellEffect(Duration duration) {
 		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+		staticText = "Target creature gets +2/+2 until end of turn.\nLandfall - If you had a land enter the battlefield under your control this turn, that creature gets +4/+4 until end of turn instead";
 	}
 
 	public GroundswellEffect(final GroundswellEffect effect) {
@@ -135,8 +136,4 @@ class GroundswellEffect extends ContinuousEffectImpl<GroundswellEffect> {
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Target creature gets +2/+2 until end of turn.\nLandfall - If you had a land enter the battlefield under your control this turn, that creature gets +4/+4 until end of turn instead";
-	}
 }

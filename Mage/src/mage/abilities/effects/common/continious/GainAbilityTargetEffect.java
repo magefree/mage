@@ -38,6 +38,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
+import mage.abilities.Mode;
 
 /**
  *
@@ -77,9 +78,9 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
 
 	@Override
 	//TODO redone text for multiple targets
-	public String getText(Ability source) {
+	public String getText(Mode mode) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Target ").append(source.getTargets().get(0).getTargetName()).append(" gains ");
+		sb.append("Target ").append(mode.getTargets().get(0).getTargetName()).append(" gains ");
 		sb.append(ability.getRule()).append(" ").append(duration.toString());
 		return sb.toString();
 	}

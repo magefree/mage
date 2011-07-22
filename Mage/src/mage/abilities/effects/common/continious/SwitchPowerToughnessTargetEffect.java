@@ -33,6 +33,7 @@ import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -69,9 +70,9 @@ public class SwitchPowerToughnessTargetEffect extends ContinuousEffectImpl<Switc
 	}
 
 	@Override
-	public String getText(Ability source) {
+	public String getText(Mode mode) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Switch target ").append(source.getTargets().get(0).getTargetName()).append("'s power and toughness")
+		sb.append("Switch target ").append(mode.getTargets().get(0).getTargetName()).append("'s power and toughness")
 			.append(" ").append(duration.toString());
 		return sb.toString();
 	}

@@ -86,6 +86,7 @@ class SpreadingSeasEffect extends ContinuousEffectImpl<SpreadingSeasEffect> {
 
 	public SpreadingSeasEffect() {
 		super(Duration.WhileOnBattlefield, Outcome.Detriment);
+		staticText = "Enchanted land is an Island";
 	}
 
 	public SpreadingSeasEffect(final SpreadingSeasEffect effect) {
@@ -133,8 +134,4 @@ class SpreadingSeasEffect extends ContinuousEffectImpl<SpreadingSeasEffect> {
 		return layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.TypeChangingEffects_4;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Enchanted land is an Island";
-	}
 }

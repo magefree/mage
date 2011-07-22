@@ -63,6 +63,7 @@ public class BoostAllEffect extends ContinuousEffectImpl<BoostAllEffect> {
 		this.toughness = toughness;
 		this.filter = filter;
 		this.excludeSource = excludeSource;
+		setText();
 	}
 
 	public BoostAllEffect(final BoostAllEffect effect) {
@@ -103,15 +104,14 @@ public class BoostAllEffect extends ContinuousEffectImpl<BoostAllEffect> {
 		return true;
 	}
 
-	@Override
-	public String getText(Ability source) {
+	private void setText() {
 		StringBuilder sb = new StringBuilder();
 		if (excludeSource)
 			sb.append("Other ");
 		sb.append(filter.getMessage());
 		sb.append(" get ").append(String.format("%1$+d/%2$+d", power, toughness));
 		sb.append((duration==Duration.EndOfTurn?" until end of turn":""));
-		return sb.toString();
+		staticText = sb.toString();
 	}
 
 }

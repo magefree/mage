@@ -81,6 +81,7 @@ class InquisitionOfKozilekEffect extends OneShotEffect<InquisitionOfKozilekEffec
 
 	public InquisitionOfKozilekEffect() {
 		super(Outcome.Discard);
+		staticText = "Target player reveals his or her hand. You choose a nonland card from it with converted mana cost 3 or less. That player discards that card";
 	}
 
 	public InquisitionOfKozilekEffect(final InquisitionOfKozilekEffect effect) {
@@ -109,11 +110,6 @@ class InquisitionOfKozilekEffect extends OneShotEffect<InquisitionOfKozilekEffec
 	@Override
 	public InquisitionOfKozilekEffect copy() {
 		return new InquisitionOfKozilekEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Target player reveals his or her hand. You choose a nonland card from it with converted mana cost 3 or less. That player discards that card";
 	}
 
 }

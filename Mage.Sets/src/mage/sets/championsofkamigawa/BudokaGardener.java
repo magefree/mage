@@ -87,6 +87,7 @@ public class BudokaGardener extends CardImpl<BudokaGardener> {
 class BudokaGardenerEffect extends OneShotEffect<BudokaGardenerEffect> {
     BudokaGardenerEffect() {
         super(Constants.Outcome.PutLandInPlay);
+        staticText = "You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip Budoka Gardener.";
     }
 
     BudokaGardenerEffect(final BudokaGardenerEffect effect) {
@@ -113,11 +114,7 @@ class BudokaGardenerEffect extends OneShotEffect<BudokaGardenerEffect> {
         return new BudokaGardenerEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip Budoka Gardener.";
-    }
-}
+ }
 
 class DokaiWeaverofLife extends Token {
     DokaiWeaverofLife() {

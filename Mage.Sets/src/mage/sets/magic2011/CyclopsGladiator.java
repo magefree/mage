@@ -77,6 +77,7 @@ class CyclopsGladiatorEffect extends OneShotEffect<CyclopsGladiatorEffect> {
 
 	public CyclopsGladiatorEffect() {
 		super(Outcome.Damage);
+		staticText = "you may have it deal damage equal to its power to target creature defending player controls. If you do, that creature deals damage equal to its power to Cyclops Gladiator";
 	}
 
 	public CyclopsGladiatorEffect(final CyclopsGladiatorEffect effect) {
@@ -106,11 +107,6 @@ class CyclopsGladiatorEffect extends OneShotEffect<CyclopsGladiatorEffect> {
 	@Override
 	public CyclopsGladiatorEffect copy() {
 		return new CyclopsGladiatorEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "you may have it deal damage equal to its power to target creature defending player controls. If you do, that creature deals damage equal to its power to Cyclops Gladiator";
 	}
 
 }

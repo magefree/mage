@@ -31,6 +31,7 @@ package mage.abilities.effects.common;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -83,10 +84,10 @@ public class DamageMultiEffect extends OneShotEffect<DamageMultiEffect> {
 	}
 
 	@Override
-	public String getText(Ability source) {
+	public String getText(Mode mode) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("{source} deals ").append(Integer.toString(amount));
-		sb.append(" damage divided as you choose among any number of target ").append(source.getTargets().get(0).getTargetName());
+		sb.append(" damage divided as you choose among any number of target ").append(mode.getTargets().get(0).getTargetName());
 		return sb.toString();
 	}
 

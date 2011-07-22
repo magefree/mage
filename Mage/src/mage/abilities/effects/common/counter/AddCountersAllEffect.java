@@ -50,6 +50,7 @@ public class AddCountersAllEffect extends OneShotEffect<AddCountersAllEffect> {
         super(Outcome.Benefit);
         this.counter = counter;
         this.filter = filter;
+		setText();
     }
 
     public AddCountersAllEffect(final AddCountersAllEffect effect) {
@@ -74,8 +75,7 @@ public class AddCountersAllEffect extends OneShotEffect<AddCountersAllEffect> {
         return applied;
     }
 
-    @Override
-    public String getText(Ability source) {
+    private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append("put ");
         if (counter.getCount() > 1) {
@@ -84,7 +84,7 @@ public class AddCountersAllEffect extends OneShotEffect<AddCountersAllEffect> {
             sb.append("a ").append(counter.getName()).append(" counter on each ");
         }
         sb.append(filter.getMessage());
-        return sb.toString();
+        staticText = sb.toString();
     }
 
     @Override

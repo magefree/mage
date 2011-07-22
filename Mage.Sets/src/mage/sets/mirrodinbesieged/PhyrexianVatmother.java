@@ -78,6 +78,8 @@ class PoisonControllerEffect extends OneShotEffect<PoisonControllerEffect> {
 	public PoisonControllerEffect(int amount) {
 		super(Outcome.Damage);
 		this.amount = amount;
+		staticText = "you get " + amount + " poison counter(s)";
+
 	}
 
 	public PoisonControllerEffect(final PoisonControllerEffect effect) {
@@ -98,13 +100,6 @@ class PoisonControllerEffect extends OneShotEffect<PoisonControllerEffect> {
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("you get ").append(Integer.toString(amount)).append(" poison counter(s)");
-		return sb.toString();
 	}
 
 }

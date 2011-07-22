@@ -2,7 +2,6 @@ package mage.abilities.effects.common;
 
 import mage.Constants;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -15,6 +14,7 @@ public class SkipEnchantedUntapEffect extends ReplacementEffectImpl<SkipEnchante
 
 	public SkipEnchantedUntapEffect() {
 		super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+		staticText = "Enchanted creature doesn't untap during its controller's untap step.";
 	}
 
 	public SkipEnchantedUntapEffect(final SkipEnchantedUntapEffect effect) {
@@ -50,8 +50,4 @@ public class SkipEnchantedUntapEffect extends ReplacementEffectImpl<SkipEnchante
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Enchanted creature doesn't untap during its controller's untap step.";
-	}
 }

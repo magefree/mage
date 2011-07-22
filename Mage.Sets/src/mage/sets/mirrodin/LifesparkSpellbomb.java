@@ -78,6 +78,7 @@ class LifesparkSpellbombEffect extends ContinuousEffectImpl<LifesparkSpellbombEf
 
     public LifesparkSpellbombEffect() {
         super(Constants.Duration.EndOfTurn, Constants.Outcome.BecomeCreature);
+        staticText = "Until end of turn, target land becomes a 3/3 creature that's still a land";
     }
 
     public LifesparkSpellbombEffect(final LifesparkSpellbombEffect effect) {
@@ -120,8 +121,4 @@ class LifesparkSpellbombEffect extends ContinuousEffectImpl<LifesparkSpellbombEf
 		return layer == Constants.Layer.PTChangingEffects_7 || layer == layer.TypeChangingEffects_4;
 	}
 
-    @Override
-    public String getText(Ability source) {
-        return "Until end of turn, target land becomes a 3/3 creature that's still a land";
-    }
 }

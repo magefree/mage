@@ -31,7 +31,6 @@ package mage.abilities.effects.common;
 import mage.Constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.filter.Filter;
 import mage.filter.FilterInPlay;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -49,6 +48,7 @@ public class PreventAllDamageToEffect extends PreventionEffectImpl<PreventAllDam
 	public PreventAllDamageToEffect(Duration duration, FilterInPlay filter) {
 		super(duration);
 		this.filter = filter;
+		staticText = "Prevent all damage that would be dealt to " + filter.getMessage() + " " + duration.toString();
 	}
 
 	public PreventAllDamageToEffect(final PreventAllDamageToEffect effect) {
@@ -92,11 +92,6 @@ public class PreventAllDamageToEffect extends PreventionEffectImpl<PreventAllDam
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Prevent all damage that would be dealt to " + filter.getMessage() + " " + duration.toString();
 	}
 
 }

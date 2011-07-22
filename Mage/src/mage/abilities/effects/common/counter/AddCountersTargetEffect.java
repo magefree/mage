@@ -37,6 +37,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.abilities.Mode;
 
 /**
  *
@@ -78,7 +79,7 @@ public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffe
 	}
 
 	@Override
-	public String getText(Ability source) {
+	public String getText(Mode mode) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("put ");
 		if (counter.getCount() > 1) {
@@ -87,7 +88,7 @@ public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffe
 		else {
 			sb.append("a ").append(counter.getName()).append(" counter on target ");
 		}
-		sb.append(source.getTargets().get(0).getTargetName());
+		sb.append(mode.getTargets().get(0).getTargetName());
 		return sb.toString();
 	}
 

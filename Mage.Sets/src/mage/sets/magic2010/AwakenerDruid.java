@@ -88,6 +88,7 @@ class AwakenerDruidEffect extends ContinuousEffectImpl<AwakenerDruidEffect> {
 
 	public AwakenerDruidEffect() {
 		super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
+		staticText = "target Forest becomes a 4/5 green Treefolk creature for as long as {this} is on the battlefield. It's still a land.";
 	}
 
 	public AwakenerDruidEffect(final AwakenerDruidEffect effect) {
@@ -133,11 +134,6 @@ class AwakenerDruidEffect extends ContinuousEffectImpl<AwakenerDruidEffect> {
 	@Override
 	public boolean apply(Game game, Ability source) {
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "target Forest becomes a 4/5 green Treefolk creature for as long as {this} is on the battlefield. It's still a land.";
 	}
 
 	@Override

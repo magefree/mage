@@ -81,6 +81,7 @@ class EvilPresenceEffect extends ContinuousEffectImpl<EvilPresenceEffect> {
 
     public EvilPresenceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "Enchanted land is a Swamp";
     }
 
     public EvilPresenceEffect(final EvilPresenceEffect effect) {
@@ -128,8 +129,4 @@ class EvilPresenceEffect extends ContinuousEffectImpl<EvilPresenceEffect> {
         return layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.TypeChangingEffects_4;
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Enchanted land is a Swamp";
-    }
 }

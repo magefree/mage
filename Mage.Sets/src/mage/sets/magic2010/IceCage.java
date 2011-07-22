@@ -84,6 +84,7 @@ class IceCageEffect extends ReplacementEffectImpl<IceCageEffect> {
 
 	public IceCageEffect() {
 		super(Duration.WhileOnBattlefield, Outcome.Detriment);
+		staticText = "Enchanted creature can't attack or block, and its activated abilities can't be activated";
 	}
 
 	public IceCageEffect(final IceCageEffect effect) {
@@ -116,11 +117,6 @@ class IceCageEffect extends ReplacementEffectImpl<IceCageEffect> {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Enchanted creature can't attack or block, and its activated abilities can't be activated";
 	}
 
 }

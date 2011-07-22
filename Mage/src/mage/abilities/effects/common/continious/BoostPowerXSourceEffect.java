@@ -49,6 +49,7 @@ public class BoostPowerXSourceEffect extends ContinuousEffectImpl<BoostPowerXSou
 
 	public BoostPowerXSourceEffect(Duration duration) {
 		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+		staticText = "{this} gets " + String.format("+X/+0") + " " + duration.toString();
 	}
 
 	public BoostPowerXSourceEffect(final BoostPowerXSourceEffect effect) {
@@ -75,11 +76,6 @@ public class BoostPowerXSourceEffect extends ContinuousEffectImpl<BoostPowerXSou
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "{this} gets " + String.format("+X/+0") + " " + duration.toString();
 	}
 
 }

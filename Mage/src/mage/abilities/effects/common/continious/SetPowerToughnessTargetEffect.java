@@ -33,6 +33,7 @@ import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -81,9 +82,9 @@ public class SetPowerToughnessTargetEffect extends ContinuousEffectImpl<SetPower
 	}
 
 	@Override
-	public String getText(Ability source) {
+	public String getText(Mode mode) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("target ").append(source.getTargets().get(0).getTargetName()).append(" becomes ");
+		sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" becomes ");
 		sb.append(power).append("/").append(toughness).append(" ").append(duration.toString());
 		return sb.toString();
 	}

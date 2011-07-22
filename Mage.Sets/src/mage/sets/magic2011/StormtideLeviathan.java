@@ -86,6 +86,7 @@ class StormtideLeviathanEffect extends ContinuousEffectImpl<StormtideLeviathanEf
 
 	public StormtideLeviathanEffect() {
 		super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
+		staticText = "All lands are Islands in addition to their other types";
 	}
 
 	public StormtideLeviathanEffect(final StormtideLeviathanEffect effect) {
@@ -106,10 +107,6 @@ class StormtideLeviathanEffect extends ContinuousEffectImpl<StormtideLeviathanEf
 		return true;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "All lands are Islands in addition to their other types";
-	}
 }
 
 class StormtideLeviathanEffect2 extends ReplacementEffectImpl<StormtideLeviathanEffect2> {
@@ -118,6 +115,7 @@ class StormtideLeviathanEffect2 extends ReplacementEffectImpl<StormtideLeviathan
 
 	public StormtideLeviathanEffect2() {
 		super(Duration.WhileOnBattlefield, Outcome.Detriment);
+		staticText = "Creatures without flying or islandwalk can't attack";
 	}
 
 	public StormtideLeviathanEffect2(final StormtideLeviathanEffect2 effect) {
@@ -153,11 +151,6 @@ class StormtideLeviathanEffect2 extends ReplacementEffectImpl<StormtideLeviathan
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Creatures without flying or islandwalk can't attack";
 	}
 
 }

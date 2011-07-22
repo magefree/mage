@@ -76,6 +76,7 @@ class PlanarCleansingEffect extends OneShotEffect<PlanarCleansingEffect> {
 
     public PlanarCleansingEffect() {
         super(Constants.Outcome.DestroyPermanent);
+        staticText = "Destroy all nonland permanents";
     }
 
     public PlanarCleansingEffect(final PlanarCleansingEffect effect) {
@@ -95,8 +96,4 @@ class PlanarCleansingEffect extends OneShotEffect<PlanarCleansingEffect> {
         return new PlanarCleansingEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Destroy all nonland permanents";
-    }
 }

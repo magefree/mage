@@ -320,7 +320,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 			}
 		}
 
-		sbRule.append(modes.getText(this));
+		sbRule.append(modes.getText());
 
 		return sbRule.toString();
 	}

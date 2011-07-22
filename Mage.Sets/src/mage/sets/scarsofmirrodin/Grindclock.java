@@ -75,6 +75,7 @@ public class Grindclock extends CardImpl<Grindclock> {
 class GrindclockEffect extends OneShotEffect<GrindclockEffect> {
     public GrindclockEffect() {
         super(Constants.Outcome.Detriment);
+        staticText = "Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of charge counters on Grindclock";
     }
 
     public GrindclockEffect(final GrindclockEffect effect) {
@@ -102,8 +103,4 @@ class GrindclockEffect extends OneShotEffect<GrindclockEffect> {
         return new GrindclockEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of charge counters on Grindclock";
-    }
 }

@@ -82,6 +82,7 @@ public class BlightsteelColossus extends CardImpl<BlightsteelColossus> {
 class BlightsteelColossusEffect extends OneShotEffect<BlightsteelColossusEffect> {
     BlightsteelColossusEffect() {
         super(Constants.Outcome.Benefit);
+        staticText = "reveal Blightsteel Colossus and shuffle it into its owner's library";
     }
 
     BlightsteelColossusEffect(final BlightsteelColossusEffect effect) {
@@ -110,8 +111,4 @@ class BlightsteelColossusEffect extends OneShotEffect<BlightsteelColossusEffect>
         return new BlightsteelColossusEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "reveal Blightsteel Colossus and shuffle it into its owner's library";
-    }
 }

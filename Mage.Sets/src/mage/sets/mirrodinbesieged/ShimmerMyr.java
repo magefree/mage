@@ -73,6 +73,7 @@ class ShimmerMyrEffect extends AsThoughEffectImpl<ShimmerMyrEffect> {
 
 	public ShimmerMyrEffect() {
 		super(Constants.AsThoughEffectType.CAST, Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+		staticText = "You may cast artifact cards as though they had flash";
 	}
 
 	public ShimmerMyrEffect(final ShimmerMyrEffect effect) {
@@ -98,11 +99,6 @@ class ShimmerMyrEffect extends AsThoughEffectImpl<ShimmerMyrEffect> {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "You may cast artifact cards as though they had flash";
 	}
 
 }

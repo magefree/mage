@@ -51,6 +51,7 @@ public class GainLifeEffect extends OneShotEffect<GainLifeEffect> {
 	public GainLifeEffect(DynamicValue life) {
 		super(Outcome.GainLife);
 		this.life = life;
+		setText();
 	}
 
 	public GainLifeEffect(final GainLifeEffect effect) {
@@ -72,8 +73,7 @@ public class GainLifeEffect extends OneShotEffect<GainLifeEffect> {
 		return true;
 	}
 
-	@Override
-	public String getDynamicText(Ability source) {
+	private void setText() {
         StringBuilder sb = new StringBuilder();
         String message = life.getMessage();
 
@@ -86,7 +86,7 @@ public class GainLifeEffect extends OneShotEffect<GainLifeEffect> {
             sb.append(message.equals("1") ? " equal to the number of " : " for each ");
             sb.append(message);
         }
-		return sb.toString();
+		staticText = sb.toString();
 	}
 
 }

@@ -80,6 +80,7 @@ class VendettaEffect extends OneShotEffect<VendettaEffect> {
 
     public VendettaEffect() {
         super(Outcome.Damage);
+        staticText = "You lose life equal to that creature's toughness";
     }
 
     public VendettaEffect(final VendettaEffect effect) {
@@ -102,8 +103,4 @@ class VendettaEffect extends OneShotEffect<VendettaEffect> {
         return false;
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "You lose life equal to that creature's toughness";
-    }
 }

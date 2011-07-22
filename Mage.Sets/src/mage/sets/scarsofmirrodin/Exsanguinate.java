@@ -67,6 +67,7 @@ public class Exsanguinate extends CardImpl<Exsanguinate> {
 class ExsanguinateEffect extends OneShotEffect<ExsanguinateEffect> {
     public ExsanguinateEffect() {
         super(Constants.Outcome.Damage);
+        staticText = "Each opponent loses X life. You gain life equal to the life lost this way";
     }
 
     public ExsanguinateEffect(final ExsanguinateEffect effect) {
@@ -90,8 +91,4 @@ class ExsanguinateEffect extends OneShotEffect<ExsanguinateEffect> {
         return new ExsanguinateEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Each opponent loses X life. You gain life equal to the life lost this way";
-    }
 }

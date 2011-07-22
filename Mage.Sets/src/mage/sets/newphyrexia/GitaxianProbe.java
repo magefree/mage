@@ -70,6 +70,7 @@ public class GitaxianProbe extends CardImpl<GitaxianProbe> {
 class GitaxianProbeEffect extends OneShotEffect<GitaxianProbeEffect> {
     GitaxianProbeEffect() {
         super(Constants.Outcome.Detriment);
+        staticText = "Look at target player's hand";
     }
 
     GitaxianProbeEffect(final GitaxianProbeEffect effect) {
@@ -91,8 +92,4 @@ class GitaxianProbeEffect extends OneShotEffect<GitaxianProbeEffect> {
         return new GitaxianProbeEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Look at target player's hand";
-    }
 }

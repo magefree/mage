@@ -49,6 +49,7 @@ public class ShuffleSpellEffect extends OneShotEffect<ShuffleSpellEffect> {
 
 	private ShuffleSpellEffect() {
 		super(Outcome.Exile);
+		staticText = "Shuffle {this} into its owner's library";
 	}
 	
 	public static ShuffleSpellEffect getInstance() {
@@ -59,11 +60,6 @@ public class ShuffleSpellEffect extends OneShotEffect<ShuffleSpellEffect> {
 	public boolean apply(Game game, Ability source) {
 		//this effect is applied when a spell resolves - see Spell.java
 		return true;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Shuffle {this} into its owner's library";
 	}
 
 	@Override

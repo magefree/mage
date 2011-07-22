@@ -61,6 +61,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl<GainAbilityAllEff
 		this.ability = ability;
 		this.filter = filter;
 		this.excludeSource = excludeSource;
+		setText();
 	}
 
 	public GainAbilityAllEffect(final GainAbilityAllEffect effect) {
@@ -99,14 +100,13 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl<GainAbilityAllEff
 		return true;
 	}
 
-	@Override
-	public String getText(Ability source) {
+	private void setText() {
 		StringBuilder sb = new StringBuilder();
 		if (excludeSource)
 			sb.append("Other ");
 		sb.append(filter.getMessage()).append(" gain ").append(ability.getRule());
 		sb.append(" ").append(duration.toString());
-		return sb.toString();
+		staticText = sb.toString();
 	}
 
 }

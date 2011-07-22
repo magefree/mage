@@ -86,6 +86,7 @@ class GlimmerpointStagEffect extends OneShotEffect<GlimmerpointStagEffect> {
 
 	GlimmerpointStagEffect ( ) {
 		super(Outcome.Benefit);
+		staticText = effectText;
 	}
 	
 	GlimmerpointStagEffect(GlimmerpointStagEffect effect) {
@@ -113,10 +114,6 @@ class GlimmerpointStagEffect extends OneShotEffect<GlimmerpointStagEffect> {
 		return new GlimmerpointStagEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return effectText;
-	}
 }
 
 class GlimmerpointStagDelayedTriggeredAbility extends DelayedTriggeredAbility<GlimmerpointStagDelayedTriggeredAbility> {

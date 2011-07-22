@@ -67,6 +67,7 @@ class SilenceEffect extends ReplacementEffectImpl<SilenceEffect> {
 
 	public SilenceEffect() {
 		super(Duration.EndOfTurn, Outcome.Benefit);
+		staticText = "Your opponents can't cast spells this turn";
 	}
 
 	public SilenceEffect(final SilenceEffect effect) {
@@ -94,11 +95,6 @@ class SilenceEffect extends ReplacementEffectImpl<SilenceEffect> {
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Your opponents can't cast spells this turn";
 	}
 
 }

@@ -76,6 +76,7 @@ public class IchorRats extends CardImpl<IchorRats> {
 class IchorRatsEffect extends OneShotEffect<IchorRatsEffect> {
     public IchorRatsEffect() {
         super(Constants.Outcome.Damage);
+        staticText = "each player gets a poison counter";
     }
 
     public IchorRatsEffect(final IchorRatsEffect effect) {
@@ -98,8 +99,4 @@ class IchorRatsEffect extends OneShotEffect<IchorRatsEffect> {
         return new IchorRatsEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "each player gets a poison counter";
-    }
 }

@@ -76,6 +76,7 @@ class HauntingEchoesEffect extends OneShotEffect<HauntingEchoesEffect> {
 
 	public HauntingEchoesEffect() {
 		super(Outcome.Detriment);
+		staticText = "Exile all cards from target player's graveyard other than basic land cards. For each card exiled this way, search that player's library for all cards with the same name as that card and exile them. Then that player shuffles his or her library";
 	}
 
 	public HauntingEchoesEffect(final HauntingEchoesEffect effect) {
@@ -111,8 +112,4 @@ class HauntingEchoesEffect extends OneShotEffect<HauntingEchoesEffect> {
 		return new HauntingEchoesEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Exile all cards from target player's graveyard other than basic land cards. For each card exiled this way, search that player's library for all cards with the same name as that card and exile them. Then that player shuffles his or her library";
-	}
 }

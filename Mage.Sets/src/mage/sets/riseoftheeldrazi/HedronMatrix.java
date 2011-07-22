@@ -73,6 +73,7 @@ class HedronMatrixEffect extends ContinuousEffectImpl<HedronMatrixEffect> {
 
 	public HedronMatrixEffect() {
 		super(Duration.WhileOnBattlefield, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
+		staticText = "Equipped creature gets +X/+X, where X is its converted mana cost";
 	}
 
 	public HedronMatrixEffect(final HedronMatrixEffect effect) {
@@ -97,8 +98,4 @@ class HedronMatrixEffect extends ContinuousEffectImpl<HedronMatrixEffect> {
 		return true;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Equipped creature gets +X/+X, where X is its converted mana cost";
-	}
 }

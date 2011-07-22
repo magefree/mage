@@ -574,7 +574,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 			MageObject obj = game.getObject(source.getSourceId());
 			Map<UUID, String> modeMap = new HashMap<UUID, String>();
 			for (Mode mode: modes.values()) {
-				String modeText = mode.getEffects().getText(source);
+				String modeText = mode.getEffects().getText(mode);
 				if (obj != null)
 					modeText = modeText.replace("{source}", obj.getName());
 				modeMap.put(mode.getId(), modeText);

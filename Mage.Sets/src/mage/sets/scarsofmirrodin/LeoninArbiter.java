@@ -83,6 +83,7 @@ class LeoninArbiterReplacementEffect extends ReplacementEffectImpl<LeoninArbiter
 
 	LeoninArbiterReplacementEffect ( ) {
 		super(Duration.WhileOnBattlefield, Outcome.Neutral);
+		staticText = effectText;
 	}
 
 	LeoninArbiterReplacementEffect ( LeoninArbiterReplacementEffect effect ) {
@@ -134,8 +135,4 @@ class LeoninArbiterReplacementEffect extends ReplacementEffectImpl<LeoninArbiter
 		return new LeoninArbiterReplacementEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return effectText;
-	}
 }

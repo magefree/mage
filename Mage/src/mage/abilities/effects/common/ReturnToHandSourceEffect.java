@@ -43,6 +43,7 @@ public class ReturnToHandSourceEffect extends OneShotEffect<ReturnToHandSourceEf
 
     public ReturnToHandSourceEffect() {
         super(Outcome.ReturnToHand);
+        staticText = "Return {this} to it's owner's hand";
     }
 
     public ReturnToHandSourceEffect(final ReturnToHandSourceEffect effect) {
@@ -70,11 +71,6 @@ public class ReturnToHandSourceEffect extends OneShotEffect<ReturnToHandSourceEf
             }
         }
         return false;
-    }
-
-    @Override
-    public String getText(Ability source) {
-        return "Return {this} to it's owner's hand";
     }
 
 }

@@ -76,6 +76,7 @@ class CleanfallEffect extends OneShotEffect<CleanfallEffect> {
 
     public CleanfallEffect() {
         super(Constants.Outcome.DestroyPermanent);
+        staticText = "Destroy all enchantments";
     }
 
     public CleanfallEffect(final CleanfallEffect effect) {
@@ -95,8 +96,4 @@ class CleanfallEffect extends OneShotEffect<CleanfallEffect> {
         return new CleanfallEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Destroy all enchantments";
-    }
 }

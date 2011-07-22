@@ -42,17 +42,18 @@ public class ConditionalOneShotEffect extends OneShotEffect<ConditionalOneShotEf
 
 	private OneShotEffect effect;
 	private Condition condition;
-	private String text;
 
 	public ConditionalOneShotEffect ( OneShotEffect effect, Condition condition, String text ) {
 		super(effect.getOutcome());
 		this.effect = effect;
 		this.condition = condition;
-		this.text = text;
+		this.staticText = text;
 	}
 
 	public ConditionalOneShotEffect ( ConditionalOneShotEffect effect ) {
-		this(effect.effect, effect.condition, effect.text);
+		super(effect);
+		this.effect = effect.effect;
+		this.condition = effect.condition;
 	}
 
 	@Override
@@ -68,8 +69,4 @@ public class ConditionalOneShotEffect extends OneShotEffect<ConditionalOneShotEf
 		return new ConditionalOneShotEffect ( this );
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return this.text;
-	}
 }

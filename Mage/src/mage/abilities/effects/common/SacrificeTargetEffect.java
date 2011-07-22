@@ -35,6 +35,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
+import mage.abilities.Mode;
 
 /**
  *
@@ -69,11 +70,11 @@ public class SacrificeTargetEffect extends OneShotEffect<SacrificeTargetEffect> 
 	}
 
 	@Override
-	public String getText(Ability source) {
-        if (source.getTargets().get(0).getNumberOfTargets() == 1)
-		    return "The controller of target " + source.getTargets().get(0).getTargetName() + " sacrifices it";
+	public String getText(Mode mode) {
+        if (mode.getTargets().get(0).getNumberOfTargets() == 1)
+		    return "The controller of target " + mode.getTargets().get(0).getTargetName() + " sacrifices it";
         else
-            return "The controller of " + source.getTargets().get(0).getNumberOfTargets() + " target " + source.getTargets().get(0).getTargetName() + " sacrifices it";
+            return "The controller of " + mode.getTargets().get(0).getNumberOfTargets() + " target " + mode.getTargets().get(0).getTargetName() + " sacrifices it";
 	}
 
 }

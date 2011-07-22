@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.TargetPointer;
 
@@ -66,21 +67,22 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 	}
 
 	@Override
-	public String getText(Ability source) {
-        if (staticText.equals("")) {
-            return getDynamicText(source);
-        } else {
-            return staticText;
-        }
+	public String getText(Mode mode) {
+		return staticText;
+//        if (staticText.equals("")) {
+//            return getDynamicText(source);
+//        } else {
+//            return staticText;
+//        }
 	}
 
-    protected String getDynamicText(Ability source) {
-        return "";
-    }
+//    protected String getDynamicText(Ability source) {
+//        return "";
+//    }
 
-    public void setStaticText(String staticText) {
-        this.staticText = staticText;
-    }
+//    public void setStaticText(String staticText) {
+//        this.staticText = staticText;
+//    }
 
 	@Override
 	public Outcome getOutcome() {

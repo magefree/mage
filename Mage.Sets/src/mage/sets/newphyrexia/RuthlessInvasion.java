@@ -66,6 +66,7 @@ public class RuthlessInvasion extends CardImpl<RuthlessInvasion> {
 class RuthlessInvasionEffect extends RestrictionEffect<RuthlessInvasionEffect> {
     RuthlessInvasionEffect() {
         super(Constants.Duration.EndOfTurn);
+        staticText = "Nonartifact creatures can't block this turn";
     }
 
     RuthlessInvasionEffect(final RuthlessInvasionEffect effect) {
@@ -90,8 +91,4 @@ class RuthlessInvasionEffect extends RestrictionEffect<RuthlessInvasionEffect> {
         return false;
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Nonartifact creatures can't block this turn";
-    }
 }

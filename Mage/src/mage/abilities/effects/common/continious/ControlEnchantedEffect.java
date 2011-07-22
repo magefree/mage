@@ -13,6 +13,7 @@ public class ControlEnchantedEffect extends ContinuousEffectImpl<ControlEnchante
 
 	public ControlEnchantedEffect() {
 		super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+		staticText = "You control enchanted creature";
 	}
 
 	public ControlEnchantedEffect(final ControlEnchantedEffect effect) {
@@ -53,8 +54,4 @@ public class ControlEnchantedEffect extends ContinuousEffectImpl<ControlEnchante
 		return layer == Constants.Layer.ControlChangingEffects_2;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "You control enchanted creature";
-	}
 }

@@ -31,6 +31,7 @@ package mage.abilities.effects.common;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
@@ -77,8 +78,8 @@ public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEf
 	}
 
 	@Override
-	public String getText(Ability source) {
-		return "Return target " + source.getTargets().get(0).getTargetName() + " to it's owner's hand";
+	public String getText(Mode mode) {
+		return "Return target " + mode.getTargets().get(0).getTargetName() + " to it's owner's hand";
 
 	}
 	

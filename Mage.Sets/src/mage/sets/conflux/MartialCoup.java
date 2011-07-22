@@ -70,6 +70,7 @@ class MartialCoupEffect extends OneShotEffect<MartialCoupEffect> {
 
 	public MartialCoupEffect() {
 		super(Outcome.PutCreatureInPlay);
+		staticText = "Put X 1/1 white Soldier creature tokens onto the battlefield. If X is 5 or more, destroy all other creatures";
 	}
 
 	public MartialCoupEffect(final MartialCoupEffect effect) {
@@ -97,11 +98,6 @@ class MartialCoupEffect extends OneShotEffect<MartialCoupEffect> {
 			token.putOntoBattlefield(game, source.getId(), source.getControllerId());
 		}
 		return true;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Put X 1/1 white Soldier creature tokens onto the battlefield. If X is 5 or more, destroy all other creatures";
 	}
 
 }

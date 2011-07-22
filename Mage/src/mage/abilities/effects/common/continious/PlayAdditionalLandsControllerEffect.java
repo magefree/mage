@@ -48,6 +48,7 @@ public class PlayAdditionalLandsControllerEffect extends ContinuousEffectImpl<Pl
 	public PlayAdditionalLandsControllerEffect(int additionalCards, Duration duration) {
 		super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
 		this.additionalCards = additionalCards;
+		setText();
 	}
 
 	public PlayAdditionalLandsControllerEffect(final PlayAdditionalLandsControllerEffect effect) {
@@ -70,12 +71,11 @@ public class PlayAdditionalLandsControllerEffect extends ContinuousEffectImpl<Pl
 		return true;
 	}
 
-	@Override
-	public String getText(Ability source) {
+	private void setText() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("You may play ").append(Integer.toString(additionalCards)).append(" additional land").append((additionalCards == 1?"":"s"));
 		sb.append((duration==Duration.EndOfTurn?" this turn":""));
-		return sb.toString();
+		staticText = sb.toString();
 	}
 
 }

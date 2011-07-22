@@ -82,6 +82,7 @@ class ForcedWorshipEffect extends RestrictionEffect<ForcedWorshipEffect> {
 
 	public ForcedWorshipEffect() {
 		super(Constants.Duration.WhileOnBattlefield);
+		staticText = "Enchanted creature can't attack";
 	}
 
 	public ForcedWorshipEffect(final ForcedWorshipEffect effect) {
@@ -104,11 +105,6 @@ class ForcedWorshipEffect extends RestrictionEffect<ForcedWorshipEffect> {
 	@Override
 	public ForcedWorshipEffect copy() {
 		return new ForcedWorshipEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Enchanted creature can't attack";
 	}
 
 }

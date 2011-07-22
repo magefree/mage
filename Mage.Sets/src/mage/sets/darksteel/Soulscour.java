@@ -78,6 +78,7 @@ class SoulscourEffect extends OneShotEffect<SoulscourEffect> {
 
     public SoulscourEffect() {
         super(Constants.Outcome.DestroyPermanent);
+        staticText = "Destroy all nonartifact permanents";
     }
 
     public SoulscourEffect(final SoulscourEffect effect) {
@@ -97,8 +98,4 @@ class SoulscourEffect extends OneShotEffect<SoulscourEffect> {
         return new SoulscourEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Destroy all nonartifact permanents";
-    }
 }

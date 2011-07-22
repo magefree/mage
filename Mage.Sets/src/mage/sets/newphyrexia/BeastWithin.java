@@ -73,6 +73,7 @@ class BeastWithinEffect extends OneShotEffect<BeastWithinEffect> {
 
     public BeastWithinEffect() {
         super(Outcome.PutCreatureInPlay);
+        staticText = "Its controller puts a 3/3 green Beast creature token onto the battlefield";
     }
 
     public BeastWithinEffect(final BeastWithinEffect effect) {
@@ -94,8 +95,4 @@ class BeastWithinEffect extends OneShotEffect<BeastWithinEffect> {
         return true;
     }
 
-    @Override
-    public String getDynamicText(Ability source) {
-        return "Its controller puts a 3/3 green Beast creature token onto the battlefield";
-    }
 }

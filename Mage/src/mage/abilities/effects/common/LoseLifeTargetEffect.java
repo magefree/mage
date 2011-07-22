@@ -30,6 +30,7 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
@@ -74,12 +75,12 @@ public class LoseLifeTargetEffect extends OneShotEffect<LoseLifeTargetEffect> {
 	}
 
 	@Override
-	public String getText(Ability source) {
+	public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
 
-        if (source.getTargets().size() > 0) {
-		    sb.append("Target ").append(source.getTargets().get(0).getTargetName());
+        if (mode.getTargets().size() > 0) {
+		    sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
         } else {
             sb.append("that player");
         }

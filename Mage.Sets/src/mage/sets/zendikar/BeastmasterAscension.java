@@ -108,6 +108,7 @@ class BeastmasterAscensionEffect extends BoostControlledEffect {
 
 	public BeastmasterAscensionEffect() {
 		super(5, 5, Duration.WhileOnBattlefield);
+		staticText = "As long as Beastmaster Ascension has seven or more quest counters on it, creatures you control get +5/+5";
 	}
 
 	public BeastmasterAscensionEffect(final BeastmasterAscensionEffect effect) {
@@ -128,8 +129,4 @@ class BeastmasterAscensionEffect extends BoostControlledEffect {
 		return new BeastmasterAscensionEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "As long as Beastmaster Ascension has seven or more quest counters on it, creatures you control get +5/+5";
-	}
 }

@@ -81,6 +81,7 @@ class VampireHexmageEffect extends OneShotEffect<VampireHexmageEffect> {
 
 	VampireHexmageEffect ( ) {
 		super(Outcome.Benefit);
+		staticText = "Remove all counters from target permanent";
 	}
 
 	VampireHexmageEffect ( VampireHexmageEffect effect ) {
@@ -109,11 +110,6 @@ class VampireHexmageEffect extends OneShotEffect<VampireHexmageEffect> {
 		}
 
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Remove all counters from target permanent";
 	}
 
 }

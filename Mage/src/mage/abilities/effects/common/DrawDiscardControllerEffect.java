@@ -42,6 +42,7 @@ public class DrawDiscardControllerEffect extends OneShotEffect<DrawDiscardContro
 
 	public DrawDiscardControllerEffect() {
 		super(Outcome.DrawCard);
+		staticText = "Draw a card, then discard a card";
 	}
 
 	public DrawDiscardControllerEffect(final DrawDiscardControllerEffect effect) {
@@ -63,11 +64,5 @@ public class DrawDiscardControllerEffect extends OneShotEffect<DrawDiscardContro
 		}
 		return false;
 	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Draw a card, then discard a card";
-	}
-
 
 }

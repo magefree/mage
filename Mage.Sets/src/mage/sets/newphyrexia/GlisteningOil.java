@@ -84,6 +84,7 @@ public class GlisteningOil extends CardImpl<GlisteningOil> {
 class GlisteningOilEffect extends OneShotEffect<GlisteningOilEffect> {
     GlisteningOilEffect() {
         super(Constants.Outcome.UnboostCreature);
+        staticText = "put a -1/-1 counter on enchanted creature";
     }
 
     GlisteningOilEffect(final GlisteningOilEffect effect) {
@@ -107,8 +108,4 @@ class GlisteningOilEffect extends OneShotEffect<GlisteningOilEffect> {
         return new GlisteningOilEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "put a -1/-1 counter on enchanted creature";
-    }
 }

@@ -58,7 +58,4 @@ public class CreepingCorrosion extends CardImpl<CreepingCorrosion> {
 		return new CreepingCorrosion(this);
 	}
 
-	public String getText(Ability source) {
-		return "Destroy all artifacts";
-	}
 }

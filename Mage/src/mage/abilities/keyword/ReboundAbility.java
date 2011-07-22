@@ -184,6 +184,7 @@ class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl<Rebound
 	ReboundCastFromHandReplacementEffect ( UUID cardId ) {
 		super(Duration.OneUse, Outcome.Exile);
 		this.cardId = cardId;
+		this.staticText = replacementText;
 	}
 
 	ReboundCastFromHandReplacementEffect ( ReboundCastFromHandReplacementEffect effect ) {
@@ -224,10 +225,6 @@ class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl<Rebound
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return replacementText;
-	}
 }
 
 /**
@@ -278,6 +275,7 @@ class ReboundCastSpellFromExileEffect extends OneShotEffect<ReboundCastSpellFrom
 	ReboundCastSpellFromExileEffect ( UUID cardId ) {
 		super(Outcome.Benefit);
 		this.cardId = cardId;
+		staticText = castFromExileText;
 	}
 
 	ReboundCastSpellFromExileEffect ( ReboundCastSpellFromExileEffect effect ) {
@@ -304,8 +302,4 @@ class ReboundCastSpellFromExileEffect extends OneShotEffect<ReboundCastSpellFrom
 		return new ReboundCastSpellFromExileEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return castFromExileText;
-	}
 }

@@ -101,13 +101,14 @@ class WallOfReverenceTriggeredAbility extends TriggeredAbilityImpl<WallOfReveren
 
     @Override
     public String getRule() {
-        return "At the beginning of your end step, " + modes.getText(this);
+        return "At the beginning of your end step, " + modes.getText();
     }
 }
 
 class WallOfReverenceTriggeredEffect extends OneShotEffect<WallOfReverenceTriggeredEffect> {
     WallOfReverenceTriggeredEffect() {
         super(Outcome.GainLife);
+        staticText = "you may gain life equal to the power of target creature you control";
     }
 
     WallOfReverenceTriggeredEffect(WallOfReverenceTriggeredEffect effect) {
@@ -130,8 +131,4 @@ class WallOfReverenceTriggeredEffect extends OneShotEffect<WallOfReverenceTrigge
         return new WallOfReverenceTriggeredEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "you may gain life equal to the power of target creature you control";
-    }
 }

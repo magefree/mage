@@ -42,6 +42,7 @@ public class SacrificeSourceEffect extends OneShotEffect<SacrificeSourceEffect> 
 
 	public SacrificeSourceEffect() {
 		super(Outcome.Sacrifice);
+		staticText = "sacrifice {this}";
 	}
 
 	public SacrificeSourceEffect(final SacrificeSourceEffect effect) {
@@ -61,11 +62,5 @@ public class SacrificeSourceEffect extends OneShotEffect<SacrificeSourceEffect> 
 		}
 		return false;
 	}
-
-	@Override
-	public String getText(Ability source) {
-		return "sacrifice {this}";
-	}
-
 
 }

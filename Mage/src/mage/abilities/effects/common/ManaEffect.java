@@ -29,10 +29,7 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
-import mage.Mana;
-import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.game.Game;
 
 /**
  *

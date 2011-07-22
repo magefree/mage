@@ -31,6 +31,7 @@ package mage.abilities.effects.common;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
@@ -83,11 +84,11 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect<PutLibraryInt
 	}
 
     @Override
-    public String getText(Ability source) {
+    public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
 
-        sb.append("Target ").append(source.getTargets().get(0).getTargetName());
+        sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
         sb.append(" puts the top ");
         if (message.isEmpty() || !message.equals("1")) {
             if (amount.toString().equals("1")) {

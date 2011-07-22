@@ -42,6 +42,7 @@ public class PreventAllDamageSourceEffect extends PreventionEffectImpl<PreventAl
 
 	public PreventAllDamageSourceEffect(Duration duration) {
 		super(duration);
+		staticText = "Prevent all damage that would be dealt to {this} " + duration.toString();
 	}
 
 	public PreventAllDamageSourceEffect(final PreventAllDamageSourceEffect effect) {
@@ -77,11 +78,6 @@ public class PreventAllDamageSourceEffect extends PreventionEffectImpl<PreventAl
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Prevent all damage that would be dealt to {this} " + duration.toString();
 	}
 
 }

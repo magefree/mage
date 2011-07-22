@@ -100,6 +100,7 @@ class NissaRevaneGainLifeEffect extends OneShotEffect<NissaRevaneGainLifeEffect>
 
 	public NissaRevaneGainLifeEffect() {
 		super(Outcome.GainLife);
+		staticText = "You gain 2 life for each Elf you control";
 	}
 
 	public NissaRevaneGainLifeEffect(final NissaRevaneGainLifeEffect effect) {
@@ -119,11 +120,6 @@ class NissaRevaneGainLifeEffect extends OneShotEffect<NissaRevaneGainLifeEffect>
 			player.gainLife(life, game);
 		}
 		return true;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "You gain 2 life for each Elf you control";
 	}
 
 }

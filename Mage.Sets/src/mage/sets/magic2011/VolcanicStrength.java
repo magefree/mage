@@ -83,6 +83,7 @@ class VolcanicStrengthEffect extends ContinuousEffectImpl<VolcanicStrengthEffect
 
 	public VolcanicStrengthEffect() {
 		super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
+		staticText = "Enchanted creature gets +2/+2 and has mountainwalk";
 	}
 
 	public VolcanicStrengthEffect(final VolcanicStrengthEffect effect) {
@@ -129,8 +130,4 @@ class VolcanicStrengthEffect extends ContinuousEffectImpl<VolcanicStrengthEffect
 		return layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Enchanted creature gets +2/+2 and has mountainwalk";
-	}
 }

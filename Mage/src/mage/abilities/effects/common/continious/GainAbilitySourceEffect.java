@@ -48,6 +48,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySou
 	public GainAbilitySourceEffect(Ability ability, Duration duration) {
 		super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
 		this.ability = ability;
+		staticText = "{this} gains \"" + ability.getRule() + "\"" + duration.toString();
 	}
 
 	public GainAbilitySourceEffect(final GainAbilitySourceEffect effect) {
@@ -69,13 +70,5 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySou
 		}
 		return false;
 	}
-
-	@Override
-	public String getText(Ability source) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("{this} gains \"").append(ability.getRule()).append("\" ").append(duration.toString());
-		return sb.toString();
-	}
-
 
 }

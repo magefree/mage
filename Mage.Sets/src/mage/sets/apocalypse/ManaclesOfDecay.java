@@ -81,6 +81,7 @@ class ManaclesOfDecayFirstEffect extends RestrictionEffect<ManaclesOfDecayFirstE
 
 	public ManaclesOfDecayFirstEffect() {
 		super(Constants.Duration.WhileOnBattlefield);
+		staticText = "Enchanted creature can't attack";
 	}
 
 	public ManaclesOfDecayFirstEffect(final ManaclesOfDecayFirstEffect effect) {
@@ -105,17 +106,13 @@ class ManaclesOfDecayFirstEffect extends RestrictionEffect<ManaclesOfDecayFirstE
 		return new ManaclesOfDecayFirstEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Enchanted creature can't attack";
-	}
-
 }
 
 class ManaclesOfDecaySecondEffect extends RestrictionEffect<ManaclesOfDecaySecondEffect> {
 
 	public ManaclesOfDecaySecondEffect() {
 		super(Constants.Duration.EndOfTurn);
+		staticText = "Enchanted creature can't block until end of turn";
 	}
 
 	public ManaclesOfDecaySecondEffect(final ManaclesOfDecaySecondEffect effect) {
@@ -138,11 +135,6 @@ class ManaclesOfDecaySecondEffect extends RestrictionEffect<ManaclesOfDecaySecon
     @Override
 	public ManaclesOfDecaySecondEffect copy() {
 		return new ManaclesOfDecaySecondEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Enchanted creature can't block until end of turn";
 	}
 
 }

@@ -79,6 +79,7 @@ public class VolitionReins extends CardImpl<VolitionReins> {
 
 		public UntapVolitionReinsEffect() {
 			super(Constants.Outcome.Untap);
+			staticText = "When Volition Reins enters the battlefield, if enchanted permanent is tapped, untap it.";
 		}
 
 		public UntapVolitionReinsEffect(final UntapVolitionReinsEffect effect) {
@@ -103,10 +104,6 @@ public class VolitionReins extends CardImpl<VolitionReins> {
 			return false;
 		}
 
-		@Override
-		public String getText(Ability source) {
-			return "When Volition Reins enters the battlefield, if enchanted permanent is tapped, untap it.";
-		}
 	}
 
 }

@@ -48,6 +48,7 @@ public class ExileSpellEffect extends OneShotEffect<ExileSpellEffect> {
 
 	private ExileSpellEffect() {
 		super(Outcome.Exile);
+		staticText = "Exile {this}";
 	}
 	
 	public static ExileSpellEffect getInstance() {
@@ -58,11 +59,6 @@ public class ExileSpellEffect extends OneShotEffect<ExileSpellEffect> {
 	public boolean apply(Game game, Ability source) {
 		//this effect is applied when a spell resolves - see Spell.java
 		return true;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Exile {this}";
 	}
 
 	@Override

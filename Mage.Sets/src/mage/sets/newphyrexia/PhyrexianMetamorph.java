@@ -85,6 +85,7 @@ class PhyrexianMetamorphEffect extends ContinuousEffectImpl<PhyrexianMetamorphEf
 
 	public PhyrexianMetamorphEffect() {
 		super(Constants.Duration.WhileOnBattlefield, Constants.Layer.CopyEffects_1, Constants.SubLayer.NA, Constants.Outcome.BecomeCreature);
+		staticText = "You may have Phyrexian Metamorph enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types";
 	}
 
 	public PhyrexianMetamorphEffect(final PhyrexianMetamorphEffect effect) {
@@ -129,11 +130,6 @@ class PhyrexianMetamorphEffect extends ContinuousEffectImpl<PhyrexianMetamorphEf
 	@Override
 	public PhyrexianMetamorphEffect copy() {
 		return new PhyrexianMetamorphEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "You may have {this} enter the battlefield as a copy of any " + source.getTargets().get(0).getTargetName() + " on the battlefield, except it's an artifact in addition to its other types";
 	}
 
 }

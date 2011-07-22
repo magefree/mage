@@ -30,17 +30,13 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -54,7 +50,7 @@ public class Slagstorm extends CardImpl<Slagstorm> {
 		this.color.setRed(true);
         this.getSpellAbility().addEffect(new DamageAllEffect(3, FilterCreaturePermanent.getDefault()));
 		Mode mode = new Mode();
-		mode.getEffects().add(new SlagstormEffect());
+		mode.getEffects().add(new DamagePlayersEffect(3));
 		this.getSpellAbility().addMode(mode);
     }
 
@@ -67,35 +63,4 @@ public class Slagstorm extends CardImpl<Slagstorm> {
         return new Slagstorm(this);
     }
 
-}
-
-
-class SlagstormEffect extends OneShotEffect<SlagstormEffect> {
-    SlagstormEffect() {
-        super(Constants.Outcome.Damage);
-    }
-
-    SlagstormEffect(final SlagstormEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-		for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
-			Player player = game.getPlayer(playerId);
-			if (player != null)
-				player.damage(3, source.getId(), game, false, true);
-		}
-        return true;
-    }
-
-    @Override
-    public SlagstormEffect copy() {
-        return new SlagstormEffect(this);
-    }
-
-    @Override
-    public String getText(Ability source) {
-        return "Slagstorm deals 3 damage to each player";
-    }
 }

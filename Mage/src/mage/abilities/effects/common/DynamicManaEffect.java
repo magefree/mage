@@ -29,6 +29,7 @@ package mage.abilities.effects.common;
 
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -67,8 +68,8 @@ public class DynamicManaEffect extends BasicManaEffect {
     }
 
     @Override
-    public String getText(Ability source) {
-        return super.getText(source) + " for each " + amount.getMessage();
+    public String getText(Mode mode) {
+        return super.getText(mode) + " for each " + amount.getMessage();
     }
 
     public Mana computeMana(Game game, Ability source){

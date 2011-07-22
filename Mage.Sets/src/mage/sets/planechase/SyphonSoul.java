@@ -63,6 +63,7 @@ public class SyphonSoul extends CardImpl<SyphonSoul> {
 class SyphonSoulEffect extends OneShotEffect<SyphonSoulEffect> {
     public SyphonSoulEffect() {
         super(Constants.Outcome.Damage);
+        staticText = "{this} deals 2 damage to each other player. You gain life equal to the damage dealt this way";
     }
 
     public SyphonSoulEffect(final SyphonSoulEffect effect) {
@@ -85,8 +86,4 @@ class SyphonSoulEffect extends OneShotEffect<SyphonSoulEffect> {
         return new SyphonSoulEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "{this} deals 2 damage to each other player. You gain life equal to the damage dealt this way";
-    }
 }

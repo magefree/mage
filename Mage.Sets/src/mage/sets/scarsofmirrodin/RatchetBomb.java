@@ -73,6 +73,7 @@ public class RatchetBomb extends CardImpl<RatchetBomb> {
 
         public RatchetBombEffect() {
             super(Constants.Outcome.DestroyPermanent);
+            staticText = "Destroy each nonland permanent with converted mana cost equal to the number of charge counters on Ratchet Bomb";
         }
 
         public RatchetBombEffect(final RatchetBombEffect effect) {
@@ -104,10 +105,6 @@ public class RatchetBomb extends CardImpl<RatchetBomb> {
             return new RatchetBombEffect(this);
         }
 
-        @Override
-        public String getText(Ability source) {
-            return "Destroy each nonland permanent with converted mana cost equal to the number of charge counters on Ratchet Bomb";
-        }
     }
 
 }

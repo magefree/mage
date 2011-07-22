@@ -46,6 +46,7 @@ public class AddPlusOneCountersAttachedEffect extends OneShotEffect<AddPlusOneCo
 	public AddPlusOneCountersAttachedEffect(int amount) {
 		super(Outcome.BoostCreature);
 		this.amount = amount;
+		setText();
 	}
 
 	public AddPlusOneCountersAttachedEffect(final AddPlusOneCountersAttachedEffect effect) {
@@ -70,12 +71,11 @@ public class AddPlusOneCountersAttachedEffect extends OneShotEffect<AddPlusOneCo
 		return true;
 	}
 
-	@Override
-	public String getText(Ability source) {
+    private void setText() {
 		if (amount > 1)
-			return "put " + Integer.toString(amount) + " +1/+1 counters on enchanted creature";
+			staticText = "put " + Integer.toString(amount) + " +1/+1 counters on enchanted creature";
 		else
-			return "put a +1/+1 counter on enchanted creature";
+			staticText = "put a +1/+1 counter on enchanted creature";
 	}
 
 }

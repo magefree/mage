@@ -81,6 +81,7 @@ class GlimmerpostEffect extends OneShotEffect<GlimmerpostEffect> {
 
     public GlimmerpostEffect() {
         super(Constants.Outcome.GainLife);
+        staticText = "you gain 1 life for each Locus on the battlefield";
     }
 
     public GlimmerpostEffect(final GlimmerpostEffect effect) {
@@ -103,8 +104,4 @@ class GlimmerpostEffect extends OneShotEffect<GlimmerpostEffect> {
         return new GlimmerpostEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "you gain 1 life for each Locus on the battlefield";
-    }
 }

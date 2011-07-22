@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
 
 import java.util.UUID;
+import mage.abilities.Mode;
 
 /**
  *
@@ -80,13 +80,13 @@ public class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
 	}
 
 	@Override
-	public String getText(Ability source) {
-        if (source.getTargets().size() == 0) {
+	public String getText(Mode mode) {
+        if (mode.getTargets().size() == 0) {
             return "destroy that creature"; //TODO add possibility to specify text with targetPointer usage
-        } else if (source.getTargets().get(0).getNumberOfTargets() == 1)
-		    return "Destroy target " + source.getTargets().get(0).getTargetName();
+        } else if (mode.getTargets().get(0).getNumberOfTargets() == 1)
+		    return "Destroy target " + mode.getTargets().get(0).getTargetName();
         else
-            return "Destroy " + source.getTargets().get(0).getNumberOfTargets() + " target " + source.getTargets().get(0).getTargetName();
+            return "Destroy " + mode.getTargets().get(0).getNumberOfTargets() + " target " + mode.getTargets().get(0).getTargetName();
 	}
 
 }

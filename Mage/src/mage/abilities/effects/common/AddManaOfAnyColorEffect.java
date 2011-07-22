@@ -28,10 +28,8 @@
 
 package mage.abilities.effects.common;
 
-import mage.Constants.Outcome;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.choices.ChoiceColor;
 import mage.game.Game;
 import mage.players.Player;
@@ -44,6 +42,7 @@ public class AddManaOfAnyColorEffect extends ManaEffect<AddManaOfAnyColorEffect>
 
 	public AddManaOfAnyColorEffect() {
 		super();
+		staticText = "add one mana of any color to your mana pool";
 	}
 
 	public AddManaOfAnyColorEffect(final AddManaOfAnyColorEffect effect) {
@@ -81,11 +80,5 @@ public class AddManaOfAnyColorEffect extends ManaEffect<AddManaOfAnyColorEffect>
 		}
 		return false;
 	}
-
-	@Override
-	public String getText(Ability source) {
-        return "add one mana of any color to your mana pool";
-	}
-
 
 }

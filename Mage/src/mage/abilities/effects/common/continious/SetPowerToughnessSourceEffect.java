@@ -49,6 +49,7 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl<SetPower
     public SetPowerToughnessSourceEffect(DynamicValue amount, Duration duration) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         this.amount = amount;
+		staticText = "{this}'s power and toughness are each equal to the number of " + amount.getMessage();
     }
 
 	public SetPowerToughnessSourceEffect(final SetPowerToughnessSourceEffect effect) {
@@ -73,11 +74,4 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl<SetPower
 		return false;
 	}
 
-	@Override
-	public String getDynamicText(Ability source) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("{this}'s power and toughness are each equal to the number of ");
-        sb.append(amount.getMessage());
-		return sb.toString();
-	}
 }

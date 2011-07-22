@@ -91,6 +91,7 @@ class NecroticPlagueEffect extends ContinuousEffectImpl<NecroticPlagueEffect> {
 
 	public NecroticPlagueEffect() {
 		super(Duration.WhileOnBattlefield, Outcome.Detriment);
+		staticText = "Enchanted creature has \"At the beginning of your upkeep, sacrifice this creature.\"  When enchanted creature is put into a graveyard, its controller chooses target creature one of his or her opponents controls. Return Necrotic Plague from its owner's graveyard to the battlefield attached to that creature.";
 	}
 
 	public NecroticPlagueEffect(final NecroticPlagueEffect effect) {
@@ -132,10 +133,6 @@ class NecroticPlagueEffect extends ContinuousEffectImpl<NecroticPlagueEffect> {
 		return layer == Layer.AbilityAddingRemovingEffects_6;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Enchanted creature has \"At the beginning of your upkeep, sacrifice this creature.\"  When enchanted creature is put into a graveyard, its controller chooses target creature one of his or her opponents controls. Return Necrotic Plague from its owner's graveyard to the battlefield attached to that creature.";
-	}
 }
 
 class NecroticPlagueEffect2 extends OneShotEffect<NecroticPlagueEffect2> {
@@ -151,6 +148,7 @@ class NecroticPlagueEffect2 extends OneShotEffect<NecroticPlagueEffect2> {
 	public NecroticPlagueEffect2(UUID cardId) {
 		super(Outcome.PutCardInPlay);
 		this.cardId = cardId;
+		staticText = "its controller chooses target creature one of his or her opponents controls. Return Necrotic Plague from its owner's graveyard to the battlefield attached to that creature.";
 	}
 
 	public NecroticPlagueEffect2(final NecroticPlagueEffect2 effect) {
@@ -184,9 +182,5 @@ class NecroticPlagueEffect2 extends OneShotEffect<NecroticPlagueEffect2> {
 		return new NecroticPlagueEffect2(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "its controller chooses target creature one of his or her opponents controls. Return Necrotic Plague from its owner's graveyard to the battlefield attached to that creature.";
-	}
 
 }

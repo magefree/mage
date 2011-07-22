@@ -81,6 +81,7 @@ class CageOfHandsEffect extends RestrictionEffect<CageOfHandsEffect> {
 
 	public CageOfHandsEffect() {
 		super(Constants.Duration.WhileOnBattlefield);
+		staticText = "Enchanted creature can't attack or block";
 	}
 
 	public CageOfHandsEffect(final CageOfHandsEffect effect) {
@@ -108,11 +109,6 @@ class CageOfHandsEffect extends RestrictionEffect<CageOfHandsEffect> {
 	@Override
 	public CageOfHandsEffect copy() {
 		return new CageOfHandsEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Enchanted creature can't attack or block";
 	}
 
 }

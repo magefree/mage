@@ -80,6 +80,7 @@ class CorruptEffect extends OneShotEffect<CorruptEffect> {
 
 	public CorruptEffect() {
 		super(Outcome.Damage);
+		staticText = "Corrupt deals damage equal to the number of Swamps you control to target creature or player. You gain life equal to the damage dealt this way";
 	}
 
 	public CorruptEffect(final CorruptEffect effect) {
@@ -115,11 +116,6 @@ class CorruptEffect extends OneShotEffect<CorruptEffect> {
 	@Override
 	public CorruptEffect copy() {
 		return new CorruptEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Corrupt deals damage equal to the number of Swamps you control to target creature or player. You gain life equal to the damage dealt this way";
 	}
 
 }

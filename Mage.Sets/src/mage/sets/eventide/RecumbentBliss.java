@@ -79,6 +79,7 @@ class RecumbentBlissEffect extends RestrictionEffect<RecumbentBlissEffect> {
 
 	public RecumbentBlissEffect() {
 		super(Constants.Duration.WhileOnBattlefield);
+		staticText = "Enchanted creature can't attack or block";
 	}
 
 	public RecumbentBlissEffect(final RecumbentBlissEffect effect) {
@@ -106,11 +107,6 @@ class RecumbentBlissEffect extends RestrictionEffect<RecumbentBlissEffect> {
 	@Override
 	public RecumbentBlissEffect copy() {
 		return new RecumbentBlissEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Enchanted creature can't attack or block";
 	}
 
 }

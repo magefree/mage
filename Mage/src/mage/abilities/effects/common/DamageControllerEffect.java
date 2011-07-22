@@ -51,6 +51,7 @@ public class DamageControllerEffect extends OneShotEffect<DamageControllerEffect
 		super(Outcome.Damage);
 		this.amount = amount;
 		this.preventable = preventable;
+		setText();
 	}
 
 	public int getAmount() {
@@ -78,13 +79,12 @@ public class DamageControllerEffect extends OneShotEffect<DamageControllerEffect
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
+	private void setText() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("{source} deals ").append(Integer.toString(amount)).append(" damage to you");
 		if (!preventable)
 			sb.append(". The damage can't be prevented");
-		return sb.toString();
+		staticText = sb.toString();
 	}
 
 }

@@ -96,6 +96,7 @@ class MasterOfTheWildHuntEffect extends OneShotEffect<MasterOfTheWildHuntEffect>
 
 	public MasterOfTheWildHuntEffect() {
 		super(Outcome.Damage);
+		staticText = "Tap all untapped Wolf creatures you control. Each Wolf tapped this way deals damage equal to its power to target creature. That creature deals damage equal to its power divided as its controller chooses among any number of those Wolves";
 	}
 
 	public MasterOfTheWildHuntEffect(final MasterOfTheWildHuntEffect effect) {
@@ -124,8 +125,4 @@ class MasterOfTheWildHuntEffect extends OneShotEffect<MasterOfTheWildHuntEffect>
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Tap all untapped Wolf creatures you control. Each Wolf tapped this way deals damage equal to its power to target creature. That creature deals damage equal to its power divided as its controller chooses among any number of those Wolves";
-	}
 }

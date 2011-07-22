@@ -42,11 +42,12 @@ import mage.game.permanent.Permanent;
 public class MustBlockSourceEffect extends RequirementEffect<MustBlockSourceEffect> {
 
 	public MustBlockSourceEffect() {
-		super(Duration.WhileOnBattlefield);
+		this(Duration.WhileOnBattlefield);
 	}
 
 	public MustBlockSourceEffect(Duration duration) {
 		super(duration);
+		staticText = "All creatures able to block {this} do so";
 	}
 
 	public MustBlockSourceEffect(final MustBlockSourceEffect effect) {
@@ -76,11 +77,6 @@ public class MustBlockSourceEffect extends RequirementEffect<MustBlockSourceEffe
 	@Override
 	public MustBlockSourceEffect copy() {
 		return new MustBlockSourceEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "All creatures able to block {this} do so";
 	}
 
 }

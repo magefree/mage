@@ -75,6 +75,7 @@ class PulseTrackerLoseLifeEffect extends OneShotEffect<PulseTrackerLoseLifeEffec
 
 	PulseTrackerLoseLifeEffect ( ) {
 		super(Outcome.Damage);
+		staticText = effectText;
 	}
 
 	PulseTrackerLoseLifeEffect ( PulseTrackerLoseLifeEffect effect ) {
@@ -99,8 +100,4 @@ class PulseTrackerLoseLifeEffect extends OneShotEffect<PulseTrackerLoseLifeEffec
 		return new PulseTrackerLoseLifeEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return effectText;
-	}
 }

@@ -37,6 +37,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LoseLifePlayersEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.players.Player;
@@ -55,7 +56,7 @@ public class DeathcurseOgre extends CardImpl<DeathcurseOgre> {
 		this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DeathcurseOgreEffect()));
+        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new LoseLifePlayersEffect(3)));
     }
 
     public DeathcurseOgre (final DeathcurseOgre card) {
@@ -66,36 +67,5 @@ public class DeathcurseOgre extends CardImpl<DeathcurseOgre> {
     public DeathcurseOgre copy() {
         return new DeathcurseOgre(this);
     }
-
-}
-
-class DeathcurseOgreEffect extends OneShotEffect<DeathcurseOgreEffect> {
-
-	public DeathcurseOgreEffect() {
-		super(Constants.Outcome.Damage);
-	}
-
-	public DeathcurseOgreEffect(final DeathcurseOgreEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public DeathcurseOgreEffect copy() {
-		return new DeathcurseOgreEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (Player player: game.getPlayers().values()) {
-			player.loseLife(3, game);
-		}
-		return true;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "each player loses 3 life";
-	}
-
 
 }

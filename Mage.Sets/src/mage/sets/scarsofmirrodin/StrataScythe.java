@@ -79,6 +79,7 @@ public class StrataScythe extends CardImpl<StrataScythe> {
 class StrataScytheImprintEffect extends OneShotEffect<StrataScytheImprintEffect> {
     StrataScytheImprintEffect() {
         super(Constants.Outcome.Exile);
+        staticText = "search your library for a land card, exile it, then shuffle your library";
     }
 
     StrataScytheImprintEffect(final StrataScytheImprintEffect effect) {
@@ -107,10 +108,6 @@ class StrataScytheImprintEffect extends OneShotEffect<StrataScytheImprintEffect>
         return new StrataScytheImprintEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "search your library for a land card, exile it, then shuffle your library";
-    }
 }
 
 class SameNameAsExiledCountValue implements DynamicValue {

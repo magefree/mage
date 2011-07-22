@@ -76,6 +76,7 @@ public class DarksteelColossus extends CardImpl<DarksteelColossus> {
 class DarksteelColossusEffect extends OneShotEffect<DarksteelColossusEffect> {
     DarksteelColossusEffect() {
         super(Constants.Outcome.Benefit);
+        staticText = "reveal Darksteel Colossus and shuffle it into its owner's library instead";
     }
 
     DarksteelColossusEffect(final DarksteelColossusEffect effect) {
@@ -104,8 +105,4 @@ class DarksteelColossusEffect extends OneShotEffect<DarksteelColossusEffect> {
         return new DarksteelColossusEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "reveal Darksteel Colossus and shuffle it into its owner's library instead";
-    }
 }

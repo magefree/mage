@@ -85,6 +85,7 @@ class SkipUntapSourceEffect extends ReplacementEffectImpl<SkipUntapSourceEffect>
 
     public SkipUntapSourceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "Equipped creature doesn't untap during its controller's untap step.";
     }
 
     public SkipUntapSourceEffect(final SkipUntapSourceEffect effect) {
@@ -116,8 +117,4 @@ class SkipUntapSourceEffect extends ReplacementEffectImpl<SkipUntapSourceEffect>
         return false;
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Equipped creature doesn't untap during its controller's untap step.";
-    }
 }

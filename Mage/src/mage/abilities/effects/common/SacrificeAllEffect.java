@@ -93,8 +93,7 @@ public class SacrificeAllEffect extends OneShotEffect<SacrificeAllEffect> {
 		return true;
 	}
 
-	@Override
-	public String getText(Ability source) {
+	private void setText() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Each players sacrifices ");
 		if (amount > 1)
@@ -102,7 +101,7 @@ public class SacrificeAllEffect extends OneShotEffect<SacrificeAllEffect> {
 		else
 			sb.append("a ");
 		sb.append(filter.getMessage());
-		return sb.toString();
+		staticText = sb.toString();
 	}
 
 

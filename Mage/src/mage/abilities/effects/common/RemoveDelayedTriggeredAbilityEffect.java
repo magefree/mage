@@ -45,6 +45,7 @@ public class RemoveDelayedTriggeredAbilityEffect extends OneShotEffect<RemoveDel
 	public RemoveDelayedTriggeredAbilityEffect(UUID abilityId) {
 		super(Outcome.Neutral);
 		this.abilityId = abilityId;
+		staticText = "remove triggered ability";
 	}
 
 	public RemoveDelayedTriggeredAbilityEffect(final RemoveDelayedTriggeredAbilityEffect effect) {
@@ -61,12 +62,6 @@ public class RemoveDelayedTriggeredAbilityEffect extends OneShotEffect<RemoveDel
 	public boolean apply(Game game, Ability source) {
 		game.getState().removeDelayedTriggeredAbility(abilityId);
 		return true;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		//TODO: improve this
-		return "remove triggered ability";
 	}
 
 }

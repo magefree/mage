@@ -94,6 +94,7 @@ class SarkhanTheMadRevealAndDrawEffect extends OneShotEffect<SarkhanTheMadReveal
 
 	SarkhanTheMadRevealAndDrawEffect ( ) {
 		super(Outcome.DrawCard);
+		staticText = effectText;
 	}
 
 	SarkhanTheMadRevealAndDrawEffect ( SarkhanTheMadRevealAndDrawEffect effect ) {
@@ -121,10 +122,6 @@ class SarkhanTheMadRevealAndDrawEffect extends OneShotEffect<SarkhanTheMadReveal
 		return new SarkhanTheMadRevealAndDrawEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return effectText;
-	}
 }
 
 class SarkhanTheMadSacEffect extends OneShotEffect<SarkhanTheMadSacEffect> {
@@ -133,6 +130,7 @@ class SarkhanTheMadSacEffect extends OneShotEffect<SarkhanTheMadSacEffect> {
 
 	SarkhanTheMadSacEffect ( ) {
 		super(Outcome.Sacrifice);
+		staticText = effectText;
 	}
 
 	SarkhanTheMadSacEffect ( SarkhanTheMadSacEffect effect ) {
@@ -156,10 +154,6 @@ class SarkhanTheMadSacEffect extends OneShotEffect<SarkhanTheMadSacEffect> {
 		return new SarkhanTheMadSacEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return effectText;
-	}
 }
 
 class SarkhanTheMadDragonDamageEffect extends OneShotEffect<SarkhanTheMadDragonDamageEffect> {
@@ -175,6 +169,7 @@ class SarkhanTheMadDragonDamageEffect extends OneShotEffect<SarkhanTheMadDragonD
 
 	SarkhanTheMadDragonDamageEffect ( ) {
 		super(Outcome.Damage);
+		staticText = effectText;
 	}
 
 	SarkhanTheMadDragonDamageEffect ( SarkhanTheMadDragonDamageEffect effect ) {
@@ -200,10 +195,6 @@ class SarkhanTheMadDragonDamageEffect extends OneShotEffect<SarkhanTheMadDragonD
 		return new SarkhanTheMadDragonDamageEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return effectText;
-	}
 }
 
 class DragonToken extends mage.game.permanent.token.DragonToken {

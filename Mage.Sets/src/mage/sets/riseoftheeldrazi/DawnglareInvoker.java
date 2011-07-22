@@ -84,6 +84,7 @@ class DawnglareInvokerEffect extends OneShotEffect<DawnglareInvokerEffect> {
 
     public DawnglareInvokerEffect() {
         super(Outcome.Tap);
+        staticText = "Tap all creatures target player controls.";
     }
 
     public DawnglareInvokerEffect(final DawnglareInvokerEffect effect) {
@@ -108,8 +109,4 @@ class DawnglareInvokerEffect extends OneShotEffect<DawnglareInvokerEffect> {
         return new DawnglareInvokerEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Tap all creatures target player controls.";
-    }
 }

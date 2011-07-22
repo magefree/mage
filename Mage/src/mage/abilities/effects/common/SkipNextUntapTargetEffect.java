@@ -32,6 +32,7 @@ import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.PhaseStep;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -78,8 +79,8 @@ public class SkipNextUntapTargetEffect extends ReplacementEffectImpl<SkipNextUnt
 	}
 
 	@Override
-	public String getText(Ability source) {
-		return "Target " + source.getTargets().get(0).getTargetName() + " doesn't untap during its controller's next untap step";
+	public String getText(Mode mode) {
+		return "Target " + mode.getTargets().get(0).getTargetName() + " doesn't untap during its controller's next untap step";
 	}
 
 }

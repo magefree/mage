@@ -14,6 +14,7 @@ public class FlipSourceEffect extends OneShotEffect<FlipSourceEffect> {
 
     public FlipSourceEffect() {
         super(Constants.Outcome.BecomeCreature);
+        staticText = "flip it.";
     }
 
     public FlipSourceEffect(final FlipSourceEffect effect) {
@@ -34,8 +35,4 @@ public class FlipSourceEffect extends OneShotEffect<FlipSourceEffect> {
         return new FlipSourceEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "flip it.";
-    }
 }

@@ -79,6 +79,7 @@ class DuressEffect extends OneShotEffect<DuressEffect> {
 
 	public DuressEffect() {
 		super(Outcome.Discard);
+		staticText = "Target opponent reveals his or her hand. You choose a noncreature, nonland card from it. That player discards that card";
 	}
 
 	public DuressEffect(final DuressEffect effect) {
@@ -107,11 +108,6 @@ class DuressEffect extends OneShotEffect<DuressEffect> {
 	@Override
 	public DuressEffect copy() {
 		return new DuressEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Target opponent reveals his or her hand. You choose a noncreature, nonland card from it. That player discards that card";
 	}
 
 }

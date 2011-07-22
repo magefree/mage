@@ -49,6 +49,7 @@ public class CantTargetSourceEffect extends ReplacementEffectImpl<CantTargetSour
 	public CantTargetSourceEffect(FilterStackObject filterSource, Duration duration) {
 		super(duration, Outcome.Benefit);
 		this.filterSource = filterSource;
+		setText();
 	}
 
 	public CantTargetSourceEffect(final CantTargetSourceEffect effect) {
@@ -82,13 +83,12 @@ public class CantTargetSourceEffect extends ReplacementEffectImpl<CantTargetSour
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
+	private void setText() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("{this} can't be the target of ");
 		sb.append(filterSource.getMessage());
 		sb.append(" ").append(duration.toString());
-		return sb.toString();
+		staticText = sb.toString();
 	}
 
 }

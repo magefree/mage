@@ -82,6 +82,7 @@ public class Embersmith extends CardImpl<Embersmith> {
 class EmbersmithEffect extends OneShotEffect<EmbersmithEffect> {
     EmbersmithEffect() {
         super(Constants.Outcome.Damage);
+        staticText =  "you may pay {1}. If you do, Embersmith deals 1 damage to target creature or player";
     }
 
     EmbersmithEffect(final EmbersmithEffect effect) {
@@ -113,8 +114,4 @@ class EmbersmithEffect extends OneShotEffect<EmbersmithEffect> {
         return new EmbersmithEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "you may pay {1}. If you do, Embersmith deals 1 damage to target creature or player";
-    }
 }

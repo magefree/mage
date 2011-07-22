@@ -81,6 +81,7 @@ class ArrestEffect extends ReplacementEffectImpl<ArrestEffect> {
 
 	public ArrestEffect() {
 		super(Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+		staticText = "Enchanted creature can't attack or block, and its activated abilities can't be activated";
 	}
 
 	public ArrestEffect(final ArrestEffect effect) {
@@ -117,8 +118,4 @@ class ArrestEffect extends ReplacementEffectImpl<ArrestEffect> {
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Enchanted creature can't attack or block, and its activated abilities can't be activated";
-	}
 }

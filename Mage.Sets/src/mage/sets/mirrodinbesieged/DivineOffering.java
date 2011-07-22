@@ -80,6 +80,7 @@ public class DivineOffering extends CardImpl<DivineOffering> {
 
                 public DivineOfferingEffect() {
                         super(Constants.Outcome.DestroyPermanent);
+                        staticText = "You gain life equal to its converted mana cost";
                 }
 
                 public DivineOfferingEffect(DivineOfferingEffect effect) {
@@ -104,9 +105,5 @@ public class DivineOffering extends CardImpl<DivineOffering> {
                         return new DivineOfferingEffect(this);
                 }
 
-                @Override
-                public String getText(Ability source) {
-                        return "You gain life equal to its converted mana cost";
-                }
         }
 }

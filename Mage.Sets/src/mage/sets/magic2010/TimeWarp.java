@@ -68,6 +68,7 @@ class TimeWarpEffect extends OneShotEffect<TimeWarpEffect> {
 
 	public TimeWarpEffect() {
 		super(Outcome.ExtraTurn);
+		staticText = "Target player takes an extra turn after this one";
 	}
 
 	public TimeWarpEffect(final TimeWarpEffect effect) {
@@ -85,8 +86,4 @@ class TimeWarpEffect extends OneShotEffect<TimeWarpEffect> {
 		return true;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Target player takes an extra turn after this one";
-	}
 }

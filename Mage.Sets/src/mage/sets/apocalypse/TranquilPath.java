@@ -32,7 +32,6 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
@@ -77,6 +76,7 @@ class TranquilPathEffect extends OneShotEffect<TranquilPathEffect> {
 
     public TranquilPathEffect() {
         super(Constants.Outcome.DestroyPermanent);
+        staticText = "Destroy all enchantments";
     }
 
     public TranquilPathEffect(final TranquilPathEffect effect) {
@@ -96,8 +96,4 @@ class TranquilPathEffect extends OneShotEffect<TranquilPathEffect> {
         return new TranquilPathEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Destroy all enchantments";
-    }
 }

@@ -35,13 +35,11 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -74,6 +72,7 @@ public class BurntheImpure extends CardImpl<BurntheImpure> {
 	public BurntheImpureEffect(int amount) {
 		super(Constants.Outcome.Damage);
 		this.amount = amount;
+		staticText = "Burn the Impure deals 3 damage to target creature. If that creature has infect, Burn the Impure deals 3 damage to that creature's controller.";
 	}
 
 	public int getAmount() {
@@ -104,11 +103,6 @@ public class BurntheImpure extends CardImpl<BurntheImpure> {
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Burn the Impure deals 3 damage to target creature. If that creature has infect, Burn the Impure deals 3 damage to that creature's controller.";
 	}
 
 }

@@ -78,6 +78,7 @@ public class FlameblastDragon extends CardImpl<FlameblastDragon> {
 class FlameblastDragonEffect extends OneShotEffect<FlameblastDragonEffect> {
     FlameblastDragonEffect() {
         super(Constants.Outcome.Benefit);
+        staticText = "you may pay {X}{R}. If you do, Flameblast Dragon deals X damage to target creature or player";
     }
 
     FlameblastDragonEffect(final FlameblastDragonEffect effect) {
@@ -115,8 +116,4 @@ class FlameblastDragonEffect extends OneShotEffect<FlameblastDragonEffect> {
         return new FlameblastDragonEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "you may pay {X}{R}. If you do, Flameblast Dragon deals X damage to target creature or player";
-    }
 }

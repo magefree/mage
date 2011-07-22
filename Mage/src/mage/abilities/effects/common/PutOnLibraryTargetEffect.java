@@ -31,6 +31,7 @@ package mage.abilities.effects.common;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
@@ -81,9 +82,9 @@ public class PutOnLibraryTargetEffect extends OneShotEffect<PutOnLibraryTargetEf
 	}
 
 	@Override
-	public String getText(Ability source) {
+	public String getText(Mode mode) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Put target ").append(source.getTargets().get(0).getTargetName()).append(" on ");
+		sb.append("Put target ").append(mode.getTargets().get(0).getTargetName()).append(" on ");
 		sb.append(onTop?"top":"the bottom").append(" of it's owner's library");
 		return sb.toString();
 

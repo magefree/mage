@@ -89,6 +89,7 @@ public class RazorHippogriff extends CardImpl<RazorHippogriff> {
 
 		public RazorHippogriffGainLifeEffect() {
 			super(Constants.Outcome.GainLife);
+			staticText = "you gain life equal to that card's converted mana cost.";
 		}
 
 		public RazorHippogriffGainLifeEffect(final RazorHippogriffGainLifeEffect effect) {
@@ -113,11 +114,6 @@ public class RazorHippogriff extends CardImpl<RazorHippogriff> {
 				}
 			}
 			return true;
-		}
-
-		@Override
-		public String getText(Ability source) {
-			return "you gain life equal to that card's converted mana cost.";
 		}
 
 	}

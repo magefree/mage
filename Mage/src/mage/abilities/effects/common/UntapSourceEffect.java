@@ -42,7 +42,8 @@ public class UntapSourceEffect extends OneShotEffect<UntapSourceEffect> {
 
     public UntapSourceEffect() {
 	super(Outcome.Untap);
-    }
+ 	staticText = "untap {this}";
+   }
 
     public UntapSourceEffect(final UntapSourceEffect effect) {
 	super(effect);
@@ -63,8 +64,4 @@ public class UntapSourceEffect extends OneShotEffect<UntapSourceEffect> {
         return new UntapSourceEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-	return "untap {this}";
-    }
-}
+ }

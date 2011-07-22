@@ -117,6 +117,7 @@ class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl<UnearthLeaves
 
 	public UnearthLeavesBattlefieldEffect() {
 		super(Duration.WhileOnBattlefield, Outcome.Exile);
+		staticText = "When {this} leaves the battlefield, exile it";
 	}
 
 	public UnearthLeavesBattlefieldEffect(final UnearthLeavesBattlefieldEffect effect) {
@@ -149,8 +150,4 @@ class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl<UnearthLeaves
 		return apply(game, source);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "When {this} leaves the battlefield, exile it";
-	}
 }

@@ -72,6 +72,7 @@ class SeeBeyondEffect extends OneShotEffect<SeeBeyondEffect> {
 
 	public SeeBeyondEffect() {
 		super(Outcome.DrawCard);
+		staticText = "Draw two cards, then shuffle a card from your hand into your library";
 	}
 
 	public SeeBeyondEffect(SeeBeyondEffect effect) {
@@ -100,11 +101,6 @@ class SeeBeyondEffect extends OneShotEffect<SeeBeyondEffect> {
 	@Override
 	public SeeBeyondEffect copy() {
 		return new SeeBeyondEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Draw two cards, then shuffle a card from your hand into your library";
 	}
 
 }

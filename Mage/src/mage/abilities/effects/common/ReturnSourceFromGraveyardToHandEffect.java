@@ -44,6 +44,7 @@ public class ReturnSourceFromGraveyardToHandEffect extends OneShotEffect<ReturnS
 
 	public ReturnSourceFromGraveyardToHandEffect() {
 		super(Outcome.PutCreatureInPlay);
+		staticText = "Return {this} from your graveyard to your hand";
 	}
 
 	public ReturnSourceFromGraveyardToHandEffect(final ReturnSourceFromGraveyardToHandEffect effect) {
@@ -65,11 +66,6 @@ public class ReturnSourceFromGraveyardToHandEffect extends OneShotEffect<ReturnS
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Return {this} from your graveyard to your hand";
 	}
 
 }

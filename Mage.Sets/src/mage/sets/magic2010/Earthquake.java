@@ -75,6 +75,7 @@ class EarthquakeEffect extends OneShotEffect<EarthquakeEffect> {
 
 	public EarthquakeEffect() {
 		super(Outcome.Damage);
+		staticText = "Earthquake deals X damage to each creature without flying and each player";
 	}
 
 	public EarthquakeEffect(final EarthquakeEffect effect) {
@@ -101,8 +102,4 @@ class EarthquakeEffect extends OneShotEffect<EarthquakeEffect> {
 		return true;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Earthquake deals X damage to each creature without flying and each player";
-	}
 }

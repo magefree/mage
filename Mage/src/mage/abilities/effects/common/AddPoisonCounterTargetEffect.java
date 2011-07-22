@@ -29,6 +29,7 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -72,7 +73,7 @@ public class AddPoisonCounterTargetEffect extends OneShotEffect<AddPoisonCounter
     }
 
     @Override
-    public String getText(Ability source) {
-        return "Target " + source.getTargets().get(0).getTargetName() + " gets " + Integer.toString(amount) + " poison counter(s).";
+    public String getText(Mode mode) {
+        return "Target " + mode.getTargets().get(0).getTargetName() + " gets " + Integer.toString(amount) + " poison counter(s).";
     }
 }

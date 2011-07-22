@@ -80,6 +80,7 @@ public class ContagionEngine extends CardImpl<ContagionEngine> {
 class ContagionEngineEffect extends OneShotEffect<ContagionEngineEffect> {
 	ContagionEngineEffect() {
 		super(Constants.Outcome.UnboostCreature);
+		staticText = "put a -1/-1 counter on each creature target player controls";
 	}
 
 	ContagionEngineEffect(final ContagionEngineEffect effect) {
@@ -103,8 +104,4 @@ class ContagionEngineEffect extends OneShotEffect<ContagionEngineEffect> {
 		return new ContagionEngineEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "put a -1/-1 counter on each creature target player controls";
-	}
 }

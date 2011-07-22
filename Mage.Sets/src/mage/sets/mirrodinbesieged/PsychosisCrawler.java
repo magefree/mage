@@ -77,6 +77,7 @@ class LoseLifeOpponentsEffect extends OneShotEffect<LoseLifeOpponentsEffect> {
 
     public LoseLifeOpponentsEffect() {
         super(Outcome.Damage);
+        staticText = "each opponent loses 1 life";
     }
 
     public LoseLifeOpponentsEffect(final LoseLifeOpponentsEffect effect) {
@@ -102,8 +103,4 @@ class LoseLifeOpponentsEffect extends OneShotEffect<LoseLifeOpponentsEffect> {
         return applied;
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "each opponent loses 1 life";
-    }
 }

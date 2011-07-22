@@ -84,6 +84,7 @@ class SoilshaperEffect extends ContinuousEffectImpl<SoilshaperEffect> {
 
     public SoilshaperEffect() {
         super(Constants.Duration.EndOfTurn, Constants.Outcome.BecomeCreature);
+        staticText = "target land becomes a 3/3 creature until end of turn. It's still a land";
     }
 
     public SoilshaperEffect(final SoilshaperEffect effect) {
@@ -126,8 +127,4 @@ class SoilshaperEffect extends ContinuousEffectImpl<SoilshaperEffect> {
         return layer == Constants.Layer.PTChangingEffects_7 || layer == Constants.Layer.ColorChangingEffects_5 || layer == layer.TypeChangingEffects_4;
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "target land becomes a 3/3 creature until end of turn. It's still a land";
-    }
 }

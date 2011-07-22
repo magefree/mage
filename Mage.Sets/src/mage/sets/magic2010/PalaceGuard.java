@@ -75,6 +75,7 @@ public class PalaceGuard extends CardImpl<PalaceGuard> {
 
 		public PalaceGuardEffect() {
 			super(Duration.WhileOnBattlefield, Outcome.Benefit);
+			staticText = "Palace Guard can block any number of creatures";
 		}
 
 		public PalaceGuardEffect(final PalaceGuardEffect effect) {
@@ -110,10 +111,6 @@ public class PalaceGuard extends CardImpl<PalaceGuard> {
 			return layer == Layer.RulesEffects;
 		}
 
-		@Override
-		public String getText(Ability source) {
-			return "Palace Guard can block any number of creatures";
-		}
 	}
 }
 

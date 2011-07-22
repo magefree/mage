@@ -75,6 +75,7 @@ class LeylineOfTheVoidEffect extends ReplacementEffectImpl<LeylineOfTheVoidEffec
 
 	public LeylineOfTheVoidEffect() {
 		super(Duration.WhileOnBattlefield, Outcome.Benefit);
+		staticText = "If a card would be put into an opponent's graveyard from anywhere, exile it instead";
 	}
 
 	public LeylineOfTheVoidEffect(final LeylineOfTheVoidEffect effect) {
@@ -116,11 +117,6 @@ class LeylineOfTheVoidEffect extends ReplacementEffectImpl<LeylineOfTheVoidEffec
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "If a card would be put into an opponent's graveyard from anywhere, exile it instead";
 	}
 
 }

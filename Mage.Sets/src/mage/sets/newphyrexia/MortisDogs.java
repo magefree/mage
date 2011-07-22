@@ -79,6 +79,7 @@ class MortisDogsEffect extends OneShotEffect<MortisDogsEffect> {
 
     public MortisDogsEffect() {
         super(Outcome.Damage);
+        staticText = "target player loses life equal to its power";
     }
 
     @Override
@@ -97,8 +98,4 @@ class MortisDogsEffect extends OneShotEffect<MortisDogsEffect> {
         return false;
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "target player loses life equal to its power";
-    }
 }

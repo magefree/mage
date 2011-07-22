@@ -72,6 +72,7 @@ class CondemnEffect extends OneShotEffect<CondemnEffect> {
 
 	public CondemnEffect() {
 		super(Outcome.GainLife);
+		staticText = "Its controller gains life equal to its toughness";
 	}
 
 	public CondemnEffect(final CondemnEffect effect) {
@@ -93,11 +94,6 @@ class CondemnEffect extends OneShotEffect<CondemnEffect> {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Its controller gains life equal to its toughness";
 	}
 
 }

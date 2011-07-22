@@ -45,6 +45,7 @@ public class RegenerateSourceEffect extends ReplacementEffectImpl<RegenerateSour
 
 	public RegenerateSourceEffect() {
 		super(Duration.EndOfTurn, Outcome.Regenerate);
+		staticText = "Regenerate {this}";
 	}
 
 	public RegenerateSourceEffect(final RegenerateSourceEffect effect) {
@@ -82,11 +83,6 @@ public class RegenerateSourceEffect extends ReplacementEffectImpl<RegenerateSour
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Regenerate {this}";
 	}
 
 }

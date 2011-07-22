@@ -42,6 +42,7 @@ public class TapSourceEffect extends OneShotEffect<TapSourceEffect> {
 
 	public TapSourceEffect() {
 		super(Outcome.Tap);
+		staticText = "tap {this}";
 	}
 
 	public TapSourceEffect(final TapSourceEffect effect) {
@@ -61,11 +62,6 @@ public class TapSourceEffect extends OneShotEffect<TapSourceEffect> {
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "tap {this}";
 	}
 
 }

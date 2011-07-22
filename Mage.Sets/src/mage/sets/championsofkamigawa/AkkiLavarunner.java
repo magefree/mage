@@ -113,6 +113,7 @@ class TokTokVolcanoBornEffect extends ReplacementEffectImpl<TokTokVolcanoBornEff
 
     TokTokVolcanoBornEffect() {
         super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        staticText = "If a red source would deal damage to a player, it deals that much damage plus 1 to that player instead";
     }
 
     TokTokVolcanoBornEffect(final TokTokVolcanoBornEffect effect) {
@@ -145,8 +146,4 @@ class TokTokVolcanoBornEffect extends ReplacementEffectImpl<TokTokVolcanoBornEff
         return new TokTokVolcanoBornEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "If a red source would deal damage to a player, it deals that much damage plus 1 to that player instead";
-    }
 }

@@ -98,6 +98,7 @@ class KhalniHydraCostReductionEffect extends OneShotEffect<KhalniHydraCostReduct
 
 	KhalniHydraCostReductionEffect ( ) {
 		super(Outcome.Benefit);
+		this.staticText = effectText;
 	}
 
 	KhalniHydraCostReductionEffect ( KhalniHydraCostReductionEffect effect ) {
@@ -113,11 +114,5 @@ class KhalniHydraCostReductionEffect extends OneShotEffect<KhalniHydraCostReduct
 	public KhalniHydraCostReductionEffect copy() {
 		return new KhalniHydraCostReductionEffect(this);
 	}
-
-	@Override
-	public String getText(Ability source) {
-		return effectText;
-	}
-
 
 }

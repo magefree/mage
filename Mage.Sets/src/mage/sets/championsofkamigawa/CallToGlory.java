@@ -80,6 +80,7 @@ class CalltoGloryFirstEffect extends OneShotEffect<CalltoGloryFirstEffect> {
 
     public CalltoGloryFirstEffect() {
         super(Constants.Outcome.Untap);
+        staticText = "Untap all creatures you control";
     }
 
     public CalltoGloryFirstEffect(final CalltoGloryFirstEffect effect) {
@@ -103,8 +104,4 @@ class CalltoGloryFirstEffect extends OneShotEffect<CalltoGloryFirstEffect> {
         return new CalltoGloryFirstEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Untap all creatures you control";
-    }
 }

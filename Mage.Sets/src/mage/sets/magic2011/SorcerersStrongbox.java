@@ -76,6 +76,7 @@ class SorcerersStrongboxEffect extends OneShotEffect<SorcerersStrongboxEffect> {
 
 	public SorcerersStrongboxEffect() {
 		super(Outcome.DrawCard);
+		staticText = "Flip a coin. If you win the flip, sacrifice Sorcerer's Strongbox and draw three cards";
 	}
 
 	public SorcerersStrongboxEffect(final SorcerersStrongboxEffect effect) {
@@ -103,8 +104,4 @@ class SorcerersStrongboxEffect extends OneShotEffect<SorcerersStrongboxEffect> {
 		return new SorcerersStrongboxEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Flip a coin. If you win the flip, sacrifice Sorcerer's Strongbox and draw three cards";
-	}
 }

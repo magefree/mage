@@ -91,6 +91,7 @@ class KitsuneHealerEffect extends PreventionEffectImpl<KitsuneHealerEffect> {
 
 	public KitsuneHealerEffect(Constants.Duration duration) {
 		super(duration);
+		staticText = "Prevent all damage that would be dealt to target legendary creature " + duration.toString();
 	}
 
 	public KitsuneHealerEffect(final PreventAllCombatDamageEffect effect) {
@@ -118,9 +119,4 @@ class KitsuneHealerEffect extends PreventionEffectImpl<KitsuneHealerEffect> {
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Prevent all damage that would be dealt to target legendary creature" +
-                " " + duration.toString();
-	}
 }

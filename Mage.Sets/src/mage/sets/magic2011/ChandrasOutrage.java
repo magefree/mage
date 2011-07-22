@@ -69,6 +69,7 @@ class ChandrasOutrageEffect extends OneShotEffect<ChandrasOutrageEffect> {
 
 	public ChandrasOutrageEffect() {
 		super(Outcome.Damage);
+		staticText = "Chandra's Outrage deals 4 damage to target creature and 2 damage to that creature's controller";
 	}
 
 	public ChandrasOutrageEffect(final ChandrasOutrageEffect effect) {
@@ -92,11 +93,6 @@ class ChandrasOutrageEffect extends OneShotEffect<ChandrasOutrageEffect> {
 	@Override
 	public ChandrasOutrageEffect copy() {
 		return new ChandrasOutrageEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Chandra's Outrage deals 4 damage to target creature and 2 damage to that creature's controller";
 	}
 
 }

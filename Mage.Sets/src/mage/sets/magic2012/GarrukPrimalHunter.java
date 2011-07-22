@@ -91,6 +91,7 @@ public class GarrukPrimalHunter extends CardImpl<GarrukPrimalHunter> {
 class GarrukPrimalHunterEffect extends OneShotEffect<GarrukPrimalHunterEffect> {
     GarrukPrimalHunterEffect() {
         super(Constants.Outcome.DrawCard);
+        staticText = "Draw cards equal to the greatest power among creatures you control";
     }
 
     GarrukPrimalHunterEffect(final GarrukPrimalHunterEffect effect) {
@@ -117,10 +118,6 @@ class GarrukPrimalHunterEffect extends OneShotEffect<GarrukPrimalHunterEffect> {
         return new GarrukPrimalHunterEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Draw cards equal to the greatest power among creatures you control";
-    }
 }
 
 class WurmToken extends Token {

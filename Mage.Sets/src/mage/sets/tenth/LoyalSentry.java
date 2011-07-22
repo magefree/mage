@@ -73,6 +73,7 @@ public class LoyalSentry extends CardImpl<LoyalSentry> {
 class LoyalSentryEffect extends OneShotEffect<LoyalSentryEffect> {
     LoyalSentryEffect() {
         super(Constants.Outcome.DestroyPermanent);
+        staticText = "destroy that creature and {this}";
     }
 
     LoyalSentryEffect(LoyalSentryEffect effect) {
@@ -97,8 +98,4 @@ class LoyalSentryEffect extends OneShotEffect<LoyalSentryEffect> {
         return new LoyalSentryEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "destroy that creature and {this}";
-    }
 }

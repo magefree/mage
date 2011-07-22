@@ -47,6 +47,7 @@ public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutI
 
     public SearchLibraryPutInHandEffect(TargetCardInLibrary target) {
 		super(target, Outcome.DrawCard);
+		setText();
     }
 
 	public SearchLibraryPutInHandEffect(final SearchLibraryPutInHandEffect effect) {
@@ -74,8 +75,7 @@ public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutI
         return true;
     }
 
-    @Override
-    public String getText(Ability source) {
+    private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append("Search your library for ");
         if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
@@ -87,7 +87,7 @@ public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutI
 		}
 		sb.append(". Then shuffle your library");
 
-		return sb.toString();
+		staticText = sb.toString();
     }
 
 }

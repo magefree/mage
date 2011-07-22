@@ -46,6 +46,7 @@ public class DestroyAllControlledTargetEffect extends OneShotEffect<DestroyAllCo
 	public DestroyAllControlledTargetEffect(FilterPermanent filter) {
 		super(Outcome.DestroyPermanent);
 		this.filter = filter;
+		staticText = "Destroy all " + filter.getMessage() + " controlled by target player";
 	}
 
 	public DestroyAllControlledTargetEffect(final DestroyAllControlledTargetEffect effect) {
@@ -64,11 +65,6 @@ public class DestroyAllControlledTargetEffect extends OneShotEffect<DestroyAllCo
 			permanent.destroy(source.getId(), game, false);
 		}
 		return true;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Destroy all " + filter.getMessage() + " controlled by target player";
 	}
 
 }

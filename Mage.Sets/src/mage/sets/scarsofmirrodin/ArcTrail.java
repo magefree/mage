@@ -85,6 +85,7 @@ class ArcTrailEffect extends OneShotEffect {
 
 	private ArcTrailEffect ( ) {
 		super(Outcome.Damage);
+		staticText = "{source} deals 2 damage to target creature or player and 1 damage to another target creature or player.";
 	}
 
 	@Override
@@ -119,8 +120,4 @@ class ArcTrailEffect extends OneShotEffect {
 		return fINSTANCE;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "{source} deals 2 damage to target creature or player and 1 damage to another target creature or player.";
-	}
 }

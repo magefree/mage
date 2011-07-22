@@ -82,6 +82,7 @@ class ObstinateBalothEffect extends ReplacementEffectImpl<ObstinateBalothEffect>
 
 	public ObstinateBalothEffect() {
 		super(Duration.EndOfGame, Outcome.PutCardInPlay);
+		staticText = "If a spell or ability an opponent controls causes you to discard Obstinate Baloth, put it onto the battlefield instead of putting it into your graveyard";
 	}
 
 	public ObstinateBalothEffect(final ObstinateBalothEffect effect) {
@@ -127,8 +128,4 @@ class ObstinateBalothEffect extends ReplacementEffectImpl<ObstinateBalothEffect>
 		return apply(game, source);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "If a spell or ability an opponent controls causes you to discard Obstinate Baloth, put it onto the battlefield instead of putting it into your graveyard";
-	}
 }

@@ -87,6 +87,7 @@ class ShivsEmbraceEffect extends ContinuousEffectImpl<ShivsEmbraceEffect> {
 
 	public ShivsEmbraceEffect() {
 		super(Duration.WhileOnBattlefield, Outcome.Detriment);
+		staticText = "Enchanted creature gets +2/+2 and has flying";
 	}
 
 	public ShivsEmbraceEffect(final ShivsEmbraceEffect effect) {
@@ -133,8 +134,4 @@ class ShivsEmbraceEffect extends ContinuousEffectImpl<ShivsEmbraceEffect> {
 		return layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Enchanted creature gets +2/+2 and has flying";
-	}
 }

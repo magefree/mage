@@ -46,6 +46,7 @@ public class DrawCardAllEffect extends OneShotEffect<DrawCardAllEffect> {
 	public DrawCardAllEffect(int amount) {
 		super(Outcome.DrawCard);
 		this.amount = amount;
+		staticText = "Each player draws " + Integer.toString(amount) + " card" + (amount == 1?"":"s");
 	}
 
 	public DrawCardAllEffect(final DrawCardAllEffect effect) {
@@ -68,11 +69,6 @@ public class DrawCardAllEffect extends OneShotEffect<DrawCardAllEffect> {
 				player.drawCards(amount, game);
 		}
 		return true;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Each player draws " + Integer.toString(amount) + " card" + (amount == 1?"":"s");
 	}
 
 }

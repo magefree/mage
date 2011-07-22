@@ -77,6 +77,7 @@ class AbyssalPersecutorCannotWinEffect extends ReplacementEffectImpl<AbyssalPers
 
     AbyssalPersecutorCannotWinEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "You can't win the game and your opponents can't lose the game";
     }
 
     AbyssalPersecutorCannotWinEffect ( final AbyssalPersecutorCannotWinEffect effect ) {
@@ -100,11 +101,6 @@ class AbyssalPersecutorCannotWinEffect extends ReplacementEffectImpl<AbyssalPers
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return true;
-    }
-
-    @Override
-    public String getText(Ability source) {
-        return "You can't win the game and your opponents can't lose the game";
     }
 
     @Override

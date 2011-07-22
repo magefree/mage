@@ -130,6 +130,7 @@ class SwordOfWarAndPeaceAbility extends TriggeredAbilityImpl<SwordOfWarAndPeaceA
 class SwordOfWarAndPeaceDamageEffect extends OneShotEffect<SwordOfWarAndPeaceDamageEffect> {
     SwordOfWarAndPeaceDamageEffect() {
         super(Outcome.Damage);
+        staticText = "Sword of War and Peace deals damage to that player equal to the number of cards in his or her hand";
     }
 
     SwordOfWarAndPeaceDamageEffect(final SwordOfWarAndPeaceDamageEffect effect) {
@@ -150,8 +151,4 @@ class SwordOfWarAndPeaceDamageEffect extends OneShotEffect<SwordOfWarAndPeaceDam
         return new SwordOfWarAndPeaceDamageEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Sword of War and Peace deals damage to that player equal to the number of cards in his or her hand";
-    }
 }

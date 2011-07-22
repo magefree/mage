@@ -91,6 +91,7 @@ class EyeOfUginCostReductionEffect extends CostModificationEffectImpl<EyeOfUginC
 
 	EyeOfUginCostReductionEffect ( ) {
 		super(Duration.WhileOnBattlefield, Outcome.Benefit);
+		staticText = effectText;
 	}
 
 	EyeOfUginCostReductionEffect(EyeOfUginCostReductionEffect effect) {
@@ -126,8 +127,4 @@ class EyeOfUginCostReductionEffect extends CostModificationEffectImpl<EyeOfUginC
 		return new EyeOfUginCostReductionEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return effectText;
-	}
 }

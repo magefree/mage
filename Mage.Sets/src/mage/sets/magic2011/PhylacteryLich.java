@@ -123,6 +123,7 @@ class PhylacteryLichEffect extends OneShotEffect<PhylacteryLichEffect> {
 
 	public PhylacteryLichEffect() {
 		super(Outcome.Neutral);
+		staticText = "put a phylactery counter on an artifact you control";
 	}
 
 	public PhylacteryLichEffect(final PhylacteryLichEffect effect) {
@@ -152,8 +153,4 @@ class PhylacteryLichEffect extends OneShotEffect<PhylacteryLichEffect> {
 		return new PhylacteryLichEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "put a phylactery counter on an artifact you control";
-	}
 }

@@ -78,6 +78,7 @@ class GoblinGuideEffect extends OneShotEffect<GoblinGuideEffect> {
 
 	public GoblinGuideEffect() {
 		super(Outcome.DrawCard);
+		staticText = "defending player reveals the top card of his or her library. If it's a land card, that player puts it into his or her hand";
 	}
 
 	public GoblinGuideEffect(final GoblinGuideEffect effect) {
@@ -108,8 +109,4 @@ class GoblinGuideEffect extends OneShotEffect<GoblinGuideEffect> {
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "defending player reveals the top card of his or her library. If it's a land card, that player puts it into his or her hand";
-	}
 }

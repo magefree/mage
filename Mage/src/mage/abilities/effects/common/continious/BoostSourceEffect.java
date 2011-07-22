@@ -55,6 +55,7 @@ public class BoostSourceEffect extends ContinuousEffectImpl<BoostSourceEffect> {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.power = power;
 		this.toughness = toughness;
+		setText();
     }
 
 	public BoostSourceEffect(final BoostSourceEffect effect) {
@@ -79,9 +80,8 @@ public class BoostSourceEffect extends ContinuousEffectImpl<BoostSourceEffect> {
 		return false;
 	}
 
-	@Override
-	public String getDynamicText(Ability source) {
-        StringBuilder sb = new StringBuilder();
+	private void setText() {
+		StringBuilder sb = new StringBuilder();
 		sb.append("{this} gets ");
         String p = power.toString();
         if(!p.startsWith("-"))
@@ -102,7 +102,7 @@ public class BoostSourceEffect extends ContinuousEffectImpl<BoostSourceEffect> {
             sb.append(" for each ");
         }
         sb.append(message);
-		return sb.toString();
+		staticText = sb.toString();
 	}
 
 }

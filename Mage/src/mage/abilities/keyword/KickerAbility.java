@@ -63,7 +63,7 @@ public class KickerAbility extends StaticAbility<KickerAbility> {
 	@Override
 	public boolean activate(Game game, boolean noMana) {
 		Player player = game.getPlayer(this.getControllerId());
-		String message = "Use kicker - " + getEffects().get(0).getText(this) + "?";
+		String message = "Use kicker - " + getEffects().get(0).getText(null) + "?";
 		Card card = game.getCard(sourceId);
 		// replace by card name or just plain "this"
 		message = message.replace("{this}", card == null ? "this" : card.getName());
@@ -101,7 +101,7 @@ public class KickerAbility extends StaticAbility<KickerAbility> {
 		}
 		if (costs.size() > 0)
 			sb.append(costs.getText());
-		sb.append(":").append(modes.getText(this));
+		sb.append(":").append(modes.getText());
 		if (replaces)
 			sb.append(" instead");
 		return sb.toString();

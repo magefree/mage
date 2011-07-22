@@ -92,6 +92,7 @@ class KhalniGemReturnToHandTargetEffect extends OneShotEffect<KhalniGemReturnToH
 
 	KhalniGemReturnToHandTargetEffect ( ) {
 		super(Outcome.ReturnToHand);
+		staticText = effectText;
 	}
 
 	KhalniGemReturnToHandTargetEffect ( KhalniGemReturnToHandTargetEffect effect ) {
@@ -114,8 +115,4 @@ class KhalniGemReturnToHandTargetEffect extends OneShotEffect<KhalniGemReturnToH
 		return new KhalniGemReturnToHandTargetEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return effectText;
-	}
 }

@@ -108,6 +108,7 @@ class ElspethKnightErrantEffect extends ContinuousEffectImpl<ElspethKnightErrant
 
 	public ElspethKnightErrantEffect() {
 		super(Duration.EndOfGame, Layer.RulesEffects, SubLayer.NA, Outcome.AddAbility);
+		staticText = "For the rest of the game artifacts, creature, enchantments and lands you control are indestructible";
 	}
 
 	public ElspethKnightErrantEffect(final ElspethKnightErrantEffect effect) {
@@ -125,11 +126,6 @@ class ElspethKnightErrantEffect extends ContinuousEffectImpl<ElspethKnightErrant
 	@Override
 	public ElspethKnightErrantEffect copy() {
 		return new ElspethKnightErrantEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "For the rest of the game artifacts, creature, enchantments and lands you control are indestructible";
 	}
 
 }

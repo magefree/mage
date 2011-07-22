@@ -60,6 +60,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl<BoostEnchantedEff
 		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
 		this.power = power;
 		this.toughness = toughness;
+		setText();
 	}
 
 	public BoostEnchantedEffect(final BoostEnchantedEffect effect) {
@@ -86,8 +87,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl<BoostEnchantedEff
 		return true;
 	}
 
-	@Override
-	public String getText(Ability source) {
+	private void setText() {
         StringBuilder sb = new StringBuilder();
 		sb.append("Enchanted creature gets ");
         String p = power.toString();
@@ -109,7 +109,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl<BoostEnchantedEff
             sb.append(" for each ");
         }
         sb.append(message);
-		return sb.toString();
+		staticText = sb.toString();
 	}
 
 }

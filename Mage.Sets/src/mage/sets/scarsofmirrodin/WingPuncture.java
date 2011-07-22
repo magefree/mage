@@ -78,7 +78,8 @@ class WingPunctureEffect extends OneShotEffect<WingPunctureEffect> {
 
     public WingPunctureEffect() {
         super(Outcome.Damage);
-    }
+        staticText = "Target creature you control deals damage equal to its power to target creature with flying.";
+     }
 
     public WingPunctureEffect(final WingPunctureEffect effect) {
         super(effect);
@@ -101,8 +102,4 @@ class WingPunctureEffect extends OneShotEffect<WingPunctureEffect> {
         return new WingPunctureEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Target creature you control deals damage equal to its power to target creature with flying.";
-    }
 }

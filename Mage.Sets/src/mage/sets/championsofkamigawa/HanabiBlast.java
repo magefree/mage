@@ -75,6 +75,7 @@ class HanabiBlastDiscardEffect extends OneShotEffect<HanabiBlastDiscardEffect> {
 
 	HanabiBlastDiscardEffect () {
 		super(Constants.Outcome.Discard);
+		staticText = effectText;
 	}
 
 	HanabiBlastDiscardEffect(HanabiBlastDiscardEffect effect) {
@@ -96,9 +97,5 @@ class HanabiBlastDiscardEffect extends OneShotEffect<HanabiBlastDiscardEffect> {
 		return new HanabiBlastDiscardEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return effectText;
-	}
 }
 

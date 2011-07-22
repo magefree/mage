@@ -13,6 +13,7 @@ public class CopyTokenEffect extends ContinuousEffectImpl<CopyTokenEffect> {
 	public CopyTokenEffect(Token token) {
 		super(Constants.Duration.WhileOnBattlefield, Constants.Layer.CopyEffects_1, Constants.SubLayer.NA, Constants.Outcome.BecomeCreature);
         this.token = token.copy();
+		staticText = "You may have {this} enter the battlefield as a copy of " + token.getDescription() + " on the battlefield";
 	}
 
 	public CopyTokenEffect(final CopyTokenEffect effect) {
@@ -52,11 +53,6 @@ public class CopyTokenEffect extends ContinuousEffectImpl<CopyTokenEffect> {
 	@Override
 	public CopyTokenEffect copy() {
 		return new CopyTokenEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "You may have {this} enter the battlefield as a copy of " + token.getDescription() + " on the battlefield";
 	}
 
 }

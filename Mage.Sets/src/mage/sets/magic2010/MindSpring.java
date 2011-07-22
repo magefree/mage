@@ -66,6 +66,7 @@ class MindSpringEffect extends OneShotEffect<MindSpringEffect> {
 
 	public MindSpringEffect() {
 		super(Outcome.DrawCard);
+		staticText = "Draw X cards";
 	}
 
 	public MindSpringEffect(final MindSpringEffect effect) {
@@ -88,8 +89,4 @@ class MindSpringEffect extends OneShotEffect<MindSpringEffect> {
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Draw X cards";
-	}
 }

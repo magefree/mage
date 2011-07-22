@@ -42,6 +42,7 @@ public class ExileSourceEffect extends OneShotEffect<ExileSourceEffect> {
 
 	public ExileSourceEffect() {
 		super(Outcome.Exile);
+		staticText = "Exile {this}";
 	}
 
 	public ExileSourceEffect(final ExileSourceEffect effect) {
@@ -60,11 +61,6 @@ public class ExileSourceEffect extends OneShotEffect<ExileSourceEffect> {
 			return permanent.moveToExile(null, "", source.getId(), game);
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Exile {this}";
 	}
 
 }

@@ -80,6 +80,7 @@ class AuriokReplicaEffect extends PreventionEffectImpl<AuriokReplicaEffect> {
 
 	public AuriokReplicaEffect() {
 		super(Duration.EndOfTurn);
+		staticText = "Prevent all damage a source of your choice would deal to you this turn";
 	}
 
 	public AuriokReplicaEffect(final AuriokReplicaEffect effect) {
@@ -128,11 +129,6 @@ class AuriokReplicaEffect extends PreventionEffectImpl<AuriokReplicaEffect> {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Prevent all damage a source of your choice would deal to you this turn";
 	}
 
 }

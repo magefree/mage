@@ -30,6 +30,7 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
@@ -65,7 +66,7 @@ public class PlayTargetWithoutPayingManaEffect extends OneShotEffect<PlayTargetW
 	}
 
 	@Override
-	public String getText(Ability source) {
-		return "you may put " + source.getTargets().get(0).getTargetName() + " from your hand onto the battlefield";
+	public String getText(Mode mode) {
+		return "you may put " + mode.getTargets().get(0).getTargetName() + " from your hand onto the battlefield";
 	}
 }

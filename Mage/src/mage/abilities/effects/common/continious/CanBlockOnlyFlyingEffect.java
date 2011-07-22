@@ -45,6 +45,7 @@ public class CanBlockOnlyFlyingEffect extends ReplacementEffectImpl<CanBlockOnly
 
     public CanBlockOnlyFlyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "{this} can block only creatures with flying";
     }
 
     public CanBlockOnlyFlyingEffect(final CanBlockOnlyFlyingEffect effect) {
@@ -77,8 +78,4 @@ public class CanBlockOnlyFlyingEffect extends ReplacementEffectImpl<CanBlockOnly
         return false;
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "{this} can block only creatures with flying";
-    }
 }

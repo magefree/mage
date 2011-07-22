@@ -72,6 +72,7 @@ public class MeltTerrain extends CardImpl<MeltTerrain> {
 class MeltTerrainEffect extends OneShotEffect<MeltTerrainEffect> {
     MeltTerrainEffect() {
         super(Constants.Outcome.Damage);
+        staticText = "Melt Terrain deals 2 damage to that land's controller";
     }
 
     MeltTerrainEffect(final MeltTerrainEffect effect) {
@@ -98,8 +99,4 @@ class MeltTerrainEffect extends OneShotEffect<MeltTerrainEffect> {
         return new MeltTerrainEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Melt Terrain deals 2 damage to that land's controller";
-    }
 }

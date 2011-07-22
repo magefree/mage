@@ -30,6 +30,7 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -63,7 +64,7 @@ public class ChooseNewTargetsTargetEffect extends OneShotEffect<ChooseNewTargets
 	}
 
 	@Override
-	public String getText(Ability source) {
-		return "You may choose new targets for target " + source.getTargets().get(0).getTargetName();
+	public String getText(Mode mode) {
+		return "You may choose new targets for target " + mode.getTargets().get(0).getTargetName();
 	}
 }

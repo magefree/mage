@@ -74,6 +74,7 @@ class TempestOfLightEffect extends OneShotEffect<TempestOfLightEffect> {
 
     public TempestOfLightEffect() {
         super(Constants.Outcome.DestroyPermanent);
+        staticText = "Destroy all enchantments";
     }
 
     public TempestOfLightEffect(final TempestOfLightEffect effect) {
@@ -93,8 +94,4 @@ class TempestOfLightEffect extends OneShotEffect<TempestOfLightEffect> {
         return new TempestOfLightEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Destroy all enchantments";
-    }
 }

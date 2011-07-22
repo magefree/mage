@@ -20,6 +20,7 @@ public class ReturnToHandSpellEffect extends OneShotEffect<ReturnToHandSpellEffe
 
         private ReturnToHandSpellEffect() {
             super(Constants.Outcome.Exile);
+            staticText = "Return {this} into its owner's hand";
         }
 
         public static ReturnToHandSpellEffect getInstance() {
@@ -30,11 +31,6 @@ public class ReturnToHandSpellEffect extends OneShotEffect<ReturnToHandSpellEffe
         public boolean apply(Game game, Ability source) {
             //this effect is applied when a spell resolves - see Spell.java
             return true;
-        }
-
-        @Override
-        public String getText(Ability source) {
-            return "Return {this} into its owner's hand";
         }
 
         @Override

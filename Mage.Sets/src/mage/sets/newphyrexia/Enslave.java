@@ -38,7 +38,6 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.ControlEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -82,6 +81,7 @@ public class Enslave extends CardImpl<Enslave> {
 class EnslaveEffect extends OneShotEffect<EnslaveEffect> {
     EnslaveEffect() {
         super(Constants.Outcome.Damage);
+        staticText = "enchanted creature deals 1 damage to its owner";
     }
 
     EnslaveEffect(final EnslaveEffect effect) {
@@ -110,8 +110,4 @@ class EnslaveEffect extends OneShotEffect<EnslaveEffect> {
         return new EnslaveEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "enchanted creature deals 1 damage to its owner";
-    }
 }

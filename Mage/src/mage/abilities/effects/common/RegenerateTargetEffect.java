@@ -31,6 +31,7 @@ package mage.abilities.effects.common;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -85,11 +86,11 @@ public class RegenerateTargetEffect  extends ReplacementEffectImpl<RegenerateTar
 	}
 
 	@Override
-	public String getText(Ability source) {
+	public String getText(Mode mode) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Regenerate target ");
-		if ( source != null ) {
-		  sb.append(source.getTargets().get(0).getTargetName());
+		if ( mode != null ) {
+		  sb.append(mode.getTargets().get(0).getTargetName());
 		}
 		return sb.toString();
 	}

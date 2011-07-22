@@ -53,6 +53,7 @@ public class BecomesCreatureSourceEOTEffect extends ContinuousEffectImpl<Becomes
 		super(Duration.EndOfTurn, Outcome.BecomeCreature);
 		this.token = token;
 		this.type = type;
+		setText();
 	}
 
 	public BecomesCreatureSourceEOTEffect(final BecomesCreatureSourceEOTEffect effect) {
@@ -115,12 +116,11 @@ public class BecomesCreatureSourceEOTEffect extends ContinuousEffectImpl<Becomes
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
+	private void setText() {
         if (type.length() > 0)
-		    return "Until end of turn {this} becomes a " + token.getDescription() + " that's still a " + this.type;
+		    staticText = "Until end of turn {this} becomes a " + token.getDescription() + " that's still a " + this.type;
         else
-            return "Until end of turn {this} becomes a " + token.getDescription();
+            staticText = "Until end of turn {this} becomes a " + token.getDescription();
 	}
 
 	@Override

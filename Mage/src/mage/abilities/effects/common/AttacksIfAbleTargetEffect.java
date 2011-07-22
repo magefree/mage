@@ -30,6 +30,7 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Duration;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.RequirementEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -73,11 +74,11 @@ public class AttacksIfAbleTargetEffect extends RequirementEffect<AttacksIfAbleTa
 	}
 
 	@Override
-	public String getText(Ability source) {
+	public String getText(Mode mode) {
 		if (this.duration == Duration.EndOfTurn)
-			return "Target " + source.getTargets().get(0).getTargetName() + " attacks this turn if able";
+			return "Target " + mode.getTargets().get(0).getTargetName() + " attacks this turn if able";
 		else
-			return "Target " + source.getTargets().get(0).getTargetName() + " attacks each turn if able";
+			return "Target " + mode.getTargets().get(0).getTargetName() + " attacks each turn if able";
 	}
 
 }

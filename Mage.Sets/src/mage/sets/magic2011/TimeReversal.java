@@ -67,6 +67,7 @@ class TimeReversalEffect extends OneShotEffect<TimeReversalEffect> {
 
 	public TimeReversalEffect() {
 		super(Outcome.Neutral);
+		staticText = "Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards";
 	}
 
 	public TimeReversalEffect(final TimeReversalEffect effect) {
@@ -95,8 +96,4 @@ class TimeReversalEffect extends OneShotEffect<TimeReversalEffect> {
 		return new TimeReversalEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards";
-	}
 }

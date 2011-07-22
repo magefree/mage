@@ -24,6 +24,7 @@ public class BoostOpponentsEffect extends ContinuousEffectImpl<BoostOpponentsEff
 		this.power = power;
 		this.toughness = toughness;
 		this.filter = filter;
+		setText();
 	}
 
 	public BoostOpponentsEffect(final BoostOpponentsEffect effect) {
@@ -65,12 +66,11 @@ public class BoostOpponentsEffect extends ContinuousEffectImpl<BoostOpponentsEff
 		return true;
 	}
 
-	@Override
-	public String getText(Ability source) {
+	private void setText() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(filter.getMessage());
 		sb.append(" your opponents control get ").append(String.format("%1$+d/%2$+d", power, toughness));
 		sb.append((duration== Constants.Duration.EndOfTurn?" until end of turn":""));
-		return sb.toString();
+		staticText = sb.toString();
 	}
 }

@@ -85,6 +85,7 @@ class PoisonControllerTargetCreatureEffect extends OneShotEffect<PoisonControlle
 	public PoisonControllerTargetCreatureEffect(int amount) {
 		super(Outcome.Damage);
 		this.amount = amount;
+		setText();
 	}
 
 	public PoisonControllerTargetCreatureEffect(final PoisonControllerTargetCreatureEffect effect) {
@@ -112,12 +113,11 @@ class PoisonControllerTargetCreatureEffect extends OneShotEffect<PoisonControlle
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
+	public void setText() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("That creature's controller gets ").append(Integer.toString(amount)).append(" poison counter");
 		sb.append((amount == 1?"":"s"));
-		return sb.toString();
+		staticText = sb.toString();
 	}
 
 }

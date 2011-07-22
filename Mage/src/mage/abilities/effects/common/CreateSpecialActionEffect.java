@@ -30,6 +30,7 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.Mode;
 import mage.abilities.SpecialAction;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
@@ -68,7 +69,7 @@ public class CreateSpecialActionEffect extends OneShotEffect<CreateSpecialAction
 	}
 
 	@Override
-	public String getText(Ability source) {
+	public String getText(Mode mode) {
 		return action.getRule();
 	}
 

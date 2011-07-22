@@ -86,6 +86,7 @@ class ApostlesBlessingEffect extends GainAbilityTargetEffect {
 	public ApostlesBlessingEffect(Duration duration) {
 		super(new ProtectionAbility(new FilterCard()), duration);
 		protectionFilter = (FilterCard)((ProtectionAbility)ability).getFilter();
+		staticText = "Target artifact or creature gains protection from artifacts or from the color of your choice until end of turn";
 	}
 
 	public ApostlesBlessingEffect(final ApostlesBlessingEffect effect) {
@@ -117,12 +118,6 @@ class ApostlesBlessingEffect extends GainAbilityTargetEffect {
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "target " + source.getTargets().get(0).getTargetName() + " gains protection from artifacts or from the color of your choice " + duration.toString();
-
 	}
 
 }

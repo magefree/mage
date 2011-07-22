@@ -14,6 +14,7 @@ public class AddCardTypeAttachedEffect extends ContinuousEffectImpl<AddCardTypeA
         super(duration, Constants.Layer.TypeChangingEffects_4, Constants.SubLayer.NA, Constants.Outcome.Benefit);
         this.addedCardType = addedCardType;
         this.attachmentType = attachmentType;
+		setText();
     }
 
     public AddCardTypeAttachedEffect(final AddCardTypeAttachedEffect effect) {
@@ -38,8 +39,7 @@ public class AddCardTypeAttachedEffect extends ContinuousEffectImpl<AddCardTypeA
         return new AddCardTypeAttachedEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
+    private void setText() {
         StringBuilder sb = new StringBuilder();
         if (attachmentType == Constants.AttachmentType.AURA)
             sb.append("Enchanted");
@@ -47,6 +47,6 @@ public class AddCardTypeAttachedEffect extends ContinuousEffectImpl<AddCardTypeA
             sb.append("Equipped");
 
         sb.append(" creature becomes ").append(addedCardType.toString()).append(" in addition to its other types"); //TODO add attacked card type detection
-        return sb.toString();
+        staticText = sb.toString();
     }
 }

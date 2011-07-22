@@ -72,6 +72,7 @@ class UnifiedWillEffect extends CounterTargetEffect {
 
 	public UnifiedWillEffect(final UnifiedWillEffect effect) {
 		super(effect);
+		staticText = "Counter target spell if you control more creatures than that spell's controller";
 	}
 
 	@Override
@@ -89,11 +90,6 @@ class UnifiedWillEffect extends CounterTargetEffect {
 	@Override
 	public UnifiedWillEffect copy() {
 		return new UnifiedWillEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Counter target spell if you control more creatures than that spell's controller";
 	}
 
 }

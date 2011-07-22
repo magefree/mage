@@ -71,6 +71,7 @@ class NornsAnnexReplacementEffect extends ReplacementEffectImpl<NornsAnnexReplac
 
     NornsAnnexReplacementEffect() {
         super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+		staticText = effectText;
     }
 
     NornsAnnexReplacementEffect(NornsAnnexReplacementEffect effect) {
@@ -115,10 +116,6 @@ class NornsAnnexReplacementEffect extends ReplacementEffectImpl<NornsAnnexReplac
         return new NornsAnnexReplacementEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return effectText;
-    }
 }
 
 

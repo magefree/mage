@@ -86,6 +86,7 @@ class MystifyingMazeEffect extends OneShotEffect<MystifyingMazeEffect> {
 
 	public MystifyingMazeEffect() {
 		super(Outcome.Detriment);
+		staticText = "Exile target attacking creature an opponent controls. At the beginning of the next end step, return it to the battlefield tapped under its owner's control";
 	}
 
 	public MystifyingMazeEffect(final MystifyingMazeEffect effect) {
@@ -111,11 +112,6 @@ class MystifyingMazeEffect extends OneShotEffect<MystifyingMazeEffect> {
 	@Override
 	public MystifyingMazeEffect copy() {
 		return new MystifyingMazeEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Exile target attacking creature an opponent controls. At the beginning of the next end step, return it to the battlefield tapped under its owner's control";
 	}
 }
 

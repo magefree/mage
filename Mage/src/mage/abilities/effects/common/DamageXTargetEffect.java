@@ -30,6 +30,7 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -71,8 +72,8 @@ public class DamageXTargetEffect extends OneShotEffect<DamageXTargetEffect> {
 	}
 
 	@Override
-	public String getText(Ability source) {
-		return "{source} deals X damage to target " + source.getTargets().get(0).getTargetName();
+	public String getText(Mode mode) {
+		return "{source} deals X damage to target " + mode.getTargets().get(0).getTargetName();
 	}
 
 }

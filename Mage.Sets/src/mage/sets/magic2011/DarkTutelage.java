@@ -72,6 +72,7 @@ class DarkTutelageEffect extends OneShotEffect<DarkTutelageEffect> {
 
 	public DarkTutelageEffect() {
 		super(Outcome.DrawCard);
+		staticText = "reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost";
 	}
 
 	public DarkTutelageEffect(final DarkTutelageEffect effect) {
@@ -96,11 +97,6 @@ class DarkTutelageEffect extends OneShotEffect<DarkTutelageEffect> {
 	@Override
 	public DarkTutelageEffect copy() {
 		return new DarkTutelageEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost";
 	}
 
 }

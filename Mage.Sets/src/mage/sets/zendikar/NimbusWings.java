@@ -81,6 +81,7 @@ class NimbusWingsEffect extends ContinuousEffectImpl<NimbusWingsEffect> {
 
     public NimbusWingsEffect() {
         super(Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+		staticText = "Enchanted creature gets +1/+2 and has flying";
     }
 
     public NimbusWingsEffect(final NimbusWingsEffect effect) {
@@ -127,8 +128,4 @@ class NimbusWingsEffect extends ContinuousEffectImpl<NimbusWingsEffect> {
         return new NimbusWingsEffect(this);
     }
 
-    @Override
-	public String getText(Ability source) {
-		return "Enchanted creature gets +1/+2 and has flying";
-	}
 }

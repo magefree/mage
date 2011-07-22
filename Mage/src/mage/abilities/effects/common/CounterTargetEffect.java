@@ -30,6 +30,7 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 
@@ -58,8 +59,8 @@ public class CounterTargetEffect extends OneShotEffect<CounterTargetEffect> {
 	}
 
 	@Override
-	public String getText(Ability source) {
-		return "Counter target " + source.getTargets().get(0).getTargetName();
+	public String getText(Mode mode) {
+		return "Counter target " + mode.getTargets().get(0).getTargetName();
 	}
 
 }

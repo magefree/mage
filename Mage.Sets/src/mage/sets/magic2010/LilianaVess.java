@@ -87,6 +87,7 @@ class LilianaVessEffect extends OneShotEffect<LilianaVessEffect> {
 
 	public LilianaVessEffect() {
 		super(Outcome.PutCreatureInPlay);
+		staticText = "Put all creature cards in all graveyards onto the battlefield under your control";
 	}
 
 	public LilianaVessEffect(final LilianaVessEffect effect) {
@@ -111,8 +112,4 @@ class LilianaVessEffect extends OneShotEffect<LilianaVessEffect> {
 		return new LilianaVessEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Put all creature cards in all graveyards onto the battlefield under your control";
-	}
 }

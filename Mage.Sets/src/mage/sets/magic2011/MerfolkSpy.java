@@ -77,6 +77,7 @@ class MerfolkSpyEffect extends OneShotEffect<MerfolkSpyEffect> {
 
 	public MerfolkSpyEffect() {
 		super(Outcome.Detriment);
+		staticText = "that player reveals a card at random from his or her hand";
 	}
 
 	public MerfolkSpyEffect(final MerfolkSpyEffect effect) {
@@ -100,8 +101,4 @@ class MerfolkSpyEffect extends OneShotEffect<MerfolkSpyEffect> {
 		return new MerfolkSpyEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "that player reveals a card at random from his or her hand";
-	}
 }

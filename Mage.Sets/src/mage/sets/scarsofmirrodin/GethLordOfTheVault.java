@@ -110,6 +110,7 @@ class GethLordOfTheVaultEffect extends OneShotEffect<GethLordOfTheVaultEffect> {
     
 	public GethLordOfTheVaultEffect() {
         super(Outcome.Benefit);
+        staticText = "Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped. Then that player puts the top X cards of his or her library into his or her graveyard";
     }
 
     public GethLordOfTheVaultEffect(final GethLordOfTheVaultEffect effect) {
@@ -154,10 +155,6 @@ class GethLordOfTheVaultEffect extends OneShotEffect<GethLordOfTheVaultEffect> {
         return new GethLordOfTheVaultEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped. Then that player puts the top X cards of his or her library into his or her graveyard";
-    }
 }
 
 class GethLordOfTheVaultEffectTarget extends TargetCard<GethLordOfTheVaultEffectTarget> {

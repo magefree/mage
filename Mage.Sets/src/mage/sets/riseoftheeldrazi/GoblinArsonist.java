@@ -74,6 +74,7 @@ class GoblinArsonistEffect extends OneShotEffect<GoblinArsonistEffect> {
 
     public GoblinArsonistEffect() {
         super(Outcome.Damage);
+        staticText = "have it deal 1 damage to target creature or player";
     }
 
     public GoblinArsonistEffect(final GoblinArsonistEffect effect) {
@@ -108,8 +109,4 @@ class GoblinArsonistEffect extends OneShotEffect<GoblinArsonistEffect> {
         return new GoblinArsonistEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "have it deal 1 damage to target creature or player";
-    }
 }

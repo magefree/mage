@@ -78,6 +78,7 @@ class ElixerOfImmortalityEffect extends OneShotEffect<ElixerOfImmortalityEffect>
 
 	public ElixerOfImmortalityEffect() {
 		super(Outcome.GainLife);
+		staticText = "Shuffle Elixir of Immortality and your graveyard into your library";
 	}
 
 	public ElixerOfImmortalityEffect(final ElixerOfImmortalityEffect effect) {
@@ -102,11 +103,6 @@ class ElixerOfImmortalityEffect extends OneShotEffect<ElixerOfImmortalityEffect>
 	@Override
 	public ElixerOfImmortalityEffect copy() {
 		return new ElixerOfImmortalityEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Shuffle Elixir of Immortality and your graveyard into your library";
 	}
 
 }

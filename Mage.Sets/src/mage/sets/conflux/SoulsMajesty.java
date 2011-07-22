@@ -67,6 +67,7 @@ public class SoulsMajesty extends CardImpl<SoulsMajesty> {
 
         public SoulsMajestyEffect() {
             super(Outcome.DrawCard);
+            staticText = "Draw cards equal to the power of target creature you control";
         }
 
         public SoulsMajestyEffect(final SoulsMajestyEffect effect) {
@@ -89,9 +90,5 @@ public class SoulsMajesty extends CardImpl<SoulsMajesty> {
             return new SoulsMajestyEffect(this);
         }
 
-        @Override
-        public String getText(Ability source) {
-            return "Draw cards equal to the power of target creature you control" + super.getText(source);
-        }
     }
 }

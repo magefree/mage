@@ -71,6 +71,7 @@ class TectonicRiftEffect extends RestrictionEffect<TectonicRiftEffect> {
 
     TectonicRiftEffect() {
         super(Duration.EndOfTurn);
+        staticText = "Creatures without flying can't block this turn";
     }
 
     TectonicRiftEffect(final TectonicRiftEffect effect) {
@@ -95,8 +96,4 @@ class TectonicRiftEffect extends RestrictionEffect<TectonicRiftEffect> {
         return false;
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Creatures without flying can't block this turn";
-    }
 }

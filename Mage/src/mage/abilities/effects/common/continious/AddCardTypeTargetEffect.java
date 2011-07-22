@@ -2,6 +2,7 @@ package mage.abilities.effects.common.continious;
 
 import mage.Constants;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -35,9 +36,9 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl<AddCardTypeTar
     }
 
     @Override
-    public String getText(Ability source) {
+    public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Target ").append(source.getTargets().get(0).getTargetName()).append(" becomes ").append(addedCardType.toString()).append(" in addition to its other types until end of turn");
+        sb.append("Target ").append(mode.getTargets().get(0).getTargetName()).append(" becomes ").append(addedCardType.toString()).append(" in addition to its other types until end of turn");
         return sb.toString();
     }
 }

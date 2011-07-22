@@ -68,6 +68,7 @@ class WarReportEffect extends OneShotEffect<WarReportEffect> {
 
     public WarReportEffect() {
         super(Outcome.GainLife);
+        staticText = "You gain life equal to the number of creatures on the battlefield plus the number of artifacts on the battlefield";
     }
 
     public WarReportEffect(final WarReportEffect effect) {
@@ -90,8 +91,4 @@ class WarReportEffect extends OneShotEffect<WarReportEffect> {
         return true;
     }
 
-    @Override
-    public String getDynamicText(Ability source) {
-        return "You gain life equal to the number of creatures on the battlefield plus the number of artifacts on the battlefield";
-    }
 }

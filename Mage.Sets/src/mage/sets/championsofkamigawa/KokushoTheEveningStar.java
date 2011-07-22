@@ -73,6 +73,7 @@ public class KokushoTheEveningStar extends CardImpl<KokushoTheEveningStar> {
 class KokushoTheEveningStarEffect extends OneShotEffect<KokushoTheEveningStarEffect> {
     public KokushoTheEveningStarEffect() {
         super(Constants.Outcome.Damage);
+        staticText = "each opponent loses 5 life. You gain life equal to the life lost this way";
     }
 
     public KokushoTheEveningStarEffect(final KokushoTheEveningStarEffect effect) {
@@ -95,8 +96,4 @@ class KokushoTheEveningStarEffect extends OneShotEffect<KokushoTheEveningStarEff
         return new KokushoTheEveningStarEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "each opponent loses 5 life. You gain life equal to the life lost this way";
-    }
 }

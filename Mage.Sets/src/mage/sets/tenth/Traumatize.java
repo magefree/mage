@@ -69,6 +69,7 @@ class TraumatizeEffect extends OneShotEffect<TraumatizeEffect> {
 
 	public TraumatizeEffect() {
 		super(Outcome.GainLife);
+		staticText = "Target player puts the top half of his or her library, rounded down, into his or her graveyard";
 	}
 
 	public TraumatizeEffect(final TraumatizeEffect effect) {
@@ -96,8 +97,4 @@ class TraumatizeEffect extends OneShotEffect<TraumatizeEffect> {
 		return new TraumatizeEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Target player puts the top half of his or her library, rounded down, into his or her graveyard";
-	}
 }

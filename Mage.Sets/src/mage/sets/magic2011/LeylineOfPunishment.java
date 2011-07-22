@@ -73,6 +73,7 @@ class LeylineOfPunishmentEffect1 extends ReplacementEffectImpl<LeylineOfPunishme
 
 	public LeylineOfPunishmentEffect1() {
 		super(Duration.WhileOnBattlefield, Outcome.Benefit);
+		staticText = "Players can't gain life";
 	}
 
 	public LeylineOfPunishmentEffect1(final LeylineOfPunishmentEffect1 effect) {
@@ -102,17 +103,13 @@ class LeylineOfPunishmentEffect1 extends ReplacementEffectImpl<LeylineOfPunishme
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Players can't gain life";
-	}
-
 }
 
 class LeylineOfPunishmentEffect2 extends ReplacementEffectImpl<LeylineOfPunishmentEffect2> {
 
 	public LeylineOfPunishmentEffect2() {
 		super(Duration.WhileOnBattlefield, Outcome.Benefit);
+		staticText = "Damage can't be prevented";
 	}
 
 	public LeylineOfPunishmentEffect2(final LeylineOfPunishmentEffect2 effect) {
@@ -140,11 +137,6 @@ class LeylineOfPunishmentEffect2 extends ReplacementEffectImpl<LeylineOfPunishme
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Damage can't be prevented";
 	}
 
 }

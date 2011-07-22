@@ -79,6 +79,7 @@ public class ClockworkCondor extends CardImpl<ClockworkCondor> {
 class ClockworkCondorEffect extends OneShotEffect<ClockworkCondorEffect> {
     ClockworkCondorEffect() {
         super(Constants.Outcome.UnboostCreature);
+        staticText = "remove a +1/+1 counter from {this} at end of combat";
     }
 
     ClockworkCondorEffect(final ClockworkCondorEffect effect) {
@@ -102,8 +103,4 @@ class ClockworkCondorEffect extends OneShotEffect<ClockworkCondorEffect> {
         return new ClockworkCondorEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "remove a +1/+1 counter from {this} at end of combat";
-    }
 }

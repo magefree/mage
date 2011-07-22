@@ -16,15 +16,20 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
 
     protected ContinuousEffect effect;
     protected Condition condition;
-    protected String text;
 
     public ConditionalContinousEffect(ContinuousEffect effect, Condition condition, String text) {
         super(effect.getDuration(), effect.getLayer(), effect.getSublayer(), effect.getOutcome());
         this.effect = effect;
         this.condition = condition;
-        this.text = text;
+        this.staticText = text;
     }
 
+	public ConditionalContinousEffect(final ConditionalContinousEffect effect) {
+		super(effect);
+		this.effect = effect.effect;
+		this.condition = effect.condition;
+	}
+	
     @Override
     public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
         if (condition.apply(game, source)) {
@@ -48,11 +53,7 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
 
     @Override
     public ConditionalContinousEffect copy() {
-        return new ConditionalContinousEffect(effect, condition, text);
+        return new ConditionalContinousEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return text;
-    }
 }

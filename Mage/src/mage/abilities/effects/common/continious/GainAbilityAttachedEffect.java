@@ -51,6 +51,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityA
 		super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
 		this.ability = ability;
         this.attachmentType = attachmentType;
+		setText();
 	}
 
 	public GainAbilityAttachedEffect(final GainAbilityAttachedEffect effect) {
@@ -75,14 +76,13 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityA
 		return true;
 	}
 
-	@Override
-	public String getText(Ability source) {
+	private void setText() {
         String prefix = "";
         if (attachmentType == AttachmentType.AURA)
             prefix = "Enchanted";
         else if (attachmentType == AttachmentType.EQUIPMENT)
             prefix = "Equipped";
-		return prefix + " creature gains " + ability.getRule();
+		staticText = prefix + " creature gains " + ability.getRule();
 	}
 
 }

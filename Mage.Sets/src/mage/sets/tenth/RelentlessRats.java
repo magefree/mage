@@ -81,6 +81,7 @@ public class RelentlessRats extends CardImpl<RelentlessRats> {
 
 		public RelentlessRatsEffect() {
 			super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+			staticText = "Relentless Rats gets +1/+1 for each other creature on the battlefield named Relentless Rats";
 		}
 
 		public RelentlessRatsEffect(final RelentlessRatsEffect effect) {
@@ -104,11 +105,6 @@ public class RelentlessRats extends CardImpl<RelentlessRats> {
 				}
 			}
 			return false;
-		}
-
-		@Override
-		public String getText(Ability source) {
-			return "Relentless Rats gets +1/+1 for each other creature on the battlefield named Relentless Rats";
 		}
 
 	}

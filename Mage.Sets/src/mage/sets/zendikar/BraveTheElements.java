@@ -84,6 +84,7 @@ class BraveTheElementsEffect extends GainAbilityControlledEffect {
 		filter2 = (FilterCard)((ProtectionAbility)ability).getFilter();
 		filter2.setUseColor(true);
 		filter2.setScopeColor(ComparisonScope.Any);
+		staticText = "Choose a color. White creatures you control gain protection from the chosen color until end of turn";
 	}
 
 	public BraveTheElementsEffect(final BraveTheElementsEffect effect) {
@@ -103,11 +104,6 @@ class BraveTheElementsEffect extends GainAbilityControlledEffect {
 		filter2.setMessage(choice.getChoice());
 		ability = new ProtectionAbility(new FilterCard(filter2));
 		return super.apply(game, source);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Choose a color. White creatures you control gain protection from the chosen color until end of turn";
 	}
 
 }

@@ -80,6 +80,7 @@ class GargoyleSentinelEffect extends ContinuousEffectImpl<GargoyleSentinelEffect
 
 	public GargoyleSentinelEffect() {
 		super(Duration.EndOfTurn, Outcome.AddAbility);
+		staticText = "Until end of turn, Gargoyle Sentinel loses defender and gains flying";
 	}
 
 	public GargoyleSentinelEffect(final GargoyleSentinelEffect effect) {
@@ -115,11 +116,6 @@ class GargoyleSentinelEffect extends ContinuousEffectImpl<GargoyleSentinelEffect
 	@Override
 	public boolean apply(Game game, Ability source) {
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Until end of turn, Gargoyle Sentinel loses defender and gains flying";
 	}
 
 	@Override

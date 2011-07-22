@@ -74,6 +74,7 @@ class FulgentDistractionEffect extends OneShotEffect<FulgentDistractionEffect> {
 
 	FulgentDistractionEffect ( ) {
 		super(Outcome.Tap);
+		staticText = text;
 	}
 
 	FulgentDistractionEffect ( FulgentDistractionEffect effect ) {
@@ -110,11 +111,5 @@ class FulgentDistractionEffect extends OneShotEffect<FulgentDistractionEffect> {
 	public FulgentDistractionEffect copy() {
 		return new FulgentDistractionEffect(this);
 	}
-
-	@Override
-	public String getText(Ability source) {
-		return text;
-	}
-
 
 }

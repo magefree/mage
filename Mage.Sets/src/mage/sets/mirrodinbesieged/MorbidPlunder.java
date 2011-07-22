@@ -74,6 +74,7 @@ class MorbidPlunderEffect extends OneShotEffect<MorbidPlunderEffect> {
 
     public MorbidPlunderEffect() {
         super(Outcome.ReturnToHand);
+        staticText = "Return up to two target creature cards from your graveyard to your hand";
     }
 
     public MorbidPlunderEffect(final MorbidPlunderEffect effect) {
@@ -100,10 +101,6 @@ class MorbidPlunderEffect extends OneShotEffect<MorbidPlunderEffect> {
         return result;
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Return up to two target creature cards from your graveyard to your hand";
-    }
 }
 
 class TargetCardInYourGraveyard extends TargetCard<TargetCardInYourGraveyard> {

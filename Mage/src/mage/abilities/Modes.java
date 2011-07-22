@@ -83,21 +83,23 @@ public class Modes extends HashMap<UUID, Mode> {
 		return true;
 	}
 	
-	public String getText(Ability source) {
+	public String getText() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Choose one - ");
+		if (this.size() > 1)
+			sb.append("Choose one - ");
 		for (Mode mode: this.values()) {
-			sb.append(mode.getEffects().getText(source)).append("; or ");
+			sb.append(mode.getEffects().getText(mode)).append("; or ");
 		}
 		sb.delete(sb.length() - 5, sb.length());
 		return sb.toString();
 	}
 
-	public String getText(Ability source, String sourceName) {
+	public String getText(String sourceName) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Choose one - ");
+		if (this.size() > 1)
+			sb.append("Choose one - ");
 		for (Mode mode: this.values()) {
-			sb.append(mode.getEffects().getText(source)).append("; or ");
+			sb.append(mode.getEffects().getText(mode)).append("; or ");
 		}
 		sb.delete(sb.length() - 5, sb.length());
 		String text = sb.toString();

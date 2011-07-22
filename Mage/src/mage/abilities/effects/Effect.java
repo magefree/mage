@@ -33,6 +33,7 @@ import java.util.UUID;
 import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.game.Game;
 import mage.target.targetpointer.TargetPointer;
 
@@ -43,7 +44,7 @@ import mage.target.targetpointer.TargetPointer;
 public interface Effect<T extends Effect<T>> extends Serializable {
 
 	public UUID getId();
-	public String getText(Ability source);
+	public String getText(Mode mode);
 	public boolean apply(Game game, Ability source);
 	public Outcome getOutcome();
 	public EffectType getEffectType();

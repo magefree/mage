@@ -79,6 +79,7 @@ class AkromasVengeanceEffect extends OneShotEffect<AkromasVengeanceEffect> {
 
     public AkromasVengeanceEffect() {
         super(Constants.Outcome.DestroyPermanent);
+        staticText = "Destroy all artifacts, creatures, and enchantments";
     }
 
     public AkromasVengeanceEffect(final AkromasVengeanceEffect effect) {
@@ -98,8 +99,4 @@ class AkromasVengeanceEffect extends OneShotEffect<AkromasVengeanceEffect> {
         return new AkromasVengeanceEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Destroy all artifacts, creatures, and enchantments";
-    }
 }

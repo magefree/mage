@@ -91,6 +91,7 @@ class GodtoucherEffect extends PreventionEffectImpl<GodtoucherEffect> {
 
     public GodtoucherEffect(Duration duration) {
         super(duration);
+		staticText = "Prevent all damage that would be dealt to target creature with power 5 or greater this turn";
     }
 
     public GodtoucherEffect(final PreventAllCombatDamageEffect effect) {
@@ -118,8 +119,4 @@ class GodtoucherEffect extends PreventionEffectImpl<GodtoucherEffect> {
         return false;
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Prevent all damage that would be dealt to target " + source.getTargets().get(0).getTargetName() + " " + duration.toString();
-    }
 }

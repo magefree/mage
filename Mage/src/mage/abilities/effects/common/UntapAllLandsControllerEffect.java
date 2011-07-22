@@ -45,6 +45,7 @@ public class UntapAllLandsControllerEffect extends OneShotEffect<UntapAllLandsCo
 
 	public UntapAllLandsControllerEffect() {
 		super(Outcome.Untap);
+		staticText = "Untap all lands you control";
 	}
 
 	public UntapAllLandsControllerEffect(final UntapAllLandsControllerEffect effect) {
@@ -68,8 +69,4 @@ public class UntapAllLandsControllerEffect extends OneShotEffect<UntapAllLandsCo
 		return new UntapAllLandsControllerEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Untap all lands you control";
-	}
 }

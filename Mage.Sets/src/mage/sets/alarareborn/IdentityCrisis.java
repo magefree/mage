@@ -70,6 +70,7 @@ public class IdentityCrisis extends CardImpl<IdentityCrisis> {
 class IdentityCrisisEffect extends OneShotEffect<IdentityCrisisEffect> {
     IdentityCrisisEffect() {
         super(Constants.Outcome.Exile);
+        staticText = "Exile all cards from target player's hand and graveyard";
     }
 
     IdentityCrisisEffect(final IdentityCrisisEffect effect) {
@@ -102,8 +103,4 @@ class IdentityCrisisEffect extends OneShotEffect<IdentityCrisisEffect> {
         return new IdentityCrisisEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Exile all cards from target player's hand and graveyard";
-    }
-}
+ }

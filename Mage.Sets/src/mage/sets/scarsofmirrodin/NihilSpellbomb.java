@@ -78,6 +78,7 @@ class NihilSpellbombEffect extends OneShotEffect<NihilSpellbombEffect> {
 
     public NihilSpellbombEffect() {
         super(Outcome.Exile);
+        staticText = "Exile all cards from target player's graveyard";
     }
 
     @Override
@@ -98,8 +99,4 @@ class NihilSpellbombEffect extends OneShotEffect<NihilSpellbombEffect> {
         return false;
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Exile all cards from target player's graveyard";
-    }
 }

@@ -75,6 +75,7 @@ class RiseFromTheGraveEffect extends ContinuousEffectImpl<RiseFromTheGraveEffect
 
 	public RiseFromTheGraveEffect() {
 		super(Duration.WhileOnBattlefield, Outcome.Neutral);
+		staticText = "That creature is a black Zombie in addition to its other colors and types";
 	}
 
 	public RiseFromTheGraveEffect(final RiseFromTheGraveEffect effect) {
@@ -117,8 +118,4 @@ class RiseFromTheGraveEffect extends ContinuousEffectImpl<RiseFromTheGraveEffect
 		return layer == Layer.ColorChangingEffects_5 || layer == layer.TypeChangingEffects_4;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "That creature is a black Zombie in addition to its other colors and types";
-	}
 }

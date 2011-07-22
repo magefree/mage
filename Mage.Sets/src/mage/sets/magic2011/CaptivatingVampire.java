@@ -96,6 +96,7 @@ class CaptivatingVampireEffect extends ContinuousEffectImpl<CaptivatingVampireEf
 
 	public CaptivatingVampireEffect() {
 		super(Duration.WhileOnBattlefield, Outcome.Detriment);
+		staticText = "Gain control of target creature. It becomes a Vampire in addition to its other types";
 	}
 
 	public CaptivatingVampireEffect(final CaptivatingVampireEffect effect) {
@@ -138,8 +139,4 @@ class CaptivatingVampireEffect extends ContinuousEffectImpl<CaptivatingVampireEf
 		return layer == Layer.ControlChangingEffects_2 || layer == layer.TypeChangingEffects_4;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Gain control of target creature. It becomes a Vampire in addition to its other types";
-	}
 }

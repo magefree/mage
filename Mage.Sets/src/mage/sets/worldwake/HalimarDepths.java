@@ -78,6 +78,7 @@ class HalimarDepthsEffect extends OneShotEffect<HalimarDepthsEffect> {
 
 	public HalimarDepthsEffect() {
 		super(Outcome.Benefit);
+		staticText = "look at the top three cards of your library, then put them back in any order";
 	}
 
 	public HalimarDepthsEffect(final HalimarDepthsEffect effect) {
@@ -114,11 +115,6 @@ class HalimarDepthsEffect extends OneShotEffect<HalimarDepthsEffect> {
 	@Override
 	public HalimarDepthsEffect copy() {
 		return new HalimarDepthsEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "look at the top three cards of your library, then put them back in any order";
 	}
 
 }

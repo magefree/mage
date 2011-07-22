@@ -70,6 +70,7 @@ class OverwhelmingStampedeEffect extends ContinuousEffectImpl<OverwhelmingStampe
 
 	public OverwhelmingStampedeEffect() {
 		super(Duration.EndOfTurn, Outcome.AddAbility);
+		staticText = "Until end of turn, creatures you control gain trample and get +X/+X, where X is the greatest power among creatures you control.";
 	}
 
 	public OverwhelmingStampedeEffect(final OverwhelmingStampedeEffect effect) {
@@ -116,8 +117,4 @@ class OverwhelmingStampedeEffect extends ContinuousEffectImpl<OverwhelmingStampe
 		return layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Until end of turn, creatures you control gain trample and get +X/+X, where X is the greatest power among creatures you control.";
-	}
 }

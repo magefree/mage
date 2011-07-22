@@ -67,6 +67,7 @@ public class PartTheVeil extends CardImpl<PartTheVeil> {
 class PartTheVeilEffect extends OneShotEffect<PartTheVeilEffect> {
     public PartTheVeilEffect() {
         super(Constants.Outcome.ReturnToHand);
+        staticText = "Return all creatures you control to their owner's hand.";
     }
 
     public PartTheVeilEffect(final PartTheVeilEffect effect) {
@@ -86,8 +87,4 @@ class PartTheVeilEffect extends OneShotEffect<PartTheVeilEffect> {
         return new PartTheVeilEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Return all creatures you control to their owner's hand.";
-    }
 }

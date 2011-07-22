@@ -32,6 +32,7 @@ import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -80,9 +81,9 @@ public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
     }
 
     @Override
-    public String getText(Ability source) {
+    public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Target ").append(source.getTargets().get(0).getTargetName()).append(" gets ");
+        sb.append("Target ").append(mode.getTargets().get(0).getTargetName()).append(" gets ");
         String p = power.toString();
         if(!p.startsWith("-"))
             sb.append("+");

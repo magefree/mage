@@ -75,6 +75,7 @@ class FireServantEffect extends ReplacementEffectImpl<FireServantEffect> {
 
 	public FireServantEffect() {
 		super(Duration.WhileOnBattlefield, Outcome.Damage);
+		staticText = "If a red instant or sorcery spell you control would deal damage, it deals double that damage instead";
 	}
 
 	public FireServantEffect(final FireServantEffect effect) {
@@ -111,8 +112,4 @@ class FireServantEffect extends ReplacementEffectImpl<FireServantEffect> {
 		return apply(game, source);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "If a red instant or sorcery spell you control would deal damage, it deals double that damage instead";
-	}
 }

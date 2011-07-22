@@ -80,6 +80,7 @@ class WeaknessEffect extends ContinuousEffectImpl<WeaknessEffect> {
 
     public WeaknessEffect() {
         super(Duration.WhileOnBattlefield, Outcome.UnboostCreature);
+    	staticText = "Enchanted creature gets -2/-1";
     }
 
     public WeaknessEffect(final WeaknessEffect effect) {
@@ -121,8 +122,4 @@ class WeaknessEffect extends ContinuousEffectImpl<WeaknessEffect> {
         return new WeaknessEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-    	return "Enchanted creature gets -2/-1";
-    }
 }

@@ -54,6 +54,7 @@ public class CantTargetControlledEffect extends ReplacementEffectImpl<CantTarget
 		super(duration, Outcome.Benefit);
 		this.filterTarget = filterTarget;
 		this.filterSource = filterSource;
+		setText();
 	}
 
 	public CantTargetControlledEffect(FilterPermanent filterTarget, Duration duration) {
@@ -102,8 +103,7 @@ public class CantTargetControlledEffect extends ReplacementEffectImpl<CantTarget
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
+	private void setText() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(filterTarget.getMessage()).append(" can't be the targets of ");
 		if (filterSource != null) {
@@ -113,7 +113,7 @@ public class CantTargetControlledEffect extends ReplacementEffectImpl<CantTarget
 			sb.append("spells");
 		}
 		sb.append(" ").append(duration.toString());
-		return sb.toString();
+		staticText = sb.toString();
 	}
 
 }

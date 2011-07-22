@@ -30,6 +30,7 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Duration;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -90,10 +91,10 @@ public class PreventDamageTargetEffect extends PreventionEffectImpl<PreventDamag
 	}
 
 	@Override
-	public String getText(Ability source) {
+	public String getText(Mode mode) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Prevent the next ").append(amount).append(" damage that would be dealt to target ");
-		sb.append(source.getTargets().get(0).getTargetName()).append(" ").append(duration.toString());
+		sb.append(mode.getTargets().get(0).getTargetName()).append(" ").append(duration.toString());
 		return sb.toString();
 	}
 

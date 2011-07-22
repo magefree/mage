@@ -48,6 +48,7 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect<SearchLibraryP
 
     public SearchLibraryPutOnLibraryEffect(TargetCardInLibrary target) {
 		super(target, Outcome.DrawCard);
+		setText();
     }
 
 	public SearchLibraryPutOnLibraryEffect(final SearchLibraryPutOnLibraryEffect effect) {
@@ -78,11 +79,10 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect<SearchLibraryP
         return true;
     }
 
-    @Override
-    public String getText(Ability source) {
+    private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append("Search your library for a ").append(target.getTargetName()).append(", then shuffle your library and put that card on top of it");
-		return sb.toString();
+		staticText = sb.toString();
     }
 
 }

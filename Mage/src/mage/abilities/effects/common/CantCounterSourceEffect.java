@@ -45,6 +45,7 @@ public class CantCounterSourceEffect extends ReplacementEffectImpl<CantCounterSo
 
 	public CantCounterSourceEffect() {
 		super(Duration.WhileOnStack, Outcome.Benefit);
+		staticText = "{this} can't be countered";
 	}
 	
 	public CantCounterSourceEffect(final CantCounterSourceEffect effect) {
@@ -74,11 +75,6 @@ public class CantCounterSourceEffect extends ReplacementEffectImpl<CantCounterSo
 				return true;
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "{this} can't be countered";
 	}
 
 }

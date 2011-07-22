@@ -69,6 +69,7 @@ public class AgentOfMasks extends CardImpl<AgentOfMasks> {
 class AgentOfMasksEffect extends OneShotEffect<AgentOfMasksEffect> {
     public AgentOfMasksEffect() {
         super(Constants.Outcome.Damage);
+        staticText = "each opponent loses 1 life. You gain life equal to the life lost this way";
     }
 
     public AgentOfMasksEffect(final AgentOfMasksEffect effect) {
@@ -91,8 +92,4 @@ class AgentOfMasksEffect extends OneShotEffect<AgentOfMasksEffect> {
         return new AgentOfMasksEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "each opponent loses 1 life. You gain life equal to the life lost this way";
-    }
 }

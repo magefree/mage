@@ -51,6 +51,7 @@ public class DrawCardControllerEffect extends OneShotEffect<DrawCardControllerEf
 	public DrawCardControllerEffect(DynamicValue amount) {
 		super(Outcome.DrawCard);
 		this.amount = amount.clone();
+		setText();
 	}
 
 	public DrawCardControllerEffect(final DrawCardControllerEffect effect) {
@@ -73,15 +74,14 @@ public class DrawCardControllerEffect extends OneShotEffect<DrawCardControllerEf
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
+	private void setText() {
 		StringBuilder sb = new StringBuilder();
         sb.append("draw ").append(amount).append(" card");
         if (amount instanceof StaticValue && amount.calculate(null, null) == 1) {
         } else {
             sb.append("s");
         }
-		return sb.toString();
+		staticText = sb.toString();
 	}
 
 

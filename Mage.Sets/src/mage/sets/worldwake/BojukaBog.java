@@ -74,6 +74,7 @@ class BojukaBogEffect extends OneShotEffect<BojukaBogEffect> {
 
     public BojukaBogEffect() {
         super(Outcome.Exile);
+        staticText = "exile all cards from target player's graveyard";
     }
 
     @Override
@@ -94,8 +95,4 @@ class BojukaBogEffect extends OneShotEffect<BojukaBogEffect> {
         return false;
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "exile all cards from target player's graveyard";
-    }
 }

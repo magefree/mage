@@ -52,6 +52,7 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect<
 	public ReturnSourceFromGraveyardToBattlefieldEffect(boolean tapped) {
 		super(Outcome.PutCreatureInPlay);
 		this.tapped = tapped;
+		setText();
 	}
 
 	public ReturnSourceFromGraveyardToBattlefieldEffect(final ReturnSourceFromGraveyardToBattlefieldEffect effect) {
@@ -82,12 +83,11 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect<
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
+	private void setText() {
 		if (tapped)
-			return "Return {this} from your graveyard to the battlefield tapped";
+			staticText = "Return {this} from your graveyard to the battlefield tapped";
 		else
-			return "Return {this} from your graveyard to the battlefield";
+			staticText = "Return {this} from your graveyard to the battlefield";
 	}
 
 }

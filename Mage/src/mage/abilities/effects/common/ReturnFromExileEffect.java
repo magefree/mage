@@ -56,6 +56,7 @@ public class ReturnFromExileEffect extends OneShotEffect<ReturnFromExileEffect> 
 		this.exileId = exileId;
 		this.zone = zone;
 		this.tapped = tapped;
+		setText();
 	}
 
 	public ReturnFromExileEffect(final ReturnFromExileEffect effect) {
@@ -84,8 +85,7 @@ public class ReturnFromExileEffect extends OneShotEffect<ReturnFromExileEffect> 
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
+	private void setText() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("return the exiled cards ");
 		switch(zone) {
@@ -101,7 +101,7 @@ public class ReturnFromExileEffect extends OneShotEffect<ReturnFromExileEffect> 
 				sb.append("to their owner's graveyard");
 				break;
 		}
-		return sb.toString();
+		staticText = sb.toString();
 	}
 
 }

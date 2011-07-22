@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import mage.Constants;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.game.Game;
@@ -11,6 +10,7 @@ public class BasicManaEffect extends ManaEffect<BasicManaEffect> {
     public BasicManaEffect(Mana mana) {
 		super();
 		this.mana = mana;
+		staticText = "Add " + mana.toString() + " to your mana pool";
 	}
 
     public BasicManaEffect(final BasicManaEffect effect) {
@@ -27,12 +27,6 @@ public class BasicManaEffect extends ManaEffect<BasicManaEffect> {
 	public boolean apply(Game game, Ability source) {
 		game.getPlayer(source.getControllerId()).getManaPool().changeMana(mana);
 		return true;
-	}
-
-
-	@Override
-	public String getText(Ability source) {
-		return "Add " + mana.toString() + " to your mana pool";
 	}
 
 	public Mana getMana() {

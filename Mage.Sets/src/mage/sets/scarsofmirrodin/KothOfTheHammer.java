@@ -98,6 +98,7 @@ class KothOfTheHammerFirstEffect extends ContinuousEffectImpl<KothOfTheHammerFir
 
     public KothOfTheHammerFirstEffect() {
         super(Duration.EndOfTurn, Constants.Outcome.BecomeCreature);
+        staticText = "It becomes a 4/4 red Elemental creature until end of turn. It's still a land";
     }
 
     public KothOfTheHammerFirstEffect(final KothOfTheHammerFirstEffect effect) {
@@ -146,15 +147,12 @@ class KothOfTheHammerFirstEffect extends ContinuousEffectImpl<KothOfTheHammerFir
 		return layer == Constants.Layer.PTChangingEffects_7 || layer == Constants.Layer.ColorChangingEffects_5 || layer == layer.TypeChangingEffects_4;
 	}
 
-    @Override
-    public String getText(Ability source) {
-        return "It becomes a 4/4 red Elemental creature until end of turn. It's still a land";
-    }
 }
 
 class KothOfTheHammerThirdEffect extends ContinuousEffectImpl<KothOfTheHammerThirdEffect> {
     public KothOfTheHammerThirdEffect() {
         super(Duration.EndOfGame, Constants.Outcome.AddAbility);
+        staticText = "You get an emblem with \"Mountains you control have '{T}: This land deals 1 damage to target creature or player.'\"";
     }
 
     public KothOfTheHammerThirdEffect(final KothOfTheHammerThirdEffect effect) {
@@ -192,8 +190,4 @@ class KothOfTheHammerThirdEffect extends ContinuousEffectImpl<KothOfTheHammerThi
 		return layer == Constants.Layer.AbilityAddingRemovingEffects_6;
 	}
 
-    @Override
-    public String getText(Ability source) {
-        return "You get an emblem with \"Mountains you control have '{T}: This land deals 1 damage to target creature or player.'\"";
-    }
 }

@@ -30,16 +30,12 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LoseLifePlayersEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -54,7 +50,7 @@ public class CausticHound extends CardImpl<CausticHound> {
 		this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-		this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new CausticHoundEffect()));
+		this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new LoseLifePlayersEffect(4)));
     }
 
     public CausticHound (final CausticHound card) {
@@ -67,33 +63,3 @@ public class CausticHound extends CardImpl<CausticHound> {
     }
 }
 
-class CausticHoundEffect extends OneShotEffect<CausticHoundEffect> {
-	CausticHoundEffect() {
-		super(Constants.Outcome.Damage);
-	}
-
-	CausticHoundEffect(final CausticHoundEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (UUID playerId : game.getPlayerList()) {
-			Player p = game.getPlayer(playerId);
-			if (p != null) {
-				p.loseLife(4, game);
-			}
-		}
-		return true;
-	}
-
-	@Override
-	public CausticHoundEffect copy() {
-		return new CausticHoundEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "each player loses 4 life";
-	}
-}

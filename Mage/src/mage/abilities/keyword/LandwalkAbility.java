@@ -64,6 +64,7 @@ class LandwalkEffect extends RestrictionEffect<LandwalkEffect> {
 	public LandwalkEffect(FilterLandPermanent filter) {
 		super(Duration.WhileOnBattlefield);
 		this.filter = filter;
+		staticText = filter.getMessage() + "walk";
 	}
 
 	public LandwalkEffect(final LandwalkEffect effect) {
@@ -87,11 +88,6 @@ class LandwalkEffect extends RestrictionEffect<LandwalkEffect> {
 	@Override
 	public LandwalkEffect copy() {
 		return new LandwalkEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return filter.getMessage() + "walk";
 	}
 
 }

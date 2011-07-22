@@ -54,6 +54,7 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 		this.filter = filter;
 		this.count = count;
 		this.preText = preText;
+		setText();
 	}
 
 	public SacrificeEffect ( SacrificeEffect effect ) {
@@ -95,12 +96,11 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 		return new SacrificeEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
+	private void setText() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(preText)
 		  .append(" sacrifices ")
 		  .append(filter.getMessage());
-		return sb.toString();
+		staticText = sb.toString();
 	}
 }

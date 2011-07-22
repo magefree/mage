@@ -84,6 +84,7 @@ class FiligreeAngelEffect extends OneShotEffect<FiligreeAngelEffect> {
 
     public FiligreeAngelEffect() {
         super(Constants.Outcome.GainLife);
+        staticText = "you gain 3 life for each artifact you control";
     }
 
     public FiligreeAngelEffect(final FiligreeAngelEffect effect) {
@@ -105,8 +106,4 @@ class FiligreeAngelEffect extends OneShotEffect<FiligreeAngelEffect> {
         return new FiligreeAngelEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "you gain 3 life for each artifact you control";
-    }
 }

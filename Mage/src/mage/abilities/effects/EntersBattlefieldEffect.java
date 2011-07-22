@@ -30,6 +30,7 @@ package mage.abilities.effects;
 
 import mage.Constants.Duration;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -93,9 +94,9 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlef
 	}
 
 	@Override
-	public String getText(Ability source) {
+	public String getText(Mode mode) {
 		if (text.length() == 0)
-			return "When {this} enters the battlefield, " + baseEffects.getText(source);
+			return "When {this} enters the battlefield, " + baseEffects.getText(mode);
 		else
 			return "When {this} enters the battlefield, " + text;
 	}

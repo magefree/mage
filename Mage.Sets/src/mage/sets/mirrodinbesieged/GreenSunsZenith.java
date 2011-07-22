@@ -72,6 +72,7 @@ public class GreenSunsZenith extends CardImpl<GreenSunsZenith> {
 class GreenSunsZenithSearchEffect extends OneShotEffect<GreenSunsZenithSearchEffect> {
 	GreenSunsZenithSearchEffect() {
 		super(Constants.Outcome.PutCreatureInPlay);
+		staticText = "Search your library for a green creature card with converted mana cost X or less, put it onto the battlefield, then shuffle your library";
 	}
 
 	GreenSunsZenithSearchEffect(final GreenSunsZenithSearchEffect effect) {
@@ -107,8 +108,4 @@ class GreenSunsZenithSearchEffect extends OneShotEffect<GreenSunsZenithSearchEff
 		return new GreenSunsZenithSearchEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Search your library for a green creature card with converted mana cost X or less, put it onto the battlefield, then shuffle your library";
-	}
 }

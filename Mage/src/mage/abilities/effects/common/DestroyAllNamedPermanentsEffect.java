@@ -30,6 +30,7 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -68,8 +69,8 @@ public class DestroyAllNamedPermanentsEffect extends OneShotEffect<DestroyAllNam
 	}
 
 	@Override
-	public String getText(Ability source) {
-		return "Destroy target " + source.getTargets().get(0).getTargetName() + " and all other permanents with the same name as that permanent";
+	public String getText(Mode mode) {
+		return "Destroy target " + mode.getTargets().get(0).getTargetName() + " and all other permanents with the same name as that permanent";
 	}
 
 }

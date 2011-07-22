@@ -57,6 +57,7 @@ public class BoostSourceWhileControlsEffect extends WhileConditionContiniousEffe
 		this.power = power;
 		this.toughness = toughness;
         this.filterDescription = filter.getName();
+		staticText = "{this} gets " + String.format("%1$+d/%2$+d", power, toughness) + " as long as you control a " + filterDescription;
 	}
 
 	public BoostSourceWhileControlsEffect(final BoostSourceWhileControlsEffect effect) {
@@ -82,8 +83,4 @@ public class BoostSourceWhileControlsEffect extends WhileConditionContiniousEffe
 		return true;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "{this} gets " + String.format("%1$+d/%2$+d", power, toughness) + " as long as you control a " + filterDescription;
-	}
 }

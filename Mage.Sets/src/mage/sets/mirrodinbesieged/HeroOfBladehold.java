@@ -75,6 +75,7 @@ public class HeroOfBladehold extends CardImpl<HeroOfBladehold> {
 class HeroOfBladeholdEffect extends OneShotEffect<HeroOfBladeholdEffect> {
     HeroOfBladeholdEffect() {
         super(Outcome.PutCreatureInPlay);
+        staticText = "put two 1/1 white Soldier creature tokens onto the battlefield tapped and attacking";
     }
 
     HeroOfBladeholdEffect(final HeroOfBladeholdEffect effect) {
@@ -101,8 +102,4 @@ class HeroOfBladeholdEffect extends OneShotEffect<HeroOfBladeholdEffect> {
         return new HeroOfBladeholdEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "put two 1/1 white Soldier creature tokens onto the battlefield tapped and attacking";
-    }
 }

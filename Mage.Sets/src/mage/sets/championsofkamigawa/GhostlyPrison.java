@@ -72,6 +72,7 @@ class GhostlyPrisonReplacementEffect extends ReplacementEffectImpl<GhostlyPrison
 
 	GhostlyPrisonReplacementEffect ( ) {
 		super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Neutral);
+		staticText = effectText;
 	}
 
 	GhostlyPrisonReplacementEffect ( GhostlyPrisonReplacementEffect effect ) {
@@ -117,9 +118,5 @@ class GhostlyPrisonReplacementEffect extends ReplacementEffectImpl<GhostlyPrison
 		return new GhostlyPrisonReplacementEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return effectText;
-	}
 }
 

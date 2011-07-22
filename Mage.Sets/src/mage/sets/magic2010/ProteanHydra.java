@@ -84,6 +84,7 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 
 		public ProteanHydraEffect1() {
 			super(Outcome.BoostCreature);
+			staticText = "Protean Hydra enters the battlefield with X +1/+1 counters on it";
 		}
 
 		public ProteanHydraEffect1(final ProteanHydraEffect1 effect) {
@@ -105,11 +106,6 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 			return new ProteanHydraEffect1(this);
 		}
 
-		@Override
-		public String getText(Ability source) {
-			return "Protean Hydra enters the battlefield with X +1/+1 counters on it";
-		}
-
 	}
 
 	class ProteanHydraEffect2 extends PreventionEffectImpl<ProteanHydraEffect2> {
@@ -120,6 +116,7 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 
 		public ProteanHydraEffect2(final ProteanHydraEffect2 effect) {
 			super(effect);
+			staticText = "If damage would be dealt to Protean Hydra, prevent that damage and remove that many +1/+1 counters from it";
 		}
 
 		@Override
@@ -157,11 +154,6 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 				}
 			}
 			return false;
-		}
-
-		@Override
-		public String getText(Ability source) {
-			return "If damage would be dealt to Protean Hydra, prevent that damage and remove that many +1/+1 counters from it";
 		}
 
 	}

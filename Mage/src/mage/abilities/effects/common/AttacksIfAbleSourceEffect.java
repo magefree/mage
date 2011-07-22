@@ -42,6 +42,10 @@ public class AttacksIfAbleSourceEffect extends RequirementEffect<AttacksIfAbleSo
 
 	public AttacksIfAbleSourceEffect(Duration duration) {
 		super(duration);
+		if (this.duration == Duration.EndOfTurn)
+			staticText = "{this} attacks this turn if able";
+		else
+			staticText = "{this} attacks each turn if able";
 	}
 
 	public AttacksIfAbleSourceEffect(final AttacksIfAbleSourceEffect effect) {
@@ -69,14 +73,6 @@ public class AttacksIfAbleSourceEffect extends RequirementEffect<AttacksIfAbleSo
 	@Override
 	public boolean mustBlock(Game game) {
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		if (this.duration == Duration.EndOfTurn)
-			return "{this} attacks this turn if able";
-		else
-			return "{this} attacks each turn if able";
 	}
 
 }

@@ -97,6 +97,7 @@ class DesolationAngelDummyEffect extends OneShotEffect<DesolationAngelDummyEffec
 class DesolationAngelEntersBattlefieldEffect extends OneShotEffect<DesolationAngelEntersBattlefieldEffect> {
     DesolationAngelEntersBattlefieldEffect() {
         super(Constants.Outcome.DestroyPermanent);
+        staticText = "destroy all lands you control. If it was kicked, destroy all lands instead";
     }
 
     DesolationAngelEntersBattlefieldEffect(final DesolationAngelEntersBattlefieldEffect effect) {
@@ -128,8 +129,4 @@ class DesolationAngelEntersBattlefieldEffect extends OneShotEffect<DesolationAng
         return new DesolationAngelEntersBattlefieldEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "destroy all lands you control. If it was kicked, destroy all lands instead";
-    }
 }

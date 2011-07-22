@@ -46,6 +46,7 @@ public class DestroyAllEffect extends OneShotEffect {
 	public DestroyAllEffect(FilterPermanent filter) {
 		super(Outcome.DestroyPermanent);
 		this.filter = filter;
+		staticText = "Destroy all " + filter.getMessage();
 	}
 
 	public DestroyAllEffect(final DestroyAllEffect effect) {
@@ -64,11 +65,6 @@ public class DestroyAllEffect extends OneShotEffect {
 			permanent.destroy(source.getId(), game, false);
 		}
 		return true;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Destroy all " + filter.getMessage();
 	}
 
 }

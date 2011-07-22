@@ -49,6 +49,7 @@ public class DestroySourceEffect extends OneShotEffect<DestroySourceEffect> {
 	public DestroySourceEffect(boolean noRegen) {
 		super(Outcome.DestroyPermanent);
 		this.noRegen = noRegen;
+		staticText = "Destroy {this}";
 	}
 
 	public DestroySourceEffect(final DestroySourceEffect effect) {
@@ -69,11 +70,6 @@ public class DestroySourceEffect extends OneShotEffect<DestroySourceEffect> {
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Destroy {this}";
 	}
 
 }

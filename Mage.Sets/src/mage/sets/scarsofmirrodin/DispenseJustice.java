@@ -83,6 +83,7 @@ class DispenseJusticeEffect extends OneShotEffect<DispenseJusticeEffect> {
 
 	DispenseJusticeEffect ( ) {
 		super(Outcome.Sacrifice);
+		staticText = effectText;
 	}
 
 	DispenseJusticeEffect ( DispenseJusticeEffect effect ) {
@@ -104,8 +105,4 @@ class DispenseJusticeEffect extends OneShotEffect<DispenseJusticeEffect> {
 		return new DispenseJusticeEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return effectText;
-	}
 }

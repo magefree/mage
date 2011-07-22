@@ -74,6 +74,7 @@ public class ClockworkBeetle extends CardImpl<ClockworkBeetle> {
 class ClockworkBeetleEffect extends OneShotEffect<ClockworkBeetleEffect> {
     ClockworkBeetleEffect() {
         super(Constants.Outcome.UnboostCreature);
+        staticText = "remove a +1/+1 counter from {this} at end of combat";
     }
 
     ClockworkBeetleEffect(final ClockworkBeetleEffect effect) {
@@ -97,9 +98,5 @@ class ClockworkBeetleEffect extends OneShotEffect<ClockworkBeetleEffect> {
         return new ClockworkBeetleEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "remove a +1/+1 counter from {this} at end of combat";
-    }
 }
 

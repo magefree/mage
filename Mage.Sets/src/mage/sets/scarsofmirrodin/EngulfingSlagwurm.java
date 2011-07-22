@@ -75,6 +75,7 @@ public class EngulfingSlagwurm extends CardImpl<EngulfingSlagwurm> {
 class EngulfingSlagwurmEffect extends OneShotEffect<EngulfingSlagwurmEffect> {
     EngulfingSlagwurmEffect() {
         super(Constants.Outcome.GainLife);
+        staticText = "You gain life equal to that creature's toughness";
     }
 
     EngulfingSlagwurmEffect(final EngulfingSlagwurmEffect effect) {
@@ -96,8 +97,4 @@ class EngulfingSlagwurmEffect extends OneShotEffect<EngulfingSlagwurmEffect> {
         return new EngulfingSlagwurmEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "You gain life equal to that creature's toughness";
-    }
 }

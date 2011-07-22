@@ -2,6 +2,7 @@ package mage.abilities.effects.common;
 
 import mage.Constants;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
@@ -28,7 +29,7 @@ public class DoIfCostPaid extends OneShotEffect<DoIfCostPaid> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
 		if (player != null) {
-			if (player.chooseUse(executingEffect.getOutcome(), "Pay " + cost.getText() + " and " + executingEffect.getText(source), game)) {
+			if (player.chooseUse(executingEffect.getOutcome(), "Pay " + cost.getText() + " and " + executingEffect.getText(source.getModes().getMode()), game)) {
 				cost.clearPaid();
 				if (cost.pay(game, source.getId(), source.getControllerId(), false)) {
                     return executingEffect.apply(game, source);
@@ -40,8 +41,8 @@ public class DoIfCostPaid extends OneShotEffect<DoIfCostPaid> {
     }
 
     @Override
-    public String getText(Ability source) {
-        return "you may pay " + cost.getText() + ". If you do, " + executingEffect.getText(source);
+    public String getText(Mode mode) {
+        return "you may pay " + cost.getText() + ". If you do, " + executingEffect.getText(mode);
     }
 
     @Override

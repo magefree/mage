@@ -45,6 +45,7 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
 	public AddCountersSourceEffect(Counter counter) {
 		super(Outcome.Benefit);
 		this.counter = counter.copy();
+		setText();
 	}
 
 	public AddCountersSourceEffect(final AddCountersSourceEffect effect) {
@@ -64,14 +65,13 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
 		return true;
 	}
 
-	@Override
-	public String getText(Ability source) {
+    private void setText() {
 		if (counter.getCount() > 1) {
 			StringBuilder sb = new StringBuilder();
 			sb.append("put ").append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters on {this}");
-			return sb.toString();
+			staticText = sb.toString();
 		} else
-			return "put a " + counter.getName() + " counter on {this}";
+			staticText = "put a " + counter.getName() + " counter on {this}";
 	}
 
 	@Override

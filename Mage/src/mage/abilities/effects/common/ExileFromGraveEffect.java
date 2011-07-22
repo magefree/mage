@@ -35,6 +35,7 @@ import mage.cards.Card;
 import mage.game.Game;
 
 import java.util.UUID;
+import mage.abilities.Mode;
 
 
 /**
@@ -76,8 +77,8 @@ public class ExileFromGraveEffect extends OneShotEffect<ExileFromGraveEffect>{
     }
 
     @Override
-    public String getText(Ability source) {
-        return "Exile target " + source.getTargets().get(0).getTargetName() + " from your graveyard";
+    public String getText(Mode mode) {
+        return "Exile target " + mode.getTargets().get(0).getTargetName() + " from your graveyard";
     }
 
 }

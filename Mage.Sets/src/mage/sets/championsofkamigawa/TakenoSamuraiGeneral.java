@@ -83,6 +83,7 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl<TakenoSamuraiGener
 
 	public TakenoSamuraiGeneralEffect() {
 		super(Constants.Duration.WhileOnBattlefield, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
+		staticText = "Each other Samurai creature you control gets +1/+1 for each point of bushido it has";
 	}
 
 	public TakenoSamuraiGeneralEffect(final TakenoSamuraiGeneralEffect effect) {
@@ -127,8 +128,4 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl<TakenoSamuraiGener
 		return true;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Each other Samurai creature you control gets +1/+1 for each point of bushido it has";
-	}
 }

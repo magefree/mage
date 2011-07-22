@@ -81,6 +81,7 @@ public class ElspethTirel extends CardImpl<ElspethTirel> {
 class ElspethTirelFirstEffect extends OneShotEffect<ElspethTirelFirstEffect> {
     public ElspethTirelFirstEffect() {
         super(Constants.Outcome.GainLife);
+        staticText = "You gain 1 life for each creature you control";
     }
 
     public ElspethTirelFirstEffect(final ElspethTirelFirstEffect effect) {
@@ -102,15 +103,12 @@ class ElspethTirelFirstEffect extends OneShotEffect<ElspethTirelFirstEffect> {
         return new ElspethTirelFirstEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "You gain 1 life for each creature you control";
-    }
 }
 
 class ElspethTirelThirdEffect extends OneShotEffect<ElspethTirelThirdEffect> {
     public ElspethTirelThirdEffect() {
         super(Constants.Outcome.DestroyPermanent);
+        staticText = "Destroy all other permanents except for lands and tokens";
     }
 
     public ElspethTirelThirdEffect(final ElspethTirelThirdEffect effect) {
@@ -131,8 +129,4 @@ class ElspethTirelThirdEffect extends OneShotEffect<ElspethTirelThirdEffect> {
         return new ElspethTirelThirdEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Destroy all other permanents except for lands and tokens";
-    }
 }

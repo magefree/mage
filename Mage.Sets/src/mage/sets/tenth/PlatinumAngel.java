@@ -74,6 +74,7 @@ public class PlatinumAngel extends CardImpl<PlatinumAngel> {
 
 		public PlatinumAngelEffect() {
 			super(Duration.WhileOnBattlefield, Outcome.Benefit);
+			staticText = "You can't lose the game and your opponents can't win the game";
 		}
 
 		public PlatinumAngelEffect(final PlatinumAngelEffect effect) {
@@ -102,11 +103,6 @@ public class PlatinumAngel extends CardImpl<PlatinumAngel> {
 				return true;
 			}
 			return false;
-		}
-
-		@Override
-		public String getText(Ability source) {
-			return "You can't lose the game and your opponents can't win the game";
 		}
 
 	}

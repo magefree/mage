@@ -80,6 +80,7 @@ class PacifismEffect extends RestrictionEffect<PacifismEffect> {
 
 	public PacifismEffect() {
 		super(Duration.WhileOnBattlefield);
+		staticText = "Enchanted creature can't attack or block";
 	}
 
 	public PacifismEffect(final PacifismEffect effect) {
@@ -107,11 +108,6 @@ class PacifismEffect extends RestrictionEffect<PacifismEffect> {
 	@Override
 	public PacifismEffect copy() {
 		return new PacifismEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Enchanted creature can't attack or block";
 	}
 
 }

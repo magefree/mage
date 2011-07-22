@@ -49,6 +49,7 @@ public class CantTargetControllerEffect extends ReplacementEffectImpl<CantTarget
 	public CantTargetControllerEffect(FilterStackObject filterSource, Duration duration) {
 		super(duration, Outcome.Benefit);
 		this.filterSource = filterSource;
+		setText();
 	}
 
 	public CantTargetControllerEffect(final CantTargetControllerEffect effect) {
@@ -82,13 +83,12 @@ public class CantTargetControllerEffect extends ReplacementEffectImpl<CantTarget
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
+	private void setText() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("You can't be the targets of ");
 		sb.append(filterSource.getMessage());
 		sb.append(" ").append(duration.toString());
-		return sb.toString();
+		staticText = sb.toString();
 	}
 
 }

@@ -107,6 +107,7 @@ class GrandArchitectEffect extends ContinuousEffectImpl<GrandArchitectEffect> {
 
 	public GrandArchitectEffect() {
 		super(Duration.EndOfTurn, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Detriment);
+		staticText = "Target artifact creature becomes blue until end of turn";
 	}
 
 	public GrandArchitectEffect(final GrandArchitectEffect effect) {
@@ -132,10 +133,6 @@ class GrandArchitectEffect extends ContinuousEffectImpl<GrandArchitectEffect> {
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Target artifact creature becomes blue until end of turn";
-	}
 }
 
 class GrandArchitectManaAbility extends ManaAbility<GrandArchitectManaAbility> {

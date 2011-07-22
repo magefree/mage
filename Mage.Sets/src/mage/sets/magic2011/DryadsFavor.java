@@ -83,6 +83,7 @@ class DryadsFavorEffect extends ContinuousEffectImpl<DryadsFavorEffect> {
 
 	public DryadsFavorEffect() {
 		super(Duration.WhileOnBattlefield, Outcome.Detriment);
+		staticText = "Enchanted creature has forestwalk";
 	}
 
 	public DryadsFavorEffect(final DryadsFavorEffect effect) {
@@ -123,8 +124,4 @@ class DryadsFavorEffect extends ContinuousEffectImpl<DryadsFavorEffect> {
 		return layer == Layer.AbilityAddingRemovingEffects_6;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Enchanted creature has forestwalk";
-	}
 }

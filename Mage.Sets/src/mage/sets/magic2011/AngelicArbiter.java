@@ -132,6 +132,7 @@ class AngelicArbiterEffect1 extends ReplacementEffectImpl<AngelicArbiterEffect1>
 
 	public AngelicArbiterEffect1(final AngelicArbiterEffect1 effect) {
 		super(effect);
+		staticText = "Each opponent who cast a spell this turn can't attack with creatures";
 	}
 
 	@Override
@@ -159,17 +160,13 @@ class AngelicArbiterEffect1 extends ReplacementEffectImpl<AngelicArbiterEffect1>
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Each opponent who cast a spell this turn can't attack with creatures";
-	}
-
 }
 
 class AngelicArbiterEffect2 extends ReplacementEffectImpl<AngelicArbiterEffect2> {
 
 	public AngelicArbiterEffect2() {
 		super(Duration.WhileOnBattlefield, Outcome.Benefit);
+		staticText = "Each opponent who attacked with a creature this turn can't cast spells";
 	}
 
 	public AngelicArbiterEffect2(final AngelicArbiterEffect2 effect) {
@@ -199,11 +196,6 @@ class AngelicArbiterEffect2 extends ReplacementEffectImpl<AngelicArbiterEffect2>
 				return true;
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Each opponent who attacked with a creature this turn can't cast spells";
 	}
 
 }

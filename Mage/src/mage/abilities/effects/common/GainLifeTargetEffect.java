@@ -46,6 +46,7 @@ public class GainLifeTargetEffect extends OneShotEffect<GainLifeTargetEffect> {
 	public GainLifeTargetEffect(int life) {
 		super(Outcome.GainLife);
 		this.life = life;
+		staticText = "target players each gain " + Integer.toString(life) + " life";
 	}
 
 	public GainLifeTargetEffect(final GainLifeTargetEffect effect) {
@@ -67,11 +68,6 @@ public class GainLifeTargetEffect extends OneShotEffect<GainLifeTargetEffect> {
 			}
 		}
 		return true;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "target players each gain " + Integer.toString(life) + " life";
 	}
 
 }

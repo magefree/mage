@@ -49,6 +49,7 @@ public class ProliferateEffect extends OneShotEffect<ProliferateEffect> {
 
 	public ProliferateEffect() {
 		super(Outcome.Benefit);
+		staticText = "Proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)";
 	}
 
 	public ProliferateEffect(ProliferateEffect effect) {
@@ -138,8 +139,4 @@ public class ProliferateEffect extends OneShotEffect<ProliferateEffect> {
 		return new ProliferateEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)";
-	}
 }

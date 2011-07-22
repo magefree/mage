@@ -72,6 +72,7 @@ class InfectiousHorrorEffect extends OneShotEffect<InfectiousHorrorEffect> {
 
     InfectiousHorrorEffect() {
         super(Constants.Outcome.Damage);
+        staticText = "each opponent loses 2 life";
     }
 
     InfectiousHorrorEffect(final InfectiousHorrorEffect effect) {
@@ -94,8 +95,4 @@ class InfectiousHorrorEffect extends OneShotEffect<InfectiousHorrorEffect> {
         return new InfectiousHorrorEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "each opponent loses 2 life";
-    }
 }

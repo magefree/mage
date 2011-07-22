@@ -80,6 +80,7 @@ class SeaGateOracleEffect extends OneShotEffect<SeaGateOracleEffect> {
 
 	public SeaGateOracleEffect() {
 		super(Outcome.DrawCard);
+		staticText = "look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library";
 	}
 
 	public SeaGateOracleEffect(SeaGateOracleEffect effect) {
@@ -123,11 +124,6 @@ class SeaGateOracleEffect extends OneShotEffect<SeaGateOracleEffect> {
 	@Override
 	public SeaGateOracleEffect copy() {
 		return new SeaGateOracleEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library";
 	}
 
 }

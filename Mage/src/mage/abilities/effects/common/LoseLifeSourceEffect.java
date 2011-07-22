@@ -45,6 +45,7 @@ public class LoseLifeSourceEffect extends OneShotEffect<LoseLifeSourceEffect> {
 	public LoseLifeSourceEffect(int amount) {
 		super(Outcome.Damage);
 		this.amount = amount;
+		staticText = "You lose " + Integer.toString(amount) + " life";
 	}
 
 	public int getAmount() {
@@ -70,11 +71,5 @@ public class LoseLifeSourceEffect extends OneShotEffect<LoseLifeSourceEffect> {
 		}
 		return false;
 	}
-
-	@Override
-	public String getText(Ability source) {
-		return "You lose " + Integer.toString(amount) + " life";
-	}
-
 
 }

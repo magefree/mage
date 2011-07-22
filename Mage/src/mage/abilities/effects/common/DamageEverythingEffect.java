@@ -49,6 +49,7 @@ public class DamageEverythingEffect extends OneShotEffect<DamageEverythingEffect
 	public DamageEverythingEffect(int amount) {
 		super(Outcome.Damage);
 		this.amount = amount;
+		staticText = "{source} deals " + Integer.toString(amount) + " damage to each creature and each player";
 	}
 
 	public DamageEverythingEffect(final DamageEverythingEffect effect) {
@@ -73,11 +74,6 @@ public class DamageEverythingEffect extends OneShotEffect<DamageEverythingEffect
 				player.damage(amount, source.getId(), game, false, true);
 		}
 		return true;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "{source} deals " + Integer.toString(amount) + " damage to each creature and each player";
 	}
 
 }

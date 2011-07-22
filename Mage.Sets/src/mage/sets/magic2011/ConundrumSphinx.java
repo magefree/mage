@@ -82,6 +82,7 @@ class ConundrumSphinxEffect extends OneShotEffect<ConundrumSphinxEffect> {
 
 	public ConundrumSphinxEffect() {
 		super(Outcome.DrawCard);
+		staticText = "each player names a card. Then each player reveals the top card of his or her library. If the card a player revealed is the card he or she named, that player puts it into his or her hand. If it's not, that player puts it on the bottom of his or her library";
 	}
 
 	public ConundrumSphinxEffect(final ConundrumSphinxEffect effect) {
@@ -113,11 +114,6 @@ class ConundrumSphinxEffect extends OneShotEffect<ConundrumSphinxEffect> {
 	@Override
 	public ConundrumSphinxEffect copy() {
 		return new ConundrumSphinxEffect(this);
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "each player names a card. Then each player reveals the top card of his or her library. If the card a player revealed is the card he or she named, that player puts it into his or her hand. If it's not, that player puts it on the bottom of his or her library";
 	}
 
 }

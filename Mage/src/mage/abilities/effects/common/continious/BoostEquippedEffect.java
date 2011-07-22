@@ -64,6 +64,7 @@ public class BoostEquippedEffect extends ContinuousEffectImpl<BoostEquippedEffec
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.power = powerDynamicValue;
         this.toughness = toughnessDynamicValue;
+		setText();
     }
 
 	public BoostEquippedEffect(final BoostEquippedEffect effect) {
@@ -90,8 +91,7 @@ public class BoostEquippedEffect extends ContinuousEffectImpl<BoostEquippedEffec
 		return true;
 	}
 
-	@Override
-	public String getDynamicText(Ability source) {
+	private void setText() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Equipped creature gets ");
         String p = power.toString();
@@ -113,7 +113,7 @@ public class BoostEquippedEffect extends ContinuousEffectImpl<BoostEquippedEffec
             sb.append(" for each ");
         }
         sb.append(message);
-		return sb.toString();
+		staticText = sb.toString();
 	}
 
 }

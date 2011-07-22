@@ -31,6 +31,7 @@ package mage.abilities.effects.common;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
@@ -85,9 +86,9 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect<
 	}
 
 	@Override
-	public String getText(Ability source) {
+	public String getText(Mode mode) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Put target ").append(source.getTargets().get(0).getTargetName()).append(" onto the battlefield");
+		sb.append("Put target ").append(mode.getTargets().get(0).getTargetName()).append(" onto the battlefield");
 		if (tapped)
 			sb.append(" tapped");
 		sb.append(" under your control");

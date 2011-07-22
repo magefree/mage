@@ -102,6 +102,7 @@ class BloodcrazedGoblinEffect extends ReplacementEffectImpl<BloodcrazedGoblinEff
 
 	public BloodcrazedGoblinEffect() {
 		super(Duration.WhileOnBattlefield, Outcome.Benefit);
+		staticText = "Bloodcrazed Goblin can't attack unless an opponent has been dealt damage this turn";
 	}
 
 	public BloodcrazedGoblinEffect(final BloodcrazedGoblinEffect effect) {
@@ -131,11 +132,6 @@ class BloodcrazedGoblinEffect extends ReplacementEffectImpl<BloodcrazedGoblinEff
 				return !watcher.conditionMet();
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "Bloodcrazed Goblin can't attack unless an opponent has been dealt damage this turn";
 	}
 
 }

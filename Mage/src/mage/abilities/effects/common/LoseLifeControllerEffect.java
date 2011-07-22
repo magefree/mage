@@ -46,6 +46,7 @@ public class LoseLifeControllerEffect extends OneShotEffect<LoseLifeControllerEf
     public LoseLifeControllerEffect(int amount) {
         super(Outcome.Damage);
         this.amount = amount;
+		staticText = "Its controller loses " + amount + " life";
     }
 
     public LoseLifeControllerEffect(final LoseLifeControllerEffect effect) {
@@ -71,8 +72,4 @@ public class LoseLifeControllerEffect extends OneShotEffect<LoseLifeControllerEf
         return false;
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Its controller loses " + amount + " life";
-    }
 }

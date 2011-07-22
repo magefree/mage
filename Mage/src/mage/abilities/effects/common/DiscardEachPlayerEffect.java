@@ -11,6 +11,7 @@ import java.util.UUID;
 public class DiscardEachPlayerEffect extends OneShotEffect<DiscardEachPlayerEffect> {
     public DiscardEachPlayerEffect() {
         super(Constants.Outcome.Discard);
+        staticText = "each player discards a card";
     }
 
     public DiscardEachPlayerEffect(final DiscardEachPlayerEffect effect) {
@@ -34,8 +35,4 @@ public class DiscardEachPlayerEffect extends OneShotEffect<DiscardEachPlayerEffe
         return new DiscardEachPlayerEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "each player discards a card";
-    }
 }

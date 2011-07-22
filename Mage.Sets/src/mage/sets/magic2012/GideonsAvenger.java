@@ -97,6 +97,6 @@ class GideonsAvengerTriggeredAbility extends TriggeredAbilityImpl<GideonsAvenger
 
     @Override
     public String getRule() {
-        return "Whenever a creature an opponent controls becomes tapped, " + modes.getText(this);
+        return "Whenever a creature an opponent controls becomes tapped, " + modes.getText();
     }
 }

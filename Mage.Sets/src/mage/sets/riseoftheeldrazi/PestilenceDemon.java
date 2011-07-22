@@ -75,6 +75,7 @@ public class PestilenceDemon extends CardImpl<PestilenceDemon> {
 class PestilenceDemonEffect extends OneShotEffect<PestilenceDemonEffect> {
     PestilenceDemonEffect() {
         super(Constants.Outcome.Damage);
+        staticText = "Pestilence Demon deals 1 damage to each creature and each player";
     }
 
     PestilenceDemonEffect(final PestilenceDemonEffect effect) {
@@ -103,8 +104,4 @@ class PestilenceDemonEffect extends OneShotEffect<PestilenceDemonEffect> {
         return new PestilenceDemonEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Pestilence Demon deals 1 damage to each creature and each player";
-    }
 }

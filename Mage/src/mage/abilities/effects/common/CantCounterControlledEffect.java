@@ -53,6 +53,7 @@ public class CantCounterControlledEffect extends ReplacementEffectImpl<CantCount
 		super(duration, Outcome.Benefit);
 		this.filterTarget = filterTarget;
 		this.filterSource = filterSource;
+		setText();
 	}
 
 	public CantCounterControlledEffect(FilterSpell filterTarget, Duration duration) {
@@ -104,14 +105,13 @@ public class CantCounterControlledEffect extends ReplacementEffectImpl<CantCount
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
+	private void setText() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(filterTarget.getMessage()).append(" can't be countered");
 		if (filterSource != null) {
 			sb.append(" by ").append(filterSource.getMessage());
 		}
-		return sb.toString();
+		staticText = sb.toString();
 	}
 
 }

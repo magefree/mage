@@ -102,6 +102,7 @@ public class DeathbringerLiege extends CardImpl<DeathbringerLiege> {
 class DeathbringerLiegeEffect extends OneShotEffect<DeathbringerLiegeEffect> {
     DeathbringerLiegeEffect() {
         super(Constants.Outcome.DestroyPermanent);
+        staticText = "destroy target creature if it's tapped";
     }
 
     DeathbringerLiegeEffect(final DeathbringerLiegeEffect effect) {
@@ -122,8 +123,4 @@ class DeathbringerLiegeEffect extends OneShotEffect<DeathbringerLiegeEffect> {
         return new DeathbringerLiegeEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "destroy target creature if it's tapped";
-    }
 }

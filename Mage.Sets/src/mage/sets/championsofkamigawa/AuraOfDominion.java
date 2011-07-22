@@ -91,6 +91,7 @@ public class AuraOfDominion extends CardImpl<AuraOfDominion> {
 class AuraOfDominionEffect extends OneShotEffect<AuraOfDominionEffect> {
     AuraOfDominionEffect() {
         super(Constants.Outcome.Untap);
+        staticText = "untap enchanted creature";
     }
 
     AuraOfDominionEffect(final AuraOfDominionEffect effect) {
@@ -115,8 +116,4 @@ class AuraOfDominionEffect extends OneShotEffect<AuraOfDominionEffect> {
         return new AuraOfDominionEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "untap enchanted creature";
-    }
 }

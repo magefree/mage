@@ -75,6 +75,7 @@ class ChainedThroatseekerEffect extends ReplacementEffectImpl<ChainedThroatseeke
 
     public ChainedThroatseekerEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "Chained Throatseeker can't attack unless defending player is poisoned";
     }
 
     public ChainedThroatseekerEffect(final ChainedThroatseekerEffect effect) {
@@ -109,8 +110,4 @@ class ChainedThroatseekerEffect extends ReplacementEffectImpl<ChainedThroatseeke
         return false;
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Chained Throatseeker can't attack unless defending player is poisoned";
-    }
 }

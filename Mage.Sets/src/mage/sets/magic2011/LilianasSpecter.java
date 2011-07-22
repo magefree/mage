@@ -74,6 +74,7 @@ class LilianasSpecterEffect extends OneShotEffect<LilianasSpecterEffect> {
 
 	public LilianasSpecterEffect() {
 		super(Outcome.Discard);
+		staticText = "each opponent discards a card";
 	}
 
 	public LilianasSpecterEffect(final LilianasSpecterEffect effect) {
@@ -94,8 +95,4 @@ class LilianasSpecterEffect extends OneShotEffect<LilianasSpecterEffect> {
 		return new LilianasSpecterEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "each opponent discards a card";
-	}
 }

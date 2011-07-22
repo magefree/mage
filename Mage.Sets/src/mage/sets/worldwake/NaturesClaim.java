@@ -78,6 +78,7 @@ public class NaturesClaim extends CardImpl<NaturesClaim> {
 class NaturesClaimEffect extends OneShotEffect<NaturesClaimEffect> {
     NaturesClaimEffect() {
         super(Constants.Outcome.GainLife);
+        staticText = "Its controller gains 4 life";
     }
 
     NaturesClaimEffect(final NaturesClaimEffect effect) {
@@ -102,8 +103,4 @@ class NaturesClaimEffect extends OneShotEffect<NaturesClaimEffect> {
         return new NaturesClaimEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Its controller gains 4 life";
-    }
 }

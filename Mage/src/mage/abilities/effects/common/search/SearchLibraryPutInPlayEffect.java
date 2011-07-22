@@ -59,6 +59,7 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect<SearchLibraryPutI
 	public SearchLibraryPutInPlayEffect(TargetCardInLibrary target, boolean tapped, Outcome outcome) {
 		super(target, outcome);
 		this.tapped = tapped;
+		setText();
 	}
 
 	public SearchLibraryPutInPlayEffect(final SearchLibraryPutInPlayEffect effect) {
@@ -95,8 +96,7 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect<SearchLibraryPutI
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
+	private void setText() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Search your library for ");
 		if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
@@ -114,7 +114,7 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect<SearchLibraryPutI
 		if (tapped)
 			sb.append(" tapped");
 		sb.append(". Then shuffle your library");
-		return sb.toString();
+		staticText = sb.toString();
 	}
 
 }

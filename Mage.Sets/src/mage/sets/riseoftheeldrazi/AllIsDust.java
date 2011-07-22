@@ -68,6 +68,7 @@ public class AllIsDust extends CardImpl<AllIsDust> {
 class AllIsDustEffect extends OneShotEffect<AllIsDustEffect> {
     AllIsDustEffect() {
         super(Constants.Outcome.DestroyPermanent);
+        staticText = "Each player sacrifices all colored permanents he or she controls";
     }
 
     AllIsDustEffect(final AllIsDustEffect effect) {
@@ -90,8 +91,4 @@ class AllIsDustEffect extends OneShotEffect<AllIsDustEffect> {
         return new AllIsDustEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "Each player sacrifices all colored permanents he or she controls";
-    }
 }

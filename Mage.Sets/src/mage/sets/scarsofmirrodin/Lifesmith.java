@@ -78,6 +78,7 @@ public class Lifesmith extends CardImpl<Lifesmith> {
 class LifesmithEffect extends OneShotEffect<LifesmithEffect> {
     LifesmithEffect() {
         super(Constants.Outcome.GainLife);
+        staticText = "you may pay {1}. If you do, you gain 3 life";
     }
 
     LifesmithEffect(final LifesmithEffect effect) {
@@ -103,8 +104,4 @@ class LifesmithEffect extends OneShotEffect<LifesmithEffect> {
         return new LifesmithEffect(this);
     }
 
-    @Override
-    public String getText(Ability source) {
-        return "you may pay {1}. If you do, you gain 3 life";
-    }
 }

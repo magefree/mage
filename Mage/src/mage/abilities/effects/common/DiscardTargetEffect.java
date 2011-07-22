@@ -46,6 +46,7 @@ public class DiscardTargetEffect extends OneShotEffect<DiscardTargetEffect> {
     public DiscardTargetEffect(DynamicValue amount) {
         super(Outcome.Discard);
         this.amount = amount;
+		setText();
     }
 
     public DiscardTargetEffect(int amount) {
@@ -72,8 +73,7 @@ public class DiscardTargetEffect extends OneShotEffect<DiscardTargetEffect> {
         return false;
     }
 
-    @Override
-    public String getText(Ability source) {
+	private void setText() {
         StringBuilder sb = new StringBuilder("Target player discards ");
         sb.append(amount).append(" card");
         try {
@@ -88,6 +88,6 @@ public class DiscardTargetEffect extends OneShotEffect<DiscardTargetEffect> {
             sb.append(" for each ");
         }
         sb.append(message);
-        return sb.toString();
+        staticText = sb.toString();
     }
 }

@@ -74,6 +74,7 @@ class SleepEffect extends OneShotEffect<SleepEffect> {
 
 	public SleepEffect() {
 		super(Outcome.Tap);
+		staticText = "Tap all creatures target player controls. Those creatures don't untap during that player's next untap step";
 	}
 
 	public SleepEffect(final SleepEffect effect) {
@@ -98,10 +99,6 @@ class SleepEffect extends OneShotEffect<SleepEffect> {
 		return new SleepEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Tap all creatures target player controls. Those creatures don't untap during that player's next untap step";
-	}
 }
 
 class SleepEffect2 extends ReplacementEffectImpl<SleepEffect2> {
@@ -142,11 +139,6 @@ class SleepEffect2 extends ReplacementEffectImpl<SleepEffect2> {
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public String getText(Ability source) {
-		return "";
 	}
 
 }

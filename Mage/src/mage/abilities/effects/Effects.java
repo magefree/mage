@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Set;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 
 /**
  *
@@ -53,10 +54,10 @@ public class Effects extends ArrayList<Effect> {
 		return new Effects(this);
 	}
 
-	public String getText(Ability source) {
+	public String getText(Mode mode) {
 		StringBuilder sbText = new StringBuilder();
 		for (Effect effect: this) {
-			sbText.append(effect.getText(source)).append(". ");
+			sbText.append(effect.getText(mode)).append(". ");
 		}
 		return sbText.toString();
 	}

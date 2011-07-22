@@ -36,6 +36,7 @@ import mage.game.events.GameEvent;
 import mage.target.Target;
 
 import java.util.UUID;
+import mage.abilities.Mode;
 
 /**
  * @author nantuko
@@ -122,16 +123,16 @@ public class PreventDamageFromTargetEffect extends PreventionEffectImpl<PreventD
 	}
 
 	@Override
-	public String getText(Ability source) {
+	public String getText(Mode mode) {
 		if (this.all) {
 			StringBuilder sb = new StringBuilder();
 			sb.append("Prevent all damage target ");
-			sb.append(source.getTargets().get(0).getTargetName()).append(" would deal ").append(duration.toString());
+			sb.append(mode.getTargets().get(0).getTargetName()).append(" would deal ").append(duration.toString());
 			return sb.toString();
 		} else {
 			StringBuilder sb = new StringBuilder();
 			sb.append("Prevent the next ").append(amount).append(" damage that ");
-			sb.append(source.getTargets().get(0).getTargetName()).append(" would deal ").append(duration.toString());
+			sb.append(mode.getTargets().get(0).getTargetName()).append(" would deal ").append(duration.toString());
 			return sb.toString();
 		}
 

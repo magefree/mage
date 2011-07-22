@@ -34,6 +34,7 @@ import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.game.Game;
@@ -92,8 +93,8 @@ public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
 	}
 
 	@Override
-	public String getText(Ability source) {
-		return "You may have {this} enter the battlefield as a copy of any " + source.getTargets().get(0).getTargetName() + " on the battlefield";
+	public String getText(Mode mode) {
+		return "You may have {this} enter the battlefield as a copy of any " + mode.getTargets().get(0).getTargetName() + " on the battlefield";
 	}
 
 }

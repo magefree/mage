@@ -76,6 +76,7 @@ public class QuicksilverGargantuan extends CardImpl<QuicksilverGargantuan> {
 
 		public QuicksilverGargantuanCopyEffect() {
 			super(Constants.Duration.WhileOnBattlefield, Constants.Layer.CopyEffects_1, Constants.SubLayer.NA, Constants.Outcome.BecomeCreature);
+			staticText =  "You may have Quicksilver Gargantuan enter the battlefield as a copy of any creature on the battlefield, except it's still 7/7";
 		}
 
 		public QuicksilverGargantuanCopyEffect(final QuicksilverGargantuanCopyEffect effect) {
@@ -114,11 +115,6 @@ public class QuicksilverGargantuan extends CardImpl<QuicksilverGargantuan> {
 		@Override
 		public QuicksilverGargantuanCopyEffect copy() {
 			return new QuicksilverGargantuanCopyEffect(this);
-		}
-
-		@Override
-		public String getText(Ability source) {
-			return "You may have {this} enter the battlefield as a copy of any " + source.getTargets().get(0).getTargetName() + " on the battlefield, except it's still 7/7";
 		}
 
 	}

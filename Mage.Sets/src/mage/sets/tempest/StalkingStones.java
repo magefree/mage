@@ -68,6 +68,7 @@ class StalkingStonesEffect extends ContinuousEffectImpl<StalkingStonesEffect> {
 
     public StalkingStonesEffect() {
         super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.BecomeCreature);
+		staticText = "{this} becomes a 3/3 Elemental artifact creature that's still a land";
     }
 
     public StalkingStonesEffect(final StalkingStonesEffect effect) {
@@ -112,8 +113,4 @@ class StalkingStonesEffect extends ContinuousEffectImpl<StalkingStonesEffect> {
 		return layer == Constants.Layer.PTChangingEffects_7 || layer == layer.TypeChangingEffects_4;
 	}
 
-    @Override
-    public String getText(Ability source) {
-        return "{this} becomes a 3/3 Elemental artifact creature that's still a land";
-    }
 }

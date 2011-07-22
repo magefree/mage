@@ -89,6 +89,7 @@ class HikariTwilightGuardianEffect extends OneShotEffect<HikariTwilightGuardianE
 
 	HikariTwilightGuardianEffect ( ) {
 		super(Constants.Outcome.Benefit);
+		staticText = effectText;
 	}
 
 	HikariTwilightGuardianEffect(HikariTwilightGuardianEffect effect) {
@@ -116,10 +117,6 @@ class HikariTwilightGuardianEffect extends OneShotEffect<HikariTwilightGuardianE
 		return new HikariTwilightGuardianEffect(this);
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return effectText;
-	}
 }
 
 class HikariTwilightGuardianDelayedTriggeredAbility extends DelayedTriggeredAbility<HikariTwilightGuardianDelayedTriggeredAbility> {

@@ -120,6 +120,7 @@ class FleshAllergyEffect extends OneShotEffect<FleshAllergyEffect> {
 
 	public FleshAllergyEffect() {
 		super(Outcome.DestroyPermanent);
+		staticText = "Target creature gets +2/+2 until end of turn.\nLandfall - If you had a land enter the battlefield under your control this turn, that creature gets +4/+4 until end of turn instead";
 	}
 
 	public FleshAllergyEffect(final FleshAllergyEffect effect) {
@@ -148,8 +149,4 @@ class FleshAllergyEffect extends OneShotEffect<FleshAllergyEffect> {
 		return false;
 	}
 
-	@Override
-	public String getText(Ability source) {
-		return "Target creature gets +2/+2 until end of turn.\nLandfall - If you had a land enter the battlefield under your control this turn, that creature gets +4/+4 until end of turn instead";
-	}
 }
