@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
  * 
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,12 +25,8 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.scarsofmirrodin;
 
-package mage.sets.magic2010;
-
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
@@ -41,71 +37,84 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
-import mage.filter.common.FilterBasicLandCard;
+import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
 import mage.game.Game;
 import mage.players.Player;
+import mage.sets.Sets;
 import mage.target.TargetPlayer;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HauntingEchoes extends CardImpl<HauntingEchoes> {
+public class Memoricide extends CardImpl<Memoricide> {
 
-	public HauntingEchoes(UUID ownerId) {
-		super(ownerId, 98, "Haunting Echoes", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
-		this.expansionSetCode = "M10";
+	public Memoricide(UUID ownerId) {
+		super(ownerId, 69, "Memoricide", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
+		this.expansionSetCode = "SOM";
 		this.color.setBlack(true);
 		this.getSpellAbility().addTarget(new TargetPlayer());
-		this.getSpellAbility().addEffect(new HauntingEchoesEffect());
+		this.getSpellAbility().addEffect(new MemoricideEffect());
 	}
 
-	public HauntingEchoes(final HauntingEchoes card) {
+	public Memoricide(final Memoricide card) {
 		super(card);
 	}
 
 	@Override
-	public HauntingEchoes copy() {
-		return new HauntingEchoes(this);
+	public Memoricide copy() {
+		return new Memoricide(this);
 	}
+
 }
 
-class HauntingEchoesEffect extends OneShotEffect<HauntingEchoesEffect> {
-
-	private static final FilterBasicLandCard filter = new FilterBasicLandCard();
-
-	public HauntingEchoesEffect() {
-		super(Outcome.Detriment);
-		staticText = "Exile all cards from target player's graveyard other than basic land cards. For each card exiled this way, search that player's library for all cards with the same name as that card and exile them. Then that player shuffles his or her library";
+class MemoricideEffect extends OneShotEffect<MemoricideEffect> {
+	
+	public MemoricideEffect() {
+		super(Outcome.Exile);
+		staticText = "Name a nonland card. Search target player's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles his or her library";
 	}
-
-	public HauntingEchoesEffect(final HauntingEchoesEffect effect) {
+	
+	public MemoricideEffect(final MemoricideEffect effect) {
 		super(effect);
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
-		if (player != null) {
+		Player player = game.getPlayer(targetPointer.getFirst(source));
+		Player controller = game.getPlayer(source.getControllerId());
+		if (player != null && controller != null) {
+			Choice cardChoice = new ChoiceImpl();
+			cardChoice.setChoices(Sets.getNonLandCardNames());
+			cardChoice.clearChoice();
+			controller.choose(Outcome.Exile, cardChoice, game);
+			String cardName = cardChoice.getChoice();
 			for (Card card: player.getGraveyard().getCards(game)) {
-				if (!filter.match(card)) {
-					card.moveToExile(null, "", source.getId(), game);
-					for (Card lcard: player.getLibrary().getCards(game)) {
-						if (lcard.getName().equals(card.getName())) {
-							lcard.moveToExile(null, "", source.getId(), game);					
-						}
-					}
+				if (card.getName().equals(cardName)) {
+					card.moveToExile(null, "", source.getId(), game);					
 				}
 			}
+			for (Card card: player.getHand().getCards(game)) {
+				if (card.getName().equals(cardName)) {
+					card.moveToExile(null, "", source.getId(), game);					
+				}
+			}
+			for (Card card: player.getLibrary().getCards(game)) {
+				if (card.getName().equals(cardName)) {
+					card.moveToExile(null, "", source.getId(), game);					
+				}
+			}
+			controller.lookAtCards("Memoricide Hand", player.getHand(), game);
+			controller.lookAtCards("Memoricide Library", new CardsImpl(Zone.PICK, player.getLibrary().getCards(game)), game);
+			player.shuffleLibrary(game);
 		}
-		game.getPlayer(source.getControllerId()).lookAtCards("Haunting Echoes", new CardsImpl(Zone.PICK, player.getLibrary().getCards(game)), game);
-		player.shuffleLibrary(game);
 		return true;
 	}
 
 	@Override
-	public HauntingEchoesEffect copy() {
-		return new HauntingEchoesEffect(this);
+	public MemoricideEffect copy() {
+		return new MemoricideEffect(this);
 	}
-
+	
 }

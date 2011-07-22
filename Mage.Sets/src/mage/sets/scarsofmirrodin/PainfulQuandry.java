@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
  * 
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,87 +25,109 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.scarsofmirrodin;
 
-package mage.sets.magic2010;
-
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.CardsImpl;
-import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetCardInHand;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HauntingEchoes extends CardImpl<HauntingEchoes> {
+public class PainfulQuandry extends CardImpl<PainfulQuandry> {
 
-	public HauntingEchoes(UUID ownerId) {
-		super(ownerId, 98, "Haunting Echoes", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
-		this.expansionSetCode = "M10";
+	public PainfulQuandry(UUID ownerId) {
+		super(ownerId, 73, "Painful Quandry", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
+		this.expansionSetCode = "SOM";
 		this.color.setBlack(true);
-		this.getSpellAbility().addTarget(new TargetPlayer());
-		this.getSpellAbility().addEffect(new HauntingEchoesEffect());
+		this.addAbility(new PainfulQuandryAbility());
 	}
 
-	public HauntingEchoes(final HauntingEchoes card) {
+	public PainfulQuandry(final PainfulQuandry card) {
 		super(card);
 	}
 
 	@Override
-	public HauntingEchoes copy() {
-		return new HauntingEchoes(this);
+	public PainfulQuandry copy() {
+		return new PainfulQuandry(this);
+	}
+
+}
+
+class PainfulQuandryAbility extends TriggeredAbilityImpl<PainfulQuandryAbility> {
+
+	public PainfulQuandryAbility() {
+		super(Zone.BATTLEFIELD, new PainfulQuandryEffect());
+		this.addTarget(new TargetPlayer());
+	}
+	
+	public PainfulQuandryAbility(final PainfulQuandryAbility ability) {
+		super(ability);
+	}
+	
+	@Override
+	public PainfulQuandryAbility copy() {
+		return new PainfulQuandryAbility(this);
+	}
+
+	@Override
+	public boolean checkTrigger(GameEvent event, Game game) {
+		if (event.getType() == EventType.SPELL_CAST && game.getOpponents(controllerId).contains(event.getPlayerId())) {
+			this.getTargets().get(0).add(event.getPlayerId(), game);
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public String getRule() {
+		return "Whenever an opponent casts a spell, that player loses 5 life unless he or she discards a card.";
 	}
 }
 
-class HauntingEchoesEffect extends OneShotEffect<HauntingEchoesEffect> {
+class PainfulQuandryEffect extends OneShotEffect<PainfulQuandryEffect> {
 
-	private static final FilterBasicLandCard filter = new FilterBasicLandCard();
-
-	public HauntingEchoesEffect() {
-		super(Outcome.Detriment);
-		staticText = "Exile all cards from target player's graveyard other than basic land cards. For each card exiled this way, search that player's library for all cards with the same name as that card and exile them. Then that player shuffles his or her library";
+	public PainfulQuandryEffect() {
+		super(Outcome.Damage);
+		staticText = "player loses 5 life unless he or she discards a card";
 	}
 
-	public HauntingEchoesEffect(final HauntingEchoesEffect effect) {
+	public PainfulQuandryEffect(final PainfulQuandryEffect effect) {
 		super(effect);
+	}
+
+	@Override
+	public PainfulQuandryEffect copy() {
+		return new PainfulQuandryEffect(this);
 	}
 
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getFirstTarget());
 		if (player != null) {
-			for (Card card: player.getGraveyard().getCards(game)) {
-				if (!filter.match(card)) {
-					card.moveToExile(null, "", source.getId(), game);
-					for (Card lcard: player.getLibrary().getCards(game)) {
-						if (lcard.getName().equals(card.getName())) {
-							lcard.moveToExile(null, "", source.getId(), game);					
-						}
-					}
-				}
+			Cost cost = new DiscardTargetCost(new TargetCardInHand());
+			if (!cost.pay(game, player.getId(), player.getId(), false)) {
+				player.loseLife(5, game);
 			}
+			return true;
 		}
-		game.getPlayer(source.getControllerId()).lookAtCards("Haunting Echoes", new CardsImpl(Zone.PICK, player.getLibrary().getCards(game)), game);
-		player.shuffleLibrary(game);
-		return true;
-	}
-
-	@Override
-	public HauntingEchoesEffect copy() {
-		return new HauntingEchoesEffect(this);
+		return false;
 	}
 
 }

@@ -90,7 +90,7 @@ class MindblazeEffect extends OneShotEffect<MindblazeEffect> {
         Player playerControls = game.getPlayer(source.getControllerId());
         if (player != null && playerControls != null) {
             Choice cardChoice = new ChoiceImpl();
-		    cardChoice.setChoices(Sets.getCardNames());
+		    cardChoice.setChoices(Sets.getNonLandCardNames());
             cardChoice.clearChoice();
             Choice numberChoice = new ChoiceImpl();
             numberChoice.setMessage("Choose a number greater than 0");
