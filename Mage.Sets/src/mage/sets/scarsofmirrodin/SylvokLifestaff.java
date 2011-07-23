@@ -33,6 +33,8 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
+import mage.abilities.Ability;
+import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -44,7 +46,7 @@ import mage.cards.CardImpl;
 
 /**
  *
- * @author North
+ * @author North, Loki
  */
 public class SylvokLifestaff extends CardImpl<SylvokLifestaff> {
 
@@ -54,8 +56,7 @@ public class SylvokLifestaff extends CardImpl<SylvokLifestaff> {
         this.subtype.add("Equipment");
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
-        DiesTriggeredAbility ability = new DiesTriggeredAbility(new GainLifeEffect(3));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
+        this.addAbility(new DiesAttachedTriggeredAbility(new GainLifeEffect(3), "equipped creature"));
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
 
