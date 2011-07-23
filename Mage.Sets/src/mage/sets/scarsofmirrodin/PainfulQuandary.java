@@ -33,7 +33,6 @@ import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardTargetCost;
@@ -50,22 +49,22 @@ import mage.target.common.TargetCardInHand;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PainfulQuandry extends CardImpl<PainfulQuandry> {
+public class PainfulQuandary extends CardImpl<PainfulQuandary> {
 
-	public PainfulQuandry(UUID ownerId) {
-		super(ownerId, 73, "Painful Quandry", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
+	public PainfulQuandary(UUID ownerId) {
+		super(ownerId, 73, "Painful Quandary", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
 		this.expansionSetCode = "SOM";
 		this.color.setBlack(true);
 		this.addAbility(new PainfulQuandryAbility());
 	}
 
-	public PainfulQuandry(final PainfulQuandry card) {
+	public PainfulQuandary(final PainfulQuandary card) {
 		super(card);
 	}
 
 	@Override
-	public PainfulQuandry copy() {
-		return new PainfulQuandry(this);
+	public PainfulQuandary copy() {
+		return new PainfulQuandary(this);
 	}
 
 }
