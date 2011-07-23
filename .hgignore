@@ -27,6 +27,8 @@ Mage/target
 
 releases
 Utils/author.txt
+Utils/newList.txt
+Utils/oldList.txt
 syntax: regexp
 .class
 .jar
