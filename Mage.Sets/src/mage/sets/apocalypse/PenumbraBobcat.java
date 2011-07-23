@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
@@ -49,7 +49,7 @@ public class PenumbraBobcat extends CardImpl<PenumbraBobcat> {
         this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new CreateTokenEffect(new PenumbraBobcatToken(), 1), false));
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new PenumbraBobcatToken(), 1), false));
     }
 
     public PenumbraBobcat(final PenumbraBobcat card) {

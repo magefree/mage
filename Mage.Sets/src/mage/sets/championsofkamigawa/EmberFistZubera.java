@@ -35,7 +35,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.Card;
@@ -61,7 +61,7 @@ public class EmberFistZubera extends CardImpl<EmberFistZubera> {
 		this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        Ability ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new DamageTargetEffect(new EmberFistZuberaDynamicValue()));
+        Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(new EmberFistZuberaDynamicValue()));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
         this.watchers.add(new EmberFistZuberaWatcher(ownerId));

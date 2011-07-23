@@ -31,14 +31,12 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterBasicLandCard;
-import mage.target.common.TargetBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -56,7 +54,7 @@ public class SolemnSimulacrum extends CardImpl<SolemnSimulacrum> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true), true));
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DrawCardControllerEffect(1), true));
+        this.addAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(1), true));
     }
 
     public SolemnSimulacrum(final SolemnSimulacrum card) {

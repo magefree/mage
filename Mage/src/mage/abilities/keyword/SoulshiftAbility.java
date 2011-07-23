@@ -1,12 +1,12 @@
 package mage.abilities.keyword;
 
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
-public class SoulshiftAbility extends PutIntoGraveFromBattlefieldTriggeredAbility {
+public class SoulshiftAbility extends DiesTriggeredAbility {
     private int amount;
 
     public SoulshiftAbility(int amount) {
@@ -26,7 +26,7 @@ public class SoulshiftAbility extends PutIntoGraveFromBattlefieldTriggeredAbilit
     }
 
     @Override
-    public PutIntoGraveFromBattlefieldTriggeredAbility copy() {
+    public DiesTriggeredAbility copy() {
         return new SoulshiftAbility(this);
     }
 

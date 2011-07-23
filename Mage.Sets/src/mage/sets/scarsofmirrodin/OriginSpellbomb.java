@@ -30,11 +30,10 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -59,7 +58,7 @@ public class OriginSpellbomb extends CardImpl<OriginSpellbomb> {
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DoIfCostPaid(new DrawCardControllerEffect(1), new ManaCostsImpl("{W}")), false));
+        this.addAbility(new DiesTriggeredAbility(new DoIfCostPaid(new DrawCardControllerEffect(1), new ManaCostsImpl("{W}")), false));
     }
 
     public OriginSpellbomb (final OriginSpellbomb card) {

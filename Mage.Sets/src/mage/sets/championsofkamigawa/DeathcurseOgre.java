@@ -30,17 +30,12 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.LoseLifePlayersEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -56,7 +51,7 @@ public class DeathcurseOgre extends CardImpl<DeathcurseOgre> {
 		this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new LoseLifePlayersEffect(3)));
+        this.addAbility(new DiesTriggeredAbility(new LoseLifePlayersEffect(3)));
     }
 
     public DeathcurseOgre (final DeathcurseOgre card) {

@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.MyrToken;
@@ -49,7 +49,7 @@ public class MyrSire extends CardImpl<MyrSire> {
         this.subtype.add("Myr");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new CreateTokenEffect(new MyrToken())));
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new MyrToken())));
     }
 
     public MyrSire (final MyrSire card) {

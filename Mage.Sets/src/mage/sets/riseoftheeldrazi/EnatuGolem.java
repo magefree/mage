@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 
@@ -49,7 +49,7 @@ public class EnatuGolem extends CardImpl<EnatuGolem> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new GainLifeEffect(4), false));
+        this.addAbility(new DiesTriggeredAbility(new GainLifeEffect(4), false));
     }
 
     public EnatuGolem(final EnatuGolem card) {

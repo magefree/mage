@@ -33,7 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageEverythingEffect;
@@ -56,7 +56,7 @@ public class MagmaPhoenix extends CardImpl<MagmaPhoenix> {
 		this.toughness = new MageInt(3);
 
 		this.addAbility(FlyingAbility.getInstance());
-		this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DamageEverythingEffect(3), false));
+		this.addAbility(new DiesTriggeredAbility(new DamageEverythingEffect(3), false));
 		this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{3}{R}{R}")));
 	}
 

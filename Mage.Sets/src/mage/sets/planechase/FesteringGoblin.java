@@ -34,7 +34,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
@@ -53,7 +53,7 @@ public class FesteringGoblin extends CardImpl<FesteringGoblin> {
         this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new BoostTargetEffect(-1, -1, Constants.Duration.EndOfTurn), false);
+        Ability ability = new DiesTriggeredAbility(new BoostTargetEffect(-1, -1, Constants.Duration.EndOfTurn), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

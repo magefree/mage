@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
@@ -51,7 +51,7 @@ public class TukatongueThallid extends CardImpl<TukatongueThallid> {
         this.power = new MageInt(1);
 	this.toughness = new MageInt(1);
 
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), false));
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), false));
     }
 
     public TukatongueThallid(final TukatongueThallid card) {

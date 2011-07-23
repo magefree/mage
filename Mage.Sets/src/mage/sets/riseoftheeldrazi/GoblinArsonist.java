@@ -33,7 +33,7 @@ import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -57,7 +57,7 @@ public class GoblinArsonist extends CardImpl<GoblinArsonist> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new GoblinArsonistEffect(), true));
+        this.addAbility(new DiesTriggeredAbility(new GoblinArsonistEffect(), true));
     }
 
     public GoblinArsonist(final GoblinArsonist card) {

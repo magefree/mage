@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
@@ -50,7 +50,7 @@ public class CoreProwler extends CardImpl<CoreProwler> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 		this.addAbility(InfectAbility.getInstance());
-		this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new ProliferateEffect()));
+		this.addAbility(new DiesTriggeredAbility(new ProliferateEffect()));
     }
 
     public CoreProwler (final CoreProwler card) {

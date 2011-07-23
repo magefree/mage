@@ -35,13 +35,11 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
-
-import javax.xml.transform.Source;
 
 /**
  * @author Loki
@@ -58,7 +56,7 @@ public class KeigaTheTideStar extends CardImpl<KeigaTheTideStar> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new GainControlTargetEffect(Constants.Duration.Custom));
+        Ability ability = new DiesTriggeredAbility(new GainControlTargetEffect(Constants.Duration.Custom));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

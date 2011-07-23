@@ -39,7 +39,7 @@ import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -113,7 +113,7 @@ class NecroticPlagueEffect extends ContinuousEffectImpl<NecroticPlagueEffect> {
 					case AbilityAddingRemovingEffects_6:
 						if (sublayer == SubLayer.NA) {
 							creature.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new SacrificeSourceEffect()));
-							creature.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new NecroticPlagueEffect2(source.getSourceId()), false));
+							creature.addAbility(new DiesTriggeredAbility(new NecroticPlagueEffect2(source.getSourceId()), false));
 						}
 						break;
 				}

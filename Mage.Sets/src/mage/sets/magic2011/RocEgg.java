@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -56,7 +56,7 @@ public class RocEgg extends CardImpl<RocEgg> {
 		this.toughness = new MageInt(3);
 
 		this.addAbility(DefenderAbility.getInstance());
-		this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new CreateTokenEffect(rocEggToken, 1), false));
+		this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(rocEggToken, 1), false));
 	}
 
 	public RocEgg(final RocEgg card) {

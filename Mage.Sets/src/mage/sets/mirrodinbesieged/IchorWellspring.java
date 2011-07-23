@@ -31,7 +31,7 @@ package mage.sets.mirrodinbesieged;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 
@@ -46,7 +46,7 @@ public class IchorWellspring extends CardImpl<IchorWellspring> {
 		super(ownerId, 110, "Ichor Wellspring", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
 		this.expansionSetCode = "MBS";
 		this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
-		this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
+		this.addAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(1)));
 	}
 
 	public IchorWellspring(final IchorWellspring card) {

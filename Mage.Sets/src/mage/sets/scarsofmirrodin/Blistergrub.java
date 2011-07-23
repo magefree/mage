@@ -35,7 +35,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -54,7 +54,7 @@ public class Blistergrub extends CardImpl<Blistergrub> {
 		this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new BlistergrubEffect(), false));
+        this.addAbility(new DiesTriggeredAbility(new BlistergrubEffect(), false));
     }
 
     public Blistergrub (final Blistergrub card) {

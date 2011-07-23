@@ -32,7 +32,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -54,7 +54,7 @@ public class ArchonOfJustice extends CardImpl<ArchonOfJustice> {
         this.toughness = new MageInt(4);
 
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new ExileTargetEffect(), false);
+        Ability ability = new DiesTriggeredAbility(new ExileTargetEffect(), false);
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }

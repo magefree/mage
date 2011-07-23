@@ -34,7 +34,7 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -59,7 +59,7 @@ public class FlightSpellbomb extends CardImpl<FlightSpellbomb> {
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DoIfCostPaid(new DrawCardControllerEffect(1), new ManaCostsImpl("{U}")), false));
+        this.addAbility(new DiesTriggeredAbility(new DoIfCostPaid(new DrawCardControllerEffect(1), new ManaCostsImpl("{U}")), false));
     }
 
     public FlightSpellbomb (final FlightSpellbomb card) {

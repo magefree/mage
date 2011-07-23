@@ -32,7 +32,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -51,7 +51,7 @@ public class BogardanFirefiend extends CardImpl<BogardanFirefiend> {
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        Ability ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new DamageTargetEffect(2), false);
+        Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(2), false);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

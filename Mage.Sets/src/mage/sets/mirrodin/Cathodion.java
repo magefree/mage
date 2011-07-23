@@ -32,7 +32,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.CardImpl;
 
@@ -48,7 +48,7 @@ public class Cathodion extends CardImpl<Cathodion> {
         this.subtype.add("Construct");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 3, 0)), false));
+        this.addAbility(new DiesTriggeredAbility(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 3, 0)), false));
     }
 
     public Cathodion(final Cathodion card) {

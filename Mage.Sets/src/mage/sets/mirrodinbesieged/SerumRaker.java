@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.DiscardEachPlayerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -51,7 +51,7 @@ public class SerumRaker extends CardImpl<SerumRaker> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DiscardEachPlayerEffect()));
+        this.addAbility(new DiesTriggeredAbility(new DiscardEachPlayerEffect()));
     }
 
     public SerumRaker (final SerumRaker card) {

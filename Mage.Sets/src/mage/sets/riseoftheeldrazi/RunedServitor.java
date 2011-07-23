@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.cards.CardImpl;
 
@@ -47,7 +47,7 @@ public class RunedServitor extends CardImpl<RunedServitor> {
         this.subtype.add("Construct");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DrawCardAllEffect(1), false));
+        this.addAbility(new DiesTriggeredAbility(new DrawCardAllEffect(1), false));
     }
 
     public RunedServitor(final RunedServitor card) {

@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -53,7 +53,7 @@ public class TuktukTheExplorer extends CardImpl<TuktukTheExplorer> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 		this.addAbility(HasteAbility.getInstance());
-		this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new CreateTokenEffect(new TuktukTheReturnedToken())));
+		this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new TuktukTheReturnedToken())));
     }
 
     public TuktukTheExplorer (final TuktukTheExplorer card) {

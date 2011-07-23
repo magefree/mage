@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,72 +20,53 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.magic2011;
+package mage.sets.newphyrexia;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author Loki
  */
-public class MitoticSlime extends CardImpl<MitoticSlime> {
+public class InquisitorExarch extends CardImpl<InquisitorExarch> {
 
-	public MitoticSlime(UUID ownerId) {
-		super(ownerId, 185, "Mitotic Slime", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Ooze");
-		this.color.setGreen(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(4);
+    public InquisitorExarch(UUID ownerId) {
+        super(ownerId, 12, "Inquisitor Exarch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
+        this.expansionSetCode = "NPH";
+        this.subtype.add("Cleric");
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new Ooze2Token(), 2), false));
-	}
+        Ability ability = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2));
+        Mode mode = new Mode();
+        mode.getEffects().add(new LoseLifeTargetEffect(2));
+        mode.getTargets().add(new TargetPlayer());
+        ability.addMode(mode);
+        this.addAbility(ability);
+    }
 
-	public MitoticSlime(final MitoticSlime card) {
-		super(card);
-	}
+    public InquisitorExarch(final InquisitorExarch card) {
+        super(card);
+    }
 
-	@Override
-	public MitoticSlime copy() {
-		return new MitoticSlime(this);
-	}
-
-}
-
-class Ooze2Token extends Token {
-
-	public Ooze2Token() {
-		super("Ooze", "2/2 green Ooze creature tokens with \"When this creature is put into a graveyard, put two 1/1 green Ooze creature tokens onto the battlefield.\"");
-		cardType.add(CardType.CREATURE);
-		subtype.add("Ooze");
-		color.setGreen(true);
-		power = new MageInt(2);
-		toughness = new MageInt(2);
-		this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new Ooze1Token(), 2), false));
-	}
-}
-
-class Ooze1Token extends Token {
-
-	public Ooze1Token() {
-		super("Ooze", "1/1 green Ooze creature tokens");
-		cardType.add(CardType.CREATURE);
-		subtype.add("Ooze");
-		color.setGreen(true);
-		power = new MageInt(1);
-		toughness = new MageInt(1);
-	}
+    @Override
+    public InquisitorExarch copy() {
+        return new InquisitorExarch(this);
+    }
 }

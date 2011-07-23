@@ -34,7 +34,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.CardImpl;
 
@@ -49,7 +49,7 @@ public class MyrMoonvessel extends CardImpl<MyrMoonvessel> {
         this.subtype.add("Myr");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 1, 0))));
+        this.addAbility(new DiesTriggeredAbility(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 1, 0))));
     }
 
     public MyrMoonvessel(final MyrMoonvessel card) {

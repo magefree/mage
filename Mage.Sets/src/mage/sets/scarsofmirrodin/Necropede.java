@@ -33,7 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
@@ -53,7 +53,7 @@ public class Necropede extends CardImpl<Necropede> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(InfectAbility.getInstance());
-        Ability ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance()), true);
+        Ability ability = new DiesTriggeredAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance()), true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -30,13 +30,10 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -57,7 +54,7 @@ public class WurmcoilEngine extends CardImpl<WurmcoilEngine> {
         this.toughness = new MageInt(6);
         this.addAbility(DeathtouchAbility.getInstance());
         this.addAbility(LifelinkAbility.getInstance());
-        Ability ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new CreateTokenEffect(new Wurm1Token()), false);
+        Ability ability = new DiesTriggeredAbility(new CreateTokenEffect(new Wurm1Token()), false);
         ability.addEffect(new CreateTokenEffect(new Wurm2Token()));
         this.addAbility(ability);
     }

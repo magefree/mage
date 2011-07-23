@@ -35,7 +35,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -60,7 +60,7 @@ public class MortisDogs extends CardImpl<MortisDogs> {
         this.toughness = new MageInt(2);
 
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
-        Ability ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new MortisDogsEffect());
+        Ability ability = new DiesTriggeredAbility(new MortisDogsEffect());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

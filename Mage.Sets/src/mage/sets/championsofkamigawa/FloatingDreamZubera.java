@@ -35,7 +35,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.Card;
@@ -59,7 +59,7 @@ public class FloatingDreamZubera extends CardImpl<FloatingDreamZubera> {
         this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DrawCardControllerEffect(new FloatingDreamZuberaDynamicValue())));
+        this.addAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(new FloatingDreamZuberaDynamicValue())));
         this.watchers.add(new FloatingDreamZuberaWatcher(ownerId));
     }
 

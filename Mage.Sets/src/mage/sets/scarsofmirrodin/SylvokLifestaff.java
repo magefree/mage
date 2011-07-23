@@ -33,7 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -54,7 +54,7 @@ public class SylvokLifestaff extends CardImpl<SylvokLifestaff> {
         this.subtype.add("Equipment");
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
-        PutIntoGraveFromBattlefieldTriggeredAbility ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new GainLifeEffect(3));
+        DiesTriggeredAbility ability = new DiesTriggeredAbility(new GainLifeEffect(3));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }

@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.SaprolingToken;
@@ -55,7 +55,7 @@ public class SproutingThrinax extends CardImpl<SproutingThrinax> {
 		this.power = new MageInt(3);
 		this.toughness = new MageInt(3);
 
-		this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new CreateTokenEffect(saprolingToken, 3), false));
+		this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(saprolingToken, 3), false));
 	}
 
 	public SproutingThrinax(final SproutingThrinax card) {

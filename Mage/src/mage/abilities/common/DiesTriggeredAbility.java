@@ -35,23 +35,23 @@ import mage.abilities.effects.Effect;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PutIntoGraveFromBattlefieldTriggeredAbility extends ZoneChangeTriggeredAbility<PutIntoGraveFromBattlefieldTriggeredAbility> {
+public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility<DiesTriggeredAbility> {
 
-	public PutIntoGraveFromBattlefieldTriggeredAbility(Effect effect, boolean optional) {
-		super(Zone.BATTLEFIELD, Zone.GRAVEYARD, effect, "When {this} is put into a graveyard from the battlefield, ", optional);
+	public DiesTriggeredAbility(Effect effect, boolean optional) {
+		super(Zone.BATTLEFIELD, Zone.GRAVEYARD, effect, "When {this} dies, ", optional);
 	}
 
-	public PutIntoGraveFromBattlefieldTriggeredAbility(Effect effect) {
+	public DiesTriggeredAbility(Effect effect) {
 		this(effect, false);
 	}
 
-	public PutIntoGraveFromBattlefieldTriggeredAbility(PutIntoGraveFromBattlefieldTriggeredAbility ability) {
+	public DiesTriggeredAbility(DiesTriggeredAbility ability) {
 		super(ability);
 	}
 
 	@Override
-	public PutIntoGraveFromBattlefieldTriggeredAbility copy() {
-		return new PutIntoGraveFromBattlefieldTriggeredAbility(this);
+	public DiesTriggeredAbility copy() {
+		return new DiesTriggeredAbility(this);
 	}
 
 }

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterBasicLandCard;
@@ -50,7 +50,7 @@ public class MycosynthWellspring extends CardImpl<MycosynthWellspring> {
         this.expansionSetCode = "NPH";
 
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(filter))));
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(filter))));
+        this.addAbility(new DiesTriggeredAbility(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(filter))));
     }
 
     public MycosynthWellspring(final MycosynthWellspring card) {

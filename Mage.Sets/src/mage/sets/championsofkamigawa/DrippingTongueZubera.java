@@ -35,7 +35,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
@@ -61,7 +61,7 @@ public class DrippingTongueZubera extends CardImpl<DrippingTongueZubera> {
 		this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new CreateTokenEffect(new SpiritToken(), new DrippingTongueZuberaDynamicValue()), false));
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiritToken(), new DrippingTongueZuberaDynamicValue()), false));
         this.watchers.add(new DrippingTongueZuberaWatcher(ownerId));
     }
 

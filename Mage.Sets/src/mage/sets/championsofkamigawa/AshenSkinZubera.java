@@ -35,7 +35,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.Card;
@@ -60,7 +60,7 @@ public class AshenSkinZubera extends CardImpl<AshenSkinZubera> {
         this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        Ability ability = new PutIntoGraveFromBattlefieldTriggeredAbility(new DiscardTargetEffect(new AshenSkinZuberaDynamicValue()));
+        Ability ability = new DiesTriggeredAbility(new DiscardTargetEffect(new AshenSkinZuberaDynamicValue()));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
         this.watchers.add(new AshenSkinZuberaWatcher(ownerId));

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -51,7 +51,7 @@ public class PenumbraWurm extends CardImpl<PenumbraWurm> {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
         this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new CreateTokenEffect(new PenumbraWurmToken(), 1), false));
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new PenumbraWurmToken(), 1), false));
     }
 
     public PenumbraWurm(final PenumbraWurm card) {

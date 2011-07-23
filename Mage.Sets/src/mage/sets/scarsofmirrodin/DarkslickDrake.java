@@ -31,7 +31,7 @@ package mage.sets.scarsofmirrodin;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -52,7 +52,7 @@ public class DarkslickDrake extends CardImpl<DarkslickDrake> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DrawCardControllerEffect(1), false));
+        this.addAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(1), false));
     }
 
     public DarkslickDrake (final DarkslickDrake card) {
