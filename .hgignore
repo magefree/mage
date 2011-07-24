@@ -27,8 +27,9 @@ Mage/target
 
 releases
 Utils/author.txt
-Utils/newList.txt
-Utils/oldList.txt
+.metadata
+.project
+.settings
 syntax: regexp
 .class
 .jar
