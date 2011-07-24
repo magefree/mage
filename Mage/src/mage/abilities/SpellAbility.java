@@ -103,5 +103,5 @@ public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
 		spell.id = UUID.randomUUID();
 		return spell;
 	}
-
+	
 }

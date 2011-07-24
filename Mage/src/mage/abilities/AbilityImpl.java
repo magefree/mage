@@ -47,6 +47,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.PostResolveEffect;
 import mage.choices.Choice;
 import mage.choices.Choices;
 import mage.game.Game;
@@ -134,7 +135,8 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 		if (checkIfClause(game)) {
 			for (Effect effect: getEffects()) {
 				if (effect instanceof OneShotEffect) {
-					result &= effect.apply(game, this);
+					if (!(effect instanceof PostResolveEffect))
+						result &= effect.apply(game, this);
 				}
 				else {
 					game.addEffect((ContinuousEffect) effect, this);

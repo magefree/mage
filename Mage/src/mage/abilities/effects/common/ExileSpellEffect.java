@@ -29,16 +29,19 @@
 package mage.abilities.effects.common;
 
 import java.io.ObjectStreamException;
+import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.PostResolveEffect;
+import mage.cards.Card;
 import mage.game.Game;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ExileSpellEffect extends OneShotEffect<ExileSpellEffect> {
+public class ExileSpellEffect extends PostResolveEffect<ExileSpellEffect> {
 
 	private static final ExileSpellEffect fINSTANCE =  new ExileSpellEffect();
 
@@ -47,7 +50,6 @@ public class ExileSpellEffect extends OneShotEffect<ExileSpellEffect> {
 	}
 
 	private ExileSpellEffect() {
-		super(Outcome.Exile);
 		staticText = "Exile {this}";
 	}
 	
@@ -56,13 +58,12 @@ public class ExileSpellEffect extends OneShotEffect<ExileSpellEffect> {
 	}
 
 	@Override
-	public boolean apply(Game game, Ability source) {
-		//this effect is applied when a spell resolves - see Spell.java
-		return true;
+	public ExileSpellEffect copy() {
+		return fINSTANCE;
 	}
 
 	@Override
-	public ExileSpellEffect copy() {
-		return fINSTANCE;
+	public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
+		game.getExile().getPermanentExile().add(card);
 	}
 }

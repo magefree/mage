@@ -343,6 +343,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		//20100716 - 701.7
 		removeFromHand(card, game);
 		card.moveToZone(Zone.GRAVEYARD, source==null?null:source.getId(), game, false);
+		
 		game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source==null?null:source.getId(), playerId));
 		return true;
 	}

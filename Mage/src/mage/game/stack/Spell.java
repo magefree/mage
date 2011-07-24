@@ -30,8 +30,6 @@ package mage.game.stack;
 
 import mage.Mana;
 import mage.abilities.SpellAbility;
-import mage.abilities.effects.common.ReturnToHandSpellEffect;
-import mage.abilities.effects.common.ShuffleSpellEffect;
 import mage.game.*;
 import java.util.List;
 import java.util.UUID;
@@ -45,7 +43,8 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.effects.common.ExileSpellEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.PostResolveEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.game.events.GameEvent;
@@ -88,17 +87,13 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 					result = true;
 
 				if (!copiedSpell) {
-					if (ability.getEffects().contains(ExileSpellEffect.getInstance()))
-						game.getExile().getPermanentExile().add(card);
-					else if (ability.getEffects().contains(ShuffleSpellEffect.getInstance())) {
-						card.moveToZone(Zone.LIBRARY, ability.getId(), game, false);
-						Player player = game.getPlayer(controllerId);
-						if (player != null) player.shuffleLibrary(game);
-					} else if (ability.getEffects().contains(ReturnToHandSpellEffect.getInstance())) {
-                        card.moveToZone(Zone.HAND, ability.getId(), game, false);
-                    } else {
-						card.moveToZone(Zone.GRAVEYARD, ability.getId(), game, false);
+					for (Effect effect: ability.getEffects()) {
+						if (effect instanceof PostResolveEffect) {
+							((PostResolveEffect)effect).postResolve(card, ability, controllerId, game);
+							return result;
+						}
 					}
+					card.moveToZone(Zone.GRAVEYARD, ability.getId(), game, false);
 				}
 
 				return result;

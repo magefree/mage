@@ -31,15 +31,20 @@ package mage.abilities.effects.common;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.game.Game;
 
 import java.io.ObjectStreamException;
+import java.util.UUID;
+import mage.Constants.Zone;
+import mage.abilities.effects.PostResolveEffect;
+import mage.players.Player;
 
 /**
  *
  * @author nantuko
  */
-public class ShuffleSpellEffect extends OneShotEffect<ShuffleSpellEffect> {
+public class ShuffleSpellEffect extends PostResolveEffect<ShuffleSpellEffect> {
 
 	private static final ShuffleSpellEffect fINSTANCE =  new ShuffleSpellEffect();
 
@@ -48,7 +53,6 @@ public class ShuffleSpellEffect extends OneShotEffect<ShuffleSpellEffect> {
 	}
 
 	private ShuffleSpellEffect() {
-		super(Outcome.Exile);
 		staticText = "Shuffle {this} into its owner's library";
 	}
 	
@@ -58,12 +62,18 @@ public class ShuffleSpellEffect extends OneShotEffect<ShuffleSpellEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		//this effect is applied when a spell resolves - see Spell.java
 		return true;
 	}
 
 	@Override
 	public ShuffleSpellEffect copy() {
 		return fINSTANCE;
+	}
+
+	@Override
+	public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
+		card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+		Player player = game.getPlayer(card.getOwnerId());
+		if (player != null) player.shuffleLibrary(game);
 	}
 }
