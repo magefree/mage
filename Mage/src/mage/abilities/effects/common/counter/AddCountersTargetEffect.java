@@ -60,7 +60,7 @@ public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffe
 	@Override
 	public boolean apply(Game game, Ability source) {
 		int affectedTargets = 0;
-		for (UUID uuid : source.getTargets().get(0).getTargets()) {
+		for (UUID uuid : targetPointer.getTargets(source)) {
 			Permanent permanent = game.getPermanent(uuid);
 			if (permanent != null) {
 				if (counter != null) {
@@ -88,7 +88,9 @@ public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffe
 		else {
 			sb.append("a ").append(counter.getName()).append(" counter on target ");
 		}
-		sb.append(mode.getTargets().get(0).getTargetName());
+        // TODO add normal text infrastructure for target pointers
+        if (mode.getTargets().size() > 0)
+		    sb.append(mode.getTargets().get(0).getTargetName());
 		return sb.toString();
 	}
 
