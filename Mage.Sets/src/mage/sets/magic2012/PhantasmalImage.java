@@ -1,0 +1,131 @@
+/*
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ *  Redistribution and use in source and binary forms, with or without modification, are
+ *  permitted provided that the following conditions are met:
+ *
+ *     1. Redistributions of source code must retain the above copyright notice, this list of
+ *        conditions and the following disclaimer.
+ *
+ *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *        of conditions and the following disclaimer in the documentation and/or other materials
+ *        provided with the distribution.
+ *
+ *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ *  The views and conclusions contained in the software and documentation are those of the
+ *  authors and should not be interpreted as representing official policies, either expressed
+ *  or implied, of BetaSteward_at_googlemail.com.
+ */
+package mage.sets.magic2012;
+
+import java.util.UUID;
+import mage.Constants;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.target.common.TargetCreaturePermanent;
+
+/**
+ *
+ * @author North
+ */
+public class PhantasmalImage extends CardImpl<PhantasmalImage> {
+
+    private static final String abilityText = "You may have Phantasmal Image enter the battlefield as a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it gains \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
+
+    public PhantasmalImage(UUID ownerId) {
+        super(ownerId, 72, "Phantasmal Image", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        this.expansionSetCode = "M12";
+        this.subtype.add("Illusion");
+
+        this.color.setBlue(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
+
+        Ability ability = new EntersBattlefieldAbility(new PhantasmalImageCopyEffect(), abilityText);
+		ability.addTarget(new TargetCreaturePermanent());
+		this.addAbility(ability);
+    }
+
+    public PhantasmalImage(final PhantasmalImage card) {
+        super(card);
+    }
+
+    @Override
+    public PhantasmalImage copy() {
+        return new PhantasmalImage(this);
+    }
+}
+
+class PhantasmalImageCopyEffect extends ContinuousEffectImpl<PhantasmalImageCopyEffect> {
+
+    public PhantasmalImageCopyEffect() {
+        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.CopyEffects_1, Constants.SubLayer.NA, Constants.Outcome.BecomeCreature);
+    }
+
+    public PhantasmalImageCopyEffect(final PhantasmalImageCopyEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Card card = game.getCard(source.getFirstTarget());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        permanent.setName(card.getName());
+        permanent.setExpansionSetCode(card.getExpansionSetCode());
+        permanent.getColor().setColor(card.getColor());
+        permanent.getManaCost().clear();
+        permanent.getManaCost().add(card.getManaCost());
+
+        permanent.getCardType().clear();
+        for (CardType type : card.getCardType()) {
+            permanent.getCardType().add(type);
+        }
+
+        permanent.getSubtype().clear();
+        for (String type : card.getSubtype()) {
+            permanent.getSubtype().add(type);
+        }
+        permanent.getSubtype().add("Illusion");
+
+        permanent.getSupertype().clear();
+        for (String type : card.getSupertype()) {
+            permanent.getSupertype().add(type);
+        }
+
+        permanent.getAbilities().clear();
+        for (Ability ability : card.getAbilities()) {
+            permanent.addAbility(ability);
+        }
+
+        permanent.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
+
+		permanent.getPower().setValue(card.getPower().getValue());
+		permanent.getToughness().setValue(card.getToughness().getValue());
+
+        return true;
+    }
+
+    @Override
+    public PhantasmalImageCopyEffect copy() {
+        return new PhantasmalImageCopyEffect(this);
+    }
+}
