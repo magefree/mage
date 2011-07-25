@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,48 +20,49 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.abilities.common;
 
-package mage.sets.magic2011;
-
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
-import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.cards.CardImpl;
+import mage.Constants.Zone;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
  * @author North
  */
-public class PhantomBeast extends CardImpl<PhantomBeast> {
+public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl<BecomesTargetTriggeredAbility> {
 
-	public PhantomBeast(UUID ownerId) {
-		super(ownerId, 69, "Phantom Beast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-		this.expansionSetCode = "M11";
-		this.subtype.add("Illusion");
-		this.subtype.add("Beast");
-        
-		this.color.setBlue(true);
-		this.power = new MageInt(4);
-		this.toughness = new MageInt(5);
+    public BecomesTargetTriggeredAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect);
+    }
 
-		this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
-	}
+    public BecomesTargetTriggeredAbility(final BecomesTargetTriggeredAbility ability) {
+        super(ability);
+    }
 
-	public PhantomBeast(final PhantomBeast card) {
-		super(card);
-	}
+    @Override
+    public BecomesTargetTriggeredAbility copy() {
+        return new BecomesTargetTriggeredAbility(this);
+    }
 
-	@Override
-	public PhantomBeast copy() {
-		return new PhantomBeast(this);
-	}
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == EventType.TARGETED && event.getTargetId().equals(sourceId)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "When {this} becomes the target of a spell or ability, " + super.getRule();
+    }
 }

@@ -25,46 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.darksteel;
+package mage.sets.guildpact;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.BlocksTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
 
 /**
- * @author Loki
+ *
+ * @author North
  */
-public class Spincrusher extends CardImpl<Spincrusher> {
+public class Petrahydrox extends CardImpl<Petrahydrox> {
 
-    public Spincrusher(UUID ownerId) {
-        super(ownerId, 144, "Spincrusher", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
-        this.expansionSetCode = "DST";
-        this.subtype.add("Construct");
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-        this.addAbility(new BlocksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilitySourceEffect(UnblockableAbility.getInstance(), Constants.Duration.EndOfTurn), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1))));
+    public Petrahydrox(UUID ownerId) {
+        super(ownerId, 148, "Petrahydrox", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U/R}");
+        this.expansionSetCode = "GPT";
+        this.subtype.add("Weird");
+
+        this.color.setRed(true);
+        this.color.setBlue(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        this.addAbility(new BecomesTargetTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public Spincrusher(final Spincrusher card) {
+    public Petrahydrox(final Petrahydrox card) {
         super(card);
     }
 
     @Override
-    public Spincrusher copy() {
-        return new Spincrusher(this);
+    public Petrahydrox copy() {
+        return new Petrahydrox(this);
     }
-
 }

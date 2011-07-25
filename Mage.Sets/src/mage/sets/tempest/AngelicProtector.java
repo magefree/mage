@@ -25,46 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.darksteel;
+package mage.sets.tempest;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.BlocksTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
 
 /**
- * @author Loki
+ *
+ * @author North
  */
-public class Spincrusher extends CardImpl<Spincrusher> {
+public class AngelicProtector extends CardImpl<AngelicProtector> {
 
-    public Spincrusher(UUID ownerId) {
-        super(ownerId, 144, "Spincrusher", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
-        this.expansionSetCode = "DST";
-        this.subtype.add("Construct");
-        this.power = new MageInt(0);
+    public AngelicProtector(UUID ownerId) {
+        super(ownerId, 214, "Angelic Protector", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Angel");
+
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new BlocksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilitySourceEffect(UnblockableAbility.getInstance(), Constants.Duration.EndOfTurn), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1))));
+
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new BecomesTargetTriggeredAbility(new BoostSourceEffect(0, 3, Duration.EndOfTurn)));
     }
 
-    public Spincrusher(final Spincrusher card) {
+    public AngelicProtector(final AngelicProtector card) {
         super(card);
     }
 
     @Override
-    public Spincrusher copy() {
-        return new Spincrusher(this);
+    public AngelicProtector copy() {
+        return new AngelicProtector(this);
     }
-
 }

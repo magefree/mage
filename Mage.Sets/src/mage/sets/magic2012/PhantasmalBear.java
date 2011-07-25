@@ -25,46 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.darksteel;
+package mage.sets.magic2012;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.BlocksTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
 
 /**
- * @author Loki
+ *
+ * @author North
  */
-public class Spincrusher extends CardImpl<Spincrusher> {
+public class PhantasmalBear extends CardImpl<PhantasmalBear> {
 
-    public Spincrusher(UUID ownerId) {
-        super(ownerId, 144, "Spincrusher", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
-        this.expansionSetCode = "DST";
-        this.subtype.add("Construct");
-        this.power = new MageInt(0);
+    public PhantasmalBear(UUID ownerId) {
+        super(ownerId, 70, "Phantasmal Bear", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
+        this.expansionSetCode = "M12";
+        this.subtype.add("Bear");
+        this.subtype.add("Illusion");
+
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new BlocksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilitySourceEffect(UnblockableAbility.getInstance(), Constants.Duration.EndOfTurn), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1))));
+
+        this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
     }
 
-    public Spincrusher(final Spincrusher card) {
+    public PhantasmalBear(final PhantasmalBear card) {
         super(card);
     }
 
     @Override
-    public Spincrusher copy() {
-        return new Spincrusher(this);
+    public PhantasmalBear copy() {
+        return new PhantasmalBear(this);
     }
-
 }
