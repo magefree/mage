@@ -25,50 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.zendikar;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CantCounterSourceEffect;
-import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.filter.FilterCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class ThrunTheLastTroll extends CardImpl<ThrunTheLastTroll> {
+public class TrapmakersSnare extends CardImpl<TrapmakersSnare> {
 
-    public ThrunTheLastTroll(UUID ownerId) {
-        super(ownerId, 92, "Thrun, the Last Troll", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "MBS";
-        this.supertype.add("Legendary");
-        this.subtype.add("Troll");
-        this.subtype.add("Shaman");
+    private static final FilterCard filter = new FilterCard("Trap card");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CantCounterSourceEffect()));
-        this.addAbility(new HexproofAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
+    static {
+        filter.getSubtype().add("Trap");
     }
 
-    public ThrunTheLastTroll(final ThrunTheLastTroll card) {
+    public TrapmakersSnare(UUID ownerId) {
+        super(ownerId, 74, "Trapmaker's Snare", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+        this.expansionSetCode = "ZEN";
+
+        this.color.setBlue(true);
+
+        this.getSpellAbility().addEffect(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(filter)));
+    }
+
+    public TrapmakersSnare(final TrapmakersSnare card) {
         super(card);
     }
 
     @Override
-    public ThrunTheLastTroll copy() {
-        return new ThrunTheLastTroll(this);
+    public TrapmakersSnare copy() {
+        return new TrapmakersSnare(this);
     }
 }

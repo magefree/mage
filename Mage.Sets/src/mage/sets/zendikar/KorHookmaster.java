@@ -25,50 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.zendikar;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.Constants.TargetController;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CantCounterSourceEffect;
-import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.SkipNextUntapTargetEffect;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class ThrunTheLastTroll extends CardImpl<ThrunTheLastTroll> {
+public class KorHookmaster extends CardImpl<KorHookmaster> {
 
-    public ThrunTheLastTroll(UUID ownerId) {
-        super(ownerId, 92, "Thrun, the Last Troll", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "MBS";
-        this.supertype.add("Legendary");
-        this.subtype.add("Troll");
-        this.subtype.add("Shaman");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CantCounterSourceEffect()));
-        this.addAbility(new HexproofAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
+    static {
+        filter.setTargetController(TargetController.OPPONENT);
     }
 
-    public ThrunTheLastTroll(final ThrunTheLastTroll card) {
+    public KorHookmaster(UUID ownerId) {
+        super(ownerId, 20, "Kor Hookmaster", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Kor");
+        this.subtype.add("Soldier");
+
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect());
+        ability.addEffect(new SkipNextUntapTargetEffect());
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public KorHookmaster(final KorHookmaster card) {
         super(card);
     }
 
     @Override
-    public ThrunTheLastTroll copy() {
-        return new ThrunTheLastTroll(this);
+    public KorHookmaster copy() {
+        return new KorHookmaster(this);
     }
 }

@@ -25,50 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.zendikar;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CantCounterSourceEffect;
-import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.filter.FilterCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class ThrunTheLastTroll extends CardImpl<ThrunTheLastTroll> {
+public class KorCartographer extends CardImpl<KorCartographer> {
 
-    public ThrunTheLastTroll(UUID ownerId) {
-        super(ownerId, 92, "Thrun, the Last Troll", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "MBS";
-        this.supertype.add("Legendary");
-        this.subtype.add("Troll");
-        this.subtype.add("Shaman");
+    private static final FilterCard filter = new FilterCard("Plains card");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CantCounterSourceEffect()));
-        this.addAbility(new HexproofAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
+    static {
+        filter.getSubtype().add("Plains");
     }
 
-    public ThrunTheLastTroll(final ThrunTheLastTroll card) {
+    public KorCartographer(UUID ownerId) {
+        super(ownerId, 18, "Kor Cartographer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Kor");
+        this.subtype.add("Scout");
+
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true), true));
+    }
+
+    public KorCartographer(final KorCartographer card) {
         super(card);
     }
 
     @Override
-    public ThrunTheLastTroll copy() {
-        return new ThrunTheLastTroll(this);
+    public KorCartographer copy() {
+        return new KorCartographer(this);
     }
 }

@@ -25,50 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.zendikar;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CantCounterSourceEffect;
-import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class ThrunTheLastTroll extends CardImpl<ThrunTheLastTroll> {
+public class SeismicShudder extends CardImpl<SeismicShudder> {
 
-    public ThrunTheLastTroll(UUID ownerId) {
-        super(ownerId, 92, "Thrun, the Last Troll", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "MBS";
-        this.supertype.add("Legendary");
-        this.subtype.add("Troll");
-        this.subtype.add("Shaman");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CantCounterSourceEffect()));
-        this.addAbility(new HexproofAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
+    static {
+        filter.getAbilities().add(FlyingAbility.getInstance());
+        filter.setNotAbilities(true);
     }
 
-    public ThrunTheLastTroll(final ThrunTheLastTroll card) {
+    public SeismicShudder(UUID ownerId) {
+        super(ownerId, 147, "Seismic Shudder", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
+        this.expansionSetCode = "ZEN";
+
+        this.color.setRed(true);
+
+        this.getSpellAbility().addEffect(new DamageAllEffect(1, filter));
+    }
+
+    public SeismicShudder(final SeismicShudder card) {
         super(card);
     }
 
     @Override
-    public ThrunTheLastTroll copy() {
-        return new ThrunTheLastTroll(this);
+    public SeismicShudder copy() {
+        return new SeismicShudder(this);
     }
 }

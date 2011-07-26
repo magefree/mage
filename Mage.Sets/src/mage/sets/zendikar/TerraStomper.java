@@ -25,50 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.zendikar;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CantCounterSourceEffect;
-import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class ThrunTheLastTroll extends CardImpl<ThrunTheLastTroll> {
+public class TerraStomper extends CardImpl<TerraStomper> {
 
-    public ThrunTheLastTroll(UUID ownerId) {
-        super(ownerId, 92, "Thrun, the Last Troll", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "MBS";
-        this.supertype.add("Legendary");
-        this.subtype.add("Troll");
-        this.subtype.add("Shaman");
+    public TerraStomper(UUID ownerId) {
+        super(ownerId, 187, "Terra Stomper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Beast");
 
         this.color.setGreen(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        this.power = new MageInt(8);
+        this.toughness = new MageInt(8);
 
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new CantCounterSourceEffect()));
-        this.addAbility(new HexproofAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
+        this.addAbility(TrampleAbility.getInstance());
     }
 
-    public ThrunTheLastTroll(final ThrunTheLastTroll card) {
+    public TerraStomper(final TerraStomper card) {
         super(card);
     }
 
     @Override
-    public ThrunTheLastTroll copy() {
-        return new ThrunTheLastTroll(this);
+    public TerraStomper copy() {
+        return new TerraStomper(this);
     }
 }

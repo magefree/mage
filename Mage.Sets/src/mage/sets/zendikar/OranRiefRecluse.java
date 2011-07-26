@@ -25,50 +25,62 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.zendikar;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CantCounterSourceEffect;
-import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.KickerAbility;
+import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class ThrunTheLastTroll extends CardImpl<ThrunTheLastTroll> {
+public class OranRiefRecluse extends CardImpl<OranRiefRecluse> {
 
-    public ThrunTheLastTroll(UUID ownerId) {
-        super(ownerId, 92, "Thrun, the Last Troll", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "MBS";
-        this.supertype.add("Legendary");
-        this.subtype.add("Troll");
-        this.subtype.add("Shaman");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CantCounterSourceEffect()));
-        this.addAbility(new HexproofAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
+    static {
+        filter.getAbilities().add(FlyingAbility.getInstance());
     }
 
-    public ThrunTheLastTroll(final ThrunTheLastTroll card) {
+    public OranRiefRecluse(UUID ownerId) {
+        super(ownerId, 173, "Oran-Rief Recluse", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Spider");
+
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
+
+        this.addAbility(ReachAbility.getInstance());
+
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
+        ability.addTarget(new TargetCreaturePermanent(filter));
+
+        KickerAbility kickerAbility = new KickerAbility(new GainAbilitySourceEffect(ability, Duration.WhileOnBattlefield), false);
+        kickerAbility.addManaCost(new ManaCostsImpl("{2}{G}"));
+        this.addAbility(kickerAbility);
+    }
+
+    public OranRiefRecluse(final OranRiefRecluse card) {
         super(card);
     }
 
     @Override
-    public ThrunTheLastTroll copy() {
-        return new ThrunTheLastTroll(this);
+    public OranRiefRecluse copy() {
+        return new OranRiefRecluse(this);
     }
 }

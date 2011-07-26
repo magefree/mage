@@ -25,50 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodinbesieged;
+package mage.sets.zendikar;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CantCounterSourceEffect;
-import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.effects.common.PreventDamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class ThrunTheLastTroll extends CardImpl<ThrunTheLastTroll> {
+public class ShieldmatesBlessing extends CardImpl<ShieldmatesBlessing> {
 
-    public ThrunTheLastTroll(UUID ownerId) {
-        super(ownerId, 92, "Thrun, the Last Troll", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.expansionSetCode = "MBS";
-        this.supertype.add("Legendary");
-        this.subtype.add("Troll");
-        this.subtype.add("Shaman");
+    public ShieldmatesBlessing(UUID ownerId) {
+        super(ownerId, 35, "Shieldmate's Blessing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
+        this.expansionSetCode = "ZEN";
 
-        this.color.setGreen(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        this.color.setWhite(true);
 
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CantCounterSourceEffect()));
-        this.addAbility(new HexproofAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
+        this.getSpellAbility().addEffect(new PreventDamageTargetEffect(Duration.EndOfTurn, 3));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
-    public ThrunTheLastTroll(final ThrunTheLastTroll card) {
+    public ShieldmatesBlessing(final ShieldmatesBlessing card) {
         super(card);
     }
 
     @Override
-    public ThrunTheLastTroll copy() {
-        return new ThrunTheLastTroll(this);
+    public ShieldmatesBlessing copy() {
+        return new ShieldmatesBlessing(this);
     }
 }
