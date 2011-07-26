@@ -94,6 +94,7 @@ public interface Permanent extends Card {
 
 	public void endOfTurn(Game game);
 	public void checkTriggers(GameEvent event, Game game);
+	public void checkControlChanged(Game game);
 	public int getTurnsOnBattlefield();
 
 	public void addPower(int power);

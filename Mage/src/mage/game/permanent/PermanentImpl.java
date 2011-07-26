@@ -58,6 +58,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	protected UUID originalControllerId;
 	protected UUID controllerId;
 	protected UUID beforeResetControllerId;
+	protected boolean controllerChanged;
 	protected int damage;
 	protected boolean controlledFromStartOfTurn;
 	protected int turnsOnBattlefield;
@@ -118,6 +119,10 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	public void reset(Game game) {
 		this.beforeResetControllerId = this.controllerId;
 		this.controllerId = originalControllerId;
+		if (!controllerId.equals(beforeResetControllerId))
+			controllerChanged = true;
+		else
+			controllerChanged = false;
 		this.maxBlocks = 1;
 	}
 
@@ -357,9 +362,13 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 				// so it will lead to this.controlledFromStartOfTurn set to false over and over
 				// because of reset(game) method called before applying effect as state-based action
 				// that changes this.controllerId to original one (actually owner)
-				if (controllerId != beforeResetControllerId) {
+				if (!controllerId.equals(beforeResetControllerId)) {
 					this.removeFromCombat(game);
 					this.controlledFromStartOfTurn = false;
+					this.controllerChanged = true;
+				}
+				else {
+					this.controllerChanged = false;
 				}
 				this.controllerId = controllerId;
 				this.abilities.setControllerId(controllerId);
@@ -369,6 +378,14 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		return false;
 	}
 
+	@Override
+	public void checkControlChanged(Game game) {
+		if (this.controllerChanged) {
+			game.fireEvent(new GameEvent(EventType.LOST_CONTROL, objectId, objectId, beforeResetControllerId));
+			game.fireEvent(new GameEvent(EventType.GAINED_CONTROL, objectId, objectId, controllerId));
+		}
+	}
+	
 	@Override
 	public List<UUID> getAttachments() {
 		return attachments;

@@ -267,6 +267,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 		}
 		battlefield.reset(game);
 		effects.apply(game);
+		battlefield.fireControlChangeEvents(game);
 	}
 
 	public void removeEotEffects(Game game) {
