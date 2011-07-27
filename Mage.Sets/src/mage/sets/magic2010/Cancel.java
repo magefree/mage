@@ -34,7 +34,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Cancel extends mage.sets.shardsofalara.Cancel {
+public class Cancel extends mage.sets.tenth.Cancel {
 
 	public Cancel(UUID ownerId) {
 		super(ownerId);
