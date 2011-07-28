@@ -12,6 +12,7 @@ Champions of Kamigawa|championsofkamigawa|
 Ravnica: City of Guilds|ravnika|
 Guildpact|guildpact|
 Dissension|dissension|
+Shadowmoor|shadowmoor|
 Eventide|eventide|
 Shards of Alara|shardsofalara|
 Conflux|conflux|
