@@ -92,7 +92,8 @@ class LivewireLashAbility extends TriggeredAbilityImpl<LivewireLashAbility> {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.TARGETED && event.getTargetId().equals(sourceId)) {
-            if (game.getCard(event.getSourceId()).getCardType().contains(CardType.SORCERY)) {
+            if (game.getCard(event.getSourceId()).getCardType().contains(CardType.SORCERY) ||
+					game.getCard(event.getSourceId()).getCardType().contains(CardType.INSTANT)) {
                 return true;
             }
         }
