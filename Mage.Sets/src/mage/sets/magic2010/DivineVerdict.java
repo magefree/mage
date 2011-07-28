@@ -25,42 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.mirrodinbesieged;
+package mage.sets.magic2010;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.continious.BoostAllEffect;
-import mage.abilities.effects.common.continious.GainAbilityAllEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterAttackingCreature;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class RallyTheForces extends CardImpl<RallyTheForces> {
-    private static final FilterAttackingCreature filter = new FilterAttackingCreature("Attacking creatures");
+public class DivineVerdict extends CardImpl<DivineVerdict> {
 
-    public RallyTheForces (UUID ownerId) {
-        super(ownerId, 73, "Rally the Forces", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "MBS";
-		this.color.setRed(true);
-        this.getSpellAbility().addEffect(new BoostAllEffect(1, 1, Constants.Duration.EndOfTurn, filter, false));
-        this.getSpellAbility().addEffect(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Constants.Duration.EndOfTurn, filter, false));
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking or blocking creature");
+
+    static {
+        filter.setAttacking(true);
+        filter.setUseAttacking(true);
+        filter.setBlocking(true);
+        filter.setUseBlocking(true);
     }
 
-    public RallyTheForces (final RallyTheForces card) {
+    public DivineVerdict(UUID ownerId) {
+        super(ownerId, 8, "Divine Verdict", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
+        this.expansionSetCode = "M10";
+
+        this.color.setWhite(true);
+
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+    }
+
+    public DivineVerdict(final DivineVerdict card) {
         super(card);
     }
 
     @Override
-    public RallyTheForces copy() {
-        return new RallyTheForces(this);
+    public DivineVerdict copy() {
+        return new DivineVerdict(this);
     }
-
 }

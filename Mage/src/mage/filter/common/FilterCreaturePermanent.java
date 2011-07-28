@@ -44,8 +44,6 @@ public class FilterCreaturePermanent<T extends FilterCreaturePermanent<T>> exten
 	protected boolean attacking;
 	protected boolean useBlocking;
 	protected boolean blocking;
-	protected boolean useTapped;
-	protected boolean tapped;
 
 	public FilterCreaturePermanent() {
 		this("creature");
@@ -75,13 +73,16 @@ public class FilterCreaturePermanent<T extends FilterCreaturePermanent<T>> exten
 		if (!super.match(permanent))
 			return notFilter;
 
-		if (useAttacking && permanent.isAttacking() != attacking)
-			return notFilter;
+		if (useAttacking && permanent.isAttacking() != attacking) {
+            if (useBlocking) {
+                if ((permanent.getBlocking() > 0) != blocking)
+                    return notFilter;
+            } else
+                return notFilter;
+        }
+
 
 		if (useBlocking && (permanent.getBlocking() > 0) != blocking)
-			return notFilter;
-
-		if (useTapped && permanent.isTapped() != tapped)
 			return notFilter;
 
 		return !notFilter;
@@ -101,14 +102,6 @@ public class FilterCreaturePermanent<T extends FilterCreaturePermanent<T>> exten
 
 	public void setBlocking ( boolean blocking ) {
 		this.blocking = blocking;
-	}
-
-	public void setUseTapped ( boolean useTapped ) {
-		this.useTapped = useTapped;
-	}
-
-	public void setTapped ( boolean tapped ) {
-		this.tapped = tapped;
 	}
 
 	@Override

@@ -25,42 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.mirrodinbesieged;
+package mage.sets.magic2010;
 
 import java.util.UUID;
-
-import mage.Constants;
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.continious.BoostAllEffect;
-import mage.abilities.effects.common.continious.GainAbilityAllEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.Constants.Zone;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.BoostEquippedEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterAttackingCreature;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class RallyTheForces extends CardImpl<RallyTheForces> {
-    private static final FilterAttackingCreature filter = new FilterAttackingCreature("Attacking creatures");
+public class GorgonFlail extends CardImpl<GorgonFlail> {
 
-    public RallyTheForces (UUID ownerId) {
-        super(ownerId, 73, "Rally the Forces", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "MBS";
-		this.color.setRed(true);
-        this.getSpellAbility().addEffect(new BoostAllEffect(1, 1, Constants.Duration.EndOfTurn, filter, false));
-        this.getSpellAbility().addEffect(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Constants.Duration.EndOfTurn, filter, false));
+    public GorgonFlail(UUID ownerId) {
+        super(ownerId, 211, "Gorgon Flail", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "M10";
+        this.subtype.add("Equipment");
+
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DeathtouchAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{2}")));
     }
 
-    public RallyTheForces (final RallyTheForces card) {
+    public GorgonFlail(final GorgonFlail card) {
         super(card);
     }
 
     @Override
-    public RallyTheForces copy() {
-        return new RallyTheForces(this);
+    public GorgonFlail copy() {
+        return new GorgonFlail(this);
     }
-
 }
