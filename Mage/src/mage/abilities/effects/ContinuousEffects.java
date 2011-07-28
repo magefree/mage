@@ -463,6 +463,7 @@ public class ContinuousEffects implements Serializable {
 		for (ContinuousEffect effect: layer) {
 			effect.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, abilityMap.get(effect.getId()), game);
 		}
+		layerEffects = getLayeredEffects(game);
 		layer = filterLayeredEffects(layerEffects, Layer.PTChangingEffects_7);
 		for (ContinuousEffect effect: layer) {
 			effect.apply(Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, abilityMap.get(effect.getId()), game);

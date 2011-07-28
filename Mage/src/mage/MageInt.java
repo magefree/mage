@@ -33,7 +33,7 @@ import mage.util.Copyable;
 
 public class MageInt implements Serializable, Copyable<MageInt> {
 
-	public static MageInt EmptyMageInt = new MageInt(0, "");
+	public static MageInt EmptyMageInt = new MageInt(Integer.MIN_VALUE, null);
 	
 	protected int baseValue;
 	protected String cardValue = "";
@@ -50,6 +50,8 @@ public class MageInt implements Serializable, Copyable<MageInt> {
 
 	@Override
 	public MageInt copy() {
+		if (this == EmptyMageInt)
+			return this;
 		return new MageInt(baseValue, cardValue);
 	}
 	
