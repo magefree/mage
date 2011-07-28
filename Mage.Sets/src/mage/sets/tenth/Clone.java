@@ -52,7 +52,7 @@ public class Clone extends CardImpl<Clone> {
 		this.power = new MageInt(0);
 		this.toughness = new MageInt(0);
 
-		Ability ability = new EntersBattlefieldAbility(new CopyEffect(), "You may have Clone enter the battlefield as a copy of any creature on the battlefield");
+		Ability ability = new EntersBattlefieldAbility(new CopyEffect(), "You may have {this} enter the battlefield as a copy of any creature on the battlefield");
 		ability.addTarget(new TargetCreaturePermanent());
 		this.addAbility(ability);
 	}

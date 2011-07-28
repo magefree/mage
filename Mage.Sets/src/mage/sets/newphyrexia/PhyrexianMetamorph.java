@@ -65,7 +65,7 @@ public class PhyrexianMetamorph extends CardImpl<PhyrexianMetamorph> {
 		this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
-        Ability ability = new EntersBattlefieldAbility(new PhyrexianMetamorphEffect(), "You may have Phyrexian Metamorph enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types");
+        Ability ability = new EntersBattlefieldAbility(new PhyrexianMetamorphEffect(), "You may have {this} enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types");
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }

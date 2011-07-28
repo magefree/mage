@@ -54,7 +54,7 @@ public class SurgeNode extends CardImpl<SurgeNode> {
     public SurgeNode (UUID ownerId) {
         super(ownerId, 160, "Surge Node", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "NPH";
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(6))), "Surge Node gets six charge counters"));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(6))), "{this} gets six charge counters"));
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.CHARGE.createInstance()), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));

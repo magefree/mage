@@ -57,7 +57,7 @@ public class SigilOfDistinction extends CardImpl<SigilOfDistinction> {
         super(ownerId, 219, "Sigil of Distinction", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{X}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Equipment");
-        this.addAbility(new EntersBattlefieldAbility(new SigilOfDistinctionEffect(), "Sigil of Distinction enters the battlefield with X charge counters on it"));
+        this.addAbility(new EntersBattlefieldAbility(new SigilOfDistinctionEffect(), "{this} enters the battlefield with X charge counters on it"));
         this.addAbility(new EquipAbility(Outcome.AddAbility, new RemoveCountersSourceCost(CounterType.CHARGE.createInstance())));
         BoostEquippedEffect effect = new BoostEquippedEffect(new CountersCount(CounterType.CHARGE), new CountersCount(CounterType.CHARGE));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));

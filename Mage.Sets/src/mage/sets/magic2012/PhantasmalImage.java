@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PhantasmalImage extends CardImpl<PhantasmalImage> {
 
-    private static final String abilityText = "You may have Phantasmal Image enter the battlefield as a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it gains \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
+    private static final String abilityText = "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it gains \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
 
     public PhantasmalImage(UUID ownerId) {
         super(ownerId, 72, "Phantasmal Image", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");

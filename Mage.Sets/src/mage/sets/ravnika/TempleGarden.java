@@ -51,7 +51,7 @@ public class TempleGarden extends CardImpl<TempleGarden> {
         this.subtype.add("Plains");
         this.addAbility(new GreenManaAbility());
         this.addAbility(new WhiteManaAbility());
-        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Temple Garden enters the battlefield, you may pay 2 life. If you don't, Temple Garden enters the battlefield tapped"));
+        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As {this} enters the battlefield, you may pay 2 life. If you don't, {this} enters the battlefield tapped"));
     }
 
     public TempleGarden (final TempleGarden card) {

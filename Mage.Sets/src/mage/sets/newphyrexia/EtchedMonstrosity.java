@@ -57,7 +57,7 @@ public class EtchedMonstrosity extends CardImpl<EtchedMonstrosity> {
         this.subtype.add("Golem");
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(5)), "Etched Monstrosity gets five -1/-1 counters"));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(5)), "{this} gets five -1/-1 counters"));
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardTargetEffect(3), new ManaCostsImpl("{W}{U}{B}{R}{G}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.M1M1.createInstance(5)));
         ability.addTarget(new TargetPlayer());

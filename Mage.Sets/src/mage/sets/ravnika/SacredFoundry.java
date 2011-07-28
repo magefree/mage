@@ -53,7 +53,7 @@ public class SacredFoundry extends CardImpl<SacredFoundry> {
         this.subtype.add("Plains");
         this.addAbility(new RedManaAbility());
         this.addAbility(new WhiteManaAbility());
-        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As Sacred Foundry enters the battlefield, you may pay 2 life. If you don't, Sacred Foundry enters the battlefield tapped"));
+        this.addAbility(new EntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), "As {this} enters the battlefield, you may pay 2 life. If you don't, {this} enters the battlefield tapped"));
     }
 
     public SacredFoundry (final SacredFoundry card) {

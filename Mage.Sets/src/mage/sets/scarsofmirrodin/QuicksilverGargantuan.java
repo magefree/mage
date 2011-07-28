@@ -48,7 +48,7 @@ import java.util.UUID;
  */
 public class QuicksilverGargantuan extends CardImpl<QuicksilverGargantuan> {
 
-	private static final String text = "You may have Quicksilver Gargantuan enter the battlefield as a copy of any creature on the battlefield, except it's still 7/7";
+	private static final String text = "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still 7/7";
 
 	public QuicksilverGargantuan(UUID ownerId) {
 		super(ownerId, 39, "Quicksilver Gargantuan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
@@ -76,7 +76,7 @@ public class QuicksilverGargantuan extends CardImpl<QuicksilverGargantuan> {
 
 		public QuicksilverGargantuanCopyEffect() {
 			super(Constants.Duration.WhileOnBattlefield, Constants.Layer.CopyEffects_1, Constants.SubLayer.NA, Constants.Outcome.BecomeCreature);
-			staticText =  "You may have Quicksilver Gargantuan enter the battlefield as a copy of any creature on the battlefield, except it's still 7/7";
+			staticText =  "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still 7/7";
 		}
 
 		public QuicksilverGargantuanCopyEffect(final QuicksilverGargantuanCopyEffect effect) {

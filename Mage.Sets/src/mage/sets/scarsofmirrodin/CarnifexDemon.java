@@ -62,7 +62,7 @@ public class CarnifexDemon extends CardImpl<CarnifexDemon> {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(2)), "Carnifex Demon enters the battlefield with two -1/-1 counters on it"));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(2)), "{this} enters the battlefield with two -1/-1 counters on it"));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CarnifexDemonEffect(), new ManaCostsImpl("{B}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.M1M1.createInstance()));
         this.addAbility(ability);
