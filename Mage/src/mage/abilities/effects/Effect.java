@@ -49,6 +49,7 @@ public interface Effect<T extends Effect<T>> extends Serializable {
 	public Outcome getOutcome();
 	public EffectType getEffectType();
     public void setTargetPointer(TargetPointer targetPointer);
+	public TargetPointer getTargetPointer();
 
 	public T copy();
 
