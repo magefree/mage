@@ -71,6 +71,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	protected boolean deathtouched;
 	protected Counters counters;
 	protected List<UUID> attachments = new ArrayList<UUID>();
+	protected List<UUID> imprinted = new ArrayList<UUID>();
 	protected UUID attachedTo;
 
 	public PermanentImpl(UUID ownerId, UUID controllerId, String name) {
@@ -106,6 +107,9 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		this.counters = permanent.counters.copy();
 		for (UUID attachmentId : permanent.attachments) {
 			this.attachments.add(attachmentId);
+		}
+		for (UUID imprintedId : permanent.imprinted) {
+			this.imprinted.add(imprintedId);
 		}
 		this.attachedTo = permanent.attachedTo;
 	}
@@ -656,6 +660,20 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	public boolean removeFromCombat(Game game) {
 		game.getCombat().removeFromCombat(objectId, game);
 		return true;
+	}
+
+	public boolean imprint(UUID imprintedCard, Game game) {
+		this.imprinted.add(imprintedCard);
+		return true;
+	}
+
+	public boolean clearImprinted(Game game) {
+		this.imprinted.clear();
+		return true;
+	}
+
+	public List<UUID> getImprinted() {
+		return this.imprinted;
 	}
 
 }

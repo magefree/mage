@@ -111,6 +111,31 @@ public interface Permanent extends Card {
 	public boolean removeFromCombat(Game game);
 	public boolean isDeathtouched();
 
+	/**
+	 * Imprint some other card to this one.
+	 *
+	 * @param imprintedCard Card to count as imprinted
+	 * @param game
+	 * @return true if card was imprinted
+	 */
+	public boolean imprint(UUID imprintedCard, Game game);
+
+	/**
+	 * Removes all imprinted cards from permanent.
+	 *
+	 * @param game
+	 * @return
+	 */
+	public boolean clearImprinted(Game game);
+
+	/**
+	 * Get card that was imprinted on this one.
+	 *
+	 * Can be null if no card was imprinted.
+	 * @return Imprinted card UUID.
+	 */
+	public List<UUID> getImprinted();
+
 	@Override
 	public Permanent copy();
 
