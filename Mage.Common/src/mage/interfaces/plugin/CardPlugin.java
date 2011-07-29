@@ -20,7 +20,7 @@ import net.xeoh.plugins.base.Plugin;
 /**
  * Interface for card plugins
  *
- * @version 0.6 17,07.2011 added options to #sortPermanents
+ * @version 0.6 17.07.2011 added options to #sortPermanents
  * @version 0.3 21.11.2010 #getMageCard
  * @version 0.2 07.11.2010 #downloadImages
  * @version 0.1 31.10.2010 #getMagePermanent, #sortPermanents

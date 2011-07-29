@@ -150,6 +150,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                 try {
                     tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
 					flippedAngle = isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
+					if (gameCard.isFaceDown()) return;
                     BufferedImage srcImage = ImageCache.getThumbnail(gameCard);
                     if (srcImage != null) {
                         hasImage = true;
@@ -627,6 +628,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public void mouseEntered(MouseEvent e) {
+		if (gameCard.isFaceDown()) return;
         if (!popupShowing) {
             synchronized (this) {
                 if (!popupShowing) {
@@ -643,12 +645,14 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public void mouseMoved(MouseEvent e) {
+		if (gameCard.isFaceDown()) return;
         data.component = this;
         callback.mouseMoved(e, data);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
+		if (gameCard.isFaceDown()) return;
         if (getMousePosition(true) != null) return;
         if (popupShowing) {
             synchronized (this) {
@@ -665,6 +669,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public void mousePressed(MouseEvent e) {
+		if (gameCard.isFaceDown()) return;
         data.component = this;
         data.card = this.gameCard;
         data.gameId = this.gameId;

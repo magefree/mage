@@ -46,11 +46,10 @@ import mage.target.Target;
 import mage.target.Targets;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CardView implements Serializable {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	protected UUID id;
 	protected UUID parentId;
@@ -70,11 +69,20 @@ public class CardView implements Serializable {
 	protected int cardNumber;
 	protected boolean isAbility;
 	protected CardView ability;
+	protected boolean faceDown;
 
 	public List<UUID> targets;
-	
+
 	public CardView(Card card) {
 		this.id = card.getId();
+		this.faceDown = card.isFaceDown();
+
+		// no information available for face down cards
+		if (this.faceDown) {
+			fillEmpty();
+			return;
+		}
+
 		this.name = card.getName();
 		this.rules = card.getRules();
 		if (card instanceof Permanent) {
@@ -101,7 +109,7 @@ public class CardView implements Serializable {
 		this.cardNumber = card.getCardNumber();
 
 		if (card instanceof Spell) {
-			Spell<?> spell = (Spell<?>)card;
+			Spell<?> spell = (Spell<?>) card;
 			if (spell.getSpellAbility().getTargets().size() > 0) {
 				setTargets(spell.getSpellAbility().getTargets());
 			}
@@ -109,7 +117,23 @@ public class CardView implements Serializable {
 	}
 
 	protected CardView() {
+	}
 
+	private void fillEmpty() {
+		this.name = "Face Down";
+		this.rules = new ArrayList<String>();
+		this.power = "";
+		this.toughness = "";
+		this.loyalty = "";
+		this.cardTypes = new ArrayList<CardType>();
+		this.subTypes = new ArrayList<String>();
+		this.superTypes = new ArrayList<String>();
+		this.color = new ObjectColor();
+		this.manaCost = new ArrayList<String>();
+		this.convertedManaCost = 0;
+		this.rarity = Rarity.COMMON;
+		this.expansionSetCode = "";
+		this.cardNumber = 0;
 	}
 
 	CardView(Token token) {
@@ -135,10 +159,10 @@ public class CardView implements Serializable {
 					if (this.targets == null) this.targets = new ArrayList<UUID>();
 					this.targets.add(targetUUID);
 				}
-			}	
+			}
 		}
 	}
-	
+
 //	protected List<String> formatRules(List<String> rules) {
 //		List<String> newRules = new ArrayList<String>();
 //		for (String rule: rules) {
@@ -160,7 +184,7 @@ public class CardView implements Serializable {
 	public List<String> getRules() {
 		return rules;
 	}
-	
+
 	public void overrideRules(List<String> rules) {
 		this.rules = rules;
 	}
@@ -168,11 +192,11 @@ public class CardView implements Serializable {
 	public void setIsAbility(boolean isAbility) {
 		this.isAbility = isAbility;
 	}
-	
+
 	public boolean isAbility() {
 		return isAbility;
 	}
-	
+
 	public String getPower() {
 		return power;
 	}
@@ -220,48 +244,53 @@ public class CardView implements Serializable {
 	public UUID getId() {
 		return id;
 	}
-	
+
 	public int getCardNumber() {
 		return cardNumber;
 	}
-	
+
 	/**
 	 * Returns UUIDs for targets.
 	 * Can be null if there is no target selected.
+	 *
 	 * @return
 	 */
 	public List<UUID> getTargets() {
 		return targets;
 	}
-	
+
 	public void overrideTargets(List<UUID> newTargets) {
 		this.targets = newTargets;
 	}
-	
+
 	public void overrideId(UUID id) {
 		if (parentId == null) {
 			parentId = this.id;
 		}
 		this.id = id;
 	}
-	
+
 	public UUID getParentId() {
 		if (parentId != null) {
 			return parentId;
 		}
 		return id;
 	}
-	
+
 	public void setAbility(CardView ability) {
 		this.ability = ability;
 	}
-	
+
 	public CardView getAbility() {
 		return this.ability;
 	}
-	
+
 	@Override
 	public String toString() {
 		return getName() + " [" + getId() + "]";
+	}
+
+	public boolean isFaceDown() {
+		return faceDown;
 	}
 }

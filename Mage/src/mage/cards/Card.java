@@ -55,6 +55,8 @@ public interface Card extends MageObject {
 	public Watchers getWatchers();
 	public String getExpansionSetCode();
 	public void setExpansionSetCode(String expansionSetCode);
+	public void setFaceDown(boolean value);
+	public boolean isFaceDown();
 
 	public void assignNewId();
 	public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag);

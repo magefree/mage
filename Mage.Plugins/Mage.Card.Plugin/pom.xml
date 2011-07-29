@@ -76,7 +76,7 @@
     </build>
 
     <properties>
-        <plugin-version>0.6</plugin-version>
+        <plugin-version>0.7</plugin-version>
         <jspf-version>0.9.1</jspf-version>
     </properties>
 </project>

@@ -51,6 +51,7 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.watchers.Watchers;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -285,6 +286,16 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
 	@Override
 	public void setExpansionSetCode(String expansionSetCode) {}
+
+	@Override
+	public void setFaceDown(boolean value) {
+		throw new NotImplementedException();
+	}
+
+	@Override
+	public boolean isFaceDown() {
+		return false;
+	}
 
 	@Override
 	public Spell copy() {

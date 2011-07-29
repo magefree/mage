@@ -38,7 +38,8 @@ import java.util.List;
  *
  * @author nantuko
  * @version 0.1 01.11.2010 Mage permanents. Sorting card layout.
- * @version 0.6 17,07.2011 #sortPermanents got option to display non-land permanents in one pile
+ * @version 0.6 17.07.2011 #sortPermanents got option to display non-land permanents in one pile
+ * @version 0.7 29.07.2011 face down cards support
  */
 @PluginImplementation
 @Author(name = "nantuko")
@@ -76,7 +77,7 @@ public class CardPluginImpl implements CardPlugin {
 
     @Override
     public String toString() {
-        return "[Card plugin, version 0.6]";
+        return "[Card plugin, version 0.7]";
     }
 
     @Override

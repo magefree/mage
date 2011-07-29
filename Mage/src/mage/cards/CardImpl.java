@@ -60,6 +60,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 	protected Watchers watchers = new Watchers();
 	protected String expansionSetCode;
 	protected Rarity rarity;
+	protected boolean faceDown;
 
 	public CardImpl(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
 		this(ownerId, name);
@@ -91,6 +92,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 		expansionSetCode = card.expansionSetCode;
 		rarity = card.rarity;
 		watchers = card.watchers.copy();
+		faceDown = card.faceDown;
 	}
 
 	@Override
@@ -327,5 +329,15 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 	@Override
 	public void setCardNumber(int cid) {
 		this.cardNumber = cid;
+	}
+
+	@Override
+	public void setFaceDown(boolean value) {
+		this.faceDown = value;
+	}
+
+	@Override
+	public boolean isFaceDown() {
+		return this.faceDown;
 	}
 }
