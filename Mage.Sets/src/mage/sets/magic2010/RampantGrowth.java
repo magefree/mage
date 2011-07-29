@@ -47,7 +47,6 @@ public class RampantGrowth extends CardImpl<RampantGrowth> {
 		this.expansionSetCode = "M10";
 		this.color.setGreen(true);
 		TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
-		this.getSpellAbility().addTarget(target);
 		this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, true));
 	}
 
