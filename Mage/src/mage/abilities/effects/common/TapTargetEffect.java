@@ -72,8 +72,11 @@ public class TapTargetEffect extends OneShotEffect<TapTargetEffect> {
 	@Override
 	public String getText(Mode mode) {
 		Target target = mode.getTargets().get(0);
-		if (target.getNumberOfTargets() > 1)
-			return "tap " + target.getNumberOfTargets() + " target " + mode.getTargets().get(0).getTargetName() + "s";
+		if (target.getMaxNumberOfTargets() > 1)
+            if (target.getMaxNumberOfTargets() == target.getNumberOfTargets())
+			    return "tap " + target.getNumberOfTargets() + " target " + mode.getTargets().get(0).getTargetName() + "s";
+            else
+                return "tap up to " + target.getMaxNumberOfTargets() + " target " + mode.getTargets().get(0).getTargetName() + "s";
 		else
 			return "tap target " + mode.getTargets().get(0).getTargetName();
 	}

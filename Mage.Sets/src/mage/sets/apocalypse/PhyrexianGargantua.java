@@ -36,6 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.LoseLifeControllerEffect;
+import mage.abilities.effects.common.LoseLifeSourceEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -52,7 +53,7 @@ public class PhyrexianGargantua extends CardImpl<PhyrexianGargantua> {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(2), false);
-        ability.addEffect(new LoseLifeControllerEffect(2));
+        ability.addEffect(new LoseLifeSourceEffect(2));
         this.addAbility(ability);
     }
 
