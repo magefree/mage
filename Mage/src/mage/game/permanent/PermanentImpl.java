@@ -662,16 +662,19 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		return true;
 	}
 
+    @Override
 	public boolean imprint(UUID imprintedCard, Game game) {
 		this.imprinted.add(imprintedCard);
 		return true;
 	}
 
+    @Override
 	public boolean clearImprinted(Game game) {
 		this.imprinted.clear();
 		return true;
 	}
 
+    @Override
 	public List<UUID> getImprinted() {
 		return this.imprinted;
 	}
