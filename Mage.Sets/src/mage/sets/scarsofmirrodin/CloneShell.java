@@ -166,6 +166,7 @@ class CloneShellDiesEffect extends OneShotEffect<CloneShellDiesEffect> {
 			List<UUID> imprinted = permanent.getImprinted();
 			if (imprinted.size() > 0) {
 				Card imprintedCard = game.getCard(imprinted.get(0));
+				imprintedCard.setFaceDown(false);
 				if (imprintedCard.getCardType().contains(CardType.CREATURE)) {
 					imprintedCard.putOntoBattlefield(game, Constants.Zone.EXILED, source.getSourceId(), source.getControllerId());
 				}
