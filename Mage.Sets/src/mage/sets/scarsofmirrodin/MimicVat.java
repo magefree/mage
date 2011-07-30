@@ -34,10 +34,8 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -50,10 +48,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
-import mage.game.permanent.token.Token;
-import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+import mage.sets.tokens.EmptyToken;
 
 import java.util.UUID;
 
@@ -182,7 +179,7 @@ class MimicVatCreateTokenEffect extends OneShotEffect<MimicVatCreateTokenEffect>
 
 	public MimicVatCreateTokenEffect() {
 		super(Constants.Outcome.PutCreatureInPlay);
-		this.staticText = "Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.";
+		this.staticText = "Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step";
 	}
 
 	public MimicVatCreateTokenEffect(final MimicVatCreateTokenEffect effect) {
@@ -217,9 +214,4 @@ class MimicVatCreateTokenEffect extends OneShotEffect<MimicVatCreateTokenEffect>
 
 }
 
-class EmptyToken extends Token {
 
-	public EmptyToken() {
-		super("", "");
-	}
-}
