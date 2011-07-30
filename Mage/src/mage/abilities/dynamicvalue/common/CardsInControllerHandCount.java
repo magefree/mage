@@ -24,4 +24,9 @@ public class CardsInControllerHandCount implements DynamicValue {
     public String getMessage() {
         return "card in your hand";
     }
+
+	@Override
+	public String toString() {
+		return "1";
+	}
 }
