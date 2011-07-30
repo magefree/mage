@@ -164,7 +164,8 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 		//20100716 - 601.2e
 		if (game.getObject(sourceId) != null) {
 			//game.getObject(sourceId).adjustCosts(this, game);
-			game.getCard(sourceId).adjustCosts(this, game);
+			if (game.getCard(sourceId) != null)
+				game.getCard(sourceId).adjustCosts(this, game);
 		}
 		
 		if (!useAlternativeCost(game)) {

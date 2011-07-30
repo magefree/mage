@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -113,6 +114,32 @@ public class CardView implements Serializable {
 			if (spell.getSpellAbility().getTargets().size() > 0) {
 				setTargets(spell.getSpellAbility().getTargets());
 			}
+		}
+	}
+
+	public CardView(MageObject card) {
+		this.id = card.getId();
+
+		this.name = card.getName();
+		if (card instanceof Permanent) {
+			this.power = Integer.toString(card.getPower().getValue());
+			this.toughness = Integer.toString(card.getToughness().getValue());
+			this.loyalty = Integer.toString(((Permanent) card).getCounters().getCount(CounterType.LOYALTY));
+		} else {
+			this.power = card.getPower().toString();
+			this.toughness = card.getToughness().toString();
+			this.loyalty = "";
+		}
+		this.cardTypes = card.getCardType();
+		this.subTypes = card.getSubtype();
+		this.superTypes = card.getSupertype();
+		this.color = card.getColor();
+		this.manaCost = card.getManaCost().getSymbols();
+		this.convertedManaCost = card.getManaCost().convertedManaCost();
+		if (card instanceof PermanentToken) {
+			this.rarity = Rarity.COMMON;
+			this.expansionSetCode = ((PermanentToken)card).getExpansionSetCode();
+			this.rules = ((PermanentToken)card).getRules();
 		}
 	}
 
