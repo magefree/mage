@@ -686,6 +686,16 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	}
 
 	@Override
+	public int getMaxHandSize() {
+		return maxHandSize;
+	}
+
+	@Override
+	public void setMaxHandSize(int maxHandSize) {
+		this.maxHandSize = maxHandSize;
+	}
+
+	@Override
 	public void setResponseString(String responseString) {}
 
 	@Override

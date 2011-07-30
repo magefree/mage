@@ -88,6 +88,8 @@ public interface Player extends MageItem, Copyable<Player> {
 	public int getLandsPlayed();
 	public int getLandsPerTurn();
 	public void setLandsPerTurn(int landsPerTurn);
+	public int getMaxHandSize();
+	public void setMaxHandSize(int maxHandSize);
 	public boolean isPassed();
 	public boolean isEmptyDraw();
 	public void pass();
