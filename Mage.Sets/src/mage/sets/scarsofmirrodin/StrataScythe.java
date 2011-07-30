@@ -47,6 +47,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
@@ -96,6 +97,10 @@ class StrataScytheImprintEffect extends OneShotEffect<StrataScytheImprintEffect>
                 Card card = player.getLibrary().remove(cardId, game);
 			    if (card != null) {
                     card.moveToExile(source.getSourceId(), "Strata Scythe", source.getId(), game);
+					Permanent permanent = game.getPermanent(source.getSourceId());
+					if (permanent != null) {
+						permanent.imprint(card.getId(), game);
+					}
                 }
             }
             player.shuffleLibrary(game);
@@ -123,19 +128,13 @@ class SameNameAsExiledCountValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility) {
         int value = 0;
-        ExileZone exile = game.getExile().getExileZone(sourceAbility.getSourceId());
-        if (exile != null) {
-            UUID lastId = null;
-            for (UUID cardId: exile) {
-                lastId = cardId;
-            }
-            if (lastId != null) {
-                FilterPermanent filterPermanent = new FilterPermanent();
-                filterPermanent.getName().add(game.getCard(lastId).getName());
-                value = game.getBattlefield().countAll(filterPermanent);
-            }
-        }
-        return value;
+        Permanent permanent = game.getPermanent(sourceAbility.getSourceId());
+		if (permanent != null && permanent.getImprinted().size() > 0) {
+			FilterPermanent filterPermanent = new FilterPermanent();
+            filterPermanent.getName().add(game.getCard(permanent.getImprinted().get(0)).getName());
+            value = game.getBattlefield().countAll(filterPermanent);
+		}
+		return value;
     }
 
     @Override
