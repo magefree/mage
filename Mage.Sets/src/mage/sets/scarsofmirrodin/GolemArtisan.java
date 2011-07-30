@@ -56,7 +56,7 @@ import java.util.HashSet;
 import java.util.UUID;
 
 /**
- * @author anonymous
+ * @author nantuko
  */
 public class GolemArtisan extends CardImpl<GolemArtisan> {
 

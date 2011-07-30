@@ -45,7 +45,7 @@ public class PayVariableLoyaltyCost extends CostImpl<PayVariableLoyaltyCost> imp
 	protected int amountPaid = 0;
 
 	public PayVariableLoyaltyCost() {
-		this.text = "-X loyalty";
+		this.text = "-X";
 	}
 
 	public PayVariableLoyaltyCost(final PayVariableLoyaltyCost cost) {
