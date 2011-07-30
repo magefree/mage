@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 /**
  * @author Loki
@@ -88,37 +89,13 @@ class CryptoplasmTransformEffect extends ContinuousEffectImpl<CryptoplasmTransfo
         Permanent permanent = game.getPermanent(source.getSourceId());
 
         if (card == null || permanent == null)
-            return true;
+            return false;
 
-        permanent.setName(card.getName());
-        permanent.getColor().setColor(card.getColor());
-        permanent.getManaCost().clear();
-        permanent.getManaCost().add(card.getManaCost());
-        permanent.getCardType().clear();
-        for (CardType type : card.getCardType()) {
-            permanent.getCardType().add(type);
-        }
-        permanent.getSubtype().clear();
-        for (String type : card.getSubtype()) {
-            permanent.getSubtype().add(type);
-        }
-        permanent.getSupertype().clear();
-        for (String type : card.getSupertype()) {
-            permanent.getSupertype().add(type);
-        }
-        permanent.setExpansionSetCode(card.getExpansionSetCode());
-        permanent.getAbilities().clear();
+		CardUtil.copyTo(permanent).from(card);
 
-        Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmTransformEffect(), Constants.TargetController.YOU, true);
+		Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmTransformEffect(), Constants.TargetController.YOU, true);
         upkeepAbility.addTarget(new TargetCreaturePermanent());
         permanent.addAbility(upkeepAbility);
-
-        for (Ability ability : card.getAbilities()) {
-            permanent.addAbility(ability);
-        }
-
-        permanent.getPower().setValue(card.getPower().getValue());
-		permanent.getToughness().setValue(card.getToughness().getValue());
 
         return true;
     }

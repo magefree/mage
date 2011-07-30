@@ -30,12 +30,17 @@ package mage.util;
 
 import mage.Constants;
 import mage.Mana;
+import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.Card;
+import mage.game.permanent.token.Token;
+import mage.util.functions.CopyFunction;
+import mage.util.functions.CopyTokenFunction;
+import mage.util.functions.Function;
 
 /**
  * @author nantuko
@@ -52,7 +57,7 @@ public class CardUtil {
 	public static boolean shareTypes(Card card1, Card card2) {
 
 		if (card1 == null || card2 == null)
-			 throw new IllegalArgumentException("Params can't be null");
+			throw new IllegalArgumentException("Params can't be null");
 
 		for (Constants.CardType type : card1.getCardType()) {
 			if (card2.getCardType().contains(type)) {
@@ -77,7 +82,7 @@ public class CardUtil {
 			Mana mana = manaCost.getOptions().get(0);
 			int colorless = mana.getColorless();
 			if (!reduced && mana != null && colorless > 0) {
-				if ( (colorless - reduceCount) > 0 ) {
+				if ((colorless - reduceCount) > 0) {
 					int newColorless = colorless - reduceCount;
 					adjustedCost.add(new GenericManaCost(newColorless));
 				}
@@ -88,5 +93,23 @@ public class CardUtil {
 		}
 		spellAbility.getManaCostsToPay().clear();
 		spellAbility.getManaCostsToPay().addAll(adjustedCost);
+	}
+
+	/**
+	 * Returns function that copies params\abilities from one card to another.
+	 *
+	 * @param target
+	 */
+	public static CopyFunction copyTo(Card target) {
+		return new CopyFunction(target);
+	}
+
+	/**
+	 * Returns function that copies params\abilities from one card to {@link Token}.
+	 *
+	 * @param target
+	 */
+	public static CopyTokenFunction copyTo(Token target) {
+		return new CopyTokenFunction(target);
 	}
 }
