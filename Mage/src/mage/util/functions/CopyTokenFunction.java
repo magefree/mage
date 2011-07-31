@@ -69,7 +69,8 @@ public class CopyTokenFunction implements Function<Token, Card> {
 		//target.setExpansionSetCode(source.getExpansionSetCode());
 		target.getAbilities().clear();
 
-		for (Ability ability : source.getAbilities()) {
+		for (Ability ability0 : source.getAbilities()) {
+			Ability ability = ability0.copy();
 			ability.setSourceId(target.getId());
 			target.addAbility(ability);
 		}
