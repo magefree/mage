@@ -32,6 +32,8 @@ import java.util.UUID;
 import mage.Constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 
@@ -51,11 +53,14 @@ public class ActivateOncePerTurnActivatedAbility extends ActivatedAbilityImpl<Ac
 
 	@Override
 	public boolean canActivate(UUID playerId, Game game) {
-		Boolean activated = (Boolean)game.getState().getValue(this.originalId.toString() + "activated");
-		if (activated == null)
-			return true;
-		else
-			return !activated;
+		if (super.canActivate(playerId, game)) {
+			Boolean activated = (Boolean)game.getState().getValue(this.originalId.toString() + "activated");
+			if (activated == null)
+				return true;
+			else
+				return !activated;
+		}
+		return false;
 	}
 
 	@Override
