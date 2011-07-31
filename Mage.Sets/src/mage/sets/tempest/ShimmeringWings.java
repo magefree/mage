@@ -25,65 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.magic2012;
+package mage.sets.tempest;
 
 import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.permanent.token.ZombieToken;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
+ *
  * @author Loki
  */
-public class CemeteryReaper extends CardImpl<CemeteryReaper> {
+public class ShimmeringWings extends CardImpl<ShimmeringWings> {
 
-    private final static FilterCreaturePermanent zombieFilter = new FilterCreaturePermanent("Zombie creatures");
-    private final static FilterCreatureCard filter = new FilterCreatureCard("creature card");
-
-    static {
-        zombieFilter.getSubtype().add("Zombie");
-        zombieFilter.setScopeSubtype(Filter.ComparisonScope.Any);
+    public ShimmeringWings(UUID ownerId) {
+        super(ownerId, 87, "Shimmering Wings", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Aura");
+        this.color.setBlue(true);
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+		this.getSpellAbility().addTarget(auraTarget);
+		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+		Ability ability = new EnchantAbility(auraTarget.getTargetName());
+		this.addAbility(ability);
+		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), Constants.AttachmentType.AURA)));
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.U)));
     }
 
-    public CemeteryReaper(UUID ownerId) {
-        super(ownerId, 86, "Cemetery Reaper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "M12";
-        this.subtype.add("Zombie");
-        this.color.setBlack(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, zombieFilter, true)));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{2}{B}"));
-        ability.addCost(new TapSourceCost());
-        ability.addEffect(new CreateTokenEffect(new ZombieToken()));
-        ability.addTarget(new TargetCardInGraveyard(filter));
-        this.addAbility(ability);
-    }
-
-    public CemeteryReaper(final CemeteryReaper card) {
+    public ShimmeringWings(final ShimmeringWings card) {
         super(card);
     }
 
     @Override
-    public CemeteryReaper copy() {
-        return new CemeteryReaper(this);
+    public ShimmeringWings copy() {
+        return new ShimmeringWings(this);
     }
-
 }

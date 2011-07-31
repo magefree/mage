@@ -25,65 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.magic2012;
+package mage.sets.tempest;
 
 import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.permanent.token.ZombieToken;
-import mage.target.common.TargetCardInGraveyard;
 
 /**
+ *
  * @author Loki
  */
-public class CemeteryReaper extends CardImpl<CemeteryReaper> {
+public class GerrardsBattleCry extends CardImpl<GerrardsBattleCry> {
 
-    private final static FilterCreaturePermanent zombieFilter = new FilterCreaturePermanent("Zombie creatures");
-    private final static FilterCreatureCard filter = new FilterCreatureCard("creature card");
-
-    static {
-        zombieFilter.getSubtype().add("Zombie");
-        zombieFilter.setScopeSubtype(Filter.ComparisonScope.Any);
+    public GerrardsBattleCry(UUID ownerId) {
+        super(ownerId, 233, "Gerrard's Battle Cry", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}");
+        this.expansionSetCode = "TMP";
+        this.color.setWhite(true);
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault(), false), new ManaCostsImpl("{2}{W}")));
     }
 
-    public CemeteryReaper(UUID ownerId) {
-        super(ownerId, 86, "Cemetery Reaper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "M12";
-        this.subtype.add("Zombie");
-        this.color.setBlack(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, zombieFilter, true)));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{2}{B}"));
-        ability.addCost(new TapSourceCost());
-        ability.addEffect(new CreateTokenEffect(new ZombieToken()));
-        ability.addTarget(new TargetCardInGraveyard(filter));
-        this.addAbility(ability);
-    }
-
-    public CemeteryReaper(final CemeteryReaper card) {
+    public GerrardsBattleCry(final GerrardsBattleCry card) {
         super(card);
     }
 
     @Override
-    public CemeteryReaper copy() {
-        return new CemeteryReaper(this);
+    public GerrardsBattleCry copy() {
+        return new GerrardsBattleCry(this);
     }
-
 }

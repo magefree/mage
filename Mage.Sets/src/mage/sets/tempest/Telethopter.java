@@ -25,8 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.magic2012;
+package mage.sets.tempest;
 
 import java.util.UUID;
 
@@ -34,56 +33,42 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.permanent.token.ZombieToken;
-import mage.target.common.TargetCardInGraveyard;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author Loki
  */
-public class CemeteryReaper extends CardImpl<CemeteryReaper> {
+public class Telethopter extends CardImpl<Telethopter> {
 
-    private final static FilterCreaturePermanent zombieFilter = new FilterCreaturePermanent("Zombie creatures");
-    private final static FilterCreatureCard filter = new FilterCreatureCard("creature card");
+    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
-        zombieFilter.getSubtype().add("Zombie");
-        zombieFilter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.setTapped(false);
+        filter.setUseTapped(true);
     }
 
-    public CemeteryReaper(UUID ownerId) {
-        super(ownerId, 86, "Cemetery Reaper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "M12";
-        this.subtype.add("Zombie");
-        this.color.setBlack(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, zombieFilter, true)));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{2}{B}"));
-        ability.addCost(new TapSourceCost());
-        ability.addEffect(new CreateTokenEffect(new ZombieToken()));
-        ability.addTarget(new TargetCardInGraveyard(filter));
-        this.addAbility(ability);
+    public Telethopter(UUID ownerId) {
+        super(ownerId, 301, "Telethopter", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Thopter");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(1);
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false))));
     }
 
-    public CemeteryReaper(final CemeteryReaper card) {
+    public Telethopter(final Telethopter card) {
         super(card);
     }
 
     @Override
-    public CemeteryReaper copy() {
-        return new CemeteryReaper(this);
+    public Telethopter copy() {
+        return new Telethopter(this);
     }
-
 }

@@ -25,8 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.magic2012;
+package mage.sets.tempest;
 
 import java.util.UUID;
 
@@ -36,54 +35,38 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.DamageControllerEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.permanent.token.ZombieToken;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
+ *
  * @author Loki
  */
-public class CemeteryReaper extends CardImpl<CemeteryReaper> {
+public class Fireslinger extends CardImpl<Fireslinger> {
 
-    private final static FilterCreaturePermanent zombieFilter = new FilterCreaturePermanent("Zombie creatures");
-    private final static FilterCreatureCard filter = new FilterCreatureCard("creature card");
-
-    static {
-        zombieFilter.getSubtype().add("Zombie");
-        zombieFilter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
-    public CemeteryReaper(UUID ownerId) {
-        super(ownerId, 86, "Cemetery Reaper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.expansionSetCode = "M12";
-        this.subtype.add("Zombie");
-        this.color.setBlack(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, zombieFilter, true)));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{2}{B}"));
-        ability.addCost(new TapSourceCost());
-        ability.addEffect(new CreateTokenEffect(new ZombieToken()));
-        ability.addTarget(new TargetCardInGraveyard(filter));
+    public Fireslinger(UUID ownerId) {
+        super(ownerId, 173, "Fireslinger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+        this.color.setRed(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        ability.addEffect(new DamageControllerEffect(1));
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 
-    public CemeteryReaper(final CemeteryReaper card) {
+    public Fireslinger(final Fireslinger card) {
         super(card);
     }
 
     @Override
-    public CemeteryReaper copy() {
-        return new CemeteryReaper(this);
+    public Fireslinger copy() {
+        return new Fireslinger(this);
     }
-
 }
