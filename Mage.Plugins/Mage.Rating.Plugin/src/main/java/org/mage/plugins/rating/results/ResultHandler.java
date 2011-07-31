@@ -107,7 +107,7 @@ public class ResultHandler {
             if (m.matches()) {
                 String card = m.group(1);
                 Float stdRate = Float.parseFloat(m.group(2));
-                int rate = (int)((15 - stdRate + 1) * 1000);
+                int rate = (int)((15 - stdRate + 1) * (2/3f) * 100 + 500);
                 ratings.put(card, rate);
             }
         }
