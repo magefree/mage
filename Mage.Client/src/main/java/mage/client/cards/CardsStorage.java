@@ -175,6 +175,7 @@ public class CardsStorage {
 			readUnimplemented("SOM", "/som.txt", names, cards);
 			readUnimplemented("MBS", "/mbs.txt", names, cards);
 			readUnimplemented("NPH", "/nph.txt", names, cards);
+			readUnimplemented("M12", "/m12.txt", names, cards);
 
 			names.clear();
 			names = null;
@@ -198,6 +199,18 @@ public class CardsStorage {
 					String name = s[1].trim();
 					if (!names.contains(set + name)) {
 						Integer cid = Integer.parseInt(s[5]);
+						Card card = tmp.copy();
+						card.setName(name);
+						card.setExpansionSetCode(set);
+						card.setCardNumber(cid);
+						card.setRarity(Constants.Rarity.NA); // mark as not implemented
+						card.getCardType().clear();
+						cards.add(card);
+					}
+				} else { // for m12 and further
+					String name = s[0].trim();
+					if (!names.contains(set + name)) {
+						Integer cid = Integer.parseInt(s[2]);
 						Card card = tmp.copy();
 						card.setName(name);
 						card.setExpansionSetCode(set);
@@ -232,7 +245,7 @@ public class CardsStorage {
 	 * @author nantuko
 	 */
 	private static class CardComparator implements Comparator<Card> {
-		private static final String LATEST_SET_CODE = "NPH";
+		private static final String LATEST_SET_CODE = "M12";
 
 		@Override
 		public int compare(Card o1, Card o2) {
@@ -273,6 +286,7 @@ public class CardsStorage {
 			latestSetCodes.add("SOM");
 			latestSetCodes.add("MBS");
 			latestSetCodes.add("NPH");
+			latestSetCodes.add("M12");
 		}
 		
 		@Override

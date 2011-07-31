@@ -364,7 +364,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
 	/**
 	 *
-	 * @param netMana
+	 * @param mana
 	 * @return true if this contains any values that mana has
 	 */
 	public boolean contains(Mana mana) {
