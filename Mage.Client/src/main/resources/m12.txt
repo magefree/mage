@@ -1,0 +1,249 @@
+Phantasmal Dragon|Magic 2012|71|U|{2}{U}{U}|Creature — Dragon Illusion|5|5|Flying$When Phantasmal Dragon becomes the target of a spell or ability, sacrifice it.|
+Crimson Mage|Magic 2012|129|U|{1}{R}|Creature — Human Shaman|2|1|{R}: Target creature you control gains haste until end of turn. <i>(It can attack and {tap} this turn.)</i>|
+Onyx Mage|Magic 2012|103|U|{1}{B}|Creature — Human Wizard|2|1|{1}{B}: Target creature you control gains deathtouch until end of turn. <i>(Any amount of damage it deals to a creature is enough to destroy it.)</i>|
+Pride Guardian|Magic 2012|31|C|{W}|Creature — Cat Monk|0|3|Defender <i>(This creature can't attack.)</i>$Whenever Pride Guardian blocks, you gain 3 life.|
+Timely Reinforcements|Magic 2012|40|U|{2}{W}|Sorcery|||If you have less life than an opponent, you gain 6 life. If you control fewer creatures than an opponent, put three 1/1 white Soldier creature tokens onto the battlefield.|
+Stingerfling Spider|Magic 2012|197|U|{4}{G}|Creature — Spider|2|5|Reach <i>(This creature can block creatures with flying.)</i>$When Stingerfling Spider enters the battlefield, you may destroy target creature with flying.|
+Garruk's Horde|Magic 2012|176|R|{5}{G}{G}|Creature — Beast|7|7|Trample$Play with the top card of your library revealed.$You may cast the top card of your library if it's a creature card. <i>(Do this only any time you could cast that creature card. You still pay the spell's costs.)</i>|
+Arbalest Elite|Magic 2012|5|U|{2}{W}{W}|Creature — Human Archer|2|3|{2}{W}, {tap}: Arbalest Elite deals 3 damage to target attacking or blocking creature. Arbalest Elite doesn't untap during your next untap step.|
+Gladecover Scout|Magic 2012|178|C|{G}|Creature — Elf Scout|1|1|Hexproof <i>(This creature can't be the target of spells or abilities your opponents control.)</i>|
+Aegis Angel|Magic 2012|1|R|{4}{W}{W}|Creature — Angel|5|5|Flying$When Aegis Angel enters the battlefield, another target permanent is indestructible for as long as you control Aegis Angel. <i>(Effects that say &quot;destroy&quot; don't destroy that permanent. An indestructible creature can't be destroyed by damage.)</i>|
+Drifting Shade|Magic 2012|96|C|{3}{B}|Creature — Shade|1|1|Flying${B}: Drifting Shade gets +1/+1 until end of turn.|
+Sphinx of Uthuun|Magic 2012|76|R|{5}{U}{U}|Creature — Sphinx|5|6|Flying$When Sphinx of Uthuun enters the battlefield, reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.|
+Guardians' Pledge|Magic 2012|22|C|{1}{W}{W}|Instant|||White creatures you control get +2/+2 until end of turn.|
+Druidic Satchel|Magic 2012|207|R|{3}|Artifact|||{2}, {tap}: Reveal the top card of your library. If it's a creature card, put a 1/1 green Saproling creature token onto the battlefield. If it's a land card, put that card onto the battlefield under your control. If it's a noncreature, nonland card, you gain 2 life.|
+Phantasmal Image|Magic 2012|72|R|{1}{U}|Creature — Illusion|0|0|You may have Phantasmal Image enter the battlefield as a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it gains &quot;When this creature becomes the target of a spell or ability, sacrifice it.&quot;|
+Garruk, Primal Hunter|Magic 2012|174|M|{2}{G}{G}{G}|Planeswalker — Garruk|||+1: Put a 3/3 green Beast creature token onto the battlefield.$-3: Draw cards equal to the greatest power among creatures you control.$-6: Put a 6/6 green Wurm creature token onto the battlefield for each land you control.|
+Furyborn Hellkite|Magic 2012|135|M|{4}{R}{R}{R}|Creature — Dragon|6|6|Bloodthirst 6 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with six +1/+1 counters on it.)</i>$Flying|
+Merfolk Mesmerist|Magic 2012|66|C|{1}{U}|Creature — Merfolk Wizard|1|2|{U}, {tap}: Target player puts the top two cards of his or her library into his or her graveyard.|
+Crumbling Colossus|Magic 2012|204|U|{5}|Artifact Creature — Golem|7|4|Trample <i>(If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)</i>$When Crumbling Colossus attacks, sacrifice it at end of combat.|
+Mesa Enchantress|Magic 2012|25|R|{1}{W}{W}|Creature — Human Druid|0|2|Whenever you cast an enchantment spell, you may draw a card.|
+Tormented Soul|Magic 2012|114|C|{B}|Creature — Spirit|1|1|Tormented Soul can't block and is unblockable.|
+Bloodrage Vampire|Magic 2012|83|C|{2}{B}|Creature — Vampire|3|1|Bloodthirst 1 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)</i>|
+Vampire Outcasts|Magic 2012|115|U|{2}{B}{B}|Creature — Vampire|2|2|Bloodthirst 2 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with two +1/+1 counters on it.)</i>$Lifelink <i>(Damage dealt by this creature also causes you to gain that much life.)</i>|
+Rune-Scarred Demon|Magic 2012|106|R|{5}{B}{B}|Creature — Demon|6|6|Flying$When Rune-Scarred Demon enters the battlefield, search your library for a card, put it into your hand, then shuffle your library.|
+Lord of the Unreal|Magic 2012|62|R|{U}{U}|Creature — Human Wizard|2|2|Illusion creatures you control get +1/+1 and have hexproof. <i>(They can't be the targets of spells or abilities your opponents control.)</i>|
+Day of Judgment|Magic 2012|12|R|{2}{W}{W}|Sorcery|||Destroy all creatures.|
+Monomania|Magic 2012|102|R|{3}{B}{B}|Sorcery|||Target player chooses a card in his or her hand and discards the rest.|
+Aven Fleetwing|Magic 2012|44|C|{3}{U}|Creature — Bird Soldier|2|2|Flying$Hexproof <i>(This creature can't be the target of spells or abilities your opponents control.)</i>|
+Chandra, the Firebrand|Magic 2012|124|M|{3}{R}|Planeswalker — Chandra|||+1: Chandra, the Firebrand deals 1 damage to target creature or player.$-2: When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.$-6: Chandra, the Firebrand deals 6 damage to each of up to six target creatures and/or players.|
+Adaptive Automaton|Magic 2012|201|R|{3}|Artifact Creature — Construct|2|2|As Adaptive Automaton enters the battlefield, choose a creature type.$Adaptive Automaton is the chosen type in addition to its other types.$Other creatures you control of the chosen type get +1/+1.|
+Skinshifter|Magic 2012|195|R|{1}{G}|Creature — Human Shaman|1|1|{G}: Choose one — Until end of turn, Skinshifter becomes a 4/4 Rhino and gains trample; or until end of turn, Skinshifter becomes a 2/2 Bird and gains flying; or until end of turn, Skinshifter becomes a 0/8 Plant. Activate this ability only once each turn.|
+Doubling Chant|Magic 2012|170|R|{5}{G}|Sorcery|||For each creature you control, you may search your library for a creature card with the same name as that creature. Put those cards onto the battlefield, then shuffle your library.|
+Skywinder Drake|Magic 2012|75|C|{2}{U}|Creature — Drake|3|1|Flying$Skywinder Drake can block only creatures with flying.|
+Spirit Mantle|Magic 2012|35|U|{1}{W}|Enchantment — Aura|||Enchant creature$Enchanted creature gets +1/+1 and has protection from creatures. <i>(It can't be blocked, targeted, or dealt damage by creatures.)</i>|
+Sutured Ghoul|Magic 2012|112|R|{4}{B}{B}{B}|Creature — Zombie|*|*|Trample$As Sutured Ghoul enters the battlefield, exile any number of creature cards from your graveyard.$Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.|
+Stonehorn Dignitary|Magic 2012|37|C|{3}{W}|Creature — Rhino Soldier|1|4|When Stonehorn Dignitary enters the battlefield, target opponent skips his or her next combat phase.|
+Manalith|Magic 2012|212|C|{3}|Artifact|||{tap}: Add one mana of any color to your mana pool.|
+Vengeful Pharaoh|Magic 2012|116|R|{2}{B}{B}{B}|Creature — Zombie|5|4|Deathtouch <i>(Any amount of damage this deals to a creature is enough to destroy it.)</i>$Whenever combat damage is dealt to you or a planeswalker you control, if Vengeful Pharaoh is in your graveyard, destroy target attacking creature, then put Vengeful Pharaoh on top of your library.|
+Primordial Hydra|Magic 2012|189|M|{X}{G}{G}|Creature — Hydra|0|0|Primordial Hydra enters the battlefield with X +1/+1 counters on it.$At the beginning of your upkeep, double the number of +1/+1 counters on Primordial Hydra.$Primordial Hydra has trample as long as it has ten or more +1/+1 counters on it.|
+Serra Angel|Magic 2012|33|U|{3}{W}{W}|Creature — Angel|4|4|Flying$Vigilance <i>(Attacking doesn't cause this creature to tap.)</i>|
+Merfolk Looter|Magic 2012|65|C|{1}{U}|Creature — Merfolk Rogue|1|1|{tap}: Draw a card, then discard a card.|
+Lifelink|Magic 2012|24|C|{W}|Enchantment — Aura|||Enchant creature$Enchanted creature has lifelink. <i>(Damage dealt by the creature also causes its controller to gain that much life.)</i>|
+Wall of Torches|Magic 2012|159|C|{1}{R}|Creature — Wall|4|1|Defender <i>(This creature can't attack.)</i>|
+Trollhide|Magic 2012|199|C|{2}{G}|Enchantment — Aura|||Enchant creature$Enchanted creature gets +2/+2 and has &quot;{1}{G}: Regenerate this creature.&quot; <i>(The next time the creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)</i>|
+Divination|Magic 2012|50|C|{2}{U}|Sorcery|||Draw two cards.|
+Celestial Purge|Magic 2012|11|U|{1}{W}|Instant|||Exile target black or red permanent.|
+Lurking Crocodile|Magic 2012|184|C|{2}{G}|Creature — Crocodile|2|2|Bloodthirst 1 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)</i>$Islandwalk <i>(This creature is unblockable as long as defending player controls an Island.)</i>|
+Scepter of Empires|Magic 2012|216|U|{3}|Artifact|||{tap}: Scepter of Empires deals 1 damage to target player. It deals 3 damage to that player instead if you control artifacts named Crown of Empires and Throne of Empires.|
+Dungrove Elder|Magic 2012|171|R|{2}{G}|Creature — Treefolk|*|*|Hexproof <i>(This creature can't be the target of spells or abilities your opponents control.)</i>$Dungrove Elder's power and toughness are each equal to the number of Forests you control.|
+Amphin Cutthroat|Magic 2012|43|C|{3}{U}|Creature — Salamander Rogue|2|4||
+Divine Favor|Magic 2012|14|C|{1}{W}|Enchantment — Aura|||Enchant creature$When Divine Favor enters the battlefield, you gain 3 life.$Enchanted creature gets +1/+3.|
+Carnage Wurm|Magic 2012|168|U|{6}{G}|Creature — Wurm|6|6|Bloodthirst 3 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with three +1/+1 counters on it.)</i>$Trample <i>(If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)</i>|
+Chasm Drake|Magic 2012|48|C|{4}{U}|Creature — Drake|3|3|Flying$Whenever Chasm Drake attacks, target creature you control gains flying until end of turn.|
+Visions of Beyond|Magic 2012|80|R|{U}|Instant|||Draw a card. If a graveyard has twenty or more cards in it, draw three cards instead.|
+Blood Ogre|Magic 2012|122|C|{2}{R}|Creature — Ogre Warrior|2|2|Bloodthirst 1 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)</i>$First strike <i>(This creature deals combat damage before creatures without first strike.)</i>|
+Angelic Destiny|Magic 2012|3|M|{2}{W}{W}|Enchantment — Aura|||Enchant creature$Enchanted creature gets +4/+4, has flying and first strike, and is an Angel in addition to its other types.$When enchanted creature dies, return Angelic Destiny to its owner's hand.|
+Throne of Empires|Magic 2012|221|R|{4}|Artifact|||{1}, {tap}: Put a 1/1 white Soldier creature token onto the battlefield. Put five of those tokens onto the battlefield instead if you control artifacts named Crown of Empires and Scepter of Empires.|
+Personal Sanctuary|Magic 2012|30|R|{2}{W}|Enchantment|||During your turn, prevent all damage that would be dealt to you.|
+Gideon's Avenger|Magic 2012|17|R|{1}{W}{W}|Creature — Human Soldier|2|2|Whenever a creature an opponent controls becomes tapped, put a +1/+1 counter on Gideon's Avenger.|
+Lightning Elemental|Magic 2012|149|C|{3}{R}|Creature — Elemental|4|1|Haste <i>(This creature can attack and {tap} as soon as it comes under your control.)</i>|
+Rusted Sentinel|Magic 2012|215|U|{4}|Artifact Creature — Golem|3|4|Rusted Sentinel enters the battlefield tapped.|
+Arachnus Spinner|Magic 2012|162|R|{5}{G}|Creature — Spider|5|7|Reach <i>(This creature can block creatures with flying.)</i>$Tap an untapped Spider you control: Search your graveyard and/or library for a card named Arachnus Web and put it onto the battlefield attached to target creature. If you search your library this way, shuffle it.|
+Jace's Archivist|Magic 2012|59|R|{1}{U}{U}|Creature — Vedalken Wizard|2|2|{U}, {tap}: Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.|
+Flashfreeze|Magic 2012|52|U|{1}{U}|Instant|||Counter target red or green spell.|
+Phantasmal Bear|Magic 2012|70|C|{U}|Creature — Bear Illusion|2|2|When Phantasmal Bear becomes the target of a spell or ability, sacrifice it.|
+Duskhunter Bat|Magic 2012|97|C|{1}{B}|Creature — Bat|1|1|Bloodthirst 1 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)</i>$Flying|
+Swiftfoot Boots|Magic 2012|219|U|{2}|Artifact — Equipment|||Equipped creature has hexproof and haste. <i>(It can't be the target of spells or abilities your opponents control, and it can attack and {tap} as soon as it comes under your control.)</i>$Equip {1} <i>({1}: Attach to target creature you control. Equip only as a sorcery.)</i>|
+Alabaster Mage|Magic 2012|2|U|{1}{W}|Creature — Human Wizard|2|1|{1}{W}: Target creature you control gains lifelink until end of turn. <i>(Damage dealt by the creature also causes its controller to gain that much life.)</i>|
+Turn to Frog|Magic 2012|78|U|{1}{U}|Instant|||Target creature loses all abilities and becomes a 1/1 blue Frog until end of turn.|
+Azure Mage|Magic 2012|45|U|{1}{U}|Creature — Human Wizard|2|1|{3}{U}: Draw a card.|
+Circle of Flame|Magic 2012|127|U|{1}{R}|Enchantment|||Whenever a creature without flying attacks you or a planeswalker you control, Circle of Flame deals 1 damage to that creature.|
+Stormblood Berserker|Magic 2012|156|U|{1}{R}|Creature — Human Berserker|1|1|Bloodthirst 2 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with two +1/+1 counters on it.)</i>$Stormblood Berserker can't be blocked except by two or more creatures.|
+Jade Mage|Magic 2012|181|U|{1}{G}|Creature — Human Shaman|2|1|{2}{G}: Put a 1/1 green Saproling creature token onto the battlefield.|
+Griffin Rider|Magic 2012|20|C|{1}{W}|Creature — Human Knight|1|1|As long as you control a Griffin creature, Griffin Rider gets +3/+3 and has flying.|
+Arachnus Web|Magic 2012|163|C|{2}{G}|Enchantment — Aura|||Enchant creature$Enchanted creature can't attack or block, and its activated abilities can't be activated.$At the beginning of the end step, if enchanted creature's power is 4 or greater, destroy Arachnus Web.|
+Frost Breath|Magic 2012|54|C|{2}{U}|Instant|||Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.|
+Hunter's Insight|Magic 2012|180|U|{2}{G}|Instant|||Choose target creature you control. Whenever that creature deals combat damage to a player or planeswalker this turn, draw that many cards.|
+Dark Favor|Magic 2012|89|C|{1}{B}|Enchantment — Aura|||Enchant creature$When Dark Favor enters the battlefield, you lose 1 life.$Enchanted creature gets +3/+1.|
+Gorehorn Minotaurs|Magic 2012|144|C|{2}{R}{R}|Creature — Minotaur Warrior|3|3|Bloodthirst 2 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with two +1/+1 counters on it.)</i>|
+Stave Off|Magic 2012|36|C|{W}|Instant|||Target creature gains protection from the color of your choice until end of turn. <i>(It can't be blocked, targeted, dealt damage, or enchanted by anything of that color.)</i>|
+Greatsword|Magic 2012|209|U|{3}|Artifact — Equipment|||Equipped creature gets +3/+0.$Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>|
+Crown of Empires|Magic 2012|203|U|{2}|Artifact|||{3}, {tap}: Tap target creature. Gain control of that creature instead if you control artifacts named Scepter of Empires and Throne of Empires.|
+Chandra's Phoenix|Magic 2012|126|R|{1}{R}{R}|Creature — Phoenix|2|2|Flying$Haste <i>(This creature can attack and {tap} as soon as it comes under your control.)</i>$Whenever an opponent is dealt damage by a red instant or sorcery spell you control or by a red planeswalker you control, return Chandra's Phoenix from your graveyard to your hand.|
+Scrambleverse|Magic 2012|153|R|{6}{R}{R}|Sorcery|||For each nonland permanent, choose a player at random. Then each player gains control of each permanent for which he or she was chosen. Untap those permanents.|
+Unsummon|Magic 2012|79|C|{U}|Instant|||Return target creature to its owner's hand.|
+Buried Ruin|Magic 2012|224|U||Land|||{tap}: Add {1} to your mana pool.${2}, {tap}, Sacrifice Buried Ruin: Return target artifact card from your graveyard to your hand.|
+Hideous Visage|Magic 2012|100|C|{2}{B}|Sorcery|||Creatures you control gain intimidate until end of turn. <i>(Each of those creatures can't be blocked except by artifact creatures and/or creatures that share a color with it.)</i>|
+Bloodlord of Vaasgoth|Magic 2012|82|M|{3}{B}{B}|Creature — Vampire Warrior|3|3|Bloodthirst 3 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with three +1/+1 counters on it.)</i>$Flying$Whenever you cast a Vampire creature spell, it gains bloodthirst 3.|
+Goblin Grenade|Magic 2012|140|U|{R}|Sorcery|||As an additional cost to cast Goblin Grenade, sacrifice a Goblin.$Goblin Grenade deals 5 damage to target creature or player.|
+Goblin Piker|Magic 2012|141|C|{1}{R}|Creature — Goblin Warrior|2|1||
+Goblin Chieftain|Magic 2012|138|R|{1}{R}{R}|Creature — Goblin|2|2|Haste <i>(This creature can attack and {tap} as soon as it comes under your control.)</i>$Other Goblin creatures you control get +1/+1 and have haste.|
+Titanic Growth|Magic 2012|198|C|{1}{G}|Instant|||Target creature gets +4/+4 until end of turn.|
+Redirect|Magic 2012|74|R|{U}{U}|Instant|||You may choose new targets for target spell.|
+Deathmark|Magic 2012|90|U|{B}|Sorcery|||Destroy target green or white creature.|
+Diabolic Tutor|Magic 2012|92|U|{2}{B}{B}|Sorcery|||Search your library for a card and put that card into your hand. Then shuffle your library.|
+Angel's Feather|Magic 2012|202|U|{2}|Artifact|||Whenever a player casts a white spell, you may gain 1 life.|
+Kraken's Eye|Magic 2012|211|U|{2}|Artifact|||Whenever a player casts a blue spell, you may gain 1 life.|
+Demon's Horn|Magic 2012|205|U|{2}|Artifact|||Whenever a player casts a black spell, you may gain 1 life.|
+Dragon's Claw|Magic 2012|206|U|{2}|Artifact|||Whenever a player casts a red spell, you may gain 1 life.|
+Wurm's Tooth|Magic 2012|223|U|{2}|Artifact|||Whenever a player casts a green spell, you may gain 1 life.|
+Elixir of Immortality|Magic 2012|208|U|{1}|Artifact|||{2}, {tap}: You gain 5 life. Shuffle Elixir of Immortality and your graveyard into their owner's library.|
+Gravedigger|Magic 2012|99|C|{3}{B}|Creature — Zombie|2|2|When Gravedigger enters the battlefield, you may return target creature card from your graveyard to your hand.|
+Fireball|Magic 2012|131|U|{X}{R}|Sorcery|||Fireball deals X damage divided evenly, rounded down, among any number of target creatures and/or players.$Fireball costs {1} more to cast for each target beyond the first.|
+Lava Axe|Magic 2012|148|C|{4}{R}|Sorcery|||Lava Axe deals 5 damage to target player.|
+Llanowar Elves|Magic 2012|182|C|{G}|Creature — Elf Druid|1|1|{tap}: Add {G} to your mana pool.|
+Runeclaw Bear|Magic 2012|193|C|{1}{G}|Creature — Bear|2|2||
+Naturalize|Magic 2012|185|C|{1}{G}|Instant|||Destroy target artifact or enchantment.|
+Cudgel Troll|Magic 2012|169|U|{2}{G}{G}|Creature — Troll|4|3|{G}: Regenerate Cudgel Troll. <i>(The next time this creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)</i>|
+Birds of Paradise|Magic 2012|165|R|{G}|Creature — Bird|0|1|Flying${tap}: Add one mana of any color to your mana pool.|
+Grand Abolisher|Magic 2012|19|R|{W}{W}|Creature — Human Cleric|2|2|During your turn, your opponents can't cast spells or activate abilities of artifacts, creatures, or enchantments.|
+Glacial Fortress|Magic 2012|227|R||Land|||Glacial Fortress enters the battlefield tapped unless you control a Plains or an Island.${tap}: Add {W} or {U} to your mana pool.|
+Drowned Catacomb|Magic 2012|226|R||Land|||Drowned Catacomb enters the battlefield tapped unless you control an Island or a Swamp.${tap}: Add {U} or {B} to your mana pool.|
+Dragonskull Summit|Magic 2012|225|R||Land|||Dragonskull Summit enters the battlefield tapped unless you control a Swamp or a Mountain.${tap}: Add {B} or {R} to your mana pool.|
+Rootbound Crag|Magic 2012|228|R||Land|||Rootbound Crag enters the battlefield tapped unless you control a Mountain or a Forest.${tap}: Add {R} or {G} to your mana pool.|
+Sunpetal Grove|Magic 2012|229|R||Land|||Sunpetal Grove enters the battlefield tapped unless you control a Forest or a Plains.${tap}: Add {G} or {W} to your mana pool.|
+Stormfront Pegasus|Magic 2012|38|C|{1}{W}|Creature — Pegasus|2|1|Flying|
+Armored Warhorse|Magic 2012|7|C|{W}{W}|Creature — Horse|2|3||
+Siege Mastodon|Magic 2012|34|C|{4}{W}|Creature — Elephant|3|5||
+Griffin Sentinel|Magic 2012|21|C|{2}{W}|Creature — Griffin|1|3|Flying$Vigilance <i>(Attacking doesn't cause this creature to tap.)</i>|
+Zombie Goliath|Magic 2012|119|C|{4}{B}|Creature — Zombie Giant|4|3||
+Doom Blade|Magic 2012|95|C|{1}{B}|Instant|||Destroy target nonblack creature.|
+Taste of Blood|Magic 2012|113|C|{B}|Sorcery|||Taste of Blood deals 1 damage to target player and you gain 1 life.|
+Devouring Swarm|Magic 2012|91|C|{1}{B}{B}|Creature — Insect|2|1|Flying$Sacrifice a creature: Devouring Swarm gets +1/+1 until end of turn.|
+Reassembling Skeleton|Magic 2012|104|U|{1}{B}|Creature — Skeleton Warrior|1|1|{1}{B}: Return Reassembling Skeleton from your graveyard to the battlefield tapped.|
+Bonebreaker Giant|Magic 2012|123|C|{4}{R}|Creature — Giant|4|4||
+Chandra's Outrage|Magic 2012|125|C|{2}{R}{R}|Instant|||Chandra's Outrage deals 4 damage to target creature and 2 damage to that creature's controller.|
+Firebreathing|Magic 2012|132|C|{R}|Enchantment — Aura|||Enchant creature${R}: Enchanted creature gets +1/+0 until end of turn.|
+Act of Treason|Magic 2012|121|C|{2}{R}|Sorcery|||Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. <i>(It can attack and {tap} this turn.)</i>|
+Combust|Magic 2012|128|U|{1}{R}|Instant|||Combust can't be countered by spells or abilities.$Combust deals 5 damage to target white or blue creature. The damage can't be prevented.|
+Garruk's Companion|Magic 2012|175|C|{G}{G}|Creature — Beast|3|2|Trample <i>(If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)</i>|
+Fog|Magic 2012|173|C|{G}|Instant|||Prevent all combat damage that would be dealt this turn.|
+Bountiful Harvest|Magic 2012|166|C|{4}{G}|Sorcery|||You gain 1 life for each land you control.|
+Reclaim|Magic 2012|191|C|{G}|Instant|||Put target card from your graveyard on top of your library.|
+Lure|Magic 2012|183|U|{1}{G}{G}|Enchantment — Aura|||Enchant creature$All creatures able to block enchanted creature do so.|
+Acidic Slime|Magic 2012|161|U|{3}{G}{G}|Creature — Ooze|2|2|Deathtouch <i>(Any amount of damage this deals to a creature is enough to destroy it.)</i>$When Acidic Slime enters the battlefield, destroy target artifact, enchantment, or land.|
+Æther Adept|Magic 2012|41|C|{1}{U}{U}|Creature — Human Wizard|2|2|When &AElig;ther Adept enters the battlefield, return target creature to its owner's hand.|
+Coral Merfolk|Magic 2012|49|C|{1}{U}|Creature — Merfolk|2|1||
+Cancel|Magic 2012|47|C|{1}{U}{U}|Instant|||Counter target spell.|
+Jace's Erasure|Magic 2012|60|C|{1}{U}|Enchantment|||Whenever you draw a card, you may have target player put the top card of his or her library into his or her graveyard.|
+Worldslayer|Magic 2012|222|R|{5}|Artifact — Equipment|||Whenever equipped creature deals combat damage to a player, destroy all permanents other than Worldslayer.$Equip {5} <i>({5}: Attach to target creature you control. Equip only as a sorcery.)</i>|
+Djinn of Wishes|Magic 2012|51|R|{3}{U}{U}|Creature — Djinn|4|4|Flying$Djinn of Wishes enters the battlefield with three wish counters on it.${2}{U}{U}, Remove a wish counter from Djinn of Wishes: Reveal the top card of your library. You may play that card without paying its mana cost. If you don't, exile it.|
+Benalish Veteran|Magic 2012|10|C|{2}{W}|Creature — Human Soldier|2|2|Whenever Benalish Veteran attacks, it gets +1/+1 until end of turn.|
+Sundial of the Infinite|Magic 2012|218|R|{2}|Artifact|||{1}, {tap}: End the turn. Activate this ability only during your turn. <i>(Exile all spells and abilities on the stack. Discard down to your maximum hand size. Damage wears off, and &quot;this turn&quot; and &quot;until end of turn&quot; effects end.)</i>|
+Master Thief|Magic 2012|64|U|{2}{U}{U}|Creature — Human Rogue|2|2|When Master Thief enters the battlefield, gain control of target artifact for as long as you control Master Thief.|
+Gideon's Lawkeeper|Magic 2012|18|C|{W}|Creature — Human Soldier|1|1|{W}, {tap}: Tap target creature.|
+Warstorm Surge|Magic 2012|160|R|{5}{R}|Enchantment|||Whenever a creature enters the battlefield under your control, it deals damage equal to its power to target creature or player.|
+Pacifism|Magic 2012|28|C|{1}{W}|Enchantment — Aura|||Enchant creature$Enchanted creature can't attack or block.|
+Goblin Fireslinger|Magic 2012|139|C|{R}|Creature — Goblin Warrior|1|1|{tap}: Goblin Fireslinger deals 1 damage to target player.|
+Goblin Bangchuckers|Magic 2012|137|U|{2}{R}{R}|Creature — Goblin Warrior|2|2|{tap}: Flip a coin. If you win the flip, Goblin Bangchuckers deals 2 damage to target creature or player. If you lose the flip, Goblin Bangchuckers deals 2 damage to itself.|
+Harbor Serpent|Magic 2012|56|C|{4}{U}{U}|Creature — Serpent|5|5|Islandwalk <i>(This creature is unblockable as long as defending player controls an Island.)</i>$Harbor Serpent can't attack unless there are five or more Islands on the battlefield.|
+Negate|Magic 2012|69|C|{1}{U}|Instant|||Counter target noncreature spell.|
+Wring Flesh|Magic 2012|118|C|{B}|Instant|||Target creature gets -3/-1 until end of turn.|
+Slaughter Cry|Magic 2012|155|C|{2}{R}|Instant|||Target creature gets +3/+0 and gains first strike until end of turn. <i>(It deals combat damage before creatures without first strike.)</i>|
+Manic Vandal|Magic 2012|151|C|{2}{R}|Creature — Human Warrior|2|2|When Manic Vandal enters the battlefield, destroy target artifact.|
+Rampant Growth|Magic 2012|190|C|{1}{G}|Sorcery|||Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.|
+Giant Spider|Magic 2012|177|C|{3}{G}|Creature — Spider|2|4|Reach <i>(This creature can block creatures with flying.)</i>|
+Greater Basilisk|Magic 2012|179|C|{3}{G}{G}|Creature — Basilisk|3|5|Deathtouch <i>(Any amount of damage this deals to a creature is enough to destroy it.)</i>|
+Plummet|Magic 2012|187|C|{1}{G}|Instant|||Destroy target creature with flying.|
+Honor of the Pure|Magic 2012|23|R|{1}{W}|Enchantment|||White creatures you control get +1/+1.|
+Reverberate|Magic 2012|152|R|{R}{R}|Instant|||Copy target instant or sorcery spell. You may choose new targets for the copy.|
+Levitation|Magic 2012|61|U|{2}{U}{U}|Enchantment|||Creatures you control have flying.|
+Cemetery Reaper|Magic 2012|86|R|{1}{B}{B}|Creature — Zombie|2|2|Other Zombie creatures you control get +1/+1.${2}{B}, {tap}: Exile target creature card from a graveyard. Put a 2/2 black Zombie creature token onto the battlefield.|
+Thran Golem|Magic 2012|220|U|{5}|Artifact Creature — Golem|3|3|As long as Thran Golem is enchanted, it gets +2/+2 and has flying, first strike, and trample.|
+Incinerate|Magic 2012|146|C|{1}{R}|Instant|||Incinerate deals 3 damage to target creature or player. A creature dealt damage this way can't be regenerated this turn.|
+Grim Lavamancer|Magic 2012|145|R|{R}|Creature — Human Wizard|1|1|{R}, {tap}, Exile two cards from your graveyard: Grim Lavamancer deals 2 damage to target creature or player.|
+Sorin's Vengeance|Magic 2012|111|R|{4}{B}{B}{B}|Sorcery|||Sorin's Vengeance deals 10 damage to target player and you gain 10 life.|
+Child of Night|Magic 2012|87|C|{1}{B}|Creature — Vampire|2|1|Lifelink <i>(Damage dealt by this creature also causes you to gain that much life.)</i>|
+Mind Rot|Magic 2012|101|C|{2}{B}|Sorcery|||Target player discards two cards.|
+Oblivion Ring|Magic 2012|27|U|{2}{W}|Enchantment|||When Oblivion Ring enters the battlefield, exile another target nonland permanent.$When Oblivion Ring leaves the battlefield, return the exiled card to the battlefield under its owner's control.|
+Tectonic Rift|Magic 2012|157|U|{3}{R}|Sorcery|||Destroy target land. Creatures without flying can't block this turn.|
+Rites of Flourishing|Magic 2012|192|R|{2}{G}|Enchantment|||At the beginning of each player's draw step, that player draws an additional card.$Each player may play an additional land on each of his or her turns.|
+Frost Titan|Magic 2012|55|M|{4}{U}{U}|Creature — Giant|6|6|Whenever Frost Titan becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}.$Whenever Frost Titan enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step.|
+Inferno Titan|Magic 2012|147|M|{4}{R}{R}|Creature — Giant|6|6|{R}: Inferno Titan gets +1/+0 until end of turn.$Whenever Inferno Titan enters the battlefield or attacks, it deals 3 damage divided as you choose among one, two, or three target creatures and/or players.|
+Manabarbs|Magic 2012|150|R|{3}{R}|Enchantment|||Whenever a player taps a land for mana, Manabarbs deals 1 damage to that player.|
+Assault Griffin|Magic 2012|8|C|{3}{W}|Creature — Griffin|3|2|Flying|
+Belltower Sphinx|Magic 2012|46|U|{4}{U}|Creature — Sphinx|2|5|Flying$Whenever a source deals damage to Belltower Sphinx, that source's controller puts that many cards from the top of his or her library into his or her graveyard.|
+Mind Unbound|Magic 2012|68|R|{4}{U}{U}|Enchantment|||At the beginning of your upkeep, put a lore counter on Mind Unbound, then draw a card for each lore counter on Mind Unbound.|
+Call to the Grave|Magic 2012|85|R|{4}{B}|Enchantment|||At the beginning of each player's upkeep, that player sacrifices a non-Zombie creature.$At the beginning of the end step, if no creatures are on the battlefield, sacrifice Call to the Grave.|
+Goblin War Paint|Magic 2012|143|C|{1}{R}|Enchantment — Aura|||Enchant creature$Enchanted creature gets +2/+2 and has haste. <i>(It can attack and {tap} no matter when it came under its controller's control.)</i>|
+Royal Assassin|Magic 2012|105|R|{1}{B}{B}|Creature — Human Assassin|1|1|{tap}: Destroy target tapped creature.|
+Solemn Simulacrum|Magic 2012|217|R|{4}|Artifact Creature — Golem|2|2|When Solemn Simulacrum enters the battlefield, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library.$When Solemn Simulacrum dies, you may draw a card.|
+Distress|Magic 2012|94|C|{B}{B}|Sorcery|||Target player reveals his or her hand. You choose a nonland card from it. That player discards that card.|
+Quicksilver Amulet|Magic 2012|214|R|{4}|Artifact|||{4}, {tap}: You may put a creature card from your hand onto the battlefield.|
+Elvish Archdruid|Magic 2012|172|R|{1}{G}{G}|Creature — Elf Druid|2|2|Other Elf creatures you control get +1/+1.${tap}: Add {G} to your mana pool for each Elf you control.|
+Smallpox|Magic 2012|108|U|{B}{B}|Sorcery|||Each player loses 1 life, discards a card, sacrifices a creature, then sacrifices a land.|
+Flight|Magic 2012|53|C|{U}|Enchantment — Aura|||Enchant creature$Enchanted creature has flying.|
+Jace, Memory Adept|Magic 2012|58|M|{3}{U}{U}|Planeswalker — Jace|||+1: Draw a card. Target player puts the top card of his or her library into his or her graveyard.$0: Target player puts the top ten cards of his or her library into his or her graveyard.$-7: Any number of target players each draw twenty cards.|
+Peregrine Griffin|Magic 2012|29|C|{4}{W}|Creature — Griffin|2|4|Flying$First strike <i>(This creature deals combat damage before creatures without first strike.)</i>|
+Demystify|Magic 2012|13|C|{W}|Instant|||Destroy target enchantment.|
+Gideon Jura|Magic 2012|16|M|{3}{W}{W}|Planeswalker — Gideon|||+2: During target opponent's next turn, creatures that player controls attack Gideon Jura if able.$-2: Destroy target tapped creature.$0: Until end of turn, Gideon Jura becomes a 6/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.|
+Sorin Markov|Magic 2012|109|M|{3}{B}{B}{B}|Planeswalker — Sorin|||+2: Sorin Markov deals 2 damage to target creature or player and you gain 2 life.$-3: Target opponent's life total becomes 10.$-7: You control target player during that player's next turn.|
+Fiery Hellhound|Magic 2012|130|C|{1}{R}{R}|Creature — Elemental Hound|2|2|{R}: Fiery Hellhound gets +1/+0 until end of turn.|
+Angel's Mercy|Magic 2012|4|C|{2}{W}{W}|Instant|||You gain 7 life.|
+Roc Egg|Magic 2012|32|U|{2}{W}|Creature — Bird|0|3|Defender <i>(This creature can't attack.)</i>$When Roc Egg dies, put a 3/3 white Bird creature token with flying onto the battlefield.|
+Mind Control|Magic 2012|67|U|{3}{U}{U}|Enchantment — Aura|||Enchant creature$You control enchanted creature.|
+Overrun|Magic 2012|186|U|{2}{G}{G}{G}|Sorcery|||Creatures you control get +3/+3 and gain trample until end of turn. <i>(If a creature you control would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)</i>|
+Auramancer|Magic 2012|9|C|{2}{W}|Creature — Human Wizard|2|2|When Auramancer enters the battlefield, you may return target enchantment card from your graveyard to your hand.|
+Elite Vanguard|Magic 2012|15|U|{W}|Creature — Human Soldier|2|1||
+Grave Titan|Magic 2012|98|M|{4}{B}{B}|Creature — Giant|6|6|Deathtouch$Whenever Grave Titan enters the battlefield or attacks, put two 2/2 black Zombie creature tokens onto the battlefield.|
+Mana Leak|Magic 2012|63|C|{1}{U}|Instant|||Counter target spell unless its controller pays {3}.|
+Primeval Titan|Magic 2012|188|M|{4}{G}{G}|Creature — Giant|6|6|Trample$Whenever Primeval Titan enters the battlefield or attacks, you may search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library.|
+Sun Titan|Magic 2012|39|M|{4}{W}{W}|Creature — Giant|6|6|Vigilance$Whenever Sun Titan enters the battlefield or attacks, you may return target permanent card with converted mana cost 3 or less from your graveyard to the battlefield.|
+Fling|Magic 2012|134|C|{1}{R}|Instant|||As an additional cost to cast Fling, sacrifice a creature.$Fling deals damage equal to the sacrificed creature's power to target creature or player.|
+Sacred Wolf|Magic 2012|194|C|{2}{G}|Creature — Wolf|3|1|Hexproof <i>(This creature can't be the target of spells or abilities your opponents control.)</i>|
+Zombie Infestation|Magic 2012|120|U|{1}{B}|Enchantment|||Discard two cards: Put a 2/2 black Zombie creature token onto the battlefield.|
+Mighty Leap|Magic 2012|26|C|{1}{W}|Instant|||Target creature gets +2/+2 and gains flying until end of turn.|
+Autumn's Veil|Magic 2012|164|U|{G}|Instant|||Spells you control can't be countered by blue or black spells this turn, and creatures you control can't be the targets of blue or black spells this turn.|
+Sorin's Thirst|Magic 2012|110|C|{B}{B}|Instant|||Sorin's Thirst deals 2 damage to target creature and you gain 2 life.|
+Warpath Ghoul|Magic 2012|117|C|{2}{B}|Creature — Zombie|3|2||
+Goblin Arsonist|Magic 2012|136|C|{R}|Creature — Goblin Shaman|1|1|When Goblin Arsonist dies, you may have it deal 1 damage to target creature or player.|
+Disentomb|Magic 2012|93|C|{B}|Sorcery|||Return target creature card from your graveyard to your hand.|
+Brink of Disaster|Magic 2012|84|C|{2}{B}{B}|Enchantment — Aura|||Enchant creature or land$When enchanted permanent becomes tapped, destroy it.|
+Consume Spirit|Magic 2012|88|U|{X}{1}{B}|Sorcery|||Spend only black mana on X.$Consume Spirit deals X damage to target creature or player and you gain X life.|
+Kite Shield|Magic 2012|210|U|{0}|Artifact — Equipment|||Equipped creature gets +0/+3.$Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>|
+Pentavus|Magic 2012|213|R|{7}|Artifact Creature — Construct|0|0|Pentavus enters the battlefield with five +1/+1 counters on it.${1}, Remove a +1/+1 counter from Pentavus: Put a 1/1 colorless Pentavite artifact creature token with flying onto the battlefield.${1}, Sacrifice a Pentavite: Put a +1/+1 counter on Pentavus.|
+Blood Seeker|Magic 2012|81|C|{1}{B}|Creature — Vampire Shaman|1|1|Whenever a creature enters the battlefield under an opponent's control, you may have that player lose 1 life.|
+Sengir Vampire|Magic 2012|107|U|{3}{B}{B}|Creature — Vampire|4|4|Flying$Whenever a creature dealt damage by Sengir Vampire this turn dies, put a +1/+1 counter on Sengir Vampire.|
+Ponder|Magic 2012|73|C|{U}|Sorcery|||Look at the top three cards of your library, then put them back in any order. You may shuffle your library.$Draw a card.|
+Forest|Magic 2012|247|L||Basic Land — Forest|||G|
+Forest|Magic 2012|246|L||Basic Land — Forest|||G|
+Forest|Magic 2012|248|L||Basic Land — Forest|||G|
+Forest|Magic 2012|249|L||Basic Land — Forest|||G|
+Island|Magic 2012|235|L||Basic Land — Island|||U|
+Island|Magic 2012|236|L||Basic Land — Island|||U|
+Island|Magic 2012|234|L||Basic Land — Island|||U|
+Island|Magic 2012|237|L||Basic Land — Island|||U|
+Mountain|Magic 2012|245|L||Basic Land — Mountain|||R|
+Mountain|Magic 2012|242|L||Basic Land — Mountain|||R|
+Mountain|Magic 2012|244|L||Basic Land — Mountain|||R|
+Mountain|Magic 2012|243|L||Basic Land — Mountain|||R|
+Plains|Magic 2012|231|L||Basic Land — Plains|||W|
+Plains|Magic 2012|233|L||Basic Land — Plains|||W|
+Plains|Magic 2012|230|L||Basic Land — Plains|||W|
+Plains|Magic 2012|232|L||Basic Land — Plains|||W|
+Swamp|Magic 2012|240|L||Basic Land — Swamp|||B|
+Swamp|Magic 2012|241|L||Basic Land — Swamp|||B|
+Swamp|Magic 2012|239|L||Basic Land — Swamp|||B|
+Swamp|Magic 2012|238|L||Basic Land — Swamp|||B|
+Volcanic Dragon|Magic 2012|158|U|{4}{R}{R}|Creature — Dragon|4|4|Flying$Haste <i>(This creature can attack and {tap} as soon as it comes under your control.)</i>|
+Flameblast Dragon|Magic 2012|133|R|{4}{R}{R}|Creature — Dragon|5|5|Flying$Whenever Flameblast Dragon attacks, you may pay {X}{R}. If you do, Flameblast Dragon deals X damage to target creature or player.|
+Brindle Boar|Magic 2012|167|C|{2}{G}|Creature — Boar|2|2|Sacrifice Brindle Boar: You gain 4 life.|
+Stampeding Rhino|Magic 2012|196|C|{4}{G}|Creature — Rhino|4|4|Trample <i>(If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)</i>|
+Vastwood Gorger|Magic 2012|200|C|{5}{G}|Creature — Wurm|5|6||
+Archon of Justice|Magic 2012|6|R|{3}{W}{W}|Creature — Archon|4|4|Flying$When Archon of Justice dies, exile target permanent.|
+Shock|Magic 2012|154|C|{R}|Instant|||Shock deals 2 damage to target creature or player.|
+Goblin Tunneler|Magic 2012|142|C|{1}{R}|Creature — Goblin Rogue|1|1|{tap}: Target creature with power 2 or less is unblockable this turn.|
+Time Reversal|Magic 2012|77|M|{3}{U}{U}|Sorcery|||Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards. Exile Time Reversal.|
+Alluring Siren|Magic 2012|42|U|{1}{U}|Creature — Siren|1|1|{tap}: Target creature an opponent controls attacks you this turn if able.|
+Ice Cage|Magic 2012|57|C|{1}{U}|Enchantment — Aura|||Enchant creature$Enchanted creature can't attack or block, and its activated abilities can't be activated.$When enchanted creature becomes the target of a spell or ability, destroy Ice Cage.|

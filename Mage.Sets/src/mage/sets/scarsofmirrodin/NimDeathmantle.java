@@ -27,8 +27,6 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -38,20 +36,15 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.continious.SetCardColorAttachedEffect;
 import mage.abilities.effects.common.continious.SetCardSubtypeAttachedEffect;
-import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.IntimidateAbility;
-import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -59,6 +52,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -139,7 +134,7 @@ class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl<NimDeathmantle
 
 	@Override
 	public String getRule() {
-		return "Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {4}. If you do, return that card to the battlefield and attach Nim Deathmantle to it";
+		return "Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {4}. If you do, return that card to the battlefield and attach Nim Deathmantle to it.";
 	}
 }
 

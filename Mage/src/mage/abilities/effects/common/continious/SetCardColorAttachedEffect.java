@@ -77,7 +77,7 @@ public class SetCardColorAttachedEffect extends ContinuousEffectImpl<SetCardColo
         else if (attachmentType == Constants.AttachmentType.EQUIPMENT)
             sb.append("Equipped");
 
-        sb.append(" creature is ").append(setColor);
+        sb.append(" creature is ").append(setColor.getDescription());
         staticText = sb.toString();
     }
 }
