@@ -163,6 +163,25 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
 			sb.append("G");
 		return sb.toString();
 	}
+
+	public String getDescription() {
+		StringBuilder sb = new StringBuilder();
+		if (getColorCount() > 1) {
+			return "multicolored";
+		} else {
+		if (white)
+			return "white";
+		if (blue)
+			return "blue";
+		if (black)
+			return "black";
+		if (red)
+			return "red";
+		if (green)
+			return "green";
+		}
+		return "colorless";
+	}
 	
 	@Override
 	public boolean equals(Object color) {
