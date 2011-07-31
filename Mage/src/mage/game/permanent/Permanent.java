@@ -136,6 +136,26 @@ public interface Permanent extends Card {
 	 */
 	public List<UUID> getImprinted();
 
+	/**
+	 * Allows to connect any card to permanent.
+	 * Very similar to Imprint except that it is for internal use only.
+	 *
+	 * @param connectedCard
+	 */
+	public void addConnectedCard(UUID connectedCard);
+
+	/**
+	 * Returns connected cards.
+	 * Very similar to Imprint except that it is for internal use only.
+	 * @return
+	 */
+	public List<UUID> getConnectedCards();
+
+	/**
+	 * Clear all connected cards.
+	 */
+	public void clearConnectedCards();
+
 	@Override
 	public Permanent copy();
 

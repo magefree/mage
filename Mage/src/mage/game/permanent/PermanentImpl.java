@@ -72,6 +72,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	protected Counters counters;
 	protected List<UUID> attachments = new ArrayList<UUID>();
 	protected List<UUID> imprinted = new ArrayList<UUID>();
+	protected List<UUID> connectedCards = new ArrayList<UUID>();
 	protected UUID attachedTo;
 
 	public PermanentImpl(UUID ownerId, UUID controllerId, String name) {
@@ -110,6 +111,9 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		}
 		for (UUID imprintedId : permanent.imprinted) {
 			this.imprinted.add(imprintedId);
+		}
+		for (UUID connectedCardId : permanent.connectedCards) {
+			this.connectedCards.add(connectedCardId);
 		}
 		this.attachedTo = permanent.attachedTo;
 	}
@@ -430,6 +434,21 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	@Override
 	public UUID getAttachedTo() {
 		return attachedTo;
+	}
+
+	@Override
+	public void addConnectedCard(UUID connectedCard) {
+		this.connectedCards.add(connectedCard);
+	}
+
+	@Override
+	public List<UUID> getConnectedCards() {
+		return this.connectedCards;
+	}
+
+	@Override
+	public void clearConnectedCards() {
+		this.connectedCards.clear();
 	}
 
 	@Override
