@@ -648,7 +648,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 					if (source != null && (source.getAbilities().containsKey(InfectAbility.getInstance().getId()))) {
 						getCounters().addCounter(CounterType.POISON.createInstance(actualDamage));
 					} else {
-						actualDamage = this.loseLife(actualDamage, game);
+						// fixed: damage dealt should not be equal to life lost
+						// actualDamage = this.loseLife(actualDamage, game);
+						this.loseLife(actualDamage, game);
 					}
 					if (source != null && source.getAbilities().containsKey(LifelinkAbility.getInstance().getId())) {
 						Player player = game.getPlayer(source.getControllerId());
