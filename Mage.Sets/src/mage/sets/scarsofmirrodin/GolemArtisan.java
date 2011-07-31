@@ -53,6 +53,7 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 
 import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -118,7 +119,7 @@ class GolemArtisanEffect extends OneShotEffect<GolemArtisanEffect> {
 			Choice abilityChoice = new ChoiceImpl();
 			abilityChoice.setMessage("Choose an ability to add");
 
-			HashSet<String> abilities = new HashSet<String>();
+			Set<String> abilities = new HashSet<String>();
 			abilities.add(FlyingAbility.getInstance().getRule());
 			abilities.add(TrampleAbility.getInstance().getRule());
 			abilities.add(HasteAbility.getInstance().getRule());
