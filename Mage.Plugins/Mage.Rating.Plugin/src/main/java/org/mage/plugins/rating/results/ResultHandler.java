@@ -3,6 +3,7 @@ package org.mage.plugins.rating.results;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ public class ResultHandler {
 	private static Map<String, Integer> ratings = new LinkedHashMap<String, Integer>();
 	private static String newLine = System.getProperty("line.separator");
 	private static Pattern scorePattern = Pattern.compile("([^|]*)[|]+ > [|]+([^|]*)");
+    private static Pattern pickPattern = Pattern.compile("[\\w\\d]{3}\\|(.*)\\|(.*)\\|(.*)");
 	private static Logger log = Logger.getLogger(ResultHandler.class);
 
 	static {
@@ -62,6 +64,7 @@ public class ResultHandler {
 			}
 		}
 		if (ratingFile.createNewFile()) {
+            loadPickFiles("picks");
 			for (File f : file.listFiles()) {
 				if (!f.getName().equals("rating.txt")) {
 					parseFile(f);
@@ -78,6 +81,37 @@ public class ResultHandler {
 			fos.close();
 		}
 	}
+
+    private void loadPickFiles(String directory) throws Exception {
+        File directoryFile = new File(directory);
+        if (directoryFile.exists()) {
+            for (File f: directoryFile.listFiles(new FilenameFilter() {
+                @Override
+                public boolean accept(File dir, String name) {
+                    return name.endsWith(".txt");
+                }
+            })) {
+                log.info("Load pick file " + f.getName());
+                loadPickFile(f);
+            }
+        } else {
+            log.info("No pics directory found! Copy it from Utils");
+        }
+    }
+
+    private void loadPickFile(File f) throws Exception {
+        Scanner s = new Scanner(f);
+        while (s.hasNextLine()) {
+            String line = s.nextLine();
+            Matcher m = pickPattern.matcher(line);
+            if (m.matches()) {
+                String card = m.group(1);
+                Float stdRate = Float.parseFloat(m.group(2));
+                int rate = (int)((15 - stdRate + 1) * 1000);
+                ratings.put(card, rate);
+            }
+        }
+    }
 
 	private void parseFile(File f) throws Exception {
 		Scanner s = new Scanner(f);
