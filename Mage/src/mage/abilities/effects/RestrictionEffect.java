@@ -68,5 +68,9 @@ public abstract class RestrictionEffect<T extends RestrictionEffect<T>> extends 
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Game game) {
 		return true;
 	}
+
+	public boolean canBeUntapped(Permanent permanent, Game game) {
+		return true;
+	}
 	
 }

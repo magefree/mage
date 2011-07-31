@@ -52,6 +52,7 @@ import mage.abilities.SpecialAction;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.*;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.ManaOptions;
@@ -571,7 +572,11 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	public void untap(Game game) {
 		//20091005 - 502.2
 		for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
-			permanent.untap(game);
+			boolean untap = true;
+			for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game)) {
+				untap &= effect.canBeUntapped(permanent, game);
+			}
+			if (untap) permanent.untap(game);
 		}
 	}
 
