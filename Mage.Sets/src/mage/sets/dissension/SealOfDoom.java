@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SealOfDoom extends CardImpl<SealOfDoom> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 
     static {
         filter.setUseColor(true);
