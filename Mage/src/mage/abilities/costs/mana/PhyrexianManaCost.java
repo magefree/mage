@@ -66,6 +66,9 @@ public class PhyrexianManaCost extends ColoredManaCost {
 
 	@Override
 	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+		if (!game.getPlayer(controllerId).isLifeTotalCanChange()) {
+			return false;
+		}
 		return game.getPlayer(controllerId).getLife() > 2;
 	}
 

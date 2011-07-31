@@ -98,6 +98,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	protected RangeOfInfluence range;
 	protected Set<UUID> inRange = new HashSet<UUID>();
 	protected boolean isTestMode = false;
+	protected boolean lifeTotalCanChange = true;
 
 	@Override
 	public abstract T copy();
@@ -139,6 +140,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		this.passedTurn = player.passedTurn;
 		this.left = player.left;
 		this.range = player.range;
+		this.lifeTotalCanChange = player.lifeTotalCanChange;
 		for (UUID id: player.inRange) {
 			this.inRange.add(id);
 		}
@@ -176,6 +178,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		this.abilities.clear();
 		this.landsPerTurn = 1;
 		this.maxHandSize = 7;
+		this.lifeTotalCanChange = true;
 	}
 
 	@Override
@@ -614,11 +617,22 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public void setLife(int life, Game game) {
-		this.life = life;
+		if (this.lifeTotalCanChange) this.life = life;
+	}
+
+	@Override
+	public void setLifeTotalCanChange(boolean lifeTotalCanChange) {
+		this.lifeTotalCanChange = lifeTotalCanChange;
+	}
+
+	@Override
+	public boolean isLifeTotalCanChange() {
+		return this.lifeTotalCanChange;
 	}
 
 	@Override
 	public int loseLife(int amount, Game game) {
+		if (!lifeTotalCanChange) return 0;
 		GameEvent event = new GameEvent(GameEvent.EventType.LOSE_LIFE, playerId, playerId, playerId, amount, false);
 		if (!game.replaceEvent(event)) {
 			setLife(this.life - amount, game);
@@ -630,6 +644,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public void gainLife(int amount, Game game) {
+		if (!lifeTotalCanChange) return;
 		GameEvent event = new GameEvent(GameEvent.EventType.GAIN_LIFE, playerId, playerId, playerId, amount, false);
 		if (!game.replaceEvent(event)) {
 			setLife(this.life + amount, game);

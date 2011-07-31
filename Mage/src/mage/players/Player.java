@@ -83,6 +83,8 @@ public interface Player extends MageItem, Copyable<Player> {
 	public void setLife(int life, Game game);
 	public int loseLife(int amount, Game game);
 	public void gainLife(int amount, Game game);
+	public boolean isLifeTotalCanChange();
+	public void setLifeTotalCanChange(boolean lifeTotalCanChange);
 	public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable);
 	public Cards getHand();
 	public int getLandsPlayed();

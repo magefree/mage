@@ -53,6 +53,9 @@ public class PayLifeCost extends CostImpl<PayLifeCost> {
 
 	@Override
 	public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
+		if (amount > 0 && !game.getPlayer(controllerId).isLifeTotalCanChange()) {
+			return false;
+		}
 		return game.getPlayer(controllerId).getLife() > amount;
 	}
 
