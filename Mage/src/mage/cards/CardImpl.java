@@ -98,6 +98,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 	@Override
 	public void assignNewId() {
 		this.objectId = UUID.randomUUID();
+		this.abilities.newId();
 		this.abilities.setSourceId(objectId);
 	}
 

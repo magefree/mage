@@ -88,4 +88,10 @@ public class Effects extends ArrayList<Effect> {
 		}
 		return total;
 	}
+
+	public void newId() {
+		for (Effect effect: this) {
+			effect.newId();
+		}
+	}
 }

@@ -69,7 +69,10 @@ public class CopyFunction implements Function<Card, Card> {
 		target.setExpansionSetCode(source.getExpansionSetCode());
 		target.getAbilities().clear();
 
-		for (Ability ability : source.getAbilities()) {
+		for (Ability ability0 : source.getAbilities()) {
+			Ability ability = ability0.copy();
+			ability.newId();
+			ability.setSourceId(target.getId());
 			target.addAbility(ability);
 		}
 

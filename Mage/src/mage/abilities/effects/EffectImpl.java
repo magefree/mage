@@ -103,4 +103,9 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 	public TargetPointer getTargetPointer() {
 		return this.targetPointer;
 	}
+
+	@Override
+	public void newId() {
+		this.id = UUID.randomUUID();
+	}
 }

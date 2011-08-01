@@ -121,6 +121,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 	@Override
 	public void newId() {
 		this.id = UUID.randomUUID();
+		getEffects().newId();
 	}
 
 	@Override

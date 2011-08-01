@@ -44,6 +44,7 @@ import mage.target.targetpointer.TargetPointer;
 public interface Effect<T extends Effect<T>> extends Serializable {
 
 	public UUID getId();
+	public void newId();
 	public String getText(Mode mode);
 	public boolean apply(Game game, Ability source);
 	public Outcome getOutcome();

@@ -178,6 +178,13 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 	}
 
 	@Override
+	public void newId() {
+		for (Ability ability: this) {
+			ability.newId();
+		}
+	}
+
+	@Override
 	public boolean contains(T ability) {
 		for (T test: this) {
 			if (ability.getId().equals(test.getId()) || ability.getRule().equals(test.getRule())) {
