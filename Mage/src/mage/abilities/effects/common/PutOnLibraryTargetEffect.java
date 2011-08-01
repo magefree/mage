@@ -38,55 +38,63 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class PutOnLibraryTargetEffect extends OneShotEffect<PutOnLibraryTargetEffect> {
 
-	boolean onTop;
+    boolean onTop;
 
-	public PutOnLibraryTargetEffect(boolean onTop) {
-		super(Outcome.ReturnToHand);
-		this.onTop = onTop;
-	}
+    public PutOnLibraryTargetEffect(boolean onTop) {
+        super(Outcome.ReturnToHand);
+        this.onTop = onTop;
+    }
 
-	public PutOnLibraryTargetEffect(final PutOnLibraryTargetEffect effect) {
-		super(effect);
-		this.onTop = effect.onTop;
-	}
+    public PutOnLibraryTargetEffect(final PutOnLibraryTargetEffect effect) {
+        super(effect);
+        this.onTop = effect.onTop;
+    }
 
-	@Override
-	public PutOnLibraryTargetEffect copy() {
-		return new PutOnLibraryTargetEffect(this);
-	}
+    @Override
+    public PutOnLibraryTargetEffect copy() {
+        return new PutOnLibraryTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		switch (source.getTargets().get(0).getZone()) {
-			case BATTLEFIELD:
-				Permanent permanent = game.getPermanent(source.getFirstTarget());
-				if (permanent != null) {
-					return permanent.moveToZone(Zone.LIBRARY, source.getId(), game, onTop);
-				}
-			case GRAVEYARD:
-				Card card = game.getCard(source.getFirstTarget());
-				for (Player player: game.getPlayers().values()) {
-					if (player.getGraveyard().contains(card.getId())) {
-						player.getGraveyard().remove(card);
-						return card.moveToZone(Zone.LIBRARY, source.getId(), game, onTop);
-					}
-				}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        boolean result = false;
+        for (UUID id : targetPointer.getTargets(source)) {
+            switch (game.getZone(id)) {
+                case BATTLEFIELD:
+                    Permanent permanent = game.getPermanent(id);
+                    if (permanent != null) {
+                        result |= permanent.moveToZone(Zone.LIBRARY, source.getId(), game, onTop);
+                    }
+                case GRAVEYARD:
+                    Card card = game.getCard(id);
+                    for (Player player : game.getPlayers().values()) {
+                        if (player.getGraveyard().contains(card.getId())) {
+                            player.getGraveyard().remove(card);
+                            result |= card.moveToZone(Zone.LIBRARY, source.getId(), game, onTop);
+                        }
+                    }
+            }
+        }
+        return result;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Put target ").append(mode.getTargets().get(0).getTargetName()).append(" on ");
-		sb.append(onTop?"top":"the bottom").append(" of it's owner's library");
-		return sb.toString();
+    @Override
+    public String getText(Mode mode) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Put ");
+        if (mode.getTargets().get(0).getMaxNumberOfTargets() == 0) {
+            sb.append("any number of ");
+        }
+        sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" on ");
+        sb.append(onTop ? "top" : "the bottom").append(" of it's owner's library");
+        return sb.toString();
 
-	}
+    }
 }
