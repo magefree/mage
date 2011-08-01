@@ -117,7 +117,10 @@ class PhyrexianMetamorphEffect extends ContinuousEffectImpl<PhyrexianMetamorphEf
 		}
 		permanent.setExpansionSetCode(card.getExpansionSetCode());
 		permanent.getAbilities().clear();
-		for (Ability ability: card.getAbilities()) {
+		for (Ability ability0: card.getAbilities()) {
+            Ability ability = ability0.copy();
+            ability.newId();
+            ability.setSourceId(card.getId());
 			permanent.addAbility(ability);
 		}
 		permanent.getPower().setValue(card.getPower().getValue());
