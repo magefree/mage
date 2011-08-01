@@ -6,7 +6,8 @@ update-list-implemented-cards.pl
  - generates
   - oldList.txt: list of cards implemented at the time the script is ran
   - newList.txt: list of cards implemented since the last time the script was ran
-
+gen-list-cards-for-set.pl - generates the file for unimplemented cards for a set
+  
 Files used:
  - author.txt - one line file that contains the author name you want to appear in the generated java files
  - keywords.txt - list of keywords that have an implementaion and are automatically added to the card implementation

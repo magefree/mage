@@ -195,22 +195,10 @@ public class CardsStorage {
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
 				String[] s = line.split("\\|");
-				if (s.length == 6) {
+				if (s.length == 2) {
 					String name = s[1].trim();
 					if (!names.contains(set + name)) {
-						Integer cid = Integer.parseInt(s[5]);
-						Card card = tmp.copy();
-						card.setName(name);
-						card.setExpansionSetCode(set);
-						card.setCardNumber(cid);
-						card.setRarity(Constants.Rarity.NA); // mark as not implemented
-						card.getCardType().clear();
-						cards.add(card);
-					}
-				} else { // for m12 and further
-					String name = s[0].trim();
-					if (!names.contains(set + name)) {
-						Integer cid = Integer.parseInt(s[2]);
+						Integer cid = Integer.parseInt(s[0]);
 						Card card = tmp.copy();
 						card.setName(name);
 						card.setExpansionSetCode(set);
