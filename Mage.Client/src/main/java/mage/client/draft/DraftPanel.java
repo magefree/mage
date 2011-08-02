@@ -41,6 +41,7 @@ import java.util.UUID;
 import javax.swing.Timer;
 import mage.client.MageFrame;
 import mage.client.constants.Constants.SortBy;
+import mage.client.plugins.impl.Plugins;
 import mage.remote.Session;
 import mage.client.util.Event;
 import mage.client.util.Listener;
@@ -113,6 +114,7 @@ public class DraftPanel extends javax.swing.JPanel {
 							//draftBooster.loadBooster(view.getBooster(), bigCard);
 							draftBooster.loadBooster(emptyView, bigCard);
 							draftPicks.loadCards(view.getPicks(), bigCard, null);
+							Plugins.getInstance().getActionCallback().hidePopup();
 							setMessage("Waiting for other players");
 						}
 					}

@@ -227,7 +227,7 @@ public class MageActionCallback implements ActionCallback {
         }
     }
 
-    private void hidePopup() {
+    public void hidePopup() {
         this.popupCard = null;
         if (popup != null) {
             popup.hide();

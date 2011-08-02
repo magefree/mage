@@ -8,4 +8,5 @@ public interface ActionCallback {
 	void mouseMoved(MouseEvent e, TransferData data);
 	void mouseEntered(MouseEvent e, TransferData data);
 	void mouseExited(MouseEvent e, TransferData dat);
+	void hidePopup();
 }

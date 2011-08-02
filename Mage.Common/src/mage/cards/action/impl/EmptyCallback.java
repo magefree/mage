@@ -25,6 +25,10 @@ public class EmptyCallback implements ActionCallback {
 	}
 
 	@Override
+	public void hidePopup() {
+	}
+
+	@Override
 	public void mouseClicked(MouseEvent e, TransferData data) {
 	}
 
