@@ -44,6 +44,7 @@ import mage.client.constants.Constants.SortBy;
 import mage.remote.Session;
 import mage.client.util.Event;
 import mage.client.util.Listener;
+import mage.view.CardsView;
 import mage.view.DraftPickView;
 import mage.view.DraftView;
 
@@ -58,6 +59,8 @@ public class DraftPanel extends javax.swing.JPanel {
 	private Timer countdown;
 	private int timeout;
 	private boolean picked;
+
+	private static CardsView emptyView = new CardsView();
 	
     /** Creates new form DraftPanel */
     public DraftPanel() {
@@ -107,7 +110,8 @@ public class DraftPanel extends javax.swing.JPanel {
 					if (event.getEventName().equals("pick-a-card")) {
 						DraftPickView view = session.sendCardPick(draftId, (UUID)event.getSource());
 						if (view != null) {
-							draftBooster.loadBooster(view.getBooster(), bigCard);
+							//draftBooster.loadBooster(view.getBooster(), bigCard);
+							draftBooster.loadBooster(emptyView, bigCard);
 							draftPicks.loadCards(view.getPicks(), bigCard, null);
 							setMessage("Waiting for other players");
 						}
@@ -115,7 +119,7 @@ public class DraftPanel extends javax.swing.JPanel {
 				}
 			}
 		);
-		setMessage("");
+		setMessage("Pick a card");
 		countdown.stop();
 		this.timeout = draftPickView.getTimeout();
 		setTimeout(Integer.toString(timeout));
