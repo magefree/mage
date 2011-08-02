@@ -470,6 +470,22 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	}
 
 	@Override
+	public UUID chooseAttackerOrder(List<Permanent> attackers, Game game) {
+		while (!abort) {
+			game.fireSelectTargetEvent(playerId, "Pick attacker", attackers, true);
+			waitForResponse();
+			if (response.getUUID() != null) {
+				for (Permanent perm: attackers) {
+					if (perm.getId().equals(response.getUUID()))
+						return perm.getId();
+				}
+			}
+		}
+		return null;
+	}
+
+
+	@Override
 	public UUID chooseBlockerOrder(List<Permanent> blockers, Game game) {
 		while (!abort) {
 			game.fireSelectTargetEvent(playerId, "Pick blocker", blockers, true);

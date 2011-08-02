@@ -70,6 +70,9 @@ public class CombatDamageStep extends Step<CombatDamageStep> {
 		for (CombatGroup group: game.getCombat().getGroups()) {
 			group.assignDamage(first, game);
 		}
+		for (CombatGroup group : game.getCombat().getBlockingGroups()) {
+			group.assignDamageToAttackers(first, game);
+		}
 	}
 
 	public boolean getFirst() {

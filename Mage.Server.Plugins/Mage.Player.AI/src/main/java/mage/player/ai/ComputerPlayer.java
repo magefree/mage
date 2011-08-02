@@ -893,6 +893,12 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	@Override
+	public UUID chooseAttackerOrder(List<Permanent> attackers, Game game) {
+		//TODO: improve this
+		return attackers.iterator().next().getId();
+	}
+
+	@Override
 	public UUID chooseBlockerOrder(List<Permanent> blockers, Game game) {
 		//TODO: improve this
 		return blockers.iterator().next().getId();
