@@ -41,7 +41,6 @@ public class Deck implements Serializable {
 	private Set<Card> sideboard = new LinkedHashSet<Card>();
 
 	public static Deck load(DeckCardLists deckCardLists) throws GameException {
-
 		return Deck.load(deckCardLists, false);
 	}
 
@@ -111,5 +110,4 @@ public class Deck implements Serializable {
 	public Set<Card> getSideboard() {
 		return sideboard;
 	}
-	
 }

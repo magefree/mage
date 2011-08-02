@@ -28,6 +28,7 @@
 
 package mage.server.tournament;
 
+import java.awt.*;
 import java.rmi.RemoteException;
 import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
@@ -40,7 +41,7 @@ import mage.interfaces.callback.ClientCallback;
 import mage.server.User;
 import mage.server.UserManager;
 import mage.server.util.ThreadExecutor;
-import mage.view.TournamentView;
+import mage.view.*;
 import org.apache.log4j.Logger;
 
 /**

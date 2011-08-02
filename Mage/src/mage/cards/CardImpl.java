@@ -52,6 +52,7 @@ import mage.watchers.Watchers;
 import org.apache.log4j.Logger;
 
 public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> implements Card {
+	private static final long serialVersionUID = 1L;
 
 	private final static Logger logger = Logger.getLogger(CardImpl.class);
 

@@ -30,6 +30,8 @@ package mage.view;
 
 import java.io.Serializable;
 import java.util.UUID;
+
+import mage.cards.Card;
 import mage.cards.decks.Deck;
 
 /**
@@ -39,14 +41,14 @@ import mage.cards.decks.Deck;
 public class TableClientMessage implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	private Deck deck;
+	private DeckView deck;
 	private UUID tableId;
 	private UUID gameId;
 	private UUID playerId;
 	private int time;
 
 	public TableClientMessage(Deck deck, UUID tableId, int time) {
-		this.deck = deck;
+		this.deck = new DeckView(deck);
 		this.tableId = tableId;
 		this.time = time;
 	}
@@ -56,7 +58,7 @@ public class TableClientMessage implements Serializable {
 		this.playerId = playerId;
 	}
 
-	public Deck getDeck() {
+	public DeckView getDeck() {
 		return deck;
 	}
 
@@ -74,5 +76,9 @@ public class TableClientMessage implements Serializable {
 
 	public int getTime() {
 		return time;
+	}
+
+	public void cleanUp() {
+
 	}
 }

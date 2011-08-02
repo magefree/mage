@@ -37,18 +37,13 @@ import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.draft.DraftPanel;
 import mage.client.game.GamePanel;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.DeckUtil;
 import mage.client.util.GameManager;
 import mage.client.util.object.SaveObjectUtil;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.utils.CompressUtil;
-import mage.view.AbilityPickerView;
-import mage.view.ChatMessage;
-import mage.view.DraftClientMessage;
-import mage.view.DraftView;
-import mage.view.GameClientMessage;
-import mage.view.GameView;
-import mage.view.TableClientMessage;
+import mage.view.*;
 import org.apache.log4j.Logger;
 
 /**
@@ -213,11 +208,15 @@ public class CallbackClientImpl implements CallbackClient {
 					}
 					else if (callback.getMethod().equals("sideboard")) {
 						TableClientMessage message = (TableClientMessage) callback.getData();
-						sideboard(message.getDeck(), message.getTableId(), message.getTime());
+						DeckView deckView = message.getDeck();
+						Deck deck = DeckUtil.construct(deckView);
+						sideboard(deck, message.getTableId(), message.getTime());
 					}
 					else if (callback.getMethod().equals("construct")) {
 						TableClientMessage message = (TableClientMessage) callback.getData();
-						construct(message.getDeck(), message.getTableId(), message.getTime());
+						DeckView deckView = message.getDeck();
+						Deck deck = DeckUtil.construct(deckView);
+						construct(deck, message.getTableId(), message.getTime());
 					}
 					else if (callback.getMethod().equals("draftOver")) {
 						DraftPanel panel = frame.getDraft(callback.getObjectId());
