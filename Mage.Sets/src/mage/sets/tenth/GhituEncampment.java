@@ -25,55 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.mirrodinbesieged;
+package mage.sets.tenth;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.InfectAbility;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class InkmothNexus extends CardImpl<InkmothNexus> {
+public class GhituEncampment extends CardImpl<GhituEncampment> {
 
-    public InkmothNexus (UUID ownerId) {
-        super(ownerId, 145, "Inkmoth Nexus", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "MBS";
-        this.addAbility(new ColorlessManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new InkmothNexusToken(), "land"), new GenericManaCost(1)));
+    public GhituEncampment(UUID ownerId) {
+        super(ownerId, 353, "Ghitu Encampment", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "10E";
+
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        this.addAbility(new RedManaAbility());
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new BecomesCreatureSourceEOTEffect(new GhituEncampmentToken(), "land"),
+                new ManaCostsImpl("{1}{R}")));
     }
 
-    public InkmothNexus (final InkmothNexus card) {
+    public GhituEncampment(final GhituEncampment card) {
         super(card);
     }
 
     @Override
-    public InkmothNexus copy() {
-        return new InkmothNexus(this);
+    public GhituEncampment copy() {
+        return new GhituEncampment(this);
     }
 }
 
-class InkmothNexusToken extends Token {
-    public InkmothNexusToken() {
-        super("Blinkmoth", "a 1/1 Blinkmoth artifact creature with flying and infect");
-        cardType.add(CardType.ARTIFACT);
+class GhituEncampmentToken extends Token {
+
+    public GhituEncampmentToken() {
+        super("Warrior", "a 2/1 red Warrior creature with first strike");
         cardType.add(CardType.CREATURE);
-        this.subtype.add("Blinkmoth");
-        power = new MageInt(1);
-		toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(InfectAbility.getInstance());
+        this.subtype.add("Warrior");
+
+        this.color.setRed(true);
+        power = new MageInt(2);
+        toughness = new MageInt(1);
+
+        this.addAbility(FirstStrikeAbility.getInstance());
     }
 }

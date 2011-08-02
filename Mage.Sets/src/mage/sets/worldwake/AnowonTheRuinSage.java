@@ -25,55 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.mirrodinbesieged;
+package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.Constants.TargetController;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.InfectAbility;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class InkmothNexus extends CardImpl<InkmothNexus> {
+public class AnowonTheRuinSage extends CardImpl<AnowonTheRuinSage> {
 
-    public InkmothNexus (UUID ownerId) {
-        super(ownerId, 145, "Inkmoth Nexus", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "MBS";
-        this.addAbility(new ColorlessManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new InkmothNexusToken(), "land"), new GenericManaCost(1)));
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Vampire creature");
+
+    static {
+        filter.getSubtype().add("Vampire");
+        filter.setNotSubtype(true);
     }
 
-    public InkmothNexus (final InkmothNexus card) {
+    public AnowonTheRuinSage(UUID ownerId) {
+        super(ownerId, 49, "Anowon, the Ruin Sage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
+        this.expansionSetCode = "WWK";
+        this.supertype.add("Legendary");
+        this.subtype.add("Vampire");
+        this.subtype.add("Shaman");
+
+        this.color.setBlack(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
+
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeAllEffect(filter), TargetController.YOU, false));
+    }
+
+    public AnowonTheRuinSage(final AnowonTheRuinSage card) {
         super(card);
     }
 
     @Override
-    public InkmothNexus copy() {
-        return new InkmothNexus(this);
-    }
-}
-
-class InkmothNexusToken extends Token {
-    public InkmothNexusToken() {
-        super("Blinkmoth", "a 1/1 Blinkmoth artifact creature with flying and infect");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        this.subtype.add("Blinkmoth");
-        power = new MageInt(1);
-		toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(InfectAbility.getInstance());
+    public AnowonTheRuinSage copy() {
+        return new AnowonTheRuinSage(this);
     }
 }

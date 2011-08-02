@@ -160,7 +160,7 @@ public class CardsStorage {
 	public static List<Card> getNotImplementedCards() {
 		List<Card> cards = new ArrayList<Card>();
 		if (notImplementedCards == null) {
-			if (allCards.size() == 0) {
+			if (allCards.isEmpty()) {
 				return cards;
 			}
 

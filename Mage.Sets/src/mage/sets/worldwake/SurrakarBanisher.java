@@ -25,55 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.mirrodinbesieged;
+package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.InfectAbility;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class InkmothNexus extends CardImpl<InkmothNexus> {
+public class SurrakarBanisher extends CardImpl<SurrakarBanisher> {
 
-    public InkmothNexus (UUID ownerId) {
-        super(ownerId, 145, "Inkmoth Nexus", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "MBS";
-        this.addAbility(new ColorlessManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new InkmothNexusToken(), "land"), new GenericManaCost(1)));
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
+
+    static {
+        filter.setTapped(true);
     }
 
-    public InkmothNexus (final InkmothNexus card) {
+    public SurrakarBanisher(UUID ownerId) {
+        super(ownerId, 39, "Surrakar Banisher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
+        this.expansionSetCode = "WWK";
+        this.subtype.add("Surrakar");
+
+        this.color.setBlue(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
+        ability.addTarget(new TargetCreaturePermanent(filter));
+    }
+
+    public SurrakarBanisher(final SurrakarBanisher card) {
         super(card);
     }
 
     @Override
-    public InkmothNexus copy() {
-        return new InkmothNexus(this);
-    }
-}
-
-class InkmothNexusToken extends Token {
-    public InkmothNexusToken() {
-        super("Blinkmoth", "a 1/1 Blinkmoth artifact creature with flying and infect");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        this.subtype.add("Blinkmoth");
-        power = new MageInt(1);
-		toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(InfectAbility.getInstance());
+    public SurrakarBanisher copy() {
+        return new SurrakarBanisher(this);
     }
 }

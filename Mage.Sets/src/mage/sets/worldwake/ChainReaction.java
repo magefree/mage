@@ -25,55 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.mirrodinbesieged;
+package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.InfectAbility;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class InkmothNexus extends CardImpl<InkmothNexus> {
+public class ChainReaction extends CardImpl<ChainReaction> {
 
-    public InkmothNexus (UUID ownerId) {
-        super(ownerId, 145, "Inkmoth Nexus", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "MBS";
-        this.addAbility(new ColorlessManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new InkmothNexusToken(), "land"), new GenericManaCost(1)));
+    public ChainReaction(UUID ownerId) {
+        super(ownerId, 74, "Chain Reaction", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
+        this.expansionSetCode = "WWK";
+
+        this.color.setRed(true);
+
+        this.getSpellAbility().addEffect(new DamageAllEffect(new PermanentsOnBattlefieldCount(FilterCreaturePermanent.getDefault()), FilterCreaturePermanent.getDefault()));
     }
 
-    public InkmothNexus (final InkmothNexus card) {
+    public ChainReaction(final ChainReaction card) {
         super(card);
     }
 
     @Override
-    public InkmothNexus copy() {
-        return new InkmothNexus(this);
-    }
-}
-
-class InkmothNexusToken extends Token {
-    public InkmothNexusToken() {
-        super("Blinkmoth", "a 1/1 Blinkmoth artifact creature with flying and infect");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        this.subtype.add("Blinkmoth");
-        power = new MageInt(1);
-		toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(InfectAbility.getInstance());
+    public ChainReaction copy() {
+        return new ChainReaction(this);
     }
 }
