@@ -47,7 +47,6 @@ public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
 
 	public CreateTokenEffect(Token token) {
 		this(token, new StaticValue(1));
-		setText();
 	}
 
 	public CreateTokenEffect(Token token, int amount) {
@@ -58,6 +57,7 @@ public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
         super(Outcome.PutCreatureInPlay);
         this.token = token;
         this.amount = amount.clone();
+		setText();
     }
 
 	public CreateTokenEffect(final CreateTokenEffect effect) {
