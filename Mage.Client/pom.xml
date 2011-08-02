@@ -88,7 +88,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Mage-Card-Plugin</artifactId>
-            <version>0.6</version>
+            <version>0.7</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
