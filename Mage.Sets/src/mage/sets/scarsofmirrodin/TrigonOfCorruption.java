@@ -28,12 +28,11 @@
 
 package mage.sets.scarsofmirrodin;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
@@ -49,6 +48,8 @@ import mage.counters.common.ChargeCounter;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author nantuko
@@ -59,7 +60,7 @@ public class TrigonOfCorruption extends CardImpl<TrigonOfCorruption> {
         super(ownerId, 213, "Trigon of Corruption", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "SOM";
         
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(new ChargeCounter(3))));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new ChargeCounter(3)), ""));
 
 		Costs costs = new CostsImpl();
 		costs.add(new ManaCostsImpl("{2}"));

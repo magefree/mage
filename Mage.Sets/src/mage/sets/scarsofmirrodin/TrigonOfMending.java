@@ -28,23 +28,23 @@
 
 package mage.sets.scarsofmirrodin;
 
-import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.counters.common.ChargeCounter;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -55,7 +55,7 @@ public class TrigonOfMending extends CardImpl<TrigonOfMending> {
 		super(ownerId, 215, "Trigon of Mending", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
 		this.expansionSetCode = "SOM";
 
-		this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(new ChargeCounter(3))));
+		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new ChargeCounter(3)), ""));
 
 		Costs costs = new CostsImpl();
 		costs.add(new ManaCostsImpl("{2}"));
