@@ -71,6 +71,8 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
 		int numColumns = 5;
 		int curColumn = 0;
 		int curRow = 0;
+		int offsetX = 5;
+		int offsetY = 3;
 		Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 		Dimension dimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 		List<CardView> sortedCards = new ArrayList<CardView>(booster.values());
@@ -80,7 +82,7 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
 			cardImg.addMouseListener(this);
 			add(cardImg);
 			cardImg.update(card);
-			rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * Config.dimensions.frameHeight);
+			rectangle.setLocation(curColumn * (Config.dimensions.frameWidth + offsetX) + offsetX, curRow * (Config.dimensions.frameHeight + offsetY) + offsetY);
 			cardImg.setBounds(rectangle);
 			cardImg.setCardBounds(rectangle.x, rectangle.y, Config.dimensions.frameWidth, Config.dimensions.frameHeight);
 			curColumn++;
