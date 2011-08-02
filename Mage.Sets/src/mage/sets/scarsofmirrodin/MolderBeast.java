@@ -28,15 +28,16 @@
 
 package mage.sets.scarsofmirrodin;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.ArtifactIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,6 +54,7 @@ public class MolderBeast extends CardImpl<MolderBeast> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
         
+        this.addAbility(TrampleAbility.getInstance());
         this.addAbility(new ArtifactIntoGraveFromBattlefieldTriggeredAbility(new BoostSourceEffect(2, 0, Constants.Duration.EndOfTurn), false));
     }
 
