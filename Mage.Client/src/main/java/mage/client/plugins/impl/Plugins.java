@@ -64,13 +64,13 @@ public class Plugins implements MagePlugins {
 
 	@Override
 	public void updateGamePanel(Map<String, JComponent> ui) {
-		if (MageFrame.isLite() || themePlugin == null) return;
+		if (MageFrame.isLite() || MageFrame.isGray() || themePlugin == null) return;
 		themePlugin.applyInGame(ui);
 	}
 
 	@Override
 	public JComponent updateTablePanel(Map<String, JComponent> ui) {
-		if (MageFrame.isLite() || themePlugin == null) return null;
+		if (MageFrame.isLite() || MageFrame.isGray() || themePlugin == null) return null;
 		return themePlugin.updateTable(ui);
 	}
 	

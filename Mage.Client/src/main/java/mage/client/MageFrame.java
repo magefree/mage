@@ -102,6 +102,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private final static Logger logger = Logger.getLogger(MageFrame.class);
 	private final static String liteModeArg = "-lite";
+	private final static String grayModeArg = "-gray";
 
     private static Session session;
     private ConnectDialog connectDialog;
@@ -113,6 +114,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 	private UUID clientId;
 	private static MagePane activeFrame;
 	private static boolean liteMode = false;
+	//TODO: make gray theme, implement theme selector in preferences dialog
+	private static boolean grayMode = false;
 
 	private static Map<UUID, ChatPanel> chats = new HashMap<UUID, ChatPanel>();
 	private static Map<UUID, GamePanel> games = new HashMap<UUID, GamePanel>();
@@ -137,6 +140,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 	
 	public static boolean isLite() {
 		return liteMode;
+	}
+
+	public static boolean isGray() {
+		return grayMode;
 	}
 
 	@Override
@@ -214,7 +221,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 int width = ((JComponent) e.getSource()).getWidth();
                 int height = ((JComponent) e.getSource()).getHeight();
                 SettingsManager.getInstance().setScreenWidthAndHeight(width, height);
-				if (!liteMode) {
+				if (!liteMode && !grayMode) {
  					backgroundPane.setSize(width, height);
                 }
                 JPanel arrowsPanel = ArrowBuilder.getArrowsPanelRef();
@@ -308,7 +315,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     private void setBackground() {
-		if (liteMode)
+		if (liteMode || grayMode)
 			return;
         String filename = "/background.jpg";
         try {
@@ -328,7 +335,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     private void addMageLabel() {
-		if (liteMode)
+		if (liteMode || grayMode)
 			return;
         String filename = "/label-mage.png";
         try {
@@ -844,6 +851,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 				for (String arg: args) {
 					if (arg.startsWith(liteModeArg)) {
 						liteMode = true;
+					}
+					if (arg.startsWith(grayModeArg)) {
+						grayMode = true;
 					}
 				}
 				if (!liteMode) {
