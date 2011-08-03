@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactCard;
 
 import java.util.UUID;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *

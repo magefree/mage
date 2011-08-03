@@ -28,7 +28,6 @@
 
 package mage.abilities.costs.common;
 
-import java.util.List;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.costs.CostImpl;

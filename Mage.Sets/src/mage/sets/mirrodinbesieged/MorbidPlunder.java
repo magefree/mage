@@ -37,10 +37,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.target.TargetCard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
@@ -100,43 +99,4 @@ class MorbidPlunderEffect extends OneShotEffect<MorbidPlunderEffect> {
         }
         return result;
     }
-
-}
-
-class TargetCardInYourGraveyard extends TargetCard<TargetCardInYourGraveyard> {
-
-	public TargetCardInYourGraveyard() {
-		this(1, 1, new FilterCard());
-	}
-
-	public TargetCardInYourGraveyard(FilterCard filter) {
-		this(1, 1, filter);
-	}
-
-	public TargetCardInYourGraveyard(int numTargets, FilterCard filter) {
-		this(numTargets, numTargets, filter);
-	}
-
-	public TargetCardInYourGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
-		super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);
-		this.targetName = filter.getMessage() + " in your graveyard";
-	}
-
-	public TargetCardInYourGraveyard(final TargetCardInYourGraveyard target) {
-		super(target);
-	}
-
-	@Override
-	public boolean canTarget(UUID id, Ability source, Game game) {
-		Card card = game.getCard(id);
-		if (card != null && game.getZone(card.getId()) == Zone.GRAVEYARD && card.getOwnerId().equals(source.getControllerId()))
-			return filter.match(card);
-		return false;
-	}
-
-	@Override
-	public TargetCardInYourGraveyard copy() {
-		return new TargetCardInYourGraveyard(this);
-	}
-
 }
