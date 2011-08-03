@@ -256,7 +256,13 @@ public class CardPluginImpl implements CardPlugin {
                     int panelX = x + (stackPosition * stackSpacingX);
                     int panelY = y + (stackPosition * stackSpacingY);
                     //panel.setLocation(panelX, panelY);
-                    battlefieldPanel.moveToBack(panel);
+					try {
+						// may cause:
+						// java.lang.IllegalArgumentException: illegal component position 26 should be less then 26
+                    	battlefieldPanel.moveToBack(panel);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
                     panel.setCardBounds(panelX, panelY, cardWidth, cardHeight);
                 }
                 rowBottom = Math.max(rowBottom, y + stack.getHeight());
