@@ -27,7 +27,6 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -38,6 +37,8 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +60,7 @@ public class ScreechingSilcaw extends CardImpl<ScreechingSilcaw> {
         this.addAbility(FlyingAbility.getInstance());
 
         TriggeredAbility conditional = new ConditionalTriggeredAbility(
-                new DealsCombatDamageToAPlayerTriggeredAbility(new PutLibraryIntoGraveTargetEffect(4), false),
+                new DealsCombatDamageToAPlayerTriggeredAbility(new PutLibraryIntoGraveTargetEffect(4), false, true),
                 Metalcraft.getInstance(), text);
         this.addAbility(conditional);
     }

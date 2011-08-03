@@ -28,7 +28,6 @@
 
 package mage.sets.magic2011;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -42,6 +41,8 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +60,7 @@ public class MerfolkSpy extends CardImpl<MerfolkSpy> {
 		this.toughness = new MageInt(1);
 
 		this.addAbility(new IslandwalkAbility());
-		this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MerfolkSpyEffect(), false));
+		this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MerfolkSpyEffect(), false, true));
 	}
 
 	public MerfolkSpy(final MerfolkSpy card) {
@@ -86,7 +87,7 @@ class MerfolkSpyEffect extends OneShotEffect<MerfolkSpyEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
+		Player player = game.getPlayer(targetPointer.getFirst(source));
 		if (player != null && player.getHand().size() > 0) {
 			Cards revealed = new CardsImpl();
 			revealed.add(player.getHand().getRandom(game));

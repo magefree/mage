@@ -35,19 +35,27 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.TargetPlayer;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl<DealsCombatDamageToAPlayerTriggeredAbility> {
+    private boolean setTargetPointer;
 
 	public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional) {
-		super(Zone.BATTLEFIELD, effect, optional);
+		this(effect, optional, false);
 	}
+
+    public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
+        super(Zone.BATTLEFIELD, effect, optional);
+        this.setTargetPointer = setTargetPointer;
+    }
 
 	public DealsCombatDamageToAPlayerTriggeredAbility(final DealsCombatDamageToAPlayerTriggeredAbility ability) {
 		super(ability);
+        this.setTargetPointer = ability.setTargetPointer;
 	}
 
 	@Override
@@ -58,9 +66,11 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)) {
-			getTargets().clear();
-			this.addTarget(new TargetPlayer());
-			getTargets().get(0).add(event.getPlayerId(), game);
+            if (setTargetPointer) {
+                for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                }
+            }
 			return true;
 		}
 		return false;
