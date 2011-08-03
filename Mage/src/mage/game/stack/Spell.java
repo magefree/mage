@@ -28,30 +28,31 @@
 
 package mage.game.stack;
 
-import mage.Mana;
-import mage.abilities.SpellAbility;
-import mage.game.*;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
+import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.PostResolveEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
+import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.watchers.Watchers;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -145,7 +146,9 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 				if (object == null) {
 					Player targetPlayer = game.getPlayer(targetId);
 					if (player != null) name = targetPlayer.getName();
-				}
+				} else {
+                    name = object.getName();
+                }
 				if (name != null && player.chooseUse(ability.getEffects().get(0).getOutcome(), "Change target from " + name + "?", game)) {
 					if (!player.chooseTarget(ability.getEffects().get(0).getOutcome(), newTarget, ability, game))
 						newTarget.addTarget(targetId, ability, game);
