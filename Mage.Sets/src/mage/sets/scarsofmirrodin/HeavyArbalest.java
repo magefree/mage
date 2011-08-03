@@ -111,7 +111,7 @@ class SkipUntapSourceEffect extends ReplacementEffectImpl<SkipUntapSourceEffect>
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getTurn().getStepType() == PhaseStep.UNTAP
                 && event.getType() == EventType.UNTAP
-                && event.getTargetId().equals(source.getId())) {
+                && event.getTargetId().equals(source.getSourceId())) {
             return true;
         }
         return false;

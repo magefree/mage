@@ -73,14 +73,11 @@ public class FilterCreaturePermanent<T extends FilterCreaturePermanent<T>> exten
 		if (!super.match(permanent))
 			return notFilter;
 
-		if (useAttacking && permanent.isAttacking() != attacking) {
-            if (useBlocking) {
-                if ((permanent.getBlocking() > 0) != blocking)
-                    return notFilter;
-            } else
-                return notFilter;
+		if (useAttacking) {
+			if (permanent.isAttacking() == attacking) {
+				return !notFilter;
+			}
         }
-
 
 		if (useBlocking && (permanent.getBlocking() > 0) != blocking)
 			return notFilter;
