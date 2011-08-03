@@ -63,6 +63,10 @@ public class RateCallback implements ActionCallback {
 	}
 
 	@Override
+	public void hidePopup() {
+	}
+
+	@Override
 	public void mouseMoved(MouseEvent arg0, TransferData arg1) {
 	}
 
