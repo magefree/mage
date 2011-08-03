@@ -47,6 +47,7 @@ public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
 
 	protected DynamicValue amount;
 	protected boolean preventable;
+    protected String targetDescription;
 
 	public DamageTargetEffect(int amount) {
 		 this(new StaticValue(amount), true);
@@ -56,14 +57,23 @@ public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
 		this(new StaticValue(amount), preventable);
 	}
 
+    public DamageTargetEffect(int amount, boolean preventable, String targetDescription) {
+		this(new StaticValue(amount), preventable, targetDescription);
+	}
+
     public DamageTargetEffect(DynamicValue amount) {
         this(amount, true);
     }
 
     public DamageTargetEffect(DynamicValue amount, boolean preventable) {
+        this(amount, preventable, "");
+    }
+
+    public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription) {
         super(Outcome.Damage);
 		this.amount = amount;
 		this.preventable = preventable;
+        this.targetDescription = targetDescription;
     }
 
 	public int getAmount() {
@@ -78,6 +88,7 @@ public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
 		super(effect);
 		this.amount = effect.amount.clone();
 		this.preventable = effect.preventable;
+        this.targetDescription = effect.targetDescription;
 	}
 
 	@Override
@@ -108,8 +119,11 @@ public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
         if (message.isEmpty() || !message.equals("1")) {
             sb.append(amount);
         }
-        sb.append(" damage to target ");
-        sb.append(mode.getTargets().get(0).getTargetName());
+        sb.append(" damage to ");
+        if (targetDescription.length() > 0)
+            sb.append(targetDescription);
+        else
+            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         if (message.length() > 0) {
             sb.append(message.equals("1") ? " equal to the number of " : " for each ");
             sb.append(message);
