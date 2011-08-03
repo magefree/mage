@@ -54,7 +54,7 @@ public class ChandraNalaar extends CardImpl<ChandraNalaar> {
 	public ChandraNalaar(UUID ownerId) {
 		super(ownerId, 132, "Chandra Nalaar", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");
 		this.expansionSetCode = "M10";
-		this.subtype.add("Chandra ");
+		this.subtype.add("Chandra");
 		this.color.setRed(true);
 		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), ""));
 
