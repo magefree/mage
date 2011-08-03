@@ -212,6 +212,10 @@ public class GameState implements Serializable, Copyable<GameState> {
 		return exile;
 	}
 
+	public Command getCommand() {
+		return command;
+	}
+
 	public Revealed getRevealed() {
 		return revealed;
 	}

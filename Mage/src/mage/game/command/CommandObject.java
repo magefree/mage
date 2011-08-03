@@ -28,6 +28,7 @@
 
 package mage.game.command;
 
+import mage.abilities.Ability;
 import mage.game.*;
 import java.util.UUID;
 import mage.MageObject;
@@ -35,9 +36,8 @@ import mage.game.events.GameEvent;
 
 /**
 *
-* @author Viserion
+* @author Viserion, nantuko
 */
-
 public interface CommandObject extends MageObject {
 
 	public UUID getSourceId();
