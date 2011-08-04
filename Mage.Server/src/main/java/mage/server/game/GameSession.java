@@ -29,18 +29,15 @@
 package mage.server.game;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import mage.cards.Cards;
 import mage.game.Game;
 import mage.interfaces.callback.ClientCallback;
+import mage.players.Player;
 import mage.server.User;
 import mage.server.UserManager;
 import mage.server.util.ConfigSettings;
@@ -197,8 +194,20 @@ public class GameSession extends GameWatcher {
 	
 	@Override
 	public GameView getGameView() {
+		Player player = game.getPlayer(playerId);
 		GameView gameView = new GameView(game.getState(), game);
-		gameView.setHand(new CardsView(game.getPlayer(playerId).getHand().getCards(game)));
+		gameView.setHand(new CardsView(player.getHand().getCards(game)));
+
+		if (player.getPlayersUnderYourControl().size() > 0) {
+			Map<String, CardsView> handCards = new HashMap<String, CardsView>();
+			for (UUID playerId : player.getPlayersUnderYourControl()) {
+				Player opponent = game.getPlayer(playerId);
+				handCards.put(player.getName(), new CardsView(opponent.getHand().getCards(game)));
+			}
+			gameView.setOpponentHands(handCards);
+		}
+
+		//TODO: should player be able to look at all these cards?
 
 		List<LookedAtView> list = new ArrayList<LookedAtView>();
 		for (Entry<String, Cards> entry : game.getState().getLookedAt(playerId).entrySet()) {

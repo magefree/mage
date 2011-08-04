@@ -34,6 +34,7 @@
 
 package mage.client.game;
 
+import com.sun.corba.se.spi.presentation.rmi.IDLNameTranslator;
 import mage.Constants;
 import mage.client.MageFrame;
 import mage.client.cards.Cards;
@@ -48,6 +49,7 @@ import mage.remote.Session;
 import mage.view.*;
 import org.apache.log4j.Logger;
 
+import javax.net.ssl.HandshakeCompletedEvent;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -69,6 +71,7 @@ import java.util.prefs.Preferences;
 public class GamePanel extends javax.swing.JPanel {
 
 	private final static Logger logger = Logger.getLogger(GamePanel.class);
+	static final String YOUR_HAND = "Your hand";
 
 	private Map<UUID, PlayAreaPanel> players = new HashMap<UUID, PlayAreaPanel>();
 	private Map<UUID, ExileZoneDialog> exiles = new HashMap<UUID, ExileZoneDialog>();
@@ -80,6 +83,7 @@ public class GamePanel extends javax.swing.JPanel {
     private CombatDialog combat;
     private PickNumberDialog pickNumber;
 	private JLayeredPane jLayeredPane;
+	private String chosenHandKey = "You";
 
     private static final int HAND_CARD_WIDTH = 75;
 	private static final Dimension handCardDimension = new Dimension(HAND_CARD_WIDTH, (int)(HAND_CARD_WIDTH * 3.5f / 2.5f));
@@ -174,6 +178,7 @@ public class GamePanel extends javax.swing.JPanel {
 		this.feedbackPanel.clear();
 		this.abilityPicker.init(session, gameId);
 		this.btnConcede.setVisible(true);
+		this.btnSwitchHands.setVisible(false);
 		this.pnlReplay.setVisible(false);
 		this.btnStopWatching.setVisible(false);
 		this.gameChatPanel.clear();
@@ -190,6 +195,7 @@ public class GamePanel extends javax.swing.JPanel {
 		this.feedbackPanel.init(gameId);
 		this.feedbackPanel.clear();
 		this.btnConcede.setVisible(false);
+		this.btnSwitchHands.setVisible(false);
 		this.btnStopWatching.setVisible(true);
 		this.pnlReplay.setVisible(false);
 		this.gameChatPanel.clear();
@@ -205,6 +211,7 @@ public class GamePanel extends javax.swing.JPanel {
 		MageFrame.addGame(gameId, this);
 		this.feedbackPanel.clear();
 		this.btnConcede.setVisible(false);
+		this.btnSwitchHands.setVisible(false);
 		this.btnStopWatching.setVisible(false);
 		this.pnlReplay.setVisible(true);
 		this.gameChatPanel.clear();
@@ -298,9 +305,33 @@ public class GamePanel extends javax.swing.JPanel {
 		if (playerId == null || game.getHand() == null) {
 			this.hand.setVisible(false);
 		} else {
-			this.hand.loadCards(game.getHand(), bigCard, gameId);
-			int count = game.getHand().size();
-			hand.setPreferredSize(new java.awt.Dimension((getHandCardDimension().width + 5) * count + 5, getHandCardDimension().height + 20)); // for scroll
+			handCards.clear();
+			handCards.put(YOUR_HAND, game.getHand());
+
+			// Get opponents hand cards if available
+			if (game.getOpponentHands() != null) {
+				for (Map.Entry<String, CardsView> hand: game.getOpponentHands().entrySet()) {
+					handCards.put(hand.getKey(), hand.getValue());
+				}
+			}
+
+			if (!handCards.containsKey(chosenHandKey)) {
+				chosenHandKey = YOUR_HAND;
+			}
+			this.hand.loadCards(handCards.get(chosenHandKey), bigCard, gameId);
+			hand.setPreferredSize(new java.awt.Dimension((getHandCardDimension().width + 5) * game.getHand().size() + 5, getHandCardDimension().height + 20)); // for scroll
+
+			// set visible only if we have any other hand visible than ours
+			boolean previous = btnSwitchHands.isVisible();
+			boolean visible = handCards.size() > 1;
+			if (previous != visible) {
+				btnSwitchHands.setVisible(visible);
+				if (visible) {
+					JOptionPane.showMessageDialog(null, "You control other player's turn. \nUse \"Switch Hand\" on the bottom to switch between cards in different hands.");
+				} else {
+					JOptionPane.showMessageDialog(null, "You lost control on other player's turn.");
+				}
+			}
 		}
 		if (game.getPhase() != null)
 			this.txtPhase.setText(game.getPhase().toString());
@@ -525,6 +556,7 @@ public class GamePanel extends javax.swing.JPanel {
         lblPriority = new javax.swing.JLabel();
         feedbackPanel = new mage.client.game.FeedbackPanel();
         btnConcede = new javax.swing.JButton();
+		btnSwitchHands = new javax.swing.JButton();
         btnStopWatching = new javax.swing.JButton();
         bigCard = new mage.client.cards.BigCard();
         stack = new mage.client.cards.Cards();
@@ -544,6 +576,7 @@ public class GamePanel extends javax.swing.JPanel {
 		jTabbedPane1 = new JTabbedPane();
 
 		hand.setCardDimension(getHandCardDimension());
+		handCards = new HashMap<String, CardsView>();
 
         jSplitPane1.setBorder(null);
         jSplitPane1.setDividerSize(7);
@@ -602,6 +635,15 @@ public class GamePanel extends javax.swing.JPanel {
 				btnConcedeActionPerformed(null);
 			}
 		});
+
+		btnSwitchHands.setText("Switch Hands");
+		btnSwitchHands.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+				btnSwitchHandActionPerformed(null);
+			}
+		});
+		btnSwitchHands.setBorder(BorderFactory.createLineBorder(Color.red));
 
         btnStopWatching.setText("Stop Watching");
         btnStopWatching.addActionListener(new java.awt.event.ActionListener() {
@@ -676,6 +718,8 @@ public class GamePanel extends javax.swing.JPanel {
 								.addGap(10, 10, 10)
 								.addComponent(btnConcede)
 								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(btnSwitchHands)
+								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 								.addComponent(btnStopWatching)
 								.addContainerGap(62, Short.MAX_VALUE))
 						.addComponent(bigCard, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
@@ -721,6 +765,7 @@ public class GamePanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlGameInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConcede)
+					.addComponent(btnSwitchHands)
                     .addComponent(btnStopWatching)))
         );
 
@@ -823,6 +868,25 @@ public class GamePanel extends javax.swing.JPanel {
 		}
 	}//GEN-LAST:event_btnConcedeActionPerformed
 
+	private void btnSwitchHandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcedeActionPerformed
+		String[] choices = handCards.keySet().toArray(new String[0]);
+
+		String chosenHandKey = (String) JOptionPane.showInputDialog(
+                    this,
+                    "Choose hand to display:", "Switch between hands",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    choices,
+                    YOUR_HAND);
+
+		if (chosenHandKey != null && chosenHandKey.length() > 0) {
+			chosenHandKey = chosenHandKey;
+			CardsView cards = handCards.get(chosenHandKey);
+			this.hand.loadCards(cards, bigCard, gameId);
+			hand.setPreferredSize(new java.awt.Dimension((getHandCardDimension().width + 5) * cards.size() + 5, getHandCardDimension().height + 20)); // for scroll
+		}
+	}
+
 	private void btnStopWatchingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopWatchingActionPerformed
 		if (modalQuestion("Are you sure you want to stop watching?", "Stop watching") == JOptionPane.YES_OPTION) {
 			session.stopWatching(gameId);
@@ -910,6 +974,7 @@ public class GamePanel extends javax.swing.JPanel {
 	private mage.client.components.ability.AbilityPicker abilityPicker;
     private mage.client.cards.BigCard bigCard;
     private javax.swing.JButton btnConcede;
+	private javax.swing.JButton btnSwitchHands;
     private javax.swing.JButton btnNextPlay;
     private javax.swing.JButton btnPreviousPlay;
     private javax.swing.JButton btnStopReplay;
@@ -918,6 +983,7 @@ public class GamePanel extends javax.swing.JPanel {
     private mage.client.game.FeedbackPanel feedbackPanel;
 	private mage.client.chat.ChatPanel userChatPanel;
     private mage.client.cards.Cards hand;
+	private Map<String, CardsView> handCards;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lblActivePlayer;

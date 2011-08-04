@@ -31,6 +31,7 @@ package mage.view;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import mage.MageObject;
@@ -56,6 +57,7 @@ public class GameView implements Serializable {
 
 	private List<PlayerView> players = new ArrayList<PlayerView>();
 	private CardsView hand;
+	private Map<String, CardsView> opponentHands;
 	private CardsView stack = new CardsView();
 	private List<ExileView> exiles = new ArrayList<ExileView>();
 	private List<RevealedView> revealed = new ArrayList<RevealedView>();
@@ -122,6 +124,14 @@ public class GameView implements Serializable {
 
 	public void setHand(CardsView hand) {
 		this.hand = hand;
+	}
+
+	public Map<String, CardsView> getOpponentHands() {
+		return opponentHands;
+	}
+
+	public void setOpponentHands(Map<String, CardsView> opponentHands) {
+		this.opponentHands = opponentHands;
 	}
 
 	public TurnPhase getPhase() {
