@@ -31,6 +31,7 @@ package mage.abilities.costs.common;
 import java.util.UUID;
 
 import mage.Constants.Zone;
+import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,7 +50,7 @@ public class ReturnToHandSourceCost extends CostImpl<ReturnToHandSourceCost> {
     }
 
     @Override
-    public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent == null)
             return false;

@@ -31,6 +31,7 @@ package mage.abilities.costs.mana;
 import java.util.UUID;
 import mage.Constants.ColoredManaSymbol;
 import mage.Mana;
+import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.game.Game;
@@ -79,9 +80,11 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
 		super.clearPaid();
 	}
 
-	protected boolean assignColored(ManaPool pool, ColoredManaSymbol mana) {
+	protected boolean assignColored(Ability ability, Game game, ManaPool pool, ColoredManaSymbol mana) {
+		// first check special mana
 		switch (mana) {
 			case B:
+				if (payConditionalBlack(ability, game, pool)) return true;
 				if (pool.getBlack() > 0) {
 					this.payment.addBlack();
 					pool.removeBlack();
@@ -89,6 +92,7 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
 				}
 				break;
 			case U:
+				if (payConditionalBlue(ability, game, pool)) return true;
 				if (pool.getBlue() > 0) {
 					this.payment.addBlue();
 					pool.removeBlue();
@@ -96,6 +100,7 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
 				}
 				break;
 			case W:
+				if (payConditionalWhite(ability, game, pool)) return true;
 				if (pool.getWhite() > 0) {
 					this.payment.addWhite();
 					pool.removeWhite();
@@ -103,6 +108,7 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
 				}
 				break;
 			case G:
+				if (payConditionalGreen(ability, game, pool)) return true;
 				if (pool.getGreen() > 0) {
 					this.payment.addGreen();
 					pool.removeGreen();
@@ -110,6 +116,7 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
 				}
 				break;
 			case R:
+				if (payConditionalRed(ability, game, pool)) return true;
 				if (pool.getRed() > 0) {
 					this.payment.addRed();
 					pool.removeRed();
@@ -120,8 +127,70 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
 		return false;
 	}
 
-	protected boolean assignColorless(ManaPool pool, int mana) {
-		while (mana > payment.count() && pool.count() > 0) {
+	private boolean payConditionalRed(Ability ability, Game game, ManaPool pool) {
+		if (pool.getConditionalRed(ability, game) > 0) {
+			this.payment.addRed();
+			pool.removeConditionalRed(ability, game);
+			return true;
+		}
+		return false;
+	}
+
+	private boolean payConditionalGreen(Ability ability, Game game, ManaPool pool) {
+		if (pool.getConditionalGreen(ability, game) > 0) {
+			this.payment.addGreen();
+			pool.removeConditionalGreen(ability, game);
+			return true;
+		}
+		return false;
+	}
+
+	private boolean payConditionalWhite(Ability ability, Game game, ManaPool pool) {
+		if (pool.getConditionalWhite(ability, game) > 0) {
+			this.payment.addWhite();
+			pool.removeConditionalWhite(ability, game);
+			return true;
+		}
+		return false;
+	}
+
+	private boolean payConditionalBlue(Ability ability, Game game, ManaPool pool) {
+		if (pool.getConditionalBlue(ability, game) > 0) {
+			this.payment.addBlue();
+			pool.removeConditionalBlue(ability, game);
+			return true;
+		}
+		return false;
+	}
+
+	private boolean payConditionalBlack(Ability ability, Game game, ManaPool pool) {
+		if (pool.getConditionalBlack(ability, game) > 0) {
+			this.payment.addBlack();
+			pool.removeConditionalBlack(ability, game);
+			return true;
+		}
+		return false;
+	}
+
+	private boolean payConditionalColorless(Ability ability, Game game, ManaPool pool) {
+		if (pool.getConditionalColorless(ability, game) > 0) {
+			this.payment.addColorless();
+			pool.removeConditionalColorless(ability, game);
+			return true;
+		}
+		return false;
+	}
+
+	protected boolean assignColorless(Ability ability, Game game, ManaPool pool, int mana) {
+		int conditionalCount = pool.getConditionalCount(ability, game);
+		while (mana > payment.count() && (pool.count() > 0 || conditionalCount > 0)) {
+			if (payConditionalColorless(ability, game, pool)) continue;
+			if (payConditionalBlack(ability, game, pool)) continue;
+			if (payConditionalBlue(ability, game, pool)) continue;
+			if (payConditionalWhite(ability, game, pool)) continue;
+			if (payConditionalGreen(ability, game, pool)) continue;
+			if (payConditionalRed(ability, game, pool)) continue;
+
 			if (pool.getColorless() > 0) {
 				this.payment.addColorless();
 				pool.removeColorless();
@@ -152,6 +221,7 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
 				pool.removeRed();
 				continue;
 			}
+			break;
 		}
 		return mana > payment.count();
 	}
@@ -189,16 +259,16 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
 	}
 
 	@Override
-	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
 		if (noMana) {
 			setPaid();
 			return true;
 		}
 		Player player = game.getPlayer(controllerId);
-		assignPayment(player.getManaPool());
+		assignPayment(game, ability, player.getManaPool());
 		while (!isPaid()) {
 			if (player.playMana(this, game))
-				assignPayment(player.getManaPool());
+				assignPayment(game, ability, player.getManaPool());
 			else
 				return false;
 		}

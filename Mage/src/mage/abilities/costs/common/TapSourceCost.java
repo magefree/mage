@@ -49,7 +49,7 @@ public class TapSourceCost extends CostImpl<TapSourceCost> {
 	}
 
 	@Override
-	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
 		Permanent permanent = game.getPermanent(sourceId);
 		if (permanent != null) {
 			paid = permanent.tap(game);

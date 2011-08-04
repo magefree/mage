@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -58,7 +59,7 @@ public class SacrificeTargetCost extends CostImpl<SacrificeTargetCost> {
 	}
 
 	@Override
-	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
 		if (targets.choose(Outcome.Sacrifice, controllerId, game)) {
 			for (UUID targetId: targets.get(0).getTargets()) {
 				Permanent permanent = game.getPermanent(targetId);

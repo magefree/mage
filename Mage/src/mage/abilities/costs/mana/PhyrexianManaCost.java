@@ -31,6 +31,7 @@ package mage.abilities.costs.mana;
 import java.util.UUID;
 
 import mage.Constants.ColoredManaSymbol;
+import mage.abilities.Ability;
 import mage.game.Game;
 import mage.players.ManaPool;
 
@@ -49,8 +50,8 @@ public class PhyrexianManaCost extends ColoredManaCost {
 	}
 
 	@Override
-	public void assignPayment(ManaPool pool) {
-		if (assignColored(pool, this.mana))
+	public void assignPayment(Game game, Ability ability, ManaPool pool) {
+		if (assignColored(ability, game, pool, this.mana))
 			return;
 	}
 
@@ -73,7 +74,7 @@ public class PhyrexianManaCost extends ColoredManaCost {
 	}
 
 	@Override
-	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
 		this.paid = game.getPlayer(controllerId).loseLife(2, game) == 2;
 		return paid;
 	}

@@ -117,7 +117,7 @@ class VigilForTheLostEffect extends OneShotEffect<VigilForTheLostEffect> {
     public boolean apply(Game game, Ability source) {
         ManaCostsImpl cost = new ManaCostsImpl("{X}");
         cost.clearPaid();
-        if (cost.pay(game, source.getId(), source.getControllerId(), false)) {
+        if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
             Player player = game.getPlayer(source.getControllerId());
             player.gainLife(((VariableCost)cost.getVariableCosts().get(0)).getAmount(), game);
             return true;

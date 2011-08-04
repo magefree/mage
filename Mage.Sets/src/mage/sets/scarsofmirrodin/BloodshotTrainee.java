@@ -32,6 +32,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.TapSourceCost;
@@ -100,7 +101,7 @@ class BloodshotTraineeCost extends CostImpl<BloodshotTraineeCost> {
     }
 
     @Override
-    public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         this.paid = true;
         return paid;
     }

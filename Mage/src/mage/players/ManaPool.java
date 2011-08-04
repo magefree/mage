@@ -29,7 +29,14 @@
 package mage.players;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import mage.ConditionalMana;
 import mage.Mana;
+import mage.abilities.Ability;
+import mage.game.Game;
 
 /**
  *
@@ -44,6 +51,8 @@ public class ManaPool implements Serializable {
 	private int black = 0;
 	private int colorless = 0;
 
+	private List<ConditionalMana> conditionalMana = new ArrayList<ConditionalMana>();
+
 	public ManaPool() {}
 
 	public ManaPool(final ManaPool pool) {
@@ -53,6 +62,9 @@ public class ManaPool implements Serializable {
 		this.white = pool.white;
 		this.black = pool.black;
 		this.colorless = pool.colorless;
+		for (ConditionalMana mana : pool.conditionalMana) {
+			conditionalMana.add(mana.copy());
+		}
 	}
 
 	public void setRed(int red) {
@@ -71,6 +83,26 @@ public class ManaPool implements Serializable {
 		return red;
 	}
 
+	public int getConditionalRed(Ability ability, Game game) {
+		if (ability == null || conditionalMana.size() == 0) {
+			return 0;
+		}
+		boolean hasRed = false;
+		for (ConditionalMana mana : conditionalMana) {
+			if (mana.getRed() > 0) {
+				hasRed = true;
+				break;
+			}
+		}
+		if (!hasRed) return 0;
+		for (ConditionalMana mana : conditionalMana) {
+			if (mana.getRed() > 0 && mana.apply(ability, game)) {
+				return mana.getRed();
+			}
+		}
+		return 0;
+	}
+
 	public void setGreen(int green) {
 		this.green = green;
 	}
@@ -85,6 +117,26 @@ public class ManaPool implements Serializable {
 
 	public int getGreen() {
 		return green;
+	}
+
+	public int getConditionalGreen(Ability ability, Game game) {
+		if (ability == null || conditionalMana.size() == 0) {
+			return 0;
+		}
+		boolean hasGreen = false;
+		for (ConditionalMana mana : conditionalMana) {
+			if (mana.getGreen() > 0) {
+				hasGreen = true;
+				break;
+			}
+		}
+		if (!hasGreen) return 0;
+		for (ConditionalMana mana : conditionalMana) {
+			if (mana.getGreen() > 0 && mana.apply(ability, game)) {
+				return mana.getGreen();
+			}
+		}
+		return 0;
 	}
 
 	public void setBlue(int blue) {
@@ -103,6 +155,26 @@ public class ManaPool implements Serializable {
 		return blue;
 	}
 
+	public int getConditionalBlue(Ability ability, Game game) {
+		if (ability == null || conditionalMana.size() == 0) {
+			return 0;
+		}
+		boolean hasBlue = false;
+		for (ConditionalMana mana : conditionalMana) {
+			if (mana.getBlue() > 0) {
+				hasBlue = true;
+				break;
+			}
+		}
+		if (!hasBlue) return 0;
+		for (ConditionalMana mana : conditionalMana) {
+			if (mana.getBlue() > 0 && mana.apply(ability, game)) {
+				return mana.getBlue();
+			}
+		}
+		return 0;
+	}
+
 	public void setWhite(int white) {
 		this.white = white;
 	}
@@ -119,6 +191,26 @@ public class ManaPool implements Serializable {
 		return white;
 	}
 
+	public int getConditionalWhite(Ability ability, Game game) {
+		if (ability == null || conditionalMana.size() == 0) {
+			return 0;
+		}
+		boolean hasWhite = false;
+		for (ConditionalMana mana : conditionalMana) {
+			if (mana.getWhite() > 0) {
+				hasWhite = true;
+				break;
+			}
+		}
+		if (!hasWhite) return 0;
+		for (ConditionalMana mana : conditionalMana) {
+			if (mana.getWhite() > 0 && mana.apply(ability, game)) {
+				return mana.getWhite();
+			}
+		}
+		return 0;
+	}
+
 	public void setBlack(int black) {
 		this.black = black;
 	}
@@ -133,6 +225,60 @@ public class ManaPool implements Serializable {
 
 	public int getBlack() {
 		return black;
+	}
+
+	public int getConditionalBlack(Ability ability, Game game) {
+		if (ability == null || conditionalMana.size() == 0) {
+			return 0;
+		}
+		boolean hasBlack = false;
+		for (ConditionalMana mana : conditionalMana) {
+			if (mana.getBlack() > 0) {
+				hasBlack = true;
+				break;
+			}
+		}
+		if (!hasBlack) return 0;
+		for (ConditionalMana mana : conditionalMana) {
+			if (mana.getBlack() > 0 && mana.apply(ability, game)) {
+				return mana.getBlack();
+			}
+		}
+		return 0;
+	}
+
+	public int getConditionalColorless(Ability ability, Game game) {
+		if (ability == null || conditionalMana.size() == 0) {
+			return 0;
+		}
+		boolean hasColorless = false;
+		for (ConditionalMana mana : conditionalMana) {
+			if (mana.getColorless() > 0) {
+				hasColorless = true;
+				break;
+			}
+		}
+		if (!hasColorless) return 0;
+		for (ConditionalMana mana : conditionalMana) {
+			if (mana.getColorless() > 0 && mana.apply(ability, game)) {
+				return mana.getColorless();
+			}
+		}
+		return 0;
+	}
+
+
+	public int getConditionalCount(Ability ability, Game game) {
+		if (ability == null || conditionalMana.size() == 0) {
+			return 0;
+		}
+		int count = 0;
+		for (ConditionalMana mana : conditionalMana) {
+			if (mana.apply(ability, game)) {
+				count += mana.count();
+			}
+		}
+		return count;
 	}
 
 	public void setColorless(int colorless) {
@@ -159,6 +305,27 @@ public class ManaPool implements Serializable {
 		red = 0;
 		green = 0;
 		colorless = 0;
+		conditionalMana.clear();
+		return total;
+	}
+
+	public int emptyPoolConditional(Ability ability, Game game) {
+		int total = count();
+		black = 0;
+		blue = 0;
+		white = 0;
+		red = 0;
+		green = 0;
+		colorless = 0;
+		// remove only those mana that can be spent for ability
+		Iterator<ConditionalMana> it = conditionalMana.iterator();
+		while (it.hasNext()) {
+			ConditionalMana mana = it.next();
+			if (mana.apply(ability, game)) {
+				total += mana.count();
+				it.remove();
+			}
+		}
 		return total;
 	}
 
@@ -173,13 +340,27 @@ public class ManaPool implements Serializable {
 		return mana;
 	}
 
+	public Mana getAllConditionalMana(Ability ability, Game game) {
+		Mana mana = new Mana();
+		mana.setColorless(getConditionalCount(ability, game));
+		return mana;
+	}
+
 	public void changeMana(Mana mana) {
-		this.black += mana.getBlack();
-		this.blue += mana.getBlue();
-		this.white += mana.getWhite();
-		this.red += mana.getRed();
-		this.green += mana.getGreen();
-		this.colorless += mana.getColorless();
+		if (mana instanceof ConditionalMana) {
+			this.conditionalMana.add((ConditionalMana)mana);
+		} else {
+			this.black += mana.getBlack();
+			this.blue += mana.getBlue();
+			this.white += mana.getWhite();
+			this.red += mana.getRed();
+			this.green += mana.getGreen();
+			this.colorless += mana.getColorless();
+		}
+	}
+
+	public List<ConditionalMana> getConditionalMana() {
+		return conditionalMana;
 	}
 
 	public boolean checkMana(Mana mana) {
@@ -207,4 +388,59 @@ public class ManaPool implements Serializable {
 	public ManaPool copy() {
 		return new ManaPool(this);
 	}
+
+	public void removeConditionalBlack(Ability ability, Game game) {
+		for (ConditionalMana mana : conditionalMana) {
+			if (mana.getBlack() > 0 && mana.apply(ability, game)) {
+				mana.setBlack(mana.getBlack() - 1);
+				break;
+			}
+		}
+	}
+
+	public void removeConditionalBlue(Ability ability, Game game) {
+		for (ConditionalMana mana : conditionalMana) {
+			if (mana.getBlue() > 0 && mana.apply(ability, game)) {
+				mana.setBlue(mana.getBlue() - 1);
+				break;
+			}
+		}
+	}
+
+	public void removeConditionalWhite(Ability ability, Game game) {
+		for (ConditionalMana mana : conditionalMana) {
+			if (mana.getWhite() > 0 && mana.apply(ability, game)) {
+				mana.setWhite(mana.getWhite() - 1);
+				break;
+			}
+		}
+	}
+
+	public void removeConditionalGreen(Ability ability, Game game) {
+		for (ConditionalMana mana : conditionalMana) {
+			if (mana.getGreen() > 0 && mana.apply(ability, game)) {
+				mana.setGreen(mana.getGreen() - 1);
+				break;
+			}
+		}
+	}
+
+	public void removeConditionalRed(Ability ability, Game game) {
+		for (ConditionalMana mana : conditionalMana) {
+			if (mana.getRed() > 0 && mana.apply(ability, game)) {
+				mana.setRed(mana.getRed() - 1);
+				break;
+			}
+		}
+	}
+
+	public void removeConditionalColorless(Ability ability, Game game) {
+		for (ConditionalMana mana : conditionalMana) {
+			if (mana.getColorless() > 0 && mana.apply(ability, game)) {
+				mana.setColorless(mana.getColorless() - 1);
+				break;
+			}
+		}
+	}
+
 }

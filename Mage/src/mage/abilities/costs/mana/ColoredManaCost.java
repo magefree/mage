@@ -30,6 +30,8 @@ package mage.abilities.costs.mana;
 
 import mage.Constants.ColoredManaSymbol;
 import mage.Mana;
+import mage.abilities.Ability;
+import mage.game.Game;
 import mage.players.ManaPool;
 
 public class ColoredManaCost extends ManaCostImpl<ColoredManaCost> {
@@ -60,8 +62,8 @@ public class ColoredManaCost extends ManaCostImpl<ColoredManaCost> {
 	}
 
 	@Override
-	public void assignPayment(ManaPool pool) {
-		this.assignColored(pool, mana);
+	public void assignPayment(Game game, Ability ability, ManaPool pool) {
+		this.assignColored(ability, game, pool, mana);
 	}
 
 	@Override

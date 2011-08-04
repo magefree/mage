@@ -29,6 +29,8 @@
 package mage.abilities.costs.mana;
 
 import mage.Mana;
+import mage.abilities.Ability;
+import mage.game.Game;
 import mage.players.ManaPool;
 
 public class GenericManaCost extends ManaCostImpl<GenericManaCost> {
@@ -63,8 +65,8 @@ public class GenericManaCost extends ManaCostImpl<GenericManaCost> {
 	}
 
 	@Override
-	public void assignPayment(ManaPool pool) {
-		this.assignColorless(pool, mana);
+	public void assignPayment(Game game, Ability ability, ManaPool pool) {
+		this.assignColorless(ability, game, pool, mana);
 	}
 
 	@Override

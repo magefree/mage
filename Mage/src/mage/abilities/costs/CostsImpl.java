@@ -74,11 +74,11 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
 	}
 
 	@Override
-	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
 		if (this.size() > 0) {
 			while (!isPaid()) {
 				T cost = getFirstUnpaid();
-				if (!cost.pay(game, sourceId, controllerId, noMana))
+				if (!cost.pay(ability, game, sourceId, controllerId, noMana))
 					return false;
 			}
 		}

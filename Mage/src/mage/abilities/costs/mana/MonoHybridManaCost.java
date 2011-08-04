@@ -30,6 +30,8 @@ package mage.abilities.costs.mana;
 
 import mage.Constants.ColoredManaSymbol;
 import mage.Mana;
+import mage.abilities.Ability;
+import mage.game.Game;
 import mage.players.ManaPool;
 
 public class MonoHybridManaCost extends ManaCostImpl<MonoHybridManaCost> {
@@ -64,9 +66,9 @@ public class MonoHybridManaCost extends ManaCostImpl<MonoHybridManaCost> {
 	}
 
 	@Override
-	public void assignPayment(ManaPool pool) {
-		if (!assignColored(pool, mana)) {
-			assignColorless(pool, mana2);
+	public void assignPayment(Game game, Ability ability, ManaPool pool) {
+		if (!assignColored(ability, game, pool, mana)) {
+			assignColorless(ability, game, pool, mana2);
 		}
 	}
 

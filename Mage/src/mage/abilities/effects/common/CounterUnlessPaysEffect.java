@@ -67,7 +67,7 @@ public class CounterUnlessPaysEffect extends OneShotEffect<CounterUnlessPaysEffe
 			Player player = game.getPlayer(spell.getControllerId());
 			if (player != null) {
 				cost.clearPaid();
-				if (!cost.pay(game, spell.getControllerId(), spell.getControllerId(), false)) {
+				if (!cost.pay(source, game, spell.getControllerId(), spell.getControllerId(), false)) {
 					return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
 				}
 			}

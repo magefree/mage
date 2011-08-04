@@ -93,7 +93,7 @@ class GhostlyPrisonReplacementEffect extends ReplacementEffectImpl<GhostlyPrison
 				if ( propagandaTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
 					 player.chooseUse(Constants.Outcome.Benefit, "Pay {2} to declare attacker?", game) )
 				{
-					propagandaTax.pay(game, this.getId(), event.getPlayerId(), false);
+					propagandaTax.pay(source, game, this.getId(), event.getPlayerId(), false);
 
 					if ( propagandaTax.isPaid() ) {
 						return false;

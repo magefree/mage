@@ -93,7 +93,7 @@ class EmbersmithEffect extends OneShotEffect<EmbersmithEffect> {
     public boolean apply(Game game, Ability source) {
         Cost cost = new GenericManaCost(1);
         cost.clearPaid();
-        if (cost.pay(game, source.getId(), source.getControllerId(), false)) {
+        if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
             Permanent permanent = game.getPermanent(source.getFirstTarget());
             if (permanent != null) {
                 permanent.damage(1, source.getId(), game, true, false);

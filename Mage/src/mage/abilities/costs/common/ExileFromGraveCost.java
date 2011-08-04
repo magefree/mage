@@ -30,6 +30,7 @@ package mage.abilities.costs.common;
 
 import mage.Constants;
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
 import mage.game.Game;
@@ -62,7 +63,7 @@ public class ExileFromGraveCost extends CostImpl<ExileFromGraveCost> {
 	}
 
 	@Override
-	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
 		if (targets.choose(Outcome.Exile, controllerId, game)) {
 			Player player = game.getPlayer(controllerId);
 			for (UUID targetId: targets.get(0).getTargets()) {

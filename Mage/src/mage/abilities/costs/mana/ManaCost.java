@@ -28,9 +28,11 @@
 
 package mage.abilities.costs.mana;
 
+import mage.abilities.Ability;
 import mage.abilities.costs.*;
 import mage.Mana;
 import mage.abilities.mana.ManaOptions;
+import mage.game.Game;
 import mage.players.ManaPool;
 
 public interface ManaCost extends Cost {
@@ -38,7 +40,7 @@ public interface ManaCost extends Cost {
 	public int convertedManaCost();
 	public Mana getMana();
 	public Mana getPayment();
-	public void assignPayment(ManaPool pool);
+	public void assignPayment(Game game, Ability ability, ManaPool pool);
 	public void setPayment(Mana mana);
 	@Override
 	public String getText();

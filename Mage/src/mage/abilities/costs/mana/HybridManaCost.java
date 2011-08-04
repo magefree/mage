@@ -30,6 +30,8 @@ package mage.abilities.costs.mana;
 
 import mage.Constants.ColoredManaSymbol;
 import mage.Mana;
+import mage.abilities.Ability;
+import mage.game.Game;
 import mage.players.ManaPool;
 
 public class HybridManaCost extends ManaCostImpl<HybridManaCost> {
@@ -64,10 +66,10 @@ public class HybridManaCost extends ManaCostImpl<HybridManaCost> {
 	}
 
 	@Override
-	public void assignPayment(ManaPool pool) {
-		if (assignColored(pool, this.mana1))
+	public void assignPayment(Game game, Ability ability, ManaPool pool) {
+		if (assignColored(ability, game, pool, this.mana1))
 			return;
-		assignColored(pool, this.mana2);
+		assignColored(ability, game, pool, this.mana2);
 	}
 
 	@Override

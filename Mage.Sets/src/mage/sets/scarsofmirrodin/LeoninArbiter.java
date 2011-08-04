@@ -106,7 +106,7 @@ class LeoninArbiterReplacementEffect extends ReplacementEffectImpl<LeoninArbiter
 				if ( arbiterTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
 					 player.chooseUse(Outcome.Neutral, "Pay {2} to search your library?", game) )
 				{
-					arbiterTax.pay(game, this.getId(), event.getPlayerId(), false);
+					arbiterTax.pay(source, game, this.getId(), event.getPlayerId(), false);
 
 					if ( arbiterTax.isPaid() ) {
 						paidPlayers.add(event.getPlayerId());

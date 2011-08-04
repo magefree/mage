@@ -1,5 +1,6 @@
 package mage.abilities.costs;
 
+import mage.abilities.Ability;
 import mage.game.Game;
 import mage.target.Targets;
 
@@ -33,8 +34,8 @@ public class CompositeCost implements Cost {
     }
 
     @Override
-    public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        return firstCost.pay(game, sourceId, controllerId, noMana) && secondCost.pay(game, sourceId, controllerId, noMana);
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+        return firstCost.pay(ability, game, sourceId, controllerId, noMana) && secondCost.pay(ability, game, sourceId, controllerId, noMana);
     }
 
     @Override

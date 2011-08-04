@@ -76,6 +76,8 @@ import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetDefender;
 
+import javax.xml.transform.Source;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -372,7 +374,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 					if (cost instanceof PhyrexianManaCost) {
 						PhyrexianManaCost ph = (PhyrexianManaCost)cost;
 						if (ph.canPay(null, playerId, game)) {
-							((PhyrexianManaCost)cost).pay(game, null, playerId, false);
+							((PhyrexianManaCost)cost).pay(null, game, null, playerId, false);
 						}
 						break;
 					}

@@ -1,5 +1,6 @@
 package mage.abilities.costs.common;
 
+import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -25,7 +26,7 @@ public class ControlPermanentCost extends CostImpl<ControlPermanentCost> {
     }
 
     @Override
-    public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         this.paid = true;
 		return paid;
     }

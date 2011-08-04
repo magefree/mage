@@ -29,7 +29,9 @@
 package mage.abilities.costs.mana;
 
 import mage.Mana;
+import mage.abilities.Ability;
 import mage.abilities.costs.VariableCost;
+import mage.game.Game;
 import mage.players.ManaPool;
 
 /**
@@ -61,9 +63,10 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements 
 	}
 
 	@Override
-	public void assignPayment(ManaPool pool) {
+	public void assignPayment(Game game, Ability ability, ManaPool pool) {
 		payment.add(pool.getMana());
-		pool.emptyPool();
+		payment.add(pool.getAllConditionalMana(ability, game));
+		pool.emptyPoolConditional(ability, game);
 	}
 
 	@Override

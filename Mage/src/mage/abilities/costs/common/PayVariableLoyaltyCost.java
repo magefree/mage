@@ -29,6 +29,8 @@
 package mage.abilities.costs.common;
 
 import java.util.UUID;
+
+import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.VariableCost;
 import mage.counters.CounterType;
@@ -60,7 +62,7 @@ public class PayVariableLoyaltyCost extends CostImpl<PayVariableLoyaltyCost> imp
 	}
 
 	@Override
-	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
 		Permanent planeswalker = game.getPermanent(sourceId);
 		Player player = game.getPlayer(planeswalker.getControllerId());
 		this.amountPaid = player.getAmount(0, planeswalker.getCounters().getCount(CounterType.LOYALTY), "Choose X", game);

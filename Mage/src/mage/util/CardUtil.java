@@ -112,4 +112,5 @@ public class CardUtil {
 	public static CopyTokenFunction copyTo(Token target) {
 		return new CopyTokenFunction(target);
 	}
+
 }

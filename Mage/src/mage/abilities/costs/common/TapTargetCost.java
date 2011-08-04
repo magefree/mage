@@ -31,6 +31,7 @@ package mage.abilities.costs.common;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -55,7 +56,7 @@ public class TapTargetCost extends CostImpl<TapTargetCost> {
 	}
 
 	@Override
-	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
 		if (target.choose(Outcome.Tap, controllerId, game)) {
 			for (UUID targetId: (List<UUID>)target.getTargets()) {
 				Permanent permanent = game.getPermanent(targetId);

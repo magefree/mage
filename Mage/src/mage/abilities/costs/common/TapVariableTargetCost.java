@@ -30,6 +30,7 @@ package mage.abilities.costs.common;
 
 import java.util.UUID;
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.VariableCost;
 import mage.game.Game;
@@ -62,7 +63,7 @@ public class TapVariableTargetCost extends CostImpl<TapVariableTargetCost> imple
 	}
 
 	@Override
-	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
 		amountPaid = 0;
 		while (true) {
 			target.clearChosen();

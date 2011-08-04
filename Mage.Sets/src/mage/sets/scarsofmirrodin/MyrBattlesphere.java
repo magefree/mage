@@ -104,7 +104,7 @@ class MyrBattlesphereAbility extends TriggeredAbilityImpl<MyrBattlesphereAbility
 	public boolean checkInterveningIfClause(Game game) {
 		if (costs.isPaid())
 			return true;
-		return costs.pay(game, this.getId(), this.getControllerId(), false);
+		return costs.pay(this, game, this.getId(), this.getControllerId(), false);
 	}
 
 	@Override

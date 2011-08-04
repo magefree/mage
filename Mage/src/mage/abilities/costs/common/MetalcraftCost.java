@@ -30,6 +30,7 @@ package mage.abilities.costs.common;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -65,7 +66,7 @@ public class MetalcraftCost extends CostImpl<MetalcraftCost> {
 	}
 
 	@Override
-	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
 		this.paid = true;
 		return paid;
 	}

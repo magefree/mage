@@ -53,7 +53,7 @@ public class DiscardSourceCost extends CostImpl<DiscardSourceCost> {
 	}
 
 	@Override
-	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
 		Player player = game.getPlayer(controllerId);
 		if (player != null) {
 			Card card = player.getHand().get(sourceId, game);

@@ -30,6 +30,7 @@ package mage.abilities.costs.common;
 
 import java.util.UUID;
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
 import mage.game.Game;
@@ -52,7 +53,7 @@ public class DiscardTargetCost extends CostImpl<DiscardTargetCost> {
 	}
 
 	@Override
-	public boolean pay(Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+	public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
 		if (targets.choose(Outcome.Discard, controllerId, game)) {
 			Player player = game.getPlayer(controllerId);
 			for (UUID targetId: targets.get(0).getTargets()) {

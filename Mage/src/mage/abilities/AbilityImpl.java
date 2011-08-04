@@ -174,13 +174,13 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 			game.getContinuousEffects().costModification(this, game);
 			
 			//20100716 - 601.2f
-			if (!manaCostsToPay.pay(game, sourceId, controllerId, noMana)) {
+			if (!manaCostsToPay.pay(this, game, sourceId, controllerId, noMana)) {
 				logger.debug("activate failed - mana");
 				return false;
 			}
 		}
 		//20100716 - 601.2g
-		if (!costs.pay(game, sourceId, controllerId, noMana)) {
+		if (!costs.pay(this, game, sourceId, controllerId, noMana)) {
 			logger.debug("activate failed - non mana costs");
 			return false;
 		}
@@ -194,7 +194,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 		for (AlternativeCost cost: alternativeCosts) {
 			if (cost.isAvailable(game, this)) {
 				if (game.getPlayer(this.controllerId).chooseUse(Outcome.Neutral, "Use alternative cost " + cost.getName(), game))
-					return cost.pay(game, sourceId, controllerId, false);
+					return cost.pay(this, game, sourceId, controllerId, false);
 			}
 		}
 		return false;

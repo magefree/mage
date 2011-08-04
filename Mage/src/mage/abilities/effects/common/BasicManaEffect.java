@@ -1,5 +1,6 @@
 package mage.abilities.effects.common;
 
+import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.game.Game;
@@ -11,6 +12,12 @@ public class BasicManaEffect extends ManaEffect<BasicManaEffect> {
 		super();
 		this.mana = mana;
 		staticText = "Add " + mana.toString() + " to your mana pool";
+	}
+
+	public BasicManaEffect(ConditionalMana conditionalMana) {
+		super();
+		this.mana = conditionalMana;
+		staticText = "Add " + mana.toString() + " to your mana pool. " + conditionalMana.getDescription();
 	}
 
     public BasicManaEffect(final BasicManaEffect effect) {
