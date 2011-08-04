@@ -111,10 +111,19 @@ public interface Player extends MageItem, Copyable<Player> {
 	public Set<UUID> getPlayersUnderYourControl();
 
 	/**
-	 * Defines player whose turn you control at the moment.
+	 * Defines player whose turn this player controls at the moment.
 	 * @param playerId
 	 */
 	public void controlPlayersTurn(Game game, UUID playerId);
+
+	/**
+	 * Sets player {@link UUID} who controls this player's turn.
+	 *
+	 * @param playerId
+	 */
+	public void setTurnControlledBy(UUID playerId);
+
+	public UUID getTurnControlledBy();
 
 	/**
 	 * Resets players whose turns you control at the moment.
@@ -122,13 +131,13 @@ public interface Player extends MageItem, Copyable<Player> {
 	public void resetOtherTurnsControlled();
 
 	/**
-	 * Returns false in case you don't control the game.
+	 * Returns false in case player don't control the game.
 	 *
 	 * Note: For effects like "You control target player during that player's next turn".
 	 *
 	 * @return
 	 */
-	public boolean isGameUnderYourControl();
+	public boolean isGameUnderControl();
 
 	/**
 	 * Returns false in case you don't control the game.

@@ -50,7 +50,6 @@ import java.util.zip.GZIPOutputStream;
 
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.Modes;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
@@ -64,6 +63,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.server.ChatManager;
 import mage.server.UserManager;
+import mage.server.util.Splitter;
 import mage.server.util.ThreadExecutor;
 import mage.sets.Sets;
 import mage.view.*;
@@ -344,75 +344,94 @@ public class GameController implements GameCallback {
 		}
 	}
 
-	private synchronized void ask(UUID playerId, String question) throws MageException {
-		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).ask(question);
-		informOthers(playerId);
-	}
-
-	private synchronized void chooseAbility(UUID playerId, Collection<? extends Ability> choices) throws MageException {
-		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).chooseAbility(new AbilityPickerView(choices));
-		informOthers(playerId);
-	}
-
-	private synchronized void chooseMode(UUID playerId, Map<UUID, String> modes) throws MageException {
-		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).chooseAbility(new AbilityPickerView(modes));
-		informOthers(playerId);
-	}
-
-	private synchronized void choose(UUID playerId, String message, Set<String> choices) throws MageException {
-		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).choose(message, choices);
-		informOthers(playerId);
-	}
-
-	private synchronized void target(UUID playerId, String question, Cards cards, List<Permanent> perms, Set<UUID> targets, boolean required, Map<String, Serializable> options) throws MageException {
-		if (gameSessions.containsKey(playerId)) {
-			if (cards != null)
-				gameSessions.get(playerId).target(question, new CardsView(cards.getCards(game)), targets, required, options);
-			else if (perms != null) {
-				CardsView permsView = new CardsView();
-				for (Permanent perm: perms) {
-					permsView.put(perm.getId(), new PermanentView(perm, game.getCard(perm.getId())));
-				}
-				gameSessions.get(playerId).target(question, permsView, targets, required, options);
+	private synchronized void ask(final UUID playerId, final String question) throws MageException {
+		perform(playerId, new Command() {
+			public void execute() {
+				gameSessions.get(playerId).ask(question);
 			}
-			else
-				gameSessions.get(playerId).target(question, new CardsView(), targets, required, options);
-		}
-		informOthers(playerId);
+		});
 	}
 
-	private synchronized void target(UUID playerId, String question, Collection<? extends Ability> abilities, boolean required, Map<String, Serializable> options) throws MageException {
-		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).target(question, new CardsView(abilities, game), null, required, options);
-		informOthers(playerId);
+	private synchronized void chooseAbility(final UUID playerId, final Collection<? extends Ability> choices) throws MageException {
+		perform(playerId, new Command() {
+			public void execute() {
+				gameSessions.get(playerId).chooseAbility(new AbilityPickerView(choices));
+			}
+		});
 	}
 
-	private synchronized void select(UUID playerId, String message) throws MageException {
-		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).select(message);
-		informOthers(playerId);
+	private synchronized void chooseMode(final UUID playerId, final Map<UUID, String> modes) throws MageException {
+		perform(playerId, new Command() {
+			public void execute() {
+				gameSessions.get(playerId).chooseAbility(new AbilityPickerView(modes));
+			}
+		});
 	}
 
-	private synchronized void playMana(UUID playerId, String message) throws MageException {
-		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).playMana(message);
-		informOthers(playerId);
+	private synchronized void choose(final UUID playerId, final String message, final Set<String> choices) throws MageException {
+		perform(playerId, new Command() {
+			public void execute() {
+				gameSessions.get(playerId).choose(message, choices);
+			}
+		});
 	}
 
-	private synchronized void playXMana(UUID playerId, String message) throws MageException {
-		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).playXMana(message);
-		informOthers(playerId);
+	private synchronized void target(final UUID playerId, final String question, final Cards cards, final List<Permanent> perms, final Set<UUID> targets, final boolean required, final Map<String, Serializable> options) throws MageException {
+		perform(playerId, new Command() {
+			public void execute() {
+				if (cards != null) {
+					gameSessions.get(playerId).target(question, new CardsView(cards.getCards(game)), targets, required, options);
+				} else if (perms != null) {
+					CardsView permsView = new CardsView();
+					for (Permanent perm: perms) {
+						permsView.put(perm.getId(), new PermanentView(perm, game.getCard(perm.getId())));
+					}
+					gameSessions.get(playerId).target(question, permsView, targets, required, options);
+				} else
+					gameSessions.get(playerId).target(question, new CardsView(), targets, required, options);
+				}
+		});
+
 	}
 
-	private synchronized void amount(UUID playerId, String message, int min, int max) throws MageException {
-		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).getAmount(message, min, max);
-		informOthers(playerId);
+	private synchronized void target(final UUID playerId, final String question, final Collection<? extends Ability> abilities, final boolean required, final Map<String, Serializable> options) throws MageException {
+		perform(playerId, new Command() {
+			public void execute() {
+				gameSessions.get(playerId).target(question, new CardsView(abilities, game), null, required, options);
+			}
+		});
+	}
+
+	private synchronized void select(final UUID playerId, final String message) throws MageException {
+		perform(playerId, new Command() {
+			public void execute() {
+				gameSessions.get(playerId).select(message);
+			}
+		});
+	}
+
+	private synchronized void playMana(final UUID playerId, final String message) throws MageException {
+		perform(playerId, new Command() {
+			public void execute() {
+				gameSessions.get(playerId).playMana(message);
+			}
+		});
+	}
+
+	private synchronized void playXMana(final UUID playerId, final String message) throws MageException {
+		perform(playerId, new Command() {
+			public void execute() {
+				gameSessions.get(playerId).playXMana(message);
+				}
+		});
+	}
+
+	private synchronized void amount(final UUID playerId, final String message, final int min, final int max) throws MageException {
+		perform(playerId, new Command() {
+			public void execute() {
+				gameSessions.get(playerId).getAmount(message, min, max);
+			}
+		});
 	}
 
 	private synchronized void revealCards(String name, Cards cards) throws MageException {
@@ -421,9 +440,12 @@ public class GameController implements GameCallback {
 		}
 	}
 
-	private synchronized void lookAtCards(UUID playerId, String name, Cards cards) throws MageException {
-		if (gameSessions.containsKey(playerId))
-			gameSessions.get(playerId).revealCards(name, new CardsView(cards.getCards(game)));
+	private synchronized void lookAtCards(final UUID playerId, final String name, final Cards cards) throws MageException {
+		perform(playerId, new Command() {
+			public void execute() {
+				gameSessions.get(playerId).revealCards(name, new CardsView(cards.getCards(game)));
+			}
+		}, false);
 	}
 
 	private void informOthers(UUID playerId) throws MageException {
@@ -432,6 +454,24 @@ public class GameController implements GameCallback {
 			if (!entry.getKey().equals(playerId)) {
 				entry.getValue().inform(message);
 			}
+		}
+		for (final GameWatcher watcher: watchers.values()) {
+			watcher.inform(message);
+		}
+	}
+
+	private void informOthers(List<UUID> players) throws MageException {
+		// first player is always original controller
+		final String message = "Waiting for " + game.getPlayer(players.get(0)).getName();
+		for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
+			boolean skip = false;
+			for (UUID uuid : players) {
+				if (entry.getKey().equals(uuid)) {
+					skip = true;
+					break;
+				}
+			}
+			if (!skip) entry.getValue().inform(message);
 		}
 		for (final GameWatcher watcher: watchers.values()) {
 			watcher.inform(message);
@@ -575,5 +615,28 @@ public class GameController implements GameCallback {
 				return player;
 		}
 		return null;
+	}
+
+	private void perform(UUID playerId, Command command) throws MageException {
+		perform(playerId, command, true);
+	}
+
+	private void perform(UUID playerId, Command command, boolean informOthers) throws MageException {
+		if (game.getPlayer(playerId).isGameUnderControl()) {
+			if (gameSessions.containsKey(playerId))
+				command.execute();
+			if (informOthers) informOthers(playerId);
+		} else {
+			List<UUID> players = Splitter.split(game, playerId);
+			for (UUID uuid : players) {
+				if (gameSessions.containsKey(uuid))
+					command.execute();
+			}
+			if (informOthers) informOthers(players);
+		}
+	}
+
+	interface Command {
+		public void execute();
 	}
 }

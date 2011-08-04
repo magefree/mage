@@ -95,6 +95,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	protected boolean isTestMode = false;
 	protected boolean lifeTotalCanChange = true;
 	protected boolean isGameUnderYourControl = true;
+	protected UUID turnController;
 	protected Set<UUID> playersUnderYourControl = new HashSet<UUID>();
 
 	@Override
@@ -237,11 +238,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public void controlPlayersTurn(Game game, UUID playerId) {
-		if (!playerId.equals(getId())) {
+		if (!playerId.equals(this.getId())) {
 			this.playersUnderYourControl.add(playerId);
 			Player player = game.getPlayer(playerId);
 			if (!player.hasLeft() && !player.hasLost()) {
 				player.setGameUnderYourControl(false);
+				player.setTurnControlledBy(this.getId());
 			}
 			DelayedTriggeredAbility ability = new AtTheEndOfTurnDelayedTriggeredAbility(new LoseControlOnOtherPlayersControllerEffect());
 			ability.setSourceId(getId());
@@ -250,13 +252,21 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		}
 	}
 
+	public void setTurnControlledBy(UUID playerId) {
+		this.turnController = playerId;
+	}
+
+	public UUID getTurnControlledBy() {
+		return this.turnController;
+	}
+
 	@Override
 	public void resetOtherTurnsControlled() {
 		playersUnderYourControl.clear();
 	}
 
 	@Override
-	public boolean isGameUnderYourControl() {
+	public boolean isGameUnderControl() {
 		return isGameUnderYourControl;
 	}
 
