@@ -79,29 +79,6 @@ class EldraziTempleManaAbility extends BasicManaAbility<EldraziTempleManaAbility
         super(ability);
     }
 
-    /*@Override
-    public boolean canActivate(UUID playerId, Game game) {
-        boolean eldraziSpellBeingCast = false;
-
-        SpellStack stack = game.getStack();
-        for ( int idx = 0; idx < stack.size(); idx++ ) {
-            StackObject stackObject = stack.get(idx);
-            if ( stackObject.getControllerId().equals(playerId) ) {
-                eldraziSpellBeingCast |= stackObject.getSubtype().contains("Eldrazi");
-				MageObject source = game.getObject(stackObject.getSourceId());
-				if (source != null)
-					eldraziSpellBeingCast |= source.getSubtype().contains("Eldrazi");
-            }
-        }
-
-        return super.canActivate(playerId, game) && eldraziSpellBeingCast;
-    }*/
-
-    @Override
-    public String getRule(String source) {
-        return super.getRule(source);
-    }
-
     @Override
     public EldraziTempleManaAbility copy ( ) {
         return new EldraziTempleManaAbility(this);

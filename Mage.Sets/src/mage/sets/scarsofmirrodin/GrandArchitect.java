@@ -30,6 +30,7 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
+import mage.ConditionalMana;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
@@ -43,6 +44,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -137,9 +139,7 @@ class GrandArchitectEffect extends ContinuousEffectImpl<GrandArchitectEffect> {
 
 class GrandArchitectManaAbility extends ManaAbility<GrandArchitectManaAbility> {
 
-    private static final String abilityText = "Spend this mana only to cast artifact spells or activate abilities of artifacts. "
-            + "<b>(Mage Tip: This ability can only be activated when an artifact spell or ability is on the stack.)</b>";
-	private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped blue creature");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped blue creature");
 
 	static {
 		filter.getColor().setBlue(true);
@@ -149,7 +149,7 @@ class GrandArchitectManaAbility extends ManaAbility<GrandArchitectManaAbility> {
 	}
 	
     GrandArchitectManaAbility ( ) {
-        super(Zone.BATTLEFIELD, new BasicManaEffect(Mana.ColorlessMana(2)), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
+        super(Zone.BATTLEFIELD, new BasicManaEffect(new GrandArchitectConditionalMana()), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
         this.netMana.setColorless(2);
     }
 
@@ -158,35 +158,27 @@ class GrandArchitectManaAbility extends ManaAbility<GrandArchitectManaAbility> {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        boolean artifactSpellBeingCast = false;
-
-        SpellStack stack = game.getStack();
-        for ( int idx = 0; idx < stack.size(); idx++ ) {
-            StackObject stackObject = stack.get(idx);
-            if ( stackObject.getControllerId().equals(playerId) ) {
-                artifactSpellBeingCast |= stackObject.getCardType().contains(CardType.ARTIFACT);
-				MageObject source = game.getObject(stackObject.getSourceId());
-				if (source != null)
-					artifactSpellBeingCast |= source.getCardType().contains(CardType.ARTIFACT);
-            }
-        }
-
-        return super.canActivate(playerId, game) && artifactSpellBeingCast;
-    }
-
-    @Override
-    public String getRule() {
-        return super.getRule() + "  " + abilityText;
-    }
-
-    @Override
-    public String getRule(String source) {
-        return super.getRule(source);
-    }
-
-    @Override
     public GrandArchitectManaAbility copy ( ) {
         return new GrandArchitectManaAbility(this);
     }
+}
+
+class GrandArchitectConditionalMana extends ConditionalMana {
+
+	public GrandArchitectConditionalMana() {
+		super(Mana.ColorlessMana(2));
+		staticText = "Spend this mana only to cast artifact spells or activate abilities of artifacts";
+		addCondition(new GrandArchitectManaCondition());
+	}
+}
+
+class GrandArchitectManaCondition implements Condition {
+	@Override
+	public boolean apply(Game game, Ability source) {
+		MageObject object = game.getObject(source.getSourceId());
+		if (object != null && object.getCardType().contains(CardType.ARTIFACT)) {
+			return true;
+		}
+		return false;
+	}
 }
