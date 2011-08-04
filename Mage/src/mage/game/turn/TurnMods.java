@@ -72,6 +72,27 @@ public class TurnMods extends ArrayList<TurnMod> {
 		return false;
 	}
 
+	public UUID controlsTurn(UUID playerId) {
+		ListIterator<TurnMod> it = this.listIterator(this.size());
+		UUID newControllerId = null;
+		while (it.hasPrevious()) {
+			TurnMod turnMod = it.previous();
+			if (turnMod.getNewControllerId() != null && turnMod.getPlayerId().equals(playerId)) {
+				newControllerId = turnMod.getNewControllerId();
+				it.remove();
+			}
+		}
+		// now delete all other - control next turn effect is not cumulative
+		it = this.listIterator(this.size());
+		while (it.hasPrevious()) {
+			TurnMod turnMod = it.previous();
+			if (turnMod.getNewControllerId() != null && turnMod.getPlayerId().equals(playerId)) {
+				it.remove();
+			}
+		}
+		return newControllerId;
+	}
+
 	public Step extraStep(UUID playerId, PhaseStep afterStep) {
 		ListIterator<TurnMod> it = this.listIterator(this.size());
 		while (it.hasPrevious()) {

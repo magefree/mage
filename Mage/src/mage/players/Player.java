@@ -102,6 +102,43 @@ public interface Player extends MageItem, Copyable<Player> {
 	public ManaPool getManaPool();
 	public Set<UUID> getInRange();
 
+	/**
+	 * Returns a set of players which turns under you control.
+	 * Doesn't include yourself.
+	 *
+	 * @return
+	 */
+	public Set<UUID> getPlayersUnderYourControl();
+
+	/**
+	 * Defines player whose turn you control at the moment.
+	 * @param playerId
+	 */
+	public void controlPlayersTurn(Game game, UUID playerId);
+
+	/**
+	 * Resets players whose turns you control at the moment.
+	 */
+	public void resetOtherTurnsControlled();
+
+	/**
+	 * Returns false in case you don't control the game.
+	 *
+	 * Note: For effects like "You control target player during that player's next turn".
+	 *
+	 * @return
+	 */
+	public boolean isGameUnderYourControl();
+
+	/**
+	 * Returns false in case you don't control the game.
+	 *
+	 * Note: For effects like "You control target player during that player's next turn".
+	 *
+	 * @param value
+	 */
+	public void setGameUnderYourControl(boolean value);
+
 	public boolean isTestMode();
 	public void setTestMode(boolean value);
 	

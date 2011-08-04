@@ -106,6 +106,8 @@ public class Turn implements Serializable {
 		if (game.getState().getTurnMods().skipTurn(activePlayerId))
 			return;
 
+		checkTurnIsControlledByOtherPlayer(game, activePlayerId);
+
 		this.activePlayerId = activePlayerId;
 		resetCounts();
 		game.getPlayer(activePlayerId).beginTurn(game);
@@ -125,6 +127,13 @@ public class Turn implements Serializable {
 		}
 		//20091005 - 500.7
 		playExtraTurns(game);
+	}
+
+	private void checkTurnIsControlledByOtherPlayer(Game game, UUID activePlayerId) {
+		UUID newControllerId = game.getState().getTurnMods().controlsTurn(activePlayerId);
+		if (newControllerId != null && !newControllerId.equals(activePlayerId)) {
+			game.getPlayer(newControllerId).controlPlayersTurn(game, activePlayerId);
+		}
 	}
 
 	private void resetCounts() {

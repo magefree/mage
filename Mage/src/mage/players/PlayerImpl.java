@@ -42,17 +42,11 @@ import mage.Constants.RangeOfInfluence;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.Mana;
-import mage.abilities.Abilities;
-import mage.abilities.AbilitiesImpl;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.Mode;
-import mage.abilities.PlayLandAbility;
-import mage.abilities.SpecialAction;
-import mage.abilities.SpellAbility;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.common.PassAbility;
+import mage.abilities.common.delayed.AtTheEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.LoseControlOnOtherPlayersControllerEffect;
 import mage.abilities.keyword.*;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.ManaOptions;
@@ -100,6 +94,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	protected Set<UUID> inRange = new HashSet<UUID>();
 	protected boolean isTestMode = false;
 	protected boolean lifeTotalCanChange = true;
+	protected boolean isGameUnderYourControl = true;
+	protected Set<UUID> playersUnderYourControl = new HashSet<UUID>();
 
 	@Override
 	public abstract T copy();
@@ -232,6 +228,41 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	@Override
 	public Set<UUID> getInRange() {
 		return inRange;
+	}
+
+	@Override
+	public Set<UUID> getPlayersUnderYourControl() {
+		return this.playersUnderYourControl;
+	}
+
+	@Override
+	public void controlPlayersTurn(Game game, UUID playerId) {
+		if (!playerId.equals(getId())) {
+			this.playersUnderYourControl.add(playerId);
+			Player player = game.getPlayer(playerId);
+			if (!player.hasLeft() && !player.hasLost()) {
+				player.setGameUnderYourControl(false);
+			}
+			DelayedTriggeredAbility ability = new AtTheEndOfTurnDelayedTriggeredAbility(new LoseControlOnOtherPlayersControllerEffect());
+			ability.setSourceId(getId());
+			ability.setControllerId(getId());
+			game.addDelayedTriggeredAbility(ability);
+		}
+	}
+
+	@Override
+	public void resetOtherTurnsControlled() {
+		playersUnderYourControl.clear();
+	}
+
+	@Override
+	public boolean isGameUnderYourControl() {
+		return isGameUnderYourControl;
+	}
+
+	@Override
+	public void setGameUnderYourControl(boolean value) {
+		this.isGameUnderYourControl = value;
 	}
 
 	@Override

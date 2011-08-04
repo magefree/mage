@@ -41,6 +41,7 @@ import mage.Constants.TurnPhase;
 public class TurnMod implements Serializable {
 
 	private UUID playerId;
+	private UUID newControllerId;
 	private boolean extraTurn;
 	private boolean skipTurn;
 	private TurnPhase extraPhase;
@@ -58,8 +59,14 @@ public class TurnMod implements Serializable {
 			this.extraTurn = true;
 	}
 
+	public TurnMod(UUID playerId, UUID newControllerId) {
+		this.playerId = playerId;
+		this.newControllerId = newControllerId;
+	}
+
 	public TurnMod(final TurnMod mod) {
 		this.playerId = mod.playerId;
+		this.newControllerId = mod.newControllerId;
 		this.extraTurn = mod.extraTurn;
 		this.skipTurn = mod.skipTurn;
 		this.extraPhase = mod.extraPhase;
@@ -74,7 +81,7 @@ public class TurnMod implements Serializable {
 	/**
 	 *
 	 * @param playerId
-	 * @param extraPhase
+	 * @param phase
 	 * @param afterPhase - set to null if extraPhase is after the next phase
 	 */
 	public TurnMod(UUID playerId, TurnPhase phase, TurnPhase afterPhase, boolean skip) {
@@ -89,7 +96,7 @@ public class TurnMod implements Serializable {
 	/**
 	 *
 	 * @param playerId
-	 * @param extraStep
+	 * @param step
 	 * @param afterStep - set to null if extraStep is after the next step
 	 */
 	public TurnMod(UUID playerId, Step step, PhaseStep afterStep) {
@@ -137,6 +144,10 @@ public class TurnMod implements Serializable {
 
 	public PhaseStep getAfterStep() {
 		return afterStep;
+	}
+
+	public UUID getNewControllerId() {
+		return newControllerId;
 	}
 
 	public TurnMod copy() {
