@@ -112,5 +112,4 @@ class StalkingStonesEffect extends ContinuousEffectImpl<StalkingStonesEffect> {
 	public boolean hasLayer(Constants.Layer layer) {
 		return layer == Constants.Layer.PTChangingEffects_7 || layer == layer.TypeChangingEffects_4;
 	}
-
 }
