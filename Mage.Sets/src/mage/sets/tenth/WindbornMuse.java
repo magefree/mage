@@ -76,7 +76,7 @@ class WindbornMuseReplacementEffect extends ReplacementEffectImpl<WindbornMuseRe
 	private static final String effectText = "Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you";
 
 	WindbornMuseReplacementEffect ( ) {
-		super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Neutral);
+		super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
 		staticText = effectText;
 	}
 
@@ -98,7 +98,7 @@ class WindbornMuseReplacementEffect extends ReplacementEffectImpl<WindbornMuseRe
 				if ( propagandaTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
 					 player.chooseUse(Constants.Outcome.Benefit, "Pay {2} to declare attacker?", game) )
 				{
-					propagandaTax.pay(game, this.getId(), event.getPlayerId(), false);
+					propagandaTax.pay(source, game, this.getId(), event.getPlayerId(), false);
 
 					if ( propagandaTax.isPaid() ) {
 						return false;
@@ -124,3 +124,4 @@ class WindbornMuseReplacementEffect extends ReplacementEffectImpl<WindbornMuseRe
 	}
 
 }
+
