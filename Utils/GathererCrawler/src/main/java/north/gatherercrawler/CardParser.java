@@ -3,6 +3,8 @@ package north.gatherercrawler;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -14,6 +16,9 @@ import org.jsoup.select.Elements;
  * @author robert.biter
  */
 public class CardParser extends Thread {
+
+    private static final Pattern patternPrint = Pattern.compile("(?<=#)[\\w\\d]+?(?= )");
+    private static final Pattern patternUrl = Pattern.compile("(?<=/)[\\w\\d]+?(?=\\.html)");
 
     private boolean parseCard(Integer multiverseId) {
         String url = "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=" + multiverseId;
@@ -116,6 +121,34 @@ public class CardParser extends Thread {
             return false;
         }
 
+        if (card.getCardNumber() == null) {
+            url = "http://magiccards.info/query?q=" + card.getName().replace(' ', '+');
+            try {
+                Connection connection = Jsoup.connect(url);
+                connection.timeout(20000);
+                doc = connection.get();
+
+                Elements select = doc.select("small a:contains(" + card.getExpansion() + ")");
+                if (!select.isEmpty()) {
+                    Matcher matcher = patternUrl.matcher(select.get(0).attr("href"));
+                    matcher.find();
+                    card.setCardNumber(matcher.group());
+                } else {
+                    select = doc.select("small b:contains(#)");
+                    if (!select.isEmpty()) {
+                        Matcher matcher = patternPrint.matcher(select.get(0).html());
+                        matcher.find();
+                        card.setCardNumber(matcher.group());
+                    }
+                }
+
+            } catch (IOException ex) {
+            }
+        }
+
+        if (card.getCardNumber() == null) {
+            System.out.println("Card number missing: " + card.getName());
+        }
         CardsList.add(card);
         return true;
     }
