@@ -159,6 +159,10 @@ public class FeedbackPanel extends javax.swing.JPanel {
 		logger.debug("feedback - clear");
 	}
 
+	public void clear0() {
+		stopModal();
+	}
+
 	private synchronized void startModal() {
 
         try {
@@ -337,7 +341,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
 	private void btnRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRightActionPerformed
 		this.selected = true;
-		clear();
+		clear0();
 		if (mode == FeedbackMode.SELECT && (evt.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK)
 			session.sendPlayerInteger(gameId, 0);
 		else
@@ -346,7 +350,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
 	private void btnLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftActionPerformed
 		this.selected = true;
-		clear();
+		clear0();
 		session.sendPlayerBoolean(gameId, true);
 	}//GEN-LAST:event_btnLeftActionPerformed
 

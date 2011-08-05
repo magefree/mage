@@ -643,7 +643,7 @@ public class GamePanel extends javax.swing.JPanel {
 				btnSwitchHandActionPerformed(null);
 			}
 		});
-		btnSwitchHands.setBorder(BorderFactory.createLineBorder(Color.red));
+		//btnSwitchHands.setBorder(BorderFactory.createLineBorder(Color.red));
 
         btnStopWatching.setText("Stop Watching");
         btnStopWatching.addActionListener(new java.awt.event.ActionListener() {
@@ -877,7 +877,7 @@ public class GamePanel extends javax.swing.JPanel {
                     JOptionPane.PLAIN_MESSAGE,
                     null,
                     choices,
-                    YOUR_HAND);
+                    this.chosenHandKey);
 
 		if (chosenHandKey != null && chosenHandKey.length() > 0) {
 			this.chosenHandKey = chosenHandKey;
