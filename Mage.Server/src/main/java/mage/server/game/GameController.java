@@ -572,13 +572,26 @@ public class GameController implements GameCallback {
 	private void sendMessage(UUID userId, Command command) {
 		final UUID playerId = userPlayerMap.get(userId);
 		if (game.getPlayer(playerId).isGameUnderControl()) {
-			if (gameSessions.containsKey(playerId))
-				command.execute(playerId);
-			// now send the same command to those whose turns you control
-			Player player = game.getPlayer(playerId);
-			for (UUID controlled : player.getPlayersUnderYourControl()) {
-				if (gameSessions.containsKey(controlled))
-					command.execute(controlled);
+			if (game.getPlayer(playerId).getPlayersUnderYourControl().size() == 0) {
+				// we have a problem with synchronization between priorityId and message sent
+				// so have to check the size of list of players controlled
+				if (gameSessions.containsKey(playerId))
+						command.execute(playerId);
+			} else {
+				// if it's your priority (or game not started yet in which case it will be null)
+				// then execute only your action
+				//if (game.getPriorityPlayerId() == null || game.getPriorityPlayerId().equals(playerId)) {
+					if (gameSessions.containsKey(playerId))
+						command.execute(playerId);
+				//} // otherwise execute the action under other player's control
+				//else {
+					//System.out.println("asThough: " + playerId + " " + game.getPriorityPlayerId());
+					Player player = game.getPlayer(playerId);
+					for (UUID controlled : player.getPlayersUnderYourControl()) {
+						if (gameSessions.containsKey(controlled) && game.getPriorityPlayerId().equals(controlled))
+							command.execute(controlled);
+					}
+				//}
 			}
 		} else {
 			// ignore - no control over the turn
