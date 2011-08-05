@@ -37,50 +37,55 @@ import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEffect> {
 
-	public ReturnToHandTargetEffect() {
-		super(Outcome.ReturnToHand);
-	}
+    public ReturnToHandTargetEffect() {
+        super(Outcome.ReturnToHand);
+    }
 
-	public ReturnToHandTargetEffect(final ReturnToHandTargetEffect effect) {
-		super(effect);
-	}
+    public ReturnToHandTargetEffect(final ReturnToHandTargetEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public ReturnToHandTargetEffect copy() {
-		return new ReturnToHandTargetEffect(this);
-	}
+    @Override
+    public ReturnToHandTargetEffect copy() {
+        return new ReturnToHandTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		if (source.getTargets().size() > 0) {
-			switch (source.getTargets().get(0).getZone()) {
-				case BATTLEFIELD:
-					Permanent permanent = game.getPermanent(source.getFirstTarget());
-					if (permanent != null) {
-						return permanent.moveToZone(Zone.HAND, source.getId(), game, false);
-					}
-					break;
-				case GRAVEYARD:
-					Card card = game.getCard(source.getFirstTarget());
-					if (card != null) {
-						return card.moveToZone(Zone.HAND, source.getId(), game, true);
-					}
-					break;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        boolean result = false;
+        for (UUID id : targetPointer.getTargets(source)) {
+            switch (game.getZone(id)) {
+                case BATTLEFIELD:
+                    Permanent permanent = game.getPermanent(id);
+                    if (permanent != null) {
+                        result |= permanent.moveToZone(Zone.HAND, source.getId(), game, false);
+                    }
+                    break;
+                case GRAVEYARD:
+                    Card card = game.getCard(id);
+                    if (card != null) {
+                        result |= card.moveToZone(Zone.HAND, source.getId(), game, true);
+                    }
+                    break;
+            }
+        }
+        return result;
+    }
 
-	@Override
-	public String getText(Mode mode) {
-		return "Return target " + mode.getTargets().get(0).getTargetName() + " to it's owner's hand";
+    @Override
+    public String getText(Mode mode) {
+        if (mode.getTargets().get(0).getNumberOfTargets() == 0 && mode.getTargets().get(0).getMaxNumberOfTargets() > 0) {
+            return "Return up to " + mode.getTargets().get(0).getMaxNumberOfTargets() +" target " + mode.getTargets().get(0).getTargetName() + " to their owners' hand";
+        } else {
+            return "Return target " + mode.getTargets().get(0).getTargetName() + " to it's owner's hand";
+        }
+    }
 
-	}
-	
 }
