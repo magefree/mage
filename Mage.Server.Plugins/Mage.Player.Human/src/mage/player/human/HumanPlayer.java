@@ -139,6 +139,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public boolean chooseMulligan(Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		game.fireAskPlayerEvent(playerId, "Do you want to take a mulligan?");
 		waitForBooleanResponse();
 		if (!abort)
@@ -148,6 +149,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public boolean chooseUse(Outcome outcome, String message, Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		game.fireAskPlayerEvent(playerId, message);
 		waitForBooleanResponse();
 		if (!abort)
@@ -157,6 +159,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public int chooseEffect(List<ReplacementEffect> rEffects, Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		replacementEffectChoice.getChoices().clear();
 		for (ReplacementEffect effect: rEffects) {
 			replacementEffectChoice.getChoices().add(effect.getText(null));
@@ -179,6 +182,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public boolean choose(Outcome outcome, Choice choice, Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
 			game.fireChooseEvent(playerId, choice);
 			waitForResponse();
@@ -199,6 +203,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public boolean choose(Outcome outcome, Target target, Game game, Map<String, Serializable> options) {
+		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
 			game.fireSelectTargetEvent(playerId, target.getMessage(), target.possibleTargets(null, playerId, game), target.isRequired(), options);
 			waitForResponse();
@@ -222,6 +227,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
 			game.fireSelectTargetEvent(playerId, target.getMessage(), target.possibleTargets(source==null?null:source.getId(), playerId, game), target.isRequired(), null);
 			waitForResponse();
@@ -245,6 +251,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
 			boolean required = target.isRequired();
 			// if there is no cards to select from, then add possibility to cancel choosing action
@@ -270,6 +277,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
 			game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired());
 			waitForResponse();
@@ -287,6 +295,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
 			game.fireSelectTargetEvent(playerId, target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), target.possibleTargets(source==null?null:source.getId(), playerId, game), target.isRequired(), null);
 			waitForResponse();
@@ -346,6 +355,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public TriggeredAbility chooseTriggeredAbility(TriggeredAbilities abilities, Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
 			game.fireSelectTargetEvent(playerId, "Pick triggered ability", abilities, true);
 			waitForResponse();
@@ -361,6 +371,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public boolean playMana(ManaCost unpaid, Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		game.firePlayManaEvent(playerId, "Pay " + unpaid.getText());
 		waitForResponse();
 		if (response.getBoolean() != null) {
@@ -386,6 +397,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		game.firePlayXManaEvent(playerId, "Pay {X}: {X}=" + cost.getAmount());
 		waitForResponse();
 		if (response.getBoolean() != null) {
@@ -399,6 +411,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	}
 
 	protected void playManaAbilities(Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		MageObject object = game.getObject(response.getUUID());
 		if (object == null) return;
 		Map<UUID, ActivatedAbility> useableAbilities;
@@ -426,6 +439,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public void selectAttackers(Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
 			targetCombat.getTargets().clear();
 			game.fireSelectEvent(playerId, "Select attackers");
@@ -457,6 +471,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public void selectBlockers(Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
 			targetCombat.getTargets().clear();
 			game.fireSelectEvent(playerId, "Select blockers");
@@ -473,6 +488,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public UUID chooseAttackerOrder(List<Permanent> attackers, Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
 			game.fireSelectTargetEvent(playerId, "Pick attacker", attackers, true);
 			waitForResponse();
@@ -489,6 +505,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public UUID chooseBlockerOrder(List<Permanent> blockers, Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
 			game.fireSelectTargetEvent(playerId, "Pick blocker", blockers, true);
 			waitForResponse();
@@ -503,6 +520,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	}
 
 	protected void selectCombatGroup(UUID blockerId, Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		TargetAttackingCreature target = new TargetAttackingCreature();
 		game.fireSelectTargetEvent(playerId, "Select attacker to block", target.possibleTargets(null, playerId, game), target.isRequired(), null);
 		waitForResponse();
@@ -515,6 +533,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID sourceId, Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		int remainingDamage = damage;
 		while (remainingDamage > 0) {
 			Target target = new TargetCreatureOrPlayer();
@@ -540,6 +559,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public int getAmount(int min, int max, String message, Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		game.fireGetAmountEvent(playerId, message, min, max);
 		waitForIntegerResponse();
 		return response.getInteger();
@@ -571,6 +591,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	}
 
 	protected void activateAbility(Map<UUID, ? extends ActivatedAbility> abilities, Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		if (abilities.size() == 1) {
 			ActivatedAbility ability = abilities.values().iterator().next();
 			if (ability.getTargets().size() != 0 || !(ability.getCosts().size() == 1 && ability.getCosts().get(0) instanceof SacrificeSourceCost)) {
@@ -588,6 +609,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	
 	@Override
 	public Mode chooseMode(Modes modes, Ability source, Game game) {
+		game.getState().setPriorityPlayerId(getId());
 		if (modes.size() > 1) {
 			MageObject obj = game.getObject(source.getSourceId());
 			Map<UUID, String> modeMap = new HashMap<UUID, String>();
