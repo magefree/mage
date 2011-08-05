@@ -36,6 +36,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -54,6 +55,7 @@ public class ViralDrake extends CardImpl<ViralDrake> {
         this.toughness = new MageInt(4);
 
         this.addAbility(FlyingAbility.getInstance());
+		this.addAbility(InfectAbility.getInstance());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ProliferateEffect(), new ManaCostsImpl("{3}{U}")));
     }
 
