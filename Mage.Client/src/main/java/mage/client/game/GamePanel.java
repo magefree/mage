@@ -880,7 +880,7 @@ public class GamePanel extends javax.swing.JPanel {
                     YOUR_HAND);
 
 		if (chosenHandKey != null && chosenHandKey.length() > 0) {
-			chosenHandKey = chosenHandKey;
+			this.chosenHandKey = chosenHandKey;
 			CardsView cards = handCards.get(chosenHandKey);
 			this.hand.loadCards(cards, bigCard, gameId);
 			hand.setPreferredSize(new java.awt.Dimension((getHandCardDimension().width + 5) * cards.size() + 5, getHandCardDimension().height + 20)); // for scroll

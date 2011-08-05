@@ -44,7 +44,7 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.*;
 import mage.abilities.common.PassAbility;
-import mage.abilities.common.delayed.AtTheEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheEndOfTurnStepPostDelayedTriggeredAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.LoseControlOnOtherPlayersControllerEffect;
 import mage.abilities.keyword.*;
@@ -94,7 +94,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	protected Set<UUID> inRange = new HashSet<UUID>();
 	protected boolean isTestMode = false;
 	protected boolean lifeTotalCanChange = true;
-	protected boolean isGameUnderYourControl = true;
+	protected boolean isGameUnderControl = true;
 	protected UUID turnController;
 	protected Set<UUID> playersUnderYourControl = new HashSet<UUID>();
 
@@ -245,7 +245,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 				player.setGameUnderYourControl(false);
 				player.setTurnControlledBy(this.getId());
 			}
-			DelayedTriggeredAbility ability = new AtTheEndOfTurnDelayedTriggeredAbility(new LoseControlOnOtherPlayersControllerEffect());
+			DelayedTriggeredAbility ability = new AtTheEndOfTurnStepPostDelayedTriggeredAbility(new LoseControlOnOtherPlayersControllerEffect());
 			ability.setSourceId(getId());
 			ability.setControllerId(getId());
 			game.addDelayedTriggeredAbility(ability);
@@ -267,12 +267,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public boolean isGameUnderControl() {
-		return isGameUnderYourControl;
+		return isGameUnderControl;
 	}
 
 	@Override
 	public void setGameUnderYourControl(boolean value) {
-		this.isGameUnderYourControl = value;
+		this.isGameUnderControl = value;
 	}
 
 	@Override

@@ -84,7 +84,7 @@ import javax.xml.transform.Source;
  */
 public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
-	final transient PlayerResponse response = new PlayerResponse();
+	private final transient PlayerResponse response = new PlayerResponse();
 
 	protected static FilterCreatureForCombat filter = new FilterCreatureForCombat();
 	protected static Choice replacementEffectChoice = new ChoiceImpl(true);

@@ -35,30 +35,30 @@ import mage.game.events.GameEvent;
 /**
  * @author nantuko
  */
-public class AtTheEndOfTurnDelayedTriggeredAbility extends DelayedTriggeredAbility<AtTheEndOfTurnDelayedTriggeredAbility> {
+public class AtTheEndOfTurnStepPostDelayedTriggeredAbility extends DelayedTriggeredAbility<AtTheEndOfTurnStepPostDelayedTriggeredAbility> {
 
-	public AtTheEndOfTurnDelayedTriggeredAbility(Effect effect) {
+	public AtTheEndOfTurnStepPostDelayedTriggeredAbility(Effect effect) {
         super(effect);
     }
 
-	public AtTheEndOfTurnDelayedTriggeredAbility(Effect effect, boolean usesStack) {
+	public AtTheEndOfTurnStepPostDelayedTriggeredAbility(Effect effect, boolean usesStack) {
         super(effect);
 		this.usesStack = usesStack;
     }
 
 
-    public AtTheEndOfTurnDelayedTriggeredAbility(AtTheEndOfTurnDelayedTriggeredAbility ability) {
+    public AtTheEndOfTurnStepPostDelayedTriggeredAbility(AtTheEndOfTurnStepPostDelayedTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public AtTheEndOfTurnDelayedTriggeredAbility copy() {
-        return new AtTheEndOfTurnDelayedTriggeredAbility(this);
+    public AtTheEndOfTurnStepPostDelayedTriggeredAbility copy() {
+        return new AtTheEndOfTurnStepPostDelayedTriggeredAbility(this);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.COMBAT_PHASE_POST) {
+        if (event.getType() == GameEvent.EventType.END_TURN_STEP_POST) {
             return true;
         }
         return false;

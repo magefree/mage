@@ -32,7 +32,7 @@ import java.io.BufferedOutputStream;
 
 import mage.MageException;
 import mage.server.TableManager;
-import java.io.File;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutput;
@@ -44,8 +44,6 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.zip.GZIPOutputStream;
 
 import mage.Constants.Zone;
@@ -63,9 +61,11 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.server.ChatManager;
 import mage.server.UserManager;
+import mage.server.util.SystemUtil;
 import mage.server.util.Splitter;
 import mage.server.util.ThreadExecutor;
 import mage.sets.Sets;
+import mage.sets.alarareborn.EnlistedWurm;
 import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
 import org.apache.log4j.Logger;
@@ -78,7 +78,6 @@ public class GameController implements GameCallback {
 
 	private static ExecutorService gameExecutor = ThreadExecutor.getInstance().getGameExecutor();
 	private final static Logger logger = Logger.getLogger(GameController.class);
-	public static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
 
 	private ConcurrentHashMap<UUID, GameSession> gameSessions = new ConcurrentHashMap<UUID, GameSession>();
 	private ConcurrentHashMap<UUID, GameWatcher> watchers = new ConcurrentHashMap<UUID, GameWatcher>();
@@ -319,20 +318,39 @@ public class GameController implements GameCallback {
 		return chatId;
 	}
 
-	public void sendPlayerUUID(UUID userId, UUID data) {
-		gameSessions.get(userPlayerMap.get(userId)).sendPlayerUUID(data);
+	public void sendPlayerUUID(UUID userId, final UUID data) {
+		sendMessage(userId, new Command() {
+			public void execute(UUID playerId) {
+				gameSessions.get(playerId).sendPlayerUUID(data);
+			}
+		});
+
 	}
 
-	public void sendPlayerString(UUID userId, String data) {
-		gameSessions.get(userPlayerMap.get(userId)).sendPlayerString(data);
+	public void sendPlayerString(UUID userId, final String data) {
+		sendMessage(userId, new Command() {
+			public void execute(UUID playerId) {
+				gameSessions.get(playerId).sendPlayerString(data);
+			}
+		});
 	}
 
-	public void sendPlayerBoolean(UUID userId, Boolean data) {
-		gameSessions.get(userPlayerMap.get(userId)).sendPlayerBoolean(data);
+	public void sendPlayerBoolean(UUID userId, final Boolean data) {
+		sendMessage(userId, new Command() {
+			public void execute(UUID playerId) {
+				gameSessions.get(playerId).sendPlayerBoolean(data);
+			}
+		});
+
 	}
 
-	public void sendPlayerInteger(UUID userId, Integer data) {
-		gameSessions.get(userPlayerMap.get(userId)).sendPlayerInteger(data);
+	public void sendPlayerInteger(UUID userId, final Integer data) {
+		sendMessage(userId, new Command() {
+			public void execute(UUID playerId) {
+				gameSessions.get(playerId).sendPlayerInteger(data);
+			}
+		});
+
 	}
 
 	private synchronized void updateGame() {
@@ -344,41 +362,50 @@ public class GameController implements GameCallback {
 		}
 	}
 
-	private synchronized void ask(final UUID playerId, final String question) throws MageException {
+	private synchronized void ask(UUID playerId, final String question) throws MageException {
+		/*if (question.equals("Do you want to take a mulligan?")) {
+			System.out.println("reverted");
+			for (UUID uuid : game.getOpponents(playerId)) {
+				gameSessions.get(uuid).ask(question);
+				informOthers(uuid);
+			}
+			return;
+		}*/
 		perform(playerId, new Command() {
-			public void execute() {
+			public void execute(UUID playerId) {
 				gameSessions.get(playerId).ask(question);
 			}
 		});
+
 	}
 
-	private synchronized void chooseAbility(final UUID playerId, final Collection<? extends Ability> choices) throws MageException {
+	private synchronized void chooseAbility(UUID playerId, final Collection<? extends Ability> choices) throws MageException {
 		perform(playerId, new Command() {
-			public void execute() {
+			public void execute(UUID playerId) {
 				gameSessions.get(playerId).chooseAbility(new AbilityPickerView(choices));
 			}
 		});
 	}
 
-	private synchronized void chooseMode(final UUID playerId, final Map<UUID, String> modes) throws MageException {
+	private synchronized void chooseMode(UUID playerId, final Map<UUID, String> modes) throws MageException {
 		perform(playerId, new Command() {
-			public void execute() {
+			public void execute(UUID playerId) {
 				gameSessions.get(playerId).chooseAbility(new AbilityPickerView(modes));
 			}
 		});
 	}
 
-	private synchronized void choose(final UUID playerId, final String message, final Set<String> choices) throws MageException {
+	private synchronized void choose(UUID playerId, final String message, final Set<String> choices) throws MageException {
 		perform(playerId, new Command() {
-			public void execute() {
+			public void execute(UUID playerId) {
 				gameSessions.get(playerId).choose(message, choices);
 			}
 		});
 	}
 
-	private synchronized void target(final UUID playerId, final String question, final Cards cards, final List<Permanent> perms, final Set<UUID> targets, final boolean required, final Map<String, Serializable> options) throws MageException {
+	private synchronized void target(UUID playerId, final String question, final Cards cards, final List<Permanent> perms, final Set<UUID> targets, final boolean required, final Map<String, Serializable> options) throws MageException {
 		perform(playerId, new Command() {
-			public void execute() {
+			public void execute(UUID playerId) {
 				if (cards != null) {
 					gameSessions.get(playerId).target(question, new CardsView(cards.getCards(game)), targets, required, options);
 				} else if (perms != null) {
@@ -394,9 +421,9 @@ public class GameController implements GameCallback {
 
 	}
 
-	private synchronized void target(final UUID playerId, final String question, final Collection<? extends Ability> abilities, final boolean required, final Map<String, Serializable> options) throws MageException {
+	private synchronized void target(UUID playerId, final String question, final Collection<? extends Ability> abilities, final boolean required, final Map<String, Serializable> options) throws MageException {
 		perform(playerId, new Command() {
-			public void execute() {
+			public void execute(UUID playerId) {
 				gameSessions.get(playerId).target(question, new CardsView(abilities, game), null, required, options);
 			}
 		});
@@ -404,31 +431,31 @@ public class GameController implements GameCallback {
 
 	private synchronized void select(final UUID playerId, final String message) throws MageException {
 		perform(playerId, new Command() {
-			public void execute() {
+			public void execute(UUID playerId) {
 				gameSessions.get(playerId).select(message);
 			}
 		});
 	}
 
-	private synchronized void playMana(final UUID playerId, final String message) throws MageException {
+	private synchronized void playMana(UUID playerId, final String message) throws MageException {
 		perform(playerId, new Command() {
-			public void execute() {
+			public void execute(UUID playerId) {
 				gameSessions.get(playerId).playMana(message);
 			}
 		});
 	}
 
-	private synchronized void playXMana(final UUID playerId, final String message) throws MageException {
+	private synchronized void playXMana(UUID playerId, final String message) throws MageException {
 		perform(playerId, new Command() {
-			public void execute() {
+			public void execute(UUID playerId) {
 				gameSessions.get(playerId).playXMana(message);
 				}
 		});
 	}
 
-	private synchronized void amount(final UUID playerId, final String message, final int min, final int max) throws MageException {
+	private synchronized void amount(UUID playerId, final String message, final int min, final int max) throws MageException {
 		perform(playerId, new Command() {
-			public void execute() {
+			public void execute(UUID playerId) {
 				gameSessions.get(playerId).getAmount(message, min, max);
 			}
 		});
@@ -440,9 +467,9 @@ public class GameController implements GameCallback {
 		}
 	}
 
-	private synchronized void lookAtCards(final UUID playerId, final String name, final Cards cards) throws MageException {
+	private synchronized void lookAtCards(UUID playerId, final String name, final Cards cards) throws MageException {
 		perform(playerId, new Command() {
-			public void execute() {
+			public void execute(UUID playerId) {
 				gameSessions.get(playerId).revealCards(name, new CardsView(cards.getCards(game)));
 			}
 		}, false);
@@ -517,104 +544,10 @@ public class GameController implements GameCallback {
 	}
 
 	/**
-	 * Replaces cards in player's hands by specified in config/init.txt.<br/>
-	 * <br/>
-	 * <b>Implementation note:</b><br/>
-	 * 1. Read init.txt line by line<br/>
-	 * 2. Parse line using the following format: line ::= <zone>:<nickname>:<card name>:<amount><br/>
-	 * 3. If zone equals to 'hand', add card to player's library<br/>
-	 *   3a. Then swap added card with any card in player's hand<br/>
-	 *   3b. Parse next line (go to 2.), If EOF go to 4.<br/>
-	 * 4. Log message to all players that cards were added (to prevent unfair play).<br/>  
-	 * 5. Exit<br/>
+	 * Adds cards in player's hands that are specified in config/init.txt.
 	 */
 	private void addCardsForTesting(Game game) {
-		try {
-			File f = new File(INIT_FILE_PATH);
-			Pattern pattern = Pattern.compile("([a-zA-Z]*):([\\w]*):([a-zA-Z ,\\-.!'\\d]*):([\\d]*)");
-			if (!f.exists()) {
-				logger.warn("Couldn't find init file: " + INIT_FILE_PATH);
-				return;
-			}
-			
-			//logger.info("Parsing init.txt for player : " + player.getName());
-			
-			Scanner scanner = new Scanner(f);
-			try {
-				while (scanner.hasNextLine()) {
-					String line = scanner.nextLine().trim();
-					if (line.trim().length() == 0 || line.startsWith("#")) continue;
-					Matcher m = pattern.matcher(line);
-					if (m.matches()) {
-
-						String zone = m.group(1);
-						String nickname = m.group(2);
-
-						Player player = findPlayer(game, nickname);
-						if (player != null) {
-							Zone gameZone;
-							if ("hand".equalsIgnoreCase(zone)) {
-								gameZone = Zone.HAND;
-							} else if ("battlefield".equalsIgnoreCase(zone)) {
-								gameZone = Zone.BATTLEFIELD;
-							} else if ("graveyard".equalsIgnoreCase(zone)) {
-								gameZone = Zone.GRAVEYARD;
-							} else if ("library".equalsIgnoreCase(zone)) {
-								gameZone = Zone.LIBRARY;
-							} else {
-								continue; // go parse next line
-							}
-
-							String cardName = m.group(3);
-							Integer amount = Integer.parseInt(m.group(4));
-							for (int i = 0; i < amount; i++) {
-								Card card = Sets.findCard(cardName, true);
-								if (card != null) {
-									Set<Card> cards = new HashSet<Card>();
-									cards.add(card);
-									game.loadCards(cards, player.getId());
-									swapWithAnyCard(game, player, card, gameZone);
-								} else {
-									logger.fatal("Couldn't find a card: " + cardName);
-								}
-							}
-						} else {
-							logger.warn("Was skipped: " + line);
-						}
-					} else {
-						logger.warn("Init string wasn't parsed: " + line);
-					}
-				}
-			}
-			finally {
-				scanner.close();
-			}
-		} catch (Exception e) {
-			logger.fatal("", e);
-		}
-	}
-	
-	/**
-	 * Swap cards between specified card from library and any hand card.
-	 * 
-	 * @param game
-	 * @param card Card to put to player's hand
-	 */
-	private void swapWithAnyCard(Game game, Player player, Card card, Zone zone) {
-		if (zone.equals(Zone.BATTLEFIELD)) {
-			card.putOntoBattlefield(game, Zone.OUTSIDE, null, player.getId());
-		} else {
-			card.moveToZone(zone, null, game, false);
-		}
-		logger.info("Added card to player's " + zone.toString() + ": " + card.getName() +", player = " + player.getName());
-	}
-
-	private Player findPlayer(Game game, String name) {
-		for (Player player: game.getPlayers().values()) {
-			if (player.getName().equals(name))
-				return player;
-		}
-		return null;
+		SystemUtil.addCardsForTesting(game);
 	}
 
 	private void perform(UUID playerId, Command command) throws MageException {
@@ -624,19 +557,36 @@ public class GameController implements GameCallback {
 	private void perform(UUID playerId, Command command, boolean informOthers) throws MageException {
 		if (game.getPlayer(playerId).isGameUnderControl()) {
 			if (gameSessions.containsKey(playerId))
-				command.execute();
+				command.execute(playerId);
 			if (informOthers) informOthers(playerId);
 		} else {
 			List<UUID> players = Splitter.split(game, playerId);
 			for (UUID uuid : players) {
 				if (gameSessions.containsKey(uuid))
-					command.execute();
+					command.execute(uuid);
 			}
 			if (informOthers) informOthers(players);
 		}
 	}
 
+	private void sendMessage(UUID userId, Command command) {
+		final UUID playerId = userPlayerMap.get(userId);
+		if (game.getPlayer(playerId).isGameUnderControl()) {
+			if (gameSessions.containsKey(playerId))
+				command.execute(playerId);
+			// now send the same command to those whose turns you control
+			Player player = game.getPlayer(playerId);
+			for (UUID controlled : player.getPlayersUnderYourControl()) {
+				if (gameSessions.containsKey(controlled))
+					command.execute(controlled);
+			}
+		} else {
+			// ignore - no control over the turn
+			return;
+		}
+	}
+
 	interface Command {
-		public void execute();
+		public void execute(UUID player);
 	}
 }
