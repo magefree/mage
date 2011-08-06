@@ -32,7 +32,7 @@ import mage.Constants.Rarity;
 
 /**
  *
- * @author anonymous
+ * @author nantuko
  */
 public class Mindslaver extends mage.sets.scarsofmirrodin.Mindslaver {
 
