@@ -106,7 +106,7 @@ class BudokaGardenerEffect extends OneShotEffect<BudokaGardenerEffect> {
                 p.flip(game);
             }
         }
-        return false;
+        return true;
     }
 
     @Override

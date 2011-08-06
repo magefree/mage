@@ -33,6 +33,7 @@ import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -68,11 +69,16 @@ public class ExileTargetEffect extends OneShotEffect<ExileTargetEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
+		Permanent permanent = game.getPermanent(targetPointer.getFirst(source));
 		if (permanent != null) {
 			return permanent.moveToExile(exileId, exileZone, source.getId(), game);
-		}
-		return false;
+		} else {
+            Card card = game.getCard(targetPointer.getFirst(source));
+            if (card != null) {
+                return card.moveToExile(exileId, exileZone, source.getId(), game);
+            }
+        }
+        return false;
 	}
 
 	@Override
