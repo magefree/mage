@@ -41,6 +41,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -59,6 +60,8 @@ public class KuroPitlord extends CardImpl<KuroPitlord> {
         this.toughness = new MageInt(9);
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{B}{B}{B}{B}")), Constants.TargetController.YOU, false));
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Constants.Duration.EndOfTurn), new PayLifeCost(1));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
     public KuroPitlord(final KuroPitlord card) {
