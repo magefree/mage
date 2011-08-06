@@ -172,7 +172,6 @@ public class CardsStorage {
 			readUnimplemented("ZEN", "/zen.txt", names, cards);
 			readUnimplemented("WWK", "/wwk.txt", names, cards);
 			readUnimplemented("ROE", "/roe.txt", names, cards);
-			readUnimplemented("SOM", "/som.txt", names, cards);
 			readUnimplemented("MBS", "/mbs.txt", names, cards);
 			readUnimplemented("NPH", "/nph.txt", names, cards);
 			readUnimplemented("M12", "/m12.txt", names, cards);
