@@ -157,7 +157,7 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 
 	@Override
 	public void add(UUID id, Game game) {
-		if (targets.size() < maxNumberOfTargets) {
+		if (maxNumberOfTargets == 0 || targets.size() < maxNumberOfTargets) {
 			if (!targets.containsKey(id)) {
 				targets.put(id, 0);
 			}
