@@ -71,7 +71,7 @@ public class KitsuneHealer extends CardImpl<KitsuneHealer> {
         Ability firstAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PreventDamageTargetEffect(Constants.Duration.EndOfTurn, 1), new TapSourceCost());
         firstAbility.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(firstAbility);
-        Ability secondAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new KitsuneHealerEffect(Constants.Duration.EndOfTurn), new TapSourceCost());
+        Ability secondAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new KitsuneHealerEffect(), new TapSourceCost());
         secondAbility.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(secondAbility);
     }
@@ -89,9 +89,9 @@ public class KitsuneHealer extends CardImpl<KitsuneHealer> {
 
 class KitsuneHealerEffect extends PreventionEffectImpl<KitsuneHealerEffect> {
 
-	public KitsuneHealerEffect(Constants.Duration duration) {
-		super(duration);
-		staticText = "Prevent all damage that would be dealt to target legendary creature " + duration.toString();
+	public KitsuneHealerEffect() {
+		super(Constants.Duration.EndOfTurn);
+		staticText = "Prevent all damage that would be dealt to target legendary creature this turn";
 	}
 
 	public KitsuneHealerEffect(final PreventAllCombatDamageEffect effect) {
@@ -100,7 +100,7 @@ class KitsuneHealerEffect extends PreventionEffectImpl<KitsuneHealerEffect> {
 
 	@Override
 	public KitsuneHealerEffect copy() {
-		return new KitsuneHealerEffect(Constants.Duration.EndOfTurn);
+		return new KitsuneHealerEffect();
 	}
 
 	@Override

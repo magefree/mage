@@ -31,6 +31,7 @@ package mage.abilities.effects.common;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -59,7 +60,13 @@ public class ExileSourceEffect extends OneShotEffect<ExileSourceEffect> {
 		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
 			return permanent.moveToExile(null, "", source.getId(), game);
-		}
+		} else {
+            // try to exile card
+            Card card = game.getCard(source.getSourceId());
+            if (card != null) {
+                return card.moveToExile(null, "", source.getId(), game);
+            }
+        }
 		return false;
 	}
 
