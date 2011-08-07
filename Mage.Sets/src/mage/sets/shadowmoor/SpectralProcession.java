@@ -43,7 +43,7 @@ import mage.game.permanent.token.Token;
 public class SpectralProcession extends CardImpl<SpectralProcession> {
 
     public SpectralProcession(UUID ownerId) {
-        super(ownerId, 23, "Spectral Procession", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2W}{2W}{2W}");
+        super(ownerId, 23, "Spectral Procession", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2/W}{2/W}{2/W}");
         this.expansionSetCode = "SHM";
 
         this.color.setWhite(true);

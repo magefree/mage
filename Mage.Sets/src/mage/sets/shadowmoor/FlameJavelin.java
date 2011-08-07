@@ -41,7 +41,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class FlameJavelin extends CardImpl<FlameJavelin> {
 
     public FlameJavelin(UUID ownerId) {
-        super(ownerId, 92, "Flame Javelin", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2R}{2R}{2R}");
+        super(ownerId, 92, "Flame Javelin", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2/R}{2/R}{2/R}");
         this.expansionSetCode = "SHM";
 
         this.color.setRed(true);

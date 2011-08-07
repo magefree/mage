@@ -59,7 +59,7 @@ public class ReaperKing extends CardImpl<ReaperKing> {
     }
 
     public ReaperKing(UUID ownerId) {
-        super(ownerId, 260, "Reaper King", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2W}{2U}{2B}{2R}{2G}");
+        super(ownerId, 260, "Reaper King", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2/W}{2/U}{2/B}{2/R}{2/G}");
         this.expansionSetCode = "SHM";
         this.supertype.add("Legendary");
         this.subtype.add("Scarecrow");
