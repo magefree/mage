@@ -27,7 +27,7 @@ sub toCamelCase {
 
 sub fixCost {
     my $string = $_[0];
-    $string =~ s/{([BUGRW])([BUGRW])}/{$1\/$2}/g;
+    $string =~ s/{([2BUGRW])([2BUGRW])}/{$1\/$2}/g;
     $string;
 }
 
