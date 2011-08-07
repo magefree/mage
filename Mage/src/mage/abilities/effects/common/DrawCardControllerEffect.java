@@ -81,6 +81,11 @@ public class DrawCardControllerEffect extends OneShotEffect<DrawCardControllerEf
         } else {
             sb.append("s");
         }
+        String message = amount.getMessage();
+        if (message.length() > 0) {
+            sb.append(" for each ");
+        }
+        sb.append(message);
 		staticText = sb.toString();
 	}
 
