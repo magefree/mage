@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.SkipUntapSourceEffect;
+import mage.abilities.effects.common.SkipNextUntapSourceEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.RedManaAbility;
@@ -48,10 +48,10 @@ public class LanternLitGraveyard extends CardImpl<LanternLitGraveyard> {
         this.expansionSetCode = "CHK";
         this.addAbility(new ColorlessManaAbility());
         Ability blueManaAbility = new BlueManaAbility();
-        blueManaAbility.addEffect(new SkipUntapSourceEffect());
+        blueManaAbility.addEffect(new SkipNextUntapSourceEffect());
         this.addAbility(blueManaAbility);
         Ability redManaAbility = new RedManaAbility();
-        redManaAbility.addEffect(new SkipUntapSourceEffect());
+        redManaAbility.addEffect(new SkipNextUntapSourceEffect());
         this.addAbility(redManaAbility);
     }
 

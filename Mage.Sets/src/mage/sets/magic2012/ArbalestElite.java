@@ -25,42 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.sets.magic2012;
 
 import java.util.UUID;
 
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.SkipNextUntapSourceEffect;
-import mage.abilities.mana.BlueManaAbility;
-import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.target.common.TargetAttackingOrBlockingCreature;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
- * @author Loki
+ *
+ * @author nantuko
  */
-public class CloudcrestLake extends CardImpl<CloudcrestLake> {
+public class ArbalestElite extends CardImpl<ArbalestElite> {
 
-    public CloudcrestLake(UUID ownerId) {
-        super(ownerId, 274, "Cloudcrest Lake", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "CHK";
-        this.addAbility(new ColorlessManaAbility());
-        Ability whiteManaAbility = new WhiteManaAbility();
-        whiteManaAbility.addEffect(new SkipNextUntapSourceEffect());
-        this.addAbility(whiteManaAbility);
-        Ability blueManaAbility = new BlueManaAbility();
-        blueManaAbility.addEffect(new SkipNextUntapSourceEffect());
-        this.addAbility(blueManaAbility);
-    }
+    public ArbalestElite(UUID ownerId) {
+        super(ownerId, 5, "Arbalest Elite", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+        this.expansionSetCode = "M12";
+        this.subtype.add("Human");
+        this.subtype.add("Archer");
 
-    public CloudcrestLake(final CloudcrestLake card) {
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
+
+        // {2}{W}, {tap}: Arbalest Elite deals 3 damage to target attacking or blocking creature. Arbalest Elite doesn't untap during your next untap step.
+		Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(3), new ManaCostsImpl("{2}{W}"));
+		ability.addCost(new TapSourceCost());
+		ability.addTarget(new TargetAttackingOrBlockingCreature());
+		ability.addEffect(new SkipNextUntapSourceEffect());
+		this.addAbility(ability);
+	}
+
+    public ArbalestElite(final ArbalestElite card) {
         super(card);
     }
 
     @Override
-    public CloudcrestLake copy() {
-        return new CloudcrestLake(this);
+    public ArbalestElite copy() {
+        return new ArbalestElite(this);
     }
 }

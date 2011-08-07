@@ -52,11 +52,11 @@ public class UntapSourceEffect extends OneShotEffect<UntapSourceEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-	if (permanent != null) {
-            permanent.untap(game);
-            return true;
-	}
-	return false;
+		if (permanent != null) {
+				permanent.untap(game);
+				return true;
+		}
+		return false;
     }
 
     @Override

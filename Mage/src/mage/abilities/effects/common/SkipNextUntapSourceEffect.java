@@ -6,20 +6,20 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
-public class SkipUntapSourceEffect extends ReplacementEffectImpl<SkipUntapSourceEffect> {
+public class SkipNextUntapSourceEffect extends ReplacementEffectImpl<SkipNextUntapSourceEffect> {
 
-    public SkipUntapSourceEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+    public SkipNextUntapSourceEffect() {
+        super(Constants.Duration.OneUse, Constants.Outcome.Detriment);
         staticText = "{this} doesn't untap during your next untap step";
     }
 
-    public SkipUntapSourceEffect(final SkipUntapSourceEffect effect) {
+    public SkipNextUntapSourceEffect(final SkipNextUntapSourceEffect effect) {
         super(effect);
     }
 
     @Override
-    public SkipUntapSourceEffect copy() {
-        return new SkipUntapSourceEffect(this);
+    public SkipNextUntapSourceEffect copy() {
+        return new SkipNextUntapSourceEffect(this);
     }
 
     @Override
@@ -29,7 +29,8 @@ public class SkipUntapSourceEffect extends ReplacementEffectImpl<SkipUntapSource
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+        used = true;
+		return true;
     }
 
     @Override
