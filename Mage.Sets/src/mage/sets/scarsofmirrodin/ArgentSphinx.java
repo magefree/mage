@@ -32,13 +32,12 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.costs.common.MetalcraftCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -46,7 +45,6 @@ import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
@@ -98,7 +96,7 @@ class ArgentSphinxEffect extends OneShotEffect<ArgentSphinxEffect> {
 		if (permanent != null) {
 			if (permanent.moveToExile(source.getSourceId(), "Argent Sphinx Exile", source.getId(), game)) {
 				//create delayed triggered ability
-				ArgentSphinxDelayedTriggeredAbility delayedAbility = new ArgentSphinxDelayedTriggeredAbility(source.getSourceId());
+				AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
 				delayedAbility.setSourceId(source.getSourceId());
 				delayedAbility.setControllerId(source.getControllerId());
 				game.addDelayedTriggeredAbility(delayedAbility);
@@ -113,27 +111,4 @@ class ArgentSphinxEffect extends OneShotEffect<ArgentSphinxEffect> {
 		return new ArgentSphinxEffect(this);
 	}
 
-}
-
-class ArgentSphinxDelayedTriggeredAbility extends DelayedTriggeredAbility<ArgentSphinxDelayedTriggeredAbility> {
-
-	ArgentSphinxDelayedTriggeredAbility ( UUID exileId ) {
-		super(new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD));
-	}
-
-	ArgentSphinxDelayedTriggeredAbility(ArgentSphinxDelayedTriggeredAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE) {
-			return true;
-		}
-		return false;
-	}
-	@Override
-	public ArgentSphinxDelayedTriggeredAbility copy() {
-		return new ArgentSphinxDelayedTriggeredAbility(this);
-	}
 }

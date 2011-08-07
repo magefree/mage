@@ -25,46 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenth;
+package mage.sets.shadowmoor;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
-import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.FilterCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author anonymous
+ * @author North
  */
-public class Mortivore extends CardImpl<Mortivore> {
+public class SafewrightQuest extends CardImpl<SafewrightQuest> {
 
-    public Mortivore(UUID ownerId) {
-        super(ownerId, 161, "Mortivore", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "10E";
-        this.subtype.add("Lhurgoyf");
-        this.color.setBlack(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInAllGraveyardsCount(new FilterCreatureCard()), Constants.Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.B)));
+    private static final FilterCard filter = new FilterCard("Forest or Plains card");
+
+    static {
+        filter.getSubtype().add("Forest");
+        filter.getSubtype().add("Plains");
+        filter.setScopeSubtype(ComparisonScope.Any);
     }
 
-    public Mortivore(final Mortivore card) {
+    public SafewrightQuest(UUID ownerId) {
+        super(ownerId, 240, "Safewright Quest", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G/W}");
+        this.expansionSetCode = "SHM";
+
+        this.color.setGreen(true);
+        this.color.setWhite(true);
+
+        // Search your library for a Forest or Plains card, reveal it, and put it into your hand. Then shuffle your library.
+        this.getSpellAbility().addEffect(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(filter)));
+    }
+
+    public SafewrightQuest(final SafewrightQuest card) {
         super(card);
     }
 
     @Override
-    public Mortivore copy() {
-        return new Mortivore(this);
+    public SafewrightQuest copy() {
+        return new SafewrightQuest(this);
     }
 }

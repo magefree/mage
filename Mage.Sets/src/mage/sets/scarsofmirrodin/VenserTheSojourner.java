@@ -32,7 +32,6 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SpellCastTriggeredAbility;
@@ -48,13 +47,14 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.command.Emblem;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
+import mage.Constants.Zone;
+import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 
 /**
  * @author nantuko
@@ -115,7 +115,7 @@ class VenserTheSojournerEffect extends OneShotEffect<VenserTheSojournerEffect> {
 			if (permanent != null) {
 				if (permanent.moveToExile(permanent.getId(), "Venser, the Sojourner", source.getSourceId(), game)) {
 					//create delayed triggered ability
-					VenserTheSojournerDelayedTriggeredAbility delayedAbility = new VenserTheSojournerDelayedTriggeredAbility(permanent.getId());
+					AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
 					delayedAbility.setSourceId(source.getSourceId());
 					delayedAbility.setControllerId(source.getControllerId());
 					game.addDelayedTriggeredAbility(delayedAbility);
@@ -133,33 +133,7 @@ class VenserTheSojournerEffect extends OneShotEffect<VenserTheSojournerEffect> {
 
 }
 
-class VenserTheSojournerDelayedTriggeredAbility extends DelayedTriggeredAbility<VenserTheSojournerDelayedTriggeredAbility> {
-
-	VenserTheSojournerDelayedTriggeredAbility(UUID exileId) {
-		super(new ReturnFromExileEffect(exileId, Constants.Zone.BATTLEFIELD));
-	}
-
-	VenserTheSojournerDelayedTriggeredAbility(VenserTheSojournerDelayedTriggeredAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public VenserTheSojournerDelayedTriggeredAbility copy() {
-		return new VenserTheSojournerDelayedTriggeredAbility(this);
-	}
-}
-
 class VenserTheSojournerEmblem extends Emblem {
-
-	private static final String emblemText = "Whenever you cast a spell, exile target permanent";
 
 	public VenserTheSojournerEmblem() {
 		Ability ability = new SpellCastTriggeredAbility(new ExileTargetEffect(), false);
@@ -169,4 +143,3 @@ class VenserTheSojournerEmblem extends Emblem {
 		this.getAbilities().add(ability);
 	}
 }
-

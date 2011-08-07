@@ -35,8 +35,8 @@ import mage.Constants.Rarity;
 import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -45,8 +45,6 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -99,7 +97,7 @@ class MystifyingMazeEffect extends OneShotEffect<MystifyingMazeEffect> {
 		if (permanent != null) {
 			if (permanent.moveToExile(source.getSourceId(), "Mystifying Maze Exile", source.getId(), game)) {
 				//create delayed triggered ability
-				MystifyingMazeDelayedTriggeredAbility delayedAbility = new MystifyingMazeDelayedTriggeredAbility(source.getSourceId());
+				AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, true));
 				delayedAbility.setSourceId(source.getSourceId());
 				delayedAbility.setControllerId(source.getControllerId());
 				game.addDelayedTriggeredAbility(delayedAbility);
@@ -113,29 +111,4 @@ class MystifyingMazeEffect extends OneShotEffect<MystifyingMazeEffect> {
 	public MystifyingMazeEffect copy() {
 		return new MystifyingMazeEffect(this);
 	}
-}
-
-class MystifyingMazeDelayedTriggeredAbility extends DelayedTriggeredAbility<MystifyingMazeDelayedTriggeredAbility> {
-
-	public MystifyingMazeDelayedTriggeredAbility(UUID exileId) {
-		super(new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD, true));
-	}
-
-	public MystifyingMazeDelayedTriggeredAbility(final MystifyingMazeDelayedTriggeredAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public MystifyingMazeDelayedTriggeredAbility copy() {
-		return new MystifyingMazeDelayedTriggeredAbility(this);
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.END_TURN_STEP_PRE) {
-			return true;
-		}
-		return false;
-	}
-
 }

@@ -25,46 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenth;
+package mage.sets.shadowmoor;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
-import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author North
  */
-public class Mortivore extends CardImpl<Mortivore> {
+public class ThistledownLiege extends CardImpl<ThistledownLiege> {
 
-    public Mortivore(UUID ownerId) {
-        super(ownerId, 161, "Mortivore", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "10E";
-        this.subtype.add("Lhurgoyf");
-        this.color.setBlack(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInAllGraveyardsCount(new FilterCreatureCard()), Constants.Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.B)));
+    private static final FilterCreaturePermanent filterWhite = new FilterCreaturePermanent("white creatures");
+    private static final FilterCreaturePermanent filterBlue = new FilterCreaturePermanent("blue creatures");
+
+    static {
+        filterWhite.getColor().setWhite(true);
+        filterWhite.setUseColor(true);
+        filterBlue.getColor().setBlue(true);
+        filterBlue.setUseColor(true);
     }
 
-    public Mortivore(final Mortivore card) {
+    public ThistledownLiege(UUID ownerId) {
+        super(ownerId, 153, "Thistledown Liege", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W/U}{W/U}{W/U}");
+        this.expansionSetCode = "SHM";
+        this.subtype.add("Kithkin");
+        this.subtype.add("Knight");
+
+        this.color.setBlue(true);
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
+
+        this.addAbility(FlashAbility.getInstance());
+        // Other white creatures you control get +1/+1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterWhite, true)));
+        // Other blue creatures you control get +1/+1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBlue, true)));
+    }
+
+    public ThistledownLiege(final ThistledownLiege card) {
         super(card);
     }
 
     @Override
-    public Mortivore copy() {
-        return new Mortivore(this);
+    public ThistledownLiege copy() {
+        return new ThistledownLiege(this);
     }
 }

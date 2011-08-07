@@ -25,46 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenth;
+package mage.sets.shadowmoor;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
-import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author North
  */
-public class Mortivore extends CardImpl<Mortivore> {
+public class MassCalcify extends CardImpl<MassCalcify> {
 
-    public Mortivore(UUID ownerId) {
-        super(ownerId, 161, "Mortivore", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "10E";
-        this.subtype.add("Lhurgoyf");
-        this.color.setBlack(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInAllGraveyardsCount(new FilterCreatureCard()), Constants.Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.B)));
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonwhite creatures");
+
+    static {
+        filter.getColor().setWhite(true);
+        filter.setUseColor(true);
+        filter.setNotColor(true);
     }
 
-    public Mortivore(final Mortivore card) {
+    public MassCalcify(UUID ownerId) {
+        super(ownerId, 12, "Mass Calcify", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");
+        this.expansionSetCode = "SHM";
+
+        this.color.setWhite(true);
+
+        // Destroy all nonwhite creatures.
+        this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
+    }
+
+    public MassCalcify(final MassCalcify card) {
         super(card);
     }
 
     @Override
-    public Mortivore copy() {
-        return new Mortivore(this);
+    public MassCalcify copy() {
+        return new MassCalcify(this);
     }
 }

@@ -25,46 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenth;
+package mage.sets.shadowmoor;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
-import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
+import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.FilterSpell;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author anonymous
+ * @author North
  */
-public class Mortivore extends CardImpl<Mortivore> {
+public class GutturalResponse extends CardImpl<GutturalResponse> {
 
-    public Mortivore(UUID ownerId) {
-        super(ownerId, 161, "Mortivore", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "10E";
-        this.subtype.add("Lhurgoyf");
-        this.color.setBlack(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInAllGraveyardsCount(new FilterCreatureCard()), Constants.Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.B)));
+    private static final FilterSpell filter = new FilterSpell("blue instant spell");
+
+    static {
+        filter.getCardType().add(CardType.INSTANT);
+        filter.getColor().setBlue(true);
+        filter.setUseColor(true);
     }
 
-    public Mortivore(final Mortivore card) {
+    public GutturalResponse(UUID ownerId) {
+        super(ownerId, 208, "Guttural Response", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R/G}");
+        this.expansionSetCode = "SHM";
+
+        this.color.setRed(true);
+        this.color.setGreen(true);
+
+        // Counter target blue instant spell.
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addTarget(new TargetSpell(filter));
+    }
+
+    public GutturalResponse(final GutturalResponse card) {
         super(card);
     }
 
     @Override
-    public Mortivore copy() {
-        return new Mortivore(this);
+    public GutturalResponse copy() {
+        return new GutturalResponse(this);
     }
 }

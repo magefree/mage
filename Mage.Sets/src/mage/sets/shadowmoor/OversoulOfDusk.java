@@ -25,46 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenth;
+package mage.sets.shadowmoor;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
-import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.Filter.ComparisonScope;
+import mage.filter.FilterCard;
 
 /**
  *
- * @author anonymous
+ * @author North
  */
-public class Mortivore extends CardImpl<Mortivore> {
+public class OversoulOfDusk extends CardImpl<OversoulOfDusk> {
 
-    public Mortivore(UUID ownerId) {
-        super(ownerId, 161, "Mortivore", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "10E";
-        this.subtype.add("Lhurgoyf");
-        this.color.setBlack(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInAllGraveyardsCount(new FilterCreatureCard()), Constants.Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.B)));
+    private static final FilterCard filter = new FilterCard("blue, from black, and from red");
+
+    static {
+        filter.getColor().setBlue(true);
+        filter.getColor().setBlack(true);
+        filter.getColor().setRed(true);
+        filter.setUseColor(true);
+        filter.setScopeColor(ComparisonScope.Any);
     }
 
-    public Mortivore(final Mortivore card) {
+    public OversoulOfDusk(UUID ownerId) {
+        super(ownerId, 234, "Oversoul of Dusk", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G/W}{G/W}{G/W}{G/W}{G/W}");
+        this.expansionSetCode = "SHM";
+        this.subtype.add("Spirit");
+        this.subtype.add("Avatar");
+
+        this.color.setGreen(true);
+        this.color.setWhite(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
+
+        // Protection from blue, from black, and from red
+        this.addAbility(new ProtectionAbility(filter));
+    }
+
+    public OversoulOfDusk(final OversoulOfDusk card) {
         super(card);
     }
 
     @Override
-    public Mortivore copy() {
-        return new Mortivore(this);
+    public OversoulOfDusk copy() {
+        return new OversoulOfDusk(this);
     }
 }

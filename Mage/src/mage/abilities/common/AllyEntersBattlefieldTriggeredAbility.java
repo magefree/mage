@@ -53,11 +53,12 @@ public class AllyEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl 
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
+        if (event.getType() == EventType.ZONE_CHANGE) {
             UUID targetId = event.getTargetId();
             Permanent permanent = game.getPermanent(targetId);
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getToZone() == Zone.BATTLEFIELD
+                    && permanent.getControllerId().equals(this.controllerId)
                     && (targetId.equals(this.getSourceId())
                     || (permanent.getSubtype().contains("Ally") && !targetId.equals(this.getSourceId())))) {
                 return true;

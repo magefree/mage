@@ -28,9 +28,7 @@
 
 package mage.abilities.effects.common;
 
-import mage.Constants.Outcome;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
 

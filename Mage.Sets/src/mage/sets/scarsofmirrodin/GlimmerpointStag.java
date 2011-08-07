@@ -34,15 +34,13 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -99,7 +97,7 @@ class GlimmerpointStagEffect extends OneShotEffect<GlimmerpointStagEffect> {
 		if (permanent != null) {
 			if (permanent.moveToExile(source.getSourceId(), "Glimmerpoint Stag Exile", source.getId(), game)) {
 				//create delayed triggered ability
-				GlimmerpointStagDelayedTriggeredAbility delayedAbility = new GlimmerpointStagDelayedTriggeredAbility(source.getSourceId());
+				AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
 				delayedAbility.setSourceId(source.getSourceId());
 				delayedAbility.setControllerId(source.getControllerId());
 				game.addDelayedTriggeredAbility(delayedAbility);
@@ -114,27 +112,4 @@ class GlimmerpointStagEffect extends OneShotEffect<GlimmerpointStagEffect> {
 		return new GlimmerpointStagEffect(this);
 	}
 
-}
-
-class GlimmerpointStagDelayedTriggeredAbility extends DelayedTriggeredAbility<GlimmerpointStagDelayedTriggeredAbility> {
-
-	GlimmerpointStagDelayedTriggeredAbility ( UUID exileId ) {
-		super(new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD));
-	}
-
-	GlimmerpointStagDelayedTriggeredAbility(GlimmerpointStagDelayedTriggeredAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.END_TURN_STEP_PRE) {
-			return true;
-		}
-		return false;
-	}
-	@Override
-	public GlimmerpointStagDelayedTriggeredAbility copy() {
-		return new GlimmerpointStagDelayedTriggeredAbility(this);
-	}
 }

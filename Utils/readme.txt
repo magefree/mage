@@ -10,7 +10,7 @@ gen-list-cards-for-set.pl - generates the file for unimplemented cards for a set
   
 Files used:
  - author.txt - one line file that contains the author name you want to appear in the generated java files
- - keywords.txt - list of keywords that have an implementaion and are automatically added to the card implementation
+ - keywords.txt - list of keywords that have an implementation and are automatically added to the card implementation
  - known-sets.txt - list of sets used in mage (Set name and Package name)
  - mtg-cards-data.txt - MTG cards data (generated from the Gatherer database)
  - mtg-sets-data.txt - list of sets in MTG and the 3 letters code for each of them

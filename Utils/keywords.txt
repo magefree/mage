@@ -3,7 +3,6 @@ Bushido|number|
 Soulshift|number|
 Basic landcycling|cost|
 Cycling|cost|
-Equip|cost|
 Level up|cost|
 Unearth|cost|
 Battle cry|new|

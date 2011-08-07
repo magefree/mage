@@ -28,7 +28,6 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -90,7 +89,7 @@ class AnotherCreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
         if (event.getType() == EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getToZone() == Zone.BATTLEFIELD
-                    && zEvent.getTarget().getCardType().contains(Constants.CardType.CREATURE)
+                    && zEvent.getTarget().getCardType().contains(CardType.CREATURE)
                     && zEvent.getTargetId() != this.getSourceId()) {
                 return true;
             }

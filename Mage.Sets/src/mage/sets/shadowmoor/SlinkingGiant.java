@@ -25,46 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenth;
+package mage.sets.shadowmoor;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
-import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
+import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreatureCard;
 
 /**
  *
- * @author anonymous
+ * @author North
  */
-public class Mortivore extends CardImpl<Mortivore> {
+public class SlinkingGiant extends CardImpl<SlinkingGiant> {
 
-    public Mortivore(UUID ownerId) {
-        super(ownerId, 161, "Mortivore", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.expansionSetCode = "10E";
-        this.subtype.add("Lhurgoyf");
-        this.color.setBlack(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInAllGraveyardsCount(new FilterCreatureCard()), Constants.Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.B)));
+    public SlinkingGiant(UUID ownerId) {
+        super(ownerId, 106, "Slinking Giant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        this.expansionSetCode = "SHM";
+        this.subtype.add("Giant");
+        this.subtype.add("Rogue");
+
+        this.color.setRed(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+
+        this.addAbility(WitherAbility.getInstance());
+        // Whenever Slinking Giant blocks or becomes blocked, it gets -3/-0 until end of turn.
+        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new BoostSourceEffect(-3, 0, Duration.EndOfTurn), false));
     }
 
-    public Mortivore(final Mortivore card) {
+    public SlinkingGiant(final SlinkingGiant card) {
         super(card);
     }
 
     @Override
-    public Mortivore copy() {
-        return new Mortivore(this);
+    public SlinkingGiant copy() {
+        return new SlinkingGiant(this);
     }
 }
