@@ -989,9 +989,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	 */
 	@Override
 	public Card getLastKnownInformation(UUID objectId, Zone zone) {
-		if (!lki.containsKey(objectId)) {
+		/*if (!lki.containsKey(objectId)) {
 			return getCard(objectId);
-		}
+		}*/
 		return lki.get(objectId);
 	}
 
