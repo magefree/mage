@@ -116,22 +116,10 @@ class DjinnOfWishesEffect1 extends OneShotEffect<DjinnOfWishesEffect1> {
 			cards.add(card);
 			player.revealCards("Djinn Of Wishes", cards, game);
 
-			Choice abilityChoice = new ChoiceImpl();
-			abilityChoice.setMessage("Play " + card.getName() + " without paying its mana cost?");
-			Set<String> abilities = new HashSet<String>();
-			abilities.add("Yes");
-			abilities.add("No");
-			abilityChoice.setChoices(abilities);
-
-			player.choose(Constants.Outcome.PlayForFree, abilityChoice, game);
-
-			System.out.println(abilityChoice);
-			System.out.println(abilityChoice.getChoice());
-
 			player.getLibrary().removeFromTop(game);
 
 			boolean used = false;
-			if (abilityChoice.getChoice() != null && abilityChoice.getChoice().equals("Yes")) {
+			if (player.chooseUse(Constants.Outcome.PlayForFree, "Play " + card.getName() + " without paying its mana cost?", game)) {
 				if (card.getCardType().contains(CardType.LAND)) {
 					// If the revealed card is a land, you can play it only if it's your turn and you haven't yet played a land this turn.
 					if (game.getActivePlayerId().equals(player.getId()) && player.getLandsPlayed() < player.getLandsPerTurn()) {
@@ -142,7 +130,7 @@ class DjinnOfWishesEffect1 extends OneShotEffect<DjinnOfWishesEffect1> {
 					used = true;
 					player.cast(card.getSpellAbility(), game, true);
 				}
-			}
+            }
 
 			if (!used) {
 				card.moveToZone(Constants.Zone.EXILED, source.getSourceId(), game, false);
