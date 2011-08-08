@@ -62,7 +62,7 @@ public class ContestedWarZone extends CardImpl<ContestedWarZone> {
 	private static final FilterAttackingCreature filter = new FilterAttackingCreature("Attacking creatures");
 
 	public ContestedWarZone(UUID ownerId) {
-		super(ownerId, 0, "Contested War Zone", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+		super(ownerId, 144, "Contested War Zone", Rarity.RARE, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "MBS";
 		this.addAbility(new ColorlessManaAbility());
 		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 0, Duration.EndOfTurn, filter, false), new ManaCostsImpl("{1}"));

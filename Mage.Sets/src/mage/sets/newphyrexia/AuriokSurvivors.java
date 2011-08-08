@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author anonymous
+ * @author Loki
  */
 public class AuriokSurvivors extends CardImpl<AuriokSurvivors> {
     private static final FilterCard filter = new FilterCard();
