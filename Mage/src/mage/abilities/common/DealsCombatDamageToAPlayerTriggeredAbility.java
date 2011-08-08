@@ -34,7 +34,6 @@ import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
 /**

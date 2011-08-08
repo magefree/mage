@@ -27,8 +27,6 @@
  */
 package mage.sets.magic2010;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 import mage.Constants;
@@ -47,15 +45,9 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import org.w3c.dom.css.Counter;
 
 /**
  *
@@ -95,8 +87,6 @@ public class DjinnOfWishes extends CardImpl<DjinnOfWishes> {
 }
 
 class DjinnOfWishesEffect1 extends OneShotEffect<DjinnOfWishesEffect1> {
-
-	private static FilterPermanent filter = new FilterCreaturePermanent();
 
 	public DjinnOfWishesEffect1() {
 		super(Constants.Outcome.PlayForFree);
