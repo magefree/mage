@@ -71,7 +71,7 @@ public class HandOfThePraetors extends CardImpl<HandOfThePraetors> {
 
         this.addAbility(InfectAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
-        SpellCastTriggeredAbility ability = new SpellCastTriggeredAbility(new AddPoisonCounterTargetEffect(1), filterSpell, true);
+        SpellCastTriggeredAbility ability = new SpellCastTriggeredAbility(new AddPoisonCounterTargetEffect(1), filterSpell, false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

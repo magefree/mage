@@ -313,6 +313,7 @@ public final class Constants {
 		DrawCard(true),
 		Discard(false),
 		Sacrifice(false),
+		PlayForFree(true),
 		ReturnToHand(false),
 		Exile(false),
 		Protect(true),

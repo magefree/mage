@@ -189,7 +189,7 @@ class RustTickSelfRestrictionEffect extends RestrictionEffect<RustTickSelfRestri
 		Player playerControls = game.getPlayer(permanent.getControllerId());
 		playerControls.choose(Constants.Outcome.Neutral, abilityChoice, game);
 
-		return abilityChoice.getChoice().equals("Yes");
+		return abilityChoice.getChoice() != null && abilityChoice.getChoice().equals("Yes");
 	}
 
 	@Override
