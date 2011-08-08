@@ -25,46 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2011;
+package mage.sets.magic2012;
+
+import mage.sets.magic2011.AetherAdept;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author nantuko
  */
-public class AetherAdept extends CardImpl<AetherAdept> {
+public class AEtherAdept extends AetherAdept {
 
-    public AetherAdept(UUID ownerId) {
-        super(ownerId, 41, "AEther Adept", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.expansionSetCode = "M11";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-
-        this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // When AEther Adept enters the battlefield, return target creature to its owner's hand.
-		Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
-		ability.addTarget(new TargetCreaturePermanent());
-		this.addAbility(ability);
+    public AEtherAdept(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 41;
+        this.expansionSetCode = "M12";
     }
 
-    public AetherAdept(final AetherAdept card) {
+    public AEtherAdept(final AEtherAdept card) {
         super(card);
     }
 
     @Override
-    public AetherAdept copy() {
-        return new AetherAdept(this);
+    public AEtherAdept copy() {
+        return new AEtherAdept(this);
     }
 }

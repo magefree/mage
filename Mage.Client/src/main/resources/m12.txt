@@ -38,7 +38,7 @@
 38|Stormfront Pegasus
 39|Sun Titan
 40|Timely Reinforcements
-41|Æther Adept
+41|AEther Adept
 42|Alluring Siren
 43|Amphin Cutthroat
 44|Aven Fleetwing
