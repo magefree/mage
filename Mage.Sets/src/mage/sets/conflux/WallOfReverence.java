@@ -37,6 +37,7 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -63,7 +64,9 @@ public class WallOfReverence extends CardImpl<WallOfReverence> {
         this.toughness = new MageInt(6);
         this.addAbility(DefenderAbility.getInstance());
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new WallOfReverenceTriggeredAbility());
+        Ability ability = new BeginningOfYourEndStepTriggeredAbility(new WallOfReverenceTriggeredEffect(), true);
+        ability.addTarget(new TargetControlledCreaturePermanent());
+        this.addAbility(ability);
     }
 
     public WallOfReverence (final WallOfReverence card) {
@@ -73,35 +76,6 @@ public class WallOfReverence extends CardImpl<WallOfReverence> {
     @Override
     public WallOfReverence copy() {
         return new WallOfReverence(this);
-    }
-}
-
-class WallOfReverenceTriggeredAbility extends TriggeredAbilityImpl<WallOfReverenceTriggeredAbility> {
-    WallOfReverenceTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new WallOfReverenceTriggeredEffect(), true);
-        this.addTarget(new TargetControlledCreaturePermanent());
-    }
-
-    WallOfReverenceTriggeredAbility(final WallOfReverenceTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public WallOfReverenceTriggeredAbility copy() {
-        return new WallOfReverenceTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-     if (event.getType() == GameEvent.EventType.END_PHASE_PRE && event.getPlayerId().equals(this.controllerId)) {
-			return true;
-		}
-		return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of your end step, " + modes.getText();
     }
 }
 

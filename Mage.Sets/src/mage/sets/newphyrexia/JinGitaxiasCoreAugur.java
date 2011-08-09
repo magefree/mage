@@ -25,8 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.conflux;
+package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
@@ -35,58 +34,69 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.TableEvent;
-import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
+import mage.players.Player;
 
 /**
  *
  * @author Loki
  */
-public class GoblinRazerunners extends CardImpl<GoblinRazerunners> {
-    private static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
+public class JinGitaxiasCoreAugur extends CardImpl<JinGitaxiasCoreAugur> {
 
-    static {
-        filter.getCardType().add(CardType.LAND);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-    }
+    public JinGitaxiasCoreAugur(UUID ownerId) {
+        super(ownerId, 37, "Jin-Gitaxias, Core Augur", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{8}{U}{U}");
+        this.expansionSetCode = "NPH";
+        this.supertype.add("Legendary");
+        this.subtype.add("Praetor");
 
-    public GoblinRazerunners (UUID ownerId) {
-        super(ownerId, 64, "Goblin Razerunners", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "CON";
-        this.subtype.add("Goblin");
-        this.subtype.add("Warrior");
-		this.color.setRed(true);
-        this.power = new MageInt(3);
+        this.color.setBlue(true);
+        this.power = new MageInt(5);
         this.toughness = new MageInt(4);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{1}{R}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        this.addAbility(ability);
-        ability = new BeginningOfYourEndStepTriggeredAbility(new DamageTargetEffect(new CountersCount(CounterType.P1P1)), true);
-        ability.addTarget(new TargetPlayer());
-        this.addAbility(ability);
+
+        this.addAbility(FlashAbility.getInstance());
+        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new DrawCardControllerEffect(7), false));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new JinGitaxiasCoreAugurEffect()));
     }
 
-    public GoblinRazerunners (final GoblinRazerunners card) {
+    public JinGitaxiasCoreAugur(final JinGitaxiasCoreAugur card) {
         super(card);
     }
 
     @Override
-    public GoblinRazerunners copy() {
-        return new GoblinRazerunners(this);
+    public JinGitaxiasCoreAugur copy() {
+        return new JinGitaxiasCoreAugur(this);
+    }
+}
+
+class JinGitaxiasCoreAugurEffect extends ContinuousEffectImpl<JinGitaxiasCoreAugurEffect> {
+    JinGitaxiasCoreAugurEffect() {
+        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.PlayerEffects, Constants.SubLayer.NA, Constants.Outcome.Detriment);
+        staticText = "Each opponent's maximum hand size is reduced by seven";
+    }
+
+    JinGitaxiasCoreAugurEffect(final JinGitaxiasCoreAugurEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (UUID id : game.getOpponents(source.getControllerId())) {
+            Player player = game.getPlayer(id);
+            if (player != null) {
+                player.setMaxHandSize(player.getMaxHandSize() - 7);
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public JinGitaxiasCoreAugurEffect copy() {
+        return new JinGitaxiasCoreAugurEffect(this);
     }
 }
