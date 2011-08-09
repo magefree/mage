@@ -37,16 +37,15 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DrawCardControllerEffect extends OneShotEffect<DrawCardControllerEffect> {
 
 	protected DynamicValue amount;
 
-    public DrawCardControllerEffect(int amount) {
-        this(new StaticValue(amount));
-    }
+	public DrawCardControllerEffect(int amount) {
+		this(new StaticValue(amount));
+	}
 
 	public DrawCardControllerEffect(DynamicValue amount) {
 		super(Outcome.DrawCard);
@@ -76,16 +75,16 @@ public class DrawCardControllerEffect extends OneShotEffect<DrawCardControllerEf
 
 	private void setText() {
 		StringBuilder sb = new StringBuilder();
-        sb.append("draw ").append(amount).append(" card");
-        if (amount instanceof StaticValue && amount.calculate(null, null) == 1) {
-        } else {
-            sb.append("s");
-        }
-        String message = amount.getMessage();
-        if (message.length() > 0) {
-            sb.append(" for each ");
-        }
-        sb.append(message);
+		boolean oneCard = amount instanceof StaticValue && amount.calculate(null, null) == 1;
+		sb.append("draw ").append(oneCard ? "a" : amount).append(" card");
+		if (!oneCard) {
+			sb.append("s");
+		}
+		String message = amount.getMessage();
+		if (message.length() > 0) {
+			sb.append(" for each ");
+		}
+		sb.append(message);
 		staticText = sb.toString();
 	}
 

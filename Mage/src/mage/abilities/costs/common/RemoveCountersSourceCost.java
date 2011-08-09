@@ -47,13 +47,15 @@ public class RemoveCountersSourceCost extends CostImpl<RemoveCountersSourceCost>
 	public RemoveCountersSourceCost(String name, int amount) {
 		this.amount = amount;
 		this.name = name;
-		this.text = "Remove " + amount + " " + name + " counters from {this}";
+		this.text = "Remove " + (amount == 1 ? "a" : amount) + " " + name + " counter"
+			+ (amount != 1 ? "s" : "") + " from {this}";
 	}
 
     public RemoveCountersSourceCost(Counter counter) {
 		this.amount = counter.getCount();
 		this.name = counter.getName();
-		this.text = "Remove " + amount + " " + name + " counters from {this}";
+		this.text = "Remove " + (amount == 1 ? "a" : amount) + " " + name + " counter"
+			+ (amount != 1 ? "s" : "") + "from {this}";
 	}
 
 	public RemoveCountersSourceCost(RemoveCountersSourceCost cost) {
