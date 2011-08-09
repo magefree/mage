@@ -94,6 +94,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	protected Set<UUID> inRange = new HashSet<UUID>();
 	protected boolean isTestMode = false;
 	protected boolean lifeTotalCanChange = true;
+	protected boolean canGainLife = true;
+	protected boolean canLoseLife = true;
 	protected boolean isGameUnderControl = true;
 	protected UUID turnController;
 	protected Set<UUID> playersUnderYourControl = new HashSet<UUID>();
@@ -663,7 +665,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public void setLife(int life, Game game) {
-		if (this.lifeTotalCanChange) this.life = life;
+		// rule 118.5
+		if (life > this.life) {
+			gainLife(life - this.life, game);
+		} else if (life < this.life) {
+			loseLife(this.life - life, game);
+		}
 	}
 
 	@Override
@@ -681,7 +688,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		if (!lifeTotalCanChange) return 0;
 		GameEvent event = new GameEvent(GameEvent.EventType.LOSE_LIFE, playerId, playerId, playerId, amount, false);
 		if (!game.replaceEvent(event)) {
-			setLife(this.life - amount, game);
+			this.life -= amount;
 			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST_LIFE, playerId, playerId, playerId, amount));
 			return amount;
 		}
@@ -693,7 +700,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		if (!lifeTotalCanChange) return;
 		GameEvent event = new GameEvent(GameEvent.EventType.GAIN_LIFE, playerId, playerId, playerId, amount, false);
 		if (!game.replaceEvent(event)) {
-			setLife(this.life + amount, game);
+			this.life += amount;
 			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.GAINED_LIFE, playerId, playerId, playerId, amount));
 		}
 	}
