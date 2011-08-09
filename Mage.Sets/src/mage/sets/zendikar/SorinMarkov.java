@@ -56,9 +56,8 @@ import mage.target.common.TargetOpponent;
 public class SorinMarkov extends CardImpl<SorinMarkov> {
 
     public SorinMarkov(UUID ownerId) {
-        super(ownerId, 111, "Sorin Markov", Rarity.MYTHIC, new CardType[]{}, "{3}{B}{B}{B}");
+        super(ownerId, 111, "Sorin Markov", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}{B}");
         this.expansionSetCode = "ZEN";
-        this.supertype.add("Planeswalker");
         this.supertype.add("Sorin");
 
         this.color.setBlack(true);

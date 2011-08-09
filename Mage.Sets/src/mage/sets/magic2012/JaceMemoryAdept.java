@@ -54,9 +54,8 @@ import mage.target.TargetPlayer;
 public class JaceMemoryAdept extends CardImpl<JaceMemoryAdept> {
 
 	public JaceMemoryAdept(UUID ownerId) {
-		super(ownerId, 58, "Jace, Memory Adept", Rarity.MYTHIC, new CardType[]{}, "{3}{U}{U}");
+		super(ownerId, 58, "Jace, Memory Adept", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
 		this.expansionSetCode = "M12";
-		this.supertype.add("Planeswalker");
 		this.supertype.add("Jace");
 
 		this.color.setBlue(true);

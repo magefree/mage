@@ -75,6 +75,7 @@ $cardTypes{'Enchantment'} = 'CardType.ENCHANTMENT';
 $cardTypes{'Instant'} = 'CardType.INSTANT';
 $cardTypes{'Land'} = 'CardType.LAND';
 $cardTypes{'Sorcery'} = 'CardType.SORCERY';
+$cardTypes{'Planeswalker'} = 'CardType.PLANESWALKER';
 
 my %raritiesConversion;
 $raritiesConversion{'C'} = 'COMMON';
