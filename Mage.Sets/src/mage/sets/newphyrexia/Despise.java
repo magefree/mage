@@ -97,6 +97,7 @@ class DespiseEffect extends OneShotEffect<DespiseEffect> {
 			Player you = game.getPlayer(source.getControllerId());
 			if (you != null) {
 				TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
+                target.setRequired(true);
 				if (you.choose(Constants.Outcome.Benefit, player.getHand(), target, game)) {
 					Card card = player.getHand().get(target.getFirstTarget(), game);
 					if (card != null) {
