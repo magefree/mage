@@ -87,7 +87,7 @@ class SorcerersStrongboxEffect extends OneShotEffect<SorcerersStrongboxEffect> {
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getControllerId());
 		if (player != null) {
-			if (player.flipCoin()) {
+			if (player.flipCoin(game)) {
 				Permanent perm = game.getPermanent(source.getSourceId());
 				if (perm != null) {
 					perm.sacrifice(source.getId(), game);
