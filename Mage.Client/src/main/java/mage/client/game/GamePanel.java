@@ -448,10 +448,13 @@ public class GamePanel extends javax.swing.JPanel {
 
 	public void pickTarget(String message, CardsView cardView, GameView gameView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
 		updateGame(gameView);
-		this.feedbackPanel.getFeedback(required?FeedbackMode.INFORM:FeedbackMode.CANCEL, message, false, gameView.getSpecial(), options);
+		Map<String, Serializable> options0 = options == null ? new HashMap<String, Serializable>() : options;
 		if (cardView != null && cardView.size() > 0) {
-			showCards(message, cardView, required);
+			ShowCardsDialog dialog = showCards(message, cardView, required);
+			options0.put("dialog", dialog);
 		}
+		this.feedbackPanel.getFeedback(required?FeedbackMode.INFORM:FeedbackMode.CANCEL, message, false, gameView.getSpecial(), options0);
+
 	}
 
 	public void inform(String information, GameView gameView) {
@@ -502,9 +505,10 @@ public class GamePanel extends javax.swing.JPanel {
 //		showCards.loadCards(name, cards, bigCard, Config.dimensions, gameId, false);
 //	}
 //
-	private void showCards(String title, CardsView cards, boolean required) {
+	private ShowCardsDialog showCards(String title, CardsView cards, boolean required) {
 		ShowCardsDialog showCards = new ShowCardsDialog();
 		showCards.loadCards(title, cards, bigCard, Config.dimensions, gameId, required);
+		return showCards;
 	}
 
 	public void getAmount(int min, int max, String message) {

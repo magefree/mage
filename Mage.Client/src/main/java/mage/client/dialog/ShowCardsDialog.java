@@ -34,20 +34,22 @@
 
 package mage.client.dialog;
 
-import java.awt.Dimension;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.UUID;
 
-import javax.swing.JLayeredPane;
+import javax.swing.*;
 
+import com.sun.deploy.panel.ITreeNode;
 import mage.cards.CardDimensions;
 import mage.cards.MageCard;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
+import mage.client.util.SettingsManager;
+import mage.client.util.gui.GuiDisplayUtil;
 import mage.view.AbilityView;
 import mage.view.CardView;
 import mage.view.CardsView;
@@ -79,10 +81,24 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 			MageFrame.getDesktop().add(this, JLayeredPane.POPUP_LAYER);
 		}
 		pack();
+
 		this.revalidate();
 		this.repaint();
 		this.setModal(modal);
-		this.setVisible(true);
+
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				int width = ShowCardsDialog.this.getWidth();
+				int height = ShowCardsDialog.this.getWidth();
+				if (width > 0 && height > 0) {
+					Point centered = SettingsManager.getInstance().getComponentPosition(width, height);
+					ShowCardsDialog.this.setLocation(centered.x, centered.y);
+					GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, ShowCardsDialog.this);
+				}
+				ShowCardsDialog.this.setVisible(true);
+			}
+		});
 	}
 
 	private void loadCardsFew(CardsView showCards, BigCard bigCard, UUID gameId) {

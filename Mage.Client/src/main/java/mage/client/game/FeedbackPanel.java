@@ -46,6 +46,7 @@ import javax.swing.*;
 import mage.client.MageFrame;
 import mage.client.components.MageTextArea;
 import mage.client.components.arcane.GlowText;
+import mage.client.dialog.MageDialog;
 import mage.remote.Session;
 
 import org.apache.log4j.Logger;
@@ -66,12 +67,13 @@ public class FeedbackPanel extends javax.swing.JPanel {
 	private UUID gameId;
 	private Session session;
 	private FeedbackMode mode;
+	private MageDialog connectedDialog;
 
-        /** Creates new form FeedbackPanel */
-        public FeedbackPanel() {
-            //initComponents();
-            customInitComponents();
-        }
+	/** Creates new form FeedbackPanel */
+	public FeedbackPanel() {
+		//initComponents();
+		customInitComponents();
+	}
 
 	public void init(UUID gameId) {
 		this.gameId = gameId;
@@ -142,6 +144,9 @@ public class FeedbackPanel extends javax.swing.JPanel {
 			if (options.containsKey("UI.right.btn.text")) {
 				this.btnRight.setText((String)options.get("UI.right.btn.text"));
 				this.helper.setRight((String)options.get("UI.right.btn.text"), true);
+			}
+			if (options.containsKey("dialog")) {
+				connectedDialog = (MageDialog) options.get("dialog");
 			}
 		}
 	}
@@ -342,10 +347,14 @@ public class FeedbackPanel extends javax.swing.JPanel {
 	private void btnRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRightActionPerformed
 		this.selected = true;
 		clear0();
-		if (mode == FeedbackMode.SELECT && (evt.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK)
+		if (connectedDialog != null) {
+			connectedDialog.hideDialog();
+		}
+		if (mode == FeedbackMode.SELECT && (evt.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
 			session.sendPlayerInteger(gameId, 0);
-		else
+		} else {
 			session.sendPlayerBoolean(gameId, false);
+		}
 	}//GEN-LAST:event_btnRightActionPerformed
 
 	private void btnLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftActionPerformed
