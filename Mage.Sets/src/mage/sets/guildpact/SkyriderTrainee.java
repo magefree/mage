@@ -25,21 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.condition.common;
+package mage.sets.guildpact;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.game.Game;
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Rarity;
+import mage.Constants.Zone;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.Enchanted;
+import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
 
-public class MyTurn implements Condition {
-    private static MyTurn fInstance = new MyTurn();
+/**
+ *
+ * @author North
+ */
+public class SkyriderTrainee extends CardImpl<SkyriderTrainee> {
 
-    public static Condition getInstance() {
-        return fInstance;
+    public SkyriderTrainee(UUID ownerId) {
+        super(ownerId, 17, "Skyrider Trainee", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
+        this.expansionSetCode = "GPT";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+
+        this.color.setWhite(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new ConditionalContinousEffect(
+                new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
+                new Enchanted(),
+                "{this} has flying as long as it's enchanted")));
+    }
+
+    public SkyriderTrainee(final SkyriderTrainee card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getActivePlayerId().equals(source.getControllerId());
+    public SkyriderTrainee copy() {
+        return new SkyriderTrainee(this);
     }
 }

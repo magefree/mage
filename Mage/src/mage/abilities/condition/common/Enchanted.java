@@ -28,43 +28,36 @@
 package mage.abilities.condition.common;
 
 import java.util.UUID;
+import mage.Constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author maurer.it_at_gmail.com
+ * @author North
  */
-public class TenOrLessLife implements Condition {
+public class Enchanted implements Condition {
 
-	public static enum CheckType { AN_OPPONENT, CONTROLLER, TARGET_OPPONENT };
+    private static Equipped fInstance = new Equipped();
 
-	private CheckType type;
+    public static Condition getInstance() {
+        return fInstance;
+    }
 
-	public TenOrLessLife ( CheckType type ) {
-		this.type = type;
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		boolean conditionApplies = false;
-
-		switch ( this.type ) {
-			case AN_OPPONENT:
-				for ( UUID opponentUUID : game.getOpponents(source.getControllerId()) ) {
-					conditionApplies |= game.getPlayer(opponentUUID).getLife() <= 10;
-				}
-				break;
-			case CONTROLLER:
-				conditionApplies |= game.getPlayer(source.getControllerId()).getLife() <= 10;
-				break;
-			case TARGET_OPPONENT:
-				//TODO: Implement this.
-				break;
-		}
-
-		return conditionApplies;
-	}
-
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        if (permanent != null) {
+            for (UUID uuid : permanent.getAttachments()) {
+                Permanent attached = game.getBattlefield().getPermanent(uuid);
+                if (attached.getCardType().contains(CardType.ENCHANTMENT)) {
+                    return true;
+                }
+                return false;
+            }
+        }
+        return false;
+    }
 }

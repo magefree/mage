@@ -25,21 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.condition.common;
+package mage.sets.magic2012;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.game.Game;
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.Constants.Zone;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.CanBlockOnlyFlyingEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
 
-public class MyTurn implements Condition {
-    private static MyTurn fInstance = new MyTurn();
+/**
+ *
+ * @author North
+ */
+public class SkywinderDrake extends CardImpl<SkywinderDrake> {
 
-    public static Condition getInstance() {
-        return fInstance;
+    public SkywinderDrake(UUID ownerId) {
+        super(ownerId, 75, "Skywinder Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "M12";
+        this.subtype.add("Drake");
+
+        this.color.setBlue(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(1);
+
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockOnlyFlyingEffect()));
+    }
+
+    public SkywinderDrake(final SkywinderDrake card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getActivePlayerId().equals(source.getControllerId());
+    public SkywinderDrake copy() {
+        return new SkywinderDrake(this);
     }
 }

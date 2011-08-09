@@ -25,21 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.condition.common;
+package mage.sets.ravnika;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.game.Game;
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Rarity;
+import mage.Constants.Zone;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.Enchanted;
+import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.VigilanceAbility;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
 
-public class MyTurn implements Condition {
-    private static MyTurn fInstance = new MyTurn();
+/**
+ *
+ * @author North
+ */
+public class GateHound extends CardImpl<GateHound> {
 
-    public static Condition getInstance() {
-        return fInstance;
+    public GateHound(UUID ownerId) {
+        super(ownerId, 19, "Gate Hound", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "RAV";
+        this.subtype.add("Hound");
+
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new ConditionalContinousEffect(
+                new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent()),
+                new Enchanted(),
+                "Creatures you control have vigilance as long as {this} is enchanted")));
+    }
+
+    public GateHound(final GateHound card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getActivePlayerId().equals(source.getControllerId());
+    public GateHound copy() {
+        return new GateHound(this);
     }
 }

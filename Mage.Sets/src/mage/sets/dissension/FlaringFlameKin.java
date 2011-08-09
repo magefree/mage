@@ -25,68 +25,67 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.dissension;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ControlsPermanent;
+import mage.abilities.condition.common.Enchanted;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author nantuko
+ * @author North
  */
-public class GriffinRider extends CardImpl<GriffinRider> {
+public class FlaringFlameKin extends CardImpl<FlaringFlameKin> {
 
-	private static final FilterPermanent filterGriffinCard = new FilterCreaturePermanent();
+    public FlaringFlameKin(UUID ownerId) {
+        super(ownerId, 62, "Flaring Flame-Kin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "DIS";
+        this.subtype.add("Elemental");
+        this.subtype.add("Warrior");
 
-	static {
-		filterGriffinCard.getSubtype().add("Griffin");
-		filterGriffinCard.setScopeSubtype(Filter.ComparisonScope.Any);
-	}
+        this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-    public GriffinRider(UUID ownerId) {
-        super(ownerId, 20, "Griffin Rider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "M12";
-        this.subtype.add("Human");
-        this.subtype.add("Knight");
-
-        this.color.setWhite(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // As long as you control a Griffin creature, Griffin Rider gets +3/+3 and has flying.
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-				new ConditionalContinousEffect(
-					new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield),
-					new ControlsPermanent(filterGriffinCard),
-					"As long as you control a Griffin creature, {this} gets +3/+3")));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-				new ConditionalContinousEffect(
-					new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
-					new ControlsPermanent(filterGriffinCard),
-					"As long as you control a Griffin creature, {this} has flying")));
+        // As long as Flaring Flame-Kin is enchanted, it gets +2/+2, has trample, and has "{R}: Flaring Flame-Kin gets +1/+0 until end of turn."
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new ConditionalContinousEffect(
+                new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield),
+                new Enchanted(),
+                "As long as {this} is enchanted, it gets +2/+2")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new ConditionalContinousEffect(
+                new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
+                new Enchanted(),
+                "As long as {this} is enchanted, it has trample")));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new BoostSourceEffect(1, 0, Duration.EndOfTurn),
+                new ManaCostsImpl("{R}"));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new ConditionalContinousEffect(
+                new GainAbilitySourceEffect(ability, Duration.WhileOnBattlefield),
+                new Enchanted(),
+                "As long as {this} is enchanted, it has \"{tap}: {this} gets +1/+0 until end of turn\"")));
     }
 
-    public GriffinRider(final GriffinRider card) {
+    public FlaringFlameKin(final FlaringFlameKin card) {
         super(card);
     }
 
     @Override
-    public GriffinRider copy() {
-        return new GriffinRider(this);
+    public FlaringFlameKin copy() {
+        return new FlaringFlameKin(this);
     }
 }

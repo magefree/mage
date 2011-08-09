@@ -25,68 +25,69 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.dissension;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ControlsPermanent;
+import mage.abilities.condition.common.Enchanted;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author nantuko
+ * @author North
  */
-public class GriffinRider extends CardImpl<GriffinRider> {
+public class FreewindEquenaut extends CardImpl<FreewindEquenaut> {
 
-	private static final FilterPermanent filterGriffinCard = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking or blocking creature");
 
-	static {
-		filterGriffinCard.getSubtype().add("Griffin");
-		filterGriffinCard.setScopeSubtype(Filter.ComparisonScope.Any);
-	}
-
-    public GriffinRider(UUID ownerId) {
-        super(ownerId, 20, "Griffin Rider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "M12";
-        this.subtype.add("Human");
-        this.subtype.add("Knight");
-
-        this.color.setWhite(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // As long as you control a Griffin creature, Griffin Rider gets +3/+3 and has flying.
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-				new ConditionalContinousEffect(
-					new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield),
-					new ControlsPermanent(filterGriffinCard),
-					"As long as you control a Griffin creature, {this} gets +3/+3")));
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-				new ConditionalContinousEffect(
-					new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
-					new ControlsPermanent(filterGriffinCard),
-					"As long as you control a Griffin creature, {this} has flying")));
+    static {
+        filter.setAttacking(true);
+        filter.setUseAttacking(true);
+        filter.setBlocking(true);
+        filter.setUseBlocking(true);
     }
 
-    public GriffinRider(final GriffinRider card) {
+    public FreewindEquenaut(UUID ownerId) {
+        super(ownerId, 9, "Freewind Equenaut", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "DIS";
+        this.subtype.add("Human");
+        this.subtype.add("Archer");
+
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        this.addAbility(FlyingAbility.getInstance());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new DamageTargetEffect(2),
+                new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new ConditionalContinousEffect(
+                new GainAbilitySourceEffect(ability, Duration.WhileOnBattlefield),
+                new Enchanted(),
+                "As long as {this} is enchanted, it has \"{tap}: {this} deals 2 damage to target attacking or blocking creature\"")));
+    }
+
+    public FreewindEquenaut(final FreewindEquenaut card) {
         super(card);
     }
 
     @Override
-    public GriffinRider copy() {
-        return new GriffinRider(this);
+    public FreewindEquenaut copy() {
+        return new FreewindEquenaut(this);
     }
 }
