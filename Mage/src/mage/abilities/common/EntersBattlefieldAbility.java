@@ -39,6 +39,10 @@ import mage.abilities.effects.EntersBattlefieldEffect;
  */
 public class EntersBattlefieldAbility extends StaticAbility<EntersBattlefieldAbility> {
 
+	public EntersBattlefieldAbility(Effect effect) {
+		super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect, ""));
+	}
+
 	public EntersBattlefieldAbility(Effect effect, String rule) {
 		super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect, rule));
 	}
