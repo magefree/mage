@@ -43,3 +43,8 @@ glob:Mage.Client/test.dck
 glob:Mage.Server.Console/target/
 
 Mage.Server.Plugins/Mage.Draft.8PlayerBooster/target
+\.orig\..*$
+\.orig$
+\.chg\..*$
+\.rej$
+\.conflict\~$
