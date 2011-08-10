@@ -30,6 +30,7 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
@@ -37,7 +38,7 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
@@ -57,7 +58,7 @@ public class RagingRavine extends CardImpl<RagingRavine> {
 		this.addAbility(new EntersBattlefieldTappedAbility());
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new RedManaAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new RagingRavineToken(), "land"), new ManaCostsImpl("{2}{R}{G}")));
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new RagingRavineToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{2}{R}{G}")));
 	}
 
 	public RagingRavine(final RagingRavine card) {

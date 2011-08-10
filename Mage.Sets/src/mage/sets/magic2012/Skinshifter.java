@@ -29,6 +29,7 @@ package mage.sets.magic2012;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
@@ -36,7 +37,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -59,15 +60,15 @@ public class Skinshifter extends CardImpl<Skinshifter> {
         this.toughness = new MageInt(1);
 
         Ability ability = new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD,
-                new BecomesCreatureSourceEOTEffect(new RhinoToken(), ""),
+                new BecomesCreatureSourceEffect(new RhinoToken(), "", Duration.EndOfTurn),
                 new ManaCostsImpl("{G}"));
 
         Mode mode = new Mode();
-        mode.getEffects().add(new BecomesCreatureSourceEOTEffect(new BirdToken(), ""));
+        mode.getEffects().add(new BecomesCreatureSourceEffect(new BirdToken(), "", Duration.EndOfTurn));
         ability.addMode(mode);
 
         mode = new Mode();
-        mode.getEffects().add(new BecomesCreatureSourceEOTEffect(new PlantToken(), ""));
+        mode.getEffects().add(new BecomesCreatureSourceEffect(new PlantToken(), "", Duration.EndOfTurn));
         ability.addMode(mode);
 
         this.addAbility(ability);

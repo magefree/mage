@@ -31,13 +31,14 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
@@ -54,7 +55,7 @@ public class FaerieConclave extends CardImpl<FaerieConclave> {
         this.expansionSetCode = "10E";
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new BlueManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new FaerieConclaveToken(), "land"), new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new FaerieConclaveToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));
     }
 
     public FaerieConclave(final FaerieConclave card) {

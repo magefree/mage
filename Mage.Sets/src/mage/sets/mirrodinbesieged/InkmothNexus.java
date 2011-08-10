@@ -30,12 +30,13 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.InfectAbility;
 import mage.abilities.mana.ColorlessManaAbility;
@@ -52,7 +53,7 @@ public class InkmothNexus extends CardImpl<InkmothNexus> {
         super(ownerId, 145, "Inkmoth Nexus", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "MBS";
         this.addAbility(new ColorlessManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new InkmothNexusToken(), "land"), new GenericManaCost(1)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new InkmothNexusToken(), "land", Duration.EndOfTurn), new GenericManaCost(1)));
     }
 
     public InkmothNexus (final InkmothNexus card) {

@@ -30,12 +30,13 @@ package mage.sets.guildpact;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -51,7 +52,7 @@ public class GruulWarPlow extends CardImpl<GruulWarPlow> {
         super(ownerId, 151, "Gruul War Plow", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "GPT";
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Constants.Duration.WhileOnBattlefield, FilterCreaturePermanent.getDefault())));
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new GruulWarPlowToken(), ""), new ManaCostsImpl("{1}{R}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GruulWarPlowToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{1}{R}{G}")));
     }
 
     public GruulWarPlow(final GruulWarPlow card) {

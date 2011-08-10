@@ -44,27 +44,27 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BecomesCreatureSourceEOTEffect extends ContinuousEffectImpl<BecomesCreatureSourceEOTEffect> {
+public class BecomesCreatureSourceEffect extends ContinuousEffectImpl<BecomesCreatureSourceEffect> {
 
 	protected Token token;
 	protected String type;
 
-	public BecomesCreatureSourceEOTEffect(Token token, String type) {
-		super(Duration.EndOfTurn, Outcome.BecomeCreature);
+	public BecomesCreatureSourceEffect(Token token, String type, Duration duration) {
+		super(duration, Outcome.BecomeCreature);
 		this.token = token;
 		this.type = type;
 		setText();
 	}
 
-	public BecomesCreatureSourceEOTEffect(final BecomesCreatureSourceEOTEffect effect) {
+	public BecomesCreatureSourceEffect(final BecomesCreatureSourceEffect effect) {
 		super(effect);
 		this.token = effect.token.copy();
 		this.type = effect.type;
 	}
 
 	@Override
-	public BecomesCreatureSourceEOTEffect copy() {
-		return new BecomesCreatureSourceEOTEffect(this);
+	public BecomesCreatureSourceEffect copy() {
+		return new BecomesCreatureSourceEffect(this);
 	}
 
 	@Override
@@ -118,9 +118,9 @@ public class BecomesCreatureSourceEOTEffect extends ContinuousEffectImpl<Becomes
 
 	private void setText() {
         if (type.length() > 0)
-		    staticText = "Until end of turn {this} becomes a " + token.getDescription() + " that's still a " + this.type;
+		    staticText = duration.toString() + " {this} becomes a " + token.getDescription() + " that's still a " + this.type;
         else
-            staticText = "Until end of turn {this} becomes a " + token.getDescription();
+            staticText = duration.toString() + " {this} becomes a " + token.getDescription();
 	}
 
 	@Override

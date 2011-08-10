@@ -47,7 +47,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersCount;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -66,7 +66,7 @@ public class ChimericMass extends CardImpl<ChimericMass> {
         this.addAbility(new EntersBattlefieldAbility(new ChimericMassEffect(), "{this} enters the battlefield with X charge counters on it"));
 		Costs costs = new CostsImpl();
 		costs.add(new GenericManaCost(1));
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new ChimericMassToken(), ""), costs));
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new ChimericMassToken(), "", Duration.EndOfTurn), costs));
 	}
 
 	public ChimericMass(final ChimericMass card) {

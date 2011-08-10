@@ -35,6 +35,7 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
+import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -46,12 +47,14 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DynamicManaEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetLandPermanent;
 
@@ -77,7 +80,7 @@ public class KothOfTheHammer extends CardImpl<KothOfTheHammer> {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
         
         Ability ability = new LoyaltyAbility(new UntapTargetEffect(), 1);
-        ability.addEffect(new KothOfTheHammerFirstEffect());
+        ability.addEffect(new BecomesCreatureTargetEffect(new KothOfTheHammerToken(), "land", Duration.EndOfTurn));
         ability.addTarget(new TargetLandPermanent(filter));
         this.addAbility(ability);
         this.addAbility(new LoyaltyAbility(new DynamicManaEffect(Mana.RedMana, new PermanentsOnBattlefieldCount(filterCount)), -2));
@@ -93,60 +96,17 @@ public class KothOfTheHammer extends CardImpl<KothOfTheHammer> {
         return new KothOfTheHammer(this);
     }
 }
+class KothOfTheHammerToken extends Token {
 
-class KothOfTheHammerFirstEffect extends ContinuousEffectImpl<KothOfTheHammerFirstEffect> {
+	public KothOfTheHammerToken() {
+		super("Elemental", "4/4 red Elemental");
+		this.cardType.add(CardType.CREATURE);
+		this.subtype.add("Elemental");
 
-    public KothOfTheHammerFirstEffect() {
-        super(Duration.EndOfTurn, Constants.Outcome.BecomeCreature);
-        staticText = "It becomes a 4/4 red Elemental creature until end of turn. It's still a land";
-    }
-
-    public KothOfTheHammerFirstEffect(final KothOfTheHammerFirstEffect effect) {
-        super(effect);
-    }
-
-    @Override
-	public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			switch (layer) {
-				case TypeChangingEffects_4:
-					if (sublayer == Constants.SubLayer.NA) {
-                        permanent.getCardType().add(CardType.CREATURE);
-                        permanent.getSubtype().add("Elemental");
-					}
-					break;
-				case ColorChangingEffects_5:
-					if (sublayer == Constants.SubLayer.NA) {
-                        permanent.getColor().setRed(true);
-					}
-					break;
-				case PTChangingEffects_7:
-					if (sublayer == Constants.SubLayer.SetPT_7b) {
-						permanent.getPower().setValue(4);
-					    permanent.getToughness().setValue(4);
-					}
-			}
-			return true;
-		}
-		return false;
+		this.color.setRed(true);
+		this.power = new MageInt(4);
+		this.toughness = new MageInt(4);
 	}
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public KothOfTheHammerFirstEffect copy() {
-        return new KothOfTheHammerFirstEffect(this);
-    }
-
-    @Override
-	public boolean hasLayer(Constants.Layer layer) {
-		return layer == Constants.Layer.PTChangingEffects_7 || layer == Constants.Layer.ColorChangingEffects_5 || layer == layer.TypeChangingEffects_4;
-	}
-
 }
 
 class KothOfTheHammerThirdEffect extends ContinuousEffectImpl<KothOfTheHammerThirdEffect> {

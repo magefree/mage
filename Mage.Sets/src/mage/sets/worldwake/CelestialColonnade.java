@@ -30,13 +30,14 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.BlueManaAbility;
@@ -56,7 +57,7 @@ public class CelestialColonnade extends CardImpl<CelestialColonnade> {
 		this.addAbility(new EntersBattlefieldTappedAbility());
 		this.addAbility(new BlueManaAbility());
 		this.addAbility(new WhiteManaAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new CelestialColonnadeToken(), "land"), new ManaCostsImpl("{3}{W}{U}")));
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new CelestialColonnadeToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{3}{W}{U}")));
 	}
 
 	public CelestialColonnade(final CelestialColonnade card) {

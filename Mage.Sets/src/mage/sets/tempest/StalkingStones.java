@@ -31,15 +31,15 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
+import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.game.permanent.token.Token;
 
 /**
  *
@@ -51,7 +51,7 @@ public class StalkingStones extends CardImpl<StalkingStones> {
         super(ownerId, 333, "Stalking Stones", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "TMP";
         this.addAbility(new ColorlessManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new StalkingStonesEffect(), new GenericManaCost(6)));
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new StalkingStonesToken(), "land", Duration.WhileOnBattlefield), new GenericManaCost(6)));
     }
 
     public StalkingStones(final StalkingStones card) {
@@ -64,52 +64,14 @@ public class StalkingStones extends CardImpl<StalkingStones> {
     }
 }
 
-class StalkingStonesEffect extends ContinuousEffectImpl<StalkingStonesEffect> {
+class StalkingStonesToken extends Token {
 
-    public StalkingStonesEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.BecomeCreature);
-		staticText = "{this} becomes a 3/3 Elemental artifact creature that's still a land";
-    }
+	public StalkingStonesToken() {
+		super("Elemental", "3/3 Elemental artifact");
+		this.cardType.add(CardType.CREATURE);
+		this.cardType.add(CardType.ARTIFACT);
 
-    public StalkingStonesEffect(final StalkingStonesEffect effect) {
-        super(effect);
-    }
-
-    @Override
-	public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			switch (layer) {
-				case TypeChangingEffects_4:
-					if (sublayer == Constants.SubLayer.NA) {
-                        permanent.getCardType().add(CardType.ARTIFACT);
-                        permanent.getCardType().add(CardType.CREATURE);
-                        permanent.getSubtype().add("Elemental");
-					}
-					break;
-				case PTChangingEffects_7:
-					if (sublayer == Constants.SubLayer.SetPT_7b) {
-						permanent.getPower().setValue(3);
-					    permanent.getToughness().setValue(3);
-					}
-			}
-			return true;
-		}
-		return false;
-	}
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public StalkingStonesEffect copy() {
-        return new StalkingStonesEffect(this);
-    }
-
-    @Override
-	public boolean hasLayer(Constants.Layer layer) {
-		return layer == Constants.Layer.PTChangingEffects_7 || layer == layer.TypeChangingEffects_4;
+		this.power = new MageInt(3);
+		this.toughness = new MageInt(3);
 	}
 }

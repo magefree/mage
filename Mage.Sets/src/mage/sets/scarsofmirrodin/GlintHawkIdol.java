@@ -32,13 +32,14 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -57,8 +58,7 @@ public class GlintHawkIdol extends CardImpl<GlintHawkIdol> {
         super(ownerId, 156, "Glint Hawk Idol", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "SOM";
         this.addAbility(new GlintHawkIdolTriggeredAbility());
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new GlintHawkIdolToken(), ""), new ColoredManaCost(Constants.ColoredManaSymbol.W)));
-        
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GlintHawkIdolToken(), "", Duration.EndOfTurn), new ColoredManaCost(Constants.ColoredManaSymbol.W)));
     }
 
     public GlintHawkIdol (final GlintHawkIdol card) {
@@ -74,7 +74,7 @@ public class GlintHawkIdol extends CardImpl<GlintHawkIdol> {
 
 class GlintHawkIdolTriggeredAbility extends TriggeredAbilityImpl<GlintHawkIdolTriggeredAbility> {
     GlintHawkIdolTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new GlintHawkIdolToken(), ""), true);
+        super(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GlintHawkIdolToken(), "", Duration.EndOfTurn), true);
     }
 
     GlintHawkIdolTriggeredAbility(final GlintHawkIdolTriggeredAbility ability) {

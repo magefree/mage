@@ -58,7 +58,7 @@ import mage.abilities.costs.mana.MonoHybridManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffect;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.EquipAbility;
@@ -463,7 +463,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 						if (playableAbilities.size() > 0) {
 							for (ActivatedAbility ability: playableAbilities) {
 								if (ability.canActivate(playerId, game)) {
-									if (!(ability.getEffects().get(0) instanceof BecomesCreatureSourceEOTEffect)) {
+									if (!(ability.getEffects().get(0) instanceof BecomesCreatureSourceEffect)) {
 										if (this.activateAbility(ability, game))
 											return;
 									}

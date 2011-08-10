@@ -32,13 +32,14 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.Metalcraft;
 import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
 
@@ -54,7 +55,7 @@ public class RustedRelic extends CardImpl<RustedRelic> {
         this.addAbility(
                 new SimpleStaticAbility(Zone.BATTLEFIELD,
                         new ConditionalContinousEffect(
-                                new BecomesCreatureSourceEOTEffect(new RustedRelicToken(), "artifact"),
+                                new BecomesCreatureSourceEffect(new RustedRelicToken(), "artifact", Duration.Custom),
                                 Metalcraft.getInstance(),
                                 "Metalcraft - Rusted Relic is a 5/5 Golem artifact creature as long as you control three or more artifacts")));
     }

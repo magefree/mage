@@ -30,13 +30,14 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
@@ -55,7 +56,7 @@ public class StirringWildwood extends CardImpl<StirringWildwood> {
 		this.addAbility(new EntersBattlefieldTappedAbility());
 		this.addAbility(new GreenManaAbility());
 		this.addAbility(new WhiteManaAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new StirringWildwoodToken(), "land"), new ManaCostsImpl("{1}{G}{W}")));
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new StirringWildwoodToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{G}{W}")));
 	}
 
 	public StirringWildwood(final StirringWildwood card) {

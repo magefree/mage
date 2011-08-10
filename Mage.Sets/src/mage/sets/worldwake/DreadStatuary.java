@@ -30,12 +30,13 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
@@ -50,7 +51,7 @@ public class DreadStatuary extends CardImpl<DreadStatuary> {
 		super(ownerId, 135, "Dread Statuary", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "WWK";
 		this.addAbility(new ColorlessManaAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new DreadStatuaryToken(), "land"), new ManaCostsImpl("{4}")));
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new DreadStatuaryToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{4}")));
 	}
 
 	public DreadStatuary(final DreadStatuary card) {

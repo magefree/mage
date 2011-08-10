@@ -31,17 +31,18 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -53,7 +54,7 @@ public class LifesparkSpellbomb extends CardImpl<LifesparkSpellbomb> {
     public LifesparkSpellbomb(UUID ownerId) {
         super(ownerId, 197, "Lifespark Spellbomb", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "MRD";
-        Ability firstAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new LifesparkSpellbombEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.G));
+        Ability firstAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new LifesparkSpellbombToken(), "land", Duration.EndOfTurn), new ColoredManaCost(Constants.ColoredManaSymbol.G));
         firstAbility.addCost(new SacrificeSourceCost());
         firstAbility.addTarget(new TargetLandPermanent());
         this.addAbility(firstAbility);
@@ -71,54 +72,15 @@ public class LifesparkSpellbomb extends CardImpl<LifesparkSpellbomb> {
         return new LifesparkSpellbomb(this);
     }
 
-
 }
 
-class LifesparkSpellbombEffect extends ContinuousEffectImpl<LifesparkSpellbombEffect> {
+class LifesparkSpellbombToken extends Token {
 
-    public LifesparkSpellbombEffect() {
-        super(Constants.Duration.EndOfTurn, Constants.Outcome.BecomeCreature);
-        staticText = "Until end of turn, target land becomes a 3/3 creature that's still a land";
-    }
+	public LifesparkSpellbombToken() {
+		super("", "3/3");
+		this.cardType.add(CardType.CREATURE);
 
-    public LifesparkSpellbombEffect(final LifesparkSpellbombEffect effect) {
-        super(effect);
-    }
-
-    @Override
-	public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			switch (layer) {
-				case TypeChangingEffects_4:
-					if (sublayer == Constants.SubLayer.NA) {
-                        permanent.getCardType().add(CardType.CREATURE);
-					}
-					break;
-				case PTChangingEffects_7:
-					if (sublayer == Constants.SubLayer.SetPT_7b) {
-						permanent.getPower().setValue(3);
-					    permanent.getToughness().setValue(3);
-					}
-			}
-			return true;
-		}
-		return false;
+		this.power = new MageInt(3);
+		this.toughness = new MageInt(3);
 	}
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public LifesparkSpellbombEffect copy() {
-        return new LifesparkSpellbombEffect(this);
-    }
-
-    @Override
-	public boolean hasLayer(Constants.Layer layer) {
-		return layer == Constants.Layer.PTChangingEffects_7 || layer == layer.TypeChangingEffects_4;
-	}
-
 }

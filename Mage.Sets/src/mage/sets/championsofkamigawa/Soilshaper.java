@@ -30,18 +30,17 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastTriggeredAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -64,7 +63,7 @@ public class Soilshaper extends CardImpl<Soilshaper> {
         this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new SpellCastTriggeredAbility(new SoilshaperEffect(), filter, false);
+        Ability ability = new SpellCastTriggeredAbility(new BecomesCreatureTargetEffect(new SoilshaperToken(), "land", Duration.EndOfTurn), filter, false);
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }
@@ -80,51 +79,13 @@ public class Soilshaper extends CardImpl<Soilshaper> {
 
 }
 
-class SoilshaperEffect extends ContinuousEffectImpl<SoilshaperEffect> {
+class SoilshaperToken extends Token {
 
-    public SoilshaperEffect() {
-        super(Constants.Duration.EndOfTurn, Constants.Outcome.BecomeCreature);
-        staticText = "target land becomes a 3/3 creature until end of turn. It's still a land";
-    }
+	public SoilshaperToken() {
+		super("", "3/3");
+		this.cardType.add(CardType.CREATURE);
 
-    public SoilshaperEffect(final SoilshaperEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    if (sublayer == Constants.SubLayer.NA) {
-                        permanent.getCardType().add(CardType.CREATURE);
-                    }
-                    break;
-                case PTChangingEffects_7:
-                    if (sublayer == Constants.SubLayer.SetPT_7b) {
-                        permanent.getPower().setValue(3);
-                        permanent.getToughness().setValue(3);
-                    }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public SoilshaperEffect copy() {
-        return new SoilshaperEffect(this);
-    }
-
-    @Override
-    public boolean hasLayer(Constants.Layer layer) {
-        return layer == Constants.Layer.PTChangingEffects_7 || layer == Constants.Layer.ColorChangingEffects_5 || layer == layer.TypeChangingEffects_4;
-    }
-
+		this.power = new MageInt(3);
+		this.toughness = new MageInt(3);
+	}
 }

@@ -31,6 +31,7 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -39,7 +40,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
@@ -56,7 +57,7 @@ public class TreetopVillage extends CardImpl<TreetopVillage> {
         this.expansionSetCode = "10E";
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new GreenManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new ApeToken(), "land"), new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new ApeToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
     }
 
     public TreetopVillage(final TreetopVillage card) {

@@ -31,6 +31,7 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
@@ -39,7 +40,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
@@ -55,7 +56,7 @@ public class SpawningPool extends CardImpl<SpawningPool> {
         this.expansionSetCode = "10E";
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new BlackManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new SkeletonToken(), "land"), new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SkeletonToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{B}")));
     }
 
     public SpawningPool(final SpawningPool card) {

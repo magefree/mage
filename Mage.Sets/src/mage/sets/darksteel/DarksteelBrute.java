@@ -32,11 +32,12 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
@@ -51,7 +52,7 @@ public class DarksteelBrute extends CardImpl<DarksteelBrute> {
         super(ownerId, 108, "Darksteel Brute", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "DST";
         this.addAbility(IndestructibleAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new DarksteelBruteToken(), ""), new GenericManaCost(3)));
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new DarksteelBruteToken(), "", Duration.EndOfTurn), new GenericManaCost(3)));
     }
 
     public DarksteelBrute (final DarksteelBrute card) {

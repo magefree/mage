@@ -32,13 +32,14 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.ColorlessManaAbility;
@@ -64,7 +65,7 @@ public class BlinkmothNexus extends CardImpl<BlinkmothNexus> {
         super(ownerId, 163, "Blinkmoth Nexus", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "DST";
         this.addAbility(new ColorlessManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new BlinkmothNexusToken(), "land"), new GenericManaCost(1)));
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new BlinkmothNexusToken(), "land", Duration.EndOfTurn), new GenericManaCost(1)));
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Constants.Duration.EndOfTurn), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));

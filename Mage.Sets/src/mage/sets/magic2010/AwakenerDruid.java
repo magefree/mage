@@ -31,18 +31,13 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
 
@@ -66,7 +61,7 @@ public class AwakenerDruid extends CardImpl<AwakenerDruid> {
 		this.subtype.add("Druid");
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
-		Ability ability = new EntersBattlefieldTriggeredAbility(new AwakenerDruidEffect(), false);
+		Ability ability = new EntersBattlefieldTriggeredAbility(new BecomesCreatureTargetEffect(new AwakenerDruidToken(), "land", Duration.WhileOnBattlefield), false);
 		ability.addTarget(new TargetLandPermanent(filter));
 		this.addAbility(ability);
 	}
@@ -80,67 +75,6 @@ public class AwakenerDruid extends CardImpl<AwakenerDruid> {
 	public AwakenerDruid copy() {
 		return new AwakenerDruid(this);
 	}
-}
-
-class AwakenerDruidEffect extends ContinuousEffectImpl<AwakenerDruidEffect> {
-
-	protected static AwakenerDruidToken token = new AwakenerDruidToken();
-
-	public AwakenerDruidEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
-		staticText = "target Forest becomes a 4/5 green Treefolk creature for as long as {this} is on the battlefield. It's still a land.";
-	}
-
-	public AwakenerDruidEffect(final AwakenerDruidEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public AwakenerDruidEffect copy() {
-		return new AwakenerDruidEffect(this);
-	}
-
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			switch (layer) {
-				case TypeChangingEffects_4:
-					if (sublayer == SubLayer.NA) {
-						if (token.getCardType().size() > 0)
-							permanent.getCardType().addAll(token.getCardType());
-						if (token.getSubtype().size() > 0)
-							permanent.getSubtype().addAll(token.getSubtype());
-					}
-					break;
-				case ColorChangingEffects_5:
-					if (sublayer == SubLayer.NA) {
-						if (token.getColor().hasColor())
-							permanent.getColor().setColor(token.getColor());
-					}
-					break;
-				case PTChangingEffects_7:
-					if (sublayer == SubLayer.SetPT_7b) {
-						if (token.getPower() != MageInt.EmptyMageInt)
-							permanent.getPower().setValue(token.getPower().getValue());
-						if (token.getToughness() != MageInt.EmptyMageInt)
-							permanent.getToughness().setValue(token.getToughness().getValue());
-					}
-			}
-		}
-		return true;
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
-
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.PTChangingEffects_7 || layer == Layer.ColorChangingEffects_5 || layer == layer.TypeChangingEffects_4;
-	}
-
 }
 
 class AwakenerDruidToken extends Token {

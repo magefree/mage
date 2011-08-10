@@ -37,7 +37,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.continious.BoostPowerXSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.RedManaAbility;
@@ -56,7 +56,7 @@ public class LavaclawReaches extends CardImpl<LavaclawReaches> {
 		this.addAbility(new EntersBattlefieldTappedAbility());
 		this.addAbility(new BlackManaAbility());
 		this.addAbility(new RedManaAbility());
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEOTEffect(new LavaclawReachesToken(), "land"), new ManaCostsImpl("{1}{B}{R}")));
+		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new LavaclawReachesToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{B}{R}")));
 	}
 
 	public LavaclawReaches(final LavaclawReaches card) {

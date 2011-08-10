@@ -38,7 +38,7 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.RequirementEffect;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.PreventAllDamageSourceEffect;
@@ -79,7 +79,7 @@ public class GideonJura extends CardImpl<GideonJura> {
 		ability2.addTarget(new TargetCreaturePermanent(filter));
 		this.addAbility(ability2);
 
-		LoyaltyAbility ability3 = new LoyaltyAbility(new BecomesCreatureSourceEOTEffect(new GideonJuraToken(), "planeswalker"), 0);
+		LoyaltyAbility ability3 = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonJuraToken(), "planeswalker", Duration.EndOfTurn), 0);
 		ability3.addEffect(new PreventAllDamageSourceEffect(Duration.EndOfTurn));
 		this.addAbility(ability3);
 	}

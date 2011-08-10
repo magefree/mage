@@ -29,13 +29,14 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEOTEffect;
+import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
@@ -54,7 +55,7 @@ public class GhituEncampment extends CardImpl<GhituEncampment> {
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new RedManaAbility());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BecomesCreatureSourceEOTEffect(new GhituEncampmentToken(), "land"),
+                new BecomesCreatureSourceEffect(new GhituEncampmentToken(), "land", Duration.EndOfTurn),
                 new ManaCostsImpl("{1}{R}")));
     }
 
