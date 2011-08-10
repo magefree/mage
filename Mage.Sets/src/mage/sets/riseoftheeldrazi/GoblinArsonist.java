@@ -87,20 +87,18 @@ class GoblinArsonistEffect extends OneShotEffect<GoblinArsonistEffect> {
         Player player = game.getPlayer(source.getControllerId());
         player.choose(Outcome.Damage, target, game);
 
-        Permanent arsonist = game.getPermanent(source.getSourceId());
-        if (arsonist != null) {
-            Permanent permanent = game.getPermanent(target.getFirstTarget());
-            if (permanent != null) {
-                permanent.damage(1, arsonist.getId(), game, true, false);
-                return true;
-            }
+		Permanent permanent = game.getPermanent(target.getFirstTarget());
+		if (permanent != null) {
+			permanent.damage(1, source.getSourceId(), game, true, false);
+			return true;
+		}
 
-            Player targetPlayer = game.getPlayer(target.getFirstTarget());
-            if (targetPlayer != null) {
-                targetPlayer.damage(1, arsonist.getId(), game, true, false);
-                return true;
-            }
-        }
+		Player targetPlayer = game.getPlayer(target.getFirstTarget());
+		if (targetPlayer != null) {
+			targetPlayer.damage(1, source.getSourceId(), game, true, false);
+			return true;
+		}
+
         return false;
     }
 
