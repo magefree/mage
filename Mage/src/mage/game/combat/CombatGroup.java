@@ -134,6 +134,10 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 		return perm.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId());
 	}
 
+	private boolean hasDoubleStrike(Permanent perm) {
+		return perm.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId());
+	}
+
 	private boolean hasTrample(Permanent perm) {
 		return perm.getAbilities().containsKey(TrampleAbility.getInstance().getId());
 	}
@@ -163,8 +167,30 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 		}
 	}
 
+	/**
+	 * Determines if permanent can damage in current (First Strike or not) combat damage step
+	 *
+	 * @param perm Permanent to check
+	 * @param first First strike or common combat damage step
+	 * @return
+	 */
 	private boolean canDamage(Permanent perm, boolean first) {
-		return (first && hasFirstOrDoubleStrike(perm)) || (!first && !hasFirstStrike(perm));
+		// if now first strike combat damage step
+		if (first) {
+			// should have first strike or double strike
+			return hasFirstOrDoubleStrike(perm);
+		}
+		// if now not first strike combat
+		else {
+			if (hasFirstStrike(perm)) {
+				// if it has first strike in non FS combat damage step
+				// then it can damage only if it has ALSO double strike
+				// Fixes Issue 200
+				return hasDoubleStrike(perm);
+			}
+			// can damage otherwise
+			return true;
+		}
 	}
 
 	private void unblockedDamage(boolean first, Game game) {
