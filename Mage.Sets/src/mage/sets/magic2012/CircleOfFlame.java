@@ -110,8 +110,8 @@ class CircleOfFlameTriggeredAbility extends TriggeredAbilityImpl<CircleOfFlameTr
 				for (Effect effect : this.getEffects()) {
 					effect.setTargetPointer(new FixedTarget(attacker.getId()));
 				}
+				return true;
 			}
-			return true;
 		}
 		return false;
     }
