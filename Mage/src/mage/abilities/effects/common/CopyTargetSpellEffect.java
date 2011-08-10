@@ -31,6 +31,7 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -68,4 +69,10 @@ public class CopyTargetSpellEffect extends OneShotEffect<CopyTargetSpellEffect> 
 		return new CopyTargetSpellEffect(this);
 	}
 
+   @Override
+    public String getText(Mode mode) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Copy target ").append(mode.getTargets().get(0).getTargetName()).append(". You may choose new targets for the copy");
+        return sb.toString();
+    }
 }
