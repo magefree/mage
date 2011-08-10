@@ -41,6 +41,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.target.Target;
 import mage.target.TargetPermanent;
 
 /**
@@ -59,7 +60,9 @@ public class AegisAngel extends CardImpl<AegisAngel> {
         FilterPermanent filter = new FilterPermanent("another");
         filter.setAnother(true);
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Constants.Duration.WhileOnBattlefield), false);
-        ability.addTarget(new TargetPermanent(filter));
+        Target target = new TargetPermanent(filter);
+        target.setRequired(true);
+        ability.addTarget(target);
         this.addAbility(ability);
     }
 
