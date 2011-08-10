@@ -52,9 +52,8 @@ public class OblivionRing extends CardImpl<OblivionRing> {
 		super(ownerId, 20, "Oblivion Ring", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 		this.expansionSetCode = "ALA";
 		this.color.setWhite(true);
-		FilterNonlandPermanent filter = new FilterNonlandPermanent();
-		filter.setId(this.getId());
-		filter.setNotId(true);
+		FilterNonlandPermanent filter = new FilterNonlandPermanent("another nonland permanent");
+		filter.setAnother(true);
 		Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect(this.getId(), "Oblivion Ring exile"), false);
 		Target target = new TargetPermanent(filter);
         target.setRequired(true);
