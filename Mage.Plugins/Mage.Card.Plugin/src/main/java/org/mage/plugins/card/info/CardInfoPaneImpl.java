@@ -75,8 +75,11 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 							}
 							rulings.add(sb.toString());
 						}
+						int damage = ((PermanentView)card).getDamage();
+						if (damage > 0) {
+							rulings.add("<span color='red'><b>Damage dealt:</b> " + damage + "</span>");
+						}
 					}
-
 
 					boolean smallImages = true;
 					int fontSize = 11;
