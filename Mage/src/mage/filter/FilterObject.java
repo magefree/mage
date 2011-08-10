@@ -70,8 +70,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 	protected ComparisonType powerComparison;
 	protected int toughness;
 	protected ComparisonType toughnessComparison;
-	protected UUID id;
-	protected boolean notId;
 
 	/**
 	 * Indicates that filter shouldn't match the source.
@@ -128,18 +126,11 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 		this.powerComparison = filter.powerComparison;
 		this.toughness = filter.toughness;
 		this.toughnessComparison = filter.toughnessComparison;
-		this.id = filter.id;
-		this.notId = filter.notId;
 		this.another = filter.another;
 	}
 
 	@Override
 	public boolean match(E object) {
-
-		if (id != null) {
-			if (object.getId().equals(id) == notId)
-				return notFilter;
-		}
 
 		if (name.size() > 0) {
 			if (name.contains(object.getName()) == notName)
@@ -319,14 +310,6 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 
 	public void setUseColorless(boolean useColorless) {
 		this.useColorless = useColorless;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
-	}
-
-	public void setNotId(boolean notId) {
-		this.notId = notId;
 	}
 
 	public boolean isAnother() {

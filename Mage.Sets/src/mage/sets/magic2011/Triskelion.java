@@ -40,6 +40,7 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -57,7 +58,7 @@ public class Triskelion extends CardImpl<Triskelion> {
 		this.toughness = new MageInt(1);
 
 		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), "with three +1/+1 counters on it"));
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new RemoveCountersSourceCost("+1/+1", 1));
+		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
 		ability.addTarget(new TargetCreatureOrPlayer());
 		this.addAbility(ability);
 	}

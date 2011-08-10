@@ -39,9 +39,11 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.counters.common.QuestCounter;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
@@ -77,7 +79,7 @@ class KhalniHeartExpeditionAbility extends ActivatedAbilityImpl<KhalniHeartExped
 		super(Zone.BATTLEFIELD, null);
 		
 		Costs additionalCosts = new CostsImpl();
-		additionalCosts.add(new RemoveCountersSourceCost("quest", 3));
+		additionalCosts.add(new RemoveCountersSourceCost(CounterType.QUEST.createInstance(3)));
 		additionalCosts.add(new SacrificeSourceCost());
 		costs.add(additionalCosts);
 		TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());

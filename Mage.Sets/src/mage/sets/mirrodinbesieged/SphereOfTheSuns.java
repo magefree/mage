@@ -54,7 +54,7 @@ public class SphereOfTheSuns extends CardImpl<SphereOfTheSuns> {
         ability.addEffect(new TapSourceEffect());
         this.addAbility(ability);
 
-        RemoveCountersSourceCost removeCounterCost = new RemoveCountersSourceCost(CounterType.CHARGE.getName(), 1);
+        RemoveCountersSourceCost removeCounterCost = new RemoveCountersSourceCost(CounterType.CHARGE.createInstance());
         ability = new AnyColorManaAbility();
         ability.addCost(removeCounterCost);
         this.addAbility(ability);

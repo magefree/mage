@@ -42,6 +42,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.counters.common.QuestCounter;
 
 /**
@@ -57,7 +58,7 @@ public class SunspringExpedition extends CardImpl<SunspringExpedition> {
 
 		this.addAbility(new LandfallAbility(new AddCountersSourceEffect(new QuestCounter()), true));
 		Costs costs = new CostsImpl();
-		costs.add(new RemoveCountersSourceCost("quest", 3));
+		costs.add(new RemoveCountersSourceCost(CounterType.QUEST.createInstance(3)));
 		costs.add(new SacrificeSourceCost());
 		ActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(8), costs);
 		this.addAbility(ability);
