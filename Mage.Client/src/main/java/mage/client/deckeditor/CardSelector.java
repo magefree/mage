@@ -709,11 +709,15 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 	}//GEN-LAST:event_btnClearActionPerformed
 
 	private void btnBoosterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoosterActionPerformed
-		List<Card> booster = ((ExpansionSet)this.cbExpansionSet.getSelectedItem()).createBooster();
-		for (Card card: booster) {
-			cards.add(card);
+		if (cbExpansionSet.getSelectedItem() instanceof ExpansionSet) {
+			List<Card> booster = ((ExpansionSet)this.cbExpansionSet.getSelectedItem()).createBooster();
+			for (Card card: booster) {
+				cards.add(card);
+			}
+			filterCards();
+		} else {
+			JOptionPane.showMessageDialog(null, "It's not possible to generate booster for not Expansion Set but all cards\nChoose Expandsion Set firest.");
 		}
-		filterCards();
 	}//GEN-LAST:event_btnBoosterActionPerformed
 
 	private void cbSortByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSortByActionPerformed

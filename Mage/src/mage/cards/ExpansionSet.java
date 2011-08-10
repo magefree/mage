@@ -41,6 +41,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.net.URLDecoder;
 import java.util.*;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 import org.apache.log4j.Logger;
@@ -332,10 +333,34 @@ public abstract class ExpansionSet implements Serializable {
 	protected void addToBooster(List<Card> booster, ExpansionSet set, Rarity rarity) {
 		Card card = set.getRandom(rarity);
 		if (card != null) {
+			boolean duplicate = true;
+			int retryCount = 5;
+			while (duplicate && retryCount > 0) {
+				if (!rarity.equals(Rarity.LAND)) {
+					// check for duplicates
+					if (hasCardByName(booster, card.getName())) {
+						card = set.getRandom(rarity);
+					} else {
+						duplicate = false; // no such card yet
+					}
+				} else {
+					duplicate = false;
+				}
+				retryCount--;
+			}
 			Card newCard = card.copy();
 			newCard.assignNewId();
 			booster.add(newCard);
 		}
+	}
+
+	protected boolean hasCardByName(List<Card> booster, String name) {
+		for (Card card : booster) {
+			if (card.getName().equals(name)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	protected Card getRandom(Rarity rarity) {
