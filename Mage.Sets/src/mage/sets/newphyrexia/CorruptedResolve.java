@@ -25,67 +25,72 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
+import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
-import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterCard;
-import mage.game.permanent.token.Token;
-import mage.target.common.TargetLandPermanent;
+import mage.counters.CounterType;
+import mage.game.Game;
+import mage.game.stack.Spell;
+import mage.players.Player;
+import mage.target.TargetSpell;
 
 /**
+ *
  * @author Loki
  */
-public class Soilshaper extends CardImpl<Soilshaper> {
+public class CorruptedResolve extends CardImpl<CorruptedResolve> {
 
-    private final static FilterCard filter = new FilterCard("a Spirit or Arcane spell");
+    public CorruptedResolve(UUID ownerId) {
+        super(ownerId, 32, "Corrupted Resolve", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+        this.expansionSetCode = "NPH";
 
-    static {
-        filter.getSubtype().add("Spirit");
-        filter.getSubtype().add("Arcane");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        this.color.setBlue(true);
+
+        // Counter target spell if its controller is poisoned.
+        this.getSpellAbility().addTarget(new TargetSpell());
+        this.getSpellAbility().addEffect(new CorruptedResolveEffect());
     }
 
-    public Soilshaper(UUID ownerId) {
-        super(ownerId, 243, "Soilshaper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Spirit");
-        this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-        Ability ability = new SpellCastTriggeredAbility(new BecomesCreatureTargetEffect(new SoilshaperToken(), "land", Duration.EndOfTurn), filter, false);
-        ability.addTarget(new TargetLandPermanent());
-        this.addAbility(ability);
-    }
-
-    public Soilshaper(final Soilshaper card) {
+    public CorruptedResolve(final CorruptedResolve card) {
         super(card);
     }
 
     @Override
-    public Soilshaper copy() {
-        return new Soilshaper(this);
+    public CorruptedResolve copy() {
+        return new CorruptedResolve(this);
     }
-
 }
 
-class SoilshaperToken extends Token {
+class CorruptedResolveEffect extends OneShotEffect<CorruptedResolveEffect> {
+    CorruptedResolveEffect() {
+        super(Constants.Outcome.Detriment);
+        staticText = "Counter target spell if its controller is poisoned";
+    }
 
-	public SoilshaperToken() {
-		super("", "3/3 creature");
-		this.cardType.add(CardType.CREATURE);
+    CorruptedResolveEffect(final CorruptedResolveEffect effect) {
+        super(effect);
+    }
 
-		this.power = new MageInt(3);
-		this.toughness = new MageInt(3);
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Spell spell = game.getStack().getSpell(targetPointer.getFirst(source));
+        if (spell != null) {
+            Player player = game.getPlayer(spell.getControllerId());
+            if (player != null && player.getCounters().containsKey(CounterType.POISON))
+                return game.getStack().counter(targetPointer.getFirst(source), source.getSourceId(), game);
+        }
+        return false;
+    }
+
+    @Override
+    public CorruptedResolveEffect copy() {
+        return new CorruptedResolveEffect(this);
+    }
 }
