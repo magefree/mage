@@ -40,6 +40,7 @@ import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.keyword.LevelAbility;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -100,7 +101,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 		this.power = card.getPower();
 		this.toughness = card.getToughness();
 		if (card instanceof LevelerCard) {
-			LevelAbility level = ((LevelerCard)card).getLevel(this.getCounters().getCount("Level"));
+			LevelAbility level = ((LevelerCard)card).getLevel(this.getCounters().getCount(CounterType.LEVEL));
 			if (level != null) {
 				this.power.setValue(level.getPower());
 				this.toughness.setValue(level.getToughness());

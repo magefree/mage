@@ -39,6 +39,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.counters.common.QuestCounter;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -118,7 +119,7 @@ class BeastmasterAscensionEffect extends BoostControlledEffect {
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (permanent != null && permanent.getCounters().getCount("quest") > 6) {
+		if (permanent != null && permanent.getCounters().getCount(CounterType.QUEST) > 6) {
 			super.apply(game, source);
 		}
 		return false;

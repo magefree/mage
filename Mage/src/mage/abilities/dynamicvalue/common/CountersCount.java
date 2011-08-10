@@ -26,7 +26,7 @@ public class CountersCount implements DynamicValue {
             p = (Permanent) game.getLastKnownInformation(sourceAbility.getSourceId(), Constants.Zone.BATTLEFIELD);
         }
         if (p != null) {
-            return p.getCounters().getCount(counter.getName());
+            return p.getCounters().getCount(counter);
         }
         return 0;
     }
