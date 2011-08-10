@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.TargetController;
+import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -109,7 +110,7 @@ public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<
 		return !notFilter;
 	}
 
-	public boolean match(Permanent permanent, UUID playerId, Game game) {
+	public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
 		if (!this.match(permanent))
 			return notFilter;
 
@@ -127,6 +128,13 @@ public class FilterPermanent<T extends FilterPermanent<T>> extends FilterObject<
 					if (permanent.getControllerId().equals(playerId))
 						return notFilter;
 					break;
+			}
+		}
+
+		if (another) {
+			// filter out itself
+			if (permanent.getId().equals(sourceId)) {
+				return notFilter;
 			}
 		}
 

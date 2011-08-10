@@ -89,7 +89,7 @@ public class CantTargetControlledEffect extends ReplacementEffectImpl<CantTarget
 		if (event.getType() == EventType.TARGET) {
 			filterTarget.setTargetController(TargetController.YOU);
 			Permanent permanent = game.getPermanent(event.getTargetId());
-			if (permanent != null && filterTarget.match(permanent, source.getControllerId(), game)) {
+			if (permanent != null && filterTarget.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
 				if (filterSource == null)
 					return true;
 				else {

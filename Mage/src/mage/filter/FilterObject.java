@@ -73,6 +73,11 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 	protected UUID id;
 	protected boolean notId;
 
+	/**
+	 * Indicates that filter shouldn't match the source.
+	 */
+	protected boolean another;
+
 	@Override
 	public FilterObject<E, T> copy() {
 		return new FilterObject<E, T>(this);
@@ -125,6 +130,7 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 		this.toughnessComparison = filter.toughnessComparison;
 		this.id = filter.id;
 		this.notId = filter.notId;
+		this.another = filter.another;
 	}
 
 	@Override
@@ -323,4 +329,11 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 		this.notId = notId;
 	}
 
+	public boolean isAnother() {
+		return another;
+	}
+
+	public void setAnother(boolean another) {
+		this.another = another;
+	}
 }

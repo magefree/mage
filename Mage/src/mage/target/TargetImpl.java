@@ -102,6 +102,9 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 			}
 			return sb.toString();
 		}
+		if (targetName.startsWith("another")) {
+			return "Select " + targetName;
+		}
 		return "Select a " + targetName;
 	}
 

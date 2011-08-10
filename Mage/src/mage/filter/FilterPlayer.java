@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.TargetController;
+import mage.abilities.Ability;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -67,7 +68,7 @@ public class FilterPlayer extends FilterImpl<Player, FilterPlayer> implements Fi
 		return !notFilter;
 	}
 
-	public boolean match(Player player, UUID playerId, Game game) {
+	public boolean match(Player player, UUID sourceId, UUID playerId, Game game) {
 		if (!this.match(player))
 			return notFilter;
 

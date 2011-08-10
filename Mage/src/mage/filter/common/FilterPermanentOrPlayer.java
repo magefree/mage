@@ -28,6 +28,7 @@
 
 package mage.filter.common;
 
+import mage.abilities.Ability;
 import mage.filter.FilterImpl;
 import mage.filter.FilterInPlay;
 import mage.filter.FilterPermanent;
@@ -81,11 +82,11 @@ public class FilterPermanentOrPlayer extends FilterImpl<Object, FilterPermanentO
 	}
 
 	@Override
-	public boolean match(Object o, UUID playerId, Game game) {
+	public boolean match(Object o, UUID sourceId, UUID playerId, Game game) {
 		if (o instanceof Player) {
-			return playerFilter.match((Player) o, playerId, game);
+			return playerFilter.match((Player) o, sourceId, playerId, game);
 		} else if (o instanceof Permanent) {
-			return permanentFilter.match((Permanent) o, playerId, game);
+			return permanentFilter.match((Permanent) o, sourceId, playerId, game);
 		}
 		return notFilter;
 	}

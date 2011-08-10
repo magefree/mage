@@ -82,9 +82,9 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 		if (permanent != null) {
 			if (source != null)
 				//TODO: check for replacement effects
-				return permanent.canBeTargetedBy(game.getObject(source.getSourceId())) && filter.match(permanent, controllerId, game);
+				return permanent.canBeTargetedBy(game.getObject(source.getSourceId())) && filter.match(permanent, source.getSourceId(), controllerId, game);
 			else
-				return filter.match(permanent, controllerId, game);
+				return filter.match(permanent, null, controllerId, game);
 		}
 		return false;
 	}

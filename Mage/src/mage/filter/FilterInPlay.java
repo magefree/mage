@@ -29,6 +29,8 @@
 package mage.filter;
 
 import java.util.UUID;
+
+import mage.abilities.Ability;
 import mage.game.Game;
 
 /**
@@ -37,7 +39,7 @@ import mage.game.Game;
  */
 public interface FilterInPlay<E> extends Filter<E> {
 
-	public boolean match(E o, UUID playerId, Game game);
+	public boolean match(E o, UUID sourceId, UUID playerId, Game game);
 	@Override
 	public FilterInPlay<E> copy();
 

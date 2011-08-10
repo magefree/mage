@@ -85,7 +85,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount<TargetCreatureOrP
 		MageObject targetSource = game.getObject(source.getSourceId());
 		if (permanent != null) {
 			if (source != null)
-				return permanent.canBeTargetedBy(targetSource) && filter.match(permanent, source.getControllerId(), game);
+				return permanent.canBeTargetedBy(targetSource) && filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
 			else
 				return filter.match(permanent);
 		}
@@ -111,7 +111,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount<TargetCreatureOrP
 			}
 		}
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
-			if (permanent.canBeTargetedBy(targetSource) && filter.match(permanent, sourceControllerId, game)) {
+			if (permanent.canBeTargetedBy(targetSource) && filter.match(permanent, sourceId, sourceControllerId, game)) {
 				count++;
 				if (count >= this.minNumberOfTargets)
 					return true;
@@ -132,7 +132,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount<TargetCreatureOrP
 			}
 		}
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
-			if (filter.match(permanent, sourceControllerId, game)) {
+			if (filter.match(permanent, null, sourceControllerId, game)) {
 				count++;
 				if (count >= this.minNumberOfTargets)
 					return true;
@@ -152,7 +152,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount<TargetCreatureOrP
 			}
 		}
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
-			if (permanent.canBeTargetedBy(targetSource) && filter.match(permanent, sourceControllerId, game)) {
+			if (permanent.canBeTargetedBy(targetSource) && filter.match(permanent, sourceId, sourceControllerId, game)) {
 				possibleTargets.add(permanent.getId());
 			}
 		}
@@ -169,7 +169,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount<TargetCreatureOrP
 			}
 		}
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(FilterCreaturePermanent.getDefault(), sourceControllerId, game)) {
-			if (filter.match(permanent, sourceControllerId, game)) {
+			if (filter.match(permanent, null, sourceControllerId, game)) {
 				possibleTargets.add(permanent.getId());
 			}
 		}

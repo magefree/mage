@@ -122,7 +122,7 @@ public class Battlefield implements Serializable {
 		int count = 0;
 		if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
 			for (Permanent permanent: field.values()) {
-				if (filter.match(permanent, sourcePlayerId, game)) {
+				if (filter.match(permanent, null, sourcePlayerId, game)) {
 					count++;
 				}
 			}
@@ -130,7 +130,7 @@ public class Battlefield implements Serializable {
 		else {
 			Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
 			for (Permanent permanent: field.values()) {
-				if (range.contains(permanent.getControllerId()) && filter.match(permanent, sourcePlayerId, game)) {
+				if (range.contains(permanent.getControllerId()) && filter.match(permanent, null, sourcePlayerId, game)) {
 					count++;
 				}
 			}
@@ -193,7 +193,7 @@ public class Battlefield implements Serializable {
 		int count = 0;
 		if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
 			for (Permanent permanent: field.values()) {
-				if (filter.match(permanent, sourcePlayerId, game)) {
+				if (filter.match(permanent, null, sourcePlayerId, game)) {
 					count++;
 					if (num == count)
 						return true;
@@ -203,7 +203,7 @@ public class Battlefield implements Serializable {
 		else {
 			Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
 			for (Permanent permanent: field.values()) {
-				if (range.contains(permanent.getControllerId()) && filter.match(permanent, sourcePlayerId, game)) {
+				if (range.contains(permanent.getControllerId()) && filter.match(permanent, null, sourcePlayerId, game)) {
 					count++;
 					if (num == count)
 						return true;
@@ -352,14 +352,14 @@ public class Battlefield implements Serializable {
 		List<Permanent> active = new ArrayList<Permanent>();
 		if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
 			for (Permanent perm: field.values()) {
-				if (perm.isPhasedIn() && filter.match(perm, sourcePlayerId, game))
+				if (perm.isPhasedIn() && filter.match(perm, null, sourcePlayerId, game))
 					active.add(perm);
 			}
 		}
 		else {
 			Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
 			for (Permanent perm: field.values()) {
-				if (perm.isPhasedIn() && range.contains(perm.getControllerId()) && filter.match(perm, sourcePlayerId, game))
+				if (perm.isPhasedIn() && range.contains(perm.getControllerId()) && filter.match(perm, null, sourcePlayerId, game))
 					active.add(perm);
 			}
 		}

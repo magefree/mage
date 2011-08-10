@@ -29,6 +29,8 @@
 package mage.filter.common;
 
 import java.util.UUID;
+
+import mage.abilities.Ability;
 import mage.filter.Filter;
 import mage.filter.FilterImpl;
 import mage.filter.FilterInPlay;
@@ -82,12 +84,12 @@ public class FilterCreatureOrPlayer extends FilterImpl<Object, FilterCreatureOrP
 	}
 
 	@Override
-	public boolean match(Object o, UUID playerId, Game game) {
+	public boolean match(Object o, UUID sourceId, UUID playerId, Game game) {
 		if (o instanceof Player) {
-			return playerFilter.match((Player)o, playerId, game);
+			return playerFilter.match((Player)o, sourceId, playerId, game);
 		}
 		else if (o instanceof Permanent) {
-			return creatureFilter.match((Permanent)o, playerId, game);
+			return creatureFilter.match((Permanent)o, sourceId, playerId, game);
 		}
 		return notFilter;
 	}
