@@ -267,8 +267,12 @@ public class TablesPanel extends javax.swing.JPanel {
         btnNewTable = new javax.swing.JButton();
         btnQuickStart = new javax.swing.JButton();
         btnNewTournament = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jSplitPane1 = new javax.swing.JSplitPane();
-	    chatPanel = new mage.client.chat.ChatPanel(true);
+        chatPanel = new mage.client.chat.ChatPanel(true);
         jScrollPane1 = new javax.swing.JScrollPane();
         tableTables = new javax.swing.JTable();
 
@@ -317,10 +321,50 @@ public class TablesPanel extends javax.swing.JPanel {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.setPreferredSize(new java.awt.Dimension(664, 39));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLabel1.setText("Message of the Day:");
+        jLabel1.setAlignmentY(0.3F);
+
+        jLabel2.setText("You are playing Mage version 0.7.5. Welcome! == Mage dev team ==");
+
+        jButton1.setText(">>");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addGap(22, 22, 22))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         jSplitPane1.setDividerSize(3);
         jSplitPane1.setResizeWeight(1.0);
 
-	    chatPanel.setMinimumSize(new java.awt.Dimension(100, 43));
+        chatPanel.setMinimumSize(new java.awt.Dimension(100, 43));
         jSplitPane1.setRightComponent(chatPanel);
 
         tableTables.setModel(this.tableModel);
@@ -334,6 +378,11 @@ public class TablesPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(47, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,40 +390,49 @@ public class TablesPanel extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(518, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-	private void btnNewTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTableActionPerformed
-		newTableDialog.showDialog(roomId);
-		if (newTableDialog.getTable() != null)
-			showTableWaitingDialog(roomId, newTableDialog.getTable().getTableId(), false);
+        private void btnNewTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTournamentActionPerformed
+            newTournamentDialog.showDialog(roomId);
+            if (newTournamentDialog.getTable() != null) {
+                showTableWaitingDialog(roomId, newTournamentDialog.getTable().getTableId(), true);
+            }
+}//GEN-LAST:event_btnNewTournamentActionPerformed
+
+        private void btnQuickStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartActionPerformed
+            TableView table;
+            try {
+                MatchOptions options = new MatchOptions("1", "Two Player Duel");
+                options.getPlayerTypes().add("Human");
+                options.getPlayerTypes().add("Computer - minimax");
+                options.setDeckType("Limited");
+                options.setAttackOption(MultiplayerAttackOption.LEFT);
+                options.setRange(RangeOfInfluence.ALL);
+                options.setWinsNeeded(1);
+                table = session.createTable(roomId,	options);
+                session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, Sets.loadDeck("test.dck"));
+                session.joinTable(roomId, table.getTableId(), "Computer", "Computer - minimax", 1, Sets.loadDeck("test.dck"));
+                session.startGame(roomId, table.getTableId());
+            } catch (Exception ex) {
+                handleError(ex);
+            }
+}//GEN-LAST:event_btnQuickStartActionPerformed
+
+        private void btnNewTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTableActionPerformed
+            newTableDialog.showDialog(roomId);
+            if (newTableDialog.getTable() != null)
+                showTableWaitingDialog(roomId, newTableDialog.getTable().getTableId(), false);
 }//GEN-LAST:event_btnNewTableActionPerformed
 
-	private void btnQuickStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartActionPerformed
-		TableView table;
-		try {
-			MatchOptions options = new MatchOptions("1", "Two Player Duel");
-			options.getPlayerTypes().add("Human");
-			options.getPlayerTypes().add("Computer - minimax");
-			options.setDeckType("Limited");
-			options.setAttackOption(MultiplayerAttackOption.LEFT);
-			options.setRange(RangeOfInfluence.ALL);
-			options.setWinsNeeded(1);
-			table = session.createTable(roomId,	options);
-			session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, Sets.loadDeck("test.dck"));
-			session.joinTable(roomId, table.getTableId(), "Computer", "Computer - minimax", 1, Sets.loadDeck("test.dck"));
-			session.startGame(roomId, table.getTableId());
-		} catch (Exception ex) {
-			handleError(ex);
-		}
-	}//GEN-LAST:event_btnQuickStartActionPerformed
-
-	private void btnNewTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTournamentActionPerformed
-		newTournamentDialog.showDialog(roomId);
-		if (newTournamentDialog.getTable() != null) {
-			showTableWaitingDialog(roomId, newTournamentDialog.getTable().getTableId(), true);
-		}
-	}//GEN-LAST:event_btnNewTournamentActionPerformed
+        private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            // TODO add your handling code here:
+        }//GEN-LAST:event_jButton1ActionPerformed
 
 	private void handleError(Exception ex) {
 		logger.fatal("Error loading deck: ", ex);
@@ -386,8 +444,12 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnNewTable;
     private javax.swing.JButton btnNewTournament;
     private javax.swing.JButton btnQuickStart;
+    private mage.client.chat.ChatPanel chatPanel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-	private ChatPanel chatPanel;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTable tableTables;
