@@ -45,6 +45,14 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySou
 
 	protected Ability ability;
 
+	/**
+	 * Add ability with Duration.WhileOnBattlefield
+	 * @param ability
+	 */
+	public GainAbilitySourceEffect(Ability ability) {
+		this(ability, Duration.WhileOnBattlefield);
+	}
+
 	public GainAbilitySourceEffect(Ability ability, Duration duration) {
 		super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
 		this.ability = ability;
