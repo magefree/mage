@@ -48,6 +48,7 @@ import mage.remote.Session;
 import mage.client.util.ButtonColumn;
 import mage.game.match.MatchOptions;
 import mage.sets.Sets;
+import mage.utils.CompressUtil;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
 
@@ -80,6 +81,8 @@ public class TablesPanel extends javax.swing.JPanel {
 	private NewTableDialog newTableDialog;
 	private NewTournamentDialog newTournamentDialog;
 	private Session session;
+	private List<String> messages;
+	private int currentMessage;
 
     /** Creates new form TablesPanel */
     public TablesPanel() {
@@ -227,7 +230,21 @@ public class TablesPanel extends javax.swing.JPanel {
 		else {
 			hideTables();
 		}
-		
+
+		// reload server messages
+		List<String> messages = session.getServerMessages();
+		synchronized (this) {
+			this.messages = messages;
+			this.currentMessage = 0;
+		}
+		if (messages == null || messages.isEmpty()) {
+			this.jPanel2.setVisible(false);
+		} else {
+			this.jPanel2.setVisible(true);
+			this.jLabel2.setText(messages.get(0));
+			this.jButton1.setVisible(messages.size() > 1);
+		}
+
 		MageFrame.getUI().addButton(MageComponents.NEW_GAME_BUTTON, btnNewTable);
 	}
 
@@ -278,10 +295,10 @@ public class TablesPanel extends javax.swing.JPanel {
 
         btnNewTable.setText("New Match");
         btnNewTable.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewTableActionPerformed(evt);
-            }
-        });
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnNewTableActionPerformed(evt);
+			}
+		});
 
         btnQuickStart.setText("Quick Start");
         btnQuickStart.addActionListener(new java.awt.event.ActionListener() {
@@ -292,74 +309,76 @@ public class TablesPanel extends javax.swing.JPanel {
 
         btnNewTournament.setText("New Tournament");
         btnNewTournament.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewTournamentActionPerformed(evt);
-            }
-        });
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnNewTournamentActionPerformed(evt);
+			}
+		});
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnNewTable)
-                .addGap(6, 6, 6)
-                .addComponent(btnNewTournament)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnQuickStart)
-                .addContainerGap(414, Short.MAX_VALUE))
-        );
+				jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(jPanel1Layout.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(btnNewTable)
+								.addGap(6, 6, 6)
+								.addComponent(btnNewTournament)
+								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(btnQuickStart)
+								.addContainerGap(414, Short.MAX_VALUE))
+		);
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNewTable)
-                    .addComponent(btnQuickStart)
-                    .addComponent(btnNewTournament))
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
+				jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(jPanel1Layout.createSequentialGroup()
+								.addContainerGap()
+								.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+										.addComponent(btnNewTable)
+										.addComponent(btnQuickStart)
+										.addComponent(btnNewTournament))
+								.addContainerGap(16, Short.MAX_VALUE))
+		);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.setPreferredSize(new java.awt.Dimension(664, 39));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Message of the Day:");
         jLabel1.setAlignmentY(0.3F);
 
-        jLabel2.setText("You are playing Mage version 0.7.5. Welcome! == Mage dev team ==");
+        jLabel2.setText("You are playing Mage version 0.7.5. Welcome! -- Mage dev team --");
 
-        jButton1.setText(">>");
+        jButton1.setText("Next");
+        jButton1.setMaximumSize(new java.awt.Dimension(55, 25));
+        jButton1.setMinimumSize(new java.awt.Dimension(55, 25));
+        jButton1.setPreferredSize(new java.awt.Dimension(55, 25));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jButton1ActionPerformed(evt);
+			}
+		});
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addGap(22, 22, 22))
-        );
+				jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(jPanel2Layout.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(jLabel1)
+								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
+								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addGap(22, 22, 22))
+		);
         jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+				jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(jPanel2Layout.createSequentialGroup()
+								.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+										.addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(jLabel2)
+										.addComponent(jLabel1))
+								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
 
         jSplitPane1.setDividerSize(3);
         jSplitPane1.setResizeWeight(1.0);
@@ -379,22 +398,21 @@ public class TablesPanel extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(47, Short.MAX_VALUE)))
+					.addGroup(layout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addContainerGap(47, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE))
+					.addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+					.addGap(0, 0, 0)
+					.addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
+					.addGap(0, 0, 0)
+					.addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(518, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+                .addGap(0, 607, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -424,15 +442,24 @@ public class TablesPanel extends javax.swing.JPanel {
             }
 }//GEN-LAST:event_btnQuickStartActionPerformed
 
-        private void btnNewTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTableActionPerformed
-            newTableDialog.showDialog(roomId);
-            if (newTableDialog.getTable() != null)
-                showTableWaitingDialog(roomId, newTableDialog.getTable().getTableId(), false);
-}//GEN-LAST:event_btnNewTableActionPerformed
+	private void btnNewTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTableActionPerformed
+		newTableDialog.showDialog(roomId);
+		if (newTableDialog.getTable() != null) {
+			showTableWaitingDialog(roomId, newTableDialog.getTable().getTableId(), false);
+		}
+	}//GEN-LAST:event_btnNewTableActionPerformed
 
-        private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            // TODO add your handling code here:
-        }//GEN-LAST:event_jButton1ActionPerformed
+	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+		synchronized (this) {
+			if (messages != null && !messages.isEmpty()) {
+				currentMessage++;
+				if (currentMessage >= messages.size()) {
+					currentMessage = 0;
+				}
+				this.jLabel2.setText(messages.get(currentMessage));
+			}
+		}
+	}//GEN-LAST:event_jButton1ActionPerformed
 
 	private void handleError(Exception ex) {
 		logger.fatal("Error loading deck: ", ex);

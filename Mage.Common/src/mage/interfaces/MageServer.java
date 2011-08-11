@@ -120,5 +120,7 @@ public interface MageServer {
 	public List<UserView> getUsers(String sessionId) throws MageException;
 	public void disconnectUser(String sessionId, String userSessionId) throws MageException;
 	public void removeTable(String sessionId, UUID tableId) throws MageException;
-	
+
+	// messages of the day
+	public Object getServerMessagesCompressed(String sessionId) throws MageException;
 }

@@ -1,0 +1,3 @@
+Welcome! You are playing Mage version 0.7.4.
+Mage 0.7.5 will be released at the end of this week.
+Find us on www.slightlymagic.net.

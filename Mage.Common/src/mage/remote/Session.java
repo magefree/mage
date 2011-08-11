@@ -46,6 +46,7 @@ import mage.interfaces.MageClient;
 import mage.interfaces.MageServer;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
+import mage.utils.CompressUtil;
 import mage.view.DraftPickView;
 import mage.view.GameTypeView;
 import mage.view.TableView;
@@ -835,6 +836,18 @@ public class Session {
 			handleMageException(ex);
 		} catch (Throwable t) {
 			handleThrowable(t);		
+		}
+		return null;
+	}
+
+	public List<String> getServerMessages() {
+		try {
+			if (isConnected())
+				return (List<String>) CompressUtil.decompress(server.getServerMessagesCompressed(sessionId));
+		} catch (MageException ex) {
+			handleMageException(ex);
+		} catch (Throwable t) {
+			handleThrowable(t);
 		}
 		return null;
 	}

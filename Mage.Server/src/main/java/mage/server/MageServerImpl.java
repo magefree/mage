@@ -49,7 +49,9 @@ import mage.server.game.PlayerFactory;
 import mage.server.game.ReplayManager;
 import mage.server.tournament.TournamentFactory;
 import mage.server.tournament.TournamentManager;
+import mage.server.util.ServerMessagesUtil;
 import mage.server.util.ThreadExecutor;
+import mage.utils.CompressUtil;
 import mage.utils.MageVersion;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.DraftPickView;
@@ -74,6 +76,7 @@ public class MageServerImpl implements MageServer {
 	public MageServerImpl(String password, boolean testMode) {
 		this.password = password;
 		this.testMode = testMode;
+		ServerMessagesUtil.getInstance().getMessages();
 	}
 
 	@Override
@@ -936,5 +939,18 @@ public class MageServerImpl implements MageServer {
 				handleException(ex);
 			}
 		}
+	}
+
+	@Override
+	public Object getServerMessagesCompressed(String sessionId) throws MageException {
+		if (SessionManager.getInstance().isValidSession(sessionId)) {
+			try {
+				return CompressUtil.compress(ServerMessagesUtil.getInstance().getMessages());
+			}
+			catch (Exception ex) {
+				handleException(ex);
+			}
+		}
+		return null;
 	}
 }
