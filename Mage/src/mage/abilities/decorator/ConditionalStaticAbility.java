@@ -64,13 +64,7 @@ public class ConditionalStaticAbility extends StaticAbility<ConditionalStaticAbi
 		if (!condition.apply(game, this)) {
 			return emptyEffects;
 		}
-		Effects typedEffects = new Effects();
-		for (Effect effect: getEffects()) {
-			if (effect.getEffectType() == effectType) {
-				typedEffects.add(effect);
-			}
-		}
-		return typedEffects;
+		return super.getEffects(game, effectType);
 	}
 
 	@Override
