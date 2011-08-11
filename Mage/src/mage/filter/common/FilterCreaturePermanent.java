@@ -74,8 +74,17 @@ public class FilterCreaturePermanent<T extends FilterCreaturePermanent<T>> exten
 			return notFilter;
 
 		if (useAttacking) {
-			if (permanent.isAttacking() == attacking) {
-				return !notFilter;
+			if (permanent.isAttacking() != attacking) { // failed checking
+				// for "target attacking OR blocking" filters
+				// we have to make sure it is not blocking before returning false
+				if (useBlocking) {
+					if ((permanent.getBlocking() > 0) != blocking) {
+						return notFilter;
+					}
+				} else {
+					// filter doesn't use 'blocking', so as checking for attacking failed return false
+					return notFilter;
+				}
 			}
         }
 
