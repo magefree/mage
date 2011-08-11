@@ -63,6 +63,7 @@ public class KuldothaFlamefiend extends CardImpl<KuldothaFlamefiend> {
         ability.addEffect(new DamageMultiEffect(4));
         ability.addTarget(new TargetCreatureOrPlayerAmount(4));
         ability.addTarget(new TargetArtifactPermanent());
+        this.addAbility(ability);
     }
 
     public KuldothaFlamefiend(final KuldothaFlamefiend card) {
