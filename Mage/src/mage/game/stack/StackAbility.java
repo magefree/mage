@@ -180,8 +180,8 @@ public class StackAbility implements StackObject, Ability {
 	}
 
 	@Override
-	public Effects getEffects(EffectType effectType) {
-		return ability.getEffects(effectType);
+	public Effects getEffects(Game game, EffectType effectType) {
+		return ability.getEffects(game, effectType);
 	}
 
 	@Override

@@ -33,9 +33,12 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlsPermanent;
 import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -48,7 +51,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class SejiriMerfolk extends CardImpl<SejiriMerfolk> {
 
-    private static final String rule = "As long as you control a Plains, Sejiri Merfolk has first strike and lifelink";
+    private static final String rule = "As long as you control a Plains, Sejiri Merfolk has first strike and lifelink.";
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Plains");
 
     static {
@@ -65,12 +68,9 @@ public class SejiriMerfolk extends CardImpl<SejiriMerfolk> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Constants.Duration.WhileOnBattlefield));
-        ability.addEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Constants.Duration.WhileOnBattlefield));
-
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(new GainAbilitySourceEffect(ability, Constants.Duration.WhileOnBattlefield),
-                new ControlsPermanent(filter), rule)));
+		Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(LifelinkAbility.getInstance()), new ControlsPermanent(filter), rule);
+		ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()));
+		this.addAbility(ability);
     }
 
     public SejiriMerfolk(final SejiriMerfolk card) {

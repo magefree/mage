@@ -263,7 +263,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 	}
 
 	@Override
-	public Effects getEffects(EffectType effectType) {
+	public Effects getEffects(Game game, EffectType effectType) {
 		Effects typedEffects = new Effects();
 		for (Effect effect: getEffects()) {
 			if (effect.getEffectType() == effectType) {

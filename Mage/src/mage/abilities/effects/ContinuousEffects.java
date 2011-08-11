@@ -210,7 +210,7 @@ public class ContinuousEffects implements Serializable {
 		for (Card card: game.getCards()) {
 			if (game.getZone(card.getId()) == Zone.HAND || game.getZone(card.getId()) == Zone.GRAVEYARD) {
 				for (Ability ability: card.getAbilities().getStaticAbilities(game.getZone(card.getId()))) {
-					for (Effect effect: ability.getEffects(EffectType.CONTINUOUS)) {
+					for (Effect effect: ability.getEffects(game, EffectType.CONTINUOUS)) {
 						layerEffects.add((ContinuousEffect) effect);
 						abilityMap.put(effect.getId(), ability);
 					}
@@ -219,7 +219,7 @@ public class ContinuousEffects implements Serializable {
 		}
 		for (Permanent permanent: game.getBattlefield().getAllPermanents()) {
 			for (Ability ability: permanent.getAbilities().getStaticAbilities(Zone.BATTLEFIELD)) {
-				for (Effect effect: ability.getEffects(EffectType.CONTINUOUS)) {
+				for (Effect effect: ability.getEffects(game, EffectType.CONTINUOUS)) {
 					layerEffects.add((ContinuousEffect) effect);
 					abilityMap.put(effect.getId(), ability);
 				}
@@ -243,7 +243,7 @@ public class ContinuousEffects implements Serializable {
 		//get all applicable Requirement effects on the battlefield
 		for (Permanent perm: game.getBattlefield().getActivePermanents(permanent.getControllerId(), game)) {
 			for (StaticAbility ability: perm.getAbilities().getStaticAbilities(Zone.BATTLEFIELD)) {
-				for (Effect effect: ability.getEffects(EffectType.REQUIREMENT)) {
+				for (Effect effect: ability.getEffects(game, EffectType.REQUIREMENT)) {
 					if (((RequirementEffect)effect).applies(permanent, ability, game)) {
 						effects.add((RequirementEffect) effect);
 						abilityMap.put(effect.getId(), ability);
@@ -263,7 +263,7 @@ public class ContinuousEffects implements Serializable {
 		//get all applicable Restriction effects on the battlefield
 		for (Permanent perm: game.getBattlefield().getActivePermanents(permanent.getControllerId(), game)) {
 			for (StaticAbility ability: perm.getAbilities().getStaticAbilities(Zone.BATTLEFIELD)) {
-				for (Effect effect: ability.getEffects(EffectType.RESTRICTION)) {
+				for (Effect effect: ability.getEffects(game, EffectType.RESTRICTION)) {
 					if (((RestrictionEffect)effect).applies(permanent, ability, game)) {
 						effects.add((RestrictionEffect) effect);
 						abilityMap.put(effect.getId(), ability);
@@ -292,14 +292,14 @@ public class ContinuousEffects implements Serializable {
 		for (Card card: game.getCards()) {
 			if (game.getZone(card.getId()) == Zone.HAND || game.getZone(card.getId()) == Zone.GRAVEYARD) {
 				for (Ability ability: card.getAbilities().getStaticAbilities(game.getZone(card.getId()))) {
-					for (Effect effect: ability.getEffects(EffectType.REPLACEMENT)) {
+					for (Effect effect: ability.getEffects(game, EffectType.REPLACEMENT)) {
 						ReplacementEffect rEffect = (ReplacementEffect) effect;
 						if (rEffect.applies(event, ability, game)) {
 							replaceEffects.add(rEffect);
 							abilityMap.put(rEffect.getId(), ability);
 						}
 					}
-					for (Effect effect: ability.getEffects(EffectType.PREVENTION)) {
+					for (Effect effect: ability.getEffects(game, EffectType.PREVENTION)) {
 						ReplacementEffect rEffect = (ReplacementEffect) effect;
 						if (rEffect.applies(event, ability, game)) {
 							replaceEffects.add(rEffect);
@@ -312,14 +312,14 @@ public class ContinuousEffects implements Serializable {
 		//get all applicable Replacement effects on the battlefield
 		for (Permanent permanent: game.getBattlefield().getAllPermanents()) {
 			for (Ability ability: permanent.getAbilities().getStaticAbilities(Zone.BATTLEFIELD)) {
-				for (Effect effect: ability.getEffects(EffectType.REPLACEMENT)) {
+				for (Effect effect: ability.getEffects(game, EffectType.REPLACEMENT)) {
 					ReplacementEffect rEffect = (ReplacementEffect) effect;
 					if (rEffect.applies(event, ability, game)) {
 						replaceEffects.add(rEffect);
 						abilityMap.put(rEffect.getId(), ability);
 					}
 				}
-				for (Effect effect: ability.getEffects(EffectType.PREVENTION)) {
+				for (Effect effect: ability.getEffects(game, EffectType.PREVENTION)) {
 					ReplacementEffect rEffect = (ReplacementEffect) effect;
 					if (rEffect.applies(event, ability, game)) {
 						replaceEffects.add(rEffect);
@@ -349,7 +349,7 @@ public class ContinuousEffects implements Serializable {
 	public boolean asThough(UUID objectId, AsThoughEffectType type, Game game) {
 		for (Permanent permanent: game.getBattlefield().getAllPermanents()) {
 			for (Ability ability: permanent.getAbilities().getStaticAbilities(Zone.BATTLEFIELD)) {
-				for (Effect effect: ability.getEffects(EffectType.ASTHOUGH)) {
+				for (Effect effect: ability.getEffects(game, EffectType.ASTHOUGH)) {
 					AsThoughEffect rEffect = (AsThoughEffect) effect;
 					if (rEffect.applies(objectId, ability, game)) {
 						return true;
@@ -373,8 +373,7 @@ public class ContinuousEffects implements Serializable {
 	/**
 	 * Inspects all {@link Permanent permanent's} {@link Ability abilities} on the battlefied
 	 * for {@link CostModificationEffect cost modification effects} and applies them if necessary.
-	 * 
-	 * @param objectId
+	 *
 	 * @param abilityToModify
 	 * @param game
 	 * @return
@@ -382,7 +381,7 @@ public class ContinuousEffects implements Serializable {
 	public void costModification ( Ability abilityToModify, Game game ) {
 		for ( Permanent permanent : game.getBattlefield().getAllPermanents() ) {
 			for ( Ability ability : permanent.getAbilities().getStaticAbilities(Zone.BATTLEFIELD) ) {
-				for ( Effect effect : ability.getEffects(EffectType.COSTMODIFICATION) ) {
+				for ( Effect effect : ability.getEffects(game, EffectType.COSTMODIFICATION) ) {
 					CostModificationEffect rEffect = (CostModificationEffect)effect;
 					if ( rEffect.applies(abilityToModify, ability, game) ) {
 						rEffect.apply(game, ability, abilityToModify);

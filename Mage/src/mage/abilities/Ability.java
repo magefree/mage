@@ -190,11 +190,12 @@ public interface Ability extends Serializable {
 	/**
 	 * Retrieves the effects of the specified {@link EffectType type} that are
 	 * put into place by the resolution of this ability.
-	 * 
+	 *
+	 * @param game
 	 * @param effectType The {@link EffectType type} to search for.
 	 * @return All {@link Effects} of the given {@link EffectType}.
 	 */
-	public Effects getEffects(EffectType effectType);
+	public Effects getEffects(Game game, EffectType effectType);
 	
 	/**
 	 * Adds an effect to this ability.
