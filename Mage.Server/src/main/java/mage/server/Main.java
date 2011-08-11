@@ -28,11 +28,11 @@
 
 package mage.server;
 
-import mage.server.util.PluginClassLoader;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.HashMap;
 import java.util.Map;
 import javax.management.MBeanServer;
 import mage.game.match.MatchType;
@@ -43,6 +43,7 @@ import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.PlayerFactory;
 import mage.server.tournament.TournamentFactory;
+import mage.server.util.PluginClassLoader;
 import mage.server.util.ConfigSettings;
 import mage.server.util.config.Plugin;
 import mage.server.util.config.GamePlugin;
@@ -59,6 +60,8 @@ import org.jboss.remoting.ServerInvoker;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 import org.jboss.remoting.callback.ServerInvokerCallbackHandler;
 import org.jboss.remoting.transport.Connector;
+import org.jboss.remoting.transport.socket.SocketWrapper;
+import org.jboss.remoting.transporter.TransporterClient;
 import org.jboss.remoting.transporter.TransporterServer;
 import org.w3c.dom.Element;
 
@@ -113,11 +116,16 @@ public class Main {
 		connection.setPort(config.getPort());
 		try {
 			InvokerLocator serverLocator = new InvokerLocator(connection.getURI());
-			server = new MageTransporterServer(serverLocator, new MageServerImpl(adminPassword, testMode), MageServer.class.getName(), new MageServerInvocationHandler());
-			server.start();
-			logger.info("Started MAGE server - listening on " + connection.toString());
-			if (testMode)
-				logger.info("MAGE server running in test mode");
+            if (!isAlreadyRunning(serverLocator)) {
+                server = new MageTransporterServer(serverLocator, new MageServerImpl(adminPassword, testMode), MageServer.class.getName(), new MageServerInvocationHandler());
+                server.start();
+                logger.info("Started MAGE server - listening on " + connection.toString());
+                if (testMode)
+                    logger.info("MAGE server running in test mode");
+            }
+            else {
+                logger.fatal("Unable to start MAGE server - another server is already started");
+            }
 		} catch (IOException ex) {
 			logger.fatal("Failed to start server - " + connection.toString(), ex);
 		} catch (Exception ex) {
@@ -126,6 +134,22 @@ public class Main {
 
     }
 
+    static boolean isAlreadyRunning(InvokerLocator serverLocator) {
+        Map<String, String> metadata = new HashMap<String, String>();
+		metadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
+		metadata.put("generalizeSocketException", "true");
+        try {
+            MageServer testServer = (MageServer) TransporterClient.createTransporterClient(serverLocator.getLocatorURI(), MageServer.class, metadata);
+            if (testServer != null) {
+                testServer.getServerState();
+                return true;
+            }
+        } catch (Throwable t) {
+            // assume server is not running
+        }
+        return false;
+    }
+    
 	static class ClientConnectionListener implements ConnectionListener {
 		@Override
 		public void handleConnectionException(Throwable throwable, Client client) {
