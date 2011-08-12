@@ -82,7 +82,7 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 				Permanent permanent = game.getPermanent((UUID)target.getTargets().get(idx));
 
 				if ( permanent != null ) {
-					abilityApplied |= permanent.sacrifice(source.getId(), game);
+					abilityApplied |= permanent.sacrifice(source.getSourceId(), game);
 				}
 			}
 
