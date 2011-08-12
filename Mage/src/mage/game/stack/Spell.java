@@ -49,7 +49,6 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.watchers.Watchers;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 import java.util.UUID;
@@ -292,7 +291,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
 	@Override
 	public void setFaceDown(boolean value) {
-		throw new NotImplementedException();
+		throw new RuntimeException("Not implemented.");
 	}
 
 	@Override
