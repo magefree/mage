@@ -64,7 +64,7 @@ public class BrinkOfDisaster extends CardImpl<BrinkOfDisaster> {
 	}
 
     public BrinkOfDisaster(UUID ownerId) {
-        super(ownerId, 52, ""Brink of Disaster, Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
+        super(ownerId, 52, "Brink of Disaster", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "WWK";
         this.subtype.add("Aura");
 
