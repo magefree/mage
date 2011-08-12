@@ -50,7 +50,7 @@ public class MelirasKeepers extends CardImpl<MelirasKeepers> {
 
 	public MelirasKeepers(UUID ownerId) {
 		super(ownerId, 83, "Melira's Keepers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
-		this.expansionSetCode = "M11";
+		this.expansionSetCode = "MBS";
 		this.subtype.add("Human");
 		this.subtype.add("Warrior");
 		this.color.setGreen(true);
