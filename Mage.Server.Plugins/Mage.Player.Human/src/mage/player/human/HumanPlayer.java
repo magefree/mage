@@ -35,6 +35,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import com.sun.corba.se.spi.monitoring.StatisticMonitoredAttribute;
 import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
 import mage.Constants.TargetController;
@@ -88,10 +89,12 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	protected static FilterCreatureForCombat filter = new FilterCreatureForCombat();
 	protected static Choice replacementEffectChoice = new ChoiceImpl(true);
+	private static Map<String, Serializable> staticOptions = new HashMap<String, Serializable>();
 
 	static {
 		filter.setTargetController(TargetController.YOU);
 		replacementEffectChoice.setMessage("Choose replacement effect");
+		staticOptions.put("UI.right.btn.text", "Done");
 	}
 	protected transient TargetCreaturePermanent targetCombat = new TargetCreaturePermanent(filter);
 
@@ -229,7 +232,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
 		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
-			game.fireSelectTargetEvent(playerId, target.getMessage(), target.possibleTargets(source==null?null:source.getId(), playerId, game), target.isRequired(), null);
+			game.fireSelectTargetEvent(playerId, target.getMessage(),
+					target.possibleTargets(source==null?null:source.getId(), playerId, game),
+					target.isRequired(), target.getNumberOfTargets() != target.getMaxNumberOfTargets() ? staticOptions : null);
 			waitForResponse();
 			if (response.getUUID() != null) {
 				if (target instanceof TargetPermanent) {
