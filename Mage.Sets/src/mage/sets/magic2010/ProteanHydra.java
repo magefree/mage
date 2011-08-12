@@ -46,7 +46,6 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.counters.common.PlusOneCounter;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -96,7 +95,7 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 			Permanent permanent = game.getPermanent(source.getSourceId());
 			if (permanent != null && source.getManaCostsToPay().getVariableCosts().size() > 0) {
 				int amount = source.getManaCostsToPay().getVariableCosts().get(0).getAmount();
-				permanent.addCounters(new PlusOneCounter(amount));
+				permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
 			}
 			return true;
 		}
@@ -141,7 +140,7 @@ public class ProteanHydra extends CardImpl<ProteanHydra> {
 			}
 			Permanent permanent = game.getPermanent(source.getSourceId());
 			if (permanent != null) {
-				permanent.removeCounters("+1/+1", damage, game);
+				permanent.removeCounters(CounterType.P1P1.createInstance(damage), game);
 			}
 			return retValue;
 		}

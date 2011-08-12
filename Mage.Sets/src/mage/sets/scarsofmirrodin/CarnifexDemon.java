@@ -94,7 +94,7 @@ class CarnifexDemonEffect extends OneShotEffect<CarnifexDemonEffect> {
         if (p != null) {
             for (Permanent t : game.getBattlefield().getAllActivePermanents()) {
                 if (t.getCardType().contains(CardType.CREATURE) && !t.getId().equals(source.getSourceId()))
-                    t.addCounters(CounterType.M1M1.createInstance());
+                    t.addCounters(CounterType.M1M1.createInstance(), game);
             }
         }
         return false;

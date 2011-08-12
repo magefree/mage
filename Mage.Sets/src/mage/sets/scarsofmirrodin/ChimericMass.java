@@ -94,7 +94,7 @@ class ChimericMassEffect extends OneShotEffect<ChimericMassEffect> {
         int amount = source.getManaCostsToPay().getVariableCosts().get(0).getAmount();
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
-            p.addCounters(CounterType.CHARGE.createInstance(amount));
+            p.addCounters(CounterType.CHARGE.createInstance(amount), game);
             return true;
         }
         return true;

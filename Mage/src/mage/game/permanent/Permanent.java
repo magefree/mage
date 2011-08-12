@@ -77,9 +77,10 @@ public interface Permanent extends Card {
 	public int damage(int damage, UUID sourceId, Game game, boolean preventable, boolean combat);
 	public void removeAllDamage(Game game);
 	public Counters getCounters();
-	public void addCounters(String name, int amount);
-	public void addCounters(Counter counter);
+	public void addCounters(String name, int amount, Game game);
+	public void addCounters(Counter counter, Game game);
 	public void removeCounters(String name, int amount, Game game);
+	public void removeCounters(Counter counter, Game game);
 	public void reset(Game game);
 	public boolean destroy(UUID sourceId, Game game, boolean noRegen);
 	public boolean sacrifice(UUID sourceId, Game game);

@@ -96,7 +96,7 @@ class GlisteningOilEffect extends OneShotEffect<GlisteningOilEffect> {
 		if (enchantment != null && enchantment.getAttachedTo() != null) {
 			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
 			if (creature != null) {
-				creature.addCounters(CounterType.M1M1.createInstance());
+				creature.addCounters(CounterType.M1M1.createInstance(), game);
 			}
 		}
 		return true;

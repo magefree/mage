@@ -80,7 +80,7 @@ public class ProliferateEffect extends OneShotEffect<ProliferateEffect> {
 					if (permanent.getCounters().size() > 0) {
 						if (permanent.getCounters().size() == 1) {
 							for (Counter counter : permanent.getCounters().values()) {
-								permanent.getCounters().addCounter(counter.getName(), 1);
+								permanent.addCounters(counter.getName(), 1, game);
 							}
 						} else {
 							Choice choice = new ChoiceImpl(true);
@@ -93,7 +93,7 @@ public class ProliferateEffect extends OneShotEffect<ProliferateEffect> {
 							controller.choose(Outcome.Benefit, choice, game);
 							for (Counter counter : permanent.getCounters().values()) {
 								if (counter.getName().equals(choice.getChoice())) {
-									permanent.getCounters().addCounter(counter.getName(), 1);
+									permanent.addCounters(counter.getName(), 1, game);
 									break;
 								}
 							}

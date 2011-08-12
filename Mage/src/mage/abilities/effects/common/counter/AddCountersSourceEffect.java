@@ -59,7 +59,7 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
 		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
 			if (counter != null) {
-				permanent.addCounters(counter.copy());
+				permanent.addCounters(counter.copy(), game);
 			}
 		}
 		return true;

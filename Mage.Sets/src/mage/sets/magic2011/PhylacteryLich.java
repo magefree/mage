@@ -48,7 +48,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -140,7 +139,7 @@ class PhylacteryLichEffect extends OneShotEffect<PhylacteryLichEffect> {
 				if (player.choose(Outcome.Neutral, target, game)) {
 					Permanent permanent = game.getPermanent(target.getFirstTarget());
 					if (permanent != null) {
-						permanent.addCounters(new Counter("phylactery"));
+						permanent.addCounters(new Counter("phylactery"), game);
 					}
 				}
 			}

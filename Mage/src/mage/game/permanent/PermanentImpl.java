@@ -157,13 +157,19 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	}
 
 	@Override
-	public void addCounters(String name, int amount) {
-		counters.addCounter(name, amount);
+	public void addCounters(String name, int amount, Game game) {
+		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, controllerId))) {
+            counters.addCounter(name, amount);
+            game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, objectId, controllerId));
+        }
 	}
 
 	@Override
-	public void addCounters(Counter counter) {
-		counters.addCounter(counter);
+	public void addCounters(Counter counter, Game game) {
+		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, controllerId))) {
+    		counters.addCounter(counter);
+            game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, objectId, controllerId));
+        }
 	}
 
 	@Override
@@ -173,6 +179,11 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		event.setData(name);
 		for (int i = 0; i < amount; i++)
 			game.fireEvent(event);
+	}
+
+    @Override
+	public void removeCounters(Counter counter, Game game) {
+		removeCounters(counter.getName(), counter.getCount(), game);
 	}
 
 	@Override
@@ -533,7 +544,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 				Permanent source = game.getPermanent(sourceId);
 				if (source != null && (source.getAbilities().containsKey(InfectAbility.getInstance().getId())
 						|| source.getAbilities().containsKey(WitherAbility.getInstance().getId()))) {
-					addCounters(CounterType.M1M1.createInstance(actualDamage));
+					addCounters(CounterType.M1M1.createInstance(actualDamage), game);
 				} else {
 					this.damage += actualDamage;
 				}

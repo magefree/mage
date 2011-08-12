@@ -81,7 +81,7 @@ class BlackSunsZenithEffect extends OneShotEffect<BlackSunsZenithEffect> {
         int amount = source.getManaCostsToPay().getVariableCosts().get(0).getAmount();
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
             if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
-                permanent.addCounters(CounterType.M1M1.createInstance(amount));
+                permanent.addCounters(CounterType.M1M1.createInstance(amount), game);
             }
         }
         return true;
