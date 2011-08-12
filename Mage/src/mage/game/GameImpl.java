@@ -45,9 +45,7 @@ import mage.filter.common.*;
 import mage.game.combat.Combat;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
-import mage.game.permanent.Battlefield;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
+import mage.game.permanent.*;
 import mage.game.stack.SpellStack;
 import mage.game.stack.StackObject;
 import mage.game.turn.Phase;
@@ -62,7 +60,7 @@ import mage.watchers.Watcher;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
-import mage.game.permanent.PermanentImpl;
+
 import org.apache.log4j.Logger;
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
@@ -204,6 +202,23 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			}
 		}
 
+		return null;
+	}
+
+	@Override
+	public UUID getControllerId(UUID objectId) {
+		if (objectId == null) {
+			return null;
+		}
+		MageObject object = getObject(objectId);
+		if (object != null) {
+			if (object instanceof Permanent) {
+				return ((Permanent)object).getControllerId();
+			}
+			if (object instanceof Card) {
+				return ((Card)object).getOwnerId();
+			}
+		}
 		return null;
 	}
 
