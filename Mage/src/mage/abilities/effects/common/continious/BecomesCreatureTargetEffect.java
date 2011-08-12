@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common.continious;
 
+import mage.Constants;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
@@ -72,10 +73,19 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl<BecomesCre
 			switch (layer) {
 				case TypeChangingEffects_4:
 					if (sublayer == SubLayer.NA) {
-						if (token.getCardType().size() > 0)
-							permanent.getCardType().addAll(token.getCardType());
-						if (token.getSubtype().size() > 0)
+						if (token.getCardType().size() > 0) {
+							for (Constants.CardType t : token.getCardType()) {
+								if (!permanent.getCardType().contains(t)) {
+									permanent.getCardType().add(t);
+								}
+							}
+						}
+						if (type == null) {
+							permanent.getSubtype().clear();
+						}
+						if (token.getSubtype().size() > 0) {
 							permanent.getSubtype().addAll(token.getSubtype());
+						}
 					}
 					break;
 				case ColorChangingEffects_5:
@@ -120,7 +130,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl<BecomesCre
         StringBuilder sb = new StringBuilder();
 		sb.append(duration.toString());
         sb.append(" target ").append(mode.getTargets().get(0).getTargetName()).append(" becomes a ").append(token.getDescription());
-		if (type.length() > 0)
+		if (type != null && type.length() > 0)
 			sb.append(" that's still a ").append(type);
         return sb.toString();
     }

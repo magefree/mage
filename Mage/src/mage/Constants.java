@@ -303,6 +303,7 @@ public final class Constants {
 		BoostCreature(true),
 		UnboostCreature(false),
 		AddAbility(true),
+		LoseAbility(false),
 		GainLife(true),
 		ExtraTurn(true),
 		BecomeCreature(true),
