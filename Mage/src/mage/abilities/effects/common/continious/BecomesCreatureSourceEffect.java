@@ -74,13 +74,19 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl<BecomesCre
 			switch (layer) {
 				case TypeChangingEffects_4:
 					if (sublayer == SubLayer.NA) {
-						if (token.getCardType().size() > 0)
+						if (token.getCardType().size() > 0) {
                             for (Constants.CardType t : token.getCardType()) {
-                                if (!permanent.getCardType().contains(t))
+                                if (!permanent.getCardType().contains(t)) {
                                     permanent.getCardType().add(t);
+								}
                             }
-						if (token.getSubtype().size() > 0)
+						}
+						if (type == null) {
+							permanent.getSubtype().clear();
+						}
+						if (token.getSubtype().size() > 0) {
 							permanent.getSubtype().addAll(token.getSubtype());
+						}
 					}
 					break;
 				case ColorChangingEffects_5:
