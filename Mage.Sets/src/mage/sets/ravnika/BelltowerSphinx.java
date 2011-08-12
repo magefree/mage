@@ -31,19 +31,15 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -79,7 +75,7 @@ public class BelltowerSphinx extends CardImpl<BelltowerSphinx> {
 class BelltowerSphinxEffect extends TriggeredAbilityImpl<BelltowerSphinxEffect> {
 
 	public BelltowerSphinxEffect() {
-		super(Constants.Zone.BATTLEFIELD, null);
+		super(Constants.Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(0));
 	}
 
 	public BelltowerSphinxEffect(BelltowerSphinxEffect effect) {
@@ -94,18 +90,12 @@ class BelltowerSphinxEffect extends TriggeredAbilityImpl<BelltowerSphinxEffect> 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE && event.getTargetId().equals(this.sourceId)) {
-			MageObject object = game.getObject(event.getSourceId());
-			if (object != null && object instanceof Card) {
-				Player player = game.getPlayer(((Card)object).getOwnerId());
+			UUID controller = game.getControllerId(event.getSourceId());
+			if (controller != null) {
+				Player player = game.getPlayer(controller);
 				if (player != null) {
-					int cardsCount = Math.min(event.getAmount(), player.getLibrary().size());
-					for (int i = 0; i < cardsCount; i++) {
-						Card card = player.getLibrary().removeFromTop(game);
-						if (card != null)
-							card.moveToZone(Constants.Zone.GRAVEYARD, this.id, game, false);
-						else
-							break;
-					}
+					getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
+					((PutLibraryIntoGraveTargetEffect) getEffects().get(0)).setAmount(new StaticValue(event.getAmount()));
 					return true;
 				}
 			}
