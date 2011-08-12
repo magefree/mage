@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
 public class WistfulSelkie extends CardImpl<WistfulSelkie> {
 
     public WistfulSelkie (UUID ownerId) {
-        super(ownerId, 165, "Wistful Selkie", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B/G}{B/G}{B/G}");
+        super(ownerId, 165, "Wistful Selkie", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G/U}{G/U}{G/U}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
