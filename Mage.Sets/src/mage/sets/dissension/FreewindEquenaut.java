@@ -78,7 +78,7 @@ public class FreewindEquenaut extends CardImpl<FreewindEquenaut> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinousEffect(
                 new GainAbilitySourceEffect(ability, Duration.WhileOnBattlefield),
-                new Enchanted(),
+                Enchanted.getInstance(),
                 "As long as {this} is enchanted, it has \"{tap}: {this} deals 2 damage to target attacking or blocking creature\"")));
     }
 

@@ -59,7 +59,7 @@ public class SkyriderTrainee extends CardImpl<SkyriderTrainee> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinousEffect(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
-                new Enchanted(),
+                Enchanted.getInstance(),
                 "{this} has flying as long as it's enchanted")));
     }
 

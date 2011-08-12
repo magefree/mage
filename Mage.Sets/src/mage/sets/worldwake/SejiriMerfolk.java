@@ -51,11 +51,11 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class SejiriMerfolk extends CardImpl<SejiriMerfolk> {
 
-    private static final String rule = "As long as you control a Plains, Sejiri Merfolk has first strike and lifelink.";
-    private static final FilterLandPermanent filter = new FilterLandPermanent("a Plains");
+    private static final String rule = "As long as you control a Plains, {this} has first strike and lifelink.";
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Plains");
 
     static {
-        filter.getName().add("Plains");
+        filter.getSubtype().add("Plains");
     }
 
     public SejiriMerfolk(UUID ownerId) {
@@ -68,9 +68,9 @@ public class SejiriMerfolk extends CardImpl<SejiriMerfolk> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-		Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(LifelinkAbility.getInstance()), new ControlsPermanent(filter), rule);
-		ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()));
-		this.addAbility(ability);
+        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(LifelinkAbility.getInstance()), new ControlsPermanent(filter), rule);
+        ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()));
+        this.addAbility(ability);
     }
 
     public SejiriMerfolk(final SejiriMerfolk card) {

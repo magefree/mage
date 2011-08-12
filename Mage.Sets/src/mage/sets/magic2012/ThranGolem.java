@@ -33,9 +33,9 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.Ability;
 import mage.abilities.condition.common.Enchanted;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalStaticAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -49,6 +49,8 @@ import mage.cards.CardImpl;
  */
 public class ThranGolem extends CardImpl<ThranGolem> {
 
+    private static final String rule = "As long as {this} is enchanted, it gets +2/+2 and has flying, first strike, and trample.";
+
     public ThranGolem(UUID ownerId) {
         super(ownerId, 220, "Thran Golem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
         this.expansionSetCode = "M12";
@@ -57,27 +59,11 @@ public class ThranGolem extends CardImpl<ThranGolem> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // As long as Thran Golem is enchanted, it gets +2/+2 and has flying, first strike, and trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(
-                new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield),
-                new Enchanted(),
-                "As long as {this} is enchanted, it gets +2/+2")));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(
-                new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
-                new Enchanted(),
-                "As long as {this} is enchanted, it has flying")));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(
-                new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
-                new Enchanted(),
-                "As long as {this} is enchanted, it has first strike")));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(
-                new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
-                new Enchanted(),
-                "As long as {this} is enchanted, it has trample")));
+        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), Enchanted.getInstance(), rule);
+        ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()));
+        ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()));
+        ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()));
+        this.addAbility(ability);
     }
 
     public ThranGolem(final ThranGolem card) {

@@ -25,19 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.Ability;
 import mage.abilities.condition.common.Equipped;
-import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.decorator.ConditionalStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -49,26 +47,24 @@ import mage.cards.CardImpl;
  */
 public class SunspearShikari extends CardImpl<SunspearShikari> {
 
-	private final static String TEXT = "As long as Sunspear Shikari is equipped, it has first strike";
-	private final static String TEXT2 = "As long as Sunspear Shikari is equipped, it has lifelink";
+    private final static String rule = "As long as {this} is equipped, it has first strike and lifelink.";
 
-	public SunspearShikari (UUID ownerId) {
+    public SunspearShikari(UUID ownerId) {
         super(ownerId, 23, "Sunspear Shikari", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Cat");
         this.subtype.add("Soldier");
-        
-		this.color.setWhite(true);
+
+        this.color.setWhite(true);
         this.power = new MageInt(2);
-      	this.toughness = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-		ContinuousEffect effect = new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Constants.Duration.WhileOnBattlefield);
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(effect, Equipped.getInstance(), TEXT)));
-		ContinuousEffect effect2 = new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Constants.Duration.WhileOnBattlefield);
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(effect2, Equipped.getInstance(), TEXT2)));
-	}
+        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), Equipped.getInstance(), rule);
+        ability.addEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance()));
+        this.addAbility(ability);
+    }
 
-    public SunspearShikari (final SunspearShikari card) {
+    public SunspearShikari(final SunspearShikari card) {
         super(card);
     }
 
@@ -76,5 +72,4 @@ public class SunspearShikari extends CardImpl<SunspearShikari> {
     public SunspearShikari copy() {
         return new SunspearShikari(this);
     }
-
 }

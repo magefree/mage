@@ -33,10 +33,9 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.Ability;
 import mage.abilities.condition.common.TenOrLessLife;
-import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.decorator.ConditionalStaticAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.IntimidateAbility;
@@ -44,9 +43,11 @@ import mage.cards.CardImpl;
 
 /**
  *
- * @author North, nantuko
+ * @author North
  */
 public class GuulDrazVampire extends CardImpl<GuulDrazVampire> {
+
+    private static final String rule = "As long as an opponent has 10 or less life, {this} gets +2/+1 and has intimidate.";
 
     public GuulDrazVampire(UUID ownerId) {
         super(ownerId, 93, "Guul Draz Vampire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
@@ -58,11 +59,9 @@ public class GuulDrazVampire extends CardImpl<GuulDrazVampire> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        ContinuousEffect effect = new GainAbilitySourceEffect(IntimidateAbility.getInstance(), Duration.WhileOnBattlefield);
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect, new TenOrLessLife(TenOrLessLife.CheckType.AN_OPPONENT), "As long as an opponent has 10 or less life, Guul Draz Vampire has intimidate"));
-		ContinuousEffect effect2 = new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield);
-		ability.addEffect(new ConditionalContinousEffect(effect2, new TenOrLessLife(TenOrLessLife.CheckType.AN_OPPONENT), "As long as an opponent has 10 or less life, Guul Draz Vampire gets +2/+1"));
-		this.addAbility(ability);
+        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield), new TenOrLessLife(TenOrLessLife.CheckType.AN_OPPONENT), rule);
+        ability.addEffect(new GainAbilitySourceEffect(IntimidateAbility.getInstance()));
+        this.addAbility(ability);
     }
 
     public GuulDrazVampire(final GuulDrazVampire card) {

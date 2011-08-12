@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
  */
 public class Enchanted implements Condition {
 
-    private static Equipped fInstance = new Equipped();
+    private static Enchanted fInstance = new Enchanted();
 
     public static Condition getInstance() {
         return fInstance;

@@ -29,13 +29,14 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.Ability;
 import mage.abilities.condition.common.Equipped;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalStaticAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -47,17 +48,21 @@ import mage.cards.CardImpl;
  */
 public class KitesailApprentice extends CardImpl<KitesailApprentice> {
 
+    private static final String rule = "As long as {this} is equipped, it gets +1/+1 and has flying.";
+
     public KitesailApprentice(UUID ownerId) {
         super(ownerId, 10, "Kitesail Apprentice", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
         this.expansionSetCode = "WWK";
         this.subtype.add("Kor");
         this.subtype.add("Soldier");
+
         this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostSourceEffect(1, 1, Constants.Duration.WhileOnBattlefield), Equipped.getInstance(), "As long as Kitesail Apprentice is equipped, it gets +1/+1")));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.WhileOnBattlefield), Equipped.getInstance(), "As long as Kitesail Apprentice is equipped, it has flying")));
+        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), Equipped.getInstance(), rule);
+        ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()));
+        this.addAbility(ability);
     }
 
     public KitesailApprentice(final KitesailApprentice card) {
