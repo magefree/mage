@@ -62,7 +62,7 @@ public class SilentChantZubera extends CardImpl<SilentChantZubera> {
         this.toughness = new MageInt(2);
         Ability ability = new DiesTriggeredAbility(new GainLifeEffect(new SilentChantZuberaDynamicValue()));
         this.addAbility(ability);
-        this.watchers.add(new AshenSkinZuberaWatcher(ownerId));
+        this.addWatcher(new AshenSkinZuberaWatcher());
     }
 
     public SilentChantZubera (final SilentChantZubera card) {
@@ -80,8 +80,8 @@ class SilentChantZuberaWatcher extends WatcherImpl<SilentChantZuberaWatcher> {
 
     public int zuberasDiedThisTurn = 0;
 
-    public SilentChantZuberaWatcher(UUID controllerId) {
-        super("ZuberasDiedSilentChantZubera", controllerId);
+    public SilentChantZuberaWatcher() {
+        super("ZuberasDiedSilentChantZubera");
     }
 
     public SilentChantZuberaWatcher(final SilentChantZuberaWatcher watcher) {

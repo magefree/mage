@@ -60,7 +60,7 @@ public class BloodcrazedGoblin extends CardImpl<BloodcrazedGoblin> {
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
 
-		this.watchers.add(new BloodcrazedGoblinWatcher(ownerId));
+		this.addWatcher(new BloodcrazedGoblinWatcher());
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodcrazedGoblinEffect()));
 	}
 
@@ -77,8 +77,8 @@ public class BloodcrazedGoblin extends CardImpl<BloodcrazedGoblin> {
 
 class BloodcrazedGoblinWatcher extends WatcherImpl<BloodcrazedGoblinWatcher> {
 
-	public BloodcrazedGoblinWatcher(UUID controllerId) {
-		super("OpponentDamaged", controllerId);
+	public BloodcrazedGoblinWatcher() {
+		super("OpponentDamaged");
 	}
 
 	public BloodcrazedGoblinWatcher(final BloodcrazedGoblinWatcher watcher) {

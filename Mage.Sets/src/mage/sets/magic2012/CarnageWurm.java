@@ -52,7 +52,7 @@ public class CarnageWurm extends CardImpl<CarnageWurm> {
         this.toughness = new MageInt(6);
 
         this.addAbility(new BloodthirstAbility(3));
-        this.watchers.add(new BloodthirstWatcher(ownerId));
+        this.addWatcher(new BloodthirstWatcher());
         this.addAbility(TrampleAbility.getInstance());
     }
 

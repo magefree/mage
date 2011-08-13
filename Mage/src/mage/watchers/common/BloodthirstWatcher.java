@@ -5,15 +5,13 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.watchers.WatcherImpl;
 
-import java.util.UUID;
-
 /**
  * Must be installed to card for proper Bloodthirst work
  * @author Loki
  */
 public class BloodthirstWatcher extends WatcherImpl<BloodthirstWatcher> {
-    public BloodthirstWatcher(UUID controllerId) {
-        super("DamagedOpponents", controllerId);
+    public BloodthirstWatcher() {
+        super("DamagedOpponents");
     }
 
     public BloodthirstWatcher(final BloodthirstWatcher watcher) {

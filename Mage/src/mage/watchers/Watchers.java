@@ -59,6 +59,18 @@ public class Watchers extends ArrayList<Watcher> {
 		}
 	}
 
+    public void setSourceId(UUID sourceId) {
+		for (Watcher watcher: this) {
+			watcher.setSourceId(sourceId);
+		}
+    }
+    
+    public void setControllerId(UUID controllerId) {
+		for (Watcher watcher: this) {
+			watcher.setControllerId(controllerId);
+		}
+    }
+    
 	public Watcher get(UUID controllerId, String key) {
 		for (Watcher watcher: this) {
 			if (watcher.getControllerId().equals(controllerId) && watcher.getKey().equals(key))

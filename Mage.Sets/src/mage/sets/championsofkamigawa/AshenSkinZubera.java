@@ -63,7 +63,7 @@ public class AshenSkinZubera extends CardImpl<AshenSkinZubera> {
         Ability ability = new DiesTriggeredAbility(new DiscardTargetEffect(new AshenSkinZuberaDynamicValue()));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
-        this.watchers.add(new AshenSkinZuberaWatcher(ownerId));
+        this.addWatcher(new AshenSkinZuberaWatcher());
     }
 
     public AshenSkinZubera(final AshenSkinZubera card) {
@@ -81,8 +81,8 @@ class AshenSkinZuberaWatcher extends WatcherImpl<AshenSkinZuberaWatcher> {
 
     public int zuberasDiedThisTurn = 0;
 
-    public AshenSkinZuberaWatcher(UUID controllerId) {
-        super("ZuberasDiedAshenSkinZubera", controllerId);
+    public AshenSkinZuberaWatcher() {
+        super("ZuberasDiedAshenSkinZubera");
     }
 
     public AshenSkinZuberaWatcher(final AshenSkinZuberaWatcher watcher) {

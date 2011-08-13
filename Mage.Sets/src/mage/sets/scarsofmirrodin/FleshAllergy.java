@@ -65,7 +65,7 @@ public class FleshAllergy extends CardImpl<FleshAllergy> {
 		this.getSpellAbility().addEffect(new DestroyTargetEffect());
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 		this.getSpellAbility().addEffect(new FleshAllergyEffect());
-		this.watchers.add(new FleshAllergyWatcher(ownerId));
+		this.addWatcher(new FleshAllergyWatcher());
     }
 
     public FleshAllergy (final FleshAllergy card) {
@@ -82,8 +82,8 @@ class FleshAllergyWatcher extends WatcherImpl<FleshAllergyWatcher> {
 
 	public int creaturesDiedThisTurn = 0;
 
-	public FleshAllergyWatcher(UUID controllerId) {
-		super("CreaturesDiedFleshAllergy", controllerId);
+	public FleshAllergyWatcher() {
+		super("CreaturesDiedFleshAllergy");
 	}
 
 	public FleshAllergyWatcher(final FleshAllergyWatcher watcher) {

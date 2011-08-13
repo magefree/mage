@@ -61,7 +61,7 @@ public class SearingBlaze extends CardImpl<SearingBlaze> {
 		//TODO: change this to only allow creatures controlled by first target
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 		this.getSpellAbility().addEffect(new SearingBlazeEffect());
-		this.watchers.add(new SearingBlazeWatcher(ownerId));
+		this.addWatcher(new SearingBlazeWatcher());
 	}
 
 	public SearingBlaze(final SearingBlaze card) {
@@ -77,8 +77,8 @@ public class SearingBlaze extends CardImpl<SearingBlaze> {
 
 class SearingBlazeWatcher extends WatcherImpl<SearingBlazeWatcher> {
 
-	public SearingBlazeWatcher(UUID controllerId) {
-		super("LandPlayed", controllerId);
+	public SearingBlazeWatcher() {
+		super("LandPlayed");
 	}
 
 	public SearingBlazeWatcher(final SearingBlazeWatcher watcher) {

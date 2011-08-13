@@ -62,7 +62,7 @@ public class DrippingTongueZubera extends CardImpl<DrippingTongueZubera> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiritToken(), new DrippingTongueZuberaDynamicValue()), false));
-        this.watchers.add(new DrippingTongueZuberaWatcher(ownerId));
+        this.addWatcher(new DrippingTongueZuberaWatcher());
     }
 
     public DrippingTongueZubera (final DrippingTongueZubera card) {
@@ -80,8 +80,8 @@ class DrippingTongueZuberaWatcher extends WatcherImpl<DrippingTongueZuberaWatche
 
     public int zuberasDiedThisTurn = 0;
 
-    public DrippingTongueZuberaWatcher(UUID controllerId) {
-        super("ZuberasDiedDrippingTongueZubera", controllerId);
+    public DrippingTongueZuberaWatcher() {
+        super("ZuberasDiedDrippingTongueZubera");
     }
 
     public DrippingTongueZuberaWatcher(final DrippingTongueZuberaWatcher watcher) {

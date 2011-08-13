@@ -39,18 +39,19 @@ import java.util.UUID;
 public abstract class WatcherImpl<T extends WatcherImpl<T>> implements Watcher<T> {
 
 	protected UUID controllerId;
+    protected UUID sourceId;
 	protected String key;
 	protected boolean condition;
 
-	public WatcherImpl(String key, UUID controllerId) {
+	public WatcherImpl(String key) {
 		this.key = key;
-		this.controllerId = controllerId;
 	}
 
 	public WatcherImpl(final WatcherImpl watcher) {
 		this.condition = watcher.condition;
 		this.key = watcher.key;
 		this.controllerId = watcher.controllerId;
+        this.sourceId = watcher.sourceId;
 	}
 
 	@Override
@@ -63,6 +64,16 @@ public abstract class WatcherImpl<T extends WatcherImpl<T>> implements Watcher<T
 		this.controllerId = controllerId;
 	}
 
+    @Override
+    public UUID getSourceId() {
+        return sourceId;
+    }
+    
+    @Override
+    public void setSourceId(UUID sourceId) {
+        this.sourceId = sourceId;
+    }
+    
 	@Override
 	public String getKey() {
 		return key;

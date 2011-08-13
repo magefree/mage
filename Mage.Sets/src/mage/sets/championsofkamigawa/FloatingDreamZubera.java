@@ -60,7 +60,7 @@ public class FloatingDreamZubera extends CardImpl<FloatingDreamZubera> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         this.addAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(new FloatingDreamZuberaDynamicValue())));
-        this.watchers.add(new FloatingDreamZuberaWatcher(ownerId));
+        this.addWatcher(new FloatingDreamZuberaWatcher());
     }
 
     public FloatingDreamZubera(final FloatingDreamZubera card) {
@@ -79,8 +79,8 @@ class FloatingDreamZuberaWatcher extends WatcherImpl<FloatingDreamZuberaWatcher>
 
     public int zuberasDiedThisTurn = 0;
 
-    public FloatingDreamZuberaWatcher(UUID controllerId) {
-        super("ZuberasDiedFloatingDreamZubera", controllerId);
+    public FloatingDreamZuberaWatcher() {
+        super("ZuberasDiedFloatingDreamZubera");
     }
 
     public FloatingDreamZuberaWatcher(final FloatingDreamZuberaWatcher watcher) {

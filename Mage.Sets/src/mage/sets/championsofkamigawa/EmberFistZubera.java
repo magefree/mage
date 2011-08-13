@@ -64,7 +64,7 @@ public class EmberFistZubera extends CardImpl<EmberFistZubera> {
         Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(new EmberFistZuberaDynamicValue()));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
-        this.watchers.add(new EmberFistZuberaWatcher(ownerId));
+        this.addWatcher(new EmberFistZuberaWatcher());
     }
 
     public EmberFistZubera (final EmberFistZubera card) {
@@ -82,8 +82,8 @@ class EmberFistZuberaWatcher extends WatcherImpl<EmberFistZuberaWatcher> {
 
     public int zuberasDiedThisTurn = 0;
 
-    public EmberFistZuberaWatcher(UUID controllerId) {
-        super("ZuberasDiedEmberFistZubera", controllerId);
+    public EmberFistZuberaWatcher() {
+        super("ZuberasDiedEmberFistZubera");
     }
 
     public EmberFistZuberaWatcher(final EmberFistZuberaWatcher watcher) {

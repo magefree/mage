@@ -52,7 +52,7 @@ public class FurybornHellkite extends CardImpl<FurybornHellkite> {
         this.toughness = new MageInt(6);
 
         this.addAbility(new BloodthirstAbility(6));
-        this.watchers.add(new BloodthirstWatcher(ownerId));
+        this.addWatcher(new BloodthirstWatcher());
         this.addAbility(FlyingAbility.getInstance());
     }
 

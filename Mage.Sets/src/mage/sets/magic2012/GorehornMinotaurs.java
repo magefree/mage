@@ -52,7 +52,7 @@ public class GorehornMinotaurs extends CardImpl<GorehornMinotaurs> {
         this.toughness = new MageInt(3);
 
         this.addAbility(new BloodthirstAbility(2));
-        this.watchers.add(new BloodthirstWatcher(ownerId));
+        this.addWatcher(new BloodthirstWatcher());
     }
 
     public GorehornMinotaurs(final GorehornMinotaurs card) {

@@ -52,7 +52,7 @@ public class DuskhunterBat extends CardImpl<DuskhunterBat> {
         this.toughness = new MageInt(1);
 
         this.addAbility(new BloodthirstAbility(1));
-        this.watchers.add(new BloodthirstWatcher(ownerId));
+        this.addWatcher(new BloodthirstWatcher());
         this.addAbility(FlyingAbility.getInstance());
     }
 

@@ -48,6 +48,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
+import mage.watchers.Watcher;
 import mage.watchers.Watchers;
 import org.apache.log4j.Logger;
 
@@ -101,6 +102,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 		this.objectId = UUID.randomUUID();
 		this.abilities.newId();
 		this.abilities.setSourceId(objectId);
+        this.watchers.setSourceId(objectId);
 	}
 
 	public static Card createCard(String name) {
@@ -151,6 +153,13 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 		abilities.add(ability);
 	}
 	
+    @Override
+    public void addWatcher(Watcher watcher) {
+        watcher.setSourceId(this.getId());
+        watcher.setControllerId(this.ownerId);
+        watchers.add(watcher);
+    }
+    
 	@Override
 	public SpellAbility getSpellAbility() {
 		for (Ability ability: abilities.getActivatedAbilities(Zone.HAND)) {

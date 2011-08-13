@@ -52,6 +52,7 @@ import mage.watchers.Watchers;
 
 import java.util.List;
 import java.util.UUID;
+import mage.watchers.Watcher;
 
 /**
  *
@@ -249,6 +250,9 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	public void addAbility(Ability ability) {}
 
 	@Override
+	public void addWatcher(Watcher watcher) {}
+
+    @Override
 	public SpellAbility getSpellAbility() {
 		return ability;
 	}

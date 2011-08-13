@@ -52,7 +52,7 @@ public class BloodOgre extends CardImpl<BloodOgre> {
         this.toughness = new MageInt(2);
 
         this.addAbility(new BloodthirstAbility(1));
-        this.watchers.add(new BloodthirstWatcher(ownerId));
+        this.addWatcher(new BloodthirstWatcher());
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 

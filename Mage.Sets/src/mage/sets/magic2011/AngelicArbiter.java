@@ -61,8 +61,8 @@ public class AngelicArbiter extends CardImpl<AngelicArbiter> {
 		this.toughness = new MageInt(6);
 
 		this.addAbility(FlyingAbility.getInstance());
-		this.watchers.add(new AngelicArbiterWatcher1(ownerId));
-		this.watchers.add(new AngelicArbiterWatcher2(ownerId));
+		this.addWatcher(new AngelicArbiterWatcher1());
+		this.addWatcher(new AngelicArbiterWatcher2());
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AngelicArbiterEffect1()));
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AngelicArbiterEffect2()));
 	}
@@ -80,8 +80,8 @@ public class AngelicArbiter extends CardImpl<AngelicArbiter> {
 
 class AngelicArbiterWatcher1 extends WatcherImpl<AngelicArbiterWatcher1> {
 
-	public AngelicArbiterWatcher1(UUID controllerId) {
-		super("CastSpell", controllerId);
+	public AngelicArbiterWatcher1() {
+		super("CastSpell");
 	}
 
 	public AngelicArbiterWatcher1(final AngelicArbiterWatcher1 watcher) {
@@ -103,8 +103,8 @@ class AngelicArbiterWatcher1 extends WatcherImpl<AngelicArbiterWatcher1> {
 
 class AngelicArbiterWatcher2 extends WatcherImpl<AngelicArbiterWatcher2> {
 
-	public AngelicArbiterWatcher2(UUID controllerId) {
-		super("Attacked", controllerId);
+	public AngelicArbiterWatcher2() {
+		super("Attacked");
 	}
 
 	public AngelicArbiterWatcher2(final AngelicArbiterWatcher2 watcher) {

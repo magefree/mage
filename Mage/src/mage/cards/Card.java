@@ -38,6 +38,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.watchers.Watcher;
 import mage.watchers.Watchers;
 
 public interface Card extends MageObject {
@@ -50,6 +51,7 @@ public interface Card extends MageObject {
 	public void setControllerId(UUID controllerId);
 	public void setOwnerId(UUID ownerId);
 	public void addAbility(Ability ability);
+	public void addWatcher(Watcher watcher);
 	public SpellAbility getSpellAbility();
 	public List<String> getRules();
 	public Watchers getWatchers();

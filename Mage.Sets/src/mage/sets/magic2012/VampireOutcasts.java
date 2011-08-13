@@ -52,7 +52,7 @@ public class VampireOutcasts extends CardImpl<VampireOutcasts> {
         this.toughness = new MageInt(2);
 
         this.addAbility(new BloodthirstAbility(2));
-        this.watchers.add(new BloodthirstWatcher(ownerId));
+        this.addWatcher(new BloodthirstWatcher());
         this.addAbility(LifelinkAbility.getInstance());
     }
 

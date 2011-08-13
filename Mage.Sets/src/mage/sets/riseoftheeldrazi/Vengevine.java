@@ -60,7 +60,7 @@ public class Vengevine extends CardImpl<Vengevine> {
 
 		this.addAbility(HasteAbility.getInstance());
 		this.addAbility(new VengevineAbility());
-		this.watchers.add(new VengevineWatcher(ownerId));
+		this.addWatcher(new VengevineWatcher());
 	}
 
 	public Vengevine(final Vengevine card) {
@@ -112,8 +112,8 @@ class VengevineWatcher extends WatcherImpl<VengevineWatcher> {
 
 	int creatureSpellCount = 0;
 
-	public VengevineWatcher(UUID controllerId) {
-		super("CreatureCast", controllerId);
+	public VengevineWatcher() {
+		super("CreatureCast");
 	}
 
 	public VengevineWatcher(final VengevineWatcher watcher) {

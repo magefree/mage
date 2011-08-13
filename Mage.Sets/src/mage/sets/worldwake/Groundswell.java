@@ -63,7 +63,7 @@ public class Groundswell extends CardImpl<Groundswell> {
 		this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 		this.getSpellAbility().addEffect(new GroundswellEffect(Duration.EndOfTurn));
 		
-		this.watchers.add(new GroundswellWatcher(ownerId));
+		this.addWatcher(new GroundswellWatcher());
 	}
 
 	public Groundswell(final Groundswell card) {
@@ -78,8 +78,8 @@ public class Groundswell extends CardImpl<Groundswell> {
 
 class GroundswellWatcher extends WatcherImpl<GroundswellWatcher> {
 
-	public GroundswellWatcher(UUID controllerId) {
-		super("LandPlayed", controllerId);
+	public GroundswellWatcher() {
+		super("LandPlayed");
 	}
 
 	public GroundswellWatcher(final GroundswellWatcher watcher) {

@@ -67,7 +67,7 @@ public class SteelHellkite extends CardImpl<SteelHellkite> {
 		// {X}: Destroy each nonland permanent with converted mana cost X whose controller was dealt combat damage by Steel Hellkite this turn. Activate this ability only once each turn.
 		this.addAbility(new ActivateOncePerTurnActivatedAbility(Constants.Zone.BATTLEFIELD, new SteelHellkiteDestroyEffect(), new ManaCostsImpl("{X}")));
 
-		this.watchers.add(new SteelHellkiteWatcher(ownerId));
+		this.addWatcher(new SteelHellkiteWatcher());
 	}
 
 	public SteelHellkite(final SteelHellkite card) {
@@ -118,8 +118,8 @@ class SteelHellkiteWatcher extends WatcherImpl<SteelHellkiteWatcher> {
 
 	public Map<UUID, Set<UUID>> damagedPlayers = new HashMap<UUID, Set<UUID>>();
 
-	public SteelHellkiteWatcher(UUID controllerId) {
-		super("SteelHellkiteWatcher", controllerId);
+	public SteelHellkiteWatcher() {
+		super("SteelHellkiteWatcher");
 	}
 
 	public SteelHellkiteWatcher(final SteelHellkiteWatcher watcher) {

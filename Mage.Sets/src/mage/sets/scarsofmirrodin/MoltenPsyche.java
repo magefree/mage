@@ -53,7 +53,7 @@ public class MoltenPsyche extends CardImpl<MoltenPsyche> {
 		this.expansionSetCode = "SOM";
 		this.color.setRed(true);
 		this.getSpellAbility().addEffect(new MoltenPsycheEffect());
-		this.watchers.add(new MoltenPsycheWatcher(ownerId));
+		this.addWatcher(new MoltenPsycheWatcher());
 	}
 
 	public MoltenPsyche(final MoltenPsyche card) {
@@ -110,8 +110,8 @@ class MoltenPsycheWatcher extends WatcherImpl<MoltenPsycheWatcher> {
 
 	private Map<UUID, Integer> draws = new HashMap<UUID, Integer>();
 	
-	public MoltenPsycheWatcher(UUID controllerId) {
-        super("CardsDrawnMoltenPsyche", controllerId);
+	public MoltenPsycheWatcher() {
+        super("CardsDrawnMoltenPsyche");
 	}
 	
 	public MoltenPsycheWatcher(final MoltenPsycheWatcher watcher) {
