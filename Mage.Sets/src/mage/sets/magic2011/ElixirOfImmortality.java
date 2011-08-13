@@ -58,8 +58,7 @@ public class ElixirOfImmortality extends CardImpl<ElixirOfImmortality> {
 		Costs costs = new CostsImpl();
 		costs.add(new GenericManaCost(2));
 		costs.add(new TapSourceCost());
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(5), costs);
-		ability.addEffect(new ElixerOfImmortalityEffect());
+		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ElixerOfImmortalityEffect(), costs);
 		this.addAbility(ability);
 	}
 
@@ -89,9 +88,11 @@ class ElixerOfImmortalityEffect extends OneShotEffect<ElixerOfImmortalityEffect>
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getControllerId());
 		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (player != null && permanent != null) {
+		if (player != null) {
 			player.gainLife(5, game);
-			permanent.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+			if (permanent != null) {
+				permanent.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+			}
 			player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
 			player.getGraveyard().clear();
 			player.getLibrary().shuffle();
