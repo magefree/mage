@@ -58,7 +58,7 @@ public class CopyTargetSpellEffect extends OneShotEffect<CopyTargetSpellEffect> 
 			copy.setControllerId(source.getControllerId());
 			copy.setCopiedSpell(true);
 			game.getStack().push(copy);
-			copy.chooseNewTargets(game);
+			copy.chooseNewTargets(game, source.getControllerId());
 			return true;
 		}
 		return false;

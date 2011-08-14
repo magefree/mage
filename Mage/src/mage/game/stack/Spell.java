@@ -135,34 +135,44 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 		return replaced;
 	}
 
-	public boolean chooseNewTargets(Game game) {
-		Player player = game.getPlayer(controllerId);
-		for (Target target: ability.getTargets()) {
-			Target newTarget = target.copy();
-			newTarget.clearChosen();
-			for (UUID targetId: target.getTargets()) {
-				MageObject object = game.getObject(targetId);
-				String name = null;
-				if (object == null) {
-					Player targetPlayer = game.getPlayer(targetId);
-					if (player != null) name = targetPlayer.getName();
-				} else {
-                    name = object.getName();
-                }
-				if (name != null && player.chooseUse(ability.getEffects().get(0).getOutcome(), "Change target from " + name + "?", game)) {
-					if (!player.chooseTarget(ability.getEffects().get(0).getOutcome(), newTarget, ability, game))
+	/**
+	 * Choose new targets for the spell
+	 *
+	 * @param game
+	 * @param playerId Player UUID who changes the targets.
+	 * @return
+	 */
+	public boolean chooseNewTargets(Game game, UUID playerId) {
+		Player player = game.getPlayer(playerId);
+		if (player != null) {
+			for (Target target: ability.getTargets()) {
+				Target newTarget = target.copy();
+				newTarget.clearChosen();
+				for (UUID targetId: target.getTargets()) {
+					MageObject object = game.getObject(targetId);
+					String name = null;
+					if (object == null) {
+						Player targetPlayer = game.getPlayer(targetId);
+						if (player != null) name = targetPlayer.getName();
+					} else {
+						name = object.getName();
+					}
+					if (name != null && player.chooseUse(ability.getEffects().get(0).getOutcome(), "Change target from " + name + "?", game)) {
+						if (!player.chooseTarget(ability.getEffects().get(0).getOutcome(), newTarget, ability, game))
+							newTarget.addTarget(targetId, ability, game);
+					}
+					else {
 						newTarget.addTarget(targetId, ability, game);
+					}
 				}
-				else {
-					newTarget.addTarget(targetId, ability, game);
+				target.clearChosen();
+				for (UUID newTargetId: newTarget.getTargets()) {
+					target.addTarget(newTargetId, ability, game);
 				}
 			}
-			target.clearChosen();
-			for (UUID newTargetId: newTarget.getTargets()) {
-				target.addTarget(newTargetId, ability, game);
-			}
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
 	@Override

@@ -53,7 +53,7 @@ public class ChooseNewTargetsTargetEffect extends OneShotEffect<ChooseNewTargets
 	public boolean apply(Game game, Ability source) {
 		Spell spell = game.getStack().getSpell(source.getFirstTarget());
 		if (spell != null) {
-			return spell.chooseNewTargets(game);
+			return spell.chooseNewTargets(game, source.getControllerId());
 		}
 		return false;
 	}
