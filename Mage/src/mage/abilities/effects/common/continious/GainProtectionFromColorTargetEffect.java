@@ -65,11 +65,12 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-		protectionFilter.setColor(choice.getColor());
-		protectionFilter.setMessage(choice.getChoice());
 		Permanent creature = game.getPermanent(source.getFirstTarget());
 		if (creature != null) {
+			ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
+			protectionFilter.setColor(choice.getColor());
+			protectionFilter.setMessage(choice.getChoice());
+			((ProtectionAbility)ability).setFilter(protectionFilter);
 			creature.addAbility(ability);
 			return true;
 		}

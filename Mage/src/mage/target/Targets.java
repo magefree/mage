@@ -99,12 +99,16 @@ public class Targets extends ArrayList<Target> {
 	}
 
 	public boolean stillLegal(Ability source, Game game) {
+		// 608.2
+		// The spell or ability is countered if all its targets, for every instance of the word "target," are now illegal
+		int illegalCount = 0;
 		for (Target target: this) {
-			if (!target.isLegal(source, game)) {
-				return false;
+			if (target.isLegal(source, game)) {
+				illegalCount++;
 			}
 		}
-		return true;
+		// check all are illegal
+		return this.size() == illegalCount;
 	}
 
 	/**

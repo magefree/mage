@@ -243,12 +243,12 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 	public boolean isLegal(Ability source, Game game) {
 		//20101001 - 608.2b
 		for (UUID targetId: targets.keySet()) {
-			if (!game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getId(), source.getControllerId())))
-				return true;
-			if (canTarget(targetId, source, game))
-				return true;
+			if (game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getId(), source.getControllerId())))
+				return false;
+			if (!canTarget(targetId, source, game))
+				return false;
 		}
-		return false;
+		return true;
 	}
 
 	@Override
