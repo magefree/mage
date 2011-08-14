@@ -29,7 +29,6 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.SacrificeEffect;

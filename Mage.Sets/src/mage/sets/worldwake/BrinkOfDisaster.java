@@ -29,7 +29,6 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 
-import com.sun.corba.se.spi.monitoring.StatisticMonitoredAttribute;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;

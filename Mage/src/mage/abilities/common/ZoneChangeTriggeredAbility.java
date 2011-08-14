@@ -37,7 +37,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 
 /**
- *
+ * Is applied when the {@link Permanent} with this ability instance changes zones.
+ * 
  * @author BetaSteward_at_googlemail.com
  */
 public class ZoneChangeTriggeredAbility<T extends ZoneChangeTriggeredAbility<T>> extends TriggeredAbilityImpl<T> {
