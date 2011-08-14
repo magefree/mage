@@ -44,6 +44,7 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.stack.Spell;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -92,8 +93,7 @@ class LivewireLashAbility extends TriggeredAbilityImpl<LivewireLashAbility> {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.TARGETED && event.getTargetId().equals(sourceId)) {
-            if (game.getCard(event.getSourceId()).getCardType().contains(CardType.SORCERY) ||
-					game.getCard(event.getSourceId()).getCardType().contains(CardType.INSTANT)) {
+            if (game.getObject(event.getSourceId()) instanceof Spell) {
                 return true;
             }
         }
