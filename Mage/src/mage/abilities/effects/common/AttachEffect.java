@@ -44,6 +44,11 @@ public class AttachEffect extends OneShotEffect<AttachEffect> {
 		super(outcome);
 	}
 
+	public AttachEffect(Outcome outcome, String rule) {
+		super(outcome);
+		staticText = rule;
+	}
+
 	public AttachEffect(final AttachEffect effect) {
 		super(effect);
 	}
