@@ -52,7 +52,7 @@ public class PinecrestRidge extends CardImpl<PinecrestRidge> {
         this.addAbility(redManaAbility);
         Ability greenManaAbility = new GreenManaAbility();
         greenManaAbility.addEffect(new SkipNextUntapSourceEffect());
-        this.addAbility(redManaAbility);
+        this.addAbility(greenManaAbility);
     }
 
     public PinecrestRidge(final PinecrestRidge card) {
