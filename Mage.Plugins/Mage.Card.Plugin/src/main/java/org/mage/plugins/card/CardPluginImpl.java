@@ -487,7 +487,7 @@ public class CardPluginImpl implements CardPlugin {
     @Override
     public void onRemoveCard(MagePermanent card, int count) {
         if (card != null) {
-            Animation.hideCard((CardPanel) card, count > 0 ? count : 1);
+            Animation.hideCard(card, count > 0 ? count : 1);
             try {
                 while ((card).getAlpha() - 0.05f > 0) {
                     Thread.sleep(30);

@@ -56,6 +56,7 @@ import mage.client.cards.BigCard;
 import mage.client.cards.Permanent;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
+import mage.game.permanent.Battlefield;
 import mage.view.PermanentView;
 
 /**
@@ -69,9 +70,8 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 	private BigCard bigCard;
 	private Map<String, JComponent> ui = new HashMap<String, JComponent>();
 
-	protected static Map<UUID, PermanentView> battlefield;
-	protected static List<Thread> threads = new ArrayList<Thread>();
-	private static Dimension cardDimension;
+	protected Map<UUID, PermanentView> battlefield;
+	private Dimension cardDimension;
 	
     /** Creates new form BattlefieldPanel */
     public BattlefieldPanel(JScrollPane jScrollPane) {
@@ -127,17 +127,12 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 		}
 		
 		if (changed) {
-			BattlefieldPanel.battlefield = battlefield;
+			this.battlefield = battlefield;
 			sortLayout();
-			synchronized (this) {
-				for (Thread t : threads) {
-					t.start();
-				}
-				threads.clear();
-			}
 		}
 	}
-	
+
+	//TODO: review sorting stuff
 	public void sortLayout() {
 		Plugins.getInstance().sortPermanents(ui, permanents.values());
 		if (battlefield == null) {return;}
