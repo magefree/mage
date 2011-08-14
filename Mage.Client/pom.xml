@@ -87,12 +87,6 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Mage-Card-Plugin</artifactId>
-            <version>0.7</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>Mage-Counter-Plugin</artifactId>
             <version>0.1</version>
             <scope>runtime</scope>
@@ -106,6 +100,11 @@
             <groupId>org.swinglabs</groupId>
             <artifactId>swing-layout</artifactId>
             <version>1.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.5.2</version>
         </dependency>
     </dependencies>
 

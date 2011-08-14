@@ -22,6 +22,7 @@ import mage.view.PermanentView;
 import net.xeoh.plugins.base.PluginManager;
 import net.xeoh.plugins.base.impl.PluginManagerFactory;
 import org.apache.log4j.Logger;
+import org.mage.plugins.card.CardPluginImpl;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,7 +52,7 @@ public class Plugins implements MagePlugins {
 		logger.info("Loading plugins...");
 		pm = PluginManagerFactory.createPluginManager();
 		pm.addPluginsFrom(new File(Constants.PLUGINS_DIRECTORY).toURI());
-		this.cardPlugin = pm.getPlugin(CardPlugin.class);
+		this.cardPlugin = new CardPluginImpl();
 		this.counterPlugin = pm.getPlugin(CounterPlugin.class);
 		this.themePlugin = pm.getPlugin(ThemePlugin.class);
 		logger.info("Done.");
