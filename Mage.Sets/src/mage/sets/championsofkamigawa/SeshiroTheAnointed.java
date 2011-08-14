@@ -100,7 +100,7 @@ class SeshiroTheAnointedAbility extends TriggeredAbilityImpl<SeshiroTheAnointedA
         if (event instanceof DamagedPlayerEvent) {
             DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
             Permanent p = game.getPermanent(event.getSourceId());
-            if (damageEvent.isCombatDamage() && p != null && p.getSubtype().contains("Snake")) {
+            if (damageEvent.isCombatDamage() && p != null && p.hasSubtype("Snake")) {
 			    return true;
             }
         }

@@ -120,6 +120,11 @@ public class Emblem implements CommandObject {
 	}
 
 	@Override
+	public boolean hasSubtype(String subtype) {
+		return false;
+	}
+
+	@Override
 	public List<String> getSupertype() {
 		return emptyList;
 	}

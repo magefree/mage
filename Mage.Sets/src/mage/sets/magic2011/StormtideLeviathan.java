@@ -101,7 +101,7 @@ class StormtideLeviathanEffect extends ContinuousEffectImpl<StormtideLeviathanEf
 	@Override
 	public boolean apply(Game game, Ability source) {
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterLandPermanent(), source.getControllerId(), game)) {
-			if (!permanent.getSubtype().contains("Island"))
+			if (!permanent.hasSubtype("Island"))
 				permanent.getSubtype().add("Island");
 		}
 		return true;

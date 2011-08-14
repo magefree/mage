@@ -102,7 +102,7 @@ class JuggernautEffect extends CantBlockSourceEffect {
 
 	@Override
 	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Game game) {
-		return !blocker.getSubtype().contains("Wall");
+		return !blocker.hasSubtype("Wall");
 	}
 
 	@Override

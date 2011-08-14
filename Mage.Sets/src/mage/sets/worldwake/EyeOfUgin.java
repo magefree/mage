@@ -115,7 +115,7 @@ class EyeOfUginCostReductionEffect extends CostModificationEffectImpl<EyeOfUginC
 	public boolean applies(Ability abilityToModify, Ability source, Game game) {
 		if ( abilityToModify instanceof SpellAbility ) {
 			Card sourceCard = game.getCard(((SpellAbility)abilityToModify).getSourceId());
-			if ( sourceCard != null && sourceCard.getSubtype().contains("Eldrazi") && sourceCard.getOwnerId().equals(source.getControllerId()) ) {
+			if ( sourceCard != null && sourceCard.hasSubtype("Eldrazi") && sourceCard.getOwnerId().equals(source.getControllerId()) ) {
 				return true;
 			}
 		}

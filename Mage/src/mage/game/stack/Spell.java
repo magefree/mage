@@ -207,6 +207,11 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	}
 
 	@Override
+	public boolean hasSubtype(String subtype) {
+		return card.hasSubtype(subtype);
+	}
+
+	@Override
 	public List<String> getSupertype() {
 		return card.getSupertype();
 	}

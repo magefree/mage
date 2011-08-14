@@ -124,7 +124,7 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl<PrecursorG
             	for (UUID target : effect.getTargetPointer().getTargets(sa)) {
 					Permanent permanent = game.getPermanent(target);
 					if (permanent != null) {
-						if (!permanent.getSubtype().contains("Golem")) {
+						if (!permanent.hasSubtype("Golem")) {
 							return false;
 						}
 						if (targetGolem == null) {

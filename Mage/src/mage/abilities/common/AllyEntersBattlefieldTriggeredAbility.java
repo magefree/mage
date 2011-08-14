@@ -60,7 +60,7 @@ public class AllyEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl 
             if (zEvent.getToZone() == Zone.BATTLEFIELD
                     && permanent.getControllerId().equals(this.controllerId)
                     && (targetId.equals(this.getSourceId())
-                    || (permanent.getSubtype().contains("Ally") && !targetId.equals(this.getSourceId())))) {
+                    || (permanent.hasSubtype("Ally") && !targetId.equals(this.getSourceId())))) {
                 return true;
             }
         }

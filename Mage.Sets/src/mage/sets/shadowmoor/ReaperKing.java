@@ -108,7 +108,7 @@ class ReaperKingAbility extends TriggeredAbilityImpl<ReaperKingAbility> {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent.getControllerId().equals(this.controllerId)
                         && permanent.getCardType().contains(CardType.CREATURE)
-                        && permanent.getSubtype().contains("Scarecrow")
+                        && permanent.hasSubtype("Scarecrow")
                         && !targetId.equals(this.getSourceId())) {
                     return true;
                 }

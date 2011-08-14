@@ -113,7 +113,7 @@ class MyrManaCondition implements Condition {
 	@Override
 	public boolean apply(Game game, Ability source) {
 		MageObject object = game.getObject(source.getSourceId());
-		if (object != null && object.getSubtype().contains("Myr")) {
+		if (object != null && object.hasSubtype("Myr")) {
 			return true;
 		}
 		return false;

@@ -100,7 +100,7 @@ class AshenSkinZuberaWatcher extends WatcherImpl<AshenSkinZuberaWatcher> {
             if (((ZoneChangeEvent) event).getFromZone() == Constants.Zone.BATTLEFIELD &&
                     ((ZoneChangeEvent) event).getToZone() == Constants.Zone.GRAVEYARD) {
                 Card card = game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
-                if (card != null && card.getSubtype().contains("Zubera")) {
+                if (card != null && card.hasSubtype("Zubera")) {
                     zuberasDiedThisTurn++;
                 }
             }

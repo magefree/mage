@@ -96,7 +96,7 @@ class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl<Vala
 		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
 			Permanent permanent = game.getPermanent(event.getTargetId());
 			if (permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.controllerId)) {
-				if(permanent.getSubtype().contains("Mountain")){
+				if(permanent.hasSubtype("Mountain")){
 					
 					int count = game.getBattlefield().count(ValakutTheMoltenPinnacle.filter, permanent.getControllerId(), game);
 					

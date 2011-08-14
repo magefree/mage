@@ -121,7 +121,7 @@ class BladeOfTheBloodchiefEffect extends OneShotEffect<BladeOfTheBloodchiefEffec
 		if (enchantment != null && enchantment.getAttachedTo() != null) {
 			Permanent creature = game.getPermanent(enchantment.getAttachedTo());
 			if (creature != null) {
-				if ( creature.getSubtype().contains("Vampire") ) {
+				if ( creature.hasSubtype("Vampire") ) {
 					creature.addCounters(new PlusOneCounter(2), game);
 				}
 				else {

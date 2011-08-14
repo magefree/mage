@@ -30,7 +30,6 @@ package mage.sets.riseoftheeldrazi;
 import java.util.UUID;
 
 import mage.ConditionalMana;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageObject;
@@ -40,7 +39,6 @@ import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 
@@ -98,7 +96,7 @@ class EldraziManaCondition implements Condition {
 	@Override
 	public boolean apply(Game game, Ability source) {
 		MageObject object = game.getObject(source.getSourceId());
-		if (object != null && object.getSubtype().contains("Eldrazi") && !object.getColor().hasColor()) {
+		if (object != null && object.hasSubtype("Eldrazi") && !object.getColor().hasColor()) {
 			return true;
 		}
 		return false;

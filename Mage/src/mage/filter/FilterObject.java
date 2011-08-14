@@ -37,6 +37,7 @@ import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
+import mage.abilities.keyword.ChangelingAbility;
 
 /**
  *
@@ -169,8 +170,10 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 		}
 		
 		if (subtype.size() > 0) {
-			if (!compString.compare(subtype, object.getSubtype(), scopeSubtype, notSubtype))
-				return notFilter;
+			if (!object.getAbilities().contains(ChangelingAbility.getInstance())) {
+				if (!compString.compare(subtype, object.getSubtype(), scopeSubtype, notSubtype))
+					return notFilter;
+			}
 		}
 
 		if (supertype.size() > 0) {
