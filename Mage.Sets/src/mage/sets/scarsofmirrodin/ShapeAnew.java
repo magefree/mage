@@ -91,11 +91,7 @@ public class ShapeAnew extends CardImpl<ShapeAnew> {
 
 		@Override
 		public boolean apply(Game game, Ability source) {
-			Card artifact = game.getLastKnownInformation(source.getFirstTarget(), Constants.Zone.BATTLEFIELD);
-			if (artifact == null) {
-				return false;
-			}
-			Player controller = game.getPlayer(((Permanent)artifact).getControllerId());
+			Player controller = game.getPlayer(source.getControllerId());
 			if (controller == null) {
 				return false;
 			}
