@@ -152,19 +152,19 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
 	public void adjustCosts(Ability ability, Game game) {}
 
 	@Override
-	public boolean hasSubtype(String subtype) {
-		if (subtype == null) {
+	public boolean hasSubtype(String value) {
+		if (value == null) {
 			return false;
 		}
-		if (subtype.contains(subtype)) {
+		if (this.subtype.contains(value)) {
 			return true;
 		}
 		else { // checking for Changeling
 			// first make sure input parameter is not creature type
 			// if so, then ChangelingAbility doesn't matter
-			if (subtype.equals("Mountain") || subtype.equals("Island") || subtype.equals("Plains")
-					|| subtype.equals("Forest") || subtype.equals("Swamp") || subtype.equals("Aura")
-					|| subtype.equals("Equipment") || subtype.equals("Fortification")) {
+			if (value.equals("Mountain") || value.equals("Island") || value.equals("Plains")
+					|| value.equals("Forest") || value.equals("Swamp") || value.equals("Aura")
+					|| value.equals("Equipment") || value.equals("Fortification")) {
 				return false;
 			}
 			// as it is creature subtype, then check the existence of Changeling
