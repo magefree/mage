@@ -58,6 +58,7 @@ import org.jboss.remoting.Client;
 import org.jboss.remoting.ConnectionListener;
 import org.jboss.remoting.ConnectionValidator;
 import org.jboss.remoting.InvokerLocator;
+import org.jboss.remoting.Remoting;
 import org.jboss.remoting.callback.Callback;
 import org.jboss.remoting.callback.HandleCallbackException;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
@@ -135,6 +136,7 @@ public class Session {
 			clientMetadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
 			clientMetadata.put("generalizeSocketException", "true");
 			clientMetadata.put(Client.ENABLE_LEASE, "true");
+            clientMetadata.put(Remoting.USE_CLIENT_CONNECTION_IDENTITY, "true");
 			callbackClient = new Client(clientLocator, "callback", clientMetadata);
 			
 			Map<String, String> listenerMetadata = new HashMap<String, String>();
