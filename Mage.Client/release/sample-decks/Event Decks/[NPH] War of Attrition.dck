@@ -1,0 +1,37 @@
+//Created with Mage - www.magefree.com
+NAME:War of Attrition
+AUTHOR:WotC
+
+# Creature
+2 [ZEN:19] Kor Duelist
+2 [WWK:20] Stoneforge Mystic
+4 [M11:13] Elite Vanguard
+1 [SOM:12] Kemba, Kha Regent
+4 [MBS:10] Leonin Relic-Warder
+4 [MBS:11] Leonin Skyhunter
+1 [MBS:14] Mirran Crusader
+4 [NPH:19] Porcelain Legionnaire
+1 [NPH:20] Puresteel Paladin
+# Instant
+1 [NPH:2] Apostle's Blessing
+# Artifact
+1 [M11:216] Sword of Vengeance
+1 [SOM:149] Darksteel Axe
+1 [MBS:100] Bonehoard
+4 [MBS:107] Flayer Husk
+1 [MBS:133] Skinwing
+1 [NPH:157] Sickleslicer
+# Enchantment
+4 [ZEN:14] Journey to Nowhere
+# Land
+2 [WWK:135] Dread Statuary
+10 [NPH:167] Plains
+11 [NPH:166] Plains
+
+# Sideboard
+SB: 4 [SOM:18] Revoke Existence
+SB: 4 [WWK:11] Kor Firewalker
+SB: 2 [SOM:2] Arrest
+SB: 3 [M11:9] Celestial Purge
+SB: 1 [ZEN:19] Kor Duelist
+SB: 1 [NPH:2] Apostle's Blessing
