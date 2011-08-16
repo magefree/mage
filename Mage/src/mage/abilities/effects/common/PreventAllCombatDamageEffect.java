@@ -66,6 +66,7 @@ public class PreventAllCombatDamageEffect extends PreventionEffectImpl<PreventAl
 		if (!game.replaceEvent(preventEvent)) {
 			int damage = event.getAmount();
 			event.setAmount(0);
+			game.informPlayers("Damage has been prevented: " + damage);
 			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
 		}
 		return false;
