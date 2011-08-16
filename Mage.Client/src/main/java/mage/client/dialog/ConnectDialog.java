@@ -109,14 +109,14 @@ public class ConnectDialog extends MageDialog {
 	}
 
 	private void saveSettings() {
-		MageFrame.getPreferences().put("serverAddress", txtServer.getText());
-		MageFrame.getPreferences().put("serverPort", txtPort.getText());
-		MageFrame.getPreferences().put("userName", txtUserName.getText());
+		MageFrame.getPreferences().put("serverAddress", txtServer.getText().trim());
+		MageFrame.getPreferences().put("serverPort", txtPort.getText().trim());
+		MageFrame.getPreferences().put("userName", txtUserName.getText().trim());
 		MageFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
-		MageFrame.getPreferences().put("proxyAddress", txtProxyServer.getText());
-		MageFrame.getPreferences().put("proxyPort", txtProxyPort.getText());
+		MageFrame.getPreferences().put("proxyAddress", txtProxyServer.getText().trim());
+		MageFrame.getPreferences().put("proxyPort", txtProxyPort.getText().trim());
 		MageFrame.getPreferences().put("proxyType", cbProxyType.getSelectedItem().toString());
-		MageFrame.getPreferences().put("proxyUsername", txtProxyUserName.getText());
+		MageFrame.getPreferences().put("proxyUsername", txtProxyUserName.getText().trim());
 		char[] input = txtPasswordField.getPassword();
 		MageFrame.getPreferences().put("proxyPassword", new String(input));
 		Arrays.fill(input, '0');
@@ -412,13 +412,13 @@ public class ConnectDialog extends MageDialog {
 		try {
 			setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 			connection = new Connection();
-			connection.setHost(this.txtServer.getText());
-			connection.setPort(Integer.valueOf(this.txtPort.getText()));
-			connection.setUsername(this.txtUserName.getText());
+			connection.setHost(this.txtServer.getText().trim());
+			connection.setPort(Integer.valueOf(this.txtPort.getText().trim()));
+			connection.setUsername(this.txtUserName.getText().trim());
 			connection.setProxyType((ProxyType) this.cbProxyType.getSelectedItem());
-			connection.setProxyHost(this.txtProxyServer.getText());
-			connection.setProxyPort(Integer.valueOf(this.txtProxyPort.getText()));
-			connection.setProxyUsername(this.txtProxyUserName.getText());
+			connection.setProxyHost(this.txtProxyServer.getText().trim());
+			connection.setProxyPort(Integer.valueOf(this.txtProxyPort.getText().trim()));
+			connection.setProxyUsername(this.txtProxyUserName.getText().trim());
 			input = txtPasswordField.getPassword();
 			connection.setProxyPassword(new String(input));
 			logger.debug("connecting: " + connection.getProxyType() + " " + connection.getProxyHost() + " " + connection.getProxyPort());
