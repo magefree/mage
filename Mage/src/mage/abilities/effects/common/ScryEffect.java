@@ -66,7 +66,11 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getControllerId());
 		Cards cards = new CardsImpl(Zone.PICK);
-		for (int i = 0; i < scryNumber; i++) {
+		int count = Math.min(scryNumber, player.getLibrary().size());
+		if (count == 0) {
+			return false;
+		}
+		for (int i = 0; i < count; i++) {
 			Card card = player.getLibrary().removeFromTop(game);
 			cards.add(card);
 			game.setZone(card.getId(), Zone.PICK);
