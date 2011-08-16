@@ -76,4 +76,8 @@ public class TargetCardInHand extends TargetCard<TargetCardInHand> {
 		return new TargetCardInHand(this);
 	}
 
+    @Override
+    public String getTargetedName(Game game) {
+        return filter.getMessage();
+    }
 }
