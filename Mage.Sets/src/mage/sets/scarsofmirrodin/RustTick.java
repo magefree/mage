@@ -179,17 +179,8 @@ class RustTickSelfRestrictionEffect extends RestrictionEffect<RustTickSelfRestri
 
 	@Override
 	public boolean canBeUntapped(Permanent permanent, Game game) {
-		Choice abilityChoice = new ChoiceImpl();
-		abilityChoice.setMessage("Untap Rust Tick?");
-		Set<String> abilities = new HashSet<String>();
-		abilities.add("Yes");
-		abilities.add("No");
-		abilityChoice.setChoices(abilities);
-
-		Player playerControls = game.getPlayer(permanent.getControllerId());
-		playerControls.choose(Constants.Outcome.Neutral, abilityChoice, game);
-
-		return abilityChoice.getChoice() != null && abilityChoice.getChoice().equals("Yes");
+		Player player = game.getPlayer(permanent.getControllerId());
+		return player != null && player.chooseUse(Constants.Outcome.Benefit, "Untap Rust Tick?", game);
 	}
 
 	@Override
