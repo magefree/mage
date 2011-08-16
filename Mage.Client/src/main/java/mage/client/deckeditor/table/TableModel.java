@@ -152,6 +152,11 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 		drawCards(sortBy, piles);
 	}
 
+	@Override
+	public void refresh() {
+		fireTableDataChanged();
+	}
+
 	public void clear() {
 		view.clear();
 		cards.clear();

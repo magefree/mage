@@ -281,6 +281,11 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 		drawCards((SortBy) cbSortBy.getSelectedItem());
 	}
 
+	@Override
+	public void refresh() {
+		redrawCards();
+	}
+
 	public void clearCardEventListeners() {
 		cardEventSource.clearListeners();
 		mainModel.clearCardEventListeners();

@@ -288,7 +288,12 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         if (size.height != area.height || size.width != area.width) {
         	setPreferredSize(area);
        }
+	}
 
+	@Override
+	public void refresh() {
+		revalidate();
+       	repaint();
 	}
 }
 

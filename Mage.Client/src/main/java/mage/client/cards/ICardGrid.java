@@ -46,4 +46,5 @@ public interface ICardGrid {
 	void addCardEventListener(Listener<Event> listener);
 	void drawCards(Constants.SortBy sortBy, boolean piles);
 	void loadCards(CardsView showCards, Constants.SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId);
+	void refresh();
 }

@@ -798,6 +798,15 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 		return list;
     }
 
+	public void refresh() {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				currentView.refresh();
+			}
+		});
+	}
+
 	private TableModel mainModel;
 	private JTable mainTable;
 	private ICardGrid currentView;
