@@ -27,23 +27,19 @@
  */
 package mage.sets.mirrodin;
 
-import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.EquipmentAttachedCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -67,40 +63,5 @@ public class GolemSkinGauntlets extends CardImpl<GolemSkinGauntlets> {
     @Override
     public GolemSkinGauntlets copy() {
         return new GolemSkinGauntlets(this);
-    }
-
-    private class EquipmentAttachedCount implements DynamicValue {
-
-        @Override
-        public int calculate(Game game, Ability source) {
-            int count = 0;
-            Permanent p = game.getPermanent(source.getSourceId());
-            if (p != null) {
-                List<UUID> attachments = p.getAttachments();
-                for (UUID attachmentId : attachments) {
-                    Permanent attached = game.getPermanent(attachmentId);
-                    if (attached != null && attached.getSubtype().contains("Equipment")) {
-                        count++;
-                    }
-                }
-
-            }
-            return count;
-        }
-
-        @Override
-        public DynamicValue clone() {
-            return new EquipmentAttachedCount();
-        }
-
-        @Override
-        public String toString() {
-            return "1";
-        }
-
-        @Override
-        public String getMessage() {
-            return "Equipment attached to it";
-        }
     }
 }

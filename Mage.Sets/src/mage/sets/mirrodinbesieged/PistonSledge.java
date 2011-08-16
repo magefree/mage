@@ -38,7 +38,6 @@ import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
@@ -50,21 +49,22 @@ import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author Viserion
+ * @author Viserion, North
  */
 public class PistonSledge extends CardImpl<PistonSledge> {
 
+    private static FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
     public PistonSledge (UUID ownerId) {
         super(ownerId, 124, "Piston Sledge", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Equipment");
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new PistonSledgeEquipCost()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1)));
 
-		Ability ability = new EntersBattlefieldTriggeredAbility(new PistonSledgeEffect(Constants.Outcome.AddAbility), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new AttachEffect(Outcome.BoostCreature, "attach it to target creature you control"), false);
 		ability.addTarget(new TargetControlledCreaturePermanent());
 		this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1)));
+        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
     public PistonSledge (final PistonSledge card) {
@@ -75,44 +75,4 @@ public class PistonSledge extends CardImpl<PistonSledge> {
     public PistonSledge copy() {
         return new PistonSledge(this);
     }
-}
-
-class PistonSledgeEquipCost extends AlternativeCost<PistonSledgeEquipCost> {
-	private static FilterControlledPermanent filter = new FilterControlledPermanent("artifact");
-
-	static {
-		filter.getCardType().add(CardType.ARTIFACT);
-	}
-
-	public PistonSledgeEquipCost() {
-		super("sacrifice an artifact");
-		this.add(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, false)));
-	}
-
-	public PistonSledgeEquipCost(final PistonSledgeEquipCost cost) {
-		super(cost);
-	}
-
-	@Override
-	public PistonSledgeEquipCost copy() {
-		return new PistonSledgeEquipCost(this);
-	}
-
-	@Override
-	public String getText() {
-		return " sacrifice an artifact";
-	}
-
-}
-
-class PistonSledgeEffect extends AttachEffect{
-	public PistonSledgeEffect(Outcome outcome) {
-		super(outcome);
-		staticText = "attach it to target creature you control";
-	}
-
-	public PistonSledgeEffect(final AttachEffect effect) {
-		super(effect);
-	}
-
 }

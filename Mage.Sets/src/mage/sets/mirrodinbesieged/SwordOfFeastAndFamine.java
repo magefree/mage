@@ -45,13 +45,11 @@ import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -59,13 +57,12 @@ import mage.target.targetpointer.FixedTarget;
  * @author Viserion
  */
 public class SwordOfFeastAndFamine extends CardImpl<SwordOfFeastAndFamine> {
-    private static FilterCard filter = new FilterCard("green and from black");
+    private static final FilterCard filter = new FilterCard("green and from black");
 
     static {
         filter.setUseColor(true);
         filter.getColor().setBlack(true);
         filter.getColor().setGreen(true);
-        filter.setScopeColor(Filter.ComparisonScope.Any);
     }
 
 

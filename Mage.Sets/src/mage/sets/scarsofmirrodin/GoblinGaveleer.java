@@ -27,21 +27,17 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.EquipmentAttachedCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -59,7 +55,7 @@ public class GoblinGaveleer extends CardImpl<GoblinGaveleer> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new EquipmentAttachedCount(),
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new EquipmentAttachedCount(2),
                 new StaticValue(0), Duration.WhileOnBattlefield)));
     }
 
@@ -70,40 +66,5 @@ public class GoblinGaveleer extends CardImpl<GoblinGaveleer> {
     @Override
     public GoblinGaveleer copy() {
         return new GoblinGaveleer(this);
-    }
-
-    private class EquipmentAttachedCount implements DynamicValue {
-
-        @Override
-        public int calculate(Game game, Ability source) {
-            int count = 0;
-            Permanent p = game.getPermanent(source.getSourceId());
-            if (p != null) {
-                List<UUID> attachments = p.getAttachments();
-                for (UUID attachmentId : attachments) {
-                    Permanent attached = game.getPermanent(attachmentId);
-                    if (attached != null && attached.getSubtype().contains("Equipment")) {
-                        count++;
-                    }
-                }
-
-            }
-            return 2 * count;
-        }
-
-        @Override
-        public DynamicValue clone() {
-            return new EquipmentAttachedCount();
-        }
-
-        @Override
-        public String toString() {
-            return "2";
-        }
-
-        @Override
-        public String getMessage() {
-            return "Equipment attached to it";
-        }
     }
 }

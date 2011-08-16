@@ -57,7 +57,7 @@ public class PhyrexianVatmother extends CardImpl<PhyrexianVatmother> {
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
         this.addAbility(InfectAbility.getInstance());
-        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new PoisonControllerEffect(1)));
+        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new PoisonControllerEffect()));
     }
 
     public PhyrexianVatmother (final PhyrexianVatmother card) {
@@ -73,18 +73,14 @@ public class PhyrexianVatmother extends CardImpl<PhyrexianVatmother> {
 
 class PoisonControllerEffect extends OneShotEffect<PoisonControllerEffect> {
 
-	protected int amount;
-
-	public PoisonControllerEffect(int amount) {
+	public PoisonControllerEffect() {
 		super(Outcome.Damage);
-		this.amount = amount;
-		staticText = "you get " + amount + " poison counter(s)";
+		staticText = "you get a poison counter";
 
 	}
 
 	public PoisonControllerEffect(final PoisonControllerEffect effect) {
 		super(effect);
-		this.amount = effect.amount;
 	}
 
 	@Override
@@ -96,7 +92,7 @@ class PoisonControllerEffect extends OneShotEffect<PoisonControllerEffect> {
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getControllerId());
 		if (player != null) {
-			player.getCounters().addCounter(CounterType.POISON.createInstance(amount));
+			player.getCounters().addCounter(CounterType.POISON.createInstance());
 			return true;
 		}
 		return false;

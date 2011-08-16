@@ -25,24 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
-import java.util.List;
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.EquipmentAttachedCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 
 /**
@@ -51,22 +46,22 @@ import mage.game.permanent.token.Token;
  */
 public class KembaKhaRegent extends CardImpl<KembaKhaRegent> {
 
-    public KembaKhaRegent (UUID ownerId) {
+    public KembaKhaRegent(UUID ownerId) {
         super(ownerId, 12, "Kemba, Kha Regent", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
         this.expansionSetCode = "SOM";
         this.supertype.add("Legendary");
         this.subtype.add("Cat");
         this.subtype.add("Cleric");
 
-		this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new CatToken(), new EquipmentAttachedCount()),
-                Constants.TargetController.YOU, false));
+                TargetController.YOU, false));
     }
 
-    public KembaKhaRegent (final KembaKhaRegent card) {
+    public KembaKhaRegent(final KembaKhaRegent card) {
         super(card);
     }
 
@@ -74,50 +69,16 @@ public class KembaKhaRegent extends CardImpl<KembaKhaRegent> {
     public KembaKhaRegent copy() {
         return new KembaKhaRegent(this);
     }
-
-    private class EquipmentAttachedCount implements DynamicValue {
-
-        @Override
-        public int calculate(Game game, Ability source) {
-            int count = 0;
-            Permanent p = game.getPermanent(source.getSourceId());
-            if (p != null) {
-                List<UUID> attachments = p.getAttachments();
-                for (UUID attachmentId : attachments) {
-                    Permanent attached = game.getPermanent(attachmentId);
-                    if (attached != null && attached.getSubtype().contains("Equipment")) {
-                        count++;
-                    }
-                }
-
-            }
-            return count;
-        }
-
-        @Override
-        public DynamicValue clone() {
-            return new EquipmentAttachedCount();
-        }
-
-        @Override
-        public String toString() {
-            return "1";
-        }
-
-        @Override
-        public String getMessage() {
-            return "Equipment attached to {this}";
-        }
-    }
 }
 
 class CatToken extends Token {
+
     public CatToken() {
         super("Cat", "a 2/2 white Cat creature token");
         cardType.add(CardType.CREATURE);
-		color = ObjectColor.WHITE;
-		subtype.add("Cat");
-		power = new MageInt(2);
-		toughness = new MageInt(2);
+        color = ObjectColor.WHITE;
+        subtype.add("Cat");
+        power = new MageInt(2);
+        toughness = new MageInt(2);
     }
 }

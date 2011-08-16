@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class PistusStrike extends CardImpl<PistusStrike> {
 
-	private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
+	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 
 	static {
 		filter.getAbilities().add(FlyingAbility.getInstance());
@@ -62,10 +62,9 @@ public class PistusStrike extends CardImpl<PistusStrike> {
 		this.expansionSetCode = "MBS";
 		this.color.setGreen(true);
 		
-		TargetCreaturePermanent target1 = new TargetCreaturePermanent(filter);
-		this.getSpellAbility().addTarget(target1);
+		this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
 		this.getSpellAbility().addEffect(new DestroyTargetEffect());
-		this.getSpellAbility().addEffect(new PoisonControllerTargetCreatureEffect(1));
+		this.getSpellAbility().addEffect(new PoisonControllerTargetCreatureEffect());
 	}
 
 	public PistusStrike(final PistusStrike card) {
@@ -80,17 +79,13 @@ public class PistusStrike extends CardImpl<PistusStrike> {
 
 class PoisonControllerTargetCreatureEffect extends OneShotEffect<PoisonControllerTargetCreatureEffect> {
 
-	protected int amount;
-
-	public PoisonControllerTargetCreatureEffect(int amount) {
+	public PoisonControllerTargetCreatureEffect() {
 		super(Outcome.Damage);
-		this.amount = amount;
-		setText();
+        staticText = "Its controller gets a poison counter";
 	}
 
 	public PoisonControllerTargetCreatureEffect(final PoisonControllerTargetCreatureEffect effect) {
 		super(effect);
-		this.amount = effect.amount;
 	}
 
 	@Override
@@ -107,17 +102,9 @@ class PoisonControllerTargetCreatureEffect extends OneShotEffect<PoisonControlle
         if (p != null) {
             Player player = game.getPlayer(p.getControllerId());
             if (player != null) {
-    			player.getCounters().addCounter(CounterType.POISON.createInstance(amount));
+    			player.getCounters().addCounter(CounterType.POISON.createInstance());
             }
         }
 		return false;
 	}
-
-	public void setText() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("That creature's controller gets ").append(Integer.toString(amount)).append(" poison counter");
-		sb.append((amount == 1?"":"s"));
-		staticText = sb.toString();
-	}
-
 }

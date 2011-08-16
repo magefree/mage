@@ -32,7 +32,6 @@ import mage.Constants.Outcome;
 import mage.Constants.TimingRule;
 import mage.Constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.common.AttachEffect;
 import mage.target.common.TargetControlledCreaturePermanent;

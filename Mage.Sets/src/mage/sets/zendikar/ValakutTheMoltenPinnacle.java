@@ -45,7 +45,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreatureOrPlayer;
-import mage.watchers.WatcherImpl;
 
 /**
  *
@@ -53,7 +52,7 @@ import mage.watchers.WatcherImpl;
  */
 public class ValakutTheMoltenPinnacle extends CardImpl<ValakutTheMoltenPinnacle> {
 	
-	static FilterLandPermanent filter = new FilterLandPermanent("Mountain");
+	static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
 
 	static {
 	    filter.getSubtype().add("Mountain");

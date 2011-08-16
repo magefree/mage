@@ -27,20 +27,16 @@
  */
 package mage.sets.mirrodin;
 
-import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.EquipmentAttachedCount;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -58,7 +54,7 @@ public class LoxodonPunisher extends CardImpl<LoxodonPunisher> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        EquipmentAttachedCount amount = new EquipmentAttachedCount();
+        EquipmentAttachedCount amount = new EquipmentAttachedCount(2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield)));
     }
 
@@ -69,40 +65,5 @@ public class LoxodonPunisher extends CardImpl<LoxodonPunisher> {
     @Override
     public LoxodonPunisher copy() {
         return new LoxodonPunisher(this);
-    }
-
-    private class EquipmentAttachedCount implements DynamicValue {
-
-        @Override
-        public int calculate(Game game, Ability source) {
-            int count = 0;
-            Permanent p = game.getPermanent(source.getSourceId());
-            if (p != null) {
-                List<UUID> attachments = p.getAttachments();
-                for (UUID attachmentId : attachments) {
-                    Permanent attached = game.getPermanent(attachmentId);
-                    if (attached != null && attached.getSubtype().contains("Equipment")) {
-                        count++;
-                    }
-                }
-
-            }
-            return 2 * count;
-        }
-
-        @Override
-        public DynamicValue clone() {
-            return new EquipmentAttachedCount();
-        }
-
-        @Override
-        public String toString() {
-            return "2";
-        }
-
-        @Override
-        public String getMessage() {
-            return "Equipment attached to it";
-        }
     }
 }

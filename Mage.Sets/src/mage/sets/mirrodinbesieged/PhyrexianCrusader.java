@@ -30,16 +30,12 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.InfectAbility;
 import mage.abilities.keyword.ProtectionAbility;
-import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterCard;
 
 /**
@@ -48,17 +44,15 @@ import mage.filter.FilterCard;
  */
 public class PhyrexianCrusader extends CardImpl<PhyrexianCrusader> {
 
-	private static FilterCard filter = new FilterCard("Red");
-	private static FilterCard filter2 = new FilterCard("White");
+	private static final FilterCard filter = new FilterCard("Red");
+	private static final FilterCard filter2 = new FilterCard("White");
 
 	static {
 		filter.setUseColor(true);
 		filter.getColor().setRed(true);
-		filter.setScopeColor(ComparisonScope.Any);
 		
 		filter2.setUseColor(true);
 		filter2.getColor().setWhite(true);
-		filter2.setScopeColor(ComparisonScope.Any);
 	}
 	
     public PhyrexianCrusader (UUID ownerId) {

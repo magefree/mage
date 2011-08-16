@@ -31,9 +31,7 @@ package mage.game.permanent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.CardType;
 import mage.Constants.Zone;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
@@ -42,11 +40,9 @@ import mage.cards.Card;
 import mage.cards.LevelerCard;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
-import javax.swing.*;
 
 /**
  *

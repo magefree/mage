@@ -33,13 +33,10 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.LandfallAbility;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
@@ -60,7 +57,12 @@ public class KhalniHeartExpedition extends CardImpl<KhalniHeartExpedition> {
 		this.color.setGreen(true);
 
 		this.addAbility(new LandfallAbility(new AddCountersSourceEffect(new QuestCounter()), true));
-		this.addAbility(new KhalniHeartExpeditionAbility());
+        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay),
+                new RemoveCountersSourceCost(CounterType.QUEST.createInstance(3)));
+        ability.addCost(new SacrificeSourceCost());
+        this.addAbility(ability);
 	}
 
 	public KhalniHeartExpedition(final KhalniHeartExpedition card) {
@@ -71,33 +73,4 @@ public class KhalniHeartExpedition extends CardImpl<KhalniHeartExpedition> {
 	public KhalniHeartExpedition copy() {
 		return new KhalniHeartExpedition(this);
 	}
-}
-
-class KhalniHeartExpeditionAbility extends ActivatedAbilityImpl<KhalniHeartExpeditionAbility> {
-
-	public KhalniHeartExpeditionAbility() {
-		super(Zone.BATTLEFIELD, null);
-		
-		Costs additionalCosts = new CostsImpl();
-		additionalCosts.add(new RemoveCountersSourceCost(CounterType.QUEST.createInstance(3)));
-		additionalCosts.add(new SacrificeSourceCost());
-		costs.add(additionalCosts);
-		TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
-		addEffect(new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay));
-	}
-
-	public KhalniHeartExpeditionAbility(final KhalniHeartExpeditionAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public KhalniHeartExpeditionAbility copy() {
-		return new KhalniHeartExpeditionAbility(this);
-	}
-
-	@Override
-	public String getRule() {
-		return "Remove three quest counters from {this} and sacrifice it: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library.";
-	}
-
 }

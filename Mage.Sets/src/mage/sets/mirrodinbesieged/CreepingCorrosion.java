@@ -31,7 +31,6 @@ package mage.sets.mirrodinbesieged;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactPermanent;
