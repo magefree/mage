@@ -68,6 +68,7 @@ public class KothOfTheHammer extends CardImpl<KothOfTheHammer> {
 
     static {
         filter.getSubtype().add("Mountain");
+		filter.setTargetController(Constants.TargetController.YOU);
         filterCount.getSubtype().add("Mountain");
         filterCount.setTargetController(Constants.TargetController.YOU);
     }
