@@ -49,7 +49,7 @@ public class RateCard {
 		} else {
 			type = 6;
 		}
-		int score = 3 * getCardRating(card) + type + getManaCostScore(card, allowedColors);
+		int score = 10 * getCardRating(card) + type + getManaCostScore(card, allowedColors);
 		return score;
 	}
 
