@@ -13,7 +13,7 @@ import mage.game.Game;
  */
 public class Metalcraft implements Condition {
 
-    private static FilterPermanent filter = new FilterPermanent("artifact");
+    private static final FilterPermanent filter = new FilterPermanent("artifact");
 
     static {
         filter.getCardType().add(Constants.CardType.ARTIFACT);
