@@ -40,6 +40,11 @@ public class TargetControlledCreaturePermanent extends TargetControlledPermanent
 		this(1, 1, new FilterControlledCreaturePermanent(), false);
 	}
 
+	public TargetControlledCreaturePermanent(boolean required) {
+		this(1, 1, new FilterControlledCreaturePermanent(), false);
+		this.required = required;
+	}
+
 	public TargetControlledCreaturePermanent(int numTargets) {
 		this(numTargets, numTargets, new FilterControlledCreaturePermanent(), false);
 	}

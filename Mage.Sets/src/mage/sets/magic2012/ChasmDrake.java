@@ -55,7 +55,7 @@ public class ChasmDrake extends CardImpl<ChasmDrake> {
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new AttacksTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn), false);
-        ability.addTarget(new TargetControlledCreaturePermanent());
+		ability.addTarget(new TargetControlledCreaturePermanent(true));
         this.addAbility(ability);
     }
 
