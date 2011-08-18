@@ -1,7 +1,16 @@
 package mage.player.ai.utils;
 
 import mage.Constants;
+import mage.abilities.Ability;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.Card;
+import mage.target.Target;
+import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetCreaturePermanent;
+import org.apache.log4j.Logger;
+import sun.rmi.runtime.Log;
 
 import java.io.InputStream;
 import java.util.*;
@@ -22,6 +31,8 @@ public class RateCard {
 	 * Ratings are in [1,10] range, so setting it high will make new cards appear more often.
 	 */
 	private static final int DEFAULT_NOT_RATED_CARD_RATING = 4;
+
+	private static final Logger log = Logger.getLogger(RateCard.class);
 
 	/**
 	 * Hide constructor.
@@ -49,8 +60,38 @@ public class RateCard {
 		} else {
 			type = 6;
 		}
-		int score = 10 * getCardRating(card) + type + getManaCostScore(card, allowedColors);
+		int score = 10 * getCardRating(card) + 2 * type + getManaCostScore(card, allowedColors)
+				+ 40 * isRemoval(card);
 		return score;
+	}
+
+	private static int isRemoval(Card card) {
+		if (card.getSubtype().contains("Aura") || card.getCardType().contains(Constants.CardType.INSTANT)
+				|| card.getCardType().contains(Constants.CardType.SORCERY)) {
+
+			for (Ability ability : card.getAbilities()) {
+				for (Effect effect : ability.getEffects()) {
+					if (effect.getOutcome().equals(Constants.Outcome.Removal)) {
+						log.info("Found removal: " + card.getName());
+						return 1;
+					}
+					if (effect.getOutcome().equals(Constants.Outcome.Damage)) {
+						if (effect instanceof DamageTargetEffect) {
+							DamageTargetEffect damageEffect = (DamageTargetEffect) effect;
+							if (damageEffect.getAmount() > 1) {
+								for (Target target : ability.getTargets()) {
+									if (target instanceof TargetCreaturePermanent || target instanceof TargetCreatureOrPlayer) {
+										log.info("Found damage dealer: " + card.getName());
+										return 1;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return 0;
 	}
 
 	/**
@@ -139,7 +180,7 @@ public class RateCard {
 					}
 				}
 				if (count == 0) {
-					return -30;
+					return -100;
 				}
 				Integer typeCount = singleCount.get(symbol);
 				if (typeCount == null) {

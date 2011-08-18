@@ -328,7 +328,8 @@ public final class Constants {
 		Copy(true),
 		Benefit(true),
 		Detriment(false),
-		Neutral(true);
+		Neutral(true),
+		Removal(true);
 
 		private boolean good;
 
