@@ -34,6 +34,7 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -44,19 +45,30 @@ public class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTri
     private static final FilterCard spellCard = new FilterCard("a spell");
     protected FilterCard filter;
 
+	/**
+	 * If true, the source that triggered the ability will be set as target to effect.
+	 */
+	protected boolean rememberSource = false;
+
     public SpellCastTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = spellCard;
     }
 
     public SpellCastTriggeredAbility(Effect effect, FilterCard filter, boolean optional) {
+        this(effect, filter, optional, false);
+    }
+
+	public SpellCastTriggeredAbility(Effect effect, FilterCard filter, boolean optional, boolean rememberSource) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
+		this.rememberSource = rememberSource;
     }
 
     public SpellCastTriggeredAbility(final SpellCastTriggeredAbility ability) {
         super(ability);
         filter = ability.filter;
+		this.rememberSource = ability.rememberSource;
     }
 
     @Override
@@ -64,6 +76,9 @@ public class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTri
         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && filter.match(spell)) {
+				if (rememberSource) {
+					this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
+				}
                 return true;
             }
         }
