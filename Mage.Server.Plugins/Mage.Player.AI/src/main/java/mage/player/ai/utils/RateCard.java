@@ -88,6 +88,14 @@ public class RateCard {
 							}
 						}
 					}
+					if (effect.getOutcome().equals(Constants.Outcome.DestroyPermanent)) {
+						for (Target target : ability.getTargets()) {
+							if (target instanceof TargetCreaturePermanent) {
+								log.info("Found destroyer: " + card.getName());
+								return 1;
+							}
+						}
+					}
 				}
 			}
 		}

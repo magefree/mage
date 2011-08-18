@@ -152,7 +152,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				}
 			}
 			else {
-				if (target.canTarget(playerId, game)) {
+				if (target.canTarget(opponentId, game)) {
 					target.add(opponentId, game);
 					return true;
 				}
@@ -218,7 +218,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				}
 			}
 			else {
-				if (target.canTarget(playerId, source, game)) {
+				if (target.canTarget(opponentId, source, game)) {
 					target.addTarget(opponentId, source, game);
 					return true;
 				}
@@ -267,6 +267,8 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 					return true;
 				}
 			}
+			if (!target.isRequired())
+				return false;
 		}
 		if (target instanceof TargetPermanent) {
 			List<Permanent> targets;
@@ -310,7 +312,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				}
 			}
 			else {
-				if (target.canTarget(playerId, source, game)) {
+				if (target.canTarget(opponentId, source, game)) {
 					target.addTarget(opponentId, source, game);
 					return true;
 				}
