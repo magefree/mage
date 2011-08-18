@@ -31,7 +31,6 @@ package mage.abilities.effects;
 import java.util.UUID;
 import mage.Constants.EffectType;
 import mage.Constants.Outcome;
-import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.TargetPointer;

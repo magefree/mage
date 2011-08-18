@@ -65,8 +65,7 @@ public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
      * @param optional
      */
     public CreatureEntersBattlefieldTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        opponentController = false;
+        this(effect, optional, false);
     }
 
     /**
