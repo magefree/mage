@@ -164,19 +164,24 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	public int chooseEffect(List<ReplacementEffect> rEffects, Game game) {
 		game.getState().setPriorityPlayerId(getId());
 		replacementEffectChoice.getChoices().clear();
+		int count = 1;
 		for (ReplacementEffect effect: rEffects) {
-			replacementEffectChoice.getChoices().add(effect.getText(null));
+			replacementEffectChoice.getChoices().add(count + ". " + effect.getText(null));
+			count++;
 		}
 		if (replacementEffectChoice.getChoices().size() == 1)
 			return 0;
 		while (!abort) {
 			game.fireChooseEvent(playerId, replacementEffectChoice);
 			waitForResponse();
+			System.out.println(response.getString());
 			if (response.getString() != null) {
 				replacementEffectChoice.setChoice(response.getString());
+				count = 1;
 				for (int i = 0; i < rEffects.size(); i++) {
-					if (replacementEffectChoice.getChoice().equals(rEffects.get(i).getText(null)))
+					if (replacementEffectChoice.getChoice().equals(count + ". " + rEffects.get(i).getText(null)))
 						return i;
+					count++;
 				}
 			}
 		}
