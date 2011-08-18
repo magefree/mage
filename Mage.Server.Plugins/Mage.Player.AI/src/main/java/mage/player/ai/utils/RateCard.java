@@ -100,7 +100,7 @@ public class RateCard {
 	 * @param card Card to rate.
 	 * @return Rating number from [1;10].
 	 */
-	private static int getCardRating(Card card) {
+	public static int getCardRating(Card card) {
 		if (ratings == null) {
 			readRatings();
 		}
@@ -240,5 +240,4 @@ public class RateCard {
 		}
 		return symbols.size();
 	}
-
 }

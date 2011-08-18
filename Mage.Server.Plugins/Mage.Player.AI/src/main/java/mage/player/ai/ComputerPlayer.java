@@ -36,7 +36,6 @@ import java.util.Map.Entry;
 
 import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.ColoredManaSymbol;
 import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
 import mage.Constants.Zone;
@@ -77,7 +76,6 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
-import mage.game.Table;
 import mage.game.combat.CombatGroup;
 import mage.game.match.Match;
 import mage.game.permanent.Permanent;
@@ -104,7 +102,7 @@ import org.apache.log4j.Logger;
  */
 public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> implements Player {
 
-	private final static transient Logger logger = Logger.getLogger(ComputerPlayer.class);
+	private transient final static Logger log = Logger.getLogger(ComputerPlayer.class);
 	private transient Map<Mana, Card> unplayable = new TreeMap<Mana, Card>();
 	private transient List<Card> playableNonInstant = new ArrayList<Card>();
 	private transient List<Card> playableInstant = new ArrayList<Card>();
@@ -127,7 +125,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	
 	@Override
 	public boolean chooseMulligan(Game game) {
-		logger.debug("chooseMulligan");
+		log.debug("chooseMulligan");
 		if (hand.size() < 6 || isTestMode())
 			return false;
 		Set<Card> lands = hand.getCards(new FilterLandCard(), game);
@@ -143,8 +141,8 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 	@Override
 	public boolean choose(Outcome outcome, Target target, Game game, Map<String, Serializable> options) {
-		if (logger.isDebugEnabled())
-			logger.debug("chooseTarget: " + outcome.toString() + ":" + target.toString());
+		if (log.isDebugEnabled())
+			log.debug("chooseTarget: " + outcome.toString() + ":" + target.toString());
 		UUID opponentId = game.getOpponents(playerId).iterator().next();
 		if (target instanceof TargetPlayer) {
 			if (outcome.isGood()) {
@@ -209,8 +207,8 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 	@Override
 	public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
-		if (logger.isDebugEnabled())
-			logger.debug("chooseTarget: " + outcome.toString() + ":" + target.toString());
+		if (log.isDebugEnabled())
+			log.debug("chooseTarget: " + outcome.toString() + ":" + target.toString());
 		UUID opponentId = game.getOpponents(playerId).iterator().next();
 		if (target instanceof TargetPlayer) {
 			if (outcome.isGood()) {
@@ -380,8 +378,8 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 	@Override
 	public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
-		if (logger.isDebugEnabled())
-			logger.debug("chooseTarget: " + outcome.toString() + ":" + target.toString());
+		if (log.isDebugEnabled())
+			log.debug("chooseTarget: " + outcome.toString() + ":" + target.toString());
 		UUID opponentId = game.getOpponents(playerId).iterator().next();
 		if (target instanceof TargetCreatureOrPlayerAmount) {
 			if (game.getPlayer(opponentId).getLife() <= target.getAmountRemaining()) {
@@ -409,7 +407,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 	@Override
 	public void priority(Game game) {
-		logger.debug("priority");
+		log.debug("priority");
 		UUID opponentId = game.getOpponents(playerId).iterator().next();
 		if (game.getActivePlayerId().equals(playerId)) {
 			if (game.isMainPhase() && game.getStack().isEmpty()) {
@@ -495,7 +493,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	protected void playLand(Game game) {
-		logger.debug("playLand");
+		log.debug("playLand");
 		Set<Card> lands = hand.getCards(new FilterLandCard(), game);
 		while (lands.size() > 0 && this.landsPlayed < this.landsPerTurn) {
 			if (lands.size() == 1)
@@ -507,7 +505,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	protected void playALand(Set<Card> lands, Game game) {
-		logger.debug("playALand");
+		log.debug("playALand");
 		//play a land that will allow us to play an unplayable
 		for (Mana mana: unplayable.keySet()) {
 			for (Card card: lands) {
@@ -618,19 +616,17 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				}
 			}
 		}
-		if (logger.isDebugEnabled())
-			logger.debug("findPlayables: " + playableInstant.toString() + "---" + playableNonInstant.toString() + "---" + playableAbilities.toString() );
+		if (log.isDebugEnabled())
+			log.debug("findPlayables: " + playableInstant.toString() + "---" + playableNonInstant.toString() + "---" + playableAbilities.toString() );
 	}
 
 	@Override
 	protected ManaOptions getManaAvailable(Game game) {
-//		logger.debug("getManaAvailable");
 		return super.getManaAvailable(game);
 	}
 
 	@Override
 	public boolean playMana(ManaCost unpaid, Game game) {
-//		logger.debug("playMana");
 		ManaCost cost;
 		List<Permanent> producers;
 		if (unpaid instanceof ManaCosts) {
@@ -738,7 +734,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 	@Override
 	public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
-		logger.debug("playXMana");
+		log.debug("playXMana");
 		//put everything into X
 		for (Permanent perm: this.getAvailableManaProducers(game)) {
 			for (ManaAbility ability: perm.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {
@@ -762,14 +758,14 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 	@Override
 	public boolean chooseUse(Outcome outcome, String message, Game game) {
-		logger.debug("chooseUse");
+		log.debug("chooseUse");
 		//TODO: improve this
 		return outcome.isGood();
 	}
 
 	@Override
 	public boolean choose(Outcome outcome, Choice choice, Game game) {
-		logger.debug("choose");
+		log.debug("choose");
 		//TODO: improve this
 		choice.setChoice(choice.getChoices().iterator().next());
 		return true;
@@ -777,7 +773,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 	@Override
 	public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game)  {
-		logger.debug("chooseTarget");
+		log.debug("chooseTarget");
 		while (!target.doneChosing()) {
 			if (cards.isEmpty()) {
 				if (!target.isRequired())
@@ -794,7 +790,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 	@Override
 	public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game)  {
-		logger.debug("choose");
+		log.debug("choose");
 		if (cards != null && cards.isEmpty()) {
 			return false;
 		}
@@ -814,7 +810,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 	@Override
 	public void selectAttackers(Game game) {
-		logger.debug("selectAttackers");
+		log.debug("selectAttackers");
 		UUID opponentId = game.getCombat().getDefenders().iterator().next();
 		Attackers attackers = getPotentialAttackers(game);
 		List<Permanent> blockers = getOpponentBlockers(opponentId, game);
@@ -841,7 +837,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 	@Override
 	public void selectBlockers(Game game) {
-		logger.debug("selectBlockers");
+		log.debug("selectBlockers");
 
 		List<Permanent> blockers = getAvailableBlockers(game);
 
@@ -857,21 +853,21 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	
 	@Override
 	public int chooseEffect(List<ReplacementEffect> rEffects, Game game) {
-		logger.debug("chooseEffect");
+		log.debug("chooseEffect");
 		//TODO: implement this
 		return 0;
 	}
 
 	@Override
 	public Mode chooseMode(Modes modes, Ability source, Game game) {
-		logger.debug("chooseMode");
+		log.debug("chooseMode");
 		//TODO: improve this;
 		return modes.get(0);
 	}
 	
 	@Override
 	public TriggeredAbility chooseTriggeredAbility(TriggeredAbilities abilities, Game game) {
-		logger.debug("chooseTriggeredAbility");
+		log.debug("chooseTriggeredAbility");
 		//TODO: improve this
 		if (abilities.size() > 0)
 			return abilities.get(0);
@@ -880,14 +876,14 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 	@Override
 	public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID sourceId, Game game) {
-		logger.debug("assignDamage");
+		log.debug("assignDamage");
 		//TODO: improve this
 		game.getPermanent(targets.get(0)).damage(damage, sourceId, game, true, false);
 	}
 
 	@Override
 	public int getAmount(int min, int max, String message, Game game) {
-		logger.debug("getAmount");
+		log.debug("getAmount");
 		//TODO: improve this
 		return min;
 	}
@@ -906,7 +902,6 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		
 	@Override
 	protected List<Permanent> getAvailableManaProducers(Game game) {
-//		logger.debug("getAvailableManaProducers");
 		return super.getAvailableManaProducers(game);
 	}
 
@@ -1042,6 +1037,22 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		try {
 			Card bestCard = pickBestCard(cards, chosenColors);
 			int maxScore = RateCard.rateCard(bestCard, chosenColors);
+			int pickedCardRate = RateCard.getCardRating(bestCard);
+
+			if (pickedCardRate <= 3) {
+				// if card is bad
+				// try to counter pick without any color restriction
+				Card counterPick = pickBestCard(cards, null);
+				int counterPickScore = RateCard.getCardRating(counterPick);
+				// card is really good
+				// take it!
+				if (counterPickScore >= 8) {
+					bestCard = counterPick;
+					maxScore =  RateCard.rateCard(bestCard, chosenColors);
+				}
+			}
+
+
 			String colors = "not chosen yet";
 			// remember card if colors are not chosen yet
 			if (chosenColors == null) {
@@ -1054,7 +1065,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 					colors += symbol.toString();
 				}
 			}
-			System.out.println("[DEBUG] AI picked: " + bestCard.getName() + ", score=" + maxScore + ", deck colors=" + colors);
+			log.debug("[DEBUG] AI picked: " + bestCard.getName() + ", score=" + maxScore + ", deck colors=" + colors);
 			draft.addPick(playerId, bestCard.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1139,7 +1150,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	protected Attackers getPotentialAttackers(Game game) {
-		logger.debug("getAvailableAttackers");
+		log.debug("getAvailableAttackers");
 		Attackers attackers = new Attackers();
 		List<Permanent> creatures = super.getAvailableAttackers(game);
 		for (Permanent creature: creatures) {
@@ -1155,7 +1166,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	protected int combatPotential(Permanent creature, Game game) {
-		logger.debug("combatPotential");
+		log.debug("combatPotential");
 		if (!creature.canAttack(game))
 			return 0;
 		int potential = creature.getPower().getValue();
@@ -1167,22 +1178,14 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		return potential;
 	}
 
-//	protected List<Permanent> getAvailableBlockers(Game game) {
-//		logger.debug("getAvailableBlockers");
-//		FilterCreatureForCombat blockFilter = new FilterCreatureForCombat();
-//		List<Permanent> blockers = game.getBattlefield().getAllActivePermanents(blockFilter, playerId);
-//		return blockers;
-//	}
-
 	protected List<Permanent> getOpponentBlockers(UUID opponentId, Game game) {
-		logger.debug("getOpponentBlockers");
 		FilterCreatureForCombat blockFilter = new FilterCreatureForCombat();
 		List<Permanent> blockers = game.getBattlefield().getAllActivePermanents(blockFilter, opponentId);
 		return blockers;
 	}
 
 	protected CombatSimulator simulateAttack(Attackers attackers, List<Permanent> blockers, UUID opponentId, Game game) {
-		logger.debug("simulateAttack");
+		log.debug("simulateAttack");
 		List<Permanent> attackersList = attackers.getAttackers();
 		CombatSimulator best = new CombatSimulator();
 		int bestResult = 0;
@@ -1213,7 +1216,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	protected CombatSimulator simulateBlock(CombatSimulator combat, List<Permanent> blockers, Game game) {
-		logger.debug("simulateBlock");
+		log.debug("simulateBlock");
 
 		TreeNode<CombatSimulator> simulations;
 
@@ -1286,7 +1289,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	protected void logState(Game game) {
-		if (logger.isDebugEnabled())
+		if (log.isDebugEnabled())
 			logList("computer player " + name + " hand: ", new ArrayList(hand.getCards(game)));
 	}
 
@@ -1296,7 +1299,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		for (MageObject object: list) {
 			sb.append(object.getName()).append(",");
 		}
-		logger.debug(sb.toString());
+		log.debug(sb.toString());
 	}
 
 	protected void logAbilityList(String message, List<Ability> list) {
@@ -1305,7 +1308,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 		for (Ability ability: list) {
 			sb.append(ability.getRule()).append(",");
 		}
-		logger.debug(sb.toString());
+		log.debug(sb.toString());
 	}
 
 	private void playRemoval(List<UUID> creatures, Game game) {
