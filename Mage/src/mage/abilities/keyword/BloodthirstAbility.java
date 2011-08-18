@@ -43,6 +43,7 @@ class BloodthirstEffect extends OneShotEffect<BloodthirstEffect> {
     BloodthirstEffect(int amount) {
         super(Constants.Outcome.BoostCreature);
         this.amount = amount;
+		staticText = "this permanent comes into play with " + amount + " +1/+1 counters on it";
     }
 
     BloodthirstEffect(final BloodthirstEffect effect) {
