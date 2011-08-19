@@ -27,6 +27,8 @@
  */
 package mage.sets.magic2012;
 
+import static mage.Constants.Zone;
+
 import java.util.UUID;
 
 import mage.Constants;
@@ -55,6 +57,8 @@ import mage.game.permanent.Permanent;
  */
 public class PrimordialHydra extends CardImpl<PrimordialHydra> {
 
+	private final static String staticText = "{this} has trample as long as it has ten or more +1/+1 counters on it";
+
     public PrimordialHydra(UUID ownerId) {
         super(ownerId, 189, "Primordial Hydra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{X}{G}{G}");
         this.expansionSetCode = "M12";
@@ -66,8 +70,10 @@ public class PrimordialHydra extends CardImpl<PrimordialHydra> {
 
         this.addAbility(new EntersBattlefieldAbility(new PrimordialHydraEntersEffect(), "{this} enters the battlefield with X +1/+1 counters on it"));
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PrimordialHydraDoubleEffect(), Constants.TargetController.YOU, false));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Constants.Duration.WhileOnBattlefield), new HaveCounter(CounterType.P1P1, 10), "{this} has trample as long as it has ten or more +1/+1 counters on it")));
-    }
+        this.addAbility(new ConditionalStaticAbility(Zone.BATTLEFIELD,
+				new GainAbilitySourceEffect(TrampleAbility.getInstance(), Constants.Duration.WhileOnBattlefield),
+				new HaveCounter(CounterType.P1P1, 10), staticText));
+	}
 
     public PrimordialHydra(final PrimordialHydra card) {
         super(card);
