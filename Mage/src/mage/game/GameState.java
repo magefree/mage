@@ -127,9 +127,6 @@ public class GameState implements Serializable, Copyable<GameState> {
 		for (Map.Entry<UUID, LookedAt> entry: state.lookedAt.entrySet()) {
 			lookedAt.put(entry.getKey(), entry.getValue());
 		}
-		for (UUID key: state.lookedAt.keySet()) {
-			lookedAt.put(key, state.lookedAt.get(key));
-		}
 		this.battlefield = state.battlefield.copy();
 		this.turnNum = state.turnNum;
 		this.gameOver = state.gameOver;
