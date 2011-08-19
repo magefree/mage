@@ -34,6 +34,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -88,7 +89,8 @@ class WarstormSurgeTriggeredAbility extends TriggeredAbilityImpl<WarstormSurgeTr
             if (((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD
                     && permanent.getCardType().contains(CardType.CREATURE)
                     && permanent.getControllerId().equals(this.controllerId)) {
-                game.getState().setValue(sourceId.toString(), event.getTargetId());
+				Effect effect = this.getEffects().get(0);
+				effect.setValue("damageSource", event.getTargetId());
                 return true;
             }
         }
@@ -124,7 +126,7 @@ class WarstormSurgeEffect extends OneShotEffect<WarstormSurgeEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID creatureId = (UUID) game.getState().getValue(source.getSourceId().toString());
+        UUID creatureId = (UUID) getValue("damageSource");
         Permanent creature = game.getPermanent(creatureId);
         if (creature == null) {
             creature = (Permanent) game.getLastKnownInformation(creatureId, Zone.BATTLEFIELD);
