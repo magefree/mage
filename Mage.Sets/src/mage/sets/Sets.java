@@ -76,11 +76,13 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(Eventide.getInstance());
         this.addSet(Guildpact.getInstance());
         this.addSet(Guru.getInstance());
+        this.addSet(Lorwyn.getInstance());
 		this.addSet(Magic2010.getInstance());
 		this.addSet(Magic2011.getInstance());
 		this.addSet(Magic2012.getInstance());
         this.addSet(Mirrodin.getInstance());
 		this.addSet(MirrodinBesieged.getInstance());
+        this.addSet(Morningtide.getInstance());
         this.addSet(NewPhyrexia.getInstance());
 		this.addSet(Planechase.getInstance());
         this.addSet(RavnicaCityOfGuilds.getInstance());
