@@ -12,6 +12,8 @@ Champions of Kamigawa|championsofkamigawa|
 Ravnica: City of Guilds|ravnika|
 Guildpact|guildpact|
 Dissension|dissension|
+Lorwyn|lorwyn|
+Morningtide|morningtide|
 Shadowmoor|shadowmoor|
 Eventide|eventide|
 Shards of Alara|shardsofalara|
