@@ -25,48 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.sets.elspethvstezzeret;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class TrashForTreasure extends CardImpl<TrashForTreasure> {
+public class ArgivianRestoration extends CardImpl<ArgivianRestoration> {
 
-    private static final FilterControlledPermanent filterPermanent = new FilterControlledPermanent("an artifact");
-    private static final FilterCard filterCard = new FilterCard("artifact");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("artifact");
 
     static {
-        filterPermanent.getCardType().add(CardType.ARTIFACT);
-        filterCard.getCardType().add(CardType.ARTIFACT);
+        filter.getCardType().add(CardType.ARTIFACT);
     }
 
-    public TrashForTreasure(UUID ownerId) {
-        super(ownerId, 109, "Trash for Treasure", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "MRD";
-        this.color.setRed(true);
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filterPermanent)));
+    public ArgivianRestoration(UUID ownerId) {
+        super(ownerId, 69, "Argivian Restoration", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
+        this.expansionSetCode = "DDF";
+
+        this.color.setBlue(true);
+
+        // Return target artifact card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filterCard));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
     }
 
-    public TrashForTreasure(final TrashForTreasure card) {
+    public ArgivianRestoration(final ArgivianRestoration card) {
         super(card);
     }
 
     @Override
-    public TrashForTreasure copy() {
-        return new TrashForTreasure(this);
+    public ArgivianRestoration copy() {
+        return new ArgivianRestoration(this);
     }
 }

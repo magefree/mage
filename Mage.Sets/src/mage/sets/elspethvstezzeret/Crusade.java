@@ -25,48 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.sets.elspethvstezzeret;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.Constants.Zone;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class TrashForTreasure extends CardImpl<TrashForTreasure> {
+public class Crusade extends CardImpl<Crusade> {
 
-    private static final FilterControlledPermanent filterPermanent = new FilterControlledPermanent("an artifact");
-    private static final FilterCard filterCard = new FilterCard("artifact");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("White creatures");
 
     static {
-        filterPermanent.getCardType().add(CardType.ARTIFACT);
-        filterCard.getCardType().add(CardType.ARTIFACT);
+        filter.getColor().setWhite(true);
     }
 
-    public TrashForTreasure(UUID ownerId) {
-        super(ownerId, 109, "Trash for Treasure", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "MRD";
-        this.color.setRed(true);
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filterPermanent)));
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filterCard));
+    public Crusade(UUID ownerId) {
+        super(ownerId, 27, "Crusade", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");
+        this.expansionSetCode = "DDF";
+
+        this.color.setWhite(true);
+
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public TrashForTreasure(final TrashForTreasure card) {
+    public Crusade(final Crusade card) {
         super(card);
     }
 
     @Override
-    public TrashForTreasure copy() {
-        return new TrashForTreasure(this);
+    public Crusade copy() {
+        return new Crusade(this);
     }
 }

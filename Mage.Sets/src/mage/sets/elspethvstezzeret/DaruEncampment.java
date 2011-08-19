@@ -25,48 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.sets.elspethvstezzeret;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.Constants.Zone;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class TrashForTreasure extends CardImpl<TrashForTreasure> {
+public class DaruEncampment extends CardImpl<DaruEncampment> {
 
-    private static final FilterControlledPermanent filterPermanent = new FilterControlledPermanent("an artifact");
-    private static final FilterCard filterCard = new FilterCard("artifact");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creature");
 
     static {
-        filterPermanent.getCardType().add(CardType.ARTIFACT);
-        filterCard.getCardType().add(CardType.ARTIFACT);
+        filter.getSubtype().add("Soldier");
     }
 
-    public TrashForTreasure(UUID ownerId) {
-        super(ownerId, 109, "Trash for Treasure", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}");
-        this.expansionSetCode = "MRD";
-        this.color.setRed(true);
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filterPermanent)));
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filterCard));
+    public DaruEncampment(UUID ownerId) {
+        super(ownerId, 32, "Daru Encampment", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "DDF";
+
+        this.addAbility(new ColorlessManaAbility());
+        // {W}, {tap}: Target Soldier creature gets +1/+1 until end of turn.
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new BoostTargetEffect(1, 1, Duration.EndOfTurn),
+                new ManaCostsImpl("{W}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
     }
 
-    public TrashForTreasure(final TrashForTreasure card) {
+    public DaruEncampment(final DaruEncampment card) {
         super(card);
     }
 
     @Override
-    public TrashForTreasure copy() {
-        return new TrashForTreasure(this);
+    public DaruEncampment copy() {
+        return new DaruEncampment(this);
     }
 }
