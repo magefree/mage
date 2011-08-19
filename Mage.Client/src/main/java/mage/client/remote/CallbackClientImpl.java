@@ -105,6 +105,10 @@ public class CallbackClientImpl implements CallbackClient {
 							}
 						}
 					}
+					else if (callback.getMethod().equals("joinedTable")) {
+                        TableClientMessage message = (TableClientMessage) callback.getData();
+                        joinedTable(message.getRoomId(), message.getTableId(), message.getFlag());
+					}
 					else if (callback.getMethod().equals("replayInit")) {
 						GamePanel panel = frame.getGame(callback.getObjectId());
 						if (panel != null)
@@ -264,6 +268,15 @@ public class CallbackClientImpl implements CallbackClient {
 		return clientId;
 	}
 
+    private void joinedTable(UUID roomId, UUID tableId, boolean isTournament) {
+        try {
+            frame.showTableWaitingDialog(roomId, tableId, isTournament);
+        }
+ 		catch (Exception ex) {
+			handleException(ex);
+		}
+   }
+            
 	protected void gameStarted(final UUID gameId, final UUID playerId) {
 		try {
 			frame.showGame(gameId, playerId);

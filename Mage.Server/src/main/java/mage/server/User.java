@@ -33,6 +33,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 import mage.cards.decks.Deck;
+import mage.game.Table;
 import mage.interfaces.callback.ClientCallback;
 import mage.server.draft.DraftSession;
 import mage.server.game.GameManager;
@@ -57,6 +58,7 @@ public class User {
 	private Date connectionTime = new Date();
 	private Date lastActivity = new Date();
 	private UserState userState;
+    private Map<UUID, Table> tables = new HashMap<UUID, Table>();
  	private Map<UUID, GameSession> gameSessions = new HashMap<UUID, GameSession>();
 	private Map<UUID, DraftSession> draftSessions = new HashMap<UUID, DraftSession>();
 	private Map<UUID, TournamentSession> tournamentSessions = new HashMap<UUID, TournamentSession>();
@@ -108,6 +110,10 @@ public class User {
 			Session session = SessionManager.getInstance().getSession(sessionId);
 			session.fireCallback(call);		
 		}
+	}
+
+	public void joinedTable(final UUID roomId, final UUID tableId, boolean isTournament) {
+		fireCallback(new ClientCallback("joinedTable", tableId, new TableClientMessage(roomId, tableId, isTournament)));
 	}
 
 	public void gameStarted(final UUID gameId, final UUID playerId) {
@@ -178,6 +184,9 @@ public class User {
 			entry.getValue().init();
 			entry.getValue().update();
 		}
+		for (Entry<UUID, Table> entry: tables.entrySet()) {
+            joinedTable(entry.getValue().getRoomId(), entry.getValue().getId(), entry.getValue().isTournament());
+		}
 	}
 
 	public void addGame(UUID playerId, GameSession gameSession) {
@@ -204,15 +213,29 @@ public class User {
 		tournamentSessions.remove(playerId);
 	}
 	
+    public void addTable(UUID playerId, Table table) {
+        tables.put(playerId, table);
+    }
+    
+    public void removeTable(UUID playerId) {
+        tables.remove(playerId);
+    }
+    
 	public void kill() {
-		for (Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
-			entry.getValue().kill();
+		for (GameSession session: gameSessions.values()) {
+			session.kill();
 		}
-		for (Entry<UUID, DraftSession> entry: draftSessions.entrySet()) {
-			entry.getValue().setKilled();
+		for (DraftSession session: draftSessions.values()) {
+			session.setKilled();
 		}
-		for (Entry<UUID, TournamentSession> entry: tournamentSessions.entrySet()) {
-			entry.getValue().setKilled();
+		for (TournamentSession session: tournamentSessions.values()) {
+			session.setKilled();
+		}
+		for (Entry<UUID, Table> entry: tables.entrySet()) {
+			entry.getValue().leaveTable(entry.getKey());
+            if (TableManager.getInstance().isTableOwner(entry.getValue().getId(), userId)) {
+                TableManager.getInstance().removeTable(userId, entry.getValue().getId());
+            }
 		}
 	}
 

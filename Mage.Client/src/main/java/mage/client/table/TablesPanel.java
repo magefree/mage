@@ -133,15 +133,11 @@ public class TablesPanel extends javax.swing.JPanel {
 					}
 					if (isTournament) {
 						logger.info("Joining tournament " + tableId);
-						if (session.joinTournamentTable(roomId, tableId, session.getUserName(), "Human", 1)) {
-							showTableWaitingDialog(roomId, tableId, true);
-						}
+						session.joinTournamentTable(roomId, tableId, session.getUserName(), "Human", 1);
 					}
 					else {
 						logger.info("Joining table " + tableId);
 						joinTableDialog.showDialog(roomId, tableId);
-						if (joinTableDialog.isJoined())
-							showTableWaitingDialog(roomId, tableId, false);
 					}
 				} else if (state.equals("Watch")) {
 					logger.info("Watching table " + tableId);
@@ -263,12 +259,6 @@ public class TablesPanel extends javax.swing.JPanel {
 		}
 		if (c != null)
 			((TablesPane)c).hideFrame();
-	}
-
-	private void showTableWaitingDialog(UUID roomId, UUID tableId, boolean isTournament) {
-		TableWaitingDialog tableWaitingDialog = new TableWaitingDialog();
-		MageFrame.getDesktop().add(tableWaitingDialog, JLayeredPane.MODAL_LAYER);
-		tableWaitingDialog.showDialog(roomId, tableId, isTournament);
 	}
 	
     /** This method is called from within the constructor to
@@ -418,9 +408,6 @@ public class TablesPanel extends javax.swing.JPanel {
 
         private void btnNewTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTournamentActionPerformed
             newTournamentDialog.showDialog(roomId);
-            if (newTournamentDialog.getTable() != null) {
-                showTableWaitingDialog(roomId, newTournamentDialog.getTable().getTableId(), true);
-            }
 }//GEN-LAST:event_btnNewTournamentActionPerformed
 
         private void btnQuickStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartActionPerformed
@@ -444,9 +431,6 @@ public class TablesPanel extends javax.swing.JPanel {
 
 	private void btnNewTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTableActionPerformed
 		newTableDialog.showDialog(roomId);
-		if (newTableDialog.getTable() != null) {
-			showTableWaitingDialog(roomId, newTableDialog.getTable().getTableId(), false);
-		}
 	}//GEN-LAST:event_btnNewTableActionPerformed
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

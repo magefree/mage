@@ -526,7 +526,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 		} catch (PropertyVetoException ex) {}
 	}
 
-	public static boolean connect(Connection connection) {
+	public void showTableWaitingDialog(UUID roomId, UUID tableId, boolean isTournament) {
+		TableWaitingDialog tableWaitingDialog = new TableWaitingDialog();
+		desktopPane.add(tableWaitingDialog, JLayeredPane.MODAL_LAYER);
+		tableWaitingDialog.showDialog(roomId, tableId, isTournament);
+	}
+
+    public static boolean connect(Connection connection) {
         return session.connect(connection);
     }
 
@@ -776,7 +782,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 	}//GEN-LAST:event_btnPreferencesActionPerformed
 
     public void exitApp() {
-        session.disconnect(false);
+        if (session.isConnected()) {
+            if (JOptionPane.showConfirmDialog(this, "You are currently connected.  Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+                return;
+            }
+            session.disconnect(false);
+        }
         Plugins.getInstance().shutdown();
         dispose();
         System.exit(0);

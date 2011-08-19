@@ -136,6 +136,9 @@ public class TableController {
 		Player player = createPlayer(name, seat.getPlayerType(), skill);
 		tournament.addPlayer(player, seat.getPlayerType());
 		table.joinTable(player, seat);
+        User user = UserManager.getInstance().getUser(userId);
+        user.addTable(player.getId(), table);
+        user.joinedTable(table.getRoomId(), table.getId(), true);
 		logger.info("player joined " + player.getId());
 		//only add human players to sessionPlayerMap
 		if (seat.getPlayer().isHuman()) {
@@ -161,6 +164,9 @@ public class TableController {
 		Player player = createPlayer(name, seat.getPlayerType(), skill);
 		match.addPlayer(player, deck);
 		table.joinTable(player, seat);
+        User user = UserManager.getInstance().getUser(userId);
+        user.addTable(player.getId(), table);
+        user.joinedTable(table.getRoomId(), table.getId(), false);
 		logger.info("player joined " + player.getId());
 		//only add human players to sessionPlayerMap
 		if (seat.getPlayer().isHuman()) {
