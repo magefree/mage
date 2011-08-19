@@ -28,6 +28,8 @@
 
 package mage.abilities.effects;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import mage.Constants.EffectType;
 import mage.Constants.Outcome;
@@ -46,6 +48,7 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 	protected EffectType effectType;
     protected TargetPointer targetPointer = FirstTargetPointer.getInstance();
     protected String staticText = "";
+	protected Map<String, Object> values;
 
 	public EffectImpl(Outcome outcome) {
 		this.id = UUID.randomUUID();
@@ -58,6 +61,13 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 		this.effectType = effect.effectType;
         this.staticText = effect.staticText;
         this.targetPointer = effect.targetPointer.copy();
+		if (effect.values != null) {
+			values = new HashMap<String, Object>();
+			Map<String, Object> map = effect.values;
+			for (Map.Entry<String, Object> entry : map.entrySet()) {
+				values.put(entry.getKey(), entry.getValue());
+			}
+		}
 	}
 
 	@Override
@@ -106,5 +116,25 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
 	@Override
 	public void newId() {
 		this.id = UUID.randomUUID();
+	}
+
+	@Override
+	public void setValue(String key, Object value) {
+		if (values == null) {
+			synchronized (this) {
+				if (values == null) {
+					values = new HashMap<String, Object>();
+				}
+			}
+		}
+		values.put(key, value);
+	}
+
+	@Override
+	public Object getValue(String key) {
+		if (values == null) { // no value was set
+			return null;
+		}
+		return values.get(key);
 	}
 }
