@@ -93,7 +93,6 @@ class SemblanceAnvilEffect extends OneShotEffect<SemblanceAnvilEffect> {
 		Player player = game.getPlayer(source.getControllerId());
 		if (player.getHand().size() > 0) {
 			TargetCard target = new TargetCard(Constants.Zone.HAND, filter);
-			target.setRequired(true);
 			player.choose(Constants.Outcome.Benefit, player.getHand(), target, game);
 			Card card = player.getHand().get(target.getFirstTarget(), game);
 			if (card != null) {
