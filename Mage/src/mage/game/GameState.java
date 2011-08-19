@@ -124,6 +124,9 @@ public class GameState implements Serializable, Copyable<GameState> {
 		this.command = state.command.copy();
 		this.exile = state.exile.copy();
 		this.revealed = state.revealed.copy();
+		for (Map.Entry<UUID, LookedAt> entry: state.lookedAt.entrySet()) {
+			lookedAt.put(entry.getKey(), entry.getValue());
+		}
 		for (UUID key: state.lookedAt.keySet()) {
 			lookedAt.put(key, state.lookedAt.get(key));
 		}
@@ -137,12 +140,12 @@ public class GameState implements Serializable, Copyable<GameState> {
 		this.combat = state.combat.copy();
 		this.turnMods = state.turnMods.copy();
 		this.watchers = state.watchers.copy();
-		for (String key: state.values.keySet()) {
-			values.put(key, state.values.get(key));
+		for (Map.Entry<String, Object> entry : state.values.entrySet()) {
+			values.put(entry.getKey(), entry.getValue());
 			//TODO: might have to change value to Copyable
 		}
-		for (UUID key: state.zones.keySet()) {
-			zones.put(key, state.zones.get(key));
+		for (Map.Entry<UUID, Zone> entry: state.zones.entrySet()) {
+			zones.put(entry.getKey(), entry.getValue());
 		}
 	}
 
