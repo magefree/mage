@@ -398,21 +398,31 @@ public class ContinuousEffects implements Serializable {
 
 	public boolean replaceEvent(GameEvent event, Game game) {
 		boolean caught = false;
-		List<ReplacementEffect> rEffects = getApplicableReplacementEffects(event, game);
-		if (rEffects.size() > 0) {
-			int index;
-			if (rEffects.size() == 1) {
-				index = 0;
-			}
-			else {
-				//20100716 - 616.1c
-				Player player = game.getPlayer(event.getPlayerId());
-				index = player.chooseEffect(rEffects, game);
-			}
-			ReplacementEffect rEffect = rEffects.get(index);
-			caught = rEffect.replaceEvent(event, abilityMap.get(rEffect.getId()), game);
-		}
-
+        List<UUID> consumed = new ArrayList<UUID>();
+        do {
+            List<ReplacementEffect> rEffects = getApplicableReplacementEffects(event, game);
+            for (Iterator<ReplacementEffect> i = rEffects.iterator(); i.hasNext();) {
+                ReplacementEffect entry = i.next();
+                if (consumed.contains(entry.getId()))
+                    i.remove();
+            }
+            if (rEffects.isEmpty())
+                break;
+            int index;
+            if (rEffects.size() == 1) {
+                index = 0;
+            }
+            else {
+                //20100716 - 616.1c
+                Player player = game.getPlayer(event.getPlayerId());
+                index = player.chooseEffect(rEffects, game);
+            }
+            ReplacementEffect rEffect = rEffects.get(index);
+            caught = rEffect.replaceEvent(event, abilityMap.get(rEffect.getId()), game);
+            if (caught)
+                break;
+            consumed.add(rEffect.getId());
+        } while (true);
 		return caught;
 	}
 
