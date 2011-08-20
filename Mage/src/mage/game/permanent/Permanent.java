@@ -113,6 +113,12 @@ public interface Permanent extends Card {
 	public boolean isDeathtouched();
 
 	/**
+	 * Returns the list of sources that dealt damage this turn to this permanent
+	 * @return
+	 */
+	public List<UUID> getDealtDamageByThisTurn();
+
+	/**
 	 * Imprint some other card to this one.
 	 *
 	 * @param imprintedCard Card to count as imprinted

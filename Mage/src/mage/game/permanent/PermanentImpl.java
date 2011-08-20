@@ -45,6 +45,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -73,7 +74,10 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	protected List<UUID> attachments = new ArrayList<UUID>();
 	protected List<UUID> imprinted = new ArrayList<UUID>();
 	protected List<UUID> connectedCards = new ArrayList<UUID>();
+	protected List<UUID> dealtDamageByThisTurn;
 	protected UUID attachedTo;
+
+	private static final List<UUID> emptyList = Collections.unmodifiableList(new ArrayList<UUID>());
 
 	public PermanentImpl(UUID ownerId, UUID controllerId, String name) {
 		super(ownerId, name);
@@ -114,6 +118,12 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		}
 		for (UUID connectedCardId : permanent.connectedCards) {
 			this.connectedCards.add(connectedCardId);
+		}
+		if (permanent.dealtDamageByThisTurn != null) {
+			dealtDamageByThisTurn = new ArrayList<UUID>();
+			for (UUID sourceId : permanent.dealtDamageByThisTurn) {
+				this.dealtDamageByThisTurn.add(sourceId);
+			}
 		}
 		this.attachedTo = permanent.attachedTo;
 	}
@@ -197,6 +207,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		this.loyaltyUsed = false;
 		this.turnsOnBattlefield++;
 		this.deathtouched = false;
+		dealtDamageByThisTurn = null;
 		for (Ability ability : this.abilities) {
 			ability.reset(game);
 		}
@@ -501,6 +512,10 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 				if (source != null && source.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
 					deathtouched = true;
 				}
+				if (dealtDamageByThisTurn == null) {
+					dealtDamageByThisTurn = new ArrayList<UUID>();
+				}
+				dealtDamageByThisTurn.add(sourceId);
 			}
 		}
 		return damageDone;
@@ -709,4 +724,11 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		return this.imprinted;
 	}
 
+	@Override
+	public List<UUID> getDealtDamageByThisTurn() {
+		if (dealtDamageByThisTurn == null) {
+			return emptyList;
+		}
+		return dealtDamageByThisTurn;
+	}
 }
