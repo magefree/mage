@@ -33,6 +33,7 @@ import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.VariableCost;
+import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
@@ -90,6 +91,10 @@ public class TapVariableTargetCost extends CostImpl<TapVariableTargetCost> imple
 	@Override
 	public int getAmount() {
 		return amountPaid;
+	}
+
+	@Override
+	public void setFilter(FilterMana filter) {
 	}
 
 	@Override

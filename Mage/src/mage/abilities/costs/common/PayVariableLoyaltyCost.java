@@ -34,6 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.VariableCost;
 import mage.counters.CounterType;
+import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -85,6 +86,10 @@ public class PayVariableLoyaltyCost extends CostImpl<PayVariableLoyaltyCost> imp
 	@Override
 	public int getAmount() {
 		return amountPaid;
+	}
+
+	@Override
+	public void setFilter(FilterMana filter) {
 	}
 
 	@Override

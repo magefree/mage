@@ -31,6 +31,7 @@ package mage.abilities.costs.mana;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.VariableCost;
+import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.players.ManaPool;
 
@@ -41,6 +42,7 @@ import mage.players.ManaPool;
 public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements VariableCost {
 
 	protected int multiplier;
+	protected FilterMana filter;
 
 	public VariableManaCost() {
 		this(1);
@@ -55,6 +57,7 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements 
 	public VariableManaCost(VariableManaCost manaCost) {
 		super(manaCost);
 		this.multiplier = manaCost.multiplier;
+		if (manaCost.filter != null) this.filter = manaCost.filter.copy();
 	}
 
 	@Override
@@ -64,9 +67,9 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements 
 
 	@Override
 	public void assignPayment(Game game, Ability ability, ManaPool pool) {
-		payment.add(pool.getMana());
-		payment.add(pool.getAllConditionalMana(ability, game));
-		pool.emptyPoolConditional(ability, game);
+		payment.add(pool.getMana(filter));
+		payment.add(pool.getAllConditionalMana(ability, game, filter));
+		pool.emptyPoolConditional(ability, game, filter);
 	}
 
 	@Override
@@ -96,6 +99,11 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements 
 	@Override
 	public boolean testPay(Mana testMana) {
 		return true;
+	}
+
+	@Override
+	public void setFilter(FilterMana filter) {
+		this.filter = filter;
 	}
 
 	@Override

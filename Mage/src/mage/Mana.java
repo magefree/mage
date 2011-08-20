@@ -31,6 +31,7 @@ package mage;
 import java.io.Serializable;
 
 import mage.Constants.ColoredManaSymbol;
+import mage.filter.FilterMana;
 import mage.util.Copyable;
 
 /**
@@ -166,6 +167,20 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
 	public int count() {
 		return red + green + blue + white + black + colorless + any;
+	}
+
+	public int count(FilterMana filter) {
+		if (filter == null) {
+			return count();
+		}
+		int count = 0;
+		if (filter.isBlack()) count += black;
+		if (filter.isBlue()) count += blue;
+		if (filter.isWhite()) count += white;
+		if (filter.isGreen()) count += green;
+		if (filter.isRed()) count += red;
+		if (filter.isColorless()) count += colorless;
+		return count;
 	}
 
 	public void clear() {

@@ -28,6 +28,8 @@
 
 package mage.abilities.costs;
 
+import mage.filter.FilterMana;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -35,5 +37,5 @@ package mage.abilities.costs;
 public interface VariableCost {
 
 	public int getAmount();
-
+	public void setFilter(FilterMana filter);
 }

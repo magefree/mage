@@ -36,6 +36,8 @@ import java.util.List;
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.filter.Filter;
+import mage.filter.FilterMana;
 import mage.game.Game;
 
 /**
@@ -268,14 +270,14 @@ public class ManaPool implements Serializable {
 	}
 
 
-	public int getConditionalCount(Ability ability, Game game) {
+	public int getConditionalCount(Ability ability, Game game, FilterMana filter) {
 		if (ability == null || conditionalMana.size() == 0) {
 			return 0;
 		}
 		int count = 0;
 		for (ConditionalMana mana : conditionalMana) {
 			if (mana.apply(ability, game)) {
-				count += mana.count();
+				count += mana.count(filter);
 			}
 		}
 		return count;
@@ -329,6 +331,31 @@ public class ManaPool implements Serializable {
 		return total;
 	}
 
+	public int emptyPoolConditional(Ability ability, Game game, FilterMana filter) {
+		if (filter == null) {
+			return emptyPoolConditional(ability, game);
+		}
+		int total = count(filter);
+		if (filter.isBlack()) black = 0;
+		if (filter.isBlue()) blue = 0;
+		if (filter.isWhite()) white = 0;
+		if (filter.isRed()) red = 0;
+		if (filter.isGreen()) green = 0;
+		if (filter.isColorless()) colorless = 0;
+		// remove only those mana that can be spent for ability
+		Iterator<ConditionalMana> it = conditionalMana.iterator();
+		while (it.hasNext()) {
+			ConditionalMana mana = it.next();
+			if (mana.apply(ability, game)) {
+				if (mana.count(filter) > 0) {
+					total += mana.count();
+					it.remove();
+				}
+			}
+		}
+		return total;
+	}
+
 	public Mana getMana() {
 		Mana mana = new Mana();
 		mana.setBlack(black);
@@ -340,9 +367,29 @@ public class ManaPool implements Serializable {
 		return mana;
 	}
 
+	public Mana getMana(FilterMana filter) {
+		if (filter == null) {
+			return getMana();
+		}
+		Mana mana = new Mana();
+		if (filter.isBlack()) mana.setBlack(black);
+		if (filter.isBlue()) mana.setBlue(blue);
+		if (filter.isColorless()) mana.setColorless(colorless);
+		if (filter.isGreen()) mana.setGreen(green);
+		if (filter.isRed()) mana.setRed(red);
+		if (filter.isWhite()) mana.setWhite(white);
+		return mana;
+	}
+
 	public Mana getAllConditionalMana(Ability ability, Game game) {
 		Mana mana = new Mana();
-		mana.setColorless(getConditionalCount(ability, game));
+		mana.setColorless(getConditionalCount(ability, game, null));
+		return mana;
+	}
+
+	public Mana getAllConditionalMana(Ability ability, Game game, FilterMana filter) {
+		Mana mana = new Mana();
+		mana.setColorless(getConditionalCount(ability, game, filter));
 		return mana;
 	}
 
@@ -383,6 +430,20 @@ public class ManaPool implements Serializable {
 
 	public int count() {
 		return red + green + blue + white + black + colorless;
+	}
+
+	public int count(FilterMana filter) {
+		if (filter == null) {
+			return count();
+		}
+		int count = 0;
+		if (filter.isBlack()) count += black;
+		if (filter.isBlue()) count += blue;
+		if (filter.isWhite()) count += white;
+		if (filter.isGreen()) count += green;
+		if (filter.isRed()) count += red;
+		if (filter.isColorless()) count += colorless;
+		return count;
 	}
 
 	public ManaPool copy() {

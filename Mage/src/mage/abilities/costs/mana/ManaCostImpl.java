@@ -182,7 +182,7 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
 	}
 
 	protected boolean assignColorless(Ability ability, Game game, ManaPool pool, int mana) {
-		int conditionalCount = pool.getConditionalCount(ability, game);
+		int conditionalCount = pool.getConditionalCount(ability, game, null);
 		while (mana > payment.count() && (pool.count() > 0 || conditionalCount > 0)) {
 			if (payConditionalColorless(ability, game, pool)) continue;
 			if (payConditionalBlack(ability, game, pool)) continue;

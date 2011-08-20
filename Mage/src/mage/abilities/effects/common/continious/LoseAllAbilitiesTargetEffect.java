@@ -75,7 +75,7 @@ public class LoseAllAbilitiesTargetEffect extends ContinuousEffectImpl {
 	@Override
 	public String getText(Mode mode) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Target ").append(mode.getTargets().get(0).getTargetName()).append(" loses all abilities").append(duration.toString());
+		sb.append("Target ").append(mode.getTargets().get(0).getTargetName()).append(" loses all abilities ").append(duration.toString());
 		return sb.toString();
 	}
 
