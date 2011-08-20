@@ -25,45 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.mirrodinbesieged;
+package mage.sets.shardsofalara;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.counters.CounterType;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class BlisterstickShaman extends CardImpl<BlisterstickShaman> {
+public class BloodCultist extends CardImpl<BloodCultist> {
 
-    public BlisterstickShaman (UUID ownerId) {
-        super(ownerId, 58, "Blisterstick Shaman", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "MBS";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
-		this.color.setRed(true);
-        this.power = new MageInt(2);
+    public BloodCultist(UUID ownerId) {
+        super(ownerId, 157, "Blood Cultist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
+        this.expansionSetCode = "ALA";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+
+        this.color.setRed(true);
+        this.color.setBlack(true);
+        this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1));
-        ability.addTarget(new TargetCreatureOrPlayer());
+
+        // {tap}: Blood Cultist deals 1 damage to target creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
+        // Whenever a creature dealt damage by Blood Cultist this turn dies, put a +1/+1 counter on Blood Cultist.
+        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }
 
-    public BlisterstickShaman (final BlisterstickShaman card) {
+    public BloodCultist(final BloodCultist card) {
         super(card);
     }
 
     @Override
-    public BlisterstickShaman copy() {
-        return new BlisterstickShaman(this);
+    public BloodCultist copy() {
+        return new BloodCultist(this);
     }
-
 }

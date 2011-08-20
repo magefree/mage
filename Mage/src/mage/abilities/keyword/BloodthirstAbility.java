@@ -10,7 +10,7 @@ import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
 
 /**
- * This ability depends on BloodthirstWather installed on source card
+ * 
  * @author Loki
  */
 public class BloodthirstAbility extends EntersBattlefieldAbility {

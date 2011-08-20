@@ -1,0 +1,35 @@
+//Created with Mage - www.magefree.com
+NAME:Path of Blight
+AUTHOR:WotC
+
+# Creature
+2 [SOM:112] Blight Mamba
+2 [SOM:128] Tangle Angler
+1 [SOM:147] Corpse Cur
+2 [MBS:16] Priests of Norn
+2 [MBS:17] Tine Shrike
+1 [MBS:77] Blightwidow
+1 [MBS:85] Phyrexian Hydra
+2 [MBS:90] Rot Wolf
+1 [MBS:94] Viridian Corrupter
+1 [MBS:103] Core Prowler
+2 [MBS:120] Phyrexian Digester
+2 [MBS:121] Phyrexian Juggernaut
+2 [MBS:125] Plague Myr
+# Instant
+2 [MBS:3] Banishment Decree
+2 [MBS:4] Choking Fumes
+1 [MBS:86] Pistus Strike
+2 [MBS:93] Unnatural Predation
+1 [M11:22] Mighty Leap
+1 [M11:26] Safe Passage
+# Sorcery
+2 [M11:182] Hunters' Feast
+# Artifact
+2 [SOM:214] Trigon of Infestation
+1 [MBS:105] Decimator Web
+# Land
+6 [MBS:146] Plains
+5 [MBS:147] Plains
+7 [MBS:154] Forest
+7 [MBS:155] Forest
