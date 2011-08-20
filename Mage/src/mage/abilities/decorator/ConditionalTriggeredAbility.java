@@ -41,6 +41,7 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl<Conditiona
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ability.setSourceId(this.getSourceId());
+		ability.setControllerId(this.getControllerId());
         if (ability.checkTrigger(event, game)) {
             if (condition.apply(game, this)) {
                 getTargets().clear();
