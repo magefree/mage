@@ -60,7 +60,6 @@ public class BloodcrazedGoblin extends CardImpl<BloodcrazedGoblin> {
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
 
-		this.addWatcher(new BloodcrazedGoblinWatcher());
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodcrazedGoblinEffect()));
 	}
 
@@ -71,29 +70,6 @@ public class BloodcrazedGoblin extends CardImpl<BloodcrazedGoblin> {
 	@Override
 	public BloodcrazedGoblin copy() {
 		return new BloodcrazedGoblin(this);
-	}
-
-}
-
-class BloodcrazedGoblinWatcher extends WatcherImpl<BloodcrazedGoblinWatcher> {
-
-	public BloodcrazedGoblinWatcher() {
-		super("OpponentDamaged");
-	}
-
-	public BloodcrazedGoblinWatcher(final BloodcrazedGoblinWatcher watcher) {
-		super(watcher);
-	}
-
-	@Override
-	public BloodcrazedGoblinWatcher copy() {
-		return new BloodcrazedGoblinWatcher(this);
-	}
-
-	@Override
-	public void watch(GameEvent event, Game game) {
-		if (event.getType() == EventType.DAMAGED_PLAYER && game.getOpponents(controllerId).contains(event.getPlayerId()))
-			condition = true;
 	}
 
 }
@@ -127,7 +103,7 @@ class BloodcrazedGoblinEffect extends ReplacementEffectImpl<BloodcrazedGoblinEff
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
 		if (event.getType() == EventType.DECLARE_ATTACKER && source.getSourceId().equals(event.getSourceId())) {
-			Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "OpponentDamaged");
+			Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "DamagedOpponents");
 			if (watcher != null)
 				return !watcher.conditionMet();
 		}
