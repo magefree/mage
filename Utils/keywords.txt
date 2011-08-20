@@ -1,4 +1,5 @@
 Annihilator|number|
+Bloodthirst|number|
 Bushido|number|
 Soulshift|number|
 Basic landcycling|cost|

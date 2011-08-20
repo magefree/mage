@@ -25,45 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class BlisterstickShaman extends CardImpl<BlisterstickShaman> {
+public class RotWolf extends CardImpl<RotWolf> {
 
-    public BlisterstickShaman (UUID ownerId) {
-        super(ownerId, 58, "Blisterstick Shaman", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+    public RotWolf(UUID ownerId) {
+        super(ownerId, 90, "Rot Wolf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "MBS";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
-		this.color.setRed(true);
+        this.subtype.add("Wolf");
+
+        this.color.setGreen(true);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1));
-        ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(ability);
+        this.toughness = new MageInt(2);
+
+        this.addAbility(InfectAbility.getInstance());
+        // Whenever a creature dealt damage by Rot Wolf this turn dies, you may draw a card.
+        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new DrawCardControllerEffect(1)));
     }
 
-    public BlisterstickShaman (final BlisterstickShaman card) {
+    public RotWolf(final RotWolf card) {
         super(card);
     }
 
     @Override
-    public BlisterstickShaman copy() {
-        return new BlisterstickShaman(this);
+    public RotWolf copy() {
+        return new RotWolf(this);
     }
-
 }
