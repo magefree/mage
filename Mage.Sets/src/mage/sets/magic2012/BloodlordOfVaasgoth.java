@@ -109,6 +109,9 @@ class BloodlordOfVaasgothEffect extends ContinuousEffectImpl {
 		if (object != null) {
 			Permanent permanent = game.getPermanent(object.getSourceId());
 			if (permanent != null) {
+				Ability bloodthirst = ability.copy();
+				bloodthirst.newId();
+				bloodthirst.setSourceId(source.getSourceId());
 				permanent.addAbility(ability);
 				return true;
 			}
