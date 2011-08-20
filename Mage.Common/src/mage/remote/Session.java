@@ -193,7 +193,7 @@ public class Session {
 		}
 		client.disconnected();
 		if (showMessage)
-			client.showError("Server error.  You have been disconnected");
+			client.showError("Network error.  You have been disconnected");
 	}
 
 	class CallbackHandler implements InvokerCallbackHandler {

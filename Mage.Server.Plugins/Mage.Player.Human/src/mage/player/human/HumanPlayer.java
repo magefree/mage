@@ -35,7 +35,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-import com.sun.corba.se.spi.monitoring.StatisticMonitoredAttribute;
 import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
 import mage.Constants.TargetController;
@@ -77,7 +76,6 @@ import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetDefender;
 
-import javax.xml.transform.Source;
 
 /**
  *

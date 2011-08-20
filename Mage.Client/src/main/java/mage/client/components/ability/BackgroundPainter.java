@@ -1,9 +1,7 @@
 package mage.client.components.ability;
 
 import org.jdesktop.swingx.painter.AbstractPainter;
-import sun.swing.CachedPainter;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;

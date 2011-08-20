@@ -7,10 +7,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.Card;
 import mage.target.Target;
 import mage.target.common.TargetCreatureOrPlayer;
-import mage.target.common.TargetCreatureOrPlayerAmount;
 import mage.target.common.TargetCreaturePermanent;
 import org.apache.log4j.Logger;
-import sun.rmi.runtime.Log;
 
 import java.io.InputStream;
 import java.util.*;

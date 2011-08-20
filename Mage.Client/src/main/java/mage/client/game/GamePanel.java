@@ -34,7 +34,6 @@
 
 package mage.client.game;
 
-import com.sun.corba.se.spi.presentation.rmi.IDLNameTranslator;
 import mage.Constants;
 import mage.client.MageFrame;
 import mage.client.cards.Cards;
@@ -49,7 +48,6 @@ import mage.remote.Session;
 import mage.view.*;
 import org.apache.log4j.Logger;
 
-import javax.net.ssl.HandshakeCompletedEvent;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -61,7 +59,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.Serializable;
 import java.util.*;
-import java.util.List;
 import java.util.prefs.Preferences;
 
 /**
@@ -872,7 +869,7 @@ public class GamePanel extends javax.swing.JPanel {
 		}
 	}//GEN-LAST:event_btnConcedeActionPerformed
 
-	private void btnSwitchHandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcedeActionPerformed
+	private void btnSwitchHandActionPerformed(java.awt.event.ActionEvent evt) {                                           
 		String[] choices = handCards.keySet().toArray(new String[0]);
 
 		String chosenHandKey = (String) JOptionPane.showInputDialog(

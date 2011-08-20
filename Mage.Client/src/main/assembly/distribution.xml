@@ -19,7 +19,6 @@
       <excludes>
           <exclude>org.mage:Mage-Client</exclude>
           <exclude>org.mage:Mage-Theme-Plugin</exclude>
-          <exclude>org.mage:Mage-Card-Plugin</exclude>
           <exclude>org.mage:Mage-Counter-Plugin</exclude>
       </excludes>
     </dependencySet>
@@ -27,7 +26,6 @@
         <outputDirectory>/plugins</outputDirectory>
         <includes>
             <include>org.mage:Mage-Theme-Plugin</include>
-            <include>org.mage:Mage-Card-Plugin</include>
             <include>org.mage:Mage-Counter-Plugin</include>
             <include>org.mage:Mage-Counter-Plugin</include>
         </includes>

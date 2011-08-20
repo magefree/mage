@@ -74,7 +74,7 @@ public class ServerMessagesUtil {
 	}
 
 	private void reloadMessages() {
-		log.info("Reading server messages...");
+		log.debug("Reading server messages...");
 		List<String> newMessages = readFromFile();
 		if (newMessages != null && !newMessages.isEmpty()) {
 			lock.writeLock().lock();
@@ -90,7 +90,7 @@ public class ServerMessagesUtil {
 	private List<String> readFromFile() {
 		InputStream is = ServerMessagesUtil.class.getResourceAsStream(SERVER_MSG_TXT_FILE);
 		if (is == null) {
-			log.info("Couldn't find server.msg");
+			log.warn("Couldn't find server.msg");
 			return null;
 		}
 		Scanner scanner = new Scanner(is);
