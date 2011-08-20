@@ -34,7 +34,6 @@ import mage.MageInt;
 import mage.abilities.keyword.BloodthirstAbility;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
-import mage.watchers.common.BloodthirstWatcher;
 
 /**
  *
@@ -52,7 +51,6 @@ public class LurkingCrocodile extends CardImpl<LurkingCrocodile> {
         this.toughness = new MageInt(2);
 
         this.addAbility(new BloodthirstAbility(1));
-        this.addWatcher(new BloodthirstWatcher());
         this.addAbility(new IslandwalkAbility());
     }
 

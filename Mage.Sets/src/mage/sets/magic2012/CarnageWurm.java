@@ -34,7 +34,6 @@ import mage.MageInt;
 import mage.abilities.keyword.BloodthirstAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.watchers.common.BloodthirstWatcher;
 
 /**
  *
@@ -52,7 +51,6 @@ public class CarnageWurm extends CardImpl<CarnageWurm> {
         this.toughness = new MageInt(6);
 
         this.addAbility(new BloodthirstAbility(3));
-        this.addWatcher(new BloodthirstWatcher());
         this.addAbility(TrampleAbility.getInstance());
     }
 

@@ -33,7 +33,6 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.BloodthirstAbility;
 import mage.cards.CardImpl;
-import mage.watchers.common.BloodthirstWatcher;
 
 /**
  *
@@ -51,7 +50,6 @@ public class BloodrageVampire extends CardImpl<BloodrageVampire> {
         this.toughness = new MageInt(1);
 
         this.addAbility(new BloodthirstAbility(1));
-        this.addWatcher(new BloodthirstWatcher());
     }
 
     public BloodrageVampire(final BloodrageVampire card) {

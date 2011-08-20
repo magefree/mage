@@ -33,7 +33,6 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.BloodthirstAbility;
 import mage.cards.CardImpl;
-import mage.watchers.common.BloodthirstWatcher;
 
 /**
  *
@@ -52,7 +51,6 @@ public class GorehornMinotaurs extends CardImpl<GorehornMinotaurs> {
         this.toughness = new MageInt(3);
 
         this.addAbility(new BloodthirstAbility(2));
-        this.addWatcher(new BloodthirstWatcher());
     }
 
     public GorehornMinotaurs(final GorehornMinotaurs card) {

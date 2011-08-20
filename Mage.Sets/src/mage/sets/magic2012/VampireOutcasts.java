@@ -34,7 +34,6 @@ import mage.MageInt;
 import mage.abilities.keyword.BloodthirstAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
-import mage.watchers.common.BloodthirstWatcher;
 
 /**
  *
@@ -52,7 +51,6 @@ public class VampireOutcasts extends CardImpl<VampireOutcasts> {
         this.toughness = new MageInt(2);
 
         this.addAbility(new BloodthirstAbility(2));
-        this.addWatcher(new BloodthirstWatcher());
         this.addAbility(LifelinkAbility.getInstance());
     }
 

@@ -34,7 +34,6 @@ import mage.MageInt;
 import mage.abilities.keyword.BloodthirstAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
-import mage.watchers.common.BloodthirstWatcher;
 
 /**
  *
@@ -52,7 +51,6 @@ public class BloodOgre extends CardImpl<BloodOgre> {
         this.toughness = new MageInt(2);
 
         this.addAbility(new BloodthirstAbility(1));
-        this.addWatcher(new BloodthirstWatcher());
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 

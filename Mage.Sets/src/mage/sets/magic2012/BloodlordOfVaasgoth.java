@@ -31,13 +31,9 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.BloodthirstAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
@@ -45,9 +41,6 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
-import mage.target.TargetSpell;
-import mage.watchers.common.BloodthirstWatcher;
 
 import java.util.UUID;
 
@@ -77,7 +70,6 @@ public class BloodlordOfVaasgoth extends CardImpl<BloodlordOfVaasgoth> {
 
 		// Bloodthirst 3
 		this.addAbility(new BloodthirstAbility(3));
-		this.addWatcher(new BloodthirstWatcher());
 
 		// Whenever you cast a Vampire creature spell, it gains bloodthirst 3.
 		this.addAbility(new SpellCastTriggeredAbility(new BloodlordOfVaasgothEffect(), filterCard, false, true));
@@ -117,10 +109,7 @@ class BloodlordOfVaasgothEffect extends ContinuousEffectImpl {
 		if (object != null) {
 			Permanent permanent = game.getPermanent(object.getSourceId());
 			if (permanent != null) {
-				Ability bloodthirst = ability.copy();
-				bloodthirst.newId();
-				bloodthirst.setSourceId(source.getSourceId());
-				permanent.addAbility(bloodthirst);
+				permanent.addAbility(ability);
 				return true;
 			}
 		} else {

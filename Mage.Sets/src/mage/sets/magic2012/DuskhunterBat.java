@@ -34,7 +34,6 @@ import mage.MageInt;
 import mage.abilities.keyword.BloodthirstAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.watchers.common.BloodthirstWatcher;
 
 /**
  *
@@ -52,7 +51,6 @@ public class DuskhunterBat extends CardImpl<DuskhunterBat> {
         this.toughness = new MageInt(1);
 
         this.addAbility(new BloodthirstAbility(1));
-        this.addWatcher(new BloodthirstWatcher());
         this.addAbility(FlyingAbility.getInstance());
     }
 

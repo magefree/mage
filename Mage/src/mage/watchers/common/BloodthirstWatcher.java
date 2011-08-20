@@ -6,7 +6,7 @@ import mage.game.events.GameEvent;
 import mage.watchers.WatcherImpl;
 
 /**
- * Must be installed to card for proper Bloodthirst work
+ * Must be installed to player for proper Bloodthirst work
  * @author Loki
  */
 public class BloodthirstWatcher extends WatcherImpl<BloodthirstWatcher> {
