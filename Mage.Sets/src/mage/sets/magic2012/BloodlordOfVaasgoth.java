@@ -112,7 +112,7 @@ class BloodlordOfVaasgothEffect extends ContinuousEffectImpl {
 				Ability bloodthirst = ability.copy();
 				bloodthirst.newId();
 				bloodthirst.setSourceId(source.getSourceId());
-				permanent.addAbility(ability);
+				permanent.addAbility(bloodthirst);
 				return true;
 			}
 		} else {
