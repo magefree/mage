@@ -74,7 +74,7 @@ public class DruidicSatchel extends CardImpl<DruidicSatchel> {
 class DruidicSatchelEffect extends OneShotEffect<DruidicSatchelEffect> {
 
     public DruidicSatchelEffect() {
-        super(Outcome.DrawCard);
+        super(Outcome.Benefit);
         staticText = "Reveal the top card of your library. If it's a creature card, put a 1/1 green Saproling creature token onto the battlefield. If it's a land card, put that card onto the battlefield under your control. If it's a noncreature, nonland card, you gain 2 life";
     }
 

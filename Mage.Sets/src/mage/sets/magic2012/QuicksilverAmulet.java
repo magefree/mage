@@ -59,7 +59,6 @@ public class QuicksilverAmulet extends CardImpl<QuicksilverAmulet> {
                 new PutCreatureOnBattlefieldEffect(),
                 new ManaCostsImpl("{4}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCardInHand(new FilterCreatureCard()));
         this.addAbility(ability);
     }
 
@@ -75,9 +74,11 @@ public class QuicksilverAmulet extends CardImpl<QuicksilverAmulet> {
 
 class PutCreatureOnBattlefieldEffect extends OneShotEffect<PutCreatureOnBattlefieldEffect> {
 
+    private static final String choiceText = "Put a creature card from your hand onto the battlefield?";
+
     public PutCreatureOnBattlefieldEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "You may put a creature card from your hand into play";
+        this.staticText = "You may put a creature card from your hand onto the battlefield";
     }
 
     public PutCreatureOnBattlefieldEffect(final PutCreatureOnBattlefieldEffect effect) {
@@ -91,12 +92,20 @@ class PutCreatureOnBattlefieldEffect extends OneShotEffect<PutCreatureOnBattlefi
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getFirstTarget());
-        Player player = game.getPlayer(card.getOwnerId());
-        if (card != null && player != null) {
-            player.removeFromHand(card, game);
-            card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
-            return true;
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null || !player.chooseUse(Outcome.PutCreatureInPlay, choiceText, game)) {
+            return false;
+        }
+
+        TargetCardInHand target = new TargetCardInHand(new FilterCreatureCard());
+        target.setRequired(true);
+        if (player.choose(Outcome.Benefit, target, game)) {
+            Card card = game.getCard(target.getFirstTarget());
+            if (card != null) {
+                player.removeFromHand(card, game);
+                card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
+                return true;
+            }
         }
         return false;
     }
