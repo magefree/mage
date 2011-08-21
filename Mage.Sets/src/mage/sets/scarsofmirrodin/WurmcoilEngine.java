@@ -73,6 +73,7 @@ public class WurmcoilEngine extends CardImpl<WurmcoilEngine> {
 class Wurm1Token extends Token {
     public Wurm1Token() {
         super("Wurm", "a 3/3 colorless Wurm artifact creature token with deathtouch");
+        cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
 		subtype.add("Wurm");
 		power = new MageInt(3);
@@ -84,6 +85,7 @@ class Wurm1Token extends Token {
 class Wurm2Token extends Token {
     public Wurm2Token() {
         super("Wurm", "a 3/3 colorless Wurm artifact creature token with lifelink");
+        cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
 		subtype.add("Wurm");
 		power = new MageInt(3);
