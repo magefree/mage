@@ -68,34 +68,36 @@ public class Sets extends HashMap<String, ExpansionSet> {
 		nonLandNames = new TreeSet<String>();
 		cards = new ArrayList<Card>();
 		creatureTypes = new TreeSet<String>();
-		this.addSet(AlaraReborn.getInstance());
+        this.addSet(AlaraReborn.getInstance());
         this.addSet(Apocalypse.getInstance());
         this.addSet(ChampionsOfKamigawa.getInstance());
-		this.addSet(Conflux.getInstance());
+        this.addSet(Conflux.getInstance());
         this.addSet(Darksteel.getInstance());
         this.addSet(Dissension.getInstance());
         this.addSet(ElspethvsTezzeret.getInstance());
         this.addSet(Eventide.getInstance());
         this.addSet(Guildpact.getInstance());
         this.addSet(Guru.getInstance());
+        this.addSet(Invasion.getInstance());
         this.addSet(Lorwyn.getInstance());
-		this.addSet(Magic2010.getInstance());
-		this.addSet(Magic2011.getInstance());
-		this.addSet(Magic2012.getInstance());
+        this.addSet(Magic2010.getInstance());
+        this.addSet(Magic2011.getInstance());
+        this.addSet(Magic2012.getInstance());
         this.addSet(Mirrodin.getInstance());
-		this.addSet(MirrodinBesieged.getInstance());
+        this.addSet(MirrodinBesieged.getInstance());
         this.addSet(Morningtide.getInstance());
         this.addSet(NewPhyrexia.getInstance());
-		this.addSet(Planechase.getInstance());
+        this.addSet(Planechase.getInstance());
+        this.addSet(Planeshift.getInstance());
         this.addSet(RavnicaCityOfGuilds.getInstance());
-		this.addSet(RiseOfTheEldrazi.getInstance());
+        this.addSet(RiseOfTheEldrazi.getInstance());
         this.addSet(ScarsOfMirrodin.getInstance());
-		this.addSet(ShardsOfAlara.getInstance());
+        this.addSet(ShardsOfAlara.getInstance());
         this.addSet(Shadowmoor.getInstance());
-		this.addSet(Tenth.getInstance());
+        this.addSet(Tenth.getInstance());
         this.addSet(Tempest.getInstance());
-		this.addSet(Worldwake.getInstance());
-		this.addSet(Zendikar.getInstance());
+        this.addSet(Worldwake.getInstance());
+        this.addSet(Zendikar.getInstance());
 	}
 
 	private void addSet(ExpansionSet set) {
@@ -228,15 +230,15 @@ public class Sets extends HashMap<String, ExpansionSet> {
         if (!random) {
             return findCard(name);
         } else {
-            List<Card> cards = new ArrayList<Card>();
+            List<Card> cardsFound = new ArrayList<Card>();
             for (ExpansionSet set: fINSTANCE.values()) {
                 Card card = set.findCard(name, true);
                 if (card != null) {
-                    cards.add(card);
+                    cardsFound.add(card);
                 }
             }
-            if (cards.size() > 0) {
-                return cards.get(rnd.nextInt(cards.size()));
+            if (cardsFound.size() > 0) {
+                return cardsFound.get(rnd.nextInt(cardsFound.size()));
             }
         }
 		return null;
@@ -305,7 +307,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
 
 	public static void saveDeck(String file, DeckCardLists deck) throws FileNotFoundException {
 		PrintWriter out = new PrintWriter(file);
-		Map<String, Integer> cards = new HashMap<String, Integer>();
+		Map<String, Integer> deckCards = new HashMap<String, Integer>();
 		Map<String, Integer> sideboard = new HashMap<String, Integer>();
 		try {
 			if (deck.getName() != null && deck.getName().length() > 0)
@@ -313,11 +315,11 @@ public class Sets extends HashMap<String, ExpansionSet> {
 			if (deck.getAuthor() != null && deck.getAuthor().length() > 0)
 				out.println("AUTHOR:" + deck.getAuthor());
 			for (String cardClass: deck.getCards()) {
-				if (cards.containsKey(cardClass)) {
-					cards.put(cardClass, cards.get(cardClass) + 1);
+				if (deckCards.containsKey(cardClass)) {
+					deckCards.put(cardClass, deckCards.get(cardClass) + 1);
 				}
 				else {
-					cards.put(cardClass, 1);
+					deckCards.put(cardClass, 1);
 				}
 			}
 			for (String cardClass: deck.getSideboard()) {
@@ -328,7 +330,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
 					sideboard.put(cardClass, 1);
 				}
 			}
-			for (Map.Entry<String, Integer> entry: cards.entrySet()) {
+			for (Map.Entry<String, Integer> entry: deckCards.entrySet()) {
 				Card card = CardImpl.createCard(entry.getKey());
 				if (card != null) {
 					out.printf("%d [%s:%d] %s%n", entry.getValue(), card.getExpansionSetCode(), card.getCardNumber(), card.getName());

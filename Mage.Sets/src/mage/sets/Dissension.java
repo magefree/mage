@@ -50,10 +50,10 @@ public class Dissension extends ExpansionSet {
         super("Dissension", "DIS", "", "mage.sets.dissension", new GregorianCalendar(2006, 4, 5).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Ravnika";
         this.hasBoosters = true;
-        this.numBoosterLands = 1;
-		this.numBoosterCommon = 10;
-		this.numBoosterUncommon = 3;
-		this.numBoosterRare = 1;
-		this.ratioBoosterMythic = 0;
+        this.numBoosterLands = 0;
+        this.numBoosterCommon = 11;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 0;
     }
 }
