@@ -153,6 +153,10 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 			if (cost instanceof VariableCost)
 				variableCosts.add((VariableCost) cost);
 		}
+		if (variableCosts.size() == 0) {
+			// add empty cost (#Issue 210)
+			variableCosts.add(new VariableManaCost());
+		}
 		return variableCosts;
 	}
 
