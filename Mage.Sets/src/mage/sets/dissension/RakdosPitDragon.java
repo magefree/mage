@@ -30,13 +30,14 @@ package mage.sets.dissension;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.Hellbent;
+import mage.abilities.condition.common.HellbentCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
@@ -58,9 +59,9 @@ public class RakdosPitDragon extends CardImpl<RakdosPitDragon> {
 		this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn), new ManaCostsImpl("{R}{R}")));
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Constants.Duration.EndOfTurn), new ManaCostsImpl("{R}")));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Constants.Duration.WhileOnBattlefield), Hellbent.getInstance(), "Hellbent - Rakdos Pit Dragon has double strike as long as you have no cards in hand")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield), HellbentCondition.getInstance(), "Hellbent - Rakdos Pit Dragon has double strike as long as you have no cards in hand")));
     }
 
     public RakdosPitDragon (final RakdosPitDragon card) {

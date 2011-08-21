@@ -35,7 +35,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
@@ -54,7 +54,7 @@ public class RazorfieldRhino extends CardImpl<RazorfieldRhino> {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         ContinuousEffect effect1 = new BoostSourceEffect(2, 2, Constants.Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(effect1, Metalcraft.getInstance(), "Metalcraft - Razorfield Rhino gets +2/+2 as long as you control three or more artifacts")));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(effect1, MetalcraftCondition.getInstance(), "Metalcraft - Razorfield Rhino gets +2/+2 as long as you control three or more artifacts")));
     }
 
     public RazorfieldRhino (final RazorfieldRhino card) {

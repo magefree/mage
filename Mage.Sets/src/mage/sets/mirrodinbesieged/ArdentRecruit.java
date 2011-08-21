@@ -36,7 +36,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
@@ -58,7 +58,7 @@ public class ArdentRecruit extends CardImpl<ArdentRecruit> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         ContinuousEffect boostSource = new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield);
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(boostSource, Metalcraft.getInstance(), myText);
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(boostSource, MetalcraftCondition.getInstance(), myText);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

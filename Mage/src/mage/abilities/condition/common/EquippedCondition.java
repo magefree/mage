@@ -32,9 +32,16 @@ import mage.abilities.condition.Condition;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-public class Flipped implements Condition {
+import java.util.UUID;
 
-    private static Flipped fInstance = new Flipped();
+/**
+ * Describes condition when creature is equipped.
+ *
+ * @author nantuko
+ */
+public class EquippedCondition implements Condition {
+
+    private static EquippedCondition fInstance = new EquippedCondition();
 
     public static Condition getInstance() {
         return fInstance;
@@ -42,10 +49,15 @@ public class Flipped implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(source.getSourceId());
-        if (p != null) {
-            return p.isFlipped();
-        }
-        return false;
+        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+		if (permanent != null) {
+			for (UUID uuid : permanent.getAttachments()) {
+				Permanent attached = game.getBattlefield().getPermanent(uuid);
+				if (attached.getSubtype().contains("Equipment")) {
+					return true;
+				}
+			}
+		}
+		return false;
     }
 }

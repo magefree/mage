@@ -36,7 +36,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
@@ -75,7 +75,7 @@ public class PuresteelPaladin extends CardImpl<PuresteelPaladin> {
                                                         new GainAbilityControlledEffect(
                                                                 new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(0)),
                                                                 Constants.Duration.WhileOnBattlefield, filter),
-                                                        Metalcraft.getInstance(),
+                                                        MetalcraftCondition.getInstance(),
                                                         "Metalcraft - Equipment you control have equip {0} as long as you control three or more artifacts")));
     }
 

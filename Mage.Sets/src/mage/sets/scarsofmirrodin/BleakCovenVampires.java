@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -67,7 +67,7 @@ public class BleakCovenVampires extends CardImpl<BleakCovenVampires> {
         target.setRequired(true);
         ability.addTarget(target);
 
-        this.addAbility(new ConditionalTriggeredAbility(ability, Metalcraft.getInstance(), effectText));
+        this.addAbility(new ConditionalTriggeredAbility(ability, MetalcraftCondition.getInstance(), effectText));
     }
 
     public BleakCovenVampires(final BleakCovenVampires card) {

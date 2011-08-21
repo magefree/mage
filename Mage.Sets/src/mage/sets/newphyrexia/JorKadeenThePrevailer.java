@@ -34,7 +34,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -63,7 +63,7 @@ public class JorKadeenThePrevailer extends CardImpl<JorKadeenThePrevailer> {
 
         this.addAbility(FirstStrikeAbility.getInstance());
         ConditionalContinousEffect effect = new ConditionalContinousEffect(new BoostControlledEffect(3, 0, Duration.WhileOnBattlefield, FilterCreaturePermanent.getDefault(), true),
-                Metalcraft.getInstance(), effectText);
+                MetalcraftCondition.getInstance(), effectText);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

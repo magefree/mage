@@ -37,7 +37,7 @@ import mage.Constants.Rarity;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBlockAbility;
-import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -62,7 +62,7 @@ public class ConcussiveBolt extends CardImpl<ConcussiveBolt> {
 
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(new ConcussiveBoltEffect(), Metalcraft.getInstance(), "Metalcraft - If you control three or more artifacts, creatures that player controls can't block this turn"));
+        this.getSpellAbility().addEffect(new ConditionalContinousEffect(new ConcussiveBoltEffect(), MetalcraftCondition.getInstance(), "Metalcraft - If you control three or more artifacts, creatures that player controls can't block this turn"));
     }
 
     public ConcussiveBolt(final ConcussiveBolt card) {

@@ -35,7 +35,7 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.Enchanted;
+import mage.abilities.condition.common.EnchantedCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -78,7 +78,7 @@ public class FreewindEquenaut extends CardImpl<FreewindEquenaut> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinousEffect(
                 new GainAbilitySourceEffect(ability, Duration.WhileOnBattlefield),
-                Enchanted.getInstance(),
+                EnchantedCondition.getInstance(),
                 "As long as {this} is enchanted, it has \"{tap}: {this} deals 2 damage to target attacking or blocking creature\"")));
     }
 

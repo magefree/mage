@@ -35,7 +35,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.Equipped;
+import mage.abilities.condition.common.EquippedCondition;
 import mage.abilities.decorator.ConditionalStaticAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
@@ -60,7 +60,7 @@ public class KitesailApprentice extends CardImpl<KitesailApprentice> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), Equipped.getInstance(), rule);
+        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), EquippedCondition.getInstance(), rule);
         ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()));
         this.addAbility(ability);
     }

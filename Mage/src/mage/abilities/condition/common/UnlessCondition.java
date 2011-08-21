@@ -38,11 +38,11 @@ import mage.game.Game;
  * 
  * @author maurer.it_at_gmail.com
  */
-public class Unless implements Condition {
+public class UnlessCondition implements Condition {
 
 	private Condition condition;
 
-	public Unless ( Condition condition ) {
+	public UnlessCondition ( Condition condition ) {
 		this.condition = condition;
 	}
 

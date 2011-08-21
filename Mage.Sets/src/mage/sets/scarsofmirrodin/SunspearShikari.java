@@ -34,7 +34,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.Equipped;
+import mage.abilities.condition.common.EquippedCondition;
 import mage.abilities.decorator.ConditionalStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -59,7 +59,7 @@ public class SunspearShikari extends CardImpl<SunspearShikari> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), Equipped.getInstance(), rule);
+        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), EquippedCondition.getInstance(), rule);
         ability.addEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance()));
         this.addAbility(ability);
     }

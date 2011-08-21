@@ -36,7 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.condition.common.MyTurn;
+import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -254,7 +254,7 @@ class ReboundEffectCastFromExileDelayedTrigger extends DelayedTriggeredAbility<R
 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
-		if ( event.getType() == EventType.UPKEEP_STEP_PRE && MyTurn.getInstance().apply(game, this) ) {
+		if ( event.getType() == EventType.UPKEEP_STEP_PRE && MyTurnCondition.getInstance().apply(game, this) ) {
 			return true;
 		}
 		return false;

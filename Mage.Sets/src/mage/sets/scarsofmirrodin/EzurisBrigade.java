@@ -36,7 +36,7 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
@@ -60,9 +60,9 @@ public class EzurisBrigade extends CardImpl<EzurisBrigade> {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         ContinuousEffect boostSource = new BoostSourceEffect(4, 4, Duration.WhileOnBattlefield);
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(boostSource, Metalcraft.getInstance(), text);
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(boostSource, MetalcraftCondition.getInstance(), text);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        ability.addEffect(new ConditionalContinousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield), Metalcraft.getInstance(), ""));
+        ability.addEffect(new ConditionalContinousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield), MetalcraftCondition.getInstance(), ""));
         this.addAbility(ability);
     }
 

@@ -34,7 +34,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
@@ -64,7 +64,7 @@ public class BladeTribeBerserkers extends CardImpl<BladeTribeBerserkers> {
 
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new BoostSourceEffect(3, 3, Duration.EndOfTurn), false);
         ability.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
-		this.addAbility(new ConditionalTriggeredAbility(ability, Metalcraft.getInstance(), effectText));
+		this.addAbility(new ConditionalTriggeredAbility(ability, MetalcraftCondition.getInstance(), effectText));
     }
 
     public BladeTribeBerserkers(final BladeTribeBerserkers card) {

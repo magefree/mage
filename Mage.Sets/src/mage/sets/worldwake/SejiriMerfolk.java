@@ -35,7 +35,7 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ControlsPermanent;
+import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.decorator.ConditionalStaticAbility;
 import mage.abilities.effects.Effect;
@@ -68,7 +68,7 @@ public class SejiriMerfolk extends CardImpl<SejiriMerfolk> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(LifelinkAbility.getInstance()), new ControlsPermanent(filter), rule);
+        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(LifelinkAbility.getInstance()), new ControlsPermanentCondition(filter), rule);
         ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()));
         this.addAbility(ability);
     }

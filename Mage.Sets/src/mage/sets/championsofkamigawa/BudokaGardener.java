@@ -36,7 +36,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.Flipped;
+import mage.abilities.condition.common.FlippedCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinousEffect;
@@ -70,7 +70,7 @@ public class BudokaGardener extends CardImpl<BudokaGardener> {
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BudokaGardenerEffect(), new TapSourceCost());
         ability.addTarget(new TargetCardInHand(new FilterLandCard()));
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new DokaiWeaverofLife()), Flipped.getInstance(), "")));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new DokaiWeaverofLife()), FlippedCondition.getInstance(), "")));
     }
 
     public BudokaGardener(final BudokaGardener card) {

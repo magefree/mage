@@ -31,7 +31,7 @@ package mage.sets.newphyrexia;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
@@ -49,7 +49,7 @@ public class Dispatch extends CardImpl<Dispatch> {
         this.expansionSetCode = "NPH";
 		this.color.setWhite(true);
         this.getSpellAbility().addEffect(new TapTargetEffect());
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ExileTargetEffect(), Metalcraft.getInstance(), "Metalcraft - If you control three or more artifacts, exile that creature"));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ExileTargetEffect(), MetalcraftCondition.getInstance(), "Metalcraft - If you control three or more artifacts, exile that creature"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

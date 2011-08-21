@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.SaprolingToken;
 
 /**
  *
@@ -49,7 +49,7 @@ public class TukatongueThallid extends CardImpl<TukatongueThallid> {
         this.color.setGreen(true);
         this.subtype.add("Fungus");
         this.power = new MageInt(1);
-	this.toughness = new MageInt(1);
+        this.toughness = new MageInt(1);
 
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), false));
     }
@@ -61,16 +61,5 @@ public class TukatongueThallid extends CardImpl<TukatongueThallid> {
     @Override
     public TukatongueThallid copy() {
         return new TukatongueThallid(this);
-    }
-
-    private class SaprolingToken extends Token {
-        public SaprolingToken() {
-            super("Saproling", "1/1 green Saproling creature tokens");
-            cardType.add(CardType.CREATURE);
-            subtype.add("Saproling");
-            color.setGreen(true);
-            power = new MageInt(1);
-            toughness = new MageInt(1);
-        }
     }
 }

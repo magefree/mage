@@ -34,7 +34,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
@@ -59,7 +59,7 @@ public class SpiralingDuelist extends CardImpl<SpiralingDuelist> {
         this.toughness = new MageInt(1);
 
         ContinuousEffect effect = new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect, Metalcraft.getInstance(), effectText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect, MetalcraftCondition.getInstance(), effectText)));
     }
 
     public SpiralingDuelist(final SpiralingDuelist card) {

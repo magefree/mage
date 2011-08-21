@@ -11,7 +11,7 @@ import mage.game.Game;
  *
  * @author nantuko
  */
-public class Metalcraft implements Condition {
+public class MetalcraftCondition implements Condition {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 
@@ -19,7 +19,7 @@ public class Metalcraft implements Condition {
         filter.getCardType().add(Constants.CardType.ARTIFACT);
     }
 
-    private static Metalcraft fInstance = new Metalcraft();
+    private static MetalcraftCondition fInstance = new MetalcraftCondition();
 
     public static Condition getInstance() {
         return fInstance;

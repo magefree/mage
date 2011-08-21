@@ -37,7 +37,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
@@ -56,7 +56,7 @@ public class RustedRelic extends CardImpl<RustedRelic> {
                 new SimpleStaticAbility(Zone.BATTLEFIELD,
                         new ConditionalContinousEffect(
                                 new BecomesCreatureSourceEffect(new RustedRelicToken(), "artifact", Duration.Custom),
-                                Metalcraft.getInstance(),
+                                MetalcraftCondition.getInstance(),
                                 "Metalcraft - Rusted Relic is a 5/5 Golem artifact creature as long as you control three or more artifacts")));
     }
 

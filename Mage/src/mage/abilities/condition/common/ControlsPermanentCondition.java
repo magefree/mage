@@ -42,7 +42,7 @@ import mage.game.Game;
  * @author nantuko
  * @author maurer.it_at_gmail.com
  */
-public class ControlsPermanent implements Condition {
+public class ControlsPermanentCondition implements Condition {
 
 	public static enum CountType { MORE_THAN, FEWER_THAN, EQUAL_TO };
 	private FilterPermanent filter;
@@ -57,7 +57,7 @@ public class ControlsPermanent implements Condition {
 	 * 
 	 * @param filter
 	 */
-    public ControlsPermanent(FilterPermanent filter) {
+    public ControlsPermanentCondition(FilterPermanent filter) {
         this(filter, CountType.MORE_THAN, 0);
     }
 
@@ -68,7 +68,7 @@ public class ControlsPermanent implements Condition {
 	 *
 	 * @param filter
 	 */
-	public ControlsPermanent ( FilterPermanent filter, CountType type, int count ) {
+	public ControlsPermanentCondition ( FilterPermanent filter, CountType type, int count ) {
 		this.filter = filter;
 		this.type = type;
 		this.count = count;
@@ -83,7 +83,7 @@ public class ControlsPermanent implements Condition {
 	 * @param filter
 	 * @param conditionToDecorate
 	 */
-	public ControlsPermanent ( FilterPermanent filter, CountType type, int count, Condition conditionToDecorate ) {
+	public ControlsPermanentCondition ( FilterPermanent filter, CountType type, int count, Condition conditionToDecorate ) {
 		this(filter, type, count);
 		this.condition = conditionToDecorate;
 	}

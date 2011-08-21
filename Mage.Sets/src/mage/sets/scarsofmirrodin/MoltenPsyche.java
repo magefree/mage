@@ -34,7 +34,7 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -90,7 +90,7 @@ class MoltenPsycheEffect extends OneShotEffect<MoltenPsycheEffect> {
 				player.getLibrary().shuffle();
 				player.getHand().clear();
 				player.drawCards(count, game);
-				if (Metalcraft.getInstance().apply(game, source) && !playerId.equals(source.getControllerId())) {
+				if (MetalcraftCondition.getInstance().apply(game, source) && !playerId.equals(source.getControllerId())) {
 					MoltenPsycheWatcher watcher = (MoltenPsycheWatcher) game.getState().getWatchers().get(source.getControllerId(), "CardsDrawnMoltenPsyche");
 					player.damage(watcher.getDraws(playerId), source.getId(), game, false, true);
 				}

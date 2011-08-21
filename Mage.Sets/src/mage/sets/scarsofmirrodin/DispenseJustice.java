@@ -33,7 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
@@ -92,7 +92,7 @@ class DispenseJusticeEffect extends OneShotEffect<DispenseJusticeEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		if ( Metalcraft.getInstance().apply(game, source) ) {
+		if ( MetalcraftCondition.getInstance().apply(game, source) ) {
 			return new SacrificeEffect(filter, 2, effectText).apply(game, source);
 		}
 		else {

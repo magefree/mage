@@ -39,7 +39,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.HaveCounter;
+import mage.abilities.condition.common.HasCounterCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.decorator.ConditionalStaticAbility;
 import mage.abilities.dynamicvalue.common.CountersCount;
@@ -72,7 +72,7 @@ public class PrimordialHydra extends CardImpl<PrimordialHydra> {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PrimordialHydraDoubleEffect(), Constants.TargetController.YOU, false));
         this.addAbility(new ConditionalStaticAbility(Zone.BATTLEFIELD,
 				new GainAbilitySourceEffect(TrampleAbility.getInstance(), Constants.Duration.WhileOnBattlefield),
-				new HaveCounter(CounterType.P1P1, 10), staticText));
+				new HasCounterCondition(CounterType.P1P1, 10), staticText));
 	}
 
     public PrimordialHydra(final PrimordialHydra card) {

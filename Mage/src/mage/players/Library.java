@@ -43,10 +43,8 @@ import java.util.Set;
 import java.util.UUID;
 import mage.Constants.Zone;
 import mage.cards.Card;
-import mage.cards.Cards;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.util.Copier;
 
 /**
  *
@@ -81,9 +79,7 @@ public class Library implements Serializable {
 			shuffled[r] = temp;
 		}
 		library.clear();
-		for (UUID card: shuffled) {
-			library.add(card);
-		}
+        library.addAll(Arrays.asList(shuffled));
 	}
 
 	/**
@@ -134,7 +130,6 @@ public class Library implements Serializable {
 	}
 
 	public Library copy() {
-//		return new Copier<Library>().copy(this);
 		return new Library(this);
 	}
 

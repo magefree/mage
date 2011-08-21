@@ -34,7 +34,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.TenOrLessLife;
+import mage.abilities.condition.common.TenOrLessLifeCondition;
 import mage.abilities.decorator.ConditionalStaticAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
@@ -59,7 +59,7 @@ public class GuulDrazVampire extends CardImpl<GuulDrazVampire> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield), new TenOrLessLife(TenOrLessLife.CheckType.AN_OPPONENT), rule);
+        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield), new TenOrLessLifeCondition(TenOrLessLifeCondition.CheckType.AN_OPPONENT), rule);
         ability.addEffect(new GainAbilitySourceEffect(IntimidateAbility.getInstance()));
         this.addAbility(ability);
     }

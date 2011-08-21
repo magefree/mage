@@ -34,7 +34,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.Enchanted;
+import mage.abilities.condition.common.EnchantedCondition;
 import mage.abilities.decorator.ConditionalStaticAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
@@ -59,7 +59,7 @@ public class ThranGolem extends CardImpl<ThranGolem> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), Enchanted.getInstance(), rule);
+        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), EnchantedCondition.getInstance(), rule);
         ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()));
         ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()));
         ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()));

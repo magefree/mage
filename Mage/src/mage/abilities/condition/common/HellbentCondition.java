@@ -31,8 +31,9 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
 
-public class NotMyTurn implements Condition {
-    private static NotMyTurn fInstance = new NotMyTurn();
+public class HellbentCondition implements Condition {
+
+    private static HellbentCondition fInstance = new HellbentCondition();
 
     public static Condition getInstance() {
         return fInstance;
@@ -40,6 +41,6 @@ public class NotMyTurn implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return !game.getActivePlayerId().equals(source.getControllerId());
+        return game.getPlayer(source.getControllerId()).getHand().size() == 0;
     }
 }

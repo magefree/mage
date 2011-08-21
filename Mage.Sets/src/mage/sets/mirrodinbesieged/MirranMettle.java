@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -53,7 +53,7 @@ public class MirranMettle extends CardImpl<MirranMettle> {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
         
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn), Metalcraft.getInstance(), effectText));
+        this.getSpellAbility().addEffect(new ConditionalContinousEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn), MetalcraftCondition.getInstance(), effectText));
     }
 
     public MirranMettle(final MirranMettle card) {

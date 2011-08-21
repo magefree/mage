@@ -32,7 +32,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -61,7 +61,7 @@ public class ScreechingSilcaw extends CardImpl<ScreechingSilcaw> {
 
         TriggeredAbility conditional = new ConditionalTriggeredAbility(
                 new DealsCombatDamageToAPlayerTriggeredAbility(new PutLibraryIntoGraveTargetEffect(4), false, true),
-                Metalcraft.getInstance(), text);
+                MetalcraftCondition.getInstance(), text);
         this.addAbility(conditional);
     }
 

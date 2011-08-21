@@ -30,7 +30,7 @@ package mage.sets.scarsofmirrodin;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -52,7 +52,7 @@ public class GalvanicBlast extends CardImpl<GalvanicBlast> {
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageTargetEffect(2), Metalcraft.getInstance(), effectText));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageTargetEffect(2), MetalcraftCondition.getInstance(), effectText));
     }
 
     public GalvanicBlast(final GalvanicBlast card) {

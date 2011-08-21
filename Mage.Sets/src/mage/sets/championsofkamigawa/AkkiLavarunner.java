@@ -6,7 +6,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.Flipped;
+import mage.abilities.condition.common.FlippedCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CopyTokenEffect;
@@ -40,7 +40,7 @@ public class AkkiLavarunner extends CardImpl<AkkiLavarunner> {
         this.toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());
         this.addAbility(new AkkiLavarunnerAbility());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new TokTokVolcanoBorn()), Flipped.getInstance(), "")));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new TokTokVolcanoBorn()), FlippedCondition.getInstance(), "")));
     }
 
     public AkkiLavarunner(final AkkiLavarunner card) {

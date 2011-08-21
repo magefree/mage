@@ -36,7 +36,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
@@ -67,7 +67,7 @@ public class IndomitableArchangel extends CardImpl<IndomitableArchangel> {
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
         ContinuousEffect gainAbilityEffect = new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, filter);
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(gainAbilityEffect, Metalcraft.getInstance(), text);
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(gainAbilityEffect, MetalcraftCondition.getInstance(), text);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

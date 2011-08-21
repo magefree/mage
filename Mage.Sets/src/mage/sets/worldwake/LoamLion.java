@@ -34,7 +34,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ControlsPermanent;
+import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -64,7 +64,7 @@ public class LoamLion extends CardImpl<LoamLion> {
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinousEffect(new BoostSourceEffect(1, 2, Duration.WhileOnBattlefield),
-                new ControlsPermanent(filter), rule)));
+                new ControlsPermanentCondition(filter), rule)));
     }
 
     public LoamLion(final LoamLion card) {

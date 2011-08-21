@@ -35,7 +35,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
@@ -58,7 +58,7 @@ public class GhalmasWarden extends CardImpl<GhalmasWarden> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
         ContinuousEffect boostSource = new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield);
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(boostSource, Metalcraft.getInstance(), text);
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(boostSource, MetalcraftCondition.getInstance(), text);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

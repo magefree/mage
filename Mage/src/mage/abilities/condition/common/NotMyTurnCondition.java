@@ -31,8 +31,8 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
 
-public class MyTurn implements Condition {
-    private static MyTurn fInstance = new MyTurn();
+public class NotMyTurnCondition implements Condition {
+    private static NotMyTurnCondition fInstance = new NotMyTurnCondition();
 
     public static Condition getInstance() {
         return fInstance;
@@ -40,6 +40,6 @@ public class MyTurn implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getActivePlayerId().equals(source.getControllerId());
+        return !game.getActivePlayerId().equals(source.getControllerId());
     }
 }

@@ -32,7 +32,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
@@ -57,7 +57,7 @@ public class LumengridDrake extends CardImpl<LumengridDrake> {
         this.toughness = new MageInt(2);
 
         TriggeredAbility conditional = new ConditionalTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()), Metalcraft.getInstance(), text);
+                new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()), MetalcraftCondition.getInstance(), text);
         conditional.addTarget(new TargetCreaturePermanent());
         this.addAbility(conditional);
     }

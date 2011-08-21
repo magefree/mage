@@ -34,7 +34,7 @@ import mage.Constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.condition.common.Metalcraft;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -71,7 +71,7 @@ public class StoicRebuttal extends CardImpl<StoicRebuttal> {
 
 	@Override
 	public void adjustCosts(Ability ability, Game game) {
-		if (Metalcraft.getInstance().apply(game, ability)) {
+		if (MetalcraftCondition.getInstance().apply(game, ability)) {
 			/*ManaCosts<ManaCost> previousCost = ability.getManaCostsToPay();
 			ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<ManaCost>();
 			boolean reduced = false;

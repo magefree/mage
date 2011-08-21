@@ -34,7 +34,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.Enchanted;
+import mage.abilities.condition.common.EnchantedCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -59,7 +59,7 @@ public class SkyriderTrainee extends CardImpl<SkyriderTrainee> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinousEffect(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
-                Enchanted.getInstance(),
+                EnchantedCondition.getInstance(),
                 "{this} has flying as long as it's enchanted")));
     }
 

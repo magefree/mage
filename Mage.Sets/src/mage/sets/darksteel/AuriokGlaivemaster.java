@@ -32,14 +32,14 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.Equipped;
+import mage.abilities.condition.common.EquippedCondition;
 import mage.abilities.decorator.ConditionalStaticAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -47,7 +47,7 @@ import mage.cards.CardImpl;
  * @author Loki
  */
 public class AuriokGlaivemaster extends CardImpl<AuriokGlaivemaster> {
-    private final static String cardRule = "As long as {this} is equipped, it gets +1/+1 and has first strike";
+    private static final String cardRule = "As long as {this} is equipped, it gets +1/+1 and has first strike";
 
     public AuriokGlaivemaster(UUID ownerId) {
         super(ownerId, 1, "Auriok Glaivemaster", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
@@ -59,7 +59,10 @@ public class AuriokGlaivemaster extends CardImpl<AuriokGlaivemaster> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        Ability ability = new ConditionalStaticAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Constants.Duration.WhileOnBattlefield), Equipped.getInstance(), cardRule);
+        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD,
+                new BoostSourceEffect(1, 1, Constants.Duration.WhileOnBattlefield),
+                EquippedCondition.getInstance(),
+                cardRule);
         ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()));
         this.addAbility(ability);
     }

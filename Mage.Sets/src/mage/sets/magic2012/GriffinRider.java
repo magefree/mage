@@ -35,7 +35,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.ControlsPermanent;
+import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalStaticAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
@@ -70,7 +70,7 @@ public class GriffinRider extends CardImpl<GriffinRider> {
         this.toughness = new MageInt(1);
 
         // As long as you control a Griffin creature, Griffin Rider gets +3/+3 and has flying.
-        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield), new ControlsPermanent(filterGriffinCard), rule);
+        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield), new ControlsPermanentCondition(filterGriffinCard), rule);
         ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()));
         this.addAbility(ability);
     }

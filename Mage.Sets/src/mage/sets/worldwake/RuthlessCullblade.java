@@ -34,7 +34,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.TenOrLessLife;
+import mage.abilities.condition.common.TenOrLessLifeCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -57,7 +57,7 @@ public class RuthlessCullblade extends CardImpl<RuthlessCullblade> {
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinousEffect(new BoostSourceEffect(2, 1, Duration.Custom),
-                new TenOrLessLife(TenOrLessLife.CheckType.AN_OPPONENT),
+                new TenOrLessLifeCondition(TenOrLessLifeCondition.CheckType.AN_OPPONENT),
                 "Ruthless Cullblade gets +2/+1 as long as an opponent has 10 or less life.")));
     }
 

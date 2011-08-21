@@ -35,7 +35,7 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.common.Enchanted;
+import mage.abilities.condition.common.EnchantedCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalStaticAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
@@ -61,7 +61,7 @@ public class FlaringFlameKin extends CardImpl<FlaringFlameKin> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), Enchanted.getInstance(), rule);
+        Ability ability = new ConditionalStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), EnchantedCondition.getInstance(), rule);
         ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()));
         SimpleActivatedAbility grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
