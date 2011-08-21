@@ -35,22 +35,21 @@ import mage.cards.ExpansionSet;
  *
  * @author North
  */
-public class Morningtide extends ExpansionSet {
+public class Invasion extends ExpansionSet {
+    private static final Invasion fINSTANCE =  new Invasion();
 
-    private static final Morningtide fINSTANCE = new Morningtide();
+	public static Invasion getInstance() {
+		return fINSTANCE;
+	}
 
-    public static Morningtide getInstance() {
-        return fINSTANCE;
-    }
-
-    private Morningtide() {
-        super("Morningtide", "MOR", "", "mage.sets.morningtide", new GregorianCalendar(2008, 1, 1).getTime(), SetType.EXPANSION);
-        this.blockName = "Morningtide";
-        this.hasBoosters = true;
-        this.numBoosterLands = 0;
-        this.numBoosterCommon = 11;
-        this.numBoosterUncommon = 3;
-        this.numBoosterRare = 1;
-        this.ratioBoosterMythic = 0;
+    private Invasion() {
+        super("Invasion", "INV", "", "mage.sets.invasion", new GregorianCalendar(2000, 9, 2).getTime(), SetType.EXPANSION);
+        this.blockName = "Invasion";
+		this.hasBoosters = true;
+		this.numBoosterLands = 1;
+		this.numBoosterCommon = 10;
+		this.numBoosterUncommon = 3;
+		this.numBoosterRare = 1;
+		this.ratioBoosterMythic = 8;
     }
 }

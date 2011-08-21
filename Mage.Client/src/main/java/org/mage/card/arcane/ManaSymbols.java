@@ -9,27 +9,30 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
 import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.utils.BufferedImageBuilder;
 
 
 public class ManaSymbols {
-	private static final Logger log = Logger.getLogger(ManaSymbols.class);
 	static private final Map<String, Image> manaImages = new HashMap<String, Image>();
 	static private final Map<String, Image> manaImagesOriginal = new HashMap<String, Image>();
 	static private final Map<String, Dimension> setImagesExist = new HashMap<String, Dimension>();
 	static private Pattern replaceSymbolsPattern = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
 
-	private static final String[] sets = {"DIS", "GPT", "RAV", "MRD",
-			"10E", "HOP", "ALA", "CFX", "ARB", "ZEN", "WWK", "ROE", "SOM", "M10", "M11", "M12",
-			"MBS", "DDF", "DST", "LRW", "MOR", "SHM", "EVE", "APC", "NPH", "TMP", "CHK"};
+    private static final String[] sets = {
+        "10E", "M10", "M11", "M12",
+        "HOP", "DDF",
+        "TMP", "INV", "PLS", "APC",
+        "MRD", "DST", "CHK", "RAV", "GPT", "DIS",
+        "LRW", "MOR", "SHM", "EVE", "ALA", "CFX", "ARB",
+        "ZEN", "WWK", "ROE", "SOM", "MBS", "NPH"
+    };
 
 
 	static public void loadImages() {
-		String[] symbols = new String[]{"0", "1", "10", "11", "12", "15", "16", "2", "3", "4", "5", "6", "7", "8", "9", "B", "BG",
-				"BR", "G", "GU", "GW", "R", "RG", "RW", "S", "T", "U", "UB", "UR", "W", "WB", "WU", 
+		String[] symbols = new String[]{"0", "1", "10", "11", "12", "15", "16", "2", "3", "4", "5", "6", "7", "8", "9",
+				"B", "BG", "BR", "G", "GU", "GW", "R", "RG", "RW", "S", "T", "U", "UB", "UR", "W", "WB", "WU",
 				"WP", "UP", "BP", "RP", "GP", "X", "Y", "Z", "slash"};
 		for (String symbol : symbols) {
 			File file = new File(Constants.RESOURCE_PATH_MANA_MEDIUM + "/" + symbol + ".jpg");

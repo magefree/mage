@@ -15,11 +15,11 @@ public class Eventide extends ExpansionSet {
     private Eventide() {
         super("Eventide", "EVE", "", "mage.sets.eventide", new GregorianCalendar(2008, 6, 25).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Shadowmoor";
-		this.hasBoosters = true;
-		this.numBoosterLands = 1;
-		this.numBoosterCommon = 10;
-		this.numBoosterUncommon = 3;
-		this.numBoosterRare = 1;
-		this.ratioBoosterMythic = 0;
+        this.hasBoosters = true;
+        this.numBoosterLands = 0;
+        this.numBoosterCommon = 11;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 0;
     }
 }

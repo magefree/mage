@@ -5,6 +5,8 @@ Magic 2012|magic2012|
 Planechase|planechase|
 Duel Decks: Elspeth vs. Tezzeret|elspethvstezzeret|
 Tempest|tempest|
+Invasion|invasion|
+Planeshift|planeshift|
 Apocalypse|apocalypse|
 Mirrodin|mirrodin|
 Darksteel|darksteel|
