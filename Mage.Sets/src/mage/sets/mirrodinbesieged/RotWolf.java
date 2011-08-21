@@ -53,7 +53,7 @@ public class RotWolf extends CardImpl<RotWolf> {
 
         this.addAbility(InfectAbility.getInstance());
         // Whenever a creature dealt damage by Rot Wolf this turn dies, you may draw a card.
-        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new DrawCardControllerEffect(1)));
+        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new DrawCardControllerEffect(1), true));
     }
 
     public RotWolf(final RotWolf card) {

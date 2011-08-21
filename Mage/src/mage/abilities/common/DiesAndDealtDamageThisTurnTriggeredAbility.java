@@ -13,6 +13,10 @@ public class DiesAndDealtDamageThisTurnTriggeredAbility extends TriggeredAbility
 	public DiesAndDealtDamageThisTurnTriggeredAbility(Effect effect) {
 		super(Constants.Zone.BATTLEFIELD, effect);
 	}
+    
+	public DiesAndDealtDamageThisTurnTriggeredAbility(Effect effect, boolean optional) {
+		super(Constants.Zone.BATTLEFIELD, effect, true);
+	}
 
 	public DiesAndDealtDamageThisTurnTriggeredAbility(final DiesAndDealtDamageThisTurnTriggeredAbility ability) {
 		super(ability);
