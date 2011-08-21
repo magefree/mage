@@ -87,7 +87,7 @@ public class BloodlordOfVaasgoth extends CardImpl<BloodlordOfVaasgoth> {
 
 class BloodlordOfVaasgothEffect extends ContinuousEffectImpl {
 
-	private static final Ability ability = new BloodthirstAbility(3);
+	private Ability ability = new BloodthirstAbility(3);
 
 	public BloodlordOfVaasgothEffect() {
 		super(Constants.Duration.OneUse, Constants.Layer.AbilityAddingRemovingEffects_6, Constants.SubLayer.NA, Constants.Outcome.AddAbility);
@@ -109,10 +109,7 @@ class BloodlordOfVaasgothEffect extends ContinuousEffectImpl {
 		if (object != null) {
 			Permanent permanent = game.getPermanent(object.getSourceId());
 			if (permanent != null) {
-				Ability bloodthirst = ability.copy();
-				bloodthirst.newId();
-				bloodthirst.setSourceId(source.getSourceId());
-				permanent.addAbility(bloodthirst);
+				permanent.addAbility(ability);
 				return true;
 			}
 		} else {
