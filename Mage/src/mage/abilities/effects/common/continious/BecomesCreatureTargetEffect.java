@@ -40,98 +40,103 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class BecomesCreatureTargetEffect extends ContinuousEffectImpl<BecomesCreatureTargetEffect> {
 
-	protected Token token;
-	protected String type;
+    protected Token token;
+    protected String type;
 
-	public BecomesCreatureTargetEffect(Token token, String type, Duration duration) {
-		super(duration, Outcome.BecomeCreature);
-		this.token = token;
-		this.type = type;
-	}
+    public BecomesCreatureTargetEffect(Token token, String type, Duration duration) {
+        super(duration, Outcome.BecomeCreature);
+        this.token = token;
+        this.type = type;
+    }
 
-	public BecomesCreatureTargetEffect(final BecomesCreatureTargetEffect effect) {
-		super(effect);
-		token = effect.token.copy();
-		type = effect.type;
-	}
+    public BecomesCreatureTargetEffect(final BecomesCreatureTargetEffect effect) {
+        super(effect);
+        token = effect.token.copy();
+        type = effect.type;
+    }
 
-	@Override
-	public BecomesCreatureTargetEffect copy() {
-		return new BecomesCreatureTargetEffect(this);
-	}
+    @Override
+    public BecomesCreatureTargetEffect copy() {
+        return new BecomesCreatureTargetEffect(this);
+    }
 
-	@Override
-	public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-		Permanent permanent = game.getPermanent(source.getFirstTarget());
-		if (permanent != null) {
-			switch (layer) {
-				case TypeChangingEffects_4:
-					if (sublayer == SubLayer.NA) {
-						if (token.getCardType().size() > 0) {
-							for (Constants.CardType t : token.getCardType()) {
-								if (!permanent.getCardType().contains(t)) {
-									permanent.getCardType().add(t);
-								}
-							}
-						}
-						if (type == null) {
-							permanent.getSubtype().clear();
-						}
-						if (token.getSubtype().size() > 0) {
-							permanent.getSubtype().addAll(token.getSubtype());
-						}
-					}
-					break;
-				case ColorChangingEffects_5:
-					if (sublayer == SubLayer.NA) {
-						if (token.getColor().hasColor())
-							permanent.getColor().setColor(token.getColor());
-					}
-					break;
-				case AbilityAddingRemovingEffects_6:
-					if (sublayer == SubLayer.NA) {
-						if (token.getAbilities().size() > 0) {
-							for (Ability ability: token.getAbilities()) {
-								permanent.addAbility(ability);
-							}
-						}
-					}
-					break;
-				case PTChangingEffects_7:
-					if (sublayer == SubLayer.SetPT_7b) {
-						if (token.getPower() != MageInt.EmptyMageInt)
-							permanent.getPower().setValue(token.getPower().getValue());
-						if (token.getToughness() != MageInt.EmptyMageInt)
-							permanent.getToughness().setValue(token.getToughness().getValue());
-					}
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        boolean result = false;
+        for (UUID permanentId : targetPointer.getTargets(source)) {
+            Permanent permanent = game.getPermanent(permanentId);
+            if (permanent != null) {
+                switch (layer) {
+                    case TypeChangingEffects_4:
+                        if (sublayer == SubLayer.NA) {
+                            if (token.getCardType().size() > 0) {
+                                for (Constants.CardType t : token.getCardType()) {
+                                    if (!permanent.getCardType().contains(t)) {
+                                        permanent.getCardType().add(t);
+                                    }
+                                }
+                            }
+                            if (type == null) {
+                                permanent.getSubtype().clear();
+                            }
+                            if (token.getSubtype().size() > 0) {
+                                permanent.getSubtype().addAll(token.getSubtype());
+                            }
+                        }
+                        break;
+                    case ColorChangingEffects_5:
+                        if (sublayer == SubLayer.NA) {
+                            if (token.getColor().hasColor())
+                                permanent.getColor().setColor(token.getColor());
+                        }
+                        break;
+                    case AbilityAddingRemovingEffects_6:
+                        if (sublayer == SubLayer.NA) {
+                            if (token.getAbilities().size() > 0) {
+                                for (Ability ability : token.getAbilities()) {
+                                    permanent.addAbility(ability);
+                                }
+                            }
+                        }
+                        break;
+                    case PTChangingEffects_7:
+                        if (sublayer == SubLayer.SetPT_7b) {
+                            if (token.getPower() != MageInt.EmptyMageInt)
+                                permanent.getPower().setValue(token.getPower().getValue());
+                            if (token.getToughness() != MageInt.EmptyMageInt)
+                                permanent.getToughness().setValue(token.getToughness().getValue());
+                        }
+                }
+            }
+            result |= true;
+        }
+        return result;
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
 
-	@Override
-	public boolean hasLayer(Layer layer) {
-		return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == layer.TypeChangingEffects_4;
-	}
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == layer.TypeChangingEffects_4;
+    }
 
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-		sb.append(duration.toString());
+        sb.append(duration.toString());
         sb.append(" target ").append(mode.getTargets().get(0).getTargetName()).append(" becomes a ").append(token.getDescription());
-		if (type != null && type.length() > 0)
-			sb.append(" that's still a ").append(type);
+        if (type != null && type.length() > 0)
+            sb.append(" that's still a ").append(type);
         return sb.toString();
     }
 
