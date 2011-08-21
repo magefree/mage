@@ -96,7 +96,7 @@ public class GameEvent {
 
 		//permanent events
 		ENTERS_THE_BATTLEFIELD,
-		TAP, TAPPED,
+		TAP, TAPPED, TAPPED_FOR_MANA,
 		UNTAP, UNTAPPED,
 		FLIP, FLIPPED,
 		UNFLIP, UNFLIPPED,
