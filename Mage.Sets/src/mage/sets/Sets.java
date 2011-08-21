@@ -55,6 +55,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
 	private static final Sets fINSTANCE =  new Sets();
 	private static Set<String> names;
 	private static Set<String> nonLandNames;
+	private static Set<String> creatureTypes;
 	private static List<Card> cards;
     protected static Random rnd = new Random();
 
@@ -66,6 +67,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
 		names = new TreeSet<String>();
 		nonLandNames = new TreeSet<String>();
 		cards = new ArrayList<Card>();
+		creatureTypes = new TreeSet<String>();
 		this.addSet(AlaraReborn.getInstance());
         this.addSet(Apocalypse.getInstance());
         this.addSet(ChampionsOfKamigawa.getInstance());
@@ -101,6 +103,11 @@ public class Sets extends HashMap<String, ExpansionSet> {
 		for (Card card: set.getCards()) {
 			cards.add(card);
 			names.add(card.getName());
+			if (card.getCardType().contains(CardType.CREATURE)) {
+				for (String type :  card.getSubtype()) {
+					creatureTypes.add(type);
+				}
+			}
 			if (!card.getCardType().contains(CardType.LAND)) nonLandNames.add(card.getName());
 		}
 	}
@@ -111,6 +118,10 @@ public class Sets extends HashMap<String, ExpansionSet> {
 
 	public static Set<String> getNonLandCardNames() {
 		return nonLandNames;
+	}
+
+	public static Set<String> getCreatureTypes() {
+		return creatureTypes;
 	}
 
 	public static Card getRandomCard() {
