@@ -91,7 +91,7 @@ class LinvalaKeeperOfSilenceEffect extends ReplacementEffectImpl<LinvalaKeeperOf
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent p = game.getPermanent(event.getTargetId());
+        Permanent p = game.getPermanent(event.getSourceId());
         if ( event.getType() == GameEvent.EventType.ACTIVATE_ABILITY && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())
                 && p != null && p.getCardType().contains(CardType.CREATURE)) {
 			return true;
@@ -101,7 +101,7 @@ class LinvalaKeeperOfSilenceEffect extends ReplacementEffectImpl<LinvalaKeeperOf
 
     @Override
     public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
+        return true;
     }
 
     @Override

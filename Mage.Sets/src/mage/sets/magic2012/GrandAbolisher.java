@@ -36,12 +36,10 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.watchers.Watcher;
 
 import java.util.UUID;
 
@@ -111,12 +109,12 @@ class GrandAbolisherEffect extends ReplacementEffectImpl<GrandAbolisherEffect> {
 			}
 
 			// check source of activated ability
-			Permanent permanent = game.getPermanent(event.getTargetId());
+			Permanent permanent = game.getPermanent(event.getSourceId());
 			if (permanent != null) {
 				return permanent.getCardType().contains(CardType.ARTIFACT) || permanent.getCardType().contains(CardType.CREATURE)
 						|| permanent.getCardType().contains(CardType.ENCHANTMENT);
 			} else {
-				MageObject object = game.getObject(event.getTargetId());
+				MageObject object = game.getObject(event.getSourceId());
 				if (object != null) {
 					return object.getCardType().contains(CardType.ARTIFACT) || object.getCardType().contains(CardType.CREATURE)
 						|| object.getCardType().contains(CardType.ENCHANTMENT);

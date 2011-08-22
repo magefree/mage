@@ -259,10 +259,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		}
 	}
 
+    @Override
 	public void setTurnControlledBy(UUID playerId) {
 		this.turnController = playerId;
 	}
 
+    @Override
 	public UUID getTurnControlledBy() {
 		return this.turnController;
 	}
@@ -484,13 +486,13 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	protected boolean playAbility(ActivatedAbility ability, Game game) {
 		//20091005 - 602.2a
-		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, ability.getSourceId(), ability.getId(), playerId))) {
+		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, ability.getId(), ability.getSourceId(), playerId))) {
 			game.bookmarkState();
 			ability.newId();
 			game.getStack().push(new StackAbility(ability, playerId));
 			String message = ability.getActivatedMessage(game);
 			if (ability.activate(game, false)) {
-				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, ability.getSourceId(), ability.getId(), playerId));
+				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, ability.getId(), ability.getSourceId(), playerId));
 				game.fireInformEvent(name + message);
 				game.removeLastBookmark();
 				return true;

@@ -41,7 +41,6 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
@@ -140,7 +139,7 @@ class PhyrexianRevokerEffect2 extends ReplacementEffectImpl<PhyrexianRevokerEffe
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.ACTIVATE_ABILITY) {
-            MageObject object = game.getObject(event.getTargetId());
+            MageObject object = game.getObject(event.getSourceId());
             if (object != null && object.getName().equals(game.getState().getValue(source.getSourceId().toString()))) {
                 return true;
             }

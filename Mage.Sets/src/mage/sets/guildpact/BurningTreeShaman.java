@@ -30,16 +30,16 @@ package mage.sets.guildpact;
 
 import java.util.UUID;
 
-import mage.Constants;
+import mage.Constants.AbilityType;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.target.TargetPlayer;
 
@@ -73,7 +73,7 @@ public class BurningTreeShaman extends CardImpl<BurningTreeShaman> {
 
 class BurningTreeShamanTriggeredAbility extends TriggeredAbilityImpl<BurningTreeShamanTriggeredAbility> {
     BurningTreeShamanTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(1));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
         this.addTarget(new TargetPlayer());
     }
 
@@ -89,8 +89,8 @@ class BurningTreeShamanTriggeredAbility extends TriggeredAbilityImpl<BurningTree
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
-            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getTargetId());
-            if (stackAbility.getAbilityType() == Constants.AbilityType.ACTIVATED) {
+            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+            if (stackAbility.getAbilityType() == AbilityType.ACTIVATED) {
                 this.getTargets().get(0).add(event.getPlayerId(), game);
                 return true;
             }

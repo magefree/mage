@@ -43,6 +43,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -105,17 +106,15 @@ class ArrestEffect extends ReplacementEffectImpl<ArrestEffect> {
 
 	@Override
 	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER || event.getType() == GameEvent.EventType.DECLARE_BLOCKER || event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-			Permanent enchantment = game.getPermanent(source.getSourceId());
-			if (enchantment != null && enchantment.getAttachedTo() != null) {
-				if ((event.getType() == GameEvent.EventType.DECLARE_ATTACKER || event.getType() == GameEvent.EventType.DECLARE_BLOCKER) && event.getSourceId().equals(enchantment.getAttachedTo())) {
-					return true;
-				} else if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY && event.getTargetId().equals(enchantment.getAttachedTo())) {
+        if (event.getType() == EventType.DECLARE_ATTACKER || event.getType() == EventType.DECLARE_BLOCKER || event.getType() == EventType.ACTIVATE_ABILITY) {
+            Permanent enchantment = game.getPermanent(source.getSourceId());
+            if (enchantment != null && enchantment.getAttachedTo() != null) {
+                if (event.getSourceId().equals(enchantment.getAttachedTo())) {
                     return true;
                 }
-			}
-		}
-		return false;
+            }
+        }
+        return false;
 	}
 
 }
