@@ -28,57 +28,39 @@
 
 package mage.view;
 
-import java.util.Collection;
-import java.util.HashMap;
+import java.io.Serializable;
 import java.util.UUID;
-import mage.Constants.Zone;
-import mage.abilities.Ability;
-import mage.cards.Card;
-import mage.game.Game;
-import mage.game.GameState;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CardsView extends HashMap<UUID, CardView> {
+public class SimpleCardView implements Serializable {
+    protected UUID id;
+	protected String expansionSetCode;
+	protected int cardNumber;
+	protected boolean faceDown;
 
-	public CardsView() {}
-
-	public CardsView(Collection<Card> cards) {
-		for (Card card: cards) {
-			this.put(card.getId(), new CardView(card));
-		}
-	}
-
-	public CardsView ( Collection<? extends Ability> abilities, Game game ) {
-		for ( Ability ability : abilities ) {
-			Card sourceCard = null;
-			switch ( ability.getZone() ) {
-				case ALL:
-				case EXILED:
-				case GRAVEYARD:
-					sourceCard = game.getCard(ability.getSourceId());
-					break;
-				case BATTLEFIELD:
-                    sourceCard = game.getPermanent(ability.getSourceId());
-                    if (sourceCard == null)
-					    sourceCard = game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD);
-					break;
-			}
-			if (sourceCard != null) {
-				this.put(ability.getId(), new AbilityView(ability, sourceCard.getName(), new CardView(sourceCard)));
-			}
-		}
-	}
-
-	public CardsView(Collection<? extends Ability> abilities, GameState state) {
-		for (Ability ability: abilities) {
-			Card sourceCard = state.getPermanent(ability.getSourceId());
-			if (sourceCard != null) {
-				this.put(ability.getId(), new AbilityView(ability, sourceCard.getName(), new CardView(sourceCard)));
-			}
-		}
-	}
-
+    public SimpleCardView(UUID id, String expansionSetCode, int cardNumber, boolean faceDown) {
+        this.id = id;
+        this.expansionSetCode = expansionSetCode;
+        this.cardNumber = cardNumber;
+        this.faceDown = faceDown;
+    }
+    
+    public UUID getId() {
+        return id;
+    }
+    
+    public String getExpansionSetCode() {
+        return expansionSetCode;
+    }
+    
+    public int getCardNumber() {
+        return cardNumber;
+    }
+    
+    public boolean isFaceDown() {
+        return faceDown;
+    }
 }

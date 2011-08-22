@@ -31,53 +31,19 @@ package mage.view;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.UUID;
-import mage.Constants.Zone;
-import mage.abilities.Ability;
 import mage.cards.Card;
-import mage.game.Game;
-import mage.game.GameState;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CardsView extends HashMap<UUID, CardView> {
+public class SimpleCardsView extends HashMap<UUID, SimpleCardView> {
 
-	public CardsView() {}
+	public SimpleCardsView() {}
 
-	public CardsView(Collection<Card> cards) {
+	public SimpleCardsView(Collection<Card> cards) {
 		for (Card card: cards) {
-			this.put(card.getId(), new CardView(card));
-		}
-	}
-
-	public CardsView ( Collection<? extends Ability> abilities, Game game ) {
-		for ( Ability ability : abilities ) {
-			Card sourceCard = null;
-			switch ( ability.getZone() ) {
-				case ALL:
-				case EXILED:
-				case GRAVEYARD:
-					sourceCard = game.getCard(ability.getSourceId());
-					break;
-				case BATTLEFIELD:
-                    sourceCard = game.getPermanent(ability.getSourceId());
-                    if (sourceCard == null)
-					    sourceCard = game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD);
-					break;
-			}
-			if (sourceCard != null) {
-				this.put(ability.getId(), new AbilityView(ability, sourceCard.getName(), new CardView(sourceCard)));
-			}
-		}
-	}
-
-	public CardsView(Collection<? extends Ability> abilities, GameState state) {
-		for (Ability ability: abilities) {
-			Card sourceCard = state.getPermanent(ability.getSourceId());
-			if (sourceCard != null) {
-				this.put(ability.getId(), new AbilityView(ability, sourceCard.getName(), new CardView(sourceCard)));
-			}
+			this.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown()));
 		}
 	}
 

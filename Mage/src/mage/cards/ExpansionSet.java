@@ -41,7 +41,6 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.net.URLDecoder;
 import java.util.*;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 import org.apache.log4j.Logger;
@@ -132,9 +131,9 @@ public abstract class ExpansionSet implements Serializable {
 		return null;
 	}
 
-	public Card findCard(String name, int cardNum) {
+	public Card findCard(int cardNum) {
 		for (Card card : cards) {
-			if (cardNum == card.getCardNumber() && name.equalsIgnoreCase(card.getName())) {
+			if (cardNum == card.getCardNumber()) {
 				Card newCard = card.copy();
 				newCard.assignNewId();
 				return newCard;
@@ -158,7 +157,7 @@ public abstract class ExpansionSet implements Serializable {
 		return null;
 	}
 
-	public String findCard(int cardNum) {
+	public String findCardName(int cardNum) {
 		for (Card card : cards) {
 			if (card.getCardNumber() == cardNum)
 				return card.getClass().getCanonicalName();

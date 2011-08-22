@@ -1,5 +1,5 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+* Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -26,59 +26,32 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.view;
+package mage.client.util;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.UUID;
-import mage.Constants.Zone;
-import mage.abilities.Ability;
-import mage.cards.Card;
-import mage.game.Game;
-import mage.game.GameState;
+import mage.sets.Sets;
+import mage.view.CardView;
+import mage.view.CardsView;
+import mage.view.SimpleCardView;
+import mage.view.SimpleCardsView;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CardsView extends HashMap<UUID, CardView> {
-
-	public CardsView() {}
-
-	public CardsView(Collection<Card> cards) {
-		for (Card card: cards) {
-			this.put(card.getId(), new CardView(card));
-		}
-	}
-
-	public CardsView ( Collection<? extends Ability> abilities, Game game ) {
-		for ( Ability ability : abilities ) {
-			Card sourceCard = null;
-			switch ( ability.getZone() ) {
-				case ALL:
-				case EXILED:
-				case GRAVEYARD:
-					sourceCard = game.getCard(ability.getSourceId());
-					break;
-				case BATTLEFIELD:
-                    sourceCard = game.getPermanent(ability.getSourceId());
-                    if (sourceCard == null)
-					    sourceCard = game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD);
-					break;
-			}
-			if (sourceCard != null) {
-				this.put(ability.getId(), new AbilityView(ability, sourceCard.getName(), new CardView(sourceCard)));
-			}
-		}
-	}
-
-	public CardsView(Collection<? extends Ability> abilities, GameState state) {
-		for (Ability ability: abilities) {
-			Card sourceCard = state.getPermanent(ability.getSourceId());
-			if (sourceCard != null) {
-				this.put(ability.getId(), new AbilityView(ability, sourceCard.getName(), new CardView(sourceCard)));
-			}
-		}
-	}
-
+public class CardsViewUtil {
+    
+    public static CardsView convertSimple(SimpleCardsView view) {
+        CardsView cards = new CardsView();
+        
+        for (SimpleCardView simple: view.values()) {
+            mage.cards.Card card = Sets.findCard(simple.getExpansionSetCode(), simple.getCardNumber());
+            if (card != null) {
+                
+                cards.put(simple.getId(), new CardView(card, simple.getId()));
+            }
+        }
+        
+        return cards;
+    }
+    
 }

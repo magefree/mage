@@ -55,7 +55,7 @@ public class PlayerView implements Serializable {
 	private boolean isActive;
 	private boolean hasLeft;
 	private ManaPoolView manaPool;
-	private CardsView graveyard = new CardsView();
+	private SimpleCardsView graveyard = new SimpleCardsView();
 	private Map<UUID, PermanentView> battlefield = new HashMap<UUID, PermanentView>();
 
 	public PlayerView(Player player, GameState state, Game game) {
@@ -69,7 +69,7 @@ public class PlayerView implements Serializable {
 		this.isActive = (player.getId().equals(state.getActivePlayerId()));
 		this.hasLeft = player.hasLeft();
 		for (Card card: player.getGraveyard().getCards(game)) {
-			graveyard.put(card.getId(), new CardView(card));
+			graveyard.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown()));
 		}
 		for (Permanent permanent: state.getBattlefield().getAllPermanents()) {
 			if (showInBattlefield(permanent, state)) {
@@ -113,7 +113,7 @@ public class PlayerView implements Serializable {
 		return this.manaPool;
 	}
 
-	public CardsView getGraveyard() {
+	public SimpleCardsView getGraveyard() {
 		return this.graveyard;
 	}
 

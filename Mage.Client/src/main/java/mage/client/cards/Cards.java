@@ -41,7 +41,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.Map.Entry;
 
-import mage.cards.CardDimensions;
 import mage.cards.MageCard;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
@@ -50,9 +49,11 @@ import mage.view.CardsView;
 import mage.view.PermanentView;
 import mage.view.StackAbilityView;
 
-import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
+import mage.client.util.CardsViewUtil;
+import mage.sets.Sets;
+import mage.view.SimpleCardView;
+import mage.view.SimpleCardsView;
 
 /**
  *
@@ -113,6 +114,10 @@ public class Cards extends javax.swing.JPanel {
 		}
 	}
 
+    public boolean loadCards(SimpleCardsView cardsView, BigCard bigCard, UUID gameId) {        
+        return loadCards(CardsViewUtil.convertSimple(cardsView), bigCard, gameId);
+    }
+    
 	public boolean loadCards(CardsView cardsView, BigCard bigCard, UUID gameId) {
 		boolean changed = false;
 		

@@ -307,7 +307,7 @@ public class GamePanel extends javax.swing.JPanel {
 
 			// Get opponents hand cards if available
 			if (game.getOpponentHands() != null) {
-				for (Map.Entry<String, CardsView> hand: game.getOpponentHands().entrySet()) {
+				for (Map.Entry<String, SimpleCardsView> hand: game.getOpponentHands().entrySet()) {
 					handCards.put(hand.getKey(), hand.getValue());
 				}
 			}
@@ -577,7 +577,7 @@ public class GamePanel extends javax.swing.JPanel {
 		jTabbedPane1 = new JTabbedPane();
 
 		hand.setCardDimension(getHandCardDimension());
-		handCards = new HashMap<String, CardsView>();
+		handCards = new HashMap<String, SimpleCardsView>();
 
         jSplitPane1.setBorder(null);
         jSplitPane1.setDividerSize(7);
@@ -882,7 +882,7 @@ public class GamePanel extends javax.swing.JPanel {
 
 		if (chosenHandKey != null && chosenHandKey.length() > 0) {
 			this.chosenHandKey = chosenHandKey;
-			CardsView cards = handCards.get(chosenHandKey);
+			SimpleCardsView cards = handCards.get(chosenHandKey);
 			this.hand.loadCards(cards, bigCard, gameId);
 			hand.setPreferredSize(new java.awt.Dimension((getHandCardDimension().width + 5) * cards.size() + 5, getHandCardDimension().height + 20)); // for scroll
 		}
@@ -983,8 +983,6 @@ public class GamePanel extends javax.swing.JPanel {
     private mage.client.chat.ChatPanel gameChatPanel;
     private mage.client.game.FeedbackPanel feedbackPanel;
 	private mage.client.chat.ChatPanel userChatPanel;
-    private mage.client.cards.Cards hand;
-	private Map<String, CardsView> handCards;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lblActivePlayer;
@@ -995,13 +993,16 @@ public class GamePanel extends javax.swing.JPanel {
     private javax.swing.JPanel pnlBattlefield;
 	private javax.swing.JPanel pnlGameInfo;
     private javax.swing.JPanel pnlReplay;
-    private mage.client.cards.Cards stack;
     private javax.swing.JLabel txtActivePlayer;
     private javax.swing.JLabel txtPhase;
     private javax.swing.JLabel txtPriority;
     private javax.swing.JLabel txtStep;
     private javax.swing.JLabel txtTurn;
     // End of variables declaration//GEN-END:variables
+
+    private mage.client.cards.Cards hand;
+	private Map<String, SimpleCardsView> handCards;
+    private mage.client.cards.Cards stack;
 
 	private JTabbedPane jTabbedPane1;
 	private Border emptyBorder = new EmptyBorder(0,0,0,0);

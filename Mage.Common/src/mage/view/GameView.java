@@ -32,13 +32,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import mage.MageObject;
 import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
 import mage.cards.Card;
-import mage.cards.Cards;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.GameState;
@@ -56,8 +54,8 @@ public class GameView implements Serializable {
     private static final long serialVersionUID = 1L;
 
 	private List<PlayerView> players = new ArrayList<PlayerView>();
-	private CardsView hand;
-	private Map<String, CardsView> opponentHands;
+	private SimpleCardsView hand;
+	private Map<String, SimpleCardsView> opponentHands;
 	private CardsView stack = new CardsView();
 	private List<ExileView> exiles = new ArrayList<ExileView>();
 	private List<RevealedView> revealed = new ArrayList<RevealedView>();
@@ -118,19 +116,19 @@ public class GameView implements Serializable {
 		return players;
 	}
 
-	public CardsView getHand() {
+	public SimpleCardsView getHand() {
 		return hand;
 	}
 
-	public void setHand(CardsView hand) {
+	public void setHand(SimpleCardsView hand) {
 		this.hand = hand;
 	}
 
-	public Map<String, CardsView> getOpponentHands() {
+	public Map<String, SimpleCardsView> getOpponentHands() {
 		return opponentHands;
 	}
 
-	public void setOpponentHands(Map<String, CardsView> opponentHands) {
+	public void setOpponentHands(Map<String, SimpleCardsView> opponentHands) {
 		this.opponentHands = opponentHands;
 	}
 
