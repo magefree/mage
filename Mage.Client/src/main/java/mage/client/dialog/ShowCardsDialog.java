@@ -51,6 +51,8 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.UUID;
+import mage.client.util.CardsViewUtil;
+import mage.view.SimpleCardsView;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -67,7 +69,11 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
 		this.setModal(false);
 	}
 
-	public void loadCards(String name, CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean modal) {
+	public void loadCards(String name, SimpleCardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean modal) {
+        loadCards(name, CardsViewUtil.convertSimple(showCards), bigCard, dimension, gameId, modal);
+    }
+    
+    public void loadCards(String name, CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean modal) {
 		this.reloaded = true;
 		this.title = name;
 		cardArea.removeAll();

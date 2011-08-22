@@ -26,28 +26,25 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.abilities.costs.mana;
+package mage.view;
 
-import java.util.List;
-import mage.Mana;
-import mage.abilities.costs.VariableCost;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.UUID;
+import mage.cards.Card;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface ManaCosts<T extends ManaCost> extends List<T>, ManaCost {
+public class SimpleCardsView extends HashMap<UUID, SimpleCardView> {
 
-	public ManaCosts<T> getUnpaidVariableCosts();
-	public List<VariableCost> getVariableCosts();
-    public int getX();
-	public void load(String mana);
-	public List<String> getSymbols();
-    
-    
-    @Override
-	public Mana getMana();
+	public SimpleCardsView() {}
 
-	@Override
-	public ManaCosts<T> copy();
+	public SimpleCardsView(Collection<Card> cards) {
+		for (Card card: cards) {
+			this.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown()));
+		}
+	}
+
 }

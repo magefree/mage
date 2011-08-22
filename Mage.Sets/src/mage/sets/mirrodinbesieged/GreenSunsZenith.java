@@ -87,7 +87,7 @@ class GreenSunsZenithSearchEffect extends OneShotEffect<GreenSunsZenithSearchEff
 		filter.setUseColor(true);
 		filter.getCardType().add(CardType.CREATURE);
 		//Set the mana cost one higher to 'emulate' a less than or equal to comparison.
-		filter.setConvertedManaCost(source.getManaCostsToPay().getVariableCosts().get(0).getAmount() + 1);
+		filter.setConvertedManaCost(source.getManaCostsToPay().getX() + 1);
 		filter.setConvertedManaCostComparison(ComparisonType.LessThan);
 		TargetCardInLibrary target = new TargetCardInLibrary(filter);
 		if (player.searchLibrary(target, game)) {

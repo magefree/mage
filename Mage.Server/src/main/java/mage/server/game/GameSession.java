@@ -47,6 +47,7 @@ import mage.view.CardsView;
 import mage.view.GameClientMessage;
 import mage.view.GameView;
 import mage.view.LookedAtView;
+import mage.view.SimpleCardsView;
 
 /**
  *
@@ -196,13 +197,13 @@ public class GameSession extends GameWatcher {
 	public GameView getGameView() {
 		Player player = game.getPlayer(playerId);
 		GameView gameView = new GameView(game.getState(), game);
-		gameView.setHand(new CardsView(player.getHand().getCards(game)));
+		gameView.setHand(new SimpleCardsView(player.getHand().getCards(game)));
 
 		if (player.getPlayersUnderYourControl().size() > 0) {
-			Map<String, CardsView> handCards = new HashMap<String, CardsView>();
+			Map<String, SimpleCardsView> handCards = new HashMap<String, SimpleCardsView>();
 			for (UUID playerId : player.getPlayersUnderYourControl()) {
 				Player opponent = game.getPlayer(playerId);
-				handCards.put(opponent.getName(), new CardsView(opponent.getHand().getCards(game)));
+				handCards.put(opponent.getName(), new SimpleCardsView(opponent.getHand().getCards(game)));
 			}
 			gameView.setOpponentHands(handCards);
 		}

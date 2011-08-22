@@ -26,28 +26,41 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.abilities.costs.mana;
+package mage.view;
 
-import java.util.List;
-import mage.Mana;
-import mage.abilities.costs.VariableCost;
+import java.io.Serializable;
+import java.util.UUID;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface ManaCosts<T extends ManaCost> extends List<T>, ManaCost {
+public class SimpleCardView implements Serializable {
+    protected UUID id;
+	protected String expansionSetCode;
+	protected int cardNumber;
+	protected boolean faceDown;
 
-	public ManaCosts<T> getUnpaidVariableCosts();
-	public List<VariableCost> getVariableCosts();
-    public int getX();
-	public void load(String mana);
-	public List<String> getSymbols();
+    public SimpleCardView(UUID id, String expansionSetCode, int cardNumber, boolean faceDown) {
+        this.id = id;
+        this.expansionSetCode = expansionSetCode;
+        this.cardNumber = cardNumber;
+        this.faceDown = faceDown;
+    }
     
+    public UUID getId() {
+        return id;
+    }
     
-    @Override
-	public Mana getMana();
-
-	@Override
-	public ManaCosts<T> copy();
+    public String getExpansionSetCode() {
+        return expansionSetCode;
+    }
+    
+    public int getCardNumber() {
+        return cardNumber;
+    }
+    
+    public boolean isFaceDown() {
+        return faceDown;
+    }
 }

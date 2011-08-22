@@ -101,7 +101,7 @@ class SteelHellkiteDestroyEffect extends OneShotEffect {
 		SteelHellkiteWatcher watcher = (SteelHellkiteWatcher) game.getState().getWatchers().get(source.getControllerId(), "SteelHellkiteWatcher");
 		if (watcher != null && watcher.damagedPlayers.containsKey(source.getSourceId())) {
 			Set<UUID> players = watcher.damagedPlayers.get(source.getSourceId());
-			int xValue = source.getManaCostsToPay().getVariableCosts().get(0).getAmount();
+			int xValue = source.getManaCostsToPay().getX();
 			for (UUID uuid : players) {
 				for (Permanent permanent: game.getBattlefield().getAllActivePermanents()) {
 					if (permanent.getControllerId().equals(uuid) && permanent.getManaCost().convertedManaCost() == xValue) {

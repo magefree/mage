@@ -1,5 +1,5 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+* Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without modification, are
 * permitted provided that the following conditions are met:
@@ -26,28 +26,32 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.abilities.costs.mana;
+package mage.client.util;
 
-import java.util.List;
-import mage.Mana;
-import mage.abilities.costs.VariableCost;
+import mage.sets.Sets;
+import mage.view.CardView;
+import mage.view.CardsView;
+import mage.view.SimpleCardView;
+import mage.view.SimpleCardsView;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public interface ManaCosts<T extends ManaCost> extends List<T>, ManaCost {
-
-	public ManaCosts<T> getUnpaidVariableCosts();
-	public List<VariableCost> getVariableCosts();
-    public int getX();
-	public void load(String mana);
-	public List<String> getSymbols();
+public class CardsViewUtil {
     
+    public static CardsView convertSimple(SimpleCardsView view) {
+        CardsView cards = new CardsView();
+        
+        for (SimpleCardView simple: view.values()) {
+            mage.cards.Card card = Sets.findCard(simple.getExpansionSetCode(), simple.getCardNumber());
+            if (card != null) {
+                
+                cards.put(simple.getId(), new CardView(card, simple.getId()));
+            }
+        }
+        
+        return cards;
+    }
     
-    @Override
-	public Mana getMana();
-
-	@Override
-	public ManaCosts<T> copy();
 }

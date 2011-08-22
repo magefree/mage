@@ -40,12 +40,12 @@ import mage.game.Game;
 public class RevealedView implements Serializable {
 
 	private String name;
-	private CardsView cards = new CardsView();
+	private SimpleCardsView cards = new SimpleCardsView();
 
 	public RevealedView(String name, Cards cards, Game game) {
 		this.name = name;
 		for (Card card: cards.getCards(game)) {
-			this.cards.put(card.getId(), new CardView(card));
+			this.cards.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown()));
 		}
 	}
 
@@ -53,7 +53,7 @@ public class RevealedView implements Serializable {
 		return name;
 	}
 
-	public CardsView getCards() {
+	public SimpleCardsView getCards() {
 		return cards;
 	}
 }

@@ -88,7 +88,7 @@ class ConsumeSpiritEffect extends OneShotEffect<ConsumeSpiritEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		int damage = source.getManaCostsToPay().getVariableCosts().get(0).getAmount();
+		int damage = source.getManaCostsToPay().getX();
 		if (damage > 0) {
 			Permanent permanent = game.getPermanent(getTargetPointer().getFirst(source));
 			if (permanent != null) {

@@ -34,6 +34,7 @@ import mage.cards.decks.Deck;
 import mage.sets.Sets;
 import mage.view.CardView;
 import mage.view.DeckView;
+import mage.view.SimpleCardView;
 import org.apache.log4j.Logger;
 
 /**
@@ -50,25 +51,25 @@ public class DeckUtil {
 
 	public static Deck construct(DeckView view) {
 		Deck deck = new Deck();
-		for (CardView cardView : view.getCards().values()) {
+		for (SimpleCardView cardView : view.getCards().values()) {
 			ExpansionSet set = Sets.findSet(cardView.getExpansionSetCode());
 			if (set != null) {
-				Card card = set.findCard(cardView.getName(), cardView.getCardNumber());
+				Card card = set.findCard(cardView.getCardNumber());
 				if (card != null) {
 					deck.getCards().add(card);
 				} else {
-					log.fatal("(Deck constructing) Couldn't find card: " + cardView.getName() + ", set=" + cardView.getExpansionSetCode() + ", cid=" + Integer.valueOf(cardView.getCardNumber()));
+					log.fatal("(Deck constructing) Couldn't find card: set=" + cardView.getExpansionSetCode() + ", cid=" + Integer.valueOf(cardView.getCardNumber()));
 				}
 			}
 		}
-		for (CardView cardView : view.getSideboard().values()) {
+		for (SimpleCardView cardView : view.getSideboard().values()) {
 			ExpansionSet set = Sets.findSet(cardView.getExpansionSetCode());
 			if (set != null) {
-				Card card = set.findCard(cardView.getName(), cardView.getCardNumber());
+				Card card = set.findCard(cardView.getCardNumber());
 				if (card != null) {
 					deck.getSideboard().add(card);
 				} else {
-					log.fatal("(Deck constructing) Couldn't find card: " + cardView.getName() + ", set=" + cardView.getExpansionSetCode() + ", cid=" + Integer.valueOf(cardView.getCardNumber()));
+					log.fatal("(Deck constructing) Couldn't find card: set=" + cardView.getExpansionSetCode() + ", cid=" + Integer.valueOf(cardView.getCardNumber()));
 				}
 			}
 		}

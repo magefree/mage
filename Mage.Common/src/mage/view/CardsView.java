@@ -36,7 +36,6 @@ import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.game.GameState;
-import mage.game.permanent.Permanent;
 
 /**
  *

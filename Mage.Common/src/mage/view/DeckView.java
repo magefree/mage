@@ -27,13 +27,9 @@
  */
 package mage.view;
 
-import mage.cards.Card;
-import mage.cards.Cards;
 import mage.cards.decks.Deck;
 
 import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 /**
  * @author nantuko
@@ -41,24 +37,24 @@ import java.util.Set;
 public class DeckView implements Serializable {
 
 	private String name;
-	private CardsView cards;
-	private CardsView sideboard;
+	private SimpleCardsView cards;
+	private SimpleCardsView sideboard;
 
 	public DeckView(Deck deck) {
 		name = deck.getName();
-		cards = new CardsView(deck.getCards());
-		sideboard = new CardsView(deck.getSideboard());
+		cards = new SimpleCardsView(deck.getCards());
+		sideboard = new SimpleCardsView(deck.getSideboard());
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public CardsView getCards() {
+	public SimpleCardsView getCards() {
 		return cards;
 	}
 
-	public CardsView getSideboard() {
+	public SimpleCardsView getSideboard() {
 		return sideboard;
 	}
 }

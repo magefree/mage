@@ -42,6 +42,7 @@ import javax.swing.Timer;
 import mage.client.MageFrame;
 import mage.client.constants.Constants.SortBy;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.CardsViewUtil;
 import mage.remote.Session;
 import mage.client.util.Event;
 import mage.client.util.Listener;
@@ -101,8 +102,8 @@ public class DraftPanel extends javax.swing.JPanel {
 	}
 
 	public void loadBooster(DraftPickView draftPickView) {
-		draftBooster.loadBooster(draftPickView.getBooster(), bigCard);
-		draftPicks.loadCards(draftPickView.getPicks(), bigCard, null);
+		draftBooster.loadBooster(CardsViewUtil.convertSimple(draftPickView.getBooster()), bigCard);
+		draftPicks.loadCards(CardsViewUtil.convertSimple(draftPickView.getPicks()), bigCard, null);
 		this.draftBooster.clearCardEventListeners();
 		this.draftBooster.addCardEventListener(
 			new Listener<Event> () {
@@ -113,7 +114,7 @@ public class DraftPanel extends javax.swing.JPanel {
 						if (view != null) {
 							//draftBooster.loadBooster(view.getBooster(), bigCard);
 							draftBooster.loadBooster(emptyView, bigCard);
-							draftPicks.loadCards(view.getPicks(), bigCard, null);
+							draftPicks.loadCards(CardsViewUtil.convertSimple(view.getPicks()), bigCard, null);
 							Plugins.getInstance().getActionCallback().hidePopup();
 							setMessage("Waiting for other players");
 						}

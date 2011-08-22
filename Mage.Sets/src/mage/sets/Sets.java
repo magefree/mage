@@ -57,6 +57,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
 	private static Set<String> nonLandNames;
 	private static Set<String> creatureTypes;
 	private static List<Card> cards;
+    private static Map<String, Card> cardMap;
     protected static Random rnd = new Random();
 
 	public static Sets getInstance() {
@@ -67,6 +68,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
 		names = new TreeSet<String>();
 		nonLandNames = new TreeSet<String>();
 		cards = new ArrayList<Card>();
+        cardMap = new HashMap<String, Card>();
 		creatureTypes = new TreeSet<String>();
         this.addSet(AlaraReborn.getInstance());
         this.addSet(Apocalypse.getInstance());
@@ -243,6 +245,23 @@ public class Sets extends HashMap<String, ExpansionSet> {
         }
 		return null;
 	}
+    
+    public static Card findCard(String expansionsetCode, int cardNum) {
+        if (cardMap.containsKey(expansionsetCode + Integer.toString(cardNum))) {
+            return cardMap.get(expansionsetCode + Integer.toString(cardNum));
+        }
+		if (fINSTANCE.containsKey(expansionsetCode)) {
+			ExpansionSet set = fINSTANCE.get(expansionsetCode);
+            Card card = set.findCard(cardNum);
+            if (card != null) {
+                cardMap.put(expansionsetCode + Integer.toString(cardNum), card);
+                return card;
+            }
+        }
+        logger.warn("Could not find card: set=" + expansionsetCode + "cardNum=" + Integer.toString(cardNum));
+		return null;
+        
+    }
 
 	public static Card createCard(Class clazz) {
 		try {
@@ -280,7 +299,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
 					String setCode = m.group(3);
 					int cardNum = Integer.parseInt(m.group(4));
 					ExpansionSet set = Sets.findSet(setCode);
-					String card = set.findCard(cardNum);
+					String card = set.findCardName(cardNum);
 					for (int i = 0; i < count; i++) {
 						if (!sideboard) {
 							deckList.getCards().add(card);

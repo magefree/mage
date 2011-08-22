@@ -49,10 +49,9 @@ import mage.target.Targets;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class CardView implements Serializable {
+public class CardView extends SimpleCardView {
 	private static final long serialVersionUID = 1L;
 
-	protected UUID id;
 	protected UUID parentId;
 	protected String name;
 	protected List<String> rules;
@@ -66,17 +65,18 @@ public class CardView implements Serializable {
 	protected List<String> manaCost;
 	protected int convertedManaCost;
 	protected Rarity rarity;
-	protected String expansionSetCode;
-	protected int cardNumber;
 	protected boolean isAbility;
 	protected CardView ability;
-	protected boolean faceDown;
 
 	public List<UUID> targets;
 
+    public CardView(Card card, UUID cardId) {
+        this(card);
+        this.id = cardId;
+    }
+    
 	public CardView(Card card) {
-		this.id = card.getId();
-		this.faceDown = card.isFaceDown();
+        super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown());
 
 		// no information available for face down cards
 		if (this.faceDown) {
@@ -106,8 +106,6 @@ public class CardView implements Serializable {
 		} else {
 			this.rarity = card.getRarity();
 		}
-		this.expansionSetCode = card.getExpansionSetCode();
-		this.cardNumber = card.getCardNumber();
 
 		if (card instanceof Spell) {
 			Spell<?> spell = (Spell<?>) card;
@@ -118,7 +116,7 @@ public class CardView implements Serializable {
 	}
 
 	public CardView(MageObject card) {
-		this.id = card.getId();
+		super(card.getId(), "", 0, false);
 
 		this.name = card.getName();
 		if (card instanceof Permanent) {
@@ -144,9 +142,10 @@ public class CardView implements Serializable {
 	}
 
 	protected CardView() {
+        super(null, "", 0, false);
 	}
 
-	private void fillEmpty() {
+    private void fillEmpty() {
 		this.name = "Face Down";
 		this.rules = new ArrayList<String>();
 		this.power = "";
@@ -164,6 +163,7 @@ public class CardView implements Serializable {
 	}
 
 	CardView(Token token) {
+        super(token.getId(), "", 0, false);
 		this.id = token.getId();
 		this.name = token.getName();
 		this.rules = token.getAbilities().getRules(this.name);
