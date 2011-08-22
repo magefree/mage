@@ -11,11 +11,11 @@ import mage.game.permanent.Permanent;
 public class DiesAndDealtDamageThisTurnTriggeredAbility extends TriggeredAbilityImpl<DiesAndDealtDamageThisTurnTriggeredAbility> {
 
 	public DiesAndDealtDamageThisTurnTriggeredAbility(Effect effect) {
-		super(Constants.Zone.BATTLEFIELD, effect);
+		super(Constants.Zone.ALL, effect);
 	}
     
 	public DiesAndDealtDamageThisTurnTriggeredAbility(Effect effect, boolean optional) {
-		super(Constants.Zone.BATTLEFIELD, effect, true);
+		super(Constants.Zone.ALL, effect, true);
 	}
 
 	public DiesAndDealtDamageThisTurnTriggeredAbility(final DiesAndDealtDamageThisTurnTriggeredAbility ability) {
