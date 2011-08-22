@@ -564,7 +564,8 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 				/*if (this.damage + event.getAmount() > this.toughness.getValue()) {
 					actualDamage = this.toughness.getValue() - this.damage;
 				}*/
-				Permanent source = game.getPermanent(sourceId);
+				//Permanent source = game.getPermanent(sourceId);
+				MageObject source = game.getObject(sourceId);
 				if (source != null && (source.getAbilities().containsKey(InfectAbility.getInstance().getId())
 						|| source.getAbilities().containsKey(WitherAbility.getInstance().getId()))) {
 					addCounters(CounterType.M1M1.createInstance(actualDamage), game);
