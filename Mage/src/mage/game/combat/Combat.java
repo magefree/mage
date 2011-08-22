@@ -189,6 +189,12 @@ public class Combat implements Serializable, Copyable<Combat> {
 		}
 	}
 
+	public void checkBlockRestrictions(Game game) {
+		for (CombatGroup group : groups) {
+			group.checkBlockRestrictions(game);
+		}
+	}
+
 	public void setDefenders(Game game) {
 		Set<UUID> opponents = game.getOpponents(attackerId);
 		PlayerList players;

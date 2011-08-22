@@ -53,6 +53,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 	protected List<UUID> blockers = new ArrayList<UUID>();
 	protected List<UUID> blockerOrder = new ArrayList<UUID>();
 	protected List<UUID> attackerOrder = new ArrayList<UUID>();
+	protected Map<UUID, UUID> players = new HashMap<UUID, UUID>();
 	protected boolean blocked;
 	protected UUID defenderId;
 	protected boolean defenderIsPlaneswalker;
@@ -77,6 +78,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 		}
 		for (UUID orderId: group.attackerOrder) {
 			this.attackerOrder.add(orderId);
+		}
+		for (Map.Entry<UUID, UUID> entry : group.players.entrySet()) {
+			players.put(entry.getKey(), entry.getValue());
 		}
 	}
 
@@ -391,9 +395,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 			blockers.add(blockerId);
 			blockerOrder.add(blockerId);
 			this.blocked = true;
-			for (UUID attackerId: attackers) {
-				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, attackerId, blockerId, playerId));
-			}
+			this.players.put(blockerId, playerId);
 		}
 	}
 
@@ -464,6 +466,33 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 			//20100423 - 509.2a
 			if (blockerOrder.contains(creatureId))
 				blockerOrder.remove(creatureId);
+		}
+	}
+
+	public void checkBlockRestrictions(Game game) {
+		if (attackers.isEmpty()) {
+			return;
+		}
+		for (UUID uuid : attackers) {
+			Permanent attacker = game.getPermanent(uuid);
+			if (attacker != null && this.blocked && attacker.getMinBlockedBy() > 1 && blockers.size() > 0 && blockers.size() < attacker.getMinBlockedBy()) {
+				for (UUID blockerId : blockers) {
+					Permanent blocker = game.getPermanent(blockerId);
+					if (blocker != null) {
+						blocker.setBlocking(blocker.getBlocking() - 1);
+					}
+				}
+				blockers.clear();
+				blockerOrder.clear();
+				this.blocked = false;
+				game.informPlayers(attacker.getName() + " can't be blocked except by " + attacker.getMinBlockedBy() + " or more creatures. Blockers discarded.");
+				return;
+			}
+		}
+		for (UUID blockerId : blockers) {
+			for (UUID attackerId: attackers) {
+				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, attackerId, blockerId, players.get(blockerId)));
+			}
 		}
 	}
 

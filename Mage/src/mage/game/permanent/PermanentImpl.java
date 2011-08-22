@@ -68,6 +68,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	protected boolean attacking;
 	protected int blocking;
 	protected int maxBlocks = 1;
+	protected int minBlockedBy = 1;
 	protected boolean loyaltyUsed;
 	protected boolean deathtouched;
 	protected Counters counters;
@@ -126,6 +127,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 			}
 		}
 		this.attachedTo = permanent.attachedTo;
+		this.minBlockedBy = permanent.minBlockedBy;
 	}
 
 	@Override
@@ -142,6 +144,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		else
 			controllerChanged = false;
 		this.maxBlocks = 1;
+		this.minBlockedBy = 1;
 	}
 
 	@Override
@@ -376,6 +379,11 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	@Override
 	public int getMaxBlocks() {
 		return maxBlocks;
+	}
+
+	@Override
+	public int getMinBlockedBy() {
+		return minBlockedBy;
 	}
 
 	@Override
@@ -699,6 +707,11 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	@Override
 	public void setMaxBlocks(int maxBlocks) {
 		this.maxBlocks = maxBlocks;
+	}
+
+	@Override
+	public void setMinBlockedBy(int minBlockedBy) {
+		this.minBlockedBy = minBlockedBy;
 	}
 
 	@Override

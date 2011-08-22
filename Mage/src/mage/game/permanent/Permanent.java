@@ -107,6 +107,8 @@ public interface Permanent extends Card {
 	public void setBlocking(int blocking);
 	public int getMaxBlocks();
 	public void setMaxBlocks(int maxBlocks);
+	public int getMinBlockedBy();
+	public void setMinBlockedBy(int minBlockedBy);
 	public boolean canAttack(Game game);
 	public boolean canBlock(UUID attackerId, Game game);
 	public boolean removeFromCombat(Game game);

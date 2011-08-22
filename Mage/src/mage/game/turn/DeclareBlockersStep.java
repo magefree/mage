@@ -61,6 +61,7 @@ public class DeclareBlockersStep extends Step<DeclareBlockersStep> {
 	public void beginStep(Game game, UUID activePlayerId) {
 		super.beginStep(game, activePlayerId);
 		game.getCombat().selectBlockers(game);
+		game.getCombat().checkBlockRestrictions(game);
 		game.getCombat().damageAssignmentOrder(game);
 	}
 
