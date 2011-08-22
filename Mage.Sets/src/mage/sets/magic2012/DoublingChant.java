@@ -92,6 +92,9 @@ class DoublingChantEffect extends OneShotEffect<DoublingChantEffect> {
         List<String> namesFiltered = new ArrayList<String>();
 
         Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
+        }
         List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(FilterCreaturePermanent.getDefault(), source.getControllerId());
         for (Permanent creature : creatures) {
             final String creatureName = creature.getName();
@@ -100,7 +103,7 @@ class DoublingChantEffect extends OneShotEffect<DoublingChantEffect> {
                 sb.append("Search for ").append(creatureName).append(" in your library?");
 
                 if (player.chooseUse(Outcome.PutCreatureInPlay, sb.toString(), game)) {
-                    FilterCreatureCard filter = new FilterCreatureCard(creatureName);
+                    FilterCreatureCard filter = new FilterCreatureCard("creature card named" + creatureName);
                     filter.getName().add(creatureName);
                     TargetCardInLibrary target = new TargetCardInLibrary(filter);
 
@@ -119,12 +122,7 @@ class DoublingChantEffect extends OneShotEffect<DoublingChantEffect> {
         for (Card card : chosenCards) {
             card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
         }
-
-        if (!chosenCards.isEmpty()) {
-            player.shuffleLibrary(game);
-            return true;
-        } else {
-            return false;
-        }
+        player.shuffleLibrary(game);
+        return true;
     }
 }
