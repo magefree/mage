@@ -77,7 +77,7 @@ class ExsanguinateEffect extends OneShotEffect<ExsanguinateEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         int loseLife = 0;
-        int damage = source.getManaCostsToPay().getVariableCosts().get(0).getAmount();
+        int damage = source.getManaCostsToPay().getX();
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             loseLife += game.getPlayer(opponentId).loseLife(damage, game);
         }

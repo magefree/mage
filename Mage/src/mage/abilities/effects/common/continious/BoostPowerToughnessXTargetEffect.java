@@ -61,14 +61,14 @@ public class BoostPowerToughnessXTargetEffect extends ContinuousEffectImpl<Boost
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		int amount = source.getManaCostsToPay().getVariableCosts().get(0).getAmount();
-		if (amount == 0) {
+        int amountX = source.getManaCostsToPay().getX();
+		if (amountX == 0) {
 			return false;
 		}
 		Permanent target = game.getPermanent(source.getFirstTarget());
 		if (target != null) {
-			target.addPower(amount);
-			target.addToughness(amount);
+			target.addPower(amountX);
+			target.addToughness(amountX);
 			return true;
 		}
 		return false;

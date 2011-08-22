@@ -98,8 +98,7 @@ class VengefulArchonEffect extends PreventionEffectImpl<VengefulArchonEffect> {
 	@Override
 	public void init(Ability source, Game game) {
 		super.init(source, game);
-		if (source.getManaCostsToPay().getVariableCosts().size() > 0)
-			amount = source.getManaCostsToPay().getVariableCosts().get(0).getAmount();
+		amount = source.getManaCostsToPay().getX();
 	}
 
 	@Override

@@ -38,11 +38,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.HasCounterCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.decorator.ConditionalStaticAbility;
-import mage.abilities.dynamicvalue.common.CountersCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -96,7 +93,7 @@ class PrimordialHydraEntersEffect extends OneShotEffect<PrimordialHydraEntersEff
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = source.getManaCostsToPay().getVariableCosts().get(0).getAmount();
+        int amount = source.getManaCostsToPay().getX();
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
             p.addCounters(CounterType.P1P1.createInstance(amount), game);

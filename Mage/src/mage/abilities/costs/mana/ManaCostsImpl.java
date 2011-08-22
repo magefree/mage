@@ -146,6 +146,8 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 		return unpaid;
 	}
 
+    
+    
 	@Override
 	public List<VariableCost> getVariableCosts() {
 		List<VariableCost> variableCosts = new ArrayList<VariableCost>();
@@ -153,13 +155,22 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 			if (cost instanceof VariableCost)
 				variableCosts.add((VariableCost) cost);
 		}
-		if (variableCosts.size() == 0) {
-			// add empty cost (#Issue 210)
-			variableCosts.add(new VariableManaCost());
-		}
+//		if (variableCosts.size() == 0) {
+//			// add empty cost (#Issue 210)
+//			variableCosts.add(new VariableManaCost());
+//		}
 		return variableCosts;
 	}
 
+    @Override
+    public int getX() {
+        int amount = 0;
+        List<VariableCost> variableCosts = getVariableCosts();
+        if (!variableCosts.isEmpty())
+            amount = variableCosts.get(0).getAmount();
+        return amount;
+    }
+    
 	@Override
 	public void setPayment(Mana mana) {
 	}
