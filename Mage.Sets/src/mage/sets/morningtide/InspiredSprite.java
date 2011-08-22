@@ -29,37 +29,54 @@ package mage.sets.morningtide;
 
 import java.util.UUID;
 
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DrawDiscardControllerEffect;
+import mage.abilities.effects.common.UntapSourceEffect;
+import mage.abilities.keyword.FlashAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.ElfToken;
+import mage.filter.Filter;
+import mage.filter.FilterCard;
 
 /**
  *
  * @author Loki
  */
-public class AmbassadorOak extends CardImpl<AmbassadorOak> {
+public class InspiredSprite extends CardImpl<InspiredSprite> {
 
-    public AmbassadorOak(UUID ownerId) {
-        super(ownerId, 113, "Ambassador Oak", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "MOR";
-        this.subtype.add("Treefolk");
-        this.subtype.add("Warrior");
-        this.color.setGreen(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElfToken(), 1), false));
+    private final static FilterCard filter = new FilterCard("Wizard");
+
+    static {
+        filter.getSubtype().add("Wizard");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public AmbassadorOak(final AmbassadorOak card) {
+    public InspiredSprite(UUID ownerId) {
+        super(ownerId, 37, "Inspired Sprite", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "MOR";
+        this.subtype.add("Faerie");
+        this.subtype.add("Wizard");
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+        this.addAbility(FlashAbility.getInstance());
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new SpellCastTriggeredAbility(new UntapSourceEffect(), filter, true));
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost()));
+    }
+
+    public InspiredSprite(final InspiredSprite card) {
         super(card);
     }
 
     @Override
-    public AmbassadorOak copy() {
-        return new AmbassadorOak(this);
+    public InspiredSprite copy() {
+        return new InspiredSprite(this);
     }
 }

@@ -31,35 +31,38 @@ import java.util.UUID;
 
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.ElfToken;
+import mage.filter.Filter;
+import mage.filter.FilterCard;
+import mage.target.TargetCard;
+import mage.target.common.TargetCardInLibrary;
 
 /**
- *
  * @author Loki
  */
-public class AmbassadorOak extends CardImpl<AmbassadorOak> {
+public class IdyllicTutor extends CardImpl<IdyllicTutor> {
 
-    public AmbassadorOak(UUID ownerId) {
-        super(ownerId, 113, "Ambassador Oak", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "MOR";
-        this.subtype.add("Treefolk");
-        this.subtype.add("Warrior");
-        this.color.setGreen(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElfToken(), 1), false));
+    private final static FilterCard filter = new FilterCard("enchantment");
+
+    static {
+        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
-    public AmbassadorOak(final AmbassadorOak card) {
+    public IdyllicTutor(UUID ownerId) {
+        super(ownerId, 12, "Idyllic Tutor", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}");
+        this.expansionSetCode = "MOR";
+        this.color.setWhite(true);
+        this.getSpellAbility().addEffect(new SearchLibraryRevealPutInHandEffect(new TargetCardInLibrary(filter)));
+    }
+
+    public IdyllicTutor(final IdyllicTutor card) {
         super(card);
     }
 
     @Override
-    public AmbassadorOak copy() {
-        return new AmbassadorOak(this);
+    public IdyllicTutor copy() {
+        return new IdyllicTutor(this);
     }
 }

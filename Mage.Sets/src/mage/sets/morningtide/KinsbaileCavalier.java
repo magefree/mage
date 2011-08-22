@@ -29,37 +29,47 @@ package mage.sets.morningtide;
 
 import java.util.UUID;
 
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.ElfToken;
+import mage.filter.Filter;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class AmbassadorOak extends CardImpl<AmbassadorOak> {
+public class KinsbaileCavalier extends CardImpl<KinsbaileCavalier> {
 
-    public AmbassadorOak(UUID ownerId) {
-        super(ownerId, 113, "Ambassador Oak", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "MOR";
-        this.subtype.add("Treefolk");
-        this.subtype.add("Warrior");
-        this.color.setGreen(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElfToken(), 1), false));
+    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Knight");
+
+    static {
+        filter.getSubtype().add("Knight");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public AmbassadorOak(final AmbassadorOak card) {
+    public KinsbaileCavalier(UUID ownerId) {
+        super(ownerId, 15, "Kinsbaile Cavalier", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "MOR";
+        this.subtype.add("Kithkin");
+        this.subtype.add("Knight");
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filter, false)));
+    }
+
+    public KinsbaileCavalier(final KinsbaileCavalier card) {
         super(card);
     }
 
     @Override
-    public AmbassadorOak copy() {
-        return new AmbassadorOak(this);
+    public KinsbaileCavalier copy() {
+        return new KinsbaileCavalier(this);
     }
 }

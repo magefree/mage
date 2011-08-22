@@ -28,38 +28,55 @@
 package mage.sets.morningtide;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.ElfToken;
+import mage.filter.Filter;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class AmbassadorOak extends CardImpl<AmbassadorOak> {
+public class LysAlanaBowmaster extends CardImpl<LysAlanaBowmaster> {
 
-    public AmbassadorOak(UUID ownerId) {
-        super(ownerId, 113, "Ambassador Oak", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "MOR";
-        this.subtype.add("Treefolk");
-        this.subtype.add("Warrior");
-        this.color.setGreen(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElfToken(), 1), false));
+    private final static FilterCard filterElf = new FilterCard("Elf");
+    private final static FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("creature with flying");
+
+    static {
+        filterElf.getSubtype().add("Elf");
+        filterElf.setScopeSubtype(Filter.ComparisonScope.Any);
+        filterFlying.getAbilities().add(FlyingAbility.getInstance());
     }
 
-    public AmbassadorOak(final AmbassadorOak card) {
+    public LysAlanaBowmaster(UUID ownerId) {
+        super(ownerId, 130, "Lys Alana Bowmaster", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.expansionSetCode = "MOR";
+        this.subtype.add("Elf");
+        this.subtype.add("Archer");
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+        this.addAbility(ReachAbility.getInstance());
+        Ability ability = new SpellCastTriggeredAbility(new DamageTargetEffect(2), filterElf, true);
+        ability.addTarget(new TargetCreaturePermanent(filterFlying));
+        this.addAbility(ability);
+    }
+
+    public LysAlanaBowmaster(final LysAlanaBowmaster card) {
         super(card);
     }
 
     @Override
-    public AmbassadorOak copy() {
-        return new AmbassadorOak(this);
+    public LysAlanaBowmaster copy() {
+        return new LysAlanaBowmaster(this);
     }
 }

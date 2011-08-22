@@ -28,12 +28,11 @@
 package mage.sets.morningtide;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.keyword.ReinforceAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.ElfToken;
 
@@ -41,25 +40,24 @@ import mage.game.permanent.token.ElfToken;
  *
  * @author Loki
  */
-public class AmbassadorOak extends CardImpl<AmbassadorOak> {
+public class HuntingTriad extends CardImpl<HuntingTriad> {
 
-    public AmbassadorOak(UUID ownerId) {
-        super(ownerId, 113, "Ambassador Oak", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+    public HuntingTriad(UUID ownerId) {
+        super(ownerId, 127, "Hunting Triad", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "MOR";
-        this.subtype.add("Treefolk");
-        this.subtype.add("Warrior");
+        this.supertype.add("Tribal");
+        this.subtype.add("Elf");
         this.color.setGreen(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElfToken(), 1), false));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new ElfToken(), 3));
+        this.addAbility(new ReinforceAbility(3, new ManaCostsImpl("{3}{G}")));
     }
 
-    public AmbassadorOak(final AmbassadorOak card) {
+    public HuntingTriad(final HuntingTriad card) {
         super(card);
     }
 
     @Override
-    public AmbassadorOak copy() {
-        return new AmbassadorOak(this);
+    public HuntingTriad copy() {
+        return new HuntingTriad(this);
     }
 }
