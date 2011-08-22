@@ -27,85 +27,95 @@
  */
 package mage.sets.magic2012;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
  * @author North
  */
-public class QuicksilverAmulet extends CardImpl<QuicksilverAmulet> {
+public class DoublingChant extends CardImpl<DoublingChant> {
 
-    public QuicksilverAmulet(UUID ownerId) {
-        super(ownerId, 214, "Quicksilver Amulet", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
+    public DoublingChant(UUID ownerId) {
+        super(ownerId, 170, "Doubling Chant", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{G}");
         this.expansionSetCode = "M12";
 
-        // {4}, {tap}: You may put a creature card from your hand onto the battlefield.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutCreatureOnBattlefieldEffect(),
-                new ManaCostsImpl("{4}"));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+        this.color.setGreen(true);
+
+        this.getSpellAbility().addEffect(new DoublingChantEffect());
     }
 
-    public QuicksilverAmulet(final QuicksilverAmulet card) {
+    public DoublingChant(final DoublingChant card) {
         super(card);
     }
 
     @Override
-    public QuicksilverAmulet copy() {
-        return new QuicksilverAmulet(this);
+    public DoublingChant copy() {
+        return new DoublingChant(this);
     }
 }
 
-class PutCreatureOnBattlefieldEffect extends OneShotEffect<PutCreatureOnBattlefieldEffect> {
+class DoublingChantEffect extends OneShotEffect<DoublingChantEffect> {
 
-    private static final String choiceText = "Put a creature card from your hand onto the battlefield?";
-
-    public PutCreatureOnBattlefieldEffect() {
+    public DoublingChantEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "You may put a creature card from your hand onto the battlefield";
+        this.staticText = "For each creature you control, you may search your library for a creature card with the same name as that creature. Put those cards onto the battlefield, then shuffle your library";
     }
 
-    public PutCreatureOnBattlefieldEffect(final PutCreatureOnBattlefieldEffect effect) {
+    public DoublingChantEffect(final DoublingChantEffect effect) {
         super(effect);
     }
 
     @Override
-    public PutCreatureOnBattlefieldEffect copy() {
-        return new PutCreatureOnBattlefieldEffect(this);
+    public DoublingChantEffect copy() {
+        return new DoublingChantEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
+        List<Card> chosenCards = new ArrayList<Card>();
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null || !player.chooseUse(Outcome.PutCreatureInPlay, choiceText, game)) {
-            return false;
-        }
-
-        TargetCardInHand target = new TargetCardInHand(new FilterCreatureCard());
-        if (player.choose(Outcome.PutCreatureInPlay, target, game)) {
-            Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                player.removeFromHand(card, game);
-                card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
-                return true;
+        List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(FilterCreaturePermanent.getDefault(), source.getControllerId());
+        for (Permanent creature : creatures) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Search for ").append(creature.getName()).append(" in your library?");
+            if (player.chooseUse(Outcome.PutCreatureInPlay, sb.toString(), game)) {
+                FilterCreatureCard filter = new FilterCreatureCard(creature.getName());
+                filter.getName().add(creature.getName());
+                TargetCardInLibrary target = new TargetCardInLibrary(filter);
+                if (player.searchLibrary(target, game)) {
+                    Card card = player.getLibrary().remove(target.getFirstTarget(), game);
+                    if (card != null) {
+                        chosenCards.add(card);
+                    }
+                }
             }
         }
-        return false;
+
+        for (Card card : chosenCards) {
+            card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
+        }
+
+        if (!chosenCards.isEmpty()) {
+            player.shuffleLibrary(game);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
