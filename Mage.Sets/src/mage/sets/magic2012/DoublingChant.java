@@ -89,20 +89,29 @@ class DoublingChantEffect extends OneShotEffect<DoublingChantEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Card> chosenCards = new ArrayList<Card>();
+        List<String> namesFiltered = new ArrayList<String>();
+
         Player player = game.getPlayer(source.getControllerId());
         List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(FilterCreaturePermanent.getDefault(), source.getControllerId());
         for (Permanent creature : creatures) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("Search for ").append(creature.getName()).append(" in your library?");
-            if (player.chooseUse(Outcome.PutCreatureInPlay, sb.toString(), game)) {
-                FilterCreatureCard filter = new FilterCreatureCard(creature.getName());
-                filter.getName().add(creature.getName());
-                TargetCardInLibrary target = new TargetCardInLibrary(filter);
-                if (player.searchLibrary(target, game)) {
-                    Card card = player.getLibrary().remove(target.getFirstTarget(), game);
-                    if (card != null) {
-                        chosenCards.add(card);
+            final String creatureName = creature.getName();
+            if (!namesFiltered.contains(creatureName)) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("Search for ").append(creatureName).append(" in your library?");
+
+                if (player.chooseUse(Outcome.PutCreatureInPlay, sb.toString(), game)) {
+                    FilterCreatureCard filter = new FilterCreatureCard(creatureName);
+                    filter.getName().add(creatureName);
+                    TargetCardInLibrary target = new TargetCardInLibrary(filter);
+
+                    if (player.searchLibrary(target, game)) {
+                        Card card = player.getLibrary().remove(target.getFirstTarget(), game);
+                        if (card != null) {
+                            chosenCards.add(card);
+                        }
                     }
+                } else {
+                    namesFiltered.add(creatureName);
                 }
             }
         }
