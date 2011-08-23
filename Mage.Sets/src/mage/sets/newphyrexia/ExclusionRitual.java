@@ -82,6 +82,7 @@ public class ExclusionRitual extends CardImpl<ExclusionRitual> {
 class ExclusionRitualImprintEffect extends OneShotEffect<ExclusionRitualImprintEffect> {
     ExclusionRitualImprintEffect() {
         super(Constants.Outcome.Exile);
+        staticText = "exile target nonland permanent";
     }
 
     ExclusionRitualImprintEffect(final ExclusionRitualImprintEffect effect) {
