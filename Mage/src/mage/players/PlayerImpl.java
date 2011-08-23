@@ -435,7 +435,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		//20091005 - 601.2a
 		Card card = game.getCard(ability.getSourceId());
 		if (card != null) {
-			if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getId(), playerId))) {
+			if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getId(), ability.getSourceId(), playerId))) {
 				game.bookmarkState();
 				card.cast(game, game.getZone(card.getId()), ability, playerId);
 				removeFromHand(card, game);
