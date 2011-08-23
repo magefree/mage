@@ -97,9 +97,8 @@ class VengefulPharaohTriggeredAbility extends TriggeredAbilityImpl<VengefulPhara
             return true;
         }
         if (event.getType() == EventType.DAMAGED_PLANESWALKER) {
-            Card card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (card != null && card instanceof Permanent
-                    && ((Permanent) card).getControllerId().equals(this.getControllerId())) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent != null && permanent.getControllerId().equals(this.getControllerId())) {
                 return true;
             }
         }
