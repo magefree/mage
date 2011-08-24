@@ -28,60 +28,43 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.KithkinToken;
-import mage.target.common.TargetControlledPermanent;
+import mage.game.permanent.token.ElfToken;
 
 /**
  *
  * @author Loki
  */
-public class CloudgoatRanger extends CardImpl<CloudgoatRanger> {
+public class ElvishPromenade extends CardImpl<ElvishPromenade> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("untapped Kithkin you control");
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Elf you control");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Kithkin");
+        filter.getSubtype().add("Elf");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public CloudgoatRanger(UUID ownerId) {
-        super(ownerId, 10, "Cloudgoat Ranger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+    public ElvishPromenade(UUID ownerId) {
+        super(ownerId, 208, "Elvish Promenade", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "LRW";
-        this.subtype.add("Giant");
-        this.subtype.add("Warrior");
-        this.color.setWhite(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KithkinToken(), 3), false));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Constants.Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(3, 3, filter, false)));
-        ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn));
-        this.addAbility(ability);
+        this.supertype.add("Tribal");
+        this.subtype.add("Elf");
+        this.color.setGreen(true);
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new ElfToken(), new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public CloudgoatRanger(final CloudgoatRanger card) {
+    public ElvishPromenade(final ElvishPromenade card) {
         super(card);
     }
 
     @Override
-    public CloudgoatRanger copy() {
-        return new CloudgoatRanger(this);
+    public ElvishPromenade copy() {
+        return new ElvishPromenade(this);
     }
 }

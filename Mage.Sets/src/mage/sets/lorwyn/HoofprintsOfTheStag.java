@@ -34,54 +34,53 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
+import mage.abilities.common.DrawCardTriggeredAbility;
+import mage.abilities.costs.common.RemoveCountersSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.KithkinToken;
-import mage.target.common.TargetControlledPermanent;
+import mage.counters.CounterType;
+import mage.game.permanent.token.Token;
 
 /**
  *
  * @author Loki
  */
-public class CloudgoatRanger extends CardImpl<CloudgoatRanger> {
+public class HoofprintsOfTheStag extends CardImpl<HoofprintsOfTheStag> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("untapped Kithkin you control");
-
-    static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Kithkin");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
-    public CloudgoatRanger(UUID ownerId) {
-        super(ownerId, 10, "Cloudgoat Ranger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+    public HoofprintsOfTheStag(UUID ownerId) {
+        super(ownerId, 21, "Hoofprints of the Stag", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "LRW";
-        this.subtype.add("Giant");
-        this.subtype.add("Warrior");
+        this.supertype.add("Tribal");
+        this.subtype.add("Elemental");
         this.color.setWhite(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KithkinToken(), 3), false));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Constants.Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(3, 3, filter, false)));
-        ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn));
+        this.addAbility(new DrawCardTriggeredAbility(new AddCountersSourceEffect(CounterType.HOOFPRINT.createInstance(1)), true));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new WhiteElementalToken(), 1), new ManaCostsImpl("{2}{W}"));
+        ability.addCost(new RemoveCountersSourceCost(CounterType.HOOFPRINT.createInstance(4)));
         this.addAbility(ability);
     }
 
-    public CloudgoatRanger(final CloudgoatRanger card) {
+    public HoofprintsOfTheStag(final HoofprintsOfTheStag card) {
         super(card);
     }
 
     @Override
-    public CloudgoatRanger copy() {
-        return new CloudgoatRanger(this);
+    public HoofprintsOfTheStag copy() {
+        return new HoofprintsOfTheStag(this);
+    }
+}
+
+class WhiteElementalToken extends Token {
+    WhiteElementalToken() {
+        super("Elemental", "4/4 white Elemental creature token with flying");
+        cardType.add(CardType.CREATURE);
+        color.setWhite(true);
+        subtype.add("Elemental");
+        power = new MageInt(4);
+        toughness = new MageInt(4);
+        this.addAbility(FlyingAbility.getInstance());
     }
 }

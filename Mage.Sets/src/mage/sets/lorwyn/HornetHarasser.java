@@ -34,54 +34,36 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.KithkinToken;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class CloudgoatRanger extends CardImpl<CloudgoatRanger> {
+public class HornetHarasser extends CardImpl<HornetHarasser> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("untapped Kithkin you control");
-
-    static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Kithkin");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
-    public CloudgoatRanger(UUID ownerId) {
-        super(ownerId, 10, "Cloudgoat Ranger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+    public HornetHarasser(UUID ownerId) {
+        super(ownerId, 118, "Hornet Harasser", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.expansionSetCode = "LRW";
-        this.subtype.add("Giant");
-        this.subtype.add("Warrior");
-        this.color.setWhite(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KithkinToken(), 3), false));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Constants.Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(3, 3, filter, false)));
-        ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn));
+        this.subtype.add("Goblin");
+        this.subtype.add("Shaman");
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+        Ability ability = new DiesTriggeredAbility(new BoostTargetEffect(-2, -2, Constants.Duration.EndOfTurn), false);
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public CloudgoatRanger(final CloudgoatRanger card) {
+    public HornetHarasser(final HornetHarasser card) {
         super(card);
     }
 
     @Override
-    public CloudgoatRanger copy() {
-        return new CloudgoatRanger(this);
+    public HornetHarasser copy() {
+        return new HornetHarasser(this);
     }
 }

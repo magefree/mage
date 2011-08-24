@@ -36,11 +36,10 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
@@ -51,37 +50,35 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class CloudgoatRanger extends CardImpl<CloudgoatRanger> {
+public class GuardianOfCloverdell extends CardImpl<GuardianOfCloverdell> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("untapped Kithkin you control");
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Kithkin");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
         filter.getSubtype().add("Kithkin");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public CloudgoatRanger(UUID ownerId) {
-        super(ownerId, 10, "Cloudgoat Ranger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+    public GuardianOfCloverdell(UUID ownerId) {
+        super(ownerId, 216, "Guardian of Cloverdell", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
         this.expansionSetCode = "LRW";
-        this.subtype.add("Giant");
-        this.subtype.add("Warrior");
-        this.color.setWhite(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        this.subtype.add("Treefolk");
+        this.subtype.add("Shaman");
+        this.color.setGreen(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(5);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KithkinToken(), 3), false));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Constants.Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(3, 3, filter, false)));
-        ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn));
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainLifeEffect(1), new ColoredManaCost(Constants.ColoredManaSymbol.G));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }
 
-    public CloudgoatRanger(final CloudgoatRanger card) {
+    public GuardianOfCloverdell(final GuardianOfCloverdell card) {
         super(card);
     }
 
     @Override
-    public CloudgoatRanger copy() {
-        return new CloudgoatRanger(this);
+    public GuardianOfCloverdell copy() {
+        return new GuardianOfCloverdell(this);
     }
 }

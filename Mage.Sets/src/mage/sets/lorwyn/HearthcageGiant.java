@@ -36,52 +36,65 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.KithkinToken;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class CloudgoatRanger extends CardImpl<CloudgoatRanger> {
+public class HearthcageGiant extends CardImpl<HearthcageGiant> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("untapped Kithkin you control");
+    private final static FilterControlledPermanent filterElemental = new FilterControlledPermanent("Elemental");
+    private final static FilterCreaturePermanent filterGiant = new FilterCreaturePermanent("Giant");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Kithkin");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filterElemental.getSubtype().add("Elemental");
+        filterElemental.setScopeSubtype(Filter.ComparisonScope.Any);
+        filterGiant.getSubtype().add("Giant");
+        filterGiant.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public CloudgoatRanger(UUID ownerId) {
-        super(ownerId, 10, "Cloudgoat Ranger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+    public HearthcageGiant(UUID ownerId) {
+        super(ownerId, 174, "Hearthcage Giant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Giant");
         this.subtype.add("Warrior");
-        this.color.setWhite(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KithkinToken(), 3), false));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Constants.Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(3, 3, filter, false)));
-        ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn));
+        this.color.setRed(true);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new RedElementalToken(), 2), false));
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(3, 1, Constants.Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filterElemental)));
+        ability.addTarget(new TargetCreaturePermanent(filterGiant));
         this.addAbility(ability);
     }
 
-    public CloudgoatRanger(final CloudgoatRanger card) {
+    public HearthcageGiant(final HearthcageGiant card) {
         super(card);
     }
 
     @Override
-    public CloudgoatRanger copy() {
-        return new CloudgoatRanger(this);
+    public HearthcageGiant copy() {
+        return new HearthcageGiant(this);
+    }
+}
+
+class RedElementalToken extends Token {
+    RedElementalToken() {
+        super("Elemental", "3/1 red Elemental Shaman creature token");
+        cardType.add(CardType.CREATURE);
+        color.setRed(true);
+        subtype.add("Elemental");
+        subtype.add("Shaman");
+        power = new MageInt(3);
+        toughness = new MageInt(1);
     }
 }
