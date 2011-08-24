@@ -68,13 +68,13 @@ public class KickerAbility extends StaticAbility<KickerAbility> {
 		// replace by card name or just plain "this"
 		message = message.replace("{this}", card == null ? "this" : card.getName());
 		if (player.chooseUse(getEffects().get(0).getOutcome(), message, game)) {
-			game.bookmarkState();
+			int bookmark = game.bookmarkState();
 			if (super.activate(game, noMana)) {
-				game.removeLastBookmark();
+				game.removeBookmark(bookmark);
 				kicked = true;
 			}
 			else {
-				game.restoreState();
+				game.restoreState(bookmark);
 				kicked = false;
 			}
 			return kicked;

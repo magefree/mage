@@ -60,12 +60,12 @@ import mage.game.events.TableEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.server.ChatManager;
+import mage.server.Main;
 import mage.server.UserManager;
 import mage.server.util.SystemUtil;
 import mage.server.util.Splitter;
 import mage.server.util.ThreadExecutor;
 import mage.sets.Sets;
-import mage.sets.alarareborn.EnlistedWurm;
 import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
 import org.apache.log4j.Logger;
@@ -506,8 +506,9 @@ public class GameController implements GameCallback {
 	}
 
 	private void error(String message) {
+        String msg = message + "\nServer version: " + Main.getVersion().toString();
 		for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
-			entry.getValue().gameError(message);
+			entry.getValue().gameError(msg);
 		}
 	}
 

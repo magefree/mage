@@ -42,7 +42,6 @@ import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.Modes;
 import mage.abilities.TriggeredAbilities;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -158,9 +157,9 @@ public interface Game extends MageItem, Serializable {
 
 	//game transaction methods
 	public void saveState();
-	public void bookmarkState();
-	public void restoreState();
-	public void removeLastBookmark();
+	public int bookmarkState();
+	public void restoreState(int bookmark);
+	public void removeBookmark(int bookmark);
 
 	// game options
 	public void setGameOptions(GameOptions options);

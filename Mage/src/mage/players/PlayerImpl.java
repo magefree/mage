@@ -73,6 +73,8 @@ import mage.watchers.common.BloodthirstWatcher;
 
 public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Serializable {
 
+    private static Random rnd = new Random();
+    
 	protected boolean abort;
 	protected final UUID playerId;
 	protected String name;
@@ -436,7 +438,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		Card card = game.getCard(ability.getSourceId());
 		if (card != null) {
 			if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getId(), ability.getSourceId(), playerId))) {
-				game.bookmarkState();
+				int bookmark = game.bookmarkState();
 				card.cast(game, game.getZone(card.getId()), ability, playerId);
 				removeFromHand(card, game);
 				Ability spellAbility = game.getStack().getSpell(ability.getId()).getSpellAbility();
@@ -446,10 +448,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 					}
 					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, spellAbility.getId(), playerId));
 					game.fireInformEvent(name + " casts " + card.getName());
-					game.removeLastBookmark();
+					game.removeBookmark(bookmark);
 					return true;
 				}
-				game.restoreState();
+				game.restoreState(bookmark);
 			}
 		}
 		return false;
@@ -459,45 +461,45 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	public boolean playLand(Card card, Game game) {
 		//20091005 - 305.1
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), playerId))) {
-			game.bookmarkState();
+			int bookmark = game.bookmarkState();
 			removeFromHand(card, game);
 			if (card.putOntoBattlefield(game, Zone.HAND, null, playerId)) {
 				landsPlayed++;
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED, card.getId(), playerId));
 				game.fireInformEvent(name + " plays " + card.getName());
-				game.removeLastBookmark();
+				game.removeBookmark(bookmark);
 				return true;
 			}
-			game.restoreState();
+			game.restoreState(bookmark);
 		}
 		return false;
 	}
 
 	protected boolean playManaAbility(ManaAbility ability, Game game) {
-		game.bookmarkState();
+		int bookmark = game.bookmarkState();
 		if (ability.activate(game, false)) {
 			ability.resolve(game);
-			game.removeLastBookmark();
+			game.removeBookmark(bookmark);
 			return true;
 		}
-		game.restoreState();
+		game.restoreState(bookmark);
 		return false;
 	}
 
 	protected boolean playAbility(ActivatedAbility ability, Game game) {
 		//20091005 - 602.2a
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, ability.getId(), ability.getSourceId(), playerId))) {
-			game.bookmarkState();
+			int bookmark = game.bookmarkState();
 			ability.newId();
 			game.getStack().push(new StackAbility(ability, playerId));
 			String message = ability.getActivatedMessage(game);
 			if (ability.activate(game, false)) {
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, ability.getId(), ability.getSourceId(), playerId));
 				game.fireInformEvent(name + message);
-				game.removeLastBookmark();
+				game.removeBookmark(bookmark);
 				return true;
 			}
-			game.restoreState();
+			game.restoreState(bookmark);
 		}
 		return false;
 	}
@@ -505,16 +507,16 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	protected boolean specialAction(SpecialAction action, Game game) {
 		//20091005 - 114
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, action.getSourceId(), action.getId(), playerId))) {
-			game.bookmarkState();
+			int bookmark = game.bookmarkState();
 			if (action.activate(game, false)) {
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, action.getSourceId(), action.getId(), playerId));
 				game.fireInformEvent(name + action.getActivatedMessage(game));
 				if (action.resolve(game)) {
-					game.removeLastBookmark();
+					game.removeBookmark(bookmark);
 					return true;
 				}
 			}
-			game.restoreState();
+			game.restoreState(bookmark);
 		}
 		return false;
 	}
@@ -553,16 +555,16 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	@Override
 	public boolean triggerAbility(TriggeredAbility source, Game game) {
 		//20091005 - 603.3c, 603.3d
-		game.bookmarkState();
+		int bookmark = game.bookmarkState();
 		TriggeredAbility ability = (TriggeredAbility) source.copy();
 		if (ability.getTargets().canChoose(ability.getSourceId(), playerId, game)) {
 			game.getStack().push(new StackAbility(ability, playerId));
 			if (ability.activate(game, false)) {
-				game.removeLastBookmark();
+				game.removeBookmark(bookmark);
 				return true;
 			}
 		}
-		game.restoreState();
+		game.restoreState(bookmark);
 		return false;
 	}
 
@@ -796,6 +798,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		this.inRange = player.getInRange();
 		this.landsPlayed = player.getLandsPlayed();
 		this.name = player.getName();
+        this.passed = player.isPassed();
 	}
 
 	@Override
@@ -932,7 +935,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	 */
 	@Override
 	public boolean flipCoin(Game game) {
-		boolean result = new Random().nextBoolean();
+		boolean result = rnd.nextBoolean();
 		game.informPlayers("[Flip a coin] " + getName() + (result ? " won." : " lost."));
 		return result;
 	}

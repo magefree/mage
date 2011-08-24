@@ -73,6 +73,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	private static FilterAura filterAura = new FilterAura();
 	private static FilterEquipment filterEquipment = new FilterEquipment();
 	private static FilterFortification filterFortification = new FilterFortification();
+	private static Random rnd = new Random();
 
 	private transient Stack<Integer> savedStates = new Stack<Integer>();
 	private transient Object customData;
@@ -296,28 +297,37 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	}
 
 	@Override
-	public void bookmarkState() {
+	public int bookmarkState() {
 		if (!simulation) {
 			saveState();
 			if (logger.isDebugEnabled())
 				logger.debug("Bookmarking state: " + gameStates.getSize());
 			savedStates.push(gameStates.getSize() - 1);
+            return savedStates.size();
+		}
+        return 0;
+	}
+
+	@Override
+	public void restoreState(int bookmark) {
+		if (!simulation) {
+            if (bookmark != 0) {
+                int stateNum = savedStates.get(bookmark - 1);
+                removeBookmark(bookmark);
+                GameState restore = gameStates.rollback(stateNum);
+                if (restore != null)
+                    state.restore(restore);
+            }
 		}
 	}
 
 	@Override
-	public void restoreState() {
+	public void removeBookmark(int bookmark) {
 		if (!simulation) {
-			GameState restore = gameStates.rollback(savedStates.pop());
-			if (restore != null)
-				state.restore(restore);
-		}
-	}
-
-	@Override
-	public void removeLastBookmark() {
-		if (!simulation) {
-			savedStates.pop();
+            if (bookmark != 0) {
+                while (savedStates.size() > bookmark)
+                    savedStates.pop();
+            }
 		}
 	}
 
@@ -453,7 +463,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	protected UUID pickChoosingPlayer() {
 		UUID[] players = getPlayers().keySet().toArray(new UUID[0]);
-		UUID playerId = players[new Random().nextInt(players.length)];
+		UUID playerId = players[rnd.nextInt(players.length)];
 		fireInformEvent(state.getPlayer(playerId).getName() + " won the toss");
 		return playerId;
 	}
@@ -502,37 +512,55 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public void playPriority(UUID activePlayerId) {
+        int bookmark = 0;
 		try {
 			while (!isGameOver()) {
 				state.getPlayers().resetPassed();
 				state.getPlayerList().setCurrent(activePlayerId);
 				Player player;
 				while (!isGameOver()) {
-					player = getPlayer(state.getPlayerList().get());
-					state.setPriorityPlayerId(player.getId());
-					while (!player.isPassed() && !player.hasLost() && !player.hasLeft() && !isGameOver()) {
-						checkStateAndTriggered();
-						if (isGameOver()) return;
-						// resetPassed should be called if player performs any action
-						player.priority(this);
-						if (isGameOver()) return;
-						applyEffects();
-					}
-					if (isGameOver()) return;
-					if (allPassed()) {
-						if (!state.getStack().isEmpty()) {
-							//20091005 - 115.4
-							state.getStack().resolve(this);
-							applyEffects();
-							state.getPlayers().resetPassed();
-							fireUpdatePlayersEvent();
-							state.getRevealed().reset();
-							break;
-						} else
-							return;
-					}
+                    try {
+                        if (bookmark == 0)
+                            bookmark = bookmarkState();
+                        player = getPlayer(state.getPlayerList().get());
+                        state.setPriorityPlayerId(player.getId());
+                        while (!player.isPassed() && !player.hasLost() && !player.hasLeft() && !isGameOver()) {
+                            checkStateAndTriggered();
+                            if (isGameOver()) return;
+                            // resetPassed should be called if player performs any action
+                            player.priority(this);
+                            if (isGameOver()) return;
+                            applyEffects();
+                        }
+                        if (isGameOver()) return;
+                        if (allPassed()) {
+                            if (!state.getStack().isEmpty()) {
+                                   //20091005 - 115.4
+                                    state.getStack().resolve(this);
+                                    applyEffects();
+                                    state.getPlayers().resetPassed();
+                                    fireUpdatePlayersEvent();
+                                    state.getRevealed().reset();
+                                    break;
+                            } else {
+                                removeBookmark(bookmark);
+                                return;
+                            }
+                        }
+                    }
+                    catch (Exception ex) {
+                        logger.fatal("Game exception ", ex);
+                        this.fireErrorEvent("Game exception occurred: " + ex.getMessage() + " - " + ex.getStackTrace()[0]);
+                        restoreState(bookmark);
+                        bookmark = 0;
+                        continue;
+                    }
+//                    removeBookmark(bookmark);
+//                    bookmark = 0;
 					state.getPlayerList().getNext();
 				}
+                removeBookmark(bookmark);
+                bookmark = 0;
 			}
 		} catch (Exception ex) {
 			logger.fatal("Game exception ", ex);
