@@ -30,9 +30,7 @@ package mage.sets.alarareborn;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.CompositeCost;
@@ -44,7 +42,6 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
-import mage.sets.magic2011.BlackKnight;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -52,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  * @author Loki
  */
 public class MistveinBorderpost extends CardImpl<MistveinBorderpost> {
-    private static FilterControlledPermanent filter = new FilterControlledPermanent("basic land");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("basic land");
 
     private static final String COST_DESCRIPTION = "pay {1} and return a basic land you control to its owner's hand";
     private static final String ALTERNATIVE_COST_DESCRIPTION = "You may pay {1} and return a basic land you control to its owner's hand rather than pay Mistvein Borderpos's mana cost";

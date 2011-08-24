@@ -25,45 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.planechase;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.CardImpl;
-import mage.counters.CounterType;
-
 /**
  *
- * @author Loki
+ * @author North
  */
-public class MindUnbound extends CardImpl<MindUnbound> {
+public class BeastHunt extends mage.sets.zendikar.BeastHunt {
 
-    public MindUnbound(UUID ownerId) {
-        super(ownerId, 68, "Mind Unbound", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}");
-        this.expansionSetCode = "M12";
-
-        this.color.setBlue(true);
-
-        // At the beginning of your upkeep, put a lore counter on Mind Unbound, then draw a card for each lore counter on Mind Unbound.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.LORE.createInstance()), Constants.TargetController.YOU, false);
-        ability.addEffect(new DrawCardControllerEffect(new CountersCount(CounterType.LORE)));
-        this.addAbility(ability);
+    public BeastHunt(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 68;
+        this.expansionSetCode = "HOP";
     }
 
-    public MindUnbound(final MindUnbound card) {
+    public BeastHunt(final BeastHunt card) {
         super(card);
     }
 
     @Override
-    public MindUnbound copy() {
-        return new MindUnbound(this);
+    public BeastHunt copy() {
+        return new BeastHunt(this);
     }
 }

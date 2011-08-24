@@ -25,45 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.zendikar;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.SkipEnchantedUntapEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class MindUnbound extends CardImpl<MindUnbound> {
+public class ParalyzingGrasp extends CardImpl<ParalyzingGrasp> {
 
-    public MindUnbound(UUID ownerId) {
-        super(ownerId, 68, "Mind Unbound", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}");
-        this.expansionSetCode = "M12";
+    public ParalyzingGrasp(UUID ownerId) {
+        super(ownerId, 58, "Paralyzing Grasp", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Aura");
 
         this.color.setBlue(true);
 
-        // At the beginning of your upkeep, put a lore counter on Mind Unbound, then draw a card for each lore counter on Mind Unbound.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.LORE.createInstance()), Constants.TargetController.YOU, false);
-        ability.addEffect(new DrawCardControllerEffect(new CountersCount(CounterType.LORE)));
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        EnchantAbility ability = new EnchantAbility(auraTarget.getTargetName());
+        ability.addEffect(new SkipEnchantedUntapEffect());
         this.addAbility(ability);
     }
 
-    public MindUnbound(final MindUnbound card) {
+    public ParalyzingGrasp(final ParalyzingGrasp card) {
         super(card);
     }
 
     @Override
-    public MindUnbound copy() {
-        return new MindUnbound(this);
+    public ParalyzingGrasp copy() {
+        return new ParalyzingGrasp(this);
     }
 }

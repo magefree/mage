@@ -25,45 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.MageInt;
+import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
+import mage.filter.common.FilterControlledPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class MindUnbound extends CardImpl<MindUnbound> {
+public class HandOfEmrakul extends CardImpl<HandOfEmrakul> {
 
-    public MindUnbound(UUID ownerId) {
-        super(ownerId, 68, "Mind Unbound", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}");
-        this.expansionSetCode = "M12";
+    private static final String ALTERNATIVE_COST_DESCRIPTION = "You may sacrifice four Eldrazi Spawn rather than pay Hand of Emrakul's mana cost.";
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Eldrazi Spawn");
 
-        this.color.setBlue(true);
-
-        // At the beginning of your upkeep, put a lore counter on Mind Unbound, then draw a card for each lore counter on Mind Unbound.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.LORE.createInstance()), Constants.TargetController.YOU, false);
-        ability.addEffect(new DrawCardControllerEffect(new CountersCount(CounterType.LORE)));
-        this.addAbility(ability);
+    static {
+        filter.getName().add("Eldrazi Spawn");
     }
 
-    public MindUnbound(final MindUnbound card) {
+    public HandOfEmrakul(UUID ownerId) {
+        super(ownerId, 5, "Hand of Emrakul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{9}");
+        this.expansionSetCode = "ROE";
+        this.subtype.add("Eldrazi");
+
+        this.power = new MageInt(7);
+        this.toughness = new MageInt(7);
+
+        // You may sacrifice four Eldrazi Spawn rather than pay Hand of Emrakul's mana cost.
+        this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl(ALTERNATIVE_COST_DESCRIPTION,
+                new SacrificeTargetCost(new TargetControlledPermanent(4, 4, filter, true))));
+        this.addAbility(new AnnihilatorAbility(1));
+    }
+
+    public HandOfEmrakul(final HandOfEmrakul card) {
         super(card);
     }
 
     @Override
-    public MindUnbound copy() {
-        return new MindUnbound(this);
+    public HandOfEmrakul copy() {
+        return new HandOfEmrakul(this);
     }
 }

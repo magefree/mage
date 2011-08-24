@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common.continious;
 
+import java.util.UUID;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
@@ -38,6 +39,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
 
 /**
  *
@@ -71,19 +73,27 @@ public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = (Permanent) game.getPermanent(source.getFirstTarget());
-        if (target != null) {
-            target.addPower(power.calculate(game, source));
-            target.addToughness(toughness.calculate(game, source));
-            return true;
+        int affectedTargets = 0;
+        for (UUID permanentId : source.getTargets().get(0).getTargets()) {
+            Permanent target = (Permanent) game.getPermanent(permanentId);
+            if (target != null) {
+                target.addPower(power.calculate(game, source));
+                target.addToughness(toughness.calculate(game, source));
+                affectedTargets++;
+            }
         }
-        return false;
+        return affectedTargets > 0;
     }
 
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Target ").append(mode.getTargets().get(0).getTargetName()).append(" gets ");
+        Target target = mode.getTargets().get(0);
+        if(target.getNumberOfTargets() > 1){
+            sb.append(target.getNumberOfTargets()).append(" target ").append(target.getTargetName()).append(" get ");
+        } else {
+            sb.append("Target ").append(target.getTargetName()).append(" gets ");
+        }
         String p = power.toString();
         if(!p.startsWith("-"))
             sb.append("+");

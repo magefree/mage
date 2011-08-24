@@ -25,45 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.zendikar;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
+import mage.game.permanent.token.WolfToken;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class MindUnbound extends CardImpl<MindUnbound> {
+public class TurntimberRanger extends CardImpl<TurntimberRanger> {
 
-    public MindUnbound(UUID ownerId) {
-        super(ownerId, 68, "Mind Unbound", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}");
-        this.expansionSetCode = "M12";
+    public TurntimberRanger(UUID ownerId) {
+        super(ownerId, 191, "Turntimber Ranger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Elf");
+        this.subtype.add("Scout");
+        this.subtype.add("Ally");
 
-        this.color.setBlue(true);
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // At the beginning of your upkeep, put a lore counter on Mind Unbound, then draw a card for each lore counter on Mind Unbound.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.LORE.createInstance()), Constants.TargetController.YOU, false);
-        ability.addEffect(new DrawCardControllerEffect(new CountersCount(CounterType.LORE)));
+        // Whenever Turntimber Ranger or another Ally enters the battlefield under your control, you may put a 2/2 green Wolf creature token onto the battlefield. If you do, put a +1/+1 counter on Turntimber Ranger.
+        Ability ability = new AllyEntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WolfToken()), true);
+        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         this.addAbility(ability);
     }
 
-    public MindUnbound(final MindUnbound card) {
+    public TurntimberRanger(final TurntimberRanger card) {
         super(card);
     }
 
     @Override
-    public MindUnbound copy() {
-        return new MindUnbound(this);
+    public TurntimberRanger copy() {
+        return new TurntimberRanger(this);
     }
 }

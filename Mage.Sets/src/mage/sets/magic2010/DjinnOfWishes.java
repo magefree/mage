@@ -29,9 +29,10 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -71,7 +72,7 @@ public class DjinnOfWishes extends CardImpl<DjinnOfWishes> {
 		this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.WISH.createInstance(3)), ruleText));
 
         // {2}{U}{U}, Remove a wish counter from Djinn of Wishes: Reveal the top card of your library. You may play that card without paying its mana cost. If you don't, exile it.
-		Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DjinnOfWishesEffect1(), new ManaCostsImpl("{2}{U}{U}"));
+		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DjinnOfWishesEffect(), new ManaCostsImpl("{2}{U}{U}"));
 		ability.addCost(new RemoveCountersSourceCost(CounterType.WISH.createInstance()));
 		this.addAbility(ability);
     }
@@ -86,14 +87,14 @@ public class DjinnOfWishes extends CardImpl<DjinnOfWishes> {
     }
 }
 
-class DjinnOfWishesEffect1 extends OneShotEffect<DjinnOfWishesEffect1> {
+class DjinnOfWishesEffect extends OneShotEffect<DjinnOfWishesEffect> {
 
-	public DjinnOfWishesEffect1() {
-		super(Constants.Outcome.PlayForFree);
+	public DjinnOfWishesEffect() {
+		super(Outcome.PlayForFree);
 		staticText = "Reveal the top card of your library. You may play that card without paying its mana cost. If you don't, exile it";
 	}
 
-	public DjinnOfWishesEffect1(final DjinnOfWishesEffect1 effect) {
+	public DjinnOfWishesEffect(final DjinnOfWishesEffect effect) {
 		super(effect);
 	}
 
@@ -109,7 +110,7 @@ class DjinnOfWishesEffect1 extends OneShotEffect<DjinnOfWishesEffect1> {
 			player.getLibrary().removeFromTop(game);
 
 			boolean used = false;
-			if (player.chooseUse(Constants.Outcome.PlayForFree, "Play " + card.getName() + " without paying its mana cost?", game)) {
+			if (player.chooseUse(Outcome.PlayForFree, "Play " + card.getName() + " without paying its mana cost?", game)) {
 				if (card.getCardType().contains(CardType.LAND)) {
 					// If the revealed card is a land, you can play it only if it's your turn and you haven't yet played a land this turn.
 					if (game.getActivePlayerId().equals(player.getId()) && player.getLandsPlayed() < player.getLandsPerTurn()) {
@@ -123,7 +124,7 @@ class DjinnOfWishesEffect1 extends OneShotEffect<DjinnOfWishesEffect1> {
             }
 
 			if (!used) {
-				card.moveToZone(Constants.Zone.EXILED, source.getSourceId(), game, false);
+				card.moveToZone(Zone.EXILED, source.getSourceId(), game, false);
 			}
 
 			return true;
@@ -132,8 +133,8 @@ class DjinnOfWishesEffect1 extends OneShotEffect<DjinnOfWishesEffect1> {
 	}
 
 	@Override
-	public DjinnOfWishesEffect1 copy() {
-		return new DjinnOfWishesEffect1(this);
+	public DjinnOfWishesEffect copy() {
+		return new DjinnOfWishesEffect(this);
 	}
 
 }
