@@ -28,6 +28,8 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -37,6 +39,7 @@ import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -49,7 +52,8 @@ public class SeascapeAerialist extends CardImpl<SeascapeAerialist> {
 
     static {
         filter.getSubtype().add("Ally");
-        filter.setTargetController(TargetController.YOU);
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+		filter.setTargetController(Constants.TargetController.YOU);
     }
 
     public SeascapeAerialist(UUID ownerId) {

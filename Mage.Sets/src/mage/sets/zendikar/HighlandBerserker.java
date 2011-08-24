@@ -28,6 +28,8 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -37,6 +39,7 @@ import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -49,8 +52,9 @@ public class HighlandBerserker extends CardImpl<HighlandBerserker> {
 
     static {
         filter.getSubtype().add("Ally");
-        filter.setTargetController(TargetController.YOU);
-    }
+		filter.setScopeSubtype(Filter.ComparisonScope.Any);
+		filter.setTargetController(Constants.TargetController.YOU);
+   }
 
     public HighlandBerserker(UUID ownerId) {
         super(ownerId, 132, "Highland Berserker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

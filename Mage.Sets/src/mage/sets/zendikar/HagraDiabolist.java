@@ -28,6 +28,8 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -36,6 +38,7 @@ import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.TargetPlayer;
 
@@ -49,6 +52,8 @@ public class HagraDiabolist extends CardImpl<HagraDiabolist> {
 
     static {
         filter.getSubtype().add("Ally");
+		filter.setScopeSubtype(Filter.ComparisonScope.Any);
+		filter.setTargetController(Constants.TargetController.YOU);
     }
 
     public HagraDiabolist(UUID ownerId) {

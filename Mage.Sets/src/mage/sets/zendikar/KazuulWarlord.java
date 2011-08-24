@@ -28,6 +28,8 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.TargetController;
@@ -36,6 +38,7 @@ import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
+import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -48,6 +51,7 @@ public class KazuulWarlord extends CardImpl<KazuulWarlord> {
 
     static {
         filter.getSubtype().add("Ally");
+		filter.setScopeSubtype(Filter.ComparisonScope.Any);
         filter.setTargetController(TargetController.YOU);
     }
 

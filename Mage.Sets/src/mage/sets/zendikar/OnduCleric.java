@@ -28,6 +28,8 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -35,6 +37,7 @@ import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -47,6 +50,8 @@ public class OnduCleric extends CardImpl<OnduCleric> {
 
     static {
         filter.getSubtype().add("Ally");
+		filter.setScopeSubtype(Filter.ComparisonScope.Any);
+		filter.setTargetController(Constants.TargetController.YOU);
     }
 
     public OnduCleric(UUID ownerId) {

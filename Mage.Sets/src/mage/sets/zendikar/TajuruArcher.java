@@ -28,6 +28,8 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
+
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.TargetController;
@@ -38,6 +40,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -52,7 +55,8 @@ public class TajuruArcher extends CardImpl<TajuruArcher> {
 
     static {
         filter.getSubtype().add("Ally");
-        filter.setTargetController(TargetController.YOU);
+		filter.setScopeSubtype(Filter.ComparisonScope.Any);
+		filter.setTargetController(Constants.TargetController.YOU);
         filterTarget.getAbilities().add(FlyingAbility.getInstance());
     }
 
