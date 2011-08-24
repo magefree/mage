@@ -92,7 +92,8 @@ class GlintHawkIdolTriggeredAbility extends TriggeredAbilityImpl<GlintHawkIdolTr
 			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
 			if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
 				Permanent permanent = game.getPermanent(event.getTargetId());
-				if (permanent != null && permanent.getCardType().contains(CardType.ARTIFACT)) {
+				if (permanent != null && permanent.getCardType().contains(CardType.ARTIFACT)
+						&& permanent.getControllerId().equals(this.controllerId)) {
 					return true;
 				}
 			}
