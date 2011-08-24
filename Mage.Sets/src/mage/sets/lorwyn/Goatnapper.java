@@ -33,6 +33,8 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
@@ -64,10 +66,11 @@ public class Goatnapper extends CardImpl<Goatnapper> {
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
-		this.getSpellAbility().addEffect(new GainControlTargetEffect(Constants.Duration.EndOfTurn));
-		this.getSpellAbility().addEffect(new UntapTargetEffect());
-		this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new UntapTargetEffect(), false);
+        ability.addTarget(new TargetPermanent(filter));
+        ability.addEffect(new GainControlTargetEffect(Constants.Duration.EndOfTurn));
+        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn));
+        this.addAbility(ability);
     }
 
     public Goatnapper(final Goatnapper card) {
