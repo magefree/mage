@@ -10,6 +10,7 @@ Planeshift|planeshift|
 Apocalypse|apocalypse|
 Mirrodin|mirrodin|
 Darksteel|darksteel|
+Fifth Dawn|fifthdawn|
 Champions of Kamigawa|championsofkamigawa|
 Ravnica: City of Guilds|ravnika|
 Guildpact|guildpact|

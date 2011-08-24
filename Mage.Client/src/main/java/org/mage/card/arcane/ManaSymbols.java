@@ -24,7 +24,7 @@ public class ManaSymbols {
         "10E", "M10", "M11", "M12",
         "HOP", "DDF",
         "TMP", "INV", "PLS", "APC",
-        "MRD", "DST", "CHK", "RAV", "GPT", "DIS",
+        "MRD", "DST", "5DN", "CHK", "RAV", "GPT", "DIS",
         "LRW", "MOR", "SHM", "EVE", "ALA", "CFX", "ARB",
         "ZEN", "WWK", "ROE", "SOM", "MBS", "NPH"
     };
