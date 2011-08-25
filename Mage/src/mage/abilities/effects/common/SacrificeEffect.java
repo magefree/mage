@@ -31,6 +31,8 @@ import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.Constants.TargetController;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -47,15 +49,19 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 
 	private FilterPermanent filter;
 	private String preText;
-	private int count;
+	private DynamicValue count;
 
-	public SacrificeEffect ( FilterPermanent filter, int count, String preText ) {
+	public SacrificeEffect ( FilterPermanent filter, DynamicValue count, String preText ) {
 		super(Outcome.Sacrifice);
 		this.filter = filter;
 		this.count = count;
 		this.preText = preText;
 		setText();
 	}
+
+    public SacrificeEffect ( FilterPermanent filter, int count, String preText ) {
+        this(filter, new StaticValue(count), preText);
+    }
 
 	public SacrificeEffect ( SacrificeEffect effect ) {
 		super(effect);
@@ -68,7 +74,7 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(targetPointer.getFirst(source));
 		filter.setTargetController(TargetController.YOU);
-		Target target = new TargetControlledPermanent(count, count, filter, false);
+		Target target = new TargetControlledPermanent(count.calculate(game, source), count.calculate(game, source), filter, false);
 
 		//A spell or ability could have removed the only legal target this player
 		//had, if thats the case this ability should fizzle.
@@ -90,6 +96,10 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 		}
 		return false;
 	}
+
+    public void setAmount(DynamicValue amount) {
+        this.count = amount;
+    }
 
 	@Override
 	public SacrificeEffect copy() {
