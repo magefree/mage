@@ -219,7 +219,7 @@ public class TableManager {
 			controllers.remove(tableId);
 			tables.remove(tableId);
 			GamesRoomManager.getInstance().removeTable(tableId);
-			if (table.getMatch().getGame() != null)
+			if (table.getMatch() != null && table.getMatch().getGame() != null)
 				table.getMatch().getGame().end();
 		}
 	}
