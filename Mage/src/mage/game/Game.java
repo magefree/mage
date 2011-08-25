@@ -164,6 +164,10 @@ public interface Game extends MageItem, Serializable {
 	// game options
 	public void setGameOptions(GameOptions options);
 
+    // game times
+    public Date getStartTime();
+    public Date getEndTime();
+    
 	// game cheats (for tests only)
 	public void cheat(UUID ownerId, Map<Zone, String> commands);
 	public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard);

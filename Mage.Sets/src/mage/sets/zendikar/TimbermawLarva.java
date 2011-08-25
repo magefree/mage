@@ -48,7 +48,7 @@ public class TimbermawLarva extends CardImpl<TimbermawLarva> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest you control");
 
     static {
-        filter.getName().add("Forest");
+        filter.getSubtype().add("Forest");
         filter.setTargetController(TargetController.YOU);
         
     }

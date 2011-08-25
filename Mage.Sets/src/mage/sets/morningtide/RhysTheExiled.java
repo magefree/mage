@@ -29,7 +29,6 @@ package mage.sets.morningtide;
 
 import java.util.UUID;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;

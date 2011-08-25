@@ -45,7 +45,7 @@ public class SpittingEarth extends CardImpl<SpittingEarth> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Mountain you control");
 
     static {
-        filter.getName().add("Mountain");
+        filter.getSubtype().add("Mountain");
     }
 
     public SpittingEarth(UUID ownerId) {

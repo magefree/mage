@@ -45,7 +45,7 @@ public class SeismicStrike extends CardImpl<SeismicStrike> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Mountains you control");
 
     static {
-        filter.getName().add("Mountain");
+        filter.getSubtype().add("Mountain");
     }
 
     public SeismicStrike(UUID ownerId) {

@@ -96,6 +96,7 @@ class BloodlordOfVaasgothEffect extends ContinuousEffectImpl {
 
 	public BloodlordOfVaasgothEffect(final BloodlordOfVaasgothEffect effect) {
 		super(effect);
+        this.ability = effect.ability.copy();
 	}
 
 	@Override

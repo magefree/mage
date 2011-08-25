@@ -47,7 +47,7 @@ public class PrimalBellow extends CardImpl<PrimalBellow> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest you control");
 
     static {
-        filter.getName().add("Forest");
+        filter.getSubtype().add("Forest");
         filter.setTargetController(TargetController.YOU);
         
     }

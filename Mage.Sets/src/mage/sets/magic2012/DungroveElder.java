@@ -30,13 +30,14 @@ package mage.sets.magic2012;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
@@ -47,21 +48,23 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public class DungroveElder extends CardImpl<DungroveElder> {
 
-    final static FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests");
+    final static FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
 
         static {
-            filterLands.getName().add("Forest");
+            filterLands.getSubtype().add("Forest");
         }
 
         public DungroveElder (UUID ownerId) {
         super(ownerId, 171, "Dungrove Elder", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "M12";
         this.subtype.add("Treefolk");
+
 		this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
+
         this.addAbility(new HexproofAbility());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(filterLands), new PermanentsOnBattlefieldCount(filterLands), Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands), Duration.EndOfGame)));
     }
 
     public DungroveElder (final DungroveElder card) {

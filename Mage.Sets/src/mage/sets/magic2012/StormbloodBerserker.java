@@ -27,88 +27,42 @@
  */
 package mage.sets.magic2012;
 
-import mage.Constants;
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continious.CantBeBlockedByOneEffect;
 import mage.abilities.keyword.BloodthirstAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  * @author nantuko
  */
 public class StormbloodBerserker extends CardImpl<StormbloodBerserker> {
 
-	public StormbloodBerserker(UUID ownerId) {
-		super(ownerId, 156, "Stormblood Berserker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-		this.expansionSetCode = "M12";
-		this.subtype.add("Human");
-		this.subtype.add("Berserker");
+    public StormbloodBerserker(UUID ownerId) {
+        super(ownerId, 156, "Stormblood Berserker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "M12";
+        this.subtype.add("Human");
+        this.subtype.add("Berserker");
 
-		this.color.setRed(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+        this.color.setRed(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-		this.addAbility(new BloodthirstAbility(2));
-		// Stormblood Berserker can't be blocked except by two or more creatures.
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new StormbloodBerserkerEffect()));
-	}
+        this.addAbility(new BloodthirstAbility(2));
+        // Stormblood Berserker can't be blocked except by two or more creatures.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)));
+    }
 
-	public StormbloodBerserker(final StormbloodBerserker card) {
-		super(card);
-	}
+    public StormbloodBerserker(final StormbloodBerserker card) {
+        super(card);
+    }
 
-	@Override
-	public StormbloodBerserker copy() {
-		return new StormbloodBerserker(this);
-	}
-}
-
-class StormbloodBerserkerEffect extends ContinuousEffectImpl<StormbloodBerserkerEffect> {
-
-	public StormbloodBerserkerEffect() {
-		super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
-		staticText = "{this} can't be blocked except by two or more creatures";
-	}
-
-	public StormbloodBerserkerEffect(final StormbloodBerserkerEffect effect) {
-		super(effect);
-	}
-
-	@Override
-	public StormbloodBerserkerEffect copy() {
-		return new StormbloodBerserkerEffect(this);
-	}
-
-	@Override
-	public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
-		Permanent perm = game.getPermanent(source.getSourceId());
-		if (perm != null) {
-			switch (layer) {
-				case RulesEffects:
-					perm.setMinBlockedBy(2);
-					break;
-			}
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return false;
-	}
-
-	@Override
-	public boolean hasLayer(Constants.Layer layer) {
-		return layer == Constants.Layer.RulesEffects;
-	}
-
+    @Override
+    public StormbloodBerserker copy() {
+        return new StormbloodBerserker(this);
+    }
 }

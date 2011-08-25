@@ -25,55 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenth;
+package mage.sets.shadowmoor;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
+import mage.Constants.Zone;
+import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.effects.common.continious.CantBeBlockedByOneEffect;
+import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class BlanchwoodArmor extends CardImpl<BlanchwoodArmor> {
+public class HordeOfBoggarts extends CardImpl<HordeOfBoggarts> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Forest you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("red permanents you control");
 
     static {
-        filter.getSubtype().add("Forest");
+        filter.getColor().setRed(true);
+        filter.setUseColor(true);
     }
 
-    public BlanchwoodArmor(UUID ownerId) {
-        super(ownerId, 253, "Blanchwood Armor", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.expansionSetCode = "10E";
-        this.subtype.add("Aura");
-        this.color.setGreen(true);
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Constants.Duration.WhileOnBattlefield)));
+    public HordeOfBoggarts(UUID ownerId) {
+        super(ownerId, 94, "Horde of Boggarts", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "SHM";
+        this.subtype.add("Goblin");
+
+        this.color.setRed(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
+
+        // Horde of Boggarts's power and toughness are each equal to the number of red permanents you control.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
+        // Horde of Boggarts can't be blocked except by two or more creatures.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)));
     }
 
-    public BlanchwoodArmor(final BlanchwoodArmor card) {
+    public HordeOfBoggarts(final HordeOfBoggarts card) {
         super(card);
     }
 
     @Override
-    public BlanchwoodArmor copy() {
-        return new BlanchwoodArmor(this);
+    public HordeOfBoggarts copy() {
+        return new HordeOfBoggarts(this);
     }
 }

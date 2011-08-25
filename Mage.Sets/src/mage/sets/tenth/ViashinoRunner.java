@@ -28,52 +28,39 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
+import mage.Constants.Zone;
+import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.effects.common.continious.CantBeBlockedByOneEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledPermanent;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class BlanchwoodArmor extends CardImpl<BlanchwoodArmor> {
+public class ViashinoRunner extends CardImpl<ViashinoRunner> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Forest you control");
-
-    static {
-        filter.getSubtype().add("Forest");
-    }
-
-    public BlanchwoodArmor(UUID ownerId) {
-        super(ownerId, 253, "Blanchwood Armor", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
+    public ViashinoRunner(UUID ownerId) {
+        super(ownerId, 245, "Viashino Runner", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "10E";
-        this.subtype.add("Aura");
-        this.color.setGreen(true);
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Constants.Duration.WhileOnBattlefield)));
+        this.subtype.add("Viashino");
+
+        this.color.setRed(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
+
+        // Viashino Runner can't be blocked except by two or more creatures.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)));
     }
 
-    public BlanchwoodArmor(final BlanchwoodArmor card) {
+    public ViashinoRunner(final ViashinoRunner card) {
         super(card);
     }
 
     @Override
-    public BlanchwoodArmor copy() {
-        return new BlanchwoodArmor(this);
+    public ViashinoRunner copy() {
+        return new ViashinoRunner(this);
     }
 }

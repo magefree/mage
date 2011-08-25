@@ -29,20 +29,13 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continious.CantBeBlockedByOneEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -59,7 +52,8 @@ public class PathrazerOfUlamog extends CardImpl<PathrazerOfUlamog> {
         this.toughness = new MageInt(9);
 
         this.addAbility(new AnnihilatorAbility(3));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PathrazerOfUlamogEffect()));
+        // Pathrazer of Ulamog can't be blocked except by three or more creatures.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(3)));
     }
 
     public PathrazerOfUlamog(final PathrazerOfUlamog card) {
@@ -69,46 +63,5 @@ public class PathrazerOfUlamog extends CardImpl<PathrazerOfUlamog> {
     @Override
     public PathrazerOfUlamog copy() {
         return new PathrazerOfUlamog(this);
-    }
-}
-
-class PathrazerOfUlamogEffect extends ContinuousEffectImpl<PathrazerOfUlamogEffect> {
-
-    public PathrazerOfUlamogEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "{this} can't be blocked except by three or more creatures";
-    }
-
-    public PathrazerOfUlamogEffect(final PathrazerOfUlamogEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PathrazerOfUlamogEffect copy() {
-        return new PathrazerOfUlamogEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent perm = game.getPermanent(source.getSourceId());
-        if (perm != null) {
-            switch (layer) {
-                case RulesEffects:
-                    perm.setMinBlockedBy(3);
-                    break;
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
     }
 }

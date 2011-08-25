@@ -27,6 +27,7 @@
  */
 package mage.abilities;
 
+import java.io.Serializable;
 import java.util.UUID;
 import mage.abilities.effects.Effects;
 import mage.choices.Choices;
@@ -36,7 +37,7 @@ import mage.target.Targets;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Mode {
+public class Mode implements Serializable {
 
 	protected UUID id;
 	protected Targets targets;

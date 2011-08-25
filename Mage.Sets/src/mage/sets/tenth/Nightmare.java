@@ -49,7 +49,7 @@ public class Nightmare extends CardImpl<Nightmare> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Swamps you control");
 
     static {
-        filter.getName().add("Swamp");
+        filter.getSubtype().add("Swamp");
     }
 
     public Nightmare(UUID ownerId) {

@@ -29,9 +29,6 @@
 package mage.view;
 
 import java.io.Serializable;
-import mage.game.tournament.Round;
-import mage.game.tournament.Tournament;
-import mage.game.tournament.TournamentPairing;
 import mage.game.tournament.TournamentPlayer;
 
 /**

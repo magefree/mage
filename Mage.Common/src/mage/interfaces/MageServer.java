@@ -91,6 +91,7 @@ public interface MageServer {
 	public void sendPlayerBoolean(UUID gameId, String sessionId, Boolean data) throws MageException;
 	public void sendPlayerInteger(UUID gameId, String sessionId, Integer data) throws MageException;
 	public void concedeGame(UUID gameId, String sessionId) throws MageException;
+    
 
 	//tournament methods
 	public void startTournament(String sessionId, UUID roomId, UUID tableId) throws MageException;

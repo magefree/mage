@@ -87,6 +87,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	protected Map<UUID, Card> gameCards = new HashMap<UUID, Card>();
 	protected Map<UUID, Card> lki = new HashMap<UUID, Card>();
 	protected GameState state;
+    
+    protected Date startTime;
+    protected Date endTime;
 	protected UUID startingPlayerId;
 	protected UUID winnerId;
 
@@ -279,6 +282,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		}
 		if (remainingPlayers <= 1 || numLosers >= state.getPlayers().size() - 1) {
 			state.endGame();
+            endTime = new Date();
 			return true;
 		}
 		return false;
@@ -338,6 +342,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public void start(UUID choosingPlayerId, GameOptions options) {
+        startTime = new Date();
 		init(choosingPlayerId, options.testMode);
 		PlayerList players = state.getPlayerList(startingPlayerId);
 		Player player = getPlayer(players.get());
@@ -1167,10 +1172,16 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		}
 	}
 
-	public void clearGraveyard(UUID playerId) {
-
-	}
-
+    @Override
+    public Date getStartTime() {
+        return startTime;
+    }
+    
+    @Override
+    public Date getEndTime() {
+        return endTime;
+    }
+    
     @Override
 	public void setGameOptions(GameOptions options) {
 		this.gameOptions = options;

@@ -369,7 +369,7 @@ public class TableController {
 		UUID choosingPlayerId = match.getChooser();
 		match.endGame();
 		table.endGame();
-//		GameManager.getInstance().saveGame(match.getGame().getId());
+		GameManager.getInstance().saveGame(match.getGame().getId());
 		GameManager.getInstance().removeGame(match.getGame().getId());
 		try {
 			if (!match.isMatchOver()) {
