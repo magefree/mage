@@ -106,7 +106,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private static Session session;
     private ConnectDialog connectDialog;
-    private ErrorDialog errorDialog;
+    //private ErrorDialog errorDialog;
 	private static CallbackClient callbackClient;
     private static Preferences prefs = Preferences.userNodeForPackage(MageFrame.class);
     private JLabel title;
@@ -189,8 +189,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 		callbackClient = new CallbackClientImpl(this);
         connectDialog = new ConnectDialog();
         desktopPane.add(connectDialog, JLayeredPane.POPUP_LAYER);
-        errorDialog = new ErrorDialog();
-        desktopPane.add(errorDialog, JLayeredPane.POPUP_LAYER);
+        //errorDialog = new ErrorDialog();
+        //desktopPane.add(errorDialog, JLayeredPane.POPUP_LAYER);
         ui.addComponent(MageComponents.DESKTOP_PANE, desktopPane);
 
 		try {
@@ -839,13 +839,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public void showErrorDialog(final String title, final String message) {
 		if (SwingUtilities.isEventDispatchThread()) {
-			errorDialog.showDialog(title, message);
+			//errorDialog.showDialog(title, message);
 		}
 		else {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					errorDialog.showDialog(title, message);
+					//errorDialog.showDialog(title, message);
 				}
 			});
 		}
