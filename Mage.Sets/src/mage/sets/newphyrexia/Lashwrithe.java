@@ -51,7 +51,7 @@ public class Lashwrithe extends CardImpl<Lashwrithe> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp you control");
 
     static {
-        filter.getName().add("Swamp");
+        filter.getSubtype().add("Swamp");
         filter.setTargetController(TargetController.YOU);
     }
 

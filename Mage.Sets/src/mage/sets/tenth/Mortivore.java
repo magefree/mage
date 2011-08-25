@@ -44,7 +44,7 @@ import mage.filter.common.FilterCreatureCard;
 
 /**
  *
- * @author anonymous
+ * @author Loki
  */
 public class Mortivore extends CardImpl<Mortivore> {
 

@@ -46,7 +46,7 @@ public class TendrilsOfCorruption extends CardImpl<TendrilsOfCorruption> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Swamp you control");
 
     static {
-        filter.getName().add("Swamp");
+        filter.getSubtype().add("Swamp");
     }
 
     public TendrilsOfCorruption(UUID ownerId) {

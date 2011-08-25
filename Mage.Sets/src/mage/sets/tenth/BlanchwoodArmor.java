@@ -52,7 +52,7 @@ public class BlanchwoodArmor extends CardImpl<BlanchwoodArmor> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Forest you control");
 
     static {
-        filter.getName().add("Forest");
+        filter.getSubtype().add("Forest");
     }
 
     public BlanchwoodArmor(UUID ownerId) {
@@ -66,8 +66,6 @@ public class BlanchwoodArmor extends CardImpl<BlanchwoodArmor> {
 		Ability ability = new EnchantAbility(auraTarget.getTargetName());
 		this.addAbility(ability);
 		this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Constants.Duration.WhileOnBattlefield)));
-        // Enchant creature
-        // Enchanted creature gets +1/+1 for each Forest you control.
     }
 
     public BlanchwoodArmor(final BlanchwoodArmor card) {

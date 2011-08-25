@@ -45,7 +45,7 @@ public class HowlOfTheNightPack extends CardImpl<HowlOfTheNightPack> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("for each Forest you control");
 
     static {
-        filter.getName().add("Forest");
+        filter.getSubtype().add("Forest");
     }
 
     public HowlOfTheNightPack(UUID ownerId) {
