@@ -97,9 +97,6 @@ public class TezzeretAgentOfBolas extends CardImpl<TezzeretAgentOfBolas> {
 
 class TezzeretAgentOfBolasEffect1 extends OneShotEffect<TezzeretAgentOfBolasEffect1> {
 
-	protected static FilterCard filter1 = new FilterArtifactCard("artifact card to reveal and put into your hand");
-	protected static FilterCard filter2 = new FilterCard("card to put on the bottom of your library");
-
 	public TezzeretAgentOfBolasEffect1() {
 		super(Outcome.DrawCard);
 		staticText = "Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order";
@@ -114,51 +111,60 @@ class TezzeretAgentOfBolasEffect1 extends OneShotEffect<TezzeretAgentOfBolasEffe
 		return new TezzeretAgentOfBolasEffect1(this);
 	}
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-				
-		Player player = game.getPlayer(source.getControllerId());
-		Cards cards = new CardsImpl(Zone.PICK);
-		for (int i = 0; i < 5; i++) {
-			Card card = player.getLibrary().removeFromTop(game);
-			cards.add(card);
-			game.setZone(card.getId(), Zone.PICK);
-		}
-		player.lookAtCards("Tezzeret, Agent of Bolas", cards, game);
-		if (player.chooseUse(outcome, "Do you wish to reveal an artifact card and put it into your hand?", game)) {
-			TargetCard target1 = new TargetCard(Zone.PICK, filter1);
-			while (cards.size() > 0 && player.choose(Outcome.DrawCard, cards, target1, game)) {
-				Card card = cards.get(target1.getFirstTarget(), game);
-				if (card != null) {
-					cards.remove(card);
-					card.moveToZone(Zone.HAND, source.getId(), game, false);
-					Cards reveal = new CardsImpl(Zone.OUTSIDE);
-					reveal.add(card);
-					player.revealCards("Tezzeret, Agent of Bolas", reveal, game);
-					break;
-				}
-				target1.clearChosen();
-			}
-		}
-		if (cards.size() > 1) {
-			TargetCard target2 = new TargetCard(Zone.PICK, filter2);
-			target2.setRequired(true);
-			while (cards.size() > 1) {
-				player.choose(Outcome.Benefit, cards, target2, game);
-				Card card = cards.get(target2.getFirstTarget(), game);
-				if (card != null) {
-					cards.remove(card);
-					card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
-				}
-				target2.clearChosen();
-			}
-		}
-		if (cards.size() == 1) {
-			Card card = cards.get(cards.iterator().next(), game);
-			card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
-		}
-		return true;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
+        }
+
+        Cards cards = new CardsImpl(Zone.PICK);
+        boolean artifactFound = false;
+        for (int i = 0; i < 5; i++) {
+            Card card = player.getLibrary().removeFromTop(game);
+            if (card != null) {
+                cards.add(card);
+                game.setZone(card.getId(), Zone.PICK);
+                if (card.getCardType().contains(CardType.ARTIFACT)) {
+                    artifactFound = true;
+                }
+            }
+        }
+        player.lookAtCards("Tezzeret, Agent of Bolas", cards, game);
+
+        if (artifactFound && player.chooseUse(Outcome.DrawCard, "Do you wish to reveal an artifact card and put it into your hand?", game)) {
+            TargetCard target = new TargetCard(Zone.PICK, new FilterArtifactCard("artifact card to reveal and put into your hand"));
+            if (player.choose(Outcome.DrawCard, cards, target, game)) {
+                Card card = cards.get(target.getFirstTarget(), game);
+                if (card != null) {
+                    cards.remove(card);
+                    card.moveToZone(Zone.HAND, source.getId(), game, false);
+
+                    Cards reveal = new CardsImpl(Zone.OUTSIDE);
+                    reveal.add(card);
+                    player.revealCards("Tezzeret, Agent of Bolas", reveal, game);
+                }
+            }
+        }
+
+        TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
+        target.setRequired(true);
+        while (cards.size() > 1) {
+            player.choose(Outcome.Neutral, cards, target, game);
+            Card card = cards.get(target.getFirstTarget(), game);
+            if (card != null) {
+                cards.remove(card);
+                card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+            }
+            target.clearChosen();
+        }
+        if (cards.size() == 1) {
+            Card card = cards.get(cards.iterator().next(), game);
+            card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+        }
+        
+        return true;
+    }
 }
 
 class ArtifactCreatureToken extends Token {
