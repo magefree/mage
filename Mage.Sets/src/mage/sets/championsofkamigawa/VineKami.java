@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 import mage.Constants.CardType;
@@ -34,35 +34,35 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.CantBeBlockedByOneEffect;
-import mage.abilities.keyword.BloodthirstAbility;
+import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.CardImpl;
 
 /**
- * @author nantuko
+ *
+ * @author North
  */
-public class StormbloodBerserker extends CardImpl<StormbloodBerserker> {
+public class VineKami extends CardImpl<VineKami> {
 
-    public StormbloodBerserker(UUID ownerId) {
-        super(ownerId, 156, "Stormblood Berserker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "M12";
-        this.subtype.add("Human");
-        this.subtype.add("Berserker");
+    public VineKami(UUID ownerId) {
+        super(ownerId, 249, "Vine Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{G}");
+        this.expansionSetCode = "CHK";
+        this.subtype.add("Spirit");
 
-        this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.color.setGreen(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-        this.addAbility(new BloodthirstAbility(2));
-        // Stormblood Berserker can't be blocked except by two or more creatures.
+        // Vine Kami can't be blocked except by two or more creatures.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)));
+        this.addAbility(new SoulshiftAbility(6));
     }
 
-    public StormbloodBerserker(final StormbloodBerserker card) {
+    public VineKami(final VineKami card) {
         super(card);
     }
 
     @Override
-    public StormbloodBerserker copy() {
-        return new StormbloodBerserker(this);
+    public VineKami copy() {
+        return new VineKami(this);
     }
 }

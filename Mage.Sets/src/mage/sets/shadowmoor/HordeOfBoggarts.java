@@ -25,44 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.shadowmoor;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continious.CantBeBlockedByOneEffect;
-import mage.abilities.keyword.BloodthirstAbility;
+import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
- * @author nantuko
+ *
+ * @author North
  */
-public class StormbloodBerserker extends CardImpl<StormbloodBerserker> {
+public class HordeOfBoggarts extends CardImpl<HordeOfBoggarts> {
 
-    public StormbloodBerserker(UUID ownerId) {
-        super(ownerId, 156, "Stormblood Berserker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "M12";
-        this.subtype.add("Human");
-        this.subtype.add("Berserker");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("red permanents you control");
+
+    static {
+        filter.getColor().setRed(true);
+        filter.setUseColor(true);
+    }
+
+    public HordeOfBoggarts(UUID ownerId) {
+        super(ownerId, 94, "Horde of Boggarts", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "SHM";
+        this.subtype.add("Goblin");
 
         this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
 
-        this.addAbility(new BloodthirstAbility(2));
-        // Stormblood Berserker can't be blocked except by two or more creatures.
+        // Horde of Boggarts's power and toughness are each equal to the number of red permanents you control.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
+        // Horde of Boggarts can't be blocked except by two or more creatures.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)));
     }
 
-    public StormbloodBerserker(final StormbloodBerserker card) {
+    public HordeOfBoggarts(final HordeOfBoggarts card) {
         super(card);
     }
 
     @Override
-    public StormbloodBerserker copy() {
-        return new StormbloodBerserker(this);
+    public HordeOfBoggarts copy() {
+        return new HordeOfBoggarts(this);
     }
 }

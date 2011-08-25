@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.tenth;
 
 import java.util.UUID;
 import mage.Constants.CardType;
@@ -34,35 +34,33 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.CantBeBlockedByOneEffect;
-import mage.abilities.keyword.BloodthirstAbility;
 import mage.cards.CardImpl;
 
 /**
- * @author nantuko
+ *
+ * @author North
  */
-public class StormbloodBerserker extends CardImpl<StormbloodBerserker> {
+public class ViashinoRunner extends CardImpl<ViashinoRunner> {
 
-    public StormbloodBerserker(UUID ownerId) {
-        super(ownerId, 156, "Stormblood Berserker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.expansionSetCode = "M12";
-        this.subtype.add("Human");
-        this.subtype.add("Berserker");
+    public ViashinoRunner(UUID ownerId) {
+        super(ownerId, 245, "Viashino Runner", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "10E";
+        this.subtype.add("Viashino");
 
         this.color.setRed(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-        this.addAbility(new BloodthirstAbility(2));
-        // Stormblood Berserker can't be blocked except by two or more creatures.
+        // Viashino Runner can't be blocked except by two or more creatures.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)));
     }
 
-    public StormbloodBerserker(final StormbloodBerserker card) {
+    public ViashinoRunner(final ViashinoRunner card) {
         super(card);
     }
 
     @Override
-    public StormbloodBerserker copy() {
-        return new StormbloodBerserker(this);
+    public ViashinoRunner copy() {
+        return new ViashinoRunner(this);
     }
 }
