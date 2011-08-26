@@ -36,11 +36,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import mage.Constants.TableState;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.MageException;
+import mage.view.MatchView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
 
@@ -58,10 +60,21 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 	public List<TableView> getTables() {
 		ArrayList<TableView> tableList = new ArrayList<TableView>();
 		for (Table table: tables.values()) {
-			tableList.add(new TableView(table));
+            if (table.getState() != TableState.FINISHED)
+                tableList.add(new TableView(table));
 		}
 		return tableList;
 	}
+
+    @Override
+    public List<MatchView> getFinished() {
+		ArrayList<MatchView> matchList = new ArrayList<MatchView>();
+		for (Table table: tables.values()) {
+            if (table.getState() == TableState.FINISHED)
+                matchList.add(new MatchView(table.getMatch()));
+		}
+		return matchList;
+    }
 
 	@Override
 	public boolean joinTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException {

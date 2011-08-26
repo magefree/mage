@@ -44,6 +44,7 @@ import mage.players.Player;
 public interface Match {
 
 	public UUID getId();
+    public String getName();
 	public boolean isMatchOver();
 	public List<MatchPlayer> getPlayers();
 	public MatchPlayer getPlayer(UUID playerId);
@@ -59,6 +60,7 @@ public interface Match {
 	public int getNumGames();
 	public boolean isDoneSideboarding();
 	public UUID getChooser();
+    public MatchOptions getOptions();
 
 	public void addTableEventListener(Listener<TableEvent> listener);
 	public void fireSideboardEvent(UUID playerId, Deck deck);

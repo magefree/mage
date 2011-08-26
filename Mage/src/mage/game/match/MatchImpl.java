@@ -51,6 +51,7 @@ public abstract class MatchImpl implements Match {
 	private static final int SIDEBOARD_TIME = 180;
 
 	protected UUID id = UUID.randomUUID();
+    protected String name;
 	protected List<MatchPlayer> players = new ArrayList<MatchPlayer>();
 	protected List<Game> games = new ArrayList<Game>();
 	protected MatchOptions options;
@@ -91,6 +92,16 @@ public abstract class MatchImpl implements Match {
 		return id;
 	}
 
+    @Override
+    public String getName() {
+        return options.getName();
+    }
+    
+    @Override
+    public MatchOptions getOptions() {
+        return options;
+    }
+    
 	@Override
 	public boolean isMatchOver() {
 		for (MatchPlayer player: players) {

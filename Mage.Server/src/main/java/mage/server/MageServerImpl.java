@@ -56,6 +56,7 @@ import mage.utils.MageVersion;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.DraftPickView;
 import mage.view.GameView;
+import mage.view.MatchView;
 import mage.view.TableView;
 import mage.view.TournamentView;
 import mage.view.UserView;
@@ -224,6 +225,17 @@ public class MageServerImpl implements MageServer {
 	}
 
 	@Override
+	public List<MatchView> getFinishedMatches(UUID roomId) throws MageException {
+		try {
+			return GamesRoomManager.getInstance().getRoom(roomId).getFinished();
+		}
+		catch (Exception ex) {
+			handleException(ex);
+		}
+		return null;
+	}
+
+    @Override
 	public List<String> getConnectedPlayers(UUID roomId) throws MageException {
 		try {
 			List<String> players = new ArrayList<String>();

@@ -48,7 +48,6 @@ import mage.remote.Session;
 import mage.client.util.ButtonColumn;
 import mage.game.match.MatchOptions;
 import mage.sets.Sets;
-import mage.utils.CompressUtil;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
 
@@ -63,6 +62,8 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import mage.client.util.gui.GuiDisplayUtil;
+import mage.view.MatchView;
 
 
 /**
@@ -74,12 +75,15 @@ public class TablesPanel extends javax.swing.JPanel {
 	private final static Logger logger = Logger.getLogger(TablesPanel.class);
 
 	private TableTableModel tableModel;
+	private MatchesTableModel matchesModel;
 	private UUID roomId;
-	private UpdateTablesTask updateTask;
+	private UpdateTablesTask updateTablesTask;
 	private UpdatePlayersTask updatePlayersTask;
+	private UpdateMatchesTask updateMatchesTask;
 	private JoinTableDialog joinTableDialog;
 	private NewTableDialog newTableDialog;
 	private NewTournamentDialog newTournamentDialog;
+    private GameChooser gameChooser;
 	private Session session;
 	private List<String> messages;
 	private int currentMessage;
@@ -88,6 +92,8 @@ public class TablesPanel extends javax.swing.JPanel {
     public TablesPanel() {
 		
 		tableModel = new TableTableModel();
+        matchesModel = new MatchesTableModel();
+        gameChooser = new GameChooser();
 
         initComponents();
 
@@ -96,7 +102,7 @@ public class TablesPanel extends javax.swing.JPanel {
 		chatPanel.setOpaque(false);
 		chatPanel.setBorder(null);
 
-		Action join = new AbstractAction()
+		Action joinTable = new AbstractAction()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
@@ -149,7 +155,24 @@ public class TablesPanel extends javax.swing.JPanel {
 			}
 		};
 
-		ButtonColumn buttonColumn = new ButtonColumn(tableTables, join, 6);
+		Action replayMatch = new AbstractAction()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				int modelRow = Integer.valueOf( e.getActionCommand() );
+				List<UUID> games = (List<UUID>)matchesModel.getValueAt(modelRow, 6);
+                if (games.size() == 1) {
+                    session.replayGame(games.get(0));
+                }
+                else {
+                    gameChooser.show(games, MageFrame.getDesktop().getMousePosition());
+                }
+			}
+		};
+
+        ButtonColumn buttonColumn1 = new ButtonColumn(tableTables, joinTable, 6);
+		ButtonColumn buttonColumn2 = new ButtonColumn(tableCompleted, replayMatch, 5);
 		
 		jSplitPane1.setOpaque(false);
 		jScrollPane1.setOpaque(false);
@@ -168,7 +191,7 @@ public class TablesPanel extends javax.swing.JPanel {
 		return components;
     }
     
-	public void update(Collection<TableView> tables) {
+	public void updateTables(Collection<TableView> tables) {
 		try {
 			tableModel.loadData(tables);
 			this.tableTables.repaint();
@@ -177,24 +200,45 @@ public class TablesPanel extends javax.swing.JPanel {
 		}
 	}
 
-	public void startTasks() {
+	public void updateMatches(Collection<MatchView> matches) {
+		try {
+			matchesModel.loadData(matches);
+			this.tableCompleted.repaint();
+		} catch (Exception ex) {
+			hideTables();
+		}
+	}
+
+    public void startTasks() {
 		if (session != null) {
-			if (updateTask == null || updateTask.isDone()) {
-				updateTask = new UpdateTablesTask(session, roomId, this);
-				updateTask.execute();
+			if (updateTablesTask == null || updateTablesTask.isDone()) {
+				updateTablesTask = new UpdateTablesTask(session, roomId, this);
+				updateTablesTask.execute();
 			}
 			if (updatePlayersTask == null || updatePlayersTask.isDone()) {
 				updatePlayersTask = new UpdatePlayersTask(session, roomId, this.chatPanel);
 				updatePlayersTask.execute();
 			}
+            if (this.chkShowCompleted.isSelected()) {
+                if (updateMatchesTask == null || updateMatchesTask.isDone()) {
+                    updateMatchesTask = new UpdateMatchesTask(session, roomId, this);
+                    updateMatchesTask.execute();
+                }
+            }
+            else {
+           		if (updateMatchesTask != null)
+                    updateMatchesTask.cancel(true);
+            }
 		}
 	}
 	
 	public void stopTasks() {
-		if (updateTask != null)
-			updateTask.cancel(true);
+		if (updateTablesTask != null)
+			updateTablesTask.cancel(true);
 		if (updatePlayersTask != null)
 			updatePlayersTask.cancel(true);
+		if (updateMatchesTask != null)
+			updateMatchesTask.cancel(true);
 	}
 	
 	public void showTables(UUID roomId) {
@@ -203,6 +247,7 @@ public class TablesPanel extends javax.swing.JPanel {
 		session = MageFrame.getSession();
 		if (session != null) {
 			btnQuickStart.setVisible(session.isTestMode());
+            gameChooser.init(session);
 		}
 		if (newTableDialog == null) {
 			newTableDialog = new NewTableDialog();
@@ -311,6 +356,11 @@ public class TablesPanel extends javax.swing.JPanel {
 
         chkShowCompleted.setSelected(true);
         chkShowCompleted.setText("Show Completed");
+        chkShowCompleted.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkShowCompletedActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -342,7 +392,7 @@ public class TablesPanel extends javax.swing.JPanel {
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.setPreferredSize(new java.awt.Dimension(664, 39));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel1.setText("Message of the Day:");
         jLabel1.setAlignmentY(0.3F);
 
@@ -366,7 +416,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(440, 440, 440))
@@ -388,23 +438,16 @@ public class TablesPanel extends javax.swing.JPanel {
         jSplitPane1.setRightComponent(chatPanel);
 
         jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        jSplitPane2.setResizeWeight(0.5);
 
         tableTables.setModel(this.tableModel);
         jScrollPane1.setViewportView(tableTables);
 
         jSplitPane2.setLeftComponent(jScrollPane1);
 
-        tableCompleted.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        jScrollPane2.setMinimumSize(new java.awt.Dimension(23, 0));
+
+        tableCompleted.setModel(this.matchesModel);
         jScrollPane2.setViewportView(tableCompleted);
 
         jSplitPane2.setRightComponent(jScrollPane2);
@@ -485,6 +528,16 @@ public class TablesPanel extends javax.swing.JPanel {
 			}
 		}
 	}//GEN-LAST:event_jButton1ActionPerformed
+
+private void chkShowCompletedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkShowCompletedActionPerformed
+    if (this.chkShowCompleted.isSelected()) {
+        this.jSplitPane2.setDividerLocation(-1);
+    }
+    else {
+        this.jSplitPane2.setDividerLocation(this.jPanel3.getHeight());
+    }
+    this.startTasks();
+}//GEN-LAST:event_chkShowCompletedActionPerformed
 
 	private void handleError(Exception ex) {
 		logger.fatal("Error loading deck: ", ex);
@@ -622,7 +675,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 
 	@Override
 	protected void process(List<Collection<TableView>> view) {
-		panel.update(view.get(0));
+		panel.updateTables(view.get(0));
 	}
 	
 	@Override
@@ -675,6 +728,150 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<String>> {
 		} catch (ExecutionException ex) {
 			logger.fatal("Update Players Task error", ex);
 		} catch (CancellationException ex) {}
+	}
+
+}
+
+class MatchesTableModel extends AbstractTableModel {
+    private String[] columnNames = new String[]{"Match Name", "Game Type", "Deck Type", "Players", "Result", "Action"};
+	private MatchView[] matches = new MatchView[0];
+	private static final DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
+
+	public void loadData(Collection<MatchView> matches) throws MageRemoteException {
+		this.matches = matches.toArray(new MatchView[0]);
+		this.fireTableDataChanged();
+	}
+
+	@Override
+	public int getRowCount() {
+		return matches.length;
+	}
+
+	@Override
+	public int getColumnCount() {
+		return columnNames.length;
+	}
+
+	@Override
+	public Object getValueAt(int arg0, int arg1) {
+		switch (arg1) {
+			case 0:
+				return matches[arg0].getName();
+			case 1:
+				return matches[arg0].getGameType();
+			case 2:
+				return matches[arg0].getDeckType();
+			case 3:
+				return matches[arg0].getPlayers();
+			case 4:
+				return matches[arg0].getResult();
+			case 5:
+				return "Replay";
+            case 6:
+                return matches[arg0].getGames();
+		}
+		return "";
+	}
+
+	@Override
+	public String getColumnName(int columnIndex) {
+        String colName = "";
+
+        if (columnIndex <= getColumnCount())
+            colName = columnNames[columnIndex];
+
+        return colName;
+    }
+
+	@Override
+    public Class getColumnClass(int columnIndex){
+		return String.class;
+    }
+
+	@Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+		if (columnIndex != 5)
+			return false;
+		return true;
+    }
+
+}
+
+class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
+
+	private Session session;
+	private UUID roomId;
+	private TablesPanel panel;
+
+	private final static Logger logger = Logger.getLogger(UpdateTablesTask.class);
+
+	UpdateMatchesTask(Session session, UUID roomId, TablesPanel panel) {
+		this.session = session;
+		this.roomId = roomId;
+		this.panel = panel;
+	}
+
+	@Override
+	protected Void doInBackground() throws Exception {
+		while (!isCancelled()) {
+			Collection<MatchView> matches = session.getFinishedMatches(roomId);
+			if (matches != null) this.publish(matches);
+			Thread.sleep(5000);
+		}
+		return null;
+	}
+
+	@Override
+	protected void process(List<Collection<MatchView>> view) {
+		panel.updateMatches(view.get(0));
+	}
+	
+	@Override
+	protected void done() {
+		try {
+			get();
+		} catch (InterruptedException ex) {
+			logger.fatal("Update Matches Task error", ex);
+		} catch (ExecutionException ex) {
+			logger.fatal("Update Matches Task error", ex);
+		} catch (CancellationException ex) {}
+	}
+
+}
+
+class GameChooser extends JPopupMenu {
+
+	private Session session;
+
+	public void init(Session session) {
+		this.session = session;
+	}
+
+    public void show(List<UUID> games, Point p) {
+		if (p == null) return;
+		this.removeAll();
+		for (UUID gameId: games) {
+			this.add(new GameChooserAction(gameId, gameId.toString()));
+		}
+		this.show(MageFrame.getDesktop(), p.x, p.y);
+		GuiDisplayUtil.keepComponentInsideScreen(p.x, p.y, this);
+	}
+
+	private class GameChooserAction extends AbstractAction {
+
+		private UUID id;
+
+		public GameChooserAction(UUID id, String choice) {
+			this.id = id;
+			putValue(Action.NAME, choice);
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			session.replayGame(id);
+			setVisible(false);
+		}
+
 	}
 
 }

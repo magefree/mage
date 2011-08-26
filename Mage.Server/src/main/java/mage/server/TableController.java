@@ -377,9 +377,9 @@ public class TableController {
 				match.sideboard();
 				startGame(choosingPlayerId);
 			}
-			else {
-				GamesRoomManager.getInstance().removeTable(table.getId());
-			}
+//			else {
+//				GamesRoomManager.getInstance().removeTable(table.getId());
+//			}
 		} catch (GameException ex) {
 			logger.fatal(null, ex);
 		}

@@ -39,6 +39,7 @@ import mage.utils.MageVersion;
 import mage.view.DraftPickView;
 import mage.view.TableView;
 import mage.view.GameView;
+import mage.view.MatchView;
 import mage.view.TournamentView;
 import mage.view.UserView;
 
@@ -68,6 +69,7 @@ public interface MageServer {
 	public TableView getTable(UUID roomId, UUID tableId) throws MageException;
 	public List<TableView> getTables(UUID roomId) throws MageException;
 	public List<String> getConnectedPlayers(UUID roomId) throws MageException;
+    public List<MatchView> getFinishedMatches(UUID roomId) throws MageException;
 
 	//chat methods
 	public void sendChatMessage(UUID chatId, String userName, String message) throws MageException;
@@ -91,7 +93,6 @@ public interface MageServer {
 	public void sendPlayerBoolean(UUID gameId, String sessionId, Boolean data) throws MageException;
 	public void sendPlayerInteger(UUID gameId, String sessionId, Integer data) throws MageException;
 	public void concedeGame(UUID gameId, String sessionId) throws MageException;
-    
 
 	//tournament methods
 	public void startTournament(String sessionId, UUID roomId, UUID tableId) throws MageException;

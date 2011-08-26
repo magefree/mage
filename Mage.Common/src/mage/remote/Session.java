@@ -49,6 +49,7 @@ import mage.interfaces.callback.ClientCallback;
 import mage.utils.CompressUtil;
 import mage.view.DraftPickView;
 import mage.view.GameTypeView;
+import mage.view.MatchView;
 import mage.view.TableView;
 import mage.view.TournamentTypeView;
 import mage.view.TournamentView;
@@ -342,7 +343,6 @@ public class Session {
 	}
 
 	public Collection<TableView> getTables(UUID roomId) throws MageRemoteException {
-//		lock.readLock().lock();
 		try {
 			if (isConnected())
 				return server.getTables(roomId);
@@ -351,14 +351,24 @@ public class Session {
 			throw new MageRemoteException();
 		} catch (Throwable t) {
 			handleThrowable(t);		
-//		} finally {
-//			lock.readLock().unlock();
 		}
 		return null;
 	}
 
-	public Collection<String> getConnectedPlayers(UUID roomId) throws MageRemoteException {
-//		lock.readLock().lock();
+	public Collection<MatchView> getFinishedMatches(UUID roomId) throws MageRemoteException {
+		try {
+			if (isConnected())
+				return server.getFinishedMatches(roomId);
+		} catch (MageException ex) {
+			handleMageException(ex);
+			throw new MageRemoteException();
+		} catch (Throwable t) {
+			handleThrowable(t);		
+		}
+		return null;
+	}
+
+    public Collection<String> getConnectedPlayers(UUID roomId) throws MageRemoteException {
 		try {
 			if (isConnected())
 				return server.getConnectedPlayers(roomId);
@@ -367,8 +377,6 @@ public class Session {
 			throw new MageRemoteException();
 		} catch (Throwable t) {
 			handleThrowable(t);		
-//		} finally {
-//			lock.readLock().unlock();
 		}
 		return null;
 	}
