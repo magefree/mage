@@ -32,6 +32,7 @@ import mage.Constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
@@ -64,7 +65,8 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
-		if (event.getType() == EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)) {
+		if (event.getType() == EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)
+                && ((DamagedPlayerEvent) event).isCombatDamage()) {
             if (setTargetPointer) {
                 for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));

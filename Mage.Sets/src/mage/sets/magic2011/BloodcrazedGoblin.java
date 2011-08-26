@@ -31,23 +31,21 @@ package mage.sets.magic2011;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
-import mage.watchers.WatcherImpl;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @author North
  */
 public class BloodcrazedGoblin extends CardImpl<BloodcrazedGoblin> {
 
@@ -74,40 +72,33 @@ public class BloodcrazedGoblin extends CardImpl<BloodcrazedGoblin> {
 
 }
 
-class BloodcrazedGoblinEffect extends ReplacementEffectImpl<BloodcrazedGoblinEffect> {
+class BloodcrazedGoblinEffect extends RestrictionEffect<BloodcrazedGoblinEffect> {
 
-	public BloodcrazedGoblinEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.Benefit);
-		staticText = "{this} can't attack unless an opponent has been dealt damage this turn";
-	}
+    public BloodcrazedGoblinEffect() {
+        super(Duration.WhileOnBattlefield);
+        staticText = "{this} can't attack unless an opponent has been dealt damage this turn";
+    }
 
-	public BloodcrazedGoblinEffect(final BloodcrazedGoblinEffect effect) {
-		super(effect);
-	}
+    public BloodcrazedGoblinEffect(final BloodcrazedGoblinEffect effect) {
+        super(effect);
+    }
 
-	@Override
-	public BloodcrazedGoblinEffect copy() {
-		return new BloodcrazedGoblinEffect(this);
-	}
+    @Override
+    public BloodcrazedGoblinEffect copy() {
+        return new BloodcrazedGoblinEffect(this);
+    }
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		return true;
-	}
+    @Override
+    public boolean canAttack(Game game) {
+        return false;
+    }
 
-	@Override
-	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-		return true;
-	}
-
-	@Override
-	public boolean applies(GameEvent event, Ability source, Game game) {
-		if (event.getType() == EventType.DECLARE_ATTACKER && source.getSourceId().equals(event.getSourceId())) {
-			Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "DamagedOpponents");
-			if (watcher != null)
-				return !watcher.conditionMet();
-		}
-		return false;
-	}
-
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "DamagedOpponents");
+        if (watcher != null) {
+            return !watcher.conditionMet();
+        }
+        return false;
+    }
 }

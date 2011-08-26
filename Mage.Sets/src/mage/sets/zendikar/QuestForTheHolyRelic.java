@@ -31,7 +31,9 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastTriggeredAbility;
@@ -39,26 +41,23 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.sets.alarareborn.FiligreeAngel;
 import mage.target.Target;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author Loki, North
  */
 public class QuestForTheHolyRelic extends CardImpl<QuestForTheHolyRelic> {
-
 
     public QuestForTheHolyRelic(UUID ownerId) {
         super(ownerId, 33, "Quest for the Holy Relic", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
@@ -84,46 +83,48 @@ public class QuestForTheHolyRelic extends CardImpl<QuestForTheHolyRelic> {
     }
 }
 
-class QuestForTheHolyRelicEffect extends SearchLibraryPutInPlayEffect {
-    private static final FilterCard filter = new FilterCard("Equipment");
+class QuestForTheHolyRelicEffect extends OneShotEffect<QuestForTheHolyRelicEffect> {
 
-    static {
-        filter.getSubtype().add("Equipment");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+    public QuestForTheHolyRelicEffect() {
+        super(Outcome.PutCardInPlay);
+        this.staticText = "Search your library for an Equipment card, put it onto the battlefield, and attach it to a creature you control. Then shuffle your library";
     }
 
-    QuestForTheHolyRelicEffect() {
-        super(new TargetCardInLibrary(filter));
-        staticText = "Search your library for an Equipment card, put it onto the battlefield, and attach it to a creature you control. Then shuffle your library";
-    }
-
-    QuestForTheHolyRelicEffect(final QuestForTheHolyRelicEffect effect) {
+    public QuestForTheHolyRelicEffect(final QuestForTheHolyRelicEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null && super.apply(game, source)) {
-            Target target = new TargetControlledCreaturePermanent();
-            if (player.choose(Constants.Outcome.Benefit, target, game)) {
-                if (target.getTargets().size() > 0) {
-                    Permanent permanent = game.getPermanent(target.getTargets().get(0));
-                    Permanent sourceEquipment = null;
-                    if (super.getTargets().size() > 0) {
-                        sourceEquipment = game.getPermanent(super.getTargets().get(0));
-                    }
-                    if (permanent != null && sourceEquipment != null) {
-                        return permanent.addAttachment(sourceEquipment.getId(), game);
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     @Override
     public QuestForTheHolyRelicEffect copy() {
         return new QuestForTheHolyRelicEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
+        }
+
+        FilterCard filter = new FilterCard("Equipment");
+        filter.getSubtype().add("Equipment");
+        TargetCardInLibrary target = new TargetCardInLibrary(filter);
+        if (player.searchLibrary(target, game)) {
+            Card card = player.getLibrary().remove(target.getFirstTarget(), game);
+            if (card != null) {
+                card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
+                Permanent equipment = game.getPermanent(card.getId());
+
+                Target targetCreature = new TargetControlledCreaturePermanent();
+                if (equipment != null && player.choose(Outcome.BoostCreature, targetCreature, game)) {
+                    Permanent permanent = game.getPermanent(targetCreature.getFirstTarget());
+                    permanent.addAttachment(equipment.getId(), game);
+                }
+
+                player.shuffleLibrary(game);
+            }
+        }
+
+        return true;
     }
 }

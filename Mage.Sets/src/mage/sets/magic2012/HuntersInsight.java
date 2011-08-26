@@ -37,6 +37,7 @@ import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -86,7 +87,7 @@ class HuntersInsightTriggeredAbility extends TriggeredAbilityImpl<HuntersInsight
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if ((event.getType() == EventType.DAMAGED_PLAYER || event.getType() == EventType.DAMAGED_PLANESWALKER)
-                && event.getSourceId().equals(this.sourceId)) {
+                && event.getSourceId().equals(this.sourceId) && ((DamagedEvent) event).isCombatDamage()) {
             this.addEffect(new DrawCardControllerEffect(event.getAmount()));
             return true;
         }

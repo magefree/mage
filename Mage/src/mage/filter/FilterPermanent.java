@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.TargetController;
-import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 

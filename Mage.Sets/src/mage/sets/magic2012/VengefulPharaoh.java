@@ -40,6 +40,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -93,10 +94,11 @@ class VengefulPharaohTriggeredAbility extends TriggeredAbilityImpl<VengefulPhara
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if ((event.getType() == EventType.DAMAGED_PLAYER && event.getTargetId().equals(this.getControllerId()))) {
+        if ((event.getType() == EventType.DAMAGED_PLAYER && event.getTargetId().equals(this.getControllerId()))
+                && ((DamagedEvent) event).isCombatDamage()) {
             return true;
         }
-        if (event.getType() == EventType.DAMAGED_PLANESWALKER) {
+        if (event.getType() == EventType.DAMAGED_PLANESWALKER && ((DamagedEvent) event).isCombatDamage()) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && permanent.getControllerId().equals(this.getControllerId())) {
                 return true;

@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
 public class MustBlockSourceTargetEffect extends RequirementEffect<MustBlockSourceTargetEffect> {
 
 	public MustBlockSourceTargetEffect() {
-		this(Duration.WhileOnBattlefield);
+		this(Duration.EndOfTurn);
 	}
 
 	public MustBlockSourceTargetEffect(Duration duration) {
