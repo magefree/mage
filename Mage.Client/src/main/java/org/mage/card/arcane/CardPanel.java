@@ -89,7 +89,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     private boolean isFoil;
     private String zone;
 
-    public CardPanel(CardView newGameCard, UUID gameId, boolean loadImage, ActionCallback callback, final boolean foil) {
+    public CardPanel(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback, final boolean foil) {
         this.gameCard = newGameCard;
         this.callback = callback;
         this.gameId = gameId;
@@ -143,14 +143,12 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         String cardType = getType(newGameCard);
         popupText.setText(getText(cardType, newGameCard));
 
-        if (!loadImage) return;
-
         Util.threadPool.submit(new Runnable() {
             public void run() {
                 try {
                     tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
 					flippedAngle = isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
-					if (gameCard.isFaceDown()) return;
+					if (!loadImage || gameCard.isFaceDown()) return;
                     BufferedImage srcImage = ImageCache.getThumbnail(gameCard);
                     if (srcImage != null) {
                         hasImage = true;
