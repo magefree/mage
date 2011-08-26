@@ -87,7 +87,7 @@ class FlyingEffect extends RestrictionEffect<FlyingEffect> {
 	}
 
 	@Override
-	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Game game) {
+	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
 		if (blocker.getAbilities().containsKey(FlyingAbility.getInstance().getId()) || blocker.getAbilities().containsKey(ReachAbility.getInstance().getId()))
 			return true;
 		return false;

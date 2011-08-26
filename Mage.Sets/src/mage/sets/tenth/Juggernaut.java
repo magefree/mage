@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.effects.common.CantBlockSourceEffect;
@@ -101,7 +102,7 @@ class JuggernautEffect extends CantBlockSourceEffect {
 	}
 
 	@Override
-	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Game game) {
+	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
 		return !blocker.hasSubtype("Wall");
 	}
 

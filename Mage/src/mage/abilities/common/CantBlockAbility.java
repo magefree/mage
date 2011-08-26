@@ -61,7 +61,7 @@ class CantBlockEffect extends RestrictionEffect<CantBlockEffect> {
 	}
 
 	@Override
-	public boolean canBlock(Permanent attacker, Permanent blocker, Game game) {
+	public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
 		return !blocker.getAbilities().containsKey(CantBlockAbility.getInstance().getId());
 	}
 

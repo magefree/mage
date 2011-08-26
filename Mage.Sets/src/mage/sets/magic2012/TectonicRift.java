@@ -92,7 +92,7 @@ class TectonicRiftEffect extends RestrictionEffect<TectonicRiftEffect> {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return false;
     }
 

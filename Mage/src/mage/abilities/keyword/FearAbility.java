@@ -89,7 +89,7 @@ class FearEffect extends RestrictionEffect<FearEffect> {
 	}
 
 	@Override
-	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Game game) {
+	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
 		if (blocker.getCardType().contains(Constants.CardType.ARTIFACT) || blocker.getColor().isBlack()) {
 			return true;
         }

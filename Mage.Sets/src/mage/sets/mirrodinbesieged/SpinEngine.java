@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
  * 
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,89 +25,81 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.tenth;
+package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Pacifism extends CardImpl<Pacifism> {
+public class SpinEngine extends CardImpl<SpinEngine> {
 
-	public Pacifism(UUID ownerId) {
-		super(ownerId, 31, "Pacifism", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-		this.expansionSetCode = "10E";
-		this.color.setWhite(true);
-		this.subtype.add("Aura");
+	public SpinEngine(UUID ownerId) {
+		super(ownerId, 135, "Spin Engine", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+		this.expansionSetCode = "MBS";
+		this.subtype.add("Construct");
+		this.power = new MageInt(3);
+		this.toughness = new MageInt(1);
 
-		TargetPermanent auraTarget = new TargetCreaturePermanent();
-		this.getSpellAbility().addTarget(auraTarget);
-		this.getSpellAbility().addEffect(new AttachEffect(Outcome.Removal));
-		Ability ability = new EnchantAbility(auraTarget.getTargetName());
-		this.addAbility(ability);
-		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PacifismEffect()));
-
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpinEngineEffect(), new ManaCostsImpl("{R}"));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
 	}
 
-	public Pacifism(final Pacifism card) {
+	public SpinEngine(final SpinEngine card) {
 		super(card);
 	}
 
 	@Override
-	public Pacifism copy() {
-		return new Pacifism(this);
+	public SpinEngine copy() {
+		return new SpinEngine(this);
 	}
+
 }
 
-class PacifismEffect extends RestrictionEffect<PacifismEffect> {
+class SpinEngineEffect extends RestrictionEffect<SpinEngineEffect> {
 
-	public PacifismEffect() {
-		super(Duration.WhileOnBattlefield);
-		staticText = "Enchanted creature can't attack or block";
+	public SpinEngineEffect() {
+		super(Duration.EndOfTurn);
 	}
 
-	public PacifismEffect(final PacifismEffect effect) {
+	public SpinEngineEffect(final SpinEngineEffect effect) {
 		super(effect);
 	}
 
 	@Override
 	public boolean applies(Permanent permanent, Ability source, Game game) {
-		if (permanent.getAttachments().contains((source.getSourceId()))) {
+		if (permanent.getId().equals(source.getSourceId())) {
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public boolean canAttack(Game game) {
-		return false;
+	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+		UUID targetId = source.getFirstTarget();
+        if (targetId != null && blocker.getId().equals(targetId))
+            return false;
+        return true;
 	}
 
 	@Override
-	public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-		return false;
-	}
-
-	@Override
-	public PacifismEffect copy() {
-		return new PacifismEffect(this);
+	public SpinEngineEffect copy() {
+		return new SpinEngineEffect(this);
 	}
 
 }
