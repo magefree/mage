@@ -117,4 +117,8 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect<SearchLibraryPutI
 		staticText = sb.toString();
 	}
 
+    public List<UUID> getTargets() {
+        return target.getTargets();
+    }
+
 }
