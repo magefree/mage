@@ -101,6 +101,8 @@ public interface Player extends MageItem, Copyable<Player> {
 	public boolean hasLeft();
 	public ManaPool getManaPool();
 	public Set<UUID> getInRange();
+	public boolean isTopCardRevealed();
+	public void setTopCardRevealed(boolean topCardRevealed);
 
 	/**
 	 * Returns a set of players which turns under you control.

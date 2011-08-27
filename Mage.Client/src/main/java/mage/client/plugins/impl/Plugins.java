@@ -96,6 +96,8 @@ public class Plugins implements MagePlugins {
 			return new Card(card, bigCard, Config.dimensions, gameId);
 		}
 	}
+
+
 	
 	@Override
 	public boolean isCardPluginLoaded() {

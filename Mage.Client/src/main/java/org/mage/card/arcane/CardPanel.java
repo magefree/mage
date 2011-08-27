@@ -155,8 +155,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                         setText(gameCard);
                         setImage(srcImage);
                         setFoil(foil);
-                    } else {
-                        //log.warn("image wasn't found, card=" + gameCard.getName() + ", set=" + gameCard.getExpansionSetCode() + ", cid=" + gameCard.getCardNumber());
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -487,22 +485,25 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     }
 
     public void updateImage() {
-        if (!hasImage) {
-            throw new IllegalStateException("Not implemented");
-            //TODO:
-            /*Util.threadPool.submit(new Runnable() {
-                   public void run () {
-                       //BufferedImage srcImage = ImageCache.getImageOriginal(gameCard);
-                       //BufferedImage srcImage = null;
-                       //tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
-                       if (srcImage != null) {
-                           hasImage = true;
-                           setText(gameCard);
-                           setImage(srcImage, srcImage);
-                       }
-                   }
-               });*/
-        }
+        Util.threadPool.submit(new Runnable() {
+            public void run() {
+                try {
+                    tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
+					flippedAngle = isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
+					if (gameCard.isFaceDown()) return;
+                    BufferedImage srcImage = ImageCache.getThumbnail(gameCard);
+                    if (srcImage != null) {
+                        hasImage = true;
+                        setText(gameCard);
+                        setImage(srcImage);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } catch (Error err) {
+                    err.printStackTrace();
+                }
+            }
+        });
     }
 
     @Override
@@ -759,4 +760,10 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     public PermanentView getOriginalPermanent() {
         throw new IllegalStateException("Is not permanent.");
     }
+
+	@Override
+	public void updateCallback(ActionCallback callback, UUID gameId) {
+		this.callback = callback;
+		this.gameId = gameId;
+	}
 }

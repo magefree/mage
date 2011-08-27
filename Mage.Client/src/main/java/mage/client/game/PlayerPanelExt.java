@@ -34,12 +34,16 @@
 
 package mage.client.game;
 
+import mage.cards.MageCard;
+import mage.cards.action.ActionCallback;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.components.HoverButton;
 import mage.client.components.MageRoundPane;
 import mage.client.components.arcane.ManaSymbols;
 import mage.client.dialog.ShowCardsDialog;
+import mage.client.plugins.adapters.MageActionCallback;
+import mage.client.plugins.impl.Plugins;
 import mage.remote.Session;
 import mage.client.util.Command;
 import mage.client.util.Config;
@@ -47,8 +51,10 @@ import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.components.ImagePanel;
 import mage.sets.Sets;
+import mage.view.CardView;
 import mage.view.ManaPoolView;
 import mage.view.PlayerView;
+import org.mage.card.arcane.CardPanel;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -87,6 +93,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 	private static final Border redBorder = new LineBorder(Color.red, 2);
 	private static final Border emptyBorder = BorderFactory.createEmptyBorder(0,0,0,0);
 
+	private static final Dimension topCardDimension = new Dimension(40, 56);
+
     /** Creates new form PlayerPanel */
     public PlayerPanelExt(boolean me) {
         initComponents(me);
@@ -117,6 +125,25 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 			this.avatar.setBorder(emptyBorder);
 		}
 
+		synchronized (this) {
+			if (player.getTopCard() != null) {
+				if (topCard == null || !topCard.getId().equals(player.getTopCard().getId())) {
+					if (topCard == null) {
+						topCardPanel.setVisible(true);
+					}
+					topCard = player.getTopCard();
+					topCardPanel.update(topCard);
+					topCardPanel.updateImage();
+					ActionCallback callback = Plugins.getInstance().getActionCallback();
+					((MageActionCallback)callback).refreshSession();
+					topCardPanel.updateCallback(callback, gameId);
+				}
+			} else if (topCard != null) {
+				topCard = null;
+				topCardPanel.setVisible(false);
+			}
+		}
+
 		update(player.getManaPool());
 	}
 
@@ -140,7 +167,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 		setLayout(null);
 		setOpaque(false);
 
-		MageRoundPane panelBackground = new MageRoundPane();
+		panelBackground = new MageRoundPane();
 		panelBackground.setXOffset(3);
 		panelBackground.setYOffset(3);
         panelBackground.setLayout(null);
@@ -155,6 +182,10 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 			index += 2;
 		}
 		Image image = ImageHelper.getImageFromResources("/avatars/face" + index + ".jpg");
+
+		topCardPanel = Plugins.getInstance().getMageCard(new CardView(Sets.findCard("Forest")), bigCard, topCardDimension, gameId, true);
+		topCardPanel.setVisible(false);
+		panelBackground.add(topCardPanel);
 
 		// Avatar
 		BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
@@ -305,7 +336,10 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 	private ImagePanel hand;
 	private HoverButton grave;
 	private ImagePanel library;
+	private CardView topCard;
+	private MageCard topCardPanel;
 	private JButton cheat;
+	private MageRoundPane panelBackground;
 
 	private JLabel lifeLabel;
 	private JLabel handLabel;

@@ -145,6 +145,14 @@ public class CardView extends SimpleCardView {
         super(null, "", 0, false);
 	}
 
+	public CardView(boolean empty) {
+		super(null, "", 0, false);
+		if (!empty) {
+			throw new IllegalArgumentException("Not supported.");
+		}
+		fillEmpty();
+	}
+
     private void fillEmpty() {
 		this.name = "Face Down";
 		this.rules = new ArrayList<String>();

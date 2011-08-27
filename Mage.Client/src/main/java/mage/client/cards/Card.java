@@ -78,6 +78,7 @@ import mage.Constants.CardType;
 import mage.cards.CardDimensions;
 import mage.cards.MagePermanent;
 import mage.cards.TextPopup;
+import mage.cards.action.ActionCallback;
 import mage.client.MageFrame;
 import mage.client.game.PlayAreaPanel;
 import mage.remote.Session;
@@ -203,6 +204,10 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 		drawText();
 
 	    gSmall.dispose();
+	}
+
+	@Override
+	public void updateImage() {
 	}
 
 	protected String getText(String cardType) {
@@ -500,7 +505,12 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    @Override
+	@Override
+	public void updateCallback(ActionCallback callback, UUID gameId) {
+		//To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
 	public PermanentView getOriginalPermanent() {
 		return null;
 	}

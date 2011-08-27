@@ -1,9 +1,11 @@
 package mage.cards;
 
 import java.awt.Image;
+import java.util.UUID;
 
 import javax.swing.JPanel;
 
+import mage.cards.action.ActionCallback;
 import mage.view.CardView;
 
 public abstract class MageCard extends JPanel {
@@ -18,9 +20,11 @@ public abstract class MageCard extends JPanel {
 	abstract public CardView getOriginal();
 	abstract public void setCardBounds(int x, int y, int width, int height);
 	abstract public void update(CardView card);
+	abstract public void updateImage();
 	abstract public Image getImage();
     abstract public void setFoil(boolean foil);
     abstract public boolean isFoil();
     abstract public void setZone(String zone);
     abstract public String getZone();
+	abstract public void updateCallback(ActionCallback callback, UUID gameId);
 }
