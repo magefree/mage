@@ -50,7 +50,7 @@ import mage.game.Game;
  */
 public class SpireSerpent extends CardImpl<SpireSerpent> {
 
-    private static final String abilityText1 = "Metalcraft — As long as you control three or more artifacts, {this} gets +2/+2 and ";
+    private static final String abilityText1 = "Metalcraft - As long as you control three or more artifacts, {this} gets +2/+2 and ";
    
 	public SpireSerpent(UUID ownerId) {
 		super(ownerId, 32, "Spire Serpent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
