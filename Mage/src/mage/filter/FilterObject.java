@@ -46,7 +46,7 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 	protected Abilities<Ability> abilities;
 	protected boolean notAbilities;
 	protected List<CardType> cardType = new ArrayList<CardType>();
-	protected ComparisonScope scopeCardType = ComparisonScope.All;
+	protected ComparisonScope scopeCardType = ComparisonScope.Any;
 	protected List<CardType> notCardTypeList = new ArrayList<CardType>();
 	protected ComparisonScope notScopeCardType = ComparisonScope.Any;
 	protected boolean notCardType;
@@ -62,7 +62,7 @@ public class FilterObject<E extends MageObject, T extends FilterObject<E, T>> ex
 	protected ComparisonScope scopeSubtype = ComparisonScope.All;
 	protected boolean notSubtype;
 	protected List<String> supertype = new ArrayList<String>();
-	protected ComparisonScope scopeSupertype = ComparisonScope.All;
+	protected ComparisonScope scopeSupertype = ComparisonScope.Any;
 	protected boolean notSupertype;
 	protected int convertedManaCost;
 	protected ComparisonType convertedManaCostComparison;
