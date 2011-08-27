@@ -31,7 +31,6 @@ package mage.game.combat;
 import mage.Constants.Outcome;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.filter.common.FilterCreatureForAttack;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.game.Game;
@@ -52,7 +51,6 @@ import java.util.*;
 public class Combat implements Serializable, Copyable<Combat> {
 
 	private static FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
-	private static FilterCreatureForAttack filterAttackers = new FilterCreatureForAttack();
 	private static FilterCreatureForCombat filterBlockers = new FilterCreatureForCombat();
 
 	protected List<CombatGroup> groups = new ArrayList<CombatGroup>();
@@ -137,7 +135,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 
 	protected void checkAttackRequirements(Player player, Game game) {
 		//20101001 - 508.1d
-		for (Permanent creature : game.getBattlefield().getAllActivePermanents(filterAttackers, player.getId())) {
+		for (Permanent creature : player.getAvailableAttackers(game)) {
 			for (RequirementEffect effect : game.getContinuousEffects().getApplicableRequirementEffects(creature, game)) {
 				if (effect.mustAttack(game)) {
 					UUID defenderId = effect.mustAttackDefender(game.getContinuousEffects().getAbility(effect.getId()), game);

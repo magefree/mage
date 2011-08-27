@@ -48,6 +48,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import mage.Constants.AsThoughEffectType;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -668,8 +669,8 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 			if (!effect.canAttack(game))
 				return false;
 		}
-		if (abilities.containsKey(DefenderAbility.getInstance().getId()))
-			return false;
+        if (abilities.containsKey(DefenderAbility.getInstance().getId()) && !game.getContinuousEffects().asThough(this.objectId, AsThoughEffectType.ATTACK, game))
+            return false;
 		return true;
 	}
 

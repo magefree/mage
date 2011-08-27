@@ -28,80 +28,83 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.MetalcraftCondition;
+import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SpinEngine extends CardImpl<SpinEngine> {
+public class SpireSerpent extends CardImpl<SpireSerpent> {
 
-	public SpinEngine(UUID ownerId) {
-		super(ownerId, 135, "Spin Engine", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+    private static final String abilityText1 = "Metalcraft — As long as you control three or more artifacts, {this} gets +2/+2 and ";
+   
+	public SpireSerpent(UUID ownerId) {
+		super(ownerId, 32, "Spire Serpent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
 		this.expansionSetCode = "MBS";
-		this.subtype.add("Construct");
+		this.subtype.add("Serpent");
+		this.color.setBlue(true);
 		this.power = new MageInt(3);
-		this.toughness = new MageInt(1);
+		this.toughness = new MageInt(5);
 
-        // {R}: Target creature can't block Spin Engine this turn
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpinEngineEffect(), new ManaCostsImpl("{R}"));
-        ability.addTarget(new TargetCreaturePermanent());
+		this.addAbility(DefenderAbility.getInstance());
+        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), MetalcraftCondition.getInstance(), abilityText1);
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
+        ability.addEffect(new SpireSerpentEffect());
         this.addAbility(ability);
 	}
 
-	public SpinEngine(final SpinEngine card) {
+	public SpireSerpent(final SpireSerpent card) {
 		super(card);
 	}
 
 	@Override
-	public SpinEngine copy() {
-		return new SpinEngine(this);
+	public SpireSerpent copy() {
+		return new SpireSerpent(this);
 	}
 
 }
 
-class SpinEngineEffect extends RestrictionEffect<SpinEngineEffect> {
+class SpireSerpentEffect extends AsThoughEffectImpl<SpireSerpentEffect> {
 
-	public SpinEngineEffect() {
-		super(Duration.EndOfTurn);
-        staticText = "Target creature can't block {this} this turn";
+	public SpireSerpentEffect() {
+		super(Constants.AsThoughEffectType.ATTACK, Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+		staticText = "{this} can attack as though it didn't have defender";
 	}
 
-	public SpinEngineEffect(final SpinEngineEffect effect) {
+	public SpireSerpentEffect(final SpireSerpentEffect effect) {
 		super(effect);
 	}
 
 	@Override
-	public boolean applies(Permanent permanent, Ability source, Game game) {
-		if (permanent.getId().equals(source.getSourceId())) {
-			return true;
-		}
+	public boolean apply(Game game, Ability source) {
+		return true;
+	}
+
+	@Override
+	public SpireSerpentEffect copy() {
+		return new SpireSerpentEffect(this);
+	}
+
+	@Override
+	public boolean applies(UUID sourceId, Ability source, Game game) {
+        if (sourceId.equals(source.getSourceId()) && MetalcraftCondition.getInstance().apply(game, source)) {
+            return true;
+        }
 		return false;
-	}
-
-	@Override
-	public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-		UUID targetId = source.getFirstTarget();
-        if (targetId != null && blocker.getId().equals(targetId))
-            return false;
-        return true;
-	}
-
-	@Override
-	public SpinEngineEffect copy() {
-		return new SpinEngineEffect(this);
 	}
 
 }

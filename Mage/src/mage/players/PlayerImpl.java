@@ -32,6 +32,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -57,7 +58,6 @@ import mage.cards.decks.Deck;
 import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.filter.FilterAbility;
-import mage.filter.common.FilterCreatureForAttack;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
@@ -942,9 +942,13 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	@Override
 	public List<Permanent> getAvailableAttackers(Game game) {
-		FilterCreatureForAttack attackFilter = new FilterCreatureForAttack();
-		attackFilter.getControllerId().add(playerId);
-		List<Permanent> attackers = game.getBattlefield().getAllActivePermanents(attackFilter);
+		FilterCreatureForCombat filter = new FilterCreatureForCombat();
+		List<Permanent> attackers = game.getBattlefield().getAllActivePermanents(filter, playerId);
+		for (Iterator<Permanent> i = attackers.iterator(); i.hasNext();) {
+			Permanent entry = i.next();
+			if (!entry.canAttack(game))
+				i.remove();
+		}
 		return attackers;
 	}
 
