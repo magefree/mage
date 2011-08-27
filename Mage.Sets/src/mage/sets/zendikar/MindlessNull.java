@@ -89,7 +89,7 @@ class MindlessNullEffect extends RestrictionEffect<MindlessNullEffect> {
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Game game) {
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return false;
     }
 
