@@ -547,7 +547,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 			Target target = new TargetCreatureOrPlayer();
 			if (singleTargetName != null) target.setTargetName(singleTargetName);
 			choose(Outcome.Damage, target, game);
-			if (targets.size() == 0 || targets.contains(target.getFirstTarget())) {
+			if (targets.isEmpty() || targets.contains(target.getFirstTarget())) {
 				int damageAmount = getAmount(0, remainingDamage, "Select amount", game);
 				Permanent permanent = game.getPermanent(target.getFirstTarget());
 				if (permanent != null) {

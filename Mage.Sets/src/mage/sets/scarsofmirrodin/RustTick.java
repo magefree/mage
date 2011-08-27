@@ -40,15 +40,11 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
