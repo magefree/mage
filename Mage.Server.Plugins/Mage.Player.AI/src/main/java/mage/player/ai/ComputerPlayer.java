@@ -789,6 +789,9 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				target.addTarget(card.getId(), source, game);
 				cardChoices.remove(card);
 			}
+			if (outcome.equals(Outcome.Neutral) && target.getTargets().size() > target.getNumberOfTargets() + (target.getMaxNumberOfTargets() - target.getNumberOfTargets()) / 2) {
+				return true;
+			}
 		}
 		return true;
 	}
@@ -808,6 +811,9 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 			if (card != null) {
 				target.add(card.getId(), game);
 				cardChoices.remove(card);
+			}
+			if (outcome.equals(Outcome.Neutral) && target.getTargets().size() > target.getNumberOfTargets() + (target.getMaxNumberOfTargets() - target.getNumberOfTargets()) / 2) {
+				return true;
 			}
 		}
 		return true;

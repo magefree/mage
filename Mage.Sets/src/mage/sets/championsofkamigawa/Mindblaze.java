@@ -51,7 +51,6 @@ import mage.target.TargetPlayer;
 /**
  *
  * @author Loki
- * TODO: add normal chooser for int
  */
 public class Mindblaze extends CardImpl<Mindblaze> {
 
