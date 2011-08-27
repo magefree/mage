@@ -103,6 +103,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	protected boolean isGameUnderControl = true;
 	protected UUID turnController;
 	protected Set<UUID> playersUnderYourControl = new HashSet<UUID>();
+	protected boolean topCardRevealed = false;
 
 	@Override
 	public abstract T copy();
@@ -440,7 +441,20 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 			if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getId(), ability.getSourceId(), playerId))) {
 				int bookmark = game.bookmarkState();
 				card.cast(game, game.getZone(card.getId()), ability, playerId);
-				removeFromHand(card, game);
+
+				Zone zone = game.getZone(card.getId());
+				switch (zone) {
+					case HAND:
+						removeFromHand(card, game);
+						break;
+					case LIBRARY:
+						removeFromLibrary(card, game);
+						break;
+					case GRAVEYARD:
+						removeFromGraveyard(card, game);
+						break;
+				}
+
 				Ability spellAbility = game.getStack().getSpell(ability.getId()).getSpellAbility();
 				if (spellAbility.activate(game, noMana)) {
 					for (KickerAbility kicker: card.getAbilities().getKickerAbilities()) {
@@ -462,8 +476,20 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		//20091005 - 305.1
 		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), playerId))) {
 			int bookmark = game.bookmarkState();
-			removeFromHand(card, game);
-			if (card.putOntoBattlefield(game, Zone.HAND, null, playerId)) {
+			Zone zone = game.getZone(card.getId());
+			switch (zone) {
+				case HAND:
+					removeFromHand(card, game);
+					break;
+				case LIBRARY:
+					removeFromLibrary(card, game);
+					break;
+				case GRAVEYARD:
+					removeFromGraveyard(card, game);
+					break;
+			}
+
+			if (card.putOntoBattlefield(game, zone, null, playerId)) {
 				landsPlayed++;
 				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED, card.getId(), playerId));
 				game.fireInformEvent(name + " plays " + card.getName());
@@ -531,7 +557,11 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 			return true;
 		}
 		else if (ability instanceof PlayLandAbility) {
-			result = playLand(hand.get(ability.getSourceId(), game), game);
+			Card card = hand.get(ability.getSourceId(), game);
+			if (card == null) {
+				card = game.getCard(ability.getSourceId());
+			}
+			result = playLand(card, game);
 		}
 		else if (ability instanceof SpecialAction) {
 			result = specialAction((SpecialAction)ability.copy(), game);
@@ -1120,5 +1150,15 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	@Override
 	public void setTestMode(boolean value) {
 		this.isTestMode = value;
+	}
+
+	@Override
+	public boolean isTopCardRevealed() {
+		return topCardRevealed;
+	}
+
+	@Override
+	public void setTopCardRevealed(boolean topCardRevealed) {
+		this.topCardRevealed = topCardRevealed;
 	}
 }

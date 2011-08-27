@@ -35,6 +35,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import mage.Constants;
 import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
 import mage.Constants.TargetController;
@@ -351,12 +352,26 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 							break;
 						case GRAVEYARD:
 							useableAbilities = getUseableAbilities(object.getAbilities().getActivatedAbilities(Zone.GRAVEYARD), game);
+							playAsThoughInYourHand(game, object, useableAbilities);
+							break;
+						case LIBRARY:
+							useableAbilities = getUseableAbilities(object.getAbilities().getActivatedAbilities(Zone.LIBRARY), game);
+						    playAsThoughInYourHand(game, object, useableAbilities);
 							break;
 					}
 					if (useableAbilities != null && useableAbilities.size() > 0) {
 						activateAbility(useableAbilities, game);
 					}
 				}
+			}
+		}
+	}
+
+	// not sure it is the best to implement such stuff this way
+	private void playAsThoughInYourHand(Game game, MageObject object, Map<UUID, ActivatedAbility> useableAbilities) {
+		if (game.getContinuousEffects().asThough(object.getId(), Constants.AsThoughEffectType.CAST, game)) {
+			for (Map.Entry<UUID, ActivatedAbility> entry : getUseableAbilities(object.getAbilities().getActivatedAbilities(Zone.HAND), game).entrySet()) {
+				useableAbilities.put(entry.getKey(), entry.getValue());
 			}
 		}
 	}

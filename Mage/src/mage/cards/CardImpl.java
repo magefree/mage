@@ -278,6 +278,9 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 					case GRAVEYARD:
 						game.getPlayer(ownerId).removeFromGraveyard(this, game);
 						break;
+					case LIBRARY:
+						game.getPlayer(ownerId).removeFromLibrary(this, game);
+						break;
 					default:
 						//logger.warning("moveToZone, not fully implemented: from="+event.getFromZone() + ", to="+event.getToZone());
 				}
