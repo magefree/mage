@@ -318,6 +318,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 
 	protected void addActionsTimed(final FilterAbility filter) {
 		FutureTask<Integer> task = new FutureTask<Integer>(new Callable<Integer>() {
+			@Override
 			public Integer call() throws Exception
 			{
 				return addActions(root, filter, Integer.MIN_VALUE, Integer.MAX_VALUE);
@@ -329,8 +330,8 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 			task.get(maxThink, TimeUnit.SECONDS);
 			long endTime = System.nanoTime();
 			long duration = endTime - startTime;
-			logger.info("Calculated " + root.nodeCount + " nodes in " + duration/1000000000.0 + "s");
-			nodeCount += root.nodeCount;
+			logger.info("Calculated " + SimulationNode.nodeCount + " nodes in " + duration/1000000000.0 + "s");
+			nodeCount += SimulationNode.nodeCount;
 			thinkTime += duration;
 		} catch (TimeoutException e) {
 			logger.debug("simulating - timed out");
@@ -343,8 +344,8 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 			}
 			long endTime = System.nanoTime();
 			long duration = endTime - startTime;
-			logger.info("Timeout - Calculated " + root.nodeCount + " nodes in " + duration/1000000000.0 + "s");
-			nodeCount += root.nodeCount;
+			logger.info("Timeout - Calculated " + SimulationNode.nodeCount + " nodes in " + duration/1000000000.0 + "s");
+			nodeCount += SimulationNode.nodeCount;
 			thinkTime += duration;
 		} catch (ExecutionException e) {
 			logger.fatal("Simulation error", e);
@@ -506,7 +507,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 
 	@Override
 	public boolean choose(Outcome outcome, Choice choice, Game game) {
-		if (choices.size() == 0)
+		if (choices.isEmpty())
 			return super.choose(outcome, choice, game);
 		if (!choice.isChosen()) {
 			for (String achoice: choices) {
@@ -523,7 +524,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 
 	@Override
 	public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game)  {
-		if (targets.size() == 0)
+		if (targets.isEmpty())
 			return super.chooseTarget(outcome, cards, target, source, game);
 		if (!target.doneChosing()) {
 			for (UUID targetId: targets) {
@@ -540,7 +541,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 
 	@Override
 	public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game)  {
-		if (targets.size() == 0)
+		if (targets.isEmpty())
 			return super.choose(outcome, cards, target, game);
 		if (!target.doneChosing()) {
 			for (UUID targetId: targets) {

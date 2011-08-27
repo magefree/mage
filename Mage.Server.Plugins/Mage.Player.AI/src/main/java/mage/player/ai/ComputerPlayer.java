@@ -776,15 +776,18 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	@Override
 	public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game)  {
 		log.debug("chooseTarget");
+		if (cards != null && cards.isEmpty()) {
+			if (!target.isRequired())
+				return false;
+			return true;
+		}
+
+		ArrayList<Card> cardChoices = new ArrayList<Card>(cards.getCards(target.getFilter(), game));
 		while (!target.doneChosing()) {
-			if (cards.isEmpty()) {
-				if (!target.isRequired())
-					return false;
-				return true;
-			}
-			Card card = pickTarget(new ArrayList<Card>(cards.getCards(target.getFilter(), game)), outcome, target, source, game);
+			Card card = pickTarget(cardChoices, outcome, target, source, game);
 			if (card != null) {
 				target.addTarget(card.getId(), source, game);
+				cardChoices.remove(card);
 			}
 		}
 		return true;
@@ -794,17 +797,17 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game)  {
 		log.debug("choose");
 		if (cards != null && cards.isEmpty()) {
-			return false;
+			if (!target.isRequired())
+				return false;
+			return true;
 		}
+
+		ArrayList<Card> cardChoices = new ArrayList<Card>(cards.getCards(target.getFilter(), game));
 		while (!target.doneChosing()) {
-			if (cards.isEmpty()) {
-				if (!target.isRequired())
-					return false;
-				return true;
-			}
-			Card card = pickTarget(new ArrayList<Card>(cards.getCards(target.getFilter(), game)), outcome, target, null, game);
+			Card card = pickTarget(cardChoices, outcome, target, null, game);
 			if (card != null) {
 				target.add(card.getId(), game);
+				cardChoices.remove(card);
 			}
 		}
 		return true;
@@ -864,7 +867,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	public Mode chooseMode(Modes modes, Ability source, Game game) {
 		log.debug("chooseMode");
 		//TODO: improve this;
-		return modes.get(0);
+		return modes.values().iterator().next();
 	}
 	
 	@Override
@@ -1000,7 +1003,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	public Card pickBestCard(List<Card> cards, List<Constants.ColoredManaSymbol> chosenColors) {
-		if (cards.size() == 0) {
+		if (cards.isEmpty()) {
 			return null;
 		}
 		Card bestCard = null;
@@ -1016,7 +1019,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	}
 
 	public Card pickWorstCard(List<Card> cards, List<Constants.ColoredManaSymbol> chosenColors) {
-		if (cards.size() == 0) {
+		if (cards.isEmpty()) {
 			return null;
 		}
 		Card worstCard = null;
@@ -1033,7 +1036,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
 	@Override
 	public void pickCard(List<Card> cards, Deck deck, Draft draft) {
-		if (cards.size() == 0) {
+		if (cards.isEmpty()) {
 			throw new IllegalArgumentException("No cards to pick from.");
 		}
 		try {
@@ -1125,17 +1128,17 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 				}
 				// only two or three color decks are allowed
 				if (chosenSymbols.size() >  1 && chosenSymbols.size() < 4) {
-					List<Constants.ColoredManaSymbol> chosenColors = new ArrayList<Constants.ColoredManaSymbol>();
+					List<Constants.ColoredManaSymbol> colorsChosen = new ArrayList<Constants.ColoredManaSymbol>();
 					for (String symbol : chosenSymbols) {
 						Constants.ColoredManaSymbol manaSymbol = Constants.ColoredManaSymbol.lookup(symbol.charAt(0));
 						if (manaSymbol != null) {
-							chosenColors.add(manaSymbol);
+							colorsChosen.add(manaSymbol);
 						}
 					}
-					if (chosenColors.size() > 1) {
+					if (colorsChosen.size() > 1) {
 						// no need to remember picks anymore
 						pickedCards = null;
-						return chosenColors;
+						return colorsChosen;
 					}
 				}
 			}

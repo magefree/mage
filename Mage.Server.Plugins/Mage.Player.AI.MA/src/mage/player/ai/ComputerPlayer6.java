@@ -44,7 +44,6 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
 import mage.filter.FilterAbility;
-import mage.filter.common.FilterCreatureForAttack;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
@@ -56,7 +55,6 @@ import mage.game.turn.*;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
-import mage.util.Logging;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -365,6 +363,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
 	protected Integer addActionsTimed(final FilterAbility filter) {
 		FutureTask<Integer> task = new FutureTask<Integer>(new Callable<Integer>() {
+			@Override
 			public Integer call() throws Exception
 			{
 				return addActions(root, filter, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE);
@@ -552,7 +551,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
 	@Override
 	public boolean choose(Outcome outcome, Choice choice, Game game) {
-		if (choices.size() == 0)
+		if (choices.isEmpty())
 			return super.choose(outcome, choice, game);
 		if (!choice.isChosen()) {
 			for (String achoice: choices) {
@@ -569,7 +568,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
 	@Override
 	public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game)  {
-		if (targets.size() == 0)
+		if (targets.isEmpty())
 			return super.chooseTarget(outcome, cards, target, source, game);
 		if (!target.doneChosing()) {
 			for (UUID targetId: targets) {
@@ -586,7 +585,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
 	@Override
 	public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game)  {
-		if (targets.size() == 0)
+		if (targets.isEmpty())
 			return super.choose(outcome, cards, target, game);
 		if (!target.doneChosing()) {
 			for (UUID targetId: targets) {
