@@ -56,7 +56,7 @@ public class Putrefax extends CardImpl<Putrefax> {
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
         this.addAbility(InfectAbility.getInstance());
-        this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", new SacrificeSourceEffect()));
+        this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
     }
 
     public Putrefax (final Putrefax card) {

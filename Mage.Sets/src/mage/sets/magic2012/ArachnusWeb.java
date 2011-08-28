@@ -69,7 +69,7 @@ public class ArachnusWeb extends CardImpl<ArachnusWeb> {
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArachnusWebEffect1()));
         // At the beginning of the end step, if enchanted creature's power is 4 or greater, destroy Arachnus Web.
-        this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", new ArachnusWebEffect2()));
+        this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new ArachnusWebEffect2()));
     }
 
     public ArachnusWeb(final ArachnusWeb card) {

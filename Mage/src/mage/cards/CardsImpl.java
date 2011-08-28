@@ -94,6 +94,8 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
 	@Override
 	public void remove(Card card) {
+		if (card == null)
+			return;
 		this.remove(card.getId());
 	}
 

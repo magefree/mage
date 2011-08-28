@@ -203,7 +203,7 @@ class MimicVatCreateTokenEffect extends OneShotEffect<MimicVatCreateTokenEffect>
 				CardUtil.copyTo(token).from(card);
 
 				token.addAbility(HasteAbility.getInstance());
-				token.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", new SacrificeSourceEffect()));
+				token.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
 				token.putOntoBattlefield(game, source.getSourceId(), source.getControllerId());
 				return true;
 			}
