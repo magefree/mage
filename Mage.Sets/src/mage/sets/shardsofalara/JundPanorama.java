@@ -33,13 +33,15 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -49,11 +51,26 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class JundPanorama extends CardImpl<JundPanorama> {
 
+     private static final FilterCard filter = new FilterCard("a basic Swamp, Mountain, or Forest card");
+
+    static {
+        filter.getCardType().add(CardType.LAND);
+        filter.getSupertype().add("Basic");
+        filter.getSubtype().add("Swamp");
+        filter.getSubtype().add("Mountain");
+        filter.getSubtype().add("Forest");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+    }
+
 	public JundPanorama(UUID ownerId) {
 		super(ownerId, 225, "Jund Panorama", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
 		this.expansionSetCode = "ALA";
 		this.addAbility(new ColorlessManaAbility());
-		this.addAbility(new JundPanoramaAbility());
+		TargetCardInLibrary target = new TargetCardInLibrary(filter);
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay), new GenericManaCost(1));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
+        this.addAbility(ability);
 	}
 
 	public JundPanorama(final JundPanorama card) {
@@ -65,33 +82,4 @@ public class JundPanorama extends CardImpl<JundPanorama> {
 		return new JundPanorama(this);
 	}
 
-}
-
-class JundPanoramaAbility extends ActivatedAbilityImpl<JundPanoramaAbility> {
-
-    private static final FilterCard filter = new FilterCard("Swamp, Mountain, or Forest");
-    static {
-        filter.getName().add("Swamp");
-        filter.getName().add("Mountain");
-        filter.getName().add("Forest");
-    }
-	public JundPanoramaAbility() {
-		super(Zone.BATTLEFIELD, null);
-		addCost(new TapSourceCost());
-		addCost(new GenericManaCost(1));
-		addCost(new SacrificeSourceCost());
-		TargetCardInLibrary target = new TargetCardInLibrary(filter);
-		addEffect(new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay));
-	}
-
-	public JundPanoramaAbility(final JundPanoramaAbility ability) {
-		super(ability);
-	}
-
-	@Override
-	public JundPanoramaAbility copy() {
-		return new JundPanoramaAbility(this);
-	}
-
-	
 }
