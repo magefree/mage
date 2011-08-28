@@ -162,7 +162,7 @@ public class Main {
 				else
 					sessionName = session.getHost();
 				if (throwable instanceof ClientDisconnectedException) {					
-					SessionManager.getInstance().disconnect(client.getSessionId(), true);
+					SessionManager.getInstance().disconnect(client.getSessionId(), false);
 					logger.info("client disconnected - " + sessionName);
 				}
 				else {
