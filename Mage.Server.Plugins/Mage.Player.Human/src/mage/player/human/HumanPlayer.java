@@ -228,8 +228,13 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 						return true;
 					}
 				}
-			} else if (!target.isRequired()) {
-				return false;
+			} else {
+				if (target.getTargets().size() >= target.getNumberOfTargets()) {
+					return true;
+				}
+				if (!target.isRequired()) {
+					return false;
+				}
 			}
 		}
 		return false;
@@ -257,8 +262,13 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 						return true;
 					}
 				}
-			} else if (!target.isRequired()) {
-				return false;
+			} else {
+				if (target.getTargets().size() >= target.getNumberOfTargets()) {
+					return true;
+				}
+				if (!target.isRequired()) {
+					return false;
+				}
 			}
 		}
 		return false;
@@ -289,8 +299,13 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 						return true;
 					}
 				}
-			} else if (!required) {
-				return false;
+			} else {
+				if (target.getTargets().size() >= target.getNumberOfTargets()) {
+					return true;
+				}
+				if (!target.isRequired()) {
+					return false;
+				}
 			}
 		}
 		return false;
@@ -309,8 +324,13 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 						return true;
 					}
 				}
-			} else if (!target.isRequired()) {
-				return false;
+			} else {
+				if (target.getTargets().size() >= target.getNumberOfTargets()) {
+					return true;
+				}
+				if (!target.isRequired()) {
+					return false;
+				}
 			}
 		}
 		return false;
