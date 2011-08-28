@@ -27,9 +27,6 @@
  */
 package mage.sets.invasion;
 
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -46,6 +43,10 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -96,7 +97,8 @@ class FactOrFictionEffect extends OneShotEffect<FactOrFictionEffect> {
         }
 
         Cards cards = new CardsImpl(Zone.PICK);
-        for (int i = 0; i < 5; i++) {
+		int count = Math.min(player.getLibrary().size(), 5);
+        for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);
@@ -111,16 +113,17 @@ class FactOrFictionEffect extends OneShotEffect<FactOrFictionEffect> {
             TargetCard target = new TargetCard(0, cards.size(), Zone.PICK, new FilterCard("cards to put in the first pile"));
 
             Cards pile1 = new CardsImpl();
-            if (opponent.choose(Outcome.Neutral, cards, target, game)) {
-                List<UUID> targets = target.getTargets();
-                for (UUID targetId : targets) {
-                    Card card = cards.get(targetId, game);
-                    if (card != null) {
-                        pile1.add(card);
-                        cards.remove(card);
-                    }
-                }
-            }
+
+			while (opponent.choose(Outcome.Neutral, cards, target, game));
+
+			List<UUID> targets = target.getTargets();
+			for (UUID targetId : targets) {
+				Card card = cards.get(targetId, game);
+				if (card != null) {
+					pile1.add(card);
+					cards.remove(card);
+				}
+			}
 
             player.revealCards("Pile 1 (Fact or Fiction)", pile1, game);
             player.revealCards("Pile 2 (Fact or Fiction)", cards, game);
