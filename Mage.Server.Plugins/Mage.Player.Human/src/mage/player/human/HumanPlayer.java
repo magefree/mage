@@ -218,12 +218,15 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 				if (target instanceof TargetPermanent) {
 					if (((TargetPermanent)target).canTarget(playerId, response.getUUID(), null, game)) {
 						target.add(response.getUUID(), game);
+						if(target.doneChosing()){
+							return true;
+						}
+					}
+				} else if (target.canTarget(response.getUUID(), game)) {
+					target.add(response.getUUID(), game);
+					if(target.doneChosing()){
 						return true;
 					}
-				}
-				else if (target.canTarget(response.getUUID(), game)) {
-					target.add(response.getUUID(), game);
-					return true;
 				}
 			} else if (!target.isRequired()) {
 				return false;
@@ -244,12 +247,15 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 				if (target instanceof TargetPermanent) {
 					if (((TargetPermanent)target).canTarget(playerId, response.getUUID(), source, game)) {
 						target.addTarget(response.getUUID(), source, game);
+						if(target.doneChosing()){
+							return true;
+						}
+					}
+				} else if (target.canTarget(response.getUUID(), source, game)) {
+					target.addTarget(response.getUUID(), source, game);
+					if(target.doneChosing()){
 						return true;
 					}
-				}
-				else if (target.canTarget(response.getUUID(), source, game)) {
-					target.addTarget(response.getUUID(), source, game);
-					return true;
 				}
 			} else if (!target.isRequired()) {
 				return false;
@@ -279,7 +285,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 			if (response.getUUID() != null) {
 				if (target.canTarget(response.getUUID(), cards, game)) {
 					target.add(response.getUUID(), game);
-					return true;
+					if(target.doneChosing()){
+						return true;
+					}
 				}
 			} else if (!required) {
 				return false;
@@ -297,7 +305,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 			if (response.getUUID() != null) {
 				if (target.canTarget(response.getUUID(), cards, game)) {
 					target.addTarget(response.getUUID(), source, game);
-					return true;
+					if(target.doneChosing()){
+						return true;
+					}
 				}
 			} else if (!target.isRequired()) {
 				return false;
