@@ -16,7 +16,7 @@ public class Card implements Comparable<Card> {
     private Integer convertedManaCost;
     private String types;
     private List<String> cardText;
-    private String flavorText;
+    private List<String> flavorText;
     private String powerToughness;
     private String expansion;
     private String rarity;
@@ -45,9 +45,8 @@ public class Card implements Comparable<Card> {
         }
         cardText = new ArrayList<String>();
         cardText.addAll(Arrays.asList(split[5].split("\\$")));
-        if (split[6].length() > 0) {
-            flavorText = split[6];
-        }
+        flavorText = new ArrayList<String>();
+        flavorText.addAll(Arrays.asList(split[6].split("\\$")));
         if (split[7].length() > 0) {
             powerToughness = split[7];
         }
@@ -105,11 +104,11 @@ public class Card implements Comparable<Card> {
         this.expansion = expansion;
     }
 
-    public String getFlavorText() {
+    public List<String> getFlavorText() {
         return flavorText;
     }
 
-    public void setFlavorText(String flavorText) {
+    public void setFlavorText(List<String> flavorText) {
         this.flavorText = flavorText;
     }
 
@@ -182,7 +181,13 @@ public class Card implements Comparable<Card> {
             }
         }
         sb.append("|");
-        sb.append(flavorText != null ? flavorText : "").append("|");
+        for (int i = 0; i < flavorText.size(); i++) {
+            sb.append(flavorText.get(i));
+            if (i < flavorText.size() - 1) {
+                sb.append("$");
+            }
+        }
+        sb.append("|");
         sb.append(powerToughness != null ? powerToughness : "").append("|");
         sb.append(expansion).append("|");
         sb.append(rarity != null ? rarity : "").append("|");

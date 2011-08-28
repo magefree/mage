@@ -13,7 +13,7 @@ import org.jsoup.select.Elements;
 
 /**
  *
- * @author robert.biter
+ * @author North
  */
 public class CardParser extends Thread {
 
@@ -69,15 +69,19 @@ public class CardParser extends Thread {
             List<String> cardText = new ArrayList<String>();
             if (!select.isEmpty()) {
                 for (Element element : select) {
-                    cardText.add(element.html().trim().replace("<img src=\"/Handlers/Image.ashx?size=small&amp;name=", "{").replace("&amp;type=symbol", "}").replaceAll("\" alt=\"[\\d\\w\\s]+?\" align=\"absbottom\" />", "").replace("\n", ""));
+                    cardText.add(element.html().trim().replace("<img src=\"/Handlers/Image.ashx?size=small&amp;name=", "{").replace("&amp;type=symbol", "}").replaceAll("\" alt=\"[\\d\\w\\s]+?\" align=\"absbottom\" />", "").replace("\n", "").replace("&quot;", "\""));
                 }
             }
             card.setCardText(cardText);
 
-            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_FlavorText .cardtextbox i");
+            select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_FlavorText .cardtextbox");
+            List<String> flavorText = new ArrayList<String>();
             if (!select.isEmpty()) {
-                card.setFlavorText(select.get(0).text().trim());
+                for (Element element : select) {
+                    flavorText.add(element.html().trim().replace("&quot;", "\""));
+                }
             }
+            card.setFlavorText(flavorText);
 
             select = doc.select("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ptRow .value");
             if (!select.isEmpty()) {
@@ -147,7 +151,22 @@ public class CardParser extends Thread {
         }
 
         if (card.getCardNumber() == null) {
-            System.out.println("Card number missing: " + card.getName());
+            Elements select = doc.select("p a:contains(" + card.getExpansion() + ")");
+            if (!select.isEmpty()) {
+                Matcher matcher = patternUrl.matcher(select.get(0).attr("href"));
+                matcher.find();
+                card.setCardNumber(matcher.group());
+            } else {
+                select = doc.select("p b:contains(#)");
+                if (!select.isEmpty()) {
+                    Matcher matcher = patternPrint.matcher(select.get(0).html());
+                    matcher.find();
+                    card.setCardNumber(matcher.group());
+                }
+            }
+            if (card.getCardNumber() == null) {
+                System.out.println("Card number missing: " + card.getName());
+            }
         }
         CardsList.add(card);
         return true;
