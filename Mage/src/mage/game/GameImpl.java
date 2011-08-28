@@ -844,8 +844,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 	}
 
 	@Override
-	public void fireSelectTargetEvent(UUID playerId, String message, Cards cards, boolean required) {
-		playerQueryEventSource.target(playerId, message, cards, required);
+	public void fireSelectTargetEvent(UUID playerId, String message, Cards cards, boolean required, Map<String, Serializable> options) {
+		playerQueryEventSource.target(playerId, message, cards, required, options);
 	}
 
 	@Override

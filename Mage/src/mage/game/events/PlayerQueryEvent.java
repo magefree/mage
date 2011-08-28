@@ -144,8 +144,8 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 		return new PlayerQueryEvent(playerId, message, null, null, targets, null, QueryType.PICK_TARGET, 0, 0, required, options);
 	}
 
-	public static PlayerQueryEvent targetEvent(UUID playerId, String message, Cards cards, boolean required) {
-		return new PlayerQueryEvent(playerId, message, null, null, null, cards, QueryType.PICK_TARGET, 0, 0, required);
+	public static PlayerQueryEvent targetEvent(UUID playerId, String message, Cards cards, boolean required, Map<String, Serializable> options) {
+		return new PlayerQueryEvent(playerId, message, null, null, null, cards, QueryType.PICK_TARGET, 0, 0, required, options);
 	}
 
 	public static PlayerQueryEvent targetEvent(UUID playerId, String message, TriggeredAbilities abilities, boolean required) {

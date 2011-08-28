@@ -77,8 +77,8 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
 		dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, targets, required, options));
 	}
 
-	public void target(UUID playerId, String message, Cards cards, boolean required) {
-		dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, cards, required));
+	public void target(UUID playerId, String message, Cards cards, boolean required, Map<String, Serializable> options) {
+		dispatcher.fireEvent(PlayerQueryEvent.targetEvent(playerId, message, cards, required, options));
 	}
 
 	public void target(UUID playerId, String message, Cards cards) {

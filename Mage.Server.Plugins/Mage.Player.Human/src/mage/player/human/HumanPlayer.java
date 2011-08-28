@@ -238,7 +238,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 		while (!abort) {
 			game.fireSelectTargetEvent(playerId, target.getMessage(),
 					target.possibleTargets(source==null?null:source.getId(), playerId, game),
-					target.isRequired(), target.getNumberOfTargets() != target.getMaxNumberOfTargets() ? staticOptions : null);
+					target.isRequired(), getOptions(target));
 			waitForResponse();
 			if (response.getUUID() != null) {
 				if (target instanceof TargetPermanent) {
@@ -258,6 +258,10 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 		return false;
 	}
 
+	private Map getOptions(Target target) {
+		return target.getNumberOfTargets() != target.getMaxNumberOfTargets() ? staticOptions : null;
+	}
+
 	@Override
 	public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
 		game.getState().setPriorityPlayerId(getId());
@@ -270,7 +274,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 				int count = cards.count(target.getFilter(), game);
 				if (count == 0) required = false;
 			}
-			game.fireSelectTargetEvent(playerId, target.getMessage(), cards, required);
+			game.fireSelectTargetEvent(playerId, target.getMessage(), cards, required, getOptions(target));
 			waitForResponse();
 			if (response.getUUID() != null) {
 				if (target.canTarget(response.getUUID(), cards, game)) {
@@ -288,7 +292,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
 		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
-			game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired());
+			game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired(), null);
 			waitForResponse();
 			if (response.getUUID() != null) {
 				if (target.canTarget(response.getUUID(), cards, game)) {
