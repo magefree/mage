@@ -440,20 +440,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		if (card != null) {
 			if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CAST_SPELL, ability.getId(), ability.getSourceId(), playerId))) {
 				int bookmark = game.bookmarkState();
-				card.cast(game, game.getZone(card.getId()), ability, playerId);
 
-				Zone zone = game.getZone(card.getId());
-				switch (zone) {
-					case HAND:
-						removeFromHand(card, game);
-						break;
-					case LIBRARY:
-						removeFromLibrary(card, game);
-						break;
-					case GRAVEYARD:
-						removeFromGraveyard(card, game);
-						break;
-				}
+				card.cast(game, game.getZone(card.getId()), ability, playerId);
 
 				Ability spellAbility = game.getStack().getSpell(ability.getId()).getSpellAbility();
 				if (spellAbility.activate(game, noMana)) {

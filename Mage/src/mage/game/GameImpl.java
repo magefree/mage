@@ -1172,6 +1172,15 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		}
 	}
 
+	@Override
+	public boolean endTurn(UUID playerId) {
+		if (!getActivePlayerId().equals(playerId)) {
+			return false;
+		}
+		getTurn().endTurn(this, getActivePlayerId());
+		return true;
+	}
+
     @Override
     public Date getStartTime() {
         return startTime;

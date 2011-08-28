@@ -35,6 +35,7 @@ import java.util.UUID;
 import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -124,6 +125,8 @@ public class Turn implements Serializable {
 					playExtraPhases(game, phase.getType());
 				}
 			}
+			if (!currentPhase.equals(phase)) // phase was changed from the card
+				break;
 		}
 		//20091005 - 500.7
 		playExtraTurns(game);
@@ -171,6 +174,30 @@ public class Turn implements Serializable {
 		while (game.getState().getTurnMods().extraTurn(activePlayerId)) {
 			this.play(game, activePlayerId);
 		}
+	}
+
+	public void endTurn(Game game, UUID activePlayerId) {
+		// Exile all spells and abilities on the stack
+		game.getStack().clear();
+
+		// Discard down to your maximum hand size.
+		Player activePlayer = game.getPlayer(activePlayerId);
+		game.getState().setPriorityPlayerId(activePlayer.getId());
+		//20091005 - 514.1
+		if (!activePlayer.hasLeft() && !activePlayer.hasLost()) {
+			activePlayer.discardToMax(game);
+			activePlayer.setGameUnderYourControl(true);
+		}
+
+		// Damage wears off.
+		//20100423 - 514.2
+		game.getBattlefield().endOfTurn(activePlayerId, game);
+		game.getState().removeEotEffects(game);
+
+		Phase phase = new EndPhase();
+		phase.setStep(new CleanupStep());
+   		currentPhase = phase;
+		//phase.play(game, activePlayerId);
 	}
 
 	public Turn copy() {

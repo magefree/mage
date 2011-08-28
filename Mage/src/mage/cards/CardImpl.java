@@ -278,6 +278,9 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 					case GRAVEYARD:
 						game.getPlayer(ownerId).removeFromGraveyard(this, game);
 						break;
+					case HAND:
+						game.getPlayer(ownerId).removeFromHand(this, game);
+						break;
 					case LIBRARY:
 						game.getPlayer(ownerId).removeFromLibrary(this, game);
 						break;

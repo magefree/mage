@@ -154,6 +154,7 @@ public interface Game extends MageItem, Serializable {
 	public void applyEffects();
 	public boolean checkStateAndTriggered();
 	public void playPriority(UUID activePlayerId);
+	public boolean endTurn(UUID playerId);
 
 	//game transaction methods
 	public void saveState();
