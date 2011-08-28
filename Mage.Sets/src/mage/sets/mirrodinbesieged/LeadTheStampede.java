@@ -95,7 +95,8 @@ class LeadTheStampedeEffect extends OneShotEffect<LeadTheStampedeEffect> {
 
         Cards cards = new CardsImpl(Zone.PICK);
         int creatureCardsFound = 0;
-        for (int i = 0; i < 5; i++) {
+        int count = Math.min(player.getLibrary().size(), 5);
+        for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);

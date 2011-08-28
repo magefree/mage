@@ -104,15 +104,17 @@ class SarkhanTheMadRevealAndDrawEffect extends OneShotEffect<SarkhanTheMadReveal
 	@Override
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getControllerId());
-		Card card = player.getLibrary().removeFromTop(game);
-		Permanent permanent = game.getPermanent(source.getSourceId());
-		if (card != null) {
-			card.moveToZone(Zone.HAND, source.getId(), game, false);
-			permanent.damage(card.getManaCost().convertedManaCost(), this.getId(), game, false, false);
-			Cards cards = new CardsImpl();
-			cards.add(card);
-			player.revealCards("Sarkhan the Mad", cards, game);
-			return true;
+		if (player != null && player.getLibrary().size() > 0) {
+			Card card = player.getLibrary().removeFromTop(game);
+			Permanent permanent = game.getPermanent(source.getSourceId());
+			if (card != null) {
+				card.moveToZone(Zone.HAND, source.getId(), game, false);
+				permanent.damage(card.getManaCost().convertedManaCost(), this.getId(), game, false, false);
+				Cards cards = new CardsImpl();
+				cards.add(card);
+				player.revealCards("Sarkhan the Mad", cards, game);
+				return true;
+			}
 		}
 		return false;
 	}

@@ -102,7 +102,8 @@ class MitoticManipulationEffect extends OneShotEffect<MitoticManipulationEffect>
 
         Cards cards = new CardsImpl(Zone.PICK);
         Cards cardsFound = new CardsImpl(Zone.PICK);
-        for (int i = 0; i < 7; i++) {
+        int count = Math.min(player.getLibrary().size(), 7);
+        for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);

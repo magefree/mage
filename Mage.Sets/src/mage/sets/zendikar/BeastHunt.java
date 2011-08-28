@@ -85,7 +85,8 @@ class BeastHuntEffect extends OneShotEffect<BeastHuntEffect> {
         }
 
         Cards cards = new CardsImpl();
-        for (int i = 0; i < 3; i++) {
+        int count = Math.min(player.getLibrary().size(), 3);
+        for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);

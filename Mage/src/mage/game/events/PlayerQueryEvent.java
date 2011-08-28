@@ -33,7 +33,6 @@ import java.util.*;
 
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
-import mage.abilities.Modes;
 import mage.abilities.TriggeredAbilities;
 import mage.cards.Card;
 import mage.cards.Cards;

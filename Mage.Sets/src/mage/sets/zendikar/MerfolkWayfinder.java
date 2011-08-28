@@ -101,7 +101,8 @@ class MerfolkWayfinderEffect extends OneShotEffect<MerfolkWayfinderEffect> {
 
         Cards cards = new CardsImpl(Zone.PICK);
         Cards cardsToReveal = new CardsImpl();
-        for (int i = 0; i < 3; i++) {
+        int count = Math.min(player.getLibrary().size(), 3);
+        for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);
             cardsToReveal.add(card);
             if (card != null) {

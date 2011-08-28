@@ -103,7 +103,7 @@ class SphinxOfUthuunEffect extends OneShotEffect<SphinxOfUthuunEffect> {
         }
 
         Cards cards = new CardsImpl(Zone.PICK);
-		int count = Math.min(player.getLibrary().size(), 5);
+        int count = Math.min(player.getLibrary().size(), 5);
         for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
@@ -119,19 +119,18 @@ class SphinxOfUthuunEffect extends OneShotEffect<SphinxOfUthuunEffect> {
             TargetCard target = new TargetCard(0, cards.size(), Zone.PICK, new FilterCard("cards to put in the first pile"));
 
             Cards pile1 = new CardsImpl();
+            if (opponent.choose(Outcome.Neutral, cards, target, game)) {
+                List<UUID> targets = target.getTargets();
+                for (UUID targetId : targets) {
+                    Card card = cards.get(targetId, game);
+                    if (card != null) {
+                        pile1.add(card);
+                        cards.remove(card);
+                    }
+                }
+            }
 
-			while (opponent.choose(Outcome.Neutral, cards, target, game));
-
-			List<UUID> targets = target.getTargets();
-			for (UUID targetId : targets) {
-				Card card = cards.get(targetId, game);
-				if (card != null) {
-					pile1.add(card);
-					cards.remove(card);
-				}
-			}
-
-			player.revealCards("Pile 1 (Sphinx of Uthuun)", pile1, game);
+            player.revealCards("Pile 1 (Sphinx of Uthuun)", pile1, game);
             player.revealCards("Pile 2 (Sphinx of Uthuun)", cards, game);
 
             Choice choice = new ChoiceImpl(true);

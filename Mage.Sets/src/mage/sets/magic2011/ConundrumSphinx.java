@@ -28,7 +28,6 @@
 
 package mage.sets.magic2011;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
@@ -94,19 +93,20 @@ class ConundrumSphinxEffect extends OneShotEffect<ConundrumSphinxEffect> {
 		Choice cardChoice = new ChoiceImpl();
 		cardChoice.setChoices(Sets.getCardNames());
 		for (Player player: game.getPlayers().values()) {
-			cardChoice.clearChoice();
-			player.choose(Outcome.DrawCard, cardChoice, game);
-			Card card = player.getLibrary().removeFromTop(game);
-			Cards cards  = new CardsImpl();
-			cards.add(card);
-			player.revealCards("Conundrum Sphinx", cards, game);
-			if (card.getName().equals(cardChoice.getChoice())) {
-				card.moveToZone(Zone.HAND, source.getId(), game, true);
+			if(player.getLibrary().size() > 0){
+				cardChoice.clearChoice();
+				player.choose(Outcome.DrawCard, cardChoice, game);
+				Card card = player.getLibrary().removeFromTop(game);
+				Cards cards  = new CardsImpl();
+				cards.add(card);
+				player.revealCards("Conundrum Sphinx", cards, game);
+				if (card.getName().equals(cardChoice.getChoice())) {
+					card.moveToZone(Zone.HAND, source.getId(), game, true);
+				}
+				else {
+					card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+				}
 			}
-			else {
-				card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
-			}
-
 		}
 		return true;
 	}

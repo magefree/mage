@@ -79,20 +79,22 @@ class DarkTutelageEffect extends OneShotEffect<DarkTutelageEffect> {
 		super(effect);
 	}
 
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-		Card card = player.getLibrary().removeFromTop(game);
-		if (card != null) {
-			card.moveToZone(Zone.HAND, source.getId(), game, false);
-			player.loseLife(card.getManaCost().convertedManaCost(), game);
-			Cards cards = new CardsImpl();
-			cards.add(card);
-			player.revealCards("Dark Tutelage", cards, game);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null && player.getLibrary().size() > 0) {
+            Card card = player.getLibrary().removeFromTop(game);
+            if (card != null) {
+                card.moveToZone(Zone.HAND, source.getId(), game, false);
+                player.loseLife(card.getManaCost().convertedManaCost(), game);
+                Cards cards = new CardsImpl();
+                cards.add(card);
+                player.revealCards("Dark Tutelage", cards, game);
+                return true;
+            }
+        }
+        return false;
+    }
 
 	@Override
 	public DarkTutelageEffect copy() {

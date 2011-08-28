@@ -84,6 +84,7 @@ class GenesisWaveEffect extends OneShotEffect<GenesisWaveEffect> {
 		Player player = game.getPlayer(source.getControllerId());
 		Cards cards = new CardsImpl(Zone.PICK);
         int count = source.getManaCostsToPay().getX();
+		count = Math.min(player.getLibrary().size(), count);
 		for (int i = 0; i < count; i++) {
 			Card card = player.getLibrary().removeFromTop(game);
 			cards.add(card);

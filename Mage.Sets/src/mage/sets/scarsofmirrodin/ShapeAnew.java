@@ -28,7 +28,6 @@
 
 package mage.sets.scarsofmirrodin;
 
-import java.util.List;
 import java.util.UUID;
 
 import mage.Constants;
@@ -41,11 +40,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
@@ -55,7 +51,7 @@ import mage.target.TargetPermanent;
  */
 public class ShapeAnew extends CardImpl<ShapeAnew> {
 
-	private static FilterPermanent filter = new FilterPermanent("an artifact");
+	private static final FilterPermanent filter = new FilterPermanent("an artifact");
 
 	static {
 		filter.getCardType().add(CardType.ARTIFACT);

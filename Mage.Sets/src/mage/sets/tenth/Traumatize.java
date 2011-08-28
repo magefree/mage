@@ -68,7 +68,7 @@ public class Traumatize extends CardImpl<Traumatize> {
 class TraumatizeEffect extends OneShotEffect<TraumatizeEffect> {
 
 	public TraumatizeEffect() {
-		super(Outcome.GainLife);
+		super(Outcome.Detriment);
 		staticText = "Target player puts the top half of his or her library, rounded down, into his or her graveyard";
 	}
 

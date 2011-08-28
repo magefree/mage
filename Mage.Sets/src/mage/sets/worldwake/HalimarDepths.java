@@ -89,7 +89,8 @@ class HalimarDepthsEffect extends OneShotEffect<HalimarDepthsEffect> {
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getControllerId());
 		Cards cards = new CardsImpl(Zone.PICK);
-		for (int i = 0; i < 3; i++) {
+		int count = Math.min(player.getLibrary().size(), 3);
+		for (int i = 0; i < count; i++) {
 			Card card = player.getLibrary().removeFromTop(game);
 			cards.add(card);
 			game.setZone(card.getId(), Zone.PICK);

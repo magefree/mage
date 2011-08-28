@@ -120,7 +120,8 @@ class TezzeretAgentOfBolasEffect1 extends OneShotEffect<TezzeretAgentOfBolasEffe
 
         Cards cards = new CardsImpl(Zone.PICK);
         boolean artifactFound = false;
-        for (int i = 0; i < 5; i++) {
+        int count = Math.min(player.getLibrary().size(), 5);
+        for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);

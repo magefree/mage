@@ -27,10 +27,7 @@
  */
 package mage.sets.newphyrexia;
 
-import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
@@ -117,43 +114,34 @@ class SurgicalExtractionEffect extends OneShotEffect<SurgicalExtractionEffect> {
                 if (cardsCount > 0) {
                     filter.setMessage("card named " + card.getName() + " in the graveyard of " + targetPlayer.getName());
                     TargetCardInGraveyard target = new TargetCardInGraveyard(0, cardsCount, filter);
-
-					while (target.canChoose(player.getId(), game)) {
-						if (!player.choose(Outcome.Exile, targetPlayer.getGraveyard(), target, game)) {
-							break;
-						}
-					}
-
-					for (UUID targetId : target.getTargets()) {
-						Card targetCard = targetPlayer.getGraveyard().get(targetId, game);
-						if (targetCard != null) {
-							targetPlayer.getGraveyard().remove(targetCard);
-							targetCard.moveToZone(Zone.EXILED, source.getId(), game, false);
-						}
-					}
-				}
+                    if (player.choose(Outcome.Exile, targetPlayer.getGraveyard(), target, game)) {
+                        List<UUID> targets = target.getTargets();
+                        for (UUID targetId : targets) {
+                            Card targetCard = targetPlayer.getGraveyard().get(targetId, game);
+                            if (targetCard != null) {
+                                targetPlayer.getGraveyard().remove(targetCard);
+                                targetCard.moveToZone(Zone.EXILED, source.getId(), game, false);
+                            }
+                        }
+                    }
+                }
 
                 // cards in Hand
                 cardsCount = targetPlayer.getHand().count(filter, game);
                 if (cardsCount > 0) {
                     filter.setMessage("card named " + card.getName() + " in the hand of " + targetPlayer.getName());
                     TargetCardInHand target = new TargetCardInHand(0, cardsCount, filter);
-
-					while (target.canChoose(player.getId(), game)) {
-						if (!player.choose(Outcome.Exile, targetPlayer.getHand(), target, game)) {
-							break;
-						}
-					}
-
-					for (UUID targetId : target.getTargets()) {
-						Card targetCard = targetPlayer.getHand().get(targetId, game);
-						if (targetCard != null) {
-							targetPlayer.getHand().remove(targetCard);
-							targetCard.moveToZone(Zone.EXILED, source.getId(), game, false);
-						}
-					}
-
-				} else {
+                    if (player.choose(Outcome.Exile, targetPlayer.getHand(), target, game)) {
+                        List<UUID> targets = target.getTargets();
+                        for (UUID targetId : targets) {
+                            Card targetCard = targetPlayer.getHand().get(targetId, game);
+                            if (targetCard != null) {
+                                targetPlayer.getHand().remove(targetCard);
+                                targetCard.moveToZone(Zone.EXILED, source.getId(), game, false);
+                            }
+                        }
+                    }
+                } else {
                     player.lookAtCards(targetPlayer.getName() + " hand", targetPlayer.getHand(), game);
                 }
 
@@ -162,19 +150,15 @@ class SurgicalExtractionEffect extends OneShotEffect<SurgicalExtractionEffect> {
                 if (cardsCount > 0) {
                     filter.setMessage("card named " + card.getName() + " in the library of " + targetPlayer.getName());
                     TargetCardInLibrary target = new TargetCardInLibrary(0, cardsCount, filter);
-
-					while (target.canChoose(player.getId(), game)) {
-						if (!player.choose(Outcome.Exile, cardsInLibrary, target, game)) {
-							break;
-						}
-					}
-
-					for (UUID targetId : target.getTargets()) {
-						Card targetCard = targetPlayer.getLibrary().remove(targetId, game);
-						if (targetCard != null) {
-							targetCard.moveToZone(Zone.EXILED, source.getId(), game, false);
-						}
-					}
+                    if (player.choose(Outcome.Exile, cardsInLibrary, target, game)) {
+                        List<UUID> targets = target.getTargets();
+                        for (UUID targetId : targets) {
+                            Card targetCard = targetPlayer.getLibrary().remove(targetId, game);
+                            if (targetCard != null) {
+                                targetCard.moveToZone(Zone.EXILED, source.getId(), game, false);
+                            }
+                        }
+                    }
                 } else {
                     player.lookAtCards(targetPlayer.getName() + " library", cardsInLibrary, game);
                 }
