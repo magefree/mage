@@ -87,7 +87,7 @@ class MoltenPsycheEffect extends OneShotEffect<MoltenPsycheEffect> {
 			if (player != null) {
 				int count = player.getHand().size();
 				player.getLibrary().addAll(player.getHand().getCards(game), game);
-				player.getLibrary().shuffle();
+				player.shuffleLibrary(game);
 				player.getHand().clear();
 				player.drawCards(count, game);
 				if (MetalcraftCondition.getInstance().apply(game, source) && !playerId.equals(source.getControllerId())) {

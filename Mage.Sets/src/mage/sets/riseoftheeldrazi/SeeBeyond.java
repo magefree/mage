@@ -91,7 +91,7 @@ class SeeBeyondEffect extends OneShotEffect<SeeBeyondEffect> {
 			if (card != null) {
 				player.removeFromHand(card, game);
 				card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
-				player.getLibrary().shuffle();
+				player.shuffleLibrary(game);
 				return true;
 			}
 		}

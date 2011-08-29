@@ -106,7 +106,7 @@ public class ShapeAnew extends CardImpl<ShapeAnew> {
 			player.revealCards("Shape Anew", revealed, game);
 			artifactCard.putOntoBattlefield(game, Constants.Zone.LIBRARY, source.getId(), controller.getId());
 			player.getLibrary().addAll(nonArtifactCards.getCards(game), game);
-			player.getLibrary().shuffle();
+			player.shuffleLibrary(game);
 			return true;
 		}
 

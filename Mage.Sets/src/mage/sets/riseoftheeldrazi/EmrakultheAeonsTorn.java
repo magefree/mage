@@ -139,7 +139,7 @@ class EmrakultheAeonsTornEffect extends OneShotEffect<EmrakultheAeonsTornEffect>
             /*permanent.moveToZone(Zone.LIBRARY, source.getId(), game, true);*/
             player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
             player.getGraveyard().clear();
-            player.getLibrary().shuffle();
+            player.shuffleLibrary(game);
             return true;
         }
         return false;

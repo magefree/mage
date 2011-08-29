@@ -82,7 +82,7 @@ class TimeReversalEffect extends OneShotEffect<TimeReversalEffect> {
 			if (player != null) {
 				player.getLibrary().addAll(player.getHand().getCards(game), game);
 				player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
-				player.getLibrary().shuffle();
+				player.shuffleLibrary(game);
 				player.getHand().clear();
 				player.getGraveyard().clear();
 				player.drawCards(7, game);
