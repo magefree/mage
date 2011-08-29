@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.Iterator;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
@@ -77,17 +78,22 @@ public class DestroyMultiTargetEffect extends OneShotEffect<DestroyMultiTargetEf
 		return affectedTargets > 0;
 	}
 
-	@Override
-	public String getText(Mode mode) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Destroy ");
-		for (Target target: mode.getTargets()) {
-			if (target.getNumberOfTargets() > 1)
-				sb.append(target.getNumberOfTargets());
-			sb.append("target ").append(target.getTargetName()).append(" and ");
-		}
-		return sb.toString();
- 	}
+    @Override
+    public String getText(Mode mode) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Destroy ");
 
-	
+        Iterator<Target> iterator = mode.getTargets().iterator();
+        while (iterator.hasNext()) {
+            Target target = iterator.next();
+            if (target.getNumberOfTargets() > 1) {
+                sb.append(target.getNumberOfTargets()).append(" ");
+            }
+            sb.append("target ").append(target.getTargetName());
+            if (iterator.hasNext()) {
+                sb.append(" and ");
+            }
+        }
+        return sb.toString();
+    }
 }

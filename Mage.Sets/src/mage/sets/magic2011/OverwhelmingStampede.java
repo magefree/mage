@@ -114,7 +114,7 @@ class OverwhelmingStampedeEffect extends ContinuousEffectImpl<OverwhelmingStampe
 
 	@Override
 	public boolean hasLayer(Layer layer) {
-		return layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
+		return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.PTChangingEffects_7;
 	}
 
 }

@@ -61,6 +61,19 @@ public interface Card extends MageObject {
 	public boolean isFaceDown();
 
 	public void assignNewId();
+    /**
+     * Moves the card to the specified zone
+     * @param zone
+     * @param sourceId
+     * @param game
+     * @param flag If zone
+     * <ul>
+     * <li>LIBRARY: <ul><li>true - put on top</li><li>false - put on bottom</li></ul></li>
+     * <li>BATTLEFIELD: <ul><li>true - tapped</li><li>false - untapped</li></ul></li>
+     * <li>GRAVEYARD: <ul><li>true - not from Battlefield</li><li>false - from Battlefield</li></ul></li>
+     * </ul>
+     * @return true if cards was moved to zone
+     */
 	public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag);
 	public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game);
 	public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId);
