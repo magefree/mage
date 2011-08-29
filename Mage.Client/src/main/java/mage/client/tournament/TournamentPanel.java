@@ -113,6 +113,8 @@ public class TournamentPanel extends javax.swing.JPanel {
 	}
 
 	public void hideTournament() {
+		stopTasks();
+		this.chatPanel1.disconnect();
 		Component c = this.getParent();
 		while (c != null && !(c instanceof TournamentPane)) {
 			c = c.getParent();

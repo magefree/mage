@@ -169,6 +169,14 @@ public class User {
 	}
 	
 	private void reconnect() {
+		for (Entry<UUID, Table> entry: tables.entrySet()) {
+            joinedTable(entry.getValue().getRoomId(), entry.getValue().getId(), entry.getValue().isTournament());
+		}
+		for (Entry<UUID, TournamentSession> entry: tournamentSessions.entrySet()) {
+			tournamentStarted(entry.getValue().getTournamentId(), entry.getKey());
+			entry.getValue().init();
+			entry.getValue().update();
+		}
 		for (Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
 			gameStarted(entry.getValue().getGameId(), entry.getKey());
 			entry.getValue().init();
@@ -178,14 +186,6 @@ public class User {
 			draftStarted(entry.getValue().getDraftId(), entry.getKey());
 			entry.getValue().init();
 			entry.getValue().update();
-		}
-		for (Entry<UUID, TournamentSession> entry: tournamentSessions.entrySet()) {
-			tournamentStarted(entry.getValue().getTournamentId(), entry.getKey());
-			entry.getValue().init();
-			entry.getValue().update();
-		}
-		for (Entry<UUID, Table> entry: tables.entrySet()) {
-            joinedTable(entry.getValue().getRoomId(), entry.getValue().getId(), entry.getValue().isTournament());
 		}
 	}
 

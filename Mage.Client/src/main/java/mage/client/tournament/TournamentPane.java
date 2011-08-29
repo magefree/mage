@@ -54,6 +54,10 @@ public class TournamentPane extends MagePane {
 		this.repaint();
 	}
 
+    public void hideTournament() {
+        tournamentPanel.hideTournament();
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

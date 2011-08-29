@@ -29,6 +29,7 @@
 package mage.game.events;
 
 import java.util.UUID;
+import mage.Constants.Zone;
 
 /**
  *
@@ -43,6 +44,7 @@ public class GameEvent {
 	protected int amount;
 	protected boolean flag;
 	protected String data;
+    protected Zone zone;
 
 	public enum EventType {
 
@@ -182,4 +184,12 @@ public class GameEvent {
 	public void setData(String data) {
 		this.data = data;
 	}
+    
+    public Zone getZone() {
+        return zone;
+    }
+    
+    public void setZone(Zone zone) {
+        this.zone = zone;
+    }
 }

@@ -24,7 +24,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="tournamentPanel" alignment="0" pref="526" max="32767" attributes="0"/>
+          <Component id="tournamentPanel" alignment="0" pref="530" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
