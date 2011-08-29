@@ -33,9 +33,15 @@ import mage.server.RoomImpl;
 import mage.game.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import mage.Constants.TableState;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
@@ -53,30 +59,57 @@ import org.apache.log4j.Logger;
 public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
 	private final static Logger logger = Logger.getLogger(GamesRoomImpl.class);
-
+    
+	private static ScheduledExecutorService updateExecutor = Executors.newSingleThreadScheduledExecutor();
+    private static List<TableView> tableView = new ArrayList<TableView>();
+    private static List<MatchView> matchView = new ArrayList<MatchView>();
+    
 	private ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<UUID, Table>();
 
-	@Override
+	public GamesRoomImpl() {
+		updateExecutor.scheduleAtFixedRate(new Runnable() {
+			@Override
+			public void run() {
+				updateTables();
+                updateFinished();
+			}
+		}, 2, 2, TimeUnit.SECONDS);
+	}
+
+    @Override
 	public List<TableView> getTables() {
+		return tableView;
+	}
+
+	private void updateTables() {
 		ArrayList<TableView> tableList = new ArrayList<TableView>();
 		for (Table table: tables.values()) {
             if (table.getState() != TableState.FINISHED)
                 tableList.add(new TableView(table));
 		}
-		return tableList;
+		tableView = tableList;
 	}
-
+    
     @Override
     public List<MatchView> getFinished() {
-		ArrayList<MatchView> matchList = new ArrayList<MatchView>();
-		for (Table table: tables.values()) {
-            if (table.getState() == TableState.FINISHED)
-                matchList.add(new MatchView(table.getMatch()));
-		}
-		return matchList;
+		return matchView;
     }
 
-	@Override
+    private void updateFinished() {
+		ArrayList<MatchView> matchList = new ArrayList<MatchView>();
+        List<Table> t = new ArrayList<Table>(tables.values());
+        Collections.sort(t, new TimestampSorter());
+		for (Table table: t) {
+            if (table.getState() == TableState.FINISHED) {
+                matchList.add(new MatchView(table.getMatch()));
+                if (matchList.size() >= 50)
+                    break;
+            }
+		}
+		matchView = matchList;
+    }
+
+    @Override
 	public boolean joinTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException {
 		if (tables.containsKey(tableId)) {
 			return TableManager.getInstance().joinTable(userId, tableId, name, playerType, skill, deckList);
@@ -137,4 +170,11 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 		return TableManager.getInstance().watchTable(userId, tableId);
 	}
 
+}
+
+class TimestampSorter implements Comparator<Table> {
+	@Override
+	public int compare(Table one, Table two) {
+		return one.getCreateTime().compareTo(two.getCreateTime());
+	}
 }
