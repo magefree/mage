@@ -39,7 +39,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactCard;
-import mage.target.TargetCard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
 
@@ -59,7 +59,7 @@ public class SalvageScout extends CardImpl<SalvageScout> {
 		this.toughness = new MageInt(1);
 
 		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{W}"));
-		ability.addTarget(new TargetCard(Zone.GRAVEYARD, FilterArtifactCard.getDefault()));
+		ability.addTarget(new TargetCardInYourGraveyard(FilterArtifactCard.getDefault()));
 		ability.addCost(new SacrificeSourceCost());
 		this.addAbility(ability);
 	}
