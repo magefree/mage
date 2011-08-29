@@ -128,6 +128,11 @@ public class Combat implements Serializable, Copyable<Combat> {
 			//20101001 - 508.1d
 			checkAttackRequirements(player, game);
 			player.selectAttackers(game);
+            for (CombatGroup group: groups) {
+                for (UUID attacker: group.getAttackers()) {
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ATTACKER_DECLARED, group.defenderId, attacker, attackerId));
+                }
+            }
 			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackerId, attackerId));
 			game.fireInformEvent(player.getName() + " attacks with " + groups.size() + " creatures");
 		}
@@ -388,6 +393,35 @@ public class Combat implements Serializable, Copyable<Combat> {
 		}
 	}
 
+    public void removeAttacker(UUID attackerId, Game game) {
+		for (CombatGroup group : groups) {
+            if (group.attackers.contains(attackerId)) {
+                group.attackers.remove(attackerId);
+                Permanent creature = game.getPermanent(attackerId);
+                if (creature != null) {
+                    creature.setAttacking(false);
+                    creature.setTapped(false);
+                }
+                if (group.attackers.isEmpty()) {
+                    groups.remove(group);
+                }
+                return;
+            }
+        }
+    }
+
+    public void removeBlocker(UUID blockerId, Game game) {
+		for (CombatGroup group : groups) {
+            if (group.blockers.contains(blockerId)) {
+                group.blockers.remove(blockerId);
+                Permanent creature = game.getPermanent(blockerId);
+                if (creature != null)
+                    creature.setBlocking(0);
+                return;
+            }
+        }
+    }
+     
 	@Override
 	public Combat copy() {
 		return new Combat(this);

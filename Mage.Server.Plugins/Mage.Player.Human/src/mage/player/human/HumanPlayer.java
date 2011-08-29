@@ -60,6 +60,8 @@ import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.filter.common.FilterAttackingCreature;
+import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.game.Game;
 import mage.game.draft.Draft;
@@ -74,7 +76,6 @@ import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetCreatureOrPlayer;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetDefender;
 
 
@@ -87,6 +88,8 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	private final transient PlayerResponse response = new PlayerResponse();
 
 	protected static FilterCreatureForCombat filter = new FilterCreatureForCombat();
+    protected static FilterAttackingCreature filterAttack = new FilterAttackingCreature();
+    protected static FilterBlockingCreature filterBlock = new FilterBlockingCreature();
 	protected static Choice replacementEffectChoice = new ChoiceImpl(true);
 	private static Map<String, Serializable> staticOptions = new HashMap<String, Serializable>();
 
@@ -95,7 +98,6 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 		replacementEffectChoice.setMessage("Choose replacement effect");
 		staticOptions.put("UI.right.btn.text", "Done");
 	}
-	protected transient TargetCreaturePermanent targetCombat = new TargetCreaturePermanent(filter);
 
 	public HumanPlayer(String name, RangeOfInfluence range, int skill) {
 		super(name, range);
@@ -498,16 +500,22 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	public void selectAttackers(Game game) {
 		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
-			targetCombat.getTargets().clear();
 			game.fireSelectEvent(playerId, "Select attackers");
 			waitForResponse();
 			if (response.getBoolean() != null) {
 				return;
 			} else if (response.getUUID() != null) {
-				if (targetCombat.canTarget(playerId, response.getUUID(), null, game)) {
-					selectDefender(game.getCombat().getDefenders(), response.getUUID(), game);
-				}
-			}
+                Permanent attacker = game.getPermanent(response.getUUID());
+                if (attacker != null) {
+                    if (filter.match(attacker, null, playerId, game)) {
+                        selectDefender(game.getCombat().getDefenders(), attacker.getId(), game);
+                    }
+                    else if (filterAttack.match(attacker, null, playerId, game) && game.getStack().isEmpty()) {
+                        if (game.getState().getTriggered().isEmpty() && game.getState().getDelayed().isEmpty())
+                            game.getCombat().removeAttacker(attacker.getId(), game);
+                    }
+                }
+ 			}
 		}
 	}
 
@@ -530,15 +538,21 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 	public void selectBlockers(Game game) {
 		game.getState().setPriorityPlayerId(getId());
 		while (!abort) {
-			targetCombat.getTargets().clear();
 			game.fireSelectEvent(playerId, "Select blockers");
 			waitForResponse();
 			if (response.getBoolean() != null) {
 				return;
 			} else if (response.getUUID() != null) {
-				if (targetCombat.canTarget(playerId, response.getUUID(), null, game)) {
-					selectCombatGroup(response.getUUID(), game);
-				}
+                Permanent blocker = game.getPermanent(response.getUUID());
+                if (blocker != null) {
+                    if (filter.match(blocker, null, playerId, game)) {
+                        selectCombatGroup(blocker.getId(), game);
+                    }
+                    else if (filterBlock.match(blocker, null, playerId, game) && game.getStack().isEmpty()) {
+                        if (game.getState().getTriggered().isEmpty() && game.getState().getDelayed().isEmpty())
+                            game.getCombat().removeBlocker(blocker.getId(), game);
+                    }
+                }
 			}
 		}
 	}

@@ -914,7 +914,6 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		if (attacker != null && attacker.canAttack(game)) {
 			if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER, defenderId, attackerId, playerId))) {
 				game.getCombat().declareAttacker(attackerId, defenderId, game);
-				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ATTACKER_DECLARED, defenderId, attackerId, playerId));
 			}
 		}
 	}

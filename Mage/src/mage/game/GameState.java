@@ -389,6 +389,10 @@ public class GameState implements Serializable, Copyable<GameState> {
 		return this.triggers;
 	}
 
+    public DelayedTriggeredAbilities getDelayed() {
+        return this.delayed;
+    }
+    
 	public ContinuousEffects getContinuousEffects() {
 		return effects;
 	}
