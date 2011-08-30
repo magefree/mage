@@ -103,6 +103,13 @@ public class Exile implements Serializable, Copyable<Exile> {
 		return null;
 	}
 
+    public void removeCard(Card card, Game game) {
+		for (ExileZone exile: exileZones.values()) {
+			if (exile.contains(card.getId()))
+				exile.remove(card);
+		}
+    }
+    
 	@Override
 	public Exile copy() {
 		return new Exile(this);
