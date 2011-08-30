@@ -1,30 +1,32 @@
-Tenth Edition|tenth|
-Magic 2010|magic2010|
-Magic 2011|magic2011|
-Magic 2012|magic2012|
-Planechase|planechase|
-Duel Decks: Elspeth vs. Tezzeret|elspethvstezzeret|
-Tempest|tempest|
-Invasion|invasion|
-Planeshift|planeshift|
-Apocalypse|apocalypse|
-Mirrodin|mirrodin|
-Darksteel|darksteel|
-Fifth Dawn|fifthdawn|
-Champions of Kamigawa|championsofkamigawa|
-Ravnica: City of Guilds|ravnika|
-Guildpact|guildpact|
-Dissension|dissension|
-Lorwyn|lorwyn|
-Morningtide|morningtide|
-Shadowmoor|shadowmoor|
-Eventide|eventide|
-Shards of Alara|shardsofalara|
-Conflux|conflux|
-Alara Reborn|alarareborn|
-Zendikar|zendikar|
-Worldwake|worldwake|
-Rise of the Eldrazi|riseoftheeldrazi|
-Scars of Mirrodin|scarsofmirrodin|
-Mirrodin Besieged|mirrodinbesieged|
-New Phyrexia|newphyrexia|
+Tenth Edition|tenth|10E|
+Magic 2010|magic2010|M10|
+Magic 2011|magic2011|M11|
+Magic 2012|magic2012|M12|
+Planechase|planechase|HOP|
+Duel Decks: Elspeth vs. Tezzeret|elspethvstezzeret|DDF|
+Tempest|tempest|TMP|
+Invasion|invasion|INV|
+Planeshift|planeshift|PLS|
+Apocalypse|apocalypse|APC|
+Mirrodin|mirrodin|MRD|
+Darksteel|darksteel|DST|
+Fifth Dawn|fifthdawn|5DN|
+Champions of Kamigawa|championsofkamigawa|CHK|
+Ravnica: City of Guilds|ravnika|RAV|
+Guildpact|guildpact|GPT|
+Dissension|dissension|DIS|
+Lorwyn|lorwyn|LRW|
+Morningtide|morningtide|MOR|
+Shadowmoor|shadowmoor|SHM|
+Eventide|eventide|EVE|
+Shards of Alara|shardsofalara|ALA|
+Conflux|conflux|CON|
+Alara Reborn|alarareborn|ARB|
+Zendikar|zendikar|ZEN|
+Worldwake|worldwake|WWK|
+Rise of the Eldrazi|riseoftheeldrazi|ROE|
+Scars of Mirrodin|scarsofmirrodin|SOM|
+Mirrodin Besieged|mirrodinbesieged|MBS|
+New Phyrexia|newphyrexia|NPH|
+Innistrad|innistrad|ISD|
+Dark Ascension|darkascension|DKA|

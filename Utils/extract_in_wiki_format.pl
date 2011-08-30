@@ -2,11 +2,21 @@
 
 use strict;
 
-open CARDS, "< added_cards.txt" or die;
+my $knownSetsFile = 'known-sets.txt';
 
 my $cards_count = 0;
 
+my %knownSets;
 my %cards;
+
+open (DATA, $knownSetsFile) || die "can't open $knownSetsFile";
+while(my $line = <DATA>) {
+    my @data = split('\\|', $line);
+    $knownSets{$data[1]}= $data[2];
+}
+close(DATA);
+
+open CARDS, "< added_cards.txt" or die;
 
 while (<CARDS>) {
 	my $line = $_;
@@ -23,9 +33,13 @@ while (<CARDS>) {
 }
 
 open REPORT, "> added_cards_in_wiki_format.txt";
-print REPORT "Added cards ($cards_count):\n";
+print REPORT " * Added cards ($cards_count):\n";
 foreach my $set (keys(%cards)) {
-	print REPORT " $set: ";
+	if (exists $knownSets{$set}) {
+		print REPORT "   * $knownSets{$set}: ";
+	} else {
+		print REPORT " $set: ";
+	}
 	foreach my $card (@{$cards{$set}}) {
 		print REPORT $card . ", ";
 	}
