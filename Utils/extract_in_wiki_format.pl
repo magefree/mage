@@ -35,13 +35,22 @@ while (<CARDS>) {
 open REPORT, "> added_cards_in_wiki_format.txt";
 print REPORT " * Added cards ($cards_count):\n";
 foreach my $set (keys(%cards)) {
-	if (exists $knownSets{$set}) {
-		print REPORT "   * $knownSets{$set}: ";
-	} else {
-		print REPORT " $set: ";
+    if ($set ne "tokens") {
+		if (exists $knownSets{$set}) {
+			print REPORT "   * $knownSets{$set}: ";
+		} else {
+			print REPORT " $set: ";
+		}
+		my $first = 1;
+		foreach my $card (@{$cards{$set}}) {
+			if ($first == 0) { print REPORT ","; }
+			$card =~ s/([A-Z]{1}[a-z]+)/ $1/g;
+			$card =~ s/A Ether/ AEther/g;
+			print REPORT $card;
+			$first = 0;
+		}
+		print REPORT "\n";
 	}
-	foreach my $card (@{$cards{$set}}) {
-		print REPORT $card . ", ";
-	}
-	print REPORT "\n";
 }
+
+close REPORT;
