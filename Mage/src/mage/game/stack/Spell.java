@@ -52,6 +52,7 @@ import mage.watchers.Watchers;
 
 import java.util.List;
 import java.util.UUID;
+import mage.game.events.ZoneChangeEvent;
 import mage.watchers.Watcher;
 
 /**
@@ -338,8 +339,23 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
 	@Override
 	public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
-		throw new UnsupportedOperationException("Unsupported operation");
-	}
+		ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), sourceId, this.getOwnerId(), Zone.STACK, Zone.EXILED);
+		if (!game.replaceEvent(event)) {
+            game.getStack().remove(this);
+			game.rememberLKI(this.getId(), event.getFromZone(), this);
+			
+			if (exileId == null) {
+				game.getExile().getPermanentExile().add(this.card);
+			}
+			else {
+				game.getExile().createZone(exileId, name).add(this.card);
+			}
+			game.setZone(this.card.getId(), event.getToZone());
+			game.fireEvent(event);
+			return event.getToZone() == Zone.EXILED;
+		}
+		return false;
+    }
 
 	@Override
 	public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId) {
