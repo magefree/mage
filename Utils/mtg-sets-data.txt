@@ -39,6 +39,7 @@ Guildpact|GPT|
 Homelands|HML|
 Planechase|HOP|
 Ice Age|ICE|
+Innistrad|ISD|
 Invasion|INV|
 Judgment|JUD|
 Limited Edition Alpha|LEA|
