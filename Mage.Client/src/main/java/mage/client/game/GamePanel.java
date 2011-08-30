@@ -34,6 +34,7 @@
 
 package mage.client.game;
 
+import java.util.logging.Level;
 import mage.Constants;
 import mage.client.MageFrame;
 import mage.client.cards.Cards;
@@ -60,6 +61,7 @@ import java.awt.event.MouseEvent;
 import java.io.Serializable;
 import java.util.*;
 import java.util.prefs.Preferences;
+import mage.client.components.MageComponents;
 
 /**
  *
@@ -164,6 +166,12 @@ public class GamePanel extends javax.swing.JPanel {
 		for (ShowCardsDialog reveal: revealed.values()) {
 			reveal.hideDialog();
 		}
+        try {
+            Component popupContainer = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
+            popupContainer.setVisible(false);
+        } catch (InterruptedException ex) {
+            logger.fatal("popupContainer error:", ex);
+        }
 	}
 
 	public synchronized void showGame(UUID gameId, UUID playerId) {
