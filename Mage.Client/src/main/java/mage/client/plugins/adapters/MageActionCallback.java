@@ -152,7 +152,7 @@ public class MageActionCallback implements ActionCallback {
                 public void run() {
                     ThreadUtils.sleep(700);
 
-                    if (!popupCard.equals(data.card)) {
+                    if (popupCard == null || !popupCard.equals(data.card)) {
                         return;
                     }
 
