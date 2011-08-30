@@ -81,9 +81,12 @@ public class ExileTargetEffect extends OneShotEffect<ExileTargetEffect> {
         return false;
 	}
 
-	@Override
-	public String getText(Mode mode) {
-		return "Exile target " + mode.getTargets().get(0).getTargetName();
-	}
-
+    @Override
+    public String getText(Mode mode) {
+        if (mode.getTargets().isEmpty()) {
+            return "Exile it";
+        } else {
+            return "Exile target " + mode.getTargets().get(0).getTargetName();
+        }
+    }
 }

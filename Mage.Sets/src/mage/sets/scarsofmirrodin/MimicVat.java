@@ -31,26 +31,25 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
+import mage.sets.tokens.EmptyToken;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-import mage.sets.tokens.EmptyToken;
 
 import java.util.UUID;
 
@@ -102,10 +101,10 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl<MimicVatTriggeredAbi
 		if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
 
 			// make sure card is on battlefield
-			UUID sourceId = getSourceId();
-			if (game.getPermanent(sourceId) == null) {
+			UUID sourceCardId = getSourceId();
+			if (game.getPermanent(sourceCardId) == null) {
 				// or it is being removed
-				if (game.getLastKnownInformation(sourceId, Constants.Zone.BATTLEFIELD) == null) {
+				if (game.getLastKnownInformation(sourceCardId, Constants.Zone.BATTLEFIELD) == null) {
 					return false;
 				}
 			}
@@ -133,8 +132,6 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl<MimicVatTriggeredAbi
 }
 
 class MimicVatEffect extends OneShotEffect<MimicVatEffect> {
-
-	private static FilterCard filter = new FilterNonlandCard();
 
 	public MimicVatEffect() {
 		super(Constants.Outcome.Benefit);
@@ -203,8 +200,15 @@ class MimicVatCreateTokenEffect extends OneShotEffect<MimicVatCreateTokenEffect>
 				CardUtil.copyTo(token).from(card);
 
 				token.addAbility(HasteAbility.getInstance());
-				token.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
 				token.putOntoBattlefield(game, source.getSourceId(), source.getControllerId());
+
+				ExileTargetEffect exileEffect = new ExileTargetEffect();
+				exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
+				DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect);
+				delayedAbility.setSourceId(source.getSourceId());
+				delayedAbility.setControllerId(source.getControllerId());
+				game.addDelayedTriggeredAbility(delayedAbility);
+
 				return true;
 			}
 		}
@@ -213,5 +217,3 @@ class MimicVatCreateTokenEffect extends OneShotEffect<MimicVatCreateTokenEffect>
 	}
 
 }
-
-

@@ -59,4 +59,9 @@ public class AtEndOfTurnDelayedTriggeredAbility extends DelayedTriggeredAbility<
     public AtEndOfTurnDelayedTriggeredAbility copy() {
         return new AtEndOfTurnDelayedTriggeredAbility(this);
     }
+
+    @Override
+    public String getRule() {
+        return "At the beginning of the next end step, " + modes.getText();
+    }
 }
