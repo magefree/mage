@@ -793,7 +793,20 @@ public class GamePanel extends javax.swing.JPanel {
 		main2 = new JButton("M2");
 		main2.setToolTipText("Main#2");
 		endOfTurn = new JButton("End");
-		endOfTurn.setToolTipText("End Of Turn");
+		endOfTurn.setToolTipText("End The Turn");
+		endOfTurn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (feedbackPanel != null && FeedbackMode.SELECT.equals(feedbackPanel.getMode())) {
+					logger.info("user pressed End Of Turn");
+					endButtonTip.setVisible(false);
+					session.sendPlayerInteger(gameId, 0);
+				}
+			}
+		});
+
+		endButtonTip = new JLabel("<-- Press this button to end the turn");
+		endButtonTip.setForeground(Color.white);
 
 		jPhases.add(untap);
 		jPhases.add(upkeep);
@@ -804,6 +817,7 @@ public class GamePanel extends javax.swing.JPanel {
 		jPhases.add(combatButton);
 		jPhases.add(main2);
 		jPhases.add(endOfTurn);
+		jPhases.add(endButtonTip);
 
         //hand.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 20)); // for scroll
 		hand.setBorder(emptyBorder);
@@ -1020,4 +1034,5 @@ public class GamePanel extends javax.swing.JPanel {
 	private JButton main2;
 	private JButton endOfTurn;
 	private JButton prevStep;
+	private JLabel endButtonTip;
 }

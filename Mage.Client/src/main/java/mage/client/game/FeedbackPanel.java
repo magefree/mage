@@ -371,6 +371,10 @@ public class FeedbackPanel extends javax.swing.JPanel {
         this.helper = helper;
     }
 
+	public FeedbackMode getMode() {
+		return this.mode;
+	}
+
     private javax.swing.JButton btnLeft;
     private javax.swing.JButton btnRight;
     private javax.swing.JButton btnSpecial;
