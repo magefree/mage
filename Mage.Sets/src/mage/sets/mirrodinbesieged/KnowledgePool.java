@@ -36,8 +36,6 @@ import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -46,7 +44,6 @@ import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -94,7 +91,8 @@ class KnowledgePoolEffect1 extends OneShotEffect<KnowledgePoolEffect1> {
 		for (UUID playerId: sourcePlayer.getInRange()) {
 			Player player = game.getPlayer(playerId);
 			if (player != null) {
-                for (int i = 0; i < 3; i++) {
+                int amount = Math.min(3, player.getLibrary().size());
+                for (int i = 0; i < amount; i++) {
                     player.getLibrary().removeFromTop(game).moveToExile(source.getSourceId(), "Knowledge Pool Exile", source.getId(), game);
                 }
             }
