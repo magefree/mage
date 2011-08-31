@@ -397,6 +397,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 		for (CombatGroup group : groups) {
             if (group.attackers.contains(attackerId)) {
                 group.attackers.remove(attackerId);
+                group.attackerOrder.remove(attackerId);
                 Permanent creature = game.getPermanent(attackerId);
                 if (creature != null) {
                     creature.setAttacking(false);
@@ -414,12 +415,12 @@ public class Combat implements Serializable, Copyable<Combat> {
 		for (CombatGroup group : groups) {
             if (group.blockers.contains(blockerId)) {
                 group.blockers.remove(blockerId);
-                Permanent creature = game.getPermanent(blockerId);
-                if (creature != null)
-                    creature.setBlocking(0);
-                return;
+                group.blockerOrder.remove(blockerId);
             }
         }
+        Permanent creature = game.getPermanent(blockerId);
+        if (creature != null)
+            creature.setBlocking(0);
     }
      
 	@Override
