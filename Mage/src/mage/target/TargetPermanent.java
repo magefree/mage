@@ -81,8 +81,13 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 		Permanent permanent = game.getPermanent(id);
 		if (permanent != null) {
 			if (source != null)
-				//TODO: check for replacement effects
-				return permanent.canBeTargetedBy(game.getObject(source.getId())) && filter.match(permanent, source.getSourceId(), controllerId, game);
+				//1. TODO: check for replacement effects
+				//2. We need to check both source.getId() and source.getSourceId()
+			    // first for protection from spells or abilities (e.g. protection from colored spells, r1753)
+			    // second for protection from sources (e.g. protection from artifacts + equip ability)
+				return permanent.canBeTargetedBy(game.getObject(source.getId()))
+						&& permanent.canBeTargetedBy(game.getObject(source.getSourceId()))
+						&& filter.match(permanent, source.getSourceId(), controllerId, game);
 			else
 				return filter.match(permanent, null, controllerId, game);
 		}
