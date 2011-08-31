@@ -29,6 +29,7 @@ public interface MagePlugins {
 	boolean isCardPluginLoaded();
 	boolean isCounterPluginLoaded();
 	void sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents);
+	boolean newImage(Set<Card> allCards);
 	void downloadImage(Set<Card> allCards);
 	void downloadSymbols();
 	int getGamesPlayed();

@@ -32,6 +32,14 @@ public interface CardPlugin extends Plugin {
 	void sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> cards, Map<String, String> options);
 
     /**
+     * Check for new images.
+     *
+     * @param allCards Set of cards to check images for.
+     * @param imagesPath Path to check in. Can be null, in such case default path should be used.
+     */
+    public boolean newImages(Set<Card> allCards, String imagesPath);
+    
+    /**
      * Download images.
      *
      * @param allCards Set of cards to download images for.

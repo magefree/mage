@@ -286,6 +286,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
 	            disableButtons();
+                checkForNewImages();
                 if (autoConnect())
                     enableButtons();
                 else {
@@ -424,6 +425,17 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 		menu.show(component, 0, component.getHeight());
 	}
 
+    private void checkForNewImages() {
+        HashSet<Card> cards = new HashSet<Card>(CardsStorage.getAllCards());
+        List<Card> notImplemented = CardsStorage.getNotImplementedCards();
+        cards.addAll(notImplemented);
+        if (Plugins.getInstance().newImage(cards)) {
+            if (JOptionPane.showConfirmDialog(null, "New cards are available.  Do you want to download the images?") == JOptionPane.OK_OPTION) {
+                Plugins.getInstance().downloadImage(cards);
+            }
+        }
+    }
+    
     private void btnImagesActionPerformed(java.awt.event.ActionEvent evt) {
         HashSet<Card> cards = new HashSet<Card>(CardsStorage.getAllCards());
         List<Card> notImplemented = CardsStorage.getNotImplementedCards();

@@ -232,7 +232,24 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		Object[] options = { startDownloadButton, closeButton = new JButton("Cancel") };
 		dlg = new JOptionPane(p0, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
 	}
-
+    
+    public static boolean checkForNewCards(Set<Card> allCards, String imagesPath) {
+		File file;
+        for (Card card : allCards) {
+            if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()) {
+                CardInfo url = new CardInfo(card.getName(), card.getExpansionSetCode(), card.getCardNumber(), false);
+                boolean withCollectorId = false;
+                if (card.getName().equals("Forest") || card.getName().equals("Mountain") || card.getName().equals("Swamp") || card.getName().equals("Island") || card.getName().equals("Plains")) {
+                    withCollectorId = true;
+                }
+                file = new File(CardImageUtils.getImagePath(url, withCollectorId, imagesPath));
+                if (!file.exists())
+                    return true;
+            }
+        }        
+        return false;
+    }
+    
 	private static ArrayList<CardInfo> getNeededCards(Set<Card> allCards, String imagesPath) {
 
 		ArrayList<CardInfo> cardsToDownload = new ArrayList<CardInfo>();

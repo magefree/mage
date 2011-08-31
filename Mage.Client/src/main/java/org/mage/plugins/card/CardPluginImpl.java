@@ -420,6 +420,11 @@ public class CardPluginImpl implements CardPlugin {
         }
     }
 
+    @Override
+    public boolean newImages(Set<Card> allCards, String imagesPath) {
+        return DownloadPictures.checkForNewCards(allCards, imagesPath);
+    }
+    
     /**
      * Download images.
      *
