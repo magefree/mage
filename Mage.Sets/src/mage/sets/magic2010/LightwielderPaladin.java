@@ -36,7 +36,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
 import mage.filter.Filter.ComparisonScope;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -79,12 +78,6 @@ class LightwielderPaladinTriggeredAbility extends TriggeredAbilityImpl<Lightwiel
 
     public LightwielderPaladinTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileTargetEffect(), true);
-        FilterPermanent filter = new FilterPermanent("black or red permanent");
-        filter.getColor().setBlack(true);
-        filter.getColor().setRed(true);
-        filter.setUseColor(true);
-        filter.setScopeColor(ComparisonScope.Any);
-        this.addTarget(new TargetPermanent(filter));
     }
 
     public LightwielderPaladinTriggeredAbility(final LightwielderPaladinTriggeredAbility ability) {
@@ -100,12 +93,14 @@ class LightwielderPaladinTriggeredAbility extends TriggeredAbilityImpl<Lightwiel
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)
                 && ((DamagedPlayerEvent) event).isCombatDamage()) {
-            Filter filter = this.getTargets().get(0).getFilter();
-            if (filter instanceof FilterPermanent) {
-                FilterPermanent filterPermanent = ((FilterPermanent) filter);
-                filterPermanent.getControllerId().add(event.getTargetId());
-                filterPermanent.setNotController(false);
-            }
+            FilterPermanent filter = new FilterPermanent("black or red permanent");
+            filter.getColor().setBlack(true);
+            filter.getColor().setRed(true);
+            filter.setUseColor(true);
+            filter.setScopeColor(ComparisonScope.Any);
+            filter.getControllerId().add(event.getTargetId());
+            filter.setNotController(false);
+            this.addTarget(new TargetPermanent(filter));
             return true;
         }
         return false;

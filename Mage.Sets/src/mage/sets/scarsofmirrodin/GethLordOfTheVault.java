@@ -50,7 +50,7 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetCard;
+import mage.target.common.TargetCardInOpponentsGraveyard;
 
 /**
  *
@@ -77,7 +77,7 @@ public class GethLordOfTheVault extends CardImpl<GethLordOfTheVault> {
         
         this.addAbility(IntimidateAbility.getInstance());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GethLordOfTheVaultEffect(), new ManaCostsImpl("{X}{B}"));
-        ability.addTarget(new GethLordOfTheVaultEffectTarget(filter));
+        ability.addTarget(new TargetCardInOpponentsGraveyard(filter));
         this.addAbility(ability);
     }
 
@@ -155,41 +155,4 @@ class GethLordOfTheVaultEffect extends OneShotEffect<GethLordOfTheVaultEffect> {
         return new GethLordOfTheVaultEffect(this);
     }
 
-}
-
-class GethLordOfTheVaultEffectTarget extends TargetCard<GethLordOfTheVaultEffectTarget> {
-
-	public GethLordOfTheVaultEffectTarget(FilterCard filter) {
-		this(1, 1, filter);
-	}
-
-	public GethLordOfTheVaultEffectTarget(int minNumTargets, int maxNumTargets, FilterCard filter) {
-		super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);
-		this.targetName = filter.getMessage() + " from an opponent's graveyard";
-	}
-
-	public GethLordOfTheVaultEffectTarget(final GethLordOfTheVaultEffectTarget target) {
-		super(target);
-	}
-
-	@Override
-	public boolean canTarget(UUID id, Ability source, Game game) {
-		Card card = game.getCard(id);
-		if (card != null && game.getZone(card.getId()) == Zone.GRAVEYARD) {
-			if (game.getOpponents(source.getControllerId()).contains(card.getOwnerId())) {
-				return filter.match(card);
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public boolean canChoose(UUID sourceControllerId, Game game) {
-		return true;
-	}
-
-	@Override
-	public GethLordOfTheVaultEffectTarget copy() {
-		return new GethLordOfTheVaultEffectTarget(this);
-	}
 }

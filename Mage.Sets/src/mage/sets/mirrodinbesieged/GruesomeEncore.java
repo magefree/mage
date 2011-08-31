@@ -97,26 +97,22 @@ class GruesomeEncoreEffect extends OneShotEffect<GruesomeEncoreEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
         Card card = game.getCard(source.getFirstTarget());
-
-        if (player != null & card != null) {
+        if (card != null) {
             Player opponent = game.getPlayer(card.getOwnerId());
-            if (opponent != null) {
-                opponent.removeFromGraveyard(card, game);
+            if (opponent != null && opponent.removeFromGraveyard(card, game)) {
+                card.addAbility(HasteAbility.getInstance());
+                card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
+
+                ExileTargetEffect exileEffect = new ExileTargetEffect();
+                exileEffect.setTargetPointer(new FixedTarget(card.getId()));
+                DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect);
+                delayedAbility.setSourceId(source.getSourceId());
+                delayedAbility.setControllerId(source.getControllerId());
+                game.addDelayedTriggeredAbility(delayedAbility);
+
+                return true;
             }
-
-            card.addAbility(HasteAbility.getInstance());
-            card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
-
-            ExileTargetEffect exileEffect = new ExileTargetEffect();
-            exileEffect.setTargetPointer(new FixedTarget(card.getId()));
-            DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect);
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            game.addDelayedTriggeredAbility(delayedAbility);
-
-            return true;
         }
 
         return false;

@@ -93,7 +93,7 @@ class PawnOfUlamogTriggeredAbility extends TriggeredAbilityImpl<PawnOfUlamogTrig
         if (event.getType() == EventType.ZONE_CHANGE) {
             UUID targetId = event.getTargetId();
             Card card = game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
-            if (card != null && card instanceof Permanent) {
+            if (card != null && card instanceof Permanent && !(card instanceof PermanentToken)) {
                 Permanent permanent = (Permanent) card;
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
                 if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD
