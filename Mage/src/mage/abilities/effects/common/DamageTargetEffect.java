@@ -84,6 +84,10 @@ public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
         }
 	}
 
+    public void setAmount(DynamicValue amount) {
+        this.amount = amount;
+    }
+
 	public DamageTargetEffect(final DamageTargetEffect effect) {
 		super(effect);
 		this.amount = effect.amount.clone();

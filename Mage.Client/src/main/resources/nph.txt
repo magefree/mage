@@ -25,7 +25,7 @@
 25|Suture Priest
 26|War Report
 27|Argent Mutation
-28|Arm with Æther
+28|Arm with AEther
 29|Blighted Agent
 30|Chained Throatseeker
 31|Chancellor of the Spires

@@ -448,7 +448,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 					for (KickerAbility kicker: card.getAbilities().getKickerAbilities()) {
 						kicker.activate(game, false);
 					}
-                    GameEvent event = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, spellAbility.getId(), playerId);
+                    GameEvent event = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, spellAbility.getId(), spellAbility.getSourceId(), playerId);
                     event.setZone(fromZone);
 					game.fireEvent(event);
 					game.fireInformEvent(name + " casts " + card.getName());
