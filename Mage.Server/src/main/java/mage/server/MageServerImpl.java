@@ -40,6 +40,7 @@ import mage.game.tournament.TournamentOptions;
 import mage.interfaces.MageServer;
 //import mage.interfaces.Server;
 import mage.interfaces.ServerState;
+import mage.remote.MageVersionException;
 import mage.server.game.DeckValidatorFactory;
 import mage.server.draft.DraftManager;
 import mage.server.game.GameFactory;
@@ -85,9 +86,11 @@ public class MageServerImpl implements MageServer {
 
 		try {
 			if (version.compareTo(Main.getVersion()) != 0)
-				throw new MageException("Wrong client version " + version + ", expecting version " + Main.getVersion());
+				throw new MageVersionException(version, Main.getVersion());
 			return SessionManager.getInstance().registerUser(sessionId, userName);
 		} catch (Exception ex) {
+            if (ex instanceof MageVersionException)
+                throw (MageVersionException)ex;
 			handleException(ex);
 		}
 		return false;

@@ -169,6 +169,9 @@ public class Session {
 		} catch (MalformedURLException ex) {
 			logger.fatal("", ex);
 			client.showMessage("Unable to connect to server. "  + ex.getMessage());
+        } catch (MageVersionException ex) {
+            client.showMessage("Unable to connect to server. "  + ex.getMessage());
+            // TODO: download client that matches server version
 		} catch (Throwable t) {
 			logger.fatal("Unable to connect to server - ", t);
 			disconnect(false);
