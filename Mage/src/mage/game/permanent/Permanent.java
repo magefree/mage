@@ -75,6 +75,11 @@ public interface Permanent extends Card {
 	public boolean hasSummoningSickness();
 	public int getDamage();
 	public int damage(int damage, UUID sourceId, Game game, boolean preventable, boolean combat);
+
+	// used in combat only to deal damage at the same time
+	public int markDamage(int damage, UUID sourceId, Game game, boolean preventable, boolean combat);
+	public int applyDamage(Game game);
+
 	public void removeAllDamage(Game game);
 	public Counters getCounters();
 	public void addCounters(String name, int amount, Game game);

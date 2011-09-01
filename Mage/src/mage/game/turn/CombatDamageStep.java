@@ -68,10 +68,18 @@ public class CombatDamageStep extends Step<CombatDamageStep> {
 	public void beginStep(Game game, UUID activePlayerId) {
 		super.beginStep(game, activePlayerId);
 		for (CombatGroup group: game.getCombat().getGroups()) {
-			group.assignDamage(first, game);
+			group.assignDamageToBlockers(first, game);
 		}
 		for (CombatGroup group : game.getCombat().getBlockingGroups()) {
 			group.assignDamageToAttackers(first, game);
+		}
+
+		for (CombatGroup group: game.getCombat().getGroups()) {
+			group.applyDamage(game);
+		}
+
+		for (CombatGroup group : game.getCombat().getBlockingGroups()) {
+			group.applyDamage(game);
 		}
 	}
 

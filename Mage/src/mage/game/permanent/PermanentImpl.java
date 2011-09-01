@@ -44,10 +44,8 @@ import mage.game.events.*;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 import mage.Constants.AsThoughEffectType;
 
 /**
@@ -78,6 +76,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	protected List<UUID> connectedCards = new ArrayList<UUID>();
 	protected List<UUID> dealtDamageByThisTurn;
 	protected UUID attachedTo;
+	protected List<Counter> markedDamage;
 
 	private static final List<UUID> emptyList = Collections.unmodifiableList(new ArrayList<UUID>());
 
@@ -125,6 +124,12 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 			dealtDamageByThisTurn = new ArrayList<UUID>();
 			for (UUID sourceId : permanent.dealtDamageByThisTurn) {
 				this.dealtDamageByThisTurn.add(sourceId);
+			}
+			if (permanent.markedDamage != null) {
+				markedDamage = new ArrayList<Counter>();
+				for (Counter counter : permanent.markedDamage) {
+					markedDamage.add(counter.copy());
+				}
 			}
 		}
 		this.attachedTo = permanent.attachedTo;
@@ -505,12 +510,26 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
 	@Override
 	public int damage(int damageAmount, UUID sourceId, Game game, boolean preventable, boolean combat) {
+		return damage(damageAmount, sourceId, game, preventable, combat, false);
+	}
+
+	/**
+	 *
+	 * @param damageAmount
+	 * @param sourceId
+	 * @param game
+	 * @param preventable
+	 * @param combat
+	 * @param markDamage If true, damage will be dealt later in applyDamage method
+	 * @return
+	 */
+	private int damage(int damageAmount, UUID sourceId, Game game, boolean preventable, boolean combat, boolean markDamage) {
 		int damageDone = 0;
 		if (damageAmount > 0 && canDamage(game.getObject(sourceId))) {
 			if (cardType.contains(CardType.PLANESWALKER)) {
-				damageDone = damagePlaneswalker(damageAmount, sourceId, game, preventable, combat);
+				damageDone = damagePlaneswalker(damageAmount, sourceId, game, preventable, combat, markDamage);
 			} else {
-				damageDone = damageCreature(damageAmount, sourceId, game, preventable, combat);
+				damageDone = damageCreature(damageAmount, sourceId, game, preventable, combat, markDamage);
 			}
 			if (damageDone > 0) {
 				Permanent source = game.getPermanent(sourceId);
@@ -531,12 +550,30 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 	}
 
 	@Override
+	public int markDamage(int damageAmount, UUID sourceId, Game game, boolean preventable, boolean combat) {
+		return damage(damageAmount, sourceId, game, preventable, combat, true);
+	}
+
+	@Override
+	public int applyDamage(Game game) {
+		if (markedDamage == null) {
+			return 0;
+		}
+		for (Counter counter : markedDamage) {
+			addCounters(counter, game);
+		}
+		markedDamage.clear();
+		return 0;
+	}
+
+
+	@Override
 	public void removeAllDamage(Game game) {
 		damage = 0;
 		deathtouched = false;
 	}
 
-	protected int damagePlaneswalker(int damage, UUID sourceId, Game game, boolean preventable, boolean combat) {
+	protected int damagePlaneswalker(int damage, UUID sourceId, Game game, boolean preventable, boolean combat, boolean markDamage) {
 		GameEvent event = new DamagePlaneswalkerEvent(objectId, sourceId, controllerId, damage, preventable, combat);
 		if (!game.replaceEvent(event)) {
 			int actualDamage = event.getAmount();
@@ -553,23 +590,22 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		return 0;
 	}
 
-	protected int damageCreature(int damage, UUID sourceId, Game game, boolean preventable, boolean combat) {
+	protected int damageCreature(int damage, UUID sourceId, Game game, boolean preventable, boolean combat, boolean markDamage) {
 		GameEvent event = new DamageCreatureEvent(objectId, sourceId, controllerId, damage, preventable, combat);
 		if (!game.replaceEvent(event)) {
 			int actualDamage = event.getAmount();
 			if (actualDamage > 0) {
-				// this is not correct
-				// from rules: The amount of damage dealt to a creature is not bounded by its toughness, 
-				// and the amount of damage dealt to a player is not bounded by that player's life total.
-				// For example, if Corrupt deals 6 damage to a 2/2 creature, you'll gain 6 life.
-				/*if (this.damage + event.getAmount() > this.toughness.getValue()) {
-					actualDamage = this.toughness.getValue() - this.damage;
-				}*/
 				//Permanent source = game.getPermanent(sourceId);
 				MageObject source = game.getObject(sourceId);
 				if (source != null && (source.getAbilities().containsKey(InfectAbility.getInstance().getId())
 						|| source.getAbilities().containsKey(WitherAbility.getInstance().getId()))) {
-					addCounters(CounterType.M1M1.createInstance(actualDamage), game);
+					if (markDamage) {
+						// mark damage only
+						markDamage(CounterType.M1M1.createInstance(actualDamage));
+					} else {
+						// deal damage immediately
+						addCounters(CounterType.M1M1.createInstance(actualDamage), game);
+					}
 				} else {
 					this.damage += actualDamage;
 				}
@@ -578,6 +614,13 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 			}
 		}
 		return 0;
+	}
+
+	private void markDamage(Counter counter) {
+		if (markedDamage == null) {
+			markedDamage = new ArrayList<Counter>();
+		}
+		markedDamage.add(counter);
 	}
 
 	@Override
