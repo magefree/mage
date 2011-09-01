@@ -34,8 +34,6 @@ import mage.cards.MageCard;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardsStorage;
 import mage.client.components.HoverButton;
-import mage.client.components.arcane.GlowText;
-import mage.client.components.arcane.ManaSymbols;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.AudioManager;
 import mage.client.util.Command;
@@ -43,6 +41,7 @@ import mage.client.util.Config;
 import mage.client.util.ImageHelper;
 import mage.components.ImagePanel;
 import mage.view.CardView;
+import org.mage.card.arcane.GlowText;
 import org.apache.log4j.Logger;
 
 import javax.imageio.ImageIO;
@@ -52,6 +51,7 @@ import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.UUID;
+import org.mage.card.arcane.ManaSymbols;
 
 /**
  * Mage book with cards and page flipping.

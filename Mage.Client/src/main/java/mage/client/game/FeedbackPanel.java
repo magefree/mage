@@ -45,7 +45,6 @@ import javax.swing.*;
 
 import mage.client.MageFrame;
 import mage.client.components.MageTextArea;
-import mage.client.components.arcane.GlowText;
 import mage.client.dialog.MageDialog;
 import mage.remote.Session;
 

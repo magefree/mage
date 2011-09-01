@@ -11,7 +11,7 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
-import org.mage.plugins.card.utils.BufferedImageBuilder;
+import mage.client.util.gui.BufferedImageBuilder;
 import org.mage.plugins.card.utils.ImageManager;
 import org.mage.plugins.card.utils.Transparency;
 

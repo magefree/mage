@@ -1,8 +1,8 @@
 package mage.client.components;
 
-import mage.client.components.arcane.ManaSymbols;
-import mage.client.components.arcane.UI;
 import mage.view.CardView;
+import org.mage.card.arcane.ManaSymbols;
+import org.mage.card.arcane.UI;
 
 import javax.swing.*;
 import java.awt.*;

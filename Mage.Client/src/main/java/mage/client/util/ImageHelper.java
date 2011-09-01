@@ -45,8 +45,8 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import mage.cards.CardDimensions;
-import mage.client.components.arcane.UI;
 import mage.view.CardView;
+import org.mage.card.arcane.UI;
 
 import com.mortennobel.imagescaling.ResampleOp;
 import java.awt.Rectangle;

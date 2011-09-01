@@ -40,7 +40,6 @@ import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.components.HoverButton;
 import mage.client.components.MageRoundPane;
-import mage.client.components.arcane.ManaSymbols;
 import mage.client.dialog.ShowCardsDialog;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
@@ -54,7 +53,7 @@ import mage.sets.Sets;
 import mage.view.CardView;
 import mage.view.ManaPoolView;
 import mage.view.PlayerView;
-import org.mage.card.arcane.CardPanel;
+import org.mage.card.arcane.ManaSymbols;
 
 import javax.swing.*;
 import javax.swing.border.Border;

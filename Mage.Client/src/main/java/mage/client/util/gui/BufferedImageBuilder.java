@@ -1,6 +1,7 @@
 package mage.client.util.gui;
 
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
@@ -38,6 +39,7 @@ public class BufferedImageBuilder {
     private void waitForImage(BufferedImage bufferedImage) {
         final ImageLoadStatus imageLoadStatus = new ImageLoadStatus();
         bufferedImage.getHeight(new ImageObserver() {
+            @Override
             public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
                 if (infoflags == ALLBITS) {
                     imageLoadStatus.heightDone = true;
@@ -47,6 +49,7 @@ public class BufferedImageBuilder {
             }
         });
         bufferedImage.getWidth(new ImageObserver() {
+            @Override
             public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
                 if (infoflags == ALLBITS) {
                     imageLoadStatus.widthDone = true;
