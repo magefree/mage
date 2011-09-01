@@ -93,6 +93,8 @@ class GroundswellWatcher extends WatcherImpl<GroundswellWatcher> {
 
 	@Override
 	public void watch(GameEvent event, Game game) {
+        if (condition == true) //no need to check - condition has already occured
+            return;
 		if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
 			Permanent permanent = game.getPermanent(event.getTargetId());
 			if (permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.controllerId)) {

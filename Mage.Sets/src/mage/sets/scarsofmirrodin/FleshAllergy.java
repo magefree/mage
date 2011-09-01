@@ -120,7 +120,7 @@ class FleshAllergyEffect extends OneShotEffect<FleshAllergyEffect> {
 
 	public FleshAllergyEffect() {
 		super(Outcome.DestroyPermanent);
-		staticText = "Target creature gets +2/+2 until end of turn.\nLandfall - If you had a land enter the battlefield under your control this turn, that creature gets +4/+4 until end of turn instead";
+		staticText = "Destroy target creature. Its controller loses life equal to the number of creatures that died this turn";
 	}
 
 	public FleshAllergyEffect(final FleshAllergyEffect effect) {

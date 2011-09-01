@@ -138,6 +138,8 @@ class RedSunsZenithWatcher extends WatcherImpl<RedSunsZenithWatcher> {
 
 	@Override
 	public void watch(GameEvent event, Game game) {
+        if (condition == true) //no need to check - condition has already occured
+            return;
 		if (event.getType() == EventType.DAMAGED_CREATURE) {
             Card card = game.getCard(sourceId);
             if (card != null && card.getSpellAbility().getId().equals(event.getSourceId()))

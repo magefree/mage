@@ -92,6 +92,8 @@ class TunnelIgnusWatcher extends WatcherImpl {
 
     @Override
     public void watch(GameEvent event, Game game) {
+        if (condition == true) //no need to check - condition has already occured
+            return;
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Constants.Zone.BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent.getCardType().contains(CardType.LAND) && game.getOpponents(this.controllerId).contains(permanent.getControllerId())) {
@@ -101,9 +103,12 @@ class TunnelIgnusWatcher extends WatcherImpl {
                 }
             }
         }
-        if (event.getType() == GameEvent.EventType.END_TURN_STEP_POST) {
-            count = 0;
-        }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        count = 0;
     }
 }
 

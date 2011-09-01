@@ -87,6 +87,8 @@ class ArchiveTrapWatcher extends WatcherImpl<ArchiveTrapWatcher> {
 
 	@Override
 	public void watch(GameEvent event, Game game) {
+        if (condition == true) //no need to check - condition has already occured
+            return;
 		if (event.getType() == EventType.LIBRARY_SEARCHED && game.getOpponents(controllerId).contains(event.getPlayerId()))
 			condition = true;
 	}

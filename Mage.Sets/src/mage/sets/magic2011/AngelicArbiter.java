@@ -95,6 +95,8 @@ class AngelicArbiterWatcher1 extends WatcherImpl<AngelicArbiterWatcher1> {
 
 	@Override
 	public void watch(GameEvent event, Game game) {
+        if (condition == true) //no need to check - condition has already occured
+            return;
 		if (event.getType() == EventType.SPELL_CAST && game.getActivePlayerId().equals(event.getPlayerId()) && game.getOpponents(controllerId).contains(event.getPlayerId()))
 			condition = true;
 	}
