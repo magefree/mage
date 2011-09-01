@@ -117,8 +117,7 @@ public class CallbackClientImpl implements CallbackClient {
 					else if (callback.getMethod().equals("replayDone")) {
 						GamePanel panel = frame.getGame(callback.getObjectId());
 						if (panel != null) {
-							panel.modalMessage((String) callback.getData());
-							panel.hideGame();
+							panel.endMessage((String) callback.getData());
 						}
 					}
 					else if (callback.getMethod().equals("replayUpdate")) {
@@ -136,8 +135,7 @@ public class CallbackClientImpl implements CallbackClient {
 					else if (callback.getMethod().equals("gameOver")) {
 						GamePanel panel = frame.getGame(callback.getObjectId());
 						if (panel != null) {
-							panel.modalMessage((String) callback.getData());
-							panel.hideGame();
+							panel.endMessage((String) callback.getData());
 						}
 					}
 					else if (callback.getMethod().equals("gameError")) {

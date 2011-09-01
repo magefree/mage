@@ -214,6 +214,7 @@ public class GamePanel extends javax.swing.JPanel {
 		this.playerId = null;
 		session = MageFrame.getSession();
 		MageFrame.addGame(gameId, this);
+		this.feedbackPanel.init(gameId);
 		this.feedbackPanel.clear();
 		this.btnConcede.setVisible(false);
 		this.btnSwitchHands.setVisible(false);
@@ -467,10 +468,10 @@ public class GamePanel extends javax.swing.JPanel {
 		this.feedbackPanel.getFeedback(FeedbackMode.INFORM, information, false, gameView.getSpecial(), null);
 	}
 
-	public void modalMessage(String message) {
-		JOptionPane.showMessageDialog(this, message, "", JOptionPane.INFORMATION_MESSAGE);
-	}
-
+    public void endMessage(String message) {
+		this.feedbackPanel.getFeedback(FeedbackMode.END, message, false, false, null);
+    }
+    
 	public int modalQuestion(String message, String title) {
 		return JOptionPane.showConfirmDialog(this, message, title, JOptionPane.YES_NO_OPTION);
 	}

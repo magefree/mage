@@ -60,7 +60,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 	private final static Logger logger = Logger.getLogger(FeedbackPanel.class);
 
 	public enum FeedbackMode {
-		INFORM, QUESTION, CONFIRM, CANCEL, SELECT
+		INFORM, QUESTION, CONFIRM, CANCEL, SELECT, END
 	}
 
 	private boolean selected = false;
@@ -115,6 +115,12 @@ public class FeedbackPanel extends javax.swing.JPanel {
 				this.btnLeft.setVisible(false);
 				this.btnRight.setVisible(true);
 				this.btnRight.setText("Done");
+				this.helper.setState("", false, "Done", true);
+				break;
+            case END:
+				this.btnLeft.setVisible(false);
+				this.btnRight.setVisible(true);
+				this.btnRight.setText("OK");
 				this.helper.setState("", false, "Done", true);
 				break;
 		}
@@ -352,6 +358,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
 		}
 		if (mode == FeedbackMode.SELECT && (evt.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
 			session.sendPlayerInteger(gameId, 0);
+        } else if (mode == FeedbackMode.END) {
+            MageFrame.getGame(gameId).hideGame();
 		} else {
 			session.sendPlayerBoolean(gameId, false);
 		}
