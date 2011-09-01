@@ -129,15 +129,17 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl<PrecursorG
 						}
 						if (targetGolem == null) {
 							targetGolem = target;
-						} else
+						} else {
 							// If a spell has multiple targets, but it's targeting the same Golem with all of them, Precursor Golem's last ability will trigger
 							if (!targetGolem.equals(target)) {
 								return false;
 							}
+						}
 					}
 				}
 			}
 			getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
+			getEffects().get(0).setValue("targetedGolem", targetGolem);
 			return true;
 		}
 		return false;
@@ -171,7 +173,11 @@ class PrecursorGolemCopySpellEffect extends OneShotEffect<PrecursorGolemCopySpel
 		Spell spell = game.getStack().getSpell(targetPointer.getFirst(source));
 		if (spell != null) {
 			SpellAbility sa = spell.getSpellAbility();
+			UUID targetedGolem = (UUID) getValue("targetedGolem");
 			for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filterGolem)) {
+				if (permanent.getId().equals(targetedGolem)) {
+					continue; // copy only for other golems
+				}
 				boolean legal = true;
 				for (Target target : sa.getTargets()) {
 					if (!target.canTarget(permanent.getId(), game)) {
@@ -185,6 +191,10 @@ class PrecursorGolemCopySpellEffect extends OneShotEffect<PrecursorGolemCopySpel
 					copy.setCopiedSpell(true);
 					for (Effect effect : copy.getSpellAbility().getEffects()) {
 						effect.setTargetPointer(new FixedTarget(permanent.getId()));
+					}
+					for (Target target : copy.getSpellAbility().getTargets()) {
+						target.clearChosen();
+						target.add(permanent.getId(), game);
 					}
 					game.getStack().push(copy);
 				}
