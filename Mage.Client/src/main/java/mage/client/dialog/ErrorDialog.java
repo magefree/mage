@@ -49,6 +49,7 @@ public class ErrorDialog extends MageDialog {
 	public void showDialog(String title, String message) {
 		this.setTitle(title);
 		this.lblMessage.setText(message);
+        this.lblMessage.setCaretPosition(0);
 		this.pack();
 		this.revalidate();
 		this.repaint();

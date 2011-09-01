@@ -190,6 +190,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         connectDialog = new ConnectDialog();
         desktopPane.add(connectDialog, JLayeredPane.POPUP_LAYER);
         errorDialog = new ErrorDialog();
+        errorDialog.setLocation(100, 100);
         desktopPane.add(errorDialog, JLayeredPane.POPUP_LAYER);
         ui.addComponent(MageComponents.DESKTOP_PANE, desktopPane);
 

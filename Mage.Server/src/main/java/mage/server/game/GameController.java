@@ -118,7 +118,7 @@ public class GameController implements GameCallback {
 								revealCards(event.getMessage(), event.getCards());
 								break;
 							case ERROR:
-								error(event.getMessage());
+								error(event.getMessage(), event.getException());
 								break;
 						}
 					} catch (MageException ex) {
@@ -505,10 +505,16 @@ public class GameController implements GameCallback {
 		}
 	}
 
-	private void error(String message) {
-        String msg = message + "\nServer version: " + Main.getVersion().toString();
+	private void error(String message, Exception ex) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(message).append(ex.toString());
+        sb.append("\nServer version: ").append(Main.getVersion().toString());
+        sb.append("\n");
+        for (StackTraceElement e: ex.getStackTrace()) {
+            sb.append(e.toString()).append("\n");
+        }
 		for (final Entry<UUID, GameSession> entry: gameSessions.entrySet()) {
-			entry.getValue().gameError(msg);
+			entry.getValue().gameError(sb.toString());
 		}
 	}
 

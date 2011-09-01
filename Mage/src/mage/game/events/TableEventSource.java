@@ -56,7 +56,11 @@ public class TableEventSource implements EventSource<TableEvent>, Serializable {
 	}
 
 	public void fireTableEvent(EventType eventType, String message, Game game) {
-		dispatcher.fireEvent(new TableEvent(eventType, message, null, game));
+		dispatcher.fireEvent(new TableEvent(eventType, message, game));
+	}
+
+	public void fireTableEvent(EventType eventType, String message, Exception ex, Game game) {
+		dispatcher.fireEvent(new TableEvent(eventType, message, ex, game));
 	}
 
 	public void fireTableEvent(EventType eventType, String message, Draft draft) {

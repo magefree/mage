@@ -52,6 +52,7 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
 	private Draft draft;
 	private EventType eventType;
 	private String message;
+    private Exception ex;
 	private Cards cards;
 	private UUID playerId;
 	private Deck deck;
@@ -64,12 +65,21 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
 		this.eventType = eventType;
 	}
 
-	public TableEvent(EventType eventType, String message, Cards cards, Game game) {
+	public TableEvent(EventType eventType, String message, Game game) {
 		super(game);
 		this.game = game;
 		this.message = message;
-		this.cards = cards;
 		this.eventType = eventType;
+	}
+
+	public TableEvent(EventType eventType, String message, Cards cards, Game game) {
+        this(eventType, message, game);
+		this.cards = cards;
+	}
+
+	public TableEvent(EventType eventType, String message, Exception ex, Game game) {
+        this(eventType, message, game);
+        this.ex = ex;
 	}
 
 	public TableEvent(EventType eventType, UUID playerId, Deck deck, int timeout) {
@@ -109,6 +119,10 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
 	public String getMessage() {
 		return message;
 	}
+    
+    public Exception getException() {
+        return ex;
+    }
 
 	public Cards getCards() {
 		return cards;

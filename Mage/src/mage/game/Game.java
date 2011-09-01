@@ -134,7 +134,7 @@ public interface Game extends MageItem, Serializable {
 	public void fireInformEvent(String message);
 	public void fireUpdatePlayersEvent();
 	public void informPlayers(String message);
-	public void fireErrorEvent(String message);
+	public void fireErrorEvent(String message, Exception ex);
 	
 	//game event methods
 	public void fireEvent(GameEvent event);
