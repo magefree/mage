@@ -75,11 +75,12 @@ public class TargetCardInLibrary extends TargetCard<TargetCardInLibrary> {
 			}
 			chosen = targets.size() >= minNumberOfTargets;
 		}
-		while (!doneChosing()) {
+		// Issue 231
+		/*while (!doneChosing()) {
 			if (!player.choose(outcome, new CardsImpl(Zone.LIBRARY, player.getLibrary().getCards(game)), this, game)) {
 				break;
 			}
-		}
+		}*/
 		return chosen = true;
 	}
 
