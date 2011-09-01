@@ -71,8 +71,8 @@ public class CardPluginImpl implements CardPlugin {
 
     @PluginLoaded
     public void newPlugin(CardPlugin plugin) {
-        ManaSymbols.loadImages();
-        log.info(plugin.toString() + " has been loaded.");
+        //ManaSymbols.loadImages();
+        //log.info(plugin.toString() + " has been loaded.");
     }
 
     @Override
