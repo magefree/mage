@@ -29,6 +29,7 @@
 package mage.abilities.keyword;
 
 import mage.Constants.Zone;
+import mage.abilities.Mode;
 import mage.abilities.StaticAbility;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
@@ -63,10 +64,12 @@ public class KickerAbility extends StaticAbility<KickerAbility> {
 	@Override
 	public boolean activate(Game game, boolean noMana) {
 		Player player = game.getPlayer(this.getControllerId());
-		String message = "Use kicker - " + getEffects().get(0).getText(null) + "?";
+
+		String message = "Use kicker - " + getRule() + "?";
 		Card card = game.getCard(sourceId);
 		// replace by card name or just plain "this"
-		message = message.replace("{this}", card == null ? "this" : card.getName());
+		String text = card == null ? "this" : card.getName();
+		message = message.replace("{this}", text).replace("{source}", text);
 		if (player.chooseUse(getEffects().get(0).getOutcome(), message, game)) {
 			int bookmark = game.bookmarkState();
 			if (super.activate(game, noMana)) {
