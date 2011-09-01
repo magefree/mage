@@ -61,6 +61,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
+import mage.watchers.common.MorbidWatcher;
 import org.apache.log4j.Logger;
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
@@ -428,6 +429,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 			saveState();
 		}
 
+        state.getWatchers().add(new MorbidWatcher());
+        
 		//20100716 - 103.5
 		for (UUID playerId: state.getPlayerList(startingPlayerId)) {
 			Player player = getPlayer(playerId);
