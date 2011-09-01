@@ -20,12 +20,11 @@ import org.apache.log4j.Logger;
 public class CardsStorage {
 	private static final Logger log = Logger.getLogger(CardsStorage.class);
 	
-	private static List<Card> allCards = new ArrayList<Card>();
-	private static Set<Card> nonBasicLandCards = new LinkedHashSet<Card>();
+	private static final List<Card> allCards;
+	private static final Set<Card> nonBasicLandCards;
+	private static final List<String> setCodes;
 	private static Map<String, Integer> ratings;
 	private static Integer min = Integer.MAX_VALUE, max = 0;
-	private static int cardsCount;
-	private static List<String> setCodes = new ArrayList<String>();
 	private static List<Card> notImplementedCards;
 
 	/**
@@ -34,21 +33,28 @@ public class CardsStorage {
 	 */
 	private static final int DEFAULT_NOT_RATED_CARD_RATING = 6;
 
-	static {
-		for (ExpansionSet set : Sets.getInstance().values()) {
-			setCodes.add(set.getCode());
-			List<Card> cards = set.getCards();
-			allCards.addAll(cards);
-			for (Card card : cards) {
-				if (CardUtil.isLand(card) && !CardUtil.isBasicLand(card)) {
-					nonBasicLandCards.add(card);
-				}
-			}
-		}
-		Collections.sort(allCards, new CardComparator());
-		Collections.sort(setCodes, new SetComparator());
-		cardsCount = allCards.size();
-	}
+    static {
+        allCards = new ArrayList<Card>();
+        nonBasicLandCards = new LinkedHashSet<Card>();
+        setCodes = new ArrayList<String>();
+
+        List<ExpansionSet> sets = new ArrayList<ExpansionSet>(Sets.getInstance().values());
+        Collections.sort(sets, new SetComparator());
+        for (ExpansionSet set : sets) {
+            setCodes.add(set.getCode());
+        }
+
+        for (ExpansionSet set : sets) {
+            List<Card> cards = set.getCards();
+            Collections.sort(cards, new CardComparator());
+            allCards.addAll(cards);
+            for (Card card : cards) {
+                if (CardUtil.isLand(card) && !CardUtil.isBasicLand(card)) {
+                    nonBasicLandCards.add(card);
+                }
+            }
+        }
+    }
 
 	public static List<Card> getAllCards() {
 		return allCards;
@@ -92,12 +98,12 @@ public class CardsStorage {
 	}
 
 	public static int getCardsCount() {
-		return cardsCount;
+		return allCards.size();
 	}
 
-	public static List<String> getSetCodes() {
-		return setCodes;
-	}
+    public static List<String> getSetCodes() {
+        return setCodes;
+    }
 
 	public static Set<Card> getNonBasicLandCards() {
 		return nonBasicLandCards;
@@ -225,69 +231,34 @@ public class CardsStorage {
 
 	/**
 	 * Card comparator.
-	 * First compares set codes, then collector ids and just then card names.
+	 * First compares collector ids and then card names.
 	 * <p/>
 	 * Show latest set cards on top.
 	 *
 	 * @author nantuko
 	 */
-	private static class CardComparator implements Comparator<Card> {
-		private static final String LATEST_SET_CODE = "M12";
+    private static class CardComparator implements Comparator<Card> {
 
-		@Override
-		public int compare(Card o1, Card o2) {
-			String set1 = o1.getExpansionSetCode();
-			String set2 = o2.getExpansionSetCode();
-			if (set1.equals(set2)) {
-				Integer cid1 = o1.getCardNumber();
-				Integer cid2 = o2.getCardNumber();
-				if (cid1 == cid2) {
-					return o1.getName().compareTo(o2.getName());
-				} else {
-					return cid1.compareTo(cid2);
-				}
-			} else {
-				// put latest set on top
-				if (set1.equals(LATEST_SET_CODE)) {
-					return -1;
-				}
-				if (set2.equals(LATEST_SET_CODE)) {
-					return 1;
-				}
-				return set1.compareTo(set2);
-			}
-		}
-	}
+        @Override
+        public int compare(Card o1, Card o2) {
+            Integer cid1 = o1.getCardNumber();
+            Integer cid2 = o2.getCardNumber();
+            if (cid1 == cid2) {
+                return o1.getName().compareTo(o2.getName());
+            } else {
+                return cid1.compareTo(cid2);
+            }
+        }
+    }
 
 	/**
 	 * Set comparator. Puts latest set on top.
 	 */
-	private static class SetComparator implements Comparator<String> {
+	private static class SetComparator implements Comparator<ExpansionSet> {
 
-		/**
-		 * Sets that will be put on top.
-		 */
-		private static final List<String> latestSetCodes = new ArrayList<String>();
-		
-		static {
-			latestSetCodes.add("SOM");
-			latestSetCodes.add("MBS");
-			latestSetCodes.add("NPH");
-			latestSetCodes.add("M12");
-		}
-		
 		@Override
-		public int compare(String set1, String set2) {
-			// put latest set on top
-			for (String set : latestSetCodes) {
-				if (set1.equals(set)) {
-					return -1;
-				}
-				if (set2.equals(set)) {
-					return 1;
-				}
-			}
-			return set1.compareTo(set2);
+		public int compare(ExpansionSet set1, ExpansionSet set2) {
+			return set2.getReleaseDate().compareTo(set1.getReleaseDate());
 		}
 	}
 }
