@@ -287,7 +287,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
 	            disableButtons();
-                checkForNewImages();
+                if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_CHECK, "true").equals("true"))
+                    checkForNewImages();
                 if (autoConnect())
                     enableButtons();
                 else {
@@ -431,7 +432,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         List<Card> notImplemented = CardsStorage.getNotImplementedCards();
         cards.addAll(notImplemented);
         if (Plugins.getInstance().newImage(cards)) {
-            if (JOptionPane.showConfirmDialog(null, "New cards are available.  Do you want to download the images?") == JOptionPane.OK_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "New cards are available.  Do you want to download the images?", "New images available", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 Plugins.getInstance().downloadImage(cards);
             }
         }

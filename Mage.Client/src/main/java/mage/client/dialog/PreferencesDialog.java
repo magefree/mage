@@ -58,6 +58,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 	public static final String KEY_PERMANENTS_IN_ONE_PILE = "nonLandPermanentsInOnePile";
     public static final String KEY_CARD_IMAGES_USE_DEFAULT = "cardImagesUseDefault";
     public static final String KEY_CARD_IMAGES_PATH = "cardImagesPath";
+    public static final String KEY_CARD_IMAGES_CHECK = "cardImagesCheck";
 
     private static Map<String, String> cache = new HashMap<String, String>();
     private static final Boolean UPDATE_CACHE_POLICY = Boolean.TRUE;
@@ -121,6 +122,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         useDefaultImageFolder = new javax.swing.JCheckBox();
         imageFolderPath = new javax.swing.JTextField();
         browseButton = new javax.swing.JButton();
+        checkForNewImages = new javax.swing.JCheckBox();
         saveButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
 
@@ -350,6 +352,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
+        checkForNewImages.setText("check for new images on startup");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -363,7 +367,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
                         .addGap(19, 19, 19)
                         .addComponent(imageFolderPath, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(browseButton)))
+                        .addComponent(browseButton))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(checkForNewImages)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -375,6 +382,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(imageFolderPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(browseButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(checkForNewImages)
                 .addContainerGap(75, Short.MAX_VALUE))
         );
 
@@ -558,6 +567,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
             dialog.imageFolderPath.setText(path);
             updateCache(KEY_CARD_IMAGES_PATH, path);
         }
+        dialog.checkForNewImages.setSelected(Boolean.parseBoolean(prefs.get(KEY_CARD_IMAGES_CHECK, "true")));
+        updateCache(KEY_CARD_IMAGES_CHECK, Boolean.toString(dialog.checkForNewImages.isSelected()));
     }
 
      private static void saveImagesPath(Preferences prefs) {
@@ -571,6 +582,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
             prefs.put(KEY_CARD_IMAGES_PATH, path);
             updateCache(KEY_CARD_IMAGES_PATH, path);
         }
+        prefs.put(KEY_CARD_IMAGES_CHECK, Boolean.toString(dialog.checkForNewImages.isSelected()));
+        updateCache(KEY_CARD_IMAGES_CHECK, Boolean.toString(dialog.checkForNewImages.isSelected()));
     }
 
     private static void load(Preferences prefs, JCheckBox checkBox, String propName, String yesValue) {
@@ -629,6 +642,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox checkBoxMainYou;
     private javax.swing.JCheckBox checkBoxUpkeepOthers;
     private javax.swing.JCheckBox checkBoxUpkeepYou;
+    private javax.swing.JCheckBox checkForNewImages;
     private javax.swing.JCheckBox displayBigCardsInHand;
     private javax.swing.JButton exitButton;
     private javax.swing.JTextField imageFolderPath;
