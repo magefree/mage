@@ -13,7 +13,7 @@ public class Apocalypse extends ExpansionSet {
 	}
 
     private Apocalypse() {
-        super("Apocalypse", "APC", "", "mage.sets.apocalypse", new GregorianCalendar(2009, 5, 1).getTime(), Constants.SetType.EXPANSION);
+        super("Apocalypse", "APC", "", "mage.sets.apocalypse", new GregorianCalendar(2001, 5, 1).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Invasion";
         this.hasBoosters = true;
         this.numBoosterLands = 0;
