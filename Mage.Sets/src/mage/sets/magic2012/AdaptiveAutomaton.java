@@ -29,6 +29,7 @@ package mage.sets.magic2012;
 
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -46,8 +47,6 @@ import mage.players.Player;
 import mage.sets.Sets;
 
 import java.util.UUID;
-
-import static mage.Constants.Duration;
 
 /**
  * @author nantuko
@@ -83,8 +82,8 @@ public class AdaptiveAutomaton extends CardImpl<AdaptiveAutomaton> {
 class AdaptiveAutomatonEffect extends OneShotEffect<AdaptiveAutomatonEffect> {
 
 	public AdaptiveAutomatonEffect() {
-		super(Constants.Outcome.DrawCard);
-		staticText = "As Adaptive Automaton enters the battlefield, choose a creature type";
+		super(Constants.Outcome.BoostCreature);
+		staticText = "As {this} enters the battlefield, choose a creature type";
 	}
 
 	public AdaptiveAutomatonEffect(final AdaptiveAutomatonEffect effect) {
@@ -116,7 +115,7 @@ class AdaptiveAutomatonEffect extends OneShotEffect<AdaptiveAutomatonEffect> {
 class AdaptiveAutomatonAddSubtypeEffect extends ContinuousEffectImpl<AdaptiveAutomatonAddSubtypeEffect> {
 	public AdaptiveAutomatonAddSubtypeEffect() {
 		super(Duration.WhileOnBattlefield, Constants.Layer.TypeChangingEffects_4, Constants.SubLayer.NA, Constants.Outcome.Benefit);
-		staticText = "Adaptive Automaton is the chosen type in addition to its other types";
+		staticText = "{this} is the chosen type in addition to its other types";
 	}
 
 	public AdaptiveAutomatonAddSubtypeEffect(final AdaptiveAutomatonAddSubtypeEffect effect) {

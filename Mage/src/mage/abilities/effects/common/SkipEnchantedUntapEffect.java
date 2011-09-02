@@ -14,7 +14,7 @@ public class SkipEnchantedUntapEffect extends ReplacementEffectImpl<SkipEnchante
 
 	public SkipEnchantedUntapEffect() {
 		super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
-		staticText = "Enchanted permanent doesn't untap during its controller's untap step.";
+		staticText = "Enchanted permanent doesn't untap during its controller's untap step";
 	}
 
 	public SkipEnchantedUntapEffect(final SkipEnchantedUntapEffect effect) {
