@@ -73,7 +73,7 @@ public class Watchers extends ArrayList<Watcher> {
     
 	public Watcher get(UUID controllerId, String key) {
 		for (Watcher watcher: this) {
-			if (watcher.getControllerId().equals(controllerId) && watcher.getKey().equals(key))
+			if ((watcher.getControllerId() == null || watcher.getControllerId().equals(controllerId)) && watcher.getKey().equals(key))
 				return watcher;
 		}
 		return null;
