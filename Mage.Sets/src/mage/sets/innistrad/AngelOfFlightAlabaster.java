@@ -24,7 +24,7 @@ public class AngelOfFlightAlabaster extends CardImpl<AngelOfFlightAlabaster> {
     }
 
     public AngelOfFlightAlabaster(UUID ownerId) {
-        super(ownerId, 2, "Angel of Flight Alabaster", Constants.Rarity.RARE, new Constants.CardType[]{Constants.CardType.CREATURE}, "{4{W}");
+        super(ownerId, 2, "Angel of Flight Alabaster", Constants.Rarity.RARE, new Constants.CardType[]{Constants.CardType.CREATURE}, "{4}{W}");
         this.expansionSetCode = "ISD";
 		this.subtype.add("Angel");
 		this.color.setWhite(true);
