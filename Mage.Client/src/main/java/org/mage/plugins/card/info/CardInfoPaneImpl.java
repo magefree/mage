@@ -46,7 +46,7 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 						manaCost += m;
 					}
 					String castingCost = UI.getDisplayManaCost(manaCost);
-					castingCost = ManaSymbols.replaceSymbolsWithHTML(castingCost, false);
+					castingCost = ManaSymbols.replaceSymbolsWithHTML(castingCost, ManaSymbols.Type.CARD);
 
 					int symbolCount = 0;
 					int offset = 0;
@@ -162,7 +162,7 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 						//buffer.append("<br>");
 						legal = legal.replaceAll("\\{this\\}", card.getName());
 						legal = legal.replaceAll("\\{source\\}", card.getName());
-						buffer.append(ManaSymbols.replaceSymbolsWithHTML(legal, smallImages));
+						buffer.append(ManaSymbols.replaceSymbolsWithHTML(legal, ManaSymbols.Type.CARD));
 					}
 
 					buffer.append("<br></body></html>");

@@ -31,7 +31,6 @@ public class MageTextArea extends JEditorPane {
     public void setText(String text, CardView source) {
         if (text == null) return;
 
-        boolean smallImages = false;
         int fontSize = 16;
 
         String fontFamily = "arial";
@@ -52,7 +51,7 @@ public class MageTextArea extends JEditorPane {
             //buffer.append("<br>");
             //text = text.replaceAll("\\{this\\}", card.getName());
             //text = text.replaceAll("\\{source\\}", card.getName());
-            buffer.append(ManaSymbols.replaceSymbolsWithHTML(text, smallImages));
+            buffer.append(ManaSymbols.replaceSymbolsWithHTML(text, ManaSymbols.Type.PAY));
         }
 
         buffer.append("</b></center></body></html>");
