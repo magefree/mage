@@ -44,6 +44,7 @@ import java.util.concurrent.ExecutionException;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import mage.client.MageFrame;
+import mage.client.chat.ChatPanel;
 import mage.remote.Session;
 import mage.client.util.ButtonColumn;
 import mage.view.RoundView;
@@ -75,6 +76,8 @@ public class TournamentPanel extends javax.swing.JPanel {
 
 		tablePlayers.createDefaultColumnsFromModel();
 		tableMatches.createDefaultColumnsFromModel();
+
+		chatPanel1.useExtendedView(ChatPanel.VIEW_MODE.NONE);
 
 		Action action = new AbstractAction()
 		{

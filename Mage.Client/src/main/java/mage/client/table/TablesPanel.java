@@ -178,6 +178,10 @@ public class TablesPanel extends javax.swing.JPanel {
 			}
 		};
 
+
+		// adds buttons (don't delete this)
+		new ButtonColumn(tableTables, joinTable, 6);
+		new ButtonColumn(tableCompleted, replayMatch, 5);
     }
 
     public Map<String, JComponent> getUIComponents() {
