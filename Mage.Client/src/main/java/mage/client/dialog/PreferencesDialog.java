@@ -644,33 +644,25 @@ public class PreferencesDialog extends javax.swing.JDialog {
 		save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false", UPDATE_CACHE_POLICY);
 
 		// connection
-		//MageFrame.getPreferences().put("proxyAddress", txtProxyServer.getText().trim());
-		//MageFrame.getPreferences().put("proxyPort", txtProxyPort.getText().trim());
-		//MageFrame.getPreferences().put("proxyType", cbProxyType.getSelectedItem().toString());
-		//MageFrame.getPreferences().put("proxyUsername", txtProxyUserName.getText().trim());
-		//char[] input = txtPasswordField.getPassword();
-		//MageFrame.getPreferences().put("proxyPassword", new String(input));
-		//Arrays.fill(input, '0');
-
-		//TODO: !!!!!!!!!!!!!
-		// connection
-		/*dialog.cbProxyType.setSelectedItem(Connection.ProxyType.valueOf(MageFrame.getPreferences().get(KEY_PROXY_TYPE, "NONE").toUpperCase()));
-		load(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS, Config.serverName);
-		load(prefs, dialog.txtProxyPort, KEY_PROXY_PORT, Integer.toString(Config.port));
-		load(prefs, dialog.txtProxyUserName, KEY_PROXY_USERNAME, "");
-		load(prefs, dialog.rememberPswd, KEY_PROXY_REMEMBER, "true", "false");
+		save(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS);
+		save(prefs, dialog.txtProxyPort, KEY_PROXY_PORT);
+		save(prefs, dialog.txtProxyUserName, KEY_PROXY_USERNAME);
+		save(prefs, dialog.rememberPswd, KEY_PROXY_REMEMBER, "true", "false", UPDATE_CACHE_POLICY);
 		if (dialog.rememberPswd.isSelected()) {
-			load(prefs, dialog.txtPasswordField, KEY_PROXY_PSWD, "");
-		}*/
+			char[] input = txtPasswordField.getPassword();
+			prefs.put(KEY_PROXY_PSWD, new String(input));
+		}
 
 		// images
 		saveImagesPath(prefs);
+
         try {
             prefs.flush();
         } catch (BackingStoreException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error: couldn't save phase stops. Please try again.");
         }
+
         dialog.setVisible(false);
     }//GEN-LAST:event_saveButtonActionPerformed
 
@@ -679,11 +671,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void showToolTipsInHandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showToolTipsInHandActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_showToolTipsInHandActionPerformed
 
     private void displayBigCardsInHandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayBigCardsInHandActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_displayBigCardsInHandActionPerformed
 
     private void useDefaultImageFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_useDefaultImageFolderActionPerformed
@@ -875,6 +865,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         if (updateCache) {
             updateCache(propName, checkBox.isSelected() ? yesValue : onValue);
         }
+    }
+
+	private static void save(Preferences prefs, JTextField textField, String propName) {
+        prefs.put(propName, textField.getText().trim());
+		updateCache(propName, textField.getText().trim());
     }
 
 	public void reset() {

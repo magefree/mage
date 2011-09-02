@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.prefs.Preferences;
 
 import javax.management.ImmutableDescriptor;
 import javax.swing.AbstractButton;
@@ -45,6 +46,9 @@ import javax.swing.event.ChangeListener;
 
 import mage.cards.Card;
 
+import mage.client.MageFrame;
+import mage.client.dialog.PreferencesDialog;
+import mage.remote.Connection;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.dl.sources.CardImageSource;
@@ -57,7 +61,7 @@ import org.mage.plugins.card.utils.CardImageUtils;
 public class DownloadPictures extends DefaultBoundedRangeModel implements Runnable {
 
 	private int type;
-	private JTextField addr, port;
+	//private JTextField addr, port;
 	private JProgressBar bar;
 	private JOptionPane dlg;
 	private boolean cancel;
@@ -121,15 +125,15 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		this.cards = cards;
         this.imagesPath = imagesPath;
 
-		addr = new JTextField("Proxy Address");
-		port = new JTextField("Proxy Port");
+		//addr = new JTextField("Proxy Address");
+		//port = new JTextField("Proxy Port");
 		bar = new JProgressBar(this);
 
 		JPanel p0 = new JPanel();
 		p0.setLayout(new BoxLayout(p0, BoxLayout.Y_AXIS));
 
 		// Proxy Choice
-		ButtonGroup bg = new ButtonGroup();
+		/*ButtonGroup bg = new ButtonGroup();
 		String[] labels = { "No Proxy", "HTTP Proxy", "SOCKS Proxy" };
 		for (int i = 0; i < types.length; i++) {
 			JRadioButton rb = new JRadioButton(labels[i]);
@@ -138,11 +142,11 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 			p0.add(rb);
 			if (i == 0)
 				rb.setSelected(true);
-		}
+		}*/
 
 		// Proxy config
-		p0.add(addr);
-		p0.add(port);
+		//p0.add(addr);
+		//p0.add(port);
 
 		p0.add(Box.createVerticalStrut(5));
 		jLabel1 = new JLabel();
@@ -384,11 +388,11 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
         @Override
 		public void stateChanged(ChangeEvent e) {
-			if (((AbstractButton) e.getSource()).isSelected()) {
+			/*if (((AbstractButton) e.getSource()).isSelected()) {
 				DownloadPictures.this.type = type;
 				addr.setEnabled(type != 0);
 				port.setEnabled(type != 0);
-			}
+			}*/
 		}
 	}
 
@@ -400,14 +404,25 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 			base.mkdir();
 		}
 
-		if (type == 0)
-			p = Proxy.NO_PROXY;
-		else
+		Connection.ProxyType configProxyType = Connection.ProxyType.valueByText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_TYPE, "None"));
+
+		Proxy.Type type = Proxy.Type.DIRECT;
+		switch (configProxyType) {
+			case HTTP: type = Proxy.Type.HTTP; break;
+			case SOCKS: type = Proxy.Type.SOCKS; break;
+			case NONE:
+			default: p = Proxy.NO_PROXY; break;
+		}
+
+		if (!p.equals(Proxy.NO_PROXY)) {
 			try {
-				p = new Proxy(types[type], new InetSocketAddress(addr.getText(), Integer.parseInt(port.getText())));
+				String address = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_ADDRESS, "");
+				Integer port = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_PORT, "80"));
+				p = new Proxy(type, new InetSocketAddress(address, port));
 			} catch (Exception ex) {
 				throw new RuntimeException("Gui_DownloadPictures : error 1 - " + ex);
 			}
+		}
 
 		if (p != null) {
 			HashSet<String> ignoreUrls = SettingsManager.getIntance().getIgnoreUrls();

@@ -37,6 +37,8 @@ package mage.client.dialog;
 import java.awt.Cursor;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -267,18 +269,11 @@ public class ConnectDialog extends MageDialog {
 			connection.setPort(Integer.valueOf(this.txtPort.getText().trim()));
 			connection.setUsername(this.txtUserName.getText().trim());
 
-			String proxyType = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_TYPE, "None");
-			ProxyType configProxyType = null;
-			for (ProxyType pt : Connection.ProxyType.values()) {
-				if (pt.toString().equals(proxyType)) {
-					configProxyType = pt;
-					break;
-				}
-			}
+			ProxyType configProxyType = Connection.ProxyType.valueByText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_TYPE, "None"));
 
 			if (configProxyType != null) {
 				connection.setProxyType(configProxyType);
-				if (!proxyType.equals("None")) {
+				if (!configProxyType.equals(ProxyType.NONE)) {
 					String host = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_ADDRESS, "");
 					String port = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_PORT, "");
 					if (!host.isEmpty() && !port.isEmpty()) {
@@ -361,7 +356,34 @@ public class ConnectDialog extends MageDialog {
     	BufferedReader in = null;
     	try {
 			URL serverListURL = new URL("http://mage.googlecode.com/files/server-list.txt");
-			in = new BufferedReader(new InputStreamReader(serverListURL.openStream()));
+
+			Connection.ProxyType configProxyType = Connection.ProxyType.valueByText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_TYPE, "None"));
+
+			Proxy p = null;
+			Proxy.Type type = Proxy.Type.DIRECT;
+			switch (configProxyType) {
+				case HTTP: type = Proxy.Type.HTTP; break;
+				case SOCKS: type = Proxy.Type.SOCKS; break;
+				case NONE:
+				default: p = Proxy.NO_PROXY; break;
+			}
+
+			if (!p.equals(Proxy.NO_PROXY)) {
+				try {
+					String address = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_ADDRESS, "");
+					Integer port = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_PORT, "80"));
+					p = new Proxy(type, new InetSocketAddress(address, port));
+				} catch (Exception ex) {
+					throw new RuntimeException("Gui_DownloadPictures : error 1 - " + ex);
+				}
+			}
+
+			if (p == null) {
+				JOptionPane.showMessageDialog(null, "Couldn't configure Proxy object!", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			in = new BufferedReader(new InputStreamReader(serverListURL.openConnection(p).getInputStream()));
 			
 			List<String> servers = new ArrayList<String>();
 			String inputLine;
