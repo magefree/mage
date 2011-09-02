@@ -99,8 +99,15 @@ public class TablesPanel extends javax.swing.JPanel {
 
 		tableTables.createDefaultColumnsFromModel();
 		chatPanel.useExtendedView(ChatPanel.VIEW_MODE.NONE);
-		chatPanel.setOpaque(false);
 		chatPanel.setBorder(null);
+
+		JComponent[] components = new JComponent[] {chatPanel, jSplitPane1, jScrollPane1, jScrollPane2, jPanel1, jPanel3};
+		for (JComponent component : components) {
+			component.setOpaque(false);
+		}
+
+		jScrollPane1.getViewport().setBackground(new Color(255,255,255,50));
+		jScrollPane2.getViewport().setBackground(new Color(255,255,255,50));
 
 		Action joinTable = new AbstractAction()
 		{
@@ -171,13 +178,6 @@ public class TablesPanel extends javax.swing.JPanel {
 			}
 		};
 
-        ButtonColumn buttonColumn1 = new ButtonColumn(tableTables, joinTable, 6);
-		ButtonColumn buttonColumn2 = new ButtonColumn(tableCompleted, replayMatch, 5);
-		
-		jSplitPane1.setOpaque(false);
-		jScrollPane1.setOpaque(false);
-		jPanel1.setOpaque(false);
-		jScrollPane1.getViewport().setBackground(new Color(20,20,20,150));
     }
 
     public Map<String, JComponent> getUIComponents() {
@@ -416,7 +416,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, 449, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(440, 440, 440))
