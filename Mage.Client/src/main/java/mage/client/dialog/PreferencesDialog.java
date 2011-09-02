@@ -33,18 +33,18 @@
  */
 package mage.client.dialog;
 
+import mage.client.MageFrame;
+import mage.client.util.Config;
+import mage.remote.Connection;
+
+import javax.swing.*;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.prefs.BackingStoreException;
-
-import mage.client.MageFrame;
-
-import javax.swing.*;
 import java.util.prefs.Preferences;
 
 import static mage.client.util.PhaseManager.*;
-import static mage.client.util.PhaseManager.END_OF_TURN_OTHERS;
 
 /**
  * Preferences dialog.
@@ -60,10 +60,19 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CARD_IMAGES_PATH = "cardImagesPath";
     public static final String KEY_CARD_IMAGES_CHECK = "cardImagesCheck";
 
+	public static final String KEY_PROXY_ADDRESS = "proxyAddress";
+	public static final String KEY_PROXY_PORT = "proxyPort";
+	public static final String KEY_PROXY_USERNAME = "proxyUsername";
+	public static final String KEY_PROXY_REMEMBER = "proxyRemember";
+	public static final String KEY_PROXY_TYPE = "proxyType";
+	public static final String KEY_PROXY_PSWD = "proxyPassword";
+
     private static Map<String, String> cache = new HashMap<String, String>();
     private static final Boolean UPDATE_CACHE_POLICY = Boolean.TRUE;
 
-    private final JFileChooser fc = new JFileChooser();
+	public static final String OPEN_CONNECTION_TAB = "Open-Connection-Tab";
+
+	private final JFileChooser fc = new JFileChooser();
 
     {
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -74,6 +83,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         imageFolderPath.setEditable(false);
+		cbProxyType.setModel(new DefaultComboBoxModel(Connection.ProxyType.values()));
     }
 
     /** This method is called from within the constructor to
@@ -88,10 +98,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-		jPanel6 = new javax.swing.JPanel();
         showToolTipsInHand = new javax.swing.JCheckBox();
-		nonLandPermanentsInOnePile = new javax.swing.JCheckBox();
         displayBigCardsInHand = new javax.swing.JCheckBox();
+        jPanel7 = new javax.swing.JPanel();
+        nonLandPermanentsInOnePile = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -123,13 +133,28 @@ public class PreferencesDialog extends javax.swing.JDialog {
         imageFolderPath = new javax.swing.JTextField();
         browseButton = new javax.swing.JButton();
         checkForNewImages = new javax.swing.JCheckBox();
+        jPanel6 = new javax.swing.JPanel();
+        lblProxyType = new javax.swing.JLabel();
+        cbProxyType = new javax.swing.JComboBox();
+        pnlProxySettings = new javax.swing.JPanel();
+        pnlProxy = new javax.swing.JPanel();
+        lblProxyServer = new javax.swing.JLabel();
+        txtProxyServer = new javax.swing.JTextField();
+        lblProxyPort = new javax.swing.JLabel();
+        txtProxyPort = new javax.swing.JTextField();
+        lblProxyUserName = new javax.swing.JLabel();
+        txtProxyUserName = new javax.swing.JTextField();
+        lblProxyPassword = new javax.swing.JLabel();
+        txtPasswordField = new javax.swing.JPasswordField();
+        rememberPswd = new javax.swing.JCheckBox();
+        jLabel11 = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Preferences");
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Hand"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Hand"));
 
         showToolTipsInHand.setSelected(true);
         showToolTipsInHand.setText("Show tooltips");
@@ -146,11 +171,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-		jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Battlefield"));
-
-		nonLandPermanentsInOnePile.setSelected(false);
-        nonLandPermanentsInOnePile.setText("Put non-land permanents in one pile.");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -160,7 +180,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(showToolTipsInHand)
                     .addComponent(displayBigCardsInHand))
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,40 +191,56 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Battlefield"));
+
+        nonLandPermanentsInOnePile.setSelected(true);
+        nonLandPermanentsInOnePile.setLabel("Put non-land permanents in one pile");
+        nonLandPermanentsInOnePile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nonLandPermanentsInOnePileActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(nonLandPermanentsInOnePile)
+                .addContainerGap(199, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addComponent(nonLandPermanentsInOnePile)
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+
+        nonLandPermanentsInOnePile.getAccessibleContext().setAccessibleName("nonLandPermanentsInOnePile");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            	.addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            	.addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-		);
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-				.addContainerGap()
-				.addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
-		javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nonLandPermanentsInOnePile)
-                    )
-                .addContainerGap(170, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(nonLandPermanentsInOnePile)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel7.getAccessibleContext().setAccessibleName("Battlefield");
 
         jTabbedPane1.addTab("Main", jPanel1);
 
@@ -235,48 +271,48 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8))
-                                .addGap(77, 77, 77)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(2, 2, 2)
-                                        .addComponent(jLabel9)
-                                        .addGap(32, 32, 32)
-                                        .addComponent(jLabel10))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(13, 13, 13)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(checkBoxDrawYou)
-                                            .addComponent(checkBoxUpkeepYou)
-                                            .addComponent(checkBoxMainYou)
-                                            .addComponent(checkBoxBeforeCYou)
-                                            .addComponent(checkBoxEndOfCYou)
-                                            .addComponent(checkBoxMain2You)
-                                            .addComponent(checkBoxEndTurnYou))
-                                        .addGap(78, 78, 78)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(checkBoxUpkeepOthers)
-                                            .addComponent(checkBoxBeforeCOthers)
-                                            .addComponent(checkBoxMainOthers)
-                                            .addComponent(checkBoxEndOfCOthers)
-                                            .addComponent(checkBoxDrawOthers)
-                                            .addComponent(checkBoxMain2Others)
-                                            .addComponent(checkBoxEndTurnOthers)))))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+							.addGap(20, 20, 20)
+							.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+									.addGroup(jPanel2Layout.createSequentialGroup()
+											.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+													.addComponent(jLabel2)
+													.addComponent(jLabel5)
+													.addComponent(jLabel6)
+													.addComponent(jLabel7)
+													.addComponent(jLabel8))
+											.addGap(77, 77, 77)
+											.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+													.addGroup(jPanel2Layout.createSequentialGroup()
+															.addGap(2, 2, 2)
+															.addComponent(jLabel9)
+															.addGap(32, 32, 32)
+															.addComponent(jLabel10))
+													.addGroup(jPanel2Layout.createSequentialGroup()
+															.addGap(13, 13, 13)
+															.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+																	.addComponent(checkBoxDrawYou)
+																	.addComponent(checkBoxUpkeepYou)
+																	.addComponent(checkBoxMainYou)
+																	.addComponent(checkBoxBeforeCYou)
+																	.addComponent(checkBoxEndOfCYou)
+																	.addComponent(checkBoxMain2You)
+																	.addComponent(checkBoxEndTurnYou))
+															.addGap(78, 78, 78)
+															.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+																	.addComponent(checkBoxUpkeepOthers)
+																	.addComponent(checkBoxBeforeCOthers)
+																	.addComponent(checkBoxMainOthers)
+																	.addComponent(checkBoxEndOfCOthers)
+																	.addComponent(checkBoxDrawOthers)
+																	.addComponent(checkBoxMain2Others)
+																	.addComponent(checkBoxEndTurnOthers)))))
+									.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+											.addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+											.addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)))
-                .addContainerGap(109, Short.MAX_VALUE))
+							.addContainerGap()
+							.addComponent(jLabel1)))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,19 +320,19 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(checkBoxUpkeepOthers))
+							.addComponent(jLabel10)
+							.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+							.addComponent(checkBoxUpkeepOthers))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(20, 20, 20))
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(checkBoxUpkeepYou)
-                            .addComponent(jLabel2))))
+							.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+									.addGroup(jPanel2Layout.createSequentialGroup()
+											.addComponent(jLabel1)
+											.addGap(20, 20, 20))
+									.addComponent(jLabel9))
+							.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+							.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+									.addComponent(checkBoxUpkeepYou)
+									.addComponent(jLabel2))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
@@ -309,13 +345,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(checkBoxMainOthers))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(checkBoxBeforeCYou, javax.swing.GroupLayout.Alignment.TRAILING)))
+							.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+							.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+									.addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+									.addComponent(checkBoxBeforeCYou, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(checkBoxBeforeCOthers)))
+							.addGap(6, 6, 6)
+							.addComponent(checkBoxBeforeCOthers)))
                 .addGap(7, 7, 7)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
@@ -336,7 +372,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Phases", jPanel2);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Card images location:"));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card images location:"));
 
         useDefaultImageFolder.setText("use default");
         useDefaultImageFolder.addActionListener(new java.awt.event.ActionListener() {
@@ -361,17 +397,17 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(useDefaultImageFolder))
+							.addContainerGap()
+							.addComponent(useDefaultImageFolder))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(imageFolderPath, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(browseButton))
+							.addGap(19, 19, 19)
+							.addComponent(imageFolderPath, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+							.addComponent(browseButton))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(checkForNewImages)))
-                .addContainerGap(19, Short.MAX_VALUE))
+							.addContainerGap()
+							.addComponent(checkForNewImages)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,7 +420,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(browseButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(checkForNewImages)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -401,10 +437,150 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Images", jPanel4);
+
+        lblProxyType.setText("Proxy:");
+
+        cbProxyType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbProxyTypeActionPerformed(evt);
+            }
+        });
+
+        pnlProxySettings.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblProxyServer.setText("Server:");
+
+        lblProxyPort.setText("Port:");
+
+        txtProxyPort.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtProxyPortkeyTyped(evt);
+            }
+        });
+
+        lblProxyUserName.setText("User Name:");
+
+        lblProxyPassword.setText("Password:");
+
+        txtPasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordFieldActionPerformed(evt);
+            }
+        });
+
+        rememberPswd.setText("Remember Password");
+        rememberPswd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rememberPswdActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 2, 10));
+        jLabel11.setText("Note: password won't be encrypted!");
+
+        javax.swing.GroupLayout pnlProxyLayout = new javax.swing.GroupLayout(pnlProxy);
+        pnlProxy.setLayout(pnlProxyLayout);
+        pnlProxyLayout.setHorizontalGroup(
+            pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlProxyLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(rememberPswd)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11)
+                .addGap(34, 34, 34))
+            .addGroup(pnlProxyLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblProxyPort)
+                    .addComponent(lblProxyPassword)
+                    .addComponent(lblProxyServer)
+                    .addComponent(lblProxyUserName))
+                .addGap(19, 19, 19)
+                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtProxyPort, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+							.addComponent(txtPasswordField, javax.swing.GroupLayout.Alignment.LEADING)
+							.addComponent(txtProxyUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtProxyServer, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        pnlProxyLayout.setVerticalGroup(
+            pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlProxyLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtProxyServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProxyServer))
+                .addGap(8, 8, 8)
+                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProxyPort)
+                    .addComponent(txtProxyPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtProxyUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProxyUserName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProxyPassword))
+                .addGap(18, 18, 18)
+                .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rememberPswd)
+                    .addComponent(jLabel11))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout pnlProxySettingsLayout = new javax.swing.GroupLayout(pnlProxySettings);
+        pnlProxySettings.setLayout(pnlProxySettingsLayout);
+        pnlProxySettingsLayout.setHorizontalGroup(
+            pnlProxySettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlProxySettingsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlProxy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnlProxySettingsLayout.setVerticalGroup(
+            pnlProxySettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlProxySettingsLayout.createSequentialGroup()
+                .addComponent(pnlProxy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(lblProxyType)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbProxyType, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(pnlProxySettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProxyType)
+                    .addComponent(cbProxyType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlProxySettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+
+        pnlProxySettings.getAccessibleContext().setAccessibleDescription("");
+
+        jTabbedPane1.addTab("Connection", jPanel6);
 
         saveButton.setLabel("Save");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
@@ -424,9 +600,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(320, Short.MAX_VALUE)
+                .addContainerGap(311, Short.MAX_VALUE)
                 .addComponent(saveButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -466,7 +642,29 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.showToolTipsInHand, KEY_HAND_SHOW_TOOLTIPS, "true", "false", UPDATE_CACHE_POLICY);
 		save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false", UPDATE_CACHE_POLICY);
-        saveImagesPath(prefs);
+
+		// connection
+		//MageFrame.getPreferences().put("proxyAddress", txtProxyServer.getText().trim());
+		//MageFrame.getPreferences().put("proxyPort", txtProxyPort.getText().trim());
+		//MageFrame.getPreferences().put("proxyType", cbProxyType.getSelectedItem().toString());
+		//MageFrame.getPreferences().put("proxyUsername", txtProxyUserName.getText().trim());
+		//char[] input = txtPasswordField.getPassword();
+		//MageFrame.getPreferences().put("proxyPassword", new String(input));
+		//Arrays.fill(input, '0');
+
+		//TODO: !!!!!!!!!!!!!
+		// connection
+		/*dialog.cbProxyType.setSelectedItem(Connection.ProxyType.valueOf(MageFrame.getPreferences().get(KEY_PROXY_TYPE, "NONE").toUpperCase()));
+		load(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS, Config.serverName);
+		load(prefs, dialog.txtProxyPort, KEY_PROXY_PORT, Integer.toString(Config.port));
+		load(prefs, dialog.txtProxyUserName, KEY_PROXY_USERNAME, "");
+		load(prefs, dialog.rememberPswd, KEY_PROXY_REMEMBER, "true", "false");
+		if (dialog.rememberPswd.isSelected()) {
+			load(prefs, dialog.txtPasswordField, KEY_PROXY_PSWD, "");
+		}*/
+
+		// images
+		saveImagesPath(prefs);
         try {
             prefs.flush();
         } catch (BackingStoreException ex) {
@@ -518,41 +716,104 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_browseButtonActionPerformed
 
+    private void cbProxyTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProxyTypeActionPerformed
+        this.showProxySettings();
+	}//GEN-LAST:event_cbProxyTypeActionPerformed
+
+    private void txtPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordFieldActionPerformed
+	}//GEN-LAST:event_txtPasswordFieldActionPerformed
+
+    private void txtProxyPortkeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProxyPortkeyTyped
+	}//GEN-LAST:event_txtProxyPortkeyTyped
+
+    private void nonLandPermanentsInOnePileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nonLandPermanentsInOnePileActionPerformed
+    }//GEN-LAST:event_nonLandPermanentsInOnePileActionPerformed
+
+    private void rememberPswdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rememberPswdActionPerformed
+    }//GEN-LAST:event_rememberPswdActionPerformed
+
+	private void showProxySettings() {
+		if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
+			this.pnlProxy.setVisible(true);
+			this.pnlProxySettings.setVisible(true);
+		}
+		else if (cbProxyType.getSelectedItem() == Connection.ProxyType.HTTP) {
+			this.pnlProxy.setVisible(true);
+			this.pnlProxySettings.setVisible(true);
+		}
+		else if (cbProxyType.getSelectedItem() == Connection.ProxyType.NONE) {
+			this.pnlProxy.setVisible(false);
+			this.pnlProxySettings.setVisible(false);
+		}
+		this.pack();
+		this.repaint();
+	}
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+		int param = 0;
+		if (args.length > 0) {
+			String param1 = args[0];
+			if (param1.equals(OPEN_CONNECTION_TAB)) {
+				param = 3;
+			}
+		}
+		final int openedTab = param;
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                if (!dialog.isVisible()) {
-                    Preferences prefs = MageFrame.getPreferences();
-                    load(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU);
-                    load(prefs, dialog.checkBoxDrawYou, DRAW_YOU);
-                    load(prefs, dialog.checkBoxMainYou, MAIN_YOU);
-                    load(prefs, dialog.checkBoxBeforeCYou, BEFORE_COMBAT_YOU);
-                    load(prefs, dialog.checkBoxEndOfCYou, END_OF_COMBAT_YOU);
-                    load(prefs, dialog.checkBoxMain2You, MAIN_2_YOU);
-                    load(prefs, dialog.checkBoxEndTurnYou, END_OF_TURN_YOU);
+			public void run() {
+				if (!dialog.isVisible()) {
+					Preferences prefs = MageFrame.getPreferences();
+					load(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU);
+					load(prefs, dialog.checkBoxDrawYou, DRAW_YOU);
+					load(prefs, dialog.checkBoxMainYou, MAIN_YOU);
+					load(prefs, dialog.checkBoxBeforeCYou, BEFORE_COMBAT_YOU);
+					load(prefs, dialog.checkBoxEndOfCYou, END_OF_COMBAT_YOU);
+					load(prefs, dialog.checkBoxMain2You, MAIN_2_YOU);
+					load(prefs, dialog.checkBoxEndTurnYou, END_OF_TURN_YOU);
 
-                    load(prefs, dialog.checkBoxUpkeepOthers, UPKEEP_OTHERS);
-                    load(prefs, dialog.checkBoxDrawOthers, DRAW_OTHERS);
-                    load(prefs, dialog.checkBoxMainOthers, MAIN_OTHERS);
-                    load(prefs, dialog.checkBoxBeforeCOthers, BEFORE_COMBAT_OTHERS);
-                    load(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS);
-                    load(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS);
-                    load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
-                    load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true");
-                    load(prefs, dialog.showToolTipsInHand, KEY_HAND_SHOW_TOOLTIPS, "true");
+					load(prefs, dialog.checkBoxUpkeepOthers, UPKEEP_OTHERS);
+					load(prefs, dialog.checkBoxDrawOthers, DRAW_OTHERS);
+					load(prefs, dialog.checkBoxMainOthers, MAIN_OTHERS);
+					load(prefs, dialog.checkBoxBeforeCOthers, BEFORE_COMBAT_OTHERS);
+					load(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS);
+					load(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS);
+					load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
+					load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true");
+					load(prefs, dialog.showToolTipsInHand, KEY_HAND_SHOW_TOOLTIPS, "true");
 					load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
-                    loadImagesPath(prefs);
-                    dialog.setLocation(300, 200);
-                    dialog.reset();
-                    dialog.setVisible(true);
-                } else {
-                    dialog.requestFocus();
-                }
-            }
-        });
+
+					// connection
+					dialog.cbProxyType.setSelectedItem(Connection.ProxyType.valueOf(MageFrame.getPreferences().get(KEY_PROXY_TYPE, "NONE").toUpperCase()));
+					load(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS, Config.serverName);
+					load(prefs, dialog.txtProxyPort, KEY_PROXY_PORT, Integer.toString(Config.port));
+					load(prefs, dialog.txtProxyUserName, KEY_PROXY_USERNAME, "");
+					load(prefs, dialog.rememberPswd, KEY_PROXY_REMEMBER, "true", "false");
+					if (dialog.rememberPswd.isSelected()) {
+						load(prefs, dialog.txtPasswordField, KEY_PROXY_PSWD, "");
+					}
+
+					// images
+					loadImagesPath(prefs);
+
+					dialog.setLocation(300, 200);
+					dialog.reset();
+
+					try {
+						if (openedTab > 0) {
+							dialog.jTabbedPane1.setSelectedIndex(3);
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+					dialog.setVisible(true);
+				} else {
+					dialog.requestFocus();
+				}
+			}
+		});
     }
 
     private static void loadImagesPath(Preferences prefs) {
@@ -589,6 +850,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private static void load(Preferences prefs, JCheckBox checkBox, String propName, String yesValue) {
         String prop = prefs.get(propName, yesValue);
         checkBox.setSelected(prop.equals(yesValue));
+    }
+
+	private static void load(Preferences prefs, JCheckBox checkBox, String propName, String yesValue, String defaultValue) {
+        String prop = prefs.get(propName, defaultValue);
+        checkBox.setSelected(prop.equals(yesValue));
+    }
+
+	private static void load(Preferences prefs, JTextField field, String propName, String defaultValue) {
+        String prop = prefs.get(propName, defaultValue);
+        field.setText(prop);
     }
 
     private static void load(Preferences prefs, JCheckBox checkBox, String propName) {
@@ -628,6 +899,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browseButton;
+    private javax.swing.JComboBox cbProxyType;
     private javax.swing.JCheckBox checkBoxBeforeCOthers;
     private javax.swing.JCheckBox checkBoxBeforeCYou;
     private javax.swing.JCheckBox checkBoxDrawOthers;
@@ -648,6 +920,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JTextField imageFolderPath;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -661,12 +934,25 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-	private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblProxyPassword;
+    private javax.swing.JLabel lblProxyPort;
+    private javax.swing.JLabel lblProxyServer;
+    private javax.swing.JLabel lblProxyType;
+    private javax.swing.JLabel lblProxyUserName;
+    private javax.swing.JCheckBox nonLandPermanentsInOnePile;
+    private javax.swing.JPanel pnlProxy;
+    private javax.swing.JPanel pnlProxySettings;
+    private javax.swing.JCheckBox rememberPswd;
     private javax.swing.JButton saveButton;
     private javax.swing.JCheckBox showToolTipsInHand;
+    private javax.swing.JPasswordField txtPasswordField;
+    private javax.swing.JTextField txtProxyPort;
+    private javax.swing.JTextField txtProxyServer;
+    private javax.swing.JTextField txtProxyUserName;
     private javax.swing.JCheckBox useDefaultImageFolder;
-	private javax.swing.JCheckBox nonLandPermanentsInOnePile;
     // End of variables declaration//GEN-END:variables
 
     private static final PreferencesDialog dialog = new PreferencesDialog(new javax.swing.JFrame(), true);
