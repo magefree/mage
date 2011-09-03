@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.TargetPlayer;
 
 import java.util.UUID;
 
@@ -55,7 +55,7 @@ public class ScepterOfEmpires extends CardImpl<ScepterOfEmpires> {
 		// {tap}: Scepter of Empires deals 1 damage to target player. It deals 3 damage to that player instead if you control artifacts named Crown of Empires and Throne of Empires.
 		Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ScepterOfEmpiresEffect(), new GenericManaCost(0));
 		ability.addCost(new TapSourceCost());
-		ability.addTarget(new TargetCreatureOrPlayer());
+		ability.addTarget(new TargetPlayer());
 		this.addAbility(ability);
 	}
 
