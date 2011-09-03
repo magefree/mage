@@ -48,7 +48,7 @@ public class CantCounterAbility extends StaticAbility<CantCounterAbility> {
 
 	@Override
 	public String getRule() {
-		return "{this} can't be countered";
+		return "{this} can't be countered.";
 	}
 
 	@Override
