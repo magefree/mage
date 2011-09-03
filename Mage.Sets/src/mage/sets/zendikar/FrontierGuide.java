@@ -57,10 +57,12 @@ public class FrontierGuide extends CardImpl<FrontierGuide> {
         this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true),
                 new ManaCostsImpl("{3}{G}"));
         ability.addCost(new TapSourceCost());
+		this.addAbility(ability);
     }
 
     public FrontierGuide(final FrontierGuide card) {
