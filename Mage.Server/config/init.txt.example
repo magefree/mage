@@ -6,7 +6,7 @@
 #
 # Format: <zone>:<nickname>:<card name>:<amount>
 # 
-# zone ::= hand | battlefield | graveyard
+# zone ::= hand | battlefield | graveyard | library
 # nickname - Player's name you connect to the game with
 #
 #
@@ -16,3 +16,4 @@ battlefield:computer:Island:2
 battlefield:player:Plains:3
 hand:player:Whispersilk Cloak:1
 hand:computer:Lightning Bolt:1
+library:player:Shock:2
