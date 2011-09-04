@@ -45,6 +45,7 @@ public enum CounterType {
     LEVEL(new LevelCounter().name),
     TIME(new TimeCounter().name),
     FADE(new FadeCounter().name),
+    FATE(new FateCounter().name),
     FEATHER(new FeatherCounter().name),
     QUEST(new QuestCounter().name),
     ARROWHEAD(new ArrowheadCounter().name),
@@ -105,6 +106,8 @@ public enum CounterType {
                 return new TimeCounter(amount);
             case FADE:
                 return new FadeCounter(amount);
+            case FATE:
+                return new FateCounter(amount);
             case FEATHER:
                 return new FeatherCounter(amount);
             case QUEST:
