@@ -27,8 +27,10 @@
  */
 package mage.server;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
@@ -62,6 +64,8 @@ public class User {
  	private Map<UUID, GameSession> gameSessions = new HashMap<UUID, GameSession>();
 	private Map<UUID, DraftSession> draftSessions = new HashMap<UUID, DraftSession>();
 	private Map<UUID, TournamentSession> tournamentSessions = new HashMap<UUID, TournamentSession>();
+    private Map<UUID, TournamentSession> constructing = new HashMap<UUID, TournamentSession>();
+    private Map<UUID, Deck> sideboarding = new HashMap<UUID, Deck>();
 	
 	public User(String userName, String host) {
 		this.userName = userName;
@@ -130,6 +134,7 @@ public class User {
 
 	public void sideboard(final Deck deck, final UUID tableId, final int time) {
 		fireCallback(new ClientCallback("sideboard", tableId, new TableClientMessage(deck, tableId, time)));
+        sideboarding.put(tableId, deck);
 	}
 
 	public void construct(final Deck deck, final UUID tableId, final int time) {
@@ -187,6 +192,13 @@ public class User {
 			entry.getValue().init();
 			entry.getValue().update();
 		}
+        for (Entry<UUID, TournamentSession> entry: constructing.entrySet()) {
+            entry.getValue().construct(0);
+        }
+        for (Entry<UUID, Deck> entry: sideboarding.entrySet()) {
+            int remaining = TableManager.getInstance().getController(entry.getKey()).getRemainingTime();
+            sideboard(entry.getValue(), entry.getKey(), remaining);
+        }
 	}
 
 	public void addGame(UUID playerId, GameSession gameSession) {
@@ -220,8 +232,20 @@ public class User {
     public void removeTable(UUID playerId) {
         tables.remove(playerId);
     }
+
+    public void addConstructing(UUID playerId, TournamentSession tournamentSession) {
+        constructing.put(playerId, tournamentSession);
+    }
     
-	public void kill() {
+    public void removeConstructing(UUID playerId) {
+        constructing.remove(playerId);
+    }
+        
+    public void removeSideboarding(UUID tableId) {
+        sideboarding.remove(tableId);
+    }
+
+    public void kill() {
 		for (GameSession session: gameSessions.values()) {
 			session.kill();
 		}

@@ -113,8 +113,8 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
 		dispatcher.fireEvent(PlayerQueryEvent.pickCard(playerId, message, booster, time));
 	}
 
-	public void construct(UUID playerId, String message, Deck deck, int time) {
-		dispatcher.fireEvent(PlayerQueryEvent.construct(playerId, message, deck, time));
+	public void construct(UUID playerId, String message, int time) {
+		dispatcher.fireEvent(PlayerQueryEvent.construct(playerId, message, time));
 	}
 
 }

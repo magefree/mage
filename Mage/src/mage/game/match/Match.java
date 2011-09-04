@@ -43,7 +43,9 @@ import mage.players.Player;
  */
 public interface Match {
 
-	public UUID getId();
+	public static final int SIDEBOARD_TIME = 180;
+
+    public UUID getId();
     public String getName();
 	public boolean isMatchOver();
 	public List<MatchPlayer> getPlayers();

@@ -28,6 +28,7 @@
 
 package mage.game.match;
 
+import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.players.Player;
 
@@ -75,6 +76,16 @@ public class MatchPlayer {
 		this.doneSideboarding = true;
 	}
 
+    public Deck generateDeck() {
+        //TODO: improve this
+        while (deck.getCards().size() < 40 && deck.getSideboard().size() > 0) {
+            Card card = deck.getSideboard().iterator().next();
+            deck.getCards().add(card);
+            deck.getSideboard().remove(card);
+        }
+        return deck;
+    }
+    
 	public Player getPlayer() {
 		return player;
 	}

@@ -31,7 +31,6 @@ package mage.game.match;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Logger;
 import mage.cards.decks.Deck;
 import mage.game.Game;
 import mage.game.GameException;
@@ -48,7 +47,6 @@ import mage.players.Player;
 public abstract class MatchImpl implements Match {
 
 //	private final static Logger logger = Logging.getLogger(MatchImpl.class.getName());
-	private static final int SIDEBOARD_TIME = 180;
 
 	protected UUID id = UUID.randomUUID();
     protected String name;
@@ -199,7 +197,7 @@ public abstract class MatchImpl implements Match {
 		return true;
 	}
 
-	@Override
+    @Override
 	public void fireSideboardEvent(UUID playerId, Deck deck) {
 		MatchPlayer player = getPlayer(playerId);
 		if (player != null) {

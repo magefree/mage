@@ -91,9 +91,9 @@ public class TournamentController {
 						case START_MATCH:
 							startMatch(event.getPair(), event.getMatchOptions());
 							break;
-						case SUBMIT_DECK:
-							submitDeck(event.getPlayerId(), event.getDeck());
-							break;
+//						case SUBMIT_DECK:
+//							submitDeck(event.getPlayerId(), event.getDeck());
+//							break;
 						case CONSTRUCT:
 							construct();
 							break;
@@ -111,7 +111,7 @@ public class TournamentController {
 					try {
 						switch (event.getQueryType()) {
 							case CONSTRUCT:
-								construct(event.getPlayerId(), event.getDeck(), event.getMax());
+								construct(event.getPlayerId(), event.getMax());
 								break;
 						}
 					} catch (MageException ex) {
@@ -208,9 +208,12 @@ public class TournamentController {
 		TableManager.getInstance().construct(tableId);
 	}
 
-	private void construct(UUID playerId, Deck deck, int timeout) throws MageException {
-		if (tournamentSessions.containsKey(playerId))
-			tournamentSessions.get(playerId).construct(deck, timeout);
+	private void construct(UUID playerId, int timeout) throws MageException {
+		if (tournamentSessions.containsKey(playerId)) {
+            TournamentSession tournamentSession = tournamentSessions.get(playerId);
+			tournamentSession.construct(timeout);
+            UserManager.getInstance().getUser(getPlayerSessionId(playerId)).addConstructing(playerId, tournamentSession);
+        }
 	}
 
 	public void submitDeck(UUID playerId, Deck deck) {
@@ -220,7 +223,7 @@ public class TournamentController {
 	public void timeout(UUID userId) {
 		if (userPlayerMap.containsKey(userId)) {
 			TournamentPlayer player = tournament.getPlayer(userPlayerMap.get(userId));
-			tournament.autoSubmit(userPlayerMap.get(userId), player.getDeck());
+			tournament.autoSubmit(userPlayerMap.get(userId), player.generateDeck());
 		}
 	}
 

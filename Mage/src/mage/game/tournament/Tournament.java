@@ -59,7 +59,6 @@ public interface Tournament {
 
 	public void addTableEventListener(Listener<TableEvent> listener);
 	public void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener);
-	public void fireConstructEvent(UUID playerId, Deck deck);
-	public void fireSubmitDeckEvent(UUID playerId, Deck deck);
+	public void fireConstructEvent(UUID playerId);
 	
 }

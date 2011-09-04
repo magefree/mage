@@ -848,12 +848,30 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 	}
 
 	public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
+        String name;
+        if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited)
+            name = "Deck Editor - " + tableId.toString();
+        else {
+            if (deck != null)
+                name = "Deck Editor - " + deck.getName();
+            else
+                name = "Deck Editor";
+        }
+        JInternalFrame[] windows = desktopPane.getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER);
+        for (JInternalFrame window : windows) {
+            if (window instanceof DeckEditorPane) {
+                if (window.getTitle().equals(name)) {
+                    setActive((MagePane)window);
+                    return;
+                }
+            }
+        }
 		try {
 			DeckEditorPane deckEditorPane = new DeckEditorPane();
 			desktopPane.add(deckEditorPane, JLayeredPane.DEFAULT_LAYER);
 			deckEditorPane.setMaximum(true);
 			deckEditorPane.setVisible(true);
-			deckEditorPane.show(mode, deck, tableId, time);
+			deckEditorPane.show(mode, deck, name, tableId, time);
 			setActive(deckEditorPane);
 		} catch (PropertyVetoException ex) {
 			logger.fatal(null, ex);

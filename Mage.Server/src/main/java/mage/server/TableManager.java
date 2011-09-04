@@ -96,6 +96,10 @@ public class TableManager {
 		return tables.values();
 	}
 
+    public TableController getController(UUID tableId) {
+        return controllers.get(tableId);
+    }
+    
 	public boolean joinTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException {
 		if (controllers.containsKey(tableId))
 			return controllers.get(tableId).joinTable(userId, name, playerType, skill, deckList);

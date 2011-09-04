@@ -96,12 +96,13 @@ public class TournamentSession {
 		}
 	}
 
-	public void construct(Deck deck, int timeout) throws MageException {
+	public void construct(int timeout) {
 		if (!killed) {
 			setupTimeout(timeout);
 			User user = UserManager.getInstance().getUser(userId);
 			if (user != null) {
-				user.construct(deck, tableId, timeout);
+                int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
+				user.construct(tournament.getPlayer(playerId).getDeck(), tableId, remaining);
 			}
 		}
 	}
@@ -121,6 +122,8 @@ public class TournamentSession {
 	}
 
 	private synchronized void setupTimeout(int seconds) {
+        if (futureTimeout != null && !futureTimeout.isDone())
+            return;
 		cancelTimeout();
 		if (seconds > 0) {
 			futureTimeout = timeoutExecutor.schedule(

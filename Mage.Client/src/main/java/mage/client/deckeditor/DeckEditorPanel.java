@@ -102,6 +102,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 					else {
 						setTimeout("0");
 						countdown.stop();
+                        hideDeckEditor();
 					}
 				}
 			}

@@ -73,11 +73,15 @@ public class DeckEditorPane extends MagePane {
         }
     }
 
-	public void show(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
-		if (deck != null)
-			this.setTitle("Deck Editor - " + deck.getName());
-		else
-			this.setTitle("Deck Editor");
+	public void show(DeckEditorMode mode, Deck deck, String name, UUID tableId, int time) {
+        if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited)
+            this.setTitle("Deck Editor - " + tableId.toString());
+        else {
+            if (deck != null)
+                this.setTitle("Deck Editor - " + deck.getName());
+            else
+                this.setTitle("Deck Editor");
+        }
 		this.deckEditorPanel1.showDeckEditor(mode, deck, tableId, time);
 		this.repaint();
 	}

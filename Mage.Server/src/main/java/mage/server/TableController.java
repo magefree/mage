@@ -56,7 +56,12 @@ import org.apache.log4j.Logger;
 import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import mage.cards.decks.InvalidDeckException;
+import mage.game.match.MatchPlayer;
+import mage.server.util.ThreadExecutor;
 
 /**
  *
@@ -74,6 +79,9 @@ public class TableController {
 	private MatchOptions options;
 	private Tournament tournament;
 	private ConcurrentHashMap<UUID, UUID> userPlayerMap = new ConcurrentHashMap<UUID, UUID>();
+    
+	private ScheduledFuture<?> futureTimeout;
+	protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
 
 	public TableController(UUID roomId, UUID userId, MatchOptions options) {
 		this.userId = userId;
@@ -111,10 +119,7 @@ public class TableController {
 					try {
 						switch (event.getEventType()) {
 							case SIDEBOARD:
-								sideboard(event.getPlayerId(), event.getDeck(), event.getTimeout());
-								break;
-							case SUBMIT_DECK:
-								submitDeck(event.getPlayerId(), event.getDeck());
+								sideboard(event.getPlayerId(), event.getDeck());
 								break;
 						}
 					} catch (MageException ex) {
@@ -200,16 +205,18 @@ public class TableController {
 		if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
 			throw new InvalidDeckException("Invalid deck for this format", table.getValidator().getInvalid());
 		}
-		submitDeck(playerId, deck);
+		submitDeck(userId, playerId, deck);
 		return true;
 	}
 
-	private void submitDeck(UUID playerId, Deck deck) {
+	private void submitDeck(UUID userId, UUID playerId, Deck deck) {
 		if (table.getState() == TableState.SIDEBOARDING) {
 			match.submitDeck(playerId, deck);
+            UserManager.getInstance().getUser(userId).removeSideboarding(table.getId());
 		}
 		else {
 			TournamentManager.getInstance().submitDeck(tournament.getId(), playerId, deck);
+            UserManager.getInstance().getUser(userId).removeConstructing(table.getId());
 		}
 	}
 
@@ -350,17 +357,22 @@ public class TableController {
 		}
 	}
 
-	private void sideboard(UUID playerId, Deck deck, int timeout) throws MageException {
+	private void sideboard(UUID playerId, Deck deck) throws MageException {
 		for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
 			if (entry.getValue().equals(playerId)) {
 				User user = UserManager.getInstance().getUser(entry.getKey());
-				if (user != null)
-					user.sideboard(deck, table.getId(), timeout);
+                int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
+                if (user != null)
+					user.sideboard(deck, table.getId(), remaining);
 				break;
 			}
 		}
 	}
 
+    public int getRemainingTime() {
+        return (int) futureTimeout.getDelay(TimeUnit.SECONDS);
+    }    
+    
 	public void construct() {
 		table.construct();
 	}
@@ -374,7 +386,9 @@ public class TableController {
 		try {
 			if (!match.isMatchOver()) {
 				table.sideboard();
+                setupTimeout(Match.SIDEBOARD_TIME);
 				match.sideboard();
+                cancelTimeout();
 				startGame(choosingPlayerId);
 			}
 //			else {
@@ -385,7 +399,35 @@ public class TableController {
 		}
 	}
 
-	public void endDraft(Draft draft) {
+	private synchronized void setupTimeout(int seconds) {
+		cancelTimeout();
+		if (seconds > 0) {
+			futureTimeout = timeoutExecutor.schedule(
+				new Runnable() {
+					@Override
+					public void run() {
+						autoSideboard();
+					}
+				},
+				seconds, TimeUnit.SECONDS
+			);
+		}
+	}
+    
+	private synchronized void cancelTimeout() {
+		if (futureTimeout != null) {
+			futureTimeout.cancel(false);
+		}
+	}
+
+    private void autoSideboard() {
+        for (MatchPlayer player: match.getPlayers()) {
+            if (!player.isDoneSideboarding())
+                match.submitDeck(player.getPlayer().getId(), player.generateDeck());
+        }
+    }
+    
+    public void endDraft(Draft draft) {
 		for (DraftPlayer player: draft.getPlayers()) {
 			tournament.getPlayer(player.getPlayer().getId()).setDeck(player.getDeck());
 		}

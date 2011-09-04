@@ -643,7 +643,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
 	@Override
 	public void construct(Tournament tournament, Deck deck) {
-		tournament.fireConstructEvent(playerId, deck);
+		tournament.fireConstructEvent(playerId);
 	}
 
 	@Override

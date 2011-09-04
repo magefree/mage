@@ -215,19 +215,14 @@ public abstract class TournamentImpl implements Tournament {
 	}
 
 	@Override
-	public void fireSubmitDeckEvent(UUID playerId, Deck deck) {
-		tableEventSource.fireTableEvent(EventType.SUBMIT_DECK, playerId, deck, 0);
-	}
-
-	@Override
 	public void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener) {
 		playerQueryEventSource.addListener(listener);
 	}
 
 	@Override
-	public void fireConstructEvent(UUID playerId, Deck deck) {
+	public void fireConstructEvent(UUID playerId) {
 		TournamentPlayer player = players.get(playerId);
-		playerQueryEventSource.construct(playerId, "Construct", deck, CONSTRUCT_TIME);
+		playerQueryEventSource.construct(playerId, "Construct", CONSTRUCT_TIME);
 	}
 
 	public void construct() {
