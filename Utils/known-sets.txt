@@ -12,6 +12,8 @@ Mirrodin|mirrodin|
 Darksteel|darksteel|
 Fifth Dawn|fifthdawn|
 Champions of Kamigawa|championsofkamigawa|
+Betrayers of Kamigawa|betrayersofkamigawa|
+Saviors of Kamigawa|saviorsofkamigawa|
 Ravnica: City of Guilds|ravnika|
 Guildpact|guildpact|
 Dissension|dissension|

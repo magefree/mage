@@ -16,7 +16,7 @@ public class GathererSets implements Iterable<DownloadJob> {
     private final static File DEFAULT_OUT_DIR = new File("plugins" + File.separator + "images" + SETS_PATH);
     private static File outDir  = DEFAULT_OUT_DIR;
 
-    private static final String[] symbols = {"10E", "HOP", "TMP", "INV", "PLS", "APC", "MRD", "DST", "5DN", "CHK", "RAV", "GPT", "DIS", "LRW", "MOR", "SHM", "EVE"};
+    private static final String[] symbols = {"10E", "HOP", "TMP", "INV", "PLS", "APC", "MRD", "DST", "5DN", "CHK", "BOK", "SOK", "RAV", "GPT", "DIS", "LRW", "MOR", "SHM", "EVE"};
     private static final String[] withMythics = {"M10", "M11", "M12", "DDF", "ALA", "CFX", "ARB", "ZEN", "WWK", "ROE", "SOM", "MBS", "NPH"};
     private static final HashMap<String, String> symbolsReplacements = new HashMap<String, String>();
 
