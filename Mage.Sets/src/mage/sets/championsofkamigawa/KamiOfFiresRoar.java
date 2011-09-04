@@ -41,21 +41,13 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  * @author Loki
  */
 public class KamiOfFiresRoar extends CardImpl<KamiOfFiresRoar> {
-
-    private final static FilterCard filter = new FilterCard("a Spirit of Arcane spell");
-
-    static {
-        filter.getSubtype().add("Spirit");
-        filter.getSubtype().add("Arcane");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
     public KamiOfFiresRoar(UUID ownerId) {
         super(ownerId, 174, "Kami of Fire's Roar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "CHK";
@@ -63,7 +55,7 @@ public class KamiOfFiresRoar extends CardImpl<KamiOfFiresRoar> {
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
-        Ability ability = new SpellCastTriggeredAbility(new GainAbilityTargetEffect(CantBlockAbility.getInstance(), Constants.Duration.EndOfTurn), filter, false);
+        Ability ability = new SpellCastTriggeredAbility(new GainAbilityTargetEffect(CantBlockAbility.getInstance(), Constants.Duration.EndOfTurn), FilterSpiritOrArcaneCard.getDefault(), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -43,6 +43,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
+import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -52,14 +54,6 @@ import mage.game.permanent.Permanent;
  * @author Loki
  */
 public class HikariTwilightGuardian extends CardImpl<HikariTwilightGuardian> {
-    private final static FilterCard filter = new FilterCard("a Spirit or Arcane spell");
-
-    static {
-        filter.getSubtype().add("Spirit");
-        filter.getSubtype().add("Arcane");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
     public HikariTwilightGuardian (UUID ownerId) {
         super(ownerId, 12, "Hikari, Twilight Guardian", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.expansionSetCode = "CHK";
@@ -69,7 +63,7 @@ public class HikariTwilightGuardian extends CardImpl<HikariTwilightGuardian> {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SpellCastTriggeredAbility(new HikariTwilightGuardianEffect(), filter, true));
+        this.addAbility(new SpellCastTriggeredAbility(new HikariTwilightGuardianEffect(), FilterSpiritOrArcaneCard.getDefault(), true));
     }
 
     public HikariTwilightGuardian (final HikariTwilightGuardian card) {

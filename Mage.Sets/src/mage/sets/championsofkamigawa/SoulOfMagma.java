@@ -39,21 +39,13 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  * @author Loki
  */
 public class SoulOfMagma extends CardImpl<SoulOfMagma> {
-
-    private final static FilterCard filter = new FilterCard("a Spirit or Arcane spell");
-
-    static {
-        filter.getSubtype().add("Spirit");
-        filter.getSubtype().add("Arcane");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
     public SoulOfMagma(UUID ownerId) {
         super(ownerId, 189, "Soul of Magma", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.expansionSetCode = "CHK";
@@ -61,7 +53,7 @@ public class SoulOfMagma extends CardImpl<SoulOfMagma> {
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new SpellCastTriggeredAbility(new DamageTargetEffect(1), filter, false);
+        Ability ability = new SpellCastTriggeredAbility(new DamageTargetEffect(1), FilterSpiritOrArcaneCard.getDefault(), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -41,21 +41,13 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  * @author Loki
  */
 public class GuardianOfSolitude extends CardImpl<GuardianOfSolitude> {
-
-    private final static FilterCard filter = new FilterCard("a Spirit or Arcane spell");
-
-    static {
-        filter.getSubtype().add("Spirit");
-        filter.getSubtype().add("Arcane");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
     public GuardianOfSolitude(UUID ownerId) {
         super(ownerId, 64, "Guardian of Solitude", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "CHK";
@@ -63,7 +55,7 @@ public class GuardianOfSolitude extends CardImpl<GuardianOfSolitude> {
         this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        Ability ability = new SpellCastTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn), filter, false);
+        Ability ability = new SpellCastTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn), FilterSpiritOrArcaneCard.getDefault(), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

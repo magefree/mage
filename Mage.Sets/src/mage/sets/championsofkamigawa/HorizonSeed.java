@@ -39,21 +39,13 @@ import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  * @author Loki
  */
 public class HorizonSeed extends CardImpl<HorizonSeed> {
-
-    private final static FilterCard filter = new FilterCard("Spirit or Arcane spell");
-
-    static {
-        filter.getSubtype().add("Spirit");
-        filter.getSubtype().add("Arcane");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
     public HorizonSeed(UUID ownerId) {
         super(ownerId, 15, "Horizon Seed", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.expansionSetCode = "CHK";
@@ -61,7 +53,7 @@ public class HorizonSeed extends CardImpl<HorizonSeed> {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        Ability ability = new SpellCastTriggeredAbility(new RegenerateTargetEffect(), filter, false);
+        Ability ability = new SpellCastTriggeredAbility(new RegenerateTargetEffect(), FilterSpiritOrArcaneCard.getDefault(), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
