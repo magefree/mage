@@ -112,7 +112,11 @@ public class TournamentSession {
 		tournament.submitDeck(playerId, deck);
 	}
 
-	protected void handleRemoteException(RemoteException ex) {
+	public void updateDeck(Deck deck) {
+		tournament.updateDeck(playerId, deck);
+	}
+
+    protected void handleRemoteException(RemoteException ex) {
 		logger.fatal("TournamentSession error ", ex);
 		TournamentManager.getInstance().kill(tournament.getId(), userId);
 	}

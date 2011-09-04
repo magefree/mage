@@ -51,6 +51,7 @@ public interface Tournament {
 	public Collection<Round> getRounds();
 	public List<ExpansionSet> getSets();
 	public void submitDeck(UUID playerId, Deck deck);
+	public void updateDeck(UUID playerId, Deck deck);
 	public void autoSubmit(UUID playerId, Deck deck);
 	public boolean allJoined();
 	public boolean isDoneConstructing();

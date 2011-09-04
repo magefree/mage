@@ -209,7 +209,16 @@ public class TableController {
 		return true;
 	}
 
-	private void submitDeck(UUID userId, UUID playerId, Deck deck) {
+	public void updateDeck(UUID userId, DeckCardLists deckList) throws MageException {
+		UUID playerId = userPlayerMap.get(userId);
+		if (table.getState() != TableState.SIDEBOARDING && table.getState() != TableState.CONSTRUCTING) {
+			return;
+		}
+		Deck deck = Deck.load(deckList);
+		updateDeck(userId, playerId, deck);
+	}
+
+    private void submitDeck(UUID userId, UUID playerId, Deck deck) {
 		if (table.getState() == TableState.SIDEBOARDING) {
 			match.submitDeck(playerId, deck);
             UserManager.getInstance().getUser(userId).removeSideboarding(table.getId());
@@ -220,7 +229,16 @@ public class TableController {
 		}
 	}
 
-	public boolean watchTable(UUID userId) {
+    private void updateDeck(UUID userId, UUID playerId, Deck deck) {
+		if (table.getState() == TableState.SIDEBOARDING) {
+			match.updateDeck(playerId, deck);
+		}
+		else {
+			TournamentManager.getInstance().updateDeck(tournament.getId(), playerId, deck);
+		}
+	}
+
+    public boolean watchTable(UUID userId) {
 		if (table.getState() != TableState.DUELING) {
 			return false;
 		}

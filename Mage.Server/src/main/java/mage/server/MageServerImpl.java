@@ -217,6 +217,22 @@ public class MageServerImpl implements MageServer {
 	}
 
 	@Override
+	public void updateDeck(String sessionId, UUID tableId, DeckCardLists deckList) throws MageException, GameException {
+		try {
+			if (SessionManager.getInstance().isValidSession(sessionId)) {
+				UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+				TableManager.getInstance().updateDeck(userId, tableId, deckList);
+				logger.debug("Session " + sessionId + " updated deck");
+			}
+		}
+		catch (Exception ex) {
+			if (ex instanceof GameException)
+				throw (GameException)ex;
+			handleException(ex);
+		}
+	}
+
+    @Override
 	public List<TableView> getTables(UUID roomId) throws MageException {
 		try {
 			return GamesRoomManager.getInstance().getRoom(roomId).getTables();

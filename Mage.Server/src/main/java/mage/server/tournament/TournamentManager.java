@@ -69,7 +69,11 @@ public class TournamentManager {
 		controllers.get(tournamentId).submitDeck(playerId, deck);
 	}
 
-	public TournamentView getTournamentView(UUID tournamentId) {
+	public void updateDeck(UUID tournamentId, UUID playerId, Deck deck) {
+		controllers.get(tournamentId).updateDeck(playerId, deck);
+	}
+
+    public TournamentView getTournamentView(UUID tournamentId) {
 		return controllers.get(tournamentId).getTournamentView();
 	}
 

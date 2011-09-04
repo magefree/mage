@@ -76,6 +76,10 @@ public class MatchPlayer {
 		this.doneSideboarding = true;
 	}
 
+	public void updateDeck(Deck deck) {
+		this.deck = deck;
+	}
+
     public Deck generateDeck() {
         //TODO: improve this
         while (deck.getCards().size() < 40 && deck.getSideboard().size() > 0) {

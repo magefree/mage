@@ -216,4 +216,13 @@ public abstract class MatchImpl implements Match {
 		}
 	}
 
+    @Override
+	public void updateDeck(UUID playerId, Deck deck) {
+		MatchPlayer player = getPlayer(playerId);
+		if (player != null) {
+			player.updateDeck(deck);
+		}
+	}
+
+    
 }

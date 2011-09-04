@@ -743,7 +743,23 @@ public class Session {
 		return false;
 	}
 
-	public boolean concedeGame(UUID gameId) {
+	public boolean updateDeck(UUID tableId, DeckCardLists deck) {
+		try {
+			if (isConnected()) {
+				server.updateDeck(sessionId, tableId, deck);
+                return true;
+            }
+		} catch (GameException ex) {
+			handleGameException(ex);
+		} catch (MageException ex) {
+			handleMageException(ex);
+		} catch (Throwable t) {
+			handleThrowable(t);		
+		}
+		return false;
+	}
+
+    public boolean concedeGame(UUID gameId) {
 		try {
 			if (isConnected()) {
 				server.concedeGame(gameId, sessionId);

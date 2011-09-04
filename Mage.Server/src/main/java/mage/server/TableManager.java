@@ -118,7 +118,12 @@ public class TableManager {
 		return false;
 	}
 
-	public void removeSession(UUID userId) {
+	public void updateDeck(UUID userId, UUID tableId, DeckCardLists deckList) throws MageException {
+		if (controllers.containsKey(tableId))
+			controllers.get(tableId).updateDeck(userId, deckList);
+	}
+
+    public void removeSession(UUID userId) {
 		for (TableController controller: controllers.values()) {
 			controller.kill(userId);
 		}

@@ -220,7 +220,11 @@ public class TournamentController {
 		tournamentSessions.get(playerId).submitDeck(deck);
 	}
 
-	public void timeout(UUID userId) {
+	public void updateDeck(UUID playerId, Deck deck) {
+		tournamentSessions.get(playerId).updateDeck(deck);
+	}
+
+    public void timeout(UUID userId) {
 		if (userPlayerMap.containsKey(userId)) {
 			TournamentPlayer player = tournament.getPlayer(userPlayerMap.get(userId));
 			tournament.autoSubmit(userPlayerMap.get(userId), player.generateDeck());

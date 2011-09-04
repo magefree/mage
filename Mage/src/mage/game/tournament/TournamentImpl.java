@@ -124,7 +124,14 @@ public abstract class TournamentImpl implements Tournament {
 		}
 	}
 
-	protected Round createRoundRandom() {
+	@Override
+	public void updateDeck(UUID playerId, Deck deck) {
+		if (players.containsKey(playerId)) {
+			players.get(playerId).updateDeck(deck);
+		}
+	}
+
+    protected Round createRoundRandom() {
 		Round round = new Round(rounds.size() + 1);
 		rounds.add(round);
 		List<TournamentPlayer> roundPlayers = getActivePlayers();

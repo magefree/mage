@@ -41,12 +41,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
-import javax.swing.table.TableModel;
 
 import mage.cards.Card;
 import mage.cards.decks.Deck;
@@ -60,8 +59,10 @@ import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.components.CardInfoPane;
 import mage.game.GameException;
+import mage.remote.Session;
 import mage.sets.Sets;
 import mage.view.CardView;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -69,7 +70,9 @@ import mage.view.CardView;
  */
 public class DeckEditorPanel extends javax.swing.JPanel {
 
-	private JFileChooser fcSelectDeck;
+	private final static Logger logger = Logger.getLogger(DeckEditorPanel.class);
+
+    private JFileChooser fcSelectDeck;
 	private JFileChooser fcImportDeck;
 	private Deck deck = new Deck();
     private boolean isShowCardInfo = false;
@@ -77,6 +80,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 	private DeckEditorMode mode;
 	private int timeout;
 	private Timer countdown;
+	private UpdateDeckTask updateDeckTask;
 
 
     /** Creates new form DeckEditorPanel */
@@ -100,6 +104,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 						setTimeout(Integer.toString(timeout));
 					}
 					else {
+                        if (updateDeckTask != null)
+                            updateDeckTask.cancel(true);
 						setTimeout("0");
 						countdown.stop();
                         hideDeckEditor();
@@ -134,6 +140,10 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				setTimeout(Integer.toString(timeout));
 				if (timeout != 0) {
 					countdown.start();
+                    if (updateDeckTask == null || updateDeckTask.isDone()) {
+                        updateDeckTask = new UpdateDeckTask(MageFrame.getSession(), tableId, deck);
+                        updateDeckTask.execute();
+                    }
 				}
 				break;
 			case Constructed:
@@ -256,6 +266,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 	}
 	
 	public void hideDeckEditor() {
+        if (updateDeckTask != null)
+            updateDeckTask.cancel(true);
 		Component c = this.getParent();
 		while (c != null && !(c instanceof DeckEditorPane)) {
 			c = c.getParent();
@@ -526,7 +538,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 			} catch (GameException ex) {
 				JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
 			} catch (Exception ex) {
-				Logger.getLogger(DeckEditorPanel.class.getName()).log(Level.SEVERE, null, ex);
+				logger.fatal(ex);
 			}
 			finally {
 				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -554,7 +566,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 				setCursor(new Cursor(Cursor.WAIT_CURSOR));
 				Sets.saveDeck(fileName, deck.getDeckCardLists());
 			} catch (Exception ex) {
-				Logger.getLogger(DeckEditorPanel.class.getName()).log(Level.SEVERE, null, ex);
+				logger.fatal(ex);
 			}
 			finally {
 				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -601,7 +613,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 					JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Unknown deck format", "Error importing deck", JOptionPane.ERROR_MESSAGE);
 				}
 			} catch (Exception ex) {
-				Logger.getLogger(DeckEditorPanel.class.getName()).log(Level.SEVERE, null, ex);
+				logger.fatal(ex);
 			}
 			finally {
 				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -616,6 +628,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 	}//GEN-LAST:event_btnImportActionPerformed
 
 	private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {
+        if (updateDeckTask != null)
+            updateDeckTask.cancel(true);
+
 		if (MageFrame.getSession().submitDeck(tableId, deck.getDeckCardLists()))
 			hideDeckEditor();
 	}
@@ -711,5 +726,41 @@ class ImportFilter extends FileFilter {
 		return "*.dec | *.mwDeck | *.txt";
 	}
 
+
+}
+
+class UpdateDeckTask extends SwingWorker<Void, Void> {
+
+	private final static Logger logger = Logger.getLogger(UpdateDeckTask.class);
+
+    private Session session;
+	private UUID tableId;
+	private Deck deck;
+
+	UpdateDeckTask(Session session, UUID tableId, Deck deck) {
+		this.session = session;
+		this.tableId = tableId;
+		this.deck = deck;
+	}
+
+	@Override
+	protected Void doInBackground() throws Exception {
+		while (!isCancelled()) {
+			session.updateDeck(tableId, deck.getDeckCardLists());
+			Thread.sleep(5000);
+		}
+		return null;
+	}
+
+	@Override
+	protected void done() {
+		try {
+			get();
+		} catch (InterruptedException ex) {
+			logger.fatal("Update Matches Task error", ex);
+		} catch (ExecutionException ex) {
+			logger.fatal("Update Matches Task error", ex);
+		} catch (CancellationException ex) {}
+	}
 
 }

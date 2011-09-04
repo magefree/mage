@@ -52,6 +52,7 @@ public interface Match {
 	public MatchPlayer getPlayer(UUID playerId);
 	public void addPlayer(Player player, Deck deck);
 	public void submitDeck(UUID playerId, Deck deck);
+	public void updateDeck(UUID playerId, Deck deck);
 	public void startMatch() throws GameException;
 	public void startGame() throws GameException;
 	public void sideboard();
