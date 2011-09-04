@@ -41,20 +41,12 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterSpiritOrArcaneCard;
 
 /**
  * @author Loki
  */
 public class OrbweaverKumo extends CardImpl<OrbweaverKumo> {
-
-    private final static FilterCard filter = new FilterCard("a Spirit or Arcane spell");
-
-    static {
-        filter.getSubtype().add("Spirit");
-        filter.getSubtype().add("Arcane");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
     public OrbweaverKumo(UUID ownerId) {
         super(ownerId, 231, "Orbweaver Kumo", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.expansionSetCode = "CHK";
@@ -63,7 +55,7 @@ public class OrbweaverKumo extends CardImpl<OrbweaverKumo> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         this.addAbility(ReachAbility.getInstance());
-        this.addAbility(new SpellCastTriggeredAbility(new GainAbilitySourceEffect(new ForestwalkAbility(), Constants.Duration.EndOfTurn), filter, false));
+        this.addAbility(new SpellCastTriggeredAbility(new GainAbilitySourceEffect(new ForestwalkAbility(), Constants.Duration.EndOfTurn), FilterSpiritOrArcaneCard.getDefault(), false));
     }
 
     public OrbweaverKumo(final OrbweaverKumo card) {

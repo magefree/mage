@@ -44,21 +44,13 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  * @author Loki
  */
 public class InnocenceKami extends CardImpl<InnocenceKami> {
-
-    private final static FilterCard filter = new FilterCard("a Spirit or Arcane spell");
-
-    static {
-        filter.getSubtype().add("Spirit");
-        filter.getSubtype().add("Arcane");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
     public InnocenceKami(UUID ownerId) {
         super(ownerId, 18, "Innocence Kami", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.expansionSetCode = "CHK";
@@ -70,7 +62,7 @@ public class InnocenceKami extends CardImpl<InnocenceKami> {
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        this.addAbility(new SpellCastTriggeredAbility(new UntapSourceEffect(), filter, false));
+        this.addAbility(new SpellCastTriggeredAbility(new UntapSourceEffect(), FilterSpiritOrArcaneCard.getDefault(), false));
     }
 
     public InnocenceKami(final InnocenceKami card) {

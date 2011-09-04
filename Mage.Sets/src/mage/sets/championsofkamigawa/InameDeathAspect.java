@@ -76,10 +76,10 @@ class InameDeathAspectEffect extends SearchEffect<InameDeathAspectEffect> {
 
     private final static FilterCreatureCard filter = new FilterCreatureCard();
 
-//    static {
-//        filter.getSubtype().add("Spirit");
-//        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-//    }
+    static {
+        filter.getSubtype().add("Spirit");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+    }
 
     public InameDeathAspectEffect() {
 		super(new TargetCardInLibrary(0, 0, filter), Constants.Outcome.Neutral);
