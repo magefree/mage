@@ -60,6 +60,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.Serializable;
 import java.util.*;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
 import java.util.prefs.Preferences;
 import mage.client.components.MageComponents;
 
@@ -79,6 +81,7 @@ public class GamePanel extends javax.swing.JPanel {
 	private UUID gameId;
 	private UUID playerId;
 	private Session session;
+	private ReplayTask replayTask;
     private CombatDialog combat;
     private PickNumberDialog pickNumber;
 	private JLayeredPane jLayeredPane;
@@ -572,8 +575,10 @@ public class GamePanel extends javax.swing.JPanel {
         stack = new mage.client.cards.Cards();
         pnlReplay = new javax.swing.JPanel();
         btnStopReplay = new javax.swing.JButton();
-        btnPreviousPlay = new javax.swing.JButton();
         btnNextPlay = new javax.swing.JButton();
+        btnPlay = new javax.swing.JButton();
+        btnSkipForward = new javax.swing.JButton();
+        btnPreviousPlay = new javax.swing.JButton();
         pnlBattlefield = new javax.swing.JPanel();
         hand = new mage.client.cards.Cards(true);
         gameChatPanel = new mage.client.chat.ChatPanel();
@@ -664,24 +669,38 @@ public class GamePanel extends javax.swing.JPanel {
 
         stack.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 25));
 
-        btnStopReplay.setText("Stop");
+        btnStopReplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop.png"))); // NOI18N
         btnStopReplay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnStopReplayActionPerformed(evt);
             }
         });
 
-        btnPreviousPlay.setText("Previous");
-        btnPreviousPlay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPreviousPlayActionPerformed(evt);
-            }
-        });
-
-        btnNextPlay.setText("Next");
+        btnNextPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop_right.png"))); // NOI18N
         btnNextPlay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNextPlayActionPerformed(evt);
+            }
+        });
+
+        btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_right.png"))); // NOI18N
+        btnPlay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlayActionPerformed(evt);
+            }
+        });
+
+        btnSkipForward.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_double_stop_right.png"))); // NOI18N
+        btnSkipForward.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSkipForwardActionPerformed(evt);
+            }
+        });
+
+        btnPreviousPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop_left.png"))); // NOI18N
+        btnPreviousPlay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreviousPlayActionPerformed(evt);
             }
         });
 
@@ -690,18 +709,23 @@ public class GamePanel extends javax.swing.JPanel {
         pnlReplayLayout.setHorizontalGroup(
             pnlReplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlReplayLayout.createSequentialGroup()
-                .addComponent(btnStopReplay)
+                .addComponent(btnPreviousPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPreviousPlay)
+                .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnStopReplay, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnNextPlay))
+                .addComponent(btnNextPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSkipForward, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pnlReplayLayout.setVerticalGroup(
             pnlReplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlReplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(btnStopReplay)
-                .addComponent(btnPreviousPlay)
-                .addComponent(btnNextPlay))
+            .addComponent(btnSkipForward, 0, 0, Short.MAX_VALUE)
+            .addComponent(btnNextPlay, 0, 0, Short.MAX_VALUE)
+            .addComponent(btnStopReplay, 0, 0, Short.MAX_VALUE)
+            .addComponent(btnPlay, 0, 0, Short.MAX_VALUE)
+            .addComponent(btnPreviousPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 31, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnlGameInfoLayout = new javax.swing.GroupLayout(pnlGameInfo);
@@ -919,7 +943,10 @@ public class GamePanel extends javax.swing.JPanel {
 	}//GEN-LAST:event_btnStopWatchingActionPerformed
 
 	private void btnStopReplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopReplayActionPerformed
-		if (modalQuestion("Are you sure you want to stop replay?", "Stop replay") == JOptionPane.YES_OPTION) {
+        if (replayTask != null && !replayTask.isDone()) {
+            replayTask.cancel(true);
+        }
+        else if (modalQuestion("Are you sure you want to stop replay?", "Stop replay") == JOptionPane.YES_OPTION) {
 			session.stopReplay(gameId);
 		}
 	}//GEN-LAST:event_btnStopReplayActionPerformed
@@ -931,7 +958,18 @@ public class GamePanel extends javax.swing.JPanel {
 	private void btnPreviousPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousPlayActionPerformed
 		session.previousPlay(gameId);
 	}//GEN-LAST:event_btnPreviousPlayActionPerformed
+	
+	private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
+        if (replayTask == null || replayTask.isDone()) {
+            replayTask = new ReplayTask(session, gameId);
+            replayTask.execute();
+        }
+	}//GEN-LAST:event_btnPlayActionPerformed
 
+	private void btnSkipForwardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkipForwardActionPerformed
+		session.skipForward(gameId, 10);
+	}//GEN-LAST:event_btnSkipForwardActionPerformed
+	
     private Dimension getHandCardDimension() {
         Preferences pref = MageFrame.getPreferences();
         String useBigCards = pref.get(PreferencesDialog.KEY_HAND_USE_BIG_CARDS, "false");
@@ -966,6 +1004,7 @@ public class GamePanel extends javax.swing.JPanel {
 			setOpaque(false);
 			jPanel.setOpaque(false);
 			jScrollPane1.setOpaque(false);
+			pnlReplay.setOpaque(false);
 
 			jPanel.setBorder(emptyBorder);
 			jScrollPane1.setBorder(emptyBorder);
@@ -1000,7 +1039,9 @@ public class GamePanel extends javax.swing.JPanel {
     private javax.swing.JButton btnConcede;
 	private javax.swing.JButton btnSwitchHands;
     private javax.swing.JButton btnNextPlay;
+    private javax.swing.JButton btnPlay;
     private javax.swing.JButton btnPreviousPlay;
+    private javax.swing.JButton btnSkipForward;
     private javax.swing.JButton btnStopReplay;
     private javax.swing.JButton btnStopWatching;
     private mage.client.chat.ChatPanel gameChatPanel;
@@ -1044,4 +1085,38 @@ public class GamePanel extends javax.swing.JPanel {
 	private JButton endOfTurn;
 	private JButton prevStep;
 	private JLabel endButtonTip;
+}
+
+class ReplayTask extends SwingWorker<Void, Collection<MatchView>> {
+
+	private Session session;
+	private UUID gameId;
+
+	private final static Logger logger = Logger.getLogger(ReplayTask.class);
+
+	ReplayTask(Session session, UUID gameId) {
+		this.session = session;
+		this.gameId = gameId;
+	}
+
+	@Override
+	protected Void doInBackground() throws Exception {
+		while (!isCancelled()) {
+			session.nextPlay(gameId);
+			Thread.sleep(1000);
+		}
+		return null;
+	}
+
+	@Override
+	protected void done() {
+		try {
+			get();
+		} catch (InterruptedException ex) {
+			logger.fatal("Update Matches Task error", ex);
+		} catch (ExecutionException ex) {
+			logger.fatal("Update Matches Task error", ex);
+		} catch (CancellationException ex) {}
+	}
+
 }

@@ -113,6 +113,7 @@ public interface MageServer {
 	public void stopReplay(UUID gameId, String sessionId) throws MageException;
 	public void nextPlay(UUID gameId, String sessionId) throws MageException;
 	public void previousPlay(UUID gameId, String sessionId) throws MageException;
+    public void skipForward(UUID gameId, String sessionId, int moves) throws MageException;
 
 	//test methods
 	public void cheat(UUID gameId, String sessionId, UUID playerId, DeckCardLists deckList) throws MageException;

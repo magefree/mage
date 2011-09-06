@@ -68,5 +68,10 @@ public class ReplayManager {
 	public void previousPlay(UUID gameId, UUID userId) {
 		replaySessions.get(gameId.toString() + userId.toString()).previous();
 	}
+    
+	public void skipForward(UUID gameId, UUID userId, int moves) {
+		replaySessions.get(gameId.toString() + userId.toString()).next(moves);
+	}
+
 
 }

@@ -843,7 +843,21 @@ public class Session {
 		return false;
 	}
 
-	public boolean cheat(UUID gameId, UUID playerId, DeckCardLists deckList) {
+	public boolean skipForward(UUID gameId, int moves) {
+		try {
+			if (isConnected()) {
+				server.skipForward(gameId, sessionId, moves);
+				return true;
+			}
+		} catch (MageException ex) {
+			handleMageException(ex);
+		} catch (Throwable t) {
+			handleThrowable(t);		
+		}
+		return false;
+	}
+
+    public boolean cheat(UUID gameId, UUID playerId, DeckCardLists deckList) {
 		try {
 			if (isConnected()) {
 				server.cheat(gameId, sessionId, playerId, deckList);

@@ -858,6 +858,26 @@ public class MageServerImpl implements MageServer {
 	}
 
 	@Override
+	public void skipForward(final UUID gameId, final String sessionId, final int moves) throws MageException {
+		if (SessionManager.getInstance().isValidSession(sessionId)) {
+			try {
+				callExecutor.execute(
+					new Runnable() {
+						@Override
+						public void run() {
+							UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+							ReplayManager.getInstance().skipForward(gameId, userId, moves);
+						}
+					}
+				);
+			}
+			catch (Exception ex) {
+				handleException(ex);
+			}
+		}
+	}
+
+    @Override
 	public ServerState getServerState() throws MageException {
 		try {
 			return new ServerState(

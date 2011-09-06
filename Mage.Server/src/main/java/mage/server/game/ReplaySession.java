@@ -68,7 +68,14 @@ public class ReplaySession implements GameCallback {
 		updateGame(replay.next(), replay.getGame());
 	}
 
-	public synchronized void previous() {
+	public synchronized void next(int moves) {
+        for (int i = 0; i < moves; i++) {
+            replay.next();
+        }
+		updateGame(replay.next(), replay.getGame());
+	}
+
+    public synchronized void previous() {
 		updateGame(replay.previous(), replay.getGame());
 	}
 
