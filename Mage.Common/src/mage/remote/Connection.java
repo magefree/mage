@@ -183,12 +183,13 @@ public class Connection {
 			NetworkInterface iface = interfaces.nextElement( );
 			if (iface.isLoopback())
 				continue;
-			for (InterfaceAddress addr: iface.getInterfaceAddresses())
-			{
-				InetAddress iaddr = addr.getAddress();
-				if (iaddr instanceof Inet4Address) {
-					return iaddr;
-				}
+			for (InterfaceAddress addr: iface.getInterfaceAddresses()) {
+                if (addr != null) {
+                    InetAddress iaddr = addr.getAddress();
+                    if (iaddr != null && iaddr instanceof Inet4Address) {
+                        return iaddr;
+                    }
+                }
 			}
 		}
 		return null;
