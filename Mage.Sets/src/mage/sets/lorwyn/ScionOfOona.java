@@ -33,55 +33,56 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.FlashAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.MerfolkToken;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class Benthicore extends CardImpl<Benthicore> {
+public class ScionOfOona extends CardImpl<ScionOfOona> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
+    private final static FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Faerie creatures");
+    private final static FilterControlledPermanent filter2 = new FilterControlledPermanent("Faeries");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Merfolk");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter1.getSubtype().add("Faerie");
+        filter1.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter2.getSubtype().add("Faerie");
+        filter2.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public Benthicore(UUID ownerId) {
-        super(ownerId, 53, "Benthicore", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{U}");
+    public ScionOfOona(UUID ownerId) {
+        super(ownerId, 83, "Scion of Oona", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "LRW";
-        this.subtype.add("Elemental");
+        this.subtype.add("Faerie");
+        this.subtype.add("Soldier");
         this.color.setBlue(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MerfolkToken(), 2), false));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapSourceEffect(), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
-        ability.addEffect(new GainAbilitySourceEffect(ShroudAbility.getInstance(), Constants.Duration.EndOfTurn));
-        this.addAbility(ability);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        this.addAbility(FlashAbility.getInstance());
+        this.addAbility(FlyingAbility.getInstance());
+        // Other Faerie creatures you control get +1/+1.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, filter1, true)));
+        // Other Faeries you control have shroud.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(), Constants.Duration.EndOfTurn, filter2, true)));
     }
 
-    public Benthicore(final Benthicore card) {
+    public ScionOfOona(final ScionOfOona card) {
         super(card);
     }
 
     @Override
-    public Benthicore copy() {
-        return new Benthicore(this);
+    public ScionOfOona copy() {
+        return new ScionOfOona(this);
     }
 }
-

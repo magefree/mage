@@ -39,6 +39,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
@@ -52,7 +53,8 @@ public class HeartwoodGiant extends CardImpl<HeartwoodGiant> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("a Forest");
 
     static {
-        filter.getName().add("Forest");
+        filter.getSubtype().add("Forest");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
     public HeartwoodGiant(UUID ownerId) {

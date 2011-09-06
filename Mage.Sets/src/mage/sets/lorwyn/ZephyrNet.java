@@ -32,56 +32,45 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.ShroudAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.MerfolkToken;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class Benthicore extends CardImpl<Benthicore> {
+public class ZephyrNet extends CardImpl<ZephyrNet> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
-
-    static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Merfolk");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
-    public Benthicore(UUID ownerId) {
-        super(ownerId, 53, "Benthicore", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{U}");
+    public ZephyrNet(UUID ownerId) {
+        super(ownerId, 98, "Zephyr Net", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "LRW";
-        this.subtype.add("Elemental");
+        this.subtype.add("Aura");
         this.color.setBlue(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MerfolkToken(), 2), false));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapSourceEffect(), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
-        ability.addEffect(new GainAbilitySourceEffect(ShroudAbility.getInstance(), Constants.Duration.EndOfTurn));
-        this.addAbility(ability);
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+		this.getSpellAbility().addTarget(auraTarget);
+		this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+		Ability ability = new EnchantAbility(auraTarget.getTargetName());
+		this.addAbility(ability);
+        // Enchanted creature has defender and flying.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DefenderAbility.getInstance(), Constants.AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), Constants.AttachmentType.AURA)));
     }
 
-    public Benthicore(final Benthicore card) {
+    public ZephyrNet(final ZephyrNet card) {
         super(card);
     }
 
     @Override
-    public Benthicore copy() {
-        return new Benthicore(this);
+    public ZephyrNet copy() {
+        return new ZephyrNet(this);
     }
 }
-

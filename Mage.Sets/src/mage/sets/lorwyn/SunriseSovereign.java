@@ -33,55 +33,47 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.ShroudAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.MerfolkToken;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class Benthicore extends CardImpl<Benthicore> {
+public class SunriseSovereign extends CardImpl<SunriseSovereign> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Giant");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Merfolk");
+        filter.getSubtype().add("Giant");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public Benthicore(UUID ownerId) {
-        super(ownerId, 53, "Benthicore", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{U}");
+    public SunriseSovereign(UUID ownerId) {
+        super(ownerId, 192, "Sunrise Sovereign", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}");
         this.expansionSetCode = "LRW";
-        this.subtype.add("Elemental");
-        this.color.setBlue(true);
+        this.subtype.add("Giant");
+        this.subtype.add("Warrior");
+        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MerfolkToken(), 2), false));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapSourceEffect(), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
-        ability.addEffect(new GainAbilitySourceEffect(ShroudAbility.getInstance(), Constants.Duration.EndOfTurn));
-        this.addAbility(ability);
+        // Other Giant creatures you control get +2/+2 and have trample.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Constants.Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public Benthicore(final Benthicore card) {
+    public SunriseSovereign(final SunriseSovereign card) {
         super(card);
     }
 
     @Override
-    public Benthicore copy() {
-        return new Benthicore(this);
+    public SunriseSovereign copy() {
+        return new SunriseSovereign(this);
     }
 }
-

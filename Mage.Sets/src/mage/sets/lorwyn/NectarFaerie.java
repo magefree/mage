@@ -34,54 +34,53 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.ShroudAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.MerfolkToken;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.FilterPermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author Loki
  */
-public class Benthicore extends CardImpl<Benthicore> {
+public class NectarFaerie extends CardImpl<NectarFaerie> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
+    private final static FilterPermanent filter = new FilterPermanent("Faerie or Elf");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Merfolk");
+        filter.getSubtype().add("Faerie");
+        filter.getSubtype().add("Elf");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public Benthicore(UUID ownerId) {
-        super(ownerId, 53, "Benthicore", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{U}");
+    public NectarFaerie(UUID ownerId) {
+        super(ownerId, 130, "Nectar Faerie", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "LRW";
-        this.subtype.add("Elemental");
-        this.color.setBlue(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MerfolkToken(), 2), false));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapSourceEffect(), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
-        ability.addEffect(new GainAbilitySourceEffect(ShroudAbility.getInstance(), Constants.Duration.EndOfTurn));
+        this.subtype.add("Faerie");
+        this.subtype.add("Wizard");
+        this.color.setBlack(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+        this.addAbility(FlyingAbility.getInstance());
+        // {B}, {tap}: Target Faerie or Elf gains lifelink until end of turn.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Constants.Duration.EndOfTurn), new ColoredManaCost(Constants.ColoredManaSymbol.B));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
-    public Benthicore(final Benthicore card) {
+    public NectarFaerie(final NectarFaerie card) {
         super(card);
     }
 
     @Override
-    public Benthicore copy() {
-        return new Benthicore(this);
+    public NectarFaerie copy() {
+        return new NectarFaerie(this);
     }
 }
-

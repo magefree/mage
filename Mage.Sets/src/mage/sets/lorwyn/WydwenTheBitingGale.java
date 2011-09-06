@@ -34,54 +34,44 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.ShroudAbility;
+import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.keyword.FlashAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.MerfolkToken;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
  * @author Loki
  */
-public class Benthicore extends CardImpl<Benthicore> {
+public class WydwenTheBitingGale extends CardImpl<WydwenTheBitingGale> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
-
-    static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Merfolk");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
-    public Benthicore(UUID ownerId) {
-        super(ownerId, 53, "Benthicore", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{U}");
+    public WydwenTheBitingGale(UUID ownerId) {
+        super(ownerId, 253, "Wydwen, the Biting Gale", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
         this.expansionSetCode = "LRW";
-        this.subtype.add("Elemental");
+        this.supertype.add("Legendary");
+        this.subtype.add("Faerie");
+        this.subtype.add("Wizard");
         this.color.setBlue(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MerfolkToken(), 2), false));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapSourceEffect(), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
-        ability.addEffect(new GainAbilitySourceEffect(ShroudAbility.getInstance(), Constants.Duration.EndOfTurn));
+        this.color.setBlack(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+        this.addAbility(FlashAbility.getInstance());
+        this.addAbility(FlyingAbility.getInstance());
+        // {U}{B}, Pay 1 life: Return Wydwen, the Biting Gale to its owner's hand.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new ManaCostsImpl("{U}{B}"));
+        ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);
     }
 
-    public Benthicore(final Benthicore card) {
+    public WydwenTheBitingGale(final WydwenTheBitingGale card) {
         super(card);
     }
 
     @Override
-    public Benthicore copy() {
-        return new Benthicore(this);
+    public WydwenTheBitingGale copy() {
+        return new WydwenTheBitingGale(this);
     }
 }
-

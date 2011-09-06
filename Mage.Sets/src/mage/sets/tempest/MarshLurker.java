@@ -38,6 +38,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -50,7 +51,8 @@ public class MarshLurker extends CardImpl<MarshLurker> {
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("a Swamp");
 
     static {
-        filter.getName().add("Swamp");
+        filter.getSubtype().add("Swamp");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
     public MarshLurker(UUID ownerId) {

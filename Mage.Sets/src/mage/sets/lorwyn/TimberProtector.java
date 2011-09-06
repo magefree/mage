@@ -33,55 +33,53 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.ShroudAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.MerfolkToken;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author anonymous
  */
-public class Benthicore extends CardImpl<Benthicore> {
+public class TimberProtector extends CardImpl<TimberProtector> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
+    private final static FilterCreaturePermanent filterTreefolk = new FilterCreaturePermanent("Treefolk creatures");
+    private final static FilterControlledPermanent filterBoth = new FilterControlledPermanent("Treefolk and Forests");
 
     static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Merfolk");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filterTreefolk.getSubtype().add("Treefolk");
+        filterTreefolk.setScopeSubtype(Filter.ComparisonScope.Any);
+        filterBoth.getSubtype().add("Treefolk");
+        filterBoth.getSubtype().add("Forest");
+        filterBoth.setScopeSubtype(Filter.ComparisonScope.Any);
+
     }
 
-    public Benthicore(UUID ownerId) {
-        super(ownerId, 53, "Benthicore", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{U}");
+    public TimberProtector(UUID ownerId) {
+        super(ownerId, 238, "Timber Protector", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "LRW";
-        this.subtype.add("Elemental");
-        this.color.setBlue(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MerfolkToken(), 2), false));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapSourceEffect(), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
-        ability.addEffect(new GainAbilitySourceEffect(ShroudAbility.getInstance(), Constants.Duration.EndOfTurn));
-        this.addAbility(ability);
+        this.subtype.add("Treefolk");
+        this.subtype.add("Warrior");
+        this.color.setGreen(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(6);
+        // Other Treefolk creatures you control get +1/+1.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, filterTreefolk, true)));
+        // Other Treefolk and Forests you control are indestructible.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filterBoth, true)));
     }
 
-    public Benthicore(final Benthicore card) {
+    public TimberProtector(final TimberProtector card) {
         super(card);
     }
 
     @Override
-    public Benthicore copy() {
-        return new Benthicore(this);
+    public TimberProtector copy() {
+        return new TimberProtector(this);
     }
 }
-

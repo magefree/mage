@@ -38,6 +38,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -50,7 +51,8 @@ public class ArborElf extends CardImpl<ArborElf> {
 	private static final FilterLandPermanent filter = new FilterLandPermanent();
 
 	static {
-		filter.getName().add("Forest");
+		filter.getSubtype().add("Forest");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
 	}
 
 	public ArborElf(UUID ownerId) {

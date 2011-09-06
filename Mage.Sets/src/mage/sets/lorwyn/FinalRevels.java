@@ -32,56 +32,33 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.ShroudAbility;
+import mage.abilities.Mode;
+import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.MerfolkToken;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author Loki
  */
-public class Benthicore extends CardImpl<Benthicore> {
+public class FinalRevels extends CardImpl<FinalRevels> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
-
-    static {
-        filter.setTapped(false);
-        filter.setUseTapped(true);
-        filter.getSubtype().add("Merfolk");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
-    }
-
-    public Benthicore(UUID ownerId) {
-        super(ownerId, 53, "Benthicore", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{U}");
+    public FinalRevels(UUID ownerId) {
+        super(ownerId, 113, "Final Revels", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "LRW";
-        this.subtype.add("Elemental");
-        this.color.setBlue(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MerfolkToken(), 2), false));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapSourceEffect(), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
-        ability.addEffect(new GainAbilitySourceEffect(ShroudAbility.getInstance(), Constants.Duration.EndOfTurn));
-        this.addAbility(ability);
+        this.color.setBlack(true);
+        this.getSpellAbility().addEffect(new BoostAllEffect(2, 0, Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault(), false));
+        Mode mode = new Mode();
+		mode.getEffects().add(new BoostAllEffect(0, -2, Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault(), false));
+		this.getSpellAbility().addMode(mode);
     }
 
-    public Benthicore(final Benthicore card) {
+    public FinalRevels(final FinalRevels card) {
         super(card);
     }
 
     @Override
-    public Benthicore copy() {
-        return new Benthicore(this);
+    public FinalRevels copy() {
+        return new FinalRevels(this);
     }
 }
-

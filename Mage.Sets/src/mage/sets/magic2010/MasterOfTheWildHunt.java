@@ -43,6 +43,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
@@ -89,7 +90,8 @@ class MasterOfTheWildHuntEffect extends OneShotEffect<MasterOfTheWildHuntEffect>
 	private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
 	static {
-		filter.getName().add("Wolf");
+		filter.getSubtype().add("Wolf");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
 		filter.setTapped(false);
 		filter.setUseTapped(true);
 	}

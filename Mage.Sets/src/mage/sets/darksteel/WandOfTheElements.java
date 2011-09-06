@@ -41,6 +41,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledPermanent;
@@ -54,8 +55,10 @@ public class WandOfTheElements extends CardImpl<WandOfTheElements> {
     private static final FilterControlledPermanent mountainFilter = new FilterControlledPermanent("a Mountain");
 
     static {
-        islandFilter.getName().add("Island");
-        mountainFilter.getName().add("Mountain");
+        islandFilter.getSubtype().add("Island");
+        islandFilter.setScopeSubtype(Filter.ComparisonScope.Any);
+        mountainFilter.getSubtype().add("Mountain");
+        mountainFilter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
     public WandOfTheElements(UUID ownerId) {

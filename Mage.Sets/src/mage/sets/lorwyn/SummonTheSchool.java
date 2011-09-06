@@ -32,15 +32,10 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.ShroudAbility;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
@@ -51,37 +46,35 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class Benthicore extends CardImpl<Benthicore> {
+public class SummonTheSchool extends CardImpl<SummonTheSchool> {
 
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
 
     static {
-        filter.setTapped(false);
         filter.setUseTapped(true);
+        filter.setTapped(false);
         filter.getSubtype().add("Merfolk");
         filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
-    public Benthicore(UUID ownerId) {
-        super(ownerId, 53, "Benthicore", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{U}");
+    public SummonTheSchool(UUID ownerId) {
+        super(ownerId, 42, "Summon the School", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
         this.expansionSetCode = "LRW";
-        this.subtype.add("Elemental");
-        this.color.setBlue(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MerfolkToken(), 2), false));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapSourceEffect(), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
-        ability.addEffect(new GainAbilitySourceEffect(ShroudAbility.getInstance(), Constants.Duration.EndOfTurn));
-        this.addAbility(ability);
+        this.supertype.add("Tribal");
+        this.subtype.add("Merfolk");
+        this.color.setWhite(true);
+        // Put two 1/1 blue Merfolk Wizard creature tokens onto the battlefield.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new MerfolkToken(), 2));
+        // Tap four untapped Merfolk you control: Return Summon the School from your graveyard to your hand.
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.GRAVEYARD, new ReturnToHandSourceEffect(), new TapTargetCost(new TargetControlledPermanent(4, 4, filter, false))));
     }
 
-    public Benthicore(final Benthicore card) {
+    public SummonTheSchool(final SummonTheSchool card) {
         super(card);
     }
 
     @Override
-    public Benthicore copy() {
-        return new Benthicore(this);
+    public SummonTheSchool copy() {
+        return new SummonTheSchool(this);
     }
 }
-

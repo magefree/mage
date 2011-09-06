@@ -35,6 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -47,7 +48,8 @@ public class SilvergladeElemental extends CardImpl<SilvergladeElemental> {
     private final static FilterLandCard filter = new FilterLandCard("Forest card");
 
     static {
-        filter.getName().add("Forest");
+        filter.getSubtype().add("Forest");
+        filter.setScopeSubtype(Filter.ComparisonScope.Any);
     }
 
     public SilvergladeElemental(UUID ownerId) {
