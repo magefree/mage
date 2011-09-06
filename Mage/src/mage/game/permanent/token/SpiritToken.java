@@ -8,7 +8,7 @@ import mage.MageInt;
  */
 public class SpiritToken extends Token {
     public SpiritToken() {
-        super("Spirit", "a 1/1 colorless Spirit creature token");
+        super("Spirit", "1/1 colorless Spirit creature token");
         cardType.add(Constants.CardType.CREATURE);
         subtype.add("Spirit");
         power = new MageInt(1);

@@ -102,6 +102,8 @@ public class BoostSourceEffect extends ContinuousEffectImpl<BoostSourceEffect> {
 		if (duration != Duration.WhileOnBattlefield)
 			sb.append(" ").append(duration.toString());
         String message = power.getMessage();
+        if (message.length() == 0)
+            message = toughness.getMessage();
         if (message.length() > 0) {
             sb.append(" for each ");
         }

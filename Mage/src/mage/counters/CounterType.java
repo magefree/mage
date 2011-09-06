@@ -54,7 +54,8 @@ public enum CounterType {
     DEVOTION(new DevotionCounter().name),
     DIVINE(new DivineCounter().name),
 	WISH(new WishCounter().name),
-    HOOFPRINT(new HoofprintCounter().name);
+    HOOFPRINT(new HoofprintCounter().name),
+    KI(new KiCounter().name);
 
     private String name;
 
@@ -126,6 +127,8 @@ public enum CounterType {
 				return new WishCounter(amount);
             case HOOFPRINT:
                 return new HoofprintCounter(amount);
+            case KI:
+                return new KiCounter(amount);
         }
         return null;
     }
