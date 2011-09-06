@@ -152,7 +152,7 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
 			return false;
 		//20091005 - 602.5d/602.5e
 		if (timing == TimingRule.INSTANT || game.canPlaySorcery(playerId)) {
-			if (costs.canPay(sourceId, controllerId, game) && getTargets().canChoose(sourceId, playerId, game)) {
+			if (costs.canPay(sourceId, controllerId, game) && canChooseTarget(game)) {
 				return true;
 			}
 		}

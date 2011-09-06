@@ -305,6 +305,7 @@ public class StackAbility implements StackObject, Ability {
 	@Override
 	public void newId() {}
 
+    @Override
 	public Ability getStackAbility() {
 		return ability;
 	}
@@ -321,4 +322,9 @@ public class StackAbility implements StackObject, Ability {
 	public Modes getModes() {
 		return ability.getModes();
 	}
+
+    @Override
+    public boolean canChooseTarget(Game game) {
+        return ability.canChooseTarget(game);
+    }
 }

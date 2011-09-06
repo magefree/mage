@@ -414,6 +414,15 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 	public Modes getModes() {
 		return modes;
 	}
+    
+    @Override
+    public boolean canChooseTarget(Game game) {
+        for (Mode mode: modes.values()) {
+            if (mode.getTargets().canChoose(sourceId, controllerId, game))
+                return true;
+        }
+        return false;
+    }
 	
 	@Override
 	public String toString() {

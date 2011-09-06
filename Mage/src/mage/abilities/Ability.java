@@ -321,7 +321,10 @@ public interface Ability extends Serializable {
 	public void reset(Game game);
 	
 	/**
-	 * TODO: Determine what this is used for, current implementations always return true.
+	 * Overridden by triggered abilities with intervening if clauses - rule 20110715 - 603.4
+     * 
+     * @param game
+     * @return Whether or not the intervening if clause is satisfied
 	 */
 	public boolean checkIfClause(Game game);
 
@@ -337,5 +340,7 @@ public interface Ability extends Serializable {
 	public void addMode(Mode mode);
 	
 	public Modes getModes();
+    
+    public boolean canChooseTarget(Game game);
 	
 }

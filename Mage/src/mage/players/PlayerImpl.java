@@ -577,7 +577,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		//20091005 - 603.3c, 603.3d
 		int bookmark = game.bookmarkState();
 		TriggeredAbility ability = (TriggeredAbility) source.copy();
-		if (ability.getTargets().canChoose(ability.getSourceId(), playerId, game)) {
+		if (ability.canChooseTarget(game)) {
 			game.getStack().push(new StackAbility(ability, playerId));
 			if (ability.activate(game, false)) {
 				game.removeBookmark(bookmark);
