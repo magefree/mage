@@ -30,31 +30,32 @@ package mage.sets.saviorsofkamigawa;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 
 /**
  *
- * @author North
+ * @author Loki
  */
-public class HomurasEssence extends CardImpl<HomurasEssence> {
+public class DosansOldestChant extends CardImpl<DosansOldestChant> {
 
-    public HomurasEssence(UUID ownerId) {
-        super(ownerId, 103, "Homura's Essence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{R}");
+    public DosansOldestChant(UUID ownerId) {
+        super(ownerId, 127, "Dosan's Oldest Chant", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");
         this.expansionSetCode = "SOK";
-        this.supertype.add("Legendary");
-
-        this.color.setRed(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.color.setGreen(true);
+        // You gain 6 life.
+        this.getSpellAbility().addEffect(new GainLifeEffect(6));
+        // Draw a card.
+        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
     }
 
-    public HomurasEssence(final HomurasEssence card) {
+    public DosansOldestChant(final DosansOldestChant card) {
         super(card);
     }
 
     @Override
-    public HomurasEssence copy() {
-        return new HomurasEssence(this);
+    public DosansOldestChant copy() {
+        return new DosansOldestChant(this);
     }
 }
