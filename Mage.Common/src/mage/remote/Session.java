@@ -47,13 +47,7 @@ import mage.interfaces.MageServer;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
 import mage.utils.CompressUtil;
-import mage.view.DraftPickView;
-import mage.view.GameTypeView;
-import mage.view.MatchView;
-import mage.view.TableView;
-import mage.view.TournamentTypeView;
-import mage.view.TournamentView;
-import mage.view.UserView;
+import mage.view.*;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.Client;
 import org.jboss.remoting.ConnectionListener;
@@ -153,10 +147,14 @@ public class Session {
 									
 			this.sessionId = callbackClient.getSessionId();
 			boolean registerResult = false;
-			if (connection.getPassword() == null)
+			if (connection.getPassword() == null) {
+				UserDataView userDataView = new UserDataView(0);
+				// for backward compatibility. don't remove twice call - first one does nothing but for version checking
 				registerResult = server.registerClient(connection.getUsername(), sessionId, client.getVersion());
-			else
+				server.setUserData(connection.getUsername(), sessionId, userDataView);
+			} else {
 				registerResult = server.registerAdmin(connection.getPassword(), sessionId, client.getVersion());
+			}
 			if (registerResult) {
 				sessionState = SessionState.CONNECTED;
 				serverState = server.getServerState();

@@ -32,6 +32,9 @@ import java.util.Date;
 import java.util.UUID;
 import mage.MageException;
 import mage.interfaces.callback.ClientCallback;
+import mage.players.net.UserData;
+import mage.players.net.UserGroup;
+import mage.view.UserDataView;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.AsynchInvokerCallbackHandler;
 import org.jboss.remoting.callback.Callback;
@@ -86,7 +89,31 @@ public class Session {
 	public void registerAdmin() {
 		this.isAdmin = true;
 		User user = UserManager.getInstance().createUser("Admin", host);
+		user.setUserData(new UserData(UserGroup.ADMIN, 0));
 		this.userId = user.getId();
+	}
+
+	public boolean setUserData(String userName, UserDataView userDataView) {
+		User user = UserManager.getInstance().findUser(userName);
+		if (user != null) {
+			UserData userData = new UserData(UserGroup.PLAYER, userDataView.getAvatarId());
+			updateAvatar(userName, userData);
+			user.setUserData(userData);
+			return true;
+		}
+		return false;
+	}
+
+	private void updateAvatar(String userName, UserData userData) {
+	   	//TODO: move to separate class
+		//TODO: add for checking for private key
+		if (userName.equals("nantuko")) {
+			userData.setAvatarId(1000);
+		} else if (userName.equals("i_no_k")) {
+			userData.setAvatarId(1002);
+		} else if (userName.equals("Askael")) {
+			userData.setAvatarId(1003);
+		}
 	}
 	
 	public String getId() {

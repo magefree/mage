@@ -36,12 +36,7 @@ import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
 import mage.game.tournament.TournamentOptions;
 import mage.utils.MageVersion;
-import mage.view.DraftPickView;
-import mage.view.TableView;
-import mage.view.GameView;
-import mage.view.MatchView;
-import mage.view.TournamentView;
-import mage.view.UserView;
+import mage.view.*;
 
 /**
  *
@@ -53,6 +48,7 @@ public interface MageServer {
 	public boolean registerAdmin(String password, String sessionId, MageVersion version) throws MageException;
 	public void deregisterClient(String sessionId) throws MageException;
 
+	public boolean setUserData(String userName, String sessionId, UserDataView userDataView) throws MageException;
 	public ServerState getServerState() throws MageException;
 
 	//table methods

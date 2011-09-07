@@ -27,16 +27,15 @@
  */
 package mage.server;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 import mage.cards.decks.Deck;
 import mage.game.Table;
 import mage.interfaces.callback.ClientCallback;
+import mage.players.net.UserData;
 import mage.server.draft.DraftSession;
 import mage.server.game.GameManager;
 import mage.server.game.GameSession;
@@ -66,6 +65,8 @@ public class User {
 	private Map<UUID, TournamentSession> tournamentSessions = new HashMap<UUID, TournamentSession>();
     private Map<UUID, TournamentSession> constructing = new HashMap<UUID, TournamentSession>();
     private Map<UUID, Deck> sideboarding = new HashMap<UUID, Deck>();
+
+	private UserData userData;
 	
 	public User(String userName, String host) {
 		this.userName = userName;
@@ -261,6 +262,14 @@ public class User {
                 TableManager.getInstance().removeTable(userId, entry.getValue().getId());
             }
 		}
+	}
+
+	public void setUserData(UserData userData) {
+		this.userData = userData;
+	}
+
+	public UserData getUserData() {
+		return this.userData;
 	}
 
 }

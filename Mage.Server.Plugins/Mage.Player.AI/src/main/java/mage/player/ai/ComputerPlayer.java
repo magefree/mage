@@ -83,6 +83,8 @@ import mage.game.tournament.Tournament;
 import mage.player.ai.utils.RateCard;
 import mage.players.Player;
 import mage.players.PlayerImpl;
+import mage.players.net.UserData;
+import mage.players.net.UserGroup;
 import mage.sets.Sets;
 import mage.target.Target;
 import mage.target.TargetAmount;
@@ -113,6 +115,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 	public ComputerPlayer(String name, RangeOfInfluence range) {
 		super(name, range);
 		human = false;
+		userData = new UserData(UserGroup.COMPUTER, 64);
 	}
 
 	protected ComputerPlayer(UUID id) {

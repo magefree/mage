@@ -94,6 +94,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
 	private static final Dimension topCardDimension = new Dimension(40, 56);
 
+	private int avatarId = -1;
+
     /** Creates new form PlayerPanel */
     public PlayerPanelExt(boolean me) {
         initComponents(me);
@@ -114,6 +116,23 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 		handLabel.setText(Integer.toString(player.getHandCount()));
 		libraryLabel.setText(Integer.toString(player.getLibraryCount()));
 		graveLabel.setText(Integer.toString(player.getGraveyard().size()));
+
+		if (avatarId == -1) {
+			avatarId = player.getUserData().getAvatarId();
+			if (avatarId > 0) {
+				String path = "/avatars/" + String.valueOf(avatarId) + ".jpg";
+				if (avatarId == 64) {
+					path = "/avatars/i64.jpg";
+				} else if (avatarId >= 1000) {
+					avatarId = avatarId-1000;
+					path = "/avatars/special/" + String.valueOf(avatarId) + ".gif";
+				}
+				Image image = ImageHelper.getImageFromResources(path);
+				Rectangle r = new Rectangle(80, 80);
+				BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
+				this.avatar.update("player", resized, resized, resized, resized, r);
+			}
+		}
 
 		this.avatar.setText(player.getName());
 		if (player.isActive()) {
@@ -175,12 +194,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 		add(panelBackground);
 
 		Rectangle r = new Rectangle(80, 80);
-		Random rand = new Random();
-		Integer index = me ? 51 : rand.nextInt(AVATAR_COUNT) + 1;
-		if (index == 64 || index == 65) {
-			index += 2;
-		}
-		Image image = ImageHelper.getImageFromResources("/avatars/face" + index + ".jpg");
+		Image image = ImageHelper.getImageFromResources("/avatars/51.jpg");
 
 		topCardPanel = Plugins.getInstance().getMageCard(new CardView(Sets.findCard("Forest")), bigCard, topCardDimension, gameId, true);
 		topCardPanel.setVisible(false);

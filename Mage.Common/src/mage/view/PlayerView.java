@@ -58,6 +58,7 @@ public class PlayerView implements Serializable {
 	private SimpleCardsView graveyard = new SimpleCardsView();
 	private Map<UUID, PermanentView> battlefield = new HashMap<UUID, PermanentView>();
 	private CardView topCard;
+	private UserDataView userDataView;
 
 	public PlayerView(Player player, GameState state, Game game) {
 		this.playerId = player.getId();
@@ -80,6 +81,11 @@ public class PlayerView implements Serializable {
 		}
 		this.topCard = player.isTopCardRevealed() && player.getLibrary().size() > 0 ?
 				new CardView(player.getLibrary().getFromTop(game)) : null;
+		if (player.getUserData() != null) {
+			this.userDataView = new UserDataView(player.getUserData());
+		} else {
+			this.userDataView = new UserDataView(0);
+		}
 	}
 
 	private boolean showInBattlefield(Permanent permanent, GameState state) {
@@ -142,5 +148,9 @@ public class PlayerView implements Serializable {
 
 	public CardView getTopCard() {
 		return this.topCard;
+	}
+
+	public UserDataView getUserData() {
+		return this.userDataView;
 	}
 }

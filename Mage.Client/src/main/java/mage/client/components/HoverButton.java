@@ -209,4 +209,14 @@ public class HoverButton extends JPanel implements MouseListener {
 	public void drawSet() {
 		this.drawSet = true;
 	}
+
+	public void update(String text, Image image, Image hover, Image selected, Image disabled, Rectangle size) {
+		this.image = image;
+		this.hoverImage = hover;
+		this.selectedImage = selected;
+		this.disabledImage = disabled;
+		this.imageSize = size;
+		this.text = text;
+		repaint();
+	}
 }

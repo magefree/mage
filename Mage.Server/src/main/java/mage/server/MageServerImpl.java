@@ -54,13 +54,8 @@ import mage.server.util.ServerMessagesUtil;
 import mage.server.util.ThreadExecutor;
 import mage.utils.CompressUtil;
 import mage.utils.MageVersion;
+import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
-import mage.view.DraftPickView;
-import mage.view.GameView;
-import mage.view.MatchView;
-import mage.view.TableView;
-import mage.view.TournamentView;
-import mage.view.UserView;
 import org.apache.log4j.Logger;
 
 /**
@@ -83,7 +78,6 @@ public class MageServerImpl implements MageServer {
 
 	@Override
 	public boolean registerClient(String userName, String sessionId, MageVersion version) throws MageException {
-
 		try {
 			if (version.compareTo(Main.getVersion()) != 0)
 				throw new MageVersionException(version, Main.getVersion());
@@ -95,7 +89,17 @@ public class MageServerImpl implements MageServer {
 		}
 		return false;
 	}
-	
+
+	@Override
+	public boolean setUserData(String userName, String sessionId, UserDataView userDataView) throws MageException {
+		try {
+			return SessionManager.getInstance().setUserData(userName, sessionId, userDataView);
+		} catch (Exception ex) {
+			handleException(ex);
+		}
+		return false;
+	}
+
 	@Override
 	public boolean registerAdmin(String password, String sessionId, MageVersion version) throws MageException {
 		try {

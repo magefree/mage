@@ -66,6 +66,7 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.permanent.Permanent;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackAbility;
+import mage.players.net.UserData;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
 import mage.watchers.Watcher;
@@ -103,7 +104,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	protected boolean isGameUnderControl = true;
 	protected UUID turnController;
 	protected Set<UUID> playersUnderYourControl = new HashSet<UUID>();
+
 	protected boolean topCardRevealed = false;
+
+	protected UserData userData;
 
 	@Override
 	public abstract T copy();
@@ -149,6 +153,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		for (UUID id: player.inRange) {
 			this.inRange.add(id);
 		}
+		this.userData = player.userData;
 	}
 
 	@Override
@@ -1152,5 +1157,15 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	@Override
 	public void setTopCardRevealed(boolean topCardRevealed) {
 		this.topCardRevealed = topCardRevealed;
+	}
+
+	@Override
+	public UserData getUserData() {
+		return this.userData;
+	}
+
+	@Override
+	public void setUserData(UserData userData) {
+		this.userData = userData;
 	}
 }

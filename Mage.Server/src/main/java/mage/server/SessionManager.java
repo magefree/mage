@@ -30,9 +30,11 @@ package mage.server;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.MageException;
+import mage.players.net.UserData;
+import mage.players.net.UserGroup;
+import mage.view.UserDataView;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 
@@ -76,6 +78,15 @@ public class SessionManager {
 		if (session != null) {
 			session.registerAdmin();
 			logger.info("Admin connected from " + session.getHost());
+			return true;
+		}
+		return false;
+	}
+
+	public boolean setUserData(String userName, String sessionId, UserDataView userDataView) throws MageException {
+		Session session = sessions.get(sessionId);
+		if (session != null) {
+			session.setUserData(userName, userDataView);
 			return true;
 		}
 		return false;

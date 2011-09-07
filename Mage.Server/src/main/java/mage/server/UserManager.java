@@ -29,12 +29,13 @@ package mage.server;
 
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import mage.players.net.UserData;
 import mage.view.ChatMessage.MessageColor;
 
 /**

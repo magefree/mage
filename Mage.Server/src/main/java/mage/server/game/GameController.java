@@ -31,7 +31,7 @@ package mage.server.game;
 import java.io.BufferedOutputStream;
 
 import mage.MageException;
-import mage.server.TableManager;
+import mage.server.*;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -59,9 +59,6 @@ import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.server.ChatManager;
-import mage.server.Main;
-import mage.server.UserManager;
 import mage.server.util.SystemUtil;
 import mage.server.util.Splitter;
 import mage.server.util.ThreadExecutor;
@@ -190,7 +187,9 @@ public class GameController implements GameCallback {
 		UUID playerId = userPlayerMap.get(userId);
 		GameSession gameSession = new GameSession(game, userId, playerId);
 		gameSessions.put(playerId, gameSession);
-		UserManager.getInstance().getUser(userId).addGame(playerId, gameSession);
+		User user = UserManager.getInstance().getUser(userId);
+		gameSession.setUserData(user.getUserData());
+		user.addGame(playerId, gameSession);
 		logger.info("player " + playerId + " has joined game " + game.getId());
 		ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(playerId).getName() + " has joined the game", MessageColor.BLACK);
 		checkStart();

@@ -38,6 +38,7 @@ import mage.cards.Cards;
 import mage.game.Game;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.Player;
+import mage.players.net.UserData;
 import mage.server.User;
 import mage.server.UserManager;
 import mage.server.util.ConfigSettings;
@@ -59,6 +60,8 @@ public class GameSession extends GameWatcher {
 
 	private ScheduledFuture<?> futureTimeout;
 	protected static ScheduledExecutorService timeoutExecutor = ThreadExecutor.getInstance().getTimeoutExecutor();
+
+	private UserData userData;
 
 	public GameSession(Game game, UUID userId, UUID playerId) {
 		super(userId, game);
@@ -196,6 +199,7 @@ public class GameSession extends GameWatcher {
 	@Override
 	public GameView getGameView() {
 		Player player = game.getPlayer(playerId);
+		player.setUserData(this.userData);
 		GameView gameView = new GameView(game.getState(), game);
 		gameView.setHand(new SimpleCardsView(player.getHand().getCards(game)));
 
@@ -234,4 +238,7 @@ public class GameSession extends GameWatcher {
 		game.quit(playerId);
 	}
 
+	public void setUserData(UserData userData) {
+		this.userData = userData;
+	}
 }
