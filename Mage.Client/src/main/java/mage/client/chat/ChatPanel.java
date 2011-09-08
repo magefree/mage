@@ -61,12 +61,12 @@ public class ChatPanel extends javax.swing.JPanel {
 	/**
 	 * Chat message color for opponents.
 	 */
-	private static final Color OPPONENT_COLOR = Color.RED;
+	private static final Color OPPONENT_COLOR = new Color(0, 230, 64);
 
 	/**
 	 * Chat message color for client player.
 	 */
-	private static final Color MY_COLOR = Color.GREEN;
+	private static final Color MY_COLOR = new Color(0, 230, 64);
 
 	/**
 	 * Chat message color for timestamps.

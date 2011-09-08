@@ -130,6 +130,39 @@ abstract public class Animation {
 		};
 	}
 
+	public static void transformCard (final CardPanel panel, final MagePermanent parent, final boolean transformed) {
+
+		new Animation(1200) {
+			boolean state = false;
+
+			protected void start () {
+				parent.onBeginAnimation();
+			}
+
+			protected void update (float percentage) {
+				double p = percentage * 2;
+				if (percentage > 0.5) {
+					if (!state) {
+						parent.toggleTransformed();
+					}
+					state = true;
+					p = (p - 0.5) * 2;
+				}
+				if (!state) {
+					panel.transformAngle = Math.max(0.01, 1 - p);
+				} else {
+					panel.transformAngle = Math.max(0.01, p - 1);
+				}
+				panel.repaint();
+			}
+
+			protected void end () {
+				parent.onEndAnimation();
+				parent.repaint();
+			}
+		};
+	}
+
 	// static public void moveCardToPlay (Component source, final CardPanel dest, final CardPanel animationPanel) {
 	static public void moveCardToPlay (final int startX, final int startY, final int startWidth, final int endX, final int endY,
 		final int endWidth, final CardPanel animationPanel, final CardPanel placeholder, final JLayeredPane layeredPane,

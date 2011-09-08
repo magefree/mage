@@ -27,4 +27,5 @@ public abstract class MageCard extends JPanel {
     abstract public void setZone(String zone);
     abstract public String getZone();
 	abstract public void updateCallback(ActionCallback callback, UUID gameId);
+	abstract public void toggleTransformed();
 }

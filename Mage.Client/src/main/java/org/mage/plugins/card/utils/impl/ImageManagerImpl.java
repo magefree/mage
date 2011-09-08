@@ -34,6 +34,24 @@ public class ImageManagerImpl implements ImageManager {
 		return imageSickness;
 	}
 
+	@Override
+	public BufferedImage getDayImage() {
+		if (imageDay == null) {
+			Image image = getImageFromResourceTransparent("/card/day.png", Color.WHITE, new Rectangle(20, 20));
+			imageDay = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+		}
+		return imageDay;
+	}
+
+	@Override
+	public BufferedImage getNightImage() {
+		if (imageNight == null) {
+			Image image = getImageFromResourceTransparent("/card/night.png", Color.WHITE, new Rectangle(20, 20));
+			imageNight = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+		}
+		return imageNight;
+	}
+
 	protected static Image getImageFromResourceTransparent(String path, Color mask, Rectangle rec) {
         BufferedImage image = null;
         Image imageCardTransparent = null;
@@ -54,4 +72,6 @@ public class ImageManagerImpl implements ImageManager {
     }
 
 	private static BufferedImage imageSickness = null;
+	private static BufferedImage imageDay = null;
+	private static BufferedImage imageNight = null;
 }
