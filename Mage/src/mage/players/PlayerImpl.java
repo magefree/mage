@@ -192,6 +192,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		this.landsPerTurn = 1;
 		this.maxHandSize = 7;
 		this.lifeTotalCanChange = true;
+		this.topCardRevealed = false;
 	}
 
 	@Override
