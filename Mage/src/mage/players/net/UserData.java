@@ -1,11 +1,13 @@
 package mage.players.net;
 
+import java.io.Serializable;
+
 /**
  * User data that is passed during connection to the server.
  *
  * @author ayrat
  */
-public class UserData {
+public class UserData implements Serializable {
 
 	protected int groupId;
 	protected int avatarId;
