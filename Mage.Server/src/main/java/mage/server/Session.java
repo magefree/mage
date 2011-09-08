@@ -112,7 +112,13 @@ public class Session {
 		} else if (userName.equals("i_no_k")) {
 			userData.setAvatarId(1002);
 		} else if (userName.equals("Askael")) {
-			userData.setAvatarId(1003);
+			userData.setAvatarId(1004);
+		} else if (userName.equals("North")) {
+			userData.setAvatarId(1006);
+		} else if (userName.equals("BetaSteward")) {
+			userData.setAvatarId(1008);
+		} else if (userName.equals("Arching")) {
+			userData.setAvatarId(1010);
 		}
 	}
 	

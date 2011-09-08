@@ -8,7 +8,8 @@ public enum UserGroup {
 	COMPUTER(0),
 	PLAYER(1),
 	MAGE(3),
-	ADMIN(7);
+	ADMIN(7),
+	OWNER(15);
 
 	private int groupId;
 
