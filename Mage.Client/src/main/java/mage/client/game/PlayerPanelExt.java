@@ -88,7 +88,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
 	private static final int AVATAR_COUNT = 77;
 
-	private static final Border greenBorder = new LineBorder(Color.green, 2);
+	private static final Border greenBorder = new LineBorder(Color.green, 4);
 	private static final Border redBorder = new LineBorder(Color.red, 2);
 	private static final Border emptyBorder = BorderFactory.createEmptyBorder(0,0,0,0);
 
