@@ -51,7 +51,7 @@ import mage.watchers.Watcher;
  */
 public class ReaperFromTheAbyss extends CardImpl<ReaperFromTheAbyss> {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("non-demon creature");
+    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Demon creature");
     
     static {
         filter.getSubtype().add("Demon");
