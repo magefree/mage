@@ -156,9 +156,6 @@
                   </Border>
                 </Property>
               </Properties>
-              <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Battlefield"/>
-              </AccessibilityProperties>
 
               <Layout>
                 <DimensionLayout dim="0">

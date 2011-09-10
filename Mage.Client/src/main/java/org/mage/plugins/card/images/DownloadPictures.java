@@ -414,7 +414,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 			default: p = Proxy.NO_PROXY; break;
 		}
 
-		if (!p.equals(Proxy.NO_PROXY)) {
+		if (type != Proxy.Type.DIRECT) {
 			try {
 				String address = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_ADDRESS, "");
 				Integer port = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_PORT, "80"));

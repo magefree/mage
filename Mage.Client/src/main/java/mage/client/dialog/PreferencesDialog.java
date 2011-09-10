@@ -644,6 +644,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 		save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false", UPDATE_CACHE_POLICY);
 
 		// connection
+        save(prefs, dialog.cbProxyType, KEY_PROXY_TYPE);
 		save(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS);
 		save(prefs, dialog.txtProxyPort, KEY_PROXY_PORT);
 		save(prefs, dialog.txtProxyUserName, KEY_PROXY_USERNAME);
@@ -776,6 +777,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
 					// connection
 					dialog.cbProxyType.setSelectedItem(Connection.ProxyType.valueOf(MageFrame.getPreferences().get(KEY_PROXY_TYPE, "NONE").toUpperCase()));
+                    
 					load(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS, Config.serverName);
 					load(prefs, dialog.txtProxyPort, KEY_PROXY_PORT, Integer.toString(Config.port));
 					load(prefs, dialog.txtProxyUserName, KEY_PROXY_USERNAME, "");
@@ -852,6 +854,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         field.setText(prop);
     }
 
+	private static void load(Preferences prefs, JComboBox field, String propName, String defaultValue) {
+        String prop = prefs.get(propName, defaultValue);
+        field.setSelectedItem(prop);
+    }
+
     private static void load(Preferences prefs, JCheckBox checkBox, String propName) {
         load(prefs, checkBox, propName, PHASE_ON);
     }
@@ -870,6 +877,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
 	private static void save(Preferences prefs, JTextField textField, String propName) {
         prefs.put(propName, textField.getText().trim());
 		updateCache(propName, textField.getText().trim());
+    }
+    
+	private static void save(Preferences prefs, JComboBox comboBox, String propName) {
+        prefs.put(propName, comboBox.getSelectedItem().toString().trim());
+		updateCache(propName, comboBox.getSelectedItem().toString().trim());
     }
 
 	public void reset() {
