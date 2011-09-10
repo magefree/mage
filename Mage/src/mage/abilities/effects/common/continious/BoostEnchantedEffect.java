@@ -56,6 +56,10 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl<BoostEnchantedEff
         this(new StaticValue(power), new StaticValue(toughness), duration);
 	}
 
+	public BoostEnchantedEffect(DynamicValue power, DynamicValue toughness) {
+		this(power, toughness, Duration.WhileOnBattlefield);
+	}
+
 	public BoostEnchantedEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
 		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
 		this.power = power;
