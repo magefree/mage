@@ -52,6 +52,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -537,8 +538,18 @@ public class ContinuousEffects implements Serializable {
 		}
 	}
 
-}
+    public void clear() {
+        layeredEffects.clear();
+        replacementEffects.clear();
+        preventionEffects.clear();
+        requirementEffects.clear();
+        restrictionEffects.clear();
+        asThoughEffects.clear();
+        costModificationEffects.clear();
+        abilityMap.clear();
+    }
 
+}
 class TimestampSorter implements Comparator<ContinuousEffect> {
 	@Override
 	public int compare(ContinuousEffect one, ContinuousEffect two) {

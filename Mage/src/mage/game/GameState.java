@@ -409,4 +409,24 @@ public class GameState implements Serializable, Copyable<GameState> {
 		values.put(valueId, value);
 	}
 
+    public void clear() {
+        battlefield.clear();
+        effects.clear();
+        delayed.clear();
+        triggers.clear();
+        stack.clear();
+        exile.clear();
+        command.clear();
+        revealed.clear();
+        lookedAt.clear();
+        turnNum = 0;
+        gameOver = false;
+    	specialActions.clear();
+        combat.clear();
+        turnMods.clear();
+        watchers.clear();
+        values.clear();
+        zones.clear();
+    }
+
 }

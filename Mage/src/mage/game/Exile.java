@@ -114,4 +114,10 @@ public class Exile implements Serializable, Copyable<Exile> {
 	public Exile copy() {
 		return new Exile(this);
 	}
+
+    public void clear() {
+        for (ExileZone exile: exileZones.values()) {
+            exile.clear();
+        }
+    }
 }
