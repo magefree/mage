@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
 
 /**
  *
- * @author mamaurer
+ * @author mamaurer, nantuko
  */
 public class BladeOfTheBloodchief extends CardImpl<BladeOfTheBloodchief> {
 	
@@ -88,7 +88,13 @@ class BladeOfTheBloodChiefTriggeredAbility extends TriggeredAbilityImpl<BladeOfT
 		if ( event.getType() == EventType.ZONE_CHANGE ) {
 			ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
 			if ( zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD ) {
-				return true;
+				Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
+                if (p != null && p.getCardType().contains(CardType.CREATURE)) {
+					Permanent enchantment = game.getPermanent(getSourceId());
+					if (enchantment != null && enchantment.getAttachedTo() != null) {
+						return true;
+					}
+				}
 			}
 		}
 		return false;
