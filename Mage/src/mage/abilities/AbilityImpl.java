@@ -56,6 +56,8 @@ import mage.target.Targets;
 
 import org.apache.log4j.Logger;
 
+import javax.management.openmbean.ArrayType;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -162,6 +164,15 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 			logger.debug("activate failed - target");
 			return false;
 		}
+        ArrayList<Cost> addedOptionalCosts = new ArrayList<Cost>();
+        for (Cost cost : optionalCosts) {
+            if (game.getPlayer(this.controllerId).chooseUse(Outcome.Benefit, "Pay optional cost " + cost.getText() + "?", game)) {
+                if (cost instanceof ManaCost) {
+                    manaCostsToPay.add((ManaCost) cost);
+                    addedOptionalCosts.add(cost);
+                }
+            }
+        }
 		//20100716 - 601.2e
 		if (game.getObject(sourceId) != null) {
 			//game.getObject(sourceId).adjustCosts(this, game);

@@ -164,7 +164,7 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
 			// if so, then ChangelingAbility doesn't matter
 			if (value.equals("Mountain") || value.equals("Island") || value.equals("Plains")
 					|| value.equals("Forest") || value.equals("Swamp") || value.equals("Aura")
-					|| value.equals("Equipment") || value.equals("Fortification")) {
+					|| value.equals("Equipment") || value.equals("Fortification") || value.equals("Shrine")) {
 				return false;
 			}
 			// as it is creature subtype, then check the existence of Changeling

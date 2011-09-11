@@ -37,6 +37,8 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -55,12 +57,9 @@ public class DesolationAngel extends CardImpl<DesolationAngel> {
         this.expansionSetCode = "APC";
         this.subtype.add("Angel");
 		this.color.setBlack(true);
-		this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
-        Ability ability = new KickerAbility(new DesolationAngelDummyEffect(), false);
-        ability.addManaCost(new ManaCostsImpl("{W}{W}"));
-        this.addAbility(ability);
+        this.getSpellAbility().addOptionalCost(new ManaCostsImpl("{W}{W}"));
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DesolationAngelEntersBattlefieldEffect()));
     }
 
@@ -109,8 +108,12 @@ class DesolationAngelEntersBattlefieldEffect extends OneShotEffect<DesolationAng
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
             boolean kicked = false;
-            for (KickerAbility kicker: p.getAbilities().getKickerAbilities()) {
-                kicked |= kicker.isKicked();
+            for (Object cost: p.getSpellAbility().getOptionalCosts()) {
+                if (cost instanceof ManaCost) {
+                    if (((ManaCost)cost).isPaid()) {
+                        kicked = true;
+                    }
+                }
             }
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
                 if (permanent.getCardType().contains(CardType.LAND)) {
