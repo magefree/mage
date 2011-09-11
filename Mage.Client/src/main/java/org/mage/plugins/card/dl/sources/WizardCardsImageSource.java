@@ -1,9 +1,7 @@
 package org.mage.plugins.card.dl.sources;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -29,7 +27,9 @@ public class WizardCardsImageSource implements CardImageSource {
     public WizardCardsImageSource() {
         sets = new HashMap();
         setsAliases = new HashMap();
+        setsAliases.put("ISD", "innistrad/cig");
         setsAliases.put("M12", "magic2012/cig");
+        setsAliases.put("CMD", "commander/cig");
         setsAliases.put("NPH", "newphyrexia/spoiler");
         setsAliases.put("MBS", "mirrodinbesieged/spoiler");
         setsAliases.put("SOM", "scarsofmirrodin/spoiler");
@@ -43,13 +43,25 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("ALA", "shardsofalara/spoiler");
     }
 
-    private List<String> getSetLinks(String cardSet) {
-        List<String> setLinks = new ArrayList<String>();
+    private Map<String, String> getSetLinks(String cardSet) {
+        Map<String, String> setLinks = new HashMap<String, String>();
         try {
             Document doc = Jsoup.connect("http://www.wizards.com/magic/tcg/article.aspx?x=mtg/tcg/" + (String) setsAliases.get(cardSet)).get();
             Elements cardsImages = doc.select("img[height$=370]");
             for (int i = 0; i < cardsImages.size(); i++) {
-                setLinks.add(cardsImages.get(i).attr("src"));
+                String cardName = cardsImages.get(i).attr("title").replace("Æ", "AE");
+                if (cardName != null && !cardName.isEmpty()) {
+                    if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
+                        int landNumber = 1;
+                        while (setLinks.get(cardName + landNumber) != null) {
+                            landNumber++;
+                        }
+                        cardName += landNumber;
+                    }
+                    setLinks.put(cardName, cardsImages.get(i).attr("src"));
+                } else {
+                    setLinks.put(Integer.toString(i), cardsImages.get(i).attr("src"));
+                }
             }
         } catch (IOException ex) {
             System.out.println("Exception when parsing the wizards page: " + ex.getMessage());
@@ -58,22 +70,26 @@ public class WizardCardsImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateURL(Integer collectorId, String cardSet) throws Exception {
+    public String generateURL(Integer collectorId, String cardName, String cardSet) throws Exception {
         if (collectorId == null || cardSet == null) {
             throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
         }
         if (setsAliases.get(cardSet) != null) {
-            List<String> setLinks = (List<String>) sets.get(cardSet);
+            Map<String, String> setLinks = (Map<String, String>) sets.get(cardSet);
             if (setLinks == null) {
                 setLinks = getSetLinks(cardSet);
                 sets.put(cardSet, setLinks);
             }
-            String link;
-            if (setLinks.size() >= collectorId) {
-                link = setLinks.get(collectorId - 1);
-            } else {
-                link = setLinks.get(collectorId - 21);
-                link = link.replace(Integer.toString(collectorId - 20), (Integer.toString(collectorId - 20) + "a"));
+            String link = setLinks.get(cardName);
+            if (link == null) {
+                if (setLinks.size() >= collectorId) {
+                    link = setLinks.get(Integer.toString(collectorId - 1));
+                } else {
+                    link = setLinks.get(Integer.toString(collectorId - 21));
+                    if (link != null) {
+                        link = link.replace(Integer.toString(collectorId - 20), (Integer.toString(collectorId - 20) + "a"));
+                    }
+                }
             }
             if (!link.startsWith("http://")) {
                 link = "http://www.wizards.com" + link;

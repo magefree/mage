@@ -50,7 +50,7 @@ public class MagicCardsImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateURL(Integer collectorId, String cardSet) throws Exception {
+    public String generateURL(Integer collectorId, String cardName, String cardSet) throws Exception {
         if (collectorId == null || cardSet == null) {
             throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
         }

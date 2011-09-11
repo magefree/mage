@@ -20,13 +20,9 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.prefs.Preferences;
 
-import javax.management.ImmutableDescriptor;
-import javax.swing.AbstractButton;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultBoundedRangeModel;
 import javax.swing.DefaultComboBoxModel;
@@ -39,14 +35,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import mage.cards.Card;
 
-import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
 import mage.remote.Connection;
 import org.apache.log4j.Logger;
@@ -156,7 +149,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
 		p0.add(jLabel1);
 		p0.add(Box.createVerticalStrut(5));
-		ComboBoxModel jComboBox1Model = new DefaultComboBoxModel(new String[] { "magiccards.info", "wizards.com", "mtgathering.ru HQ", "mtgathering.ru MQ", "mtgathering.ru LQ"});
+		ComboBoxModel jComboBox1Model = new DefaultComboBoxModel(new String[] { "magiccards.info", "wizards.com"/*, "mtgathering.ru HQ", "mtgathering.ru MQ", "mtgathering.ru LQ"*/});
 		jComboBox1 = new JComboBox();
         
         cardImageSource = MagicCardsImageSource.getInstance();
@@ -266,20 +259,24 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 		try {
 			offlineMode = true;
 
-			for (Card card : allCards) {
-				if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()) {
-					CardInfo url = new CardInfo(card.getName(), card.getExpansionSetCode(), card.getCardNumber(), false);
-					allCardsUrls.add(url);
-				} else {
-					if (card.getCardNumber() < 1) {
-						System.err.println("There was a critical error!");
-						log.error("Card has no collector ID and won't be sent to client: " + card);
-					} else if (card.getExpansionSetCode().isEmpty()) {
-						System.err.println("There was a critical error!");
-						log.error("Card has no set name and won't be sent to client:" + card);
-					}
-				}
-			}
+            for (Card card : allCards) {
+                if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()) {
+                    String cardName = card.getName();
+                    if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
+                        cardName = card.getClass().getName().replace(card.getClass().getPackage().getName() + ".", "");
+                    }
+                    CardInfo url = new CardInfo(cardName, card.getExpansionSetCode(), card.getCardNumber(), false);
+                    allCardsUrls.add(url);
+                } else {
+                    if (card.getCardNumber() < 1) {
+                        System.err.println("There was a critical error!");
+                        log.error("Card has no collector ID and won't be sent to client: " + card);
+                    } else if (card.getExpansionSetCode().isEmpty()) {
+                        System.err.println("There was a critical error!");
+                        log.error("Card has no set name and won't be sent to client:" + card);
+                    }
+                }
+            }
 
 			allCardsUrls.addAll(getTokenCardUrls());
 		} catch (Exception e) {
@@ -442,7 +439,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 						}
 						url = cardImageSource.generateTokenUrl(card.getName(), card.getSet());
 					} else {
-                        url = cardImageSource.generateURL(card.getCollectorId(), card.getSet());
+                        url = cardImageSource.generateURL(card.getCollectorId(), card.getName(), card.getSet());
                     }
 
                     if (url != null) {
