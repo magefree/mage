@@ -49,7 +49,7 @@ public class WizardCardsImageSource implements CardImageSource {
             Document doc = Jsoup.connect("http://www.wizards.com/magic/tcg/article.aspx?x=mtg/tcg/" + (String) setsAliases.get(cardSet)).get();
             Elements cardsImages = doc.select("img[height$=370]");
             for (int i = 0; i < cardsImages.size(); i++) {
-                String cardName = cardsImages.get(i).attr("title").replace("\u00C6", "AE");
+                String cardName = cardsImages.get(i).attr("title").replace("\u00C6", "AE").replace("’", "'");
                 if (cardName != null && !cardName.isEmpty()) {
                     if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
                         int landNumber = 1;

@@ -78,7 +78,7 @@ public class CardParser extends Thread {
             List<String> flavorText = new ArrayList<String>();
             if (!select.isEmpty()) {
                 for (Element element : select) {
-                    flavorText.add(element.html().trim().replace("&quot;", "\""));
+                    flavorText.add(element.html().trim().replace("&quot;", "\"").replace("<i>", "").replace("</i>", ""));
                 }
             }
             card.setFlavorText(flavorText);
