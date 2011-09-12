@@ -213,11 +213,6 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 			}
 			chosen = targets.size() >= minNumberOfTargets;
 		}
-		while (!doneChosing()) {
-			if (!player.choose(outcome, this, game)) {
-				break;
-			}
-		}
 		return chosen = true;
 	}
 
@@ -230,11 +225,6 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 				return chosen;
 			}
 			chosen = targets.size() >= minNumberOfTargets;
-		}
-		while (!doneChosing()) {
-			if (!player.chooseTarget(outcome, this, source, game)) {
-				break;
-			}
 		}
 		return chosen = true;
 	}
