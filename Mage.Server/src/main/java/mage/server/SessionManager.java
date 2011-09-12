@@ -67,7 +67,7 @@ public class SessionManager {
 		Session session = sessions.get(sessionId);
 		if (session != null) {
 			session.registerUser(userName);
-			logger.info("User " + userName + " connected from " + session.getHost());
+			logger.info("User " + userName + " connected from " + session.getHost() + " sessionId: " + sessionId);
 			return true;
 		}
 		return false;
@@ -94,13 +94,16 @@ public class SessionManager {
 	
 	public synchronized void disconnect(String sessionId, boolean voluntary) {
 		Session session = sessions.get(sessionId);
+   		sessions.remove(sessionId);
 		if (session != null) {
 			if (voluntary)
 				session.kill();
 			else
 				session.disconnect();
-			sessions.remove(sessionId);
 		}
+        else {
+            logger.info("could not find session with id " + sessionId);
+        }
 	}
 	
 	public Map<String, Session> getSessions() {

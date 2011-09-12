@@ -41,6 +41,7 @@ import mage.server.game.GameManager;
 import mage.server.game.GameSession;
 import mage.server.tournament.TournamentSession;
 import mage.view.TableClientMessage;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -48,7 +49,9 @@ import mage.view.TableClientMessage;
  */
 public class User {
 
-	public enum UserState {
+	private final static Logger logger = Logger.getLogger(User.class);
+
+    public enum UserState {
 		Created, Connected, Disconnected, Reconnected;
 	}
 	
@@ -92,13 +95,16 @@ public class User {
 	
 	public void setSessionId(String sessionId) {
 		this.sessionId = sessionId;
-		if (sessionId.isEmpty())
+		if (sessionId.isEmpty()) {
 			userState = UserState.Disconnected;
-		else if (userState == UserState.Created) 
+            logger.info("User " + userName + " disconnected");
+        } else if (userState == UserState.Created) {
 			userState = UserState.Connected;
-		else {
+            logger.info("User " + userName + " created");
+        } else {
 			userState = UserState.Reconnected;
 			reconnect();
+            logger.info("User " + userName + " reconnected");
 		}
 	}
 	

@@ -35,8 +35,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import mage.players.net.UserData;
 import mage.view.ChatMessage.MessageColor;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -50,6 +50,7 @@ public class UserManager {
 	protected static ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
 
 	private final static UserManager INSTANCE = new UserManager();
+	private final static Logger logger = Logger.getLogger(UserManager.class);
 
 	public static UserManager getInstance() {
 		return INSTANCE;
@@ -100,6 +101,7 @@ public class UserManager {
 	
 	public void disconnect(UUID userId) {
 		if (users.containsKey(userId)) {
+            logger.info("user disconnected " + userId);
 			users.get(userId).setSessionId("");
 			ChatManager.getInstance().broadcast(userId, "has lost connection", MessageColor.BLACK);
 		}
@@ -114,6 +116,7 @@ public class UserManager {
 
 	public void removeUser(UUID userId) {
 		if (users.containsKey(userId)) {
+            logger.info("user removed" + userId);
 			users.get(userId).setSessionId("");
 			ChatManager.getInstance().broadcast(userId, "has disconnected", MessageColor.BLACK);
 			users.get(userId).kill();
