@@ -135,8 +135,8 @@ public class Session {
 			callbackClient = new Client(clientLocator, "callback", clientMetadata);
 			
 			Map<String, String> listenerMetadata = new HashMap<String, String>();
-			listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "5000");
-			listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "2000");
+			listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "10000");
+			listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "9000");
 			callbackClient.connect(new ClientConnectionListener(), listenerMetadata);
 			
 			Map<String, String> callbackMetadata = new HashMap<String, String>();
@@ -184,6 +184,7 @@ public class Session {
 		if (connection == null)
 			return;
 		try {
+            
 			callbackClient.disconnect();
 			TransporterClient.destroyTransporterClient(server);
 		} catch (Throwable ex) {
