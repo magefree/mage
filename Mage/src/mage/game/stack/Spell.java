@@ -38,6 +38,7 @@ import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
@@ -78,51 +79,75 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 		this.controllerId = spell.controllerId;
 	}
 
-	@Override
-	public boolean resolve(Game game) {
-		boolean result = false;
-		if (card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY)) {
-			if (ability.getTargets().stillLegal(ability, game)) {
-				boolean replaced = resolveKicker(game);
-				if (!replaced)
-					result = ability.resolve(game);
-				else
-					result = true;
+    @Override
+    public boolean resolve(Game game) {
+        boolean result = false;
+        if (card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY)) {
+            if (ability.getTargets().stillLegal(ability, game)) {
+                updateOptionalCosts();
+                boolean replaced = resolveKicker(game);
+                if (!replaced)
+                    result = ability.resolve(game);
+                else
+                    result = true;
 
-				if (!copiedSpell) {
-					for (Effect effect: ability.getEffects()) {
-						if (effect instanceof PostResolveEffect) {
-							((PostResolveEffect)effect).postResolve(card, ability, controllerId, game);
-							return result;
-						}
-					}
-					card.moveToZone(Zone.GRAVEYARD, ability.getId(), game, false);
-				}
+                if (!copiedSpell) {
+                    for (Effect effect : ability.getEffects()) {
+                        if (effect instanceof PostResolveEffect) {
+                            ((PostResolveEffect) effect).postResolve(card, ability, controllerId, game);
+                            return result;
+                        }
+                    }
+                    card.moveToZone(Zone.GRAVEYARD, ability.getId(), game, false);
+                }
 
-				return result;
-			}
-			//20091005 - 608.2b
-			game.informPlayers(getName() + " has been fizzled.");
-			counter(null, game);
-			return false;
-		}
-		else if (card.getCardType().contains(CardType.ENCHANTMENT) && card.getSubtype().contains("Aura")) {
-			if (ability.getTargets().stillLegal(ability, game)) {
-				if (card.putOntoBattlefield(game, Zone.HAND, ability.getId(), controllerId)) {
-					return ability.resolve(game);
-				}
-				return false;
-			}
-			//20091005 - 608.2b
-			counter(null, game);
-			return false;
-		}
-		else {
-			resolveKicker(game);
-			result = card.putOntoBattlefield(game, Zone.HAND, ability.getId(), controllerId);
-			return result;
-		}
-	}
+                return result;
+            }
+            //20091005 - 608.2b
+            game.informPlayers(getName() + " has been fizzled.");
+            counter(null, game);
+            return false;
+        } else if (card.getCardType().contains(CardType.ENCHANTMENT) && card.getSubtype().contains("Aura")) {
+            if (ability.getTargets().stillLegal(ability, game)) {
+                updateOptionalCosts();
+                if (card.putOntoBattlefield(game, Zone.HAND, ability.getId(), controllerId)) {
+                    return ability.resolve(game);
+                }
+                return false;
+            }
+            //20091005 - 608.2b
+            counter(null, game);
+            return false;
+        } else {
+            updateOptionalCosts();
+
+            resolveKicker(game);
+            result = card.putOntoBattlefield(game, Zone.HAND, ability.getId(), controllerId);
+            return result;
+        }
+    }
+
+    /**
+     * As we have ability in the stack, we need to update optional costs in original card.
+     * This information will be used later by effects, e.g. to determine whether card was kicked or not.
+     * E.g. Desolation Angel
+     */
+    private void updateOptionalCosts() {
+        Ability abilityOrig = card.getAbilities().get(ability.getId());
+        for (Object object : ability.getOptionalCosts()) {
+            Cost cost = (Cost) object;
+            for (Cost costOrig : abilityOrig.getOptionalCosts()) {
+                if (cost.getId().equals(costOrig.getId())) {
+                    if (cost.isPaid()) {
+                        costOrig.setPaid();
+                    } else {
+                        costOrig.clearPaid();
+                    }
+                    break;
+                }
+            }
+        }
+    }
 
 	protected boolean resolveKicker(Game game) {
 		boolean replaced = false;

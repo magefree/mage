@@ -164,12 +164,12 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 			logger.debug("activate failed - target");
 			return false;
 		}
-        ArrayList<Cost> addedOptionalCosts = new ArrayList<Cost>();
+
         for (Cost cost : optionalCosts) {
-            if (game.getPlayer(this.controllerId).chooseUse(Outcome.Benefit, "Pay optional cost " + cost.getText() + "?", game)) {
-                if (cost instanceof ManaCost) {
+            if (cost instanceof ManaCost) {
+                cost.clearPaid();
+                if (game.getPlayer(this.controllerId).chooseUse(Outcome.Benefit, "Pay optional cost " + cost.getText() + "?", game)) {
                     manaCostsToPay.add((ManaCost) cost);
-                    addedOptionalCosts.add(cost);
                 }
             }
         }
