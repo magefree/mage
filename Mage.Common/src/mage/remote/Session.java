@@ -77,14 +77,11 @@ public class Session {
 	private SessionState sessionState = SessionState.DISCONNECTED;
 	private Connection connection;
 
-	/**
-	 * For locking session object.
-	 * Read-write locking is used for better performance, as in most cases session object won't be changed so
-	 * there shouldn't be any penalty for synchronization.
-	 *
-	 * @author nantuko
-	*/
-//	private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+    private static boolean debugMode = false;
+
+    static {
+        debugMode = System.getProperty("debug.mage") != null;
+    }
 
 	public Session(MageClient client) {
 		this.client = client;
@@ -135,8 +132,14 @@ public class Session {
 			callbackClient = new Client(clientLocator, "callback", clientMetadata);
 			
 			Map<String, String> listenerMetadata = new HashMap<String, String>();
-			listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "10000");
-			listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "9000");
+            if (debugMode) {
+                // prevent client from disconnecting while debugging
+                listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "1000000");
+                listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "900000");
+            } else {
+			    listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "10000");
+			    listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "9000");
+            }
 			callbackClient.connect(new ClientConnectionListener(), listenerMetadata);
 			
 			Map<String, String> callbackMetadata = new HashMap<String, String>();
