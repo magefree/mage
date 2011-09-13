@@ -73,26 +73,6 @@ public class DesolationAngel extends CardImpl<DesolationAngel> {
     }
 }
 
-class DesolationAngelDummyEffect extends OneShotEffect<DesolationAngelDummyEffect> {
-    DesolationAngelDummyEffect() {
-        super(Constants.Outcome.Benefit);
-    }
-
-    DesolationAngelDummyEffect(final DesolationAngelDummyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public DesolationAngelDummyEffect copy() {
-        return new DesolationAngelDummyEffect(this);
-    }
-}
-
 class DesolationAngelEntersBattlefieldEffect extends OneShotEffect<DesolationAngelEntersBattlefieldEffect> {
     DesolationAngelEntersBattlefieldEffect() {
         super(Constants.Outcome.DestroyPermanent);
