@@ -57,14 +57,20 @@ public class PlayerFactory {
 		Player player;
 		Constructor<?> con;
 		try {
-			con = playerTypes.get(playerType).getConstructor(new Class[]{String.class, RangeOfInfluence.class, int.class});
-			player = (Player)con.newInstance(new Object[] {name, range, skill});
+            Class playerTypeClass = playerTypes.get(playerType);
+            if (playerTypeClass != null) {
+                con = playerTypeClass.getConstructor(new Class[]{String.class, RangeOfInfluence.class, int.class});
+                player = (Player)con.newInstance(new Object[] {name, range, skill});
+                logger.info("Player created: " + name + "-" + player.getId().toString());
+                return player;
+            }
+            else {
+                logger.fatal("Unknown player type: " + playerType);
+            }
 		} catch (Exception ex) {
 			logger.fatal("PlayerFactory error ", ex);
-			return null;
 		}
-		logger.info("Player created: " + name + "-" + player.getId().toString());
-		return player;
+		return null;
 	}
 
 	public Set<String> getPlayerTypes() {

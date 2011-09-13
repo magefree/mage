@@ -88,7 +88,7 @@ public class ChatManager {
 		}
 	}
 
-	void removeUser(UUID userId) {
+	public void removeUser(UUID userId) {
 		for (ChatSession chat: chatSessions.values()) {
 			chat.kill(userId);
 		}

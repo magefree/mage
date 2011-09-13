@@ -27,10 +27,12 @@
  */
 package mage.filter;
 
+import java.io.Serializable;
+
 /**
  * @author nantuko
  */
-public class FilterMana {
+public class FilterMana implements Serializable {
 
 	protected boolean black;
 	protected boolean green;

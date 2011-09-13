@@ -131,10 +131,12 @@ public class Session {
 	}
 		
 	public void disconnect() {
+        logger.info("session disconnected for user " + userId);
 		UserManager.getInstance().disconnect(userId);
 	}
 	
 	public void kill() {
+        logger.info("session killed for user " + userId);
 		UserManager.getInstance().removeUser(userId);
 	}
 	

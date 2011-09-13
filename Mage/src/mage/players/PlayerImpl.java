@@ -393,12 +393,18 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 			game.fireInformEvent(name + " discards " + Integer.toString(discardAmount) + " card" + (discardAmount > 1?"s":""));
 			return;
 		}
-		for (int i = 0; i < amount; i++) {
+        int numDiscarded = 0;
+		while (numDiscarded < amount) {
+            if (hand.size() == 0)
+                break;
 			TargetDiscard target = new TargetDiscard(playerId);
 			choose(Outcome.Discard, target, game);
-			discard(hand.get(target.getFirstTarget(), game), source, game);
+            Card card = hand.get(target.getFirstTarget(), game);
+            if (card != null && discard(card, source, game)) {
+                numDiscarded++;
+            }
 		}
-		game.fireInformEvent(name + " discards " + Integer.toString(amount) + " card" + (amount > 1?"s":""));
+		game.fireInformEvent(name + " discards " + Integer.toString(numDiscarded) + " card" + (numDiscarded > 1?"s":""));
 	}
 
 	@Override
@@ -583,7 +589,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		//20091005 - 603.3c, 603.3d
 		int bookmark = game.bookmarkState();
 		TriggeredAbility ability = (TriggeredAbility) source.copy();
-		if (ability.canChooseTarget(game)) {
+		if (ability != null && ability.canChooseTarget(game)) {
 			game.getStack().push(new StackAbility(ability, playerId));
 			if (ability.activate(game, false)) {
 				game.removeBookmark(bookmark);
