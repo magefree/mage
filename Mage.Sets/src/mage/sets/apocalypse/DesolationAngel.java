@@ -42,28 +42,28 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.KickerAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author Loki
  */
 public class DesolationAngel extends CardImpl<DesolationAngel> {
 
-    public DesolationAngel (UUID ownerId) {
+    public DesolationAngel(UUID ownerId) {
         super(ownerId, 38, "Desolation Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.expansionSetCode = "APC";
         this.subtype.add("Angel");
-		this.color.setBlack(true);
+        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
         this.getSpellAbility().addOptionalCost(new ManaCostsImpl("{W}{W}"));
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DesolationAngelEntersBattlefieldEffect()));
     }
 
-    public DesolationAngel (final DesolationAngel card) {
+    public DesolationAngel(final DesolationAngel card) {
         super(card);
     }
 
@@ -105,26 +105,28 @@ class DesolationAngelEntersBattlefieldEffect extends OneShotEffect<DesolationAng
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(source.getSourceId());
+        Card p = game.getCard(source.getSourceId());
+
+        boolean kicked = false;
         if (p != null) {
-            boolean kicked = false;
-            for (Object cost: p.getSpellAbility().getOptionalCosts()) {
+            for (Object cost : p.getSpellAbility().getOptionalCosts()) {
                 if (cost instanceof ManaCost) {
-                    if (((ManaCost)cost).isPaid()) {
+                    if (((ManaCost) cost).isPaid()) {
                         kicked = true;
                     }
                 }
             }
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
-                if (permanent.getCardType().contains(CardType.LAND)) {
-                    if ((!kicked && permanent.getControllerId() == source.getControllerId()) || kicked) {
-                        permanent.destroy(source.getSourceId(), game, false);
-                    }
+        }
+
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
+            if (permanent.getCardType().contains(CardType.LAND)) {
+                if ((!kicked && permanent.getControllerId() == source.getControllerId()) || kicked) {
+                    permanent.destroy(source.getSourceId(), game, false);
                 }
             }
-            return true;
         }
-        return false;
+
+        return true;
     }
 
     @Override
