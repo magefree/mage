@@ -166,7 +166,7 @@ public class CardPluginImpl implements CardPlugin {
 		boolean othersOnTheRight = true;
 		if (options != null && options.containsKey("nonLandPermanentsInOnePile")) {
 			if (options.get("nonLandPermanentsInOnePile").equals("true")) {
-				System.out.println("in one pile");
+//				System.out.println("in one pile");
 				othersOnTheRight = false;
 			   	allCreatures.addAll(allOthers);
 				allOthers.clear();
