@@ -51,7 +51,12 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
 		}
 	}
 
-	@Override
+    @Override
+    public UUID getId() {
+        throw new RuntimeException("Not supported method");
+    }
+
+    @Override
 	public String getText() {
 		if (this.size() == 0)
 			return "";

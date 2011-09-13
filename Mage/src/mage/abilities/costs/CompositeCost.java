@@ -24,6 +24,11 @@ public class CompositeCost implements Cost {
     }
 
     @Override
+    public UUID getId() {
+        throw new RuntimeException("Not supported method");
+    }
+
+    @Override
     public String getText() {
         return description;
     }

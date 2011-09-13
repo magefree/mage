@@ -31,8 +31,11 @@ package mage.abilities.costs;
 import mage.target.Target;
 import mage.target.Targets;
 
+import java.util.UUID;
+
 public abstract class CostImpl<T extends CostImpl<T>> implements Cost {
 
+	protected UUID id;
 	protected String text;
 	protected boolean paid;
 	protected Targets targets;
@@ -41,11 +44,13 @@ public abstract class CostImpl<T extends CostImpl<T>> implements Cost {
 	public abstract T copy();
 
 	public CostImpl() {
+		id = UUID.randomUUID();
 		paid = false;
 		targets = new Targets();
 	}
 
 	public CostImpl(final CostImpl cost) {
+		this.id = cost.id;
 		this.text = cost.text;
 		this.paid = cost.paid;
 		this.targets = cost.targets.copy();
@@ -80,6 +85,11 @@ public abstract class CostImpl<T extends CostImpl<T>> implements Cost {
 	@Override
 	public void setPaid() {
 		paid = true;
+	}
+
+	@Override
+	public UUID getId() {
+		return this.id;
 	}
 
 }
