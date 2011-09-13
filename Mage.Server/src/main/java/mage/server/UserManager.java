@@ -100,6 +100,7 @@ public class UserManager {
 	}
 	
 	public void disconnect(UUID userId) {
+        ChatManager.getInstance().removeUser(userId);
 		if (users.containsKey(userId)) {
             logger.info("user disconnected " + userId);
 			users.get(userId).setSessionId("");
