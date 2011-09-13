@@ -166,6 +166,12 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 			}
 		}
 	}
+    
+    @Override
+    public void remove(UUID id) {
+        if (targets.containsKey(id))
+            targets.remove(id);
+    }
 
 	@Override
 	public void addTarget(UUID id, Ability source, Game game) {

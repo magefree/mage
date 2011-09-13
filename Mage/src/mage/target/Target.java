@@ -65,6 +65,7 @@ public interface Target extends Serializable {
 	public Set<UUID> possibleTargets(UUID sourceControllerId, Game game);
 	public boolean choose(Outcome outcome, UUID playerId, Game game);
 	public void add(UUID id, Game game);
+    public void remove(UUID targetId);
 
 	public String getMessage();
 	public String getTargetName();
