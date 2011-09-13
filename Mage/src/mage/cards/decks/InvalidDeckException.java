@@ -29,13 +29,14 @@
 package mage.cards.decks;
 
 import java.util.Map;
-import mage.MageException;
+import java.util.Map.Entry;
+import mage.game.GameException;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class InvalidDeckException extends MageException {
+public class InvalidDeckException extends GameException {
 
 	Map<String, String> invalid;
 
@@ -47,4 +48,14 @@ public class InvalidDeckException extends MageException {
 	public Map<String, String> getInvalid() {
 		return invalid;
 	}
+    
+    @Override
+    public String getMessage() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(super.getMessage()).append("\n");
+        for (Entry<String, String> entry: invalid.entrySet()) {
+            sb.append(entry.getKey()).append(" ").append(entry.getValue()).append("\n");
+        }
+        return sb.toString();
+    }
 }

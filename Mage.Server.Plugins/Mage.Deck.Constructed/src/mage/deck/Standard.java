@@ -56,5 +56,7 @@ public class Standard extends Constructed {
 				setCodes.add(set.getCode());
 			}
 		}
+        banned.add("Jace, the Mind Sculptor");
+        banned.add("Stoneforge Mystic");
 	}
 }
