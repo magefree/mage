@@ -470,6 +470,8 @@ public class TableController {
 	}
 
 	public boolean isOwner(UUID userId) {
+        if (userId == null)
+            return false;
 		return userId.equals(this.userId);
 	}
 

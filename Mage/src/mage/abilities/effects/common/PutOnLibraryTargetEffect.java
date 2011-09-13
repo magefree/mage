@@ -74,10 +74,12 @@ public class PutOnLibraryTargetEffect extends OneShotEffect<PutOnLibraryTargetEf
                     }
                 case GRAVEYARD:
                     Card card = game.getCard(id);
-                    for (Player player : game.getPlayers().values()) {
-                        if (player.getGraveyard().contains(card.getId())) {
-                            player.getGraveyard().remove(card);
-                            result |= card.moveToZone(Zone.LIBRARY, source.getId(), game, onTop);
+                    if (card != null) {
+                        for (Player player : game.getPlayers().values()) {
+                            if (player.getGraveyard().contains(card.getId())) {
+                                player.getGraveyard().remove(card);
+                                result |= card.moveToZone(Zone.LIBRARY, source.getId(), game, onTop);
+                            }
                         }
                     }
             }
