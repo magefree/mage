@@ -35,6 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.BloodthirstAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -70,6 +71,8 @@ public class BloodlordOfVaasgoth extends CardImpl<BloodlordOfVaasgoth> {
 
 		// Bloodthirst 3
 		this.addAbility(new BloodthirstAbility(3));
+
+		this.addAbility(FlyingAbility.getInstance());
 
 		// Whenever you cast a Vampire creature spell, it gains bloodthirst 3.
 		this.addAbility(new SpellCastTriggeredAbility(new BloodlordOfVaasgothEffect(), filterCard, false, true));

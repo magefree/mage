@@ -56,7 +56,7 @@ public class OracleOfMulDaya extends CardImpl<OracleOfMulDaya> {
 		this.color.setGreen(true);
 
 		this.power = new MageInt(2);
-		this.toughness = new MageInt(3);
+		this.toughness = new MageInt(2);
 
 		// You may play an additional land on each of your turns.
 		this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OracleOfMulDayaEffect1()));

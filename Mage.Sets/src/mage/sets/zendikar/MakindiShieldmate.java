@@ -33,6 +33,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 
@@ -52,6 +53,8 @@ public class MakindiShieldmate extends CardImpl<MakindiShieldmate> {
         this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
+
+		this.addAbility(DefenderAbility.getInstance());
 
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
     }
