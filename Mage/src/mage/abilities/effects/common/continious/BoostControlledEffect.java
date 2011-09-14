@@ -33,6 +33,8 @@ import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -44,12 +46,16 @@ import mage.game.permanent.Permanent;
  */
 public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledEffect> {
 
-	protected int power;
-	protected int toughness;
+    private DynamicValue power;
+    private DynamicValue toughness;
 	protected boolean excludeSource;
 	protected FilterCreaturePermanent filter;
 
 	public BoostControlledEffect(int power, int toughness, Duration duration) {
+		this(power, toughness, duration, FilterCreaturePermanent.getDefault(), false);
+	}
+
+    public BoostControlledEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
 		this(power, toughness, duration, FilterCreaturePermanent.getDefault(), false);
 	}
 
@@ -58,6 +64,10 @@ public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledE
 	}
 
 	public BoostControlledEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
+		this(new StaticValue(power), new StaticValue(toughness), duration, filter, excludeSource);
+	}
+
+    public BoostControlledEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
 		super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
 		this.power = power;
 		this.toughness = toughness;
@@ -96,8 +106,8 @@ public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledE
 		for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId())) {
 			if (!this.affectedObjectsSet || objects.contains(perm.getId())) {
 				if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
-					perm.addPower(power);
-					perm.addToughness(toughness);
+					perm.addPower(power.calculate(game, source));
+					perm.addToughness(toughness.calculate(game, source));
 				}
 			}
 		}
@@ -109,7 +119,23 @@ public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledE
 		if (excludeSource)
 			sb.append("Other ");
 		sb.append(filter.getMessage());
-		sb.append(" you control get ").append(String.format("%1$+d/%2$+d", power, toughness));
+		sb.append(" you control get ");
+
+        String p = power.toString();
+        if(!p.startsWith("-")) {
+            sb.append("+");
+        }
+        sb.append(p).append("/");
+        String t = toughness.toString();
+        if(!t.startsWith("-")){
+            if(p.startsWith("-")) {
+                sb.append("-");
+            } else {
+                sb.append("+");
+            }
+        }
+        sb.append(t);
+
 		sb.append((duration==Duration.EndOfTurn?" until end of turn":""));
 		staticText = sb.toString();
 	}
