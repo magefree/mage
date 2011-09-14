@@ -27,7 +27,6 @@
  */
 package mage.sets.lorwyn;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -40,6 +39,8 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *

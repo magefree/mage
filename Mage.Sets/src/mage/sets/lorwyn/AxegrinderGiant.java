@@ -27,11 +27,12 @@
  */
 package mage.sets.lorwyn;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+
+import java.util.UUID;
 
 /**
  *

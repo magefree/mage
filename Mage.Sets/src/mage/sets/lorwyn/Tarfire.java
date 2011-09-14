@@ -27,12 +27,13 @@
  */
 package mage.sets.lorwyn;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreatureOrPlayer;
+
+import java.util.UUID;
 
 /**
  *

@@ -27,8 +27,6 @@
  */
 package mage.sets.lorwyn;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -38,6 +36,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
+
+import java.util.UUID;
 
 /**
  *

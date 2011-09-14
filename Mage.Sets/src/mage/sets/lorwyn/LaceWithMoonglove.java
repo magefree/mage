@@ -27,17 +27,16 @@
  */
 package mage.sets.lorwyn;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.DrawCardEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

@@ -39,14 +39,21 @@ import mage.game.permanent.Permanent;
  * @author BetaSteward_at_googlemail.com
  */
 public class TapSourceEffect extends OneShotEffect<TapSourceEffect> {
+    private boolean withoutTrigger;
 
-	public TapSourceEffect() {
+    public TapSourceEffect() {
+        this(false);
+    }
+
+	public TapSourceEffect(boolean withoutTrigger) {
 		super(Outcome.Tap);
+        this.withoutTrigger = withoutTrigger;
 		staticText = "tap {this}";
 	}
 
 	public TapSourceEffect(final TapSourceEffect effect) {
 		super(effect);
+        this.withoutTrigger = effect.withoutTrigger;
 	}
 
 	@Override
@@ -58,7 +65,11 @@ public class TapSourceEffect extends OneShotEffect<TapSourceEffect> {
 	public boolean apply(Game game, Ability source) {
 		Permanent permanent = game.getPermanent(source.getSourceId());
 		if (permanent != null) {
-			permanent.tap(game);
+            if (withoutTrigger) {
+                permanent.setTapped(true);
+            } else {
+			    permanent.tap(game);
+            }
 			return true;
 		}
 		return false;

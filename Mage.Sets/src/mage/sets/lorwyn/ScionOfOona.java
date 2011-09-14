@@ -27,8 +27,6 @@
  */
 package mage.sets.lorwyn;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -41,9 +39,10 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

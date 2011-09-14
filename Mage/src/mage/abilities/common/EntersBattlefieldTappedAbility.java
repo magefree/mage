@@ -40,7 +40,7 @@ import mage.abilities.effects.common.TapSourceEffect;
 public class EntersBattlefieldTappedAbility extends StaticAbility<EntersBattlefieldTappedAbility> {
 
 	public EntersBattlefieldTappedAbility() {
-		super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new TapSourceEffect()));
+		super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new TapSourceEffect(true)));
 	}
 
 	public EntersBattlefieldTappedAbility(final EntersBattlefieldTappedAbility ability) {

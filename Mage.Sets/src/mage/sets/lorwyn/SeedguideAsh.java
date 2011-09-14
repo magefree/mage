@@ -27,19 +27,18 @@
  */
 package mage.sets.lorwyn;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *

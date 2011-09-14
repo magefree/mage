@@ -27,8 +27,6 @@
  */
 package mage.sets.lorwyn;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -44,6 +42,8 @@ import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.ElfToken;
+
+import java.util.UUID;
 
 /**
  *

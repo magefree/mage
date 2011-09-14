@@ -27,8 +27,6 @@
  */
 package mage.sets.lorwyn;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -40,6 +38,8 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
+
+import java.util.UUID;
 
 /**
  *

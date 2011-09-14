@@ -27,8 +27,6 @@
  */
 package mage.sets.lorwyn;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -42,6 +40,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *

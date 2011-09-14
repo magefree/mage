@@ -74,6 +74,10 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlef
 		return false;
 	}
 
+    public void addEffect(Effect effect) {
+        baseEffects.add(effect);
+    }
+
 	@Override
 	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
 		Spell spell = game.getStack().getSpell(event.getSourceId());
@@ -96,9 +100,9 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlef
 	@Override
 	public String getText(Mode mode) {
 		if (text.length() == 0)
-			return "When {this} enters the battlefield, " + baseEffects.getText(mode);
+			return "{this} enters the battlefield " + baseEffects.getText(mode);
 		else
-			return "When {this} enters the battlefield, " + text;
+			return "{this} enters the battlefield " + text;
 	}
 
 	@Override

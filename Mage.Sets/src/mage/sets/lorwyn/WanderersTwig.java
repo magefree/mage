@@ -27,8 +27,6 @@
  */
 package mage.sets.lorwyn;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -39,8 +37,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.search.SearchLibraryRevealPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterBasicLandCard;
-import mage.target.common.TargetBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *

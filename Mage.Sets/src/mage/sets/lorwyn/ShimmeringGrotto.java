@@ -27,16 +27,16 @@
  */
 package mage.sets.lorwyn;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+
+import java.util.UUID;
 
 /**
  *

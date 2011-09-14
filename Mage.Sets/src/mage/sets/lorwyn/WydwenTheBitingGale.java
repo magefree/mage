@@ -27,8 +27,6 @@
  */
 package mage.sets.lorwyn;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -41,6 +39,8 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+
+import java.util.UUID;
 
 /**
  *
