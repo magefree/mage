@@ -16,7 +16,8 @@ public class FirstTargetPointer implements TargetPointer {
     @Override
     public List<UUID> getTargets(Ability source) {
         ArrayList<UUID> target = new ArrayList<UUID>();
-        target.addAll(source.getTargets().get(0).getTargets());
+        if (source.getTargets().size() > 0)
+            target.addAll(source.getTargets().get(0).getTargets());
         return target;
     }
 

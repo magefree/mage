@@ -101,7 +101,7 @@ class KhalniGemReturnToHandTargetEffect extends OneShotEffect<KhalniGemReturnToH
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		for ( UUID target : source.getTargets().get(0).getTargets() ) {
+		for ( UUID target : targetPointer.getTargets(source) ) {
 			Permanent permanent = game.getPermanent(target);
 			if ( permanent != null ) {
 				permanent.moveToZone(Zone.HAND, source.getId(), game, true);

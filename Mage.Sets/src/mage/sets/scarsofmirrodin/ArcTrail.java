@@ -95,7 +95,7 @@ class ArcTrailEffect extends OneShotEffect {
 		boolean twoDamageDone = false;
 		int damage = 2;
 
-		for ( UUID target : source.getTargets().get(0).getTargets() ) {
+		for ( UUID target : targetPointer.getTargets(source) ) {
 			Permanent permanent = game.getPermanent(target);
 
 			if ( twoDamageDone ) {
