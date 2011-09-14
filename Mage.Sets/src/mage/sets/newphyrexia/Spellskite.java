@@ -92,8 +92,11 @@ class SpellskiteEffect extends OneShotEffect<SpellskiteEffect> {
 		if (spell != null) {
             Targets targets = spell.getSpellAbility().getTargets();
 			if (targets.size() == 1 && targets.get(0).getTargets().size() == 1) {
-                targets.get(0).clearChosen();
-                targets.get(0).add(source.getSourceId(), game);
+                Target target = targets.get(0);
+                if (target.canTarget(source.getSourceId(), game)) {
+                    target.clearChosen();
+                    target.add(source.getSourceId(), game);
+                }
             }
             else {
                 Player player = game.getPlayer(source.getControllerId());
@@ -108,9 +111,11 @@ class SpellskiteEffect extends OneShotEffect<SpellskiteEffect> {
                             name = object.getName();
                         }
                         if (name != null && player.chooseUse(Outcome.Neutral, "Change target from " + name + " to {this}?", game)) {
-                            target.remove(targetId);
-                            target.addTarget(source.getSourceId(), source, game);
-                            break;
+                            if (target.canTarget(source.getSourceId(), game)) {
+                                target.remove(targetId);
+                                target.addTarget(source.getSourceId(), source, game);
+                                break;
+                            }
                         }
                     }
                 }
