@@ -61,6 +61,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
+import mage.abilities.mana.TriggeredManaAbility;
 import mage.watchers.common.MorbidWatcher;
 import org.apache.log4j.Logger;
 
@@ -612,9 +613,15 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
 	@Override
 	public void addTriggeredAbility(TriggeredAbility ability) {
-		TriggeredAbility newAbility = (TriggeredAbility) ability.copy();
-		newAbility.newId();
-		state.addTriggeredAbility(newAbility);
+        if (ability instanceof TriggeredManaAbility) {
+            // 20110715 - 605.4
+            ability.resolve(this);
+        }
+        else {
+            TriggeredAbility newAbility = (TriggeredAbility) ability.copy();
+            newAbility.newId();
+            state.addTriggeredAbility(newAbility);
+        }
 	}
 	
 	@Override
