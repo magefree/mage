@@ -59,8 +59,10 @@ public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl<SetCardSu
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent target = game.getPermanent(equipment.getAttachedTo());
-			target.getSubtype().clear();
-			target.getSubtype().add(setSubtype);
+			if (target != null) {
+				target.getSubtype().clear();
+				target.getSubtype().add(setSubtype);
+			}
         }
         return true;
     }
