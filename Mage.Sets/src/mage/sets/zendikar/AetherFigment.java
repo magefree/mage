@@ -28,49 +28,57 @@
 
 package mage.sets.zendikar;
 
-import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.decorator.ConditionalStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 
+import java.util.UUID;
+
 /**
- *
- * @author BetaSteward_at_googlemail.com
+ * @author nantuko, BetaSteward_at_googlemail.com
  */
 public class AetherFigment extends CardImpl<AetherFigment> {
 
-	public AetherFigment(UUID ownerId) {
-		super(ownerId, 40, "AEther Figment", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-		this.expansionSetCode = "ZEN";
-		this.subtype.add("Illusion");
-		this.color.setBlue(true);
-		this.power = new MageInt(1);
-		this.toughness = new MageInt(1);
+    private final static String staticText = "If AEther Figment was kicked, it enters the battlefield with two +1/+1 counters on it";
 
-		this.addAbility(UnblockableAbility.getInstance());
-		Ability ability1 = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)));
-		KickerAbility ability2 = new KickerAbility(new GainAbilitySourceEffect(ability1, Duration.WhileOnBattlefield), false);
-		ability2.addManaCost(new GenericManaCost(3));
-		this.addAbility(ability2);
-	}
+    public AetherFigment(UUID ownerId) {
+        super(ownerId, 40, "AEther Figment", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Illusion");
+        this.color.setBlue(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-	public AetherFigment(final AetherFigment card) {
-		super(card);
-	}
+        // AEther Figment is unblockable.
+        this.addAbility(UnblockableAbility.getInstance());
 
-	@Override
-	public AetherFigment copy() {
-		return new AetherFigment(this);
-	}
+        // Kicker {3}
+        this.getSpellAbility().addOptionalCost(new GenericManaCost(3));
+
+        // If AEther Figment was kicked, it enters the battlefield with two +1/+1 counters on it
+        Ability ability = new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), KickedCondition.getInstance(), ""), staticText);
+        this.addAbility(ability);
+    }
+
+    public AetherFigment(final AetherFigment card) {
+        super(card);
+    }
+
+    @Override
+    public AetherFigment copy() {
+        return new AetherFigment(this);
+    }
 
 }

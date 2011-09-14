@@ -88,13 +88,10 @@ class MorbidPlunderEffect extends OneShotEffect<MorbidPlunderEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean result = false;
-        List<UUID> targets = source.getTargets().get(0).getTargets();
-        if (targets.size() > 0) {
-            for (UUID target : targets) {
-                Card card = game.getCard(target);
-                if (card != null) {
-                    result |= card.moveToZone(Zone.HAND, source.getId(), game, true);
-                }
+        for (UUID target : targetPointer.getTargets(source)) {
+            Card card = game.getCard(target);
+            if (card != null) {
+                result |= card.moveToZone(Zone.HAND, source.getId(), game, true);
             }
         }
         return result;

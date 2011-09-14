@@ -27,35 +27,45 @@
  */
 package mage.sets.zendikar;
 
-import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
+import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
+
+import java.util.UUID;
 
 /**
- *
- * @author Loki
+ * @author nantuko, Loki
  */
 public class BoldDefense extends CardImpl<BoldDefense> {
+
+    private final String staticText = "If Bold Defense was kicked, instead creatures you control get +2/+2 and gain first strike until end of turn";
 
     public BoldDefense(UUID ownerId) {
         super(ownerId, 3, "Bold Defense", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "ZEN";
         this.color.setWhite(true);
-        Ability kickedAbility = new KickerAbility(new BoostControlledEffect(2, 2, Constants.Duration.EndOfTurn), true);
-        kickedAbility.addCost(new ManaCostsImpl("{3}{W}"));
-        kickedAbility.addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault(), false));
-        this.addAbility(kickedAbility);
-        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn));
+
+        DynamicValue dn = new BoldDefensePTCount();
+        this.getSpellAbility().addEffect(new BoostControlledEffect(dn, dn, Constants.Duration.EndOfTurn));
+
+        this.getSpellAbility().addOptionalCost(new ManaCostsImpl("{3}{W}"));
+
+        ContinuousEffect effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Constants.Duration.EndOfTurn, FilterCreaturePermanent.getDefault(), false);
+        this.getSpellAbility().addEffect(new ConditionalContinousEffect(effect, KickedCondition.getInstance(), staticText));
     }
 
     public BoldDefense(final BoldDefense card) {
@@ -65,5 +75,30 @@ public class BoldDefense extends CardImpl<BoldDefense> {
     @Override
     public BoldDefense copy() {
         return new BoldDefense(this);
+    }
+}
+
+class BoldDefensePTCount implements DynamicValue {
+
+    public BoldDefensePTCount() {
+    }
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility) {
+        if (KickedCondition.getInstance().apply(game, sourceAbility)) {
+            return 2;
+        } else {
+            return 1;
+        }
+    }
+
+    @Override
+    public DynamicValue clone() {
+        return new BoldDefensePTCount();
+    }
+
+    @Override
+    public String getMessage() {
+        return "";
     }
 }

@@ -67,19 +67,21 @@ public class DamageMultiEffect extends OneShotEffect<DamageMultiEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Target multiTarget = source.getTargets().get(0);
-		for (UUID target: multiTarget.getTargets()) {
-			Permanent permanent = game.getPermanent(target);
-			if (permanent != null) {
-				permanent.damage(multiTarget.getTargetAmount(target), source.getId(), game, true, false);
-			}
-			else {
-				Player player = game.getPlayer(target);
-				if (player != null) {
-					player.damage(multiTarget.getTargetAmount(target), source.getId(), game, false, true);
-				}
-			}
-		}
+        if (source.getTargets().size() > 0) {
+            Target multiTarget = source.getTargets().get(0);
+            for (UUID target: multiTarget.getTargets()) {
+                Permanent permanent = game.getPermanent(target);
+                if (permanent != null) {
+                    permanent.damage(multiTarget.getTargetAmount(target), source.getId(), game, true, false);
+                }
+                else {
+                    Player player = game.getPlayer(target);
+                    if (player != null) {
+                        player.damage(multiTarget.getTargetAmount(target), source.getId(), game, false, true);
+                    }
+                }
+            }
+        }
 		return true;
 	}
 

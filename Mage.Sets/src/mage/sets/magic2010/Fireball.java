@@ -86,12 +86,12 @@ class FireballEffect extends OneShotEffect<FireballEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		int numTargets = source.getTargets().get(0).getTargets().size();
+		int numTargets = targetPointer.getTargets(source).size();
 		int damage = source.getManaCostsToPay().getX();
 		if (numTargets > 0) {
 			int damagePer = damage/numTargets;
 			if (damagePer > 0) {
-				for (UUID targetId: source.getTargets().get(0).getTargets()) {
+				for (UUID targetId: targetPointer.getTargets(source)) {
 					Permanent permanent = game.getPermanent(targetId);
 					if (permanent != null) {
 						permanent.damage(damagePer, source.getSourceId(), game, true, false);

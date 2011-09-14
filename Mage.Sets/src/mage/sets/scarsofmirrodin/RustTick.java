@@ -97,7 +97,7 @@ class RustTickTapTargetEffect extends TapTargetEffect {
 	public boolean apply(Game game, Ability source) {
 		Permanent rustTick = game.getPermanent(source.getSourceId());
 		if (rustTick != null) rustTick.clearConnectedCards();
-		for (UUID target : source.getTargets().get(0).getTargets()) {
+		for (UUID target : targetPointer.getTargets(source)) {
 			Permanent permanent = game.getPermanent(target);
 			if (permanent != null) {
 				rustTick.addConnectedCard(permanent.getId());

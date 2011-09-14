@@ -174,7 +174,7 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl<LiegeOfTheTangleEffect
 	public void init(Ability source, Game game) {
 		super.init(source, game);
 		if (this.affectedObjectsSet) {
-			for (UUID permId: source.getTargets().get(0).getTargets()) {
+			for (UUID permId: targetPointer.getTargets(source)) {
 				objects.add(permId);
 			}
 		}

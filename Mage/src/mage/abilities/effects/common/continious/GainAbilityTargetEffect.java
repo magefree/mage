@@ -67,7 +67,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
 	@Override
 	public boolean apply(Game game, Ability source) {
 		int affectedTargets = 0;
-		for (UUID permanentId : source.getTargets().get(0).getTargets()) {
+		for (UUID permanentId : targetPointer.getTargets(source)) {
 			Permanent permanent = game.getPermanent(permanentId);
 			if (permanent != null) {
 				permanent.addAbility(ability);

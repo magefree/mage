@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
  * 
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,49 +25,23 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.abilities.mana;
 
-package mage.abilities.effects.common;
-
-import java.util.UUID;
-import mage.Constants.Outcome;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.game.Game;
-import mage.players.Player;
+import mage.Constants.Zone;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.common.ManaEffect;
 
 /**
- *
+ * see 20110715 - 605.1b
  * @author BetaSteward_at_googlemail.com
  */
-public class GainLifeTargetEffect extends OneShotEffect<GainLifeTargetEffect> {
-
-	private int life;
-
-	public GainLifeTargetEffect(int life) {
-		super(Outcome.GainLife);
-		this.life = life;
-		staticText = "target players each gain " + Integer.toString(life) + " life";
-	}
-
-	public GainLifeTargetEffect(final GainLifeTargetEffect effect) {
-		super(effect);
-		this.life = effect.life;
-	}
-
-	@Override
-	public GainLifeTargetEffect copy() {
-		return new GainLifeTargetEffect(this);
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		for (UUID playerId: targetPointer.getTargets(source)) {
-			Player player = game.getPlayer(playerId);
-			if (player != null) {
-				player.gainLife(life, game);
-			}
-		}
-		return true;
-	}
-
+public abstract class TriggeredManaAbility<T extends TriggeredManaAbility<T>> extends TriggeredAbilityImpl<T> {
+    
+    public TriggeredManaAbility(Zone zone, ManaEffect effect) {
+        super(zone, effect);
+    }
+    
+    public TriggeredManaAbility(final TriggeredManaAbility ability) {
+        super(ability);
+    }
 }
