@@ -70,7 +70,7 @@ public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffe
 			} else {
 				Player player = game.getPlayer(uuid);
 				if (player != null) {
-					player.getCounters().addCounter(counter.copy());
+					player.addCounters(counter.copy(), game);
                     affectedTargets ++;
 				}
 			}

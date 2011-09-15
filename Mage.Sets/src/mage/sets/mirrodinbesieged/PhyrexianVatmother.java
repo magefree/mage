@@ -92,7 +92,7 @@ class PoisonControllerEffect extends OneShotEffect<PoisonControllerEffect> {
 	public boolean apply(Game game, Ability source) {
 		Player player = game.getPlayer(source.getControllerId());
 		if (player != null) {
-			player.getCounters().addCounter(CounterType.POISON.createInstance());
+			player.addCounters(CounterType.POISON.createInstance(), game);
 			return true;
 		}
 		return false;

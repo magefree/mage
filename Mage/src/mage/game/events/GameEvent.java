@@ -149,7 +149,14 @@ public class GameEvent {
 		return new GameEvent(type, targetId, null, playerId);
 	}
 
-	public EventType getType() {
+	public static GameEvent getEvent(EventType type, UUID targetId, UUID playerId, String data, int amount) {
+		GameEvent event = getEvent(type, targetId,playerId);
+        event.setAmount(amount);
+        event.setData(data);
+        return event;
+	}
+
+    public EventType getType() {
 		return type;
 	}
 

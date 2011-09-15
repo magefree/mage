@@ -53,6 +53,7 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
+import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.filter.FilterAbility;
 import mage.game.events.GameEvent;
@@ -67,7 +68,6 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
-import org.w3c.dom.UserDataHandler;
 
 /**
  *
@@ -238,4 +238,6 @@ public interface Player extends MageItem, Copyable<Player> {
 	public List<Ability> getPlayable(Game game, FilterAbility filter, ManaOptions available, boolean hidden);
 	public List<Ability> getPlayableOptions(Ability ability, Game game);
 	
+	public void addCounters(Counter counter, Game game);
+
 }

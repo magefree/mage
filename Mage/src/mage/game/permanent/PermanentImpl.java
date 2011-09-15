@@ -177,17 +177,18 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
 	@Override
 	public void addCounters(String name, int amount, Game game) {
-		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, controllerId))) {
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, controllerId, name, amount);
+		if (!game.replaceEvent(event)) {
             counters.addCounter(name, amount);
-            game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, objectId, controllerId));
+            game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, objectId, controllerId, name, amount));
         }
 	}
 
 	@Override
 	public void addCounters(Counter counter, Game game) {
-		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, controllerId))) {
+		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, controllerId, counter.getName(), counter.getCount()))) {
     		counters.addCounter(counter);
-            game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, objectId, controllerId));
+            game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, objectId, controllerId, counter.getName(), counter.getCount()));
         }
 	}
 

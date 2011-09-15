@@ -81,7 +81,7 @@ public class AddCountersControllerEffect extends OneShotEffect<AddCountersContro
 		}
 		Player player = game.getPlayer(uuid);
 		if (player != null) {
-			player.getCounters().addCounter(counter);
+			player.addCounters(counter, game);
 			return true;
 		}
 		return false;

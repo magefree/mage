@@ -55,6 +55,7 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.decks.Deck;
+import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.filter.FilterAbility;
@@ -65,6 +66,7 @@ import mage.game.events.DamagePlayerEvent;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.permanent.Permanent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackAbility;
 import mage.players.net.UserData;
 import mage.target.common.TargetCardInLibrary;
@@ -758,7 +760,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 				if (actualDamage > 0) {
 					Permanent source = game.getPermanent(sourceId);
 					if (source != null && (source.getAbilities().containsKey(InfectAbility.getInstance().getId()))) {
-						getCounters().addCounter(CounterType.POISON.createInstance(actualDamage));
+						addCounters(CounterType.POISON.createInstance(actualDamage), game);
 					} else {
 						// fixed: damage dealt should not be equal to life lost
 						// actualDamage = this.loseLife(actualDamage, game);
@@ -776,7 +778,15 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		return 0;
 	}
 
-	protected boolean canDamage(MageObject source) {
+	@Override
+	public void addCounters(Counter counter, Game game) {
+		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, playerId, playerId, counter.getName(), counter.getCount()))) {
+    		counters.addCounter(counter);
+            game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, playerId, playerId, counter.getName(), counter.getCount()));
+        }
+	}
+
+    protected boolean canDamage(MageObject source) {
 		for (ProtectionAbility ability: abilities.getProtectionAbilities()) {
 			if (!ability.canTarget(source))
 				return false;

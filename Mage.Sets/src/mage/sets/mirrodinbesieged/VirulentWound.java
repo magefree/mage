@@ -164,7 +164,7 @@ class VirulentWoundDelayedEffect extends OneShotEffect<VirulentWoundDelayedEffec
         if (permanent != null) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
-                player.getCounters().addCounter(CounterType.POISON.createInstance(1));
+                player.addCounters(CounterType.POISON.createInstance(1), game);
                 return true;
             }
         }
