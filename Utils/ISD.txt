@@ -1,6 +1,7 @@
 Abbey Griffin|Innistrad|1|C|{3}{W}|Creature - Griffin|2|2|Flying, vigilance|
 Angel of Flight Alabaster|Innistrad|2|R|{4}{W}|Creature - Angel|4|4|Flying$At the beginning of your upkeep, return target Spirit card from your graveyard to your hand.|
 Angelic Overseer|Innistrad|3|M|{3}{W}{W}|Creature - Angel|5|3|Flying$As long as you control a Human, Angelic Overseer has hexproof and is indestructible.|
+Avacynian Priest|Innistrad|4|C|{1}{W}|Creature - Human Cleric|1|2|{1}, {T}: Tap target non-Human creature.|
 Bonds of Faith|Innistrad|5|C|{1}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +2/+2 as long as it's a Human. Otherwise, it can't attack or block.|
 Champion of the Parish|Innistrad|6|R|{W}|Creature - Human Soldier|1|1|Whenever another Human enters the battlefield under your control, put a +1/+1 counter on Champion of the Parish.|
 Dearly Departed|Innistrad|9|R|{4}{W}{W}|Creature - Spirit|5|5|Flying$As long as Dearly Departed is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it.|
@@ -10,8 +11,9 @@ Elite Inquisitor|Innistrad|13|R|{W}{W}|Creature - Human Soldier|2|2|First strike
 Fiend Hunter|Innistrad|15|U|{1}{W}{W}|Creature - Human Cleric|1|3|When Fiend Hunter enters the battlefield, you may exile another target creature.$When Fiend Hunter leaves the battlefield, return the exiled card to the battlefield under its owner's control.|
 Mentor of the Meek|Innistrad|21|R|{2}{W}|Creature - Human Soldier|2|2|Whenever another creature with power 2 or less enters the battlefield under your control, you may pay {1}. If you do, draw a card.|
 Mikaeus, the Lunarch|Innistrad|23|M|{X}{W}|Legendary Creature - Human Cleric|0|0|Mikaeus, the Lunarch enters the battlefield with X +1/+1 counters on it.${T}: Put a +1/+1 counter on Mikaeus.${T}, Remove a +1/+1 counter from Mikaeus: Put a +1/+1 counter on each other creature you control.|
+Nevermore|Innistrad||R|{1}{W}{W}|Enchantment|||As Nevermore enters the battlefield, name a nonland card.$The named card can't be cast.|
 Rally the Peasants|Innistrad|28|U|{2}{W}|Instant|||Creatures you control get +2/+0 until end of turn.$Flashback {2}{R}|
-Silence of Stone|Innistrad|36|R|{1}{W}|Enchantment|||Artifact abilities cannot be activated.|
+Silence of Stone|Innistrad|36|R|{1}{W}|Enchantment|||Activated abilities of artifacts can't be activated.|
 Slayer of the Wicked|Innistrad||U|{3}{W}|Creature - Human Soldier|3|2|When Slayer of the Wicked enters the battlefield, you may destroy target Vampire, Werewolf, or Zombie.|
 Spectral Rider|Innistrad||U|{W}{W}|Creature - Spirit Knight|2|2|Intimidate|
 Thraben Sentry|Innistrad|38|C|{3}{W}|Creature - Human Soldier|2|2|Vigilance$Whenever another creature you control dies, you may transform Thraben Sentry.|
@@ -27,6 +29,7 @@ Delver of Secrets|Innistrad|51|C|{U}|Creature - Human Wizard|1|1|At the beginnin
 Insectile Aberration|Innistrad|51|C||Creature - Human Insect|3|2|Flying|
 Deranged Assistant|Innistrad|52|C|{1}{U}|Creature - Human Wizard|1|1|{T}, Put the top card of your library into your graveyard: Add {1} to your mana pool.|
 Forbidden Alchemy|Innistrad|55|C|{2}{U}|Instant|||Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.$Flashback {6}{B}|
+Frightful Delusion|Innistrad|57|C|{2}{U}|Instant|||Counter target spell unless its controller pays {1}. That player discards a card.|
 Grasp of Phantoms|Innistrad|58|U|{3}{U}|Sorcery|||Put target creature on top of its owner's library.$Flashback {7}{U}|
 Invisible Stalker|Innistrad|60|U|{1}{U}|Creature - Human Rogue|1|1|Hexproof$Invisible Stalker is unblockable.|
 Laboratory Maniac|Innistrad|61|R|{2}{U}|Creature - Human Wizard|2|2|If you would draw a card while your library has no cards in it, you win the game instead.|
@@ -38,12 +41,14 @@ Mirror-Mad Phantasm|Innistrad||M|{3}{U}{U}|Creature - Spirit|5|1|Flying${1}{U}: 
 Murder of Crows|Innistrad|70|U|{3}{U}{U}|Creature - Bird|4|4|Flying$Whenever another creature dies, you may draw a card. If you do, discard a card.|
 Rooftop Storm|Innistrad|71|R|{5}{U}|Enchantment|||You may pay {0} rather than pay the mana cost for Zombie creature spells you cast.|
 Silent Departure|Innistrad|75|C|{U}|Sorcery|||Return target creature to its owner's hand.$Flashback {4}{U}|
+Skaab Goliath|Innistrad|76|U|{5}{U}|Creature - Zombie Giant|6|9|As an additional cost to cast Skaab Goliath, exile two creature cards from your graveyard.$Trample|
 Skaab Ruinator|Innistrad|77|M|{1}{U}{U}|Creature - Zombie Horror|5|6|As an additional cost to cast Skaab Ruinator, exile 3 creature cards from your graveyard.$Flying$You may cast Skaab Ruinator from your graveyard.|
 Snapcaster Mage|Innistrad||R|{1}{U}|Creature - Human Wizard|2|1|Flash$When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.|
 Stitched Drake|Innistrad|80|C|{1}{U}{U}|Creature - Zombie Drake|3|4|As an addition cost to cast Stitched Drake, exile a creature card from your graveyard.$$Flying|
 Stitcher's Apprentice|Innistrad|81|C|{1}{U}|Creature - Homunculus|1|2|{1}{U}, {T}: Put a 2/2 blue Homunculus creature token onto the battlefield, then sacrifice a creature.|
 Think Twice|Innistrad|83|C|{1}{U}|Instant|||Draw a card.$Flashback {2}{U}|
 Undead Alchemist|Innistrad|84|R|{3}{U}|Creature - Zombie|4|2|If a Zombie you control would deal combat damage to a player, instead that player puts that many cards from the top of his or her library into his or her graveyard.$Whenever a creature card is put into an opponent's graveyard from his or her library, exile that card and put a 2/2 black Zombie creature token onto the battlefield.|
+Abattoir Ghoul|Innistrad|85|U|{3}{B}|Creature - Zombie|3|2|First strike$Whenever a creature dealt damage by Abattoir Ghoul this turn dies, you gain life equal to that creature's toughness.|
 Army of the Damned|Innistrad|87|M|{5}{B}{B}{B}|Sorcery|||Put thirteen 2/2 black Zombie creature tokens onto the battlefield tapped.$Flashback {7}{B}{B}{B}|
 Bloodgift Demon|Innistrad|89|R|{3}{B}{B}|Creature - Demon|5|4|Flying$At the beginning of your upkeep, target player draws a card and loses 1 life.|
 Bloodline Keeper|Innistrad||R|{2}{B}{B}|Creature - Vampire|3|3|Flying${T}: Put a 2/2 black Vampire creature token with flying onto the battlefield.${B}: Transform Bloodline Keeper.$Activate this ability only if you control five or more vampires.|
@@ -54,6 +59,7 @@ Curse of Death's Hold|Innistrad|94|R|{3}{B}{B}|Enchantment - Aura Curse|||Enchan
 Diregraf Ghoul|Innistrad|97|U|{B}|Creature - Zombie|2|2|Diregraf Ghoul enters the battlefield tapped.|
 Endless Ranks of the Dead|Innistrad|99|R|{2}{B}{B}|Enchantment|||At the beginning of your upkeep, put X 2/2 black zombie creature tokens onto the battlefield, where X is half the number of the zombies you control, rounded down.|
 Falkenrath Noble|Innistrad|100|U|{3}{B}|Creature - Vampire|2|2|Flying$Whenever Falkenrath Noble or another creature dies, target player loses 1 life and you gain 1 life.|
+Heartless Summoning|Innistrad|104|R|{1}{B}|Enchantment|||Creature spells you cast cost {2} less to cast.$Creatures you control get -1/-1.|
 Liliana of the Veil|Innistrad|105|M|{1}{B}{B}|Planeswalker - Liliana|3|+1: Each player discards a card.$-2: Target player sacrifices a creature.$-6: Separate all permanents target player controls into two piles. That player sacrifices all permanents in the pile of his or her choice.|
 Moan of the Unhallowed|Innistrad|109|U|{2}{B}{B}|Sorcery|||Put two 2/2 black Zombie creature tokens onto the battlefield.$Flashback {5}{B}{B}|
 Morkrut Banshee|Innistrad|110|U|{3}{B}{B}|Creature - Spirit|4|4|Morbid - When Morkut Banshee enters the battlefield, if a creature died this turn, target creature gets -4/-4 until end of turn.|
@@ -63,7 +69,7 @@ Stalking Vampire|Innistrad|114|U||Creature - Vampire|5|5|At the beginning of you
 Sever the Bloodline|Innistrad|115|R|{3}{B}|Sorcery|||Exile target creature and all other creatures with the same name as that creature.$Flashback {5}{B}{B}|
 Skeletal Grimace|Innistrad|116|C|{1}{B}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +1/+1 and has "{B}: Regenerate this creature."|
 Skirsdag High Priest|Innistrad|117|R|{1}{B}|Creature - Human Cleric|1|2|Morbid - {T}, tap two untapped creatures you control: Put a 5/5 black Demon creature token with flying onto the battlefield. Activate this ability only if a creature died this turn.|
-Unbreathing Horde|Innistrad|121|R|{2}{B}|Creature - Zombie|0|0|Unbreathing Horde comes into play with +1/+1 counters equal to the number of other zombies you control plus the number of zombie cards in your graveyard$If damage would be dealt to Unbreathing Horde, prevent that damage and remove a +1/+1 counter from it|
+Unbreathing Horde|Innistrad|121|R|{2}{B}|Creature - Zombie|0|0|Unbreathing Horde enters the battlefield with a +1/+1 counter on it for each other Zombie you control and for each Zombie card in your graveyard.$If Unbreathing Horde would be dealt damage, prevent that damage and remove a +1/+1 counter from it.|
 Vampire Interloper|Innistrad|123|C|{1}{B}|Creature - Vampire Scout|2|1|Flying$Vampire Interloper can't block.|
 Village Cannibals|Innistrad||U|{2}{B}|Creature - Human|2|2|Whenever another Human creature dies, put a +1/+1 counter on Village Cannibals.|
 Walking Corpse|Innistrad|126|C|{1}{B}|Creature - Zombie|2|2||
@@ -71,12 +77,15 @@ Balefire Dragon|Innistrad||M|{5}{R}{R}|Creature - Dragon|6|6|Flying$Whenever Bal
 Blasphemous Act|Innistrad||R|{8}{R}|Sorcery|||Blasphemous Act costs {1} less to cast for each creature on the battlefield.$Blasphemous Act deals 13 damage to each creature.|
 Bloodcrazed Neonate|Innistrad||C|{1}{R}|Creature - Vampire|2|1|Bloodcrazed Neonate attacks each turn if able. $$Whenever Bloodcrazed Neonate deals combat damage to a player, put a +1/+1 counter on it.|
 Brimstone Volley|Innistrad|132|C|{2}{R}|Instant|||Brimstone Volley deals 3 damage to target creature or player.$Morbid - Brimstone Volley deals 5 damage to that creature or player instead if a creature died this turn.|
+Burning Vengeance|Innistrad|133|U|{2}{R}|Enchantment|||Whenever you cast a spell from your graveyard, Burning Vengeance deals 2 damage to target creature or player.|
 Charmbreaker Devils|Innistrad||R|{5}{R}|Creature - Devil|4|4|At the beginning of your upkeep, return an instant or sorcery card at random from your graveyard to your hand.$Whenever you cast an instant or sorcery spell, Charmbreaker Devils gets +4/+0 until end of turn|
 Curse of Stalked Prey|Innistrad||R|{1}{R}|Enchantment - Aura Curse|||Enchant player$Whenever a creature deals combat damage to enchanted player, put a +1/+1 counter on that creature.|
 Devil's Play|Innistrad||R|{X}{R}|Sorcery|||Devil's Play deals X damage to target creature or player.$Flashback {X}{R}{R}{R}|
 Falkenrath Marauders|Innistrad||R|{3}{R}{R}|Creature - Vampire Warrior|2|2|Flying, haste$Whenever Falkenrath Marauders deals combat damage to a player, put two +1/+1 counters on it.|
 Feral Ridgewolf|Innistrad|142|C|{2}{R}|Creature - Wolf|1|2|Trample${1}{R}: Feral Ridgewolf gets +2/+0 until end of turn.|
 Geistflame|Innistrad|144|C|{R}|Instant|||Geistflame deals 1 damage to target creature or player.$Flashback {3}{R}|
+Hanweir Watchkeep|Innistrad||U|{2}{R}|Creature - Human Warrior Werewolf|1|5|Defender$At the beginning of each upkeep, if no spells were cast last turn, transform Hanweir Watchkeep.|
+Bane of Hanweir|Innistrad||U||Creature Werewolf|5|5|Bane of Hanweir attacks each turn if able$At the beginning of each upkeep, if a player cast two or more spells last turn, transform Bane of Hanweir.|
 Instigator Gang|Innistrad||R|{3}{R}|Creature - Human Werewolf|2|3|Attacking creatures you control get +1/+0.$At the beginning of each upkeep, if no spells were cast last turn, transform Instigator Gang.|
 Wildblood Pack|Innistrad||R||Creature - Werewolf|5|5|Trample$Attacking creatures you control get +3/+0.$At the beginning of each upkeep, if a player cast two or more spells last turn, transform Wildblood Pack.|
 Into the Maw of Hell|Innistrad||U|{4}{R}{R}|Sorcery|||Destroy target land. Into the Maw of Hell deals 13 damage to target creature. |
@@ -93,10 +102,12 @@ Village Ironsmith|Innistrad||C|{1}{R}|Creature - Human Werewolf|1|1|First strike
 Ironfang|Innistrad||C||Creature - Werewolf|3|1|First strike$At the beginning of each upkeep, if a player cast two or more spells last turn, transform Ironfang.|
 Avacyn's Pilgrim|Innistrad|170|C|{G}|Creature - Human Monk|1|1|{T}: Add {W} to your mana pool.|
 Boneyard Wurm|Innistrad|171|U|{1}{G}|Creature - Wurm|*|*|Boneyard Wurm's power and toughness are each equal to the number of creature cards in your graveyard.|
+Darkthicket Wolf|Innistrad|175|C|{1}{G}|Creature - Wolf|2|2|{2}{G}: Darkthicket Wolf gets +2/+2 until end of turn. Activate this ability only once each turn.|
 Daybreak Ranger|Innistrad|176|R|{2}{G}|Creature - Human Archer Werewolf|2|2|{T}: Daybreak Ranger deals 2 damage to target creature with flying.$At the beginning of each upkeep, if no spells were cast last turn, transform Daybreak Ranger.|
 Nightfall Predator|Innistrad|176|R||Creature - Werewolf|4|4|{R}, {T}: Nightfall Predator fights target creature. <i>(Each deals damage equal to its power to the other.)</i>$At the beginning of each upkeep, if a player cast two or more spells last turn, transform Nightfall Predator.|
 Elder of Laurels|Innistrad|177|R|{2}{G}|Creature - Human Advisor|2|3|{3}{G}: Target creature gets +X/+X until end of turn, where X is the number of creatures you control.|
 Essence of the Wild|Innistrad|178|M|{3}{G}{G}{G}|Creature - Avatar|6|6|Creatures you control enter the battlefield as a copy of Essence of the Wild.|
+Full Moon's Rise|Innistrad|180|U|{1}{G}|Enchantment|||Werewolf creatures you control get +1/+0 and have trample.$Sacrifice Full Moon's Rise: Regenerate all Werewolf creatures you control.|
 Garruk Relentless|Innistrad|181|M|{3}{G}|Planeswalker - Garruk|3|When Garruk Relentless has two or fewer loyalty counters on him, transform him.$0: Garruk Relentless deals 3 damage to target creature. That creature deals damage equal to its power to him$0: Put a 2/2 green Wolf creature token onto the battlefield.|
 Garruk, the Veil-Cursed|Innistrad|181|M|{BG}|Planeswalker - Garruk|||+1 : Put a 1/1 black Wolf creature token with deathtouch onto the battlefield.$-1 : Sacrifice a creature. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle your library.$-3 : Creatures you control gain trample and get +X/+X until end of turn, where X is the number of creature cards in your graveyard.|
 Gatstaf Shepherd|Innistrad|182|U|{1}{G}|Creature - Human Werewolf|2|2|At the beginning of each upkeep, if no spells were cast last turn, transform Gastaf Shepherd.|
@@ -133,6 +144,7 @@ Cellar Door|Innistrad|218|U|{2}|Artifact|||{3},{T}: Target player puts the botto
 Creepy Doll|Innistrad|220|R|{5}|Artifact Creature - Construct|1|1|Creepy Doll is indestructible.$Whenever Creepy Doll deals combat damage to a creature, flip a coin. If you win the flip, destroy that creature.|
 One-Eyed Scarecrow|Innistrad|230|C|{3}|Artifact Creature - Scarecrow|2|3|Defender$Creatures with flying your opponents control get -1/-0.|
 Sharpened Pitchfork|Innistrad|233|C|{2}|Artifact - Equipment|||Equipped creature has first strike.$As long as equipped creature is a Human, it gets +1/+1.$Equip {1}|
+Trepanation Blade|Innistrad|235|U|{3}|Artifact - Equipment|||Whenever equipped creature attacks, defending player reveals cards from the top of his or her library until he or she reveals a land card. The creature gets +1/+0 until end of turn for each card revealed this way. That player puts the revealed cards into his or her graveyard.$Equip {2}|
 Witchbane Orb|Innistrad|236|R|{4}|Artifact|||When Witchbane Orb enters the battlefield, destroy all Curses attached to you.$You have hexproof.|
 Wooden Stake|Innistrad|237|C|{2}|Artifact - Equipment|||Equipped creature gets +1/+0.$$Whenever equipped creature blocks or becomes blocked by a Vampire, destroy that creature. It can't be regenerated.$$Equip {1}|
 Clifftop Retreat|Innistrad|238|R||Land|||Clifftop Retreat enters the battlefield tapped unless you control a Mountain or Plains.${T}: Add {R} or {W} to your mana pool.|
