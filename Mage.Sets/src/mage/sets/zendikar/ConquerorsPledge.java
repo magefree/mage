@@ -32,7 +32,10 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.KickerManaCost;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -48,10 +51,10 @@ public class ConquerorsPledge extends CardImpl<ConquerorsPledge> {
 		super(ownerId, 8, "Conqueror's Pledge", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}{W}");
 		this.expansionSetCode = "ZEN";
 		this.color.setWhite(true);
-		this.getSpellAbility().addEffect(new CreateTokenEffect(new KorSoldierToken(), 6));
-		KickerAbility ability = new KickerAbility(new CreateTokenEffect(new KorSoldierToken(), 12), true);
-		ability.addManaCost(new GenericManaCost(6));
-		this.addAbility(ability);
+        this.getSpellAbility().addOptionalCost(new KickerManaCost("{6}"));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new KorSoldierToken(), 12),
+                new CreateTokenEffect(new KorSoldierToken(), 6), KickedCondition.getInstance(),
+                "Put six 1/1 white Kor Soldier creature tokens onto the battlefield. If Conqueror's Pledge was kicked, put twelve of those tokens onto the battlefield instead"));
 	}
 
 	public ConquerorsPledge(final ConquerorsPledge card) {
