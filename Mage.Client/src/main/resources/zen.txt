@@ -37,7 +37,7 @@
 37|Sunspring Expedition
 38|Windborne Charge
 39|World Queller
-40|Æther Figment
+40|AEther Figment
 41|Archive Trap
 42|Archmage Ascension
 43|Caller of Gales

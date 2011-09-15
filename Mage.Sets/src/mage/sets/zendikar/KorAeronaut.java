@@ -32,7 +32,11 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
@@ -54,12 +58,13 @@ public class KorAeronaut extends CardImpl<KorAeronaut> {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+        this.getSpellAbility().addOptionalCost(new KickerManaCost("{1}{W}"));
 
         this.addAbility(FlyingAbility.getInstance());
-        KickerAbility ability = new KickerAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), false);
-        ability.addManaCost(new ManaCostsImpl("{1}{W}"));
+
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), false);
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, target creature gains flying until end of turn"));
     }
 
     public KorAeronaut(final KorAeronaut card) {

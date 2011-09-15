@@ -30,13 +30,14 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.costs.mana.KickerManaCost;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
@@ -63,10 +64,11 @@ public class KorSanctifiers extends CardImpl<KorSanctifiers> {
 		this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
-        KickerAbility kickerAbility = new KickerAbility(new DestroyTargetEffect(), false);
-        kickerAbility.addCost(new ColoredManaCost(Constants.ColoredManaSymbol.W));
-        kickerAbility.addTarget(new TargetPermanent(filter));
-        this.addAbility(kickerAbility);
+        this.getSpellAbility().addOptionalCost(new KickerManaCost("{W}"));
+
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, destroy target artifact or enchantment"));
     }
 
     public KorSanctifiers (final KorSanctifiers card) {
