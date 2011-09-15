@@ -37,6 +37,7 @@ import mage.ObjectColor;
 public class ChoiceColor extends ChoiceImpl<ChoiceColor> {
 
 	public ChoiceColor() {
+        super(true);
 		this.choices.add("Black");
 		this.choices.add("Blue");
 		this.choices.add("Green");
