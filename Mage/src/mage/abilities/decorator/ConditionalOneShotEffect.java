@@ -60,7 +60,8 @@ public class ConditionalOneShotEffect extends OneShotEffect<ConditionalOneShotEf
 	public ConditionalOneShotEffect ( ConditionalOneShotEffect effect ) {
 		super(effect);
 		this.effect = (OneShotEffect) effect.effect.copy();
-        this.otherwiseEffect = (OneShotEffect) effect.otherwiseEffect.copy();
+        if (effect.otherwiseEffect != null)
+            this.otherwiseEffect = (OneShotEffect) effect.otherwiseEffect.copy();
 		this.condition = effect.condition;
 	}
 
