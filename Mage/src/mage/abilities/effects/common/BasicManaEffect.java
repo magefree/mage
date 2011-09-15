@@ -4,6 +4,7 @@ import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 
 public class BasicManaEffect extends ManaEffect<BasicManaEffect> {
     protected Mana mana;
@@ -32,7 +33,7 @@ public class BasicManaEffect extends ManaEffect<BasicManaEffect> {
 
     @Override
 	public boolean apply(Game game, Ability source) {
-		game.getPlayer(source.getControllerId()).getManaPool().changeMana(mana);
+		game.getPlayer(source.getControllerId()).getManaPool().changeMana(mana, game, source);
 		return true;
 	}
 

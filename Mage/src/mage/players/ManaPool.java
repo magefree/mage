@@ -39,6 +39,7 @@ import mage.abilities.Ability;
 import mage.filter.Filter;
 import mage.filter.FilterMana;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
@@ -393,7 +394,7 @@ public class ManaPool implements Serializable {
 		return mana;
 	}
 
-	public void changeMana(Mana mana) {
+	public void changeMana(Mana mana, Game game, Ability source) {
 		if (mana instanceof ConditionalMana) {
 			this.conditionalMana.add((ConditionalMana)mana);
 		} else {
@@ -403,6 +404,9 @@ public class ManaPool implements Serializable {
 			this.red += mana.getRed();
 			this.green += mana.getGreen();
 			this.colorless += mana.getColorless();
+            GameEvent event = GameEvent.getEvent(GameEvent.EventType.MANA_ADDED, source.getSourceId(), source.getId(), source.getControllerId());
+            event.setData(mana.toString());
+            game.fireEvent(event);
 		}
 	}
 
