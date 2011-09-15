@@ -53,6 +53,7 @@ public class BloodriteInvoker extends CardImpl<BloodriteInvoker> {
         this.expansionSetCode = "ROE";
         this.subtype.add("Vampire");
         this.subtype.add("Shaman");
+        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new LoseLifeTargetEffect(3), new GenericManaCost(8));

@@ -49,8 +49,8 @@ public class Auramancer extends CardImpl<Auramancer> {
     private final static FilterCard filter = new FilterCard("enchantment card");
 
     static {
-        filter.getSubtype().add("Enchantment");
-        filter.setScopeSubtype(Filter.ComparisonScope.Any);
+        filter.getCardType().add(CardType.ENCHANTMENT);
+        filter.setScopeCardType(Filter.ComparisonScope.Any);
     }
 
     public Auramancer(UUID ownerId) {
