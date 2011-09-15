@@ -42,8 +42,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -73,7 +73,6 @@ class PainfulQuandryAbility extends TriggeredAbilityImpl<PainfulQuandryAbility> 
 
 	public PainfulQuandryAbility() {
 		super(Zone.BATTLEFIELD, new PainfulQuandryEffect());
-		this.addTarget(new TargetPlayer());
 	}
 	
 	public PainfulQuandryAbility(final PainfulQuandryAbility ability) {
@@ -88,7 +87,7 @@ class PainfulQuandryAbility extends TriggeredAbilityImpl<PainfulQuandryAbility> 
 	@Override
 	public boolean checkTrigger(GameEvent event, Game game) {
 		if (event.getType() == EventType.SPELL_CAST && game.getOpponents(controllerId).contains(event.getPlayerId())) {
-			this.getTargets().get(0).add(event.getPlayerId(), game);
+            this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
 			return true;
 		}
 		return false;
@@ -118,7 +117,7 @@ class PainfulQuandryEffect extends OneShotEffect<PainfulQuandryEffect> {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getFirstTarget());
+		Player player = game.getPlayer(targetPointer.getFirst(source));
 		if (player != null) {
 			Cost cost = new DiscardTargetCost(new TargetCardInHand());
 			if (!cost.pay(source, game, player.getId(), player.getId(), false)) {
