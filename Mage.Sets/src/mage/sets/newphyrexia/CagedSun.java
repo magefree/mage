@@ -52,7 +52,7 @@ import mage.players.Player;
 
 /**
  *
- * @author anonymous
+ * @author BetaSteward
  */
 public class CagedSun extends CardImpl<CagedSun> {
 
