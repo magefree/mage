@@ -37,6 +37,7 @@ import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
@@ -64,11 +65,11 @@ public class KabiraVindicator extends LevelerCard<KabiraVindicator> {
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}{W}")));
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
-        abilities1.add(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, FilterCreaturePermanent.getDefault(), true), new TapSourceCost()));
+        abilities1.add(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, FilterCreaturePermanent.getDefault(), true)));
         this.getLevels().add(new LevelAbility(2, 4, abilities1, 3, 6));
 
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
-        abilities2.add(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, FilterCreaturePermanent.getDefault(), true), new TapSourceCost()));
+        abilities2.add(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, FilterCreaturePermanent.getDefault(), true)));
         this.getLevels().add(new LevelAbility(5, -1, abilities2, 4, 8));
     }
 

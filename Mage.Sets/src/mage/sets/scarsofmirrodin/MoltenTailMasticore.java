@@ -46,6 +46,7 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCardInHand;
@@ -57,12 +58,6 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author Loki
  */
 public class MoltenTailMasticore extends CardImpl<MoltenTailMasticore> {
-    private static FilterCard filter = new FilterCard("creature card");
-
-    static {
-        filter.getCardType().add(CardType.CREATURE);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-    }
 
     public MoltenTailMasticore (UUID ownerId) {
         super(ownerId, 177, "Molten-Tail Masticore", Rarity.MYTHIC, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
@@ -72,7 +67,7 @@ public class MoltenTailMasticore extends CardImpl<MoltenTailMasticore> {
         this.toughness = new MageInt(4);
         this.addAbility(new MoltenTailMasticoreAbility());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new GenericManaCost(4));
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard())));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new GenericManaCost(2)));
