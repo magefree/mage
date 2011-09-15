@@ -40,6 +40,7 @@ import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -55,8 +56,6 @@ import mage.target.Target;
 import mage.target.Targets;
 
 import org.apache.log4j.Logger;
-
-import javax.management.openmbean.ArrayType;
 
 /**
  *

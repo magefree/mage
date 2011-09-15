@@ -32,25 +32,14 @@ import java.util.UUID;
 
 import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.TargetController;
-import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.HexproofAbility;
-import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterStackObject;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.stack.StackObject;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -68,7 +57,7 @@ public class VinesOfVastwood extends CardImpl<VinesOfVastwood> {
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new HexproofAbility(), Duration.EndOfTurn));
 
-        this.getSpellAbility().addOptionalCost(new ManaCostsImpl("{G}"));
+        this.getSpellAbility().addOptionalCost(new KickerManaCost("{G}"));
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn),
                 KickedCondition.getInstance(), staticText));
     }

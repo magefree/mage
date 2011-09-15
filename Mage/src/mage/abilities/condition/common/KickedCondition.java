@@ -1,11 +1,9 @@
 package mage.abilities.condition.common;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.KickerManaCost;
 import mage.cards.Card;
-import mage.filter.FilterPermanent;
 import mage.game.Game;
 
 /**
@@ -28,8 +26,8 @@ public class KickedCondition implements Condition {
         boolean kicked = false;
         if (p != null) {
             for (Object cost : p.getSpellAbility().getOptionalCosts()) {
-                if (cost instanceof ManaCost) {
-                    if (((ManaCost) cost).isPaid()) {
+                if (cost instanceof KickerManaCost) {
+                    if (((KickerManaCost) cost).isPaid()) {
                         kicked = true;
                     }
                 }

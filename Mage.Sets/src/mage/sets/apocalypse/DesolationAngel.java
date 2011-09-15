@@ -28,7 +28,6 @@
 
 package mage.sets.apocalypse;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 import mage.Constants;
@@ -37,11 +36,9 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -59,7 +56,7 @@ public class DesolationAngel extends CardImpl<DesolationAngel> {
         this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
-        this.getSpellAbility().addOptionalCost(new ManaCostsImpl("{W}{W}"));
+        this.getSpellAbility().addOptionalCost(new KickerManaCost("{W}{W}"));
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DesolationAngelEntersBattlefieldEffect()));
     }
 
@@ -90,8 +87,8 @@ class DesolationAngelEntersBattlefieldEffect extends OneShotEffect<DesolationAng
         boolean kicked = false;
         if (p != null) {
             for (Object cost : p.getSpellAbility().getOptionalCosts()) {
-                if (cost instanceof ManaCost) {
-                    if (((ManaCost) cost).isPaid()) {
+                if (cost instanceof KickerManaCost) {
+                    if (((KickerManaCost) cost).isPaid()) {
                         kicked = true;
                     }
                 }
