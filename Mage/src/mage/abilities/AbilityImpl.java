@@ -165,7 +165,12 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 		}
 
         for (Cost cost : optionalCosts) {
-            if (cost instanceof ManaCost) {
+            if (cost instanceof KickerManaCost) {
+                cost.clearPaid();
+                if (game.getPlayer(this.controllerId).chooseUse(Outcome.Benefit, "Pay " + cost.getText() + "?", game)) {
+                    manaCostsToPay.add((ManaCost) cost);
+                }
+            } else if (cost instanceof ManaCost) {
                 cost.clearPaid();
                 if (game.getPlayer(this.controllerId).chooseUse(Outcome.Benefit, "Pay optional cost " + cost.getText() + "?", game)) {
                     manaCostsToPay.add((ManaCost) cost);
