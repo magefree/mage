@@ -136,8 +136,10 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
 	@Override
 	public boolean canChoose(UUID sourceControllerId, Game game) {
 		int remainingTargets = this.minNumberOfTargets - targets.size();
-		if (remainingTargets == 0)
-			return true;
+		if (remainingTargets == 0) {
+			// if we return true, then AnowonTheRuinSage will hang for AI when no targets in play
+            return false;
+        }
 		int count = 0;
 		for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, game)) {
 			if (!targets.containsKey(permanent.getId())) {
