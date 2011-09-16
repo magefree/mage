@@ -28,7 +28,6 @@
 
 package mage.abilities.decorator;
 
-import com.sun.istack.internal.Nullable;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.OneShotEffect;
@@ -36,48 +35,48 @@ import mage.game.Game;
 
 /**
  * Adds condition to {@link OneShotEffect}. Acts as decorator.
- * 
+ *
  * @author maurer.it_at_gmail.com
  */
 public class ConditionalOneShotEffect extends OneShotEffect<ConditionalOneShotEffect> {
 
 	private OneShotEffect effect;
-    private OneShotEffect otherwiseEffect;
+	private OneShotEffect otherwiseEffect;
 	private Condition condition;
 
-    public ConditionalOneShotEffect ( OneShotEffect effect, Condition condition, String text ) {
-        this(effect, null, condition, text);
-    }
+	public ConditionalOneShotEffect(OneShotEffect effect, Condition condition, String text) {
+		this(effect, null, condition, text);
+	}
 
-	public ConditionalOneShotEffect ( OneShotEffect effect, OneShotEffect otherwiseEffect, Condition condition, String text ) {
+	public ConditionalOneShotEffect(OneShotEffect effect, OneShotEffect otherwiseEffect, Condition condition, String text) {
 		super(effect.getOutcome());
 		this.effect = effect;
-        this.otherwiseEffect = otherwiseEffect;
+		this.otherwiseEffect = otherwiseEffect;
 		this.condition = condition;
 		this.staticText = text;
 	}
 
-	public ConditionalOneShotEffect ( ConditionalOneShotEffect effect ) {
+	public ConditionalOneShotEffect(ConditionalOneShotEffect effect) {
 		super(effect);
 		this.effect = (OneShotEffect) effect.effect.copy();
-        if (effect.otherwiseEffect != null)
-            this.otherwiseEffect = (OneShotEffect) effect.otherwiseEffect.copy();
+		if (effect.otherwiseEffect != null)
+			this.otherwiseEffect = (OneShotEffect) effect.otherwiseEffect.copy();
 		this.condition = effect.condition;
 	}
 
 	@Override
-	public boolean apply ( Game game, Ability source ) {
-		if ( condition.apply(game, source) ) {
+	public boolean apply(Game game, Ability source) {
+		if (condition.apply(game, source)) {
 			return effect.apply(game, source);
 		} else if (otherwiseEffect != null) {
-            return otherwiseEffect.apply(game, source);
-        }
+			return otherwiseEffect.apply(game, source);
+		}
 		return false;
 	}
 
 	@Override
-	public ConditionalOneShotEffect copy ( ) {
-		return new ConditionalOneShotEffect ( this );
+	public ConditionalOneShotEffect copy() {
+		return new ConditionalOneShotEffect(this);
 	}
 
 }
