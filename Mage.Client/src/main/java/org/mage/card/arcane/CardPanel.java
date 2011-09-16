@@ -110,6 +110,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 		buttonPanel = new JPanel();
 		buttonPanel.setLayout(null);
 		buttonPanel.setOpaque(false);
+		buttonPanel.setVisible(false);
 		add(buttonPanel);
 
 		dayNightButton = new JButton("");
