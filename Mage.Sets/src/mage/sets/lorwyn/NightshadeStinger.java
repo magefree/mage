@@ -27,13 +27,14 @@
  */
 package mage.sets.lorwyn;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+
+import java.util.UUID;
 
 /**
  *

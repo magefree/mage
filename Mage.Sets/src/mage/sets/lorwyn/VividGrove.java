@@ -27,18 +27,21 @@
  */
 package mage.sets.lorwyn;
 
-import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.EntersBattlefieldTappedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
+import mage.abilities.effects.EntersBattlefieldEffect;
+import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,8 +53,9 @@ public class VividGrove extends CardImpl<VividGrove> {
         super(ownerId, 277, "Vivid Grove", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "LRW";
         // Vivid Grove enters the battlefield tapped with two charge counters on it.
-        this.addAbility(new EntersBattlefieldTappedAbility());
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(2))));
+        EntersBattlefieldEffect effect = new EntersBattlefieldEffect(new TapSourceEffect(true), "tapped with two charge counters on it");
+        effect.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(2)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
         // {tap}: Add {G} to your mana pool.
         this.addAbility(new GreenManaAbility());
         // {tap}, Remove a charge counter from Vivid Grove: Add one mana of any color to your mana pool.
