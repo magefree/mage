@@ -60,8 +60,10 @@ import mage.watchers.Watcher;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
+import mage.abilities.common.ChancellorAbility;
 
 import mage.abilities.mana.TriggeredManaAbility;
+import mage.cards.CardsImpl;
 import mage.watchers.common.MorbidWatcher;
 import org.apache.log4j.Logger;
 
@@ -442,6 +444,16 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 						card.putOntoBattlefield(this, Zone.HAND, null, player.getId());
 					}
 				}
+                for (Ability ability: card.getAbilities()) {
+                    if (ability instanceof ChancellorAbility) {
+                        if (player.chooseUse(Outcome.PutCardInPlay, "Do you wish to reveal " + card.getName() + "?", this)) {
+                            Cards cards = new CardsImpl();
+                            cards.add(card);
+                            player.revealCards("Revealed", cards, this);
+                            ability.resolve(this);
+                        }
+                    }
+                }
 			}
 		}
 	}
