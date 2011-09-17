@@ -111,6 +111,12 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 		this.expansionSetCode = card.getExpansionSetCode();
 		this.rarity = card.getRarity();
 		this.cardNumber = card.getCardNumber();
+
+        canTransform = card.canTransform();
+        if (canTransform) {
+            secondSideCard = card.getSecondCardFace();
+            nightCard = card.isNightCard();
+        }
 	}
 
 	public void checkPermanentOnlyTriggers(ZoneChangeEvent event, Game game) {

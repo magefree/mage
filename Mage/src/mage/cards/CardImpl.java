@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -53,308 +54,330 @@ import mage.watchers.Watchers;
 import org.apache.log4j.Logger;
 
 public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> implements Card {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private final static Logger logger = Logger.getLogger(CardImpl.class);
+    private final static Logger logger = Logger.getLogger(CardImpl.class);
 
-	protected UUID ownerId;
-	protected int cardNumber;
-	protected Watchers watchers = new Watchers();
-	protected String expansionSetCode;
-	protected Rarity rarity;
-	protected boolean faceDown;
+    protected UUID ownerId;
+    protected int cardNumber;
+    protected Watchers watchers = new Watchers();
+    protected String expansionSetCode;
+    protected Rarity rarity;
+    protected boolean faceDown;
+    protected boolean canTransform;
+    protected Card secondSideCard;
+    protected boolean nightCard;
 
-	public CardImpl(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
-		this(ownerId, name);
-		this.rarity = rarity;
-		this.cardNumber = cardNumber;
-		this.cardType.addAll(Arrays.asList(cardTypes));
-		this.manaCost.load(costs);
-		if (cardType.contains(CardType.LAND))
-			addAbility(new PlayLandAbility(name));
-		else
-			addAbility(new SpellAbility(manaCost, name));
-	}
+    public CardImpl(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
+        this(ownerId, name);
+        this.rarity = rarity;
+        this.cardNumber = cardNumber;
+        this.cardType.addAll(Arrays.asList(cardTypes));
+        this.manaCost.load(costs);
+        if (cardType.contains(CardType.LAND))
+            addAbility(new PlayLandAbility(name));
+        else
+            addAbility(new SpellAbility(manaCost, name));
+    }
 
-	protected CardImpl(UUID ownerId, String name) {
-		this.ownerId = ownerId;
-		this.name = name;
-	}
+    protected CardImpl(UUID ownerId, String name) {
+        this.ownerId = ownerId;
+        this.name = name;
+    }
 
-	protected CardImpl(UUID id, UUID ownerId, String name) {
-		super(id);
-		this.ownerId = ownerId;
-		this.name = name;
-	}
+    protected CardImpl(UUID id, UUID ownerId, String name) {
+        super(id);
+        this.ownerId = ownerId;
+        this.name = name;
+    }
 
-	public CardImpl(final CardImpl card) {
-		super(card);
-		ownerId = card.ownerId;
-		cardNumber = card.cardNumber;
-		expansionSetCode = card.expansionSetCode;
-		rarity = card.rarity;
-		watchers = card.watchers.copy();
-		faceDown = card.faceDown;
-	}
+    public CardImpl(final CardImpl card) {
+        super(card);
+        ownerId = card.ownerId;
+        cardNumber = card.cardNumber;
+        expansionSetCode = card.expansionSetCode;
+        rarity = card.rarity;
+        watchers = card.watchers.copy();
+        faceDown = card.faceDown;
 
-	@Override
-	public void assignNewId() {
-		this.objectId = UUID.randomUUID();
-		this.abilities.newId();
-		this.abilities.setSourceId(objectId);
+        canTransform = card.canTransform;
+        if (canTransform) {
+            secondSideCard = card.secondSideCard;
+            nightCard = card.nightCard;
+        }
+    }
+
+    @Override
+    public void assignNewId() {
+        this.objectId = UUID.randomUUID();
+        this.abilities.newId();
+        this.abilities.setSourceId(objectId);
         this.watchers.setSourceId(objectId);
-	}
+    }
 
-	public static Card createCard(String name) {
-		try {
-			Class<?> theClass  = Class.forName(name);
-			Constructor<?> con = theClass.getConstructor(new Class[]{UUID.class});
-			Card card = (Card) con.newInstance(new Object[] {null});
-			return card;
-		}
-		catch (Exception e) {
-			logger.fatal("Error loading card: " + name, e);
-			return null;
-		}
-	}
+    public static Card createCard(String name) {
+        try {
+            Class<?> theClass = Class.forName(name);
+            Constructor<?> con = theClass.getConstructor(new Class[]{UUID.class});
+            Card card = (Card) con.newInstance(new Object[]{null});
+            return card;
+        } catch (Exception e) {
+            logger.fatal("Error loading card: " + name, e);
+            return null;
+        }
+    }
 
-	@Override
-	public UUID getOwnerId() {
-		return ownerId;
-	}
+    @Override
+    public UUID getOwnerId() {
+        return ownerId;
+    }
 
-	@Override
-	public int getCardNumber() {
-		return cardNumber;
-	}
+    @Override
+    public int getCardNumber() {
+        return cardNumber;
+    }
 
-	@Override
-	public Rarity getRarity() {
-		return rarity;
-	}
+    @Override
+    public Rarity getRarity() {
+        return rarity;
+    }
 
-	@Override
-	public void setRarity(Rarity rarity) {
-		this.rarity = rarity;
-	}
+    @Override
+    public void setRarity(Rarity rarity) {
+        this.rarity = rarity;
+    }
 
-	@Override
-	public List<String> getRules() {
-		List<String> rules = abilities.getRules(this.name);
-		if (cardType.contains(CardType.INSTANT) || cardType.contains(CardType.SORCERY)) {
-			rules.add(0, getSpellAbility().getRule(this.name));
-		}
-		return rules;
-	}
+    @Override
+    public List<String> getRules() {
+        List<String> rules = abilities.getRules(this.name);
+        if (cardType.contains(CardType.INSTANT) || cardType.contains(CardType.SORCERY)) {
+            rules.add(0, getSpellAbility().getRule(this.name));
+        }
+        return rules;
+    }
 
-	@Override
-	public void addAbility(Ability ability) {
-		ability.setSourceId(this.getId());
-		abilities.add(ability);
-	}
-	
+    @Override
+    public void addAbility(Ability ability) {
+        ability.setSourceId(this.getId());
+        abilities.add(ability);
+    }
+
     @Override
     public void addWatcher(Watcher watcher) {
         watcher.setSourceId(this.getId());
         watcher.setControllerId(this.ownerId);
         watchers.add(watcher);
     }
-    
-	@Override
-	public SpellAbility getSpellAbility() {
-		for (Ability ability: abilities.getActivatedAbilities(Zone.HAND)) {
-			if (ability instanceof SpellAbility)
-				return (SpellAbility)ability;
-		}
-		return null;
-	}
 
-	@Override
-	public void setControllerId(UUID controllerId) {
-		abilities.setControllerId(controllerId);
-	}
+    @Override
+    public SpellAbility getSpellAbility() {
+        for (Ability ability : abilities.getActivatedAbilities(Zone.HAND)) {
+            if (ability instanceof SpellAbility)
+                return (SpellAbility) ability;
+        }
+        return null;
+    }
 
-	@Override
-	public void setOwnerId(UUID ownerId) {
-		this.ownerId = ownerId;
-		abilities.setControllerId(ownerId);
-	}
+    @Override
+    public void setControllerId(UUID controllerId) {
+        abilities.setControllerId(controllerId);
+    }
 
-	@Override
-	public Watchers getWatchers() {
-		return watchers;
-	}
+    @Override
+    public void setOwnerId(UUID ownerId) {
+        this.ownerId = ownerId;
+        abilities.setControllerId(ownerId);
+    }
 
-	@Override
-	public void checkTriggers(Zone zone, GameEvent event, Game game) {
-		for (TriggeredAbility ability: abilities.getTriggeredAbilities(zone)) {
-			if (ability.checkTrigger(event, game)) {
-				ability.trigger(game, ownerId);
-			}
-		}
-	}
+    @Override
+    public Watchers getWatchers() {
+        return watchers;
+    }
 
-	@Override
-	public String getExpansionSetCode() {
-		return expansionSetCode;
-	}
+    @Override
+    public void checkTriggers(Zone zone, GameEvent event, Game game) {
+        for (TriggeredAbility ability : abilities.getTriggeredAbilities(zone)) {
+            if (ability.checkTrigger(event, game)) {
+                ability.trigger(game, ownerId);
+            }
+        }
+    }
 
-	@Override
-	public void setExpansionSetCode(String expansionSetCode) {
-		this.expansionSetCode = expansionSetCode;
-	}
+    @Override
+    public String getExpansionSetCode() {
+        return expansionSetCode;
+    }
 
-	@Override
-	public List<Mana> getMana() {
-		List<Mana> mana = new ArrayList<Mana>();
-		for (ManaAbility ability: this.abilities.getManaAbilities(Zone.BATTLEFIELD)) {
-			mana.add(ability.getNetMana(null));
-		}
-		return mana;
-	}
+    @Override
+    public void setExpansionSetCode(String expansionSetCode) {
+        this.expansionSetCode = expansionSetCode;
+    }
 
-	@Override
-	public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag) {
-		Zone fromZone = game.getZone(objectId);
-		ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, toZone);
-		if (!game.replaceEvent(event)) {
-			if (event.getFromZone() != null) {
-				switch (event.getFromZone()) {
-					case GRAVEYARD:
-						game.getPlayer(ownerId).removeFromGraveyard(this, game);
-						break;
-					case HAND:
-						game.getPlayer(ownerId).removeFromHand(this, game);
-						break;
-					case LIBRARY:
-						game.getPlayer(ownerId).removeFromLibrary(this, game);
-						break;
-					default:
-						//logger.warning("moveToZone, not fully implemented: from="+event.getFromZone() + ", to="+event.getToZone());
-				}
-				game.rememberLKI(objectId, event.getFromZone(), this);
-			}
-			switch (event.getToZone()) {
-				case GRAVEYARD:
-					game.getPlayer(ownerId).putInGraveyard(this, game, !flag);
-					break;
-				case HAND:
-					game.getPlayer(ownerId).getHand().add(this);
-					break;
-				case STACK:
-					game.getStack().push(new Spell(this, this.getSpellAbility().copy(), ownerId));
-					break;
-				case EXILED:
-					game.getExile().getPermanentExile().add(this);
-					break;
-				case LIBRARY:
-					if (flag)
-						game.getPlayer(ownerId).getLibrary().putOnTop(this, game);
-					else
-						game.getPlayer(ownerId).getLibrary().putOnBottom(this, game);
-					break;
-				case BATTLEFIELD:
-					PermanentCard permanent = new PermanentCard(this, ownerId);
-					game.getBattlefield().addPermanent(permanent);
-					permanent.entersBattlefield(sourceId, game);
-					game.applyEffects();
-					if (flag)
-						permanent.setTapped(true);
-					break;
-			}
-			game.setZone(objectId, event.getToZone());
-			game.fireEvent(event);
-			return game.getZone(objectId) == toZone;
-		}
-		return false;
-	}
+    @Override
+    public List<Mana> getMana() {
+        List<Mana> mana = new ArrayList<Mana>();
+        for (ManaAbility ability : this.abilities.getManaAbilities(Zone.BATTLEFIELD)) {
+            mana.add(ability.getNetMana(null));
+        }
+        return mana;
+    }
 
-	@Override
-	public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
-		ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, ability.getId(), controllerId, fromZone, Zone.STACK);
-		if (!game.replaceEvent(event)) {
-			if (event.getFromZone() != null) {
-				switch (event.getFromZone()) {
-					case GRAVEYARD:
-						game.getPlayer(ownerId).removeFromGraveyard(this, game);
-						break;
-					case HAND:
-						game.getPlayer(ownerId).removeFromHand(this, game);
-						break;
-					case LIBRARY:
-						game.getPlayer(ownerId).removeFromLibrary(this, game);
-						break;
-					default:
-						//logger.warning("moveToZone, not fully implemented: from="+event.getFromZone() + ", to="+event.getToZone());
-				}
-				game.rememberLKI(objectId, event.getFromZone(), this);
-			}
-			game.getStack().push(new Spell(this, ability.copy(), controllerId));
-			game.setZone(objectId, event.getToZone());
-			game.fireEvent(event);
-			return game.getZone(objectId) == Zone.STACK;
-		}
-		return false;
-	}
+    @Override
+    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag) {
+        Zone fromZone = game.getZone(objectId);
+        ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, toZone);
+        if (!game.replaceEvent(event)) {
+            if (event.getFromZone() != null) {
+                switch (event.getFromZone()) {
+                    case GRAVEYARD:
+                        game.getPlayer(ownerId).removeFromGraveyard(this, game);
+                        break;
+                    case HAND:
+                        game.getPlayer(ownerId).removeFromHand(this, game);
+                        break;
+                    case LIBRARY:
+                        game.getPlayer(ownerId).removeFromLibrary(this, game);
+                        break;
+                    default:
+                        //logger.warning("moveToZone, not fully implemented: from="+event.getFromZone() + ", to="+event.getToZone());
+                }
+                game.rememberLKI(objectId, event.getFromZone(), this);
+            }
+            switch (event.getToZone()) {
+                case GRAVEYARD:
+                    game.getPlayer(ownerId).putInGraveyard(this, game, !flag);
+                    break;
+                case HAND:
+                    game.getPlayer(ownerId).getHand().add(this);
+                    break;
+                case STACK:
+                    game.getStack().push(new Spell(this, this.getSpellAbility().copy(), ownerId));
+                    break;
+                case EXILED:
+                    game.getExile().getPermanentExile().add(this);
+                    break;
+                case LIBRARY:
+                    if (flag)
+                        game.getPlayer(ownerId).getLibrary().putOnTop(this, game);
+                    else
+                        game.getPlayer(ownerId).getLibrary().putOnBottom(this, game);
+                    break;
+                case BATTLEFIELD:
+                    PermanentCard permanent = new PermanentCard(this, ownerId);
+                    game.getBattlefield().addPermanent(permanent);
+                    permanent.entersBattlefield(sourceId, game);
+                    game.applyEffects();
+                    if (flag)
+                        permanent.setTapped(true);
+                    break;
+            }
+            game.setZone(objectId, event.getToZone());
+            game.fireEvent(event);
+            return game.getZone(objectId) == toZone;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
-		Zone fromZone = game.getZone(objectId);
-		ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, Zone.EXILED);
-		if (!game.replaceEvent(event)) {
-			if (fromZone != null) {
-				switch (fromZone) {
-					case GRAVEYARD:
-						game.getPlayer(ownerId).removeFromGraveyard(this, game);
-						break;
-					case HAND:
-						game.getPlayer(ownerId).removeFromHand(this, game);
-						break;
-					case LIBRARY:
-						game.getPlayer(ownerId).removeFromLibrary(this, game);
-						break;
-					default:
-						//logger.warning("moveToExile, not fully implemented: from="+fromZone);
-				}
-				game.rememberLKI(objectId, event.getFromZone(), this);
-			}
-			
-			if (exileId == null) {
-				game.getExile().getPermanentExile().add(this);
-			}
-			else {
-				game.getExile().createZone(exileId, name).add(this);
-			}
-			game.setZone(objectId, event.getToZone());
-			game.fireEvent(event);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
+        ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, ability.getId(), controllerId, fromZone, Zone.STACK);
+        if (!game.replaceEvent(event)) {
+            if (event.getFromZone() != null) {
+                switch (event.getFromZone()) {
+                    case GRAVEYARD:
+                        game.getPlayer(ownerId).removeFromGraveyard(this, game);
+                        break;
+                    case HAND:
+                        game.getPlayer(ownerId).removeFromHand(this, game);
+                        break;
+                    case LIBRARY:
+                        game.getPlayer(ownerId).removeFromLibrary(this, game);
+                        break;
+                    default:
+                        //logger.warning("moveToZone, not fully implemented: from="+event.getFromZone() + ", to="+event.getToZone());
+                }
+                game.rememberLKI(objectId, event.getFromZone(), this);
+            }
+            game.getStack().push(new Spell(this, ability.copy(), controllerId));
+            game.setZone(objectId, event.getToZone());
+            game.fireEvent(event);
+            return game.getZone(objectId) == Zone.STACK;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId) {
-		PermanentCard permanent = new PermanentCard(this, controllerId);
-		game.getBattlefield().addPermanent(permanent);
-		game.setZone(objectId, Zone.BATTLEFIELD);
-		game.applyEffects();
-		permanent.entersBattlefield(sourceId, game);
-		game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));
-		return true;
-	}
+    @Override
+    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
+        Zone fromZone = game.getZone(objectId);
+        ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, Zone.EXILED);
+        if (!game.replaceEvent(event)) {
+            if (fromZone != null) {
+                switch (fromZone) {
+                    case GRAVEYARD:
+                        game.getPlayer(ownerId).removeFromGraveyard(this, game);
+                        break;
+                    case HAND:
+                        game.getPlayer(ownerId).removeFromHand(this, game);
+                        break;
+                    case LIBRARY:
+                        game.getPlayer(ownerId).removeFromLibrary(this, game);
+                        break;
+                    default:
+                        //logger.warning("moveToExile, not fully implemented: from="+fromZone);
+                }
+                game.rememberLKI(objectId, event.getFromZone(), this);
+            }
 
-	@Override
-	public void setCardNumber(int cid) {
-		this.cardNumber = cid;
-	}
+            if (exileId == null) {
+                game.getExile().getPermanentExile().add(this);
+            } else {
+                game.getExile().createZone(exileId, name).add(this);
+            }
+            game.setZone(objectId, event.getToZone());
+            game.fireEvent(event);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public void setFaceDown(boolean value) {
-		this.faceDown = value;
-	}
+    @Override
+    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId) {
+        PermanentCard permanent = new PermanentCard(this, controllerId);
+        game.getBattlefield().addPermanent(permanent);
+        game.setZone(objectId, Zone.BATTLEFIELD);
+        game.applyEffects();
+        permanent.entersBattlefield(sourceId, game);
+        game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));
+        return true;
+    }
 
-	@Override
-	public boolean isFaceDown() {
-		return this.faceDown;
-	}
+    @Override
+    public void setCardNumber(int cid) {
+        this.cardNumber = cid;
+    }
+
+    @Override
+    public void setFaceDown(boolean value) {
+        this.faceDown = value;
+    }
+
+    @Override
+    public boolean isFaceDown() {
+        return this.faceDown;
+    }
+
+    @Override
+    public boolean canTransform() {
+        return this.canTransform;
+    }
+
+    @Override
+    public Card getSecondCardFace() {
+        return this.secondSideCard;
+    }
+
+    @Override
+    public boolean isNightCard() {
+        return this.nightCard;
+    }
 }

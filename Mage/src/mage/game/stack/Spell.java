@@ -347,7 +347,22 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 		return false;
 	}
 
-	@Override
+    @Override
+    public boolean canTransform() {
+        return false;
+    }
+
+    @Override
+    public Card getSecondCardFace() {
+        return null;
+    }
+
+    @Override
+    public boolean isNightCard() {
+        return false;
+    }
+
+    @Override
 	public Spell copy() {
 		return new Spell(this);
 	}

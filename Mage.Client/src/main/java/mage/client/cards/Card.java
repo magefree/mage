@@ -521,4 +521,9 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
 	@Override
 	public void toggleTransformed() {
 	}
+
+    @Override
+    public boolean isTransformed() {
+        return false;
+    }
 }

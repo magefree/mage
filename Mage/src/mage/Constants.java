@@ -323,6 +323,7 @@ public final class Constants {
 		PreventDamage(true),
 		RedirectDamage(true),
 		Tap(false),
+		Transform(true),
 		Untap(true),
 		Win(true),
 		Copy(true),

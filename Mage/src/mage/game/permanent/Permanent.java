@@ -54,6 +54,10 @@ public interface Permanent extends Card {
 	public boolean unflip(Game game);
 	public boolean flip(Game game);
 
+    public boolean transform(Game game);
+    public boolean isTransformed();
+    public void setTransformed(boolean value);
+
 	public boolean isPhasedIn();
 	public boolean phaseIn(Game game);
 	public boolean phaseOut(Game game);

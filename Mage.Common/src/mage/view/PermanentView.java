@@ -79,6 +79,7 @@ public class PermanentView extends CardView {
 		else {
 			original = new CardView(card);
 		}
+		this.transformed = permanent.isTransformed();
 	}
 
 	public boolean isTapped() {

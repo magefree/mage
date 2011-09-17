@@ -55,6 +55,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
 	protected boolean tapped;
 	protected boolean flipped;
+    protected boolean transformed;
 	protected UUID originalControllerId;
 	protected UUID controllerId;
 	protected UUID beforeResetControllerId;
@@ -312,6 +313,18 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 			if (!replaceEvent(EventType.FLIP, game)) {
 				this.flipped = true;
 				fireEvent(EventType.FLIPPED, game);
+				return true;
+			}
+		}
+		return false;
+	}
+
+    @Override
+	public boolean transform(Game game) {
+		if (canTransform) {
+			if (!replaceEvent(EventType.TRANSFORM, game)) {
+				setTransformed(!transformed);
+				fireEvent(EventType.TRANSFORMED, game);
 				return true;
 			}
 		}
@@ -790,4 +803,14 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 		}
 		return dealtDamageByThisTurn;
 	}
+
+    @Override
+    public boolean isTransformed() {
+        return this.transformed;
+    }
+
+    @Override
+    public void setTransformed(boolean value) {
+        this.transformed = value;
+    }
 }

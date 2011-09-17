@@ -60,6 +60,10 @@ public interface Card extends MageObject {
 	public void setFaceDown(boolean value);
 	public boolean isFaceDown();
 
+	public boolean canTransform();
+	public Card getSecondCardFace();
+	public boolean isNightCard();
+
 	public void assignNewId();
     /**
      * Moves the card to the specified zone

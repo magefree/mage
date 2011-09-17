@@ -221,7 +221,12 @@ public abstract class ExpansionSet implements Serializable {
 		List<Card> newCards = new ArrayList<Card>();
 		for (Class clazz : classes) {
 			if (clazz.getPackage().getName().equals(packageName)) {
-				newCards.add(createCard(clazz));
+				Card card = createCard(clazz);
+				if (card.isNightCard()) {
+					// skip second face of double-faced cards
+					continue;
+				}
+				newCards.add(card);
 			}
 		}
 		return newCards;
