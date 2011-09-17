@@ -62,7 +62,7 @@ public class CounterUnlessPaysEffect extends OneShotEffect<CounterUnlessPaysEffe
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-		StackObject spell = game.getStack().getStackObject(source.getFirstTarget());
+		StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(source));
 		if (spell != null) {
 			Player player = game.getPlayer(spell.getControllerId());
 			if (player != null) {
@@ -77,7 +77,15 @@ public class CounterUnlessPaysEffect extends OneShotEffect<CounterUnlessPaysEffe
 
 	@Override
 	public String getText(Mode mode) {
-		return "Counter target " + mode.getTargets().get(0).getTargetName() + " unless its controller pays " + cost.getText();
+        StringBuilder sb = new StringBuilder();
+        if (mode.getTargets().size() == 0) {
+            sb.append("counter it");
+        }
+        else {
+            sb.append("Counter target ").append(mode.getTargets().get(0).getTargetName());
+        }
+        sb.append(" unless its controller pays ").append(cost.getText());
+		return sb.toString();
 	}
 
 }

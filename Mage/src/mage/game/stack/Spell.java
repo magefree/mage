@@ -71,6 +71,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 	public Spell(Card card, SpellAbility ability, UUID controllerId) {
 		this.card = card;
 		this.ability = ability;
+        this.ability.setControllerId(controllerId);
 		this.controllerId = controllerId;
 	}
 

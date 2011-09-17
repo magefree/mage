@@ -29,12 +29,14 @@
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.Target;
 
 /**
  *
@@ -67,6 +69,16 @@ public class PlayTargetWithoutPayingManaEffect extends OneShotEffect<PlayTargetW
 
 	@Override
 	public String getText(Mode mode) {
-		return "you may put " + mode.getTargets().get(0).getTargetName() + " from your hand onto the battlefield";
+        StringBuilder sb = new StringBuilder();
+        if (mode.getTargets().size() > 0) {
+            Target target = mode.getTargets().get(0);
+            if (mode.getTargets().get(0).getZone() == Zone.HAND) {
+                sb.append("you may put ").append(target.getTargetName()).append(" from your hand onto the battlefield");
+            }
+            else {
+                sb.append("you may cast target ").append(target.getTargetName()).append(" without paying its mana cost");
+            }
+        }
+		return sb.toString();
 	}
 }

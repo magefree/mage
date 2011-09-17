@@ -27,70 +27,57 @@
  */
 package mage.abilities.common;
 
-import mage.Constants.Outcome;
 import mage.Constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.StaticAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
+import mage.filter.FilterCard;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ChancellorAbility extends StaticAbility<ChancellorAbility> {
+public class OpponentCastsSpellTriggeredAbility extends TriggeredAbilityImpl<OpponentCastsSpellTriggeredAbility> {
+    private static final FilterCard spellCard = new FilterCard("a spell");
+    protected FilterCard filter;
 
-    public ChancellorAbility(DelayedTriggeredAbility ability, String text) {
-        super(Zone.HAND, new ChancellorEffect(ability, text));
-    }
-    
-    public ChancellorAbility(OneShotEffect effect) {
-        super(Zone.HAND, effect);
+    public OpponentCastsSpellTriggeredAbility(Effect effect, boolean optional) {
+        this(effect, spellCard, optional);
     }
 
-    public ChancellorAbility(final ChancellorAbility ability) {
+    public OpponentCastsSpellTriggeredAbility(Effect effect, FilterCard filter, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
+        this.filter = filter;
+    }
+
+    public OpponentCastsSpellTriggeredAbility(final OpponentCastsSpellTriggeredAbility ability) {
         super(ability);
+        filter = ability.filter;
     }
-    
+
     @Override
-    public ChancellorAbility copy() {
-        return new ChancellorAbility(this);
+    public boolean checkTrigger(GameEvent event, Game game) {
+		if (event.getType() == GameEvent.EventType.SPELL_CAST && game.getOpponents(controllerId).contains(event.getPlayerId())) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null && filter.match(spell)) {
+                this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever an opponent casts " + filter.getMessage() + ", " + super.getRule();
+    }
+
+    @Override
+    public OpponentCastsSpellTriggeredAbility copy() {
+        return new OpponentCastsSpellTriggeredAbility(this);
     }
     
-   	@Override
-	public String getRule() {
-		return "You may reveal this card from your opening hand. If you do, " + super.getRule();
-	}
-    
-}
-
-class ChancellorEffect extends OneShotEffect<ChancellorEffect> {
-
-    private DelayedTriggeredAbility ability;
-    
-	ChancellorEffect (DelayedTriggeredAbility ability, String text) {
-		super(Outcome.Benefit);
-        this.ability = ability;
-		staticText = text;
-	}
-
-	ChancellorEffect(ChancellorEffect effect) {
-		super(effect);
-        this.ability = effect.ability;
-	}
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-        ability.setSourceId(source.getSourceId());
-        ability.setControllerId(source.getControllerId());
-        game.addDelayedTriggeredAbility(ability);
-        return true;
-	}
-
-	@Override
-	public ChancellorEffect copy() {
-		return new ChancellorEffect(this);
-	}
-
 }
