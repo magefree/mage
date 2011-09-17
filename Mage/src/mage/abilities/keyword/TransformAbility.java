@@ -56,7 +56,7 @@ public class TransformAbility extends SimpleStaticAbility {
 
     @Override
     public String getRule() {
-        return "Transform";
+        return "";
     }
 }
 
@@ -116,7 +116,7 @@ class TransformEffect extends ContinuousEffectImpl<TransformEffect> {
 
     @Override
     public String getText(Mode mode) {
-        return "You may have {this} enter the battlefield as a copy of any " + mode.getTargets().get(0).getTargetName() + " on the battlefield";
+        return "";
     }
 
 }
