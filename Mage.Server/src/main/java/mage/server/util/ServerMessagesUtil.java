@@ -85,7 +85,7 @@ public class ServerMessagesUtil {
 	}
 
 	private void reloadMessages() {
-		log.info("Reading server messages...");
+		log.debug("Reading server messages...");
 		List<String> newMessages = readFromFile();
 		if (newMessages != null && !newMessages.isEmpty()) {
 			lock.writeLock().lock();

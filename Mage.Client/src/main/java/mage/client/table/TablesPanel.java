@@ -291,7 +291,6 @@ public class TablesPanel extends javax.swing.JPanel {
 		if (messages == null || messages.isEmpty()) {
 			this.jPanel2.setVisible(false);
 		} else {
-			System.out.println("Test");
 			this.jPanel2.setVisible(true);
 			this.jLabel2.setText(messages.get(0));
 			this.jButton1.setVisible(messages.size() > 1);
