@@ -32,6 +32,9 @@ import org.apache.log4j.Logger;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,10 +53,18 @@ public class ServerMessagesUtil {
 	private static final ServerMessagesUtil instance = new ServerMessagesUtil();
 
 	private static final Logger log = Logger.getLogger(ServerMessagesUtil.class);
-	static final String SERVER_MSG_TXT_FILE = "/server.msg.txt";
+	private static final String SERVER_MSG_TXT_FILE = "server.msg.txt";
 
 	private List<String> messages = new ArrayList<String>();
 	private ReadWriteLock lock = new ReentrantReadWriteLock();
+
+	private static String pathToExternalMessages = null;
+
+	private static boolean ignore = false;
+
+	static {
+		pathToExternalMessages = System.getProperty("messagesPath");
+	}
 
 	public ServerMessagesUtil() {
 		timer.setInitialDelay(5000);
@@ -74,7 +85,7 @@ public class ServerMessagesUtil {
 	}
 
 	private void reloadMessages() {
-		log.debug("Reading server messages...");
+		log.info("Reading server messages...");
 		List<String> newMessages = readFromFile();
 		if (newMessages != null && !newMessages.isEmpty()) {
 			lock.writeLock().lock();
@@ -88,7 +99,40 @@ public class ServerMessagesUtil {
 	}
 
 	private List<String> readFromFile() {
-		InputStream is = ServerMessagesUtil.class.getResourceAsStream(SERVER_MSG_TXT_FILE);
+		if (ignore) {
+			return null;
+		}
+		File externalFile = null;
+		if (pathToExternalMessages != null) {
+			externalFile = new File(pathToExternalMessages);
+			if (!externalFile.exists()) {
+				log.warn("Couldn't find server.msg.txt using external path: " + pathToExternalMessages);
+				pathToExternalMessages = null; // not to repeat error action again
+			} else if (!externalFile.canRead()) {
+				log.warn("Couldn't read (no access) server.msg.txt using external path: " + pathToExternalMessages);
+				pathToExternalMessages = null; // not to repeat error action again
+			}
+		}
+		InputStream is = null;
+		if (externalFile != null) {
+			try {
+				is = new FileInputStream(externalFile);
+			} catch (Exception  f) {
+				log.error(f, f);
+				pathToExternalMessages = null; // not to repeat error action again
+			}
+		} else {
+			File file = new File(SERVER_MSG_TXT_FILE);
+			if (!file.exists() || !file.canRead()) {
+				log.warn("Couldn't find server.msg.txt using path: " + SERVER_MSG_TXT_FILE);
+			}
+			try {
+				is = new FileInputStream(file);
+			} catch (Exception  f) {
+				log.error(f, f);
+				ignore = true;
+			}
+		}
 		if (is == null) {
 			log.warn("Couldn't find server.msg");
 			return null;
@@ -104,7 +148,7 @@ public class ServerMessagesUtil {
 		return messages;
 	}
 
-	private Timer timer = new Timer(1000 * 60 * 5, new ActionListener() {
+	private Timer timer = new Timer(1000 * 60, new ActionListener() {
         public void actionPerformed(ActionEvent e) {
 			reloadMessages();
         }

@@ -91,7 +91,7 @@ public class WizardCardsImageSource implements CardImageSource {
                     }
                 }
             }
-            if (!link.startsWith("http://")) {
+            if (link != null && !link.startsWith("http://")) {
                 link = "http://www.wizards.com" + link;
             }
             return link;

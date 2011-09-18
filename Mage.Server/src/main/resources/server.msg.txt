@@ -1,3 +1,0 @@
-Welcome! You are playing Mage version 0.7.5.
-Find what was changed since 0.7.4 on project Wiki.
-Contact us on www.slightlymagic.net.

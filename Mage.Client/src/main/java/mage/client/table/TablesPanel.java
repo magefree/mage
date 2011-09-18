@@ -276,6 +276,12 @@ public class TablesPanel extends javax.swing.JPanel {
 			hideTables();
 		}
 
+		reloadMessages();
+
+		MageFrame.getUI().addButton(MageComponents.NEW_GAME_BUTTON, btnNewTable);
+	}
+
+	protected void reloadMessages() {
 		// reload server messages
 		List<String> messages = session.getServerMessages();
 		synchronized (this) {
@@ -285,12 +291,11 @@ public class TablesPanel extends javax.swing.JPanel {
 		if (messages == null || messages.isEmpty()) {
 			this.jPanel2.setVisible(false);
 		} else {
+			System.out.println("Test");
 			this.jPanel2.setVisible(true);
 			this.jLabel2.setText(messages.get(0));
 			this.jButton1.setVisible(messages.size() > 1);
 		}
-
-		MageFrame.getUI().addButton(MageComponents.NEW_GAME_BUTTON, btnNewTable);
 	}
 
 	public void hideTables() {
@@ -661,6 +666,8 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 
 	private final static Logger logger = Logger.getLogger(UpdateTablesTask.class);
 
+	private int count = 0;
+
 	UpdateTablesTask(Session session, UUID roomId, TablesPanel panel) {
 		this.session = session;
 		this.roomId = roomId;
@@ -680,6 +687,11 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 	@Override
 	protected void process(List<Collection<TableView>> view) {
 		panel.updateTables(view.get(0));
+		count++;
+		if (count > 60) {
+			count = 0;
+			panel.reloadMessages();
+		}
 	}
 	
 	@Override
