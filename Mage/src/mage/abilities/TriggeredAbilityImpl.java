@@ -87,7 +87,6 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
 			else {
 				sb.append("Use the following ability? ").append(this.getRule());
 			}
-			sb.append("?");
 			if (!player.chooseUse(getEffects().get(0).getOutcome(), sb.toString(), game)) {
 				return false;
 			}
