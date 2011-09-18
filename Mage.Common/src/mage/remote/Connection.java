@@ -28,12 +28,9 @@
 
 package mage.remote;
 
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.InterfaceAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
+import java.net.*;
 import java.util.Enumeration;
+import java.util.logging.Logger;
 
 /**
  *
@@ -76,7 +73,10 @@ public class Connection {
 	public String getURI() {
 		if (host.equals("localhost")) {
 			try {
-				return transport + "://" + getLocalAddress().getHostAddress() + ":" + port + "/" + serialization;
+				InetAddress inet = getLocalAddress();
+				if (inet != null) {
+					return transport + "://" + inet.getHostAddress() + ":" + port + "/" + serialization;
+				}
 			} catch (SocketException ex) {
 				// just use localhost if can't find local ip
 			}
