@@ -368,7 +368,7 @@ public class ConnectDialog extends MageDialog {
 				default: p = Proxy.NO_PROXY; break;
 			}
 
-			if (!p.equals(Proxy.NO_PROXY)) {
+			if (p == null || !p.equals(Proxy.NO_PROXY)) {
 				try {
 					String address = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_ADDRESS, "");
 					Integer port = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_PORT, "80"));
