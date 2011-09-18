@@ -31,7 +31,7 @@ import java.util.UUID;
 
 /**
  *
- * @author anonymous
+ * @author Loki
  */
 public class MyrEnforcer extends mage.sets.planechase.MyrEnforcer {
 

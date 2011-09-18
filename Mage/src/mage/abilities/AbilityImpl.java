@@ -36,10 +36,7 @@ import mage.Constants.AbilityType;
 import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
-import mage.abilities.costs.AlternativeCost;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.*;
 import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -180,8 +177,14 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 		//20100716 - 601.2e
 		if (game.getObject(sourceId) != null) {
 			//game.getObject(sourceId).adjustCosts(this, game);
-			if (game.getCard(sourceId) != null)
+			if (game.getCard(sourceId) != null) {
 				game.getCard(sourceId).adjustCosts(this, game);
+                for (Ability ability : game.getCard(sourceId).getAbilities()) {
+                    if (ability instanceof AdjustingSourceCosts) {
+                        ((AdjustingSourceCosts)ability).adjustCosts(this, game);
+                    }
+                }
+            }
 		}
 		
 		if (!useAlternativeCost(game)) {

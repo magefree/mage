@@ -1,15 +1,19 @@
 package mage.abilities.keyword;
 
 import mage.Constants;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.AdjustingSourceCosts;
+import mage.abilities.effects.CostModificationEffect;
 import mage.abilities.effects.common.AffinityEffect;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
+import mage.game.Game;
 
 /**
  * Affinity for artifacts
  */
-public class AffinityForArtifactsAbility extends SimpleStaticAbility {
+public class AffinityForArtifactsAbility extends SimpleStaticAbility implements AdjustingSourceCosts {
     private static FilterControlledPermanent filter = new FilterControlledPermanent();
 
     static {
@@ -18,7 +22,7 @@ public class AffinityForArtifactsAbility extends SimpleStaticAbility {
     }
 
     public AffinityForArtifactsAbility() {
-        super(Constants.Zone.ALL, new AffinityEffect(filter));
+        super(Constants.Zone.OUTSIDE, new AffinityEffect(filter));
     }
 
     public AffinityForArtifactsAbility(final AffinityForArtifactsAbility ability) {
@@ -33,5 +37,10 @@ public class AffinityForArtifactsAbility extends SimpleStaticAbility {
     @Override
     public String getRule() {
         return "Affinity for artifacts";
+    }
+
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        ((CostModificationEffect)getEffects().get(0)).apply(game, this, ability);
     }
 }

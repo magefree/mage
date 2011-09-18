@@ -25,39 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.abilities.costs;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.keyword.AffinityForArtifactsAbility;
-import mage.cards.CardImpl;
+import mage.abilities.Ability;
+import mage.game.Game;
 
 /**
+ * Interface for abilities that adjust source and only source costs.
+ * For the cases when some permanent adjusts costs of other spells use {@link mage.abilities.effects.CostModificationEffect}.
  *
- * @author Loki
+ * Example of such source costs adjusting: {@link mage.abilities.keyword.AffinityForArtifactsAbility}
+ *
+ * @author nantuko
  */
-public class MyrEnforcer extends CardImpl<MyrEnforcer> {
-
-    public MyrEnforcer(UUID ownerId) {
-        super(ownerId, 120, "Myr Enforcer", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
-        this.expansionSetCode = "HOP";
-        this.subtype.add("Myr");
-
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        // Affinity for artifacts
-        this.addAbility(new AffinityForArtifactsAbility());
-    }
-
-    public MyrEnforcer(final MyrEnforcer card) {
-        super(card);
-    }
-
-    @Override
-    public MyrEnforcer copy() {
-        return new MyrEnforcer(this);
-    }
+public interface AdjustingSourceCosts {
+    void adjustCosts(Ability ability, Game game);
 }
