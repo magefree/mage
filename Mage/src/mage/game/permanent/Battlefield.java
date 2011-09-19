@@ -338,6 +338,10 @@ public class Battlefield implements Serializable {
 		return active;
 	}
 
+    public List<Permanent> getActivePermanents(FilterPermanent filter, UUID sourcePlayerId, Game game) {
+        return getActivePermanents(filter, sourcePlayerId, null, game);
+    }
+
 	/**
 	 * Returns all {@link Permanent} that are within the range of influence  of the specified player id
 	 * and that match the supplied filter.
@@ -348,18 +352,18 @@ public class Battlefield implements Serializable {
 	 * @return a list of {@link Permanent}
 	 * @see Permanent
 	 */
-	public List<Permanent> getActivePermanents(FilterPermanent filter, UUID sourcePlayerId, Game game) {
+	public List<Permanent> getActivePermanents(FilterPermanent filter, UUID sourcePlayerId, UUID sourceId, Game game) {
 		List<Permanent> active = new ArrayList<Permanent>();
 		if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
 			for (Permanent perm: field.values()) {
-				if (perm.isPhasedIn() && filter.match(perm, null, sourcePlayerId, game))
+				if (perm.isPhasedIn() && filter.match(perm, sourceId, sourcePlayerId, game))
 					active.add(perm);
 			}
 		}
 		else {
 			Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
 			for (Permanent perm: field.values()) {
-				if (perm.isPhasedIn() && range.contains(perm.getControllerId()) && filter.match(perm, null, sourcePlayerId, game))
+				if (perm.isPhasedIn() && range.contains(perm.getControllerId()) && filter.match(perm, sourceId, sourcePlayerId, game))
 					active.add(perm);
 			}
 		}
