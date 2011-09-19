@@ -9,7 +9,7 @@
   </formats>
   <dependencySets>
     <dependencySet>
-      <outputDirectory>/</outputDirectory>
+      <outputDirectory>/lib</outputDirectory>
       <includes>
         <include>org.mage:Mage-Client</include>
       </includes>

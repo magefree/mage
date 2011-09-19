@@ -1,0 +1,35 @@
+//Created with Mage - www.magefree.com
+NAME:Rot from Within
+AUTHOR:WotC
+
+# Creature
+1 [SOM:112] Blight Mamba
+4 [NPH:111] Glistener Elf
+4 [ROE:203] Overgrown Battlement
+3 [MBS:94] Viridian Corrupter
+3 [MBS:90] Rot Wolf
+2 [SOM:166] Ichorclaw Myr
+2 [SOM:126] Putrefax
+# Instant
+4 [ZEN:176] Primal Bellow
+4 [WWK:104] Groundswell
+4 [SOM:115] Carrion Call
+4 [NPH:116] Mutagenic Growth
+# Sorcery
+1 [MBS:81] Green Sun's Zenith
+# Artifact
+1 [SOM:144] Contagion Clasp
+# Land
+1 [MBS:145] Inkmoth Nexus
+11 [NPH:175] Forest
+11 [NPH:174] Forest
+
+# Sideboard
+SB: 2 [ZEN:193] Vines of Vastwood
+SB: 2 [M11:188] Obstinate Baloth
+SB: 3 [SOM:144] Contagion Clasp
+SB: 3 [SOM:214] Trigon of Infestation
+SB: 1 [MBS:86] Pistus Strike
+SB: 2 [MBS:93] Unnatural Predation
+SB: 1 [MBS:94] Viridian Corrupter
+SB: 1 [NPH:115] Melira, Sylvok Outcast

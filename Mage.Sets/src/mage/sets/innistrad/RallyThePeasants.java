@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,49 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.keyword;
+package mage.sets.innistrad;
 
 import mage.Constants;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.AdjustingSourceCosts;
-import mage.abilities.effects.CostModificationEffect;
-import mage.abilities.effects.common.AffinityEffect;
-import mage.filter.Filter;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.cards.CardImpl;
+
+import java.util.UUID;
 
 /**
- * Affinity for artifacts
+ * @author nantuko
  */
-public class AffinityForArtifactsAbility extends SimpleStaticAbility implements AdjustingSourceCosts {
-    private static FilterControlledPermanent filter = new FilterControlledPermanent();
+public class RallyThePeasants extends CardImpl<RallyThePeasants> {
 
-    static {
-        filter.getCardType().add(Constants.CardType.ARTIFACT);
-        filter.setScopeCardType(Filter.ComparisonScope.Any);
-    }
+	public RallyThePeasants(UUID ownerId) {
+		super(ownerId, 28, "Rally the Peasants", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
+		this.expansionSetCode = "ISD";
 
-    public AffinityForArtifactsAbility() {
-        super(Constants.Zone.OUTSIDE, new AffinityEffect(filter));
-    }
+		this.color.setWhite(true);
 
-    public AffinityForArtifactsAbility(final AffinityForArtifactsAbility ability) {
-        super(ability);
-    }
+		// Creatures you control get +2/+0 until end of turn.
+		this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Constants.Duration.EndOfTurn));
 
-    @Override
-    public SimpleStaticAbility copy() {
-        return new AffinityForArtifactsAbility(this);
-    }
+		// Flashback {2}{R}
+		this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{R}"), Constants.TimingRule.INSTANT));
+	}
 
-    @Override
-    public String getRule() {
-        return "Affinity for artifacts";
-    }
+	public RallyThePeasants(final RallyThePeasants card) {
+		super(card);
+	}
 
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        ((CostModificationEffect)getEffects().get(0)).apply(game, this, ability);
-    }
+	@Override
+	public RallyThePeasants copy() {
+		return new RallyThePeasants(this);
+	}
 }
