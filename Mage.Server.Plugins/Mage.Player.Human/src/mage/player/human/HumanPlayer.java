@@ -55,6 +55,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.ReplacementEffect;
+import mage.abilities.mana.ManaAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
@@ -379,35 +380,14 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 				MageObject object = game.getObject(response.getUUID());
 				if (object != null) {
 					Map<UUID, ActivatedAbility> useableAbilities = null;
-					switch (game.getZone(object.getId())) {
-						case HAND:
-							useableAbilities = getUseableAbilities(object.getAbilities().getActivatedAbilities(Zone.HAND), game);
-							break;
-						case BATTLEFIELD:
-							useableAbilities = getUseableAbilities(object.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD), game);
-							break;
-						case GRAVEYARD:
-							useableAbilities = getUseableAbilities(object.getAbilities().getActivatedAbilities(Zone.GRAVEYARD), game);
-							playAsThoughInYourHand(game, object, useableAbilities);
-							break;
-						case LIBRARY:
-							useableAbilities = getUseableAbilities(object.getAbilities().getActivatedAbilities(Zone.LIBRARY), game);
-						    playAsThoughInYourHand(game, object, useableAbilities);
-							break;
-					}
-					if (useableAbilities != null && useableAbilities.size() > 0) {
-						activateAbility(useableAbilities, game);
-					}
+                    Zone zone = game.getZone(object.getId());
+                    if (zone != null) {
+                        useableAbilities = getUseableActivatedAbilities(object, zone, game);
+                        if (useableAbilities != null && useableAbilities.size() > 0) {
+                            activateAbility(useableAbilities, game);
+                        }
+                    }
 				}
-			}
-		}
-	}
-
-	// not sure it is the best to implement such stuff this way
-	private void playAsThoughInYourHand(Game game, MageObject object, Map<UUID, ActivatedAbility> useableAbilities) {
-		if (game.getContinuousEffects().asThough(object.getId(), Constants.AsThoughEffectType.CAST, game)) {
-			for (Map.Entry<UUID, ActivatedAbility> entry : getUseableAbilities(object.getAbilities().getActivatedAbilities(Zone.HAND), game).entrySet()) {
-				useableAbilities.put(entry.getKey(), entry.getValue());
 			}
 		}
 	}
@@ -473,27 +453,14 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 		game.getState().setPriorityPlayerId(getId());
 		MageObject object = game.getObject(response.getUUID());
 		if (object == null) return;
-		Map<UUID, ActivatedAbility> useableAbilities;
-		switch (game.getZone(object.getId())) {
-			case HAND:
-				useableAbilities = getUseableAbilities(object.getAbilities().getManaAbilities(Zone.HAND), game);
-				if (useableAbilities.size() > 0) {
-					activateAbility(useableAbilities, game);
-				}
-				break;
-			case BATTLEFIELD:
-				useableAbilities = getUseableAbilities(object.getAbilities().getManaAbilities(Zone.BATTLEFIELD), game);
-				if (useableAbilities.size() > 0) {
-					activateAbility(useableAbilities, game);
-				}
-				break;
-			case GRAVEYARD:
-				useableAbilities = getUseableAbilities(object.getAbilities().getManaAbilities(Zone.GRAVEYARD), game);
-				if (useableAbilities.size() > 0) {
-					activateAbility(useableAbilities, game);
-				}
-				break;
-		}
+		Map<UUID, ManaAbility> useableAbilities = null;
+        Zone zone = game.getZone(object.getId());
+        if (zone != null) {
+            useableAbilities = getUseableManaAbilities(object, zone, game);
+            if (useableAbilities != null && useableAbilities.size() > 0) {
+                activateAbility(useableAbilities, game);
+            }
+        }
 	}
 
 	@Override

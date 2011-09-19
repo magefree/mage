@@ -38,6 +38,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
+import mage.Constants.AsThoughEffectType;
 import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
 import mage.Constants.Zone;
@@ -604,15 +605,29 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		return false;
 	}
 
-	protected Map<UUID, ActivatedAbility> getUseableAbilities(List<? extends ActivatedAbility> abilities, Game game) {
+	protected Map<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
 		Map<UUID, ActivatedAbility> useable = new HashMap<UUID, ActivatedAbility>();
-		for (ActivatedAbility ability: abilities) {
+		for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(zone)) {
+			if (ability.canActivate(playerId, game))
+				useable.put(ability.getId(), ability);
+		}
+		if (zone != Zone.HAND && game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.CAST, game)) {
+			for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(Zone.HAND)) {
+				useable.put(ability.getId(), ability);
+			}
+		}
+		return useable;
+	}
+
+	protected Map<UUID, ManaAbility> getUseableManaAbilities(MageObject object, Zone zone, Game game) {
+		Map<UUID, ManaAbility> useable = new HashMap<UUID, ManaAbility>();
+		for (ManaAbility ability: object.getAbilities().getManaAbilities(zone)) {
 			if (ability.canActivate(playerId, game))
 				useable.put(ability.getId(), ability);
 		}
 		return useable;
 	}
-
+    
 	@Override
 	public int getLandsPlayed() {
 		return landsPlayed;
