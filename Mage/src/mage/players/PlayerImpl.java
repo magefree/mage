@@ -520,14 +520,24 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
 	protected boolean playAbility(ActivatedAbility ability, Game game) {
 		//20091005 - 602.2a
-		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, ability.getId(), ability.getSourceId(), playerId))) {
+		if (ability.isUsesStack()) {
+			if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, ability.getId(), ability.getSourceId(), playerId))) {
+				int bookmark = game.bookmarkState();
+				ability.newId();
+				game.getStack().push(new StackAbility(ability, playerId));
+				String message = ability.getActivatedMessage(game);
+				if (ability.activate(game, false)) {
+					game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, ability.getId(), ability.getSourceId(), playerId));
+					game.fireInformEvent(name + message);
+					game.removeBookmark(bookmark);
+					return true;
+				}
+				game.restoreState(bookmark);
+			}
+		} else {
 			int bookmark = game.bookmarkState();
-			ability.newId();
-			game.getStack().push(new StackAbility(ability, playerId));
-			String message = ability.getActivatedMessage(game);
 			if (ability.activate(game, false)) {
-				game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, ability.getId(), ability.getSourceId(), playerId));
-				game.fireInformEvent(name + message);
+				ability.resolve(game);
 				game.removeBookmark(bookmark);
 				return true;
 			}
@@ -594,10 +604,18 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 		int bookmark = game.bookmarkState();
 		TriggeredAbility ability = (TriggeredAbility) source.copy();
 		if (ability != null && ability.canChooseTarget(game)) {
-			game.getStack().push(new StackAbility(ability, playerId));
-			if (ability.activate(game, false)) {
-				game.removeBookmark(bookmark);
-				return true;
+			if (ability.isUsesStack()) {
+				game.getStack().push(new StackAbility(ability, playerId));
+				if (ability.activate(game, false)) {
+					game.removeBookmark(bookmark);
+					return true;
+				}
+			} else {
+				if (ability.activate(game, false)) {
+					ability.resolve(game);
+					game.removeBookmark(bookmark);
+					return true;
+				}
 			}
 		}
 		game.restoreState(bookmark);
