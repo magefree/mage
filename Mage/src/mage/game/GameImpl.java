@@ -556,13 +556,13 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                         if (isGameOver()) return;
                         if (allPassed()) {
                             if (!state.getStack().isEmpty()) {
-                                   //20091005 - 115.4
-                                    state.getStack().resolve(this);
-                                    applyEffects();
-                                    state.getPlayers().resetPassed();
-                                    fireUpdatePlayersEvent();
-                                    state.getRevealed().reset();
-                                    break;
+                               //20091005 - 115.4
+                                resolve();
+                                applyEffects();
+                                state.getPlayers().resetPassed();
+                                fireUpdatePlayersEvent();
+                                state.getRevealed().reset();
+                                break;
                             } else {
                                 removeBookmark(bookmark);
                                 return;
@@ -576,8 +576,6 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                         bookmark = 0;
                         continue;
                     }
-//                    removeBookmark(bookmark);
-//                    bookmark = 0;
 					state.getPlayerList().getNext();
 				}
                 removeBookmark(bookmark);
@@ -591,7 +589,19 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 		}
 	}
 
-	protected boolean allPassed() {
+	//resolve top StackObject
+	protected void resolve() {
+		StackObject top = null;
+		try {
+			top = state.getStack().peek();
+			top.resolve(this);
+		} finally {
+			if (top != null)
+				state.getStack().remove(top);
+		}
+	}
+
+    protected boolean allPassed() {
 		for (Player player: state.getPlayers().values()) {
 			if (!player.isPassed() && !player.hasLost() && !player.hasLeft())
 				return false;

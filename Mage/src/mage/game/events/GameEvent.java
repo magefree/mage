@@ -77,7 +77,7 @@ public class GameEvent {
 
 		//player events
 		ZONE_CHANGE,
-		DREW_CARD,
+		DRAW_CARD, DREW_CARD,
 		DISCARDED_CARD,
 		CYCLE_CARD, CYCLED_CARD,
 		DAMAGE_PLAYER, DAMAGED_PLAYER,

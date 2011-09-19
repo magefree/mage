@@ -59,6 +59,7 @@ public class UntapStep extends Step<UntapStep> {
 		activePlayer.phasing(game);
 		//20091005 - 502.2/703.4b
 		activePlayer.untap(game);
+        game.applyEffects();
 	}
 
 	@Override

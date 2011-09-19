@@ -331,12 +331,14 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 	}
 
 	protected boolean drawCard(Game game) {
-		Card card = getLibrary().removeFromTop(game);
-		if (card != null) {
-			card.moveToZone(Zone.HAND, null, game, false);
-			game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DREW_CARD, card.getId(), playerId));
-			return true;
-		}
+		if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DRAW_CARD, playerId, playerId))) {
+            Card card = getLibrary().removeFromTop(game);
+            if (card != null) {
+                card.moveToZone(Zone.HAND, null, game, false);
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DREW_CARD, card.getId(), playerId));
+                return true;
+            }
+        }
 		return false;
 	}
 

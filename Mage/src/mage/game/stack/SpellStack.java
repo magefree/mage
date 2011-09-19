@@ -68,6 +68,15 @@ public class SpellStack extends Stack<StackObject> {
 		}
 	}
 
+    public void remove(StackObject object) {
+        for (StackObject spell: this) {
+            if (spell.getId().equals(object.getId())) {
+                super.remove(spell);
+                return;
+            }
+        }
+    }
+    
 	public void checkTriggers(GameEvent event, Game game) {
 		for (StackObject stackObject: this) {
 			stackObject.checkTriggers(event, game);
