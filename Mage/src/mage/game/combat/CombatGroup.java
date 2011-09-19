@@ -30,13 +30,13 @@ package mage.game.combat;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.Constants.Outcome;
+import mage.abilities.common.DamageAsThoughNotBlockedAbility;
 import mage.abilities.keyword.DeathtouchAbility;
 
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -148,15 +148,25 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
 	public void assignDamageToBlockers(boolean first, Game game) {
 		if (attackers.size() > 0 && (!first || hasFirstOrDoubleStrike(game))) {
-			if (blockers.size() == 0) {
+			if (blockers.isEmpty()) {
 				unblockedDamage(first, game);
 			}
-			else if (blockers.size() == 1) {
-				singleBlockerDamage(first, game);
-			}
-			else {
-				multiBlockerDamage(first, game);
-			}
+            else {
+                Permanent attacker = game.getPermanent(attackers.get(0));
+                if (attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId())) {
+                    Player player = game.getPlayer(attacker.getControllerId());
+                    if (player.chooseUse(Outcome.Damage, "Do you wish to assign damage for " + attacker.getName() + " as though it weren't blocked?", game)) {
+                        blocked = false;
+                        unblockedDamage(first, game);
+                    }
+                }
+                if (blockers.size() == 1) {
+                    singleBlockerDamage(first, game);
+                }
+                else {
+                    multiBlockerDamage(first, game);
+                }
+            }
 		}
 	}
 
@@ -228,7 +238,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 		Permanent blocker = game.getPermanent(blockers.get(0));
 		Permanent attacker = game.getPermanent(attackers.get(0));
 		if (blocker != null && attacker != null) {
-			if (canDamage(attacker, first)) {
+			if (blocked && canDamage(attacker, first)) {
 				int damage = attacker.getPower().getValue();
 				if (hasTrample(attacker)) {
 					int lethalDamage = blocker.getToughness().getValue() - blocker.getDamage();
@@ -266,30 +276,32 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 		Player player = game.getPlayer(attacker.getControllerId());
 		int damage = attacker.getPower().getValue();
 		if (canDamage(attacker, first)) {
-			Map<UUID, Integer> assigned = new HashMap<UUID, Integer>();
-			for (UUID blockerId: blockerOrder) {
-				Permanent blocker = game.getPermanent(blockerId);
-				int lethalDamage;
-				if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId()))
-					lethalDamage = 1;
-				else
-					lethalDamage = blocker.getToughness().getValue() - blocker.getDamage();
-				if (lethalDamage >= damage) {
-					// Issue#73
-					//blocker.damage(damage, attacker.getId(), game, true, true);
-					assigned.put(blockerId, damage);
-					damage = 0;
-					break;
-				}
-				int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
-				// Issue#73
-				//blocker.damage(damageAssigned, attacker.getId(), game, true, true);
-				assigned.put(blockerId, damageAssigned);
-				damage -= damageAssigned;
-			}
-			if (damage > 0 && hasTrample(attacker)) {
-				defenderDamage(attacker, damage, game);
-			}
+            Map<UUID, Integer> assigned = new HashMap<UUID, Integer>();
+            if (blocked) {
+                for (UUID blockerId: blockerOrder) {
+                    Permanent blocker = game.getPermanent(blockerId);
+                    int lethalDamage;
+                    if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId()))
+                        lethalDamage = 1;
+                    else
+                        lethalDamage = blocker.getToughness().getValue() - blocker.getDamage();
+                    if (lethalDamage >= damage) {
+                        // Issue#73
+                        //blocker.damage(damage, attacker.getId(), game, true, true);
+                        assigned.put(blockerId, damage);
+                        damage = 0;
+                        break;
+                    }
+                    int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
+                    // Issue#73
+                    //blocker.damage(damageAssigned, attacker.getId(), game, true, true);
+                    assigned.put(blockerId, damageAssigned);
+                    damage -= damageAssigned;
+                }
+                if (damage > 0 && hasTrample(attacker)) {
+                    defenderDamage(attacker, damage, game);
+                }
+            }
 			for (UUID blockerId: blockerOrder) {
 				Permanent blocker = game.getPermanent(blockerId);
 				if (canDamage(blocker, first)) {
