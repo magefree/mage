@@ -43,12 +43,12 @@ import mage.client.components.MageRoundPane;
 import mage.client.dialog.ShowCardsDialog;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
-import mage.remote.Session;
 import mage.client.util.Command;
 import mage.client.util.Config;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.components.ImagePanel;
+import mage.remote.Session;
 import mage.sets.Sets;
 import mage.view.CardView;
 import mage.view.ManaPoolView;
@@ -66,7 +66,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -88,7 +87,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
 	private static final int AVATAR_COUNT = 77;
 
-	private static final Border greenBorder = new LineBorder(Color.green, 4);
+	private static final Border greenBorder = new LineBorder(Color.red, 3);
 	private static final Border redBorder = new LineBorder(Color.red, 2);
 	private static final Border emptyBorder = BorderFactory.createEmptyBorder(0,0,0,0);
 
@@ -117,21 +116,20 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 		libraryLabel.setText(Integer.toString(player.getLibraryCount()));
 		graveLabel.setText(Integer.toString(player.getGraveyard().size()));
 
-		if (avatarId == -1) {
-			avatarId = player.getUserData().getAvatarId();
-			if (avatarId > 0) {
-				String path = "/avatars/" + String.valueOf(avatarId) + ".jpg";
-				if (avatarId == 64) {
-					path = "/avatars/i64.jpg";
-				} else if (avatarId >= 1000) {
-					avatarId = avatarId-1000;
-					path = "/avatars/special/" + String.valueOf(avatarId) + ".gif";
-				}
-				Image image = ImageHelper.getImageFromResources(path);
-				Rectangle r = new Rectangle(80, 80);
-				BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-				this.avatar.update("player", resized, resized, resized, resized, r);
+		int id = player.getUserData().getAvatarId();
+		if (id > 0 && id != avatarId) {
+			avatarId = id;
+			String path = "/avatars/" + String.valueOf(avatarId) + ".jpg";
+			if (avatarId == 64) {
+				path = "/avatars/i64.jpg";
+			} else if (avatarId >= 1000) {
+				avatarId = avatarId - 1000;
+				path = "/avatars/special/" + String.valueOf(avatarId) + ".gif";
 			}
+			Image image = ImageHelper.getImageFromResources(path);
+			Rectangle r = new Rectangle(80, 80);
+			BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
+			this.avatar.update("player", resized, resized, resized, resized, r);
 		}
 
 		this.avatar.setText(player.getName());
@@ -194,7 +192,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 		add(panelBackground);
 
 		Rectangle r = new Rectangle(80, 80);
-		Image image = ImageHelper.getImageFromResources("/avatars/51.jpg");
+		Image image = ImageHelper.getImageFromResources("/avatars/unknown.jpg");
 
 		topCardPanel = Plugins.getInstance().getMageCard(new CardView(Sets.findCard("Forest")), bigCard, topCardDimension, gameId, true);
 		topCardPanel.setVisible(false);

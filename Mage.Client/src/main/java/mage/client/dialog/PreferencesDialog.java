@@ -35,12 +35,22 @@ package mage.client.dialog;
 
 import mage.client.MageFrame;
 import mage.client.util.Config;
+import mage.client.util.ImageHelper;
+import mage.client.util.gui.BufferedImageBuilder;
 import mage.remote.Connection;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
@@ -67,10 +77,35 @@ public class PreferencesDialog extends javax.swing.JDialog {
 	public static final String KEY_PROXY_TYPE = "proxyType";
 	public static final String KEY_PROXY_PSWD = "proxyPassword";
 
+	public static final String KEY_AVATAR = "selectedId";
+
     private static Map<String, String> cache = new HashMap<String, String>();
     private static final Boolean UPDATE_CACHE_POLICY = Boolean.TRUE;
 
 	public static final String OPEN_CONNECTION_TAB = "Open-Connection-Tab";
+
+	private static final transient Logger log = Logger.getLogger(PreferencesDialog.class);
+
+	public static final int DEFAULT_AVATAR_ID = 51;
+	private static int selectedId = DEFAULT_AVATAR_ID;
+	private static Set<Integer> availableAvatars = new HashSet<Integer>();
+	private static Map<Integer, JPanel> panels = new HashMap<Integer, JPanel>();
+
+	private static final Border GREEN_BORDER = BorderFactory.createLineBorder(Color.GREEN, 3);
+	private static final Border BLACK_BORDER = BorderFactory.createLineBorder(Color.BLACK, 3);
+
+	static {
+		availableAvatars.add(51);
+		availableAvatars.add(13);
+		availableAvatars.add(9);
+		availableAvatars.add(53);
+		availableAvatars.add(10);
+		availableAvatars.add(39);
+		availableAvatars.add(19);
+		availableAvatars.add(30);
+		availableAvatars.add(25);
+
+	}
 
 	private final JFileChooser fc = new JFileChooser();
 
@@ -84,6 +119,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         initComponents();
         imageFolderPath.setEditable(false);
 		cbProxyType.setModel(new DefaultComboBoxModel(Connection.ProxyType.values()));
+		addAvatars();
     }
 
     /** This method is called from within the constructor to
@@ -148,6 +184,23 @@ public class PreferencesDialog extends javax.swing.JDialog {
         txtPasswordField = new javax.swing.JPasswordField();
         rememberPswd = new javax.swing.JCheckBox();
         jLabel11 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jPanel16 = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        jPanel18 = new javax.swing.JPanel();
+        jPanel19 = new javax.swing.JPanel();
+        jPanel20 = new javax.swing.JPanel();
+        jPanel21 = new javax.swing.JPanel();
         saveButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
 
@@ -240,8 +293,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap(84, Short.MAX_VALUE))
         );
 
-        jPanel7.getAccessibleContext().setAccessibleName("Battlefield");
-
         jTabbedPane1.addTab("Main", jPanel1);
 
         jLabel1.setText("Choose phases MAGE will stop on:");
@@ -271,47 +322,47 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-							.addGap(20, 20, 20)
-							.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-									.addGroup(jPanel2Layout.createSequentialGroup()
-											.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-													.addComponent(jLabel2)
-													.addComponent(jLabel5)
-													.addComponent(jLabel6)
-													.addComponent(jLabel7)
-													.addComponent(jLabel8))
-											.addGap(77, 77, 77)
-											.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-													.addGroup(jPanel2Layout.createSequentialGroup()
-															.addGap(2, 2, 2)
-															.addComponent(jLabel9)
-															.addGap(32, 32, 32)
-															.addComponent(jLabel10))
-													.addGroup(jPanel2Layout.createSequentialGroup()
-															.addGap(13, 13, 13)
-															.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-																	.addComponent(checkBoxDrawYou)
-																	.addComponent(checkBoxUpkeepYou)
-																	.addComponent(checkBoxMainYou)
-																	.addComponent(checkBoxBeforeCYou)
-																	.addComponent(checkBoxEndOfCYou)
-																	.addComponent(checkBoxMain2You)
-																	.addComponent(checkBoxEndTurnYou))
-															.addGap(78, 78, 78)
-															.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-																	.addComponent(checkBoxUpkeepOthers)
-																	.addComponent(checkBoxBeforeCOthers)
-																	.addComponent(checkBoxMainOthers)
-																	.addComponent(checkBoxEndOfCOthers)
-																	.addComponent(checkBoxDrawOthers)
-																	.addComponent(checkBoxMain2Others)
-																	.addComponent(checkBoxEndTurnOthers)))))
-									.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-											.addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-											.addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8))
+                                .addGap(77, 77, 77)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(2, 2, 2)
+                                        .addComponent(jLabel9)
+                                        .addGap(32, 32, 32)
+                                        .addComponent(jLabel10))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(13, 13, 13)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(checkBoxDrawYou)
+                                            .addComponent(checkBoxUpkeepYou)
+                                            .addComponent(checkBoxMainYou)
+                                            .addComponent(checkBoxBeforeCYou)
+                                            .addComponent(checkBoxEndOfCYou)
+                                            .addComponent(checkBoxMain2You)
+                                            .addComponent(checkBoxEndTurnYou))
+                                        .addGap(78, 78, 78)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(checkBoxUpkeepOthers)
+                                            .addComponent(checkBoxBeforeCOthers)
+                                            .addComponent(checkBoxMainOthers)
+                                            .addComponent(checkBoxEndOfCOthers)
+                                            .addComponent(checkBoxDrawOthers)
+                                            .addComponent(checkBoxMain2Others)
+                                            .addComponent(checkBoxEndTurnOthers)))))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(jLabel1)))
+                        .addContainerGap()
+                        .addComponent(jLabel1)))
                 .addContainerGap(100, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -320,19 +371,19 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-							.addComponent(jLabel10)
-							.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-							.addComponent(checkBoxUpkeepOthers))
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(checkBoxUpkeepOthers))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-							.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-									.addGroup(jPanel2Layout.createSequentialGroup()
-											.addComponent(jLabel1)
-											.addGap(20, 20, 20))
-									.addComponent(jLabel9))
-							.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-							.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-									.addComponent(checkBoxUpkeepYou)
-									.addComponent(jLabel2))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(20, 20, 20))
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(checkBoxUpkeepYou)
+                            .addComponent(jLabel2))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
@@ -345,13 +396,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(checkBoxMainOthers))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-							.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-							.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-									.addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-									.addComponent(checkBoxBeforeCYou, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(checkBoxBeforeCYou, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-							.addGap(6, 6, 6)
-							.addComponent(checkBoxBeforeCOthers)))
+                        .addGap(6, 6, 6)
+                        .addComponent(checkBoxBeforeCOthers)))
                 .addGap(7, 7, 7)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
@@ -397,16 +448,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(useDefaultImageFolder))
+                        .addContainerGap()
+                        .addComponent(useDefaultImageFolder))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-							.addGap(19, 19, 19)
-							.addComponent(imageFolderPath, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-							.addComponent(browseButton))
+                        .addGap(19, 19, 19)
+                        .addComponent(imageFolderPath, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(browseButton))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(checkForNewImages)))
+                        .addContainerGap()
+                        .addComponent(checkForNewImages)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -503,8 +554,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtProxyPort, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-							.addComponent(txtPasswordField, javax.swing.GroupLayout.Alignment.LEADING)
-							.addComponent(txtProxyUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtPasswordField, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtProxyUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtProxyServer, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -582,6 +633,253 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Connection", jPanel6);
 
+        jPanel10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jPanel13.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jPanel11.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLabel12.setText("Choose your avatar:");
+
+        jPanel12.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jPanel14.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jPanel15.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLabel13.setText("Locked avatars:");
+
+        jPanel16.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jPanel17.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jPanel18.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jPanel19.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jPanel20.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
+        jPanel20.setLayout(jPanel20Layout);
+        jPanel20Layout.setHorizontalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel20Layout.setVerticalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jPanel21.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel12))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPanel19, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(33, 33, 33)
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel9Layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(33, 33, 33)
+                                        .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel13))))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25))
+        );
+
+        jScrollPane1.setViewportView(jPanel9);
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Avatars", jPanel8);
+
         saveButton.setLabel("Save");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -652,6 +950,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
 		if (dialog.rememberPswd.isSelected()) {
 			char[] input = txtPasswordField.getPassword();
 			prefs.put(KEY_PROXY_PSWD, new String(input));
+		}
+
+		if (availableAvatars.contains(selectedId)) {
+			prefs.put(KEY_AVATAR, String.valueOf(selectedId));
+			updateCache(KEY_AVATAR, String.valueOf(selectedId));
 		}
 
 		// images
@@ -756,49 +1059,24 @@ public class PreferencesDialog extends javax.swing.JDialog {
 			public void run() {
 				if (!dialog.isVisible()) {
 					Preferences prefs = MageFrame.getPreferences();
-					load(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU);
-					load(prefs, dialog.checkBoxDrawYou, DRAW_YOU);
-					load(prefs, dialog.checkBoxMainYou, MAIN_YOU);
-					load(prefs, dialog.checkBoxBeforeCYou, BEFORE_COMBAT_YOU);
-					load(prefs, dialog.checkBoxEndOfCYou, END_OF_COMBAT_YOU);
-					load(prefs, dialog.checkBoxMain2You, MAIN_2_YOU);
-					load(prefs, dialog.checkBoxEndTurnYou, END_OF_TURN_YOU);
 
-					load(prefs, dialog.checkBoxUpkeepOthers, UPKEEP_OTHERS);
-					load(prefs, dialog.checkBoxDrawOthers, DRAW_OTHERS);
-					load(prefs, dialog.checkBoxMainOthers, MAIN_OTHERS);
-					load(prefs, dialog.checkBoxBeforeCOthers, BEFORE_COMBAT_OTHERS);
-					load(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS);
-					load(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS);
-					load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
-					load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true");
-					load(prefs, dialog.showToolTipsInHand, KEY_HAND_SHOW_TOOLTIPS, "true");
-					load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
+					// Phases
+	                loadPhases(prefs);
 
-					// connection
-					dialog.cbProxyType.setSelectedItem(Connection.ProxyType.valueOf(MageFrame.getPreferences().get(KEY_PROXY_TYPE, "NONE").toUpperCase()));
-                    
-					load(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS, Config.serverName);
-					load(prefs, dialog.txtProxyPort, KEY_PROXY_PORT, Integer.toString(Config.port));
-					load(prefs, dialog.txtProxyUserName, KEY_PROXY_USERNAME, "");
-					load(prefs, dialog.rememberPswd, KEY_PROXY_REMEMBER, "true", "false");
-					if (dialog.rememberPswd.isSelected()) {
-						load(prefs, dialog.txtPasswordField, KEY_PROXY_PSWD, "");
-					}
+					// Connection
+					loadProxySettings(prefs);
 
-					// images
+					// Selected avatar
+					loadSelectedAvatar(prefs);
+
+					// Images
 					loadImagesPath(prefs);
+
+					// open specified tab before displaying
+					openTab(openedTab);
 
 					dialog.setLocation(300, 200);
 					dialog.reset();
-
-					try {
-						if (openedTab > 0) {
-							dialog.jTabbedPane1.setSelectedIndex(3);
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
 
 					dialog.setVisible(true);
 				} else {
@@ -807,6 +1085,67 @@ public class PreferencesDialog extends javax.swing.JDialog {
 			}
 		});
     }
+
+	private static void loadPhases(Preferences prefs) {
+		load(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU);
+		load(prefs, dialog.checkBoxDrawYou, DRAW_YOU);
+		load(prefs, dialog.checkBoxMainYou, MAIN_YOU);
+		load(prefs, dialog.checkBoxBeforeCYou, BEFORE_COMBAT_YOU);
+		load(prefs, dialog.checkBoxEndOfCYou, END_OF_COMBAT_YOU);
+		load(prefs, dialog.checkBoxMain2You, MAIN_2_YOU);
+		load(prefs, dialog.checkBoxEndTurnYou, END_OF_TURN_YOU);
+
+		load(prefs, dialog.checkBoxUpkeepOthers, UPKEEP_OTHERS);
+		load(prefs, dialog.checkBoxDrawOthers, DRAW_OTHERS);
+		load(prefs, dialog.checkBoxMainOthers, MAIN_OTHERS);
+		load(prefs, dialog.checkBoxBeforeCOthers, BEFORE_COMBAT_OTHERS);
+		load(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS);
+		load(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS);
+		load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
+		load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true");
+		load(prefs, dialog.showToolTipsInHand, KEY_HAND_SHOW_TOOLTIPS, "true");
+		load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
+	}
+
+	private static void loadProxySettings(Preferences prefs) {
+		dialog.cbProxyType.setSelectedItem(Connection.ProxyType.valueOf(MageFrame.getPreferences().get(KEY_PROXY_TYPE, "NONE").toUpperCase()));
+
+		load(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS, Config.serverName);
+		load(prefs, dialog.txtProxyPort, KEY_PROXY_PORT, Integer.toString(Config.port));
+		load(prefs, dialog.txtProxyUserName, KEY_PROXY_USERNAME, "");
+		load(prefs, dialog.rememberPswd, KEY_PROXY_REMEMBER, "true", "false");
+		if (dialog.rememberPswd.isSelected()) {
+			load(prefs, dialog.txtPasswordField, KEY_PROXY_PSWD, "");
+		}
+	}
+
+	private static void loadSelectedAvatar(Preferences prefs) {
+		getSelectedAvatar();
+		dialog.setSelectedId(selectedId);
+	}
+
+	public static int getSelectedAvatar() {
+		try {
+			selectedId = Integer.valueOf(MageFrame.getPreferences().get(KEY_AVATAR, String.valueOf(DEFAULT_AVATAR_ID)));
+		} catch (NumberFormatException n) {
+			selectedId = DEFAULT_AVATAR_ID;
+		} finally {
+			if (!availableAvatars.contains(selectedId)) {
+				selectedId = DEFAULT_AVATAR_ID;
+			}
+		}
+		return selectedId;
+	}
+
+	private static void openTab(int index) {
+		try {
+			if (index > 0) {
+				dialog.jTabbedPane1.setSelectedIndex(3);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
     private static void loadImagesPath(Preferences prefs) {
         String prop = prefs.get(KEY_CARD_IMAGES_USE_DEFAULT, "true");
@@ -904,6 +1243,70 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cache.put(key, value);
     }
 
+	private void addAvatars() {
+		try {
+			addAvatar(jPanel10, 51, true, false);
+			addAvatar(jPanel13, 13, false, false);
+			addAvatar(jPanel11, 9,  false, false);
+			addAvatar(jPanel12, 53, false, false);
+			addAvatar(jPanel14, 10, false, false);
+			addAvatar(jPanel15, 39, false, false);
+			addAvatar(jPanel19, 19, false, false);
+			addAvatar(jPanel20, 30, false, false);
+			addAvatar(jPanel21, 25, false, false);
+
+			addAvatar(jPanel16, 22, false, true);
+			addAvatar(jPanel17, 77, false, true);
+			addAvatar(jPanel18, 62, false, true);
+		} catch (Exception e) {
+			log.error(e, e);
+		}
+	}
+
+	public void setSelectedId(int id) {
+		if (availableAvatars.contains(id)) {
+			for (JPanel panel : panels.values()) {
+				panel.setBorder(BLACK_BORDER);
+			}
+			this.selectedId = id;
+			panels.get(this.selectedId).setBorder(GREEN_BORDER);
+		}
+	}
+
+	private void addAvatar(JPanel jPanel, final int id, boolean selected, boolean locked) {
+		String path = "/avatars/" + String.valueOf(id) + ".jpg";
+		panels.put(id, jPanel);
+		Image image = ImageHelper.getImageFromResources(path);
+		Rectangle r = new Rectangle(90, 90);
+		BufferedImage bufferedImage;
+		if (!locked) {
+			bufferedImage = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+		} else {
+			bufferedImage = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB, new Color(150, 150, 150, 170));
+		}
+		BufferedImage resized = ImageHelper.getResizedImage(bufferedImage, r);
+		final JLabel jLabel = new JLabel();
+		jLabel.setIcon(new ImageIcon(resized));
+		if (selected) {
+			jPanel.setBorder(GREEN_BORDER);
+		} else {
+			jPanel.setBorder(BLACK_BORDER);
+		}
+		jPanel.setLayout(new BorderLayout());
+		jPanel.add(jLabel);
+		if (!locked) {
+			jLabel.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mousePressed(MouseEvent e) {
+					if (selectedId != id) {
+						setSelectedId(id);
+						MageFrame.getSession().updateAvatar(id);
+					}
+				}
+			});
+		}
+	}
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browseButton;
     private javax.swing.JComboBox cbProxyType;
@@ -928,6 +1331,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -937,12 +1342,27 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblProxyPassword;
     private javax.swing.JLabel lblProxyPort;

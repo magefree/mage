@@ -1,7 +1,6 @@
 package mage.client.util.gui;
 
-import java.awt.Graphics2D;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
@@ -33,6 +32,18 @@ public class BufferedImageBuilder {
         Graphics2D g = bufferedImage.createGraphics();
         g.drawImage(image, null, null);
         //waitForImage(bufferedImage);
+        return bufferedImage;
+    }
+
+	public static BufferedImage bufferImage(Image image, int type, Color color) {
+	    if (image == null) {
+		    return null;
+	    }
+        BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), type);
+        Graphics2D g = bufferedImage.createGraphics();
+        g.drawImage(image, null, null);
+		g.setColor(color);
+		g.fillRect(0, 0, image.getWidth(null), image.getHeight(null));
         return bufferedImage;
     }
 
