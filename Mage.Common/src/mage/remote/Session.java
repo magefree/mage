@@ -151,7 +151,7 @@ public class Session {
 			this.sessionId = callbackClient.getSessionId();
 			boolean registerResult = false;
 			if (connection.getPassword() == null) {
-				UserDataView userDataView = new UserDataView(0);
+				UserDataView userDataView = new UserDataView(connection.getAvatarId());
 				// for backward compatibility. don't remove twice call - first one does nothing but for version checking
 				registerResult = server.registerClient(connection.getUsername(), sessionId, client.getVersion());
 				server.setUserData(connection.getUsername(), sessionId, userDataView);
@@ -929,6 +929,21 @@ public class Session {
 
 	public String getUserName() {
 		return connection.getUsername();
+	}
+
+	public boolean updateAvatar(int avatarId) {
+		try {
+			if (isConnected()) {
+				UserDataView userDataView = new UserDataView(avatarId);
+				server.setUserData(connection.getUsername(), sessionId, userDataView);
+			}
+			return true;
+		} catch (MageException ex) {
+			handleMageException(ex);
+		} catch (Throwable t) {
+			handleThrowable(t);
+		}
+		return false;
 	}
 
 }

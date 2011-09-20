@@ -291,6 +291,9 @@ public class ConnectDialog extends MageDialog {
 				}
 			}
 
+			// Avatar
+			int avatarId = PreferencesDialog.getSelectedAvatar();
+			connection.setAvatarId(avatarId);
 
 			logger.debug("connecting: " + connection.getProxyType() + " " + connection.getProxyHost() + " " + connection.getProxyPort());
 			task = new ConnectTask();

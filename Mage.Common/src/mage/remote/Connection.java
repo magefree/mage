@@ -47,6 +47,8 @@ public class Connection {
 	private int proxyPort;
 	private String proxyUsername;
 	private String proxyPassword;
+
+	private int avatarId;
 	
 	private static final String serialization = "?serializationtype=jboss";
 	private static final String transport = "bisocket";
@@ -193,6 +195,14 @@ public class Connection {
 			}
 		}
 		return null;
+	}
+
+	public int getAvatarId() {
+		return avatarId;
+	}
+
+	public void setAvatarId(int avatarId) {
+		this.avatarId = avatarId;
 	}
 
 }
