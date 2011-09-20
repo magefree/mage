@@ -37,6 +37,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.ExaltedAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -56,7 +57,11 @@ public class BattlegraceAngel extends CardImpl<BattlegraceAngel> {
         this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
+
+        this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new ExaltedAbility());
+
+        // Whenever a creature you control attacks alone, it gains lifelink until end of turn.
         this.addAbility(new BattlegraceAngelAbility());
     }
 
