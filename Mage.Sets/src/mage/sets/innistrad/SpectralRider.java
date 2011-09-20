@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class SpectralRider extends CardImpl<SpectralRider> {
 
     public SpectralRider(UUID ownerId) {
-        super(ownerId, , "Spectral Rider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
+        super(ownerId, 35, "Spectral Rider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
         this.expansionSetCode = "ISD";
         this.subtype.add("Spirit");
         this.subtype.add("Knight");
