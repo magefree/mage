@@ -78,6 +78,7 @@ public class Session {
 	private Connection connection;
 
     private static boolean debugMode = false;
+	private boolean canceled = false;
 
     static {
         debugMode = System.getProperty("debug.mage") != null;
@@ -92,7 +93,13 @@ public class Session {
 			disconnect(true);
 		}
 		this.connection = connection;
+		this.canceled = false;
 		return connect();
+	}
+
+	public boolean stopConnecting() {
+		canceled = true;
+		return true;
 	}
 
 	public boolean connect() {
@@ -141,7 +148,7 @@ public class Session {
 			    listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "9000");
             }
 			callbackClient.connect(new ClientConnectionListener(), listenerMetadata);
-			
+
 			Map<String, String> callbackMetadata = new HashMap<String, String>();
 			callbackMetadata.put(Bisocket.IS_CALLBACK_SERVER, "true");
 			CallbackHandler callbackHandler = new CallbackHandler();
@@ -171,12 +178,16 @@ public class Session {
 			logger.fatal("", ex);
 			client.showMessage("Unable to connect to server. "  + ex.getMessage());
         } catch (MageVersionException ex) {
-            client.showMessage("Unable to connect to server. "  + ex.getMessage());
+            if (!canceled) {
+				client.showMessage("Unable to connect to server. "  + ex.getMessage());
+			}
             // TODO: download client that matches server version
 		} catch (Throwable t) {
 			logger.fatal("Unable to connect to server - ", t);
-			disconnect(false);
-			client.showMessage("Unable to connect to server. "  + t.getMessage());
+			if (!canceled) {
+				disconnect(false);
+				client.showMessage("Unable to connect to server. "  + t.getMessage());
+			}
 		}
 		return false;
 	}
@@ -187,7 +198,6 @@ public class Session {
 		if (connection == null)
 			return;
 		try {
-            
 			callbackClient.disconnect();
 			TransporterClient.destroyTransporterClient(server);
 		} catch (Throwable ex) {

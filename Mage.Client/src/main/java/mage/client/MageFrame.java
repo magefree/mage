@@ -554,6 +554,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 		return session.connect(connection);
 	}
 
+	public static boolean stopConnecting() {
+		return session.stopConnecting();
+	}
+
 	public boolean autoConnect() {
 		boolean autoConnect = Boolean.parseBoolean(prefs.get("autoConnect", "false"));
 		if (autoConnect) {

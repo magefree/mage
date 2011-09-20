@@ -322,7 +322,6 @@ public class ConnectDialog extends MageDialog {
 			try {
 				get();
 				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-				btnConnect.setEnabled(true);
 				if (result) {
 					lblStatus.setText("");
 					connected();
@@ -334,7 +333,13 @@ public class ConnectDialog extends MageDialog {
 				logger.fatal("Update Players Task error", ex);
 			} catch (ExecutionException ex) {
 				logger.fatal("Update Players Task error", ex);
-			} catch (CancellationException ex) {}
+			} catch (CancellationException ex) {
+				logger.info("Connect was canceled");
+				lblStatus.setText("Connect was canceled");
+				MageFrame.stopConnecting();
+			} finally {
+				btnConnect.setEnabled(true);
+			}
 		}
 	}
 
