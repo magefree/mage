@@ -32,27 +32,10 @@ import mage.abilities.Ability;
 import mage.game.Game;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class AlternativeCost<T extends AlternativeCost<T>> extends CostsImpl<Cost> {
+public interface AlternativeCost extends Cost {
+    public boolean isAvailable(Game game, Ability source);
 
-	protected String name;
-
-	public AlternativeCost(String name) {
-		this.name = name;
-	}
-
-	public AlternativeCost(final AlternativeCost<T> cost) {
-		super(cost);
-		this.name = cost.name;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public boolean isAvailable(Game game, Ability source) {
-		return true;
-	}
+    public String getName();
 }

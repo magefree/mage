@@ -28,11 +28,10 @@
 
 package mage.sets.zendikar;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCost;
+import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
@@ -43,85 +42,86 @@ import mage.target.common.TargetOpponent;
 import mage.watchers.Watcher;
 import mage.watchers.WatcherImpl;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ArchiveTrap extends CardImpl<ArchiveTrap> {
 
-	public ArchiveTrap(UUID ownerId) {
-		super(ownerId, 41, "Archive Trap", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
-		this.expansionSetCode = "ZEN";
-		this.color.setBlue(true);
-		this.getSpellAbility().addTarget(new TargetOpponent());
-		this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(13));
-		this.getSpellAbility().addAlternativeCost(new ArchiveTrapAlternativeCost());
-		this.addWatcher(new ArchiveTrapWatcher());
-	}
+    public ArchiveTrap(UUID ownerId) {
+        super(ownerId, 41, "Archive Trap", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
+        this.expansionSetCode = "ZEN";
+        this.color.setBlue(true);
+        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(13));
+        this.getSpellAbility().addAlternativeCost(new ArchiveTrapAlternativeCost());
+        this.addWatcher(new ArchiveTrapWatcher());
+    }
 
-	public ArchiveTrap(final ArchiveTrap card) {
-		super(card);
-	}
+    public ArchiveTrap(final ArchiveTrap card) {
+        super(card);
+    }
 
-	@Override
-	public ArchiveTrap copy() {
-		return new ArchiveTrap(this);
-	}
+    @Override
+    public ArchiveTrap copy() {
+        return new ArchiveTrap(this);
+    }
 
 }
 
 class ArchiveTrapWatcher extends WatcherImpl<ArchiveTrapWatcher> {
 
-	public ArchiveTrapWatcher() {
-		super("LibrarySearched");
-	}
+    public ArchiveTrapWatcher() {
+        super("LibrarySearched");
+    }
 
-	public ArchiveTrapWatcher(final ArchiveTrapWatcher watcher) {
-		super(watcher);
-	}
+    public ArchiveTrapWatcher(final ArchiveTrapWatcher watcher) {
+        super(watcher);
+    }
 
-	@Override
-	public ArchiveTrapWatcher copy() {
-		return new ArchiveTrapWatcher(this);
-	}
+    @Override
+    public ArchiveTrapWatcher copy() {
+        return new ArchiveTrapWatcher(this);
+    }
 
-	@Override
-	public void watch(GameEvent event, Game game) {
+    @Override
+    public void watch(GameEvent event, Game game) {
         if (condition == true) //no need to check - condition has already occured
             return;
-		if (event.getType() == EventType.LIBRARY_SEARCHED && game.getOpponents(controllerId).contains(event.getPlayerId()))
-			condition = true;
-	}
+        if (event.getType() == EventType.LIBRARY_SEARCHED && game.getOpponents(controllerId).contains(event.getPlayerId()))
+            condition = true;
+    }
 
 }
 
-class ArchiveTrapAlternativeCost extends AlternativeCost<ArchiveTrapAlternativeCost> {
+class ArchiveTrapAlternativeCost extends AlternativeCostImpl<ArchiveTrapAlternativeCost> {
 
-	public ArchiveTrapAlternativeCost() {
-		super("you may pay {0} rather than pay Archive Trap's mana cost");
-		this.add(new GenericManaCost(0));
-	}
+    public ArchiveTrapAlternativeCost() {
+        super("you may pay {0} rather than pay Archive Trap's mana cost");
+        this.add(new GenericManaCost(0));
+    }
 
-	public ArchiveTrapAlternativeCost(final ArchiveTrapAlternativeCost cost) {
-		super(cost);
-	}
+    public ArchiveTrapAlternativeCost(final ArchiveTrapAlternativeCost cost) {
+        super(cost);
+    }
 
-	@Override
-	public ArchiveTrapAlternativeCost copy() {
-		return new ArchiveTrapAlternativeCost(this);
-	}
+    @Override
+    public ArchiveTrapAlternativeCost copy() {
+        return new ArchiveTrapAlternativeCost(this);
+    }
 
-	@Override
-	public boolean isAvailable(Game game, Ability source) {
-		Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "LibrarySearched");
-		if (watcher != null && watcher.conditionMet())
-			return true;
-		return false;
-	}
+    @Override
+    public boolean isAvailable(Game game, Ability source) {
+        Watcher watcher = game.getState().getWatchers().get(source.getControllerId(), "LibrarySearched");
+        if (watcher != null && watcher.conditionMet())
+            return true;
+        return false;
+    }
 
-	@Override
-	public String getText() {
-		return "If an opponent searched his or her library this turn, you may pay {0} rather than pay Archive Trap's mana cost";
-	}
+    @Override
+    public String getText() {
+        return "If an opponent searched his or her library this turn, you may pay {0} rather than pay Archive Trap's mana cost";
+    }
 
 }

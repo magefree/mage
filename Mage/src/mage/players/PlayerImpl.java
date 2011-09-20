@@ -47,6 +47,7 @@ import mage.Mana;
 import mage.abilities.*;
 import mage.abilities.common.PassAbility;
 import mage.abilities.common.delayed.AtTheEndOfTurnStepPostDelayedTriggeredAbility;
+import mage.abilities.costs.AlternativeCost;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.LoseControlOnOtherPlayersControllerEffect;
 import mage.abilities.keyword.*;
@@ -629,10 +630,21 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 			if (ability.canActivate(playerId, game))
 				useable.put(ability.getId(), ability);
 		}
-		if (zone != Zone.HAND && game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.CAST, game)) {
-			for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(Zone.HAND)) {
-				useable.put(ability.getId(), ability);
-			}
+		if (zone != Zone.HAND) {
+            if (game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.CAST, game)) {
+                for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                    useable.put(ability.getId(), ability);
+                }
+            } else {
+                // this allows alternative costs like Flashback work from other than hand zones
+                for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                    for (AlternativeCost cost: ability.getAlternativeCosts()) {
+                        if (cost.isAvailable(game, ability)) {
+                            useable.put(ability.getId(), ability);
+                        }
+                    }
+                }
+            }
 		}
 		return useable;
 	}
