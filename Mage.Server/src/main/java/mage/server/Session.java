@@ -123,6 +123,8 @@ public class Session {
 			userData.setAvatarId(1012);
 		} else if (userName.equals("Alive")) {
 			userData.setAvatarId(1014);
+		} else if (userName.equals("Rahan")) {
+			userData.setAvatarId(1016);
 		}
 	}
 	
