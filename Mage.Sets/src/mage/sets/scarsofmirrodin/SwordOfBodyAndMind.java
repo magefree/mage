@@ -40,6 +40,7 @@ import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
@@ -55,6 +56,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPlayer;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -97,7 +99,6 @@ class SwordOfBodyAndMindAbility extends TriggeredAbilityImpl<SwordOfBodyAndMindA
     public SwordOfBodyAndMindAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken()));
         this.addEffect(new PutLibraryIntoGraveTargetEffect(10));
-        this.addTarget(new TargetPlayer());
     }
 
     public SwordOfBodyAndMindAbility(final SwordOfBodyAndMindAbility ability) {
@@ -115,7 +116,9 @@ class SwordOfBodyAndMindAbility extends TriggeredAbilityImpl<SwordOfBodyAndMindA
             DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
             Permanent p = game.getPermanent(event.getSourceId());
             if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
-                getTargets().get(0).add(event.getPlayerId(), game);
+                for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                }
 			    return true;
             }
         }
