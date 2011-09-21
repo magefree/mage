@@ -37,6 +37,8 @@ import mage.filter.FilterCard;
  */
 public class FilterCreatureCard extends FilterCard<FilterCreatureCard> {
 
+    protected static FilterCreatureCard defaultFilter = new FilterCreatureCard();
+
 	public FilterCreatureCard() {
 		this("creature card");
 	}
@@ -55,4 +57,7 @@ public class FilterCreatureCard extends FilterCard<FilterCreatureCard> {
 		return new FilterCreatureCard(this);
 	}
 
+    public static FilterCreatureCard getDefault() {
+        return defaultFilter;
+    }
 }

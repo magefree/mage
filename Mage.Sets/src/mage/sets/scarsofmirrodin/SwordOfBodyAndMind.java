@@ -28,23 +28,15 @@
 
 package mage.sets.scarsofmirrodin;
 
-import java.util.UUID;
-
-import mage.Constants.AttachmentType;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.ObjectColor;
+import mage.Constants.*;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.continious.BoostEquippedEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
@@ -54,9 +46,10 @@ import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
-import mage.target.TargetPlayer;
+import mage.game.permanent.token.WolfToken;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -128,16 +121,5 @@ class SwordOfBodyAndMindAbility extends TriggeredAbilityImpl<SwordOfBodyAndMindA
     @Override
     public String getRule() {
         return "Whenever equipped creature deals combat damage to a player, you put a 2/2 green Wolf creature token onto the battlefield and that player puts the top ten cards of his or her library into his or her graveyard.";
-    }
-}
-
-class WolfToken extends Token {
-    public WolfToken() {
-        super("Wolf", "a 2/2 green Wolf creature token");
-        cardType.add(CardType.CREATURE);
-		color = ObjectColor.GREEN;
-		subtype.add("Wolf");
-		power = new MageInt(2);
-		toughness = new MageInt(2);
     }
 }

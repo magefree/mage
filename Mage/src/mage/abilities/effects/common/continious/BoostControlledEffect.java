@@ -144,4 +144,8 @@ public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledE
 		staticText = sb.toString();
 	}
 
+    public void setRule(String rule) {
+        staticText = rule;
+    }
+
 }
